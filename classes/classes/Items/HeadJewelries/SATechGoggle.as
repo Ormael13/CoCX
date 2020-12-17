@@ -13,7 +13,7 @@ package classes.Items.HeadJewelries
 		
 		public function SATechGoggle() 
 		{
-			super("SATGog", "SATechGoggle", "S.A Tech Goggle", "a S.A Tech Goggle", 0, 0, 11105, "Better than its previous iteration the Scanner goggles, the tech goggles also reveal opponent's flaws and weaknesses, highlighting their vulnerabilities in red within the goggles glass. The fact it also has a complete logbook and access to previous encounter information also helps catalog foes weaknesses.","Helm");
+			super("SATGog", "SATechGoggle", "S.A Tech Goggle", "a S.A Tech Goggle", 0, 0, 11105, "Better than its previous iteration the Scanner goggles, the tech goggles also reveal opponent's flaws and weaknesses, highlighting their vulnerabilities in red within the goggles glass. The fact it also has a complete logbook and access to previous encounter information also helps catalog foes weaknesses.","Helmet");
 		}
 		
 		override public function canUse():Boolean {

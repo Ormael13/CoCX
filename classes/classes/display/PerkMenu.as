@@ -490,6 +490,7 @@ public class PerkMenu extends BaseContent {
 				outputText("Dark ritual is currently: <b>Active</b>.");
 				addButton(11, "Off", DarkRitualOptionOff);
 			}
+			outputText("\n\n");
 		}
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
 			outputText("Set if you will be using blood instead of mana to fuel your magic.\n\n");
@@ -500,9 +501,10 @@ public class PerkMenu extends BaseContent {
 			if (player.hasStatusEffect(StatusEffects.BloodMage)) {
 				outputText("Blood Mage: <b>Active</b>.");
 				addButton(1, "Off", BloodMageOptionOff);
-			}/*
-			if (player.hasPerk(PerkLib.)) {
-				outputText("Set if you will be using blood instead of soulfroce to fuel your soulskills.\n\n");
+			}
+			outputText("\n\n");
+			if (player.hasPerk(PerkLib.WayOfTheBlood)) {
+				outputText("Set if you will be using blood instead of soulforce to fuel your soulskills.\n\n");
 				if (!player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 					outputText("Blood Cultivator: <b>Inactive</b>.");
 					addButton(2, "On", BloodCultivatorOptionOn);
@@ -511,7 +513,7 @@ public class PerkMenu extends BaseContent {
 					outputText("Blood Cultivator: <b>Active</b>.");
 					addButton(3, "Off", BloodCultivatorOptionOff);
 				}
-			}*/
+			}
 		}
 		var e:MouseEvent;
 		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);

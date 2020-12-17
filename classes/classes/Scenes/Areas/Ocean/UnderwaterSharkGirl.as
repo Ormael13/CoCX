@@ -65,20 +65,20 @@ public class UnderwaterSharkGirl extends Monster
 			this.skinTone = "gray";
 			this.hairColor = "silver";
 			this.hairLength = 16;
-			initStrTouSpeInte(200, 140, 160, 90);
-			initWisLibSensCor(90, 100, 35, 40);
+			initStrTouSpeInte(240, 165, 200, 109);
+			initWisLibSensCor(109, 116, 35, 40);
 			this.weaponName = "shark teeth";
 			this.weaponVerb="bite";
-			this.weaponAttack = 30;
+			this.weaponAttack = 35;
 			this.armorName = "tough skin";
 			this.armorDef = 20;
 			this.armorMDef = 2;
-			this.bonusHP = 100;
-			this.bonusLust = 20;
+			this.bonusHP = 150;
+			this.bonusLust = 206;
 			this.lust = 40;
-			this.lustVuln = .9;
+			this.lustVuln = .7;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 52;
+			this.level = 55;
 			this.gems = rand(30) + 25;
 			this.drop = new WeightedDrop().
 					add(consumables.L_DRAFT,3).

@@ -115,7 +115,6 @@ public class Boat extends AbstractLakeContent
 					SceneLib.anemoneScene.mortalAnemoneeeeee();
 					return;
 			}
-
 		}
 	}
 }

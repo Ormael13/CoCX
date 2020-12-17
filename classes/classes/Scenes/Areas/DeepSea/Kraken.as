@@ -95,7 +95,7 @@ public class Kraken extends Monster
 			this.armorDef = 190;
 			this.armorMDef = 95;
 			this.bonusHP = 10000;
-			this.bonusLust = 20;
+			this.bonusLust = 650;
 			this.lust = 20;
 			this.lustVuln = .2;
 			this.level = 100;

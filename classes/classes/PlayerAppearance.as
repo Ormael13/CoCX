@@ -873,7 +873,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" and [shield] as your shield");
 		outputText(".");
 		if (player.headjewelryName != "nothing") {
-			if (player.headjewelryPerk == "Helm") outputText(" On your head is " + player.headjewelryName + ".");
+			if (player.headjewelryPerk == "Helmet") outputText(" On your head is " + player.headjewelryName + ".");
 			else outputText(" In your hair is " + player.headjewelryName + ".");
 		}
 		if (player.necklaceName != "nothing")
@@ -1815,6 +1815,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your eyes are similar to those of a cat, with slit pupils. However, their [eyecolor] iris dismiss any links to the regular felines in favor of something way more ominous.");
 		else if(eyeType == Eyes.FOX)
 			outputText("  Your [eyecolor] eyes looks like those of a fox with a slit in the middle.");
+		else if(eyeType == Eyes.FIENDISH)
+			outputText("  Your [eyecolor] eyes looks like those of a fiend with a slit in the middle.");
 		else if(eyeType == Eyes.REPTILIAN)
 			outputText("  Your eyes looks like those of a reptile with [eyecolor] irises and a slit.");
 		else if(eyeType == Eyes.SNAKE)
@@ -3077,7 +3079,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.nekomataScore() >= 1) outputText("\n<font color=\"#008000\">Nekomata: " + player.nekomataScore() + "</font>");
 		else if (player.nekomataScore() < 1) outputText("\n<font color=\"#ff0000\">Nekomata: 0</font>");
 		//Oni
-		if (player.oniScore() >= 15) outputText("\n<font color=\"#0000a0\">Oni: " + player.oniScore() + " (+120% to Str racial multi, +70% to Tou racial multi, -20% to Int racial multi, +55% to Wis racial multi)</font>");
+		if (player.oniScore() >= 18) outputText("\n<font color=\"#0000a0\">Elder Oni: " + player.oniScore() + " (+150% to Str racial multi, +90% to Tou racial multi, -30% to Int racial multi, +60% to Wis racial multi)</font>");
 		else if (player.oniScore() >= 12) outputText("\n<font color=\"#0000a0\">Oni: " + player.oniScore() + " (+100% to Str racial multi, +60% to Tou racial multi, -20% to Int racial multi, +40% to Wis racial multi)</font>");
 		else if (player.oniScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Oni: " + player.oniScore() + " (+50% to Str racial multi, +30% to Tou racial multi, -10% to Int racial multi, +20% to Wis racial multi)</font>");
 		else if (player.oniScore() >= 1) outputText("\n<font color=\"#008000\">Half Oni: " + player.oniScore() + "</font>");
@@ -3096,7 +3098,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.orcScore() < 1) outputText("\n<font color=\"#ff0000\">Half Orc: 0</font>");
 		//Orca
 		if (player.orcaScore() >= 20) outputText("\n<font color=\"#0000a0\">Great Orca-boy/girl: " + player.orcaScore() + " (+140% to Str racial multi, +70% to Tou racial multi, +100% to Spe racial multi)</font>");
-		else if (player.orcaScore() >= 17) outputText("\n<font color=\"#0000a0\">Orca-boy/girl: " + player.orcaScore() + " (+125% to Str racial multi, +40% to Tou racial multi, +100% to Spe racial multi)</font>");
+		else if (player.orcaScore() >= 14) outputText("\n<font color=\"#0000a0\">Orca-boy/girl: " + player.orcaScore() + " (+100% to Str racial multi, +40% to Tou racial multi, +70% to Spe racial multi)</font>");
 		else if (player.orcaScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Orca-boy/girl: " + player.orcaScore() + " (+35% to Str racial multi, +20% to Tou racial multi, +35% to Spe racial multi)</font>");
 		else if (player.orcaScore() >= 1) outputText("\n<font color=\"#008000\">Half Orca-boy/girl: " + player.orcaScore() + "</font>");
 		else if (player.orcaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Orca-boy/girl: 0</font>");

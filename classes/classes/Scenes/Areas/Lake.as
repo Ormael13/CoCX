@@ -334,7 +334,5 @@ use namespace CoC;
 			outputText("You throw yourself into a roll and take off, leaving the ring of lights hovering in the distance behind you.");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
-
 	}
 }

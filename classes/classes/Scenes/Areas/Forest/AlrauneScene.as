@@ -15,9 +15,7 @@ public class AlrauneScene extends BaseContent
 	{
 		
 		public function AlrauneScene() 
-		{
-			
-		}
+		{}
 
 		public function AlrauneVSAlraune(Location:String, type:String):void{
 			outputText("As you wander the "+Location+" you come across a rather large flower. " +
@@ -180,7 +178,5 @@ public class AlrauneScene extends BaseContent
 		dynStats("lib", 15, "sen", 5);
 		cleanupAfterCombat();
 	}
-	
 	}
-
 }

@@ -6100,5 +6100,3 @@ private function drunkFuck():void {
 //Leave 'dese
 	}
 }
-
-

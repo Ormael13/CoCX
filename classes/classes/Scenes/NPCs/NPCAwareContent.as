@@ -301,6 +301,5 @@ import classes.Scenes.SceneLib;
 		{
 			return SceneLib.vapula.vapulaSlave();
 		}
-
 	}
 }

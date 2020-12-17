@@ -155,6 +155,24 @@ import classes.internals.Utils;
 					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.DINAH_LVL_UP] = 6;
 				}
+				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 6 && flags[kFLAGS.DINAH_LVL_UP] == 6) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 36);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 36, 0);
+					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.DINAH_LVL_UP] = 7;
+				}
+				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 7 && flags[kFLAGS.DINAH_LVL_UP] == 7) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 42);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 42, 0);
+					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.DINAH_LVL_UP] = 8;
+				}
+				if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] == 8 && flags[kFLAGS.DINAH_LVL_UP] == 8) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 3, 48);
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, 0, 0, 48, 0);
+					flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.DINAH_LVL_UP] = 9;
+				}
 			}
 			cleanupAfterCombat();
 		}

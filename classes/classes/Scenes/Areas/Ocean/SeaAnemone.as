@@ -87,7 +87,7 @@ public class SeaAnemone extends Monster
 			this.armorDef = 30;
 			this.armorMDef = 3;
 			this.bonusHP = 500;
-			this.bonusLust = 20;
+			this.bonusLust = 270;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

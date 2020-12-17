@@ -36,6 +36,7 @@ public class AlrauneMaiden extends Alraune
 			this.armorDef = 100;
 			this.armorMDef = 20;
 			this.bonusHP = 500;
+			this.bonusLust = 329;
 			this.level = 54;
 			this.gems = rand(35) + 25;
 			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6);

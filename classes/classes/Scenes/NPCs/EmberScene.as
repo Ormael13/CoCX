@@ -4665,7 +4665,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.addStatusValue(StatusEffects.CampLunaMishaps2, 2, 1);
 			else player.createStatusEffect(StatusEffects.CampLunaMishaps2, 0, 1, 0, 0);
 			if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);
-			if (player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
+			else player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
 			if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 			doNext(playerMenu);
 		}

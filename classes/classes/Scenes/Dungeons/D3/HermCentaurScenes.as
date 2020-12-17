@@ -479,7 +479,5 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 				EventParser.gameOver();
 			}
 		}
-		
 	}
-
 }

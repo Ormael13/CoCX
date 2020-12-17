@@ -19,6 +19,9 @@ import coc.view.ButtonDataList;
 		public static var Z2ndKid:String;
 		public static var ZenjiNightWatch:Number;
 		public static var ZenjiFood:Boolean;
+		public static var ZenjiMarae:Boolean;
+		public static var ZenjiHolli:Boolean;
+		public static var ZenjiMarried:Boolean;
 
 		public function stateObjectName():String {
 			return "ZenjiScenes";
@@ -29,6 +32,9 @@ import coc.view.ButtonDataList;
 			Z2ndKid = "";
 			ZenjiNightWatch = 0;
 			ZenjiFood = false;
+			ZenjiMarae = false;
+			ZenjiHolli = false;
+			ZenjiMarried = false;
 		}
 
 		public function saveToObject():Object {
@@ -36,7 +42,10 @@ import coc.view.ButtonDataList;
 				"Z1stKid": Z1stKid,
 				"Z2ndKid": Z2ndKid,
 				"ZenjiNightWatch": ZenjiNightWatch,
-				"ZenjiFood": ZenjiFood
+				"ZenjiFood": ZenjiFood,
+				"ZenjiMarae": ZenjiMarae,
+				"ZenjiHolli": ZenjiHolli,
+				"ZenjiMarried": ZenjiMarried
 			};
 		}
 
@@ -46,6 +55,9 @@ import coc.view.ButtonDataList;
 				Z2ndKid = o["Z2ndKid"];
 				ZenjiNightWatch = o["ZenjiNightWatch"];
 				ZenjiFood = o["ZenjiFood"];
+				ZenjiMarae = o["ZenjiMarae"];
+				ZenjiHolli = o["ZenjiHolli"];
+				ZenjiMarried = o["ZenjiMarried"];
 			} else {
 				// loading from old save
 				resetState();
@@ -594,7 +606,7 @@ public function part2TrollEncounterTrainStrength():void {
 	}
 	else {
 		outputText("Some time passes and you can't do anymore, but you feel that this exercise was worth the effort and return to camp after dismissing yourself.\n\n");
-		player.trainStat("str",2,75);
+		player.trainStat("str",2,90);
 		player.fatigue += Math.round(player.maxFatigue() * 0.35);
 		zenjiPerspectiveOnPlayer(3);
 	}
@@ -617,7 +629,7 @@ public function part2TrollEncounterTrainToughness():void {
 	}
 	else {
 		outputText("You begin planking, a few minutes pass and your arms start feeling weak, you figure you've been planking for enough time and relax. You feel that the exercise was worth the time and return to camp after dismissing yourself.\n\n");
-		player.trainStat("tou",1,100)
+		player.trainStat("tou",1,90)
 		player.fatigue += Math.round(player.maxFatigue() * 0.35);
 		zenjiPerspectiveOnPlayer(3);
 	}
@@ -642,7 +654,7 @@ public function part2TrollEncounterTrainSpeed():void {
 		outputText("You begin at a brisk pace, jogging from the tree and back to Zenji.\n\n");
 		outputText("\"<i>Das a good start, try ta go fasta each time.</i>\"\n\n");
 		outputText("You jog back and forth with the troll, making sure to keep a good pace. You feel that the exercise was worth the time and return to camp after dismissing yourself.\n\n");
-		player.trainStat("spe",2,75);
+		player.trainStat("spe",2,90);
 		player.fatigue += Math.round(player.maxFatigue() * 0.35);
 		zenjiPerspectiveOnPlayer(3);
 	}
@@ -751,7 +763,7 @@ public function followerZenjiMainCampMenuTrainingStrength():void {
 	outputText("You decide to try your hardest at doing as many pull-ups as you can, the Troll has a bar that he practices on as well, he helps guide you on good form as he trains with you.\n\n");
 	outputText("Once you’re done, you feel that this exercise was worth the effort. You thank Zenji before dismissing yourself.\n\n");
 	if (player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 1, 1);
-	dynStats("str", (4 - player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters1)), "scale", false);
+	player.trainStat("str",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)),100);
 	outputText(player.modTone(player.maxToneCap(), 1));
 	player.fatigue += Math.round(player.maxFatigue() * 0.2);
 	followerZenjiMainCampMenuTrainingPerks();
@@ -769,7 +781,7 @@ public function followerZenjiMainCampMenuTrainingToughness():void {
 	outputText("You begin planking, a few minutes pass and your arms start feeling weak. Zenji helps you and planks beside you, teaching you about endurance, form and technique.\n\n");
 	outputText("Once you’re done you feel that the exercise was worth the time. You thank Zenji before dismissing yourself.\n\n");
 	if (player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 2, 1);
-	dynStats("tou", (4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters1)), "scale", false);
+	player.trainStat("tou",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)),100);
 	outputText(player.modThickness(0, 1));
     outputText(player.modTone(player.maxToneCap(), 1));
 	player.fatigue += Math.round(player.maxFatigue() * 0.2);
@@ -788,7 +800,7 @@ public function followerZenjiMainCampMenuTrainingSpeed():void {
 	outputText("You jog back and forth with the troll, making sure to keep a good pace. Zenji soon joins you and instructs you on good form and technique.\n\n");
 	outputText("Once you’re done, you feel that the exercise was worth the time. You thank Zenji before dismissing yourself.\n\n");
 	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters1) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters1, 3, 1);
-	dynStats("spe", (4 - player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters1)), "scale", false);
+	player.trainStat("spe",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)),100);
 	outputText(player.modThickness(0, 1));
     player.fatigue += Math.round(player.maxFatigue() * 0.2);
 	followerZenjiMainCampMenuTrainingPerks();
@@ -812,7 +824,7 @@ public function followerZenjiMainCampMenuTrainingIntelligence():void {
 	outputText("Once you feel the rhythm and find a good balance with the stone, the magic you’ve conjured steadies and Zenji applauds.\n\n");
 	outputText("\"<i>Strength of mind requires balance and strategy. Know your limits and how much you are capable of.</i>\"\n\n");
 	if (player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters2) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 1, 1);
-	dynStats("inte", (4 - player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters2)), "scale", false);
+	player.trainStat("int",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)),100);
 	player.fatigue += Math.round(player.maxFatigue() * 0.2);
 	followerZenjiMainCampMenuTrainingPerks();
 	doNext(camp.returnToCampUseOneHour);
@@ -834,7 +846,7 @@ public function followerZenjiMainCampMenuTrainingWisdom():void {
 	outputText("\"<i>Well done, [name]. Keep dat keenness and focus of mind.</i>\" Zenji says with small applause.\n\n");
 	outputText("\"<i>Remember everting you’ve learned, wisdom is about how ya use de knowledge ya have.</i>\"\n\n");
 	if (player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2) < 3) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 2, 1);
-	dynStats("wis", (4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)), "scale", false);
+	player.trainStat("wis",(4 - player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2)),100);
 	player.fatigue += Math.round(player.maxFatigue() * 0.2);
 	followerZenjiMainCampMenuTrainingPerks();
 	doNext(camp.returnToCampUseOneHour);
@@ -1022,6 +1034,14 @@ public function loverZenjiOfferYes():void {
 }
 
 public var loadVolume:Number = 1300;
+
+public function loverZenjiMainCampMenu2():void {
+	if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
+		if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaZenji();
+		else loverZenjiMainCampMenu();
+	}
+	else loverZenjiMainCampMenu();
+}
 
 public function loverZenjiMainCampMenu():void {
 	spriteSelect(SpriteDb.s_zenji);
@@ -2133,7 +2153,7 @@ public function loverZenjiSexTease():void {
 	outputText("He falls to his knees, addled by lust, \"<i>I need you so badly [name]...</i>\" He takes a deep sigh, his burly chest heaves from his breath, his massive arm lowers to his groin, pressed down his erection, \"<i>Can’t you see what you’re doing ta me..? I need you now more dan ever…</i>\"\n\n");
 	outputText("Zenji gives a pained sigh, grunting softly as he touches his throbbing erection. His tail flails against the ground, desperate and aching with need.\n\n");
 	outputText("You grin in satisfaction as you approach him. His girth has pushed aside his loincloth and is already leaking a steady stream of precum. You gently cop a feel from him moving his hand away. Zenji moans in pleasure, thrusting against the palm of your hand.\n\n");
-	outputText("You flick his ear with your hand, Zenji flinches softly. You tell him that he should be still or his nose is next. Zenji whimpers in desperation, his ears droop in shame. His erection throbs beneath you, needy for more of your touch.\n\n");
+	outputText("You flick his ear with your [finger], Zenji flinches softly. You tell him that he should be still or his nose is next. Zenji whimpers in desperation, his ears droop in shame. His erection throbs beneath you, needy for more of your touch.\n\n");
 	outputText("\"<i>Please…” He begs, “Don’t stop… so good… More… please...</i>\" he whimpers. You can feel his hot breath on you begin to strain, you’re barely even touching him and he seems ready to cum at any given moment.\n\n");
 	outputText("You push Zenji onto his back, his toned and muscular body splayed onto the ground, his firm abs are almost beckoning you to mount him, but you have over things in mind as you shift your gaze to his throbbing erection. Perhaps you could tease him in another way.\n\n");
 	if (player.isNaga()) {
@@ -2230,7 +2250,7 @@ public function loverZenjiSleepWithMorning():void {
 	outputText("\"<i>Good morning [name]. Sleep well?</i>\" He asks, gently caressing your face.\n\n");
 	outputText("You assure him that you did, it’s nice spending the night with him.\n\n");
 	outputText("\"<i>We got a whole day ahead of us now, best ta get to it.</i>\" He replies, disentangling his tail from you while helping you get up, ready to start the day.\n\n");
-	outputText("You nod, ready to start the day, but now you have the support of your lover backing you up. You tell him as you reach your hand up and give him a scratch behind his ear.\n\n");
+	outputText("You nod, ready to start the day, but now you have the support of your lover backing you up. You tell him as you reach your [finger] up and give him a scratch behind his ear.\n\n");
 	outputText("Zenji sighs softly as he sinks into your ministrations, he’s like putty in your hands. \"<i>R-right dere, [name]... yeah… dat’s de spot…</i>\" he says with his eyes closed as his ears twitch slightly. You can hear his tail swishing happily behind him like an excited puppy.\n\n");
 	outputText("You laugh, you’re not used to this side of him. It would seem his ears are quite the soft spot for him.\n\n");
 	outputText("As much as you enjoy toying with him you decide that you must continue with your day. You finally break the trance you’ve brought him in.\n\n");
@@ -2624,6 +2644,20 @@ private function applyZenjikidName2():void {
 	outputText("Zenji gives you a gentle stare as he gently caresses your child, \"<i>Actually, Ya know... I was thinkin’, and I thought I should name dem dis time.</i>\"\n\n");
 	outputText("He scoops up your baby once they detach from your breast. \"<i>What will daddy name you?</i>\" he croons, taking his child to his nest.\n\n");
 	doNext(camp.returnToCampUseTwoHours);
+}
+
+public function mishapsLunaZenji():void {
+	clearOutput();
+	outputText("You notice Zenji surveying the camp for potential danger. As he hops off the tree he usually resides on top of, you notice a rope trap quickly close in on his ankle. Zenji is swept clean off his feet from the ground and hung upside down.\n\n");
+	outputText("You notice a figure not too far off, trying to hold the rope up. You can’t quite see who it is from the bushes. Unfortunately, they must have underestimated just how much Zenji weighs as the rope slips from their hands.\n\n");
+	outputText("Zenji screams in terror as he drops several feet from the air, crashing down on his head. You wince the moment he crashes into the ground. Your gaze narrows on the figure hiding in the bushes, but they’ve already run away. You could’ve sworn you saw a made outfit or something, but it couldn’t have been Luna, right? It doesn’t matter as you rush to Zenji to make sure he’s alright.\n\n");
+	outputText("You inspect Zenji. He’s knocked completely unconscious but breathing steadily. It looks like he’ll be out of it for the time being.\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps3)) player.addStatusValue(StatusEffects.CampLunaMishaps3, 1, 1);
+	else player.createStatusEffect(StatusEffects.CampLunaMishaps3, 1, 0, 0, 0);
+	if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);
+	else player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
+	if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
+	doNext(playerMenu);
 }
 
 //ZENJI MARRIAGE

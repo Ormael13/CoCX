@@ -25,14 +25,16 @@ package classes.Items
 		public static const MODIFIER_POIS_R:int = 			13;
 		public static const MODIFIER_MAGIC_R:int = 			14;
 		public static const MODIFIER_LUST_R:int = 			15;
+		public static const MODIFIER_PHYS_R:int = 			16;
 		
 		public static const DEFAULT_VALUE:Number = 6;
 		
 		public static const NOTHING:Nothing = new Nothing();
 		
-		public const AQBREATH:HeadJewelry = new HeadJewelry("AqBreath", "Aqua breather", "Aqua breather", "an Aqua breather", 0, 0, 200, "This unfashionable, yet very practical, goblin device allows to breathe underwater. A must have for any underwater expedition. \n\nType: Helm \nBase value: 200","Helm");
+		public const AQBREATH:HeadJewelry = new HeadJewelry("AqBreath", "Aqua breather", "Aqua breather", "an Aqua breather", 0, 0, 200, "This unfashionable, yet very practical, goblin device allows to breathe underwater. A must have for any underwater expedition. \n\nType: Helm \nBase value: 200","Helmet");
 		public const FOXHAIR:HeadJewelry = new HeadJewelry("FoxHair", "Fox Hairpin", "fox hairpin", "a fox hairpin", 0, 0, 800, "This hairpin, adorned with the design of a fox and blessed by Taoth, grants a kitsune increased magical power. (-20% spell and soulskills costs, +20% mag/lust dmg to fox fire specials) \n\nType: Jewelry (Hairpin) \nBase value: 800","Hairpin");
 		public const GNHAIR:HeadJewelry = new HeadJewelry("GNHair", "Golden Naga Hairpins", "pair of Golden Naga Hairpins", "a pair of Golden Naga Hairpins", 0, 0, 400, "This pair of lovely half moon-shaped golden hairpins are commonly used by the nagas to enhance their bodily charms. (+10% lust dmg from naga specials and +1 duration of Hypnosis) \n\nType: Jewelry (Hairpin) \nBase value: 400","Hairpin");
+		public const HBHELM :HBHelmet = new HBHelmet();
 		public const MACHGOG:MachinistGoggles = new MachinistGoggles();
 		public const SATGOG :SATechGoggle = new SATechGoggle();
 		public const SCANGOG:ScannerGoggle = new ScannerGoggle();
@@ -46,8 +48,10 @@ package classes.Items
 		public const DARKCRO:HeadJewelry = new HeadJewelry("DarkCro", "Dark Crown", "crown of darkness protection", "an enchanted crown of darkness protection", MODIFIER_DARK_R, 20, 3200, "This crown is topped with onyx gemstones. It is said that this will make you protected from darkness. \n\nType: Jewelry (Crown) \nBase value: 3,200 \nSpecial: Increases darkness resistance by 20%.","Crown");
 		public const POISCRO:HeadJewelry = new HeadJewelry("PoisCro", "Pois Crown", "crown of poison protection", "an enchanted crown of poison protection", MODIFIER_POIS_R, 20, 3200, "This crown is topped with pearls. It is said that this will make you protected from poison. \n\nType: Jewelry (Crown) \nBase value: 3,200 \nSpecial: Increases poison resistance by 20%.","Crown");
 		public const LUSTCRO:HeadJewelry = new HeadJewelry("LustCro", "Lust Crown", "crown of lust protection", "an enchanted crown of lust protection", MODIFIER_LUST_R, 20, 4800, "This crown is topped with amethyst gemstones. It is said that this will make you protected from lust. \n\nType: Jewelry (Crown) \nBase value: 4,800 \nSpecial: Increases lust resistance by 20%.","Crown");
+		public const MAGICRO:HeadJewelry = new HeadJewelry("MagiCro", "Magic Crown", "crown of magic protection", "an enchanted crown of magical protection", MODIFIER_MAGIC_R, 8, 6400, "This crown is topped with pyrite gemstones. It is said that this will make you protected from magic. \n\nType: Jewelry (Crown) \nBase value: 6,400 \nSpecial: Increases magic resistance by 8%.","Crown");
+		public const PHYSCRO:HeadJewelry = new HeadJewelry("PhysCro", "Phys Crown", "crown of physical protection", "an enchanted crown of physical protection", MODIFIER_PHYS_R, 12, 6400, "This crown is topped with hematite gemstones. It is said that this will make you protected from physical harm. \n\nType: Jewelry (Crown) \nBase value: 6,400 \nSpecial: Increases physical resistance by 12%.","Crown");
 		public const CUNDKIN:HeadJewelry = new HeadJewelry("CUndKing", "CroUndefKing", "Crown of the Undefeated King", "a Crown of the Undefeated King", 0, 0, 6000, "This splendid crown topped with many kinds of gems belonged in the past to the king, which claimed to be undefeated. But then how it get into your hands? \n\nType: Jewelry (Crown) \nBase value: 3,000","Crown");
-		//armor, mag resis protection crowns........
+		//helmet(s) that giving armor and/or mres
 		public const CROWINT:CrownOfIntelligence = new CrownOfIntelligence();
 		public const CROWLIB:CrownOfLibido = new CrownOfLibido();
 		public const CROWSEN:CrownOfSensitivity = new CrownOfSensitivity();
@@ -60,5 +64,4 @@ package classes.Items
 		{
 		}
 	}
-
 }

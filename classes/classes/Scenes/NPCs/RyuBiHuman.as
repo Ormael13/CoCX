@@ -32,7 +32,7 @@ public class RyuBiHuman extends Monster
 			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "red";
 			this.hairColor = "black";
-			this.hairLength = 15;
+			this.hairLength = 45;//obscenely long, >= 40 a mniej niż tallness
 			initStrTouSpeInte(100, 90, 80, 90);
 			initWisLibSensCor(90, 50, 35, 50);
 			this.weaponName = "claws";
@@ -42,7 +42,7 @@ public class RyuBiHuman extends Monster
 			this.armorDef = 54;
 			this.armorMDef = 54;
 			this.bonusHP = 600;
-			this.bonusLust = 10;
+			this.bonusLust = 175;//lib+sens+lvl
 			this.lust = 20;
 			this.lustVuln = .25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

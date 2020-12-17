@@ -120,6 +120,7 @@ public class Rangiku extends Monster
 				this.armorDef = 21;
 				this.armorMDef = 7;
 				this.bonusHP = 100;
+				this.bonusLust = 465;//lib+sens+level
 				this.level = 15;
 			}/*
 			if (flags[kFLAGS.RANGIKU_LVL_UP] == 1) {
@@ -132,6 +133,7 @@ public class Rangiku extends Monster
 				this.armorDef = 21;
 				this.armorMDef = 7;
 				this.bonusHP = 100;
+				this.bonusLust = 465;
 				this.level = 30;
 			}
 			if (flags[kFLAGS.RANGIKU_LVL_UP] == 2) {
@@ -144,6 +146,7 @@ public class Rangiku extends Monster
 				this.armorDef = 21;
 				this.armorMDef = 7;
 				this.bonusHP = 100;
+				this.bonusLust = 465;
 				this.level = 45;
 			}
 			if (flags[kFLAGS.RANGIKU_LVL_UP] == 3) {
@@ -156,6 +159,7 @@ public class Rangiku extends Monster
 				this.armorDef = 21;
 				this.armorMDef = 7;
 				this.bonusHP = 100;
+				this.bonusLust = 465;
 				this.level = 60;
 			}
 			if (flags[kFLAGS.RANGIKU_LVL_UP] == 4) {
@@ -168,9 +172,9 @@ public class Rangiku extends Monster
 				this.armorDef = 21;
 				this.armorMDef = 7;
 				this.bonusHP = 100;
+				this.bonusLust = 465;
 				this.level = 70;
 			}*/
-			this.bonusLust = 20;
 			this.lust = 30;
 			this.lustVuln = .35;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

@@ -66,5 +66,4 @@ import classes.ItemType;
 			outputText("You are suited up and all good to go. ");
 		}
 	}
-
 }

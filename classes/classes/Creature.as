@@ -545,6 +545,11 @@ public class Creature extends Utils
 				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.7;
 				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 1;
 			}
+			if (game.player.vehiclesName == "Howling Banshee Mech") {
+				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.25;
+				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.5;
+				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.75;
+			}
 			return maxHP_mult1;
 		}
 		public function maxHP():Number {
@@ -553,10 +558,22 @@ public class Creature extends Utils
 		}
 		public function maxOverHP():Number {
 			var maxOver:Number = maxHP();
-			if (findPerk(PerkLib.HiddenJobBloodDemon) >= 0) maxOver += Math.round(tou * 5);
-			//if (findPerk(PerkLib.) >= 0) maxOver += Math.round(tou*5);
-			if (findPerk(PerkLib.YourPainMyPower) >= 0) maxOver += Math.round(tou*5);
-			if (findPerk(PerkLib.MyBloodForBloodPuppies) >= 0) maxOver += Math.round(tou*5);
+			if (findPerk(PerkLib.HiddenJobBloodDemon) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 5);
+				else maxOver += Math.round(tou * 5);
+			}
+			if (findPerk(PerkLib.WayOfTheBlood) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 5);
+				else maxOver += Math.round(tou * 5);
+			}
+			if (findPerk(PerkLib.YourPainMyPower) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 5);
+				else maxOver += Math.round(tou * 5);
+			}
+			if (findPerk(PerkLib.MyBloodForBloodPuppies) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 5);
+				else maxOver += Math.round(tou * 5);
+			}
 			return Math.min(19999999,maxOver);
 		}
 		public function minHP():Number {
@@ -2907,7 +2924,7 @@ public class Creature extends Utils
 		//Crit immunity
 		public function isImmuneToCrits():Boolean
 		{
-			if (game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGooType) >= 0)
+			if (game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyFleshConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGooType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0)
 				return true;//dodać inne typy wrogów: żywiołaki, nieumarli/duchy
 			return false;
 		}
@@ -2915,16 +2932,16 @@ public class Creature extends Utils
 		//Eyes of the Hunter
 		public function whenEyesOfTheHunterActivates():Boolean
 		{
-			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyFeralType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGooType) >= 0
-					|| game.monster.findPerk(PerkLib.EnemyHugeType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyColossalType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGhostType) >= 0))
-                    || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0 || game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
-                    || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
+			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyFeralType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyFleshConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0
+					|| game.monster.findPerk(PerkLib.EnemyGooType) >= 0 || game.monster.findPerk(PerkLib.EnemyHugeType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyColossalType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGhostType) >= 0)
+					|| game.monster.findPerk(PerkLib.EnemyLargeGroupType) >= 0) || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0 || game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0
+                    || game.monster.findPerk(PerkLib.LightningNature) >= 0)) || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
 		}
 		public function whenGeneralEnemyPerksDisplayed():Boolean
 		{
-			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyFeralType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyGooType) >= 0
-					|| game.monster.findPerk(PerkLib.EnemyHugeType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyColossalType) >= 0 || game.monster.findPerk(PerkLib.EnemyGhostType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGhostType) >= 0))
-                    || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0));
+			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyFeralType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyFleshConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0
+					|| game.monster.findPerk(PerkLib.EnemyLargeGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyGooType) >= 0 || game.monster.findPerk(PerkLib.EnemyHugeType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyColossalType) >= 0 || game.monster.findPerk(PerkLib.EnemyGhostType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0
+					|| game.monster.findPerk(PerkLib.EnemyGhostType) >= 0)) || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0));
 		}
 		public function whenElementalEnemyPerksDisplayed():Boolean
 		{

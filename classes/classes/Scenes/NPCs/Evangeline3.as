@@ -221,7 +221,7 @@ public class Evangeline3 extends Monster
 				this.armorDef = 16;
 				this.armorMDef = 15;
 				this.bonusHP = 420;
-				this.bonusLust = 40;
+				this.bonusLust = 108;
 				this.lust = 70;
 				this.lustVuln = .7;
 				this.additionalXP += 70;
@@ -244,7 +244,7 @@ public class Evangeline3 extends Monster
 				this.armorDef = 16;
 				this.armorMDef = 15;
 				this.bonusHP = 450;
-				this.bonusLust = 40;
+				this.bonusLust = 115;
 				this.lust = 70;
 				this.lustVuln = .7;
 				this.additionalXP += 75;
@@ -268,7 +268,7 @@ public class Evangeline3 extends Monster
 				this.armorDef = 16;
 				this.armorMDef = 30;
 				this.bonusHP = 510;
-				this.bonusLust = 40;
+				this.bonusLust = 119;
 				this.lust = 70;
 				this.lustVuln = .65;
 				this.additionalXP += 85;
@@ -294,7 +294,7 @@ public class Evangeline3 extends Monster
 				this.armorDef = 16;
 				this.armorMDef = 30;
 				this.bonusHP = 540;
-				this.bonusLust = 40;
+				this.bonusLust = 121;
 				this.lust = 70;
 				this.lustVuln = .65;
 				this.additionalXP += 90;
@@ -321,7 +321,7 @@ public class Evangeline3 extends Monster
 				this.armorDef = 16;
 				this.armorMDef = 75;
 				this.bonusHP = 600;
-				this.bonusLust = 40;
+				this.bonusLust = 125;
 				this.lust = 70;
 				this.lustVuln = .6;
 				this.additionalXP += 100;
@@ -350,7 +350,7 @@ public class Evangeline3 extends Monster
 				this.armorDef = 16;
 				this.armorMDef = 75;
 				this.bonusHP = 630;
-				this.bonusLust = 40;//Jak zyska perk BoosTierEnemy wtedy bonus lust musi wzrosnac do 50 z 40 wiec do tego czasu nie ma bonus lust bedzie na 40 stał
+				this.bonusLust = 127;//Jak zyska perk BoosTierEnemy wtedy bonus lust musi wzrosnac do 50 z 40 wiec do tego czasu nie ma bonus lust bedzie na 40 stał
 				this.lust = 70;
 				this.lustVuln = .6;//im bedziej poteżna bedzie tym bliżej 0 powinno być czyli trudniej ją lustem pobijać ^^
 				this.additionalXP += 105;

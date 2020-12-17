@@ -632,6 +632,7 @@ use namespace CoC;
 				}
 				armorDef += goblinbracerBonus;
 			}
+			if (headjewelryName == "HB helmet") armorDef += 5;
 			if (vehiclesName == "Goblin Mech Alpha") {
 				armorDef += 10;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 5;
@@ -643,6 +644,12 @@ use namespace CoC;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 10;
 				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 20;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 30;
+			}
+			if (vehiclesName == "Howling Banshee Mech") {
+				armorDef += 15;
+				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 8;
+				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 16;
+				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 24;
 			}
 			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
@@ -811,6 +818,7 @@ use namespace CoC;
 				}
 				armorMDef += goblinbracerBonus;
 			}
+			if (headjewelryName == "HB helmet") armorMDef += 4;
 			if (vehiclesName == "Goblin Mech Alpha") {
 				armorMDef += 10;
 				if (hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) armorMDef += 5;
@@ -822,6 +830,12 @@ use namespace CoC;
 				if (hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) armorMDef += 10;
 				if (hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) armorMDef += 20;
 				if (hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) armorMDef += 30;
+			}
+			if (vehiclesName == "Howling Banshee Mech") {
+				armorMDef += 15;
+				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorMDef += 8;
+				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorMDef += 16;
+				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorMDef += 24;
 			}
 			armorMDef = Math.round(armorMDef);
 			//Berzerking/Lustzerking removes magic resistance
@@ -893,11 +907,12 @@ use namespace CoC;
 				|| tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL
 				|| tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM
 				|| lowerBody == LowerBody.NAGA);}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack());}
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasPerk(PerkLib.MorphicWeaponry) || isAlraune());}
 		//Some other checks
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
-		public function isNightCreature():Boolean { return (vampireScore() >= 10 || batScore() >= 6 || jiangshiScore() >= 20);}
+		public function isNightCreature():Boolean { return (vampireScore() >= 10 || batScore() >= 6 || jiangshiScore() >= 20); }
+		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }	
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
@@ -968,7 +983,7 @@ use namespace CoC;
 		}
 		//Dueling sword-type weapons (rapier & katana)
 		public function isDuelingTypeWeapon():Boolean {
-			return weapon == game.weapons.UGATANA || weapon == game.weapons.NODACHI || game.weapons.MOONLIT || weapon == game.weapons.C_BLADE || weapon == game.weapons.BLETTER || weapon == game.weapons.B_WIDOW || weapon == game.weapons.DRAPIER || weapon == game.weapons.JRAPIER || weapon == game.weapons.KATANA || weapon == game.weapons.MASAMUN || weapon == game.weapons.Q_GUARD || weapon == game.weapons.RRAPIER || weapon == game.weapons.LRAPIER;
+			return weapon == game.weapons.UGATANA || weapon == game.weapons.NODACHI || weapon == game.weapons.MOONLIT || weapon == game.weapons.C_BLADE || weapon == game.weapons.BLETTER || weapon == game.weapons.B_WIDOW || weapon == game.weapons.DRAPIER || weapon == game.weapons.JRAPIER || weapon == game.weapons.KATANA || weapon == game.weapons.MASAMUN || weapon == game.weapons.Q_GUARD || weapon == game.weapons.RRAPIER || weapon == game.weapons.LRAPIER;
 		}
 		//Spear-type
 		public function isSpearTypeWeapon():Boolean {
@@ -1005,6 +1020,11 @@ use namespace CoC;
 		{
 			return weaponRange == game.weaponsrange.TRFATBI;//weaponRange == game.weaponsrange.TRFATBI ||
 		}
+		//Is in Ayo armor
+		public function isInAyoArmor():Boolean
+		{
+			return armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo";
+		}
 		//Is in goblin mech
 		public function isInGoblinMech():Boolean
 		{
@@ -1016,7 +1036,16 @@ use namespace CoC;
 			return weaponRange == game.weaponsrange.ADBSCAT || weaponRange == game.weaponsrange.ADBSHOT || weaponRange == game.weaponsrange.BLUNDER || weaponRange == game.weaponsrange.DESEAGL || weaponRange == game.weaponsrange.DUEL_P_ || weaponRange == game.weaponsrange.FLINTLK || weaponRange == game.weaponsrange.HARPGUN || weaponRange == game.weaponsrange.IVIARG_
 			 || weaponRange == game.weaponsrange.M1CERBE || weaponRange == game.weaponsrange.TOUHOM3 || weaponRange == game.weaponsrange.TWINGRA || weaponRange == game.weaponsrange.TDPISTO || weaponRange == game.weaponsrange.DPISTOL;
 		}
-		//Is in ... mech (med sized races mech)(have upgrade option to allow smaller than medium races pilot it)
+		//Is in medium sized mech (med sized races mech)(have upgrade option to allow smaller than medium races pilot it)
+		public function isInNonGoblinMech():Boolean
+		{
+			return vehicles == game.vehicles.HB_MECH;// || vehicles == game.vehicles.GOBMPRI
+		}
+		//Is using howling banshee mech friendly range weapons
+		public function isUsingHowlingBansheeMechFriendlyRangeWeapons():Boolean
+		{
+			return weaponRangePerk == "Bow" || weaponRangePerk == "Crossbow";
+		}
 		//Is in ... mech (large sized races mech)(have upgrade option to allow smaller than large races pilot it)
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
@@ -1914,7 +1943,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.ImmovableObject) && tou >= 75) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 75 && armorPerk == "Ayo") {
+			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 75 && (armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo")) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && armorPerk == "Heavy") {
@@ -1950,6 +1979,13 @@ use namespace CoC;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			if (jewelryEffectId == JewelryLib.MODIFIER_PHYS_R) mult -= jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_PHYS_R) mult -= jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_PHYS_R) mult -= jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_PHYS_R) mult -= jewelryEffectMagnitude4;
+			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_PHYS_R) mult -= headjewelryEffectMagnitude;
+			if (necklaceEffectId == NecklaceLib.MODIFIER_PHYS_R) mult -= necklaceEffectMagnitude;
+			if (jewelryEffectId == JewelryLib.MODIFIER_PHYS_R && jewelryEffectId2 == JewelryLib.MODIFIER_PHYS_R && jewelryEffectId3 == JewelryLib.MODIFIER_PHYS_R && jewelryEffectId4 == JewelryLib.MODIFIER_PHYS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_PHYS_R && necklaceEffectId == NecklaceLib.MODIFIER_PHYS_R) mult -= 9;
 			//Defend = 35-95% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {
 				if (hasPerk(PerkLib.DefenceStance) && tou >= 80) {
@@ -2087,6 +2123,13 @@ use namespace CoC;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			if (jewelryEffectId == JewelryLib.MODIFIER_MAGIC_R) mult -= jewelryEffectMagnitude;
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_MAGIC_R) mult -= jewelryEffectMagnitude2;
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_MAGIC_R) mult -= jewelryEffectMagnitude3;
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_MAGIC_R) mult -= jewelryEffectMagnitude4;
+			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_MAGIC_R) mult -= headjewelryEffectMagnitude;
+			if (necklaceEffectId == NecklaceLib.MODIFIER_MAGIC_R) mult -= necklaceEffectMagnitude;
+			if (jewelryEffectId == JewelryLib.MODIFIER_MAGIC_R && jewelryEffectId2 == JewelryLib.MODIFIER_MAGIC_R && jewelryEffectId3 == JewelryLib.MODIFIER_MAGIC_R && jewelryEffectId4 == JewelryLib.MODIFIER_MAGIC_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_MAGIC_R && necklaceEffectId == NecklaceLib.MODIFIER_MAGIC_R) mult -= 6;
 			//Defend = 35-95% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {
 				if (hasPerk(PerkLib.DefenceStance) && tou >= 80) {
@@ -2187,6 +2230,8 @@ use namespace CoC;
 
 		public override function damageFirePercent():Number {
 			var mult:Number = damageMagicalPercent();
+			if (upperGarmentName == "HB shirt") mult -= 10;
+			if (lowerGarmentName == "HB shorts") mult -= 10;
 			if (findPerk(PerkLib.FromTheFrozenWaste) >= 0 || findPerk(PerkLib.ColdAffinity) >= 0) mult += 100;
 			if (findPerk(PerkLib.FireAffinity) >= 0) mult -= 50;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
@@ -2288,12 +2333,14 @@ use namespace CoC;
 
 		public override function damageIcePercent():Number {
 			var mult:Number = damageMagicalPercent();
+			if (upperGarmentName == "Fur bikini top") mult -= 10;
+			if (lowerGarmentName == "Fur loincloth" || lowerGarmentName == "Fur panty") mult -= 10;
+			if (upperGarmentName == "HB shirt") mult -= 10;
+			if (lowerGarmentName == "HB shorts") mult -= 10;
+			if (necklaceName == "Blue Winter scarf") mult -= 20;
 			if (findPerk(PerkLib.FromTheFrozenWaste) >= 0 || findPerk(PerkLib.ColdAffinity) >= 0) mult -= 50;
 			if (findPerk(PerkLib.IcyFlesh) >= 0) mult -= 40;
 			if (findPerk(PerkLib.FireAffinity) >= 0) mult += 100;
-			if (upperGarmentName == "Fur bikini top") mult -= 10;
-			if (lowerGarmentName == "Fur loincloth" || lowerGarmentName == "Fur panty") mult -= 10;
-			if (necklaceName == "Blue Winter scarf") mult -= 20;
 			if (jewelryEffectId == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude3;
@@ -2396,6 +2443,8 @@ use namespace CoC;
 			if (armorName == "Goblin Technomancer clothes") mult -= 25;
 			if (upperGarmentName == "Technomancer bra") mult -= 15;
 			if (lowerGarmentName == "Technomancer panties") mult -= 15;
+			if (upperGarmentName == "HB shirt") mult -= 10;
+			if (lowerGarmentName == "HB shorts") mult -= 10;
 			if (findPerk(PerkLib.LightningAffinity) >= 0) mult -= 50;
 			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) mult -= 10;
 			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) mult -= 30;
@@ -3659,10 +3708,15 @@ use namespace CoC;
 			}
 			if (TopRace == "oni") {
 				if (TopScore) {
-					if (TopScore >= 12) {
+					if (TopScore >= 18) {
+						if (isTaur()) race = "elder oni-taur";
+						else race = "elder oni";
+					}
+					else if (TopScore >= 12) {
 						if (isTaur()) race = "oni-taur";
 						else race = "oni";
-					} else {
+					}
+					else {
 						if (isTaur()) race = "half oni-taur";
 						else race = "half oni";
 					}
@@ -4334,7 +4388,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (sharkScore() >= 8)
 				chimeraCounter++;
-			if (orcaScore() >= 17)
+			if (orcaScore() >= 14)
 				chimeraCounter++;
 			if (oniScore() >= 12)
 				chimeraCounter++;
@@ -4465,9 +4519,11 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (lowerBody == 51 && hydraScore() >= 19)
 				grandchimeraCounter++;
-/*			if (oniScore() >= 12)
+			if (oniScore() >= 18)
 				grandchimeraCounter++;
-			if (elfScore() >= 11)
+			if (orcaScore() >= 20)
+				grandchimeraCounter++;
+/*			if (elfScore() >= 11)
 				grandchimeraCounter++;
 			if (orcScore() >= 11)
 				grandchimeraCounter++;
@@ -5459,9 +5515,9 @@ use namespace CoC;
 				spiderCounter += 2;
 			if (tailType == Tail.SPIDER_ADBOMEN)
 				spiderCounter++;
-			if (!hasCoatOfType(Skin.CHITIN) && spiderCounter > 0)
+			if (!hasPartialCoat(Skin.CHITIN) && spiderCounter > 0)
 				spiderCounter--;
-			if (hasCoatOfType(Skin.CHITIN))
+			if (hasPartialCoat(Skin.CHITIN))
 				spiderCounter++;
 			if (spiderCounter > 0 && findPerk(PerkLib.TrachealSystem) >= 0)
 				spiderCounter++;
@@ -5858,6 +5914,8 @@ use namespace CoC;
 				gremlinCounter++;
 			if (hairType == Hair.CRAZY)
 				gremlinCounter++;
+			if (eyes.type == Eyes.GREMLIN && (eyes.colour == "red" || eyes.colour == "yellow" || eyes.colour == "purple" || eyes.colour == "orange"))
+				gremlinCounter++;
 			if (tallness < 48)
 				gremlinCounter+=2;
 			if (hasVagina())
@@ -5865,8 +5923,6 @@ use namespace CoC;
 			if (hasPlainSkinOnly()) {
 				gremlinCounter++;
 				if (skinTone == "light" || skinTone == "tan" || skinTone == "dark")
-					gremlinCounter++;
-				if (eyes.type == Eyes.GREMLIN && (eyes.colour == "red" || eyes.colour == "yellow" || eyes.colour == "purple" || eyes.colour == "orange"))
 					gremlinCounter++;
 				if (hairColor == "emerald" || hairColor == "green" || hairColor == "dark green" || hairColor == "aqua" || hairColor == "light green")
 					gremlinCounter++;
@@ -6052,13 +6108,15 @@ use namespace CoC;
 					darkgooCounter++;
 				if (lowerBody == LowerBody.GOO)
 					darkgooCounter += 3;
+				if (eyes.colour == "red")
+					darkgooCounter ++;
 				if (rearBody.type == RearBody.METAMORPHIC_GOO)
 					darkgooCounter += 2;
 				if (hasGooSkin() && skinAdj == "slimy") {
 					darkgooCounter++;
 					if (faceType == Face.HUMAN)
 						darkgooCounter++;
-					if (eyes.type == Eyes.HUMAN || eyes.type == Eyes.DEVIL)
+					if (eyes.type == Eyes.HUMAN || eyes.type == Eyes.FIENDISH)
 						darkgooCounter++;
 					if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN)
 						darkgooCounter++;
@@ -6078,8 +6136,8 @@ use namespace CoC;
 				darkgooCounter++;
 			if (hasStatusEffect(StatusEffects.SlimeCraving))
 				darkgooCounter++;
-			//if (findPerk(PerkLib.SlimeCore) >= 0)
-			//	darkgooCounter++;
+			if (findPerk(PerkLib.DarkSlimeCore) >= 0)
+				darkgooCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				darkgooCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && darkgooCounter >= 4)
@@ -6790,11 +6848,15 @@ use namespace CoC;
 				oniCounter++;
 			if (skin.base.pattern == Skin.PATTERN_BATTLE_TATTOO)
 				oniCounter++;
+			if (rearBody.type == RearBody.NONE)
+				oniCounter++;
 			if (tailType == Tail.NONE)
 				oniCounter++;
-			if (tone >= 75)
+			if (tone >= 80)
 				oniCounter++;
-			if (tone >= 150 && oniCounter >= 4)
+			if (tone >= 120 && oniCounter >= 4)
+				oniCounter++;
+			if (tone >= 160 && oniCounter >= 8)
 				oniCounter++;
 			if ((hasVagina() && biggestTitSize() >= 19) || (cocks.length > 18))
 				oniCounter++;
@@ -9185,6 +9247,8 @@ use namespace CoC;
 				counter++;
 			if ((findPerk(PerkLib.VampiricBloodsteamFinalForm) >= 0 || findPerk(PerkLib.HollowFangsFinalForm) >= 0) && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
 				counter++;
+			if (findPerk(PerkLib.VampiresDescendant) >= 0 || findPerk(PerkLib.BloodlineVampire) >= 0)
+				counter += 2;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && counter >= 4)
 				counter++;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && counter >= 8)
@@ -9552,7 +9616,7 @@ use namespace CoC;
 			var ballsMutations:Number = 1;
 			if (findPerk(PerkLib.MinotaurTesticles) >= 0)
 				ballsMutations--;
-			if (findPerk(PerkLib.EasterBunnyBalls) >= 0)
+			if (findPerk(PerkLib.EasterBunnyEggBag) >= 0)
 				ballsMutations--;
 			if (findPerk(PerkLib.NukiNuts) >= 0)
 				ballsMutations--;
@@ -9747,7 +9811,7 @@ use namespace CoC;
 				if (findPerk(PerkLib.IronStomachEx) >= 0) overeatingLimit += 10;
 				if (findPerk(PerkLib.IronStomachSu) >= 0) overeatingLimit += 15;/*(perki muszą dać zwiekszenie limitu przejedzenia sie bez przyrostu wagi powyżej 10 ^^)
 				overeatingLimit += 10;overating perk chyba			perki overating dające stałe utrzymywanie hunger powyżej limitu max hunger dopóki hunger naturalnie nie zostanie zużyty xD
-				overeatingLimit += 20;overeating ex perk chyba		achiev polegający na przeżyciu x dni bez jedzenie czegokolwiek wic każde podniesienie hunger resetuje ten timer xD
+				overeatingLimit += 20;overeating ex perk chyba		achiev polegający na przeżyciu x dni bez jedzenie czegokolwiek wiec każde podniesienie hunger resetuje ten timer xD
 				overeatingLimit += 40;overeating su perk chyba*/
 				hunger += amnt;
 				if (hunger > maxHunger()) {
@@ -9845,6 +9909,7 @@ use namespace CoC;
 					createStatusEffect(StatusEffects.SlimeCravingFeed,0,0,0,0);
 				}
 				refillHunger(30);
+				slimeGrowth();
 			}
 			if (findPerk(PerkLib.Diapause) >= 0) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
@@ -9892,8 +9957,8 @@ use namespace CoC;
 
 		public function spellCount():Number
 		{
-			return [StatusEffects.KnowsArcticGale, StatusEffects.KnowsArouse, StatusEffects.KnowsBlind, StatusEffects.KnowsBlink, StatusEffects.KnowsBlizzard, StatusEffects.KnowsChainLighting, StatusEffects.KnowsCharge, StatusEffects.KnowsChargeA, StatusEffects.KnowsDarknessShard, StatusEffects.KnowsDuskWave, StatusEffects.KnowsFireStorm, StatusEffects.KnowsHeal,
-			StatusEffects.KnowsIceRain, StatusEffects.KnowsIceSpike,StatusEffects.KnowsLightningBolt, StatusEffects.KnowsManaShield,StatusEffects.KnowsMight,StatusEffects.KnowsNosferatu,StatusEffects.KnowsRegenerate,StatusEffects.KnowsWhitefire]
+			return [StatusEffects.KnowsArcticGale, StatusEffects.KnowsArouse, StatusEffects.KnowsBlind, StatusEffects.KnowsBlink, StatusEffects.KnowsBlizzard, StatusEffects.KnowsBloodExplosion, StatusEffects.KnowsBloodMissiles, StatusEffects.KnowsChainLighting, StatusEffects.KnowsCharge, StatusEffects.KnowsChargeA, StatusEffects.KnowsDarknessShard, StatusEffects.KnowsDuskWave,
+			StatusEffects.KnowsFireStorm, StatusEffects.KnowsHeal, StatusEffects.KnowsIceRain, StatusEffects.KnowsIceSpike,StatusEffects.KnowsLightningBolt, StatusEffects.KnowsManaShield,StatusEffects.KnowsMight,StatusEffects.KnowsNosferatu,StatusEffects.KnowsRegenerate,StatusEffects.KnowsWhitefire]
 					.filter(function(item:StatusEffectType, index:int, array:Array):Boolean{
 						return this.hasStatusEffect(item);},this)
 					.length;
@@ -10985,10 +11050,10 @@ use namespace CoC;
 					maxTouCap2 += 70;
 					maxSpeCap2 += 100;
 				}
-				else if (orcaScore() >= 17) {
-					maxStrCap2 += 125;
+				else if (orcaScore() >= 14) {
+					maxStrCap2 += 100;
 					maxTouCap2 += 40;
-					maxSpeCap2 += 100;
+					maxSpeCap2 += 70;
 				}
 				else {
 					maxStrCap2 += 35;
@@ -10997,7 +11062,13 @@ use namespace CoC;
 				}
 			}//+10/10-20
 			if (oniScore() >= 6) {
-				if (oniScore() >= 12) {
+				if (oniScore() >= 18) {
+					maxStrCap2 += 150;
+					maxTouCap2 += 90;
+					maxIntCap2 -= 30;
+					maxWisCap2 += 60;
+				}
+				else if (oniScore() >= 12) {
 					maxStrCap2 += 100;
 					maxTouCap2 += 60;
 					maxIntCap2 -= 20;
@@ -11207,7 +11278,7 @@ use namespace CoC;
 					maxSpeCap2 -= 15;
 					maxIntCap2 -= 10;
 				}
-				else if (pigScore() >= 10 && pigScore() < 15) {
+				else if (pigScore() >= 10) {
 					maxStrCap2 += 60;
 					maxTouCap2 += 120;
 					maxSpeCap2 -= 15;
@@ -12390,6 +12461,27 @@ use namespace CoC;
 				} else {
 					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50) {
 						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(10);
+					}
+				}
+			}
+			EngineCore.HPChange(Math.round(maxHP() * .2), true);
+			cumOmeter(40);
+			cor += 2;
+			refillHunger(100);
+		}
+
+		public function slimeGrowth():void {
+			if (hasStatusEffect(StatusEffects.SlimeCraving)) {
+				var time:Number = 4;
+				if (hasPerk(PerkLib.SlimeMetabolismEvolved)) {
+					buff("Fluid Growth").addStats({"tou.mult": 0.02}).withText("Fluid Growth!");
+					if (hasPerk(PerkLib.DarkSlimeCore)){
+						buff("Fluid Growth").addStats({"int.mult": 0.02}).withText("Fluid Growth!");
+					}
+				} else {
+					buff("Fluid Growth").addStats({"tou.mult": 0.01}).withText("Fluid Growth!");
+					if (hasPerk(PerkLib.DarkSlimeCore)){
+						buff("Fluid Growth").addStats({"int.mult": 0.01}).withText("Fluid Growth!");
 					}
 				}
 			}

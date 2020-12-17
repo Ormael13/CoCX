@@ -249,7 +249,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			this.armorDef = 1;
 			this.armorMDef = 1;
 			this.bonusHP = 20;
-			this.bonusLust = 10;
+			this.bonusLust = 101;
 			this.lust = 20;
 			this.lustVuln = .85;
 			this.level = 12;

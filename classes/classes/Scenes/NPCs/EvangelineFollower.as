@@ -134,7 +134,17 @@ public function Nie2():void
 	
 public function meetEvangeline():void {
 	clearOutput();
-	outputText("Deciding to visit your camp’s transformation expert you called Evangeline. Shortly after that she slowly walks toward you.\n\n");
+	if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && rand(4) == 0) {
+		outputText("You call your transformations expert, Evangeline, but you get no response. After a moment you decide to head over to her.\n\n");
+		outputText("When you arrive, you already see Zenji hovering over her shoulder, his tail nervously coiling around himself. Evangeline is showing Zenji what the transformations do and ensuring him that it will cause no harm to any imbibers.\n\n");
+		outputText("Zenji seems somewhat unconvinced at her assurance. \"<i>If dat is what you say so, but if you dare harm [name], just know dat I will be de first to know.</i>\"\n\n");
+		outputText("Evangeline mumbles something under her breath, a little perturbed by his presence."+(player.isHavingEnhancedHearing() ? " \"<i>Is everything going to be my fault now..? I'm just trying to help, but my work is not the same as yours...</i>\"":"")+"\n\n");
+		outputText("Zenji sighs, \"<i>I guess I’m being too hard on ya, you’re right…</i>\" He says, giving her a gentle pat on the shoulder.\n\n");
+		outputText("Evangeline seems slightly comforted by that statement.\n\n");
+		outputText("\"<i>Well, if you have no other questions it looks like [name] wants to talk to me now.</i>\" She mumbles again.\n\n");
+		outputText("Zenji nods and gives you a brief hug before leaving you alone with Evangeline.\n\n");
+	}
+	else outputText("Deciding to visit your camp’s transformation expert you called Evangeline. Shortly after that she slowly walks toward you.\n\n");
 	outputText("\"<i>Hi [name]! Anything I can help you with?</i>\"");
 	menu();
 	addButton(0, "Appearance", evangelineAppearance).hint("Examine Evangeline's detailed appearance.");

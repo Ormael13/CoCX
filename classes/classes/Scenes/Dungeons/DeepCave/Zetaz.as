@@ -190,7 +190,7 @@ public class Zetaz extends Monster
 			this.armorDef = 14;
 			this.armorMDef = 7;
 			this.bonusHP = 600;
-			this.bonusLust = 50;
+			this.bonusLust = 120;
 			this.lust = 40;
 			this.lustVuln = .35;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

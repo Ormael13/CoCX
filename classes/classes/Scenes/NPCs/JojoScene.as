@@ -640,8 +640,8 @@ private function jojoMilkPay(tentacle:Boolean = false):void {
 	var payout:Number = 0;
 	var cap:Number = 500;
 	var cumQ:Number = 0;
-	//Ez mode cap doubles
-	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
+	//Ez mode cap is 10x
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) cap *= 10;
 	if(debug) 
 	{
 		flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0;
@@ -3347,6 +3347,5 @@ public function mishapsLunaJojo():void {
 	if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 	doNext(playerMenu);
 }
-
 }
 }

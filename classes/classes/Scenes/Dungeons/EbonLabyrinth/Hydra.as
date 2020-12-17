@@ -124,6 +124,7 @@ use namespace CoC;
 				this.armorDef = 80;
 				this.armorMDef = 80;
 				this.bonusHP = 1000;
+				this.bonusLust = 480;
 				this.level = 65;
 				this.gems = 200 + rand(80);
 			}
@@ -133,6 +134,7 @@ use namespace CoC;
 				this.armorDef = 100;
 				this.armorMDef = 100;
 				this.bonusHP = 2000;
+				this.bonusLust = 530;
 				this.level = 70;
 				this.gems = 250 + rand(90);
 			}
@@ -142,6 +144,7 @@ use namespace CoC;
 				this.armorDef = 120;
 				this.armorMDef = 120;
 				this.bonusHP = 3000;
+				this.bonusLust = 580;
 				this.level = 75;
 				this.gems = 300 + rand(100);
 			}
@@ -168,7 +171,6 @@ use namespace CoC;
 			this.weaponVerb="punch";
 			this.weaponAttack = 5;
 			this.armorName = "scales";
-			this.bonusLust = 10;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new WeightedDrop(consumables.HYDRASC, 1);

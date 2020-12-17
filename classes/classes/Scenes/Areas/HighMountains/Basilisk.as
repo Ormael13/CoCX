@@ -118,7 +118,7 @@ import classes.internals.ChainedDrop;
 			this.armorPerk = "";
 			this.armorValue = 70;
 			this.bonusHP = 200;
-			this.bonusLust = 10;
+			this.bonusLust = 109;
 			this.lust = 30;
 			this.lustVuln = .5;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

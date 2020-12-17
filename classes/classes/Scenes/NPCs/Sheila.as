@@ -302,7 +302,7 @@ public class Sheila extends Monster
 				this.touStat.core.value += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				this.intStat.core.value += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				bonusHP += 200;
-				this.bonusLust = 30;
+				bonusLust += 30;
 				lust= 50;
 				lustVuln= .15;
 				//-all special attacks are lust damage
@@ -320,7 +320,7 @@ public class Sheila extends Monster
 			this.armorDef = 7;
 			this.armorMDef = 0;
 			this.bonusHP = bonusHP;
-			this.bonusLust = 10;
+			this.bonusLust = 94;
 			this.lust = lust;
 			this.lustVuln = lustVuln;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

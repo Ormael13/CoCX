@@ -12,6 +12,8 @@ import classes.CoC;
 import classes.Scenes.Areas.BlightRidge.*;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Monsters.ImpLord;
+import classes.Scenes.Monsters.CorruptedFleshGolemBasic;
+import classes.Scenes.Monsters.CorruptedFleshGolemsBasic;
 
 use namespace CoC;
 	
@@ -95,11 +97,10 @@ use namespace CoC;
 			
 			//Build choice list!
 			choice[choice.length] = 0; //Imp enemies
-			choice[choice.length] = 1; //Succubi/Incubu/Omnicubi enemies
-			choice[choice.length] = 2; //Imp Food
-			//choice[choice.length] = 3; //
-			//if (rand(3) == 0) choice[choice.length] = 2; //Find Imp's Food ^^
-			if (rand(4) == 0) choice[choice.length] = 3; //Find nothing! The rand will be removed from this once the Blight Ridge is populated with more encounters.
+			choice[choice.length] = 1; //Succubi (lvl 26)/Incubu (lvl 26)/Omnicubi enemies (lvl 29)
+			choice[choice.length] = 2; //Corrupted Basic Flesh Golem (lvl 35)/Corrupted Basic Flesh Golems(lvl 36)
+			choice[choice.length] = 3; //Imp Food
+			if (rand(4) == 0) choice[choice.length] = 4; //Find nothing! The rand will be removed from this once the Blight Ridge is populated with more encounters.
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
@@ -110,6 +111,9 @@ use namespace CoC;
 					SceneLib.exploration.genericDemonsEncounters1();
 					break;
 				case 2:
+					SceneLib.fleshGolemScenes.introCorruptedBasicFleshGolemS();
+					return;
+				case 3:
 					clearOutput();
 					outputText("You spot something on the ground. Taking a closer look, it's one of those imps food packages. ");
 					inventory.takeItem(consumables.IMPFOOD, camp.returnToCampUseOneHour);

@@ -371,7 +371,5 @@ public function siegweirdAdvancedCampStudy():void
 		cheatTime2(5);
 	}
 }
-
 	}
-
 }

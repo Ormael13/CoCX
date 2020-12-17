@@ -5286,7 +5286,6 @@ private function urtaTakesPCOnWalkies():void {
 		flags[kFLAGS.URTA_VIXEN_AND_CREAM_COUNTER]++;
 		urtaLove(3);
 		doNext(camp.returnToCampUseTwoHours);
-	}
-	
+	}	
 }
 }

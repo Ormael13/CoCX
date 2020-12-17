@@ -95,7 +95,8 @@ package classes.Scenes.Places.HeXinDao
 
 		public function BoardkeeperYangMain():void {
 			clearOutput();
-			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 || player.hasKeyItem("Adventurer Guild: Iron plate") >= 0) {// || player.hasKeyItem("Adventurer Guild: Bronze plate") >= 0 || player.hasKeyItem("Adventurer Guild: Silver plate") >= 0 || player.hasKeyItem("Adventurer Guild: Gold plate") >= 0 || player.hasKeyItem("Adventurer Guild: Platinum plate") >= 0
+			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0
+			|| player.hasKeyItem("Adventurer Guild: Iron plate") >= 0) {// || player.hasKeyItem("Adventurer Guild: Bronze plate") >= 0 || player.hasKeyItem("Adventurer Guild: Silver plate") >= 0 || player.hasKeyItem("Adventurer Guild: Gold plate") >= 0 || player.hasKeyItem("Adventurer Guild: Platinum plate") >= 0 || player.hasKeyItem("Adventurer Guild: Mithril plate") >= 0 || player.hasKeyItem("Adventurer Guild: Orichalcum plate") >= 0 || player.hasKeyItem("Adventurer Guild: Adamantite plate") >= 0
 				outputText("Yang the job handler wait at you arm crossed. She looks bored like she has been there all day.\n\n");
 				outputText("\"<i>So [name] how can I help you today? Here to talk jobs or something else?</i>\"");
 				menu();

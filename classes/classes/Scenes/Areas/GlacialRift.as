@@ -277,6 +277,4 @@ use namespace CoC;
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}
-	
-
 }

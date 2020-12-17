@@ -44,7 +44,7 @@ import classes.internals.*;
 					this.armorMDef = 50;
 					this.bonusHP = 100;
 					this.bonusWrath = 25;
-					this.bonusLust = 50;
+					this.bonusLust = 318;
 					this.level = 18;
 				//}
 			}
@@ -53,7 +53,7 @@ import classes.internals.*;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 45 + rand(40);
 			this.drop = NO_DROP;
-			this.tailType = Tail.CAT;
+			this.tailType = Tail.MONKEY;
 			this.tailRecharge = 0;
 			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGodType, 0, 0, 0, 0);

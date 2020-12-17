@@ -29,10 +29,12 @@ import classes.Scenes.Areas.Forest.TentacleBeastRaging;
 import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
 import classes.Scenes.Dungeons.D3.Lethice;
+import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Explore.Pierce;
+import classes.Scenes.Explore.TheDummy;
 import classes.Scenes.Monsters.DarkElfRanger;
 import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;
@@ -294,7 +296,7 @@ use namespace CoC;
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function AddMaxBackpack03():void {
-			outputText("A11 th4t Prestige is Y0urs to T4ke!!!");
+			outputText("\n\nA11 th4t Prestige is Y0urs to T4ke!!!");
 			if (!player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) player.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
@@ -1614,23 +1616,43 @@ use namespace CoC;
 			}
 			doNext(SoulforceCheats);
 		}
-		public function EquipmentMenu():void {
+		public function EquipmentMenu(page:int = 1):void {
 			menu();
-			addButton(0, "Rap. Perk", AddRapPerk).hint("Add Raphael Rapier Perk and 1 Dragon Rapier.  USE only ONCE to not break the game!");
-			addButton(1, "Sky Pearl", AddSkyPoisonPearl).hint("Add 1 Sky Poison Pearl.");
-			addButton(2, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
-			addButton(3, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
-			addButton(4, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
-			addButton(5, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
-			addButton(6, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
-			addButton(7, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
-			addButton(8, "HBA Armor", AddHBAArmor).hint("Add 1 HBA Armor for testing purposes.");
-			addButton(9, "YODrops", AddYukiOnnaStuff).hint("Add both Yuki Onna equipment drops for testing purposes.");
-			addButton(10, "SpikeShields", AddSpikedShields).hint("Add set of two spiked shields of various sizes and weight for testing purposes.");
-			addButton(11, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
-			addButton(12, "MatrixArmory1", AddTheSeerHairpinAndCo).hint("Adds: 1 Eldritch Staff, 1 master Gloves, 1 Gnoll Throwing Axes, 1 Hodr's Bow, 1 Truestrike Sword, 1 Sceptre of Command, 1 Demonic Scythe, 1 Seer's Hairpin, Sakura Petal Kimono, Oni bead necklace");
-			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
-			addButton(14, "Back", SoulforceCheats);
+			if (page == 1) {
+				addButton(0, "Rap. Perk", AddRapPerk).hint("Add Raphael Rapier Perk and 1 Dragon Rapier.  USE only ONCE to not break the game!");
+				addButton(1, "Sky Pearl", AddSkyPoisonPearl).hint("Add 1 Sky Poison Pearl.");
+				addButton(2, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
+				addButton(3, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
+				addButton(4, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
+				//addButton(5, "UH Ayo Arm", AddUltraHeavyAyoArmor).hint("Add 1 Ultra heavy Ayo Armor for testing purposes.");
+				//6
+				//7
+				addButton(8, "HB Mech", AddHBMech).hint("Add 1 Howling Banshee Mech for testing purposes.");
+				addButton(9, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
+				//10
+				addButton(11, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
+				addButton(12, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
+				addButton(13, "-2-", EquipmentMenu, page + 1);
+				addButton(14, "Back", SoulforceCheats);
+			}
+			if (page == 2)  {
+				//0
+				//1
+				//2
+				//3
+				//4
+				//5
+				//6
+				//7
+				//8
+				addButton(9, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
+				addButton(10, "YODrops", AddYukiOnnaStuff).hint("Add both Yuki Onna equipment drops for testing purposes.");
+				addButton(11, "SpikeShields", AddSpikedShields).hint("Add set of two spiked shields of various sizes and weight for testing purposes.");
+				addButton(12, "MatrixArmory1", AddTheSeerHairpinAndCo).hint("Adds: 1 Eldritch Staff, 1 master Gloves, 1 Gnoll Throwing Axes, 1 Hodr's Bow, 1 Truestrike Sword, 1 Sceptre of Command, 1 Demonic Scythe, 1 Seer's Hairpin, Sakura Petal Kimono, Oni bead necklace");
+				addButton(13, "-1-", EquipmentMenu, page - 1);
+				addButton(14, "Back", SoulforceCheats);
+			}
+			
 		}
 		public function NonEquipmentMenu(page:int = 1):void {
 			menu();
@@ -1641,6 +1663,7 @@ use namespace CoC;
 				//addButton(3, "", ).hint("Add 1 .");
 				//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 				//addButton(5, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
+				addButton(4, "R.Manuscript", AddRedManuscript).hint("Add 1 Red Manuscript.");
 				addButton(5, "ALICORN", AddAlicornium).hint("Add 1 Alicornium.");
 				addButton(6, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
 				addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
@@ -1714,8 +1737,8 @@ use namespace CoC;
 				addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
 				addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
 				addButton(2, "Pierce", FightPierce).hint("Test fight with Pierce.");
-				//addButton(3, "", ).hint("Test fight with .");
-				//addButton(4, "", ).hint("Test fight with .");
+				addButton(3, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
+				addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
 				//addButton(5, "", ).hint("Test fight with .");
 				//addButton(6, "", ).hint("Test fight with .");
 				addButton(7, "Zenji", FightZenji).hint("Test fight with Zenji.");
@@ -1745,68 +1768,129 @@ use namespace CoC;
 				addButton(14, "Back", SoulforceCheats);
 			}
 		}
-
-		public function AddEnergyCore():void {
-			outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
-			inventory.takeItem(useables.ENECORE, curry(MaterialMenu, 2));
+		
+		public function AddRapPerk():void {
+			flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4;
+			player.createPerk(PerkLib.RapierTraining, 0, 0, 0, 0);
+			outputText("\n\n<b>(Gained Perk: Rapier Training and 1 Dragon Rapier!)</b>\n\n");
+			inventory.takeItem(weapons.DRAPIER, curry(EquipmentMenu, 1));
 		}
-		public function AddMechanism():void {
-			outputText("\n\n<b>(Gained 1 Mechanism!)</b>\n\n");
-			inventory.takeItem(useables.MECHANI, curry(MaterialMenu, 2));
+		public function AddSkyPoisonPearl():void {
+			outputText("\n\n<b>(Gained 1 Sky Poison Pearl!)</b>\n\n");
+			inventory.takeItem(consumables.SPPEARL, curry(EquipmentMenu, 1));
 		}
-		public function AddMetalPieces():void {
-			outputText("\n\n<b>(Gained 50 Metal Pieces!)</b>\n\n");
-			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += 50;
-			statScreenRefresh();
-			curry(MaterialMenu, 1);
+		public function AddCatONineTailWhip():void {
+			outputText("\n\n<b>(Gained 1 Bastet Whip!)</b>\n\n");
+			inventory.takeItem(weapons.CNTWHIP, curry(EquipmentMenu, 1));
 		}
-		public function AddGolemCore():void {
-			outputText("\n\n<b>(Gained 1 Golem Core!)</b>\n\n");
-			inventory.takeItem(useables.GOLCORE, curry(MaterialMenu, 2));
+		public function AddNineTailWhip():void {
+			outputText("\n\n<b>(Gained 1 Nine Tail Whip!)</b>\n\n");
+			inventory.takeItem(weapons.NTWHIP, curry(EquipmentMenu, 1));
 		}
-		public function AddPolarMidnightScroll():void {
-			outputText("\n\n<b>(Gained 1 Polar Midnight scroll!)</b>\n\n");
-			inventory.takeItem(consumables.POL_MID, curry(MaterialMenu, 2));
+		public function AddDualMinoAxes():void {
+			outputText("\n\n<b>(Gained 1 pair of Large Axes!)</b>\n\n");
+			inventory.takeItem(weapons.DL_AXE_, curry(EquipmentMenu, 1));
 		}
-		public function AddMeteorShowerTome():void {
-			outputText("\n\n<b>(Gained 1 Meteor Shower tome!)</b>\n\n");
-			inventory.takeItem(consumables.MET_SHO, curry(MaterialMenu, 2));
+		public function AddUltraHeavyAyoArmor():void {
+			outputText("\n\n<b>(Gained 1 Ultra Heavy Ayo Armor!)</b>\n\n");
+			inventory.takeItem(armors.LAYOARM, curry(EquipmentMenu, 1));
 		}
-		public function AddFeralImpSkull():void {
-			outputText("\n\n<b>(Gained 1 Feral Imp Skull!)</b>\n\n");
-			inventory.takeItem(useables.FIMPSKL, curry(MaterialMenu, 2));
+		public function AddHBMech():void {
+			outputText("\n\n<b>(Gained 1 Howling Banshee Mech!)</b>\n\n");
+			inventory.takeItem(vehicles.HB_MECH, curry(EquipmentMenu, 1));
 		}
-		public function AddSpiderSilk():void {
-			outputText("\n\n<b>(Gained 1 Spider Silk!)</b>\n\n");
-			inventory.takeItem(useables.T_SSILK, curry(MaterialMenu, 1));
+		public function AddGoblinMechPrime():void {
+			outputText("\n\n<b>(Gained 1 Goblin Mech Prime!)</b>\n\n");
+			inventory.takeItem(vehicles.GOBMPRI, curry(EquipmentMenu, 1));
 		}
-		public function AddBeeChitin():void {
-			outputText("\n\n<b>(Gained 1 Chitin Shard!)</b>\n\n");
-			inventory.takeItem(useables.B_CHITN, curry(MaterialMenu, 1));
+		public function AddTheEvelyn():void {
+			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");
+			inventory.takeItem(weaponsrange.EVELYN_, curry(EquipmentMenu, 1));
 		}
-		public function AddGreenGel():void {
-			outputText("\n\n<b>(Gained 1 Green Gel!)</b>\n\n");
-			inventory.takeItem(useables.GREENGL, curry(MaterialMenu, 1));
+		public function AddTheInquisitorsTome():void {
+			outputText("\n\n<b>(Gained 1 Inquisitor's Tome!)</b>\n\n");
+			inventory.takeItem(weaponsrange.I_TOME_, curry(EquipmentMenu, 1));
 		}
-		public function AddDragonscale():void {
-			outputText("\n\n<b>(Gained 1 Dragonscale!)</b>\n\n");
-			inventory.takeItem(useables.D_SCALE, curry(MaterialMenu, 1));
+		public function AddTheStaffs():void {
+			outputText("\n\n<b>(Gained set of items to make Ascensus!)</b>\n\n");
+			inventory.takeItem(useables.TBAPLAT, AddTheStaffs1);
 		}
-		public function AddShard():void {
-			outputText("\n\n<b>(Gained 1 Shard!)</b>\n\n");
-			inventory.takeItem(useables.S_SHARD, curry(MaterialMenu, 1));
+		public function AddTheStaffs1():void {
+			outputText("\n\n");
+			inventory.takeItem(useables.DBAPLAT, AddTheStaffs2);
 		}
-		public function AddHerb():void {
-			outputText("\n\n<b>(Gained 1 Healing Herb!)</b>\n\n");
-			inventory.takeItem(consumables.HEALHERB, curry(MaterialMenu, 1));
+		public function AddTheStaffs2():void {
+			outputText("\n\n");
+			inventory.takeItem(weapons.W_STAFF, curry(EquipmentMenu, 2));
+		}
+		public function AddYukiOnnaStuff():void {
+			outputText("\n\n<b>(Gained 1st Yuki Onna item!)</b>\n\n");
+			inventory.takeItem(armors.BLIZZ_K, AddYukiOnnaStuff2);
+		}
+		public function AddYukiOnnaStuff2():void {
+			outputText("\n\n<b>(Gained 2nd Yuki Onna item!)</b>\n\n");
+			inventory.takeItem(headjewelries.SNOWFH, curry(EquipmentMenu, 2));
+		}
+		public function AddSpikedShields():void {
+			outputText("\n\n<b>(Gained Heavy Spiked Shield!)</b>\n\n");
+			inventory.takeItem(shields.SPIH_SH, AddSpikedShields2);
+		}
+		public function AddSpikedShields2():void {
+			outputText("\n\n<b>(Gained Massive Spiked Shield!)</b>\n\n");
+			inventory.takeItem(shields.SPIM_SH, curry(EquipmentMenu, 2));
+		}
+		public function AddTheSeerHairpinAndCo():void {
+			outputText("\n\n<b>(Gained 1 Eldritch Staff!)</b>\n\n");
+			inventory.takeItem(weapons.E_STAFF, AddTheSeerHairpinAndCo1);
+		}
+		public function AddTheSeerHairpinAndCo1():void {
+			outputText("\n\n<b>(Gained 1 Master Gloves!)</b>\n\n");
+			inventory.takeItem(weapons.MASTGLO, AddTheSeerHairpinAndCo2);
+		}
+		public function AddTheSeerHairpinAndCo2():void {
+			outputText("\n\n<b>(Gained 1 Gnoll Throwing Axes!)</b>\n\n");
+			inventory.takeItem(weaponsrange.GTHRAXE, AddTheSeerHairpinAndCo3);
+		}
+		public function AddTheSeerHairpinAndCo3():void {
+			outputText("\n\n<b>(Gained 1 Hodr's Bow!)</b>\n\n");
+			inventory.takeItem(weaponsrange.BOWHODR, AddTheSeerHairpinAndCo4);
+		}
+		public function AddTheSeerHairpinAndCo4():void {
+			outputText("\n\n<b>(Gained 1 Sceptre of Command!)</b>\n\n");
+			inventory.takeItem(weapons.SCECOMM, AddTheSeerHairpinAndCo5);
+		}
+		public function AddTheSeerHairpinAndCo5():void {
+			outputText("\n\n<b>(Gained 1 Truestrike Sword!)</b>\n\n");
+			inventory.takeItem(weapons.TRSTSWO, AddTheSeerHairpinAndCo6);
+		}
+		public function AddTheSeerHairpinAndCo6():void {
+			outputText("\n\n<b>(Gained 1 Demonic Scythe!)</b>\n\n");
+			inventory.takeItem(weapons.DEMSCYT, AddTheSeerHairpinAndCo7);
+		}
+		public function AddTheSeerHairpinAndCo7():void {
+			outputText("\n\n<b>(Gained 1 Seer's Hairpin!)</b>\n\n");
+			inventory.takeItem(headjewelries.SEERPIN, AddTheSeerHairpinAndCo8);
+		}
+		public function AddTheSeerHairpinAndCo8():void {
+			outputText("\n\n<b>(Gained 1 Sakura Petal Kimono!)</b>\n\n");
+			inventory.takeItem(armors.SPKIMO, AddTheSeerHairpinAndCo9);
+		}
+		public function AddTheSeerHairpinAndCo9():void {
+			outputText("\n\n<b>(Gained 1 Oni bead necklace!)</b>\n\n");
+			inventory.takeItem(necklaces.OBNECK, curry(EquipmentMenu, 2));
+		}
+		
+		public function AddFoxJewel():void {
+			outputText("\n\n<b>(Gained 1 Fox Jewel!)</b>\n\n");
+			inventory.takeItem(consumables.FOXJEWL, curry(NonEquipmentMenu, 1));
 		}
 		public function AddFreshFish():void {
 			outputText("\n\n<b>(Gained 1 Fresh Fish!)</b>\n\n");
 			inventory.takeItem(consumables.FREFISH, curry(NonEquipmentMenu, 2));
 		}
-		public function AddFoxJewel():void {
-			outputText("\n\n<b>(Gained 1 Fox Jewel!)</b>\n\n");
-			inventory.takeItem(consumables.FOXJEWL, curry(NonEquipmentMenu, 1));
+		public function AddTrollFig():void {
+			outputText("\n\n<b>(Gained 1 Troll Fig!)</b>\n\n");
+			inventory.takeItem(consumables.TROLFIG, curry(NonEquipmentMenu, 1));
 		}
 		public function AddVoltageTopaz():void {
 			outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");
@@ -1832,10 +1916,6 @@ use namespace CoC;
 			outputText("\n\n<b>(Gained 1 Fire Snail Saliva!)</b>\n\n");
 			inventory.takeItem(consumables.FSNAILS, curry(NonEquipmentMenu, 2));
 		}
-		public function AddTrollFig():void {
-			outputText("\n\n<b>(Gained 1 Troll Fig!)</b>\n\n");
-			inventory.takeItem(consumables.TROLFIG, curry(NonEquipmentMenu, 1));
-		}
 		public function AddGorgonOil():void {
 			outputText("\n\n<b>(Gained 1 vial of Gorgon Oil!)</b>\n\n");
 			inventory.takeItem(consumables.GORGOIL, AddVouivreOil);
@@ -1858,12 +1938,80 @@ use namespace CoC;
 		}
 		public function AddFTear():void {
 			outputText("\n\n<b>(Gained 1 Fafnir Tear!)</b>\n\n");
+			outputText("Weapon types: "+[player.isStaffTypeWeapon(),player.isSwordTypeWeapon(),player.isAxeTypeWeapon(),player.isMaceHammerTypeWeapon(),player.isSpearTypeWeapon(),player.isSpearTypeWeapon(),player.isDuelingTypeWeapon()].join());
 			inventory.takeItem(consumables.F_TEAR, curry(NonEquipmentMenu, 2));
 		}
 		public function AddBubble():void {
 			outputText("\n\n<b>(Gained 1 Bubblegum!)</b>\n\n");
 			inventory.takeItem(consumables.BUBBLEG, curry(NonEquipmentMenu, 2));
 		}
+		
+		public function AddMetalPieces():void {
+			outputText("\n\n<b>(Gained 50 Metal Pieces!)</b>\n\n");
+			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += 50;
+			statScreenRefresh();
+			curry(MaterialMenu, 1);
+		}
+		public function AddSpiderSilk():void {
+			outputText("\n\n<b>(Gained 1 Spider Silk!)</b>\n\n");
+			inventory.takeItem(useables.T_SSILK, curry(MaterialMenu, 1));
+		}
+		public function AddBeeChitin():void {
+			outputText("\n\n<b>(Gained 1 Chitin Shard!)</b>\n\n");
+			inventory.takeItem(useables.B_CHITN, curry(MaterialMenu, 1));
+		}
+		public function AddGreenGel():void {
+			outputText("\n\n<b>(Gained 1 Green Gel!)</b>\n\n");
+			inventory.takeItem(useables.GREENGL, curry(MaterialMenu, 1));
+		}
+		public function AddDragonscale():void {
+			outputText("\n\n<b>(Gained 1 Dragonscale!)</b>\n\n");
+			inventory.takeItem(useables.D_SCALE, curry(MaterialMenu, 1));
+		}
+		public function AddShard():void {
+			outputText("\n\n<b>(Gained 1 Shard!)</b>\n\n");
+			inventory.takeItem(useables.S_SHARD, curry(MaterialMenu, 1));
+		}
+		public function AddHerb():void {
+			outputText("\n\n<b>(Gained 1 Healing Herb!)</b>\n\n");
+			inventory.takeItem(consumables.HEALHERB, curry(MaterialMenu, 1));
+		}
+		public function AddEnergyCore():void {
+			outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
+			inventory.takeItem(useables.ENECORE, curry(MaterialMenu, 2));
+		}
+		public function AddMechanism():void {
+			outputText("\n\n<b>(Gained 1 Mechanism!)</b>\n\n");
+			inventory.takeItem(useables.MECHANI, curry(MaterialMenu, 2));
+		}
+		public function AddGolemCore():void {
+			outputText("\n\n<b>(Gained 1 Golem Core!)</b>\n\n");
+			inventory.takeItem(useables.GOLCORE, curry(MaterialMenu, 2));
+		}
+		public function AddPolarMidnightScroll():void {
+			outputText("\n\n<b>(Gained 1 Polar Midnight scroll!)</b>\n\n");
+			inventory.takeItem(consumables.POL_MID, curry(MaterialMenu, 2));
+		}
+		public function AddMeteorShowerTome():void {
+			outputText("\n\n<b>(Gained 1 Meteor Shower tome!)</b>\n\n");
+			inventory.takeItem(consumables.MET_SHO, curry(MaterialMenu, 2));
+		}
+		public function AddFeralImpSkull():void {
+			outputText("\n\n<b>(Gained 1 Feral Imp Skull!)</b>\n\n");
+			inventory.takeItem(useables.FIMPSKL, curry(MaterialMenu, 2));
+		}
+		
+		public function FightTheDummy():void {
+			clearOutput();
+			outputText("Entering battle with The Dummy! Enjoy ^^");
+			startCombat(new TheDummy());
+		}
+		public function FightSuccubusGardener():void {
+			clearOutput();
+			outputText("Entering battle with Succubus Gardener! Enjoy ^^");
+			startCombat(new SuccubusGardener());
+		}
+		
 		public function AddThickGreenOnnaGossamer():void {
 			outputText("\n\n<b>(Gained 1 Thick Green Onna Gossamer!)</b>\n\n");
 			inventory.takeItem(consumables.WHITEIS, SoulforceCheats);
@@ -1919,70 +2067,6 @@ use namespace CoC;
 		public function AddWorldTreeBranch():void {
 			outputText("\n\n<b>(Gained 1 Wold Tree branch!)</b>\n\n");
 			inventory.takeItem(useables.WT_BRAN, curry(MaterialMenu, 1));
-		}
-		public function AddTheStaffs():void {
-			outputText("\n\n<b>(Gained set of items to make Ascensus!)</b>\n\n");
-			inventory.takeItem(useables.TBAPLAT, AddTheStaffs1);
-		}
-		public function AddTheStaffs1():void {
-			outputText("\n\n");
-			inventory.takeItem(useables.DBAPLAT, AddTheStaffs2);
-		}
-		public function AddTheStaffs2():void {
-			outputText("\n\n");
-			inventory.takeItem(weapons.W_STAFF, EquipmentMenu);
-		}
-		public function AddCatONineTailWhip():void {
-			outputText("\n\n<b>(Gained 1 Bastet Whip!)</b>\n\n");
-			inventory.takeItem(weapons.CNTWHIP, EquipmentMenu);
-		}
-		public function AddTheEvelyn():void {
-			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");
-			inventory.takeItem(weaponsrange.EVELYN_, EquipmentMenu);
-		}
-		public function AddTheSeerHairpinAndCo():void {
-			outputText("\n\n<b>(Gained 1 Eldritch Staff!)</b>\n\n");
-			inventory.takeItem(weapons.E_STAFF, AddTheSeerHairpinAndCo1);
-		}
-		public function AddTheSeerHairpinAndCo1():void {
-			outputText("\n\n<b>(Gained 1 Master Gloves!)</b>\n\n");
-			inventory.takeItem(weapons.MASTGLO, AddTheSeerHairpinAndCo2);
-		}
-		public function AddTheSeerHairpinAndCo2():void {
-			outputText("\n\n<b>(Gained 1 Gnoll Throwing Axes!)</b>\n\n");
-			inventory.takeItem(weaponsrange.GTHRAXE, AddTheSeerHairpinAndCo3);
-		}
-		public function AddTheSeerHairpinAndCo3():void {
-			outputText("\n\n<b>(Gained 1 Hodr's Bow!)</b>\n\n");
-			inventory.takeItem(weaponsrange.BOWHODR, AddTheSeerHairpinAndCo4);
-		}
-		public function AddTheSeerHairpinAndCo4():void {
-			outputText("\n\n<b>(Gained 1 Sceptre of Command!)</b>\n\n");
-			inventory.takeItem(weapons.SCECOMM, AddTheSeerHairpinAndCo5);
-		}
-		public function AddTheSeerHairpinAndCo5():void {
-			outputText("\n\n<b>(Gained 1 Truestrike Sword!)</b>\n\n");
-			inventory.takeItem(weapons.TRSTSWO, AddTheSeerHairpinAndCo6);
-		}
-		public function AddTheSeerHairpinAndCo6():void {
-			outputText("\n\n<b>(Gained 1 Demonic Scythe!)</b>\n\n");
-			inventory.takeItem(weapons.DEMSCYT, AddTheSeerHairpinAndCo7);
-		}
-		public function AddTheSeerHairpinAndCo7():void {
-			outputText("\n\n<b>(Gained 1 Seer's Hairpin!)</b>\n\n");
-			inventory.takeItem(headjewelries.SEERPIN, AddTheSeerHairpinAndCo8);
-		}
-		public function AddTheSeerHairpinAndCo8():void {
-			outputText("\n\n<b>(Gained 1 Sakura Petal Kimono!)</b>\n\n");
-			inventory.takeItem(armors.SPKIMO, AddTheSeerHairpinAndCo9);
-		}
-		public function AddTheSeerHairpinAndCo9():void {
-			outputText("\n\n<b>(Gained 1 Oni bead necklace!)</b>\n\n");
-			inventory.takeItem(necklaces.OBNECK, EquipmentMenu);
-		}
-		public function AddTheInquisitorsTome():void {
-			outputText("\n\n<b>(Gained 1 Inquisitor's Tome!)</b>\n\n");
-			inventory.takeItem(weaponsrange.I_TOME_, EquipmentMenu);
 		}
 		public function EarlyAscension():void {
 			if (flags[kFLAGS.LETHICE_DEFEATED] == 1) {
@@ -2520,52 +2604,6 @@ use namespace CoC;
 			statScreenRefresh();
 			PerksGemsEXPLvL();
 		}
-		public function AddRapPerk():void {
-			flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4;
-			player.createPerk(PerkLib.RapierTraining, 0, 0, 0, 0);
-			outputText("\n\n<b>(Gained Perk: Rapier Training and 1 Dragon Rapier!)</b>\n\n");
-			inventory.takeItem(weapons.DRAPIER, EquipmentMenu);
-		}
-		public function AddSkyPoisonPearl():void {
-			outputText("\n\n<b>(Gained 1 Sky Poison Pearl!)</b>\n\n");
-			inventory.takeItem(consumables.SPPEARL, EquipmentMenu);
-		}
-		public function AddLightAyoArmor():void {
-			outputText("\n\n<b>(Gained 1 Light Ayo Armor!)</b>\n\n");
-			inventory.takeItem(armors.LAYOARM, EquipmentMenu);
-		}
-		public function AddHBAArmor():void {
-			outputText("\n\n<b>(Gained 1 HBA Armor!)</b>\n\n");
-			inventory.takeItem(armors.HBA_ARM, EquipmentMenu);
-		}
-		public function AddYukiOnnaStuff():void {
-			outputText("\n\n<b>(Gained 1st Yuki Onna item!)</b>\n\n");
-			inventory.takeItem(armors.BLIZZ_K, AddYukiOnnaStuff2);
-		}
-		public function AddYukiOnnaStuff2():void {
-			outputText("\n\n<b>(Gained 2nd Yuki Onna item!)</b>\n\n");
-			inventory.takeItem(headjewelries.SNOWFH, EquipmentMenu);
-		}
-		public function AddSpikedShields():void {
-			outputText("\n\n<b>(Gained Heavy Spiked Shield!)</b>\n\n");
-			inventory.takeItem(shields.SPIH_SH, AddSpikedShields2);
-		}
-		public function AddSpikedShields2():void {
-			outputText("\n\n<b>(Gained Massive Spiked Shield!)</b>\n\n");
-			inventory.takeItem(shields.SPIM_SH, EquipmentMenu);
-		}
-		public function AddGoblinMechPrime():void {
-			outputText("\n\n<b>(Gained 1 Goblin Mech Prime!)</b>\n\n");
-			inventory.takeItem(vehicles.GOBMPRI, EquipmentMenu);
-		}
-		public function AddNineTailWhip():void {
-			outputText("\n\n<b>(Gained 1 Nine Tail Whip!)</b>\n\n");
-			inventory.takeItem(weapons.NTWHIP, EquipmentMenu);
-		}
-		public function AddDualMinoAxes():void {
-			outputText("\n\n<b>(Gained 1 pair of Large Axes!)</b>\n\n");
-			inventory.takeItem(weapons.DL_AXE_, EquipmentMenu);
-		}
 		public function AddWhiteBook():void {
 			outputText("\n\n<b>(Gained 1 White Book!)</b>\n\n");
 			inventory.takeItem(consumables.W__BOOK, curry(NonEquipmentMenu, 1));
@@ -2577,6 +2615,10 @@ use namespace CoC;
 		public function AddGreyBook():void {
 			outputText("\n\n<b>(Gained 1 Grey Book!)</b>\n\n");
 			inventory.takeItem(consumables.G__BOOK, curry(NonEquipmentMenu, 1));
+		}
+		public function AddRedManuscript():void {
+			outputText("\n\n<b>(Gained 1 Red Manuscript!)</b>\n\n");
+			inventory.takeItem(consumables.RMANUSC, curry(NonEquipmentMenu, 1));
 		}
 		public function AddThePearls():void {
 			outputText("\n\n<b>(Gained set of items to get all perks countering Elemental Conjuer perks negative effects on stat caps!)</b>\n\n");
@@ -3986,7 +4028,7 @@ use namespace CoC;
 			//button 11
 			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(12, "Giacomo", findGiacomo).hint("Req. 100+ soulforce");
 			else addButtonDisabled(12, "Giacomo", "");
-			addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
+			//addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function TamaniEnc():void {

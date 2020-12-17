@@ -13,7 +13,7 @@ package classes.Items.HeadJewelries
 		
 		public function MachinistGoggles() 
 		{
-			super("MachGog", "MachinistGoggles", "Machinist Goggles", "a Machinist Goggles", 0, 0, 400, "A pair of ordinary machinist goggles. One of the basic tools of anyone working with engines. Helps prevent blindness.","Helm");
+			super("MachGog", "MachinistGoggles", "Machinist Goggles", "a Machinist Goggles", 0, 0, 400, "A pair of ordinary machinist goggles. One of the basic tools of anyone working with engines. Helps prevent blindness.","Helmet");
 		}
 		
 		override public function canUse():Boolean {

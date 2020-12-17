@@ -53,7 +53,10 @@ public class RyuBiDragon extends Monster
 		override public function get long():String {
 			var str:String = "";
 			str += "You are currently battling the mighty dragon. It body covers brownish scales with exception of the ";
-			if (flags[kFLAGS.RYUBI_LVL_UP] == 1) str += "head and neck which is covered by mismatching mix of red, blue, white, black and green scales.";
+			if (flags[kFLAGS.RYUBI_LVL_UP] == 4) str += "head and neck which is covered by mismatching mix of red, blue, white, black and green scales.";
+			else if (flags[kFLAGS.RYUBI_LVL_UP] == 3) str += "head and neck which is covered by mismatching mix of red, blue, white, black and green scales.";
+			else if (flags[kFLAGS.RYUBI_LVL_UP] == 2) str += "head and neck which is covered by mismatching mix of red, blue, white, black and green scales.";
+			else if (flags[kFLAGS.RYUBI_LVL_UP] == 1) str += "head and neck which is covered by mismatching mix of red, blue, white, black and green scales.";
 			else str += "head and neck which is covered by mismatching mix of red, blue, white, black and green scales.";
 			str += " It lashes it's tail along the ground, with claws spread and teeth bared ferociously.";
 			return str;
@@ -70,7 +73,7 @@ public class RyuBiDragon extends Monster
 				this.armorMDef = 25;
 				this.lustVuln = .01;
 				this.bonusHP = 50;
-				this.bonusLust = 10;
+				this.bonusLust = 20;
 				this.level = 0;
 			}
 			if (flags[kFLAGS.RYUBI_LVL_UP] == 1) {

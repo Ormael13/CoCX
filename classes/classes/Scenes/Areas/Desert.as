@@ -25,6 +25,8 @@ use namespace CoC;
 		public var sandTrapScene:SandTrapScene = new SandTrapScene();
 		public var sandWitchScene:SandWitchScene = new SandWitchScene();
 		public var wanderer:Wanderer = new Wanderer();
+		//public var gorgonScene:GorgonScene = new GorgonScene();przenieść do deep desert potem
+		
 		public function Desert()
 		{
 			onGameInit(init);
@@ -173,6 +175,13 @@ use namespace CoC;
 			doNext(camp.returnToCampUseOneHour); // default button
 			story.execute();
 			flushOutputTextToGUI();
+		}
+		//Finding inner part of desert
+		public function discoverDesertInnerPart():void {
+			player.exploredDesert++;
+			clearOutput();
+			
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function sandWitchPregnancyEvent():void {

@@ -187,6 +187,7 @@ public class Akbal extends Monster
 				this.armorDef = 10;
 				this.armorMDef = 20;
 				this.bonusHP = 100;
+				this.bonusLust = 150;
 				this.level = 20;
 				this.additionalXP = 50;
 			}
@@ -197,6 +198,7 @@ public class Akbal extends Monster
 				this.armorDef = 12;
 				this.armorMDef = 24;
 				this.bonusHP = 200;
+				this.bonusLust = 183;
 				this.level = 26;
 				this.additionalXP = 100;
 			}
@@ -207,6 +209,7 @@ public class Akbal extends Monster
 				this.armorDef = 14;
 				this.armorMDef = 28;
 				this.bonusHP = 300;
+				this.bonusLust = 216;
 				this.level = 32;
 				this.additionalXP = 150;
 			}
@@ -217,6 +220,7 @@ public class Akbal extends Monster
 				this.armorDef = 16;
 				this.armorMDef = 32;
 				this.bonusHP = 400;
+				this.bonusLust = 249;
 				this.level = 38;
 				this.additionalXP = 200;
 			}
@@ -227,6 +231,7 @@ public class Akbal extends Monster
 				this.armorDef = 18;
 				this.armorMDef = 36;
 				this.bonusHP = 500;
+				this.bonusLust = 282;
 				this.level = 44;
 				this.additionalXP = 250;
 			}
@@ -237,6 +242,7 @@ public class Akbal extends Monster
 				this.armorDef = 20;
 				this.armorMDef = 40;
 				this.bonusHP = 600;
+				this.bonusLust = 315;
 				this.level = 50;
 				this.additionalXP = 300;
 			}
@@ -247,6 +253,7 @@ public class Akbal extends Monster
 				this.armorDef = 22;
 				this.armorMDef = 44;
 				this.bonusHP = 700;
+				this.bonusLust = 348;
 				this.level = 56;
 				this.additionalXP = 350;
 			}
@@ -257,6 +264,7 @@ public class Akbal extends Monster
 				this.armorDef = 24;
 				this.armorMDef = 48;
 				this.bonusHP = 800;
+				this.bonusLust = 382;
 				this.level = 62;
 				this.additionalXP = 400;
 			}
@@ -267,6 +275,7 @@ public class Akbal extends Monster
 				this.armorDef = 26;
 				this.armorMDef = 52;
 				this.bonusHP = 900;
+				this.bonusLust = 415;
 				this.level = 68;
 				this.additionalXP = 450;
 			}
@@ -277,6 +286,7 @@ public class Akbal extends Monster
 				this.armorDef = 28;
 				this.armorMDef = 56;
 				this.bonusHP = 1000;
+				this.bonusLust = 448;
 				this.level = 74;
 				this.additionalXP = 500;
 			}
@@ -287,6 +297,7 @@ public class Akbal extends Monster
 				this.armorDef = 30;
 				this.armorMDef = 60;
 				this.bonusHP = 1100;
+				this.bonusLust = 481;
 				this.level = 80;
 				this.additionalXP = 550;
 			}
@@ -297,6 +308,7 @@ public class Akbal extends Monster
 				this.armorDef = 32;
 				this.armorMDef = 64;
 				this.bonusHP = 1200;
+				this.bonusLust = 514;
 				this.level = 86;
 				this.additionalXP = 600;
 			}
@@ -307,6 +319,7 @@ public class Akbal extends Monster
 				this.armorDef = 34;
 				this.armorMDef = 68;
 				this.bonusHP = 1300;
+				this.bonusLust = 547;
 				this.level = 92;
 				this.additionalXP = 650;
 			}
@@ -317,6 +330,7 @@ public class Akbal extends Monster
 				this.armorDef = 36;
 				this.armorMDef = 72;
 				this.bonusHP = 1400;
+				this.bonusLust = 580;
 				this.level = 98;
 				this.additionalXP = 700;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
@@ -345,7 +359,6 @@ public class Akbal extends Monster
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
 			this.armorName = "shimmering pelt";
-			this.bonusLust = 40;
 			this.lust = 30;
 			this.lustVuln = 0.8;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

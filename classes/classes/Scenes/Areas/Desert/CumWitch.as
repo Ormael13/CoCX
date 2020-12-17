@@ -194,7 +194,7 @@ public class CumWitch extends Monster
 			this.armorDef = 4;
 			this.armorMDef = 10;
 			this.bonusHP = 150;
-			this.bonusLust = 20;
+			this.bonusLust = 105;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
@@ -207,6 +207,7 @@ public class CumWitch extends Monster
 					consumables.LABOVA_,
 					consumables.W__BOOK,
 					consumables.B__BOOK,
+					consumables.RMANUSC,
 					null);
 			checkMonster();
 		}

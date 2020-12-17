@@ -42,6 +42,7 @@ use namespace CoC;
 		private var callNext:Function;		//These are used so that we know what has to happen once the player finishes with an item
 		private var callOnAbandon:Function;	//They simplify dealing with items that have a sub menu. Set in inventoryMenu and in takeItem
 		private var currentItemSlot:ItemSlotClass;	//The slot previously occupied by the current item - only needed for stashes and items with a sub menu.
+		private var maxSFCapacity:Number = 0;
 		public var HolliPure:HolliPureScene = new HolliPureScene();
 		public var Gardening:UniqueCampScenes = new UniqueCampScenes();
 		public var Magnolia:MagnoliaFollower = new MagnoliaFollower();
@@ -269,6 +270,8 @@ use namespace CoC;
 				}
 			}
 			addButton(10, "Unequip", manageEquipment);
+			if (player.isInAyoArmor()) addButton(11, "Ayo Armors", AyoArmorsMaintance);
+			else addButtonDisabled(11, "Ayo Armors", "You need to wear any type of Ayo Armor to use this option.");
 			addButton(14, "Back", inventoryMenu);
 		}
 
@@ -278,6 +281,128 @@ use namespace CoC;
 			else player.createPerk(PerkLib.PurityElixir, 1, 0, 0, 0);
 			player.removeKeyItem("Rathazul's Purity Elixir");
 			doNext(inventoryMenu);
+		}
+		
+		public function AyoArmorsMaintance():void {
+			clearOutput();
+			var currentArmorSFDrainrate:Number = 0;
+			if (player.armor == armors.LAYOARM) currentArmorSFDrainrate += 60;
+			if (player.armor == armors.HBARMOR) currentArmorSFDrainrate += 80;
+			if (player.armor == armors.HAYOARM) currentArmorSFDrainrate += 120;
+			if (player.vehicles == vehicles.HB_MECH) {
+				/*if (upgrade 1) currentArmorSFDrainrate += ?40?;
+				else */currentArmorSFDrainrate += 60;
+			}
+			maxSFCapacity = 0;
+			if (player.armor == armors.LAYOARM) maxSFCapacity += 1500;
+			if (player.armor == armors.HBARMOR) {
+				maxSFCapacity += 2000;
+				if (player.headJewelry == headjewelries.HBHELM) maxSFCapacity += 400;
+			}
+			if (player.armor == armors.HAYOARM) maxSFCapacity += 3000;
+			if (player.upperGarment == undergarments.HBSHIRT) maxSFCapacity += 150;
+			if (player.lowerGarment == undergarments.HBSHORT) maxSFCapacity += 150;
+			if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
+			if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
+			outputText("Currently used Ayo Armor name: "+player.armorName+"\n\n");
+			outputText("Currently used Ayo Armor soulforce drain rate (per hour): "+currentArmorSFDrainrate+"\n\n");
+			outputText("Soulforce reserves in armor: "+flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR]+" / "+maxSFCapacity+"\n\n");
+			menu();
+			addButton(0, "Charge 50", AyoArmorRecharge1);
+			addButton(1, "Charge 100", AyoArmorRecharge2);
+			addButton(2, "Charge 200", AyoArmorRecharge3);
+			addButton(3, "Charge 500", AyoArmorRecharge4);
+			addButton(4, "FullRechar", AyoArmorRecharge5);
+			if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) addButton(10, "Power UP", AyoArmorPowerUP).hint("Activate Ayo Armor (and feel faster and stronger than before ^^)");
+			else addButtonDisabled(10, "Power UP", "You need ");
+			addButton(14, "Back", inventoryMenu);
+		}
+		public function AyoArmorRecharge1():void {
+			clearOutput();
+			if (player.soulforce >= 50) {
+				outputText("You focus on your spiritual power and guide it to armor energy storages recharging it for 50 SF.");
+				player.soulforce -= 50;
+				flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] += 50;
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > maxSFCapacity) {
+					outputText(" Some of spiritual power was too much to be stored into storage and so it been reabsorbed by your body. (+"+(flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity)+")");
+					player.soulforce += (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity);
+					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = maxSFCapacity;
+				}
+				statScreenRefresh();
+			}
+			else outputText("Your current soulforce is too low.");
+			doNext(AyoArmorsMaintance);
+		}
+		public function AyoArmorRecharge2():void {
+			clearOutput();
+			if (player.soulforce >= 100) {
+				outputText("You focus on your spiritual power and guide it to armor energy storages recharging it for 100 SF.");
+				player.soulforce -= 100;
+				flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] += 100;
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > maxSFCapacity) {
+					outputText(" Some of spiritual power was too much to be stored into storage and so it been reabsorbed by your body. (+"+(flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity)+")");
+					player.soulforce += (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity);
+					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = maxSFCapacity;
+				}
+				statScreenRefresh();
+			}
+			else outputText("Your current soulforce is too low.");
+			doNext(AyoArmorsMaintance);
+		}
+		public function AyoArmorRecharge3():void {
+			clearOutput();
+			if (player.soulforce >= 200) {
+				outputText("You focus on your spiritual power and guide it to armor energy storages recharging it for 200 SF.");
+				player.soulforce -= 200;
+				flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] += 200;
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > maxSFCapacity) {
+					outputText(" Some of spiritual power was too much to be stored into storage and so it been reabsorbed by your body. (+"+(flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity)+")");
+					player.soulforce += (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity);
+					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = maxSFCapacity;
+				}
+				statScreenRefresh();
+			}
+			else outputText("Your current soulforce is too low.");
+			doNext(AyoArmorsMaintance);
+		}
+		public function AyoArmorRecharge4():void {
+			clearOutput();
+			if (player.soulforce >= 500) {
+				outputText("You focus on your spiritual power and guide it to armor energy storages recharging it for 500 SF.");
+				player.soulforce -= 500;
+				flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] += 500;
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > maxSFCapacity) {
+					outputText(" Some of spiritual power was too much to be stored into storage and so it been reabsorbed by your body. (+"+(flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity)+")");
+					player.soulforce += (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity);
+					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = maxSFCapacity;
+				}
+				statScreenRefresh();
+			}
+			else outputText("Your current soulforce is too low.");
+			doNext(AyoArmorsMaintance);
+		}
+		public function AyoArmorRecharge5():void {
+			clearOutput();
+			if (player.soulforce >= (maxSFCapacity - flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR])) {
+				outputText("You focus on your spiritual power and guide it to armor energy storages recharging it for "+(maxSFCapacity - flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR])+" SF.");
+				player.soulforce -= (maxSFCapacity - flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR]);
+				flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = maxSFCapacity;
+				statScreenRefresh();
+			}
+			else outputText("Your current soulforce is too low.");
+			doNext(AyoArmorsMaintance);
+		}
+		public function AyoArmorPowerUP():void {
+			clearOutput();
+			var oldHPratio:Number = player.hp100/100;
+			player.buff("Ayo Armor").remove();
+			outputText("You pressing button placed on side of chest part of armor, activating it. With a silent hiss armor activate making you feel faster and stronger."+(silly()?" You have come here to chew bubblegum and kick ass...and you're all out of bubblegum.":"")+"");
+			if (player.armor == armors.LAYOARM) player.buff("Ayo Armor").addStats( {"str.mult":0.10, "spe.mult":0.10} );
+			if (player.armor == armors.HBARMOR) player.buff("Ayo Armor").addStats( {"str.mult":0.06, "spe.mult":0.20} );
+			if (player.armor == armors.HAYOARM) player.buff("Ayo Armor").addStats( {"str.mult":0.20, "spe.mult":0.20} );
+			player.HP = oldHPratio*player.maxHP();
+			statScreenRefresh();
+			doNext(AyoArmorsMaintance);
 		}
 		/*
 		public function miscitemsMenu():void {
@@ -983,45 +1108,59 @@ use namespace CoC;
 				if (player.weapon != WeaponLib.FISTS && !player.hasPerk(PerkLib.Rigidity)) {
 					addButton(0, "Weapon (M)", unequipWeapon).hint(player.weapon.description, capitalizeFirstLetter(player.weapon.name));
 				}
+				else addButtonDisabled(0, "Weapon (M)", "You not have melee weapon equipped.");
 				if (player.weaponRange != WeaponRangeLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
 					addButton(1, "Weapon (R)", unequipWeaponRange).hint(player.weaponRange.description, capitalizeFirstLetter(player.weaponRange.name));
 				}
+				else addButtonDisabled(1, "Weapon (R)", "You not have range weapon equipped.");
 				if (player.shield != ShieldLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
 					addButton(2, "Shield", unequipShield).hint(player.shield.description, capitalizeFirstLetter(player.shield.name));
 				}
+				else addButtonDisabled(2, "Shield", "You not have shield equipped.");
 				if (player.armor != ArmorLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
 					addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
 				}
+				else addButtonDisabled(5, "Armour", "You not have armor equipped.");
 				if (player.upperGarment != UndergarmentLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
 					addButton(6, "Upperwear", unequipUpperwear).hint(player.upperGarment.description, capitalizeFirstLetter(player.upperGarment.name));
 				}
-				if (player.lowerGarment != UndergarmentLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
-					addButton(7, "Lowerwear", unequipLowerwear).hint(player.lowerGarment.description, capitalizeFirstLetter(player.lowerGarment.name));
-				}
+				else addButtonDisabled(6, "Upperwear", "You not have upperwear equipped.");
 				if (player.vehicles != VehiclesLib.NOTHING) {
-					addButton(10, "Vehicle", unequipVehicle).hint(player.vehicles.description, capitalizeFirstLetter(player.vehicles.name));
+					addButton(7, "Vehicle", unequipVehicle).hint(player.vehicles.description, capitalizeFirstLetter(player.vehicles.name));
 				}
+				else addButtonDisabled(7, "Vehicle", "You not using currently any vehicle.");
+				//10 - lower body armor slot
+				if (player.lowerGarment != UndergarmentLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
+					addButton(11, "Lowerwear", unequipLowerwear).hint(player.lowerGarment.description, capitalizeFirstLetter(player.lowerGarment.name));
+				}
+				else addButtonDisabled(11, "Lowerwear", "You not have lowerwear equipped.");
 				addButton(13, "-2-", manageEquipment, page + 1);
 			}
 			if (page == 2) {
 				if (player.jewelry != JewelryLib.NOTHING) {
 					addButton(0, "Ring 1", unequipJewel1).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
 				}
+				else addButtonDisabled(0, "Ring 1", "You not have equipped any ring.");
 				if (player.jewelry2 != JewelryLib.NOTHING) {
 					addButton(1, "Ring 2", unequipJewel2).hint(player.jewelry2.description, capitalizeFirstLetter(player.jewelry2.name));
 				}
+				else addButtonDisabled(1, "Ring 2", "You not have equipped any ring.");
 				if (player.jewelry3 != JewelryLib.NOTHING) {
 					addButton(2, "Ring 3", unequipJewel3).hint(player.jewelry3.description, capitalizeFirstLetter(player.jewelry3.name));
 				}
+				else addButtonDisabled(2, "Ring 3", "You not have equipped any ring.");
 				if (player.jewelry4 != JewelryLib.NOTHING) {
 					addButton(3, "Ring 4", unequipJewel4).hint(player.jewelry4.description, capitalizeFirstLetter(player.jewelry4.name));
 				}
+				else addButtonDisabled(3, "Ring 4", "You not have equipped any ring.");
 				if (player.headJewelry != HeadJewelryLib.NOTHING) {
 					addButton(5, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
 				}
+				else addButtonDisabled(5, "Head Acc", "You not have equipped any head accesory.");
 				if (player.necklace != NecklaceLib.NOTHING) {
 					addButton(6, "Necklace", unequipNecklace).hint(player.necklace.description, capitalizeFirstLetter(player.necklace.name));
 				}
+				else addButtonDisabled(6, "Necklace", "You not have equipped any necklace.");
 				addButton(13, "-1-", manageEquipment, page - 1);
 			}
 			/*if (player.jewelry != JewelryLib.NOTHING) {

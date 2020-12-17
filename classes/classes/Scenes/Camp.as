@@ -605,6 +605,18 @@ public class Camp extends NPCAwareContent {
 			hideMenus();
 			return;
 		}
+		//Zenji freaks out about jojo
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && ZenjiScenes.ZenjiMarried == false && campCorruptJojo() && rand(4) == 0) {
+			finter.zenjiFreaksOverJojo();
+			hideMenus();
+			return;
+		}
+		//Zenji freaks out about corrupted celess
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && CelessScene.instance.isCorrupt && rand(4) == 0) {
+			finter.zenjiFreaksOverCorruptCeless();
+			hideMenus();
+			return;
+		}
 		//Izma/Marble freakout - marble moves in
 		if (flags[kFLAGS.IZMA_MARBLE_FREAKOUT_STATUS] == 1) {
 			izmaScene.newMarbleMeetsIzma();
@@ -1175,6 +1187,7 @@ public class Camp extends NPCAwareContent {
 		if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
 		if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
+		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 		if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
 		//if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7) counter++;
@@ -1572,7 +1585,7 @@ public class Camp extends NPCAwareContent {
 					}
 				}
 				outputText("\n\n");
-				buttons.add("Zenji", SceneLib.zenjiScene.loverZenjiMainCampMenu).hint("Visit Zenji the troll.");
+				buttons.add("Zenji", SceneLib.zenjiScene.loverZenjiMainCampMenu2).hint("Visit Zenji the troll.").disableIf(player.statusEffectv1(StatusEffects.CampLunaMishaps3) > 0, "Zenji is still unconscious, his steady breaths assure you he’s doing fine..");
 			}
 			//Nieve (jako, ze jest sezonowym camp member powinna byc na koncu listy...chyba, ze zrobie cos w stylu utworzenia mini lodowej jaskini dla niej)
 			if (flags[kFLAGS.NIEVE_STAGE] == 5) {
@@ -1742,7 +1755,8 @@ public class Camp extends NPCAwareContent {
 				else outputText(", though she probably wander somewhere near [camp] looking for more ingredients to make her potions.");
 				outputText(" Next to it stands a small chest with her personal stuff.\n\n");
 				buttons.add("Evangeline", EvangelineF.meetEvangeline).hint("Visit Evangeline.");
-			} else if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1) {
+			}
+			else if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1) {
 				/*if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1)*/
 				outputText("Evangeline isn't in the [camp] as she went to buy some items. She should be out no longer than a few hours.\n\n");
 				//if () outputText("Evangeline is busy training now. She should be done with it in a few hours.\n\n");
@@ -1762,25 +1776,25 @@ public class Camp extends NPCAwareContent {
 				outputText("Neisa is hanging by a tree next to the [camp] practicing her swordplay on a makeshift dummy for the next expedition.\n\n");
 				buttons.add("Neisa", SceneLib.neisaFollower.neisaCampMenu).hint("Visit Neisa the shield maiden.");
 			}
-		//Zenji folower
-		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) {
-			if (model.time.hours >= 7 && model.time.hours <= 18) {
-				if (rand(3) == 0) outputText("Zenji is around your [camp], you see him currently relaxing atop a tree.");
-				else {
-					if (rand(2) == 0) outputText("Zenji is around your [camp], you see him doing a routine of stretches.");
-					else outputText("Zenji is around your [camp], you see him doing some push-ups.");
+			//Zenji folower
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) {
+				if (model.time.hours >= 7 && model.time.hours <= 18) {
+					if (rand(3) == 0) outputText("Zenji is around your [camp], you see him currently relaxing atop a tree.");
+					else {
+						if (rand(2) == 0) outputText("Zenji is around your [camp], you see him doing a routine of stretches.");
+						else outputText("Zenji is around your [camp], you see him doing some push-ups.");
+					}
 				}
-			}
-			else {
-				if (rand(3) == 0) outputText("Zenji is around your [camp], you see him resting on his bedroll.");
 				else {
-					if (rand(2) == 0) outputText("Zenji is around your [camp], he is coating his fur in some ashes as he grooms himself.");
-					else outputText("Zenji is around your [camp], it looks like he’s polishing his tusks and brushing his teeth with something.");
+					if (rand(3) == 0) outputText("Zenji is around your [camp], you see him resting on his bedroll.");
+					else {
+						if (rand(2) == 0) outputText("Zenji is around your [camp], he is coating his fur in some ashes as he grooms himself.");
+						else outputText("Zenji is around your [camp], it looks like he’s polishing his tusks and brushing his teeth with something.");
+					}
 				}
+				outputText("\n\n");
+				buttons.add("Zenji", SceneLib.zenjiScene.followerZenjiMainCampMenu).hint("Visit Zenji the troll.");
 			}
-			outputText("\n\n");
-			buttons.add("Zenji", SceneLib.zenjiScene.followerZenjiMainCampMenu).hint("Visit Zenji the troll.");
-		}
 			//Helspawn
 			if (helspawnFollower()) {
 				buttons.add(flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);
@@ -1804,7 +1818,8 @@ public class Camp extends NPCAwareContent {
 				} else outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work on the silken equipment you've commissioned him to craft.\n\n");
 				if (flags[kFLAGS.MITZI_RECRUITED] == 2) outputText("Mitzi is laying on a cot in Rathazul's lab. A deep blush is present her face and she pants heavily, constantly fading in and out of consciousness.\n\n");
 				buttons.add("Rathazul", SceneLib.rathazul.returnToRathazulMenu).hint("Visit with Rathazul to see what alchemical supplies and services he has available at the moment.");
-			} else {
+			}
+			else {
 				if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1) {
 					outputText("There is a note on your ");
 					if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("bed inside your cabin.");
@@ -3614,7 +3629,7 @@ public function wakeFromBadEnd():void {
 				var soulforce:int = 0;
 				var wrath:int = 0;
 				var lust:int = 0;
-				var statpoints:int = 10;
+				var statpoints:int = 5;
 				var perkpoints:int = 1;
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
 					hp += 20;
@@ -3661,7 +3676,7 @@ public function wakeFromBadEnd():void {
 				if (player.findPerk(PerkLib.UnlockArdor3rdStage) >= 0) lust += 1;
 				if (player.findPerk(PerkLib.UnlockArdor4thStage) >= 0) lust += 1;
 				if (player.level < 6) {
-					statpoints += 10;
+					statpoints += 5;
 					perkpoints += 1;
 				}
 				mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + ", maximum Mana by " + mana + ", maximum Soulforce by " + soulforce + ", maximum Wrath by " + wrath + " and maximum Lust by " + lust + "; gain " + statpoints + " attribute points and " + perkpoints + " perk points.";
@@ -4403,7 +4418,7 @@ public function wakeFromBadEnd():void {
 	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 29) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 30;
 			clearOutput();
-			outputText("Zenji going to town... HARD");
+			outputText("Zenji going to town... HARD. And Fruits... all loves fruits especialy if they giving even more juice, right? RIGHT?");
 			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) player.createStatusEffect(StatusEffects.ZenjiZList,0,0,0,0);
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) player.createStatusEffect(StatusEffects.TrainingNPCsTimersReduction, 6, 0, 0, 0);
 			player.statStore.addBuffObject({
@@ -4414,6 +4429,7 @@ public function wakeFromBadEnd():void {
 				"wis": 5,
 				"lib": 5
 			}, 'EzekielBlessing', {text: 'Ezekiel Blessing'});
+			if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && flags[kFLAGS.DIANA_LVL_UP] < 8) flags[kFLAGS.DIANA_LVL_UP] = 8;
 			doNext(doCamp);
 			return;
 		}
@@ -4586,6 +4602,7 @@ public function wakeFromBadEnd():void {
 		if (player.statusEffectv1(StatusEffects.ExploredDeepwoods) >= 100) awardAchievement("We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER);
 		if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] >= 100) awardAchievement("Light-headed", kACHIEVEMENTS.ZONE_LIGHT_HEADED);
 		if (flags[kFLAGS.BOG_EXPLORED] >= 100) awardAchievement("All murky", kACHIEVEMENTS.ZONE_ALL_MURKY);
+		if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] >= 100) awardAchievement("Defiled", kACHIEVEMENTS.ZONE_DEFILED);
 		if (flags[kFLAGS.DISCOVERED_OCEAN] >= 100) awardAchievement("Sea-Legs", kACHIEVEMENTS.ZONE_SAILOR);
 		if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] >= 100) awardAchievement("Frozen", kACHIEVEMENTS.ZONE_FROZEN);
 		if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] >= 100) awardAchievement("Roasted", kACHIEVEMENTS.ZONE_ROASTED);
@@ -4596,7 +4613,7 @@ public function wakeFromBadEnd():void {
 		if (flags[kFLAGS.AMILY_VILLAGE_EXPLORED] >= 15) awardAchievement("Archaeologist", kACHIEVEMENTS.ZONE_ARCHAEOLOGIST);
 
 		//Levels
-		if (player.level >= 2) awardAchievement("Level up!", kACHIEVEMENTS.LEVEL_LEVEL_UP);
+		if (player.level >= 1) awardAchievement("Level up!", kACHIEVEMENTS.LEVEL_LEVEL_UP);
 		if (player.level >= 5) awardAchievement("Novice", kACHIEVEMENTS.LEVEL_NOVICE);
 		if (player.level >= 10) awardAchievement("Apprentice", kACHIEVEMENTS.LEVEL_APPRENTICE);
 		if (player.level >= 15) awardAchievement("Journeyman", kACHIEVEMENTS.LEVEL_JOURNEYMAN);
@@ -4608,7 +4625,9 @@ public function wakeFromBadEnd():void {
 		if (player.level >= 90) awardAchievement("Sovereign", kACHIEVEMENTS.LEVEL_SOVEREIGN);
 		if (player.level >= 100) awardAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD);
 		if (player.level >= 120) awardAchievement("Newb God(ess)", kACHIEVEMENTS.LEVEL_NEWB_GOD_ESS);
-		if (player.level >= 150) awardAchievement("Mid-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS);
+		if (player.level >= 150) awardAchievement("Lowest-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS);
+		//if (player.level >= ?180?) awardAchievement("Low-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS);
+		//if (player.level >= ?210?) awardAchievement("-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS);
 
 		//Population
 		if (getCampPopulation() >= 2) awardAchievement("My First Companion", kACHIEVEMENTS.POPULATION_FIRST);
@@ -4695,10 +4714,10 @@ public function wakeFromBadEnd():void {
 		if (player.previouslyWornClothes.length >= 10) awardAchievement("Cosplayer (Beginner)", kACHIEVEMENTS.FASHION_COSPLAYER);
 		if (player.previouslyWornClothes.length >= 30) awardAchievement("Cosplayer (Amateour)", kACHIEVEMENTS.FASHION_COSPLAYER_1);
 		if (player.previouslyWornClothes.length >= 60) awardAchievement("Cosplayer (Recognizable)", kACHIEVEMENTS.FASHION_COSPLAYER_2);
-		if (player.previouslyWornClothes.length >= 100) awardAchievement("Cosplayer (Seasonal)", kACHIEVEMENTS.FASHION_COSPLAYER_1);
-		if (player.previouslyWornClothes.length >= 150) awardAchievement("Cosplayer (Proffesional)", kACHIEVEMENTS.FASHION_COSPLAYER_2);
-		//if (player.previouslyWornClothes.length >= 210) awardAchievement("Jessica Nigri apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_3);
-		//if (player.previouslyWornClothes.length >= 270) awardAchievement("Yaya Han apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_4);
+		if (player.previouslyWornClothes.length >= 100) awardAchievement("Cosplayer (Seasonal)", kACHIEVEMENTS.FASHION_COSPLAYER_3);
+		if (player.previouslyWornClothes.length >= 150) awardAchievement("Cosplayer (Proffesional)", kACHIEVEMENTS.FASHION_COSPLAYER_4);
+		//if (player.previouslyWornClothes.length >= 300) awardAchievement("Jessica Nigri apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_5);
+		//if (player.previouslyWornClothes.length >= 600) awardAchievement("Yaya Han apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_6);
 		if ((player.armor == armors.RBBRCLT || player.armor == armors.BONSTRP || player.armor == armors.NURSECL) &&
 				(player.weapon == weapons.RIDINGC || player.weapon == weapons.WHIP || player.weapon == weapons.SUCWHIP || player.weapon == weapons.L_WHIP || player.weapon == weapons.PSWHIP || player.weapon == weapons.PWHIP || player.weapon == weapons.BFWHIP || player.weapon == weapons.DBFWHIP || player.weapon == weapons.NTWHIP || player.weapon == weapons.CNTWHIP)) awardAchievement("Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX);
 		if (player.armor != ArmorLib.NOTHING && player.lowerGarment == UndergarmentLib.NOTHING && player.upperGarment == UndergarmentLib.NOTHING) awardAchievement("Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO);
@@ -4715,8 +4734,9 @@ public function wakeFromBadEnd():void {
 		if (player.headJewelry == headjewelries.CROWSTR && player.necklace == necklaces.NECKSTR && player.jewelry == jewelries.RINGSTR && player.jewelry2 == jewelries.RINGSTR && player.jewelry3 == jewelries.RINGSTR && player.jewelry4 == jewelries.RINGSTR) awardAchievement("Throne of Strength", kACHIEVEMENTS.FASHION_THRONE_OF_STRENGTH);
 		if (player.headJewelry == headjewelries.CROWTOU && player.necklace == necklaces.NECKTOU && player.jewelry == jewelries.RINGTOU && player.jewelry2 == jewelries.RINGTOU && player.jewelry3 == jewelries.RINGTOU && player.jewelry4 == jewelries.RINGTOU) awardAchievement("Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS);
 		if (player.headJewelry == headjewelries.CROWWIS && player.necklace == necklaces.NECKWIS && player.jewelry == jewelries.RINGWIS && player.jewelry2 == jewelries.RINGWIS && player.jewelry3 == jewelries.RINGWIS && player.jewelry4 == jewelries.RINGWIS) awardAchievement("Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM);
-		if (player.isInGoblinMech()) awardAchievement("Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP);
+		if (player.isInGoblinMech() || player.isInNonGoblinMech()) awardAchievement("Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP);
 		if (player.vehicles == vehicles.GOBMPRI) awardAchievement("Rollin' Rollin'", kACHIEVEMENTS.FASHION_ROLLIN_ROLLIN);
+		if (player.vehicles == vehicles.HB_MECH) awardAchievement("Howl of the Banshee", kACHIEVEMENTS.FASHION_HOWL_OF_THE_BANSHEE);
 		if (player.jewelry.value >= 1000) awardAchievement("Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING);
 		if (player.necklace.value >= 5000) awardAchievement("Ka-Ching!", kACHIEVEMENTS.FASHION_KA_CHING);
 		if (player.headJewelry.value >= 4000) awardAchievement("Royalty", kACHIEVEMENTS.FASHION_ROYALTY);

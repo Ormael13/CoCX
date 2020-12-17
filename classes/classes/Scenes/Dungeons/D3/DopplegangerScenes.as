@@ -241,5 +241,4 @@ import classes.PerkLib;
 			EventParser.gameOver();
 		}
 	}
-
 }

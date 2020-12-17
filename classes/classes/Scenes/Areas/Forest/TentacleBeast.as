@@ -123,7 +123,7 @@ public class TentacleBeast extends Monster
 					this.armorDef = 180;
 					this.armorMDef = 40;
 					this.bonusHP = 12000;
-					this.bonusLust = 150;
+					this.bonusLust = 408;
 					this.level = 68;
 					this.additionalXP = 450;
 				}
@@ -134,7 +134,7 @@ public class TentacleBeast extends Monster
 					this.armorDef = 135;
 					this.armorMDef = 30;
 					this.bonusHP = 8000;
-					this.bonusLust = 100;
+					this.bonusLust = 399;
 					this.level = 64;
 					this.additionalXP = 350;
 				}
@@ -145,7 +145,7 @@ public class TentacleBeast extends Monster
 					this.armorDef = 90;
 					this.armorMDef = 20;
 					this.bonusHP = 4000;
-					this.bonusLust = 50;
+					this.bonusLust = 390;
 					this.level = 60;
 					this.additionalXP = 250;
 				}
@@ -159,7 +159,7 @@ public class TentacleBeast extends Monster
 				this.armorDef = 18;
 				this.armorMDef = 2;
 				this.bonusHP = 400;
-				this.bonusLust = 20;
+				this.bonusLust = 122;
 				this.level = 12;
 			}
 			this.a = "the ";

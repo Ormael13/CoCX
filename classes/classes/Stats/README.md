@@ -80,13 +80,16 @@ player.buff("Poison")
 
 ```js
 player.buff("Poison").addStat("str", -10);
+player.buff("Poison").addStat("str", -10, -50, 0);
 ```
 Buff the stat. If buff already present, **increase** it.
+
+Otional `min` and `max` arguments control the limits of total buff value. Buff is removed if its value becomes 0.
 
 ----
 
 ```js
-player.buff("Poison").addStat("str", -10);
+player.buff("Poison").setStat("str", -10);
 ```
 Buff the stat. If buff already present, **reset** it.
 

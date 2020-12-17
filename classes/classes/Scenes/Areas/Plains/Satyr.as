@@ -166,7 +166,7 @@ public class Satyr extends Monster
 			this.armorDef = 2;
 			this.armorMDef = 0;
 			this.bonusHP = 300;
-			this.bonusLust = 20;
+			this.bonusLust = 114;
 			this.lust = 20;
 			this.lustVuln = 0.30;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

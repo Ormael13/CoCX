@@ -818,11 +818,11 @@ public function getMilked():void {
 	var liters:Number = 0;
 	var payout:Number = 0;
 	var cap:Number = 500;
-	//Ez mode cap doubles
-	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
+	//Ez mode cap is 10x
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) cap *= 10;
 	if(debug) {
 		flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0;
-		cap = 9999;
+		cap = 99999;
 	}
 	liters = int(player.lactationQ()* (rand(10) + 90) / 100)/1000;
 	if(liters < 0) liters = 1337;
@@ -1108,11 +1108,11 @@ public function cockPumping():void {
 	//Set temp to liter amount produced.
 	var payout:Number = 0;
 	var cap:Number = 500;
-	//Ez mode cap doubles
-	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
+	//Ez mode cap is 10x
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) cap *= 10;
 	if(debug) {
 		flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0;
-		cap = 9999;
+		cap = 99999;
 	}
 	//Get rid of extra digits
 	cumQ = int(cumQ);

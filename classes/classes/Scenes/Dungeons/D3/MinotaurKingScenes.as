@@ -411,7 +411,6 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText("\n\nPivoting on your prick, dragging her velvety dicksleeve in a delightful 180 on your length, Excellia crawls atop you, still shaking. Her pussy is still squeezing and clenching down around your [cock "+x+"], keeping your attention focused solely on the itch between your thighs. Your overstimulated crotch has no choice but to climax once more, orgasming to the insatiable mynx’s demands. There’s not much to left to give her, but that doesn’t stop you from writhing in ecstasy, or groping her tits in wild excitement.");
 			outputText("\n\nYou aren’t sure how many more times you give it to her, but by the time you finally manage to extract yourself from her wanton lips, the Minotaur King has been dragged into the crowd.");
 			outputText("\n\nLethice looks bored, drumming her fingers on the edge of her throne. Time to deal with her.");
-
 			player.orgasm();
             cleanupAfterCombat(SceneLib.d3.resumeFromFight);
         }
@@ -462,7 +461,6 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText(". His flare somehow grows even fatter, wide enough to be visible through the [skinFurScales] of your belly and hard enough for you to stroke through the intervening flesh.");
 			outputText("\n\nHis orgasm rocks your entire world. The first squirt alone fills your stomach to capacity, giving you a nicely-rounded cum paunch. The second stretches your tummy into gravid obscenity. Your eyes roll back, both from lack of oxygen and the super-sized load of druggy, mind-obliterating minotaur spunk. You barely register the feeling of his cannon-like ejaculations pushing you off his spasming member. You definitely don’t remember opening wide and letting him paint your face and hair in a mask of it.");
 			outputText("\n\nEverything is too hazy to clearly piece together, just flashes of memories, sensations, and an all-consuming bliss. Excellia’s hands on your [chest], stroking and squeezing, massaging her lord’s copious ejaculation into your [skinFurScales] until you gleam with it. Imps jacking off high above, mixing their tainted spooge in with the pure love of your majestic master. Lethice may have even fucked your ass. Somebody definitely did.");
-
 			menu();
 			addButton(0, "Next", gurglegurgle);
 		}
@@ -479,7 +477,6 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 				outputText("\n\nIt’s wonderful. Even when he’s not fucking your ass, he’s rock hard and dribbling, giving you a constant feed of the fluid you’ve fallen in love with. You let him carry you around like that. That’s what you tell yourself, anyway. The big lug would probably pin you in place if you tried to struggle, but you can’t imagine yourself fighting this.");
 				outputText("\n\nSo what if you’re a dick-cozy, mounted on a minotaur’s beastly cock like some kind of trophy? Who cares if sometimes you have to lick out the Demon Queen while being reamed from behind? Everything is great. You never worry about anything, and there’s always someone filling you, fucking you full of liquid happiness.");
 				outputText("\n\nYou smile and request someone fuck your mouth. It always feels better with one in each end.");
-
 				EventParser.gameOver();
 			}
 		}
@@ -488,7 +485,6 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 		{
 			flags[kFLAGS.MINOTAURKING_ALIVE] = 1;
 			clearOutput();
-
 			outputText("\n\nYou square yourself off at the demon queen");
 			if (player.weapon != WeaponLib.FISTS) outputText(", [weapon] in hand");
 			else outputText(", balled fists raised");
@@ -498,8 +494,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			else if (player.cor <= 20) outputText("Why would I debase myself in front of you like that? The pure need no such indulgence.");
 			else outputText("Not all of us are as enslaved by our desires as you.");
 			outputText("”</i>");
-
-cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			cleanupAfterCombat(SceneLib.d3.resumeFromFight);
         }
 	}
 }

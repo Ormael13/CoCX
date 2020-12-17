@@ -45,6 +45,7 @@ public class SnowLily extends Alraune
 			this.armorDef = 90;
 			this.armorMDef = 9;
 			this.bonusHP = 200;
+			this.bonusLust = 290;
 			this.level = 40;
 			this.gems = rand(25) + 15;
 			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6);

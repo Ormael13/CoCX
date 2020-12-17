@@ -168,7 +168,7 @@ public class CancerAttack extends Monster
 			this.armorDef = 90;
 			this.armorMDef = 10;
 			this.bonusHP = 200;
-			this.bonusLust = 50;
+			this.bonusLust = 263;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 37;

@@ -3244,6 +3244,5 @@ public class Prison extends BaseContent implements TimeAwareInterface
 				outputText("");
 			}
 		}
-		
 	}
 }

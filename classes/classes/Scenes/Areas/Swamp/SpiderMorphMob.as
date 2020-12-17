@@ -99,7 +99,7 @@ public class SpiderMorphMob extends Monster
 			this.a = "the ";
 			this.short = "mob of spiders-morphs";
 			this.imageName = "spidermorphmob";
-			this.long = "You are fighting a horde of spider-morphs!  A group of some two-dozen spiders and driders approaches you, all baring their teeth.  A pair of large, powerful driders lead the group, their corrupt, lusty stares sending shivers up your spine.  While "+(player.level <= 13?"you'd never face such a large horde on your own":"you could probably handle them alone")+", you have a powerful ally in this fight - the dragoness Kiha!";
+			this.long = "You are fighting a horde of spider-morphs!  A group of some two-dozen spiders and driders approaches you, all baring their teeth.  A pair of large, powerful driders lead the group, their corrupt, lusty stares sending shivers up your spine.  While "+(player.level <= 18?"you'd never face such a large horde on your own":"you could probably handle them alone")+", you have a powerful ally in this fight - the dragoness Kiha!";
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
@@ -128,7 +128,7 @@ public class SpiderMorphMob extends Monster
 			this.armorDef = 30;
 			this.armorMDef = 3;
 			this.bonusHP = 1200;
-			this.bonusLust = 50;
+			this.bonusLust = 93;
 			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 23;
@@ -137,7 +137,7 @@ public class SpiderMorphMob extends Monster
 			this.special2 = SceneLib.combat.lustAttack;
 			this.tailType = Tail.SPIDER_ADBOMEN;
 			this.drop = NO_DROP;
-			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

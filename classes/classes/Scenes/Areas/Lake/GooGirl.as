@@ -176,7 +176,7 @@ public class GooGirl extends Monster
 			this.armorDef = 4;
 			this.armorMDef = 12;
 			this.bonusHP = 40;
-			this.bonusLust = 10;
+			this.bonusLust = 96;
 			this.lust = 45;
 			this.lustVuln = .75;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

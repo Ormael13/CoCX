@@ -42,5 +42,4 @@ package classes.Items
 		{
 		}
 	}
-
 }

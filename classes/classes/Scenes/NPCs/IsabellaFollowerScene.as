@@ -1719,6 +1719,5 @@ public function isabellaGivesBirth():void {
 	flags[kFLAGS.ISABELLA_PREGNANCY_BOOSTED] = 0;
 	isabellaScene.pregnancy.knockUpForce(); //CLEAR!
 }
-
 }
 }

@@ -563,7 +563,5 @@ public class YourCabin extends DungeonAbstractContent
 			fatigue(20);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
 	}
-
 }

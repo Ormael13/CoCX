@@ -155,7 +155,7 @@ public class HellHound extends Monster
 			this.armorName = "thick fur";
 			this.armorDef = 7;
 			this.armorMDef = 1;
-			this.bonusLust = 10;
+			this.bonusLust = 125;
 			this.lust = 25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 10;

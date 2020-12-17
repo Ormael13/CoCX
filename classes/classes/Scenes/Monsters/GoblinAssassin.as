@@ -125,11 +125,13 @@ public class GoblinAssassin extends Monster
 				this.short = "goblin adventurer";
 				this.level = 9;
 				this.bonusHP = 70;
+				this.bonusLust = 108;
 			}
 			else {
 				this.short = "goblin assassin";
 				this.level = 8;
 				this.bonusHP = 100;
+				this.bonusLust = 107;
 			}
 			this.imageName = "goblinAssassin";
 			this.long = "Her appearance is that of a regular goblin, curvy and pale green, perhaps slightly taller than the norm. Her wavy, untamed hair is a deep shade of blue, covering her pierced ears and reaching just above her shoulders. Her soft curves are accentuated by her choice of wear, a single belt lined with assorted needles strapped across her full chest and a pair of fishnet stockings reaching up to her thick thighs. She bounces on the spot, preparing to dodge anything you might have in store, though your eyes seem to wander towards her bare slit and jiggling ass. Despite her obvious knowledge in combat, she’s a goblin all the same – a hard cock can go a long way.";
@@ -154,7 +156,6 @@ public class GoblinAssassin extends Monster
 			this.armorName = "leather straps";
 			this.armorDef = 1;
 			this.armorMDef = 1;
-			this.bonusLust = 20;
 			this.lust = 50;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = rand(50) + 25;

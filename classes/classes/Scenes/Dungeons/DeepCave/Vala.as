@@ -131,7 +131,7 @@ public class Vala extends Monster
 			var lust:Number = 30 + game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] * 10;
 			if(lust > 80) lust = 80;
 			this.bonusHP = 500;
-			this.bonusLust = 20;
+			this.bonusLust = 116;
 			this.lust = lust;
 			this.lustVuln = lustVuln;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

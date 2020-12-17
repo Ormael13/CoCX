@@ -1969,6 +1969,5 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		 -minor cosmetic changes to vag one day if code allows
 
 		 */
-
 	}
 }

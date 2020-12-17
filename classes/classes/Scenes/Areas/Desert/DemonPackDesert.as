@@ -126,7 +126,7 @@ public class DemonPackDesert extends Monster
 			this.armorDef = 5;
 			this.armorMDef = 1;
 			this.bonusHP = 20;
-			this.bonusLust = 200;
+			this.bonusLust = 129;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 9;

@@ -1163,6 +1163,5 @@ public class KatherineEmployment extends TelAdreAbstractContent {
 			}
 			telAdre.telAdreMenuShow();
 		}
-
 	}
 }

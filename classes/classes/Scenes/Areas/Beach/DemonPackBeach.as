@@ -66,7 +66,7 @@ public class DemonPackBeach extends Monster
 			this.armorDef = 55;
 			this.armorMDef = 10;
 			this.bonusHP = 200;
-			this.bonusLust = 200;
+			this.bonusLust = 275;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 45;
@@ -81,7 +81,7 @@ public class DemonPackBeach extends Monster
 			this.tailType = Tail.DEMONIC;
 			this.horns.type = Horns.DEMON;
 			this.horns.count = 2;
-			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

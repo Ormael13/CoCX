@@ -25,6 +25,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	private static const _ageShouldDoBirth:int = -2;
 	private static const _ageCanMeetNightmare:int = -3;
 	private static const _ageDidPregnancy:int = -4;
+	private static const _ageIsDeadOrRemoved:int = -5;
 
 	private static var _instance:CelessScene;
 
@@ -91,6 +92,10 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 
 	public function get isAdult():Boolean {
 		return _age == _ageIsAdult;
+	}
+
+	public function setDeadOrRemoved():void {
+		_age = _ageIsDeadOrRemoved;
 	}
 
 	public override function unload():void {
@@ -174,7 +179,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				submenu(menu, campInteraction);
 			}
 			else {
-				pureIncest()
+				pureIncest();
 			}
 		}
 	}

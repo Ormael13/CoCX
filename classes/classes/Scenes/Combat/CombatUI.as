@@ -40,6 +40,7 @@ public class CombatUI extends BaseCombatContent {
 	private var blackSpellButtons:ButtonDataList = new ButtonDataList();
 	private var greySpellButtons:ButtonDataList = new ButtonDataList();
 	private var hexSpellButtons:ButtonDataList = new ButtonDataList();
+	private var bloodSpellButtons:ButtonDataList = new ButtonDataList();
 	private var soulforceButtons:ButtonDataList = new ButtonDataList();
 	private var otherButtons:ButtonDataList = new ButtonDataList();
 	public function mainMenu():void {
@@ -51,6 +52,7 @@ public class CombatUI extends BaseCombatContent {
 		blackSpellButtons.clear();
 		greySpellButtons.clear();
 		hexSpellButtons.clear();
+		bloodSpellButtons.clear();
 		soulforceButtons.clear();
 		otherButtons.clear();
 
@@ -96,13 +98,16 @@ public class CombatUI extends BaseCombatContent {
 			} else if (player.isInGoblinMech()) {
 				btnMelee.show("Sawblade", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech sawblade.  Damage done is determined by your strength and weapon.");
 			}*/
-			if (player.isInGoblinMech()) {
+			if (player.isInGoblinMech() || player.isInNonGoblinMech()) {
+				var weapon:String = "";
+				if (player.isInGoblinMech()) weapon = "saw blade";
+				if (player.vehicles == vehicles.HB_MECH) weapon = "twin power blades";
 				if (monster.isFlying()) {
-					if (player.isFlying()) btnMelee.show("Sawblade", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech sawblade.  Damage done is determined by your strength and weapon.");
+					if (player.isFlying()) btnMelee.show("Attack", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech "+weapon+".  Damage done is determined by your strength and weapon.");
 					else btnMelee.disable("No way you could reach enemy in air with melee attacks.");
 					if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 				}
-				else btnMelee.show("Sawblade", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech sawblade.  Damage done is determined by your strength and weapon.");
+				else btnMelee.show("Attack", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech "+weapon+".  Damage done is determined by your strength and weapon.");
 				if (combat.isEnnemyInvisible) btnMelee.disable("You cannot use attack an opponent you cannot see or target.");
 			}
 			else {
@@ -164,6 +169,10 @@ public class CombatUI extends BaseCombatContent {
 			} else btnRanged.disable("No way you could use your range weapon while piloting goblin mech.");
 			if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 		}
+		if (player.vehicles == vehicles.HB_MECH) {
+			if (player.isUsingHowlingBansheeMechFriendlyRangeWeapons()) btnRanged.show("Shoot", combat.fireBow, "Attempt to attack the enemy with your mech inbuilt range weapons.  Damage done is determined by your speed and weapon.");
+			else btnRanged.disable("Your range wepaon is not compatibile to be used with current piloted mech.");
+		}
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 
 		// Submenus
@@ -180,11 +189,11 @@ public class CombatUI extends BaseCombatContent {
 		if (player.isFlying()) combat.pspecials.buildMenuForFlying(physpButtons);
 		else combat.pspecials.buildMenu(physpButtons);
 		if (physpButtons.length > 0) {
-			if (player.isInGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
+			if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
 			else btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
 		}
 		if (!player.isFlying() && monster.isFlying() && !player.canFly()) {
-			if (player.isInGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
+			if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
 			else btnPSpecials.disable("No way you could reach an opponent in the air with p. specials.");
 		}
 		// Submenu - Magical Specials
@@ -214,8 +223,8 @@ public class CombatUI extends BaseCombatContent {
 			}
 			else if (player.hasKeyItem("Aphrodigas Gun") >= 0) btnTease.show("Aphrodigas Gun", combat.goboLustnadeLauncher, "Gassing the opponent with aphrodisiacs.");
 			else btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting goblin mech.");
-
 		}
+		else if (player.vehicles == vehicles.HB_MECH) btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting elf mech.");
 		else if (monster.hasStatusEffect(StatusEffects.Stunned) && player.hasPerk(PerkLib.Straddle)) btnTease.show("Straddle", combat.Straddle, "Go to town on your opponent with devastating teases.");
 		else btnTease.show("Tease", combat.teaseAttack, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
 		if (combat.isEnnemyInvisible) btnTease.disable("You cannot tease an opponent you cannot see or target, heck is it even looking at you right now?");
@@ -310,6 +319,9 @@ public class CombatUI extends BaseCombatContent {
 		} else if (monster.hasStatusEffect(StatusEffects.DisplacerPlug)) {
 			menu();
 			addButton(0, "Feed", combat.DisplacerFeed).hint("Milk your victim's breast with your tentacles!");
+		} else if (monster.hasStatusEffect(StatusEffects.SlimeInsert)) {
+			menu();
+			addButton(0, "Rape", combat.SlimeRapeFeed).hint("Violate your opponent from the inside!");
 		} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 			menu();
 			if (monster.statusEffectv1(StatusEffects.Dig) > 0){
@@ -467,6 +479,7 @@ public class CombatUI extends BaseCombatContent {
 		combat.magic.buildBlackMenu(blackSpellButtons);
 		combat.magic.buildGreyMenu(greySpellButtons);
 		combat.magic.buildHexMenu(hexSpellButtons);
+		combat.magic.buildBloodMenu(bloodSpellButtons);
 		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your White magic book");
 		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your Black magic book");
 		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
@@ -474,6 +487,9 @@ public class CombatUI extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.HexKnowledge)) {
 			if (hexSpellButtons.length > 0) buttons.add("Hexes", curry(submenu,hexSpellButtons, submenuSpells, 0, false)).hint("Open your Hex grimoire");
+		}
+		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
+			if (bloodSpellButtons.length > 0) buttons.add("Blood Spells", curry(submenu,bloodSpellButtons, submenuSpells, 0, false)).hint("Open your Blood grimoire");
 		}
 	}
 

@@ -149,8 +149,7 @@ use namespace CoC;
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			/*if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) */SceneLib.dungeons.ebonlabyrinth.defeatedByDarkSlime();
-			//else SceneLib.lake.gooGirlScene.getBeatByGooGirl();
+			SceneLib.dungeons.ebonlabyrinth.defeatedByDarkSlime();
 		}
 		
 		public function DarkSlime() 
@@ -164,7 +163,7 @@ use namespace CoC;
 					this.armorMDef = 90;
 					this.bonusHP = 800;
 					this.bonusMana = 200;
-					this.bonusLust = 40;
+					this.bonusLust = 606;
 					this.level = 68;
 				}
 				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
@@ -175,7 +174,7 @@ use namespace CoC;
 					this.armorMDef = 75;
 					this.bonusHP = 600;
 					this.bonusMana = 150;
-					this.bonusLust = 30;
+					this.bonusLust = 558;
 					this.level = 64;
 				}
 				else {
@@ -186,19 +185,20 @@ use namespace CoC;
 					this.armorMDef = 60;
 					this.bonusHP = 400;
 					this.bonusMana = 100;
-					this.bonusLust = 20;
+					this.bonusLust = 510;
 					this.level = 60;
 				}
 			}
 			else {
-				initStrTouSpeInte(32, 40, 20, 30);
-				initWisLibSensCor(30, 50, 40, 10);
-				this.weaponAttack = 7;
-				this.armorDef = 4;
-				this.armorMDef = 12;
-				this.bonusHP = 40;
-				this.bonusLust = 10;
-				this.level = 6;
+				initStrTouSpeInte(154, 187, 92, 145);
+				initWisLibSensCor(145, 226, 182, 10);
+				this.weaponAttack = 35;
+				this.armorDef = 20;
+				this.armorMDef = 60;
+				this.bonusHP = 400;
+				this.bonusMana = 100;
+				this.bonusLust = 463;
+				this.level = 55;
 			}
 			this.a = "";
 			this.short = "dark slime";

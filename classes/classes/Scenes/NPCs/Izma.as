@@ -170,7 +170,7 @@ import classes.Scenes.SceneLib;
 			this.armorDef = 12;
 			this.armorMDef = 1;
 			this.bonusHP = 330;
-			this.bonusLust = 20;
+			this.bonusLust = 125;
 			this.lust = 20;
 			this.lustVuln = .20;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

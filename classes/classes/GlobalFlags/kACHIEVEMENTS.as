@@ -333,7 +333,7 @@ package classes.GlobalFlags
 		public static const ZONE_CAVEMAN:int						= 287; //100 exploration of Caves
 		public static const ZONE_288:int		= 288;//100 exploration of Deep Desert
 		public static const ZONE_289:int		= 289;//100 exploration of Inner Battlefield (Warmoger lub dla 3 obszaru battlefield-a)
-		public static const ZONE_290:int		= 290;//100 exploration of Defiled Ravine
+		public static const ZONE_DEFILED:int						= 290;//100 exploration of Defiled Ravine
 		public static const ZONE_291:int		= 291;//100 exploration of Marsh
 		public static const ZONE_292:int		= 292;//100 exploration of Deep Caves
 		public static const ZONE_293:int		= 293;//100 exploration of Tundra
@@ -342,11 +342,11 @@ package classes.GlobalFlags
 		public static const ZONE_296:int		= 296;//100 exploration of Inner Plateau
 		public static const ZONE_297:int		= 297;//100 exploration of 3rd forest related area (jungle?) ZONE_JUMANJI?
 		public static const ZONE_298:int		= 298;//100 exploration of 4th forest related area
-		public static const ZONE_299:int		= 299;//100 exploration of 3rd blight ridge related area
-		public static const ZONE_300:int		= 300;//100 exploration of 4th blight ridge related area
+		public static const ZONE_299:int		= 299;//100 exploration of 3rd blight ridge related area (pit?)
+		public static const ZONE_300:int		= 300;//100 exploration of 4th blight ridge related area (abyss (O)?)
 		public static const ZONE_301:int		= 301;//100 exploration of 2nd plains related area
 		public static const ZONE_302:int		= 302;//100 exploration of 3rd plains related area
-		public static const ZONE_303:int		= 303;//100 exploration of 3rd caves related area
+		public static const ZONE_303:int		= 303;//100 exploration of Deeper Caves
 		public static const ZONE_304:int		= 304;//100 exploration of x1
 		public static const ZONE_305:int		= 305;//100 exploration of x2
 		
@@ -424,7 +424,7 @@ package classes.GlobalFlags
 		public static const REALISTIC_CHAMPION_NEEDS_FOOD_4:int		= 377;
 		public static const EPIC_LET_IT_GO:int						= 378;
 		public static const GENERAL_VIRILITY_GOD:int				= 379;
-		public static const UNKNOWN_ACHIEVEMENT_380:int				= 380;
+		public static const FASHION_HOWL_OF_THE_BANSHEE:int			= 380;
 		public static const UNKNOWN_ACHIEVEMENT_381:int				= 381;
 		public static const UNKNOWN_ACHIEVEMENT_382:int				= 382;
 		public static const UNKNOWN_ACHIEVEMENT_383:int				= 383;
@@ -446,5 +446,4 @@ package classes.GlobalFlags
 		public static const UNKNOWN_ACHIEVEMENT_399:int				= 399;
 		
 	}
-
 }

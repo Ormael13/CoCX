@@ -10,7 +10,7 @@ import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
-	public class FemaleTroll extends Monster
+	public class CorruptedFemaleTroll extends Monster
 	{
 		public function femaleTrollPassive():void {
 			outputText("Her pheromone cloud is getting to you, causing your manhood to stiffen with each passing moment, if you don’t finish this quickly you’ll eventually cave in! ");
@@ -70,10 +70,10 @@ import classes.internals.*;
 			SceneLib.trollScene.encounterAdultFemaleTrollWon();
 		}
 		
-		public function FemaleTroll() 
+		public function CorruptedFemaleTroll() 
 		{
 			this.a = "the ";
-			this.short = "adult troll female";
+			this.short = "corrupted adult troll female";
 			this.imageName = "trollfemale";
 			this.long = "You are fighting what appears to be an adult troll female. She is nearly 7 feet tall, covered in green fuzz and has a lithe, yet slightly muscular build. She has tusks protruding from her mouth each about 5 inches long curving upwards. While most trolls are calm and relaxed, she hunches over, shaky and ready to pounce. Unlike most trolls, she has fallen into corruption, which is apparent by her lusty gaze towards you. She is completely naked. She sticks her tongue out tauntingly, her arousal is dense as her pheromones coat the air, almost blinding you with her lusty aura.";
 			// this.plural = false;
@@ -97,7 +97,7 @@ import classes.internals.*;
 			this.weaponVerb="punch";
 			this.armorName = "green fuzz";
 			this.bonusHP = 350;
-			this.bonusLust = 10;
+			this.bonusLust = 235;
 			this.lust = 20;
 			this.lustVuln = .7;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

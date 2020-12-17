@@ -1323,6 +1323,8 @@ import coc.view.MainView;
 			else addButtonDisabled(6, "Oni", "You already have this bloodline!");
 			if (player.findPerk(PerkLib.BloodlineOrc) < 0) addButton(7, "Orc", confirmBloodline, PerkLib.OrcsDescendant).hint("(+2 to orc score)");
 			else addButtonDisabled(7, "Orc", "You already have this bloodline!");
+			if (player.findPerk(PerkLib.BloodlineVampire) < 0) addButton(8, "Vampire", confirmBloodline, PerkLib.VampiresDescendant).hint("(+2 to vampire score)");
+			else addButtonDisabled(8, "Vampire", "You already have this bloodline!");
 			addButton(14, "None", noBloodlineAtAllCuzYouAscendedTooManyTimesAlready).hint("You either cannot add a new unstable bloodline, or you have a stable bloodline. (It mean you only will get some bonus perk points for start instead new bloodline.)");
 		}
 
@@ -1352,6 +1354,9 @@ import coc.view.MainView;
 					break;
 				case PerkLib.OrcsDescendant:
 					outputText("Your ancestor was an orc?");
+					break;
+				case PerkLib.VampiresDescendant:
+					outputText("Your ancestor was a vampire?");
 					break;
 				default:
 					outputText("Your ancestor was a dragon?");
@@ -1819,8 +1824,7 @@ import coc.view.MainView;
 
 		private function ascensionPerkSelection(perk:* = null, maxRank:int = 10):void {
 			clearOutput();
-			var maxRank:int = 5;
-			maxRank += maxRankValue();
+			maxRank = Math.min( 5 + maxRankValue(), maxRank );
 			outputText("Perk Effect: " + perk.longDesc);
 			outputText("\nCurrent level: " + player.perkv1(perk) + " / " + maxRank + "");
 			if (player.perkv1(perk) >= maxRank) outputText(" <b>(Maximum)</b>");
@@ -1860,8 +1864,7 @@ import coc.view.MainView;
 		}
 		private function ascensionPerkSelection2(perk:* = null, maxRank:int = 10):void {
 			clearOutput();
-			var maxRank:int = 5;
-			maxRank += maxRankValue();
+			maxRank = Math.min( 5 + maxRankValue(), maxRank );
 			outputText("Perk Effect: " + perk.longDesc);
 			outputText("\nCurrent level: " + player.perkv1(perk) + " / " + maxRank + "");
 			if (player.perkv1(perk) >= maxRank) outputText(" <b>(Maximum)</b>");

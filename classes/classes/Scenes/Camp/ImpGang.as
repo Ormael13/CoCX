@@ -59,7 +59,7 @@ public class ImpGang extends Imp
 			this.armorDef = 3;
 			this.armorMDef = 0;
 			this.bonusHP = 300;
-			this.bonusLust = 150;
+			this.bonusLust = 104;
 			this.lust = 30;
 			this.lustVuln = .65;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

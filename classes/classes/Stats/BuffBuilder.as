@@ -45,8 +45,17 @@ public class BuffBuilder {
 		store.findBuffableStat(statName).removeBuff(tag);
 		return this;
 	}
-	public function addStat(statName: String, value: Number): BuffBuilder {
-		store.findBuffableStat(statName).addOrIncreaseBuff(tag, value, options);
+	public function addStat(statName: String, value: Number,
+							min: Number = Number.NEGATIVE_INFINITY,
+							max: Number = Number.POSITIVE_INFINITY): BuffBuilder {
+		var stat:BuffableStat = store.findBuffableStat(statName);
+		var oldValue: Number = stat.valueOfBuff(tag);
+		var newValue: Number = Utils.boundFloat(min, oldValue + value, max);
+		if (newValue == 0) {
+			stat.removeBuff(tag);
+		} else {
+			stat.addOrReplaceBuff(tag, newValue, options);
+		}
 		return this;
 	}
 	public function setStat(statName: String, value: Number): BuffBuilder {

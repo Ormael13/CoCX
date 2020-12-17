@@ -21,6 +21,6 @@ use namespace CoC;
 		{
 		}
 		
-		
+		//Phoenix Squad - lvl 41 group of enemies
 	}
 }
