@@ -645,6 +645,12 @@ use namespace CoC;
 				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 20;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 30;
 			}
+			if (vehiclesName == "Giant Slayer Mech") {
+				armorDef += 10;
+				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 20;
+				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 30;
+				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 40;
+			}
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorDef += 15;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 8;
@@ -821,15 +827,21 @@ use namespace CoC;
 			if (headjewelryName == "HB helmet") armorMDef += 4;
 			if (vehiclesName == "Goblin Mech Alpha") {
 				armorMDef += 10;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) armorMDef += 5;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) armorMDef += 10;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) armorMDef += 15;
+				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorMDef += 5;
+				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorMDef += 10;
+				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorMDef += 15;
 			}
 			if (vehiclesName == "Goblin Mech Prime") {
 				armorMDef += 20;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) armorMDef += 10;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) armorMDef += 20;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) armorMDef += 30;
+				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorMDef += 10;
+				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorMDef += 20;
+				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorMDef += 30;
+			}
+			if (vehiclesName == "Giant Slayer Mech") {
+				armorMDef += 10;
+				if (hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) armorMDef += 20;
+				if (hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) armorMDef += 30;
+				if (hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) armorMDef += 40;
 			}
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorMDef += 15;
@@ -1028,7 +1040,7 @@ use namespace CoC;
 		//Is in goblin mech
 		public function isInGoblinMech():Boolean
 		{
-			return vehicles == game.vehicles.GOBMALP || vehicles == game.vehicles.GOBMPRI;
+			return vehicles == game.vehicles.GOBMALP || vehicles == game.vehicles.GOBMPRI || vehicles == game.vehicles.GS_MECH;
 		}
 		//Is using goblin mech friendly firearms
 		public function isUsingGoblinMechFriendlyFirearms():Boolean

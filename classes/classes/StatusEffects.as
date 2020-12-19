@@ -387,6 +387,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const JojoMeditationCount:StatusEffectType            = mk("Jojo Meditation Count");
 		public static const JojoNightWatch:StatusEffectType                 = mk("JojoNightWatch");
 		public static const JojoTFOffer:StatusEffectType                    = mk("JojoTFOffer");
+		public static const KaibaDailyLimit:StatusEffectType                = mk("KaibaDailyLimit");
 		public static const Kelt:StatusEffectType                           = mk("Kelt");
 		public static const KeltBJ:StatusEffectType                         = mk("KeltBJ");
 		public static const KeltBadEndWarning:StatusEffectType              = mk("Kelt Bad End Warning");

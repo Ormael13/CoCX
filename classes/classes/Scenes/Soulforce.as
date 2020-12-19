@@ -1626,9 +1626,9 @@ use namespace CoC;
 				addButton(4, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
 				addButton(5, "UH Ayo Arm", AddUltraHeavyAyoArmor).hint("Add 1 Ultra heavy Ayo Armor for testing purposes.");
 				//6
-				//7
-				addButton(8, "HB Mech", AddHBMech).hint("Add 1 Howling Banshee Mech for testing purposes.");
-				addButton(9, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
+				addButton(7, "HB Mech", AddHBMech).hint("Add 1 Howling Banshee Mech for testing purposes.");
+				addButton(8, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
+				addButton(9, "GiantSlayerMech", AddGiantSlayerMech).hint("Add 1 Giant Slayer Mech for testing purposes.");
 				//10
 				addButton(11, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
 				addButton(12, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
@@ -1801,6 +1801,10 @@ use namespace CoC;
 		}
 		public function AddGoblinMechPrime():void {
 			outputText("\n\n<b>(Gained 1 Goblin Mech Prime!)</b>\n\n");
+			inventory.takeItem(vehicles.GOBMPRI, curry(EquipmentMenu, 1));
+		}
+		public function AddGiantSlayerMech():void {
+			outputText("\n\n<b>(Gained 1 Giant Slayer Mech!)</b>\n\n");
 			inventory.takeItem(vehicles.GOBMPRI, curry(EquipmentMenu, 1));
 		}
 		public function AddTheEvelyn():void {

@@ -908,15 +908,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					ZenjiScenes.ZenjiFood = false;
 				}
 
-				//Kaiba shor stock daily update
-				flags[kFLAGS.KAIBA_0] = rand(3);
-				flags[kFLAGS.KAIBA_1] = rand(4);
-				flags[kFLAGS.KAIBA_2] = rand(2);
-				flags[kFLAGS.KAIBA_3] = rand(4);
-				flags[kFLAGS.KAIBA_4] = rand(3);
-				flags[kFLAGS.KAIBA_5] = rand(3);
-
-				//Racial perk daily effect Area
+				//Kaiba daily buy limit refresh
+				if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) player.removeStatusEffect(StatusEffects.KaibaDailyLimit);
 
 				//Player overheat is intensifying
 				if (player.statusEffectv1(StatusEffects.Overheat) == 1) {
@@ -1806,6 +1799,24 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.HP = Math.round(player.HP);
 				player.setVehicle(VehiclesLib.NOTHING);
 				inventory.takeItem(vehicles.GOBMPRI, null);
+				needNext = true;
+			}
+			if (player.vehiclesName == "Giant Slayer Mech" && (player.elfScore() >= 11 || player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE)) { //Elf OR Taller than 4 ft or having wings/tail
+				if (player.elfScore() >= 11) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
+				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 || player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) {
+					var RHP:Number = 1;
+					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) RHP += 0.25;
+					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) RHP += 0.5;
+					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) RHP += 0.75;
+					if (player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) RHP += 0.25;
+					if (player.hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) RHP += 0.5;
+					if (player.hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) RHP += 0.75;
+					player.HP /= RHP;
+				}
+				player.HP = Math.round(player.HP);
+				player.setVehicle(VehiclesLib.NOTHING);
+				inventory.takeItem(vehicles.GS_MECH, null);
 				needNext = true;
 			}
 			if (player.vehiclesName == "Howling Banshee Mech" && player.tallness < 84) {

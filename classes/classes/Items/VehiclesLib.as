@@ -16,6 +16,7 @@ package classes.Items
 		
 		public const GOBMALP:GoblinMechAlpha = new GoblinMechAlpha();
 		public const GOBMPRI:GoblinMechPrime = new GoblinMechPrime();
+		public const GS_MECH:GiantSlayerMech = new GiantSlayerMech();
 		public const HB_MECH:HowlingBansheeMech = new HowlingBansheeMech();
 		
 		public function VehiclesLib() 
