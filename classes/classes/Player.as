@@ -12351,7 +12351,8 @@ use namespace CoC;
 				//else maxLevel += 48;
 			//}
 			//else {
-				maxLevel += level;
+				if (level < 18) maxLevel += level;
+				else maxLevel += 18;
 			//}
 			return maxLevel;
 		}

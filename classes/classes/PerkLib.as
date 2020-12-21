@@ -3389,9 +3389,9 @@ public class PerkLib
 		public static const MinotaurCumResistance:PerkType = mk("Minotaur Cum Resistance", "Minotaur Cum Resistance",
 				"You can never become a Minotaur Cum Addict. Grants immunity to Minotaur Cum addiction.");
 		public static const NaturalHerbalism:PerkType = mk("Natural herbalism", "Natural herbalism",
-			"Gain three times as many herbs and items from gathering and crafting. Poultice heals for 50% more. Gain alchemist experience faster.");
+				"Gain three times as many herbs and items from gathering and crafting. Poultice heals for 50% more. Gain herbalism experience faster.");
 		public static const Necromancy:PerkType = mk("Necromancy", "Necromancy",
-				"Black magic effectiveness is increased by 50%. Soulforce regenerate passively by 2%.");//, Hex and Necromancy		 and recharge 1 round faster\
+				"Black magic effectiveness is increased by 50%. Soulforce regenerate passively by 2%.");//, Hex and Necromancy		 and recharge 1 round faster
 		public static const NinetailsKitsuneOfBalance:PerkType = mk("Nine-tails Kitsune of Balance", "Nine-tails Kitsune of Balance",
 				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  You tread narrow path between corruption and true enlightment maintaining balance that allow to fuse both sides powers.",null,true);
 		public static const Oviposition:PerkType = mk("Oviposition", "Oviposition",

@@ -6,6 +6,8 @@ package classes.Scenes.Areas.Bog
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Areas.GlacialRift.GlacialFemaleTroll;
+	import classes.Scenes.Areas.GlacialRift.GlacialMaleTroll;
 	
 	public class TrollScenes extends BaseContent
 	{
@@ -13,7 +15,7 @@ package classes.Scenes.Areas.Bog
 		public function TrollScenes() 
 		{
 		}
-		
+		//Corrupted Male Troll
 		public function encounterAdultMaleTroll():void {
 			clearOutput();
 			outputText("As you are wandering through the bog you are suddenly halted by a noise very near. You turn around and see a large man leaping towards you. You barely have enough time to dodge him as he tumbles in front of you, quickly springing up to his feet. His physique is supported by a very muscular build and his face is adorned with tusks jutting from his mouth, he seems very agitated. ");
@@ -125,9 +127,9 @@ package classes.Scenes.Areas.Bog
 			else player.createStatusEffect(StatusEffects.TrollDefeatsCounter, 1, 0, 0, 0);
 			cleanupAfterCombat();
 		}
-		
+		//Corrupted Female Troll
 		public function encounterAdultFemaleTroll():void {
-			clearOutput();//\"<i></i>\"
+			clearOutput();
 			outputText("As you are wandering through the bog you are suddenly halted by a noise very near. You turn around and see a large woman leaping towards you. You barely have enough time to dodge her as she tumbles in front of you, quickly springing up to her feet. Her physique is supported by a very muscular build and her face is adorned with tusks jutting from her mouth, she seems very agitated. It doesn’t take long before you notice her lusty gaze towards you and her nether lips dripping beads of lubricant. She is definitely corrupt and if you’re not careful you may be her next victim.\n\n");
 			startCombat(new CorruptedFemaleTroll());
 		}
@@ -194,7 +196,6 @@ package classes.Scenes.Areas.Bog
 			doNext(cleanupAfterCombat);
 		}
 		public function encounterAdultFemaleTrollWon():void {
-			clearOutput();
 			if (player.hasCock()) {
 				outputText("She inspects your body, copping a feel from in between your legs. She smiles in satisfaction when her fingers grace your erection.\n\n");
 				outputText("She quickly removes your [armor] before throwing you onto your back. You lie helplessly before her as she straddles you. She spends a moment aligning the tip of your length with her twat, gently fingering your tip. You try to hump her in desperation, she smiles, getting the reaction she wanted before slowly dropping herself onto your prick.\n\n");
@@ -204,6 +205,134 @@ package classes.Scenes.Areas.Bog
 				player.sexReward("vaginalFluids","Dick");
 			}
 			else outputText("She inspects your body, trying to cop a feel from in between your legs. She sighs dejectly when she finds your lack of a penis. She rifles through your gem pouch before leaving you alone in the bog.\n\n");
+			cleanupAfterCombat();
+		}
+		//Glacial Male Troll
+		public function encounterAdultGlacialMaleTroll():void {
+			clearOutput();
+			outputText("As you are wandering through the glacial rift you are suddenly halted by the sound of footsteps crunching in the snow. You turn around and see a large man leaping towards you. You barely have enough time to dodge her as he tumbles around the snow with you. The man gives you a hostile snarl as you shake him off before the both of you enter a combat stance.\n\n");
+			startCombat(new GlacialMaleTroll());
+		}
+		public function encounterAdultGlacialMaleTrollLost():void {
+			clearOutput();
+			outputText("The troll falls to the snow, "+(monster.HP < 1 ? "wounded from combat and unable to fight any longer":"too turned on to fight as he falls to the snow on his back, gently stroking his length")+".\n\n");
+			outputText("You inspect the large troll, he’s tall, easily over 9 feet, with an intimidating physique. He is large and bearish, covered head to toe in soft fur. You consider if you want to take advantage of him right now.\n\n");
+			menu();
+			if (player.hasVagina()) addButton(1, "Female Rape", encounterAdultGlacialMaleTrollLostFemaleRape);
+			else addButtonDisabled(1, "Female Rape", "You need a vagina for this scene.");
+			if (player.hasCock()) addButton(2, "Anal Rape", encounterAdultGlacialMaleTrollLostAnalRape);
+			else addButtonDisabled(2, "Anal Rape", "You need a penis for this scene.");
+			addButton(3, "Leave", encounterAdultGlacialMaleTrollLostLeave);
+		}
+		public function encounterAdultGlacialMaleTrollLostFemaleRape():void {
+			clearOutput();
+			outputText("It sure is cold right now, and now you have a large, hunkish glacial troll to huddle against all to yourself. You get close to him before you remove your [armor]. You straddle him as the troll growls in disgust, but he is too weak to fight back. You spend a moment undressing him, allowing your [skin] to make contact with his warm body. His fur is so comforting, it’s a welcome respite from the cold.\n\n");
+			outputText("You lie upon the burly troll as you align his length with your netherlips. His strong arms reflexively reach up and wrap around you, further protecting you from the cold. You gyrate your hips on him as he slowly bucks into you. You almost wish you could spend your time like this forever curled up with him.\n\n");
+			outputText("You slowly move down his manhood as he fills up your vagina. So warm, so inviting, it’s almost addicting. His hands wrapped tightly against you suddenly take control, grabbing your hips and lifting you up and down his cock. You go with his actions, unable to resist his strength, he’s your only solace now from the bitter cold. You press yourself tighter against him, hugging him tightly as he pumps into you while pulling you down onto his length.\n\n");
+			player.cuntChange(20,true,true,false);
+			outputText("He grunts aggressively as you feel pressure building up, you’re so close now, you need more. You bounce up against him even more, but he stays at the same pace. You cry out as your orgasm hits, coating his manhood in girlcum"+(player.hasCock() ? " as you shoot ropes of cum on his chest":"")+".\n\n");
+			outputText("He wraps his hands around your back, locking you down onto his chest as he thrusts into you even harder. You moan softly as he groans loudly, shooting waves and waves of seed directly into your womb. He doesn’t stop, still pumping into you. You couldn’t hope to contain all the cum he’s unloading into you. After at least a minute of his continuous orgasm he finally slows down. His grasp on you relaxes as he passes out from exhaustion.\n\n");
+			outputText("You could almost fall asleep within his soft, fuzzy embrace, still safe from the cold. You know it’s unwise to stay with him, your legs are shaky, but you manage.\n\n");
+			outputText("You pick up your [armor] and head back to your camp.\n\n");
+			player.sexReward("cum","Vaginal");
+			doNext(cleanupAfterCombat);
+		}
+		public function encounterAdultGlacialMaleTrollLostAnalRape():void {
+			clearOutput();
+			outputText("You look down at the burly troll lying down. You can’t resist the opportunity to take such an amazing ass.\n\n");
+			outputText("You strip out of your [armor], just enough to unveil your [penis]. You tell him to bend over as you kneel behind him. He doesn’t even put up a fight after the beating you gave him. You take a firm grasp on his muscular rear before undressing him, giving you a full view of his firm ass. Once readied, you allow yourself to penetrate him.\n\n");
+			outputText("You slowly begin pumping into him, holding him as tightly as possible, so that you’re warmed up by his fur. He releases a soft moan as you press deeper into his backdoor. He reaches his hand to his length as he jerks himself off in tandem with your thrusts.\n\n");
+			outputText("You can feel his sphincter clench around your shaft as you continue railing him. You feel your shaft begin to twitch as you near your own orgasm. His backdoor is desperately trying to coax you to finish, he is desperate for this. You moan loudly as you finally orgasm, shooting waves of spunk into him.\n\n");
+			outputText("The troll groans as he slumps down to the snow, exhausted from the beating you gave him. You quickly clean yourself up as you pick up your [armor] and take your leave.\n\n");
+			player.sexReward("Default","Dick",true,false);
+			doNext(cleanupAfterCombat);
+		}
+		public function encounterAdultGlacialMaleTrollLostLeave():void {
+			clearOutput();
+			outputText("You decide it’s best not to mess with him and take your business elsewhere.\n\n");
+			doNext(cleanupAfterCombat);
+		}
+		public function encounterAdultGlacialMaleTrollWon():void {
+			if (rand(4) == 0) {
+				outputText("The troll eyes your form, narrowing his gaze as if he’s thinking about something.\n\n");
+				if (player.hasVagina()) {
+					outputText("You look up as the troll approaches you, making quick work of your [armor], quickly tearing it off of you and inspecting your body. Upon seeing your vagina he gives you a taunting grin as he pins you to the ground, grabbing hold onto your wrists, keeping you locked within his grasp, unable to escape from beneath him.\n\n");
+					outputText("He places his torso against your body, you squirm beneath him but to no avail, he’s too strong for you. His length has been erect for some time now, he wastes no time aligning himself with your sex before penetrating you. His manhood presses into your tight snatch, gently stretching out your walls. He feels so big inside you as he presses deeper, bucking into you.\n\n");
+					player.cuntChange(20,true,true,false);
+					outputText("You submit to his dominance, wrapping your [legs] around his waist. He continues grinding against you, your face smothered into his fuzzy chest. You spend several minutes trapped beneath you, it seems like there’s no end to his stamina. You’re ashamed that you’re getting off to him, but it doesn’t take long before you feel a familiar pressure build up within your loins. You tense up, trying to resist, but your body craves more. You moan softly and he responds with a low growl. Your [legs] squeeze onto him, holding on for dear life as your climax finally hits. ");
+					outputText("You cry out in pleasure as you clench around his manhood, trying to coax him to cum as well, desperate for his seed.\n\nYou can feel his length begin to twitch as he thrusts into you with further aggression. His soft growls become a tremendous howl as he finally cums into you. He looks down at you with a satisfied grin before releasing his grip on you and standing back up, leaving you alone in the snow.\n\n");
+					player.sexReward("cum","Vaginal");
+				}
+				else {
+					outputText("You look up as the burly troll approaches you, making quick work of your [armor], quickly tearing it off of you and inspecting your body. Seeing your lack of a vagina, he clicks his tongue as he turns you around onto your back and positions himself behind you.\n\n");
+					outputText("He kneels behind you, grabbing hold of your hips as he pulls your rear up to his throbbing manhood. He lines himself against your hole before every so slowly thrusting himself into you. All 10 inches of him are thrusted into you again and again as he uses you like his personal toy.\n\n");
+					player.buttChange(20,true,true,false);
+					outputText("You can’t help yourself, there’s something uncanny about him that makes you crave more. You groan beneath him as your body is slowly rocked from his thrusts. You squirm in pleasure, but his dense hands keep you locked in place beneath him as he growls softly at you. His pounding becomes more frantic as he steadily reaches his climax, you can feel yourself reaching the edge as well.\n\n");
+					outputText("The troll leans down further, his stomach pressed against your back, completely wrapping you within his arms as he pumps into you with tremendous vigor, you cry in delight as you finally orgasm"+(player.hasCock()?", shooting ropes of cum all over the ground beneath you":"")+". He keeps pounding away at you, thrusting with firm strokes, letting loose a low growl. Finally, after what feels like hours he cums into you with a tremendous howl.\n\n");
+					outputText("The troll sighs softly as he drops you to the snow, having lost most of his interest in you, getting what he wanted.\n\n");
+					player.sexReward("cum","Anal");
+				}
+			}
+			else outputText("The troll scoffs.\n\n\"<i>Stay. out…</i>\" he grumbles before leaving.");
+			cleanupAfterCombat();
+		}
+		//Glacial Female Troll
+		public function encounterAdultGlacialFemaleTroll():void {
+			clearOutput();
+			outputText("As you are wandering through the glacial rift you are suddenly halted by the sound of footsteps crunching in the snow. You turn around and see a large woman leaping towards you. You barely have enough time to dodge her as she tumbles around the snow with you. The woman gives you a hostile snarl as you shake her off before the both of you enter a combat stance.\n\n");
+			startCombat(new GlacialFemaleTroll());
+		}
+		public function encounterAdultGlacialFemaleTrollLost():void {
+			clearOutput();
+			outputText("The troll falls to the ground, "+(monster.HP < 1 ? "wounded from combat and unable to fight any longer":"too turned on to fight as she falls to the ground, face on the ground, rubbing her breasts slowly")+".\n\n");
+			outputText("You look at her prone form and consider what you want to do with her.\n\n");
+			menu();
+			if (player.hasCock()) {
+				addButton(1, "Rape", encounterAdultGlacialFemaleTrollLostRape);
+				addButton(2, "Anal Rape", encounterAdultGlacialFemaleTrollLostAnalRape);
+			}
+			else {
+				addButtonDisabled(1, "Rape", "You need a penis for this scene.");
+				addButtonDisabled(2, "Anal Rape", "You need a penis for this scene.");
+			}
+			addButton(4, "Leave", encounterAdultGlacialFemaleTrollLostLeave);
+		}
+		public function encounterAdultGlacialFemaleTrollLostRape():void {
+			clearOutput();
+			outputText("You approach the troll, slipping her armor off much to her dismay, but she’s too weak to fend you off. Eventually her entire body is on display for you"+(player.isNaked()?"":" as you take the time to disrobe yourself as well")+".\n\n");
+			outputText("Her stout body is quite a sight, you figure that you better give her what she wants. You kneel down before her as you align your tip with her entry before finally thrusting in. She coos as you enter. Her legs wrap around your body as you position your arms by her side. You continue thrusting into her for a few minutes. She takes in a sharp breath as her grip around you tightens, her walls tighten as she keeps you close. She is getting close to the edge. You feel your length begin to throb within her as well. ");
+			outputText("She takes in another breath as she cums, girlcum leaking over your manhood as you thrust away into her. You moan as you finally hit your limits. She tries to milk your dick of everything it has to offer as you unload your seed into her womb. She passes out from exhaustion from the act.\n\n");
+			outputText("Once you’re done you stand up, picking up your [armor] before you rifle through her pockets.\n\n");
+			player.sexReward("vaginalFluids","Dick");
+			doNext(cleanupAfterCombat);
+		}
+		public function encounterAdultGlacialFemaleTrollLostAnalRape():void {
+			clearOutput();
+			outputText("You’re not letting her go that easily, perhaps a different course of action is in order here. You move beside her, undressing her much to her dismay, but she’s too weak to fight back."+(player.isNaked()?"":" You take the time to taunt her, slowly undressing yourself before her.")+"\n\n");
+			outputText("She yelps at your sudden intrusion before taking a sharp breath. She starts rocking her body, pressing her behind against your crotch, trying to fit more of you inside her. Her sphincter contracts around your length, testing your limits as she squeezes around you with everything she has. It doesn’t take long before you can feel yourself nearing the edge, your manhood starts throbbing as you get closer and you thrust inter her with greater force. ");
+			outputText("Sensing your imending orgams, she bucks against you harder, desperate for your length. Finally you cum inside her, waves of spunk are shot into her rear as you calm down and clean yourself up. You let her drop to the ground, but she doesn’t seem satisfied. You shrug, it’s not your problem.\n\n");
+			outputText("You pick up your [armor] and leave her alone in the snow.\n\n");
+			player.sexReward("Default","Dick",true,false);
+			doNext(cleanupAfterCombat);
+		}
+		public function encounterAdultGlacialFemaleTrollLostLeave():void {
+			clearOutput();
+			outputText("You decide not to mess with her and return to your [camp].\n\n");
+			doNext(cleanupAfterCombat);
+		}
+		public function encounterAdultGlacialFemaleTrollWon():void {
+			if (rand(4) == 0) {
+				if (player.hasCock()) {
+					outputText("She inspects your body, copping a feel from in between your legs. She smiles in satisfaction when her fingers grace your erection.\n\n");
+					outputText("She quickly removes your [armor] before throwing you onto your back. You lie helplessly before her as she straddles you. She spends a moment aligning the tip of your length with her twat, gently fingering your tip. You try to hump her in desperation, she smiles, getting the reaction she wanted before slowly dropping herself onto your prick.\n\n");
+					outputText("You squirm beneath her, but she leaves you locked in place underneath her strong legs. You can’t resist any longer and just succumb to her desires. Her pace is agonizingly slow. You try to buck into her, but when you move she grabs you by the neck, pinning you down until you get the idea that she’s the one in control. You struggle to breathe as she keeps a firm grasp over you.\n\n");
+					outputText("You soon feel your length begin to twitch as you near your orgasm. Sensing your impending climax she bounces on you with a little more force, trying to fit every last inch of your manhood inside her.\n\n");
+					outputText("She breathes sharply before you feel her girlcum splatter across your prick, further lubing you up. You groan as your orgasm finally hits, waves and waves of your spunk jet inside of her awaiting walls. She finally lets go of your neck and you pass out from exhaustion.\n\n");
+					player.sexReward("vaginalFluids","Dick");
+				}
+				else outputText("She inspects your body, trying to cop a feel from in between your legs. She sighs dejectly when she finds your lack of a penis. She rifles through your gem pouch before leaving you alone in the snow.\n\n");
+			}
+			else outputText("\"<i>Don’t come back,</i>\" she snarls before leaving.");
 			cleanupAfterCombat();
 		}
 	}

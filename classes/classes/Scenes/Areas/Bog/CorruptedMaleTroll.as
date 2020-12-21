@@ -104,7 +104,7 @@ import classes.internals.*;
 			this.weaponVerb="punch";
 			this.armorName = "green fuzz";
 			this.bonusHP = 350;
-			this.bonusLust = 10;
+			this.bonusLust = 231;
 			this.lust = 20;
 			this.lustVuln = .7;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
@@ -117,7 +117,5 @@ import classes.internals.*;
 			this.createPerk(PerkLib.TrollResistance, 0, 0, 0, 0);
 			checkMonster();
 		}
-		
 	}
-
 }

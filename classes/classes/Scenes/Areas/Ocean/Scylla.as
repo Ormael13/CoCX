@@ -103,8 +103,8 @@ public class Scylla extends Monster
 			this.weaponVerb="slash";
 			this.weaponAttack = 86;
 			this.armorName = "thick skin";
-			this.armorDef = 52;
-			this.armorMDef = 26;
+			this.armorDef = 104;
+			this.armorMDef = 52;
 			this.bonusHP = 5000;
 			this.bonusLust = 420;
 			this.lust = 20;

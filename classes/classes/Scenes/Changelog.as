@@ -131,7 +131,7 @@ package classes.Scenes
 			outputText("-New Blood Spell: Blood Missiles - learned from Red Manuscript. Cost 50 health. Deal magic dmg and have cooldown of 2 turns.\n");//and deal AoE ice dmg and stun enemies for 5 turns. Have 1 turn channel time and cooldown of 12 turns.
 			outputText("-New Blood Spell: Blood Explosion - learned from Red Manuscript. Cost 200 health. Deal AoE magic dmg and have cooldown of 3 turns.\n");
 			outputText("-Added Large Group-type enemy perk for large monsters groups (if description say about having above 20 it would be then considered large group). And so some of monsters advanced to not be just Group but Large Group. Compared to bonuses form Group type enemy boosts those enemies gets is 10x instead of 5x.\n");
-			outputText("-Oni race now could reach 3rd stage of bonuses (+150% to Str racial multi, +90% to Tou racial multi, -30% to Int racial multi, +60% to Wis racial multi) and been called Elder Oni on app screen.\n");
+			outputText("-Oni race now could reach 3rd stage of bonuses (+150% to Str racial multi, +90% to Tou racial multi, -30% to Int racial multi, +60% to Wis racial multi) and been called Elder Oni on appearance screen.\n");
 			outputText("-New armor (by Ormael): Light Ayo Armor - buyable at Serena shop in HXD after reaching Soul Apprentice. Cost 5600 gems. Req. 20+ str/spe to put on. Unpowered it grants 36 armor / 6 resistance and lower str/spe by 10. Powered it grants 60 armor / 10 resistance and giving +10% to str/spe multi.\n");
 			outputText("-New armor (by Ormael): Heavy Ayo Armor - buyable at Serena shop in HXD after reaching Soul Personage. Cost 14000 gems. Req. 40+ str/spe to put on. Unpowered it grants 72 armor / 12 resistance and lower str/spe by 20. Powered it grants 120 armor / 20 resistance and giving +20% to str/spe multi.\n");
 			outputText("-New armor (by Ormael): HB armor - buyable at Kaiba shop in Tel'Adre. Cost 28800 gems. Req. 60+ str/spe to put on. Unpowered it grants 60 armor / 48 resistance and lower str/spe by 30. Powered it grants 100 armor / 80 resistance and giving +18%/+60% to str/spe multi. Increase melee/range weapon damage of Howling Banshee Mech/Other non goblin mechs by 50%/25%.\n");
@@ -141,6 +141,12 @@ package classes.Scenes
 			outputText("-New enemies possible to encounter during Blight Ridge exploration: Corrupted Basic Flesh Golem - lvl 35, Corrupted Basic Flesh Golem - lvl 36.\n");
 			outputText("-New underwear (upper) (by Ormael): HB shirt - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems, 4 armor / 3 resistance, reduces fire/ice/electric damage taken by 10%, increase soulforce stored and usable by ayo armor by 350 and increase melee/range weapon damage of Howling Banshee Mech/Other non goblin mechs by 10%/5%.\n");
 			outputText("-New underwear (lower) (by Ormael): HB shorts - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems, 4 armor / 3 resistance, reduces fire/ice/electric damage taken by 10%, increase soulforce stored and usable by ayo armor by 350 and increase melee/range weapon damage of Howling Banshee Mech/Other non goblin mechs by 10%/5%.\n");
+			outputText("-New enemies possible to encounter during Glacial Rift exploration: Glacial Troll (Male or Female) - lvl 94\n");
+			outputText("-Yuki Onna at Glacial Rift got her level rised form 40 to 71 (that included buff to most of her stats).\n");
+			outputText("-New area to discover: Defile Ravine - home of demon enemies like: Cow Succubus (level 45), Mino Incubus (lvl 46), Corrupted Improved Golem(s) (lvl 59(61))\n");
+			outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			outputText("-Herbalism lvl cap been set on 20. Also some of herb crafting got a bit lower req. for herbalism level. And herbalism level will reset on ascension like tease level.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -157,12 +163,6 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New enemies possible to encounter during Bog exploration: Glacial Troll (Male or Female) - lvl (70-100)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -177,13 +177,13 @@ package classes.Scenes
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");//New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies. Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			outputText("-\n");//
 			//outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. ");
 			//outputText("When used with any ayo armor it would increase soulforce drain from armor by 60 units, increase soulforce stored and usable by ayo armor by 1,000 and boost mech meele/range weapon damage by 25%. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");
 			outputText("-Fixed bugs: Bugfixes / Typo fixing by Pyromania & Liadri, Luna event not happening in forest after PC fire her at first Full Moon event conclusion, some minor errors in calculation and display bonuses for kitsunes, some of Slave Excellia scenes sending back to Fixed Excellia, game ocassionaly incorrectly desc monsters in combat due to forced PC gender setting, returning from any type of minion setting ");
 			outputText("in middle of combat been treated as new turn, Zenji Food option not always resetting, soultraining ring not been accounted for when cultivating, Akbal lust victory not showing any post combat options sometimes, some of enemies like hellhoud been seen as valid target for tailpeg unique sex scene, Yara's Piercing Studio Rare menu Back button not sending back even to main menu, green slime able to lower it ");
 			outputText("lust below 0, Drider Incubus Anal sex giving PC imps pregnancy, bunny herm scenes on plains still TF-ing PC despite been undead/gargoyle, goblin ale huminizing effect not taking into account PC resistance to been TF'd, missing fatigue cost check on Money Strike, Diana not able to level up after joining camp, Many Birds soulskill dealing damage twice, some of attacks incorrect texts, some enemy perks ");
-			outputText("been wrong labeled as player perks in few specials/attacks, eastern bunny perk bugging free balls mutation slot\n\n");/*ostatni punkt changelogu
+			outputText("been wrong labeled as player perks in few specials/attacks, eastern bunny perk bugging free balls mutation slot, able to fuck Tamani daughters without having cock, certain Beast Warrior perks not allowing cast Charge Weapon or Charge Armor with all other req. meet\n\n");/*ostatni punkt changelogu
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");

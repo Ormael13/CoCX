@@ -9,6 +9,8 @@ import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.DefiledRavine.CowSuccubus;
+import classes.Scenes.Areas.DefiledRavine.MinoIncubus;
 import classes.Scenes.Dungeons.Factory;
 import classes.Scenes.UniqueSexScenes;
 
@@ -20,11 +22,16 @@ import classes.Scenes.UniqueSexScenes;
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function DemonScene() 
-		{
-			
-		}
+		{}
 		
-		//CowSuccubus
+		//MinoIncubus
+		
+		public function MinoIncubusEncounter():void {
+			clearOutput();
+			outputText("As you wander in the ravine, from behind one of trees ahead comes out a purple skinned person covered in fur.  When he is approaching closer you can clearly see his horse dick hangging free.  Looks like this minotaur went to the dark side of Mareth.  \"<i>Tasty soul in you I can feel.  Give it to me!</i>\" he directly command with a manly voice.  Look like there is no way around it, you ready your [weapon] for the fight.");
+			startCombat(new MinoIncubus());
+			doNext(playerMenu);
+		}
 		
 		//Incubus
 		public function IncubusEncounter():void {
@@ -292,8 +299,6 @@ import classes.Scenes.UniqueSexScenes;
 				}
 		}
 		
-		//MinoIncubus
-		
 		//Omnibus
 		public function OmnibusEncounter():void {
 			clearOutput();
@@ -542,6 +547,19 @@ import classes.Scenes.UniqueSexScenes;
 					cleanupAfterCombat();
 				}
 			}
+		}
+		
+		//CowSuccubus
+		
+		public function CowSuccubusEncounter():void {
+			clearOutput();
+			outputText("As you wander in the ridge, from behind one of trees ahead comes out a blue skinned person covered in fur.  Or more to be precise a cow that felt that grass must be greener on the dark side.  When she is approaching closer despite rags covering some of her body you not notice any 'addition' at her crotch.  \"<i>A yummy soul in you I can feel.  Would you kindly give it to me?</i>\" she blurt directly.  Look like there is no way around it, you ready your [weapon] for the fight.");
+			if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Succubus!</b>")
+			}
+			startCombat(new CowSuccubus());
+			doNext(playerMenu);
 		}
 		
 		//Succubus
@@ -797,7 +815,5 @@ import classes.Scenes.UniqueSexScenes;
 		private function takeSkull():void {
 			inventory.takeItem(useables.DEMSKLL, cleanupAfterCombat);
 		}
-		
 	}
-
 }

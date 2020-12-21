@@ -183,9 +183,10 @@ package classes.Scenes.NPCs
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
+			if (flags[kFLAGS.JENIFFER_LVL_UP] >= 1 && flags[kFLAGS.JENIFFER_LVL_UP] < 4) this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			if (flags[kFLAGS.JENIFFER_LVL_UP] >= 1) {
-				this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.JENIFFER_LVL_UP] >= 2) {
 				this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);

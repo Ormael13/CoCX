@@ -94,28 +94,27 @@ public class YukiOnna extends Monster
 			this.skin.setBaseOnly({color:"pale blue"});
 			this.hairColor = "silver white";
 			this.hairLength = 25;
-			initStrTouSpeInte(85, 10, 140, 195);
-			initWisLibSensCor(165, 140, 50, 15);
+			initStrTouSpeInte(135, 24, 240, 319);
+			initWisLibSensCor(265, 240, 115, 15);
 			this.weaponName = "Icy spear";
 			this.weaponVerb="pummel";
-			this.weaponAttack = 34;
+			this.weaponAttack = 54;
 			this.armorName = "Snowy Kimono";
-			this.armorDef = 0;
-			this.armorMDef = 0;
-			this.bonusHP = 450;
-			this.bonusLust = 230;
+			this.armorDef = 10;
+			this.armorMDef = 10;
+			this.bonusHP = 1500;
+			this.bonusLust = 426;
 			this.lust = 25 + rand(15);
-			this.lustVuln = 0.46;
+			this.lustVuln = 0.36;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 40;
-			this.gems = 55 + rand(20);
+			this.level = 71;
+			this.gems = 115 + rand(20);
 			this.drop = new WeightedDrop()
 					.add(armors.BLIZZ_K, 1)
 					.add(headjewelries.SNOWFH, 1)
 					.add(consumables.QWHITED, 1)
 					.add(consumables.SNOWW_D, 5)
-					.add(consumables.WHITEIS, 5)					
-					.add(null, 5);
+					.add(consumables.WHITEIS, 5);
 			this.wings.type = Wings.LEVITATION;
 			this.wings.desc = "levitation";
 			//this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);

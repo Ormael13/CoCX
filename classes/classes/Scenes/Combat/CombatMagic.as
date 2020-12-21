@@ -31,7 +31,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function applyAutocast():void {
 		outputText("\n\n");
-		if (player.hasPerk(PerkLib.Spellsword) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(30) * spellChargeWeaponCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0 && player.weaponName != "fists") {
+		if (player.hasPerk(PerkLib.Spellsword) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(30) * spellChargeWeaponCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0 && ((player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) && player.weaponName == "fists") || player.weaponName != "fists")) {
 			spellChargeWeapon(true);
 			useMana((30 * spellChargeWeaponCostMultiplier()), 5);
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -39,7 +39,7 @@ public class CombatMagic extends BaseCombatContent {
 			spellPerkUnlock();
 			outputText("<b>Charge Weapon was autocasted succesfully.</b>\n\n");
 		}
-		if (player.hasPerk(PerkLib.Spellarmor) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0 && !player.isNaked()) {
+		if (player.hasPerk(PerkLib.Spellarmor) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0 && ((player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) && player.haveNaturalArmor() && player.isNaked()) || !player.isNaked())) {
 			spellChargeArmor(true);
 			useMana((40 * spellChargeArmorCostMultiplier()), 5);
 			flags[kFLAGS.SPELLS_CAST]++;
