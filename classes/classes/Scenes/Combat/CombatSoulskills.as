@@ -281,6 +281,36 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd = buttons.add("DeActTrance", DeactivateTranceTransformation).hint("Deactivate Trance.");
 			}
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBloodSwipe)) {
+			bd = buttons.add("Blood Swipe", bloodSwipe)
+					.hint("Blood Swipe is simple blood soulskill that will fire three red lines of blood energy from your hand.  " +
+							"\n\nBlood Cost: " + spellCostBlood(60) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(60)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodSwipe)) {
+				bd.disable("You need more time before you can cast this soulskill again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff soulskills while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBloodSwipeSF)) {
+			bd = buttons.add("Blood Swipe (SF)", bloodSwipeSF)
+					.hint("(Soulforce infused) Blood Swipe is simple blood soulskill, which was infused by small amount of soulforce to enhance it power, that will fire three red lines of blood energy from your hand.  " +
+							"\n\nBlood Cost: " + spellCostBlood(60) + "\n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
+			if ((bloodForBloodGod - 1) < spellCostBlood(60)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.soulforce < 60 * soulskillCost() * soulskillcostmulti()) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF)) {
+				bd.disable("You need more time before you can cast this soulskill again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff soulskills while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			}
+		}
 	}
 
 	public function TripleThrust():void {
@@ -1403,6 +1433,79 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		outputText(".\n\n");
 		enemyAI();
+	}
+	
+	public function bloodSwipe():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(spellCostBlood(60), false);
+		player.createStatusEffect(StatusEffects.CooldownSpellBloodSwipe,2,0,0,0);
+		outputText("You concentrate, focusing on the power of your blood before making swipe gesture with your hand. In instant three red claw-like lines leaves your hands flying toward " + monster.a + monster.short + ".\n\n");
+		var damage:Number = scalingBonusWisdom() * spellModBlood();
+		if (damage < 10) damage = 10;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		outputText(monster.capitalA + monster.short + " takes ");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	
+	public function bloodSwipeSF():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(spellCostBlood(60), false);
+		var soulforcecost:Number = 60 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		player.soulforce -= soulforcecost;
+		player.createStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF,3,0,0,0);
+		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you you infuse a bit of soulforce into the blood, before making swipe gesture with your hand. In instant three red claw-like lines, with soulfroce infused blood, leaves your hands flying toward " + monster.a + monster.short + ".\n\n");
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 3;
+		if (damage < 10) damage = 10;
+		//soulskill mod effect
+		damage *= soulskillPhysicalMod();
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		outputText(monster.capitalA + monster.short + " takes ");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
 	}
 	/*
 	 //Mantis Omni Slash (AoE attack) - przerobić to na soulskilla zużywającego jak inne soulforce z rosnącym kosztem im wyższy lvl postaci ^^ owinno wciąż jakoś być powiązane z posiadaniem mantis arms czy też ulepszonych mantis arms (czyt. versji 2.0 tych ramion z TF bdącego soul evolution of Mantis) ^^

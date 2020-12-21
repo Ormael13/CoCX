@@ -1663,6 +1663,7 @@ use namespace CoC;
 				//addButton(3, "", ).hint("Add 1 .");
 				//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 				//addButton(5, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
+				addButton(3, "CrimsonJade", AddCrimsonJade).hint("Add 1 Crimson Jade.");
 				addButton(4, "R.Manuscript", AddRedManuscript).hint("Add 1 Red Manuscript.");
 				addButton(5, "ALICORN", AddAlicornium).hint("Add 1 Alicornium.");
 				addButton(6, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
@@ -2623,6 +2624,10 @@ use namespace CoC;
 		public function AddRedManuscript():void {
 			outputText("\n\n<b>(Gained 1 Red Manuscript!)</b>\n\n");
 			inventory.takeItem(consumables.RMANUSC, curry(NonEquipmentMenu, 1));
+		}
+		public function AddCrimsonJade():void {
+			outputText("\n\n<b>(Gained 1 Crimson Jade!)</b>\n\n");
+			inventory.takeItem(consumables.CRIMS_J, curry(NonEquipmentMenu, 1));
 		}
 		public function AddThePearls():void {
 			outputText("\n\n<b>(Gained set of items to get all perks countering Elemental Conjuer perks negative effects on stat caps!)</b>\n\n");

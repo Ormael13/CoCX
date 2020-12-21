@@ -96,6 +96,7 @@ public class SandWitch extends Monster
 					consumables.W__BOOK,
 					consumables.B__BOOK,
 					consumables.RMANUSC,
+					consumables.CRIMS_J,
 					null);
 			this.special1 = lustMagicAttack;
 			this.special2 = special2;

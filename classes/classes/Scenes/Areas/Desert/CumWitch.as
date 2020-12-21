@@ -208,6 +208,7 @@ public class CumWitch extends Monster
 					consumables.W__BOOK,
 					consumables.B__BOOK,
 					consumables.RMANUSC,
+					consumables.CRIMS_J,
 					null);
 			checkMonster();
 		}

@@ -3848,6 +3848,58 @@ public final class Mutations extends MutationsHelper {
 			}*/
 		}
 	}
+	
+	public function crimsonJade(player:Player):void {
+		clearOutput();
+        outputText("You touch the crimson jade and discover it to be an instructional on the use of blood soulskills.  The jade shares generic information about blood soulskills, generally what you'd expect anyway - how to draw it using your blood as well as the positive and negative effects of repeated use.  It doesn't take long to read all knowledger stored in jade, but before you can stow it away for later, the crystal crumbles into crimson dust. The same metallic scent lingers on your [claws], the lingering smell of blood is stained on you... at least for the time being.");
+        if (player.wis < 30) {
+            outputText("\n\nYou feel greatly enlightened by your time spent reading.");
+            KnowledgeBonus("wis", 4);
+        } else if (player.wis < 60) {
+            outputText("\n\nSpending some time reading was probably good for you, and you definitely feel wiser for it.");
+            KnowledgeBonus("wis", 2);
+        } else if (player.wis < 90) {
+            outputText("\n\nAfter reading the crimson jade your already quick mind feels invigorated.");
+            KnowledgeBonus("wis", 1);
+        } else {
+            outputText("\n\nThe contents of the jade did little for your already considerable wisdom.");
+            KnowledgeBonus("wis", 0.6);
+        }
+		if (player.hasPerk(PerkLib.WayOfTheBlood)) {
+			//Smart enough for Blood Swipe and doesnt have it
+			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodSwipe)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Swipe.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodSwipe, 0, 0, 0, 0);
+				return;
+			}/*
+			//Smart enough for  and doesnt have it
+			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
+				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for  and doesnt have it
+			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
+				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for  and doesnt have it
+			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
+				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+				return;
+			}*/
+		//}
+		//if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
+			//Smart enough for SF Infused Blood Swipe and doesnt have it
+			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBloodSwipeSF)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Swipe.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodSwipeSF, 0, 0, 0, 0);
+				return;
+			}
+		}
+	}
 
     public function lustDraft(fuck:Boolean, player:Player):void {
         player.slimeFeed();

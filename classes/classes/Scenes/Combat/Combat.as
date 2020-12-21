@@ -7557,6 +7557,20 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellBloodExplosion, 1, -1);
             }
         }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodSwipe)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodSwipe) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBloodSwipe);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBloodSwipe, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodSwipeSF) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBloodSwipeSF, 1, -1);
+            }
+        }
         //Companion Boosting PC Armor Value
         if (player.hasStatusEffect(StatusEffects.CompBoostingPCArmorValue)) player.removeStatusEffect(StatusEffects.CompBoostingPCArmorValue);
         //Elemental Aspect status effects
@@ -11253,4 +11267,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}
