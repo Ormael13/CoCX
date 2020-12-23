@@ -15,6 +15,38 @@ package classes.Scenes.Monsters
 	
 	public class CorruptedFleshGolemBasic extends AbstractFleshGolem
 	{
+		public function corruptedGolemSwordSlash():void {
+			outputText("The corrupted golem's visage twists into a grimace of irritation, and she swings her swords at you.");
+			var damage:Number = int ((str + weaponAttack) - rand(player.tou) - player.armorDef);
+			//Dodge
+			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise slash!");
+			else
+			{
+				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
+				outputText(" She slash you chest. ");
+				damage = player.takePhysDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
+			}
+		}
+		public function corruptedGolemLustAttack():void {
+			outputText("She smirks and licks her lips as she gives her cock a squeeze, milking a few beads of clear pre from the tip.  You shake your head and try to ignore your growing need.");
+			player.dynStats("lus", 10 + player.lib / 6 + player.cor / 6);
+		}
+		
+		override protected function performCombatAction():void
+		{
+			if (hasStatusEffect(StatusEffects.Provoke)) {
+				var choiceP:Number = rand(4);
+				if (choiceP < 2) eAttack();
+				if (choiceP > 1) corruptedGolemSwordSlash();
+			}
+			else {
+				var choice:Number = rand(4);
+				if (choice < 2) eAttack();
+				if (choice == 2) corruptedGolemSwordSlash();
+				if (choice == 3) corruptedGolemLustAttack();
+			}
+		}
 		
 		public function CorruptedFleshGolemBasic() 
 		{

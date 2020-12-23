@@ -25,6 +25,7 @@ import classes.Monster;
 import classes.PerkLib;
 import classes.PotionType;
 import classes.Scenes.Areas.Beach.Gorgon;
+import classes.Scenes.Areas.Bog.CorruptedMaleTroll;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
 import classes.Scenes.Areas.Desert.Naga;
 import classes.Scenes.Areas.Desert.SandTrap;
@@ -32,6 +33,7 @@ import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Forest.BeeGirl;
 import classes.Scenes.Areas.Forest.Kitsune;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
+import classes.Scenes.Areas.GlacialRift.GlacialMaleTroll;
 import classes.Scenes.Areas.GlacialRift.WinterWolf;
 import classes.Scenes.Areas.HighMountains.Basilisk;
 import classes.Scenes.Areas.HighMountains.Harpy;
@@ -1584,12 +1586,20 @@ public class Combat extends BaseContent {
 			if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
 			if (player.vehicles == vehicles.GOBMPRI) damage *= 1.5;
 		}
-        if (player.vehicles == vehicles.HB_MECH) {
-			if (player.armor == armors.HBARMOR) damage *= 1.5;
-			if (player.headJewelry == headjewelries.HBHELM) damage *= 1.2;
-            if (player.upperGarment == undergarments.HBSHIRT) damage *= 1.05;
-            if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.05;
-			if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) damage *= 1.25;
+		if (player.isInNonGoblinMech()) {
+			if (player.vehicles == vehicles.HB_MECH) {
+				if (player.armor == armors.HBARMOR) damage *= 1.5;
+				if (player.headJewelry == headjewelries.HBHELM) damage *= 1.2;
+				if (player.upperGarment == undergarments.HBSHIRT) damage *= 1.1;
+				if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.1;
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) damage *= 1.25;
+			}
+			else {
+				if (player.armor == armors.HBARMOR) damage *= 1.2;
+				if (player.headJewelry == headjewelries.HBHELM) damage *= 1.1;
+				if (player.upperGarment == undergarments.HBSHIRT) damage *= 1.05;
+				if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.05;
+			}
 		}
         //Bonus sand trap damage!
         if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
@@ -1793,9 +1803,27 @@ public class Combat extends BaseContent {
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.TrollHold)) {
             clearOutput();
-            outputText("You don’t feel motivated, something about his strong arms and soothing fur is getting to you, it’s not so bad once you really sink into him.");
-			outputText("\n\nHe leans in close to you, sniffing you intently as he gives you a long lick across your cheek.");
-			var licklust:Number = (monster.inte / 5) + rand(10);
+			if (player.statusEffectv1(StatusEffects.TrollHold) >= 2) {
+                outputText("As you squirm around in his grasp, he lifts you over his head before slamming you directly into the ground. ");
+				if (player.hasPerk(PerkLib.Resolute)) outputText("You quickly spring to your feet, ready to continue fighting. ");
+				else {
+					outputText("You’re seeing stars as you try to shake yourself from the brutal throw. ");
+					player.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+				}
+				player.removeStatusEffect(StatusEffects.TrollHold);
+				var throwDMG:Number = monster.eBaseDamage() * 2;
+				player.takePhysDamage(throwDMG, true);
+                return;
+            }
+			if (monster as GlacialMaleTroll) {
+				outputText("You don’t feel motivated, something about his big, strong arms and soothing fur is getting to you, granting you safety from the cold.");
+				player.addStatusValue(StatusEffects.TrollHold, 1, 1);
+			}
+            if (monster as CorruptedMaleTroll) {
+				outputText("You don’t feel motivated, something about his strong arms and soothing fur is getting to you, it’s not so bad once you really sink into him.");
+				outputText("\n\nHe leans in close to you, sniffing you intently as he gives you a long lick across your cheek.");
+			}
+            var licklust:Number = (monster.inte / 5) + rand(10);
 			licklust = Math.round(licklust);
 			player.dynStats("lus", licklust, "scale", false);
             skipMonsterAction = true;
@@ -1974,16 +2002,33 @@ public class Combat extends BaseContent {
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.TrollHold)) {
 			clearOutput();
-			if (rand(3) == 0 || rand(80) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
+			if (player.statusEffectv1(StatusEffects.TrollHold) >= 2) {
+                outputText("As you squirm around in his grasp, he lifts you over his head before slamming you directly into the ground. ");
+				if (player.hasPerk(PerkLib.Resolute)) outputText("You quickly spring to your feet, ready to continue fighting. ");
+				else {
+					outputText("You’re seeing stars as you try to shake yourself from the brutal throw. ");
+					player.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+				}
+				player.removeStatusEffect(StatusEffects.TrollHold);
+				var throwDMG:Number = monster.eBaseDamage() * 2;
+				player.takePhysDamage(throwDMG, true);
+                return;
+            }
+			else if (rand(3) == 0 || rand(80) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
                 outputText("You squirm violently, trying to shake out of his grasp. You break free of his grasp, pushing him away, disorienting him for a moment.");
                 player.removeStatusEffect(StatusEffects.TrollHold);
-            } else {
-				outputText("The troll clutches onto you tighter as you are pulled deeper into his embrace. Your struggles seem to be in vain as he pokes your body with his pre-leaking erection. The warm fluid makes you flush reflexively, but you cannot give in!");
+            }
+			else {
+				if (monster as GlacialMaleTroll) {
+					outputText("You squirm violently, trying to shake out of his grasp. He maintains a fierce grip on you.");
+					player.addStatusValue(StatusEffects.TrollHold, 1, 1);
+				}
+				if (monster as CorruptedMaleTroll) outputText("The troll clutches onto you tighter as you are pulled deeper into his embrace. Your struggles seem to be in vain as he pokes your body with his pre-leaking erection. The warm fluid makes you flush reflexively, but you cannot give in!");
                 player.takePhysDamage(7 + rand(5));
 				var licklust:Number = (monster.inte / 5) + rand(10) + player.statusEffectv3(StatusEffects.TrollHold);
 				licklust = Math.round(licklust);
 				player.dynStats("lus", licklust, "scale", false);
-				player.addStatusValue(StatusEffects.TrollHold, 3, 1);
+				if (monster as CorruptedMaleTroll) player.addStatusValue(StatusEffects.TrollHold, 3, 1);
 			}
             skipMonsterAction = true;
 		} else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
@@ -2338,12 +2383,20 @@ public class Combat extends BaseContent {
             else if (player.weaponRangeAttack >= 101 && player.weaponRangeAttack < 151) damage *= (3.75 + ((player.weaponRangeAttack - 100) * 0.02));
             else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
             else damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
-			if (player.vehicles == vehicles.HB_MECH) {
-				if (player.armor == armors.HBARMOR) damage *= 1.5;
-				if (player.headJewelry == headjewelries.HBHELM) damage *= 1.2;
-                if (player.upperGarment == undergarments.HBSHIRT) damage *= 1.05;
-                if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.05;
-				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) damage *= 1.25;
+			if (player.isInNonGoblinMech()) {
+				if (player.vehicles == vehicles.HB_MECH) {
+					if (player.armor == armors.HBARMOR) damage *= 1.5;
+					if (player.headJewelry == headjewelries.HBHELM) damage *= 1.2;
+					if (player.upperGarment == undergarments.HBSHIRT) damage *= 1.1;
+					if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.1;
+					if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) damage *= 1.25;
+				}
+				else {
+					if (player.armor == armors.HBARMOR) damage *= 1.2;
+					if (player.headJewelry == headjewelries.HBHELM) damage *= 1.1;
+					if (player.upperGarment == undergarments.HBSHIRT) damage *= 1.05;
+					if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.05;
+				}
 			}
             if (damage == 0) {
                 if (monster.inte > 0) {
@@ -3736,6 +3789,26 @@ public class Combat extends BaseContent {
             if (player.lowerBody == LowerBody.FLOWER_LILIRAUNE || player.lowerBody == LowerBody.PLANT_FLOWER) {
                 outputText("You lash at your opponent with your many vines striking twele times.");
                 ExtraNaturalWeaponAttack(6);
+            }
+
+            //Unique TENTACLES STRIKES
+            if ((player.isScylla() || player.isKraken()) && player.tallness >= 70){
+                if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
+                    outputText("You raise your tentacles and begin to violently slam them against your opponent as if you were trying to wreck a ship.");
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                    if(player.isKraken()){
+                        ExtraNaturalWeaponAttack(1.5);
+                        ExtraNaturalWeaponAttack(1.5);
+                    }
+                    outputText("\n");
+                }
             }
         }
         // Do all other attacks
@@ -6684,7 +6757,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.KissOfDeath)) {
             //Effect
-            outputText("Your lips burn with an unexpected flash of heat.  They sting and burn with unholy energies as a puff of ectoplasmic gas escapes your lips.  That puff must be a part of your soul!  It darts through the air to the succubus, who slurps it down like a delicious snack.  You feel feverishly hot and exhausted...\n\n");
+            outputText("Your lips burn with an unexpected flash of heat.  They sting and burn with unholy energies as a puff of ectoplasmic gas escapes your lips.  That puff must be a part of your soul!  It darts through the air to [monster a] [monster name], who slurps it down like a delicious snack.  You feel feverishly hot and exhausted...\n\n");
             dynStats("lus", 5);
             player.takePhysDamage(15);
         }
@@ -7482,6 +7555,20 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownSpellBloodExplosion);
             } else {
                 player.addStatusValue(StatusEffects.CooldownSpellBloodExplosion, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodSwipe)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodSwipe) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBloodSwipe);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBloodSwipe, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodSwipeSF) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBloodSwipeSF, 1, -1);
             }
         }
         //Companion Boosting PC Armor Value
@@ -10367,7 +10454,7 @@ public class Combat extends BaseContent {
             return;
         }
         if (monster.hasStatusEffect(StatusEffects.AlrauneRunDisabled)) {
-            if (player.hasKeyItem("Torch")){
+            if (player.hasKeyItem("Torch") < 0){
                 clearOutput();
                 outputText("You burn away the vines and run for it, much to the frustration of the [monster name]. You’re thankful that she’s this slow.\n");
                 inCombat = false;

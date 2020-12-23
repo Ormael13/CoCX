@@ -110,7 +110,5 @@ import classes.internals.*;
 			this.createPerk(PerkLib.TrollResistance, 0, 0, 0, 0);
 			checkMonster();
 		}
-		
 	}
-
 }

@@ -826,7 +826,8 @@ public function soularena():void {
 			//addButton(5, "Gaunlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");gdzieś tam tu dodać grupowe tylko walki dające na pierwszej walce oblokowanie perków do powiekszania drużyny
 			addButton(7, "LvL 24 Gargoyle (F)", arenaSelection,GargoyleFBasic).hint("Gargoyle (F) LVL 24 (axe-tail)");
 			addButton(8, "LvL 24 Gargoyle (M)", arenaSelection,GargoyleMBasic).hint("Gargoyle (M) LVL 24 (mace-tail)");
-			addButton(9, "-2-", soularenaChallengeSubpages, page + 1);
+			addButton(9, "Golemancer", arenaSelection,Jeniffer).hint("Golemancer goblin.");
+			//addButton(9, "-2-", soularenaChallengeSubpages, page + 1);
 			addButton(10, "LvL 33 Golems", arenaSelection,GolemsBasic).hint("Basic Golems LVL 33");
 			addButton(11, "LvL 42 Golems", arenaSelection,GolemsImproved).hint("Improved Golems LVL 42");
 			addButton(12, "LvL 51 Golems", arenaSelection, GolemsAdvanced).hint("Advanced Golems LVL 51");
@@ -834,7 +835,7 @@ public function soularena():void {
 		}
 		if (page == 2) {
 			//addButton(0, "Kitty", arenaSelection, Veronika);
-			addButton(1, "Golemancer", arenaSelection,Jeniffer).hint("Golemancer goblin");
+			addButton(1, "Golemancer", arenaSelection,Jeniffer).hint("Golemancer goblin.");
 			addButton(2, "AyotechManiac", arenaSelection,Jinx).hint("Crazy girl wearing lots of belts... err ayoteach weapons.");
 			//addButton(5, "Macho Mander", arenaSelection,Syth);
 			//addButton(6, "Miss Mander", arenaSelection,Asuka);

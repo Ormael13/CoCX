@@ -1624,11 +1624,11 @@ use namespace CoC;
 				addButton(2, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
 				addButton(3, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
 				addButton(4, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
-				//addButton(5, "UH Ayo Arm", AddUltraHeavyAyoArmor).hint("Add 1 Ultra heavy Ayo Armor for testing purposes.");
+				addButton(5, "UH Ayo Arm", AddUltraHeavyAyoArmor).hint("Add 1 Ultra heavy Ayo Armor for testing purposes.");
 				//6
-				//7
-				addButton(8, "HB Mech", AddHBMech).hint("Add 1 Howling Banshee Mech for testing purposes.");
-				addButton(9, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
+				addButton(7, "HB Mech", AddHBMech).hint("Add 1 Howling Banshee Mech for testing purposes.");
+				addButton(8, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
+				addButton(9, "GiantSlayerMech", AddGiantSlayerMech).hint("Add 1 Giant Slayer Mech for testing purposes.");
 				//10
 				addButton(11, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
 				addButton(12, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
@@ -1663,6 +1663,7 @@ use namespace CoC;
 				//addButton(3, "", ).hint("Add 1 .");
 				//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 				//addButton(5, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
+				addButton(3, "CrimsonJade", AddCrimsonJade).hint("Add 1 Crimson Jade.");
 				addButton(4, "R.Manuscript", AddRedManuscript).hint("Add 1 Red Manuscript.");
 				addButton(5, "ALICORN", AddAlicornium).hint("Add 1 Alicornium.");
 				addButton(6, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
@@ -1793,7 +1794,7 @@ use namespace CoC;
 		}
 		public function AddUltraHeavyAyoArmor():void {
 			outputText("\n\n<b>(Gained 1 Ultra Heavy Ayo Armor!)</b>\n\n");
-			inventory.takeItem(armors.LAYOARM, curry(EquipmentMenu, 1));
+			inventory.takeItem(armors.UHAYOARM, curry(EquipmentMenu, 1));
 		}
 		public function AddHBMech():void {
 			outputText("\n\n<b>(Gained 1 Howling Banshee Mech!)</b>\n\n");
@@ -1801,6 +1802,10 @@ use namespace CoC;
 		}
 		public function AddGoblinMechPrime():void {
 			outputText("\n\n<b>(Gained 1 Goblin Mech Prime!)</b>\n\n");
+			inventory.takeItem(vehicles.GOBMPRI, curry(EquipmentMenu, 1));
+		}
+		public function AddGiantSlayerMech():void {
+			outputText("\n\n<b>(Gained 1 Giant Slayer Mech!)</b>\n\n");
 			inventory.takeItem(vehicles.GOBMPRI, curry(EquipmentMenu, 1));
 		}
 		public function AddTheEvelyn():void {
@@ -2619,6 +2624,10 @@ use namespace CoC;
 		public function AddRedManuscript():void {
 			outputText("\n\n<b>(Gained 1 Red Manuscript!)</b>\n\n");
 			inventory.takeItem(consumables.RMANUSC, curry(NonEquipmentMenu, 1));
+		}
+		public function AddCrimsonJade():void {
+			outputText("\n\n<b>(Gained 1 Crimson Jade!)</b>\n\n");
+			inventory.takeItem(consumables.CRIMS_J, curry(NonEquipmentMenu, 1));
 		}
 		public function AddThePearls():void {
 			outputText("\n\n<b>(Gained set of items to get all perks countering Elemental Conjuer perks negative effects on stat caps!)</b>\n\n");

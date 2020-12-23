@@ -27,6 +27,18 @@ use namespace CoC;
 			flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE]++;
 			if (player.cor < 66) dynStats("cor", 1);
 			
+			//Discover Blight Ridge
+			if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && rand(3) == 0 && player.level >= 36) {
+				player.explored++;
+				clearOutput();
+				outputText("As you tread through Blight Ridge, you come across a small valley, one you've never noticed before. Where does this place go? How deep does the valley go? Judging by the usual inhabitants of this place, it's not implausible to assume that it would be nothing but more demons up to no good.\n\n");
+				outputText("You pause for a moment, debating if you should go into the valley.\n\n");
+				menu();
+                addButton(1, "Venture forth", findDefiledRavineYes);
+                addButton(3, "Fall back", findDefiledRavineNo);
+				return;
+			}
+			
 			//Dart pistol
 			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
 				partsofDartPistol();
@@ -124,6 +136,18 @@ use namespace CoC;
 					dynStats("lib", .5);
 					doNext(camp.returnToCampUseOneHour);
 			}
+		}
+		
+		public function findDefiledRavineYes():void {
+			outputText("What's the worst that could happen? Treading through the valley, the faint sound of flowing water hits your ears. The sound is quickly followed by the scent of sweat, milk and semen. This is not unlike the usual smells you get in the Blight Ridge, but it's far more condensed and sour here. One step closer to the source.\n\n");
+			outputText("<b>You've discovered the Defiled Ravine!</b>");
+			flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] = 1;
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		
+		public function findDefiledRavineNo():void {
+			outputText("Not everything needs to be your problem anyway. Who knows what could happen if you stick your face into somewhere it doesn't belong.\n\n");
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function partsofDartPistol():void {

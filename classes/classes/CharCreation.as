@@ -3616,6 +3616,8 @@ import coc.view.MainView;
 			player.level = 0;
 			player.teaseLevel = 0;
 			player.teaseXP = 0;
+			player.herbalismLevel = 0;
+			player.herbalismXP = 0;
 			player.statPoints = 0;
 			player.perkPoints = 0;
 			player.XP = 0;

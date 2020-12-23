@@ -31,7 +31,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function applyAutocast():void {
 		outputText("\n\n");
-		if (player.hasPerk(PerkLib.Spellsword) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(30) * spellChargeWeaponCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0 && player.weaponName != "fists") {
+		if (player.hasPerk(PerkLib.Spellsword) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(30) * spellChargeWeaponCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0 && ((player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons) && player.weaponName == "fists") || player.weaponName != "fists")) {
 			spellChargeWeapon(true);
 			useMana((30 * spellChargeWeaponCostMultiplier()), 5);
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -39,7 +39,7 @@ public class CombatMagic extends BaseCombatContent {
 			spellPerkUnlock();
 			outputText("<b>Charge Weapon was autocasted succesfully.</b>\n\n");
 		}
-		if (player.hasPerk(PerkLib.Spellarmor) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0 && !player.isNaked()) {
+		if (player.hasPerk(PerkLib.Spellarmor) && player.lust < getWhiteMagicLustCap() && player.mana >= (spellCostWhite(40) * spellChargeArmorCostMultiplier()) && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0 && ((player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) && player.haveNaturalArmor() && player.isNaked()) || !player.isNaked())) {
 			spellChargeArmor(true);
 			useMana((40 * spellChargeArmorCostMultiplier()), 5);
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -112,10 +112,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) costPercent -= 10;
-		if (player.hasPerk(PerkLib.WayOfTheBlood)) costPercent -= 10;
-		if (player.hasPerk(PerkLib.YourPainMyPower)) costPercent -= 10;
-		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) costPercent -= 5;
+		if (player.hasPerk(PerkLib.WayOfTheBlood)) costPercent -= 5;
+		if (player.hasPerk(PerkLib.YourPainMyPower)) costPercent -= 5;
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) costPercent -= 5
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
@@ -360,10 +360,10 @@ public class CombatMagic extends BaseCombatContent {
 	internal function spellModBloodImpl():Number {
 		var mod:Number = 0;
 		mod += spellModImpl();
-		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) mod += .2;
-		if (player.hasPerk(PerkLib.WayOfTheBlood)) mod += .2;
-		if (player.hasPerk(PerkLib.YourPainMyPower)) mod += .2;
-		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) mod += .2;
+		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) mod += .1;
+		if (player.hasPerk(PerkLib.WayOfTheBlood)) mod += .1;
+		if (player.hasPerk(PerkLib.YourPainMyPower)) mod += .1;
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) mod += .1;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -1418,7 +1418,7 @@ public class CombatMagic extends BaseCombatContent {
 		HPChange(spellCostBlood(50), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodMissiles,2,0,0,0);
 		if(handleShell()){return;}
-		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, "+(player.HP < player.maxOverHP() ? "wounds":"skin pores")+". Around you form a few crimson spheres you aim at " + monster.a + monster.short + " !\n\n");
+		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, "+(player.HP < player.maxOverHP() ? "wounds":"skin pores")+". Around you form a few crimson spheres you aim at " + monster.a + monster.short + "!\n\n");
 		var damage:Number = scalingBonusIntelligence() * spellModBlood();
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!
@@ -2985,6 +2985,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.armorPerk == "Heavy") a12b *= 3;
 		if (player.armorPerk == "Light Ayo") a12b *= 4;
 		if (player.armorPerk == "Heavy Ayo") a12b *= 5;
+		if (player.armorPerk == "Ultra Heavy Ayo") a12b *= 7.5;
 		return a12b;
 	}
 	

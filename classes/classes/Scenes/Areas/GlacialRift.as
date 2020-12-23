@@ -50,11 +50,12 @@ use namespace CoC;
 			choice[choice.length] = 3; //Winter Wolf
 			choice[choice.length] = 4; //Ice True Golems
 			choice[choice.length] = 5; //Snow Lily
-			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && flags[kFLAGS.TOOK_GOO_ARMOR] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 6; //Valeria
-			if (rand(3) == 0) choice[choice.length] = 7; //Freebie items!
-			if (rand(15) == 0) choice[choice.length] = 8; //Ornate Chest or cache of gems/pile of stones
-			if (player.faceType == Face.WOLF && player.ears.type == Ears.WOLF && player.arms.type == Arms.WOLF && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0) choice[choice.length] = 9; //Fenrir ruined shrine
-			choice[choice.length] = 10; //Find nothing!
+			choice[choice.length] = 6; //Glacial Troll (M & F variants)
+			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && flags[kFLAGS.TOOK_GOO_ARMOR] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 7; //Valeria
+			if (rand(3) == 0) choice[choice.length] = 8; //Freebie items!
+			if (rand(15) == 0) choice[choice.length] = 9; //Ornate Chest or cache of gems/pile of stones
+			if (player.faceType == Face.WOLF && player.ears.type == Ears.WOLF && player.arms.type == Arms.WOLF && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0) choice[choice.length] = 10; //Fenrir ruined shrine
+			choice[choice.length] = 11; //Find nothing!
 			
 			//DLC april fools
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
@@ -137,7 +138,11 @@ use namespace CoC;
 						alrauneScene.alrauneGlacialRift();
 					}
 					break;
-				case 6: //Find Valeria! She can be found there if you rejected her offer initially at Tower of the Phoenix or didn't find her. She can never be Lost Forever.
+				case 6:
+					if (rand(2) == 0) SceneLib.trollScene.encounterAdultFemaleTroll();
+					else SceneLib.trollScene.encounterAdultMaleTroll();
+					break;
+				case 7: //Find Valeria! She can be found there if you rejected her offer initially at Tower of the Phoenix or didn't find her. She can never be Lost Forever.
 					spriteSelect(79);
 					flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] = 1;
 					clearOutput();
@@ -146,7 +151,7 @@ use namespace CoC;
 					addButton(0, "Fight", fightValeria);
 					addButton(1, "Submit", SceneLib.valeria.pcWinsValeriaSparDefeat, true);
 					break;
-				case 7: //Find Aria of item!
+				case 8: //Find Aria of item!
 					clearOutput();/*
 					if (rand(2) == 0) {
 						SceneLib.ariaScene.MelkieEncounter();
@@ -163,7 +168,7 @@ use namespace CoC;
 						}
 					//}
 					break;
-				case 8: //Find ornate chest!
+				case 9: //Find ornate chest!
 					if (player.hasKeyItem("Camp - Ornate Chest") < 0) {
 						var gemsFound:int = 400 + rand(400);
 						outputText("While you're minding your own business, you spot an ornately-decorated chest somewhat buried in the snow. You walk on the snowy grounds you finally reach the chest. As you open the chest, you find " + String(gemsFound) + " gems inside the chest! You pocket the gems and haul the chest home. It looks nice and would make a good storage.");
@@ -206,7 +211,7 @@ use namespace CoC;
 					}
 					doNext(camp.returnToCampUseOneHour);
 					break;
-				case 9: //Fenrir ruined shrine!
+				case 10: //Fenrir ruined shrine!
 					clearOutput();
 					if (flags[kFLAGS.FENRIR_COLLAR] == 1) {
 						outputText("On your way to the glacial rift you find your way back to the temple again and the menacing voice of Fenrir echoes.");

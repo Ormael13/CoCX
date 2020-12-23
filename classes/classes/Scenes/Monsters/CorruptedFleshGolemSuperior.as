@@ -14,7 +14,7 @@ package classes.Scenes.Monsters
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.SceneLib;
 	
-	public class CorruptedFleshGolemSuperior extends AbstractFleshGolem
+	public class CorruptedFleshGolemSuperior extends CorruptedFleshGolemsBasic
 	{
 		
 		public function CorruptedFleshGolemSuperior() 
@@ -45,7 +45,7 @@ package classes.Scenes.Monsters
 			this.bonusHP = 350;
 			this.lust = 30;
 			this.bonusLust = 186;
-			this.lustVuln = .5;
+			this.lustVuln = .2;
 			this.level = 36;
 			this.additionalXP = 350;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

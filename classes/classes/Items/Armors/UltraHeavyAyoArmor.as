@@ -2,32 +2,32 @@
  * ...
  * @author Ormael
  */
-package classes.Items.Armors
+package classes.Items.Armors 
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.ItemType;
 	import classes.Items.Armor;
 	import classes.Player;
 
-	public class HBArmor extends Armor {
+	public class UltraHeavyAyoArmor extends Armor {
 		
-		public function HBArmor() {//160 * armor + mres
-			super("HBArmor","HBArmor","HB armor","a HB armor",100,80,28800,"This white suit of armor is more than just platemail - it was reverse engineered from almost intact armor of elf-like offworlder. It protective properties would increase as long user is capable to feed it on regular basis with soulforce.","Light Ayo");
+		public function UltraHeavyAyoArmor() {//150 * armor + mres
+			super("UHAyoArm","UHAyoArm","ultra heavy ayo armor","an ultra heavy ayo armor",180,30,31500,"This suit of armor is more than typical heavy armor - it have added pieces of Ayo Tech that increase by a large margin it properties as long user is capable to feed it on regular basis with soulforce.","Ultra Heavy Ayo");
 		}
 		
 		override public function get def():Number { 
-			if (game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) return 100;
-			else return 60;
+			if (game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) return 180;
+			else return 108;
 		}
 		
 		override public function get mdef():Number { 
-			if (game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) return 80;
-			else return 48;
+			if (game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) return 30;
+			else return 18;
 		}
 		
 		override public function playerEquip():Armor {
 			var oldHPratio:Number = game.player.hp100/100;
-			game.player.buff("Ayo Armor").addStats( {"str": -30, "spe": -30} );
+			game.player.buff("Ayo Armor").addStats( {"str": -50, "spe": -50} );
 			game.player.HP = oldHPratio*game.player.maxHP();
 			return super.playerEquip();
 		}
@@ -45,11 +45,10 @@ package classes.Items.Armors
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.str >= 60 && game.player.spe >= 60 && game.player.tallness >= 84) {
+			if (game.player.str >= 100 && game.player.spe >= 100) {
 				return true;
 			}
-			if (game.player.tallness < 84) outputText("You aren't tall enough to wear this armor!  ");
-			else outputText("You aren't strong and agile enough to wear this armor!  Unless you likes to move slower than snail and hit weaked than wet noddle!  ");
+			outputText("You aren't strong and agile enough to wear this armor!  Unless you likes to move slower than snail and hit weaked than wet noddle!  ");
 			return false;
 		}
 	}

@@ -203,8 +203,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Ayo Armors SF drain
 			if (player.isInAyoArmor() && flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) {
 				if (player.armor == armors.LAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
-				if (player.armor == armors.HBARMOR) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 80;
 				if (player.armor == armors.HAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 120;
+				if (player.armor == armors.UHAYOARM) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 240;
+				if (player.armor == armors.HBARMOR) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 180;
 				if (player.vehicles == vehicles.HB_MECH) {
 					/*if (upgrade 1) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= ?40?;
 					else */flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
@@ -213,8 +214,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.buff("Ayo Armor").remove();
 					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
 					outputText("\nYour ayo armor power reserves reached bottom. With a silent hiss armor depowers itself making you feel slower and heavier.\n");
-					if (player.armor == armors.LAYOARM || player.armor == armors.HBARMOR) player.buff("Ayo Armor").addStats( {"str": -10, "spe": -10} );
+					if (player.armor == armors.LAYOARM) player.buff("Ayo Armor").addStats( {"str": -10, "spe": -10} );
 					if (player.armor == armors.HAYOARM) player.buff("Ayo Armor").addStats( {"str": -20, "spe": -20} );
+					if (player.armor == armors.UHAYOARM) player.buff("Ayo Armor").addStats( {"str": -50, "spe": -50} );
+					if (player.armor == armors.HBARMOR) player.buff("Ayo Armor").addStats( {"str": -30, "spe": -30} );
 					EngineCore.statScreenRefresh();
 					needNext = true;
 				}
@@ -905,13 +908,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					ZenjiScenes.ZenjiFood = false;
 				}
 
-				//Kaiba shor stock daily update
-				flags[kFLAGS.KAIBA_1] = rand(3);
-				flags[kFLAGS.KAIBA_2] = rand(4);
-				flags[kFLAGS.KAIBA_3] = rand(2);
-				flags[kFLAGS.KAIBA_4] = rand(4);
-
-				//Racial perk daily effect Area
+				//Kaiba daily buy limit refresh
+				if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) player.removeStatusEffect(StatusEffects.KaibaDailyLimit);
 
 				//Player overheat is intensifying
 				if (player.statusEffectv1(StatusEffects.Overheat) == 1) {
@@ -1803,6 +1801,24 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				inventory.takeItem(vehicles.GOBMPRI, null);
 				needNext = true;
 			}
+			if (player.vehiclesName == "Giant Slayer Mech" && (player.elfScore() >= 11 || player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE)) { //Elf OR Taller than 4 ft or having wings/tail
+				if (player.elfScore() >= 11) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
+				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 || player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) {
+					var RHP:Number = 1;
+					if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) RHP += 0.25;
+					if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) RHP += 0.5;
+					if (player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) RHP += 0.75;
+					if (player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) RHP += 0.25;
+					if (player.hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) RHP += 0.5;
+					if (player.hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) RHP += 0.75;
+					player.HP /= RHP;
+				}
+				player.HP = Math.round(player.HP);
+				player.setVehicle(VehiclesLib.NOTHING);
+				inventory.takeItem(vehicles.GS_MECH, null);
+				needNext = true;
+			}
 			if (player.vehiclesName == "Howling Banshee Mech" && player.tallness < 84) {
 				outputText("You aren't tall enough to properly use this vehicle anymore.\n\n");
 				var oldHPratio:Number = player.hp100/100;
@@ -2577,7 +2593,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					LunaFollower.Nursed = false;
 				}
 			}
-			if (isNightTime && !camp.IsWaitingResting){
+			//Luna mooning reset
+			if (LunaFollower.Sated) {
+				LunaFollower.SatedCooldown -= 1
+				if (LunaFollower.SatedCooldown == 0)
+				{
+					LunaFollower.Sated = false;
+				}
+			}
+			if (isNightTime && !camp.IsWaitingResting && !LunaFollower.Sated){
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && (flags[kFLAGS.LUNA_JEALOUSY] >= 400 || flags[kFLAGS.LUNA_FOLLOWER] > 6) && player.gender > 0 && player.hasStatusEffect(StatusEffects.LunaWasWarned) && !player.hasStatusEffect(StatusEffects.LunaOff)) {
 					LunaFullMoonScene = true;
 					return true;
@@ -2604,7 +2628,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 
 			if (LunaFullMoonScene){
-				SceneLib.lunaFollower.fullMoonEvent(true);
+				if (camp.IsSleeping)
+				{
+					SceneLib.lunaFollower.fullMoonEvent();
+				}
+				else
+				{
+					SceneLib.lunaFollower.fullMoonEvent(true);
+				}
 				LunaFullMoonScene = false;
 				return true;
 			}

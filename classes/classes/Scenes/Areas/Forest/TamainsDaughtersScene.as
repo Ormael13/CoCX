@@ -140,7 +140,6 @@ private function playDumbToTamanisDaughters():void {
 	spriteSelect(57);
 	clearOutput();
 	outputText("You shrug and ask, \"<i>What exactly is it you want again?  I'm not sure you have the right " + player.mf("guy","person") + ".</i>\"\n\n");
-	
 	//approx 33% chance at 0 int, going up the smarter you are.
 	if(player.inte/2 + 25 > rand(75)) {
 		outputText("The leader looks you up and down for a moment.  Her face slowly contorts to puzzlement, then rage, \"<i>Tammi you ditz!  I thought you said this was his trail?  Come on girls, we've got a dad to hunt.</i>\"\n\n");
@@ -148,13 +147,15 @@ private function playDumbToTamanisDaughters():void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	
 	outputText("The leader stamps her foot in a fit of rage.  It would be more imposing if she wasn't three feet tall... Her eyes lock onto your crotch and she says, \"<i>Last chance.   We're getting our ");
 	if(flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS] == 1) outputText("first ");
 	outputText("litters one way or another!</i>\"\n\n");
-	
 	//[Fuck them] [Fight] [Let them have their way with you]
-	simpleChoices("Fuck Them", fuckYoDaughtersHomie, "Fight", fightTamanisDaughters, "", null, "Let Them", legTamanisDaughtersRAEPYou, "", null);
+	menu();
+	if (player.hasCock()) addButton(0, "Fuck Them", fuckYoDaughtersHomie);
+	else addButtonDisabled(0, "Fuck Them", "You not have cock.");
+	addButton(2, "Fight", fightTamanisDaughters);
+	addButton(4, "Let Them", legTamanisDaughtersRAEPYou);
 }
 
 //[Fight Them]

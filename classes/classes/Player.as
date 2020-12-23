@@ -645,6 +645,12 @@ use namespace CoC;
 				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 20;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 30;
 			}
+			if (vehiclesName == "Giant Slayer Mech") {
+				armorDef += 10;
+				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 20;
+				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 30;
+				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 40;
+			}
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorDef += 15;
 				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 8;
@@ -821,15 +827,21 @@ use namespace CoC;
 			if (headjewelryName == "HB helmet") armorMDef += 4;
 			if (vehiclesName == "Goblin Mech Alpha") {
 				armorMDef += 10;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) armorMDef += 5;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) armorMDef += 10;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) armorMDef += 15;
+				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorMDef += 5;
+				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorMDef += 10;
+				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorMDef += 15;
 			}
 			if (vehiclesName == "Goblin Mech Prime") {
 				armorMDef += 20;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 1.0") >= 0) armorMDef += 10;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 2.0") >= 0) armorMDef += 20;
-				if (hasKeyItem("Blueprint - Upgraded Armor plating 3.0") >= 0) armorMDef += 30;
+				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorMDef += 10;
+				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorMDef += 20;
+				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorMDef += 30;
+			}
+			if (vehiclesName == "Giant Slayer Mech") {
+				armorMDef += 10;
+				if (hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) armorMDef += 20;
+				if (hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) armorMDef += 30;
+				if (hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) armorMDef += 40;
 			}
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorMDef += 15;
@@ -907,7 +919,7 @@ use namespace CoC;
 				|| tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL
 				|| tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM
 				|| lowerBody == LowerBody.NAGA);}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasPerk(PerkLib.MorphicWeaponry) || isAlraune());}
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasPerk(PerkLib.MorphicWeaponry) || isAlraune() || isScylla() || isKraken());}
 		//Some other checks
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
@@ -1023,12 +1035,12 @@ use namespace CoC;
 		//Is in Ayo armor
 		public function isInAyoArmor():Boolean
 		{
-			return armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo";
+			return armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo" || armorPerk == "Ultra Heavy Ayo";
 		}
 		//Is in goblin mech
 		public function isInGoblinMech():Boolean
 		{
-			return vehicles == game.vehicles.GOBMALP || vehicles == game.vehicles.GOBMPRI;
+			return vehicles == game.vehicles.GOBMALP || vehicles == game.vehicles.GOBMPRI || vehicles == game.vehicles.GS_MECH;
 		}
 		//Is using goblin mech friendly firearms
 		public function isUsingGoblinMechFriendlyFirearms():Boolean
@@ -8413,7 +8425,9 @@ use namespace CoC;
 				scyllaCounter++;
 			if (faceType != Face.HUMAN)
 				scyllaCounter--;
-			if (eyes.type == Eyes.KRAKEN)
+			if (hairType == Hair.NORMAL)
+				scyllaCounter++;
+			if (eyes.type == Eyes.KRAKEN || eyes.type == Eyes.HUMAN)
 				scyllaCounter++;
 			if (ears.type == Ears.ELFIN)
 				scyllaCounter++;
@@ -8434,6 +8448,10 @@ use namespace CoC;
 			if (InCollection(eyes.colour, krakenEyeColor))
 				scyllaCounter++;
 			if (tallness > 96)
+				scyllaCounter++;
+			if (wings.type > Wings.NONE)
+				scyllaCounter+=2;
+			if (hasVagina() && (vaginaType() == VaginaClass.SCYLLA))
 				scyllaCounter++;
 			if (findPerk(PerkLib.InkSpray) >= 0)
 				scyllaCounter++;
@@ -12333,7 +12351,8 @@ use namespace CoC;
 				//else maxLevel += 48;
 			//}
 			//else {
-				maxLevel += level;
+				if (level < 18) maxLevel += level;
+				else maxLevel += 18;
 			//}
 			return maxLevel;
 		}

@@ -15,6 +15,41 @@ package classes.Scenes.Monsters
 	
 	public class CorruptedFleshGolemsBasic extends AbstractFleshGolem
 	{
+		public function corruptedGolemsSwordSlash():void {
+			outputText("The corrupted golems visage twists into a grimace of irritation, and few of them swings their swords at you.");
+			var damage:Number = int (((str + weaponAttack) * 2) - rand(player.tou) - player.armorDef);
+			//Dodge
+			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise slashes!");
+			else
+			{
+				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
+				outputText(" They slash you from a few different angles. ");
+				damage = player.takePhysDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
+				damage = player.takePhysDamage(damage, true);
+			}
+		}
+		public function corruptedGolemsLustAttack():void {
+			outputText("Two of them smirks and licks their lips while gives their cocks a squeeze, milking a few beads of clear pre from the tip.  You shake your head and try to ignore your growing need.");
+			player.dynStats("lus", 20 + player.lib / 3 + player.cor / 3);
+		}
+		
+		override protected function performCombatAction():void
+		{
+			if (hasStatusEffect(StatusEffects.Provoke)) {
+				var choiceP:Number = rand(4);
+				if (choiceP < 2) eAttack();
+				if (choiceP > 1) corruptedGolemsSwordSlash();
+			}
+			else {
+				var choice:Number = rand(4);
+				if (choice < 2) eAttack();
+				if (choice == 2) corruptedGolemsSwordSlash();
+				if (choice == 3) corruptedGolemsLustAttack();
+			}
+		}
 		
 		public function CorruptedFleshGolemsBasic() 
 		{

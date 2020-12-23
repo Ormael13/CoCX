@@ -287,21 +287,23 @@ use namespace CoC;
 			clearOutput();
 			var currentArmorSFDrainrate:Number = 0;
 			if (player.armor == armors.LAYOARM) currentArmorSFDrainrate += 60;
-			if (player.armor == armors.HBARMOR) currentArmorSFDrainrate += 80;
 			if (player.armor == armors.HAYOARM) currentArmorSFDrainrate += 120;
+			if (player.armor == armors.UHAYOARM) currentArmorSFDrainrate += 240;
+			if (player.armor == armors.HBARMOR) currentArmorSFDrainrate += 180;
 			if (player.vehicles == vehicles.HB_MECH) {
 				/*if (upgrade 1) currentArmorSFDrainrate += ?40?;
 				else */currentArmorSFDrainrate += 60;
 			}
 			maxSFCapacity = 0;
 			if (player.armor == armors.LAYOARM) maxSFCapacity += 1500;
-			if (player.armor == armors.HBARMOR) {
-				maxSFCapacity += 2000;
-				if (player.headJewelry == headjewelries.HBHELM) maxSFCapacity += 400;
-			}
 			if (player.armor == armors.HAYOARM) maxSFCapacity += 3000;
-			if (player.upperGarment == undergarments.HBSHIRT) maxSFCapacity += 150;
-			if (player.lowerGarment == undergarments.HBSHORT) maxSFCapacity += 150;
+			if (player.armor == armors.UHAYOARM) maxSFCapacity += 6000;
+			if (player.armor == armors.HBARMOR) {
+				maxSFCapacity += 4500;
+				if (player.headJewelry == headjewelries.HBHELM) maxSFCapacity += 900;
+			}
+			if (player.upperGarment == undergarments.HBSHIRT) maxSFCapacity += 350;
+			if (player.lowerGarment == undergarments.HBSHORT) maxSFCapacity += 350;
 			if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
 			if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
 			outputText("Currently used Ayo Armor name: "+player.armorName+"\n\n");
@@ -398,8 +400,9 @@ use namespace CoC;
 			player.buff("Ayo Armor").remove();
 			outputText("You pressing button placed on side of chest part of armor, activating it. With a silent hiss armor activate making you feel faster and stronger."+(silly()?" You have come here to chew bubblegum and kick ass...and you're all out of bubblegum.":"")+"");
 			if (player.armor == armors.LAYOARM) player.buff("Ayo Armor").addStats( {"str.mult":0.10, "spe.mult":0.10} );
-			if (player.armor == armors.HBARMOR) player.buff("Ayo Armor").addStats( {"str.mult":0.06, "spe.mult":0.20} );
 			if (player.armor == armors.HAYOARM) player.buff("Ayo Armor").addStats( {"str.mult":0.20, "spe.mult":0.20} );
+			if (player.armor == armors.UHAYOARM) player.buff("Ayo Armor").addStats( {"str.mult":0.40, "spe.mult":0.30, "tou.mult":0.10} );
+			if (player.armor == armors.HBARMOR) player.buff("Ayo Armor").addStats( {"str.mult":0.18, "spe.mult":0.60} );
 			player.HP = oldHPratio*player.maxHP();
 			statScreenRefresh();
 			doNext(AyoArmorsMaintance);

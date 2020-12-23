@@ -92,8 +92,8 @@ public class Kraken extends Monster
 			this.weaponVerb="slash";
 			this.weaponAttack = 145;
 			this.armorName = "super thick skin";
-			this.armorDef = 190;
-			this.armorMDef = 95;
+			this.armorDef = 380;
+			this.armorMDef = 190;
 			this.bonusHP = 10000;
 			this.bonusLust = 650;
 			this.lust = 20;
