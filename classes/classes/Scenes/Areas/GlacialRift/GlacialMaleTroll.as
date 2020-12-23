@@ -80,9 +80,9 @@ import classes.internals.*;
 		public function GlacialMaleTroll() 
 		{
 			this.a = "the ";
-			this.short = "glacial adult troll male";
+			this.short = "glacial troll male";
 			this.imageName = "glacialtrollmale";
-			this.long = "You are fighting what appears to be an adult troll male. He is just over 9 feet tall, covered in white fur and has a large, muscular, yet stout build. He has tusks protruding from his mouth each about 8 inches long curving upwards. Like all ice trolls, his hands and feet end in sharp claws ready to grip and tear through anything. He is wearing fur armor that conceals most of his body.";
+			this.long = "You are fighting what appears to be an glacial troll male. He is just over 9 feet tall, covered in white fur and has a large, muscular, yet stout build. He has tusks protruding from his mouth each about 8 inches long curving upwards. Like all ice trolls, his hands and feet end in sharp claws ready to grip and tear through anything. He is wearing fur armor that conceals most of his body.";
 			// this.plural = false;
 			createBreastRow(Appearance.breastCupInverse("flat"));
 			this.createCock(10, 2, CockTypesEnum.HUMAN);
@@ -100,11 +100,11 @@ import classes.internals.*;
 			this.armorMDef = 600;
 			this.skin.setBaseOnly({color:"green"});
 			this.skinDesc = "skin";
-			this.hairColor = "green";
+			this.hairColor = "white";
 			this.hairLength = 2;
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.armorName = "green fuzz";
+			this.armorName = "white fuzz";
 			this.bonusHP = 2500;
 			this.bonusLust = 480;
 			this.lust = 20;

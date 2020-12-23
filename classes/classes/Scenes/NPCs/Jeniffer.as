@@ -91,8 +91,8 @@ package classes.Scenes.NPCs
 				this.long = "You're currently fighting a golemancer controling personaly created golem called J1c. It's six feet tall with general shape of a female but lacking any fine details. It stone body is covered with thin soulmetal plates in many placed and from it looks like using spike covered fists to smash enemies. Only goblin's head isn't protected showing her green skin, pointed ears, and purple hair.";
 				createBreastRow(Appearance.breastCupInverse("A"));
 				this.tallness = 72;
-				initStrTouSpeInte(30, 60, 10, 100);
-				initWisLibSensCor(100, 10, 10, 50);
+				initStrTouSpeInte(60, 80, 40, 100);
+				initWisLibSensCor(100, 90, 50, 50);
 				this.weaponName = "spiked fists";
 				this.weaponVerb = "smash";
 				this.weaponAttack = 18;
@@ -108,8 +108,8 @@ package classes.Scenes.NPCs
 				this.short = "J2a golem";
 				this.long = "You're currently fighting a golemancer controling personaly created golem called J2a. It's twelve feet tall with general shape of a female but lacking any fine details. It stone body is covered with soulmetal plates in many placed and it looks like using lance to stab enemies.  Only goblin's head isn't protected showing her green skin, pointed ears, and purple hair.";
 				this.tallness = 144;
-				initStrTouSpeInte(35, 70, 20, 100);
-				initWisLibSensCor(100, 15, 20, 50);
+				initStrTouSpeInte(100, 120, 80, 100);
+				initWisLibSensCor(100, 100, 60, 50);
 				this.weaponAttack = 36;
 				this.armorDef = 100;
 				this.armorMDef = 100;
@@ -122,8 +122,8 @@ package classes.Scenes.NPCs
 				this.imageName = "J2Golem";
 				this.long = "You're currently fighting a golemancer controling personaly created golem called J2a. It's fourteen feet tall with general shape of a female but lacking any fine details. It stone body is covered with soulmetal plates in many placed and it looks like using lance to stab enemies.  Only goblin's head isn't protected showing her green skin, pointed ears, and purple hair.";
 				this.tallness = 168;
-				initStrTouSpeInte(35, 70, 20, 100);
-				initWisLibSensCor(100, 15, 20, 50);
+				initStrTouSpeInte(120, 140, 100, 100);
+				initWisLibSensCor(100, 110, 70, 50);
 				this.weaponAttack = 44;
 				this.armorDef = 125;
 				this.armorMDef = 125;
@@ -136,8 +136,8 @@ package classes.Scenes.NPCs
 				this.imageName = "J2Golem";
 				this.long = "You're currently fighting a golemancer controling personaly created golem called J2a. It's sixteen feet tall with general shape of a female but lacking any fine details. It stone body is covered with soulmetal plates in many placed and it looks like using lance to stab enemies.  Only goblin's head isn't protected showing her green skin, pointed ears, and purple hair.";
 				this.tallness = 192;
-				initStrTouSpeInte(35, 70, 20, 100);
-				initWisLibSensCor(100, 15, 20, 50);
+				initStrTouSpeInte(140, 160, 120, 100);
+				initWisLibSensCor(100, 120, 80, 50);
 				this.weaponAttack = 52;
 				this.armorDef = 150;
 				this.armorMDef = 150;
@@ -198,7 +198,5 @@ package classes.Scenes.NPCs
 			}
 			checkMonster();
 		}
-		
 	}
-
 }

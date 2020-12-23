@@ -73,9 +73,9 @@ import classes.internals.*;
 		public function CorruptedFemaleTroll() 
 		{
 			this.a = "the ";
-			this.short = "corrupted adult troll female";
+			this.short = "corrupted troll female";
 			this.imageName = "trollfemale";
-			this.long = "You are fighting what appears to be an adult troll female. She is nearly 7 feet tall, covered in green fuzz and has a lithe, yet slightly muscular build. She has tusks protruding from her mouth each about 5 inches long curving upwards. While most trolls are calm and relaxed, she hunches over, shaky and ready to pounce. Unlike most trolls, she has fallen into corruption, which is apparent by her lusty gaze towards you. She is completely naked. She sticks her tongue out tauntingly, her arousal is dense as her pheromones coat the air, almost blinding you with her lusty aura.";
+			this.long = "You are fighting what appears to be an corrupted troll female. She is nearly 7 feet tall, covered in green fuzz and has a lithe, yet slightly muscular build. She has tusks protruding from her mouth each about 5 inches long curving upwards. While most trolls are calm and relaxed, she hunches over, shaky and ready to pounce. Unlike most trolls, she has fallen into corruption, which is apparent by her lusty gaze towards you. She is completely naked. She sticks her tongue out tauntingly, her arousal is dense as her pheromones coat the air, almost blinding you with her lusty aura.";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_LOOSE);
 			createBreastRow(Appearance.breastCupInverse("B"));

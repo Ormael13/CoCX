@@ -77,9 +77,9 @@ import classes.internals.*;
 		public function GlacialFemaleTroll() 
 		{
 			this.a = "the ";
-			this.short = "glacial adult troll female";
+			this.short = "glacial troll female";
 			this.imageName = "glacialtrollfemale";
-			this.long = "You are fighting what appears to be an adult troll female. She is nearly 9 feet tall, covered in white hair and has a bit of heft to her weight, but she seemingly remains very agile. She has tusks protruding from her mouth each about 5 inches long curving upwards. Like all ice trolls, her hands and feet end in sharp claws ready to grip and tear through anything. She is wearing fur armor that conceals the most of her body.";
+			this.long = "You are fighting what appears to be an glacial troll female. She is nearly 9 feet tall, covered in white hair and has a bit of heft to her weight, but she seemingly remains very agile. She has tusks protruding from her mouth each about 5 inches long curving upwards. Like all ice trolls, her hands and feet end in sharp claws ready to grip and tear through anything. She is wearing fur armor that conceals the most of her body.";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_LOOSE);
 			createBreastRow(Appearance.breastCupInverse("B"));
@@ -95,11 +95,11 @@ import classes.internals.*;
 			this.armorMDef = 600;
 			this.skin.setBaseOnly({color:"green"});
 			this.skinDesc = "skin";
-			this.hairColor = "green";
+			this.hairColor = "white";
 			this.hairLength = 2;
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.armorName = "green fuzz";
+			this.armorName = "white fuzz";
 			this.bonusHP = 2500;
 			this.bonusLust = 488;
 			this.lust = 20;

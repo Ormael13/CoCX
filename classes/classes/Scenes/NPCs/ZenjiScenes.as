@@ -2582,22 +2582,25 @@ public function loverZenjiHalloweenEventEndingDryOff():void {
 public function birthScene():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
-	outputText("It's finally time, you feel yourself losing balance as your cervix begins convulsing, this baby is coming out, now! You cry in pain as you start to feel contractions as your abdominal muscles attempt to push out your child.\n\n");
-	outputText("In no time Zenji is already by your side, \"<i>¡Ay miércoles! [name]! I'm here! I can tell someting was up. The baby is coming, I can feel it.</i>\"\n\n");
-	outputText("You groan in pain, ready to give birth, hoping for a healthy child. Zenji has placed you on his bedroll, cushioned out with an assortment of different herbs.");
-	outputText("\"<i>Relax, just focus on pressing out de baby, you got dis.</i>\"\n\n");
-	outputText("You spread your legs, intent on pushing the child out.\n\n");
-	outputText("\"<i>Feel de rhythm of ya body, push with the convulsions, I know you can do dis.</i>\" Zenji's words of assurance help you concentrate.\n\n");
-	outputText("You lie down, screaming as Zenji kneels beside you, awaiting the child that you're about to bring into this world.\n\n");
-	outputText("After an hour of pain and screaming, you've finally released the child from your womb.\n\n");
-	outputText("Zenji cheers as he gently strokes your stomach, \"<i>I never doubted ya for a second [name],</i>\" he says before he cuts the umbilical cord from the baby with his tusks. \"<i>Tradition states dat de father always cuts de cord wit his tusks. I hope ya don' mind.</i>\"\n\n");
-	outputText("You're thankful he's here, but now you want to see the child you've brought into this world together.\n\n");
-	outputText("Zenji gently picks up the baby in his arms, inspecting them, \"<i>Yep, it’s a "+(!Z1stKid ? "boy":"girl")+" alright. De tusks haven't grown in yet, so it is best ta nurse dem while ya can so dey can grow big strong tusks like me.</i>\" He places your child on your chest, you pull "+(!Z1stKid ? "him":"her")+" closer so that they can latch onto you. Maternal pride overwhelms you as you begin crying tears of joy. Zenji leans down and nuzzles his face against yours, rubbing his beard affectionately against you, \"<i>Ya will be a fine mother, [name] I'm glad dat we can raise a family together… I love you [name]. Do ya know what ya wanna name dem..?</i>\"\n\n");
-	if (flags[kFLAGS.ZENJI_KIDS] > 1) doNext(applyZenjikidName2);
+	if (flags[kFLAGS.ZENJI_PROGRESS] == -1) applyZenjikidName3();
 	else {
-		mainView.nameBox.text = "";
-		menu();
-		addButton(0,"Next",applyZenjikidName);
+		outputText("It's finally time, you feel yourself losing balance as your cervix begins convulsing, this baby is coming out, now! You cry in pain as you start to feel contractions as your abdominal muscles attempt to push out your child.\n\n");
+		outputText("In no time Zenji is already by your side, \"<i>¡Ay miércoles! [name]! I'm here! I can tell someting was up. The baby is coming, I can feel it.</i>\"\n\n");
+		outputText("You groan in pain, ready to give birth, hoping for a healthy child. Zenji has placed you on his bedroll, cushioned out with an assortment of different herbs.");
+		outputText("\"<i>Relax, just focus on pressing out de baby, you got dis.</i>\"\n\n");
+		outputText("You spread your legs, intent on pushing the child out.\n\n");
+		outputText("\"<i>Feel de rhythm of ya body, push with the convulsions, I know you can do dis.</i>\" Zenji's words of assurance help you concentrate.\n\n");
+		outputText("You lie down, screaming as Zenji kneels beside you, awaiting the child that you're about to bring into this world.\n\n");
+		outputText("After an hour of pain and screaming, you've finally released the child from your womb.\n\n");
+		outputText("Zenji cheers as he gently strokes your stomach, \"<i>I never doubted ya for a second [name],</i>\" he says before he cuts the umbilical cord from the baby with his tusks. \"<i>Tradition states dat de father always cuts de cord wit his tusks. I hope ya don' mind.</i>\"\n\n");
+		outputText("You're thankful he's here, but now you want to see the child you've brought into this world together.\n\n");
+		outputText("Zenji gently picks up the baby in his arms, inspecting them, \"<i>Yep, it’s a "+(!Z1stKid ? "boy":"girl")+" alright. De tusks haven't grown in yet, so it is best ta nurse dem while ya can so dey can grow big strong tusks like me.</i>\" He places your child on your chest, you pull "+(!Z1stKid ? "him":"her")+" closer so that they can latch onto you. Maternal pride overwhelms you as you begin crying tears of joy. Zenji leans down and nuzzles his face against yours, rubbing his beard affectionately against you, \"<i>Ya will be a fine mother, [name] I'm glad dat we can raise a family together… I love you [name]. Do ya know what ya wanna name dem..?</i>\"\n\n");
+		if (flags[kFLAGS.ZENJI_KIDS] > 1) doNext(applyZenjikidName2);
+		else {
+			mainView.nameBox.text = "";
+			menu();
+			addButton(0,"Next",applyZenjikidName);
+		}
 	}
 }
 private function applyZenjikidName():void {
@@ -2643,6 +2646,17 @@ private function applyZenjikidName2():void {
 	flags[kFLAGS.ZENJI_KIDS]++;
 	outputText("Zenji gives you a gentle stare as he gently caresses your child, \"<i>Actually, Ya know... I was thinkin’, and I thought I should name dem dis time.</i>\"\n\n");
 	outputText("He scoops up your baby once they detach from your breast. \"<i>What will daddy name you?</i>\" he croons, taking his child to his nest.\n\n");
+	doNext(camp.returnToCampUseTwoHours);
+}
+private function applyZenjikidName3():void {
+	spriteSelect(SpriteDb.s_zenji);
+	clearOutput();
+	flags[kFLAGS.ZENJI_KIDS]++;
+	outputText("It's finally time for your pregnancy to come to an end. You feel yourself falling over as your cervix slowly dilates in preparation. This baby is coming out now! Your cry in pain as you start to feel the contractions as your abdominal muscles attempt to push out your child.\n\n");
+	outputText("You glance around for... for the father. Zenji... he is truly a deadbeat husband. He couldn't handle you for yourself, so he doesn't deserve to have this child.\n\n");
+	outputText("You groan in pain as you spread your legs, ready to give birth, hoping for a healthy child.\n\n");
+	outputText("After an hour of pain and screaming, you successfully give birth to your child. She is doing just fine, taking her first breath as she cries.\n\n");
+	outputText("Maternal pride overwhelms you. You manage to collect yourself enough to bring your baby to your breast to comfort her. She latches on reflexively as you take a moment to rest.\n\n");
 	doNext(camp.returnToCampUseTwoHours);
 }
 

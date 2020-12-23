@@ -874,7 +874,7 @@ public class PlayerInfo extends BaseContent {
 				interpersonStats += "<b>Zenji status:</b> Lover\n";
 				interpersonStats += "<b>Zenji Cum Production:</b> " + addComma(Math.round(1300 + player.statusEffectv2(StatusEffects.ZenjiModificationsList))) + "mL\n";
 				if (ZenjiScenes.Z1stKid != "") interpersonStats += "<b>Zenji Firstborn (Male) Name:</b> "+ZenjiScenes.Z1stKid+"\n";
-				if (ZenjiScenes.Z2ndKid != "") interpersonStats += "<b>Zenji Secondborn (Female) Name:</b> "+ZenjiScenes.Z2ndKid+"\n";
+				if (ZenjiScenes.Z2ndKid != "") interpersonStats += "<b>Zenji Secondborn (Female) Name:</b> " + ZenjiScenes.Z2ndKid + "\n";
 			}
 		}
 
@@ -1503,7 +1503,7 @@ public class PlayerInfo extends BaseContent {
 	
 	public function superPerkBuyMenu(page:int = 1):void {
 		clearOutput();
-		outputText("Placeholder\n");
+		outputText("If you meet requirements and have enough points you can pick one or more super perks.\n");
 		if (player.superPerkPoints > 0) outputText("You have "+numberOfThings(player.superPerkPoints,"super perk point","super perk points")+".\n\n");
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
@@ -1526,7 +1526,7 @@ public class PlayerInfo extends BaseContent {
 					else addButtonDisabled(2, "YPMP", "You need first to have 'Way of the Blood' super perk.");
 				}
 				//addButton(3, "MBFBP", ).hint("Choose the 'My Blood for Blood Puppies' super perk. ");
-				addButtonDisabled(3, "MBFBP", "Soon.");
+				//addButtonDisabled(3, "MBFBP", "Soon.");
 			}
 			else {
 				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this perk.");
@@ -1535,9 +1535,11 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(1, "WOTB", "You not have free super perk point to pick this super perk.");
 				if (player.hasPerk(PerkLib.YourPainMyPower)) addButtonDisabled(2, "YPMP", "You already have this perk.");
 				else addButtonDisabled(2, "YPMP", "You not have free super perk point to pick this super perk.");
-				if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) addButtonDisabled(3, "MBFBP", "You already have this perk.");
-				else addButtonDisabled(3, "MBFBP", "You not have free super perk point to pick this super perk.");
+				//if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) addButtonDisabled(3, "MBFBP", "You already have this perk.");
+				//else addButtonDisabled(3, "MBFBP", "You not have free super perk point to pick this super perk.");
 			}
+			//10 -> page + 1 button
+			//11 -> page - 1 button
 			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);
 			else addButtonDisabled(13, "Convert", "You need at least 3 perk points to convert them.");
 			addButton(14, "Back", playerMenu);
@@ -1551,7 +1553,7 @@ public class PlayerInfo extends BaseContent {
 	}
 	private function superPerkConvertMenu():void {
 		clearOutput();
-		outputText("Placeholder");
+		outputText("You sacrifice three perk points and recieve one super perk point.");
 		player.perkPoints -= 3;
 		player.superPerkPoints++;
 		doNext(superPerkBuyMenu);
@@ -1578,4 +1580,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(curry(superPerkBuyMenu, 1));
 	}
 }
-}
+}

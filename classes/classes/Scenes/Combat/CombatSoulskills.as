@@ -1440,7 +1440,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		HPChange(spellCostBlood(60), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodSwipe,2,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood before making swipe gesture with your hand. In instant three red claw-like lines leaves your hands flying toward " + monster.a + monster.short + ".\n\n");
+		outputText("You concentrate, focusing on the power of your blood before making somatic gestures with your hand. Within an instant, three red claw-like lines coalesce briefly before being shot from your hands, flying toward " + monster.a + monster.short + ".\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood();
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!

@@ -475,6 +475,18 @@ public class CombatUI extends BaseCombatContent {
 				bd.disable("You cannot use offensive spell against an opponent you cannot see or target.");
 			}
 		}
+		if (player.hasPerk(PerkLib.ElementalBolt)) {
+			bd = buttons.add("E.Bolt", combat.magic.spellElementalBolt);
+			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Elemental Bolt");
+			else bd.hint("Attempt to attack the enemy with elemental bolt.  Damage done is determined by your intelligence.", "Elemental Bolt");
+			if (player.mana < spellCost(80)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
+			} else if (player.hasStatusEffect(StatusEffects.MonsterDig)) {
+				bd.disable("You cannot use offensive spell against an opponent you cannot see or target.");
+			}
+		}
 		combat.magic.buildWhiteMenu(whiteSpellButtons);
 		combat.magic.buildBlackMenu(blackSpellButtons);
 		combat.magic.buildGreyMenu(greySpellButtons);

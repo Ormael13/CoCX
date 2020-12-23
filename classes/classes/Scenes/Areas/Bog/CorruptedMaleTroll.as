@@ -78,9 +78,9 @@ import classes.internals.*;
 		public function CorruptedMaleTroll() 
 		{
 			this.a = "the ";
-			this.short = "corrupted adult troll male";
+			this.short = "corrupted troll male";
 			this.imageName = "trollmale";
-			this.long = "You are fighting what appears to be an adult troll male. He is just over 7 feet tall, covered in green fuzz and has a lithe, yet notably muscular build. He has tusks protruding from his mouth each about 8 inches long curving upwards. While most trolls are calm and relaxed, he hunches over, shaky and ready to pounce. His tail unfurls outward toward you, almost as if it were ready to pierce you. Unlike most trolls, he has fallen into corruption, which is apparent by his lusty gaze towards you. His erection pokes towards you, you can practically feel his arousal in the air as he awaits your next move, biding his time for a chance to subdue you.";
+			this.long = "You are fighting what appears to be an corrupted troll male. He is just over 7 feet tall, covered in green fuzz and has a lithe, yet notably muscular build. He has tusks protruding from his mouth each about 8 inches long curving upwards. While most trolls are calm and relaxed, he hunches over, shaky and ready to pounce. His tail unfurls outward toward you, almost as if it were ready to pierce you. Unlike most trolls, he has fallen into corruption, which is apparent by his lusty gaze towards you. His erection pokes towards you, you can practically feel his arousal in the air as he awaits your next move, biding his time for a chance to subdue you.";
 			// this.plural = false;
 			createBreastRow(Appearance.breastCupInverse("flat"));
 			this.createCock(9, 2, CockTypesEnum.HUMAN);

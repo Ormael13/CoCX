@@ -3851,7 +3851,8 @@ public final class Mutations extends MutationsHelper {
 	
 	public function crimsonJade(player:Player):void {
 		clearOutput();
-        outputText("You touch the crimson jade and discover it to be an instructional on the use of blood soulskills.  The jade shares generic information about blood soulskills, generally what you'd expect anyway - how to draw it using your blood as well as the positive and negative effects of repeated use.  It doesn't take long to read all knowledger stored in jade, but before you can stow it away for later, the crystal crumbles into crimson dust. The same metallic scent lingers on your [claws], the lingering smell of blood is stained on you... at least for the time being.");
+        outputText("You touch the crimson jade only to discover that it seems to be an instructional on the use of blood soulskills. The jade shares generic information about blood soulskills. The contents seem to go over the basics; how to draw power using your blood as well as the consequences of repeated use, beneficial or not.\n\n");
+		outputText("It doesn't take long to absorb all knowledge stored in jade, but before you can stow it away for later, the crystal crumbles into crimson dust. The same metallic scent lingers on your [claws], the lingering smell of blood is stained on you... at least for the time being.");
         if (player.wis < 30) {
             outputText("\n\nYou feel greatly enlightened by your time spent reading.");
             KnowledgeBonus("wis", 4);
@@ -3890,8 +3891,8 @@ public final class Mutations extends MutationsHelper {
 				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
 				return;
 			}*/
-		//}
-		//if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
+		}
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
 			//Smart enough for SF Infused Blood Swipe and doesnt have it
 			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBloodSwipeSF)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Swipe.</b>");

@@ -139,8 +139,8 @@ use namespace CoC;
 					}
 					break;
 				case 6:
-					if (rand(2) == 0) SceneLib.trollScene.encounterAdultFemaleTroll();
-					else SceneLib.trollScene.encounterAdultMaleTroll();
+					if (rand(2) == 0) SceneLib.trollScene.encounterAdultGlacialFemaleTroll();
+					else SceneLib.trollScene.encounterAdultGlacialMaleTroll();
 					break;
 				case 7: //Find Valeria! She can be found there if you rejected her offer initially at Tower of the Phoenix or didn't find her. She can never be Lost Forever.
 					spriteSelect(79);
