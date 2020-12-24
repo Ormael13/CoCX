@@ -36,7 +36,7 @@ public class GoblinQueen extends Goblin
 			this.armorMDef = 6;
 			this.fatigue = 0;
 			this.bonusHP = 275;
-			this.bonusLust = 20;
+			this.bonusLust = 104;
 			this.lust = 35;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

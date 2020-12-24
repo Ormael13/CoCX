@@ -95,7 +95,7 @@ package classes.Scenes.Areas.GlacialRift
 			if (player.hasVagina()) outputText("Feminine juice splatters all over from your [vagina] and onto his cock.  " );
 			outputText("The giant, however, still needs his release and as he continues pumping, you reach climax more times than you can count. At last, you hear the giant moan, and he drops you on the base of his dick while he finishes himself off. Too exhausted to move, you lay there as the giant cums, gallons of cum shooting in an arc, in slow motion, landing directly on you. You barely manage to gulp down enough to keep from drowning. The giant laughs and grabs you, licks you clean, and sets you down, sheltering you from the cold with his hands and allowing you to fix your armor. Once you redress, the giant lets out a bellowing laugh and saunters off behind a mountain.");
 			player.refillHunger(50);
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
 			cleanupAfterCombat();
 		}
 		
@@ -116,7 +116,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("The giant, however, still needs his release and as he continues pumping, you reach climax more times than you can count. At last, you hear the giant moan, and he finally slides his entire length into you.");
 			outputText("You yelp in surprise as as the giant cums, filling your bowels completely and stuffing your stomach. The giant laughs and grabs you, licks you clean, and sets you down, sheltering you from the cold with his hands and allowing you to fix your armor. Once you redress, the giant lets out a bellowing laugh and saunters off behind a mountain. You feel warm thanks to being stuffed with his cum.");
 			player.refillHunger(30);
-			player.sexReward("cum");
+			player.sexReward("cum","Anal");
 			cleanupAfterCombat();			
 		}
 		

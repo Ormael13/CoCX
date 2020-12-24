@@ -103,13 +103,13 @@ import classes.Scenes.SceneLib;
 			outputText("Strong hands come from behind and slide under your equipment to squeeze your " + chestDesc() + ".  The brutish fingers immediately locate and pinch at your " + nippleDescript(0) + "s, the sensitive flesh on your chest lighting up with pain and pleasure.  You arch your back in surprise, utterly stunned by the violation of your body.  After a moment you regain your senses and twist away, but the damage is already done.  You're breathing a bit quicker now");
 			if(player.lust >= 80) outputText(", and your pussy is absolutely soaking wet");
 			outputText(".");
-			player.dynStats("lus", (5 + player.sens/10));
+			player.dynStats("lus", (5 + player.effectiveSensitivity()/10));
 		}
 		//Gang Grope
 		private function minotaurGangGangGropeAttack():void {
 			game.spriteSelect(94);
 			outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + Appearance.buttDescription(player) + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your [chest] and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.");
-			player.dynStats("lus", (15 + player.sens/10));
+			player.dynStats("lus", (15 + player.effectiveSensitivity()/10));
 		}
 		//Waste  a turn
 		private function minotaurGangWaste():void {
@@ -118,7 +118,7 @@ import classes.Scenes.SceneLib;
 			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck " + player.mf("him", "her") + ",</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!");
 		}
 
-		override public function doAI():void
+		override protected function performCombatAction():void
 		{
 			game.spriteSelect(94);
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
@@ -189,7 +189,7 @@ import classes.Scenes.SceneLib;
 			if((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) lustVuln = .3;
 			else lustVuln -= (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
 			this.bonusHP = bonusHP;
-			this.bonusLust = 20 * Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
+			this.bonusLust = 115 * Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
 			this.lust = 30;
 			this.lustVuln = lustVuln;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
@@ -200,7 +200,8 @@ import classes.Scenes.SceneLib;
 			this.tailType = Tail.COW;
 			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.drop = NO_DROP;
-			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] > 20) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
+			else this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();
 		}

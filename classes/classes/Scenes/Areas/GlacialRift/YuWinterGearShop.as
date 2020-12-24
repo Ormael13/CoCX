@@ -139,7 +139,7 @@ import classes.internals.Utils;
 			outputText("\"<i>");
 			if (flags[kFLAGS.YU_TALKS] == 1) outputText("Yu though you knew but Yu doesn’t mind repeating. ");
 			outputText("Yu is Yu! Yu is yeti. Yu born from yeti father and yeti mother. Mother eaten by wolves and father went avenge mother now Yu live alone.</i>\"\n\n");
-			outputText("Yu suddenly strike a thoughtful pose and hug you warmly as if trying to give some of her warmth to you. You ask her why she does those hugs.\n\n");
+			outputText("Yu suddenly strikes a thoughtful pose and hugs you warmly as if trying to give some of her warmth to you. You ask her why she does those hugs.\n\n");
 			outputText("\"<i>Father told Yu to hug friends when meet them. If friends returns hug Yu can have snu snu but if friends look bad Yu must strangle till head pop or make snow statue with them so no snu snu.</i>\"\n\n");
 			outputText("Yea that's a very... simplistic form of courtship. Speaking of which what happens to demons?\n\n");
 			outputText("\"<i>Yu make furniture.</i>\"\n\n");

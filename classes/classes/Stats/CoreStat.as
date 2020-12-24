@@ -1,6 +1,7 @@
 package classes.Stats {
 import classes.Creature;
 import classes.PerkLib;
+import classes.Monster;
 
 public class CoreStat extends RawStat{
 	public function CoreStat(host:Creature, name:String) {
@@ -8,6 +9,7 @@ public class CoreStat extends RawStat{
 	}
 	
 	override public function get max():Number {
+		if (this is Monster) return Infinity;
 		var base:Number = 100;
 		base += host.perkv1(PerkLib.AscensionTranshumanism);
 		switch (statName) {

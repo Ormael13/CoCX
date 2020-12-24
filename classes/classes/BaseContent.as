@@ -32,7 +32,7 @@ import coc.xxc.StoryContext;
 	{
         public function BaseContent()
 		{
-		
+
 		}
 
 		protected function cheatTime(time:Number, needNext:Boolean = false):void
@@ -53,7 +53,7 @@ import coc.xxc.StoryContext;
 		}
 
 		protected function get isNightTime():Boolean {
-			return (model.time.hours <= 5 || model.time.hours >= 21);
+			return (model.time.hours <= 5 || model.time.hours >= 22);
 		}
 
 		/*protected function get measurements():Class
@@ -64,15 +64,15 @@ import coc.xxc.StoryContext;
 		protected function get camp():Camp {
 			return SceneLib.camp;
 		}
-		
+
 		protected function get ingnam():Ingnam {
 			return SceneLib.ingnam;
 		}
-		
+
 		protected function get prison():Prison {
 			return SceneLib.prison;
 		}
-		
+
 		protected function get d3():D3 {
 			return SceneLib.d3;
 		}
@@ -81,7 +81,7 @@ import coc.xxc.StoryContext;
 		{
 			return EventParser.goNext(time,defNext);
 		}
-		
+
 		protected function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false, nl2:Boolean = true):void
 		{
 			return EngineCore.awardAchievement(title, achievement, display, nl, nl2);
@@ -91,7 +91,7 @@ import coc.xxc.StoryContext;
 		{
 			return Holidays.isLunarNewYear();
 		}
-		
+
 		protected function isHalloween():Boolean
 		{
 			return Holidays.isHalloween();
@@ -121,7 +121,7 @@ import coc.xxc.StoryContext;
 		{
 			return Holidays.isAprilFools();
 		}
-		
+
 		protected function get date():Date
 		{
 			return CoC.instance.date;
@@ -144,7 +144,7 @@ import coc.xxc.StoryContext;
 			CoC.instance.inDungeon = v;
 		}
 */
-		
+
 		protected function get inRoomedDungeon():Boolean
 		{
 			return DungeonAbstractContent.inRoomedDungeon;
@@ -153,7 +153,7 @@ import coc.xxc.StoryContext;
 		{
 			DungeonAbstractContent.inRoomedDungeon = v;
 		}
-		
+
 		protected function get inRoomedDungeonResume():Function
 		{
 			return DungeonAbstractContent.inRoomedDungeonResume;
@@ -162,7 +162,7 @@ import coc.xxc.StoryContext;
 		{
 			DungeonAbstractContent.inRoomedDungeonResume = v;
 		}
-		
+
 /*
 		protected function get itemSubMenu():Boolean
 		{
@@ -173,7 +173,7 @@ import coc.xxc.StoryContext;
 			CoC.instance.itemSubMenu = value;
 		}
 */
-		
+
 		protected function showStats():void
 		{
 			EngineCore.showStats();
@@ -223,7 +223,7 @@ import coc.xxc.StoryContext;
 			return Utils.curry.apply(null,[func].concat(args));
 		}
 		*/
-		
+
 		/* None of these functions are called anymore
 		protected function lazyIndex(obj:*,...args):Function
 		{
@@ -256,8 +256,8 @@ import coc.xxc.StoryContext;
 		protected function doSFWloss():Boolean {
 			return EngineCore.doSFWloss();
 		}
-		
-		
+
+
 		protected function startCombatImmediate(monster:Monster, _plotFight:Boolean = false):void
 		{
 			SceneLib.combat.startCombatImmediateImpl(monster, _plotFight);
@@ -274,7 +274,7 @@ import coc.xxc.StoryContext;
 		{
 			EngineCore.outputText(output);
 		}
-		
+
 		protected function clearOutput():void
 		{
 			EngineCore.clearOutputTextOnly();
@@ -283,7 +283,7 @@ import coc.xxc.StoryContext;
 		{
 			EngineCore.displayHeader(string);
 		}
-		
+
 		protected function flushOutputTextToGUI():void {
 			CoC.instance.flushOutputTextToGUI();
 		}
@@ -292,7 +292,7 @@ import coc.xxc.StoryContext;
 		{
 			EngineCore.doNext(eventNo);
 		}
-		
+
 		protected function menu():void
 		{
 			EngineCore.menu();
@@ -302,7 +302,7 @@ import coc.xxc.StoryContext;
 		{
 			EngineCore.hideMenus();
 		}
-		
+
 		//To be phased out
 		protected function choices(text1:String, butt1:Function,
 								text2:String, butt2:Function,
@@ -349,7 +349,7 @@ import coc.xxc.StoryContext;
 		{
 			return EngineCore.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
 		}
-		
+
 		protected function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
 			return EngineCore.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
@@ -358,7 +358,7 @@ import coc.xxc.StoryContext;
 		{
 			return EngineCore.button(pos);
 		}
-		
+
 		protected function removeButton(arg:*):void
 		{
 			EngineCore.removeButton(arg);
@@ -382,75 +382,75 @@ import coc.xxc.StoryContext;
 			return CoC.instance.outputList();
 		}
 */
-		
+
 		protected function openURL(url:String):void{
 			return EngineCore.openURL(url);
 		}
-		
+
 		protected function sackDescript():String
 		{
 			return Appearance.sackDescript(player);
 		}
-		
+
 		protected function cockClit(value:int = 0):String
 		{
 			if(player.hasCock() && value >= 0 && value < player.cockTotal()) return player.cockDescript(value);
 			else return clitDescript();
 		}
-		
+
 /* Was only used in Scylla's code. Replaced with conditionals
 		protected function balls(balls:*, noBalls:*):String
 		{
 			return CoC.instance.balls(balls, noBalls);
 		}
 */
-		
+
 		protected function sheathDesc():String
 		{
 			return CoC.instance.player.sheathDescription();
 		}
-		
+
 		protected function chestDesc():String
 		{
 			return player.chestDesc();
 			//return Appearance.chestDesc(player);
 		}
-		
+
 		protected function allChestDesc():String
 		{
 			return player.allChestDesc();
 		}
-		
+
 		protected function allBreastsDescript():String
 		{
 			return Appearance.allBreastsDescript(player);
 		}
-		
+
 		protected function sMultiCockDesc():String
 		{
 			return CoC.instance.player.sMultiCockDesc();
 		}
-		
+
 		protected function SMultiCockDesc():String
 		{
 			return CoC.instance.player.SMultiCockDesc();
 		}
-		
+
 		protected function oMultiCockDesc():String
 		{
 			return CoC.instance.player.oMultiCockDesc();
 		}
-		
+
 		protected function OMultiCockDesc():String
 		{
 			return CoC.instance.player.OMultiCockDesc();
 		}
-		
+
 		protected function tongueDescript():String
 		{
             return Appearance.tongueDescription(player);
 		}
-		
+
 		protected function ballsDescriptLight(forcedSize:Boolean = true):String {
             return Appearance.ballsDescription(forcedSize, true, player);
 		}
@@ -464,7 +464,7 @@ import coc.xxc.StoryContext;
 			return CoC.instance.eBallsDescriptLight();
 		}
 		*/
-		
+
 		/* Was never called
 		protected function eBallsDescript():String {
 			return CoC.instance.eBallsDescript();
@@ -474,7 +474,7 @@ import coc.xxc.StoryContext;
 		protected function ballsDescript():String {
             return Appearance.ballsDescription(false, true, player, true);
 		}
-		
+
 		protected function simpleBallsDescript():String {
             return Appearance.ballsDescription(false, true, player);
 		}
@@ -482,19 +482,19 @@ import coc.xxc.StoryContext;
 		protected function assholeDescript():String {
 			return Appearance.assholeDescript(player)
 		}
-		
+
 		protected function eAssholeDescript():String {
 			return Appearance.assholeDescript(monster);
 		}
-		
+
 		protected function hipDescript():String {
 			return Appearance.hipDescription(player);
 		}
-		
+
 		protected function assDescript():String {
 			return Appearance.buttDescription(player);
 		}
-		
+
 		protected  function buttDescript():String {
 			return Appearance.buttDescription(player);
 		}
@@ -518,7 +518,7 @@ import coc.xxc.StoryContext;
 		{
 			return CoC.instance.num2TextBest(number, capitalised, positional);
 		}
-		
+
 		protected function num2Text(number:int):String
 		{
 			return CoC.instance.num2Text(number);
@@ -532,98 +532,98 @@ import coc.xxc.StoryContext;
 			return CoC.instance.num2Text2(number);
 		}
 */
-		
+
 		protected function nippleDescript(rowNum:Number):String
 		{
 			return Appearance.nippleDescription(player, rowNum)
 		}
-		
+
 		protected function cockDescript(cockNum:int = 0):String
 		{
 			return CoC.instance.player.cockDescript(cockNum);
 		}
-		
+
 /*
 		protected function cockAdjective(cockNum:Number = -1):String
 		{
 			return CoC.instance.cockAdjective(cockNum);
 		}
 */
-		
+
 		protected function multiCockDescript():String
 		{
 			return CoC.instance.player.multiCockDescript();
 		}
-		
+
 		protected function multiCockDescriptLight():String
 		{
 			return CoC.instance.player.multiCockDescriptLight();
 		}
-		
+
 /*
 		protected function eMultiCockDescriptLight():String
 		{
 			return CoC.instance.eMultiCockDescriptLight();
 		}
-		
+
 		protected function eCockHead(cockNum:Number = 0):String
 		{
 			return CoC.instance.eCockHead(cockNum);
 		}
-		
+
 		protected function eCockDescript(cockIndex:Number = 0):String
 		{
 			return CoC.instance.eCockDescript(cockIndex);
 		}
 */
-		
+
 		protected function breastDescript(rowNum:Number):String
 		{
 			return player.breastDescript(rowNum);
 		}
-		
+
 /*
 		protected function cockHead(cockNum:Number = 0):String
 		{
 			return CoC.instance.cockHead(cockNum);
 		}
 */
-		
+
 		protected function breastSize(val:Number):String
 		{
 			return Appearance.breastSize(val);
 		}
-		
+
 		protected function biggestBreastSizeDescript():String
 		{
 			return Appearance.biggestBreastSizeDescript(player);
 		}
-		
+
 		protected function hairDescript():String
 		{
 			return Appearance.hairDescription(player);
 		}
-		
+
 		protected function beardDescript():String
 		{
 			return Appearance.beardDescription(player);
 		}
-		
+
 		protected function hairOrFur():String
 		{
             return Appearance.hairOrFur(player);
 		}
-		
+
 		protected function clitDescript():String
 		{
             return Appearance.clitDescription(player);
 		}
-		
+
 		protected function vaginaDescript(vaginaNum:Number = 0):String
 		{
             return Appearance.vaginaDescript(player, vaginaNum);
 		}
-		
+
 		protected function allVaginaDescript():String
 		{
             if (player.vaginas.length == 1) return vaginaDescript(rand(player.vaginas.length - 1));
@@ -632,7 +632,7 @@ import coc.xxc.StoryContext;
             CoC_Settings.error("ERROR: allVaginaDescript called with no vaginas.");
             return "ERROR: allVaginaDescript called with no vaginas.";
 		}
-		
+
 /* Now called directly
 		protected function breastCup(val:Number):String
 		{
@@ -646,7 +646,7 @@ import coc.xxc.StoryContext;
 			return CoC.instance.NPCCockDescript(cockType,cockLength,lust);
 		}
 */
-		
+
 		/**
 		 * Apply statmods to the player. dynStats wraps the regular stats call, but supports "named" arguments of the form:
 		 * 		"statname", value.
@@ -719,64 +719,64 @@ import coc.xxc.StoryContext;
 			return CoC.instance.eventParser;
 		}
 */
-		
+
 		protected function playerMenu():void { EventParser.playerMenu(); }
-		
+
 		protected function get player():Player
 		{
 			return CoC.instance.player;
 		}
-		
+
 		protected function set player(val:Player):void
 		{
 			CoC.instance.player = val;
 		}
-		
+
 		protected function get player2():Player
 		{
 			return CoC.instance.player2;
 		}
-		
+
 		protected function set player2(val:Player):void
 		{
 			CoC.instance.player2 = val;
 		}
-		
+
 		protected function get debug():Boolean
 		{
 			return CoC.instance.debug;
 		}
-		
+
 		protected function set debug(val:Boolean):void
 		{
 			CoC.instance.debug = val;
 		}
-		
+
 		protected function get ver():String
 		{
 			return CoC.instance.ver;
 		}
-		
+
 		protected function set ver(val:String):void
 		{
 			CoC.instance.ver = val;
 		}
-		
+
 		protected function get images():ImageManager
 		{
 			return CoC.instance.images;
 		}
-		
+
 		protected function set images(val:ImageManager):void
 		{
 			CoC.instance.images = val;
 		}
-		
+
 		protected function get monster():Monster
 		{
 			return CoC.instance.monster;
 		}
-		
+
 		protected function set monster(val:Monster):void
 		{
 			CoC.instance.monster = val;
@@ -833,29 +833,29 @@ import coc.xxc.StoryContext;
 		{
 			return CoC.instance.itemSwapping;
 		}
-		
+
 		protected function set itemSwapping(val:Boolean):void
 		{
 			CoC.instance.itemSwapping = val;
 		}
 */
-		
+
 		protected function get time():TimeModel
 		{
 			return CoC.instance.time;
 		}
-		
+
 		protected function set time(val:TimeModel):void
 		{
 			CoC.instance.time = val;
 		}
-		
+
 /* Finally got rid of this var
 		protected function get menuLoc():Number
 		{
 			return CoC.instance.menuLoc;
 		}
-		
+
 		protected function set menuLoc(val:Number):void
 		{
 			CoC.instance.menuLoc = val;
@@ -879,12 +879,12 @@ import coc.xxc.StoryContext;
 		{
 			CoC.instance.itemStorage = val;
 		}
-		
+
 		protected function get gearStorage():Array
 		{
 			return CoC.instance.gearStorage;
 		}
-		
+
 		protected function set gearStorage(val:Array):void
 		{
 			CoC.instance.gearStorage = val;
@@ -900,17 +900,17 @@ import coc.xxc.StoryContext;
 		{
 			return CoC.instance.mainViewManager;
 		}
-		
+
 		protected function get model():GameModel
 		{
 			return CoC.instance.model;
 		}
-		
+
 		protected function set model(val:GameModel):void
 		{
 			CoC.instance.model = val;
 		}
-		
+
 		protected function get flags():DefaultDict
 		{
 			return CoC.instance.flags;
@@ -920,39 +920,39 @@ import coc.xxc.StoryContext;
 		{
 			CoC.instance.flags = val;
 		}
-		
+
 		protected function get achievements():DefaultDict
 		{
 			return CoC.instance.achievements;
 		}
-		
+
 		protected function set achievements(val:DefaultDict):void
 		{
 			CoC.instance.achievements = val;
 		}
-		
+
 		protected function showStatDown(arg:String):void
 		{
 			CoC.instance.mainView.statsView.showStatDown(arg);
 		}
-		
+
 		protected function showStatUp(arg:String):void
 		{
 			CoC.instance.mainView.statsView.showStatUp(arg);
 		}
-		
+
 		protected function buttonTextIsOneOf(index:int, possibleLabels:Array):Boolean {
 			return EngineCore.buttonTextIsOneOf(index, possibleLabels);
 		}
-		
+
 		protected function getButtonText(index:int):String {
 			return EngineCore.getButtonText(index);
 		}
-		
+
 		protected function buttonIsVisible(index:int):Boolean {
 			return EngineCore.buttonIsVisible(index);
 		}
-		
+
 		protected function darkTheme():Boolean {
 			return CoC.instance.mainViewManager.darkThemeImpl();
 		}

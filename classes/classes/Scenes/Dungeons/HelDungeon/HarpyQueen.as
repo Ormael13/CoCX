@@ -13,12 +13,6 @@ public class HarpyQueen extends Monster
 	{
 		public var spellCostWhitefire:int = 12;
 		
-		public function harpyQueenAI():void {
-			if (rand(4) == 0) eldritchRopes();
-			else if(rand(3) == 0 && fatigue <= (100 - spellCostWhitefire)) whitefire();
-			else if(rand(2) == 0) lustSpikeAttack();
-			else windSlamAttack();
-		}
 		//ATTACK ONE: ELDRITCH ROPES
 		public function eldritchRopes():void {
 			outputText("The Harpy Queen flicks her left wrist at you. Before you can blink, ropes of white-hot magic hurtle toward you. You manage to duck and dodge a few of them, but a pair still grab your wrists, pulling painfully at your arms.");
@@ -77,7 +71,7 @@ public class HarpyQueen extends Monster
 			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 2;
 			damage = Math.round(damage);
 			player.takeFireDamage(damage, true);
-			fatigue += spellCostWhitefire;
+			mana -= spellCostWhitefire;
 		}
 		
 		public function SpellMod():Number {
@@ -91,7 +85,10 @@ public class HarpyQueen extends Monster
 		
 		override protected function performCombatAction():void
 		{
-			harpyQueenAI();
+			if (rand(4) == 0) eldritchRopes();
+			else if(rand(3) == 0 && mana >= spellCostWhitefire) whitefire();
+			else if(rand(2) == 0) lustSpikeAttack();
+			else windSlamAttack();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
@@ -133,7 +130,7 @@ public class HarpyQueen extends Monster
 			this.armorDef = 29;
 			this.armorMDef = 29;
 			this.bonusHP = 1000;
-			this.bonusLust = 30;
+			this.bonusLust = 155;
 			this.fatigue = 0;
 			this.lust = 20;
 			this.lustVuln = .15;

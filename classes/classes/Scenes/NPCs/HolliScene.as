@@ -71,8 +71,18 @@ public function treeMenu(output:Boolean = true):void {
 		addButton(4, "Back", inventory.inventoryMenu);
 	}
 	else if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 1) {
-		if(output) outputText("The sprout looks about the same as when you first noticed it.  It's a simple, leafy shoot that only goes to about knee height.  It looks healthy and strong, with a few dozen branches and shiny green leaves.  If you look closely, the veins on the undersides of the leaf are purplish and pulse slightly with corruption.  You could easily destroy it.");
-		simpleChoices("Burn It", destroyDatFukkinTree, "", null, "", null, "", null, "Back", inventory.inventoryMenu);
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && ZenjiScenes.ZenjiHolli == false) {
+			if (output) {
+				outputText("You find Zenji carefully inspecting the strange plant you saw growing in your camp.\n\n");
+				outputText("\"<i>Dis plant has some very bad energy coming from it, [name]... I better destroy it before it becomes a problem.</i>\"\n\n");
+				outputText("You see him reach down to uproot it, you consider if you want him to continue though.");
+			}
+			simpleChoices("", null, "Stop Him", letZeFuckingSproutLive2, "", null, "Let Him", destroyDatFukkinTree2, "", null);
+		}
+		else {
+			if(output) outputText("The sprout looks about the same as when you first noticed it.  It's a simple, leafy shoot that only goes to about knee height.  It looks healthy and strong, with a few dozen branches and shiny green leaves.  If you look closely, the veins on the undersides of the leaf are purplish and pulse slightly with corruption.  You could easily destroy it.");
+			simpleChoices("Burn It", destroyDatFukkinTree, "", null, "", null, "", null, "Back", inventory.inventoryMenu);
+		}
 	}
 	else if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 2) {
 		//[Fuck It] [Ride Stamen] [Do Nothing] [Destroy It]
@@ -127,12 +137,12 @@ public function treeMenu(output:Boolean = true):void {
 		// []			[]			[]			[]			[Leave]
 		menu();
 		if(player.hasCock() && player.lust >= 33) {
-			addButton(0, "Fuck Holli", flags[kFLAGS.HOLLI_SUBMISSIVE] == 0 ? fuckHolliInZeFlowerPuss : holliGetsDickDommed)
+			addButton(0, "FuckHolli", flags[kFLAGS.HOLLI_SUBMISSIVE] == 0 ? fuckHolliInZeFlowerPuss : holliGetsDickDommed)
 		} else {
 			addButtonDisabled(0, "FuckHolli");
 		}
 		if(player.hasVagina() && player.lust >= 33) {
-			addButton(1,"Ride Tentacles", flags[kFLAGS.HOLLI_SUBMISSIVE] == 0 ? level4RideHollisTentacruels : vaginalDomHollisTentacruels);
+			addButton(1,"RideTentacles", flags[kFLAGS.HOLLI_SUBMISSIVE] == 0 ? level4RideHollisTentacruels : vaginalDomHollisTentacruels);
 		} else {
 			addButtonDisabled(1, "RideTentacles");
 		}
@@ -273,6 +283,22 @@ private function letZeFuckingSproutLive():void {
 	clearOutput();
 	outputText("Looking down at the sapling, you stay your wrath.  It may be corrupt, but it hasn't done anything to harm you just yet.  You give it a little pat on the uppermost leaves and leave it be.  It's not like it's going anywhere.");
 	outputText("\n\n(<b>'Plant' added to your items menu</b>.  It's too small to know what it will grow into yet.  You can currently remove it at your leisure.)");
+	doNext(playerMenu);
+}
+private function destroyDatFukkinTree2():void {
+	clearOutput();
+	outputText("Zenji grasps the plant within his bare hands, meticulously tearing it apart to make sure that nothing is left but scraps of plant bits.\n\n");
+	outputText("\"<i>Dere, dat should do it, dis plant won’t be harming no one anymore.</i>\" He says as he picks up the pieces, \"<i>I’m gonna burn dis filth from de camp.</i>\"\n\n");
+	//(-5 corruption)
+	dynStats("cor", -5);
+	flags[kFLAGS.FUCK_FLOWER_KILLED] = 1;
+	doNext(camp.returnToCampUseOneHour);
+}
+private function letZeFuckingSproutLive2():void {
+	clearOutput();
+	outputText("You tell Zenji that he shouldn’t destroy the plant, neither of you knows what exactly it’s here for or even if it’s corrupted.\n\n");
+	outputText("Zenji peers at the plant suspiciously. \"<i>I know danger when I see it, [name], and dis plant is up to no good.” He takes a deep breath, “But if you tink you can handle whatever it grows up to be, den so be it. But don’ say I didn’ warn you…</i>\"\n\n");
+	ZenjiScenes.ZenjiHolli = true;
 	doNext(playerMenu);
 }
 
@@ -505,7 +531,7 @@ private function rideTheWalrusP3():void {
 	//{- big sensitivity loss, big libido gain, minus lust}
 	player.orgasm();
 	dynStats("lib", 1, "sen", -5);
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	if(flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 5;
     flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;
     flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;

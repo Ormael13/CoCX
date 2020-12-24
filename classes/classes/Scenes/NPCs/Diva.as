@@ -44,7 +44,7 @@ public class Diva extends Monster {
 		this.armorMDef = levelBonus;
         this.wings.type = Wings.BAT_LIKE_LARGE;
         this.bonusHP = levelBonus * 500;
-        this.bonusLust = 50;
+        this.bonusLust = levelBonus * 8;
         this.lustVuln = 1;
         this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
         this.level = levelBonus;

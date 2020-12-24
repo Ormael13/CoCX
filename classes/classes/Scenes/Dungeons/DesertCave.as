@@ -4321,5 +4321,4 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			addButton(0, "Approach", sandMotherStuffGOA).hint("Approach the Sand Mother.");
 		}
 	}
-
 }

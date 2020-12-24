@@ -2,10 +2,12 @@ package classes.Scenes {
 import classes.CoC;
 import classes.Items.Mutations;
 import classes.Scenes.Areas.*;
+import classes.Scenes.Areas.Bog.TrollScenes;
 import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Areas.GlacialRift.FrostGiantScene;
 import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
+import classes.Scenes.Areas.Ocean.ScyllaScene;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.AnzuPalace.AnzuScene;
 import classes.Scenes.Dungeons.D3.D3;
@@ -39,6 +41,8 @@ public class SceneLib {
     public static var beach:Beach = new Beach();
 
     public static var blightridge:BlightRidge = new BlightRidge();
+
+    public static var defiledravine:DefiledRavine = new DefiledRavine();
 
     public static var bog:Bog = new Bog();
 
@@ -87,6 +91,8 @@ public class SceneLib {
     public static var goblinShamanScene:GoblinShamanScene = new GoblinShamanScene();
 
     public static var goblinElderScene:GoblinElderScene = new GoblinElderScene();
+
+    public static var trollScene:TrollScenes = new TrollScenes();
 	
 	public static var displacerbeastScene:DisplacerBeastScene = new DisplacerBeastScene();
 
@@ -182,6 +188,8 @@ public class SceneLib {
 
     public static var rathazul:Rathazul = new Rathazul();
 
+    public static var ryubi:RyuBiFollower = new RyuBiFollower();
+
     public static var siegweirdFollower:SiegweirdFollower = new SiegweirdFollower();
 
     public static var sheilaScene:SheilaScene = new SheilaScene();
@@ -218,6 +226,8 @@ public class SceneLib {
 
     public static var sharkgirlScene:SharkGirlScene = new SharkGirlScene();
 
+    public static var scyllaScene:ScyllaScene = new ScyllaScene();
+
     public static var bazaar:Bazaar = new Bazaar();
 
     public static var boat:Boat = new Boat();
@@ -253,6 +263,8 @@ public class SceneLib {
     public static var aikoScene:AikoScene = new AikoScene();
 	
 	public static var glacialYuShop:YuWinterGearShop = new YuWinterGearShop();
+	
+	public static var fleshGolemScenes:FleshGolemScene = new FleshGolemScene();
 
     public function SceneLib() {
     }

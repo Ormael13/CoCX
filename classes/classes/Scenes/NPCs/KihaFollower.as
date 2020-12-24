@@ -537,10 +537,10 @@ private function lieThere():void {
 	outputText("[pg]OHSHIT.  You duck down as a great gout of flame shoots over you, utterly consuming Hel in the blast and nearly baking you into the mud.  Laughing, Kiha roars in triumph as Hel vanishes in the smoke cloud left over from the dragon-flame blast.");
 	outputText("[pg]You cough violently as the smoke settles.  You wave your hand in front of your face, desperately looking in the baked mud for some sign of a surely-incinerated Hel... yet she still stands!  Though you can see her scale bikini and thong have been incinerated, leaving her as nude as Kiha with her big breasts hanging free, she has survived seemingly unscathed.");
 	outputText("[pg]Scowling, the salamander simply crosses her arms over her ample bosom.  \"<i>Seriously. Seriously, you cunt!?</i>\"  Hel snaps, grabbing her fiery tail.  \"<i>Do you even fucking SEE THIS!? That weak shit does nothing to me, you moron.</i>\"");
-	outputText("[pg]Kiha stands dumbfounded for a moment, surprised her potent fire-breath didn't simply melt the flesh from Hel's bones.  She recovers quickly, though, and yells, \"<i>Get out of here!  This is MY swamp, and that ");
-	if(!player.isGoo()) outputText("meatsack");
-	else outputText("goosack");
-	outputText(" behind you belongs to ME, you got it?</i>\"");
+	outputText("[pg]Kiha stands dumbfounded for a moment, surprised her potent fire-breath didn't simply melt the flesh from Hel's bones.  She recovers quickly, though, and yells, \"<i>Get out of here!  This is MY swamp, and that </i>");
+	if(!player.isGoo()) outputText("<i>meatsack</i>");
+	else outputText("<i>goosack</i>");
+	outputText("<i> behind you belongs to ME, you got it?</i>\"");
 	outputText("[pg]\"<i>Oh, " + player.mf("he","she") + " belongs to you, is that it?</i>\"");
 	outputText("[pg]\"<i>That's right, you bitch.  So get your fat scaly ass out of the way!</i>\"");
 	outputText("[pg]\"<i>FAT!?</i>\"  Hel fumes, her tail swaying dangerously behind her.  \"<i>You're just jealous you don't have an ass as fine as this one!</i>\"");
@@ -549,7 +549,7 @@ private function lieThere():void {
 	outputText("[pg]\"<i>SHITTER MUSCLE!?!</i>\"");
 	outputText("[pg]\"<i>Shitter muscle,</i>\" Hel says with a sneer.  \"<i>And to top it all off... You've got small tits.  Why the hell would [name] want those little things over THESE,</i>\" she laughs, cupping her big E-cups for emphasis.");
 	outputText("[pg]\"<i>Oh, like [name] would even look twice at those floppy things!</i>\" Kiha growls, grabbing her own D-cups defensively.  \"<i>" + player.mf("He","She") + " OBVIOUSLY prefers smaller, perkier boobs.  Don't you, [name]?</i>\"");
-	outputText("[pg]You start to stammer an answer, but before you know it, Hel's put a foot on your chest, pushing you just a little deeper into the still-hot mud.  \"<i>How the hell would YOU know what [name] likes, huh?  <i>I</i> know exactly what makes " + player.mf("him","her") + " tick!</i>\"");
+	outputText("[pg]You start to stammer an answer, but before you know it, Hel's put a foot on your chest, pushing you just a little deeper into the still-hot mud.  \"<i>How the hell would YOU know what [name] likes, huh? <b>I</b> know exactly what makes " + player.mf("him","her") + " tick!</i>\"");
 	outputText("[pg]Before you can say a word in your own defense, Hel uses her clawed foot to rip off the bottom of your [armorName].  Grinning at you, she puts the heel of her foot on the bottom of [cock one].  She gives it a short, forceful rub, pushing your stiffening cock into your belly as she runs her heel across it.  She gives your cock a few playful strokes, but the tell-tale hardening of your cock soon turns it into a full-blown footjob, with Hel hooking her heel's claw around one side of your shaft and wrapping the rest of her foot around the other side.  She shamelessly jerks you off, pumping your stiffy as Kiha stares, wide-eyed.");
 	outputText("[pg]Kiha yells in feral outrage.  \"<i>HOW THE FUCK DARE YOU!?</i>\"  she screams, storming over.  \"<i>Get your filthy feet off [name]!</i>\"");
 	outputText("[pg]Kiha gives Hel a forceful shove, causing her to stumble back as the dragoness looms over you.  \"<i>Why the hell would you like a whore like her, huh?</i>\" she asks, \"<i>The kind of girl who, on a damn whim, just starts handing out favors.  What, do you LIKE sluts?  Huh?  Is that it?</i>\"");
@@ -845,7 +845,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 			addButton(2, "Hug", hugFriendWarmKiha).hint("Give the dragoness a hug.");
 			addButton(3, "Sex", kihaSexMenu).hint("Initiate sex session with Kiha.");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(4, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!");
-			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) {
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) {
 				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] == 0) addButton(7, "Destroy Glades", kihaDestroyGladesToggle).hint("Request Kiha to destroy any corrupted glades she can find.");
 				else addButton(7, "Stop Destroying", kihaDestroyGladesToggle).hint("Request Kiha to stop destroying the corrupted glades.");
 			}
@@ -1577,7 +1577,7 @@ private function giveKihaIncubusDraft():void {
 	outputText("[pg]Roaring, Kiha thrusts her cock up into your ass as you slam down upon her, meeting half-way as the first great, hot load of dragon-spunk shoots into your ass.  You grind your [asshole] around your lover's reptilian prick, milking out squirt after squirt of dragon-spooge until white streamers leak freely out of your asshole and coat the ground beneath you.");
 	outputText("[pg]By the time Kiha's orgasm subsides, you're both covered in her hot white spunk, reeking of sex, sweat, and semen.  Shuddering from the sticky, slimy sensation up your ass, you crawl off your lover, her prick popping out of you with a wet POP.  Looking down at her, you see Kiha's eyes are crossed, her chest heaving; she's mumbling something about some pink eggs in her stash, but seems otherwise insensate.  You give her soon-to-be-gone cock a last loving little pat before gathering your [armorName] and heading out.");
 	dynStats("sen", 4, "lus", 30, "cor", .5);
-	player.sexReward("cum");
+	player.sexReward("cum","Anal");
 	if(player.hasItem(consumables.P_DRAFT)) player.consumeItem(consumables.P_DRAFT);
 	else {
 		player.consumeItem(consumables.INCUBID);
@@ -2094,6 +2094,30 @@ private function lvlUpCheckup():void {
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 72, 0);
 			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.KIHA_LVL_UP] = 9;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.KIHA_LVL_UP] == 9) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 78);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 78, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 10;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.KIHA_LVL_UP] == 10) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 84);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 84, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 11;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.KIHA_LVL_UP] == 11) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 90);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 90, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 12;
+		}
+		if (flags[kFLAGS.KIHA_DEFEATS_COUNTER] == 16 && flags[kFLAGS.KIHA_LVL_UP] == 12) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 3, 96);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 96, 0);
+			flags[kFLAGS.KIHA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.KIHA_LVL_UP] = 13;
 		}
 	}
 }

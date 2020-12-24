@@ -42,6 +42,7 @@ public class Ears extends BodyPart {
 	public static const MELKIE:int 	  = 38;
 	public static const GREMLIN:int   = 39;
 	public static const WEASEL:int    = 40;
+	public static const SQUIRREL:int  = 41;
 	// Don't forget to add new types in DebugMenu.as list EAR_TYPE_CONSTANTS
 	
 	public function Ears() {

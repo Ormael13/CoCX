@@ -25,6 +25,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	private static const _ageShouldDoBirth:int = -2;
 	private static const _ageCanMeetNightmare:int = -3;
 	private static const _ageDidPregnancy:int = -4;
+	private static const _ageIsDeadOrRemoved:int = -5;
 
 	private static var _instance:CelessScene;
 
@@ -91,6 +92,10 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 
 	public function get isAdult():Boolean {
 		return _age == _ageIsAdult;
+	}
+
+	public function setDeadOrRemoved():void {
+		_age = _ageIsDeadOrRemoved;
 	}
 
 	public override function unload():void {
@@ -174,7 +179,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				submenu(menu, campInteraction);
 			}
 			else {
-				pureIncest()
+				pureIncest();
 			}
 		}
 	}
@@ -214,6 +219,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					"The time passes and eventually both of you head back to camp, your daughter still sporting a wide smile from all the fun she had, none the wiser about your little altercation with that moron of an imp.\n\n" +
 					"As innocent as a day can be in Mareth, even if you had to force the issue. But if it’s for the sake of your daughter having a happy childhood, you would gladly beat this whole crazy realm into submission.")
 		}
+		_age+=72;
 		doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -274,7 +280,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		function nameScene():void {
 			if (mainView.nameBox.text == "") {
 				clearOutput();
-				outputText("<b>You must name her.</b>");
+				outputText("\n\n\n<b>You must name her.</b>");
 				mainView.nameBox.text = "Celess";
 				mainView.nameBox.visible = true;
 				mainView.nameBox.width = 165;
@@ -384,10 +390,19 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				}
 				player.growTits(3, 1, false, 1);
 				scene("strings/forest-unicorn/okay-male");
-				while (player.hasCock()) {
-					player.removeCock(0, 1);
+				if (player.hasCock()) player.killCocks(1);
+				if (player.balls > 0) {
+					player.balls = 0;
+                    player.ballSize = 0;
 				}
+				if (player.butt.type < 6) player.butt.type = 6;
+				if (player.hips.type < 6) player.hips.type = 6;
+				if (player.hairLength < 10) player.hairLength += 10;
+				if (player.thickness < 70) player.thickness = 70;
+				if (player.tone > 30) player.tone = 30;
+				player.fertility += 10;
 				player.createVagina();
+                player.clitLength = .25;
 				addButton(0, "Next", celessUnicornIntro1, 3, true);
 				break;
 			case 3:

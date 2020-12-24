@@ -29,16 +29,19 @@ import classes.Scenes.Areas.Forest.TentacleBeastRaging;
 import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
 import classes.Scenes.Dungeons.D3.Lethice;
+import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Explore.Pierce;
+import classes.Scenes.Explore.TheDummy;
 import classes.Scenes.Monsters.DarkElfRanger;
 import classes.Scenes.Monsters.DarkElfScout;
 import classes.Scenes.Monsters.DarkElfSlaver;
 import classes.Scenes.Monsters.DarkElfSniper;
 import classes.Scenes.Monsters.Malikore;
 import classes.Scenes.Monsters.Manticore;
+import classes.Scenes.Monsters.Oozaru;
 import classes.Scenes.NPCs.Alvina;
 import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.Aurora;
@@ -187,7 +190,7 @@ use namespace CoC;
 			if (player.findPerk(PerkLib.SoulTyrant) >= 0) dailySoulforceUsesLimit++;
 			if (player.findPerk(PerkLib.SoulAncestor) >= 0) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 			outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
-			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1430\n");
+			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1730\n");
 		/*	outputText("<b>Progress toward clearing next meridian: </b>");
 			if (flags[kFLAGS.UNLOCKED_MERIDIANS] == 2)
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
@@ -196,7 +199,7 @@ use namespace CoC;
 			else
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 			outputText("<b>PC Speed %:</b> " + player.getMaxStats("spe") + "\n");
-		*/	if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
 				outputText("<b>TelAdre Tripxi Guns general timer:</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxi) + "\n");
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) {
 					outputText("<b>TelAdre Tripxi Guns 1 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) + " (Desert Eagle)\n");
@@ -235,13 +238,15 @@ use namespace CoC;
 					outputText("<b>TelAdre Tripxi Guns 6 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns6) + "\n");
 				}
 			}
-			outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
+		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
 			menu();
 			if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Cultivate", "You're unable to recover soulforce by cultivating.");
 			else addButton(0, "Cultivate", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
-			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) addButton(1, "Self-sustain", SelfSustain).hint("Spend some soulforce on suppresing hunger for a while."); //zamiana soulforce na satiety w stosunku 1:5
-			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) addButton(2, "Repres. Lust", RepresLust).hint("Spend some soulforce on calming your sexual urges."); //używanie soulforce do zmniejszania lust w stosunku 1:2
-			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) addButton(4, "Adj. Corr.", CorruptionAndSoulforce).hint("Spend some soulforce on affecting your current corruption."); //używanie soulforce do zmniejszania corruption w stosunku 1:100 a zdobywanie corruption w stosunku 1:50
+			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) {
+				addButton(1, "Self-sustain", SelfSustain).hint("Spend some soulforce on suppresing hunger for a while."); //zamiana soulforce na satiety w stosunku 1:5
+				addButton(2, "Repres. Lust", RepresLust).hint("Spend some soulforce on calming your sexual urges."); //używanie soulforce do zmniejszania lust w stosunku 1:2
+				addButton(4, "Adj. Corr.", CorruptionAndSoulforce).hint("Spend some soulforce on affecting your current corruption."); //używanie soulforce do zmniejszania corruption w stosunku 1:100 a zdobywanie corruption w stosunku 1:50
+			}
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(3, "Mana", ManaAndSoulforce).hint("Convert some soulforce into mana or vice versa."); //używanie soulforce do zamiany na mane w stosunku 1:1 a many do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.hasPerk(PerkLib.Metamorph)) {
@@ -267,127 +272,145 @@ use namespace CoC;
 			addButton(7, "Body State", BodyStateMenu).hint("For more precise adjusting of few other body values or parts than Stats Adj option.");
 			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.")
 			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that not fit anywhere else and etc.");
-			addButton(11, "PerkGalore1", PerkGalore1);
-			addButton(12, "PerkGalore2", PerkGalore2);
+			addButton(11, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
+			addButton(12, "FairyTest", FairyTest).hint("Become a fairy.");
 			addButton(13, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function submenucuzwhynot():void {
 			menu();
-			//addButton(4, "ClickItOnce", AddMaxBackpack3).hint("");
+			addButton(0, "ClickItTwice", AddMaxBackpack00).hint("Zenji spawning pool");
+			addButton(1, "Instant-house", AddMaxBackpack01).hint("Instant-house + bed");
+			addButton(2, "Hex-Mate", AddMaxBackpack02).hint("Hex-Mate");
+			addButton(3, "EzekielBuffFix", AddMaxBackpack4).hint("Fix for Blessing.");
+			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) addButton(4, "ClickItOnce", AddMaxBackpack3).hint("Fixing Lover Zenji missing one status effect needed for his sex scenes menu.");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2 && !player.hasStatusEffect(StatusEffects.TrainingNPCsTimersReduction)) addButton(5, "ClickItDoIt", AddMaxBackpack2).hint("Adding one status effect needed for sparring ring upgrades effect.");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
 			addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
-			if ((player.hasPerk(PerkLib.TitanGripEx) && !player.hasPerk(PerkLib.GigantGripEx)) || player.hasPerk(PerkLib.LegendaryGolemMaker)) addButton(10, "PerkFixes", AddMaxBackpack).hint("Fix testers saves perks for Giant's Grip (Ex) and above Epic Golem maker");
-			addButton(11, "ChimeraUprising", AddMaxBackpack4).hint("Use only ONCE if PC from older save have chimerical body perks above Basic stage.");
+			addButton(10, "All4Prestige", AddMaxBackpack03).hint("A11 th4t Prestige is Y0urs to T4ke!!!");
+			addButton(11, "PerkGalore1", PerkGalore1);
+			addButton(12, "PerkGalore2", PerkGalore2);
+			//addButton(13, "ClickItOnce", AddMaxBackpack3).hint("");
 			addButton(14, "Back", SoulforceCheats);
 		}
-		public function AddMaxBackpack():void {
-			if (player.hasPerk(PerkLib.TitanGripEx)) {
-				player.removePerk(PerkLib.TitanGripEx);
-				player.createPerk(PerkLib.GigantGripEx, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(PerkLib.LegendaryGolemMaker)) {
-				player.removePerk(PerkLib.LegendaryGolemMaker);
-				player.createPerk(PerkLib.EpicGolemMaker2ndCircle, 0, 0, 0, 0);
-			}
+		public function AddMaxBackpack03():void {
+			outputText("\n\nA11 th4t Prestige is Y0urs to T4ke!!!");
+			if (!player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) player.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobSentinel)) player.createPerk(PerkLib.PrestigeJobSentinel, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobSoulArtMaster)) player.createPerk(PerkLib.PrestigeJobSoulArtMaster, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobSpellKnight)) player.createPerk(PerkLib.PrestigeJobSpellKnight, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobTempest)) player.createPerk(PerkLib.PrestigeJobTempest, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobWarlock)) player.createPerk(PerkLib.PrestigeJobWarlock, 0, 0, 0, 0);
+			doNext(submenucuzwhynot);
+		}
+		public function AddMaxBackpack02():void {
+			if (!player.hasPerk(PerkLib.JobSorcerer)) player.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
+			player.createPerk(PerkLib.PrestigeJobWarlock, 0, 0, 0, 0);
+			player.createPerk(PerkLib.HexKnowledge, 0, 0, 0, 0);
+			player.createPerk(PerkLib.DarkRitual, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.KnowsConsumingDarkness, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.KnowsCurseOfDesire, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.KnowsCurseOfWeeping, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.KnowsLifeSiphon, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.KnowsLifetap, 0, 0, 0, 0);
+			doNext(submenucuzwhynot);
+		}
+		public function AddMaxBackpack00():void {
+			player.createStatusEffect(StatusEffects.ZenjiModificationsList,0,0,15,7);
+			player.createStatusEffect(StatusEffects.ZenjiPreparationsList,0,0,0,0);
+			player.createStatusEffect(StatusEffects.ZenjiZList,0,0,0,0);
+			flags[kFLAGS.ZENJI_PROGRESS] = 11;
+			flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] = 0;
+			doNext(submenucuzwhynot);
+		}
+		public function AddMaxBackpack01():void {
+			flags[kFLAGS.CAMP_BUILT_CABIN] = 1;
+			flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] = 1;
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack2():void {
-
+			player.createStatusEffect(StatusEffects.TrainingNPCsTimersReduction, 6, 0, 0, 0);
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack3():void {
-
+			player.createStatusEffect(StatusEffects.ZenjiZList, 0, 0, 0, 0);
 			doNext(SoulforceCheats);
 		}
 		public function AddMaxBackpack4():void {
-			if (player.hasPerk(PerkLib.ChimericalBodySemiAdvancedStage)) {
-				player.removePerk(PerkLib.ChimericalBodySemiAdvancedStage);
-				player.createPerk(PerkLib.ChimericalBodySemiImprovedStage, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodyAdvancedStage)) {
-				player.removePerk(PerkLib.ChimericalBodyAdvancedStage);
-				player.createPerk(PerkLib.ChimericalBodyImprovedStage, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)) {
-				player.removePerk(PerkLib.ChimericalBodySemiSuperiorStage);
-				player.createPerk(PerkLib.ChimericalBodySemiAdvancedStage, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodySuperiorStage)) {
-				player.removePerk(PerkLib.ChimericalBodySuperiorStage);
-				player.createPerk(PerkLib.ChimericalBodyAdvancedStage, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodySemiPeerlessStage)) {
-				player.removePerk(PerkLib.ChimericalBodySemiPeerlessStage);
-				player.createPerk(PerkLib.ChimericalBodySemiSuperiorStage, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodyPeerlessStage)) {
-				player.removePerk(PerkLib.ChimericalBodyPeerlessStage);
-				player.createPerk(PerkLib.ChimericalBodySuperiorStage, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
-				player.removePerk(PerkLib.ChimericalBodySemiEpicStage);
-				player.createPerk(PerkLib.ChimericalBodySemiPeerlessStage, 0, 0, 0, 0);
-			}
+			player.statStore.addBuffObject({
+				"str": 5,
+				"tou": 5,
+				"spe": 5,
+				"int": 5,
+				"wis": 5,
+				"lib": 5
+			}, 'EzekielBlessing', {text: 'Ezekiel Blessing'});
 			doNext(submenucuzwhynot);
 		}
-public function FightAria():void {
-	clearOutput();
-	outputText("Entering battle with Melkie! Enjoy ^^");
-	startCombat(new Aria());
-}
-public function FightLethice():void {
-	clearOutput();
-	outputText("Entering battle with Lethice! Enjoy ^^");
-	startCombat(new Lethice());
-}
-public function FightNeisa():void {
-	clearOutput();
-	outputText("Entering battle with Neisa! Enjoy ^^");
-	startCombat(new Neisa());
-}
-public function FightAlvina():void {
-	clearOutput();
-	outputText("Entering battle with Alvina! Enjoy ^^");
-	startCombat(new Alvina());
-}
-public function FightChaosChimera():void {
-	clearOutput();
-	outputText("Entering battle with Chaos Chimera! Enjoy ^^");
-	startCombat(new ChaosChimera());
-}
-public function FightDarkSlimeEmpress():void {
-	clearOutput();
-	outputText("Entering battle with Dark Slime Empress! Enjoy ^^");
-	if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,65,0,0,0);
-	else {
-		if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
-		else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
-	}
-	startCombat(new DarkSlimeEmpress());
-}
-public function FightHydra():void {
-	clearOutput();
-	outputText("Entering battle with Hydra! Enjoy ^^");
-	if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,65,0,0,0);
-	else {
-		if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
-		else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
-	}
-	startCombat(new Hydra());
-}
-public function FightHellfireSnail():void {
-	clearOutput();
-	outputText("Entering battle with Hellfire Snail! Enjoy ^^");
-	if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,65,0,0,0);
-	else {
-		if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
-		else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
-	}
-	startCombat(new HellfireSnail());
-}
+		public function TestDynamicStats():void {
+			player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
+			statScreenRefresh();
+			SoulforceCheats();
+		}
+		public function FightAria():void {
+			clearOutput();
+			outputText("Entering battle with Melkie! Enjoy ^^");
+			startCombat(new Aria());
+		}
+		public function FightLethice():void {
+			clearOutput();
+			outputText("Entering battle with Lethice! Enjoy ^^");
+			startCombat(new Lethice());
+		}
+		public function FightNeisa():void {
+			clearOutput();
+			outputText("Entering battle with Neisa! Enjoy ^^");
+			startCombat(new Neisa());
+		}
+		public function FightAlvina():void {
+			clearOutput();
+			outputText("Entering battle with Alvina! Enjoy ^^");
+			startCombat(new Alvina());
+		}
+		public function FightChaosChimera():void {
+			clearOutput();
+			outputText("Entering battle with Chaos Chimera! Enjoy ^^");
+			startCombat(new ChaosChimera());
+		}
+		public function FightDarkSlimeEmpress():void {
+			clearOutput();
+			outputText("Entering battle with Dark Slime Empress! Enjoy ^^");
+			if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,65,0,0,0);
+			else {
+				if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
+				else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+			}
+			startCombat(new DarkSlimeEmpress());
+		}
+		public function FightHydra():void {
+			clearOutput();
+			outputText("Entering battle with Hydra! Enjoy ^^");
+			if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,65,0,0,0);
+			else {
+				if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
+				else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+			}
+			startCombat(new Hydra());
+		}
+		public function FightHellfireSnail():void {
+			clearOutput();
+			outputText("Entering battle with Hellfire Snail! Enjoy ^^");
+			if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,65,0,0,0);
+			else {
+				if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
+				else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+			}
+			startCombat(new HellfireSnail());
+		}
 		public function AddReptaTongue():void {
 			outputText("\n\n<b>(Gained set of items to make Repta-Tongue Potion!)</b>\n\n");
 			inventory.takeItem(consumables.HUMMUS_, AddReptaTongue1);
@@ -776,7 +799,7 @@ public function FightHellfireSnail():void {
 				player.createPerk(PerkLib.SexDeity, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Sex Deity!)</b>");
 			}
-			doNext(SoulforceCheats);
+			doNext(submenucuzwhynot);
 		}
 		public function PerkGalore2():void {
 			if (player.findPerk(PerkLib.PrestigeJobNecromancer) < 0) {
@@ -971,11 +994,15 @@ public function FightHellfireSnail():void {
 				player.createPerk(PerkLib.HistorySmith, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Smith!)</b>");
 			}
+			if (player.findPerk(PerkLib.HistoryTactician) < 0 && player.findPerk(PerkLib.PastLifeTactician) < 0) {
+				player.createPerk(PerkLib.HistoryTactician, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: History: Tactician!)</b>");
+			}
 			if (player.findPerk(PerkLib.HistoryWhore) < 0 && player.findPerk(PerkLib.PastLifeWhore) < 0) {
 				player.createPerk(PerkLib.HistoryWhore, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: History: Whore!)</b>");
 			}
-			doNext(SoulforceCheats);
+			doNext(submenucuzwhynot);
 		}
 		public function StatsAscensionMenu():void {
 			menu();
@@ -991,6 +1018,7 @@ public function FightHellfireSnail():void {
 			addButton(9, "Wis", StatsMenuWis).hint("Adj Wis.");
 			addButton(10, "Tone/Thicc/Fem", StatsMenuToneThicknessFeminity).hint("Adj Tone/Thickness/Feminity.");
 			addButton(11, "Lib", StatsMenuLib).hint("Adj Lib.");
+			addButton(12, "Sen", StatsMenuSen).hint("Adj Sen.");
 			addButton(13, "Cor", StatsMenuCor).hint("Adj Cor.");
 			addButton(14, "Back", SoulforceCheats);
 		}
@@ -1078,6 +1106,20 @@ public function FightHellfireSnail():void {
 			addButton(9, "Lib Down 5", SubLib5).hint("Substract 1000 from Lib.");
 			addButton(14, "Back", StatsAscensionMenu);
 		}
+		public function StatsMenuSen():void {
+			menu();
+			addButton(0, "Sen Up 1", AddSen1).hint("Add 1 to Sen.");
+			addButton(5, "Sen Down 1", SubSen1).hint("Substract 1 from Sen.");
+			addButton(1, "Sen Up 2", AddSen2).hint("Add 10 to Sen.");
+			addButton(6, "Sen Down 2", SubSen2).hint("Substract 10 from Sen.");
+			addButton(2, "Sen Up 3", AddSen3).hint("Add 50 to Sen.");
+			addButton(7, "Sen Down 3", SubSen3).hint("Substract 50 from Sen.");
+			addButton(3, "Sen Up 4", AddSen4).hint("Add 200 to Sen.");
+			addButton(8, "Sen Down 4", SubSen4).hint("Substract 200 from Sen.");
+			addButton(4, "Sen Up 5", AddSen5).hint("Add 1000 to Sen.");
+			addButton(9, "Sen Down 5", SubSen5).hint("Substract 1000 from Sen.");
+			addButton(14, "Back", StatsAscensionMenu);
+		}
 		public function StatsMenuCor():void {
 			menu();
 			addButton(0, "Cor Up 1", AddCor1).hint("Add 1 to Cor.");
@@ -1116,9 +1158,8 @@ public function FightHellfireSnail():void {
 			addButton(5, "Add EXP 1", AddEXP1).hint("Add 100 EXP.");
 			addButton(6, "Add EXP 2", AddEXP2).hint("Add 1000 EXP.");
 			addButton(7, "Add EXP 3", AddEXP3).hint("Add 10000 EXP.");
-			//addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
-			addButton(8, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
-			if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) addButton(10, "Trib Perks", TribulationPerks).hint("Add 2 Tribulation perks.");
+			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
+			if (player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) < 0) addButton(10, "Trib Perks", TribulationPerks).hint("Add 4 Tribulation perks.");
 			if (player.findPerk(PerkLib.SoulAncestor) < 0) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Add all soul cultivator related perks for stages 10-12 of cultivation.");
 			if (player.level < CoC.instance.levelCap) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
 			if (player.level < CoC.instance.levelCap - 9) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
@@ -1542,6 +1583,14 @@ public function FightHellfireSnail():void {
 				player.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: G class Heaven Tribulation Survivor!)</b>");
 			}
+			if (player.findPerk(PerkLib.FclassHeavenTribulationSurvivor) < 0) {
+				player.createPerk(PerkLib.FclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: F class Heaven Tribulation Survivor!)</b>");
+			}
+			if (player.findPerk(PerkLib.EclassHeavenTribulationSurvivor) < 0) {
+				player.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+				outputText("\n\n<b>(Gained Perk: E class Heaven Tribulation Survivor!)</b>");
+			}
 			doNext(SoulforceCheats);
 		}
 		public function Stage10to12SoulPerks():void {
@@ -1567,33 +1616,55 @@ public function FightHellfireSnail():void {
 			}
 			doNext(SoulforceCheats);
 		}
-		public function EquipmentMenu():void {
+		public function EquipmentMenu(page:int = 1):void {
 			menu();
-			addButton(0, "Rap. Perk", AddRapPerk).hint("Add Raphael Rapier Perk and 1 Dragon Rapier.  USE only ONCE to not break the game!");
-			addButton(1, "Sky Pearl", AddSkyPoisonPearl).hint("Add 1 Sky Poison Pearl.");
-			addButton(2, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
-			addButton(3, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
-			addButton(4, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
-			addButton(5, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
-			addButton(6, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
-			addButton(7, "L Ayo Arm", AddLightAyoArmor).hint("Add 1 Light Ayo Armor for testing purposes.");
-			addButton(8, "HBA Armor", AddHBAArmor).hint("Add 1 HBA Armor for testing purposes.");
-			addButton(9, "YODrops", AddYukiOnnaStuff).hint("Add both Yuki Onna equipment drops for testing purposes.");
-			addButton(10, "SpikeShields", AddSpikedShields).hint("Add set of two spiked shields of various sizes and weight for testing purposes.");
-			addButton(11, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
-			addButton(12, "MatrixArmory1", AddTheSeerHairpinAndCo).hint("Adds: 1 Eldritch Staff, 1 master Gloves, 1 Gnoll Throwing Axes, 1 Hodr's Bow, 1 Truestrike Sword, 1 Sceptre of Command, 1 Demonic Scythe, 1 Seer's Hairpin, Sakura Petal Kimono, Oni bead necklace");
-			addButton(13, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
-			addButton(14, "Back", SoulforceCheats);
+			if (page == 1) {
+				addButton(0, "Rap. Perk", AddRapPerk).hint("Add Raphael Rapier Perk and 1 Dragon Rapier.  USE only ONCE to not break the game!");
+				addButton(1, "Sky Pearl", AddSkyPoisonPearl).hint("Add 1 Sky Poison Pearl.");
+				addButton(2, "CatONIneTWhip", AddCatONineTailWhip).hint("Add 1 Bastet Whip.");
+				addButton(3, "NineTailWhip", AddNineTailWhip).hint("Add 1 Nine Tail Whip.");
+				addButton(4, "DualLAxes", AddDualMinoAxes).hint("Add 1 pair of Large Axes.");
+				addButton(5, "UH Ayo Arm", AddUltraHeavyAyoArmor).hint("Add 1 Ultra heavy Ayo Armor for testing purposes.");
+				//6
+				addButton(7, "HB Mech", AddHBMech).hint("Add 1 Howling Banshee Mech for testing purposes.");
+				addButton(8, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
+				addButton(9, "GiantSlayerMech", AddGiantSlayerMech).hint("Add 1 Giant Slayer Mech for testing purposes.");
+				//10
+				addButton(11, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
+				addButton(12, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
+				addButton(13, "-2-", EquipmentMenu, page + 1);
+				addButton(14, "Back", SoulforceCheats);
+			}
+			if (page == 2)  {
+				//0
+				//1
+				//2
+				//3
+				//4
+				//5
+				//6
+				//7
+				//8
+				addButton(9, "Ascensus", AddTheStaffs).hint("Add set of items for Ascensus.");
+				addButton(10, "YODrops", AddYukiOnnaStuff).hint("Add both Yuki Onna equipment drops for testing purposes.");
+				addButton(11, "SpikeShields", AddSpikedShields).hint("Add set of two spiked shields of various sizes and weight for testing purposes.");
+				addButton(12, "MatrixArmory1", AddTheSeerHairpinAndCo).hint("Adds: 1 Eldritch Staff, 1 master Gloves, 1 Gnoll Throwing Axes, 1 Hodr's Bow, 1 Truestrike Sword, 1 Sceptre of Command, 1 Demonic Scythe, 1 Seer's Hairpin, Sakura Petal Kimono, Oni bead necklace");
+				addButton(13, "-1-", EquipmentMenu, page - 1);
+				addButton(14, "Back", SoulforceCheats);
+			}
+			
 		}
 		public function NonEquipmentMenu(page:int = 1):void {
 			menu();
 			if (page == 1) {
 				addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
 				addButton(1, "CDI", AddCurrentDebugItem).hint("Add 1 Gun.");
-				//addButton(2, "", ).hint("Add 1 .");
+				addButton(2, "TrollFig", AddTrollFig).hint("Add 1 Troll Fig.");
 				//addButton(3, "", ).hint("Add 1 .");
 				//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 				//addButton(5, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
+				addButton(3, "CrimsonJade", AddCrimsonJade).hint("Add 1 Crimson Jade.");
+				addButton(4, "R.Manuscript", AddRedManuscript).hint("Add 1 Red Manuscript.");
 				addButton(5, "ALICORN", AddAlicornium).hint("Add 1 Alicornium.");
 				addButton(6, "SBMan", AddSoulBlastManual).hint("Add 1 Soul Blast manual.");
 				addButton(7, "V.D.ARC", AddVeryDilutedArcaneRegenConcotion).hint("Add 1 very diluted Arcane Regen Concotion.");
@@ -1667,9 +1738,8 @@ public function FightHellfireSnail():void {
 				addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
 				addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
 				addButton(2, "Pierce", FightPierce).hint("Test fight with Pierce.");
-				addButton(2, "FairyTest", FairyTest).hint("Become a fairy.");
-				//addButton(3, "", ).hint("Test fight with .");
-				//addButton(4, "", ).hint("Test fight with .");
+				addButton(3, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
+				addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
 				//addButton(5, "", ).hint("Test fight with .");
 				//addButton(6, "", ).hint("Test fight with .");
 				addButton(7, "Zenji", FightZenji).hint("Test fight with Zenji.");
@@ -1699,68 +1769,133 @@ public function FightHellfireSnail():void {
 				addButton(14, "Back", SoulforceCheats);
 			}
 		}
-
-		public function AddEnergyCore():void {
-			outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
-			inventory.takeItem(useables.ENECORE, curry(MaterialMenu, 2));
+		
+		public function AddRapPerk():void {
+			flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4;
+			player.createPerk(PerkLib.RapierTraining, 0, 0, 0, 0);
+			outputText("\n\n<b>(Gained Perk: Rapier Training and 1 Dragon Rapier!)</b>\n\n");
+			inventory.takeItem(weapons.DRAPIER, curry(EquipmentMenu, 1));
 		}
-		public function AddMechanism():void {
-			outputText("\n\n<b>(Gained 1 Mechanism!)</b>\n\n");
-			inventory.takeItem(useables.MECHANI, curry(MaterialMenu, 2));
+		public function AddSkyPoisonPearl():void {
+			outputText("\n\n<b>(Gained 1 Sky Poison Pearl!)</b>\n\n");
+			inventory.takeItem(consumables.SPPEARL, curry(EquipmentMenu, 1));
 		}
-		public function AddMetalPieces():void {
-			outputText("\n\n<b>(Gained 50 Metal Pieces!)</b>\n\n");
-			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += 50;
-			statScreenRefresh();
-			curry(MaterialMenu, 1);
+		public function AddCatONineTailWhip():void {
+			outputText("\n\n<b>(Gained 1 Bastet Whip!)</b>\n\n");
+			inventory.takeItem(weapons.CNTWHIP, curry(EquipmentMenu, 1));
 		}
-		public function AddGolemCore():void {
-			outputText("\n\n<b>(Gained 1 Golem Core!)</b>\n\n");
-			inventory.takeItem(useables.GOLCORE, curry(MaterialMenu, 2));
+		public function AddNineTailWhip():void {
+			outputText("\n\n<b>(Gained 1 Nine Tail Whip!)</b>\n\n");
+			inventory.takeItem(weapons.NTWHIP, curry(EquipmentMenu, 1));
 		}
-		public function AddPolarMidnightScroll():void {
-			outputText("\n\n<b>(Gained 1 Polar Midnight scroll!)</b>\n\n");
-			inventory.takeItem(consumables.POL_MID, curry(MaterialMenu, 2));
+		public function AddDualMinoAxes():void {
+			outputText("\n\n<b>(Gained 1 pair of Large Axes!)</b>\n\n");
+			inventory.takeItem(weapons.DL_AXE_, curry(EquipmentMenu, 1));
 		}
-		public function AddMeteorShowerTome():void {
-			outputText("\n\n<b>(Gained 1 Meteor Shower tome!)</b>\n\n");
-			inventory.takeItem(consumables.MET_SHO, curry(MaterialMenu, 2));
+		public function AddUltraHeavyAyoArmor():void {
+			outputText("\n\n<b>(Gained 1 Ultra Heavy Ayo Armor!)</b>\n\n");
+			inventory.takeItem(armors.UHAYOARM, curry(EquipmentMenu, 1));
 		}
-		public function AddFeralImpSkull():void {
-			outputText("\n\n<b>(Gained 1 Feral Imp Skull!)</b>\n\n");
-			inventory.takeItem(useables.FIMPSKL, curry(MaterialMenu, 2));
+		public function AddHBMech():void {
+			outputText("\n\n<b>(Gained 1 Howling Banshee Mech!)</b>\n\n");
+			inventory.takeItem(vehicles.HB_MECH, curry(EquipmentMenu, 1));
 		}
-		public function AddSpiderSilk():void {
-			outputText("\n\n<b>(Gained 1 Spider Silk!)</b>\n\n");
-			inventory.takeItem(useables.T_SSILK, curry(MaterialMenu, 1));
+		public function AddGoblinMechPrime():void {
+			outputText("\n\n<b>(Gained 1 Goblin Mech Prime!)</b>\n\n");
+			inventory.takeItem(vehicles.GOBMPRI, curry(EquipmentMenu, 1));
 		}
-		public function AddBeeChitin():void {
-			outputText("\n\n<b>(Gained 1 Chitin Shard!)</b>\n\n");
-			inventory.takeItem(useables.B_CHITN, curry(MaterialMenu, 1));
+		public function AddGiantSlayerMech():void {
+			outputText("\n\n<b>(Gained 1 Giant Slayer Mech!)</b>\n\n");
+			inventory.takeItem(vehicles.GS_MECH, curry(EquipmentMenu, 1));
 		}
-		public function AddGreenGel():void {
-			outputText("\n\n<b>(Gained 1 Green Gel!)</b>\n\n");
-			inventory.takeItem(useables.GREENGL, curry(MaterialMenu, 1));
+		public function AddTheEvelyn():void {
+			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");
+			inventory.takeItem(weaponsrange.EVELYN_, curry(EquipmentMenu, 1));
 		}
-		public function AddDragonscale():void {
-			outputText("\n\n<b>(Gained 1 Dragonscale!)</b>\n\n");
-			inventory.takeItem(useables.D_SCALE, curry(MaterialMenu, 1));
+		public function AddTheInquisitorsTome():void {
+			outputText("\n\n<b>(Gained 1 Inquisitor's Tome!)</b>\n\n");
+			inventory.takeItem(weaponsrange.I_TOME_, curry(EquipmentMenu, 1));
 		}
-		public function AddShard():void {
-			outputText("\n\n<b>(Gained 1 Shard!)</b>\n\n");
-			inventory.takeItem(useables.S_SHARD, curry(MaterialMenu, 1));
+		public function AddTheStaffs():void {
+			outputText("\n\n<b>(Gained set of items to make Ascensus!)</b>\n\n");
+			inventory.takeItem(useables.TBAPLAT, AddTheStaffs1);
 		}
-		public function AddHerb():void {
-			outputText("\n\n<b>(Gained 1 Shard!)</b>\n\n");
-			inventory.takeItem(consumables.HEALHERB, curry(MaterialMenu, 1));
+		public function AddTheStaffs1():void {
+			outputText("\n\n");
+			inventory.takeItem(useables.DBAPLAT, AddTheStaffs2);
+		}
+		public function AddTheStaffs2():void {
+			outputText("\n\n");
+			inventory.takeItem(weapons.W_STAFF, curry(EquipmentMenu, 2));
+		}
+		public function AddYukiOnnaStuff():void {
+			outputText("\n\n<b>(Gained 1st Yuki Onna item!)</b>\n\n");
+			inventory.takeItem(armors.BLIZZ_K, AddYukiOnnaStuff2);
+		}
+		public function AddYukiOnnaStuff2():void {
+			outputText("\n\n<b>(Gained 2nd Yuki Onna item!)</b>\n\n");
+			inventory.takeItem(headjewelries.SNOWFH, curry(EquipmentMenu, 2));
+		}
+		public function AddSpikedShields():void {
+			outputText("\n\n<b>(Gained Heavy Spiked Shield!)</b>\n\n");
+			inventory.takeItem(shields.SPIH_SH, AddSpikedShields2);
+		}
+		public function AddSpikedShields2():void {
+			outputText("\n\n<b>(Gained Massive Spiked Shield!)</b>\n\n");
+			inventory.takeItem(shields.SPIM_SH, curry(EquipmentMenu, 2));
+		}
+		public function AddTheSeerHairpinAndCo():void {
+			outputText("\n\n<b>(Gained 1 Eldritch Staff!)</b>\n\n");
+			inventory.takeItem(weapons.E_STAFF, AddTheSeerHairpinAndCo1);
+		}
+		public function AddTheSeerHairpinAndCo1():void {
+			outputText("\n\n<b>(Gained 1 Master Gloves!)</b>\n\n");
+			inventory.takeItem(weapons.MASTGLO, AddTheSeerHairpinAndCo2);
+		}
+		public function AddTheSeerHairpinAndCo2():void {
+			outputText("\n\n<b>(Gained 1 Gnoll Throwing Axes!)</b>\n\n");
+			inventory.takeItem(weaponsrange.GTHRAXE, AddTheSeerHairpinAndCo3);
+		}
+		public function AddTheSeerHairpinAndCo3():void {
+			outputText("\n\n<b>(Gained 1 Hodr's Bow!)</b>\n\n");
+			inventory.takeItem(weaponsrange.BOWHODR, AddTheSeerHairpinAndCo4);
+		}
+		public function AddTheSeerHairpinAndCo4():void {
+			outputText("\n\n<b>(Gained 1 Sceptre of Command!)</b>\n\n");
+			inventory.takeItem(weapons.SCECOMM, AddTheSeerHairpinAndCo5);
+		}
+		public function AddTheSeerHairpinAndCo5():void {
+			outputText("\n\n<b>(Gained 1 Truestrike Sword!)</b>\n\n");
+			inventory.takeItem(weapons.TRSTSWO, AddTheSeerHairpinAndCo6);
+		}
+		public function AddTheSeerHairpinAndCo6():void {
+			outputText("\n\n<b>(Gained 1 Demonic Scythe!)</b>\n\n");
+			inventory.takeItem(weapons.DEMSCYT, AddTheSeerHairpinAndCo7);
+		}
+		public function AddTheSeerHairpinAndCo7():void {
+			outputText("\n\n<b>(Gained 1 Seer's Hairpin!)</b>\n\n");
+			inventory.takeItem(headjewelries.SEERPIN, AddTheSeerHairpinAndCo8);
+		}
+		public function AddTheSeerHairpinAndCo8():void {
+			outputText("\n\n<b>(Gained 1 Sakura Petal Kimono!)</b>\n\n");
+			inventory.takeItem(armors.SPKIMO, AddTheSeerHairpinAndCo9);
+		}
+		public function AddTheSeerHairpinAndCo9():void {
+			outputText("\n\n<b>(Gained 1 Oni bead necklace!)</b>\n\n");
+			inventory.takeItem(necklaces.OBNECK, curry(EquipmentMenu, 2));
+		}
+		
+		public function AddFoxJewel():void {
+			outputText("\n\n<b>(Gained 1 Fox Jewel!)</b>\n\n");
+			inventory.takeItem(consumables.FOXJEWL, curry(NonEquipmentMenu, 1));
 		}
 		public function AddFreshFish():void {
 			outputText("\n\n<b>(Gained 1 Fresh Fish!)</b>\n\n");
 			inventory.takeItem(consumables.FREFISH, curry(NonEquipmentMenu, 2));
 		}
-		public function AddFoxJewel():void {
-			outputText("\n\n<b>(Gained 1 Fox Jewel!)</b>\n\n");
-			inventory.takeItem(consumables.FOXJEWL, curry(NonEquipmentMenu, 1));
+		public function AddTrollFig():void {
+			outputText("\n\n<b>(Gained 1 Troll Fig!)</b>\n\n");
+			inventory.takeItem(consumables.TROLFIG, curry(NonEquipmentMenu, 1));
 		}
 		public function AddVoltageTopaz():void {
 			outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");
@@ -1808,12 +1943,80 @@ public function FightHellfireSnail():void {
 		}
 		public function AddFTear():void {
 			outputText("\n\n<b>(Gained 1 Fafnir Tear!)</b>\n\n");
+			outputText("Weapon types: "+[player.isStaffTypeWeapon(),player.isSwordTypeWeapon(),player.isAxeTypeWeapon(),player.isMaceHammerTypeWeapon(),player.isSpearTypeWeapon(),player.isSpearTypeWeapon(),player.isDuelingTypeWeapon()].join());
 			inventory.takeItem(consumables.F_TEAR, curry(NonEquipmentMenu, 2));
 		}
 		public function AddBubble():void {
 			outputText("\n\n<b>(Gained 1 Bubblegum!)</b>\n\n");
 			inventory.takeItem(consumables.BUBBLEG, curry(NonEquipmentMenu, 2));
 		}
+		
+		public function AddMetalPieces():void {
+			outputText("\n\n<b>(Gained 50 Metal Pieces!)</b>\n\n");
+			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += 50;
+			statScreenRefresh();
+			curry(MaterialMenu, 1);
+		}
+		public function AddSpiderSilk():void {
+			outputText("\n\n<b>(Gained 1 Spider Silk!)</b>\n\n");
+			inventory.takeItem(useables.T_SSILK, curry(MaterialMenu, 1));
+		}
+		public function AddBeeChitin():void {
+			outputText("\n\n<b>(Gained 1 Chitin Shard!)</b>\n\n");
+			inventory.takeItem(useables.B_CHITN, curry(MaterialMenu, 1));
+		}
+		public function AddGreenGel():void {
+			outputText("\n\n<b>(Gained 1 Green Gel!)</b>\n\n");
+			inventory.takeItem(useables.GREENGL, curry(MaterialMenu, 1));
+		}
+		public function AddDragonscale():void {
+			outputText("\n\n<b>(Gained 1 Dragonscale!)</b>\n\n");
+			inventory.takeItem(useables.D_SCALE, curry(MaterialMenu, 1));
+		}
+		public function AddShard():void {
+			outputText("\n\n<b>(Gained 1 Shard!)</b>\n\n");
+			inventory.takeItem(useables.S_SHARD, curry(MaterialMenu, 1));
+		}
+		public function AddHerb():void {
+			outputText("\n\n<b>(Gained 1 Healing Herb!)</b>\n\n");
+			inventory.takeItem(consumables.HEALHERB, curry(MaterialMenu, 1));
+		}
+		public function AddEnergyCore():void {
+			outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
+			inventory.takeItem(useables.ENECORE, curry(MaterialMenu, 2));
+		}
+		public function AddMechanism():void {
+			outputText("\n\n<b>(Gained 1 Mechanism!)</b>\n\n");
+			inventory.takeItem(useables.MECHANI, curry(MaterialMenu, 2));
+		}
+		public function AddGolemCore():void {
+			outputText("\n\n<b>(Gained 1 Golem Core!)</b>\n\n");
+			inventory.takeItem(useables.GOLCORE, curry(MaterialMenu, 2));
+		}
+		public function AddPolarMidnightScroll():void {
+			outputText("\n\n<b>(Gained 1 Polar Midnight scroll!)</b>\n\n");
+			inventory.takeItem(consumables.POL_MID, curry(MaterialMenu, 2));
+		}
+		public function AddMeteorShowerTome():void {
+			outputText("\n\n<b>(Gained 1 Meteor Shower tome!)</b>\n\n");
+			inventory.takeItem(consumables.MET_SHO, curry(MaterialMenu, 2));
+		}
+		public function AddFeralImpSkull():void {
+			outputText("\n\n<b>(Gained 1 Feral Imp Skull!)</b>\n\n");
+			inventory.takeItem(useables.FIMPSKL, curry(MaterialMenu, 2));
+		}
+		
+		public function FightTheDummy():void {
+			clearOutput();
+			outputText("Entering battle with The Dummy! Enjoy ^^");
+			startCombat(new TheDummy());
+		}
+		public function FightSuccubusGardener():void {
+			clearOutput();
+			outputText("Entering battle with Succubus Gardener! Enjoy ^^");
+			startCombat(new SuccubusGardener());
+		}
+		
 		public function AddThickGreenOnnaGossamer():void {
 			outputText("\n\n<b>(Gained 1 Thick Green Onna Gossamer!)</b>\n\n");
 			inventory.takeItem(consumables.WHITEIS, SoulforceCheats);
@@ -1869,70 +2072,6 @@ public function FightHellfireSnail():void {
 		public function AddWorldTreeBranch():void {
 			outputText("\n\n<b>(Gained 1 Wold Tree branch!)</b>\n\n");
 			inventory.takeItem(useables.WT_BRAN, curry(MaterialMenu, 1));
-		}
-		public function AddTheStaffs():void {
-			outputText("\n\n<b>(Gained set of items to make Ascensus!)</b>\n\n");
-			inventory.takeItem(useables.TBAPLAT, AddTheStaffs1);
-		}
-		public function AddTheStaffs1():void {
-			outputText("\n\n");
-			inventory.takeItem(useables.DBAPLAT, AddTheStaffs2);
-		}
-		public function AddTheStaffs2():void {
-			outputText("\n\n");
-			inventory.takeItem(weapons.W_STAFF, EquipmentMenu);
-		}
-		public function AddCatONineTailWhip():void {
-			outputText("\n\n<b>(Gained 1 Bastet Whip!)</b>\n\n");
-			inventory.takeItem(weapons.CNTWHIP, EquipmentMenu);
-		}
-		public function AddTheEvelyn():void {
-			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");
-			inventory.takeItem(weaponsrange.EVELYN_, EquipmentMenu);
-		}
-		public function AddTheSeerHairpinAndCo():void {
-			outputText("\n\n<b>(Gained 1 Eldritch Staff!)</b>\n\n");
-			inventory.takeItem(weapons.E_STAFF, AddTheSeerHairpinAndCo1);
-		}
-		public function AddTheSeerHairpinAndCo1():void {
-			outputText("\n\n<b>(Gained 1 Master Gloves!)</b>\n\n");
-			inventory.takeItem(weapons.MASTGLO, AddTheSeerHairpinAndCo2);
-		}
-		public function AddTheSeerHairpinAndCo2():void {
-			outputText("\n\n<b>(Gained 1 Gnoll Throwing Axes!)</b>\n\n");
-			inventory.takeItem(weaponsrange.GTHRAXE, AddTheSeerHairpinAndCo3);
-		}
-		public function AddTheSeerHairpinAndCo3():void {
-			outputText("\n\n<b>(Gained 1 Hodr's Bow!)</b>\n\n");
-			inventory.takeItem(weaponsrange.BOWHODR, AddTheSeerHairpinAndCo4);
-		}
-		public function AddTheSeerHairpinAndCo4():void {
-			outputText("\n\n<b>(Gained 1 Sceptre of Command!)</b>\n\n");
-			inventory.takeItem(weapons.SCECOMM, AddTheSeerHairpinAndCo5);
-		}
-		public function AddTheSeerHairpinAndCo5():void {
-			outputText("\n\n<b>(Gained 1 Truestrike Sword!)</b>\n\n");
-			inventory.takeItem(weapons.TRSTSWO, AddTheSeerHairpinAndCo6);
-		}
-		public function AddTheSeerHairpinAndCo6():void {
-			outputText("\n\n<b>(Gained 1 Demonic Scythe!)</b>\n\n");
-			inventory.takeItem(weapons.DEMSCYT, AddTheSeerHairpinAndCo7);
-		}
-		public function AddTheSeerHairpinAndCo7():void {
-			outputText("\n\n<b>(Gained 1 Seer's Hairpin!)</b>\n\n");
-			inventory.takeItem(headjewelries.SEERPIN, AddTheSeerHairpinAndCo8);
-		}
-		public function AddTheSeerHairpinAndCo8():void {
-			outputText("\n\n<b>(Gained 1 Sakura Petal Kimono!)</b>\n\n");
-			inventory.takeItem(armors.SPKIMO, AddTheSeerHairpinAndCo9);
-		}
-		public function AddTheSeerHairpinAndCo9():void {
-			outputText("\n\n<b>(Gained 1 Oni bead necklace!)</b>\n\n");
-			inventory.takeItem(necklaces.OBNECK, EquipmentMenu);
-		}
-		public function AddTheInquisitorsTome():void {
-			outputText("\n\n<b>(Gained 1 Inquisitor's Tome!)</b>\n\n");
-			inventory.takeItem(weaponsrange.I_TOME_, EquipmentMenu);
 		}
 		public function EarlyAscension():void {
 			if (flags[kFLAGS.LETHICE_DEFEATED] == 1) {
@@ -2113,6 +2252,31 @@ public function FightHellfireSnail():void {
 			player.libStat.core.value += 1000;
 			statScreenRefresh();
 			StatsMenuLib();
+		}
+		public function AddSen1():void {
+			dynStats("sen", 1);
+			statScreenRefresh();
+			StatsMenuSen();
+		}
+		public function AddSen2():void {
+			dynStats("sen", 10);
+			statScreenRefresh();
+			StatsMenuSen();
+		}
+		public function AddSen3():void {
+			dynStats("sen", 50);
+			statScreenRefresh();
+			StatsMenuSen();
+		}
+		public function AddSen4():void {
+			dynStats("sen", 200);
+			statScreenRefresh();
+			StatsMenuSen();
+		}
+		public function AddSen5():void {
+			dynStats("sen", 1000);
+			statScreenRefresh();
+			StatsMenuSen();
 		}
 		public function AddCor1():void {
 			dynStats("cor", 1);
@@ -2314,6 +2478,31 @@ public function FightHellfireSnail():void {
 			statScreenRefresh();
 			StatsMenuLib();
 		}
+		public function SubSen1():void {
+			dynStats("sen", -1);
+			statScreenRefresh();
+			StatsMenuSen();
+		}
+		public function SubSen2():void {
+			dynStats("sen", -10);
+			statScreenRefresh();
+			StatsMenuSen();
+		}
+		public function SubSen3():void {
+			dynStats("sen", -50);;
+			statScreenRefresh();
+			StatsMenuSen();
+		}
+		public function SubSen4():void {
+			dynStats("sen", -200);
+			statScreenRefresh();
+			StatsMenuSen();
+		}
+		public function SubSen5():void {
+			dynStats("sen", -1000);
+			statScreenRefresh();
+			StatsMenuSen();
+		}
 		public function SubCor1():void {
 			dynStats("cor", -1);
 			statScreenRefresh();
@@ -2406,10 +2595,6 @@ public function FightHellfireSnail():void {
 			statScreenRefresh();
 			PerksGemsEXPLvL();
 		}
-		public function TestDynamicStats():void {
-			player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
-			statScreenRefresh();
-		}
 		public function AddLvL1():void {
 			player.level = player.level + 1;
 			player.statPoints += 5;
@@ -2424,52 +2609,6 @@ public function FightHellfireSnail():void {
 			statScreenRefresh();
 			PerksGemsEXPLvL();
 		}
-		public function AddRapPerk():void {
-			flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4;
-			player.createPerk(PerkLib.RapierTraining, 0, 0, 0, 0);
-			outputText("\n\n<b>(Gained Perk: Rapier Training and 1 Dragon Rapier!)</b>\n\n");
-			inventory.takeItem(weapons.DRAPIER, EquipmentMenu);
-		}
-		public function AddSkyPoisonPearl():void {
-			outputText("\n\n<b>(Gained 1 Sky Poison Pearl!)</b>\n\n");
-			inventory.takeItem(consumables.SPPEARL, EquipmentMenu);
-		}
-		public function AddLightAyoArmor():void {
-			outputText("\n\n<b>(Gained 1 Light Ayo Armor!)</b>\n\n");
-			inventory.takeItem(armors.LAYOARM, EquipmentMenu);
-		}
-		public function AddHBAArmor():void {
-			outputText("\n\n<b>(Gained 1 HBA Armor!)</b>\n\n");
-			inventory.takeItem(armors.HBA_ARM, EquipmentMenu);
-		}
-		public function AddYukiOnnaStuff():void {
-			outputText("\n\n<b>(Gained 1st Yuki Onna item!)</b>\n\n");
-			inventory.takeItem(armors.BLIZZ_K, AddYukiOnnaStuff2);
-		}
-		public function AddYukiOnnaStuff2():void {
-			outputText("\n\n<b>(Gained 2nd Yuki Onna item!)</b>\n\n");
-			inventory.takeItem(headjewelries.SNOWFH, EquipmentMenu);
-		}
-		public function AddSpikedShields():void {
-			outputText("\n\n<b>(Gained Heavy Spiked Shield!)</b>\n\n");
-			inventory.takeItem(shields.SPIH_SH, AddSpikedShields2);
-		}
-		public function AddSpikedShields2():void {
-			outputText("\n\n<b>(Gained Massive Spiked Shield!)</b>\n\n");
-			inventory.takeItem(shields.SPIM_SH, EquipmentMenu);
-		}
-		public function AddGoblinMechPrime():void {
-			outputText("\n\n<b>(Gained 1 Goblin Mech Prime!)</b>\n\n");
-			inventory.takeItem(vehicles.GOBMPRI, EquipmentMenu);
-		}
-		public function AddNineTailWhip():void {
-			outputText("\n\n<b>(Gained 1 Nine Tail Whip!)</b>\n\n");
-			inventory.takeItem(weapons.NTWHIP, EquipmentMenu);
-		}
-		public function AddDualMinoAxes():void {
-			outputText("\n\n<b>(Gained 1 pair of Large Axes!)</b>\n\n");
-			inventory.takeItem(weapons.DL_AXE_, EquipmentMenu);
-		}
 		public function AddWhiteBook():void {
 			outputText("\n\n<b>(Gained 1 White Book!)</b>\n\n");
 			inventory.takeItem(consumables.W__BOOK, curry(NonEquipmentMenu, 1));
@@ -2481,6 +2620,14 @@ public function FightHellfireSnail():void {
 		public function AddGreyBook():void {
 			outputText("\n\n<b>(Gained 1 Grey Book!)</b>\n\n");
 			inventory.takeItem(consumables.G__BOOK, curry(NonEquipmentMenu, 1));
+		}
+		public function AddRedManuscript():void {
+			outputText("\n\n<b>(Gained 1 Red Manuscript!)</b>\n\n");
+			inventory.takeItem(consumables.RMANUSC, curry(NonEquipmentMenu, 1));
+		}
+		public function AddCrimsonJade():void {
+			outputText("\n\n<b>(Gained 1 Crimson Jade!)</b>\n\n");
+			inventory.takeItem(consumables.CRIMS_J, curry(NonEquipmentMenu, 1));
 		}
 		public function AddThePearls():void {
 			outputText("\n\n<b>(Gained set of items to get all perks countering Elemental Conjuer perks negative effects on stat caps!)</b>\n\n");
@@ -2549,7 +2696,8 @@ public function FightHellfireSnail():void {
 				if (player.breastRows[0].breastRating < 5 && rand(4) == 0) growth++;
 				if (player.breastRows[0].breastRating < 6 && rand(5) == 0) growth++;
 			}
-			player.createPerk(PerkLib.TransformationImmunity,0,0,0,0);
+			player.createPerk(PerkLib.TransformationImmunity, 0, 0, 0, 0);
+			doNext(SoulforceCheats);
 		}
 		public function FightZenji():void {
 			clearOutput();
@@ -2775,26 +2923,48 @@ public function FightHellfireSnail():void {
 		}
 		public function SoulforceRegeneration():void {
 			menu();
-			addButton(0, "1 hour", SoulforceRegeneration1).hint("Cultivate for 1 hour (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(20) + " soulforce).");
-			addButton(1, "2 hours", SoulforceRegeneration2).hint("Cultivate for 2 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(60) + " soulforce).");
-			addButton(2, "4 hours", SoulforceRegeneration3).hint("Cultivate for 4 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(140) + " soulforce).");
-			addButton(3, "6 hours", SoulforceRegeneration4).hint("Cultivate for 6 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(220) + " soulforce).");
-			addButton(4, "8 hours", SoulforceRegeneration5).hint("Cultivate for 8 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(300) + " soulforce).");
+			addButton(0, "1 hour", SoulforceRegeneration1).hint("Cultivate for 1 hour (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(20) + " soulforce).");//x1
+			addButton(1, "2 hours", SoulforceRegeneration2).hint("Cultivate for 2 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(60) + " soulforce).");//x3
+			addButton(2, "4 hours", SoulforceRegeneration3).hint("Cultivate for 4 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(140) + " soulforce).");//x7
+			addButton(3, "6 hours", SoulforceRegeneration4).hint("Cultivate for 6 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(220) + " soulforce).");//x11
+			addButton(4, "8 hours", SoulforceRegeneration5).hint("Cultivate for 8 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(300) + " soulforce).");//x15
+			addButton(5, "10 hours", SoulforceRegeneration6).hint("Cultivate for 10 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(380) + " soulforce).");//x19
+			addButton(6, "12 hours", SoulforceRegeneration7).hint("Cultivate for 12 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(460) + " soulforce).");//x23
+			addButton(7, "14 hours", SoulforceRegeneration8).hint("Cultivate for 14 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(540) + " soulforce).");//x27
+			addButton(8, "16 hours", SoulforceRegeneration9).hint("Cultivate for 16 hours (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(620) + " soulforce).");//x31
 			addButton(14, "Back", accessSoulforceMenu);
+		}
+		private function SoulforceRegeneration00():Number {
+			var SFR00:Number = 0;
+			if (player.kitsuneScore() >= 5) {
+				if (player.kitsuneScore() >= 9 && player.tailType == 13 && player.tailCount >= 2) {
+					if (player.kitsuneScore() >= 14) {
+						if (player.kitsuneScore() >= 18 && player.tailCount == 9 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+							if (player.kitsuneScore() >= 21) SFR00 += 200;
+							else SFR00 += 150;
+						}
+						else SFR00 += 80;
+					}
+					else SFR00 += 40;
+				}
+				else SFR00 += 20;
+			}
+			if (player.nekomataScore() >= 10) {
+				if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) SFR00 += 40;
+				else SFR00 += 20;
+			}
+			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) SFR00 += 20;
+			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) SFR00 += 20;
+			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) SFR00 += 20;
+			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) SFR00 += 20;
+			if (player.findPerk(PerkLib.DaoistTyrantStage) >= 0) SFR00 += 20;
+			return SFR00;
 		}
 		public function SoulforceRegeneration1():void {
 			clearOutput();
 			var soulforceamountrestored:int = 16;
-			if (player.alicornScore() >= 12) soulforceamountrestored += 20;
-			if (player.kitsuneScore() >= 6) soulforceamountrestored += 20;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 80;
-			if (player.unicornScore() >= 10) soulforceamountrestored += 10;
+			soulforceamountrestored += SoulforceRegeneration00();
 			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 16;
-			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 20;
-			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 20;
-			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 20;
-			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 20;
-			if (player.findPerk(PerkLib.DaoistTyrantStage) >= 0) soulforceamountrestored += 20;
 			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 16;
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 16;
 			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 16;
@@ -2809,7 +2979,7 @@ public function FightHellfireSnail():void {
 			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 16;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
-				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.headjewelryName == "training soul ring") {
+				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring") {
 				var bonussoulforce:Number = 0;
 				bonussoulforce += SoulforceGainedFromCultivation1();
 				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
@@ -2825,16 +2995,8 @@ public function FightHellfireSnail():void {
 		public function SoulforceRegeneration2():void {
 			clearOutput();
 			var soulforceamountrestored:int = 52;
-			if (player.alicornScore() >= 12) soulforceamountrestored += 60;
-			if (player.kitsuneScore() >= 6) soulforceamountrestored += 60;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 240;
-			if (player.unicornScore() >= 10) soulforceamountrestored += 30;
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 52;
-			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 60;
-			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 60;
-			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 60;
-			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 60;
-			if (player.findPerk(PerkLib.DaoistTyrantStage) >= 0) soulforceamountrestored += 60;
+			soulforceamountrestored += (SoulforceRegeneration00() * 3);
+			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 52;//48(4)
 			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 52;
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 52;
 			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 52;
@@ -2849,7 +3011,7 @@ public function FightHellfireSnail():void {
 			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 52;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
-				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.headjewelryName == "training soul ring") {
+				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
 				var bonussoulforce:Number = 0;
 				bonussoulforce += SoulforceGainedFromCultivation1() * 2;
 				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
@@ -2865,16 +3027,8 @@ public function FightHellfireSnail():void {
 		public function SoulforceRegeneration3():void {
 			clearOutput();
 			var soulforceamountrestored:int = 124;
-			if (player.alicornScore() >= 12) soulforceamountrestored += 140;
-			if (player.kitsuneScore() >= 6) soulforceamountrestored += 140;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 560;
-			if (player.unicornScore() >= 10) soulforceamountrestored += 70;
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 124;
-			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 140;
-			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 140;
-			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 140;
-			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 140;
-			if (player.findPerk(PerkLib.DaoistTyrantStage) >= 0) soulforceamountrestored += 140;
+			soulforceamountrestored += (SoulforceRegeneration00() * 7);
+			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 124;//112(12)
 			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 124;
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 124;
 			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 124;
@@ -2889,7 +3043,7 @@ public function FightHellfireSnail():void {
 			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 124;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
-				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.headjewelryName == "training soul ring") {
+				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
 				var bonussoulforce:Number = 0;
 				bonussoulforce += SoulforceGainedFromCultivation1() * 4;
 				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
@@ -2905,16 +3059,8 @@ public function FightHellfireSnail():void {
 		public function SoulforceRegeneration4():void {
 			clearOutput();
 			var soulforceamountrestored:int = 196;
-			if (player.alicornScore() >= 12) soulforceamountrestored += 220;
-			if (player.kitsuneScore() >= 6) soulforceamountrestored += 220;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 880;
-			if (player.unicornScore() >= 10) soulforceamountrestored += 110;
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 196;
-			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 220;
-			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 220;
-			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 220;
-			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 220;
-			if (player.findPerk(PerkLib.DaoistTyrantStage) >= 0) soulforceamountrestored += 220;
+			soulforceamountrestored += (SoulforceRegeneration00() * 11);
+			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 196;//176(20)
 			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 196;
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 196;
 			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 196;
@@ -2929,7 +3075,7 @@ public function FightHellfireSnail():void {
 			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 196;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
-				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.headjewelryName == "training soul ring") {
+				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
 				var bonussoulforce:Number = 0;
 				bonussoulforce += SoulforceGainedFromCultivation1() * 6;
 				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
@@ -2945,16 +3091,8 @@ public function FightHellfireSnail():void {
 		public function SoulforceRegeneration5():void {
 			clearOutput();
 			var soulforceamountrestored:int = 268;
-			if (player.alicornScore() >= 12) soulforceamountrestored += 300;
-			if (player.kitsuneScore() >= 6) soulforceamountrestored += 300;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 1200;
-			if (player.unicornScore() >= 10) soulforceamountrestored += 150;
-			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 268;
-			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) soulforceamountrestored += 300;
-			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) soulforceamountrestored += 300;
-			if (player.findPerk(PerkLib.DaoistElderStage) >= 0) soulforceamountrestored += 300;
-			if (player.findPerk(PerkLib.DaoistOverlordStage) >= 0) soulforceamountrestored += 300;
-			if (player.findPerk(PerkLib.DaoistTyrantStage) >= 0) soulforceamountrestored += 300;
+			soulforceamountrestored += (SoulforceRegeneration00() * 15);
+			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 268;//240(28)
 			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 268;
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 268;
 			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 268;
@@ -2969,7 +3107,7 @@ public function FightHellfireSnail():void {
 			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 268;
 			player.soulforce += soulforceamountrestored;
 			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
-				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.headjewelryName == "training soul ring") {
+				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
 				var bonussoulforce:Number = 0;
 				bonussoulforce += SoulforceGainedFromCultivation1() * 8;
 				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
@@ -2982,10 +3120,142 @@ public function FightHellfireSnail():void {
 			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(160);
 			doNext(camp.returnToCampUseEightHours);
 		}
+		public function SoulforceRegeneration6():void {
+			clearOutput();
+			var soulforceamountrestored:int = 340;
+			soulforceamountrestored += (SoulforceRegeneration00() * 19);
+			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 340;//304(36)
+			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 340;
+			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 340;
+			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 340;
+			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 340;
+			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 340;
+			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 340;
+			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 340;
+			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 340;
+			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 340;
+			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 340;
+			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 340;
+			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 340;
+			player.soulforce += soulforceamountrestored;
+			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
+				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
+				var bonussoulforce:Number = 0;
+				bonussoulforce += SoulforceGainedFromCultivation1() * 10;
+				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
+				SoulforceGainedFromCultivation2();
+			}
+			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+			outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
+			outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(200);
+			doNext(camp.returnToCampUseTenHours);
+		}
+		public function SoulforceRegeneration7():void {
+			clearOutput();
+			var soulforceamountrestored:int = 412;
+			soulforceamountrestored += (SoulforceRegeneration00() * 23);
+			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 412;//368(44)
+			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 412;
+			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 412;
+			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 412;
+			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 412;
+			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 412;
+			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 412;
+			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 412;
+			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 412;
+			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 412;
+			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 412;
+			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 412;
+			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 412;
+			player.soulforce += soulforceamountrestored;
+			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
+				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
+				var bonussoulforce:Number = 0;
+				bonussoulforce += SoulforceGainedFromCultivation1() * 12;
+				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
+				SoulforceGainedFromCultivation2();
+			}
+			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+			outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
+			outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(240);
+			doNext(camp.returnToCampUseTwelveHours);
+		}
+		public function SoulforceRegeneration8():void {
+			clearOutput();
+			var soulforceamountrestored:int = 484;
+			soulforceamountrestored += (SoulforceRegeneration00() * 27);
+			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 484;//432(52)
+			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 484;
+			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 484;
+			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 484;
+			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 484;
+			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 484;
+			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 484;
+			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 484;
+			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 484;
+			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 484;
+			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 484;
+			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 484;
+			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 484;
+			player.soulforce += soulforceamountrestored;
+			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
+				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
+				var bonussoulforce:Number = 0;
+				bonussoulforce += SoulforceGainedFromCultivation1() * 14;
+				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
+				SoulforceGainedFromCultivation2();
+			}
+			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+			outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
+			outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(280);
+			doNext(camp.returnToCampUseFourteenHours);
+		}
+		public function SoulforceRegeneration9():void {
+			clearOutput();
+			var soulforceamountrestored:int = 556;
+			soulforceamountrestored += (SoulforceRegeneration00() * 31);
+			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) soulforceamountrestored += 556;//496(60)
+			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 556;
+			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 556;
+			if (player.findPerk(PerkLib.SoulWarrior) >= 0) soulforceamountrestored += 556;
+			if (player.findPerk(PerkLib.SoulSprite) >= 0) soulforceamountrestored += 556;
+			if (player.findPerk(PerkLib.SoulScholar) >= 0) soulforceamountrestored += 556;
+			if (player.findPerk(PerkLib.SoulElder) >= 0) soulforceamountrestored += 556;
+			if (player.findPerk(PerkLib.SoulExalt) >= 0) soulforceamountrestored += 556;
+			if (player.findPerk(PerkLib.SoulOverlord) >= 0) soulforceamountrestored += 556;
+			if (player.findPerk(PerkLib.SoulTyrant) >= 0) soulforceamountrestored += 556;
+			if (player.findPerk(PerkLib.SoulKing) >= 0) soulforceamountrestored += 556;
+			if (player.findPerk(PerkLib.SoulEmperor) >= 0) soulforceamountrestored += 556;
+			if (player.findPerk(PerkLib.SoulAncestor) >= 0) soulforceamountrestored += 556;
+			player.soulforce += soulforceamountrestored;
+			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
+				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
+				var bonussoulforce:Number = 0;
+				bonussoulforce += SoulforceGainedFromCultivation1() * 16;
+				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
+				SoulforceGainedFromCultivation2();
+			}
+			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+			outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
+			outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(320);
+			doNext(camp.returnToCampUseSixteenHours);
+		}
 		public function SoulforceGainedFromCultivation1():Number {
 			var cumulativegains:Number = 0;
 			if (player.weaponName == "training soul axe" && player.weaponRangeName == "training soul crossbow" && player.shieldName == "training soul buckler" && player.armorName == "training soul armor" && player.upperGarmentName == "soul training shirt" && player.lowerGarmentName == "soul training panties"
-				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.headjewelryName == "training soul ring") {
+				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
+				cumulativegains += 26;//+120% jak wszystkie 12 slotów - każdy kolejny dodany slot dodaje kolejne 10%
+			}
+			else if (player.weaponName == "training soul axe" && player.weaponRangeName == "training soul crossbow" && player.shieldName == "training soul buckler" && player.armorName == "training soul armor" && player.upperGarmentName == "soul training shirt" && player.lowerGarmentName == "soul training panties"
+				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring") {
 				cumulativegains += 13;//+45% jak wszystkie 9 slotów - każdy kolejny dodany slot dodaje kolejne 5%
 			}
 			else {
@@ -2998,11 +3268,14 @@ public function FightHellfireSnail():void {
 				if (player.headjewelryName == "training soul hairpin") cumulativegains += 1;
 				if (player.necklaceName == "training soul necklace") cumulativegains += 1;
 				if (player.jewelryName == "training soul ring") cumulativegains += 1;
+				if (player.jewelryName2 == "training soul ring") cumulativegains += 1;
+				if (player.jewelryName3 == "training soul ring") cumulativegains += 1;
+				if (player.jewelryName4 == "training soul ring") cumulativegains += 1;
 			}
 			return cumulativegains;
 		}
 		public function SoulforceGainedFromCultivation2():void {
-			var bonussoulforce2:Number = 0;//razem może mieć max 1430
+			var bonussoulforce2:Number = 0;//razem może mieć max 1730
 			if (player.weaponName == "training soul axe") bonussoulforce2 += 80;
 			if (player.weaponRangeName == "training soul crossbow") bonussoulforce2 += 50;
 			if (player.shieldName == "training soul buckler") bonussoulforce2 += 60;
@@ -3011,7 +3284,10 @@ public function FightHellfireSnail():void {
 			if (player.lowerGarmentName == "soul training panties") bonussoulforce2 += 200;
 			if (player.headjewelryName == "training soul hairpin") bonussoulforce2 += 200;
 			if (player.necklaceName == "training soul necklace") bonussoulforce2 += 300;
-				if (player.jewelryName == "training soul ring") bonussoulforce2 += 100;
+			if (player.jewelryName == "training soul ring") bonussoulforce2 += 100;
+			if (player.jewelryName2 == "training soul ring") bonussoulforce2 += 100;
+			if (player.jewelryName3 == "training soul ring") bonussoulforce2 += 100;
+			if (player.jewelryName4 == "training soul ring") bonussoulforce2 += 100;
 			if ((bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) > 0) {
 				if ((bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) > flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2]) flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2];
 				else flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] += (bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]);
@@ -3019,10 +3295,23 @@ public function FightHellfireSnail():void {
 		}
 		public function AmountOfSoulforceRecoveredDuringCultivation(mod:Number):Number {
 			var costPercent:Number = 100;
-			if (player.alicornScore() >= 12) costPercent += 100;
-			if (player.kitsuneScore() >= 6) costPercent += 100;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) costPercent += 400;
-			if (player.unicornScore() >= 10) costPercent += 50;
+			if (player.kitsuneScore() >= 5) {
+				if (player.kitsuneScore() >= 9 && player.tailType == 13 && player.tailCount >= 2) {
+					if (player.kitsuneScore() >= 14) {
+						if (player.kitsuneScore() >= 18 && player.tailCount == 9 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+							if (player.kitsuneScore() >= 21) costPercent += 1000;
+							else costPercent += 650;
+						}
+						else costPercent += 400;
+					}
+					else costPercent += 200;
+				}
+				else costPercent += 100;
+			}
+			if (player.nekomataScore() >= 10) {
+				if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) costPercent += 200;
+				else costPercent += 100;
+			}
 			if (player.findPerk(PerkLib.DaoistCultivator) >= 0) costPercent += 100;
 			if (player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) costPercent += 100;
 			if (player.findPerk(PerkLib.DaoistWarriorStage) >= 0) costPercent += 100;
@@ -3051,9 +3340,11 @@ public function FightHellfireSnail():void {
 			menu();
 			addButton(0, "V. Low", SelfSustain1).hint("Spend 50 soulforce for 10 hunger.");
 			if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(1, "Low", SelfSustain2).hint("Spend 100 soulforce for 20 hunger.");
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(2, "Medium", SelfSustain3).hint("Spend 200 soulforce for 40 hunger.");
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(3, "High", SelfSustain4).hint("Spend 400 soulforce for 80 hunger.");
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(4, "V. High", SelfSustain5).hint("Spend 800 soulforce for 160 hunger.");
+			if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(2, "Low-Med", SelfSustain3).hint("Spend 200 soulforce for 40 hunger.");
+			if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(3, "Medium", SelfSustain4).hint("Spend 400 soulforce for 80 hunger.");
+			if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(4, "High-Med", SelfSustain5).hint("Spend 800 soulforce for 160 hunger.");
+			if (player.findPerk(PerkLib.SoulScholar) >= 0) addButton(5, "High", SelfSustain6).hint("Spend 1600 soulforce for 320 hunger.");
+			if (player.findPerk(PerkLib.SoulElder) >= 0) addButton(6, "V. High", SelfSustain7).hint("Spend 3200 soulforce for 640 hunger.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function SelfSustain1():void {
@@ -3136,6 +3427,38 @@ public function FightHellfireSnail():void {
 				doNext(SelfSustain);
 			}
 		}
+		public function SelfSustain6():void {
+			clearOutput();
+			if (player.soulforce >= 1600) {
+				outputText("Consuming below averange amount of your soulforce you feel your hungry decreasing very noticable.");
+				player.soulforce -= 1600;
+				player.refillHunger(320);
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(320);
+				statScreenRefresh();
+				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
+				doNext(playerMenu);
+			}
+			else {
+				outputText("Your current soulforce is too low.");
+				doNext(SelfSustain);
+			}
+		}
+		public function SelfSustain7():void {
+			clearOutput();
+			if (player.soulforce >= 3200) {
+				outputText("Consuming a bit below averange amount of your soulforce you feel your hungry decreasing by large margin.");
+				player.soulforce -= 3200;
+				player.refillHunger(640);
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(640);
+				statScreenRefresh();
+				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
+				doNext(playerMenu);
+			}
+			else {
+				outputText("Your current soulforce is too low.");
+				doNext(SelfSustain);
+			}
+		}
 		public function RepresLust():void {
 			clearOutput();
 			outputText("Use some of your soulforce to partialy suppress your lust. The higher your cultivation is the more of the soulforce you could drawn without hurting yourself.\n\n");
@@ -3143,9 +3466,11 @@ public function FightHellfireSnail():void {
 			menu();
 			addButton(0, "V. Low", RepresLust1).hint("Spend 40 soulforce for 20 lust.");
 			if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(1, "Low", RepresLust2).hint("Spend 80 soulforce for 40 lust.");
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(2, "Medium", RepresLust3).hint("Spend 200 soulforce for 100 lust.");
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(3, "High", RepresLust4).hint("Spend 400 soulforce for 200 lust.");
-			if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(4, "V. High", RepresLust5).hint("Spend 800 soulforce for 400 lust.");
+			if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(2, "Low-med", RepresLust3).hint("Spend 200 soulforce for 100 lust.");
+			if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(3, "Medium", RepresLust4).hint("Spend 400 soulforce for 200 lust.");
+			if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(4, "High-Med", RepresLust5).hint("Spend 800 soulforce for 400 lust.");
+			if (player.findPerk(PerkLib.SoulScholar) >= 0) addButton(5, "High", RepresLust6).hint("Spend 1600 soulforce for 800 lust.");
+			if (player.findPerk(PerkLib.SoulElder) >= 0) addButton(6, "V. High", RepresLust7).hint("Spend 3200 soulforce for 1600 lust.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function RepresLust1():void {
@@ -3215,9 +3540,41 @@ public function FightHellfireSnail():void {
 		public function RepresLust5():void {
 			clearOutput();
 			if (player.soulforce >= 800) {
-				outputText("Consuming not a small amount of your soulforce most of your lust is gone.");
+				outputText("Consuming not a small amount of your soulforce bit above averange amount of your lust is gone.");
 				player.soulforce -= 800;
 				player.lust -= 400;
+				if (player.lust < 0) player.lust = 0;
+				statScreenRefresh();
+				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
+				doNext(playerMenu);
+			}
+			else {
+				outputText("Your current soulforce is too low.");
+				doNext(RepresLust);
+			}
+		}
+		public function RepresLust6():void {
+			clearOutput();
+			if (player.soulforce >= 1600) {
+				outputText("Consuming below averange amount of your soulforce high amount of your lust is gone.");
+				player.soulforce -= 1600;
+				player.lust -= 800;
+				if (player.lust < 0) player.lust = 0;
+				statScreenRefresh();
+				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
+				doNext(playerMenu);
+			}
+			else {
+				outputText("Your current soulforce is too low.");
+				doNext(RepresLust);
+			}
+		}
+		public function RepresLust7():void {
+			clearOutput();
+			if (player.soulforce >= 3200) {
+				outputText("Consuming a bit below averange amount of your soulforce most of your lust is gone.");
+				player.soulforce -= 3200;
+				player.lust -= 1600;
 				if (player.lust < 0) player.lust = 0;
 				statScreenRefresh();
 				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
@@ -3241,12 +3598,16 @@ public function FightHellfireSnail():void {
 				if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(1, "200", Covert200Soulforce).hint("Convert 200 soulforce to 200 mana.");
 				if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(2, "500", Covert500Soulforce).hint("Convert 500 soulforce to 500 mana.");
 				if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(3, "1000", Covert1000Soulforce).hint("Convert 1000 soulforce to 1000 mana.");
-				if (player.findPerk(PerkLib.SoulExalt) >= 0) addButton(4, "2000", Covert2000Soulforce).hint("Convert 2000 soulforce to 2000 mana.");
+				if (player.findPerk(PerkLib.SoulScholar) >= 0) addButton(4, "2000", Covert2000Soulforce).hint("Convert 2000 soulforce to 2000 mana.");
 				addButton(5, "100", Covert100Mana).hint("Convert 100 mana to 50 soulforce.");
 				if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(6, "200", Covert200Mana).hint("Convert 200 mana to 100 soulforce.");
 				if (player.findPerk(PerkLib.SoulWarrior) >= 0) addButton(7, "500", Covert500Mana).hint("Convert 500 mana to 250 soulforce.");
 				if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(8, "1000", Covert1000Mana).hint("Convert 1000 mana to 500 soulforce.");
-				if (player.findPerk(PerkLib.SoulExalt) >= 0) addButton(9, "2000", Covert2000Mana).hint("Convert 2000 mana to 1000 soulforce.");
+				if (player.findPerk(PerkLib.SoulScholar) >= 0) addButton(9, "2000", Covert2000Mana).hint("Convert 2000 mana to 1000 soulforce.");
+				if (player.findPerk(PerkLib.SoulElder) >= 0) addButton(10, "5000", Covert5000Soulforce).hint("Convert 5000 soulforce to 5000 mana.");
+				if (player.findPerk(PerkLib.SoulExalt) >= 0) addButton(11, "10000", Covert10000Soulforce).hint("Convert 10000 soulforce to 10000 mana.");
+				if (player.findPerk(PerkLib.SoulElder) >= 0) addButton(12, "5000", Covert5000Mana).hint("Convert 5000 mana to 2500 soulforce.");
+				if (player.findPerk(PerkLib.SoulExalt) >= 0) addButton(13, "10000", Covert10000Mana).hint("Convert 10000 mana to 5000 soulforce.");
 				addButton(14, "Back", accessSoulforceMenu);
 		//	}
 		}
@@ -3320,6 +3681,38 @@ public function FightHellfireSnail():void {
 				outputText("You sit down and focus your spiritual power to recover some of your mana, within moments, you feel rested and refreshed.");
 				player.soulforce -= 2000;
 				player.mana += 2000;
+				if (player.mana > player.maxMana()) player.mana = player.maxMana();
+				statScreenRefresh();
+				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
+				doNext(playerMenu);
+			}
+			else {
+				outputText("Your current soulforce is too low.");
+				doNext(ManaAndSoulforce);
+			}
+		}
+		public function Covert5000Soulforce():void {
+			clearOutput();
+			if (player.soulforce >= 5000) {
+				outputText("You sit down and focus your spiritual power to recover some of your mana, within moments, you feel rested and refreshed.");
+				player.soulforce -= 5000;
+				player.mana += 5000;
+				if (player.mana > player.maxMana()) player.mana = player.maxMana();
+				statScreenRefresh();
+				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
+				doNext(playerMenu);
+			}
+			else {
+				outputText("Your current soulforce is too low.");
+				doNext(ManaAndSoulforce);
+			}
+		}
+		public function Covert10000Soulforce():void {
+			clearOutput();
+			if (player.soulforce >= 10000) {
+				outputText("You sit down and focus your spiritual power to recover some of your mana, within moments, you feel rested and refreshed.");
+				player.soulforce -= 10000;
+				player.mana += 10000;
 				if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				statScreenRefresh();
 				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
@@ -3404,6 +3797,38 @@ public function FightHellfireSnail():void {
 				outputText("You sit down and focus in recovering your spiritual power, draining your mana to replenish your soul force.");
 				player.mana -= 2000;
 				player.soulforce += 1000;
+				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+				statScreenRefresh();
+				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
+				doNext(playerMenu);
+			}
+		}
+		public function Covert5000Mana():void {
+			clearOutput();
+			if (player.mana < 5000) {
+				outputText("Your current mana is too low.");
+				doNext(ManaAndSoulforce);
+			}
+			else {
+				outputText("You sit down and focus in recovering your spiritual power, draining your mana to replenish your soul force.");
+				player.mana -= 5000;
+				player.soulforce += 2500;
+				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+				statScreenRefresh();
+				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
+				doNext(playerMenu);
+			}
+		}
+		public function Covert10000Mana():void {
+			clearOutput();
+			if (player.mana < 10000) {
+				outputText("Your current mana is too low.");
+				doNext(ManaAndSoulforce);
+			}
+			else {
+				outputText("You sit down and focus in recovering your spiritual power, draining your mana to replenish your soul force.");
+				player.mana -= 10000;
+				player.soulforce += 5000;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 				statScreenRefresh();
 				flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT]++;
@@ -3603,12 +4028,16 @@ public function FightHellfireSnail():void {
 			//next page button?
 			if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3) addButton(5, "Priscilla", PriscillaEnc).hint("Req. 320+ soulforce");
 			else addButtonDisabled(5, "Priscilla", "");
-			//Sheila find
+			 addButtonDisabled(6, "Mino Sons", "");
+			//button 7 - Sheila (non demon ver) find
+			//button 8 - ?Behemoth find?
 			//previous page button?
 			if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] >= 1) addButton(10, "WorldTree", findWorldTree).hint("Req. 100+ soulforce");
 			else addButtonDisabled(10, "WorldTree", "");
-			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(13, "Giacomo", findGiacomo).hint("Req. 100+ soulforce");
-			else addButtonDisabled(13, "Giacomo", "");
+			//button 11
+			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(12, "Giacomo", findGiacomo).hint("Req. 100+ soulforce");
+			else addButtonDisabled(12, "Giacomo", "");
+			//addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
 		public function TamaniEnc():void {
@@ -3618,7 +4047,7 @@ public function FightHellfireSnail():void {
 				tamaniScene.encounterTamani();
 			}
 			else {
-				outputText("Your current soulforce is too low.");
+				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
 		}
@@ -3629,7 +4058,7 @@ public function FightHellfireSnail():void {
 				tamaniDaughtersScene.encounterTamanisDaughters();
 			}
 			else {
-				outputText("Your current soulforce is too low.");
+				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
 		}
@@ -3640,7 +4069,7 @@ public function FightHellfireSnail():void {
 				SceneLib.kitsuneScene.enterTheTrickster();
 			}
 			else {
-				outputText("Your current soulforce is too low.");
+				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
 		}
@@ -3651,7 +4080,7 @@ public function FightHellfireSnail():void {
 				izumiScenes.encounter();
 			}
 			else {
-				outputText("Your current soulforce is too low.");
+				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
 		}
@@ -3663,11 +4092,13 @@ public function FightHellfireSnail():void {
 				spriteSelect(122);
 			}
 			else {
-				outputText("Your current soulforce is too low.");
+				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
 		}
-
+		//button 6
+		//button 7
+		//button 8
 		public function findWorldTree():void {
 			if (player.soulforce >= 100) {
 				player.soulforce -= 100;
@@ -3675,10 +4106,11 @@ public function FightHellfireSnail():void {
 				wolrdtreeScene.YggdrasilDiscovery();
 			}
 			else {
-				outputText("Your current soulforce is too low.");
+				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
 		}
+		//button 11
 		public function findGiacomo():void {
 			if (player.soulforce >= 100) {
 				player.soulforce -= 100;
@@ -3686,7 +4118,24 @@ public function FightHellfireSnail():void {
 				SceneLib.giacomoShop.giacomoEncounter();
 			}
 			else {
-				outputText("Your current soulforce is too low.");
+				outputText("\n\nYour current soulforce is too low.");
+				doNext(SoulSense);
+			}
+		}
+		public function theUnknown():void {
+			if (player.soulforce >= 100) {
+				player.soulforce -= 100;
+				statScreenRefresh();
+				if (rand(2) == 0) {
+					clearOutput();
+					outputText("A gigantic monkey and you. (placeholder text for now so not mind it and just kick the monkey ass)");
+					flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] = 1;
+					startCombat(new Oozaru());
+				}
+				else SceneLib.ryubi.RyuBiEnterTheDragon();
+			}
+			else {
+				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
 		}

@@ -702,7 +702,5 @@ public class HarpyScene extends BaseContent
 				cleanupAfterCombat();
 			}
 		}
-
-
 	}
 }

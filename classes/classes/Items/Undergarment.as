@@ -58,6 +58,9 @@ package classes.Items
 				case "rune thong":
 				case "rune jock":
 					return 3;
+				case "HB shirt":
+				case "HB panties":
+					return 4;
 				default:
 					return 0;
 			}
@@ -77,6 +80,9 @@ package classes.Items
 				case "dragonscale loincloth":
 				case "dragonscale thong":
 					return 2;
+				case "HB shirt":
+				case "HB panties":
+					return 3;
 				default:
 					return 0;
 			}

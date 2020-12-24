@@ -4,6 +4,7 @@ import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.Scenes.NPCs.IsabellaScene;
+import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.SceneLib;
 import classes.Stats.StatUtils;
 import classes.StatusEffects.VampireThirstEffect;
@@ -113,7 +114,7 @@ public class PlayerInfo extends BaseContent {
 			if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18)
 				bodyStats += "<b>Slime Craving:</b> Active! You are currently losing strength and speed.  You should find fluids.\n";
 			else {
-				if (player.findPerk(PerkLib.SlimeCore) >= 0)
+				if (player.findPerk(PerkLib.SlimeCore) >= 0 || player.findPerk(PerkLib.DarkSlimeCore) >= 0)
 					bodyStats += "<b>Slime Stored:</b> " + ((17 - player.statusEffectv1(StatusEffects.SlimeCraving)) * 2) + " hours until you start losing strength.\n";
 				else
 					bodyStats += "<b>Slime Stored:</b> " + (17 - player.statusEffectv1(StatusEffects.SlimeCraving)) + " hours until you start losing strength.\n";
@@ -157,7 +158,7 @@ public class PlayerInfo extends BaseContent {
 
 		miscStats += "<b>Basic Jobs:</b> " + player.currentBasicJobs() + " / 9\n";
 		miscStats += "<b>Advanced Jobs:</b> " + player.currentAdvancedJobs() + " / " + player.maxAdvancedJobs() + "\n";
-		//miscStats += "<b>Hidden Jobs:</b> " + player.currentHiddenJobs() + " / " + player.maxHiddenJobs() + "\n";
+		miscStats += "<b>Hidden Jobs:</b> " + player.currentHiddenJobs() + " / " + player.maxHiddenJobs() + "\n";
 		miscStats += "<b>Prestige Jobs:</b> " + player.currentPrestigeJobs() + " / " + player.maxPrestigeJobs() + "\n";
 		
 		if (player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter1)) {
@@ -389,6 +390,8 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Black Spells Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlack()) + "%\n";
 		combatStats += "<b>Black Spells Cost:</b> " + combat.spellCostBlack(100) + "%\n";
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) combatStats += "<b>Black Spells Cooldowns:</b> " + combat.spellBlackCooldown() + " turns\n";
+		combatStats += "<b>Blood Spells/Soulskills Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlood()) + "%\n";
+		combatStats += "<b>Blood Spells/Soulskills Cost:</b> " + combat.spellCostBlood(100) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Heals Effect Multiplier:</b> " + Math.round(100 * combat.healMod()) + "%\n";
 		combatStats += "<b>Heals Cost:</b> " + combat.healCost(100) + "%\n";
@@ -420,18 +423,18 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Throw Cost (Fatigue): </b> " + combat.oneThrowTotalCost() + "\n";
 		combatStats += "<b>One Bullet Reload Cost (Fatigue): </b> " + combat.oneBulletReloadCost() + "\n";
 		combatStats += "<b>Bow/Crossbow Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
-		if (player.findPerk(PerkLib.DoubleStrike) >= 0) combatStats += "<b>Bow/Crossbow Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - combat.arrowsAccuracyPenalty()) + "%\n";
-		if (player.findPerk(PerkLib.TripleStrike) >= 0) combatStats += "<b>Bow/Crossbow Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 2)) + "%\n";
-		if (player.findPerk(PerkLib.Manyshot) >= 0) combatStats += "<b>Bow/Crossbow Accuracy (4th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 3)) + "%\n";
-		if (player.findPerk(PerkLib.WildQuiver) >= 0) combatStats += "<b>Bow/Crossbow Accuracy (5th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 4)) + "%\n";
-		if (player.findPerk(PerkLib.Multishot) >= 0) combatStats += "<b>Bow/Crossbow Accuracy (6th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 5)) + "%\n";
+		if (player.hasPerk(PerkLib.DoubleStrike)) combatStats += "<b>Bow/Crossbow Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - combat.arrowsAccuracyPenalty()) + "%\n";
+		if (player.hasPerk(PerkLib.TripleStrike)) combatStats += "<b>Bow/Crossbow Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 2)) + "%\n";
+		if (player.hasPerk(PerkLib.Manyshot)) combatStats += "<b>Bow/Crossbow Accuracy (4th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 3)) + "%\n";
+		if (player.hasPerk(PerkLib.WildQuiver)) combatStats += "<b>Bow/Crossbow Accuracy (5th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 4)) + "%\n";
+		if (player.hasPerk(PerkLib.Multishot)) combatStats += "<b>Bow/Crossbow Accuracy (6th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 5)) + "%\n";
 		combatStats += "<b>Throwed Weapon Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
-		if (player.findPerk(PerkLib.DoubleStrike) >= 0) combatStats += "<b>Throwed Weapon Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 15) + "%\n";
-		if (player.findPerk(PerkLib.TripleStrike) >= 0) combatStats += "<b>Throwed Weapon Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 30) + "%\n";
+		if (player.hasPerk(PerkLib.DoubleStrike)) combatStats += "<b>Throwed Weapon Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 15) + "%\n";
+		if (player.hasPerk(PerkLib.TripleStrike)) combatStats += "<b>Throwed Weapon Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 30) + "%\n";
 		combatStats += "<b>Firearms Accuracy (1st range attack):</b> " + (combat.firearmsAccuracy() / 2) + "%\n";
-		if (player.findPerk(PerkLib.AmateurGunslinger) >= 0) combatStats += "<b>Firearms Accuracy (2nd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 10) + "%\n";
-		if (player.findPerk(PerkLib.ExpertGunslinger) >= 0) combatStats += "<b>Firearms Accuracy (3rd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 20) + "%\n";
-		if (player.findPerk(PerkLib.MasterGunslinger) >= 0) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 30) + "%\n";
+		if (player.hasPerk(PerkLib.AmateurGunslinger)) combatStats += "<b>Firearms Accuracy (2nd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 10) + "%\n";
+		if (player.hasPerk(PerkLib.ExpertGunslinger)) combatStats += "<b>Firearms Accuracy (3rd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 20) + "%\n";
+		if (player.hasPerk(PerkLib.MasterGunslinger)) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 30) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMod()) + "%\n";
 		combatStats += "<b>Physical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillPhysicalMod()) + "%\n";
@@ -439,8 +442,7 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost()) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
-		if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0)
-			combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
+		if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0) combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
 
 		if (player.teaseLevel < combat.maxTeaseLevel())
 			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + combat.teaseExpToLevelUp() + ")\n";
@@ -451,12 +453,16 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Strength Cap:</b> " + Math.floor(player.strStat.max) + "\n";
 		combatStats += "<i>Ghost Strength:</i> +" + Math.floor(combat.ghostStrength()) + "\n";
 		combatStats += "<b>Toughness Cap:</b> " + Math.floor(player.touStat.max) + "\n";
+		combatStats += "<i>Ghost Toughness:</i> +" + Math.floor(combat.ghostToughness()) + "\n";
 		combatStats += "<b>Speed Cap:</b> " + Math.floor(player.speStat.max) + "\n";
 		combatStats += "<i>Ghost Speed:</i> +" + Math.floor(combat.ghostSpeed()) + "\n";
 		combatStats += "<b>Intelligence Cap:</b> " + Math.floor(player.intStat.max) + "\n";
 		combatStats += "<b>Wisdom Cap:</b> " + Math.floor(player.wisStat.max) + "\n";
 		combatStats += "<b>Libido Cap:</b> " + Math.floor(player.libStat.max) + "\n";
+		combatStats += "<i>Effective Libido:</i> " + Math.floor(player.effectiveLibido()) + "\n";
+		combatStats += "<i>Libido Minimum:</i> " + mins.lib + "\n";
 		combatStats += "<b>Sensitivity Cap:</b> " + Math.floor(player.sensStat.max) + "\n";
+		combatStats += "<i>Effective Sensitivity:</i> " + Math.floor(player.effectiveSensitivity()) + "\n";
 		combatStats += "<i>Sensitivity Minimum:</i> " + mins.sens + "\n";
 		combatStats += "<i>Corruption Minimum:</i> " + mins.cor + "\n";
 		combatStats += "\n";
@@ -467,6 +473,7 @@ public class PlayerInfo extends BaseContent {
 			combatStats += "\n\n";
 		}
 		combatStats += "<b>Minimum HP (reaching it mean HP based defeat):</b> " + player.minHP() + "\n";
+		combatStats += "<b>Over HP (HP amount that can be reached beyond default 100% of Health bar):</b> " + (player.maxOverHP() - player.maxHP()) + "\n";
 		combatStats += "<b>HP Regeneration (%):</b> ~ " + combat.PercentBasedRegeneration() + " % / " + combat.maximumRegeneration() + " % (turn), ~ " + combat.PercentBasedRegeneration() * 2 + " % / " + combat.maximumRegeneration() * 2 + " % (hour)\n";
 		combatStats += "<b>HP Regeneration (Total):</b> ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) + " HP /  turn, ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) * 2 + " HP /  hour\n";
 		combatStats += "<b>Fatigue Recovery:</b> " + combat.fatigueRecovery2() + " / turn\n";
@@ -536,6 +543,7 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.AURORA_LVL] >= 1) {
 			//interpersonStats += "<b>Aurora:</b> " + Math.round(flags[kFLAGS.GALIA_AFFECTION]) + "%\n";
+			/*if (flags[kFLAGS.AURORA_LVL] == 14) interpersonStats += "<b>Aurora lvl:</b> 79\n";
 			if (flags[kFLAGS.AURORA_LVL] == 13) interpersonStats += "<b>Aurora lvl:</b> 73\n";
 			if (flags[kFLAGS.AURORA_LVL] == 12) interpersonStats += "<b>Aurora lvl:</b> 67\n";
 			if (flags[kFLAGS.AURORA_LVL] == 11) interpersonStats += "<b>Aurora lvl:</b> 61\n";
@@ -544,7 +552,7 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.AURORA_LVL] == 8) interpersonStats += "<b>Aurora lvl:</b> 43\n";
 			if (flags[kFLAGS.AURORA_LVL] == 7) interpersonStats += "<b>Aurora lvl:</b> 37\n";
 			if (flags[kFLAGS.AURORA_LVL] == 6) interpersonStats += "<b>Aurora lvl:</b> 31\n";
-			if (flags[kFLAGS.AURORA_LVL] == 5) interpersonStats += "<b>Aurora lvl:</b> 25\n";
+			if (flags[kFLAGS.AURORA_LVL] == 5) interpersonStats += "<b>Aurora lvl:</b> 25\n";*/
 			if (flags[kFLAGS.AURORA_LVL] == 4) interpersonStats += "<b>Aurora lvl:</b> 19\n";
 			if (flags[kFLAGS.AURORA_LVL] == 3) interpersonStats += "<b>Aurora lvl:</b> 13\n";
 			if (flags[kFLAGS.AURORA_LVL] == 2) interpersonStats += "<b>Aurora lvl:</b> 7\n";
@@ -558,6 +566,10 @@ public class PlayerInfo extends BaseContent {
         if (flags[kFLAGS.CEANI_AFFECTION] > 0)
 			interpersonStats += "<b>Ceani Affection:</b> " + Math.round(flags[kFLAGS.CEANI_AFFECTION]) + "%\n";
 			if (flags[kFLAGS.CEANI_FOLLOWER] == 1) {
+				if (flags[kFLAGS.CEANI_LVL_UP] == 9) interpersonStats += "<b>Ceani lvl:</b> 98\n";
+				if (flags[kFLAGS.CEANI_LVL_UP] == 8) interpersonStats += "<b>Ceani lvl:</b> 92\n";
+				if (flags[kFLAGS.CEANI_LVL_UP] == 7) interpersonStats += "<b>Ceani lvl:</b> 86\n";
+				if (flags[kFLAGS.CEANI_LVL_UP] == 6) interpersonStats += "<b>Ceani lvl:</b> 80\n";
 				if (flags[kFLAGS.CEANI_LVL_UP] == 5) interpersonStats += "<b>Ceani lvl:</b> 74\n";
 				if (flags[kFLAGS.CEANI_LVL_UP] == 4) interpersonStats += "<b>Ceani lvl:</b> 68\n";
 				if (flags[kFLAGS.CEANI_LVL_UP] == 3) interpersonStats += "<b>Ceani lvl:</b> 60\n";
@@ -591,6 +603,12 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.DIANA_AFFECTION] > 0) {
 			interpersonStats += "<b>Diana Affection:</b> " + Math.round(flags[kFLAGS.DIANA_AFFECTION]) + "%\n";
 			interpersonStats += "<b>Spells Casted:</b> " + flags[kFLAGS.DIANA_SPELLS_CASTED] + "\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 16) interpersonStats += "<b>Diana lvl:</b> 75\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 15) interpersonStats += "<b>Diana lvl:</b> 69\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 14) interpersonStats += "<b>Diana lvl:</b> 63\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 13) interpersonStats += "<b>Diana lvl:</b> 57\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 12) interpersonStats += "<b>Diana lvl:</b> 51\n";
+			if (flags[kFLAGS.DIANA_LVL_UP] == 11) interpersonStats += "<b>Diana lvl:</b> 45\n";
 			if (flags[kFLAGS.DIANA_LVL_UP] == 10) interpersonStats += "<b>Diana lvl:</b> 39\n";
 			if (flags[kFLAGS.DIANA_LVL_UP] == 9) interpersonStats += "<b>Diana lvl:</b> 33\n";
 			if (flags[kFLAGS.DIANA_LVL_UP] == 8) interpersonStats += "<b>Diana lvl:</b> 27\n";
@@ -618,6 +636,9 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.ETNA_AFFECTION] > 0) {
 			interpersonStats += "<b>Etna Affection:</b> " + Math.round(flags[kFLAGS.ETNA_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] == 11) interpersonStats += "<b>Etna lvl:</b> 96\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] == 10) interpersonStats += "<b>Etna lvl:</b> 90\n";
+			if (flags[kFLAGS.ETNA_LVL_UP] == 9) interpersonStats += "<b>Etna lvl:</b> 84\n";
 			if (flags[kFLAGS.ETNA_LVL_UP] == 8) interpersonStats += "<b>Etna lvl:</b> 78\n";
 			if (flags[kFLAGS.ETNA_LVL_UP] == 7) interpersonStats += "<b>Etna lvl:</b> 72\n";
 			if (flags[kFLAGS.ETNA_LVL_UP] == 6) interpersonStats += "<b>Etna lvl:</b> 66\n";
@@ -629,18 +650,29 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.ETNA_LVL_UP] < 1) interpersonStats += "<b>Etna lvl:</b> 30\n";
 		}
 
-		if (flags[kFLAGS.ELECTRA_AFFECTION] > 0)
+		if (flags[kFLAGS.ELECTRA_AFFECTION] > 0) {
 			interpersonStats += "<b>Electra Affection:</b> " + Math.round(flags[kFLAGS.ELECTRA_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 12) interpersonStats += "<b>Electra lvl:</b> 96\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 11) interpersonStats += "<b>Electra lvl:</b> 90\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 10) interpersonStats += "<b>Electra lvl:</b> 84\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 9) interpersonStats += "<b>Electra lvl:</b> 78\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 8) interpersonStats += "<b>Electra lvl:</b> 72\n";
+			if (flags[kFLAGS.ELECTRA_LVL_UP] == 7) interpersonStats += "<b>Electra lvl:</b> 66\n";
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 6) interpersonStats += "<b>Electra lvl:</b> 60\n";
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 5) interpersonStats += "<b>Electra lvl:</b> 54\n";
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 4) interpersonStats += "<b>Electra lvl:</b> 48\n";
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 3) interpersonStats += "<b>Electra lvl:</b> 42\n";
 			if (flags[kFLAGS.ELECTRA_LVL_UP] == 2) interpersonStats += "<b>Electra lvl:</b> 36\n";
 			if (flags[kFLAGS.ELECTRA_LVL_UP] < 2) interpersonStats += "<b>Electra lvl:</b> 30\n";
+		}
 
 		if (SceneLib.emberScene.emberAffection() > 0) {
             interpersonStats += "<b>Ember Affection:</b> " + Math.round(SceneLib.emberScene.emberAffection()) + "%\n";
-            if (flags[kFLAGS.EMBER_LVL_UP] == 9) interpersonStats += "<b>Ember lvl:</b> 74\n";
+            if (flags[kFLAGS.EMBER_LVL_UP] == 13) interpersonStats += "<b>Ember lvl:</b> 98\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 12) interpersonStats += "<b>Ember lvl:</b> 92\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 11) interpersonStats += "<b>Ember lvl:</b> 86\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 10) interpersonStats += "<b>Ember lvl:</b> 80\n";
+			if (flags[kFLAGS.EMBER_LVL_UP] == 9) interpersonStats += "<b>Ember lvl:</b> 74\n";
 			if (flags[kFLAGS.EMBER_LVL_UP] == 8) interpersonStats += "<b>Ember lvl:</b> 68\n";
 			if (flags[kFLAGS.EMBER_LVL_UP] == 7) interpersonStats += "<b>Ember lvl:</b> 62\n";
 			if (flags[kFLAGS.EMBER_LVL_UP] == 6) interpersonStats += "<b>Ember lvl:</b> 56\n";
@@ -672,6 +704,10 @@ public class PlayerInfo extends BaseContent {
                 interpersonStats += Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n";
 			else
 				interpersonStats += "100%\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 13) interpersonStats += "<b>Isabella lvl:</b> 98\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 12) interpersonStats += "<b>Isabella lvl:</b> 92\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 11) interpersonStats += "<b>Isabella lvl:</b> 86\n";
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 10) interpersonStats += "<b>Isabella lvl:</b> 80\n";
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 9) interpersonStats += "<b>Isabella lvl:</b> 74\n";
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 8) interpersonStats += "<b>Isabella lvl:</b> 68\n";
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 7) interpersonStats += "<b>Isabella lvl:</b> 62\n";
@@ -709,6 +745,10 @@ public class PlayerInfo extends BaseContent {
                 interpersonStats += "<b>Kiha Affection:</b> " + 100 + "%\n";
 			else
 				interpersonStats += "<b>Kiha Affection:</b> " + Math.round(flags[kFLAGS.KIHA_AFFECTION]) + "%\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 13) interpersonStats += "<b>Kiha lvl:</b> 99\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 12) interpersonStats += "<b>Kiha lvl:</b> 93\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 11) interpersonStats += "<b>Kiha lvl:</b> 87\n";
+			if (flags[kFLAGS.KIHA_LVL_UP] == 10) interpersonStats += "<b>Kiha lvl:</b> 81\n";
 			if (flags[kFLAGS.KIHA_LVL_UP] == 9) interpersonStats += "<b>Kiha lvl:</b> 75\n";
 			if (flags[kFLAGS.KIHA_LVL_UP] == 8) interpersonStats += "<b>Kiha lvl:</b> 69\n";
 			if (flags[kFLAGS.KIHA_LVL_UP] == 7) interpersonStats += "<b>Kiha lvl:</b> 63\n";
@@ -724,6 +764,10 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.KINDRA_FOLLOWER] > 0)
 			interpersonStats += "<b>Kindra Affection:</b> " + Math.round(flags[kFLAGS.KINDRA_AFFECTION]) + "%\n";
 			if (flags[kFLAGS.KINDRA_AFFECTION] >= 5) {
+				if (flags[kFLAGS.KINDRA_LVL_UP] == 15) interpersonStats += "<b>Kindra lvl:</b> 99\n";
+				if (flags[kFLAGS.KINDRA_LVL_UP] == 14) interpersonStats += "<b>Kindra lvl:</b> 93\n";
+				if (flags[kFLAGS.KINDRA_LVL_UP] == 13) interpersonStats += "<b>Kindra lvl:</b> 87\n";
+				if (flags[kFLAGS.KINDRA_LVL_UP] == 12) interpersonStats += "<b>Kindra lvl:</b> 81\n";
 				if (flags[kFLAGS.KINDRA_LVL_UP] == 11) interpersonStats += "<b>Kindra lvl:</b> 75\n";
 				if (flags[kFLAGS.KINDRA_LVL_UP] == 10) interpersonStats += "<b>Kindra lvl:</b> 69\n";
 				if (flags[kFLAGS.KINDRA_LVL_UP] == 9) interpersonStats += "<b>Kindra lvl:</b> 63\n";
@@ -740,6 +784,16 @@ public class PlayerInfo extends BaseContent {
         if (flags[kFLAGS.LUNA_FOLLOWER] > 3) {
 			interpersonStats += "<b>Luna Affection:</b> " + Math.round(flags[kFLAGS.LUNA_AFFECTION]) + "%\n";
 			interpersonStats += "<b>Luna Jealousy:</b> " + Math.round(flags[kFLAGS.LUNA_JEALOUSY]) + "%\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 15) interpersonStats += "<b>Luna lvl:</b> 99\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 14) interpersonStats += "<b>Luna lvl:</b> 93\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 13) interpersonStats += "<b>Luna lvl:</b> 87\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 12) interpersonStats += "<b>Luna lvl:</b> 81\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 11) interpersonStats += "<b>Luna lvl:</b> 75\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 10) interpersonStats += "<b>Luna lvl:</b> 69\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 9) interpersonStats += "<b>Luna lvl:</b> 63\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 8) interpersonStats += "<b>Luna lvl:</b> 57\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 7) interpersonStats += "<b>Luna lvl:</b> 51\n";
+			if (flags[kFLAGS.LUNA_LVL_UP] == 6) interpersonStats += "<b>Luna lvl:</b> 45\n";
 			if (flags[kFLAGS.LUNA_LVL_UP] == 5) interpersonStats += "<b>Luna lvl:</b> 39\n";
 			if (flags[kFLAGS.LUNA_LVL_UP] == 4) interpersonStats += "<b>Luna lvl:</b> 33\n";
 			if (flags[kFLAGS.LUNA_LVL_UP] == 3) interpersonStats += "<b>Luna lvl:</b> 27\n";
@@ -809,15 +863,19 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.ZENJI_PROGRESS] > 0) {
 			interpersonStats += "<b>Zenji's perspective on player:</b> " + Math.round(flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER]) + "%\n";
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 8) {
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) {
 				interpersonStats += "<b>Zenji status:</b> Follower\n";
 				interpersonStats += "<b>Zenji lvl:</b> ";
-				if (player.level > 149) interpersonStats += "150";
-				else if (player.level > 24) interpersonStats += ""+player.level+"";
+				if (player.level > 24) interpersonStats += ""+player.level+"";
 				else interpersonStats += "25";
 				interpersonStats += "\n";
 			}
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 9) interpersonStats += "<b>Zenji status:</b> Lover\n";
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
+				interpersonStats += "<b>Zenji status:</b> Lover\n";
+				interpersonStats += "<b>Zenji Cum Production:</b> " + addComma(Math.round(1300 + player.statusEffectv2(StatusEffects.ZenjiModificationsList))) + "mL\n";
+				if (ZenjiScenes.Z1stKid != "") interpersonStats += "<b>Zenji Firstborn (Male) Name:</b> "+ZenjiScenes.Z1stKid+"\n";
+				if (ZenjiScenes.Z2ndKid != "") interpersonStats += "<b>Zenji Secondborn (Female) Name:</b> " + ZenjiScenes.Z2ndKid + "\n";
+			}
 		}
 
 		if (interpersonStats != "")
@@ -876,8 +934,10 @@ public class PlayerInfo extends BaseContent {
 
 		// Begin Outside camp NPC's Stats
 		var outsideCampNpcsStats:String = "";
+		if (flags[kFLAGS.AKBAL_LVL_UP] == 13) outsideCampNpcsStats += "<b>Akbal lvl:</b> 98 (current max lvl he can reach)\n";
+		if (flags[kFLAGS.AKBAL_LVL_UP] == 12) outsideCampNpcsStats += "<b>Akbal lvl:</b> 92\n";
 		if (flags[kFLAGS.AKBAL_LVL_UP] == 11) outsideCampNpcsStats += "<b>Akbal lvl:</b> 86\n";
-		if (flags[kFLAGS.AKBAL_LVL_UP] == 10) outsideCampNpcsStats += "<b>Akbal lvl:</b> 80 (current max lvl he can reach)\n";
+		if (flags[kFLAGS.AKBAL_LVL_UP] == 10) outsideCampNpcsStats += "<b>Akbal lvl:</b> 80\n";
 		if (flags[kFLAGS.AKBAL_LVL_UP] == 9) outsideCampNpcsStats += "<b>Akbal lvl:</b> 74\n";
 		if (flags[kFLAGS.AKBAL_LVL_UP] == 8) outsideCampNpcsStats += "<b>Akbal lvl:</b> 68\n";
 		if (flags[kFLAGS.AKBAL_LVL_UP] == 7) outsideCampNpcsStats += "<b>Akbal lvl:</b> 62\n";
@@ -888,8 +948,8 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.AKBAL_LVL_UP] == 2) outsideCampNpcsStats += "<b>Akbal lvl:</b> 32\n";
 		if (flags[kFLAGS.AKBAL_LVL_UP] == 1) outsideCampNpcsStats += "<b>Akbal lvl:</b> 26\n";
 		if (flags[kFLAGS.AKBAL_LVL_UP] < 1) outsideCampNpcsStats += "<b>Akbal lvl:</b> 20\n";
-		if (flags[kFLAGS.IZUMI_LVL_UP] == 11) outsideCampNpcsStats += "<b>Izumi lvl:</b> 96\n";
-		if (flags[kFLAGS.IZUMI_LVL_UP] == 10) outsideCampNpcsStats += "<b>Izumi lvl:</b> 90 (current max lvl she can reach)\n";
+		if (flags[kFLAGS.IZUMI_LVL_UP] == 11) outsideCampNpcsStats += "<b>Izumi lvl:</b> 96 (current max lvl she can reach)\n";
+		if (flags[kFLAGS.IZUMI_LVL_UP] == 10) outsideCampNpcsStats += "<b>Izumi lvl:</b> 90\n";
 		if (flags[kFLAGS.IZUMI_LVL_UP] == 9) outsideCampNpcsStats += "<b>Izumi lvl:</b> 84\n";
 		if (flags[kFLAGS.IZUMI_LVL_UP] == 8) outsideCampNpcsStats += "<b>Izumi lvl:</b> 78\n";
 		if (flags[kFLAGS.IZUMI_LVL_UP] == 7) outsideCampNpcsStats += "<b>Izumi lvl:</b> 72\n";
@@ -900,8 +960,9 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.IZUMI_LVL_UP] == 2) outsideCampNpcsStats += "<b>Izumi lvl:</b> 42\n";
 		if (flags[kFLAGS.IZUMI_LVL_UP] == 1) outsideCampNpcsStats += "<b>Izumi lvl:</b> 36\n";
 		if (flags[kFLAGS.IZUMI_LVL_UP] < 1) outsideCampNpcsStats += "<b>Izumi lvl:</b> 30\n";
+		if (flags[kFLAGS.MINERVA_LVL_UP] == 12) outsideCampNpcsStats += "<b>Minerva lvl:</b> 95 (current max lvl she can reach)\n";
 		if (flags[kFLAGS.MINERVA_LVL_UP] == 11) outsideCampNpcsStats += "<b>Minerva lvl:</b> 89\n";
-		if (flags[kFLAGS.MINERVA_LVL_UP] == 10) outsideCampNpcsStats += "<b>Minerva lvl:</b> 83 (current max lvl she can reach)\n";
+		if (flags[kFLAGS.MINERVA_LVL_UP] == 10) outsideCampNpcsStats += "<b>Minerva lvl:</b> 83\n";
 		if (flags[kFLAGS.MINERVA_LVL_UP] == 9) outsideCampNpcsStats += "<b>Minerva lvl:</b> 77\n";
 		if (flags[kFLAGS.MINERVA_LVL_UP] == 8) outsideCampNpcsStats += "<b>Minerva lvl:</b> 71\n";
 		if (flags[kFLAGS.MINERVA_LVL_UP] == 7) outsideCampNpcsStats += "<b>Minerva lvl:</b> 65\n";
@@ -913,8 +974,8 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.MINERVA_LVL_UP] == 1) outsideCampNpcsStats += "<b>Minerva lvl:</b> 29\n";
 		if (flags[kFLAGS.MINERVA_LVL_UP] < 1) outsideCampNpcsStats += "<b>Minerva lvl:</b> 23\n";
 		if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] >= 1) {
-			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 11) outsideCampNpcsStats += "<b>Priscilla lvl:</b> 98\n";
-			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 10) outsideCampNpcsStats += "<b>Priscilla lvl:</b> 92 (current max lvl she can reach)\n";
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 11) outsideCampNpcsStats += "<b>Priscilla lvl:</b> 98 (current max lvl she can reach)\n";
+			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 10) outsideCampNpcsStats += "<b>Priscilla lvl:</b> 92\n";
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 9) outsideCampNpcsStats += "<b>Priscilla lvl:</b> 86\n";
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 8) outsideCampNpcsStats += "<b>Priscilla lvl:</b> 80\n";
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 7) outsideCampNpcsStats += "<b>Priscilla lvl:</b> 74\n";
@@ -1070,6 +1131,9 @@ public class PlayerInfo extends BaseContent {
 
         if (SceneLib.urtaPregs.urtaKids() > 0)
             childStats += "<b>Children With Urta:</b> " + SceneLib.urtaPregs.urtaKids() + "\n";
+
+		if (flags[kFLAGS.ZENJI_KIDS] > 0)
+            childStats += "<b>Kids with Zenji:</b> " + flags[kFLAGS.ZENJI_KIDS] + "\n";
         //Mino sons
 		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0)
 			childStats += "<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n";
@@ -1400,7 +1464,7 @@ public class PlayerInfo extends BaseContent {
 			outputText("</ul>");
 		}
 		outputText("If you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.\n");
-		if (player.perkPoints>1) outputText("\n\nYou have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
+		if (player.perkPoints > 1) outputText("\n\nYou have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
 		for each(var p:* in perkList){
 			outputText("<u><a href=\"event:"+perkList.indexOf(p)+"\">"+p.perk.perkName+"</a></u>\n");
 		}
@@ -1436,6 +1500,84 @@ public class PlayerInfo extends BaseContent {
 			doNext(playerMenu);
 		}
 	}
-
+	
+	public function superPerkBuyMenu(page:int = 1):void {
+		clearOutput();
+		outputText("If you meet requirements and have enough points you can pick one or more super perks.\n");
+		if (player.superPerkPoints > 0) outputText("You have "+numberOfThings(player.superPerkPoints,"super perk point","super perk points")+".\n\n");
+		hideMenus();
+		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
+		menu();
+		if (page == 1) {
+			if (player.superPerkPoints > 0) {
+				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this super perk.");
+				else {
+					if (player.freeHiddenJobsSlots() > 0) addButton(0, "HJ:BD", perkHiddenJobBloodDemon).hint("Choose the 'Hidden Job: Blood Demon' super perk. You've trained in arts of blood demons. Beings that reached mastery of using their own or others blood to great effect. (+5x Tou of OverMax HP, -10% blood spells cost, +20% blood spells power)");
+					else addButtonDisabled(0, "HJ:BD", "You not have free slot for hidden jobs that allows you to pick this one hidden job.");
+				}
+				if (player.hasPerk(PerkLib.WayOfTheBlood)) addButtonDisabled(1, "WOTB", "You already have this super perk.");
+				else {
+					if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButton(1, "WOTB", perkWayOfTheBlood).hint("Choose the 'Way of the Blood' super perk. Allowing to use health to substitude using soulforce in almost all soulskills. (+5x Tou of OverMax HP, -10% blood spells cost, +20% blood spells power)");
+					else addButtonDisabled(1, "WOTB", "You need first to have 'Hidden Job: Blood Demon' super perk.");
+				}
+				if (player.hasPerk(PerkLib.YourPainMyPower)) addButtonDisabled(2, "YPMP", "You already have this super perk.");
+				else {
+					if (player.hasPerk(PerkLib.WayOfTheBlood)) addButton(2, "YPMP", perkYourPainMyPower).hint("Choose the 'Your Pain My Power' super perk. You can absorb all of blood spilled and wrath generated by enemy under Bleed effects into yourself. (+5x Tou of OverMax HP, -10% blood spells cost, +20% blood spells power)");
+					else addButtonDisabled(2, "YPMP", "You need first to have 'Way of the Blood' super perk.");
+				}
+				//addButton(3, "MBFBP", ).hint("Choose the 'My Blood for Blood Puppies' super perk. ");
+				//addButtonDisabled(3, "MBFBP", "Soon.");
+			}
+			else {
+				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this perk.");
+				else addButtonDisabled(0, "HJ:BD", "You not have free super perk point to pick this super perk.");
+				if (player.hasPerk(PerkLib.WayOfTheBlood)) addButtonDisabled(1, "WOTB", "You already have this perk.");
+				else addButtonDisabled(1, "WOTB", "You not have free super perk point to pick this super perk.");
+				if (player.hasPerk(PerkLib.YourPainMyPower)) addButtonDisabled(2, "YPMP", "You already have this perk.");
+				else addButtonDisabled(2, "YPMP", "You not have free super perk point to pick this super perk.");
+				//if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) addButtonDisabled(3, "MBFBP", "You already have this perk.");
+				//else addButtonDisabled(3, "MBFBP", "You not have free super perk point to pick this super perk.");
+			}
+			//10 -> page + 1 button
+			//11 -> page - 1 button
+			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);
+			else addButtonDisabled(13, "Convert", "You need at least 3 perk points to convert them.");
+			addButton(14, "Back", playerMenu);
+		}
+		if (page == 2) {
+			if (player.superPerkPoints > 0) {
+				
+			}
+			addButton(14, "Back", playerMenu);
+		}
+	}
+	private function superPerkConvertMenu():void {
+		clearOutput();
+		outputText("You sacrifice three perk points and recieve one super perk point.");
+		player.perkPoints -= 3;
+		player.superPerkPoints++;
+		doNext(superPerkBuyMenu);
+	}
+	private function perkHiddenJobBloodDemon():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.HiddenJobBloodDemon,0,0,0,0);
+		clearOutput();
+		outputText("Your gained Hidden Job: Blood Demon super perk.");
+		doNext(curry(superPerkBuyMenu, 1));
+	}
+	private function perkWayOfTheBlood():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.WayOfTheBlood,0,0,0,0);
+		clearOutput();
+		outputText("Your gained Way of the Blood super perk.");
+		doNext(curry(superPerkBuyMenu, 1));
+	}
+	private function perkYourPainMyPower():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.YourPainMyPower,0,0,0,0);
+		clearOutput();
+		outputText("Your gained Your Pain My Power super perk.");
+		doNext(curry(superPerkBuyMenu, 1));
+	}
 }
 }

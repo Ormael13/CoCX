@@ -7,6 +7,8 @@ package classes.Scenes.Areas.Caves
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Caves.CaveWyrmScene;
 import classes.internals.*;
@@ -114,6 +116,13 @@ use namespace CoC;
 			this.short = "cave wyrm";
 			this.imageName = "cave wyrm";
 			this.long = "";
+			if (flags[kFLAGS.HERM_CAVE_WYRM] == 1) {
+				this.createCock(14 + rand(6),2 + rand(5)/2,CockTypesEnum.CAVE_WYRM);
+				this.balls = 2;
+				this.ballSize = 4 + rand(6);
+				this.cumMultiplier = 1.5;
+				this.hoursSinceCum = ballSize * 10;
+			}
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 120, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("B"));
@@ -123,7 +132,7 @@ use namespace CoC;
 			this.tallness = 72;
 			this.hips.type = Hips.RATING_INHUMANLY_WIDE;
 			this.butt.type = Butt.RATING_INCONCEIVABLY_BIG;
-			//this.lowerBody = LowerBody.ELF;
+			this.lowerBody = LowerBody.CAVE_WYRM;
 			this.skinTone = "dark blue";
 			this.hairColor = "black";
 			this.hairLength = 9;
@@ -138,7 +147,7 @@ use namespace CoC;
 			this.bonusHP = 500;
 			this.bonusWrath = 250;
 			this.wrath = 130;
-			this.bonusLust = 20;
+			this.bonusLust = 185;
 			this.lustVuln = .35;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
@@ -147,8 +156,8 @@ use namespace CoC;
 			this.drop = new ChainedDrop().
 					add(useables.EBONBLO,1/20).
 					add(consumables.METHIRC,0.7);
-			//this.tailType = Tail.SALAMANDER;
-			//this.tailRecharge = 0;
+			this.tailType = Tail.CAVE_WYRM;
+			this.tailRecharge = 0;
 			checkMonster();
 		}	
 	}

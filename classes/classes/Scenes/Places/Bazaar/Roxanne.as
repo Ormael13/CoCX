@@ -588,7 +588,7 @@ private function bigBootyRoxanneContestLoss():void {
 	outputText("\n\nYour strength is gone, either from booze, or the incredible reaming and creaming you just took.  In any case, you slump over into the mess[if (hasCock = true) , falling asleep in your own spooge].");
 	outputText("\n\n<b>LATER...</b>\n");
 	outputText("You wake in the lizan's bed, her arm curled around your gurgling belly.  From how sore your rear feels, she probably kept 'winning' at least two or three more times.  Your head is pounding, your [legs] are weak, and you dribble cum from your ass with every movement.  It takes some doing to extricate yourself from Roxanne's slumbering form, but you find your equipment and leave, hanging your head in shame under the leering eyes of the caravan-goers.");
-	player.sexReward("cum");
+	player.sexReward("cum","Anal");
 	//(-100 lust, -1 int, hangover effect)
 	player.orgasm();
 	dynStats("int", -1);

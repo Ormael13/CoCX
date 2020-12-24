@@ -4469,6 +4469,5 @@ private function hammerQuest():void {
 	outputText("\n\n\"<i>Sweetie, that would be wonderful!  I still remember how to make a hammer and I think I can forge one like the hammer I have.  But I will need the resources.  Steel ingots will do; the ores can be found at the mountains.  You'll need a pickaxe though.</i>\"");
 	flags[kFLAGS.MARBLE_HAMMER_QUEST_PROGRESS] = 1;
 }
-
 }
 }

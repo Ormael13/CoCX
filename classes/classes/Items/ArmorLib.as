@@ -10,7 +10,7 @@ package classes.Items
 	{
 		public static const COMFORTABLE_UNDERCLOTHES:Armor = new ComfortableUnderclothes();
 		public static const NOTHING:Armor = new Nothing();
-		//25 za 1 ptk robes, 20 dla light, 40 dla medium i 60 dla heavy, z perkiem/dod. efektem podwaja koszt za każdy
+		//25 za 1 ptk robes, 20 dla light, 40 dla medium, 60 dla heavy, 80 dla light ayo, 100 dla heavy ayo i 150 dla ultra heavy ayo, z perkiem/dod. efektem podwaja koszt za każdy
 		public const NOTHING:Armor = new Nothing();
 		public const ADVCLTH:Armor = new Armor("AdvClth","G. Clothes","green adventurer's clothes","a green adventurer's outfit, complete with pointed cap",2,0,50,"A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!","Light");
 		public const A_ROBE_:ArmorWithPerk = new ArmorWithPerk("A.Robe","A.Robe","apprentice's robe","an apprentice's robe",0,1,25,"This drab robe lacks adornment, yet retains an air of mysticality. The low quality of the fabric coupled with its mystic air suggests that it is a garment meant for mages in training.","Light",
@@ -21,6 +21,7 @@ package classes.Items
 		public const B_DRESS:Armor = new Armor("B.Dress","Long Dress","long ballroom dress patterned with sequins","a ballroom dress patterned with sequins",0,0,40,"A long ballroom dress patterned with sequins.  Perfect for important occasions.","Medium");
 		public const B_QIPAO:Armor = new Armor("B.Qipao","BlueQipao","Blue Lunar new year dress (f)","a Blue Lunar new year dress (f)",0,0,100,"A simple yet elegant blue qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const BEEARMR:Armor = new BeeArmor();
+		public const BERA:Armor = new BerserkerArmor();
 		public const BIMBOSK:ArmorWithPerk = new ArmorWithPerk("BimboSk","BimboSk","bimbo skirt","a skirt that looks like it belongs on a bimbo",1,0,40,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your delightfully slutty yet upbeat garb helps you seduce your foes!", false, false);
 		public const BLIZZ_K:BlizzardKimono = new BlizzardKimono();
@@ -56,7 +57,8 @@ package classes.Items
 		public const GTECHC_:GoblinTechnomancerClothes = new GoblinTechnomancerClothes();
 		public const GOOARMR:GooArmor = new GooArmor();
 		public const H_GARB_:HereticsGarb = new HereticsGarb();
-		public const HBA_ARM:HBAspArmor = new HBAspArmor();
+		public const HBARMOR:HBArmor = new HBArmor();
+		public const HAYOARM:HeavyAyoArmor = new HeavyAyoArmor();
 		public const I_CORST:InquisitorsCorset = new InquisitorsCorset();
 		public const I_ROBES:InquisitorsRobes = new InquisitorsRobes();
 		public const INDECST:ArmorWithPerk = new ArmorWithPerk("IndecSt","Indec StAr","practically indecent steel armor","a suit of practically indecent steel armor",5,0,400,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium",
@@ -122,15 +124,15 @@ package classes.Items
 				PerkLib.SluttySeduction,7,0,0,0,"Your clingy transparent bodysuit allows you access to 'Seduce', an improved form of 'Tease'.");
 		public const TBARMOR:Armor = new MaraeArmor();
 		public const TRMOUTF:Armor = new TravelingMerchantOutfit();
-		public const TRADITC:ArmorWithPerk = new ArmorWithPerk("TraditC","TraditionalCloth","Traditional clothes","a Traditional clothes",0,0,160,"These clothes bear resemblance to the traditional outfit whore by people in He'Xin'Dao on important days however there is something lewd and obscene about this more skimpy variant of the design. These clothes naturally assist soul force manipulation.","Light",
+		public const TRADITC:ArmorWithPerk = new ArmorWithPerk("TraditC","TraditionalCloth","Traditional clothes","a Traditional clothes",0,0,160,"These clothes bear resemblance to the traditional outfit whore by people in He'Xin'Dao on important days however there is something lewd and obscene about this more skimpy variant of the design. These clothes naturally assist soulforce manipulation.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your revealing clothes allows you access to 'Seduce', an improved form of 'Tease'.", false, false);
 		public const TRASARM:Armor = new Armor("TraSArm","TraSArmor","training soul armor","a training soul armor",1,1,240,"This set of heavy armor is made using soulmetal but it main purpose is to allow user train soulforce to the uttermost limit for novice soul cultivator.","Heavy");
 		public const TUBETOP:Armor = new Armor("TubeTop","Tube Top","tube top and short shorts","a snug tube top and VERY short shorts",0,0,25,"A clingy tube top and VERY short shorts.","Light");
+		public const UHAYOARM:UltraHeavyAyoArmor = new UltraHeavyAyoArmor();
 		public const W_ROBES:ArmorWithPerk = new ArmorWithPerk("W.Robes","W.Robes","wizard's robes","a wizard's robes",0,1,50,"These robes appear to have once belonged to a female wizard.  They're long with a slit up the side and full billowing sleeves.  The top is surprisingly low cut.  Somehow you know wearing it would aid your spellcasting.","Light",
 				PerkLib.WizardsEndurance,25,0,0,0);
 		public const WALIC:ArmorWithPerk = new WalpurgisIzaliaRobe();
 		public const VLAR:ArmorWithPerk = new VladimirRegalia();
-		public const BERA:Armor = new BerserkerArmor();
 		public const WKIMONO:ArmorWithPerk = new ArmorWithPerk("W.Kimono","W.Kimono","white kimono","a white kimono",0,1,200,"This lovely white kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		/*

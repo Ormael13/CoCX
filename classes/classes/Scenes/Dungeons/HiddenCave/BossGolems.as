@@ -110,13 +110,10 @@ public class BossGolems extends AbstractGargoyle
 			this.weaponName = "stone fists";
 			this.weaponVerb = "smash";
 			this.armorName = "slight cracked stone";
-			this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.Sentience, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

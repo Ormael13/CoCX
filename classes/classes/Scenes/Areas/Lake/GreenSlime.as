@@ -66,7 +66,8 @@ public class GreenSlime extends Monster
 		
 		private function lustReduction():void {
 			outputText("The creature collapses backwards as its cohesion begins to give out, and the faint outline of eyes and a mouth form on its face.  Its chest heaves as if it were gasping, and the bolt upright erection it sports visibly quivers and pulses before relaxing slightly.");
-			lust -= 13;
+			if (lust < 20) lust = 0;
+			else lust -= 20;
 			doNext(EventParser.playerMenu);
 		}
 		
@@ -79,6 +80,7 @@ public class GreenSlime extends Monster
 				this.armorDef = 4;
 				this.armorMDef = 12;
 				this.bonusHP = 100;
+				this.bonusLust = 146;
 				this.level = 6;
 			}
 			else {
@@ -88,6 +90,7 @@ public class GreenSlime extends Monster
 				this.armorDef = 3;
 				this.armorMDef = 9;
 				this.bonusHP = 50;
+				this.bonusLust = 114;
 				this.level = 4;
 			}
 			trace("GreenSlime Constructor!");
@@ -113,7 +116,6 @@ public class GreenSlime extends Monster
 			this.weaponName = "hands";
 			this.weaponVerb = "slap";
 			this.armorName = "gelatinous skin";
-			this.bonusLust = 20;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = rand(5) + 3;

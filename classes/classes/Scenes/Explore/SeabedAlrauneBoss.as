@@ -62,9 +62,11 @@ import classes.internals.ChainedDrop;
 			}
 			initStrTouSpeInte(540, 1240, 820, 560);
 			initWisLibSensCor(560, 720, 500, 50);
+			this.tallness = rand(11) + 110;
 			this.armorDef = 90;
 			this.armorMDef = 9;
 			this.bonusHP = 200;
+			this.bonusLust = 1355;
 			this.level = 135;
 			this.gems = rand(25) + 15;
 			this.drop = new ChainedDrop().add(consumables.MARAFRU, 1 / 6);
@@ -76,7 +78,7 @@ import classes.internals.ChainedDrop;
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}

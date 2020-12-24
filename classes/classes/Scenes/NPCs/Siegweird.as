@@ -16,7 +16,7 @@ import classes.internals.*;
 		public var spellCostCharge:int = 6;
 		
 		public function siegweirdMagicWeapon():void {
-			outputText("Siegweird passes his armored paw over his greatsword, which begins to flash like a torchlight. This is gonna hurt!");
+			outputText("Siegweird passes his armored paw over his greatsword, imbuing it with holy power as it gives off a radiant incandescence.");
 			createStatusEffect(StatusEffects.ChargeWeapon, 40, 0, 0, 0);
 			this.weaponAttack += (40 + (40 * (1 + player.newGamePlusMod)));
 			mana -= spellCostCharge;
@@ -40,7 +40,7 @@ import classes.internals.*;
 		}
 		
 		private function siegweirdBerserk():void {
-			outputText("Siegweird suddenly screams a war cry, becoming bigger, tougher and more intimidating by the second!\n\n");
+			outputText("Siegwerd's helmet glows even brighter as he's filled with fanatical fury!\n\n");
 			createStatusEffect(StatusEffects.BerzerkingSiegweird,50,0,0,0);
 		}
 		
@@ -88,19 +88,19 @@ import classes.internals.*;
 		public function Siegweird() 
 		{
 			this.a = "";
-			this.short = "Siegweird of Catelyna";
+			this.short = "Siegweird";
 			this.imageName = "siegweird";
-			this.long = "You are fighting Siegweird of Catelyna, a somewhat goofy albeith determined paladin of Marae. He wield his sword with both hands, his onion shaped spiked shield on his back. His Onion shaped Armor hides most of his features though you know him to be a white bear morph.";
+			this.long = "You are fighting Siegweird, alleged paladin of Marae. He wields his massive sword with both hands as his body is adorned with full golden plate. His helmet is radiating an intense light, completely hiding his face. You can tell he is ready to do what is necessary to purge corruption.";
 			// this.plural = false;
 			this.createCock(7.5,1.8);
 			this.balls = 2;
 			this.ballSize = 1;
 			this.cumMultiplier = 1;
-			this.hoursSinceCum = 1000;
+			this.hoursSinceCum = 10000;
 			createBreastRow(0);
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
-			this.tallness = 5*12+6;
+			this.tallness = 7*12+6;
 			this.skin.growFur({color:"tawny"});
 			this.hairColor = "brown";
 			this.hairLength = 5;
@@ -109,11 +109,11 @@ import classes.internals.*;
 			this.weaponName = "greatsword";
 			this.weaponVerb="slash";
 			this.weaponAttack = 40;
-			this.armorName = "onion armor";
+			this.armorName = "holy armor";
 			this.armorDef = 500;
 			this.armorMDef = 500;
 			this.bonusHP = 5000;
-			this.bonusLust = 40;
+			this.bonusLust = 214;
 			this.lust = 30;
 			this.lustVuln = 0.75;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

@@ -1204,7 +1204,7 @@ import classes.lists.Gender;
 			}
 			outputText("\n\nAs he helps you clean up he tells you how much he likes your ass. After chatting for a little bit he tells you he has to get back to work. As you walk out the tent flap all eyes are on you. After a few moments one of the satyrs sticks his fingers to his lips and gives a high pitched wolf whistle. Some of the tables with people in them erupt in stomping and clapping. Harry's harpy wife catches your eye and gives you a conspiratorial wink, rubbing her pussy through her tight little cut off pants as she watches you leave.");
 			flags[kFLAGS.BLACK_COCK_HARRY_SEX_COUNTER]++;
-			player.sexReward("cum");
+			player.sexReward("cum","Lips");
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2103,5 +2103,4 @@ import classes.lists.Gender;
 			//outputText("\n\n<b>Mystery meat transformations are not yet implemented.</b>");
 		}
 	}
-
 }

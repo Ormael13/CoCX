@@ -55,37 +55,38 @@ public class Achievements extends BaseContent
 			addAchievement("Revenge at Last", kACHIEVEMENTS.STORY_ZETAZ_REVENGE, "Defeat Zetaz and obtain the map.");
 			addAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, "Defeat Lethice.");
 			
-			titleAchievementSection("Zones"); //23 achievements
+			titleAchievementSection("Zones"); //24 achievements
 			addAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER, "Discover every zone.");
 			addAchievement("Sightseer", kACHIEVEMENTS.ZONE_SIGHTSEER, "Discover every place.");
 			addAchievement("Where am I?", kACHIEVEMENTS.ZONE_WHERE_AM_I, "Explore for the first time.");
 			addAchievement("Forest Ranger", kACHIEVEMENTS.ZONE_FOREST_RANGER, "Explore the forest 100 times.");
+			addAchievement("We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER, "Explore the deepwoods 100 times.");
+			//addAchievement("Jumanji", kACHIEVEMENTS., "Explore the jungle 100 times.");
 			addAchievement("Vacationer", kACHIEVEMENTS.ZONE_VACATIONER, "Explore the lake 100 times.");
 			addAchievement("Dehydrated", kACHIEVEMENTS.ZONE_DEHYDRATED, "Explore the desert 100 times.");
 			addAchievement("Rookie", kACHIEVEMENTS.ZONE_ROOKIE, "Explore the outer battlefield 100 times.");
 			addAchievement("Mountaineer", kACHIEVEMENTS.ZONE_MOUNTAINEER, "Explore the mountains 100 times.");
+			addAchievement("Light-headed", kACHIEVEMENTS.ZONE_LIGHT_HEADED, "Explore the high mountains 100 times.");
 			addAchievement("Rolling Hills", kACHIEVEMENTS.ZONE_ROLLING_HILLS, "Explore the plains 100 times.");
 			addAchievement("Wet All Over", kACHIEVEMENTS.ZONE_WET_ALL_OVER, "Explore the swamp 100 times.");
-			addAchievement("Tainted", kACHIEVEMENTS.ZONE_TAINTED, "Explore the blight ridge 100 times");
-			addAchievement("We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER, "Explore the deepwoods 100 times.");
-			//addAchievement("Jumanji", kACHIEVEMENTS., "Explore the jungle 100 times.");
-			addAchievement("Sunburned", kACHIEVEMENTS.ZONE_SUNBURNED, "Explore the beach 100 times.");
-			addAchievement("Caveman", kACHIEVEMENTS.ZONE_CAVEMAN, "Explore the caves 100 times.");
-			addAchievement("Light-headed", kACHIEVEMENTS.ZONE_LIGHT_HEADED, "Explore the high mountains 100 times.");
 			addAchievement("All Murky", kACHIEVEMENTS.ZONE_ALL_MURKY, "Explore the bog 100 times.");
+			addAchievement("Tainted", kACHIEVEMENTS.ZONE_TAINTED, "Explore the blight ridge 100 times");
+			addAchievement("Defiled", kACHIEVEMENTS.ZONE_DEFILED, "Explore the defiled ravine 100 times.");
+			addAchievement("Sunburned", kACHIEVEMENTS.ZONE_SUNBURNED, "Explore the beach 100 times.");
 			addAchievement("Sea-Legs", kACHIEVEMENTS.ZONE_SAILOR, "Explore the ocean 100 times.");
+			addAchievement("Diver", kACHIEVEMENTS.ZONE_DIVER, "Explore the deep sea 100 times.");
+			addAchievement("Caveman", kACHIEVEMENTS.ZONE_CAVEMAN, "Explore the caves 100 times.");
 			//addAchievement("Spelunker", kACHIEVEMENTS., "Explore the deep caves 100 times.");
 			//addAchievement("", kACHIEVEMENTS., "Explore the tundra 100 times.");
 			addAchievement("Frozen", kACHIEVEMENTS.ZONE_FROZEN, "Explore the glacial rift 100 times.");
 			//addAchievement("Ashes to ashes, dust to dust", kACHIEVEMENTS.ZONE_ASHES_TO_ASHES_DUST_TO_DUST, "Explore the ashlands 100 times.");
 			addAchievement("Roasted", kACHIEVEMENTS.ZONE_ROASTED, "Explore the volcanic crag 100 times.");
-			addAchievement("Diver", kACHIEVEMENTS.ZONE_DIVER, "Explore the deep sea 100 times.");
 			addAchievement("Archaeologist", kACHIEVEMENTS.ZONE_ARCHAEOLOGIST, "Explore the town ruins 15 times.");
 			addAchievement("Farmer", kACHIEVEMENTS.ZONE_FARMER, "Visit Whitney's farm 30 times.");
 			addAchievement("Sailor", kACHIEVEMENTS.ZONE_SEA_LEGS, "Use the lake boat 15 times.");
 			
 			titleAchievementSection("Levels"); //13 achievements
-			addAchievement("Level up!", kACHIEVEMENTS.LEVEL_LEVEL_UP, "Get to level 2.");
+			addAchievement("Level up!", kACHIEVEMENTS.LEVEL_LEVEL_UP, "Get to level 1.");
 			addAchievement("Novice", kACHIEVEMENTS.LEVEL_NOVICE, "Get to level 5.");
 			addAchievement("Apprentice", kACHIEVEMENTS.LEVEL_APPRENTICE, "Get to level 10.");
 			addAchievement("Journeyman", kACHIEVEMENTS.LEVEL_JOURNEYMAN, "Get to level 15.");
@@ -97,7 +98,7 @@ public class Achievements extends BaseContent
 			addAchievement("Sovereign", kACHIEVEMENTS.LEVEL_SOVEREIGN, "Get to level 90.");
 			addAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, "Get to level 100.", "Get to level 100. (Your powers would have surpassed weakest god by now.)", true);
 			addAchievement("Newb God(ess)", kACHIEVEMENTS.LEVEL_NEWB_GOD_ESS, "Get to level 120.", "Get to level 120. (You still new to all this 'god' stuff.)", true);
-			addAchievement("Mid-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, "Get to level 150.", "Get to level 150. (No more called newb god(ess) at least.)", true);
+			addAchievement("Lowest-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS, "Get to level 150.", "Get to level 150. (No more called newb god(ess) at least.)", true);
 			//lvl 180// (Your powers would have surpassed Marae's by now.)
 			
 			titleAchievementSection("Population"); //21 achievements
@@ -143,6 +144,9 @@ public class Achievements extends BaseContent
 			addAchievement("Delver Grand Master", kACHIEVEMENTS.DUNGEON_DELVER_GRAND_MASTER, "Clear 16 dungeons.");
 			addAchievement("Shut Down Everything", kACHIEVEMENTS.DUNGEON_SHUT_DOWN_EVERYTHING, "Clear the Factory.");
 			addAchievement("You're in Deep", kACHIEVEMENTS.DUNGEON_YOURE_IN_DEEP, "Fully clear the Deep Cave.");
+			//addAchievement("", kACHIEVEMENTS., "Fully clear the 3rd mainstoryline dungeon.");
+			//addAchievement("", kACHIEVEMENTS., "Fully clear the 4th mainstoryline dungeon.");
+			//addAchievement("", kACHIEVEMENTS., "Fully clear the 5th mainstoryline dungeon.");
 			addAchievement("End of Reign", kACHIEVEMENTS.DUNGEON_END_OF_REIGN, "Fully clear the Lethice Stronghold.");
 			addAchievement("Friend of the Sand Witches", kACHIEVEMENTS.DUNGEON_SAND_WITCH_FRIEND, "Fully clear the Desert Cave.");
 			addAchievement("Fall of the Phoenix", kACHIEVEMENTS.DUNGEON_PHOENIX_FALL, "Clear the Tower of the Phoenix.");
@@ -163,6 +167,10 @@ public class Achievements extends BaseContent
 			addAchievement("Why are you here?", kACHIEVEMENTS.DUNGEON_WHY_ARE_YOU_HERE, "Reach 300th room of Ebon Labyrinth.");
 			//addAchievement("", kACHIEVEMENTS., "Reach 350th room of Ebon Labyrinth.");
 			//addAchievement("", kACHIEVEMENTS., "Reach 400th room of Ebon Labyrinth.");
+			//addAchievement("", kACHIEVEMENTS., "Reach 450th room of Ebon Labyrinth.");
+			//addAchievement("", kACHIEVEMENTS., "Reach 500th room of Ebon Labyrinth.");
+			//addAchievement("", kACHIEVEMENTS., "Reach 550th room of Ebon Labyrinth.");
+			//addAchievement("", kACHIEVEMENTS., "Reach 600th room of Ebon Labyrinth.");
 			addAchievement("Four heads better then one", kACHIEVEMENTS.DUNGEON_DUNGEONMASTER, "Defeat the Chimera Boss in Ebon Labyrinth.");
 			
 			titleAchievementSection("Fashion"); //24 achievements
@@ -172,8 +180,8 @@ public class Achievements extends BaseContent
 			addAchievement("Cosplayer (Recognizable)", kACHIEVEMENTS.FASHION_COSPLAYER_2, "Wear 60 different clothings/armors.");
 			addAchievement("Cosplayer (Seasonal)", kACHIEVEMENTS.FASHION_COSPLAYER_3, "Wear 100 different clothings/armors.");
 			addAchievement("Cosplayer (Proffesional)", kACHIEVEMENTS.FASHION_COSPLAYER_4, "Wear 150 different clothings/armors.");
-			//addAchievement("Jessica Nigri apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_3, "Wear 135 different clothings/armors.");
-			//addAchievement("Yaya Han apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_4, "Wear 290 different clothings/armors.");
+			//addAchievement("Jessica Nigri apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_5, "Wear 300 different clothings/armors.");
+			//addAchievement("Yaya Han apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_6, "Wear 600 different clothings/armors.");
 			addAchievement("Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX, "Wear any form of kinky clothing and wield any form of whip.");
 			addAchievement("Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO, "Wear no undergarments while wearing any clothes or armours.");
 			addAchievement("Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING, "Wear ring that is valued at least 1,000 gems.");
@@ -193,7 +201,8 @@ public class Achievements extends BaseContent
 			addAchievement("Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS, "Equip all toughness boosting accessories.");
 			addAchievement("Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM, "Equip all wisdom boosting accessories.");
 			addAchievement("Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP, "Equip any vehicle.");
-			addAchievement("Rollin'", kACHIEVEMENTS.FASHION_SUIT_UP, "Equip Goblin Mech Prime.", "", true);
+			addAchievement("Rollin'", kACHIEVEMENTS.FASHION_ROLLIN_ROLLIN, "Equip Goblin Mech Prime.", "", true);
+			addAchievement("Howl of the Banshee", kACHIEVEMENTS.FASHION_HOWL_OF_THE_BANSHEE, "Equip Howling Bashee Mech.", "", true);
 			
 			titleAchievementSection("Wealth"); //9 achievements
 			addAchievement("Rich", kACHIEVEMENTS.WEALTH_RICH, "Have 1,000 gems.");
@@ -214,6 +223,7 @@ public class Achievements extends BaseContent
 			addAchievement("Merlin", kACHIEVEMENTS.COMBAT_WIZARD, "Learn all black and white spells from spell books.");
 			//learn all grey spells
 			//learn all white/black/grey spells
+			//learn all blood spells
 			addAchievement("Cum Cannon", kACHIEVEMENTS.COMBAT_CUM_CANNON, "Cum in the middle of battle.");
 			addAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB, "Fire your webbings at your opponent.");
 			addAchievement("Pain", kACHIEVEMENTS.COMBAT_PAIN, "Deal 50 damage in one hit.");
@@ -280,12 +290,13 @@ public class Achievements extends BaseContent
 			addAchievement("xXx 4", kACHIEVEMENTS.EPIC_XXX_4, "Start NG+++ (or higher) game.", "", true);
 			addAchievement("xXx 5: Mareth's Judgment_Day", kACHIEVEMENTS.EPIC_XXX5_MARETHS_JUDGMENT_DAY, "Start NG 4+ (or higher) game.", "", true);
 			addAchievement("xXx 6: Rise of the Demons", kACHIEVEMENTS.EPIC_XXX6_RISE_OF_THE_DEMONS, "Start NG 5+ (or higher) game.", "", true);
-			//addAchievement("xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION, "Start NG 6+ (or higher) game.", "", true);
+			addAchievement("xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION, "Start NG 6+ (or higher) game.", "", true);
 			//addAchievement("xXx 8: Genisys", kACHIEVEMENTS.EPIC_XXX8_GENISYS, "Start NG 7+ (or higher) game.", "", true);
 			//addAchievement("xXx 9: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE, "Start NG 8+ (or higher) game.", "", true);
 			addAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME, "Become Gargoyle.", "", true);
 			addAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA, "Became Devil.", "", true);
 			addAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER, "Became Jiangshi.", "", true);
+			addAchievement("Let It Go", kACHIEVEMENTS.EPIC_LET_IT_GO, "Became Yuki Onna.", "", true);
 			//odblokowanie pierwszego animal ancestory starting bonus at chara creation
 			addAchievement("My own Demon Weapon", kACHIEVEMENTS.EPIC_MY_OWN_DEMON_WEAPON, "Find an evolving weapon.", "", true);
 			//znalezienie ewolującą zbroje
@@ -363,6 +374,7 @@ public class Achievements extends BaseContent
 			addAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR, "Wear the goo armor.");
 			addAchievement("Urta's True Lover", kACHIEVEMENTS.GENERAL_URTA_TRUE_LOVER, "Complete Urta's infertility quest then have her give birth to a baby fox.");
 			addAchievement("Dress-tacular", kACHIEVEMENTS.GENERAL_DRESSTACULAR, "Give Rubi every outfit available.");
+			addAchievement("Virility God", kACHIEVEMENTS.GENERAL_VIRILITY_GOD, "Turned Zenji into a freak by increasing his cum volume above 1 million.", "", true);
 			addAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, "Defeat Marae.", "", true);
 			addAchievement("Follow the Leader (1)", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER, "Get seven followers in the game.");
 			addAchievement("Follow the Leader (2)", kACHIEVEMENTS.GENERAL_FOLLOW_THE_LEADER_2, "Get fourteen followers in the game.");
@@ -442,7 +454,5 @@ public class Achievements extends BaseContent
 			addButton(12, "unlocked", EngineCore.doNothing);
 			addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
 		}
-		
 	}
-
 }

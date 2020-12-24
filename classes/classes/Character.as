@@ -667,11 +667,20 @@ import classes.Items.JewelryLib;
 		{
 			var max:Number = 150;
 			if (game.player.alicornScore() >= 12) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.dragonScore() >= 20) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.dragonScore() >= 28) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.dragonScore() >= 24) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.dragonScore() >= 32) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.foxScore() >= 7) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.kitsuneScore() >= 5 && game.player.tailType == 13 && game.player.tailCount >= 2 && game.player.tailCount < 9) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.kitsuneScore() >= 12 && game.player.tailType == 13 && game.player.tailCount == 9) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.kitsuneScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
+				max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (game.player.kitsuneScore() >= 14 && game.player.tailCount == 9) {
+					max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+					if (game.player.kitsuneScore() >= 18 && findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0) {
+						max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+						if (game.player.kitsuneScore() >= 21) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+					}
+				}
+			}
 			if (game.player.lizardScore() >= 4) max += (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.unicornScore() >= 10) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.ArchersStaminaI) >= 0) max += Math.round(spe);
@@ -724,6 +733,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.AscensionEndurance) >= 0) max += perkv1(PerkLib.AscensionEndurance) * 30;
 			max += level * 5;
 			if (findPerk(PerkLib.UnlockEndurance) >= 0) max += level * 5;
@@ -731,6 +741,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.UnlockEndurance3rdStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockEndurance4thStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 6;
+			if (findPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) max += level * 6;
 			var multimax:Number = 1;
 			if (findPerk(PerkLib.ZenjisInfluence1) >= 0) multimax += 0.1;
 			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
@@ -825,12 +836,20 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.UnlockSpirit3rdStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockSpirit4thStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 6;
+			if (findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) max += level * 6;
 			var multimax:Number = 1;
 			if (game.player.alicornScore() >= 12) multimax += 0.2;
-			if (game.player.dragonScore() >= 20) multimax += 0.1;
-			if (game.player.dragonScore() >= 28) multimax += 0.1;
-			if (game.player.kitsuneScore() >= 5 && game.player.tailType == 13 && game.player.tailCount >= 2 && game.player.tailCount < 9) multimax += 0.2;
-			if (game.player.kitsuneScore() >= 12 && game.player.tailType == 13 && game.player.tailCount == 9) multimax += 0.4;
+			if (game.player.kitsuneScore() >= 5) multimax += 0.1;
+			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
+				multimax += 0.1;
+				if (game.player.kitsuneScore() >= 14 && game.player.tailCount == 9) {
+					multimax += 0.2;
+					if (game.player.kitsuneScore() >= 18 && findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0) {
+						multimax += 0.25;
+						if (game.player.kitsuneScore() >= 21) multimax += 0.35;
+					}
+				}
+			}
 			if (game.player.nekomataScore() >= 10) multimax += 0.1;
 			if (game.player.nekomataScore() >= 12 && game.player.tailType == 8 && game.player.tailCount == 2) multimax += 0.2;
 			if (game.player.unicornScore() >= 10) multimax += 0.1;
@@ -862,6 +881,7 @@ import classes.Items.JewelryLib;
 				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) multimax += 0.1;
 				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) multimax += 0.15;
 				if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) multimax += 0.2;
+				if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) multimax += 0.25;
 				//if (flags[kFLAGS.UNLOCKED_MERIDIANS] > 0) multimax += flags[kFLAGS.UNLOCKED_MERIDIANS] * 0.05;
 				//if (findPerk(PerkLib.Ascension) >= 0) multimax += perkv1(PerkLib.Ascension) * 0.01;
 				
@@ -943,6 +963,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.UnlockId3rdStage) >= 0) max += level;
 			if (findPerk(PerkLib.UnlockId4thStage) >= 0) max += level;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;//~35,730
+			if (findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) max += level * 2;
 			var multimax:Number = 1;
 			if (game.player.orcScore() >= 5) multimax += 0.1;
 			if (game.player.orcScore() >= 11) multimax += 0.1;
@@ -1055,6 +1076,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.UnlockForce3rdStage) >= 0) max += level * 10;
 			if (findPerk(PerkLib.UnlockForce4thStage) >= 0) max += level * 10;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 12;
+			if (findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) max += level * 12;
 			if (findPerk(PerkLib.LimitBreakerSoul1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerSoul2ndStage) >= 0) multimax += 0.1;
 			max *= multimax;
@@ -1084,6 +1106,7 @@ import classes.Items.JewelryLib;
 				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.1;
 				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.15;
 				if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.2;
+				if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.25;
 			}
 			maxven *= multimaxven;
 			maxven = Math.round(maxven);
@@ -1131,12 +1154,23 @@ import classes.Items.JewelryLib;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 37) max += 35;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 38) max += 35;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 39) max += 35;
-			if (game.player.dragonScore() >= 20) max += 50;
-			if (game.player.dragonScore() >= 28) max += 50;
-			//if (game.player.dragonScore() >= 11) max += 25;//pig races having max hunger bonus too?
+			if (game.player.dragonScore() >= 16) max += 50;
+			if (game.player.dragonScore() >= 24) max += 50;
+			if (game.player.pigScore() >= 5) max += 10;
+			if (game.player.pigScore() >= 10) max += 15;
+			if (game.player.pigScore() >= 15) max += 20;
+			if (game.player.orcaScore() >= 6) max += 15;
+			if (game.player.orcaScore() >= 14) max += 20;
+			if (game.player.orcaScore() >= 20) max += 25;
 			if (findPerk(PerkLib.EzekielBlessing) >= 0) max += 50;
-			if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0) max += 50;
 			if (findPerk(PerkLib.DisplacerMetabolismEvolved) >= 0) max += 50;
+			if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0) max += 50;
+			if (findPerk(PerkLib.PigBoarFat) >= 0) max += 5;
+			if (findPerk(PerkLib.PigBoarFatEvolved) >= 0) max += 10;
+			if (findPerk(PerkLib.PigBoarFatFinalForm) >= 0) max += 20;
+			if (findPerk(PerkLib.WhaleFat) >= 0) max += 5;
+			if (findPerk(PerkLib.WhaleFatEvolved) >= 0) max += 10;
+			if (findPerk(PerkLib.WhaleFatFinalForm) >= 0) max += 20;
 			// (findPerk(PerkLib.) >= 0 && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
 			if (findPerk(PerkLib.IronStomach) >= 0) max += 50;
@@ -1150,7 +1184,8 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += 20;
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += 30;
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) max += 40;
-			if (max > 1759) max = 1759;//obecnie max to 1750
+			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) max += 50;
+			if (max > 2030) max = 2030;//obecnie max to 2030
 			return max;
 		}
 

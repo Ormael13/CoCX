@@ -64,6 +64,18 @@ public class AkbalScene extends BaseContent
 					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.AKBAL_LVL_UP] = 10;
 				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 11 && flags[kFLAGS.AKBAL_LVL_UP] == 10) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 11;
+				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 12 && flags[kFLAGS.AKBAL_LVL_UP] == 11) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 12;
+				}
+				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 13 && flags[kFLAGS.AKBAL_LVL_UP] == 12) {
+					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.AKBAL_LVL_UP] = 13;
+				}
 			}
 			if (hpVictory) {//[General Victory]
 				/*if(rand(10) == 0) {
@@ -77,27 +89,31 @@ public class AkbalScene extends BaseContent
 			}
 			else {//[Victory via Lust]
 				outputText("Akbal falls to the ground, unable to go on. Yet a growl still rumbles in his chest, and you quickly recognize the submissive gesture when he bows his head, his cat belly hugging the ground.  His body begins shifting, and soon he has a vaguely humanoid form. You assume this is the form he uses for sex, as his lust is out of control.\n\n");
-				if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0)
-				{
+				menu();
+				addButton(14, "Leave", cleanupAfterCombat);
+				if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("You walk around Akbal's beaten and lust crazed form with a smile on your face. The demon's growl continues as he awaits your judgment.");
+					outputText("\n\nDo you rape him?");
 					var vagoo:Function =null;
 					var vagooLick:Function =null;
 					var buttFuck:Function =null;
 					var bikiniTits:Function =null;
-					if (player.hasVagina())
-					{
+					if (player.hasCock()) {
+						buttFuck = rapeAkbal;
+						addButton(0, "Butt-fuck", buttFuck);
+					}
+					if (player.hasVagina()) {
 						vagoo = girlsRapeAkbal;
 						vagooLick = rapeAkbalForcedFemaleOral;
+						addButton(1, "Take Vaginally", vagoo);
+						addButton(2, "Force Lick", vagooLick);
 					}
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor)
+					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) {
 						bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-					if (player.hasCock())
-						buttFuck = rapeAkbal;
-					outputText("\n\nDo you rape him?");
-					//Rape / Don't Rape
-					menu();
+						addButton(3, "B.Titfuck", bikiniTits);
+					}
 					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-					addButton(14, "Leave", cleanupAfterCombat);
+					//Rape / Don't Rape
 					//EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, );
 					return;
 				}
@@ -192,7 +208,7 @@ public class AkbalScene extends BaseContent
 				primary = 0;
 			clearOutput();
 			//Naga RAPPUUUUUU
-			if (player.lowerBody == LowerBody.NAGA)
+			if (player.isNaga())
 			{
 				outputText("You slither around the demon cat's form, wrapping him up until a scared whimper rises from his chest.  You continue to tighten your coils around Akbal until he's gasping for breath.  You ask him if he's going to be a good little demon for you.  He nods.\n\n");
 
@@ -858,7 +874,7 @@ public class AkbalScene extends BaseContent
 			}
 			clearOutput();
 			//Naga variant goez here
-			if (player.lowerBody == LowerBody.NAGA)
+			if (player.isNaga())
 			{
 				outputText(images.showImage("akbal-deepwoods-naga-sumbitanal"));
 				outputText("After a few moments of thinking you nod to Akbal and the masculine voice in your head commands you to disrobe. You take off your [armor], setting it aside moments before the demon is upon you.\n\n");
@@ -908,7 +924,7 @@ public class AkbalScene extends BaseContent
 				dynStats("cor", 4 + rand(8));
 				//[+ 1-2 Speed]
 				dynStats("spe", 1 + rand(2));
-				player.sexReward("cum");
+				player.sexReward("cum","Anal");
 				//[Chance of butt growth]
 				if (player.butt.type < 8)
 				{
@@ -1670,6 +1686,7 @@ public class AkbalScene extends BaseContent
 				//[if (hasVagina = true)
 				if (player.hasVagina())
 					outputText("\n\nYour [vagina] releases a flood of creamy fluid as your body continues to convulse.  Your orgasm lasts for several minutes in which you paint Akbal with the evidence of how much he has pleased you.");
+				player.sexReward("cum", "Vaginal", true, false);
 				//{genderless}
 				if (player.gender == 0)
 					outputText("\n\nYour body begins to convulse as you call out. Your [ass] feels as though the demon’s dick is a lightning rod expelling a constant torrent of elation.");

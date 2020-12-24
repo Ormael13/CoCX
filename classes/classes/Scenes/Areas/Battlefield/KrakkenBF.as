@@ -41,14 +41,14 @@ public class KrakkenBF extends Monster
 			this.armorDef = 30;
 			this.armorMDef = 30;
 			this.bonusHP = 150;
-			this.bonusLust = 20;
+			this.bonusLust = 160;
 			this.lust = 20;
 			this.lustVuln = .2;
 			this.level = 60;
 			this.gems = 0;
 			this.drop = new WeightedDrop(consumables.SPPEARL, 1);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);

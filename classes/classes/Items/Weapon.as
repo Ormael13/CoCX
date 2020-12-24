@@ -36,12 +36,14 @@ public class Weapon extends Useable //Equipable
 			desc += "\n\nType: Melee Weapon ";
 			if (perk == "Massive") desc += "(Massive)";
 			else if (perk == "Large") desc += "(Large)";
+			else if (perk == "Hybrid") desc += "(Hybrid)";
 			else if (perk == "Small") desc += "(Small)";
 			else if (perk == "Staff") desc += "(Staff)";
 			else if (perk == "Wand") desc += "(Wand)";
 			else if (perk == "Dual") desc += "(Dual)";
 			else if (perk == "Dual Large") desc += "(Dual Large)";
 			else if (perk == "Dual Small") desc += "(Dual Small)";
+			else if (perk == "Quad") desc += "(Quad)";
 			else if (verb.indexOf("whip") >= 0) desc += "(Whip)";
 			else if (verb.indexOf("punch") >= 0) desc += "(Gauntlet)";
 			else if (verb == "slash" || verb == "keen cut") desc += "(Sword)";

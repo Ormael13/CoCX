@@ -132,7 +132,7 @@ public class Gorgon extends Monster
 		
 		public function petrify():void {
 			outputText("With a moment of concentration she awakens normaly dormant snake hair that starts to hiss and then casual glance at you. Much to your suprise you noticing your fingers then hands starting to pertify... ");
-			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
 			if (player.hasStatusEffect(StatusEffects.NagaBind)) player.removeStatusEffect(StatusEffects.NagaBind);
 		}
@@ -166,7 +166,7 @@ public class Gorgon extends Monster
 			this.armorDef = 31;
 			this.armorMDef = 10;
 			this.bonusHP = 500;
-			this.bonusLust = 10;
+			this.bonusLust = 151;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 24;

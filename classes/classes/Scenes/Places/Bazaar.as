@@ -437,7 +437,7 @@ private function suckOffJoeysGardenHose():void {
 	outputText("Gurgling in surprise, you nearly choke from the deluge of spooge flooding your throat.  Your tongue tingles from the salty aftertaste while you gulp down the rest of the bunny-cream.  Joey pants and pleads, \"<i>Oooh... it's... it's... so good.  Feels so amazing... don't stop!  Please don't stop!</i>\"\n\n");
 	outputText("You cup the fem-boy's heavy, swollen sack in your hands and keep up the pressure, and he rewards you with another languid eruption of goo.  His balls shrink ever-so-slightly in your hands with every pulsating pump.  You look up while your throat works, meeting Joey's dazed, relieved expression with your own sultry gaze.  He shivers, delivering the next creamy deluge to you on the spot, nearly making you gag.  It's even more voluminous than the pulse before, and if this keeps up, you won't be able to swallow it down.\n\n");
 	outputText("Joey's rouged lips silently mouth, \"<i>Oh gods,</i>\" as he delivers the next, even bigger rope to your eager maw, stuffing your mouth so quickly that his jism squirts from the corners before you can react.  You shiver from the semen overload");
-	if(player.minotaurAddicted()) outputText(" and find yourself wishing you had one of these potions to use on a minotaur.  It would be divine!");
+	if(player.minotaurAddicted() || player.hasPerk(PerkLib.LactaBovineImmunity)) outputText(" and find yourself wishing you had one of these potions to use on a minotaur.  It would be divine!");
 	else outputText(" and keep at it.  The knowledge that you're helping a friend is almost as filling as his delicious cum.");
 	outputText("  White goo drips down your chin towards the floor, but you note that his balls are now back down to the size of grapefruits.  You're making progress!\n\n");
 	
@@ -1289,7 +1289,6 @@ private function finalGayFinallee(road:int = 0):void {
 		player.orgasm();
 		dynStats("sen", 5);
 		model.time.days++;
-		
 		model.time.hours = 6;
 		//Lust sated
 		//Gained 1 lust draft, lost a few gems(9 or so?)
@@ -1298,13 +1297,11 @@ private function finalGayFinallee(road:int = 0):void {
 		//Time set to morning
 	}
 }
-
 	//Prisoner mod!
 	private function investigateBackAlley():void {
 		clearOutput();
 		outputText("Your curiousity draws you half way down a dark alleyway between two tents. In the gloom ahead you see what appears to be a cage wagon, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
         doYesNo(SceneLib.prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, enterTheBazaarAndMenu);
     }
-
 }
 }

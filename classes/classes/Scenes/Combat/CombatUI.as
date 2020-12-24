@@ -40,6 +40,7 @@ public class CombatUI extends BaseCombatContent {
 	private var blackSpellButtons:ButtonDataList = new ButtonDataList();
 	private var greySpellButtons:ButtonDataList = new ButtonDataList();
 	private var hexSpellButtons:ButtonDataList = new ButtonDataList();
+	private var bloodSpellButtons:ButtonDataList = new ButtonDataList();
 	private var soulforceButtons:ButtonDataList = new ButtonDataList();
 	private var otherButtons:ButtonDataList = new ButtonDataList();
 	public function mainMenu():void {
@@ -51,6 +52,7 @@ public class CombatUI extends BaseCombatContent {
 		blackSpellButtons.clear();
 		greySpellButtons.clear();
 		hexSpellButtons.clear();
+		bloodSpellButtons.clear();
 		soulforceButtons.clear();
 		otherButtons.clear();
 
@@ -66,7 +68,7 @@ public class CombatUI extends BaseCombatContent {
 		var btnOther:CoCButton      = button(9);
 		var btnSpecial1:CoCButton   = button(10);
 		var btnSpecial2:CoCButton   = button(11);
-		//var btnSpecial3:CoCButton   = button(12);
+		var btnSpecial3:CoCButton   = button(12);
 		var btnFantasize:CoCButton  = button(13);
 		var btnRun:CoCButton        = button(14);
 		/*
@@ -96,13 +98,16 @@ public class CombatUI extends BaseCombatContent {
 			} else if (player.isInGoblinMech()) {
 				btnMelee.show("Sawblade", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech sawblade.  Damage done is determined by your strength and weapon.");
 			}*/
-			if (player.isInGoblinMech()) {
+			if (player.isInGoblinMech() || player.isInNonGoblinMech()) {
+				var weapon:String = "";
+				if (player.isInGoblinMech()) weapon = "saw blade";
+				if (player.vehicles == vehicles.HB_MECH) weapon = "twin power blades";
 				if (monster.isFlying()) {
-					if (player.isFlying()) btnMelee.show("Sawblade", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech sawblade.  Damage done is determined by your strength and weapon.");
+					if (player.isFlying()) btnMelee.show("Attack", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech "+weapon+".  Damage done is determined by your strength and weapon.");
 					else btnMelee.disable("No way you could reach enemy in air with melee attacks.");
 					if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 				}
-				else btnMelee.show("Sawblade", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech sawblade.  Damage done is determined by your strength and weapon.");
+				else btnMelee.show("Attack", combat.basemechmeleeattacks, "Attempt to attack the enemy with your mech "+weapon+".  Damage done is determined by your strength and weapon.");
 				if (combat.isEnnemyInvisible) btnMelee.disable("You cannot use attack an opponent you cannot see or target.");
 			}
 			else {
@@ -164,6 +169,10 @@ public class CombatUI extends BaseCombatContent {
 			} else btnRanged.disable("No way you could use your range weapon while piloting goblin mech.");
 			if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 		}
+		if (player.vehicles == vehicles.HB_MECH) {
+			if (player.isUsingHowlingBansheeMechFriendlyRangeWeapons()) btnRanged.show("Shoot", combat.fireBow, "Attempt to attack the enemy with your mech inbuilt range weapons.  Damage done is determined by your speed and weapon.");
+			else btnRanged.disable("Your range wepaon is not compatibile to be used with current piloted mech.");
+		}
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 
 		// Submenus
@@ -180,11 +189,11 @@ public class CombatUI extends BaseCombatContent {
 		if (player.isFlying()) combat.pspecials.buildMenuForFlying(physpButtons);
 		else combat.pspecials.buildMenu(physpButtons);
 		if (physpButtons.length > 0) {
-			if (player.isInGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
+			if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
 			else btnPSpecials.show("P. Specials", submenuPhySpecials, "Physical special attack menu.", "Physical Specials");
 		}
 		if (!player.isFlying() && monster.isFlying() && !player.canFly()) {
-			if (player.isInGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
+			if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
 			else btnPSpecials.disable("No way you could reach an opponent in the air with p. specials.");
 		}
 		// Submenu - Magical Specials
@@ -214,8 +223,8 @@ public class CombatUI extends BaseCombatContent {
 			}
 			else if (player.hasKeyItem("Aphrodigas Gun") >= 0) btnTease.show("Aphrodigas Gun", combat.goboLustnadeLauncher, "Gassing the opponent with aphrodisiacs.");
 			else btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting goblin mech.");
-
 		}
+		else if (player.vehicles == vehicles.HB_MECH) btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting elf mech.");
 		else if (monster.hasStatusEffect(StatusEffects.Stunned) && player.hasPerk(PerkLib.Straddle)) btnTease.show("Straddle", combat.Straddle, "Go to town on your opponent with devastating teases.");
 		else btnTease.show("Tease", combat.teaseAttack, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
 		if (combat.isEnnemyInvisible) btnTease.disable("You cannot tease an opponent you cannot see or target, heck is it even looking at you right now?");
@@ -310,6 +319,9 @@ public class CombatUI extends BaseCombatContent {
 		} else if (monster.hasStatusEffect(StatusEffects.DisplacerPlug)) {
 			menu();
 			addButton(0, "Feed", combat.DisplacerFeed).hint("Milk your victim's breast with your tentacles!");
+		} else if (monster.hasStatusEffect(StatusEffects.SlimeInsert)) {
+			menu();
+			addButton(0, "Rape", combat.SlimeRapeFeed).hint("Violate your opponent from the inside!");
 		} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 			menu();
 			if (monster.statusEffectv1(StatusEffects.Dig) > 0){
@@ -402,6 +414,7 @@ public class CombatUI extends BaseCombatContent {
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") combat.comfoll.mitziCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") combat.comfoll.neisaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Siegweird") combat.comfoll.siegweirdCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") combat.comfoll.zenjiCombatActions();
 		} else if (flags[kFLAGS.PLAYER_COMPANION_2] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) {
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") combat.comfoll.alvinaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Amily") combat.comfoll.amilyCombatActions();
@@ -411,6 +424,7 @@ public class CombatUI extends BaseCombatContent {
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi") combat.comfoll.mitziCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") combat.comfoll.neisaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Siegweird") combat.comfoll.siegweirdCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji") combat.comfoll.zenjiCombatActions();
 		} else if (flags[kFLAGS.PLAYER_COMPANION_3] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) {
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") combat.comfoll.alvinaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Amily") combat.comfoll.amilyCombatActions();
@@ -420,6 +434,7 @@ public class CombatUI extends BaseCombatContent {
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi") combat.comfoll.mitziCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Neisa") combat.comfoll.neisaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Siegweird") combat.comfoll.siegweirdCombatActions();
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Zenji") combat.comfoll.zenjiCombatActions();
 		}
 		
 		// Modifications - monster-special actions
@@ -435,18 +450,13 @@ public class CombatUI extends BaseCombatContent {
 			} else if (monster is Lethice) {
 				var lethice:Lethice = monster as Lethice;
 				if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
-					if (player.lust < combat.magic.getWhiteMagicLustCap()
-						&& player.hasStatusEffect(StatusEffects.KnowsWhitefire)
-						&& !player.hasPerk(PerkLib.BloodMage)
-						&& player.mana >= 30) {
+					if (player.lust < combat.magic.getWhiteMagicLustCap() && player.hasStatusEffect(StatusEffects.KnowsWhitefire)
+						&& ((!player.hasPerk(PerkLib.BloodMage) && player.mana >= 30) || (player.hasStatusEffect(StatusEffects.BloodMage) && ((player.HP + 30) > (player.minHP() + 30))))) {
 						btnSpecial1.show("Dispell", lethice.dispellRapetacles);
 					}
 				}
 			}
 		}
-		if ((monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.Polymorphed) || monster.hasStatusEffect(StatusEffects.Sleep) || monster.hasStatusEffect(StatusEffects.Fascinated)) && (player.fatigueLeft() > combat.physicalCost(20)) && player.hasPerk(PerkLib.HollowFangsEvolved)) {
-			btnSpecial1.show("Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
-		}// || monster.hasStatusEffect(StatusEffects.InvisibleOrStealth)
 	}
 
 	private function BuildSpellBookMenu(buttons:ButtonDataList):void {
@@ -465,17 +475,33 @@ public class CombatUI extends BaseCombatContent {
 				bd.disable("You cannot use offensive spell against an opponent you cannot see or target.");
 			}
 		}
+		if (player.hasPerk(PerkLib.ElementalBolt)) {
+			bd = buttons.add("E.Bolt", combat.magic.spellElementalBolt);
+			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Elemental Bolt");
+			else bd.hint("Attempt to attack the enemy with elemental bolt.  Damage done is determined by your intelligence.", "Elemental Bolt");
+			if (player.mana < spellCost(80)) {
+				bd.disable("Your mana is too low to cast this spell.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
+			} else if (player.hasStatusEffect(StatusEffects.MonsterDig)) {
+				bd.disable("You cannot use offensive spell against an opponent you cannot see or target.");
+			}
+		}
 		combat.magic.buildWhiteMenu(whiteSpellButtons);
 		combat.magic.buildBlackMenu(blackSpellButtons);
 		combat.magic.buildGreyMenu(greySpellButtons);
 		combat.magic.buildHexMenu(hexSpellButtons);
-		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your white spell book");
-		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your black spell book");
-		if (player.hasPerk(PerkLib.PrestigeJobGreySage)){
-			if (greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your grey spell book");
+		combat.magic.buildBloodMenu(bloodSpellButtons);
+		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your White magic book");
+		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your Black magic book");
+		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
+			if (greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your Grey magic book");
 		}
-		if (player.hasPerk(PerkLib.HexKnowledge)){
+		if (player.hasPerk(PerkLib.HexKnowledge)) {
 			if (hexSpellButtons.length > 0) buttons.add("Hexes", curry(submenu,hexSpellButtons, submenuSpells, 0, false)).hint("Open your Hex grimoire");
+		}
+		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
+			if (bloodSpellButtons.length > 0) buttons.add("Blood Spells", curry(submenu,bloodSpellButtons, submenuSpells, 0, false)).hint("Open your Blood grimoire");
 		}
 	}
 

@@ -183,7 +183,7 @@ public class HeXinDao extends BaseContent
         addButton(3, "SoulArrow", ermaswiftarrowmerchant);
 		if (flags[kFLAGS.NEISA_FOLLOWER] == 0) addButton(4, "Dungeon", entranceToRiverDungeon);
 		else {
-			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") addButton(4, "Dungeon", entranceToRiverDungeon);
+			if (flags[kFLAGS.PLAYER_COMPANION_1] != "" || flags[kFLAGS.PLAYER_COMPANION_2] != "" || flags[kFLAGS.PLAYER_COMPANION_3] != "") addButton(4, "Dungeon", entranceToRiverDungeon);
 			else addButtonDisabled(4, "Dungeon", "Seems you need to find someone to form party with you.");
 		}
         //addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
@@ -417,18 +417,20 @@ public class HeXinDao extends BaseContent
             addButton(7, "S.Gossr", buyItem,consumables.S_GOSSR,sayLine(consumables.S_GOSSR,"spider"),onBuyString).hint("Buy a bundle of pink, gossamer webbing.");
             addButton(8, "SalamFW", buyItem,consumables.SALAMFW,sayLine(consumables.SALAMFW,"salamander"),onBuyString).hint("Buy a hip flask of Salamander Firewater.");
             addButton(9, "Scorpinum", buyItem,consumables.SCORICO,sayLine(consumables.SCORICO,"scorpion"),onBuyString).hint("Buy a vial of Scorpinum.");
-            addButton(10, "Shark.T", buyItem,consumables.SHARK_T,sayLine(consumables.SHARK_T,"shark"),onBuyString).hint("Buy a sharp shark tooth.");
-            addButton(11, "SnakeOil", buyItem,consumables.SNAKOIL,sayLine(consumables.SNAKOIL,"snake"),onBuyString).hint("Buy a vial of snake oil.");
-            addButton(12, "SucMilk", buyItem,consumables.SUCMILK,sayLine(consumables.SUCMILK,"sucubus"),onBuyString).hint("Buy a bottle of Succubi milk.");
+            addButton(10, "SmartNuts", buyItem,consumables.SMRTNUT,sayLine(consumables.SMRTNUT,"squirrel"),onBuyString).hint("Buy a smarty nut.");
+            addButton(11, "Shark.T", buyItem,consumables.SHARK_T,sayLine(consumables.SHARK_T,"shark"),onBuyString).hint("Buy a sharp shark tooth.");
+            addButton(12, "SnakeOil", buyItem,consumables.SNAKOIL,sayLine(consumables.SNAKOIL,"snake"),onBuyString).hint("Buy a vial of snake oil.");
+            addButton(13, "SucMilk", buyItem,consumables.SUCMILK,sayLine(consumables.SUCMILK,"sucubus"),onBuyString).hint("Buy a bottle of Succubi milk.");
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }
 		function Tier3():void {
 			menu();
             addButton(0, "TSTooth", buyItem,consumables.TSTOOTH,sayLine(consumables.TSTOOTH,"tigershark"),onBuyString).hint("Buy a glowing tiger shark tooth.");
-            addButton(1, "W.Fruit", buyItem,consumables.W_FRUIT,sayLine(consumables.W_FRUIT,"cat"),onBuyString).hint("Buy a piece of whisker-fruit.");
-            addButton(2, "WetCloth", buyItem,consumables.WETCLTH,sayLine(consumables.WETCLTH,"goo"),onBuyString).hint("Buy a wet cloth dripping with slippery slime.");
-            addButton(3, "YetiCum", buyItem,consumables.YETICUM,sayLine(consumables.YETICUM,"yeti"),onBuyString).hint("Buy a bottle of Yeti Cum.");
+            addButton(1, "W.Emerald", buyItem,consumables.W_EMRLD,sayLine(consumables.W_EMRLD,"kamaitachi"),onBuyString).hint("Buy a 'Windstorm Emerald'.");
+            addButton(2, "W.Fruit", buyItem,consumables.W_FRUIT,sayLine(consumables.W_FRUIT,"cat"),onBuyString).hint("Buy a piece of whisker-fruit.");
+            addButton(3, "WetCloth", buyItem,consumables.WETCLTH,sayLine(consumables.WETCLTH,"goo"),onBuyString).hint("Buy a wet cloth dripping with slippery slime.");
+            addButton(4, "YetiCum", buyItem,consumables.YETICUM,sayLine(consumables.YETICUM,"yeti"),onBuyString).hint("Buy a bottle of Yeti Cum.");
 			addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
 		}
@@ -465,7 +467,6 @@ public class HeXinDao extends BaseContent
             addButton(3, "TrapOil", buyItem,consumables.TRAPOIL,sayLine(consumables.TRAPOIL,"sand trap"),onBuyString).hint("Buy a vial of trap oil.");
             addButton(4, "Icicle", buyItem,consumables.ICICLE_,sayLine(consumables.ICICLE_,"ice shard"),onBuyString).hint("Buy an icicle.");
             addButton(5, "S.Delight", buyItem,consumables.SDELITE,sayLine(consumables.SDELITE,"Succubi's Delight"),onBuyString).hint("Buy a bottle of 'Succubi's Delight'.");
-            addButton(5, "W.Emerald", buyItem,consumables.W_EMERALD,sayLine(consumables.W_EMERALD,"Windstorm Emerald"),onBuyString).hint("Buy a 'Windstorm Emerald'.");
 
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
@@ -546,9 +547,10 @@ public class HeXinDao extends BaseContent
         outputText("After entering the shop with a sign saying 'Equipment' over the doors you see a few shelves filled with various weapons, shields, armors and even more rare items like rings or necklaces. Behind the desk that looks like a central point of the shop you see a woman that seems to have mixed races traits. A shark face and a tail that sometimes show up on either side of the desk which is contrasting to its feather covered arms that are not looking at all like shark ones and more similar to bird wings.");
         outputText("\n\n\"<i>Greeting dear customer. I'm Serena and this is my humble shop. Look around and if something catch your eyes let me know,</i>\" she say all that almost on one breath after noticing your near.");
         menu();
-        addButton(1, "Shelf 1", soulequipmentshelf1);
-        addButton(2, "Shelf 2", soulequipmentshelf2);
-        addButton(3, "Shelf 3", soulequipmentshelf3);//armors and consumable
+        addButton(1, "Shelf 1", soulequipmentshelf1).hint("Misc");
+        addButton(2, "Shelf 2", soulequipmentshelf2).hint("Weapons");
+        addButton(3, "Shelf 3", soulequipmentshelf3).hint("Consumables");
+        addButton(4, "Shelf 4", soulequipmentshelf4).hint("Armors");
 		//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
         //addButton(12, "Talk", ).hint("Tak with .");
@@ -598,18 +600,41 @@ public class HeXinDao extends BaseContent
     }
     public function soulequipmentshelf3():void {
         menu();
-        //if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(3, armors.LAYOARM.shortName, weaponBuy, armors.LAYOARM);
-        //addButton(1, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
-        //addButton(2, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
-        //addButton(0, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic heavy armor made of soulmetal
         if (player.level >= 6) addButton(5, consumables.BANGBM1.shortName, weaponBuy, consumables.BANGBM1);
 		else addButtonDisabled(5, "???", "Req. lvl 6+");
         if (player.level >= 24) addButton(6, consumables.BANGBM2.shortName, weaponBuy, consumables.BANGBM2);
         else addButtonDisabled(6, "???", "Req. lvl 24+");
-        if (player.level >= 42) addButton(7, consumables.BANGBM3.shortName, weaponBuy, consumables.BANGBM3);
-        else addButtonDisabled(7, "???", "Req. lvl 42+");
+        if (player.level >= 42) {
+			addButton(0, consumables.BALLOFL.shortName, weaponBuy, consumables.BALLOFL);
+			addButton(1, consumables.FROZENB.shortName, weaponBuy, consumables.FROZENB);
+			addButton(2, consumables.THUNDBl.shortName, weaponBuy, consumables.THUNDBl);
+			addButton(3, consumables.BALLOTD.shortName, weaponBuy, consumables.BALLOTD);
+			addButton(4, consumables.POISONB.shortName, weaponBuy, consumables.POISONB);
+			addButton(7, consumables.BANGBM3.shortName, weaponBuy, consumables.BANGBM3);
+			addButton(8, consumables.BANGBM3.shortName, weaponBuy, consumables.BANGBM3);
+		}
+        else {
+			addButtonDisabled(0, "???", "Req. lvl 42+");
+			addButtonDisabled(1, "???", "Req. lvl 42+");
+			addButtonDisabled(2, "???", "Req. lvl 42+");
+			addButtonDisabled(3, "???", "Req. lvl 42+");
+			addButtonDisabled(4, "???", "Req. lvl 42+");
+			addButtonDisabled(7, "???", "Req. lvl 42+");
+			addButtonDisabled(8, "???", "Req. lvl 42+");
+		}
         addButton(10, consumables.BANGB_M.shortName, weaponBuy, consumables.BANGB_M);
         addButton(11, consumables.W_STICK.shortName, weaponBuy, consumables.W_STICK);
+        addButton(14, "Back", serenamerchant);
+    }
+    public function soulequipmentshelf4():void {
+        menu();
+        if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(0, armors.LAYOARM.shortName, weaponBuy, armors.LAYOARM);
+		else addButtonDisabled(0, "???", "Req. Soul Apprentice");
+        if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(1, armors.HAYOARM.shortName, weaponBuy, armors.HAYOARM);
+		else addButtonDisabled(1, "???", "Req. Soul Personage");
+        //addButton(11, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
+        //addButton(12, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
+        //addButton(10, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic heavy armor made of soulmetal
         addButton(14, "Back", serenamerchant);
     }
 
@@ -755,13 +780,13 @@ public function soularena():void {
         outputText("Picking the one on the left prepared for solo fight you enter there and looking around checking who is currently avialable for sparring session.");
         menu();
         //addButton(0, "Goblin", );//Goblinka
-        addButton(5, "D.Golem", arenaSelection,GolemDummy).hint("LVL 6");
-        addButton(6, "I.D.Golem", arenaSelection,GolemDummyImproved).hint("LVL 12");
-        addButton(7, "A.D.Golem", arenaSelection,GolemDummyAdvanced).hint("LVL 18");
-        addButton(8, "S.D.Golem", arenaSelection,GolemDummySuperior).hint("LVL 24");
-        addButton(10, "B.T.Golem", arenaSelection,GolemTrueBasic).hint("LVL 33");
-        addButton(11, "I.T.Golem", arenaSelection,GolemTrueImproved).hint("LVL 42");
-        addButton(12, "A.T.Golem", arenaSelection,GolemTrueAdvanced).hint("LVL 51");
+        addButton(5, "D.Golem", arenaSelection,GolemDummy).hint("Dummy Golem LVL 6");
+        addButton(6, "I.D.Golem", arenaSelection,GolemDummyImproved).hint("Improved Dummy Golem LVL 12");
+        addButton(7, "A.D.Golem", arenaSelection,GolemDummyAdvanced).hint("Advanced Dummy Golem LVL 18");
+        addButton(8, "S.D.Golem", arenaSelection,GolemDummySuperior).hint("Superior Dummy Golem LVL 24");
+        addButton(10, "B.T.Golem", arenaSelection,GolemTrueBasic).hint("Basic True Golem LVL 33");
+        addButton(11, "I.T.Golem", arenaSelection,GolemTrueImproved).hint("Improved True Golem LVL 42");
+        addButton(12, "A.T.Golem", arenaSelection,GolemTrueAdvanced).hint("Advanced True Golem LVL 51");
         addButton(14, "Back", soularena);
     }
 
@@ -770,13 +795,13 @@ public function soularena():void {
         outputText("Picking the one on the right prepared for group fight you enter there and looking around checking who is currently avialable for sparring session.");
         menu();
         //addButton(0, "Goblins", );//Córki goblinki z solo areny ^^
-        addButton(5, "D.Golems", arenaSelection,GolemsDummy).hint("LVL 6");
-        addButton(6, "I.D.Golems", arenaSelection,GolemsDummyImproved).hint("LVL 12");
-        addButton(7, "A.D.Golems", arenaSelection,GolemsDummyAdvanced).hint("LVL 18");
-        addButton(8, "S.D.Golems", arenaSelection,GolemsDummySuperior).hint("LVL 24");
-        addButton(10, "B.T.Golems", arenaSelection,GolemsTrueBasic).hint("LVL 33");
-        addButton(11, "I.T.Golems", arenaSelection,GolemsTrueImproved).hint("LVL 42");
-        addButton(12, "A.T.Golems", arenaSelection,GolemsTrueAdvanced).hint("LVL 51");
+        addButton(5, "D.Golems", arenaSelection,GolemsDummy).hint("Dummy Golems LVL 6");
+        addButton(6, "I.D.Golems", arenaSelection,GolemsDummyImproved).hint("Improved Dummy Golems LVL 12");
+        addButton(7, "A.D.Golems", arenaSelection,GolemsDummyAdvanced).hint("Advanced Dummy Golems LVL 18");
+        addButton(8, "S.D.Golems", arenaSelection,GolemsDummySuperior).hint("Superior Dummy Golems LVL 24");
+        addButton(10, "B.T.Golems", arenaSelection,GolemsTrueBasic).hint("Basic True Golems LVL 33");
+        addButton(11, "I.T.Golems", arenaSelection,GolemsTrueImproved).hint("Improved True Golems LVL 42");
+        addButton(12, "A.T.Golems", arenaSelection,GolemsTrueAdvanced).hint("Advanced True Golems LVL 51");
         addButton(14, "Back", soularena);
     }
 
@@ -799,35 +824,37 @@ public function soularena():void {
 			//addButton(3, "Gaunlet 4", gaunletchallange4).hint("Fight 6 diff enemies one after another.");
 			//addButton(4, "Gaunlet 5", gaunletchallange5).hint("Fight 7 diff enemies one after another.");
 			//addButton(5, "Gaunlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");gdzieś tam tu dodać grupowe tylko walki dające na pierwszej walce oblokowanie perków do powiekszania drużyny
-			addButton(9, "LvL 24 Gargoyle", arenaSelection,GargoyleBasic);
-			addButton(10, "LvL 33 Golems", arenaSelection,GolemsBasic);
-			addButton(11, "LvL 42 Golems", arenaSelection,GolemsImproved);
-			addButton(12, "LvL 51 Golems", arenaSelection, GolemsAdvanced);
-			//addButton(13, "-2-", soularenaChallengeSubpages, page + 1);
+			addButton(7, "LvL 24 Gargoyle (F)", arenaSelection,GargoyleFBasic).hint("Gargoyle (F) LVL 24 (axe-tail)");
+			addButton(8, "LvL 24 Gargoyle (M)", arenaSelection,GargoyleMBasic).hint("Gargoyle (M) LVL 24 (mace-tail)");
+			addButton(9, "Golemancer", arenaSelection,Jeniffer).hint("Golemancer goblin.");
+			//addButton(9, "-2-", soularenaChallengeSubpages, page + 1);
+			addButton(10, "LvL 33 Golems", arenaSelection,GolemsBasic).hint("Basic Golems LVL 33");
+			addButton(11, "LvL 42 Golems", arenaSelection,GolemsImproved).hint("Improved Golems LVL 42");
+			addButton(12, "LvL 51 Golems", arenaSelection, GolemsAdvanced).hint("Advanced Golems LVL 51");
 			addButton(14, "Back", soularena);
 		}
 		if (page == 2) {
-			addButton(0, "Kitty", arenaSelection,Veronika);
-			addButton(1, "Golemancer", arenaSelection,Jeniffer);
-			addButton(2, "AyotechManiac", arenaSelection,Jinx);
-			addButton(5, "Macho Mander", arenaSelection,Syth);
-			addButton(6, "Miss Mander", arenaSelection,Asuka);
-			addButton(7, "Miss Oni", arenaSelection,Rangiku);
-			addButton(13, "-1-", soularenaChallengeSubpages, page - 1);
+			//addButton(0, "Kitty", arenaSelection, Veronika);
+			addButton(1, "Golemancer", arenaSelection,Jeniffer).hint("Golemancer goblin.");
+			addButton(2, "AyotechManiac", arenaSelection,Jinx).hint("Crazy girl wearing lots of belts... err ayoteach weapons.");
+			//addButton(5, "Macho Mander", arenaSelection,Syth);
+			//addButton(6, "Miss Mander", arenaSelection,Asuka);
+			//addButton(7, "Miss Oni", arenaSelection,Rangiku);
+			addButton(9, "-1-", soularenaChallengeSubpages, page - 1);
 			addButton(14, "Back", soularena);
 		}
 	}
     private function arenaSelection(mon:Class):void{
-        player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
-        if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
-        startCombat(new mon());
-        monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
-        monster.XP = Math.round(monster.XP / 2);
+		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+		if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
+		startCombat(new mon());
+		monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
+		monster.XP = Math.round(monster.XP / 2);
     }
 	public function gaunletsinbetween():void {
 		cleanupAfterCombat();
-        player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
-        player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
 	}
     public function gaunletchallange1fight1():void {
         clearOutput();

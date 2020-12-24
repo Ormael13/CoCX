@@ -90,7 +90,7 @@ import classes.internals.*;
 					this.armorDef = 125;
 					this.armorMDef = 25;
 					this.bonusHP = 300 + rand(this.ballSize * 5);
-					this.bonusLust = 60 + rand(this.ballSize * 6);
+					this.bonusLust = 268 + this.ballSize * 10 + rand(this.ballSize * 6);
 					this.level = 73;
 				}
 				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
@@ -100,7 +100,7 @@ import classes.internals.*;
 					this.armorDef = 100;
 					this.armorMDef = 20;
 					this.bonusHP = 250 + rand(this.ballSize * 4);
-					this.bonusLust = 50 + rand(this.ballSize * 5);
+					this.bonusLust = 249 + this.ballSize * 8 + rand(this.ballSize * 5);
 					this.level = 69;
 				}
 				else {
@@ -110,7 +110,7 @@ import classes.internals.*;
 					this.armorDef = 75;
 					this.armorMDef = 15;
 					this.bonusHP = 200 + rand(this.ballSize * 3);
-					this.bonusLust = 40 + rand(this.ballSize * 4);
+					this.bonusLust = 230 + this.ballSize * 6 + rand(this.ballSize * 4);
 					this.level = 65;
 				}
 				this.drop = new ChainedDrop().add(weapons.DL_AXE_, 1 / 8)
@@ -129,11 +129,12 @@ import classes.internals.*;
 				this.armorDef = 12;
 				this.armorMDef = 1;
 				this.bonusHP = 20 + rand(this.ballSize * 2);
-				this.bonusLust = 30 + rand(this.ballSize * 3);
 				this.level = hasAxe?15:12;
 				if (hasAxe) {
+					this.bonusLust = 70 + this.ballSize * 4 + rand(this.ballSize * 3);
 					this.drop = new WeightedDrop(consumables.MINOBLO, 1);
 				} else {
+					this.bonusLust = 68 + this.ballSize * 4 + rand(this.ballSize * 3);
 					this.drop = new ChainedDrop().add(consumables.MINOCUM, 1 / 5)
 							.add(consumables.MINOBLO, 1 / 2)
 							.elseDrop(null);

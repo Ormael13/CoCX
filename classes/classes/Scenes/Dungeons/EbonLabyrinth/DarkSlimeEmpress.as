@@ -53,7 +53,7 @@ use namespace CoC;
 		private function gooSlimeBarrageD():void {
 			var td:Number = 7 + rand(5);
 			td += player.lib / 8;
-			td += player.sens / 8;
+			td += player.effectiveSensitivity() / 8;
 			td = Math.round(td);
 			td = td * (EngineCore.lustPercent() / 100);
 			if (!hasStatusEffect(StatusEffects.LingeringSlime)) createStatusEffect(StatusEffects.LingeringSlime, 0, 0, 0, 0);
@@ -105,6 +105,7 @@ use namespace CoC;
 				this.armorDef = 60;
 				this.armorMDef = 180;
 				this.bonusHP = 10000;
+				this.bonusLust = 505;
 				this.level = 65;
 				this.gems = 200 + rand(80);
 			}
@@ -114,6 +115,7 @@ use namespace CoC;
 				this.armorDef = 80;
 				this.armorMDef = 240;
 				this.bonusHP = 20000;
+				this.bonusLust = 570;
 				this.level = 70;
 				this.gems = 250 + rand(90);
 			}
@@ -123,6 +125,7 @@ use namespace CoC;
 				this.armorDef = 100;
 				this.armorMDef = 300;
 				this.bonusHP = 30000;
+				this.bonusLust = 635;
 				this.level = 75;
 				this.gems = 300 + rand(100);
 			}
@@ -148,7 +151,6 @@ use namespace CoC;
 			this.weaponAttack = 35;
 			this.weaponVerb="slap";
 			this.armorName = "gelatinous skin";
-			this.bonusLust = 100;
 			this.lust = 45;
 			this.lustVuln = .75;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
@@ -158,7 +160,7 @@ use namespace CoC;
 			this.createPerk(PerkLib.LightningVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGooType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			checkMonster();
 		}
 	}

@@ -17,7 +17,8 @@ public class Minerva extends Monster
 		{
 			outputText("The siren paces around you in circles, waiting for the right moment to strike.  Unexpectedly quick thanks to her clawed feet, she propels herself toward you at full speed.  Her maw opens wide to chomp on you, showing off multiple rows of glinting, razor-sharp teeth.");
 			var damage:int = int((str + 5) - rand(player.tou) - player.armorDef);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage + 255;
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) damage + 340;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage + 255;
 			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) damage + 170;
 			else damage + 85;
 			if (player.getEvasionRoll()) {
@@ -41,7 +42,8 @@ public class Minerva extends Monster
 		{
 			outputText("The blue beauty flaps her wings and launches herself into the air.  Once she's gained as much altitude as she can, she dive-bombs you, her demon-clawed feet leading the attack.");
 			var damage:int = int((str + weaponAttack + 100) - rand(player.tou) - player.armorDef);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage += 200;
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) damage += 400;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage += 200;
 			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) damage += 100;
 			speStat.core.value -= 70;
 			if (player.getEvasionRoll()) {
@@ -61,7 +63,8 @@ public class Minerva extends Monster
 		private function tailWhip():void
 		{
 			var damage:int = int((str + 35) - rand(player.tou) - player.armorDef);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage += 70;
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) damage += 140;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage += 70;
 			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) damage += 35;
 			outputText("She runs at you, holding the weapon like she's about to chop into your side.  You brace yourself, but when she's only a few feet away, she starts to turn her body.");
 			//[else block]
@@ -82,7 +85,8 @@ public class Minerva extends Monster
 		{
 			outputText("Minerva charges at you, brandishing her halberd's sharp tip toward you.");
 			var damage:int = int((str + weaponAttack) - rand(player.tou));
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage += 50;
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) damage += 100;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage += 50;
 			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) damage += 25;
 			if (player.getEvasionRoll()) outputText("  You sidestep the attack just as she thrusts the point past your face.");
 			//[else block]
@@ -99,7 +103,8 @@ public class Minerva extends Monster
 		{
 			outputText("She moves in close, practically right in front of you and raises the halberd.");
 			var damage:int = int((str + 100) - rand(player.tou) - player.armorDef);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage += 200;
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) damage += 400;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage += 200;
 			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) damage += 100;
 			if (player.getEvasionRoll()) outputText("  You get out of the way quickly, her attack chopping deeply into the earth. ");
 			//[else block]
@@ -115,7 +120,8 @@ public class Minerva extends Monster
 		private function kiteFire():void
 		{
 			var inteused:Number = inte;
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) inteused *= 3;
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) inteused *= 4;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) inteused *= 3;
 			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) inteused *= 2;
 			var damage:int = int(10 + (inteused / 3 + rand(inteused / 2)) * 1.5);
 			damage = Math.round(damage);
@@ -136,7 +142,10 @@ public class Minerva extends Monster
 		private function bootyShortInYoFaceSon():void
 		{
 			outputText("The blue beauty turns around and bends over so far that she uses her halberd like a pole to support herself.  She lifts her shark tail up so you can see her short-shorts hugging perfectly against her ample bottom.  Her tail waves to the left and to the right as she does a little booty shake for you.  The siren gives her big ass a nice, hard slap that echoes off the tower walls, and making it jiggle even more.  She quickly turns around to face you, smirking at what she just did. ");
-			player.dynStats("lus", 20 + player.lib / 10 + rand(5));
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) player.dynStats("lus", 50 + player.lib / 10 + rand(8));
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) player.dynStats("lus", 40 + player.lib / 10 + rand(7));
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) player.dynStats("lus", 30 + player.lib / 10 + rand(6));
+			else player.dynStats("lus", 20 + player.lib / 10 + rand(5));
 		}
 
 //Lust Attacks for all Minervas
@@ -144,7 +153,10 @@ public class Minerva extends Monster
 		private function lickDatPole():void
 		{
 			outputText("Minerva stands, holding her halberd straight up next to her as she looks it over with a seductive stare.  Giving you a suggestive look she rolls out a two-foot long tongue from her mouth, licking a good length of the massive weapon, even wrapping her tongue around it a few times.  Suddenly she sucks her tongue back into her mouth and gives you a little smirk, almost to say \"<i>Yeah, I can do that... and more.</i>\" ");
-			player.dynStats("lus", 20 + player.lib / 10 + rand(5));
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) player.dynStats("lus", 50 + player.lib / 10 + rand(8));
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) player.dynStats("lus", 40 + player.lib / 10 + rand(7));
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) player.dynStats("lus", 30 + player.lib / 10 + rand(6));
+			else player.dynStats("lus", 20 + player.lib / 10 + rand(5));
 		}
 
 //Special attack
@@ -208,6 +220,7 @@ public class Minerva extends Monster
 				this.armorDef = 7;
 				this.armorMDef = 2;
 				this.bonusHP = 470;
+				this.bonusLust = 78;
 				this.level = 23;//potem zrobic jak purification udane to dostaje nieco lvl up i stat up tez
 				this.additionalXP = 50;
 			}
@@ -218,6 +231,7 @@ public class Minerva extends Monster
 				this.armorDef = 9;
 				this.armorMDef = 3;
 				this.bonusHP = 940;
+				this.bonusLust = 105;
 				this.level = 29;
 				this.additionalXP = 100;
 			}
@@ -228,6 +242,7 @@ public class Minerva extends Monster
 				this.armorDef = 11;
 				this.armorMDef = 4;
 				this.bonusHP = 1410;
+				this.bonusLust = 132;
 				this.level = 35;
 				this.additionalXP = 150;
 			}
@@ -238,6 +253,7 @@ public class Minerva extends Monster
 				this.armorDef = 13;
 				this.armorMDef = 5;
 				this.bonusHP = 1880;
+				this.bonusLust = 159;
 				this.level = 41;
 				this.additionalXP = 200;
 			}
@@ -248,6 +264,7 @@ public class Minerva extends Monster
 				this.armorDef = 15;
 				this.armorMDef = 6;
 				this.bonusHP = 2350;
+				this.bonusLust = 186;
 				this.level = 47;
 				this.additionalXP = 250;
 			}
@@ -258,6 +275,7 @@ public class Minerva extends Monster
 				this.armorDef = 17;
 				this.armorMDef = 7;
 				this.bonusHP = 2820;
+				this.bonusLust = 213;
 				this.level = 53;
 				this.additionalXP = 300;
 			}
@@ -268,49 +286,76 @@ public class Minerva extends Monster
 				this.armorDef = 19;
 				this.armorMDef = 8;
 				this.bonusHP = 3290;
+				this.bonusLust = 240;
 				this.level = 59;
 				this.additionalXP = 350;
 			}
 			if (flags[kFLAGS.MINERVA_LVL_UP] == 7) {
 				initStrTouSpeInte(183, 220, 250, 180);
-				initWisLibSensCor(175, 85, 95, 45);
+				initWisLibSensCor(175, 107, 95, 45);
 				this.weaponAttack = 120;
 				this.armorDef = 21;
 				this.armorMDef = 9;
 				this.bonusHP = 3760;
+				this.bonusLust = 267;
 				this.level = 65;
 				this.additionalXP = 400;
 			}
 			if (flags[kFLAGS.MINERVA_LVL_UP] == 8) {
 				initStrTouSpeInte(200, 240, 270, 195);
-				initWisLibSensCor(190, 96, 105, 45);
+				initWisLibSensCor(190, 118, 105, 45);
 				this.weaponAttack = 130;
 				this.armorDef = 23;
 				this.armorMDef = 10;
 				this.bonusHP = 4230;
+				this.bonusLust = 294;
 				this.level = 71;
 				this.additionalXP = 450;
 			}
 			if (flags[kFLAGS.MINERVA_LVL_UP] == 9) {
 				initStrTouSpeInte(217, 260, 290, 210);
-				initWisLibSensCor(205, 85, 115, 45);
+				initWisLibSensCor(205, 129, 115, 45);
 				this.weaponAttack = 140;
 				this.armorDef = 25;
 				this.armorMDef = 11;
 				this.bonusHP = 4700;
+				this.bonusLust = 321;
 				this.level = 77;
 				this.additionalXP = 500;
 			}
 			if (flags[kFLAGS.MINERVA_LVL_UP] == 10) {
 				initStrTouSpeInte(234, 280, 310, 225);
-				initWisLibSensCor(220, 96, 125, 45);
+				initWisLibSensCor(220, 140, 125, 45);
 				this.weaponAttack = 150;
 				this.armorDef = 27;
 				this.armorMDef = 12;
 				this.bonusHP = 5170;
+				this.bonusLust = 348;
 				this.level = 83;
 				this.additionalXP = 550;
 			}
+			if (flags[kFLAGS.MINERVA_LVL_UP] == 10) {
+				initStrTouSpeInte(251, 300, 330, 240);
+				initWisLibSensCor(235, 151, 135, 45);
+				this.weaponAttack = 160;
+				this.armorDef = 29;
+				this.armorMDef = 13;
+				this.bonusHP = 5640;
+				this.bonusLust = 375;
+				this.level = 83;
+				this.additionalXP = 550;
+			}
+			if (flags[kFLAGS.MINERVA_LVL_UP] == 10) {
+				initStrTouSpeInte(268, 320, 350, 255);
+				initWisLibSensCor(250, 162, 145, 45);
+				this.weaponAttack = 170;
+				this.armorDef = 31;
+				this.armorMDef = 14;
+				this.bonusHP = 6110;
+				this.bonusLust = 402;
+				this.level = 83;
+				this.additionalXP = 550;
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.a = "";
 			this.short = "Minerva";
 			//Set imageName based on pure/corrupt
@@ -320,7 +365,7 @@ public class Minerva extends Monster
 			//Set description based on pure/corrupt
 			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) this.long = "You're fighting the purified siren, Minerva.  Standing around eight feet and wielding a weapon just as tall, she is a force to be reckoned with.  Her skin is a golden yellow, though her belly, neck and inner thighs are as white as the clouds in the sky, and a golden piecing decorates her navel.  White stripes adorn her legs, tail and back.  Two large wings sprout from her back, their feathers an attention-grabbing white and .  She wears a tube-top that hold back her G-cups, and short shorts around her wide waist that seem to be holding back a huge bulge.\n\nHer weapon is a halberd, made from a shiny, silvery metal, and seems to have an unnatural glow to it.";
 			else if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) this.long = "You're fighting the corrupted siren, Minerva.";
-			else this.long = "You're fighting the tainted siren, Minerva.  Standing around eight feet and wielding a weapon just as tall, she is a force to be reckoned with.  Her skin is a dark navy blue, though her belly, neck and inner thighs are as white as the clouds in the sky, and a golden piecing decorates her navel.  Orange and white stripes adorn her legs, tail and back.  Two large wings sprout from her back, their feathers an attention-grabbing red and orange mix.  She wears a tube-top that hold back her double d-cups, and short shorts around her wide waist that seem to be holding back a huge bulge.\n\nHer weapon is a halberd, made from a shiny, silvery metal, and seems to have an unnatural glow to it.";
+			else this.long = "You're fighting the tainted siren, Minerva.  Standing around eight feet and wielding a weapon just as tall, she is a force to be reckoned with.  Her skin is a dark navy blue, though her belly, neck and inner thighs are as white as the clouds in the sky, and a golden piecing decorates her navel.  Orange and white stripes adorn her legs, tail and back.  Two large wings sprout from her back, their feathers an attention-grabbing red and orange mix.  She wears a tube-top that hold back her double D-cups, and short shorts around her wide waist that seem to be holding back a huge bulge.\n\nHer weapon is a halberd, made from a shiny, silvery metal, and seems to have an unnatural glow to it.";
 			// this.plural = false;
 			this.createCock(16, 3);
 			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) this.createCock(16, 3); //Second cock for corrupted Minerva.
@@ -351,7 +396,6 @@ public class Minerva extends Monster
 			this.armorName = game.armors.TUBETOP.name;
 			this.armorPerk = "";
 			this.armorValue = 5;
-			this.bonusLust = 20;
 			this.lust = 20;
 			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
@@ -370,6 +414,8 @@ public class Minerva extends Monster
 			if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			if (flags[kFLAGS.MINERVA_LVL_UP] >= 9) this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
 			if (flags[kFLAGS.MINERVA_LVL_UP] >= 10) this.createPerk(PerkLib.PrestigeJobTempest, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 11) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) this.createPerk(PerkLib.MythicalSpeed, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

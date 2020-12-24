@@ -149,7 +149,7 @@ public class Valkyrie extends Monster
 			this.armorDef = 0;
 			this.armorMDef = 0;
 			this.bonusHP = 450;
-			this.bonusLust = 10;
+			this.bonusLust = 134;
 			this.lust = 25 + rand(15);
 			this.lustVuln = 0.46;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

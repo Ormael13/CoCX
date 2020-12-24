@@ -48,15 +48,13 @@ public class GameSettings extends BaseContent {
 
 		if (flags[kFLAGS.HARDCORE_MODE] > 0) outputText("<font color=\"#ff0000\">Hardcore mode is enabled. Cheats are disabled.</font>\n\n");
 
-		if (debug)
-			outputText("Debug Mode: <font color=\"#008000\"><b>ON</b></font>\n Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
-		else
-			outputText("Debug Mode: <font color=\"#800000\"><b>OFF</b></font>\n Items consumption will occur as normal.");
+		if (debug) outputText("Debug Mode: <font color=\"#008000\"><b>ON</b></font>\n Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
+		else outputText("Debug Mode: <font color=\"#800000\"><b>OFF</b></font>\n Items consumption will occur as normal.");
 
 		outputText("\n\n");
+
 		if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) {
-			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG]) outputText("Difficulty: <font color=\"#008000\"><b>Easy</b></font>\n Combat is easier and bad-ends can be ignored.");
-			else outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent stats modifiers. You can resume from bad-ends with penalties.");
+			outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent stats modifiers. You can resume from bad-ends with penalties.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) {
 			outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 1,5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 15% more damage and giving ~10% more EXP. Bad-ends can ruin your game.");
@@ -72,6 +70,7 @@ public class GameSettings extends BaseContent {
 		}
 
 		outputText("\n\n");
+
 		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) {
 			outputText("Secondary Stats Modifier: <font color=\"#808000\"><b>Normal</b></font>\n No opponent secondary stats modifiers.");
 		}
@@ -88,54 +87,21 @@ public class GameSettings extends BaseContent {
 			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 100x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 
-		/*if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
-		 outputText("Easy Mode: <font color=\"#008000\"><b>ON</b></font>\n Bad-ends can be ignored and combat is easier.");
-		 else
-		 outputText("Easy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Bad-ends can ruin your game and combat is challenging.");
-
-		 outputText("\n\n");*/
 		outputText("\n\n");
+
+		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG]) {
+			outputText("Easy Mode: <font color=\"#008000\"><b>ON</b></font>\n Bad-ends can be ignored and combat is as easy that even coc1 and coc2 makers can't breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
+		}
+		else {
+			outputText("Easy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Bad-ends can ruin your game and combat is back to what it should be.");
+		}
+
+		outputText("\n\n");
+
 		if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
 			outputText("Silly Mode: <font color=\"#008000\"><b>ON</b></font>\n Crazy, nonsensical, and possibly hilarious things may occur.");
 		else
 			outputText("Silly Mode: <font color=\"#800000\"><b>OFF</b></font>\n You're an incorrigable stick-in-the-mud with no sense of humor.");
-
-		outputText("\n\n");
-		outputText("<b>The following flags are not fully implemented yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n");
-		outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.");
-		outputText("\n\n");
-
-		if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
-			outputText("Low standards Mode: <font color=\"#008000\"><b>ON</b></font>\n NPCs ignore body type preferences.");
-			outputText("\n (Not gender preferences though. You still need the right hole.)");
-		}
-		else
-			outputText("Low standards Mode: <font color=\"#800000\"><b>OFF</b></font>\n NPCs have body-type preferences.");
-
-		outputText("\n\n");
-
-		if (flags[kFLAGS.HYPER_HAPPY]) {
-			outputText("Hyper Happy Mode: <font color=\"#008000\"><b>ON</b></font>\n Only reducto and humus shrink endowments.");
-			outputText("\n Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
-		}
-		else
-			outputText("Hyper Happy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Male enhancement potions shrink female endowments, and vice versa.");
-
-		outputText("\n\n");
-
-		if (flags[kFLAGS.SFW_MODE] >= 1) {
-			outputText("SFW Mode: <font color=\"#008000\"><b>ON</b></font>\n Sex scenes are disabled and adult materials are hidden.");
-		}
-		else
-			outputText("SFW Mode: <font color=\"#800000\"><b>OFF</b></font>\n Sex scenes are enabled.");
-
-		outputText("\n\n");
-
-		if (flags[kFLAGS.NO_GORE_MODE] >= 1) {
-			outputText("No Blood Mode: <font color=\"#008000\"><b>ON</b></font>\n Excesive Bloody or Gore scenes variants are disabled.");
-		}
-		else
-			outputText("No Blood Mode: <font color=\"#800000\"><b>OFF</b></font>\n Excesive Bloody or Gore scenes variants are enabled.");
 
 		outputText("\n\n");
 
@@ -209,10 +175,51 @@ public class GameSettings extends BaseContent {
 		else
 			outputText("Automatic Leveling: <font color=\"#800000\"><b>OFF</b></font>\n Leveling up is done manually.");
 
+		outputText("\n\n");
+
+		outputText("<b>The following flags are not fully implemented yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n");
+		outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.");
+		outputText("\n\n");
+
+		if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
+			outputText("Low standards Mode: <font color=\"#008000\"><b>ON</b></font>\n NPCs ignore body type preferences.");
+			outputText("\n (Not gender preferences though. You still need the right hole.)");
+		}
+		else
+			outputText("Low standards Mode: <font color=\"#800000\"><b>OFF</b></font>\n NPCs have body-type preferences.");
+
+		outputText("\n\n");
+
+		if (flags[kFLAGS.HYPER_HAPPY]) {
+			outputText("Hyper Happy Mode: <font color=\"#008000\"><b>ON</b></font>\n Only reducto and humus shrink endowments.");
+			outputText("\n Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
+		}
+		else
+			outputText("Hyper Happy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Male enhancement potions shrink female endowments, and vice versa.");
+
+		outputText("\n\n");
+
+		if (flags[kFLAGS.SFW_MODE] >= 1) {
+			outputText("SFW Mode: <font color=\"#008000\"><b>ON</b></font>\n Sex scenes are disabled and adult materials are hidden.");
+		}
+		else
+			outputText("SFW Mode: <font color=\"#800000\"><b>OFF</b></font>\n Sex scenes are enabled.");
+
+		outputText("\n\n");
+
+		if (flags[kFLAGS.NO_GORE_MODE] >= 1) {
+			outputText("No Blood Mode: <font color=\"#008000\"><b>ON</b></font>\n Excesive Bloody or Gore scenes variants are disabled.");
+		}
+		else
+			outputText("No Blood Mode: <font color=\"#800000\"><b>OFF</b></font>\n Excesive Bloody or Gore scenes variants are enabled.");
+
 		menu();
 		addButton(0, "Toggle Debug", toggleDebug).hint("Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
-		if (player) addButton(1, "Difficulty", difficultySelectionMenu).hint("Adjust the game difficulty to make it easier or harder.");
-		//addButton(1, "Easy Mode", toggleEasyModeFlag).hint("Toggles easy mode.  Enemy damage is halved and bad-ends can be ignored.");
+		if (player) {
+			addButton(1, "Difficulty", difficultySelectionMenu).hint("Adjust the game difficulty to make it easier or harder.");
+			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(7, "Easy Mode", toggleEasyModeFlag).hint("Toggles easy mode.  Enemy damage is 10% of normal and bad-ends can be ignored.");
+			else addButtonDisabled(7, "Easy Mode", "Diffulty setting is too high to allow toggle easy mod.");
+		}
 		addButton(2, "Silly Toggle", toggleSillyFlag).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
 		addButton(3, "Low Standards", toggleStandards);
 		addButton(4, "Hyper Happy", toggleHyperHappy);
@@ -291,24 +298,16 @@ public class GameSettings extends BaseContent {
 		outputText("\n<b>Extreme:</b> 3x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, +50% damage, ~30% more EXP.");
 		outputText("\n<b>Xianxia:</b> 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, +100% damage, ~40% more EXP.");
 		menu();
-		addButton(0, "Easy", chooseDifficulty, -1);
-		addButton(1, "Normal", chooseDifficulty, 0);
-		addButton(2, "Hard", chooseDifficulty, 1);
-		addButton(3, "Nightmare", chooseDifficulty, 2);
-		addButton(5, "EXTREME", chooseDifficulty, 3);
-		addButton(6, "XIANXIA", chooseDifficulty, 4);
+		addButton(0, "Normal", chooseDifficulty, 0);
+		addButton(1, "Hard", chooseDifficulty, 1);
+		addButton(2, "Nightmare", chooseDifficulty, 2);
+		addButton(3, "EXTREME", chooseDifficulty, 3);
+		addButton(4, "XIANXIA", chooseDifficulty, 4);
 		addButton(14, "Back", settingsScreenGameSettings);
 	}
 
 	public function chooseDifficulty(difficulty:int = 0):void {
-		if (difficulty <= -1) {
-			flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
-			flags[kFLAGS.GAME_DIFFICULTY]       = 0;
-		}
-		else {
-			flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
-			flags[kFLAGS.GAME_DIFFICULTY]       = difficulty;
-		}
+		flags[kFLAGS.GAME_DIFFICULTY] = difficulty;
 		settingsScreenGameSettings();
 	}
 	
@@ -334,18 +333,12 @@ public class GameSettings extends BaseContent {
 		settingsScreenGameSettings2();
 	}
 
-//Not used anymore as there's difficulty settings.
-	/*public function toggleEasyModeFlag():void
-	 {
-	 //toggle easy mode
-	 if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 0)
-	 flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
-	 else
-	 flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
-	 mainView.showMenuButton(MainView.MENU_DATA);
-	 settingsScreenGameSettings();
-	 return;
-	 }*/
+	public function toggleEasyModeFlag():void {
+		//toggle easy mode
+		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 0) flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
+		else flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
+		settingsScreenGameSettings();
+	}
 
 	public function toggleSillyFlag():void {
 		//toggle silly mode
@@ -534,13 +527,13 @@ public class GameSettings extends BaseContent {
 		outputText("\nChar View Style: ");
 		switch (flags[kFLAGS.CHARVIEW_STYLE]) {
 			case 0:
-				outputText("<font color=\"#008000\"><b>NEW</b></font>\n Viewer is inline with text");
+				outputText("<font color=\"#000080\"><b>ALWAYS</b></font>\n Viewer is shown at left, always visible");
 				break;
 			case 1:
 				outputText("<font color=\"#800000\"><b>OLD</b></font>\n Viewer is shown at left");
 				break;
 			case 2:
-				outputText("<font color=\"#000080\"><b>ALWAYS</b></font>\n Viewer is shown at left, always visible");
+				outputText("<font color=\"#008000\"><b>NEW</b></font>\n Viewer is inline with text");
 				break;
 		}
 		outputText("\n\n");

@@ -27,7 +27,7 @@ public function minoVictoryRapeChoices():void {
 	spriteSelect(44);
 	var feedposit:String = "B. Feed";
 	clearOutput();
-	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1) {
+	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict)) {
 		outputText("Smiling down at your vanquished foe, you feel a familiar hunger growing within you.  What do you do?");
 	}
 	//Not an addict
@@ -112,8 +112,8 @@ private function postfightoptions():void {
 		if (player.gender == 3 && x >= 0 && !player.isTaur()) addButton(2, "Use Both", minotaurGetsRapedByHerms);
 		if (tentaRape != null) addButton(3, "TentacleDick", rapeMinotaurTentacles);
 		if (urethralPen != null) addButton(4, "UrethraFuck", minoUrethralPen);
-		if (filled != null) addButton(5, "Get Filled", takeMinoCumDirectly);
-		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
+		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict)) {
+			addButton(5, "Get Filled", takeMinoCumDirectly);
 			if(player.biggestTitSize() >= 5 && !player.isNaga()) addButton(6, "Titfuck Him", minoGetsTitFucked);
 			if(player.isNaga()) addButton(6, "ProstateMilk", minoGetsTitFucked);
 		}
@@ -305,7 +305,7 @@ private function AddictNagaOnMinotaur():void {
 	outputText("You start to wipe some off the cum off of your face, but you're so drenched that the efforts are futile.  Drunk from the pleasure, you giggle quietly and meander back to your camp in a dreamy haze, almost left unable to think by the pleasurable sensations that the minotaur's semen still gives you.  At camp you curl up, smiling as you think of the huge load inside you, and drift off into a satisfied sleep.");
 	if(player.hasCock()) player.sexReward("Default","Dick", true,false);
 	//(satisfy or progress mino addiction)
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	minoCumAddiction(10);
 	monster.short = "tit-fucked Minotaur";
 	cleanupAfterCombat();
@@ -723,7 +723,7 @@ private function getOralRapedByMinotaur():void {
 	player.refillHunger(50, false);
 	//last pg
 	outputText("The minotaur grunts a few last times.  Finished with you, it lifts your [leg] and pulls you off its " + monster.cockDescriptShort(0) + ". The huge cock-head slides through your throat, gets jammed behind your teeth, and finally pulls free with a loud sucking sound. Cum pours from your throat and over your face, and the minotaur sprays a few final loads across your bloated stomach. The minotaur drops you in the cum-pool and walks away, leaving you to cradle your distended belly and swoon as his drug-like sperm addles your mind.  You pass out with a blissful smile.");
-	player.sexReward("cum");
+	player.sexReward("cum","Lips");
 	dynStats("sen", 1);
 	minoCumAddiction(10);
     if (CoC.instance.inCombat) {

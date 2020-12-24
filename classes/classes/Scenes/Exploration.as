@@ -92,6 +92,10 @@ public class Exploration extends BaseContent
 				explorePageIII();
 				return;
 			}
+			if (flags[kFLAGS.EXPLORATION_PAGE] == 4) {
+				explorePageIV();
+				return;
+			}
 			hideMenus();
 			menu();
 			addButton(0, "Explore", tryDiscover).hint("Explore to find new regions and visit any discovered regions.");
@@ -117,18 +121,20 @@ public class Exploration extends BaseContent
 			hideMenus();
 			menu();
 			if (SceneLib.forest.deepwoodsDiscovered()) addButton(0, "Deepwoods", SceneLib.forest.exploreDeepwoods).hint("Visit the dark, bioluminescent deepwoods. " + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExploredDeepwoods() : ""));
-			if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(1, "Ocean", SceneLib.ocean.exploreOcean).hint("Explore the ocean surface. But beware of... sharks. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
-			if (flags[kFLAGS.DISCOVERED_OCEAN] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(1, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
-			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(2, "High Mountain", SceneLib.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
-			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(3, "Bog", SceneLib.bog.exploreBog).hint("Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
+			//desert inner part
+			if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(2, "Ocean", SceneLib.ocean.exploreOcean).hint("Explore the ocean surface. But beware of... sharks. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
+			if (flags[kFLAGS.DISCOVERED_OCEAN] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(2, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
+			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(3, "High Mountain", SceneLib.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
 			
-			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(5, "Glacial Rift", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
-			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(6, "Volcanic Crag", SceneLib.volcanicCrag.exploreVolcanicCrag).hint("Visit the infernal volcanic crag. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
+			if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] > 0) addButton(5, "Defiled Ravine", SceneLib.defiledravine.exploreDefiledRavine).hint("Visit the defiled ravine. \n\nRecommended level: 41" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] : ""));
+			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(6, "Bog", SceneLib.bog.exploreBog).hint("Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
+			
+			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(10, "Glacial Rift", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
+			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(11, "Volcanic Crag", SceneLib.volcanicCrag.exploreVolcanicCrag).hint("Visit the infernal volcanic crag. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(9, "",	//Wuxia related area - ?latająca wyspa?
 			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(10, "Pit", CoC.instance.abyss.explorePit).hint("Visit the pit. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
 			//if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(11, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
-			//if (!player.canSwimUnderwater() && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(11, "Deep Sea", "Without any way to breathe underwater you can't explore this area!");
 			//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(12, "Abyss", CoC.instance.abyss.exploreAbyss).hint("Visit the abyss. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
 			
 			addButton(4, "Next", explorePageIII);
@@ -151,8 +157,16 @@ public class Exploration extends BaseContent
 			if (player.level >= 125) addButton(4, "XXHL Explore", tryDiscoverXXHL).hint("Explore to find strong new enemies.");
 			else addButtonDisabled(4, "XXHL Explore", "Req. lvl 125+");
 			
-			addButton(10, "42", tryRNGod).hint("Explore to find the answer for your prayers. Or maybe you really not wanna find it fearing answer will not be happy with you?");
+			if (silly()) addButton(10, "42", tryRNGod).hint("Explore to find the answer for your prayers. Or maybe you really not wanna find it fearing answer will not be happy with you?");
 			addButton(9, "Previous", goBackToPageII);
+			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
+			addButton(14, "Back", playerMenu);
+		}
+		private function explorePageIV():void {
+			flags[kFLAGS.EXPLORATION_PAGE] = 4;
+			hideMenus();
+			menu();
+			addButton(9, "Previous", goBackToPageIII);
 			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
 			addButton(14, "Back", playerMenu);
 		}
@@ -165,6 +179,11 @@ public class Exploration extends BaseContent
 		private function goBackToPageII():void
 		{
 			flags[kFLAGS.EXPLORATION_PAGE] = 2;
+			doExplore();
+		}
+		private function goBackToPageIII():void
+		{
+			flags[kFLAGS.EXPLORATION_PAGE] = 3;
 			doExplore();
 		}
 		
@@ -423,27 +442,15 @@ public class Exploration extends BaseContent
 			//Imptacular Encounter
 			var demonChooser:int = rand(100);
 			//Succubus
-			//if (demonChooser >= 30 && demonChooser < 55) {
 			if (demonChooser >= 40 && demonChooser < 70) {
 				TrueDemons.SuccubusEncounter();
 				return;
 			}
 			//Incubus
-			//else if (demonChooser >= 55 && demonChooser < 80) {
 			else if (demonChooser >= 70) {
 				TrueDemons.IncubusEncounter();
 				return;
 			}
-			//Cow-Succubus
-			//else if (demonChooser >= 80 && demonChooser < 90) {
-				//startCombat(new CowSuccubus());
-				//return;
-			//}
-			//Mino-Incubus
-			//else if (demonChooser >= 90) {
-				//startCombat(new MinoIncubus());
-				//return;
-			//}
 			//Omnibus
 			else {
 				TrueDemons.OmnibusEncounter();
@@ -596,7 +603,7 @@ public class Exploration extends BaseContent
 					if (player.lowerBody == LowerBody.HUMAN) outputText("inside your footwear, between your toes");
 					if (player.lowerBody == LowerBody.HOOFED) outputText("in your hooves");
 					if (player.lowerBody == LowerBody.DOG) outputText("in your paws");
-					if (player.lowerBody == LowerBody.NAGA) outputText("in your scales");
+					if (player.isNaga()) outputText("in your scales");
 					outputText(".\n\n<b>You've discovered the Desert!</b>");
 					player.exploredDesert = 1;
 					player.explored++;
@@ -666,7 +673,8 @@ public class Exploration extends BaseContent
 					player.explored++;
 					clearOutput();
 					outputText("You hear seagulls in the distance and run on the grass to look what is beyond. There is a few dunes of sand with patch of grass that you eagerly cross over as you discover what you hoped to find.");
-					outputText("\n\nFinally, after stepping over another dune, in the distance before you a shore of water spreads. Its surely way bigger than the lake you found some time ago. As far as you look to the side you can't see the shores end.  Mesmerized by the view you continue walking towards the ocean until you stand in the shallow water with waves passing by around your waist. Despite the corruption of Mareth this water turns out to be quite clear and who knows, maybe it’s not even that much tainted... yet. But that would probably require submerging deeper to check it out.\n\n<b>You've discovered the Beach, the Ocean and the Deep Sea!</b>");
+					outputText("\n\nFinally, after stepping over another dune, in the distance before you a shore of water spreads. Its surely way bigger than the lake you found some time ago. As far as you look to the side you can't see the shores end.  Mesmerized by the view you continue walking towards the ocean until you stand in the shallow water with waves passing by around your waist. Despite the corruption of Mareth this water turns out to be quite clear and who knows, maybe it’s not even that much tainted... yet. But that would probably require submerging deeper to check it out.");
+					outputText("\n\n<b>You've discovered the Beach and the Ocean!</b>");
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}

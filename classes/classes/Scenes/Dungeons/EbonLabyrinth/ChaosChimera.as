@@ -50,7 +50,7 @@ use namespace CoC;
 				damage += this.wis * 2;
 				damage = Math.round(damage);
 				damage = player.takePoisonDamage(damage, true);
-				player.dynStats("lus", 7 + rand(5) + player.sens / 5);
+				player.dynStats("lus", 7 + rand(5) + player.effectiveSensitivity() / 5);
 			}
 		}
 		private function Dragonbreath():void
@@ -188,7 +188,7 @@ use namespace CoC;
 			this.armorDef = 120;
 			this.armorMDef = 20;
 			this.bonusHP = 100000;
-			this.bonusLust = 40;
+			this.bonusLust = 270;
 			this.gems = 200 + rand(80);
 			this.additionalXP = 1500;
 			this.level = 70;

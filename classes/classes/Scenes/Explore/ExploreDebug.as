@@ -106,7 +106,7 @@ package classes.Scenes.Explore
 			function ():Monster {return new Minerva();},
 			function ():Monster {return new MinotaurLord();},
 			function ():Monster {return new OmnibusOverseer();},
-			function ():Monster {return new PhoenixPlatoon();},
+			function ():Monster {return new PhoenixSquad();},
 			function ():Monster {return new SandMother();},
 			function ():Monster {return new SandWitchMob();},
 			function ():Monster {return new SecretarialSuccubus();},

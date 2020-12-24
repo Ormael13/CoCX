@@ -23,8 +23,8 @@ use namespace CoC;
 			createStatusEffect(StatusEffects.AbilityCooldown2, 3, 0, 0, 0);
 			this.HP = this.maxHP();
 			this.addStatusValue(StatusEffects.HydraTails, 1, 1);
-			this.removePerk(PerkLib.MonsterRegeneration);
-			this.createPerk(PerkLib.MonsterRegeneration, this.statusEffectv1(StatusEffects.HydraTails), 0, 0, 0);
+			this.removePerk(PerkLib.HydraRegeneration);
+			this.createPerk(PerkLib.HydraRegeneration, this.statusEffectv1(StatusEffects.HydraTails), 0, 0, 0);
 		}
 		
 		private function hydraOmniBreathWeapon():void
@@ -124,6 +124,7 @@ use namespace CoC;
 				this.armorDef = 80;
 				this.armorMDef = 80;
 				this.bonusHP = 1000;
+				this.bonusLust = 480;
 				this.level = 65;
 				this.gems = 200 + rand(80);
 			}
@@ -133,6 +134,7 @@ use namespace CoC;
 				this.armorDef = 100;
 				this.armorMDef = 100;
 				this.bonusHP = 2000;
+				this.bonusLust = 530;
 				this.level = 70;
 				this.gems = 250 + rand(90);
 			}
@@ -142,6 +144,7 @@ use namespace CoC;
 				this.armorDef = 120;
 				this.armorMDef = 120;
 				this.bonusHP = 3000;
+				this.bonusLust = 580;
 				this.level = 75;
 				this.gems = 300 + rand(100);
 			}
@@ -168,13 +171,12 @@ use namespace CoC;
 			this.weaponVerb="punch";
 			this.weaponAttack = 5;
 			this.armorName = "scales";
-			this.bonusLust = 10;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new WeightedDrop(consumables.HYDRASC, 1);
 			this.createStatusEffect(StatusEffects.HydraTails, 5, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
-			this.createPerk(PerkLib.MonsterRegeneration, 5, 0, 0, 0);
+			this.createPerk(PerkLib.HydraRegeneration, 5, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
 			checkMonster();

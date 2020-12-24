@@ -821,7 +821,6 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 
 			player.dynStats("cor+", 20);
 			player.orgasm();
-			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			driderDefeatMenu();
 		}
 	}

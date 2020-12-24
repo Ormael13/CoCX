@@ -124,7 +124,7 @@ public class ImpOverlord extends Imp
 			var damage:int = 12 + rand(25);
 			player.takePhysDamage(damage, true);
 			//[-HP(minor) // +Lust]
-			player.dynStats("lus", 25 + player.sens / 4 + player.cor / 10);
+			player.dynStats("lus", 25 + player.effectiveSensitivity() / 4 + player.cor / 10);
 		}
 		
 		//Cum cannon!
@@ -144,7 +144,7 @@ public class ImpOverlord extends Imp
 			else {
 				outputText("The cum lands on you, staining your [armor] and the cum even gets on your [skinfurscales]! You feel aroused from his cum.");
 				player.slimeFeed();
-				player.dynStats("lus", 30 + player.sens / 4 + player.cor / 10);
+				player.dynStats("lus", 30 + player.effectiveSensitivity() / 4 + player.cor / 10);
 			}
 		}
 		
@@ -233,7 +233,7 @@ public class ImpOverlord extends Imp
 			this.armorDef = 20;
 			this.armorMDef = 10;
 			this.bonusHP = 600;
-			this.bonusLust = 30;
+			this.bonusLust = 131;
 			this.lust = 30;
 			this.lustVuln = .3;
 			this.fatigue = 0;

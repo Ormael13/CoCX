@@ -227,7 +227,7 @@ import classes.internals.WeightedDrop;
 			this.armorDef = 90;
 			this.armorMDef = 30;
 			this.bonusHP = 900;
-			this.bonusLust = 10;
+			this.bonusLust = 84;
 			this.lust = 10;
 			this.lustVuln = 0.3;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
@@ -238,7 +238,7 @@ import classes.internals.WeightedDrop;
 					.add(null, 3);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0);
 			checkMonster();
 		}

@@ -60,7 +60,7 @@ public class DarkElfSniper extends DarkElfScout
 			this.armorName = "elven armor";
 			this.armorDef = 16;
 			this.armorMDef = 16;
-			this.bonusLust = 20;
+			this.bonusLust = 221;
 			this.lustVuln = .7;
 			this.lust = 50;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

@@ -76,7 +76,7 @@ public class Brigid extends Monster
 			createBreastRow(Appearance.breastCupInverse("D"));
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.tallness = rand(8) + 70;
+			this.tallness = rand(8) + 82;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "red";
@@ -91,7 +91,7 @@ public class Brigid extends Monster
 			this.armorDef = 24;
 			this.armorMDef = 2;
 			this.bonusHP = 1000;
-			this.bonusLust = 30;
+			this.bonusLust = 144;
 			this.lust = 20;
 			this.lustVuln = .25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

@@ -159,7 +159,7 @@ public class Tamani extends Goblin
 			this.armorDef = 1;
 			this.armorMDef = 1;
 			this.bonusHP = 60;
-			this.bonusLust = 20;
+			this.bonusLust = 137;
 			this.lust = 40;
 			this.lustVuln = 0.9;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

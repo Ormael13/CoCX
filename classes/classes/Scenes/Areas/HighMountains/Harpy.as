@@ -48,7 +48,7 @@ public class Harpy extends Monster
 		protected function harpyTease():void
 		{
 			outputText("The harpy charges at you carelessly, her body striking you with the full weight of her motherly hips.  The pair of you go crashing backwards onto the ground.  You grapple with her weighty ass, trying your best not to think dirty thoughts, but the way she's maniacally flapping and writhing her curvy body against you makes it impossible! After a brief, groping wrestle on the ground, she pushes you away and takes flight again.");
-			player.dynStats("lus", (12 + rand(player.sens / 5)));
+			player.dynStats("lus", (12 + rand(player.effectiveSensitivity() / 5)));
 		}
 
 
@@ -124,7 +124,7 @@ public class Harpy extends Monster
 			this.armorDef = 10;
 			this.armorMDef = 1;
 			this.bonusHP = 200;
-			this.bonusLust = 20;
+			this.bonusLust = 120;
 			this.lust = 10;
 			this.lustVuln = .7;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

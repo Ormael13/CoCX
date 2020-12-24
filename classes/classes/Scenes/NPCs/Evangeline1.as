@@ -337,10 +337,9 @@ public class Evangeline1 extends Monster
 				this.armorDef = 1;
 				this.armorMDef = 1;
 				this.bonusHP = 30;
-				this.bonusLust = 5;
+				this.bonusLust = 22;
 				this.additionalXP += 5;
 				this.level = 2;
-				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2) {
 				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human. She's wearing simple peasant's rags and using bare fists to attack.";
@@ -352,11 +351,9 @@ public class Evangeline1 extends Monster
 				this.armorDef = 1;
 				this.armorMDef = 1;
 				this.bonusHP = 60;
-				this.bonusLust = 10;
+				this.bonusLust = 24;
 				this.additionalXP += 10;
 				this.level = 4;
-				this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
-				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) {
 				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human. She's wearing simple peasant's rags and using bare fists to attack.";
@@ -368,12 +365,9 @@ public class Evangeline1 extends Monster
 				this.armorDef = 1;
 				this.armorMDef = 1;
 				this.bonusHP = 90;
-				this.bonusLust = 15;
+				this.bonusLust = 26;
 				this.additionalXP += 15;
 				this.level = 6;
-				this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
-				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
-				this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) {
 				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human. She's wearing simple peasant's rags and using spiked gauntlet to attack.";
@@ -385,13 +379,9 @@ public class Evangeline1 extends Monster
 				this.armorDef = 1;
 				this.armorMDef = 1;
 				this.bonusHP = 120;
-				this.bonusLust = 20;
+				this.bonusLust = 28;
 				this.additionalXP += 20;
 				this.level = 8;
-				this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
-				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
-				this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
-				this.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) {
 				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human. She's wearing practically indecent steel armor and using spiked gauntlet to attack.";
@@ -403,14 +393,9 @@ public class Evangeline1 extends Monster
 				this.armorDef = 11;
 				this.armorMDef = 1;
 				this.bonusHP = 150;
-				this.bonusLust = 25;
+				this.bonusLust = 30;
 				this.additionalXP += 25;
 				this.level = 10;
-				this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
-				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
-				this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
-				this.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
-				this.createPerk(PerkLib.Mage, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) {
 				this.long = "You are currently fighting Evangeline, which is a seven and a half feet tall human. She's wearing practically indecent steel armor and using inscribed spellblade to attack.";
@@ -422,16 +407,9 @@ public class Evangeline1 extends Monster
 				this.armorDef = 11;
 				this.armorMDef = 1;
 				this.bonusHP = 180;
-				this.bonusLust = 30;
+				this.bonusLust = 32;
 				this.additionalXP += 30;
 				this.level = 12;
-				this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
-				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
-				this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
-				this.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
-				this.createPerk(PerkLib.Mage, 0, 0, 0, 0);
-				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
-				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
 			}
 			createBreastRow(Appearance.breastCupInverse("A"));
 			this.createVagina(false, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_TIGHT);
@@ -449,8 +427,16 @@ public class Evangeline1 extends Monster
 			this.fatigue = 0;
 			this.gems = 0;
 			this.drop = NO_DROP;
-			this.libStat.core.value += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] < 2) this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2) this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) this.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) this.createPerk(PerkLib.Mage, 0, 0, 0, 0);
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) {
+				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
+			}
 			checkMonster();
 		}
 		

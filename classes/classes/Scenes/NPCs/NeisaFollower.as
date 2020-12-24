@@ -112,6 +112,7 @@ public function neisaCampMenu():void {
 		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") addButton(5, "Team", neisaHenchmanOption).hint("Ask Neisa to stay in camp.");
 		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Neisa about accompaning you.");
 	}
+	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 	addButton(14, "Back", camp.campFollowers);
 }
 
@@ -148,12 +149,12 @@ public function neisaHenchmanOption():void {
 	if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
 		outputText("\"<i>Yeah sure, I will join, just make sure to share the loot.</i>\"\n\n");
 		outputText("Neisa is now following you around.\n\n");
-		var strNeisa:Number = 100;
+		var strNeisa:Number = 50;
 		var meleeAtkNeisa:Number = 12;
-		/*if (flags[kFLAGS.ETNA_LVL_UP] >= 1) {
-			strEtna += 10 * flags[kFLAGS.ETNA_LVL_UP];
-			libEtna += 20 * flags[kFLAGS.ETNA_LVL_UP];
-		}*/
+		if (flags[kFLAGS.NEISA_LVL_UP] >= 2) {
+			strNeisa += 15 * (flags[kFLAGS.NEISA_LVL_UP] - 1);
+			meleeAtkNeisa += 3 * (flags[kFLAGS.NEISA_LVL_UP] - 1);
+		}
 		strNeisa *= (1 + (0.2 * player.newGamePlusMod()));
 		strNeisa = Math.round(strNeisa);
 		meleeAtkNeisa += (1 + (int)(meleeAtkNeisa / 5)) * player.newGamePlusMod();

@@ -570,9 +570,9 @@ public function chichiSex():void {
 		outputText("Chi Chi blushes then gives a categorical “No”, causing you to ask her why.\n\n");
 		outputText("\"<i>Sorry, but I won’t. While the first time was fine, I want our relationship to proceed to the next level before we truly move to that step. And yes, unlike most monks, I can actually marry. Also, you would need to show your strength by defeating an oni first, I ain't going out with a nobody… well, at least not officially.</i>\"\n\n");
 		menu();
-		if (player.hasStatusEffect(StatusEffects.ChiChiWeddingS)) addButton(1, "Weeding", chichiSex1);
-		else if (flags[kFLAGS.MARRIAGE_FLAG] != 0 && flags[kFLAGS.MARRIAGE_FLAG] != 1) addButtonDisabled(1, "Weeding", "You already married someone else.");
-		else addButtonDisabled(1, "Weeding", "Need to beat some oni.");
+		if (player.hasStatusEffect(StatusEffects.ChiChiWeddingS)) addButton(1, "Wedding", chichiSex1);
+		else if (flags[kFLAGS.MARRIAGE_FLAG] != 0 && flags[kFLAGS.MARRIAGE_FLAG] != 1) addButtonDisabled(1, "Wedding", "You already married someone else.");
+		else addButtonDisabled(1, "Wedding", "Need to beat some oni.");
 		addButton(3, "Later", chichiSex0);
 	}
 	else {
@@ -593,7 +593,7 @@ public function chichiSex0():void {
 }
 public function chichiSex1():void {
 	outputText("Well sure. If it will make her happy, you will propose to her.");
-	if ((player.hasItem(jewelries.POWRRNG, 1) || player.hasItem(jewelries.RPOWRNG, 1)) && flags[kFLAGS.SAPPHIRE_TALKS] >= 4) {
+	if (player.hasItem(jewelries.ENDGRNG, 1) && flags[kFLAGS.SAPPHIRE_TALKS] >= 4) {
 		outputText(" You have the ruby ring on you, but is this really the time?\n\n");
 		menu();
 		addButton(1, "Yes", chichiSex3).hint("Taking this step leads to a fight. Save your game!");
@@ -602,7 +602,7 @@ public function chichiSex1():void {
 	else {
 		outputText(" You ");
 		if (flags[kFLAGS.SAPPHIRE_TALKS] < 4) {
-			if (!player.hasItem(jewelries.POWRRNG, 1) && !player.hasItem(jewelries.RPOWRNG, 1)) outputText("also realize to your annoyance that not only are you missing a wedding ring but the two of you will need a holy place to recite your vows, one with a still working altar of Marae and active priestess. Come to think of it her favorite color was red maybe a ruby ring would do.");
+			if (!player.hasItem(jewelries.ENDGRNG, 1)) outputText("also realize to your annoyance that not only are you missing a wedding ring but the two of you will need a holy place to recite your vows, one with a still working altar of Marae and active priestess. Come to think of it her favorite color was red maybe a ruby ring would do.");
 			outputText("realise to your annoyance that the two of you will need a holy place to recite your vows, one with a still working altar of Marae and active priestess likely.");
 		}
 		else outputText("realize however that to properly propose to her, you would need an engagement ring, preferably a ruby one.");
@@ -621,6 +621,7 @@ public function chichiSex3():void {
 	outputText("\"<i>A..are you serious???!!! You idiot! Y..you're...really?!”</i>\"\n\n");
 	outputText("Chi Chi is at a loss for words. It takes her an entire minute to come back from the shock of your proposal, but she finally answers in the clearest manner she can.\n\n");
 	outputText("\"<i>Yes…I will.</i>\"\n\n");
+	player.destroyItems(jewelries.ENDGRNG, 1);
 	player.HP = player.maxHP();
 	player.fatigue = 0;
 	player.mana = player.maxMana();
@@ -758,15 +759,15 @@ public function chichiSexHinezumiYuri():void {
 public function mishapsLunaChiChi():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
-	outputText("As you go to visit Chi Chi you hear her scream. Running over to check whats going on you notice the fire mouse is now a sobbing mess, wet with water. You don’t recall her crying before so this must be serious.\n\n");
+	outputText("As you go to visit Chi Chi, you hear her scream. Running over to check what's going on you notice the fire mouse is now a sobbing mess, wet with water. You don’t recall her crying before so this must be serious.\n\n");
 	outputText("\"<i>Why why? Why would someone put a bucket right above my bedroll now I’m all wet and my fire will take hours to rise again!</i>\"\n\n");
-	outputText("She notice you checking her and panic.\n\n");
+	outputText("She notices you checking on her and panic.\n\n");
 	outputText("\"<i>Eep go away [name]! D..don’t look at me!! The last thing I need is you looking at me right now.</i>\"\n\n");
-	outputText("That’s quite the surprise. Does the proud fighter she normaly is turn into an awkward village girl the moment shes wet? Well regardless you guess you will have to visit her later because there’s no way she’s letting you approach her right now.\n\n");
+	outputText("That’s quite a surprise. Does the proud fighter facade drop when she’s wet? Well, regardless you guess you will have to visit her later because there’s no way she’s letting you approach her right now.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.addStatusValue(StatusEffects.CampLunaMishaps2, 4, 1);
 	else player.createStatusEffect(StatusEffects.CampLunaMishaps2, 0, 0, 0, 1);
 	if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);
-	if (player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
+	else player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
 	if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 	doNext(playerMenu);
 }

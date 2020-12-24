@@ -98,7 +98,7 @@ use namespace CoC;
 		private function minotaurCumPress():void
 		{
 			outputText("The minotaur lord tugs on the end of the chain, pulling you toward him, making you spin round and round so many times that you're dazed and dizzy.  You can feel the links coming free of your " + player.skinFurScales() + ", and the closer you get, the more freedom of movement you have.  Yet, the dizziness makes it hard to do anything other than stumble.  You splat into something wet, sticky, and spongy.  You gasp, breathing a heavy gasp of minotaur musk that makes your head spin in a whole different way.  You pry yourself away from the sweaty, sperm-soaked nuts you landed on and look up, admiring the towering horse-cock with its three-rings of pre-puce along its length.  A droplet of pre-cum as fat as your head smacks into your face, staggering you back and dulling your senses with narcotic lust.");
-			player.dynStats("lus", 22 + player.lib / 8 + player.sens / 8);
+			player.dynStats("lus", 22 + player.lib / 8 + player.effectiveSensitivity() / 8);
 			outputText("You tumble to your knees a few feet away, compulsively licking it up.  Once it's gone, ");
 			if (player.lust >= player.maxLust()) outputText("you rise up, horny and hungry for more.");
 			else {
@@ -127,7 +127,7 @@ use namespace CoC;
 				outputText(" slapping into your face before you can react!  You wipe the slick snot-like stuff out of your eyes and nose, ");
 				if (player.lust >= 70) outputText("swallowing it into your mouth without thinking.  You greedily guzzle the potent, narcotic aphrodisiac down, even going so far as to lick it from each of your fingers in turn, sucking every drop into your waiting gullet.");
 				else outputText("feeling your heart hammer lustily.");
-				player.dynStats("lus", 15 + player.lib / 8 + player.sens / 8);
+				player.dynStats("lus", 15 + player.lib / 8 + player.effectiveSensitivity() / 8);
 			}
 			else {
 				outputText(" right past your head, but the smell alone is enough to make you weak at the knees.");
@@ -197,7 +197,7 @@ use namespace CoC;
 			this.armorDef = 22;
 			this.armorMDef = 3;
 			this.bonusHP = 640 + rand(this.ballSize*4);
-			this.bonusLust = 40 + rand(this.ballSize*3);
+			this.bonusLust = 122 + rand(this.ballSize*3);
 			this.lust = 50;
 			this.lustVuln = 0.33;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
@@ -213,6 +213,7 @@ use namespace CoC;
 			this.tailType = Tail.COW;
 			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			checkMonster();
 		}
 

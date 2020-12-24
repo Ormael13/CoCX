@@ -93,6 +93,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function ghostSpeed():Number {
 		return combat.ghostSpeed();
 	}
+	protected function ghostToughness():Number {
+		return combat.ghostToughness();
+	}
 	// =================
 	// CHECKS
 	// =================
@@ -144,6 +147,12 @@ public class BaseCombatContent extends BaseContent {
 	protected function soulskillMod():Number {
 		return combat.soulskillMod();
 	}
+	protected function soulskillPhysicalMod():Number {
+		return combat.soulskillPhysicalMod();
+	}
+	protected function soulskillMagicalMod():Number {
+		return combat.soulskillMagicalMod();
+	}
 	protected function scalingBonusStrength():Number {
 		return combat.scalingBonusStrength();
 	}
@@ -186,6 +195,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function healCostBlack(mod:Number):Number {
 		return combat.magic.healCostBlackImpl(mod);
 	}
+	protected function spellCostBlood(mod:Number):Number {
+		return combat.magic.spellCostBloodImpl(mod);
+	}
 	protected function spellMod():Number {
 		return combat.magic.spellModImpl();
 	}
@@ -194,6 +206,9 @@ public class BaseCombatContent extends BaseContent {
 	}
 	protected function spellModWhite():Number {
 		return combat.magic.spellModWhiteImpl();
+	}
+	protected function spellModBlood():Number {
+		return combat.magic.spellModBloodImpl();
 	}
 	protected function spellBlackCooldown():Number {
 		return combat.magic.spellBlackCooldownImpl();

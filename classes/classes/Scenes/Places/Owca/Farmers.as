@@ -60,7 +60,7 @@ public class Farmers extends Monster
 			this.armorDef = 10;
 			this.armorMDef = 1;
 			this.bonusHP = 300;
-			this.bonusLust = 10;
+			this.bonusLust = 94;
 			this.lustVuln = 0;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 24;
@@ -69,7 +69,7 @@ public class Farmers extends Monster
 			this.horns.count = 2;
 			this.tailType = Tail.DEMONIC;
 			this.drop = NO_DROP;
-			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();
 		}

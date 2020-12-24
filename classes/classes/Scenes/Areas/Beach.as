@@ -12,6 +12,7 @@ import classes.CoC;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Beach.*;
+import classes.Scenes.Areas.Lake.GooGirlScene;
 import classes.Scenes.NPCs.CeaniScene;
 import classes.Scenes.SceneLib;
 
@@ -25,7 +26,7 @@ import classes.Scenes.SceneLib;
 		public var cancerScene:CancerAttackScene = new CancerAttackScene();
 		public var demonsPack:DemonPackBeachScene = new DemonPackBeachScene();
 		public var pinchoushop:PinchousWaterwearAndTools = new PinchousWaterwearAndTools();
-		//public var gorgonScene:GorgonScene = new GorgonScene();przenieść do deep desert potem
+		public var gooGirlScene:GooGirlScene = new GooGirlScene();
 
 		public function Beach() 
 		{
@@ -108,6 +109,14 @@ import classes.Scenes.SceneLib;
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					cancerScene.CancerEncounter();
+				},
+				chance: 1
+			}, {
+				// Beach goo girl
+				name: "beach goo girl",
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
+					gooGirlScene.encounterGooGirlBeach();
 				},
 				chance: 1
 			}, {

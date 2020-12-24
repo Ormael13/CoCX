@@ -192,7 +192,7 @@ package classes.Scenes
 				num++;
 			}
 			if (num >= 20) awardAchievement("Scholar (1)", kACHIEVEMENTS.GENERAL_SCHOLAR);
-			if (num >= 30) awardAchievement("Scholar (2)", kACHIEVEMENTS.GENERAL_SCHOLAR_2);//aktualnie 35 codex entries exist ingame
+			if (num >= 30) awardAchievement("Scholar (2)", kACHIEVEMENTS.GENERAL_SCHOLAR_2);//aktualnie 36 codex entries exist ingame
 			//if (num >= 40) awardAchievement("Scholar (3)", kACHIEVEMENTS.GENERAL_SCHOLAR_3);
 			return num;
 		}
@@ -204,7 +204,7 @@ package classes.Scenes
 			menu();
 			flags[kFLAGS.CODEX_CURRENT_ENTRY] = 0;
 			outputText("You open your codex. Which topic would you like to read?\n\n");
-			outputText("Codex entries unlocked: " + checkUnlocked() + "/34");
+			outputText("Codex entries unlocked: " + checkUnlocked() + "/36");
 			addButton(0, "Races", menuRaces);
 			addButton(1, "Cults", menuFactions);
 			addButton(2, "Others", menuItems);

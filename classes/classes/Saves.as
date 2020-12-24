@@ -897,6 +897,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.gems = player.gems;
 		saveFile.data.perkPoints = player.perkPoints;
 		saveFile.data.statPoints = player.statPoints;
+		saveFile.data.superPerkPoints = player.superPerkPoints;
 		saveFile.data.ascensionPerkPoints = player.ascensionPerkPoints;
 		//Appearance
 		saveFile.data.startingRace = player.startingRace;
@@ -1878,6 +1879,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.perkPoints = saveFile.data.perkPoints;
 
+		if (saveFile.data.superPerkPoints == undefined)
+			player.superPerkPoints = 0;
+		else
+			player.superPerkPoints = saveFile.data.superPerkPoints;
+
 		if (saveFile.data.ascensionPerkPoints == undefined)
 			player.ascensionPerkPoints = 0;
 		else
@@ -2172,7 +2178,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 
 		// Fixup missing History: Whore perk IF AND ONLY IF the flag used to track the prior selection of a history perk has been set
-		if (hasHistoryPerk == false && flags[kFLAGS.HISTORY_PERK_SELECTED] != 0)
+		if (hasHistoryPerk == false && flags[kFLAGS.HISTORY_PERK_SELECTED] != 1)
 		{
 			player.createPerk(PerkLib.HistoryWhore, 0, 0, 0, 0);
 		}

@@ -558,7 +558,7 @@ import classes.Stats.Buff;
 
 			outputText("  At the same time, she leans in close to your ear.  “<i>Do the </i>Minotaurs?”  She hisses suggestively, eyes flashing.\n\n");
 
-			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1)
+			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.hasPerk(PerkLib.LactaBovineImmunity))
 			{
 				outputText("The moment the word ‘Minotaur’ enters your lust-addled brain, your body shifts over to automatic. Your [cock biggest] twitches painfully, loins longing for the release that can only come from being filled full of gallons of hot Minotaur cream, and you let out a distinctly feminine sounding moan as depraved fantasies of being roughly taken by the bull-men rush through your head.\n\n");
 
@@ -1469,6 +1469,10 @@ import classes.Stats.Buff;
 				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 10 && flags[kFLAGS.IZUMI_LVL_UP] == 9) {
 					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
 					flags[kFLAGS.IZUMI_LVL_UP] = 10;
+				}
+				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] == 11 && flags[kFLAGS.IZUMI_LVL_UP] == 10) {
+					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.IZUMI_LVL_UP] = 11;
 				}
 			}
 			if (!player.hasStatusEffect(StatusEffects.ChiChiWeddingS)) player.createStatusEffect(StatusEffects.ChiChiWeddingS,0,0,0,0);

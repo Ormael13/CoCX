@@ -508,6 +508,7 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += (225 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) max += (375 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.AscensionHardiness) >= 0) max += perkv1(PerkLib.AscensionHardiness) * 100;
 			if (findPerk(PerkLib.ChiReflowDefense) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
 			max += level * 15;
@@ -516,6 +517,7 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.UnlockBody3rdStage) >= 0) max += level * 15;
 			if (findPerk(PerkLib.UnlockBody4thStage) >= 0) max += level * 15;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 20;
+			if (findPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) max += level * 20;
 			if (jewelryEffectId == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude3;
@@ -525,6 +527,65 @@ public class Creature extends Utils
 			max *= multimax;
 			max = Math.round(max);
 			return max;
+		}
+		protected function maxHP_mult():Number {
+			var maxHP_mult1:Number = 1;
+			maxHP_mult1 += (countCockSocks("green") * 0.02);
+			if (game.player.dragonScore() >= 5) maxHP_mult1 += 0.05;
+			if (game.player.dragonScore() >= 16) maxHP_mult1 += 0.05;
+			if (game.player.dragonScore() >= 24) maxHP_mult1 += 0.1;
+			if (game.player.dragonScore() >= 32) maxHP_mult1 += 0.1;
+			if (game.player.vehiclesName == "Goblin Mech Alpha") {
+				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.2;
+				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.35;
+				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.5;
+			}
+			if (game.player.vehiclesName == "Goblin Mech Prime") {
+				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.4;
+				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.7;
+				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 1;
+			}
+			if (game.player.vehiclesName == "Giant Slayer Mech") {
+				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.25;
+				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.5;
+				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.75;
+				if (game.player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) maxHP_mult1 += 0.25;
+				if (game.player.hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) maxHP_mult1 += 0.5;
+				if (game.player.hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) maxHP_mult1 += 0.75;
+			}
+			if (game.player.vehiclesName == "Howling Banshee Mech") {
+				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.25;
+				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.5;
+				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.75;
+			}
+			return maxHP_mult1;
+		}
+		public function maxHP():Number {
+			var max:Number = Math.round(maxHP_base()*maxHP_mult());
+			return Math.min(9999999,max);
+		}
+		public function maxOverHP():Number {
+			var maxOver:Number = maxHP();
+			if (findPerk(PerkLib.HiddenJobBloodDemon) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 5);
+				else maxOver += Math.round(tou * 5);
+			}
+			if (findPerk(PerkLib.WayOfTheBlood) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 5);
+				else maxOver += Math.round(tou * 5);
+			}
+			if (findPerk(PerkLib.YourPainMyPower) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 5);
+				else maxOver += Math.round(tou * 5);
+			}
+			if (findPerk(PerkLib.MyBloodForBloodPuppies) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 5);
+				else maxOver += Math.round(tou * 5);
+			}
+			return Math.min(19999999,maxOver);
+		}
+		public function minHP():Number {
+			return 0;
 		}
 		protected function maxLust_base():Number {
 			var max:Number = 100;
@@ -590,32 +651,19 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) max += (125 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.AscensionDesires) >= 0) max += perkv1(PerkLib.AscensionDesires) * 10;
 			if (findPerk(PerkLib.UnlockArdor) >= 0) max += level;
 			if (findPerk(PerkLib.UnlockArdor2ndStage) >= 0) max += level;
 			if (findPerk(PerkLib.UnlockArdor3rdStage) >= 0) max += level;
 			if (findPerk(PerkLib.UnlockArdor4thStage) >= 0) max += level;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 2;
+			if (findPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) max += level * 2;
 			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
 			max *= multimax;
 			max = Math.round(max);
 			return max;
-		}
-		protected function maxHP_mult():Number {
-			var maxHP_mult1:Number = 1;
-			maxHP_mult1 += (countCockSocks("green") * 0.02);
-			if (game.player.vehiclesName == "Goblin Mech Alpha") {
-				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.2;
-				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.35;
-				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.5;
-			}
-			if (game.player.vehiclesName == "Goblin Mech Prime") {
-				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.4;
-				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.7;
-				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 1;
-			}
-			return maxHP_mult1;
 		}
 		protected function maxLust_ElementalBondFleshMulti():Number {
 			var multiValue1a:Number = 1;
@@ -631,13 +679,6 @@ public class Creature extends Utils
 		}
 		public function maxLust_mult():Number {
 			return 1;
-		}
-		public function maxHP():Number {
-			var max:Number = Math.round(maxHP_base()*maxHP_mult());
-			return Math.min(9999999,max);
-		}
-		public function minHP():Number {
-			return 0;
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
@@ -2816,7 +2857,11 @@ public class Creature extends Utils
 			Wings.FEATHERED_ALICORN,
 			Wings.NIGHTMARE,
 			Wings.ETHEREAL_WINGS,
-			//WING_TYPE_IMP_LARGE,
+			Wings.DEVILFEATHER,
+			Wings.FAIRY,
+			//Wings.,
+			//Wings.,
+			//Wings.,
 		];
 
 		//PC can fly?
@@ -2879,11 +2924,15 @@ public class Creature extends Utils
 		{
 			return game.player.armorName == "nothing" && game.player.upperGarmentName == "nothing" && game.player.lowerGarmentName == "nothing";
 		}
+		public function isNaked2():Boolean
+		{
+			return game.player.upperGarmentName == "nothing" && game.player.lowerGarmentName == "nothing";
+		}
 
 		//Crit immunity
 		public function isImmuneToCrits():Boolean
 		{
-			if (game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGooType) >= 0)
+			if (game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyFleshConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGooType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0)
 				return true;//dodać inne typy wrogów: żywiołaki, nieumarli/duchy
 			return false;
 		}
@@ -2891,16 +2940,16 @@ public class Creature extends Utils
 		//Eyes of the Hunter
 		public function whenEyesOfTheHunterActivates():Boolean
 		{
-			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyFeralType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGooType) >= 0
-					|| game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyGhostType) >= 0))
-                    || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0 || game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
-                    || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
+			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyFeralType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyFleshConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0
+					|| game.monster.findPerk(PerkLib.EnemyGooType) >= 0 || game.monster.findPerk(PerkLib.EnemyHugeType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyColossalType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGhostType) >= 0)
+					|| game.monster.findPerk(PerkLib.EnemyLargeGroupType) >= 0) || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0 || game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0
+                    || game.monster.findPerk(PerkLib.LightningNature) >= 0)) || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
 		}
 		public function whenGeneralEnemyPerksDisplayed():Boolean
 		{
-			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyFeralType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyGooType) >= 0
-					|| game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGhostType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0))
-                    || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0));
+			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyFeralType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyFleshConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0
+					|| game.monster.findPerk(PerkLib.EnemyLargeGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyGooType) >= 0 || game.monster.findPerk(PerkLib.EnemyHugeType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyColossalType) >= 0 || game.monster.findPerk(PerkLib.EnemyGhostType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0
+					|| game.monster.findPerk(PerkLib.EnemyGhostType) >= 0)) || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0));
 		}
 		public function whenElementalEnemyPerksDisplayed():Boolean
 		{
@@ -2913,8 +2962,8 @@ public class Creature extends Utils
 		{
 			if ((game.player.tailType == Tail.MANTICORE_PUSSYTAIL && game.monster.hasCock()) || (game.player.isAlraune() && game.monster.hasCock()) || (game.player.isAlraune() && game.monster.hasVagina()) || game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.SALAMANDER ||
 			((game.player.gender == 1 || game.player.gender == 2) && (game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.MOUSE || game.player.tailType == Tail.DEMONIC)) || (game.player.isInGoblinMech() && game.player.hasKeyItem("Cum Reservoir") >= 0 && game.monster.hasCock()) ||
-			(game.player.raijuScore() >= 10 && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()) ||
-			(game.player.yukiOnnaScore() >= 14 && game.monster.hasCock() && !game.monster.hasPerk(PerkLib.UniqueNPC) && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()))
+			(game.player.raijuScore() >= 10 && !game.monster.hasPerk(PerkLib.EnemyHugeType) && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.hasPerk(PerkLib.EnemyColossalType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()) ||
+			(game.player.yukiOnnaScore() >= 14 && game.monster.hasCock() && !game.monster.hasPerk(PerkLib.UniqueNPC) && !game.monster.hasPerk(PerkLib.EnemyHugeType) && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.hasPerk(PerkLib.EnemyColossalType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()))
 				return true;
 			return false;
 		}
@@ -2991,27 +3040,18 @@ public class Creature extends Utils
 			else
 				return mf(male, female);
 		}
-		public function looksMale():Boolean {
-			return !looksFemale();
-		}
 		
-		public function looksFemale():Boolean {
-			var tits:Number = biggestTitSize();
-			switch(gender) {
-				case Gender.GENDER_HERM:
-                case Gender.GENDER_NONE:
-                    return ((tits >= 3 || tits == 2 && femininity >= 15 || tits == 1 && femininity >= 40 || femininity >= 65) && (flags[kFLAGS.MALE_OR_FEMALE] == 0 || flags[kFLAGS.MALE_OR_FEMALE] == 2));
-				case Gender.GENDER_MALE:
-                    return ((tits >= 3 && femininity >= 5 || tits == 2 && femininity >= 35 || tits == 1 && femininity >= 65 || femininity >= 95) && (flags[kFLAGS.MALE_OR_FEMALE] == 0 || flags[kFLAGS.MALE_OR_FEMALE] == 2));
-                case Gender.GENDER_FEMALE:
-                    return ((tits > 1 || tits == 1 && femininity >= 15 || femininity >= 45) && (flags[kFLAGS.MALE_OR_FEMALE] == 0 || flags[kFLAGS.MALE_OR_FEMALE] == 2));
-				default: return false;
-			}
-		}
 		//Rewritten!
 		public function mf(male:String, female:String):String
 		{
-			return looksMale() ? male : female;
+			if (hasCock() && hasVagina()) // herm
+				return (biggestTitSize() >= 3 || biggestTitSize() == 2 && femininity >= 15 || biggestTitSize() == 1 && femininity >= 40 || femininity >= 65) ? female : male;
+			if (hasCock()) // male
+				return (biggestTitSize() >= 3 && femininity >= 5 || biggestTitSize() == 2 && femininity >= 35 || biggestTitSize() == 1 && femininity >= 65 || femininity >= 95) ? female : male;
+			if (hasVagina()) // pure female
+				return (biggestTitSize() >= 3 || femininity >= 75) ? female : male;
+			// genderless
+			return (biggestTitSize() >= 3 || biggestTitSize() == 2 && femininity >= 15 || biggestTitSize() == 1 && femininity >= 40 || femininity >= 65) ? female : male;
 		}
 		
 		public function maleFemaleHerm(caps:Boolean = false):String
@@ -4087,7 +4127,7 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.Flexibility) >= 0) chance += 6;
 			if (findPerk(PerkLib.Misdirection) >= 0 && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
 			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq()) chance += 10;
-			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing")) chance += 10;
+			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "berserker armor" || game.player.armorName == "nothing")) chance += 10;
 			if (game.player.armor == game.armors.R_CHANG || game.player.armor == game.armors.R_QIPAO || game.player.armor == game.armors.G_CHANG || game.player.armor == game.armors.G_QIPAO || game.player.armor == game.armors.B_CHANG || game.player.armor == game.armors.B_QIPAO || game.player.armor == game.armors.P_CHANG || game.player.armor == game.armors.P_QIPAO) chance += 5;
 			if (game.player.hasKeyItem("Spring Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 10;
 			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 20;
@@ -4126,6 +4166,7 @@ public class Creature extends Utils
 		public const EVASION_ILLUSION:String = "Illusion";
 		public const EVASION_FLYING:String = "Flying";
 		public const EVASION_CHESHIRE_PHASING:String = "Phasing";
+		public const EVASION_TITANIA_MINIMISE:String = "Minimise";
 
 		/**
 	    * Try to avoid and @return a reason if successfull or null if failed to evade.
@@ -4162,7 +4203,7 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.Flexibility) >= 0 && (roll < 6)) return "Flexibility";
 			if (findPerk(PerkLib.Misdirection) >= 0 && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia") && (roll < 10)) return "Misdirection";
 			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
-			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "nothing") && (roll < 10)) return "Unhindered";
+			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "berserker armor" || game.player.armorName == "nothing") && (roll < 10)) return "Unhindered";
 			if (findPerk(PerkLib.JunglesWanderer) >= 0 && (roll < 35)) return "Jungle's Wanderer";
 			if (hasStatusEffect(StatusEffects.Illusion)) {
 				if (findPerk(PerkLib.KitsuneThyroidGlandFinalForm) >= 0 && roll < 20) return "Illusion";
@@ -4171,6 +4212,7 @@ public class Creature extends Utils
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < flyeavsion)) return "Flying";
 			if (hasStatusEffect(StatusEffects.HurricaneDance) && (roll < 25)) return "Hurricane Dance";
 			if (hasStatusEffect(StatusEffects.BladeDance) && (roll < 30)) return "Blade Dance";
+			if (game.player.cheshireScore() >= 11 && ((!hasStatusEffect(StatusEffects.Minimise) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Minimise";
 			if (game.player.cheshireScore() >= 11 && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Phasing";
 			if (game.player.displacerbeastScore() >= 11 && ((!hasStatusEffect(StatusEffects.Displacement) && (roll < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (roll < 80)))) return "Displacing";
 			return null;
@@ -4180,6 +4222,30 @@ public class Creature extends Utils
 		{
 			return getEvasionReason(useMonster, attackSpeed) != null;
 		}
+
+		//private function evasionCalc():void { //In development
+			//var evasionValue:Number = 0;
+			//evasionValue += Math.min( 40, spe/25);
+			//if (hasPerk(PerkLib.Flexibility)) evasionValue += 5;
+			//if (hasPerk(PerkLib.CatlikeNimbleness)) evasionValue += 5;
+			//if (hasPerk(PerkLib.CatlikeNimblenessEvolved)) evasionValue += 5;
+			//if (hasPerk(PerkLib.CatlikeNimblenessFinalForm)) evasionValue += 5;
+			//if (hasPerk(PerkLib.ElvenSense)) evasionValue += 5;
+			//if (hasPerk(PerkLib.Evade)) evasionValue += 5;
+			//if (hasPerk(PerkLib.ImprovedEvade)) evasionValue += 10;
+			//if (hasPerk(PerkLib.GreaterEvade)) evasionValue += 15;
+			//if (hasPerk(PerkLib.Spectre && hasPerk(PerkLib.Incorporeality) >= 0)) evasionValue += 10;
+			//if (hasPerk(PerkLib.AdvancedAerialCombat) && isFlying()) evasionValue += 5;
+			//if (hasPerk(PerkLib.GreaterAerialCombat) && isFlying()) evasionValue += 15;
+			//if (game.player.hasKeyItem("Spring Boots") >= 0 && tallness < 48 && isBiped()) evasionValue += 10;
+			//if (game.player.hasKeyItem("Rocket Boots") >= 0 && tallness < 48 && isBiped()) evasionValue += 20;
+			//if (game.player.hasKeyItem("Nitro Boots") >= 0 && tallness < 48 && isBiped()) evasionValue += 30;
+			//if (hasPerk(PerkLib.Unhindered) && (armorName == "arcane bangles" || armorName == "practically indecent steel armor"
+			//|| armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps"
+			//|| armorName == "berserker armor" || armorName == "nothing")) evasionValue += 10;
+			//if (hasPerk(PerkLib.Misdirection) && (armorName == "red, high-society bodysuit"
+			//|| armorName == "Fairy Queen Regalia")) evasionValue += 10;
+		//}
 
 		public function get vagorass():IOrifice {
 			return hasVagina() ? vaginas[0] : ass;

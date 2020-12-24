@@ -73,7 +73,7 @@ use namespace CoC;
 					this.armorDef = 46;
 					this.armorMDef = 46;
 					this.bonusHP = 300;
-					this.bonusLust = 80;
+					this.bonusLust = 308;
 					this.level = 68;
 				}
 				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
@@ -83,7 +83,7 @@ use namespace CoC;
 					this.armorDef = 43;
 					this.armorMDef = 43;
 					this.bonusHP = 200;
-					this.bonusLust = 60;
+					this.bonusLust = 274;
 					this.level = 64;
 				}
 				else {
@@ -93,7 +93,7 @@ use namespace CoC;
 					this.armorDef = 40;
 					this.armorMDef = 40;
 					this.bonusHP = 100;
-					this.bonusLust = 40;
+					this.bonusLust = 240;
 					this.level = 60;
 				}
 			}
@@ -104,7 +104,7 @@ use namespace CoC;
 				this.armorDef = 40;
 				this.armorMDef = 40;
 				this.bonusHP = 100;
-				this.bonusLust = 20;
+				this.bonusLust = 240;
 				this.level = 60;
 			}
 			this.a = "the ";

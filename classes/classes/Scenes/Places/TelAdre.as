@@ -1083,31 +1083,82 @@ public function kaibaShopMainMenu():void {
 
 public function kaibaShopMainMenu2():void {
 	menu();
-	//Slot 1 Any one of the following: Undefeated King's Signet, Crown of the Undefeated King, Undefeated King's Destroyer
-	if (flags[kFLAGS.KAIBA_1] == 0) addButton(0, "UnDefKingS", buyItem, jewelries.UNDKINS).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
-	if (flags[kFLAGS.KAIBA_1] == 1) addButton(0, "CroUndefKing", buyItem, headjewelries.CUNDKIN).hint("Crown of the Undefeated King - You can't loose by HP until reaching droping into negative health larger than 5% of max HP + 500(scalable). When below 0 HP PC would gain additional 1% of max HP per turn regeneration effect.");
-	if (flags[kFLAGS.KAIBA_1] == 2) addButton(0, "UnDefKingDest", buyItem, weapons.UDKDEST).hint("Undefeated King's Destroyer - Massive mace weapon that will increase PC parry chance by 20%. Have 20% base chance for stun (3 rounds).");
-	//Slot 2 Any one of the following: Flame Lizard ring, Infernal Mouse ring
-	if (flags[kFLAGS.KAIBA_2] == 0) addButton(1, "FlameLizR", buyItem, jewelries.FLLIRNG).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
-	if (flags[kFLAGS.KAIBA_2] == 1) addButton(1, "InferMouseR", buyItem, jewelries.INMORNG).hint("Infernal Mouse ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
-	//Slot 3 Any one of the following: Ring of deadeye aim, Ring of Ambidexty
-	if (flags[kFLAGS.KAIBA_3] == 0) addButton(2, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
-	if (flags[kFLAGS.KAIBA_3] == 1) addButton(2, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
-	//Slot 4 Any one of the following: 
-	//if (flags[kFLAGS.KAIBA_4] == 0) 
-	//Slot 5 Any one of the following: 
-	//if (flags[kFLAGS.KAIBA_5] == 0) 
-	
-	//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
-	addButton(6, "T.M.Outfit", buyItem, armors.TRMOUTF).hint("Traveling Merchant Outfit -  Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");
-	addButton(7, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak -  Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
-	addButton(8, "B.Armor", buyItem, armors.BERA).hint("Berzerker Armor -  Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
-	addButton(9, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
-	addButton(10, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace - Allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior.");
-    addButton(11, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
-	addButton(12, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
-	addButton(13, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional bolts each time.");
+	if (flags[kFLAGS.KAIBA_SHELFS] == 0) {
+		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
+			addButtonDisabled(0, "UnDefKingS", "You already bought item from Kaiba today.");
+			addButtonDisabled(1, "CroUndefKing", "You already bought item from Kaiba today.");
+			addButtonDisabled(2, "UnDefKingDest", "You already bought item from Kaiba today.");
+			addButtonDisabled(3, "R.DeadeyeAim", "You already bought item from Kaiba today.");
+			addButtonDisabled(4, "R.Ambidexty", "You already bought item from Kaiba today.");
+		}
+		else {
+			addButton(0, "UnDefKingS", buyItem, jewelries.UNDKINS).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
+			addButton(1, "CroUndefKing", buyItem, headjewelries.CUNDKIN).hint("Crown of the Undefeated King - You can't loose by HP until reaching droping into negative health larger than 5% of max HP + 500(scalable). When below 0 HP PC would gain additional 1% of max HP per turn regeneration effect.");
+			addButton(2, "UnDefKingDest", buyItem, weapons.UDKDEST).hint("Undefeated King's Destroyer - Massive mace weapon that will increase PC parry chance by 20%. Have 20% base chance for stun (3 rounds).");
+			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
+			addButton(4, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
+		}
+		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		addButton(13, "-2-", kaibaShopMainMenuPage2);
+	}
+	if (flags[kFLAGS.KAIBA_SHELFS] == 1) {
+		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
+			addButtonDisabled(0, "FlameLizR", "You already bought item from Kaiba today.");
+			addButtonDisabled(1, "InferMouseR", "You already bought item from Kaiba today.");
+			addButtonDisabled(2, "C.S.Necklace", "You already bought item from Kaiba today.");
+			addButtonDisabled(3, "B.Armor", "You already bought item from Kaiba today.");
+			addButtonDisabled(4, "Soul Drill", "You already bought item from Kaiba today.");
+			addButtonDisabled(5, "Hodr's bow", "You already bought item from Kaiba today.");
+			addButtonDisabled(6, "Avelynn", "You already bought item from Kaiba today.");
+		}
+		else {
+			addButton(0, "FlameLizR", buyItem, jewelries.FLLIRNG).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
+			addButton(1, "InferMouseR", buyItem, jewelries.INMORNG).hint("Infernal Mouse ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
+			addButton(2, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace - Allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior.");
+			addButton(3, "B.Armor", buyItem, armors.BERA).hint("Berzerker Armor - Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
+			addButton(4, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
+			addButton(5, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
+			addButton(6, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional bolts each time.");
+		}
+		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		addButton(13, "-3-", kaibaShopMainMenuPage3);
+	}
+	if (flags[kFLAGS.KAIBA_SHELFS] == 2) {
+		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
+			addButtonDisabled(0, "HBHelmet", "You already bought item from Kaiba today.");
+			addButtonDisabled(1, "HBArmor", "You already bought item from Kaiba today.");
+			addButtonDisabled(2, "HBShirt", "You already bought item from Kaiba today.");
+			addButtonDisabled(3, "HBShorts", "You already bought item from Kaiba today.");
+			addButtonDisabled(4, "T.M.Outfit", "You already bought item from Kaiba today.");
+			addButtonDisabled(5, "W.I.Cloak", "You already bought item from Kaiba today.");
+			addButtonDisabled(6, "S.S.Clothing", "You already bought item from Kaiba today.");
+		}
+		else {
+			addButton(0, "HBHelmet", buyItem, headjewelries.HBHELM).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
+			addButton(1, "HBArmor", buyItem, armors.HBARMOR).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
+			//later put her lower body armor part of HB set
+			addButton(2, "HBShirt", buyItem, undergarments.HBSHIRT).hint("HB Shirt - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
+			addButton(3, "HBShorts", buyItem, undergarments.HBSHORT).hint("HB Shorts - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
+			addButton(4, "T.M.Outfit", buyItem, armors.TRMOUTF).hint("Traveling Merchant Outfit - Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");
+			addButton(5, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak - Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
+			addButton(6, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
+		}
+		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		addButton(13, "-1-", kaibaShopMainMenuPage1);
+	}
 	addButton(14, "Leave", telAdreMenu);
+}
+private function kaibaShopMainMenuPage1():void {
+	flags[kFLAGS.KAIBA_SHELFS] = 0;
+	kaibaShopMainMenu2();
+}
+private function kaibaShopMainMenuPage2():void {
+	flags[kFLAGS.KAIBA_SHELFS] = 1;
+	kaibaShopMainMenu2();
+}
+private function kaibaShopMainMenuPage3():void {
+	flags[kFLAGS.KAIBA_SHELFS] = 2;
+	kaibaShopMainMenu2();
 }
 
 public function kaibaShopInside():void {
@@ -1132,6 +1183,7 @@ private function buyItem(odd:ItemType):void{
 private function buyItemYes(odd:ItemType):void {
 	player.gems -= odd.value;// * 3
 	statScreenRefresh();
+	player.createStatusEffect(StatusEffects.KaibaDailyLimit,0,0,0,0);
 	outputText("Kaiba smile wide as you hand the gems to him.\n\n");
 	outputText("\"<i>Thanks for your patronage.</i>\"\n\n");
 	inventory.takeItem(odd, kaibaShopInside);
@@ -1648,7 +1700,7 @@ private function goJogging():void {
 public function meetingLunaFirstTime():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_luna_maid);
-	outputText("As you wander the streets of Tel'Adre, you see a woman being brutally thrown out of a house along with her belongings. The crowd seems to be ignoring her.  Curious, you walk up to her just in time to see her start to cry. She wears what looks like a formal maid dress. Under her white bonnet, the maid sports short, ashen hair. You decide to break the ice and ask her what's going on. By all means she looks human, which is a surprise to you.\n\n");
+	outputText("As you wander the streets of Tel'Adre, you see a woman being brutally thrown out of a house along with her belongings. The crowd seems to be ignoring her.  Curious, you walk up to her just in time to see her start to cry. She wears what looks like a formal maid dress. Under her white bonnet, the maid sports short, ashen hair. You decide to break the ice and ask her what's going on. By all means, she looks human, which is a surprise to you.\n\n");
 	outputText("\"<i>Why, this is terrible... I’m masterless, and out of a job! What am I going to do?</i>\"\n\n");
 	outputText("What did she do to be fired to begin with?\n\n");
 	outputText("\"<i>Master William’s wife is a liar. She didn’t like me around her husband, so she broke his favorite vase and framed me for it.</i>\"\n\n");
@@ -1667,7 +1719,7 @@ public function meetingLunaFirstTimeLeave():void {
 public function meetingLunaFirstTimeHelp():void {
 	clearOutput();
 	outputText("Now that you think about it, life at camp would be infinitely easier if you had a person like her helping around. How about she comes over to live with you at your camp?\n\n");
-	outputText("\"<i>You.. you would hire me? Even after I’ve been kicked out? Oh this is wonderful! Thank you so much!!</i>\"\n\n");
+	outputText("\"<i>You.. you would hire me? Even after I’ve been kicked out? Oh, this is wonderful, thank you so much!!</i>\"\n\n");
 	doNext(meetingLunaCamp);
 }
 public function meetingLunaRepated():void {
@@ -1689,11 +1741,15 @@ public function meetingLunaRepatedYes():void {
 	doNext(meetingLunaCamp);
 }
 public function meetingLunaCamp():void {
-	outputText("The two of you head back to camp. The maid doesn’t comment on the fact you only have a cabin for a house");
+	outputText("The two of you head back to camp. The maid doesn’t comment on the fact you only have a");
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] == 1) outputText(" cabin ");
+	else outputText(" tent ");
+	outputText("for a house");
 	if (camp.companionsCount() > 2) outputText(", let alone the many people camping next to you");
 	outputText(". In fact, she is practically overjoyed.\n\n");
-	outputText("As the two of you reach the middle of the camp, you finally introduce yourself as [name] champion of Ingnam. She swiftly realises she hasn’t presented herself yet and does so with reverence.\n\n");
-	outputText("\"<i>I’ve forgotten to introduce myself, please forgive me. My name is Luna. As you have probably figured out, I am a maid. Please allow me to call you " + player.mf("Master","Mistress") + " [name] from now on, I will serve you to the best of my abilities.</i>\"\n\n");
+	outputText("As the two of you reach the middle of the camp, you finally introduce yourself as [name], champion of Ingnam. She swiftly realizes she hasn’t presented herself yet and does so with reverence.\n\n");
+	outputText("\"<i>I’ve forgotten to introduce myself, please forgive me. My name is Luna and as you have probably figured out, I am a maid. Please allow me to call you " + player.mf("Master","Mistress") + " [name] from now on, I will serve you to the best of my abilities.</i>\"\n\n");
+	outputText("On this, Luna begins running around all over the camp fixing up anything she deems disorganized. Talk about being on point. It would seem that life in the camp is going to be significantly easier now that she handles the menial chores.\n\n");
 	outputText("(<b>Luna has been added to the Followers menu!</b>)\n\n");
 	flags[kFLAGS.LUNA_FOLLOWER] = 4;
 	flags[kFLAGS.LUNA_LVL_UP] = 0;

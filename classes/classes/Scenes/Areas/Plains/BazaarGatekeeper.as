@@ -84,6 +84,29 @@ import classes.internals.*;
 				this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
 				removeStatusEffect(StatusEffects.Fear);
 			}
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug)) {
+				if (!handleConstricted()) return;
+			}
+			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
+				return;
+			}
+			if (hasStatusEffect(StatusEffects.Straddle)) {
+				return;
+			}
+			if (hasStatusEffect(StatusEffects.Dig)) {
+				outputText("\n\nYour opponent is still looking for you as you remain quietly hiding underground, away from view.");
+				addStatusValue(StatusEffects.Dig, 1, -1);
+				if (hasStatusEffect(StatusEffects.Uber)) {
+					outputText(" Due to being out of view you've managed to interrupt his special attack!");
+					removeStatusEffect(StatusEffects.Uber);
+				}
+				return;
+			}
+			if (hasStatusEffect(StatusEffects.OrcaHasWackedFinish)) {
+				outputText("\n\nYour opponent is still stunned from the powerful blow of your tail.");
+				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				return;
+			}
 			if (hasStatusEffect(StatusEffects.Uber)) {
 				scimitarCrossAttack();
 				return;
@@ -127,7 +150,7 @@ import classes.internals.*;
 			this.skinTone = "crimson";
 			this.hairColor = "black";
 			this.hairLength = 8;
-			initStrTouSpeInte(120, 140, 100, 70);
+			initStrTouSpeInte(124, 150, 104, 70);
 			initWisLibSensCor(70, 15, 10, 55);
 			this.weaponName = "dual scimitars";
 			this.weaponVerb="slash";
@@ -138,15 +161,16 @@ import classes.internals.*;
 			this.armorDef = 14;
 			this.armorMDef = 2;
 			this.bonusHP = 1750;
-			this.bonusLust = 40;
+			this.bonusLust = 55;
 			this.lust = 0;
 			this.lustVuln = .15;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 30;
+			this.level = 33;
 			this.additionalXP = 300;
 			this.drop = new WeightedDrop().add(weapons.SCIMITR, 1);
 			this.gems = 300;
 			this.special1 = scimitarSpecial;
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			checkMonster();
 		}
 	}

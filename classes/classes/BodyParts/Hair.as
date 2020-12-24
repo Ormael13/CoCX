@@ -18,6 +18,7 @@ public class Hair extends BodyPart {
 	public static const FAIRY:int 		= 14;
 	public static const CRAZY:int 		= 15;
 	public static const WINDSWEPT:int 	= 16;
+	public static const RATATOSKR:int 	= 17;
 	//public static const SNOWY:int 	= 14;//button 0 on 2nd page of metamorph
 	// Don't forget to add new types in DebugMenu.as list HAIR_TYPE_CONSTANTS
 

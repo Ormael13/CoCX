@@ -11,7 +11,7 @@ import classes.StatusEffects.Combat.CalledShotDebuff;
 public class Helspawn extends Monster
 	{
 
-		override public function doAI():void
+		override protected function performCombatAction():void
 		{
 			var choices:Array = [];
 			choices[choices.length] = helspawnTwinStrikes;
@@ -176,7 +176,7 @@ private function calledShot():void {
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 175;
-			this.bonusLust = 5;
+			this.bonusLust = 118;
 			this.lust = 30;
 			this.lustVuln = .55;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

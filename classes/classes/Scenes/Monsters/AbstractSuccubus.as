@@ -13,20 +13,21 @@ package classes.Scenes.Monsters
 			if (hasStatusEffect(StatusEffects.WhipReady)) {
 				//Blind dodge change
 				if (hasStatusEffect(StatusEffects.Blind)) {
-					outputText(capitalA + short + " swings her whip at you wildly, totally missing due to her blindness!!");
+					outputText(capitalA + short + " swings her " + weaponName + " at you wildly, totally missing due to her blindness!!");
 					return;
 				}
 				outputText("Grinning deviously, the ");
 				if (this.short == "omnibus") outputText("omnibus");
+				else if (this.short == "cow succubus") outputText("cow succubus");
 				else outputText("succubus");
-				outputText(" cracks her whip with expert skill, landing a painful blow on your ");
+				outputText(" cracks her " + weaponName + " with expert skill, landing a painful blow on your ");
 				var temp:int = rand(6);
 				var damage:int;
 				//Whip yo ass!
 				if (temp == 0) {
 					outputText("ass");
 					damage = 4;
-					player.dynStats("lus", 6 + int(player.sens / 20));
+					player.dynStats("lus", 6 + int(player.effectiveSensitivity() / 20));
 				}
 				//Whip yo tits!
 				if (temp == 1) {
@@ -37,7 +38,7 @@ package classes.Scenes.Monsters
 						outputText(" but you feel no pain thanks to your protection");
 						damage = 0;
 					}
-					player.dynStats("lus", 4 + int(player.sens / 15));
+					player.dynStats("lus", 4 + int(player.effectiveSensitivity() / 15));
 				}
 				//Whip yo groin
 				if (temp == 2) {
@@ -107,21 +108,22 @@ package classes.Scenes.Monsters
 				}
 				//Whip yo neck
 				if (temp == 5) {
-					outputText("neck (24)");
+					outputText("neck");
 					damage = 24;
 				}
 				outputText("! ");
-				player.takePhysDamage(damage, true);
+				damage *= 0.1;
+				var damage2:Number = damage * this.weaponAttack;
+				player.takePhysDamage(damage2, true);
 			}
 			else {
 				outputText("The ");
 				if (this.short == "omnibus") outputText("omnibus");
+				else if (this.short == "cow succubus") outputText("cow succubus");
 				else outputText("succubus");
-				outputText(" flicks her wrist, allowing a whip-like cord to slither out from the palm of her clawed hand.  She cracks the whip experimentally, cackling with glee.");
+				outputText(" flicks her wrist, allowing a whip-like cord to slither out from the palm of her clawed hand.  She cracks the " + weaponName + " experimentally, cackling with glee.");
 				createStatusEffect(StatusEffects.WhipReady, 0, 0, 0, 0);
 				this.strStat.core.value += 20;
-				this.weaponName = "whip";
-				this.weaponVerb = "brutal whip-crack";
 			}
 		}
 

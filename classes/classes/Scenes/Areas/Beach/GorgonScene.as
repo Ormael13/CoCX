@@ -16,7 +16,7 @@ public function gorgonEncounter():void {
 	//Create status if needed
 	if(!player.hasStatusEffect(StatusEffects.Naga)) player.createStatusEffect(StatusEffects.Naga,0,0,0,0);
 	clearOutput();
-	if(player.lowerBody == LowerBody.NAGA) {
+	if(player.isNaga()) {
 		//Set 'last fuck as naga'
 		player.changeStatusValue(StatusEffects.Naga,1,1);
 		//Not met as naga before

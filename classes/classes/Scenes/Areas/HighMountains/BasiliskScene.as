@@ -405,7 +405,7 @@ public class BasiliskScene extends BaseContent
 			outputText("After what seems like many hours later, you find with a sense of overwhelming relief you can move one of your little fingers again.  Concentrating hard, you move backwards from there until you can move your hand, your other fingers, your arm, and then, with a creaking finality, you break entirely free of the paralyzing spell.  The first thing you do is wipe the cum off your face and body and urgently wash your mouth out with a nearby spring; but you can feel the creature's warm jizz sloshing deep within you and you know the damage is done.  You woozily put your clothes back on and stagger back towards camp.");
 			//(standard imp cum corruption gain, set lust to 100)
 			dynStats("cor", 1);
-			player.sexReward("cum");
+			player.sexReward("cum","Lips");
 		}
 		//Defeated, Taken Advantage of: harpy
 		private function basiliskAdvantageHarpy():void {
@@ -524,11 +524,11 @@ public class BasiliskScene extends BaseContent
 		
 				outputText("The minotaur holds onto you until he has finished spurting his last into you, before abruptly setting you back down on your frozen feet, pulling his slimy, receding member out of your abused anus and with a satisfied snort, takes his leave.  You feel his cum drooling out of you and down your " + hipDescript() + ", but in your hazy, druggy state the feeling is almost sensual.");
 				//(Addict: 
-				if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) outputText("  You're incredibly frustrated that you can't clench yourself and hold the magical substance deep inside you, so you can savor the wonderful, soft elation it blossoms inside of you for as long as you can.");
+				if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || player.hasPerk(PerkLib.LactaBovineImmunity)) outputText("  You're incredibly frustrated that you can't clench yourself and hold the magical substance deep inside you, so you can savor the wonderful, soft elation it blossoms inside of you for as long as you can.");
 				outputText("\n\n");
 				
 				outputText("Eventually, after another thirty or so minutes of being forced to stand there and savor the cum trickling down your legs, you find with great relief you can begin to move your fingers again. With some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you shake the aching out of your [legs] and re-dress before anything else finds you and woozily begin to make your way back down the mountain, trying to ignore the feeling of ooze dripping out of you.");
-				player.sexReward("cum");
+				player.sexReward("cum","Anal");
 			}
 			//Female: 
 			else {
@@ -580,7 +580,7 @@ public class BasiliskScene extends BaseContent
 		
 			outputText("Eventually, after another thirty or so minutes of being forced to stand there and savor the cum trickling down your legs, you find with great relief you can begin to move your fingers again. With some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you shake the aching out of your knees and redress before anything else finds you and woozily begin to make your way back down the mountain, trying to ignore the feeling of ooze dripping out of you.");
 			//(lose 100 lust, stretch anus according to minotaur, increment mino addiction)*/
-			player.sexReward("cum");
+			player.sexReward("cum","Anal");
 			player.minoCumAddiction(10);
 		}
 		

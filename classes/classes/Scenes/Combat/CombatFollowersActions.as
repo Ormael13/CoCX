@@ -664,6 +664,123 @@ import classes.StatusEffects;
 		public function siegweirdCombatActions():void {
 			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerSiegweird) > 0) {
+				var choice12:Number = rand(20);
+				if (choice12 < 10) outputText("\n\n");
+				if (choice12 >= 10 && choice12 < 14) outputText("\n\n");
+				if (choice12 >= 14 && choice12 < 17) outputText("\n\n");
+				if (choice12 == 17 || choice12 == 18) outputText("\n\n");
+				if (choice12 == 19) outputText("\n\n");
+			}
+			else {
+				outputText("\n\n");
+				player.createStatusEffect(StatusEffects.CombatFollowerSiegweird, 0, 0, 0, 0);
+			}
+		}
+		
+		public function zenjiCombatActions():void {
+			clearOutput();
+			if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 0) {
+				if ((player.HP < player.maxHP() * 0.35) && player.statusEffectv3(StatusEffects.CombatFollowerZenji) < 4 && rand(10) > 1) zenjiCombatActions5();
+				else {
+					var choice13:Number = rand(20);
+					if (choice13 < 10) zenjiCombatActions0();
+					if (choice13 >= 10 && choice13 < 14) zenjiCombatActions1();
+					if (choice13 >= 14 && choice13 < 17) zenjiCombatActions2();
+					if (choice13 == 17 || choice13 == 18) {
+						if (player.lust > player.maxLust() * 0.7) zenjiCombatActions3();
+						else {
+							choice13 = rand(20);
+							if (choice13 < 10) zenjiCombatActions0();
+							if (choice13 >= 10 && choice13 < 14) zenjiCombatActions1();
+							if (choice13 >= 14 && choice13 < 18) zenjiCombatActions2();
+							if (choice13 == 18 || choice13 == 19) zenjiCombatActions4();
+						}
+					}
+					if (choice13 == 19) zenjiCombatActions4();
+				}
+			}
+			else {
+				outputText("Zenji readies his spear, wedging himself between you and your opponent, \"<i>¡Si quieres lastimar [name], tendrás que pasar por mí!</i>\"\n\n");
+				player.addStatusValue(StatusEffects.CombatFollowerZenji, 4, 1);
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Zenji" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			else {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
+		}
+		public function zenjiCombatActions0():void {
+			outputText("Zenji remains fixated on your opponent, ready to deflect their blows.\n\n");
+			player.addStatusValue(StatusEffects.CombatFollowerZenji, 4, 1);
+		}
+		public function zenjiCombatActions1():void {
+			var dmg11:Number = player.statusEffectv1(StatusEffects.CombatFollowerZenji);
+			var weaponZenji:Number = player.statusEffectv2(StatusEffects.CombatFollowerZenji);
+			dmg11 += scalingBonusStrengthCompanion() * 0.5;
+			if (weaponZenji < 51) dmg11 *= (1 + (weaponZenji * 0.03));
+			else if (weaponZenji >= 51 && weaponZenji < 101) dmg11 *= (2.5 + ((weaponZenji - 50) * 0.025));
+			else if (weaponZenji >= 101 && weaponZenji < 151) dmg11 *= (3.75 + ((weaponZenji - 100) * 0.02));
+			else if (weaponZenji >= 151 && weaponZenji < 201) dmg11 *= (4.75 + ((weaponZenji - 150) * 0.015));
+			else dmg11 *= (5.5 + ((weaponZenji - 200) * 0.01));
+			dmg11 = Math.round(dmg11);
+			doDamage(dmg11);
+			outputText("Seeing an opening, Zenji thrusts his spear at " + monster.a + monster.short + ". <b>(<font color=\"#800000\">" + String(dmg11) + "</font>)</b>\n\n");
+		}
+		public function zenjiCombatActions2():void {
+			var dmg12:Number = player.statusEffectv1(StatusEffects.CombatFollowerZenji);
+			var weaponZenji:Number = player.statusEffectv2(StatusEffects.CombatFollowerZenji);
+			dmg12 += scalingBonusStrengthCompanion() * 0.35;
+			if (weaponZenji < 51) dmg12 *= (1 + (weaponZenji * 0.03));
+			else if (weaponZenji >= 51 && weaponZenji < 101) dmg12 *= (2.5 + ((weaponZenji - 50) * 0.025));
+			else if (weaponZenji >= 101 && weaponZenji < 151) dmg12 *= (3.75 + ((weaponZenji - 100) * 0.02));
+			else if (weaponZenji >= 151 && weaponZenji < 201) dmg12 *= (4.75 + ((weaponZenji - 150) * 0.015));
+			else dmg12 *= (5.5 + ((weaponZenji - 200) * 0.01));
+			dmg12 = Math.round(dmg12);
+			doDamage(dmg12);
+			outputText("Zenji charges at " + monster.a + monster.short + " with his spear in a feint before bashing them with his tusks. <b>(<font color=\"#800000\">" + String(dmg12) + "</font>)</b> " + monster.capitalA + monster.short + "");
+			if (monster.hasPerk(PerkLib.Resolute) || rand(4) == 0) outputText(" remains focused despite Zenji’s brutal strikes");
+			else {
+				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+				outputText(" seems disoriented for a moment");
+			}
+			outputText(".\n\n");
+		}
+		public function zenjiCombatActions3():void {
+			outputText("Zenji turns around to you, gripping you by the shoulders and giving you a firm shake. \"<i>Snap out of it [name]! ");
+			if (silly()) outputText("If you keep dis up, no more sex after dis fight! I mean it dis time");
+			else outputText("Remained focused, don’t give in");
+			outputText("!</i>\"\n\n");
+			dynStats("lust", -(player.maxLust() * 0.2));
+		}
+		public function zenjiCombatActions4():void {
+			var dmg13:Number = player.statusEffectv1(StatusEffects.CombatFollowerZenji);
+			var weaponZenji:Number = player.statusEffectv2(StatusEffects.CombatFollowerZenji);
+			dmg13 += scalingBonusStrengthCompanion() * 0.2;
+			if (weaponZenji < 51) dmg13 *= (1 + (weaponZenji * 0.03));
+			else if (weaponZenji >= 51 && weaponZenji < 101) dmg13 *= (2.5 + ((weaponZenji - 50) * 0.025));
+			else if (weaponZenji >= 101 && weaponZenji < 151) dmg13 *= (3.75 + ((weaponZenji - 100) * 0.02));
+			else if (weaponZenji >= 151 && weaponZenji < 201) dmg13 *= (4.75 + ((weaponZenji - 150) * 0.015));
+			else dmg13 *= (5.5 + ((weaponZenji - 200) * 0.01));
+			dmg13 = Math.round(dmg13);
+			doDamage(dmg13);
+			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			outputText("Zenji charges at " + monster.a + monster.short + ", knocking them down and pinning them beneath him with his spear. <b>(<font color=\"#800000\">" + String(dmg13) + "</font>)</b> Zenji has " + monster.a + monster.short + " pinned beneath him. \"<i>And stay down!</i>\" Zenji shouts. " + monster.capitalA + monster.short + " struggles beneath him before finally shaking him off.\n\n");
+		}
+		public function zenjiCombatActions5():void {
+			outputText("Seeing your injuries, Zenji quickly rushes to your side, \"<i>It’s okay [name]... I’m here for you…</i>\" he says, wrapping you within his arms, completely shielding you from your enemies. ");
+			outputText("\"<i>It’s… okay… I won’t let them hurt you… I will endure it all for you so you don’t have to. I’d do anything for you.</i>\" He gently rubs a hand over your wounds, helping you recover slightly.\n\n");
+			HPChange(Math.round(player.maxHP() * .1), true);
+			player.addStatusValue(StatusEffects.CombatFollowerZenji, 3, 1);
+			if (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1) outputText(" Zenji remains weary, but he stands as if he were completely unaffected by the physical trauma he just endured.");
+			else outputText("Zenji seems much worse for wear after protecting you, \"<i>I’m fine.</i>\" he mumbles, but it’s apparent that he’s sustained heavy damage.");
+		}/*
+		
+		public function divaCombatActions():void {
+			clearOutput();
+			if (player.statusEffectv4(StatusEffects.) > 0) {
 				var choice7:Number = rand(20);
 				if (choice7 < 10) outputText("\n\n");
 				if (choice7 >= 10 && choice7 < 14) outputText("\n\n");
@@ -673,8 +790,24 @@ import classes.StatusEffects;
 			}
 			else {
 				outputText("\n\n");
-				player.createStatusEffect(StatusEffects.CombatFollowerSiegweird, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
 			}
 		}
+		
+		public function divaCombatActions():void {
+			clearOutput();
+			if (player.statusEffectv4(StatusEffects.) > 0) {
+				var choice7:Number = rand(20);
+				if (choice7 < 10) outputText("\n\n");
+				if (choice7 >= 10 && choice7 < 14) outputText("\n\n");
+				if (choice7 >= 14 && choice7 < 17) outputText("\n\n");
+				if (choice7 == 17 || choice7 == 18) outputText("\n\n");
+				if (choice7 == 19) outputText("\n\n");
+			}
+			else {
+				outputText("\n\n");
+				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			}
+		}*/
 	}
 }

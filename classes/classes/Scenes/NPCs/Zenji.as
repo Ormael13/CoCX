@@ -81,6 +81,7 @@ use namespace CoC;
 		private function zenjiRegenerate():void {
 			mana -= Math.round(maxMana() * 0.2);
 			var heal:Number = 0;
+			heal += Math.round(maxHP() * 0.35);
 			heal += inteligencescalingbonus();
 			heal += wisdomscalingbonus();
 			if (this.short == "Zenji") outputText("Zenji crouches down for a moment and clutches at his wounds, \"<i>Dis is noting!</i>\" He shouts, \"<i>Ya gotta try harda dan dat!</i>\" And before your eyes, his wounds close as he heals for " + heal + ".");
@@ -117,7 +118,7 @@ use namespace CoC;
 		
 		override protected function performCombatAction():void
 		{
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 8) {
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) {
 				if (this.level > 49) {
 					if ((this.lust > this.maxLust() * .8) || (this.HP < this.maxHP() * .3)) zenjiEnrage();
 					else if (this.HP < this.maxHP() * .4 && mana > maxMana() * 0.2) zenjiRegenerate();
@@ -149,7 +150,7 @@ use namespace CoC;
 					}
 				}
 			}
-			else if (flags[kFLAGS.ZENJI_PROGRESS] == -1 || flags[kFLAGS.ZENJI_PROGRESS] == 5 || flags[kFLAGS.ZENJI_PROGRESS] == 6) {
+			else if (flags[kFLAGS.ZENJI_PROGRESS] == -1 || flags[kFLAGS.ZENJI_PROGRESS] == 5 || flags[kFLAGS.ZENJI_PROGRESS] == 6 || flags[kFLAGS.ZENJI_PROGRESS] == 10) {
 				if (this.lust > this.maxLust() * .8 || this.HP < this.maxHP() * .3) zenjiEnrage();
 				else if (this.HP < this.maxHP() * .4 && mana > maxMana() * 0.2) zenjiRegenerate();
 				else {
@@ -206,21 +207,30 @@ use namespace CoC;
 				this.weaponAttack = 50;
 				this.armorDef = 50;
 				this.armorMDef = 200;
-				if (player.level > 25 && player.level < 150) {
+				this.additionalXP = 125;
+				if (player.level > 25 && player.level < 185) {
 					this.level = player.level;
 					this.strStat.core.value += 29 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.touStat.core.value += 28 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.speStat.core.value += 27 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.intStat.core.value += 25 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 					this.wisStat.core.value += 27 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.weaponAttack += 5 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.armorDef += 5 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.armorMDef += 20 * Math.round((player.level - 20) / 5) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.additionalXP += 25 * Math.round((player.level - 20) / 5);
 				}
-				else if (player.level >= 150) {
-					this.level = 150;
-					this.strStat.core.value += 754 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-					this.touStat.core.value += 728 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-					this.speStat.core.value += 702 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-					this.intStat.core.value += 650 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-					this.wisStat.core.value += 702 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				else if (player.level >= 185) {
+					this.level = 185;
+					this.strStat.core.value += 957 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.touStat.core.value += 924 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.speStat.core.value += 891 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.intStat.core.value += 825 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.wisStat.core.value += 891 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.weaponAttack += 165 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.armorDef += 165 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.armorMDef += 660 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+					this.additionalXP += 825;
 				}
 				else this.level = 25;
 			}
@@ -270,7 +280,7 @@ use namespace CoC;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
-			this.createPerk(PerkLib.MonsterRegeneration, 0.5, 0, 0, 0);
+			this.createPerk(PerkLib.HydraRegeneration, 0.5, 0, 0, 0);
 			this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			if ((flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) && this.level >= 40) this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);

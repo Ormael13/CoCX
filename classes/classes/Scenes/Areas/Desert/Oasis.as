@@ -137,7 +137,7 @@ internal function oasisSexing():void {
 		outputText("\n\n");
 		//Preggers chance!
 		player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 90);
-		player.sexReward("cum");
+		player.sexReward("cum","Vaginal");
 	}
 	//Buttbutt buuuuuttt
 	if(player.gender > 0) outputText("However, the demons are interested in every part of you, not just your crotch.  ");
@@ -156,6 +156,7 @@ internal function oasisSexing():void {
 	}
 	//Newline for oral!
 	outputText("\n\nSoon even your mouth is taken by a demoness lowering her slick honeypot down onto your lips. You lick and suck as she moans like a whore atop your head. It's impossible to count how many times she comes and so you just relax into a rhythm of licking and sucking, interrupted only by your own bone-creaking orgasms as the demonic attentions to the rest of your body drive you over the edge time and time again.");
+	player.sexReward("cum","Lips");
 	//Non-preggers text!
 	if(player.pregnancyIncubation == 0 && player.gender > 1) {
 		//Newline for potential preggers?

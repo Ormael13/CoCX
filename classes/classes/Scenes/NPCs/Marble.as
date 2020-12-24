@@ -103,7 +103,7 @@ public class Marble extends Monster
 			this.armorName = "tough hide";
 			this.armorDef = 10;
 			this.armorMDef = 0;
-			this.bonusLust = 20;
+			this.bonusLust = 84;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 14;
 			this.gems = rand(15) + 50;

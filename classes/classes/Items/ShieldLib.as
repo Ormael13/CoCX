@@ -23,7 +23,7 @@ package classes.Items
 		public const GREATSH:GreatShield = new GreatShield();
 		public const KITE_SH:Shield = new Shield("Kite Sh", "KiteShield", "kite shield", "a kite shield", 14, 700, "An average-sized kite shield.");
 		public const MABRACE:Shield = new Shield("MaBrace", "ManaBracer", "mana bracer", "a mana bracer", 2, 200, "Runed bracers such as this are popular amongst mages that can afford them. This silver bracer augments a mage’s spell power while leaving the hand open to make gestures used in spellcasting.");
-		public const SPI_FOC:Shield = new Shield("Spi Foc", "SpiritFocus", "spirit focus", "a spirit focus", 4, 800, "This small icon with a silk ribbon is inscribed with eldritch runes and reinforces a kitsune's power and magic. (+20% to Fox Fire dmg and lust dmg, +20% to soulskills power)");
+		public const SPI_FOC:Shield = new Shield("Spi Foc", "SpiritFocus", "spirit focus", "a spirit focus", 4, 800, "This small icon with a silk ribbon is inscribed with eldritch runes and reinforces a kitsune's power and magic. (+20% to Fox Fire dmg and lust dmg, +25% to magical soulskills power)");
 		public const TRASBUC:Shield = new Shield("TraSBuc", "TrainSBuckler", "training soul buckler", "a training soul buckler", 3, 300, "A simple rounded shield made of soulmetal used to train soulforce by soul cultivator novices.");
 		public const TOWERSH:Shield = new TowerShield();
 		public const SANCTYN:SanctuaryN = new SanctuaryN();
@@ -42,5 +42,4 @@ package classes.Items
 		{
 		}
 	}
-
 }

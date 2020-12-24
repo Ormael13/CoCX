@@ -51,5 +51,4 @@ package classes.Items.Shields
 			return desc;
 		}
 	}
-
 }

@@ -33,7 +33,7 @@ public class Lethice extends Monster
 			this.armorDef = 36;
 			this.armorMDef = 72;
 			this.bonusHP = 3000;
-			this.bonusLust = 150;
+			this.bonusLust = 280;
 			this.gems = 200 + rand(100);
 			this.additionalXP = 3000;
 			this.level = 50;
@@ -45,6 +45,7 @@ public class Lethice extends Monster
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.drop = new WeightedDrop(weapons.L_WHIP, 1);
 			this.checkMonster();
 		}
@@ -209,7 +210,8 @@ public class Lethice extends Monster
 			outputText(" spray forth a torrent of white flame, burning the shadowy constructs away in the light of your pure, focused fire. In the span of seconds, Lethice’s spell is gone.");
 
 			EngineCore.doNext(SceneLib.combat.combatMenu);
-			game.player.mana -= 30;
+			if (game.player.hasStatusEffect(StatusEffects.BloodMage)) game.player.HP -= 30;
+			else game.player.mana -= 30;
 			outputText("\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
 			SceneLib.combat.spellPerkUnlock();

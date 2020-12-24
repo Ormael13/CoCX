@@ -535,7 +535,7 @@ public function etnaRapeIntro2():void
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 72);
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 8;
-		}/*
+		}
 		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.ETNA_LVL_UP] == 8) {
 			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 78);
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 78);
@@ -547,7 +547,13 @@ public function etnaRapeIntro2():void
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 84);
 			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ETNA_LVL_UP] = 10;
-		}*/
+		}
+		if (flags[kFLAGS.ETNA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.ETNA_LVL_UP] == 10) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 4, 90);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 0, 0, 90);
+			flags[kFLAGS.ETNA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ETNA_LVL_UP] = 11;
+		}
 	}
 	menu();
 	if (player.lust >= 33 && player.hasCock()) addButton(0, "Yes (M)", etnaRapeYesM);
@@ -580,6 +586,7 @@ public function etnaCampMenu():void
 		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to stay in camp.");
 		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Etna about accompaning you.");
 	}
+	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -761,7 +768,7 @@ public function mishapsLunaEtna():void {
 	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.addStatusValue(StatusEffects.CampLunaMishaps2, 1, 1);
 	else player.createStatusEffect(StatusEffects.CampLunaMishaps2, 1, 0, 0, 0);
 	if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);
-	if (player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
+	else player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
 	if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 	doNext(playerMenu);
 }

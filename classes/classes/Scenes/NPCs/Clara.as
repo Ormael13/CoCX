@@ -161,7 +161,7 @@ public class Clara extends Monster
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 12;
 			this.bonusHP = 30;
-			this.bonusLust = 20;
+			this.bonusLust = 82;
 			this.gems = rand(5) + 25;
 			this.drop = NO_DROP;
 			this.tailType = Tail.COW;

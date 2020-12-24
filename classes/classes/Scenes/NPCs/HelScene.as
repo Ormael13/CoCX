@@ -1841,7 +1841,7 @@ private function foxyFluffOutro():void {
 private function telHelToGetOffTheMInoCock():void {
 	clearOutput();
 	outputText("As you lie in your post-coitus afterglow with your lover, a thought makes its way into your mind: Hel just took a load of minotaur cum up the twat.  That's... that's not good. You tell her as much, adding that ");
-	if(player.minotaurAddicted()) outputText("you know firsthand");
+	if(player.minotaurAddicted() || player.hasPerk(PerkLib.LactaBovineImmunity)) outputText("you know firsthand");
 	else outputText("you've heard");
 	outputText(" that their cum is addictive, and you don't want her to get hooked on the stuff.");
 	

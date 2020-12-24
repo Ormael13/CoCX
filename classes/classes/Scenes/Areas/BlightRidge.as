@@ -12,6 +12,8 @@ import classes.CoC;
 import classes.Scenes.Areas.BlightRidge.*;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Monsters.ImpLord;
+import classes.Scenes.Monsters.CorruptedFleshGolemBasic;
+import classes.Scenes.Monsters.CorruptedFleshGolemsBasic;
 
 use namespace CoC;
 	
@@ -24,6 +26,18 @@ use namespace CoC;
 		public function exploreBlightRidge():void {
 			flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE]++;
 			if (player.cor < 66) dynStats("cor", 1);
+			
+			//Discover Blight Ridge
+			if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && rand(3) == 0 && player.level >= 36) {
+				player.explored++;
+				clearOutput();
+				outputText("As you tread through Blight Ridge, you come across a small valley, one you've never noticed before. Where does this place go? How deep does the valley go? Judging by the usual inhabitants of this place, it's not implausible to assume that it would be nothing but more demons up to no good.\n\n");
+				outputText("You pause for a moment, debating if you should go into the valley.\n\n");
+				menu();
+                addButton(1, "Venture forth", findDefiledRavineYes);
+                addButton(3, "Fall back", findDefiledRavineNo);
+				return;
+			}
 			
 			//Dart pistol
 			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
@@ -95,11 +109,10 @@ use namespace CoC;
 			
 			//Build choice list!
 			choice[choice.length] = 0; //Imp enemies
-			choice[choice.length] = 1; //Succubi/Incubu/Omnicubi enemies
-			choice[choice.length] = 2; //Imp Food
-			//choice[choice.length] = 3; //
-			//if (rand(3) == 0) choice[choice.length] = 2; //Find Imp's Food ^^
-			if (rand(4) == 0) choice[choice.length] = 3; //Find nothing! The rand will be removed from this once the Blight Ridge is populated with more encounters.
+			choice[choice.length] = 1; //Succubi (lvl 26)/Incubu (lvl 26)/Omnicubi enemies (lvl 29)
+			choice[choice.length] = 2; //Corrupted Basic Flesh Golem (lvl 35)/Corrupted Basic Flesh Golems(lvl 36)
+			choice[choice.length] = 3; //Imp Food
+			if (rand(4) == 0) choice[choice.length] = 4; //Find nothing! The rand will be removed from this once the Blight Ridge is populated with more encounters.
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
@@ -110,6 +123,9 @@ use namespace CoC;
 					SceneLib.exploration.genericDemonsEncounters1();
 					break;
 				case 2:
+					SceneLib.fleshGolemScenes.introCorruptedBasicFleshGolemS();
+					return;
+				case 3:
 					clearOutput();
 					outputText("You spot something on the ground. Taking a closer look, it's one of those imps food packages. ");
 					inventory.takeItem(consumables.IMPFOOD, camp.returnToCampUseOneHour);
@@ -120,6 +136,18 @@ use namespace CoC;
 					dynStats("lib", .5);
 					doNext(camp.returnToCampUseOneHour);
 			}
+		}
+		
+		public function findDefiledRavineYes():void {
+			outputText("What's the worst that could happen? Treading through the valley, the faint sound of flowing water hits your ears. The sound is quickly followed by the scent of sweat, milk and semen. This is not unlike the usual smells you get in the Blight Ridge, but it's far more condensed and sour here. One step closer to the source.\n\n");
+			outputText("<b>You've discovered the Defiled Ravine!</b>");
+			flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] = 1;
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		
+		public function findDefiledRavineNo():void {
+			outputText("Not everything needs to be your problem anyway. Who knows what could happen if you stick your face into somewhere it doesn't belong.\n\n");
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function partsofDartPistol():void {

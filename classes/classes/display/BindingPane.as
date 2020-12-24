@@ -5,8 +5,6 @@ package classes.display
 
 import coc.view.Block;
 
-import mx.core.ScrollControlBase;
-
 	import fl.containers.ScrollPane;
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;

@@ -21,6 +21,7 @@ public class Izumi extends Monster
 				this.armorDef = 14;
 				this.armorMDef = 10;
 				this.bonusHP = 800;
+				this.bonusLust = 85;
 				this.level = 30;
 				this.additionalXP = 150;
 			}
@@ -31,6 +32,7 @@ public class Izumi extends Monster
 				this.armorDef = 15;
 				this.armorMDef = 11;
 				this.bonusHP = 1000;
+				this.bonusLust = 106;
 				this.level = 36;
 				this.additionalXP = 175;
 			}
@@ -41,6 +43,7 @@ public class Izumi extends Monster
 				this.armorDef = 17;
 				this.armorMDef = 12;
 				this.bonusHP = 1200;
+				this.bonusLust = 127;
 				this.level = 42;
 				this.additionalXP = 200;
 			}
@@ -51,6 +54,7 @@ public class Izumi extends Monster
 				this.armorDef = 18;
 				this.armorMDef = 13;
 				this.bonusHP = 1400;
+				this.bonusLust = 148;
 				this.level = 48;
 				this.additionalXP = 225;
 			}
@@ -61,6 +65,7 @@ public class Izumi extends Monster
 				this.armorDef = 20;
 				this.armorMDef = 14;
 				this.bonusHP = 1600;
+				this.bonusLust = 169;
 				this.level = 54;
 				this.additionalXP = 250;
 			}
@@ -71,6 +76,7 @@ public class Izumi extends Monster
 				this.armorDef = 21;
 				this.armorMDef = 15;
 				this.bonusHP = 1800;
+				this.bonusLust = 190;
 				this.level = 60;
 				this.additionalXP = 275;
 			}
@@ -81,6 +87,7 @@ public class Izumi extends Monster
 				this.armorDef = 23;
 				this.armorMDef = 16;
 				this.bonusHP = 2000;
+				this.bonusLust = 211;
 				this.level = 66;
 				this.additionalXP = 300;
 			}
@@ -91,6 +98,7 @@ public class Izumi extends Monster
 				this.armorDef = 24;
 				this.armorMDef = 17;
 				this.bonusHP = 2200;
+				this.bonusLust = 232;
 				this.level = 72;
 				this.additionalXP = 350;
 			}
@@ -101,6 +109,7 @@ public class Izumi extends Monster
 				this.armorDef = 26;
 				this.armorMDef = 18;
 				this.bonusHP = 2400;
+				this.bonusLust = 253;
 				this.level = 78;
 				this.additionalXP = 400;
 			}
@@ -111,6 +120,7 @@ public class Izumi extends Monster
 				this.armorDef = 28;
 				this.armorMDef = 19;
 				this.bonusHP = 2600;
+				this.bonusLust = 274;
 				this.level = 84;
 				this.additionalXP = 450;
 			}
@@ -121,28 +131,39 @@ public class Izumi extends Monster
 				this.armorDef = 30;
 				this.armorMDef = 20;
 				this.bonusHP = 3000;
+				this.bonusLust = 295;
 				this.level = 90;
 				this.additionalXP = 500;
 			}
+			if (flags[kFLAGS.IZUMI_LVL_UP] == 11) {
+				initStrTouSpeInte(545, 460, 315, 240);
+				initWisLibSensCor(240, 160, 90, 15);
+				this.weaponAttack = 140;
+				this.armorDef = 32;
+				this.armorMDef = 21;
+				this.bonusHP = 3400;
+				this.bonusLust = 316;
+				this.level = 96;
+				this.additionalXP = 550;
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.a = "";
 			this.short = "Izumi";
 			this.imageName = "izumi";
-			this.long = "You're fighting the immense Oni, Izumi.  Standing around 9 feet tall and wielding little more than her fists, she is the picture of strength and power.  She is clad in a scandalous blue and white Kimono, the garment drawing your eyes to her humongous breasts, and her perfectly sculpted thighs.  A curious horns juts from her head, the texture of it almost lost amongst the rock lining the inside of the cave.\n\nA distinctly cocky grin is painted across her face, her undivided attention focused upon you.";
+			this.long = "You're fighting the immense Oni, Izumi.  Standing around 11 feet tall and wielding little more than her fists, she is the picture of strength and power.  She is clad in a scandalous blue and white Kimono, the garment drawing your eyes to her humongous breasts, and her perfectly sculpted thighs.  A curious horns juts from her head, the texture of it almost lost amongst the rock lining the inside of the cave.\n\nA distinctly cocky grin is painted across her face, her undivided attention focused upon you.";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_NORMAL);
-			createBreastRow(Appearance.breastCupInverse("FF")); // The doc mentions her breasts would be around D/DD on a "normal human" so err, winging this shit
+			createBreastRow(Appearance.breastCupInverse("GG")); // The doc mentions her breasts would be around D/DD on a "normal human" so err, winging this shit
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.tallness = 108;
-			this.hips.type = Hips.RATING_AVERAGE;
-			this.butt.type = Butt.RATING_TIGHT;
+			this.tallness = 132;
+			this.hips.type = Hips.RATING_AVERAGE+1;
+			this.butt.type = Butt.RATING_TIGHT+1;
 			this.skinTone = "creamy-white";
 			this.hairColor = "golden";
 			this.hairLength = 25;
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
 			this.armorName = "silken kimono";
-			this.bonusLust = 10;
 			this.lust = 10;
 			this.lustVuln = 0.33;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
@@ -160,6 +181,7 @@ public class Izumi extends Monster
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 9) this.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 10) this.createPerk(PerkLib.MythicalStrength, 0, 0, 0, 0);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 11) this.createPerk(PerkLib.OniMusculature, 0, 0, 0, 0);
 			checkMonster();
 		}
 
@@ -257,6 +279,8 @@ public class Izumi extends Monster
 		{
 			outputText("Quick as a flash, Izumi lashes out with her free hand, aiming for your head.");
 			var damage:int = int((str + 175) - rand(player.tou) - player.armorDef);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) damage += 50;
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) damage += 50;
 			if (player.getEvasionRoll())
 			{
 				outputText("  You deftly dodge under the lightning-quick punch.");
@@ -284,12 +308,16 @@ public class Izumi extends Monster
 			if (player.cor >= 50 || player.lib >= 50 || player.sens >= 50)
 			{
 				outputText("You fall backwards and stagger away, already feeling a flush of warmth colouring your cheeks, trying to drag your mind back to the fight and away from... other things.");
-				player.dynStats("lus", 10 + player.lib / 10);
+				if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.dynStats("lus", 30 + player.lib / 10);
+				else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.dynStats("lus", 20 + player.lib / 10);
+				else player.dynStats("lus", 10 + player.lib / 10);
 			}
 			else
 			{
 				outputText("You furrow a brow at the Oni's ineffectual attack, not entirely sure if she was intending to hurt you or turn you on.  Her thighs did look rather tantalizing though...");
-				player.dynStats("lus", 5 + player.lib / 20);
+				if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.dynStats("lus", 15 + player.lib / 20);
+				else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.dynStats("lus", 10 + player.lib / 20);
+				else player.dynStats("lus", 5 + player.lib / 20);
 			}
 		}
 		
@@ -361,6 +389,8 @@ public class Izumi extends Monster
 			outputText("The hit is extreme enough to leave you dazed for a moment, splayed out across the floor.  When you rouse yourself back to full consciousness a few seconds later, the cave is still echoing with the sound of the impact, a testament to the strength of the Oni - and your resilience.");
 			
 			var damage:int = int ((str + 225) - rand(player.tou) - player.armorDef);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) damage += 100;
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) damage += 100;
 			player.takePhysDamage(damage, true);
 		}
 		
@@ -430,7 +460,9 @@ public class Izumi extends Monster
 			outputText("first into Izumi - specifically, into her chest.  Shocked by suddenly having your face rammed into the pillowy soft expanse of Izumi’s bust, you rear back only to be slammed straight back into the mountainous expanse by Izumi’s arm.");
 			
 			player.createStatusEffect(StatusEffects.Titsmother, 0, 0, 0, 0);
-			player.dynStats("lus", (player.lib / 15) + 5 + rand(5));
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.dynStats("lus", (player.lib / 15) + 15 + rand(15));
+			else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.dynStats("lus", (player.lib / 15) + 10 + rand(10));
+			else player.dynStats("lus", (player.lib / 15) + 5 + rand(5));
 		}
 		
 		// Remove the effect post-combat

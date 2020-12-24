@@ -123,7 +123,7 @@ public class GooArmor extends GooGirl
 			this.armorDef = 60;
 			this.armorMDef = 5;
 			this.bonusHP = 500;
-			this.bonusLust = 20;
+			this.bonusLust = 155;
 			this.lustVuln = .35;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 30;

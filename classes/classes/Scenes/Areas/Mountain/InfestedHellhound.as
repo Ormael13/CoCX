@@ -128,7 +128,7 @@ import classes.internals.*;
 			this.armorName = "thick fur";
 			this.armorDef = 7;
 			this.armorMDef = 1;
-			this.bonusLust = 10;
+			this.bonusLust = 125;
 			this.lust = 50;
 			this.lustVuln = 0.87;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;

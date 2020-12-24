@@ -43,7 +43,11 @@ public class Isabella extends Monster
 				else damage = Math.round((weaponAttack + str + 20) - rand(player.tou + player.armorDef));
 				if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8) damage *= 0.2;
 				if (wrath >= 50) {
-					if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8 && wrath >= 200) {
+					if (flags[kFLAGS.ISABELLA_LVL_UP] >= 12 && wrath >= 300) {
+						wrath -= 300;
+						damage *= 5;
+					}
+					else if (flags[kFLAGS.ISABELLA_LVL_UP] >= 8 && wrath >= 200) {
 						wrath -= 200;
 						damage *= 4;
 					}
@@ -221,6 +225,7 @@ public class Isabella extends Monster
 				this.armorDef = 16;
 				this.armorMDef = 4;
 				this.bonusHP = 600;
+				this.bonusLust = 109;
 				this.level = 20;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 1) {
@@ -230,6 +235,7 @@ public class Isabella extends Monster
 				this.armorDef = 24;
 				this.armorMDef = 6;
 				this.bonusHP = 800;
+				this.bonusLust = 126;
 				this.level = 26;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 2) {
@@ -239,6 +245,7 @@ public class Isabella extends Monster
 				this.armorDef = 32;
 				this.armorMDef = 8;
 				this.bonusHP = 1000;
+				this.bonusLust = 147;
 				this.level = 32;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 3) {
@@ -248,6 +255,7 @@ public class Isabella extends Monster
 				this.armorDef = 40;
 				this.armorMDef = 10;
 				this.bonusHP = 1200;
+				this.bonusLust = 168;
 				this.level = 38;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 4) {
@@ -257,6 +265,7 @@ public class Isabella extends Monster
 				this.armorDef = 48;
 				this.armorMDef = 12;
 				this.bonusHP = 1400;
+				this.bonusLust = 189;
 				this.level = 44;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 5) {
@@ -266,6 +275,7 @@ public class Isabella extends Monster
 				this.armorDef = 54;
 				this.armorMDef = 14;
 				this.bonusHP = 1600;
+				this.bonusLust = 210;
 				this.level = 50;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 6) {
@@ -275,6 +285,7 @@ public class Isabella extends Monster
 				this.armorDef = 62;
 				this.armorMDef = 16;
 				this.bonusHP = 1800;
+				this.bonusLust = 231;
 				this.level = 56;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 7) {
@@ -284,6 +295,7 @@ public class Isabella extends Monster
 				this.armorDef = 70;
 				this.armorMDef = 18;
 				this.bonusHP = 2000;
+				this.bonusLust = 252;
 				this.level = 62;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 8) {
@@ -293,6 +305,7 @@ public class Isabella extends Monster
 				this.armorDef = 78;
 				this.armorMDef = 20;
 				this.bonusHP = 2200;
+				this.bonusLust = 273;
 				this.level = 68;
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] == 9) {
@@ -302,14 +315,54 @@ public class Isabella extends Monster
 				this.armorDef = 86;
 				this.armorMDef = 22;
 				this.bonusHP = 2400;
+				this.bonusLust = 294;
 				this.level = 74;
 			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 10) {
+				initStrTouSpeInte(280, 390, 220, 160);
+				initWisLibSensCor(160, 160, 75, 40);
+				this.weaponAttack = 48;
+				this.armorDef = 94;
+				this.armorMDef = 24;
+				this.bonusHP = 2600;
+				this.bonusLust = 315;
+				this.level = 80;
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 11) {
+				initStrTouSpeInte(300, 420, 235, 170);
+				initWisLibSensCor(170, 170, 80, 40);
+				this.weaponAttack = 51;
+				this.armorDef = 102;
+				this.armorMDef = 26;
+				this.bonusHP = 2800;
+				this.bonusLust = 336;
+				this.level = 86;
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 12) {
+				initStrTouSpeInte(320, 450, 250, 180);
+				initWisLibSensCor(180, 180, 85, 40);
+				this.weaponAttack = 54;
+				this.armorDef = 110;
+				this.armorMDef = 28;
+				this.bonusHP = 3000;
+				this.bonusLust = 357;
+				this.level = 92;
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] == 13) {
+				initStrTouSpeInte(340, 480, 265, 190);
+				initWisLibSensCor(190, 190, 90, 40);
+				this.weaponAttack = 57;
+				this.armorDef = 118;
+				this.armorMDef = 30;
+				this.bonusHP = 3200;
+				this.bonusLust = 378;
+				this.level = 98;
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.weaponName = "giant shield";
 			this.weaponVerb="smash";
 			this.armorName = "giant shield";
 			this.armorPerk = "";
 			this.armorValue = 70;
-			this.bonusLust = 20;
 			this.lust = 30;
 			this.lustVuln = .35;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
@@ -346,6 +399,11 @@ public class Isabella extends Monster
 				this.createPerk(PerkLib.AdvancedTranquilness, 0, 0, 0, 0)
 			}
 			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 11) this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 12) {
+				this.createPerk(PerkLib.EpicLifeline, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToSuperiorTranquilness, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 13) this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

@@ -18,6 +18,7 @@ import classes.Scenes.Dungeons.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao;
 import classes.lists.Gender;
+import classes.display.SpriteDb;
 
 import coc.view.CoCButton;
 import coc.view.ButtonDataList;
@@ -122,8 +123,17 @@ public class Camp extends NPCAwareContent {
 	public function returnToCampUseEightHours():void {
 		returnToCamp(8);
 	} //Replacement for event number 16;
+	public function returnToCampUseTenHours():void {
+		returnToCamp(10);
+	}
 	public function returnToCampUseTwelveHours():void {
 		returnToCamp(12);
+	}
+	public function returnToCampUseFourteenHours():void {
+		returnToCamp(14);
+	}
+	public function returnToCampUseSixteenHours():void {
+		returnToCamp(16);
 	}
 
 //  SLEEP_WITH:int = 701;
@@ -595,6 +605,18 @@ public class Camp extends NPCAwareContent {
 			hideMenus();
 			return;
 		}
+		//Zenji freaks out about jojo
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && ZenjiScenes.ZenjiMarried == false && campCorruptJojo() && rand(4) == 0) {
+			finter.zenjiFreaksOverJojo();
+			hideMenus();
+			return;
+		}
+		//Zenji freaks out about corrupted celess
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && CelessScene.instance.isCorrupt && rand(4) == 0) {
+			finter.zenjiFreaksOverCorruptCeless();
+			hideMenus();
+			return;
+		}
 		//Izma/Marble freakout - marble moves in
 		if (flags[kFLAGS.IZMA_MARBLE_FREAKOUT_STATUS] == 1) {
 			izmaScene.newMarbleMeetsIzma();
@@ -964,7 +986,7 @@ public class Camp extends NPCAwareContent {
 		}
 		addButton(12, "Wait", doWaitMenu).hint("Wait for one to eigth hours. Or until the night comes.");
 		if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to eight hours. Or until fully healed / night comes.");
-		if((isNightTime && !canExploreAtNight) || (!isNightTime && canExploreAtNight)) {
+		if(((model.time.hours <= 5 || model.time.hours >= 21) && !canExploreAtNight) || (!isNightTime && canExploreAtNight)) {
 			addButton(12, "Sleep", doSleep).hint("Turn yourself in for the night.");
 			if(isAWerewolf && flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
 				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
@@ -1134,6 +1156,7 @@ public class Camp extends NPCAwareContent {
 		//if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
 		//if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 		//if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) counter++;
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9 || flags[kFLAGS.ZENJI_PROGRESS] == 11) counter++;
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) counter++;
 		if (flags[kFLAGS.MITZI_RECRUITED] >= 4) counter++;
 		if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
@@ -1164,6 +1187,7 @@ public class Camp extends NPCAwareContent {
 		if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
 		if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
+		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 		if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
 		//if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7) counter++;
@@ -1515,45 +1539,53 @@ public class Camp extends NPCAwareContent {
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (slavesCount() > 0 && rand(5) == 0) outputText("Zenji is keeping a close eye on some of your more corrupt camp members, ensuring that they don’t cause any harm.");
+					else if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 998700 && rand(5) == 0) outputText("Zenji is around your [camp], it’s impossible to miss him as he strokes his length as cascades of cum leak from his erection.");
+					else if (ZenjiScenes.Z1stKid != "" && rand(5) == 0) {
+						if (rand(2) == 0) outputText("Zenji is at his bedroll, playing around with "+(flags[kFLAGS.ZENJI_KIDS] == 1 ? ""+ZenjiScenes.Z1stKid+"":"some of the children you've made")+".");
+						else outputText("Zenji is around your [camp], he remains vigilant, surveying the area for danger atop a tree.");
+					}
 					else {
 						var z:int = rand(7);
 						switch (z) {
 							case 0:
-								outputText("Zenji is around your camp, he remains vigilant, surveying the area for danger atop a tree.");
+								outputText("Zenji is around your [camp], he remains vigilant, surveying the area for danger atop a tree.");
 								break;
 							case 1:
-								outputText("Zenji is around your camp, you see him doing a routine of stretches and working out.");
+								outputText("Zenji is around your [camp], you see him doing a routine of stretches and working out.");
 								break;
 							case 2:
-								outputText("Zenji is around your camp, he is looking at you with intent almost as if you were his child.");
+								outputText("Zenji is around your [camp], he is looking at you with intent almost as if you were his child.");
 								break;
 							case 3:
-								outputText("Zenji is around your camp, he is eyeing some of your followers warily, almost as if he doesn’t trust them.");
+								outputText("Zenji is around your [camp], he is eyeing some of your followers warily, almost as if he doesn’t trust them.");
 								break;
 							case 4:
-								outputText("Zenji is around your camp, his ears twitch attentively to any signs of danger.");
+								outputText("Zenji is around your [camp], his ears twitch attentively to any signs of danger.");
 								break;
 							case 5:
-								outputText("Zenji is around your camp, he’s gently stroking the brush of his tail, running his fingers through them almost worriedly as he surveys his surroundings.");
+								outputText("Zenji is around your [camp], he’s gently stroking the brush of his tail, running his fingers through them almost worriedly as he surveys his surroundings.");
 								break;
 							case 6:
-								outputText("Zenji is around your camp, he appears to be eating some cooked meat.");
+								outputText("Zenji is around your [camp], he appears to be eating some cooked meat.");
 								break;
 						}
 					}
 				}
 				else {
-					if (rand(4) == 0) outputText("Zenji is around your camp, he gives a small yawn before shaking himself awake.");
+					if (ZenjiScenes.Z1stKid != "" && rand(5) == 0) outputText("Zenji is currently lying down on his bedroll, with "+(flags[kFLAGS.ZENJI_KIDS] == 1 ? ""+ZenjiScenes.Z1stKid+"":"one of the children you've made")+" sleeping atop his torso, as Zenji gently strokes their head.");
 					else {
-						if (rand(3) == 0) outputText("Zenji is around your camp, it looks like he’s polishing his tusks and brushing his teeth with something.");
+						if (rand(4) == 0) outputText("Zenji is around your [camp], he gives a small yawn before shaking himself awake.");
 						else {
-							if (rand(2) == 0) outputText("Zenji is around your camp, he is coating his fur in some ashes as he grooms himself.");
-							else outputText("With how dark it is, Zenji is keeping much closer to you, making sure that you’re safe. His eyes never seem to stray from you.");
+							if (rand(3) == 0) outputText("Zenji is around your [camp], it looks like he’s polishing his tusks and brushing his teeth with something.");
+							else {
+								if (rand(2) == 0) outputText("Zenji is around your [camp], he is coating his fur in some ashes as he grooms himself.");
+								else outputText("With how dark it is, Zenji is keeping much closer to you, making sure that you’re safe. His eyes never seem to stray from you.");
+							}
 						}
 					}
 				}
 				outputText("\n\n");
-				buttons.add("Zenji", SceneLib.zenjiScene.loverZenjiMainCampMenu).hint("Visit Zenji the troll.");
+				buttons.add("Zenji", SceneLib.zenjiScene.loverZenjiMainCampMenu2).hint("Visit Zenji the troll.").disableIf(player.statusEffectv1(StatusEffects.CampLunaMishaps3) > 0, "Zenji is still unconscious, his steady breaths assure you he’s doing fine..");
 			}
 			//Nieve (jako, ze jest sezonowym camp member powinna byc na koncu listy...chyba, ze zrobie cos w stylu utworzenia mini lodowej jaskini dla niej)
 			if (flags[kFLAGS.NIEVE_STAGE] == 5) {
@@ -1669,7 +1701,7 @@ public class Camp extends NPCAwareContent {
 			}
 			//Siegweird
 			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) {
-				outputText("The regular pensive 'Mmmmmm' by the campfire and the delicious smell of soup reminds you that Siegweird the paladin is now residing in your [camp].\n\n");
+				outputText("Siegweird is in your [camp], his armor set to the side while he reads a book.\n\n");
 				buttons.add("Siegweird", SceneLib.siegweirdFollower.siegweirdMainCampMenu).hint("Check up on Siegweird.");
 			}
 			//Ember
@@ -1723,7 +1755,8 @@ public class Camp extends NPCAwareContent {
 				else outputText(", though she probably wander somewhere near [camp] looking for more ingredients to make her potions.");
 				outputText(" Next to it stands a small chest with her personal stuff.\n\n");
 				buttons.add("Evangeline", EvangelineF.meetEvangeline).hint("Visit Evangeline.");
-			} else if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1) {
+			}
+			else if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1) {
 				/*if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1)*/
 				outputText("Evangeline isn't in the [camp] as she went to buy some items. She should be out no longer than a few hours.\n\n");
 				//if () outputText("Evangeline is busy training now. She should be done with it in a few hours.\n\n");
@@ -1743,25 +1776,25 @@ public class Camp extends NPCAwareContent {
 				outputText("Neisa is hanging by a tree next to the [camp] practicing her swordplay on a makeshift dummy for the next expedition.\n\n");
 				buttons.add("Neisa", SceneLib.neisaFollower.neisaCampMenu).hint("Visit Neisa the shield maiden.");
 			}
-		//Zenji folower
-		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) {
-			if (model.time.hours >= 7 && model.time.hours <= 18) {
-				if (rand(3) == 0) outputText("Zenji is around your camp, you see him currently relaxing atop a tree.");
-				else {
-					if (rand(2) == 0) outputText("Zenji is around your camp, you see him doing a routine of stretches.");
-					else outputText("Zenji is around your camp, you see him doing some push-ups.");
+			//Zenji folower
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) {
+				if (model.time.hours >= 7 && model.time.hours <= 18) {
+					if (rand(3) == 0) outputText("Zenji is around your [camp], you see him currently relaxing atop a tree.");
+					else {
+						if (rand(2) == 0) outputText("Zenji is around your [camp], you see him doing a routine of stretches.");
+						else outputText("Zenji is around your [camp], you see him doing some push-ups.");
+					}
 				}
-			}
-			else {
-				if (rand(3) == 0) outputText("Zenji is around your camp, you see him resting on his bedroll.");
 				else {
-					if (rand(2) == 0) outputText("Zenji is around your camp, he is coating his fur in some ashes as he grooms himself.");
-					else outputText("Zenji is around your camp, it looks like he’s polishing his tusks and brushing his teeth with something.");
+					if (rand(3) == 0) outputText("Zenji is around your [camp], you see him resting on his bedroll.");
+					else {
+						if (rand(2) == 0) outputText("Zenji is around your [camp], he is coating his fur in some ashes as he grooms himself.");
+						else outputText("Zenji is around your [camp], it looks like he’s polishing his tusks and brushing his teeth with something.");
+					}
 				}
+				outputText("\n\n");
+				buttons.add("Zenji", SceneLib.zenjiScene.followerZenjiMainCampMenu).hint("Visit Zenji the troll.");
 			}
-			outputText("\n\n");
-			buttons.add("Zenji", SceneLib.zenjiScene.followerZenjiMainCampMenu).hint("Visit Zenji the troll.");
-		}
 			//Helspawn
 			if (helspawnFollower()) {
 				buttons.add(flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);
@@ -1785,7 +1818,8 @@ public class Camp extends NPCAwareContent {
 				} else outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work on the silken equipment you've commissioned him to craft.\n\n");
 				if (flags[kFLAGS.MITZI_RECRUITED] == 2) outputText("Mitzi is laying on a cot in Rathazul's lab. A deep blush is present her face and she pants heavily, constantly fading in and out of consciousness.\n\n");
 				buttons.add("Rathazul", SceneLib.rathazul.returnToRathazulMenu).hint("Visit with Rathazul to see what alchemical supplies and services he has available at the moment.");
-			} else {
+			}
+			else {
 				if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1) {
 					outputText("There is a note on your ");
 					if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("bed inside your cabin.");
@@ -1965,7 +1999,8 @@ public class Camp extends NPCAwareContent {
 			//addButton(2, "Build Cabin(O)", campUpgrades.buildCampMembersCabinsMenu).hint("Work on your camp members cabins.");
 			addButton(5, "Build Misc", campUpgrades.buildmisc1Menu).hint("Build other structures than walls or cabins for your [camp].");
 			//addButton(6, "Build Misc(O)", campUpgrades.).hint("Other structures than walls or cabins for your camp.");
-		} else {
+		}
+		else {
 			addButtonDisabled(0, "Build Wall", "Req. Carpenter's Toolbox.");
 			//addButtonDisabled(2, "Build Cabin(O)", "Req. Carpenter's Toolbox.");
 			addButtonDisabled(5, "Build Misc", "Req. Carpenter's Toolbox.");
@@ -1982,7 +2017,6 @@ public class Camp extends NPCAwareContent {
 		else addButtonDisabled(0, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
 		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(1, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
 		else addButtonDisabled(1, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
-		addButton(13, "WiPButton", strtouspeintwislibsenCalculation1ipol).hint("Taka a Hint (wip tooltip)");
 		addButton(14, "Back", campActions);
 	}
 
@@ -2005,19 +2039,19 @@ public class Camp extends NPCAwareContent {
 				.disableIf(player.itemCount(CoC.instance.consumables.HEALHERB) == 0, "You lack the ingrediants to craft this item.\n\nHealing herbs currently owned "+player.itemCount(CoC.instance.consumables.HEALHERB)+"");
 		//Energy drink
 		addButton(1, "Energy drink", HerbalismCraftItem,CoC.instance.consumables.MOONGRASS, "moon grass", PotionType.ENERGYDRINK).hint("Craft a Energy drink using moon grass.\n\nMoon grass currently owned "+player.itemCount(CoC.instance.consumables.MOONGRASS)+"");
-		if (player.herbalismLevel < 3) button(1).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 3");
+		if (player.herbalismLevel < 2) button(1).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 2");
 		if (player.itemCount(CoC.instance.consumables.MOONGRASS) == 0) button(1).disable("You lack the ingrediants to craft this item. \n\nMoon grass currently owned "+player.itemCount(CoC.instance.consumables.MOONGRASS)+"");
 		//Cure
 		addButton(2, "Cure", HerbalismCraftItem,CoC.instance.consumables.SNAKEBANE, "snakebane flower", PotionType.CURE).hint("Craft a Cure using snakebane flower.\n\nSnakebane flower currently owned "+player.itemCount(CoC.instance.consumables.SNAKEBANE)+"");
-		if (player.herbalismLevel < 5) button(2).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 5");
+		if (player.herbalismLevel < 4) button(2).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 4");
 		if (player.itemCount(CoC.instance.consumables.SNAKEBANE) == 0) button(2).disable("You lack the ingrediants to craft this item. \n\nSnakebane flower currently owned "+player.itemCount(CoC.instance.consumables.SNAKEBANE)+"");
 		//Painkiller
 		addButton(3, "Painkiller", HerbalismCraftItem,CoC.instance.consumables.IRONWEED, "ironweed", PotionType.PAINKILLER).hint("Craft a Painkiller using ironweed.\n\nIronweed currently owned "+player.itemCount(CoC.instance.consumables.IRONWEED)+"");
-		if (player.herbalismLevel < 10) button(3).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
+		if (player.herbalismLevel < 6) button(3).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 6");
 		if (player.itemCount(CoC.instance.consumables.IRONWEED) == 0) button(3).disable("You lack the ingrediants to craft this item. \n\nIronweed currently owned "+player.itemCount(CoC.instance.consumables.IRONWEED)+"");
 		//Stimulant
 		addButton(4, "Stimulant", HerbalismCraftItem,CoC.instance.consumables.BLADEFERN, "blade ferns", PotionType.STIMULANT).hint("Craft a Stimulant using a handfull of blade ferns.\n\nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
-		if (player.herbalismLevel < 10) button(4).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
+		if (player.herbalismLevel < 8) button(4).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 8");
 		if (player.itemCount(CoC.instance.consumables.BLADEFERN) == 0) button(4).disable("You lack the ingrediants to craft this item. \n\nBlade ferns currently owned "+player.itemCount(CoC.instance.consumables.BLADEFERN)+"");
 		//Perfume
 		addButton(5, "Perfume", HerbalismCraftItem,CoC.instance.consumables.RAUNENECT, "alraune nectar", PotionType.PERFUME).hint("Craft a Perfume using Alraune nectar.\n\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
@@ -2045,9 +2079,10 @@ public class Camp extends NPCAwareContent {
 			outputText("Your natural knowledge of herbalism allowed you two craft two additionnal "+CraftingResult.name+".");
 		}
 		player.destroyItems(ItemID, 1);
-		player.herbXP(20+player.level);
-		if (player.hasPerk(PerkLib.PlantKnowledge)) player.herbXP(20+player.level);
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) player.herbXP(20+player.level);
+		var HE:Number = 20 + player.level;
+		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE * 2;
+		player.herbXP(HE);
 		doNext(HerbalismMenu);
 	}
 
@@ -2082,12 +2117,6 @@ public class Camp extends NPCAwareContent {
 		player.destroyItems(consumables.MG_SFRP, 10);
 		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
 	}
-	private function strtouspeintwislibsenCalculation1ipol():void {
-		clearOutput();
-		outputText("Placeholder for text on how PC reflect on effects of lvl up perks.");
-		player.strtouspeintwislibsenCalculation1();
-		doNext(campMiscActions);
-	}
 
 private function SparrableNPCsMenu():void {
 	clearOutput();
@@ -2095,11 +2124,11 @@ private function SparrableNPCsMenu():void {
 	if (player.hasPerk(PerkLib.BasicLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_1]);
 		else outputText(", (no combat companion)");
-	}/*
+	}
 	if (player.hasPerk(PerkLib.IntermediateLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_2]);
 		else outputText(", (no combat companion)");
-	}
+	}/*
 	if (player.hasPerk(PerkLib.AdvancedLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_3] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_3]);
 		else outputText(", (no combat companion)");
@@ -2762,6 +2791,40 @@ private function SparrableNPCsMenu():void {
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Arian" && arianScene.arianFollower()) {
 				arianScene.sleepWithArian();
 				return;
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Zenji" && flags[kFLAGS.ZENJI_PROGRESS] == 11) {
+				spriteSelect(SpriteDb.s_zenji);
+				if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) {
+					outputText("You approach Zenji, ready to call it a day and spend the rest of your night with him in your cabin.\n\n");
+					outputText("As you approach him, you ask if he wouldn’t mind spending the night with you as well. Zenji caresses your cheek with his soft and fuzzy hand, \"<i>Of course, [name]. If dat is ya request, den who would I be ta deny it?</i>\" His hand slides down to your shoulder, giving it a gentle squeeze before letting you go.\n\n");
+					outputText("You grab onto Zenji’s hand, to which he responds by giving your palm a gentle squeeze. After a moment of holding his hand you realize what you were about to do and lead him to your cabin. Breaking the hand hold, he opens the door for you, letting you in first as you guide him to your bedroom.\n\n");
+					outputText("You take off your [armor], leaving you "+(player.isNaked2() ? "completely naked":"left in your underwear")+", Zenji strips off his loincloth, getting comfortable with you as well. It doesn't take long before he begins sporting an erection, you consider for a moment if you want to have sex with him before bed.");
+					menu();
+					if (player.hasVagina()) addButton(1, "Get Penetrated", curry(SceneLib.zenjiScene.loverZenjiSleepWithGetPenetrated, timeQ));
+					else addButtonDisabled(1, "Get Penetrated", "You need a vagina for this scene.");
+					addButton(2,"Catch Anal", curry(SceneLib.zenjiScene.loverZenjiSleepWithCatchAnal, timeQ));
+					addButton(3,"No Sex", curry(SceneLib.zenjiScene.loverZenjiSleepWithNoSex, timeQ));
+				}
+				else {
+					outputText("You approach Zenji, ready to call it a day, and spend the rest of the night with him.\n\n");
+					outputText("As you approach, you ask him if he has any room in his bedroll for you. Zenji gives a wary glance around the camp, \"<i>Alright, [name], I will watch over you tonight, but I don’ wanna do anyting else. It doesn't feel safe letting my guard down when it’s so late, especially out in de open.</i>\"\n\n");
+					outputText("You sigh, you suppose that if you had somewhere safe to sleep in during the night he’d be more open to doing something with you. At least it’s better than sleeping alone.\n\n");
+					outputText("You curl up with Zenji in his sleeping roll, planning on sleeping for " + num2Text(timeQ) + " hours.");
+					if (player.tailType != Tail.NONE) outputText(" As you lie beside him, you feel his tail coil around you, you reflexively bring your [tail] to tangle with his, the two of you locking tails each other.");
+					else outputText(" As you lie beside him, you can feel his tail coil around you, protectively stroking your [legs].");
+					if (player.tailType == Tail.FOX) outputText(" You hate to admit it, but Zenji’s tail just might almost kind of rival yours in terms of how soft and cuddly it is.");
+					outputText("\n\nHe pulls you closer to his fuzzy body, \"<i>Good night, [name].</i>\"\n\n");
+					if (silly() && rand(5) == 0) {
+						outputText("You are jolted awake by a strange sound in the middle of the night. Fear overwhelms you for a moment as you survey your surroundings, but your cabin is empty. You remain wary for a moment, not willing to rest easy just yet.\n\n");
+						outputText("You nearly jump by the faint sound of groaning from beneath you. You cautiously peer over the edge of the mattress to be met with Zenji rubbing the side of his head softly.\n\n");
+						outputText("He looks up at you, \"<i>Ack, [name]... Ya kicked me off de bed...</i>\"\n\n");
+						outputText("You apologize as you help him back up with you.\n\n");
+						outputText("\"<i>No worries, I'll just be sure t' keep ya tighter in my arms so ya don't try to kick me away again. Heheh...</i>\"\n\n");
+						outputText("With that, Zenji wraps his strong arms around you as you ready yourself to sleep for another " + num2Text(timeQ) + " hours.\n");
+					}
+					menu();
+					addButton(0,"Next", sleepWrapper);
+				}
+				return;
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Excellia" && flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) {
 				outputText("When you head to bed for the night, Excellia is already there waiting. You lay down next to her and get comfortable. She wraps her arms around you and pulls you into her warm embrace nuzzling your neck.");
 				outputText("\n\n\"<i>See you in the morning [name]...</i>\"\n");
@@ -2827,7 +2890,6 @@ private function SparrableNPCsMenu():void {
 			if (timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 			else outputText("You lie down to resume sleeping for the remaining hour.\n");
 		}
-		player.strtouspeintwislibsenCalculation1();
 		player.sleepUpdateStat();
 		goNext(timeQ, true);
 	}
@@ -3078,17 +3140,28 @@ private function SparrableNPCsMenu():void {
 		hideMenus();
 		clearOutput();
 		outputText("Which place would you like to visit?");
-		if (flags[kFLAGS.PLACES_PAGE] == 1) placesPage2();
-		if (flags[kFLAGS.PLACES_PAGE] == 2) placesPage3();
 		//Build menu
+		if (flags[kFLAGS.PLACES_PAGE] == 2) {
+			placesPage3();
+			return true;
+		}
+		if (flags[kFLAGS.PLACES_PAGE] == 1) {
+			placesPage2();
+			return true;
+		}
 		menu();
 		if (dungeonFound()) addButton(0, "Dungeons", dungeons).hint("Delve into dungeons.");
 		if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(3, "Boat", SceneLib.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 12");
-
+		else addButtonDisabled(3, "???", "???");
+		
 		if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(5, "Tel'Adre", SceneLib.telAdre.telAdreMenu).hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
+		else addButtonDisabled(5, "???", "???");
 		if (flags[kFLAGS.BAZAAR_ENTERED] > 0) addButton(6, "Bazaar", SceneLib.bazaar.enterTheBazaar).hint("Visit the Bizarre Bazaar where the demons and corrupted beings hang out.");
+		else addButtonDisabled(6, "???", "???");
 		if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(7, "Owca", SceneLib.owca.gangbangVillageStuff).hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.");
+		else addButtonDisabled(7, "???", "???");
 		if (flags[kFLAGS.HEXINDAO_UNLOCKED] == 1) addButton(10, "He'Xin'Dao", hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, place where all greenhorn soul cultivators come together.");
+		else addButtonDisabled(10, "???", "???");
 		addButton(4, "Next", placesPage2);
 		addButton(14, "Back", playerMenu);
 		return true;
@@ -3101,16 +3174,25 @@ private function SparrableNPCsMenu():void {
 			if (flags[kFLAGS.GAR_NAME] == 0) addButton(0, "Cathedral", SceneLib.gargoyle.gargoylesTheShowNowOnWBNetwork).hint("Visit the ruined cathedral you've recently discovered.");
 			else addButton(0, "Cathedral", SceneLib.gargoyle.returnToCathedral).hint("Visit the ruined cathedral where " + flags[kFLAGS.GAR_NAME] + " resides.");
 		}
+		else addButtonDisabled(0, "???", "???");
 		if (farmFound()) addButton(1, "Farm", SceneLib.farm.farmExploreEncounter).hint("Visit Whitney's farm.");
+		else addButtonDisabled(1, "???", "???");
 		if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(2, "Town Ruins", SceneLib.amilyScene.exploreVillageRuin).hint("Visit the village ruins. \n\nRecommended level: 12");
+		else addButtonDisabled(2, "???", "???");
 		if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) addButton(3, "Salon", SceneLib.mountain.salon.salonGreeting).hint("Visit the salon for hair services.");
-
+		else addButtonDisabled(3, "???", "???");
+		
 		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) addButton(5, "Shrine", SceneLib.kitsuneScene.kitsuneShrine).hint("Visit the kitsune shrine in the deepwoods.");
+		else addButtonDisabled(5, "???", "???");
 		if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
+		else addButtonDisabled(6, "???", "???");
 		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
+		else addButtonDisabled(7, "???", "???");
 		if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");
-
+		else addButtonDisabled(8, "???", "???");
+		
 		if (flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(10, "Great Tree", SceneLib.aikoScene.encounterAiko).hint("Visit the Great Tree in the Deep Woods where Aiko lives.");
+		else addButtonDisabled(10, "???", "???");
 //	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", CoC.instance.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
 		if (debug) addButton(13, "Ingnam", SceneLib.ingnam.returnToIngnam).hint("Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
 		addButton(4, "Next", placesPage3);
@@ -3127,7 +3209,11 @@ private function SparrableNPCsMenu():void {
 			if (player.statusEffectv2(StatusEffects.ResourceNode1) < 5) addButtonDisabled(1, "???", "You need to explore Mountains more to unlock this place.");
 			else addButton(1, "Quarry", camp.cabinProgress.quarrySite);
 		}
-
+		else {
+			addButtonDisabled(0, "???", "???");
+			addButtonDisabled(1, "???", "???");
+		}
+		
 		addButton(9, "Previous", placesToPage2);
 		addButton(14, "Back", playerMenu);
 	}
@@ -3139,7 +3225,7 @@ private function SparrableNPCsMenu():void {
 
 	private function placesToPage2():void {
 		flags[kFLAGS.PLACES_PAGE] = 1;
-		places();
+		placesPage2();
 	}
 
 	private function dungeons():void {
@@ -3291,7 +3377,8 @@ public function wakeFromBadEnd():void {
 		fatigueAmount -= player.str / 5;
 		fatigueAmount -= player.tou / 10;
 		fatigueAmount -= player.spe / 10;
-		if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+		if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) fatigueAmount -= 10;
 		fatigueAmount /= (helpers + 1);
 		if (fatigueAmount < 15) fatigueAmount = 15;
 		fatigue(fatigueAmount);
@@ -3540,7 +3627,7 @@ public function wakeFromBadEnd():void {
 		//Children
 		var childPerformance:int = 0;
 		childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
-		childPerformance += (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren());
+		childPerformance += (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren() + flags[kFLAGS.ZENJI_KIDS]);
 		childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4) + (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] / 4) + (flags[kFLAGS.MITZI_DAUGHTERS] / 4));
 		performancePointsPrediction += Math.sqrt(childPerformance);
 		//Level
@@ -3568,7 +3655,7 @@ public function wakeFromBadEnd():void {
 				var soulforce:int = 0;
 				var wrath:int = 0;
 				var lust:int = 0;
-				var statpoints:int = 10;
+				var statpoints:int = 5;
 				var perkpoints:int = 1;
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
 					hp += 20;
@@ -3576,6 +3663,16 @@ public function wakeFromBadEnd():void {
 					fatigue += 6;
 				}
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) {
+					wrath += 2;
+					mana += 12;
+					soulforce += 6;
+				}
+				if (player.findPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) {
+					hp += 20;
+					lust += 2;
+					fatigue += 6;
+				}
+				if (player.findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) {
 					wrath += 2;
 					mana += 12;
 					soulforce += 6;
@@ -3605,7 +3702,7 @@ public function wakeFromBadEnd():void {
 				if (player.findPerk(PerkLib.UnlockArdor3rdStage) >= 0) lust += 1;
 				if (player.findPerk(PerkLib.UnlockArdor4thStage) >= 0) lust += 1;
 				if (player.level < 6) {
-					statpoints += 10;
+					statpoints += 5;
 					perkpoints += 1;
 				}
 				mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + ", maximum Mana by " + mana + ", maximum Soulforce by " + soulforce + ", maximum Wrath by " + wrath + " and maximum Lust by " + lust + "; gain " + statpoints + " attribute points and " + perkpoints + " perk points.";
@@ -3655,6 +3752,7 @@ public function wakeFromBadEnd():void {
 		if (followerKiha() && kihaFollower.totalKihaChildren() > 0) pop += kihaFollower.totalKihaChildren();
 		if (marbleFollower() && flags[kFLAGS.MARBLE_KIDS] > 0) pop += flags[kFLAGS.MARBLE_KIDS];
 		if (flags[kFLAGS.ANT_WAIFU] > 0 && (flags[kFLAGS.ANT_KIDS] > 0 || flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0)) pop += (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]);
+		if (flags[kFLAGS.ZENJI_KIDS] > 0) pop += flags[kFLAGS.ZENJI_KIDS];
 		//------------
 		//Return number!
 		return pop;
@@ -4278,7 +4376,6 @@ public function wakeFromBadEnd():void {
 				player.createStatusEffect(StatusEffects.IntWisCounter2, 0, 0, 0, 0);
 				player.createStatusEffect(StatusEffects.LibSensCounter1, 0, 0, 0, 0);
 				player.createStatusEffect(StatusEffects.LibSensCounter2, 0, 0, 0, 0);
-				player.strtouspeintwislibsenCalculation1();
 				player.strtouspeintwislibsenCalculation2();
 			}
 			if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) {
@@ -4344,14 +4441,25 @@ public function wakeFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 29) {
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 29) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 30;
 			clearOutput();
-			outputText("Text.");
+			outputText("Zenji going to town... HARD. Our loved/hated white mare getting bit of help to be what he wanted to be... or something like that. And Fruits... all loves fruits especialy if they giving even more juice, right? RIGHT?");
+			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) player.createStatusEffect(StatusEffects.ZenjiZList,0,0,0,0);
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) player.createStatusEffect(StatusEffects.TrainingNPCsTimersReduction, 6, 0, 0, 0);
+			player.statStore.addBuffObject({
+				"str": 5,
+				"tou": 5,
+				"spe": 5,
+				"int": 5,
+				"wis": 5,
+				"lib": 5
+			}, 'EzekielBlessing', {text: 'Ezekiel Blessing'});
+			if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && flags[kFLAGS.DIANA_LVL_UP] < 8) flags[kFLAGS.DIANA_LVL_UP] = 8;
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 30) {
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 30) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 31;
 			clearOutput();
 			outputText("Text.");
@@ -4520,6 +4628,7 @@ public function wakeFromBadEnd():void {
 		if (player.statusEffectv1(StatusEffects.ExploredDeepwoods) >= 100) awardAchievement("We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER);
 		if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] >= 100) awardAchievement("Light-headed", kACHIEVEMENTS.ZONE_LIGHT_HEADED);
 		if (flags[kFLAGS.BOG_EXPLORED] >= 100) awardAchievement("All murky", kACHIEVEMENTS.ZONE_ALL_MURKY);
+		if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] >= 100) awardAchievement("Defiled", kACHIEVEMENTS.ZONE_DEFILED);
 		if (flags[kFLAGS.DISCOVERED_OCEAN] >= 100) awardAchievement("Sea-Legs", kACHIEVEMENTS.ZONE_SAILOR);
 		if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] >= 100) awardAchievement("Frozen", kACHIEVEMENTS.ZONE_FROZEN);
 		if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] >= 100) awardAchievement("Roasted", kACHIEVEMENTS.ZONE_ROASTED);
@@ -4530,7 +4639,7 @@ public function wakeFromBadEnd():void {
 		if (flags[kFLAGS.AMILY_VILLAGE_EXPLORED] >= 15) awardAchievement("Archaeologist", kACHIEVEMENTS.ZONE_ARCHAEOLOGIST);
 
 		//Levels
-		if (player.level >= 2) awardAchievement("Level up!", kACHIEVEMENTS.LEVEL_LEVEL_UP);
+		if (player.level >= 1) awardAchievement("Level up!", kACHIEVEMENTS.LEVEL_LEVEL_UP);
 		if (player.level >= 5) awardAchievement("Novice", kACHIEVEMENTS.LEVEL_NOVICE);
 		if (player.level >= 10) awardAchievement("Apprentice", kACHIEVEMENTS.LEVEL_APPRENTICE);
 		if (player.level >= 15) awardAchievement("Journeyman", kACHIEVEMENTS.LEVEL_JOURNEYMAN);
@@ -4542,7 +4651,9 @@ public function wakeFromBadEnd():void {
 		if (player.level >= 90) awardAchievement("Sovereign", kACHIEVEMENTS.LEVEL_SOVEREIGN);
 		if (player.level >= 100) awardAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD);
 		if (player.level >= 120) awardAchievement("Newb God(ess)", kACHIEVEMENTS.LEVEL_NEWB_GOD_ESS);
-		if (player.level >= 150) awardAchievement("Mid-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS);
+		if (player.level >= 150) awardAchievement("Lowest-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS);
+		//if (player.level >= ?180?) awardAchievement("Low-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS);
+		//if (player.level >= ?210?) awardAchievement("-tier God(ess)", kACHIEVEMENTS.LEVEL_MID_TIER_GOD_ESS);
 
 		//Population
 		if (getCampPopulation() >= 2) awardAchievement("My First Companion", kACHIEVEMENTS.POPULATION_FIRST);
@@ -4629,10 +4740,10 @@ public function wakeFromBadEnd():void {
 		if (player.previouslyWornClothes.length >= 10) awardAchievement("Cosplayer (Beginner)", kACHIEVEMENTS.FASHION_COSPLAYER);
 		if (player.previouslyWornClothes.length >= 30) awardAchievement("Cosplayer (Amateour)", kACHIEVEMENTS.FASHION_COSPLAYER_1);
 		if (player.previouslyWornClothes.length >= 60) awardAchievement("Cosplayer (Recognizable)", kACHIEVEMENTS.FASHION_COSPLAYER_2);
-		if (player.previouslyWornClothes.length >= 100) awardAchievement("Cosplayer (Seasonal)", kACHIEVEMENTS.FASHION_COSPLAYER_1);
-		if (player.previouslyWornClothes.length >= 150) awardAchievement("Cosplayer (Proffesional)", kACHIEVEMENTS.FASHION_COSPLAYER_2);
-		//if (player.previouslyWornClothes.length >= 210) awardAchievement("Jessica Nigri apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_3);
-		//if (player.previouslyWornClothes.length >= 270) awardAchievement("Yaya Han apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_4);
+		if (player.previouslyWornClothes.length >= 100) awardAchievement("Cosplayer (Seasonal)", kACHIEVEMENTS.FASHION_COSPLAYER_3);
+		if (player.previouslyWornClothes.length >= 150) awardAchievement("Cosplayer (Proffesional)", kACHIEVEMENTS.FASHION_COSPLAYER_4);
+		//if (player.previouslyWornClothes.length >= 300) awardAchievement("Jessica Nigri apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_5);
+		//if (player.previouslyWornClothes.length >= 600) awardAchievement("Yaya Han apprentice", kACHIEVEMENTS.FASHION_COSPLAYER_6);
 		if ((player.armor == armors.RBBRCLT || player.armor == armors.BONSTRP || player.armor == armors.NURSECL) &&
 				(player.weapon == weapons.RIDINGC || player.weapon == weapons.WHIP || player.weapon == weapons.SUCWHIP || player.weapon == weapons.L_WHIP || player.weapon == weapons.PSWHIP || player.weapon == weapons.PWHIP || player.weapon == weapons.BFWHIP || player.weapon == weapons.DBFWHIP || player.weapon == weapons.NTWHIP || player.weapon == weapons.CNTWHIP)) awardAchievement("Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX);
 		if (player.armor != ArmorLib.NOTHING && player.lowerGarment == UndergarmentLib.NOTHING && player.upperGarment == UndergarmentLib.NOTHING) awardAchievement("Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO);
@@ -4649,8 +4760,9 @@ public function wakeFromBadEnd():void {
 		if (player.headJewelry == headjewelries.CROWSTR && player.necklace == necklaces.NECKSTR && player.jewelry == jewelries.RINGSTR && player.jewelry2 == jewelries.RINGSTR && player.jewelry3 == jewelries.RINGSTR && player.jewelry4 == jewelries.RINGSTR) awardAchievement("Throne of Strength", kACHIEVEMENTS.FASHION_THRONE_OF_STRENGTH);
 		if (player.headJewelry == headjewelries.CROWTOU && player.necklace == necklaces.NECKTOU && player.jewelry == jewelries.RINGTOU && player.jewelry2 == jewelries.RINGTOU && player.jewelry3 == jewelries.RINGTOU && player.jewelry4 == jewelries.RINGTOU) awardAchievement("Throne of Toughness", kACHIEVEMENTS.FASHION_THRONE_OF_TOUGHNESS);
 		if (player.headJewelry == headjewelries.CROWWIS && player.necklace == necklaces.NECKWIS && player.jewelry == jewelries.RINGWIS && player.jewelry2 == jewelries.RINGWIS && player.jewelry3 == jewelries.RINGWIS && player.jewelry4 == jewelries.RINGWIS) awardAchievement("Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM);
-		if (player.isInGoblinMech()) awardAchievement("Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP);
+		if (player.isInGoblinMech() || player.isInNonGoblinMech()) awardAchievement("Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP);
 		if (player.vehicles == vehicles.GOBMPRI) awardAchievement("Rollin' Rollin'", kACHIEVEMENTS.FASHION_ROLLIN_ROLLIN);
+		if (player.vehicles == vehicles.HB_MECH) awardAchievement("Howl of the Banshee", kACHIEVEMENTS.FASHION_HOWL_OF_THE_BANSHEE);
 		if (player.jewelry.value >= 1000) awardAchievement("Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING);
 		if (player.necklace.value >= 5000) awardAchievement("Ka-Ching!", kACHIEVEMENTS.FASHION_KA_CHING);
 		if (player.headJewelry.value >= 4000) awardAchievement("Royalty", kACHIEVEMENTS.FASHION_ROYALTY);
@@ -4769,7 +4881,7 @@ public function wakeFromBadEnd():void {
 		//if (slavesCount() >= 12) awardAchievement("Meet Your " + player.mf("Master", "Mistress") + " (3)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_3);
 		if (slavesCount() >= 6 && slavesOptionalCount() >= 2) awardAchievement("Slaver (1)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE);
 		//if (slavesCount() >= 12 && slavesOptionalCount() >= 4) awardAchievement("Slaver (2)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE_2);
-		//if (slavesCount() >= 18 && slavesOptionalCount() >= 6) awardAchievement("Slaver (3)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE_3);//dodać dodatkowych opcjonalnych Slaves tutaj i dać licznik opcjonalnych z każdym achiev wymagającym wicej np. 2-4-6?
+		//if (slavesCount() >= 18 && slavesOptionalCount() >= 6) awardAchievement("Slaver (3)", kACHIEVEMENTS.GENERAL_MEET_YOUR_MASTER_TRUE_3);//dodać dodatkowych opcjonalnych Slaves tutaj i dać licznik opcjonalnych z każdym achiev wymagającym wiecej np. 2-4-6?
 		if (followersCount() + loversCount() + slavesCount() >= 19) awardAchievement("All Your People are Belong to Me (1)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME);
 		if (followersCount() + loversCount() + slavesCount() >= 38) awardAchievement("All Your People are Belong to Me (2)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_2);
 		//if (followersCount() + loversCount() + slavesCount() >= 57) awardAchievement("All Your People are Belong to Me (3)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_3);
@@ -4828,8 +4940,8 @@ public function wakeFromBadEnd():void {
 		if (player.newGamePlusMod() >= 2) awardAchievement("xXx: The Return of Mareth Champion", kACHIEVEMENTS.EPIC_XXX_THE_RETURN_OF_MARETH_CHAMPION);
 		if (player.newGamePlusMod() >= 3) awardAchievement("xXx 4", kACHIEVEMENTS.EPIC_XXX_4);
 		if (player.newGamePlusMod() >= 4) awardAchievement("xXx 5: Mareth's Judgment_Day", kACHIEVEMENTS.EPIC_XXX5_MARETHS_JUDGMENT_DAY);
-		if (player.newGamePlusMod() >= 5) awardAchievement("xXx 6: Rise of the Demons", kACHIEVEMENTS.EPIC_XXX6_RISE_OF_THE_DEMONS);/*
-	if (player.newGamePlusMod() >= 6) awardAchievement("xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION);
+		if (player.newGamePlusMod() >= 5) awardAchievement("xXx 6: Rise of the Demons", kACHIEVEMENTS.EPIC_XXX6_RISE_OF_THE_DEMONS);
+		if (player.newGamePlusMod() >= 6) awardAchievement("xXx 7: Salvation", kACHIEVEMENTS.EPIC_XXX7_SALVATION);/*
 	if (player.newGamePlusMod() >= 7) awardAchievement("xXx 8: Genisys", kACHIEVEMENTS.EPIC_XXX8_GENISYS);
 	if (player.newGamePlusMod() >= 8) awardAchievement("xXx 9: Dark Fate", kACHIEVEMENTS.EPIC_XXX9_DARK_FATE);*/
 
@@ -4845,7 +4957,7 @@ public function wakeFromBadEnd():void {
 		if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) awardAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME);
 		if (player.hasPerk(PerkLib.Phylactery)) awardAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA);
 		if (player.jiangshiScore() >= 20) awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
-		//yuki onna achiev - Let It Go!!!
+		if (player.yukiOnnaScore() >= 14) awardAchievement("Let It Go", kACHIEVEMENTS.EPIC_LET_IT_GO);
 
 		if (player.hasStatusEffect(StatusEffects.AchievementsNormalShadowTotal)) {
 			//Shadow
@@ -4874,4 +4986,4 @@ public function wakeFromBadEnd():void {
         }
         */
 	}
-}
+}

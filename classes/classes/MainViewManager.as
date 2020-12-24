@@ -70,18 +70,27 @@ public class MainViewManager extends BaseContent {
 		setTheme();
         mainView.statsView.refreshStats(CoC.instance);
     }
+	public function updateCharviewIfNeeded():void {
+		if (flags[kFLAGS.CHARVIEW_STYLE] != 0) { // if not display always
+			hidePlayerDoll();
+		} else { // if display always
+			showPlayerDoll(false);
+		}
+	}
 	public function showPlayerDoll(reload:Boolean=false):void {
 		//tweenOutStats();
 		if (reload) mainView.charView.reload("external");
 		mainView.charView.setCharacter(player);
 		mainView.charView.redraw();
 		mainView.charView.visible = true;
-		if(flags[kFLAGS.CHARVIEW_STYLE] < 1){
+		if(flags[kFLAGS.CHARVIEW_STYLE] == 2){
+			// display in the text
 			mainView.charView.x = 0;
 			mainView.charView.y = 0;
 			BoundClip.nextContent = mainView.charView;
 			outputText("<img src='coc.view::BoundClip' align='left' id='charview'/>");
 		} else {
+			// display in the corner
 			mainView.placeCharviewAtRight();
 			mainView.addElement(mainView.charView);
 		}

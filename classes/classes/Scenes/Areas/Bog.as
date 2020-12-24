@@ -20,7 +20,7 @@ public class Bog extends BaseContent
 		}
 		public function exploreBog():void
 		{
-			var chooser:int = rand(5);
+			var chooser:int = rand(6);
 			if (chooser == 0) {
 				if (player.buttPregnancyIncubation != 0) chooser++;
 			}
@@ -84,6 +84,10 @@ public class Bog extends BaseContent
 			}
 			else if (chooser == 3) {
 				lizanScene.lizanIntro();
+			}
+			else if (chooser == 4) {
+				if (rand(2) == 0) SceneLib.trollScene.encounterAdultFemaleTroll();
+				else SceneLib.trollScene.encounterAdultMaleTroll();
 			}
 			else {
 				clearOutput();

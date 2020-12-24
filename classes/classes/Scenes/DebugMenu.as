@@ -779,7 +779,7 @@ public class DebugMenu extends BaseContent
 			addButton(14, "Back", bodyPartEditorRoot);
 		}
 		private static const COLOR_CONSTANTS:Array = [
-			"albino", "aqua", "ashen", "auburn", "black", "blond", "blonde", "blue", "bronzed", "brown", "caramel",
+			"albino", "aqua", "ashen", "auburn", "black", "blond", "blonde", "blood-red", "blue", "bronzed", "brown", "caramel",
 			"cerulean", "chocolate", "crimson", "crystal", "dark", "dusky", "ebony", "emerald", "fair",
 			"golden", "gray", "green", "indigo", "light", "mahogany", "metallic", "midnight", "olive", "orange",
 			"peach", "pink", "purple", "red", "russet", "sable", "sanguine", "silky", "silver",
@@ -1084,6 +1084,17 @@ public class DebugMenu extends BaseContent
 			[Eyes.FIRE_SNAIL, "25 FIRE_SNAIL"],
 			[Eyes.GHOST, "26 GHOST"],
 			[Eyes.JIANGSHI, "27 JIANGSHI"],
+			[Eyes.GOAT, "28 GOAT"],
+			[Eyes.CENTIPEDE, "29 CENTIPEDE"],
+			[Eyes.KRAKEN, "30 KRAKEN"],
+			[Eyes.FROSTWYRM, "31 FROSTWYRM"],
+			[Eyes.CANCER, "32 CANCER"],
+			[Eyes.FAIRY, "33 FAIRY"],
+			[Eyes.GREMLIN, "34 GREMLIN"],
+			[Eyes.WEASEL, "35 WEASEL"],
+			[Eyes.GAZER, "36 GAZER"],
+			[Eyes.RATATOSKR, "37 RATATOSKR"],
+			[Eyes.FIENDISH, "38 FIENDISH"],
 		];
 		private static const EAR_TYPE_CONSTANTS:Array    = [
 			[Ears.HUMAN, "0 HUMAN"],
@@ -1429,6 +1440,9 @@ public class DebugMenu extends BaseContent
 			[Tail.BEAR, "45 BEAR"],
 			[Tail.TWINKASHA, "46 TWINKASHA"],
 			[Tail.USHI_ONI_ONNA, "47 USHI_ONI_ONNA"],
+			[Tail.WEASEL, "48 WEASEL"],
+			[Tail.SQUIRREL, "49 SQUIRREL"],
+			[Tail.MONKEY, "50 MONKEY"],
 		];
 		private static const TAIL_COUNT_CONSTANTS:Array = [
 			[0,"0"],1,2,3,4,
@@ -1970,5 +1984,4 @@ public class DebugMenu extends BaseContent
 			if (pY < 2) toggleSlot(slot + 5);
 		}
 	}
-
 }

@@ -49,12 +49,12 @@ public class IgnisArenaSeer extends Monster
 		
 		public function IgnisCastsComet():void {
 			outputText("Ignis raises a hand, focusing with intensity.  From above comes a crystalline meteor, which you barely manage to dodge.  The crystal shatters upon contact with the ground, sending a shower of splinters that you cannot avoid. ");
-			if (player.armorPerk == "Heavy" || player.armorPerk == "Ayo") outputText("Thankfully, your armor manages to absorb most of the impact. ");
+			if (player.armorPerk == "Heavy" || player.armorPerk == "Light Ayo" || player.armorPerk == "Heavy Ayo" || player.armorPerk == "Ultra Heavy Ayo") outputText("Thankfully, your armor manages to absorb most of the impact. ");
 			var damage:Number = 0;
 			damage += inteligencescalingbonus();
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
-			if (player.armorPerk != "Heavy" || player.armorPerk != "Ayo") damage *= 2;
+			if (player.armorPerk != "Heavy" && player.armorPerk != "Light Ayo" && player.armorPerk != "Heavy Ayo" && player.armorPerk != "Ultra Heavy Ayo") damage *= 2;
 			damage = Math.round(damage);
 			player.takeMagicDamage(damage, true);
 			removeStatusEffect(StatusEffects.IgnisCounter);
@@ -124,7 +124,7 @@ public class IgnisArenaSeer extends Monster
 			this.armorDef = 20;
 			this.armorMDef = 50;
 			this.bonusHP = 120;
-			this.bonusLust = 20;
+			this.bonusLust = 200;
 			this.lust = 20;
 			this.lustVuln = 0.9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

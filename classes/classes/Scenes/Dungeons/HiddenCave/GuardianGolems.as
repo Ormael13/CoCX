@@ -18,6 +18,7 @@ public class GuardianGolems extends Monster
 			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swings!");
 			else
 			{
+				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" They hits you square in the chest from a few different angles. ");
 				damage = player.takePhysDamage(damage, true);
 			}

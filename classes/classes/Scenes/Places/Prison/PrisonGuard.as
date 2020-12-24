@@ -259,5 +259,4 @@ package classes.Scenes.Places.Prison
 			guardCombatID.drop = new WeightedDrop();
 		}
 	}
-
 }

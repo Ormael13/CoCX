@@ -8,6 +8,7 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Scylla extends Monster
@@ -68,12 +69,21 @@ public class Scylla extends Monster
 			}
 		}
 		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			SceneLib.scyllaScene.oceanScyllaWin();
+		}
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			SceneLib.scyllaScene.oceanScyllaLoss();
+		}
+		
 		public function Scylla() 
 		{
 			this.a = "the ";
 			this.short = "scylla";
 			this.imageName = "scylla";
-			this.long = "You are currently fighting 10 feet tall scylla.";
+			this.long = "You are currently fighting ten feet tall scylla. She looks like mix between an octopus and a woman. Eight long tentacles grow at the place where her legs should be, each easily twice her length.";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 200, 0, 0, 0);
@@ -93,20 +103,20 @@ public class Scylla extends Monster
 			this.weaponVerb="slash";
 			this.weaponAttack = 86;
 			this.armorName = "thick skin";
-			this.armorDef = 52;
-			this.armorMDef = 26;
+			this.armorDef = 104;
+			this.armorMDef = 52;
 			this.bonusHP = 5000;
-			this.bonusLust = 20;
+			this.bonusLust = 420;
 			this.lust = 20;
 			this.lustVuln = .2;
 			this.level = 70;
 			this.gems = 0;
-			this.drop = NO_DROP;
-			//this.drop = new WeightedDrop(consumables.BLACKIN, 1);
+			this.drop = new WeightedDrop(consumables.BLACKIN, 1);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

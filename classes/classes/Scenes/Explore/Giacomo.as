@@ -467,7 +467,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		private function pitchTorch():void {
 			spriteSelect(23);
 			clearOutput();
-			if (player.hasKeyItem("Torch") >= 0) {
+			if (player.hasKeyItem("Torch") > 0) {
 				outputText("<b>You already have Torch.</b>");
 				doNext(bookMenu);
 				return;
@@ -484,7 +484,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nThe crazy merchant nods satisfied when you hand him over hundred gems and in exchange gives you a torch.");
+				outputText("The crazy merchant nods satisfied when you hand him over hundred gems and in exchange gives you a torch.");
 				player.gems -= 100;
 				statScreenRefresh();
 				player.createKeyItem("Torch", 0, 0, 0, 0);

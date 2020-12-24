@@ -164,7 +164,7 @@ public class Kelt extends Monster
 			this.armorDef = 10;
 			this.armorMDef = 0;
 			this.bonusHP = 250;
-			this.bonusLust = 20;
+			this.bonusLust = 78;
 			this.lust = 40;
 			this.lustVuln = 0.83;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

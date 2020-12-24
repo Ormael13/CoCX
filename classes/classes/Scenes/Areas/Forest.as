@@ -247,6 +247,13 @@ use namespace CoC;
 							return (flags[kFLAGS.KONSTANTIN_FOLLOWER] < 2);
 						},
 						chance: 0.8
+					}, {
+						name  : "luna",
+						call  : SceneLib.lunaFollower.fullMoonEventResistWinFireHerForest,
+						when  : function():Boolean {
+							return (flags[kFLAGS.LUNA_FOLLOWER] == 2);
+						},
+						chance: 2
 					});
 					/*
 					{

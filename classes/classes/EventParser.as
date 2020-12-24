@@ -7,6 +7,7 @@ import classes.Items.ShieldLib;
 import classes.Items.UndergarmentLib;
 import classes.Items.WeaponLib;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.internals.Utils;
@@ -24,11 +25,7 @@ public class EventParser {
     private static var _campSet:Boolean = false;
 
     public static function playerMenu():void {
-        if (CoC.instance.flags[kFLAGS.CHARVIEW_STYLE] != 2) {
-            CoC.instance.mainViewManager.hidePlayerDoll();
-        } else {
-            CoC.instance.mainViewManager.showPlayerDoll(false);
-        }
+        CoC.instance.mainViewManager.updateCharviewIfNeeded();
         if (!CoC.instance.inCombat) {
             CoC.instance.spriteSelect(-1);
         }
@@ -88,7 +85,7 @@ public class EventParser {
         }
         CoC.instance.inCombat = false;
         DungeonAbstractContent.dungeonLoc = 0; //Replaces inDungeon = false;
-		
+
 		if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 			CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
@@ -189,7 +186,7 @@ public class EventParser {
             player.HP = HPPercent*player.maxHP();
             SceneLib.combat.regeneration(false);
             if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration(false);
-            if (player.findPerk(PerkLib.JobSorcerer) >= 0) SceneLib.combat.manaregeneration(false);
+            if (player.findPerk(PerkLib.JobSorcerer) >= 0 || player.findPerk(PerkLib.JobElementalConjurer) >= 0) SceneLib.combat.manaregeneration(false);
             SceneLib.combat.wrathregeneration(false);
             //Inform all time aware classes that a new hour has arrived
             for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) {
@@ -592,6 +589,10 @@ public class EventParser {
                 }
                 else if (flags[kFLAGS.ANEMONE_WATCH] > 0) {
                     EngineCore.outputText("\n<b>Your sleep is momentarily disturbed by the sound of tiny clawed feet skittering away in all directions.  When you sit up, you can make out Kid A holding a struggling, concussed imp in a headlock and wearing a famished expression.  You catch her eye and she sheepishly retreats to a more urbane distance before beginning her noisy meal.</b>\n");
+                    return 1;
+                }
+                else if (ZenjiScenes.ZenjiNightWatch == 1) {
+                    EngineCore.outputText("\n<b>Zenji informs you that he managed to fend off creatures that tried to assault you during the night.</b>\n");
                     return 1;
                 }
                 else if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "") && (player.inte / 5) >= Utils.rand(15)) {

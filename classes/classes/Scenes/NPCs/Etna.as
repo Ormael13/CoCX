@@ -162,6 +162,7 @@ use namespace CoC;
 				this.armorDef = 10;
 				this.armorMDef = 2;
 				this.bonusHP = 100;
+				this.bonusLust = 280;
 				this.level = 30;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 1) {
@@ -169,8 +170,9 @@ use namespace CoC;
 				initWisLibSensCor(180, 190, 90, 80);
 				this.weaponAttack = 42;
 				this.armorDef = 12;
-				this.armorMDef = 2;
+				this.armorMDef = 3;
 				this.bonusHP = 150;
+				this.bonusLust = 316;
 				this.level = 36;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 2) {
@@ -178,8 +180,9 @@ use namespace CoC;
 				initWisLibSensCor(190, 210, 100, 80);
 				this.weaponAttack = 48;
 				this.armorDef = 14;
-				this.armorMDef = 2;
+				this.armorMDef = 4;
 				this.bonusHP = 150;
+				this.bonusLust = 352;
 				this.level = 42;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 3) {
@@ -187,8 +190,9 @@ use namespace CoC;
 				initWisLibSensCor(200, 230, 110, 80);
 				this.weaponAttack = 54;
 				this.armorDef = 16;
-				this.armorMDef = 3;
+				this.armorMDef = 5;
 				this.bonusHP = 200;
+				this.bonusLust = 388;
 				this.level = 48;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 4) {
@@ -196,8 +200,9 @@ use namespace CoC;
 				initWisLibSensCor(210, 250, 120, 80);
 				this.weaponAttack = 60;
 				this.armorDef = 18;
-				this.armorMDef = 3;
+				this.armorMDef = 6;
 				this.bonusHP = 200;
+				this.bonusLust = 424;
 				this.level = 54;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 5) {
@@ -205,8 +210,9 @@ use namespace CoC;
 				initWisLibSensCor(220, 270, 130, 80);
 				this.weaponAttack = 66;
 				this.armorDef = 20;
-				this.armorMDef = 4;
+				this.armorMDef = 7;
 				this.bonusHP = 250;
+				this.bonusLust = 460;
 				this.level = 60;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 6) {
@@ -214,8 +220,9 @@ use namespace CoC;
 				initWisLibSensCor(230, 290, 140, 80);
 				this.weaponAttack = 72;
 				this.armorDef = 22;
-				this.armorMDef = 4;
+				this.armorMDef = 8;
 				this.bonusHP = 250;
+				this.bonusLust = 496;
 				this.level = 66;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 7) {
@@ -223,8 +230,9 @@ use namespace CoC;
 				initWisLibSensCor(240, 310, 150, 80);
 				this.weaponAttack = 78;
 				this.armorDef = 24;
-				this.armorMDef = 5;
+				this.armorMDef = 9;
 				this.bonusHP = 300;
+				this.bonusLust = 532;
 				this.level = 72;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 8) {
@@ -232,8 +240,9 @@ use namespace CoC;
 				initWisLibSensCor(250, 330, 160, 80);
 				this.weaponAttack = 84;
 				this.armorDef = 26;
-				this.armorMDef = 6;
+				this.armorMDef = 10;
 				this.bonusHP = 300;
+				this.bonusLust = 568;
 				this.level = 78;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 9) {
@@ -241,8 +250,9 @@ use namespace CoC;
 				initWisLibSensCor(260, 350, 170, 80);
 				this.weaponAttack = 90;
 				this.armorDef = 28;
-				this.armorMDef = 7;
+				this.armorMDef = 11;
 				this.bonusHP = 400;
+				this.bonusLust = 604;
 				this.level = 84;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] == 10) {
@@ -250,10 +260,21 @@ use namespace CoC;
 				initWisLibSensCor(270, 370, 180, 80);
 				this.weaponAttack = 96;
 				this.armorDef = 30;
-				this.armorMDef = 8;
+				this.armorMDef = 12;
 				this.bonusHP = 400;
+				this.bonusLust = 640;
 				this.level = 90;
 			}
+			if (flags[kFLAGS.ETNA_LVL_UP] == 11) {
+				initStrTouSpeInte(210, 315, 570, 280);
+				initWisLibSensCor(280, 390, 190, 80);
+				this.weaponAttack = 102;
+				this.armorDef = 32;
+				this.armorMDef = 13;
+				this.bonusHP = 500;
+				this.bonusLust = 676;
+				this.level = 96;
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("E"));
@@ -269,7 +290,6 @@ use namespace CoC;
 			this.weaponName = "claw";
 			this.weaponVerb="claw-slash";
 			this.armorName = "skimpy black bikini";
-			this.bonusLust = 50;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
@@ -304,6 +324,10 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 9) this.createPerk(PerkLib.PeerlessSelfControl, 0, 0, 0, 0);
 			if (flags[kFLAGS.ETNA_LVL_UP] >= 10) this.createPerk(PerkLib.HalfStepToInhumanSelfControl, 0, 0, 0, 0);
+			if (flags[kFLAGS.ETNA_LVL_UP] >= 11) {
+				this.createPerk(PerkLib.InhumanSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.MythicalLibido, 0, 0, 0, 0);
+			}
 			checkMonster();
 		}
 		

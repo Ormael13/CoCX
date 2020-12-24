@@ -257,7 +257,7 @@ private function rathazulWorkOffer():Boolean {
 		lethiciteDefense = growLethiciteDefense;
 	}
 	if(player.hasStatusEffect(StatusEffects.CampRathazul)) {
-	if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || flags[kFLAGS.JOJO_BIMBO_STATE] == 3 ||(flags[kFLAGS.EXCELLIA_RECRUITED] > 2 && flags[kFLAGS.EXCELLIA_RECRUITED] < 33) || player.findPerk(PerkLib.BroBrains) >= 0 || player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0)) {
+	if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || flags[kFLAGS.JOJO_BIMBO_STATE] == 3 || (flags[kFLAGS.EXCELLIA_RECRUITED] > 2 && flags[kFLAGS.EXCELLIA_RECRUITED] < 33) || player.findPerk(PerkLib.BroBrains) >= 0 || player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0)) {
 			rathazulDebimboOffer();
 			return true;
 		}
@@ -1050,6 +1050,5 @@ public function rathazulAprilFoolPart3():void {
 	player.createKeyItem("Rathazul's Purity Elixir", 0, 0, 0, 0);
 	doNext(returnToRathazulMenu);
 }
-
 }
 }

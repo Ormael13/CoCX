@@ -20,7 +20,7 @@ import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
 			}
 			else {
 				outputText(" You cry out as the bottle shatters, exploding in a yellow cloud that blows over you. You gag and cough and suddenly your hands are reaching to your crotch as if on their own. You yank back, but feel a hot haze washing across your exposed body.");
-				player.dynStats("lus", (25 + player.lib/20 + player.sens/5));
+				player.dynStats("lus", (25 + player.lib/20 + player.effectiveSensitivity()/5));
 			}
 		}
 		
@@ -46,6 +46,7 @@ import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
 			this.armorDef = 49;
 			this.armorMDef = 26;
 			this.bonusHP = 400;
+			this.bonusLust = 297;//lib+sens+lvl
 			this.level = 63;
 			this.gems = rand(42) + 28;
 			this.drop = new ChainedDrop().add(consumables.OVIELIX, 1 / 4)

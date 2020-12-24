@@ -50,47 +50,50 @@ public class NightmareScene extends BaseContent
 		public function nightmareVictory():void {
 			clearOutput();
 			if (silly()) {
-				outputText("<i>“That's it now give in..to your desire...”</i>\n\n");
+				outputText("\"<i>That's it now give in..to your desire...</i>\"\n\n");
 				outputText("You put on a pair of black shades and reply:\n\n");
-				outputText("<i>“D--D--DJ desiiiire!!!”</i>\n\n");
+				outputText("\"<i>D--D--DJ desiiiire!!!</i>\"\n\n");
 				outputText("You start dancing as blue and red lights spin everywhere. A light projection ball on a string falls down from a tree and start spinning as some bumping music plays out of nowhere. A big screen shows the footstep to do the nightmare dance as you all get down to that party! In, out, in, out, in, out, up, up, down, down, left, right, left! You dance and fuck all night but ");
 				outputText("sadly for you some scumbag spiked your drink. Just as you fall unconscious you wake up instead realizing all of this was a weird dream to escape your reality, the reality of that massive hardening horsecock in front of you.\n\n");
 			}
 			outputText("Defeated by your growing desire, you fall to the ground as the nightmare trots to your now prone form.\n\n");
-			outputText("<i>“It's all okay, I will help you become honest with yourself big girl. By the time you cum out your soul you will yearn for cock and thirst for cum, especially mine or perhaps I will restrain myself? Lets see...”</i>\n\n");
+			outputText("\"<i>It's all okay, I will help you become honest with yourself big girl. By the time you cum out your soul you will yearn for cock and thirst for cum, especially mine or perhaps I will restrain myself? Lets see...</i>\"\n\n");
 			outputText("With this said she weaves a sign, watching with glee as your clothes fly away from you to go pile up on the side.\n\n");
-			outputText("<i>“You won’t need these for what is to come next.”</i>\n\n");
+			outputText("\"<i>You won’t need these for what is to come next.</i>\"\n\n");
 			if (!player.hasVagina()) {
-			outputText("You can’t help but weakly try and shove her away but the nightmare proves too strong. She kicks you on all fours and aligns her unholy cock with your [asshole]. You try to crawl away but she responds by jamming her entire length into your hole.\n\n");
-			outputText("\"<i>Here we go for a ride! Ohhh yeaaaa!</i>\"\n\n");
-			outputText("She neighs in pleasure as she violates your ass, thoroughly molding your hole after the shape of her cock. You scream at first from the stretching of your passage, her cock bulging in your belly, but pain slowly turns to pleasure as various things change about you.\n\n");
-			outputText("Without knowing it, your ass shape begin to change, molding itself into a perfect heart to further accommodate the centauress desire.");
-			if (player.biggestTitSize() < 7) {
-				outputText("Your breasts follow suit, inflating up to an E cup and if you weren't forced down on all fours, you would be groping them yourself to savor their shape.");
-				if (player.breastRows.length == 0) {
-					player.createBreastRow();
-					player.breastRows[0].breasts = 2;
-					player.breastRows[0].nipplesPerBreast = 1;
-					player.breastRows[0].breastRating = 7;
+				outputText("You can’t help but weakly try and shove her away but the nightmare proves too strong. She kicks you on all fours and aligns her unholy cock with your [asshole]. You try to crawl away but she responds by jamming her entire length into your hole.\n\n");
+				outputText("\"<i>Here we go for a ride! Ohhh yeaaaa!</i>\"\n\n");
+				outputText("She neighs in pleasure as she violates your ass, thoroughly molding your hole after the shape of her cock. You scream at first from the stretching of your passage, her cock bulging in your belly, but pain slowly turns to pleasure as various things change about you.\n\n");
+				outputText("Without knowing it, your ass shape begin to change, molding itself into a perfect heart to further accommodate the centauress desire.");
+				if (player.biggestTitSize() < 7) {
+					outputText("Your breasts follow suit, inflating up to an E cup and if you weren't forced down on all fours, you would be groping them yourself to savor their shape.");
+					if (player.breastRows.length == 0) {
+						player.createBreastRow();
+						player.breastRows[0].breasts = 2;
+						player.breastRows[0].nipplesPerBreast = 1;
+						player.breastRows[0].breastRating = 7;
+					}
+					else player.breastRows[0].breastRating = 7;
 				}
-				else player.breastRows[0].breastRating = 7;
-			}
-			outputText("If your voice was any less than womanly before, it's no longer the case as your moans turn increasingly feminine. Each thrust of the nightmare messes you up a little more and as you are about to finally reach anal orgasm, the flesh of your crotch");
-			if (player.balls > 0) outputText(" at the base of your balls");
-			outputText(" begins to change revealing a pair of drooling lips that can only be your newly formed cunt englobing your male genitalia");
-			outputText(". This final change is too much and you cum at once from");
-			if (player.hasCock()) outputText(" your [cock] and");
-			outputText(" newly formed vagina, drenching the grass with your fluids.");
-			if (player.hasCock()) {
-				outputText(" The more you cum the more your cock");
-				if (player.balls > 0) outputText(" and balls");
-				outputText(" shrink and before you know it you're left with a perfectly feminine set of assets, whatever is left of your cock vanishes entirely between your pussy lips with a final spurt of cum. Guess the nightmare was indeed calling you a girl on purpose before because now you fully look like one. You feel the nightmare slide her member out of your bitchy asshole and realign her monster for her true goal.");
-			}
-			outputText("\n\n\"<i>Here I go girl better be ready now! Because we going for part two!</i>\"\n\n");
-			if (player.hasCock()) {
-				player.removeCock(0, 1);
-			}
-			player.createVagina();
+				outputText("If your voice was any less than womanly before, it's no longer the case as your moans turn increasingly feminine. Each thrust of the nightmare messes you up a little more and as you are about to finally reach anal orgasm, the flesh of your crotch");
+				if (player.balls > 0) outputText(" at the base of your balls");
+				outputText(" begins to change revealing a pair of drooling lips that can only be your newly formed cunt englobing your male genitalia");
+				outputText(". This final change is too much and you cum at once from");
+				if (player.hasCock()) outputText(" your [cock] and");
+				outputText(" newly formed vagina, drenching the grass with your fluids.");
+				if (player.hasCock()) {
+					outputText(" The more you cum the more your cock");
+					if (player.balls > 0) outputText(" and balls");
+					outputText(" shrink and before you know it you're left with a perfectly feminine set of assets, whatever is left of your cock vanishes entirely between your pussy lips with a final spurt of cum. Guess the nightmare was indeed calling you a girl on purpose before because now you fully look like one. You feel the nightmare slide her member out of your bitchy asshole and realign her monster for her true goal.");
+				}
+				outputText("\n\n\"<i>Here I go girl better be ready now! Because we going for part two!</i>\"\n\n");
+				if (player.hasCock()) player.killCocks(1);
+				if (player.balls > 0) {
+					player.balls = 0;
+                    player.ballSize = 0;
+				}
+				player.createVagina();
+                player.clitLength = .25;
 			}
 			if (player.isTaur()) {
 				outputText("The nightmare licks her lip in anticipation as she examines your prone form.\n\n");
@@ -171,9 +174,15 @@ public class NightmareScene extends BaseContent
 				outputText("You nod weakly with a confused lust addled expression. Yea, whatever she says... You don’t care, you're in nirvana, trying to reconnect with your body right now, and so your vision fades to black.\n\n");
 				outputText("You wake up your alone in the clearing. Seems everyone left while you were sleeping. You feel horribly aroused by your newfound corruption and all the more by the powerful black magic your body is permeated with. Somehow the centauress permanently desecrated your body with her energy and you can feel this “blessing” resonating with your newfound corruption.\n\n");
 			}
+			if (player.butt.type < 6) player.butt.type = 6;
+			if (player.hips.type < 6) player.hips.type = 6;
+			if (player.hairLength < 10) player.hairLength += 10;
+			if (player.thickness < 70) player.thickness = 70;
+			if (player.tone > 30) player.tone = 30;
+			player.fertility += 10;
 			player.createPerk(PerkLib.BicornBlessing, 0, 0, 0, 0);
 			player.cor = 100;
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
 			player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
 			player.addStatusValue(StatusEffects.CanMeetNightmare, 1, 1);
 			CelessScene.instance.nightmareDefeated();

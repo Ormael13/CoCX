@@ -158,7 +158,7 @@ public class Goblin extends Monster
 			this.armorName = "leather straps";
 			this.armorDef = 1;
 			this.armorMDef = 0;
-			this.bonusLust = 20;
+			this.bonusLust = 92;
 			this.lust = 50;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 2;

@@ -33,7 +33,7 @@ public class DriderIncubus extends AbstractSpiderMorph
 			this.armorDef = 60;
 			this.armorMDef = 10;
 			this.bonusHP = 1500;
-			this.bonusLust = 40;
+			this.bonusLust = 244;
 			this.gems = 200 + rand(80);
 			this.additionalXP = 1500;
 			this.level = 44;
@@ -43,6 +43,7 @@ public class DriderIncubus extends AbstractSpiderMorph
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.drop = NO_DROP;
 			this.checkMonster();
 		}

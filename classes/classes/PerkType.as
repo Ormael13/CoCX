@@ -395,6 +395,36 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireBonesAndMarrowMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxBonesAndMarrowMutations() > 0;
+				},
+				text: "Free Bones and Marrow Mutation Slot",
+				type: "bonesandmarrowmutation"
+			});
+			return this;
+		}
+		public function requireThyroidGlandMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxThyroidGlandMutations() > 0;
+				},
+				text: "Free Thyroid Gland Mutation Slot",
+				type: "thyroidglandmutation"
+			});
+			return this;
+		}
+		public function requireParathyroidGlandMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxParathyroidGlandMutations() > 0;
+				},
+				text: "Free Parathyroid Gland Mutation Slot",
+				type: "parathyroidglandmutation"
+			});
+			return this;
+		}
 		public function requireHungerEnabled():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {

@@ -71,8 +71,8 @@ public function basicarcherytraining2():void
 {
 	player.gems -= 50;
 	if (flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 3 && player.statusEffectv1(StatusEffects.Kelt) >= 90) {
-		outputText("You seek out Ceani and ask her if she could resume your training. The both of you head to the training ground. Once there she help you to position yourself properly and show you how to throw the javelins. You do so for a few hours moving to recover your weapon every few shots. ");
-		outputText("All the while you have a good show of Ceani sexy glossy skin and JJ cup breast held by her pink bikini. Somehow you manage to ignore the distraction and focus anyway hitting bullseye several time.\n\n");
+		outputText("You seek out Ceani and ask her if she could resume your training. The both of you head to the training ground. Once there she helps you to position yourself properly and show you how to throw the javelins. You do so for a few hours moving to recover your weapon every few shots. ");
+		outputText("All the while you have a good show of Ceani's sexy glossy skin and JJ cup breast held by her pink bikini. Somehow you manage to ignore the distraction and focus anyway hitting bullseye several time.\n\n");
 		outputText("\"<i>You got it! Yeah just like that! I think this will likely be our last session together, but before you go, I got a special gift for you to commemorate your graduation.</i>\"\n\n");
 		outputText("Ceani go to a nearby barrel and pull out a set of harpoons with a sea animal design on it.\n\n");
 		outputText("\"<i>This is an enchanted weapon and nah, it has nothing in particular except the bundle endlessly replenish when emptied. You shouldn't run out of harpoons to throw in battle. People who can properly use these are far and few, so I think it's important for you to have your own set.</i>\"\n\n");
@@ -83,8 +83,8 @@ public function basicarcherytraining2():void
 	}
 	else if ((flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 2 || flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 3)) {
 		outputText("You seek out Ceani and ask her if she could resume your training. The both of you head to the training ground. Once there she help you to position yourself properly and show you how to throw the javelins. You do so for a few hours, moving to recover your weapon every few shots. ");
-		outputText("All the while you have a good show of Ceani sexy glossy skin and JJ cup breast held by her pink bikini. She has to regularly remind you to keep the eyes on the target and not on the ‘horizon’.\n\n");
-		outputText("\"<i>Your doing well, but were far from done you're going to need more training before you can effectively aim at a moving target.</i>\"\n\n");
+		outputText("All the while you have a good show of Ceani's sexy glossy skin and JJ cup breast held by her pink bikini. She has to regularly remind you to keep the eyes on the target and not on the ‘horizon’.\n\n");
+		outputText("\"<i>You're doing well, but we're far from done you're going to need more training before you can effectively aim at a moving target.</i>\"\n\n");
 		outputText("The session ends well, you learned a few tricks but you know all too well you're still far from your teachers skill.\n\n");
 		outputText("\"<i>Well you're free to go, I can’t teach you more anyway, and, there's a barrel of fish by that otter girl fisherwoman just waiting for me. Come back tomorrow for more training.</i>\"\n\n");
 		outputText("You head back to camp resolving to visit her again to resume training.\n\n");
@@ -99,7 +99,7 @@ public function basicarcherytraining2():void
 		outputText("She hands you a pack of javelins. They look to be of fairly good quality, even if they are novices weapons.\n\n");
 		outputText("\"<i>I've set up a few targets on the beach, we will be practicing there. Now if you don’t have any question, let us begin.</i>\"\n\n");
 		outputText("The two of you head to the shooting range. Once there she quickly teach you how to position yourself properly and show you how to throw the javelins. You do so for a few hours moving to recover your weapon every few shots. All the while you have a good show of Ceani sexy glossy skin and JJ cup breasts held by her pink bikini. She has to regularly remind you to keep the eyes on the target and not on the ‘horizon’.\n\n");
-		outputText("\"<i>Your doing well but we are barely getting started. You're going to need more training before you can effectively aim at a moving target.</i>\"\n\n");
+		outputText("\"<i>You're doing well but we are barely getting started. You're going to need more training before you can effectively aim at a moving target.</i>\"\n\n");
 		outputText("The session ends well, you learned a few tricks but you know all too well you're still far from your teachers skill.\n\n");
 		outputText("\"<i>Well you're free to go, I can’t teach you more anyway, and, there's a barrel of fish by that otter girl fisherwoman just waiting for me. Come back tomorrow for more training.</i>\"\n\n");
 		outputText("You head back to camp resolving to visit her again tomorrow to resume your training.\n\n");
@@ -650,19 +650,31 @@ public function sparringWithCeaniWon():void
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 66, 0);
 			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CEANI_LVL_UP] = 5;
-		}/*
-		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 12 && flags[kFLAGS.CEANI_LVL_UP] == 4) {
+		}
+		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 12 && flags[kFLAGS.CEANI_LVL_UP] == 5) {
 			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 72);
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 72, 0);
 			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CEANI_LVL_UP] = 6;
 		}
-		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 13 && flags[kFLAGS.CEANI_LVL_UP] == 4) {
+		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 13 && flags[kFLAGS.CEANI_LVL_UP] == 6) {
 			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 78);
 			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 78, 0);
 			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.CEANI_LVL_UP] = 7;
-		}*/
+		}
+		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 14 && flags[kFLAGS.CEANI_LVL_UP] == 7) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 84);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 84, 0);
+			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.CEANI_LVL_UP] = 8;
+		}
+		if (flags[kFLAGS.CEANI_DEFEATS_COUNTER] == 15 && flags[kFLAGS.CEANI_LVL_UP] == 8) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 3, 90);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 90, 0);
+			flags[kFLAGS.CEANI_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.CEANI_LVL_UP] = 9;
+		}
 	}
 	cleanupAfterCombat();
 }

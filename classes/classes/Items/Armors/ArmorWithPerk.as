@@ -46,7 +46,9 @@ package classes.Items.Armors
 				}
 				else if (perk == "Medium") desc += "(Medium)";
 				else if (perk == "Heavy") desc += "(Heavy)";
-				else if (perk == "Ayo") desc += "(Ayo)";
+				else if (perk == "Light Ayo") desc += "(Light Ayo)";
+				else if (perk == "Heavy Ayo") desc += "(Heavy Ayo)";
+				else if (perk == "Ultra Heavy Ayo") desc += "(Ultra Heavy Ayo)";
 			}
 			else desc += "Clothing ";
 			//Defense

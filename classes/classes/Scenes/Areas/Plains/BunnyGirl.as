@@ -249,7 +249,7 @@ private function bunbunFucksYourVag():void {
 		if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
         else player.knockUp(PregnancyStore.PREGNANCY_BUNNY, PregnancyStore.INCUBATION_BUNNY_BABY, 60);
 	}
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	dynStats("lib", 1, "sen", -3);
 	doNext(camp.returnToCampUseEightHours);
 }
@@ -338,7 +338,7 @@ private function bunbunFucksPCInAss():void {
 	outputText("She walks away, her puffy tail twitching with the breeze while your eyes drift closed.");
 	//(Easter ass-preg + 8 hours pass)
 	player.buttKnockUp(PregnancyStore.PREGNANCY_BUNNY, PregnancyStore.INCUBATION_BUNNY_EGGS, 1, 1);
-	player.sexReward("cum");
+	player.sexReward("cum","Anal");
 	dynStats("lib", 1, "sen", 1);
 	doNext(camp.returnToCampUseEightHours);
 }
@@ -498,13 +498,13 @@ private function bunbun69():void {
 			
 			outputText("Her second egg forces its way down your throat with gushing shudders and you can feel your hips straining against the weight of your overburdened stomach. You're a little afraid of what the second one will do to you as it slides out of the flared tip of the bunny's fourteen inches. Maybe it's the milking motion of the bunny's head bobbing in happy hops on your cock or maybe it's the swelling of the second egg, but your body begins to feel hot and your flesh tingles at your scalp and butt. You clench your eyes, willing yourself to digest the bunny's candy eggs and, to your surprise, your belly slows its expansion, gradually shrinking as the eggs burst in your stomach, unloading their gooey candy filling.");
 			player.refillHunger(60);
-			if(player.tailType != Tail.RABBIT) {
+			if(player.tailType != Tail.RABBIT && !player.hasPerk(PerkLib.TransformationImmunity) && !player.hasPerk(PerkLib.Undeath)) {
 				//[No Tail: 
 				if(player.tailType == Tail.NONE) outputText("  The heat around your lower back clutches at your tail bone and you feel a fluffy explosion swell around your butt cheeks as <b>a fluffy bunny's tail pops out of your back</b>, twitching excitedly!");
 				//[Existing tail: 
 				else outputText("  Your tail jiggles and shrinks, slowly sucking back into your body until only a tiny nub remains which quickly explodes with fluff into <b>your new cuddly, twitching bunny tail!</b>");
 			}
-			if(player.ears.type != Ears.BUNNY) {
+			if(player.ears.type != Ears.BUNNY && !player.hasPerk(PerkLib.TransformationImmunity) && !player.hasPerk(PerkLib.Undeath)) {
 				outputText("  The top of your head is next, it seems.");
 				//[No antennae.type: 
 				outputText("  Your eyebrows feel like they're being drawn upwards, your eyes getting larger and larger until you're almost painfully aware of every color and sound around you. You shake your head and <b>large, floppy bunny ears bounce in front of your eyes</b>. You slap the sides of your head and, sure enough, your old ears are gone.");
@@ -516,11 +516,13 @@ private function bunbun69():void {
 			else if(player.cumQ() < 1000) outputText("a noticeable girth");
 			else outputText("bloated obscenely");
 			outputText(", your spunk calming the egg-laying passion that had her bouncing like whipped caramel. She pulls her shrinking phallus from your mouth with a wet slurp, the taste of her rich cum sweet on your lips. She rises to a crouch and gives your new ears a playful tweak between her thumb and forefinger. \"<i>Sorry about that, I don't know what came over me! I certainly didn't expect this, though! Kind of makes me want to stick around and see if you and I could pop out more bunnies,</i>\" she winks. \"<i>But unfortunately, I've got to get going! Hope you had a happy, tasty day! Maybe I'll try to find you again, some time down the line.</i>\" She gives you a moist little kiss and hops away, still energetic after all that. You groan, still feeling fat and bloated from the 'meal.'\n\n");
-			
-			player.tailType = Tail.RABBIT;
-			player.ears.type = Ears.BUNNY;
+			if (!player.hasPerk(PerkLib.TransformationImmunity) && !player.hasPerk(PerkLib.Undeath)) {
+				player.tailType = Tail.RABBIT;
+				player.ears.type = Ears.BUNNY;
+			}
 			doNext(camp.returnToCampUseOneHour);
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 1, "sen", 1);
 		}
 		//REGULAR SHOW
@@ -552,13 +554,13 @@ private function bunbun69():void {
 			
 			outputText("Her second egg forces its way down your throat with pulsing shudders and you can feel your hips straining against the weight of your overburdened stomach. You're a little afraid of what the second one will do to you as it slides out of the flared tip of the bunny's fourteen inches. Maybe it's the milking motion of the bunny's head bobbing in happy hops on your cock or maybe it's the swelling numbness of the eggs, but your body begins to feel hot and your flesh tingles at your scalp and butt. You clench your eyes, grunting through the heat of the bunny's eggs and, to your surprise, your belly begins to feel like it's emptying.");
 			player.refillHunger(60);
-			if(player.tailType != Tail.RABBIT) {
+			if(player.tailType != Tail.RABBIT && !player.hasPerk(PerkLib.TransformationImmunity) && !player.hasPerk(PerkLib.Undeath)) {
 				//[No Tail: 
 				if(player.tailType == Tail.NONE) outputText("  The heat around your lower back clutches at your tail bone and you feel a fluffy explosion swell around your butt cheeks as a fluffy bunny's tail pops out of your back, twitching excitedly!");
 				//Existing tail: 
 				else outputText("  Your tail jiggles and shrinks, slowly sucking back into your body until only a tiny nub remains which quickly explodes with fluff into a cuddly, twitching bunny tail!");
 			}
-			if(player.ears.type != Ears.BUNNY) {
+			if(player.ears.type != Ears.BUNNY && !player.hasPerk(PerkLib.TransformationImmunity) && !player.hasPerk(PerkLib.Undeath)) {
 				outputText("  The top of your head is next, it seems.");
 				//[No antennae.type:
 				outputText("  Your eyebrows feel like they're being drawn upwards, your eyes getting larger and larger until you're almost painfully aware of every color and sound around you. You shake your head and large, floppy bunny ears bounce in front of your eyes.");
@@ -572,11 +574,13 @@ private function bunbun69():void {
 			outputText(", your spunk calming the egg-laying passion. She pulls her shrinking phallus from your mouth with a wet slurp, the taste of her strange cum sweet on your lips. She rises to a crouch and gives your ");
 			if(player.ears.type != Ears.BUNNY) outputText("new ");
 			outputText("ears a playful tweak between her thumb and forefinger. \"<i>Sorry about that, I don't know what came over me! I certainly didn't expect this, though! Kind of makes me want to stick around and see if you and I could pop out more bunnies,</i>\" she winks. \"<i>But unfortunately, I've got to get going! Maybe I'll try to find you again, some time down the line.</i>\" She gives you a moist little kiss and hops away, still energetic after all that. You groan, still recovering from the eggs.");
-			
-			player.tailType = Tail.RABBIT;
-			player.ears.type = Ears.BUNNY;
+			if (!player.hasPerk(PerkLib.TransformationImmunity) && !player.hasPerk(PerkLib.Undeath)) {
+				player.tailType = Tail.RABBIT;
+				player.ears.type = Ears.BUNNY;
+			}
 			doNext(camp.returnToCampUseOneHour);
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 1, "sen", 1);
 		}
 	}
@@ -597,13 +601,13 @@ private function bunbun69():void {
 		outputText("Still possessed by the delirious egg-laying hysteria, the bunny grunts and jams her cock back down your throat, pushing the egg along with it. Your skin mushrooms as the bunny's load slides down your cum-lubricated neck and tumbles into your belly with an audible, vulgar plop. A feeling of incredible fullness fills you, as if you've been swallowing spunk and eggs for hours. You become dizzy from the bunny's numbing jizz and when her sac deflates as the second egg slides into her dick, you shake your head weakly, as if to say 'no more.' The girl is too far gone in her wanton ardor to take your motion as anything but encouragement, however, and she nuzzles her nose into your vulva, whiskers vibrating with a happy little hum, her buck teeth massaging you enthusiastically, impatient for her own creamy meal. Her hands slide from the back of your head, along your neck, down your back, and to your rump, fingers wrapping around to find your sphincter. Slipping both middle fingers in, she strokes your inner walls with fingers and tongue until your orgasm overpowers your bunny-fucked daze and you climax again, your egg-bloated body spurting in gushing jets of female lubrication into the olive girl's twitching nose.\n\n");
 		
 		outputText("Her second egg forces its way down your throat with pulsing shudders and you can feel your hips straining against the weight of your overburdened stomach. You're a little afraid of what the second one will do to you as it slides out of the flared tip of the bunny's fourteen inches. Maybe it's the milking motion of the bunny's head bobbing in happy hops on your clit or maybe it's the swelling numbness of the eggs, but your body begins to feel hot and your flesh tingles at your scalp and butt. You clench your eyes, grunting through the heat of the bunny's eggs and, to your surprise, your belly begins to feel like it's emptying.");
-		if(player.tailType != Tail.RABBIT) {
+		if(player.tailType != Tail.RABBIT && !player.hasPerk(PerkLib.TransformationImmunity) && !player.hasPerk(PerkLib.Undeath)) {
 			//[No Tail: 
 			if(player.tailType == Tail.NONE) outputText("  The heat around your lower back clutches at your tail bone and you feel a fluffy explosion swell around your butt cheeks as a fluffy bunny's tail pops out of your back, twitching excitedly!");
 			//Existing tail: 
 			else outputText("  Your tail jiggles and shrinks, slowly sucking back into your body until only a tiny nub remains which quickly explodes with fluff into a cuddly, twitching bunny tail!");
 		}
-		if(player.ears.type != Ears.BUNNY) {
+		if(player.ears.type != Ears.BUNNY && !player.hasPerk(PerkLib.TransformationImmunity) && !player.hasPerk(PerkLib.Undeath)) {
 			outputText("  The top of your head is next, it seems.");
 			//[No antennae.type:
 			outputText("  Your eyebrows feel like they're being drawn upwards, your eyes getting larger and larger until you're almost painfully aware of every color and sound around you. You shake your head and large, floppy bunny ears bounce in front of your eyes.");
@@ -613,10 +617,12 @@ private function bunbun69():void {
 		outputText("With a happy sigh, the girl rubs your slick honey off of her face and gives your clit a final, pleased lick. She pulls her shrinking phallus from your mouth with a wet slurp, the taste of her cum sweetly icy on your lips. She rises to a crouch and gives your ");
 		if(player.ears.type != Ears.BUNNY) outputText("new ");
 		outputText("ears a playful tweak between her thumb and forefinger. \"<i>Sorry about that, I don't know what came over me! I certainly didn't expect this, though! Kind of makes me want to stick around and see if you and I could pop out more bunnies,</i>\" she winks. \"<i>But unfortunately, I've got to get going! Maybe I'll try to find you again, some time down the line.</i>\" She gives you a moist little kiss and hops away, still energetic after all that. You groan, still recovering from the eggs.");
-		player.tailType = Tail.RABBIT;
-		player.ears.type = Ears.BUNNY;
+		if (!player.hasPerk(PerkLib.TransformationImmunity) && !player.hasPerk(PerkLib.Undeath)) {
+			player.tailType = Tail.RABBIT;
+			player.ears.type = Ears.BUNNY;
+		}
 		doNext(camp.returnToCampUseOneHour);
-		player.sexReward("cum");
+		player.sexReward("cum","Vaginal");
 		dynStats("lib", 1, "sen", 1);
 	}
 }
@@ -974,7 +980,7 @@ private function getEggflated():void {
 	}
 	outputText(player.modThickness(player.maxThicknessCap(),3));
 	outputText(player.modTone(0,3));
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	dynStats("lib", 1, "sen", -3);
 	doNext(camp.returnToCampUseEightHours);
 }

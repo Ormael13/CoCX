@@ -9,11 +9,17 @@ public class VaginaClass implements IOrifice {
 		
 		public static const HUMAN:int           = 0;
 		public static const EQUINE:int          = 1;
+		//dragon	= 2;
+		//cat		= 3;
+		//			= 4;
 		public static const BLACK_SAND_TRAP:int = 5;
 		public static const CAVE_WYRM:int 		= 6;
 		public static const VENOM_DRIPPING:int 	= 7;
 		public static const MANTICORE:int 		= 8;
 		public static const CANCER:int 			= 9;
+		public static const DEMONIC:int 		= 10;
+		public static const ALRAUNE:int 		= 11;
+		public static const SCYLLA:int 			= 12;
 		
 		public static const WETNESS_DRY:int       = 0;
 		public static const WETNESS_NORMAL:int    = 1;

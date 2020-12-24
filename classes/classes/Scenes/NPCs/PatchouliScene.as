@@ -130,7 +130,7 @@ public class PatchouliScene extends NPCAwareContent {
 				outputText("\"<i>Please.. not so rough, my cock hurts!</i>\"\n\n");
 				outputText("He could at least pretend he likes it, you’re already are very kind, granting him the right to even get raped in the first place instead of straight out killing him. Soon, you find yourself on the verge of orgasm. Patchouli finally loses control of his cat cock as it twitches, filling you with kitty jizz and causing your orgasm shortly after.\n\n");
 				outputText("You keep milking the prankster for a few hours until he is passed out. Then bring him back to your camp and tie him to a tree.\n\n");
-				player.sexReward("cum");
+				player.sexReward("cum","Vaginal");
 			} else {
 				var x:int = player.cockThatFits(36, "length");
 				outputText("You force the catboy on his back and yank his shorts away, revealing his girly ass and his cute pucker. Patchouli gulps as your [cock] hardens, already aware of what is about to happen.\n\n");
@@ -303,7 +303,7 @@ public class PatchouliScene extends NPCAwareContent {
 
 			function patchouliExploreWonderlandStay():void {
 				outputText("You decide to stay regardless of the cat’s thoughts on the matter and hear a roar somewhere in the forest. Patchouli whimpers in terror and tries to hide.\n\n");
-				outputText("\"<i>It’s too late, were both dead. Jabberwocky is here!!!</i>\"\n\n");
+				outputText("\"<i>It’s too late, we're both dead. Jabberwocky is here!!!</i>\"\n\n");
 				outputText("Just as he says this, a massive shape splits the nearby trees wide to pass. It looks like a dragon with pink scales, bat wings and funnily enough two large buck teeth, similar to a rabbit. The overgrown dragon-rabbit thing suddenly speaks.\n\n");
 				outputText("\"<i>You were told never to come back, cat! You will pay for your insolence, along with this outsider.</i>\"\n\n");
 				outputText("The rabbit dragon breathes a stream of fire to the sky and charges.\n\n");
@@ -694,7 +694,5 @@ public class PatchouliScene extends NPCAwareContent {
 			}
 		}
 	}
-
-
 }
 }

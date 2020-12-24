@@ -113,7 +113,7 @@ import classes.internals.*;
 			outputText("She hits you hard, nearly bowling you over.  Thankfully, her talons passed to either side of your torso.  They lock together behind your back and your face is pulled tightly into Sophie's smotheringly large mounds!");
 			if(rand(2) == 0) outputText("  She jiggles them around you pleasantly and coos, \"<i>Don't fight it baby.  Just let your body do what comes naturally.</i>\"\n");
 			else outputText("  She runs her long fingernails through your hair as she whispers, \"<i>Why fight it?  I'll make you feel so good.  Just relax and play with momma Sophie's tits.</i>\"\n");
-			player.dynStats("lus", (13 + player.sens/10));
+			player.dynStats("lus", (13 + player.effectiveSensitivity()/10));
 		}
 		
 		//Compulsion (Male Only)
@@ -292,7 +292,7 @@ import classes.internals.*;
 			this.armorDef = 10;
 			this.armorMDef = 0;
 			this.bonusHP = 300;
-			this.bonusLust = 20;
+			this.bonusLust = 132;
 			this.lust = 10;
 			this.lustVuln = .3;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;

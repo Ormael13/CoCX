@@ -176,7 +176,8 @@ public function ElectraCampMainMenu():void {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to join you in adventures outside camp.");
 		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to stay in camp.");
 		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Etna about accompaning you.");
-	}*/
+	}
+	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");*/
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -291,7 +292,7 @@ public function ElectraSexPlayer():void {
 	return;
 }
 public function PlayerSexElectraPostSpar():void {
-	/*if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.ELECTRA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 1;
 		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.ELECTRA_LVL_UP] == 1) {
@@ -306,7 +307,61 @@ public function PlayerSexElectraPostSpar():void {
 			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ELECTRA_LVL_UP] = 3;
 		}
-	}*/
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.ELECTRA_LVL_UP] == 3) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 42);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 42, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 4;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.ELECTRA_LVL_UP] == 4) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 48);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 48, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 5;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.ELECTRA_LVL_UP] == 5) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 54);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 54, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 6;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.ELECTRA_LVL_UP] == 6) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 60);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 60, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 7;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.ELECTRA_LVL_UP] == 7) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 66);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 66, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 8;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.ELECTRA_LVL_UP] == 8) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 72);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 72, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 9;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.ELECTRA_LVL_UP] == 9) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 78);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 78, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 10;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.ELECTRA_LVL_UP] == 10) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 84);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 84, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 11;
+		}
+		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.ELECTRA_LVL_UP] == 11) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, 90);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 90, 0);
+			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ELECTRA_LVL_UP] = 12;
+		}
+	}
 	PlayerSexElectra();
 }
 public function PlayerSexElectra():void {

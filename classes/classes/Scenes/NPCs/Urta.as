@@ -1985,7 +1985,7 @@ private function oralFiestyUberExplosionUrta():void {
 
 		outputText("The fox giggles and returns to cuddling and licking you.  You rest with a happy smile plastered on your [face] from the experience.  After all the snuggling, you both rise and get dressed.  Urta finds a new dress in the closet and with a long goodbye kiss, you go your separate ways.\n\n");
 		doNext(camp.returnToCampUseOneHour);
-		player.sexReward("cum");
+		player.sexReward("cum","Lips");
 		dynStats("sen", -1);
 		return;
 	}
@@ -2526,7 +2526,7 @@ private function makeUrtaSitOnYourLapWithScylla():void {
 
 	outputText(images.showImage("urta-scylla-lapfuck"));
 	outputText("You smirk at the drunken fox and inform her in no uncertain words that you'll do more than watch.  She blinks at you, her inebriated mind unable to process new thoughts as you stalk forwards and sit behind her on the crate");
-	if(player.lowerBody == LowerBody.NAGA) outputText(", snaking your tail around her legs");
+	if(player.isNaga()) outputText(", snaking your tail around her legs");
 	else if(player.lowerBody == LowerBody.GOO) outputText(", enveloping her legs with your goo");
 	else outputText(", straddling your [legs] around her hips");
 	outputText(".  You grab her narrow waist and pull her up, dragging Scylla's cock-locked head up with her and aligning your " + cockDescript(x) + " with her backdoor before you start to lower her back down.  ");
@@ -4023,6 +4023,7 @@ private function fillMeUpPleaseUrta():void {
 	if (flags[kFLAGS.URTA_FERTILE] == 1) {
 		if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 		else player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
+		if(player.hasCock())player.sexReward("cum","Vaginal");
 	}
 	if(player.hasCock())player.sexReward("Default","Dick",true,false);
 	player.sexReward("cum");
@@ -4356,7 +4357,7 @@ private function lickOutUrtaAtHome():void {
 	//Boost love
 	urtaLove(3);
 	//Drain lust, slimefeed, reduce libido
-	player.sexReward("cum");
+	player.sexReward("cum","Lips");
 	knockUpUrtaChance();
 	if(player.lib > 50) dynStats("lib", -1);
 	if(player.lib > 90) dynStats("lib", -1);
@@ -4400,7 +4401,7 @@ internal function slurpFawkesCocksForFunAndInflation():void {
 	outputText("\n\nThe concept of taking in more fluids is a bit too much for you, making you cringe and nearly lose your... 'lunch'.  You shake your head and thank her, but refuse the drink.");
 	outputText("\n\nYou say goodbye to Urta as you head back towards camp, your stomach sloshing with each step.");
 	dynStats("lus", 10+player.lib/10);
-	player.sexReward("cum");
+	player.sexReward("cum","Lips");
 	player.refillHunger(100);
 	flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] = 0;
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 3;
@@ -5004,7 +5005,7 @@ private function getAPetReward():void {
 	outputText("  Your Owner doesn't just let it end there, however, she continues her paw-assault on your crotch, stroking and rubbing until you become little more than a gibbering mess of orgasm-infused flesh laying in a puddle of your own sexy goo.");
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 2;
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 2;
-	player.sexReward("cum");
+	player.sexReward("cum","Lips");
 	outputText("...");
 	menu();
 	addButton(0,"Next",feedTheBeastPartII);
@@ -5285,7 +5286,6 @@ private function urtaTakesPCOnWalkies():void {
 		flags[kFLAGS.URTA_VIXEN_AND_CREAM_COUNTER]++;
 		urtaLove(3);
 		doNext(camp.returnToCampUseTwoHours);
-	}
-	
+	}	
 }
 }

@@ -21,7 +21,6 @@ public class Kraken extends Monster
 		}
 		
 		public function krakenInkSpray():void {
-			clearOutput();
 			outputText("The kraken stretches all her tentacles apart revealing a huge gaping pussy at the center which spray a cloud of ink all around you impairing your vision. ");
 			if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, 3, 0, 0, 0);
 		}
@@ -93,15 +92,15 @@ public class Kraken extends Monster
 			this.weaponVerb="slash";
 			this.weaponAttack = 145;
 			this.armorName = "super thick skin";
-			this.armorDef = 190;
-			this.armorMDef = 95;
+			this.armorDef = 380;
+			this.armorMDef = 190;
 			this.bonusHP = 10000;
-			this.bonusLust = 20;
+			this.bonusLust = 650;
 			this.lust = 20;
 			this.lustVuln = .2;
 			this.level = 100;
 			this.gems = 0;
-			this.drop = NO_DROP;
+			this.drop = new WeightedDrop(consumables.ABYSSIN, 1);
 			//this.drop = new WeightedDrop(consumables.SPPEARL, 1);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);

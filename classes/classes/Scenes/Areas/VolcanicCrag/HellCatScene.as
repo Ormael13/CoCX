@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.VolcanicCrag 
+package classes.Scenes.Areas.VolcanicCrag
 {
 import classes.*;
 import classes.BodyParts.Eyes;
@@ -17,10 +17,10 @@ import classes.display.SpriteDb;
 public class HellCatScene extends BaseContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+
 		public var mutations:MutationsHelper = new MutationsHelper();
-		
-		public function HellCatScene() 
+
+		public function HellCatScene()
 		{
 		}
 
@@ -46,7 +46,7 @@ public function DefeatedHellCat():void {
 	if (player.hasCock()) addButton(1, "Pussycat", DefeatedHellCatPussycat);
 	if (player.hasVagina()) addButton(2, "Catcock", DefeatedHellCatCatcock);
 	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-	
+
 }
 public function DefeatedHellCatPussycat():void {
 	if (player.gender == 3) outputText("You ain’t gonna get any close to that feline penis of hers. " + (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] > 0 ? "If your hunch is good it’s likely even worse than that of the hellhounds. " : "") + "");
@@ -264,6 +264,7 @@ public function WitchesSabbathThirdVisitYes():void {
 	if (rand(2) == 0) player.goIntoRut(false);
 	else player.goIntoHeat(false);
 	flags[kFLAGS.WITCHES_SABBATH]++;
+	CoC.instance.mainViewManager.updateCharviewIfNeeded();
 	doNext(camp.returnToCampUseOneHour);
 }
 public function WitchesSabbathFourthVisitYeahSure():void {
@@ -317,6 +318,7 @@ public function WitchesSabbathFourthVisitYeahSure2():void {
 
 	outputText("The hellcat nod with a satisfied smile.\n\n\"<i>All over now. I don’t know how your body became warped, must have been transformatives. Come and see me if that ever happens again.</i>\"\n\n");
 	outputText("She waves off and leave you there to enjoy your new toys. After a few minute pleasuring yourself in order to kill that raging erection and aching pussy you head back to camp.");
+	CoC.instance.mainViewManager.updateCharviewIfNeeded();
 	if (flags[kFLAGS.WITCHES_SABBATH] > 5) {
 		flags[kFLAGS.WITCHES_SABBATH] -= 2;
 		cleanupAfterCombat();

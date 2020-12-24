@@ -640,8 +640,8 @@ private function jojoMilkPay(tentacle:Boolean = false):void {
 	var payout:Number = 0;
 	var cap:Number = 500;
 	var cumQ:Number = 0;
-	//Ez mode cap doubles
-	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
+	//Ez mode cap is 10x
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) cap *= 10;
 	if(debug) 
 	{
 		flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0;
@@ -1285,7 +1285,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				if(player.cockTotal() == 3) outputText("A multitude of thick cum-streams splatter over Jojo from head to waist as your [cocks] hose him down.  ");
 				outputText("\n\nSatisfied at last, you pull yourself away from the dazed mouse.  His shaft is still swollen with need, his hands irresistibly stroking it, eyes vacant.  You're going to corrupt him so much more next time.\n\n");
 				//Preggers chance!
-				player.sexReward("cum");
+				player.sexReward("cum","Vaginal");
 				player.sexReward("Default", "Default",true,false);
 				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
@@ -1335,7 +1335,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				}
 				if(player.biggestLactation() >= 1.5 && player.biggestTitSize() > 2 && player.mostBreastsPerRow() >= 2 && player.breastRows.length >= 1) outputText("Every sensual peak within you is mirrored with small spurts of milk from your nipples.  It eventually trickles down to Jojo's tongue, spurring his efforts on.  ");
 				outputText("The mousey gets more and more in to eating your box, making it harder and harder to stave off an orgasm.  You wrap ");
-				if(player.lowerBody == LowerBody.NAGA) outputText("your coils ");
+				if(player.isNaga()) outputText("your coils ");
 				else if(player.lowerBody == LowerBody.GOO) outputText("your jiggling goo ");
 				else outputText("your thighs ");
 				outputText("around his head and quiver with passion, ");
@@ -1515,7 +1515,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				}
 				player.cuntChange(3, true);
 				//Preggers chance!
-				player.sexReward("cum");
+				player.sexReward("cum","Vaginal");
 				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 				else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 				//The end
@@ -1529,7 +1529,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				}
 				else {
 					outputText("\n\nExhausted, you pull yourself free from the mouse, drained of lust but feeling VERY naughty.  Jojo doesn't even bother getting up, he just keeps masturbating, lost in the scents of your slick juices and his cum.  As you walk away with a sexy wiggle, the sexual fluids are absorbed into the ground.");
-					player.sexReward("cum");
+					player.sexReward("cum","Vaginal");
 					dynStats("lib", 2, "cor", 1);
 				}
 			}
@@ -1580,7 +1580,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 						player.buttChange(monster.cockArea(0), true);
 						outputText("You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.");
 					}
-					player.sexReward("cum");
+					player.sexReward("cum","Vaginal");
 					hideUpDown();
 					dynStats("cor", 1);
 					statScreenRefresh();
@@ -1699,7 +1699,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			//Preggers chance!
 			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 			else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
-			player.sexReward("cum");
+			player.sexReward("cum","Vaginal");
 			dynStats("cor", 0.5);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1716,7 +1716,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			else outputText("You settle the full of your weight against his face and laugh as you feel him struggling to pleasure you, his nose and mouth trapped tight against your slit so that every attempt to breathe is halted, making him tremble breathlessly beneath you.  ");
 			outputText("His tongue digs deep into your body, finally bringing you to an explosive climax that leaves you shuddering thoughtlessly above him. You actually forget you are sitting on his face for a moment, feeling him go still as he nearly passes out from lack of breath before you stand up.  ");
 			outputText("He gasps for breath and coughs a few times, and once you are sure that he is safe, you laugh softly and walk back to your camp.  ");
-			player.sexReward("cum");
+			player.sexReward("saliva","Vaginal");
 			dynStats("cor", 0.5);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1853,7 +1853,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				outputText("Jojo's balls begin to shrink as he shoots his own seed, your weight forcing his body flat against the ground once his sac has shrunk to normal.  His tail still slides around inside your " + buttDescript() + ", spurring you to reward him with a few post-orgasm thrusts.  His bowels are hot and wet from your load, and you grind your " + player.cockDescript(x) + " around with a look of supreme bliss on your face.  Jojo groans as you pull out, releasing a stream of creamy white that slides down to his now normal sized balls. Well... normal for Jojo.\n\n");
 				outputText("As you move away from the mouse, you step into a huge puddle of Jojo's creamy rodent cum and look back. You see that his dick, still trapped under his body and pointing behind the two of you, blasted long ropes of thick mouse spunk far into the depths of the forest.  Feeling beyond satisfied, you give your mouse slut a quick scratch behind the ear as he passes out – cum splattered and smiling.");
 			}
-			player.sexReward("cum");
+			player.sexReward("default","Dick");
 			doNext(camp.returnToCampUseTwoHours);
 		}
 
@@ -3257,7 +3257,7 @@ private function getAnallyFuckedByMouseYouSlut():void {
 	dynStats("sens", 1, "cor", -1);
 	flags[kFLAGS.JOJO_ANAL_CATCH_COUNTER]++;
 	flags[kFLAGS.JOJO_SEX_COUNTER]++;
-	player.sexReward("cum");
+	player.sexReward("cum","Anal");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -3293,7 +3293,7 @@ private function getVagFuckedByMouse():void {
 	flags[kFLAGS.JOJO_SEX_COUNTER]++;
 	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 	else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82, (jojoCumQ() < 2000 ? 100 - (jojoCumQ() / 50) : 60));
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -3332,13 +3332,14 @@ private function suckJojosCock():void {
 	flags[kFLAGS.JOJO_BLOWJOB_XP]++;
 	flags[kFLAGS.JOJO_SEX_COUNTER]++;
 	dynStats("lus", 20, "cor", -1);
-	player.sexReward("cum");
+	player.sexReward("cum","Lips");
 	doNext(camp.returnToCampUseOneHour);
 }
 
 public function mishapsLunaJojo():void {
 	clearOutput();
-	outputText("Jojo is looking at the ground in front of his training area in annoyance. Seems someone has drawn an ugly imp in the dirt using red paint and the imp happens to be jerking a 10 foot long cock. You spot Luna in the distance, cleaning the area with a smile. Surely it couldn’t have been her.\n\n");
+	outputText("Jojo is looking at the ground in front of his training area in annoyance. Seems someone has drawn an ugly imp in the dirt using red paint and the imp happens to be jerking a 10 foot long cock." +
+			" There is text along with it, “Give in, you know you want it.” You spot Luna in the distance, cleaning the area with a smile. Surely it couldn’t have been her.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps1)) player.addStatusValue(StatusEffects.CampLunaMishaps1, 2, 1);
 	else player.createStatusEffect(StatusEffects.CampLunaMishaps1, 0, 1, 0, 0);
 	if (!player.hasStatusEffect(StatusEffects.LunaWasCaugh)) player.createStatusEffect(StatusEffects.LunaWasCaugh, 1, 0, 0, 0);
@@ -3346,6 +3347,5 @@ public function mishapsLunaJojo():void {
 	if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 	doNext(playerMenu);
 }
-
 }
 }

@@ -24,6 +24,7 @@ import classes.Scenes.Areas.Forest.BeeGirl;
 			this.armorDef = 25;
 			this.armorMDef = 10;
 			this.bonusHP = 100;
+			this.bonusLust = 181;//lib+sens+lvl
 			this.level = 16;
 			this.gems = rand(30) + 12;
 			this.drop = new ChainedDrop().add(consumables.OVIELIX, 1 / 4)

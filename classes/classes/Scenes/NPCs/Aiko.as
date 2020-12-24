@@ -58,8 +58,8 @@ import classes.internals.*;
 			outputText("Aiko moves her fingers through the air in a circle, conjuring up a pale blue flame. As she thrusts her palm forward, it rockets toward you like a missile, bursting on impact! The flames burn intensely as they engulf you, at the same time filling your body with a crippling pleasure that makes your skin flush red.  ");
 			var damage:int = 2*(str + rand(30));
 			damage = player.takeFireDamage(damage, true);
-			//player.takeLustDamage(15 + player.sens / 5
-			player.takeLustDamage(15 + player.sens / 5, true);
+			//player.takeLustDamage(15 + player.effectiveSensitivity() / 5
+			player.takeLustDamage(15 + player.effectiveSensitivity() / 5, true);
 		}
 		
 		private function aikoFireArrow():void
@@ -155,7 +155,7 @@ import classes.internals.*;
 			outputText("Aiko moves her fingers through the air in a circle, conjuring up a corrupt purple flame. She twists her upper body into a batter’s stance and strikes it at you ferociously, making the fireball rocket toward you like a missile, bursting on impact! The flames burn intensely as they engulf you, but the more it burns, the more you start to LIKE it.  ");
 			player.takeFireDamage(int(str/2) + rand(15), true);
 			//if masochist, take more damage
-			(player.hasPerk(PerkLib.Masochist) ?  player.takeLustDamage(15 + player.sens / 5) : player.takeLustDamage((10 + player.sens / 5)*2));
+			(player.hasPerk(PerkLib.Masochist) ?  player.takeLustDamage(15 + player.effectiveSensitivity() / 5) : player.takeLustDamage((10 + player.effectiveSensitivity() / 5)*2));
 		}
 		
 		private function aikoTerrorize():void
@@ -221,14 +221,14 @@ import classes.internals.*;
 					reportABug("Aiko Tease");
 					break;
 			}
-			var lustDmg:int = 8 + int(player.sens / 5);
+			var lustDmg:int = 8 + int(player.effectiveSensitivity() / 5);
 			player.takeLustDamage(lustDmg);
 		}
 
 		private function aikoIllusionLust():void
 		{
 			var x:int = rand(6);
-			var lustDmg:int = 11 + int(player.sens / 5);
+			var lustDmg:int = 11 + int(player.effectiveSensitivity() / 5);
 			
 			if (player.hasStatusEffect(StatusEffects.Illusion)) {
 				outputText("A series of Aiko's illusions surround you! You try to find the real one but you're too slow! An arrow comes from the side, impaling you!  ");
@@ -460,7 +460,7 @@ import classes.internals.*;
 		{
 			castIllusion--;
 			if (player.hasStatusEffect(StatusEffects.lustvenom)) {
-				player.takeLustDamage(5 + player.sens / 5);
+				player.takeLustDamage(5 + player.effectiveSensitivity() / 5);
 				outputText("  You feel slightly more flushed from the poisoned arrow.\n\n");
 			}
 			if (player.hasStatusEffect(StatusEffects.Illusion))
@@ -564,11 +564,13 @@ import classes.internals.*;
 				initWisLibSensCor(200, 80, 130, game.flags[kFLAGS.AIKO_CORRUPTION]);
 				this.level = 58;
 				this.tail.count = 8;
+				this.bonusLust = 268;
 			} else {
 				initStrTouSpeInte(45, 55, 180, 170);
 				initWisLibSensCor(170, 70, 115, game.flags[kFLAGS.AIKO_CORRUPTION]);
 				this.level = 48;
 				this.tail.count = 7;
+				this.bonusLust = 233;
 			}
 			this.gems = rand(10) + 30;
 			this.drop = new WeightedDrop(consumables.FOXJEWL, 1);

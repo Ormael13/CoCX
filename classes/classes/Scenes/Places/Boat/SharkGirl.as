@@ -68,7 +68,7 @@ public class SharkGirl extends Monster
 			this.armorDef = 12;
 			this.armorMDef = 1;
 			this.bonusHP = 20;
-			this.bonusLust = 20;
+			this.bonusLust = 130;
 			this.lust = 40;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
@@ -84,7 +84,5 @@ public class SharkGirl extends Monster
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();
 		}
-
 	}
-
 }

@@ -251,13 +251,13 @@ public class Mountain extends BaseContent
 		}
 
 		public function minotaurChance():Number {
-			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0) return 3;
+			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || player.hasPerk(PerkLib.LactaBovineImmunity)) return 3;
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0) return 2;
 			return 1;
 		}
 		public function minotaurRouter():void {
 			//Every 15 explorations chance at mino bad-end!
-			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && rand(16) == 0) {
+			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && !player.hasPerk(PerkLib.LactaBovineImmunity) && rand(16) == 0) {
 				spriteSelect(44);
 				minotaurScene.minoAddictionBadEndEncounter();
 				return;
@@ -289,7 +289,7 @@ public class Mountain extends BaseContent
 				}
 				//Mino gangbang
 				if (!player.hasStatusEffect(StatusEffects.MinoPlusCowgirl) || rand(10) == 0) {
-					if (flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.cowScore() >= 4 && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && player.minotaurAddicted()) {
+					if (flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.cowScore() >= 4 && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && (player.minotaurAddicted() || player.hasPerk(PerkLib.LactaBovineImmunity))) {
 						//PC must be a cowmorph (horns, legs, ears, tail, lactating, breasts at least C-cup)
 						//Must be addicted to minocum
 						outputText("As you pass a shadowy cleft in the mountainside, you hear the now-familiar call of a cowgirl echoing from within.  Knowing what's in store, you carefully inch closer and peek around the corner.");

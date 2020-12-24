@@ -61,6 +61,8 @@ public class Face extends SaveableBodyPart {
 	public static const USHI_ONI_ONNA:int	 = 52;
 	public static const FAIRY:int            = 53;
 	public static const CRAZY:int            = 54;
+	public static const SMUG:int             = 55;
+	public static const SQUIRREL:int         = 56;
 	// Don't forget to add new types in DebugMenu.as list FACE_TYPE_CONSTANTS
 	
 	public function Face(creature:Creature) {

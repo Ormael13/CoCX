@@ -22,7 +22,7 @@ public function dianaAffection(changes:Number = 0):Number {
 public function repeatLakeEnc():void {
 	clearOutput();
 	outputText("As you explore the lake area, you run into ");
-	if (flags[kFLAGS.DIANA_LVL_UP] >= 8) outputText("Diana");
+	if (flags[kFLAGS.DIANA_AFFECTION] >= 95) outputText("Diana");
 	else if (flags[kFLAGS.DIANA_LVL_UP] >= 2) outputText("an unicorn");
 	else outputText("a white furred horse morph");
 	outputText(".\n\nAt first she doesn’t notice you, she’s to busy examining a flower. You walk to her to greet her, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled expression and grabs her staff to defend herself, lunging for a set of preemptive strikes as she begins to attack you.\n\n");
@@ -40,7 +40,7 @@ public function repeatLakeEnc():void {
 public function repeatPlainsEnc():void {
 	clearOutput();
 	outputText("As you explore the plains area, you run into ");
-	if (flags[kFLAGS.DIANA_LVL_UP] >= 8) outputText("Diana");
+	if (flags[kFLAGS.DIANA_AFFECTION] >= 95) outputText("Diana");
 	else outputText("an unicorn");
 	outputText(".\n\nAt first she doesn’t notice you, she’s to busy examining a flower. You walk to her to greet her, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled expression and grabs her staff to defend herself, lunging for a set of preemptive strikes as she begins to attack you.\n\n");
 	outputText("\"<i>Eeeeep! Go away, you fiend! ");
@@ -56,7 +56,7 @@ public function repeatPlainsEnc():void {
 public function repeatBattlefieldEnc():void {
 	clearOutput();
 	outputText("As you explore the outer battlefield area, you run into ");
-	if (flags[kFLAGS.DIANA_LVL_UP] >= 8) outputText("Diana");
+	if (flags[kFLAGS.DIANA_AFFECTION] >= 95) outputText("Diana");
 	else outputText("an unicorn");
 	outputText(".\n\nAt first she doesn’t notice you, she’s to busy examining a flower. You walk to her to greet her, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled expression and grabs her staff to defend herself, lunging for a set of preemptive strikes as she begins to attack you.\n\n");
 	outputText("\"<i>Eeeeep! Go away, you fiend! ");
@@ -516,18 +516,6 @@ private function levelingHerself():void {
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 8;
 	}
-	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.DIANA_LVL_UP] == 8) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 45);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 45);
-		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.DIANA_LVL_UP] = 9;
-	}
-	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.DIANA_LVL_UP] == 9) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 51);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 51);
-		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.DIANA_LVL_UP] = 10;
-	}
 	dianaAffection(5);
 }
 public function beMyStallion():void {
@@ -690,6 +678,7 @@ public function mainCampMenu():void {
 	menu();
 	addButton(0, "Appearance", dianaAppearance);
 	//1 - Talk
+	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(2, "Spar", dianaSparsWithPC).hint("Ask Diana for a mock battle.");
 	if (player.HP < player.maxHP()) addButton(3, "Healing", HealingScene);
 	else addButtonDisabled(3, "Healing", "You're fully healed already.");
 	addButton(4, "Sex", mainSexMenu);
@@ -702,6 +691,69 @@ public function dianaAppearance():void {
 	outputText("Your eyes pretend not to drop to her J cup breast below her neck though if she noticed she did not seem to mind. Her feets as with all horse morphs ends in hooves. You have been hit often enough by these to know not to mess with her. Her tail the same color as as hair is wrapped across her legs right now. You know Diana protected her virginity up to becoming a Alicorn, though now since you are her stallion, she is before anything your girlfriend.\n\n");
 	menu();
 	addButton(14, "Back", mainCampMenu);
+}
+
+public function dianaSparsWithPC():void {
+	clearOutput();
+	outputText("You ask Diana for a mock battle.\n\n");
+	outputText("\"<i>You know i not good fighter. I preffer more to stay on backline to provide support...</i>\" she complines. She grabs her staff and adopt a fighting stance, ready for combat.");
+	startCombat(new Diana());
+}
+public function wonOverDianaSpar():void {
+	clearOutput();
+	outputText("\"<i>I need get stronger to have chance next time to win this spar,</i>\" she mumbles under her breath.\n\n");
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.DIANA_DEFEATS_COUNTER]++;
+		else flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 1;
+		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.DIANA_LVL_UP] == 8) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 45);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 45);
+			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.DIANA_LVL_UP] = 9;
+		}
+		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.DIANA_LVL_UP] == 9) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 51);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 51);
+			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.DIANA_LVL_UP] = 10;
+		}
+		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.DIANA_LVL_UP] == 10) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 57);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 57);
+			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.DIANA_LVL_UP] = 11;
+		}
+		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.DIANA_LVL_UP] == 11) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 63);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 63);
+			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.DIANA_LVL_UP] = 12;
+		}
+		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.DIANA_LVL_UP] == 12) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 69);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 69);
+			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.DIANA_LVL_UP] = 13;
+		}
+		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.DIANA_LVL_UP] == 13) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 75);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 75);
+			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.DIANA_LVL_UP] = 14;
+		}
+		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.DIANA_LVL_UP] == 14) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 81);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 81);
+			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.DIANA_LVL_UP] = 15;
+		}
+	}
+	cleanupAfterCombat();
+}
+public function lostToDianaSpar():void {
+	clearOutput();
+	outputText("Diana kicks you in the face, knocking you unconscious. When you wake up, you realise she seems never to change compared to begining of your relationship with her. Always kicking enemy even if it a friendly spar. Well maybe one day she get over this nasty habit of her, right?\n\n");
+	cleanupAfterCombat();
 }
 
 public function HealingScene():void {

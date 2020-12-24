@@ -37,13 +37,12 @@ public function winningOverCaveWyrm():void {
 	menu();
 	if (player.hasCock()) {
 		addButton(0, "Nope", cleanupAfterCombat);
-		if (player.cavewyrmCocks() > 0)
-		{
+		if (player.cavewyrmCocks() > 0) {
 			outputText("Defeated, the Cave Wyrm reels back and falls shoulders-first into the ground. There's a dull smack where she strikes the earth... followed by an odd 'hiss' sound between her legs. Your eyes drop down the busty but fearsome Wyrm's figure to her glistening vagina just in time to see discolored vapors rising from the ground in front of it: she's got acid femcum, and it's turning even the stone under her sex to smoke...! This only turns your acid dripping cock on more...\n\n");
 			outputText("Her scaly thighs part a little as she sizes-up your torso and, of course, your own sex. Just how long has she been waiting for this?\n\n");
 			addButton(1, "Fuck Her", winningOverCaveWyrmWithCaveWyrmDick);
 		}
-		else{
+		else {
 			outputText("Defeated, the Cave Wyrm reels back and falls shoulders-first into the ground. There's a dull smack where she strikes the earth... followed by an odd 'hiss' sound between her legs. Your eyes drop down the busty but fearsome Wyrm's figure to her glistening vagina just in time to see discolored vapors rising from the ground in front of it: she's got acid femcum, and it's turning even the stone under her sex to smoke...! You quickly reconsider trying to fuck her...\n\n");
 			outputText("... then again, maybe you don't. It's definitely a risk- but since when have you ever played it safe in Mareth? The Wyrm's eyes light up curiously as she sees you eyeing her wet genitals, and something about the twisted grin on her face tells her she'd like you to try. Her scaly thighs part a little as she sizes-up your torso and, of course, your own sex.\n\n");
 			addButton(1, "Fuck Her", winningOverCaveWyrmDMelting);
@@ -100,14 +99,13 @@ public function winningOverCaveWyrmWithCaveWyrmDick():void {
 	outputText("Your bodies roll in a lewd union across the cavern floor, your bodies bucking with each other. Her thighs scrape across your sides constantly, your crotches joined for minutes as you fuck each other with wild, lusty abandon. You're soon a sweaty mess, but you manage to keep up with the Wyrm" + (flags[kFLAGS.HERM_CAVE_WYRM] > 0 ? ", whose cock bounces above or grinds against your belly in sloppy strokes with your bucks, thrusts and twists together as mates" : "") + ". It's raw, primal sex... and true to her words, the pleasure you feel is far more than it could ever normally be from a defrent partners cooch. This cock is made to fuck wyrms like her: ");
 	outputText("pleasure radiates along your dick's insides, resulting in throbs of euphoria. The drooling acid from her snatch onto your tights only serves to make you fuck her harder.\n\n");
 	outputText("Two arms scoop-around your chest and hug you to her bosom, before the Wyrm twists and raises-up to plant herself on top of your crotch. The cool cavern stone floor on your back feels good- but so does the hot, messy-wet vice of her sex around your hilt. Looking down, you see yourself balls-deep in her plump pussy still, her tail thrashing behind her as she makes slow bucks up and down- ... your breath catches, and your nerves all but tremble. You're about to cum!\n\n");
-
 	outputText("Scaled fingers lay-down and splay across your chest as she presses her crotch into yours: your dick makes huge throbs inside of her, blowing-out the thickest load of neon acidic cum you've shot in months. Because of her acid- you cum enough semen past her cervix and into her womb that she's sure to fertilize at least a few of her eggs. This your partner is far from done and as you reach your second wind she catch up and resume bucking her hips.\n\n");
 	outputText("\"<i>I need more of your cum. theres no telling for when ill get another mate who can take me on like this!</i>\" She cries out; You still feel the same wet-and-hot pleasure you had earlier inside of her and it seems you won't stop feeling it for a while as your partner relentlesstly attempt to milk your seed.\n\n");
-	outputText("She huffs and groans; you're not sure how many times she came or if she's been cumming for minutes already, but ecstasy peaks on her face before she smiles and leans back, palms now on your knees. \"<i>Haaah~</i>\" She groans, wiggling her hips into your crotch as you reach your own orgasmYour member spurts and swells keeping on filling the horny cave wyrm cunt for whats its worth of your glowing seed until her belly balloons out with the sheer volume of your neon blue cum. You can actualy see your cum from inside her stomach as it cause her bellow to glow with the characteristic neon blue of your fluids. \"<i>Ah- good. Finally. Normaly most of my mate dicks melt but yours is thankfully made for this</i>\" She says, before pushing-up off your thighs.\n\n");
+	outputText("She huffs and groans; you're not sure how many times she came or if she's been cumming for minutes already, but ecstasy peaks on her face before she smiles and leans back, palms now on your knees. \"<i>Haaah~</i>\" She groans, wiggling her hips into your crotch as you reach your own orgasm. Your member spurts and swells keeping on filling the horny cave wyrm cunt for whats its worth of your glowing seed until her belly balloons out with the sheer volume of your neon blue cum. You can actualy see your cum from inside her stomach as it cause her bellow to glow with the characteristic neon blue of your fluids. \"<i>Ah- good. Finally. Normaly most of my mate dicks melt but yours is thankfully made for this</i>\" She says, before pushing-up off your thighs.\n\n");
 	outputText("She just shrugs. \"<i>Well the bad news is that I still need to get nourishment for the eggs so I can't stay with you, but at least you'll probably make a few hatchling.</i>\" She says before lifting up. While your still recovering from the subsequant orgasms you hear her footsteps carrying her away, and by the time you look, the Cave Wyrm is gone.\n\n");
 	player.sexReward("vaginalFluids");
 	outputText("\n\nThe residual effect of her vaginal acid seems to have enhanced your member sensitivity as well as your libido by a notch.");
-	dynStats("lib"+5);
+	dynStats("lib",+5);
 	player.addCurse('sens',+1)
 	cleanupAfterCombat();
 }
@@ -152,7 +150,7 @@ public function loosingToHermCaveWyrm():void {
 		outputText("The lizard herm begin to pant in delight as she forcefully pull in and out of you, slapping your [ass] at about every five thrusts. By the time she finally reach her orgasm, filling your abused hole full of glowing blue seed, your butt cheeks are imprinted red with her hand shape. Thankfully, you lose consciousness just as she ready for round two.\n\n");
 		outputText("When you wake up, she is already gone and your ass is still leaking with bluish fluorescent cum but at least she left your equipment in a tidy pile next to you.");
 	}
-	player.sexReward("cum");
+	player.sexReward("cum","Vaginal");
 	cleanupAfterCombat();
 }
 public function loosingToCaveWyrmDMelting():void {
@@ -184,7 +182,7 @@ public function loosingToCaveWyrmDMelting():void {
 		if (player.cocks.length > 1) player.removeCock(0, 1);
 		else player.killCocks(1);
 	}
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids","Dick");
 	cleanupAfterCombat();
 }
 		

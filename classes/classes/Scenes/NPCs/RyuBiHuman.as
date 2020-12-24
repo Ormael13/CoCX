@@ -32,7 +32,7 @@ public class RyuBiHuman extends Monster
 			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "red";
 			this.hairColor = "black";
-			this.hairLength = 15;
+			this.hairLength = 45;//obscenely long, >= 40 a mniej niż tallness
 			initStrTouSpeInte(100, 90, 80, 90);
 			initWisLibSensCor(90, 50, 35, 50);
 			this.weaponName = "claws";
@@ -42,16 +42,16 @@ public class RyuBiHuman extends Monster
 			this.armorDef = 54;
 			this.armorMDef = 54;
 			this.bonusHP = 600;
-			this.bonusLust = 10;
+			this.bonusLust = 175;//lib+sens+lvl
 			this.lust = 20;
 			this.lustVuln = .25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 42;
+			this.level = 90;
 			this.gems = 15 + rand(8);
-			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);//zamienić na worek of spirit stones ^^
-			this.horns.type = Horns.DRACONIC_X4_12_INCH_LONG;
-			this.horns.count = 4;
-			this.tailType = Tail.DRACONIC;
+			this.drop = new ChainedDrop().
+					add(consumables.BAGOCA1, 1).
+					add(consumables.BAGOCA2, 0.7).
+					add(consumables.BAGOCA3, 0.4);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGodType, 0, 0, 0, 0);
 			checkMonster();

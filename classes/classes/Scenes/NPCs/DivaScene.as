@@ -122,8 +122,16 @@ public class DivaScene extends XXCNPC{
             _sexMenu.add("Share A Meal",shareAMeal).disableIf((player.vampireScore() < 6)|| !(player.faceType == Face.VAMPIRE));
             _sexMenu.add("Bloody Rose",bloodyRose).disableIf((player.vampireScore() < 6) || !(player.faceType == Face.VAMPIRE));
 
-            function shareAMeal():void{scene("camp/sexMenu/shareAMeal");}
-            function bloodyRose():void{scene("camp/sexMenu/bloodyRose");}
+            function shareAMeal():void{
+                scene("camp/sexMenu/shareAMeal");
+                player.orgasm();
+                player.sexReward("Default");
+            }
+            function bloodyRose():void{
+                scene("camp/sexMenu/bloodyRose");
+                player.orgasm();
+                player.sexReward("Default");
+            }
         }
     }
 
@@ -150,8 +158,10 @@ public class DivaScene extends XXCNPC{
             }
         } else if(player.isMaleOrHerm()){
             display(baseRef + "male/regular",{$combat:fromCombat});
+            player.sexReward("vaginalFluids","Dick");
         } else {
             display(baseRef + "female/regular",{$combat:fromCombat});
+            player.sexReward("vaginalFluids","Vaginal");
         }
         if(fromCombat){
             if(firstLoss){
@@ -163,6 +173,7 @@ public class DivaScene extends XXCNPC{
         } else{
             display(baseRef + "outro/camp");
         }
+        player.orgasm();
         if(!fromCombat){
             doNext(camp.returnToCampUseOneHour);
         }

@@ -61,7 +61,7 @@ use namespace CoC;
 			choice[choice.length] = 0; //Cave Wyrm (lvl 35)
 			//choice[choice.length] = 1; //Ant worker (lvl 41)
 			choice[choice.length] = 1; //2Dark Elf Ranger (underground ver lvl 48)
-			choice[choice.length] = 2; //3Dark Slime (lvl 54 lub 55)
+			choice[choice.length] = 2; //3Dark Slime (lvl 55)
 			choice[choice.length] = 3; //4Displacer Beast (lvl 60)
 			choice[choice.length] = 4; //5Ebonbloom
 			choice[choice.length] = 5; //6Methir Crystal

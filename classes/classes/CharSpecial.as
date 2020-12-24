@@ -2002,7 +2002,7 @@ import classes.Items.*;
 				}
 				else if (player.lowerBody == LowerBody.DRIDER)
 					player.legCount = 8;
-				else if (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.GOO)
+				else if (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.FROSTWYRM || player.lowerBody == LowerBody.GOO)
 					player.legCount = 1;
 				else if (rand(15) == 0)
 					player.legCount = 4;

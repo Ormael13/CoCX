@@ -49,7 +49,7 @@ import classes.internals.*;
 			outputText("Yamata moves her fingers through the air in a circle, conjuring up a corrupted purple flame. She twists her upper body into a batter’s stance and strikes it with the flat of her blade, making the fireball rocket toward you like a missile, bursting on impact! The flames burn intensely as they engulf you, but the more it burns, the more you start to LIKE it.  ");
 			player.takeFireDamage(int(str/2) + rand(15), true);
 			//if masochist, take more damage
-			(player.hasPerk(PerkLib.Masochist) ?  player.takeLustDamage(15 + player.sens/10) : player.takeLustDamage((10 + player.sens/10)*2));
+			(player.hasPerk(PerkLib.Masochist) ?  player.takeLustDamage(15 + player.effectiveSensitivity()/10) : player.takeLustDamage((10 + player.effectiveSensitivity()/10)*2));
 			flags[kFLAGS.YAMATA_MASOCHIST]++;
 		}
 		
@@ -86,7 +86,7 @@ import classes.internals.*;
 			+(player.hasCock()? "engulfing your [cock] whole, sinking fangs into the base and filling your groin with corrupted fire!"+(player.hasVagina()?" Another of her snakes impale your [vagina], filling your womb with corrupted fire!":""):"impaling your [vagina], filling your womb with corrupted fire!")
 			+"\n\nShe roughly tosses you to the ground, smirking as you struggle to your feet, lust burning in your loins.  ");
 			
-			var lustDmg:int = 15 + player.sens / 3 + player.lib/5;
+			var lustDmg:int = 15 + player.effectiveSensitivity() / 3 + player.lib/5;
 			player.takeLustDamage(lustDmg, true);
 			if (player.hasCock()) player.dynStats("cor", 1);
 			if (player.hasVagina()) player.dynStats("cor", 1);
@@ -97,7 +97,7 @@ import classes.internals.*;
 
 		private function yamataIllusionLust():void
 		{
-			var lustDmg:int = 10 + player.sens / 5;
+			var lustDmg:int = 10 + player.effectiveSensitivity() / 5;
 			outputText("Yamata splits herself into a series of illusions that quickly surround you! You try to find the real one but you're too slow! A fireball comes from the side, blasting you with broiling corrupted flames!  ");
 			player.takeFireDamage(int(str/2) + rand(15), true);
 			if (player.hasStatusEffect(StatusEffects.Fear))
@@ -373,7 +373,7 @@ import classes.internals.*;
 			this.armorDef = 16;
 			this.bonusHP = 2400;
 			this.lust = 25;
-			this.bonusLust = 150;
+			this.bonusLust = 310;
 			this.lustVuln = 0.35;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 60;

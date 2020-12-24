@@ -1057,6 +1057,30 @@ public function defeatIsabella():void {
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.ISABELLA_LVL_UP] = 9;
 		}
+		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.ISABELLA_LVL_UP] == 9) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 78);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 78, 0, 0);
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 10;
+		}
+		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.ISABELLA_LVL_UP] == 10) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 84);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 84, 0, 0);
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 11;
+		}
+		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.ISABELLA_LVL_UP] == 11) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 90);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 90, 0, 0);
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 12;
+		}
+		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 16 && flags[kFLAGS.ISABELLA_LVL_UP] == 12) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, 96);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, 96, 0, 0);
+			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.ISABELLA_LVL_UP] = 13;
+		}
 	}
 	if(monster.statusEffectv1(StatusEffects.Sparring) == 2) {
 		outputText("You give the ");

@@ -1909,4 +1909,4 @@ private function yamataAftermath():void {
 	cleanupAfterCombat(camp.returnToCampUseFourHours);
 }
   }
-}
+}

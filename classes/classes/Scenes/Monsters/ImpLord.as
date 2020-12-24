@@ -65,7 +65,7 @@ public class ImpLord extends Imp
 			var damage:int = 3 + rand(10);
 			player.takePhysDamage(damage, true);
 			//[-HP(minor) // +Lust]
-			player.dynStats("lus", 5 + player.sens / 4 + player.cor / 10);
+			player.dynStats("lus", 5 + player.effectiveSensitivity() / 4 + player.cor / 10);
 		}
         override protected function performCombatAction():void
 		{
@@ -142,7 +142,7 @@ public class ImpLord extends Imp
 			this.armorDef = 5;
 			this.armorMDef = 1;
 			this.bonusHP = 100;
-			this.bonusLust = 30;
+			this.bonusLust = 97;
 			this.lust = 30;
 			this.lustVuln = .65;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;

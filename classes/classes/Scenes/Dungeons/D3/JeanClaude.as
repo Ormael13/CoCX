@@ -21,7 +21,7 @@ import classes.Scenes.SceneLib;
 			eAttack();
 		}
 		
-		override public function doAI():void
+		override protected function performCombatAction():void
 		{
 			doubleAttack();
 		}
@@ -110,7 +110,7 @@ import classes.Scenes.SceneLib;
 			this.armorDef = 25;
 			this.armorMDef = 10;
 			this.bonusHP = 1000;
-			this.bonusLust = 30;
+			this.bonusLust = 118;
 			this.lustVuln = 0.6;
 			this.lust = 5;
 			this.level = 38;

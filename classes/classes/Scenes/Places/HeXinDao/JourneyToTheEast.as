@@ -2,7 +2,7 @@
  * ...
  * @author Ormael and others
  */
-package classes.Scenes.Places.HeXinDao 
+package classes.Scenes.Places.HeXinDao
 {
 	import classes.*;
 	import classes.BodyParts.Arms;
@@ -20,14 +20,14 @@ package classes.Scenes.Places.HeXinDao
 	import classes.Items.UndergarmentLib;
 	import classes.Items.WeaponLib;
 	import classes.Items.WeaponRangeLib;
-	
+
 	public class JourneyToTheEast extends HeXinDaoAbstractContent
 	{
 		public var riverdungeon:RiverDungeon = new RiverDungeon();
-		
-		public function JourneyToTheEast() 
+
+		public function JourneyToTheEast()
 		{}
-		
+
 		public function enteringInn(first:Boolean = true):void {
 			clearOutput();
 			if(first){
@@ -53,7 +53,7 @@ package classes.Scenes.Places.HeXinDao
 			}
 			addButton(14, "Leave", heXinDao.riverislandVillageStuff);
 		}
-		
+
 		private function drinkAlcohol():void {
 			clearOutput();
 			outputText("You go sit at the counter and the barman comes over to take your order.\n\n");
@@ -79,7 +79,7 @@ package classes.Scenes.Places.HeXinDao
 			outputText("In the end you realise you are not thirsty after all and wave a goodbye before leaving.\n\n");
 			doNext(curry(enteringInn,false));
 		}
-		
+
 		private function buyDrink(drink:ItemType):void{
 			var cost:int = drink.value * 3;
 			if(player.gems < cost){
@@ -92,10 +92,11 @@ package classes.Scenes.Places.HeXinDao
 			outputText("\n\nThe barman hands over the drink you ordered. ");
 			inventory.takeItem(drink, drinkAlcohol);
 		}
-		
+
 		public function BoardkeeperYangMain():void {
 			clearOutput();
-			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 || player.hasKeyItem("Adventurer Guild: Iron plate") >= 0) {// || player.hasKeyItem("Adventurer Guild: Bronze plate") >= 0 || player.hasKeyItem("Adventurer Guild: Silver plate") >= 0 || player.hasKeyItem("Adventurer Guild: Gold plate") >= 0 || player.hasKeyItem("Adventurer Guild: Platinum plate") >= 0
+			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0
+			|| player.hasKeyItem("Adventurer Guild: Iron plate") >= 0) {// || player.hasKeyItem("Adventurer Guild: Bronze plate") >= 0 || player.hasKeyItem("Adventurer Guild: Silver plate") >= 0 || player.hasKeyItem("Adventurer Guild: Gold plate") >= 0 || player.hasKeyItem("Adventurer Guild: Platinum plate") >= 0 || player.hasKeyItem("Adventurer Guild: Mithril plate") >= 0 || player.hasKeyItem("Adventurer Guild: Orichalcum plate") >= 0 || player.hasKeyItem("Adventurer Guild: Adamantite plate") >= 0
 				outputText("Yang the job handler wait at you arm crossed. She looks bored like she has been there all day.\n\n");
 				outputText("\"<i>So [name] how can I help you today? Here to talk jobs or something else?</i>\"");
 				menu();
@@ -777,7 +778,7 @@ package classes.Scenes.Places.HeXinDao
 			}
 			doNext(BoardkeeperYangMain);
 		}
-		
+
 		public function firstTimeMeetingNeisa():void {
 			clearOutput();
 			outputText("A woman figure in heavy armor is sitting on one of the chair. You can barely see that she got blue eyes and black hairs under that highly covering helmet visor.\n\n");
@@ -872,7 +873,7 @@ package classes.Scenes.Places.HeXinDao
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 4) flags[kFLAGS.NEISA_FOLLOWER] = 5;
 			doNext(curry(enteringInn,false));
 		}
-		
+
 		public function firstTimeMeetingNekomataBoy():void {
 			clearOutput();
 			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 1) {
@@ -998,9 +999,10 @@ package classes.Scenes.Places.HeXinDao
 			if (player.hasPerk(PerkLib.FutaFaculties)) player.removePerk(PerkLib.FutaFaculties);
 			player.strtouspeintwislibsenCalculation2();
 			awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			doNext(camp.returnToCampUseFourHours);
 		}
-		
+
 		public function ChiChiDrunkSex():void {
 			clearOutput();
 			outputText("As you enter the bar you hear a feminine laughter swiftly spotting what seems to be ");

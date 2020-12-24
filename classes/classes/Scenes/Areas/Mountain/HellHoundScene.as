@@ -53,9 +53,9 @@ public class HellHoundScene extends BaseContent
 			if (player.lowerBody == LowerBody.HOOFED) outputText("hocks and knees");
 			else outputText("hands and knees");
 			outputText(" and positions himself behind you. He grips you with his clawed hands on your shoulders and easily holds you in place. The powerful creature is easily able to get past your [armor] and you feel one of his rods brush against your " + buttDescript() + ".  A shudder shoots through your body as he brings his two heads down to either side of your own, his hot canine breath blowing past your ears. He stays there for a few moments, completely still... before suddenly pulling his heads back and ");
-			if (player.vaginas.length > 0 && player.lowerBody != LowerBody.NAGA) outputText("slamming his twin dicks into your " + vaginaDescript(0) + " and your " + assholeDescript() + ".  ");
+			if (player.vaginas.length > 0 && !player.isNaga()) outputText("slamming his twin dicks into your " + vaginaDescript(0) + " and your " + assholeDescript() + ".  ");
 			else outputText("slamming his lower dick into your " + assholeDescript() + ", while rubbing the other between the cheeks of your " + buttDescript() + ".  ");
-			if (player.vaginas.length > 0 && player.lowerBody != LowerBody.NAGA) {
+			if (player.vaginas.length > 0 && !player.isNaga()) {
 				if (player.vaginalCapacity() < monster.cockArea(0)) outputText("You feel an intense mixture of sensations in your lower body as your " + assholeDescript() + " feels like it is being torn apart, while your " + vaginaDescript(0) + " is filled with an intense pleasure at being filled with the creature's large member.  ");
 				else outputText("Your lower body explodes with pain as the hellhound forces himself in too quickly for either your " + assholeDescript() + " or your " + vaginaDescript(0) + " to handle.  ");
 				if (player.vaginas[0].virgin) outputText("<b>You are no longer a virgin!  </b>");

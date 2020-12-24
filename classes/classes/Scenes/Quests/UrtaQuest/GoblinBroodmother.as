@@ -37,7 +37,7 @@ public class GoblinBroodmother extends Goblin
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("E"));
+			createBreastRow(Appearance.breastCupInverse("I"));
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
@@ -48,7 +48,7 @@ public class GoblinBroodmother extends Goblin
 			this.hairColor = "purple";
 			this.hairLength = 4;
 			initStrTouSpeInte(100, 90, 80, 100);
-			initWisLibSensCor(100, 70, 20, 70);
+			initWisLibSensCor(100, 81, 43, 70);
 			this.weaponName = "fists";
 			this.weaponVerb="tiny punch";
 			this.weaponAttack = 20;
@@ -56,7 +56,7 @@ public class GoblinBroodmother extends Goblin
 			this.armorDef = 5;
 			this.armorMDef = 1;
 			this.bonusHP = 300;
-			this.bonusLust = 30;
+			this.bonusLust = 146;
 			this.lust = 50;
 			this.lustVuln = 0.5;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
