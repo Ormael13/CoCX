@@ -3140,17 +3140,28 @@ private function SparrableNPCsMenu():void {
 		hideMenus();
 		clearOutput();
 		outputText("Which place would you like to visit?");
-		if (flags[kFLAGS.PLACES_PAGE] == 1) placesPage2();
-		if (flags[kFLAGS.PLACES_PAGE] == 2) placesPage3();
 		//Build menu
+		if (flags[kFLAGS.PLACES_PAGE] == 2) {
+			placesPage3();
+			return true;
+		}
+		if (flags[kFLAGS.PLACES_PAGE] == 1) {
+			placesPage2();
+			return true;
+		}
 		menu();
 		if (dungeonFound()) addButton(0, "Dungeons", dungeons).hint("Delve into dungeons.");
 		if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(3, "Boat", SceneLib.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 12");
-
+		else addButtonDisabled(3, "???", "???");
+		
 		if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(5, "Tel'Adre", SceneLib.telAdre.telAdreMenu).hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
+		else addButtonDisabled(5, "???", "???");
 		if (flags[kFLAGS.BAZAAR_ENTERED] > 0) addButton(6, "Bazaar", SceneLib.bazaar.enterTheBazaar).hint("Visit the Bizarre Bazaar where the demons and corrupted beings hang out.");
+		else addButtonDisabled(6, "???", "???");
 		if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(7, "Owca", SceneLib.owca.gangbangVillageStuff).hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.");
+		else addButtonDisabled(7, "???", "???");
 		if (flags[kFLAGS.HEXINDAO_UNLOCKED] == 1) addButton(10, "He'Xin'Dao", hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, place where all greenhorn soul cultivators come together.");
+		else addButtonDisabled(10, "???", "???");
 		addButton(4, "Next", placesPage2);
 		addButton(14, "Back", playerMenu);
 		return true;
@@ -3163,16 +3174,25 @@ private function SparrableNPCsMenu():void {
 			if (flags[kFLAGS.GAR_NAME] == 0) addButton(0, "Cathedral", SceneLib.gargoyle.gargoylesTheShowNowOnWBNetwork).hint("Visit the ruined cathedral you've recently discovered.");
 			else addButton(0, "Cathedral", SceneLib.gargoyle.returnToCathedral).hint("Visit the ruined cathedral where " + flags[kFLAGS.GAR_NAME] + " resides.");
 		}
+		else addButtonDisabled(0, "???", "???");
 		if (farmFound()) addButton(1, "Farm", SceneLib.farm.farmExploreEncounter).hint("Visit Whitney's farm.");
+		else addButtonDisabled(1, "???", "???");
 		if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(2, "Town Ruins", SceneLib.amilyScene.exploreVillageRuin).hint("Visit the village ruins. \n\nRecommended level: 12");
+		else addButtonDisabled(2, "???", "???");
 		if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) addButton(3, "Salon", SceneLib.mountain.salon.salonGreeting).hint("Visit the salon for hair services.");
-
+		else addButtonDisabled(3, "???", "???");
+		
 		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) addButton(5, "Shrine", SceneLib.kitsuneScene.kitsuneShrine).hint("Visit the kitsune shrine in the deepwoods.");
+		else addButtonDisabled(5, "???", "???");
 		if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
+		else addButtonDisabled(6, "???", "???");
 		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
+		else addButtonDisabled(7, "???", "???");
 		if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");
-
+		else addButtonDisabled(8, "???", "???");
+		
 		if (flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(10, "Great Tree", SceneLib.aikoScene.encounterAiko).hint("Visit the Great Tree in the Deep Woods where Aiko lives.");
+		else addButtonDisabled(10, "???", "???");
 //	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", CoC.instance.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
 		if (debug) addButton(13, "Ingnam", SceneLib.ingnam.returnToIngnam).hint("Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
 		addButton(4, "Next", placesPage3);
@@ -3189,7 +3209,11 @@ private function SparrableNPCsMenu():void {
 			if (player.statusEffectv2(StatusEffects.ResourceNode1) < 5) addButtonDisabled(1, "???", "You need to explore Mountains more to unlock this place.");
 			else addButton(1, "Quarry", camp.cabinProgress.quarrySite);
 		}
-
+		else {
+			addButtonDisabled(0, "???", "???");
+			addButtonDisabled(1, "???", "???");
+		}
+		
 		addButton(9, "Previous", placesToPage2);
 		addButton(14, "Back", playerMenu);
 	}
@@ -3201,7 +3225,7 @@ private function SparrableNPCsMenu():void {
 
 	private function placesToPage2():void {
 		flags[kFLAGS.PLACES_PAGE] = 1;
-		places();
+		placesPage2();
 	}
 
 	private function dungeons():void {
@@ -4417,10 +4441,10 @@ public function wakeFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 29) {
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 29) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 30;
 			clearOutput();
-			outputText("Zenji going to town... HARD. And Fruits... all loves fruits especialy if they giving even more juice, right? RIGHT?");
+			outputText("Zenji going to town... HARD. Our loved/hated white mare getting bit of help to be what he wanted to be... or something like that. And Fruits... all loves fruits especialy if they giving even more juice, right? RIGHT?");
 			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) player.createStatusEffect(StatusEffects.ZenjiZList,0,0,0,0);
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) player.createStatusEffect(StatusEffects.TrainingNPCsTimersReduction, 6, 0, 0, 0);
 			player.statStore.addBuffObject({
@@ -4435,7 +4459,7 @@ public function wakeFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 30) {
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 30) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 31;
 			clearOutput();
 			outputText("Text.");

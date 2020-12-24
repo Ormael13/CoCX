@@ -29,6 +29,11 @@ package classes.Scenes
 		private function Changelog34():void {
 			clearOutput();
 			outputText("(Part 2/2) <b>Version 0.8o3:</b>\n\n");
+			outputText("-Shark Girl and Tigershark Girl at Ocean got both rised level a stats a bit to respectively lvl 55 and 60.\n");
+			outputText("-Yuki Onna at Glacial Rift got her level rised form 40 to 71 (that included buff to most of her stats).\n");
+			outputText("-Phoenix Platoon was renamed into Phoenix Squad. Also most of enemies in Phoenix Tower get minor lvl/stats boost (really it's nothing large ;))\n");
+			outputText("-Succubus Gardener get bit more beefy on HP section and her heal would lower lust resistance bit less and cost more of her stamina. And IF by chance PC make her heal up enough times to reach 0% lust resistance she still could use heal up few more times but they won't lower her resistance (cuz it's already 0% right?)\n");
+			outputText("-Marae got bit of attention too ^^ She got perk here or there and new moves added to both pure and corrupted versions. A hint for them: You all remember that Marae is the one to make PC int Alraune, right?\n");
 			outputText("-All ascension perks from tab named 'Perk Select(2)' have increased max rank by 5.\n");
 			outputText("-As some crazy dungeon delver PC's went as far as 1000th room in Ebon labyrinth there would be placed chest with EXP in each 10th room aside boos rooms till that 1000th room.\n");
 			outputText("-Buff spells been changed (again) and now would be not as OP especialy due to new stats system been implemented. Well time to get used to new way buffs works. For the balance ^^\n");
@@ -44,15 +49,11 @@ package classes.Scenes
 			outputText("-Jobs: Enchanter, Eromancer, Healer get a small bonus to mana regenerations (the same like Job: Elemental Conjuer have (+5)). Also amount of mana regen gained by possesing Star Sphere was decreased by 1/3.\n");
 			outputText("-Raging Inferno, Glacial Storm, High Voltage, Eclipsing Shadow perks effects was changed to boost respective elemental damage by 20% and each turn without casted the same element spell/special lowering damage bonus by 20% instead of reseting it fully.\n");
 			outputText("-Easy Mode is now toggle instead of difficulty setting. But it can only be toggled when pc play on lower than Hard difficulty.\n");
-			outputText("-Shark Girl and Tigershark Girl at Ocean got both rised level a stats a bit to respectively lvl 55 and 60.\n");
-			outputText("-Phoenix Platoon was renamed into Phoenix Squad. Also most of enemies in Phoenix Tower get minor lvl/stats boost (really it's nothing large ;))\n");
-			outputText("-Succubus Gardener get bit more beefy on HP section and her heal would lower lust resistance bit less and cost more of her stamina. And IF by chance PC make her heal up enough times to reach 0% lust resistance she still could use heal up few more times but they won;t lower her resistance (cuz it's already 0% right?)\n");
-			outputText("-Marae got bit of attention too ^^ She got perk here or there and new moves added to both pure and corrupted versions. A hint for them: You all remember that Marae is the one to make PC int Alraune, right?\n");
 			outputText("-Been pig/boar or orca would now extend hunger bar. Similary each racial mutation perk for those races will increase it too.\n");
 			outputText("-Oni race now could reach 3rd stage of bonuses (+150% to Str racial multi, +90% to Tou racial multi, -30% to Int racial multi, +60% to Wis racial multi) and been called Elder Oni on appearance screen.\n");
 			outputText("-In unequip menu if PC not have specific slot item equipped button will be greyed out (even if PC not yet possible to equip item in that slot (like ring 2nd to 4th)). Also bit of rearrange buttons on first page preparing for future new slot for equipment to be added.\n");
-			outputText("-Yuki Onna at Glacial Rift got her level rised form 40 to 71 (that included buff to most of her stats).\n");
 			outputText("-Herbalism lvl cap been set on 20. Also some of herb crafting got a bit lower req. for herbalism level. And herbalism level will reset on ascension like tease level.\n");
+			outputText("-Places menu will remember on which page was it last time opened. Also it will show all undiscovered places putting buttons with ???. What places are they... that up to player to find out or remember from playing other character that had those places unlocked. (At least now there will be bit less quessing of: did i unlocked all places or not yet?)\n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -65,8 +66,7 @@ package classes.Scenes
 			outputText("-Fixed bugs: Bugfixes / Typo fixing by Pyromania & Liadri, Luna event not happening in forest after PC fire her at first Full Moon event conclusion, some minor errors in calculation and display bonuses for kitsunes, some of Slave Excellia scenes sending back to Fixed Excellia, game ocassionaly incorrectly desc monsters in combat due to forced PC gender setting, returning from any type of minion setting ");
 			outputText("in middle of combat been treated as new turn, Zenji Food option not always resetting, soultraining ring not been accounted for when cultivating, Akbal lust victory not showing any post combat options sometimes, some of enemies like hellhoud been seen as valid target for tailpeg unique sex scene, Yara's Piercing Studio Rare menu Back button not sending back even to main menu, green slime able to lower it ");
 			outputText("lust below 0, Drider Incubus Anal sex giving PC imps pregnancy, bunny herm scenes on plains still TF-ing PC despite been undead/gargoyle, goblin ale huminizing effect not taking into account PC resistance to been TF'd, missing fatigue cost check on Money Strike, Diana not able to level up after joining camp, Many Birds soulskill dealing damage twice, some of attacks incorrect texts, some enemy perks ");
-			outputText("been wrong labeled as player perks in few specials/attacks, eastern bunny perk bugging free balls mutation slot, able to fuck Tamani daughters without having cock, certain Beast Warrior perks not allowing cast Charge Weapon or Charge Armor with all other req. meet\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
+			outputText("been wrong labeled as player perks in few specials/attacks, eastern bunny perk bugging free balls mutation slot, able to fuck Tamani daughters without having cock, certain Beast Warrior perks not allowing cast Charge Weapon or Charge Armor with all other req. meet, mana not regenerating with elemental conjuer job\n\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -406,7 +406,7 @@ package classes.Scenes
 			outputText("-New enemies possible to encounter during Ocean exploration: Shark Girls Pack - lvl 65, Scylla - lvl 70.\n");
 			outputText("-New enemy possible to encounter when exploring Beach: Goo Girl (Beach variant) - lvl 34\n");
 			outputText("-New enemies possible to encounter during Blight Ridge exploration: Corrupted Basic Flesh Golem - lvl 35, Corrupted Basic Flesh Golem - lvl 36.\n");
-			outputText("-New enemies possible to encounter during Glacial Rift exploration: Glacial Troll (Male or Female) - lvl 94\n");
+			outputText("-New enemies possible to encounter during Glacial Rift exploration: Glacial Troll (Male or Female) - lvl 94. (Due to extreme high lvl of enemy and low entry lvl req. for area they will not be found by PC below lvl 54)\n");
 			outputText("-New area to discover: Defile Ravine - home of demon enemies like: Cow Succubus (level 45), Mino Incubus (lvl 46), Corrupted Improved Golem(s) (lvl 59(61))\n");
 			outputText("-Ayo Armors require periodical injection of soulforce to stay in 'powered' state. Depending on armor it can drain form 60 to 120 SF per hour. Menu to transfer SF to armor and later activate armor is in Unequip/Misc menu in Inventory. Also when PC taking off such type of armor all remaining in it SF is transfered into PC. In case that would make PC SF goes over the max capacity all over the top amount of SF is lost.\n");
 			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Ceani (lvl 98), Diana (lvl 69), Dinah (lvl 56), Etna (lvl 96), Electra (lvl 96), Ember (lvl 98), Isabella (lvl 98), Kiha (lvl 99), Kindra (lvl 99), Luna (lvl 99)\n");

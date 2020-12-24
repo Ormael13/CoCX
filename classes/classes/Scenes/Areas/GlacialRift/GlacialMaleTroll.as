@@ -51,17 +51,32 @@ import classes.internals.*;
 			statScreenRefresh();
 		}
 		
+		public function glacialTrollGrabsFinisher():void {
+			outputText("\n\nAs you squirm around in his grasp, he lifts you over his head before slamming you directly into the ground. ");
+			if (player.hasPerk(PerkLib.Resolute)) outputText("You quickly spring to your feet, ready to continue fighting. ");
+			else {
+				outputText("You’re seeing stars as you try to shake yourself from the brutal throw. ");
+				player.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+			}
+			player.removeStatusEffect(StatusEffects.TrollHold);
+			var throwDMG:Number = eBaseDamage() * 2;
+			player.takePhysDamage(throwDMG, true);
+		}
+		
 		override protected function performCombatAction():void
 		{
-			var choice:Number = rand(3);
-			if (choice == 0) glacialTrollPunch();
-			if (choice == 1) {
-				if (!player.hasStatusEffect(StatusEffects.Stunned) && rand(2) == 0) glacialTrollGoreWithTusks();
-				else glacialTrollPunch();
-			}
-			if (choice == 2) {
-				if (!player.hasStatusEffect(StatusEffects.TrollHold) && rand(2) == 0) glacialTrollGrabs();
-				else glacialTrollPunch();
+			if (player.statusEffectv1(StatusEffects.TrollHold) >= 2) glacialTrollGrabsFinisher();
+			else {
+				var choice:Number = rand(3);
+				if (choice == 0) glacialTrollPunch();
+				if (choice == 1) {
+					if (!player.hasStatusEffect(StatusEffects.Stunned) && rand(2) == 0) glacialTrollGoreWithTusks();
+					else glacialTrollPunch();
+				}
+				if (choice == 2) {
+					if (!player.hasStatusEffect(StatusEffects.TrollHold) && rand(2) == 0) glacialTrollGrabs();
+					else glacialTrollPunch();
+				}
 			}
 		}
 		

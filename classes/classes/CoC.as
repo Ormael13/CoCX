@@ -69,7 +69,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 29;
+    public var modSaveVersion:Number = 30;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
@@ -248,7 +248,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8o3";
-			version = ver + " (<b></b>)";
+			version = ver + " (<b>More about Zenji, Traditional X-mas Perk-o-calipse 6 (only around 30+ perks this year), squirrel TF, Defiled Ravine, Ayo Armors and bugfixes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

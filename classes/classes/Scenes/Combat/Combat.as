@@ -1803,30 +1803,18 @@ public class Combat extends BaseContent {
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.TrollHold)) {
             clearOutput();
-			if (player.statusEffectv1(StatusEffects.TrollHold) >= 2) {
-                outputText("As you squirm around in his grasp, he lifts you over his head before slamming you directly into the ground. ");
-				if (player.hasPerk(PerkLib.Resolute)) outputText("You quickly spring to your feet, ready to continue fighting. ");
-				else {
-					outputText("You’re seeing stars as you try to shake yourself from the brutal throw. ");
-					player.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
-				}
-				player.removeStatusEffect(StatusEffects.TrollHold);
-				var throwDMG:Number = monster.eBaseDamage() * 2;
-				player.takePhysDamage(throwDMG, true);
-                return;
-            }
 			if (monster as GlacialMaleTroll) {
 				outputText("You don’t feel motivated, something about his big, strong arms and soothing fur is getting to you, granting you safety from the cold.");
 				player.addStatusValue(StatusEffects.TrollHold, 1, 1);
 			}
-            if (monster as CorruptedMaleTroll) {
+			if (monster as CorruptedMaleTroll) {
 				outputText("You don’t feel motivated, something about his strong arms and soothing fur is getting to you, it’s not so bad once you really sink into him.");
 				outputText("\n\nHe leans in close to you, sniffing you intently as he gives you a long lick across your cheek.");
+				var licklust:Number = (monster.inte / 5) + rand(10);
+				licklust = Math.round(licklust);
+				player.dynStats("lus", licklust, "scale", false);
 			}
-            var licklust:Number = (monster.inte / 5) + rand(10);
-			licklust = Math.round(licklust);
-			player.dynStats("lus", licklust, "scale", false);
-            skipMonsterAction = true;
+            if (player.statusEffectv1(StatusEffects.TrollHold) < 2) skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
             (monster as Holli).waitForHolliConstrict(true);
             skipMonsterAction = true;
@@ -2002,35 +1990,23 @@ public class Combat extends BaseContent {
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.TrollHold)) {
 			clearOutput();
-			if (player.statusEffectv1(StatusEffects.TrollHold) >= 2) {
-                outputText("As you squirm around in his grasp, he lifts you over his head before slamming you directly into the ground. ");
-				if (player.hasPerk(PerkLib.Resolute)) outputText("You quickly spring to your feet, ready to continue fighting. ");
-				else {
-					outputText("You’re seeing stars as you try to shake yourself from the brutal throw. ");
-					player.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
-				}
+			if (rand(3) == 0 || rand(80) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
+				outputText("You squirm violently, trying to shake out of his grasp. You break free of his grasp, pushing him away, disorienting him for a moment.");
 				player.removeStatusEffect(StatusEffects.TrollHold);
-				var throwDMG:Number = monster.eBaseDamage() * 2;
-				player.takePhysDamage(throwDMG, true);
-                return;
-            }
-			else if (rand(3) == 0 || rand(80) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
-                outputText("You squirm violently, trying to shake out of his grasp. You break free of his grasp, pushing him away, disorienting him for a moment.");
-                player.removeStatusEffect(StatusEffects.TrollHold);
-            }
+			}
 			else {
 				if (monster as GlacialMaleTroll) {
 					outputText("You squirm violently, trying to shake out of his grasp. He maintains a fierce grip on you.");
 					player.addStatusValue(StatusEffects.TrollHold, 1, 1);
 				}
 				if (monster as CorruptedMaleTroll) outputText("The troll clutches onto you tighter as you are pulled deeper into his embrace. Your struggles seem to be in vain as he pokes your body with his pre-leaking erection. The warm fluid makes you flush reflexively, but you cannot give in!");
-                player.takePhysDamage(7 + rand(5));
+				player.takePhysDamage(7 + rand(5));
 				var licklust:Number = (monster.inte / 5) + rand(10) + player.statusEffectv3(StatusEffects.TrollHold);
 				licklust = Math.round(licklust);
 				player.dynStats("lus", licklust, "scale", false);
 				if (monster as CorruptedMaleTroll) player.addStatusValue(StatusEffects.TrollHold, 3, 1);
 			}
-            skipMonsterAction = true;
+            if (player.statusEffectv1(StatusEffects.TrollHold) < 2) skipMonsterAction = true;
 		} else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
             if (monster as FrostGiant) (monster as FrostGiant).giantGrabStruggle();
             if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantGrabStruggle();
@@ -8303,7 +8279,7 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.EnemyConstructType)) generalTypes.push("Construct");
                 if (monster.hasPerk(PerkLib.EnemyFeralType)) generalTypes.push("Feral");
                 if (monster.hasPerk(PerkLib.EnemyGhostType)) generalTypes.push("Ghost");
-                if (monster.hasPerk(PerkLib.EnemyHugeType)) generalTypes.push("Gigant");
+                if (monster.hasPerk(PerkLib.EnemyGigantType)) generalTypes.push("Gigant");
                 if (monster.hasPerk(PerkLib.EnemyGooType)) generalTypes.push("Goo");
                 if (monster.hasPerk(PerkLib.EnemyGroupType)) generalTypes.push("Group");
                 if (monster.hasPerk(PerkLib.EnemyHugeType)) generalTypes.push("Huge");

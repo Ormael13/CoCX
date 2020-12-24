@@ -139,8 +139,16 @@ use namespace CoC;
 					}
 					break;
 				case 6:
+					if (player.level >= 54) {
 					if (rand(2) == 0) SceneLib.trollScene.encounterAdultGlacialFemaleTroll();
 					else SceneLib.trollScene.encounterAdultGlacialMaleTroll();
+					}
+					else {
+						clearOutput();
+						outputText("Making your way across the hard-packed ice of the Rift, you’re surprised to see the thick gray clouds part overhead.  You see a beautiful woman descend from on high, her snow-white wings flapping powerfully behind her back.  Armed with a long spear and shield, and clad in a bronze cuirass and a winged helm, she looks every bit the part of a mighty warrior.\n\n");
+						outputText("She touches down gently a few feet before you, her shield and spear raised.  \"<i>You seem a worthy sort to test my skills against, wanderer.  Prepare yourself!</i>\" she shouts, bearing down on you.  She doesn’t look like she’s going to back down -- you ready your [weapon] for a fight!");
+						startCombat(new Valkyrie());
+					}
 					break;
 				case 7: //Find Valeria! She can be found there if you rejected her offer initially at Tower of the Phoenix or didn't find her. She can never be Lost Forever.
 					spriteSelect(79);
