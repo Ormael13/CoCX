@@ -174,7 +174,7 @@ public class BreastStore extends Utils implements SaveAwareInterface
 				default:
 			}
 			return("titanic");
-		} //Is this what replaces the character.as' BreastCupS function? ^
+		}
 
 		public function canTitFuck():Boolean { return _cupSize >= BreastCup.C; }
 

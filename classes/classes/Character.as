@@ -123,7 +123,6 @@ import classes.Items.JewelryLib;
 			}
 			trace("MOD THICKNESS FIRE");
 			//DIsplay 'U GOT FAT'
-			//I see someone else is a fellow Linux user... :)
 			if (goal >= thickness && goal >= 50)
 				return "\n\nYour center of balance changes a little bit as your body noticeably widens. (+" + strength + " body thickness)";
 			//GET THIN BITCH
@@ -601,8 +600,6 @@ import classes.Items.JewelryLib;
 		   else if(breastRows[rowNum].breastRating < 13) return "HHH";
 		   return "massive custom-made";
 		 }*/
-		 
-		 //If that's the case, can't we remove it to save space? ^
 		public function viridianChange():Boolean
 		{
 			var count:int = cockTotal();
