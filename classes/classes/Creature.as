@@ -2619,7 +2619,7 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.ANEMONE);
 		}
 
-		public function foamingCocks():int { //How many catcocks?
+		public function foamingCocks():int { //How many catcocks? //Cat? not sure where this is called. But this desc. probably should be fixed? (Unless it actually implies cancer in the cock, in which case, foaming is definitely an odd side effect.)
 			return countCocksOfType(CockTypesEnum.CANCER);
 		}
 

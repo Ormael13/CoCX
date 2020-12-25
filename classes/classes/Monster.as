@@ -136,7 +136,7 @@ import flash.utils.getQualifiedClassName;
 		protected var bonusAscLib:Number = 0;
 		protected var bonusAscSen:Number = 0;
 		protected var bonusAscMaxHP:Number = 0;
-		private var _long:String = "<b>You have encountered an unitialized  Please report this as a bug</b>.";
+		private var _long:String = "<b>You have encountered something uninitialized. Please report this as a bug</b>.";
 		public function get long():String
 		{
 			return _long;
@@ -1486,7 +1486,7 @@ import flash.utils.getQualifiedClassName;
 		public function outputAttack(damage:int):void
 		{
 			if (damage <= 0) {
-				//Due to toughness or amor...
+				//Due to toughness or armor...
 				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + (player.armor != ArmorLib.NOTHING ? player.armor.name : player.armorName) + ".");
 				else {
 					if (plural) outputText("You deflect and block every " + weaponVerb + " " + a + short + " throw at you. ");
@@ -1603,7 +1603,7 @@ import flash.utils.getQualifiedClassName;
 				}
 				if (game.player.findPerk(PerkLib.Backlash) >= 0 && game.player.isFistOrFistWeapon()) {
 					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-					outputText(" As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
+					outputText("As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
 					SceneLib.combat.basemeleeattacks();
 				}
 				return true;
@@ -1891,17 +1891,17 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.StunnedTornado, 1, -1);
 			}
 			if (hasStatusEffect(StatusEffects.InkBlind)) {
-				if (plural) EngineCore.outputText("Your foes are busy trying to remove the ink and therefore does no other action then flay their hand about its faces.");
-				else EngineCore.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.");
+				if (plural) EngineCore.outputText("Your foes are busy trying to remove the ink and therefore does no other action than flay their hand about its faces.");
+				else EngineCore.outputText("Your foe is busy trying to remove the ink and therefore does no other action than flay its hand about its face.");
 			}
 			if (hasStatusEffect(StatusEffects.Fascinated)) {
-				if (plural) EngineCore.outputText("Your opponents stares emptily in the space in front of [monster him] a dreamy expression on [monster his] face, totaly entranced. A brief moment later [monster he] realises [monster he]'s been doing nothing for the past six second and snaps out of it.");
-				else EngineCore.outputText("Your opponent stares emptily in the space in front of [monster him] a dreamy expression on [monster his] face, totaly entranced. A brief moment later [monster he] realises [monster he]'s been doing nothing for the past six second and snaps out of it.");
+				if (plural) EngineCore.outputText("Your opponents stares emptily in the space in front of [monster him] a dreamy expression on [monster his] face, totally entranced. A brief moment later [monster he] realises [monster he]'s been doing nothing for the past few seconds and snaps out of it.");
+				else EngineCore.outputText("Your opponent stares emptily in the space in front of [monster him] a dreamy expression on [monster his] face, totally entranced. A brief moment later [monster he] realises [monster he]'s been doing nothing for the past few seconds and snaps out of it.");
 				removeStatusEffect(StatusEffects.Fascinated);
 			}
 			else if (hasStatusEffect(StatusEffects.FrozenSolid)) {
 				if (plural) EngineCore.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
-				else EngineCore.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
+				else EngineCore.outputText("Your foe is too busy trying to break out of his icy prison to fight back."); // Only males?
 			}
 			else if (hasStatusEffect(StatusEffects.Sleep)) {
 				if (plural) EngineCore.outputText("Your foes are fast asleep.");

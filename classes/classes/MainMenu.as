@@ -79,7 +79,7 @@ public class MainMenu extends BaseContent {
 
 		addButton(5, "Credits", creditsScreen).hint("See a list of all the cool people who have contributed to content for this game!");
 		addButton(6, "Image Credits", imageCreditsScreen).hint("Check out who contributed to the image pack.");
-		addButton(7, "Changelog", changelog.accessChangelogMenu).hint("View full changelog for each version of Xianxia since v0.1 <i>Warning: It have many pages already.</i>");
+		addButton(7, "Changelog", changelog.accessChangelogMenu).hint("View full changelog for each version of Xianxia since v0.1 <i>Warning: It contains a lot of pages.</i>");
         if (CoC_Settings.debugBuild) addButton(8, "Debug Info", CoC.instance.debugInfoMenu.debugPane).hint("View debug information.");
     }
 
@@ -105,7 +105,7 @@ public class MainMenu extends BaseContent {
 		outputText("<li>Please be 18 or the legal age to view porn before playing. If not, enable SFW Mode.</li>");
 		outputText("<li>Try to keep your keyboard clean.  Think of the children!</li>");
 		//Other Info
-		outputText("\n<b>Fall of Eden</b> is worth a try too ^^");
+		outputText("\n<b>Fall of Eden</b> is worth a try too ^^"); //R.I.P., still barely has content.
 
 		if (debug)
 			outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>");
