@@ -105,7 +105,7 @@ public class MainMenu extends BaseContent {
 		outputText("<li>Please be 18 or the legal age to view porn before playing. If not, enable SFW Mode.</li>");
 		outputText("<li>Try to keep your keyboard clean.  Think of the children!</li>");
 		//Other Info
-		outputText("\n<b>Fall of Eden</b> is worth a try too ^^"); //R.I.P., still barely has content.
+		outputText("\n<b>Fall of Eden</b> is worth a try too ^^");
 
 		if (debug)
 			outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>");
