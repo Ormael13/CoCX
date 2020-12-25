@@ -1901,7 +1901,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			else if (hasStatusEffect(StatusEffects.FrozenSolid)) {
 				if (plural) EngineCore.outputText("Your foes are too busy trying to break out of their icy prison to fight back.");
-				else EngineCore.outputText("Your foe is too busy trying to break out of his icy prison to fight back."); // Only males?
+				else EngineCore.outputText("Your foe is too busy trying to break out of his icy prison to fight back.");
 			}
 			else if (hasStatusEffect(StatusEffects.Sleep)) {
 				if (plural) EngineCore.outputText("Your foes are fast asleep.");
