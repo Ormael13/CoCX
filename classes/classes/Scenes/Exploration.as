@@ -129,7 +129,7 @@ public class Exploration extends BaseContent
 			if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] > 0) addButton(5, "Defiled Ravine", SceneLib.defiledravine.exploreDefiledRavine).hint("Visit the defiled ravine. \n\nRecommended level: 41" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] : ""));
 			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(6, "Bog", SceneLib.bog.exploreBog).hint("Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
 			
-			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(10, "Glacial Rift", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
+			if (flags[kFLAGS.DISCOVERED_TUNDRA] > 0) addButton(10, "Tundra", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the tundra. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_TUNDRA] : ""));
 			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(11, "Volcanic Crag", SceneLib.volcanicCrag.exploreVolcanicCrag).hint("Visit the infernal volcanic crag. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(9, "",	//Wuxia related area - ?latająca wyspa?
@@ -157,8 +157,9 @@ public class Exploration extends BaseContent
 			if (player.level >= 125) addButton(4, "XXHL Explore", tryDiscoverXXHL).hint("Explore to find strong new enemies.");
 			else addButtonDisabled(4, "XXHL Explore", "Req. lvl 125+");
 			
-			if (silly()) addButton(10, "42", tryRNGod).hint("Explore to find the answer for your prayers. Or maybe you really not wanna find it fearing answer will not be happy with you?");
+			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(10, "Glacial Rift(O)", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift (outer part). " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
 			addButton(9, "Previous", goBackToPageII);
+			if (silly()) addButton(12, "42", tryRNGod).hint("Explore to find the answer for your prayers. Or maybe you really not wanna find it fearing answer will not be happy with you?");
 			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
 			addButton(14, "Back", playerMenu);
 		}
@@ -685,16 +686,6 @@ public class Exploration extends BaseContent
 					clearOutput();
 					outputText("As you explore the area you run into a somewhat big hole in the landscape. You look inside unsure as it seems to lead into the depths of Mareth. Resolving yourself to chase the demons wherever they go you decide to still enter the hole discovering a full world of linked tunnels beneath Mareth ground.\n\n");
 					outputText("<b>You've discovered the Caves!</b>");
-					doNext(camp.returnToCampUseTwoHours);
-					return;
-				}
-				//Discover Glacial Rift! - do przeniesienia do Caves exploration
-				if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && rand(3) == 0 && player.level >= 25) {
-					flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
-					player.explored++;
-					clearOutput();
-					outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. You wrap your arms around yourself tightly, shivering fiercely despite yourself as the hard pink dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n");
-					outputText("<b>You've discovered the Glacial Rift!</b>");
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}

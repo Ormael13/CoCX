@@ -254,7 +254,7 @@ use namespace CoC;
 				else addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			}
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			//addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
+			addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -282,7 +282,7 @@ use namespace CoC;
 			addButton(0, "ClickItTwice", AddMaxBackpack00).hint("Zenji spawning pool");
 			addButton(1, "Instant-house", AddMaxBackpack01).hint("Instant-house + bed");
 			addButton(2, "Hex-Mate", AddMaxBackpack02).hint("Hex-Mate");
-			addButton(3, "EzekielBuffFix", AddMaxBackpack4).hint("Fix for Blessing.");
+			addButton(3, "WendigoTrigger", AddMaxBackpack4).hint("Trigger Wendigo transformation. (Without active Wendigo Psychosis will do nothing ;) )");
 			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) addButton(4, "ClickItOnce", AddMaxBackpack3).hint("Fixing Lover Zenji missing one status effect needed for his sex scenes menu.");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2 && !player.hasStatusEffect(StatusEffects.TrainingNPCsTimersReduction)) addButton(5, "ClickItDoIt", AddMaxBackpack2).hint("Adding one status effect needed for sparring ring upgrades effect.");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
@@ -341,15 +341,11 @@ use namespace CoC;
 			doNext(SoulforceCheats);
 		}
 		public function AddMaxBackpack4():void {
-			player.statStore.addBuffObject({
-				"str": 5,
-				"tou": 5,
-				"spe": 5,
-				"int": 5,
-				"wis": 5,
-				"lib": 5
-			}, 'EzekielBlessing', {text: 'Ezekiel Blessing'});
-			doNext(submenucuzwhynot);
+			if (player.hasStatusEffect(StatusEffects.WendigoPsychosis)) SceneLib.glacialRift.wendigoScene.becomeWendigo();
+			else {
+				outputText("Get a Life... i mean Wendigo Psychosis...");
+				doNext(submenucuzwhynot);
+			}
 		}
 		public function TestDynamicStats():void {
 			player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});

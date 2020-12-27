@@ -3311,6 +3311,8 @@ public class PerkLib
 				"Removes all negative modifiers to PC max Str/Tou/Spe caused by picking perk Elemental Conjurer Sacrifice.").withBuffs({'str.mult':0.45,'tou.mult':0.45,'spe.mult':0.45,'wis.mult':0.90});
 		public static const ElvenSense:PerkType = mk("Elven Sense", "Elven Sense",
 				"Gain a chance to dodge attacks and an increased chance to score critical hits.");
+		public static const EndlessHunger:PerkType = mk("Endless Hunger", "Endless Hunger",
+				"Your hunger progress at twice the normal speed but must be sated through oral sex. As a result, you are completely unable to obtain a body shape larger than a thin frame.");
 		public static const EnergyDependent:PerkType = mk("Energy dependent", "Energy dependent",
 				"You become faster, smarter and clearer of mind when well fed in life force. However you become dim witted and stiffer than a corpse when starved. You cannot recover soul force through normal means.");
 		public static const EnlightenedKitsune:PerkType = mk("Enlightened Kitsune", "Enlightened Kitsune",
@@ -3441,6 +3443,8 @@ public class PerkLib
 				"Increase strenght by a percentage based on milk or cum production up to 50% of total value.");
 		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",
 				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
+		public static const WendigoCurse:PerkType = mk("Wendigo Curse", "Wendigo Curse",
+				"Your body and soul has been cursed by a wendigo. Transformative no longer have an effect on you.");
 		public static const ZenjisInfluence1:PerkType = mk("Zenji's influence 1", "Zenji's influence 1",
 				"Increases maximum mana and fatigue by 10%.");
 		public static const ZenjisInfluence2:PerkType = mk("Zenji's influence 2", "Zenji's influence 2",

@@ -78,12 +78,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Normal
 			if (player.findPerk(PerkLib.WellAdjusted) < 0) {
-				dynStats("lus", player.lib * 0.04, "scale", false); //Raise lust
-				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.lib * 0.02, "scale", false); //Double lust rise if lusty.
+				dynStats("lus", player.libStat.core.value * 0.04, "scale", false); //Raise lust
+				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.libStat.core.value * 0.01, "scale", false); //Double lust rise if lusty.
 			}
 			else { //Well adjusted perk
-				dynStats("lus", player.lib * 0.02, "scale", false); //Raise lust
-				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.lib * 0.01, "scale", false); //Double lust rise if lusty.
+				dynStats("lus", player.libStat.core.value * 0.02, "scale", false); //Raise lust
+				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.libStat.core.value * 0.005, "scale", false); //Double lust rise if lusty.
 			}
 			//Jewelry effect
 			if (player.jewelryEffectId == JewelryLib.CORRUPTION)
@@ -1289,8 +1289,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Kitsune energy thirst
 			if (player.hasStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)) {
-				if (player.hunger < player.maxHunger())
-				{
+				if (player.hunger < player.maxHunger()) {
 					player.refillHunger(10, false);
 				}
 				if (player.HP < player.maxHP()) {
@@ -1625,6 +1624,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nYour limbs now back to normal size it might be smart to use weapon over your bare hands and feet for fighting.\n\n<b>(Lost the Big hand and feet perk!)</b>\n");
 				player.removePerk(PerkLib.BigHandAndFeet);
 				needNext = true;
+			}
+			//Wendigo stuff
+			if (player.hasStatusEffect(StatusEffects.WendigoPsychosis) && player.findPerk(PerkLib.EndlessHunger) < 0 && ((flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0) || (flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxLust()))) SceneLib.glacialRift.wendigoScene.becomeWendigo();
+			if (player.lowerBody != LowerBody.WENDIGO && player.wings.type == Wings.LEVITATION && player.hasStatusEffect(StatusEffects.WendigoPlus)) {
+				player.removeStatusEffect(StatusEffects.WendigoPlus);
+				player.wings.type == Wings.NONE;
 			}
 			//Necromancy perk
 			if (((player.tailType == Tail.CAT && player.tailCount == 2) || player.tailType == Tail.NEKOMATA_FORKED_2_3 || player.tailType == Tail.NEKOMATA_FORKED_1_3) && player.findPerk(PerkLib.Necromancy) < 0) {

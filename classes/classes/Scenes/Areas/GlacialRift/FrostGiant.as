@@ -19,13 +19,13 @@ public class FrostGiant extends Monster
 			else {
 				if (rand(player.spe + 120) < spe) {
 					outputText("You take the full force of his grand slam, sending you flying a good 40 feet, plunging through a snowdrift. As you right yourself, his laugh shakes the ground, \"<i>Puny! Haaaa!</i>\" ");
-					damage = (((str * 3) + 500) + rand(200));
+					damage = ((((str + weaponAttack) * 3) + 500) + rand(200));
 					if (damage < 120) damage = 120;
 					player.takePhysDamage(damage, true);
 				}
 				else {
 					outputText("You nearly avoid the giant's fist, stumbling as you regain your footing. The giant's growl is a deep bass as he bellows, \"<i>Bah! Luck!</i>\" ");
-					damage = 150 + rand(str * 3);
+					damage = 150 + rand((str + weaponAttack) * 3);
 					player.takePhysDamage(damage, true);
 				}
 			}
@@ -71,13 +71,13 @@ public class FrostGiant extends Monster
 				}
 				else if (player.str >= 50 && player.str < 100) {
 					outputText("The giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");
-					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 30 + rand(str * 1.5);
+					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 30 + rand((str + weaponAttack) * 1.5);
 					player.takePhysDamage(damage, true);
 					}
 				}
 				else if (player.str < 50) {
 					outputText("The giant squeezes you mercilessly, the pressure on your body reaching critical levels. The giant doesn't seem to want to murder you, fortunately, so he lessens his grip slightly. No dice escaping it though. ");
-					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 60 + rand(str * 2.25);
+					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 60 + rand((str + weaponAttack) * 2.25);
 					player.takePhysDamage(damage, true);
 					}
 				}
@@ -100,7 +100,7 @@ public class FrostGiant extends Monster
 				case 2: //Taunt
 					outputText("\"<i>Ha, ha, ha! Puny little [race]! You cannot escape my grasp!</i>\" He flicks your head, nearly snapping your neck, and you see stars for a moment. ");
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
-					damage = 150 + rand(str * 1.2);
+					damage = 150 + rand((str + weaponAttack) * 1.2);
 					player.takePhysDamage(damage, true);
 					break;
 				case 3:
@@ -108,14 +108,14 @@ public class FrostGiant extends Monster
 					outputText("The giant brings you to his face to yell at you. His scream is probably the loudest thing you've ever heard, and while your ears are still ringing he raises you up, and up, and up and then punches the ground with all his might. ");
 					outputText("The force of the punch leaves you reeling for a time; you come to your senses before he tries to do anything else. ");
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
-					damage = 540 + rand(str * 3.6);
+					damage = 540 + rand((str + weaponAttack) * 3.6);
 					player.takePhysDamage(damage, true);
 					break;
 				case 5: //Throw
 					outputText("\"<i>Oh, little [race] wants to be let go? Ha! Then GO!</i>\" He rears back and chucks you as hard as he can against the nearest rock face. Fortunately, his aim is off and he throws you into a patch of snow. The snow helps cushion the impact, but you're still very disoriented. ");
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
 					player.createStatusEffect(StatusEffects.Stunned, 2 + rand(2), 0, 0, 0);
-					damage = 150 + rand(str * 2.4);
+					damage = 150 + rand((str + weaponAttack) * 2.4);
 					if (damage < 150) damage = 150;
 					player.takePhysDamage(damage, true);
 					break;
@@ -217,25 +217,28 @@ public class FrostGiant extends Monster
 			this.skin.growFur({color:"deep blue"});
 			this.hairColor = "white";
 			this.hairLength = 8;
-			initStrTouSpeInte(530, 420, 300, 140);
-			initWisLibSensCor(140, 20, 15, 35);
+			initStrTouSpeInte(560, 455, 360, 140);
+			initWisLibSensCor(140, 50, 75, 35);
 			this.weaponName = "fists";
 			this.weaponVerb="punch";
-			this.weaponAttack = 149;
+			this.weaponAttack = 197;
 			this.armorName = "ice";
-			this.armorDef = 180;
-			this.armorMDef = 60;
-			this.bonusHP = 2500;
-			this.bonusLust = 115;
+			this.armorDef = 450;
+			this.armorMDef = 150;
+			this.bonusHP = 7500;
+			this.bonusLust = 214;
 			this.lust = 10;
 			this.lustVuln = 0.3;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 80;
-			this.gems = 100 + rand(50);
+			this.level = 89;
+			this.additionalXP = 5000;
+			this.gems = 150 + rand(75);
 			this.drop = new WeightedDrop()
 					.add(consumables.ICICLE_, 1)
 					.add(null, 3);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0);

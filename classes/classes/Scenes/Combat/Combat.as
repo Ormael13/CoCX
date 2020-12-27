@@ -501,8 +501,8 @@ public class Combat extends BaseContent {
 
     public function isPlayerBound():Boolean {
         var bound:Boolean = false;
-        if (player.hasStatusEffect(StatusEffects.HarpyBind) || player.hasStatusEffect(StatusEffects.GooBind) || player.hasStatusEffect(StatusEffects.TentacleBind) || player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind)
-                || player.hasStatusEffect(StatusEffects.WolfHold) || player.hasStatusEffect(StatusEffects.TrollHold) || monster.hasStatusEffect(StatusEffects.QueenBind) || monster.hasStatusEffect(StatusEffects.PCTailTangle)) bound = true;
+        if (player.hasStatusEffect(StatusEffects.HarpyBind) || player.hasStatusEffect(StatusEffects.GooBind) || player.hasStatusEffect(StatusEffects.TentacleBind) || player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind) || monster.hasStatusEffect(StatusEffects.QueenBind)
+             || player.hasStatusEffect(StatusEffects.WolfHold) || player.hasStatusEffect(StatusEffects.TrollHold) || player.hasStatusEffect(StatusEffects.PossessionWendigo) || monster.hasStatusEffect(StatusEffects.PCTailTangle)) bound = true;
         if (player.hasStatusEffect(StatusEffects.HolliConstrict)) bound = true;
         if (player.hasStatusEffect(StatusEffects.GooArmorBind)) bound = true;
         if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
@@ -540,11 +540,20 @@ public class Combat extends BaseContent {
             outputText("\n<b>You're too confused</b> about who you are to try to attack!");
             stunned = true;
         }
-        if (player.hasStatusEffect(StatusEffects.Confusion)) {
+        if (player.hasStatusEffect(StatusEffects.Polymorphed)) {
             outputText("\n<b>You fight against the spell to return to your true form!</b>");
             stunned = true;
         }
         return stunned;
+    }
+
+    public function isPlayerFeared():Boolean {
+        var feared:Boolean = false;
+        if (player.hasStatusEffect(StatusEffects.Fear)) {
+			outputText("\n<b>You're too busy shivering with fear</b> to fight.");
+			feared = true;
+		}
+        return feared;
     }
 
     public function canUseMagic():Boolean {
@@ -593,7 +602,7 @@ public class Combat extends BaseContent {
             addButton(5, "Fantasize", fantasize).hint("Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
             addButton(6, "Wait", wait).hint("Take no action for this round.  Why would you do this?  This is a terrible idea.");
         }
-        if (player.statusEffectv1(StatusEffects.ChanneledAttack) >= 1 && (isPlayerBound() || isPlayerSilenced() || isPlayerStunned())) {
+        if (player.statusEffectv1(StatusEffects.ChanneledAttack) >= 1 && (isPlayerBound() || isPlayerSilenced() || isPlayerStunned() || isPlayerFeared())) {
             addButton(1, "Stop", stopChanneledSpecial);
         }
         /*
@@ -1815,6 +1824,13 @@ public class Combat extends BaseContent {
 				player.dynStats("lus", licklust, "scale", false);
 			}
             if (player.statusEffectv1(StatusEffects.TrollHold) < 2) skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.PossessionWendigo)) {
+            clearOutput();
+            outputText("You decide to do nothing for now as the wendigo takes advantage of your inaction, gleefully forcing you to masturbate while enjoying every sensation your tormented body is inflicted with.");
+            var possessionWendigo:Number = (monster.inte / 4) + rand(15);
+			possessionWendigo = Math.round(possessionWendigo);
+			player.dynStats("lus", possessionWendigo, "scale", false);
+            skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
             (monster as Holli).waitForHolliConstrict(true);
             skipMonsterAction = true;
@@ -2007,7 +2023,21 @@ public class Combat extends BaseContent {
 				if (monster as CorruptedMaleTroll) player.addStatusValue(StatusEffects.TrollHold, 3, 1);
 			}
             if (player.statusEffectv1(StatusEffects.TrollHold) < 2) skipMonsterAction = true;
-		} else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
+		} else if (player.hasStatusEffect(StatusEffects.PossessionWendigo)) {
+            clearOutput();
+            outputText("You struggle for control over your body ");
+            if (rand(3) == 0 || rand(80) < player.str / 1.5) {
+				outputText("and manage to force the fiend out.");
+				player.removeStatusEffect(StatusEffects.PossessionWendigo);
+			}
+            else {
+				outputText("but the wendigo overpowers you and gleefully forces you to masturbate yourself, enjoying every sensation your tormented body is inflicted with.");
+				var possessionWendigo:Number = (monster.inte / 4) + rand(15);
+				possessionWendigo = Math.round(possessionWendigo);
+				player.dynStats("lus", possessionWendigo, "scale", false);
+			}
+            skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
             if (monster as FrostGiant) (monster as FrostGiant).giantGrabStruggle();
             if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantGrabStruggle();
             skipMonsterAction = true;
@@ -6325,6 +6355,13 @@ public class Combat extends BaseContent {
             if (player.statusEffectv1(StatusEffects.Polymorphed) <= 0) {
                 player.removeStatusEffect(StatusEffects.Polymorphed);
                 outputText("<b>You finally manage to break free from the spell regaining your true form.</b>\n\n");
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.Fear)) {
+            player.addStatusValue(StatusEffects.Fear, 1, -1);
+            if (player.statusEffectv1(StatusEffects.Fear) <= 0) {
+                player.removeStatusEffect(StatusEffects.Fear);
+                outputText("<b>You finally manage to shake off the fear.</b>\n\n");
             }
         }
         if (player.hasStatusEffect(StatusEffects.Disarmed)) {

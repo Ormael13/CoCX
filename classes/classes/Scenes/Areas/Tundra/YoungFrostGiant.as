@@ -20,13 +20,13 @@ import classes.internals.WeightedDrop;
 			else {
 				if (rand(player.spe + 40) < spe) {
 					outputText("You take the full force of his grand slam, sending you flying a good 30 feet, plunging through a snowdrift. As you right yourself, his laugh shakes the ground, \"<i>Puny! Haaaa!</i>\" ");
-					damage = ((str + 150) + rand(100));
+					damage = ((str + weaponAttack + 150) + rand(100));
 					if (damage < 40) damage = 40;
 					player.takePhysDamage(damage, true);
 				}
 				else {
 					outputText("You nearly avoid young giant's fist, stumbling as you regain your footing. The giant's growl is a deep bass as he bellows, \"<i>Bah! Luck!</i>\" ");
-					damage = 50 + rand(str);
+					damage = 50 + rand(str + weaponAttack);
 					player.takePhysDamage(damage, true);
 				}
 			}
@@ -72,13 +72,13 @@ import classes.internals.WeightedDrop;
 				}
 				else if (player.str >= 20 && player.str < 40) {
 					outputText("Young giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");
-					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 10 + rand(str * 0.5);
+					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 10 + rand((str + weaponAttack) * 0.5);
 					player.takePhysDamage(damage, true);
 					}
 				}
 				else if (player.str < 20) {
 					outputText("Young giant squeezes you mercilessly, the pressure on your body reaching critical levels. Young giant doesn't seem to want to murder you, fortunately, so he lessens his grip slightly. No dice escaping it though. ");
-					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 20 + rand(str * 0.75);
+					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 20 + rand((str + weaponAttack) * 0.75);
 					player.takePhysDamage(damage, true);
 					}
 				}
@@ -101,7 +101,7 @@ import classes.internals.WeightedDrop;
 				case 2: //Taunt
 					outputText("\"<i>Ha, ha, ha! Puny little [race]! You cannot escape my grasp!</i>\" He flicks your head, nearly snapping your neck, and you see stars for a moment. ");
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
-					damage = 50 + rand(str * 0.4);
+					damage = 50 + rand((str + weaponAttack) * 0.4);
 					player.takePhysDamage(damage, true);
 					break;
 				case 3:
@@ -109,14 +109,14 @@ import classes.internals.WeightedDrop;
 					outputText("Young giant brings you to his face to yell at you. His scream is probably the loudest thing you've ever heard, and while your ears are still ringing he raises you up, and up, and up and then punches the ground with all his might. ");
 					outputText("The force of the punch leaves you reeling for a time; you come to your senses before he tries to do anything else. ");
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
-					damage = 180 + rand(str * 1.2);
+					damage = 180 + rand((str + weaponAttack) * 1.2);
 					player.takePhysDamage(damage, true);
 					break;
 				case 5: //Throw
 					outputText("\"<i>Oh, little [race] wants to be let go? Ha! Then GO!</i>\" He rears back and chucks you as hard as he can against the nearest rock face. Fortunately, his aim is off and he throws you into a patch of snow. The snow helps cushion the impact, but you're still very disoriented. ");
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
 					player.createStatusEffect(StatusEffects.Stunned, 1 + rand(3), 0, 0, 0);
-					damage = 50 + rand(str * 0.8);
+					damage = 50 + rand((str + weaponAttack) * 0.8);
 					if (damage < 50) damage = 50;
 					player.takePhysDamage(damage, true);
 					break;
@@ -231,7 +231,7 @@ import classes.internals.WeightedDrop;
 			this.lust = 10;
 			this.lustVuln = 0.3;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 49;
+			this.level = 47;
 			this.gems = 45 + rand(25);
 			this.drop = new WeightedDrop()
 					.add(consumables.ICICLE_, 1)
