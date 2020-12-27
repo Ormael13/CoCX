@@ -782,6 +782,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const UsedTitsmother:StatusEffectType     	= mk("UsedTitsmother");
 		public static const Vala:StatusEffectType               	= mk("vala");
 		public static const Vapula:StatusEffectType             	= mk("Vapula");
+		public static const WendigoPlus:StatusEffectType  			= mk("Wendigo plus");
+		public static const WendigoPsychosis:StatusEffectType  		= mk("Wendigo psychosis");
 		public static const WhipReady:StatusEffectType          	= mk("Whip Ready");
 		public static const YamataCanon:StatusEffectType 			= mk("Yamata Foxfire Canon");
 		public static const ZenjiModificationsList:StatusEffectType = mk("Zenji Modifications List");
@@ -789,9 +791,9 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const ZenjiZList:StatusEffectType  			= mk("Zenji Z List");
 
 		//Alchemical buffs
-		public static const AlchIronweed:StatusEffectType       = mk("IronweedEffect");
-		public static const AlchBladeFerns:StatusEffectType     = mk("BladeFernsEffect");
-		public static const AlchAlrauneNectar:StatusEffectType     = mk("AlrauneNectarEffect");
+		public static const AlchIronweed:StatusEffectType		= mk("IronweedEffect");
+		public static const AlchBladeFerns:StatusEffectType		= mk("BladeFernsEffect");
+		public static const AlchAlrauneNectar:StatusEffectType	= mk("AlrauneNectarEffect");
 		// universal combat debuffs
 
 		public static const GenericCombatStrBuff:StatusEffectType  = CombatStrBuff.TYPE;
@@ -923,6 +925,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PoisonDoT:StatusEffectType                 = mkCombat("Poison DoT");
 		public static const PoisonDoTH:StatusEffectType                = mkCombat("Poison DoT (H)");
 		public static const Polymorphed:StatusEffectType               = mkCombat("Polymorphed");
+		public static const PossessionWendigo:StatusEffectType         = mkCombat("Possession (Wendigo)");
 		public static const PunishingKick:StatusEffectType	           = mkCombat("Punishing Kick");
 		public static const Rage:StatusEffectType                      = mkCombat("Rage");
 		public static const RaijuStaticDischarge:StatusEffectType      = mkCombat("Raiju Static Discharge");

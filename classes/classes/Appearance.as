@@ -2316,6 +2316,10 @@ public class Appearance extends Utils
 		{
 			return DEFAULT_EARS_NAMES[i_creature.ears.type] + " ears";
 		}
+		public static function antennaeDescript(i_creature:Creature):String
+		{
+			return DEFAULT_ANTENNAE_NAMES[i_creature.antennae.type] + " antennae";
+		}
 
 /* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().
 		private static function humanDescript(cockNum:Number):String
@@ -2449,7 +2453,7 @@ public class Appearance extends Utils
 			"hyper T-cup", "hyper large T-cup", "hyper TT-cup", "hyper large TT-cup", "hyper U-cup", "hyper large U-cup", "hyper UU-cup", "hyper large UU-cup", "hyper V-cup", "hyper large V-cup",//170-179
 			"hyper VV-cup", "hyper large VV-cup", "hyper W-cup", "hyper large W-cup", "hyper WW-cup", "hyper large WW-cup", "hyper X-cup", "hyper large X-cup", "hyper XX-cup", "hyper large XX-cup",//180-189
 			"hyper Y-cup", "hyper large Y-cup", "hyper YY-cup", "hyper large YY-cup", "hyper Z-cup", "hyper large Z-cup", "hyper ZZ-cup", "hyper large ZZ-cup", "hyper ZZZ-cup", "hyper large ZZZ-cup",//190-199
-			"jacques00-cup"
+			"jacques00-cup", "lia-cup"
 		];
 
 		public static function breastCup(size:Number):String

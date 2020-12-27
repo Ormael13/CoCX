@@ -3620,6 +3620,7 @@ import coc.view.MainView;
 			player.herbalismXP = 0;
 			player.statPoints = 0;
 			player.perkPoints = 0;
+			player.superPerkPoints = 0;
 			player.XP = 0;
 			player.setArmor(armors.C_CLOTH);
 			player.setWeapon(WeaponLib.FISTS);

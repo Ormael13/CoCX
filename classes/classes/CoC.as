@@ -247,8 +247,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8o3";
-			version = ver + " (<b>More about Zenji, Traditional X-mas Perk-o-calipse 6 (only around 30+ perks this year), squirrel TF, Defiled Ravine, Ayo Armors and bugfixes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8o4";
+			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

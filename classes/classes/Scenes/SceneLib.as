@@ -66,6 +66,8 @@ public class SceneLib {
 
     public static var caves:Caves = new Caves();
 
+    public static var tundra:Tundra = new Tundra();
+
     public static var glacialRift:GlacialRift = new GlacialRift();
 
     public static var volcanicCrag:VolcanicCrag = new VolcanicCrag();

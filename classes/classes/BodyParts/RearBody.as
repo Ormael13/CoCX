@@ -22,6 +22,7 @@ public class RearBody extends BodyPart {
 	public static const CENTIPEDE:int			= 18;
 	public static const KRAKEN:int				= 19;
 	public static const FROSTWYRM:int			= 20;
+	public static const FUR_COAT:int			= 21;
 	// Don't forget to add new types in DebugMenu.as list REAR_TYPE_CONSTANTS
 	
 	public function RearBody() {

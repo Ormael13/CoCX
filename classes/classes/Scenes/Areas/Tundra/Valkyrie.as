@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.GlacialRift 
+package classes.Scenes.Areas.Tundra 
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -115,12 +115,12 @@ public class Valkyrie extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.glacialRift.valkyrieScene.winAgainstValkyrie();
+			SceneLib.tundra.valkyrieScene.winAgainstValkyrie();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.glacialRift.valkyrieScene.loseToValkyrie();
+			SceneLib.tundra.valkyrieScene.loseToValkyrie();
 		}
 		
 		public function Valkyrie() 

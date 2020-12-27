@@ -27,7 +27,7 @@ public class Yeti extends Monster
 					return;
 				}
 				outputText("Like a white blur the yeti charges you, striking at you with his claws and slashing over your [armor] before a fist collides with your side, sending you sliding over the icy floor. ");
-				var damage:Number = (str * 1.25) + 75 + rand(60);
+				var damage:Number = ((str + weaponAttack) * 1.25) + 75 + rand(60);
 				player.takePhysDamage(damage, true);
 			}
 		}
@@ -42,7 +42,7 @@ public class Yeti extends Monster
 			else {
 				//take heavy damage
 				outputText("The beast’s hind claws dig into the ice before his giant furred body launches at you and he collides with you in a brutal tackle. The pair of you are sent rolling around on the floor as you trade blows with the furred beast, and then he lifts you up and tosses you aside, your body hitting the ice walls with a groan. You shakily get to your feet. ");
-				var damage:Number = (str * 1.4) + 200 + rand(250);
+				var damage:Number = ((str + weaponAttack) * 1.4) + 200 + rand(250);
 				player.takePhysDamage(damage, true);				
 			}
 		}
@@ -56,7 +56,7 @@ public class Yeti extends Monster
 					return;
 				}
 				outputText("The beast takes a step back, mist forming into a ball in his clenched fist. It condenses into a ball before your eyes, and with a growl the beast whips it at you. The ball slams into your [armor] and explodes into frost, you hiss at the sting. The frost is also restricting your movement. ");
-				var damage:Number = (str * 0.8) + rand(30);
+				var damage:Number = ((str + weaponAttack) * 0.8) + rand(30);
 				damage = Math.round(damage);
 				player.takeIceDamage(damage, true);
 				tempSpeedLoss += 15;
@@ -117,20 +117,20 @@ public class Yeti extends Monster
 			this.skin.growFur({color:"light"});
 			this.hairColor = "white";
 			this.hairLength = 8;
-			initStrTouSpeInte(225, 260, 125, 80);
-			initWisLibSensCor(70, 40, 20, 45);
+			initStrTouSpeInte(305, 360, 185, 90);
+			initWisLibSensCor(80, 50, 30, 45);
 			this.weaponName = "fists";
 			this.weaponVerb="punch";
-			this.weaponAttack = 60;
+			this.weaponAttack = 160;
 			this.armorName = "thick fur";
-			this.armorDef = 60;
-			this.armorMDef = 20;
-			this.bonusHP = 2000;
+			this.armorDef = 240;
+			this.armorMDef = 80;
+			this.bonusHP = 3000;
 			this.bonusLust = 120;
 			this.lust = 10;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 60;
+			this.level = 76;
 			this.gems = 75 + rand(40);
 			this.drop = new WeightedDrop()
 					.add(consumables.YETICUM, 1)
