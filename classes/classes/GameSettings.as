@@ -57,16 +57,16 @@ public class GameSettings extends BaseContent {
 			outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent stats modifiers. You can resume from bad-ends with penalties.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) {
-			outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 1,5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 15% more damage and giving ~10% more EXP. Bad-ends can ruin your game.");
+			outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 1,5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 15% more damage and gives ~10% more EXP. Bad-ends can ruin your game.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) {
-			outputText("Difficulty: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 2x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 30% more damage and giving ~20% more EXP.");
+			outputText("Difficulty: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 2x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 30% more damage and gives ~20% more EXP.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) {
-			outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 3x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 50% damage and giving ~30% more EXP.");
+			outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 3x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 50% damage and gives ~30% more EXP.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) {
-			outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 100% damage and giving ~40% more EXP.");
+			outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 100% damage and gives ~40% more EXP.");
 		}
 
 		outputText("\n\n");
@@ -253,14 +253,14 @@ public class GameSettings extends BaseContent {
 	public function settingsScreenGameSettings2():void {
 		menu();
 		addButton(0, "Eternal Holiday", toggleEternalHoliday).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. would happen at any day of the year.");
-		addButton(1, "No Blood Toggle", toggleNOGORE).hint("Toggles No Blood Mode. If enabled, scenes could have more grungesome/bloody variants showed. Not for the weak of heart players.");
-		addButton(3, "Wis scalling", toggleWisScaling).hint("Toggles Wisdom scalling for all attacks using it. If enabled, wisdom scaling would be less randomn with big generaly a bit higher values on averange.");
-		addButton(4, "Int scalling", toggleIntScaling).hint("Toggles Intelligance scalling for all attacks using it. If enabled, intelligence scaling would be less randomn with big generaly a bit higher values on averange.");
-		addButton(5, "Damage Overhaul", toggleDamageOverhaul).hint("Toggles Damage Overhaul. If enabled, melle and range attacks would deal randomn damage between 15% to 115%. Int and Wis could increase both values.");
+		addButton(1, "No Blood Toggle", toggleNOGORE).hint("Toggles No Blood Mode. If enabled, scenes could have more gruesome/bloody variants showed. Not for the weak of heart players.");
+		addButton(3, "Wis scalling", toggleWisScaling).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generaly a bit higher values on averange.");
+		addButton(4, "Int scalling", toggleIntScaling).hint("Toggles Intelligance scalling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
+		addButton(5, "Damage Overhaul", toggleDamageOverhaul).hint("Toggles Damage Overhaul. If enabled, melee and range attacks would deal random damage between 15% to 115%. Int and Wis could increase both values.");
 		addButton(6, "Spells Cooldowns", toggleSpellsCooldowns).hint("Toggles Spells cooldowns. If enabled, spells would have cooldowns and they will be stronger.");
-		addButton(8, "Str scalling", toggleStrScaling).hint("Toggles Strength scalling for all attacks using it. If enabled, strength scaling would be less randomn with big generaly a bit higher values on averange.");
-		addButton(9, "Spe scalling", toggleSpeScaling).hint("Toggles Speed scalling for all attacks using it. If enabled, speed scaling would be less randomn with big generaly a bit higher values on averange.");
-		addButton(10, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjust monsters secondary stats multi to make game easier or harder.");
+		addButton(8, "Str scalling", toggleStrScaling).hint("Toggles Strength scalling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
+		addButton(9, "Spe scalling", toggleSpeScaling).hint("Toggles Speed scalling for all attacks using it. If enabled, speed scaling would be less random with values being a bit higher on average.");
+		addButton(10, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
 		addButton(14, "Back", settingsScreenGameSettings);
 	}
 
@@ -527,10 +527,10 @@ public class GameSettings extends BaseContent {
 		outputText("\nChar View Style: ");
 		switch (flags[kFLAGS.CHARVIEW_STYLE]) {
 			case 0:
-				outputText("<font color=\"#000080\"><b>ALWAYS</b></font>\n Viewer is shown at left, always visible");
+				outputText("<font color=\"#000080\"><b>ALWAYS</b></font>\n Viewer is shown on the left, always visible");
 				break;
 			case 1:
-				outputText("<font color=\"#800000\"><b>OLD</b></font>\n Viewer is shown at left");
+				outputText("<font color=\"#800000\"><b>OLD</b></font>\n Viewer is shown on the left");
 				break;
 			case 2:
 				outputText("<font color=\"#008000\"><b>NEW</b></font>\n Viewer is inline with text");

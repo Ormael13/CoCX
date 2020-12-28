@@ -63,7 +63,7 @@ public class ButtonData {
 		toolTipText += "\nSoulforce cost: "+cost;
 		if (!CoC.instance.player.hasStatusEffect(StatusEffects.BloodCultivator) && CoC.instance.player.soulforce < cost) {
 			disable();
-			toolTipText += " <b>Your soulfroce is too low to cast this..</b>";
+			toolTipText += " <b>Your soulforce is too low to cast this..</b>";
 		}
 		return this;
 	}
