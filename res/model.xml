@@ -581,8 +581,8 @@
         <cell rect="1427,216,70,100" name="clotheLegs/merchantClotheBootsMale" dx="65" dy="72"/>
         <cell rect="776,12,45,25" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
         <cell rect="833,12,45,25" name="armorNeck/fullplatetopMale" dx="80" dy="63"/>
-        <cell rect="644,798,173,156" name="armorNeck/WalpurgisClothes" dx="20" dy="12"/>
-        <cell rect="992,798,173,156" name="armorNeck/WendigoCloak" dx="20" dy="12"/>
+        <cell rect="644,798,173,156" name="armorNeck/walpurgisClothes" dx="20" dy="12"/>
+        <cell rect="992,798,173,156" name="armorNeck/wendigoCloak" dx="20" dy="12"/>
         <cell rect="1013,70,40,28" name="armorNeck/merchantClotheCape_fg" dx="85" dy="59"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="82" dy="75"/>
         <cell rect="728,42,45,58" name="armorLegs/fullplateLegs" dx="82" dy="115"/>
@@ -604,8 +604,8 @@
         <cell rect="1272,489,40,44" name="clothRightArm/berserkerArmorArmsFeralRight" dx="101" dy="56"/>
         <cell rect="1322,489,40,44" name="clothRightArm/berserkerArmorArmsFeralQuadRight" dx="101" dy="56"/>
         <cell rect="1339,158,60,40" name="clothRightArm/merchantClotheArms" dx="74" dy="65"/>
-        <cell rect="818,798,173,156" name="clothCape/WalpurgisClothesBack" dx="19" dy="12"/>
-        <cell rect="1166,798,173,156" name="clothCape/WendigoCloakBack" dx="19" dy="12"/>
+        <cell rect="818,798,173,156" name="clothCape/walpurgisClothesBack" dx="19" dy="12"/>
+        <cell rect="1166,798,173,156" name="clothCape/wendigoCloakBack" dx="19" dy="12"/>
         <cell rect="935,543,150,80" name="clothCape/fairyQueenDressUnder" dx="22" dy="61"/>
         <cell rect="1509,216,80,100" name="clothCape_bg/merchantClotheCape_bg" dx="65" dy="64"/>
         <cell rect="150,91,35,25" name="eyes/SpecialForeheadShadow" dx="81" dy="35"/>
@@ -1354,6 +1354,9 @@
                 <show part="horns_bg/frostWyrm"/>
                 <show part="horns_bg/frostWyrmLeft"/>
             </case>
+			<case values="Horns.ANTLERS">
+				<show part="horns_overclothe/deer"/>
+            </case>
         </switch>
 
 
@@ -1546,6 +1549,10 @@
             </case>
 			<case values="RearBody.SNAIL_SHELL">
                 <show part="rearBody/snail"/>
+            </case>
+			<case values="RearBody.FUR_COAT">
+                <show part="armorNeck/wendigoCloak"/>
+				<show part="clothCape/wendigoCloakBack"/>
             </case>
             <default>
             </default>
@@ -2319,6 +2326,10 @@
                 <show part="hands/frostWyrmright"/>
                 <show part="hands_bg/frostWyrmleft"/>
             </case>
+			<case values="Arms.WENDIGO">
+                <show part="hands/wendigo"/>
+                <show part="hands_bg/wendigo"/>
+            </case>
             <default>
                 <!--see switch[value=skinType]-->
             </default>
@@ -2820,6 +2831,9 @@
                 <hide part="legs/*"/>
                 <show part="legs_fg/snail"/>
             </case>
+			<case values="LowerBody.WENDIGO">
+                <hide part="legs/wendigo"/>
+            </case>
             <!--<case values="LowerBody.YGG_ROOT_CLAWS">TODO </case>-->
             <case values="'never'"><!--TODO liliraune-->
                 <hide part="legs/*"/>
@@ -2931,7 +2945,7 @@
 		<!-- TAIL AREA -->
         <switch value="tailType">
             <case values="Tail.NONE"></case>
-			<case values="Tail.HORSE">
+			<case values="Tail.HORSE,Tail.WENDIGO">
 				<if test="isTaur()">
 					<show part="tail/horse_taur"/>
 					<else>
@@ -4291,8 +4305,8 @@
 				<hide part="hair/*"/>
 				<show part="hair/feather"/>
 			</if>
-			<show part="armorNeck/WalpurgisClothes"/>
-			<show part="clothCape/WalpurgisClothesBack"/>
+			<show part="armorNeck/walpurgisClothes"/>
+			<show part="clothCape/walpurgisClothesBack"/>
         </if>
 
         <if test="scandalousSuccubusClothing">
