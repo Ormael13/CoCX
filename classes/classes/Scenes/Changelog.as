@@ -60,11 +60,17 @@ package classes.Scenes
 			outputText("been wrong labeled as player perks in few specials/attacks, eastern bunny perk bugging free balls mutation slot, able to fuck Tamani daughters without having cock, certain Beast Warrior perks not allowing cast Charge Weapon or Charge Armor with all other req. meet, mana not regenerating with elemental conjuer job\n\n");
 			outputText("<b>Version 0.8o4:</b>\n\n");
 			outputText("-Yeti / Winter Wolf / Frost Gigant / True Ice Golems at Glacial Rift got their level rised from 60/47/80/43 to 76/99/89/80 (that included buff to most of their stats).\n");
-			outputText("-New area to discover: Tundra. It have new monster(s) - Wendigo (lvl 52), True Ice Golem (lvl 64). Req. to explore Caves and been at least level 35. It have some of glacial rift monsters. Exploring it would unlock now Glacial Rift.\n");
+			outputText("-New area to discover: Tundra. It have new monster - True Ice Golem (lvl 64). Req. to explore Caves and been at least level 35. It have some of glacial rift monsters. Exploring it would unlock now Glacial Rift.\n");
 			outputText("-Added parser for calling right antennae name instead of antennae.type in tf scenes. Also Hair color change for goblin ale got rid of werid piece of code so will work better. And bnot having any anntanae for goblin and gremlin will give those races +1 to race score.\n");
 			outputText("-Half Scylla race will req. to have scylla lower body. Kraken lower body will give now +15 to sens and +60% to str multi (up from +30% to str multi before).\n");
 			outputText("-Pure Pearl will have now effect of lowering additionaly libido by 10 pts.\n");
 			outputText("-Hourly lust gains are not related to core value of libido not it current total value. It would give reduction of lust gains per hour from 80 to 90%.\n");
+			outputText("-Added Jojo comments on Tactician History perk or lacking History perk in his talk scene about PC Past.\n");
+			outputText("-New enemies possible to encounter during Glacial Rift exploration: Wendigo - lvl 84.\n");
+			outputText("-Been attacked by Wendigo can apply status called Wendigo psychosis lasting up to 7 days. If during this time PC lust reach 100% (without hunger bar enabled) or hunger drop to 0 it would trigger transformation into Wendigo.\n");
+			outputText("-During character creation after ascension could pick between getting free job perk from any Past Life perk or getting instead free perk point(s).\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -85,16 +91,15 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -151,8 +156,6 @@ package classes.Scenes
 			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -240,12 +243,9 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bedą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
 			outputText("\n");cel na 0.8(/9): dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
-			outputText("\n");cel na 0.8(/9): pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

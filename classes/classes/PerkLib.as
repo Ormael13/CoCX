@@ -249,9 +249,9 @@ public class PerkLib
 		public static const PastLifeSmith:PerkType = mk("Past Life: Smith", "Past Life: Smith",
 				"Knowledge of armor and fitting increases armor effectiveness by roughly 5% each (phys + mag).", null, true);
 		public static const HistoryTactician:PerkType = mk("History: Tactician", "History: Tactician",
-				" (+10% to minions/pets damage).");
+				"Tactical knowledge allows you to increase effectivness of your subordinates. (+10% to minions/pets damage).");
 		public static const PastLifeTactician:PerkType = mk("Past Life: Tactician", "Past Life: Tactician",
-				" (+10% to minions/pets damage).", null, true);
+				"Tactical knowledge allows you to increase effectivness of your subordinates. (+10% to minions/pets damage).", null, true);
 		public static const HistoryWhore:PerkType = mk("History: Whore", "History: Whore",
 				"Seductive experience causes your tease attacks to be 15% more effective.");
 		public static const PastLifeWhore:PerkType = mk("Past Life: Whore", "Past Life: Whore",
@@ -6920,4 +6920,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}
