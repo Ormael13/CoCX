@@ -1910,7 +1910,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Loosing hellcat body parts
 			if (player.hellcatScore() >= 10 && flags[kFLAGS.WITCHES_SABBATH] > 1) {
 				var hellcatparts:Number = 3;
-				if (player.tailType != Tail.BURNING || player.tailType != Tail.TWINKASHA) hellcatparts -= 1;
+				if (player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA) hellcatparts -= 1;
 				if (player.hairType != Hair.BURNING) hellcatparts -= 1;
 				if (player.eyes.type != Eyes.INFERNAL) hellcatparts -= 1;
 				if (hellcatparts < 3) {
