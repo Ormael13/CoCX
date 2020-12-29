@@ -190,7 +190,7 @@ use namespace CoC;
 			if (player.findPerk(PerkLib.SoulTyrant) >= 0) dailySoulforceUsesLimit++;
 			if (player.findPerk(PerkLib.SoulAncestor) >= 0) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 			outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
-			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1430\n");
+			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1730\n");
 		/*	outputText("<b>Progress toward clearing next meridian: </b>");
 			if (flags[kFLAGS.UNLOCKED_MERIDIANS] == 2)
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
@@ -199,7 +199,7 @@ use namespace CoC;
 			else
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 			outputText("<b>PC Speed %:</b> " + player.getMaxStats("spe") + "\n");
-		*/	if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
 				outputText("<b>TelAdre Tripxi Guns general timer:</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxi) + "\n");
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) {
 					outputText("<b>TelAdre Tripxi Guns 1 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) + " (Desert Eagle)\n");
@@ -238,7 +238,7 @@ use namespace CoC;
 					outputText("<b>TelAdre Tripxi Guns 6 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns6) + "\n");
 				}
 			}
-			outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
+		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
 			menu();
 			if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Cultivate", "You're unable to recover soulforce by cultivating.");
 			else addButton(0, "Cultivate", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
@@ -282,7 +282,7 @@ use namespace CoC;
 			addButton(0, "ClickItTwice", AddMaxBackpack00).hint("Zenji spawning pool");
 			addButton(1, "Instant-house", AddMaxBackpack01).hint("Instant-house + bed");
 			addButton(2, "Hex-Mate", AddMaxBackpack02).hint("Hex-Mate");
-			addButton(3, "EzekielBuffFix", AddMaxBackpack4).hint("Fix for Blessing.");
+			addButton(3, "WendigoTrigger", AddMaxBackpack4).hint("Trigger Wendigo transformation. (Without active Wendigo Psychosis will do nothing ;) )");
 			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) addButton(4, "ClickItOnce", AddMaxBackpack3).hint("Fixing Lover Zenji missing one status effect needed for his sex scenes menu.");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2 && !player.hasStatusEffect(StatusEffects.TrainingNPCsTimersReduction)) addButton(5, "ClickItDoIt", AddMaxBackpack2).hint("Adding one status effect needed for sparring ring upgrades effect.");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
@@ -341,15 +341,11 @@ use namespace CoC;
 			doNext(SoulforceCheats);
 		}
 		public function AddMaxBackpack4():void {
-			player.statStore.addBuffObject({
-				"str": 5,
-				"tou": 5,
-				"spe": 5,
-				"int": 5,
-				"wis": 5,
-				"lib": 5
-			}, 'EzekielBlessing', {text: 'Ezekiel Blessing'});
-			doNext(submenucuzwhynot);
+			if (player.hasStatusEffect(StatusEffects.WendigoPsychosis)) SceneLib.glacialRift.wendigoScene.becomeWendigo();
+			else {
+				outputText("Get a Life... i mean Wendigo Psychosis...");
+				doNext(submenucuzwhynot);
+			}
 		}
 		public function TestDynamicStats():void {
 			player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
@@ -1806,7 +1802,7 @@ use namespace CoC;
 		}
 		public function AddGiantSlayerMech():void {
 			outputText("\n\n<b>(Gained 1 Giant Slayer Mech!)</b>\n\n");
-			inventory.takeItem(vehicles.GOBMPRI, curry(EquipmentMenu, 1));
+			inventory.takeItem(vehicles.GS_MECH, curry(EquipmentMenu, 1));
 		}
 		public function AddTheEvelyn():void {
 			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");

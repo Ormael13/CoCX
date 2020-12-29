@@ -92,6 +92,8 @@ public class Race {
     public static const KAMAITACHI:Race = new Race("Kamaitachi",86);
     public static const GAZER:Race = new Race("Gazer",87);
     public static const RATATOSKR:Race = new Race("Ratatoskr",88);
+    public static const WENDIGO:Race = new Race("Wendigo",89);
+    public static const TROLL:Race = new Race("Troll",90);
 
     public var name:String;
     public var id:int;

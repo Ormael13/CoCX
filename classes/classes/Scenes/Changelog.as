@@ -17,7 +17,7 @@ package classes.Scenes
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog33();
+			Changelog34();
 		}
 		//zrobić do 2021 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
 		private function Changelog35():void {
@@ -28,67 +28,12 @@ package classes.Scenes
 		}
 		private function Changelog34():void {
 			clearOutput();
-			menu();
-			addButton(0, "Next", Changelog33);
-			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
-		}
-		private function Changelog33():void {
-			clearOutput();
-			outputText("<b>Version 0.8o2 (Fixes, fixes and 3 new weapons):</b>\n\n");
-			outputText("-New weapons from Liadri (1h katana and it upgr. versions from Celess): Uchigatana, Moonlit Snow, Chaos Blade\n");
-			outputText("-Nodachi moved to massive weapon section increasing base atk form 25 to 65 and cost from 100 to 2600 gems.\n");
-			outputText("-Fixed bugs: Various fixes from Liadri for many errors from last build, DeBimo offer from Rathazul not including Joy or Excellia in camp\n\n");
-			outputText("<b>Version 0.8o3:</b>\n\n");//perk lvl 4,6,7,8,11,12,14,16,17,18,19
-			outputText("-New tier 0 sensitivity lvl-up perk: Desensitization. Req. 10+ sens. Effect: Negative effects of sensitivity are reduced by 5%.\n");
-			outputText("-New tier 0 misc lvl-up perk: Draconic Bones. Req. Free bones and marrow mutation slot, dragon or its variants arms, dragon or its variants legs, dragon or its variants tail and 8+/10+ pts in dragon/frost wyrm score. Effect: Basic strengthening of your body bone structure. (+10 to unarmed attack)\n");
-			outputText("-New tier 0 misc lvl-up perk: Draconic Heart. Req. Free heart mutation slot, Draconic Bones perk, Draconic/Drake Lungs perk, 8+/10+ pts/frost wyrm in dragon score. Effect: Your heart was strengthened to better handle your changing body. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen)\n");
-			outputText("-New tier 0 misc lvl-up perk: Drake Lungs. Req. Free lungs mutation slot, one of the dragon breaths and 10+/10+/11+ pts in frost wyrm/jabberwocky/vouivre score. Effect: Increases the power of dragon breath attack. (+300% to dragon breath damage that race is using)\n");
-			outputText("-New tier 0 misc lvl-up perk: Ratatoskr smarts. Req. Knowledge is power perk and 4+ in squirrel/ratatoskr score. Effect: Allows to perma Weird words. +5% to int multi.\n");
-			outputText("-New tier 1 misc lvl-up perk: Ratatoskr smarts (Evolved). Req. Ratatoskr smarts perk and 8+ in squirrel/ratatoskr score. Effect: Increase the damage of Weird words by 20%. Lower cooldown of Knowledge overload by 1 turn. +10% to int multi.\n");
-			outputText("-New tier 2 misc lvl-up perk: Draconic Bones (Evolved). Req. Draconic Bones, Draconic Heart, Draconic/Drake Lungs perks and 12+/12+ pts in dragon/frost wyrm score. Effect: Advanced strengthening of your body bone structure. (+10 to unarmed attack, +5% to damage reduction against physical and magical attacks, +5% of max core Tou as phantom Tou)\n");
-			outputText("-New tier 2 misc lvl-up perk: Draconic Heart (Evolved). Req. Draconic Bones, Draconic Heart, Draconic/Drake Lungs perks and 12+/12+ pts in dragon/frost wyrm score. Effect: Each heartbeat fills your body with great power. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +5% of max core Str as phantom Str)\n");
-			outputText("-New tier 2 misc lvl-up perk: Drake Lungs (Evolved). Req. Drake Lungs perk and 12+/11+/12+ pts in frost wyrm/jabberwocky/vouivre score. Effect: Further increases increases dragon breath attack power. (+300% to dragon breath damage that race is using)\n");
-			outputText("-New tier 3 misc lvl-up perk: Ratatoskr smarts (Final Form). Req. Ratatoskr smarts (Evolved) perk and 12+ in squirrel/ratatoskr score. Effect: Increase the damage of Weird words by another 30%. Lower cooldowns of ratatoskr specials by 1 turn. Knowledge is power is now three times as effective. +20% to int multi.\n");
-			outputText("-New tier 5 sensitivity lvl-up perk: Greater Desensitization. Req. Desensitization perk and 20+ sens. Effect: Negative effects of sensitivity are reduced by 10%.\n");
-			outputText("-New tier 5 misc lvl-up perk: Draconic Bones (Final Form). Req. Draconic Bones (Evolved), Draconic Heart (Evolved), Draconic Lungs/Drake (Evolved) perks and 16+/15+ pts in dragon/frost wyrm score. Effect: Strengthening of your body bone structure to pseudo-dragon grade. (+20 to unarmed attack, +50% to unarmed atk, +5% to damage reduction against physical and magical attacks, +10% of max core Tou as phantom Tou)\n");
-			outputText("-New tier 5 misc lvl-up perk: Draconic Heart (Final Form). Req. Draconic Heart (Evolved), Draconic Heart (Evolved), Draconic Lungs/Drake (Evolved) perks and 16+/15+ pts in dragon/frost wyrm score. Effect: Your heart metamorphosis reached pseudo-dragon level. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +1% HP regen, +10% of max core Str as phantom Str)\n");
-			outputText("-New tier 5 misc lvl-up perk: Drake Lungs (Final Form). Req. Drake Lungs (Evolved) perk and 15+/12+/13+ pts in frost wyrm/jabberwocky/vouivre score. Effect: Allows to use breath attack more often with increase to it power. (+300% to dragon breath damage that race is using and allowing to use it once per combat instead of once per day)\n");
-			outputText("-New tier 5 misc lvl-up perk: Mantis-like Agility (Final Form). Req. Mantis-like Agility (Evolved) perk and mantis score 15+. Effect: triple speed bouses gained from Mantis-like Agility perk and 30 pts of phantom Spe (scalable).\n");
-			outputText("-New tier 5 intelligence lvl-up perk: Raging Inferno (Ex). Req. Raging Inferno perk, Grand Archmage perk and 150+ int. Effect: Increase to cumulative damage by 10%. Penalty for turn without casted fire spell decreased by 5%.\n");
-			outputText("-New tier 5 intelligence lvl-up perk: Glacial Storm (Ex). Req. Glacial Storm perk, Grand Archmage perk and 150+ int. Effect: Increase to cumulative damage by 10%. Penalty for turn without casted ice spell decreased by 5%.\n");
-			outputText("-New tier 5 intelligence lvl-up perk: High Voltage (Ex). Req. High Voltage perk, Grand Archmage perk and 150+ int. Effect: Increase to cumulative damage by 10%. Penalty for turn without casted lightning spell decreased by 5%.\n");
-			outputText("-New tier 5 intelligence lvl-up perk: Eclipsing Shadow (Ex). Req. Eclipsing Shadow perk, Grand Archmage perk and 150+ int. Effect: Increase to cumulative damage by 10%. Penalty for turn without casted darkness spell decreased by 5%.\n");
-			outputText("-New tier 9 intelligence lvl-up perk: Raging Inferno (Su). Req. Raging Inferno (Ex) perk, Grand Archmage (3rd circle) perk and 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling fire based attack. Penalty for turn without casted fire spell decreased by another 5%.\n");
-			outputText("-New tier 9 intelligence lvl-up perk: Glacial Storm (Su). Req. Glacial Storm (Ex) perk, Grand Archmage (3rd circle) perk and 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling ice based attack. Penalty for turn without casted ice spell decreased by another 5%.\n");
-			outputText("-New tier 9 intelligence lvl-up perk: High Voltage (Su). Req. High Voltage (Ex) perk, Grand Archmage (3rd circle) perk and 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling lightning based attack. Penalty for turn without casted lightning spell decreased by another 5%.\n");
-			outputText("-New tier 9 intelligence lvl-up perk: Eclipsing Shadow (Su). Req. Eclipsing Shadow (Ex) perk, Grand Archmage (3rd circle) perk and 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling darkness based attack. Penalty for turn without casted darkness spell decreased by another 5%.\n");
-			outputText("-New tier 10 sensitivity lvl-up perk: Epic Desensitization. Req. Greater Desensitization perk and 50+ sens. Effect: Negative effects of sensitivity are reduced by 15%.\n");
-			outputText("-New tier 13 misc lvl-up perk: Chimerical Body: Epic Stage. Req. Chimerical Body: Semi-Epic Stage perk and 99+ points in Internal Chimerical Disposition score. Effect: Your chimerical body attained Epic Stage. (negate up to 14 racial perk points negative effects) (+10% to Str/Tou/Spe racial multi, +20% to Int/Wis racial multi, +15% to Lib racial multi, +10 to Sens)\n");
-			outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
-			outputText("-New tier 20 sensitivity lvl-up perk: Mythical Desensitization. Req. Legendary Desensitization perk and 200+ sens. Effect: Negative effects of sensitivity are reduced by 25%.\n");
-			outputText("-New rare ascension perk -> Ascension: Additional Organ Mutation (4th Stage). Req. Ascension: Additional Organ Mutation (3rd Stage) perk, 40+ in internal chimera score and be at eighth ascension. It costs 80 asc points and will give 1 more slot for organ mutations. Like heart, muscles or mouth related racial mutation perks.\n");
-			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 5). Req. Ascension: Transcendental Genetic Memory (Stage 4) perk and be at fifth ascension. It cost 40 asc points and allow to perm up to 90 selected Metamorph options. (with prev perks it give max cap of 315)\n");
-			outputText("-New rare ascension perk -> Ascension: Building Prestige (6th Stage). Req. Ascension: Building Prestige (5th Stage) perk and be at fifth ascension. It costs 30 asc points and will give 1 more slot for Prestige Jobs.\n");
-			outputText("-New rare ascension perk -> Ascension: Unlocked Potential (3rd Stage). Req. Ascension: Unlocked Potential (2nd Stage) and be at third ascension. It costs 10 asc points and will give +2 to max lust, +6 to max fatigue and +20 to max HP at each lvl-up.\n");
-			outputText("-New rare ascension perk -> Ascension: Unlocked Potential (4th Stage). Req. Ascension: Unlocked Potential (3rd Stage) and be at fourth ascension. It costs 10 asc points and will give +2 to max wrath, +6 to max soulforce and +12 to max mana at each lvl-up.\n");
-			outputText("-New ring (by Liadri): Engagement Ring - buyable at jewelry shop in Tel'Adre in Special Rings shelf. Cost 200 gems. Required in wedding ceremonies. Will be used during event.\n");
-			outputText("-New ring (by Ormael): ring of magical protection - buyable at Jewel shop in Tel'Adre. Cost 1600 gems. Increase magical resistance by 2%.\n");
-			outputText("-New ring (by Ormael): ring of physical protection - buyable at Jewel shop in Tel'Adre. Cost 1600 gems. Increase physical resistance by 3%.\n");
-			outputText("-New head jewelery/accesory/misc (by Ormael): crown of magical protection - buyable at Jewel shop in Tel'Adre. Cost 6400 gems. Increase magical resistance by 8%.\n");
-			outputText("-New head jewelery/accesory/misc (by Ormael): crown of physical protection - buyable at Jewel shop in Tel'Adre. Cost 6400 gems. Increase physical resistance by 12%.\n");
-			outputText("-New necklace (by Ormael): Necklace of magical protection - buyable at Jewel shop in Tel'Adre. Cost 8000 gems. Increase magical resistance by 10%.\n");
-			outputText("-New necklace (by Ormael): Necklace of physical protection - buyable at Jewel shop in Tel'Adre. Cost 8000 gems. Increase physical resistance by 15%.\n");
-			outputText("-New consumable items (by Ormael): Balls of Flame, Frozen Balls, THUNDERballs, Balls of the Darkness, Poisoned Balls - buyable at Serena shop in HXD (Shelf 3 - all of them req. lvl 42+ to be accessable). Each costs 60 gems and deal same damage as bangball mk 3 but with elemental affix (fire, ice, lighting, darkness, poison).\n");
-			outputText("-Draconic Lungs perks stat bonuses to str and tou was changed into bonuses to spe. Also Evolved and Final Form perk from this perk line granting +5%/+10% of max core Spe as phantom Spe\n");
-			outputText("-Lizan Marrow perk have now additional req. of having free bones and marrow mutation slot. Kitsune Thyroid Gland perk also now req. free thyroid gland mutation slot.\n");
-			outputText("-New enemies possible to encounter during Bog exploration: Corrupted Troll (Male or Female) - lvl 38\n");
-			outputText("-New enemies possible to encounter during Ocean exploration: Shark Girls Pack - lvl 65, Scylla - lvl 70.\n");
-			outputText("-New enemy possible to encounter when exploring Beach: Goo Girl (Beach variant) - lvl 34\n");
-			outputText("-Arena have now in challange section 2nd type of gargoyle enemy (this one is more of female-like one with axe tail instead of mace tail).\n");
-			outputText("-5 new achievments. (4 shadow ones)\n");	
-			outputText("-Explore option named 42 was moved to silly mode.\n");
-			outputText("-Follower Zenji now scales up to PC lvl cap (150 > 185). He will also have gradualy increasing other combat stats beside raw stats and XP reward for beating him will be much higher.\n");
-			outputText("-Lover Zenji got more sex scenes. Lover Zenji also can impregnate PC - pregnancy takes 30 days and first two kids can be named.\n");
+			outputText("(Part 2/2) <b>Version 0.8o3 (More about Zenji, Traditional X-mas Perk-o-calipse 6 (only around 30+ perks this year), squirrel TF, Defiled Ravine, Ayo Armors and bugfixes):</b>\n\n");
+			outputText("-Shark Girl and Tigershark Girl at Ocean got both rised level a stats a bit to respectively lvl 55 and 60.\n");
+			outputText("-Yuki Onna at Glacial Rift got her level rised from 40 to 71 (that included buff to most of her stats).\n");
+			outputText("-Phoenix Platoon was renamed into Phoenix Squad. Also most of enemies in Phoenix Tower get minor lvl/stats boost (really it's nothing large ;))\n");
+			outputText("-Succubus Gardener get bit more beefy on HP section and her heal would lower lust resistance bit less and cost more of her stamina. And IF by chance PC make her heal up enough times to reach 0% lust resistance she still could use heal up few more times but they won't lower her resistance (cuz it's already 0% right?)\n");
+			outputText("-Marae got bit of attention too ^^ She got perk here or there and new moves added to both pure and corrupted versions. A hint for them: You all remember that Marae is the one to make PC int Alraune, right?\n");
 			outputText("-All ascension perks from tab named 'Perk Select(2)' have increased max rank by 5.\n");
 			outputText("-As some crazy dungeon delver PC's went as far as 1000th room in Ebon labyrinth there would be placed chest with EXP in each 10th room aside boos rooms till that 1000th room.\n");
 			outputText("-Buff spells been changed (again) and now would be not as OP especialy due to new stats system been implemented. Well time to get used to new way buffs works. For the balance ^^\n");
@@ -104,86 +49,71 @@ package classes.Scenes
 			outputText("-Jobs: Enchanter, Eromancer, Healer get a small bonus to mana regenerations (the same like Job: Elemental Conjuer have (+5)). Also amount of mana regen gained by possesing Star Sphere was decreased by 1/3.\n");
 			outputText("-Raging Inferno, Glacial Storm, High Voltage, Eclipsing Shadow perks effects was changed to boost respective elemental damage by 20% and each turn without casted the same element spell/special lowering damage bonus by 20% instead of reseting it fully.\n");
 			outputText("-Easy Mode is now toggle instead of difficulty setting. But it can only be toggled when pc play on lower than Hard difficulty.\n");
-			outputText("-Shark Girl and Tigershark Girl at Ocean got both rised level a stats a bit to respectively lvl 55 and 60.\n");
-			outputText("-Phoenix Platoon was renamed into Phoenix Squad. Also most of enemies in Phoenix Tower get minor lvl/stats boost (really it's nothing large ;))\n");
-			outputText("-Succubus Gardener get bit more beefy on HP section and her heal would lower lust resistance bit less and cost more of her stamina. And IF by chance PC make her heal up enough times to reach 0% lust resistance she still could use heal up few more times but they won;t lower her resistance (cuz it's already 0% right?)\n");
-			outputText("-Marae got bit of attention too ^^ She got perk here or there and new moves added to both pure and corrupted versions. A hint for them: You all remember that Marae is the one to make PC int Alraune, right?\n");
 			outputText("-Been pig/boar or orca would now extend hunger bar. Similary each racial mutation perk for those races will increase it too.\n");
-			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
-			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Ceani (lvl 98), Diana (lvl 69), Dinah (lvl 56), Etna (lvl 96), Electra (lvl 96), Ember (lvl 98), Isabella (lvl 98), Kiha (lvl 99), Kindra (lvl 99), Luna (lvl 99)\n");
-			outputText("-Increased max lvl npc's outside camp can attain: Akbal (lvl 98), Izumi (lvl 96), Minerva (lvl 95), Priscilla (lvl 98)\n");
-			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");//tier 4,6,7,8,11,12,14,16,17,18,19
-			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
-			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
-			outputText("-Lover Zenji get new options: Sleep With (variants for having or not cabin), Nightwatch, Assist me (allowing to take him as henchman)\n");
-			outputText("-New submenu in Perks page that allow to convert perk points into super perk points or to buy perks for those super perk points.\n");
-			outputText("-New event perk: Hidden Job: Blood Demon. Gained by spending 1 super perk point. Effects: Allow to reach OverMax HP equal to 5x current Tou score, -5% blood spells/soulskills cost, +10% blood spells/soulskills power, enable toggle to switch between using or not blood instead of mana to power spells (excluding few special cases), allowing to learn Blood magic spells from Red Manuscript.\n");
-			outputText("-New TF item (by Liandri): Smarty Nuts. Gained by ... Using this item would turn PC into Ratatoskr (squirrel-morph). Racial bonuses for Half squirrel-morph (6+) /  squirrel-morph (12+) / Ratatoskr (18+): -10/20/25% to Str multi, +60/90/140% to Spe multi, +40/95/155% to Int multi\n");
-			outputText("-New M. Special: Knowledge overload. Req. 12+ in squirrel-morph score. Stun for 1 round by sharing insightful information. Duration increase in round based on how much of the codex was read (~each 10 entries = +1 turn). Cooldown 12 rounds.\n");
-			outputText("-New M. Special: Provoke. Req. 12+ in squirrel-morph score. Drop all of foe’s armor to zero and increase all types of pc damage by 20% for 3 rounds but increase opponent damage take by 20% as well. 6 round cooldown and silence most enemies. More powerful based on how many entry pc has read in the codex (1 entry = +1%).\n");
-			outputText("-New M. Special: Weird words. Req. 12+ in squirrel-morph score. Damage based on spell mod and a modifier based on how many info pc has read in the codex (1 entry = +1%). Cooldown 4 rounds.\n");
-			outputText("-New mutation perk: Knowledge is power. Req. (???) Effects: You become more powerful the more you know about Mareth. Increase spell and physical damage by a percentage based on how much of the codex was read (1 entry = +1%).\n");
-			outputText("-New event perk: Way of the Blood. Gained by spending 1 super perk point and having 'Hidden Job: Blood Demon' super perk. Effects: Allow to reach OverMax HP equal to 5x current Tou score, -5% blood spells/soulskills cost, +10% blood spells/soulskills power, ");
-			outputText("enable toggle to switch between using or not blood instead of soulforce to power soulskills (excluding few special cases), allowing to learn Blood soulskills from Crimson Jade.\n");
-			outputText("-New event perk: Your Pain My Power. Gained by spending 1 super perk point and having 'Way of the Blood' super perk. Effects: Allow to reach OverMax HP equal to 5x current Tou score, -5% blood spells/soulskills cost, +10% blood spells/soulskills power, PC absorb all of blood spilled and wrath generated by enemy under Bleed effects.\n");
-			outputText("-New item: Red Manuscript. Dropped by Sand Witch or Cum Witch. Allow to learn Blood Spells when PC have Hidden Job: Blood Demon.\n");
-			outputText("-New Blood Spell: Blood Missiles - learned from Red Manuscript. Cost 50 health. Deal magic dmg and have cooldown of 2 turns.\n");//and deal AoE ice dmg and stun enemies for 5 turns. Have 1 turn channel time and cooldown of 12 turns.
-			outputText("-New Blood Spell: Blood Explosion - learned from Red Manuscript. Cost 200 health. Deal AoE magic dmg and have cooldown of 3 turns.\n");
-			outputText("-Added Large Group-type enemy perk for large monsters groups (if description say about having above 20 it would be then considered large group). And so some of monsters advanced to not be just Group but Large Group. Compared to bonuses form Group type enemy boosts those enemies gets is 10x instead of 5x.\n");
 			outputText("-Oni race now could reach 3rd stage of bonuses (+150% to Str racial multi, +90% to Tou racial multi, -30% to Int racial multi, +60% to Wis racial multi) and been called Elder Oni on appearance screen.\n");
-			outputText("-New armor (by Ormael): Light Ayo Armor - buyable at Serena shop in HXD after reaching Soul Apprentice. Cost 5600 gems. Req. 20+ str/spe to put on. Unpowered it grants 36 armor / 6 resistance and lower str/spe by 10. Powered it grants 60 armor / 10 resistance and giving +10% to str/spe multi.\n");
-			outputText("-New armor (by Ormael): Heavy Ayo Armor - buyable at Serena shop in HXD after reaching Soul Personage. Cost 14000 gems. Req. 40+ str/spe to put on. Unpowered it grants 72 armor / 12 resistance and lower str/spe by 20. Powered it grants 120 armor / 20 resistance and giving +20% to str/spe multi.\n");
-			outputText("-New armor (by Ormael): HB armor - buyable at Kaiba shop in Tel'Adre. Cost 28800 gems. Req. 60+ str/spe to put on. Unpowered it grants 60 armor / 48 resistance and lower str/spe by 30. Powered it grants 100 armor / 80 resistance and giving +18%/+60% to str/spe multi. Increase melee/range weapon damage of Howling Banshee Mech/Other non goblin mechs by 50%/25%.\n");
-			outputText("-Ayo Armors require periodical injection of soulforce to stay in 'powered' state. Depending on armor it can drain form 60 to 120 SF per hour. Menu to transfer SF to armor and later activate armor is in Unequip/Misc menu in Inventory. Also when PC taking off such type of armor all remaining in it SF is transfered into PC. In case that would make PC SF goes over the max capacity all over the top amount of SF is lost.\n");
 			outputText("-In unequip menu if PC not have specific slot item equipped button will be greyed out (even if PC not yet possible to equip item in that slot (like ring 2nd to 4th)). Also bit of rearrange buttons on first page preparing for future new slot for equipment to be added.\n");
-			outputText("-New head jewelery/accesory/misc (by Ormael): HB Helmet - buyable at Kaiba shop in Tel'Adre. Cost 1440 gems. Increase armor by 5 and magic resistance by 4. Increase melee/range weapon damage of Howling Banshee Mech/Other non goblin mechs by 20%/10%.\n");
-			outputText("-New enemies possible to encounter during Blight Ridge exploration: Corrupted Basic Flesh Golem - lvl 35, Corrupted Basic Flesh Golem - lvl 36.\n");
-			outputText("-New underwear (upper) (by Ormael): HB shirt - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems, 4 armor / 3 resistance, reduces fire/ice/electric damage taken by 10%, increase soulforce stored and usable by ayo armor by 350 and increase melee/range weapon damage of Howling Banshee Mech/Other non goblin mechs by 10%/5%.\n");
-			outputText("-New underwear (lower) (by Ormael): HB shorts - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems, 4 armor / 3 resistance, reduces fire/ice/electric damage taken by 10%, increase soulforce stored and usable by ayo armor by 350 and increase melee/range weapon damage of Howling Banshee Mech/Other non goblin mechs by 10%/5%.\n");
-			outputText("-New enemies possible to encounter during Glacial Rift exploration: Glacial Troll (Male or Female) - lvl 94\n");
-			outputText("-Yuki Onna at Glacial Rift got her level rised form 40 to 71 (that included buff to most of her stats).\n");
-			outputText("-New area to discover: Defile Ravine - home of demon enemies like: Cow Succubus (level 45), Mino Incubus (lvl 46), Corrupted Improved Golem(s) (lvl 59(61))\n");
-			outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
-			outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			outputText("-Herbalism lvl cap been set on 20. Also some of herb crafting got a bit lower req. for herbalism level. And herbalism level will reset on ascension like tease level.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");//
-			//outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. ");
-			//outputText("When used with any ayo armor it would increase soulforce drain from armor by 60 units, increase soulforce stored and usable by ayo armor by 1,000 and boost mech meele/range weapon damage by 25%. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");
+			outputText("-Places menu will remember on which page was it last time opened. Also it will show all undiscovered places putting buttons with ???. What places are they... that up to player to find out or remember from playing other character that had those places unlocked. (At least now there will be bit less quessing of: did i unlocked all places or not yet?)\n");
 			outputText("-Fixed bugs: Bugfixes / Typo fixing by Pyromania & Liadri, Luna event not happening in forest after PC fire her at first Full Moon event conclusion, some minor errors in calculation and display bonuses for kitsunes, some of Slave Excellia scenes sending back to Fixed Excellia, game ocassionaly incorrectly desc monsters in combat due to forced PC gender setting, returning from any type of minion setting ");
 			outputText("in middle of combat been treated as new turn, Zenji Food option not always resetting, soultraining ring not been accounted for when cultivating, Akbal lust victory not showing any post combat options sometimes, some of enemies like hellhoud been seen as valid target for tailpeg unique sex scene, Yara's Piercing Studio Rare menu Back button not sending back even to main menu, green slime able to lower it ");
 			outputText("lust below 0, Drider Incubus Anal sex giving PC imps pregnancy, bunny herm scenes on plains still TF-ing PC despite been undead/gargoyle, goblin ale huminizing effect not taking into account PC resistance to been TF'd, missing fatigue cost check on Money Strike, Diana not able to level up after joining camp, Many Birds soulskill dealing damage twice, some of attacks incorrect texts, some enemy perks ");
-			outputText("been wrong labeled as player perks in few specials/attacks, eastern bunny perk bugging free balls mutation slot, able to fuck Tamani daughters without having cock, certain Beast Warrior perks not allowing cast Charge Weapon or Charge Armor with all other req. meet\n\n");/*ostatni punkt changelogu
+			outputText("been wrong labeled as player perks in few specials/attacks, eastern bunny perk bugging free balls mutation slot, able to fuck Tamani daughters without having cock, certain Beast Warrior perks not allowing cast Charge Weapon or Charge Armor with all other req. meet, mana not regenerating with elemental conjuer job\n\n");
+			outputText("<b>Version 0.8o4:</b>\n\n");
+			outputText("-Yeti / Winter Wolf / Frost Gigant / True Ice Golems at Glacial Rift got their level rised from 60/47/80/43 to 76/99/89/80 (that included buff to most of their stats).\n");
+			outputText("-New area to discover: Tundra. It have new monster - True Ice Golem (lvl 64). Req. to explore Caves and been at least level 35. It have some of glacial rift monsters. Exploring it would unlock now Glacial Rift.\n");
+			outputText("-Added parser for calling right antennae name instead of antennae.type in tf scenes. Also Hair color change for goblin ale got rid of werid piece of code so will work better. And bnot having any anntanae for goblin and gremlin will give those races +1 to race score.\n");
+			outputText("-Half Scylla race will req. to have scylla lower body. Kraken lower body will give now +15 to sens and +60% to str multi (up from +30% to str multi before).\n");
+			outputText("-Pure Pearl will have now effect of lowering additionaly libido by 10 pts.\n");
+			outputText("-Hourly lust gains are not related to core value of libido not it current total value. It would give reduction of lust gains per hour from 80 to 90%.\n");
+			outputText("-Added Jojo comments on Tactician History perk or lacking History perk in his talk scene about PC Past.\n");
+			outputText("-New enemy possible to encounter during Glacial Rift exploration: Wendigo - lvl 84.\n");
+			outputText("-Been attacked by Wendigo can apply status called Wendigo psychosis lasting up to 7 days. If during this time PC lust reach 100% (without hunger bar enabled) or hunger drop to 0 it would trigger transformation into Wendigo.\n");
+			outputText("-During character creation after ascension could pick between getting free job perk from any Past Life perk or getting instead free perk point(s).\n");
+			outputText("-New vehicle (by Ormael): Giant Slayer Mech - can be found during exploration of Battlefield (O). Req. to have built Workshop to bring it back to camp. Cost 2000 gems. Would increase Armor and Magic Resistance by 20, max Wrath by 10% and increase firearms power by 25%. Can be upgraded by using blueprint and materials. Many of upgrades from Goblin Mech Alpha could be carried over to this one.\n");
+			outputText("-1 new achievment. (shadow one)\n");
+			outputText("-New masturbation option for goblin that have goblin mech with full cum reservoir.\n");
+			outputText("-Diana corruption get reduced in her unicorn and alicorn forms. Since someone pointed she was way more corrupted than lust crazy spider-morph enemies.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: Cold Fish Soup missing it main intendeed effect (libido lowering), super perk points not reseting on ascension\n");/*ostatni punkt changelogu
+			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
+			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
+			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
+			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
+			//outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
+			//outputText("-New tier 20 sensitivity lvl-up perk: Mythical Desensitization. Req. Legendary Desensitization perk and 200+ sens. Effect: Negative effects of sensitivity are reduced by 25%.\n");
+			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
+			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			//outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. ");
+			//outputText("When used with any ayo armor it would increase soulforce drain from armor by 60 units, increase soulforce stored and usable by ayo armor by 1,000 and boost mech meele/range weapon damage by 25%. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
 			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
@@ -260,16 +190,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -324,17 +245,9 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bedą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
 			outputText("\n");cel na 0.8(/9): dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
-			outputText("\n");cel na 0.8(/9): pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -416,6 +329,95 @@ package classes.Scenes
 			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
 			outputText("-More camp build options (involving using stones and etc.)\n");
 			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
+			menu();
+			addButton(0, "Next", Changelog33);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
+		private function Changelog33():void {
+			clearOutput();
+			outputText("<b>Version 0.8o2 (Fixes, fixes and 3 new weapons):</b>\n\n");
+			outputText("-New weapons from Liadri (1h katana and it upgr. versions from Celess): Uchigatana, Moonlit Snow, Chaos Blade\n");
+			outputText("-Nodachi moved to massive weapon section increasing base atk form 25 to 65 and cost from 100 to 2600 gems.\n");
+			outputText("-Fixed bugs: Various fixes from Liadri for many errors from last build, DeBimo offer from Rathazul not including Joy or Excellia in camp\n\n");
+			outputText("(Part 1/2) <b>Version 0.8o3 (More about Zenji, Traditional X-mas Perk-o-calipse 6 (only around 30+ perks this year), squirrel TF, Defiled Ravine, Ayo Armors and bugfixes):</b>\n\n");
+			outputText("-New tier 0 sensitivity lvl-up perk: Desensitization. Req. 10+ sens. Effect: Negative effects of sensitivity are reduced by 5%.\n");
+			outputText("-New tier 0 misc lvl-up perk: Draconic Bones. Req. Free bones and marrow mutation slot, dragon or its variants arms, dragon or its variants legs, dragon or its variants tail and 8+/10+ pts in dragon/frost wyrm score. Effect: Basic strengthening of your body bone structure. (+10 to unarmed attack)\n");
+			outputText("-New tier 0 misc lvl-up perk: Draconic Heart. Req. Free heart mutation slot, Draconic Bones perk, Draconic/Drake Lungs perk, 8+/10+ pts/frost wyrm in dragon score. Effect: Your heart was strengthened to better handle your changing body. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen)\n");
+			outputText("-New tier 0 misc lvl-up perk: Drake Lungs. Req. Free lungs mutation slot, one of the dragon breaths and 10+/10+/11+ pts in frost wyrm/jabberwocky/vouivre score. Effect: Increases the power of dragon breath attack. (+300% to dragon breath damage that race is using)\n");
+			outputText("-New tier 0 misc lvl-up perk: Ratatoskr smarts. Req. Knowledge is power perk and 4+ in squirrel/ratatoskr score. Effect: Allows to perma Weird words. +5% to int multi.\n");
+			outputText("-New tier 1 misc lvl-up perk: Ratatoskr smarts (Evolved). Req. Ratatoskr smarts perk and 8+ in squirrel/ratatoskr score. Effect: Increase the damage of Weird words by 20%. Lower cooldown of Knowledge overload by 1 turn. +10% to int multi.\n");
+			outputText("-New tier 2 misc lvl-up perk: Draconic Bones (Evolved). Req. Draconic Bones, Draconic Heart, Draconic/Drake Lungs perks and 12+/12+ pts in dragon/frost wyrm score. Effect: Advanced strengthening of your body bone structure. (+10 to unarmed attack, +5% to damage reduction against physical and magical attacks, +5% of max core Tou as phantom Tou)\n");
+			outputText("-New tier 2 misc lvl-up perk: Draconic Heart (Evolved). Req. Draconic Bones, Draconic Heart, Draconic/Drake Lungs perks and 12+/12+ pts in dragon/frost wyrm score. Effect: Each heartbeat fills your body with great power. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +5% of max core Str as phantom Str)\n");
+			outputText("-New tier 2 misc lvl-up perk: Drake Lungs (Evolved). Req. Drake Lungs perk and 12+/11+/12+ pts in frost wyrm/jabberwocky/vouivre score. Effect: Further increases increases dragon breath attack power. (+300% to dragon breath damage that race is using)\n");
+			outputText("-New tier 3 misc lvl-up perk: Ratatoskr smarts (Final Form). Req. Ratatoskr smarts (Evolved) perk and 12+ in squirrel/ratatoskr score. Effect: Increase the damage of Weird words by another 30%. Lower cooldowns of ratatoskr specials by 1 turn. Knowledge is power is now three times as effective. +20% to int multi.\n");
+			outputText("-New tier 4 intelligence lvl-up perk: Elemental Bolt. Req. 125+ int and one of those perks: Raging Inferno, Glacial Storm, High Voltage, Eclipsing Shadow. Effect: Enable use of Elemental bolt. (would prevent decay of buff from building up elemental damage).\n");
+			outputText("-New tier 5 sensitivity lvl-up perk: Greater Desensitization. Req. Desensitization perk and 20+ sens. Effect: Negative effects of sensitivity are reduced by 10%.\n");
+			outputText("-New tier 5 misc lvl-up perk: Draconic Bones (Final Form). Req. Draconic Bones (Evolved), Draconic Heart (Evolved), Draconic Lungs/Drake (Evolved) perks and 16+/15+ pts in dragon/frost wyrm score. Effect: Strengthening of your body bone structure to pseudo-dragon grade. (+20 to unarmed attack, +50% to unarmed atk, +5% to damage reduction against physical and magical attacks, +10% of max core Tou as phantom Tou)\n");
+			outputText("-New tier 5 misc lvl-up perk: Draconic Heart (Final Form). Req. Draconic Heart (Evolved), Draconic Heart (Evolved), Draconic Lungs/Drake (Evolved) perks and 16+/15+ pts in dragon/frost wyrm score. Effect: Your heart metamorphosis reached pseudo-dragon level. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen, +1% HP regen, +10% of max core Str as phantom Str)\n");
+			outputText("-New tier 5 misc lvl-up perk: Drake Lungs (Final Form). Req. Drake Lungs (Evolved) perk and 15+/12+/13+ pts in frost wyrm/jabberwocky/vouivre score. Effect: Allows to use breath attack more often with increase to it power. (+300% to dragon breath damage that race is using and allowing to use it once per combat instead of once per day)\n");
+			outputText("-New tier 5 misc lvl-up perk: Mantis-like Agility (Final Form). Req. Mantis-like Agility (Evolved) perk and mantis score 15+. Effect: triple speed bouses gained from Mantis-like Agility perk and 30 pts of phantom Spe (scalable).\n");
+			outputText("-New tier 5 intelligence lvl-up perk: Raging Inferno (Ex). Req. Raging Inferno perk, Grand Archmage perk and 150+ int. Effect: Increase to cumulative damage by 10%. Penalty for turn without casted fire spell decreased by 5%.\n");
+			outputText("-New tier 5 intelligence lvl-up perk: Glacial Storm (Ex). Req. Glacial Storm perk, Grand Archmage perk and 150+ int. Effect: Increase to cumulative damage by 10%. Penalty for turn without casted ice spell decreased by 5%.\n");
+			outputText("-New tier 5 intelligence lvl-up perk: High Voltage (Ex). Req. High Voltage perk, Grand Archmage perk and 150+ int. Effect: Increase to cumulative damage by 10%. Penalty for turn without casted lightning spell decreased by 5%.\n");
+			outputText("-New tier 5 intelligence lvl-up perk: Eclipsing Shadow (Ex). Req. Eclipsing Shadow perk, Grand Archmage perk and 150+ int. Effect: Increase to cumulative damage by 10%. Penalty for turn without casted darkness spell decreased by 5%.\n");
+			outputText("-New tier 9 intelligence lvl-up perk: Raging Inferno (Su). Req. Raging Inferno (Ex) perk, Grand Archmage (3rd circle) perk and 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling fire based attack. Penalty for turn without casted fire spell decreased by another 5%.\n");
+			outputText("-New tier 9 intelligence lvl-up perk: Glacial Storm (Su). Req. Glacial Storm (Ex) perk, Grand Archmage (3rd circle) perk and 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling ice based attack. Penalty for turn without casted ice spell decreased by another 5%.\n");
+			outputText("-New tier 9 intelligence lvl-up perk: High Voltage (Su). Req. High Voltage (Ex) perk, Grand Archmage (3rd circle) perk and 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling lightning based attack. Penalty for turn without casted lightning spell decreased by another 5%.\n");
+			outputText("-New tier 9 intelligence lvl-up perk: Eclipsing Shadow (Su). Req. Eclipsing Shadow (Ex) perk, Grand Archmage (3rd circle) perk and 300+ int. Effect: Prevent decay of cumulative damage increase bonus when channeling darkness based attack. Penalty for turn without casted darkness spell decreased by another 5%.\n");
+			outputText("-New tier 10 sensitivity lvl-up perk: Epic Desensitization. Req. Greater Desensitization perk and 50+ sens. Effect: Negative effects of sensitivity are reduced by 15%.\n");
+			outputText("-New tier 13 misc lvl-up perk: Chimerical Body: Epic Stage. Req. Chimerical Body: Semi-Epic Stage perk and 99+ points in Internal Chimerical Disposition score. Effect: Your chimerical body attained Epic Stage. (negate up to 14 racial perk points negative effects) (+10% to Str/Tou/Spe racial multi, +20% to Int/Wis racial multi, +15% to Lib racial multi, +10 to Sens)\n");
+			outputText("-New mutation perk: Knowledge is power. Req. 12+ in squirrel-morph score. Effects: You become more powerful the more you know about Mareth. Increase spell and physical damage by a percentage based on how much of the codex was read (1 entry = +1%).\n");
+			outputText("-New event perk: Hidden Job: Blood Demon. Gained by spending 1 super perk point. Effects: Allow to reach OverMax HP equal to 5x current Tou score, -5% blood spells/soulskills cost, +10% blood spells/soulskills power, enable toggle to switch between using or not blood instead of mana to power spells (excluding few special cases), allowing to learn Blood magic spells from Red Manuscript.\n");
+			outputText("-New event perk: Way of the Blood. Gained by spending 1 super perk point and having 'Hidden Job: Blood Demon' super perk. Effects: Allow to reach OverMax HP equal to 5x current Tou score, -5% blood spells/soulskills cost, +10% blood spells/soulskills power, ");
+			outputText("enable toggle to switch between using or not blood instead of soulforce to power soulskills (excluding few special cases), allowing to learn Blood soulskills from Crimson Jade.\n");
+			outputText("-New event perk: Your Pain My Power. Gained by spending 1 super perk point and having 'Way of the Blood' super perk. Effects: Allow to reach OverMax HP equal to 5x current Tou score, -5% blood spells/soulskills cost, +10% blood spells/soulskills power, PC absorb all of blood spilled and wrath generated by enemy under Bleed effects.\n");
+			outputText("-New rare ascension perk -> Ascension: Additional Organ Mutation (4th Stage). Req. Ascension: Additional Organ Mutation (3rd Stage) perk, 40+ in internal chimera score and be at eighth ascension. It costs 80 asc points and will give 1 more slot for organ mutations. Like heart, muscles or mouth related racial mutation perks.\n");
+			outputText("-New rare ascension perk -> Ascension: Ascension: Transcendental Genetic Memory (Stage 5). Req. Ascension: Transcendental Genetic Memory (Stage 4) perk and be at fifth ascension. It cost 40 asc points and allow to perm up to 90 selected Metamorph options. (with prev perks it give max cap of 315)\n");
+			outputText("-New rare ascension perk -> Ascension: Building Prestige (6th Stage). Req. Ascension: Building Prestige (5th Stage) perk and be at fifth ascension. It costs 30 asc points and will give 1 more slot for Prestige Jobs.\n");
+			outputText("-New rare ascension perk -> Ascension: Unlocked Potential (3rd Stage). Req. Ascension: Unlocked Potential (2nd Stage) and be at third ascension. It costs 10 asc points and will give +2 to max lust, +6 to max fatigue and +20 to max HP at each lvl-up.\n");
+			outputText("-New rare ascension perk -> Ascension: Unlocked Potential (4th Stage). Req. Ascension: Unlocked Potential (3rd Stage) and be at fourth ascension. It costs 10 asc points and will give +2 to max wrath, +6 to max soulforce and +12 to max mana at each lvl-up.\n");
+			outputText("-New armor (by Ormael): Light Ayo Armor - buyable at Serena shop in HXD after reaching Soul Apprentice. Cost 5600 gems. Req. 20+ str/spe to put on. Unpowered it grants 36 armor / 6 resistance and lower str/spe by 10. Powered it grants 60 armor / 10 resistance and giving +10% to str/spe multi.\n");
+			outputText("-New armor (by Ormael): Heavy Ayo Armor - buyable at Serena shop in HXD after reaching Soul Personage. Cost 14000 gems. Req. 40+ str/spe to put on. Unpowered it grants 72 armor / 12 resistance and lower str/spe by 20. Powered it grants 120 armor / 20 resistance and giving +20% to str/spe multi.\n");
+			outputText("-New armor (by Ormael): HB armor - buyable at Kaiba shop in Tel'Adre. Cost 28800 gems. Req. 60+ str/spe to put on. Unpowered it grants 60 armor / 48 resistance and lower str/spe by 30. Powered it grants 100 armor / 80 resistance and giving +18%/+60% to str/spe multi. Increase melee/range weapon damage of Howling Banshee Mech/Other non goblin mechs by 50%/25%.\n");
+			outputText("-New ring (by Liadri): Engagement Ring - buyable at jewelry shop in Tel'Adre in Special Rings shelf. Cost 200 gems. Required in wedding ceremonies. Will be used during event.\n");
+			outputText("-New ring (by Ormael): ring of magical protection - buyable at Jewel shop in Tel'Adre. Cost 1600 gems. Increase magical resistance by 2%.\n");
+			outputText("-New ring (by Ormael): ring of physical protection - buyable at Jewel shop in Tel'Adre. Cost 1600 gems. Increase physical resistance by 3%.\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): crown of magical protection - buyable at Jewel shop in Tel'Adre. Cost 6400 gems. Increase magical resistance by 8%.\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): crown of physical protection - buyable at Jewel shop in Tel'Adre. Cost 6400 gems. Increase physical resistance by 12%.\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): HB Helmet - buyable at Kaiba shop in Tel'Adre. Cost 1440 gems. Increase armor by 5 and magic resistance by 4. Increase melee/range weapon damage of Howling Banshee Mech/Other non goblin mechs by 20%/10%.\n");
+			outputText("-New necklace (by Ormael): Necklace of magical protection - buyable at Jewel shop in Tel'Adre. Cost 8000 gems. Increase magical resistance by 10%.\n");
+			outputText("-New necklace (by Ormael): Necklace of physical protection - buyable at Jewel shop in Tel'Adre. Cost 8000 gems. Increase physical resistance by 15%.\n");
+			outputText("-New underwear (upper) (by Ormael): HB shirt - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems, 4 armor / 3 resistance, reduces fire/ice/electric damage taken by 10%, increase soulforce stored and usable by ayo armor by 350 and increase melee/range weapon damage of Howling Banshee Mech/Other non goblin mechs by 10%/5%.\n");
+			outputText("-New underwear (lower) (by Ormael): HB shorts - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems, 4 armor / 3 resistance, reduces fire/ice/electric damage taken by 10%, increase soulforce stored and usable by ayo armor by 350 and increase melee/range weapon damage of Howling Banshee Mech/Other non goblin mechs by 10%/5%.\n");
+			outputText("-New consumable items (by Ormael): Balls of Flame, Frozen Balls, THUNDERballs, Balls of the Darkness, Poisoned Balls - buyable at Serena shop in HXD (Shelf 3 - all of them req. lvl 42+ to be accessable). Each costs 60 gems and deal same damage as bangball mk 3 but with elemental affix (fire, ice, lighting, darkness, poison).\n");
+			outputText("-New consumable item: Red Manuscript. Dropped by Sand Witch or Cum Witch. Allow to learn Blood Spells when PC have Hidden Job: Blood Demon.\n");
+			outputText("-New consumable item: Crimson Jade. Dropped by Sand Witch or Cum Witch. Allow to learn Blood Soulskills when PC have Way of the Blood.\n");
+			outputText("-New Blood Spell: Blood Missiles - learned from Red Manuscript. Cost 50 health. Deal magic dmg and have cooldown of 2 turns.\n");//and deal AoE ice dmg and stun enemies for 5 turns. Have 1 turn channel time and cooldown of 12 turns.
+			outputText("-New Blood Spell: Blood Explosion - learned from Red Manuscript. Cost 200 health. Deal AoE magic dmg and have cooldown of 3 turns.\n");
+			outputText("-New Blood Soulskill: Blood Swipe - learned from Crimson Jade. Cost 60 health. Deal phys dmg and have cooldown of 2 turns.\n");
+			outputText("-New TF item (by Liandri): Smarty Nuts. Buyable at Moga'Hen TF items shop. Using this item would turn PC into Ratatoskr (squirrel-morph). Racial bonuses for Half squirrel-morph (6+) /  squirrel-morph (12+) / Ratatoskr (18+): -10/20/25% to Str multi, +60/90/140% to Spe multi, +40/95/155% to Int multi\n");
+			outputText("-New M. Special: Knowledge overload. Req. 12+ in squirrel-morph score. Stun for 1 round by sharing insightful information. Duration increase in round based on how much of the codex was read (~each 10 entries = +1 turn). Cooldown 12 rounds.\n");
+			outputText("-New M. Special: Provoke. Req. 12+ in squirrel-morph score. Drop all of foe’s armor to zero and increase all types of pc damage by 20% for 3 rounds but increase opponent damage take by 20% as well. 6 round cooldown and silence most enemies. More powerful based on how many entry pc has read in the codex (1 entry = +1%).\n");
+			outputText("-New M. Special: Weird words. Req. 12+ in squirrel-morph score. Damage based on spell mod and a modifier based on how many info pc has read in the codex (1 entry = +1%). Cooldown 4 rounds.\n");
+			outputText("-New submenu in Perks page that allow to convert perk points into super perk points or to buy perks for those super perk points.\n");
+			outputText("-Added Large Group-type enemy perk for large monsters groups (if description say about having above 20 it would be then considered large group). And so some of monsters advanced to not be just Group but Large Group. Compared to bonuses form Group type enemy boosts those enemies gets is 10x instead of 5x.\n");
+			outputText("-Draconic Lungs perks stat bonuses to str and tou was changed into bonuses to spe. Also Evolved and Final Form perk from this perk line granting +5%/+10% of max core Spe as phantom Spe\n");
+			outputText("-Lizan Marrow perk have now additional req. of having free bones and marrow mutation slot. Kitsune Thyroid Gland perk also now req. free thyroid gland mutation slot.\n");
+			outputText("-New enemies possible to encounter during Bog exploration: Corrupted Troll (Male or Female) - lvl 38\n");
+			outputText("-New enemies possible to encounter during Ocean exploration: Shark Girls Pack - lvl 65, Scylla - lvl 70.\n");
+			outputText("-New enemy possible to encounter when exploring Beach: Goo Girl (Beach variant) - lvl 34\n");
+			outputText("-New enemies possible to encounter during Blight Ridge exploration: Corrupted Basic Flesh Golem - lvl 35, Corrupted Basic Flesh Golem - lvl 36.\n");
+			outputText("-New enemies possible to encounter during Glacial Rift exploration: Glacial Troll (Male or Female) - lvl 94. (Due to extreme high lvl of enemy and low entry lvl req. for area they will not be found by PC below lvl 54)\n");
+			outputText("-New area to discover: Defile Ravine - home of demon enemies like: Cow Succubus (level 45), Mino Incubus (lvl 46), Corrupted Improved Golem(s) (lvl 59(61))\n");
+			outputText("-Ayo Armors require periodical injection of soulforce to stay in 'powered' state. Depending on armor it can drain form 60 to 120 SF per hour. Menu to transfer SF to armor and later activate armor is in Unequip/Misc menu in Inventory. Also when PC taking off such type of armor all remaining in it SF is transfered into PC. In case that would make PC SF goes over the max capacity all over the top amount of SF is lost.\n");
+			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Ceani (lvl 98), Diana (lvl 69), Dinah (lvl 56), Etna (lvl 96), Electra (lvl 96), Ember (lvl 98), Isabella (lvl 98), Kiha (lvl 99), Kindra (lvl 99), Luna (lvl 99)\n");
+			outputText("-Increased max lvl npc's outside camp can attain: Akbal (lvl 98), Izumi (lvl 96), Minerva (lvl 95), Priscilla (lvl 98)\n");
+			outputText("-Arena have now in challange section 2nd type of gargoyle enemy (this one is more of female-like one with axe tail instead of mace tail).\n");
+			outputText("-5 new achievments. (4 shadow ones)\n");	
+			outputText("-Explore option named 42 was moved to silly mode.\n");
+			outputText("-Follower Zenji now scales up to PC lvl cap (150 > 185). He will also have gradualy increasing other combat stats beside raw stats and XP reward for beating him will be much higher.\n");
+			outputText("-Lover Zenji get new options: Sleep With (variants for having or not cabin), Nightwatch, Assist me (allowing to take him as henchman)\n");
+			outputText("-Lover Zenji got more sex scenes. Lover Zenji also can impregnate PC - pregnancy takes 30 days and first two kids can be named.\n");
 			menu();
 			addButton(0, "Next", Changelog32);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);

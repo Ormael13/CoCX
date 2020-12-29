@@ -501,8 +501,8 @@ public class Combat extends BaseContent {
 
     public function isPlayerBound():Boolean {
         var bound:Boolean = false;
-        if (player.hasStatusEffect(StatusEffects.HarpyBind) || player.hasStatusEffect(StatusEffects.GooBind) || player.hasStatusEffect(StatusEffects.TentacleBind) || player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind)
-                || player.hasStatusEffect(StatusEffects.WolfHold) || player.hasStatusEffect(StatusEffects.TrollHold) || monster.hasStatusEffect(StatusEffects.QueenBind) || monster.hasStatusEffect(StatusEffects.PCTailTangle)) bound = true;
+        if (player.hasStatusEffect(StatusEffects.HarpyBind) || player.hasStatusEffect(StatusEffects.GooBind) || player.hasStatusEffect(StatusEffects.TentacleBind) || player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind) || monster.hasStatusEffect(StatusEffects.QueenBind)
+             || player.hasStatusEffect(StatusEffects.WolfHold) || player.hasStatusEffect(StatusEffects.TrollHold) || player.hasStatusEffect(StatusEffects.PossessionWendigo) || monster.hasStatusEffect(StatusEffects.PCTailTangle)) bound = true;
         if (player.hasStatusEffect(StatusEffects.HolliConstrict)) bound = true;
         if (player.hasStatusEffect(StatusEffects.GooArmorBind)) bound = true;
         if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
@@ -540,11 +540,20 @@ public class Combat extends BaseContent {
             outputText("\n<b>You're too confused</b> about who you are to try to attack!");
             stunned = true;
         }
-        if (player.hasStatusEffect(StatusEffects.Confusion)) {
+        if (player.hasStatusEffect(StatusEffects.Polymorphed)) {
             outputText("\n<b>You fight against the spell to return to your true form!</b>");
             stunned = true;
         }
         return stunned;
+    }
+
+    public function isPlayerFeared():Boolean {
+        var feared:Boolean = false;
+        if (player.hasStatusEffect(StatusEffects.Fear)) {
+			outputText("\n<b>You're too busy shivering with fear</b> to fight.");
+			feared = true;
+		}
+        return feared;
     }
 
     public function canUseMagic():Boolean {
@@ -593,7 +602,7 @@ public class Combat extends BaseContent {
             addButton(5, "Fantasize", fantasize).hint("Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
             addButton(6, "Wait", wait).hint("Take no action for this round.  Why would you do this?  This is a terrible idea.");
         }
-        if (player.statusEffectv1(StatusEffects.ChanneledAttack) >= 1 && (isPlayerBound() || isPlayerSilenced() || isPlayerStunned())) {
+        if (player.statusEffectv1(StatusEffects.ChanneledAttack) >= 1 && (isPlayerBound() || isPlayerSilenced() || isPlayerStunned() || isPlayerFeared())) {
             addButton(1, "Stop", stopChanneledSpecial);
         }
         /*
@@ -1585,6 +1594,7 @@ public class Combat extends BaseContent {
 			if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
 			if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
 			if (player.vehicles == vehicles.GOBMPRI) damage *= 1.5;
+			if (player.vehicles == vehicles.GS_MECH) damage *= 1.25;
 		}
 		if (player.isInNonGoblinMech()) {
 			if (player.vehicles == vehicles.HB_MECH) {
@@ -1803,29 +1813,24 @@ public class Combat extends BaseContent {
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.TrollHold)) {
             clearOutput();
-			if (player.statusEffectv1(StatusEffects.TrollHold) >= 2) {
-                outputText("As you squirm around in his grasp, he lifts you over his head before slamming you directly into the ground. ");
-				if (player.hasPerk(PerkLib.Resolute)) outputText("You quickly spring to your feet, ready to continue fighting. ");
-				else {
-					outputText("You’re seeing stars as you try to shake yourself from the brutal throw. ");
-					player.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
-				}
-				player.removeStatusEffect(StatusEffects.TrollHold);
-				var throwDMG:Number = monster.eBaseDamage() * 2;
-				player.takePhysDamage(throwDMG, true);
-                return;
-            }
 			if (monster as GlacialMaleTroll) {
 				outputText("You don’t feel motivated, something about his big, strong arms and soothing fur is getting to you, granting you safety from the cold.");
 				player.addStatusValue(StatusEffects.TrollHold, 1, 1);
 			}
-            if (monster as CorruptedMaleTroll) {
+			if (monster as CorruptedMaleTroll) {
 				outputText("You don’t feel motivated, something about his strong arms and soothing fur is getting to you, it’s not so bad once you really sink into him.");
 				outputText("\n\nHe leans in close to you, sniffing you intently as he gives you a long lick across your cheek.");
+				var licklust:Number = (monster.inte / 5) + rand(10);
+				licklust = Math.round(licklust);
+				player.dynStats("lus", licklust, "scale", false);
 			}
-            var licklust:Number = (monster.inte / 5) + rand(10);
-			licklust = Math.round(licklust);
-			player.dynStats("lus", licklust, "scale", false);
+            if (player.statusEffectv1(StatusEffects.TrollHold) < 2) skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.PossessionWendigo)) {
+            clearOutput();
+            outputText("You decide to do nothing for now as the wendigo takes advantage of your inaction, gleefully forcing you to masturbate while enjoying every sensation your tormented body is inflicted with.");
+            var possessionWendigo:Number = (monster.inte / 4) + rand(15);
+			possessionWendigo = Math.round(possessionWendigo);
+			player.dynStats("lus", possessionWendigo, "scale", false);
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
             (monster as Holli).waitForHolliConstrict(true);
@@ -2002,36 +2007,38 @@ public class Combat extends BaseContent {
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.TrollHold)) {
 			clearOutput();
-			if (player.statusEffectv1(StatusEffects.TrollHold) >= 2) {
-                outputText("As you squirm around in his grasp, he lifts you over his head before slamming you directly into the ground. ");
-				if (player.hasPerk(PerkLib.Resolute)) outputText("You quickly spring to your feet, ready to continue fighting. ");
-				else {
-					outputText("You’re seeing stars as you try to shake yourself from the brutal throw. ");
-					player.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
-				}
+			if (rand(3) == 0 || rand(80) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
+				outputText("You squirm violently, trying to shake out of his grasp. You break free of his grasp, pushing him away, disorienting him for a moment.");
 				player.removeStatusEffect(StatusEffects.TrollHold);
-				var throwDMG:Number = monster.eBaseDamage() * 2;
-				player.takePhysDamage(throwDMG, true);
-                return;
-            }
-			else if (rand(3) == 0 || rand(80) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
-                outputText("You squirm violently, trying to shake out of his grasp. You break free of his grasp, pushing him away, disorienting him for a moment.");
-                player.removeStatusEffect(StatusEffects.TrollHold);
-            }
+			}
 			else {
 				if (monster as GlacialMaleTroll) {
 					outputText("You squirm violently, trying to shake out of his grasp. He maintains a fierce grip on you.");
 					player.addStatusValue(StatusEffects.TrollHold, 1, 1);
 				}
 				if (monster as CorruptedMaleTroll) outputText("The troll clutches onto you tighter as you are pulled deeper into his embrace. Your struggles seem to be in vain as he pokes your body with his pre-leaking erection. The warm fluid makes you flush reflexively, but you cannot give in!");
-                player.takePhysDamage(7 + rand(5));
+				player.takePhysDamage(7 + rand(5));
 				var licklust:Number = (monster.inte / 5) + rand(10) + player.statusEffectv3(StatusEffects.TrollHold);
 				licklust = Math.round(licklust);
 				player.dynStats("lus", licklust, "scale", false);
 				if (monster as CorruptedMaleTroll) player.addStatusValue(StatusEffects.TrollHold, 3, 1);
 			}
+            if (player.statusEffectv1(StatusEffects.TrollHold) < 2) skipMonsterAction = true;
+		} else if (player.hasStatusEffect(StatusEffects.PossessionWendigo)) {
+            clearOutput();
+            outputText("You struggle for control over your body ");
+            if (rand(3) == 0 || rand(80) < player.str / 1.5) {
+				outputText("and manage to force the fiend out.");
+				player.removeStatusEffect(StatusEffects.PossessionWendigo);
+			}
+            else {
+				outputText("but the wendigo overpowers you and gleefully forces you to masturbate yourself, enjoying every sensation your tormented body is inflicted with.");
+				var possessionWendigo:Number = (monster.inte / 4) + rand(15);
+				possessionWendigo = Math.round(possessionWendigo);
+				player.dynStats("lus", possessionWendigo, "scale", false);
+			}
             skipMonsterAction = true;
-		} else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
+        } else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
             if (monster as FrostGiant) (monster as FrostGiant).giantGrabStruggle();
             if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantGrabStruggle();
             skipMonsterAction = true;
@@ -2914,7 +2921,10 @@ public class Combat extends BaseContent {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.3;
                         if (damage < 30) damage = 30;
-                    } else {
+					} else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 1.25;
+                        if (damage < 25) damage = 25;
+					} else {
                         damage *= 1.2;
                         if (damage < 20) damage = 20;
                     }
@@ -2923,7 +2933,10 @@ public class Combat extends BaseContent {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.6;
                         if (damage < 60) damage = 60;
-                    } else {
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 1.5;
+                        if (damage < 50) damage = 50;
+					} else {
                         damage *= 1.4;
                         if (damage < 40) damage = 40;
                     }
@@ -2932,7 +2945,10 @@ public class Combat extends BaseContent {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.9;
                         if (damage < 90) damage = 90;
-                    } else {
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 1.75;
+                        if (damage < 75) damage = 75;
+					} else {
                         damage *= 1.6;
                         if (damage < 60) damage = 60;
                     }
@@ -2941,11 +2957,23 @@ public class Combat extends BaseContent {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 2.2;
                         if (damage < 120) damage = 120;
-                    } else {
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 2;
+                        if (damage < 100) damage = 100;
+					} else {
                         damage *= 1.8;
                         if (damage < 80) damage = 80;
                     }
                 }
+				if (player.hasKeyItem("Machine Gun MK4") >= 0) {
+					if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 2.25;
+                        if (damage < 125) damage = 125;
+					} else {
+                        damage *= 2;
+                        if (damage < 100) damage = 100;
+                    }
+				}
             }
             if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
                 //if ((damage == 0) ){
@@ -6351,6 +6379,13 @@ public class Combat extends BaseContent {
                 outputText("<b>You finally manage to break free from the spell regaining your true form.</b>\n\n");
             }
         }
+        if (player.hasStatusEffect(StatusEffects.Fear)) {
+            player.addStatusValue(StatusEffects.Fear, 1, -1);
+            if (player.statusEffectv1(StatusEffects.Fear) <= 0) {
+                player.removeStatusEffect(StatusEffects.Fear);
+                outputText("<b>You finally manage to shake off the fear.</b>\n\n");
+            }
+        }
         if (player.hasStatusEffect(StatusEffects.Disarmed)) {
             player.addStatusValue(StatusEffects.Disarmed, 1, -1);
             if (player.statusEffectv1(StatusEffects.Disarmed) <= 0) {
@@ -8303,7 +8338,7 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.EnemyConstructType)) generalTypes.push("Construct");
                 if (monster.hasPerk(PerkLib.EnemyFeralType)) generalTypes.push("Feral");
                 if (monster.hasPerk(PerkLib.EnemyGhostType)) generalTypes.push("Ghost");
-                if (monster.hasPerk(PerkLib.EnemyHugeType)) generalTypes.push("Gigant");
+                if (monster.hasPerk(PerkLib.EnemyGigantType)) generalTypes.push("Gigant");
                 if (monster.hasPerk(PerkLib.EnemyGooType)) generalTypes.push("Goo");
                 if (monster.hasPerk(PerkLib.EnemyGroupType)) generalTypes.push("Group");
                 if (monster.hasPerk(PerkLib.EnemyHugeType)) generalTypes.push("Huge");

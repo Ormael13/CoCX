@@ -1507,6 +1507,16 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		useMana(40, 1);
 		if(handleShell()){return;}
+		spellMagicBolt2();
+	}
+	public function spellElementalBolt():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		useMana(80, 1);
+		if(handleShell()){return;}
+		spellMagicBolt2();
+	}
+	public function spellMagicBolt2():void {
 		outputText("You narrow your eyes, focusing your mind with deadly intent.  ");
 		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") outputText("You point your staff and shots magic bolt toward " + monster.a + monster.short + "!\n\n");
 		else outputText("You point your hand toward " + monster.a + monster.short + " and shots magic bolt!\n\n");
@@ -1520,6 +1530,7 @@ public class CombatMagic extends BaseCombatContent {
 			else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (6.25 + ((player.weaponAttack - 150) * 0.025));
 			else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
 		}
+		if (player.hasPerk(PerkLib.ElementalBolt)) damage *= 1.25;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1531,7 +1542,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doMagicDamage(damage, true, true);
+		doMagicDamage(damage, true, true);
 		outputText(" damage.");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
@@ -1541,6 +1552,28 @@ public class CombatMagic extends BaseCombatContent {
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
+		if (player.hasPerk(PerkLib.ElementalBolt)) {
+			if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) {
+				if (player.hasPerk(PerkLib.EclipsingShadowSu)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 2);
+				else if (player.hasPerk(PerkLib.EclipsingShadowEx)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 3);
+				player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 4);
+			}
+			if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) {
+				if (player.hasPerk(PerkLib.GlacialStormSu)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 2);
+				else if (player.hasPerk(PerkLib.GlacialStormEx)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 3);
+				player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 4);
+			}
+			if (player.hasStatusEffect(StatusEffects.CounterHighVoltage)) {
+				if (player.hasPerk(PerkLib.HighVoltageSu)) player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 2);
+				else if (player.hasPerk(PerkLib.HighVoltageEx)) player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 3);
+				player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 4);
+			}
+			if (player.hasStatusEffect(StatusEffects.CounterRagingInferno)) {
+				if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 2);
+				else if (player.hasPerk(PerkLib.RagingInfernoEx)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 3);
+				player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 4);
+			}
+		}
 		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else
 		{

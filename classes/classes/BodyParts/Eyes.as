@@ -41,6 +41,7 @@ public class Eyes extends BodyPart {
 	public static const GAZER:int                = 36;
 	public static const RATATOSKR:int            = 37;
 	public static const FIENDISH:int             = 38;
+	public static const DEAD_EYES:int            = 39;
 	// Don't forget to add new types in DebugMenu.as list EYE_TYPE_CONSTANTS
 	
 	public var colour:String = "brown";

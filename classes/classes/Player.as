@@ -646,10 +646,10 @@ use namespace CoC;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 30;
 			}
 			if (vehiclesName == "Giant Slayer Mech") {
-				armorDef += 10;
-				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 20;
-				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 30;
-				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 40;
+				armorDef += 20;
+				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 40;
+				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 60;
+				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 80;
 			}
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorDef += 15;
@@ -838,10 +838,10 @@ use namespace CoC;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorMDef += 30;
 			}
 			if (vehiclesName == "Giant Slayer Mech") {
-				armorMDef += 10;
-				if (hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) armorMDef += 20;
-				if (hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) armorMDef += 30;
-				if (hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) armorMDef += 40;
+				armorMDef += 20;
+				if (hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) armorMDef += 40;
+				if (hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) armorMDef += 60;
+				if (hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) armorMDef += 80;
 			}
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorMDef += 15;
@@ -895,7 +895,7 @@ use namespace CoC;
 		public function haveNaturalClaws():Boolean
 		{
 			return arms.type == Arms.KITSUNE || arms.type == Arms.CAT || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER || arms.type == Arms.DRAGON || arms.type == Arms.FOX || arms.type == Arms.GARGOYLE || arms.type == Arms.LION || arms.type == Arms.WOLF || arms.type == Arms.LIZARD || arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_2
-			 || arms.type == Arms.RED_PANDA || arms.type == Arms.SALAMANDER || arms.type == Arms.HYDRA || arms.type == Arms.JIANGSHI || arms.type == Arms.FROSTWYRM || arms.type == Arms.BEAR || arms.type == Arms.MANTIS || arms.type == Arms.KAMAITACHI || arms.type == Arms.SQUIRREL || arms.type == Arms.WEASEL;
+			 || arms.type == Arms.RED_PANDA || arms.type == Arms.SALAMANDER || arms.type == Arms.HYDRA || arms.type == Arms.JIANGSHI || arms.type == Arms.FROSTWYRM || arms.type == Arms.BEAR || arms.type == Arms.MANTIS || arms.type == Arms.KAMAITACHI || arms.type == Arms.SQUIRREL || arms.type == Arms.WEASEL || arms.type == Arms.WENDIGO;
 		}
 		public function haveNaturalClawsTypeWeapon():Boolean
 		{
@@ -3019,6 +3019,8 @@ use namespace CoC;
 				{name: 'gargoyle', score: gargoyleScore(), minscore: 20},
 				{name: 'kamaitachi', score: kamaitachiScore(), minscore: 7},
 				{name: 'ratatoskr', score: ratatoskrScore(), minscore: 6},
+				{name: 'wendigo', score: wendigoScore(), minscore: 10},
+				{name: 'troll', score: trollScore(), minscore: 5},
 			];
 
 			ScoreList = ScoreList.filter(function(element:Object, index:int, array:Array):Boolean {
@@ -3283,6 +3285,14 @@ use namespace CoC;
 					else {
 						race = "kitshoo";
 					}
+				}
+			}
+			if (TopRace == "troll") {
+				if (TopScore >= 5) {
+					if (TopScore >= 10)
+						race = "troll";
+					else
+						race = "half troll";
 				}
 			}
 			if (TopRace == "horse") {
@@ -3789,6 +3799,12 @@ use namespace CoC;
 					}
 				}
 			}
+			if (TopRace == "wendigo") {
+				if (TopScore >= 10) {
+					if (TopScore >= 22) race = "greater wendigo";
+					else race = "wendigo";
+				}
+			}
 			if (TopRace == "raiju") {
 				if (TopScore >= 5) {
 					if (TopScore >= 10) {
@@ -3802,7 +3818,7 @@ use namespace CoC;
 			}
 			if (TopRace == "thunderbird") {
 				if (TopScore >= 12) {
-					if (TopScore >= 12) race = "greater thunderbird";
+					if (TopScore >= 15) race = "greater thunderbird";
 					else race = "thunderbird";
 				}
 			}
@@ -4424,6 +4440,8 @@ use namespace CoC;
 //				chimeraCounter++;
 			if (mouseScore() >= 8)
 				chimeraCounter++;
+			if (trollScore() >= 10)
+				chimeraCounter++;
 //			if (scorpionScore() >= 4)
 //				chimeraCounter++;
 			if (mantisScore() >= 12)
@@ -4477,6 +4495,8 @@ use namespace CoC;
 			if (yetiScore() >= 14)
 				chimeraCounter++;
 			if (yukiOnnaScore() >= 14)
+				chimeraCounter++;
+			if (wendigoScore() >= 10)
 				chimeraCounter++;
 			if (melkieScore() >= 18)
 				chimeraCounter++;
@@ -4539,13 +4559,17 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (orcScore() >= 11)
 				grandchimeraCounter++;
-*/			if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI)
+*/			if (thunderbirdScore() >= 15)
+				grandchimeraCounter++;
+			if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI)
 				grandchimeraCounter++;
 //			if (mantisScore() >= 12)
 //				grandchimeraCounter++;
 			if (scyllaScore() >= 12)
 				grandchimeraCounter++;
 			if (pigScore() >= 15)
+				grandchimeraCounter++;
+			if (wendigoScore() >= 22)
 				grandchimeraCounter++;
 			if (melkieScore() >= 21)
 				grandchimeraCounter++;
@@ -5880,6 +5904,8 @@ use namespace CoC;
 					goblinCounter++;
 				if (lowerBody == LowerBody.HUMAN)
 					goblinCounter++;
+				if (antennae.type == Antennae.NONE)
+					goblinCounter++;
 			}
 			if (findPerk(PerkLib.GoblinoidBlood) >= 0)
 				goblinCounter++;
@@ -5941,6 +5967,8 @@ use namespace CoC;
 				if (arms.type == Arms.HUMAN)
 					gremlinCounter++;
 				if (lowerBody == LowerBody.HUMAN)
+					gremlinCounter++;
+				if (antennae.type == Antennae.NONE)
 					gremlinCounter++;
 				if (wings.type == Wings.NONE)
 					gremlinCounter++;
@@ -7488,7 +7516,29 @@ use namespace CoC;
 			return mutantCounter;
 		}
 
-		//scorpion score
+		//Troll score
+		public function trollScore():Number {
+			Begin("Player","racialScore","troll");
+			var trollCounter:Number = 0;
+		//	if (hasCoatOfType(Skin.CHITIN))
+		//		trollCounter++;
+		//	if (tailType == Tail.SCORPION)
+		//		trollCounter++;
+		//	if (scorpionCounter > 0 && findPerk(PerkLib.TrachealSystem) >= 0)
+		//		trollCounter++;
+		//	if (scorpionCounter > 4 && findPerk(PerkLib.TrachealSystemEvolved) >= 0)
+		//		trollCounter++;
+		//	if (scorpionCounter > 8 && findPerk(PerkLib.TrachealSystemFinalForm) >= 0)
+		//		trollCounter++;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				trollCounter += 50;
+			if (isGargoyle()) trollCounter = 0;
+			trollCounter = finalRacialScore(trollCounter, Race.TROLL);
+			End("Player","racialScore");
+			return trollCounter;
+		}
+
+		//Scorpion score
 		public function scorpionScore():Number {
 			Begin("Player","racialScore","scorpion");
 			var scorpionCounter:Number = 0;
@@ -7777,6 +7827,46 @@ use namespace CoC;
 			yukiOnnaCounter = finalRacialScore(yukiOnnaCounter, Race.YUKIONNA);
 			End("Player","racialScore");
 			return yukiOnnaCounter;
+		}
+
+		//Wendigo score
+		public function wendigoScore():Number {
+			Begin("Player","racialScore","wendigo");
+			var wendigoCounter:Number = 0;
+			if (hairColor == "silver-white")
+				wendigoCounter++;
+			if (coatColor == "snow white")
+				wendigoCounter++;
+			if (eyes.type == Eyes.DEAD_EYES)
+				wendigoCounter++;
+			if (eyes.colour == "spectral blue")
+				wendigoCounter++;
+			if (tongue.type == Tongue.RAVENOUS_TONGUE)
+				wendigoCounter++;
+			if (horns.type == Horns.ANTLERS && horns.count >= 4)
+				wendigoCounter += 2;
+			if (ears.type == Ears.DEER)
+				wendigoCounter++;
+			if (tailType == Tail.WENDIGO)
+				wendigoCounter++;
+			if (lowerBody == LowerBody.WENDIGO)
+				wendigoCounter++;
+			if (arms.type == Arms.WENDIGO)
+				wendigoCounter++;
+			if (faceType == Face.DEER || faceType == Face.ANIMAL_TOOTHS)
+				wendigoCounter++;
+			if (rearBody.type == RearBody.FUR_COAT)
+				wendigoCounter += 2;
+			if (wings.type == Wings.LEVITATION)
+				wendigoCounter += 3;
+			if (findPerk(PerkLib.EndlessHunger) >= 0)
+				wendigoCounter++;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				wendigoCounter += 50;
+			if (isGargoyle()) wendigoCounter = 0;
+			wendigoCounter = finalRacialScore(wendigoCounter, Race.WENDIGO);
+			End("Player","racialScore");
+			return wendigoCounter;
 		}
 
 		//Melkie score
@@ -8421,12 +8511,8 @@ use namespace CoC;
 			Begin("Player","racialScore","scylla");
 			var scyllaCounter:Number = 0;
 			var krakenEyeColor:Array = ["Bright pink", "light purple", "purple"];
-			if (faceType == Face.HUMAN)
-				scyllaCounter++;
 			if (faceType != Face.HUMAN)
 				scyllaCounter--;
-			if (hairType == Hair.NORMAL)
-				scyllaCounter++;
 			if (eyes.type == Eyes.KRAKEN || eyes.type == Eyes.HUMAN)
 				scyllaCounter++;
 			if (ears.type == Ears.ELFIN)
@@ -8437,10 +8523,6 @@ use namespace CoC;
 				scyllaCounter++;
 			if (hasPlainSkinOnly() && skinAdj == "slippery")
 				scyllaCounter++;
-			if (isScylla())
-				scyllaCounter += 2;
-			if (isKraken())
-				scyllaCounter += 4;
 			if (rearBody.type == RearBody.KRAKEN)
 				scyllaCounter++;
 			if (skinTone == "ghostly pale")
@@ -8449,10 +8531,19 @@ use namespace CoC;
 				scyllaCounter++;
 			if (tallness > 96)
 				scyllaCounter++;
-			if (wings.type > Wings.NONE)
-				scyllaCounter+=2;
 			if (hasVagina() && (vaginaType() == VaginaClass.SCYLLA))
 				scyllaCounter++;
+			if (isScylla() || isKraken()) {
+				scyllaCounter += 2;
+				if (isKraken())
+					scyllaCounter += 2;
+				if (faceType == Face.HUMAN)
+					scyllaCounter++;
+				if (hairType == Hair.NORMAL)
+					scyllaCounter++;
+				if (wings.type > Wings.NONE)
+					scyllaCounter += 2;
+			}
 			if (findPerk(PerkLib.InkSpray) >= 0)
 				scyllaCounter++;
 			if (findPerk(PerkLib.ScyllaInkGlands) >= 0)
@@ -9926,7 +10017,9 @@ use namespace CoC;
 				if(!hasStatusEffect(StatusEffects.SlimeCravingFeed)) {
 					createStatusEffect(StatusEffects.SlimeCravingFeed,0,0,0,0);
 				}
-				refillHunger(30);
+				var Ammount:Number = 30;
+				if ((hunger+Ammount)>maxHunger()) Ammount = (maxHunger()-hunger-1);
+				refillHunger(Ammount);
 				slimeGrowth();
 			}
 			if (findPerk(PerkLib.Diapause) >= 0) {
@@ -11310,6 +11403,20 @@ use namespace CoC;
 					maxIntCap2 -= 5;
 				}
 			}
+			if (trollScore() >= 5) {
+				if (mantisScore() >= 10) {//150
+					maxStrCap2 += 50;
+					maxSpeCap2 += 70;
+					maxIntCap2 += 50;
+					maxWisCap2 += 100;
+				}
+				else {//75
+					maxStrCap2 += 25;
+					maxSpeCap2 += 35;
+					maxIntCap2 += 25;
+					maxWisCap2 += 50;
+				}
+			}
 			if (mantisScore() >= 6) {
 				if (mantisScore() >= 12) {
 					maxStrCap2 -= 40;
@@ -11423,7 +11530,7 @@ use namespace CoC;
 				maxSpeCap2 += 70;
 				maxLibCap2 += 40;
 			}//+30/30-40
-			if (scyllaScore() >= 4) {
+			if (scyllaScore() >= 4 && (isScylla() || isKraken())) {
 				if (scyllaScore() >= 12 && isKraken()) {
 					if (scyllaScore() >= 17) {
 						maxStrCap2 += 135;
@@ -11435,7 +11542,7 @@ use namespace CoC;
 						maxIntCap2 += 60;
 					}
 				}
-				else if (scyllaScore() >= 7 && isScylla()) {
+				else if (scyllaScore() >= 7) {
 					maxStrCap2 += 65;
 					maxIntCap2 += 40;
 				}
@@ -11514,6 +11621,24 @@ use namespace CoC;
 				maxIntCap2 += 140;
 				maxWisCap2 += 70;
 				maxLibCap2 += 50;
+			}
+			if (wendigoScore() >= 10) {
+				if (wendigoScore() >= 22) {
+					maxStrCap2 += 70;
+					maxTouCap2 += 70;
+					maxIntCap2 += 60;
+					maxWisCap2 -= 50;
+					maxLibCap2 += 50;
+					currentSen += 50;
+				}
+				else {
+					maxStrCap2 += 70;
+					maxTouCap2 += 70;
+					maxIntCap2 += 60;
+					maxWisCap2 -= 50;
+					maxLibCap2 += 50;
+					currentSen += 50;
+				}
 			}
 			if (melkieScore() >= 8) {
 				if (melkieScore() >= 21) {
@@ -11688,8 +11813,12 @@ use namespace CoC;
 					maxSpeCap2 += 15;
 				}
 			}
-			if (isScylla() || isKraken()) {
+			if (isScylla()) {
 				maxStrCap2 += 30;
+			}
+			if (isKraken()) {
+				maxStrCap2 += 60;
+				currentSen += 15;
 			}
 			if (lowerBody == LowerBody.CENTIPEDE) {
 				maxStrCap2 += 15;
@@ -12211,10 +12340,10 @@ use namespace CoC;
 					if (hasStatusEffect(StatusEffects.Infested)) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.");
 				}
 				if (cocks.length == 1) {
-					outputText("<b>You feel " + num2Text(removed) + " cocks disappear into your groin, leaving you with just your [cock].");
+					outputText("<b>You feel " + num2Text(removed) + " cocks disappear into your groin, leaving you with just your [cock].</b>");
 				}
 				if (cocks.length > 1) {
-					outputText("<b>You feel " + num2Text(removed) + " cocks disappear into your groin, leaving you with [cocks].");
+					outputText("<b>You feel " + num2Text(removed) + " cocks disappear into your groin, leaving you with [cocks].</b>");
 				}
 			}
 			//remove infestation if cockless
@@ -12468,7 +12597,9 @@ use namespace CoC;
 			EngineCore.HPChange(Math.round(maxHP() * .2), true);
 			cumOmeter(40);
 			cor += 2;
-			refillHunger(100);
+			var Ammount:Number = 100;
+			if ((hunger+Ammount)>maxHunger()) Ammount = (maxHunger()-hunger-1);
+			refillHunger(Ammount);
 		}
 
 		public function displacerFeed():void {
@@ -12486,7 +12617,9 @@ use namespace CoC;
 			EngineCore.HPChange(Math.round(maxHP() * .2), true);
 			cumOmeter(40);
 			cor += 2;
-			refillHunger(100);
+			var Ammount:Number = 100;
+			if ((hunger+Ammount)>maxHunger()) Ammount = (maxHunger()-hunger-1);
+			refillHunger(Ammount);
 		}
 
 		public function slimeGrowth():void {
@@ -12507,7 +12640,9 @@ use namespace CoC;
 			EngineCore.HPChange(Math.round(maxHP() * .2), true);
 			cumOmeter(40);
 			cor += 2;
-			refillHunger(100);
+			var Ammount:Number = 100;
+			if ((hunger+Ammount)>maxHunger()) Ammount = (maxHunger()-hunger-1);
+			refillHunger(Ammount);
 		}
 
         /**

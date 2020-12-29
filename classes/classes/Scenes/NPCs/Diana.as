@@ -335,7 +335,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 2) {
 				initStrTouSpeInte(30, 40, 35, 80);
-				initWisLibSensCor(50, 50, 50, 50);
+				initWisLibSensCor(50, 50, 50, 30);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.armorMDef = 27;
@@ -346,7 +346,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 3) {
 				initStrTouSpeInte(30, 50, 40, 80);
-				initWisLibSensCor(60, 55, 50, 50);
+				initWisLibSensCor(60, 55, 50, 30);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.armorMDef = 27;
@@ -357,7 +357,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 4) {
 				initStrTouSpeInte(30, 60, 45, 80);
-				initWisLibSensCor(70, 60, 50, 50);
+				initWisLibSensCor(70, 60, 50, 30);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.armorMDef = 27;
@@ -368,7 +368,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 5) {
 				initStrTouSpeInte(30, 70, 50, 80);
-				initWisLibSensCor(80, 65, 50, 50);
+				initWisLibSensCor(80, 65, 50, 30);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.armorMDef = 27;
@@ -379,7 +379,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 6) {
 				initStrTouSpeInte(30, 80, 55, 90);
-				initWisLibSensCor(80, 70, 50, 50);
+				initWisLibSensCor(80, 70, 50, 30);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.armorMDef = 27;
@@ -390,7 +390,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 7) {
 				initStrTouSpeInte(30, 90, 60, 90);
-				initWisLibSensCor(90, 75, 50, 50);
+				initWisLibSensCor(90, 75, 50, 30);
 				this.weaponAttack = 6;
 				this.armorDef = 9;
 				this.armorMDef = 27;
@@ -401,7 +401,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 8) {
 				initStrTouSpeInte(40, 100, 70, 100);
-				initWisLibSensCor(100, 100, 75, 50);
+				initWisLibSensCor(100, 100, 75, 5);
 				this.weaponAttack = 9;
 				this.armorDef = 12;
 				this.armorMDef = 48;
@@ -412,7 +412,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 9) {
 				initStrTouSpeInte(42, 110, 80, 110);
-				initWisLibSensCor(110, 110, 85, 50);
+				initWisLibSensCor(110, 110, 85, 5);
 				this.weaponAttack = 10;
 				this.armorDef = 13;
 				this.armorMDef = 52;
@@ -423,7 +423,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 10) {
 				initStrTouSpeInte(44, 120, 90, 120);
-				initWisLibSensCor(120, 120, 95, 50);
+				initWisLibSensCor(120, 120, 95, 5);
 				this.weaponAttack = 11;
 				this.armorDef = 14;
 				this.armorMDef = 56;
@@ -434,7 +434,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 11) {
 				initStrTouSpeInte(46, 130, 100, 130);
-				initWisLibSensCor(130, 130, 105, 50);
+				initWisLibSensCor(130, 130, 105, 5);
 				this.weaponAttack = 12;
 				this.armorDef = 15;
 				this.armorMDef = 60;
@@ -445,7 +445,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 12) {
 				initStrTouSpeInte(48, 140, 110, 140);
-				initWisLibSensCor(140, 140, 115, 50);
+				initWisLibSensCor(140, 140, 115, 5);
 				this.weaponAttack = 13;
 				this.armorDef = 16;
 				this.armorMDef = 64;
@@ -456,7 +456,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 13) {
 				initStrTouSpeInte(50, 150, 120, 150);
-				initWisLibSensCor(150, 150, 125, 50);
+				initWisLibSensCor(150, 150, 125, 5);
 				this.weaponAttack = 14;
 				this.armorDef = 17;
 				this.armorMDef = 68;
@@ -467,7 +467,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 14) {
 				initStrTouSpeInte(52, 160, 130, 160);
-				initWisLibSensCor(160, 160, 135, 50);
+				initWisLibSensCor(160, 160, 135, 5);
 				this.weaponAttack = 15;
 				this.armorDef = 18;
 				this.armorMDef = 72;
@@ -478,7 +478,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 15) {
 				initStrTouSpeInte(54, 170, 140, 170);
-				initWisLibSensCor(170, 170, 145, 50);
+				initWisLibSensCor(170, 170, 145, 5);
 				this.weaponAttack = 16;
 				this.armorDef = 19;
 				this.armorMDef = 76;
@@ -489,7 +489,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] == 16) {
 				initStrTouSpeInte(56, 180, 150, 180);
-				initWisLibSensCor(180, 180, 155, 50);
+				initWisLibSensCor(180, 180, 155, 5);
 				this.weaponAttack = 17;
 				this.armorDef = 20;
 				this.armorMDef = 80;

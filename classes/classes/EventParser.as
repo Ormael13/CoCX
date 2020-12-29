@@ -186,7 +186,7 @@ public class EventParser {
             player.HP = HPPercent*player.maxHP();
             SceneLib.combat.regeneration(false);
             if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration(false);
-            if (player.findPerk(PerkLib.JobSorcerer) >= 0) SceneLib.combat.manaregeneration(false);
+            if (player.findPerk(PerkLib.JobSorcerer) >= 0 || player.findPerk(PerkLib.JobElementalConjurer) >= 0) SceneLib.combat.manaregeneration(false);
             SceneLib.combat.wrathregeneration(false);
             //Inform all time aware classes that a new hour has arrived
             for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) {

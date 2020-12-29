@@ -51,17 +51,32 @@ import classes.internals.*;
 			statScreenRefresh();
 		}
 		
+		public function glacialTrollGrabsFinisher():void {
+			outputText("\n\nAs you squirm around in his grasp, he lifts you over his head before slamming you directly into the ground. ");
+			if (player.hasPerk(PerkLib.Resolute)) outputText("You quickly spring to your feet, ready to continue fighting. ");
+			else {
+				outputText("You’re seeing stars as you try to shake yourself from the brutal throw. ");
+				player.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+			}
+			player.removeStatusEffect(StatusEffects.TrollHold);
+			var throwDMG:Number = eBaseDamage() * 2;
+			player.takePhysDamage(throwDMG, true);
+		}
+		
 		override protected function performCombatAction():void
 		{
-			var choice:Number = rand(3);
-			if (choice == 0) glacialTrollPunch();
-			if (choice == 1) {
-				if (!player.hasStatusEffect(StatusEffects.Stunned) && rand(2) == 0) glacialTrollGoreWithTusks();
-				else glacialTrollPunch();
-			}
-			if (choice == 2) {
-				if (!player.hasStatusEffect(StatusEffects.TrollHold) && rand(2) == 0) glacialTrollGrabs();
-				else glacialTrollPunch();
+			if (player.statusEffectv1(StatusEffects.TrollHold) >= 2) glacialTrollGrabsFinisher();
+			else {
+				var choice:Number = rand(3);
+				if (choice == 0) glacialTrollPunch();
+				if (choice == 1) {
+					if (!player.hasStatusEffect(StatusEffects.Stunned) && rand(2) == 0) glacialTrollGoreWithTusks();
+					else glacialTrollPunch();
+				}
+				if (choice == 2) {
+					if (!player.hasStatusEffect(StatusEffects.TrollHold) && rand(2) == 0) glacialTrollGrabs();
+					else glacialTrollPunch();
+				}
 			}
 		}
 		
@@ -80,9 +95,9 @@ import classes.internals.*;
 		public function GlacialMaleTroll() 
 		{
 			this.a = "the ";
-			this.short = "glacial adult troll male";
+			this.short = "glacial troll male";
 			this.imageName = "glacialtrollmale";
-			this.long = "You are fighting what appears to be an adult troll male. He is just over 9 feet tall, covered in white fur and has a large, muscular, yet stout build. He has tusks protruding from his mouth each about 8 inches long curving upwards. Like all ice trolls, his hands and feet end in sharp claws ready to grip and tear through anything. He is wearing fur armor that conceals most of his body.";
+			this.long = "You are fighting what appears to be an glacial troll male. He is just over 9 feet tall, covered in white fur and has a large, muscular, yet stout build. He has tusks protruding from his mouth each about 8 inches long curving upwards. Like all ice trolls, his hands and feet end in sharp claws ready to grip and tear through anything. He is wearing fur armor that conceals most of his body.";
 			// this.plural = false;
 			createBreastRow(Appearance.breastCupInverse("flat"));
 			this.createCock(10, 2, CockTypesEnum.HUMAN);
@@ -94,17 +109,17 @@ import classes.internals.*;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			initStrTouSpeInte(414, 392, 378, 344);
-			initWisLibSensCor(362, 286, 100, 80);
+			initWisLibSensCor(362, 286, 100, 15);
 			this.weaponAttack = 120;
 			this.armorDef = 150;
 			this.armorMDef = 600;
 			this.skin.setBaseOnly({color:"green"});
 			this.skinDesc = "skin";
-			this.hairColor = "green";
+			this.hairColor = "white";
 			this.hairLength = 2;
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.armorName = "green fuzz";
+			this.armorName = "white fuzz";
 			this.bonusHP = 2500;
 			this.bonusLust = 480;
 			this.lust = 20;

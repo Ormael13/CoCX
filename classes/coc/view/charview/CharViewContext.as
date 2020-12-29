@@ -138,10 +138,12 @@ import coc.xlogic.ExecContext;
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
 					dragonscaleBikiniBra: player.upperGarment == game.undergarments.DS_BRA,
+					comfyBikiniBra: player.upperGarment == game.undergarments.C_BRA,
 
 					//viewable panty list
 					goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
 					dragonscaleBikiniPanty: player.lowerGarment == game.undergarments.DSTHONG,
+					comfyBikiniPanty: player.lowerGarment == game.undergarments.C_PANTY || player.lowerGarment == game.undergarments.C_LOIN,
 
 					// Viewable neck Accessory lists
 					blueScarf: player.necklace == game.necklaces.BWSCARF,
