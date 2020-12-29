@@ -425,7 +425,7 @@ package classes.GlobalFlags
 		public static const EPIC_LET_IT_GO:int						= 378;
 		public static const GENERAL_VIRILITY_GOD:int				= 379;
 		public static const FASHION_HOWL_OF_THE_BANSHEE:int			= 380;
-		public static const UNKNOWN_ACHIEVEMENT_381:int				= 381;
+		public static const FASHION_ASURAS_WRATH:int				= 381;
 		public static const UNKNOWN_ACHIEVEMENT_382:int				= 382;
 		public static const UNKNOWN_ACHIEVEMENT_383:int				= 383;
 		public static const UNKNOWN_ACHIEVEMENT_384:int				= 384;

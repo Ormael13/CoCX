@@ -969,6 +969,13 @@ import classes.Items.JewelryLib;
 			if (game.player.orcScore() >= 11) multimax += 0.1;
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
+			if (vehiclesName == "Giant Slayer Mech") {
+				multimax += 0.1;
+				//if (upgrade mecha) multimax += 0.1;
+				//if (upgrade mecha) multimax += 0.1;
+				//if (upgrade mecha) multimax += 0.1;
+				//if (upgrade mecha) multimax += 0.1;
+			}
 			max *= multimax;
 			max = Math.round(max);
 			if (max > 69999) max = 69999;

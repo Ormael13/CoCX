@@ -76,8 +76,8 @@ use namespace CoC;
 					break;
 				case 4: //True Ice Golems
 					clearOutput();
-					outputText("As you take a stroll, from nearby trees emerge huge golem. Looks like you have encountered 'true ice golems'! You ready your [weapon] for a fight!");
-					startCombat(new Valkyrie());
+					outputText("As you take a stroll, from nearby trees emerge huge golem. Looks like you have encountered 'true ice golem'! You ready your [weapon] for a fight!");
+					startCombat(new GolemTrueIce());
 					break;
 				default:
 					clearOutput();
