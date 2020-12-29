@@ -1,5 +1,5 @@
 //Coded by Kitteh6660, courtesy of Savin.
-package classes.Scenes.Areas.GlacialRift 
+package classes.Scenes.Areas.Tundra 
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;

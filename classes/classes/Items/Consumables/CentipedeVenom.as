@@ -48,15 +48,13 @@ public class CentipedeVenom extends Consumable {
 			dynStats("lus", (10+player.lib/10), "scale", false);
 			changes++;
 		}
-
 		if (changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYou suddenly jerk forward, feeling somewhat twitchy. Surprised, you didn't know you could react so quickly.");
 			player.MutagenBonus("spe", 1);
 			changes++;
 		}
 		//end of stat change list and starts of body changes
-		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
-
+		if (game.mutations.blockingBodyTransformations()) changeLimit = 0;
 		//Physical changes
 		//Legs
 		if (player.lowerBody != LowerBody.CENTIPEDE && changes < changeLimit && rand(3) == 0) {

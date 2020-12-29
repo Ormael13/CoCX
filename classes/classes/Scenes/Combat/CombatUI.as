@@ -235,7 +235,7 @@ public class CombatUI extends BaseCombatContent {
 		// Modifications - full or partial replacements
 		if (isPlayerBound()) {
 			mainMenuWhenBound();
-		} else if (isPlayerStunned()) {
+		} else if (isPlayerStunned() || isPlayerFeared()) {
 			menu();
 			addButton(0, "Recover", combat.wait);
 		} else if (player.hasStatusEffect(StatusEffects.ChanneledAttack)) {
@@ -572,7 +572,7 @@ public class CombatUI extends BaseCombatContent {
 		var btnStop:CoCButton        = button(1);
 		btnStop.show("Stop", combat.stopChanneledSpecial, "Stop channeling.");
 		if (chatk && chatk.value1 >= 1) {
-			if (!isPlayerBound() && !isPlayerSilenced() && !isPlayerStunned()) {
+			if (!isPlayerBound() && !isPlayerSilenced() && !isPlayerStunned() && !isPlayerFeared()) {
 				switch (chtype.value1) {
 					case 1:
 						btnContinue.show("Continue", combat.mspecials.singCompellingAria, "Continue singing.");

@@ -28,9 +28,9 @@ package classes.Scenes
 		}
 		private function Changelog34():void {
 			clearOutput();
-			outputText("(Part 2/2) <b>Version 0.8o3:</b>\n\n");
+			outputText("(Part 2/2) <b>Version 0.8o3 (More about Zenji, Traditional X-mas Perk-o-calipse 6 (only around 30+ perks this year), squirrel TF, Defiled Ravine, Ayo Armors and bugfixes):</b>\n\n");
 			outputText("-Shark Girl and Tigershark Girl at Ocean got both rised level a stats a bit to respectively lvl 55 and 60.\n");
-			outputText("-Yuki Onna at Glacial Rift got her level rised form 40 to 71 (that included buff to most of her stats).\n");
+			outputText("-Yuki Onna at Glacial Rift got her level rised from 40 to 71 (that included buff to most of her stats).\n");
 			outputText("-Phoenix Platoon was renamed into Phoenix Squad. Also most of enemies in Phoenix Tower get minor lvl/stats boost (really it's nothing large ;))\n");
 			outputText("-Succubus Gardener get bit more beefy on HP section and her heal would lower lust resistance bit less and cost more of her stamina. And IF by chance PC make her heal up enough times to reach 0% lust resistance she still could use heal up few more times but they won't lower her resistance (cuz it's already 0% right?)\n");
 			outputText("-Marae got bit of attention too ^^ She got perk here or there and new moves added to both pure and corrupted versions. A hint for them: You all remember that Marae is the one to make PC int Alraune, right?\n");
@@ -54,6 +54,30 @@ package classes.Scenes
 			outputText("-In unequip menu if PC not have specific slot item equipped button will be greyed out (even if PC not yet possible to equip item in that slot (like ring 2nd to 4th)). Also bit of rearrange buttons on first page preparing for future new slot for equipment to be added.\n");
 			outputText("-Herbalism lvl cap been set on 20. Also some of herb crafting got a bit lower req. for herbalism level. And herbalism level will reset on ascension like tease level.\n");
 			outputText("-Places menu will remember on which page was it last time opened. Also it will show all undiscovered places putting buttons with ???. What places are they... that up to player to find out or remember from playing other character that had those places unlocked. (At least now there will be bit less quessing of: did i unlocked all places or not yet?)\n");
+			outputText("-Fixed bugs: Bugfixes / Typo fixing by Pyromania & Liadri, Luna event not happening in forest after PC fire her at first Full Moon event conclusion, some minor errors in calculation and display bonuses for kitsunes, some of Slave Excellia scenes sending back to Fixed Excellia, game ocassionaly incorrectly desc monsters in combat due to forced PC gender setting, returning from any type of minion setting ");
+			outputText("in middle of combat been treated as new turn, Zenji Food option not always resetting, soultraining ring not been accounted for when cultivating, Akbal lust victory not showing any post combat options sometimes, some of enemies like hellhoud been seen as valid target for tailpeg unique sex scene, Yara's Piercing Studio Rare menu Back button not sending back even to main menu, green slime able to lower it ");
+			outputText("lust below 0, Drider Incubus Anal sex giving PC imps pregnancy, bunny herm scenes on plains still TF-ing PC despite been undead/gargoyle, goblin ale huminizing effect not taking into account PC resistance to been TF'd, missing fatigue cost check on Money Strike, Diana not able to level up after joining camp, Many Birds soulskill dealing damage twice, some of attacks incorrect texts, some enemy perks ");
+			outputText("been wrong labeled as player perks in few specials/attacks, eastern bunny perk bugging free balls mutation slot, able to fuck Tamani daughters without having cock, certain Beast Warrior perks not allowing cast Charge Weapon or Charge Armor with all other req. meet, mana not regenerating with elemental conjuer job\n\n");
+			outputText("<b>Version 0.8o4:</b>\n\n");
+			outputText("-Yeti / Winter Wolf / Frost Gigant / True Ice Golems at Glacial Rift got their level rised from 60/47/80/43 to 76/99/89/80 (that included buff to most of their stats).\n");
+			outputText("-New area to discover: Tundra. It have new monster - True Ice Golem (lvl 64). Req. to explore Caves and been at least level 35. It have some of glacial rift monsters. Exploring it would unlock now Glacial Rift.\n");
+			outputText("-Added parser for calling right antennae name instead of antennae.type in tf scenes. Also Hair color change for goblin ale got rid of werid piece of code so will work better. And bnot having any anntanae for goblin and gremlin will give those races +1 to race score.\n");
+			outputText("-Half Scylla race will req. to have scylla lower body. Kraken lower body will give now +15 to sens and +60% to str multi (up from +30% to str multi before).\n");
+			outputText("-Pure Pearl will have now effect of lowering additionaly libido by 10 pts.\n");
+			outputText("-Hourly lust gains are not related to core value of libido not it current total value. It would give reduction of lust gains per hour from 80 to 90%.\n");
+			outputText("-Added Jojo comments on Tactician History perk or lacking History perk in his talk scene about PC Past.\n");
+			outputText("-New enemies possible to encounter during Glacial Rift exploration: Wendigo - lvl 84.\n");
+			outputText("-Been attacked by Wendigo can apply status called Wendigo psychosis lasting up to 7 days. If during this time PC lust reach 100% (without hunger bar enabled) or hunger drop to 0 it would trigger transformation into Wendigo.\n");
+			outputText("-During character creation after ascension could pick between getting free job perk from any Past Life perk or getting instead free perk point(s).\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			outputText("-Fixed bugs: Cold Fish Soup missing it main intendeed effect (libido lowering), super perk points not reseting on ascension\n");/*ostatni punkt changelogu
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -61,29 +85,6 @@ package classes.Scenes
 			//outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
 			//outputText("-New tier 20 sensitivity lvl-up perk: Mythical Desensitization. Req. Legendary Desensitization perk and 200+ sens. Effect: Negative effects of sensitivity are reduced by 25%.\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
-			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
-			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
-			outputText("-Fixed bugs: Bugfixes / Typo fixing by Pyromania & Liadri, Luna event not happening in forest after PC fire her at first Full Moon event conclusion, some minor errors in calculation and display bonuses for kitsunes, some of Slave Excellia scenes sending back to Fixed Excellia, game ocassionaly incorrectly desc monsters in combat due to forced PC gender setting, returning from any type of minion setting ");
-			outputText("in middle of combat been treated as new turn, Zenji Food option not always resetting, soultraining ring not been accounted for when cultivating, Akbal lust victory not showing any post combat options sometimes, some of enemies like hellhoud been seen as valid target for tailpeg unique sex scene, Yara's Piercing Studio Rare menu Back button not sending back even to main menu, green slime able to lower it ");
-			outputText("lust below 0, Drider Incubus Anal sex giving PC imps pregnancy, bunny herm scenes on plains still TF-ing PC despite been undead/gargoyle, goblin ale huminizing effect not taking into account PC resistance to been TF'd, missing fatigue cost check on Money Strike, Diana not able to level up after joining camp, Many Birds soulskill dealing damage twice, some of attacks incorrect texts, some enemy perks ");
-			outputText("been wrong labeled as player perks in few specials/attacks, eastern bunny perk bugging free balls mutation slot, able to fuck Tamani daughters without having cock, certain Beast Warrior perks not allowing cast Charge Weapon or Charge Armor with all other req. meet, mana not regenerating with elemental conjuer job\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -94,6 +95,17 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");//
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			//outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. ");
 			//outputText("When used with any ayo armor it would increase soulforce drain from armor by 60 units, increase soulforce stored and usable by ayo armor by 1,000 and boost mech meele/range weapon damage by 25%. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");
 			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
@@ -144,11 +156,6 @@ package classes.Scenes
 			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
 			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -236,15 +243,9 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bedą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
 			outputText("\n");cel na 0.8(/9): dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
-			outputText("\n");cel na 0.8(/9): pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -338,7 +339,7 @@ package classes.Scenes
 			outputText("-New weapons from Liadri (1h katana and it upgr. versions from Celess): Uchigatana, Moonlit Snow, Chaos Blade\n");
 			outputText("-Nodachi moved to massive weapon section increasing base atk form 25 to 65 and cost from 100 to 2600 gems.\n");
 			outputText("-Fixed bugs: Various fixes from Liadri for many errors from last build, DeBimo offer from Rathazul not including Joy or Excellia in camp\n\n");
-			outputText("(Part 1/2) <b>Version 0.8o3:</b>\n\n");
+			outputText("(Part 1/2) <b>Version 0.8o3 (More about Zenji, Traditional X-mas Perk-o-calipse 6 (only around 30+ perks this year), squirrel TF, Defiled Ravine, Ayo Armors and bugfixes):</b>\n\n");
 			outputText("-New tier 0 sensitivity lvl-up perk: Desensitization. Req. 10+ sens. Effect: Negative effects of sensitivity are reduced by 5%.\n");
 			outputText("-New tier 0 misc lvl-up perk: Draconic Bones. Req. Free bones and marrow mutation slot, dragon or its variants arms, dragon or its variants legs, dragon or its variants tail and 8+/10+ pts in dragon/frost wyrm score. Effect: Basic strengthening of your body bone structure. (+10 to unarmed attack)\n");
 			outputText("-New tier 0 misc lvl-up perk: Draconic Heart. Req. Free heart mutation slot, Draconic Bones perk, Draconic/Drake Lungs perk, 8+/10+ pts/frost wyrm in dragon score. Effect: Your heart was strengthened to better handle your changing body. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen)\n");

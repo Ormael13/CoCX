@@ -1,7 +1,6 @@
 /**
- * Created by Kitteh6660. Glacial Rift is a area with level 30-40 encounters	(outer lvl 60-80, inner lvl 85-110)
- * Currently a Work in Progress.
- * 
+ * Created by Kitteh6660.
+ * Glacial Rift is a area with level 70-100 (outer) or 105-140 (inner) encounters
  * Please see this project. (This is not mine.) http://forum.fenoxo.com/thread-10719.html
  */
 package classes.Scenes.Areas 
@@ -15,8 +14,8 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.GlacialRift.*;
+import classes.Scenes.Areas.Tundra.Valkyrie;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.GooArmor;
 import classes.Scenes.SceneLib;
@@ -26,11 +25,10 @@ use namespace CoC;
 	public class GlacialRift extends BaseContent
 	{
 		public var yukionnaScene:YukiOnnaScene = new YukiOnnaScene();
-		public var valkyrieScene:ValkyrieScene = new ValkyrieScene();
 		public var yetiScene:YetiScene = new YetiScene();
 		public var giantScene:FrostGiantScene = new FrostGiantScene();
 		public var winterwolfScene:WinterWolfScene = new WinterWolfScene();
-		public var alrauneScene:AlrauneScene = new AlrauneScene();
+		public var wendigoScene:WendigoScene = new WendigoScene();
 		
 		public function GlacialRift() 
 		{
@@ -39,23 +37,23 @@ use namespace CoC;
 		public function exploreGlacialRift():void {
 			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT]++;
 			doNext(playerMenu);
-
+			
 			var choice:Array = [];
 			var select:int;
 			
 			//Build choice list!
-			choice[choice.length] = 0; //Yuki Onna OR Valkyrie (Valkyrie later on move down to Tundra ^^)
-			choice[choice.length] = 1; //Yeti
-			choice[choice.length] = 2; //Frost Giant
-			choice[choice.length] = 3; //Winter Wolf
-			choice[choice.length] = 4; //Ice True Golems
-			choice[choice.length] = 5; //Snow Lily
-			choice[choice.length] = 6; //Glacial Troll (M & F variants)
+			choice[choice.length] = 0; //Yuki Onna (lvl 71) OR Frost Giant (lvl 89)
+			choice[choice.length] = 1; //Yeti (lvl 76)
+			choice[choice.length] = 2; //Frost Giant (lvl 89)
+			choice[choice.length] = 3; //Winter Wolf (lvl 99)
+			choice[choice.length] = 4; //Ice True Golems (lvl 80)
+			choice[choice.length] = 5; //Glacial Troll (M & F variants) (lvl 94)
+			choice[choice.length] = 6; //Wendigo (lvl 84)
 			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && flags[kFLAGS.TOOK_GOO_ARMOR] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 7; //Valeria
 			if (rand(3) == 0) choice[choice.length] = 8; //Freebie items!
 			if (rand(15) == 0) choice[choice.length] = 9; //Ornate Chest or cache of gems/pile of stones
 			if (player.faceType == Face.WOLF && player.ears.type == Ears.WOLF && player.arms.type == Arms.WOLF && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0) choice[choice.length] = 10; //Fenrir ruined shrine
-			choice[choice.length] = 11; //Find nothing!
+			choice[choice.length] = 10; //Find nothing!
 			
 			//DLC april fools
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
@@ -84,13 +82,12 @@ use namespace CoC;
 			}
 			select = choice[rand(choice.length)];
 			switch(select) {
-				case 0: //Yuki Onna OR Valkyrie
+				case 0: //Yuki Onna OR Frost Gigant
 					clearOutput();
 					if (rand(2) == 0 && flags[kFLAGS.YU_SHOP] > 0) yukionnaScene.encounterYukiOnna();
 					else {
-						outputText("Making your way across the hard-packed ice of the Rift, you’re surprised to see the thick gray clouds part overhead.  You see a beautiful woman descend from on high, her snow-white wings flapping powerfully behind her back.  Armed with a long spear and shield, and clad in a bronze cuirass and a winged helm, she looks every bit the part of a mighty warrior.\n\n");
-						outputText("She touches down gently a few feet before you, her shield and spear raised.  \"<i>You seem a worthy sort to test my skills against, wanderer.  Prepare yourself!</i>\" she shouts, bearing down on you.  She doesn’t look like she’s going to back down -- you ready your [weapon] for a fight!");
-						startCombat(new Valkyrie());
+						outputText("You wander the frozen landscape of the Rift, frozen rocks, frosted hills and forested mountains your only landmarks. As you cross the peak of a rather large, lightly forested hill, you come face to gigantic face with a Frost Giant! He belches fiercely at you and you tumble back down the hill. He mostly steps over it as you come to your senses. You quickly draw your [weapon] and withdraw from the hill to prepare for battle.\n\n");
+						startCombat(new FrostGiant());
 					}
 					break;
 				case 1: //Yeti
@@ -127,28 +124,12 @@ use namespace CoC;
 					outputText("As you take a stroll, out of the nearby glaciers emerge a group of golems. Looks like you have encountered some true ice golems! You ready your [weapon] for a fight!");
 					startCombat(new GolemsTrueIce());
 					break;
-				case 5:	//Snow Lily
-					clearOutput();
-					if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
-						outputText("You can smell the thick scent of particularly strong pollen in the air. The book mentioned something about this but you don’t recall exactly what. Do you turn back to camp?\n\n");
-						menu();
-						addButton(0, "Yes", camp.returnToCampUseOneHour);
-						addButton(1, "No", alrauneScene.alrauneGlacialRift);
-					} else {
-						alrauneScene.alrauneGlacialRift();
-					}
-					break;
-				case 6:
-					if (player.level >= 54) {
+				case 5:
 					if (rand(2) == 0) SceneLib.trollScene.encounterAdultGlacialFemaleTroll();
 					else SceneLib.trollScene.encounterAdultGlacialMaleTroll();
-					}
-					else {
-						clearOutput();
-						outputText("Making your way across the hard-packed ice of the Rift, you’re surprised to see the thick gray clouds part overhead.  You see a beautiful woman descend from on high, her snow-white wings flapping powerfully behind her back.  Armed with a long spear and shield, and clad in a bronze cuirass and a winged helm, she looks every bit the part of a mighty warrior.\n\n");
-						outputText("She touches down gently a few feet before you, her shield and spear raised.  \"<i>You seem a worthy sort to test my skills against, wanderer.  Prepare yourself!</i>\" she shouts, bearing down on you.  She doesn’t look like she’s going to back down -- you ready your [weapon] for a fight!");
-						startCombat(new Valkyrie());
-					}
+					break;
+				case 6:
+					wendigoScene.encounterWendigo();
 					break;
 				case 7: //Find Valeria! She can be found there if you rejected her offer initially at Tower of the Phoenix or didn't find her. She can never be Lost Forever.
 					spriteSelect(79);

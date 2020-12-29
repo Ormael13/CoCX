@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.GlacialRift 
+package classes.Scenes.Areas.Tundra 
 {
 	import classes.*;
 	import classes.internals.*;
@@ -10,30 +10,30 @@ package classes.Scenes.Areas.GlacialRift
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Camp.CampMakeWinions;
 	
-	public class GolemsTrueIce extends Monster
+	public class GolemTrueIce extends Monster
 	{
 		public var campMake:CampMakeWinions = new CampMakeWinions();
 		
 		public function backhand():void {
-			outputText("The golems visage twists into a grimace of irritation, and few of them flyby you swinging their hands at you in a vicious backhand.");
-			var damage:Number = int (((str + weaponAttack) * 5) - rand(player.tou) - player.armorDef);
+			outputText("The golem visage twists into a grimace of irritation, and it flyby you swinging hand at you in a vicious backhand.");
+			var damage:Number = int ((str + weaponAttack) - rand(player.tou) - player.armorDef);
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.1;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
 			damage = Math.round(damage);
 			//Dodge
-			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swings!");
+			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swing!");
 			else
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" They hits you square in the chest from a few different angles. ");
+				outputText(" It hits you square in the chest. ");
 				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		
 		public function overhandSmash():void {
-			outputText("Raising their fists high overhead, golems swiftly dives down brings their fists down in a punishing strike!");
+			outputText("Raising it fists high overhead, golem swiftly dives down bringing it fists down in a punishing strike!");
 			
-			var damage:Number = 100 + int(((str + weaponAttack) * 5) - rand(player.tou) - player.armorDef);
+			var damage:Number = 100 + int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.1;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
 			damage = Math.round(damage);
@@ -41,7 +41,7 @@ package classes.Scenes.Areas.GlacialRift
 			else
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" The concussive strikes impacts you with a bonecrushing force. ");
+				outputText(" The concussive strike impacts you with a bonecrushing force. ");
 				damage = player.takePhysDamage(damage, true);
 			}
 		}
@@ -50,11 +50,7 @@ package classes.Scenes.Areas.GlacialRift
 			var damage:Number = (eBaseIntelligenceDamage() + eBaseWisdomDamage()) * 2;
 			damage = Math.round(damage);
 			if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-			outputText("At the palm of their hands form ice spikes that they then shots toward you! ");
-			damage = player.takeIceDamage(damage, true);
-			damage = player.takeIceDamage(damage, true);
-			damage = player.takeIceDamage(damage, true);
-			damage = player.takeIceDamage(damage, true);
+			outputText("At the palm of it hand form ice spike that then shots toward you! ");
 			damage = player.takeIceDamage(damage, true);
 		}
 		
@@ -87,29 +83,29 @@ package classes.Scenes.Areas.GlacialRift
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			campMake.postFightGolemOptions2();
+			campMake.postFightGolemOptions1();
 		}
 		
-		public function GolemsTrueIce() 
+		public function GolemTrueIce() 
 		{
 			this.a = "the ";
-			this.short = "true ice golems";
-			this.imageName = "true ice golems";
-			this.long = "You're currently fighting true ice golems. They're all around ten feet tall without any sexual characteristics, their body shaped like gorilla, with bird-like wings, covered with with thick ice and using bare fists to smash enemies.";
-			this.plural = true;
-			initStrTouSpeInte(375, 335, 190, 20);
+			this.short = "true ice golem";
+			this.imageName = "true ice golem";
+			this.long = "You're currently fighting true ice golem. It's over twenty four feet tall without any sexual characteristics, it body shaped like gigantic gorilla, with bird-like wings, covered with with thick ice and using huge fists to smash enemies.";
+			//this.plural = true;
+			initStrTouSpeInte(315, 295, 175, 20);
 			initWisLibSensCor(20, 10, 10, 50);
 			this.lustVuln = 0;
-			this.tallness = 84;
+			this.tallness = 290;
 			this.drop = NO_DROP;
 			this.createBreastRow(0, 1);
 			initGenderless();
-			this.level = 80;
-			this.bonusHP = 5000;
-			this.additionalXP = 000;
+			this.level = 64;
+			this.bonusHP = 4000;
+			this.additionalXP = 800;
 			this.weaponName = "fists";
 			this.weaponVerb = "smash";
-			this.weaponAttack = 175;
+			this.weaponAttack = 150;
 			this.armorName = "ice armor";
 			this.armorDef = 180;
 			this.armorMDef = 180;
@@ -117,8 +113,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			checkMonster();
