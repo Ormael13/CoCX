@@ -12,7 +12,8 @@ package classes.Scenes.Areas.Caves
 	import classes.BodyParts.Face;
 	import classes.BodyParts.Gills;
 	import classes.BodyParts.Hair;
-	import classes.BodyParts.LowerBody;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
 	import classes.BodyParts.RearBody;
 	import classes.BodyParts.Skin;
 	import classes.BodyParts.Tail;
@@ -145,6 +146,7 @@ public function LetzRape(letzRape:Boolean = false):void {
 		if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);
 		else player.addStatusValue(StatusEffects.BonusVCapacity, 1, 9000);
 		player.antennae.type = Antennae.NONE;
+		player.horns.type = Horns.NONE;
 		player.wings.type = Wings.NONE;
 		player.tail.type = Tail.NONE;
 		player.gills.type = Gills.NONE;
