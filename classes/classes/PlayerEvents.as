@@ -539,13 +539,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.rearBody.type = RearBody.NONE;
 				needNext = true;
 			}
-			if (!player.findPerk(PerkLib.MorphicWeaponry) && (player.darkgooScore() >= 17 || player.gooScore() >= 15 || player.magmagooScore() >= 17) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") > 50){
+			if (!player.hasPerk(PerkLib.MorphicWeaponry) && (player.darkgooScore() >= 17 || player.gooScore() >= 15 || player.magmagooScore() >= 17) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") > 50){
 				player.createPerk(PerkLib.MorphicWeaponry,0,0,0,0);
 				outputText("\nYour body has become so bloated with fluids and so large that you gain the ability to use your excess mass to form any number of additionnal tendrils wich you can use to attack your opponents.\n(<b>Gained New Perk: Morphic Weaponry.</b>\n>\n");
 			}
-			if (player.findPerk(PerkLib.MorphicWeaponry) && ((player.darkgooScore() >= 17 && player.gooScore() >= 15 && player.magmagooScore() >= 17) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") <= 50)){
+			if (player.hasPerk(PerkLib.MorphicWeaponry) && ((player.darkgooScore() < 17 && player.gooScore() < 15 && player.magmagooScore() < 17) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") <= 50)){
 				player.removePerk(PerkLib.MorphicWeaponry);
-				if((player.darkgooScore() >= 17 && player.gooScore() >= 15 && player.magmagooScore() >= 17)){
+				if((player.darkgooScore() < 17 && player.gooScore() < 15 && player.magmagooScore() < 17)){
 					outputText("\nAs you are mo longuer a slime, you can't use the morphic weaponry ability anymore.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
 				}
 				else{
@@ -1910,12 +1910,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Loosing hellcat body parts
 			if (player.hellcatScore() >= 10 && flags[kFLAGS.WITCHES_SABBATH] > 1) {
 				var hellcatparts:Number = 3;
-				if (player.tailType != Tail.BURNING) hellcatparts -= 1;
+				if (player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA) hellcatparts -= 1;
 				if (player.hairType != Hair.BURNING) hellcatparts -= 1;
 				if (player.eyes.type != Eyes.INFERNAL) hellcatparts -= 1;
 				if (hellcatparts < 3) {
 					outputText("\nAs you become less of a hellcat your inner fire entirely dies down, your body reverting to that of a standard feline.\n");
-					if (player.tailType == Tail.BURNING) player.tailType = Tail.CAT;
+					if (player.tailType == Tail.BURNING || player.tailType == Tail.TWINKASHA) player.tailType = Tail.CAT;
 					if (player.hairType == Hair.BURNING) player.hairType = Hair.NORMAL;
 					if (player.eyes.type == Eyes.INFERNAL) player.eyes.type = Eyes.CAT_SLITS;
 					if (flags[kFLAGS.WITCHES_SABBATH] > 1) flags[kFLAGS.WITCHES_SABBATH] = 1;

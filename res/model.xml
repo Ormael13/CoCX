@@ -979,6 +979,9 @@
         <cell rect="811,410,49,29" name="bra/dragonScaleBraSmall" dx="79" dy="68"/>
         <cell rect="811,440,49,29" name="bra/dragonScaleBraMedium" dx="79" dy="68"/>
         <cell rect="811,470,49,29" name="bra/dragonScaleBraLarge" dx="79" dy="68"/>
+		<cell rect="1011,410,49,29" name="bra/comfortableBraSmall" dx="79" dy="68"/>
+        <cell rect="1011,440,49,29" name="bra/comfortableBraMedium" dx="79" dy="68"/>
+		<cell rect="1011,470,49,29" name="bra/comfortableBraLarge" dx="79" dy="68"/>
         <cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="79" dy="99"/>
         <cell rect="61,500,49,29" name="panty/sexyBlackBikiniPanty" dx="79" dy="99"/>
         <cell rect="111,500,49,29" name="panty/sexyAquamarineBikiniPanty" dx="79" dy="99"/>
@@ -992,6 +995,7 @@
         <cell rect="511,500,49,48" name="panty/scandalousSuccubusClothingPantyTaur" dx="79" dy="94"/>
         <cell rect="761,500,49,29" name="panty/chainMailPanty" dx="79" dy="99"/>
         <cell rect="811,500,49,29" name="panty/dragonScalePanty" dx="79" dy="99"/>
+		<cell rect="1011,500,49,29" name="panty/comfortablePanty" dx="79" dy="99"/>
     </spritemap>
     <spritemap file="tails.png">
         <cell rect="1,71,168,139" name="tail/manticore" dx="20" dy="40"/>
@@ -3851,6 +3855,39 @@
 		<if test="dragonscaleBikiniPanty">
 			<if test="showClothing">
 				<show part="panty/dragonScalePanty"/>
+				<hide part="penis/*"/>
+				<hide part="balls/*"/>
+			</if>
+		</if>
+		
+		<!--Comfy set -->
+		<if test="comfyBikiniBra">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra/comfortableBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/comfortableBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/comfortableBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/comfortableBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/comfortableBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/comfortableBraLarge"/>
+					</default>
+				</switch>
+			</if>
+		</if>
+		<if test="comfyBikiniPanty">
+			<if test="showClothing">
+				<show part="panty/comfortablePanty"/>
 				<hide part="penis/*"/>
 				<hide part="balls/*"/>
 			</if>
