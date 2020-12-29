@@ -1910,12 +1910,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Loosing hellcat body parts
 			if (player.hellcatScore() >= 10 && flags[kFLAGS.WITCHES_SABBATH] > 1) {
 				var hellcatparts:Number = 3;
-				if (player.tailType != Tail.BURNING) hellcatparts -= 1;
+				if (player.tailType != Tail.BURNING || player.tailType != Tail.TWINKASHA) hellcatparts -= 1;
 				if (player.hairType != Hair.BURNING) hellcatparts -= 1;
 				if (player.eyes.type != Eyes.INFERNAL) hellcatparts -= 1;
 				if (hellcatparts < 3) {
 					outputText("\nAs you become less of a hellcat your inner fire entirely dies down, your body reverting to that of a standard feline.\n");
-					if (player.tailType == Tail.BURNING) player.tailType = Tail.CAT;
+					if (player.tailType == Tail.BURNING || player.tailType == Tail.TWINKASHA) player.tailType = Tail.CAT;
 					if (player.hairType == Hair.BURNING) player.hairType = Hair.NORMAL;
 					if (player.eyes.type == Eyes.INFERNAL) player.eyes.type = Eyes.CAT_SLITS;
 					if (flags[kFLAGS.WITCHES_SABBATH] > 1) flags[kFLAGS.WITCHES_SABBATH] = 1;
