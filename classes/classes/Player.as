@@ -10017,7 +10017,9 @@ use namespace CoC;
 				if(!hasStatusEffect(StatusEffects.SlimeCravingFeed)) {
 					createStatusEffect(StatusEffects.SlimeCravingFeed,0,0,0,0);
 				}
-				refillHunger(30);
+				var Ammount:Number = 30;
+				if ((hunger+Ammount)>maxHunger()) Ammount = (maxHunger()-hunger-1);
+				refillHunger(Ammount);
 				slimeGrowth();
 			}
 			if (findPerk(PerkLib.Diapause) >= 0) {
@@ -12595,7 +12597,9 @@ use namespace CoC;
 			EngineCore.HPChange(Math.round(maxHP() * .2), true);
 			cumOmeter(40);
 			cor += 2;
-			refillHunger(100);
+			var Ammount:Number = 100;
+			if ((hunger+Ammount)>maxHunger()) Ammount = (maxHunger()-hunger-1);
+			refillHunger(Ammount);
 		}
 
 		public function displacerFeed():void {
@@ -12613,7 +12617,9 @@ use namespace CoC;
 			EngineCore.HPChange(Math.round(maxHP() * .2), true);
 			cumOmeter(40);
 			cor += 2;
-			refillHunger(100);
+			var Ammount:Number = 100;
+			if ((hunger+Ammount)>maxHunger()) Ammount = (maxHunger()-hunger-1);
+			refillHunger(Ammount);
 		}
 
 		public function slimeGrowth():void {
@@ -12634,7 +12640,9 @@ use namespace CoC;
 			EngineCore.HPChange(Math.round(maxHP() * .2), true);
 			cumOmeter(40);
 			cor += 2;
-			refillHunger(100);
+			var Ammount:Number = 100;
+			if ((hunger+Ammount)>maxHunger()) Ammount = (maxHunger()-hunger-1);
+			refillHunger(Ammount);
 		}
 
         /**
