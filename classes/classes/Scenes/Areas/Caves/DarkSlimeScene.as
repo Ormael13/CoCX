@@ -70,7 +70,7 @@ public function beatingDarkSlime():void {
 
 public function LetzRape2():void {
 	LetzRape(true);
-	doNext(camp.returnToCampUseOneHour);
+	cleanupAfterCombat();
 }
 public function LetzRape(letzRape:Boolean = false):void {
 	clearOutput();
