@@ -4160,7 +4160,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Ears!
         if (player.ears.type != Ears.GREMLIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nWhoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in -haircolor- fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears!</b>");
+            outputText("\n\nWhoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in "+player.hairColor+" fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears!</b>");
             setEarType(Ears.GREMLIN);
             changes++;
         }
@@ -13314,12 +13314,12 @@ public final class Mutations extends MutationsHelper {
         if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0) {
             if (player.tentacleCocks() < player.cockTotal()) {
                 if (player.cocks.length == 1) { //Single cawks
-                    outputText("\n\nYour feel your [cock] bending and flexing of its own volition... looking down, you see it morph into a green vine-like shape.  <b>You now have a tentacle cock!</b>  ");
+                    outputText("\n\nYour feel your [cock] bending and flexing of its own volition... looking down, you see it morph into a tentacle-like shape.  <b>You now have a tentacle cock!</b>  ");
                     //Set primary cock flag
                     player.cocks[0].cockType = CockTypesEnum.SCYLLATENTACLE;
                 }
                 if (player.cockTotal() > 1) { //multi
-                    outputText("\n\nYour feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible vine-like shapes.  <b>You now have green tentacle cocks!</b>  ");
+                    outputText("\n\nYour feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible tentacle-like shapes.  <b>You now have tentacle cocks!</b>  ");
                     for (var x:int = 0; x < player.cocks.length; x++) player.cocks[x].cockType = CockTypesEnum.SCYLLATENTACLE;
                 }
             }
@@ -13729,7 +13729,7 @@ public final class Mutations extends MutationsHelper {
                     player.cocks[0].cockType = CockTypesEnum.SCYLLATENTACLE;
                 }
                 if (player.cockTotal() > 1) { //multi
-                    outputText("\n\nYour feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible vine-like shapes.  <b>You now have green tentacle cocks!</b>  ");
+                    outputText("\n\nYour feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible tentacle-like shapes.  <b>You now have tentacle cocks!</b>  ");
                     for (var x:int = 0; x < player.cocks.length; x++) player.cocks[x].cockType = CockTypesEnum.SCYLLATENTACLE;
                 }
             }

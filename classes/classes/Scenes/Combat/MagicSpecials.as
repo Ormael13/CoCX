@@ -5617,6 +5617,5 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		enemyAI();
 	}
-
 }
 }

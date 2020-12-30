@@ -12,8 +12,8 @@ package classes.Scenes.Areas.Caves
 	import classes.BodyParts.Face;
 	import classes.BodyParts.Gills;
 	import classes.BodyParts.Hair;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
+	import classes.BodyParts.Horns;
+	import classes.BodyParts.LowerBody;
 	import classes.BodyParts.RearBody;
 	import classes.BodyParts.Skin;
 	import classes.BodyParts.Tail;
@@ -71,6 +71,7 @@ public function beatingDarkSlime():void {
 public function LetzRape2():void {
 	LetzRape(true);
 	cleanupAfterCombat();
+	doNext(camp.returnToCampUseOneHour);
 }
 public function LetzRape(letzRape:Boolean = false):void {
 	clearOutput();

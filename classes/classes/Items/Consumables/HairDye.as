@@ -27,7 +27,6 @@ public class HairDye extends Consumable
 		override public function useItem():Boolean {
 			clearOutput();
 			EngineCore.menu();
-			 
 			if (game.player.hairLength > 0) {
 				outputText("You have " + game.player.hairColor + " hair.");
 				if (game.player.hairColor != _color) EngineCore.addButton(0, "Hair", dyeHair);
@@ -36,7 +35,6 @@ public class HairDye extends Consumable
 				outputText("You have no hair.");
 				EngineCore.addButtonDisabled(0, "Hair", "You are bald!");
 			}
-			
 			if (game.player.hasCoatOfType(Skin.FUR)) {
 				outputText("\n\nYou have [skin coat].");
 				if (game.player.coatColor != _color) EngineCore.addButton(1, "Fur", dyeFur);
@@ -45,16 +43,40 @@ public class HairDye extends Consumable
 				outputText("\n\nYou have no fur.");
 				EngineCore.addButtonDisabled(1, "Fur", "You have no fur!");
 			}
-			//if (game.player.hasCoatOfType(Skin.SCALES, Skin.DRAGON_SCALES)) {
-			//	outputText("\n\nYou have [skin coat].");
-			//	if (game.player.coatColor != _color) EngineCore.addButton(2, "Scales", dyeScales);
-			//	else EngineCore.addButtonDisabled(2, "Scale", "Your already have " + _color + " scales!");
-			//} else {
-			//	outputText("\n\nYou have no scales.");
-			//	EngineCore.addButtonDisabled(2, "Scale", "You have no scales!");
-			//}
-			
-			EngineCore.addButton(4, "Nevermind", dyeCancel);
+			if (game.player.hasCoatOfType(Skin.SCALES)) {
+				outputText("\n\nYou have [skin coat].");
+				if (game.player.coatColor != _color) {
+					if (game.player.hasItem(game.useables.REAGENT, 1)) EngineCore.addButton(2, "Scales", dyeScales);
+					else EngineCore.addButtonDisabled(2, "Scales", "You not have enough reagents! (1)");
+				}
+				else EngineCore.addButtonDisabled(2, "Scale", "Your already have " + _color + " scales!");
+			} else {
+				outputText("\n\nYou have no scales.");
+				EngineCore.addButtonDisabled(2, "Scale", "You have no scales!");
+			}
+			if (game.player.hasCoatOfType(Skin.CHITIN)) {
+				outputText("\n\nYou have [skin coat].");
+				if (game.player.coatColor != _color) {
+					if (game.player.hasItem(game.useables.REAGENT, 2)) EngineCore.addButton(3, "Chitin", dyeChitin);
+					else EngineCore.addButtonDisabled(3, "Chitin", "You not have enough reagents! (2)");
+				}
+				else EngineCore.addButtonDisabled(3, "Chitin", "Your already have " + _color + " chitin!");
+			} else {
+				outputText("\n\nYou have no chitin.");
+				EngineCore.addButtonDisabled(3, "Chitin", "You have no scales!");
+			}
+			if (game.player.hasCoatOfType(Skin.DRAGON_SCALES)) {
+				outputText("\n\nYou have [skin coat].");
+				if (game.player.coatColor != _color) {
+					if (game.player.hasItem(game.useables.REAGENT, 2)) EngineCore.addButton(7, "D.Scales", dyeDragonScales);
+					else EngineCore.addButtonDisabled(7, "D.Scales", "You not have enough reagents! (2)");
+				}
+				else EngineCore.addButtonDisabled(7, "D.Scale", "Your already have " + _color + " dragon scales!");
+			} else {
+				outputText("\n\nYou have no dragon scales.");
+				EngineCore.addButtonDisabled(7, "D.Scale", "You have no scales!");
+			}
+			EngineCore.addButton(14, "Nevermind", dyeCancel);
 			return true;
 		}
 		
@@ -78,7 +100,6 @@ public class HairDye extends Consumable
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			SceneLib.inventory.itemGoNext();
 		}
-		
 		private function dyeFur():void {
 			clearOutput();
 			outputText("You rub the dye into your fur, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
@@ -91,19 +112,45 @@ public class HairDye extends Consumable
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			SceneLib.inventory.itemGoNext();
 		}
-
-		//private function dyeScales():void {
-		//	clearOutput();
-		//	outputText("You rub the dye into your scales, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
-		//	game.player.skin.coat.color = _color;
-		//	outputText("You now have [skin coat].");
-		//	if (game.player.lust > 50) {
-		//		outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
-		//		game.player.dynStats("lus", -15);
-		//	}
-		//	CoC.instance.mainViewManager.updateCharviewIfNeeded();
-		//	SceneLib.inventory.itemGoNext();
-		//}
+		private function dyeScales():void {
+			clearOutput();
+			outputText("You rub the dye into your scales, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
+			game.player.skin.coat.color = _color;
+			player.consumeItem(game.useables.REAGENT, 1);
+			outputText("You now have [skin coat].");
+			if (game.player.lust > 50) {
+				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
+				game.player.dynStats("lus", -15);
+			}
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			SceneLib.inventory.itemGoNext();
+		}
+		private function dyeChitin():void {
+			clearOutput();
+			outputText("You rub the dye into your chitin, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
+			game.player.skin.coat.color = _color;
+			player.consumeItem(game.useables.REAGENT, 2);
+			outputText("You now have [skin coat].");
+			if (game.player.lust > 50) {
+				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
+				game.player.dynStats("lus", -15);
+			}
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			SceneLib.inventory.itemGoNext();
+		}
+		private function dyeDragonScales():void {
+			clearOutput();
+			outputText("You rub the dye into your dragon scales, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
+			game.player.skin.coat.color = _color;
+			player.consumeItem(game.useables.REAGENT, 2);
+			outputText("You now have [skin coat].");
+			if (game.player.lust > 50) {
+				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
+				game.player.dynStats("lus", -15);
+			}
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			SceneLib.inventory.itemGoNext();
+		}
 		
 		private function dyeCancel():void {
 			clearOutput();
@@ -111,5 +158,4 @@ public class HairDye extends Consumable
 			SceneLib.inventory.returnItemToInventory(this);
 		}
 	}
-
 }

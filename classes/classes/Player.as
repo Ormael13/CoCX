@@ -10859,10 +10859,10 @@ use namespace CoC;
 				}
 				else {
 					maxStrCap2 += 50;
-					maxTouCap2 -= 20;
+					maxTouCap2 -= 10;
 					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 50;
 					else maxSpeCap2 += 40;
-					maxIntCap2 += 100;
+					maxIntCap2 += 90;
 					maxWisCap2 += 40;
 				}
 			}//+50/-20/+40/+100/+40
@@ -11770,14 +11770,14 @@ use namespace CoC;
 				if (couatlScore() >= 19) {
 					maxStrCap2 += 50;
 					maxTouCap2 += 45;
-					maxSpeCap2 += 140
-					maxIntCap2 += 50
+					maxSpeCap2 += 140;
+					maxIntCap2 += 50;
 				}
 				else {
 					maxStrCap2 += 30;
 					maxTouCap2 += 25;
-					maxSpeCap2 += 80
-					maxIntCap2 += 30
+					maxSpeCap2 += 80;
+					maxIntCap2 += 30;
 				}
 			}//+30/30-40
 			if (vouivreScore() >= 11) {
@@ -11790,17 +11790,17 @@ use namespace CoC;
 				}
 				else if (vouivreScore() >= 16) {
 					maxStrCap2 += 100;
-					maxTouCap2 += 75;
+					maxTouCap2 += 65;
 					maxSpeCap2 += 70;
-					maxIntCap2 += 10;
-					maxWisCap2 -= 20;
+					maxIntCap2 += 15;
+					maxWisCap2 -= 15;
 				}
 				else {
-					maxStrCap2 += 80;
+					maxStrCap2 += 70;
 					maxTouCap2 += 45;
 					maxSpeCap2 += 45;
 					maxIntCap2 += 10;
-					maxWisCap2 -= 20;
+					maxWisCap2 -= 10;
 				}
 			}
 			if (gorgonScore() >= 11) {
@@ -12750,7 +12750,7 @@ use namespace CoC;
 						if (hasStatusEffect(StatusEffects.Overheat) && inHeat){
 							if (statusEffectv3(StatusEffects.Overheat) != 1){
 								addStatusValue(StatusEffects.Overheat, 3, 1);
-							}/
+							}
 						}
 						if (hasPerk(PerkLib.ManticoreCumAddict))
 						{
@@ -12930,6 +12930,7 @@ use namespace CoC;
 			if (alicornScore() >= 12) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (centaurScore() >= 8) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (gorgonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (gorgonScore() >= 17) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (horseScore() >= 4) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (horseScore() >= 7) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (manticoreScore() >= 6) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
