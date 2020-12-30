@@ -12833,7 +12833,7 @@ use namespace CoC;
 			if (intBuff < +0.9) {
 				buff("Energy Vampire").addStats({ "int.mult": +0.05 }).withText("Energy Vampire");
 			}
-			if (speBuff < 0) {
+			if (speBuff < +0.9) {
 				buff("Energy Vampire").addStats({ "spe.mult": +0.05 }).withText("Energy Vampire");
 			}
 			//MOST OF BELOW PART TOO DELETE WHEN SPEED IS REVAMPED
