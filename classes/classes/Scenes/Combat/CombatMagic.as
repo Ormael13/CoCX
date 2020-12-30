@@ -2830,7 +2830,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	public function DeactivateManaShield():void {
 		clearOutput();
-		outputText("Deciding you no longuer need to maintain your mana shield, you concentrate on deactivating it.\n\n");
+		outputText("Deciding you no longer need to maintain your mana shield, you concentrate on deactivating it.\n\n");
 		player.removeStatusEffect(StatusEffects.ManaShield);
 		enemyAI();
 	}

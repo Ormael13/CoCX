@@ -642,7 +642,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\n");
 		if (player.vaginas.length == 1){
 			if(player.vaginaType() == VaginaClass.EQUINE){
-				outputText("Your " + vaginaDescript(0) + " is deep and wide just like that of a horse. Sometime you lament that most of your partners are no longuer big enought to satisfy you. Inside you have a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+				outputText("Your " + vaginaDescript(0) + " is deep and wide just like that of a horse. Sometime you lament that most of your partners are no longer big enough to satisfy you. Inside you have a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 			}
 			else if (player.lowerBody == LowerBody.MELKIE){
 				outputText("You have two set of vaginal lips one twice as bigger then the other and hidding the smaller within it folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
@@ -2309,9 +2309,9 @@ public class PlayerAppearance extends BaseContent {
 				}
 			} else if(faceType == Face.VAMPIRE){
 				if (odd == 0){
-					outputText("  Your mouth is human looking all right though your near constant crazy toothy smile isn't exactly helping to make you look sane. A careful onlooker could also easily notice that your canines are longuer and pointier then normal like those of tiny fiends.");
+					outputText("  Your mouth is human looking all right though your near constant crazy toothy smile isn't exactly helping to make you look sane. A careful onlooker could also easily notice that your canines are longer and pointier then normal like those of tiny fiends.");
 				} else {
-					outputText("  In addition, your mouth could pass for human if not for your near constant crazy toothy smile isn't exactly helping to make you look sane. A careful onlooker also could easily notice that your canines are longuer and pointier then normal like those of tiny fiends.");
+					outputText("  In addition, your mouth could pass for human if not for your near constant crazy toothy smile isn't exactly helping to make you look sane. A careful onlooker also could easily notice that your canines are longer and pointier then normal like those of tiny fiends.");
 				}
 			} else if(faceType == Face.FAIRY){
 				if (odd == 0){

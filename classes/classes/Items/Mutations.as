@@ -14510,7 +14510,7 @@ public final class Mutations extends MutationsHelper {
 
         //-Raises strength to 200.
         if (rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYou feel raw power run through your muscle. Gosh you might as well be strong enought to shatter rocks.");
+            outputText("\n\nYou feel raw power run through your muscle. Gosh you might as well be strong enough to shatter rocks.");
             if (player.str < 50) outputText(" Well maybe not that strong yet but you sure can pack a punch with your fist.");
             MutagenBonus("str", 5);
             changes++;
