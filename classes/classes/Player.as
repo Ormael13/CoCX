@@ -12750,7 +12750,7 @@ use namespace CoC;
 						if (hasStatusEffect(StatusEffects.Overheat) && inHeat){
 							if (statusEffectv3(StatusEffects.Overheat) != 1){
 								addStatusValue(StatusEffects.Overheat, 3, 1);
-							}/
+							}
 						}
 						if (hasPerk(PerkLib.ManticoreCumAddict))
 						{

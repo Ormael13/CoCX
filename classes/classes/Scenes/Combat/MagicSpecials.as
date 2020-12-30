@@ -237,11 +237,11 @@ public class MagicSpecials extends BaseCombatContent {
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.couatlScore() >= 11 && player.isFlying()) {
-			bd = buttons.add("Hurricane", Hurricane).hint("Kickstart a hurricane unleashing violent winds on your opponent. The hurricane intansify every round and may even stun your victim\n", "Hurricane");
+			bd = buttons.add("Hurricane", Hurricane).hint("Kickstart a hurricane unleashing violent winds on your opponent. The hurricane intensifies every round and may even stun your victim\n", "Hurricane");
 			bd.requireMana(spellCost(50));
 			//Not Ready Yet:
 			if(player.hasStatusEffect(StatusEffects.CooldownHurricane)) {
-				bd.disable("You need time to gather enought winds to empower your Hurricane again.");
+				bd.disable("You need time to gather enough winds to empower your Hurricane again.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.kamaitachiScore() >= 10 && player.arms.type == Arms.KAMAITACHI) {
@@ -249,7 +249,7 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireFatigue(spellCost(50));
 			//Not Ready Yet:
 			if(player.hasStatusEffect(StatusEffects.CooldownWindScythe)) {
-				bd.disable("You need time to gather enought winds to unleash a wind scythe again.");
+				bd.disable("You need time to gather enough winds to unleash a wind scythe again.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.hasPerk(PerkLib.DragonFireBreath)) {

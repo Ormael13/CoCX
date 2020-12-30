@@ -2494,7 +2494,7 @@ import flash.utils.getQualifiedClassName;
 				if(plural) outputText(capitalA + short + " is violently struck by the ever intensifying windstorm. <b>(<font color=\"#800000\">" + store13 + "</font>)</b>\n\n");
 				else outputText(capitalA + short + " are violently struck by the ever intensifying windstorm. <b>(<font color=\"#800000\">" + store13 + "</font>)</b>\n\n");
 				temp = rand(4);
-				if(temp == 3) createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); outputText("<b>A random flying object caugh in the hurricane ram into your opponent, stunning it!</b>\n\n");
+				if(temp == 3) createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.KamaitachiBleed)) {
 				//This wounds never heals unless by magic
