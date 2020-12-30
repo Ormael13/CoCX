@@ -29,14 +29,13 @@ import classes.internals.*;
 		public function WendigoSpectralScream():void {
 			outputText("The wendigo howl a soul-chilling scream. You try to move but realize to your horror that your body is paralyzed by fear! ");
 			player.createStatusEffect(StatusEffects.Fear, 3, 0, 0, 0);
-			player.buff("Spectral Scream").addStats( {"wis.mult":-0.05} ).withText("Spectral Scream!").combatPermanent();
+			player.addCurse("wis.mult",0.05);
 		}
 		
 		public function WendigoClaw():void {
 			outputText("The wendigo tries to rend you with its claws. ");
 			WendigoClaw2();
 			WendigoClaw2();
-			if (!player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger)) player.createStatusEffect(StatusEffects.WendigoPsychosis,168,0,0,0);
 		}
 		public function WendigoClaw2():void {
 			var dodged:String = player.getEvasionReason();
@@ -63,12 +62,14 @@ import classes.internals.*;
 				}
 			}
 			else {
-				var isCursed:Boolean = player.buff("Wendigo curse").isPresent();
+				//var isCursed:Boolean = player.buff("Wendigo curse").isPresent();
 				var damage:Number = 0;
 				damage += eBaseDamage();
 				player.takePhysDamage(damage, true);
-				if (!isCursed) player.buff("Wendigo curse").addStats( {"tou.mult": -0.05} ).withText("Wendigo curse!").combatPermanent();
-				else player.buff("Wendigo curse").addStats( {"tou.mult":-0.05} ).combatPermanent();
+				//if (!isCursed) player.buff("Wendigo curse").addStats( {"tou.mult": -0.05} ).withText("Wendigo curse!").combatPermanent();
+				//else player.buff("Wendigo curse").addStats( {"tou.mult":-0.05} ).combatPermanent();
+				player.addCurse("tou.mult",0.05);
+				if (!player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger)) player.createStatusEffect(StatusEffects.WendigoPsychosis,168,0,0,0);
 			}
 		}
 		

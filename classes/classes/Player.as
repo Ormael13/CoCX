@@ -5864,18 +5864,18 @@ use namespace CoC;
 		//		dragonCounter++;
 			if (jabberwockyCounter >= 5 && (hasPerk(PerkLib.DragonFireBreath) || hasPerk(PerkLib.DragonIceBreath) || hasPerk(PerkLib.DragonLightningBreath) || hasPerk(PerkLib.DragonDarknessBreath)))
 				jabberwockyCounter++;
-			if (hasPerk(PerkLib.DraconicBones))
-				jabberwockyCounter++;
-			if (hasPerk(PerkLib.DraconicBonesEvolved))
-				jabberwockyCounter++;
-			if (hasPerk(PerkLib.DraconicBonesFinalForm))
-				jabberwockyCounter++;
-			if (hasPerk(PerkLib.DraconicHeart))
-				jabberwockyCounter++;
-			if (hasPerk(PerkLib.DraconicHeartEvolved))
-				jabberwockyCounter++;
-			if (hasPerk(PerkLib.DraconicHeartFinalForm))
-				jabberwockyCounter++;
+			//if (hasPerk(PerkLib.Insanity))(Immune to insanity gains bonus)
+			//	jabberwockyCounter++;
+			//if (hasPerk(PerkLib.InsanityEvolved))(Immune to insanity gains bonus)
+			//	jabberwockyCounter++;
+			//if (hasPerk(PerkLib.InsanityFinalForm))(Immune to insanity gains bonus)
+			//	jabberwockyCounter++;
+			//if (hasPerk(PerkLib.JabberwockyMarrow)) (regeneration)
+			//	jabberwockyCounter++;
+			//if (hasPerk(PerkLib.JabberwockyMarrowEvolved)) (regeneration)
+			//	jabberwockyCounter++;
+			//if (hasPerk(PerkLib.JabberwockyMarrowFinalForm)) (regeneration)
+			//	jabberwockyCounter++;
 			if (hasPerk(PerkLib.DrakeLungs))
 				jabberwockyCounter++;
 			if (hasPerk(PerkLib.DrakeLungsEvolved))
@@ -12750,7 +12750,7 @@ use namespace CoC;
 						if (hasStatusEffect(StatusEffects.Overheat) && inHeat){
 							if (statusEffectv3(StatusEffects.Overheat) != 1){
 								addStatusValue(StatusEffects.Overheat, 3, 1);
-							}
+							}/
 						}
 						if (hasPerk(PerkLib.ManticoreCumAddict))
 						{

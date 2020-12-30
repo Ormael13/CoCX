@@ -5664,7 +5664,7 @@ public class PerkLib
                 .requirePerk(DraconicBones)
                 .requireAnyPerk(DraconicLungs, DrakeLungs)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10);
+                return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10);
             }, "Dragon race or its variants");
 			DraconicLungs.requireLungsMutationSlot()
 				.requirePerk(DragonFireBreath)
@@ -6062,14 +6062,14 @@ public class PerkLib
                     .requirePerk(DraconicHeart)
                     .requireAnyPerk(DraconicLungs, DrakeLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 12 || player.jabberwockyScore() >= 12 || player.frostWyrmScore() >= 12);
+						return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12);
             }, "Dragon race or its variants");
 			DraconicHeartEvolved.requireLevel(12)
                     .requirePerk(DraconicBones)
                     .requirePerk(DraconicHeart)
                     .requireAnyPerk(DraconicLungs, DrakeLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 12 || player.jabberwockyScore() >= 12 || player.frostWyrmScore() >= 12);
+						return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12);
             }, "Dragon race or its variants");
 			DraconicLungsEvolved.requireLevel(12)
                     .requirePerk(DraconicBones)
@@ -6479,7 +6479,7 @@ public class PerkLib
                 .requirePerk(DraconicHeartEvolved)
                 .requireAnyPerk(DraconicLungsEvolved, DrakeLungsEvolved)
                 .requireCustomFunction(function (player:Player):Boolean {
-					return (player.dragonScore() >= 16 || player.jabberwockyScore() >= 16 || player.frostWyrmScore() >= 15);
+					return (player.dragonScore() >= 16 || player.frostWyrmScore() >= 15);
             }, "Dragon race or its variants");
 			DraconicHeartFinalForm.requireLevel(30)
                 .requirePerk(DraconicBonesEvolved)

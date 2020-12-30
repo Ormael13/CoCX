@@ -3666,6 +3666,10 @@ public class Combat extends BaseContent {
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
                 }
+                if (player.arms.type == Arms.WENDIGO){
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
+                }
                 else{
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier);
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier);
@@ -3688,6 +3692,13 @@ public class Combat extends BaseContent {
                     outputText("You use your extra arms to rend your opponent two more times.");
                     ExtraNaturalWeaponAttack();
                     ExtraNaturalWeaponAttack();
+                    outputText("\n");
+                }
+                if (player.arms.type == Arms.WENDIGO)
+                {
+                    outputText("Your maddening hunger gives you strength allowing you to attack two more times, your strike delivering cursed wounds.");
+                    ExtraNaturalWeaponAttack(1, "WendigoClaw");
+                    ExtraNaturalWeaponAttack(1, "WendigoClaw");
                     outputText("\n");
                 }
             }
@@ -4681,6 +4692,10 @@ public class Combat extends BaseContent {
             if (SpecialEffect == "KamaitachiScythe"){
                 if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,0,0,0,0);
                 else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*2);
+            }
+            if (SpecialEffect == "WendigoClaw"){
+                monster.addCurse("tou.mult",0.05);
+                monster.addCurse("str.mult",0.05);
             }
             // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
             if (monster is Doppleganger) {
