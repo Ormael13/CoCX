@@ -1694,6 +1694,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.TitanicStrength);
 				needNext = true;
 			}
+			//Enigma
+			if (player.sphinxScore() >= 14 && player.findPerk(PerkLib.Enigma) < 0) {
+				outputText("\nBeing a sphinx has granted you insight on many things including various secret to martial combat, guess this is what they say about using your smarts before your brawn.\n\n<b>(Gained Enigma perk!)</b>\n");
+				player.createPerk(PerkLib.Enigma, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.sphinxScore() < 14 && player.findPerk(PerkLib.Enigma) >= 0) {
+				outputText("\nAs you no longuer possess the insight of a sphinx you no longuer have the ability to fully use your smarts to improve your martial prowess.\n\n<b>(Lost the Enigma perk!)</b>\n");
+				player.removePerk(PerkLib.Enigma);
+				needNext = true;
+			}
 			//Lacta bovine immubities
 			if (player.cowScore() >= 10 && player.findPerk(PerkLib.LactaBovineImmunity) < 0) {
 				outputText("\nAs you become more of a lacta bovine you become increasingly obsessed with thoughts of horsecocks and cum sloshing balls, namely minotaur balls. While you are aware you naturaly became addicted to minotaur cum you also know your nature as a lacta bovine will protect you from most of its harmful effects allowing you to sample the substance to your heart content witheout risks.");

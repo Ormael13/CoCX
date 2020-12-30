@@ -2482,6 +2482,20 @@ import flash.utils.getQualifiedClassName;
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
 				}
 			}
+			if(hasStatusEffect(StatusEffects.CouatlHurricane)) {
+				//Deal severe true damage each round
+				var store13:Number = (player.inte + player.spe) * 2;
+				createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
+				store13 = Math.round(store13);
+				if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) store13 *= statusEffectv2(StatusEffects.CouatlHurricane);
+				store13 += statusEffectv1(StatusEffects.CouatlHurricane); //Stacks on itself growing ever stronger
+				store13 += maxHP()*0.02;
+				store13 = SceneLib.combat.doDamage(store13);
+				if(plural) outputText(capitalA + short + " is violently struck by the ever intensifying windstorm. <b>(<font color=\"#800000\">" + store13 + "</font>)</b>\n\n");
+				else outputText(capitalA + short + " are violently struck by the ever intensifying windstorm. <b>(<font color=\"#800000\">" + store13 + "</font>)</b>\n\n");
+				temp = rand(4);
+				if(temp == 3) createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); outputText("<b>A random flying object caugh in the hurricane ram into your opponent, stunning it!</b>\n\n");
+			}
 			if(hasStatusEffect(StatusEffects.KamaitachiBleed)) {
 				//This wounds never heals unless by magic
 				//Deal damage if still wounded.

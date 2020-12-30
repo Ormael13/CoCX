@@ -518,9 +518,9 @@ public class AbstractEquinum extends Consumable {
 		//Fur - if has horsetail && ears and not at changelimit
 		if (!player.hasFur() && !player.isTaur() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.tailType == Tail.HORSE) {
 			if (!player.hasScales()) {
-				outputText("\n\nAn itchy feeling springs up over every inch of your [skin base].  As you scratch yourself madly, you feel fur grow out of your [skin base] until <b>you have a fine coat of ");
-				if (type == 0) outputText("[haircolor]-colored fur.</b>");
-				else outputText("[haircolor]-colored fur.</b>");
+				outputText("\n\nAn itchy feeling springs up over every inch of your [skin base].  As you scratch yourself madly, you feel fur grow out of your [skin base] until <b>you have a fine coat of </b>");
+				if (type == 0) outputText("<b>[haircolor]-colored fur.</b>");
+				else outputText("<b>[haircolor]-colored fur.</b>");
 			} else {
 				player.skinDesc = "fur";
 				outputText("\n\nYour " + player.skinTone + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of ");

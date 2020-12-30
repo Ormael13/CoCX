@@ -5,6 +5,7 @@ import classes.ItemType;
 import classes.PregnancyStore;
 import classes.Scenes.Camp;
 import classes.Scenes.Areas.Forest.Nightmare;
+import classes.StatusEffects.HeatEffect;
 import classes.TimeAwareInterface;
 import classes.PerkLib;
 import classes.BodyParts.Horns;
@@ -241,8 +242,16 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				"<i>“Eep!!! Mom, I’m scared. It feels all weird... S..something is comiiiiiiing!”</i>\n\n" +
 				""+_name+" whines as she finally orgasms, her sweet cum flooding your throat. It tastes like cake icing, making it an exercise on willpower to keep from desperately trying to get more. " +
 				"As her erection finally dies down, you feel something change in you as the cum reaches your stomach.");
-		display("strings/incest/doHeatOrRut")
+		CelessGoIntoHeatRut();
 		doNext(camp.returnToCampUseOneHour);
+	}
+
+	public function CelessGoIntoHeatRut():void{
+		outputText("Lewd images of cocks ");
+		if (player.hasCock()) outputText("and vaginas");
+		outputText("of all sizes and shapes fill your mind, making you drool in anticipation. It seems your daughter’s condition is spreading over to you.");
+		if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(true);
+		else if (player.hasVagina()) player.goIntoHeat(true);
 	}
 
 		//region INTERFACE classes.TimeAwareInterface
@@ -485,6 +494,60 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		if (isCorrupt)spriteSelect(SpriteDb.s_celessBlack);
 		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
 		scene("strings/growUp", myLocals);
+
+		outputText("As you wake up this morning, you check the space next to you where "+_name+" usually sleeps, and find it empty.\n\n" +
+				"You almost panic for a moment, before calming down and deciding to go look for her. When you finally find her by the stream, she’s holding her forehead, visibly in pain.\n\n");
+		if (isCorrupt) {
+			outputText("\"<i>Ahhhh so good… this feels way too good!…Mom please look!</i>\"\n\n");
+			outputText("Well, looks like it wasn’t pain, not at all. You watch spellbound as a duo of parallel horns, symbols of her corruption, push out of "+_name+"’s forehead. " +
+					"She holds her horns like a pair of dicks, playing her hands along their length as if trying to masturbate them. " +
+					"Speaking of which, her 25 inch long horse cock is now fully erect and throbbing, almost as if an invisible hand was toying with it, a thick flow of precum steadily seeping out already. " +
+					"Her breasts, currently D-cups, are progressively inflating, finally stopping somewhere around E-cups. " +
+					"And as her horns finish their growth, her horsecock explodes, splattering much of the ground, covering it in white. " +
+					"Your little girl seems to have matured to adulthood.\n\n" +
+					"\"<i>Mom… I feel so energised, and hot... please... help me get that throbbing thing to calm down.</i>\"\n\n");
+		}
+		else{
+			outputText("\"<i>Oww! It hurts!...Mom… don’t look!</i>\"\n\n");
+			outputText("You see your daughter is holding a large horns on her forehead. It seems she finally reached adulthood, her breasts inflating to E-cups only confirms your suspicion. She seems to be in pain");
+			if (silly()) outputText(", kinda obvious, what with her outright telling you less than two seconds ago,");
+			outputText(" and it’s your duty as her mother to do all you can to help her. You hug her, trying your best to comfort and distract her from the pain as the horns pushes forward, eventually growing to a length just shy of her sire’s own horns." +
+					"\"<i>Mom… It’s terrible! I've grown this weird bony stump on my head, what do I do?</i>\"\n\n" +
+					"You explain to your daughter that it's normal for unicorns to have a horns on their forehead and that you love her all the same, horns or not. " +
+					"She calms down and hugs you warmly like she always does. This time, however, you can’t help but notice the large horsecock between her leg rising to full mast. " +
+					"Noticing where you’re looking, she blushes and tries to hide it from you, failing miserably due to being unable to reach it with her hands. All she achieves is looking somewhat silly. " +
+					"You tell her it’s alright , that you’re here for her and that, as you already said, you love her, horns or no horns, no matter what kind. This manages to get a chuckle out of her, easing some of her worry, but not all of it. " +
+					"You sigh, she’s your daughter, and no matter the problems she might have, she can always come to you and you will gladly go to any length to help her with it. No exceptions...\n\n" +
+					"\"<i>Mom, I’m a little scared…why did it get so big?! How do I get rid of this huge thing between my legs?</i>\"\n\n");
+		}
+		if (player.isFemaleOrHerm()) {
+			outputText("This is a… somewhat unusual situation, but as a ");
+			if (player.isFemale()) outputText("female ");
+			if (player.isHerm()) outputText("herm like her");
+			outputText(" it’s something you can understand. ");
+		}
+		else {
+			outputText("You really would prefer not to do this but sadly you have no other way to solve this problem. ");
+		}
+		outputText("You approach your girl’s massive tool and give it a few experimental strokes, making "+_name+" gasp in surprise. " +
+				"You lick the flared tip to get a taste, satisfied with it you then proceed to put the thing in your mouth proper. "+_name+" moans as her horse dong throbs in appreciation for the attention you’re giving it. " +
+				"You suck on her cock until she finally orgasms, the sweet cum flooding your throat.");
+		if (isCorrupt) {
+			outputText("Weirdly enough, you feel something change in you as the corrupted cum reaches your stomach. ");
+			CelessGoIntoHeatRut();
+			outputText(" Aroused like you are its barely if you can hold yourself from");
+			if(player.hasStatusEffect(StatusEffects.Heat)) outputText(" impaling yourself on her alluring cock.");
+			else if(player.hasStatusEffect(StatusEffects.Rut)) outputText(" moving behind her and plowing her alluring pussy with your painfully erect "+player.cockDescript()+".");
+			outputText(" how will you handle the situation?");
+		}
+		else {
+			outputText("Her cum somehow makes your mind feel clearer and sharper, purifying some of the darker thoughts plaguing you. " +
+					""+_name+"’s horsecock finally shrinks back to its sheath, but she’s still blushing like a tomato.\n\n" +
+					"\"<i>Mom, is this really ok with you?</i>\"\n\n" +
+					"You would rather it be you than some imp after her purity, stealing your daughter firsts. " +
+					"She understands you’re doing this for her sake and does her best to stop blushing, being only moderately successful. " +
+					"The morning pretty much continues as normal, aside from a lecture on sex you put some time aside to give her, mainly on what and who to avoid and why.");
+		}
 		if (isCorrupt) {
 			addButton(0, "MasturbateHer", incestScene, "masturbateHer");
 			if (player.isMaleOrHerm()) {
@@ -493,7 +556,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				addButtonDisabled(1, "Fuck Her");
 			}
 			if (player.hasKeyItem("Fake Mare") + player.hasKeyItem("Centaur Pole") >= 0) {
-				addButton(2, "Centuar Toys", incestScene, "centaurToys");
+				addButton(2, "Centaur Toys", incestScene, "centaurToys");
 			} else {
 				addButtonDisabled(2, "Centaur Toys");
 			}

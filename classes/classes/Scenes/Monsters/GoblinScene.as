@@ -212,6 +212,7 @@ public class GoblinScene extends BaseContent
 		public function gobboRapeIntro():void {
 			spriteSelect(24);
 			clearOutput();
+			menu();
 			story.display("strings/defeated/intro");
 			var buttseks:Function = null;
 			var feeder:Function = null;
@@ -251,11 +252,9 @@ public class GoblinScene extends BaseContent
 				feeder = giveGoblinAMilkMustache;
 			}
 
-
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
 					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
 				story.display("strings/defeated/prompt-sex");
-				menu();
 				if (fitsFuck != null) addButton(0, "Dick Fuck", fitsFuck);
 				if (tooBig != null) addButton(1, "DickTooBig", tooBig);
 				if (corruptTooBig != null) addButton(2, "CorruptDick", corruptTooBig);

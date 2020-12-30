@@ -3666,6 +3666,10 @@ public class Combat extends BaseContent {
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
                 }
+                if (player.arms.type == Arms.WENDIGO){
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
+                }
                 else{
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier);
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier);
@@ -3688,6 +3692,13 @@ public class Combat extends BaseContent {
                     outputText("You use your extra arms to rend your opponent two more times.");
                     ExtraNaturalWeaponAttack();
                     ExtraNaturalWeaponAttack();
+                    outputText("\n");
+                }
+                if (player.arms.type == Arms.WENDIGO)
+                {
+                    outputText("Your maddening hunger gives you strength allowing you to attack two more times, your strike delivering cursed wounds.");
+                    ExtraNaturalWeaponAttack(1, "WendigoClaw");
+                    ExtraNaturalWeaponAttack(1, "WendigoClaw");
                     outputText("\n");
                 }
             }
@@ -4682,6 +4693,10 @@ public class Combat extends BaseContent {
                 if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,0,0,0,0);
                 else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*2);
             }
+            if (SpecialEffect == "WendigoClaw"){
+                monster.addCurse("tou.mult",0.05);
+                monster.addCurse("str.mult",0.05);
+            }
             // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
             if (monster is Doppleganger) {
                 if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -5256,7 +5271,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
             if (monster.hasPerk(PerkLib.FuelForTheFire)) WrathGains += Math.round((damage / 5)*BonusWrathMult);
             else WrathGains += Math.round((damage / 10) * BonusWrathMult);
-			if ((monster.hasStatusEffect(StatusEffects.IzmaBleed) || monster.hasStatusEffect(StatusEffects.SharkBiteBleed)
+			if ((monster.hasStatusEffect(StatusEffects.CouatlHurricane) || monster.hasStatusEffect(StatusEffects.IzmaBleed) || monster.hasStatusEffect(StatusEffects.SharkBiteBleed)
 			 || monster.hasStatusEffect(StatusEffects.KamaitachiBleed) || monster.hasStatusEffect(StatusEffects.GoreBleed)
 			 || monster.hasStatusEffect(StatusEffects.Hemorrhage) || monster.hasStatusEffect(StatusEffects.HemorrhageArmor)
 			 || monster.hasStatusEffect(StatusEffects.HemorrhageShield) || monster.hasStatusEffect(StatusEffects.Hemorrhage2))
@@ -7240,6 +7255,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownTailCleave);
             } else {
                 player.addStatusValue(StatusEffects.CooldownTailCleave, 1, -1);
+            }
+        }
+        //Hurricane
+        if (player.hasStatusEffect(StatusEffects.CooldownHurricane)) {
+            if (player.statusEffectv1(StatusEffects.CooldownHurricane) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownHurricane);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownHurricane, 1, -1);
             }
         }
         //Wind Scythe
