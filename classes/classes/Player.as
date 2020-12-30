@@ -8078,6 +8078,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && cancerCounter >= 8)
 				cancerCounter += 1;
 			if (isGargoyle()) cancerCounter = 0;
+			if (lowerBody != LowerBody.CRAB && lowerBody != LowerBody.CANCER) cancerCounter = 0;
 			cancerCounter = finalRacialScore(cancerCounter, Race.CANCER);
 			End("Player","racialScore");
 			return cancerCounter;
@@ -8595,6 +8596,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && scyllaCounter >= 8)
 				scyllaCounter += 1;
 			if (isGargoyle()) scyllaCounter = 0;
+			if (!isScylla() && !isKraken()) scyllaCounter = 0;
 			scyllaCounter = finalRacialScore(scyllaCounter, Race.SCYLLA);
 			End("Player","racialScore");
 			return scyllaCounter;
@@ -12750,7 +12752,7 @@ use namespace CoC;
 						if (hasStatusEffect(StatusEffects.Overheat) && inHeat){
 							if (statusEffectv3(StatusEffects.Overheat) != 1){
 								addStatusValue(StatusEffects.Overheat, 3, 1);
-							}/
+							}
 						}
 						if (hasPerk(PerkLib.ManticoreCumAddict))
 						{
