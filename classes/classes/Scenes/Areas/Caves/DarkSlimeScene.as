@@ -60,8 +60,8 @@ public function beatingDarkSlime():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
 	outputText("You smirk as the creature falls to the ground, flattened in every possible way.\n\n");
-	outputText("\"<i>L..look I did not mean to try and eat you… I mean yes I did but it’s just the instincts I need fluids and…</i>\"\n\n");
-	outputText("The slime now clearly defeated you consider your options. You could rape her but then realise it might as well be EXACTLY what she wants. Heck there's no telling if she won’t turn the table on you. What do you do with her?");
+	outputText("\"<i>L..look, I didn't mean to try and eat you… I mean yes I did but it’s just my instincts, I need fluids and…</i>\"\n\n");
+	outputText("Now that the slime is clearly defeated, you consider your options. You could rape her but then realise it might as well be EXACTLY what she wants. Heck there's no telling if she won’t turn the table on you. What do you do with her?");
 	menu();
 	addButton(1, "Scram", beatingDarkSlimeScram);
 	addButton(2, "Use her", beatingDarkSlimeUseHer);

@@ -50,7 +50,7 @@ package classes.Scenes.Areas.GlacialRift
 			var damage:Number = (eBaseIntelligenceDamage() + eBaseWisdomDamage()) * 2;
 			damage = Math.round(damage);
 			if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-			outputText("At the palm of their hands form ice spikes that they then shots toward you! ");
+			outputText("At the palm of their hands form ice spikes that they then shoot towards you! ");
 			damage = player.takeIceDamage(damage, true);
 			damage = player.takeIceDamage(damage, true);
 			damage = player.takeIceDamage(damage, true);

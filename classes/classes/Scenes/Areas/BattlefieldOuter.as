@@ -116,7 +116,7 @@ use namespace CoC;
 					break;
 				default:
 					clearOutput();
-					outputText("You spend one hour exploring this deserted battlefield but you don't manage to find anything interesting. Yet this trip made you become a little bit more wise.");
+					outputText("You spend an hour exploring this deserted battlefield but you don't manage to find anything interesting, yet this trip had made you a little wiser.");
 					dynStats("wis", .5);
 					doNext(camp.returnToCampUseOneHour);
 			}
@@ -134,14 +134,14 @@ use namespace CoC;
 				inventory.takeItem(item, playerMenu);
 			}
 			else {
-				outputText("Sadly, there's no way you could bring this back to camp by yourself witheout dismantling it. It's far too clunky, and without care, you could easily cause irreparable damage. You leave it be for the time being, perhaps there'll be an opportunity in the future.");
+				outputText("Sadly, there's no way you could bring this back to camp by yourself without dismantling it. It's far too clunky, and without care, you could easily cause irreparable damage. You leave it be for the time being, perhaps there'll be an opportunity in the future.");
 				doNext(playerMenu);
 			}
 		}
 		
 		public function partsofTwinGrakaturd():void {
 			clearOutput();
-			outputText("As you explore the (outer) battlefield, you run into what appears to be the half buried remains of an old contraption. This might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("As you explore the (outer) battlefield, you run into what appears to be the half buried remains of an old contraption. This might just be what that gun vendor was talking about! You proceed to dig up the items realizing this to indeed be the remains of a broken firearm.\n\n");
 			outputText("You carefully put the pieces of the Twin Grakaturd in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 1, 1);
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
