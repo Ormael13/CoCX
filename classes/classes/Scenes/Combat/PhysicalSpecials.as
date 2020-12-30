@@ -3282,6 +3282,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//spe bonuses
 		damage += player.spe;
 		damage += scalingBonusSpeed();
+		if (player.hasPerk(PerkLib.HeartOfTheStorm)) damage *= 1.5;
+		if (player.hasPerk(PerkLib.HeartOfTheStormEvolved)) damage *= 1.5;
+		if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)) damage *= 1.5;
 		//other bonuses
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		//Determine if critical hit!
