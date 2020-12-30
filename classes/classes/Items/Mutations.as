@@ -16918,7 +16918,7 @@ public final class Mutations extends MutationsHelper {
                         "The more you think about it, the more you lose your ability to display your emotions, your voice’s tone starts becoming somewhat empty. " +
                         "Well what your face won't show, your body will.");
                 dynStats("spe", -5);
-                if (player.spe < 30 && player.faceType == Face.HUMAN && player.faceType != Face.KUDERE) {
+                if (player.faceType == Face.HUMAN && player.faceType != Face.KUDERE) {
                     outputText("\n\nHey, why do you even bother with those expressions? " +
                             "Your flat tone and emotionless face is the perfect armor against all the lust mongers out there. Let them guess whether you are aroused or not. " +
                             "Only your bodily movement can betray your hidden desires to mate or your anger now. " +
@@ -17168,4 +17168,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}
