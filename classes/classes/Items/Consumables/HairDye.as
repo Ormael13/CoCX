@@ -45,14 +45,14 @@ public class HairDye extends Consumable
 				outputText("\n\nYou have no fur.");
 				EngineCore.addButtonDisabled(1, "Fur", "You have no fur!");
 			}
-			if (game.player.hasCoatOfType(Skin.SCALES, Skin.DRAGON_SCALES)) {
-				outputText("\n\nYou have [skin coat].");
-				if (game.player.coatColor != _color) EngineCore.addButton(2, "Scales", dyeScales);
-				else EngineCore.addButtonDisabled(2, "Scale", "Your already have " + _color + " scales!");
-			} else {
-				outputText("\n\nYou have no scales.");
-				EngineCore.addButtonDisabled(2, "Scale", "You have no scales!");
-			}
+			//if (game.player.hasCoatOfType(Skin.SCALES, Skin.DRAGON_SCALES)) {
+			//	outputText("\n\nYou have [skin coat].");
+			//	if (game.player.coatColor != _color) EngineCore.addButton(2, "Scales", dyeScales);
+			//	else EngineCore.addButtonDisabled(2, "Scale", "Your already have " + _color + " scales!");
+			//} else {
+			//	outputText("\n\nYou have no scales.");
+			//	EngineCore.addButtonDisabled(2, "Scale", "You have no scales!");
+			//}
 			
 			EngineCore.addButton(4, "Nevermind", dyeCancel);
 			return true;
@@ -92,18 +92,18 @@ public class HairDye extends Consumable
 			SceneLib.inventory.itemGoNext();
 		}
 
-		private function dyeScales():void {
-			clearOutput();
-			outputText("You rub the dye into your scales, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
-			game.player.skin.coat.color = _color;
-			outputText("You now have [skin coat].");
-			if (game.player.lust > 50) {
-				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
-				game.player.dynStats("lus", -15);
-			}
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
-			SceneLib.inventory.itemGoNext();
-		}
+		//private function dyeScales():void {
+		//	clearOutput();
+		//	outputText("You rub the dye into your scales, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
+		//	game.player.skin.coat.color = _color;
+		//	outputText("You now have [skin coat].");
+		//	if (game.player.lust > 50) {
+		//		outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
+		//		game.player.dynStats("lus", -15);
+		//	}
+		//	CoC.instance.mainViewManager.updateCharviewIfNeeded();
+		//	SceneLib.inventory.itemGoNext();
+		//}
 		
 		private function dyeCancel():void {
 			clearOutput();
