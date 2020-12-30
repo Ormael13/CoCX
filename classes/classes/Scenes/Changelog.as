@@ -454,7 +454,7 @@ package classes.Scenes
 			outputText("-New items: Sphinx Regalia availlable from Sanurah, Walpurgis Izalia Robe availlable in Kaiba shop, Kraken black dress availlable at Pinchou\n");
 			outputText("-Dark ritual was added to the Warlock prestige class perk tree.\n");
 			outputText("-Warlock now require less aggravating prerequisite.\n");
-			outputText("-Warlock no longuer spoils.\n");
+			outputText("-Warlock no longer spoils.\n");
 			outputText("-New sprites were added for: Centaur armor, All scarves, All Bikini, All Qipao, All Kimono, Goblin technomancer outfit, Full plate armors, Basic stat necklaces, Naga head accessory, Kasha tail, Centipede full body, Walpurgis Izalia Robe, Kraken Black Dress, Hinezumi stance, New cock Cave wyrm, New pussy Cave wyrm\n");
 			outputText("-Fixed Appearance screen declaring you as your lowest score race. You will now always be declared as by your highest valid score.\n");
 			outputText("-All changes for 0.8n9 was due to hard work of our glorious lady Liadri. With a bit of Lia Twist.\n");
@@ -551,7 +551,7 @@ package classes.Scenes
 			outputText("-Several new sex scenes gives sex EXP\n");
 			outputText("-Gremlin race was added to the game\n");
 			outputText("-JIANGSHI HP NOW SCALES OF LIBIDO\n");
-			outputText("-Manticore and displacer feeding euphoria now stacks up to 50% but only at the rate of 5 per stacks furthermore they last longuer\n");
+			outputText("-Manticore and displacer feeding euphoria now stacks up to 50% but only at the rate of 5 per stacks furthermore they last longer\n");
 			outputText("-Alchemical, Mutagenic and Knowledge bonus added to the game. Read book drink potions and use transformative to stack them each up to 20%\n");
 			outputText("-You can now escape from Alraune using the torch and alraune has now customised text when trying to escape witheout it\n");
 			outputText("-Thunderbird can now use Lust Storm\n");
@@ -1822,7 +1822,7 @@ package classes.Scenes
 			outputText("-Gargoyle PC have a bit diff Bad End for loosing any fight in Sand Witch, Helia or D3 dungeons (if any of you fond of seeing all new bad ends for PC).\n");
 			outputText("-Quest reward for finishing Hidden Cave is now split in two so game will allow getting reward that was before for WHOLE dungeon by only completing first part. IF PC manage find way to unlock hidden part will be given 1 perk point and 5 stat points (so completing whole Hidden Cave now would give 2 bigger reward than before).\n");
 			outputText("-In Journey to the East Inn in He'Xin'Dao PC can now talk with new NPC - Yang (panda) that giving to player option to join Adventure Guild for 5 sprit stones. It's guild for getting some new quests/repeatable quests.\n");
-			outputText("-After joing Adventure Guild PC can pick one of three quests. First two are accesable right away and consist of finding and killing enought amount of imps/raging tentacle beasts to bring back to Yang enough of proof (imp sculls or severed tentacles) for reward. First time finished quest will give respectively perk Sense Corruption/Wrath, next time completing will give 1 perk point ");
+			outputText("-After joing Adventure Guild PC can pick one of three quests. First two are accesable right away and consist of finding and killing enough amount of imps/raging tentacle beasts to bring back to Yang enough of proof (imp sculls or severed tentacles) for reward. First time finished quest will give respectively perk Sense Corruption/Wrath, next time completing will give 1 perk point ");
 			outputText("and afterward each completetion of those quests will give some spirit stones.\n");
 			outputText("-Third quest req. to finish first two ones at least once and getting promotion to higher rank in Adventure Guild (and spending small fee for promotion and etc. *cough* 10 SS *cough*). This one quest req. killing demons and bringing back to Yang their skulls. First reward is Demon Slayer perk, second is 1 perk point and afterward few spirit stones. All three quests can be done only once per day.\n");
 			outputText("-Yang have also Talk options beside giving quests/checing their completetion or well getting PC promoted or answering the most important question - what about sex? ^^\n");
