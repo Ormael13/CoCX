@@ -50,7 +50,7 @@ public function accessMetamorphMenu():void {
 	}*/
 	addButton(10, "Page 1", accessPage1MetamorphMenu).hint("Hair, Face, Tongue, Eyes, Ears, Horns");
 	addButton(11, "Page 2", accessPage2MetamorphMenu).hint("Arms, Wings, Legs");
-	addButton(12, "Page 3", accessPage3MetamorphMenu).hint("Skin, Skin Patterns/Tattoes, Rear Body, Antennae, Gills, Tail");
+	addButton(12, "Page 3", accessPage3MetamorphMenu).hint("Skin, Skin Patterns/Tattoos, Rear Body, Antennae, Gills, Tail");
 	//addButton(13, "Page 4", accessPage4MetamorphMenu);
 	if (player.hasPerk(PerkLib.JobSoulCultivator)) addButton(14, "Back", SceneLib.soulforce.accessSoulforceMenu);
 	else addButton(14, "Back", playerMenu);
