@@ -914,6 +914,7 @@
         <cell rect="561,110,49,29" name="overskin/Bpyeti" dx="79" dy="68"/>
         <cell rect="561,140,49,29" name="overskin/Byeti" dx="79" dy="68"/>
         <cell rect="561,170,49,29" name="overskin/Blyeti" dx="79" dy="68"/>
+		<cell rect="61,80,49,29" name="overskin/BfcaveWyrm" dx="79" dy="68"/>
         <cell rect="611,110,49,29" name="overskin/BpcaveWyrm" dx="79" dy="68"/>
         <cell rect="611,140,49,29" name="overskin/BcaveWyrm" dx="79" dy="68"/>
         <cell rect="611,170,49,29" name="overskin/BlcaveWyrm" dx="79" dy="68"/>
@@ -1968,7 +1969,7 @@
 			<if test="CaveWyrmNipples">
             <switch>
                 <case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-                    <show part="overskin/BpcaveWyrm"/>
+                    <show part="overskin/BfcaveWyrm"/>
                 </case>
                 <case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
                     <show part="overskin/BpcaveWyrm"/>

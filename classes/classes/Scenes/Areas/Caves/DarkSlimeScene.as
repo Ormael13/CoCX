@@ -70,7 +70,7 @@ public function beatingDarkSlime():void {
 
 public function LetzRape2():void {
 	LetzRape(true);
-	doNext(camp.returnToCampUseOneHour);
+	cleanupAfterCombat();
 }
 public function LetzRape(letzRape:Boolean = false):void {
 	clearOutput();
@@ -93,7 +93,7 @@ public function LetzRape(letzRape:Boolean = false):void {
 		}
 		outputText("Some of her drool falls over your chest as the slime slowly covers you. Eventually, you are left floating inside her body as she forces you to sit, a slimy hand holding you up. You aren’t even granted the dignity of undressing yourself as the slime forcefully makes your gear float off with her oozing masses. ");
 		if (player.hasVagina()) outputText("You barely register your nakedness as your pussy is forced open, your eyes going wide as the slime fills you with a solid dick shaped goo mass. At first you try to close your pussy to keep it out, but the more you tighten, the deeper it goes… forcefully fucking you through the small hole no other cock but hers could enter! Your struggle is short lived, your lips opening wide again as the goo methodically fucks you up to the cervix. ");
-		if (player.hasCock()) outputText("The slime mass moves to your cock "+(player.gender == 3 ? "as well":"")+"forcefully entering your urethra and violating you from the inside, filling your balls and forcefully drinking the cum out of them. The pleasure of your cock being violated in this way is almost too much to bear, your body is spasming from the forced consecutive ejaculations.");
+		if (player.hasCock()) outputText("The slime mass moves to your cock "+(player.gender == 3 ? "as well ":"")+"forcefully entering your urethra and violating you from the inside, filling your balls and forcefully drinking the cum out of them. The pleasure of your cock being violated in this way is almost too much to bear, your body is spasming from the forced consecutive ejaculations.");
 		outputText("You want to scream, but the slime is not finished yet as she proceeds to take your anus just the same as your canal"+(player.gender == 3 ? "s":"")+". The wild "+(player.gender == 3 ? "s":"")+"");
 		if(player.gender == 3) outputText("double ");
 		else outputText("triple ");

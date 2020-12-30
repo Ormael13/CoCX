@@ -142,14 +142,15 @@ package classes.Scenes.Areas.Forest
 			this.imageName = "nightmare";
 			this.long = "This creature is anathema to everything pure and good. The very avatar of depravity, the nightmare looks at you with a lewd and all the more evil expression. She has a pair of F cup breasts and a horsecock barely smaller than that of an adult minotaur capable of defiling anything it fills. Her body screams temptation better than that of any succubus.";
 			// this.plural = false;
+			this.femininity = 95;
+			this.createCock(rand(13)+ 24,2 + rand(3),CockTypesEnum.HORSE);
 			this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 48, 0, 0, 0);
-			this.createCock(rand(13)+ 24,2 + rand(3),CockTypesEnum.HORSE);
+			createBreastRow(Appearance.breastCupInverse("F"));
 			this.balls = 2;
 			this.ballSize = 2 + rand(13);
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = this.ballSize * 10;
-			createBreastRow(Appearance.breastCupInverse("F"));
 			this.ass.analLooseness = AssClass.LOOSENESS_LOOSE;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 4*12;

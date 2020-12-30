@@ -2757,16 +2757,7 @@ public class PlayerAppearance extends BaseContent {
 		//CHIMERA
 		outputText("\nCHIMERA: " + player.chimeraScore());
 		//Couatl
-		if (player.couatlScore() >= 11) {
-			outputText("\n<font color=\"#0000a0\">Couatl: " + player.couatlScore() + " (+");
-			if (player.isNaga()) outputText("55");
-			else outputText("40");
-			outputText("% to Str racial multi, +25% to Tou racial multi, +");
-			if (player.isNaga()) outputText("115");
-			else outputText("100");
-			outputText("% to Spe racial multi)</font>");//, +50 max HP
-		}
-		else if (player.couatlScore() >= 1) outputText("\n<font color=\"#008000\">Couatl: " + player.couatlScore() + "</font>");
+		if (player.couatlScore() >= 19) outputText("\n<font color=\"#0000a0\">Greater Couatl: " + player.couatlScore() + " (+"+(player.isNaga() ? "55":"40")+"% to Str racial multi, +25% to Tou racial multi, +"+(player.isNaga() ? "115":"100")+"% to Spe racial multi)</font>");//, +50 max HP
 		if (player.couatlScore() >= 11) outputText("\n<font color=\"#0000a0\">Couatl: " + player.couatlScore() + " (+"+(player.isNaga() ? "55":"40")+"% to Str racial multi, +25% to Tou racial multi, +"+(player.isNaga() ? "115":"100")+"% to Spe racial multi)</font>");//, +50 max HP
 		else if (player.couatlScore() >= 1) outputText("\n<font color=\"#008000\">Couatl: " + player.couatlScore() + "</font>");
 		else if (player.couatlScore() < 1) outputText("\n<font color=\"#ff0000\">Couatl: 0</font>");
@@ -2901,6 +2892,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.gooScore() >= 1) outputText("\n<font color=\"#008000\">Half Slime: " + player.gooScore() + "</font>");
 		else if (player.gooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Slime: 0</font>");
 		//Gorgon
+		if (player.gorgonScore() >= 17) outputText("\n<font color=\"#0000a0\">Greater Gorgon: " + player.gorgonScore() + " (+"+(player.isNaga() ? "65":"50")+"% to Str racial multi, +45% to Tou racial multi, +"+(player.isNaga() ? "85":"70")+"% to Spe racial multi, +50 max HP)</font>");
 		if (player.gorgonScore() >= 11) outputText("\n<font color=\"#0000a0\">Gorgon: " + player.gorgonScore() + " (+"+(player.isNaga() ? "65":"50")+"% to Str racial multi, +45% to Tou racial multi, +"+(player.isNaga() ? "85":"70")+"% to Spe racial multi, +50 max HP)</font>");
 		else if (player.gorgonScore() >= 1) outputText("\n<font color=\"#008000\">Gorgon: " + player.gorgonScore() + "</font>");
 		else if (player.gorgonScore() < 1) outputText("\n<font color=\"#ff0000\">Gorgon: 0</font>");
@@ -2967,9 +2959,10 @@ public class PlayerAppearance extends BaseContent {
 		if (player.internalChimeraScore() >= 1) outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: (" + player.internalChimeraRating() + ") " + player.internalChimeraScore() + " (+" + (5 * player.internalChimeraScore()) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib and +" + (5 * player.internalChimeraScore()) + " to Sens)</font>");
 		else if (player.internalChimeraScore() < 1) outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0</font>");
 		//Jabberwocky
-		if (player.jabberwockyScore() >= 20) outputText("\n<font color=\"#0000a0\">Greater Jabberwocky: " + player.jabberwockyScore() + " (+95% to Str racial multi, +95% to Tou racial multi, +100% to Spe racial multi, +40% to Int racial multi, -50% to Wis racial multi, +20% to Lib racial multi)</font>");
-		else if (player.jabberwockyScore() >= 10) outputText("\n<font color=\"#0000a0\">Jabberwocky: " + player.jabberwockyScore() + " (+50% to Str racial multi, +40% to Tou racial multi, +50% to Spe racial multi, +20% to Int racial multi, -20% to Wis racial multi, +10% to Lib racial multi)</font>");
-		else if (player.jabberwockyScore() >= 1) outputText("\n<font color=\"#008000\">Jabberwocky: " + player.jabberwockyScore() + "</font>");
+		if (player.jabberwockyScore() >= 25) outputText("\n<font color=\"#0000a0\">Greater Jabberwocky: " + player.jabberwockyScore() + " (+125% to Str racial multi, +95% to Tou racial multi, +145% to Spe racial multi, +40% to Int racial multi, -50% to Wis racial multi, +20% to Lib racial multi)</font>");
+		else if (player.jabberwockyScore() >= 20) outputText("\n<font color=\"#0000a0\">Jabberwocky: " + player.jabberwockyScore() + " (+95% to Str racial multi, +95% to Tou racial multi, +100% to Spe racial multi, +40% to Int racial multi, -50% to Wis racial multi, +20% to Lib racial multi)</font>");
+		else if (player.jabberwockyScore() >= 10) outputText("\n<font color=\"#0000a0\">Lesser Jabberwocky: " + player.jabberwockyScore() + " (+50% to Str racial multi, +40% to Tou racial multi, +50% to Spe racial multi, +20% to Int racial multi, -20% to Wis racial multi, +10% to Lib racial multi)</font>");
+		else if (player.jabberwockyScore() >= 1) outputText("\n<font color=\"#008000\">Lesser Jabberwocky: " + player.jabberwockyScore() + "</font>");
 		else if (player.jabberwockyScore() < 1) outputText("\n<font color=\"#ff0000\">Jabberwocky: 0</font>");
 		//Jiangshi
 		if (player.jiangshiScore() >= 20) outputText("\n<font color=\"#0000a0\">Jiangshi: " + player.jiangshiScore() + " (+150% to Str racial multi, -90 min Spe, -90 min Int, +130% to Wis racial multi, +200% to Lib racial multi)</font>");
@@ -3209,6 +3202,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.sirenScore() >= 1) outputText("\n<font color=\"#008000\">Siren: " + player.sirenScore() + "</font>");
 		else if (player.sirenScore() < 1) outputText("\n<font color=\"#ff0000\">Siren: 0</font>");
 		//Sphinx
+		if (player.sphinxScore() >= 23) outputText("\n<font color=\"#0000a0\">Greater Sphinx: " + player.sphinxScore() + " (+100% to Str racial multi, -20% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "60":"70")+"% to Spe racial multi, +130% to Int racial multi, +75% to Wis racial multi)</font>");
 		if (player.sphinxScore() >= 14) outputText("\n<font color=\"#0000a0\">Sphinx: " + player.sphinxScore() + " (+50% to Str racial multi, -20% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "40":"50")+"% to Spe racial multi, +100% to Int racial multi, +40% to Wis racial multi)</font>");
 		else if (player.sphinxScore() >= 1) outputText("\n<font color=\"#008000\">Sphinx: " + player.sphinxScore() + "</font>");
 		else if (player.sphinxScore() < 1) outputText("\n<font color=\"#ff0000\">Sphinx: 0</font>");
@@ -3273,7 +3267,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.vampireScore() >= 1) outputText("\n<font color=\"#008000\">Dhampir: " + player.vampireScore() + "</font>");
 		else if (player.vampireScore() < 1) outputText("\n<font color=\"#ff0000\">Dhampir: 0</font>");
 		//Vouivre
-		if (player.vouivreScore() >= 11) outputText("\n<font color=\"#0000a0\">Vouivre: " + player.vouivreScore() + " (+"+(player.isNaga() ? "25":"10")+"% to Str racial multi, -10% to Tou racial multi, +"+(player.isNaga() ? "50":"35")+"% to Spe racial multi, +10% to Int racial multi, -20% to Wis racial multi)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
+		if (player.vouivreScore() >= 22) outputText("\n<font color=\"#0000a0\">Greater Vouivre: " + player.vouivreScore() + " (+"+(player.isNaga() ? "25":"10")+"% to Str racial multi, -10% to Tou racial multi, +"+(player.isNaga() ? "50":"35")+"% to Spe racial multi, +10% to Int racial multi, -20% to Wis racial multi)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
+		else if (player.vouivreScore() >= 16) outputText("\n<font color=\"#0000a0\">Vouivre: " + player.vouivreScore() + " (+"+(player.isNaga() ? "25":"10")+"% to Str racial multi, -10% to Tou racial multi, +"+(player.isNaga() ? "50":"35")+"% to Spe racial multi, +10% to Int racial multi, -20% to Wis racial multi)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
+		else if (player.vouivreScore() >= 11) outputText("\n<font color=\"#0000a0\">Lesser Vouivre: " + player.vouivreScore() + " (+"+(player.isNaga() ? "25":"10")+"% to Str racial multi, -10% to Tou racial multi, +"+(player.isNaga() ? "50":"35")+"% to Spe racial multi, +10% to Int racial multi, -20% to Wis racial multi)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
 		else if (player.vouivreScore() >= 1) outputText("\n<font color=\"#008000\">Vouivre: " + player.vouivreScore() + "</font>");
 		else if (player.vouivreScore() < 1) outputText("\n<font color=\"#ff0000\">Vouivre: 0</font>");
 		//Yeti
