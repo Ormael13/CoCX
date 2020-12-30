@@ -3166,13 +3166,17 @@ use namespace CoC;
 			}
 			if (TopRace == "jabberwocky") {
 				if (TopScore >= 10) {
-					if (TopScore >= 20) {
+					if (TopScore >= 25) {
 						if (isTaur()) race = "greater jabberwocky-taur";
 						else race = "greater jabberwocky";
 					}
-					else {
+					else if (TopScore >= 20) {
 						if (isTaur()) race = "jabberwocky-taur";
 						else race = "jabberwocky";
+					}
+					else {
+						if (isTaur()) race = "lesser jabberwocky-taur";
+						else race = "lesser jabberwocky";
 					}
 				}
 			}
@@ -5854,23 +5858,37 @@ use namespace CoC;
 		//		dragonCounter++;
 			if (jabberwockyCounter >= 5 && (hasPerk(PerkLib.DragonFireBreath) || hasPerk(PerkLib.DragonIceBreath) || hasPerk(PerkLib.DragonLightningBreath) || hasPerk(PerkLib.DragonDarknessBreath)))
 				jabberwockyCounter++;
-			if (findPerk(PerkLib.DrakeLungs) >= 0)
+			if (hasPerk(PerkLib.DraconicBones))
 				jabberwockyCounter++;
-			if (findPerk(PerkLib.DrakeLungsEvolved) >= 0)
+			if (hasPerk(PerkLib.DraconicBonesEvolved))
 				jabberwockyCounter++;
-			if (findPerk(PerkLib.DrakeLungsFinalForm) >= 0)
+			if (hasPerk(PerkLib.DraconicBonesFinalForm))
 				jabberwockyCounter++;
-			if (findPerk(PerkLib.DrakeLungs) >= 0 && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
+			if (hasPerk(PerkLib.DraconicHeart))
 				jabberwockyCounter++;
-			if (findPerk(PerkLib.DrakeLungsEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
+			if (hasPerk(PerkLib.DraconicHeartEvolved))
 				jabberwockyCounter++;
-			if (findPerk(PerkLib.DrakeLungsFinalForm) >= 0 && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
+			if (hasPerk(PerkLib.DraconicHeartFinalForm))
 				jabberwockyCounter++;
+			if (hasPerk(PerkLib.DrakeLungs))
+				jabberwockyCounter++;
+			if (hasPerk(PerkLib.DrakeLungsEvolved))
+				jabberwockyCounter++;
+			if (hasPerk(PerkLib.DrakeLungsFinalForm))
+				jabberwockyCounter++;
+			if ((hasPerk(PerkLib.DraconicBones) || hasPerk(PerkLib.DraconicHeart) || hasPerk(PerkLib.DrakeLungs)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+				jabberwockyCounter++;
+			if ((hasPerk(PerkLib.DraconicBonesEvolved) || hasPerk(PerkLib.DraconicHeartEvolved) || hasPerk(PerkLib.DrakeLungsEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+				jabberwockyCounter++;
+			if ((hasPerk(PerkLib.DraconicBonesFinalForm) || hasPerk(PerkLib.DraconicHeartFinalForm) || hasPerk(PerkLib.DrakeLungsFinalForm)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+				jabberwockyCounter++;
+			if (hasPerk(PerkLib.DragonsDescendant) || hasPerk(PerkLib.BloodlineDragon))
+				jabberwockyCounter += 2;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && jabberwockyCounter >= 4)
 				jabberwockyCounter++;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && jabberwockyCounter >= 8)
 				jabberwockyCounter += 1;
-			if (faceType != Face.JABBERWOCKY || faceType != Face.BUCKTOOTH || wings.type != Wings.FEY_DRAGON_WINGS || lowerBody == LowerBody.FROSTWYRM) jabberwockyCounter = 0;
+			if ((faceType != Face.JABBERWOCKY && faceType != Face.BUCKTOOTH) || wings.type != Wings.FEY_DRAGON_WINGS || lowerBody == LowerBody.FROSTWYRM) jabberwockyCounter = 0;
 			if (isGargoyle()) jabberwockyCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				jabberwockyCounter += 50;
@@ -10671,6 +10689,14 @@ use namespace CoC;
 				}
 			}
 			if (jabberwockyScore() >= 10) {
+				if (jabberwockyScore() >= 25) {
+					maxStrCap2 += 125;
+					maxTouCap2 += 95;
+					maxSpeCap2 += 145;
+					maxIntCap2 += 40;
+					maxWisCap2 -= 50;
+					maxLibCap2 += 20;
+				}
 				if (jabberwockyScore() >= 20) {
 					maxStrCap2 += 95;
 					maxTouCap2 += 95;
