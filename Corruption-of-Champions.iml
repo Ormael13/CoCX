@@ -54,9 +54,7 @@
         </dependencies>
         <compiler-options>
           <map>
-            <entry key="compiler.debug.swf" value="false" />
             <entry key="compiler.define" value="CONFIG::AIR&#9;true&#10;CONFIG::STANDALONE&#9;false&#10;CONFIG::debug&#9;false&#10;CONFIG::release&#9;true" />
-            <entry key="compiler.keep-generated-actionscript" value="true" />
           </map>
           <option name="resourceFilesMode" value="None" />
         </compiler-options>
@@ -64,7 +62,7 @@
         <packaging-android enabled="true" package-file-name="CoC-Mobile">
           <AirSigningOptions keystore-path="$MODULE_DIR$/coc.keystore" use-temp-certificate="false" />
         </packaging-android>
-        <packaging-ios enabled="true" package-file-name="CoC-Mobile" />
+        <packaging-ios package-file-name="CoC-Mobile" />
       </configuration>
     </configurations>
     <compiler-options />
