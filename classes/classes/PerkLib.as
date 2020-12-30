@@ -3439,6 +3439,8 @@ public class PerkLib
 				"Toughens your dermis to provide 2 points of armor and 1 point of magic resistance.");
 		public static const TitanicStrength:PerkType = mk("Titanic Strength", "Titanic Strength",
 				"Increase max Strength by a percentage equal to the size in ft of the player x4.");
+		public static const Enigma:PerkType = mk("Enigma", "Enigma",
+				"Your bottomless insight somehow traduce itself into raw power, allowing you to add half of your inteligence and wisdom as a modifier to strenght and toughness.");
 		public static const BullStrength:PerkType = mk("Bull Strength", "Bull Strength",
 				"Increase strenght by a percentage based on milk or cum production up to 50% of total value.");
 		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",
@@ -5709,7 +5711,7 @@ public class PerkLib
                 return player.mouseScore() >= 12;
             }, "Mouse race");
 			HeartOfTheStorm.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-				return player.raijuScore() >= 6 || player.thunderbirdScore() >= 10 || player.kamaitachiScore() >= 10;
+				return player.raijuScore() >= 6 || player.thunderbirdScore() >= 10 || player.kamaitachiScore() >= 10 || player.couatlScore() >= 11;
 			}, "Stormborn race");
 			HollowFangs.requireMouthMutationSlot().requirePerk(VampiricBloodsteam)
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -5890,7 +5892,7 @@ public class PerkLib
                 return player.mouseScore() >= 12;
             }, "Mouse race");
 			HeartOfTheStormEvolved.requireLevel(6).requirePerk(HeartOfTheStorm).requireCustomFunction(function (player:Player):Boolean {
-				return player.raijuScore() >= 9 || player.thunderbirdScore() >= 11 || player.kamaitachiScore() >= 11;
+				return player.raijuScore() >= 9 || player.thunderbirdScore() >= 11 || player.kamaitachiScore() >= 11 || player.couatlScore() >= 12;
 			}, "Stormborn race");
 			ManticoreMetabolismEvolved.requireLevel(6)
 				.requirePerk(ManticoreMetabolism)
@@ -6248,7 +6250,7 @@ public class PerkLib
                 return player.mouseScore() >= 12;
             }, "Mouse race");
 			HeartOfTheStormFinalForm.requireLevel(18).requirePerk(HeartOfTheStormEvolved).requireCustomFunction(function (player:Player):Boolean {
-				return player.raijuScore() >= 12 || player.thunderbirdScore() >= 12 || player.kamaitachiScore() >= 12;
+				return player.raijuScore() >= 12 || player.thunderbirdScore() >= 12 || player.kamaitachiScore() >= 12 || player.couatlScore() >= 13;
 			}, "Stormborn race");
             LactaBovinaOvariesEvolved.requireLevel(18)
 				.requirePerk(LactaBovinaOvaries)

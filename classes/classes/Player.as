@@ -3094,6 +3094,9 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "sphinx") {
+				if (TopScore >= 23) {
+					race = "greater sphinx";
+				}
 				if (TopScore >= 14) {
 					race = "sphinx";
 				}
@@ -3653,7 +3656,7 @@ use namespace CoC;
 			}
 			if (TopRace == "coualt") {
 				if (TopScore >= 11) {
-					if (isTaur()) race = "couatl-taur";
+					if (TopScore >= 19) race = "greater coualt";
 					else {
 						race = "couatl";
 					}
@@ -3661,15 +3664,18 @@ use namespace CoC;
 			}
 			if (TopRace == "vouivre") {
 				if (TopScore >= 11) {
-					if (isTaur()) race = "vouivre-taur";
+					if (TopScore >= 19) race = "greater vouivre";
 					else {
-						race = "vouivre";
+						if (TopScore >= 16) race = "vouivre";
+						else {
+							race = "lesser vouivre";
+						}
 					}
 				}
 			}
 			if (TopRace == "gorgon") {
 				if (TopScore >= 11) {
-					if (isTaur()) race = "gorgon-taur";
+					if (TopScore >= 19) race = "greater gorgon";
 					else {
 						race = "gorgon";
 					}
@@ -6266,7 +6272,7 @@ use namespace CoC;
 				gorgonCounter++;
 			if (arms.type == Arms.HUMAN)
 				gorgonCounter++;
-			if (hasCoatOfType(Skin.SCALES))
+			if (hasCoatOfType(Skin.SCALES) || hasPartialCoat(Skin.SCALES))
 				gorgonCounter++;
 			if (ears.type == Ears.SNAKE)
 				gorgonCounter++;
@@ -6325,10 +6331,12 @@ use namespace CoC;
 				vouivreCounter++;
 			if (ears.type == Ears.DRAGON)
 				vouivreCounter++;
-			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG || horns.type == Horns.DRACONIC_X2)
+			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
+				vouivreCounter+= 2;
+			if (horns.type == Horns.DRACONIC_X2)
 				vouivreCounter++;
 			if (wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE)
-				vouivreCounter += 2;
+				vouivreCounter += 4;
 			if (vouivreCounter >= 11 && hasPerk(PerkLib.DragonFireBreath))
 				vouivreCounter++;
 			if (findPerk(PerkLib.DrakeLungs) >= 0)
@@ -6384,18 +6392,24 @@ use namespace CoC;
 			if (hairType == Hair.FEATHER)
 				couatlCounter++;
 			if (wings.type == Wings.FEATHERED_LARGE)
-				couatlCounter += 2;
+				couatlCounter += 4;
 			if (findPerk(PerkLib.VenomGlands) >= 0)
 				couatlCounter++;
 			if (findPerk(PerkLib.VenomGlandsEvolved) >= 0)
 				couatlCounter++;
 			if (findPerk(PerkLib.VenomGlandsFinalForm) >= 0)
 				couatlCounter++;
-			if (findPerk(PerkLib.VenomGlands) >= 0 && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
+			if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
 				couatlCounter++;
-			if (findPerk(PerkLib.VenomGlandsEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
+			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
 				couatlCounter++;
-			if (findPerk(PerkLib.VenomGlandsFinalForm) >= 0 && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
+			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
+				couatlCounter++;
+			if ((findPerk(PerkLib.VenomGlands) >= 0 || findPerk(PerkLib.HeartOfTheStorm) >= 0) && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
+				couatlCounter++;
+			if ((findPerk(PerkLib.VenomGlandsEvolved) >= 0 || findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
+				couatlCounter++;
+			if ((findPerk(PerkLib.VenomGlandsFinalForm) >= 0 || findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
 				couatlCounter++;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && couatlCounter >= 4)
 				couatlCounter += 1;
@@ -8102,7 +8116,7 @@ use namespace CoC;
 			if (faceType == Face.CAT_CANINES)
 				sphinxCounter++;
 			if (wings.type == Wings.FEATHERED_SPHINX)
-				sphinxCounter += 2;
+				sphinxCounter += 4;
 			if (catCocks() > 0)
 				sphinxCounter++;
 			if (findPerk(PerkLib.Flexibility) > 0)
@@ -10835,12 +10849,22 @@ use namespace CoC;
 				}
 			}//+10 / 10 - 20
 			if (sphinxScore() >= 14) {
-				maxStrCap2 += 50;
-				maxTouCap2 -= 20;
-				if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 50;
-				else maxSpeCap2 += 40;
-				maxIntCap2 += 100;
-				maxWisCap2 += 40;
+				if (sphinxScore() >= 23) {
+					maxStrCap2 += 80;
+					maxTouCap2 -= 20;
+					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 70;
+					else maxSpeCap2 += 60;
+					maxIntCap2 += 130;
+					maxWisCap2 += 95;
+				}
+				else {
+					maxStrCap2 += 50;
+					maxTouCap2 -= 20;
+					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 50;
+					else maxSpeCap2 += 40;
+					maxIntCap2 += 100;
+					maxWisCap2 += 40;
+				}
 			}//+50/-20/+40/+100/+40
 			if (nekomataScore() >= 10) {
 				if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 50;
@@ -11743,21 +11767,53 @@ use namespace CoC;
 				}
 			}//+30/30-40
 			if (couatlScore() >= 11) {
-				maxStrCap2 += 40;
-				maxTouCap2 += 25;
-				maxSpeCap2 += 100;
+				if (couatlScore() >= 19) {
+					maxStrCap2 += 50;
+					maxTouCap2 += 45;
+					maxSpeCap2 += 140
+					maxIntCap2 += 50
+				}
+				else {
+					maxStrCap2 += 30;
+					maxTouCap2 += 25;
+					maxSpeCap2 += 80
+					maxIntCap2 += 30
+				}
 			}//+30/30-40
 			if (vouivreScore() >= 11) {
-				maxStrCap2 += 10;
-				maxTouCap2 -= 10;
-				maxSpeCap2 += 35;
-				maxIntCap2 += 10;
-				maxWisCap2 -= 20;
-			}//+30/30-40
+				if (vouivreScore() >= 22) {
+					maxStrCap2 += 130;
+					maxTouCap2 += 95;
+					maxSpeCap2 += 100;
+					maxIntCap2 += 20;
+					maxWisCap2 -= 20;
+				}
+				else if (vouivreScore() >= 16) {
+					maxStrCap2 += 100;
+					maxTouCap2 += 75;
+					maxSpeCap2 += 70;
+					maxIntCap2 += 10;
+					maxWisCap2 -= 20;
+				}
+				else {
+					maxStrCap2 += 80;
+					maxTouCap2 += 45;
+					maxSpeCap2 += 45;
+					maxIntCap2 += 10;
+					maxWisCap2 -= 20;
+				}
+			}
 			if (gorgonScore() >= 11) {
-				maxStrCap2 += 50;
-				maxTouCap2 += 45;
-				maxSpeCap2 += 70;
+				if (gorgonScore() >= 17) {
+					maxStrCap2 += 80;
+					maxTouCap2 += 65;
+					maxSpeCap2 += 110;
+				}
+				else {
+					maxStrCap2 += 50;
+					maxTouCap2 += 45;
+					maxSpeCap2 += 70;
+				}
 			}//+30/30-40
 			if (nagaScore() >= 4)
 			{
@@ -11962,6 +12018,8 @@ use namespace CoC;
 			strtouspeintwislibsenCalculation2();
 			if (hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tallness*4))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
+			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':((0.01 * Math.round(inte/2))+(0.01 * Math.round(wis/2))),'tou.mult':((0.01 * Math.round(inte/2))+(0.01 * Math.round(wis/2)))}, 'Enigma', { text: 'Enigma' });
+			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
 			if (hasPerk(PerkLib.BullStrength)){
 				var power:Number = 0;
 				if(cowScore() >=15) power = lactationQ()*0.001;
