@@ -2757,16 +2757,6 @@ public class PlayerAppearance extends BaseContent {
 		//CHIMERA
 		outputText("\nCHIMERA: " + player.chimeraScore());
 		//Couatl
-		if (player.couatlScore() >= 11) {
-			outputText("\n<font color=\"#0000a0\">Couatl: " + player.couatlScore() + " (+");
-			if (player.isNaga()) outputText("55");
-			else outputText("40");
-			outputText("% to Str racial multi, +25% to Tou racial multi, +");
-			if (player.isNaga()) outputText("115");
-			else outputText("100");
-			outputText("% to Spe racial multi)</font>");//, +50 max HP
-		}
-		else if (player.couatlScore() >= 1) outputText("\n<font color=\"#008000\">Couatl: " + player.couatlScore() + "</font>");
 		if (player.couatlScore() >= 11) outputText("\n<font color=\"#0000a0\">Couatl: " + player.couatlScore() + " (+"+(player.isNaga() ? "55":"40")+"% to Str racial multi, +25% to Tou racial multi, +"+(player.isNaga() ? "115":"100")+"% to Spe racial multi)</font>");//, +50 max HP
 		else if (player.couatlScore() >= 1) outputText("\n<font color=\"#008000\">Couatl: " + player.couatlScore() + "</font>");
 		else if (player.couatlScore() < 1) outputText("\n<font color=\"#ff0000\">Couatl: 0</font>");
