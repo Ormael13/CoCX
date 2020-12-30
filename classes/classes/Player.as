@@ -646,10 +646,10 @@ use namespace CoC;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 30;
 			}
 			if (vehiclesName == "Giant Slayer Mech") {
-				armorDef += 10;
-				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 20;
-				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 30;
-				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 40;
+				armorDef += 20;
+				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 40;
+				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 60;
+				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 80;
 			}
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorDef += 15;
@@ -838,10 +838,10 @@ use namespace CoC;
 				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorMDef += 30;
 			}
 			if (vehiclesName == "Giant Slayer Mech") {
-				armorMDef += 10;
-				if (hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) armorMDef += 20;
-				if (hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) armorMDef += 30;
-				if (hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) armorMDef += 40;
+				armorMDef += 20;
+				if (hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) armorMDef += 40;
+				if (hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) armorMDef += 60;
+				if (hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) armorMDef += 80;
 			}
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorMDef += 15;

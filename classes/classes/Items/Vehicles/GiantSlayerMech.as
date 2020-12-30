@@ -15,7 +15,7 @@ package classes.Items.Vehicles
 		
 		public function GiantSlayerMech() 
 		{
-			super("GS Mech", "GiantSlayerMech", "Giant Slayer Mech", "a Giant Slayer Mech", 0, 0, 500, "A customisable goblin invention, this bipedal, large mech is equipped with a comfortable seat, fit for a goblin or a rather small person. Within it you feel like you could kill gods or well gigants... \n\nType: Goblin Mech \nBase value: 500","Mech");
+			super("GS Mech", "GiantSlayerMech", "Giant Slayer Mech", "a Giant Slayer Mech", 0, 0, 2000, "A customisable goblin invention, this bipedal, large mech is equipped with a comfortable seat, fit for a goblin or a rather small person. Within it you feel like you could kill gods or well gigants... \n\nType: Goblin Mech \nBase value: 500","Mech");
 		}
 		
 		override public function canUse():Boolean {

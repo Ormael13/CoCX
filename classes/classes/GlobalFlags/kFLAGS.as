@@ -1980,7 +1980,7 @@ public static const UNKNOWN_FLAG_NUMBER_01971:int                               
 public static const UNKNOWN_FLAG_NUMBER_01972:int                                   = 1972;
 public static const UNKNOWN_FLAG_NUMBER_01973:int                                   = 1973;
 public static const UNKNOWN_FLAG_NUMBER_01974:int                                   = 1974;
-public static const UNKNOWN_FLAG_NUMBER_01975:int                                   = 1975;
+public static const WRATH_GIANT_SLAYER_GOBLIN_MECH:int                              = 1975;
 public static const UNKNOWN_FLAG_NUMBER_01976:int                                   = 1976;
 public static const UNKNOWN_FLAG_NUMBER_01977:int                                   = 1977;
 public static const UNKNOWN_FLAG_NUMBER_01978:int                                   = 1978;
@@ -3006,4 +3006,4 @@ public static const LOW_STANDARDS_FOR_ALL:int                                   
 public static const HYPER_HAPPY:int                                                 = 2998;
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
 	}    
-}
+}

@@ -129,7 +129,7 @@ public class Exploration extends BaseContent
 			if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] > 0) addButton(5, "Defiled Ravine", SceneLib.defiledravine.exploreDefiledRavine).hint("Visit the defiled ravine. \n\nRecommended level: 41" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] : ""));
 			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(6, "Bog", SceneLib.bog.exploreBog).hint("Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
 			
-			if (flags[kFLAGS.DISCOVERED_TUNDRA] > 0) addButton(10, "Tundra", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the tundra. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_TUNDRA] : ""));
+			if (flags[kFLAGS.DISCOVERED_TUNDRA] > 0) addButton(10, "Tundra", SceneLib.tundra.exploreTundra).hint("Visit the tundra. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_TUNDRA] : ""));
 			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(11, "Volcanic Crag", SceneLib.volcanicCrag.exploreVolcanicCrag).hint("Visit the infernal volcanic crag. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(9, "",	//Wuxia related area - ?latająca wyspa?

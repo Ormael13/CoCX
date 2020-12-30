@@ -10,6 +10,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.Battlefield.*;
 import classes.Scenes.SceneLib;
+import classes.Items.Vehicles;
 
 use namespace CoC;
 	
@@ -45,6 +46,11 @@ use namespace CoC;
 			//Ted
 			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
 				SceneLib.tedScene.introPostHiddenCave();
+				return;
+			}
+			//Giant Slayer Mech
+			if (flags[kFLAGS.WRATH_GIANT_SLAYER_GOBLIN_MECH] == 0 && rand(10) == 0) {
+				takeWrathMech();
 				return;
 			}
 			
@@ -113,6 +119,23 @@ use namespace CoC;
 					outputText("You spend one hour exploring this deserted battlefield but you don't manage to find anything interesting. Yet this trip made you become a little bit more wise.");
 					dynStats("wis", .5);
 					doNext(camp.returnToCampUseOneHour);
+			}
+		}
+		
+		public function takeWrathMech():void {
+			clearOutput();
+			outputText("As you explore the battlefield you come up on what appears to be the wreckage of several gigantic metal armors or so at first you think, A torought inspection reveal one of them to be of mechanical origin and thanks to your goblin knowledge you quickly identify this as a defrent mech model, ");
+			outputText("this one bypedal. Its highly damaged but with some material from the scrapyard around you and a little work you could put it back into working shape! ");
+			if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
+				var item:Vehicles;
+				item = vehicles.GS_MECH;
+				outputText("You grab a waki talkie your Eldest let you borrow and call her out for backup. Soon all of your kids are there with machinery and retrieval equipment assisting in moving the big mech back to the workshop. You can't wait to get started on this project!");
+				flags[kFLAGS.WRATH_GIANT_SLAYER_GOBLIN_MECH] = 1;
+				inventory.takeItem(item, playerMenu);
+			}
+			else {
+				outputText("Sadly theres no way you could bring this back to camp all on your own witheout dismantling it thus you leave it there and vow to recover it later.");
+				doNext(playerMenu);
 			}
 		}
 		

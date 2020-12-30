@@ -1594,6 +1594,7 @@ public class Combat extends BaseContent {
 			if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
 			if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
 			if (player.vehicles == vehicles.GOBMPRI) damage *= 1.5;
+			if (player.vehicles == vehicles.GS_MECH) damage *= 1.25;
 		}
 		if (player.isInNonGoblinMech()) {
 			if (player.vehicles == vehicles.HB_MECH) {
@@ -2920,7 +2921,10 @@ public class Combat extends BaseContent {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.3;
                         if (damage < 30) damage = 30;
-                    } else {
+					} else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 1.25;
+                        if (damage < 25) damage = 25;
+					} else {
                         damage *= 1.2;
                         if (damage < 20) damage = 20;
                     }
@@ -2929,7 +2933,10 @@ public class Combat extends BaseContent {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.6;
                         if (damage < 60) damage = 60;
-                    } else {
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 1.5;
+                        if (damage < 50) damage = 50;
+					} else {
                         damage *= 1.4;
                         if (damage < 40) damage = 40;
                     }
@@ -2938,7 +2945,10 @@ public class Combat extends BaseContent {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.9;
                         if (damage < 90) damage = 90;
-                    } else {
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 1.75;
+                        if (damage < 75) damage = 75;
+					} else {
                         damage *= 1.6;
                         if (damage < 60) damage = 60;
                     }
@@ -2947,11 +2957,23 @@ public class Combat extends BaseContent {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 2.2;
                         if (damage < 120) damage = 120;
-                    } else {
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 2;
+                        if (damage < 100) damage = 100;
+					} else {
                         damage *= 1.8;
                         if (damage < 80) damage = 80;
                     }
                 }
+				if (player.hasKeyItem("Machine Gun MK4") >= 0) {
+					if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 2.25;
+                        if (damage < 125) damage = 125;
+					} else {
+                        damage *= 2;
+                        if (damage < 100) damage = 100;
+                    }
+				}
             }
             if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
                 //if ((damage == 0) ){
