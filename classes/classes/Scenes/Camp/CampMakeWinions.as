@@ -894,7 +894,40 @@ package classes.Scenes.Camp
 			addButton(0, "Ranks (1)", accessSummonElementalsMainMenu1).hint("Rank 0 to 9th Elder Rank");
 			addButton(1, "Ranks (2)", accessSummonElementalsMainMenu2).hint("5th Elder Rank to (Peak) Baron Rank");
 			addButton(2, "Ranks (3)", accessSummonElementalsMainMenu3).hint("(Low) Viscount Rank to (Peak) Viscount Rank");
+			//addButton(13, "Evocation Tome", evocationTome).hint("Description of various elementals powers.");
 			addButton(14, "Back", playerMenu);
+		}
+		private function evocationTome():void {
+			clearOutput();
+			menu();
+			outputText("About which one elemental would you like to read about?\n\n");
+			addButtonDisabled(0, "Air", "Very Soon.");
+			addButtonDisabled(1, "Earth", "Very Soon.");
+			addButtonDisabled(2, "Fire", "Very Soon.");
+			addButtonDisabled(3, "Water", "Very Soon.");
+			addButtonDisabled(4, "Ether", "Soon.");
+			addButtonDisabled(5, "Wood", "Soon.");
+			addButtonDisabled(6, "Metal", "Soon.");
+			addButtonDisabled(7, "Ice", "Soon.");
+			addButtonDisabled(8, "Lightning", "Soon.");
+			addButtonDisabled(9, "Darkness", "Soon.");
+			addButtonDisabled(10, "Poison", "Soon.");
+			addButtonDisabled(11, "Purity", "Soon.");
+			addButtonDisabled(12, "Corruption", "Soon.");
+			addButtonDisabled(13, "???", "Not so Soon.");
+			addButton(14, "Back", accessSummonElementalsMainMenu);
+		}
+		private function evocationTomeAir():void {
+			
+		}
+		private function evocationTomeEarth():void {
+			
+		}
+		private function evocationTomeFire():void {
+			
+		}
+		private function evocationTomeWater():void {
+			
 		}
 		private function accessSummonElementalsMainMenu1():void {
 			menu();
@@ -1978,5 +2011,4 @@ package classes.Scenes.Camp
 			HPChange(-(Math.round(player.HP * 0.5)), true);
 		}
 	}
-
 }

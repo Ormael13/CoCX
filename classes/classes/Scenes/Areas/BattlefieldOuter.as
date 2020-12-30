@@ -10,6 +10,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.Battlefield.*;
 import classes.Scenes.SceneLib;
+import classes.Items.Vehicles;
 
 use namespace CoC;
 	
@@ -45,6 +46,11 @@ use namespace CoC;
 			//Ted
 			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
 				SceneLib.tedScene.introPostHiddenCave();
+				return;
+			}
+			//Giant Slayer Mech
+			if (flags[kFLAGS.WRATH_GIANT_SLAYER_GOBLIN_MECH] == 0 && rand(10) == 0) {
+				takeWrathMech();
 				return;
 			}
 			
@@ -116,9 +122,26 @@ use namespace CoC;
 			}
 		}
 		
+		public function takeWrathMech():void {
+			clearOutput();
+			outputText("As you explore the battlefield, you come up on what appears to be the wreckage of several gigantic metal armors. At least it would seem so initially. Further inspection reveals that the armor is of mechanical origin. Thanks to your goblin knowledge, you quickly identify this as a a mech model, but not one you're typically used to. ");
+			outputText("A notable difference is that this suit is bipedal. It's highly damaged but with some material from the scrapyard, and a little work, you could put it back into working shape! ");
+			if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
+				var item:Vehicles;
+				item = vehicles.GS_MECH;
+				outputText("You grab a walkie-talkie and contact your Eldest to borrow, and call her out for backup. Soon all of your kids are there with machinery and retrieval equipment, assisting in moving the large mech back to the workshop. You can't wait to get started on this project!");
+				flags[kFLAGS.WRATH_GIANT_SLAYER_GOBLIN_MECH] = 1;
+				inventory.takeItem(item, playerMenu);
+			}
+			else {
+				outputText("Sadly, there's no way you could bring this back to camp by yourself witheout dismantling it. It's far too clunky, and without care, you could easily cause irreparable damage. You leave it be for the time being, perhaps there'll be an opportunity in the future.");
+				doNext(playerMenu);
+			}
+		}
+		
 		public function partsofTwinGrakaturd():void {
 			clearOutput();
-			outputText("As you explore the (outer) battlefield you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("As you explore the (outer) battlefield, you run into what appears to be the half buried remains of an old contraption. This might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
 			outputText("You carefully put the pieces of the Twin Grakaturd in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 1, 1);
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
