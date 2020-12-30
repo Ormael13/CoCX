@@ -68,7 +68,7 @@ public class HairDye extends Consumable
 			}
 			else {
 				outputText("You rub the dye into your " + Appearance.hairDescription(player) + ", then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
-				game.player.hairColor = _color;
+				game.player.hairColorOnly = _color;
 				outputText("You now have " + Appearance.hairDescription(player) + ".");
 				if (game.player.lust > 50) {
 					outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
