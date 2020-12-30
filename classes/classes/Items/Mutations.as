@@ -9562,7 +9562,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPlainSkinOnly() && !player.skin.hasScarShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou double over suddenly as a harsh, stabbing pain runs across your skin, tattoos in the shape of scars forming on various parts of your body. Considering how you look now, you might as well proudly display your <b>Orc scar tattooed skin.</b>");
             if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedScarTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Scar Tattoed Skin - Memorized!</b>\n\n");
+                outputText("\n\n<b>Genetic Memory: Scar Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedScarTattoed, 0, 0, 0, 0);
             }
             player.skin.base.pattern = Skin.PATTERN_SCAR_SHAPED_TATTOO;
@@ -9717,7 +9717,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
             if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Lighting Tattoed Skin - Memorized!</b>\n\n");
+                outputText("\n\n<b>Genetic Memory: Lighting Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
             }
             player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
@@ -9887,7 +9887,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
             if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Lighting Tattoed Skin - Memorized!</b>\n\n");
+                outputText("\n\n<b>Genetic Memory: Lighting Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
             }
             player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
@@ -11413,7 +11413,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("curved");
             outputText(" markings remain, as if etched into your skin. <b>You now have Kitsune tattooed skin.</b>");
             if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Magic Tattoed Skin - Memorized!</b>\n\n");
+                outputText("\n\n<b>Genetic Memory: Magic Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
             }
             player.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;

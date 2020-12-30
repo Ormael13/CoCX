@@ -1368,7 +1368,7 @@ package classes.Scenes
 			outputText("-New body part - arms: Orc arms. Req. Orc Legs\n");
 			outputText("-New body part - face: Orc fangs. Req. Orc Arms\n");
 			outputText("-New body part - eyes: Orc eyes. Req. Elfin Ears (those from orc/goblin/spider tf not elf tf)\n");
-			outputText("-New body part - skin pattern: scar shaped tattoes. Req. Plain(human) skin\n");
+			outputText("-New body part - skin pattern: scar shaped tattoos. Req. Plain(human) skin\n");
 			outputText("-New TF item: Orc Mead. Buyable in Journey to the East inn or at Moga Hen shop. Using this item will turn PC into orc. Half Orc/Orc bonuses at 5/11 pts in racial score (scalable): +60/130 to max Str, +15/30 to max Tou, +5/10 to max Spe, -15/30 to max Int, +10/25 to max Lib, +10/20% to max Wrath.\n");
 			outputText("-New body part - arms: Displacer arms. Req. Cat Legs\n");
 			outputText("-New body part - rear body: Displacer tentacles. Req. Displacer Arms\n");
@@ -1501,7 +1501,7 @@ package classes.Scenes
 			outputText("-New tier 12 misc lvl-up perk: Skipping Work. Req. Taking a Break perk. Effect: +20% to fatigue recovery.\n");
 			outputText("-New tier 12 misc lvl-up perk: Hammer. Req. Furnace perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
 			outputText("-New tier 12 misc lvl-up perk: Brothel Owner. Req. Escort perk. Effect: +15% tease dmg.\n");
-			outputText("-New event perk: Ferocity. Gained by using orc tf when having orc: legs, arms, fangs, eyes; scar shaped tattoes and 11+ in orc score. Effect: PC continue fighting even when HP is below 0. Will loose 1% of max HP each round and would loose fight by HP defeat when negative HP reach 15% of max HP. Doubles wrath generated when below 0 HP. Would be lost if orc score drop below 11 pts. (+2 to orc score)\n");
+			outputText("-New event perk: Ferocity. Gained by using orc tf when having orc: legs, arms, fangs, eyes; scar shaped tattoos and 11+ in orc score. Effect: PC continue fighting even when HP is below 0. Will loose 1% of max HP each round and would loose fight by HP defeat when negative HP reach 15% of max HP. Doubles wrath generated when below 0 HP. Would be lost if orc score drop below 11 pts. (+2 to orc score)\n");
 			outputText("-New event perk: Elven Sense. Gained by using elf tf when PC have both elf eyes and ears. Effect: Gain a chance to dodge attacks (+5%) and an increased chance to score critical hits (+5% to both phys and magical crit chance when having 50+ int/wis). Would be lost if PC not have elf eyes and ears. (+1 to elf score)\n");
 			outputText("-New event perk: Flawless Body. Gained by using elf tf when PC skin change to flawless human skin. Effect: Your elven body with its flawless form and skin is so alluring it reinforces your ability to tease. Would be lost if PC not have elf arms, elf legs and flawless normal (human) skin. (+10 slutty seduction, +1 to elf score)\n");
 			outputText("-History: Smith and Past Life: Smith have bonus to phys armor bonus and magic resistance bonus lowered from 10% to 5%.\n");
