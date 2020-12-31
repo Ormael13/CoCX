@@ -40,8 +40,7 @@ public final class Mutations extends MutationsHelper {
     public var emberTFchanges:EmberTF = new EmberTF();
 	
 	public function blockingBodyTransformations():Boolean {
-		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.WendigoCurse)) return true;
-		else return false;
+		return player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.WendigoCurse);
 	}
 
     public function DrunkenPowerEmpower():void {
@@ -5176,7 +5175,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Dragon Arms
         if (type == 1 && player.wings.type == Wings.DRACONIC_HUGE && player.arms.type != Arms.DRAGON && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of dragon one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  dragon, one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
             setArmType(Arms.DRAGON);
             changes++;
         }
@@ -6505,7 +6504,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.LIZARD && player.lowerBody == LowerBody.LIZARD && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of lizard one with leathery scales and short claws replacing your fingernails.  <b>You now have lizard arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  lizard, one with leathery scales and short claws replacing your fingernails.  <b>You now have lizard arms.</b>");
             setArmType(Arms.LIZARD);
             changes++;
         }
@@ -6764,7 +6763,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.SALAMANDER && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.SALAMANDER && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of salamander one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  salamander, one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
             setArmType(Arms.SALAMANDER);
             changes++;
         }
@@ -6949,7 +6948,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.CAVE_WYRM && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of cave wyrm one with leathery, black scales and short claws replacing your fingernails.  <b>You now have a cave wyrm arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  cave wyrm, one with leathery, black scales and short claws replacing your fingernails.  <b>You now have a cave wyrm arms.</b>");
             setArmType(Arms.CAVE_WYRM);
             changes++;
         }
@@ -10965,7 +10964,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.SALAMANDER && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.SALAMANDER && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of salamander one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  salamander, one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
             setArmType(Arms.SALAMANDER);
             changes++;
         }
@@ -14303,7 +14302,7 @@ public final class Mutations extends MutationsHelper {
         //changeLimit += additionalTransformationChances();
         //clear screen
         clearOutput();
-        outputText("You eat the weird kelp seed and feel suddenly like singing. Seems your talent for music are skyrocketing as you embrace the changes within you.");
+        outputText("You eat the weird kelp seed and suddenly feel like singing. It seems like your talent for music are skyrocketing as you embrace the changes within you!");
 
         if (blockingBodyTransformations()) changeLimit = 0;
         //FAILSAFE CHANGE

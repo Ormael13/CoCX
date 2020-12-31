@@ -16,7 +16,7 @@ public class HairDye extends Consumable
 			_color = color.toLowerCase();
 			var shortName:String = color + " Dye";
 			var longName:String = "a vial of " + _color + " hair dye";
-			var description:String = "This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.";
+			var description:String = "This bottle of dye will allow you to change the color of your hair.  Of course, if you don't have hair, using this would be a waste.";
 			super(id, shortName, longName, value, description);
 		}
 		
@@ -32,7 +32,7 @@ public class HairDye extends Consumable
 				if (game.player.hairColor != _color) EngineCore.addButton(0, "Hair", dyeHair);
 				else EngineCore.addButtonDisabled(0, "Hair", "Your already have " + game.player.hairColor + " hair!");
 			} else {
-				outputText("You have no hair.");
+				outputText("You don't have any hair.");
 				EngineCore.addButtonDisabled(0, "Hair", "You are bald!");
 			}
 			if (game.player.hasCoatOfType(Skin.FUR)) {
@@ -40,41 +40,41 @@ public class HairDye extends Consumable
 				if (game.player.coatColor != _color) EngineCore.addButton(1, "Fur", dyeFur);
 				else EngineCore.addButtonDisabled(1, "Fur", "Your already have " + _color + " fur!");
 			} else {
-				outputText("\n\nYou have no fur.");
-				EngineCore.addButtonDisabled(1, "Fur", "You have no fur!");
+				outputText("\n\nYou don't have any fur.");
+				EngineCore.addButtonDisabled(1, "Fur", "You don't have any fur!");
 			}
 			if (game.player.hasCoatOfType(Skin.SCALES)) {
 				outputText("\n\nYou have [skin coat].");
 				if (game.player.coatColor != _color) {
 					if (game.player.hasItem(game.useables.REAGENT, 1)) EngineCore.addButton(2, "Scales", dyeScales);
-					else EngineCore.addButtonDisabled(2, "Scales", "You not have enough reagents! (1)");
+					else EngineCore.addButtonDisabled(2, "Scales", "You do not have enough reagents! (1)");
 				}
 				else EngineCore.addButtonDisabled(2, "Scale", "Your already have " + _color + " scales!");
 			} else {
-				outputText("\n\nYou have no scales.");
-				EngineCore.addButtonDisabled(2, "Scale", "You have no scales!");
+				outputText("\n\nYou don't have any scales.");
+				EngineCore.addButtonDisabled(2, "Scale", "You don't have any scales!");
 			}
 			if (game.player.hasCoatOfType(Skin.CHITIN)) {
 				outputText("\n\nYou have [skin coat].");
 				if (game.player.coatColor != _color) {
 					if (game.player.hasItem(game.useables.REAGENT, 2)) EngineCore.addButton(3, "Chitin", dyeChitin);
-					else EngineCore.addButtonDisabled(3, "Chitin", "You not have enough reagents! (2)");
+					else EngineCore.addButtonDisabled(3, "Chitin", "You do not have enough reagents! (2)");
 				}
 				else EngineCore.addButtonDisabled(3, "Chitin", "Your already have " + _color + " chitin!");
 			} else {
-				outputText("\n\nYou have no chitin.");
-				EngineCore.addButtonDisabled(3, "Chitin", "You have no scales!");
+				outputText("\n\nYou don't have any chitin.");
+				EngineCore.addButtonDisabled(3, "Chitin", "You don't have any scales!");
 			}
 			if (game.player.hasCoatOfType(Skin.DRAGON_SCALES)) {
 				outputText("\n\nYou have [skin coat].");
 				if (game.player.coatColor != _color) {
 					if (game.player.hasItem(game.useables.REAGENT, 2)) EngineCore.addButton(7, "D.Scales", dyeDragonScales);
-					else EngineCore.addButtonDisabled(7, "D.Scales", "You not have enough reagents! (2)");
+					else EngineCore.addButtonDisabled(7, "D.Scales", "You do not have enough reagents! (2)");
 				}
 				else EngineCore.addButtonDisabled(7, "D.Scale", "Your already have " + _color + " dragon scales!");
 			} else {
-				outputText("\n\nYou have no dragon scales.");
-				EngineCore.addButtonDisabled(7, "D.Scale", "You have no scales!");
+				outputText("\n\nYou don't have any dragon scales.");
+				EngineCore.addButtonDisabled(7, "D.Scale", "You don't have any scales!");
 			}
 			EngineCore.addButton(14, "Nevermind", dyeCancel);
 			return true;
@@ -89,9 +89,9 @@ public class HairDye extends Consumable
 				outputText("You massage the dye into your " + Appearance.hairDescription(player) + " but the dye cannot penetrate the impermeable material your hair is composed of.");
 			}
 			else {
-				outputText("You rub the dye into your " + Appearance.hairDescription(player) + ", then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
+				outputText("You rub the dye into your " + Appearance.hairDescription(player) + ", then use a bucket of cool lakewater to rinse it off a few minutes later.  ");
 				game.player.hairColorOnly = _color;
-				outputText("You now have " + Appearance.hairDescription(player) + ".");
+				outputText("You now have " + Appearance.hairDescription(player) + "!");
 				if (game.player.lust > 50) {
 					outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 					game.player.dynStats("lus", -15);
@@ -102,9 +102,9 @@ public class HairDye extends Consumable
 		}
 		private function dyeFur():void {
 			clearOutput();
-			outputText("You rub the dye into your fur, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
+			outputText("You rub the dye into your fur, then use a bucket of cool lakewater to rinse it off a few minutes later.  ");
 			game.player.skin.coat.color = _color;
-			outputText("You now have [skin coat].");
+			outputText("You now have [skin coat]!");
 			if (game.player.lust > 50) {
 				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 				game.player.dynStats("lus", -15);
@@ -114,10 +114,10 @@ public class HairDye extends Consumable
 		}
 		private function dyeScales():void {
 			clearOutput();
-			outputText("You rub the dye into your scales, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
+			outputText("You rub the dye into your scales, then use a bucket of cool lakewater to rinse it off a few minutes later.  ");
 			game.player.skin.coat.color = _color;
 			player.consumeItem(game.useables.REAGENT, 1);
-			outputText("You now have [skin coat].");
+			outputText("You now have [skin coat]!");
 			if (game.player.lust > 50) {
 				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 				game.player.dynStats("lus", -15);
@@ -127,10 +127,10 @@ public class HairDye extends Consumable
 		}
 		private function dyeChitin():void {
 			clearOutput();
-			outputText("You rub the dye into your chitin, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
+			outputText("You rub the dye into your chitin, then use a bucket of cool lakewater to rinse it off a few minutes later.  ");
 			game.player.skin.coat.color = _color;
 			player.consumeItem(game.useables.REAGENT, 2);
-			outputText("You now have [skin coat].");
+			outputText("You now have [skin coat]!");
 			if (game.player.lust > 50) {
 				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 				game.player.dynStats("lus", -15);
@@ -140,10 +140,10 @@ public class HairDye extends Consumable
 		}
 		private function dyeDragonScales():void {
 			clearOutput();
-			outputText("You rub the dye into your dragon scales, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
+			outputText("You rub the dye into your dragon scales, then use a bucket of cool lakewater to rinse it off a few minutes later.  ");
 			game.player.skin.coat.color = _color;
 			player.consumeItem(game.useables.REAGENT, 2);
-			outputText("You now have [skin coat].");
+			outputText("You now have [skin coat]!");
 			if (game.player.lust > 50) {
 				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 				game.player.dynStats("lus", -15);

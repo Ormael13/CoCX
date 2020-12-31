@@ -3855,7 +3855,7 @@ public class Combat extends BaseContent {
     }
 
     public function attack2():void {
-        // ESSENTIALY DO EVERYTHING AGAIN BUT WITHEOUT THE NATURAL ATTACK SET
+        // ESSENTIALY DO EVERYTHING AGAIN BUT without THE NATURAL ATTACK SET
         flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
         //	if(!player.hasStatusEffect(StatusEffects.FirstAttack)) {
         //		clearOutput();
@@ -8693,7 +8693,7 @@ public class Combat extends BaseContent {
     public function OrcaCleanup():void {
         player.addStatusValue(StatusEffects.OrcaPlayRoundLeft, 1, -1);
         if (player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft) <= 0) {
-            outputText("\n\nUnable to prolong the game further you finaly let your opponent drops to the ground. ");
+            outputText("\n\nUnable to prolong the game further you finally let your opponent drop to the ground. ");
             var damage:Number = unarmedAttack();
             damage += player.str;
             damage += scalingBonusStrength() * 0.25;
@@ -8823,7 +8823,7 @@ public class Combat extends BaseContent {
     public function OrcaImpale():void {
         clearOutput();
         if (player.isSpearTypeWeapon() || player.isSwordTypeWeapon()) {
-            outputText("You cannot impale your foe witheout a piercing weapon.");
+            outputText("You cannot impale your foe without a piercing weapon.");
             addButton(0, "Next", combatMenu, false);
         } else {
             fatigue(20, USEFATG_PHYSICAL);
@@ -9232,7 +9232,7 @@ public class Combat extends BaseContent {
             if (player.statusEffectv1(StatusEffects.StraddleRoundLeft) <= 0) {
                 monster.removeStatusEffect(StatusEffects.Straddle);
                 player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
-                outputText("\n\nYour opponent finaly manage to struggle free of your grapple!\n\n");
+                outputText("\n\nYour opponent finally manages to struggle free of your grapple!\n\n");
             }
         }
         enemyAI();

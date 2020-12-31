@@ -446,7 +446,7 @@ package classes.Scenes
 			outputText("-Manticore now has a pussy bodypart.\n");
 			outputText("-Bicorn/Unicorn scores have been redefined.\n");
 			outputText("-New Bicorn/Unicorn ability Aura of purity and Aura of Corruption.\n");
-			outputText("-Equine pussy is back or finaly here whatever you may call it.\n");
+			outputText("-Equine pussy is back or finally here whatever you may call it.\n");
 			outputText("-Cave wyrm has been updated.\n");
 			outputText("-Cave wyrm now has a cock and pussy type instead of mere status.\n");
 			outputText("-Demons and kitsunes as well as players with phylactery can new heal and leech energy from sex.\n");
@@ -553,7 +553,7 @@ package classes.Scenes
 			outputText("-JIANGSHI HP NOW SCALES OF LIBIDO\n");
 			outputText("-Manticore and displacer feeding euphoria now stacks up to 50% but only at the rate of 5 per stacks furthermore they last longer\n");
 			outputText("-Alchemical, Mutagenic and Knowledge bonus added to the game. Read book drink potions and use transformative to stack them each up to 20%\n");
-			outputText("-You can now escape from Alraune using the torch and alraune has now customised text when trying to escape witheout it\n");
+			outputText("-You can now escape from Alraune using the torch and alraune has now customised text when trying to escape without it\n");
 			outputText("-Thunderbird can now use Lust Storm\n");
 			outputText("-Biggest Bags are now properly displayed as costing\n");
 			outputText("-Heart of the storm perk line for Thunderbird, Raiju, Kamaitachi\n");
@@ -808,7 +808,7 @@ package classes.Scenes
 			outputText("-New body part - wings: Thunderous aura. Req. Raiju Mane\n");
 			outputText("-Added new item possible to find at Battlefield - Metal Plate (item used in goblin engenerring)\n");
 			outputText("-Yeti race bonuses are now gained at 7 or 14 pts in racial score: +50/100 to max Str, +40/80 to max Tou, +25/50 to max Spe and Lib, -35/70 to max Int\n");
-			outputText("-After saving goblin form Drider boss in Lethice Stronghold we can finaly take the goblin back to camp as vanilla promised. Would req. to leave stronghold by entrance and not lift + having Rathazul in camp to help her. After birning items Rath ask for PC would be faced with another choice to keep Mitzi in camp or shoo her away.\n");
+			outputText("-After saving goblin form Drider boss in Lethice Stronghold we can finally take the goblin back to camp as vanilla promised. Would req. to leave stronghold by entrance and not lift + having Rathazul in camp to help her. After birning items Rath ask for PC would be faced with another choice to keep Mitzi in camp or shoo her away.\n");
 			outputText("-When PC decided to keep Mitzi in camp after cure she can talk on two subjects with PC, be fucked or pc can check her appearance.\n");
 			outputText("-Mitzi can get pregnant. After succesfull deed her pregnancy last 13 days and will result in 4 daughters born. Her daughters will stay in camp and it would be possible to interact with them. They would gather some items each day in barrels that pc can pick.\n");
 			outputText("-After Mitzi's brood grow to at least 6 daughters it would became possible to take Mitzi and few of her daughters as henchman (they all count as one henchman).\n");
@@ -1207,7 +1207,7 @@ package classes.Scenes
 			outputText("-Violet Pupil Transformation and Comet manuals cost was lowered form 250 to 200 gems.\n");
 			outputText("-New magical soulskill: Flames of Love (Basic Rank). Req. buying manual from golem merchant for 20 spirit stones. Deal fire damage, against group enemies deal 2x more damage, using ~90% of current PC lust creates flames that deals 200% dmg of used lust. (1 lust used = 2 pts of fire dmg) Cooldown: 3 turns.\n");
 			outputText("-New magical soulskill: Icicles of Love (Basic Rank). Req. buying manual from golem merchant for 20 spirit stones. Deal ice damage, against group enemies deal 2x more damage, using ~90% of current PC lust creates icicles that deals 200% dmg of used lust. (1 lust used = 2 pts of ice dmg) Cooldown: 3 turns.\n");
-			outputText("-Soul Equipment siren shop merchant finaly got her name. Which she would always meantion after entering.\n");
+			outputText("-Soul Equipment siren shop merchant finally got her name. Which she would always meantion after entering.\n");
 			outputText("-Options in Camp Actions was a bit rearranged. Some was mover to new submenu named SpentTime that involve spending time on watching sky or swimming at steam. Even action of using time to prepare bottles filled with various pills is found here.\n");
 			outputText("-When PC is lvl 24+ can find sometimes instead of very diluted Arcane Regen Concotions and low-grade Soulforce Recovery Pills their stronger versions: diluted Arcane Regen Concotions and mid-grade Soulforce Recovery Pills\n");
 			outputText("-New consumable item: an Arcane Regen Concotion. Costs 720 gems and currently only drops from white mare/unicorn/alicorn founded in Lake, Battlefield or Plains. It restore 7200 mana.\n");
@@ -1303,7 +1303,7 @@ package classes.Scenes
 			outputText("-Getting forked nekomata tail fully divide into two cat tails req. 50+ wis, 20+ int and lvl 12+.\n");
 			outputText("-Reaching Elder Nekomata would increase cost of Ghost Fire 2x and fire damage 2,5x.\n");
 			outputText("-After meeting desert naga on desert 5 times as naga (having naga lower body is enough) it would trigger scene when she tells PC her name. This start gaing affection with her and adding few new sex scenes. When affection with her reach 100% it trigger scene, in which she talks with PC about inability to understand non-naga people. That scene will add option ");
-			outputText("in Rathazul menu to make Repta-Tongue potion after PC brings him: hummus, reptilium, and ovi elixir. Finding desert naga again with Repta-Tongue potion will allow her to finaly understand any non-naga beings. She would also then show interest in moving in to camp as long PC agree to this. Is rejected she will be at each next meeting asks if PC not changed mind.\n");
+			outputText("in Rathazul menu to make Repta-Tongue potion after PC brings him: hummus, reptilium, and ovi elixir. Finding desert naga again with Repta-Tongue potion will allow her to finally understand any non-naga beings. She would also then show interest in moving in to camp as long PC agree to this. Is rejected she will be at each next meeting asks if PC not changed mind.\n");
 			outputText("-When in camp Samirah have few possible randomn events when visiting her, Appearance, Talk options, Sex options, can teach some new specials if PC is naga, can show up at hot springs, have option to Sleep with her (followed for morning coiling up) and female naga PC get dress from her.\n");
 			outputText("-New possible tease scene text for naga PC - Belly Dance.\n");
 			outputText("-New M. Special: Tactical Distraction. Req. to be naga and having finished hypnosis training with Samirah. It would distract enemy for 1 actions interrupting them in case they were channeling some ability while dealing very small amount of lust damage. It have 5 turns CD.\n");
@@ -1812,7 +1812,7 @@ package classes.Scenes
 			outputText("-New jewelry: training soul ring - buyable in the same shop as others soul training equipment. Cost 10 spirit stones. Increase per hour gain of bonus soulforce as well as rising max bonus soulforce cap by 100.\n");
 			outputText("-New event perk: Gargoyle. Gained in ritual to become gargoyle by picking own blood. Effects: PC need to feed on soulforce gained from cultivation session or from pills to survive. +80 to max Wis, -10 to max Lib/Sens, sets min Lib/Sens to 5\n");
 			outputText("-New event perk: Corrupted Gargoyle. Gained in ritual to become gargoyle by picking minotaur blood. Effects: PC need to feed on fluids (cum, milk) to survive. -10 to max Wis, +80 to max Lib, +15 to min Sens\n");
-			outputText("-PC can finaly become Gargoyle by taking last step in Temple of the Divine. At that last step it will be one last choice what type of blood to use. Own that would result in getting Gargoyle perk and switching to feeding on soulforce or Minotaur Blood (need to have one bottle of it in inv) to become Corrupted Gargoyle that feed on fluids like cum or milk.\n");
+			outputText("-PC can finally become Gargoyle by taking last step in Temple of the Divine. At that last step it will be one last choice what type of blood to use. Own that would result in getting Gargoyle perk and switching to feeding on soulforce or Minotaur Blood (need to have one bottle of it in inv) to become Corrupted Gargoyle that feed on fluids like cum or milk.\n");
 			outputText("-Depending on previous choices PC would get 3 new p.specials: Stone Claw/Stone Fist, Tail Slam/Tail Cleave and Wing Buffet. Also depending on material chosen for carving gargoyle body would get diff stat bonuses. Marble/Alabaster would give give +165/+50 max Str, +250 max Tou, +50/+30 max Spe, +30/+165 max Int, +60/+10 to armor, +10/+60 to spell resistance.\n");
 			outputText("-Gargoyle P. Special: Stone Claw (req. having gargoyle shaped arms) - Rend your foe using your sharp stone claws. It can cause Bleed. It have 3 turns cooldown after use.\n");
 			outputText("-Gargoyle P. Special: Stone Fist (req. having human shaped arms) - Slam your two fist at your foe and attempt to stun them. It have 3 turns cooldown after use.\n");
@@ -2013,7 +2013,7 @@ package classes.Scenes
 			outputText("-After another 30 ays she will be considered an young adult (18+) and unlock all interactions like: purify/corrupt specific items or sex scenes.\n");
 			outputText("-Incest sex scenes with her req. to have 30+ corruption. For pure PC's it's only posisble to access yuri scene.\n");
 			outputText("-Chi Chi final training added allowing to face her again. TIP: better save game before it as it would affect Chi Chi storyline.\n");
-			outputText("-Chi Chi can finaly visit PC camp...for longer. After finishing all training sessions she will give PC option to fight again with option to agree or decline (which would make PC able to accept it in future when ready). In this second fight when PC win with her (she would use slight different moves and would be slight easier to fight enemy) would be given two options. ");
+			outputText("-Chi Chi can finally visit PC camp...for longer. After finishing all training sessions she will give PC option to fight again with option to agree or decline (which would make PC able to accept it in future when ready). In this second fight when PC win with her (she would use slight different moves and would be slight easier to fight enemy) would be given two options. ");
 			outputText("Leaving her would lead to her death and reciving Master Gloves. Nursing her would lead to...recruitment path that will bring her for good to the camp.\n");
 			outputText("-When in camp her interactions inclused: checking her appearance, talking with her, learning soul skills (if not yet all are learned), sparring (due to her recovery she will only be able spar once a day before she recover to similar power level as during 2nd fight (lvl 58)).\n");
 			outputText("-Whenever PC spar with her each day or not she would be gradula healing back to full health each day. Approximatly time needed to her full recovery is four days. After recovery if option for npc's been in train mode she would have chance to lvl up to lvl 64.\n");
@@ -2139,7 +2139,7 @@ package classes.Scenes
 			outputText("-Marae buff power base is 10% but with leaving B.Sword/Excalibur and Pure Pearl on Altar can be rised by 5% for each. Rebuilding Statur will increase it by an0other 10%. Rebuilding Gdecorative gargoyles or making all benches will add 5% for each of those task completed.\n");
 			outputText("-Aimozg worked many days on... new combat menu layout. Some muscle memory would be changed but that for good as it would be easier to handle any future new combat options.\n");
 			outputText("-New npc that can be recruited to camp: Diva. All her content coded entirely by Oxdeception. Diva is... vampire... well sort of, whcih can be meet in Mountains after PC deal with Factory. PC need to let her keep winning till 3rd and final fight when PC would need to get serious and beat her to cme back to camp with new bloodsucke...waifu. She's source of bat tf item aside Mog Hen shop.\n");
-			outputText("-New sprites added (by aimozg): Alraune, Ceani, Crabgirl (shopkeeper at Beach), Etna. Ayane sprites finaly showing up.");
+			outputText("-New sprites added (by aimozg): Alraune, Ceani, Crabgirl (shopkeeper at Beach), Etna. Ayane sprites finally showing up.");
 			outputText("-We got...Halloween suprise. I know it may be small one but at least I remebered and convinced one of writers to do it rather than make contest for it (and I count on doing same next year too ^^). All I can say is... pumpkins.\n");
 			outputText("-Fixed bugs: Albino tail(s) after changing only hair color with tf items, 'dead' enemies last hurray attack, lust meter jumping between min lust or max lust values when first is higher than second, missing part of map in Hidden Cave\n\n");
 			outputText("<b>Version 0.8g2 (Bugfixing):</b>\n\n");
@@ -2769,7 +2769,7 @@ package classes.Scenes
 			outputText("-Not best lines probably but now JoJo will also have reply to PC picking Cultivator or Scout History perks.\n");
 			outputText("-Meditation shortened to one hour (somehow I couldn't come with interesting perks to make it more usefull nor way to change it on start to be more usefull).\n");
 			outputText("-Evangeline first X-pack is unlocked. I not sure only if the name is fancy enough. Still that will give chance to lvl-up her from lvl 2 to 12. Future one X-packs will be adding next ones lvl-up options and more her backstory.\n");
-			outputText("-Some of talks, light sparing and way to make her lvl-up a few times. Also that would mean now PC can rise her affection (finaly as some would say) that is done by talking or sparring with her. Also for talk scenes she got first time version of each talk and then repetable one (but both are only different in one sentence so kudos to who will find where the differences are).\n");
+			outputText("-Some of talks, light sparing and way to make her lvl-up a few times. Also that would mean now PC can rise her affection (finally as some would say) that is done by talking or sparring with her. Also for talk scenes she got first time version of each talk and then repetable one (but both are only different in one sentence so kudos to who will find where the differences are).\n");
 			outputText("-LvL-ing her up us after PC give her enough gems for this and then ask for it (Somehow I decided t keep name of this option as Just Do It!). After this she will be out of camp for few hours so not get worried she's bugged or something. IN main camp menu there will be even short paragraph of text as long she's out of camp.\n");
 			outputText("-Inreased chance to proc Marae encounters not to meantioning little better stats of armors made of her bark.\n");
 			outputText("-Past Life perks will be giving now also related job perk or just free perk point.\n");
@@ -3064,7 +3064,7 @@ package classes.Scenes
 			outputText("-Added new achievements: six combat related, one general.\n");
 			outputText("-Added/Polished intro and outro scenes for encounters: Imp Pack, Succubus, Incubus, Omnibus.\n");
 			outputText("-Added chance to find Imp Food during exploration of the Blight Ridge.\n");
-			outputText("-Finaly managed make soulskill costs work properly without bugging out game. Current added soulskills are only str/weapon based (next ones added will relay on other stats ^^).\n");
+			outputText("-finally managed make soulskill costs work properly without bugging out game. Current added soulskills are only str/weapon based (next ones added will relay on other stats ^^).\n");
 			outputText("-A few minor under the hood changes to make game goes more smooth (that includes small boost to lvl-up rising of max Soulforce value).\n\n");
 			outputText("<b>Version 0.4 (He'Xin'Dao (part 1), Soulforce new features (part 1), few minor fixes/changes):</b>\n\n");
 			outputText("-Having perk History: Cultivation now properly unlock soulforce option when picked to play prologue in Ignam.\n");

@@ -155,7 +155,7 @@ public class CombatUI extends BaseCombatContent {
 				if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 				break;
 			default:
-				btnRanged.showDisabled("Shoot", "You cannot use ranged combat witheout a ranged weapon equiped");
+				btnRanged.showDisabled("Shoot", "You cannot use ranged combat without a ranged weapon equiped");
 				if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 		}
 		if (player.isFlying() && player.wings.type == Wings.BAT_ARM){btnRanged.disable("It would be rather difficult to aim while flapping your arms."); }
@@ -163,15 +163,15 @@ public class CombatUI extends BaseCombatContent {
 			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) {
 				if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") {
 					if (player.isUsingGoblinMechFriendlyFirearms()) btnRanged.show("Shoot", combat.fireBow, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
-					else btnRanged.disable("Your firearms is not compatibile to be used with current piloted mech.");
+					else btnRanged.disable("Your firearms are not compatibile with the current piloted mech.");
 				}
-				else btnRanged.disable("You could use your range weapon while piloting goblin mech if it would be any form of firearms.");
-			} else btnRanged.disable("No way you could use your range weapon while piloting goblin mech.");
+				else btnRanged.disable("You could use your ranged weapon while piloting the goblin mech if you have firearms.");
+			} else btnRanged.disable("There is no way you could use your ranged weapon while piloting the goblin mech.");
 			if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 		}
 		if (player.vehicles == vehicles.HB_MECH) {
-			if (player.isUsingHowlingBansheeMechFriendlyRangeWeapons()) btnRanged.show("Shoot", combat.fireBow, "Attempt to attack the enemy with your mech inbuilt range weapons.  Damage done is determined by your speed and weapon.");
-			else btnRanged.disable("Your range wepaon is not compatibile to be used with current piloted mech.");
+			if (player.isUsingHowlingBansheeMechFriendlyRangeWeapons()) btnRanged.show("Shoot", combat.fireBow, "Attempt to attack the enemy with your mech's inbuilt ranged weapons.  Damage done is determined by your speed and weapon.");
+			else btnRanged.disable("Your range weapon is not compatibile to be used with current piloted mech.");
 		}
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 
@@ -191,7 +191,7 @@ public class CombatUI extends BaseCombatContent {
 		if (physpButtons.length > 0) {
 			if (!player.isFlying() && monster.isFlying() && !player.canFly()) {
 				if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
-				else btnPSpecials.disable("No way you could reach an opponent in the air with p. specials.");
+				else btnPSpecials.disable("There is no way you could reach an opponent in the air with p. specials.");
 			}
 			else {
 				if (player.isInGoblinMech() || player.isInNonGoblinMech()) btnPSpecials.show("Mech", submenuPhySpecials, "Mech special attacks menu.", "Mech Specials");
