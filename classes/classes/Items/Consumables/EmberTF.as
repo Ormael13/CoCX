@@ -207,7 +207,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	}
 	//Arms
 	if (player.arms.type != Arms.DRAGON && player.lowerBody == LowerBody.DRAGON && changes < changeLimit && rand(3) == 0) {
-		outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of dragon one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
+		outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  dragon, one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
 	//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLizardArms)) {
 	//		outputText("\n\n<b>Genetic Memory: Lizard Arms - Memorized!</b>\n\n");
 	//		player.createStatusEffect(StatusEffects.UnlockedLizardArms, 0, 0, 0, 0);

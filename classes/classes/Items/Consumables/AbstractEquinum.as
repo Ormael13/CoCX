@@ -482,7 +482,7 @@ public class AbstractEquinum extends Consumable {
 
 		if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your " + Appearance.vaginaDescript(player,0) + " has grown larger, in depth AND size. To your absolute surprise it suddenly resume deepening inside your body. " +
-					"When you finaly take a check you discover your vagina is now not unlike that of a horse, capable of taking the largest cock witheout ease." +
+					"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease." +
 					"<b>  You now have a equine vagina!</b>");
 			player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
 			player.vaginaType(VaginaClass.EQUINE);
@@ -505,7 +505,7 @@ public class AbstractEquinum extends Consumable {
 		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && player.eyes.colour != "blue" && player.eyes.colour != "red") {
 			if (player.cor >= 50) mutations.setEyeTypeAndColor(Eyes.HUMAN, "red");
 			else mutations.setEyeTypeAndColor(Eyes.HUMAN, "blue");
-			outputText("\n\nSomething weird happens in your eyes when you go to see what is going on you discover your irises turned [eyecolor].");
+			outputText("\n\nSomething weird is happening in your eyes, when you go to see what is going on you discover your irises turned [eyecolor]!");
 			changes++;
 		}
 		//HorseFace - Req's Fur && Ears
