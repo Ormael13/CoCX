@@ -1031,6 +1031,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownSnowballGenerator:StatusEffectType   		= mkCombat("Cooldown Snowball Generator");
 		public static const CooldownSonicScream:StatusEffectType         		= mkCombat("Cooldown Sonic scream");
 		public static const CooldownSoulBlast:StatusEffectType           		= mkCombat("Cooldown Soul Blast");
+		public static const CooldownSpectralScream:StatusEffectType           	= mkCombat("Cooldown Spectral scream");
 		public static const CooldownSpellBlackTier1:StatusEffectType       		= mkCombat("Cooldown Spell Black magic tier 1");
 		public static const CooldownSpellBlackTier2:StatusEffectType      		= mkCombat("Cooldown Spell Black magic tier 2");
 		public static const CooldownSpellBlackTier3:StatusEffectType      		= mkCombat("Cooldown Spell Black magic tier 3");

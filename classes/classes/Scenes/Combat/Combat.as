@@ -7680,6 +7680,14 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownInfernalClaw, 1, -1);
             }
         }
+        //Spectral Scream
+        if (player.hasStatusEffect(StatusEffects.CooldownSpectralScream)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpectralScream) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpectralScream);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpectralScream, 1, -1);
+            }
+        }
         //Hurricane Dance
         if (player.hasStatusEffect(StatusEffects.CooldownHurricaneDance)) {
             if (player.statusEffectv1(StatusEffects.CooldownHurricaneDance) <= 0) {

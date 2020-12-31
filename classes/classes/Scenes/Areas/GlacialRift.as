@@ -52,7 +52,6 @@ use namespace CoC;
 			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && flags[kFLAGS.TOOK_GOO_ARMOR] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 7; //Valeria
 			if (rand(3) == 0) choice[choice.length] = 8; //Freebie items!
 			if (rand(15) == 0) choice[choice.length] = 9; //Ornate Chest or cache of gems/pile of stones
-			if (player.faceType == Face.WOLF && player.ears.type == Ears.WOLF && player.arms.type == Arms.WOLF && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0) choice[choice.length] = 10; //Fenrir ruined shrine
 			choice[choice.length] = 10; //Find nothing!
 			
 			//DLC april fools
@@ -78,6 +77,11 @@ use namespace CoC;
 			//Yu shop
 			if (flags[kFLAGS.YU_SHOP] < 2 && rand(5) == 0) {
 				SceneLib.glacialYuShop.YuIntro();
+				return;
+			}
+			//Fenrir ruined shrine
+			if (player.faceType == Face.WOLF && player.ears.type == Ears.WOLF && player.arms.type == Arms.WOLF && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0 && rand(5) == 0) {
+				FenrirRuinedShrine();
 				return;
 			}
 			select = choice[rand(choice.length)];
@@ -200,31 +204,6 @@ use namespace CoC;
 					}
 					doNext(camp.returnToCampUseOneHour);
 					break;
-				case 10: //Fenrir ruined shrine!
-					clearOutput();
-					if (flags[kFLAGS.FENRIR_COLLAR] == 1) {
-						outputText("On your way to the glacial rift you find your way back to the temple again and the menacing voice of Fenrir echoes.");
-						outputText("\n\n\"<i>’So have you reconsidered my offer? You can take your time I have an eternity ahead of me.</i>\"");
-						outputText("The collar is still patiently waiting on the altar so what do you do. Will you take the collar and allow the black god the freedom he crave or will you ignore it and leave.");
-						addButton(0, "Put the collar", putTheCollar);
-						addButton(1, "Leave", leaveShrine);
-					}
-					else {
-						outputText("As you walk in the Glacial rift you spot what looks like an old ruin covered in snow the entrance barely still visible from the outside. Clearing some of the snow you open yourself a path. You walk inside what looks to be a room of which the walls are either made out of magical ice. The circular room has several pillars some of them shattered as if a great battle had raged here. At the bottom of the room stands the statue of a fearsome looking wolf made out of what appears to be a diamond like structure at the foot of which is an altar on which has been placed what looks like a collar made for a huge sized animal.  ");
-						outputText("The collar is bound to the altar with chains and, despite the fact the place likely has been abandoned for century, they seems to be quite strong. As you approach the altar a powerful masculine voice echo through the room making the ancient structure shake with its power alone.");
-						outputText("\n\n\"<i>You who dares to approach my ruined shrine and enter the boundary of my prison... speak up... why have you come here?</i>\"");
-						outputText("\n\nYou present yourself telling you're a champion sent on Mareth to defeat the demons.");
-						outputText("\n\n\"<i>Defeating the demons eh? Have the gods sunk so low as to fear vermins now?</i>\" The voice roar in an unsettling laugh making the icy chamber shake.");
-						outputText("\n\nYou ask just who or what is talking actually.");
-						outputText("\n\n\"<i>You mortals have forgotten the gods and their battle. I am what one could call... a fallen deity... a divinity who has been sealed by the other gods for fear of its power because they could not control me, they couldn't TAME me. ");
-						outputText("I am the cold hand of winter the howling blizzard the treasonous chill of death my name is Fenrir and I am the deity of this blasted lost glacial land or rather I was until the pantheon itself teamed up to seal me in this ridiculous collar destroying my body and scattering its remnant across the glacial rift in the form of puppies. I fear no demons I was there before them and will still be there after them. Right now I only wish one of those fiends would come here and set me free so that I could exact my vengeance.</i>\"");
-						outputText("\n\nFaced with such a malevolent being you prepare to leave as the voice rise again.");
-						outputText("\n\n\"<i>’I will never be able to fully take form again. However, as your body is close enough to my original form, I have a favor to ask that only you mortal could do. Take this collar and wear it so that at least what is left of my once mighty spirit can see the world again through your eyes. In exchange, I will grant you a fraction of my once almighty divine power. For it is power that you seek is it not?</i>\"");
-						outputText("\n\nThe voice has a sinister laugh for a moment then falls silent leaving you a choice will you leave the shrine or will you take the risk and put on the collar?");
-						addButton(0, "Put the collar", putTheCollar);
-						addButton(1, "Leave", leaveShrine);
-					}
-					break;
 				default:
 					clearOutput();
 					outputText("You spend an hour trudging through the bleak and bitingly cold glaciers but you don’t find anything interesting. ");
@@ -241,6 +220,32 @@ use namespace CoC;
 			clearOutput();
 			outputText("You ready your [weapon] for a fight!");
 			startCombat(new GooArmor());
+		}
+		
+		private function FenrirRuinedShrine():void {
+			clearOutput();
+			if (flags[kFLAGS.FENRIR_COLLAR] == 1) {
+				outputText("On your way to the glacial rift you find your way back to the temple again and the menacing voice of Fenrir echoes.");
+				outputText("\n\n\"<i>’So have you reconsidered my offer? You can take your time I have an eternity ahead of me.</i>\"");
+				outputText("The collar is still patiently waiting on the altar so what do you do. Will you take the collar and allow the black god the freedom he crave or will you ignore it and leave.");
+				addButton(0, "Put the collar", putTheCollar);
+				addButton(1, "Leave", leaveShrine);
+			}
+			else {
+				outputText("As you walk in the Glacial rift you spot what looks like an old ruin covered in snow the entrance barely still visible from the outside. Clearing some of the snow you open yourself a path. You walk inside what looks to be a room of which the walls are either made out of magical ice. The circular room has several pillars some of them shattered as if a great battle had raged here. At the bottom of the room stands the statue of a fearsome looking wolf made out of what appears to be a diamond like structure at the foot of which is an altar on which has been placed what looks like a collar made for a huge sized animal.  ");
+				outputText("The collar is bound to the altar with chains and, despite the fact the place likely has been abandoned for century, they seems to be quite strong. As you approach the altar a powerful masculine voice echo through the room making the ancient structure shake with its power alone.");
+				outputText("\n\n\"<i>You who dares to approach my ruined shrine and enter the boundary of my prison... speak up... why have you come here?</i>\"");
+				outputText("\n\nYou present yourself telling you're a champion sent on Mareth to defeat the demons.");
+				outputText("\n\n\"<i>Defeating the demons eh? Have the gods sunk so low as to fear vermins now?</i>\" The voice roar in an unsettling laugh making the icy chamber shake.");
+				outputText("\n\nYou ask just who or what is talking actually.");
+				outputText("\n\n\"<i>You mortals have forgotten the gods and their battle. I am what one could call... a fallen deity... a divinity who has been sealed by the other gods for fear of its power because they could not control me, they couldn't TAME me. ");
+				outputText("I am the cold hand of winter the howling blizzard the treasonous chill of death my name is Fenrir and I am the deity of this blasted lost glacial land or rather I was until the pantheon itself teamed up to seal me in this ridiculous collar destroying my body and scattering its remnant across the glacial rift in the form of puppies. I fear no demons I was there before them and will still be there after them. Right now I only wish one of those fiends would come here and set me free so that I could exact my vengeance.</i>\"");
+				outputText("\n\nFaced with such a malevolent being you prepare to leave as the voice rise again.");
+				outputText("\n\n\"<i>’I will never be able to fully take form again. However, as your body is close enough to my original form, I have a favor to ask that only you mortal could do. Take this collar and wear it so that at least what is left of my once mighty spirit can see the world again through your eyes. In exchange, I will grant you a fraction of my once almighty divine power. For it is power that you seek is it not?</i>\"");
+				outputText("\n\nThe voice has a sinister laugh for a moment then falls silent leaving you a choice will you leave the shrine or will you take the risk and put on the collar?");
+				addButton(0, "Put the collar", putTheCollar);
+				addButton(1, "Leave", leaveShrine);
+			}
 		}
 		
 		private function putTheCollar():void {

@@ -1071,17 +1071,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		private function hourlyHunger():Boolean {
 			var needNext:Boolean = false;
 			var hungerActive:Boolean = false;
-			if (flags[kFLAGS.HUNGER_ENABLED] > 0) hungerActive = true;
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0 || player.hasPerk(PerkLib.EndlessHunger)) hungerActive = true;
 			if (hungerActive) {
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 3) hungerActive = false;
 				else if (player.hasPerk(PerkLib.DeadMetabolism)) hungerActive = false;
 			}
 			if (hungerActive || prison.inPrison) {
 				var multiplier:Number = 1.0;
-				if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
-				if (player.findPerk(PerkLib.Survivalist2) >= 0) multiplier -= 0.2;
-				if (player.findPerk(PerkLib.ManticoreCumAddict) >= 0) multiplier *= 2;
-				if (player.findPerk(PerkLib.HydraRegeneration) >= 0) multiplier *= 2;
+				if (player.hasPerk(PerkLib.Survivalist)) multiplier -= 0.2;
+				if (player.hasPerk(PerkLib.Survivalist2)) multiplier -= 0.2;
+				if (player.hasPerk(PerkLib.ManticoreCumAddict)) multiplier *= 2;
+				if (player.hasPerk(PerkLib.HydraRegeneration)) multiplier *= 2;
 				//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
 				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 hours with Survivalist perks.
 				if (player.hasStatusEffect(StatusEffects.FastingPill)) player.hunger += 2;
@@ -1206,16 +1206,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Demonic energy thirst
 			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
-				if (player.hunger < player.maxHunger())
-				{
-					player.refillHunger(10, false);
-				}
-				if (player.HP < player.maxHP()) {
-					EngineCore.HPChange(100 + (player.tou*2), true);
-				}
-				if (player.mana < player.maxMana()) {
-					EngineCore.ManaChange(100 + (player.inte*2), true);
-				}
+				if (player.hunger < player.maxHunger()) player.refillHunger(10, false);
+				if (player.HP < player.maxHP()) EngineCore.HPChange(100 + (player.tou*2), true);
+				if (player.mana < player.maxMana()) EngineCore.ManaChange(100 + (player.inte*2), true);
 				EngineCore.changeFatigue(-(100 + (player.spe*2)));
 				outputText("You feel energised and empowered by the energy drained out of the cum of your recent fuck. What a meal!");
 				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed)
