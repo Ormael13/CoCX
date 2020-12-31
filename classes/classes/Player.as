@@ -4129,6 +4129,9 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 14;//	104-r99	119	135	152	180	199	219(potem legendary/mythical stages?)
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				internalChimeraRatingCounter -= 20;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) internalChimeraRatingCounter -= 3;//6
+			//if (flags[kFLAGS.GAME_DIFFICULTY] == 1) internalChimeraRatingCounter -= 3;//tyle ile stopni perków rasowych
+			if (internalChimeraRatingCounter < 0 || flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) internalChimeraRatingCounter = 0;
 			End("Player","racialScore");
 			return internalChimeraRatingCounter;
 		}//każdy nowy chimerical body perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle

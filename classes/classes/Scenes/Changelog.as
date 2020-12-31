@@ -76,8 +76,8 @@ package classes.Scenes
 			outputText("-He'Xin'Dao is prepared for next celebration of Lunar New year with tons of new year animal-morphs comming form all hidden places across the realm. As usual it starts at 21th January and last till 20th February.\n");
 			outputText("-New usable item: Reagent. Costing 50 gems and it's obtainable from Rathazul dyes shop. Usefull in making dyes working on other things than hair or fur, like scales.\n");
 			outputText("-Jtecx many typo corrections.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Playing difficulty setting below Hard Mode giving PC 3 less points in internal chimera score that would normaly giving negative regen. So now pc can pick most of races all three racial perks without worry to get negative HP regen.\n");
+			outputText("-Easy mode enabled would totaly remove negative HP regen from having racial mutation perks.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
