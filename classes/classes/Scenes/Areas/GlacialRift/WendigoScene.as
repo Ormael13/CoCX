@@ -37,9 +37,9 @@ package classes.Scenes.Areas.GlacialRift
 			}
 			else {
 				if (player.wendigoScore() >= 10) {
-					outputText("You walk steadily toward the lost girl to offer her support.then realise it's just another wendigo.\n\n");
+					outputText("You walk steadily toward the lost girl to offer her support. Then you realise it's just another wendigo.\n\n");
 					outputText("\"<i>So hungry… kin please, do you have food… anything... I’m starving.</i>\"\n\n");
-					outputText("Yea no you don’t and true be told even if you did you wouldn’t share it with her because if you did have food you would have eaten it already. Wendigos are the reason you are in this sorry state in the first place. Frustrated by your reply the wendigo turns back heels and wails as she resumes looking for food which reminds you that you also need to look for lunch. You head back to camp still starving.\n\n");
+					outputText("You don’t and truth be told even if you did you wouldn’t share it with her because if you did have food you would have eaten it already. Wendigos are the reason you are in this sorry state in the first place. Frustrated by your reply the wendigo turns back heels and wails as she resumes looking for food which reminds you that you also need to look for lunch. You head back to camp still starving.\n\n");
 					doNext(camp.returnToCampUseTwoHours);
 				}
 				else {
@@ -63,15 +63,15 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("\"<i>Hungry… so HUNGRY! Give me... GIVE ME!</i>\"\n\n");
 			outputText("Just how hungry is she.. is she about to devour you alive?! Your question is swiftly answered as she strips and tosses your equipment to the side zeroing right up onto your crotch.\n\n");
 			if (player.hasCock()) {
-				outputText("Before you can say a word, she already has her ass up to your face, presenting you with her inhuman looking pussy as her mouth hungrily wraps around your [cock] taking in the entire length."+(player.biggestCockLength() >= 30) ? " Just how the hell can she take all of this in? This is definitively not natural!":""+" Your member is easily forced into full erection ");
+				outputText("Before you can say a word, she already has her ass up to your face, presenting you with her inhuman looking pussy as her mouth hungrily wraps around your [cock] taking in the entire length."+(player.biggestCockLength() >= 30) ? " Just how the hell can she take all of this in? This is definitely not natural!":""+" Your member is easily forced into full erection ");
 				outputText("as her devilish tongue skillfully coaxes you toward the inevitable ejaculation. You try and shove her off you but she turns out to be extremely strong for her frame, easily pinning you down with her arms. Your cock feels as if it is alive with pleasure and inevitably you cum into the ravenous girl's mouth. A fraction of a second later you watch in a stupor as a literal fountain of juice shoots out of her pussy right into your face. ");
-				outputText("Did the crazy bitch cum just from sucking you off? You thought this nightmare was finally over however but to your horror it has only started as the thing resumes tormenting your prick, is she insatiable? Your question is answered a while later as you pass out sometime before she stops.\n\n");
+				outputText("Did the crazy bitch cum just from sucking you off? You thought this nightmare was finally over but to your horror it has only just started as the thing resumes tormenting your prick, is she insatiable? Your question is answered a while later as you pass out sometime before she stops.\n\n");
 				outputText("When you wake up you are in some random cave, your stuff neatly piled up next to you. At least she had the decency NOT to let you die in the cold despite sucking you off until you blacked out. You head back to camp sore and tired but at least alive.\n\n");
 				player.sexReward("vaginalFluids","Vaginal");
 			}
 			else if (player.hasVagina()) {
 				outputText("Before you can say a word she already has her ass up to your face, presenting you her inhuman looking pussy as her tongue hungrily strikes at your [clit], teasing your most sensitive spots. Your pussy is easily forced into full bloom as her devilish tongue skillfully coaxes you toward the inevitable climax. ");
-				outputText("You try and shove her off you but she turns out to be extremely strong for her frame, easily pinning you down with her arms. Your pussy feels as if alive with pleasure and inevitably, against your will, you cum into the ravenous girl's mouth flooding her with your pussy juices. A fraction of a second later you watch in a stupor as a literal fountain of juice shoots out of her pussy right into your face. ");
+				outputText("You try and shove her off you but she turns out to be extremely strong for her frame, easily pinning you down with her arms. Your pussy feels alive with pleasure and inevitably, against your will, you cum into the ravenous girl's mouth flooding her with your pussy juices. A fraction of a second later you watch in a stupor as a literal fountain of juice shoots out of her pussy right into your face. ");
 				outputText("Did the crazy bitch cum just from eating you out? You thought this nightmare was finally over however but to your horror it just has started as the thing resumes tormenting your cunt, is she insatiable? Your question is answered a while later as you pass out sometime before she stops.\n\n");
 				outputText("When you wake up you are in some random cave, your stuff neatly piled up next to you. At least she had the decency NOT to let you die in the cold despite eating you out until you blacked out. You head back to camp sore and tired but at least alive.\n\n");
 				player.sexReward("vaginalFluids","Vaginal");
