@@ -4582,7 +4582,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (pigScore() >= 15)
 				grandchimeraCounter++;
-			if (wendigoScore() >= 22)
+			if (wendigoScore() >= 25)
 				grandchimeraCounter++;
 			if (melkieScore() >= 21)
 				grandchimeraCounter++;
@@ -7895,6 +7895,12 @@ use namespace CoC;
 				wendigoCounter += 2;
 			if (wings.type == Wings.LEVITATION)
 				wendigoCounter += 3;
+			if (hasPlainSkinOnly() || hasPartialCoat(Skin.FUR))
+				wendigoCounter++;
+			if ((hasVagina() && biggestTitSize() >= 8) || biggestTitSize() == 0)
+				wendigoCounter++;
+			if (horseCocks() > 0 || (hasVagina() && vaginaType() == VaginaClass.EQUINE))
+				wendigoCounter++;
 			if (findPerk(PerkLib.EndlessHunger) >= 0)
 				wendigoCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
@@ -12034,6 +12040,13 @@ use namespace CoC;
 				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Bull Strength', { text: 'Bull Strength' });
 			}
 			if (!hasPerk(PerkLib.BullStrength) && statStore.hasBuff('Bull Strength')) statStore.removeBuffs('Bull Strength');
+			if (hasPerk(PerkLib.UnnaturalStrength)){
+				var powar:Number = 0;
+				if (flags[kFLAGS.HUNGER_ENABLED] > 0) powar = maxHunger()*0.01;
+				else powar = maxLust()*0.01;
+				statStore.replaceBuffObject({'str.mult':(Math.round(powar))}, 'Unnatural Strength', { text: 'Unnatural Strength' });
+			}
+			if (!hasPerk(PerkLib.UnnaturalStrength) && statStore.hasBuff('Unnatural Strength')) statStore.removeBuffs('Unnatural Strength');
 			statStore.replaceBuffObject({
 				"str.mult":statusEffectv1(StatusEffects.StrTouSpeCounter2)/100,
 				"tou.mult":statusEffectv2(StatusEffects.StrTouSpeCounter2)/100,
@@ -12742,41 +12755,32 @@ use namespace CoC;
 		 */
 		public function sexReward(fluidtype:String = 'Default', type:String = 'Default', real:Boolean = true, Wasfluidinvolved:Boolean = true):void
 		{
-			if(Wasfluidinvolved)
-			{
+			if (Wasfluidinvolved) {
 				slimeFeed();
 				if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
 				if (jiangshiScore() >= 20 && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
-				if (hasPerk(PerkLib.DemonEnergyThirst)) createStatusEffect(StatusEffects.DemonEnergyThirstFeed, 0, 0 ,0,0);
-				if (hasPerk(PerkLib.KitsuneEnergyThirst)) createStatusEffect(StatusEffects.KitsuneEnergyThirstFeed, 0, 0 ,0,0);
+				if (hasPerk(PerkLib.DemonEnergyThirst)) createStatusEffect(StatusEffects.DemonEnergyThirstFeed, 0, 0, 0, 0);
+				if (hasPerk(PerkLib.KitsuneEnergyThirst)) createStatusEffect(StatusEffects.KitsuneEnergyThirstFeed, 0, 0, 0, 0);
 				switch (fluidtype)
 				{
 					// Start with that, whats easy
 					case 'cum':
-						if (hasStatusEffect(StatusEffects.Overheat) && inHeat){
-							if (statusEffectv3(StatusEffects.Overheat) != 1){
-								addStatusValue(StatusEffects.Overheat, 3, 1);
-							}
+						if (hasStatusEffect(StatusEffects.Overheat) && inHeat) {
+							if (statusEffectv3(StatusEffects.Overheat) != 1) addStatusValue(StatusEffects.Overheat, 3, 1);
 						}
-						if (hasPerk(PerkLib.ManticoreCumAddict))
-						{
-							manticoreFeed();
-						}
+						if (hasPerk(PerkLib.ManticoreCumAddict)) manticoreFeed();
+						if (hasPerk(PerkLib.EndlessHunger)) refillHunger(30, false);
 						break;
 					case 'vaginalFluids':
-						if (hasStatusEffect(StatusEffects.Overheat) && inRut){
-							if (statusEffectv3(StatusEffects.Overheat) != 1){
-							addStatusValue(StatusEffects.Overheat, 3, 1);
-							}
+						if (hasStatusEffect(StatusEffects.Overheat) && inRut) {
+							if (statusEffectv3(StatusEffects.Overheat) != 1) addStatusValue(StatusEffects.Overheat, 3, 1);
 						}
+						if (hasPerk(PerkLib.EndlessHunger)) refillHunger(30, false);
 						break;
 					case 'saliva':
 						break;
 					case 'milk':
-						if (hasPerk(PerkLib.ManticoreCumAddict))
-						{
-							displacerFeed();
-						}
+						if (hasPerk(PerkLib.ManticoreCumAddict)) displacerFeed();
 						refillHunger(10, false);
 						break;
 				}
@@ -12784,29 +12788,20 @@ use namespace CoC;
 			SexXP(5+level);
 			if (armor == game.armors.SCANSC)SexXP(5+level);
 			orgasm(type,real);
-			if (type == "Dick")
-			{
-				if (hasPerk(PerkLib.EasterBunnyBalls))
-				{
-					if(ballSize > 3)
-					{
-						createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
-					}
+			if (type == "Dick") {
+				if (hasPerk(PerkLib.EasterBunnyBalls)) {
+					if (ballSize > 3) createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
 				}
-				if (hasPerk(PerkLib.NukiNutsEvolved)){
+				if (hasPerk(PerkLib.NukiNutsEvolved)) {
 					var cumAmmount:Number = cumQ();
 					var payout:Number = 0;
 					//Get rid of extra digits
 					cumAmmount = int(cumAmmount);
 					//Calculate payout
-					if(cumAmmount > 10) {
-						payout = 2 + int(cumAmmount/100)*2;
-					}
+					if (cumAmmount > 10) payout = 2 + int(cumAmmount/100)*2;
 					//Reduce payout if it would push past
-					if (hasPerk(PerkLib.NukiNutsFinalForm)){
-						payout *= 2;
-					}
-					if(payout > 0) {
+					if (hasPerk(PerkLib.NukiNutsFinalForm)) payout *= 2;
+					if (payout > 0) {
 						gems += payout;
 						EngineCore.outputText("\n\nBefore moving on you grab the " + payout + " gems you came from from your " + cockDescript(0) + ".</b>\n\n");
 					}

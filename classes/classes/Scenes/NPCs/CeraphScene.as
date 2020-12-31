@@ -93,12 +93,14 @@ public class CeraphScene extends NPCAwareContent
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
 			spriteSelect(7);
 			clearOutput();
+			var x:Number = player.cockThatFits(monster.vaginalCapacity());
+			if (x < 0) x = 0;
 			//UBER-Fullbodypenetration
 			if (!player.isTaur() && player.biggestCockArea() > 500 && (player.statusEffectv1(StatusEffects.Exgartuan) == 1 || monk >= 5)) {
 				hugeCorruptionForceFuckCeraph();
 				return;
 			}
-			if (player.cockArea(0) <= monster.vaginalCapacity()) {
+			if (player.cockArea(x) <= monster.vaginalCapacity()) {
 				//[Male] Fuck 'Dat Pussah
 				//[lust]
 				if (monster.lust >= monster.maxLust()) {

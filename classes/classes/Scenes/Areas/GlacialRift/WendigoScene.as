@@ -36,10 +36,18 @@ package classes.Scenes.Areas.GlacialRift
 				doNext(camp.returnToCampUseTwoHours);
 			}
 			else {
-				outputText("You walk steadily toward the lost girl to offer her support.\n\n");
-				outputText("It's only when she gets closer that you identify what you mistook for an open helmet as a pair of deer antlers jutting from under the creature's fur hood through a set of holes! Not to mention the claws, the cold glowing dead stare, or the emaciated body bordering anorexia. Your eyes are drawn to its lower body as you notice this monster hovers above the snow, its leg ending with furry forelimbs and a notable absence of feet!\n\n");
-				outputText("Smiling wide with a stare that betrays an endless hunger for pleasures that can never be fully sated, the creature lunges at you with its greedy claws.\n\n");
-				startCombat(new Wendigo());
+				if (player.wendigoScore() >= 10) {
+					outputText("You walk steadily toward the lost girl to offer her support.then realise it's just another wendigo.\n\n");
+					outputText("\"<i>So hungry… kin please, do you have food… anything... I’m starving.</i>\"\n\n");
+					outputText("Yea no you don’t and true be told even if you did you wouldn’t share it with her because if you did have food you would have eaten it already. Wendigos are the reason you are in this sorry state in the first place. Frustrated by your reply the wendigo turns back heels and wails as she resumes looking for food which reminds you that you also need to look for lunch. You head back to camp still starving.\n\n");
+					doNext(camp.returnToCampUseTwoHours);
+				}
+				else {
+					outputText("You walk steadily toward the lost girl to offer her support.\n\n");
+					outputText("It's only when she gets closer that you identify what you mistook for an open helmet as a pair of deer antlers jutting from under the creature's fur hood through a set of holes! Not to mention the claws, the cold glowing dead stare, or the emaciated body bordering anorexia. Your eyes are drawn to its lower body as you notice this monster hovers above the snow, its leg ending with furry forelimbs and a notable absence of feet!\n\n");
+					outputText("Smiling wide with a stare that betrays an endless hunger for pleasures that can never be fully sated, the creature lunges at you with its greedy claws.\n\n");
+					startCombat(new Wendigo());
+				}
 			}
 		}
 		public function encounterWendigo3():void {
@@ -96,8 +104,17 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Your still glazed but dead eyes open upon the world their irises glowing with a spectral blue light <b>as you achieve the last of your transformation into a wendigo!</b>\n\n");
 			outputText("Still hungry you resume eating out the imp dick for the next few hours until the poor thing just passes out unable to cum any further. In frustration, you head back to camp your hunger still nagging at you. You console yourself knowing that there's plenty of cock to suck and pussy to eat out, you will find some around, you just need to keep searching.\n\n");
 			player.removeStatusEffect(StatusEffects.WendigoPsychosis);
-			if (player.faceType == Face.ANIMAL_TOOTHS) CoC.instance.mutations.setFaceType(Face.DEER);
-			else CoC.instance.mutations.setFaceType(Face.ANIMAL_TOOTHS);
+			player.hairColor = "silver-white";
+			player.coatColor = "snow white";
+			if (player.faceType == Face.ANIMAL_TOOTHS) {
+				CoC.instance.mutations.setFaceType(Face.DEER);
+				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.mutations.humanizeSkin();
+				else if (player.hasPlainSkinOnly()) player.skin.growFur({color: player.coatColor}, Skin.COVERAGE_LOW);
+			}
+			else {
+				CoC.instance.mutations.setFaceType(Face.ANIMAL_TOOTHS);
+				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.mutations.humanizeSkin();
+			}
 			if (player.tailType != Tail.WENDIGO) CoC.instance.mutations.setTailType(Tail.WENDIGO);
 			if (player.tailCount != 1) player.tailCount = 1;
 			if (player.lowerBody != LowerBody.WENDIGO) CoC.instance.mutations.setLowerBody(LowerBody.WENDIGO);
@@ -108,16 +125,15 @@ package classes.Scenes.Areas.GlacialRift
 			if (player.horns.type != Horns.ANTLERS) CoC.instance.mutations.setHornType(Horns.ANTLERS, 30);
 			if (player.ears.type != Ears.DEER) CoC.instance.mutations.setEarType(Ears.DEER);
 			if (player.wings.type != Wings.LEVITATION) CoC.instance.mutations.setWingType(Wings.LEVITATION, "levitation");
-			if (player.rearBody.type != RearBody.FUR_COAT) CoC.instance.mutations.setRearBody(RearBody.FUR_COAT);/*
-			if (player.skin.base.pattern != Skin.PATTERN_NONE) {
-				player.skin.base.pattern = Skin.PATTERN_NONE;
-				player.skin.base.adj = "";
-			}*/
-			player.hairColor = "silver-white";
-			player.coatColor = "snow white";
+			if (player.rearBody.type != RearBody.FUR_COAT) CoC.instance.mutations.setRearBody(RearBody.FUR_COAT);
+			if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE) player.vaginaType(VaginaClass.EQUINE);
+			if (player.hasVagina() && player.biggestTitSize() < 8) player.breastRows[0].breastRating += 8;
+			if (player.hasCock() && player.horseCocks() < player.cocks.length) player.addHorseCock();
 			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
+			player.createPerk(PerkLib.UnnaturalStrength, 0, 0, 0, 0);
 			player.createPerk(PerkLib.EndlessHunger, 0, 0, 0, 0);
 			player.createPerk(PerkLib.WendigoCurse, 0, 0, 0, 0);
+			player.hunger = 80;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

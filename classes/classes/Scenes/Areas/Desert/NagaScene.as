@@ -338,12 +338,14 @@ private function nagaVictoryMale():void {
 			outputText(" beneath her.\n\n");
 		}
 		//Uncorrupted  
-		else if(player.cor < 50) {
+		else if (player.cor < 50) {
+			var x:Number = player.cockThatFits(monster.vaginalCapacity());
+			if (x < 0) x = 0;
             outputText("You almost feel pity as you behold the defeated creature lying before you, but your growing arousal pushes the thought from your mind. Leaning forward to get a closer look, your thoughts wander, and you find yourself wondering what her flexible body could do. Unable to contain your lust, you remove your [armor] and slowly lay on top of her, moving your hands across her scaly form in search of her pussy. As you rub your hands across the underside of her scaly belly, you notice that she is beginning to blush and moan softly. She is visibly trying to hold the feelings back, but whatever it is you're doing to her is definitely making that difficult. For the moment, you decide to abandon the search, content with simply running your hands along her tail's soft underside and watching her face as she tries in vain to hold her passion back. As you run your fingers up the center of her tail's underside, you notice a strange bump just a few inches below where her skin and scales meet. On further inspection, you realize that this is the thing you have been searching for - her warm, wet lovehole. Your touches seem to have had an effect on her; she is already rather moist, ready to take your [cock]. You gingerly slide one of your fingers inside her, feeling for depth as well as for wetness. The " + gorgonOrNaga);
 			outputText(" coos softly, unable to withhold her moans.\n\n");
 			outputText("You slowly begin moving your fingers in and out of her wet snatch, petting her underbelly with your free hand. You can tell that she is still tense; the look on her face is a mix of passion and fear. She struggles weakly, terrified as you place your warm [cock] against her belly. You feel her grow still as your length rubs against her. You look deeply into her amber eyes as you wrap your arms around her, and after a moment's hesitation, kiss her passionately. Surprised at your own decision, your mind quickly conjures an image of her biting you. Instead, she relaxes in your arms and returns the kiss, abandoning herself to your will.\n\n");
 			//[if cock fits]
-			if(player.cockArea(0) <= monster.vaginalCapacity()) {
+			if (player.cockArea(x) <= monster.vaginalCapacity()) {
 				outputText("Chills run down your spine as her delicate forked tongue tangles with your own, and you gently press the tip of your [cock] against her moist pussy-lips. Her tail slowly wraps around your legs as she moans in a soft and mildly hissing voice. You sink your engorged member into her depths, pausing for a moment to let her adapt to your presence, before pumping away and kissing her passionately as you both get caught up in the wonderful sensations of your entwined bodies. Her tight passage massages your length, and her scaly body rubbing on your skin only encourages you to go further while you rock back and forth in her embrace. You gradually increase your pace, hearing her moans become louder as she moves her hips in time with yours. Your fingers dig into her smooth backside as you continue thrusting into her, pleasure building for what seems like a wonderful eternity. You finally reach your limit, thrusting frantically until you climax, ");
 				//[normal cum load]
 				if(player.cumQ() < 250) outputText("shooting thick ropes of sperm deep inside her as the both of you wail with excitement.");
@@ -621,7 +623,9 @@ public function nagaFUCKSJOOOOOO():void {
 	}
 	//a) male (slightly modified could be good for centaurs
 	//too)
-	else if(player.gender == 1 || (player.gender == 3 && rand(2) == 0)) {
+	else if (player.gender == 1 || (player.gender == 3 && rand(2) == 0)) {
+		var x:Number = player.cockThatFits(monster.vaginalCapacity());
+		if (x < 0) x = 0;
 		//(If defeated by lust)
 		if(player.lust >= player.maxLust()) outputText("You fall to your knees, your body shaking with desire.\n\n");
 		//(If defeated by KO)
@@ -648,7 +652,7 @@ public function nagaFUCKSJOOOOOO():void {
 		outputText(" grabs ahold of your [cock] and starts to stroke it, licking at the [cockhead] with her serpentine tongue. You moan as she quickens her pace, causing a wave of heat to rise through your shaft.\n\n");
     
 		//(Cock fits)
-		if(player.cockArea(0) <= monster.vaginalCapacity()) {
+		if(player.cockArea(x) <= monster.vaginalCapacity()) {
             outputText("She stops suddenly and you look at her, a pleading look in your eyes despite yourself. The " + gorgonOrNaga);
 			outputText(" isn't done with you yet, and she makes this known by opening up the scaly slit at her crotch to reveal her moist cunt. She rubs the opening on to the [cockhead] of your [cock], teasing your throbbing member before slowly sliding it in. She carefully lowers herself onto you, swallowing up the first few inches of your [cock]. Her hips slide back, before bringing them back down and sliding more of your cock into her. She continues to gently swallow more of you inside of her, the folds of her love canal massaging you with each progressive thrust. Finally there is no more of you that she can push into her, her stomach presses against you in an attempt to try to bring more of you inside her.\n\n");
     		outputText("You feel the hands of the snake woman firmly grab your shoulders and watch as she pulls away from you, shouting with pleasure as she thrusts herself down on the full length of your shaft. Unable to move or do anything to help her, you watch helplessly as she manipulates your body, her slick netherlips completely enveloping your [cock].  Again and again she thrusts her hips onto your [cock], her pussy squeezing you almost as tightly as her tail. She continues to impale herself on your [cock], her thrusts becoming more intense by the moment. Finally she gives one last squeeze and tilts her head back with a yell. Unable to hold back, her tight walls begin to convulse, squeezing your [cock] tighter than ever before. You can feel a pressure welling up inside as her soaking pussy attempts to milk your [cock] of its tasty seed. You try to hold back, but it's no use. As she continues to pump at your [cock], a torrent of warm, sticky cum ");

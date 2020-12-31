@@ -64,7 +64,13 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("<b>You need some time to think of a new riddle.</b>\n\n");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.hasPerk(PerkLib.Incorporeality)) {
+		if (player.wendigoScore() >= 10) {
+			bd = buttons.add("Spectral scream", SpectralScream, "Let out a soul-chilling scream to stun your opponent and damage their sanity and soul. \n");
+			if (player.hasStatusEffect(StatusEffects.CooldownSpectralScream)) {
+				bd.disable("<b>You need more time before you can use Spectral scream again.</b>\n\n");
+			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		}
+		if (player.hasPerk(PerkLib.Incorporeality) || player.wendigoScore() >= 10) {
 			buttons.add("Possess", possess).hint("Attempt to temporarily possess a foe and force them to raise their own lusts.\nWould go into cooldown after use for: 2 rounds\n");
 			if (player.hasStatusEffect(StatusEffects.CooldownPossess)) {
 				bd.disable("<b>You need more time before you can use Possess again.</b>\n\n");
@@ -4508,6 +4514,15 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) player.removeStatusEffect(StatusEffects.GiantGrabbed);
 		if (player.hasStatusEffect(StatusEffects.Tentagrappled)) player.removeStatusEffect(StatusEffects.Tentagrappled);
 		possess();
+	}
+
+//Spectral Scream
+	public function SpectralScream():void {
+		clearOutput();
+		player.createStatusEffect(StatusEffects.CooldownSpectralScream,6,0,0,0);
+		outputText("You let out a soul-chilling scream freezing your opponent"+(monster.plural ? "s":"")+" in " + monster.pronoun1 + " tracks from sheer terror. This also seems to have damaged " + monster.pronoun1 + " sanity.");
+		monster.createStatusEffect(StatusEffects.Fear,1+rand(3),0,0,0);
+		enemyAI();
 	}
 
 //Feline Curse
