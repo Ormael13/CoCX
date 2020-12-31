@@ -73,6 +73,11 @@ package classes.Scenes
 			outputText("-1 new achievment. (shadow one)\n");
 			outputText("-New masturbation option for goblin that have goblin mech with full cum reservoir.\n");
 			outputText("-Diana corruption get reduced in her unicorn and alicorn forms. Since someone pointed she was way more corrupted than lust crazy spider-morph enemies.\n");
+			outputText("-He'Xin'Dao is prepared for next celebration of Lunar New year with tons of new year animal-morphs comming form all hidden places across the realm. As usual it starts at 21th January and last till 20th February.\n");
+			outputText("-New usable item: Reagent. Costing 50 gems and it's obtainable from Rathazul dyes shop. Usefull in making dyes working on other things than hair or fur, like scales.\n");
+			outputText("-Jtecx many typo corrections.\n");
+			outputText("-Playing difficulty setting below Hard Mode giving PC 3 less points in internal chimera score that would normaly giving negative regen. So now pc can pick most of races all three racial perks without worry to get negative HP regen.\n");
+			outputText("-Easy mode enabled would totaly remove negative HP regen from having racial mutation perks.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -82,7 +87,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: Cold Fish Soup missing it main intendeed effect (libido lowering), super perk points not reseting on ascension\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: Liadri bugfixes, Pyro bugfixes/typo corrections, Cold Fish Soup missing it main intendeed effect (libido lowering), super perk points not reseting on ascension, gremlin tf text error\n");/*ostatni punkt changelogu
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -95,6 +102,7 @@ package classes.Scenes
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -188,12 +196,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -248,9 +251,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

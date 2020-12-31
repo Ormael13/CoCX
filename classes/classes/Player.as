@@ -4129,6 +4129,9 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 14;//	104-r99	119	135	152	180	199	219(potem legendary/mythical stages?)
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				internalChimeraRatingCounter -= 20;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) internalChimeraRatingCounter -= 3;//6
+			//if (flags[kFLAGS.GAME_DIFFICULTY] == 1) internalChimeraRatingCounter -= 3;//tyle ile stopni perków rasowych
+			if (internalChimeraRatingCounter < 0 || flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) internalChimeraRatingCounter = 0;
 			End("Player","racialScore");
 			return internalChimeraRatingCounter;
 		}//każdy nowy chimerical body perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle
@@ -7221,6 +7224,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && orcCounter >= 8)
 				orcCounter += 1;
 			if (isGargoyle()) orcCounter = 0;
+			if (tallness < 48) orcCounter = 0;
 			orcCounter = finalRacialScore(orcCounter, Race.ORC);
 			End("Player","racialScore");
 			return orcCounter;
@@ -8078,6 +8082,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && cancerCounter >= 8)
 				cancerCounter += 1;
 			if (isGargoyle()) cancerCounter = 0;
+			if (lowerBody != LowerBody.CRAB && lowerBody != LowerBody.CANCER) cancerCounter = 0;
 			cancerCounter = finalRacialScore(cancerCounter, Race.CANCER);
 			End("Player","racialScore");
 			return cancerCounter;
@@ -8595,6 +8600,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && scyllaCounter >= 8)
 				scyllaCounter += 1;
 			if (isGargoyle()) scyllaCounter = 0;
+			if (!isScylla() && !isKraken()) scyllaCounter = 0;
 			scyllaCounter = finalRacialScore(scyllaCounter, Race.SCYLLA);
 			End("Player","racialScore");
 			return scyllaCounter;
@@ -10859,10 +10865,10 @@ use namespace CoC;
 				}
 				else {
 					maxStrCap2 += 50;
-					maxTouCap2 -= 20;
+					maxTouCap2 -= 10;
 					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 50;
 					else maxSpeCap2 += 40;
-					maxIntCap2 += 100;
+					maxIntCap2 += 90;
 					maxWisCap2 += 40;
 				}
 			}//+50/-20/+40/+100/+40
@@ -11770,14 +11776,14 @@ use namespace CoC;
 				if (couatlScore() >= 19) {
 					maxStrCap2 += 50;
 					maxTouCap2 += 45;
-					maxSpeCap2 += 140
-					maxIntCap2 += 50
+					maxSpeCap2 += 140;
+					maxIntCap2 += 50;
 				}
 				else {
 					maxStrCap2 += 30;
 					maxTouCap2 += 25;
-					maxSpeCap2 += 80
-					maxIntCap2 += 30
+					maxSpeCap2 += 80;
+					maxIntCap2 += 30;
 				}
 			}//+30/30-40
 			if (vouivreScore() >= 11) {
@@ -11790,17 +11796,17 @@ use namespace CoC;
 				}
 				else if (vouivreScore() >= 16) {
 					maxStrCap2 += 100;
-					maxTouCap2 += 75;
+					maxTouCap2 += 65;
 					maxSpeCap2 += 70;
-					maxIntCap2 += 10;
-					maxWisCap2 -= 20;
+					maxIntCap2 += 15;
+					maxWisCap2 -= 15;
 				}
 				else {
-					maxStrCap2 += 80;
+					maxStrCap2 += 70;
 					maxTouCap2 += 45;
 					maxSpeCap2 += 45;
 					maxIntCap2 += 10;
-					maxWisCap2 -= 20;
+					maxWisCap2 -= 10;
 				}
 			}
 			if (gorgonScore() >= 11) {
@@ -12930,6 +12936,7 @@ use namespace CoC;
 			if (alicornScore() >= 12) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (centaurScore() >= 8) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (gorgonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (gorgonScore() >= 17) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (horseScore() >= 4) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (horseScore() >= 7) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (manticoreScore() >= 6) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));

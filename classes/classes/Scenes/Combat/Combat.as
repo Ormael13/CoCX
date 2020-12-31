@@ -7168,7 +7168,7 @@ public class Combat extends BaseContent {
                 if (player.hasKeyItem("Jetpack") >= 0 || player.hasKeyItem("MK2 Jetpack") >= 0) {
                     outputText("<b>You need to give some time for your mech to recharge and thus land back to the ground.</b>\n\n");
                     player.createStatusEffect(StatusEffects.CooldownJetpack, 3, 0, 0, 0);
-                } else outputText("<b>You land to tired to keep flying.</b>\n\n");
+                } else outputText("<b>You land too tired to keep flying.</b>\n\n");
                 if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
                     player.removeStatusEffect(StatusEffects.FlyingNoStun);
                     player.removePerk(PerkLib.Resolute);

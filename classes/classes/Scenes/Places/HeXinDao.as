@@ -69,7 +69,8 @@ public class HeXinDao extends BaseContent
 		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2017) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rooster";
 		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2018) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "dog";
 		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2019) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "pig";
-		else if (flags[kFLAGS.LUNAR_NEW_YEAR] >= 2020) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rat";
+		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2020) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rat";
+		else if (flags[kFLAGS.LUNAR_NEW_YEAR] >= 2021) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "ox";
 		outputText("You go deeper in town and discover the whole place is indeed covered in red. The big question now is what should you check upon first?");
 		menu();
 		if (!player.hasStatusEffect(StatusEffects.CanGetLunarGift)) addButton(0, "Gifts", riverislandVillageStuffLunarGifts);
