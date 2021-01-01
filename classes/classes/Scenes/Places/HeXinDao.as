@@ -362,9 +362,9 @@ public class HeXinDao extends BaseContent
 
     public function mogahenmerchant():void {
         clearOutput();
-        outputText("You enter a shop that got sign over the entrance titled 'Transformative Items and Exchanges'.  Inside you see few stalls with many types of the items put on the display.  Most of them you have already seen somewhere but few seems to been quite rare ones as you not seen many of them so far or at least never seen in such large amounts gathered in one place.");
-        outputText("\n\nWhen you're looking over the stalls human owner almost silently approched you but compared to other shop you have seen in this islands Moga Hen by clearing his throat attracts your attention to himself.  After you turned toward him, smiling at you like a cat at the mouse, he first breaks the silence.");
-        outputText("\n\n\"<i>Welcome to my humble shop dear and precious customer. What need bring you here today? To repair some damage by using casual picked item or some specific change to attain? Or maybe you need to exchange some gems or spirit stones? I could even give you a fair price on special items that are useless for non-cultivators.</i>\" Each word sounds almost like it was repeated endless times.\n\n");
+        outputText("You enter a shop titled 'Transformative Items and Exchanges' from the sign on its entrance. Inside you see few stalls with many types of the items on display.  Most items seem rather generic, but a few items gathered are far more difficult to come by and rarer to encounter.");
+        outputText("\n\nAs you're looking over the stalls, the owner almost silently approches you. He announces his presence by clearing his throat. You turn to face him, only to be greeted by him smiling at you like a cat that caught the mouse. After a moment of pause, he breaks the silence.");
+        outputText("\n\n\"<i>Welcome to my humble shop dear and precious customer. I am Moga Hen. What need bring you here today? To repair some damage by using casual picked item or some specific change to attain? Or maybe you need to exchange some gems or spirit stones? I could even give you a fair price on special items that are useless for non-cultivators.</i>\" Each word sounds almost like it was repeated endless times.\n\n");
         var buyItem:Function = curry(confirmBuy1,mogahenmerchant,"Moga",3);
         var introText:String = "While you point toward the one of the items on the display merchant says, \"<i>It's item to embrace the ";
         var costText:String = " in you.  Interested?  It is merely <b>";
