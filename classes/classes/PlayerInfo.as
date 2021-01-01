@@ -328,6 +328,9 @@ public class PlayerInfo extends BaseContent {
 		if (player.statusEffectv1(StatusEffects.Airweed) > 0)
 			statEffects += "Airweed: Water breathing for " + Math.round(player.statusEffectv1(StatusEffects.Airweed)) + " hours.\n";
 
+		if (player.statusEffectv1(StatusEffects.WendigoPsychosis) > 0)
+			statEffects += "Wendigo psychosis - " + player.statusEffectv1(StatusEffects.WendigoPsychosis) + " hours remaining.\n";
+
 		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 		if (vthirst != null) {
 			statEffects += "Vampire Thirst: " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
@@ -1580,4 +1583,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(curry(superPerkBuyMenu, 1));
 	}
 }
-}
+}

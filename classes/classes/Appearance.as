@@ -2316,6 +2316,10 @@ public class Appearance extends Utils
 		{
 			return DEFAULT_EARS_NAMES[i_creature.ears.type] + " ears";
 		}
+		public static function antennaeDescript(i_creature:Creature):String
+		{
+			return DEFAULT_ANTENNAE_NAMES[i_creature.antennae.type] + " antennae";
+		}
 
 /* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().
 		private static function humanDescript(cockNum:Number):String
@@ -2449,7 +2453,7 @@ public class Appearance extends Utils
 			"hyper T-cup", "hyper large T-cup", "hyper TT-cup", "hyper large TT-cup", "hyper U-cup", "hyper large U-cup", "hyper UU-cup", "hyper large UU-cup", "hyper V-cup", "hyper large V-cup",//170-179
 			"hyper VV-cup", "hyper large VV-cup", "hyper W-cup", "hyper large W-cup", "hyper WW-cup", "hyper large WW-cup", "hyper X-cup", "hyper large X-cup", "hyper XX-cup", "hyper large XX-cup",//180-189
 			"hyper Y-cup", "hyper large Y-cup", "hyper YY-cup", "hyper large YY-cup", "hyper Z-cup", "hyper large Z-cup", "hyper ZZ-cup", "hyper large ZZ-cup", "hyper ZZZ-cup", "hyper large ZZZ-cup",//190-199
-			"jacques00-cup"
+			"jacques00-cup", "lia-cup"
 		];
 
 		public static function breastCup(size:Number):String
@@ -2492,14 +2496,14 @@ public class Appearance extends Utils
 			[Skin.CHITIN, "CHITIN", "chitin", "", false],
 			[Skin.BARK, "BARK", "bark", "", false],
 			[Skin.STONE, "STONE", "stone", "", false],
-			[Skin.TATTOED, "TATTOED", "tattooed skin", "", false],
+			[Skin.TATTOED, "TATTOOED", "tattooed skin", "", false],
 			[Skin.AQUA_SCALES, "AQUA_SCALES", "scales", "", true],
 			[Skin.DRAGON_SCALES, "dragon scales", "dragon scales", "", true],
 			[Skin.MOSS, "moss", "moss", "", false],
 			[Skin.AQUA_RUBBER_LIKE, "AQUA_RUBBER_LIKE", "slippery rubber-like skin", "", false],
 			[Skin.FEATHER, "FEATHER", "feather", "", false],
 			[Skin.TRANSPARENT, "TRANSPARENT", "transparent", "", false],
-			[Skin.TATTOED_ONI, "TATTOED_ONI", "tattooed skin", "", false],
+			[Skin.TATTOED_ONI, "TATTOOED_ONI", "tattooed skin", "", false],
 			[Skin.PARTIAL_DRAGON_SCALES, "partial dragon scales", "partial dragon scales", "", true],
 			[Skin.PARTIAL_STONE, "partial stone", "partial stone", "", false],
 			[Skin.PARTIAL_AQUA_SCALES, "partial fish scales", "partial fish scales", "", true],

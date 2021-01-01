@@ -52,7 +52,7 @@ public class Centaurinum extends Consumable{
 			outputText("\n\nYour body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher it has gotten.");
 			changes++;
 		}
-		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+		if (game.mutations.blockingBodyTransformations()) changeLimit = 0;
 		//Increase player's breast size, if they are big FF or smaller
 		if (player.smallestTitSize() <= 14 && player.gender == 2 && changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nAfter eating it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + player.breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.");
@@ -268,7 +268,7 @@ public class Centaurinum extends Consumable{
 		//Mare-gina
 		if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your " + Appearance.vaginaDescript(player,0) + " has grown larger, in depth AND size. To your absolute surprise it suddenly resume deepening inside your body. " +
-					"When you finaly take a check you discover your vagina is now not unlike that of a horse, capable of taking the largest cock witheout ease." +
+					"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease." +
 					"<b>  You now have a equine vagina!</b>");
 			player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
 			player.vaginaType(VaginaClass.EQUINE);
@@ -293,7 +293,7 @@ public class Centaurinum extends Consumable{
 					outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
 				}
 				if (player.isScylla()) {
-					outputText("\n\nYou collapse as your tentacle legs starts to merge in pairs, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
+					outputText("\n\nYou collapse as your tentacle legs start to merge in pairs, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
 				}
 			}
 			//Catch-all

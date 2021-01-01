@@ -41,16 +41,18 @@ package classes.Scenes.Places.HeXinDao
 			menu();
 			addButton(0, "Drink", drinkAlcohol);
 			addButton(4, "Adv.Guild", BoardkeeperYangMain);
-			if (flags[kFLAGS.MICHIKO_FOLLOWER] < 1) addButton(10, "???", SceneLib.michikoFollower.firstMeetingMichiko).hint("You see some suspicious looking squirrel in one of inn corners.");
-			if (flags[kFLAGS.NEISA_FOLLOWER] == 1) addButton(11, "ShieldMaiden", firstTimeMeetingNeisa);
-			if (flags[kFLAGS.NEISA_FOLLOWER] == 2) addButton(11, "Neisa", meetingNeisaAfterDecline);
-			if (flags[kFLAGS.NEISA_FOLLOWER] == 4 || flags[kFLAGS.NEISA_FOLLOWER] == 5) addButton(11, "Neisa", meetingNeisaPostDungeonExploration).hint("Neisa is sitting at a table enjoying one of the local drinks.");
-			if (flags[kFLAGS.NEISA_FOLLOWER] == 6) addButton(11, "Neisa", meetingNeisaPostDungeonExploration2).hint("Neisa is sitting at a table enjoying one of the local drinks.");
-			//addButtonDisabled(12, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
+			//addButtonDisabled(5, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
+			//addButtonDisabled(6, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
+			//addButtonDisabled(7, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
+			if (flags[kFLAGS.MICHIKO_FOLLOWER] < 1) addButton(8, "???", SceneLib.michikoFollower.firstMeetingMichiko).hint("You see some suspicious looking squirrel in one of inn corners.");
 			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore()))) {
-				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 1) addButton(13, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
-				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 1) addButton(13, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
+				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 1) addButton(9, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
+				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 1) addButton(9, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
 			}
+			if (flags[kFLAGS.NEISA_FOLLOWER] == 1) addButton(10, "ShieldMaiden", firstTimeMeetingNeisa);
+			if (flags[kFLAGS.NEISA_FOLLOWER] == 2) addButton(10, "Neisa", meetingNeisaAfterDecline);
+			if (flags[kFLAGS.NEISA_FOLLOWER] == 4 || flags[kFLAGS.NEISA_FOLLOWER] == 5) addButton(10, "Neisa", meetingNeisaPostDungeonExploration).hint("Neisa is sitting at a table enjoying one of the local drinks.");
+			if (flags[kFLAGS.NEISA_FOLLOWER] == 6) addButton(10, "Neisa", meetingNeisaPostDungeonExploration2).hint("Neisa is sitting at a table enjoying one of the local drinks.");
 			addButton(14, "Leave", heXinDao.riverislandVillageStuff);
 		}
 

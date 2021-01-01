@@ -978,7 +978,7 @@ public class Camp extends NPCAwareContent {
 		addButton(8, "Camp Actions", campActions).hint("Interact with the [camp] surroundings and also read your codex or questlog.");
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(9, "Enter Cabin", cabinProgress.initiateCabin).hint("Enter your cabin."); //Enter cabin for furnish.
 		if (player.hasPerk(PerkLib.JobSoulCultivator) || debug) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation or spend some of the soulforce.");
-		else if (!player.hasPerk(PerkLib.JobSoulCultivator) && player.hasPerk(PerkLib.Metamorph)) addButton(10, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");
+		else if (!player.hasPerk(PerkLib.JobSoulCultivator) && player.hasPerk(PerkLib.Metamorph)) addButton(10, "Metamorph", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");
 		var canFap:Boolean = !player.hasStatusEffect(StatusEffects.Dysfunction) && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
 		if (player.lust >= 30) {
 			addButton(11, "Masturbate", SceneLib.masturbation.masturbateMenu);
@@ -4762,6 +4762,7 @@ public function wakeFromBadEnd():void {
 		if (player.headJewelry == headjewelries.CROWWIS && player.necklace == necklaces.NECKWIS && player.jewelry == jewelries.RINGWIS && player.jewelry2 == jewelries.RINGWIS && player.jewelry3 == jewelries.RINGWIS && player.jewelry4 == jewelries.RINGWIS) awardAchievement("Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM);
 		if (player.isInGoblinMech() || player.isInNonGoblinMech()) awardAchievement("Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP);
 		if (player.vehicles == vehicles.GOBMPRI) awardAchievement("Rollin' Rollin'", kACHIEVEMENTS.FASHION_ROLLIN_ROLLIN);
+		if (player.vehicles == vehicles.GS_MECH) awardAchievement("Asura's Wrath", kACHIEVEMENTS.FASHION_ASURAS_WRATH);
 		if (player.vehicles == vehicles.HB_MECH) awardAchievement("Howl of the Banshee", kACHIEVEMENTS.FASHION_HOWL_OF_THE_BANSHEE);
 		if (player.jewelry.value >= 1000) awardAchievement("Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING);
 		if (player.necklace.value >= 5000) awardAchievement("Ka-Ching!", kACHIEVEMENTS.FASHION_KA_CHING);

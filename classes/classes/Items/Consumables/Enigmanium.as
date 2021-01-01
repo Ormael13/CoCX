@@ -106,9 +106,7 @@ public class Enigmanium extends Consumable{
 				player.MutagenBonus("lib", 1);
 				changes++;
 			}
-
-		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
-			
+		if (game.mutations.blockingBodyTransformations()) changeLimit = 0;
 		//Mare
 		if (player.gender == 2 || player.gender == 3) {
 			//Single vag

@@ -1678,8 +1678,20 @@ import coc.view.MainView;
 			CoC.instance.saves.loadPermObject();
 			flags[kFLAGS.MOD_SAVE_VERSION] = CoC.instance.modSaveVersion;
 			statScreenRefresh();
-			chooseToPlay();
+			chooseToPlayHalf();
 			return;
+		}
+
+		private function chooseToPlayHalf():void {
+			clearOutput();
+			outputText("Do you want to gain free Job(s) from all Past Life perks your PC have or just get free perk point(s) instead?\n\n");
+			menu();
+			addButton(1, "Jobs", chooseToPlay);
+			addButton(3, "Perks", choosePerks);
+		}
+		private function choosePerks():void {
+			player.createKeyItem("PerksOverJobs", 0, 0, 0, 0);
+			chooseToPlay();
 		}
 
 		public function chooseToPlay():void {
@@ -1687,20 +1699,33 @@ import coc.view.MainView;
 			else player.setUndergarment(undergarments.C_LOIN);
 			if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
 			else player.setUndergarment(undergarments.C_SHIRT);
-			if (player.findPerk(PerkLib.HistoryCultivator) >= 0 || player.findPerk(PerkLib.PastLifeCultivator) >= 0) player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) player.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistoryScout) >= 0 || player.findPerk(PerkLib.PastLifeScout) >= 0) player.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistoryScholar) >= 0 || player.findPerk(PerkLib.PastLifeScholar) >= 0) player.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistorySmith) >= 0 || player.findPerk(PerkLib.PastLifeSmith) >= 0) player.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistoryTactician) >= 0 || player.findPerk(PerkLib.PastLifeTactician) >= 0) player.createPerk(PerkLib.JobLeader, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) player.createPerk(PerkLib.JobSeducer, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.HistoryFortune) >= 0 || player.findPerk(PerkLib.HistoryHealer) >= 0 || player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.HistorySlacker) >= 0 || player.findPerk(PerkLib.HistorySlut) >= 0) player.perkPoints += 1;
+			if (player.findPerk(PerkLib.HistoryCultivator) >= 0 || (player.findPerk(PerkLib.PastLifeCultivator) >= 0 && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+			if (player.findPerk(PerkLib.HistoryFighter) >= 0 || (player.findPerk(PerkLib.PastLifeFighter) >= 0 && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
+			if (player.findPerk(PerkLib.HistoryScout) >= 0 || (player.findPerk(PerkLib.PastLifeScout) >= 0 && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
+			if (player.findPerk(PerkLib.HistoryScholar) >= 0 || (player.findPerk(PerkLib.PastLifeScholar) >= 0 && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
+			if (player.findPerk(PerkLib.HistorySmith) >= 0 || (player.findPerk(PerkLib.PastLifeSmith) >= 0 && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
+			if (player.findPerk(PerkLib.HistoryTactician) >= 0 || (player.findPerk(PerkLib.PastLifeTactician) >= 0 && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobLeader, 0, 0, 0, 0);
+			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || (player.findPerk(PerkLib.PastLifeWhore) >= 0 && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSeducer, 0, 0, 0, 0);
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) player.perkPoints += 1;
+			if (player.findPerk(PerkLib.HistoryFortune) >= 0) player.perkPoints += 1;
+			if (player.findPerk(PerkLib.HistoryHealer) >= 0) player.perkPoints += 1;
+			if (player.findPerk(PerkLib.HistoryReligious) >= 0) player.perkPoints += 1;
+			if (player.findPerk(PerkLib.HistorySlacker) >= 0) player.perkPoints += 1;
+			if (player.findPerk(PerkLib.HistorySlut) >= 0) player.perkPoints += 1;
+			if (player.findPerk(PerkLib.PastLifeCultivator) >= 0 && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.findPerk(PerkLib.PastLifeFighter) >= 0 && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.findPerk(PerkLib.PastLifeScout) >= 0 && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.findPerk(PerkLib.PastLifeScholar) >= 0 && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.findPerk(PerkLib.PastLifeSmith) >= 0 && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.findPerk(PerkLib.PastLifeTactician) >= 0 && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.findPerk(PerkLib.PastLifeWhore) >= 0 && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.findPerk(PerkLib.PastLifeAlchemist) >= 0) player.perkPoints += 1;
 			if (player.findPerk(PerkLib.PastLifeFortune) >= 0) player.perkPoints += 1;
 			if (player.findPerk(PerkLib.PastLifeHealer) >= 0) player.perkPoints += 1;
 			if (player.findPerk(PerkLib.PastLifeReligious) >= 0) player.perkPoints += 1;
 			if (player.findPerk(PerkLib.PastLifeSlacker) >= 0) player.perkPoints += 1;
 			if (player.findPerk(PerkLib.PastLifeSlut) >= 0) player.perkPoints += 1;
+			if (player.hasKeyItem("PerksOverJobs") >= 0) player.removeKeyItem("PerksOverJobs");
 			if (player.findPerk(PerkLib.AscensionHerosHeritage) >= 0) {
 				player.perkPoints += 3 * player.newGamePlusMod();
 				player.statPoints += 15 * player.newGamePlusMod();
@@ -2674,16 +2699,16 @@ import coc.view.MainView;
 				addButton(4, "Next", ascensionMetamorphPermeryMenu, page + 1);
 				if (player.hasStatusEffect(StatusEffects.UnlockedTattoed) && player.statusEffectv4(StatusEffects.UnlockedTattoed) < 9000) addButton(5, "Tattoed", permanentizeStatusEffect3, StatusEffects.UnlockedTattoed);
 				else if (player.hasStatusEffect(StatusEffects.UnlockedTattoed) && player.statusEffectv4(StatusEffects.UnlockedTattoed) == 9000) addButtonDisabled(5, "Tattoed", "Tattoed option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(5, "Tattoed", "Tattoed");
+				else addButtonDisabled(5, "Tattooed", "Tattooed");
 				if (player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed) && player.statusEffectv4(StatusEffects.UnlockedBattleTattoed) < 9000) addButton(6, "B.Tattoed", permanentizeStatusEffect3, StatusEffects.UnlockedBattleTattoed);
 				else if (player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed) && player.statusEffectv4(StatusEffects.UnlockedBattleTattoed) == 9000) addButtonDisabled(6, "B.Tattoed", "Battle Tattoed option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(6, "B.Tattoed", "Battle Tattoed");
+				else addButtonDisabled(6, "B.Tattooed", "Battle Tattooed");
 				if (player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed) && player.statusEffectv4(StatusEffects.UnlockedLightningTattoed) < 9000) addButton(7, "L.Tattoed", permanentizeStatusEffect3, StatusEffects.UnlockedLightningTattoed);
 				else if (player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed) && player.statusEffectv4(StatusEffects.UnlockedLightningTattoed) == 9000) addButtonDisabled(7, "L.Tattoed", "Lightning Tattoed option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(7, "L.Tattoed", "Lightning Tattoed");
+				else addButtonDisabled(7, "L.Tattooed", "Lightning Tattooed");
 				if (player.hasStatusEffect(StatusEffects.UnlockedScarTattoed) && player.statusEffectv4(StatusEffects.UnlockedScarTattoed) < 9000) addButton(8, "S.Tattoed", permanentizeStatusEffect3, StatusEffects.UnlockedScarTattoed);
 				else if (player.hasStatusEffect(StatusEffects.UnlockedScarTattoed) && player.statusEffectv4(StatusEffects.UnlockedScarTattoed) == 9000) addButtonDisabled(8, "S.Tattoed", "Scar Tattoed option is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(8, "S.Tattoed", "Scar Tattoed");
+				else addButtonDisabled(8, "S.Tattooed", "Scar Tattooed");
 				addButton(9, "Previous", ascensionMetamorphPermeryMenu, page - 1);
 				/*if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) < 9000) addButton(10, "", permanentizeStatusEffect3, StatusEffects.);
 				else if (player.hasStatusEffect(StatusEffects.) && player.statusEffectv4(StatusEffects.) == 9000) addButtonDisabled(10, "", " option is already made permanent and will carry over in all subsequent ascensions.");
@@ -3620,6 +3645,7 @@ import coc.view.MainView;
 			player.herbalismXP = 0;
 			player.statPoints = 0;
 			player.perkPoints = 0;
+			player.superPerkPoints = 0;
 			player.XP = 0;
 			player.setArmor(armors.C_CLOTH);
 			player.setWeapon(WeaponLib.FISTS);

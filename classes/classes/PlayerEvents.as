@@ -78,12 +78,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Normal
 			if (player.findPerk(PerkLib.WellAdjusted) < 0) {
-				dynStats("lus", player.lib * 0.04, "scale", false); //Raise lust
-				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.lib * 0.02, "scale", false); //Double lust rise if lusty.
+				dynStats("lus", player.libStat.core.value * 0.04, "scale", false); //Raise lust
+				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.libStat.core.value * 0.01, "scale", false); //Double lust rise if lusty.
 			}
 			else { //Well adjusted perk
-				dynStats("lus", player.lib * 0.02, "scale", false); //Raise lust
-				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.lib * 0.01, "scale", false); //Double lust rise if lusty.
+				dynStats("lus", player.libStat.core.value * 0.02, "scale", false); //Raise lust
+				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.libStat.core.value * 0.005, "scale", false); //Double lust rise if lusty.
 			}
 			//Jewelry effect
 			if (player.jewelryEffectId == JewelryLib.CORRUPTION)
@@ -423,7 +423,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.salamanderScore()>=7) outputText(" salamander");
 				else if (player.hellcatScore() >= 10) outputText(" hellcat");
 				else if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText(" hinezumi");
-				outputText(" your body has started overheating with lust. You will have to constantly sate your uncontrollable burning need for sex if only to stay sane long enought not to jump on everything that moves.");
+				outputText(" your body has started overheating with lust. You will have to constantly sate your uncontrollable burning need for sex if only to stay sane long enough not to jump on everything that moves.");
 				player.createStatusEffect(StatusEffects.Overheat, 1, 0, 0,0);
 				if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
 				else if (player.hasVagina()) player.goIntoHeat(false);
@@ -431,7 +431,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if ((player.salamanderScore()<7 && !player.hasStatusEffect(StatusEffects.HinezumiCoat) && player.hellcatScore() < 10) && player.hasStatusEffect(StatusEffects.Overheat))
 			{
-				outputText("\n\nYour body finaly calms down it would seem you no longer are as hot as you used to be wich might be a good thing as you won't have to deal with those bodily heat problems anymore.");
+				outputText("\n\nYour body finally calms down. It would seem you are no longer as hot as you used to be, which might be a good thing as you won't have to deal with heat problems... for now.");
 				player.removeStatusEffect(StatusEffects.Overheat);
 				player.removeStatusEffect(StatusEffects.Heat);
 				player.removeStatusEffect(StatusEffects.Rut);
@@ -539,17 +539,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.rearBody.type = RearBody.NONE;
 				needNext = true;
 			}
-			if (!player.findPerk(PerkLib.MorphicWeaponry) && (player.darkgooScore() >= 17 || player.gooScore() >= 15 || player.magmagooScore() >= 17) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") > 50){
+			if (!player.hasPerk(PerkLib.MorphicWeaponry) && (player.darkgooScore() >= 17 || player.gooScore() >= 15 || player.magmagooScore() >= 17) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") > 50){
 				player.createPerk(PerkLib.MorphicWeaponry,0,0,0,0);
 				outputText("\nYour body has become so bloated with fluids and so large that you gain the ability to use your excess mass to form any number of additionnal tendrils wich you can use to attack your opponents.\n(<b>Gained New Perk: Morphic Weaponry.</b>\n>\n");
 			}
-			if (player.findPerk(PerkLib.MorphicWeaponry) && ((player.darkgooScore() >= 17 && player.gooScore() >= 15 && player.magmagooScore() >= 17) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") <= 50)){
+			if (player.hasPerk(PerkLib.MorphicWeaponry) && ((player.darkgooScore() < 17 && player.gooScore() < 15 && player.magmagooScore() < 17) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") <= 50)){
 				player.removePerk(PerkLib.MorphicWeaponry);
-				if((player.darkgooScore() >= 17 && player.gooScore() >= 15 && player.magmagooScore() >= 17)){
-					outputText("\nAs you are mo longuer a slime, you can't use the morphic weaponry ability anymore.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
+				if((player.darkgooScore() < 17 && player.gooScore() < 15 && player.magmagooScore() < 17)){
+					outputText("\nAs you are mo longer a slime, you can't use the morphic weaponry ability anymore.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
 				}
 				else{
-					outputText("\nHaving lost fluids, you no longuer have enought body mass to produce extra tendril attacks.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
+					outputText("\nHaving lost fluids, you no longer have enough body mass to produce extra tendril attacks.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.Fullness)) {
@@ -965,7 +965,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						player.buff("EasterBunnyBalls").setStat("lib.mult",changeLib).withText("Easter Bunny Balls");
 					}
 					if (player.ballSize > 3 && player.ballSize < 4) {
-						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head. Your balls have increased enought that you are ready to lay your eggs.\n");
+						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head. Your balls have increased enough that you are ready to lay your eggs.\n");
 					}
 					if (player.ballSize > 4) {
 						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head, as the size of your increasingly growing balls remind you that you need to expel those eggs one way or another before they become too big.\n");
@@ -1071,17 +1071,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		private function hourlyHunger():Boolean {
 			var needNext:Boolean = false;
 			var hungerActive:Boolean = false;
-			if (flags[kFLAGS.HUNGER_ENABLED] > 0) hungerActive = true;
+			if (flags[kFLAGS.HUNGER_ENABLED] > 0 || player.hasPerk(PerkLib.EndlessHunger)) hungerActive = true;
 			if (hungerActive) {
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 3) hungerActive = false;
 				else if (player.hasPerk(PerkLib.DeadMetabolism)) hungerActive = false;
 			}
 			if (hungerActive || prison.inPrison) {
 				var multiplier:Number = 1.0;
-				if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
-				if (player.findPerk(PerkLib.Survivalist2) >= 0) multiplier -= 0.2;
-				if (player.findPerk(PerkLib.ManticoreCumAddict) >= 0) multiplier *= 2;
-				if (player.findPerk(PerkLib.HydraRegeneration) >= 0) multiplier *= 2;
+				if (player.hasPerk(PerkLib.Survivalist)) multiplier -= 0.2;
+				if (player.hasPerk(PerkLib.Survivalist2)) multiplier -= 0.2;
+				if (player.hasPerk(PerkLib.ManticoreCumAddict)) multiplier *= 2;
+				if (player.hasPerk(PerkLib.HydraRegeneration)) multiplier *= 2;
 				//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
 				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 hours with Survivalist perks.
 				if (player.hasStatusEffect(StatusEffects.FastingPill)) player.hunger += 2;
@@ -1172,24 +1172,24 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Armor unequip zone
 			if (player.armor == armors.CTPALAD && !player.isTaur())
 			{
-				outputText("Due to your current body shape you are no longuer able to wear the centaur armor and thus you drop the over encumbering equipment back into your inventory");
+				outputText("Due to your current body shape you are no longer able to wear the centaur armor and thus you drop the over encumbering equipment back into your inventory");
 				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
 				needNext = true;
 			}
 			if (player.armor == armors.KBDRESS && !player.isScylla() && !player.isKraken())
 			{
-				outputText("Due to your current body shape you are no longuer able to wear the Kraken black dress and thus you put the over item back into your inventory");
+				outputText("Due to your current body shape you are no longer able to wear the Kraken black dress and thus you put the over item back into your inventory");
 				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
 				needNext = true;
 			}
 			//if (player.armor == armors.SSC && (player.isTaur() || player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.GOO || player.lowerBody == LowerBody.MELKIE || player.lowerBody == LowerBody.DRIDER))
 			//{
-				//outputText("Due to your current body shape you are no longuer able to wear the scandalous succubus clothes and thus you drop the over encumbering equipment back into your inventory.");
+				//outputText("Due to your current body shape you are no longer able to wear the scandalous succubus clothes and thus you drop the over encumbering equipment back into your inventory.");
 				//SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
 				//needNext = true;
 			//}
 			//Demonic hunger perk
-			if (player.demonScore() >= 10 || player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enought
+			if (player.demonScore() >= 10 || player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enough
 				if (player.findPerk(PerkLib.DemonEnergyThirst) < 0) {
 					outputText("\nYou begin fantasising about pussies and cocks foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners. \n\n(<b>Gained Perk: Demonic Hunger</b>)\n");
 					player.createPerk(PerkLib.DemonEnergyThirst, 0, 0, 0, 0);
@@ -1197,7 +1197,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Demonic hunger perk loss
-			if (player.demonScore() < 10 && !player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enought
+			if (player.demonScore() < 10 && !player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enough
 				if (player.findPerk(PerkLib.DemonEnergyThirst) > 0) {
 					outputText("\nYour mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate. \n\n(<b>Lost Perk: Demonic Hunger</b>)\n");
 					player.removePerk(PerkLib.DemonEnergyThirst);
@@ -1206,16 +1206,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Demonic energy thirst
 			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
-				if (player.hunger < player.maxHunger())
-				{
-					player.refillHunger(10, false);
-				}
-				if (player.HP < player.maxHP()) {
-					EngineCore.HPChange(100 + (player.tou*2), true);
-				}
-				if (player.mana < player.maxMana()) {
-					EngineCore.ManaChange(100 + (player.inte*2), true);
-				}
+				if (player.hunger < player.maxHunger()) player.refillHunger(10, false);
+				if (player.HP < player.maxHP()) EngineCore.HPChange(100 + (player.tou*2), true);
+				if (player.mana < player.maxMana()) EngineCore.ManaChange(100 + (player.inte*2), true);
 				EngineCore.changeFatigue(-(100 + (player.spe*2)));
 				outputText("You feel energised and empowered by the energy drained out of the cum of your recent fuck. What a meal!");
 				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed)
@@ -1272,7 +1265,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
 			}
 			//Kitsune hunger perk
-			if (player.kitsuneScore() >= 10) { //Check for being a kitsune enought
+			if (player.kitsuneScore() >= 10) { //Check for being a kitsune enough
 				if (player.findPerk(PerkLib.KitsuneEnergyThirst) < 0) {
 					outputText("\nYou begin fantasising about pussies and cocks foaming at the idea of fucking or getting fucked. It would look like you aquired the kitsunes hunger for sex and can now feed from the life force extracted of the orgasms of your partners. \n\n(<b>Gained Perk: Kitsune Hunger</b>)\n");
 					player.createPerk(PerkLib.KitsuneEnergyThirst, 0, 0, 0, 0);
@@ -1280,7 +1273,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Kitsune hunger perk
-			if (player.kitsuneScore() < 10) { //Check for being a kitsune enought
+			if (player.kitsuneScore() < 10) { //Check for being a kitsune enough
 				if (player.findPerk(PerkLib.KitsuneEnergyThirst) > 0) {
 					outputText("\nYour mind clears up as becoming less of a kitsune you also lost the hunger for life force only sex could provide you. \n\n(<b>Lost Perk: Kitsune Hunger</b>)\n");
 					player.removePerk(PerkLib.KitsuneEnergyThirst);
@@ -1289,8 +1282,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Kitsune energy thirst
 			if (player.hasStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)) {
-				if (player.hunger < player.maxHunger())
-				{
+				if (player.hunger < player.maxHunger()) {
 					player.refillHunger(10, false);
 				}
 				if (player.HP < player.maxHP()) {
@@ -1463,12 +1455,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Compelling Aria
 			if (player.tongue.type != Tongue.MELKIE && player.hasPerk(PerkLib.MelkieSong) && !player.hasPerk(PerkLib.MelkieLung)) {
-				outputText("\n Your voice no longuer carries the magical power it used to and thus you are no longuer able to use your compelling aria. <b>Lost Perks: Melkie Song</b>)\n");
+				outputText("\n Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria. <b>Lost Perks: Melkie Song</b>)\n");
 				player.removePerk(PerkLib.MelkieSong);
 				needNext = true;
 			}
 			if (player.sirenScore() < 10 && player.harpyScore() < 8 && player.hasPerk(PerkLib.HarpySong) && !player.hasPerk(PerkLib.MelkieLung)) {
-				outputText("\n Your voice no longuer carries the magical power it used to and thus you are no longuer able to use your compelling aria. <b>Lost Perks: Harpy Song</b>)\n");
+				outputText("\n Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria. <b>Lost Perks: Harpy Song</b>)\n");
 				player.removePerk(PerkLib.HarpySong);
 				needNext = true;
 			}
@@ -1499,13 +1491,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (!player.isAlraune() && player.hasPerk(PerkLib.AlrauneNectar)){
-				outputText("\nAs you no longuer have a pitcher to produce nectar your scent has became more like that of an ordinary human. <b>Lost Perk: Alraune Nectar</b>\n");
+				outputText("\nAs you no longer have a pitcher to produce nectar your scent has became more like that of an ordinary human. <b>Lost Perk: Alraune Nectar</b>\n");
 				player.removePerk(PerkLib.AlrauneNectar);
 				player.vaginaType(VaginaClass.HUMAN);
 				needNext = true;
 			}
 			if (!player.isAlraune() && player.hasPerk(PerkLib.PlantKnowledge)){
-				outputText("\nNo longuer a plant you lost some of your innate floral knowledge. <b>Lost Perk: Plant Knowledge</b>\n");
+				outputText("\nNo longer a plant you lost some of your innate floral knowledge. <b>Lost Perk: Plant Knowledge</b>\n");
 				player.removePerk(PerkLib.PlantKnowledge);
 				needNext = true;
 			}
@@ -1529,7 +1521,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.kamaitachiScore() <10 && player.hasPerk(PerkLib.NaturalHerbalism)){
-				outputText("\nNo longuer a Kamaitachi, you seem to have lost your knack for herbs and medicines. <b>Lost Perks: Natural Herbalism</b>)\n");
+				outputText("\nNo longer a Kamaitachi, you seem to have lost your knack for herbs and medicines. <b>Lost Perks: Natural Herbalism</b>)\n");
 				player.removePerk(PerkLib.NaturalHerbalism);
 				needNext = true;
 			}
@@ -1550,7 +1542,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Fire Affinity
 			if ((player.salamanderScore() >= 4 || player.phoenixScore() >= 10 || player.hellcatScore() >= 10 || player.firesnailScore() >= 15 || (player.mouseScore() >= 12 && player.lowerBody == LowerBody.HINEZUMI && player.arms.type == Arms.HINEZUMI && player.tailType == Tail.HINEZUMI)) && player.findPerk(PerkLib.FireAffinity) < 0) {
-				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until your finaly at ease with your bodily heat. You doubt any more heat is gunna make you more incomfortable then this as you quietly soak in the soothing warmth your body naturaly produce. Its like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
+				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until you're finally at ease with your bodily heat. You doubt any more heat is going to make you more uncomfortable then this as you quietly soak in the soothing warmth your body naturally produce. It's like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
 				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
@@ -1617,14 +1609,20 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removeStatusEffect(StatusEffects.YetiScarf);
 			}
 			if (player.lowerBody == LowerBody.YETI && player.arms.type == Arms.YETI && player.findPerk(PerkLib.BigHandAndFeet) < 0) {
-				outputText("\nGeeze with those oversized hands and foot you should just drop your weapon and punch things out cold. Why do you even need a weapon for anyway?\n\n<b>(Lost the Big hand and feet perk!)</b>\n");
+				outputText("\nGeeze, with those oversized hands and feet you should just drop your weapon and punch things out cold. Why do you even need a weapon for anyway?\n\n<b>(Lost the Big hand and feet perk!)</b>\n");
 				player.createPerk(PerkLib.BigHandAndFeet, 0, 0, 0, 0);
 				needNext = true;
 			}
 			if ((player.lowerBody != LowerBody.YETI || player.arms.type != Arms.YETI) && player.findPerk(PerkLib.BigHandAndFeet) >= 0) {
-				outputText("\nYour limbs now back to normal size it might be smart to use weapon over your bare hands and feet for fighting.\n\n<b>(Lost the Big hand and feet perk!)</b>\n");
+				outputText("\nYour limbs are now back to their normal size, it might be smart to use a weapon over your bare hands and feet for fighting.\n\n<b>(Lost the Big hand and feet perk!)</b>\n");
 				player.removePerk(PerkLib.BigHandAndFeet);
 				needNext = true;
+			}
+			//Wendigo stuff
+			if (player.hasStatusEffect(StatusEffects.WendigoPsychosis) && player.findPerk(PerkLib.EndlessHunger) < 0 && ((flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0) || (flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxLust()))) SceneLib.glacialRift.wendigoScene.becomeWendigo();
+			if (player.lowerBody != LowerBody.WENDIGO && player.wings.type == Wings.LEVITATION && player.hasStatusEffect(StatusEffects.WendigoPlus)) {
+				player.removeStatusEffect(StatusEffects.WendigoPlus);
+				player.wings.type == Wings.NONE;
 			}
 			//Necromancy perk
 			if (((player.tailType == Tail.CAT && player.tailCount == 2) || player.tailType == Tail.NEKOMATA_FORKED_2_3 || player.tailType == Tail.NEKOMATA_FORKED_1_3) && player.findPerk(PerkLib.Necromancy) < 0) {
@@ -1647,13 +1645,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Cancer stance
 			if ((player.arms.type != Arms.HUMAN || player.lowerBody != LowerBody.CANCER) && player.hasStatusEffect(StatusEffects.CancerCrabStance)) {
-				outputText("\nYour body now less crab like, you have stopped folding your arms like one would.\n");
+				outputText("\nYour body is now less crab-like, you have stopped folding your arms like one would.\n");
 				player.removeStatusEffect(StatusEffects.CancerCrabStance);
 				needNext = true;
 			}
 			//Elven Sense
 			if ((player.eyes.type != Eyes.ELF || player.ears.type != Ears.ELVEN) && player.findPerk(PerkLib.ElvenSense) >= 0 && player.findPerk(PerkLib.ElvishPeripheralNervSys) < 0) {
-				outputText("\nYou feels yourself less aware of your surrounding. Heck your vision seems less keen then it used to be. Likely it's because you no longer possess the senses of an elf.\n\n<b>(Lost the Elven Sense perk!)</b>\n");
+				outputText("\nYou feels yourself less aware of your surroundings. Heck your vision seems less keen then it used to be. Most likely because you no longer possess the senses of an elf.\n\n<b>(Lost the Elven Sense perk!)</b>\n");
 				player.removePerk(PerkLib.ElvenSense);
 				needNext = true;
 			}
@@ -1666,20 +1664,20 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Ferocity
 			if (player.orcScore() < 11 && player.findPerk(PerkLib.Ferocity) >= 0 && player.findPerk(PerkLib.OrcAdrenalGlandsFinalForm) < 0) {
-				outputText("\nYour natural ferocity start vanishing at a dramatic rate until finally there is no more. You realise you likely aren’t orc enough anymore, considering you felt so invincible with it, might not be a good thing.\n\n<b>(Lost the Ferocity perk!)</b>\n");
+				outputText("\nYour natural ferocity starts vanishing at a dramatic rate until finally there is no more. You realise you likely aren’t orc enough anymore, considering you felt so invincible with it, which might not be a good thing.\n\n<b>(Lost the Ferocity perk!)</b>\n");
 				player.removePerk(PerkLib.Ferocity);
 				needNext = true;
 			}
 			//Acid Spit and Azureflame Breath
 			if (player.cavewyrmScore() < 7 && player.findPerk(PerkLib.AcidSpit) >= 0 && player.findPerk(PerkLib.AzureflameBreath) >= 0) {// && player.findPerk(PerkLib.) < 0
-				outputText("\nAs you become less of a cave wyrm your spit and fluids begins to lose their acidic propriety until its back to being ordinary drool and fluids. With no acid to ignite it seems you also lost the ability to breath fire.\n\n<b>(Lost the Acid Spit and Azureflame Breath perks!)</b>\n");
+				outputText("\nAs you become less of a cave wyrm your spit and fluids begins to lose their acidic properties until its back to being ordinary drool and fluids. With no acid to ignite it seems you also lost the ability to breath fire.\n\n<b>(Lost the Acid Spit and Azureflame Breath perks!)</b>\n");
 				player.removePerk(PerkLib.AcidSpit);
 				player.removePerk(PerkLib.AzureflameBreath);
 				needNext = true;
 			}
 			//Titanic Strength
 			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.scyllaScore() >= 12 || player.frostWyrmScore() >= 10) && player.tallness >= 80 && player.findPerk(PerkLib.TitanicStrength) < 0) {
-				outputText("\nWhoa you've grown so big its sheer miracle if you don't damage the landscape while moving. This said your size contribute to your strength as well now.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
+				outputText("\nWhoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
 				player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
 				needNext = true;
 			}
@@ -1689,29 +1687,40 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.TitanicStrength);
 				needNext = true;
 			}
+			//Enigma
+			if (player.sphinxScore() >= 14 && player.findPerk(PerkLib.Enigma) < 0) {
+				outputText("\nBeing a sphinx has granted you insight on many things including various secrets to martial combat, guess this is what they mean about using your smarts before your brawn.\n\n<b>(Gained Enigma perk!)</b>\n");
+				player.createPerk(PerkLib.Enigma, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.sphinxScore() < 14 && player.findPerk(PerkLib.Enigma) >= 0) {
+				outputText("\nAs you no longer possess the insight of a sphinx you no longer have the ability to fully use your smarts to improve your martial prowess.\n\n<b>(Lost the Enigma perk!)</b>\n");
+				player.removePerk(PerkLib.Enigma);
+				needNext = true;
+			}
 			//Lacta bovine immubities
 			if (player.cowScore() >= 10 && player.findPerk(PerkLib.LactaBovineImmunity) < 0) {
-				outputText("\nAs you become more of a lacta bovine you become increasingly obsessed with thoughts of horsecocks and cum sloshing balls, namely minotaur balls. While you are aware you naturaly became addicted to minotaur cum you also know your nature as a lacta bovine will protect you from most of its harmful effects allowing you to sample the substance to your heart content witheout risks.");
+				outputText("\nAs you become more of a lacta bovine you become increasingly obsessed with thoughts of horsecocks and cum sloshing balls, namely minotaur balls. While you are aware you naturally became addicted to minotaur cum you also know your nature as a lacta bovine will protect you from most of its harmful effects allowing you to sample the substance to your heart's content without risks.");
 				outputText(".\n\n<b>(Gained the Lacta Bovine Immunity perk!)</b>\n");
 				player.createPerk(PerkLib.LactaBovineImmunity, 0, 0, 0, 0);
 				needNext = true;
 			}
 			if (player.cowScore() < 10 && player.findPerk(PerkLib.LactaBovineImmunity) >= 0) {
-				outputText("\nYour mind clears up as you cease to obsess over minotaur dicks this is also a sign that you are no longuer cow enought to be immune to the harmful effect of minotaur cum.\n\n<b>(Lost the Lacta Bovine Immunity perk!)</b>\n");
+				outputText("\nYour mind clears up as you cease to obsess over minotaur dicks. This is also a sign that you are no longer considered a cow enough to be immune to the addictive effects of minotaur cum.\n\n<b>(Lost the Lacta Bovine Immunity perk!)</b>\n");
 				player.removePerk(PerkLib.LactaBovineImmunity);
 				needNext = true;
 			}
 			//Bull Strength
 			if ((player.minotaurScore() >= 15 || player.cowScore() >= 15) && player.findPerk(PerkLib.BullStrength) < 0) {
-				outputText("\nWhoa you feel tremendous power accumulate in ");
-				if (player.minotaurScore() >= 15) outputText("your balls. It fills your body with bovine strength, nourishing your muscle with manly power. They say having big balls makes you stronguer well its not like you can deny the correlation anymore!");
-				if (player.cowScore() >= 15) outputText("your mammaries. It fills your body with bovine strength, nourishing your muscle with milky power. Talk about storing all your might into your jugs!");
+				outputText("\nWhoa, you feel tremendous power accumulate in ");
+				if (player.minotaurScore() >= 15) outputText("your balls. It fills your body with bovine strength, nourishing your muscles with manly power. They say having big balls makes you stronger... Well its not like you can deny the correlation anymore!");
+				if (player.cowScore() >= 15) outputText("your mammaries. It fills your body with bovine strength, nourishing your muscles with milky power. Talk about storing all your might into your jugs!");
 				outputText(".\n\n<b>(Gained Bull Strength perk!)</b>\n");
 				player.createPerk(PerkLib.BullStrength, 0, 0, 0, 0);
 				needNext = true;
 			}
 			if ((player.minotaurScore() < 15 && player.cowScore() < 15) && player.findPerk(PerkLib.BullStrength) >= 0) {
-				outputText("\nYou feel weaker punyer it looks like you lost the benefit of your bull strength. Probably because you are no longuer bovine like enought.\n\n<b>(Lost the Bull Strength perk!)</b>\n");
+				outputText("\nYou feel weaker, it looks like you lost the benefit of your bull strength. Probably because you are no longer bovine enough.\n\n<b>(Lost the Bull Strength perk!)</b>\n");
 				player.removePerk(PerkLib.BullStrength);
 				needNext = true;
 			}
@@ -1730,7 +1739,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.mouseScore() < 12 && (player.lowerBody != LowerBody.HINEZUMI || player.arms.type != Arms.HINEZUMI || player.tailType != Tail.HINEZUMI) && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-				outputText("\nFor one reason or another your inner flames finally die down leaving you penting but clear of mind. Seems you no longer are hinezumi enough for the coat to maintain itself.\n\n<b>(Lost the Hinezumi Coat!)</b>\n");
+				outputText("\nFor one reason or another your inner flames suddenly die down leaving you penting but clear of mind. Seems you no longer are hinezumi enough for the coat to maintain itself.\n\n<b>(Lost the Hinezumi Coat!)</b>\n");
 				player.removeStatusEffect(StatusEffects.HinezumiCoat);
 				needNext = true;
 			}
@@ -1760,7 +1769,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			else if ((!player.isGoblinoid()) && player.findPerk(PerkLib.GoblinoidBlood) >= 0) {
-				outputText("\nYou feel the drugs in your blood losing effect. Damnit, of course it won’t work since those chemical power ups were tested for goblinoids only. Guess perhaps a in few years you could try and develop a variant.\n");
+				outputText("\nYou feel the drugs in your blood losing effect. Damnit, of course it won’t work since those chemical power ups were tested for goblinoids only. Perhaps in few years you could try and develop a variant...\n");
 				outputText("\n<b>(Lost Perk: Goblinoid blood)</b>\n");
 				player.removePerk(PerkLib.GoblinoidBlood);
 				player.statStore.removeBuffs("DrugInjector");
@@ -1768,7 +1777,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if ((player.isGoblinoid()) && player.findPerk(PerkLib.BouncyBody) < 0) {
-				outputText("\nGeeze with how round and small you've become its like you’ve got natural cushion now. The worst that will happen is that you'll get yourself punted by some random people mistaking you for a ball. Your body is so bouncy that it naturally has a chance to reduce damage from attacks.\n");
+				outputText("\nGeeze, with how round and small you've become its like you’ve become a natural cushion now. The worst that will happen is that you'll get yourself punted by some random people mistaking you for a ball. Your body is so bouncy that it naturally has a chance to reduce damage from attacks.\n");
 				outputText("\n(<b>Gained Perk: Bouncy body</b>)\n");
 				player.createPerk(PerkLib.BouncyBody, 0, 0, 0, 0);
 				needNext = true;
@@ -1905,12 +1914,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Loosing hellcat body parts
 			if (player.hellcatScore() >= 10 && flags[kFLAGS.WITCHES_SABBATH] > 1) {
 				var hellcatparts:Number = 3;
-				if (player.tailType != Tail.BURNING) hellcatparts -= 1;
+				if (player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA) hellcatparts -= 1;
 				if (player.hairType != Hair.BURNING) hellcatparts -= 1;
 				if (player.eyes.type != Eyes.INFERNAL) hellcatparts -= 1;
 				if (hellcatparts < 3) {
 					outputText("\nAs you become less of a hellcat your inner fire entirely dies down, your body reverting to that of a standard feline.\n");
-					if (player.tailType == Tail.BURNING) player.tailType = Tail.CAT;
+					if (player.tailType == Tail.BURNING || player.tailType == Tail.TWINKASHA) player.tailType = Tail.CAT;
 					if (player.hairType == Hair.BURNING) player.hairType = Hair.NORMAL;
 					if (player.eyes.type == Eyes.INFERNAL) player.eyes.type = Eyes.CAT_SLITS;
 					if (flags[kFLAGS.WITCHES_SABBATH] > 1) flags[kFLAGS.WITCHES_SABBATH] = 1;
@@ -2576,7 +2585,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//QUEST AREA
 			//Vala Gathering Quest
 			if (player.hasItem(useables.S_SHARD, 15) && ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_STARTED) {
-				outputText("\n<b>You now have enought scepter shards to repair the fairy queen scepter! Go turn this to Vala in Tel Adre.</b>\n");
+				outputText("\n<b>You now have enough scepter shards to repair the fairy queen scepter! Go turn this to Vala in Tel Adre.</b>\n");
 				ValaScene.ValaFairyQueenQuest = ValaScene.QUEST_STAGE_ITEM_GATHERED;
 				needNext = true;
 			}

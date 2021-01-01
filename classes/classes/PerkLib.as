@@ -249,9 +249,9 @@ public class PerkLib
 		public static const PastLifeSmith:PerkType = mk("Past Life: Smith", "Past Life: Smith",
 				"Knowledge of armor and fitting increases armor effectiveness by roughly 5% each (phys + mag).", null, true);
 		public static const HistoryTactician:PerkType = mk("History: Tactician", "History: Tactician",
-				" (+10% to minions/pets damage).");
+				"Tactical knowledge allows you to increase effectivness of your subordinates. (+10% to minions/pets damage).");
 		public static const PastLifeTactician:PerkType = mk("Past Life: Tactician", "Past Life: Tactician",
-				" (+10% to minions/pets damage).", null, true);
+				"Tactical knowledge allows you to increase effectivness of your subordinates. (+10% to minions/pets damage).", null, true);
 		public static const HistoryWhore:PerkType = mk("History: Whore", "History: Whore",
 				"Seductive experience causes your tease attacks to be 15% more effective.");
 		public static const PastLifeWhore:PerkType = mk("Past Life: Whore", "Past Life: Whore",
@@ -1624,7 +1624,7 @@ public class PerkLib
 				"You chose the 'Hold With Both Hands' perk.  As long as you're wielding a melee weapon and you're not using a shield, you gain 20% strength modifier to damage.");
 		public static const HollowFangs:PerkType = mk("Hollow Fangs", "Hollow Fangs",
 				"Your fangs and mouth started to slowly change showing rudimental ability to suck out fluids like blood. (+5 max stack of Vampire Thirst)",
-				"You chose the 'Hollow Fangs' perk. Due to often feeding on fluids like blood your mouth started to adapt to such feeding style.").withBuffs({'tou.mult':0.05});;
+				"You chose the 'Hollow Fangs' perk. Due to often feeding on fluids like blood your mouth started to adapt to such feeding style.").withBuffs({'tou.mult':0.05});
 		public static const HollowFangsEvolved:PerkType = mk("Hollow Fangs (Evolved)", "Hollow Fangs (Evolved)",
 				"Your ability to suck substances like blood have developed halfway. (+5 max stack of Vampire Thirst, +3% more healed from Vampire Bite)",
 				"You chose the 'Hollow Fangs (Evolved)' perk, changes to your mouth and tissues around progressing.").withBuffs({'tou.mult':0.10});
@@ -2648,7 +2648,7 @@ public class PerkLib
 				"You chose the 'Soldier's Friend' perk, gaining +10% range phys dmg.");
 		public static const SoulAncestor:PerkType = mk("Soul Ancestor", "Soul Ancestor",
 				"Allow reaching 12th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)",
-				"You chose the 'Soul Ancestor' perk, reaching 12th stage of soul cultivation! (+35 max Hunger, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)").withBuffs({'wis.mult':0.05});;
+				"You chose the 'Soul Ancestor' perk, reaching 12th stage of soul cultivation! (+35 max Hunger, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)").withBuffs({'wis.mult':0.05});
 		public static const SoulApprentice:PerkType = mk("Soul Apprentice", "Soul Apprentice",
 				"Allow reaching 1st stage of soul cultivation. (+20 max Hunger, +5 to max Wis, +30 max SF at lvl 6, 8, 10; +10% to max SF at lvl 6)",
 				"You chose the 'Soul Apprentice' perk, reaching 1st stage of soul cultivation! (+20 max Hunger, +30 max SF at lvl 6, 8, 10; +10% to max SF at lvl 6)").withBuffs({'wis.mult':0.05});
@@ -3271,6 +3271,8 @@ public class PerkLib
 				.withBuffs({'lib.mult':0.50,'sens':45});
 		public static const BroBrains:PerkType = mk("Bro Brains", "Bro Brains",
 				"Makes thou... thin... fuck, that shit's for nerds.").withBuffs({'int.mult':-0.50});
+		public static const BullStrength:PerkType = mk("Bull Strength", "Bull Strength",
+				"Increase strength by a percentage based on milk or cum production up to 50% of total value.");
 		public static const BunnyEggs:PerkType = mk("Bunny Eggs", "Bunny Eggs",
 				"Laying eggs has become a normal part of your bunny-body's routine.");
 		public static const ColdAffinity:PerkType = mk("Cold Affinity", "Cold Affinity",
@@ -3311,6 +3313,10 @@ public class PerkLib
 				"Removes all negative modifiers to PC max Str/Tou/Spe caused by picking perk Elemental Conjurer Sacrifice.").withBuffs({'str.mult':0.45,'tou.mult':0.45,'spe.mult':0.45,'wis.mult':0.90});
 		public static const ElvenSense:PerkType = mk("Elven Sense", "Elven Sense",
 				"Gain a chance to dodge attacks and an increased chance to score critical hits.");
+		public static const EndlessHunger:PerkType = mk("Endless Hunger", "Endless Hunger",
+				"Your hunger progress at twice the normal speed but must be sated through oral sex. As a result, you are completely unable to obtain a body shape larger than a thin frame.");
+		public static const Enigma:PerkType = mk("Enigma", "Enigma",
+				"Your bottomless insight somehow transmutes itself into raw power, allowing you to add half of your intelligence and wisdom as a modifier to strength and toughness.");
 		public static const EnergyDependent:PerkType = mk("Energy dependent", "Energy dependent",
 				"You become faster, smarter and clearer of mind when well fed in life force. However you become dim witted and stiffer than a corpse when starved. You cannot recover soul force through normal means.");
 		public static const EnlightenedKitsune:PerkType = mk("Enlightened Kitsune", "Enlightened Kitsune",
@@ -3437,10 +3443,12 @@ public class PerkLib
 				"Toughens your dermis to provide 2 points of armor and 1 point of magic resistance.");
 		public static const TitanicStrength:PerkType = mk("Titanic Strength", "Titanic Strength",
 				"Increase max Strength by a percentage equal to the size in ft of the player x4.");
-		public static const BullStrength:PerkType = mk("Bull Strength", "Bull Strength",
-				"Increase strenght by a percentage based on milk or cum production up to 50% of total value.");
 		public static const TransformationResistance:PerkType = mk("Transformation Resistance", "Transformation Resistance",
 				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
+		public static const UnnaturalStrength:PerkType = mk("Unnatural Strength", "Unnatural Strength",
+				"The more sated you are the stronger you get, although your satisfaction is fleeting.");
+		public static const WendigoCurse:PerkType = mk("Wendigo Curse", "Wendigo Curse",
+				"Your body and soul has been cursed by a wendigo. Transformative no longer have an effect on you.");
 		public static const ZenjisInfluence1:PerkType = mk("Zenji's influence 1", "Zenji's influence 1",
 				"Increases maximum mana and fatigue by 10%.");
 		public static const ZenjisInfluence2:PerkType = mk("Zenji's influence 2", "Zenji's influence 2",
@@ -5652,7 +5660,7 @@ public class PerkLib
                 return (player.tailType == Tail.DRACONIC || player.lowerBody == LowerBody.FROSTWYRM);
 				}, "Dragon race or its variants tail")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10);
+                return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10);
             }, "Dragon race or its variants");
 			DraconicHeart.requireHeartMutationSlot()
                 .requirePerk(DraconicBones)
@@ -5705,7 +5713,7 @@ public class PerkLib
                 return player.mouseScore() >= 12;
             }, "Mouse race");
 			HeartOfTheStorm.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-				return player.raijuScore() >= 6 || player.thunderbirdScore() >= 10 || player.kamaitachiScore() >= 10;
+				return player.raijuScore() >= 6 || player.thunderbirdScore() >= 10 || player.kamaitachiScore() >= 10 || player.couatlScore() >= 11;
 			}, "Stormborn race");
 			HollowFangs.requireMouthMutationSlot().requirePerk(VampiricBloodsteam)
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -5886,7 +5894,7 @@ public class PerkLib
                 return player.mouseScore() >= 12;
             }, "Mouse race");
 			HeartOfTheStormEvolved.requireLevel(6).requirePerk(HeartOfTheStorm).requireCustomFunction(function (player:Player):Boolean {
-				return player.raijuScore() >= 9 || player.thunderbirdScore() >= 11 || player.kamaitachiScore() >= 11;
+				return player.raijuScore() >= 9 || player.thunderbirdScore() >= 11 || player.kamaitachiScore() >= 11 || player.couatlScore() >= 12;
 			}, "Stormborn race");
 			ManticoreMetabolismEvolved.requireLevel(6)
 				.requirePerk(ManticoreMetabolism)
@@ -6074,7 +6082,7 @@ public class PerkLib
             }, "Dragon race");
 			DrakeLungsEvolved.requireLevel(12).requirePerk(DrakeLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.frostWyrmScore() >= 12 || player.jabberwockyScore() >= 11 || player.vouivreScore() >= 12);
+						return (player.frostWyrmScore() >= 12 || player.jabberwockyScore() >= 12 || player.vouivreScore() >= 12);
             }, "Variants of the dragon race");
 			EasterBunnyEggBagEvolved.requireLevel(12).requirePerk(EasterBunnyEggBag).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
@@ -6244,7 +6252,7 @@ public class PerkLib
                 return player.mouseScore() >= 12;
             }, "Mouse race");
 			HeartOfTheStormFinalForm.requireLevel(18).requirePerk(HeartOfTheStormEvolved).requireCustomFunction(function (player:Player):Boolean {
-				return player.raijuScore() >= 12 || player.thunderbirdScore() >= 12 || player.kamaitachiScore() >= 12;
+				return player.raijuScore() >= 12 || player.thunderbirdScore() >= 12 || player.kamaitachiScore() >= 12 || player.couatlScore() >= 13;
 			}, "Stormborn race");
             LactaBovinaOvariesEvolved.requireLevel(18)
 				.requirePerk(LactaBovinaOvaries)
@@ -6480,7 +6488,7 @@ public class PerkLib
                 .requirePerk(DraconicHeartEvolved)
                 .requireAnyPerk(DraconicLungsEvolved, DrakeLungsEvolved)
                 .requireCustomFunction(function (player:Player):Boolean {
-					return (player.dragonScore() >= 16 || player.frostWyrmScore() >= 15);
+					return (player.dragonScore() >= 16 || player.jabberwockyScore() >= 16 || player.frostWyrmScore() >= 15);
             }, "Dragon race or its variants");
 			DraconicLungsFinalForm.requireLevel(30)
                 .requirePerk(DraconicBonesEvolved)
@@ -6491,7 +6499,7 @@ public class PerkLib
             }, "Dragon race");
 			DrakeLungsFinalForm.requireLevel(30).requirePerk(DrakeLungsEvolved)
                  .requireCustomFunction(function (player:Player):Boolean {
-					return (player.frostWyrmScore() >= 15 || player.jabberwockyScore() >= 12 || player.vouivreScore() >= 13);
+					return (player.frostWyrmScore() >= 15 || player.jabberwockyScore() >= 15 || player.vouivreScore() >= 13);
             }, "Variants of the dragon race");
 			EasterBunnyEggBagFinalForm.requireLevel(30).requirePerk(EasterBunnyEggBagEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;

@@ -94,13 +94,13 @@ use namespace CoC;
 			"You look at the pair of minotaur horns.  You admire the overall frame of the horns yet you find no obvious uses for them.");
 		public const SEVTENT:SimpleUseable = new SimpleUseable("SevTent", "SevTent", "a severed tentacle", 50, 
 			"A severed tentacle taken from a slain tentacle beast.",
-			"You look at the severed tentacle skull.  It certain look a bit of...deformed more than any other tentacle you seen so far.  Is it natural occuring or forced mutation?");
+			"You look at the severed tentacle skull.  It certainly looks a bit ...deformed, more than any other tentacle you seen so far.  Is it natural occuring or forced mutation?");
 		public const SOULGEM:SimpleUseable = new SimpleUseable("SoulGem", "Soul Gem", "a Soul Gem", 2500, 
 			"A Soul Gem.",
 			"You examine the purplish crystal. It must be soul gem. It's used to capture and hold souls.");
 		public const STAFISH:SimpleUseable = new SimpleUseable("StaFish", "StackFish", "a stack of fishes", 60, 
 			"A stack of fresh fish. It’s smelly but it can be sold at the pawn shop for gems.",
-			"You look at stack of fresh fish.  Too many to eat them all at once you can sold them at the pawn shop for gems.");
+			"You look at the stack of fresh fish.  There's too many to eat them all at once. You can sell them at the pawn shop for gems.");
 		public const THHTONG:SimpleUseable = new SimpleUseable("THHTong", "TwoHellhoundTongues", "two hellhound tongues", 35, 
 			"Two tongues taken from a slain hellhound.",
 			"You look at the two hellhound tongues.  They look disgusting but at least it proves you killed another of those wretched beasts.");
@@ -119,9 +119,12 @@ use namespace CoC;
 		public const VIALRAI:SimpleUseable = new SimpleUseable("VialRai", "V.Rainbow", "a rainbow vial", 1, 
 			"A rainbow vial used to dye scales.",
 			"You look at rainbow vial.  It would help Arian change scales color.");
+		public const REAGENT:SimpleUseable = new SimpleUseable("Reagent", "Reagent", "a reagent vial", 12, 
+			"A vial of reagent.",
+			"You look at the reagent vial.  It's used with dyes to dye scales, chitins and other similar types of natural armor covering your body.");
 		public const S_SHARD:SimpleUseable = new SimpleUseable("S_SHARD", "S.Shard", "a tarnished shard of metal wich may have been part of a golden weapon", 200,
-			"These appears to be the shard of a shattered weapon. You are no smith and thus have no idea how to reforge this item. Its likely worthless unless...",
-			"These appears to be the shard of a shattered weapon though wich one you do not know. You are no smith and thus have no idea how to reforge this item. From what Vala told you it might have been part of the scepter of the fairy queen. You recall to need 15 shards in total.");
+			"These appears to be the shards of a shattered weapon. You are no smith and thus have no idea how to reforge this item. Its likely worthless unless...",
+			"These appears to be the shards of a shattered weapon though which one you do not know. You are no smith and thus have no idea how to reforge this item. From what Vala told you it might have been part of the scepter of the fairy queen. You recall that you will need 15 shards in total to start...");
 		//CHEAT ITEM
 		public const DBGWAND:DebugWand = new DebugWand();
 	}

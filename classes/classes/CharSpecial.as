@@ -1679,7 +1679,7 @@ import classes.Items.*;
 			player.setShield(shields.BLASPHE);
 			player.setJewelry(jewelries.MSIGNIT);
 			player.setUndergarment(undergarments.C_LOIN);
-			player.createKeyItem("Dark Mage's Grimoire",0,0,0,0);
+			player.createKeyItem("Dark Mage’s Grimoire",0,0,0,0);
 			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 3, 0, 0, 0);
 			player.itemSlot1.setItemAndQty(consumables.H_BISCU, 5);
 

@@ -164,7 +164,7 @@ package classes.Scenes.Areas.GlacialRift
 				encounterYukiOnnaYes();
 			}
 			else {
-				outputText("Defeated by (lust)your growing lust (damage)the ravaging cold (End of cut)you pass out somewhat terrified to think of what will happen to you.\n\n");
+				outputText("Defeated by "+(player.lust >= player.maxLust() ? "your growing lust":"the ravaging cold")+" you pass out somewhat terrified to think of what will happen to you.\n\n");
 				outputText("After awhile you wake up still dizzy. You don't know exactly how or when you did move but you are now laying down on a silky white couch, in some beautiful and cozy house, fully stripped out of your gear and with the Yuki Onna snuggling against you, ready for a kiss. Even if you wanted to try and get out of this situation you are still to weak from the battle to fight back.");
 				if (player.gender == 2 || player.gender == 3) {
 					outputText(" Sensing that you are terrified she gently shushes you, placing a finger on your trembling lips.\n\n");
@@ -177,7 +177,7 @@ package classes.Scenes.Areas.GlacialRift
 		}
 
 		public function winAgainstYukiOnna():void {
-			menu();
+			clearOutput();
 			outputText("In defeat the Yuki Onna screams before vanishing in the intensifying blizzard covers her escape as the world around you turns white with snow, ice and sleet. This said she doesn't leave without warning, likely you will meet her again sooner or later.\n\n");
 			outputText("\"<i>This is just a setback! The wolf god be my witness I will freeze your soul sooner or later.</i>\"\n\n");
 			outputText("Eventually the storm finally calms down, leaving you somewhat alive and fine in the middle of the rift. You head back to camp, satisfied with having defeated your opponent and truth be told, with how freezing you are right now, the last thing on your mind is sex, least of all with a ice spirit bent on doing you harm.\n\n");

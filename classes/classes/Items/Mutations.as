@@ -38,6 +38,10 @@ public final class Mutations extends MutationsHelper {
     //const BIKINI_ARMOR_BONUS:int = 769;
 
     public var emberTFchanges:EmberTF = new EmberTF();
+	
+	public function blockingBodyTransformations():Boolean {
+		return player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.WendigoCurse);
+	}
 
     public function DrunkenPowerEmpower():void {
         var bonusempower:Number = 60;
@@ -157,8 +161,9 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         clearOutput();
         outputText("As you eat the soup you shiver as your bodily temperature drop. Not only that but the last thing on your mind right now is sex as you feel yourself freezing from the inside. The cold crisis eventualy passes but you remain relatively less libidinous afterward.");
-        if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) dynStats("lus", -20);
-        else dynStats("lus", -10);
+        player.buff("Curse").addStats( {"lib.mult": -0.05} ).permanent();
+		if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) dynStats("lib", -4, "lus", -20);
+        else dynStats("lib", -2, "lus", -10);
         player.refillHunger(15);
     }
 
@@ -198,7 +203,7 @@ public final class Mutations extends MutationsHelper {
     public function purePearl(player:Player):void {
         clearOutput();
         outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.");
-        dynStats("lus", -25, "cor", -10);
+        dynStats("lib", -10, "lus", -25, "cor", -10);
         if (player.findPerk(PerkLib.PurityBlessing) < 0) player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
     }
 
@@ -820,7 +825,7 @@ public final class Mutations extends MutationsHelper {
         if (player.cor > 33 && player.cor <= 66) outputText("reminding you of something you just can't place.");
         if (player.cor > 66) outputText("deliciously sinful in all the right ways.");
         if (player.cor >= 90) outputText("  You're sure it must be distilled from the cum of an incubus.");
-        if (player.findPerk(PerkLib.TransformationImmunity) < 0 && player.findPerk(PerkLib.Undeath) < 0) {
+        if (player.findPerk(PerkLib.TransformationImmunity) < 0 && player.findPerk(PerkLib.Undeath) < 0 && player.findPerk(PerkLib.WendigoCurse) < 0) {
             //Lowlevel changes
             if (rando < 50) {
                 if (player.cocks.length == 1) {
@@ -1151,7 +1156,7 @@ public final class Mutations extends MutationsHelper {
             dynStats("lus", 3);
             MutagenBonus("spe", 1);
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Breast growth (maybe cock reduction!)
         if (rando <= 75) {
             var growth:int = 1 + rand(3);
@@ -1373,7 +1378,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYou feel dumber.");
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Male Stuff
         if (player.cocks.length > 0 && rand(2) == 0 && changes < changeLimit) {
             var selectedCockValue:int = -1; //Changed as selectedCock and i caused duplicate var warnings
@@ -1813,7 +1818,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //if(type != 2 && type != 4 && type != 5) outputText("\n");
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Double Pepper!
         //Xforms/grows dicks to make you have two dogcocks
         if (type == 2) {
@@ -2484,7 +2489,7 @@ public final class Mutations extends MutationsHelper {
             else dynStats("cor", 0);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Makes your balls biggah! (Or cummultiplier higher if futa!)
         if (rand(1.5) == 0 && changes < changeLimit && player.balls > 0) {
             player.ballSize++;
@@ -2568,7 +2573,7 @@ public final class Mutations extends MutationsHelper {
             dynStats("cor", mult + 2);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //NEW BALLZ
         if (player.balls < 4) {
             if (player.balls > 0) {
@@ -3194,7 +3199,7 @@ public final class Mutations extends MutationsHelper {
             if (temp < 0) temp = 0;
             dynStats("cor", temp / 10);
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sex bits - Duderiffic
         if (player.cocks.length > 0 && rand(2) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
             //If the player has at least one dick, decrease the size of each slightly,
@@ -3980,7 +3985,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYou feel like dancing, and stumble as your legs react more quickly than you'd think.  Is the alcohol slowing you down or are you really faster?  You take a step and nearly faceplant as you go off balance.  It's definitely both.");
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Shrink
         if (rand(2) == 0 && player.tallness > 42) {
             changes++;
@@ -4067,7 +4072,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Removes antennaes!
         if (player.antennae.type > Antennae.NONE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour [hair] itches so you give it a scratch, only to have your antennae.type fall to the ground.  What a relief.  <b>You've lost your antennae.type!</b>");
+            outputText("\n\nYour [hair] itches so you give it a scratch, only to have your [antennae] fall to the ground.  What a relief.  <b>You've lost your [antennae]!</b>");
             changes++;
             player.antennae.type = Antennae.NONE;
         }
@@ -4078,7 +4083,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Eye colors
         var goblin_eyes_color:Array = ["red", "yellow", "purple", "orange"];
-        if (player.eyes.type == Eyes.HUMAN && player.eyes.colour != "red" && player.eyes.colour != "yellow" && player.eyes.colour != "purple" && changes < changeLimit && rand(3) == 0) {
+        if (player.eyes.type == Eyes.HUMAN && player.eyes.colour != "red" && player.eyes.colour != "yellow" && player.eyes.colour != "purple" && player.eyes.colour != "orange" && changes < changeLimit && rand(3) == 0) {
             player.eyes.colour = randomChoice(goblin_eyes_color);
             outputText("\n\nSomething weird happens in your eyes… like colors have slightly become brighter and wilder. <b>You make sure you ain’t on some drug trip from the Gremlin Oil before checking yourself in a puddle, discovering that your iris changed to [eyecolor].</b>");
             changes++;
@@ -4154,7 +4159,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Ears!
         if (player.ears.type != Ears.GREMLIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nWhoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in -haircolor- fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears!</b>");
+            outputText("\n\nWhoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in "+player.hairColor+" fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears!</b>");
             setEarType(Ears.GREMLIN);
             changes++;
         }
@@ -4204,7 +4209,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYou feel like dancing, and stumble as your legs react more quickly than you'd think.  Is the alcohol slowing you down or are you really faster?  You take a step and nearly faceplant as you go off balance.  It's definitely both.");
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Shrink
         if (rand(2) == 0 && player.tallness > 42) {
             changes++;
@@ -4291,7 +4296,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Removes antennaes!
         if (player.antennae.type > Antennae.NONE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour [hair] itches so you give it a scratch, only to have your antennae.type fall to the ground.  What a relief.  <b>You've lost your antennae.type!</b>");
+            outputText("\n\nYour [hair] itches so you give it a scratch, only to have your [antennae] fall to the ground.  What a relief.  <b>You've lost your [antennae]!</b>");
             changes++;
             player.antennae.type = Antennae.NONE;
         }
@@ -4307,7 +4312,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         var goblin_hair_color:Array = ["red", "purple", "green", "blue", "pink", "orange"];
-        if (player.hairColor != "red" && player.hairColor != "purple" && player.hairColor != "green" && player.hairColor != "blue" && player.hairColor != "pink" && player.hairColor != "orange" && (player.hairColor.indexOf("rubbery") != -1 || player.hairColor.indexOf("latex-textured") != -1) && changes < changeLimit && rand(3) == 0) {
+        if (player.hairColor != "red" && player.hairColor != "purple" && player.hairColor != "green" && player.hairColor != "blue" && player.hairColor != "pink" && player.hairColor != "orange" && changes < changeLimit && rand(3) == 0) {
             player.hairColor = randomChoice(goblin_hair_color);
             outputText("\n\nYour scalp tingles and when you check yourself in nearby steam it seems your <b>[hair] become " + player.hairColor + ".</b>");
             changes++;
@@ -4782,15 +4787,15 @@ public final class Mutations extends MutationsHelper {
             if (player.spe < 40) outputText("  Of course, you're nowhere near as fast as that.");
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Removes wings
         if (!InCollection(player.wings.type, Wings.NONE, Wings.GARGOYLE_LIKE_LARGE) && rand(3) == 0 && changes < changeLimit) {
             removeWings();
             changes++;
         }
-        //Removes antennae.type
+        //Removes antennae
         if (player.antennae.type > Antennae.NONE && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nThe muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead.  When it passes, you touch yourself and discover your antennae.type have vanished!");
+            outputText("\n\nThe muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead.  When it passes, you touch yourself and discover your [antennae] have vanished!");
             player.antennae.type = Antennae.NONE;
             changes++;
         }
@@ -4927,7 +4932,7 @@ public final class Mutations extends MutationsHelper {
             if (player.tallness > 84 && player.lowerBody == LowerBody.HYDRA) outputText(" Woah, being this size most people looks almost like they're small toys before your massive body now. You've definitely grown to one hell of a size!");
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Snake tounge
         if (player.tongue.type != Tongue.SNAKE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
             if (player.tongue.type == Tongue.HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.");
@@ -5170,7 +5175,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Dragon Arms
         if (type == 1 && player.wings.type == Wings.DRACONIC_HUGE && player.arms.type != Arms.DRAGON && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of dragon one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  dragon, one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
             setArmType(Arms.DRAGON);
             changes++;
         }
@@ -5384,7 +5389,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.");
         player.refillHunger(5);
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         if (player.humanScore() > 6) {
             outputText("\n\nYou blink and the world twists around you.  You feel more like yourself than you have in a while, but exactly how isn't immediately apparent.  Maybe you should take a look at yourself?");
         } else {
@@ -5572,9 +5577,9 @@ public final class Mutations extends MutationsHelper {
         //-----------------------
         // EXTRA PARTS REMOVAL
         //-----------------------
-        //Removes antennae.type
+        //Removes antennae
         if (player.antennae.type > Antennae.NONE && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nThe muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead.  When it passes, you touch yourself and discover your antennae.type have vanished!");
+            outputText("\n\nThe muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead.  When it passes, you touch yourself and discover your [antennae] have vanished!");
             player.antennae.type = Antennae.NONE;
             changes++;
         }
@@ -5855,7 +5860,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("lib", 1);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sexual changes would go here if I wasn't a tard.
         //Heat
         if (rand(4) == 0 && changes < changeLimit) {
@@ -6279,7 +6284,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sexual Changes:
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
@@ -6499,7 +6504,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.LIZARD && player.lowerBody == LowerBody.LIZARD && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of lizard one with leathery scales and short claws replacing your fingernails.  <b>You now have lizard arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  lizard, one with leathery scales and short claws replacing your fingernails.  <b>You now have lizard arms.</b>");
             setArmType(Arms.LIZARD);
             changes++;
         }
@@ -6640,7 +6645,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("str", 1);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sexual Changes:
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
@@ -6758,7 +6763,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.SALAMANDER && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.SALAMANDER && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of salamander one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  salamander, one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
             setArmType(Arms.SALAMANDER);
             changes++;
         }
@@ -6867,7 +6872,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Lower wisdom down to 40
 
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
 
         //-Grow hips out if narrow.
         if (player.hips.type < 10 && changes < changeLimit && rand(3) == 0) {
@@ -6943,7 +6948,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.CAVE_WYRM && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of cave wyrm one with leathery, black scales and short claws replacing your fingernails.  <b>You now have a cave wyrm arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  cave wyrm, one with leathery, black scales and short claws replacing your fingernails.  <b>You now have a cave wyrm arms.</b>");
             setArmType(Arms.CAVE_WYRM);
             changes++;
         }
@@ -7102,7 +7107,7 @@ public final class Mutations extends MutationsHelper {
             if (player.str > 90) dynStats("str", -1);
             outputText("\n\nYou feel a little weaker, but maybe it's just the liqueur.");
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sexual Changes:
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
@@ -7489,7 +7494,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Shrink
         if (rand(3) == 0 && player.tallness > 72) {
             changes++;
@@ -7872,7 +7877,7 @@ public final class Mutations extends MutationsHelper {
                 }
             }
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //antianemone corollary:
         if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
             //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
@@ -8144,7 +8149,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("str", 0.5);
         }
         if (type == 1 || type == 2) changeLimit = 1;
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sexual changes
         if (player.avianCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && type == 0 && rand(3) == 0) {
             for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
@@ -8448,7 +8453,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("\n\nYou lose track of everything as you eat, staring at the bugs crawling across the ground.  After a while you notice the dull taste of saliva in your mouth and realize you've been sitting there, chewing the same mouthful for five minutes.  You vacantly swallow and take another bite, then go back to staring at the ground.  Was there anything else to do today?");
             dynStats("int", -1);
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //****************
         //Appearance Effects:
         //****************
@@ -8685,7 +8690,7 @@ public final class Mutations extends MutationsHelper {
             dynStats("str", -1);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //****************
         //Sexual Changes
         //****************
@@ -8925,7 +8930,7 @@ public final class Mutations extends MutationsHelper {
     public function broBrew(player:Player):void {
         player.slimeFeed();
         clearOutput();
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) {
+        if (blockingBodyTransformations()) {
             outputText("\n\n<b>You won't get anything from drinking this... aside getting drunk.</b>");
             if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
             return;
@@ -9119,7 +9124,7 @@ public final class Mutations extends MutationsHelper {
             if (player.lib < 50) MutagenBonus("lib", 1);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Effect script a:  (human wang)
         if (player.hasCock() && changes < changeLimit) {
             if (rand(3) == 0 && player.cocks[0].cockType != CockTypesEnum.HUMAN) {
@@ -9179,9 +9184,9 @@ public final class Mutations extends MutationsHelper {
             setArmType(Arms.GHOST);
             changes++;
         }
-        //Removes antennae.type
+        //Removes antennae
         if (player.antennae.type > Antennae.NONE && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nThe muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead.  When it passes, you touch yourself and discover your antennae.type have vanished!");
+            outputText("\n\nThe muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead.  When it passes, you touch yourself and discover your [antennae] have vanished!");
             player.antennae.type = Antennae.NONE;
             changes++;
         }
@@ -9335,7 +9340,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (changes < changeLimit && rand(3) == 0) outputText(player.modTone(10, 5));
         if (changes < changeLimit && rand(3) == 0 && player.femininity != 50) outputText(player.modFem(50, 3));
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sexual
         if (player.cockTotal() > 0 && player.biggestCockArea() > 6 && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYour " + player.cockDescript(0) + " begins to tingle as it shrinks to a smaller size.");
@@ -9494,7 +9499,7 @@ public final class Mutations extends MutationsHelper {
             player.ballSize++;
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         if (rand(3) == 0 && changes < changeLimit && player.cocks.length > 0 && player.cocks[0].cockType != CockTypesEnum.PIG) {
             if (player.cocks.length == 1) { //Single cock
                 outputText("\n\nYou feel an uncomfortable pinching sensation in your [cock]. " + player.clothedOrNakedLower("You pull open your [armor]", "You look down at your exposed groin") + ", watching as it warps and changes. As the transformation completes, you’re left with a shiny, pinkish red pecker ending in a prominent corkscrew at the tip. <b>You now have a pig penis!</b>");
@@ -9556,7 +9561,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPlainSkinOnly() && !player.skin.hasScarShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou double over suddenly as a harsh, stabbing pain runs across your skin, tattoos in the shape of scars forming on various parts of your body. Considering how you look now, you might as well proudly display your <b>Orc scar tattooed skin.</b>");
             if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedScarTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Scar Tattoed Skin - Memorized!</b>\n\n");
+                outputText("\n\n<b>Genetic Memory: Scar Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedScarTattoed, 0, 0, 0, 0);
             }
             player.skin.base.pattern = Skin.PATTERN_SCAR_SHAPED_TATTOO;
@@ -9608,7 +9613,7 @@ public final class Mutations extends MutationsHelper {
             if (player.sens < 40) dynStats("sen", 1);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sexual
         if (player.vaginas.length > 0 && player.breastRows[0].breastRating < 7 && changes < changeLimit && rand(3) == 0) {
             player.growTits(1 + rand(2), 1, false, 3);
@@ -9711,7 +9716,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
             if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Lighting Tattoed Skin - Memorized!</b>\n\n");
+                outputText("\n\n<b>Genetic Memory: Lighting Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
             }
             player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
@@ -9769,7 +9774,7 @@ public final class Mutations extends MutationsHelper {
             if (player.sens < 40) dynStats("sen", 1);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sexual
         //-Remove extra breast rows
         if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
@@ -9881,7 +9886,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
             if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Lighting Tattoed Skin - Memorized!</b>\n\n");
+                outputText("\n\n<b>Genetic Memory: Lighting Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
             }
             player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
@@ -9942,7 +9947,7 @@ public final class Mutations extends MutationsHelper {
             if (player.tou > 90) dynStats("tou", -1);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Physical
         if (!InCollection(player.hairColor, Ratatoskr_Colour) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             player.hairColor = randomChoice(Ratatoskr_Colour);
@@ -10099,7 +10104,7 @@ public final class Mutations extends MutationsHelper {
             if (player.sens < 40) dynStats("sen", 1);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sexual
         if (player.vaginas.length > 0 && player.breastRows[0].breastRating < 7 && changes < changeLimit && rand(3) == 0) {
             player.growTits(1 + rand(2), 1, false, 3);
@@ -10364,7 +10369,7 @@ public final class Mutations extends MutationsHelper {
         }
         //-always increases lust by a function of sensitivity
         //"The tingling of the tentacle
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //physical changes:
         //- may randomly remove bee abdomen, if present; always checks and does so when any changes to hair might happen
         if (rand(4) == 0 && changes < changeLimit && player.tailType == Tail.BEE_ABDOMEN) {
@@ -10842,7 +10847,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("str", 1);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sexual Changes:
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
@@ -10959,7 +10964,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.SALAMANDER && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.SALAMANDER && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of salamander one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  salamander, one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
             setArmType(Arms.SALAMANDER);
             changes++;
         }
@@ -11093,7 +11098,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You gulp the bottle's contents, and its sweet taste immediately invigorates you, making you feel calm and concentrated");
         //-60 fatigue, -2 libido, -20 lust]
         fatigue(-180);
-        dynStats("lib", -1, "lus", -90, "cor", -2);
+        dynStats("lib", -2, "lus", -90, "cor", -2);
         player.refillHunger(40);
     }
 
@@ -11103,7 +11108,7 @@ public final class Mutations extends MutationsHelper {
         outputText("The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body. ");
         //-30 fatigue, -2 libido, -10 lust]
         fatigue(-40);
-        dynStats("lus", -100, "cor", (-4 - rand(3)), "scale", false);
+        dynStats("lib", -2, "lus", -100, "cor", (-4 - rand(3)), "scale", false);
         HPChange(100 + (10 * player.level) + rand(10 * player.level), true);
         player.refillHunger(30);
         if (player.cor > 50) dynStats("cor", -2);
@@ -11407,7 +11412,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("curved");
             outputText(" markings remain, as if etched into your skin. <b>You now have Kitsune tattooed skin.</b>");
             if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Magic Tattoed Skin - Memorized!</b>\n\n");
+                outputText("\n\n<b>Genetic Memory: Magic Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
             }
             player.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;
@@ -11688,7 +11693,7 @@ public final class Mutations extends MutationsHelper {
             if (player.lib < 30) MutagenBonus("lib", 2);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Body Mass Loss:
         if (player.thickness > 40 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou feel an odd tightening sensation in your midriff, as if you were becoming narrower and lither.  You frown downwards, and then turn your arms around, examining them closely.  Is it just you or have you lost weight?");
@@ -13081,7 +13086,7 @@ public final class Mutations extends MutationsHelper {
             outputText(player.modFem(0, 3 + rand(5)));
         }
 
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sexual Changes:
         //FEMALE
         if (player.gender == 2 || player.gender == 3) {
@@ -13308,12 +13313,12 @@ public final class Mutations extends MutationsHelper {
         if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0) {
             if (player.tentacleCocks() < player.cockTotal()) {
                 if (player.cocks.length == 1) { //Single cawks
-                    outputText("\n\nYour feel your [cock] bending and flexing of its own volition... looking down, you see it morph into a green vine-like shape.  <b>You now have a tentacle cock!</b>  ");
+                    outputText("\n\nYour feel your [cock] bending and flexing of its own volition... looking down, you see it morph into a tentacle-like shape.  <b>You now have a tentacle cock!</b>  ");
                     //Set primary cock flag
                     player.cocks[0].cockType = CockTypesEnum.SCYLLATENTACLE;
                 }
                 if (player.cockTotal() > 1) { //multi
-                    outputText("\n\nYour feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible vine-like shapes.  <b>You now have green tentacle cocks!</b>  ");
+                    outputText("\n\nYour feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible tentacle-like shapes.  <b>You now have tentacle cocks!</b>  ");
                     for (var x:int = 0; x < player.cocks.length; x++) player.cocks[x].cockType = CockTypesEnum.SCYLLATENTACLE;
                 }
             }
@@ -13495,7 +13500,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sexual Changes:
         //FEMALE
         if (player.gender == 2 || player.gender == 3) {
@@ -13723,7 +13728,7 @@ public final class Mutations extends MutationsHelper {
                     player.cocks[0].cockType = CockTypesEnum.SCYLLATENTACLE;
                 }
                 if (player.cockTotal() > 1) { //multi
-                    outputText("\n\nYour feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible vine-like shapes.  <b>You now have green tentacle cocks!</b>  ");
+                    outputText("\n\nYour feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible tentacle-like shapes.  <b>You now have tentacle cocks!</b>  ");
                     for (var x:int = 0; x < player.cocks.length; x++) player.cocks[x].cockType = CockTypesEnum.SCYLLATENTACLE;
                 }
             }
@@ -13940,7 +13945,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("lib", 1);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Maleness
         if (player.hasCock() && rand(3) == 0 && player.cocks.length > 0) {
             if (player.cocks.length == 1) {
@@ -14124,7 +14129,7 @@ public final class Mutations extends MutationsHelper {
             dynStats("sens", -1);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         if (player.cocks.length > 0 && rand(2) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
             //If the player has at least one dick, decrease the size of each slightly,
             outputText("\n\n");
@@ -14297,9 +14302,9 @@ public final class Mutations extends MutationsHelper {
         //changeLimit += additionalTransformationChances();
         //clear screen
         clearOutput();
-        outputText("You eat the weird kelp seed and feel suddenly like singing. Seems your talent for music are skyrocketing as you embrace the changes within you.");
+        outputText("You eat the weird kelp seed and suddenly feel like singing. It seems like your talent for music are skyrocketing as you embrace the changes within you!");
 
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //FAILSAFE CHANGE
         if (changes == 0) outputText("\n\nRemarkably, the seed has no effect.  Maybe next time?");
         player.refillHunger(10);
@@ -14348,7 +14353,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //In case of immunities
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
 
         //Cock gets bigger!
         if ((player.gender == 1 || player.gender == 3) && player.cocks.length > 0 && player.biggestCockLength() < 30 && changes < changeLimit && rand(4) == 0) {
@@ -14504,7 +14509,7 @@ public final class Mutations extends MutationsHelper {
 
         //-Raises strength to 200.
         if (rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYou feel raw power run through your muscle. Gosh you might as well be strong enought to shatter rocks.");
+            outputText("\n\nYou feel raw power run through your muscle. Gosh you might as well be strong enough to shatter rocks.");
             if (player.str < 50) outputText(" Well maybe not that strong yet but you sure can pack a punch with your fist.");
             MutagenBonus("str", 5);
             changes++;
@@ -14542,7 +14547,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sexual Changes:
 
         //Gain Dragon Dick
@@ -14804,7 +14809,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Sexual Changes:
         //-Remove extra breast rows
         if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
@@ -15032,7 +15037,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("int", 1);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //sexual changes
         //female
         if (player.gender > 1) {
@@ -15339,7 +15344,7 @@ public final class Mutations extends MutationsHelper {
         } else {
             outputText("You eat the scale expecting some kind of spectacular change strangely nothing happened. Maybe you should stop eating everything you find.");
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //-Jabberwocky face/bucktooth
         if ((player.faceType == Face.DRAGON || player.faceType == Face.DRAGON_FANGS) && changes < changeLimit) {
             outputText("\n\nWhile you are busy laughing at the ridicule of this situation your bucktooth begin to pulse in accordance with your laughter growing almost to rabbit like size. You now have ");
@@ -15389,7 +15394,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("str", 1);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         if (changes < changeLimit && rand(2) == 0 && player.tallness < 84) {
             temp = rand(5) + 3;
             //Slow rate of growth near ceiling
@@ -15560,7 +15565,7 @@ public final class Mutations extends MutationsHelper {
 
         //Libido up
 
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //Skin
         if (player.skinAdj != "sticky glistering" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYour sweating begins to intensify and before you know it you’re covered with sticky fluid all over your body just like a slug or a snail, your skin glistening under the sun.");
@@ -15674,7 +15679,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("spe", 1);
             changes++;
         }
-        if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+        if (blockingBodyTransformations()) changeLimit = 0;
         //sexual changes
         //-If the PC has quad nipples:
         if (player.averageNipplesPerBreast() > 1 && rand(4) == 0 && changes < changeLimit) {
@@ -15832,9 +15837,9 @@ public final class Mutations extends MutationsHelper {
             setEarType(Ears.RED_PANDA);
             changes++;
         }
-        //Removes antennae.type
+        //Removes antennae
         if (player.antennae.type > Antennae.NONE && player.antennae.type != Antennae.COCKATRICE && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nThe pair of antennae.type atop your head start losing the ability of ‘feel’ your surroundings as the root takes effect on them. Soon they recede on your head, and in a matter of seconds, it looks like they never were there.");
+            outputText("\n\nThe pair of [antennae] atop your head start losing the ability of ‘feel’ your surroundings as the root takes effect on them. Soon they recede on your head, and in a matter of seconds, it looks like they never were there.");
             player.antennae.type = Antennae.NONE;
             changes++;
         }
@@ -16594,7 +16599,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         if (type == 0) outputText("You bite into the fig, it’s sour, very sour. Trolls are supposed to enjoy this?");
 		if (type == 1) outputText("You bite into the fig. The icy crust gives a crunch before you’re met with the juice trapped within. It’s sour, very sour. Trolls are supposed to enjoy this?");
-		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+		if (blockingBodyTransformations()) changeLimit = 0;
 		//wis change
         if (rand(4) == 0 && changes < changeLimit) {
             outputText("\n\nYou feel a tremendous rush of mental celerity, as if your mind were clear of all doubt.");
@@ -16912,7 +16917,7 @@ public final class Mutations extends MutationsHelper {
                         "The more you think about it, the more you lose your ability to display your emotions, your voice’s tone starts becoming somewhat empty. " +
                         "Well what your face won't show, your body will.");
                 dynStats("spe", -5);
-                if (player.spe < 30 && player.faceType == Face.HUMAN && player.faceType != Face.KUDERE) {
+                if (player.faceType == Face.HUMAN && player.faceType != Face.KUDERE) {
                     outputText("\n\nHey, why do you even bother with those expressions? " +
                             "Your flat tone and emotionless face is the perfect armor against all the lust mongers out there. Let them guess whether you are aroused or not. " +
                             "Only your bodily movement can betray your hidden desires to mate or your anger now. " +

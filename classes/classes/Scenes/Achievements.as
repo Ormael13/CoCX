@@ -202,6 +202,7 @@ public class Achievements extends BaseContent
 			addAchievement("Throne of Wisdom", kACHIEVEMENTS.FASHION_THRONE_OF_WISDOM, "Equip all wisdom boosting accessories.");
 			addAchievement("Suit Up!", kACHIEVEMENTS.FASHION_SUIT_UP, "Equip any vehicle.");
 			addAchievement("Rollin'", kACHIEVEMENTS.FASHION_ROLLIN_ROLLIN, "Equip Goblin Mech Prime.", "", true);
+			addAchievement("Asura's Wrath", kACHIEVEMENTS.FASHION_ASURAS_WRATH, "Equip Giant Slayer Mech.", "", true);
 			addAchievement("Howl of the Banshee", kACHIEVEMENTS.FASHION_HOWL_OF_THE_BANSHEE, "Equip Howling Bashee Mech.", "", true);
 			
 			titleAchievementSection("Wealth"); //9 achievements

@@ -129,6 +129,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function isPlayerStunned():Boolean {
 		return combat.isPlayerStunned();
 	}
+	protected function isPlayerFeared():Boolean {
+		return combat.isPlayerFeared();
+	}
 	// =================
 	// MODIFIERS
 	// =================

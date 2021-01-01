@@ -810,7 +810,7 @@ use namespace CoC;
 						//Big cum
 						if(player.cumQ() >= 50 && player.cumQ() < 400) outputText("Your orgasm goes off like a shotgun blast, splattering the incubus with a huge wad of cum.  It's but the first of many, and though each load of jizz is of comparable size, the force behind them diminishes until the last few blasts drip down your body and soak your [legs] and [feet].  ");
 						//Huge cum
-						if(player.cumQ() >= 400) outputText("Your orgasm goes off like a volcano, visibly distending your [cock] as a huge wave of cum erupts from your groin, painting the incubus and floor with your spoo.  You cry from the sheer pleasure as the next wave builds and erupts, nearly as large as the last.  The demon-cock controlling your prick aims this blast up, forcing you to soak your " + hairDescript() + " and face with slick goo. The orgasming drags on and on while you slowly turn blue from oxygen deprivation. Before long, both you and the incubus are buried under a wave of white.  ");
+						if(player.cumQ() >= 400) outputText("Your orgasm goes off like a volcano, visibly distending your [cock] as a huge wave of cum erupts from your groin, painting the incubus and floor with your spooge.  You cry from the sheer pleasure as the next wave builds and erupts, nearly as large as the last.  The demon-cock controlling your prick aims this blast up, forcing you to soak your " + hairDescript() + " and face with slick goo. The orgasming drags on and on while you slowly turn blue from oxygen deprivation. Before long, both you and the incubus are buried under a wave of white.  ");
 					}
 					outputText("The feeling is so intense that your " + hipDescript() + " twitch and move of their own volition while your eyes roll back in pleasure.\n\n");
 					outputText("You black out just as you feel the cock-tentacle in your throat retracting. You dully feel your body drop to the ground, your pregnant-looking belly sloshing with demon jizz.");
@@ -1416,7 +1416,7 @@ use namespace CoC;
 			outputText("The suction pulls squirt after squirt of milk from your breasts as your [allbreasts] start to grow, swelling heavier as they enlarge to produce more milk.  You squeal with delight as your nipples turn black, tainted by corruptive chemicals that are slowly dripped into you.  ");
 			//Dick  
 			if(player.cocks.length > 0) {
-				outputText("The vacuum-pump on your cock noisily sucks down all your spoo, ");
+				outputText("The vacuum-pump on your cock noisily sucks down all your spooge, ");
 				//High cum variant
 				if(player.cumQ() > 300) outputText("struggling with the amount you put off.  Grinning, the succubus reaches over and flips a lever.  You feel the suction increase as the machine is turned up to accommodate your altered physique.  ");
 				//else
