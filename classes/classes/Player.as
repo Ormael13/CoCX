@@ -1848,6 +1848,7 @@ use namespace CoC;
 			if (armor == game.armors.DBARMOR) lust *= 0.9;
 			if (weapon == game.weapons.HNTCANE) lust *= 0.75;
 			if ((weapon == game.weapons.PURITAS) || (weapon == game.weapons.ASCENSU)) lust *= 0.9;
+			if (vehiclesName == "Giant Slayer Mech") lust *= 0.25;
 			// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
 			// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
 			var sac:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);

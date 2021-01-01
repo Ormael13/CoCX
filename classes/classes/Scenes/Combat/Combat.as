@@ -5208,9 +5208,13 @@ public class Combat extends BaseContent {
     }
 
     public function monsterLevelAdjustment():Number {
-        var monsterLevelAdjustment:Number = 0;
-		//perks like god type enemy
-        return monsterLevelAdjustment;
+        var monsterLvlAdjustment:Number = 0;
+		if (player.vehiclesName == "Giant Slayer Mech") {
+			if (monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType) || monster.hasPerk(PerkLib.EnemyGodType)) monsterLvlAdjustment -= 10;
+			else monsterLvlAdjustment += 10;
+		}
+		//if (player.hasPerk(PerkLib.EnemyGodType)) 
+        return monsterLvlAdjustment;
     }
 
 //DEAL DAMAGE
@@ -11333,4 +11337,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}
