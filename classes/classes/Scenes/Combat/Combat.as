@@ -1347,10 +1347,11 @@ public class Combat extends BaseContent {
 
     public function elementalattacks(elementType:int, summonedElementals:int):void {
         var elementalDamage:Number = 0;
-        var baseDamage:Number = summonedElementals * intwisscaling() * 0.05;
+        var baseDamage:Number = summonedElementals * intwisscaling() * 0.1;
         if (summonedElementals >= 1) elementalDamage += baseDamage;
         if (summonedElementals >= 5) elementalDamage += baseDamage;
         if (summonedElementals >= 9) elementalDamage += baseDamage;
+        if (summonedElementals >= 13) elementalDamage += baseDamage;
         if (elementalDamage < 10) elementalDamage = 10;
         if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) elementalDamage *= historyTacticianBonus();
         if (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 2) {
@@ -5213,6 +5214,9 @@ public class Combat extends BaseContent {
 			if (monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType) || monster.hasPerk(PerkLib.EnemyGodType)) monsterLvlAdjustment -= 10;
 			else monsterLvlAdjustment += 10;
 		}
+		if (monster.hasPerk(PerkLib.EnemyHugeType)) monsterLvlAdjustment += 2;
+		if (monster.hasPerk(PerkLib.EnemyGigantType)) monsterLvlAdjustment += 5;
+		if (monster.hasPerk(PerkLib.EnemyColossalType)) monsterLvlAdjustment += 10;
 		//if (player.hasPerk(PerkLib.EnemyGodType)) 
         return monsterLvlAdjustment;
     }
@@ -5221,6 +5225,7 @@ public class Combat extends BaseContent {
     public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
+		if (damage < 1) damage = 1;
         if (player.hasStatusEffect(StatusEffects.Minimise)) damage *= 0.01;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
@@ -5311,6 +5316,7 @@ public class Combat extends BaseContent {
     public function doMagicDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
+		if (damage < 1) damage = 1;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -5381,8 +5387,9 @@ public class Combat extends BaseContent {
 
     public function doFireDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage * 2;
         damage *= doDamageReduction();
+		if (damage < 1) damage = 1;
+        if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage * 2;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -5469,8 +5476,9 @@ public class Combat extends BaseContent {
 
     public function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
         damage *= doDamageReduction();
+		if (damage < 1) damage = 1;
+        if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -5552,8 +5560,9 @@ public class Combat extends BaseContent {
 
     public function doLightingDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
         damage *= doDamageReduction();
+		if (damage < 1) damage = 1;
+        if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -5632,9 +5641,10 @@ public class Combat extends BaseContent {
 
     public function doDarknessDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
+        damage *= doDamageReduction();
+		if (damage < 1) damage = 1;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage * 2;
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage = damage * 2;
-        damage *= doDamageReduction();
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -5711,6 +5721,7 @@ public class Combat extends BaseContent {
     public function doPoisonDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
+		if (damage < 1) damage = 1;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);

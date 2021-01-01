@@ -370,7 +370,7 @@ package classes.Scenes.Camp
 		
 		public function maxSizeOfElementalsArmy():Number {
 			var maxSizeOfElementalsArmyCounter:Number = 0;
-			if (player.findPerk(PerkLib.JobElementalConjurer) >= 0) maxSizeOfElementalsArmyCounter += 1;
+			if (player.findPerk(PerkLib.JobElementalConjurer) >= 0) maxSizeOfElementalsArmyCounter += 2;
 			if (player.findPerk(PerkLib.ElementalContractRank1) >= 0) maxSizeOfElementalsArmyCounter += 1;
 			if (player.findPerk(PerkLib.ElementalContractRank2) >= 0) maxSizeOfElementalsArmyCounter += 1;
 			if (player.findPerk(PerkLib.ElementalContractRank3) >= 0) maxSizeOfElementalsArmyCounter += 1;
@@ -894,7 +894,7 @@ package classes.Scenes.Camp
 			addButton(0, "Ranks (1)", accessSummonElementalsMainMenu1).hint("Rank 0 to 9th Elder Rank");
 			addButton(1, "Ranks (2)", accessSummonElementalsMainMenu2).hint("5th Elder Rank to (Peak) Baron Rank");
 			addButton(2, "Ranks (3)", accessSummonElementalsMainMenu3).hint("(Low) Viscount Rank to (Peak) Viscount Rank");
-			//addButton(13, "Evocation Tome", evocationTome).hint("Description of various elementals powers.");
+			addButton(13, "Evocation Tome", evocationTome).hint("Description of various elementals powers.");
 			addButton(14, "Back", playerMenu);
 		}
 		private function evocationTome():void {
