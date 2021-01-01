@@ -59,6 +59,9 @@ package classes.Scenes
 			outputText("lust below 0, Drider Incubus Anal sex giving PC imps pregnancy, bunny herm scenes on plains still TF-ing PC despite been undead/gargoyle, goblin ale huminizing effect not taking into account PC resistance to been TF'd, missing fatigue cost check on Money Strike, Diana not able to level up after joining camp, Many Birds soulskill dealing damage twice, some of attacks incorrect texts, some enemy perks ");
 			outputText("been wrong labeled as player perks in few specials/attacks, eastern bunny perk bugging free balls mutation slot, able to fuck Tamani daughters without having cock, certain Beast Warrior perks not allowing cast Charge Weapon or Charge Armor with all other req. meet, mana not regenerating with elemental conjuer job\n\n");
 			outputText("<b>Version 0.8o4:</b>\n\n");
+			outputText("-New mutation perk: Unnatural Strength. Req. 10+ in wendigo score. Effects: The more sated you are the stronger you get, although your satisfaction is fleeting (+1% to str multi per 1% of lust/hunger).\n");
+			outputText("-New mutation perk: Endless Hunger. Req. 10+ in wendigo score. Effects: Your hunger progress at twice the normal speed but must be sated through oral sex. As a result, you are completely unable to obtain a body shape larger than a thin frame. (also for all difficulty settings that not have enabled hunger will enable it)\n");
+			outputText("-New mutation perk: Enigma. Req. 14+ in sphinx score. Effects: Your bottomless insight somehow traduce itself into raw power, allowing you to add half of your intelligence and wisdom as a modifier to strength and toughness.\n");
 			outputText("-Yeti / Winter Wolf / Frost Gigant / True Ice Golems at Glacial Rift got their level rised from 60/47/80/43 to 76/99/89/80 (that included buff to most of their stats).\n");
 			outputText("-New area to discover: Tundra. It have new monster - True Ice Golem (lvl 64). Req. to explore Caves and been at least level 35. It have some of glacial rift monsters. Exploring it would unlock now Glacial Rift.\n");
 			outputText("-Added parser for calling right antennae name instead of antennae.type in tf scenes. Also Hair color change for goblin ale got rid of werid piece of code so will work better. And bnot having any anntanae for goblin and gremlin will give those races +1 to race score.\n");
@@ -78,18 +81,15 @@ package classes.Scenes
 			outputText("-Jtecx many typo corrections.\n");
 			outputText("-Playing difficulty setting below Hard Mode giving PC 3 less points in internal chimera score that would normaly giving negative regen. So now pc can pick most of races all three racial perks without worry to get negative HP regen.\n");
 			outputText("-Easy mode enabled would totaly remove negative HP regen from having racial mutation perks.\n");
-			outputText("-New mutation perk: Unnatural Strength. Req. 10+ in wendigo score. Effects: The more sated you are the stronger you get, although your satisfaction is fleeting (+1% to str multi per 1% of lust/hunger).\n");
-			outputText("-New mutation perk: Endless Hunger. Req. 10+ in wendigo score. Effects: Your hunger progress at twice the normal speed but must be sated through oral sex. As a result, you are completely unable to obtain a body shape larger than a thin frame. (also for all difficulty settings that not have enabled hunger will enable it)\n");
-			outputText("-New mutation perk: Enigma. Req. 14+ in sphinx score. Effects: Your bottomless insight somehow transmutes itself into raw power, allowing you to add half of your intelligence and wisdom as a modifier to strength and toughness.\n");
 			outputText("-Wendigo can use Possess m.special and it's race bonuses are (10+): +70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis raciaol multi, +50% to Lib racial multi, +50 min sens\n");
 			outputText("-New M. Special: Spectra Scream. Req. 10+ pts in wendigo score. Scream that will cause 1-3 turns long Fear effect on enemy with stackable wisdom debuff. 6 turns colldown after use.\n");
 			outputText("-New mutation perk: Wendigo Curse. Gained as part of transformation into Wendigo. Effects: Your body and soul has been cursed by a wendigo. Transformative no longer have an effect on you.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New speciic action during fight with Minotaur King: Dish Helper - in case PC have henchman in this fight can command henchman to occupy healing slut that accompany Minotaur King cutting him off from healing but also make henchman not helping PC in combat. So for super low price of no help in combat from henchman Minotaur King would not heal back after beatdown ^^\n");
 			outputText("-Fixed bugs: Liadri bugfixes, Pyro bugfixes/typo corrections, Cold Fish Soup missing it main intendeed effect (libido lowering), super perk points not reseting on ascension, gremlin tf text error, some of the scenes only looking for correct size of 1st cock ignoring any other PC could have\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
