@@ -15,6 +15,7 @@ import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Dungeons.D3.DriderIncubus;
 import classes.Scenes.Dungeons.D3.Lethice;
+import classes.Scenes.Dungeons.D3.MinotaurKing;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.NPCs.Ceraph;
 import classes.Scenes.NPCs.Luna;
@@ -407,7 +408,7 @@ public class CombatUI extends BaseCombatContent {
 					else addButtonDisabled(2, "Send P.Gol/5", "Not enough mana.");
 				}
 			}
-		} else if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) {
+		} else if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1 && !player.hasStatusEffect(StatusEffects.MinoKing)) {
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") combat.comfoll.alvinaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") combat.comfoll.amilyCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") combat.comfoll.auroraCombatActions();
@@ -449,6 +450,9 @@ public class CombatUI extends BaseCombatContent {
 			} else if (monster is DriderIncubus) {
 				var drider:DriderIncubus = monster as DriderIncubus;
 				if (!drider.goblinFree) btnSpecial1.show("Free Goblin", drider.freeGoblin);
+			} else if (monster is MinotaurKing) {
+				var minoking:MinotaurKing = monster as MinotaurKing;
+				if (!player.hasStatusEffect(StatusEffects.MinoKing)) btnSpecial1.show("Dish Helper", minoking.dishHelper);
 			} else if (monster is Lethice) {
 				var lethice:Lethice = monster as Lethice;
 				if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {

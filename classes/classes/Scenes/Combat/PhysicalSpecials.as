@@ -5491,7 +5491,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) damage *= 1.4;
 		//if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) damage *= 1.6;
 		//if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
-		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType)) {
+		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType)) {
 			//if (player.hasPerk(PerkLib.ExplosiveCartridge)) damage *= 2;
 			if (player.hasKeyItem("Omni Missile") >= 0) damage *= 10;
 			else damage *= 5;
@@ -5751,4 +5751,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}
