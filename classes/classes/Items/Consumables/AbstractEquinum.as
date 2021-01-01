@@ -195,7 +195,7 @@ public class AbstractEquinum extends Consumable {
 			player.MutagenBonus("int", 1);
 			changes++;
 		}
-		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+		if (mutations.blockingBodyTransformations()) changeLimit = 0;
 		//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
 		if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
 			mutations.humanizeArms();
@@ -482,7 +482,7 @@ public class AbstractEquinum extends Consumable {
 
 		if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your " + Appearance.vaginaDescript(player,0) + " has grown larger, in depth AND size. To your absolute surprise it suddenly resume deepening inside your body. " +
-					"When you finaly take a check you discover your vagina is now not unlike that of a horse, capable of taking the largest cock witheout ease." +
+					"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease." +
 					"<b>  You now have a equine vagina!</b>");
 			player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
 			player.vaginaType(VaginaClass.EQUINE);
@@ -505,7 +505,7 @@ public class AbstractEquinum extends Consumable {
 		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && player.eyes.colour != "blue" && player.eyes.colour != "red") {
 			if (player.cor >= 50) mutations.setEyeTypeAndColor(Eyes.HUMAN, "red");
 			else mutations.setEyeTypeAndColor(Eyes.HUMAN, "blue");
-			outputText("\n\nSomething weird happens in your eyes when you go to see what is going on you discover your irises turned [eyecolor].");
+			outputText("\n\nSomething weird is happening in your eyes, when you go to see what is going on you discover your irises turned [eyecolor]!");
 			changes++;
 		}
 		//HorseFace - Req's Fur && Ears
@@ -518,9 +518,9 @@ public class AbstractEquinum extends Consumable {
 		//Fur - if has horsetail && ears and not at changelimit
 		if (!player.hasFur() && !player.isTaur() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.tailType == Tail.HORSE) {
 			if (!player.hasScales()) {
-				outputText("\n\nAn itchy feeling springs up over every inch of your [skin base].  As you scratch yourself madly, you feel fur grow out of your [skin base] until <b>you have a fine coat of ");
-				if (type == 0) outputText("[haircolor]-colored fur.</b>");
-				else outputText("[haircolor]-colored fur.</b>");
+				outputText("\n\nAn itchy feeling springs up over every inch of your [skin base].  As you scratch yourself madly, you feel fur grow out of your [skin base] until <b>you have a fine coat of </b>");
+				if (type == 0) outputText("<b>[haircolor]-colored fur.</b>");
+				else outputText("<b>[haircolor]-colored fur.</b>");
 			} else {
 				player.skinDesc = "fur";
 				outputText("\n\nYour " + player.skinTone + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of ");

@@ -88,7 +88,7 @@ public class OnikiriSake extends Consumable {
 		if (changes < changeLimit && rand(3) == 0 && player.tone < player.maxToneCap()) {
 			outputText(player.modTone(player.maxToneCap(), 3));
 		}
-		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+		if (game.mutations.blockingBodyTransformations()) changeLimit = 0;
 		//Sexual changed
 		if ((player.gender == 1 || player.gender == 3) && player.cocks.length > 0 && changes < changeLimit && rand(3) == 0) {
 			var selectedCock:int = -1;
@@ -206,7 +206,7 @@ public class OnikiriSake extends Consumable {
 		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {
 			outputText("\n\nAs you thought your skin couldn't handle more tattoo a few localised skin burns reveal a new set of drawing along your skin, some decorating your chest. Well you might as well proudly display your <b>Oni tattooed skin.</b>");
 			if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) {
-				outputText("\n\n<b>Genetic Memory: Battle Tattoed Skin - Memorized!</b>\n\n");
+				outputText("\n\n<b>Genetic Memory: Battle Tattooed Skin - Memorized!</b>\n\n");
 				player.createStatusEffect(StatusEffects.UnlockedBattleTattoed, 0, 0, 0, 0);
 			}
 			player.skin.base.pattern = Skin.PATTERN_BATTLE_TATTOO;

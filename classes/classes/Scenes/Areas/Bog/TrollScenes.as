@@ -240,7 +240,7 @@ package classes.Scenes.Areas.Bog
 		public function encounterAdultGlacialMaleTrollLostAnalRape():void {
 			clearOutput();
 			outputText("You look down at the burly troll lying down. You can’t resist the opportunity to take such an amazing ass.\n\n");
-			outputText("You strip out of your [armor], just enough to unveil your [penis]. You tell him to bend over as you kneel behind him. He doesn’t even put up a fight after the beating you gave him. You take a firm grasp on his muscular rear before undressing him, giving you a full view of his firm ass. Once readied, you allow yourself to penetrate him.\n\n");
+			outputText("You strip out of your [armor], just enough to unveil your [cock]. You tell him to bend over as you kneel behind him. He doesn’t even put up a fight after the beating you gave him. You take a firm grasp on his muscular rear before undressing him, giving you a full view of his firm ass. Once readied, you allow yourself to penetrate him.\n\n");
 			outputText("You slowly begin pumping into him, holding him as tightly as possible, so that you’re warmed up by his fur. He releases a soft moan as you press deeper into his backdoor. He reaches his hand to his length as he jerks himself off in tandem with your thrusts.\n\n");
 			outputText("You can feel his sphincter clench around your shaft as you continue railing him. You feel your shaft begin to twitch as you near your own orgasm. His backdoor is desperately trying to coax you to finish, he is desperate for this. You moan loudly as you finally orgasm, shooting waves of spunk into him.\n\n");
 			outputText("The troll groans as he slumps down to the snow, exhausted from the beating you gave him. You quickly clean yourself up as you pick up your [armor] and take your leave.\n\n");

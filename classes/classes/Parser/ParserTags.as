@@ -28,6 +28,7 @@ public class ParserTags {
         "agility"               : function ():* { return "[Agility]"; },
         "allbreasts"            : function ():* { return CoC.instance.player.allBreastsDescript(); },
         "alltits"               : function ():* { return CoC.instance.player.allBreastsDescript(); },
+        "antennae"              : function ():* { return CoC.instance.player.antennaeDescript(); },
         "armor"                 : function ():* { return CoC.instance.player.armorName; },
         "armorname"             : function ():* { return CoC.instance.player.armorName; },
         "ass"                   : function ():* { return CoC.instance.player.buttDescript(); },

@@ -501,8 +501,8 @@ public class Combat extends BaseContent {
 
     public function isPlayerBound():Boolean {
         var bound:Boolean = false;
-        if (player.hasStatusEffect(StatusEffects.HarpyBind) || player.hasStatusEffect(StatusEffects.GooBind) || player.hasStatusEffect(StatusEffects.TentacleBind) || player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind)
-                || player.hasStatusEffect(StatusEffects.WolfHold) || player.hasStatusEffect(StatusEffects.TrollHold) || monster.hasStatusEffect(StatusEffects.QueenBind) || monster.hasStatusEffect(StatusEffects.PCTailTangle)) bound = true;
+        if (player.hasStatusEffect(StatusEffects.HarpyBind) || player.hasStatusEffect(StatusEffects.GooBind) || player.hasStatusEffect(StatusEffects.TentacleBind) || player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind) || monster.hasStatusEffect(StatusEffects.QueenBind)
+             || player.hasStatusEffect(StatusEffects.WolfHold) || player.hasStatusEffect(StatusEffects.TrollHold) || player.hasStatusEffect(StatusEffects.PossessionWendigo) || monster.hasStatusEffect(StatusEffects.PCTailTangle)) bound = true;
         if (player.hasStatusEffect(StatusEffects.HolliConstrict)) bound = true;
         if (player.hasStatusEffect(StatusEffects.GooArmorBind)) bound = true;
         if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
@@ -540,11 +540,20 @@ public class Combat extends BaseContent {
             outputText("\n<b>You're too confused</b> about who you are to try to attack!");
             stunned = true;
         }
-        if (player.hasStatusEffect(StatusEffects.Confusion)) {
+        if (player.hasStatusEffect(StatusEffects.Polymorphed)) {
             outputText("\n<b>You fight against the spell to return to your true form!</b>");
             stunned = true;
         }
         return stunned;
+    }
+
+    public function isPlayerFeared():Boolean {
+        var feared:Boolean = false;
+        if (player.hasStatusEffect(StatusEffects.Fear)) {
+			outputText("\n<b>You're too busy shivering with fear</b> to fight.");
+			feared = true;
+		}
+        return feared;
     }
 
     public function canUseMagic():Boolean {
@@ -593,7 +602,7 @@ public class Combat extends BaseContent {
             addButton(5, "Fantasize", fantasize).hint("Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
             addButton(6, "Wait", wait).hint("Take no action for this round.  Why would you do this?  This is a terrible idea.");
         }
-        if (player.statusEffectv1(StatusEffects.ChanneledAttack) >= 1 && (isPlayerBound() || isPlayerSilenced() || isPlayerStunned())) {
+        if (player.statusEffectv1(StatusEffects.ChanneledAttack) >= 1 && (isPlayerBound() || isPlayerSilenced() || isPlayerStunned() || isPlayerFeared())) {
             addButton(1, "Stop", stopChanneledSpecial);
         }
         /*
@@ -1585,6 +1594,7 @@ public class Combat extends BaseContent {
 			if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
 			if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
 			if (player.vehicles == vehicles.GOBMPRI) damage *= 1.5;
+			if (player.vehicles == vehicles.GS_MECH) damage *= 1.25;
 		}
 		if (player.isInNonGoblinMech()) {
 			if (player.vehicles == vehicles.HB_MECH) {
@@ -1815,6 +1825,13 @@ public class Combat extends BaseContent {
 				player.dynStats("lus", licklust, "scale", false);
 			}
             if (player.statusEffectv1(StatusEffects.TrollHold) < 2) skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.PossessionWendigo)) {
+            clearOutput();
+            outputText("You decide to do nothing for now as the wendigo takes advantage of your inaction, gleefully forcing you to masturbate while enjoying every sensation your tormented body is inflicted with.");
+            var possessionWendigo:Number = (monster.inte / 4) + rand(15);
+			possessionWendigo = Math.round(possessionWendigo);
+			player.dynStats("lus", possessionWendigo, "scale", false);
+            skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.HolliConstrict)) {
             (monster as Holli).waitForHolliConstrict(true);
             skipMonsterAction = true;
@@ -2007,7 +2024,21 @@ public class Combat extends BaseContent {
 				if (monster as CorruptedMaleTroll) player.addStatusValue(StatusEffects.TrollHold, 3, 1);
 			}
             if (player.statusEffectv1(StatusEffects.TrollHold) < 2) skipMonsterAction = true;
-		} else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
+		} else if (player.hasStatusEffect(StatusEffects.PossessionWendigo)) {
+            clearOutput();
+            outputText("You struggle for control over your body ");
+            if (rand(3) == 0 || rand(80) < player.str / 1.5) {
+				outputText("and manage to force the fiend out.");
+				player.removeStatusEffect(StatusEffects.PossessionWendigo);
+			}
+            else {
+				outputText("but the wendigo overpowers you and gleefully forces you to masturbate yourself, enjoying every sensation your tormented body is inflicted with.");
+				var possessionWendigo:Number = (monster.inte / 4) + rand(15);
+				possessionWendigo = Math.round(possessionWendigo);
+				player.dynStats("lus", possessionWendigo, "scale", false);
+			}
+            skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
             if (monster as FrostGiant) (monster as FrostGiant).giantGrabStruggle();
             if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantGrabStruggle();
             skipMonsterAction = true;
@@ -2890,7 +2921,10 @@ public class Combat extends BaseContent {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.3;
                         if (damage < 30) damage = 30;
-                    } else {
+					} else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 1.25;
+                        if (damage < 25) damage = 25;
+					} else {
                         damage *= 1.2;
                         if (damage < 20) damage = 20;
                     }
@@ -2899,7 +2933,10 @@ public class Combat extends BaseContent {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.6;
                         if (damage < 60) damage = 60;
-                    } else {
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 1.5;
+                        if (damage < 50) damage = 50;
+					} else {
                         damage *= 1.4;
                         if (damage < 40) damage = 40;
                     }
@@ -2908,7 +2945,10 @@ public class Combat extends BaseContent {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 1.9;
                         if (damage < 90) damage = 90;
-                    } else {
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 1.75;
+                        if (damage < 75) damage = 75;
+					} else {
                         damage *= 1.6;
                         if (damage < 60) damage = 60;
                     }
@@ -2917,11 +2957,23 @@ public class Combat extends BaseContent {
                     if (player.vehicles == vehicles.GOBMPRI) {
                         damage *= 2.2;
                         if (damage < 120) damage = 120;
-                    } else {
+                    } else if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 2;
+                        if (damage < 100) damage = 100;
+					} else {
                         damage *= 1.8;
                         if (damage < 80) damage = 80;
                     }
                 }
+				if (player.hasKeyItem("Machine Gun MK4") >= 0) {
+					if (player.vehicles == vehicles.GS_MECH) {
+						damage *= 2.25;
+                        if (damage < 125) damage = 125;
+					} else {
+                        damage *= 2;
+                        if (damage < 100) damage = 100;
+                    }
+				}
             }
             if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
                 //if ((damage == 0) ){
@@ -3614,6 +3666,10 @@ public class Combat extends BaseContent {
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
                 }
+                if (player.arms.type == Arms.WENDIGO){
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
+                }
                 else{
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier);
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier);
@@ -3636,6 +3692,13 @@ public class Combat extends BaseContent {
                     outputText("You use your extra arms to rend your opponent two more times.");
                     ExtraNaturalWeaponAttack();
                     ExtraNaturalWeaponAttack();
+                    outputText("\n");
+                }
+                if (player.arms.type == Arms.WENDIGO)
+                {
+                    outputText("Your maddening hunger gives you strength allowing you to attack two more times, your strike delivering cursed wounds.");
+                    ExtraNaturalWeaponAttack(1, "WendigoClaw");
+                    ExtraNaturalWeaponAttack(1, "WendigoClaw");
                     outputText("\n");
                 }
             }
@@ -3792,7 +3855,7 @@ public class Combat extends BaseContent {
     }
 
     public function attack2():void {
-        // ESSENTIALY DO EVERYTHING AGAIN BUT WITHEOUT THE NATURAL ATTACK SET
+        // ESSENTIALY DO EVERYTHING AGAIN BUT without THE NATURAL ATTACK SET
         flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
         //	if(!player.hasStatusEffect(StatusEffects.FirstAttack)) {
         //		clearOutput();
@@ -4630,6 +4693,10 @@ public class Combat extends BaseContent {
                 if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,0,0,0,0);
                 else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*2);
             }
+            if (SpecialEffect == "WendigoClaw"){
+                monster.addCurse("tou.mult",0.05);
+                monster.addCurse("str.mult",0.05);
+            }
             // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
             if (monster is Doppleganger) {
                 if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -5141,9 +5208,13 @@ public class Combat extends BaseContent {
     }
 
     public function monsterLevelAdjustment():Number {
-        var monsterLevelAdjustment:Number = 0;
-		//perks like god type enemy
-        return monsterLevelAdjustment;
+        var monsterLvlAdjustment:Number = 0;
+		if (player.vehiclesName == "Giant Slayer Mech") {
+			if (monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType) || monster.hasPerk(PerkLib.EnemyGodType)) monsterLvlAdjustment -= 10;
+			else monsterLvlAdjustment += 10;
+		}
+		//if (player.hasPerk(PerkLib.EnemyGodType)) 
+        return monsterLvlAdjustment;
     }
 
 //DEAL DAMAGE
@@ -5204,7 +5275,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
             if (monster.hasPerk(PerkLib.FuelForTheFire)) WrathGains += Math.round((damage / 5)*BonusWrathMult);
             else WrathGains += Math.round((damage / 10) * BonusWrathMult);
-			if ((monster.hasStatusEffect(StatusEffects.IzmaBleed) || monster.hasStatusEffect(StatusEffects.SharkBiteBleed)
+			if ((monster.hasStatusEffect(StatusEffects.CouatlHurricane) || monster.hasStatusEffect(StatusEffects.IzmaBleed) || monster.hasStatusEffect(StatusEffects.SharkBiteBleed)
 			 || monster.hasStatusEffect(StatusEffects.KamaitachiBleed) || monster.hasStatusEffect(StatusEffects.GoreBleed)
 			 || monster.hasStatusEffect(StatusEffects.Hemorrhage) || monster.hasStatusEffect(StatusEffects.HemorrhageArmor)
 			 || monster.hasStatusEffect(StatusEffects.HemorrhageShield) || monster.hasStatusEffect(StatusEffects.Hemorrhage2))
@@ -6327,6 +6398,13 @@ public class Combat extends BaseContent {
                 outputText("<b>You finally manage to break free from the spell regaining your true form.</b>\n\n");
             }
         }
+        if (player.hasStatusEffect(StatusEffects.Fear)) {
+            player.addStatusValue(StatusEffects.Fear, 1, -1);
+            if (player.statusEffectv1(StatusEffects.Fear) <= 0) {
+                player.removeStatusEffect(StatusEffects.Fear);
+                outputText("<b>You finally manage to shake off the fear.</b>\n\n");
+            }
+        }
         if (player.hasStatusEffect(StatusEffects.Disarmed)) {
             player.addStatusValue(StatusEffects.Disarmed, 1, -1);
             if (player.statusEffectv1(StatusEffects.Disarmed) <= 0) {
@@ -7094,7 +7172,7 @@ public class Combat extends BaseContent {
                 if (player.hasKeyItem("Jetpack") >= 0 || player.hasKeyItem("MK2 Jetpack") >= 0) {
                     outputText("<b>You need to give some time for your mech to recharge and thus land back to the ground.</b>\n\n");
                     player.createStatusEffect(StatusEffects.CooldownJetpack, 3, 0, 0, 0);
-                } else outputText("<b>You land to tired to keep flying.</b>\n\n");
+                } else outputText("<b>You land too tired to keep flying.</b>\n\n");
                 if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
                     player.removeStatusEffect(StatusEffects.FlyingNoStun);
                     player.removePerk(PerkLib.Resolute);
@@ -7181,6 +7259,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownTailCleave);
             } else {
                 player.addStatusValue(StatusEffects.CooldownTailCleave, 1, -1);
+            }
+        }
+        //Hurricane
+        if (player.hasStatusEffect(StatusEffects.CooldownHurricane)) {
+            if (player.statusEffectv1(StatusEffects.CooldownHurricane) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownHurricane);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownHurricane, 1, -1);
             }
         }
         //Wind Scythe
@@ -7596,6 +7682,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownInfernalClaw);
             } else {
                 player.addStatusValue(StatusEffects.CooldownInfernalClaw, 1, -1);
+            }
+        }
+        //Spectral Scream
+        if (player.hasStatusEffect(StatusEffects.CooldownSpectralScream)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpectralScream) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpectralScream);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpectralScream, 1, -1);
             }
         }
         //Hurricane Dance
@@ -8611,7 +8705,7 @@ public class Combat extends BaseContent {
     public function OrcaCleanup():void {
         player.addStatusValue(StatusEffects.OrcaPlayRoundLeft, 1, -1);
         if (player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft) <= 0) {
-            outputText("\n\nUnable to prolong the game further you finaly let your opponent drops to the ground. ");
+            outputText("\n\nUnable to prolong the game further you finally let your opponent drop to the ground. ");
             var damage:Number = unarmedAttack();
             damage += player.str;
             damage += scalingBonusStrength() * 0.25;
@@ -8741,7 +8835,7 @@ public class Combat extends BaseContent {
     public function OrcaImpale():void {
         clearOutput();
         if (player.isSpearTypeWeapon() || player.isSwordTypeWeapon()) {
-            outputText("You cannot impale your foe witheout a piercing weapon.");
+            outputText("You cannot impale your foe without a piercing weapon.");
             addButton(0, "Next", combatMenu, false);
         } else {
             fatigue(20, USEFATG_PHYSICAL);
@@ -9150,7 +9244,7 @@ public class Combat extends BaseContent {
             if (player.statusEffectv1(StatusEffects.StraddleRoundLeft) <= 0) {
                 monster.removeStatusEffect(StatusEffects.Straddle);
                 player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
-                outputText("\n\nYour opponent finaly manage to struggle free of your grapple!\n\n");
+                outputText("\n\nYour opponent finally manages to struggle free of your grapple!\n\n");
             }
         }
         enemyAI();

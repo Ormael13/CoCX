@@ -72,7 +72,7 @@ public function MitziCampMainMenu2():void {
 			else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") addButton(5, "Assist me", mitziHenchmanOption).hint("Ask Mitzi to stay in camp.");
 			else addButtonDisabled(5, "Assist me", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Mitzi about accompaning you.");
 		}
-		else addButtonDisabled(5, "Assist me", "She not have enought daughters (6+) to accompaning you.");
+		else addButtonDisabled(5, "Assist me", "She not have enough daughters (6+) to accompaning you.");
 	}
 	else addButtonDisabled(5, "Assist me", "You need to have at least Basic Leadership to form a team with Mitzi.");
 	addButton(4, "Sex", mitziSexMenu);

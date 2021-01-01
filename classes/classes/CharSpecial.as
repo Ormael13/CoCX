@@ -1703,7 +1703,7 @@ import classes.Items.*;
 			player.speStat.core.value = 20;
 			player.libStat.core.value = 30;
 			player.cor = 30;
-			outputText("You have been fascinated with magic as long as you can remember.  The villagers humored this at first, regaling you with stories about mages of old and providing “spellbooks” that were more superstition than fact.  When you learned to cast whitefire without any instruction, the villagers got worried. Your salvation came in the form of a traveling mage, a hero himself in his youth. He provided the apprenticeship you craved and focused your eccentricities into mastering the art of magical healing.  While you had earned yourself a respectable livelihood well before your coming of age, your fascination with the unnatural has always unnerved your friends and neighbors.  One year, an unknown disease passed through the town.  You saw this peculiar sickness as a challenge, and devised a spell to neutralize it.  ");
+			outputText("You have been fascinated with magic as long as you can remember.  The villagers humored this at first, regaling you with stories about mages of old and providing â€œspellbooksâ€� that were more superstition than fact.  When you learned to cast whitefire without any instruction, the villagers got worried. Your salvation came in the form of a traveling mage, a hero himself in his youth. He provided the apprenticeship you craved and focused your eccentricities into mastering the art of magical healing.  While you had earned yourself a respectable livelihood well before your coming of age, your fascination with the unnatural has always unnerved your friends and neighbors.  One year, an unknown disease passed through the town.  You saw this peculiar sickness as a challenge, and devised a spell to neutralize it.  ");
 			outputText("While you saved several lives, a handful of villagers died before you bested the plague. Rumors spread that you used their deaths to fuel unnatural rituals, bringing all the fear and suspicion focused on you over the years to a crux.  Your trial was swift, but you accepted the outcome without a second thought.  Whatever lay beyond that portal, you knew it would fall to your powers.");
 		}
 		
@@ -1975,7 +1975,7 @@ import classes.Items.*;
 			if(rand(3) != 0) // 2/3 to have human face
 				player.faceType = Face.HUMAN;
 			else // totally random one
-				player.faceType = rand(20)+1; // since it is not a enum, it is impossible to make it auto-ajust...
+				player.faceType = rand(20)+1; // since it is not a enum, it is impossible to make it auto-adjust...
 				
 			if(player.faceType == Face.SPIDER_FANGS && rand(2) == 0)
 					player.eyes.type = Eyes.FOUR_SPIDER_EYES; // 50% to have spider eyes with spider fangs
@@ -1988,7 +1988,7 @@ import classes.Items.*;
 			if(player.faceType == Face.HUMAN && rand(2)!=0) // if human face, 50% to have human ears
 				player.ears.type = Ears.HUMAN;
 			else // totally random one
-				player.ears.type = rand(14) + 1; // since it is not a enum, it is impossible to make it auto-ajust...
+				player.ears.type = rand(14) + 1; // since it is not a enum, it is impossible to make it auto-adjust...
 
 
 			if(rand(2) != 0) // 50% to have human lower body

@@ -1054,6 +1054,9 @@ public class DebugMenu extends BaseContent
 			[Tongue.DOG, "7 DOG"],
 			[Tongue.CAVE_WYRM, "8 CAVE_WYRM"],
 			[Tongue.GHOST, "9 GHOST"],
+			[Tongue.MELKIE, "10 MELKIE"],
+			[Tongue.RATATOSKR, "11 RATATOSKR"],
+			[Tongue.RAVENOUS_TONGUE, "12 RAVENOUS_TONGUE"],
 		];
 		private static const EYE_TYPE_CONSTANTS:Array = [
 			[Eyes.HUMAN, "0 HUMAN"],
@@ -1095,6 +1098,7 @@ public class DebugMenu extends BaseContent
 			[Eyes.GAZER, "36 GAZER"],
 			[Eyes.RATATOSKR, "37 RATATOSKR"],
 			[Eyes.FIENDISH, "38 FIENDISH"],
+			[Eyes.DEAD_EYES, "38 DEAD_EYES"],
 		];
 		private static const EAR_TYPE_CONSTANTS:Array    = [
 			[Ears.HUMAN, "0 HUMAN"],
@@ -1377,6 +1381,7 @@ public class DebugMenu extends BaseContent
 			[Arms.FROSTWYRM, "45 FROSTWYRM"],
 			[Arms.CANCER, "46 CANCER"],
 			[Arms.USHI_ONI_ONNA, "47 USHI_ONI_ONNA"],
+			[Arms.WENDIGO, "48 WENDIGO"],
 		];
 		private static const CLAW_TYPE_CONSTANTS:Array = [
 			[Claws.NORMAL, "0 NORMAL"],
@@ -1443,6 +1448,7 @@ public class DebugMenu extends BaseContent
 			[Tail.WEASEL, "48 WEASEL"],
 			[Tail.SQUIRREL, "49 SQUIRREL"],
 			[Tail.MONKEY, "50 MONKEY"],
+			[Tail.WENDIGO, "51 WENDIGO"],
 		];
 		private static const TAIL_COUNT_CONSTANTS:Array = [
 			[0,"0"],1,2,3,4,
@@ -1554,6 +1560,11 @@ public class DebugMenu extends BaseContent
 			[LowerBody.CANCER, "61 CANCER"],
 			[LowerBody.FROSTWYRM, "62 FROSTWYRM"],
 			[LowerBody.USHI_ONI_ONNA, "63 USHI_ONI_ONNA"],
+			[LowerBody.FLOWER_LILIRAUNE, "64 FLOWER_LILIRAUNE"],
+			[LowerBody.WEASEL, "65 WEASEL"],
+			[LowerBody.GAZER, "66 GAZER"],
+			[LowerBody.SQUIRREL, "67 SQUIRREL"],
+			[LowerBody.WENDIGO, "68 WENDIGO"],
 		];
 		private static const LEG_COUNT_CONSTANTS:Array = [
 			1,2,4,6,8,
@@ -1574,9 +1585,14 @@ public class DebugMenu extends BaseContent
 			[RearBody.DISPLACER_TENTACLES, "11 DISPLACER_TENTACLES"],
 			[RearBody.SNAIL_SHELL, "12 SNAIL_SHELL"],
 			[RearBody.METAMORPHIC_GOO, "13 METAMORPHIC_GOO"],
+			//14
 			[RearBody.GHOSTLY_AURA, "15 GHOSTLY_AURA"],
 			[RearBody.YETI_FUR, "16 YETI_FUR"],
 			[RearBody.GLACIAL_AURA, "17 GLACIAL_AURA"],
+			[RearBody.CENTIPEDE, "18 CENTIPEDE"],
+			[RearBody.KRAKEN, "19 KRAKEN"],
+			[RearBody.FROSTWYRM, "20 FROSTWYRM"],
+			[RearBody.FUR_COAT, "21 FUR_COAT"],
 		];
 		private function changeArmType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.arms.type = setIdx;

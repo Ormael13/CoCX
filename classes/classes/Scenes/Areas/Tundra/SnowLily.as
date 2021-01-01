@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.GlacialRift 
+package classes.Scenes.Areas.Tundra 
 {
 import classes.*;
 import classes.GlobalFlags.*;

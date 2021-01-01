@@ -250,11 +250,11 @@ use namespace CoC;
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(3, "Mana", ManaAndSoulforce).hint("Convert some soulforce into mana or vice versa."); //używanie soulforce do zamiany na mane w stosunku 1:1 a many do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.hasPerk(PerkLib.Metamorph)) {
-				if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) addButtonDisabled(6, "Metamorf", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
-				else addButton(6, "Metamorf", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
+				if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) addButtonDisabled(6, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
+				else addButton(6, "Metamorph", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			}
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			//addButton(10, "Cheats", SoulforceCheats).hint("Well as title saying those are cheats ^^");//block this option at each public version
+			//addButton(10, "Cheats", SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -262,16 +262,16 @@ use namespace CoC;
 			outputText("Collection of current used cheats that with time will be removed or replaced by new ones.");
 			outputText("\n\nAscension points: " + player.ascensionPerkPoints + "");
 			menu();
-			addButton(0, "StatsAdj/Ascen", StatsAscensionMenu).hint("For more precise adjusting each of 8 main stats and Ascension related stuff.");
+			addButton(0, "StatsAdj/Ascen", StatsAscensionMenu).hint("For more precisely adjusting each of the 8 main stats and Ascension related stuff.");
 			addButton(1, "P/G/XP/LvL", PerksGemsEXPLvL).hint("Adding/Removing perk points and adding gems/exp/lvl.");
-			addButton(2, "Equip", EquipmentMenu).hint("For creting various equipment items for tests.");
-			addButton(3, "NonEquip", NonEquipmentMenu).hint("For creting various non-equipment items for tests.");
-			addButton(4, "Materials", MaterialMenu).hint("For creting various materials for tests.");
+			addButton(2, "Equip", EquipmentMenu).hint("For creating various equipment items for tests.");
+			addButton(3, "NonEquip", NonEquipmentMenu).hint("For creating various non-equipment items for tests.");
+			addButton(4, "Materials", MaterialMenu).hint("For creating various materials for tests.");
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
-			addButton(7, "Body State", BodyStateMenu).hint("For more precise adjusting of few other body values or parts than Stats Adj option.");
-			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Metamorph all options unlock.")
-			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that not fit anywhere else and etc.");
+			addButton(7, "Body State", BodyStateMenu).hint("For more precisely adjusting a few other body values or parts than Stats Adj option.");
+			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Unlock all Metamorph options.")
+			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that don't fit anywhere else and etc.");
 			addButton(11, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
 			addButton(12, "FairyTest", FairyTest).hint("Become a fairy.");
 			addButton(13, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
@@ -282,7 +282,7 @@ use namespace CoC;
 			addButton(0, "ClickItTwice", AddMaxBackpack00).hint("Zenji spawning pool");
 			addButton(1, "Instant-house", AddMaxBackpack01).hint("Instant-house + bed");
 			addButton(2, "Hex-Mate", AddMaxBackpack02).hint("Hex-Mate");
-			addButton(3, "EzekielBuffFix", AddMaxBackpack4).hint("Fix for Blessing.");
+			addButton(3, "WendigoTrigger", AddMaxBackpack4).hint("Trigger Wendigo transformation. (Without active Wendigo Psychosis will do nothing ;) )");
 			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) addButton(4, "ClickItOnce", AddMaxBackpack3).hint("Fixing Lover Zenji missing one status effect needed for his sex scenes menu.");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2 && !player.hasStatusEffect(StatusEffects.TrainingNPCsTimersReduction)) addButton(5, "ClickItDoIt", AddMaxBackpack2).hint("Adding one status effect needed for sparring ring upgrades effect.");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
@@ -341,15 +341,11 @@ use namespace CoC;
 			doNext(SoulforceCheats);
 		}
 		public function AddMaxBackpack4():void {
-			player.statStore.addBuffObject({
-				"str": 5,
-				"tou": 5,
-				"spe": 5,
-				"int": 5,
-				"wis": 5,
-				"lib": 5
-			}, 'EzekielBlessing', {text: 'Ezekiel Blessing'});
-			doNext(submenucuzwhynot);
+			if (player.hasStatusEffect(StatusEffects.WendigoPsychosis)) SceneLib.glacialRift.wendigoScene.becomeWendigo();
+			else {
+				outputText("Get a Life... i mean Wendigo Psychosis...");
+				doNext(submenucuzwhynot);
+			}
 		}
 		public function TestDynamicStats():void {
 			player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
@@ -1683,7 +1679,8 @@ use namespace CoC;
 				addButton(3, "TGOGossamer", AddThickGreenOnnaGossamer).hint("Add 1 Thick Green Onna Gossamer.");
 				addButton(4, "WhiteIceS.", AddWhiteIceShard).hint("White Ice Shard");
 				addButton(5, "Enigmanium", AddEnigmanium).hint("Add 1 vial of Enigmanium.");
-				addButton(6, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
+				//addButton(6, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
+				addButton(6, "dragonshit", AddDragonShit).hint("Add dragon stuff for jabberwocky test.");
 				addButton(7, "Naga Oils", AddGorgonOil).hint("Add 1 vial of Gorgon, Vouivre and Couatl Oil.");
 				addButton(8, "VT RV WF", AddVoltageTopaz).hint("Add 1 Voltage Topaz, 1 vial of Red Blood (Bat TF) and 1 Wonder Fruit.");
 				addButton(9, "DSJ HS FSS", AddDarkSlimeJelly).hint("Add 1 Dark Slime Jelly, 1 Hydra Scale and 1 Fire Snail Saliva.");
@@ -1900,6 +1897,14 @@ use namespace CoC;
 		public function AddVoltageTopaz():void {
 			outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");
 			inventory.takeItem(consumables.VOLTTOP, AddRedBlood);
+		}
+		public function AddDragonShit():void {
+			outputText("\n\n<b>(Gained 1 dragon!)</b>\n\n");
+			inventory.takeItem(consumables.DRAKHRT, AddJabbyShit);
+		}
+		public function AddJabbyShit():void {
+			outputText("\n\n<b>(Gained 1 Jabby!)</b>\n\n");
+			inventory.takeItem(consumables.JABBERS, curry(NonEquipmentMenu, 2));
 		}
 		public function AddRedBlood():void {
 			outputText("\n\n<b>(Gained 1 vial of red blood!)</b>\n\n");

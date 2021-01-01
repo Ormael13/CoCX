@@ -54,11 +54,11 @@ public class WinterWolf extends Monster
 				}
 				else {
 					player.createStatusEffect(StatusEffects.Frostbite,0,0,0,0);
-					damage += 30 + Math.round(rand(str / 3));
+					damage += 30 + Math.round(rand((str + weaponAttack) / 2));
 					player.takeIceDamage(damage);
 					dmgtaken += damage;
 				}
-				damage += 30 + Math.round(rand(str / 3));
+				damage += 30 + Math.round(rand((str + weaponAttack) / 2));
 				player.takeIceDamage(damage);
 				dmgtaken += damage;
 				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
@@ -71,11 +71,11 @@ public class WinterWolf extends Monster
 					player.addStatusValue(StatusEffects.Frostbite,1,5);
 				}
 				else {
-					damage += 30 + Math.round(rand(str / 3));
+					damage += 30 + Math.round(rand((str + weaponAttack) / 2));
 					player.takeIceDamage(damage);
 					dmgtaken += damage;
 				}
-				damage += 30 + Math.round(rand(str / 3));
+				damage += 30 + Math.round(rand((str + weaponAttack) / 2));
 				player.takeIceDamage(damage);
 				dmgtaken += damage;
 				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
@@ -92,7 +92,7 @@ public class WinterWolf extends Monster
 		
 		public function paw():void {
 			outputText("The wolf smash you with its enormous paw you rail at the impact as it sends you flying across the field.");
-			player.takePhysDamage(str);
+			player.takePhysDamage(str + weaponAttack);
 			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
 			if (player.hasStatusEffect(StatusEffects.WolfHold)) player.removeStatusEffect(StatusEffects.WolfHold);
@@ -118,29 +118,33 @@ public class WinterWolf extends Monster
 			this.skin.growFur({color:"glacial white"});
 			this.hairColor = "glacial white";
 			this.hairLength = 8;
-			initStrTouSpeInte(150, 190, 100, 90);
-			initWisLibSensCor(80, 20, 15, 75);
+			initStrTouSpeInte(400, 420, 375, 120);
+			initWisLibSensCor(100, 75, 150, 75);
 			this.weaponName = "paws";
 			this.weaponVerb="paw-slash";
-			this.weaponAttack = 43;
+			this.weaponAttack = 274;
 			this.armorName = "fur";
-			this.armorDef = 36;
-			this.armorMDef = 27;
-			this.bonusHP = 800;
-			this.bonusLust = 82;
+			this.armorDef = 328;
+			this.armorMDef = 261;
+			this.bonusHP = 15000;
+			this.bonusLust = 324;
 			this.lust = 10;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 47;
-			this.gems = 100 + rand(25);
+			this.level = 99;
+			this.additionalXP = 8000;
+			this.gems = 200 + rand(50);
 			this.drop = new WeightedDrop()
 					.add(consumables.CHILLYP, 1)
 					.add(null, 2);
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

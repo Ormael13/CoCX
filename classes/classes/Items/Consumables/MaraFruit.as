@@ -58,7 +58,7 @@ public class MaraFruit extends Consumable{
 			dynStats("spe", -1);
 			changes++;
 		}
-		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) changeLimit = 0;
+		if (game.mutations.blockingBodyTransformations()) changeLimit = 0;
 		//Female changes - pussy to flower (for now unused)
 		if (player.gender == 2 || (player.gender == 3 && player.mf("m", "f") == "f")) {
 			var boobsGrew:Boolean = false;
@@ -328,13 +328,13 @@ public class MaraFruit extends Consumable{
 		}
 		//
 		if (player.plantScore() >= 7 && player.wings.type == Wings.PLANT && player.hasStatusEffect(StatusEffects.AlrauneFlower) && changes < changeLimit && rand(2) == 0) {
-			outputText("\n\nYour close your eyes to appreciate the feeling of the sun on your vegetal skin, losing yourself in the sensation. That is short lived as your feet suddenly tingle with a weird feeling. Opening your eye you look down in panic as your feet roots themselves in the ground and start to merge together up to your pussy into a trunk which turn a shade of green darker than the rest of your body. Your tentacle wings have also moved down to your feet tips but the weirdest happen when everything below your waist grow bloated easily becoming twice as large as you are. ");
-			outputText("Your legs almost look... like a flower about to bloom? Bloom it does indeed as everything below your waist explode in a orchid of enormous size with petal large enough to engulf you entirely. Worried about being rooted in place you try and move and to your surprise you pretty much discover you can actually walk around on the vine like tentacle cocks at the base of your body. It feels weird at first but you think you will get used to walking on pseudo vines.");
+			outputText("\n\nYour close your eyes to appreciate the feeling of the sun on your vegetal skin, losing yourself in the sensation. The feeling is short lived as your feet suddenly tingle with a weird feeling. Opening your eyes you look down in panic as your feet roots themselves in the ground and start to merge together up to your pussy into a trunk which turn a shade of green darker than the rest of your body. Your tentacle wings have also moved down to your feet tips but the weirdest thing happens when everything below your waist grows bloated, easily becoming twice as large as you are. ");
+			outputText("Your legs almost look... like a flower about to bloom? Bloom it does indeed as everything below your waist explodes in a orchid of enormous size with petals large enough to engulf you entirely. Worried about being rooted in place you try and move and to your surprise you pretty much discover you can actually walk around on the vine like tentacle cocks at the base of your body. It feels weird at first but you think you will get used to walking on pseudo vines.");
 			if (player.tailType != 0) {
 				if (player.tailType == 5 || player.tailType == 6) outputText(" Your insectile abdomen");
 				else if (player.tailType > 0 && player.tailCount > 1) outputText(" Your tails");
 				else outputText(" Your tail");
-				outputText(" recede back into your body disappearing entirely into your backside as if it never existed.");
+				outputText(" recedes back into your body, disappearing entirely into your backside as if it never existed.");
 			}
 			if (player.tailType != 0) mutations.setTailType(0);
 			mutations.setWingType(Wings.NONE, "non-existant");

@@ -4061,6 +4061,11 @@ public class Creature extends Utils
 		{
 			return Appearance.earsDescript(this);
 		}
+		
+		public function antennaeDescript():String
+		{
+			return Appearance.antennaeDescript(this);
+		}
 
 		public function damagePercent():Number {
 			var mult:Number = 100;

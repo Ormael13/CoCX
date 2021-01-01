@@ -1,7 +1,6 @@
 /**
- * Created by Kitteh6660. Volcanic Crag is a area with level 30 encounters.	(outer lvl 60-80, inner lvl 85-110)
- * Currently a Work in Progress.
- * 
+ * Created by Kitteh6660.
+ * Volcanic Crag is a area with level 70-100 (outer) or 105-140 (inner) encounters
  * This zone was mentioned in Glacial Rift doc.
  */
 
@@ -29,7 +28,7 @@ public class VolcanicCrag extends BaseContent
 		public function exploreVolcanicCrag():void {
 			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG]++;
 			doNext(playerMenu);
-
+			
 			var choice:Array = [];
 			var select:int;
 			

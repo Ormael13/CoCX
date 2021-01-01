@@ -53,6 +53,17 @@ use namespace CoC;
 				dungeonEL.ebonlabyrinthdiscovery();
 				return;
 			}
+			//Ashlands
+			
+			//Tundra
+			if (player.level >= 35 && flags[kFLAGS.DISCOVERED_TUNDRA] == 0) {
+				clearOutput();
+				outputText("While exploring one of the many tunnels you begin to see a bluish light, curious as to where this opens you take it all the way to the surface and begin to feel chilly, it's definitely cold out there. What awaits you beyond the exit is the sight of endless tundra and icebound mountains.\n\n");
+				outputText("<b>You've discovered the Tundra!</b>");
+				flags[kFLAGS.DISCOVERED_TUNDRA]++;
+				doNext(camp.returnToCampUseTwoHours);
+				return;
+			}
 			
 			var choice:Array = [];
 			var select:int;
@@ -77,15 +88,6 @@ use namespace CoC;
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					//antworker.();
 					clearOutput();
-					outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling of becoming slight tougher counts
-					dynStats("tou", .5);
-					outputText("You spend one hour exploring the caves but you don't
-					dynStats("tou", .5);
-					clearOutput();
-					outputText("You spend one hour exploring the caves but you don't manage to
-					dynStats("tou", .5);
-					doNext(camp.returnToCampUseOneHour);
-					//clearOutput();
 					//outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling of becoming slight tougher counts.");
 					break;*/
 				case 1://2:

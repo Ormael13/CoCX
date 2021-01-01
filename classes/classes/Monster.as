@@ -136,7 +136,7 @@ import flash.utils.getQualifiedClassName;
 		protected var bonusAscLib:Number = 0;
 		protected var bonusAscSen:Number = 0;
 		protected var bonusAscMaxHP:Number = 0;
-		private var _long:String = "<b>You have encountered an unitialized  Please report this as a bug</b>.";
+		private var _long:String = "<b>You have encountered something uninitialized. Please report this as a bug</b>.";
 		public function get long():String
 		{
 			return _long;
@@ -1486,7 +1486,7 @@ import flash.utils.getQualifiedClassName;
 		public function outputAttack(damage:int):void
 		{
 			if (damage <= 0) {
-				//Due to toughness or amor...
+				//Due to toughness or armor...
 				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + (player.armor != ArmorLib.NOTHING ? player.armor.name : player.armorName) + ".");
 				else {
 					if (plural) outputText("You deflect and block every " + weaponVerb + " " + a + short + " throw at you. ");
@@ -1603,7 +1603,7 @@ import flash.utils.getQualifiedClassName;
 				}
 				if (game.player.findPerk(PerkLib.Backlash) >= 0 && game.player.isFistOrFistWeapon()) {
 					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-					outputText(" As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
+					outputText("As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
 					SceneLib.combat.basemeleeattacks();
 				}
 				return true;
@@ -1891,12 +1891,12 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.StunnedTornado, 1, -1);
 			}
 			if (hasStatusEffect(StatusEffects.InkBlind)) {
-				if (plural) EngineCore.outputText("Your foes are busy trying to remove the ink and therefore does no other action then flay their hand about its faces.");
-				else EngineCore.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.");
+				if (plural) EngineCore.outputText("Your foes are busy trying to remove the ink and therefore does no other action than flay their hand about its faces.");
+				else EngineCore.outputText("Your foe is busy trying to remove the ink and therefore does no other action than flay its hand about its face.");
 			}
 			if (hasStatusEffect(StatusEffects.Fascinated)) {
-				if (plural) EngineCore.outputText("Your opponents stares emptily in the space in front of [monster him] a dreamy expression on [monster his] face, totaly entranced. A brief moment later [monster he] realises [monster he]'s been doing nothing for the past six second and snaps out of it.");
-				else EngineCore.outputText("Your opponent stares emptily in the space in front of [monster him] a dreamy expression on [monster his] face, totaly entranced. A brief moment later [monster he] realises [monster he]'s been doing nothing for the past six second and snaps out of it.");
+				if (plural) EngineCore.outputText("Your opponents stares emptily in the space in front of [monster him] a dreamy expression on [monster his] face, totally entranced. A brief moment later [monster he] realises [monster he]'s been doing nothing for the past few seconds and snaps out of it.");
+				else EngineCore.outputText("Your opponent stares emptily in the space in front of [monster him] a dreamy expression on [monster his] face, totally entranced. A brief moment later [monster he] realises [monster he]'s been doing nothing for the past few seconds and snaps out of it.");
 				removeStatusEffect(StatusEffects.Fascinated);
 			}
 			else if (hasStatusEffect(StatusEffects.FrozenSolid)) {
@@ -2481,6 +2481,20 @@ import flash.utils.getQualifiedClassName;
 					if(plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
 				}
+			}
+			if(hasStatusEffect(StatusEffects.CouatlHurricane)) {
+				//Deal severe true damage each round
+				var store14:Number = (player.inte + player.spe) * 2;
+				createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
+				store14 = Math.round(store14);
+				if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) store14 *= statusEffectv2(StatusEffects.CouatlHurricane);
+				store14 += statusEffectv1(StatusEffects.CouatlHurricane); //Stacks on itself growing ever stronger
+				store14 += maxHP()*0.02;
+				store14 = SceneLib.combat.doDamage(store14);
+				if(plural) outputText(capitalA + short + " is violently struck by the ever intensifying windstorm. <b>(<font color=\"#800000\">" + store14 + "</font>)</b>\n\n");
+				else outputText(capitalA + short + " are violently struck by the ever intensifying windstorm. <b>(<font color=\"#800000\">" + store14 + "</font>)</b>\n\n");
+				temp = rand(4);
+				if(temp == 3) createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.KamaitachiBleed)) {
 				//This wounds never heals unless by magic

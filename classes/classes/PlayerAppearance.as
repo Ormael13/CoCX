@@ -642,7 +642,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\n");
 		if (player.vaginas.length == 1){
 			if(player.vaginaType() == VaginaClass.EQUINE){
-				outputText("Your " + vaginaDescript(0) + " is deep and wide just like that of a horse. Sometime you lament that most of your partners are no longuer big enought to satisfy you. Inside you have a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+				outputText("Your " + vaginaDescript(0) + " is deep and wide just like that of a horse. Sometime you lament that most of your partners are no longer big enough to satisfy you. Inside you have a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 			}
 			else if (player.lowerBody == LowerBody.MELKIE){
 				outputText("You have two set of vaginal lips one twice as bigger then the other and hidding the smaller within it folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
@@ -1220,6 +1220,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your legs are human in appearance albeit for the bluish nails.");
 		else if (player.lowerBody == LowerBody.USHI_ONI_ONNA)
 			outputText("  You have the lower body of a Ushi-"+player.mf("oni","onna")+", it is like the one of a drider except that it is covered in fur with the exoskeleton under it, the usually black sheen legs of a drider are replaced with rough bone ones of an ushi-"+player.mf("oni","onna")+".");
+		else if (player.lowerBody == LowerBody.WENDIGO)
+			outputText("  Your legs are covered in fur up to the knee however they are entirely devoid of feet.");
 	}
 	public function describeTail():void {
 		if (player.tailType == Tail.HORSE)
@@ -1389,6 +1391,9 @@ public class PlayerAppearance extends BaseContent {
 		else if(player.tailType == Tail.SQUIRREL) {
 			outputText(" At your back is a big long striped furry tail that curves up like that of a squirrel.");
 		}
+		else if(player.tailType == Tail.WENDIGO) {
+			outputText(" Your silky tail extends out from just above your ass. Its fur is lovely to the touch and warm. It protects you well against the cold.");
+		}
 	}
 	public function describeArms():void {
 //Wing arms
@@ -1498,6 +1503,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your forearms are covered with scales which themselves are covered with fur and end with five fingered clawed hands. Your claws are strong enough to dig and tear through next to anything.");
 		else if (armType == Arms.USHI_ONI_ONNA)
 			outputText("  You have Ushi-"+player.mf("oni","onna")+" arms they are longer and thicker than most races, strange pattern of fur begins at you middle biceps and go down until the furred part in your forearms, it extends to your hands where even you fingers had changed to bone like claws.");
+		else if (armType == Arms.WENDIGO)
+			outputText("  Your arms and hands are practically human save for the wicked sharp white claws that have replaced your normal nails.");
 	}
 	public function describeRearBody():void {
 		if (player.rearBody.type == RearBody.FENRIR_ICE_SPIKES) {
@@ -1505,9 +1512,6 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.rearBody.type == RearBody.LION_MANE) {
 			outputText("  Around your neck there is a thick mane of [skin coat.color] fur. It looks great on you.");
-		}
-		else if (player.rearBody.type == RearBody.FROSTWYRM) {
-			outputText("  Around your neck there is a thick collar of snowy white fur. It looks great on you and, best of all, shields you against the cold.");
 		}
 		else if (player.rearBody.type == RearBody.SHARK_FIN) {
 			outputText("  A large shark-like fin has sprouted between your shoulder blades.  With it you have far more control over swimming underwater.");
@@ -1547,6 +1551,12 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.rearBody.type == RearBody.KRAKEN) {
 			outputText("  Small glowing dots draw a trail all over the length of your body. They shine beautifully in both the deepest waters and the night giving you a somewhat ominous presence.");
+		}
+		else if (player.rearBody.type == RearBody.FROSTWYRM) {
+			outputText("  Around your neck there is a thick collar of snowy white fur. It looks great on you and, best of all, shields you against the cold.");
+		}
+		else if (player.rearBody.type == RearBody.FUR_COAT) {
+			outputText("  On your back you wear a thick fur coat, not unlike a mantle complete with a hood always worn over your head it has a pair of holes just to let a pair of horns or rather antlers juts through it.");
 		}
 	}
 	public function describeWings():void {
@@ -1784,6 +1794,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Occasionally a long transparent tongue slicks out of your mouth, stretching out about a foot in length.");
 		else if (player.tongue.type == Tongue.RATATOSKR)
 			outputText("  Your tongue is human in appearance but way more dexterous at handling words, able to form sentences and words so good it becomes art or so bad that it bleeds the ears and drives who hear them insane.");
+		else if (player.tongue.type == Tongue.RAVENOUS_TONGUE)
+			outputText("  You constantly hunger for food and your ravenous tongue has gained some unnatural skills of its own,  always ready to coax a penis or a pussy into cumming.");
 	}
 	public function describeBeard():void {
 //Beards!
@@ -1894,6 +1906,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if(eyeType == Eyes.GREMLIN){
 			outputText("  Your [eyecolor] eyes looks human enough though your eyelids are dark, just as if you very tired althought it's more likely traces of your demonic corruption.");
+		}
+		else if(eyeType == Eyes.DEAD_EYES){
+			outputText("  Your eyes look dead, but the pupils glow in the dark with a [eyecolor].");
 		}
 		else outputText("  Your eyes are [eyecolor].");
 	}
@@ -2294,9 +2309,9 @@ public class PlayerAppearance extends BaseContent {
 				}
 			} else if(faceType == Face.VAMPIRE){
 				if (odd == 0){
-					outputText("  Your mouth is human looking all right though your near constant crazy toothy smile isn't exactly helping to make you look sane. A careful onlooker could also easily notice that your canines are longuer and pointier then normal like those of tiny fiends.");
+					outputText("  Your mouth is human looking all right though your near constant crazy toothy smile isn't exactly helping to make you look sane. A careful onlooker could also easily notice that your canines are longer and pointier then normal like those of tiny fiends.");
 				} else {
-					outputText("  In addition, your mouth could pass for human if not for your near constant crazy toothy smile isn't exactly helping to make you look sane. A careful onlooker also could easily notice that your canines are longuer and pointier then normal like those of tiny fiends.");
+					outputText("  In addition, your mouth could pass for human if not for your near constant crazy toothy smile isn't exactly helping to make you look sane. A careful onlooker also could easily notice that your canines are longer and pointier then normal like those of tiny fiends.");
 				}
 			} else if(faceType == Face.FAIRY){
 				if (odd == 0){
@@ -2742,17 +2757,8 @@ public class PlayerAppearance extends BaseContent {
 		//CHIMERA
 		outputText("\nCHIMERA: " + player.chimeraScore());
 		//Couatl
-		if (player.couatlScore() >= 11) {
-			outputText("\n<font color=\"#0000a0\">Couatl: " + player.couatlScore() + " (+");
-			if (player.isNaga()) outputText("55");
-			else outputText("40");
-			outputText("% to Str racial multi, +25% to Tou racial multi, +");
-			if (player.isNaga()) outputText("115");
-			else outputText("100");
-			outputText("% to Spe racial multi)</font>");//, +50 max HP
-		}
-		else if (player.couatlScore() >= 1) outputText("\n<font color=\"#008000\">Couatl: " + player.couatlScore() + "</font>");
-		if (player.couatlScore() >= 11) outputText("\n<font color=\"#0000a0\">Couatl: " + player.couatlScore() + " (+"+(player.isNaga() ? "55":"40")+"% to Str racial multi, +25% to Tou racial multi, +"+(player.isNaga() ? "115":"100")+"% to Spe racial multi)</font>");//, +50 max HP
+		if (player.couatlScore() >= 19) outputText("\n<font color=\"#0000a0\">Greater Couatl: " + player.couatlScore() + " (+"+(player.isNaga() ? "65":"50")+"% to Str racial multi, +45% to Tou racial multi, +"+(player.isNaga() ? "155":"140")+"% to Spe racial multi, +50% to Int racial multi)</font>");//, +50 max HP
+		if (player.couatlScore() >= 11) outputText("\n<font color=\"#0000a0\">Couatl: " + player.couatlScore() + " (+"+(player.isNaga() ? "45":"30")+"% to Str racial multi, +25% to Tou racial multi, +"+(player.isNaga() ? "95":"80")+"% to Spe racial multi, +30% to Int racial multi)</font>");//, +50 max HP
 		else if (player.couatlScore() >= 1) outputText("\n<font color=\"#008000\">Couatl: " + player.couatlScore() + "</font>");
 		else if (player.couatlScore() < 1) outputText("\n<font color=\"#ff0000\">Couatl: 0</font>");
 		//Cow
@@ -2886,7 +2892,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.gooScore() >= 1) outputText("\n<font color=\"#008000\">Half Slime: " + player.gooScore() + "</font>");
 		else if (player.gooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Slime: 0</font>");
 		//Gorgon
-		if (player.gorgonScore() >= 11) outputText("\n<font color=\"#0000a0\">Gorgon: " + player.gorgonScore() + " (+"+(player.isNaga() ? "65":"50")+"% to Str racial multi, +45% to Tou racial multi, +"+(player.isNaga() ? "85":"70")+"% to Spe racial multi, +50 max HP)</font>");
+		if (player.gorgonScore() >= 17) outputText("\n<font color=\"#0000a0\">Greater Gorgon: " + player.gorgonScore() + " (+"+(player.isNaga() ? "95":"80")+"% to Str racial multi, +65% to Tou racial multi, +"+(player.isNaga() ? "125":"110")+"% to Spe racial multi, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		if (player.gorgonScore() >= 11) outputText("\n<font color=\"#0000a0\">Gorgon: " + player.gorgonScore() + " (+"+(player.isNaga() ? "65":"50")+"% to Str racial multi, +45% to Tou racial multi, +"+(player.isNaga() ? "85":"70")+"% to Spe racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 		else if (player.gorgonScore() >= 1) outputText("\n<font color=\"#008000\">Gorgon: " + player.gorgonScore() + "</font>");
 		else if (player.gorgonScore() < 1) outputText("\n<font color=\"#ff0000\">Gorgon: 0</font>");
 		//GRAND CHIMERA
@@ -2952,9 +2959,10 @@ public class PlayerAppearance extends BaseContent {
 		if (player.internalChimeraScore() >= 1) outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: (" + player.internalChimeraRating() + ") " + player.internalChimeraScore() + " (+" + (5 * player.internalChimeraScore()) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib and +" + (5 * player.internalChimeraScore()) + " to Sens)</font>");
 		else if (player.internalChimeraScore() < 1) outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0</font>");
 		//Jabberwocky
-		if (player.jabberwockyScore() >= 20) outputText("\n<font color=\"#0000a0\">Greater Jabberwocky: " + player.jabberwockyScore() + " (+95% to Str racial multi, +95% to Tou racial multi, +100% to Spe racial multi, +40% to Int racial multi, -50% to Wis racial multi, +20% to Lib racial multi)</font>");
-		else if (player.jabberwockyScore() >= 10) outputText("\n<font color=\"#0000a0\">Jabberwocky: " + player.jabberwockyScore() + " (+50% to Str racial multi, +40% to Tou racial multi, +50% to Spe racial multi, +20% to Int racial multi, -20% to Wis racial multi, +10% to Lib racial multi)</font>");
-		else if (player.jabberwockyScore() >= 1) outputText("\n<font color=\"#008000\">Jabberwocky: " + player.jabberwockyScore() + "</font>");
+		if (player.jabberwockyScore() >= 25) outputText("\n<font color=\"#0000a0\">Greater Jabberwocky: " + player.jabberwockyScore() + " (+125% to Str racial multi, +95% to Tou racial multi, +145% to Spe racial multi, +40% to Int racial multi, -50% to Wis racial multi, +20% to Lib racial multi)</font>");
+		else if (player.jabberwockyScore() >= 20) outputText("\n<font color=\"#0000a0\">Jabberwocky: " + player.jabberwockyScore() + " (+95% to Str racial multi, +95% to Tou racial multi, +100% to Spe racial multi, +40% to Int racial multi, -50% to Wis racial multi, +20% to Lib racial multi)</font>");
+		else if (player.jabberwockyScore() >= 10) outputText("\n<font color=\"#0000a0\">Lesser Jabberwocky: " + player.jabberwockyScore() + " (+50% to Str racial multi, +40% to Tou racial multi, +50% to Spe racial multi, +20% to Int racial multi, -20% to Wis racial multi, +10% to Lib racial multi)</font>");
+		else if (player.jabberwockyScore() >= 1) outputText("\n<font color=\"#008000\">Lesser Jabberwocky: " + player.jabberwockyScore() + "</font>");
 		else if (player.jabberwockyScore() < 1) outputText("\n<font color=\"#ff0000\">Jabberwocky: 0</font>");
 		//Jiangshi
 		if (player.jiangshiScore() >= 20) outputText("\n<font color=\"#0000a0\">Jiangshi: " + player.jiangshiScore() + " (+150% to Str racial multi, -90 min Spe, -90 min Int, +130% to Wis racial multi, +200% to Lib racial multi)</font>");
@@ -3156,9 +3164,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.rhinoScore() >= 1) outputText("\n<font color=\"#008000\">Rhino-morph: " + player.rhinoScore() + "</font>");
 		else if (player.rhinoScore() < 1) outputText("\n<font color=\"#ff0000\">Rhino-morph: 0</font>");
 		//Salamander
-		if (player.salamanderScore() >= 16) outputText("\n<font color=\"#0000a0\">Primordial Salamander: " + player.salamanderScore() + " (+105% to Str racial multi, +80% to Tou racial multi, +130max Lib, +75 min sens, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-		else if (player.salamanderScore() >= 7) outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+25% to Str racial multi, +25% to Tou racial multi, +40max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-		else if (player.salamanderScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Salamander: " + player.salamanderScore() + " (+15% to Str racial multi, +15% to Tou racial multi, +30max Lib, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		if (player.salamanderScore() >= 16) outputText("\n<font color=\"#0000a0\">Primordial Salamander: " + player.salamanderScore() + " (+105% to Str racial multi, +80% to Tou racial multi, +130% to Lib racial multi, +75 min sens, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		else if (player.salamanderScore() >= 7) outputText("\n<font color=\"#0000a0\">Salamander: " + player.salamanderScore() + " (+25% to Str racial multi, +25% to Tou racial multi, +40% to Lib racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		else if (player.salamanderScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Salamander: " + player.salamanderScore() + " (+15% to Str racial multi, +15% to Tou racial multi, +30% to Lib racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		else if (player.salamanderScore() >= 1) outputText("\n<font color=\"#008000\">Half Salamander: " + player.salamanderScore() + "</font>");
 		else if (player.salamanderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Salamander: 0</font>");
 		//Satyr
@@ -3171,39 +3179,15 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.scorpionScore() < 1) outputText("\n<font color=\"#ff0000\">Half Scorpion-morph: 0</font>");*/
 		outputText("\nScorpion-morph: " + player.scorpionScore());
 		//Scylla
+		var scyllakrakengland:Number = 0;
+		if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) scyllakrakengland += 10;
 		if (player.scyllaScore() >= 12 && player.isKraken()) {
-			if (player.scyllaScore() >= 17) {
-				outputText("\n<font color=\"#0000a0\">Elder Kraken: " + player.scyllaScore() + " (+");
-				if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("175");
-				else if (player.isScylla()) outputText("165");
-				else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("145");
-				else outputText("(+135 ");
-				outputText("% to Str racial multi, +60% to Tou racial multi, +60% to Int racial multi, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-			}
-			else {
-				outputText("\n<font color=\"#0000a0\">Kraken: " + player.scyllaScore() + " (+");
-				if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("160");
-				else if (player.isScylla()) outputText("150");
-				else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("130");
-				else outputText("120");
-				outputText("% to Str racial multi, +60% to Int racial multi, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-			}
+			if (player.scyllaScore() >= 17) outputText("\n<font color=\"#0000a0\">Elder Kraken: " + player.scyllaScore() + " (+"+(195+scyllakrakengland)+"% to Str racial multi, +60% to Tou racial multi, +60% to Int racial multi, +15 min sens, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+			else outputText("\n<font color=\"#0000a0\">Kraken: " + player.scyllaScore() + " (+"+(180+scyllakrakengland)+"% to Str racial multi, +60% to Int racial multi, +15 min sens, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 		}
-		else if (player.scyllaScore() >= 7 && player.isScylla()) {
-			outputText("\n<font color=\"#0000a0\">Scylla: " + player.scyllaScore() + " (+");
-			if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("105");
-			else if (player.isScylla()) outputText("95");
-			else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("75");
-			else outputText("65");
-			outputText("% to Str racial multi, +40% to Int racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-		}
-		else if (player.scyllaScore() >= 4) {
-			outputText("\n<font color=\"#0000a0\">Half Scylla: " + player.scyllaScore() + " (+");
-			if (player.findPerk(PerkLib.ScyllaInkGlands) > 0 && player.isScylla()) outputText("80");
-			else if (player.isScylla()) outputText("95");
-			else if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) outputText("50");
-			else outputText("40");
-			outputText("% to Str racial multi, +20% to Int racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		else if (player.scyllaScore() >= 4 && player.isScylla()) {
+			if (player.scyllaScore() >= 7) outputText("\n<font color=\"#0000a0\">Scylla: " + player.scyllaScore() + " (+"+(95+scyllakrakengland)+"% to Str racial multi, +40% to Int racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+			else outputText("\n<font color=\"#0000a0\">Half Scylla: " + player.scyllaScore() + " (+"+(player.findPerk(PerkLib.ScyllaInkGlands) > 0 ? "80":"70")+"% to Str racial multi, +20% to Int racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 		}
 		else if (player.scyllaScore() >= 1) outputText("\n<font color=\"#008000\">Half Scylla: " + player.scyllaScore() + "</font>");
 		else if (player.scyllaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Scylla: 0</font>");
@@ -3218,7 +3202,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.sirenScore() >= 1) outputText("\n<font color=\"#008000\">Siren: " + player.sirenScore() + "</font>");
 		else if (player.sirenScore() < 1) outputText("\n<font color=\"#ff0000\">Siren: 0</font>");
 		//Sphinx
-		if (player.sphinxScore() >= 14) outputText("\n<font color=\"#0000a0\">Sphinx: " + player.sphinxScore() + " (+50% to Str racial multi, -20% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "40":"50")+"% to Spe racial multi, +100% to Int racial multi, +40% to Wis racial multi)</font>");
+		if (player.sphinxScore() >= 23) outputText("\n<font color=\"#0000a0\">Greater Sphinx: " + player.sphinxScore() + " (+80% to Str racial multi, -20% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "70":"60")+"% to Spe racial multi, +130% to Int racial multi, +95% to Wis racial multi)</font>");
+		if (player.sphinxScore() >= 14) outputText("\n<font color=\"#0000a0\">Sphinx: " + player.sphinxScore() + " (+50% to Str racial multi, -10% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "50":"40")+"% to Spe racial multi, +90% to Int racial multi, +40% to Wis racial multi)</font>");
 		else if (player.sphinxScore() >= 1) outputText("\n<font color=\"#008000\">Sphinx: " + player.sphinxScore() + "</font>");
 		else if (player.sphinxScore() < 1) outputText("\n<font color=\"#ff0000\">Sphinx: 0</font>");
 		//Spider
@@ -3231,6 +3216,11 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.thunderbirdScore() >= 12) outputText("\n<font color=\"#0000a0\">Thunderbird: " + player.thunderbirdScore() + " (-20% to Tou racial multi, +100% to Spe racial multi, +100% to Lib racial multi)</font>");
 		else if (player.thunderbirdScore() >= 1) outputText("\n<font color=\"#008000\">Thunderbird: " + player.thunderbirdScore() + "</font>");
 		else if (player.thunderbirdScore() < 1) outputText("\n<font color=\"#ff0000\">Thunderbird: 0</font>");
+		//Troll
+		if (player.trollScore() >= 10) outputText("\n<font color=\"#0000a0\">Troll: " + player.trollScore() + " (-20% to Str racial multi, +50% to Tou racial multi, +75% to Int racial multi)</font>");
+		else if (player.trollScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Troll: " + player.trollScore() + " (-10% to Str racial multi, +30% to Tou racial multi, +40% to Int racial multi)</font>");
+		else if (player.trollScore() >= 1) outputText("\n<font color=\"#008000\">Half Troll: " + player.trollScore() + "</font>");
+		else if (player.trollScore() < 1) outputText("\n<font color=\"#ff0000\">Half Troll: 0</font>");
 		//Ushi Onna
 		if (player.ushionnaScore() >= 11) {
 			outputText("\n<font color=\"#0000a0\">");
@@ -3244,6 +3234,11 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.ushionnaScore() >= 1) outputText("\n<font color=\"#008000\">Ushi-Onna: " + player.ushionnaScore() + "</font>");
 		else if (player.ushionnaScore() < 1) outputText("\n<font color=\"#ff0000\">Ushi-Onna: 0</font>");
+		//Wendigo
+		if (player.wendigoScore() >= 25) outputText("\n<font color=\"#0000a0\">Greater Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis raciaol multi, +50% to Lib racial multi, +50 min sens)</font>");
+		else if (player.wendigoScore() >= 10) outputText("\n<font color=\"#0000a0\">Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis raciaol multi, +50% to Lib racial multi, +50 min sens)</font>");
+		else if (player.wendigoScore() >= 1) outputText("\n<font color=\"#008000\">Wendigo: " + player.wendigoScore() + "</font>");
+		else if (player.wendigoScore() < 1) outputText("\n<font color=\"#ff0000\">Wendigo: 0</font>");
 		//Werewolf
 		if (player.werewolfScore() >= 12) outputText("\n<font color=\"#0000a0\">Werewolf: " + player.werewolfScore() + " (+100% to Str racial multi, +40% to Tou racial multi, +60% to Spe racial multi, -20% to Int racial multi)</font>");
 		else if (player.wolfScore() >= 1) outputText("\n<font color=\"#008000\">Werewolf: " + player.werewolfScore() + "</font>");
@@ -3272,9 +3267,11 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.vampireScore() >= 1) outputText("\n<font color=\"#008000\">Dhampir: " + player.vampireScore() + "</font>");
 		else if (player.vampireScore() < 1) outputText("\n<font color=\"#ff0000\">Dhampir: 0</font>");
 		//Vouivre
-		if (player.vouivreScore() >= 11) outputText("\n<font color=\"#0000a0\">Vouivre: " + player.vouivreScore() + " (+"+(player.isNaga() ? "25":"10")+"% to Str racial multi, -10% to Tou racial multi, +"+(player.isNaga() ? "50":"35")+"% to Spe racial multi, +10% to Int racial multi, -20% to Wis racial multi)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
-		else if (player.vouivreScore() >= 1) outputText("\n<font color=\"#008000\">Vouivre: " + player.vouivreScore() + "</font>");
-		else if (player.vouivreScore() < 1) outputText("\n<font color=\"#ff0000\">Vouivre: 0</font>");
+		if (player.vouivreScore() >= 22) outputText("\n<font color=\"#0000a0\">Greater Vouivre: " + player.vouivreScore() + " (+"+(player.isNaga() ? "145":"130")+"% to Str racial multi, +95% to Tou racial multi, +"+(player.isNaga() ? "115":"100")+"% to Spe racial multi, +20% to Int racial multi, -20% to Wis racial multi)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
+		else if (player.vouivreScore() >= 16) outputText("\n<font color=\"#0000a0\">Vouivre: " + player.vouivreScore() + " (+"+(player.isNaga() ? "115":"100")+"% to Str racial multi, +65% to Tou racial multi, +"+(player.isNaga() ? "85":"70")+"% to Spe racial multi, +15% to Int racial multi, -15% to Wis racial multi)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
+		else if (player.vouivreScore() >= 11) outputText("\n<font color=\"#0000a0\">Lesser Vouivre: " + player.vouivreScore() + " (+"+(player.isNaga() ? "85":"70")+"% to Str racial multi, +45% to Tou racial multi, +"+(player.isNaga() ? "60":"45")+"% to Spe racial multi, +10% to Int racial multi, -10% to Wis racial multi)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
+		else if (player.vouivreScore() >= 1) outputText("\n<font color=\"#008000\">Lesser Vouivre: " + player.vouivreScore() + "</font>");
+		else if (player.vouivreScore() < 1) outputText("\n<font color=\"#ff0000\">Lesser Vouivre: 0</font>");
 		//Yeti
 		if (player.yetiScore() >= 14) outputText("\n<font color=\"#0000a0\">Yeti: " + player.yetiScore() + " (+100% to Str racial multi, +80% to Tou racial multi, +50% to Spe racial multi, -70% to Int racial multi, +50% to Lib racial multi)</font>");
 		else if (player.yetiScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Yeti: " + player.yetiScore() + " (+50% to Str racial multi, +40% to Tou racial multi, +25% to Spe racial multi, -35% to Int racial multi, +25% to Lib racial multi)</font>");
@@ -3362,4 +3359,4 @@ public class PlayerAppearance extends BaseContent {
 		else outputText("<b>Yo, this is an error.</b>");
 	}
 }
-}
+}
