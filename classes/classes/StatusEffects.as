@@ -911,6 +911,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MedusaVenom:StatusEffectType               = mkCombat("Medusa Venom");
 		public static const MetalSkin:StatusEffectType                 = mkCombat("Metal Skin");
 		public static const Minimise:StatusEffectType                  = mkCombat("Minimise");
+		public static const MinoKing:StatusEffectType                  = mkCombat("MinoKing");
 		public static const MonsterAttacksDisabled:StatusEffectType    = mkCombat("Monster Attacks Disabled");
 		public static const NagaBind:StatusEffectType                  = mkCombat("Naga Bind");
 		public static const NagaVenom:StatusEffectType                 = mkCombat("Naga Venom");
