@@ -2,8 +2,8 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="CoC-debug">
     <configurations>
-      <configuration name="CoC-debug" main-class="classes.CoC" output-file="CoC-debug.swf" output-folder="$MODULE_DIR$">
-        <dependencies target-player="11.1" component-set="MxOnly" framework-linkage="Merged">
+      <configuration name="CoC-debug" main-class="classes.CoC" output-file="CoC-debug.swf" output-folder="$MODULE_DIR$/../../Compiled/CoC-Xianxia/SWF">
+        <dependencies target-player="31.0" component-set="MxOnly" framework-linkage="Merged">
           <entries>
             <entry library-name="lib" library-level="project">
               <dependency linkage="Merged" />
@@ -24,7 +24,7 @@
         <packaging-ios />
       </configuration>
       <configuration name="CoC-release" main-class="classes.CoC" output-file="CoC-release.swf" output-folder="$MODULE_DIR$" skip-build="true">
-        <dependencies target-player="11.1" component-set="MxOnly" framework-linkage="Merged">
+        <dependencies target-player="31.0" component-set="MxOnly" framework-linkage="Merged">
           <entries>
             <entry library-name="lib" library-level="project">
               <dependency linkage="Merged" />
@@ -43,14 +43,14 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="CoC-Mobile" target-platform="Mobile" main-class="classes.CoC" output-file="CoC-Mobile.swf" output-folder="$MODULE_DIR$">
+      <configuration name="CoC-Mobile" target-platform="Mobile" main-class="classes.CoC" output-file="CoC-Mobile.swf" output-folder="$MODULE_DIR$/../../Compiled/CoC-Xianxia/apk">
         <dependencies>
           <entries>
             <entry library-name="lib" library-level="project">
               <dependency linkage="Merged" />
             </entry>
           </entries>
-          <sdk name="Air SDK" />
+          <sdk name="FLEX" />
         </dependencies>
         <compiler-options>
           <map>
@@ -79,7 +79,7 @@
       <excludeFolder url="file://$MODULE_DIR$/generated" />
       <excludeFolder url="file://$MODULE_DIR$/obj" />
     </content>
-    <orderEntry type="jdk" jdkName="FLEX&#9;Air SDK" jdkType="__CompositeFlexSdk__" />
+    <orderEntry type="jdk" jdkName="FLEX" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="lib" level="project" />
   </component>

@@ -1596,7 +1596,7 @@ use namespace CoC;
 				addButton(0, "Sex", sexAnImpLord);
 				if (player.pcCanUseUniqueSexScene()) addButton(14, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 			} else {
-				outputText("\n\nYou are not aroused enought to rape him.");
+				outputText("\n\nYou are not aroused enough to rape him.");
 			}
 			addButton(1, "Kill Him", killImp);
 			addButton(4, "Leave", cleanupAfterCombat);

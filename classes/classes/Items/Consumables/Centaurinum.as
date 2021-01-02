@@ -268,7 +268,7 @@ public class Centaurinum extends Consumable{
 		//Mare-gina
 		if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your " + Appearance.vaginaDescript(player,0) + " has grown larger, in depth AND size. To your absolute surprise it suddenly resume deepening inside your body. " +
-					"When you finaly take a check you discover your vagina is now not unlike that of a horse, capable of taking the largest cock witheout ease." +
+					"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease." +
 					"<b>  You now have a equine vagina!</b>");
 			player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
 			player.vaginaType(VaginaClass.EQUINE);
@@ -293,7 +293,7 @@ public class Centaurinum extends Consumable{
 					outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
 				}
 				if (player.isScylla()) {
-					outputText("\n\nYou collapse as your tentacle legs starts to merge in pairs, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
+					outputText("\n\nYou collapse as your tentacle legs start to merge in pairs, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
 				}
 			}
 			//Catch-all

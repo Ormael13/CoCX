@@ -1848,6 +1848,7 @@ use namespace CoC;
 			if (armor == game.armors.DBARMOR) lust *= 0.9;
 			if (weapon == game.weapons.HNTCANE) lust *= 0.75;
 			if ((weapon == game.weapons.PURITAS) || (weapon == game.weapons.ASCENSU)) lust *= 0.9;
+			if (vehiclesName == "Giant Slayer Mech") lust *= 0.25;
 			// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
 			// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
 			var sac:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
@@ -4130,6 +4131,9 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 14;//	104-r99	119	135	152	180	199	219(potem legendary/mythical stages?)
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				internalChimeraRatingCounter -= 20;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) internalChimeraRatingCounter -= 3;//6
+			//if (flags[kFLAGS.GAME_DIFFICULTY] == 1) internalChimeraRatingCounter -= 3;//tyle ile stopni perków rasowych
+			if (internalChimeraRatingCounter < 0 || flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) internalChimeraRatingCounter = 0;
 			End("Player","racialScore");
 			return internalChimeraRatingCounter;
 		}//każdy nowy chimerical body perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle
@@ -4580,7 +4584,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (pigScore() >= 15)
 				grandchimeraCounter++;
-			if (wendigoScore() >= 22)
+			if (wendigoScore() >= 25)
 				grandchimeraCounter++;
 			if (melkieScore() >= 21)
 				grandchimeraCounter++;
@@ -7954,6 +7958,12 @@ use namespace CoC;
 				wendigoCounter += 2;
 			if (wings.type == Wings.LEVITATION)
 				wendigoCounter += 3;
+			if (hasPlainSkinOnly() || hasPartialCoat(Skin.FUR))
+				wendigoCounter++;
+			if ((hasVagina() && biggestTitSize() >= 8) || biggestTitSize() == 0)
+				wendigoCounter++;
+			if (horseCocks() > 0 || (hasVagina() && vaginaType() == VaginaClass.EQUINE))
+				wendigoCounter++;
 			if (findPerk(PerkLib.EndlessHunger) >= 0)
 				wendigoCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
@@ -10954,10 +10964,10 @@ use namespace CoC;
 				}
 				else {
 					maxStrCap2 += 50;
-					maxTouCap2 -= 20;
+					maxTouCap2 -= 10;
 					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 50;
 					else maxSpeCap2 += 40;
-					maxIntCap2 += 100;
+					maxIntCap2 += 90;
 					maxWisCap2 += 40;
 				}
 			}//+50/-20/+40/+100/+40
@@ -11865,14 +11875,14 @@ use namespace CoC;
 				if (couatlScore() >= 19) {
 					maxStrCap2 += 50;
 					maxTouCap2 += 45;
-					maxSpeCap2 += 140
-					maxIntCap2 += 50
+					maxSpeCap2 += 140;
+					maxIntCap2 += 50;
 				}
 				else {
 					maxStrCap2 += 30;
 					maxTouCap2 += 25;
-					maxSpeCap2 += 80
-					maxIntCap2 += 30
+					maxSpeCap2 += 80;
+					maxIntCap2 += 30;
 				}
 			}//+30/30-40
 			if (vouivreScore() >= 11) {
@@ -11885,17 +11895,17 @@ use namespace CoC;
 				}
 				else if (vouivreScore() >= 16) {
 					maxStrCap2 += 100;
-					maxTouCap2 += 75;
+					maxTouCap2 += 65;
 					maxSpeCap2 += 70;
-					maxIntCap2 += 10;
-					maxWisCap2 -= 20;
+					maxIntCap2 += 15;
+					maxWisCap2 -= 15;
 				}
 				else {
-					maxStrCap2 += 80;
+					maxStrCap2 += 70;
 					maxTouCap2 += 45;
 					maxSpeCap2 += 45;
 					maxIntCap2 += 10;
-					maxWisCap2 -= 20;
+					maxWisCap2 -= 10;
 				}
 			}
 			if (gorgonScore() >= 11) {
@@ -12123,6 +12133,13 @@ use namespace CoC;
 				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Bull Strength', { text: 'Bull Strength' });
 			}
 			if (!hasPerk(PerkLib.BullStrength) && statStore.hasBuff('Bull Strength')) statStore.removeBuffs('Bull Strength');
+			if (hasPerk(PerkLib.UnnaturalStrength)){
+				var powar:Number = 0;
+				if (flags[kFLAGS.HUNGER_ENABLED] > 0) powar = maxHunger()*0.01;
+				else powar = maxLust()*0.01;
+				statStore.replaceBuffObject({'str.mult':(Math.round(powar))}, 'Unnatural Strength', { text: 'Unnatural Strength' });
+			}
+			if (!hasPerk(PerkLib.UnnaturalStrength) && statStore.hasBuff('Unnatural Strength')) statStore.removeBuffs('Unnatural Strength');
 			statStore.replaceBuffObject({
 				"str.mult":statusEffectv1(StatusEffects.StrTouSpeCounter2)/100,
 				"tou.mult":statusEffectv2(StatusEffects.StrTouSpeCounter2)/100,
@@ -12831,41 +12848,32 @@ use namespace CoC;
 		 */
 		public function sexReward(fluidtype:String = 'Default', type:String = 'Default', real:Boolean = true, Wasfluidinvolved:Boolean = true):void
 		{
-			if(Wasfluidinvolved)
-			{
+			if (Wasfluidinvolved) {
 				slimeFeed();
 				if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
 				if (jiangshiScore() >= 20 && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
-				if (hasPerk(PerkLib.DemonEnergyThirst)) createStatusEffect(StatusEffects.DemonEnergyThirstFeed, 0, 0 ,0,0);
-				if (hasPerk(PerkLib.KitsuneEnergyThirst)) createStatusEffect(StatusEffects.KitsuneEnergyThirstFeed, 0, 0 ,0,0);
+				if (hasPerk(PerkLib.DemonEnergyThirst)) createStatusEffect(StatusEffects.DemonEnergyThirstFeed, 0, 0, 0, 0);
+				if (hasPerk(PerkLib.KitsuneEnergyThirst)) createStatusEffect(StatusEffects.KitsuneEnergyThirstFeed, 0, 0, 0, 0);
 				switch (fluidtype)
 				{
 					// Start with that, whats easy
 					case 'cum':
-						if (hasStatusEffect(StatusEffects.Overheat) && inHeat){
-							if (statusEffectv3(StatusEffects.Overheat) != 1){
-								addStatusValue(StatusEffects.Overheat, 3, 1);
-							}
+						if (hasStatusEffect(StatusEffects.Overheat) && inHeat) {
+							if (statusEffectv3(StatusEffects.Overheat) != 1) addStatusValue(StatusEffects.Overheat, 3, 1);
 						}
-						if (hasPerk(PerkLib.ManticoreCumAddict))
-						{
-							manticoreFeed();
-						}
+						if (hasPerk(PerkLib.ManticoreCumAddict)) manticoreFeed();
+						if (hasPerk(PerkLib.EndlessHunger)) refillHunger(30, false);
 						break;
 					case 'vaginalFluids':
-						if (hasStatusEffect(StatusEffects.Overheat) && inRut){
-							if (statusEffectv3(StatusEffects.Overheat) != 1){
-							addStatusValue(StatusEffects.Overheat, 3, 1);
-							}
+						if (hasStatusEffect(StatusEffects.Overheat) && inRut) {
+							if (statusEffectv3(StatusEffects.Overheat) != 1) addStatusValue(StatusEffects.Overheat, 3, 1);
 						}
+						if (hasPerk(PerkLib.EndlessHunger)) refillHunger(30, false);
 						break;
 					case 'saliva':
 						break;
 					case 'milk':
-						if (hasPerk(PerkLib.ManticoreCumAddict))
-						{
-							displacerFeed();
-						}
+						if (hasPerk(PerkLib.ManticoreCumAddict)) displacerFeed();
 						refillHunger(10, false);
 						break;
 				}
@@ -12873,29 +12881,20 @@ use namespace CoC;
 			SexXP(5+level);
 			if (armor == game.armors.SCANSC)SexXP(5+level);
 			orgasm(type,real);
-			if (type == "Dick")
-			{
-				if (hasPerk(PerkLib.EasterBunnyBalls))
-				{
-					if(ballSize > 3)
-					{
-						createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
-					}
+			if (type == "Dick") {
+				if (hasPerk(PerkLib.EasterBunnyBalls)) {
+					if (ballSize > 3) createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
 				}
-				if (hasPerk(PerkLib.NukiNutsEvolved)){
+				if (hasPerk(PerkLib.NukiNutsEvolved)) {
 					var cumAmmount:Number = cumQ();
 					var payout:Number = 0;
 					//Get rid of extra digits
 					cumAmmount = int(cumAmmount);
 					//Calculate payout
-					if(cumAmmount > 10) {
-						payout = 2 + int(cumAmmount/100)*2;
-					}
+					if (cumAmmount > 10) payout = 2 + int(cumAmmount/100)*2;
 					//Reduce payout if it would push past
-					if (hasPerk(PerkLib.NukiNutsFinalForm)){
-						payout *= 2;
-					}
-					if(payout > 0) {
+					if (hasPerk(PerkLib.NukiNutsFinalForm)) payout *= 2;
+					if (payout > 0) {
 						gems += payout;
 						EngineCore.outputText("\n\nBefore moving on you grab the " + payout + " gems you came from from your " + cockDescript(0) + ".</b>\n\n");
 					}
@@ -13025,6 +13024,7 @@ use namespace CoC;
 			if (alicornScore() >= 12) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (centaurScore() >= 8) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (gorgonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (gorgonScore() >= 17) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (horseScore() >= 4) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (horseScore() >= 7) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (manticoreScore() >= 6) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));

@@ -3855,7 +3855,7 @@ public class Combat extends BaseContent {
     }
 
     public function attack2():void {
-        // ESSENTIALY DO EVERYTHING AGAIN BUT WITHEOUT THE NATURAL ATTACK SET
+        // ESSENTIALY DO EVERYTHING AGAIN BUT without THE NATURAL ATTACK SET
         flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
         //	if(!player.hasStatusEffect(StatusEffects.FirstAttack)) {
         //		clearOutput();
@@ -5208,9 +5208,13 @@ public class Combat extends BaseContent {
     }
 
     public function monsterLevelAdjustment():Number {
-        var monsterLevelAdjustment:Number = 0;
-		//perks like god type enemy
-        return monsterLevelAdjustment;
+        var monsterLvlAdjustment:Number = 0;
+		if (player.vehiclesName == "Giant Slayer Mech") {
+			if (monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType) || monster.hasPerk(PerkLib.EnemyGodType)) monsterLvlAdjustment -= 10;
+			else monsterLvlAdjustment += 10;
+		}
+		//if (player.hasPerk(PerkLib.EnemyGodType)) 
+        return monsterLvlAdjustment;
     }
 
 //DEAL DAMAGE
@@ -7168,7 +7172,7 @@ public class Combat extends BaseContent {
                 if (player.hasKeyItem("Jetpack") >= 0 || player.hasKeyItem("MK2 Jetpack") >= 0) {
                     outputText("<b>You need to give some time for your mech to recharge and thus land back to the ground.</b>\n\n");
                     player.createStatusEffect(StatusEffects.CooldownJetpack, 3, 0, 0, 0);
-                } else outputText("<b>You land to tired to keep flying.</b>\n\n");
+                } else outputText("<b>You land too tired to keep flying.</b>\n\n");
                 if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
                     player.removeStatusEffect(StatusEffects.FlyingNoStun);
                     player.removePerk(PerkLib.Resolute);
@@ -7678,6 +7682,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownInfernalClaw);
             } else {
                 player.addStatusValue(StatusEffects.CooldownInfernalClaw, 1, -1);
+            }
+        }
+        //Spectral Scream
+        if (player.hasStatusEffect(StatusEffects.CooldownSpectralScream)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpectralScream) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpectralScream);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpectralScream, 1, -1);
             }
         }
         //Hurricane Dance
@@ -8693,7 +8705,7 @@ public class Combat extends BaseContent {
     public function OrcaCleanup():void {
         player.addStatusValue(StatusEffects.OrcaPlayRoundLeft, 1, -1);
         if (player.statusEffectv1(StatusEffects.OrcaPlayRoundLeft) <= 0) {
-            outputText("\n\nUnable to prolong the game further you finaly let your opponent drops to the ground. ");
+            outputText("\n\nUnable to prolong the game further you finally let your opponent drop to the ground. ");
             var damage:Number = unarmedAttack();
             damage += player.str;
             damage += scalingBonusStrength() * 0.25;
@@ -8823,7 +8835,7 @@ public class Combat extends BaseContent {
     public function OrcaImpale():void {
         clearOutput();
         if (player.isSpearTypeWeapon() || player.isSwordTypeWeapon()) {
-            outputText("You cannot impale your foe witheout a piercing weapon.");
+            outputText("You cannot impale your foe without a piercing weapon.");
             addButton(0, "Next", combatMenu, false);
         } else {
             fatigue(20, USEFATG_PHYSICAL);
@@ -9232,7 +9244,7 @@ public class Combat extends BaseContent {
             if (player.statusEffectv1(StatusEffects.StraddleRoundLeft) <= 0) {
                 monster.removeStatusEffect(StatusEffects.Straddle);
                 player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
-                outputText("\n\nYour opponent finaly manage to struggle free of your grapple!\n\n");
+                outputText("\n\nYour opponent finally manages to struggle free of your grapple!\n\n");
             }
         }
         enemyAI();

@@ -64,7 +64,13 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("<b>You need some time to think of a new riddle.</b>\n\n");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.hasPerk(PerkLib.Incorporeality)) {
+		if (player.wendigoScore() >= 10) {
+			bd = buttons.add("Spectral scream", SpectralScream, "Let out a soul-chilling scream to stun your opponent and damage their sanity and soul. \n");
+			if (player.hasStatusEffect(StatusEffects.CooldownSpectralScream)) {
+				bd.disable("<b>You need more time before you can use Spectral scream again.</b>\n\n");
+			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		}
+		if (player.hasPerk(PerkLib.Incorporeality) || player.wendigoScore() >= 10) {
 			buttons.add("Possess", possess).hint("Attempt to temporarily possess a foe and force them to raise their own lusts.\nWould go into cooldown after use for: 2 rounds\n");
 			if (player.hasStatusEffect(StatusEffects.CooldownPossess)) {
 				bd.disable("<b>You need more time before you can use Possess again.</b>\n\n");
@@ -237,11 +243,11 @@ public class MagicSpecials extends BaseCombatContent {
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.couatlScore() >= 11 && player.isFlying()) {
-			bd = buttons.add("Hurricane", Hurricane).hint("Kickstart a hurricane unleashing violent winds on your opponent. The hurricane intansify every round and may even stun your victim\n", "Hurricane");
+			bd = buttons.add("Hurricane", Hurricane).hint("Kickstart a hurricane unleashing violent winds on your opponent. The hurricane intensifies every round and may even stun your victim\n", "Hurricane");
 			bd.requireMana(spellCost(50));
 			//Not Ready Yet:
 			if(player.hasStatusEffect(StatusEffects.CooldownHurricane)) {
-				bd.disable("You need time to gather enought winds to empower your Hurricane again.");
+				bd.disable("You need time to gather enough winds to empower your Hurricane again.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.kamaitachiScore() >= 10 && player.arms.type == Arms.KAMAITACHI) {
@@ -249,7 +255,7 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireFatigue(spellCost(50));
 			//Not Ready Yet:
 			if(player.hasStatusEffect(StatusEffects.CooldownWindScythe)) {
-				bd.disable("You need time to gather enought winds to unleash a wind scythe again.");
+				bd.disable("You need time to gather enough winds to unleash a wind scythe again.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.hasPerk(PerkLib.DragonFireBreath)) {
@@ -4510,6 +4516,15 @@ public class MagicSpecials extends BaseCombatContent {
 		possess();
 	}
 
+//Spectral Scream
+	public function SpectralScream():void {
+		clearOutput();
+		player.createStatusEffect(StatusEffects.CooldownSpectralScream,6,0,0,0);
+		outputText("You let out a soul-chilling scream freezing your opponent"+(monster.plural ? "s":"")+" in " + monster.pronoun1 + " tracks from sheer terror. This also seems to have damaged " + monster.pronoun1 + " sanity.");
+		monster.createStatusEffect(StatusEffects.Fear,1+rand(3),0,0,0);
+		enemyAI();
+	}
+
 //Feline Curse
 	public function FelineCurse():void {
 		clearOutput();
@@ -5617,6 +5632,5 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		enemyAI();
 	}
-
 }
 }

@@ -50,7 +50,7 @@ public function accessMetamorphMenu():void {
 	}*/
 	addButton(10, "Page 1", accessPage1MetamorphMenu).hint("Hair, Face, Tongue, Eyes, Ears, Horns");
 	addButton(11, "Page 2", accessPage2MetamorphMenu).hint("Arms, Wings, Legs");
-	addButton(12, "Page 3", accessPage3MetamorphMenu).hint("Skin, Skin Patterns/Tattoes, Rear Body, Antennae, Gills, Tail");
+	addButton(12, "Page 3", accessPage3MetamorphMenu).hint("Skin, Skin Patterns/Tattoos, Rear Body, Antennae, Gills, Tail");
 	//addButton(13, "Page 4", accessPage4MetamorphMenu);
 	if (player.hasPerk(PerkLib.JobSoulCultivator)) addButton(14, "Back", SceneLib.soulforce.accessSoulforceMenu);
 	else addButton(14, "Back", playerMenu);
@@ -2536,7 +2536,7 @@ private function metamorphDragonTail():void {
 private function metamorphDragonArms():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of dragon one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
+	outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  dragon, one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
 	player.arms.type = Arms.DRAGON;
 	doNext(accessPage2ArmsMenu);
 }
@@ -2759,7 +2759,7 @@ private function metamorphSalamanderFace():void {
 private function metamorphSalamanderArms():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of salamander one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
+	outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  salamander, one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
 	player.arms.type = Arms.SALAMANDER;
 	doNext(accessPage1ArmsMenu);
 }
@@ -3018,7 +3018,7 @@ private function metamorphLizardTail():void {
 private function metamorphLizardArms():void {
 	clearOutput();
 	player.soulforce -= 100;
-	outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of lizard one with leathery scales and short claws replacing your fingernails.  <b>You now have a lizard arms.</b>");
+	outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  lizard, one with leathery scales and short claws replacing your fingernails.  <b>You now have a lizard arms.</b>");
 	player.arms.type = Arms.LIZARD;
 	doNext(accessPage2ArmsMenu);
 }

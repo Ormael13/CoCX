@@ -59,6 +59,17 @@ package classes.Scenes
 			outputText("lust below 0, Drider Incubus Anal sex giving PC imps pregnancy, bunny herm scenes on plains still TF-ing PC despite been undead/gargoyle, goblin ale huminizing effect not taking into account PC resistance to been TF'd, missing fatigue cost check on Money Strike, Diana not able to level up after joining camp, Many Birds soulskill dealing damage twice, some of attacks incorrect texts, some enemy perks ");
 			outputText("been wrong labeled as player perks in few specials/attacks, eastern bunny perk bugging free balls mutation slot, able to fuck Tamani daughters without having cock, certain Beast Warrior perks not allowing cast Charge Weapon or Charge Armor with all other req. meet, mana not regenerating with elemental conjuer job\n\n");
 			outputText("<b>Version 0.8o4:</b>\n\n");
+			outputText("-New mutation perk: Wendigo Curse. Gained as part of transformation into Wendigo. Effects: Your body and soul has been cursed by a wendigo. Transformative no longer have an effect on you.\n");
+			outputText("-New mutation perk: Unnatural Strength. Req. 10+ in wendigo score. Effects: The more sated you are the stronger you get, although your satisfaction is fleeting (+1% to str multi per 1% of lust/hunger).\n");
+			outputText("-New mutation perk: Endless Hunger. Req. 10+ in wendigo score. Effects: Your hunger progress at twice the normal speed but must be sated through oral sex. As a result, you are completely unable to obtain a body shape larger than a thin frame. (also for all difficulty settings that not have enabled hunger will enable it)\n");
+			outputText("-New mutation perk: Enigma. Req. 14+ in sphinx score. Effects: Your bottomless insight somehow traduce itself into raw power, allowing you to add half of your intelligence and wisdom as a modifier to strength and toughness.\n");
+			outputText("-New M. Special: Spectra Scream. Req. 10+ pts in wendigo score. Scream that will cause 1-3 turns long Fear effect on enemy with stackable wisdom debuff. 6 turns colldown after use.\n");
+			outputText("-New vehicle (by Ormael): Giant Slayer Mech - can be found during exploration of Battlefield (O). Req. to have built Workshop to bring it back to camp. Cost 2000 gems. Would increase Armor and Magic Resistance by 20, decrease any lust damage by 75%, max Wrath by 10% and increase firearms power by 25%. When fighting god/gigantic/collosal type enemies it will nullify penalty for level difference up to 10 levels, ");
+			outputText("but when fighting against any other type of enemy it will increase that penalty by 10. Well it's very specialiazed mech to do one job good and... suck at rest xD. Can be upgraded by using blueprint and materials. Many of upgrades from Goblin Mech Alpha could be carried over to this one.\n");
+			outputText("-New usable item: Reagent. Costing 50 gems and it's obtainable from Rathazul dyes shop. Usefull in making dyes working on other things than hair or fur, like scales.\n");
+			outputText("-New enemy possible to encounter during Glacial Rift exploration: Wendigo - lvl 84.\n");
+			outputText("-New specific action during fight with Minotaur King: Dish Helper - in case PC have henchman in this fight can command henchman to occupy healing slut that accompany Minotaur King cutting him off from healing but also make henchman not helping PC in combat. So for super low price of no help in combat from henchman Minotaur King would not heal back after beatdown ^^\n");
+			outputText("-Wendigo can use Possess m.special and it's race bonuses are (10+): +70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis raciaol multi, +50% to Lib racial multi, +50 min sens\n");
 			outputText("-Yeti / Winter Wolf / Frost Gigant / True Ice Golems at Glacial Rift got their level rised from 60/47/80/43 to 76/99/89/80 (that included buff to most of their stats).\n");
 			outputText("-New area to discover: Tundra. It have new monster - True Ice Golem (lvl 64). Req. to explore Caves and been at least level 35. It have some of glacial rift monsters. Exploring it would unlock now Glacial Rift.\n");
 			outputText("-Added parser for calling right antennae name instead of antennae.type in tf scenes. Also Hair color change for goblin ale got rid of werid piece of code so will work better. And bnot having any anntanae for goblin and gremlin will give those races +1 to race score.\n");
@@ -66,23 +77,20 @@ package classes.Scenes
 			outputText("-Pure Pearl will have now effect of lowering additionaly libido by 10 pts.\n");
 			outputText("-Hourly lust gains are not related to core value of libido not it current total value. It would give reduction of lust gains per hour from 80 to 90%.\n");
 			outputText("-Added Jojo comments on Tactician History perk or lacking History perk in his talk scene about PC Past.\n");
-			outputText("-New enemy possible to encounter during Glacial Rift exploration: Wendigo - lvl 84.\n");
 			outputText("-Been attacked by Wendigo can apply status called Wendigo psychosis lasting up to 7 days. If during this time PC lust reach 100% (without hunger bar enabled) or hunger drop to 0 it would trigger transformation into Wendigo.\n");
 			outputText("-During character creation after ascension could pick between getting free job perk from any Past Life perk or getting instead free perk point(s).\n");
-			outputText("-New vehicle (by Ormael): Giant Slayer Mech - can be found during exploration of Battlefield (O). Req. to have built Workshop to bring it back to camp. Cost 2000 gems. Would increase Armor and Magic Resistance by 20, max Wrath by 10% and increase firearms power by 25%. Can be upgraded by using blueprint and materials. Many of upgrades from Goblin Mech Alpha could be carried over to this one.\n");
-			outputText("-1 new achievment. (shadow one)\n");
 			outputText("-New masturbation option for goblin that have goblin mech with full cum reservoir.\n");
 			outputText("-Diana corruption get reduced in her unicorn and alicorn forms. Since someone pointed she was way more corrupted than lust crazy spider-morph enemies.\n");
+			outputText("-He'Xin'Dao is prepared for next celebration of Lunar New year with tons of new year animal-morphs comming form all hidden places across the realm. As usual it starts at 21th January and last till 20th February.\n");
+			outputText("-Playing difficulty setting below Hard Mode giving PC 3 less points in internal chimera score that would normaly giving negative regen. So now pc can pick most of races all three racial perks without worry to get negative HP regen.\n");
+			outputText("-Easy mode enabled would totaly remove negative HP regen from having racial mutation perks.\n");
+			outputText("-1 new achievment. (shadow one)\n");
+			outputText("-Jtecx many typo corrections.\n");
+			outputText("-Fixed bugs: Liadri bugfixes, Pyro bugfixes/typo corrections, Cold Fish Soup missing it main intendeed effect (libido lowering), super perk points not reseting on ascension, gremlin tf text error, some of the scenes only looking for correct size of 1st cock ignoring any other PC could have\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Cold Fish Soup missing it main intendeed effect (libido lowering), super perk points not reseting on ascension\n");/*ostatni punkt changelogu
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -95,6 +103,7 @@ package classes.Scenes
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -188,12 +197,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -248,9 +252,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -446,7 +447,7 @@ package classes.Scenes
 			outputText("-Manticore now has a pussy bodypart.\n");
 			outputText("-Bicorn/Unicorn scores have been redefined.\n");
 			outputText("-New Bicorn/Unicorn ability Aura of purity and Aura of Corruption.\n");
-			outputText("-Equine pussy is back or finaly here whatever you may call it.\n");
+			outputText("-Equine pussy is back or finally here whatever you may call it.\n");
 			outputText("-Cave wyrm has been updated.\n");
 			outputText("-Cave wyrm now has a cock and pussy type instead of mere status.\n");
 			outputText("-Demons and kitsunes as well as players with phylactery can new heal and leech energy from sex.\n");
@@ -454,7 +455,7 @@ package classes.Scenes
 			outputText("-New items: Sphinx Regalia availlable from Sanurah, Walpurgis Izalia Robe availlable in Kaiba shop, Kraken black dress availlable at Pinchou\n");
 			outputText("-Dark ritual was added to the Warlock prestige class perk tree.\n");
 			outputText("-Warlock now require less aggravating prerequisite.\n");
-			outputText("-Warlock no longuer spoils.\n");
+			outputText("-Warlock no longer spoils.\n");
 			outputText("-New sprites were added for: Centaur armor, All scarves, All Bikini, All Qipao, All Kimono, Goblin technomancer outfit, Full plate armors, Basic stat necklaces, Naga head accessory, Kasha tail, Centipede full body, Walpurgis Izalia Robe, Kraken Black Dress, Hinezumi stance, New cock Cave wyrm, New pussy Cave wyrm\n");
 			outputText("-Fixed Appearance screen declaring you as your lowest score race. You will now always be declared as by your highest valid score.\n");
 			outputText("-All changes for 0.8n9 was due to hard work of our glorious lady Liadri. With a bit of Lia Twist.\n");
@@ -551,9 +552,9 @@ package classes.Scenes
 			outputText("-Several new sex scenes gives sex EXP\n");
 			outputText("-Gremlin race was added to the game\n");
 			outputText("-JIANGSHI HP NOW SCALES OF LIBIDO\n");
-			outputText("-Manticore and displacer feeding euphoria now stacks up to 50% but only at the rate of 5 per stacks furthermore they last longuer\n");
+			outputText("-Manticore and displacer feeding euphoria now stacks up to 50% but only at the rate of 5 per stacks furthermore they last longer\n");
 			outputText("-Alchemical, Mutagenic and Knowledge bonus added to the game. Read book drink potions and use transformative to stack them each up to 20%\n");
-			outputText("-You can now escape from Alraune using the torch and alraune has now customised text when trying to escape witheout it\n");
+			outputText("-You can now escape from Alraune using the torch and alraune has now customised text when trying to escape without it\n");
 			outputText("-Thunderbird can now use Lust Storm\n");
 			outputText("-Biggest Bags are now properly displayed as costing\n");
 			outputText("-Heart of the storm perk line for Thunderbird, Raiju, Kamaitachi\n");
@@ -808,7 +809,7 @@ package classes.Scenes
 			outputText("-New body part - wings: Thunderous aura. Req. Raiju Mane\n");
 			outputText("-Added new item possible to find at Battlefield - Metal Plate (item used in goblin engenerring)\n");
 			outputText("-Yeti race bonuses are now gained at 7 or 14 pts in racial score: +50/100 to max Str, +40/80 to max Tou, +25/50 to max Spe and Lib, -35/70 to max Int\n");
-			outputText("-After saving goblin form Drider boss in Lethice Stronghold we can finaly take the goblin back to camp as vanilla promised. Would req. to leave stronghold by entrance and not lift + having Rathazul in camp to help her. After birning items Rath ask for PC would be faced with another choice to keep Mitzi in camp or shoo her away.\n");
+			outputText("-After saving goblin form Drider boss in Lethice Stronghold we can finally take the goblin back to camp as vanilla promised. Would req. to leave stronghold by entrance and not lift + having Rathazul in camp to help her. After birning items Rath ask for PC would be faced with another choice to keep Mitzi in camp or shoo her away.\n");
 			outputText("-When PC decided to keep Mitzi in camp after cure she can talk on two subjects with PC, be fucked or pc can check her appearance.\n");
 			outputText("-Mitzi can get pregnant. After succesfull deed her pregnancy last 13 days and will result in 4 daughters born. Her daughters will stay in camp and it would be possible to interact with them. They would gather some items each day in barrels that pc can pick.\n");
 			outputText("-After Mitzi's brood grow to at least 6 daughters it would became possible to take Mitzi and few of her daughters as henchman (they all count as one henchman).\n");
@@ -1207,7 +1208,7 @@ package classes.Scenes
 			outputText("-Violet Pupil Transformation and Comet manuals cost was lowered form 250 to 200 gems.\n");
 			outputText("-New magical soulskill: Flames of Love (Basic Rank). Req. buying manual from golem merchant for 20 spirit stones. Deal fire damage, against group enemies deal 2x more damage, using ~90% of current PC lust creates flames that deals 200% dmg of used lust. (1 lust used = 2 pts of fire dmg) Cooldown: 3 turns.\n");
 			outputText("-New magical soulskill: Icicles of Love (Basic Rank). Req. buying manual from golem merchant for 20 spirit stones. Deal ice damage, against group enemies deal 2x more damage, using ~90% of current PC lust creates icicles that deals 200% dmg of used lust. (1 lust used = 2 pts of ice dmg) Cooldown: 3 turns.\n");
-			outputText("-Soul Equipment siren shop merchant finaly got her name. Which she would always meantion after entering.\n");
+			outputText("-Soul Equipment siren shop merchant finally got her name. Which she would always meantion after entering.\n");
 			outputText("-Options in Camp Actions was a bit rearranged. Some was mover to new submenu named SpentTime that involve spending time on watching sky or swimming at steam. Even action of using time to prepare bottles filled with various pills is found here.\n");
 			outputText("-When PC is lvl 24+ can find sometimes instead of very diluted Arcane Regen Concotions and low-grade Soulforce Recovery Pills their stronger versions: diluted Arcane Regen Concotions and mid-grade Soulforce Recovery Pills\n");
 			outputText("-New consumable item: an Arcane Regen Concotion. Costs 720 gems and currently only drops from white mare/unicorn/alicorn founded in Lake, Battlefield or Plains. It restore 7200 mana.\n");
@@ -1303,7 +1304,7 @@ package classes.Scenes
 			outputText("-Getting forked nekomata tail fully divide into two cat tails req. 50+ wis, 20+ int and lvl 12+.\n");
 			outputText("-Reaching Elder Nekomata would increase cost of Ghost Fire 2x and fire damage 2,5x.\n");
 			outputText("-After meeting desert naga on desert 5 times as naga (having naga lower body is enough) it would trigger scene when she tells PC her name. This start gaing affection with her and adding few new sex scenes. When affection with her reach 100% it trigger scene, in which she talks with PC about inability to understand non-naga people. That scene will add option ");
-			outputText("in Rathazul menu to make Repta-Tongue potion after PC brings him: hummus, reptilium, and ovi elixir. Finding desert naga again with Repta-Tongue potion will allow her to finaly understand any non-naga beings. She would also then show interest in moving in to camp as long PC agree to this. Is rejected she will be at each next meeting asks if PC not changed mind.\n");
+			outputText("in Rathazul menu to make Repta-Tongue potion after PC brings him: hummus, reptilium, and ovi elixir. Finding desert naga again with Repta-Tongue potion will allow her to finally understand any non-naga beings. She would also then show interest in moving in to camp as long PC agree to this. Is rejected she will be at each next meeting asks if PC not changed mind.\n");
 			outputText("-When in camp Samirah have few possible randomn events when visiting her, Appearance, Talk options, Sex options, can teach some new specials if PC is naga, can show up at hot springs, have option to Sleep with her (followed for morning coiling up) and female naga PC get dress from her.\n");
 			outputText("-New possible tease scene text for naga PC - Belly Dance.\n");
 			outputText("-New M. Special: Tactical Distraction. Req. to be naga and having finished hypnosis training with Samirah. It would distract enemy for 1 actions interrupting them in case they were channeling some ability while dealing very small amount of lust damage. It have 5 turns CD.\n");
@@ -1368,7 +1369,7 @@ package classes.Scenes
 			outputText("-New body part - arms: Orc arms. Req. Orc Legs\n");
 			outputText("-New body part - face: Orc fangs. Req. Orc Arms\n");
 			outputText("-New body part - eyes: Orc eyes. Req. Elfin Ears (those from orc/goblin/spider tf not elf tf)\n");
-			outputText("-New body part - skin pattern: scar shaped tattoes. Req. Plain(human) skin\n");
+			outputText("-New body part - skin pattern: scar shaped tattoos. Req. Plain(human) skin\n");
 			outputText("-New TF item: Orc Mead. Buyable in Journey to the East inn or at Moga Hen shop. Using this item will turn PC into orc. Half Orc/Orc bonuses at 5/11 pts in racial score (scalable): +60/130 to max Str, +15/30 to max Tou, +5/10 to max Spe, -15/30 to max Int, +10/25 to max Lib, +10/20% to max Wrath.\n");
 			outputText("-New body part - arms: Displacer arms. Req. Cat Legs\n");
 			outputText("-New body part - rear body: Displacer tentacles. Req. Displacer Arms\n");
@@ -1501,7 +1502,7 @@ package classes.Scenes
 			outputText("-New tier 12 misc lvl-up perk: Skipping Work. Req. Taking a Break perk. Effect: +20% to fatigue recovery.\n");
 			outputText("-New tier 12 misc lvl-up perk: Hammer. Req. Furnace perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
 			outputText("-New tier 12 misc lvl-up perk: Brothel Owner. Req. Escort perk. Effect: +15% tease dmg.\n");
-			outputText("-New event perk: Ferocity. Gained by using orc tf when having orc: legs, arms, fangs, eyes; scar shaped tattoes and 11+ in orc score. Effect: PC continue fighting even when HP is below 0. Will loose 1% of max HP each round and would loose fight by HP defeat when negative HP reach 15% of max HP. Doubles wrath generated when below 0 HP. Would be lost if orc score drop below 11 pts. (+2 to orc score)\n");
+			outputText("-New event perk: Ferocity. Gained by using orc tf when having orc: legs, arms, fangs, eyes; scar shaped tattoos and 11+ in orc score. Effect: PC continue fighting even when HP is below 0. Will loose 1% of max HP each round and would loose fight by HP defeat when negative HP reach 15% of max HP. Doubles wrath generated when below 0 HP. Would be lost if orc score drop below 11 pts. (+2 to orc score)\n");
 			outputText("-New event perk: Elven Sense. Gained by using elf tf when PC have both elf eyes and ears. Effect: Gain a chance to dodge attacks (+5%) and an increased chance to score critical hits (+5% to both phys and magical crit chance when having 50+ int/wis). Would be lost if PC not have elf eyes and ears. (+1 to elf score)\n");
 			outputText("-New event perk: Flawless Body. Gained by using elf tf when PC skin change to flawless human skin. Effect: Your elven body with its flawless form and skin is so alluring it reinforces your ability to tease. Would be lost if PC not have elf arms, elf legs and flawless normal (human) skin. (+10 slutty seduction, +1 to elf score)\n");
 			outputText("-History: Smith and Past Life: Smith have bonus to phys armor bonus and magic resistance bonus lowered from 10% to 5%.\n");
@@ -1812,7 +1813,7 @@ package classes.Scenes
 			outputText("-New jewelry: training soul ring - buyable in the same shop as others soul training equipment. Cost 10 spirit stones. Increase per hour gain of bonus soulforce as well as rising max bonus soulforce cap by 100.\n");
 			outputText("-New event perk: Gargoyle. Gained in ritual to become gargoyle by picking own blood. Effects: PC need to feed on soulforce gained from cultivation session or from pills to survive. +80 to max Wis, -10 to max Lib/Sens, sets min Lib/Sens to 5\n");
 			outputText("-New event perk: Corrupted Gargoyle. Gained in ritual to become gargoyle by picking minotaur blood. Effects: PC need to feed on fluids (cum, milk) to survive. -10 to max Wis, +80 to max Lib, +15 to min Sens\n");
-			outputText("-PC can finaly become Gargoyle by taking last step in Temple of the Divine. At that last step it will be one last choice what type of blood to use. Own that would result in getting Gargoyle perk and switching to feeding on soulforce or Minotaur Blood (need to have one bottle of it in inv) to become Corrupted Gargoyle that feed on fluids like cum or milk.\n");
+			outputText("-PC can finally become Gargoyle by taking last step in Temple of the Divine. At that last step it will be one last choice what type of blood to use. Own that would result in getting Gargoyle perk and switching to feeding on soulforce or Minotaur Blood (need to have one bottle of it in inv) to become Corrupted Gargoyle that feed on fluids like cum or milk.\n");
 			outputText("-Depending on previous choices PC would get 3 new p.specials: Stone Claw/Stone Fist, Tail Slam/Tail Cleave and Wing Buffet. Also depending on material chosen for carving gargoyle body would get diff stat bonuses. Marble/Alabaster would give give +165/+50 max Str, +250 max Tou, +50/+30 max Spe, +30/+165 max Int, +60/+10 to armor, +10/+60 to spell resistance.\n");
 			outputText("-Gargoyle P. Special: Stone Claw (req. having gargoyle shaped arms) - Rend your foe using your sharp stone claws. It can cause Bleed. It have 3 turns cooldown after use.\n");
 			outputText("-Gargoyle P. Special: Stone Fist (req. having human shaped arms) - Slam your two fist at your foe and attempt to stun them. It have 3 turns cooldown after use.\n");
@@ -1822,7 +1823,7 @@ package classes.Scenes
 			outputText("-Gargoyle PC have a bit diff Bad End for loosing any fight in Sand Witch, Helia or D3 dungeons (if any of you fond of seeing all new bad ends for PC).\n");
 			outputText("-Quest reward for finishing Hidden Cave is now split in two so game will allow getting reward that was before for WHOLE dungeon by only completing first part. IF PC manage find way to unlock hidden part will be given 1 perk point and 5 stat points (so completing whole Hidden Cave now would give 2 bigger reward than before).\n");
 			outputText("-In Journey to the East Inn in He'Xin'Dao PC can now talk with new NPC - Yang (panda) that giving to player option to join Adventure Guild for 5 sprit stones. It's guild for getting some new quests/repeatable quests.\n");
-			outputText("-After joing Adventure Guild PC can pick one of three quests. First two are accesable right away and consist of finding and killing enought amount of imps/raging tentacle beasts to bring back to Yang enough of proof (imp sculls or severed tentacles) for reward. First time finished quest will give respectively perk Sense Corruption/Wrath, next time completing will give 1 perk point ");
+			outputText("-After joing Adventure Guild PC can pick one of three quests. First two are accesable right away and consist of finding and killing enough amount of imps/raging tentacle beasts to bring back to Yang enough of proof (imp sculls or severed tentacles) for reward. First time finished quest will give respectively perk Sense Corruption/Wrath, next time completing will give 1 perk point ");
 			outputText("and afterward each completetion of those quests will give some spirit stones.\n");
 			outputText("-Third quest req. to finish first two ones at least once and getting promotion to higher rank in Adventure Guild (and spending small fee for promotion and etc. *cough* 10 SS *cough*). This one quest req. killing demons and bringing back to Yang their skulls. First reward is Demon Slayer perk, second is 1 perk point and afterward few spirit stones. All three quests can be done only once per day.\n");
 			outputText("-Yang have also Talk options beside giving quests/checing their completetion or well getting PC promoted or answering the most important question - what about sex? ^^\n");
@@ -2013,7 +2014,7 @@ package classes.Scenes
 			outputText("-After another 30 ays she will be considered an young adult (18+) and unlock all interactions like: purify/corrupt specific items or sex scenes.\n");
 			outputText("-Incest sex scenes with her req. to have 30+ corruption. For pure PC's it's only posisble to access yuri scene.\n");
 			outputText("-Chi Chi final training added allowing to face her again. TIP: better save game before it as it would affect Chi Chi storyline.\n");
-			outputText("-Chi Chi can finaly visit PC camp...for longer. After finishing all training sessions she will give PC option to fight again with option to agree or decline (which would make PC able to accept it in future when ready). In this second fight when PC win with her (she would use slight different moves and would be slight easier to fight enemy) would be given two options. ");
+			outputText("-Chi Chi can finally visit PC camp...for longer. After finishing all training sessions she will give PC option to fight again with option to agree or decline (which would make PC able to accept it in future when ready). In this second fight when PC win with her (she would use slight different moves and would be slight easier to fight enemy) would be given two options. ");
 			outputText("Leaving her would lead to her death and reciving Master Gloves. Nursing her would lead to...recruitment path that will bring her for good to the camp.\n");
 			outputText("-When in camp her interactions inclused: checking her appearance, talking with her, learning soul skills (if not yet all are learned), sparring (due to her recovery she will only be able spar once a day before she recover to similar power level as during 2nd fight (lvl 58)).\n");
 			outputText("-Whenever PC spar with her each day or not she would be gradula healing back to full health each day. Approximatly time needed to her full recovery is four days. After recovery if option for npc's been in train mode she would have chance to lvl up to lvl 64.\n");
@@ -2139,7 +2140,7 @@ package classes.Scenes
 			outputText("-Marae buff power base is 10% but with leaving B.Sword/Excalibur and Pure Pearl on Altar can be rised by 5% for each. Rebuilding Statur will increase it by an0other 10%. Rebuilding Gdecorative gargoyles or making all benches will add 5% for each of those task completed.\n");
 			outputText("-Aimozg worked many days on... new combat menu layout. Some muscle memory would be changed but that for good as it would be easier to handle any future new combat options.\n");
 			outputText("-New npc that can be recruited to camp: Diva. All her content coded entirely by Oxdeception. Diva is... vampire... well sort of, whcih can be meet in Mountains after PC deal with Factory. PC need to let her keep winning till 3rd and final fight when PC would need to get serious and beat her to cme back to camp with new bloodsucke...waifu. She's source of bat tf item aside Mog Hen shop.\n");
-			outputText("-New sprites added (by aimozg): Alraune, Ceani, Crabgirl (shopkeeper at Beach), Etna. Ayane sprites finaly showing up.");
+			outputText("-New sprites added (by aimozg): Alraune, Ceani, Crabgirl (shopkeeper at Beach), Etna. Ayane sprites finally showing up.");
 			outputText("-We got...Halloween suprise. I know it may be small one but at least I remebered and convinced one of writers to do it rather than make contest for it (and I count on doing same next year too ^^). All I can say is... pumpkins.\n");
 			outputText("-Fixed bugs: Albino tail(s) after changing only hair color with tf items, 'dead' enemies last hurray attack, lust meter jumping between min lust or max lust values when first is higher than second, missing part of map in Hidden Cave\n\n");
 			outputText("<b>Version 0.8g2 (Bugfixing):</b>\n\n");
@@ -2769,7 +2770,7 @@ package classes.Scenes
 			outputText("-Not best lines probably but now JoJo will also have reply to PC picking Cultivator or Scout History perks.\n");
 			outputText("-Meditation shortened to one hour (somehow I couldn't come with interesting perks to make it more usefull nor way to change it on start to be more usefull).\n");
 			outputText("-Evangeline first X-pack is unlocked. I not sure only if the name is fancy enough. Still that will give chance to lvl-up her from lvl 2 to 12. Future one X-packs will be adding next ones lvl-up options and more her backstory.\n");
-			outputText("-Some of talks, light sparing and way to make her lvl-up a few times. Also that would mean now PC can rise her affection (finaly as some would say) that is done by talking or sparring with her. Also for talk scenes she got first time version of each talk and then repetable one (but both are only different in one sentence so kudos to who will find where the differences are).\n");
+			outputText("-Some of talks, light sparing and way to make her lvl-up a few times. Also that would mean now PC can rise her affection (finally as some would say) that is done by talking or sparring with her. Also for talk scenes she got first time version of each talk and then repetable one (but both are only different in one sentence so kudos to who will find where the differences are).\n");
 			outputText("-LvL-ing her up us after PC give her enough gems for this and then ask for it (Somehow I decided t keep name of this option as Just Do It!). After this she will be out of camp for few hours so not get worried she's bugged or something. IN main camp menu there will be even short paragraph of text as long she's out of camp.\n");
 			outputText("-Inreased chance to proc Marae encounters not to meantioning little better stats of armors made of her bark.\n");
 			outputText("-Past Life perks will be giving now also related job perk or just free perk point.\n");
@@ -3064,7 +3065,7 @@ package classes.Scenes
 			outputText("-Added new achievements: six combat related, one general.\n");
 			outputText("-Added/Polished intro and outro scenes for encounters: Imp Pack, Succubus, Incubus, Omnibus.\n");
 			outputText("-Added chance to find Imp Food during exploration of the Blight Ridge.\n");
-			outputText("-Finaly managed make soulskill costs work properly without bugging out game. Current added soulskills are only str/weapon based (next ones added will relay on other stats ^^).\n");
+			outputText("-finally managed make soulskill costs work properly without bugging out game. Current added soulskills are only str/weapon based (next ones added will relay on other stats ^^).\n");
 			outputText("-A few minor under the hood changes to make game goes more smooth (that includes small boost to lvl-up rising of max Soulforce value).\n\n");
 			outputText("<b>Version 0.4 (He'Xin'Dao (part 1), Soulforce new features (part 1), few minor fixes/changes):</b>\n\n");
 			outputText("-Having perk History: Cultivation now properly unlock soulforce option when picked to play prologue in Ignam.\n");

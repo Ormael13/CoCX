@@ -677,11 +677,12 @@ private function buyDyes(fromPage2:Boolean = false):void {
 	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 8) {
 		addButton(4, "Next", buyDyesPage2);
 		addButton(8, "Blue", buyDye, consumables.BLUEDYE);
-		addButton(10, "Green", buyDye, consumables.GREEN_D);
-		addButton(11, "Orange", buyDye, consumables.ORANGDY);
-		addButton(12, "Purple", buyDye, consumables.PURPDYE);
-		addButton(13, "Pink", buyDye, consumables.PINKDYE);
+		addButton(9, "Green", buyDye, consumables.GREEN_D);
+		addButton(10, "Orange", buyDye, consumables.ORANGDY);
+		addButton(11, "Purple", buyDye, consumables.PURPDYE);
+		addButton(12, "Pink", buyDye, consumables.PINKDYE);
 	}
+	addButton(13, "Reagent", buyDye, useables.REAGENT);
 	addButton(14, "Nevermind", buyDyeNevermind);
 }
 private function buyDyesPage2():void {

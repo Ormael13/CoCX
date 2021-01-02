@@ -40,8 +40,7 @@ public final class Mutations extends MutationsHelper {
     public var emberTFchanges:EmberTF = new EmberTF();
 	
 	public function blockingBodyTransformations():Boolean {
-		if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.WendigoCurse)) return true;
-		else return false;
+		return player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.WendigoCurse);
 	}
 
     public function DrunkenPowerEmpower():void {
@@ -4160,7 +4159,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Ears!
         if (player.ears.type != Ears.GREMLIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nWhoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in -haircolor- fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears!</b>");
+            outputText("\n\nWhoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in "+player.hairColor+" fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears!</b>");
             setEarType(Ears.GREMLIN);
             changes++;
         }
@@ -5176,7 +5175,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Dragon Arms
         if (type == 1 && player.wings.type == Wings.DRACONIC_HUGE && player.arms.type != Arms.DRAGON && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of dragon one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  dragon, one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
             setArmType(Arms.DRAGON);
             changes++;
         }
@@ -6505,7 +6504,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.LIZARD && player.lowerBody == LowerBody.LIZARD && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of lizard one with leathery scales and short claws replacing your fingernails.  <b>You now have lizard arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  lizard, one with leathery scales and short claws replacing your fingernails.  <b>You now have lizard arms.</b>");
             setArmType(Arms.LIZARD);
             changes++;
         }
@@ -6764,7 +6763,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.SALAMANDER && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.SALAMANDER && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of salamander one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  salamander, one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
             setArmType(Arms.SALAMANDER);
             changes++;
         }
@@ -6949,7 +6948,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.CAVE_WYRM && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of cave wyrm one with leathery, black scales and short claws replacing your fingernails.  <b>You now have a cave wyrm arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  cave wyrm, one with leathery, black scales and short claws replacing your fingernails.  <b>You now have a cave wyrm arms.</b>");
             setArmType(Arms.CAVE_WYRM);
             changes++;
         }
@@ -9562,7 +9561,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPlainSkinOnly() && !player.skin.hasScarShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou double over suddenly as a harsh, stabbing pain runs across your skin, tattoos in the shape of scars forming on various parts of your body. Considering how you look now, you might as well proudly display your <b>Orc scar tattooed skin.</b>");
             if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedScarTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Scar Tattoed Skin - Memorized!</b>\n\n");
+                outputText("\n\n<b>Genetic Memory: Scar Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedScarTattoed, 0, 0, 0, 0);
             }
             player.skin.base.pattern = Skin.PATTERN_SCAR_SHAPED_TATTOO;
@@ -9717,7 +9716,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
             if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Lighting Tattoed Skin - Memorized!</b>\n\n");
+                outputText("\n\n<b>Genetic Memory: Lighting Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
             }
             player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
@@ -9887,7 +9886,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
             if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Lighting Tattoed Skin - Memorized!</b>\n\n");
+                outputText("\n\n<b>Genetic Memory: Lighting Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
             }
             player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
@@ -10965,7 +10964,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.SALAMANDER && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.SALAMANDER && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of salamander one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
+            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  salamander, one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
             setArmType(Arms.SALAMANDER);
             changes++;
         }
@@ -11413,7 +11412,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("curved");
             outputText(" markings remain, as if etched into your skin. <b>You now have Kitsune tattooed skin.</b>");
             if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
-                outputText("\n\n<b>Genetic Memory: Magic Tattoed Skin - Memorized!</b>\n\n");
+                outputText("\n\n<b>Genetic Memory: Magic Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
             }
             player.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;
@@ -13314,12 +13313,12 @@ public final class Mutations extends MutationsHelper {
         if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0) {
             if (player.tentacleCocks() < player.cockTotal()) {
                 if (player.cocks.length == 1) { //Single cawks
-                    outputText("\n\nYour feel your [cock] bending and flexing of its own volition... looking down, you see it morph into a green vine-like shape.  <b>You now have a tentacle cock!</b>  ");
+                    outputText("\n\nYour feel your [cock] bending and flexing of its own volition... looking down, you see it morph into a tentacle-like shape.  <b>You now have a tentacle cock!</b>  ");
                     //Set primary cock flag
                     player.cocks[0].cockType = CockTypesEnum.SCYLLATENTACLE;
                 }
                 if (player.cockTotal() > 1) { //multi
-                    outputText("\n\nYour feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible vine-like shapes.  <b>You now have green tentacle cocks!</b>  ");
+                    outputText("\n\nYour feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible tentacle-like shapes.  <b>You now have tentacle cocks!</b>  ");
                     for (var x:int = 0; x < player.cocks.length; x++) player.cocks[x].cockType = CockTypesEnum.SCYLLATENTACLE;
                 }
             }
@@ -13729,7 +13728,7 @@ public final class Mutations extends MutationsHelper {
                     player.cocks[0].cockType = CockTypesEnum.SCYLLATENTACLE;
                 }
                 if (player.cockTotal() > 1) { //multi
-                    outputText("\n\nYour feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible vine-like shapes.  <b>You now have green tentacle cocks!</b>  ");
+                    outputText("\n\nYour feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible tentacle-like shapes.  <b>You now have tentacle cocks!</b>  ");
                     for (var x:int = 0; x < player.cocks.length; x++) player.cocks[x].cockType = CockTypesEnum.SCYLLATENTACLE;
                 }
             }
@@ -14303,7 +14302,7 @@ public final class Mutations extends MutationsHelper {
         //changeLimit += additionalTransformationChances();
         //clear screen
         clearOutput();
-        outputText("You eat the weird kelp seed and feel suddenly like singing. Seems your talent for music are skyrocketing as you embrace the changes within you.");
+        outputText("You eat the weird kelp seed and suddenly feel like singing. It seems like your talent for music are skyrocketing as you embrace the changes within you!");
 
         if (blockingBodyTransformations()) changeLimit = 0;
         //FAILSAFE CHANGE
@@ -14510,7 +14509,7 @@ public final class Mutations extends MutationsHelper {
 
         //-Raises strength to 200.
         if (rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYou feel raw power run through your muscle. Gosh you might as well be strong enought to shatter rocks.");
+            outputText("\n\nYou feel raw power run through your muscle. Gosh you might as well be strong enough to shatter rocks.");
             if (player.str < 50) outputText(" Well maybe not that strong yet but you sure can pack a punch with your fist.");
             MutagenBonus("str", 5);
             changes++;
