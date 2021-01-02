@@ -3359,4 +3359,4 @@ public class PlayerAppearance extends BaseContent {
 		else outputText("<b>Yo, this is an error.</b>");
 	}
 }
-}
+}
