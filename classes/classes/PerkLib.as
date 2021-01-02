@@ -288,9 +288,6 @@ public class PerkLib
 		public static const FloralOvaries:PerkType = mk("Floral Ovaries", "Floral Ovaries",
 				"Increase the potency of Alraune pollen.",
 				"You've chosen the 'Floral Ovaries' perk. Increase the potency of Alraune pollen.").withBuffs({'lib.mult':0.05});
-		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
-				"You are currently in elemental form.",
-				"You are currently in elemental form.");
 		public static const FloralOvariesEvolved:PerkType = mk("Floral Ovaries (Evolved)", "Floral Ovaries (Evolved)",
 				"Further increase the potency of Alraune pollen. Males takes an extra 50% lust damage.",
 				"You've chosen the 'Floral Ovaries (Evolved)' perk. Further increase the potency of Alraune pollen. Males takes an extra 50% lust damage.").withBuffs({'lib.mult':0.10});
