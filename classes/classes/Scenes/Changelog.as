@@ -2163,8 +2163,8 @@ package classes.Scenes
 			outputText("-New tier 0 wisdom lvl-up perk: Job: Elemental Conjurer. Req. 10+ wis. Effect: Allow to summon 4 basic type of elementals for helping PC in fight, +5 to max wisdom (scalable)\n");
 			outputText("-New tier 0 wisdom lvl-up perk: Elemental Conjurer Resolve. Req. Job: Elemental Conjurer and 20+ wis. Effect: +30 max Wis, +20 max Int, -15 max Str/Tou/Spe (scalable), +10% of elementals attacks dmg\n");
 			outputText("-New tier 0 wisdom lvl-up perk: Elemental Contract Rank 1. Req. perk Elemental Conjurer Resolve and 25+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 1\n");
-			outputText("-New tier 0 wisdom lvl-up perk: Elements of the Ortodox Path Req. perk Elemental Contract Rank 1 and 30+ wis. Effect: Increase limit of summoned elementals by 1 and unlock summoning of ice, lightning and darkness elementals\n");
-			outputText("-New tier 0 wisdom lvl-up perk: Elements of Mareth: Basics. Req. perk Elements of the Ortodox Path and 35+ wis. Effect: Increase limit of summoned elementals by 1 and unlock summoning of ether, wood and metal elementals\n");
+			outputText("-New tier 0 wisdom lvl-up perk: Elements of the orthodox Path Req. perk Elemental Contract Rank 1 and 30+ wis. Effect: Increase limit of summoned elementals by 1 and unlock summoning of ice, lightning and darkness elementals\n");
+			outputText("-New tier 0 wisdom lvl-up perk: Elements of Mareth: Basics. Req. perk Elements of the orthodox Path and 35+ wis. Effect: Increase limit of summoned elementals by 1 and unlock summoning of ether, wood and metal elementals\n");
 			outputText("-New tier 0 intelligence lvl-up perk: Basic Spirituality. Req. 30+ int and 20+ wis. Effect: Increase max mana by 45\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Half-step-to Improved Spirituality. Req. Basic Spirituality perk, 60+ int and 40+ wis. Effect: Increase max mana by 75\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Arcane Regeneration (Minor). Req. Mage perk and 50+ int. Effect: Increase max mana by 10% and recovery rate by 5\n");
