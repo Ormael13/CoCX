@@ -705,102 +705,102 @@ public class Combat extends BaseContent {
 	public function GolemsMenu():void {
 		menu();
         if (monster.isFlying() && !player.hasPerk(PerkLib.ExpertGolemMaker)) {
-            addButtonDisabled(0, "Send T.Gol/1", "Your golems can't attack flying targets. (Only golems made by expert golem maker can do this)");
+            addButtonDisabled(0, "Send T.Gol/1", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
             if (monster.plural) {
-				addButtonDisabled(1, "Send T.Gol/3", "Your golems can't attack flying targets. (Only golems made by expert golem maker can do this)");
-				addButtonDisabled(2, "Send T.Gol/5", "Your golems can't attack flying targets. (Only golems made by expert golem maker can do this)");
+				addButtonDisabled(1, "Send T.Gol/3", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
+				addButtonDisabled(2, "Send T.Gol/5", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
 			}
-            if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButtonDisabled(3, "KamikazeProtocol", "Your golems can't attack flying targets. (Only golems made by expert golem maker can do this)");
+            if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButtonDisabled(3, "KamikazeProtocol", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this)");
         }
 		else {
 			addButton(0, "Send T.Gol/1", combat.pspecials.sendTemporalGolem1)
-				.hint("Send one golem from your bag to attack enemy. <b>After attack golem will fall apart and it core can shatter leaving it unable to be reused in future!</b>");
+				.hint("Send one golem from your bag to attack the enemy. <b>After attacking, the golem will fall apart and its core can shatter, leaving it unable to be reused in future!</b>");
 			if (monster.plural) {
 				if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 2) addButton(1, "Send T.Gol/3", combat.pspecials.sendTemporalGolem3)
-					.hint("Send three golems from your bag to attack enemy. <b>After attack golems will fall apart and they cores can shatter leaving it unable to be reused in future!</b>");
+					.hint("Send three golems from your bag to attack the enemy. <b>After attacking, the golem will fall apart and its core can shatter, leaving it unable to be reused in future!</b>");
 				if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 4) addButton(2, "Send T.Gol/5", combat.pspecials.sendTemporalGolem5)
-					.hint("Send five golems from your bag to attack enemy. <b>After attack golems will fall apart and they cores can shatter leaving it unable to be reused in future!</b>");
+					.hint("Send five golems from your bag to attack the enemy. <b>After attacking, the golem will fall apart and its core can shatter, leaving it unable to be reused in future!</b>");
 			}
 			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButton(3, "KamikazeProtocol", combat.pspecials.sendTemporalGolemKamikazeProtocol)
-				.hint("Send all temporal golems from your bag to attack enemy. <b>After attack golems will fall apart!</b>");
+				.hint("Send all temporal golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart!</b>");
         }
         if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 0) {
             if (monster.isFlying() && !player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-				addButtonDisabled(4, "Send P.Gol/1", "Your golems can't attack flying targets. (Only golems made by grand-master golem maker can do this)");
+				addButtonDisabled(4, "Send P.Gol/1", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
 				if (monster.plural) {
-					addButtonDisabled(5, "Send P.Gol/3", "Your golems can't attack flying targets. (Only golems made by grand-master golem maker can do this)");
-					addButtonDisabled(6, "Send P.Gol/5", "Your golems can't attack flying targets. (Only golems made by grand-master golem maker can do this)");
+					addButtonDisabled(5, "Send P.Gol/3", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
+					addButtonDisabled(6, "Send P.Gol/5", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
 				}
             }
 			else {
 				addButton(4, "Send P.Gol/1", combat.pspecials.sendPernamentGolem1)
-					.hint("Send one stone golem from your bag to attack enemy.");
+					.hint("Send one stone golem from your bag to attack the enemy.");
 				if (monster.plural) {
 					if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 2) addButton(5, "Send P.Gol/3", combat.pspecials.sendPernamentGolem3)
-						.hint("Send three stone golems from your bag to attack enemy.");
+						.hint("Send three stone golems from your bag to attack the enemy.");
 					if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 4) addButton(6, "Send P.Gol/5", combat.pspecials.sendPernamentGolem5)
-						.hint("Send five stone golems from your bag to attack enemy.");
+						.hint("Send five stone golems from your bag to attack the enemy.");
 				}
 			}
         }
         if (flags[kFLAGS.IMPROVED_PERNAMENT_GOLEMS_BAG] > 0) {
             addButton(7, "Send I.P.Gol/1", combat.pspecials.sendPernamentImprovedGolem1)
-				.hint("Send one improved stone golem from your bag to attack enemy.");
+				.hint("Send one improved stone golem from your bag to attack the enemy.");
         }
 		addButton(14, "Back", combat.combatMenu, false);
 	}
 	public function ElementalAspectsMenu():void {
 		menu();
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) {
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectAir)) addButtonDisabled(0, "Air E.Asp", "You already used air elemental aspect in this fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectAir)) addButtonDisabled(0, "Air E.Asp", "You've already used the air elemental aspect in this fight!");
 			else addButton(0, "Air E.Asp", combat.mspecials.ElementalAspectAir);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) {
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectEarth)) addButtonDisabled(1, "Earth E.Asp", "You already used earth elemental aspect in this fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectEarth)) addButtonDisabled(1, "Earth E.Asp", "You've already used the earth elemental aspect in this fight!");
 			else addButton(1, "Earth E.Asp", combat.mspecials.ElementalAspectEarth);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) {
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectFire)) addButtonDisabled(2, "Fire E.Asp", "You already used fire elemental aspect in this fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectFire)) addButtonDisabled(2, "Fire E.Asp", "You've already used the fire elemental aspect in this fight!");
 			else addButton(2, "Fire E.Asp", combat.mspecials.ElementalAspectFire);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) {
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectWater)) addButtonDisabled(3, "Water E.Asp", "You already used water elemental aspect in this fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectWater)) addButtonDisabled(3, "Water E.Asp", "You've already used the water elemental aspect in this fight!");
 			else addButton(3, "Water E.Asp", combat.mspecials.ElementalAspectWater);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) {
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectEther)) addButtonDisabled(4, "Ether E.Asp", "You already used ether elemental aspect in this fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectEther)) addButtonDisabled(4, "Ether E.Asp", "You've already used the ether elemental aspect in this fight!");
 			else addButton(4, "Ether E.Asp", combat.mspecials.ElementalAspectEther);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) {
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectWood)) addButtonDisabled(5, "Wood E.Asp", "You already used wood elemental aspect in this fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectWood)) addButtonDisabled(5, "Wood E.Asp", "You've already used the wood elemental aspect in this fight!");
 			else addButton(5, "Wood E.Asp", combat.mspecials.ElementalAspectWood);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) {
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectMetal)) addButtonDisabled(6, "Metal E.Asp", "You already used metal elemental aspect in this fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectMetal)) addButtonDisabled(6, "Metal E.Asp", "You've already used the metal elemental aspect in this fight!");
 			else addButton(6, "Metal E.Asp", combat.mspecials.ElementalAspectMetal);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) {
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectIce)) addButtonDisabled(7, "Ice E.Asp", "You already used ice elemental aspect in this fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectIce)) addButtonDisabled(7, "Ice E.Asp", "You've already used the ice elemental aspect in this fight!");
 			else addButton(7, "Ice E.Asp", combat.mspecials.ElementalAspectIce);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) {
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectLightning)) addButtonDisabled(8, "Lightning E.Asp", "You already used lightning elemental aspect in this fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectLightning)) addButtonDisabled(8, "Lightning E.Asp", "You've already used the lightning elemental aspect in this fight!");
 			else addButton(8, "Lightning E.Asp", combat.mspecials.ElementalAspectLightning);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) {
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectDarkness)) addButtonDisabled(9, "Darkness E.Asp", "You already used darkness elemental aspect in this fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectDarkness)) addButtonDisabled(9, "Darkness E.Asp", "You've already used the darkness elemental aspect in this fight!");
 			else addButton(9, "Darkness E.Asp", combat.mspecials.ElementalAspectDarkness);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) {
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectPoison)) addButtonDisabled(10, "Poison E.Asp", "You already used poison elemental aspect in this fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectPoison)) addButtonDisabled(10, "Poison E.Asp", "You've already used the poison elemental aspect in this fight!");
 			else addButton(10, "Poison E.Asp", combat.mspecials.ElementalAspectPoison);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) {
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectPurity)) addButtonDisabled(11, "Purity E.Asp", "You already used purity elemental aspect in this fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectPurity)) addButtonDisabled(11, "Purity E.Asp", "You've already used the purity elemental aspect in this fight!");
 			else addButton(11, "Purity E.Asp", combat.mspecials.ElementalAspectPurity);
 		}
 		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) {
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectCorruption)) addButtonDisabled(12, "Corruption E.Asp", "You already used corruption elemental aspect in this fight.");
+			if (player.hasStatusEffect(StatusEffects.CooldownEAspectCorruption)) addButtonDisabled(12, "Corruption E.Asp", "You've already used the corruption elemental aspect in this fight!");
 			else addButton(12, "Corruption E.Asp", combat.mspecials.ElementalAspectCorruption);
 		}
 		//?lust?
@@ -2901,7 +2901,7 @@ public class Combat extends BaseContent {
                 outputText("\n\n<i>“Ouch. Such a cowardly weapon,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your pathetic weapon?”</i>\n\n");
                 monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
             }
-            if (player.ammo == 0) outputText("\n\n<b>You're out of weapons to throw in this fight.</b>\n\n");
+            if (player.ammo == 0) outputText("\n\n<b>You're out of weapons to throw in this fight!</b>\n\n");
             enemyAI();
         }
         if (monster.HP <= monster.minHP()) {

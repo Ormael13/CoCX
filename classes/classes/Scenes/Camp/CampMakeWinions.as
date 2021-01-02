@@ -894,31 +894,31 @@ package classes.Scenes.Camp
 			addButton(0, "Ranks (1)", accessSummonElementalsMainMenu1).hint("Rank 0 to 9th Elder Rank");
 			addButton(1, "Ranks (2)", accessSummonElementalsMainMenu2).hint("5th Elder Rank to (Peak) Baron Rank");
 			addButton(2, "Ranks (3)", accessSummonElementalsMainMenu3).hint("(Low) Viscount Rank to (Peak) Viscount Rank");
-			addButton(13, "EvocationTome", evocationTome).hint("Description of various elementals powers.");
+			addButton(13, "EvocationTome", evocationTome).hint("Description of various elemental powers.");
 			addButton(14, "Back", playerMenu);
 		}
 		private function evocationTome():void {
 			clearOutput();
 			menu();
-			outputText("About which one elemental would you like to read about?\n\n");
-			addButton(0, "Air", evocationTomeAir).hint("Informations about Air Elemental.");
-			addButton(1, "Earth", evocationTomeEarth).hint("Informations about Earth Elemental.");
-			addButton(2, "Fire", evocationTomeFire).hint("Informations about Fire Elemental.");
-			addButton(3, "Water", evocationTomeWater).hint("Informations about Water Elemental.");
+			outputText("Which element would you like to read about?\n\n");
+			addButton(0, "Air", evocationTomeAir).hint(" Information about the Air Elements.");
+			addButton(1, "Earth", evocationTomeEarth).hint(" Information about the Earth Elements.");
+			addButton(2, "Fire", evocationTomeFire).hint(" Information about the Fire Elements.");
+			addButton(3, "Water", evocationTomeWater).hint(" Information about the Water Elements.");
 			if (player.findPerk(PerkLib.ElementsOfTheOrtodoxPath) >= 0) {
-				addButton(4, "Ether", evocationTomeEther).hint("Informations about Ether Elemental.");
-				addButton(5, "Wood", evocationTomeWood).hint("Informations about Wood Elemental.");
-				addButton(6, "Metal", evocationTomeMetal).hint("Informations about Metal Elemental.");
+				addButton(4, "Ether", evocationTomeEther).hint(" Information about the Ether Elements.");
+				addButton(5, "Wood", evocationTomeWood).hint(" Information about the Wood Elements.");
+				addButton(6, "Metal", evocationTomeMetal).hint(" Information about the Metal Elements.");
 			}
 			else {
-				addButtonDisabled(4, "Ether", "Req. Elements of the Ortodox Path perk.");
-				addButtonDisabled(5, "Wood", "Req. Elements of the Ortodox Path perk.");
-				addButtonDisabled(6, "Metal", "Req. Elements of the Ortodox Path perk.");
+				addButtonDisabled(4, "Ether", "Req. Elements of the orthodox Path perk.");
+				addButtonDisabled(5, "Wood", "Req. Elements of the orthodox Path perk.");
+				addButtonDisabled(6, "Metal", "Req. Elements of the orthodox Path perk.");
 			}
 			if (player.findPerk(PerkLib.ElementsOfMarethBasics) >= 0) {
-				addButton(7, "Ice", evocationTomeIce).hint("Informations about Ice Elemental.");
-				addButton(8, "Lightning", evocationTomeLightning).hint("Informations about Lightning Elemental.");
-				addButton(9, "Darkness", evocationTomeDarkness).hint("Informations about Darkness Elemental.");
+				addButton(7, "Ice", evocationTomeIce).hint(" Information about the Ice Elements.");
+				addButton(8, "Lightning", evocationTomeLightning).hint(" Information about the Lightning Elements.");
+				addButton(9, "Darkness", evocationTomeDarkness).hint(" Information about the Darkness Elements.");
 			}
 			else {
 				addButtonDisabled(7, "Ice", "Req. Elements of Mareth: Basics perk.");
@@ -926,113 +926,113 @@ package classes.Scenes.Camp
 				addButtonDisabled(9, "Darkness", "Req. Elements of Mareth: Basics perk.");
 			}
 			if (player.findPerk(PerkLib.ElementsOfMarethAdvanced) >= 0) {
-				addButton(10, "Poison", evocationTomePoison).hint("Informations about Poison Elemental.");
-				addButton(11, "Purity", evocationTomePurity).hint("Informations about Purity Elemental.");
-				addButton(12, "Corruption", evocationTomeCorruption).hint("Informations about Corruption Elemental.");
+				addButton(10, "Poison", evocationTomePoison).hint(" Information about the Poison Elements.");
+				addButton(11, "Purity", evocationTomePurity).hint(" Information about the Purity Elements.");
+				addButton(12, "Corruption", evocationTomeCorruption).hint(" Information about the Corruption Elements.");
 			}
 			else {
 				addButtonDisabled(10, "Poison", "Req. Elements of Mareth: Advanced perk.");
 				addButtonDisabled(11, "Purity", "Req. Elements of Mareth: Advanced perk.");
 				addButtonDisabled(12, "Corruption", "Req. Elements of Mareth: Advanced perk.");
 			}
-			addButtonDisabled(13, "???", "Not so Soon.");
+			addButtonDisabled(13, "???", "You need to take some time to understand what you've learned. Come back later."); //Silly mode tooltip possible? "This isn't a cram school, stop forcing books into your head!"
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function evocationTomeAir():void {
 			clearOutput();
 			outputText("<b>Air Elemental</b>\n\n");
-			outputText("-When attacking have increased critical damage chance by 10%.\n");
-			outputText("-When attacking have increased critical damage multiplied from 150% to 175%.\n");
-			outputText("-When attacking ignoring enemy damage reduction.\n");
-			outputText("-M. Special: Creating Wind Wall that deflect incoming projectiles for few turns. Duration depend on elemental rank.\n");
+			outputText("-When attacking, it has an increased critical damage chance by 10%.\n");
+			outputText("-When attacking, it has an increased critical damage multiplied from 150% to 175%.\n");
+			outputText("-When attacking, it will ignore enemy damage reduction.\n");
+			outputText("-M. Special: Creates a Wind Wall that deflects incoming projectiles for few turns. Duration depends on elemental rank.\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeEarth():void {
 			clearOutput();
 			outputText("<b>Earth Elemental</b>\n\n");
-			outputText("-When attacking have increased damage by 150%.\n");
-			outputText("-M. Special: Create Earth armor around PC increasing armor and magic resistance for few turns. Duration depend on elemental rank.\n");
+			outputText("-When attacking, it has an increased damage by 150%.\n");
+			outputText("-M. Special: Creates an Earth armor around PC, increasing armor and magic resistance for a few turns. Duration depends on elemental rank.\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeFire():void {
 			clearOutput();
 			outputText("<b>Fire Elemental</b>\n\n");
-			outputText("-When attacking deal damage as Fire damage type.\n");
+			outputText("-When attacking, it will deal Fire type damage.\n");
 			outputText("-M. Special: Stronger version of fire attributed attack.\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeWater():void {
 			clearOutput();
 			outputText("<b>Water Elemental</b>\n\n");
-			outputText("-When attacking have increased critical damage chance by 10%.\n");
-			outputText("-When attacking deal damage as Ice damage type.\n");
-			outputText("-M. Special: Healing PC.\n");
+			outputText("-When attacking, it has an increased critical damage chance by 10%.\n");
+			outputText("-When attacking, it will deal water type damage.\n"); //Water elemental deals ice type damage?
+			outputText("-M. Special: Heals PC.\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeEther():void {
 			clearOutput();
 			outputText("<b>Ether Elemental</b>\n\n");
-			outputText("-When attacking have increased critical damage chance by 10%.\n");
-			outputText("-When attacking have increased critical damage multiplied from 150% to 200%.\n");
-			outputText("-When attacking ignoring enemy damage reduction.\n");
-			outputText("-M. Special: Dealing damage to enemy with increased damage bonus if enemy is weak to any of four major elements.\n");
+			outputText("-When attacking, it has an increased critical damage chance by 10%.\n");
+			outputText("-When attacking, it has an increased critical damage multiplied from 150% to 200%.\n");
+			outputText("-When attacking, it will ignore enemy damage reduction.\n");
+			outputText("-M. Special: Deals increased damage as a bonus to enemy if enemy is weak to any of the four major elements.\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeWood():void {
 			clearOutput();
 			outputText("<b>Wood Elemental</b>\n\n");
-			outputText("-When attacking have increased damage by 150%.\n");
-			outputText("-M. Special: PC (Minor) Healing and small increase to armor / magic resistance for a few turns. Duration depend on elemental rank.\n");
+			outputText("-When attacking, it has an increased damage by 150%.\n");
+			outputText("-M. Special: PC (Minor) Healing and small increase to armor / magic resistance for a few turns. Duration depends on elemental rank.\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeMetal():void {
 			clearOutput();
 			outputText("<b>Metal Elemental</b>\n\n");
-			outputText("-When attacking have increased critical damage chance by 10%.\n");
-			outputText("-When attacking have increased critical damage multiplied from 150% to 175%.\n");
-			outputText("-When attacking have increased damage by 50%.\n");
-			outputText("-M. Special: Increasing PC unarmed damage for a few turns. Duration depend on elemental rank.\n");
+			outputText("-When attacking, it has an increased critical damage chance by 10%.\n");
+			outputText("-When attacking, it has an increased critical damage multiplied from 150% to 175%.\n");
+			outputText("-When attacking, it has an increased damage by 50%.\n");
+			outputText("-M. Special: Increases PC unarmed damage for a few turns. Duration depends on elemental rank.\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeIce():void {
 			clearOutput();
 			outputText("<b>Ice Elemental</b>\n\n");
-			outputText("-When attacking deal damage as Ice damage type.\n");
+			outputText("-When attacking, it will deal Ice type damage.\n");
 			outputText("-M. Special: Stronger version of ice attributed attack.\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeLightning():void {
 			clearOutput();
 			outputText("<b>Lightning Elemental</b>\n\n");
-			outputText("-When attacking deal damage as Lightning damage type.\n");
+			outputText("-When attacking, it will deal Lightning type damage.\n");
 			outputText("-M. Special: Stronger version of lightning attributed attack.\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeDarkness():void {
 			clearOutput();
 			outputText("<b>Darkness Elemental</b>\n\n");
-			outputText("-When attacking deal damage as Darkness damage type.\n");
+			outputText("-When attacking, it will deal Darkness type damage.\n");
 			outputText("-M. Special: Stronger version of darkness attributed attack.\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomePoison():void {
 			clearOutput();
 			outputText("<b>Poison Elemental</b>\n\n");
-			outputText("-When attacking deal damage as Poison damage type.\n");
+			outputText("-When attacking, it will deal Poison type damage.\n");
 			outputText("-M. Special: Stronger version of poison attributed attack.\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomePurity():void {
 			clearOutput();
 			outputText("<b>Purity Elemental</b>\n\n");
-			outputText("-When attacking deal increased damage based on enemy corruption. The higher corruption the higher bonus to damage.\n");
+			outputText("-When attacking, it will deal increased damage based on enemy corruption. The higher the corruption the higher bonus to damage.\n");
 			outputText("-M. Special: Stronger version of purity attributed attack.\n");
 			doNext(evocationTome);
 		}
 		private function evocationTomeCorruption():void {
 			clearOutput();
 			outputText("<b>Corruption Elemental</b>\n\n");
-			outputText("-When attacking deal increased damage based on enemy corruption. The lower corruption the higher bonus to damage.\n");
+			outputText("-When attacking, it will deal increased damage based on enemy corruption. The lower the corruption the higher bonus to damage.\n");
 			outputText("-M. Special: Stronger version of corruption attributed attack.\n");
 			doNext(evocationTome);
 		}
