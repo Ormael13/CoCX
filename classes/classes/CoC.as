@@ -247,8 +247,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8o4";
-			version = ver + " (<b>Wendigo TF, Tundra area and other fixes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8p";
+			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

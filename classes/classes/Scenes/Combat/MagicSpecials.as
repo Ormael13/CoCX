@@ -575,85 +575,6 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("Your mana is too low to toss slime bolt.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) {
-			bd = buttons.add("Air E.Asp", ElementalAspectAir);
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectAir)) {
-				bd.disable("You already used air elemental aspect in this fight.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) {
-			bd = buttons.add("Earth E.Asp", ElementalAspectEarth);
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectEarth)) {
-				bd.disable("You already used earth elemental aspect in this fight.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) {
-			bd = buttons.add("Fire E.Asp", ElementalAspectFire);
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectFire)) {
-				bd.disable("You already used fire elemental aspect in this fight.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) {
-			bd = buttons.add("Water E.Asp", ElementalAspectWater);
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectWater)) {
-				bd.disable("You already used water elemental aspect in this fight.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) {
-			bd = buttons.add("Ether E.Asp", ElementalAspectEther);
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectEther)) {
-				bd.disable("You already used ether elemental aspect in this fight.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) {
-			bd = buttons.add("Wood E.Asp", ElementalAspectWood);
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectWood)) {
-				bd.disable("You already used wood elemental aspect in this fight.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) {
-			bd = buttons.add("Metal E.Asp", ElementalAspectMetal);
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectMetal)) {
-				bd.disable("You already used metal elemental aspect in this fight.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) {
-			bd = buttons.add("Ice E.Asp", ElementalAspectIce);
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectIce)) {
-				bd.disable("You already used ice elemental aspect in this fight.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) {
-			bd = buttons.add("Lightning E.Asp", ElementalAspectLightning);
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectLightning)) {
-				bd.disable("You already used lightning elemental aspect in this fight.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) {
-			bd = buttons.add("Darkness E.Asp", ElementalAspectDarkness);
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectDarkness)) {
-				bd.disable("You already used darkness elemental aspect in this fight.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) {
-			bd = buttons.add("Poison E.Asp", ElementalAspectPoison);
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectPoison)) {
-				bd.disable("You already used poison elemental aspect in this fight.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) {
-			bd = buttons.add("Purity E.Asp", ElementalAspectPurity);
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectPurity)) {
-				bd.disable("You already used purity elemental aspect in this fight.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) {
-			bd = buttons.add("Corruption E.Asp", ElementalAspectCorruption);
-			if (player.hasStatusEffect(StatusEffects.CooldownEAspectCorruption)) {
-				bd.disable("You already used corruption elemental aspect in this fight.");
-			}
-		}
-		//?lust?
 		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) buttons.add("Shielding", shieldingSpell);
 		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) buttons.add("Immolation", immolationSpell);
 		if (player.hasStatusEffect(StatusEffects.IcePrisonSpell)) buttons.add("Ice Prison", iceprisonSpell);
@@ -4842,6 +4763,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 29) windwallduration += 3;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 30) windwallduration += 3;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsAir) >= 31) windwallduration += 3;
+		windwallduration *= 2;
 		player.createStatusEffect(StatusEffects.WindWall, 0, windwallduration, 0, 0);
 		outputText("You call on your elemental projecting a air wall between you and " + monster.a + monster.short + " to deflect incoming projectiles.\n\n");
 		enemyAI();
@@ -4851,8 +4773,8 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		player.createStatusEffect(StatusEffects.CooldownEAspectEarth, 0, 0, 0, 0);
 		var stoneskinbonus:Number = 0;
-		stoneskinbonus += player.inte * 0.1;
-		stoneskinbonus += player.wis * 0.1;
+		stoneskinbonus += player.inte * 0.5;
+		stoneskinbonus += player.wis * 0.5;
 		stoneskinbonus = Math.round(stoneskinbonus);
 		var stoneskinduration:Number = 0;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEarth) >= 1) stoneskinduration += 1;
@@ -4896,8 +4818,8 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		player.createStatusEffect(StatusEffects.CooldownEAspectFire, 0, 0, 0, 0);
 		var damage:Number = 0;
-		var multiInt:Number = 0.1;
-		var multiWis:Number = 0.1;
+		var multiInt:Number = 0.5;
+		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsFire) >= 2) {
 			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 1);
 			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsFire) - 1);
@@ -4959,8 +4881,8 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		player.createStatusEffect(StatusEffects.CooldownEAspectWater, 0, 0, 0, 0);
 		var temp:Number = 0;
-		var multiInt:Number = 0.1;
-		var multiWis:Number = 0.1;
+		var multiInt:Number = 0.5;
+		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWater) >= 2) {
 			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 1);
 			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsWater) - 1);
@@ -5007,8 +4929,8 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		player.createStatusEffect(StatusEffects.CooldownEAspectEther, 0, 0, 0, 0);
 		var damage:Number = 0;
-		var multiInt:Number = 0.1;
-		var multiWis:Number = 0.1;
+		var multiInt:Number = 0.5;
+		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsEther) >= 2) {
 			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 1);
 			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsEther) - 1);
@@ -5073,8 +4995,8 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		player.createStatusEffect(StatusEffects.CooldownEAspectWood, 0, 0, 0, 0);
 		var barkskinbonus:Number = 0;
-		barkskinbonus += player.inte * 0.05;
-		barkskinbonus += player.wis * 0.05;
+		barkskinbonus += player.inte * 0.25;
+		barkskinbonus += player.wis * 0.25;
 		barkskinbonus = Math.round(barkskinbonus);
 		var barkskinduration:Number = 0;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 1) barkskinduration += 1;
@@ -5110,8 +5032,8 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 31) barkskinduration += 3;
 		player.createStatusEffect(StatusEffects.BarkSkin, barkskinbonus, barkskinduration, 0, 0);
 		var temp:Number = 0;
-		var multiInt:Number = 0.05;
-		var multiWis:Number = 0.05;
+		var multiInt:Number = 0.25;
+		var multiWis:Number = 0.25;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsWood) >= 2) {
 			multiInt += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 1);
 			multiWis += 0.05 * (player.statusEffectv2(StatusEffects.SummonedElementalsWood) - 1);
@@ -5157,8 +5079,8 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		player.createStatusEffect(StatusEffects.CooldownEAspectMetal, 0, 0, 0, 0);
 		var metalskinbonus:Number = 0;
-		metalskinbonus += player.inte * 0.1;
-		metalskinbonus += player.wis * 0.1;
+		metalskinbonus += player.inte * 0.5;
+		metalskinbonus += player.wis * 0.5;
 		metalskinbonus = Math.round(metalskinbonus);
 		var metalskinduration:Number = 0;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsMetal) >= 1) metalskinduration += 1;
@@ -5202,8 +5124,8 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		player.createStatusEffect(StatusEffects.CooldownEAspectIce, 0, 0, 0, 0);
 		var damage:Number = 0;
-		var multiInt:Number = 0.1;
-		var multiWis:Number = 0.1;
+		var multiInt:Number = 0.5;
+		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsIce) >= 2) {
 			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 1);
 			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsIce) - 1);
@@ -5266,8 +5188,8 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		player.createStatusEffect(StatusEffects.CooldownEAspectLightning, 0, 0, 0, 0);
 		var damage:Number = 0;
-		var multiInt:Number = 0.1;
-		var multiWis:Number = 0.1;
+		var multiInt:Number = 0.5;
+		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) >= 2) {
 			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 1);
 			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsLightning) - 1);
@@ -5329,8 +5251,8 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		player.createStatusEffect(StatusEffects.CooldownEAspectDarkness, 0, 0, 0, 0);
 		var damage:Number = 0;
-		var multiInt:Number = 0.1;
-		var multiWis:Number = 0.1;
+		var multiInt:Number = 0.5;
+		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) >= 2) {
 			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 1);
 			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsDarkness) - 1);
@@ -5392,8 +5314,8 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		player.createStatusEffect(StatusEffects.CooldownEAspectPoison, 0, 0, 0, 0);
 		var damage:Number = 0;
-		var multiInt:Number = 0.1;
-		var multiWis:Number = 0.1;
+		var multiInt:Number = 0.5;
+		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 2) {
 			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 1);
 			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 1);
@@ -5456,8 +5378,8 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		player.createStatusEffect(StatusEffects.CooldownEAspectPurity, 0, 0, 0, 0);
 		var damage:Number = 0;
-		var multiInt:Number = 0.1;
-		var multiWis:Number = 0.1;
+		var multiInt:Number = 0.5;
+		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) >= 2) {
 			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 1);
 			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPurity) - 1);
@@ -5520,8 +5442,8 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		player.createStatusEffect(StatusEffects.CooldownEAspectCorruption, 0, 0, 0, 0);
 		var damage:Number = 0;
-		var multiInt:Number = 0.1;
-		var multiWis:Number = 0.1;
+		var multiInt:Number = 0.5;
+		var multiWis:Number = 0.5;
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) >= 2) {
 			multiInt += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 1);
 			multiWis += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementalsCorruption) - 1);
