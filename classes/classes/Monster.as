@@ -963,6 +963,9 @@ import flash.utils.getQualifiedClassName;
 		public function calcDamage():int{
 			return player.reducePhysDamage(eBaseDamage());
 		}
+		public function calcFireDamage():int{
+			return player.reduceFireDamage(eBaseDamage());
+		}
 
 		public function totalXP(playerLevel:Number=-1):Number
 		{
@@ -1414,8 +1417,14 @@ import flash.utils.getQualifiedClassName;
 		public function eOneAttack():int
 		{
 			//Determine damage - str modified by enemy toughness!
-			var damage:int = calcDamage();
-			if (damage > 0) damage = player.takePhysDamage(damage);
+			if (hasStatusEffect(StatusEffects.FlameBlade)) {
+				var damageF:int = calcFireDamage();
+				if (damageF > 0) player.takeFireDamage(damageF);
+			}
+			else {
+				var damage:int = calcDamage();
+				if (damage > 0) player.takePhysDamage(damage);
+			}
 			return damage;
 		}
 
@@ -2917,6 +2926,15 @@ import flash.utils.getQualifiedClassName;
 					outputText("<b>" + capitalA + short + " ice armor has thawed out.</b>\n\n");
 				}
 				else addStatusValue(StatusEffects.IceArmor,1,-1);
+			}
+			
+			//Flame Blade
+			if (hasStatusEffect(StatusEffects.FlameBlade)) {
+				if (statusEffectv1(StatusEffects.FlameBlade) <= 0) {
+					removeStatusEffect(StatusEffects.FlameBlade);
+					outputText("<b>" + capitalA + short + "'s Flame Blade effect wore off.</b>\n\n");
+				}
+				else addStatusValue(StatusEffects.FlameBlade,1,-1);
 			}
 
 			//Consuming darkness

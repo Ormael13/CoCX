@@ -104,7 +104,7 @@ package classes.Scenes
 			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			outputText("-Added Envocation Tome option to elementals summonig menu - it would allow to read informations about elementals that PC can currently summon. So to give some idea which elemental would be most useful to be summoned in current situation PC is.\n");
 			outputText("-Moved Elementals specials and Golems attack options into 2 menus in Other submenu in combat menu.\n");
-			outputText("-\n");
+			outputText("-New range weapon/tome (by Ormael): Golemancy Evocation Manuscript - buyable at golemancer shop in He'Xin'Dao. Cost 200 gems. Increase golems damage by 50% of base value.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

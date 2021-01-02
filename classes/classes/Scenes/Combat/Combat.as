@@ -7083,7 +7083,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.FlameBlade)) {
             if (player.statusEffectv1(StatusEffects.FlameBlade) <= 0) {
                 player.removeStatusEffect(StatusEffects.FlameBlade);
-                outputText("<b>Blazing battle spirit effect wore off!</b>\n\n");
+                outputText("<b>Flame Blade effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.FlameBlade, 1, -1);
         }
         if (player.hasStatusEffect(StatusEffects.Maleficium)) {
