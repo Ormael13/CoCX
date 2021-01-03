@@ -18,7 +18,7 @@ public class Asuka extends Monster
 		private function asukaAttack1():void {
 			wrath -= 30;
 			var damage:Number = eBaseStrengthDamage() * 2;
-			outputText(capitalA + short + " swing her weapon with all her strenght and slash you. ");
+			outputText(capitalA + short + " swings her weapon with all her strength and slashes you. ");
 			if (damage > 0) {
 				if (hasStatusEffect(StatusEffects.FlameBlade)) {
 					damage *= 1.1;
@@ -93,7 +93,7 @@ public class Asuka extends Monster
 			outputText(" ");
 			if (hasStatusEffect(StatusEffects.FlameBlade)) player.takeFireDamage(damage, true);
 			else player.takePhysDamage(damage, true);
-			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			if (crit) outputText(" <b>*Critical Hit!*</b>");
 		}
 		
 		private function asukaFlamesOfLove():void {
@@ -101,20 +101,20 @@ public class Asuka extends Monster
 			createStatusEffect(StatusEffects.AbilityCooldown1, 4, 0, 0, 0);
 			this.lust -= fireDMG;
 			fireDMG *= 2;
-			outputText(capitalA + short + " start concentrate on the lust flowing in her body, her veins while imaging a joy of sharing flames of love with you. Shortly after that lust starts to gather around her hands getting hotter and hotter till it envelop her hands in flames.\n\n");
+			outputText(capitalA + short + " starts concentrating on the lust flowing in her body, her veins, while imaging the joy of sharing her flames of love with you. Shortly after that, her lust starts to gather around her hands, getting hotter and hotter till it envelops her hands in flames.\n\n");
 			outputText("And with almost orgasmic joy, she sends a wave of flames toward you while mumbling about 'sharing the flames of love'. ");
 			player.takeFireDamage(fireDMG, true);
 		}
 		
 		private function asukaBerserk():void {
 			wrath -= 50;
-			outputText(capitalA + short + " roar and unleash her lustful fury in order to destroy you!\n\n");
+			outputText(capitalA + short + " roars and unleashes her lustful fury in order to destroy you!\n\n");
 			this.weaponAttack += (40 + (40 * (1 + player.newGamePlusMod)));
 			createStatusEffect(StatusEffects.Lustzerking,10,0,0,0);
 		}
 		
 		private function asukaFlameBlade():void {
-			outputText(capitalA + short + " run her tail across weapon igniting it with raging flames.\n\n");
+			outputText(capitalA + short + " runs her tail across her weapon igniting it with raging flames.\n\n");
 			createStatusEffect(StatusEffects.FlameBlade,10,0,0,0);
 		}
 		
@@ -162,7 +162,7 @@ public class Asuka extends Monster
 			str += "You are fighting a salamander – a little over six foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her auburn hair accents her deep blue eyes, while her body covers red bodysuit.  Her glaive is raised to her side, looking for any hole in your guard.";
 			if (hasStatusEffect(StatusEffects.Lustzerking))
 			{
-				str += "\n\n<b>Looking at her posture and gaze indicates that she's currently under effect of some sort of berserking state.</b>";
+				str += "\n\n<b>Looking at her posture and gaze indicates that she's currently under the effect of some sort of berserking state.</b>";
 			}
 			return str;
 		}//po dorośnieciu nosi inne armory w czasie walki: pure - no change of armor beside making it look more durable so still red bodysuit,
