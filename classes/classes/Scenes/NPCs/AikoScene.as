@@ -22,7 +22,7 @@ import classes.internals.*;
 		}
 	
 	//The source document for this encounter can be found at:
-	//
+	//https://docs.google.com/document/d/1YMlyGPrf_Ejj_46-P-b945jZYX9oONkTS877mvBGX90/edit
 
 	/*FLAGS RELATING TO AIKO AND YAMATA*/
 	//public static const AIKO_TIMES_MET:int 			= 2353	//1=first, 2=second 3=third, 4+=fourth
@@ -424,7 +424,7 @@ private function aikoAggroGreeting():void {
 	outputText("You ask her if that was a threat, stowing the star sphere and readying your [weapon]. You’re certain that she’s trying to trick you somehow, and you won’t stand for it!\n\n"
 	+"<i>“Heheh… well… you know, maybe I was hasty. Perhaps we could strike a deal? What do you say? My star sphere in exchange for anything your heart desires. Riches, power… I could help take the edge off things, if you know what I mean,”</i> she says coyly, wiggling her hips seductively.\n\n");
 	if (player.kitsuneScore() >= 6 && player.tailType == 13) {
-		outputText("Kitsunes, as you are well aware, are a crafty bunch, but perhaps something she is offering in exchange is worth her star??");
+		outputText("Kitsunes, as you are well aware, are a crafty bunch, but perhaps something she is offering in exchange is worth her star?");
 	} else {
 		outputText("Whatever this star sphere is for, it seems like it is very important to her. Maybe you should reconsider—you could probably get her to do anything… but it might be a trick. What will you ask for?");
 	}
@@ -447,7 +447,7 @@ private function aikoPeaceGreeting():void {
 	+"You give her a hesitant grin, laughing along awkwardly. Just your luck—even if she isn’t overly aggressive, you can’t help but feel that Aiko has a few screws loose upstairs. Then again, perhaps this is normal for her?\n\n"
 	+"<i>“Okay, listen up, I’ll tell you what. I like you, so I’m willing to make a deal with you. Besides, it was fun messing with you, so… What’ll it take to get my star sphere back, hm? Riches? Power? Maybe a little… release?”</i> she says coyly, turning around and slapping her own plump, juicy rear playfully, revealing two spiral-shaped tattoos on her buttocks.\n\n");
 	if (player.kitsuneScore() >= 6 && player.tailType == 13) {
-		outputText("Kitsunes, as you are well aware, are a crafty bunch, but perhaps something she is offering in exchange is worth her star??");
+		outputText("Kitsunes, as you are well aware, are a crafty bunch, but perhaps something she is offering in exchange is worth her star?");
 	} else {
 		outputText("Whatever this star sphere is for, it seems like it is very important to her. Maybe you should reconsider—you could probably get her to do anything… but it might be a trick. What will you ask for?");
 	}
@@ -1011,7 +1011,7 @@ private function  talkAiko():void {
 	+(player.kitsuneScore() > 0? "<i>“My star sphere? You are a kitsune yourself, shouldn't you know how our spirit vessel works?”</i> she says, widening her eyes. You tell her that you forgot how it works. She giggles a bit and then she playfully and lightly hits your forehead like she's knocking on a door. <i>“Forgetful, aren't we? hehehe. It's very important for us, let's see, where should I begin?\n\n":
 	"<i>“Oh, my star sphere... [if (flags[kFLAGS.AIKO_TALK_AIKO]>0)I thought I explained that already? ]"
 	+"Every kitsune has one,”</i> she explains. ")
-	+(player.kitsuneScore() >0?	"Here's the basics of how it works.\n\n":"<i>“It’s difficult to explain to a non-kitsune, but... Let me see if this works.\n\n")
+	+(player.kitsuneScore() >0?	"Here's the basics of how it works. ":"<i>“It’s difficult to explain to a non-kitsune, but... Let me see if this works. ")
 	+"The star sphere is like a... spirit vessel. If someone takes it from us, our link to it slowly fades away until...”</i> She shivers, pausing for a moment. <i>“Let me put it this way. The star sphere contains a part of our soul... losing our link to it is... traumatic.”</i>\n\n"
 	+"She doesn’t seem to be too keen on elaborating, but you grimace, imagining the implications. You decide to change the subject, bringing up her tails. She certainly has a lot of them; more than you’ve seen on the other kitsune you’ve encountered.\n\n"
 	+"<i>“[if (flags[kFLAGS.AIKO_TALK_AIKO]>0)Yeah, did you forget? ]That’s because I’m [if (flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)an eight|a seven]-tails.”</i> she explains, smiling as she runs a hand along the length of one of her tails. <i>“We’re born with just one, but it splits as we grow older and our magic and wisdom gets stronger. The number of tails we have is something of a status symbol. My seventh tail came in just a little while after the demons showed up[if (flags[kFLAGS.AIKO_BOSS_COMPLETE] >0), and my last one after we beat my sister, as you well know].”</i>\n\n" //removed the if since it didn't make sense.
@@ -1188,9 +1188,11 @@ public function aikoConsSex():void {
 	if (player.hasVagina())
 		addButton(3, "Get Licked", aikoSexCunni).hint("Let her explore the soft folds of your pussy with her tongue.");
 	if (flags[kFLAGS.AIKO_AFFECTION]>= 75 && player.hasCock())
-		addButton(4, "Tailjob", aikoSexTailjob).hint("");
+		addButton(4, "Tailjob", aikoSexTailjob).hint("Ask her to surround your cock with her luxurious tails");
+	if (flags[kFLAGS.AIKO_AFFECTION]>= 75 && player.kitsuneScore > 6 && player.tailType == 13)
+		addButton(5,"Kitsune Tailjob", aikoSexKitsuneTailjob).hint(silly()? "Kitsune tailplay! Floofing all the floofs!": "Kitsune tailplay, in the way only Kitsunes can understand.");
 	if (flags[kFLAGS.AIKO_CORRUPTION] > 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0) {
-		addButton(5, "Submit", submitToAiko).hint("Submit to Aiko and see what she does with you");
+		addButton(9, "Submit", submitToAiko).hint("Submit to Aiko and see what she does with you");
 	}
 	addButton(14, "Leave", leave).hint("Leave the clearing without touching her.");
 }
@@ -1689,7 +1691,31 @@ private function aikoSexTailjob():void {
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
-
+private function aikoSexKitsuneTailjob():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_aiko_16bit)
+	if (flags[kFLAGS.AIKO_FIRST_CHOICE] == 6) {
+		outputText("You recall your first encounter, and your foxy girl's reaction to getting her tails fluffed, which sparks an idea in your mischievous head. ")
+	} else {
+		outputText("An idea strikes you out of the blue, and you thank Taoth for his, frankly odd, ideas. ")
+	}
+	outputText("You ask her to come sit besides you, [if(player.tailCount==9)which she promptly does, ] and turn around. Curiosity gets the better of her, so she does so, albeit slowly, with furtive glances back towards you. You tell her to calm down, and that she will enjoy this as much as you.\n\n"
+			+"With her back and tails facing towards you, you similarly turn around and face away from her, your tails getting restless from the plan that you're hatching. Slowly, you caress one of her tails with your own, elicting a small moan from the other girl.\n\n"
+			+"Slowly, you tangle your bundle of tails with hers, rubbing against each of them in a slow, sensual, almost caressing manner. You turn your head to look at the other kitsune, only to find her slowly hunching over, and the back of her neck slowly getting redder."
+			+"As your tails continue to get intimate with each other, you can start to feel a heat developing in your gut. It isn't quite the same feeling as going into "+player.mf("rut","heat")+", but it certainly feels just as intense. Slowly, the sensation rises up your spine, until it takes complete and sudden hold of your slowly melting brain, [if(flags[kFLAGS.AIKO_FIRST_CHOICE] == 6)and you understand why she reacted the way she did the first time].\n\n"
+			+"It takes over your thoughts rapidly, forcing you to think of nothing else but how good it feels, the way each individual strand of fur caresses the other, and you let your tongue hang out, too enraptured by the sensations to think about keeping it in your mouth. Behind you, Aiko had collapsed onto her side, curling up into a fetal position, her tails continuing to fluff-fight against your own set, while the occasional drip-drip-dripping sound could be heard from her mouth. Or was it her pussy? Doesn't matter, you think, as your own mouth starts drooling.\n\n"
+			+"As you continue to sway, you are suddenly met with the loss of feeling from your tails, but you are still too consumed by the effects to react in time to Aiko's sudden attack from behind, finally pushing you onto the floor. She smiles, with her body leaking lust, and leans in to give you a smooch on the lips, while her and your tails rove around, searching for their lost partners. \n\n" // if corruption is high, I want to replace the smooch line with "and bites you on the neck, slightly drawing blood, "
+			+"Slowly, they resume their ministrations, [if(player.tailCount==9)the extra tail [if(flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)s ]] twirling around, gliding across her soft fur... wait, since when did your clothes get remo... ohhh that feels warm, as your extra tail [if(flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)s ] suddenly find her box, and plunge into her, elicting a shriek and then a long moan from your partner as your floof[if(flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)s ] start to work their magic, spearing her open while only stretching her out just enough to contain it. \n\n"
+			+"Your lust addled mind continues to shut down, going to basic mode when you suddenly feel something around your tail[if(flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)s ], and are shocked to realise that you reached the entrance of her womb, lightly tickling the cervix causes starts to burst out of her eyes, and the ghostly flames surrounding the place to flare up, glowing immensely brighter than they were before. You are further spooked when the same flames start to envelop your tails, both cool to the touch while fanning your own flames even higher.\n\n"
+			+"Aiko grins, and with noticable effort (and a lot of whimpering in between,) says <i>Heh... This is a trick that only we..hahh.. kitsunes can do..ahh!.. when we are engaging in such lewd.. gahhh.. acts! </i> she shouts, fluids gushing out of her box, soaking your lower half. You weren't going to last much longer, the flames doing a number on your sex-charged nerves, when she pulls one final trick,"+player.mf("and wraps your neglected but rock solid shaft with her foxfire inside and out","and shunts a few of her foxfires up your drooling cunt")+ ", pushing you over the edge and inducing one of the largest climaxes you've ever had.\n\n"
+			+"Coming down from the high takes a while, and you both cuddle each other, arms and tails surround and covering you both like a makeshift blanket on the cool ground. When you wake up, you see that she is still slightly out of it, and attribute your slightly better state to your extra tail [if(flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)s ]. As you leave, she quietly whispers behind you <i>[if (flags[kFLAGS.AIKO_FIRST_CHOICE] == 6)My first time] ...that...was something...elszzzz </i> as she falls asleep once more, utterly drained from the exitement, tails limply splayed.");
+	flags[kFLAGS.AIKO_SEXED]++;
+	flags[kFLAGS.AIKO_AFFECTION] += 5;
+	if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0 && flags[kFLAGS.AIKO_CORRUPTION] >= 50 && player.cor <= flags[kFLAGS.AIKO_CORRUPTION]) {
+		player.cor += 3;
+		flags[kFLAGS.AIKO_CORRUPTION] -= 3;
+	}
+}
 private function submitToAiko():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_aiko);
