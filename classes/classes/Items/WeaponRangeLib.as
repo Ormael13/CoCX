@@ -75,6 +75,8 @@ package classes.Items
 		public const WILDHUN:WildHunt = new WildHunt();
 		
 		//Tomes
+		public const E_TOME_:WeaponRange = new WeaponRange("E. Tome", "E. Tome", "Elementalist’s Tome", "an Elementalist's Tome", "nothing", 0, 500, "This ornate navy blue book is inscribed filled with magical glyphs and complicated diagrams, concealed within a detailed treatise on the nature of the world. The magic within this tome allows you to strenghen you connection with summoned elementals. (+50% to elementals damage)", "Tome");
+		public const G_E_MAN:WeaponRange = new WeaponRange("G.E.Book", "G.E.Book", "Golemancy Evocation Manuscript", "A bundle of pages haphazardly bound together within a worn-out leather book.", "nothing", 0, 200, "This black tome is filled with golemancy knowledge. The magic within this tome allows you to control your manufactured golems with a gfreater control and precision. (+50% to golems damage)", "Tome");
 		public const I_TOME_:InquisitorsTome = new InquisitorsTome();
 		public const SSKETCH:SagesSketchbook = new SagesSketchbook();
 		

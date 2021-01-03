@@ -1625,7 +1625,7 @@ use namespace CoC;
 				addButton(7, "HB Mech", AddHBMech).hint("Add 1 Howling Banshee Mech for testing purposes.");
 				addButton(8, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
 				addButton(9, "GiantSlayerMech", AddGiantSlayerMech).hint("Add 1 Giant Slayer Mech for testing purposes.");
-				//10
+				addButton(10, "E. Tome", AddTheElementalistsTome).hint("Add 1 Elementalist’s Tome.");
 				addButton(11, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
 				addButton(12, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 				addButton(13, "-2-", EquipmentMenu, page + 1);
@@ -1804,6 +1804,10 @@ use namespace CoC;
 		public function AddGiantSlayerMech():void {
 			outputText("\n\n<b>(Gained 1 Giant Slayer Mech!)</b>\n\n");
 			inventory.takeItem(vehicles.GS_MECH, curry(EquipmentMenu, 1));
+		}
+		public function AddTheElementalistsTome():void {
+			outputText("\n\n<b>(Gained 1 Elementalist’s Tome!)</b>\n\n");
+			inventory.takeItem(weaponsrange.E_TOME_, curry(EquipmentMenu, 1));
 		}
 		public function AddTheEvelyn():void {
 			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");
