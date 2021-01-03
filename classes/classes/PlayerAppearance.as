@@ -37,6 +37,7 @@ public class PlayerAppearance extends BaseContent {
 		describeBeard();
 		describeTongue();
 		describeHorns();
+		describeVisage();
 		outputText("[pg]");
 		describeBodyShape();
 		describeWings();
@@ -3357,6 +3358,12 @@ public class PlayerAppearance extends BaseContent {
 			outputText("It's covered by a blue cock-sock that seems to glow.  Just wearing it makes you feel like you can cast spells more effectively.");
 
 		else outputText("<b>Yo, this is an error.</b>");
+	}
+
+	public function describeVisage():void{ //expressions!
+		if (player.findPerk(PerkLib.DarkenedKitsune) > 0) {
+			outputText("\nThe corruption has turned you into a inhuman being; With your head slightly tilted and ears twitching every so often, it would almost be cute if not for your gesugao expression.");
+		}
 	}
 }
 }

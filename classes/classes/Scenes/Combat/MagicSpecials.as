@@ -165,7 +165,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.CooldownIllusion)) {
 				bd.disable("You need more time before you can use Illusion again.");
 			} else if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
-				bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
+				bd.disable("You cannot focus to use this ability while you're having so much difficulty breathing.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3 || (player.tailType == Tail.CAT && player.tailCount == 2)) {//player.hasPerk(PerkLib.NekomataThyroidGland) ||

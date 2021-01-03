@@ -2642,8 +2642,8 @@ public static const DINAH_HIPS_ASS_SIZE:int                                   		
 public static const DINAH_SPELLS_CASTED:int                                   		= 2634;
 public static const UNKNOWN_FLAG_NUMBER_02635:int                                   = 2635;//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02636:int                                   = 2636;//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02637:int                                   = 2637;//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02638:int                                   = 2638;//Not Yet Used Flag
+public static const DARKITSUNE_WARN_INT:int                                 	  	= 2637;//Warning to PC INT is lower than 15% + disables looping
+public static const DARKITSUNE_WARN_WIS:int                                   		= 2638;//Warning to PC WIS is lower than 15% + disables looping
 public static const AIKO_DONE_KITSUNETJ:int                                  		= 2639;
 public static const AIKO_SPAR_VICTORIES:int                                   		= 2640;
 public static const AIKO_TIMES_MET:int                                   			= 2641;
