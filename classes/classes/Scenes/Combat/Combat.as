@@ -1298,8 +1298,8 @@ public class Combat extends BaseContent {
 
     public function willothewispattacks():void {
         var willothewispDamage:Number = 0;
-        willothewispDamage += intwisscaling() * 0.2;
-        /*bonus do dmgh wisp-a jeśli sa inne pety/miniony ^^ im wiecej podwładnch ma tym mocniej sam bedzie bił (jak efekt perku później w drzewie Job: Leader ^^)
+        willothewispDamage += intwisscaling() * 0.4;
+        /*bonus do dmgh wisp-a jeśli sa inne pety/miniony ^^ im wiecej podwładnych ma tym mocniej sam bedzie bił (jak efekt perku później w drzewie Job: Leader ^^)
 	if (summonedElementals >= 1) elementalDamage += baseDamage;
 	if (summonedElementals >= 5) elementalDamage += baseDamage;
 	if (summonedElementals >= 9) elementalDamage += baseDamage;*/
@@ -1428,6 +1428,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.ElementalConjurerDedication)) elementalamplification += 0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
         if (player.hasPerk(PerkLib.ElementalConjurerSacrifice)) elementalamplification += 0.3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
         if (player.weapon == weapons.SCECOMM) elementalamplification += 0.5;
+		if (player.weaponRange == weaponsrange.E_TOME_) elementalamplification += 0.5;
         if (player.shield == shields.Y_U_PAN) elementalamplification += 0.25;
         if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
             elementalamplification += 0.1;

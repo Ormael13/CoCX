@@ -2337,6 +2337,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
 		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
 		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
 			dmgamp += 0.1;
@@ -2400,6 +2401,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
 		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
 		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
 			dmgamp += 0.1;
@@ -2464,6 +2466,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
 		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
 		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
 			dmgamp += 0.1;
@@ -2517,6 +2520,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GolemArmyGeneral)) dmgamp += 0.1;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
 		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
 		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
 			dmgamp += 0.1;
@@ -2571,6 +2575,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.65;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
 		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
 		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
 			dmgamp += 0.1;
@@ -2615,6 +2620,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.65;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
 		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
 		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
 			dmgamp += 0.1;
@@ -2660,6 +2666,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EpicGolemMaker2ndCircle)) dmgamp += 0.65;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
 		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
 		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
 			dmgamp += 0.1;
@@ -2695,6 +2702,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage += combat.intwisscaling() * 0.3;
 		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
 		if (player.weapon == weapons.G_ROD) dmgamp += 0.75;
+		if (player.weaponRange == weaponsrange.G_E_MAN) dmgamp += 0.5;
 		if (player.shield == shields.Y_U_PAN) dmgamp += 0.25;
 		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
 			dmgamp += 0.1;
