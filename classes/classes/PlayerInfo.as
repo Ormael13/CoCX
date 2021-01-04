@@ -1583,4 +1583,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(curry(superPerkBuyMenu, 1));
 	}
 }
-}
+}

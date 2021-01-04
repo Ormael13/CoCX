@@ -942,7 +942,7 @@ public class Combat extends BaseContent {
 
     public function stopChanneledSpecial():void {
         clearOutput();
-        outputText("You decided to stop preparing your super ultra hyper mega fabious attack!\n\n");
+        outputText("You decided to stop preparing your super ultra hyper mega fabulous attack!\n\n");
 		if (player.hasPerk(PerkLib.RagingInfernoSu) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
 		if (player.hasPerk(PerkLib.GlacialStormSu) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
 		if (player.hasPerk(PerkLib.HighVoltageSu) && player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, -1);
@@ -3460,7 +3460,7 @@ public class Combat extends BaseContent {
             outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  ");
             if (monster is ChaosChimera) outputText("Curse");
             else outputText("The kitsune's seals");
-            outputText(" have made normal melee attack impossible!  Maybe you could try something else?\n\n");
+            outputText(" made normal melee attack impossible!  Maybe you could try something else?\n\n");
             enemyAI();
             return;
         }
@@ -3743,7 +3743,7 @@ public class Combat extends BaseContent {
                 outputText("\n");
                 if (player.arms.type == Arms.WOLF && player.hasPerk(PerkLib.Lycanthropy)){
                     if (flags[kFLAGS.LUNA_MOON_CYCLE] != 7){
-                        outputText("The moon grants you strength as you rend your opponent one more times with your claws.");
+                        outputText("The moon grants you strength as you rend your opponent one more time with your claws.");
                         ExtraNaturalWeaponAttack();
                         outputText("\n");
                     } else  {

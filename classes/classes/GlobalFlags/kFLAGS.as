@@ -2618,7 +2618,7 @@ public static const UNKNOWN_FLAG_NUMBER_02609:int                               
 public static const UNKNOWN_FLAG_NUMBER_02610:int                                   = 2610;//lvl 72		//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02611:int                                   = 2611;//lvl 102	//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02612:int                                   = 2612;//lvl 102	//Not Yet Used Flag
-public static const TED_02613:int                                   = 2613;								//Not Yet Used Flag
+public static const TED_02613:int                                   				= 2613;				//Not Yet Used Flag
 public static const TED_WRATH:int                                   				= 2614;
 public static const TED_DEFEATS_COUNTER:int                                   		= 2615;
 public static const TED_LVL_UP:int                                   				= 2616;
@@ -2642,8 +2642,8 @@ public static const DINAH_HIPS_ASS_SIZE:int                                   		
 public static const DINAH_SPELLS_CASTED:int                                   		= 2634;
 public static const UNKNOWN_FLAG_NUMBER_02635:int                                   = 2635;//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02636:int                                   = 2636;//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02637:int                                   = 2637;//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02638:int                                   = 2638;//Not Yet Used Flag
+public static const DARKKITSUNE_WARN_INT:int                                 	  	= 2637;//Warning to PC INT is lower than 15% + disables looping
+public static const DARKKITSUNE_WARN_WIS:int                                   		= 2638;//Warning to PC WIS is lower than 15% + disables looping
 public static const AIKO_DONE_KITSUNETJ:int                                  		= 2639;
 public static const AIKO_SPAR_VICTORIES:int                                   		= 2640;
 public static const AIKO_TIMES_MET:int                                   			= 2641;
