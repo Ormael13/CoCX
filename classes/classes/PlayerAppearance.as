@@ -2,6 +2,7 @@
 import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.SceneLib;
 
 import coc.xxc.BoundStory;
 import coc.xxc.Story;
@@ -3362,7 +3363,7 @@ public class PlayerAppearance extends BaseContent {
 
 	public function describeVisage():void{ //expressions!
 		if (player.findPerk(PerkLib.DarkenedKitsune) > 0) {
-			outputText("\nThe corruption has turned you into a inhuman being; With your head slightly tilted and ears twitching every so often, it would almost be cute if not for your gesugao expression.");
+			outputText(SceneLib.darkenedKitsuneScene.darkenedKitsuneExpression());
 		}
 	}
 }

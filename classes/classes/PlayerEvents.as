@@ -1280,36 +1280,53 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			//Insane/corrupted Kitsune warning //Help why isn't this being called.
+			if (player.findPerk(PerkLib.DarkenedKitsune) >= 0 && player.inte/player.intStat.max <= 0.85 && flags[kFLAGS.DARKKITSUNE_WARN_INT] != 1){ //warning at 15 % loss. Considering by the time you get to kitsune tier, you should probably have a decent amount of each, 15% margin should be good.
+				SceneLib.darkenedKitsuneScene.splitPersonalityWarning(1)
+				flags[kFLAGS.DARKKITSUNE_WARN_INT] = 1;
+				needNext = true;
+			}
+			else if (player.findPerk(PerkLib.DarkenedKitsune) >= 0 && player.wis/player.wisStat.max <= 0.85 && flags[kFLAGS.DARKKITSUNE_WARN_WIS] != 1){
+				SceneLib.darkenedKitsuneScene.splitPersonalityWarning(2)
+				flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 1;
+				needNext = true;
+			}
+			//Insane/corrupted Kitsune random events //Help why isn't this being called.
+			if (player.findPerk(PerkLib.DarkenedKitsune) >= 0){
+				//if (rand(5)==0){
+				SceneLib.darkenedKitsuneScene.splitPersonalityRandom()
+				needNext = true;
+				//}
+			}
 			//Insane/corrupted Kitsune perk
-			if (player.kitsuneScore() >= 9 && player.cor >= 50 && player.findPerk(PerkLib.DarkenedKitsune) < 0) { //Check for being kitsune enough + high enough corruption
-				SceneLib.darkenedKitsuneScene.splitPersonalityFirstEncounter()
-				player.createPerk(PerkLib.DarkenedKitsune, 0,0,0,0);
-				needNext = true;
-			}else if (player.kitsuneScore() >=9 && player.cor >= 95 && player.findPerk(PerkLib.DarkenedKitsune) > 0){ //Bad end roll. Most likely will be tweaked since this is really small case.
-				if (player.inte/player.intStat.max < 0.75 && player.wis/player.wisStat.max < 0.75){ //this should check for player having at least 75% of total for int and wis each to avoid.
-					if (rand(4)==0) { //nested ifs.... fuck.
-						SceneLib.darkenedKitsuneScene.splitPersonalityTakesOver()
-					}
+			if (player.kitsuneScore() >= 9 ){
+				if(player.cor >= 50 && player.findPerk(PerkLib.DarkenedKitsune) < 0) { //Check for being kitsune enough + high enough corruption
+					SceneLib.darkenedKitsuneScene.splitPersonalityFirstEncounter()
+					player.createPerk(PerkLib.DarkenedKitsune, 0,0,0,0);
+					outputText("<b>Gained Perk: Darkened Kitsune!</b>\n")
+					needNext = true;
 				}
-			}else if (player.kitsuneScore() >= 9 && player.cor < 50 && player.findPerk(PerkLib.DarkenedKitsune) > 0)  { //Remove due to low corruption
-				outputText("\nThe corruption loses it's grip on your soul, and retreats from your star shell. For the first time in a while, you feel a massive burden removed from somewhere deep within you.\n\n(<b>Lost Perk: Darkened Kitsune!</b>)\n");
+				else if (player.cor >= 95 && player.findPerk(PerkLib.DarkenedKitsune) >= 0 && player.inte/player.intStat.max < 0.75 && player.wis/player.wisStat.max < 0.75 && (rand(4)==0)){ //Bad end roll. Most likely will be tweaked since this is really small case.
+						SceneLib.darkenedKitsuneScene.splitPersonalityTakesOver()
+						//needNext = true;
+				}
+				else if (player.cor < 50 && player.findPerk(PerkLib.DarkenedKitsune) >= 0){ //Remove due to low corruption //Why is it triggering DarkKitsune random event here????
+					SceneLib.darkenedKitsuneScene.splitPersonalityLost(1)
+					player.removePerk(PerkLib.DarkenedKitsune);
+					outputText("<b>Lost Perk: Darkened Kitsune!</b>\n")
+					flags[kFLAGS.DARKKITSUNE_WARN_INT] = 0;
+					flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 0;
+					needNext = true;
+				}
+			}
+			else if (player.findPerk(PerkLib.DarkenedKitsune) >= 0){// Remove due to not kitsune
+				SceneLib.darkenedKitsuneScene.splitPersonalityLost(2)
 				player.removePerk(PerkLib.DarkenedKitsune);
-				needNext = true;
-
-			}else if (player.kitsuneScore() < 9 && player.findPerk(PerkLib.DarkenedKitsune) > 0){// Remove due to not kitsune
-				outputText("\nNo longer close enough to be considered a full-blooded kitsune, the corruption loses it's grip on your soul, and retreats from your star shell. For the first time in a while, you feel a massive burden removed from somewhere deep within you.\n\n(<b>Lost Perk: Darkened Kitsune!</b>)\n");
-				player.removePerk(PerkLib.DarkenedKitsune);
+				outputText("<b>Lost Perk: Darkened Kitsune!</b>\n")
+				flags[kFLAGS.DARKKITSUNE_WARN_INT] = 0;
+				flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 0;
 				needNext = true;
 			}
-			//Insane/corrupted Kitsune warning
-			if (player.findPerk(PerkLib.DarkenedKitsune) > 0 && player.inte/player.intStat.max <= 0.85 && flags[kFLAGS.DARKITSUNE_WARN_INT] != 1){ //warning at 15 % loss. Considering by the time you get to kitsune tier, you should probably have a decent amount of each, 15% margin should be good.
-				outputText("You look at the corruption currently infecting your star crystal, and contemplate what to do about the problem, however, the more you look at it, the slower you feel your brain moving. Then again, with all that you've been through lately, a few brain cells might be knocked lose. Perhaps something to restore your <b>intelligence</b> might be in order?")
-				flags[kFLAGS.DARKITSUNE_WARN_INT] == 1;
-			} else if (player.findPerk(PerkLib.DarkenedKitsune) > 0 && player.wis/player.wisStat.max <= 0.85 && flags[kFLAGS.DARKITSUNE_WARN_WIS] != 1){
-				outputText("You look at the corruption currently infecting your star crystal, and contemplate what to do about the problem, however, you can't think of a solution. Then, it strikes you like a bolt. Perhaps there may be other records of this phenomena happening, all you need to do is to look for the <b>wisdom</b> of the elders!")
-				flags[kFLAGS.DARKITSUNE_WARN_WIS] == 1;
-			}
-
 			//Kitsune energy thirst
 			if (player.hasStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)) {
 				if (player.hunger < player.maxHunger()) {
