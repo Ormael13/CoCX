@@ -16,7 +16,7 @@ package classes.Items.WeaponsRange
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.findPerk(PerkLib.DualWieldFirearms) >= 0) return true;
+			if (game.player.findPerk(PerkLib.DualWield) >= 0) return true;
 			outputText("You aren't skilled enough to handle this pair of firearms!  ");
 			return false;
 		}

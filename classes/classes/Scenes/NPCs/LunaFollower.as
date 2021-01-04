@@ -114,7 +114,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				if (flags[kFLAGS.LUNA_FOLLOWER] > 4) {
 					addButton(3, "Meal", mealLuna);
 					addButton(4, "Nurse", nurseLuna);
-					button(4).disableIf(player.HP >= player.maxHP() && !player.statStore.hasBuff("Curse"), "You are currently in perfect health.");
+					button(4).disableIf(player.HP >= player.maxOverHP() && !player.statStore.hasBuff("Curse"), "You are currently in perfect health.");
 					button(4).disableIf(Nursed, "Luna needs time to recharge her Mana before she can heal you again. Try tomorrow.");
 				}
 				if (flags[kFLAGS.LUNA_AFFECTION] >= 50) {

@@ -1086,7 +1086,7 @@ public class Combat extends BaseContent {
         if (SceneLib.urtaQuest.isUrta()) {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
         }
-        if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Small" && player.weaponPerk != "Dual Small" && player.weaponPerk != "Massive" && player.weaponPerk != "Staff" && !isWieldingRangedWeapon()) {
+        if ((player.weaponPerk == "" || player.weaponPerk != "Dual") && !isWieldingRangedWeapon()) {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
                 if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) {
                     if (player.hasPerk(PerkLib.HexaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
@@ -2171,6 +2171,40 @@ public class Combat extends BaseContent {
         if (accmmodpenalty < 0) accmmodpenalty = 0;
         return accmmodpenalty;
     }
+	
+	public function meleeDualWieldAccuracyPenalty():Number {
+		var accmdwmodpenalty:Number = 0;
+        if (player.weaponPerk == "Dual") {
+			accmdwmodpenalty -= 25;
+		}
+        if (player.weaponPerk == "Dual Large") {
+			accmdwmodpenalty -= 25;
+		}
+        if (player.weaponPerk == "Dual Small") {
+			accmdwmodpenalty -= 25;
+		}
+        if (player.weaponPerk == "Quad") {
+			accmdwmodpenalty -= 75;
+		}
+        return accmdwmodpenalty;
+	}
+	
+	public function meleeDualWieldDamagePenalty():Number {
+		var dmgmdwmodpenalty:Number = 1;
+        if (player.weaponPerk == "Dual") {
+			dmgmdwmodpenalty -= 0.5;
+		}
+        if (player.weaponPerk == "Dual Large") {
+			dmgmdwmodpenalty -= 0.5;
+		}
+        if (player.weaponPerk == "Dual Small") {
+			dmgmdwmodpenalty -= 0.5;
+		}
+        if (player.weaponPerk == "Quad") {
+			dmgmdwmodpenalty -= 0.9;
+		}
+        return dmgmdwmodpenalty;
+	}
 
     public function arrowsAccuracy():Number {
         var accmod:Number = 80;
@@ -2222,6 +2256,34 @@ public class Combat extends BaseContent {
         if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) faccmod += 80;
         return faccmod;
     }
+
+    public function firearmsAccuracyPenalty():Number {
+        var accfmodpenalty:Number = 10;
+        if (accfmodpenalty < 0) accfmodpenalty = 0;
+        return accfmodpenalty;
+    }
+	
+	public function firearmsDualWieldAccuracyPenalty():Number {
+		var accfdwmodpenalty:Number = 0;
+        if (player.weaponPerk == "Dual Firearms") {
+			accfdwmodpenalty -= 25;
+		}
+        if (player.weaponPerk == "Quad Firearms") {
+			accfdwmodpenalty -= 75;
+		}
+        return accfdwmodpenalty;
+	}
+	
+	public function firearmsDualWieldDamagePenalty():Number {
+		var dmgfdwmodpenalty:Number = 1;
+        if (player.weaponPerk == "Dual Firearms") {
+			dmgfdwmodpenalty -= 0.5;
+		}
+        if (player.weaponPerk == "Quad Firearms") {
+			dmgfdwmodpenalty -= 0.9;
+		}
+        return dmgfdwmodpenalty;
+	}
 
     public function oneArrowTotalCost():Number {
         var onearrowcost:Number = 25;
@@ -2959,6 +3021,7 @@ public class Combat extends BaseContent {
             else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
             else if (player.weaponRangeAttack >= 201 && player.weaponRangeAttack < 251) damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
             else damage *= (6 + ((player.weaponRangeAttack - 250) * 0.005));
+			firearmsDualWieldAccuracyPenalty();
             //any aoe effect from firearms
             if (monster.plural) {
                 if (player.weaponRange == weaponsrange.ADBSCAT) damage *= 2;
@@ -3219,7 +3282,8 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
             if (player.ammo > 0) {
                 flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
-                flags[kFLAGS.ARROWS_ACCURACY] += 10;
+                flags[kFLAGS.ARROWS_ACCURACY] += firearmsAccuracyPenalty();
+				flags[kFLAGS.ATTACKS_ACCURACY] += firearmsDualWieldAccuracyPenalty();
                 shootWeapon();
             } else {
                 outputText("<b>Your firearm clip is empty.</b>\n\n");
@@ -4126,6 +4190,7 @@ public class Combat extends BaseContent {
             else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
             else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
             else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
+			meleeDualWieldDamagePenalty();
             //Bonus sand trap damage!
             if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
             //All special weapon effects like...fire/ice
@@ -4390,8 +4455,6 @@ public class Combat extends BaseContent {
                         if (player.hasPerk(PerkLib.SuperSensual) && player.hasPerk(PerkLib.Sensual)) teaseXP(2);
                         else teaseXP(1);
                     }
-
-
 
                 } else if (vbladeeffect) outputText("As you strike, the sword shine with a red glow as somehow you aim straight for [monster a] [monster name] throat. ");
                 else if (MDODialogs) {
@@ -4680,6 +4743,7 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 2) {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]--;
             flags[kFLAGS.ATTACKS_ACCURACY] += meleeAccuracyPenalty();
+            flags[kFLAGS.ATTACKS_ACCURACY] += meleeDualWieldAccuracyPenalty();
             attack2();
             return;
         }
