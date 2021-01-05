@@ -88,11 +88,14 @@ package classes.Scenes
 			outputText("-Jtecx many typo corrections.\n");
 			outputText("-Fixed bugs: Liadri bugfixes, Pyro bugfixes/typo corrections, Cold Fish Soup missing it main intendeed effect (libido lowering), super perk points not reseting on ascension, gremlin tf text error, some of the scenes only looking for correct size of 1st cock ignoring any other PC could have\n\n");
 			outputText("<b>Version 0.8p:</b>\n\n");
+			outputText("-New range weapon/tome (by Ormael): Golemancy Evocation Manuscript - buyable at golemancer shop in He'Xin'Dao. Cost 200 gems. Increase golems damage by 50% of base value.\n");
 			outputText("-Bit of increased secondary stat bars gains for monsters at milestones to keep them protected from nuking by PC.\n");
 			outputText("-With too large diff in levels damage reduction will return 1 point of dmg instead of 0. With some effects form items or perks that will still give chance to get few points of dmg even if PC is vastly underleveled compared to enemy.\n");
 			outputText("-Huge, Gigantic, Colossal type of enemies gained now natural lvl diff bonus (it mean for level difference between PC and enemy they treated as few levels higher enemies than their displayed level). Huge +2, Gigantic +5, Colossal +10.\n");
 			outputText("-Boost to elementals dmg related to amount of summoned elementals gained another tier after pc summon 13th elemental (currently max amount of diff elementals to summon). Base damage that elemental deal when attacking was increased 2x.\n");
 			outputText("-Job: Elemental Conjuer now allow to summon 2 elementals.\n");
+			outputText("-Added Envocation Tome option to elementals summonig menu - it would allow to read informations about elementals that PC can currently summon. So to give some idea which elemental would be most useful to be summoned in current situation PC is.\n");
+			outputText("-Moved Elementals specials and Golems attack options into 2 menus in Other submenu in combat menu.\n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -102,14 +105,12 @@ package classes.Scenes
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
-			outputText("-Added Envocation Tome option to elementals summonig menu - it would allow to read informations about elementals that PC can currently summon. So to give some idea which elemental would be most useful to be summoned in current situation PC is.\n");
-			outputText("-Moved Elementals specials and Golems attack options into 2 menus in Other submenu in combat menu.\n");
-			outputText("-New range weapon/tome (by Ormael): Golemancy Evocation Manuscript - buyable at golemancer shop in He'Xin'Dao. Cost 200 gems. Increase golems damage by 50% of base value.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New scene for Aiko and PC with kitsune tails by Jtexc.\n");
+			outputText("-Revisions/corrections to Luna content by TerraParker.\n");
+			outputText("-New range weapon/tome (by Ormael): Elementalist’s Tome - buyable at Giacomo. Cost 200 gems. Increase elementals damage by 50% of base value.\n");
+			outputText("-Change to handling dual weapons. No need ot get tons of dual wield perks and only one to rule them all... Dual Wield perk is all what PC would need. Of course now that will mean dual wielding would have penalties: -50% damage and -25% accuracy.");// There would be two ways to offset those: get specific for that type of weapons perk 
+			//outputText("(so current dual wield (type of weapon) perks will have role but not of 'I need it to use this type of weapons) or simply training/using them to gain better mastery of using them.\n");
+			outputText("-Jtecx small addition to kitsunes about corruption effects on PC appearance.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -121,7 +122,7 @@ package classes.Scenes
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -154,6 +154,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			addButton(6, "Black Book", pitchBlackBook);
 			if (player.findPerk(PerkLib.PrestigeJobGreySage) >= 0) addButton(7, "Grey Book", pitchGreyBook);
 			else addButtonDisabled(7, "???", "Req. Prestige Job: Grey Sage");
+			addButton(8, "E. Tome", pitchElementalistsTome).hint("Elementalist’s Tome");
 			if (Holidays.nieveHoliday()) {
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(8, "Mysterious Seed", pitchMysteriousSeed);
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 5) addButton(9, "Decorations", pitchDecorations);
@@ -555,6 +556,28 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				player.gems -= 100;
 				statScreenRefresh();
 				inventory.takeItem(consumables.B__BOOK, bookMenu);
+			}
+		}
+		
+		private function pitchElementalistsTome():void {
+			spriteSelect(23);
+			clearOutput();
+			outputText("Giacomo holds up an Elementalist’s Tome.  \"<i>While you may not find value in this as a simple tome,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  I will offer the super-cheap price of 200 gem!</i>\"");
+			doYesNo(buyElementalistsTome, bookMenu);
+		}
+		
+		private function buyElementalistsTome():void {
+			spriteSelect(23);
+			clearOutput();
+			if (player.gems < 200) {
+				outputText("\n\nGiacomo sighs, indicating you need 200 gem to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nThe crazy merchant nods satisfied when you hand him over two hundred gems and in exchange gives you an Elementalist’s Tome.");
+				player.gems -= 200;
+				statScreenRefresh();
+				inventory.takeItem(weaponsrange.E_TOME_, bookMenu);
 			}
 		}
 		

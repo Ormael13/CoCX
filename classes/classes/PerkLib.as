@@ -950,8 +950,8 @@ public class PerkLib
 				"Further increases dragon breath attacks power and allows to combine all 4 basic breath types more often. (+600% to dragon breaths damage, +10% of max core Spe as phantom Spe)",
 				"You've chosen the 'Draconic Lungs (Final Form)' perk. Further increases increases dragon breath attacks power and allows to combine all 4 basic breath types more often.").withBuffs({'spe.mult':0.20});
 		public static const DualWield:PerkType = mk("Dual Wield", "Dual Wield",
-				"Allows you to wield two normal sized melee weapons (excluding staffs).",
-				"You've chosen the 'Dual Wield' perk, training skill of using two melee weapons excluding staffs.");
+				"Allows you to wield two melee weapons.",
+				"You've chosen the 'Dual Wield' perk, training skill of using two melee weapons.");
 		public static const DualWieldFirearms:PerkType = mk("Dual Wield (Firearms)", "Dual Wield (Firearms)",
 				"Allows you to wield two firearms (non 2H ones).",
 				"You've chosen the 'Dual Wield (Firearms)' perk, training skill of using two firearms (non 2H ones).");
