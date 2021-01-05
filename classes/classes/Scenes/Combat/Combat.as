@@ -116,6 +116,42 @@ public class Combat extends BaseContent {
         return mod;
     }
 
+    public function maxSwordLevel():Number {
+        return player.maxSwordLevel();
+    }
+	
+	public function maxAxeLevel():Number {
+        return player.maxAxeLevel();
+    }
+	
+    public function maxMaceHammerLevel():Number {
+        return player.maxMaceHammerLevel();
+    }
+	
+	public function maxDuelingSwordLevel():Number {
+        return player.maxDuelingSwordLevel();
+    }
+	
+	public function maxSpearLevel():Number {
+        return player.maxSpearLevel();
+    }
+	
+	public function maxDualWieldSmallLevel():Number {
+        return player.maxDualWieldSmallLevel();
+    }
+	
+    public function maxDualWieldNormalLevel():Number {
+        return player.maxDualWieldNormalLevel();
+    }
+	
+    public function maxDualWieldLargeLevel():Number {
+        return player.maxDualWieldLargeLevel();
+    }
+	
+    public function maxDualWieldFirearmsLevel():Number {
+        return player.maxDualWieldFirearmsLevel();
+    }
+
     public function maxTeaseLevel():Number {
         return player.maxTeaseLevel();
     }

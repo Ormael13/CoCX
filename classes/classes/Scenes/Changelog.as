@@ -111,10 +111,10 @@ package classes.Scenes
 			outputText("-Change to handling dual weapons. No need ot get tons of dual wield perks and only one to rule them all... Dual Wield perk is all what PC would need. Of course now that will mean dual wielding would have penalties: -50% damage and -25% accuracy.");// There would be two ways to offset those: get specific for that type of weapons perk 
 			//outputText("(so current dual wield (type of weapon) perks will have role but not of 'I need it to use this type of weapons) or simply training/using them to gain better mastery of using them.\n");
 			outputText("-Jtecx small addition to kitsunes about corruption effects on PC appearance.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-5th subpage on Stats page having all various trackers for mastery / skill progress.\n");
+			outputText("-Race & body part organization + enhanced body part editor (by aimozg).\n");
+			outputText("-Added mastery tracker for various types of meele weapons to 5th subpage of Stats.\n");
+			outputText("-Dual Wield perks like (Small), (Large), etc. that aren't based ones now have added req. to also have Dual Wield perk.\n");// They would allow to increase ?training efficiency/max level of respective dual wield skill/both?
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -122,9 +122,16 @@ package classes.Scenes
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -205,11 +212,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -259,9 +262,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
