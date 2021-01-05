@@ -2,9 +2,17 @@
 {
 import classes.BaseContent;
 import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Beard;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ArmorLib;
@@ -34,6 +42,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
+import classes.internals.EnumValue;
 import classes.internals.RandomDrop;
 import classes.internals.Utils;
 import classes.internals.WeightedDrop;
@@ -2095,38 +2104,38 @@ import flash.utils.getQualifiedClassName;
 			result += Heis + Appearance.inchesAndFeetsAndInches(tallness) + " tall with " +
 			          Appearance.describeByScale(hips.type,Appearance.DEFAULT_HIP_RATING_SCALES,"thinner than","wider than") + " hips and " +
 			          Appearance.describeByScale(butt.type,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than") + " butt.\n";
-			result +=Pronoun3+" lower body is "+(Appearance.DEFAULT_LOWER_BODY_NAMES[lowerBody]||("lowerBody#"+lowerBody));
-			result += ", "+pronoun3+" arms are "+(Appearance.DEFAULT_ARM_NAMES[arms.type] || ("arms.type#" + arms.type));
+			result += Pronoun3+" lower body is "+LowerBody.Types[lowerBody].name;
+			result += ", "+pronoun3+" arms are "+Arms.Types[arms.type].name;
 			result += ", "+pronoun1+" "+have+" "+skinTone+" "+skinAdj+" "+skinDesc+
-					  " (base "+(Appearance.DEFAULT_SKIN_NAMES[skin.baseType()]||("skinType#"+skin.baseType()))+")." +
-					  " (coat "+(Appearance.DEFAULT_SKIN_NAMES[skin.coatType()]||("skinType#"+skin.coatType()))+")." +
+					  " (base "+Skin.SkinTypes[skin.baseType()].id+")." +
+					  " (coat "+Skin.SkinTypes[skin.coatType()].id+")." +
 					  "\n";
 			result += Hehas;
 			if (hairLength>0){
-				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(hairLength)+" long "+(Appearance.DEFAULT_HAIR_NAMES[hairType]||("hairType#"+hairType))+" hair.\n";
+				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(hairLength)+" long "+Hair.Types[hairType].name+" hair.\n";
 			} else {
 				result += "no hair.\n";
 			}
 			result += Hehas;
 			if (beardLength>0){
-				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(beardLength)+" long "+(Appearance.DEFAULT_BEARD_NAMES[beardStyle]||("beardType#"+beardStyle))+".\n";
+				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(beardLength)+" long "+Beard.Types[beardStyle].name+" beard.\n";
 			} else {
 				result += "no beard.\n";
 			}
 			result += Hehas
-			          + (Appearance.DEFAULT_FACE_NAMES[faceType]||("faceType#"+faceType)) + " face, "
-			          + (Appearance.DEFAULT_EARS_NAMES[ears.type] || ("earType#" + ears.type)) + " ears, "
-			          + (Appearance.DEFAULT_TONGUE_NAMES[tongue.type] || ("tongue.type#" + tongue.type)) + " tongue and "
-			          + (Appearance.DEFAULT_EYES_NAMES[eyes.type] || ("eyes.type#" + eyes.type)) + " eyes.\n";
+			          + Face.Types[faceType].name + " face, "
+			          + Ears.Types[ears.type].name + " ears, "
+			          + Tongue.Types[tongue.type].name + " tongue and "
+			          + Eyes.Types[eyes.type].name + " eyes.\n";
 			result += Hehas;
 			if (tailType == Tail.NONE) result += "no tail, ";
-			else result+=(Appearance.DEFAULT_TAIL_NAMES[tailType]||("tailType#"+tailType))+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
+			else result+=Tail.Types[tailType].name+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
 			if (horns.type == Horns.NONE) result += "no horns, ";
-			else result += horns.count + " " + (Appearance.DEFAULT_HORNS_NAMES[horns.type] || ("horns.type#" + horns.type)) + " horns, ";
+			else result += horns.count + " " + Horns.Types[horns.type].name + " horns, ";
 			if (wings.type == Wings.NONE) result += "no wings, ";
-			else result += wings.desc + " wings (type " + (Appearance.DEFAULT_WING_NAMES[wings.type] || ("wings.type#" + wings.type)) + "), ";
+			else result += wings.desc + " wings (type " + Wings.Types[wings.type].name + "), ";
 			if (antennae.type == Antennae.NONE) result += "no antennae.type.\n\n";
-			else result += (Appearance.DEFAULT_ANTENNAE_NAMES[antennae.type] || ("antennaeType#" + antennae.type)) + " antennae.type.\n\n";
+			else result += Antennae.Types[antennae.type].name + " antennae.type.\n\n";
 
 			// GENITALS AND BREASTS
 			for (var i:int = 0; i<cocks.length; i++){

@@ -6,18 +6,21 @@ package classes.internals {
  * public static var FOO:int = EnumValue.add(Types, 0, 'FOO', {param:"something"});
  * public static var BAR:int = EnumValue.add(Types, 1, 'BAR', {param:"anything"});
  *
- * This, however, causes error "%s is not a compile-time constant" when you use it
- * as a function default value, for example.
+ * or
  *
- * Solution A:
+ * public static var Types:/!*EnumValue*!/Array = [];
+ * public static var FOO:int = 0;
+ * EnumValue.add(Types, FOO, 'FOO', {param:"something"});
+ * public static var BAR:int = 1;
+ * EnumValue.add(Types, BAR, 'BAR', {param:"anything"});
  *
- * public static var BAZ:int = 2;
- * EnumValue.add(Types, BAZ, 'BAZ', {param:"everything"});
+ * This will populate Types array with EnumValue's like that:
+ * Types = [
+ *           { value:0, id:'FOO', param:"something" }, // Types[0]
+ *           { value:1, id:'BAR', param:"anything" }   // Types[1]
+ * ];
  *
- * Solution B:
- *
- * //noinspection CommaExpressionJS
- * public static var BAZ:int = (EnumValue.add(Types, 2, 'BAZ', {param:"everything"}), 2);
+ * Scarse arrays are possible, but beware of the undefined in the array when iterating!
  */
 public dynamic class EnumValue {
 	public var list:/*EnumValue*/Array;

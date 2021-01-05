@@ -226,15 +226,15 @@ public class MainView extends Block {
 	internal static const BOTTOM_HGAP:Number     = (BOTTOM_W - BTN_W * BOTTOM_COLS) / (2 * BOTTOM_COLS); // between btns
 	internal static const BOTTOM_Y:Number        = SCREEN_H - BOTTOM_H; // bottom = screen bottom
 	// Sprite (top right)
-	internal static const SPRITE_X:Number           = COLUMN_3_X;
-	internal static const SPRITE_Y:Number           = TEXTZONE_Y;
-	internal static const SPRITE_MAX_W:Number       = SCREEN_W - SPRITE_X - GAP;
-	internal static const SPRITE_MAX_H:Number       = SPRITE_MAX_W;
+	public static const SPRITE_X:Number           = COLUMN_3_X;
+	public static const SPRITE_Y:Number           = TEXTZONE_Y;
+	public static const SPRITE_MAX_W:Number       = SCREEN_W - SPRITE_X - GAP;
+	public static const SPRITE_MAX_H:Number       = SPRITE_MAX_W;
 	// monster stats (top right below sprite)
-	internal static const MONSTER_X:Number          = COLUMN_3_X;
-	internal static const MONSTER_W:Number          = SPRITE_MAX_W;
-	internal static const MONSTER_H:Number          = 300;
-	internal static const MONSTER_Y:Number          = SPRITE_Y + SPRITE_MAX_H + GAP;
+	public static const MONSTER_X:Number          = COLUMN_3_X;
+	public static const MONSTER_W:Number          = SPRITE_MAX_W;
+	public static const MONSTER_H:Number          = 300;
+	public static const MONSTER_Y:Number          = SPRITE_Y + SPRITE_MAX_H + GAP;
 	// corner stats (bottom right)
 	internal static const CORNERSTATS_X:Number      = COLUMN_3_X;
 	internal static const CORNERSTATS_W:Number      = COLUMN_3_W;
