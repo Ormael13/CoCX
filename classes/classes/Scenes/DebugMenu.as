@@ -25,8 +25,19 @@ import classes.Parser.Parser;
 import classes.Scenes.NPCs.JojoScene;
 import classes.internals.EnumValue;
 
-import coc.view.Color;
+import coc.view.Block;
 
+import coc.view.Color;
+import coc.view.MainView;
+import coc.view.StatsView;
+
+import fl.controls.ComboBox;
+import fl.controls.TextInput;
+import fl.data.DataProvider;
+
+import flash.display.DisplayObject;
+
+import flash.events.Event;
 import flash.events.TextEvent;
 import flash.utils.describeType;
 
@@ -736,13 +747,31 @@ public class DebugMenu extends BaseContent
 			pa.describeArms();
 			pa.describeLowerBody();
 			outputText("[pg]");
-	/*		outputText("player.skin = " + JSON.stringify(player.skin.saveToObject())
-											  .replace(/":"/g,'":&nbsp; "')
-											  .replace(/,"/g, ', "') + "\n");
-			outputText("player.facePart = " + JSON.stringify(player.facePart.saveToObject()).replace(/,/g, ", ") + "\n");
-	*/	}
+			for each (var race:Race in Race.ALL_RACES) {
+				if (!race) continue;
+				var score:int = race.score(player);
+				if (score == 0) continue;
+				outputText(race.name+" score: "+race.score(player)+"\n");
+			}
+			flushOutputTextToGUI();
+		}
+		private var bodyEditorControls:Block;
 		public function bodyPartEditorRoot():void {
 			menu();
+			if (bodyEditorControls) {
+				mainView.removeElement(bodyEditorControls);
+			}
+			bodyEditorControls = new Block({
+				layoutConfig: {
+					type: "flow",
+					direction: "column",
+					gap: 1
+				},
+				x: MainView.SPRITE_X,
+				y: MainView.SPRITE_Y,
+				width: MainView.SPRITE_MAX_W
+			});
+			mainView.addElement(bodyEditorControls);
 			dumpPlayerData();
 			addButton(0,"Head",bodyPartEditorHead);
 			addButton(1,"Skin & Hair",bodyPartEditorSkin);
@@ -755,30 +784,200 @@ public class DebugMenu extends BaseContent
 //			addButton(7,"",bodyPartEditorPiercings);
 //			addButton(,"",change);
 //			addButton(13, "Page2", bodyPartEditor2);
-			addButton(14, "Back", accessDebugMenu);
+			addButton(14, "Back", function():void {
+				if (bodyEditorControls) {
+					mainView.removeElement(bodyEditorControls);
+					bodyEditorControls = null;
+				}
+				accessDebugMenu();
+			});
 		}
-		private var bpeSkinLayer:String = "Base";
+		private function clearBeElements():void {
+			var i:int = bodyEditorControls.numElements;
+			while (i-->0) {
+				bodyEditorControls.removeElement(bodyEditorControls.getElementAt(i));
+			}
+		}
+		private function addBeControl(label:String, element:DisplayObject):void {
+			var row:Block = new Block({
+				height: 24
+			});
+			row.addTextField({
+				text: label
+			});
+			element.x = bodyEditorControls.width*2/5;
+			element.width = bodyEditorControls.width*3/5;
+			element.visible = true;
+			row.addElement(element);
+			bodyEditorControls.addElement(row);
+		}
+		private function addBeComboBox(label:String, items:Array, selectedItem:*, callback:Function):void {
+			var cb:ComboBox = new ComboBox();
+			cb.dataProvider = new DataProvider(items);
+			for (var i:int = 0; i < items.length; i++) {
+				if (selectedItem == items[i] || 'data' in items[i] && items[i].data == selectedItem) {
+					cb.selectedIndex = i;
+					break;
+				}
+			}
+			cb.addEventListener(Event.CHANGE, function(event:Event):void {
+				event.preventDefault();
+				callback(cb.selectedItem);
+			});
+			addBeControl(label, cb);
+		}
+		private function addBeTextInput(label:String, value:String, callback:Function):void {
+			var ti:TextInput = new TextInput();
+			ti.text = value;
+			ti.addEventListener(Event.CHANGE, function (event:Event):void {
+				event.preventDefault();
+				callback(ti.text);
+			});
+			addBeControl(label, ti);
+		}
+		
 		private function bodyPartEditorSkin():void {
-			var editBase:Boolean = bpeSkinLayer == "Base";
+			clearBeElements();
+			addBeComboBox("Hair type",
+					mapForComboBox(Hair.Types, "id"),
+					player.hairType,
+					function (item:*):void {
+						player.hairType = item.data.value;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
+			addBeTextInput("Hair length",
+					""+player.hairLength,
+					function (item:String):void {
+						if (!isNaN(parseFloat(item))) {
+							player.hairLength = parseInt(item);
+							dumpPlayerData();
+							tagDemosSkin();
+						}
+					}
+			);
+			addBeComboBox("Hair color", COLOR_CONSTANTS, player.hairColor,
+					function (item:*):void {
+						player.hairColorOnly = item.data;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
+			addBeComboBox("Skin coverage", SKIN_COVERAGE_CONSTANTS, player.skin.coverage,
+					function (item:*):void {
+						player.skin.coverage = item.data;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
+			addBeComboBox("Base type",
+					mapForComboBox(
+							filterByProp(Skin.SkinTypes,"base",true),
+							"id"
+					),
+					Skin.SkinTypes[player.skin.base.type],
+					function (item:*):void {
+						player.skin.base.type = item.data.value;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
+			addBeComboBox("Base pattern",
+					mapForComboBox(
+							filterByProp(Skin.PatternTypes,"base",true),
+							"id"
+					),
+					Skin.PatternTypes[player.skin.base.pattern],
+					function (item:*):void {
+						player.skin.base.pattern = item.data.value;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
+			addBeComboBox("Base adj", SKIN_ADJ_CONSTANTS, player.skin.base.adj,
+					function (item:*):void {
+						player.skin.base.adj = item.data;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
+			addBeComboBox("Base desc", SKIN_DESC_CONSTANTS, player.skin.base.descRaw,
+					function (item:*):void {
+						player.skin.base.descRaw = item.data;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
+			addBeComboBox("Base color", COLOR_CONSTANTS, player.skin.base.color,
+					function (item:*):void {
+						player.skin.base.color = item.data;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
+			addBeComboBox("Base color 2", COLOR_CONSTANTS, player.skin.base.color2raw,
+					function (item:*):void {
+						player.skin.base.color2raw = item.data;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
+			addBeComboBox("Coat type",
+					mapForComboBox(
+							filterByProp(Skin.SkinTypes,"coat",true),
+							"id"
+					),
+					Skin.SkinTypes[player.skin.coat.type],
+					function (item:*):void {
+						player.skin.coat.type = item.data.value;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
+			addBeComboBox("Coat pattern",
+					mapForComboBox(
+							filterByProp(Skin.PatternTypes,"coat",true),
+							"id"
+					),
+					Skin.PatternTypes[player.skin.coat.pattern],
+					function (item:*):void {
+						player.skin.coat.pattern = item.data.value;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
+			addBeComboBox("Coat color", COLOR_CONSTANTS, player.skin.coat.color,
+					function (item:*):void {
+						player.skin.coat.color = item.data;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
+			addBeComboBox("Coat color 2", COLOR_CONSTANTS, player.skin.coat.color2raw,
+					function (item:*):void {
+						player.skin.coat.color2raw = item.data;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
+			addBeComboBox("Coat adj", SKIN_ADJ_CONSTANTS, player.skin.coat.adj,
+					function (item:*):void {
+						player.skin.coat.adj = item.data;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
+			addBeComboBox("Coat desc", SKIN_DESC_CONSTANTS, player.skin.coat.descRaw,
+					function (item:*):void {
+						player.skin.coat.descRaw = item.data;
+						dumpPlayerData();
+						tagDemosSkin();
+					}
+			);
 			menu();
 			dumpPlayerData();
 			tagDemosSkin();
-			addButton(0,"Skin Coverage",changeSkinCoverage);
-			addButton(1,bpeSkinLayer+ " Type",curry(changeLayerType,editBase));
-			addButton(2,bpeSkinLayer+ " Color",curry(changeLayerColor,editBase));
-			addButton(3,bpeSkinLayer+ " Adj",curry(changeLayerAdj,editBase));
-			addButton(4,bpeSkinLayer+ " Desc",curry(changeLayerDesc,editBase));
-			if (editBase) {
-				addButton(5, "Select Coat",changeCurrentLayer).disableIf(player.skin.coverage == Skin.COVERAGE_NONE);
-			} else {
-				addButton(5, "Select Base",changeCurrentLayer);
-			}
-			addButton(6,bpeSkinLayer+" Color2",curry(changeLayerColor2,editBase));
-			addButton(7,bpeSkinLayer+" Pattern",changeLayerPattern);
-			addButton(10,"HairType",changeHairType);
-			addButton(11,"HairColor",changeHairColor);
-			addButton(12,"HairLength",changeHairLength);
-//			addButton(12,"HairStyle",);
 			addButton(14, "Back", bodyPartEditorRoot);
 		}
 		private static const COLOR_CONSTANTS:Array = [
@@ -798,25 +997,6 @@ public class DebugMenu extends BaseContent
 			"yellowish-green", "black and yellow", "white and black"
 		];
 		
-		private static const SKIN_BASE_TYPES:Array = Skin.SkinTypes.filter(function(element:EnumValue, index:int, array:Array):Boolean {
-			return element && element.base;
-		});
-		private static const SKIN_COAT_TYPES:Array = Skin.SkinTypes.filter(function(element:EnumValue, index:int, array:Array):Boolean {
-			return element && element.coat;
-		});
-		private static const PATTERN_BASE_TYPES:Array = Skin.PatternTypes.filter(function(element:EnumValue, index:int, array:Array):Boolean {
-			return element && element.base;
-		});
-		private static const PATTERN_COAT_TYPES:Array = Skin.PatternTypes.filter(function(element:EnumValue, index:int, array:Array):Boolean {
-			return element && element.coat;
-		});
-		/*
-		private static const SKIN_TONE_CONSTANTS:Array = [
-			"pale", "light", "dark", "green", "gray",
-			"blue", "black", "white", "red", "yellow",
-			"dark blue", "pink",
-		];
-		*/
 		private static const SKIN_ADJ_CONSTANTS:Array = [
 			"(none)", "tough", "smooth", "rough", "sexy",
 			"freckled", "glistering", "shiny", "slimy","goopey",
@@ -828,19 +1008,12 @@ public class DebugMenu extends BaseContent
 			"scales", "bark", "stone", "chitin"
 		];
 		private static const SKIN_COVERAGE_CONSTANTS:Array = [
-				[Skin.COVERAGE_NONE, "NONE (0)"],
-				[Skin.COVERAGE_LOW, "LOW (1, partial)"],
-				[Skin.COVERAGE_MEDIUM, "MEDIUM (2, mixed)"],
-				[Skin.COVERAGE_HIGH, "HIGH (3, full)"],
-				[Skin.COVERAGE_COMPLETE, "COMPLETE (4, full+face)"]
+			{data: Skin.COVERAGE_NONE, label: "NONE (0)"},
+			{data: Skin.COVERAGE_LOW, label: "LOW (1, partial)"},
+			{data: Skin.COVERAGE_MEDIUM, label: "MEDIUM (2, mixed)"},
+			{data: Skin.COVERAGE_HIGH, label: "HIGH (3, full)"},
+			{data: Skin.COVERAGE_COMPLETE, label: "COMPLETE (4, full+face)"}
 		];
-		/*
-		private static const HAIR_COLOR_CONSTANTS:Array = [
-			"blond", "brown", "black", "red", "white",
-			"silver blonde","sandy-blonde", "platinum blonde", "midnight black", "golden blonde",
-			"rainbow", "seven-colored",
-		];
-		*/
 		private static const HAIR_LENGTH_CONSTANTS:Array = [
 			0,0.5,1,2,4,
 			8,12,24,32,40,
@@ -858,97 +1031,88 @@ public class DebugMenu extends BaseContent
 							"skin vs","skin base.vs", "skin coat.vs",
 							"skinfurscales", "skintone") + ".\n");
 		}
-		private function changeCurrentLayer():void {
-			bpeSkinLayer = bpeSkinLayer == "Base" ? "Coat" : "Base";
-			bodyPartEditorSkin();
-		}
-		private function changeLayerType(page:int=0,setIdx:int=-1):void {
-			var editBase:Boolean = bpeSkinLayer == "Base";
-			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).type = setIdx;
-			menu();
-			dumpPlayerData();
-			tagDemosSkin();
-			showChangeOptions(bodyPartEditorSkin, page, editBase?SKIN_BASE_TYPES:SKIN_COAT_TYPES, changeLayerType);
-		}
-		private function changeLayerPattern(page:int=0,setIdx:int=-1):void {
-			var editBase:Boolean = bpeSkinLayer == "Base";
-			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).pattern = setIdx;
-			menu();
-			dumpPlayerData();
-			tagDemosSkin();
-			showChangeOptions(bodyPartEditorSkin, page, editBase?PATTERN_BASE_TYPES:PATTERN_COAT_TYPES, changeLayerPattern);
-		}
-		private function changeLayerColor(editBase:Boolean,page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).color = COLOR_CONSTANTS[setIdx];
-			menu();
-			dumpPlayerData();
-			tagDemosSkin();
-			showChangeOptions(bodyPartEditorSkin, page, COLOR_CONSTANTS, curry(changeLayerColor,editBase));
-		}
-		private function changeLayerColor2(editBase:Boolean,page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).color2 = COLOR_CONSTANTS[setIdx];
-			menu();
-			dumpPlayerData();
-			tagDemosSkin();
-			showChangeOptions(bodyPartEditorSkin, page, COLOR_CONSTANTS, curry(changeLayerColor2,editBase));
-		}
-		private function changeLayerAdj(editBase:Boolean,page:int=0,setIdx:int=-1):void {
-			var tgt:SkinLayer = (editBase?player.skin.base:player.skin.coat);
-			if (setIdx==0) tgt.adj = "";
-			if (setIdx>0) tgt.adj = SKIN_ADJ_CONSTANTS[setIdx];
-			menu();
-			dumpPlayerData();
-			tagDemosSkin();
-			showChangeOptions(bodyPartEditorSkin, page, SKIN_ADJ_CONSTANTS, curry(changeLayerAdj,editBase));
-		}
-		private function changeLayerDesc(editBase:Boolean,page:int=0,setIdx:int=-1):void {
-			var tgt:SkinLayer = (editBase?player.skin.base:player.skin.coat);
-			if (setIdx==0) tgt.desc = "";
-			if (setIdx>0) tgt.desc = SKIN_DESC_CONSTANTS[setIdx];
-			menu();
-			dumpPlayerData();
-			tagDemosSkin();
-			showChangeOptions(bodyPartEditorSkin, page, SKIN_DESC_CONSTANTS, curry(changeLayerDesc,editBase));
-		}
-		private function changeSkinCoverage(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.skin.coverage = setIdx;
-			menu();
-			dumpPlayerData();
-			tagDemosSkin();
-			showChangeOptions(bodyPartEditorSkin, page, SKIN_COVERAGE_CONSTANTS, changeSkinCoverage);
-		}
-		private function changeHairType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.hairType = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorSkin, page, Hair.Types, changeHairType);
-		}
-		private function changeHairColor(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.hairColor = COLOR_CONSTANTS[setIdx];
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorSkin, page, COLOR_CONSTANTS, changeHairColor);
-		}
-		private function changeHairLength(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.hairLength = HAIR_LENGTH_CONSTANTS[setIdx];
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorSkin, page, HAIR_LENGTH_CONSTANTS, changeHairLength);
-		}
 		private function bodyPartEditorHead():void {
+			clearBeElements();
+			// Convert from EnumValue[] to { label: EnumValue.id, data: EnumValue }[]
+			// to generate proper combo box items.
+			var faceTypes:Array = mapForComboBox(Face.Types, "id");
+			addBeComboBox("Face type", faceTypes,
+					Face.Types[player.facePart.type],
+					function (item:*):void {
+						player.facePart.type = item.data.value;
+						dumpPlayerData();
+					}
+			);
+			var tongueTypes:Array = mapForComboBox(Tongue.Types, "id");
+			addBeComboBox("Tongue type", tongueTypes,
+					Tongue.Types[player.tongue.type],
+					function (item:*):void {
+						player.tongue.type = item.data.value;
+						dumpPlayerData();
+					}
+			);
+			var eyeTypes:Array = mapForComboBox(Eyes.Types, "id");
+			addBeComboBox("Eye type", eyeTypes,
+					Eyes.Types[player.eyes.type],
+					function (item:*):void {
+						player.eyes.type = item.data.value;
+						dumpPlayerData();
+					}
+			);
+			addBeComboBox("Eye color", COLOR_CONSTANTS, player.eyes.colour,
+					function (item:*):void {
+						player.eyes.colour = item.data;
+						dumpPlayerData();
+					}
+			);
+			var antennaeTypes:Array = mapForComboBox(Antennae.Types, "id");
+			addBeComboBox("Antennae type", antennaeTypes,
+					Antennae.Types[player.antennae.type],
+					function (item:*):void {
+						player.antennae.type = item.data.value;
+						dumpPlayerData();
+					}
+			);
+			var hornTypes:Array = mapForComboBox(Horns.Types, "id");
+			addBeComboBox("Horns type", hornTypes,
+					Horns.Types[player.horns.type],
+					function (item:*):void {
+						player.horns.type = item.data.value;
+						dumpPlayerData();
+					}
+			);
+			addBeComboBox("Horn count", HORN_COUNT_CONSTANTS,
+					player.horns.count,
+					function (item:*):void {
+						player.horns.count = item.data;
+						dumpPlayerData();
+					}
+			);
+			var gillTypes:Array = mapForComboBox(Gills.Types, "id");
+			addBeComboBox("Gills type", gillTypes,
+					Gills.Types[player.gills.type],
+					function (item:*):void {
+						player.gills.type = item.data.value;
+						dumpPlayerData();
+					}
+			);
+			var beardStyles:Array = mapForComboBox(Beard.Types, "id");
+			addBeComboBox("Beard style", beardStyles,
+					Beard.Types[player.beardStyle],
+					function (item:*):void {
+						player.beardStyle = item.data.value;
+						dumpPlayerData();
+					}
+			);
+			addBeComboBox("Beard length", BEARD_LENGTH_CONSTANTS,
+					player.beardLength,
+					function (item:*):void {
+						player.beardLength = item.data;
+						dumpPlayerData();
+					}
+			);
 			menu();
 			dumpPlayerData();
-			addButton(0,"FaceType",changeFaceType);
-			addButton(1,"TongueType",changeTongueType);
-			addButton(2,"EyeType",changeEyeType);
-			addButton(3,"EyeColor",changeEyeColor);
-			addButton(4,"EarType",changeEarType);
-			addButton(5,"AntennaeType",changeAntennaeType);
-			addButton(6,"HornType",changeHornType);
-			addButton(7,"HornCount",changeHornCount);
-			addButton(8,"GillType",changeGillType);
-			addButton(9,"BeardStyle",changeBeardStyle);
-			addButton(10,"BeardLength",changeBeardLength);
 			addButton(14, "Back", bodyPartEditorRoot);
 		}
 		private static const HORN_COUNT_CONSTANTS:Array = [
@@ -960,74 +1124,6 @@ public class DebugMenu extends BaseContent
 			0,0.1,0.3,2,4,
 			8,12,16,32,64,
 		];
-		private function changeFaceType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.facePart.type = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, Face.Types, changeFaceType);
-		}
-		private function changeTongueType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.tongue.type = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, Tongue.Types, changeTongueType);
-		}
-		private function changeEyeType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.eyes.type = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, Eyes.Types, changeEyeType);
-		}
-		private function changeEyeColor(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.eyes.colour = COLOR_CONSTANTS[setIdx];
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, COLOR_CONSTANTS, changeEyeColor);
-		}
-		private function changeEarType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.ears.type = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, Ears.Types, changeEarType);
-		}
-		private function changeHornType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.horns.type = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, Horns.Types, changeHornType);
-		}
-		private function changeHornCount(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.horns.count = HORN_COUNT_CONSTANTS[setIdx];
-			menu();
-			dumpPlayerData();
-			tagDemosSkin();
-			showChangeOptions(bodyPartEditorHead, page, HORN_COUNT_CONSTANTS, changeHornCount);
-		}
-		private function changeAntennaeType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.antennae.type = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, Antennae.Types, changeAntennaeType);
-		}
-		private function changeGillType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.gills.type = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, Gills.Types, changeGillType);
-		}
-		private function changeBeardStyle(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.beardStyle = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, Beard.Types, changeBeardStyle);
-		}
-		private function changeBeardLength(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.beardLength = BEARD_LENGTH_CONSTANTS[setIdx];
-			menu();
-			dumpPlayerData();
-			tagDemosSkin();
-			showChangeOptions(bodyPartEditorHead, page, BEARD_LENGTH_CONSTANTS, changeBeardLength);
-		}
 		private function AlrauneDebug():void {
 			outputText("\n\nSet all cocks to tentacle and lower body to alraune!");
 			if (player.cocks.length == 0) {
@@ -1084,22 +1180,89 @@ public class DebugMenu extends BaseContent
 
 		}
 		private function bodyPartEditorTorso():void {
+			clearBeElements();
+			var armTypes:Array = mapForComboBox(Arms.Types, "id");
+			addBeComboBox("Arm type", armTypes,
+					Arms.Types[player.arms.type],
+					function (item:*):void {
+						player.arms.type = item.data.value;
+						dumpPlayerData();
+					}
+			);
+			var clawTypes:Array = mapForComboBox(Claws.Types, "id");
+			addBeComboBox("Claw type", clawTypes,
+					Claws.Types[player.clawsPart.type],
+					function (item:*):void {
+						player.clawsPart.type = item.data.value;
+						dumpPlayerData();
+					}
+			);
+			addBeComboBox("Claw color", COLOR_CONSTANTS,
+					player.clawsPart.tone,
+					function (item:*):void {
+						player.clawsPart.tone = item.data;
+						dumpPlayerData();
+					}
+			);
+			var tailTypes:Array = mapForComboBox(Tail.Types, "id");
+			addBeComboBox("Tail type", tailTypes,
+					Tail.Types[player.tail.type],
+					function (item:*):void {
+						player.tail.type = item.data.value;
+						dumpPlayerData();
+					}
+			);
+			addBeComboBox("Tail count", TAIL_COUNT_CONSTANTS,
+					player.tail.count,
+					function (item:*):void {
+						player.tail.count = item.data;
+						dumpPlayerData();
+					}
+			);
+			var wingTypes:Array = mapForComboBox(Wings.Types, "id");
+			addBeComboBox("Wing type", wingTypes,
+					Wings.Types[player.wings.type],
+					function (item:*):void {
+						player.wings.type = item.data.value;
+						dumpPlayerData();
+					}
+			);
+			addBeComboBox("Wing desc", WING_DESC_CONSTANTS,
+					player.wings.desc,
+					function (item:*):void {
+						player.wings.desc = item.data;
+						dumpPlayerData();
+					}
+			);
+			var legTypes:Array = mapForComboBox(LowerBody.Types, "id");
+			addBeComboBox("Lower body type", legTypes,
+					LowerBody.Types[player.lowerBodyPart.type],
+					function (item:*):void {
+						player.lowerBodyPart.type = item.data.value;
+						bodyPartEditorTorso();
+					}
+			);
+			addBeComboBox("Leg count", LEG_COUNT_CONSTANTS,
+					player.lowerBodyPart.legCount,
+					function (item:*):void {
+						player.lowerBodyPart.legCount = item.data;
+						dumpPlayerData();
+					}
+			);
+			var rearTypes:Array = mapForComboBox(RearBody.Types, "id");
+			addBeComboBox("Rear body type", rearTypes,
+					RearBody.Types[player.rearBody.type],
+					function (item:*):void {
+						player.rearBody.type = item.data.value;
+						dumpPlayerData();
+					}
+			);
 			menu();
 			dumpPlayerData();
-			addButton(0,"ArmType",changeArmType);
-			addButton(1,"ClawType",changeClawType);
-			addButton(2,"ClawTone",changeClawTone);
-			addButton(3,"TailType",changeTailType);
-			addButton(4,"TailCount",changeTailCount);
-			addButton(5,"WingType",changeWingType);
-			addButton(6,"WingDesc",changeWingDesc);
-			addButton(7,"LowerBodyType",changeLowerBodyType);
-			addButton(8,"LegCount",changeLegCount);
-			addButton(9,"ReadBodyType",changeRearBodyType);
 			addButton(14, "Back", bodyPartEditorRoot);
 		}
 		private static const TAIL_COUNT_CONSTANTS:Array = [
-			[0,"0"],1,2,3,4,
+			0,1,2,3,4,
 			5,6,7,8,9,
 			10,16
 		];
@@ -1117,67 +1280,6 @@ public class DebugMenu extends BaseContent
 			1,2,4,6,8,
 			10,12,16
 		];
-		private function changeArmType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.arms.type = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, Arms.Types, changeArmType);
-		}
-		private function changeClawType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.clawType = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, Claws.Types, changeClawType);
-		}
-		private function changeClawTone(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.clawTone = COLOR_CONSTANTS[setIdx];
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, COLOR_CONSTANTS, changeClawTone);
-		}
-		private function changeTailType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.tailType = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, Tail.Types, changeTailType);
-		}
-		private function changeTailCount(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.tailCount = TAIL_COUNT_CONSTANTS[setIdx];
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, TAIL_COUNT_CONSTANTS, changeTailCount);
-		}
-		private function changeWingType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.wings.type = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, Wings.Types, changeWingType);
-		}
-		private function changeWingDesc(page:int=0,setIdx:int=-1):void {
-			if (setIdx==0) player.wings.desc = "";
-			if (setIdx>=0) player.wings.desc = WING_DESC_CONSTANTS[setIdx];
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, WING_DESC_CONSTANTS, changeWingDesc);
-		}
-		private function changeLowerBodyType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.lowerBodyPart.type = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, LowerBody.Types, changeLowerBodyType);
-		}
-		private function changeLegCount(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.legCount = LEG_COUNT_CONSTANTS[setIdx];
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, LEG_COUNT_CONSTANTS, changeLegCount);
-		}
-		private function changeRearBodyType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.rearBody.type = setIdx;
-			menu();
-			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, RearBody.Types, changeRearBodyType);
-		}
 		private function changeScorpionTail():void {
 			clearOutput();
 			outputText("<b>Your tail is now that of a scorpion's. Currently, scorpion tail has no use but it will eventually be useful for stinging.</b>");

@@ -44,14 +44,8 @@ package classes.internals
 		/**
 		 * @return input if it is not null or undefined, otherwise defaultValue
 		 */
-		public static function or(input:*, defaultValue:*):* {
+		public static function valueOr(input:*, defaultValue:*):* {
 			return (input === null || input === undefined) ? defaultValue : input;
-		}
-		/**
-		 * @return input[propName] if input is not null or undefined, otherwise undefined
-		 */
-		public static function prop(input:*, propName:String):* {
-			return (input !== undefined && input !== null) ? input[propName] : undefined;
 		}
 		public static function stringOr(input:*,def:String=""):String {
 			return (input is String) ? input : def;
@@ -127,13 +121,45 @@ package classes.internals
 			target.push.apply(target, values);
 			return target;
 		}
+		
+		/**
+		 * @return src.find( el => el[propName] == propValue ) || defaultValue
+		 */
+		public static function findByProp(src:Array, propName:String, propValue:*, defaultValue:* = undefined):* {
+			for each (var e:* in src) {
+				if (e[propName] == propValue) return e;
+			}
+			return defaultValue;
+		}
+		
+		/**
+		 * @return src.filter( el => el && el[propName] == propValue )
+		 */
+		public static function filterByProp(src:Array, propName:String, propValue:*):Array {
+			return src.filter(function(element:*, index:int, array:Array):Boolean {
+				return element && element[propName] == propValue;
+			})
+		}
 		/**
 		 * @return src.map( el => el['propname'] )
 		 */
 		public static function mapOneProp(src:Array,propname:String):Array {
 			var result:Array = [];
 			for (var i:int = 0; i< src.length; i++) {
+				if (!src[i]) continue;
 				result.push(src[i][propname]);
+			}
+			return result;
+		}
+		/**
+		 * @return src.map( el => ({ label: propname ? el[propname] : (""+el), data: el }) )
+		 */
+		public static function mapForComboBox(src:Array,propname:String):Array {
+			var result:Array = [];
+			for (var i:int = 0; i< src.length; i++) {
+				var el:* = src[i];
+				if (!el) continue;
+				result.push({label: propname ? el[propname] : (""+el), data:el});
 			}
 			return result;
 		}
