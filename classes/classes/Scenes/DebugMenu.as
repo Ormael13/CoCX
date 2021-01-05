@@ -1,4 +1,4 @@
-package classes.Scenes 
+package classes.Scenes
 {
 import classes.*;
 import classes.BodyParts.Antennae;
@@ -23,6 +23,7 @@ import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
 import classes.Parser.Parser;
 import classes.Scenes.NPCs.JojoScene;
+import classes.internals.EnumValue;
 
 import coc.view.Color;
 
@@ -52,8 +53,8 @@ public class DebugMenu extends BaseContent
 		public var testArray:Array = [];
 		
 		
-		public function DebugMenu() 
-		{	
+		public function DebugMenu()
+		{
 		}
 		
 		public function accessDebugMenu():void {
@@ -417,11 +418,11 @@ public class DebugMenu extends BaseContent
 			weaponArray.push(weapons.L_STAFF);
 			weaponArray.push(weapons.MACE);
 			weaponArray.push(weapons.PIPE);
-			weaponArray.push(weapons.PTCHFRK);			
+			weaponArray.push(weapons.PTCHFRK);
 			weaponArray.push(weapons.RIDINGC);
 			weaponArray.push(weapons.RRAPIER);
 			weaponArray.push(weapons.S_BLADE);
-			weaponArray.push(weapons.S_GAUNT);			
+			weaponArray.push(weapons.S_GAUNT);
 			weaponArray.push(weapons.SCARBLD);
 			weaponArray.push(weapons.SCIMITR);
 			weaponArray.push(weapons.SPEAR);
@@ -597,8 +598,10 @@ public class DebugMenu extends BaseContent
 			var N:int = 12;
 			for (var i:int = N * page; i < constants.length && i < (page + 1) * N; i++) {
 				var e:* = constants[i];
-				if (!(e is Array)) e = [i,e];
-				addButton(i % N, e[1], curry(functionPageIndex, page, e[0]));
+				if (e === null || e === undefined) continue;
+				if (e is EnumValue) e = [e.value, e.value+' '+e.id];
+				else if (!(e is Array)) e = [i,e];
+				addButton(i % N, e[1], curry(functionPageIndex, page, e[0])).hint(e[1]);
 			}
 			if (page > 0) addButton(12, "PrevPage", curry(functionPageIndex, page - 1));
 			if ((page +1)*N < constants.length) addButton(13, "NextPage", curry(functionPageIndex, page + 1));
@@ -795,41 +798,18 @@ public class DebugMenu extends BaseContent
 			"yellowish-green", "black and yellow", "white and black"
 		];
 		
-		private static const SKIN_BASE_TYPES:Array = [
-			[Skin.PLAIN, "0 PLAIN"],
-			[Skin.GOO, "3 GOO"],
-			[Skin.STONE, "7 STONE"],
-			[Skin.AQUA_RUBBER_LIKE, "7 AQUA_RUBBER_LIKE"],
-			[Skin.FEATHER, "21 FEATHER"],
-			[Skin.TRANSPARENT, "22 TRANSPARENT"],
-		];
-		private static const SKIN_COAT_TYPES:Array = [
-			[Skin.FUR, "1 FUR"],
-			[Skin.SCALES, "2 SCALES"],
-			[Skin.CHITIN, "5 CHITIN"],
-			[Skin.BARK, "6 BARK"],
-			[Skin.STONE, "7 STONE"],
-			[Skin.AQUA_SCALES, "9 AQUA_SCALES"],
-			[Skin.DRAGON_SCALES, "10 DRAGON_SCALES"],
-			[Skin.MOSS, "11 MOSS"],
-		];
-		private static const PATTERN_BASE_TYPES:Array = [
-			[Skin.PATTERN_NONE, "0 NONE"],
-			[Skin.PATTERN_MAGICAL_TATTOO, "1 MAGICAL_TATTOO"],
-			[Skin.PATTERN_ORCA_UNDERBODY, "2 ORCA_UNDERBODY"],
-			[Skin.PATTERN_BATTLE_TATTOO, "5 BATTLE_TATTOO"],
-			[Skin.PATTERN_LIGHTNING_SHAPED_TATTOO, "7 LIGHTNING_SHAPED_TATTOO"],
-			[Skin.PATTERN_SCAR_SHAPED_TATTOO, "9 SCAR_SHAPED_TATTOO"],
-			[Skin.PATTERN_WHITE_BLACK_VEINS, "10 PATTERN_WHITE_BLACK_VEINS"],
-			[Skin.PATTERN_USHI_ONI_ONNA_TATTOO, "12 PATTERN_USHI_ONI_ONNA_TATTOO"],
-			[Skin.PATTERN_SCAR_WINDSWEPT, "13 PATTERN_SCAR_WINDSWEPT"],
-		];
-		private static const PATTERN_COAT_TYPES:Array = [
-			[Skin.PATTERN_NONE, "0 NONE"],
-			[Skin.PATTERN_BEE_STRIPES, "3 BEE_STRIPES"],
-			[Skin.PATTERN_TIGER_STRIPES, "4 TIGER_STRIPES"],
-			[Skin.PATTERN_RED_PANDA_UNDERBODY, "8 PATTERN_RED_PANDA_UNDERBODY"],
-		];
+		private static const SKIN_BASE_TYPES:Array = Skin.SkinTypes.filter(function(element:EnumValue, index:int, array:Array):Boolean {
+			return element && element.base;
+		});
+		private static const SKIN_COAT_TYPES:Array = Skin.SkinTypes.filter(function(element:EnumValue, index:int, array:Array):Boolean {
+			return element && element.coat;
+		});
+		private static const PATTERN_BASE_TYPES:Array = Skin.PatternTypes.filter(function(element:EnumValue, index:int, array:Array):Boolean {
+			return element && element.base;
+		});
+		private static const PATTERN_COAT_TYPES:Array = Skin.PatternTypes.filter(function(element:EnumValue, index:int, array:Array):Boolean {
+			return element && element.coat;
+		});
 		/*
 		private static const SKIN_TONE_CONSTANTS:Array = [
 			"pale", "light", "dark", "green", "gray",
@@ -853,22 +833,6 @@ public class DebugMenu extends BaseContent
 				[Skin.COVERAGE_MEDIUM, "MEDIUM (2, mixed)"],
 				[Skin.COVERAGE_HIGH, "HIGH (3, full)"],
 				[Skin.COVERAGE_COMPLETE, "COMPLETE (4, full+face)"]
-		];
-		private static const HAIR_TYPE_CONSTANTS:Array = [
-			[Hair.NORMAL, "0 NORMAL"],
-			[Hair.FEATHER, "1 FEATHER"],
-			[Hair.GHOST, "2 GHOST"],
-			[Hair.GOO, "3 GOO"],
-			[Hair.ANEMONE, "4 ANEMONE"],
-			[Hair.QUILL, "5 QUILL"],
-			[Hair.GORGON, "6 GORGON"],
-			[Hair.LEAF, "7 LEAF"],
-			[Hair.FLUFFY, "8 FLUFFY"],
-			[Hair.GRASS, "9 GRASS"],
-			[Hair.SILKEN, "10 SILKEN"],
-			[Hair.STORM, "11 STORM"],
-			[Hair.BURNING, "12 BURNING"],
-			[Hair.SNOWY, "13 SNOWY"],
 		];
 		/*
 		private static const HAIR_COLOR_CONSTANTS:Array = [
@@ -957,7 +921,7 @@ public class DebugMenu extends BaseContent
 			if (setIdx>=0) player.hairType = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorSkin, page, HAIR_TYPE_CONSTANTS, changeHairType);
+			showChangeOptions(bodyPartEditorSkin, page, Hair.Types, changeHairType);
 		}
 		private function changeHairColor(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.hairColor = COLOR_CONSTANTS[setIdx];
@@ -987,208 +951,10 @@ public class DebugMenu extends BaseContent
 			addButton(10,"BeardLength",changeBeardLength);
 			addButton(14, "Back", bodyPartEditorRoot);
 		}
-		private static const FACE_TYPE_CONSTANTS:Array = [
-			[Face.HUMAN, "0 HUMAN"],
-			[Face.HORSE, "1 HORSE"],
-			[Face.DOG, "2 DOG"],
-			[Face.COW_MINOTAUR, "3 COW_MINOTAUR"],
-			[Face.SHARK_TEETH, "4 SHARK_TEETH"],
-			[Face.SNAKE_FANGS, "5 SNAKE_FANGS"],
-			[Face.CAT, "6 CAT"],
-			[Face.LIZARD, "7 LIZARD"],
-			[Face.BUNNY, "8 BUNNY"],
-			[Face.KANGAROO, "9 KANGAROO"],
-			[Face.SPIDER_FANGS, "10 SPIDER_FANGS"],
-			[Face.FOX, "11 FOX"],
-			[Face.DRAGON, "12 DRAGON"],
-			[Face.RACCOON_MASK, "13 RACCOON_MASK"],
-			[Face.RACCOON, "14 RACCOON"],
-			[Face.BUCKTEETH, "15 BUCKTEETH"],
-			[Face.MOUSE, "16 MOUSE"],
-			[Face.FERRET_MASK, "17 FERRET_MASK"],
-			[Face.FERRET, "18 FERRET"],
-			[Face.PIG, "19 PIG"],
-			[Face.BOAR, "20 BOAR"],
-			[Face.RHINO, "21 RHINO"],
-			[Face.ECHIDNA, "22 ECHIDNA"],
-			[Face.DEER, "23 DEER"],
-			[Face.WOLF, "24 WOLF"],
-			[Face.MANTICORE, "25 MANTICORE"],
-			[Face.SALAMANDER_FANGS, "26 SALAMANDER_FANGS"],
-			[Face.YETI_FANGS, "27 YETI_FANGS"],
-			[Face.ORCA, "28 ORCA"],
-			[Face.PLANT_DRAGON, "29 PLANT_DRAGON"],
-			[Face.DRAGON_FANGS, "30 DRAGON_FANGS"],
-			[Face.DEVIL_FANGS, "31 DEVIL_FANGS"],
-			[Face.ONI_TEETH, "32 ONI_TEETH"],
-			[Face.WEASEL, "33 WEASEL"],
-			[Face.VAMPIRE, "34 VAMPIRE"],
-			[Face.VAMPIRE, "34 VAMPIRE"],
-			[Face.BUCKTOOTH, "35 BUCKTOOTH"],
-			[Face.JABBERWOCKY, "36 JABBERWOCKY"],
-			[Face.RED_PANDA, "37 RED_PANDA"],
-			[Face.CAT_CANINES, "38 CAT_CANINES"],
-			[Face.CHESHIRE, "39 CHESHIRE"],
-			[Face.CHESHIRE_SMILE, "40 CHESHIRE_SMILE"],
-			[Face.AVIAN, "41 AVIAN"],
-			[Face.WOLF_FANGS, "42 WOLF_FANGS"],
-			[Face.ORC_FANGS, "43 ORC_FANGS"],
-			[Face.ANIMAL_TOOTHS, "44 ANIMAL_TOOTHS"],
-			[Face.BEAR, "45 BEAR"],
-			[Face.PANDA, "46 PANDA"],
-			[Face.FIRE_SNAIL, "47 FIRE_SNAIL"],
-			[Face.GHOST, "48 GHOST"],
-			[Face.JIANGSHI, "49 JIANGSHI"],
-			[Face.YUKI_ONNA, "50 YUKI_ONNA"],
-			[Face.KUDERE, "51 KUDERE"],
-			[Face.USHI_ONI_ONNA, "52 USHI_ONI_ONNA"],
-		];
-		private static const TONGUE_TYPE_CONSTANTS:Array = [
-			[Tongue.HUMAN, "0 HUMAN"],
-			[Tongue.SNAKE, "1 SNAKE"],
-			[Tongue.DEMONIC, "2 DEMONIC"],
-			[Tongue.DRACONIC, "3 DRACONIC"],
-			[Tongue.ECHIDNA, "4 ECHIDNA"],
-			[Tongue.CAT, "5 CAT"],
-			[Tongue.ELF, "6 ELF"],
-			[Tongue.DOG, "7 DOG"],
-			[Tongue.CAVE_WYRM, "8 CAVE_WYRM"],
-			[Tongue.GHOST, "9 GHOST"],
-			[Tongue.MELKIE, "10 MELKIE"],
-			[Tongue.RATATOSKR, "11 RATATOSKR"],
-			[Tongue.RAVENOUS_TONGUE, "12 RAVENOUS_TONGUE"],
-		];
-		private static const EYE_TYPE_CONSTANTS:Array = [
-			[Eyes.HUMAN, "0 HUMAN"],
-			[Eyes.FOUR_SPIDER_EYES, "1 FOUR_SPIDER_EYES"],
-			[Eyes.BLACK_EYES_SAND_TRAP, "2 BLACK_EYES_SAND_TRAP"],
-			[Eyes.CAT_SLITS, "3 CAT_SLITS"],
-			[Eyes.GORGON, "4 GORGON"],
-			[Eyes.FENRIR, "5 FENRIR"],
-			[Eyes.MANTICORE, "6 MANTICORE"],
-			[Eyes.FOX, "7 FOX"],
-			[Eyes.REPTILIAN, "8 REPTILIAN"],
-			[Eyes.SNAKE, "9 SNAKE"],
-			[Eyes.DRAGON, "10 DRAGON"],
-			[Eyes.DEVIL, "11 DEVIL"],
-			[Eyes.ONI, "12 ONI"],
-			[Eyes.ELF, "13 ELF"],
-			[Eyes.RAIJU, "14 RAIJU"],
-			[Eyes.VAMPIRE, "15 VAMPIRE"],
-			[Eyes.GEMSTONES, "16 GEMSTONES"],
-			[Eyes.FERAL, "17 FERAL"],
-			[Eyes.GRYPHON, "18 GRYPHON"],
-			[Eyes.INFERNAL, "19 INFERNAL"],
-			[Eyes.ORC, "20 ORC"],
-			[Eyes.CAVE_WYRM, "21 CAVE_WYRM"],
-			[Eyes.HINEZUMI, "22 HINEZUMI"],
-			[Eyes.BEAR, "23 BEAR"],
-			[Eyes.DISPLACER, "24 DISPLACER"],
-			[Eyes.FIRE_SNAIL, "25 FIRE_SNAIL"],
-			[Eyes.GHOST, "26 GHOST"],
-			[Eyes.JIANGSHI, "27 JIANGSHI"],
-			[Eyes.GOAT, "28 GOAT"],
-			[Eyes.CENTIPEDE, "29 CENTIPEDE"],
-			[Eyes.KRAKEN, "30 KRAKEN"],
-			[Eyes.FROSTWYRM, "31 FROSTWYRM"],
-			[Eyes.CANCER, "32 CANCER"],
-			[Eyes.FAIRY, "33 FAIRY"],
-			[Eyes.GREMLIN, "34 GREMLIN"],
-			[Eyes.WEASEL, "35 WEASEL"],
-			[Eyes.GAZER, "36 GAZER"],
-			[Eyes.RATATOSKR, "37 RATATOSKR"],
-			[Eyes.FIENDISH, "38 FIENDISH"],
-			[Eyes.DEAD_EYES, "38 DEAD_EYES"],
-		];
-		private static const EAR_TYPE_CONSTANTS:Array    = [
-			[Ears.HUMAN, "0 HUMAN"],
-			[Ears.HORSE, "1 HORSE"],
-			[Ears.DOG, "2 DOG"],
-			[Ears.COW, "3 COW"],
-			[Ears.ELFIN, "4 ELFIN"],
-			[Ears.CAT, "5 CAT"],
-			[Ears.LIZARD, "6 LIZARD"],
-			[Ears.BUNNY, "7 BUNNY"],
-			[Ears.KANGAROO, "8 KANGAROO"],
-			[Ears.FOX, "9 FOX"],
-			[Ears.DRAGON, "10 DRAGON"],
-			[Ears.RACCOON, "11 RACCOON"],
-			[Ears.MOUSE, "12 MOUSE"],
-			[Ears.FERRET, "13 FERRET"],
-			[Ears.PIG, "14 PIG"],
-			[Ears.RHINO, "15 RHINO"],
-			[Ears.ECHIDNA, "16 ECHIDNA"],
-			[Ears.DEER, "17 DEER"],
-			[Ears.WOLF, "18 WOLF"],
-			[Ears.LION, "19 LION"],
-			[Ears.YETI, "20 YETI"],
-			[Ears.ORCA, "21 ORCA"],
-			[Ears.SNAKE, "22 SNAKE"],
-			[Ears.GOAT, "23 GOAT"],
-			[Ears.ONI, "24 ONI"],
-			[Ears.ELVEN, "25 ELVEN"],
-			[Ears.RAIJU, "27 RAIJU"],
-			[Ears.BAT, "28 BAT"],
-			[Ears.VAMPIRE, "29 VAMPIRE"],
-			[Ears.RED_PANDA, "30 RED_PANDA"],
-			[Ears.AVIAN, "31 AVIAN"],
-			[Ears.GRYPHON, "32 GRYPHON"],
-			[Ears.CAVE_WYRM, "33 CAVE_WYRM"],
-			[Ears.BEAR, "34 BEAR"],
-			[Ears.PANDA, "35 PANDA"],
-			[Ears.SHARK, "36 SHARK"],
-			[Ears.DISPLACER, "37 DISPLACER"],
-			[Ears.MELKIE, "38 MELKIE"],
-			[Ears.GREMLIN, "39 GREMLIN"],
-			[Ears.WEASEL, "40 WEASEL"],
-		];
-		private static const HORN_TYPE_CONSTANTS:Array    = [
-			[Horns.NONE, "0 NONE"],
-			[Horns.DEMON, "1 DEMON"],
-			[Horns.COW_MINOTAUR, "2 COW_MINOTAUR"],
-			[Horns.DRACONIC_X2, "3 DRACONIC_X2"],
-			[Horns.DRACONIC_X4_12_INCH_LONG, "4 DRACONIC_X4_12_INCH_LONG"],
-			[Horns.ANTLERS, "5 ANTLERS"],
-			[Horns.GOAT, "6 GOAT"],
-			[Horns.UNICORN, "7 UNICORN"],
-			[Horns.RHINO, "8 RHINO"],
-			[Horns.OAK, "9 OAK"],
-			[Horns.GARGOYLE, "10 GARGOYLE"],
-			[Horns.ORCHID, "11 ORCHID"],
-			[Horns.ONI_X2, "12 ONI_X2"],
-			[Horns.ONI, "13 ONI"],
-			[Horns.BICORN, "14 BICORN"],
-			[Horns.GHOSTLY_WISPS, "15 GHOSTLY_WISPS"],
-			[Horns.SPELL_TAG, "16 SPELL_TAG"],
-			[Horns.GOATQUAD, "17 GOATQUAD"],
-			[Horns.KRAKEN, "18 KRAKEN"],
-			[Horns.FROSTWYRM, "19 FROSTWYRM"],
-			[Horns.USHI_ONI_ONNA, "20 USHI_ONI_ONNA"],
-		];
 		private static const HORN_COUNT_CONSTANTS:Array = [
 				0,1,2,3,4,
 				5,6,8,10,12,
 				16,20
-		];
-		private static const ANTENNA_TYPE_CONSTANTS:Array = [
-			[Antennae.NONE, "0 NONE"],
-			[Antennae.MANTIS, "1 MANTIS"],
-			[Antennae.BEE, "2 BEE"],
-			[Antennae.COCKATRICE, "3 COCKATRICE"],
-			[Antennae.FIRE_SNAIL, "4 FIRE_SNAIL"],
-			[Antennae.MOTH, "5 MOTH"],
-		];
-		private static const GILLS_TYPE_CONSTANTS:Array   = [
-			[Gills.NONE, "0 NONE"],
-			[Gills.ANEMONE, "1 ANEMONE"],
-			[Gills.FISH, "2 FISH"],
-			[Gills.GILLS_IN_TENTACLE_LEGS, "3 IN_TENTACLE_LEGS"],
-		];
-		private static const BEARD_STYLE_CONSTANTS:Array = [
-			[Beard.NORMAL, "0 NORMAL"],
-			[Beard.GOATEE, "1 GOATEE"],
-			[Beard.CLEANCUT, "2 CLEANCUT"],
-			[Beard.MOUNTAINMAN, "3 MOUNTAINMAN"],
 		];
 		private static const BEARD_LENGTH_CONSTANTS:Array = [
 			0,0.1,0.3,2,4,
@@ -1198,19 +964,19 @@ public class DebugMenu extends BaseContent
 			if (setIdx>=0) player.facePart.type = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, FACE_TYPE_CONSTANTS, changeFaceType);
+			showChangeOptions(bodyPartEditorHead, page, Face.Types, changeFaceType);
 		}
 		private function changeTongueType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.tongue.type = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, TONGUE_TYPE_CONSTANTS, changeTongueType);
+			showChangeOptions(bodyPartEditorHead, page, Tongue.Types, changeTongueType);
 		}
 		private function changeEyeType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.eyes.type = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, EYE_TYPE_CONSTANTS, changeEyeType);
+			showChangeOptions(bodyPartEditorHead, page, Eyes.Types, changeEyeType);
 		}
 		private function changeEyeColor(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.eyes.colour = COLOR_CONSTANTS[setIdx];
@@ -1222,13 +988,13 @@ public class DebugMenu extends BaseContent
 			if (setIdx>=0) player.ears.type = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, EAR_TYPE_CONSTANTS, changeEarType);
+			showChangeOptions(bodyPartEditorHead, page, Ears.Types, changeEarType);
 		}
 		private function changeHornType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.horns.type = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, HORN_TYPE_CONSTANTS, changeHornType);
+			showChangeOptions(bodyPartEditorHead, page, Horns.Types, changeHornType);
 		}
 		private function changeHornCount(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.horns.count = HORN_COUNT_CONSTANTS[setIdx];
@@ -1241,19 +1007,19 @@ public class DebugMenu extends BaseContent
 			if (setIdx>=0) player.antennae.type = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, ANTENNA_TYPE_CONSTANTS, changeAntennaeType);
+			showChangeOptions(bodyPartEditorHead, page, Antennae.Types, changeAntennaeType);
 		}
 		private function changeGillType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.gills.type = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, GILLS_TYPE_CONSTANTS, changeGillType);
+			showChangeOptions(bodyPartEditorHead, page, Gills.Types, changeGillType);
 		}
 		private function changeBeardStyle(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.beardStyle = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorHead, page, BEARD_STYLE_CONSTANTS, changeBeardStyle);
+			showChangeOptions(bodyPartEditorHead, page, Beard.Types, changeBeardStyle);
 		}
 		private function changeBeardLength(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.beardLength = BEARD_LENGTH_CONSTANTS[setIdx];
@@ -1332,162 +1098,10 @@ public class DebugMenu extends BaseContent
 			addButton(9,"ReadBodyType",changeRearBodyType);
 			addButton(14, "Back", bodyPartEditorRoot);
 		}
-		private static const ARM_TYPE_CONSTANTS:Array   = [
-			[Arms.HUMAN, "0 HUMAN"],
-			[Arms.HARPY, "1 HARPY"],
-			[Arms.SPIDER, "2 SPIDER"],
-			[Arms.MANTIS, "3 MANTIS"],
-			[Arms.BEE, "4 BEE"],
-			[Arms.SALAMANDER, "5 SALAMANDER"],
-			[Arms.PHOENIX, "6 PHOENIX"],
-			[Arms.PLANT, "7 PLANT"],
-			[Arms.SHARK, "8 SHARK"],
-			[Arms.GARGOYLE, "9 GARGOYLE"],
-			[Arms.WOLF, "10 WOLF"],
-			[Arms.LION, "11 LION"],
-			[Arms.KITSUNE, "12 KITSUNE"],
-			[Arms.FOX, "13 FOX"],
-			[Arms.LIZARD, "14 LIZARD"],
-			[Arms.DRAGON, "15 DRAGON"],
-			[Arms.YETI, "16 YETI"],
-			[Arms.ORCA, "17 ORCA"],
-			[Arms.PLANT2, "18 PLANT2"],
-			[Arms.DEVIL, "19 DEVIL"],
-			[Arms.ONI, "20 ONI"],
-			[Arms.ELF, "21 ELF"],
-			[Arms.RAIJU, "22 RAIJU"],
-			[Arms.RED_PANDA, "23 RED_PANDA"],
-			[Arms.GARGOYLE_2, "24 GARGOYLE_2"],
-			[Arms.CAT, "25 CAT"],
-			[Arms.AVIAN, "26 AVIAN"],
-			[Arms.GRYPHON, "27 GRYPHON"],
-			[Arms.SPHINX, "28 SPHINX"],
-			[Arms.PIG, "29 PIG"],
-			[Arms.BOAR, "30 BOAR"],
-			[Arms.ORC, "31 ORC"],
-			[Arms.DISPLACER, "32 DISPLACER"],
-			[Arms.CAVE_WYRM, "33 CAVE_WYRM"],
-			[Arms.HINEZUMI, "34 HINEZUMI"],
-			[Arms.BEAR, "35 BEAR"],
-			[Arms.GOO, "36 GOO"],
-			[Arms.HYDRA, "37 HYDRA"],
-			[Arms.GHOST, "38 GHOST"],
-			[Arms.JIANGSHI, "39 JIANGSHI"],
-			[Arms.RAIJU_2, "40 RAIJU_2"],
-			[Arms.YUKI_ONNA, "41 YUKI_ONNA"],
-			[Arms.MELKIE, "42 MELKIE"],
-			[Arms.CENTIPEDE, "43 CENTIPEDE"],
-			[Arms.KRAKEN, "44 KRAKEN"],
-			[Arms.FROSTWYRM, "45 FROSTWYRM"],
-			[Arms.CANCER, "46 CANCER"],
-			[Arms.USHI_ONI_ONNA, "47 USHI_ONI_ONNA"],
-			[Arms.WENDIGO, "48 WENDIGO"],
-		];
-		private static const CLAW_TYPE_CONSTANTS:Array = [
-			[Claws.NORMAL, "0 NORMAL"],
-			[Claws.LIZARD, "1 LIZARD"],
-			[Claws.DRAGON, "2 DRAGON"],
-			[Claws.SALAMANDER, "3 SALAMANDER"],
-			[Claws.CAT, "4 CAT"],
-			[Claws.DOG, "5 DOG"],
-			[Claws.RAPTOR, "6 RAPTOR"],
-			[Claws.MANTIS, "7 MANTIS"],
-			[Claws.IMP, "8 IMP"],
-			[Claws.COCKATRICE, "9 COCKATRICE"],
-			[Claws.RED_PANDA, "10 RED_PANDA"],
-		];
-		private static const TAIL_TYPE_CONSTANTS:Array  = [
-			[Tail.NONE, "0 NONE"],
-			[Tail.HORSE, "1 HORSE"],
-			[Tail.DOG, "2 DOG"],
-			[Tail.DEMONIC, "3 DEMONIC"],
-			[Tail.COW, "4 COW"],
-			[Tail.SPIDER_ADBOMEN, "5 SPIDER_ADBOMEN"],
-			[Tail.BEE_ABDOMEN, "6 BEE_ABDOMEN"],
-			[Tail.SHARK, "7 SHARK"],
-			[Tail.CAT, "8 CAT"],
-			[Tail.LIZARD, "9 LIZARD"],
-			[Tail.RABBIT, "10 RABBIT"],
-			[Tail.HARPY, "11 HARPY"],
-			[Tail.KANGAROO, "12 KANGAROO"],
-			[Tail.FOX, "13 FOX"],
-			[Tail.DRACONIC, "14 DRACONIC"],
-			[Tail.RACCOON, "15 RACCOON"],
-			[Tail.MOUSE, "16 MOUSE"],
-			[Tail.FERRET, "17 FERRET"],
-			[Tail.BEHEMOTH, "18 BEHEMOTH"],
-			[Tail.PIG, "19 PIG"],
-			[Tail.SCORPION, "20 SCORPION"],
-			[Tail.GOAT, "21 GOAT"],
-			[Tail.RHINO, "22 RHINO"],
-			[Tail.ECHIDNA, "23 ECHIDNA"],
-			[Tail.DEER, "24 DEER"],
-			[Tail.SALAMANDER, "25 SALAMANDER"],
-			[Tail.KITSHOO, "26 KITSHOO"],
-			[Tail.MANTIS_ABDOMEN, "27 MANTIS_ABDOMEN"],
-			[Tail.MANTICORE_PUSSYTAIL, "28 MANTICORE_PUSSYTAIL"],
-			[Tail.WOLF, "29 WOLF"],
-			[Tail.GARGOYLE, "30 GARGOYLE"],
-			[Tail.ORCA, "31 ORCA"],
-			[Tail.YGGDRASIL, "32 YGGDRASIL"],
-			[Tail.RAIJU, "33 RAIJU"],
-			[Tail.RED_PANDA, "34 RED_PANDA"],
-			[Tail.GARGOYLE_2, "35 GARGOYLE_2"],
-			[Tail.AVIAN, "36 AVIAN"],
-			[Tail.GRIFFIN, "37 GRIFFIN"],
-			[Tail.LION, "38 LION"],
-			[Tail.BURNING, "39 BURNING"],
-			[Tail.NEKOMATA_FORKED_1_3, "40 NEKOMATA FORKED 1/3"],
-			[Tail.NEKOMATA_FORKED_2_3, "41 NEKOMATA FORKED 2/3"],
-			[Tail.CAVE_WYRM, "42 CAVE_WYRM"],
-			[Tail.HINEZUMI, "43 HINEZUMI"],
-			[Tail.THUNDERBIRD, "44 THUNDERBIRD"],
-			[Tail.BEAR, "45 BEAR"],
-			[Tail.TWINKASHA, "46 TWINKASHA"],
-			[Tail.USHI_ONI_ONNA, "47 USHI_ONI_ONNA"],
-			[Tail.WEASEL, "48 WEASEL"],
-			[Tail.SQUIRREL, "49 SQUIRREL"],
-			[Tail.MONKEY, "50 MONKEY"],
-			[Tail.WENDIGO, "51 WENDIGO"],
-		];
 		private static const TAIL_COUNT_CONSTANTS:Array = [
 			[0,"0"],1,2,3,4,
 			5,6,7,8,9,
 			10,16
-		];
-		private static const WING_TYPE_CONSTANTS:Array  = [
-			[Wings.NONE, "0 NONE"],
-			[Wings.BEE_LIKE_SMALL, "1 BEE_LIKE_SMALL"],
-			[Wings.BEE_LIKE_LARGE, "2 BEE_LIKE_LARGE"],
-			[Wings.HARPY, "4 HARPY"],
-			[Wings.IMP, "5 IMP"],
-			[Wings.BAT_LIKE_TINY, "6 BAT_LIKE_TINY"],
-			[Wings.BAT_LIKE_LARGE, "7 BAT_LIKE_LARGE"],
-			[Wings.SHARK_FIN, "8 SHARK_FIN"],
-			[Wings.FEATHERED_LARGE, "9 FEATHERED_LARGE"],
-			[Wings.DRACONIC_SMALL, "10 DRACONIC_SMALL"],
-			[Wings.DRACONIC_LARGE, "11 DRACONIC_LARGE"],
-			[Wings.GIANT_DRAGONFLY, "12 GIANT_DRAGONFLY"],
-			[Wings.BAT_LIKE_LARGE_2, "13 BAT_LIKE_LARGE_2"],
-			[Wings.DRACONIC_HUGE, "14 DRACONIC_HUGE"],
-			[Wings.FEATHERED_PHOENIX, "15 FEATHERED_PHOENIX"],
-			[Wings.FEATHERED_ALICORN, "16 FEATHERED_ALICORN"],
-			[Wings.MANTIS_LIKE_SMALL, "17 MANTIS_LIKE_SMALL"],
-			[Wings.MANTIS_LIKE_LARGE, "18 MANTIS_LIKE_LARGE"],
-			[Wings.MANTIS_LIKE_LARGE_2, "19 MANTIS_LIKE_LARGE_2"],
-			[Wings.GARGOYLE_LIKE_LARGE, "20 GARGOYLE_LIKE_LARGE"],
-			[Wings.PLANT, "21 PLANT"],
-			[Wings.MANTICORE_LIKE_SMALL, "22 MANTICORE_LIKE_SMALL"],
-			[Wings.MANTICORE_LIKE_LARGE, "23 MANTICORE_LIKE_LARGE"],
-			[Wings.BAT_ARM, "24 BAT_ARM"],
-			[Wings.VAMPIRE, "25 VAMPIRE"],
-			[Wings.FEY_DRAGON_WINGS, "26 FEY_DRAGON_WINGS"],
-			[Wings.FEATHERED_AVIAN, "27 FEATHERED_AVIAN"],
-			[Wings.NIGHTMARE, "28 NIGHTMARE"],
-			[Wings.FEATHERED_SPHINX, "29 FEATHERED_SPHINX"],
-			[Wings.ETHEREAL_WINGS, "30 ETHEREAL_WINGS"],
-			[Wings.THUNDEROUS_AURA, "31 THUNDEROUS_AURA"],
-			[Wings.LEVITATION, "32 LEVITATION"],
 		];
 		private static const WING_DESC_CONSTANTS:Array = [
 			"(none)","non-existant","tiny hidden","huge","small",
@@ -1499,112 +1113,21 @@ public class DebugMenu extends BaseContent
 			"large manticore-like","small manticore-like",
 			"large mantis-like","small mantis-like",
 		];
-		private static const LOWER_TYPE_CONSTANTS:Array = [
-			[LowerBody.HUMAN, "0 HUMAN"],
-			[LowerBody.HOOFED, "1 HOOFED"],
-			[LowerBody.DOG, "2 DOG"],
-			[LowerBody.NAGA, "3 NAGA"],
-			[LowerBody.DEMONIC_HIGH_HEELS, "5 DEMONIC_HIGH_HEELS"],
-			[LowerBody.DEMONIC_CLAWS, "6 DEMONIC_CLAWS"],
-			[LowerBody.BEE, "7 BEE"],
-			[LowerBody.GOO, "8 GOO"],
-			[LowerBody.CAT, "9 CAT"],
-			[LowerBody.LIZARD, "10 LIZARD"],
-			[LowerBody.PONY, "11 PONY"],
-			[LowerBody.BUNNY, "12 BUNNY"],
-			[LowerBody.HARPY, "13 HARPY"],
-			[LowerBody.KANGAROO, "14 KANGAROO"],
-			[LowerBody.CHITINOUS_SPIDER_LEGS, "15 CHITINOUS_SPIDER_LEGS"],
-			[LowerBody.DRIDER, "16 DRIDER"],
-			[LowerBody.FOX, "17 FOX"],
-			[LowerBody.DRAGON, "18 DRAGON"],
-			[LowerBody.RACCOON, "19 RACCOON"],
-			[LowerBody.FERRET, "20 FERRET"],
-			[LowerBody.CLOVEN_HOOFED, "21 CLOVEN_HOOFED"],
-			[LowerBody.ECHIDNA, "23 ECHIDNA"],
-			[LowerBody.SALAMANDER, "25 SALAMANDER"],
-			[LowerBody.SCYLLA, "26 SCYLLA"],
-			[LowerBody.MANTIS, "27 MANTIS"],
-			[LowerBody.SHARK, "29 SHARK"],
-			[LowerBody.GARGOYLE, "30 GARGOYLE"],
-			[LowerBody.PLANT_HIGH_HEELS, "31 PLANT_HIGH_HEELS"],
-			[LowerBody.PLANT_ROOT_CLAWS, "32 PLANT_ROOT_CLAWS"],
-			[LowerBody.WOLF, "33 WOLF"],
-			[LowerBody.PLANT_FLOWER, "34 PLANT_FLOWER"],
-			[LowerBody.LION, "35 LION"],
-			[LowerBody.YETI, "36 YETI"],
-			[LowerBody.ORCA, "37 ORCA"],
-			[LowerBody.YGG_ROOT_CLAWS, "38 YGG_ROOT_CLAWS"],
-			[LowerBody.ONI, "39 ONI"],
-			[LowerBody.ELF, "40 ELF"],
-			[LowerBody.RAIJU, "41 RAIJU"],
-			[LowerBody.RED_PANDA, "42 RED_PANDA"],
-			[LowerBody.GARGOYLE_2, "43 GARGOYLE_2"],
-			[LowerBody.AVIAN, "44 AVIAN"],
-			[LowerBody.GRYPHON, "45 GRYPHON"],
-			[LowerBody.ORC, "46 ORC"],
-			[LowerBody.CAVE_WYRM, "47 CAVE_WYRM"],
-			[LowerBody.MOUSE, "48 MOUSE"],
-			[LowerBody.HINEZUMI, "49 HINEZUMI"],
-			[LowerBody.BEAR, "50 BEAR"],
-			[LowerBody.HYDRA, "51 HYDRA"],
-			[LowerBody.FIRE_SNAIL, "52 FIRE_SNAIL"],
-			[LowerBody.GHOST, "53 PHANTOM"],
-			[LowerBody.GHOST_2, "54 POLTERGEIST"],
-			[LowerBody.JIANGSHI, "55 JIANGSHI"],
-			[LowerBody.YUKI_ONNA, "56 YUKI_ONNA"],
-			[LowerBody.MELKIE, "57 MELKIE"],
-			[LowerBody.CENTIPEDE, "58 CENTIPEDE"],
-			[LowerBody.KRAKEN, "59 KRAKEN"],
-			[LowerBody.CRAB, "60 CRAB"],
-			[LowerBody.CANCER, "61 CANCER"],
-			[LowerBody.FROSTWYRM, "62 FROSTWYRM"],
-			[LowerBody.USHI_ONI_ONNA, "63 USHI_ONI_ONNA"],
-			[LowerBody.FLOWER_LILIRAUNE, "64 FLOWER_LILIRAUNE"],
-			[LowerBody.WEASEL, "65 WEASEL"],
-			[LowerBody.GAZER, "66 GAZER"],
-			[LowerBody.SQUIRREL, "67 SQUIRREL"],
-			[LowerBody.WENDIGO, "68 WENDIGO"],
-		];
 		private static const LEG_COUNT_CONSTANTS:Array = [
 			1,2,4,6,8,
 			10,12,16
-		];
-		private static const REAR_TYPE_CONSTANTS:Array  = [
-			[RearBody.NONE, "0 NONE"],
-			[RearBody.DRACONIC_MANE, "1 DRACONIC_MANE"],
-			[RearBody.DRACONIC_SPIKES, "2 DRACONIC_SPIKES"],
-			[RearBody.FENRIR_ICE_SPIKES, "3 FENRIR_ICE_SPIKES"],
-			[RearBody.LION_MANE, "4 LION_MANE"],
-			[RearBody.BEHEMOTH, "5 BEHEMOTH"],
-			[RearBody.SHARK_FIN, "6 SHARK_FIN"],
-			[RearBody.ORCA_BLOWHOLE, "7 ORCA_BLOWHOLE"],
-			[RearBody.RAIJU_MANE, "8 RAIJU_MANE"],
-			[RearBody.BAT_COLLAR, "9 BAT_COLLAR"],
-			[RearBody.WOLF_COLLAR, "10 WOLF_COLLAR"],
-			[RearBody.DISPLACER_TENTACLES, "11 DISPLACER_TENTACLES"],
-			[RearBody.SNAIL_SHELL, "12 SNAIL_SHELL"],
-			[RearBody.METAMORPHIC_GOO, "13 METAMORPHIC_GOO"],
-			//14
-			[RearBody.GHOSTLY_AURA, "15 GHOSTLY_AURA"],
-			[RearBody.YETI_FUR, "16 YETI_FUR"],
-			[RearBody.GLACIAL_AURA, "17 GLACIAL_AURA"],
-			[RearBody.CENTIPEDE, "18 CENTIPEDE"],
-			[RearBody.KRAKEN, "19 KRAKEN"],
-			[RearBody.FROSTWYRM, "20 FROSTWYRM"],
-			[RearBody.FUR_COAT, "21 FUR_COAT"],
 		];
 		private function changeArmType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.arms.type = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, ARM_TYPE_CONSTANTS, changeArmType);
+			showChangeOptions(bodyPartEditorTorso, page, Arms.Types, changeArmType);
 		}
 		private function changeClawType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.clawType = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, CLAW_TYPE_CONSTANTS, changeClawType);
+			showChangeOptions(bodyPartEditorTorso, page, Claws.Types, changeClawType);
 		}
 		private function changeClawTone(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.clawTone = COLOR_CONSTANTS[setIdx];
@@ -1616,7 +1139,7 @@ public class DebugMenu extends BaseContent
 			if (setIdx>=0) player.tailType = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, TAIL_TYPE_CONSTANTS, changeTailType);
+			showChangeOptions(bodyPartEditorTorso, page, Tail.Types, changeTailType);
 		}
 		private function changeTailCount(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.tailCount = TAIL_COUNT_CONSTANTS[setIdx];
@@ -1628,7 +1151,7 @@ public class DebugMenu extends BaseContent
 			if (setIdx>=0) player.wings.type = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, WING_TYPE_CONSTANTS, changeWingType);
+			showChangeOptions(bodyPartEditorTorso, page, Wings.Types, changeWingType);
 		}
 		private function changeWingDesc(page:int=0,setIdx:int=-1):void {
 			if (setIdx==0) player.wings.desc = "";
@@ -1641,7 +1164,7 @@ public class DebugMenu extends BaseContent
 			if (setIdx>=0) player.lowerBodyPart.type = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, LOWER_TYPE_CONSTANTS, changeLowerBodyType);
+			showChangeOptions(bodyPartEditorTorso, page, LowerBody.Types, changeLowerBodyType);
 		}
 		private function changeLegCount(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.legCount = LEG_COUNT_CONSTANTS[setIdx];
@@ -1653,7 +1176,7 @@ public class DebugMenu extends BaseContent
 			if (setIdx>=0) player.rearBody.type = setIdx;
 			menu();
 			dumpPlayerData();
-			showChangeOptions(bodyPartEditorTorso, page, REAR_TYPE_CONSTANTS, changeRearBodyType);
+			showChangeOptions(bodyPartEditorTorso, page, RearBody.Types, changeRearBodyType);
 		}
 		private function changeScorpionTail():void {
 			clearOutput();
@@ -1953,7 +1476,7 @@ public class DebugMenu extends BaseContent
 		{
 			lightsArray[slot] = !lightsArray[slot];
 			
-			if (lightsArray[slot]) 
+			if (lightsArray[slot])
 			{
 				//userInterface.setButtonPurple(slot);
 				mainView.setButtonText(slot, "XXXXXXXX");

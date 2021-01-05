@@ -40,6 +40,19 @@ package classes.internals
 			for (var x:int = 1; x < stringList.length - 1; x++) concat += ", " + stringList[x];
 			return concat + " and " + stringList[stringList.length - 1];
 		}
+		
+		/**
+		 * @return input if it is not null or undefined, otherwise defaultValue
+		 */
+		public static function or(input:*, defaultValue:*):* {
+			return (input === null || input === undefined) ? defaultValue : input;
+		}
+		/**
+		 * @return input[propName] if input is not null or undefined, otherwise undefined
+		 */
+		public static function prop(input:*, propName:String):* {
+			return (input !== undefined && input !== null) ? input[propName] : undefined;
+		}
 		public static function stringOr(input:*,def:String=""):String {
 			return (input is String) ? input : def;
 		}

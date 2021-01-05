@@ -25,10 +25,11 @@ public class SkinLayer extends BodyPart {
 		_color2 = value == color ? "" : value;
 	}
 	public function defaultDesc():String {
-		return Appearance.DEFAULT_SKIN_DESCS[type] || "skin";
+		return Skin.SkinTypes[type].name || "skin";
 	}
 	public function defaultAdj():String {
-		return Appearance.DEFAULT_SKIN_ADJS[type] || "";
+		if (type === Skin.GOO) return "goopey";
+		return "";
 	}
 	public function get desc():String {
 		return _desc || defaultDesc();
@@ -65,7 +66,7 @@ public class SkinLayer extends BodyPart {
 	 * and `p` (default "are") if plural (scales)
 	 */
 	public function isAre(s:String="is",p:String="are"):String {
-		return Appearance.DEFAULT_SKIN_PLURAL[type] ? p : s;
+		return Skin.SkinTypes[type].plural ? p : s;
 	}
 	override public function restore(keepColor:Boolean = true):void {
 		super.restore(keepColor);
