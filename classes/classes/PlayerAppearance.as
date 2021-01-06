@@ -883,7 +883,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.necklaceName != "nothing")
 			outputText(" On your neck is a " + player.necklaceName + ".");
-		if (player.hasKeyItem("Fenrir Collar") >= 0) {
+		if (player.hasKeyItem("Gleipnir Collar") >= 0) {
 			if (player.necklaceName != "nothing") outputText(" Benath it is ");
 			else outputText(" On your neck is ");
 			outputText("a Fenrir spiked Collar its chain still hanging down from it and clinking with an ominous metallic sound as you walk around.");
@@ -2426,17 +2426,17 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.WOLF) {
 			if (!player.hasCoat()) {
 				outputText("  You have a wolf-like face, complete with a wet nose.  ");
-				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
+				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
 				outputText("The odd visage is hairless and covered with [skin coat]");
 				tattooAndPatternGeneric();
 				outputText(".");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeth.  ");
-				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
+				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
 				outputText("You've got [skin coat], hiding your [skin noadj] underneath your furry visage.");
 			} else {
 				outputText("  You have the facial structure of a wolf, wet nose and all, but overlaid with glittering patches of [skin coat].");
-				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("  Cold blue mist seems to periodically escape from your mouth.");
+				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("  Cold blue mist seems to periodically escape from your mouth.");
 			}
 		}
 		if (faceType == Face.WOLF_FANGS) {
@@ -3237,8 +3237,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.ushionnaScore() >= 1) outputText("\n<font color=\"#008000\">Ushi-Onna: " + player.ushionnaScore() + "</font>");
 		else if (player.ushionnaScore() < 1) outputText("\n<font color=\"#ff0000\">Ushi-Onna: 0</font>");
 		//Wendigo
-		if (player.wendigoScore() >= 25) outputText("\n<font color=\"#0000a0\">Greater Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis raciaol multi, +50% to Lib racial multi, +50 min sens)</font>");
-		else if (player.wendigoScore() >= 10) outputText("\n<font color=\"#0000a0\">Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis raciaol multi, +50% to Lib racial multi, +50 min sens)</font>");
+		if (player.wendigoScore() >= 25) outputText("\n<font color=\"#0000a0\">Greater Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis racial multi, +50% to Lib racial multi, +50 min sens)</font>");
+		else if (player.wendigoScore() >= 10) outputText("\n<font color=\"#0000a0\">Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis racial multi, +50% to Lib racial multi, +50 min sens)</font>");
 		else if (player.wendigoScore() >= 1) outputText("\n<font color=\"#008000\">Wendigo: " + player.wendigoScore() + "</font>");
 		else if (player.wendigoScore() < 1) outputText("\n<font color=\"#ff0000\">Wendigo: 0</font>");
 		//Werewolf
@@ -3367,4 +3367,4 @@ public class PlayerAppearance extends BaseContent {
 		}
 	}
 }
-}
+}

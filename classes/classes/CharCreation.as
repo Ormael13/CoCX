@@ -26,6 +26,8 @@ import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
+import classes.Stats.BuffableStat;
+import classes.Stats.IStat;
 
 import coc.view.MainView;
 
@@ -161,6 +163,13 @@ import coc.view.MainView;
             }
 
 			model.player = player;
+			player.strStat.core.value = 15;
+			player.touStat.core.value = 15;
+			player.speStat.core.value = 15;
+			player.intStat.core.value = 15;
+			player.wisStat.core.value = 15;
+			player.libStat.core.value = 15;
+			player.sensStat.redefine({base:15});
 			player.cor = 15;
 			player.soulforce = 50;
 			player.wrath = 0;
@@ -170,6 +179,11 @@ import coc.view.MainView;
 			player.esteem = 50;
 			player.will = 80;
 			player.lust = 15;
+			player.statStore.forEachStat(function(stat:IStat):void {
+				if (stat is BuffableStat) {
+					(stat as BuffableStat).removeAllBuffs();
+				}
+			});
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];
 				player.level = 0;

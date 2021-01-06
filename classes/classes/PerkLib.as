@@ -294,6 +294,9 @@ public class PerkLib
 		public static const FloralOvariesFinalForm:PerkType = mk("Floral Ovaries (Final Form)", "Floral Ovaries (Final Form)",
 				"Further increase the potency of Alraune pollen. Alraune pollen has a 25% chance per round to fascinate your victim.",
 				"You've chosen the 'Floral Ovaries (Final Form)' perk. Further increase the potency of Alraune pollen. Alraune pollen has a 30% chance per round to fascinate your victim.").withBuffs({'lib.mult':0.20});
+		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
+				"You are currently in elemental form.",
+				"You are currently in elemental form.");
 		public static const HeartOfTheStorm:PerkType = mk("Heart of the storm", "Heart of the storm",
 				"Increase the power of all Wind and Lightning racial abilities.",
 				"You've chosen the 'Heart of the storm' perk. Increase the power of all Wind and Lightning racial abilities.").withBuffs({'speed.mult':0.05});
@@ -3328,8 +3331,8 @@ public class PerkLib
 				"You've recived blessing of Ezekiel enhancing your body and mind. +10 to all stats.").withBuffs({'sens':10}, false);
 		public static const Feeder:PerkType = mk("Feeder", "Feeder",
 				"Lactation does not decrease and gives a compulsion to breastfeed others.");
-		public static const FenrirSpikedCollar:PerkType = mk("Fenrir spiked collar", "Fenrir spiked collar",
-				"The magical chain as well as the strongly enchanted collar increase damage reduction by 10%.");
+		public static const FenrirSpikedCollar:PerkType = mk("Fenrir's Gleipnir Collar", "Fenrir's Gleipnir Collar",
+				"The spectral chain Gleipnir and runed collar-spikes increase damage reduction by 10%, but you are forever chained to the role of the Fenrir.");
 		public static const Ferocity:PerkType = mk("Ferocity", "Ferocity",
 				"You can remains conscious and continue fighting even if your HP is below 0. You gonna loose 1% of max HP each round and would loose fight when negative HP reach 7% (or more if PC got other perks to stay undefeated below 0%) of max HP.");
 		public static const FireAffinity:PerkType = mk("Fire Affinity", "Fire Affinity",
@@ -3342,8 +3345,6 @@ public class PerkLib
 				"Allows access to Fenrir (AoE) freezing breath attack.");
 		public static const FreezingBreathYeti:PerkType = mk("Freezing Breath (Y)", "Freezing Breath (Y)",
 				"Allows access to Yeti freezing breath attack.");
-		public static const FromTheFrozenWaste:PerkType = mk("From the frozen waste", "From the frozen waste",
-				"You are resistant to cold but gain a weakness to fire.");
 		public static const FutaFaculties:PerkType = mk("Futa Faculties", "Futa Faculties",
 				"It's super hard to think about stuff that like, isn't working out or fucking!").withBuffs({'int.mult':-0.50});
 		public static const FutaForm:PerkType = mk("Futa Form", "Futa Form",
@@ -3397,6 +3398,8 @@ public class PerkLib
 				"Your natural weapons are charged with raiju electricity adding a lusty effect to all attacks.");
 		public static const LizanRegeneration:PerkType = mk("Lizan Regeneration", "Lizan Regeneration",
 				"Regenerates 1.5% of HP per round in combat and 3% of HP per hour and additional slightly increasing maximal attainable natural healing rate.");
+		public static const FromTheFrozenWaste:PerkType = mk("From the frozen waste", "Lord of the Frozen Wastes",
+				"The icy wastes where winter reigns are your domain. You are resistant to cold but vulnerable to heat.");
 		public static const Lustzerker:PerkType = mk("Lustzerker", "Lustzerker",
 				"Lustserking increases attack and physical defenses resistance but reduces lust resistance.");
 		public static const ManticoreCumAddict:PerkType = mk("Manticore Cum Addict", "Manticore Cum Addict",

@@ -1,4 +1,4 @@
-﻿package classes.Items {
+package classes.Items {
 import classes.*;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
@@ -1374,7 +1374,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.inte > 30 && rand(3) == 0 && changes < changeLimit) {
-            MutagenBonus("int", 1);
+            MutagenBonus("int", -1);
             outputText("\n\nYou feel dumber.");
             changes++;
         }
