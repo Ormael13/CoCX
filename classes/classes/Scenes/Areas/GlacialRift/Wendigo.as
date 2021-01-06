@@ -28,6 +28,9 @@ import classes.internals.*;
 		
 		public function WendigoSpectralScream():void {
 			outputText("The wendigo howl a soul-chilling scream. You try to move but realize to your horror that your body is paralyzed by fear! ");
+			var damage:Number = 0;
+			damage += eBaseIntelligenceDamage();
+			player.takeMagicDamage(damage, true);
 			player.createStatusEffect(StatusEffects.Fear, 3, 0, 0, 0);
 			player.addCurse("wis.mult",0.05);
 		}
