@@ -254,7 +254,7 @@ use namespace CoC;
 				else addButton(6, "Metamorph", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
 			}
 			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			//addButton(10, "Cheats", SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
+			addButton(10, "Cheats", SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 		public function SoulforceCheats():void {
@@ -1625,7 +1625,7 @@ use namespace CoC;
 				addButton(7, "HB Mech", AddHBMech).hint("Add 1 Howling Banshee Mech for testing purposes.");
 				addButton(8, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
 				addButton(9, "GiantSlayerMech", AddGiantSlayerMech).hint("Add 1 Giant Slayer Mech for testing purposes.");
-				//10
+				addButton(10, "E. Tome", AddTheElementalistsTome).hint("Add 1 Elementalist’s Tome.");
 				addButton(11, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
 				addButton(12, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 				addButton(13, "-2-", EquipmentMenu, page + 1);
@@ -1804,6 +1804,10 @@ use namespace CoC;
 		public function AddGiantSlayerMech():void {
 			outputText("\n\n<b>(Gained 1 Giant Slayer Mech!)</b>\n\n");
 			inventory.takeItem(vehicles.GS_MECH, curry(EquipmentMenu, 1));
+		}
+		public function AddTheElementalistsTome():void {
+			outputText("\n\n<b>(Gained 1 Elementalist’s Tome!)</b>\n\n");
+			inventory.takeItem(weaponsrange.E_TOME_, curry(EquipmentMenu, 1));
 		}
 		public function AddTheEvelyn():void {
 			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");

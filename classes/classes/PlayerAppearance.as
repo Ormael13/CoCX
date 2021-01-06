@@ -2,6 +2,7 @@
 import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.SceneLib;
 
 import coc.xxc.BoundStory;
 import coc.xxc.Story;
@@ -37,6 +38,7 @@ public class PlayerAppearance extends BaseContent {
 		describeBeard();
 		describeTongue();
 		describeHorns();
+		describeVisage();
 		outputText("[pg]");
 		describeBodyShape();
 		describeWings();
@@ -3358,5 +3360,11 @@ public class PlayerAppearance extends BaseContent {
 
 		else outputText("<b>Yo, this is an error.</b>");
 	}
+
+	public function describeVisage():void{ //expressions!
+		if (player.findPerk(PerkLib.DarkenedKitsune) > 0) {
+			outputText(SceneLib.darkenedKitsuneScene.darkenedKitsuneExpression());
+		}
+	}
 }
-}
+}

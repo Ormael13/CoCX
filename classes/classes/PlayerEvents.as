@@ -1267,7 +1267,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Kitsune hunger perk
 			if (player.kitsuneScore() >= 10) { //Check for being a kitsune enough
 				if (player.findPerk(PerkLib.KitsuneEnergyThirst) < 0) {
-					outputText("\nYou begin fantasising about pussies and cocks foaming at the idea of fucking or getting fucked. It would look like you aquired the kitsunes hunger for sex and can now feed from the life force extracted of the orgasms of your partners. \n\n(<b>Gained Perk: Kitsune Hunger</b>)\n");
+					outputText("\nYou begin fantasizing about pussies and cocks, foaming at the idea of fucking or getting fucked. It looks like you acquired the kitsune's hunger for sex and can now feed off the life force extracted from the orgasms of your partners. \n\n(<b>Gained Perk: Kitsune Hunger</b>)\n");
 					player.createPerk(PerkLib.KitsuneEnergyThirst, 0, 0, 0, 0);
 					needNext = true;
 				}
@@ -1275,10 +1275,57 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Kitsune hunger perk
 			if (player.kitsuneScore() < 10) { //Check for being a kitsune enough
 				if (player.findPerk(PerkLib.KitsuneEnergyThirst) > 0) {
-					outputText("\nYour mind clears up as becoming less of a kitsune you also lost the hunger for life force only sex could provide you. \n\n(<b>Lost Perk: Kitsune Hunger</b>)\n");
+					outputText("\nYour mind clears up as you become less of a kitsune. You also lost the hunger for life force only sex could provide you. \n\n(<b>Lost Perk: Kitsune Hunger</b>)\n");
 					player.removePerk(PerkLib.KitsuneEnergyThirst);
 					needNext = true;
 				}
+			}
+			//Insane/corrupted Kitsune warning //Help why isn't this being called.
+			if (player.findPerk(PerkLib.DarkenedKitsune) >= 0 && player.inte/player.intStat.max <= 0.85 && flags[kFLAGS.DARKKITSUNE_WARN_INT] != 1){ //warning at 15 % loss. Considering by the time you get to kitsune tier, you should probably have a decent amount of each, 15% margin should be good.
+				SceneLib.darkenedKitsuneScene.splitPersonalityWarning(1)
+				flags[kFLAGS.DARKKITSUNE_WARN_INT] = 1;
+				needNext = true;
+			}
+			else if (player.findPerk(PerkLib.DarkenedKitsune) >= 0 && player.wis/player.wisStat.max <= 0.85 && flags[kFLAGS.DARKKITSUNE_WARN_WIS] != 1){
+				SceneLib.darkenedKitsuneScene.splitPersonalityWarning(2)
+				flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 1;
+				needNext = true;
+			}
+			//Insane/corrupted Kitsune random events //Help why isn't this being called.
+			if (player.findPerk(PerkLib.DarkenedKitsune) >= 0){
+				//if (rand(5)==0){
+				SceneLib.darkenedKitsuneScene.splitPersonalityRandom()
+				needNext = true;
+				//}
+			}
+			//Insane/corrupted Kitsune perk
+			if (player.kitsuneScore() >= 9 ){
+				if(player.cor >= 50 && player.findPerk(PerkLib.DarkenedKitsune) < 0) { //Check for being kitsune enough + high enough corruption
+					SceneLib.darkenedKitsuneScene.splitPersonalityFirstEncounter()
+					player.createPerk(PerkLib.DarkenedKitsune, 0,0,0,0);
+					outputText("<b>Gained Perk: Darkened Kitsune!</b>\n")
+					needNext = true;
+				}
+				else if (player.cor >= 95 && player.findPerk(PerkLib.DarkenedKitsune) >= 0 && player.inte/player.intStat.max < 0.75 && player.wis/player.wisStat.max < 0.75 && (rand(4)==0)){ //Bad end roll. Most likely will be tweaked since this is really small case.
+						SceneLib.darkenedKitsuneScene.splitPersonalityTakesOver()
+						//needNext = true;
+				}
+				else if (player.cor < 50 && player.findPerk(PerkLib.DarkenedKitsune) >= 0){ //Remove due to low corruption //Why is it triggering DarkKitsune random event here????
+					SceneLib.darkenedKitsuneScene.splitPersonalityLost(1)
+					player.removePerk(PerkLib.DarkenedKitsune);
+					outputText("<b>Lost Perk: Darkened Kitsune!</b>\n")
+					flags[kFLAGS.DARKKITSUNE_WARN_INT] = 0;
+					flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 0;
+					needNext = true;
+				}
+			}
+			else if (player.findPerk(PerkLib.DarkenedKitsune) >= 0){// Remove due to not kitsune
+				SceneLib.darkenedKitsuneScene.splitPersonalityLost(2)
+				player.removePerk(PerkLib.DarkenedKitsune);
+				outputText("<b>Lost Perk: Darkened Kitsune!</b>\n")
+				flags[kFLAGS.DARKKITSUNE_WARN_INT] = 0;
+				flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 0;
+				needNext = true;
 			}
 			//Kitsune energy thirst
 			if (player.hasStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)) {

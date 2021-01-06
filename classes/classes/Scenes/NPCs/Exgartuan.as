@@ -213,7 +213,7 @@ private function drinkFountainEndowment():void {
 			if(choices == 1) {
 				//If tits are big enough it must be them
 				if(player.biggestTitSize() >= 12) exgartuanInfestTits();
-				//If not then the dick was eligable.
+				//If not then the dick was eligible.
 				else exgartuanInfestDick();
 			}
 			changed = true;
@@ -267,7 +267,7 @@ private function exgartuanInfestDick():void {
 		player.cocks[0].cockLength += 1;
 		player.cocks[0].cockThickness += .5;
 	}
-	//(+Demon dick possession – not demondicked)
+	//(+Demon dick possession – demondicked)
 	else {
 		outputText("\n\nYour [cock] puffs up, growing even larger as it absorbs the fountain's essence.  It dribbles pre-cum and twitches about as if sniffing the air, feeling very warm and sensitive.");
 		outputText("\n\nA voice suddenly splits the air, demanding, \"<i>Satiate me mortal, or I'll make you find someone who will!</i>\"");

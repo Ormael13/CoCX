@@ -97,6 +97,26 @@ use namespace CoC;
 		//TODO: Kept for backwards compatibility reasons but should be phased out.
 		public var lustVuln:Number = 1;
 
+		//Mastery attributes
+		public var masterySwordLevel:Number = 0;
+		public var masterySwordXP:Number = 0;
+		public var masteryAxeLevel:Number = 0;
+		public var masteryAxeXP:Number = 0;
+		public var masteryMaceHammerLevel:Number = 0;
+		public var masteryMaceHammerXP:Number = 0;
+		public var masteryDuelingSwordLevel:Number = 0;
+		public var masteryDuelingSwordXP:Number = 0;
+		public var masterySpearLevel:Number = 0;
+		public var masterySpearXP:Number = 0;
+		public var dualWSLevel:Number = 0;
+		public var dualWSXP:Number = 0;
+		public var dualWNLevel:Number = 0;
+		public var dualWNXP:Number = 0;
+		public var dualWLLevel:Number = 0;
+		public var dualWLXP:Number = 0;
+		public var dualWFLevel:Number = 0;
+		public var dualWFXP:Number = 0;
+
 		//Herbalism attributes
 		public var herbalismLevel:Number = 0;
 		public var herbalismXP:Number = 0;
@@ -12642,7 +12662,6 @@ use namespace CoC;
 				// No cocks, can't go into rut.
 				return false;
 			}
-
 			//Has rut, intensify it!
 			if (inRut) {
 				if(output) {
@@ -12658,16 +12677,50 @@ use namespace CoC;
 				if(output) {
 					outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!");
 				}
-
 				//v1 - bonus cum production
 				//v2 - bonus libido
 				//v3 - time remaining!
 				createStatusEffect(StatusEffects.Rut, 150 * intensity, (50 * intensity)/100, 100 * intensity, 0);
 			}
-
 			return true;
 		}
 
+		public function maxSwordLevel():Number {
+			var maxLevel:Number = 5;
+			return maxLevel;
+		}
+		public function maxAxeLevel():Number {
+			var maxLevel:Number = 5;
+			return maxLevel;
+		}
+		public function maxMaceHammerLevel():Number {
+			var maxLevel:Number = 5;
+			return maxLevel;
+		}
+		public function maxDuelingSwordLevel():Number {
+			var maxLevel:Number = 5;
+			return maxLevel;
+		}
+		public function maxSpearLevel():Number {
+			var maxLevel:Number = 5;
+			return maxLevel;
+		}
+		public function maxDualWieldSmallLevel():Number {
+			var maxLevel:Number = 5;
+			return maxLevel;
+		}
+		public function maxDualWieldNormalLevel():Number {
+			var maxLevel:Number = 5;
+			return maxLevel;
+		}
+		public function maxDualWieldLargeLevel():Number {
+			var maxLevel:Number = 5;
+			return maxLevel;
+		}
+		public function maxDualWieldFirearmsLevel():Number {
+			var maxLevel:Number = 5;
+			return maxLevel;
+		}
 
 		public function maxHerbalismLevel():Number {
 			var maxLevel:Number = 2;
@@ -12907,7 +12960,6 @@ use namespace CoC;
 			dynStats("lus=", 0, "sca", false);
 			hoursSinceCum = 0;
 			flags[kFLAGS.TIMES_ORGASMED]++;
-
 			if (countCockSocks("gilded") > 0) {
 				var randomCock:int = rand( cocks.length );
 				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
@@ -12938,11 +12990,9 @@ use namespace CoC;
 				case 'VaginalAnal':
 					orgasm((hasVagina() ? 'Vaginal' : 'Anal'), real);
 					return; // Prevent calling orgasmReal() twice
-
 				case 'DickAnal':
 					orgasm((rand(2) == 0 ? 'Dick' : 'Anal'), real);
 					return;
-
 				case 'Default':
 				case 'Generic':
 				default:
@@ -12950,12 +13000,10 @@ use namespace CoC;
 						orgasm('Anal'); // Failsafe for genderless PCs
 						return;
 					}
-
 					if (hasVagina() && hasCock()) {
 						orgasm((rand(2) == 0 ? 'Vaginal' : 'Dick'), real);
 						return;
 					}
-
 					orgasm((hasVagina() ? 'Vaginal' : 'Dick'), real);
 					return;
 			}
@@ -12982,16 +13030,13 @@ use namespace CoC;
 				display:true,
 				orgasm:false
 			},options||{});
-
 			if (where.host != null && where.host != this) {
 				trace("Penetration confusion! Host is "+where.host);
 				return;
 			}
-
 			var size:Number = 8;
 			if ('size' in options) size = options.size;
 			else if (tool is Cock) size = (tool as Cock).cArea();
-
 			var otype:String = 'Default';
 			if (where is AssClass) {
 				buttChange(size, options.display);

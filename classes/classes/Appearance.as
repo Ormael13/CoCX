@@ -1,6 +1,9 @@
 ﻿package classes
 {
 import classes.BodyParts.*;
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
 import classes.GlobalFlags.kFLAGS;
 import classes.internals.Utils;
 import classes.lists.Gender;
@@ -2278,7 +2281,7 @@ public class Appearance extends Utils
 			ANAL_TIGHTNESS_DESCRIPTORS[AssClass.LOOSENESS_GAPING]    = "gaping ";
 			
 			//25% tightness description
-			if (forceDesc || rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2)) 
+			if (forceDesc || rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2))
 			{
 				description += ANAL_TIGHTNESS_DESCRIPTORS[i_creature.ass.analLooseness];
 			}
@@ -2287,7 +2290,7 @@ public class Appearance extends Utils
 			if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) {
 			description += randomChoice("rear end",
 					"backdoor");
-			} 
+			}
 			else {
 			description += randomChoice("ass",
 					"anus",
@@ -2301,24 +2304,24 @@ public class Appearance extends Utils
 		
 		public static function wingsDescript(i_creature:Creature):String
 		{
-			return DEFAULT_WING_NAMES[i_creature.wings.type] + " wings";
+			return Wings.Types[i_creature.wings.type].name + " wings";
 		}
 		public static function eyesDescript(i_creature:Creature):String
 		{
 			var description:String = "";
 			description += i_creature.eyes.colour;
-			description += " " + DEFAULT_EYES_NAMES[i_creature.eyes.type];
+			description += " " + Eyes.Types[i_creature.eyes.type].name;
 			if (i_creature.eyes.type == Eyes.CAVE_WYRM) description += " that glow in the dark"
 			description += " eyes"
 			return description;
 		}
 		public static function earsDescript(i_creature:Creature):String
 		{
-			return DEFAULT_EARS_NAMES[i_creature.ears.type] + " ears";
+			return Ears.Types[i_creature.ears.type].name + " ears";
 		}
 		public static function antennaeDescript(i_creature:Creature):String
 		{
-			return DEFAULT_ANTENNAE_NAMES[i_creature.antennae.type] + " antennae";
+			return Antennae.Types[i_creature.antennae.type].name + " antennae";
 		}
 
 /* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().
@@ -2488,376 +2491,6 @@ public class Appearance extends Utils
 					[Gender.GENDER_HERM, "hermaphrodite"]
 				]
 		);
-		private static const DEFAULT_SKIN_NAMES_DESCS_ADJS_PLURAL:Object = multipleMapsFromPairs([
-			[Skin.PLAIN, "PLAIN", "skin", "", false],
-			[Skin.FUR, "FUR", "fur", "", false],
-			[Skin.SCALES, "SCALES", "scales", "", true],
-			[Skin.GOO, "GOO", "skin", "goopey", false],
-			[Skin.CHITIN, "CHITIN", "chitin", "", false],
-			[Skin.BARK, "BARK", "bark", "", false],
-			[Skin.STONE, "STONE", "stone", "", false],
-			[Skin.TATTOED, "TATTOOED", "tattooed skin", "", false],
-			[Skin.AQUA_SCALES, "AQUA_SCALES", "scales", "", true],
-			[Skin.DRAGON_SCALES, "dragon scales", "dragon scales", "", true],
-			[Skin.MOSS, "moss", "moss", "", false],
-			[Skin.AQUA_RUBBER_LIKE, "AQUA_RUBBER_LIKE", "slippery rubber-like skin", "", false],
-			[Skin.FEATHER, "FEATHER", "feather", "", false],
-			[Skin.TRANSPARENT, "TRANSPARENT", "transparent", "", false],
-			[Skin.TATTOED_ONI, "TATTOOED_ONI", "tattooed skin", "", false],
-			[Skin.PARTIAL_DRAGON_SCALES, "partial dragon scales", "partial dragon scales", "", true],
-			[Skin.PARTIAL_STONE, "partial stone", "partial stone", "", false],
-			[Skin.PARTIAL_AQUA_SCALES, "partial fish scales", "partial fish scales", "", true],
-		]);
-		public static const DEFAULT_SKIN_NAMES:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS_PLURAL[0];
-		public static const DEFAULT_SKIN_DESCS:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS_PLURAL[1];
-		public static const DEFAULT_SKIN_ADJS:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS_PLURAL[2];
-		public static const DEFAULT_SKIN_PLURAL:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS_PLURAL[3];
-		public static const DEFAULT_HAIR_NAMES:Object = createMapFromPairs(
-				[
-					[Hair.NORMAL, "normal"],
-					[Hair.FEATHER, "feather"],
-					[Hair.GHOST, "transparent"],
-					[Hair.GOO, "goopy"],
-					[Hair.ANEMONE, "tentacle"],
-					[Hair.QUILL, "quill"],
-					[Hair.GORGON, "snake-like"],
-					[Hair.LEAF, "leaf"],
-					[Hair.FLUFFY, "fluffy"],
-					[Hair.GRASS, "grass"],
-					[Hair.SILKEN, "silk-like"],
-					[Hair.FAIRY, "otherworldly, silk-like and almost translucent"],
-					[Hair.CRAZY, "crazy"],
-					[Hair.STORM, "glowing lightning shaped"],
-					[Hair.RATATOSKR, "striped"],
-					[Hair.SNOWY, "snowy"],
-				]
-		);
-		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(
-				[
-					[Beard.NORMAL, "normal"],
-					[Beard.GOATEE, "goatee"],
-					[Beard.CLEANCUT, "clean-cut"],
-					[Beard.MOUNTAINMAN, "mountain-man"]
-				]
-		);
-		public static const DEFAULT_FACE_NAMES:Object = createMapFromPairs(
-				[
-					[Face.HUMAN, "human"],
-					[Face.HORSE, "horse"],
-					[Face.DOG, "dog"],
-					[Face.COW_MINOTAUR, "cow"],
-					[Face.SHARK_TEETH, "shark"],
-					[Face.SNAKE_FANGS, "snake"],
-					[Face.CAT, "cat"],
-					[Face.LIZARD, "lizard"],
-					[Face.BUNNY, "bunny"],
-					[Face.KANGAROO, "kangaroo"],
-					[Face.SPIDER_FANGS, "spider"],
-					[Face.FOX, "fox"],
-					[Face.DRAGON, "dragon"],
-					[Face.RACCOON_MASK, "raccoon mask"],
-					[Face.RACCOON, "racoon"],
-					[Face.BUCKTEETH, "buckteeth"],
-					[Face.MOUSE, "mouse"],
-					[Face.FERRET_MASK, "ferret mask"],
-					[Face.FERRET, "ferret"],
-					[Face.PIG, "pig"],
-					[Face.BOAR, "boar"],
-					[Face.RHINO, "rhino"],
-					[Face.ECHIDNA, "echidna"],
-					[Face.DEER, "deer"],
-					[Face.WOLF, "wolf"],
-					[Face.MANTICORE, "manticore"],
-					[Face.SALAMANDER_FANGS, "salamander"],
-					[Face.YETI_FANGS, "yeti"],
-					[Face.ORCA, "orca"],
-					[Face.PLANT_DRAGON, "plant dragon"],
-					[Face.DRAGON_FANGS, "dragon fangs"],
-					[Face.DEVIL_FANGS, "devil fangs"],
-					[Face.ONI_TEETH, "oni teeth"],
-					[Face.WEASEL, "weasel"],
-					[Face.VAMPIRE, "vampire"],
-					[Face.BUCKTOOTH, "jabberwocky buck tooths"],
-					[Face.JABBERWOCKY, "jabberwocky"],
-					[Face.RED_PANDA, "red-panda"],
-					[Face.CAT_CANINES, "cat canines"],
-					[Face.CHESHIRE, "cheshire"],
-					[Face.CHESHIRE_SMILE, "cheshire"],
-					[Face.AVIAN, "avian"],
-					[Face.WOLF_FANGS, "wolf fangs"],
-					[Face.ORC_FANGS, "orc fangs"],
-					[Face.ANIMAL_TOOTHS, "animal tooths"],
-					[Face.BEAR, "bear"],
-					[Face.PANDA, "panda"],
-					[Face.FIRE_SNAIL, "fire snail"],
-					[Face.GHOST, "ghost"],
-					[Face.JIANGSHI, "jiangshi"],
-					[Face.YUKI_ONNA, "yuki onna"],
-					[Face.FAIRY, "fairy"],
-					[Face.SQUIRREL, "squirrel"],
-					[Face.SMUG, "smug"],
-				]
-		);
-		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
-				[
-					[Tongue.HUMAN, "human"],
-					[Tongue.SNAKE, "snake"],
-					[Tongue.DEMONIC, "demonic"],
-					[Tongue.DRACONIC, "draconic"],
-					[Tongue.ECHIDNA, "echidna"],
-					[Tongue.CAT, "cat"],
-					[Tongue.ELF, "elf"],
-					[Tongue.DOG, "dog"],
-					[Tongue.CAVE_WYRM, "draconic"],
-					[Tongue.GHOST, "ghost"],
-					[Tongue.RATATOSKR, "ratatoskr"],
-				]
-		);
-		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
-				[
-					[Eyes.HUMAN, "human"],
-					[Eyes.FOUR_SPIDER_EYES, "4 spider"],
-					[Eyes.BLACK_EYES_SAND_TRAP, "sandtrap"],
-					[Eyes.CAT_SLITS, "cat"],
-					[Eyes.GORGON, "snake"],
-					[Eyes.FENRIR, "fenrir"],
-					[Eyes.MANTICORE, "manticore"],
-					[Eyes.FOX, "fox"],
-					[Eyes.REPTILIAN, "reptilian"],
-					[Eyes.SNAKE, "snake"],
-					[Eyes.DRAGON, "dragon"],
-					[Eyes.DEVIL, "devil"],
-					[Eyes.ONI, "oni"],
-					[Eyes.ELF, "elf"],
-					[Eyes.RAIJU, "raiju"],
-					[Eyes.VAMPIRE, "vampire"],
-					[Eyes.GEMSTONES, "gemstones"],
-					[Eyes.FERAL, "feral"],
-					[Eyes.GRYPHON, "gryphon"],
-					[Eyes.INFERNAL, "infernal"],
-					[Eyes.ORC, "orc"],
-					[Eyes.CAVE_WYRM, "cave wyrm"],
-					[Eyes.HINEZUMI, "hinezumi"],
-					[Eyes.BEAR, "bear"],
-					[Eyes.DISPLACER, "displacer"],
-					[Eyes.FIRE_SNAIL, "fire snail"],
-					[Eyes.GHOST, "ghost"],
-					[Eyes.JIANGSHI, "jiangshi"],
-					[Eyes.GOAT, "goat"],
-					[Eyes.CENTIPEDE, "centipede"],
-					[Eyes.KRAKEN, "kraken"],
-					[Eyes.FROSTWYRM, "frost wyrm"],
-					[Eyes.CANCER, "cancer"],
-					[Eyes.FAIRY, "fairy"],
-					[Eyes.GREMLIN, "gremlin"],
-					[Eyes.WEASEL, "weasel"],
-					[Eyes.GAZER, "gazer"],
-					[Eyes.RATATOSKR, "ratatoskr"],
-					[Eyes.FIENDISH, "fiendish"],
-				]
-		);
-		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
-				[
-					[Ears.HUMAN, "human"],
-					[Ears.HORSE, "horse"],
-					[Ears.DOG, "dog"],
-					[Ears.COW, "cow"],
-					[Ears.ELFIN, "elfin"],
-					[Ears.CAT, "cat"],
-					[Ears.LIZARD, "lizard"],
-					[Ears.BUNNY, "bunny"],
-					[Ears.KANGAROO, "kangaroo"],
-					[Ears.FOX, "fox"],
-					[Ears.DRAGON, "dragon"],
-					[Ears.RACCOON, "raccoon"],
-					[Ears.MOUSE, "mouse"],
-					[Ears.FERRET, "ferret"],
-					[Ears.PIG, "pig"],
-					[Ears.RHINO, "rhino"],
-					[Ears.ECHIDNA, "echidna"],
-					[Ears.DEER, "deer"],
-					[Ears.WOLF, "wolf"],
-					[Ears.LION, "lion"],
-					[Ears.YETI, "yeti"],
-					[Ears.ORCA, "orca"],
-					[Ears.SNAKE, "snake"],
-					[Ears.GOAT, "goat"],
-					[Ears.ONI, "oni"],
-					[Ears.ELVEN, "elven"],
-					[Ears.WEASEL, "weasel"],
-					[Ears.RAIJU, "raiju"],
-					[Ears.RED_PANDA, "red-panda"],
-					[Ears.AVIAN, "avian"],
-					[Ears.GRYPHON, "gryphon"],
-					[Ears.CAVE_WYRM, "cave wyrm"],
-					[Ears.BEAR, "bear"],
-					[Ears.PANDA, "panda"],
-					[Ears.SHARK, "shark"],
-					[Ears.DISPLACER, "displacer"],
-					[Ears.SQUIRREL, "squirrel"],
-				]
-		);
-		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
-				[
-					[Horns.NONE, "non-existant"],
-					[Horns.DEMON, "demon"],
-					[Horns.COW_MINOTAUR, "cow"],
-					[Horns.DRACONIC_X2, "2 draconic"],
-					[Horns.DRACONIC_X4_12_INCH_LONG, "four 12\" long draconic"],
-					[Horns.ANTLERS, "deer"],
-					[Horns.GOAT, "goat"],
-					[Horns.RHINO, "rhino"],
-					[Horns.UNICORN, "unicorn"],
-					[Horns.OAK, "oak"],
-					[Horns.GARGOYLE, "gargoyle"],
-					[Horns.ORCHID, "orchid"],
-					[Horns.ONI, "1 oni"],
-					[Horns.ONI_X2, "2 oni"],
-					[Horns.BICORN, "bicorn"],
-					[Horns.GHOSTLY_WISPS, "ghostly wisps"],
-					[Horns.SPELL_TAG, "spell tag"],
-					[Horns.FROSTWYRM, "frost wyrm"],
-				]
-		);
-		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
-				[
-					[Antennae.NONE, "non-existant"],
-					[Antennae.BEE, "bee"],
-					[Antennae.MANTIS, "mantis"],
-					[Antennae.FIRE_SNAIL, "fire snail"],
-					[Antennae.MOTH, "moth"],
-				]
-		);
-		public static const DEFAULT_ARM_NAMES:Object = createMapFromPairs(
-				[
-					[Arms.HUMAN, "human"],
-					[Arms.HARPY, "harpy"],
-					[Arms.SPIDER, "spider"],
-					[Arms.MANTIS, "mantis"],
-					[Arms.BEE, "bee"],
-					[Arms.SALAMANDER, "salamander"],
-					[Arms.PHOENIX, "phoenix"],
-					[Arms.PLANT, "vine-covered"],
-					[Arms.SHARK, "shark"],
-					[Arms.GARGOYLE, "gargoyle"],
-					[Arms.GARGOYLE_2, "gargoyle"],
-					[Arms.WOLF, "wolf"],
-					[Arms.LION, "lion"],
-					[Arms.KITSUNE, "kitsune"],
-					[Arms.FOX, "fox"],
-					[Arms.LIZARD, "lizard"],
-					[Arms.DRAGON, "dragon"],
-					[Arms.YETI, "yeti"],
-					[Arms.ORCA, "orca"],
-					[Arms.PLANT2, "tentacle-covered"],
-					[Arms.DEVIL, "devil"],
-					[Arms.ONI, "oni"],
-					[Arms.ELF, "elf"],
-					[Arms.RAIJU, "raiju"],
-					[Arms.RED_PANDA, "red-panda"],
-					[Arms.CAT, "cat"],
-					[Arms.AVIAN, "avian"],
-					[Arms.GRYPHON, "gryphon"],
-					[Arms.SPHINX, "sphinx"],
-					[Arms.PIG, "pig"],
-					[Arms.BOAR, "boar"],
-					[Arms.DISPLACER, "displacer"],
-					[Arms.CAVE_WYRM, "cave wyrm"],
-					[Arms.HINEZUMI, "hinezumi"],
-					[Arms.BEAR, "bear"],
-					[Arms.GOO, "goo"],
-					[Arms.HYDRA, "hydra"],
-					[Arms.GHOST, "phantom"],
-					[Arms.JIANGSHI, "jiangshi"],
-					[Arms.RAIJU_2, "raiju paws"],
-					[Arms.YUKI_ONNA, "yuki onna"],
-					[Arms.FROSTWYRM, "frost wyrm"],
-					[Arms.WEASEL, "weasel"],
-					[Arms.KAMAITACHI, "kamaitachi"],
-					[Arms.SQUIRREL, "squirrel"]
-				]
-		);
-		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
-				[
-					[Tail.NONE, "non-existant"],
-					[Tail.HORSE, "horse"],
-					[Tail.DOG, "dog"],
-					[Tail.DEMONIC, "demonic"],
-					[Tail.COW, "cow"],
-					[Tail.SPIDER_ADBOMEN, "spider abdomen"],
-					[Tail.BEE_ABDOMEN, "bee abdomen"],
-					[Tail.SHARK, "shark"],
-					[Tail.CAT, "cat"],
-					[Tail.LIZARD, "lizard"],
-					[Tail.RABBIT, "rabbit"],
-					[Tail.HARPY, "harpy"],
-					[Tail.KANGAROO, "kangaroo"],
-					[Tail.FOX, "fox"],
-					[Tail.DRACONIC, "draconic"],
-					[Tail.RACCOON, "raccoon"],
-					[Tail.MOUSE, "mouse"],
-					[Tail.BEHEMOTH, "behemoth"],
-					[Tail.PIG, "pig"],
-					[Tail.SCORPION, "scorpion"],
-					[Tail.GOAT, "goat"],
-					[Tail.RHINO, "rhino"],
-					[Tail.ECHIDNA, "echidna"],
-					[Tail.DEER, "deer"],
-					[Tail.SALAMANDER, "salamander"],
-					[Tail.KITSHOO, "kitshoo"],
-					[Tail.MANTIS_ABDOMEN, "mantis abdomen"],
-					[Tail.WOLF, "wolf"],
-					[Tail.LION, "lion"],
-					[Tail.GARGOYLE, "mace-shaped gargoyle"],
-					[Tail.MANTICORE_PUSSYTAIL, "manticore pussytail"],
-					[Tail.ORCA, "orca"],
-					[Tail.YGGDRASIL, "yggdrasil"],
-					[Tail.RAIJU, "raiju"],
-					[Tail.RED_PANDA, "red-panda"],
-					[Tail.GARGOYLE_2, "axe-shaped gargoyle"],
-					[Tail.AVIAN, "avian"],
-					[Tail.GRIFFIN, "griffin"],
-					[Tail.CAVE_WYRM, "cave wyrm"],
-					[Tail.SQUIRREL, "squirrel"],
-					[Tail.MONKEY, "monkey"]
-				]
-		);
-		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
-				[
-					[Wings.NONE, "non-existant"],
-					[Wings.BEE_LIKE_SMALL, "small bee-like"],
-					[Wings.BEE_LIKE_LARGE, "large bee-like"],
-					[Wings.HARPY, "harpy"],
-					[Wings.IMP, "imp"],
-					[Wings.BAT_LIKE_TINY, "tiny bat-like"],
-					[Wings.BAT_LIKE_LARGE, "large bat-like"],
-				//	[SHARK_FIN, "shark fin"],
-					[Wings.FEATHERED_LARGE, "large feathered"],
-					[Wings.DRACONIC_SMALL, "small draconic"],
-					[Wings.DRACONIC_LARGE, "large draconic"],
-					[Wings.GIANT_DRAGONFLY, "giant dragonfly"],
-					[Wings.BAT_LIKE_LARGE_2, "two large pairs of bat-like"],
-					[Wings.DRACONIC_HUGE, "large majestic draconic"],
-					[Wings.FEATHERED_PHOENIX, "phoenix"],
-					[Wings.FEATHERED_ALICORN, "alicorn"],
-					[Wings.FEATHERED_SPHINX, "sphinx"],
-					[Wings.MANTIS_LIKE_SMALL, "small mantis-like"],
-					[Wings.MANTIS_LIKE_LARGE, "large mantis-like"],
-					[Wings.MANTIS_LIKE_LARGE_2, "two large pairs of mantis-like"],
-					[Wings.GARGOYLE_LIKE_LARGE, "large stony"],
-					[Wings.PLANT, "three pairs of cockvines"],
-					[Wings.MANTICORE_LIKE_SMALL, "small manticore-like"],
-					[Wings.MANTICORE_LIKE_LARGE, "large manticore-like"],
-					[Wings.BAT_ARM, "bat"],
-					[Wings.VAMPIRE, "large bat"],
-					[Wings.FEY_DRAGON_WINGS, "large majestic fey draconic"],
-					[Wings.FEATHERED_AVIAN, "avian"],
-					[Wings.NIGHTMARE, "leathery"],
-					[Wings.ETHEREAL_WINGS, "etheral tendrils"],
-					[Wings.THUNDEROUS_AURA, "thunderous aura"],
-					[Wings.FAIRY, "fairy"],
-				]
-		);
 		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
 				[
 					[Wings.NONE, "non-existant"],
@@ -2893,89 +2526,7 @@ public class Appearance extends Utils
 					[Wings.FAIRY, "butterfly"],
 				]
 		);
-		public static const DEFAULT_LOWER_BODY_NAMES:Object = createMapFromPairs(
-				[
-					[LowerBody.HUMAN, "human"],
-					[LowerBody.HOOFED, "hoofed"],
-					[LowerBody.DOG, "dog"],
-					[LowerBody.NAGA, "naga"],
-					[LowerBody.CENTAUR, "centaur"],
-					[LowerBody.DEMONIC_HIGH_HEELS, "demonic high-heels"],
-					[LowerBody.DEMONIC_CLAWS, "demonic claws"],
-					[LowerBody.BEE, "bee"],
-					[LowerBody.GOO, "goo"],
-					[LowerBody.CAT, "cat"],
-					[LowerBody.LIZARD, "lizard"],
-					[LowerBody.PONY, "pony"],
-					[LowerBody.BUNNY, "bunny"],
-					[LowerBody.HARPY, "harpy"],
-					[LowerBody.KANGAROO, "kangaroo"],
-					[LowerBody.CHITINOUS_SPIDER_LEGS, "chitinous spider legs"],
-					[LowerBody.DRIDER, "drider"],
-					[LowerBody.FOX, "fox"],
-					[LowerBody.DRAGON, "dragon"],
-					[LowerBody.RACCOON, "raccoon"],
-					[LowerBody.FERRET, "ferret"],
-					[LowerBody.CLOVEN_HOOFED, "cloven-hoofed"],
-					[LowerBody.ECHIDNA, "echidna"],
-					[LowerBody.DEERTAUR, "deertaur"],
-					[LowerBody.SALAMANDER, "salamander"],
-					[LowerBody.SCYLLA, "slippery octopus tentacles"],
-					[LowerBody.MANTIS, "mantis"],
-					//[MANTIS, "mantis"],
-					[LowerBody.SHARK, "shark"],
-					[LowerBody.GARGOYLE, "gargoyle"],
-					[LowerBody.GARGOYLE_2, "gargoyle"],
-					[LowerBody.PLANT_HIGH_HEELS, "vine-covered"],
-					[LowerBody.PLANT_ROOT_CLAWS, "root feet"],
-					[LowerBody.WOLF, "wolf"],
-					[LowerBody.LION, "lion"],
-					[LowerBody.YETI, "yeti"],
-					[LowerBody.ORCA, "orca"],
-					[LowerBody.YGG_ROOT_CLAWS, "root feet"],
-					[LowerBody.ONI, "oni"],
-					[LowerBody.ELF, "elf"],
-					[LowerBody.RAIJU, "raiju"],
-					[LowerBody.RED_PANDA, "red panda"],
-					[LowerBody.AVIAN, "avian"],
-					[LowerBody.GRYPHON, "gryphon"],
-					[LowerBody.ORC, "orc"],
-					[LowerBody.CAVE_WYRM, "cave wyrm"],
-					[LowerBody.MOUSE, "mouse"],
-					[LowerBody.HINEZUMI, "hinezumi"],
-					[LowerBody.BEAR, "bear"],
-					[LowerBody.HYDRA, "hydra"],
-					[LowerBody.FIRE_SNAIL, "fire snail"],
-					[LowerBody.GHOST, "phantom"],
-					[LowerBody.GHOST_2, "poltergeist"],
-					[LowerBody.JIANGSHI, "jiangshi"],
-					[LowerBody.YUKI_ONNA, "yuki onna"],
-					[LowerBody.FROSTWYRM, "frost wyrm"],
-					[LowerBody.WEASEL, "weasel"],
-					[LowerBody.SQUIRREL, "squirrel"]
-				]
-		);
 		// <mod name="Dragon patch" author="Stadler76">
-		public static const DEFAULT_REAR_BODY_NAMES:Object = createMapFromPairs(
-				[
-					[RearBody.NONE, "none"],
-					[RearBody.DRACONIC_MANE, "draconic hairy mane"],
-					[RearBody.DRACONIC_SPIKES, "draconic spiky mane"],
-					[RearBody.FENRIR_ICE_SPIKES, "ice shards"],
-					[RearBody.BEHEMOTH, "behemoth spikes"],
-					[RearBody.LION_MANE, "lion mane"],
-					[RearBody.SHARK_FIN, "shark fin"],
-					[RearBody.ORCA_BLOWHOLE, "orca blowhole"],
-					[RearBody.RAIJU_MANE, "raiju mane"],
-					[RearBody.WOLF_COLLAR, "wolf mane"],
-					[RearBody.DISPLACER_TENTACLES, "displacer tentacles"],
-					[RearBody.SNAIL_SHELL, "snail shell"],
-					[RearBody.METAMORPHIC_GOO, "metamorphic goo"],
-					[RearBody.GHOSTLY_AURA, "ghostly aura"],
-					[RearBody.YETI_FUR, "yeti furkini"],
-					[RearBody.GLACIAL_AURA, "glacial aura"]
-				]
-		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(
 				[
 					[Piercing.NONE, "none"],
@@ -3171,7 +2722,7 @@ public class Appearance extends Utils
 			}
 			else
 			{
-				descript += DEFAULT_TAIL_NAMES[i_creature.tailType];
+				descript += Tail.Types[i_creature.tailType].name;
 				descript += " tail";
 			}
 			
@@ -3212,7 +2763,7 @@ public class Appearance extends Utils
 			}
 			else
 			{
-				descript += "your " + DEFAULT_TAIL_NAMES[i_creature.tailType] + " tail";
+				descript += "your " + Tail.Types[i_creature.tailType].name + " tail";
 			}
 			
 			return descript;

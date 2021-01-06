@@ -757,14 +757,14 @@ public class Creature extends Utils
 			var mins:Object = getAllMinStats();
 			mins.lust = minLust();
 			var oldHPratio:Number = hp100/100;
-			//Strenght
+			//Strength
 			if (dstr < 0){
 				addCurse("str", -dstr);
 			}
 			if (dstr > 0){
 				removeCurse("str", dstr);
 			}
-			//tougness
+			//toughness
 			if (dtou < 0){
 				addCurse("tou", -dtou);
 			}
@@ -778,7 +778,7 @@ public class Creature extends Utils
 			if (dspe > 0){
 				removeCurse("spe", dspe);
 			}
-			//Inteligence
+			//Intelligence
 			if (dint < 0){
 				addCurse("int", -dint);
 			}
@@ -4034,7 +4034,7 @@ public class Creature extends Utils
 		
 		public function hornDescript():String
 		{
-			return Appearance.DEFAULT_HORNS_NAMES[horns.type] + " _horns";
+			return Horns.Types[horns.type].name + " horns";
 		}
 		
 		public function tailDescript():String
