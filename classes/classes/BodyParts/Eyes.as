@@ -13,7 +13,7 @@ public class Eyes extends BodyPart {
 	public static const HUMAN:int                = 0;
 	EnumValue.add(Types, HUMAN, "HUMAN", {name:"human"})
 	public static const FOUR_SPIDER_EYES:int     = 1;
-	EnumValue.add(Types, FOUR_SPIDER_EYES, "FOUR_SPIDER_EYES", {name:"4 spider"})
+	EnumValue.add(Types, FOUR_SPIDER_EYES, "FOUR_SPIDER_EYES", {name:"six spider"})
 	public static const BLACK_EYES_SAND_TRAP:int = 2;
 	EnumValue.add(Types, BLACK_EYES_SAND_TRAP, "BLACK_EYES_SAND_TRAP", {name:"sandtrap"})
 	public static const CAT_SLITS:int            = 3;

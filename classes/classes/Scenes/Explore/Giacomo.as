@@ -156,10 +156,10 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			else addButtonDisabled(7, "???", "Req. Prestige Job: Grey Sage");
 			addButton(8, "E. Tome", pitchElementalistsTome).hint("Elementalist’s Tome");
 			if (Holidays.nieveHoliday()) {
-				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(8, "Mysterious Seed", pitchMysteriousSeed);
-				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 5) addButton(9, "Decorations", pitchDecorations);
+				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(11, "Mysterious Seed", pitchMysteriousSeed);
+				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 5) addButton(12, "Decorations", pitchDecorations);
 			}
-			addButton(10, "Torch", pitchTorch);
+			addButton(13, "Torch", pitchTorch);
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}

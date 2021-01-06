@@ -224,16 +224,17 @@ use namespace CoC;
 		
 		private function FenrirRuinedShrine():void {
 			clearOutput();
-			if (flags[kFLAGS.FENRIR_COLLAR] == 1) {
-				outputText("Wandering the Glacial Rift you find yourself drawn once more to the ruins of the Temple of Fenrir. You enter it again, drawn by the thread of Urdr, and the menacing voice of Fenrir echoes in your mind.\n\n");
-				outputText("\"<i>Welcome, feeble one. You see my words were true, as they always are. Shall you reconsider my offer? So long as you bear the shape of my fallen children the choice shall remain open to you.</i>\"\n\n");
-				outputText("The chained collar still sits around the neck of Fenrir's petrified form. Will you take the collar and inherit the dark god's will, or will you refuse, for now?\n\n");
+			if (flags[kFLAGS.FENRIR_COLLAR] == 2) {
+				outputText("Once more you are drawn into the Temple of Fenrir, and the collar stands before you on Fenrir's petrified form. The god does not speak, but you feel him watching you, silently posing his dreadful question again.\n\n");
+				outputText("Will you take the collar and inherit the dark god's will, or will you refuse, for now?\n\n");
 				addButton(0, "Take It", putTheCollar);
 				addButton(1, "Leave", leaveShrine);
 			}
-			else if (flags[kFLAGS.FENRIR_COLLAR] == 2) {
-				outputText("Once more you are drawn into the Temple of Fenrir, and the collar stands before you on Fenrir's petrified form. The god does not speak, but you feel him watching you, silently posing his dreadful question again.\n\n");
-				outputText("Will you take the collar and inherit the dark god's will, or will you refuse, for now?\n\n");
+			else if (flags[kFLAGS.FENRIR_COLLAR] == 1) {
+				outputText("Wandering the Glacial Rift you find yourself drawn once more to the ruins of the Temple of Fenrir. You enter it again, drawn by the thread of Urdr, and the menacing voice of Fenrir echoes in your mind.\n\n");
+				outputText("\"<i>Welcome, feeble one. You see my words were true, as they always are. Shall you reconsider my offer? So long as you bear the shape of my fallen children the choice shall remain open to you.</i>\"\n\n");
+				outputText("The chained collar still sits around the neck of Fenrir's petrified form. Will you take the collar and inherit the dark god's will, or will you refuse, for now?\n\n");
+				flags[kFLAGS.FENRIR_COLLAR]++;
 				addButton(0, "Take It", putTheCollar);
 				addButton(1, "Leave", leaveShrine);
 			}
@@ -284,13 +285,13 @@ use namespace CoC;
 		
 		private function leaveShrine():void {
 			clearOutput();
-			if (flags[kFLAGS.FENRIR_COLLAR] < 1) {
+			if (flags[kFLAGS.FENRIR_COLLAR] == 1) outputText("You turn to leave, still refusing Fenrir's offer. His voice echoes softly behind you. \"<i>Until next time, feeble one. May you live until the thread of Urdr draws you here once more.</i>\"");
+			else if (flags[kFLAGS.FENRIR_COLLAR] < 1) {
 				outputText("This seems like a bad idea. You don't doubt that the dark god has shown you the truth, but you've come this far without making choices you can't take back this choice in particular doesn't feel like the place to start. You return your paw to your side and move to leave the cavern, and Fenrir's voice echoes around you one more time.");
 				outputText("\n\n\"<i>Your choice is your own, feeble one. I speak the truth; I shall not force you. You will be a fitting vessel for my power only if you take it willingly, and knowing full well what it entails. Until you decide differently I will wait here, patiently. But know this: it was the weight of Urdr's thread that brought you to this place, and you may find resisting it as hard a burden as the one you already bear. Make no mistake, so long as you bear the shape of my scattered children we will meet here again, and you will have to choose once more.</i>\"");
 				outputText("\n\nOn those word Fenrir fall silent again as you make your way back to your camp.");
-			flags[kFLAGS.FENRIR_COLLAR] = 1;
+				flags[kFLAGS.FENRIR_COLLAR] = 1;
 			}
-			else if (flags[kFLAGS.FENRIR_COLLAR] = 1 outputText("You turn to leave, still refusing Fenrir's offer. His voice echoes softly behind you. \"<i>Until next time, feeble one. May you live until the thread of Urdr draws you here once more.</i>\"");
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}
