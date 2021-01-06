@@ -25,7 +25,7 @@ public class HydeKitsuneScene extends NPCAwareContent {
 
 	public function splitPersonalityTakesOver():void { //Bad end. Will require tweaking of values, but is currently easy to keep away from. Req >75% Int&Wis and <95% Corr to avoid.
 		clearOutput();
-		outputText("\n\nAs you return back to your camp, a sharp stabbing pain strikes your chest. Almost as soon as the pain fades do you also feel like the world is losing it's cohesion. You desperately consider that could be happening to you when suddenly you feel your connection to your star sphere snap, to be quickly reattached by something much darker.\n\n"
+		outputText("\n\nAs you return back to your camp, a sharp stabbing pain strikes your chest.  Almost as soon as the pain fades, you also feel like the world is losing its cohesion. You desperately consider what could be happening to you when suddenly you feel your connection to your star sphere snap, to be quickly reattached by something much darker.\n\n"
 				+"It immediately feasts upon your body and mind, silencing you while tearing your very consciousness apart, shredding every ounce of will and individuality from you, and consuming it into itself. \n\n"
 				+"As the last remnants of you keep screaming into the empty white void that was your very self, a new being emerges from nothingness. Looking closely, it slowly morphs into... it's morphing into you! It soon finishes, and inky black tentacles smash into the metaphorical walls, staining it wherever it anchors itself to, and slowly, it opens it's eyes and stares at you, before you are consumed by a vast torrent of darkness.\n\n"
 				+"You whimper, but you don't even have the energy to do so, before the corruption takes over your last concious spark, and begins masquerading as [name], the destroyer of Mareth... and perhaps even Ingnam?\n\n\n\n"
@@ -38,10 +38,10 @@ public class HydeKitsuneScene extends NPCAwareContent {
 		var x:int = lossDKtype
 		switch (x) {
 			case 1:
-				outputText("\n\nThe corruption loses it's grip on your soul, and retreats from your star sphere. For the first time in a while, you feel a massive burden removed from somewhere deep within you.\n\n");
+				outputText("\n\nThe corruption loses its grip on your soul, and retreats from your star sphere. For the first time in a while, you feel a massive burden removed from somewhere deep within you.\n\n");
 				break;
 			case 2:
-				outputText("\n\nNo longer close enough to be considered a full-blooded kitsune, the corruption loses it's grip on your soul, and retreats from your star sphere. For the first time in a while, you feel a massive burden removed from somewhere deep within you.\n\n");
+				outputText("\n\nNo longer close enough to be considered a full-blooded kitsune, the corruption loses its grip on your soul, and retreats from your star sphere. For the first time in a while, you feel a massive burden removed from somewhere deep within you.\n\n");
 				break;
 		}
 		//return true;
@@ -51,7 +51,7 @@ public class HydeKitsuneScene extends NPCAwareContent {
 		var x:int = statchk
 		switch (x){
 			case 1:
-				outputText("\n\nYou look at the corruption currently infecting your star sphere, and contemplate what to do about the problem, however, the more you look at it, the slower you feel your brain moving. Then again, with all that you've been through lately, a few brain cells might be knocked lose. Perhaps something to restore your <b>intelligence</b> might be in order?")
+				outputText("\n\nYou look at the corruption currently infecting your star sphere, and contemplate what to do about the problem, however, the more you look at it, the slower you feel your brain moving. Then again, with all that you've been through lately, a few brain cells might be knocked loose. Perhaps something to restore your <b>intelligence</b> might be in order?")
 				break;
 			case 2:
 				outputText("\n\nYou look at the corruption currently infecting your star sphere, and contemplate what to do about the problem, however, you can't think of a solution. Then, it strikes you like a bolt. Perhaps there may be other records of this phenomena happening, all you need to do is to look for the <b>wisdom</b> of the elders!")
@@ -93,11 +93,15 @@ public class HydeKitsuneScene extends NPCAwareContent {
 			}
 		}
 	}
+	public function splitPersonalityStatchange():void {
+		outputText("The corruption continues to change you, changing you to become more feral,  more like the agent of corruption it envisions you to become, "+((player.cor)>=90?"and you welcome it, embracing your new role in this world.":(player.cor)>=75?"and you wonder if this might not be an entirely bad thing.":(player.cor)>=50?"and you are slightly worried about the prospect.":""));
+
+	}
 
 	public function darkenedKitsuneExpression():String {
-		return "\n\nThe corruption has turned you into a " + ((player.cor >= 75) ? "inhuman" : "different") + " being; With your head " + ((player.cor >= 75) ? "tilted to 35 degrees" : "slightly off-center") + " and ears " + ((player.cor >= 75) ? "twitching erratically" : "constantly moving at the slightest sound") + "  every so often, it would almost be " + ((player.cor >= 75) ? "cute if not for your gesugao expression." : "considered cute, if not for your paranoid expression.")
+		return "\n\nThe corruption has turned you into a" + ((player.cor >= 75) ? "n inhuman" : " different") + " being; With your head " + ((player.cor >= 75) ? "tilted to 35 degrees" : "slightly off-center") + " and ears " + ((player.cor >= 75) ? "twitching erratically" : "constantly moving at the slightest sound") + "  every so often, it would almost be " + ((player.cor >= 75) ? "cute if not for your gesugao expression." : "considered cute, if not for your paranoid expression.")
 	}
-	public function darkKitsuneCombat():Boolean {
+	public function darkKitsuneCombat():Boolean { //Random extra attack using pc's own weapons. Also should grant slow inte + wis loss, str + tough + wrath + cor gain, loss/gain varies by cor.
 		outputText("Placeholder text.")
 		return true;
 	}
