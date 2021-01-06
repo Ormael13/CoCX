@@ -294,6 +294,9 @@ public class PerkLib
 		public static const FloralOvariesFinalForm:PerkType = mk("Floral Ovaries (Final Form)", "Floral Ovaries (Final Form)",
 				"Further increase the potency of Alraune pollen. Alraune pollen has a 25% chance per round to fascinate your victim.",
 				"You've chosen the 'Floral Ovaries (Final Form)' perk. Further increase the potency of Alraune pollen. Alraune pollen has a 30% chance per round to fascinate your victim.").withBuffs({'lib.mult':0.20});
+		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
+				"You are currently in elemental form.",
+				"You are currently in elemental form.");
 		public static const HeartOfTheStorm:PerkType = mk("Heart of the storm", "Heart of the storm",
 				"Increase the power of all Wind and Lightning racial abilities.",
 				"You've chosen the 'Heart of the storm' perk. Increase the power of all Wind and Lightning racial abilities.").withBuffs({'speed.mult':0.05});
