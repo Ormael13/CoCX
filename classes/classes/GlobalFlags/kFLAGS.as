@@ -2805,7 +2805,7 @@ public static const UNKNOWN_FLAG_NUMBER_02796:int                               
 public static const UNKNOWN_FLAG_NUMBER_02797:int                                   = 2797;
 public static const UNKNOWN_FLAG_NUMBER_02798:int                                   = 2798;
 public static const UNKNOWN_FLAG_NUMBER_02799:int                                   = 2799;
-public static const UNKNOWN_FLAG_NUMBER_02800:int                                   = 2800;
+public static const LUNA_TRIED_WORKING_AS_BARMAID:int								= 2800; // if the player didn't hire Luna at first, they suggest she try working at the Wet Bitch. If so, the player can ask Aunt Nancy how *that* went to read a funny scene   
 public static const UNKNOWN_FLAG_NUMBER_02801:int                                   = 2801;
 public static const UNKNOWN_FLAG_NUMBER_02802:int                                   = 2802;
 public static const UNKNOWN_FLAG_NUMBER_02803:int                                   = 2803;

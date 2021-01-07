@@ -42,6 +42,9 @@ public function interactWithAuntNancy():void {
 		//[Gain 20 Lust.] (I remain steadfastly unaroused; maudlin self-pity isn't sexy.  -Z)
 		dynStats("lus", 10);
 		simpleChoices("Agree", timeForAuntNancySpiderCooch, "Decline", declineAuntNancyMassage, "", null, "", null, "", null);
+		if (flags[kFLAGS.LUNA_TRIED_WORKING_AS_BARMAID] > 0) {
+			addButton(8, "Luna", lunaStory );
+		}
 	}
 	//[If Time >= 1400 - (100*(Relationship with Aunt Nancy/30), Relationship with Aunt Nancy >= 30, and PillowTalk= 1]
 	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264] >= 30 && model.time.hours >= (14 - (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264]/30)) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00266] > 0) {
@@ -50,6 +53,9 @@ public function interactWithAuntNancy():void {
 		outputText("\"<i>Couldn't stay away, could you friend?</i>\" she asks, quietly, a sexy smile on her lovely face.  \"<i>What'll it be? Do you want a drink...</i>\"  The spider-lady leans her white-haired head next to your ear conspiratorially, and whispers, \"<i>Or, do you want me to get off early and give you a little... massage?</i>\"  You shiver at her words.\n\n");
 		//[Choice: Strong, Light, Agree, Decline]
 		simpleChoices("Strong", strongStuff, "Light", lightStuff, "Agree", timeForAuntNancySpiderCooch, "", null, "Back", declineAuntNancyMassage);
+		if (flags[kFLAGS.LUNA_TRIED_WORKING_AS_BARMAID] > 0) {
+			addButton(8, "Luna", lunaStory );
+		}
 	}
 	//[Interaction 1]
 	//If Relationship with Nancy < 30
@@ -61,6 +67,9 @@ public function interactWithAuntNancy():void {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] < 1) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] = 1;
 		//[Choice: Strong, Light]
 		simpleChoices("Strong", strongStuff, "Light", lightStuff, "", null, "", null, "Leave", telAdre.barTelAdre);
+		if (flags[kFLAGS.LUNA_TRIED_WORKING_AS_BARMAID] > 0) {
+			addButton(8, "Luna", lunaStory );
+		}
 	}
 }
 
@@ -479,6 +488,24 @@ private function auntNancyPoonPartIV():void {
 	//Increment times boned!
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00266] += 1;
 	doNext(camp.returnToCampUseTwoHours);
+}
+private function lunaStory():void {
+	clearOutput();
+	outputText("You ask Aunt Nancy if she got approached by a young human dressed like a maid looking for work.\n\n");
+	outputText("\"<i>Oh...</i>\" She gives you a suprised look. \"<i>Wait a minute, you know her... ohhhh, oh no!</i>\" She puts two of her black-laquered hands over her mouth in a clear gesture of dismay. \"<i>Don't tell me that you're the one who recommended she try here?</i>\"\n\n");
+	outputText("With a growing feeling of dread you admit your involvement, and ask Aunt Nancy what happened.\n\n");
+	outputText("Noticing your dismay, she waves her other two arms in front of her as if to ward off your worries. \"<i>Ah, I'm sorry dear, I didn't mean to sound quite so... accusatory.</i>\" She sighs, and continues. \"<i>Well, I am a bit short on help right now, and she seemed like a nice enough girl, so I hired her on for a trial period. As you guessed, it didn't work out, but it wasn't because she coudn't do the work. On the contrary, I've never seen someone so naturally suited to customer service!</i>\" Aunt Nancy gazes past you a bit as she recollects.\n\n");
+	outputText("\"<i>She was energetic, worked hard, and had a wonderful way with the customers, especially the men. Maybe a bit... too good, actually,</i>\" she continues. \"<i>The trouble came when one of our customers, a regular who gets a bit... feely, when he drinks, mistook her friendliness for a come-on. He grabbed her ass as she turned to walk away, and it was like a switch had flipped.</i>\" She dropped the tray she was carrying clear on the floor, turned around, and told him in the flattest tone I've ever heard \"Did you just touch me, you piece of garbage? Only my master may touch me. I'll have to take that hand of yours to teach you better manners.\" Then she pulled a knife from somewhere, and if Edryn hadn't been here to stop her, I don't care to think what might have happened.");
+	outputText("You reply with a quiet 'oh' as Aunt Nancy finishes her story. Seeing your look of dismay, she continues. \"<i>After Edryn wrestled the knife from her hands, she seemed to recover herself and then ran from the bar, crying. Didn't see her again after that. I can't say I'd have wanted her to try staying, but I do feel bad for the poor girl; she may have overreacted, but the customer was out of line too. I hope she finds something to do that she can handle.</i>\" She sighs sadly.");
+	if (flags[kFLAGS.LUNA_FOLLOWER] == 0 || flags[kFLAGS.LUNA_FOLLOWER] == 1) outputText("Mentally you make a note not to get handsy with the strange maid");
+	if (flags[kFLAGS.LUNA_FOLLOWER] == 0) outputText(".");
+	if (flags[kFLAGS.LUNA_FOLLOWER] == 1) outputText(", especially with her staying at your camp now. Still, she's shown no sign of aggression so far...");
+	if (flags[kFLAGS.LUNA_FOLLOWER] == 2 || flags[kFLAGS.LUNA_FOLLOWER] == 3) outputText("You find yourself speechless, and decide it's best if Aunt Nancy doesn't know.");
+	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && flags[kFLAGS.LUNA_FOLLOWER] <= 6) outputText("You tell Aunt Nancy that she's actually been working for you at your camp, and that she's been a marvelous help with no sign of any such episode.\n\nShe looks surprised, and says \"<i>Well, I'm glad to hear she's doing well. I wouldn't try anything saucy though, if I were you; not unless you get a pretty clear invitation.</i>\" She laughs wryly, and you agree.");
+	if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText("Knowing what you know about Luna now, it's hardly a surprise something like this happened. You feel badly about sending her here in retrospect, though there's no way you could've known.");
+	outputText("\n\nAunt Nancy sees you looking down and chides you. \"<i>Now now, don't you go blaming yourself, dear. I'm sure you were just trying to help the pooor girl, and I'm still the one who gave her a chance in the end. Sometimes you don't know who someone really is until they show you, and that's just how life is.</i>\"\n\n");
+	outputText("You reflect on the truth in the barkeep's wise words, and move to another subject.");
+	doNext( interactWithAuntNancy );
 }
 }
 }

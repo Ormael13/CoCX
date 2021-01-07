@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Places {
+package classes.Scenes.Places {
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
@@ -1720,6 +1720,7 @@ public function meetingLunaFirstTimeLeave():void {
 	outputText("The young woman looks up at you in surprise, her eyes widening and her mouth forming a cute little \"o\". You realize she's actually rather cute, with features that lean more toward soft and sweet than sultry and soft-looking, light brown hair and big golden-colored eyes. She doesn't quite smile at you, but her expression does ease a bit and she replies, saying \"<i>Thank you, kind stranger. I'll do that, I guess; it's not like I have any better options. If... if I do get hired there, will you come see me? My name is Luna. I'd... I'd like it if you came to see me again.</i>\"");
 	outputText("Telling her that sounds nice, you say your goodbyes and continue your business, hoping that you've at least spared the poor girl the worst of her situation. If only you could do more...");
 	flags[kFLAGS.LUNA_FOLLOWER] = 1;
+	flags[kFLAGS.LUNA_TRIED_WORKING_AS_BARMAID] = 1;
 	doNext(telAdreMenu);
 }
 public function meetingLunaFirstTimeHelp():void {
