@@ -266,7 +266,7 @@ use namespace CoC;
 				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(1, "Taoth", rebuildTaothAltair);
 				else addButtonDisabled(1, "Taoth", "You not have enough stones.");
 			}
-			if (player.hasKeyItem("Fenrir Collar") >= 0 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1) {
+			if (player.hasKeyItem("Gleipnir Collar") >= 0 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1) {
 				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(2, "Fenrir", rebuildFenrirAltair);
 				else addButtonDisabled(2, "Fenrir", "You not have enough stones.");
 			}

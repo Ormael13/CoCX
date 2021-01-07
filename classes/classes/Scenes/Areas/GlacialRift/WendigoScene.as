@@ -129,6 +129,10 @@ package classes.Scenes.Areas.GlacialRift
 			if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE) player.vaginaType(VaginaClass.EQUINE);
 			if (player.hasVagina() && player.biggestTitSize() < 8) player.breastRows[0].breastRating += 8;
 			if (player.hasCock() && player.horseCocks() < player.cocks.length) player.addHorseCock();
+			if (player.skin.base.pattern != Skin.PATTERN_NONE) {
+				player.skin.base.pattern = Skin.PATTERN_NONE;
+				player.skin.base.adj = "";
+			}
 			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 			player.createPerk(PerkLib.UnnaturalStrength, 0, 0, 0, 0);
 			player.createPerk(PerkLib.EndlessHunger, 0, 0, 0, 0);

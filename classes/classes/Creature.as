@@ -512,6 +512,7 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.AscensionHardiness) >= 0) max += perkv1(PerkLib.AscensionHardiness) * 100;
 			if (findPerk(PerkLib.ChiReflowDefense) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
 			max += level * 15;
+			if (level <= 6) max += level * 15;
 			if (findPerk(PerkLib.UnlockBody) >= 0) max += level * 15;
 			if (findPerk(PerkLib.UnlockBody2ndStage) >= 0) max += level * 15;
 			if (findPerk(PerkLib.UnlockBody3rdStage) >= 0) max += level * 15;
@@ -653,6 +654,8 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) max += (125 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.AscensionDesires) >= 0) max += perkv1(PerkLib.AscensionDesires) * 10;
+			max += level;
+			if (level <= 6) max += level;
 			if (findPerk(PerkLib.UnlockArdor) >= 0) max += level;
 			if (findPerk(PerkLib.UnlockArdor2ndStage) >= 0) max += level;
 			if (findPerk(PerkLib.UnlockArdor3rdStage) >= 0) max += level;
