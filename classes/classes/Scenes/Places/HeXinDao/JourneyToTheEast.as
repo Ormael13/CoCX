@@ -40,6 +40,7 @@ package classes.Scenes.Places.HeXinDao
 			}
 			menu();
 			addButton(0, "Drink", drinkAlcohol);
+			addButton(2, "???", shadyPerson).hint("A strange two headed morph with two tails is sitting at one of the tables.");
 			addButton(4, "Adv.Guild", BoardkeeperYangMain);
 			//addButtonDisabled(5, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
 			//addButtonDisabled(6, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
@@ -93,6 +94,36 @@ package classes.Scenes.Places.HeXinDao
 			statScreenRefresh();
 			outputText("\n\nThe barman hands over the drink you ordered. ");
 			inventory.takeItem(drink, drinkAlcohol);
+		}
+
+		private function shadyPerson():void {
+			clearOutput();//Felix - male beffy bro nekomata twin herald npc
+			outputText("\"<i>Wanna buy something?</i>\" askes the cat head while dog one adds almost barking \"<i>Or get lost...</i>\"\n\n");
+			menu();
+			//addButton(10, necklaces..shortName, itemBuy, necklaces.);
+			//addButton(11, headjewelries..shortName, itemBuy, headjewelries.);
+			addButton(12, jewelries.EZEKIELS.shortName, itemBuy, jewelries.EZEKIELS);
+			addButton(14, "Back", curry(enteringInn,false));
+			statScreenRefresh();
+		}
+		private function itemBuy(itype:ItemType):void {
+			clearOutput();
+			outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
+			//outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
+			if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
+				outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
+				//Goto shop main menu
+				doNext(shadyPerson);
+				return;
+			}
+			else outputText("\n\nDo you buy it?\n\n");
+			//Go to debit/update function or back to shop window
+			doYesNo(curry(debitItem,itype), shadyPerson);
+		}
+		private function debitItem(itype:ItemType):void {
+			flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
+			statScreenRefresh();
+			inventory.takeItem(itype, shadyPerson);
 		}
 
 		public function BoardkeeperYangMain():void {

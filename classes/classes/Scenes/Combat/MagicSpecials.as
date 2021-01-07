@@ -399,6 +399,12 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You can't use this underwater!");
 			}
 		}
+		if (player.hasPerk(PerkLib.FromTheFrozenWaste)){
+			bd = buttons.add("Winter Claws", WinterClaws).hint("Natural weapon damage is increased by 200% as cold damage but take very highly increased damage from fire attacks.");
+			if(player.hasStatusEffect(StatusEffects.WinterClaw)) {
+				bd.disable("Your natural weapons are already generating cold!");
+			}
+		}
 		if ((player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI) || player.hasPerk(PerkLib.HinezumiBurningBloodFinalForm)) {
 			bd = buttons.add("Cauterize", cauterize).hint("Flash burn your wounds to cause them to close. Take damage but recover over time. \n", "Cauterize");
 			if(player.hasStatusEffect(StatusEffects.Cauterize)) {
@@ -2652,6 +2658,18 @@ public class MagicSpecials extends BaseCombatContent {
 		player.HP -= player.HP * 0.05;
 		outputText("You wince in pain but feel relief as your wounds begin to smoke and close.\n\n");
 		player.createStatusEffect(StatusEffects.Cauterize,10,0,0,0);
+		statScreenRefresh();
+		enemyAI();
+	}
+
+	public function WinterClaws():void {
+		clearOutput();
+		var WinterClawsDuration:Number = 10
+		//if (player.hasPerk(PerkLib.HinezumiBurningBlood)) blazingBattleSpiritDuration += 1;
+		//if (player.hasPerk(PerkLib.HinezumiBurningBloodEvolved)) blazingBattleSpiritDuration += 2;
+		//if (player.hasPerk(PerkLib.HinezumiBurningBloodFinalForm)) blazingBattleSpiritDuration += 7;
+		outputText("Your bodily flames begin to rage as you enter a passionate battle fury.\n\n");
+		player.createStatusEffect(StatusEffects.WinterClaw,WinterClawsDuration,0,0,0);
 		statScreenRefresh();
 		enemyAI();
 	}

@@ -3551,6 +3551,7 @@ public class Combat extends BaseContent {
 
     //ATTACK
     public function attack():void {
+        var IsFeralCombat:Boolean = false;
         flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
         //	if(!player.hasStatusEffect(StatusEffects.FirstAttack)) {
         //		clearOutput();
@@ -3702,11 +3703,17 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
         //Natural weapon Full attack list
         if ((flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) || player.isGargoyle())){
+            IsFeralCombat = true;
             //DOING BITE ATTACKS
             if (player.hasABiteAttack()) {
                 var biteMultiplier:Number = 0.5;
-                if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ORCA) biteMultiplier = 2.0;
                 outputText("You bite your foe sinking your teeth in");
+                if (player.hasPerk(PerkLib.FenrirSpiritstrike) && !monster.hasPerk(PerkLib.EnemyTrueDemon)){
+                    biteMultiplier = 10;
+                    outputText(" and tearing at your foe very soul!");
+                    HPChange(player.maxHP()*0.25,false);
+                }
+                if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ORCA) biteMultiplier = 2.0;
                 if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.VAMPIRE) {
                     outputText(" and drawing blood out");
                     if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
@@ -4017,7 +4024,7 @@ public class Combat extends BaseContent {
             }
         }
         // Do all other attacks
-        meleeDamageAcc();
+        meleeDamageAcc(IsFeralCombat);
     }
 
     public function attack2():void {
@@ -4194,7 +4201,7 @@ public class Combat extends BaseContent {
         outputText("<b>)</b>");
     }
 
-    public function meleeDamageAcc():void {
+    public function meleeDamageAcc(IsFeralCombat:Boolean = false):void {
         var accMelee:Number = 0;
         accMelee += (meleeAccuracy() / 2);
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
@@ -4207,8 +4214,14 @@ public class Combat extends BaseContent {
             //------------
             //Determine damage
             //BASIC DAMAGE STUFF
-            damage += player.str;
-            damage += scalingBonusStrength() * 0.25;
+            if (IsFeralCombat && player.hasPerk(PerkLib.VerdantMight)){
+                damage += player.tou;
+                damage += scalingBonusToughness() * 0.25;
+            }
+            else{
+                damage += player.str;
+                damage += scalingBonusStrength() * 0.25;
+            }
             if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
             if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
                 damage += player.spe;
@@ -4249,6 +4262,13 @@ public class Combat extends BaseContent {
                 else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
                 else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
                 else damage = Math.round(damage * 1.4);
+            }
+            if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw)) {
+                damage *= 2.2;
+                if (monster.hasPerk(PerkLib.FireNature)) damage *= 10;
+                if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 4;
+                if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.4;
+                if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
             }
             if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
                 if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
@@ -4816,8 +4836,14 @@ public class Combat extends BaseContent {
             //------------
             //Determine damage
             //BASIC DAMAGE STUFF
-            damage += player.str;
-            damage += scalingBonusStrength() * 0.25;
+            if (player.hasPerk(PerkLib.VerdantMight)){
+                damage += player.tou;
+                damage += scalingBonusToughness() * 0.25;
+            }
+            else{
+                damage += player.str;
+                damage += scalingBonusStrength() * 0.25;
+            }
             if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
             if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
                 damage += player.spe;
@@ -7192,6 +7218,12 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.Maleficium);
                 outputText("<b>Maleficium effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.Maleficium, 1, -1);
+        }
+        if (player.hasStatusEffect(StatusEffects.WinterClaw)) {
+            if (player.statusEffectv1(StatusEffects.WinterClaw) <= 0) {
+                player.removeStatusEffect(StatusEffects.WinterClaw);
+                outputText("<b>Winter Claw effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.WinterClaw, 1, -1);
         }
         //Spell buffs
         if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
