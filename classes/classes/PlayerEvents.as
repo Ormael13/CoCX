@@ -1453,6 +1453,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.FreezingBreath);
 				needNext = true;
 			}
+			//Fenrir Soulbite
+			if (player.faceType == Face.WOLF && player.findPerk(PerkLib.FenrirSpiritstrike) < 0 && player.hasKeyItem("Gleipnir Collar") >= 0) {
+				outputText("\nLike Fenrir you have aquired the ability to not only see souls but also tear them devouring your opponent very essence with every particularly devastating bite.\n\n(<b>Gained Perk: Spirit strike</b>)\n");
+				player.createPerk(PerkLib.FenrirSpiritstrike, 0, 0, 0, 0);
+				needNext = true;
+			}
 			//Fenrir Eyes
 			if (player.eyes.type != Eyes.FENRIR && player.hasKeyItem("Gleipnir Collar") >= 0) {
 				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");
@@ -1735,6 +1741,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.TitanicStrength);
 				needNext = true;
 			}
+			//VerdantMight
+			if ((player.plantScore() >= 11 || player.alrauneScore() >= 11) && !player.hasPerk(PerkLib.VerdantMight)) {
+				outputText("\nRaw green power flows throught your veins while being a plant hasnt done so much to improve your muscle your general sturdyness more then makes up for it allowing you to use your toughness instead of your strength when delivering blows. \n\n<b>(gained the Verdant Might perk!)</b>\n");
+				player.createPerk(PerkLib.VerdantMight,0,0,0,0);
+				needNext = true;
+			}
+			if (player.plantScore() < 11 && player.alrauneScore() < 11 && player.findPerk(PerkLib.VerdantMight) >= 0) {
+				outputText("\nBeing less of a plant you loose the ability to add your own sturdyness to your attacks.\n\n<b>(Lost the Verdant Might perk!)</b>\n");
+				player.removePerk(PerkLib.VerdantMight);
+				needNext = true;
+			}
 			//Enigma
 			if (player.sphinxScore() >= 14 && player.findPerk(PerkLib.Enigma) < 0) {
 				outputText("\nBeing a sphinx has granted you insight on many things including various secrets to martial combat, guess this is what they mean about using your smarts before your brawn.\n\n<b>(Gained Enigma perk!)</b>\n");
@@ -1746,7 +1763,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Enigma);
 				needNext = true;
 			}
-			//Lacta bovine immubities
+			//Lacta bovine immunities
 			if (player.cowScore() >= 10 && player.findPerk(PerkLib.LactaBovineImmunity) < 0) {
 				outputText("\nAs you become more of a lacta bovine you become increasingly obsessed with thoughts of horsecocks and cum sloshing balls, namely minotaur balls. While you are aware you naturally became addicted to minotaur cum you also know your nature as a lacta bovine will protect you from most of its harmful effects allowing you to sample the substance to your heart's content without risks.");
 				outputText(".\n\n<b>(Gained the Lacta Bovine Immunity perk!)</b>\n");

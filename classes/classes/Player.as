@@ -2278,6 +2278,9 @@ use namespace CoC;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			if (hasStatusEffect(StatusEffects.WinterClaw)) {
+				mult += 100;
+			}
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -4151,6 +4154,7 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 14;//	104-r99	119	135	152	180	199	219(potem legendary/mythical stages?)
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				internalChimeraRatingCounter -= 20;
+			if (jewelry == game.jewelries.EZEKIELS) internalChimeraRatingCounter -= 1;
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) internalChimeraRatingCounter -= 3;//6
 			//if (flags[kFLAGS.GAME_DIFFICULTY] == 1) internalChimeraRatingCounter -= 3;//tyle ile stopni perków rasowych
 			if (internalChimeraRatingCounter < 0 || flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) internalChimeraRatingCounter = 0;
@@ -12217,6 +12221,9 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.Cauterize)) {
 				removeStatusEffect(StatusEffects.Cauterize);
+			}
+			if(hasStatusEffect(StatusEffects.WinterClaw)) {
+				removeStatusEffect(StatusEffects.WinterClaw);
 			}
 			if(CoC.instance.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				CoC.instance.monster.removeStatusEffect(StatusEffects.TailWhip);
