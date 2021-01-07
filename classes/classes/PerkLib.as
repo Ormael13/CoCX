@@ -3034,6 +3034,9 @@ public class PerkLib
 		public static const VenomGlandsFinalForm:PerkType = mk("Venom Glands (Final Form)", "Venom Glands (Final Form)",
 				"Your body posses fully developed venom glands with large reservoir of venom and good recharge speed. (+10% to poison resistance)",
 				"You've chosen the 'Venom Glands (Final Form)' perk. Your body posses fully developed venom glands with large reservoir of venom and good recharge speed. also raises poison resistance by +10%").withBuffs({'tou.mult':0.15});
+		public static const VerdantMight:PerkType = mk("Verdant Might", "Verdant Might",
+				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.",
+				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.");
 		public static const VitalShot:PerkType = mk("Vital Shot", "Vital Shot",
 				"Gain a +10% chance to do a critical strike with arrows.",
 				"You've chosen the 'Vital Shot' perk, gaining an additional +10% chance to cause a critical hit with arrows.");

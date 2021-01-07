@@ -3551,6 +3551,7 @@ public class Combat extends BaseContent {
 
     //ATTACK
     public function attack():void {
+        var IsFeralCombat:Boolean = false;
         flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
         //	if(!player.hasStatusEffect(StatusEffects.FirstAttack)) {
         //		clearOutput();
@@ -3702,6 +3703,7 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
         //Natural weapon Full attack list
         if ((flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) || player.isGargoyle())){
+            IsFeralCombat = true;
             //DOING BITE ATTACKS
             if (player.hasABiteAttack()) {
                 var biteMultiplier:Number = 0.5;
@@ -4017,7 +4019,7 @@ public class Combat extends BaseContent {
             }
         }
         // Do all other attacks
-        meleeDamageAcc();
+        meleeDamageAcc(IsFeralCombat);
     }
 
     public function attack2():void {
@@ -4194,7 +4196,7 @@ public class Combat extends BaseContent {
         outputText("<b>)</b>");
     }
 
-    public function meleeDamageAcc():void {
+    public function meleeDamageAcc(IsFeralCombat:Boolean = false):void {
         var accMelee:Number = 0;
         accMelee += (meleeAccuracy() / 2);
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
@@ -4207,9 +4209,16 @@ public class Combat extends BaseContent {
             //------------
             //Determine damage
             //BASIC DAMAGE STUFF
-            damage += player.str;
-            damage += scalingBonusStrength() * 0.25;
-            if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
+            if (IsFeralCombat && player.hasPerk(PerkLib.VerdantMight)){
+                damage += player.tou;
+                damage += scalingBonusToughness() * 0.25;
+                if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
+            }
+            else{
+                damage += player.str;
+                damage += scalingBonusStrength() * 0.25;
+                if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
+            }
             if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
                 damage += player.spe;
                 damage += scalingBonusSpeed() * 0.20;
@@ -4816,9 +4825,16 @@ public class Combat extends BaseContent {
             //------------
             //Determine damage
             //BASIC DAMAGE STUFF
-            damage += player.str;
-            damage += scalingBonusStrength() * 0.25;
-            if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
+            if (player.hasPerk(PerkLib.VerdantMight)){
+                damage += player.tou;
+                damage += scalingBonusToughness() * 0.25;
+                if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
+            }
+            else{
+                damage += player.str;
+                damage += scalingBonusStrength() * 0.25;
+                if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
+            }
             if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
                 damage += player.spe;
                 damage += scalingBonusSpeed() * 0.20;
