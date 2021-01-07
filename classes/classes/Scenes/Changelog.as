@@ -89,6 +89,7 @@ package classes.Scenes
 			outputText("-Fixed bugs: Liadri bugfixes, Pyro bugfixes/typo corrections, Cold Fish Soup missing it main intendeed effect (libido lowering), super perk points not reseting on ascension, gremlin tf text error, some of the scenes only looking for correct size of 1st cock ignoring any other PC could have\n\n");
 			outputText("<b>Version 0.8p:</b>\n\n");
 			outputText("-New range weapon/tome (by Ormael): Golemancy Evocation Manuscript - buyable at golemancer shop in He'Xin'Dao. Cost 200 gems. Increase golems damage by 50% of base value.\n");
+			outputText("-New range weapon/tome (by Ormael): Elementalist’s Tome - buyable at Giacomo. Cost 200 gems. Increase elementals damage by 50% of base value.\n");
 			outputText("-Bit of increased secondary stat bars gains for monsters at milestones to keep them protected from nuking by PC.\n");
 			outputText("-With too large diff in levels damage reduction will return 1 point of dmg instead of 0. With some effects form items or perks that will still give chance to get few points of dmg even if PC is vastly underleveled compared to enemy.\n");
 			outputText("-Huge, Gigantic, Colossal type of enemies gained now natural lvl diff bonus (it mean for level difference between PC and enemy they treated as few levels higher enemies than their displayed level). Huge +2, Gigantic +5, Colossal +10.\n");
@@ -107,7 +108,6 @@ package classes.Scenes
 			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			outputText("-New scene for Aiko and PC with kitsune tails by Jtexc.\n");
 			outputText("-Revisions/corrections to Luna, Kitsune, Fenrir Collar content by Scary Dragon Mom.\n");
-			outputText("-New range weapon/tome (by Ormael): Elementalist’s Tome - buyable at Giacomo. Cost 200 gems. Increase elementals damage by 50% of base value.\n");
 			outputText("-Change to handling dual weapons. No need ot get tons of dual wield perks and only one to rule them all... Dual Wield perk is all what PC would need. Of course now that will mean dual wielding would have penalties: -50% damage and -25% accuracy.");// There would be two ways to offset those: get specific for that type of weapons perk 
 			//outputText("(so current dual wield (type of weapon) perks will have role but not of 'I need it to use this type of weapons) or simply training/using them to gain better mastery of using them.\n");
 			outputText("-Jtecx small addition to kitsunes about corruption effects on PC appearance.\n");
@@ -119,19 +119,21 @@ package classes.Scenes
 			outputText("-Fenrir collar been renamed to Gleipnir collar. Also there is slight diff scene after 2nd time finding the shrine.\n");
 			outputText("-Added passive gains of soulforce (5) and lust/wrath (1) on level up. Also first 6 level up would grant 5x more increase to max HP, Fatigue, Mana, Soulforce, Wrath and Lust.\n");
 			outputText("-Added two new skill to Fenrir Soulstrike and Winter Claw\n");
-			outputText("-New Plant skill Verdant Might\n");
+			outputText("-New mutation perk: Verdant Might. Req. 11+ in plant/alraune score. Effects: As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.\n");
+			outputText("-New ring (by Ormael): Ezekiel's Signet - buyable at Felix in Journey to the East inn. Cost 100 gems. Negate 1 racial perk point negative effect.\n");//Negate up to 2 racial perk points negative effects
+			outputText("-Game now knows if the full round attack is done in or includes feral ……combat. (change by Liadri)\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-Some shady person appeared in Journey to the East inn that sells items currently. Maybe he will talk in future more too ^^\n");
 			outputText("-Semi fixed bug on stats values not reseting down after ascension. Save and load after ascension would fix now the last part on this bug i not corrected.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
 			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons\n");/*ostatni punkt changelogu
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -212,7 +214,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -262,10 +266,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
