@@ -3034,6 +3034,9 @@ public class PerkLib
 		public static const VenomGlandsFinalForm:PerkType = mk("Venom Glands (Final Form)", "Venom Glands (Final Form)",
 				"Your body posses fully developed venom glands with large reservoir of venom and good recharge speed. (+10% to poison resistance)",
 				"You've chosen the 'Venom Glands (Final Form)' perk. Your body posses fully developed venom glands with large reservoir of venom and good recharge speed. also raises poison resistance by +10%").withBuffs({'tou.mult':0.15});
+		public static const VerdantMight:PerkType = mk("Verdant Might", "Verdant Might",
+				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.",
+				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.");
 		public static const VitalShot:PerkType = mk("Vital Shot", "Vital Shot",
 				"Gain a +10% chance to do a critical strike with arrows.",
 				"You've chosen the 'Vital Shot' perk, gaining an additional +10% chance to cause a critical hit with arrows.");
@@ -3333,6 +3336,8 @@ public class PerkLib
 				"Lactation does not decrease and gives a compulsion to breastfeed others.");
 		public static const FenrirSpikedCollar:PerkType = mk("Fenrir's Gleipnir Collar", "Fenrir's Gleipnir Collar",
 				"The spectral chain Gleipnir and runed collar-spikes increase damage reduction by 10%, but you are forever chained to the role of the Fenrir.");
+		public static const FenrirSpiritstrike:PerkType = mk("Fenrir's Spirit strike", "Fenrir's Spirit strike",
+				"Fenrir's power allows you to deal devastating damage with your bite attack to any creature possessing a soul.");
 		public static const Ferocity:PerkType = mk("Ferocity", "Ferocity",
 				"You can remains conscious and continue fighting even if your HP is below 0. You gonna loose 1% of max HP each round and would loose fight when negative HP reach 7% (or more if PC got other perks to stay undefeated below 0%) of max HP.");
 		public static const FireAffinity:PerkType = mk("Fire Affinity", "Fire Affinity",
