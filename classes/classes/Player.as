@@ -2278,6 +2278,9 @@ use namespace CoC;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			if (hasStatusEffect(StatusEffects.WinterClaw)) {
+				mult += 100;
+			}
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -12217,6 +12220,9 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.Cauterize)) {
 				removeStatusEffect(StatusEffects.Cauterize);
+			}
+			if(hasStatusEffect(StatusEffects.WinterClaw)) {
+				removeStatusEffect(StatusEffects.WinterClaw);
 			}
 			if(CoC.instance.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				CoC.instance.monster.removeStatusEffect(StatusEffects.TailWhip);

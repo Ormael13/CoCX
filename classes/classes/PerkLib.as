@@ -3336,6 +3336,8 @@ public class PerkLib
 				"Lactation does not decrease and gives a compulsion to breastfeed others.");
 		public static const FenrirSpikedCollar:PerkType = mk("Fenrir's Gleipnir Collar", "Fenrir's Gleipnir Collar",
 				"The spectral chain Gleipnir and runed collar-spikes increase damage reduction by 10%, but you are forever chained to the role of the Fenrir.");
+		public static const FenrirSpiritstrike:PerkType = mk("Fenrir's Gleipnir Collar", "Fenrir's Gleipnir Collar",
+				"Fenrir power allows you to deal devastating damage with your bite attack to any creature possessing a soul.");
 		public static const Ferocity:PerkType = mk("Ferocity", "Ferocity",
 				"You can remains conscious and continue fighting even if your HP is below 0. You gonna loose 1% of max HP each round and would loose fight when negative HP reach 7% (or more if PC got other perks to stay undefeated below 0%) of max HP.");
 		public static const FireAffinity:PerkType = mk("Fire Affinity", "Fire Affinity",

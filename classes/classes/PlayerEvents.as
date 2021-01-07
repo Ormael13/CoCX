@@ -1452,6 +1452,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.FreezingBreath);
 				needNext = true;
 			}
+			//Fenrir Soulbite
+			if (player.faceType == Face.WOLF && player.findPerk(PerkLib.FenrirSpiritstrike) < 0 && player.hasKeyItem("Gleipnir Collar") >= 0) {
+				outputText("\nLike Fenrir you have aquired the ability to not only see souls but also tear them devouring your opponent very essence with every particularly devastating bite.\n\n(<b>Gained Perk: Spirit strike</b>)\n");
+				player.createPerk(PerkLib.FenrirSpiritstrike, 0, 0, 0, 0);
+				needNext = true;
+			}
 			//Fenrir Eyes
 			if (player.eyes.type != Eyes.FENRIR && player.hasKeyItem("Gleipnir Collar") >= 0) {
 				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");

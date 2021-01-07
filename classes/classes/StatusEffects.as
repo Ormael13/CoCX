@@ -961,6 +961,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const VioletPupilTransformation:StatusEffectType = mkCombat("Violet Pupil Transformation");
 		public static const Web:StatusEffectType                       = WebDebuff.TYPE;
 		public static const WebSilence:StatusEffectType                = mkCombat("Web-Silence");
+		public static const WinterClaw:StatusEffectType       		   = mkCombat("Winter Claw");
 		public static const Whispered:StatusEffectType                 = mkCombat("Whispered");
 		public static const WindWall:StatusEffectType                  = mkCombat("Wind Wall");
 		public static const WolfHold:StatusEffectType                  = mkCombat("Wolf Hold");
