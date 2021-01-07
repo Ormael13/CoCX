@@ -1293,10 +1293,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Insane/corrupted Kitsune random events //Help why isn't this being called.
 			if (player.findPerk(PerkLib.DarkenedKitsune) >= 0) {
-				//if (rand(5)==0){
+				if (rand(5)==0){
 				SceneLib.darkenedKitsuneScene.splitPersonalityRandom()
-				//}
 				SceneLib.darkenedKitsuneScene.splitPersonalityStatchange()
+				}
 				needNext = true;
 			}
 			//Insane/corrupted Kitsune perk

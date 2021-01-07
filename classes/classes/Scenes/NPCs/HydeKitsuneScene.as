@@ -94,7 +94,7 @@ public class HydeKitsuneScene extends NPCAwareContent {
 		}
 	}
 	public function splitPersonalityStatchange():void {
-		outputText("The corruption continues to change you, changing you to become more feral,  more like the agent of corruption it envisions you to become, "+((player.cor)>=90?"and you welcome it, embracing your new role in this world.":(player.cor)>=75?"and you wonder if this might not be an entirely bad thing.":(player.cor)>=50?"and you are slightly worried about the prospect.":""));
+		outputText("\n\nThe corruption continues to change you, changing you to become more feral,  more like the agent of corruption it envisions you to become, "+((player.cor)>=90?"and you welcome it, embracing your new role in this world.":(player.cor)>=75?"and you wonder if this might not be an entirely bad thing.":(player.cor)>=50?"and you are slightly worried about the prospect.":""));
 
 	}
 
