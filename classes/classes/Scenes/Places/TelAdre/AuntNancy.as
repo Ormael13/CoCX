@@ -42,7 +42,7 @@ public function interactWithAuntNancy():void {
 		//[Gain 20 Lust.] (I remain steadfastly unaroused; maudlin self-pity isn't sexy.  -Z)
 		dynStats("lus", 10);
 		simpleChoices("Agree", timeForAuntNancySpiderCooch, "Decline", declineAuntNancyMassage, "", null, "", null, "", null);
-		if (flags[kFLAGS.LUNA_TRIED_WORKING_AS_BARMAID] > 0) {
+		if (flags[kFLAGS.LUNA_TRIED_WORKING_AS_BARMAID] == 1) {
 			addButton(8, "Luna", lunaStory );
 		}
 	}
@@ -53,7 +53,7 @@ public function interactWithAuntNancy():void {
 		outputText("\"<i>Couldn't stay away, could you friend?</i>\" she asks, quietly, a sexy smile on her lovely face.  \"<i>What'll it be? Do you want a drink...</i>\"  The spider-lady leans her white-haired head next to your ear conspiratorially, and whispers, \"<i>Or, do you want me to get off early and give you a little... massage?</i>\"  You shiver at her words.\n\n");
 		//[Choice: Strong, Light, Agree, Decline]
 		simpleChoices("Strong", strongStuff, "Light", lightStuff, "Agree", timeForAuntNancySpiderCooch, "", null, "Back", declineAuntNancyMassage);
-		if (flags[kFLAGS.LUNA_TRIED_WORKING_AS_BARMAID] > 0) {
+		if (flags[kFLAGS.LUNA_TRIED_WORKING_AS_BARMAID] == 1) {
 			addButton(8, "Luna", lunaStory );
 		}
 	}
@@ -67,7 +67,7 @@ public function interactWithAuntNancy():void {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] < 1) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] = 1;
 		//[Choice: Strong, Light]
 		simpleChoices("Strong", strongStuff, "Light", lightStuff, "", null, "", null, "Leave", telAdre.barTelAdre);
-		if (flags[kFLAGS.LUNA_TRIED_WORKING_AS_BARMAID] > 0) {
+		if (flags[kFLAGS.LUNA_TRIED_WORKING_AS_BARMAID] == 1) {
 			addButton(8, "Luna", lunaStory );
 		}
 	}
@@ -505,6 +505,7 @@ private function lunaStory():void {
 	if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText("Knowing what you know about Luna now, it's hardly a surprise something like this happened. You feel badly about sending her here in retrospect, though there's no way you could've known.");
 	outputText("\n\nAunt Nancy sees you looking down and chides you. \"<i>Now now, don't you go blaming yourself, dear. I'm sure you were just trying to help the pooor girl, and I'm still the one who gave her a chance in the end. Sometimes you don't know who someone really is until they show you, and that's just how life is.</i>\"\n\n");
 	outputText("You reflect on the truth in the barkeep's wise words, and move to another subject.");
+	flags[kFLAGS.LUNA_TRIED_WORKING_AS_BARMAID] = 2;
 	doNext( interactWithAuntNancy );
 }
 }
