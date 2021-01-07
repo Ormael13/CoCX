@@ -4217,13 +4217,12 @@ public class Combat extends BaseContent {
             if (IsFeralCombat && player.hasPerk(PerkLib.VerdantMight)){
                 damage += player.tou;
                 damage += scalingBonusToughness() * 0.25;
-                if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
             }
             else{
                 damage += player.str;
                 damage += scalingBonusStrength() * 0.25;
-                if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
             }
+            if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
             if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
                 damage += player.spe;
                 damage += scalingBonusSpeed() * 0.20;
@@ -4840,13 +4839,12 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.VerdantMight)){
                 damage += player.tou;
                 damage += scalingBonusToughness() * 0.25;
-                if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
             }
             else{
                 damage += player.str;
                 damage += scalingBonusStrength() * 0.25;
-                if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
             }
+            if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
             if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
                 damage += player.spe;
                 damage += scalingBonusSpeed() * 0.20;
