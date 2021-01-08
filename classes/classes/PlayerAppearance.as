@@ -1,4 +1,4 @@
-﻿package classes {
+package classes {
 import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
@@ -886,7 +886,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.hasKeyItem("Gleipnir Collar") >= 0) {
 			if (player.necklaceName != "nothing") outputText(" Benath it is ");
 			else outputText(" On your neck is ");
-			outputText("a Fenrir spiked Collar its chain still hanging down from it and clinking with an ominous metallic sound as you walk around.");
+			outputText("Fenrir's spiked Collar, pieces of the spectral chain Gleipnir still dangling from it, floating weightlessly and tracing your movements.");
 		}
 		if (player.jewelryName != "nothing") {
 			outputText(" At one of your right hand fingers is a " + player.jewelryName + "");
@@ -1510,7 +1510,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 	public function describeRearBody():void {
 		if (player.rearBody.type == RearBody.FENRIR_ICE_SPIKES) {
-			outputText("  Jagged ice shards grows out of your back providing both excellent defence and giving you a menacing look.");
+			outputText("  Jagged ice shards grows out of your back, providing excellent defence and chilling the air around you.");
 		}
 		else if (player.rearBody.type == RearBody.LION_MANE) {
 			outputText("  Around your neck there is a thick mane of [skin coat.color] fur. It looks great on you.");
@@ -1827,7 +1827,7 @@ public class PlayerAppearance extends BaseContent {
 		else if(eyeType == Eyes.GORGON)
 			outputText("  Your [eyecolor] eyes are similar to those of snake-like gorgons with ability to temporally petrify.");
 		else if(eyeType == Eyes.FENRIR)
-			outputText("  Your [eyecolor] eyes glows with a freezing blue light, icy smoke rising in the air around it.");
+			outputText("  Your [eyecolor] eyes glow with a freezing blue light, and wisps of icy mist drift from them.");
 		else if(eyeType == Eyes.MANTICORE)
 			outputText("  Your eyes are similar to those of a cat, with slit pupils. However, their [eyecolor] iris dismiss any links to the regular felines in favor of something way more ominous.");
 		else if(eyeType == Eyes.FOX)
@@ -2426,17 +2426,17 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.WOLF) {
 			if (!player.hasCoat()) {
 				outputText("  You have a wolf-like face, complete with a wet nose.  ");
-				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
+				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("Your breath freezes the air, and cold mist leaks from your jaws.   ");
 				outputText("The odd visage is hairless and covered with [skin coat]");
 				tattooAndPatternGeneric();
 				outputText(".");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeth.  ");
-				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
+				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("Your breath freezes the air, and cold mist leaks from your jaws.   ");
 				outputText("You've got [skin coat], hiding your [skin noadj] underneath your furry visage.");
 			} else {
 				outputText("  You have the facial structure of a wolf, wet nose and all, but overlaid with glittering patches of [skin coat].");
-				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("  Cold blue mist seems to periodically escape from your mouth.");
+				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("  Your breath freezes the air, and cold mist leaks from your jaws.");
 			}
 		}
 		if (faceType == Face.WOLF_FANGS) {
