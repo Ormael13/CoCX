@@ -94,7 +94,19 @@ public class HydeKitsuneScene extends NPCAwareContent {
 		}
 	}
 	public function splitPersonalityStatchange():void {
-		outputText("\n\nThe corruption continues to change you, changing you to become more feral,  more like the agent of corruption it envisions you to become, "+((player.cor)>=90?"and you welcome it, embracing your new role in this world.":(player.cor)>=75?"and you wonder if this might not be an entirely bad thing.":(player.cor)>=50?"and you are slightly worried about the prospect.":""));
+		if (rand(20)==0) {
+			outputText("\n\nThe corruption continues to change you, changing you to become more feral,  more like the agent of corruption it envisions you to become, " + ((player.cor) >= 90 ? "and you welcome it, embracing your new role in this world." : (player.cor) >= 75 ? "and you wonder if this might not be an entirely bad thing." : (player.cor) >= 50 ? "and you are slightly worried about the prospect." : ""));
+		}
+		statScreenRefresh();
+
+		player.statStore.addBuffObject({
+			"str": 1+(player.cor/100),
+			"tou": 1+(player.cor/100),
+			"int": -(1+((player.cor/4)/100)),
+			"wis": -(1+((player.cor/4)/100))
+		}, 'DarkenedKitsunePerk', {text: 'Darkened Kitsune\'s Perk'});
+
+		//dynStats("str*",1+(player.cor/100),"tou*",1+(player.cor/100),"int/",1+((player.cor/4)/100),"wis/",1+((player.cor/4)/100));
 
 	}
 

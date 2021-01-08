@@ -1295,8 +1295,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.findPerk(PerkLib.DarkenedKitsune) >= 0) {
 				if (rand(5)==0){
 				SceneLib.darkenedKitsuneScene.splitPersonalityRandom()
-				SceneLib.darkenedKitsuneScene.splitPersonalityStatchange()
 				}
+				SceneLib.darkenedKitsuneScene.splitPersonalityStatchange()
 				needNext = true;
 			}
 			//Insane/corrupted Kitsune perk
