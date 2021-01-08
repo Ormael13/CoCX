@@ -1838,6 +1838,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.GorgonsEyesEvolved);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.HarpyHollowBones)) {
+				player.removePerk(PerkLib.HarpyHollowBones);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HarpyHollowBonesEvolved)) {
+				player.removePerk(PerkLib.HarpyHollowBonesEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HarpyHollowBonesFinalForm)) {
+				player.removePerk(PerkLib.HarpyHollowBonesFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.HeartOfTheStorm)) {
 				player.removePerk(PerkLib.HeartOfTheStorm);
 				player.perkPoints += 1;
