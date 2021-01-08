@@ -1,4 +1,4 @@
-﻿package classes {
+package classes {
 import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
@@ -886,7 +886,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.hasKeyItem("Gleipnir Collar") >= 0) {
 			if (player.necklaceName != "nothing") outputText(" Benath it is ");
 			else outputText(" On your neck is ");
-			outputText("a Fenrir spiked Collar its chain still hanging down from it and clinking with an ominous metallic sound as you walk around.");
+			outputText("Fenrir's spiked Collar, pieces of the spectral chain Gleipnir still dangling from it, floating weightlessly and tracing your movements.");
 		}
 		if (player.jewelryName != "nothing") {
 			outputText(" At one of your right hand fingers is a " + player.jewelryName + "");
@@ -1510,7 +1510,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 	public function describeRearBody():void {
 		if (player.rearBody.type == RearBody.FENRIR_ICE_SPIKES) {
-			outputText("  Jagged ice shards grows out of your back providing both excellent defence and giving you a menacing look.");
+			outputText("  Jagged ice shards grows out of your back, providing excellent defence and chilling the air around you.");
 		}
 		else if (player.rearBody.type == RearBody.LION_MANE) {
 			outputText("  Around your neck there is a thick mane of [skin coat.color] fur. It looks great on you.");
@@ -1827,7 +1827,7 @@ public class PlayerAppearance extends BaseContent {
 		else if(eyeType == Eyes.GORGON)
 			outputText("  Your [eyecolor] eyes are similar to those of snake-like gorgons with ability to temporally petrify.");
 		else if(eyeType == Eyes.FENRIR)
-			outputText("  Your [eyecolor] eyes glows with a freezing blue light, icy smoke rising in the air around it.");
+			outputText("  Your [eyecolor] eyes glow with a freezing blue light, and wisps of icy mist drift from them.");
 		else if(eyeType == Eyes.MANTICORE)
 			outputText("  Your eyes are similar to those of a cat, with slit pupils. However, their [eyecolor] iris dismiss any links to the regular felines in favor of something way more ominous.");
 		else if(eyeType == Eyes.FOX)
@@ -2426,17 +2426,17 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.WOLF) {
 			if (!player.hasCoat()) {
 				outputText("  You have a wolf-like face, complete with a wet nose.  ");
-				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
+				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("Your breath freezes the air, and cold mist leaks from your jaws.   ");
 				outputText("The odd visage is hairless and covered with [skin coat]");
 				tattooAndPatternGeneric();
 				outputText(".");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeth.  ");
-				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
+				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("Your breath freezes the air, and cold mist leaks from your jaws.   ");
 				outputText("You've got [skin coat], hiding your [skin noadj] underneath your furry visage.");
 			} else {
 				outputText("  You have the facial structure of a wolf, wet nose and all, but overlaid with glittering patches of [skin coat].");
-				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("  Cold blue mist seems to periodically escape from your mouth.");
+				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("  Your breath freezes the air, and cold mist leaks from your jaws.");
 			}
 		}
 		if (faceType == Face.WOLF_FANGS) {
@@ -2901,7 +2901,8 @@ public class PlayerAppearance extends BaseContent {
 		//GRAND CHIMERA
 		outputText("\nGRAND CHIMERA: " + player.grandchimeraScore());
 		//Harpy
-		if (player.harpyScore() >= 8) outputText("\n<font color=\"#0000a0\">Harpy: " + player.harpyScore() + " (-20% to Tou racial multi, +80% to Spe racial multi, +60% to Lib racial multi)</font>");
+		if (player.harpyScore() >= 15) outputText("\n<font color=\"#0000a0\">Harpy Queen: " + player.harpyScore() + " (-30% to Tou racial multi, +150% to Spe racial multi, +105% to Lib racial multi)</font>");
+		else if (player.harpyScore() >= 8) outputText("\n<font color=\"#0000a0\">Harpy: " + player.harpyScore() + " (-20% to Tou racial multi, +80% to Spe racial multi, +60% to Lib racial multi)</font>");
 		else if (player.harpyScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Harpy: " + player.harpyScore() + " (-10% to Tou racial multi, +40% to Spe racial multi, +30% to Lib racial multi)</font>");
 		else if (player.harpyScore() >= 1) outputText("\n<font color=\"#008000\">Half Harpy: " + player.harpyScore() + "</font>");
 		else if (player.harpyScore() < 1) outputText("\n<font color=\"#ff0000\">Half Harpy: 0</font>");
@@ -3122,7 +3123,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.poltergeistScore() >= 1) outputText("\n<font color=\"#008000\">Phantom: " + player.poltergeistScore() + "</font>");
 		else if (player.poltergeistScore() < 1) outputText("\n<font color=\"#ff0000\">Phantom: 0</font>");
 		//Phoenix
-		if (player.phoenixScore() >= 10) outputText("\n<font color=\"#0000a0\">Phoenix: " + player.phoenixScore() + " (+20% to Str racial multi, +20% to Tou racial multi, +70% to Spe racial multi, +40% to Lib racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		if (player.phoenixScore() >= 21) outputText("\n<font color=\"#0000a0\">Greater Phoenix: " + player.phoenixScore() + " (+40% to Str racial multi, +20% to Tou racial multi, +150% to Spe racial multi, +105% to Lib racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		else if (player.phoenixScore() >= 10) outputText("\n<font color=\"#0000a0\">Phoenix: " + player.phoenixScore() + " (+20% to Str racial multi, +20% to Tou racial multi, +70% to Spe racial multi, +40% to Lib racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		else if (player.phoenixScore() >= 1) outputText("\n<font color=\"#008000\">Phoenix: " + player.phoenixScore() + "</font>");
 		else if (player.phoenixScore() < 1) outputText("\n<font color=\"#ff0000\">Phoenix: 0</font>");
 		//Pig
@@ -3200,7 +3202,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.sharkScore() >= 1) outputText("\n<font color=\"#008000\">Half Shark-morph: " + player.sharkScore() + "</font>");
 		else if (player.sharkScore() < 1) outputText("\n<font color=\"#ff0000\">Half Shark-morph: 0</font>");
 		//Siren
-		if (player.sirenScore() >= 10) outputText("\n<font color=\"#0000a0\">Siren: " + player.sirenScore() + " (+40% to Str racial multi, +70% to Spe racial multi, +40% to Int racial multi)</font>");
+		if (player.sirenScore() >= 16) outputText("\n<font color=\"#0000a0\">Greater Siren: " + player.sirenScore() + " (+70% to Str racial multi, +100% to Spe racial multi, +70% to Int racial multi)</font>");
+		else if (player.sirenScore() >= 10) outputText("\n<font color=\"#0000a0\">Siren: " + player.sirenScore() + " (+40% to Str racial multi, +70% to Spe racial multi, +40% to Int racial multi)</font>");
 		else if (player.sirenScore() >= 1) outputText("\n<font color=\"#008000\">Siren: " + player.sirenScore() + "</font>");
 		else if (player.sirenScore() < 1) outputText("\n<font color=\"#ff0000\">Siren: 0</font>");
 		//Sphinx
@@ -3214,8 +3217,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.spiderScore() >= 1) outputText("\n<font color=\"#008000\">Half Spider-morph: " + player.spiderScore() + "</font>");
 		else if (player.spiderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>");
 		//Thunderbird
-		if (player.thunderbirdScore() >= 15) outputText("\n<font color=\"#0000a0\">Greater Thunderbird: " + player.thunderbirdScore() + " (-20% to Tou racial multi, +115% to Spe racial multi, +130% to Lib racial multi)</font>");
-		else if (player.thunderbirdScore() >= 12) outputText("\n<font color=\"#0000a0\">Thunderbird: " + player.thunderbirdScore() + " (-20% to Tou racial multi, +100% to Spe racial multi, +100% to Lib racial multi)</font>");
+		if (player.thunderbirdScore() >= 21) outputText("\n<font color=\"#0000a0\">Greater Thunderbird: " + player.thunderbirdScore() + " (-20% to Tou racial multi, +185% to Spe racial multi, +150% to Lib racial multi)</font>");
+		else if (player.thunderbirdScore() >= 15) outputText("\n<font color=\"#0000a0\">Thunderbird: " + player.thunderbirdScore() + " (-20% to Tou racial multi, +115% to Spe racial multi, +130% to Lib racial multi)</font>");
+		else if (player.thunderbirdScore() >= 12) outputText("\n<font color=\"#0000a0\">half Thunderbird: " + player.thunderbirdScore() + " (-20% to Tou racial multi, +100% to Spe racial multi, +100% to Lib racial multi)</font>");
 		else if (player.thunderbirdScore() >= 1) outputText("\n<font color=\"#008000\">Thunderbird: " + player.thunderbirdScore() + "</font>");
 		else if (player.thunderbirdScore() < 1) outputText("\n<font color=\"#ff0000\">Thunderbird: 0</font>");
 		//Troll
@@ -3367,4 +3371,4 @@ public class PlayerAppearance extends BaseContent {
 		}
 	}
 }
-}
+}

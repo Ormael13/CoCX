@@ -4119,6 +4119,7 @@ public class Creature extends Utils
 			var flychance:Number = 20;
 			if (findPerk(PerkLib.AdvancedAerialCombat) >= 0) flychance += 5;
 			if (findPerk(PerkLib.GreaterAerialCombat) >= 0) flychance += 15;
+			if (findPerk(PerkLib.HarpyHollowBonesEvolved) >= 0) flychance += 10;
 			if ((game.player.hasKeyItem("Jetpack") >= 0 || game.player.hasKeyItem("MK2 Jetpack") >= 0) && game.player.isInGoblinMech()) flychance += 25;
 			if (findPerk(PerkLib.Evade) >= 0) {
 				chance += 5;

@@ -939,7 +939,10 @@ use namespace CoC;
 				|| tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL
 				|| tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM
 				|| lowerBody == LowerBody.NAGA);}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasPerk(PerkLib.MorphicWeaponry) || isAlraune() || isScylla() || isKraken());}
+		public function hasTalonsAttack():Boolean{
+			return lowerBody == LowerBody.HARPY;
+		}
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasPerk(PerkLib.MorphicWeaponry) || isAlraune() || isScylla() || isKraken());}
 		//Some other checks
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
@@ -3726,8 +3729,14 @@ use namespace CoC;
 			}
 			if (TopRace == "phoenix") {
 				if (TopScore >= 10) {
-					if (isTaur()) race = "phoenix-taur";
-					else race = "phoenix";
+					if (TopScore >= 21) {
+						if (isTaur()) race = "Greater phoenix-taur";
+						else race = "Greater phoenix";
+					}
+					else{
+						if (isTaur()) race = "phoenix-taur";
+						else race = "phoenix";
+					}
 				}
 			}
 			if (TopRace == "scylla") {
@@ -3814,22 +3823,28 @@ use namespace CoC;
 			if (TopRace == "kamaitachi") {
 				if (TopScore >= 7) {
 					if (TopScore >= 18) {
-						race = "greater kamaitachi";
+						if (isTaur()) race = "greater kamaitachi-taur";
+						else race = "greater kamaitachi";
 					} else if (TopScore >= 14) {
-						race = "kamaitachi";
+						if (isTaur()) race = "kamaitachi-taur";
+						else race = "kamaitachi";
 					} else {
-						race = "half kamaitachi";
+						if (isTaur()) race = "half kamaitachi-taur";
+						else race = "half kamaitachi";
 					}
 				}
 			}
 			if (TopRace == "ratatoskr") {
 				if (TopScore >= 6) {
 					if (TopScore >= 18) {
-						race = "ratatoskr";
+						if (isTaur()) race = "ratatoskr-taur";
+						else race = "ratatoskr";
 					} else if (TopScore >= 12) {
-						race = "squirrel morph";
+						if (isTaur()) race = "squirrel-taur";
+						else race = "squirrel morph";
 					} else {
-						race = "half squirrel morph";
+						if (isTaur()) race = "half squirrel-taur";
+						else race = "half squirrel morph";
 					}
 				}
 			}
@@ -3852,8 +3867,9 @@ use namespace CoC;
 			}
 			if (TopRace == "thunderbird") {
 				if (TopScore >= 12) {
-					if (TopScore >= 15) race = "greater thunderbird";
-					else race = "thunderbird";
+					if (TopScore >= 21) race = "greater thunderbird";
+					else if (TopScore >= 15) race = "thunderbird";
+					else race = "half thunderbird";
 				}
 			}
 			//<mod>
@@ -3960,8 +3976,13 @@ use namespace CoC;
 			}
 			if (TopRace == "siren") {
 				if (TopScore >= 10) {
-					if (isTaur()) race = "siren-taur";
-					else race = "siren";
+					if (TopScore >= 16) {
+						if (isTaur()) race = "Greater siren-taur";
+						else race = "Greater siren";
+					} else {
+						if (isTaur()) race = "siren-taur";
+						else race = "siren";
+					}
 				}
 			}
 			if (TopRace == "gargoyle") {
@@ -6815,20 +6836,24 @@ use namespace CoC;
 			if (hairType == Hair.FEATHER)
 				harpy++;
 			if (wings.type == Wings.FEATHERED_LARGE)
-				harpy += 2;
+				harpy += 4;
 			if (tailType == Tail.HARPY)
 				harpy++;
-			if (tailType == Tail.SHARK || tailType == Tail.SALAMANDER)
-				harpy -= 5;
 			if (lowerBody == LowerBody.HARPY)
 				harpy++;
-			if (lowerBody == LowerBody.SALAMANDER)
-				harpy--;
 			if (harpy >= 2 && faceType == Face.HUMAN)
 				harpy++;
-			if (faceType == Face.SHARK_TEETH)
-				harpy--;
 			if (harpy >= 2 && (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN))
+				harpy++;
+			if (hasCoatOfType(Skin.COVERAGE_NONE))
+				harpy++;
+			if (hasPerk(PerkLib.HarpyWomb))
+				harpy++;
+			if (hasPerk(PerkLib.HarpyHollowBones))
+				harpy++;
+			if (hasPerk(PerkLib.HarpyHollowBonesEvolved))
+				harpy++;
+			if (hasPerk(PerkLib.HarpyHollowBonesFinalForm))
 				harpy++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				harpy += 50;
@@ -6837,6 +6862,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && harpy >= 8)
 				harpy += 1;
 			if (isGargoyle()) harpy = 0;
+			if (tailType == Tail.SHARK || tailType == Tail.SALAMANDER || lowerBody == LowerBody.SALAMANDER || faceType == Face.SHARK_TEETH)
+				harpy = 0;
 			if (hasPerk(PerkLib.ElementalBody)) harpy = 0;
 			harpy = finalRacialScore(harpy, Race.HARPY);
 			End("Player","racialScore");
@@ -7431,7 +7458,7 @@ use namespace CoC;
 			if (arms.type == Arms.HARPY)
 				thunderbirdCounter++;
 			if (wings.type == Wings.FEATHERED_LARGE)
-				thunderbirdCounter += 2;
+				thunderbirdCounter += 4;
 			if (lowerBody == LowerBody.HARPY)
 				thunderbirdCounter++;
 			if (tailType == Tail.THUNDERBIRD)
@@ -7449,6 +7476,14 @@ use namespace CoC;
 			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
 				thunderbirdCounter++;
 			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
+				thunderbirdCounter++;
+			if (findPerk(PerkLib.HarpyWomb) >= 0)
+				thunderbirdCounter++;
+			if (findPerk(PerkLib.HarpyHollowBones) >= 0)
+				thunderbirdCounter++;
+			if (findPerk(PerkLib.HarpyHollowBonesEvolved) >= 0)
+				thunderbirdCounter++;
+			if (findPerk(PerkLib.HarpyHollowBonesFinalForm) >= 0)
 				thunderbirdCounter++;
 			if (findPerk(PerkLib.HeartOfTheStorm) >= 0 && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
 				thunderbirdCounter++;
@@ -8611,7 +8646,7 @@ use namespace CoC;
 			Begin("Player","racialScore","phoenix");
 			var phoenixCounter:Number = 0;
 			if (wings.type == Wings.FEATHERED_PHOENIX)
-				phoenixCounter++;
+				phoenixCounter += 4;
 			if (arms.type == Arms.PHOENIX)
 				phoenixCounter++;
 			if (hairType == Hair.FEATHER) {
@@ -8623,7 +8658,7 @@ use namespace CoC;
 			}
 			if (eyes.type == Eyes.REPTILIAN)
 				phoenixCounter++;
-			if (lowerBody == LowerBody.SALAMANDER)
+			if (lowerBody == LowerBody.SALAMANDER || lowerBody == LowerBody.HARPY)
 				phoenixCounter++;
 			if (tailType == Tail.SALAMANDER)
 				phoenixCounter++;
@@ -8632,6 +8667,20 @@ use namespace CoC;
 			if (lizardCocks() > 0)
 				phoenixCounter++;
 			if (findPerk(PerkLib.PhoenixFireBreath) >= 0)
+				phoenixCounter++;
+			if (hasPerk(PerkLib.HarpyWomb))
+				phoenixCounter++;
+			if (hasPerk(PerkLib.HarpyHollowBones))
+				phoenixCounter++;
+			if (hasPerk(PerkLib.HarpyHollowBonesEvolved))
+				phoenixCounter++;
+			if (hasPerk(PerkLib.HarpyHollowBonesFinalForm))
+				phoenixCounter++;
+			if (hasPerk(PerkLib.SalamanderAdrenalGlands))
+				phoenixCounter++;
+			if (hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved))
+				phoenixCounter++;
+			if (hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm))
 				phoenixCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				phoenixCounter += 50;
@@ -9015,7 +9064,7 @@ use namespace CoC;
 			if (tailType == Tail.SHARK)
 				sirenCounter++;
 			if (wings.type == Wings.FEATHERED_LARGE)
-				sirenCounter += 2;
+				sirenCounter += 4;
 			if (arms.type == Arms.HARPY)
 				sirenCounter++;
 			if (lowerBody == LowerBody.SHARK)
@@ -9025,6 +9074,12 @@ use namespace CoC;
 			if (gills.type == Gills.FISH)
 				sirenCounter++;
 			if (eyes.type == Eyes.HUMAN)
+				sirenCounter++;
+			if (hasPerk(PerkLib.HarpyHollowBones))
+				sirenCounter++;
+			if (hasPerk(PerkLib.HarpyHollowBonesEvolved))
+				sirenCounter++;
+			if (hasPerk(PerkLib.HarpyHollowBonesFinalForm))
 				sirenCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				sirenCounter += 50;
@@ -11278,6 +11333,11 @@ use namespace CoC;
 				}
 			}//+10/10-20
 			if (harpyScore() >= 4) {
+				if (harpyScore() >= 15) {
+					maxTouCap2 -= 30;
+					maxSpeCap2 += 150;
+					maxLibCap2 += 105;
+				}
 				if (harpyScore() >= 8) {
 					maxTouCap2 -= 20;
 					maxSpeCap2 += 80;
@@ -11330,9 +11390,16 @@ use namespace CoC;
 				}
 			}
 			if (sirenScore() >= 10) {
-				maxStrCap2 += 40;
-				maxSpeCap2 += 70;
-				maxIntCap2 += 40;
+				if (sirenScore() >= 16) {
+					maxStrCap2 += 170;
+					maxTouCap2 += 100;
+					maxSpeCap2 += 130;
+				}
+				else {
+					maxStrCap2 += 40;
+					maxSpeCap2 += 70;
+					maxIntCap2 += 40;
+				}
 			}//+20/10-20
 			if (orcaScore() >= 6) {
 				if (orcaScore() >= 20) {
@@ -11453,7 +11520,12 @@ use namespace CoC;
 				}
 			}//+10/10-20
 			if (thunderbirdScore() >= 12) {
-				if (thunderbirdScore() >= 15) {
+				if (thunderbirdScore() >= 21) {
+					maxTouCap2 -= 20;
+					maxSpeCap2 += 185;
+					maxLibCap2 += 150;
+				}
+				else if (thunderbirdScore() >= 15) {
 					maxTouCap2 -= 20;
 					maxSpeCap2 += 115;
 					maxLibCap2 += 130;
@@ -11704,10 +11776,18 @@ use namespace CoC;
 				maxIntCap2 += 75;
 			}//+(30)55/(30-40)50-60
 			if (phoenixScore() >= 10) {
-				maxStrCap2 += 20;
-				maxTouCap2 += 20;
-				maxSpeCap2 += 70;
-				maxLibCap2 += 40;
+				if (phoenixScore() >= 21) {
+					maxStrCap2 += 40;
+					maxTouCap2 += 20;
+					maxSpeCap2 += 150;
+					maxLibCap2 += 105;
+				}
+				else{
+					maxStrCap2 += 20;
+					maxTouCap2 += 20;
+					maxSpeCap2 += 70;
+					maxLibCap2 += 40;
+				}
 			}//+30/30-40
 			if (scyllaScore() >= 4 && (isScylla() || isKraken())) {
 				if (scyllaScore() >= 12 && isKraken()) {

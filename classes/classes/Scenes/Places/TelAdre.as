@@ -1700,44 +1700,62 @@ private function goJogging():void {
 public function meetingLunaFirstTime():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_luna_maid);
-	outputText("As you wander the streets of Tel'Adre, you see a woman being brutally thrown out of a house along with her belongings. The crowd seems to be ignoring her.  Curious, you walk up to her just in time to see her start to cry. She wears what looks like a formal maid dress. Under her white bonnet, the maid sports short, ashen hair. You decide to break the ice and ask her what's going on. By all means, she looks human, which is a surprise to you.\n\n");
-	outputText("\"<i>Why, this is terrible... I’m masterless, and out of a job! What am I going to do?</i>\"\n\n");
-	outputText("What did she do to be fired to begin with?\n\n");
-	outputText("\"<i>Master William’s wife is a liar. She didn’t like me around her husband, so she broke his favorite vase and framed me for it.</i>\"\n\n");
-	outputText("Well... Talk about unfair treatment. Aren’t there any other people she could work for in town?\n\n");
-	outputText("\"<i>Once a servant is cast out, everyone in town is going to learn about it. My life as a servant is ruined. What am I going to do? Work as a whore at the penthouse? I could never do such a thing.</i>\"\n\n");
+	outputText("As you pass by some of the larger homes in Tel'Andre's residential district on your way to the market, you witness an unusual scene. The door of a large home in front of you flies open and, of all people, what appears to be a normal human stumbles out, her modest black dress in a terrible state of disarray, and her stockings torn into ribbons. She turns around to face back into the house and is immediately hit in the face by a bundle of white cloth - her apron, it would appear. A harsh female voice shouts from inside. \"<i>And don't you dare show your face in this neighborhood again, or I'll set the Town Watch on you, mark my words, you beast! You-! You unruly dog!</i>\" Then the door slams shut. The young woman looks like she's about to scream something back at the door, but her resolve crumbles, and as you watch she stands there, crumpled apron in her hands, her bare feet peeking through her stockings, and begins to cry.\n\n");
+	outputText("\"<i>This... this can't be happening again... why... </i>\"\n\n");
+	outputText("Unable to ignore the poor girl's distress, and against your better judgment, you decide to intervene and speak to her. Poking your nose in other people's business rarely seems to end well in Mareth, but a crying girl is a crying girl no matter what world you're in, you reflect; surely one of the great truths of the cosmos, you think profoundly.\n\n");
+	outputText("The girl starts as she hears your approach and turns to face you with her tear-stained face. You ask her what's going on.");
+	outputText("\"<i>Awawawawa-!</i> she cries, stumbling back from you a few steps. You put your palms up to indicate you mean no harm, and after she fixes you with an oddly intense stare for a moment she relaxes her guard and speaks to you in an even, professional tone; or tries, at least, as she seems still to be working through her tears.\"\n\n");
+	outputText("\"<i>M-my apologies, " + player.mf("Sir","Miss") + ", for my shameful outburst. You startled me. A-as you can see, I've just been f-f-f-f... h-had my employment terminated from the William estate.</i>\" She grits her teeth for a moment in a frightful grimace, and fresh tears fall from her eyes. After a few seconds she relaxes a bit and continues. \"<i>Mistre-I mean, Mrs. William caught her husband attempting to... to se-seduce me.</i>\" Her lips twitch and she sends a sidelong glance toward the door with a complicated expression. \"<i>B-but, of course, that wasn't my fault! I am... was, merely their lowly maid! I can only resist my Master so much... Anyway! She threw me out in a fit of jealous rage... I'm sure she must be screaming at him now. Serves him right! You heard the terrible things she called me, as if it were my fault!</i>\" As she finishes her story her tone changes from despair to anger, and her eyes glint a bit dangerously as she mentions her former Mistress.");
+	outputText("You tell her that sounds like an awful ordeal, and ask her if she has anywhere to go now.\n\n");
+	outputText("\"<i>I... I dont' kn-know...</i>\" She looks around for a few seconds, as if expecting to see a door opening or help arriving, then her shoulders slump and she drops to her knees. \"<i>No, I have nothing. Nothing! You heard her, she's going to have me blackballed! I'll never work as a maid again in Tel'Andre, and I don't know anywhere else but the stupid desert and terrible forest full of monsters and... aaAAAAAAAAHHHH!</i>\" She screams into her apron, pushing the cloth into her face to muffle her cry of anguish.\n\n");
+	outputText("After a few seconds of breathing heavily into her apron she exposes her face again and looks up at you once more. \"<i>I'm so sorry, kind " + player.mf("Sir","Miss") + ", you've been so good as to ask after my wellbeing and listen to my story, and I'm behaving so shamefully. I... I should go... somewhere. Perhaps the brothels will take me... if not, then maybe one of the street gangs... </i>\"");
 	outputText("You could help her or leave her be. What will you do?\n\n");
 	menu();
-	addButton(0, "Help", meetingLunaFirstTimeHelp);
-	addButton(1, "Leave", meetingLunaFirstTimeLeave);
+	if (player.gems >= 100) addButton(0, "Work4Me", meetingLunaFirstTimeHelp);
+	else addButtonDisabled(0, "Work4Me", "You're not quite slimy enough to try to take advantage of a desperate girl when you're too broke to pay her. Try later with at least 100 gems.");
+	addButton(1, "Can'tHelp", meetingLunaFirstTimeLeave).hint("As nice as it sounds to have a maid, you still think it's a bad idea to get too involved.");
 }
 public function meetingLunaFirstTimeLeave():void {
-	outputText("Sadly you see no way you could help her out. You leave, wishing her the best of luck.\n\n");
+	outputText("Sadly you see no way you could help her out; but, unwilling to leave the poor girl to offer herself to the brothels or join a gang, you point her in the direction of The Wet Bitch. They always seem busy, so perhaps they might hire her as a waitress? Waitresses and maids are similar, aren't they?\n\n");
+	outputText("The young woman looks up at you in surprise, her eyes widening and her mouth forming a cute little \"o\". You realize she's actually rather cute, with features that lean more toward soft and sweet than sultry and soft-looking, light brown hair and big golden-colored eyes. She doesn't quite smile at you, but her expression does ease a bit and she replies, saying \"<i>Thank you, kind stranger. I'll do that, I guess; it's not like I have any better options. If... if I do get hired there, will you come see me? My name is Luna. I'd... I'd like it if you came to see me again.</i>\"");
+	outputText("Telling her that sounds nice, you say your goodbyes and continue your business, hoping that you've at least spared the poor girl the worst of her situation. If only you could do more...");
 	flags[kFLAGS.LUNA_FOLLOWER] = 1;
+	flags[kFLAGS.LUNA_TRIED_WORKING_AS_BARMAID] = 1;
 	doNext(telAdreMenu);
 }
 public function meetingLunaFirstTimeHelp():void {
 	clearOutput();
-	outputText("Now that you think about it, life at camp would be infinitely easier if you had a person like her helping around. How about she comes over to live with you at your camp?\n\n");
-	outputText("\"<i>You.. you would hire me? Even after I’ve been kicked out? Oh, this is wonderful, thank you so much!!</i>\"\n\n");
+	outputText("It feels a bit strange offering work to a domestic servant when all you have is a campground, but you ask the young woman if she might not mind coming to work for you? You're hardly wealthy but you bring in enough from adventuring to support another person, and it would be useful to have someone there to help with chores, since you spend so much time exploring.\n\n");
+	outputText("\"<i>You.. you would hire me? Even after I li-after what you've seen? This isn't a joke, is it?</i>\"\n\n");
+	outputText("You inform her you're quite serious, and ask her what her rate is.\n\n");
+	outputText("\"<i>I, uh, m-my normal rate is 150- no! 100 gems a month, with an advance of- no!! I still have my advance from my job at Master William, I mean, the William estate!! Oh, please, this is like a dream come true!</i>\" She looks at you with shining golden eyes, and you offer her a hand to help her stand up, which she takes tremblingly. The two of you begin walking together, discussing the details of her employment as you head back to camp.");
+	player.gems -= 100;
 	doNext(meetingLunaCamp);
 }
 public function meetingLunaRepated():void {
 	clearOutput();
-	outputText("As you walk the streets of Tel’Adre, you spot the human maid from before. She's holding an empty can and using it to beg for money as she sits on the side of the street. Seeing the former servant girl reduced to this state makes you feel terribly sorry for her. It is not too late to revise your decision, will you help her out?\n\n");
+	outputText("As you walk the streets of Tel’Adre, you spot the human maid from before. She's holding an empty can and using it to beg for money as she sits on the side of the street. You decide not to ask about your suggestion of working at The Wet Bitch; that wouldn't be very sensitive. Instead you say hellow and walk over to her. She smiles when she sees you. If she's in this dire a situation the opportunity to hire her is likely still available. Will you reconsider?\n\n");
 	menu();
-	addButton(0, "Yes", meetingLunaRepatedYes);
+	if (player.gems >= 100) addButton(0, "Yes", meetingLunaRepeatedYes).hint("Having a maid sounds like a great addition to your camp.");
+	else addButtonDisabled(0, "Yes", "You still don't have enough money to feel comfortable offering her work. Try again with at least 100 gems.");
 	addButton(1, "No", meetingLunaRepatedNo);
 }
 public function meetingLunaRepatedNo():void {
-	outputText("There is nothing you can do for her. You leave her be, for now.\n\n");
+	outputText("There is nothing you can do for her. You leave her be, for now");
+	if (player.gems >= 200) {
+		outputText(", after dropping a handful of gems in her cup out of sympathy");
+		player.gems -= 5;
+		}
+	outputText(".");
 	doNext(telAdreMenu);
 }
-public function meetingLunaRepatedYes():void {
+public function meetingLunaRepeatedYes():void {
 	clearOutput();
-	outputText("Now that you think about it, life at camp would be infinitely easier if you had a person like her helping. How about she comes over to live with you at your camp? You walk to her and tell her that while you don’t own much but you would gladly take her.\n\n");
-	outputText("The maid, now beggar, looks at you with tears in her eyes, as if snapping out of a bad dream, then stands up as she replies.\n\n");
-	outputText("\"<i>You.. you would hire me? Even after I’ve been kicked out? Oh this is wonderful, thank you so much!!</i>\"\n\n");
+	outputText("It feels a bit strange offering work to a domestic servant when all you have is a campground, but you ask the young woman if she might not mind coming to work for you? You're hardly wealthy but you bring in enough from adventuring to support another person, and it would be useful to have someone there to help with chores, since you spend so much time exploring.\n\n");
+	outputText("The maid, now a beggar, looks at you with tears in her eyes and an unbelieving stare, then stands up as she replies.\n\n");
+	outputText("\"<i>You.. you would hire me? Even... even in this state? Are you sure??</i>\"\n\n");
+	outputText("Quite sure, you tell her. You felt sorry for her at the start, and you're sure you'd have no trouble keeping her paid; and her skills are sure to be useful even if your humble camp isn't as nice as what she's used to. And, speaking of keeping her paid, you ask her what her rate is.");
+	outputText("\"<i>I, uh, m-my normal rate is 150- no! 100 gems a month, with an advance of- no!! I still have my advance from my job at Master William, I mean, the William estate!! Oh, please, this is like a dream come true!</i>\" You're a bit curous why she's begging in the streets if she has money left over from her previous employment, but as she looks at you with shining golden eyes you lose the will to ask. You offer her a hand to help her stand up, which she takes tremblingly. The two of you begin walking together, discussing the details of her employment as you head back to camp.");
 	doNext(meetingLunaCamp);
 }
 public function meetingLunaCamp():void {
@@ -1745,11 +1763,11 @@ public function meetingLunaCamp():void {
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] == 1) outputText(" cabin ");
 	else outputText(" tent ");
 	outputText("for a house");
-	if (camp.companionsCount() > 2) outputText(", let alone the many people camping next to you");
-	outputText(". In fact, she is practically overjoyed.\n\n");
-	outputText("As the two of you reach the middle of the camp, you finally introduce yourself as [name], champion of Ingnam. She swiftly realizes she hasn’t presented herself yet and does so with reverence.\n\n");
-	outputText("\"<i>I’ve forgotten to introduce myself, please forgive me. My name is Luna and as you have probably figured out, I am a maid. Please allow me to call you " + player.mf("Master","Mistress") + " [name] from now on, I will serve you to the best of my abilities.</i>\"\n\n");
-	outputText("On this, Luna begins running around all over the camp fixing up anything she deems disorganized. Talk about being on point. It would seem that life in the camp is going to be significantly easier now that she handles the menial chores.\n\n");
+	if (camp.companionsCount() > 2) outputText(", or on your other companions milling about");
+	outputText(". On the contrary, she's hardly taken her big, golden eyes off you for the entire trip over, and if she had a tail you're sure it would be wagging delightfully as she looks around.\n\n");
+	outputText("Realizing that you still haven't told her name, you introduce yourself formally, a bit embarrassed at the oversight. She gives you a graceful curtsey.\n\n");
+	outputText("\"<i>As I told you before, my name is Luna, " + player.mf("Master","Mistress") + " [name]. From now on, I will serve you to the best of my abilities. Please do not hesitate to call on me for anything... anything at all</i>\"\n\n");
+	outputText("She gives you one last gaze with damp eyes, then bows and immediately begins rushing about the camp, neatening things, removing debris and rocks from the main concourse, and gathering laundry for washing. It would seem that life in the camp is going to be significantly easier, and you smile, sure that you've made the correct choice and will suffer no unforeseen consequences whatsoever from this.\n\n");
 	outputText("(<b>Luna has been added to the Followers menu!</b>)\n\n");
 	flags[kFLAGS.LUNA_FOLLOWER] = 4;
 	flags[kFLAGS.LUNA_LVL_UP] = 0;

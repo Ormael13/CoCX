@@ -7246,6 +7246,13 @@ public final class Mutations extends MutationsHelper {
             setTailType(Tail.SALAMANDER);
             changes++;
         }
+        //SPECIAL:
+        //Harpy Womb – All eggs are automatically upgraded to large, requires legs + tail to be salamander.
+        if (player.findPerk(PerkLib.HarpyWomb) < 0 && (player.lowerBody == LowerBody.HARPY || player.lowerBody == LowerBody.SALAMANDER) && player.tailType == Tail.SALAMANDER && rand(4) == 0 && changes < changeLimit) {
+            player.createPerk(PerkLib.HarpyWomb, 0, 0, 0, 0);
+            outputText("\n\nThere's a rumbling in your womb, signifying that some strange change has taken place in your most feminine area. No doubt something in it has changed to be more like a harpy. (<b>You've gained the Harpy Womb perk! All the eggs you lay will always be large so long as you have harpy legs and a harpy tail.</b>)");
+            changes++;
+        }
         //Legs
         if (player.lowerBody != LowerBody.SALAMANDER && player.tailType == Tail.SALAMANDER && changes < changeLimit && rand(3) == 0) {
             //Hooves -
@@ -9814,6 +9821,19 @@ public final class Mutations extends MutationsHelper {
         if (!InCollection(player.hairColor, raiju_hair) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             player.hairColor = randomChoice(raiju_hair);
             outputText("\n\nYour hair stands up on end as bolts of lightning run through each strand, changing them to a <b>[haircolor] color!</b>");
+        }
+        //SPECIAL:
+        //Harpy Womb – All eggs are automatically upgraded to large, requires legs + tail to be harpy.
+        if (player.findPerk(PerkLib.HarpyWomb) < 0 && player.lowerBody == LowerBody.HARPY && player.tailType == Tail.THUNDERBIRD && rand(4) == 0 && changes < changeLimit) {
+            player.createPerk(PerkLib.HarpyWomb, 0, 0, 0, 0);
+            outputText("\n\nThere's a rumbling in your womb, signifying that some strange change has taken place in your most feminine area. No doubt something in it has changed to be more like a harpy. (<b>You've gained the Harpy Womb perk! All the eggs you lay will always be large so long as you have harpy legs and a harpy tail.</b>)");
+            changes++;
+        }
+        if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) || player.ass.analWetness > 1)) {
+            outputText("\n\nYou feel a tightening up in your colon and your [asshole] sucks into itself.  You feel sharp pain at first but that thankfully fades.  Your ass seems to have dried and tightened up.");
+            player.ass.analWetness--;
+            if (player.ass.analLooseness > 1) player.ass.analLooseness--;
+            changes++;
         }
         //-Harpy legs
         if (player.lowerBody != LowerBody.HARPY && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
