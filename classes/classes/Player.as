@@ -942,7 +942,7 @@ use namespace CoC;
 		public function hasTalonsAttack():Boolean{
 			return lowerBody == LowerBody.HARPY;
 		}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasPerk(PerkLib.MorphicWeaponry || hasTalonsAttack()) || isAlraune() || isScylla() || isKraken());}
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasPerk(PerkLib.MorphicWeaponry) || hasTalonsAttack()) || isAlraune() || isScylla() || isKraken());}
 		//Some other checks
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
