@@ -120,7 +120,7 @@ package classes.Scenes
 			outputText("-Added passive gains of soulforce (5) and lust/wrath (1) on level up. Also first 6 level up would grant 5x more increase to max HP, Fatigue, Mana, Soulforce, Wrath and Lust.\n");
 			outputText("-Added two new skill to Fenrir Soulstrike and Winter Claw\n");
 			outputText("-New Plant skill Verdant Might\n");
-			outputText("-\n");
+			outputText("-3 new perk for harpies and score update for all members of the harpy family tree\n");
 			outputText("-Semi fixed bug on stats values not reseting down after ascension. Save and load after ascension would fix now the last part on this bug i not corrected.\n");
 			outputText("-\n");
 			outputText("-\n");
