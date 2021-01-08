@@ -284,7 +284,7 @@ use namespace CoC;
 			addButton(2, "Hex-Mate", AddMaxBackpack02).hint("Hex-Mate");
 			addButton(3, "WendigoTrigger", AddMaxBackpack4).hint("Trigger Wendigo transformation. (Without active Wendigo Psychosis will do nothing ;) )");
 			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) addButton(4, "ClickItOnce", AddMaxBackpack3).hint("Fixing Lover Zenji missing one status effect needed for his sex scenes menu.");
-			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2 && !player.hasStatusEffect(StatusEffects.TrainingNPCsTimersReduction)) addButton(5, "ClickItDoIt", AddMaxBackpack2).hint("Adding one status effect needed for sparring ring upgrades effect.");
+			if (player.hasKeyItem("Fenrir Collar") >= 0) addButton(5, "Re-Collaring", AddMaxBackpack2).hint("Changing one godly collar to other godly collar.");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
@@ -333,7 +333,8 @@ use namespace CoC;
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack2():void {
-			player.createStatusEffect(StatusEffects.TrainingNPCsTimersReduction, 6, 0, 0, 0);
+			if (player.hasKeyItem("Fenrir Collar") >= 0) player.removeKeyItem("Fenrir Collar");
+			player.createKeyItem("Gleipnir Collar", 0, 0, 0, 0);
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack3():void {
@@ -1625,7 +1626,7 @@ use namespace CoC;
 				addButton(7, "HB Mech", AddHBMech).hint("Add 1 Howling Banshee Mech for testing purposes.");
 				addButton(8, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
 				addButton(9, "GiantSlayerMech", AddGiantSlayerMech).hint("Add 1 Giant Slayer Mech for testing purposes.");
-				//10
+				addButton(10, "E. Tome", AddTheElementalistsTome).hint("Add 1 Elementalist’s Tome.");
 				addButton(11, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
 				addButton(12, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 				addButton(13, "-2-", EquipmentMenu, page + 1);
@@ -1804,6 +1805,10 @@ use namespace CoC;
 		public function AddGiantSlayerMech():void {
 			outputText("\n\n<b>(Gained 1 Giant Slayer Mech!)</b>\n\n");
 			inventory.takeItem(vehicles.GS_MECH, curry(EquipmentMenu, 1));
+		}
+		public function AddTheElementalistsTome():void {
+			outputText("\n\n<b>(Gained 1 Elementalist’s Tome!)</b>\n\n");
+			inventory.takeItem(weaponsrange.E_TOME_, curry(EquipmentMenu, 1));
 		}
 		public function AddTheEvelyn():void {
 			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");

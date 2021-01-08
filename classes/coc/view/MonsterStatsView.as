@@ -97,7 +97,7 @@ public class MonsterStatsView extends Block {
 			showMax : false,
 			maxValue: 100
 		}));
-		generalTypeLabel = addTextField({
+		generalTypeLabel = addTextField({ //Move this to sub-menu which would not take a turn. Right now it spills out of the box into player advancements.
 			defaultTextFormat: StatsView.LABEL_FORMAT,
 			text:"General Type"
 		});

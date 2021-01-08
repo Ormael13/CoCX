@@ -12,6 +12,6 @@ package classes.Scenes.NPCs
 			
 		}
 		
-		//female salamander that will rival Hel cuteness ^^ and with bit of fetish for massive bio-organic robots ;)
+		//female salamander that will rival Hel cuteness ^^ ?? and with bit of fetish for massive bio-organic robots ;) ??
 	}
 }

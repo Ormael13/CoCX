@@ -2410,14 +2410,14 @@ public static const AYANE_FOLLOWER:int                               			    = 24
 public static const AYANE_02396:int                                   = 2402;				//Not Yet Used Flag
 public static const AYANE_02397:int                                   = 2403;				//Not Yet Used Flag
 public static const AYANE_02404:int                                   = 2404;				//Not Yet Used Flag
-public static const AYANE_02405:int                                   = 2405;				//Not Yet Used Flag
-public static const AYANE_02406:int                                   = 2406;				//Not Yet Used Flag
-public static const LULA_AFFECTION:int            			                        = 2407;	//Not Yet Used Flag
-public static const LULA_FOLLOWER:int                       			            = 2408;	//Not Yet Used Flag
-public static const LULA_LVL_UP:int                                   				= 2409;	//Not Yet Used Flag
-public static const LULA_DEFEATS_COUNTER:int                                   		= 2410;	//Not Yet Used Flag
-public static const LULA_02411:int                                   = 2411;				//Not Yet Used Flag
-public static const LULA_02412:int                                   = 2412;				//Not Yet Used Flag
+public static const ASUKA_AFFECTION:int                               				= 2405;	//Not Yet Used Flag
+public static const ASUKA_FOLLOWER:int                                				= 2406;	//Not Yet Used Flag
+public static const ASUKA_LVL_UP:int            			          				= 2407;	//Not Yet Used Flag
+public static const ASUKA_DEFEATS_COUNTER:int						  				= 2408;	//Not Yet Used Flag
+public static const LULA_AFFECTION:int                                				= 2409;	//Not Yet Used Flag
+public static const LULA_FOLLOWER:int                                 				= 2410;	//Not Yet Used Flag
+public static const LULA_LVL_UP:int                                   				= 2411;	//Not Yet Used Flag
+public static const LULA_DEFEATS_COUNTER:int                          				= 2412;	//Not Yet Used Flag
 public static const CEANI_AFFECTION:int                               			    = 2413;
 public static const CEANI_FOLLOWER:int                           			        = 2414;
 public static const CEANI_ARCHERY_TRAINING:int                         	            = 2415;
@@ -2618,7 +2618,7 @@ public static const UNKNOWN_FLAG_NUMBER_02609:int                               
 public static const UNKNOWN_FLAG_NUMBER_02610:int                                   = 2610;//lvl 72		//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02611:int                                   = 2611;//lvl 102	//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02612:int                                   = 2612;//lvl 102	//Not Yet Used Flag
-public static const TED_02613:int                                   = 2613;								//Not Yet Used Flag
+public static const TED_02613:int                                   				= 2613;				//Not Yet Used Flag
 public static const TED_WRATH:int                                   				= 2614;
 public static const TED_DEFEATS_COUNTER:int                                   		= 2615;
 public static const TED_LVL_UP:int                                   				= 2616;
@@ -2642,9 +2642,9 @@ public static const DINAH_HIPS_ASS_SIZE:int                                   		
 public static const DINAH_SPELLS_CASTED:int                                   		= 2634;
 public static const UNKNOWN_FLAG_NUMBER_02635:int                                   = 2635;//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02636:int                                   = 2636;//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02637:int                                   = 2637;//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02638:int                                   = 2638;//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02639:int                                   = 2639;//Not Yet Used Flag
+public static const DARKKITSUNE_WARN_INT:int                                 	  	= 2637;//Warning to PC INT is lower than 15% + disables looping
+public static const DARKKITSUNE_WARN_WIS:int                                   		= 2638;//Warning to PC WIS is lower than 15% + disables looping
+public static const AIKO_DONE_KITSUNETJ:int                                  		= 2639;
 public static const AIKO_SPAR_VICTORIES:int                                   		= 2640;
 public static const AIKO_TIMES_MET:int                                   			= 2641;
 public static const AIKO_CORRUPTION:int                                   			= 2642;
@@ -3006,4 +3006,4 @@ public static const LOW_STANDARDS_FOR_ALL:int                                   
 public static const HYPER_HAPPY:int                                                 = 2998;
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
 	}    
-}
+}

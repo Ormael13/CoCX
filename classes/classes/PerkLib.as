@@ -294,6 +294,9 @@ public class PerkLib
 		public static const FloralOvariesFinalForm:PerkType = mk("Floral Ovaries (Final Form)", "Floral Ovaries (Final Form)",
 				"Further increase the potency of Alraune pollen. Alraune pollen has a 25% chance per round to fascinate your victim.",
 				"You've chosen the 'Floral Ovaries (Final Form)' perk. Further increase the potency of Alraune pollen. Alraune pollen has a 30% chance per round to fascinate your victim.").withBuffs({'lib.mult':0.20});
+		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
+				"You are currently in elemental form.",
+				"You are currently in elemental form.");
 		public static const HeartOfTheStorm:PerkType = mk("Heart of the storm", "Heart of the storm",
 				"Increase the power of all Wind and Lightning racial abilities.",
 				"You've chosen the 'Heart of the storm' perk. Increase the power of all Wind and Lightning racial abilities.").withBuffs({'speed.mult':0.05});
@@ -950,8 +953,8 @@ public class PerkLib
 				"Further increases dragon breath attacks power and allows to combine all 4 basic breath types more often. (+600% to dragon breaths damage, +10% of max core Spe as phantom Spe)",
 				"You've chosen the 'Draconic Lungs (Final Form)' perk. Further increases increases dragon breath attacks power and allows to combine all 4 basic breath types more often.").withBuffs({'spe.mult':0.20});
 		public static const DualWield:PerkType = mk("Dual Wield", "Dual Wield",
-				"Allows you to wield two normal sized melee weapons (excluding staffs).",
-				"You've chosen the 'Dual Wield' perk, training skill of using two melee weapons excluding staffs.");
+				"Allows you to wield two weapons.",
+				"You've chosen the 'Dual Wield' perk, training skill of using two weapons.");
 		public static const DualWieldFirearms:PerkType = mk("Dual Wield (Firearms)", "Dual Wield (Firearms)",
 				"Allows you to wield two firearms (non 2H ones).",
 				"You've chosen the 'Dual Wield (Firearms)' perk, training skill of using two firearms (non 2H ones).");
@@ -3031,6 +3034,9 @@ public class PerkLib
 		public static const VenomGlandsFinalForm:PerkType = mk("Venom Glands (Final Form)", "Venom Glands (Final Form)",
 				"Your body posses fully developed venom glands with large reservoir of venom and good recharge speed. (+10% to poison resistance)",
 				"You've chosen the 'Venom Glands (Final Form)' perk. Your body posses fully developed venom glands with large reservoir of venom and good recharge speed. also raises poison resistance by +10%").withBuffs({'tou.mult':0.15});
+		public static const VerdantMight:PerkType = mk("Verdant Might", "Verdant Might",
+				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.",
+				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.");
 		public static const VitalShot:PerkType = mk("Vital Shot", "Vital Shot",
 				"Gain a +10% chance to do a critical strike with arrows.",
 				"You've chosen the 'Vital Shot' perk, gaining an additional +10% chance to cause a critical hit with arrows.");
@@ -3287,6 +3293,7 @@ public class PerkLib
 				"All damage dealt by a Kamaitachi’s scythes causes your victims to bleed from cursed wounds. This bleed stacks on itself and cannot be removed by anything short of magic or your will.");
 		public static const DarkCharm:PerkType = mk("Dark Charm", "Dark Charm",
 				"Allows access to demons charm attacks.");
+		public static const DarkenedKitsune:DarkenedKitsunePerk = new DarkenedKitsunePerk();
 		public static const DeadMetabolism:PerkType = mk("Dead metabolism", "Dead metabolism",
 				"Kills off hunger. (hunger meter wouldn't decay with time)");
 		public static const DemonEnergyThirst:PerkType = mk("Demonic hunger", "Demonic hunger",
@@ -3329,6 +3336,8 @@ public class PerkLib
 				"Lactation does not decrease and gives a compulsion to breastfeed others.");
 		public static const FenrirSpikedCollar:PerkType = mk("Fenrir's Gleipnir Collar", "Fenrir's Gleipnir Collar",
 				"The spectral chain Gleipnir and runed collar-spikes increase damage reduction by 10%, but you are forever chained to the role of the Fenrir.");
+		public static const FenrirSpiritstrike:PerkType = mk("Fenrir's Spirit strike", "Fenrir's Spirit strike",
+				"Fenrir's power allows you to deal devastating damage with your bite attack to any creature possessing a soul.");
 		public static const Ferocity:PerkType = mk("Ferocity", "Ferocity",
 				"You can remains conscious and continue fighting even if your HP is below 0. You gonna loose 1% of max HP each round and would loose fight when negative HP reach 7% (or more if PC got other perks to stay undefeated below 0%) of max HP.");
 		public static const FireAffinity:PerkType = mk("Fire Affinity", "Fire Affinity",
@@ -3724,7 +3733,8 @@ public class PerkLib
             WeaponGrandMastery.requirePerk(WeaponMastery)
                     .requireStr(140)
                     .requireLevel(24);
-            DualWieldLarge.requirePerk(GigantGrip)
+            DualWieldLarge.requirePerk(DualWield)
+					.requirePerk(GigantGrip)
                     .requireStr(125)
                     .requireLevel(24);
             TripleAttackLarge.requirePerk(DoubleAttackLarge)
@@ -4285,7 +4295,8 @@ public class PerkLib
                     .requireSpe(25)
                     .requireStr(25)
                     .requireLevel(6);
-            DualWieldSmall.requirePerk(JobRogue)
+            DualWieldSmall.requirePerk(DualWield)
+					.requirePerk(JobRogue)
                     .requireLevel(6);
             SneakyAttack.requirePerk(JobRogue)
                     .requireLevel(6);
@@ -4970,7 +4981,8 @@ public class PerkLib
 					.requireTou(25)
                     .requireSpe(20)
                     .requireLevel(6);
-            DualWieldFirearms.requirePerk(JobGunslinger)
+            DualWieldFirearms.requirePerk(DualWield)
+					.requirePerk(JobGunslinger)
 					.requireWis(25)
 					.requireTou(20)
                     .requireSpe(15)

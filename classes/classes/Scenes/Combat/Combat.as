@@ -116,6 +116,42 @@ public class Combat extends BaseContent {
         return mod;
     }
 
+    public function maxSwordLevel():Number {
+        return player.maxSwordLevel();
+    }
+	
+	public function maxAxeLevel():Number {
+        return player.maxAxeLevel();
+    }
+	
+    public function maxMaceHammerLevel():Number {
+        return player.maxMaceHammerLevel();
+    }
+	
+	public function maxDuelingSwordLevel():Number {
+        return player.maxDuelingSwordLevel();
+    }
+	
+	public function maxSpearLevel():Number {
+        return player.maxSpearLevel();
+    }
+	
+	public function maxDualWieldSmallLevel():Number {
+        return player.maxDualWieldSmallLevel();
+    }
+	
+    public function maxDualWieldNormalLevel():Number {
+        return player.maxDualWieldNormalLevel();
+    }
+	
+    public function maxDualWieldLargeLevel():Number {
+        return player.maxDualWieldLargeLevel();
+    }
+	
+    public function maxDualWieldFirearmsLevel():Number {
+        return player.maxDualWieldFirearmsLevel();
+    }
+
     public function maxTeaseLevel():Number {
         return player.maxTeaseLevel();
     }
@@ -942,7 +978,7 @@ public class Combat extends BaseContent {
 
     public function stopChanneledSpecial():void {
         clearOutput();
-        outputText("You decided to stop preparing your super ultra hyper mega fabious attack!\n\n");
+        outputText("You decided to stop preparing your super ultra hyper mega fabulous attack!\n\n");
 		if (player.hasPerk(PerkLib.RagingInfernoSu) && player.hasStatusEffect(StatusEffects.CounterRagingInferno)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, -1);
 		if (player.hasPerk(PerkLib.GlacialStormSu) && player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, -1);
 		if (player.hasPerk(PerkLib.HighVoltageSu) && player.hasStatusEffect(StatusEffects.CounterHighVoltage)) player.addStatusValue(StatusEffects.CounterHighVoltage, 3, -1);
@@ -1086,7 +1122,7 @@ public class Combat extends BaseContent {
         if (SceneLib.urtaQuest.isUrta()) {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
         }
-        if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Small" && player.weaponPerk != "Dual Small" && player.weaponPerk != "Massive" && player.weaponPerk != "Staff" && !isWieldingRangedWeapon()) {
+        if ((player.weaponPerk == "" || player.weaponPerk != "Dual") && !isWieldingRangedWeapon()) {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
                 if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) {
                     if (player.hasPerk(PerkLib.HexaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
@@ -1298,8 +1334,8 @@ public class Combat extends BaseContent {
 
     public function willothewispattacks():void {
         var willothewispDamage:Number = 0;
-        willothewispDamage += intwisscaling() * 0.2;
-        /*bonus do dmgh wisp-a jeśli sa inne pety/miniony ^^ im wiecej podwładnch ma tym mocniej sam bedzie bił (jak efekt perku później w drzewie Job: Leader ^^)
+        willothewispDamage += intwisscaling() * 0.4;
+        /*bonus do dmgh wisp-a jeśli sa inne pety/miniony ^^ im wiecej podwładnych ma tym mocniej sam bedzie bił (jak efekt perku później w drzewie Job: Leader ^^)
 	if (summonedElementals >= 1) elementalDamage += baseDamage;
 	if (summonedElementals >= 5) elementalDamage += baseDamage;
 	if (summonedElementals >= 9) elementalDamage += baseDamage;*/
@@ -1428,6 +1464,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.ElementalConjurerDedication)) elementalamplification += 0.2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
         if (player.hasPerk(PerkLib.ElementalConjurerSacrifice)) elementalamplification += 0.3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
         if (player.weapon == weapons.SCECOMM) elementalamplification += 0.5;
+		if (player.weaponRange == weaponsrange.E_TOME_) elementalamplification += 0.5;
         if (player.shield == shields.Y_U_PAN) elementalamplification += 0.25;
         if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
             elementalamplification += 0.1;
@@ -2170,6 +2207,40 @@ public class Combat extends BaseContent {
         if (accmmodpenalty < 0) accmmodpenalty = 0;
         return accmmodpenalty;
     }
+	
+	public function meleeDualWieldAccuracyPenalty():Number {
+		var accmdwmodpenalty:Number = 0;
+        if (player.weaponPerk == "Dual") {
+			accmdwmodpenalty -= 25;
+		}
+        if (player.weaponPerk == "Dual Large") {
+			accmdwmodpenalty -= 25;
+		}
+        if (player.weaponPerk == "Dual Small") {
+			accmdwmodpenalty -= 25;
+		}
+        if (player.weaponPerk == "Quad") {
+			accmdwmodpenalty -= 75;
+		}
+        return accmdwmodpenalty;
+	}
+	
+	public function meleeDualWieldDamagePenalty():Number {
+		var dmgmdwmodpenalty:Number = 1;
+        if (player.weaponPerk == "Dual") {
+			dmgmdwmodpenalty -= 0.5;
+		}
+        if (player.weaponPerk == "Dual Large") {
+			dmgmdwmodpenalty -= 0.5;
+		}
+        if (player.weaponPerk == "Dual Small") {
+			dmgmdwmodpenalty -= 0.5;
+		}
+        if (player.weaponPerk == "Quad") {
+			dmgmdwmodpenalty -= 0.9;
+		}
+        return dmgmdwmodpenalty;
+	}
 
     public function arrowsAccuracy():Number {
         var accmod:Number = 80;
@@ -2221,6 +2292,34 @@ public class Combat extends BaseContent {
         if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) faccmod += 80;
         return faccmod;
     }
+
+    public function firearmsAccuracyPenalty():Number {
+        var accfmodpenalty:Number = 10;
+        if (accfmodpenalty < 0) accfmodpenalty = 0;
+        return accfmodpenalty;
+    }
+	
+	public function firearmsDualWieldAccuracyPenalty():Number {
+		var accfdwmodpenalty:Number = 0;
+        if (player.weaponPerk == "Dual Firearms") {
+			accfdwmodpenalty -= 25;
+		}
+        if (player.weaponPerk == "Quad Firearms") {
+			accfdwmodpenalty -= 75;
+		}
+        return accfdwmodpenalty;
+	}
+	
+	public function firearmsDualWieldDamagePenalty():Number {
+		var dmgfdwmodpenalty:Number = 1;
+        if (player.weaponPerk == "Dual Firearms") {
+			dmgfdwmodpenalty -= 0.5;
+		}
+        if (player.weaponPerk == "Quad Firearms") {
+			dmgfdwmodpenalty -= 0.9;
+		}
+        return dmgfdwmodpenalty;
+	}
 
     public function oneArrowTotalCost():Number {
         var onearrowcost:Number = 25;
@@ -2958,6 +3057,7 @@ public class Combat extends BaseContent {
             else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
             else if (player.weaponRangeAttack >= 201 && player.weaponRangeAttack < 251) damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
             else damage *= (6 + ((player.weaponRangeAttack - 250) * 0.005));
+			firearmsDualWieldAccuracyPenalty();
             //any aoe effect from firearms
             if (monster.plural) {
                 if (player.weaponRange == weaponsrange.ADBSCAT) damage *= 2;
@@ -3218,7 +3318,8 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
             if (player.ammo > 0) {
                 flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
-                flags[kFLAGS.ARROWS_ACCURACY] += 10;
+                flags[kFLAGS.ARROWS_ACCURACY] += firearmsAccuracyPenalty();
+				flags[kFLAGS.ATTACKS_ACCURACY] += firearmsDualWieldAccuracyPenalty();
                 shootWeapon();
             } else {
                 outputText("<b>Your firearm clip is empty.</b>\n\n");
@@ -3450,6 +3551,7 @@ public class Combat extends BaseContent {
 
     //ATTACK
     public function attack():void {
+        var IsFeralCombat:Boolean = false;
         flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
         //	if(!player.hasStatusEffect(StatusEffects.FirstAttack)) {
         //		clearOutput();
@@ -3459,7 +3561,7 @@ public class Combat extends BaseContent {
             outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  ");
             if (monster is ChaosChimera) outputText("Curse");
             else outputText("The kitsune's seals");
-            outputText(" have made normal melee attack impossible!  Maybe you could try something else?\n\n");
+            outputText(" made normal melee attack impossible!  Maybe you could try something else?\n\n");
             enemyAI();
             return;
         }
@@ -3601,11 +3703,17 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
         //Natural weapon Full attack list
         if ((flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) || player.isGargoyle())){
+            IsFeralCombat = true;
             //DOING BITE ATTACKS
             if (player.hasABiteAttack()) {
                 var biteMultiplier:Number = 0.5;
-                if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ORCA) biteMultiplier = 2.0;
                 outputText("You bite your foe sinking your teeth in");
+                if (player.hasPerk(PerkLib.FenrirSpiritstrike) && !monster.hasPerk(PerkLib.EnemyTrueDemon)){
+                    biteMultiplier = 10;
+                    outputText(" and tearing at your foe very soul!");
+                    HPChange(player.maxHP()*0.25,false);
+                }
+                if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ORCA) biteMultiplier = 2.0;
                 if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.VAMPIRE) {
                     outputText(" and drawing blood out");
                     if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
@@ -3742,7 +3850,7 @@ public class Combat extends BaseContent {
                 outputText("\n");
                 if (player.arms.type == Arms.WOLF && player.hasPerk(PerkLib.Lycanthropy)){
                     if (flags[kFLAGS.LUNA_MOON_CYCLE] != 7){
-                        outputText("The moon grants you strength as you rend your opponent one more times with your claws.");
+                        outputText("The moon grants you strength as you rend your opponent one more time with your claws.");
                         ExtraNaturalWeaponAttack();
                         outputText("\n");
                     } else  {
@@ -3916,7 +4024,7 @@ public class Combat extends BaseContent {
             }
         }
         // Do all other attacks
-        meleeDamageAcc();
+        meleeDamageAcc(IsFeralCombat);
     }
 
     public function attack2():void {
@@ -4093,7 +4201,7 @@ public class Combat extends BaseContent {
         outputText("<b>)</b>");
     }
 
-    public function meleeDamageAcc():void {
+    public function meleeDamageAcc(IsFeralCombat:Boolean = false):void {
         var accMelee:Number = 0;
         accMelee += (meleeAccuracy() / 2);
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
@@ -4106,8 +4214,14 @@ public class Combat extends BaseContent {
             //------------
             //Determine damage
             //BASIC DAMAGE STUFF
-            damage += player.str;
-            damage += scalingBonusStrength() * 0.25;
+            if (IsFeralCombat && player.hasPerk(PerkLib.VerdantMight)){
+                damage += player.tou;
+                damage += scalingBonusToughness() * 0.25;
+            }
+            else{
+                damage += player.str;
+                damage += scalingBonusStrength() * 0.25;
+            }
             if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
             if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
                 damage += player.spe;
@@ -4125,6 +4239,7 @@ public class Combat extends BaseContent {
             else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
             else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
             else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
+			meleeDualWieldDamagePenalty();
             //Bonus sand trap damage!
             if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
             //All special weapon effects like...fire/ice
@@ -4147,6 +4262,13 @@ public class Combat extends BaseContent {
                 else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
                 else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
                 else damage = Math.round(damage * 1.4);
+            }
+            if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw)) {
+                damage *= 2.2;
+                if (monster.hasPerk(PerkLib.FireNature)) damage *= 10;
+                if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 4;
+                if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.4;
+                if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
             }
             if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
                 if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
@@ -4389,8 +4511,6 @@ public class Combat extends BaseContent {
                         if (player.hasPerk(PerkLib.SuperSensual) && player.hasPerk(PerkLib.Sensual)) teaseXP(2);
                         else teaseXP(1);
                     }
-
-
 
                 } else if (vbladeeffect) outputText("As you strike, the sword shine with a red glow as somehow you aim straight for [monster a] [monster name] throat. ");
                 else if (MDODialogs) {
@@ -4679,6 +4799,7 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 2) {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]--;
             flags[kFLAGS.ATTACKS_ACCURACY] += meleeAccuracyPenalty();
+            flags[kFLAGS.ATTACKS_ACCURACY] += meleeDualWieldAccuracyPenalty();
             attack2();
             return;
         }
@@ -4715,8 +4836,14 @@ public class Combat extends BaseContent {
             //------------
             //Determine damage
             //BASIC DAMAGE STUFF
-            damage += player.str;
-            damage += scalingBonusStrength() * 0.25;
+            if (player.hasPerk(PerkLib.VerdantMight)){
+                damage += player.tou;
+                damage += scalingBonusToughness() * 0.25;
+            }
+            else{
+                damage += player.str;
+                damage += scalingBonusStrength() * 0.25;
+            }
             if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
             if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
                 damage += player.spe;
@@ -7083,7 +7210,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.FlameBlade)) {
             if (player.statusEffectv1(StatusEffects.FlameBlade) <= 0) {
                 player.removeStatusEffect(StatusEffects.FlameBlade);
-                outputText("<b>Blazing battle spirit effect wore off!</b>\n\n");
+                outputText("<b>Flame Blade effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.FlameBlade, 1, -1);
         }
         if (player.hasStatusEffect(StatusEffects.Maleficium)) {
@@ -7091,6 +7218,12 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.Maleficium);
                 outputText("<b>Maleficium effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.Maleficium, 1, -1);
+        }
+        if (player.hasStatusEffect(StatusEffects.WinterClaw)) {
+            if (player.statusEffectv1(StatusEffects.WinterClaw) <= 0) {
+                player.removeStatusEffect(StatusEffects.WinterClaw);
+                outputText("<b>Winter Claw effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.WinterClaw, 1, -1);
         }
         //Spell buffs
         if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) {

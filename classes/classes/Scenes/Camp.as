@@ -3652,11 +3652,19 @@ public function wakeFromBadEnd():void {
 				var hp:int = 15;
 				var fatigue:int = 5;
 				var mana:int = 10;
-				var soulforce:int = 0;
-				var wrath:int = 0;
-				var lust:int = 0;
+				var soulforce:int = 5;
+				var wrath:int = 1;
+				var lust:int = 1;
 				var statpoints:int = 5;
 				var perkpoints:int = 1;
+				if (player.level <= 6) {
+					hp += 15;
+					fatigue += 5;
+					mana += 10;
+					soulforce += 5;
+					wrath += 1;
+					lust += 1;
+				}
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
 					hp += 20;
 					lust += 2;
@@ -3705,7 +3713,7 @@ public function wakeFromBadEnd():void {
 					statpoints += 5;
 					perkpoints += 1;
 				}
-				mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + ", maximum Mana by " + mana + ", maximum Soulforce by " + soulforce + ", maximum Wrath by " + wrath + " and maximum Lust by " + lust + "; gain " + statpoints + " attribute points and " + perkpoints + " perk points.";
+				mainView.levelButton.toolTipText = "Level up to increase your maximum: HP by " + hp + ", Lust by " + lust + ", Wrath by " + wrath + ", Fatigue by " + fatigue + ", Mana by " + mana + " and Soulforce by " + soulforce + "; gain " + statpoints + " attribute points and " + perkpoints + " perk points.";
 				if (flags[kFLAGS.AUTO_LEVEL] > 0 && allowAutoLevelTransition) {
 					CoC.instance.playerInfo.levelUpGo();
 					return true; //True indicates that you should be routed to level-up.
@@ -4462,7 +4470,27 @@ public function wakeFromBadEnd():void {
 	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 30) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 31;
 			clearOutput();
-			outputText("Text.");
+			outputText("What time is it? Time to get Re-Collared ^^ Unless you over been wolfy & godly emo collar user. Then no re-collaring for you. Also free bonus secondary stats for everyone. Everyones loves it? Or not?");
+			if (player.hasKeyItem("Fenrir Collar") >= 0) {
+				player.removeKeyItem("Fenrir Collar");
+				player.createKeyItem("Gleipnir Collar", 0, 0, 0, 0);
+			}
+			if (player.level > 6) {
+				hp += (15 * (6 + player.level));
+				fatigue += (5 * (6 + player.level));
+				mana += (10 * (6 + player.level));
+				soulforce += (5 * (6 + player.level));
+				wrath += (6 + player.level);
+				lust += (6 + player.level);
+			}
+			else {
+				hp += (15 * player.level);
+				fatigue += (5 * player.level);
+				mana += (10 * player.level);
+				soulforce += (5 * player.level);
+				wrath += player.level;
+				lust += player.level;
+			}
 			doNext(doCamp);
 			return;
 		}
@@ -4987,4 +5015,4 @@ public function wakeFromBadEnd():void {
         }
         */
 	}
-}
+}

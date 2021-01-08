@@ -2,6 +2,7 @@ package classes {
 import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.SceneLib;
 
 import coc.xxc.BoundStory;
 import coc.xxc.Story;
@@ -37,6 +38,7 @@ public class PlayerAppearance extends BaseContent {
 		describeBeard();
 		describeTongue();
 		describeHorns();
+		describeVisage();
 		outputText("[pg]");
 		describeBodyShape();
 		describeWings();
@@ -3235,8 +3237,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.ushionnaScore() >= 1) outputText("\n<font color=\"#008000\">Ushi-Onna: " + player.ushionnaScore() + "</font>");
 		else if (player.ushionnaScore() < 1) outputText("\n<font color=\"#ff0000\">Ushi-Onna: 0</font>");
 		//Wendigo
-		if (player.wendigoScore() >= 25) outputText("\n<font color=\"#0000a0\">Greater Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis raciaol multi, +50% to Lib racial multi, +50 min sens)</font>");
-		else if (player.wendigoScore() >= 10) outputText("\n<font color=\"#0000a0\">Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis raciaol multi, +50% to Lib racial multi, +50 min sens)</font>");
+		if (player.wendigoScore() >= 25) outputText("\n<font color=\"#0000a0\">Greater Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis racial multi, +50% to Lib racial multi, +50 min sens)</font>");
+		else if (player.wendigoScore() >= 10) outputText("\n<font color=\"#0000a0\">Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis racial multi, +50% to Lib racial multi, +50 min sens)</font>");
 		else if (player.wendigoScore() >= 1) outputText("\n<font color=\"#008000\">Wendigo: " + player.wendigoScore() + "</font>");
 		else if (player.wendigoScore() < 1) outputText("\n<font color=\"#ff0000\">Wendigo: 0</font>");
 		//Werewolf
@@ -3358,5 +3360,11 @@ public class PlayerAppearance extends BaseContent {
 
 		else outputText("<b>Yo, this is an error.</b>");
 	}
+
+	public function describeVisage():void{ //expressions!
+		if (player.findPerk(PerkLib.DarkenedKitsune) > 0) {
+			outputText(SceneLib.darkenedKitsuneScene.darkenedKitsuneExpression());
+		}
+	}
 }
-}
+}

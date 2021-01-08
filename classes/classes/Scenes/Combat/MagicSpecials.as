@@ -165,7 +165,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.CooldownIllusion)) {
 				bd.disable("You need more time before you can use Illusion again.");
 			} else if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
-				bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
+				bd.disable("You cannot focus to use this ability while you're having so much difficulty breathing.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3 || (player.tailType == Tail.CAT && player.tailCount == 2)) {//player.hasPerk(PerkLib.NekomataThyroidGland) ||
@@ -324,7 +324,7 @@ public class MagicSpecials extends BaseCombatContent {
 				else bd.disable("Your throat is incredibly sore and hoarse. You aren’t sure you can talk let alone try that attack for more than a day.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.faceType == Face.WOLF && player.hasKeyItem("Fenrir Collar") >= 0) {
+		if (player.faceType == Face.WOLF && player.hasKeyItem("Gleipnir Collar") >= 0) {
 			bd = buttons.add("FreezingBreath", fenrirFreezingBreath,"Freeze your foe solid with a powerful breath attack. \n\nWould go into cooldown after use for: 10 rounds  \n<b>AoE attack.</b>");
 			bd.requireFatigue(spellCost(150));
 			if (player.hasStatusEffect(StatusEffects.CooldownFreezingBreath)) {
@@ -399,6 +399,12 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You can't use this underwater!");
 			}
 		}
+		if (player.hasPerk(PerkLib.FromTheFrozenWaste)){
+			bd = buttons.add("Winter Claws", WinterClaws).hint("Natural weapon damage is increased by 200% as cold damage but take very highly increased damage from fire attacks.");
+			if(player.hasStatusEffect(StatusEffects.WinterClaw)) {
+				bd.disable("Your natural weapons are already generating cold!");
+			}
+		}
 		if ((player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI) || player.hasPerk(PerkLib.HinezumiBurningBloodFinalForm)) {
 			bd = buttons.add("Cauterize", cauterize).hint("Flash burn your wounds to cause them to close. Take damage but recover over time. \n", "Cauterize");
 			if(player.hasStatusEffect(StatusEffects.Cauterize)) {
@@ -406,7 +412,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.salamanderScore() >= 12 && player.tail.type == Tail.SALAMANDER && (player.isSwordTypeWeapon() || player.isAxeTypeWeapon())) {
-			bd = buttons.add("Flame Blade", flameBlade).hint("Set your weapon on fire \n", "Flame Blade");
+			bd = buttons.add("Flame Blade", flameBlade).hint("Set your weapon on fire. \n", "Flame Blade");
 			if (player.hasStatusEffect(StatusEffects.FlameBlade)) {
 				bd.disable("Your weapon is already on fire!");
 			}
@@ -2656,6 +2662,18 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 
+	public function WinterClaws():void {
+		clearOutput();
+		var WinterClawsDuration:Number = 10
+		//if (player.hasPerk(PerkLib.HinezumiBurningBlood)) blazingBattleSpiritDuration += 1;
+		//if (player.hasPerk(PerkLib.HinezumiBurningBloodEvolved)) blazingBattleSpiritDuration += 2;
+		//if (player.hasPerk(PerkLib.HinezumiBurningBloodFinalForm)) blazingBattleSpiritDuration += 7;
+		outputText("Your bodily flames begin to rage as you enter a passionate battle fury.\n\n");
+		player.createStatusEffect(StatusEffects.WinterClaw,WinterClawsDuration,0,0,0);
+		statScreenRefresh();
+		enemyAI();
+	}
+
 	public function flameBlade():void {
 		clearOutput();
 		var flameBladeDuration:Number = 10;
@@ -4441,7 +4459,14 @@ public class MagicSpecials extends BaseCombatContent {
 	public function SpectralScream():void {
 		clearOutput();
 		player.createStatusEffect(StatusEffects.CooldownSpectralScream,6,0,0,0);
-		outputText("You let out a soul-chilling scream freezing your opponent"+(monster.plural ? "s":"")+" in " + monster.pronoun1 + " tracks from sheer terror. This also seems to have damaged " + monster.pronoun1 + " sanity.");
+		outputText("You let out a soul-chilling scream freezing your opponent" + (monster.plural ? "s":"") + " in " + monster.pronoun1 + " tracks from sheer terror. This also seems to have damaged " + monster.pronoun1 + " sanity. ");
+		var damage:Number = 0;
+		damage += scalingBonusIntelligence() * spellMod();
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		damage = Math.round(damage);
+		damage = doMagicDamage(damage, true, true);
 		monster.createStatusEffect(StatusEffects.Fear,1+rand(3),0,0,0);
 		enemyAI();
 	}

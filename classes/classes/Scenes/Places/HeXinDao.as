@@ -468,7 +468,7 @@ public class HeXinDao extends BaseContent
             addButton(3, "TrapOil", buyItem,consumables.TRAPOIL,sayLine(consumables.TRAPOIL,"sand trap"),onBuyString).hint("Buy a vial of trap oil.");
             addButton(4, "Icicle", buyItem,consumables.ICICLE_,sayLine(consumables.ICICLE_,"ice shard"),onBuyString).hint("Buy an icicle.");
             addButton(5, "S.Delight", buyItem,consumables.SDELITE,sayLine(consumables.SDELITE,"Succubi's Delight"),onBuyString).hint("Buy a bottle of 'Succubi's Delight'.");
-
+			
             addButton(14, "Back", mogahenmerchant);
             statScreenRefresh();
         }
@@ -827,8 +827,7 @@ public function soularena():void {
 			//addButton(5, "Gaunlet 6", gaunletchallange6).hint("Fight 8 diff enemies one after another.");gdzieś tam tu dodać grupowe tylko walki dające na pierwszej walce oblokowanie perków do powiekszania drużyny
 			addButton(7, "LvL 24 Gargoyle (F)", arenaSelection,GargoyleFBasic).hint("Gargoyle (F) LVL 24 (axe-tail)");
 			addButton(8, "LvL 24 Gargoyle (M)", arenaSelection,GargoyleMBasic).hint("Gargoyle (M) LVL 24 (mace-tail)");
-			addButton(9, "Golemancer", arenaSelection,Jeniffer).hint("Golemancer goblin.");
-			//addButton(9, "-2-", soularenaChallengeSubpages, page + 1);
+			addButton(9, "-2-", soularenaChallengeSubpages, page + 1);
 			addButton(10, "LvL 33 Golems", arenaSelection,GolemsBasic).hint("Basic Golems LVL 33");
 			addButton(11, "LvL 42 Golems", arenaSelection,GolemsImproved).hint("Improved Golems LVL 42");
 			addButton(12, "LvL 51 Golems", arenaSelection, GolemsAdvanced).hint("Advanced Golems LVL 51");
@@ -837,9 +836,10 @@ public function soularena():void {
 		if (page == 2) {
 			//addButton(0, "Kitty", arenaSelection, Veronika);
 			addButton(1, "Golemancer", arenaSelection,Jeniffer).hint("Golemancer goblin.");
-			addButton(2, "AyotechManiac", arenaSelection,Jinx).hint("Crazy girl wearing lots of belts... err Ayotech weapons.");
+			//addButton(2, "AyotechManiac", arenaSelection,Jinx).hint("Crazy girl wearing lots of belts... err Ayotech weapons.");
 			//addButton(5, "Macho Mander", arenaSelection,Syth);
-			//addButton(6, "Miss Mander", arenaSelection,Asuka);
+			/*if () addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Salamander woman.");
+			else */addButton(6, "Miss Mander", arenaSelection,Asuka).hint("Young salamander girl.");
 			//addButton(7, "Miss Oni", arenaSelection,Rangiku);
 			addButton(9, "-1-", soularenaChallengeSubpages, page - 1);
 			addButton(14, "Back", soularena);
@@ -984,7 +984,8 @@ public function soularena():void {
 	private function golemancershop1():void {
 		menu();
 		addButton(5, "G.Rod", buyItem, weapons.G_ROD).hint("Golemancer Rod");
-		addButton(6, "Y.U.Panel", buyItem, shields.Y_U_PAN).hint("Yogi Uh Panel");/*
+		addButton(6, "G.E.Man", buyItem, weaponsrange.G_E_MAN).hint("Golemancy Evocation Manuscript");
+		addButton(7, "Y.U.Panel", buyItem, shields.Y_U_PAN).hint("Yogi Uh Panel");/*
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
 			if (player.hasKeyItem("Golems, Animations and You") >= 0) addButtonDisabled(12, "G,A&Y Man.", "You already bought 'Golems, Animations and You' manual.");
 			else addButton(12, "G,A&Y Man.", golemancershopPermGolemsUpgradesGuide).hint("Buy 'Golems, Animations and You' manual to make golems great again.");

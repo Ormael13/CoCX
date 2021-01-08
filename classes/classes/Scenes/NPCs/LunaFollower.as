@@ -114,7 +114,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				if (flags[kFLAGS.LUNA_FOLLOWER] > 4) {
 					addButton(3, "Meal", mealLuna);
 					addButton(4, "Nurse", nurseLuna);
-					button(4).disableIf(player.HP >= player.maxHP() && !player.statStore.hasBuff("Curse"), "You are currently in perfect health.");
+					button(4).disableIf(player.HP >= player.maxOverHP() && !player.statStore.hasBuff("Curse"), "You are currently in perfect health.");
 					button(4).disableIf(Nursed, "Luna needs time to recharge her Mana before she can heal you again. Try tomorrow.");
 				}
 				if (flags[kFLAGS.LUNA_AFFECTION] >= 50) {
@@ -136,18 +136,18 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			clearOutput();
 			if (flags[kFLAGS.LUNA_FOLLOWER] < 7) {
 				outputText("Luna is a human maid. She wears a black regency dress with a frilly white apron and hairband. Her large, golden eyes are trained on you, watching you almost unblinkingly for the first sign of need or inconvenience. Intensity aside, her face is more sweet than classically beautiful, with small features and a cute smile that shines through at odd moments");
-				if (companionsCount() > 1) outputText(", though you could swear you see her making a different expression sometimes when you visit your other companion");
-				if (companionsCount() > 2) outputText("s");
-				if (companionsCount() > 1) outputText(" in the camp");
+				if (camp.companionsCount() > 1) outputText(", though you could swear you see her making a different expression sometimes when you visit your other companion");
+				if (camp.companionsCount() > 2) outputText("s");
+				if (camp.companionsCount() > 1) outputText(" in the camp");
 				outputText(". Her ashen hair, partially concealed beneath her white hairband, perfectly completes her look.\n\n");
 				outputText("Luna’s body is average-sized, with modest but shapely C cup breasts and refreshingly normal proportions, after seeing so many distorted, oversexual forms in this world. Her thighs are modest, but plump up very pleasingly above her long white stockings when you manage to glimpse them under her dress. She wears a pair of tidy black shoes on her small feet; how she keeps them so perfectly shiny and unscuffed out here in the rocky campsite is a mystery.\n\n");
 			}
 			else {
 				outputText("Luna is a werewolf maid. While she spends most of the day as a human, at night or when agitated she assumes a large wolf-morph shape. When human she wears a black regency dress with a frilly white apron and hairband, but prefers to go naked on full moon nights to avoid accidentally destroying her clothes. You know better and can sometimes spot the flash of a green glow, which is the only warning of the beast within when she assumes human shape.");
 				outputText("Her large, golden eyes are trained on you, watching you, almost unblinkingly, for the first sign of need or inconvenience. Intensity aside, her face is more sweet than classically beautiful, with small features and cute smile that shines through at odd moments");
-				if (companionsCount() > 1) outputText(", though you could swear you see her making a different expression sometimes when you visit your other companion");
-				if (companionsCount() > 2) outputText("s");
-				if (companionsCount() > 1) outputText(" in the camp");
+				if (camp.companionsCount() > 1) outputText(", though you could swear you see her making a different expression sometimes when you visit your other companion");
+				if (camp.companionsCount() > 2) outputText("s");
+				if (camp.companionsCount() > 1) outputText(" in the camp");
 				outputText(". Her ashen hair, partially concealed beneath her white hairband, perfectly completes her look, and is always carefully brushed after a full moon or other... accident, as formality demands.\n\n");
 				outputText("As a human, Luna’s body is average-sized, with modest but shapely C cup breasts and refreshingly normal proportions, after seeing so many distorted, oversexual forms in this world. Her thighs are modest, but plump up very pleasingly above her long white stockings when you manage to glimpse them under her dress. She wears a pair of tidy black shoes on her small feet; how she keeps them so perfectly shiny and unscuffed out here in the rocky campsite is a mystery. However, on the night of a full moon, she becomes a seven-foot tall wolf-morph with firm DD breasts, washboard abs, wide hips and a taut, shapely ass beneath her muscular waist, and thighs you're sure could crack walnuts. The paws at the ends of her muscular arms and legs are large and padded, with claws as big as a bear's, but her ears and tail are delightfully fuzzy. You're too polite, or perhaps afraid, to ask her to keep her stockings on during her transformation to see what her feet would look like bursting out of the ends of them, but you can and do imagine it.\n\n");
 			}
