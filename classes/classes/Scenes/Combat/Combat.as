@@ -7057,7 +7057,7 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.NagaVenom);
             } else if (player.spe > 3) {
                 player.addStatusValue(StatusEffects.NagaVenom, 1, 2);
-                player.statStore.addBuffObject({"spe": player.statusEffectv1(StatusEffects.NagaVenom)}, "Poison", {text: "Poisoned!"})
+                player.statStore.addBuffObject({"spe": -player.statusEffectv1(StatusEffects.NagaVenom)}, "Poison", {text: "Poisoned!"})
             } else player.takePhysDamage(5);
             outputText("You wince in pain and try to collect yourself, [monster a] [monster name]'s venom still plaguing you.\n\n");
             player.takePhysDamage(2);

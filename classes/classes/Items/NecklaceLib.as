@@ -58,6 +58,7 @@ package classes.Items
 		public const NECKSTR:NecklaceOfStrength = new NecklaceOfStrength();
 		public const NECKTOU:NecklaceOfToughness = new NecklaceOfToughness();
 		public const NECKWIS:NecklaceOfWisdom = new NecklaceOfWisdom();
+		//public const EZEKIELS:Jewelry = new Jewelry("EzekielS", "EzekielSignet", "Ezekiel's Signet", "an Ezekiel's Signet", 0, 0, 100, "A necklace rumored to be blessed by the Ezekiel himself. Is that real one or just another fake necklace merchant sold you? \n\nType: Jewelry (Necklace) \nBase value: 500","Necklace");
 		
 		public function NecklaceLib() 
 		{

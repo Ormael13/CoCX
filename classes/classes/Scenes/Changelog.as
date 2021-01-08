@@ -123,7 +123,7 @@ package classes.Scenes
 			outputText("-New ring (by Ormael): Ezekiel's Signet - buyable at Felix in Journey to the East inn. Cost 100 gems. Negate 1 racial perk point negative effect.\n");//Negate up to 2 racial perk points negative effects
 			outputText("-Game now knows if the full round attack is done in or includes feral ……combat. (change by Liadri)\n");
 			outputText("-3 new perk for harpies and score update for all members of the harpy family tree\n");
-			outputText("-\n");
+			outputText("-Added conversation about Luna to Aunt Nancy. (by Scary Dragon Mom)\n");
 			outputText("-Some shady person appeared in Journey to the East inn that sells items currently. Maybe he will talk in future more too ^^\n");
 			outputText("-Semi fixed bug on stats values not reseting down after ascension. Save and load after ascension would fix now the last part on this bug i not corrected.\n");
 			outputText("-\n");
@@ -132,7 +132,7 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons, Izmael three bugs, Kiha scene checking for wrong cock type\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
