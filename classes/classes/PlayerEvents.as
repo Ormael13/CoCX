@@ -1449,7 +1449,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			else if (player.faceType != Face.WOLF && player.findPerk(PerkLib.FreezingBreath) >= 0 && player.hasKeyItem("Gleipnir Collar") >= 0) {
-				outputText("\nAs you no longer are wolf like enough to maintain the form of a full Fenrir your breath no longer freeze the ambient air.\n\n<b>(Lost Perk: Freezing Breath)</b>\n");
+				outputText("\nAs you no longer are wolf like enough to maintain the form of a full Fenrir your breath no longer freezes the ambient air.\n\n<b>(Lost Perk: Freezing Breath)</b>\n");
 				player.removePerk(PerkLib.FreezingBreath);
 				needNext = true;
 			}
@@ -1461,17 +1461,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Fenrir Eyes
 			if (player.eyes.type != Eyes.FENRIR && player.hasKeyItem("Gleipnir Collar") >= 0) {
-				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");
-				outputText("\n\n\"<i>How dare you throw away my gifts...</i>\"");
-				outputText("\n\nThe collar power suddenly forcefully surge through your body transforming you back. \"<b>You now have glowing icy eyes.</b>\"\n");
+				outputText("\nYou feel an icy chill run through your body as your divine nature reasserts itself over your body. You won't escape your destiny as the Fenrir so easily, it seems.");
+				outputText("\n\nYou cry out in pain as your eyes once more freeze over, eventually settling back into their proper form. \"<b>You now have glowing icy eyes.</b>\"\n");
 				CoC.instance.mutations.setEyeTypeAndColor(Eyes.FENRIR, "glacial blue");
 				needNext = true;
 			}
 			//Fenrir Back Ice Shards
 			if (player.rearBody.type != RearBody.FENRIR_ICE_SPIKES && player.hasKeyItem("Gleipnir Collar") >= 0) {
-				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");
-				outputText("\n\n\"<i>How dare you throw away my gift...</i>\"");
-				outputText("\n\nThe collar power suddenly forcefully surge through your body transforming you back.\"<b>Your back is now covered with sharp ice spike constantly cooling the air around you. (Gained Frozen Waste and Cold Mastery perks)</b>\"\n");
+				outputText("\nYou feel an icy chill run through your body as your divine nature reasserts itself over your body. You won't escape your destiny as the Fenrir so easily, it seems.");
+				outputText("\n\nYou double over as ice once more bursts from your skin down your spine, covering your back in frozen spikes.\"<b>Your back is now covered with sharp ice spike, constantly cooling the air around you. (Gained Frozen Waste and Cold Mastery perks)</b>\"\n");
 				player.rearBody.type = RearBody.FENRIR_ICE_SPIKES;
 				needNext = true;
 			}
