@@ -3882,6 +3882,13 @@ public class Combat extends BaseContent {
                 ExtraNaturalWeaponAttack();
                 outputText("\n");
             }
+            if (player.isFlying()){
+                if (player.hasTalonsAttack()){
+                    outputText("You rend at your opponent with your talons twice.");
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                }
+            }
             //DEALING WING ATTACKS
             if (player.hasAWingAttack())
             {
@@ -4221,6 +4228,11 @@ public class Combat extends BaseContent {
             else{
                 damage += player.str;
                 damage += scalingBonusStrength() * 0.25;
+            }
+            if (player.isFlying()){
+                if (player.hasPerk(PerkLib.HarpyHollowBones)) damage *= 1.2;
+                if (player.hasPerk(PerkLib.HarpyHollowBonesEvolved)) damage *= 1.3;
+                if (player.hasPerk(PerkLib.HarpyHollowBonesEvolved)) damage *= 1.5;
             }
             if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
             if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
@@ -4843,6 +4855,11 @@ public class Combat extends BaseContent {
             else{
                 damage += player.str;
                 damage += scalingBonusStrength() * 0.25;
+            }
+            if (player.isFlying()){
+                if (player.hasPerk(PerkLib.HarpyHollowBones)) damage *= 1.2;
+                if (player.hasPerk(PerkLib.HarpyHollowBonesEvolved)) damage *= 1.3;
+                if (player.hasPerk(PerkLib.HarpyHollowBonesEvolved)) damage *= 1.5;
             }
             if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
             if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
@@ -9415,7 +9432,7 @@ public class Combat extends BaseContent {
         }
         if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) TeaseFunctionList.push(RandomTeaseAnemone);
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) TeaseFunctionList.push(RandomTeaseRaiju);
-        if (player.harpyScore() >= 8) TeaseFunctionList.push(RandomTeaseHarpy);
+        if (player.harpyScore() >= 8  || player.thunderbirdScore() >= 10 || player.phoenixScore() >= 10) TeaseFunctionList.push(RandomTeaseHarpy);
         if (player.kitsuneScore() >= 8) TeaseFunctionList.push(RandomTeaseKitsune);
         if (player.hasPerk(PerkLib.BlackHeart)) TeaseFunctionList.push(RandomTeaseLustStrike);
         if (monster.hasBreasts()) TeaseFunctionList.push(RandomTeaseViolateOpponentBreast);
@@ -11122,6 +11139,9 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
         if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+        if (player.hasPerk(PerkLib.HarpyHollowBones)) damage *= 1.2;
+        if (player.hasPerk(PerkLib.HarpyHollowBonesEvolved)) damage *= 1.5;
+        if (player.hasPerk(PerkLib.HarpyHollowBonesFinalForm)) damage *= 2;
         outputText("You focus on " + monster.capitalA + monster.short + ", fold your wing and dive down, using gravity to increase the impact");
         if (player.hasPerk(PerkLib.DeathPlunge)) {
             if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
@@ -11186,12 +11206,14 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
             else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
         }
-        if (player.isFlying()) player.removeStatusEffect(StatusEffects.Flying);
-        if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
-            player.removeStatusEffect(StatusEffects.FlyingNoStun);
-            player.removePerk(PerkLib.Resolute);
+        if (!player.hasPerk(PerkLib.HarpyHollowBonesFinalForm)) {
+            if (player.isFlying()) player.removeStatusEffect(StatusEffects.Flying);
+            if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
+                player.removeStatusEffect(StatusEffects.FlyingNoStun);
+                player.removePerk(PerkLib.Resolute);
+            }
+            monster.removeStatusEffect(StatusEffects.MonsterAttacksDisabled);
         }
-        monster.removeStatusEffect(StatusEffects.MonsterAttacksDisabled);
         checkAchievementDamage(damage);
         enemyAI();
     }

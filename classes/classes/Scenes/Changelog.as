@@ -122,8 +122,8 @@ package classes.Scenes
 			outputText("-New mutation perk: Verdant Might. Req. 11+ in plant/alraune score. Effects: As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.\n");
 			outputText("-New ring (by Ormael): Ezekiel's Signet - buyable at Felix in Journey to the East inn. Cost 100 gems. Negate 1 racial perk point negative effect.\n");//Negate up to 2 racial perk points negative effects
 			outputText("-Game now knows if the full round attack is done in or includes feral ……combat. (change by Liadri)\n");
+			outputText("-3 new perk for harpies and score update for all members of the harpy family tree\n");
 			outputText("-Added conversation about Luna to Aunt Nancy. (by Scary Dragon Mom)\n");
-			outputText("-\n");
 			outputText("-Some shady person appeared in Journey to the East inn that sells items currently. Maybe he will talk in future more too ^^\n");
 			outputText("-Semi fixed bug on stats values not reseting down after ascension. Save and load after ascension would fix now the last part on this bug i not corrected.\n");
 			outputText("-\n");
