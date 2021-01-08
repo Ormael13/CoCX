@@ -11391,9 +11391,9 @@ use namespace CoC;
 			}
 			if (sirenScore() >= 10) {
 				if (sirenScore() >= 16) {
-					maxStrCap2 += 170;
+					maxStrCap2 += 70;
 					maxTouCap2 += 100;
-					maxSpeCap2 += 130;
+					maxSpeCap2 += 70;
 				}
 				else {
 					maxStrCap2 += 40;
@@ -11521,9 +11521,9 @@ use namespace CoC;
 			}//+10/10-20
 			if (thunderbirdScore() >= 12) {
 				if (thunderbirdScore() >= 21) {
-					maxTouCap2 -= 20;
-					maxSpeCap2 += 185;
-					maxLibCap2 += 150;
+					maxTouCap2 -= 15;
+					maxSpeCap2 += 150;
+					maxLibCap2 += 180;
 				}
 				else if (thunderbirdScore() >= 15) {
 					maxTouCap2 -= 20;
