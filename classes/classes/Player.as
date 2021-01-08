@@ -939,7 +939,10 @@ use namespace CoC;
 				|| tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL
 				|| tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM
 				|| lowerBody == LowerBody.NAGA);}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasPerk(PerkLib.MorphicWeaponry) || isAlraune() || isScylla() || isKraken());}
+		public function hasTalonsAttack():Boolean{
+			return lowerBody == LowerBody.HARPY;
+		}
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasPerk(PerkLib.MorphicWeaponry || hasTalonsAttack()) || isAlraune() || isScylla() || isKraken());}
 		//Some other checks
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }

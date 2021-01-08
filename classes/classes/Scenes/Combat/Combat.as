@@ -3882,6 +3882,13 @@ public class Combat extends BaseContent {
                 ExtraNaturalWeaponAttack();
                 outputText("\n");
             }
+            if (player.isFlying()){
+                if (player.hasTalonsAttack()){
+                    outputText("You rend at your opponent with your talons twice.");
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                }
+            }
             //DEALING WING ATTACKS
             if (player.hasAWingAttack())
             {
@@ -4848,6 +4855,11 @@ public class Combat extends BaseContent {
             else{
                 damage += player.str;
                 damage += scalingBonusStrength() * 0.25;
+            }
+            if (player.isFlying()){
+                if (player.hasPerk(PerkLib.HarpyHollowBones)) damage *= 1.2;
+                if (player.hasPerk(PerkLib.HarpyHollowBonesEvolved)) damage *= 1.3;
+                if (player.hasPerk(PerkLib.HarpyHollowBonesEvolved)) damage *= 1.5;
             }
             if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
             if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
@@ -9420,7 +9432,7 @@ public class Combat extends BaseContent {
         }
         if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) TeaseFunctionList.push(RandomTeaseAnemone);
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) TeaseFunctionList.push(RandomTeaseRaiju);
-        if (player.harpyScore() >= 8) TeaseFunctionList.push(RandomTeaseHarpy);
+        if (player.harpyScore() >= 8  || player.thunderbirdScore() >= 10 || player.phoenixScore() >= 10) TeaseFunctionList.push(RandomTeaseHarpy);
         if (player.kitsuneScore() >= 8) TeaseFunctionList.push(RandomTeaseKitsune);
         if (player.hasPerk(PerkLib.BlackHeart)) TeaseFunctionList.push(RandomTeaseLustStrike);
         if (monster.hasBreasts()) TeaseFunctionList.push(RandomTeaseViolateOpponentBreast);
