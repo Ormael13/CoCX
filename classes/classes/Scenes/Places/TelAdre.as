@@ -1736,7 +1736,7 @@ public function meetingLunaRepated():void {
 	clearOutput();
 	outputText("As you walk the streets of Tel’Adre, you spot the human maid from before. She's holding an empty can and using it to beg for money as she sits on the side of the street. You decide not to ask about your suggestion of working at The Wet Bitch; that wouldn't be very sensitive. Instead you say hellow and walk over to her. She smiles when she sees you. If she's in this dire a situation the opportunity to hire her is likely still available. Will you reconsider?\n\n");
 	menu();
-	if (player.gems >= 100) addButton(0, "Yes", mettingLunaRepeatedYes).hint("Having a maid sounds like a great addition to your camp.");
+	if (player.gems >= 100) addButton(0, "Yes", meetingLunaRepatedYes).hint("Having a maid sounds like a great addition to your camp.");
 	else addButtonDisabled(0, "Yes", "You still don't have enough money to feel comfortable offering her work. Try again with at least 100 gems.");
 	addButton(1, "No", meetingLunaRepatedNo);
 }
