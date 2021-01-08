@@ -885,7 +885,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests4)) {
 					if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) > 4) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 1, -3);
-					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 2, -3);
+					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) > 4) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 2, -3);
 				}
 				if (flags[kFLAGS.AURORA_LVL] > 0.3 && flags[kFLAGS.AURORA_LVL] < 0.7) flags[kFLAGS.AURORA_LVL] += 0.05;
 				//Zenji training conuters
