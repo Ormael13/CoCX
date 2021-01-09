@@ -1292,7 +1292,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 1;
 				needNext = true;
 			}
-			//Insane/corrupted Kitsune random events //Help why isn't this being called.
+			//Insane/corrupted Kitsune random events
 			if (player.findPerk(PerkLib.DarkenedKitsune) >= 0) {
 				if (rand(5)==0){
 				SceneLib.darkenedKitsuneScene.splitPersonalityRandom()
@@ -1330,6 +1330,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			*/
+			if (player.findPerk(PerkLib.DarkenedKitsune) >=0){ //Just in case someone else has it, this will remove it. No longer in use. Read above.
+				player.removePerk(PerkLib.DarkenedKitsune);
+			}
 			//Kitsune energy thirst
 			if (player.hasStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)) {
 				if (player.hunger < player.maxHunger()) {
