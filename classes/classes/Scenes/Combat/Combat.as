@@ -3887,6 +3887,7 @@ public class Combat extends BaseContent {
                     outputText("You rend at your opponent with your talons twice.");
                     ExtraNaturalWeaponAttack();
                     ExtraNaturalWeaponAttack();
+                    outputText("\n");
                 }
             }
             //DEALING WING ATTACKS
