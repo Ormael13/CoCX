@@ -4031,10 +4031,10 @@ use namespace CoC;
 			else addButtonDisabled(0, "Tamani", "");
 			if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) addButton(1, "Tamani D.", TamaniDaughtersEnc).hint("Req. at least 80+ soulforce (more daughters will increase needed SF)");
 			else addButtonDisabled(1, "Tamani D.", "");
-			if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) addButton(2, "KitsuMansion", KitsuneMansion).hint("Req. 90+ soulforce");
-			else addButtonDisabled(2, "KitsuMansion", "");
-			if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3) addButton(3, "Izumi", IzumiEnc).hint("Req. 300+ soulforce");
-			else addButtonDisabled(3, "Izumi", "");
+			//if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) addButton(2, "KitsuMansion", KitsuneMansion).hint("Req. 90+ soulforce");
+			//else addButtonDisabled(2, "KitsuMansion", "");
+			if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3) addButton(2, "Izumi", IzumiEnc).hint("Req. 300+ soulforce");
+			else addButtonDisabled(2, "Izumi", "");
 			//next page button?
 			if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3) addButton(5, "Priscilla", PriscillaEnc).hint("Req. 320+ soulforce");
 			else addButtonDisabled(5, "Priscilla", "");
