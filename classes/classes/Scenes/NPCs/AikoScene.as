@@ -1702,7 +1702,7 @@ private function aikoSexKitsuneTailjob():void {
 	outputText("You ask her to come sit besides you, "+((player.tailCount==9)?"which she promptly does, ":"")+"and turn around. Curiosity gets the better of her, so she does so, albeit slowly, with furtive glances back towards you. You tell her to calm down, and that she will enjoy this as much as you.\n\n"
 			+"With her back and tails facing towards you, you similarly turn around and face away from her, your tails getting restless from the plan that you're hatching. Slowly, you caress one of her tails with your own, elicting a small gasp from the other girl.\n\n"
 			+"Slowly, you tangle your bundle of tails with hers, rubbing against each of them in a slow, sensual, almost caressing manner. You turn your head to look at the other kitsune, only to find her slowly hunching over, and the back of her neck slowly getting redder."
-			+"As your tails continue to get intimate with each other, you can start to feel a heat developing in your gut. It isn't quite the same feeling as going into "+player.mf("rut","heat")+", but it certainly feels just as intense. Slowly, the sensation rises up your spine, until it takes complete and sudden hold of your slowly melting brain" + ((flags[kFLAGS.AIKO_FIRST_CHOICE] == 6)? ", and you understand why she reacted the way she did the first time":"")+ ".\n\n"
+			+"As your tails continue to get intimate with each other, you can start to feel a heat developing in your gut. It isn't quite the same feeling as going into "+((player.gender == 1)?"rut":(player.gender == 2)?"heat":" both heat and rut")+ ", but it certainly feels just as intense. Slowly, the sensation rises up your spine, until it takes complete and sudden hold of your slowly melting brain" + ((flags[kFLAGS.AIKO_FIRST_CHOICE] == 6)? ", and you understand why she reacted the way she did the first time":"")+ ".\n\n"
 			+"It takes over your thoughts rapidly, forcing you to think of nothing else but how good it feels, the way each individual strand of fur caresses the other, and you let your tongue hang out, too enraptured by the sensations to think about keeping it in your mouth. Behind you, Aiko had collapsed onto her side, curling up into a fetal position, her tails continuing to fluff-fight against your own set, while the occasional drip-drip-dripping sound could be heard from her mouth. Or was it her pussy? Doesn't matter, you think, as your own mouth starts drooling.\n\n"
 			+"As you continue to sway, you are suddenly met with the loss of feeling from your tails, but you are still too consumed by the effects to react in time to Aiko's sudden attack from behind, finally pushing you onto the floor. She smiles, her body exuding lust, "+ ((flags[kFLAGS.AIKO_CORRUPTION] >= 50)?"and bites you on the neck, slightly drawing blood":"and leans in to give you a smooch on the lips")+", while her and your tails rove around, searching for their lost partners. \n\n"
 			+"Slowly, they resume their ministrations, "+((player.tailCount==9)?"the extra "+((flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)?"tail":"tails"):"")+" twirling around, gliding across her soft fur... wait, since when did your clothes get remo...ohhh that feels warm,  "
@@ -1716,12 +1716,21 @@ private function aikoSexKitsuneTailjob():void {
 		player.cor += 3;
 		flags[kFLAGS.AIKO_CORRUPTION] -= 3;
 	}
-	flags[kFLAGS.AIKO_DONE_KITSUNETJ] == 1;
-	var x:String = player.mf("M", "F")
-	if (x == "M") {
+	flags[kFLAGS.AIKO_DONE_KITSUNETJ] = 1;
+	var x:int = player.gender
+	if (x == 1) {
 		player.orgasm('Dick');
-	} else {
+	}	else if (x == 2) {
 		player.orgasm('Vagina')
+	}	else {
+		player.orgasm('Dick');
+		player.orgasm('Vagina')
+	}
+	if (player.hasStatusEffect(StatusEffects.Spar)) {
+		player.removeStatusEffect(StatusEffects.Spar);
+		if (player.hasStatusEffect(StatusEffects.DomFight))
+			player.removeStatusEffect(StatusEffects.DomFight);
+		cleanupAfterCombat();
 	}
 	doNext(camp.returnToCampUseOneHour);
 }

@@ -17,6 +17,7 @@ import classes.Scenes.Camp.*;
 import classes.Scenes.Dungeons.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao;
+import classes.Scenes.Soulforce;
 import classes.lists.Gender;
 import classes.display.SpriteDb;
 
@@ -3181,7 +3182,7 @@ private function SparrableNPCsMenu():void {
 		else addButtonDisabled(2, "???", "???");
 		if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) addButton(3, "Salon", SceneLib.mountain.salon.salonGreeting).hint("Visit the salon for hair services.");
 		else addButtonDisabled(3, "???", "???");
-		
+
 		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) addButton(5, "Shrine", SceneLib.kitsuneScene.kitsuneShrine).hint("Visit the kitsune shrine in the deepwoods.");
 		else addButtonDisabled(5, "???", "???");
 		if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
@@ -3247,7 +3248,7 @@ private function SparrableNPCsMenu():void {
 		addButton(14, "Back", places);
 	}
 
-	private function exgartuanCampUpdate():void {
+		private function exgartuanCampUpdate():void {
 		//Update Exgartuan stuff
 		if (player.hasStatusEffect(StatusEffects.Exgartuan)) {
 			trace("EXGARTUAN V1: " + player.statusEffectv1(StatusEffects.Exgartuan) + " V2: " + player.statusEffectv2(StatusEffects.Exgartuan));
