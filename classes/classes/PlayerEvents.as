@@ -1367,7 +1367,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Lustzerker perk
-			if ((player.salamanderScore() >= 9 || player.phoenixScore() >= 10) && (player.findPerk(PerkLib.Lustzerker) < 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
+			if ((player.salamanderScore() >= 9 || player.phoenixScore() >= 10) && (!player.hasPerk(PerkLib.Lustzerker))) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (player.findPerk(PerkLib.Lustzerker) < 0) {
 					outputText("\nAfter drinking the last drop another hip flask of firewater you starts to feel a weird, maybe slightly unpleasant feeling inside your body.  Like many tiny flames cursing inside your veins making you ponder whats just happening with your body.  Remembering about salamanders natural talent to enter a berserk-like state you quess that should be it.\n\n(<b>Gained Perk: Lustzerker</b>)");
 					player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
