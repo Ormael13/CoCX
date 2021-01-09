@@ -7333,7 +7333,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Elfin ears
-        if (player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
             if (player.ears.type != Ears.HUMAN) {
                 outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>");
             } else {
