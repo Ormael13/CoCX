@@ -8653,9 +8653,9 @@ use namespace CoC;
 				phoenixCounter++;
 			if (hairType == Hair.FEATHER) {
 				phoenixCounter++;
-				if (faceType == Face.HUMAN && phoenixCounter > 2)
+				if ((faceType == Face.HUMAN || faceType == Face.SALAMANDER_FANGS) && phoenixCounter > 2)
 					phoenixCounter++;
-				if (ears.type == Ears.HUMAN && phoenixCounter > 2)
+				if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN || ears.type == Ears.LIZARD || ears.type == Ears.DRAGON && phoenixCounter > 2)
 					phoenixCounter++;
 			}
 			if (eyes.type == Eyes.REPTILIAN)
