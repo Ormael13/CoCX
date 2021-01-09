@@ -3183,10 +3183,8 @@ private function SparrableNPCsMenu():void {
 		if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) addButton(3, "Salon", SceneLib.mountain.salon.salonGreeting).hint("Visit the salon for hair services.");
 		else addButtonDisabled(3, "???", "???");
 
-		if ((flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) || flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(5, "Signposts", KitsuneSignpost).hint("Look for the mystical signposts that will point you to known Kitsune locations.");
+		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) addButton(5, "Shrine", SceneLib.kitsuneScene.kitsuneShrine).hint("Visit the kitsune shrine in the deepwoods.");
 		else addButtonDisabled(5, "???", "???");
-		//if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) addButton(5, "Shrine", SceneLib.kitsuneScene.kitsuneShrine).hint("Visit the kitsune shrine in the deepwoods.");
-		//else addButtonDisabled(5, "???", "???");
 		if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
 		else addButtonDisabled(6, "???", "???");
 		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
@@ -3194,8 +3192,8 @@ private function SparrableNPCsMenu():void {
 		if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");
 		else addButtonDisabled(8, "???", "???");
 		
-		//if (flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(10, "Great Tree", SceneLib.aikoScene.encounterAiko).hint("Visit the Great Tree in the Deep Woods where Aiko lives.");
-		//else addButtonDisabled(10, "???", "???");
+		if (flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(10, "Great Tree", SceneLib.aikoScene.encounterAiko).hint("Visit the Great Tree in the Deep Woods where Aiko lives.");
+		else addButtonDisabled(10, "???", "???");
 //	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", CoC.instance.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
 		if (debug) addButton(13, "Ingnam", SceneLib.ingnam.returnToIngnam).hint("Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
 		addButton(4, "Next", placesPage3);
@@ -3248,36 +3246,6 @@ private function SparrableNPCsMenu():void {
 		if (flags[kFLAGS.LUMI_MET] > 0) addButton(12, "Lumi's Lab", SceneLib.lumi.lumiEncounter).hint("Visit Lumi's laboratory.");
 		if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0) addButton(13, "Anzu's Palace", dungeonAP.enterDungeon).hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.");
 		addButton(14, "Back", places);
-	}
-
-	public function KitsuneSignpost():void {
-		clearOutput()
-		menu();
-		if (flags[kFLAGS.SIGNPOSTS_DISCOVERED] == 0) {
-			outputText("You wander into the forest once more, and you admire the scenery, and sometimes jump away from the tentacle beasts that try an snare you, when you walk headfirst into a pole.\n\n"
-					+ "Rubbing the bruise on your forehead as you look up, you wonder what a pole is doing here in the middle of the forest, when you notice arrows pointing to different directions, constantly moving like caught in a breeze, and a piece of paper stuck to it.\n\n"
-					+ "You read the paper, and learn that you have stumbled upon a mystical nexus, a guidepost that would point you to known locations of kitsunes in the area. It further states below that the signpost is enchanted to look different to each person, as to protect the location of each kitsune, and that only the locations of kitsunes that the reader knows would be shown here.\n\n"
-					+ "Now that you're here, you memorize the place, and look for the kitsune you were on your way to meet.")
-			flags[kFLAGS.SIGNPOSTS_DISCOVERED] = 1
-		} else {
-			outputText("You once again make your way into the forest, in search of the signpost. It seems like each time, you're finding it faster and faster. You promptly arrive, and look for the direction of the kitsune you're looking for.")
-		}
-		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) addButton(0, "Shrine", SceneLib.kitsuneScene.kitsuneShrine).hint("Visit the kitsune shrine in the deepwoods.");
-		else addButtonDisabled(0, "???", "???");
-		if (flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(1, "Great Tree", SceneLib.aikoScene.encounterAiko).hint("Visit the Great Tree in the Deep Woods where Aiko lives.");
-		else addButtonDisabled(1, "???", "???");
-		if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) {
-			if (player.soulforce >= 90) {
-				player.soulforce -= 90;
-				statScreenRefresh();
-				addButton(2, "KitsuMansion", SceneLib.kitsuneScene.enterTheTrickster).hint("Req. 90+ soulforce");
-			}	else {
-				outputText("\n\nYour current soulforce is too low.");
-				addButtonDisabled(2, "???", "???");
-			}
-		}
-		addButton(14, "Back", places);
-
 	}
 
 		private function exgartuanCampUpdate():void {
