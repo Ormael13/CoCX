@@ -6867,6 +6867,7 @@ use namespace CoC;
 			if (tailType == Tail.SHARK || tailType == Tail.SALAMANDER || lowerBody == LowerBody.SALAMANDER || faceType == Face.SHARK_TEETH)
 				harpy = 0;
 			if (hasPerk(PerkLib.ElementalBody)) harpy = 0;
+			if (wings.type == Wings.FEATHERED_PHOENIX) harpy = 0;
 			harpy = finalRacialScore(harpy, Race.HARPY);
 			End("Player","racialScore");
 			return harpy;
@@ -7833,6 +7834,8 @@ use namespace CoC;
 				salamanderCounter += 1;
 			if (isGargoyle()) salamanderCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) salamanderCounter = 0;
+			if (wings.type == Wings.FEATHERED_PHOENIX)
+				salamanderCounter = 0;
 			salamanderCounter = finalRacialScore(salamanderCounter, Race.SALAMANDER);
 			End("Player","racialScore");
 			return salamanderCounter;
@@ -8693,6 +8696,7 @@ use namespace CoC;
 			if (isGargoyle()) phoenixCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) phoenixCounter = 0;
 			phoenixCounter = finalRacialScore(phoenixCounter, Race.PHOENIX);
+			if (wings.type != Wings.FEATHERED_PHOENIX) phoenixCounter = 0;
 			End("Player","racialScore");
 			return phoenixCounter;
 		}
@@ -11340,7 +11344,7 @@ use namespace CoC;
 					maxSpeCap2 += 150;
 					maxLibCap2 += 105;
 				}
-				if (harpyScore() >= 8) {
+				else if (harpyScore() >= 8) {
 					maxTouCap2 -= 20;
 					maxSpeCap2 += 80;
 					maxLibCap2 += 60;
