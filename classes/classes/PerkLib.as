@@ -5807,7 +5807,7 @@ public class PerkLib
                 return player.ratatoskrScore() >= 4;
             }, "Squirrel/Ratatoskr race");
             SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(Lustzerker).requireCustomFunction(function (player:Player):Boolean {
-                return player.salamanderScore() >= 4;
+                return player.salamanderScore() >= 9 || player.phoenixScore() >= 10;
             }, "Salamander race");
             ScyllaInkGlands.requirePerk(InkSpray).requireCustomFunction(function (player:Player):Boolean {
                 return player.scyllaScore() >= 5;
