@@ -1280,7 +1280,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			//Insane/corrupted Kitsune warning //Help why isn't this being called.
+			/*
+			//Insane/corrupted Kitsune warning //No longer in dev. Just didn't work with the theme.
 			if (player.findPerk(PerkLib.DarkenedKitsune) >= 0 && player.inte/player.intStat.max <= 0.85 && flags[kFLAGS.DARKKITSUNE_WARN_INT] != 1){ //warning at 15 % loss. Considering by the time you get to kitsune tier, you should probably have a decent amount of each, 15% margin should be good.
 				SceneLib.darkenedKitsuneScene.splitPersonalityWarning(1)
 				flags[kFLAGS.DARKKITSUNE_WARN_INT] = 1;
@@ -1328,6 +1329,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 0;
 				needNext = true;
 			}
+			*/
 			//Kitsune energy thirst
 			if (player.hasStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)) {
 				if (player.hunger < player.maxHunger()) {
