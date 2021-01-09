@@ -137,8 +137,7 @@ public class CancerAttack extends Monster
 			this.long= "You are fighting a cancer, a centaur mixing the upper body of a human with the bottom body of a large crab. " +
 					"Its pincers stands at the ready looking for the opportunity of a swift and likely fatal grapple. " +
 					"While your opponent torso is pretty bare it’s obvious the crab part is sturdier than any steel plating. " +
-					"The creepiest thing about all of this is that her/his facial expression seems frozen in a constant blank state.";
-			//
+					"The creepiest thing about all of this is that "+(IsFemale ? "her":"his")+" facial expression seems frozen in a constant blank state.";
 			if (IsFemale) {
 				this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_LOOSE);
 				this.createBreastRow(1);
