@@ -1202,7 +1202,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				monk+=1;
 				
 				//Preggers chance!
-				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			}
 			else if (player.gender == 3) 
@@ -1287,7 +1287,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				//Preggers chance!
 				player.sexReward("cum","Vaginal");
 				player.sexReward("Default", "Default",true,false);
-				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			}
 		}
@@ -1365,7 +1365,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 					dynStats("lib", 2, "cor", 1);
 				}
 				//Preggers chance!
-				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 				player.sexReward("cum","Vaginal");
 			}
@@ -1408,7 +1408,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				}
 				//Preggers chance!
 				player.sexReward("cum","Vaginal");
-				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			}
 		}
@@ -1516,7 +1516,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				player.cuntChange(3, true);
 				//Preggers chance!
 				player.sexReward("cum","Vaginal");
-				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 				//The end
 				if(player.lib > 50 && player.cor > 80) {
@@ -1572,7 +1572,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 						outputText("You black out as Jojo cums AGAIN, forcing a river of spunk from your already over-filled uterus.");
 						player.cuntChange(monster.cocks[0].cockThickness, true);
 						//Preggers chance!
-						if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+						if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 						else player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE + 82, 101); //Jojo's kids take longer for some reason
 					}
 					if (player.gender == 0) {
@@ -1697,7 +1697,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			}
 			outputText("You cry out in pleasure as your orgasm floods through your body, causing your juices to splash out around your mouse slut's cock" + (player.hasCock() ? ", and your own [cocks] to explode with thick splashes of your hot cum across his chest and belly" : "") + ". You stay seated on his hips until your orgasm fades, then with a sigh of pleasure you stand off of him and dismiss him with a wave of your hand.  ");
 			//Preggers chance!
-			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 			else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
 			player.sexReward("cum","Vaginal");
 			dynStats("cor", 0.5);
@@ -3278,7 +3278,7 @@ private function getVagFuckedByMouse():void {
 	dynStats("sens", 1, "cor", -1);
 	flags[kFLAGS.JOJO_VAGINAL_CATCH_COUNTER]++;
 	flags[kFLAGS.JOJO_SEX_COUNTER]++;
-	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 	else player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82, (jojoCumQ() < 2000 ? 100 - (jojoCumQ() / 50) : 60));
 	player.sexReward("cum","Vaginal");
 	doNext(camp.returnToCampUseOneHour);
