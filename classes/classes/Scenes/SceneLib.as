@@ -5,7 +5,6 @@ import classes.Scenes.Areas.*;
 import classes.Scenes.Areas.Bog.TrollScenes;
 import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
-import classes.Scenes.Areas.Forest.KitsuneSignposts;
 import classes.Scenes.Areas.GlacialRift.FrostGiantScene;
 import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
 import classes.Scenes.Areas.Ocean.ScyllaScene;
@@ -270,8 +269,6 @@ public class SceneLib {
 	public static var glacialYuShop:YuWinterGearShop = new YuWinterGearShop();
 	
 	public static var fleshGolemScenes:FleshGolemScene = new FleshGolemScene();
-
-    public static var KitsuneSignposts:KitsuneSignposts = new KitsuneSignposts();
 
     public function SceneLib() {
     }

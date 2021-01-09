@@ -17,6 +17,7 @@ import classes.Scenes.Camp.*;
 import classes.Scenes.Dungeons.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao;
+import classes.Scenes.Soulforce;
 import classes.lists.Gender;
 import classes.display.SpriteDb;
 
@@ -3182,7 +3183,7 @@ private function SparrableNPCsMenu():void {
 		if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) addButton(3, "Salon", SceneLib.mountain.salon.salonGreeting).hint("Visit the salon for hair services.");
 		else addButtonDisabled(3, "???", "???");
 
-		if ((flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) || flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(5, "Signposts", SceneLib.KitsuneSignposts.KitsuneSignpost).hint("Look for the mystical signposts that will point you to known Kitsune locations.");
+		if ((flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) || flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(5, "Signposts", KitsuneSignpost).hint("Look for the mystical signposts that will point you to known Kitsune locations.");
 		else addButtonDisabled(5, "???", "???");
 		//if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) addButton(5, "Shrine", SceneLib.kitsuneScene.kitsuneShrine).hint("Visit the kitsune shrine in the deepwoods.");
 		//else addButtonDisabled(5, "???", "???");
@@ -3249,7 +3250,37 @@ private function SparrableNPCsMenu():void {
 		addButton(14, "Back", places);
 	}
 
-	private function exgartuanCampUpdate():void {
+	public function KitsuneSignpost():void {
+		clearOutput()
+		menu();
+		if (flags[kFLAGS.SIGNPOSTS_DISCOVERED] == 0) {
+			outputText("You wander into the forest once more, and you admire the scenery, and sometimes jump away from the tentacle beasts that try an snare you, when you walk headfirst into a pole.\n\n"
+					+ "Rubbing the bruise on your forehead as you look up, you wonder what a pole is doing here in the middle of the forest, when you notice arrows pointing to different directions, constantly moving like caught in a breeze, and a piece of paper stuck to it.\n\n"
+					+ "You read the paper, and learn that you have stumbled upon a mystical nexus, a guidepost that would point you to known locations of kitsunes in the area. It further states below that the signpost is enchanted to look different to each person, as to protect the location of each kitsune, and that only the locations of kitsunes that the reader knows would be shown here.\n\n"
+					+ "Now that you're here, you memorize the place, and look for the kitsune you were on your way to meet.")
+			flags[kFLAGS.SIGNPOSTS_DISCOVERED] = 1
+		} else {
+			outputText("You once again make your way into the forest, in search of the signpost. It seems like each time, you're finding it faster and faster. You promptly arrive, and look for the direction of the kitsune you're looking for.")
+		}
+		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) addButton(0, "Shrine", SceneLib.kitsuneScene.kitsuneShrine).hint("Visit the kitsune shrine in the deepwoods.");
+		else addButtonDisabled(0, "???", "???");
+		if (flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(1, "Great Tree", SceneLib.aikoScene.encounterAiko).hint("Visit the Great Tree in the Deep Woods where Aiko lives.");
+		else addButtonDisabled(1, "???", "???");
+		if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) {
+			if (player.soulforce >= 90) {
+				player.soulforce -= 90;
+				statScreenRefresh();
+				addButton(2, "KitsuMansion", SceneLib.kitsuneScene.enterTheTrickster).hint("Req. 90+ soulforce");
+			}	else {
+				outputText("\n\nYour current soulforce is too low.");
+				addButtonDisabled(2, "???", "???");
+			}
+		}
+		addButton(14, "Back", places);
+
+	}
+
+		private function exgartuanCampUpdate():void {
 		//Update Exgartuan stuff
 		if (player.hasStatusEffect(StatusEffects.Exgartuan)) {
 			trace("EXGARTUAN V1: " + player.statusEffectv1(StatusEffects.Exgartuan) + " V2: " + player.statusEffectv2(StatusEffects.Exgartuan));
