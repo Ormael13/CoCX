@@ -6867,7 +6867,7 @@ use namespace CoC;
 			if (tailType == Tail.SHARK || tailType == Tail.SALAMANDER || lowerBody == LowerBody.SALAMANDER || faceType == Face.SHARK_TEETH)
 				harpy = 0;
 			if (hasPerk(PerkLib.ElementalBody)) harpy = 0;
-			if (wings.type == Wings.FEATHERED_PHOENIX) harpy = 0;
+			if (wings.type == Wings.FEATHERED_PHOENIX || tail.type == Tail.THUNDERBIRD) harpy = 0;
 			harpy = finalRacialScore(harpy, Race.HARPY);
 			End("Player","racialScore");
 			return harpy;
