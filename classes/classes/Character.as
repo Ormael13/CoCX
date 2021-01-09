@@ -242,7 +242,7 @@ import classes.Items.JewelryLib;
 		public function isPregnant():Boolean { return _pregnancyType != 0; }
 
 		public function isButtPregnant():Boolean { return _buttPregnancyType != 0; }
-	
+
 		//fertility must be >= random(0-beat)
 		//If arg == 1 then override any contraceptives and guarantee fertilization
 		public function knockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void

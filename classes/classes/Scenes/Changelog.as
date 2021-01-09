@@ -126,7 +126,7 @@ package classes.Scenes
 			outputText("-Added conversation about Luna to Aunt Nancy. (by Scary Dragon Mom)\n");
 			outputText("-Some shady person appeared in Journey to the East inn that sells items currently. Maybe he will talk in future more too ^^\n");
 			outputText("-Semi fixed bug on stats values not reseting down after ascension. Save and load after ascension would fix now the last part on this bug i not corrected.\n");
-			outputText("-\n");
+			outputText("-New effect for pregnancy crazy races Pregomania\n");
 			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
