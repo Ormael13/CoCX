@@ -914,7 +914,7 @@ use namespace CoC;
 		//Natural Claws (arm types and weapons that can substitude them)
 		public function haveNaturalClaws():Boolean
 		{
-			return arms.type == Arms.KITSUNE || arms.type == Arms.CAT || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER || arms.type == Arms.DRAGON || arms.type == Arms.FOX || arms.type == Arms.GARGOYLE || arms.type == Arms.LION || arms.type == Arms.WOLF || arms.type == Arms.LIZARD || arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_2
+			return arms.type == Arms.SPHINX || arms.type == Arms.KITSUNE || arms.type == Arms.CAT || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER || arms.type == Arms.DRAGON || arms.type == Arms.FOX || arms.type == Arms.GARGOYLE || arms.type == Arms.LION || arms.type == Arms.WOLF || arms.type == Arms.LIZARD || arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_2
 			 || arms.type == Arms.RED_PANDA || arms.type == Arms.SALAMANDER || arms.type == Arms.HYDRA || arms.type == Arms.JIANGSHI || arms.type == Arms.FROSTWYRM || arms.type == Arms.BEAR || arms.type == Arms.MANTIS || arms.type == Arms.KAMAITACHI || arms.type == Arms.SQUIRREL || arms.type == Arms.WEASEL || arms.type == Arms.WENDIGO;
 		}
 		public function haveNaturalClawsTypeWeapon():Boolean
@@ -942,7 +942,7 @@ use namespace CoC;
 		public function hasTalonsAttack():Boolean{
 			return lowerBody == LowerBody.HARPY;
 		}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasPerk(PerkLib.MorphicWeaponry) || isAlraune() || isScylla() || isKraken());}
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasPerk(PerkLib.MorphicWeaponry) || isAlraune() || isScylla() || isKraken() || isTaur());}
 		//Some other checks
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
@@ -6867,6 +6867,7 @@ use namespace CoC;
 			if (tailType == Tail.SHARK || tailType == Tail.SALAMANDER || lowerBody == LowerBody.SALAMANDER || faceType == Face.SHARK_TEETH)
 				harpy = 0;
 			if (hasPerk(PerkLib.ElementalBody)) harpy = 0;
+			if (wings.type == Wings.FEATHERED_PHOENIX || tail.type == Tail.THUNDERBIRD) harpy = 0;
 			harpy = finalRacialScore(harpy, Race.HARPY);
 			End("Player","racialScore");
 			return harpy;
@@ -7833,6 +7834,8 @@ use namespace CoC;
 				salamanderCounter += 1;
 			if (isGargoyle()) salamanderCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) salamanderCounter = 0;
+			if (wings.type == Wings.FEATHERED_PHOENIX)
+				salamanderCounter = 0;
 			salamanderCounter = finalRacialScore(salamanderCounter, Race.SALAMANDER);
 			End("Player","racialScore");
 			return salamanderCounter;
@@ -8653,9 +8656,9 @@ use namespace CoC;
 				phoenixCounter++;
 			if (hairType == Hair.FEATHER) {
 				phoenixCounter++;
-				if (faceType == Face.HUMAN && phoenixCounter > 2)
+				if ((faceType == Face.HUMAN || faceType == Face.SALAMANDER_FANGS) && phoenixCounter > 2)
 					phoenixCounter++;
-				if (ears.type == Ears.HUMAN && phoenixCounter > 2)
+				if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN || ears.type == Ears.LIZARD || ears.type == Ears.DRAGON && phoenixCounter > 2)
 					phoenixCounter++;
 			}
 			if (eyes.type == Eyes.REPTILIAN)
@@ -8693,6 +8696,7 @@ use namespace CoC;
 			if (isGargoyle()) phoenixCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) phoenixCounter = 0;
 			phoenixCounter = finalRacialScore(phoenixCounter, Race.PHOENIX);
+			if (wings.type != Wings.FEATHERED_PHOENIX) phoenixCounter = 0;
 			End("Player","racialScore");
 			return phoenixCounter;
 		}
@@ -11340,7 +11344,7 @@ use namespace CoC;
 					maxSpeCap2 += 150;
 					maxLibCap2 += 105;
 				}
-				if (harpyScore() >= 8) {
+				else if (harpyScore() >= 8) {
 					maxTouCap2 -= 20;
 					maxSpeCap2 += 80;
 					maxLibCap2 += 60;

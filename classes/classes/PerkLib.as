@@ -5807,7 +5807,7 @@ public class PerkLib
                 return player.ratatoskrScore() >= 4;
             }, "Squirrel/Ratatoskr race");
             SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(Lustzerker).requireCustomFunction(function (player:Player):Boolean {
-                return player.salamanderScore() >= 4;
+                return player.salamanderScore() >= 8 || player.phoenixScore() >= 10;
             }, "Salamander race");
             ScyllaInkGlands.requirePerk(InkSpray).requireCustomFunction(function (player:Player):Boolean {
                 return player.scyllaScore() >= 5;
@@ -6160,7 +6160,7 @@ public class PerkLib
                 return player.pigScore() >= 8;
             }, "Pig/Boar race");
             SalamanderAdrenalGlandsEvolved.requireLevel(12).requirePerk(SalamanderAdrenalGlands).requireCustomFunction(function (player:Player):Boolean {
-                return player.salamanderScore() >= 7;
+                return player.salamanderScore() >= 9 || player.phoenixScore() >= 11;
             }, "Salamander race");
 			VampiricBloodsteamEvolved.requireLevel(12).requirePerk(VampiricBloodsteam).requireCustomFunction(function (player:Player):Boolean {
                 return player.hasStatusEffect(StatusEffects.VampireThirst);
@@ -6573,7 +6573,7 @@ public class PerkLib
                 return player.pigScore() >= 12;
             }, "Pig/Boar race");
             SalamanderAdrenalGlandsFinalForm.requireLevel(30).requirePerk(SalamanderAdrenalGlandsEvolved).requireCustomFunction(function (player:Player):Boolean {
-                return player.salamanderScore() >= 10;
+                return player.salamanderScore() >= 10 || player.phoenixScore() >= 13;
             }, "Salamander race");
 			VampiricBloodsteamFinalForm.requireLevel(30).requirePerk(VampiricBloodsteamEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.hasStatusEffect(StatusEffects.VampireThirst);

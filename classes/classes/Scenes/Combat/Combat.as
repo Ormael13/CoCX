@@ -3875,6 +3875,18 @@ public class Combat extends BaseContent {
                     outputText("\n");
                 }
             }
+            //CENTAUR TIME!
+            if (player.isTaur()) {
+                if (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.CLOVEN_HOOFED){
+                    outputText("You rear up and trample your opponent with your hooves.");
+                }
+                else{
+                    outputText("You rear up and claw at your opponent with your forepaws.");
+                }
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                outputText("\n");
+            }
             //POUNCING FOR THE KILL
             if (player.canPounce()) {
                 outputText("You leap up at [monster a] [monster name] raking [monster him] with your hind claws twice.");
@@ -3887,6 +3899,7 @@ public class Combat extends BaseContent {
                     outputText("You rend at your opponent with your talons twice.");
                     ExtraNaturalWeaponAttack();
                     ExtraNaturalWeaponAttack();
+                    outputText("\n");
                 }
             }
             //DEALING WING ATTACKS
