@@ -7281,7 +7281,7 @@ public final class Mutations extends MutationsHelper {
             outputText("While humanoid in shape, they have two large, taloned toes on the front and a single claw protruding from the heel. The entire ensemble is coated in [haircolor] feathers from ankle to hip, reminding you of the bird-women of the mountains. <b>You now have harpy legs!</b>");
         }
         //Arms
-        if (!InCollection(Arms.GARGOYLE, Arms.PHOENIX) && changes < changeLimit && player.lowerBody == LowerBody.SALAMANDER && rand(4) == 0) {
+        if (player.arms.type != Arms.PHOENIX && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou smile impishly as you lick the remains of the liqueur from your teeth, but when you go to wipe your mouth, instead of the usual texture of your [skin.type] on your lips, you feel feathers! You look on in horror while more of the crimson colored avian plumage sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.");
             changes++;
             setArmType(Arms.PHOENIX);
