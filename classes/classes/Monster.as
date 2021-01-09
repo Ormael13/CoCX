@@ -2104,38 +2104,38 @@ import flash.utils.getQualifiedClassName;
 			result += Heis + Appearance.inchesAndFeetsAndInches(tallness) + " tall with " +
 			          Appearance.describeByScale(hips.type,Appearance.DEFAULT_HIP_RATING_SCALES,"thinner than","wider than") + " hips and " +
 			          Appearance.describeByScale(butt.type,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than") + " butt.\n";
-			result += Pronoun3+" lower body is "+LowerBody.Types[lowerBody].name;
-			result += ", "+pronoun3+" arms are "+Arms.Types[arms.type].name;
+			result += Pronoun3+" lower body is "+Object(LowerBody.Types[lowerBody]||{}).name;
+			result += ", "+pronoun3+" arms are "+Object(Arms.Types[arms.type]||{}).name;
 			result += ", "+pronoun1+" "+have+" "+skinTone+" "+skinAdj+" "+skinDesc+
-					  " (base "+Skin.SkinTypes[skin.baseType()].id+")." +
-					  " (coat "+Skin.SkinTypes[skin.coatType()].id+")." +
+					  " (base "+Object(Skin.SkinTypes[skin.baseType()]||{}).id+")." +
+					  " (coat "+Object(Skin.SkinTypes[skin.coatType()]||{}).id+")." +
 					  "\n";
 			result += Hehas;
 			if (hairLength>0){
-				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(hairLength)+" long "+Hair.Types[hairType].name+" hair.\n";
+				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(hairLength)+" long "+Object(Hair.Types[hairType]||{}).name+" hair.\n";
 			} else {
 				result += "no hair.\n";
 			}
 			result += Hehas;
 			if (beardLength>0){
-				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(beardLength)+" long "+Beard.Types[beardStyle].name+" beard.\n";
+				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(beardLength)+" long "+Object(Beard.Types[beardStyle]||{}).name+" beard.\n";
 			} else {
 				result += "no beard.\n";
 			}
 			result += Hehas
-			          + Face.Types[faceType].name + " face, "
-			          + Ears.Types[ears.type].name + " ears, "
-			          + Tongue.Types[tongue.type].name + " tongue and "
-			          + Eyes.Types[eyes.type].name + " eyes.\n";
+			          + Object(Face.Types[faceType]||{}).name + " face, "
+			          + Object(Ears.Types[ears.type]||{}).name + " ears, "
+			          + Object(Tongue.Types[tongue.type]||{}).name + " tongue and "
+			          + Object(Eyes.Types[eyes.type]||{}).name + " eyes.\n";
 			result += Hehas;
 			if (tailType == Tail.NONE) result += "no tail, ";
-			else result+=Tail.Types[tailType].name+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
+			else result+=Object(Tail.Types[tailType]||{}).name+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
 			if (horns.type == Horns.NONE) result += "no horns, ";
-			else result += horns.count + " " + Horns.Types[horns.type].name + " horns, ";
+			else result += horns.count + " " + Object(Horns.Types[horns.type]||{}).name + " horns, ";
 			if (wings.type == Wings.NONE) result += "no wings, ";
-			else result += wings.desc + " wings (type " + Wings.Types[wings.type].name + "), ";
+			else result += wings.desc + " wings (type " + Object(Wings.Types[wings.type]||{}).name + "), ";
 			if (antennae.type == Antennae.NONE) result += "no antennae.type.\n\n";
-			else result += Antennae.Types[antennae.type].name + " antennae.type.\n\n";
+			else result += Object(Antennae.Types[antennae.type]||{}).name + " antennae.type.\n\n";
 
 			// GENITALS AND BREASTS
 			for (var i:int = 0; i<cocks.length; i++){
