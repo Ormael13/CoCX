@@ -4470,7 +4470,7 @@ public function wakeFromBadEnd():void {
 	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 30) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 31;
 			clearOutput();
-			outputText("What time is it? Time to get Re-Collared ^^ Unless you over been wolfy & godly emo collar user. Then no re-collaring for you. Also free bonus secondary stats for everyone. Everyones loves it? Or not?");
+			outputText("What time is it? Time to get Re-Collared ^^ Unless you over been wolfy & godly emo collar user. Then no re-collaring for you. Also free bonus secondary stats for everyone. Everyones loves it? Or not? Also let bring Izmael form farm if he stuck there.");
 			if (player.hasKeyItem("Fenrir Collar") >= 0) {
 				player.removeKeyItem("Fenrir Collar");
 				player.createKeyItem("Gleipnir Collar", 0, 0, 0, 0);
@@ -4491,6 +4491,7 @@ public function wakeFromBadEnd():void {
 				wrath += player.level;
 				lust += player.level;
 			}
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1 && flags[kFLAGS.IZMA_BROFIED] == 1) flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 0;
 			doNext(doCamp);
 			return;
 		}
