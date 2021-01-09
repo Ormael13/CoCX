@@ -3870,7 +3870,7 @@ use namespace CoC;
 			if (TopRace == "thunderbird") {
 				if (TopScore >= 12) {
 					if (TopScore >= 21) race = "greater thunderbird";
-					else if (TopScore >= 15) race = "thunderbird";
+					else if (TopScore >= 16) race = "thunderbird";
 					else race = "half thunderbird";
 				}
 			}
@@ -4177,7 +4177,12 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 14;//	104-r99	119	135	152	180	199	219(potem legendary/mythical stages?)
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				internalChimeraRatingCounter -= 20;
-			if (jewelry == game.jewelries.EZEKIELS) internalChimeraRatingCounter -= 1;
+			if (jewelryName == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
+			if (jewelryName2 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
+			if (jewelryName3 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
+			if (jewelryName4 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
+			if (headjewelryName == "Ezekiel's Crown") internalChimeraRatingCounter -= 4;
+			if (necklaceName == "Ezekiel's Necklace") internalChimeraRatingCounter -= 5;
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) internalChimeraRatingCounter -= 3;//6
 			//if (flags[kFLAGS.GAME_DIFFICULTY] == 1) internalChimeraRatingCounter -= 3;//tyle ile stopni perków rasowych
 			if (internalChimeraRatingCounter < 0 || flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) internalChimeraRatingCounter = 0;
@@ -4621,7 +4626,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (orcScore() >= 11)
 				grandchimeraCounter++;
-*/			if (thunderbirdScore() >= 15)
+*/			if (thunderbirdScore() >= 16)
 				grandchimeraCounter++;
 			if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI)
 				grandchimeraCounter++;
@@ -7488,11 +7493,11 @@ use namespace CoC;
 				thunderbirdCounter++;
 			if (findPerk(PerkLib.HarpyHollowBonesFinalForm) >= 0)
 				thunderbirdCounter++;
-			if (findPerk(PerkLib.HeartOfTheStorm) >= 0 && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
+			if ((findPerk(PerkLib.HeartOfTheStorm) >= 0 || findPerk(PerkLib.HarpyHollowBones) >= 0) && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
 				thunderbirdCounter++;
-			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
+			if ((findPerk(PerkLib.HeartOfTheStormEvolved) >= 0 || findPerk(PerkLib.HarpyHollowBonesEvolved) >= 0) && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
 				thunderbirdCounter++;
-			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0 && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
+			if ((findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0 || findPerk(PerkLib.HarpyHollowBonesFinalForm) >= 0) && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
 				thunderbirdCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				thunderbirdCounter += 50;
@@ -9999,6 +10004,8 @@ use namespace CoC;
 				bonesandmarrowMutations--;
 			if (findPerk(PerkLib.DraconicBones) >= 0)
 				bonesandmarrowMutations--;
+			if (findPerk(PerkLib.HarpyHollowBones) >= 0)
+				bonesandmarrowMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				bonesandmarrowMutations++;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
@@ -11527,18 +11534,18 @@ use namespace CoC;
 			}//+10/10-20
 			if (thunderbirdScore() >= 12) {
 				if (thunderbirdScore() >= 21) {
-					maxTouCap2 -= 15;
-					maxSpeCap2 += 150;
-					maxLibCap2 += 180;
+					maxTouCap2 -= 25;
+					maxSpeCap2 += 155;
+					maxLibCap2 += 185;
 				}
-				else if (thunderbirdScore() >= 15) {
+				else if (thunderbirdScore() >= 16) {
 					maxTouCap2 -= 20;
-					maxSpeCap2 += 115;
-					maxLibCap2 += 130;
+					maxSpeCap2 += 120;
+					maxLibCap2 += 140;
 				}
 				else {
-					maxTouCap2 -= 20;
-					maxSpeCap2 += 100;
+					maxTouCap2 -= 15;
+					maxSpeCap2 += 95;
 					maxLibCap2 += 100;
 				}
 			}//+10/10-20

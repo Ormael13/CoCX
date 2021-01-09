@@ -299,13 +299,13 @@ public class PerkLib
 				"You are currently in elemental form.");
 		public static const HarpyHollowBones:PerkType = mk("Harpy Hollow Bones", "Harpy Hollow Bones",
 				"Your bones are hollow like those of a harpy granting you 20% increased physical damage when flying and increasing speed at the expense of toughness. Also allows to keep Harpy song.",
-				"You've chosen the 'Harpy Hollow Bones' perk. Increase damage while flying by 20% and increasing speed at the expense of toughness.").withBuffs({'tou.mult':-0.05,'spe.mult':0.25});
+				"You've chosen the 'Harpy Hollow Bones' perk. Increase damage while flying by 20% and increasing speed at the expense of toughness.").withBuffs({'tou.mult':-0.05,'spe.mult':0.20});
 		public static const HarpyHollowBonesEvolved:PerkType = mk("Harpy Hollow Bones (Evolved)", "Harpy Hollow Bones (Evolved)",
 				"Your bones are hollow like those of a harpy granting you an additionnal 30% increased physical damage when flying and increasing speed at the expense of toughness. Increase flying evasiveness by 10%.",
-				"You've chosen the 'Harpy Hollow Bones (Evolved)' perk. Further Increase damage while flying by 30% and increasing speed at the expense of toughness. Increase flying evasiveness by 10%.").withBuffs({'tou.mult':-0.05,'speed.mult':0.30});
+				"You've chosen the 'Harpy Hollow Bones (Evolved)' perk. Further Increase damage while flying by 30% and increasing speed at the expense of toughness. Increase flying evasiveness by 10%.").withBuffs({'tou.mult':-0.05,'speed.mult':0.25});
 		public static const HarpyHollowBonesFinalForm:PerkType = mk("Harpy Hollow Bones (Final Form)", "Harpy Hollow Bones (Final Form)",
 				"Your bones are hollow like those of a harpy granting you an additionnal 30% increased physical damage when flying and increasing speed at the expense of toughness. Increase great dive damage by 50%.",
-				"You've chosen the 'Harpy Hollow Bones (Final Form)' perk. Further Increase damage while flying by 50% and increasing speed at the expense of toughness. Increase great dive damage by 50% and no longuer cause it to end flight.").withBuffs({'tou.mult':-0.05,'speed.mult':0.35});
+				"You've chosen the 'Harpy Hollow Bones (Final Form)' perk. Further Increase damage while flying by 50% and increasing speed at the expense of toughness. Increase great dive damage by 50% and no longuer cause it to end flight.").withBuffs({'tou.mult':-0.05,'speed.mult':0.45});
 		public static const HeartOfTheStorm:PerkType = mk("Heart of the storm", "Heart of the storm",
 				"Increase the power of all Wind and Lightning racial abilities.",
 				"You've chosen the 'Heart of the storm' perk. Increase the power of all Wind and Lightning racial abilities.").withBuffs({'speed.mult':0.05});
@@ -6954,4 +6954,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}

@@ -177,7 +177,7 @@ public class CombatUI extends BaseCombatContent {
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 
 		// Submenus
-		function vampireBiteDuringGrapple(Position:int):void{
+		function vampireBiteDuringGrapple(Position:int):void {
 			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
 				addButton(Position, "Bite", combat.VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 				if (player.fatigueLeft() <= combat.physicalCost(20)) {

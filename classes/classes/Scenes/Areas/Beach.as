@@ -110,7 +110,7 @@ import classes.Scenes.SceneLib;
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					cancerScene.CancerEncounter();
 				},
-				chance: 1
+				chance: 100000
 			}, {
 				// Beach goo girl
 				name: "beach goo girl",
