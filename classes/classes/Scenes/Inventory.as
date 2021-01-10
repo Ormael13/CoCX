@@ -792,8 +792,8 @@ use namespace CoC;
 				pearlStorage.push(newSlot);
 			}
 		}
-
-		private function doWhatWithItem(slotNum:int):void {
+		/*
+		private function doWhatWithItem(slotNum:int):void { //Commented out due to players probably being used to spamming tfs. Alternative idea required. But the idea for this was an extra menu between use.
 			clearOutput();
 			//menu();
 			if (player.itemSlots[slotNum].itype is Useable) {
@@ -810,8 +810,17 @@ use namespace CoC;
 					addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
 					//itemGoNext();
 				}
-				//addButton(4,"Return to menu",itemGoNext)
-				/*
+			}
+			else {
+				outputText("You cannot use " + player.itemSlots[slotNum].itype.longName + "!\n\n");
+				itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
+			}
+		}
+		*/
+		private function doWhatWithItem(slotNum:int):void {
+			clearOutput();
+			if (player.itemSlots[slotNum].itype is Useable) {
+				var item:Useable = player.itemSlots[slotNum].itype as Useable;
 				if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
 					deleteItemPrompt(item, slotNum);
 					return;
@@ -821,12 +830,11 @@ use namespace CoC;
 					useItem(item, player.itemSlots[slotNum]);
 					return;
 				}
-				*/
 			}
 			else {
 				outputText("You cannot use " + player.itemSlots[slotNum].itype.longName + "!\n\n");
-				itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
 			}
+			itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
 		}
 
 		private function handleItemInInventory(x:int, item:Useable, slotNum:int):void{
