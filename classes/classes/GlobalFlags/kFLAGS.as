@@ -2972,7 +2972,7 @@ public static const UNKNOWN_FLAG_NUMBER_02963:int                               
 public static const UNKNOWN_FLAG_NUMBER_02964:int                                   = 2964;
 public static const SECONDARY_STATS_SCALING:int                                     = 2965;
 public static const MELEE_DAMAGE_OVERHAUL:int                                   	= 2966;
-public static const UNKNOWN_FLAG_NUMBER_02967:int                                   = 2967;
+public static const INVT_MGMT_TYPE:int                                   			= 2967;//Toggles Inventory Management type between existing and new.
 public static const SPEED_SCALLING:int                                   			= 2968;
 public static const STRENGTH_SCALLING:int                                   		= 2969;
 public static const SPELLS_COOLDOWNS:int                                   			= 2970;

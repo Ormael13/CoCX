@@ -572,13 +572,19 @@ public class GameSettings extends BaseContent {
 			outputText("Measurement: <b>Metric</b>\n Height and cock size will be measured in metres and centimetres.");
 		else
 			outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches.");
+		outputText("\n\n");
+
+		if (flags[kFLAGS.INVT_MGMT_TYPE] > 0)
+			outputText("Inventory Mgmt: <b>New</b>\n A prompt will appear asking you what you want to do with the item.");
+		else
+			outputText("Inventory Mgmt: <b>Old</b>\n Shift key is required for removing items.");
 
 		menu();
 		addButton(0, "Side Bar Font", toggleFont).hint("Toggle between old and new font for side bar.");
 		addButton(1, "Main BG", menuMainBackground).hint("Choose a background for main game interface.");
 		addButton(2, "Text BG", menuTextBackground).hint("Choose a background for text.");
 		addButton(3, "Sprites", menuSpriteSelect).hint("Turn sprites on/off and change sprite style preference.");
-
+		addButton(4, "Inventory Mgmt", toggleInvt).hint("Toggle between existing SHIFT to remove items vs an extra menu. Recommended to enable for Mobile users.");
 		addButton(5, "Toggle Images", toggleImages).hint("Enable or disable image pack.");
 		addButton(6, "Time Format", toggleTimeFormat).hint("Toggles between 12-hour and 24-hour format.");
 		addButton(7, "Measurements", toggleMeasurements).hint("Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
@@ -660,6 +666,11 @@ public class GameSettings extends BaseContent {
 		flags[kFLAGS.SPRITE_STYLE]      = style;
 		settingsScreenInterfaceSettings();
 
+	}
+	public function toggleInvt():void {
+		if (flags[kFLAGS.INVT_MGMT_TYPE] > 0) flags[kFLAGS.INVT_MGMT_TYPE] = 0;
+		else flags[kFLAGS.INVT_MGMT_TYPE] = 1;
+		settingsScreenInterfaceSettings();
 	}
 
 
