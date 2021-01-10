@@ -668,7 +668,7 @@ public class GameSettings extends BaseContent {
 
 	}
 	public function toggleInvt():void {
-		if (flags[kFLAGS.INVT_MGMT_TYPE] < 0) flags[kFLAGS.INVT_MGMT_TYPE] = 0;
+		if (flags[kFLAGS.INVT_MGMT_TYPE] > 0) flags[kFLAGS.INVT_MGMT_TYPE] = 0;
 		else flags[kFLAGS.INVT_MGMT_TYPE] = 1;
 		settingsScreenInterfaceSettings();
 	}
