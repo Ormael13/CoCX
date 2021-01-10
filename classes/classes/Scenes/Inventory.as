@@ -805,7 +805,10 @@ use namespace CoC;
 					addButton(0, "Use it", handleItemInInventory, 0, item, slotNum);
 					addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
 				} else {
-					itemGoNext();
+					menu();
+					addButton(0, "Next", itemGoNext);
+					addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
+					//itemGoNext();
 				}
 				//addButton(4,"Return to menu",itemGoNext)
 				/*
