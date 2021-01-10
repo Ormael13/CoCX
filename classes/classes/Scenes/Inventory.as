@@ -117,7 +117,7 @@ use namespace CoC;
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
-						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x);
+						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), doWhatWithItem, x);
 						//foundItem = true;
 					}
 				}
@@ -126,7 +126,7 @@ use namespace CoC;
 			if (page == 2) {
 				for (x = 10; x < 20; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
-						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x);
+						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), doWhatWithItem, x);
 						//foundItem = true;
 					}
 				}
@@ -793,10 +793,22 @@ use namespace CoC;
 			}
 		}
 
-		private function useItemInInventory(slotNum:int):void {
+		private function doWhatWithItem(slotNum:int):void {
 			clearOutput();
+			//menu();
 			if (player.itemSlots[slotNum].itype is Useable) {
 				var item:Useable = player.itemSlots[slotNum].itype as Useable;
+				if (item.canUse()) {
+					outputText("You grab " + player.itemSlots[slotNum].itype.longName + " and consider what you will do with it.\n\n"
+							+"Do you use it, or destroy it?\n\n");
+					menu();	//Can't get the menu to pop up...
+					addButton(0, "Use it", handleItemInInventory, 0, item, slotNum);
+					addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
+				} else {
+					itemGoNext();
+				}
+				//addButton(4,"Return to menu",itemGoNext)
+				/*
 				if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
 					deleteItemPrompt(item, slotNum);
 					return;
@@ -806,12 +818,26 @@ use namespace CoC;
 					useItem(item, player.itemSlots[slotNum]);
 					return;
 				}
+				*/
 			}
 			else {
 				outputText("You cannot use " + player.itemSlots[slotNum].itype.longName + "!\n\n");
+				itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
 			}
-			itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
 		}
+
+		private function handleItemInInventory(x:int, item:Useable, slotNum:int):void{
+			switch(x){
+				case 0:
+					if (!debug) player.itemSlots[slotNum].removeOneItem();
+					useItem(item, player.itemSlots[slotNum]);
+				return;
+				case 1:
+					deleteItemPrompt(item, slotNum);
+				return;
+			}
+		}
+
 
 		private function inventoryCombatHandler():void {
 			//Check if the battle is over. If not then go to the enemy's action.
