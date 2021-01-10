@@ -1174,30 +1174,39 @@ use namespace CoC;
 				addButton(13, "-2-", manageEquipment, page + 1);
 			}
 			if (page == 2) {
-				if (player.jewelry != JewelryLib.NOTHING) {
-					addButton(0, "Ring 1", unequipJewel1).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
-				}
-				else addButtonDisabled(0, "Ring 1", "You not have equipped any ring.");
-				if (player.jewelry2 != JewelryLib.NOTHING) {
-					addButton(1, "Ring 2", unequipJewel2).hint(player.jewelry2.description, capitalizeFirstLetter(player.jewelry2.name));
-				}
-				else addButtonDisabled(1, "Ring 2", "You not have equipped any ring.");
-				if (player.jewelry3 != JewelryLib.NOTHING) {
-					addButton(2, "Ring 3", unequipJewel3).hint(player.jewelry3.description, capitalizeFirstLetter(player.jewelry3.name));
-				}
-				else addButtonDisabled(2, "Ring 3", "You not have equipped any ring.");
-				if (player.jewelry4 != JewelryLib.NOTHING) {
-					addButton(3, "Ring 4", unequipJewel4).hint(player.jewelry4.description, capitalizeFirstLetter(player.jewelry4.name));
-				}
-				else addButtonDisabled(3, "Ring 4", "You not have equipped any ring.");
 				if (player.headJewelry != HeadJewelryLib.NOTHING) {
-					addButton(5, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
+					addButton(0, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
 				}
-				else addButtonDisabled(5, "Head Acc", "You not have equipped any head accesory.");
+				else addButtonDisabled(0, "Head Acc", "You not have equipped any head accesory.");
 				if (player.necklace != NecklaceLib.NOTHING) {
-					addButton(6, "Necklace", unequipNecklace).hint(player.necklace.description, capitalizeFirstLetter(player.necklace.name));
+					addButton(1, "Necklace", unequipNecklace).hint(player.necklace.description, capitalizeFirstLetter(player.necklace.name));
 				}
-				else addButtonDisabled(6, "Necklace", "You not have equipped any necklace.");
+				else addButtonDisabled(1, "Necklace", "You not have equipped any necklace.");
+				if (player.jewelry != JewelryLib.NOTHING) {
+					addButton(5, "Ring 1", unequipJewel1).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
+				}
+				else addButtonDisabled(5, "Ring 1", "You not have equipped any ring.");
+				if (player.jewelry3 != JewelryLib.NOTHING) {
+					addButton(6, "Ring 3", unequipJewel3).hint(player.jewelry3.description, capitalizeFirstLetter(player.jewelry3.name));
+				}
+				else {
+					if (player.hasPerk(PerkLib.ThirdRing)) addButtonDisabled(6, "Ring 3", "You not have equipped any ring.");
+					else addButtonDisabled(6, "Ring 3", "You not have equipped any ring. (Req. lvl 60+ perk: Third Ring)");
+				}
+				if (player.jewelry2 != JewelryLib.NOTHING) {
+					addButton(10, "Ring 2", unequipJewel2).hint(player.jewelry2.description, capitalizeFirstLetter(player.jewelry2.name));
+				}
+				else {
+					if (player.hasPerk(PerkLib.SecondRing)) addButtonDisabled(10, "Ring 2", "You not have equipped any ring.");
+					else addButtonDisabled(10, "Ring 2", "You not have equipped any ring. (Req. lvl 30+ perk: Second Ring)");
+				}
+				if (player.jewelry4 != JewelryLib.NOTHING) {
+					addButton(11, "Ring 4", unequipJewel4).hint(player.jewelry4.description, capitalizeFirstLetter(player.jewelry4.name));
+				}
+				else {
+					if (player.hasPerk(PerkLib.FourthRing)) addButtonDisabled(11, "Ring 4", "You not have equipped any ring.");
+					else addButtonDisabled(11, "Ring 4", "You not have equipped any ring. (Req. lvl 90+ perk: Fourth Ring)");
+				}
 				addButton(13, "-1-", manageEquipment, page - 1);
 			}
 			/*if (player.jewelry != JewelryLib.NOTHING) {

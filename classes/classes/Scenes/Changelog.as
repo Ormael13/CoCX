@@ -127,10 +127,10 @@ package classes.Scenes
 			outputText("-New effect for pregnancy crazy races Pregomania. (change by Liadri)\n");
 			outputText("-New head jewelery/accesory/misc (by Ormael): Ezekiel's Crown - buyable at Felix in Journey to the East inn. Cost 40 spirit stones. Negate up to 4 racial perk points negative effects.\n");
 			outputText("-New necklace (by Ormael): Ezekiel's Necklace - buyable at Felix in Journey to the East inn. Cost 50 spirit stones. Negate up to 5 racial perk points negative effects.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Inventory now has an extra sub-menu for using/deleting items. It can be toggled on or off. By default it's not toggled on. Toggle to change it is in settings. So now mobile users can delete items even when not having Shift button ^^ (change by Jtexc)\n");
+			outputText("-Tooltips for 2nd to 4th ring have added text if PC not yet have perk unlocking those slots.\n");
+			outputText("-Moved all interactions with Marae after first meeting from using Boat in Places to using Marae Islan also located in Places (and it will unlock after first time meeting Marae obviously).\n");
+			outputText("-Added greyed out buttons for all undiscovered dungeons. Also fixed missing check for Ebon Labyrinth to add button for dungeons submenu in Places.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
