@@ -795,47 +795,51 @@ use namespace CoC;
 		/*
 		private function doWhatWithItem(slotNum:int):void { //Commented out due to players probably being used to spamming tfs. Alternative idea required. But the idea for this was an extra menu between use.
 			clearOutput();
-			//menu();
-			if (player.itemSlots[slotNum].itype is Useable) {
-				var item:Useable = player.itemSlots[slotNum].itype as Useable;
-				if (item.canUse()) {
-					outputText("You grab " + player.itemSlots[slotNum].itype.longName + " and consider what you will do with it.\n\n"
-							+"Do you use it, or destroy it?\n\n");
-					menu();	//Can't get the menu to pop up...
-					addButton(0, "Use it", handleItemInInventory, 0, item, slotNum);
-					addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
-				} else {
-					menu();
-					addButton(0, "Next", itemGoNext);
-					addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
-					//itemGoNext();
-				}
-			}
-			else {
-				outputText("You cannot use " + player.itemSlots[slotNum].itype.longName + "!\n\n");
-				itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
-			}
+
 		}
 		*/
 		private function doWhatWithItem(slotNum:int):void {
 			clearOutput();
-			if (player.itemSlots[slotNum].itype is Useable) {
-				var item:Useable = player.itemSlots[slotNum].itype as Useable;
-				if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
-					deleteItemPrompt(item, slotNum);
-					return;
+			if (flags[kFLAGS.INVT_MGMT_TYPE] == 0){
+				if (player.itemSlots[slotNum].itype is Useable) {
+					var item:Useable = player.itemSlots[slotNum].itype as Useable;
+					if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+						deleteItemPrompt(item, slotNum);
+						return;
+					}
+					if (item.canUse()) { //If an item cannot be used then canUse should provide a description of why the item cannot be used
+						if (!debug) player.itemSlots[slotNum].removeOneItem();
+						useItem(item, player.itemSlots[slotNum]);
+						return;
+					}
 				}
-				if (item.canUse()) { //If an item cannot be used then canUse should provide a description of why the item cannot be used
-					if (!debug) player.itemSlots[slotNum].removeOneItem();
-					useItem(item, player.itemSlots[slotNum]);
-					return;
+				else {
+					outputText("You cannot use " + player.itemSlots[slotNum].itype.longName + "!\n\n");
+				}
+				itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
+			}	else{
+				if (player.itemSlots[slotNum].itype is Useable) {
+					var item:Useable = player.itemSlots[slotNum].itype as Useable;
+					if (item.canUse()) {
+						outputText("You grab " + player.itemSlots[slotNum].itype.longName + " and consider what you will do with it.\n\n"
+								+"Do you use it, or destroy it?\n\n");
+						menu();	//Can't get the menu to pop up...
+						addButton(0, "Use it", handleItemInInventory, 0, item, slotNum);
+						addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
+					} else {
+						menu();
+						addButton(0, "Next", itemGoNext);
+						addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
+						//itemGoNext();
+					}
+				}
+				else {
+					outputText("You cannot use " + player.itemSlots[slotNum].itype.longName + "!\n\n");
+					itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
 				}
 			}
-			else {
-				outputText("You cannot use " + player.itemSlots[slotNum].itype.longName + "!\n\n");
 			}
-			itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
-		}
+
 
 		private function handleItemInInventory(x:int, item:Useable, slotNum:int):void{
 			switch(x){
