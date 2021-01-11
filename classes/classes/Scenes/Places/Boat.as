@@ -50,40 +50,17 @@ public class Boat extends AbstractLakeContent
 				return;
 			}
 			outputText("You set out, wondering if you'll find any strange islands or creatures in the lake.\n\n");
-			//Alraune
-			if (rand(5) <= 2 && player.plantScore() >= 7 && (player.gender == 2 || player.gender == 3) && flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4 || flags[kFLAGS.FLOWER_LEVEL] == 4) && flags[kFLAGS.CORRUPTED_MARAE_KILLED] == 0) {
-				marae.alraunezeMe();
-				return;
-			}
-			//40% chance if not done with marae of meeting her.
-			if (rand(5) <= 2 && flags[kFLAGS.MARAE_QUEST_COMPLETE] <= 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0) {
+			//Marae
+			if (rand(3) == 0 && flags[kFLAGS.MARAE_ISLAND] < 1) {
 				marae.encounterMarae();
 				return;
 			}
-			if (rand(5) <= 2 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] == 1) {
-				marae.talkToMaraeAboutMinervaPurification();
-				return;
-			}
-			if (rand(5) <= 2 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] != 1 && flags[kFLAGS.LETHICE_DEFEATED] > 0 && flags[kFLAGS.PURE_MARAE_ENDGAME] < 2) {
-				marae.encounterPureMaraeEndgame();
-				return;
-			}
-			//20% chance of corrupt Marae followups
-			if ((debug || rand(5) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0) {
-				marae.level2MaraeEncounter();
-				return;
-			}
-			//Done to allow player who has both perks to fight Marae.
-			if ((debug || rand(5) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 2 && flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0) {
-				marae.level3MaraeEncounter();
-				return;
-			}
+			
 			//BUILD LIST OF CHOICES
-			var choice:Array = [0, 1, 2, 3];
+			var choice:Array = [0, 1, 2, 3, 4];
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && player.level > 2)
-				choice[choice.length] = 4;
-			if (player.hasKeyItem("Fishing Pole") >= 0) choice[choice.length] = 5;
-			choice[choice.length] = 6;
+				choice[choice.length] = 5;
+			if (player.hasKeyItem("Fishing Pole") >= 0) choice[choice.length] = 6;
 			//MAKE YOUR CHOICE
 			var selector:Number = choice[rand(choice.length)];
 			//RUN CHOSEN EVENT
@@ -103,16 +80,16 @@ public class Boat extends AbstractLakeContent
 					sharkGirlScene.sharkGirlEncounter(1);
 					return;
 				case 4:
-					lake.fetishZealotScene.zealotBoat();
+					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 1;
+					SceneLib.anemoneScene.mortalAnemoneeeeee();
 					return;
 				case 5:
+					lake.fetishZealotScene.zealotBoat();
+					return;
+				case 6:
 					outputText("This is a calm day at the lake, you managed to hold your boat in place and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole. You even spotted Calu in the distance doing the same thing from her usual sitting spot.\n\n");
 					outputText("<b>You got a fish!</b>");
 					inventory.takeItem(consumables.FREFISH, camp.returnToCampUseOneHour);
-					return;
-				case 6:
-					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 1;
-					SceneLib.anemoneScene.mortalAnemoneeeeee();
 					return;
 			}
 		}
