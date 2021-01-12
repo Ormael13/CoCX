@@ -635,9 +635,9 @@ public class PlayerAppearance extends BaseContent {
 		else outputText("inches");
 		outputText(" across.\n");
 		//Worms extra descript. To match as seen in infested hellhounds.
-		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) outputText("\nAcross it's surface, random lumps move rapidly around, further proof of your infested sack, and it's wormy inhabitants that both boost and increase your cum production.")
+		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) outputText("Across it's surface, random lumps move rapidly around, further proof of your infested sack, and it's wormy inhabitants that both boost and increase your cum production.\n")
 	} else {
-		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) outputText("\nDeep within your prostate you feel the worms moving, constantly rubbing against your trigger button, keeping you aroused and constantly churning up cum to be spewed out at a moment's notice.")
+		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) outputText("Deep within your prostate you feel the worms moving, constantly rubbing against your trigger button, keeping you aroused and constantly churning up cum to be spewed out at a moment's notice.\n")
 	}
 	//VAGOOZ
 	if(player.vaginas.length > 0)
