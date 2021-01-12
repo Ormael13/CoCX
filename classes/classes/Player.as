@@ -10,7 +10,6 @@ import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.ISexyPart;
 import classes.BodyParts.LowerBody;
-import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;

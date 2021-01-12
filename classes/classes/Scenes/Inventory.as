@@ -792,12 +792,6 @@ use namespace CoC;
 				pearlStorage.push(newSlot);
 			}
 		}
-		/*
-		private function doWhatWithItem(slotNum:int):void { //Commented out due to players probably being used to spamming tfs. Alternative idea required. But the idea for this was an extra menu between use.
-			clearOutput();
-
-		}
-		*/
 		private function doWhatWithItem(slotNum:int):void {
 			clearOutput();
 			if (player.itemSlots[slotNum].itype is Useable) {
