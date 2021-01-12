@@ -2833,6 +2833,8 @@ private function SparrableNPCsMenu():void {
 				outputText("\n\n\"<i>See you in the morning [name]...</i>\"\n");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Luna" && flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
 				outputText("You head to bed, Luna following you. ");
+				flags[kFLAGS.LUNA_JEALOUSY] -= (timeQ * 2);
+				if (flags[kFLAGS.LUNA_JEALOUSY] < -timeQ) flags[kFLAGS.LUNA_JEALOUSY] = -timeQ;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] >= 9) {
 					SceneLib.lunaFollower.sleepingFullMoon();
 					return;
@@ -4524,6 +4526,7 @@ public function wakeFromBadEnd():void {
 				lust += player.level;
 			}
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1 && flags[kFLAGS.IZMA_BROFIED] == 1) flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 0;
+			if (flags[kFLAGS.MARAE_ISLAND] < 1 && flags[kFLAGS.MET_MARAE] == 1) flags[kFLAGS.MARAE_ISLAND] = 1;
 			doNext(doCamp);
 			return;
 		}
@@ -5020,6 +5023,7 @@ public function wakeFromBadEnd():void {
 		if (player.hasPerk(PerkLib.Phylactery)) awardAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA);
 		if (player.jiangshiScore() >= 20) awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
 		if (player.yukiOnnaScore() >= 14) awardAchievement("Let It Go", kACHIEVEMENTS.EPIC_LET_IT_GO);
+		//wendigo achiev
 
 		if (player.hasStatusEffect(StatusEffects.AchievementsNormalShadowTotal)) {
 			//Shadow

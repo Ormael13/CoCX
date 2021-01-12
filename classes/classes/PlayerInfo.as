@@ -1151,12 +1151,27 @@ public class PlayerInfo extends BaseContent {
 		displayHeader("Mastery Stats");
 		// Begin Mastery Stats
 		var masteryStats:String = "";
-		masteryStats += "<b>Swords Mastery / Dao of Sword:</b>  " + player.masterySwordLevel + " / " + combat.maxSwordLevel() + "\n";
-		masteryStats += "<b>Axes Mastery / Dao of Axe:</b>  " + player.masteryAxeLevel + " / " + combat.maxAxeLevel() + "\n";
-		masteryStats += "<b>Maces/Hammers Mastery / Dao of Mace/Hammer:</b>  " + player.masteryMaceHammerLevel + " / " + combat.maxMaceHammerLevel() + "\n";
-		masteryStats += "<b>Dueling Swords Mastery / Dao of Dueling Sword:</b>  " + player.masteryDuelingSwordLevel + " / " + combat.maxDuelingSwordLevel() + "\n";
+		if (player.masterySwordLevel < combat.maxSwordLevel())
+			masteryStats += "<b>Swords Mastery / Dao of Sword:</b>  " + player.masterySwordLevel + " / " + combat.maxSwordLevel() + " (Exp: " + player.masterySwordXP + " / " + combat.SwordExpToLevelUp() + ")\n";
+		else
+			masteryStats += "<b>Swords Mastery / Dao of Sword:</b>  " + player.masterySwordLevel + " / " + combat.maxSwordLevel() + " (Exp: MAX)\n";
+		if (player.masteryAxeLevel < combat.maxAxeLevel())
+			masteryStats += "<b>Axes Mastery / Dao of Axe:</b>  " + player.masteryAxeLevel + " / " + combat.maxAxeLevel() + " (Exp: " + player.masteryAxeXP + " / " + combat.AxeExpToLevelUp() + ")\n";
+		else
+			masteryStats += "<b>Axes Mastery / Dao of Axe:</b>  " + player.masteryAxeLevel + " / " + combat.maxAxeLevel() + " (Exp: MAX)\n";
+		if (player.masteryMaceHammerLevel < combat.maxMaceHammerLevel())
+			masteryStats += "<b>Maces/Hammers Mastery / Dao of Mace/Hammer:</b>  " + player.masteryMaceHammerLevel + " / " + combat.maxMaceHammerLevel() + " (Exp: " + player.masteryMaceHammerXP + " / " + combat.MaceHammerExpToLevelUp() + ")\n";
+		else
+			masteryStats += "<b>Maces/Hammers Mastery / Dao of Mace/Hammer:</b>  " + player.masteryMaceHammerLevel + " / " + combat.maxMaceHammerLevel() + " (Exp: MAX)\n";
+		if (player.masteryDuelingSwordLevel < combat.maxDuelingSwordLevel())
+			masteryStats += "<b>Dueling Swords Mastery / Dao of Dueling Sword:</b>  " + player.masteryDuelingSwordLevel + " / " + combat.maxDuelingSwordLevel() + " (Exp: " + player.masteryDuelingSwordXP + " / " + combat.DuelingSwordExpToLevelUp() + ")\n";
+		else
+			masteryStats += "<b>Dueling Swords Mastery / Dao of Dueling Sword:</b>  " + player.masteryDuelingSwordLevel + " / " + combat.maxDuelingSwordLevel() + " (Exp: MAX)\n";
 		if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0) masteryStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
-		masteryStats += "<b>Spears Mastery / Dao of Spear:</b>  " + player.masterySpearLevel + " / " + combat.maxSpearLevel() + "\n";
+		if (player.masterySpearLevel < combat.maxSpearLevel())
+			masteryStats += "<b>Spears Mastery / Dao of Spear:</b>  " + player.masterySpearLevel + " / " + combat.maxSpearLevel() + " (Exp: " + player.masterySpearXP + " / " + combat.SpearExpToLevelUp() + ")\n";
+		else
+			masteryStats += "<b>Spears Mastery / Dao of Spear:</b>  " + player.masterySpearLevel + " / " + combat.maxSpearLevel() + " (Exp: MAX)\n";
 		masteryStats += "\n";
 		if (player.hasPerk(PerkLib.DualWield)) {
 			masteryStats += "<b>Dual Wield (Small) Skill:</b>  " + player.dualWSLevel + " / " + combat.maxDualWieldSmallLevel() + "\n";

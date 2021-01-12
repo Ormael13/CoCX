@@ -3006,4 +3006,4 @@ public static const LOW_STANDARDS_FOR_ALL:int                                   
 public static const HYPER_HAPPY:int                                                 = 2998;
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
 	}    
-}
+}
