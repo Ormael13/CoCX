@@ -640,11 +640,38 @@ public class PlayerAppearance extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) outputText("Deep within your prostate you feel the worms moving, constantly rubbing against your trigger button, keeping you aroused and constantly churning up cum to be spewed out at a moment's notice.\n")
 	}
 	//VAGOOZ
+		/*
+	if (player.vaginas.length > 0){
+		if(player.gender == 2 || player.gender == 3 && player.isTaur() && player.lowerBody != 26)
+			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.");
+		if(player.gender == 2 || player.gender == 3 && (player.isScylla() || player.isKraken()))
+			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.");
+		if (player.vaginas.length == 1){
+			if (player.lowerBody == LowerBody.MELKIE){
+				outputText("You have two sets of vaginal lips, one twice as big as the other and hiding the smaller within its folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+			} else {
+				outputText("Your " + vaginaDescript(0)+ " ")
+			}
+		} else {
+			if (player.lowerBody == LowerBody.MELKIE){
+				outputText("You have four sets of vaginal lips set in pairs, one twice as big as the other and hiding the smaller within its folds. Behind your first pair of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+			} else {
+				outputText("Your first " + vaginaDescript(0)+ " ")
+			}
+		}
+		for(var i:int=0; i<player.vaginas.length; i++){
+
+			if (player.vaginas.length > 1){
+				outputText("Your second " + vaginaDescript(0)+ " ")
+			}
+		}
+	}*/
+
 	if(player.vaginas.length > 0)
 	{
-		if(player.gender == 2 && player.isTaur() && player.lowerBody != 26)
+		if(player.gender == 2 || player.gender == 3 && player.isTaur() && player.lowerBody != 26)
 			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.");
-		if(player.gender == 2 && (player.isScylla() || player.isKraken()))
+		if(player.gender == 2 || player.gender == 3 && (player.isScylla() || player.isKraken()))
 			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.");
 		outputText("\n");
 		if (player.vaginas.length == 1){
@@ -652,7 +679,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText("Your " + vaginaDescript(0) + " is deep and wide just like that of a horse. Sometime you lament that most of your partners are no longer big enough to satisfy you. Inside you have a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 			}
 			else if (player.lowerBody == LowerBody.MELKIE){
-				outputText("You have two set of vaginal lips one twice as bigger then the other and hidding the smaller within it folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+				outputText("You have two sets of vaginal lips, one twice as big as the other and hiding the smaller within its folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 			}
 			else if(player.vaginaType() == VaginaClass.CANCER){
 				outputText("You have a foaming " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
@@ -667,9 +694,9 @@ public class PlayerAppearance extends BaseContent {
 			else{
             	outputText("You have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 			}
+			if(player.vaginas[0].virgin) outputText(" and an intact hymen");
+			outputText(".  ");
 		}
-		if(player.vaginas[0].virgin) outputText(" and an intact hymen");
-		outputText(".  ");
 		if (player.vaginas.length > 1){
             outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clits each.  ");
 		}
@@ -767,6 +794,7 @@ public class PlayerAppearance extends BaseContent {
 		//Line Drop for next descript!
 		outputText("\n");
 	}
+
 	//Genderless lovun'
 	if(player.cockTotal() == 0 && player.vaginas.length == 0)
 		outputText("\nYou have a curious lack of any sexual endowments.\n");
