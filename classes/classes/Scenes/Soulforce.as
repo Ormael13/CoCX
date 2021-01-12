@@ -292,8 +292,13 @@ use namespace CoC;
 			addButton(10, "All4Prestige", AddMaxBackpack03).hint("A11 th4t Prestige is Y0urs to T4ke!!!");
 			addButton(11, "PerkGalore1", PerkGalore1);
 			addButton(12, "PerkGalore2", PerkGalore2);
-			//addButton(13, "ClickItOnce", AddMaxBackpack3).hint("");
+			if (flags[kFLAGS.MARAE_ISLAND] < 1 && flags[kFLAGS.MET_MARAE] == 1) addButton(13, "ClickItOnce", AddMaxBackpack033).hint("Fix Marae Island");
 			addButton(14, "Back", SoulforceCheats);
+		}
+		public function AddMaxBackpack033():void {
+			outputText("\n\nFix completed");
+			flags[kFLAGS.MARAE_ISLAND] = 1;
+			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack03():void {
 			outputText("\n\nA11 th4t Prestige is Y0urs to T4ke!!!");

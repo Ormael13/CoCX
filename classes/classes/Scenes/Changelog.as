@@ -131,9 +131,10 @@ package classes.Scenes
 			outputText("-Tooltips for 2nd to 4th ring have added text if PC not yet have perk unlocking those slots.\n");
 			outputText("-Moved all interactions with Marae after first meeting from using Boat in Places to using Marae Islan also located in Places (and it will unlock after first time meeting Marae obviously).\n");
 			outputText("-Added greyed out buttons for all undiscovered dungeons. Also fixed missing check for Ebon Labyrinth to add button for dungeons submenu in Places.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Newly added masteries (seen on Mastery subpage of Stats) can be trained by using type of weapon they are related to. Each gained level in mastery/dao will increase that type of weapon dmg by 1%. Current cap is 10 + PC level (capped at lvl 90). Having human score at max 9 pts below max humanity will double mastery exp gaines, having max humanity will tripple exp gains. ");
+			outputText("Dealing critical damage double exp gains.\n");
+			outputText("-Sleeping with Luna will lower her jelousity meter at the same speed as it's rising during the day. But it will not never drop below 0 after night sleep thou.\n");
+			outputText("-On inventory page at melee weapon line would be added weapon type desc if PC use weapon that belong to one of major weapon types (it's related to mastery/dao on Masteries subpage so player will know which mastery will gain using that melee weapon).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
