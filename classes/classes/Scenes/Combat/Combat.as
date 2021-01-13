@@ -178,8 +178,14 @@ public class Combat extends BaseContent {
         return player.maxDualWieldLargeLevel();
     }
 	
+    public function dualWFLevel():Number {
+        return player.dualWFLevel;
+    }
     public function maxDualWieldFirearmsLevel():Number {
         return player.maxDualWieldFirearmsLevel();
+    }
+    public function DualWieldFirearmsExpToLevelUp():Number {
+        return player.DualWieldFirearmsExpToLevelUp();
     }
 
     public function maxTeaseLevel():Number {
@@ -2229,6 +2235,11 @@ public class Combat extends BaseContent {
         }
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
+		if (player.isSwordTypeWeapon()) accmod += Math.round((masterySwordLevel() - 1) / 2);
+		if (player.isAxeTypeWeapon()) accmod += Math.round((masteryAxeLevel() - 1) / 2);
+		if (player.isMaceHammerTypeWeapon()) accmod += Math.round((masteryMaceHammerLevel() - 1) / 2);
+		if (player.isDuelingTypeWeapon()) accmod += Math.round((masteryDuelingSwordLevel() - 1) / 2);
+		if (player.isSpearTypeWeapon()) accmod += Math.round((masterySpearLevel() - 1) / 2);
         return accmod;
     }
 
@@ -2321,6 +2332,7 @@ public class Combat extends BaseContent {
         if (player.hasKeyItem("Gun Scope") >= 0) faccmod += 40;
         if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) faccmod += 60;
         if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) faccmod += 80;
+		if (player.weaponRangePerk == "Dual Firearms") faccmod += Math.round((dualWFLevel() - 1) / 2);
         return faccmod;
     }
 
@@ -3171,6 +3183,7 @@ public class Combat extends BaseContent {
                     }
 				}
             }
+			if (player.weaponRangePerk == "Dual Firearms") damage *= (1 + (0.01 * dualWFLevel()));
             if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
                 //if ((damage == 0) ){
                 if (monster.inte > 0) {
@@ -3270,6 +3283,8 @@ public class Combat extends BaseContent {
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
                 damage = doDamage(damage, true, true);
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
+				if (crit) dualWieldFirearmsXP(1);
+				dualWieldFirearmsXP(1);
                 if (player.weaponRange == weaponsrange.TOUHOM3) {
                     outputText(" ");
                     doDamage(damage, true, true);
@@ -3306,12 +3321,16 @@ public class Combat extends BaseContent {
                 if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
                     outputText(".  It's clearly very painful. ");
                     doDamage(damage, true, true);
+					if (crit) dualWieldFirearmsXP(1);
+					dualWieldFirearmsXP(1);
                 } else {
                     if (!MSGControll) {
                         outputText(".  It's clearly very painful. ");
                         doDamage(damage, true, true);
                     }
                     if (crit) outputText(" <b>*Critical Hit!*</b>");
+					if (crit) dualWieldFirearmsXP(1);
+					dualWieldFirearmsXP(1);
                     //	if (flaga dla efektu arouse arrow) outputText(" tekst dla arouse arrow effect.");
                     //	if (flaga dla efektu poison arrow) outputText(" tekst dla poison arrow effect.");
                 }
@@ -8884,6 +8903,12 @@ public class Combat extends BaseContent {
         if (player.humanScore() == player.humanMaxScore()) player.spearXP(XP);
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.spearXP(XP);
         player.spearXP(XP);
+    }
+	
+	public function dualWieldFirearmsXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.dualWieldFirearmsXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldFirearmsXP(XP);
+        player.dualWieldFirearmsXP(XP);
     }
 
     //VICTORY OR DEATH?
