@@ -400,25 +400,25 @@ public class PlayerAppearance extends BaseContent {
 	//VAGOOZ
 	//Handling multiple vagooz.
 	if (player.vaginas.length > 0){
+		var vagLoop:int = 0
+		var clitExists:int = 0
 		if(player.gender == 2 || player.gender == 3 && player.isTaur() && player.lowerBody != 26)
 			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.");
 		if(player.gender == 2 || player.gender == 3 && (player.isScylla() || player.isKraken()))
 			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.");
 		if (player.vaginas.length == 1){
 			if (player.lowerBody == LowerBody.MELKIE){
-				outputText("\nYou have two sets of vaginal lips, one twice as big as the other and hiding the smaller within its folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+				outputText("\nYou have a set of vaginal lips, "); //one twice as big as the other and hiding the smaller within its folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 			} else {
 				outputText("\nYour " + vaginaDescript(0));
 			}
 		} else {
 			if (player.lowerBody == LowerBody.MELKIE){
-				outputText("\nYou have four sets of vaginal lips set in pairs, one twice as big as the other and hiding the smaller within its folds. Behind your first pair of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+				outputText("\nYou have two sets of vaginal lips, the first set"); //set in pairs, one twice as big as the other and hiding the smaller within its folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit, and behind your second set of lips, you have a " + vaginaDescript(1) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 			} else {
 				outputText("\nYour first " + vaginaDescript(0));
 			}
 		}
-		var vagLoop:int = 0
-		var clitExists:int = 0
 		for(var i:int=0; i<player.vaginas.length; i++){
 			var vagType:int = player.vaginaType(-1, i) //It's not iterating properly to register the second pussy.
 			switch(vagType){ //missing black sand trap, maybe melkie.
@@ -431,6 +431,9 @@ public class PlayerAppearance extends BaseContent {
 				case VaginaClass.SCYLLA:
 					outputText(" has no clit. Instead, several concentric rings of small nubs line up the walls of your gaping maw of a vagina, each easily as sensitive as a human clitoris would be.");
 					clitExists++
+					break;
+				case LowerBody.MELKIE:
+					outputText(" set is twice as big as the other, and the other hidden within it's folds. Your outer lips hide a")
 					break;
 				case VaginaClass.MANTICORE:
 					outputText(" is ultrasensitive, even the slightest touch is enough to make you moan out a melody. Your song-box hides a ");
