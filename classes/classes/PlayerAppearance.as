@@ -402,7 +402,7 @@ public class PlayerAppearance extends BaseContent {
 	if (player.vaginas.length > 0){
 		var vagLoop:int = 0
 		var clitExists:int = 0
-		if(player.gender == 2 || player.gender == 3 && player.isTaur() && player.lowerBody != 26)
+		if(player.gender == 2 || player.gender == 3 && player.isTaur() && player.lowerBody != 26)//26 is scylla.
 			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.");
 		if(player.gender == 2 || player.gender == 3 && (player.isScylla() || player.isKraken()))
 			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.");
