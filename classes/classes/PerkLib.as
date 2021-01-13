@@ -5816,7 +5816,7 @@ public class PerkLib
                 return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4 || player.cancerScore() >= 4;
             }, "Any insect race");
             TwinHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-				return player.centaurScore() >= 4 || player.unicornScore() >= 8 || player.cancerScore() >= 8;
+				return player.centaurScore() >= 4 || player.unicornScore() >= 8 || player.sphinxScore() >= 15 || player.cancerScore() >= 8;
             }, "Tauric or Unicorn race");
 			VampiricBloodsteam.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
                 return player.hasStatusEffect(StatusEffects.VampireThirst);
@@ -5946,7 +5946,7 @@ public class PerkLib
             TwinHeartEvolved.requireLevel(6)
 				.requirePerk(TwinHeart)
 				.requireCustomFunction(function (player:Player):Boolean {
-				return player.centaurScore() >= 8 || player.unicornScore() >= 8 || player.cancerScore() >= 8;
+				return player.centaurScore() >= 8 || player.unicornScore() >= 8 || player.sphinxScore() >= 16 || player.cancerScore() >= 8;
             }, "Tauric or Unicorn race");
 			ChimericalBodyInitialStage.requireLevel(6)
                     .requireCustomFunction(function (player:Player):Boolean {
@@ -6399,7 +6399,7 @@ public class PerkLib
             TwinHeartFinalForm.requireLevel(24)
 				.requirePerk(TwinHeartEvolved)
 				.requireCustomFunction(function (player:Player):Boolean {
-					return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.cancerScore() >= 12;
+					return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.sphinxScore() >= 17 || player.cancerScore() >= 12;
             }, "Tauric or Unicorn race");
 			VenomGlandsFinalForm.requireLevel(24).requirePerk(VenomGlandsEvolved).requireCustomFunction(function (player:Player):Boolean {
                 return player.spiderScore() >= 12 || player.nagaScore() >= 12 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;

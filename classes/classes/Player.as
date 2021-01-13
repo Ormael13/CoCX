@@ -8245,8 +8245,6 @@ use namespace CoC;
 			}
 			if (eyes.type == Eyes.CAT_SLITS)
 				sphinxCounter++;
-			if (ears.type == Ears.LION)
-				sphinxCounter++;
 			if (tongue.type == Tongue.CAT)
 				sphinxCounter++;
 			if (tailType == Tail.CAT)
@@ -8261,6 +8259,14 @@ use namespace CoC;
 				sphinxCounter += 4;
 			if (catCocks() > 0)
 				sphinxCounter++;
+			if (hasPartialCoat(Skin.FUR) || hasPlainSkinOnly())
+				sphinxCounter++;
+			if (findPerk(PerkLib.TwinHeart) > 0)
+				sphinxCounter += 2;
+			if (findPerk(PerkLib.TwinHeartEvolved) > 0)
+				sphinxCounter += 2;
+			if (findPerk(PerkLib.TwinHeartFinalForm) > 0)
+				sphinxCounter += 2;
 			if (findPerk(PerkLib.Flexibility) > 0)
 				sphinxCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
@@ -8419,11 +8425,11 @@ use namespace CoC;
 			}
 			if (wings.type == Wings.NONE)
 				unicornCounter += 2;
-			if (hasPlainSkinOnly())
-				unicornCounter++;
 			if (horseCocks() > 0)
 				unicornCounter++;
 			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
+				unicornCounter++;
+			if (hasPlainSkinOnly())
 				unicornCounter++;
 			if (findPerk(PerkLib.TwinHeart) > 0)
 				unicornCounter += 2;
@@ -11039,13 +11045,13 @@ use namespace CoC;
 				}
 			}//+10 / 10 - 20
 			if (sphinxScore() >= 14) {
-				if (sphinxScore() >= 23) {
-					maxStrCap2 += 80;
+				if (sphinxScore() >= 26) {
+					maxStrCap2 += 110;
 					maxTouCap2 -= 20;
 					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 70;
 					else maxSpeCap2 += 60;
 					maxIntCap2 += 130;
-					maxWisCap2 += 95;
+					maxWisCap2 += 110;
 				}
 				else {
 					maxStrCap2 += 50;
