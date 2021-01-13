@@ -3870,7 +3870,7 @@ use namespace CoC;
 			if (TopRace == "thunderbird") {
 				if (TopScore >= 12) {
 					if (TopScore >= 21) race = "greater thunderbird";
-					else if (TopScore >= 15) race = "thunderbird";
+					else if (TopScore >= 16) race = "thunderbird";
 					else race = "half thunderbird";
 				}
 			}
@@ -4177,7 +4177,12 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 14;//	104-r99	119	135	152	180	199	219(potem legendary/mythical stages?)
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				internalChimeraRatingCounter -= 20;
-			if (jewelry == game.jewelries.EZEKIELS) internalChimeraRatingCounter -= 1;
+			if (jewelryName == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
+			if (jewelryName2 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
+			if (jewelryName3 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
+			if (jewelryName4 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
+			if (headjewelryName == "Ezekiel's Crown") internalChimeraRatingCounter -= 4;
+			if (necklaceName == "Ezekiel's Necklace") internalChimeraRatingCounter -= 5;
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) internalChimeraRatingCounter -= 3;//6
 			//if (flags[kFLAGS.GAME_DIFFICULTY] == 1) internalChimeraRatingCounter -= 3;//tyle ile stopni perków rasowych
 			if (internalChimeraRatingCounter < 0 || flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) internalChimeraRatingCounter = 0;
@@ -4621,7 +4626,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (orcScore() >= 11)
 				grandchimeraCounter++;
-*/			if (thunderbirdScore() >= 15)
+*/			if (thunderbirdScore() >= 16)
 				grandchimeraCounter++;
 			if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI)
 				grandchimeraCounter++;
@@ -7488,11 +7493,11 @@ use namespace CoC;
 				thunderbirdCounter++;
 			if (findPerk(PerkLib.HarpyHollowBonesFinalForm) >= 0)
 				thunderbirdCounter++;
-			if (findPerk(PerkLib.HeartOfTheStorm) >= 0 && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
+			if ((findPerk(PerkLib.HeartOfTheStorm) >= 0 || findPerk(PerkLib.HarpyHollowBones) >= 0) && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
 				thunderbirdCounter++;
-			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
+			if ((findPerk(PerkLib.HeartOfTheStormEvolved) >= 0 || findPerk(PerkLib.HarpyHollowBonesEvolved) >= 0) && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
 				thunderbirdCounter++;
-			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0 && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
+			if ((findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0 || findPerk(PerkLib.HarpyHollowBonesFinalForm) >= 0) && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
 				thunderbirdCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				thunderbirdCounter += 50;
@@ -10005,6 +10010,8 @@ use namespace CoC;
 				bonesandmarrowMutations--;
 			if (findPerk(PerkLib.DraconicBones) >= 0)
 				bonesandmarrowMutations--;
+			if (findPerk(PerkLib.HarpyHollowBones) >= 0)
+				bonesandmarrowMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				bonesandmarrowMutations++;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
@@ -11533,18 +11540,18 @@ use namespace CoC;
 			}//+10/10-20
 			if (thunderbirdScore() >= 12) {
 				if (thunderbirdScore() >= 21) {
-					maxTouCap2 -= 15;
-					maxSpeCap2 += 150;
-					maxLibCap2 += 180;
+					maxTouCap2 -= 25;
+					maxSpeCap2 += 155;
+					maxLibCap2 += 185;
 				}
-				else if (thunderbirdScore() >= 15) {
+				else if (thunderbirdScore() >= 16) {
 					maxTouCap2 -= 20;
-					maxSpeCap2 += 115;
-					maxLibCap2 += 130;
+					maxSpeCap2 += 120;
+					maxLibCap2 += 140;
 				}
 				else {
-					maxTouCap2 -= 20;
-					maxSpeCap2 += 100;
+					maxTouCap2 -= 15;
+					maxSpeCap2 += 95;
 					maxLibCap2 += 100;
 				}
 			}//+10/10-20
@@ -12785,24 +12792,209 @@ use namespace CoC;
 		}
 
 		public function maxSwordLevel():Number {
-			var maxLevel:Number = 5;
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
 			return maxLevel;
+		}
+		public function SwordExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masterySwordLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masterySwordLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+
+		public function swordXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masterySwordXP++;
+					XP--;
+				}
+				else {
+					masterySwordXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masterySwordLevel < maxSwordLevel() && masterySwordXP >= SwordExpToLevelUp()) {
+					outputText("\n\n<b>Dao of Sword leveled up to " + (masterySwordLevel + 1) + "!</b>");
+					masterySwordLevel++;
+					masterySwordXP = 0;
+				}
+			}
 		}
 		public function maxAxeLevel():Number {
-			var maxLevel:Number = 5;
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
 			return maxLevel;
+		}
+		public function AxeExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryAxeLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryAxeLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+
+		public function axeXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryAxeXP++;
+					XP--;
+				}
+				else {
+					masteryAxeXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryAxeLevel < maxAxeLevel() && masteryAxeXP >= AxeExpToLevelUp()) {
+					outputText("\n\n<b>Dao of Axe leveled up to " + (masteryAxeLevel + 1) + "!</b>");
+					masteryAxeLevel++;
+					masteryAxeXP = 0;
+				}
+			}
 		}
 		public function maxMaceHammerLevel():Number {
-			var maxLevel:Number = 5;
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
 			return maxLevel;
+		}
+		public function MaceHammerExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryMaceHammerLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryMaceHammerLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+
+		public function macehammerXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryMaceHammerXP++;
+					XP--;
+				}
+				else {
+					masteryMaceHammerXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryMaceHammerLevel < maxMaceHammerLevel() && masteryMaceHammerXP >= MaceHammerExpToLevelUp()) {
+					outputText("\n\n<b>Dao of Mace/Hammer leveled up to " + (masteryMaceHammerLevel + 1) + "!</b>");
+					masteryMaceHammerLevel++;
+					masteryMaceHammerXP = 0;
+				}
+			}
 		}
 		public function maxDuelingSwordLevel():Number {
-			var maxLevel:Number = 5;
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
 			return maxLevel;
 		}
+		public function DuelingSwordExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryDuelingSwordLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryDuelingSwordLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+
+		public function duelingswordXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryDuelingSwordXP++;
+					XP--;
+				}
+				else {
+					masteryDuelingSwordXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryDuelingSwordLevel < maxDuelingSwordLevel() && masteryDuelingSwordXP >= DuelingSwordExpToLevelUp()) {
+					outputText("\n\n<b>Dao of Dueling Sword leveled up to " + (masteryDuelingSwordLevel + 1) + "!</b>");
+					masteryDuelingSwordLevel++;
+					masteryDuelingSwordXP = 0;
+				}
+			}
+		}
 		public function maxSpearLevel():Number {
-			var maxLevel:Number = 5;
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
 			return maxLevel;
+		}
+		public function SpearExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masterySpearLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masterySpearLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+
+		public function spearXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masterySpearXP++;
+					XP--;
+				}
+				else {
+					masterySpearXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masterySpearLevel < maxSpearLevel() && masterySpearXP >= SpearExpToLevelUp()) {
+					outputText("\n\n<b>Dao of Spear leveled up to " + (masterySpearLevel + 1) + "!</b>");
+					masterySpearLevel++;
+					masterySpearXP = 0;
+				}
+			}
 		}
 		public function maxDualWieldSmallLevel():Number {
 			var maxLevel:Number = 5;

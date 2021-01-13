@@ -116,24 +116,54 @@ public class Combat extends BaseContent {
         return mod;
     }
 
+    public function masterySwordLevel():Number {
+        return player.masterySwordLevel;
+    }
     public function maxSwordLevel():Number {
         return player.maxSwordLevel();
     }
-	
-	public function maxAxeLevel():Number {
-        return player.maxAxeLevel();
+    public function SwordExpToLevelUp():Number {
+        return player.SwordExpToLevelUp();
     }
 	
+	public function masteryAxeLevel():Number {
+        return player.masteryAxeLevel;
+    }
+    public function maxAxeLevel():Number {
+        return player.maxAxeLevel();
+    }
+    public function AxeExpToLevelUp():Number {
+        return player.AxeExpToLevelUp();
+    }
+	
+    public function masteryMaceHammerLevel():Number {
+        return player.masteryMaceHammerLevel;
+    }
     public function maxMaceHammerLevel():Number {
         return player.maxMaceHammerLevel();
     }
-	
-	public function maxDuelingSwordLevel():Number {
-        return player.maxDuelingSwordLevel();
+    public function MaceHammerExpToLevelUp():Number {
+        return player.MaceHammerExpToLevelUp();
     }
 	
-	public function maxSpearLevel():Number {
+	public function masteryDuelingSwordLevel():Number {
+        return player.masteryDuelingSwordLevel;
+    }
+    public function maxDuelingSwordLevel():Number {
+        return player.maxDuelingSwordLevel();
+    }
+    public function DuelingSwordExpToLevelUp():Number {
+        return player.DuelingSwordExpToLevelUp();
+    }
+	
+	public function masterySpearLevel():Number {
+        return player.masterySpearLevel;
+    }
+    public function maxSpearLevel():Number {
         return player.maxSpearLevel();
+    }
+    public function SpearExpToLevelUp():Number {
+        return player.SpearExpToLevelUp();
     }
 	
 	public function maxDualWieldSmallLevel():Number {
@@ -155,7 +185,6 @@ public class Combat extends BaseContent {
     public function maxTeaseLevel():Number {
         return player.maxTeaseLevel();
     }
-
     public function teaseExpToLevelUp():Number {
         return player.teaseExpToLevelUp();
     }
@@ -735,31 +764,33 @@ public class Combat extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 3)) {
 			bd = buttons.add("Heal Zenji", HealZenji);
 		}
-		if (player.hasPerk(PerkLib.JobGolemancer) && flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0) bd = buttons.add("Golems", GolemsMenu);
+		if (player.hasPerk(PerkLib.JobGolemancer) && (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0 || flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 0)) bd = buttons.add("Golems", GolemsMenu);
 		if (player.hasPerk(PerkLib.JobElementalConjurer) && player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) bd = buttons.add("Elem.Asp", ElementalAspectsMenu);
     }
 	public function GolemsMenu():void {
 		menu();
-        if (monster.isFlying() && !player.hasPerk(PerkLib.ExpertGolemMaker)) {
-            addButtonDisabled(0, "Send T.Gol/1", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
-            if (monster.plural) {
-				addButtonDisabled(1, "Send T.Gol/3", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
-				addButtonDisabled(2, "Send T.Gol/5", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
+		if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0) {
+			if (monster.isFlying() && !player.hasPerk(PerkLib.ExpertGolemMaker)) {
+				addButtonDisabled(0, "Send T.Gol/1", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
+				if (monster.plural) {
+					addButtonDisabled(1, "Send T.Gol/3", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
+					addButtonDisabled(2, "Send T.Gol/5", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this!)");
+				}
+				if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButtonDisabled(3, "KamikazeProtocol", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this)");
 			}
-            if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButtonDisabled(3, "KamikazeProtocol", "Your golems can't attack flying targets. (Only golems made by an expert golem maker can do this)");
-        }
-		else {
-			addButton(0, "Send T.Gol/1", combat.pspecials.sendTemporalGolem1)
-				.hint("Send one golem from your bag to attack the enemy. <b>After attacking, the golem will fall apart and its core can shatter, leaving it unable to be reused in future!</b>");
-			if (monster.plural) {
-				if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 2) addButton(1, "Send T.Gol/3", combat.pspecials.sendTemporalGolem3)
-					.hint("Send three golems from your bag to attack the enemy. <b>After attacking, the golem will fall apart and its core can shatter, leaving it unable to be reused in future!</b>");
-				if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 4) addButton(2, "Send T.Gol/5", combat.pspecials.sendTemporalGolem5)
-					.hint("Send five golems from your bag to attack the enemy. <b>After attacking, the golem will fall apart and its core can shatter, leaving it unable to be reused in future!</b>");
+			else {
+				addButton(0, "Send T.Gol/1", combat.pspecials.sendTemporalGolem1)
+					.hint("Send one golem from your bag to attack the enemy. <b>After attacking, the golem will fall apart and its core can shatter, leaving it unable to be reused in future!</b>");
+				if (monster.plural) {
+					if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 2) addButton(1, "Send T.Gol/3", combat.pspecials.sendTemporalGolem3)
+						.hint("Send three golems from your bag to attack the enemy. <b>After attacking, the golem will fall apart and its core can shatter, leaving it unable to be reused in future!</b>");
+					if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 4) addButton(2, "Send T.Gol/5", combat.pspecials.sendTemporalGolem5)
+						.hint("Send five golems from your bag to attack the enemy. <b>After attacking, the golem will fall apart and its core can shatter, leaving it unable to be reused in future!</b>");
+				}
+				if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButton(3, "KamikazeProtocol", combat.pspecials.sendTemporalGolemKamikazeProtocol)
+					.hint("Send all temporal golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart!</b>");
 			}
-			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButton(3, "KamikazeProtocol", combat.pspecials.sendTemporalGolemKamikazeProtocol)
-				.hint("Send all temporal golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart!</b>");
-        }
+		}
         if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 0) {
             if (monster.isFlying() && !player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
 				addButtonDisabled(4, "Send P.Gol/1", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
@@ -4325,7 +4356,12 @@ public class Combat extends BaseContent {
             }
             if (player.weapon == weapons.BFGAUNT) damage *= 4;
             if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
-            //Determine if critical hit!
+			if (player.isSwordTypeWeapon()) damage *= (1 + (0.01 * masterySwordLevel()));
+			if (player.isAxeTypeWeapon()) damage *= (1 + (0.01 * masteryAxeLevel()));
+			if (player.isMaceHammerTypeWeapon()) damage *= (1 + (0.01 * masteryMaceHammerLevel()));
+			if (player.isDuelingTypeWeapon()) damage *= (1 + (0.01 * masteryDuelingSwordLevel()));
+			if (player.isSpearTypeWeapon()) damage *= (1 + (0.01 * masterySpearLevel()));
+			//Determine if critical hit!
             var crit:Boolean = false;
             var critChance:int = 5;
             var critDamage:Number = 1.75;
@@ -4536,10 +4572,8 @@ public class Combat extends BaseContent {
                         if (player.hasPerk(PerkLib.SuperSensual) && player.hasPerk(PerkLib.Sensual)) teaseXP(2);
                         else teaseXP(1);
                     }
-
                 } else if (vbladeeffect) outputText("As you strike, the sword shine with a red glow as somehow you aim straight for [monster a] [monster name] throat. ");
                 else if (MDODialogs) {
-
                 } else if (!MSGControll) {
                     outputText("You hit [monster a] [monster name]! "); // for not displaying the same msg a lot of times.
                 }
@@ -4574,6 +4608,26 @@ public class Combat extends BaseContent {
                     if (player.spe >= 300) damage += damage;
                 }
                 if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage += Math.round(damage * 0.3);
+				if (player.isSwordTypeWeapon()) {
+					if (crit) swordXP(1);
+					swordXP(1);
+				}
+				if (player.isAxeTypeWeapon()) {
+					if (crit) axeXP(1);
+					axeXP(1);
+				}
+				if (player.isMaceHammerTypeWeapon()) {
+					if (crit) macehammerXP(1);
+					macehammerXP(1);
+				}
+				if (player.isDuelingTypeWeapon()) {
+					if (crit) duelingswordXP(1);
+					duelingswordXP(1);
+				}
+				if (player.isSpearTypeWeapon()) {
+					if (crit) spearXP(1);
+					spearXP(1);
+				}
             }
             if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75) {
                 if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [monster a] [monster name]'s defenses!");
@@ -8804,6 +8858,32 @@ public class Combat extends BaseContent {
     public function teaseXP(XP:Number = 0):void {
         if (player.armor == armors.SCANSC) player.SexXP(XP);
         player.SexXP(XP);
+    }
+	
+	public function swordXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.swordXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.swordXP(XP);
+        player.swordXP(XP);
+    }
+	public function axeXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.axeXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.axeXP(XP);
+        player.axeXP(XP);
+    }
+	public function macehammerXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.macehammerXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.macehammerXP(XP);
+        player.macehammerXP(XP);
+    }
+	public function duelingswordXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.duelingswordXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.duelingswordXP(XP);
+        player.duelingswordXP(XP);
+    }
+	public function spearXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.spearXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.spearXP(XP);
+        player.spearXP(XP);
     }
 
     //VICTORY OR DEATH?

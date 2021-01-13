@@ -1299,14 +1299,14 @@ public static const EXCELLIA_MALE_COW_KIDS:int                                  
 public static const EXCELLIA_FEMALE_KIDS:int                                   		= 1291;
 public static const EXCELLIA_MALE_KIDS:int                                   		= 1292;
 public static const EASTER_BUNNY_EGGS_STORED:int                                   	= 1293;
-public static const UNKNOWN_FLAG_NUMBER_01294:int                                   = 1294;
+public static const UNKNOWN_FLAG_NUMBER_01294:int 		                            = 1294;
 public static const UNKNOWN_FLAG_NUMBER_01295:int                                   = 1295;
 public static const UNKNOWN_FLAG_NUMBER_01296:int                                   = 1296;
 public static const UNKNOWN_FLAG_NUMBER_01297:int                                   = 1297;
 public static const UNKNOWN_FLAG_NUMBER_01298:int                                   = 1298;
 public static const UNKNOWN_FLAG_NUMBER_01299:int                                   = 1299;
 public static const KAIBA_SHELFS:int                                   				= 1300;
-public static const UNKNOWN_FLAG_NUMBER_01301:int                                   = 1301;
+public static const MARAE_ISLAND:int                                   				= 1301;
 public static const UNKNOWN_FLAG_NUMBER_01302:int                                   = 1302;
 public static const UNKNOWN_FLAG_NUMBER_01303:int                                   = 1303;
 public static const UNKNOWN_FLAG_NUMBER_01304:int                                   = 1304;
@@ -2972,7 +2972,7 @@ public static const UNKNOWN_FLAG_NUMBER_02963:int                               
 public static const UNKNOWN_FLAG_NUMBER_02964:int                                   = 2964;
 public static const SECONDARY_STATS_SCALING:int                                     = 2965;
 public static const MELEE_DAMAGE_OVERHAUL:int                                   	= 2966;
-public static const UNKNOWN_FLAG_NUMBER_02967:int                                   = 2967;
+public static const INVT_MGMT_TYPE:int                                   			= 2967;//Toggles Inventory Management type between existing and new.
 public static const SPEED_SCALLING:int                                   			= 2968;
 public static const STRENGTH_SCALLING:int                                   		= 2969;
 public static const SPELLS_COOLDOWNS:int                                   			= 2970;

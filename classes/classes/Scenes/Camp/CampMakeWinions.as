@@ -120,17 +120,18 @@ package classes.Scenes.Camp
 		public function accessMakeWinionsMainMenu():void {
 			clearOutput();
 			outputText("What helper would you like to make?\n\n");
-			outputText("Stored golem cores for future reuse when making new golems: " + flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + " / " + maxReusableGolemCoresBagSize() + "\n");
-			if (player.hasPerk(PerkLib.JobGolemancer)) outputText("Temporal Golems Bag: " + flags[kFLAGS.TEMPORAL_GOLEMS_BAG] + " / " + maxTemporalGolemsBagSize() + " golems\n");
-			if (player.hasPerk(PerkLib.MasterGolemMaker)) outputText("Stone Golems Bag: " + flags[kFLAGS.PERNAMENT_GOLEMS_BAG] + " / " + maxPernamentStoneGolemsBagSize() + " golems\n");
-			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) outputText("Improved Stone Golems Bag: " + flags[kFLAGS.IMPROVED_PERNAMENT_GOLEMS_BAG] + " / " + maxPernamentImprovedStoneGolemsBagSize() + " golems\n");
+			outputText("<b>Stored golem cores for future reuse when making new golems:</b> " + flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] + " / " + maxReusableGolemCoresBagSize() + "\n");
+			if (player.hasPerk(PerkLib.JobGolemancer)) outputText("<b>Temporal Golems Bag:</b> " + flags[kFLAGS.TEMPORAL_GOLEMS_BAG] + " / " + maxTemporalGolemsBagSize() + "\n");
+			if (player.hasPerk(PerkLib.MasterGolemMaker)) outputText("<b>Stone Golems Bag:</b> " + flags[kFLAGS.PERNAMENT_GOLEMS_BAG] + " / " + maxPernamentStoneGolemsBagSize() + "\n");
+			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) outputText("<b>Improved Stone Golems Bag:</b> " + flags[kFLAGS.IMPROVED_PERNAMENT_GOLEMS_BAG] + " / " + maxPernamentImprovedStoneGolemsBagSize() + " golems\n");
+			outputText("<b>Stones:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "\n");
 			menu();
 			if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "T.S.Golem", makeTemporalStoneGolem).hint("Make the most simple golem out of a pile of stones.  <b>It will crumble after one attack!</b>\n\nCost: 1 Golem Core, " + temporalGolemMakingCost() + " Mana");
 			if (player.hasPerk(PerkLib.MasterGolemMaker)) addButton(1, "P.S.Golem", makePernamentStoneGolem).hint("Make stone golem.\n\nCost: 1 Golem Core, 10 Stones, " + pernamentStoneGolemMakingCost() + " Mana");
 			/*if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) */addButtonDisabled(2, "M.S.Golem", "Make metal golem.\n\nSoon");//Cost: 2 Golem Plasma Cores, 10 Stones, 10 Metal Plates, 10 Mechanisms, i coś jeszcze innego? " + pernamentSteelGolemMakingCost() + " Mana
 			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButton(5, "T.S.Golem(5x)", makeTemporalStoneGolems).hint("Make five of most simple golems.  <b>They will crumble after one attack!</b>\n\nCost: 5 Golem Core, " + temporalGolemMakingCost() * 5 + " Mana");
 			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) addButton(6, "I.P.S.Golem", makePernamentImprovedStoneGolem).hint("Make improved stone golem.\n\nCost: 3 Golem Cores, 100 Stones, " + pernamentImprovedStoneGolemMakingCost() + " Mana");
-			addButtonDisabled(7, "I.M.S.Golem", "Make improved metal golem.\n\nSoon");//Cost: 2 Golem ?Plasma? Cores, 10 Stones, 10 Metal Plates, 10 Metal Plates, " + pernamentImprovedSteelGolemMakingCost() + " Mana
+			addButtonDisabled(7, "I.M.S.Golem", "Make improved metal golem.\n\nSoon");//Cost: 2 Golem ?Plasma? Cores, 10 Stones, 10 Metal Plates, 10 Mechanisms, " + pernamentImprovedSteelGolemMakingCost() + " Mana
 			addButtonDisabled(12, "Upgrades", "Options to upgrade pernament golems.");
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(13, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.");
 			addButton(14, "Back", playerMenu);
@@ -197,7 +198,7 @@ package classes.Scenes.Camp
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (!player.hasItem(useables.GOLCORE, 1)) {
+			else if (!player.hasItem(useables.GOLCORE, 1) && flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < 1) {
 				outputText("You lack a golem core to finish the creation of a golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
@@ -230,7 +231,7 @@ package classes.Scenes.Camp
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
-			else if (!player.hasItem(useables.GOLCORE, 3)) {
+			else if (!player.hasItem(useables.GOLCORE, 3) && flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < 3) {
 				outputText("You lack golem cores to finish golem creation.");
 				doNext(accessMakeWinionsMainMenu);
 				return;

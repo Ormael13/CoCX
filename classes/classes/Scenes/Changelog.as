@@ -97,6 +97,16 @@ package classes.Scenes
 			outputText("-Job: Elemental Conjuer now allow to summon 2 elementals.\n");
 			outputText("-Added Envocation Tome option to elementals summonig menu - it would allow to read informations about elementals that PC can currently summon. So to give some idea which elemental would be most useful to be summoned in current situation PC is.\n");
 			outputText("-Moved Elementals specials and Golems attack options into 2 menus in Other submenu in combat menu.\n");
+			outputText("-5th subpage on Stats page having all various trackers for mastery / skill progress.\n");
+			outputText("-Spectral Scream have additional effect of dealing magic damage to enemy. Enemy Wendigo scream also would deal dmg on top of causing fear.\n");
+			outputText("-Fenrir collar been renamed to Gleipnir collar. Also there is slight diff scene after 2nd time finding the shrine.\n");
+			outputText("-Added passive gains of soulforce (5) and lust/wrath (1) on level up. Also first 6 level up would grant 5x more increase to max HP, Fatigue, Mana, Soulforce, Wrath and Lust.\n");
+			outputText("-New scene for Aiko and PC with kitsune tails by Jtexc.\n");
+			outputText("-Jtecx small addition to kitsunes about corruption effects on PC appearance.\n");
+			outputText("-Revisions/corrections to Luna, Kitsune, Fenrir Collar content by Scary Dragon Mom.\n");
+			outputText("-Race & body part organization + enhanced body part editor (change by aimozg).\n");
+			outputText("-Added conversation about Luna to Aunt Nancy. (change by Scary Dragon Mom)\n");
+			outputText("-Game now knows if the full round attack is done in or includes feral ……combat. (change by Liadri)\n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -106,33 +116,41 @@ package classes.Scenes
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
-			outputText("-New scene for Aiko and PC with kitsune tails by Jtexc.\n");
-			outputText("-Revisions/corrections to Luna, Kitsune, Fenrir Collar content by Scary Dragon Mom.\n");
 			outputText("-Change to handling dual weapons. No need ot get tons of dual wield perks and only one to rule them all... Dual Wield perk is all what PC would need. Of course now that will mean dual wielding would have penalties: -50% damage and -25% accuracy.");// There would be two ways to offset those: get specific for that type of weapons perk 
 			//outputText("(so current dual wield (type of weapon) perks will have role but not of 'I need it to use this type of weapons) or simply training/using them to gain better mastery of using them.\n");
-			outputText("-Jtecx small addition to kitsunes about corruption effects on PC appearance.\n");
-			outputText("-5th subpage on Stats page having all various trackers for mastery / skill progress.\n");
-			outputText("-Race & body part organization + enhanced body part editor (by aimozg).\n");
 			outputText("-Added mastery tracker for various types of meele weapons to 5th subpage of Stats.\n");
 			outputText("-Dual Wield perks like (Small), (Large), etc. that aren't based ones now have added req. to also have Dual Wield perk.\n");// They would allow to increase ?training efficiency/max level of respective dual wield skill/both?
-			outputText("-Spectral Scream have additional effect of dealing magic damage to enemy. Enemy Wendigo scream also would deal dmg on top of causing fear.\n");
-			outputText("-Fenrir collar been renamed to Gleipnir collar. Also there is slight diff scene after 2nd time finding the shrine.\n");
-			outputText("-Added passive gains of soulforce (5) and lust/wrath (1) on level up. Also first 6 level up would grant 5x more increase to max HP, Fatigue, Mana, Soulforce, Wrath and Lust.\n");
-			outputText("-Added two new skill to Fenrir Soulstrike and Winter Claw\n");
+			outputText("-Added two new skill to Fenrir Soulstrike and Winter Claw.\n");
 			outputText("-New mutation perk: Verdant Might. Req. 11+ in plant/alraune score. Effects: As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.\n");
-			outputText("-New ring (by Ormael): Ezekiel's Signet - buyable at Felix in Journey to the East inn. Cost 100 gems. Negate 1 racial perk point negative effect.\n");//Negate up to 2 racial perk points negative effects
-			outputText("-Game now knows if the full round attack is done in or includes feral ……combat. (change by Liadri)\n");
-			outputText("-3 new perk for harpies and score update for all members of the harpy family tree\n");
-			outputText("-Added conversation about Luna to Aunt Nancy. (by Scary Dragon Mom)\n");
+			outputText("-New ring (by Ormael): Ezekiel's Signet - buyable at Felix in Journey to the East inn. Cost 10 spirit stones. Negate 1 racial perk point negative effect.\n");
+			outputText("-3 new perk for harpies and score update for all members of the harpy family tree.\n");
+			outputText("-New effect for pregnancy crazy races Pregomania. (change by Liadri)\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): Ezekiel's Crown - buyable at Felix in Journey to the East inn. Cost 40 spirit stones. Negate up to 4 racial perk points negative effects.\n");
+			outputText("-New necklace (by Ormael): Ezekiel's Necklace - buyable at Felix in Journey to the East inn. Cost 50 spirit stones. Negate up to 5 racial perk points negative effects.\n");
+			outputText("-Inventory now has an extra sub-menu for using/deleting items. It can be toggled on or off. By default it's not toggled on. Toggle to change it is in settings. So now mobile users can delete items even when not having Shift button ^^ (change by Jtexc)\n");
+			outputText("-Tooltips for 2nd to 4th ring have added text if PC not yet have perk unlocking those slots.\n");
+			outputText("-Moved all interactions with Marae after first meeting from using Boat in Places to using Marae Islan also located in Places (and it will unlock after first time meeting Marae obviously).\n");
+			outputText("-Added greyed out buttons for all undiscovered dungeons. Also fixed missing check for Ebon Labyrinth to add button for dungeons submenu in Places.\n");
+			outputText("-Newly added masteries (seen on Mastery subpage of Stats) can be trained by using type of weapon they are related to. Each gained level in mastery/dao will increase that type of weapon dmg by 1%. Current cap is 10 + PC level (capped at lvl 90). Having human score at max 9 pts below max humanity will double mastery exp gaines, having max humanity will tripple exp gains. ");
+			outputText("Dealing critical damage double exp gains.\n");
+			outputText("-Sleeping with Luna will lower her jelousity meter at the same speed as it's rising during the day. But it will not never drop below 0 after night sleep thou.\n");
+			outputText("-On inventory page at melee weapon line would be added weapon type desc if PC use weapon that belong to one of major weapon types (it's related to mastery/dao on Masteries subpage so player will know which mastery will gain using that melee weapon).\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Some shady person appeared in Journey to the East inn that sells items currently. Maybe he will talk in future more too ^^\n");
 			outputText("-Semi fixed bug on stats values not reseting down after ascension. Save and load after ascension would fix now the last part on this bug i not corrected.\n");
-			outputText("-New effect for pregnancy crazy races Pregomania\n");
-			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons, Izmael three bugs, Kiha scene checking for wrong cock type, making golem showing error if golem core(s) isn't(aren't) in PC intentory and instead in pc 'golem bag', disabling Golems submenu if PC not have temporal golems left to use");
+			outputText("\n");/*ostatni punkt changelogu
 			outputText("-\n");
-			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons, Izmael three bugs, Kiha scene checking for wrong cock type\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -213,13 +231,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -266,16 +278,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -59,7 +59,7 @@ package classes.Items
 		public const CROWSTR:CrownOfStrength = new CrownOfStrength();
 		public const CROWTOU:CrownOfToughness = new CrownOfToughness();
 		public const CROWWIS:CrownOfWisdom = new CrownOfWisdom();
-		//public const EZEKIELS:Jewelry = new Jewelry("EzekielS", "EzekielSignet", "Ezekiel's Signet", "an Ezekiel's Crown", 0, 0, 100, "A crown rumored to be blessed by the Ezekiel himself. Is that real one or just another fake crown merchant sold you? \n\nType: Jewelry (Crown) \nBase value: 400","Crown");
+		public const EZEKIELC:Jewelry = new Jewelry("EzekielC", "EzekielCrown", "Ezekiel's Crown", "an Ezekiel's Crown", 0, 0, 400, "A crown rumored to be blessed by the Ezekiel himself. Is that real one or just another fake crown merchant sold you? \n\nType: Jewelry (Crown) \nBase value: 400","Crown");
 		
 		public function HeadJewelryLib() 
 		{

@@ -1594,7 +1594,7 @@ private function aikoSexBJ():void {
 	+"\n\nShe smirks as your [cocks] bob[if (player.cocks.length==1)s] up into view, looking up to you with a mischievous smirk as she wraps her fingers around your [cock], beginning to stroke it gently. <i>“Mmm… you’re already so hard,”</i> she says, gently rubbing her cheek into your groin, moving her nose to the base of your [cocks] and taking in your scent.\n\n"
 	+"She purses her lips against your base, sucking on the side of your shaft gently as her palm wraps around the head, squeezing drops of pre out and using them to lubricate her hand as she lavishes your [cocks] with passionate kisses and strokes. She pulls her hand away for a moment, summoning a pale blue flame into her palm, and returns it to your main shaft, coating it with cool wisps of fire that send shudders up your spine. "+(player.balls > 0?"Her other hand gently lifts your [balls], squeezing them softly as she runs her tongue up the underside of your [cock].":"")+"\n\n");
 	if (player.cockArea(x) < 40) {
-		outputText("Her lips smack loudly as she plants kisses up and down your shaft, sending your senses into a frenzy as her hand works its way up and down your [cock], dragging her fingertips along the length. [if (player.balls > 0)Cupping your player.ballsDescriptLight(),] Aiko gently glides her tongue up the underside of your shaft one last time, opening her lips into a wide O and engulfing you in her warm, moist mouth.\n\n"
+		outputText("Her lips smack loudly as she plants kisses up and down your shaft, sending your senses into a frenzy as her hand works its way up and down your [cock], dragging her fingertips along the length. "+((player.balls > 0)?"Cupping your player.ballsDescriptLight(),":"")+" Aiko gently glides her tongue up the underside of your shaft one last time, opening her lips into a wide O and engulfing you in her warm, moist mouth.\n\n"
 		+"Keeping one hand wrapped tightly around the base, she begins to bob her head forward and back, letting your [cock] hit the back of her throat with each gentle thrust. Her crystal blue eyes stare up at you coyly as she does so, her mouth curled into a smile around your quivering manhood. Pressing you against the back of her mouth, she swallows several times, the gentle rippling of her throat muscles massaging the head of your [cock].\n\n"
 		+"<i>“Mmm….. mm….”</i> Aiko moans softly into your cock, sending gentle vibrations down the shaft, and you can feel something bushy and soft begin to wrap around your legs. Her hands move around your [hips], where she digs her fingertips into the flesh of your [ass], and several of her tails coil tightly around your ankles and up to your thighs.\n\n"
 		+"You hover your hands above her head momentarily, hesitating, but Aiko looks up at you with her glittering blue eyes and nods softly, her lips squeezing down tightly around your [cock]. With her permission, you bury your fingertips in her silvery mane and begin to thrust your hips forward, driving your shaft down her throat. She moans, slurping and making lewd gulping noises as you start to throat-fuck her, her eyes rolling back a bit as spittle and precum begins to dribble down her chin.\n\n"
@@ -1603,7 +1603,7 @@ private function aikoSexBJ():void {
 		+(player.cocks.length>1 ?", the rest of your [cocks] spilling their spunk all over Aiko's chest and the ground below you":"")+"[if (player.hasVagina()), and your vagina spasming, dripping your excretions down the sides of your thighs and onto the ground, forming a messy puddle of combined sexual fluids]"
 		+".\n\nOnce your orgasm is finished, she locks her mouth tightly around your deflating shaft and pulls back, squeezing the last bits of cum from your urethra and leaving your [cock] clean as a whistle as her lips leave it with a soft smack. Using the corner of one of her sleeves, she cleans the remainder of your cum off her face, and then lets out a cute burp, patting her chest and saying <i>“Mn, oh, excuse me.</i>");
 	} else {
-		outputText("Her lips smack loudly as she plants kisses up and down your shaft, sending your senses into a frenzy as her hand works its way up and down your [cock], dragging her fingertips along the length. [if (player.balls > 0)Cupping your player.ballsDescriptLight(), ] Aiko gently glides her tongue up the underside of your shaft one last time, opening her lips into a wide O and wrapping them around the head."
+		outputText("Her lips smack loudly as she plants kisses up and down your shaft, sending your senses into a frenzy as her hand works its way up and down your [cock], dragging her fingertips along the length. "+((player.balls > 0)?"Cupping your player.ballsDescriptLight(),":"")+" Aiko gently glides her tongue up the underside of your shaft one last time, opening her lips into a wide O and wrapping them around the head."
 		+"Keeping one hand wrapped tightly around the base, her other hand begins to slide along the exposed portion of the shaft, while her warm, moist tongue slides out underneath the head. She slurps up each drop of precum enthusiastically, her crystal blue eyes staring up at you coyly as she does so, and her mouth curls into a smile as she begins to pump your shaft faster.\n\n"
 		+"Squeezing your base tightly, she clamps down on your [cock], causing your already engorged member to swell with the added pressure. She sucks on the head lavishly, allowing a mixture of spittle and precum to dribble down your shaft, which she gathers with her other hand to lubricate her strokes. One of her tails slides up to wrap around the base of your cock, constricting it tightly as it takes the place of her hand, and she begins to stroke you at a feverish pace using a double-fisted technique.\n\n"
 		+"She giggles a bit at the look of pleasure that crosses your face, and redoubles her efforts, alternating between stroking you with both hands and kissing your shaft hungrily. The pleasure is getting to be too much to take, but her tail is blocking the only avenue for your release, and you can tell by her smirk that she knows exactly what she is doing to you.\n\n"
@@ -1702,7 +1702,7 @@ private function aikoSexKitsuneTailjob():void {
 	outputText("You ask her to come sit besides you, "+((player.tailCount==9)?"which she promptly does, ":"")+"and turn around. Curiosity gets the better of her, so she does so, albeit slowly, with furtive glances back towards you. You tell her to calm down, and that she will enjoy this as much as you.\n\n"
 			+"With her back and tails facing towards you, you similarly turn around and face away from her, your tails getting restless from the plan that you're hatching. Slowly, you caress one of her tails with your own, elicting a small gasp from the other girl.\n\n"
 			+"Slowly, you tangle your bundle of tails with hers, rubbing against each of them in a slow, sensual, almost caressing manner. You turn your head to look at the other kitsune, only to find her slowly hunching over, and the back of her neck slowly getting redder."
-			+"As your tails continue to get intimate with each other, you can start to feel a heat developing in your gut. It isn't quite the same feeling as going into "+player.mf("rut","heat")+", but it certainly feels just as intense. Slowly, the sensation rises up your spine, until it takes complete and sudden hold of your slowly melting brain" + ((flags[kFLAGS.AIKO_FIRST_CHOICE] == 6)? ", and you understand why she reacted the way she did the first time":"")+ ".\n\n"
+			+"As your tails continue to get intimate with each other, you can start to feel a heat developing in your gut. It isn't quite the same feeling as going into "+((player.gender == 1)?"rut":(player.gender == 2)?"heat":" both heat and rut")+ ", but it certainly feels just as intense. Slowly, the sensation rises up your spine, until it takes complete and sudden hold of your slowly melting brain" + ((flags[kFLAGS.AIKO_FIRST_CHOICE] == 6)? ", and you understand why she reacted the way she did the first time":"")+ ".\n\n"
 			+"It takes over your thoughts rapidly, forcing you to think of nothing else but how good it feels, the way each individual strand of fur caresses the other, and you let your tongue hang out, too enraptured by the sensations to think about keeping it in your mouth. Behind you, Aiko had collapsed onto her side, curling up into a fetal position, her tails continuing to fluff-fight against your own set, while the occasional drip-drip-dripping sound could be heard from her mouth. Or was it her pussy? Doesn't matter, you think, as your own mouth starts drooling.\n\n"
 			+"As you continue to sway, you are suddenly met with the loss of feeling from your tails, but you are still too consumed by the effects to react in time to Aiko's sudden attack from behind, finally pushing you onto the floor. She smiles, her body exuding lust, "+ ((flags[kFLAGS.AIKO_CORRUPTION] >= 50)?"and bites you on the neck, slightly drawing blood":"and leans in to give you a smooch on the lips")+", while her and your tails rove around, searching for their lost partners. \n\n"
 			+"Slowly, they resume their ministrations, "+((player.tailCount==9)?"the extra "+((flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)?"tail":"tails"):"")+" twirling around, gliding across her soft fur... wait, since when did your clothes get remo...ohhh that feels warm,  "
@@ -1716,12 +1716,21 @@ private function aikoSexKitsuneTailjob():void {
 		player.cor += 3;
 		flags[kFLAGS.AIKO_CORRUPTION] -= 3;
 	}
-	flags[kFLAGS.AIKO_DONE_KITSUNETJ] == 1;
-	var x:String = player.mf("M", "F")
-	if (x == "M") {
+	flags[kFLAGS.AIKO_DONE_KITSUNETJ] = 1;
+	var x:int = player.gender
+	if (x == 1) {
 		player.orgasm('Dick');
-	} else {
+	}	else if (x == 2) {
 		player.orgasm('Vagina')
+	}	else {
+		player.orgasm('Dick');
+		player.orgasm('Vagina')
+	}
+	if (player.hasStatusEffect(StatusEffects.Spar)) {
+		player.removeStatusEffect(StatusEffects.Spar);
+		if (player.hasStatusEffect(StatusEffects.DomFight))
+			player.removeStatusEffect(StatusEffects.DomFight);
+		cleanupAfterCombat();
 	}
 	doNext(camp.returnToCampUseOneHour);
 }

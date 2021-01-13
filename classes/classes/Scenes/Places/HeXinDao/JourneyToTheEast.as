@@ -100,8 +100,8 @@ package classes.Scenes.Places.HeXinDao
 			clearOutput();//Felix - male beffy bro nekomata twin herald npc
 			outputText("\"<i>Wanna buy something?</i>\" askes the cat head while dog one adds almost barking \"<i>Or get lost...</i>\"\n\n");
 			menu();
-			//addButton(10, necklaces..shortName, itemBuy, necklaces.);
-			//addButton(11, headjewelries..shortName, itemBuy, headjewelries.);
+			addButton(10, necklaces.EZEKIELN.shortName, itemBuy, necklaces.EZEKIELN);
+			addButton(11, headjewelries.EZEKIELC.shortName, itemBuy, headjewelries.EZEKIELC);
 			addButton(12, jewelries.EZEKIELS.shortName, itemBuy, jewelries.EZEKIELS);
 			addButton(14, "Back", curry(enteringInn,false));
 			statScreenRefresh();

@@ -558,8 +558,8 @@ public class EngineCore {
      * @param    text Determines the text that will appear on button.
      * @param    func1 Determines what function to trigger.
      * @param    arg1 Pass argument #1 to func1 parameter.
-     * @param    arg2 Pass argument #1 to func1 parameter.
-     * @param    arg3 Pass argument #1 to func1 parameter.
+     * @param    arg2 Pass argument #2 to func1 parameter.
+     * @param    arg3 Pass argument #3 to func1 parameter.
      * @param    toolTipText The text that will appear on tooltip when the mouse goes over the button.
      * @param    toolTipHeader The text that will appear on the tooltip header. If not specified, it defaults to button text.
      */

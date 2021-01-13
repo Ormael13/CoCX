@@ -162,6 +162,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				addButton(1, "Incest", incestMenu);
 			}
 			addButton(2, "Items", itemImproveMenu);
+			//addButton(3, "Armour", armourImproveMenu);
 		}
 		else {
 			addButton(1, "Play Time", playTime);
@@ -325,9 +326,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
 			[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 			[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
-			[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD]//,
-			//	[armors.CTPALAD,		null,					armors.CTBGUAR],
-			//	[armors.LMARMOR,		armors.,			armors.]
+			[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD]
 		];
 		clearOutput();
 		outputText("<b>"+_name+" can empower items using materials gems and her innate magic to bless/corrupt gear. Would you like her to create an epic item and in that case which?</b>");// legendary
@@ -351,6 +350,39 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			inventory.takeItem(item, camp.returnToCampUseOneHour);
 		}
 	}
+
+	/*
+	public function armourImproveMenu():void {
+		if (isCorrupt)spriteSelect(SpriteDb.s_celessBlack);
+		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
+		var improvableArmours:Array = [
+			[armors., armors., armors.],
+			//	[armors.CTPALAD,		null,					armors.CTBGUAR], 	//This was already here from above.
+			//	[armors.LMARMOR,		armors.,			armors.]
+		];
+		clearOutput();
+		outputText("<b>"+_name+" can empower items using materials gems and her innate magic to bless/corrupt gear. Would you like her to create an epic item and in that case which?</b>");// legendary
+//Celess
+		var selectfrom:int = isCorrupt ? 2 : 1;										// Everything below should actually be fine, funny enough.
+		var selectMenu:ButtonDataList = new ButtonDataList();
+		for (var i:int = 0; i < improvableArmours.length; i++) {
+			if (improvableArmours[i][selectfrom] == null) {//do nothing
+			}
+			else {
+				var item:ItemType = improvableArmours[i][selectfrom];
+				var from:ItemType = improvableArmours[i][0];
+				selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from));
+			}
+		}
+		submenu(selectMenu, campInteraction);
+
+		function improveItem(item:ItemType, from:ItemType):void {
+			scene("strings/itemImprove/improveThatItem", myLocals);
+			player.destroyItems(from, 1);
+			inventory.takeItem(item, camp.returnToCampUseOneHour);
+		}
+	}
+	*/
 
 	public function celessUnicornIntro():void {
 		spriteSelect(SpriteDb.s_celessWhite);
