@@ -640,8 +640,9 @@ public class PlayerAppearance extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) outputText("Deep within your prostate you feel the worms moving, constantly rubbing against your trigger button, keeping you aroused and constantly churning up cum to be spewed out at a moment's notice.\n")
 	}
 	//VAGOOZ
-		/*
+	/*
 	if (player.vaginas.length > 0){
+		var defaultVagDesc:String = "You have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit"
 		if(player.gender == 2 || player.gender == 3 && player.isTaur() && player.lowerBody != 26)
 			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.");
 		if(player.gender == 2 || player.gender == 3 && (player.isScylla() || player.isKraken()))
@@ -660,7 +661,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 		for(var i:int=0; i<player.vaginas.length; i++){
-
+			var vagType:int = player.vaginaType()
 			if (player.vaginas.length > 1){
 				outputText("Your second " + vaginaDescript(0)+ " ")
 			}

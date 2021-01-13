@@ -1716,6 +1716,7 @@ private function aikoSexKitsuneTailjob():void {
 		player.cor += 3;
 		flags[kFLAGS.AIKO_CORRUPTION] -= 3;
 	}
+	postSexUpdate();
 	flags[kFLAGS.AIKO_DONE_KITSUNETJ] = 1;
 	var x:int = player.gender
 	if (x == 1) {
