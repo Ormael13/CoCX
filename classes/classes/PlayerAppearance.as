@@ -640,65 +640,66 @@ public class PlayerAppearance extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) outputText("Deep within your prostate you feel the worms moving, constantly rubbing against your trigger button, keeping you aroused and constantly churning up cum to be spewed out at a moment's notice.\n")
 	}
 	//VAGOOZ
-	/*
 	//Handling multiple vagooz.
 	if (player.vaginas.length > 0){
-		var defaultVagDesc:String = "You have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit"
 		if(player.gender == 2 || player.gender == 3 && player.isTaur() && player.lowerBody != 26)
 			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.");
 		if(player.gender == 2 || player.gender == 3 && (player.isScylla() || player.isKraken()))
 			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.");
 		if (player.vaginas.length == 1){
 			if (player.lowerBody == LowerBody.MELKIE){
-				outputText("You have two sets of vaginal lips, one twice as big as the other and hiding the smaller within its folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+				outputText("\nYou have two sets of vaginal lips, one twice as big as the other and hiding the smaller within its folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 			} else {
-				outputText("Your " + vaginaDescript(0)+ " ");
+				outputText("\nYour " + vaginaDescript(0));
 			}
 		} else {
 			if (player.lowerBody == LowerBody.MELKIE){
-				outputText("You have four sets of vaginal lips set in pairs, one twice as big as the other and hiding the smaller within its folds. Behind your first pair of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+				outputText("\nYou have four sets of vaginal lips set in pairs, one twice as big as the other and hiding the smaller within its folds. Behind your first pair of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
 			} else {
-				outputText("Your first " + vaginaDescript(0));
+				outputText("\nYour first " + vaginaDescript(0));
 			}
 		}
 		var vagLoop:int = 0
 		var clitExists:int = 0
 		for(var i:int=0; i<player.vaginas.length; i++){
-			var vagType:int = player.vaginaType() //Can be possible problem, as it might not iterate properly to register the second pussy.
-			switch(vagType){
+			var vagType:int = player.vaginaType(-1, i) //It's not iterating properly to register the second pussy.
+			switch(vagType){ //missing black sand trap, maybe melkie.
 				case VaginaClass.EQUINE:
 					outputText(" is deep and wide just like that of a horse. Sometime you lament that most of your partners are no longer big enough to satisfy you. Inside you have a ");
-					return;
+					break;
 				case VaginaClass.CANCER:
 					outputText(" is constantly foaming, in anticipation for a potential mate. Hidden within is a ");
-					return;
+					break;
 				case VaginaClass.SCYLLA:
 					outputText(" has no clit. Instead, several concentric rings of small nubs line up the walls of your gaping maw of a vagina, each easily as sensitive as a human clitoris would be.");
 					clitExists++
-					return;
+					break;
 				case VaginaClass.MANTICORE:
 					outputText(" is ultrasensitive, even the slightest touch is enough to make you moan out a melody. Your song-box hides a ");
-					return;
+					break;
 				case VaginaClass.CAVE_WYRM:
 					outputText(" constantly drools acid, small puffs of dissolving matter wafting up from beneath where you're standing. Your dissolving chamber hides a ");
-					return;
+					break;
 				case VaginaClass.VENOM_DRIPPING:
 					outputText(" constantly drools an aphrodisiac venom, forcing any potential mates to be ready regardless of their physical state. Your lust-enhancers hides a ");
-					return;
+					break;
 				case VaginaClass.ALRAUNE:
 					outputText(" constantly secretes aphrodisiac-like nectar, ensuring any stamen that parts your petals are sufficiently lubricated and ready to fertilize you. Your flower hides a ");
-					return;
+					break;
 				case VaginaClass.DEMONIC:
 					outputText(", unlike a normal pussy, feels and acts akin to a mouth that allows you to taste and savor the flavor of the cum injected within as if it landed on your tongue. Your sensitive walls are also prehensile, and you can control them to milk a cock just as well as your hand could.  Your dexterous, cum-hungry twat hides a ");
-					return;
+					break;
+				default:
+					outputText(" hides a ");
+					break;
 			}
 			//Clit check. Only for Scylla for now.
 			if (clitExists == 0) outputText(Measurements.shortSuffix(int(player.clitLength * 10) / 10) + " clit");
 			//Hymen check.
 			if(player.vaginas[i].virgin) {
-				outputText(" It's hymen is intact. ")
+				outputText(". It's hymen is intact. ");
 			} else{
-				outputText(". ")
+				outputText(". ");
 			}
 			//Wetness check.
 			if(player.lib < 50 && player.lust < 50) //not particularly horny
@@ -778,7 +779,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 
 			if (player.vaginas.length > 1 && vagLoop == 0){
-				outputText("Your second " + vaginaDescript(1)+ " ");
+				outputText("\n\nYour second " + vaginaDescript(1)+ " ");
 				vagLoop++
 				clitExists = 0
 			}
@@ -786,138 +787,6 @@ public class PlayerAppearance extends BaseContent {
 		//Line Drop for next descript!
 		outputText("\n");
 	}
-	 */
-	// Old.
-	///*
-	if(player.vaginas.length > 0)
-	{
-		if(player.gender == 2 || player.gender == 3 && player.isTaur() && player.lowerBody != 26)
-			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.");
-		if(player.gender == 2 || player.gender == 3 && (player.isScylla() || player.isKraken()))
-			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.");
-		outputText("\n");
-		if (player.vaginas.length == 1){
-			if(player.vaginaType() == VaginaClass.EQUINE){
-				outputText("Your " + vaginaDescript(0) + " is deep and wide just like that of a horse. Sometime you lament that most of your partners are no longer big enough to satisfy you. Inside you have a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
-			}
-			else if (player.lowerBody == LowerBody.MELKIE){
-				outputText("You have two sets of vaginal lips, one twice as big as the other and hiding the smaller within its folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
-			}
-			else if(player.vaginaType() == VaginaClass.CANCER){
-				outputText("You have a foaming " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
-			}
-			else if (player.vaginaType() == VaginaClass.SCYLLA){
-				outputText("you have a " + vaginaDescript(0) + " with no clit. Instead, several concentric rings of small nubs line up the walls of your gaping maw of a vagina, each easily as sensitive as a human clitoris would be.");
-			}
-			else if (player.vaginaType() == VaginaClass.MANTICORE){
-				outputText("You have a ultrasensitive " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit. " +
-						"Your manticore vagina is so sensitive that you can't help but moan musical note out loud when touching yourself.");
-			}
-			else{
-            	outputText("You have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
-			}
-			if(player.vaginas[0].virgin) outputText(" and an intact hymen");
-			outputText(".  ");
-		}
-
-		if (player.vaginas.length > 1){
-            outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clits each.  ");
-		}
-		if (player.vaginaType() == VaginaClass.CAVE_WYRM){
-			outputText("It constantly drools with acid. ");
-		}
-		if (player.vaginaType() == VaginaClass.VENOM_DRIPPING){
-			outputText("It constantly drools with aphrodisiac venom. ");
-		}
-		if (player.vaginaType() == VaginaClass.ALRAUNE){
-			outputText("Your vagina secretes aphrodisiac-like nectar, ensuring any stamen that parts your petals are sufficiently lubricated and ready to fertilize you. ");
-		}
-		if (player.vaginaType() == VaginaClass.CANCER){
-			outputText("It is constantly foaming in anticipation of a potential mate. ");
-		}
-		if(player.vaginaType() == VaginaClass.DEMONIC){
-			outputText("Your demonic vagina, unlike a normal pussy, feels and acts akin to a mouth that allows you to taste and savor the flavor of the cum injected within as if it landed on your tongue. Your sensitive walls are also prehensile, and you can control them to milk a cock just as well as your hand could. ");
-		}
-		if(player.lib < 50 && player.lust < 50) //not particularly horny
-
-		{
-			//Wetness
-			if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_WET && player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_DROOLING)
-				outputText("Moisture gleams in ");
-			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_DROOLING)
-			{
-				outputText("Occasional beads of ");
-				outputText("lubricant drip from ");
-			}
-			//Different description based on vag looseness
-			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_WET)
-			{
-				if(player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
-					outputText("your " + vaginaDescript(0) + ". ");
-				if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
-					outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ");
-				if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
-					outputText("the massive hole that is your " + vaginaDescript(0) + ".  ");
-			}
-		}
-		if((player.lib>=50 || player.lust >=50) && (player.lib< 80 && player.lust < 80)) //kinda horny
-
-		{
-			//Wetness
-			if(player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_WET)
-				outputText("Moisture gleams in ");
-			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_WET && player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_DROOLING)
-			{
-				outputText("Occasional beads of ");
-				outputText("lubricant drip from ");
-			}
-			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_DROOLING)
-			{
-				outputText("Thin streams of ");
-				outputText("lubricant occasionally dribble from ");
-			}
-			//Different description based on vag looseness
-			if(player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
-				outputText("your " + vaginaDescript(0) + ". ");
-			if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
-				outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ");
-			if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
-				outputText("the massive hole that is your " + vaginaDescript(0) + ".  ");
-		}
-		if((player.lib> 80 || player.lust > 80)) //WTF horny!
-
-		{
-			//Wetness
-			if(player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_WET)
-
-			{
-				outputText("Occasional beads of ");
-				outputText("lubricant drip from ");
-			}
-			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_WET && player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_DROOLING)
-
-			{
-				outputText("Thin streams of ");
-				outputText("lubricant occasionally dribble from ");
-			}
-			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_DROOLING)
-
-			{
-				outputText("Thick streams of ");
-				outputText("lubricant drool constantly from ");
-			}
-			//Different description based on vag looseness
-			if(player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
-				outputText("your " + vaginaDescript(0) + ". ");
-			if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
-				outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ");
-			if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
-				outputText("the massive hole that is your cunt.  ");
-		}
-		//Line Drop for next descript!
-		outputText("\n");
-	}
-	//*/
 
 	//Genderless lovun'
 	if(player.cockTotal() == 0 && player.vaginas.length == 0)
