@@ -131,8 +131,8 @@ package classes.Scenes
 			outputText("-Tooltips for 2nd to 4th ring have added text if PC not yet have perk unlocking those slots.\n");
 			outputText("-Moved all interactions with Marae after first meeting from using Boat in Places to using Marae Islan also located in Places (and it will unlock after first time meeting Marae obviously).\n");
 			outputText("-Added greyed out buttons for all undiscovered dungeons. Also fixed missing check for Ebon Labyrinth to add button for dungeons submenu in Places.\n");
-			outputText("-Newly added masteries (seen on Mastery subpage of Stats) can be trained by using type of weapon they are related to. Each gained level in mastery/dao will increase that type of weapon dmg by 1%. Current cap is 10 + PC level (capped at lvl 90). Having human score at max 9 pts below max humanity will double mastery exp gaines, having max humanity will tripple exp gains. ");
-			outputText("Dealing critical damage double exp gains.\n");
+			outputText("-Newly added masteries (seen on Mastery subpage of Stats) can be trained by using type of weapon they are related to. Each gained level in mastery/dao will increase that type of weapon dmg by 1%. Each 2 levels accuracy will increase by 0.5%. Current cap is 10 + PC level (capped at lvl 90). Having human score at max 9 pts below max humanity will double mastery exp gaines, ");
+			outputText("having max humanity will tripple exp gains. Dealing critical damage double exp gains.\n");
 			outputText("-Sleeping with Luna will lower her jelousity meter at the same speed as it's rising during the day. But it will not never drop below 0 after night sleep thou.\n");
 			outputText("-On inventory page at melee weapon line would be added weapon type desc if PC use weapon that belong to one of major weapon types (it's related to mastery/dao on Masteries subpage so player will know which mastery will gain using that melee weapon).\n");
 			outputText("-\n");
@@ -143,10 +143,23 @@ package classes.Scenes
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons, Izmael three bugs, Kiha scene checking for wrong cock type, making golem showing error if golem core(s) isn't(aren't) in PC intentory and instead in pc 'golem bag', disabling Golems submenu if PC not have temporal golems left to use");
-			outputText("\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons, Izmael three bugs, Kiha scene checking for wrong cock type, making golem showing error if golem core(s) isn't(aren't) in PC intentory and instead in pc 'golem bag', disabling Golems submenu if PC not have temporal golems left to use, ");
+			outputText("displacer beast eyes blocking gaining fur tf\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -230,10 +243,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -278,16 +288,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
