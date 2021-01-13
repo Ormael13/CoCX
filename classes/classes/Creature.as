@@ -2192,15 +2192,15 @@ public class Creature extends Utils
 				return vaginas[0].vaginalWetness;
 		}
 
-		public function vaginaType(newType:int = -1):int
+		public function vaginaType(newType:int = -1, vagNum:int = 0):int
 		{
 			if (!hasVagina())
 				return -1;
-			if (newType != -1)
+			if (newType != -1) // this handles the sandtrap pussy... for some reason.
 			{
-				vaginas[0].type = newType;
+				vaginas[vagNum].type = newType;
 			}
-			return vaginas[0].type;
+			return vaginas[vagNum].type;
 		}
 
 		public function looseness(vag:Boolean = true):Number
