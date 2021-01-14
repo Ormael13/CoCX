@@ -8622,17 +8622,17 @@ public class Combat extends BaseContent {
                 outputText("\n\n");
             }
             if (monster.plural) {
-                if (math >= 1) outputText("You see [monster heshe] are in perfect health.  ");
-                else if (math > .75) outputText("You see [monster heshe] aren't very hurt.  ");
-                else if (math > .5) outputText("You see [monster heshe] are slightly wounded.  ");
-                else if (math > .25) outputText("You see [monster heshe] are seriously hurt.  ");
-                else outputText("You see [monster heshe] are unsteady and close to death.  ");
+                if (math >= 1) outputText("You see [monster he] are in perfect health.  ");
+                else if (math > .75) outputText("You see [monster he] aren't very hurt.  ");
+                else if (math > .5) outputText("You see [monster he] are slightly wounded.  ");
+                else if (math > .25) outputText("You see [monster he] are seriously hurt.  ");
+                else outputText("You see [monster he] are unsteady and close to death.  ");
             } else {
-                if (math >= 1) outputText("You see [monster heshe] is in perfect health.  ");
-                else if (math > .75) outputText("You see [monster heshe] isn't very hurt.  ");
-                else if (math > .5) outputText("You see [monster heshe] is slightly wounded.  ");
-                else if (math > .25) outputText("You see [monster heshe] is seriously hurt.  ");
-                else outputText("You see [monster heshe] is unsteady and close to death.  ");
+                if (math >= 1) outputText("You see [monster he] is in perfect health.  ");
+                else if (math > .75) outputText("You see [monster he] isn't very hurt.  ");
+                else if (math > .5) outputText("You see [monster he] is slightly wounded.  ");
+                else if (math > .25) outputText("You see [monster he] is seriously hurt.  ");
+                else outputText("You see [monster he] is unsteady and close to death.  ");//[monster heshe]
             }
             showMonsterLust();
             // haha literally fuck organising this shit properly any more

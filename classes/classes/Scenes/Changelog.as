@@ -159,7 +159,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons, Izmael three bugs, Kiha scene checking for wrong cock type, making golem showing error if golem core(s) isn't(aren't) in PC intentory and instead in pc 'golem bag', disabling Golems submenu if PC not have temporal golems left to use, ");
-			outputText("displacer beast eyes blocking gaining fur tf\n");/*ostatni punkt changelogu
+			outputText("displacer beast eyes blocking gaining fur tf, cancer enemy minor bugs\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

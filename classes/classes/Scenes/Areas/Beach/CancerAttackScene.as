@@ -28,7 +28,7 @@ public class CancerAttackScene extends BaseContent
 						"You indeed are answered shortly afterward as a huge pincers surge out of the sand beneath you and try to grab you, " +
 						"however your large chitinous lower body proves to big for the pincer of your attacker which simply dig itself up to see what is going on. " +
 						"At the other end of the pincer which attempted to grab you is the massive chitinous body of a cancer, still partially covered in sand, " +
-						"a smaller form atop it with the physiognomy of a young human from the waist up. It would seem [monster he] is a female/male. " +
+						"a smaller form atop it with the physiognomy of a young human from the waist up. It would seem [monster he] is a "+(IsFemale ? "female":"male")+". " +
 						"[monster He] looks at you with the classic gaze devoid of emotion and flatly declares [monster his] intentions.\n\n" +
 						"<i>\"Hey... you are hunting in my ground go away.\"</i>\n\n" +
 						"Annoyed you declare equally flatly that you are not hunting as much as exploring the beach and that you have full right to go wherever you want. " +
@@ -46,7 +46,7 @@ public class CancerAttackScene extends BaseContent
 						"[monster He] looks at you with a gaze devoid of emotion and flatly declares.\n\n" +
 						"<i>\"Damn It… had to be a slime… not worth the effort.\"</i>\n\n" +
 						"[monster His] flat tone and somewhat blank stare couldn’t make this sentence sound more boring. " +
-						"The cancer simply digs back in its hole out of your reach. A victory is a victory though and in its haste to escape the crab perdon left gems on the ground" +
+						"The cancer simply digs back in its hole out of your reach. A victory is a victory though and in its haste to escape the crab person left gems on the ground" +
 						" wich you hastily take before leaving. That and you do gain the experience that crabs aren’t fans of things with a fluid body.");
 				doNext(camp.returnToCampUseOneHour);
 			} else {
@@ -70,7 +70,7 @@ public class CancerAttackScene extends BaseContent
 					}
 				} else {
 					outputText("Thankfully your peerless reflexes allows you to move out of range just in time. " +
-							"The creature follows you as it moves out of the sand, revealing the massive chitinous body of a crab, a smaller form atop it with the physiognomy of a young woman/men from the waist up. " +
+							"The creature follows you as it moves out of the sand, revealing the massive chitinous body of a crab, a smaller form atop it with the physiognomy of a young "+(IsFemale ? "woman":"men")+" from the waist up. " +
 							"[monster He] looks at you with a gaze devoid of emotion and flatly declares.\n\n" +
 							"<i>\"Ah…so I caught a [man].\"</i>\n\n" +
 							"Despite [monster his] flat tone and somewhat blank stare it's clear that what [monster he] intends to do with you will result into nothing good.\n\n" +
@@ -158,7 +158,8 @@ public class CancerAttackScene extends BaseContent
 		}
 
 		public function CancerDefeat():void {
-			spriteSelect(SpriteDb.s_crabgirl);
+			if (monster.hasCock()) spriteSelect(SpriteDb.s_crabboy);
+			else if (monster.hasVagina()) spriteSelect(SpriteDb.s_crabgirl);
 			clearOutput();
 			outputText("The cancer, defeated, escapes by digging [monster his] way underground. Wow what a sore loser!");
 			if (silly()) outputText("You ought to tell this stupid show producer miss Liadri about how her crabs dig their escapes instead of calmly letting themselves be raped!");
