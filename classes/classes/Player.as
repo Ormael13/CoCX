@@ -5334,7 +5334,7 @@ use namespace CoC;
 				catCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && catCounter >= 8)
 				catCounter += 1;
-			if (tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || rearBody.type == RearBody.LION_MANE || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING
+			if (arms.type == Arms.SPHINX || wings.type == Wings.FEATHERED_SPHINX || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || rearBody.type == RearBody.LION_MANE || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING
 			 || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) catCounter = 0;
 			if (isGargoyle()) catCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) catCounter = 0;
@@ -8249,8 +8249,6 @@ use namespace CoC;
 			}
 			if (eyes.type == Eyes.CAT_SLITS)
 				sphinxCounter++;
-			if (ears.type == Ears.LION)
-				sphinxCounter++;
 			if (tongue.type == Tongue.CAT)
 				sphinxCounter++;
 			if (tailType == Tail.CAT)
@@ -8265,6 +8263,14 @@ use namespace CoC;
 				sphinxCounter += 4;
 			if (catCocks() > 0)
 				sphinxCounter++;
+			if (hasPartialCoat(Skin.FUR) || hasPlainSkinOnly())
+				sphinxCounter++;
+			if (findPerk(PerkLib.TwinHeart) > 0)
+				sphinxCounter += 2;
+			if (findPerk(PerkLib.TwinHeartEvolved) > 0)
+				sphinxCounter += 2;
+			if (findPerk(PerkLib.TwinHeartFinalForm) > 0)
+				sphinxCounter += 2;
 			if (findPerk(PerkLib.Flexibility) > 0)
 				sphinxCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
@@ -8423,11 +8429,11 @@ use namespace CoC;
 			}
 			if (wings.type == Wings.NONE)
 				unicornCounter += 2;
-			if (hasPlainSkinOnly())
-				unicornCounter++;
 			if (horseCocks() > 0)
 				unicornCounter++;
 			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
+				unicornCounter++;
+			if (hasPlainSkinOnly())
 				unicornCounter++;
 			if (findPerk(PerkLib.TwinHeart) > 0)
 				unicornCounter += 2;
@@ -11045,13 +11051,13 @@ use namespace CoC;
 				}
 			}//+10 / 10 - 20
 			if (sphinxScore() >= 14) {
-				if (sphinxScore() >= 23) {
-					maxStrCap2 += 80;
+				if (sphinxScore() >= 26) {
+					maxStrCap2 += 110;
 					maxTouCap2 -= 20;
 					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 70;
 					else maxSpeCap2 += 60;
 					maxIntCap2 += 130;
-					maxWisCap2 += 95;
+					maxWisCap2 += 110;
 				}
 				else {
 					maxStrCap2 += 50;
