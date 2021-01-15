@@ -188,9 +188,9 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public function talkMenuLunaWhatCanSheDo():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
-			outputText("Just what can she do for you, exactly? Your upbringing in rural, backwoods Ingnam hardly gave you much of a chance to meet domestic servants.\n\n");
-			outputText("\"<i>Why, " + player.mf("Master","Mistress") + ", what <b>can't</b> I do for you would be easier to answer! I'm highly trained in the obvious duties of cooking and cleaning, naturally, but I also have experience in medicine, massage therapy, interior decoration, sewing and tailoring, minor repairs, bookkeeping, cryptography, corporate espionage, wetworks, and... pest control.</i>\"\n\n");
-			outputText("She smiles at you with the face of innocence itself. \"<i>Indeed please do not worry about troubling me with any request you might have, no matter what.</i>\"\n\n");
+			outputText("Just what can she do for you, exactly? Your upbringing in rural, backwoods Ingnam hardly gave you much of a chance to meet domestic servants.\n\n" +
+					"\"<i>Why, " + player.mf("Master","Mistress") + ", what <b>can't</b> I do for you would be easier to answer! I'm highly trained in the obvious duties of cooking and cleaning, naturally, but I also have experience in medicine, massage therapy, interior decoration, sewing and tailoring, minor repairs, bookkeeping, cryptography, corporate espionage, wetworks, and... pest control.</i>\"\n\n" +
+					"She smiles at you with the face of innocence itself. \"<i>Indeed please do not worry about troubling me with any request you might have, no matter what.</i>\"\n\n");
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText("She glances down slightly, her face flushing a bit. \"<i>Even your most... intimate needs... i-if it's your wish, I would never turn you down, " + player.mf("Master","Mistress") + "...</i>\"\n\n");
 			outputText("You can think of absolutely no potential problems with this.\n\n");
 			if (flags[kFLAGS.LUNA_FOLLOWER] < 5)flags[kFLAGS.LUNA_FOLLOWER] = 5;
@@ -202,25 +202,26 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) {
-				outputText("She lied to you when she said she was human. Why?\n\n");
-				outputText("\"<i>Well, I used to be human. I still feel human, mostly. Or rather... I-I'm sorry, " + player.mf("Master","Mistress") + ", it's all so complicated. I never wanted to deceive you, I swear.</i>\"\n\n");
-				outputText("You tell her to go on.\n\n");
-				outputText("\"<i>...I came from a different world, just like " + player.mf("Master","Mistress") + " did, after all. When the cursed mirror in my former place of work dropped me here, I also had to survive alone in the wild, and one night a werewolf... attacked me and turned me into the monster I am now. I believe werewolves to be demonic creations engineered to spread bestial corruption to populated areas in secret; we are perfectly suited to it, and our instincts... well, I'm lucky to have gotten off with merely a bite, I should say.</i>\n\n");
-				outputText("She looks uncomfortable for a few seconds, then continues. \"<i>I believe the goal of creating us is to replace remaining civilized beast-morphs and the few remaining humans in Mareth with sex crazed therianthropes. I know that there are werecats out there, at the very least, so the condition isn't just restricted to wolf forms.</i>\"\n\n");
-				outputText("What about the part when she came to town?\n\n");
-				outputText("\"<i>That was as I told you before, save that I did not actually run the entire time. My... new found abilities allowed me to deal with most of the creatures that threatened me on my own terms." +
+				outputText("She lied to you when she said she was human. Why?\n\n" +
+						"\"<i>Well, I used to be human. I still feel human, mostly. Or rather... I-I'm sorry, " + player.mf("Master","Mistress") + ", it's all so complicated. I never wanted to deceive you, I swear.</i>\"\n\n" +
+						"You tell her to go on.\n\n" +
+						"\"<i>...I came from a different world, just like " + player.mf("Master","Mistress") + " did, after all. When the cursed mirror in my former place of work dropped me here, I also had to survive alone in the wild, and one night a werewolf... attacked me and turned me into the monster I am now. I believe werewolves to be demonic creations engineered to spread bestial corruption to populated areas in secret; we are perfectly suited to it, and our instincts... well, I'm lucky to have gotten off with merely a bite, I should say.</i>\n\n" +
+						"She looks uncomfortable for a few seconds, then continues. " +
+						"\"<i>I believe the goal of creating us is to replace remaining civilized beast-morphs and the few remaining humans in Mareth with sex crazed therianthropes. I know that there are werecats out there, at the very least, so the condition isn't just restricted to wolf forms.</i>\"\n\n" +
+						"What about the part when she came to town?\n\n" +
+						"\"<i>That was as I told you before, save that I did not actually run the entire time. My... new found abilities allowed me to deal with most of the creatures that threatened me on my own terms." +
 						" I can hardly say I made a compelling maid by the time I arrived in Tel'Adre, still, covered in filth with my clothes in tatters</i>\" she admits ruefully. \"<i>But I used the few gems I acquired from my encounters on the way to purchase a new work uniform, and cleaned up as best my circumstances permitted." +
 						" Following that I soon found myself employed, working as a maid by day and... indulging myself on nights of the full moon, usually safely outside the town walls, but sometimes with companions I, er, <b>found</b> inside, one way or another. Such was the case with my previous Master, William." +
 						" He was the first employer in Tel'Adre to discover my condition, and to my surprise he found it alluring after the initial shock. Unfortunately, his wife got wind of her husband's interest, and she moved against me quite swiftly." +
 						" On a day she had planned a long shopping trip, Master William had me tie him up in his bed, with the help of some pharmaceutical encouragement I added to his tea that morning. As we were satisfying each other, his wife came back unexpectedly, without the servants she had left with." +
-						" She fired me on behalf of her husband, who was still indisposed, and warned me not to try working in Tel'Adre again or she would tell the Town Watch about my condition. I suppose she thought she was being merciful... the real mercy is that I didn't decorate the hallway with the bitch's insides on my way out. I have never resisted a stronger temptation.</i>\" Her eyes take on a dangerous green glint as she finishes her story.\n\n");
-				outputText("As fascinating as her tale was, you find yourself hung up on the detail about drugging her master's tea. Surely she hasn't been supplementing your meals in a similar way?\n\n");
-				outputText("She giggles cutely, the very picture of innocence, at your suggestion. \"<i>Of course not, " + player.mf("Master","Mistress") + ", don't be silly. Why would I need to do that?</i>\"");
-
+						" She fired me on behalf of her husband, who was still indisposed, and warned me not to try working in Tel'Adre again or she would tell the Town Watch about my condition. I suppose she thought she was being merciful... the real mercy is that I didn't decorate the hallway with the bitch's insides on my way out. I have never resisted a stronger temptation.</i>\"" +
+						" Her eyes take on a dangerous green glint as she finishes her story.\n\n" +
+						"As fascinating as her tale was, you find yourself hung up on the detail about drugging her master's tea. Surely she hasn't been supplementing your meals in a similar way?\n\n" +
+						"She giggles cutely, the very picture of innocence, at your suggestion. \"<i>Of course not, " + player.mf("Master","Mistress") + ", don't be silly. Why would I need to do that?</i>\"");
 				if(!(flags[kFLAGS.MARRIAGE_FLAG] != 0 && flags[kFLAGS.MARRIAGE_FLAG] != 1))outputText("She narrows her eyes slightly. \"<i>You don't have any <b>pesky</b> spouse to get between us and make you... inhibited.</i>\"\n\n");
-				outputText("\"<i>You already know my body is yours to use, any time, any <b>way</b> you desire it, " + player.mf("Master","Mistress") + ",</i>\" she says, her tone changing to a sultry half-whisper as her eyes begin to glaze over. \"<i>And <b>I</b> already know how <b>much</b> you want it...</i>\"\n\n");
-				outputText("In a move that somehow feels shockingly bold despite what you've seen her do in her beast form, she suddenly runs a finger along your chest teasingly, gazing squarely at you with lust, or perhaps hunger-filled eyes. \"<i>Why would I need chemicals when you already give me all your love? When all you have to do is nod and I'll give... you... <b>everything.</b></i>\"\n\n");
-				outputText("Her smile is predatory, and her golden eyes can barely contain the green glow straining to break through them. There may be no containing that beast inside her, but at least you feel better knowing she won't drug and tie you. Probably. You think. You make a mental note to hide the rope later on when she's busy with something else.");
+				outputText("\"<i>You already know my body is yours to use, any time, any <b>way</b> you desire it, " + player.mf("Master","Mistress") + ",</i>\" she says, her tone changing to a sultry half-whisper as her eyes begin to glaze over. \"<i>And <b>I</b> already know how <b>much</b> you want it...</i>\"\n\n" +
+						"In a move that somehow feels shockingly bold despite what you've seen her do in her beast form, she suddenly runs a finger along your chest teasingly, gazing squarely at you with lust, or perhaps hunger-filled eyes. \"<i>Why would I need chemicals when you already give me all your love? When all you have to do is nod and I'll give... you... <b>everything.</b></i>\"\n\n" +
+						"Her smile is predatory, and her golden eyes can barely contain the green glow straining to break through them. There may be no containing that beast inside her, but at least you feel better knowing she won't drug and tie you. Probably. You think. You make a mental note to hide the rope later on when she's busy with something else.");
 			}
 			else {
 				outputText("You ask her if she is truly a full-blooded, \"pure\" human, the first you've found besides yourself in Mareth.\n\n");
