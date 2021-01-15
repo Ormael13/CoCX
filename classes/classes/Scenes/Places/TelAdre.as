@@ -1759,6 +1759,7 @@ public function meetingLunaRepeatedYes():void {
 	doNext(meetingLunaCamp);
 }
 public function meetingLunaCamp():void {
+	clearOutput();
 	outputText("The two of you head back to camp. The maid doesn’t comment on the fact you only have a");
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] == 1) outputText(" cabin ");
 	else outputText(" tent ");

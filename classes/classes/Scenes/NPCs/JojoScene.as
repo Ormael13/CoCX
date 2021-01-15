@@ -3235,12 +3235,12 @@ private function getAnallyFuckedByMouseYouSlut():void {
 	else outputText(" \"<i>That's nice,</i>\" Jojo remarks. ");
 	outputText("Slowly, he begins to rock his hips back and forth, placing his hands on your [hips] for support. ");
 	outputText("\n\n\"<i>Does it feel good, [name]?</i>\" Jojo asks. You reply that you wish he would go a little faster. Wanting to please you, Jojo start thrusting his erect cock into you farther and faster than before. You start moaning in pleasure as his penis hollows out your insides.");
-	outputText("\n\n\As the tension builds, Jojo keeps thrusting faster and faster. Not wanting him to be left out, you start moving in time with him and taking his cock up to the hilt. Jojo moans louder and shouts, \"<i>I’m going to cum!</i>\" Jojo rams you one last time hitting your prostate with all he’s got. He starts dumping his massive load into you" + (jojoCumQ() >= 750 ? ", filling your bowels" + (jojoCumQ() >= 1000 ? " and distending your belly" : ""): "") + ". With a tremendous shudder, you orgasm, your [asshole] clenching around his member, trying to wring it of all its delicious load. ");
+	outputText("\n\nAs the tension builds, Jojo keeps thrusting faster and faster. Not wanting him to be left out, you start moving in time with him and taking his cock up to the hilt. Jojo moans louder and shouts, \"<i>I’m going to cum!</i>\" Jojo rams you one last time hitting your prostate with all he’s got. He starts dumping his massive load into you" + (jojoCumQ() >= 750 ? ", filling your bowels" + (jojoCumQ() >= 1000 ? " and distending your belly" : ""): "") + ". With a tremendous shudder, you orgasm, your [asshole] clenching around his member, trying to wring it of all its delicious load. ");
 	if (player.hasCock()) outputText("[EachCock] twitches with pleasure, soaking the ground beneath you with a small lake of cum. ");
 	if (player.hasVagina()) outputText("Your [pussy] spontaneously " + (player.averageVaginalWetness() >= 4 ? "sprays" : "leaks") + " juices all over the ground. ");
 	if (player.gender == 0) outputText("Your body rocks with ecstasy. ");
 	outputText("\n\nHis cock slides out of your [ass] with a pop. Cum start dripping out of your [ass]. \"<i>That was... You were amazing, [name].</i>\" You smile at him while rubbing your inflated belly and tell him he wasn’t too bad himself. " + (flags[kFLAGS.JOJO_SEX_COUNTER] >= 4 ? "You give Jojo a lingering kiss." : ""));
-	outputText("\n\n\After a good while of rest, " + player.clothedOrNaked("the two of you get redressed and", "Jojo gets redressed and the two of you") + " return to your camp.");
+	outputText("\n\nAfter a good while of rest, " + player.clothedOrNaked("the two of you get redressed and", "Jojo gets redressed and the two of you") + " return to your camp.");
 	dynStats("sens", 1, "cor", -1);
 	flags[kFLAGS.JOJO_ANAL_CATCH_COUNTER]++;
 	flags[kFLAGS.JOJO_SEX_COUNTER]++;
