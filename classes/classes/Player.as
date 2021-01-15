@@ -3682,9 +3682,9 @@ use namespace CoC;
 					}
 				}
 			}
-			if (TopRace == "coualt") {
+			if (TopRace == "couatl") {
 				if (TopScore >= 11) {
-					if (TopScore >= 19) race = "greater coualt";
+					if (TopScore >= 19) race = "greater couatl";
 					else {
 						race = "couatl";
 					}
@@ -3692,7 +3692,7 @@ use namespace CoC;
 			}
 			if (TopRace == "vouivre") {
 				if (TopScore >= 11) {
-					if (TopScore >= 19) race = "greater vouivre";
+					if (TopScore >= 21) race = "greater vouivre";
 					else {
 						if (TopScore >= 16) race = "vouivre";
 						else {
@@ -6333,7 +6333,7 @@ use namespace CoC;
 				nagaCounter++;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && nagaCounter >= 8)
 				nagaCounter += 1;
-			if (hairType == Hair.GORGON || eyes.type == Eyes.GORGON || horns.type == Horns.DRACONIC_X4_12_INCH_LONG || horns.type == Horns.DRACONIC_X2 || tongue.type == Tongue.DRACONIC || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE || hairType == Hair.FEATHER || arms.type == Arms.HARPY || wings.type == Wings.FEATHERED_LARGE
+			if (!isNaga() || hairType == Hair.GORGON || eyes.type == Eyes.GORGON || horns.type == Horns.DRACONIC_X4_12_INCH_LONG || horns.type == Horns.DRACONIC_X2 || tongue.type == Tongue.DRACONIC || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE || hairType == Hair.FEATHER || arms.type == Arms.HARPY || wings.type == Wings.FEATHERED_LARGE
 			 || lowerBody == LowerBody.HYDRA || arms.type == Arms.HYDRA)
 				nagaCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
@@ -6394,6 +6394,7 @@ use namespace CoC;
 				gorgonCounter += 50;
 			if (isGargoyle()) gorgonCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) gorgonCounter = 0;
+			if (lowerBody != LowerBody.NAGA || wings.type == Wings.FEATHERED_LARGE || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE) gorgonCounter = 0;
 			gorgonCounter = finalRacialScore(gorgonCounter, Race.GORGON);
 			End("Player","racialScore");
 			return gorgonCounter;
@@ -6453,6 +6454,7 @@ use namespace CoC;
 				vouivreCounter += 50;
 			if (isGargoyle()) vouivreCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) vouivreCounter = 0;
+			if (lowerBody != LowerBody.NAGA || wings.type == Wings.FEATHERED_LARGE || (wings.type != Wings.DRACONIC_SMALL && wings.type != Wings.DRACONIC_LARGE && wings.type != Wings.DRACONIC_HUGE)) vouivreCounter = 0;
 			vouivreCounter = finalRacialScore(vouivreCounter, Race.VOUIVRE);
 			End("Player","racialScore");
 			return vouivreCounter;
@@ -6508,6 +6510,7 @@ use namespace CoC;
 				couatlCounter += 50;
 			if (isGargoyle()) couatlCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) couatlCounter = 0;
+			if (lowerBody != LowerBody.NAGA || wings.type != Wings.FEATHERED_LARGE || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE) couatlCounter = 0;
 			couatlCounter = finalRacialScore(couatlCounter, Race.COUATL);
 			End("Player","racialScore");
 			return couatlCounter;
@@ -12012,9 +12015,9 @@ use namespace CoC;
 				}
 			}//+30/30-40
 			if (vouivreScore() >= 11) {
-				if (vouivreScore() >= 22) {
+				if (vouivreScore() >= 21) {
 					maxStrCap2 += 130;
-					maxTouCap2 += 95;
+					maxTouCap2 += 80;
 					maxSpeCap2 += 100;
 					maxIntCap2 += 20;
 					maxWisCap2 -= 20;
