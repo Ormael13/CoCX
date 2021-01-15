@@ -173,12 +173,12 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public function talkMenuLunaHer():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
-			outputText("You ask her how long she has worked as a maid.\n\n");
-			outputText("\"<i>Of course, " + player.mf("Master","Mistress") + ". I entered the service of my first mistress as an apprentice at the age of ten, and worked in a few other noble houses before completing my training as a young woman. The incident at the magic shop which brought me here occurred at my fifth assignment, when I was twenty-one, and that was six months ago.</i>\"\n\n");
-			outputText("Does she enjoy the work?\n\n");
-			outputText("\"<i>I do," + player.mf("Master","Mistress") + ", very much so! Getting to care for " + player.mf("Master","Mistress") + ", in every <b>possible</b> way, with everything I need to do it available to me... ahhhh, the smile on " + player.mf("Master","Mistress") + "'s face while eating a perfectly cooked meal, " + player.mf("his","her") + " contented sigh after I nurse " + player.mf("him","her") + " wounds... " + player.mf("his","her") + " perfect, helpless sleeping face when I-</i>\"\n\n");
-			outputText("Luna suddenly cuts off her increasingly impassioned speech as she looks up at you for a moment, eyebrow twitching slightly.\n\n");
-			outputText("\"<i><b>Ahem,</i></b>\" she quietly coughs as she recomposes herself, before resuming her normal tone of stoic professionalism. \"<i>Suffice to say, yes, I find my work quite satisfying, so please be at ease and make <b>full</b> use of my services, " + player.mf("Master","Mistress") + ".</i>\n\n");
+			outputText("You ask her how long she has worked as a maid.\n\n" +
+					"\"<i>Of course, " + player.mf("Master","Mistress") + ". I entered the service of my first mistress as an apprentice at the age of ten, and worked in a few other noble houses before completing my training as a young woman. The incident at the magic shop which brought me here occurred at my fifth assignment, when I was twenty-one, and that was six months ago.</i>\"\n\n" +
+					"Does she enjoy the work?\n\n" +
+					"\"<i>I do," + player.mf("Master","Mistress") + ", very much so! Getting to care for " + player.mf("Master","Mistress") + ", in every <b>possible</b> way, with everything I need to do it available to me... ahhhh, the smile on " + player.mf("Master","Mistress") + "'s face while eating a perfectly cooked meal, " + player.mf("his","her") + " contented sigh after I nurse " + player.mf("him","her") + " wounds... " + player.mf("his","her") + " perfect, helpless sleeping face when I-</i>\"\n\n" +
+					"Luna suddenly cuts off her increasingly impassioned speech as she looks up at you for a moment, eyebrow twitching slightly.\n\n" +
+					"\"<i><b>Ahem,</i></b>\" she quietly coughs as she recomposes herself, before resuming her normal tone of stoic professionalism. \"<i>Suffice to say, yes, I find my work quite satisfying, so please be at ease and make <b>full</b> use of my services, " + player.mf("Master","Mistress") + ".</i>\n\n");
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText("You could swear you see the faintest flash of green in her eyes as she finishes, but perhaps it was your imagination?\n\n");
 			if (player.cor >= 60) outputText("Of course, it's those tantalizing glimpses of her true, corrupted nature that make her so cute, you think to yourself happily... definitely happily, not nervously at all.\n\n");
 			lunaJealousy(-100);
