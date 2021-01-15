@@ -125,7 +125,7 @@ public class CancerAttack extends Monster
 
 		private function BubbleSplash():void {
 			if (this.hasVagina()) outputText("The cancer gasps in pleasure as her mandible opens revealing her pussy. Out of nowhere, she suddenly splashes you right in the face with a powerful gushing jet of foaming juices. <b>You’re blinded!</b>\n\n");
-			if (this.hasCock()) outputText("The cancer gasps in pleasure as his mandible opens revealing her pussy. Out of nowhere, she suddenly splashes you right in the face with a powerful gushing jet of foaming juices. <b>You’re blinded!</b>\n\n");
+			if (this.hasCock()) outputText("The cancer gasps in pleasure as his mandible opens revealing his cock. Out of nowhere, he suddenly splashes you right in the face with a powerful gushing jet of foaming juices. <b>You’re blinded!</b>\n\n");
 			player.createStatusEffect(StatusEffects.Blind, 6, 0, 0, 0);
 		}
 		

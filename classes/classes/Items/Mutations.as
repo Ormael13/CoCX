@@ -6179,7 +6179,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //TURN INTO A FURRAH!  OH SHIT
-        if (player.eyes.type == Eyes.CAT_SLITS && rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
+        if ((player.eyes.type == Eyes.CAT_SLITS || player.eyes.type == Eyes.DISPLACER) && rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
             humanizeSkin();
             if (type == 1) {
                 player.skin.growCoat(Skin.FUR, {color: randomChoice(["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"])}, Skin.COVERAGE_LOW);

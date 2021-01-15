@@ -173,12 +173,12 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public function talkMenuLunaHer():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
-			outputText("You ask her how long she has worked as a maid.\n\n" +
-					"\"<i>Of course, " + player.mf("Master","Mistress") + ". I entered the service of my first mistress as an apprentice at the age of ten, and worked in a few other noble houses before completing my training as a young woman. The incident at the magic shop which brought me here occurred at my fifth assignment, when I was twenty-one, and that was six months ago.</i>\"\n\n" +
-					"Does she enjoy the work?\n\n" +
-					"\"<i>I do," + player.mf("Master","Mistress") + ", very much so! Getting to care for " + player.mf("Master","Mistress") + ", in every <b>possible</b> way, with everything I need to do it available to me... ahhhh, the smile on " + player.mf("Master","Mistress") + "'s face while eating a perfectly cooked meal, " + player.mf("his","her") + " contented sigh after I nurse " + player.mf("him","her") + " wounds... " + player.mf("his","her") + " perfect, helpless sleeping face when I-</i>\"\n\n" +
-					"Luna suddenly cuts off her increasingly impassioned speech as she looks up at you for a moment, eyebrow twitching slightly.\n\n" +
-					"\"<i><b>Ahem,</i></b>\" she quietly coughs as she recomposes herself, before resuming her normal tone of stoic professionalism. \"<i>Suffice to say, yes, I find my work quite satisfying, so please be at ease and make <b>full</b> use of my services, " + player.mf("Master","Mistress") + ".</i>\n\n");
+			outputText("You ask her how long she has worked as a maid.\n\n");
+			outputText("\"<i>Of course, " + player.mf("Master","Mistress") + ". I entered the service of my first mistress as an apprentice at the age of ten, and worked in a few other noble houses before completing my training as a young woman. The incident at the magic shop which brought me here occurred at my fifth assignment, when I was twenty-one, and that was six months ago.</i>\"\n\n");
+			outputText("Does she enjoy the work?\n\n");
+			outputText("\"<i>I do," + player.mf("Master","Mistress") + ", very much so! Getting to care for " + player.mf("Master","Mistress") + ", in every <b>possible</b> way, with everything I need to do it available to me... ahhhh, the smile on " + player.mf("Master","Mistress") + "'s face while eating a perfectly cooked meal, " + player.mf("his","her") + " contented sigh after I nurse " + player.mf("him","her") + " wounds... " + player.mf("his","her") + " perfect, helpless sleeping face when I-</i>\"\n\n");
+			outputText("Luna suddenly cuts off her increasingly impassioned speech as she looks up at you for a moment, eyebrow twitching slightly.\n\n");
+			outputText("\"<i><b>Ahem,</b></i>\" she quietly coughs as she recomposes herself, before resuming her normal tone of stoic professionalism. \"<i>Suffice to say, yes, I find my work quite satisfying, so please be at ease and make <b>full</b> use of my services, " + player.mf("Master","Mistress") + ".</i>\n\n");
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) outputText("You could swear you see the faintest flash of green in her eyes as she finishes, but perhaps it was your imagination?\n\n");
 			if (player.cor >= 60) outputText("Of course, it's those tantalizing glimpses of her true, corrupted nature that make her so cute, you think to yourself happily... definitely happily, not nervously at all.\n\n");
 			lunaJealousy(-100);
@@ -1223,6 +1223,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			//if player.werewolfScore() > 6 || player.wolfScore > 6 || player.dogScore > 6 {
 				//planned special variant scenes for you giving in completely to your bestial nature as you breed her like an animal, with variations for knotting or lesbian sex with enlarged clitoris should player possess either
 			//}
+			spriteSelect(SpriteDb.s_Luna_Mooning);
 			if (player.hasCock()) {
 				if (player.cocks.length > 1) {
 					outputText("Not one to pass up such a pleasing offer, you waste no time. Grabbing Luna's hips roughly you pull her back toward you and shove your cocks between her thighs, running them back and forth across her dripping slit until they are thorougly coated in her slippery juice. As she moans shamelessly at the feel of your lengths stroking her drooling lower lips and clit, you take one of your already well-lubricated thumbs and jam it in her ass to start loosening it up; she yips in surprise but makes no effor to pull back; she's already far too gone to resist whatever you have in store for her. Once you're lubricated and she's loosened, you carefully line yourself up with both of her holes and thrust in all at once.\n\n" +

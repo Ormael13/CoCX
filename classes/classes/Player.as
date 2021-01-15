@@ -10,7 +10,6 @@ import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.ISexyPart;
 import classes.BodyParts.LowerBody;
-import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
@@ -12815,7 +12814,6 @@ use namespace CoC;
 			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
 			return expToLevelUp;
 		}
-
 		public function swordXP(XP:Number = 0):void {
 			while (XP > 0) {
 				if (XP == 1) {
@@ -12828,12 +12826,13 @@ use namespace CoC;
 				}
 				//Level dat shit up!
 				if (masterySwordLevel < maxSwordLevel() && masterySwordXP >= SwordExpToLevelUp()) {
-					outputText("\n\n<b>Dao of Sword leveled up to " + (masterySwordLevel + 1) + "!</b>");
+					outputText("\n<b>Dao of Sword leveled up to " + (masterySwordLevel + 1) + "!</b>\n");
 					masterySwordLevel++;
 					masterySwordXP = 0;
 				}
 			}
 		}
+		
 		public function maxAxeLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -12856,7 +12855,6 @@ use namespace CoC;
 			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
 			return expToLevelUp;
 		}
-
 		public function axeXP(XP:Number = 0):void {
 			while (XP > 0) {
 				if (XP == 1) {
@@ -12869,12 +12867,13 @@ use namespace CoC;
 				}
 				//Level dat shit up!
 				if (masteryAxeLevel < maxAxeLevel() && masteryAxeXP >= AxeExpToLevelUp()) {
-					outputText("\n\n<b>Dao of Axe leveled up to " + (masteryAxeLevel + 1) + "!</b>");
+					outputText("\n<b>Dao of Axe leveled up to " + (masteryAxeLevel + 1) + "!</b>\n");
 					masteryAxeLevel++;
 					masteryAxeXP = 0;
 				}
 			}
 		}
+		
 		public function maxMaceHammerLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -12897,7 +12896,6 @@ use namespace CoC;
 			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
 			return expToLevelUp;
 		}
-
 		public function macehammerXP(XP:Number = 0):void {
 			while (XP > 0) {
 				if (XP == 1) {
@@ -12910,12 +12908,13 @@ use namespace CoC;
 				}
 				//Level dat shit up!
 				if (masteryMaceHammerLevel < maxMaceHammerLevel() && masteryMaceHammerXP >= MaceHammerExpToLevelUp()) {
-					outputText("\n\n<b>Dao of Mace/Hammer leveled up to " + (masteryMaceHammerLevel + 1) + "!</b>");
+					outputText("\n<b>Dao of Mace/Hammer leveled up to " + (masteryMaceHammerLevel + 1) + "!</b>\n");
 					masteryMaceHammerLevel++;
 					masteryMaceHammerXP = 0;
 				}
 			}
 		}
+		
 		public function maxDuelingSwordLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -12938,7 +12937,6 @@ use namespace CoC;
 			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
 			return expToLevelUp;
 		}
-
 		public function duelingswordXP(XP:Number = 0):void {
 			while (XP > 0) {
 				if (XP == 1) {
@@ -12951,12 +12949,13 @@ use namespace CoC;
 				}
 				//Level dat shit up!
 				if (masteryDuelingSwordLevel < maxDuelingSwordLevel() && masteryDuelingSwordXP >= DuelingSwordExpToLevelUp()) {
-					outputText("\n\n<b>Dao of Dueling Sword leveled up to " + (masteryDuelingSwordLevel + 1) + "!</b>");
+					outputText("\n<b>Dao of Dueling Sword leveled up to " + (masteryDuelingSwordLevel + 1) + "!</b>\n");
 					masteryDuelingSwordLevel++;
 					masteryDuelingSwordXP = 0;
 				}
 			}
 		}
+		
 		public function maxSpearLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -12979,7 +12978,6 @@ use namespace CoC;
 			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
 			return expToLevelUp;
 		}
-
 		public function spearXP(XP:Number = 0):void {
 			while (XP > 0) {
 				if (XP == 1) {
@@ -12992,27 +12990,73 @@ use namespace CoC;
 				}
 				//Level dat shit up!
 				if (masterySpearLevel < maxSpearLevel() && masterySpearXP >= SpearExpToLevelUp()) {
-					outputText("\n\n<b>Dao of Spear leveled up to " + (masterySpearLevel + 1) + "!</b>");
+					outputText("\n<b>Dao of Spear leveled up to " + (masterySpearLevel + 1) + "!</b>\n");
 					masterySpearLevel++;
 					masterySpearXP = 0;
 				}
 			}
 		}
+		
 		public function maxDualWieldSmallLevel():Number {
-			var maxLevel:Number = 5;
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
 			return maxLevel;
 		}
+		
 		public function maxDualWieldNormalLevel():Number {
-			var maxLevel:Number = 5;
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
 			return maxLevel;
 		}
+		
 		public function maxDualWieldLargeLevel():Number {
-			var maxLevel:Number = 5;
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
 			return maxLevel;
 		}
+		
 		public function maxDualWieldFirearmsLevel():Number {
-			var maxLevel:Number = 5;
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
 			return maxLevel;
+		}
+		public function DualWieldFirearmsExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = dualWFLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = dualWFLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function dualWieldFirearmsXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					dualWFXP++;
+					XP--;
+				}
+				else {
+					dualWFXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (dualWFLevel < maxDualWieldFirearmsLevel() && dualWFXP >= DualWieldFirearmsExpToLevelUp()) {
+					outputText("\n<b>Dao of Axe leveled up to " + (dualWFLevel + 1) + "!</b>\n");
+					dualWFLevel++;
+					dualWFXP = 0;
+				}
+			}
 		}
 
 		public function maxHerbalismLevel():Number {
