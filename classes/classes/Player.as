@@ -6848,7 +6848,7 @@ use namespace CoC;
 				harpy++;
 			if (lowerBody == LowerBody.HARPY)
 				harpy++;
-			if (harpy >= 2 && faceType == Face.HUMAN)
+			if (harpy >= 2 && (faceType == Face.HUMAN || faceType == Face.ANIMAL_TOOTHS))
 				harpy++;
 			if (harpy >= 2 && (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN))
 				harpy++;
@@ -7507,6 +7507,7 @@ use namespace CoC;
 				thunderbirdCounter += 1;
 			if (isGargoyle()) thunderbirdCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) thunderbirdCounter = 0;
+			if (tailType != Tail.THUNDERBIRD || hairType != Hair.STORM) thunderbirdCounter = 0;
 			thunderbirdCounter = finalRacialScore(thunderbirdCounter, Race.THUNDERBIRD);
 			End("Player","racialScore");
 			return thunderbirdCounter;
@@ -8294,6 +8295,7 @@ use namespace CoC;
 				sphinxCounter += 1;
 			if (isGargoyle()) sphinxCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) sphinxCounter = 0;
+			if (arms.type != Arms.SPHINX || wings.type != Wings.FEATHERED_SPHINX) sphinxCounter = 0;
 			sphinxCounter = finalRacialScore(sphinxCounter, Race.SPHINX);
 			End("Player","racialScore");
 			return sphinxCounter;
