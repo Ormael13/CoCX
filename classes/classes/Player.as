@@ -5562,6 +5562,7 @@ use namespace CoC;
 			if (catScore() >= 4 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || rearBody.type == RearBody.LION_MANE || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING) displacerbeastCounter = 0;
 			if (isGargoyle()) displacerbeastCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) displacerbeastCounter = 0;
+			if (arms.type != Arms.DISPLACER || rearBody.type != RearBody.DISPLACER_TENTACLES) displacerbeastCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0) displacerbeastCounter += 50;
 			displacerbeastCounter = finalRacialScore(displacerbeastCounter, Race.DISPLACERBEAST);
 			End("Player","racialScore");
@@ -11110,13 +11111,23 @@ use namespace CoC;
 					currentSen += 25;
 				}
 			}
-			if (displacerbeastScore() >= 14) {
-				maxStrCap2 += 95
-				if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 110;
-				else maxSpeCap2 += 100;
-				maxIntCap2 -= 25;
-				maxWisCap2 -= 20;
-				maxLibCap2 += 60;
+			if (displacerbeastScore() >= 14){
+				if (displacerbeastScore() >= 20) {
+					maxStrCap2 += 140
+					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 150;
+					else maxSpeCap2 += 140;
+					maxIntCap2 -= 30;
+					maxWisCap2 -= 30;
+					maxLibCap2 += 80;
+				}
+				else{
+					maxStrCap2 += 95
+					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 110;
+					else maxSpeCap2 += 100;
+					maxIntCap2 -= 25;
+					maxWisCap2 -= 20;
+					maxLibCap2 += 60;
+				}
 			}
 			if (bunnyScore() >= 10) {
 					maxStrCap2 -= 20;
