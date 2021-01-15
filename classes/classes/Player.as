@@ -6847,6 +6847,8 @@ use namespace CoC;
 				harpy++;
 			if (lowerBody == LowerBody.HARPY)
 				harpy++;
+			if (hasVagina())
+				harpy++;
 			if (harpy >= 2 && (faceType == Face.HUMAN || faceType == Face.ANIMAL_TOOTHS))
 				harpy++;
 			if (harpy >= 2 && (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN))
