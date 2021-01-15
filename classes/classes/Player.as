@@ -3932,14 +3932,14 @@ use namespace CoC;
 			if (TopRace == "manticore") {
 				if (TopScore >= 7) {
 					if (isTaur() && lowerBody == LowerBody.LION) {
-						if (TopScore >= 20)
+						if (TopScore >= 22)
 							race = "true manticore-taur";
 						else if (TopScore >= 15)
 							race = "manticore-taur";
 						else
 							race = "half manticore-taur";
 					}
-					else if (TopScore >= 20)
+					else if (TopScore >= 22)
 						race = "true manticore";
 					else if (TopScore >= 15)
 						race = "manticore";
@@ -9381,7 +9381,7 @@ use namespace CoC;
 			if (wings.type == Wings.MANTICORE_LIKE_SMALL)
 				manticoreCounter++;
 			if (wings.type == Wings.MANTICORE_LIKE_LARGE)
-				manticoreCounter += 2;
+				manticoreCounter += 4;
 			if (!hasCock())
 				manticoreCounter++;
 			if (cocks.length > 0)
@@ -9410,6 +9410,7 @@ use namespace CoC;
 				manticoreCounter += 1;
 			if (isGargoyle()) manticoreCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) manticoreCounter = 0;
+			if (tailType != Tail.MANTICORE_PUSSYTAIL) manticoreCounter = 0;
 			manticoreCounter = finalRacialScore(manticoreCounter, Race.MANTICORE);
 			End("Player","racialScore");
 			return manticoreCounter;
@@ -11616,10 +11617,10 @@ use namespace CoC;
 				maxSpeCap2 += 5;
 			}//+10/10-20
 			if (manticoreScore() >= 7) {
-				if (manticoreScore() >= 20) {
-					maxSpeCap2 += 145;
+				if (manticoreScore() >= 22) {
+					maxSpeCap2 += 160;
 					maxIntCap2 += 90;
-					maxLibCap2 += 125;
+					maxLibCap2 += 140;
 					currentSen += 60;
 				}
 				else if (manticoreScore() >= 15) {
@@ -13429,7 +13430,7 @@ use namespace CoC;
 			if (horseScore() >= 7) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (manticoreScore() >= 6) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (manticoreScore() >= 15) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (manticoreScore() >= 20) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (manticoreScore() >= 22) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (rhinoScore() >= 4) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
