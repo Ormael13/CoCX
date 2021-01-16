@@ -11,11 +11,14 @@ public class LowerBody extends SaveableBodyPart {
 	 * - value: numerical id (0, 1)
 	 * - id: name of the constant ("HUMAN", "HOOFED")
 	 * - name: human-readable default name, ("human", "hoofed")
+	 * - claw:
+	 * - tailSlam:
+	 * - tentacle:
 	 */
 	public static var Types:/*EnumValue*/Array = [];
-	
+
 	public var legCount:int = 2;
-	
+
 	public static const HUMAN:int                 = 0;
 	EnumValue.add(Types, HUMAN, "HUMAN", {name: "human"});
 	public static const HOOFED:int                = 1;
@@ -23,9 +26,9 @@ public class LowerBody extends SaveableBodyPart {
 	public static const DOG:int                   = 2;
 	EnumValue.add(Types, DOG, "DOG", {name: "dog"});
 	public static const NAGA:int                  = 3;
-	EnumValue.add(Types, NAGA, "NAGA", {name: "naga"});
+	EnumValue.add(Types, NAGA, "NAGA", {name: "naga", tailSlam: true});
 	public static const CENTAUR:int               = 4;//[Deprecated] use HOOFED and legCount = 4
-	EnumValue.add(Types, CENTAUR, "CENTAUR", {name: "centaur"});
+	EnumValue.add(Types, CENTAUR, "CENTAUR", {name: "centaur", centaur: true});
 	public static const DEMONIC_HIGH_HEELS:int    = 5;
 	EnumValue.add(Types, DEMONIC_HIGH_HEELS, "DEMONIC_HIGH_HEELS", {name: "demonic high-heels"});
 	public static const DEMONIC_CLAWS:int         = 6;
@@ -68,7 +71,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const SALAMANDER:int            = 25;
 	EnumValue.add(Types, SALAMANDER, "SALAMANDER", {name: "salamander"});
 	public static const SCYLLA:int                = 26;
-	EnumValue.add(Types, SCYLLA, "SCYLLA", {name: "slippery octopus tentacles"});
+	EnumValue.add(Types, SCYLLA, "SCYLLA", {name: "slippery octopus tentacles", tentacle: true});
 	public static const MANTIS:int                = 27;
 	EnumValue.add(Types, MANTIS, "MANTIS", {name: "mantis"});
 	//public static const :int         = 28;thunder mantis legs
@@ -83,7 +86,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const WOLF:int                  = 33;
 	EnumValue.add(Types, WOLF, "WOLF", {name: "wolf"});
 	public static const PLANT_FLOWER:int          = 34;
-	EnumValue.add(Types, PLANT_FLOWER, "PLANT_FLOWER", {name: "plant flower"});
+	EnumValue.add(Types, PLANT_FLOWER, "PLANT_FLOWER", {name: "plant flower", tentacle: true});
 	public static const LION:int                  = 35;
 	EnumValue.add(Types, LION, "LION", {name: "lion"});
 	public static const YETI:int                  = 36;
@@ -117,7 +120,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const BEAR:int		          = 50;
 	EnumValue.add(Types, BEAR, "BEAR", {name: "bear"});
 	public static const HYDRA:int		          = 51;
-	EnumValue.add(Types, HYDRA, "HYDRA", {name: "hydra"});
+	EnumValue.add(Types, HYDRA, "HYDRA", {name: "hydra", bite: true});
 	public static const FIRE_SNAIL:int		      = 52;
 	EnumValue.add(Types, FIRE_SNAIL, "FIRE_SNAIL", {name: "fire snail"});
 	public static const GHOST:int			      = 53;
@@ -129,21 +132,21 @@ public class LowerBody extends SaveableBodyPart {
 	public static const YUKI_ONNA:int			  = 56;//button 0 on 5th page of metamorph
 	EnumValue.add(Types, YUKI_ONNA, "YUKI_ONNA", {name: "yuki onna"});
 	public static const MELKIE:int			  	  = 57;
-	EnumValue.add(Types, MELKIE, "MELKIE", {name: "melkie"});
+	EnumValue.add(Types, MELKIE, "MELKIE", {name: "melkie", tailSlam: true});
 	public static const CENTIPEDE:int			  = 58;
 	EnumValue.add(Types, CENTIPEDE, "CENTIPEDE", {name: "centipede"});
 	public static const KRAKEN:int                = 59;
-	EnumValue.add(Types, KRAKEN, "KRAKEN", {name: "kraken"});
+	EnumValue.add(Types, KRAKEN, "KRAKEN", {name: "kraken", tentacle: true});
 	public static const CRAB:int                  = 60;
 	EnumValue.add(Types, CRAB, "CRAB", {name: "crab"});
 	public static const CANCER:int                = 61;
-	EnumValue.add(Types, CANCER, "CANCER", {name: "cancer"});
+	EnumValue.add(Types, CANCER, "CANCER", {name: "cancer", claw: true});
 	public static const FROSTWYRM:int             = 62;
-	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {name: "frost wyrm"});
+	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {name: "frost wyrm", tailSlam: true});
 	public static const USHI_ONI_ONNA:int         = 63;
 	EnumValue.add(Types, USHI_ONI_ONNA, "USHI_ONI_ONNA", {name: "ushi-oni"});
 	public static const FLOWER_LILIRAUNE:int	  = 64;
-	EnumValue.add(Types, FLOWER_LILIRAUNE, "FLOWER_LILIRAUNE", {name: "liliraune flower"});
+	EnumValue.add(Types, FLOWER_LILIRAUNE, "FLOWER_LILIRAUNE", {name: "liliraune flower", tentacle: true});
 	public static const WEASEL:int                = 65;
 	EnumValue.add(Types, WEASEL, "WEASEL", {name: "weasel"});
 	public static const GAZER:int                 = 66;
@@ -152,7 +155,7 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, SQUIRREL, "SQUIRREL", {name: "squirrel"});
 	public static const WENDIGO:int               = 68;
 	EnumValue.add(Types, WENDIGO, "WENDIGO", {name: "wendigo"});
-	
+
 	override public function set type(value:int):void {
 		super.type = value;
 		// Reset leg count
@@ -231,11 +234,11 @@ public class LowerBody extends SaveableBodyPart {
 		super.restore(keepColor);
 		legCount = 2;
 	}
-	
+
 	public function legs():String {
 		if (isTaur())
 			return num2Text(legCount) + " legs";
-		
+
 		switch (type) {
 			case DRIDER: return num2Text(legCount) + " spider legs";
 			case PLANT_FLOWER: return num2Text(legCount) + " vine-like tentacle stamens";
@@ -287,7 +290,7 @@ public class LowerBody extends SaveableBodyPart {
 				return "legs";
 		}
 	}
-	
+
 	public function leg():String {
 		switch(type){
 			case HUMAN:
@@ -452,7 +455,7 @@ public class LowerBody extends SaveableBodyPart {
 	public function isLiliraune():Boolean {
 		return type == FLOWER_LILIRAUNE;
 	}
-	
+
 	override protected function loadFromOldSave(savedata:Object):void {
 		type = intOr(savedata.lowerBody, HUMAN);
 		if (type === CENTAUR) {
