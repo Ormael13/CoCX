@@ -488,7 +488,7 @@ use namespace CoC;
 		//Unhindered related acceptable armor types
 		public function meetUnhinderedReq():Boolean
 		{
-			return armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "bimbo skirt" || armorName == "desert naga pink and black silk dress" || hasPerk(PerkLib.ScandalousSuccubusClothing) || hasPerk(PerkLib.BerserkerArmor) || hasPerk(PerkLib.TamamoNoMaeCursedKimono) || hasPerk(PerkLib.InariBlessedKimono) || armor == ArmorLib.NOTHING ;
+			return armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "bimbo skirt" || armorName == "desert naga pink and black silk dress" || hasPerk(PerkLib.BerserkerArmor) || armor == ArmorLib.NOTHING ;
 		}
 		//override public function get armors
 		override public function get armorName():String {
@@ -903,14 +903,14 @@ use namespace CoC;
 		//Wing Slap compatibile wings + tiers of wings for dmg multi
 		public function haveWingsForWingSlap():Boolean
 		{
-			return Wings.Types[wings.type].wingSlap;
+			return Wings[wings.type].wingSlap ;
 		}
 		public function thirdtierWingsForWingSlap():Boolean
 		{
 			return wings.type == Wings.BAT_LIKE_LARGE_2 || wings.type == Wings.DRACONIC_HUGE;
 		}
 		//Natural Claws (arm types and weapons that can substitude them)
-		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.Types[lowerBody].claw;}
+		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.Types[lowerBody.type].claw;}
 		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws";}
 		//Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
@@ -3256,7 +3256,7 @@ use namespace CoC;
 			if (TopRace == "kitsune") {
 				if (TopScore >= 5) {
 					if (tailType == 13 && tailCount >= 2 && kitsuneScore() >= 9) {
-						if (TopScore >= 26) {
+						if (TopScore >= 21) {
 							if (tailCount == 9 && isTaur()) {
 								race = "Inari-taur";
 							} else if (tailCount == 9) {
@@ -3264,7 +3264,7 @@ use namespace CoC;
 							} else {
 								race = "kitsune";
 							}
-						} else if (TopScore >= 21) {
+						} else if (TopScore >= 18) {
 							if (tailCount == 9 && isTaur()) {
 								race = "nine tailed kitsune-taur of balance";
 							} else if (tailCount == 9) {
@@ -3272,7 +3272,7 @@ use namespace CoC;
 							} else {
 								race = "kitsune";
 							}
-						} else if (TopScore >= 18) {
+						} else if (TopScore >= 14) {
 							if (tailCount == 9 && isTaur()) {
 								race = "nine tailed kitsune-taur";
 							} else if (tailCount == 9) {
@@ -5230,7 +5230,7 @@ use namespace CoC;
 				fairyCounter+=4;
 			if (hairType == Hair.FAIRY)
 				fairyCounter++;
-			if (!hasCock() && fairyCounter > 0)
+			if (hasCock() > 0 && fairyCounter > 0)
 				fairyCounter++;
 			if (breastRows.length > 1 && fairyCounter > 0)
 				fairyCounter++;
@@ -5238,6 +5238,7 @@ use namespace CoC;
 				fairyCounter++;
 			if (breastRows.length == 4 && fairyCounter > 0)
 				fairyCounter++;
+			//Fur only counts if some canine features are present
 			if (!hasCoat() && fairyCounter > 0)
 				fairyCounter++;
 			if (skinType == Skin.PLAIN && skinAdj == "flawless")
@@ -5714,23 +5715,22 @@ use namespace CoC;
 				kitsuneCounter++;
 				kitsuneCounter2++;
 			if (tailType == Tail.FOX && tailCount >= 4 && tailCount < 6)
-				kitsuneCounter += 4;
+				kitsuneCounter += 2;
 				kitsuneCounter2 += 2;
 			if (tailType == Tail.FOX && tailCount >= 6 && tailCount < 9)
-				kitsuneCounter += 6;
+				kitsuneCounter += 3;
 				kitsuneCounter2 += 3;
 			if (tailType == Tail.FOX && tailCount == 9)
-				kitsuneCounter += 9;
+				kitsuneCounter += 4;
 				kitsuneCounter2 += 4;
 			if (tailType != Tail.FOX || (tailType == Tail.FOX && tailCount < 2))
 				kitsuneCounter -= 7;
 			if (skin.base.pattern == Skin.PATTERN_MAGICAL_TATTOO || hasFur())
 				kitsuneCounter++;
 				kitsuneCounter2++;
-			if (skin.base.type == Skin.PLAIN)
-				kitsuneCounter ++;
-			if (InCollection(hairColor, KitsuneScene.basicKitsuneHair) || InCollection(hairColor, KitsuneScene.elderKitsuneColors))
-				kitsuneCounter++;
+			//If the character has fur, scales, or gooey skin, -1
+		//	if (skinType == FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
+		//		kitsuneCounter--;
 			if (hasCoat() && !hasCoatOfType(Skin.FUR))
 				kitsuneCounter -= 2;
 			if (skin.base.type != Skin.PLAIN)
@@ -5751,13 +5751,12 @@ use namespace CoC;
 			//If the character has a 'vag of holding', +1
 			if (vaginalCapacity() >= 8000)
 				kitsuneCounter++;
-			//When character get Hoshi no tama
+			//If the character has "blonde","black","red","white", or "silver" hair, +1
+		//	if (kitsuneCounter > 0 && (InCollection(furColor, KitsuneScene.basicKitsuneHair) || InCollection(furColor, KitsuneScene.elderKitsuneColors)))
+		//		kitsuneCounter++;
 			if (findPerk(PerkLib.StarSphereMastery) >= 0)
 				kitsuneCounter++;
-			if (findPerk(PerkLib.EnlightenedKitsune) >= 0 || findPerk(PerkLib.CorruptedKitsune) >= 0)
-				kitsuneCounter++;
-			if (findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0)
-				kitsuneCounter++;
+			//When character get Hoshi no tama
 			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0)
 				kitsuneCounter++;
 			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0)
@@ -10997,10 +10996,10 @@ use namespace CoC;
 					maxIntCap2 += 25;
 				}
 			}
-			if (fairyScore() >= 23) {
+			if (fairyScore() >= 19) {
 				maxStrCap2 -= 25;
-				maxTouCap2 -= 10;
-				maxSpeCap2 += 200;
+				maxTouCap2 -= 25;
+				maxSpeCap2 += 155;
 				maxIntCap2 += 200;
 				currentSen += 20;
 			}//+10/10-20
@@ -11242,14 +11241,6 @@ use namespace CoC;
 			if (kitsuneScore() >= 5) {
 				if (kitsuneScore() >= 9 && tailType == 13 && tailCount >= 2) {
 					if (kitsuneScore() >= 14 && tailCount == 9) {
-						if (kitsuneScore() >= 26 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-							maxStrCap2 -= 50;
-							maxSpeCap2 += 40;
-							maxIntCap2 += 170;
-							maxWisCap2 += 170;
-							maxLibCap2 += 110;
-							currentSen += 60;
-						}
 						if (kitsuneScore() >= 21 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
 							maxStrCap2 -= 50;
 							maxSpeCap2 += 40;
@@ -11258,7 +11249,7 @@ use namespace CoC;
 							maxLibCap2 += 80;
 							currentSen += 60;
 						}//315(425)
-						else if (kitsuneScore() >= 18) {
+						else if (kitsuneScore() >= 18 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
 							maxStrCap2 -= 45;
 							maxSpeCap2 += 35;
 							maxIntCap2 += 120;
