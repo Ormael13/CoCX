@@ -2274,13 +2274,16 @@ public class Combat extends BaseContent {
 	public function meleeDualWieldAccuracyPenalty():Number {
 		var accmdwmodpenalty:Number = 0;
         if (player.weaponPerk == "Dual") {
-			accmdwmodpenalty -= 25;
+			if (player.hasPerk(PerkLib.DualWieldNormal)) accmdwmodpenalty -= 15;
+			else accmdwmodpenalty -= 25;
 		}
         if (player.weaponPerk == "Dual Large") {
-			accmdwmodpenalty -= 25;
+			if (player.hasPerk(PerkLib.DualWieldLarge)) accmdwmodpenalty -= 15;
+			else accmdwmodpenalty -= 25;
 		}
         if (player.weaponPerk == "Dual Small") {
-			accmdwmodpenalty -= 25;
+			if (player.hasPerk(PerkLib.DualWieldSmall)) accmdwmodpenalty -= 15;
+			else accmdwmodpenalty -= 25;
 		}
         if (player.weaponPerk == "Quad") {
 			accmdwmodpenalty -= 75;
@@ -2291,13 +2294,16 @@ public class Combat extends BaseContent {
 	public function meleeDualWieldDamagePenalty():Number {
 		var dmgmdwmodpenalty:Number = 1;
         if (player.weaponPerk == "Dual") {
-			dmgmdwmodpenalty -= 0.5;
+			if (player.hasPerk(PerkLib.DualWieldNormal)) dmgmdwmodpenalty -= 0.3;
+			else dmgmdwmodpenalty -= 0.5;
 		}
         if (player.weaponPerk == "Dual Large") {
-			dmgmdwmodpenalty -= 0.5;
+			if (player.hasPerk(PerkLib.DualWieldLarge)) dmgmdwmodpenalty -= 0.3;
+			else dmgmdwmodpenalty -= 0.5;
 		}
         if (player.weaponPerk == "Dual Small") {
-			dmgmdwmodpenalty -= 0.5;
+			if (player.hasPerk(PerkLib.DualWieldSmall)) dmgmdwmodpenalty -= 0.3;
+			else dmgmdwmodpenalty -= 0.5;
 		}
         if (player.weaponPerk == "Quad") {
 			dmgmdwmodpenalty -= 0.9;
@@ -2366,7 +2372,8 @@ public class Combat extends BaseContent {
 	public function firearmsDualWieldAccuracyPenalty():Number {
 		var accfdwmodpenalty:Number = 0;
         if (player.weaponPerk == "Dual Firearms") {
-			accfdwmodpenalty -= 25;
+			if (player.hasPerk(PerkLib.DualWieldSmall)) accfdwmodpenalty -= 15;
+			else accfdwmodpenalty -= 25;
 		}
         if (player.weaponPerk == "Quad Firearms") {
 			accfdwmodpenalty -= 75;
@@ -2377,7 +2384,8 @@ public class Combat extends BaseContent {
 	public function firearmsDualWieldDamagePenalty():Number {
 		var dmgfdwmodpenalty:Number = 1;
         if (player.weaponPerk == "Dual Firearms") {
-			dmgfdwmodpenalty -= 0.5;
+			if (player.hasPerk(PerkLib.DualWieldFirearms)) dmgfdwmodpenalty -= 0.3;
+			else dmgfdwmodpenalty -= 0.5;
 		}
         if (player.weaponPerk == "Quad Firearms") {
 			dmgfdwmodpenalty -= 0.9;
