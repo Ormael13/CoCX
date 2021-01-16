@@ -377,6 +377,7 @@ import coc.view.MainView;
 			for (var i:int = 0; i < player.statusEffects.length; i++) {
 				if (isSpecialStatus(player.statusEffects[i])) statusTemp.push(player.statusEffects[i]);
 			}
+			player.cleanAllBuffs();
 			player.removeStatuses();
 			if (statusTemp.length > 0) {
 				for (i = 0; i < statusTemp.length; i++) {

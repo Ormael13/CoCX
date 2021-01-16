@@ -948,7 +948,7 @@ use namespace CoC;
 		public function isHarpy():Boolean { return (harpyScore() > 10 || thunderbirdScore() > 15 || phoenixScore() > 15); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
 		public function isNightCreature():Boolean { return (vampireScore() >= 10 || batScore() >= 6 || jiangshiScore() >= 20); }
-		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }	
+		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
@@ -12849,7 +12849,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function maxAxeLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -12890,7 +12890,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function maxMaceHammerLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -12931,7 +12931,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function maxDuelingSwordLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -12972,7 +12972,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function maxSpearLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -13013,28 +13013,28 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function maxDualWieldSmallLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
 			return maxLevel;
 		}
-		
+
 		public function maxDualWieldNormalLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
 			return maxLevel;
 		}
-		
+
 		public function maxDualWieldLargeLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
 			return maxLevel;
 		}
-		
+
 		public function maxDualWieldFirearmsLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -13407,8 +13407,8 @@ use namespace CoC;
 		public function EnergyDependentRestore():void {
 			var intBuff:Number = buff("Energy Vampire").getValueOfStatBuff("int.mult");
 			var speBuff:Number = buff("Energy Vampire").getValueOfStatBuff("spe.mult");
-			if (intBuff < +0.9) {
-				buff("Energy Vampire").addStats({ "int.mult": +0.05 }).withText("Energy Vampire");
+			if (intBuff < +1.8) {
+				buff("Energy Vampire").addStats({ "int.mult": +0.10 }).withText("Energy Vampire");
 			}
 			if (speBuff < +0.9) {
 				buff("Energy Vampire").addStats({ "spe.mult": +0.05 }).withText("Energy Vampire");
@@ -13419,7 +13419,7 @@ use namespace CoC;
 		}
 
 		public function hasUniquePregnancy():Boolean{
-			if (isSlime() || isHarpy() || isGoblinoid()) return true;
+			if (isSlime() || isHarpy() || isGoblinoid() || isAlraune()) return true;
 			else return false;
 		}
 
