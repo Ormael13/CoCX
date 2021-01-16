@@ -903,52 +903,30 @@ use namespace CoC;
 		//Wing Slap compatibile wings + tiers of wings for dmg multi
 		public function haveWingsForWingSlap():Boolean
 		{
-			return wings.type == Wings.BAT_LIKE_LARGE || wings.type == Wings.FEATHERED_LARGE || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.BAT_LIKE_LARGE_2 || wings.type == Wings.DRACONIC_HUGE || wings.type == Wings.FEATHERED_PHOENIX || wings.type == Wings.FEATHERED_ALICORN || wings.type == Wings.GARGOYLE_LIKE_LARGE || wings.type == Wings.MANTICORE_LIKE_LARGE
-			 || wings.type == Wings.BAT_ARM || wings.type == Wings.VAMPIRE || wings.type == Wings.FEATHERED_AVIAN || wings.type == Wings.NIGHTMARE || wings.type == Wings.FEATHERED_SPHINX || wings.type == Wings.DEVILFEATHER;
+			return Wings[wings.type].wingSlap ;
 		}
 		public function thirdtierWingsForWingSlap():Boolean
 		{
 			return wings.type == Wings.BAT_LIKE_LARGE_2 || wings.type == Wings.DRACONIC_HUGE;
 		}
 		//Natural Claws (arm types and weapons that can substitude them)
-		public function haveNaturalClaws():Boolean
-		{
-			return arms.type == Arms.SPHINX || arms.type == Arms.KITSUNE || arms.type == Arms.CAT || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER || arms.type == Arms.DRAGON || arms.type == Arms.FOX || arms.type == Arms.GARGOYLE || arms.type == Arms.LION || arms.type == Arms.WOLF || arms.type == Arms.LIZARD || arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_2
-			 || arms.type == Arms.RED_PANDA || arms.type == Arms.SALAMANDER || arms.type == Arms.HYDRA || arms.type == Arms.JIANGSHI || arms.type == Arms.FROSTWYRM || arms.type == Arms.BEAR || arms.type == Arms.MANTIS || arms.type == Arms.KAMAITACHI || arms.type == Arms.SQUIRREL || arms.type == Arms.WEASEL || arms.type == Arms.WENDIGO;
-		}
-		public function haveNaturalClawsTypeWeapon():Boolean
-		{
-			return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws";
-		}
+		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.Types[lowerBody.type].claw;}
+		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws";}
 		//Other natural weapon checks
-		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || faceType == Face.VAMPIRE ||
-				faceType == Face.SHARK_TEETH || faceType == Face.WOLF_FANGS || faceType == Face.PANDA || faceType == Face.YETI_FANGS ||
-				faceType == Face.WOLF || faceType == Face.SPIDER_FANGS || faceType == Face.ANIMAL_TOOTHS || faceType == Face.CAT_CANINES ||
-				faceType == Face.CAT || faceType == Face.MANTICORE || faceType == Face.SALAMANDER_FANGS || faceType == Face.WEASEL ||
-				faceType == Face.SNAKE_FANGS || faceType == Face.FOX || faceType == Face.BEAR || faceType == Face.DRAGON_FANGS ||
-				faceType == Face.DRAGON || faceType == Face.DOG || faceType == Face.FERRET || faceType == Face.ORCA || faceType == Face.LIZARD ||
-				faceType == Face.DEVIL_FANGS || faceType == Face.SQUIRREL || faceType == Face.BUNNY || faceType == Face.SMUG
-				|| faceType == Face.BUCKTEETH || faceType == Face.BUCKTOOTH);}
-		public function hasAWingAttack():Boolean { return (wings.type == Wings.DRACONIC_HUGE || wings.type == Wings.NIGHTMARE
-				|| wings.type == Wings.MANTICORE_LIKE_LARGE || wings.type == Wings.GARGOYLE_LIKE_LARGE);}
-		public function hasAGoreAttack():Boolean { return (horns.type == Horns.UNICORN || horns.type == Horns.BICORN
-				|| horns.type == Horns.COW_MINOTAUR || horns.type == Horns.FROSTWYRM);}
-		public function hasATailSlapAttack():Boolean { return (tail.type == Tail.DRACONIC || tail.type == Tail.LIZARD
-				|| tail.type == Tail.SALAMANDER || tail.type == Tail.ORCA || tail.type == Tail.SHARK || tail.type == Tail.CAVE_WYRM
-				|| tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL
-				|| tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM
-				|| lowerBody == LowerBody.NAGA);}
-		public function hasTalonsAttack():Boolean{
-			return lowerBody == LowerBody.HARPY;
-		}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasPerk(PerkLib.MorphicWeaponry) || isAlraune() || isScylla() || isKraken() || isTaur());}
+		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
+		public function hasAWingAttack():Boolean { return (Wings.Types[wings.type].wingSlap);}
+		public function hasAGoreAttack():Boolean { return (Horns.Types[horns.type].gore);}
+		public function hasATailSlapAttack():Boolean { return (Tail.Types[tail.type].tailSlam || Tail.Types[tail.type].stinger || LowerBody.Types[lowerBody].tailSlam);}
+		public function hasTalonsAttack():Boolean{return lowerBody == LowerBody.HARPY;}
+		public function hasTentacleAttacks():Boolean{return LowerBody.Types[lowerBody].tentacle || hasPerk(PerkLib.MorphicWeaponry);}
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasTentacleAttacks || isTaur());}
 		//Some other checks
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
 		public function isHarpy():Boolean { return (harpyScore() > 10 || thunderbirdScore() > 15 || phoenixScore() > 15); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
 		public function isNightCreature():Boolean { return (vampireScore() >= 10 || batScore() >= 6 || jiangshiScore() >= 20); }
-		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }	
+		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
@@ -4660,7 +4638,7 @@ use namespace CoC;
 			var jiangshiCounter:Number = 0;
 			if (hasPlainSkinOnly() && skinTone != "slippery")
 				jiangshiCounter++;
-			if (skinTone == "ghostly pale" || skinTone == "light blue")
+			if (skinTone == "ghostly pale" || skinTone == "light blue" || skinTone == "snow white")
 				jiangshiCounter++;
 			if (hairType == Hair.NORMAL)
 				jiangshiCounter++;
@@ -12849,7 +12827,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function maxAxeLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -12890,7 +12868,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function maxMaceHammerLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -12931,7 +12909,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function maxDuelingSwordLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -12972,7 +12950,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function maxSpearLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -13013,7 +12991,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function maxDualWieldSmallLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -13136,7 +13114,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+    
 		public function maxDualWieldFirearmsLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -13509,8 +13487,8 @@ use namespace CoC;
 		public function EnergyDependentRestore():void {
 			var intBuff:Number = buff("Energy Vampire").getValueOfStatBuff("int.mult");
 			var speBuff:Number = buff("Energy Vampire").getValueOfStatBuff("spe.mult");
-			if (intBuff < +0.9) {
-				buff("Energy Vampire").addStats({ "int.mult": +0.05 }).withText("Energy Vampire");
+			if (intBuff < +1.8) {
+				buff("Energy Vampire").addStats({ "int.mult": +0.10 }).withText("Energy Vampire");
 			}
 			if (speBuff < +0.9) {
 				buff("Energy Vampire").addStats({ "spe.mult": +0.05 }).withText("Energy Vampire");
@@ -13521,7 +13499,7 @@ use namespace CoC;
 		}
 
 		public function hasUniquePregnancy():Boolean{
-			if (isSlime() || isHarpy() || isGoblinoid()) return true;
+			if (isSlime() || isHarpy() || isGoblinoid() || isAlraune()) return true;
 			else return false;
 		}
 

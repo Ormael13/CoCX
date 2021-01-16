@@ -53,7 +53,7 @@ public class Creature extends Utils
 		}
 
 		//Variables
-		
+
 		//Short refers to player name and monster name. BEST VARIABLE NAME EVA!
 		//"a" refers to how the article "a" should appear in text.
 		private var _short:String = "You";
@@ -231,7 +231,7 @@ public class Creature extends Utils
 		public function set upperGarmentName(value:String):void { _upperGarmentName = value; }
 		public function set upperGarmentPerk(value:String):void { _upperGarmentPerk = value; }
 		public function set upperGarmentValue(value:Number):void { _upperGarmentValue = value; }
-		
+
 		private var _lowerGarmentName:String = "";
 		private var _lowerGarmentPerk:String = "";
 		private var _lowerGarmentValue:Number = 0;
@@ -257,14 +257,14 @@ public class Creature extends Utils
 		public function set vehiclesEffectId(value:Number):void { _vehiclesEffectId = value; }
 		public function set vehiclesEffectMagnitude(value:Number):void { _vehiclesEffectId = value; }
 		public function set vehiclesPerk(value:String):void { _vehiclesPerk = value; }
-		
+
 		/*
-		
+
 		   [   S T A T S   ]
-		
+
 		 */
 		public function get statStore():StatStore { return _stats; }
-		
+
 		public function buff(tag:String):BuffBuilder {
 			return new BuffBuilder(statStore, tag);
 		}
@@ -277,10 +277,10 @@ public class Creature extends Utils
 		public var wisStat:PrimaryStat;
 		public var libStat:PrimaryStat;
 		public var sensStat:BuffableStat;
-		
+
 		private var _stats: StatStore;
-		
-		
+
+
 		public function get str():Number { return strStat.value; }
 		public function get tou():Number {if (this.hasPerk(PerkLib.IcyFlesh) || this.hasPerk(PerkLib.HaltedVitals)) {
 			return 1;
@@ -360,12 +360,12 @@ public class Creature extends Utils
 		public var fatigue:Number = 0;
 		public var mana:Number = 0;
 		public var soulforce:Number = 0;
-		
+
 		//Combat Stats
 		public var HP:Number = 0;
 		public var lust:Number = 0;
 		public var wrath:Number = 0;
-		
+
 		//Level Stats
 		public var XP:Number = 0;
 		public var level:Number = 0;
@@ -385,7 +385,7 @@ public class Creature extends Utils
 		public function get mana100():Number { return 100*mana/maxMana(); }
 		public function get soulforce100():Number { return 100*soulforce/maxSoulforce(); }
 		public function get lust100():Number { return 100*lust/maxLust(); }
-		
+
 		public function minLust():Number {
 			return 0;
 		}
@@ -811,10 +811,10 @@ public class Creature extends Utils
 			}
 			lust = Utils.boundFloat(mins.lust, lust + dlust, maxLust());
 			cor  = Utils.boundFloat(mins.cor, cor + dcor, 100);
-			
+
 			// old_hp / old_max = new_hp / new_max
 			HP = oldHPratio * maxHP();
-			
+
 			// Keep values in bounds (lust and HP handled above)
 			fatigue = Math.min(fatigue, maxFatigue());
 			mana = Math.min(mana, maxMana());
@@ -868,11 +868,11 @@ public class Creature extends Utils
 		}
 
 		/*
-		
+
 		[    A P P E A R A N C E    ]
-		
+
 		*/
-		
+
 		//Appearance Variables
 		//Gender 1M, 2F, 3H
 		public function get gender():int {
@@ -921,7 +921,7 @@ public class Creature extends Utils
 
 		public var beardStyle:Number = Beard.NORMAL;
 		public var beardLength:Number = 0;
-		
+
 		public var skin:Skin;
 		public function get skinType():Number { return skin.type; }
 	//	[Deprecated]
@@ -958,7 +958,7 @@ public class Creature extends Utils
 			if (skin.coverage >= Skin.COVERAGE_HIGH) skin.coat.adj = value;
 			else skin.base.adj = value;
 		}
-		
+
 		public var facePart:Face;
 		public function get faceType():Number { return facePart.type; }
 		public function set faceType(value:Number):void { facePart.type = value; }
@@ -974,7 +974,7 @@ public class Creature extends Utils
 		public var ears:Ears = new Ears();
 		public var horns:Horns = new Horns();
 		public var wings:Wings = new Wings();
-		
+
 		/* lowerBody: see LOWER_BODY_TYPE_ */
 		public var lowerBodyPart:LowerBody;
 		public function get lowerBody():int { return lowerBodyPart.type; }
@@ -991,11 +991,11 @@ public class Creature extends Utils
 		public function set tailVenom(value:int):void { tail.venom = value; }
 		public function set tailCount(value:Number):void { tail.count = value; }
 		public function set tailRecharge(value:Number):void { tail.recharge = value; }
-		
+
 
 		public var hips:Hips = new Hips();
 		public var butt:Butt = new Butt();
-		
+
 		//Piercings
 		//TODO: Pull this out into it's own class and enum.
 		public var nipplesPierced:Number = 0;
@@ -1022,10 +1022,10 @@ public class Creature extends Utils
 		public var eyes:Eyes = new Eyes();
 		public var tongue:Tongue = new Tongue();
 		public var arms:Arms = new Arms();
-		
+
 		public var gills:Gills = new Gills();
 		public function hasGills():Boolean { return gills.type != Gills.NONE; }
-		
+
 		public var rearBody:RearBody = new RearBody();
 
 		//Sexual Stuff
@@ -1037,7 +1037,7 @@ public class Creature extends Utils
 		public var balls:Number = 0;
 		public var cumMultiplier:Number = 1;
 		public var ballSize:Number = 0;
-		
+
 		private var _hoursSinceCum:Number = 0;
 		public function get hoursSinceCum():Number { return _hoursSinceCum; }
 		public function set hoursSinceCum(v:Number):void {
@@ -1047,7 +1047,7 @@ public class Creature extends Utils
 			}*/
 			_hoursSinceCum = v;
 		}
-		
+
 		//FEMALE STUFF
 		//TODO: Box into Female genital class?
 		public var vaginas:Vector.<VaginaClass>;
@@ -1083,7 +1083,7 @@ public class Creature extends Utils
 			wisStat = new PrimaryStat(this,'wis');
 			libStat = new PrimaryStat(this,'lib');
 			sensStat = new BuffableStat(this,'sens', {base:15, min:0});
-			
+
 			_stats = new StatStore({
 				'str': strStat,
 				'tou': touStat,
@@ -1093,7 +1093,7 @@ public class Creature extends Utils
 				'lib': libStat,
 				'sens': sensStat
 			});
-			
+
 			skin = new Skin(this);
 			underBody = new UnderBody(this);
 			lowerBodyPart = new LowerBody(this);
@@ -1223,11 +1223,11 @@ public class Creature extends Utils
 			}
 			return error;
 		}
-		
+
 		/*
-		
+
 		[        P E R K S          ]
-		
+
 		*/
 		//Monsters have few perks, which I think should be a status effect for clarity's sake.
 		//TODO: Move perks into monster status effects.
@@ -1402,6 +1402,9 @@ public class Creature extends Utils
 		//remove all perks
 		public function removePerks():void
 		{
+			for each(var pc:PerkClass in _perks){
+				this.statStore.removeBuffs("perk_"+pc.ptype.id);
+			}
 			_perks = [];
 		}
 
@@ -1492,11 +1495,11 @@ public class Creature extends Utils
 		}
 		return perk(counter).value4;
 	}
-		
+
 		/*
-		
+
 		[    S T A T U S   E F F E C T S    ]
-		
+
 		*/
 		//{region StatusEffects
 		public function createOrFindStatusEffect(stype:StatusEffectType):StatusEffectClass
@@ -1538,7 +1541,7 @@ public class Creature extends Utils
 			statusEffects.splice(i, 1);
 			sec.removedFromHostList(true);
 		}
-		
+
 		public function indexOfStatusEffect(stype:StatusEffectType):int {
 			for (var counter:int = 0; counter < statusEffects.length; counter++) {
 				if ((statusEffects[counter] as StatusEffectClass).stype == stype)
@@ -1614,11 +1617,19 @@ public class Creature extends Utils
 			return sac?sac.value4:0
 		}
 
+		public function cleanAllBuffs():void
+		{
+			this.statStore.forEachStat(function(stat:BuffableStat):void{
+				// This function will be called for every buffable stat
+				stat.removeAllBuffs()
+			},BuffableStat);
+		}
+
 		public function removeStatuses():void
 		{
 			statusEffects = [];
 		}
-		
+
 		/**
 		 * Applies (creates or increases) a combat-long debuff to stat.
 		 * Stat is fully restored after combat.
@@ -1651,9 +1662,9 @@ public class Creature extends Utils
 			return 0;
 		}
 		/*
-		
+
 		[    ? ? ?    ]
-		
+
 		*/
 		public function biggestTitSize():Number
 		{
@@ -3043,7 +3054,7 @@ public class Creature extends Utils
 			else
 				return mf(male, female);
 		}
-		
+
 		//Rewritten!
 		public function mf(male:String, female:String):String
 		{
@@ -3056,7 +3067,7 @@ public class Creature extends Utils
 			// genderless
 			return (biggestTitSize() >= 3 || biggestTitSize() == 2 && femininity >= 15 || biggestTitSize() == 1 && femininity >= 40 || femininity >= 65) ? female : male;
 		}
-		
+
 		public function maleFemaleHerm(caps:Boolean = false):String
 		{
 			switch (gender) {
@@ -3067,7 +3078,7 @@ public class Creature extends Utils
 				default: return "<b>Gender error!</b>";
 			}
 		}
-		
+
 		/**
 		 * Checks if the creature is technically male: has cock but not vagina.
 		 */
@@ -3075,7 +3086,7 @@ public class Creature extends Utils
 		{
 			return gender == Gender.GENDER_MALE;
 		}
-		
+
 		/**
 		 * Checks if the creature is technically female: has vagina but not cock.
 		 */
@@ -3426,7 +3437,7 @@ public class Creature extends Utils
 		public function isKraken():Boolean { return lowerBodyPart.isKraken(); }
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
-		
+
 		public function isFlying():Boolean {
 			return hasStatusEffect(StatusEffects.Flying);
 		}
@@ -3994,17 +4005,17 @@ public class Creature extends Utils
 		public function hasLongTongue():Boolean {
 			return tongue.type == Tongue.DEMONIC || tongue.type == Tongue.DRACONIC || tongue.type == Tongue.ECHIDNA;
 		}
-		
+
 		public function hairOrFur():String
 		{
 			return Appearance.hairOrFur(this);
 		}
-		
+
 		public function hairDescript():String
 		{
 			return Appearance.hairDescription(this);
 		}
-		
+
 		public function beardDescript():String
 		{
 			return Appearance.beardDescription(this);
@@ -4014,57 +4025,57 @@ public class Creature extends Utils
 		{
 			return Appearance.beardDescription(this);
 		}
-		
+
 		public function hipDescript():String
 		{
 			return Appearance.hipDescription(this);
 		}
-		
+
 		public function assDescript():String
 		{
 			return buttDescript();
 		}
-		
+
 		public function buttDescript():String
 		{
 			return Appearance.buttDescription(this);
 		}
-		
+
 		public function tongueDescript():String
 		{
 			return Appearance.tongueDescription(this);
 		}
-		
+
 		public function hornDescript():String
 		{
 			return Horns.Types[horns.type].name + " horns";
 		}
-		
+
 		public function tailDescript():String
 		{
 			return Appearance.tailDescript(this);
 		}
-		
+
 		public function oneTailDescript():String
 		{
 			return Appearance.oneTailDescript(this);
 		}
-		
+
 		public function wingsDescript():String
 		{
 			return Appearance.wingsDescript(this);
 		}
-		
+
 		public function eyesDescript():String
 		{
 			return Appearance.eyesDescript(this);
 		}
-		
+
 		public function earsDescript():String
 		{
 			return Appearance.earsDescript(this);
 		}
-		
+
 		public function antennaeDescript():String
 		{
 			return Appearance.antennaeDescript(this);
@@ -4074,37 +4085,37 @@ public class Creature extends Utils
 			var mult:Number = 100;
 			return mult;
 		}
-		
+
 		public function damageRangePercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-		
+
 		public function damageMagicalPercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-		
+
 		public function damageFirePercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-		
+
 		public function damageIcePercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-		
+
 		public function damageLightningPercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-		
+
 		public function damageDarknessPercent():Number {
 			var mult:Number = 100;
 			return mult;
 		}
-		
+
 		public function damagePoisonPercent():Number {
 			var mult:Number = 100;
 			return mult;
@@ -4259,8 +4270,8 @@ public class Creature extends Utils
 		public function get vagorass():IOrifice {
 			return hasVagina() ? vaginas[0] : ass;
 		}
-		
-		
+
+
 		// returns OLD OP VAL
 		public static function applyOperator(old:Number, op:String, val:Number):Number {
 			switch(op) {
@@ -4322,7 +4333,7 @@ public class Creature extends Utils
 				"resisted": "scale",
 				"wisdom": "wis"
 			};
-			
+
 			for (var i:int = 0; i < args.length; i += 2)
 			{
 				if (typeof(args[i]) == "string")
@@ -4341,7 +4352,7 @@ public class Creature extends Utils
 						argsi = argsi.slice(0, argsi.length - 1);
 					}
 					if (argsi in aliases) argsi = aliases[argsi];
-					
+
 					if (argsi in argDefs) {
 						argDefs[argsi][0] = args[i + 1];
 						if (argOp) argDefs[argsi][1] = argOp;

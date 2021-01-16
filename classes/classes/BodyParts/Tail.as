@@ -13,15 +13,17 @@ public class Tail extends SaveableBodyPart {
 	public var venom:Number    = 0;
 	//Tail recharge determines how fast venom/webs comes back per hour.
 	public var recharge:Number = 5;
-	
+
 	/**
 	 * Entry properties:
 	 * - value: numerical id (0, 1)
 	 * - id: name of the constant ("NONE", "HORSE")
 	 * - name: human-readable default name, ("non-existant", "horse")
+	 * - stinger:
+	 * - tailSlam:
 	 */
 	public static var Types:/*EnumValue*/Array = [];
-	
+
 	public static const NONE:int                = 0;
 	EnumValue.add(Types, NONE, "NONE", {name:"non-existant"});
 	public static const HORSE:int               = 1;
@@ -35,13 +37,13 @@ public class Tail extends SaveableBodyPart {
 	public static const SPIDER_ADBOMEN:int      = 5;
 	EnumValue.add(Types, SPIDER_ADBOMEN, "SPIDER_ADBOMEN", {name:"spider abdomen"});
 	public static const BEE_ABDOMEN:int         = 6;
-	EnumValue.add(Types, BEE_ABDOMEN, "BEE_ABDOMEN", {name:"bee abdomen"});
+	EnumValue.add(Types, BEE_ABDOMEN, "BEE_ABDOMEN", {name:"bee abdomen", stinger: true});
 	public static const SHARK:int               = 7;
-	EnumValue.add(Types, SHARK, "SHARK", {name:"shark"});
+	EnumValue.add(Types, SHARK, "SHARK", {name:"shark", tailSlam: true});
 	public static const CAT:int                 = 8;
 	EnumValue.add(Types, CAT, "CAT", {name:"cat"});
 	public static const LIZARD:int              = 9;
-	EnumValue.add(Types, LIZARD, "LIZARD", {name:"lizard"});
+	EnumValue.add(Types, LIZARD, "LIZARD", {name:"lizard", tailSlam: true});
 	public static const RABBIT:int              = 10;
 	EnumValue.add(Types, RABBIT, "RABBIT", {name:"rabbit"});
 	public static const HARPY:int               = 11;
@@ -51,7 +53,7 @@ public class Tail extends SaveableBodyPart {
 	public static const FOX:int                 = 13;//button 0 on 2nd page of metamorph
 	EnumValue.add(Types, FOX, "FOX", {name:"fox"});
 	public static const DRACONIC:int            = 14;
-	EnumValue.add(Types, DRACONIC, "DRACONIC", {name:"draconic"});
+	EnumValue.add(Types, DRACONIC, "DRACONIC", {name:"draconic", tailSlam: true});
 	public static const RACCOON:int             = 15;
 	EnumValue.add(Types, RACCOON, "RACCOON", {name:"raccoon"});
 	public static const MOUSE:int               = 16;
@@ -59,11 +61,11 @@ public class Tail extends SaveableBodyPart {
 	public static const FERRET:int              = 17;
 	EnumValue.add(Types, FERRET, "FERRET", {name:"ferret"});
 	public static const BEHEMOTH:int            = 18;
-	EnumValue.add(Types, BEHEMOTH, "BEHEMOTH", {name:"behemoth"});
+	EnumValue.add(Types, BEHEMOTH, "BEHEMOTH", {name:"behemoth", tailSlam: true});
 	public static const PIG:int                 = 19;//button 0 on 3rd page of metamorph
 	EnumValue.add(Types, PIG, "PIG", {name:"pig"});
 	public static const SCORPION:int            = 20;
-	EnumValue.add(Types, SCORPION, "SCORPION", {name:"scorpion"});
+	EnumValue.add(Types, SCORPION, "SCORPION", {name:"scorpion", stinger: true});
 	public static const GOAT:int                = 21;
 	EnumValue.add(Types, GOAT, "GOAT", {name:"goat"});
 	public static const RHINO:int               = 22;
@@ -73,19 +75,19 @@ public class Tail extends SaveableBodyPart {
 	public static const DEER:int                = 24;
 	EnumValue.add(Types, DEER, "DEER", {name:"deer"});
 	public static const SALAMANDER:int          = 25;
-	EnumValue.add(Types, SALAMANDER, "SALAMANDER", {name:"salamander"});
+	EnumValue.add(Types, SALAMANDER, "SALAMANDER", {name:"salamander", tailSlam: true});
 	public static const KITSHOO:int             = 26;//button 0 on 4th page of metamorph for 8th kitshoo tail
 	EnumValue.add(Types, KITSHOO, "KITSHOO", {name:"kitshoo"});
 	public static const MANTIS_ABDOMEN:int      = 27;
 	EnumValue.add(Types, MANTIS_ABDOMEN, "MANTIS_ABDOMEN", {name:"mantis abdomen"});
 	public static const MANTICORE_PUSSYTAIL:int = 28;
-	EnumValue.add(Types, MANTICORE_PUSSYTAIL, "MANTICORE_PUSSYTAIL", {name:"manticore pussytail"});
+	EnumValue.add(Types, MANTICORE_PUSSYTAIL, "MANTICORE_PUSSYTAIL", {name:"manticore pussytail", stinger: true});
 	public static const WOLF:int                = 29;
 	EnumValue.add(Types, WOLF, "WOLF", {name:"wolf"});
 	public static const GARGOYLE:int            = 30;
-	EnumValue.add(Types, GARGOYLE, "GARGOYLE", {name:"mace-shaped gargoyle"});
+	EnumValue.add(Types, GARGOYLE, "GARGOYLE", {name:"mace-shaped gargoyle", tailSlam: true});
 	public static const ORCA:int                = 31;
-	EnumValue.add(Types, ORCA, "ORCA", {name:"orca"});
+	EnumValue.add(Types, ORCA, "ORCA", {name:"orca", tailSlam: true});
 	public static const YGGDRASIL:int           = 32;
 	EnumValue.add(Types, YGGDRASIL, "YGGDRASIL", {name:"yggdrasil"});
 	public static const RAIJU:int               = 33;
@@ -93,7 +95,7 @@ public class Tail extends SaveableBodyPart {
 	public static const RED_PANDA:int           = 34;
 	EnumValue.add(Types, RED_PANDA, "RED_PANDA", {name:"red-panda"});
 	public static const GARGOYLE_2:int          = 35;
-	EnumValue.add(Types, GARGOYLE_2, "GARGOYLE_2", {name:"axe-shaped gargoyle"});
+	EnumValue.add(Types, GARGOYLE_2, "GARGOYLE_2", {name:"axe-shaped gargoyle", tailSlam: true});
 	public static const AVIAN:int          		= 36;
 	EnumValue.add(Types, AVIAN, "AVIAN", {name:"avian"});
 	public static const GRIFFIN:int          	= 37;
@@ -107,7 +109,7 @@ public class Tail extends SaveableBodyPart {
 	public static const NEKOMATA_FORKED_2_3:int = 41;
 	EnumValue.add(Types, NEKOMATA_FORKED_2_3, "NEKOMATA_FORKED_2_3", {name:"forked cat"});
 	public static const CAVE_WYRM:int           = 42;
-	EnumValue.add(Types, CAVE_WYRM, "CAVE_WYRM", {name:"cave wyrm"});
+	EnumValue.add(Types, CAVE_WYRM, "CAVE_WYRM", {name:"cave wyrm", TailSlam: true});
 	public static const HINEZUMI:int			= 43;
 	EnumValue.add(Types, HINEZUMI, "HINEZUMI", {name:"hinezumi"});
 	public static const THUNDERBIRD:int			= 44;

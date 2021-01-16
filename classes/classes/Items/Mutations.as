@@ -1277,7 +1277,7 @@ public final class Mutations extends MutationsHelper {
                 }
             }
         }
-        if (rando >= 90) {
+        if (rando >= 90 && changeLimit != 0) {
             if (player.skinTone == "blue" || player.skinTone == "grey" || player.skinTone == "red" || player.skinTone == "purple" || player.skinTone == "light purple" || player.skinTone == "ghostly white" || player.skinTone == "indigo" || player.skinTone == "sky blue" || player.skinTone == "shiny black") {
                 if (player.vaginas.length > 0) {
                     outputText("\n\nYour heart begins beating harder and harder as heat floods to your groin.  You feel your clit peeking out from under its hood, growing larger and longer as it takes in more and more blood.");
@@ -1331,7 +1331,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Demonic changes - higher chance with higher corruption.
-        if (rand(40) + player.cor / 2 > 40 && tainted) demonChanges(player);
+        if (rand(40) + player.cor / 2 > 40 && tainted && changeLimit != 0) demonChanges(player);
         if (tainted) {
             outputText(player.modFem(100, 2));
             if (rand(3) == 0) outputText(player.modTone(15, 2));

@@ -179,11 +179,6 @@ import coc.view.MainView;
 			player.esteem = 50;
 			player.will = 80;
 			player.lust = 15;
-			player.statStore.forEachStat(function(stat:IStat):void {
-				if (stat is BuffableStat) {
-					(stat as BuffableStat).removeAllBuffs();
-				}
-			});
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];
 				player.level = 0;
@@ -377,6 +372,7 @@ import coc.view.MainView;
 			for (var i:int = 0; i < player.statusEffects.length; i++) {
 				if (isSpecialStatus(player.statusEffects[i])) statusTemp.push(player.statusEffects[i]);
 			}
+			player.cleanAllBuffs();
 			player.removeStatuses();
 			if (statusTemp.length > 0) {
 				for (i = 0; i < statusTemp.length; i++) {
