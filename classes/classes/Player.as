@@ -910,7 +910,7 @@ use namespace CoC;
 			return wings.type == Wings.BAT_LIKE_LARGE_2 || wings.type == Wings.DRACONIC_HUGE;
 		}
 		//Natural Claws (arm types and weapons that can substitude them)
-		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.Types[lowerBody.type].claw;}
+		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.Types[lowerBody].claw;}
 		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws";}
 		//Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
