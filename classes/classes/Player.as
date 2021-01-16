@@ -4660,7 +4660,7 @@ use namespace CoC;
 			var jiangshiCounter:Number = 0;
 			if (hasPlainSkinOnly() && skinTone != "slippery")
 				jiangshiCounter++;
-			if (skinTone == "ghostly pale" || skinTone == "light blue")
+			if (skinTone == "ghostly pale" || skinTone == "light blue" || skinTone == "snow white")
 				jiangshiCounter++;
 			if (hairType == Hair.NORMAL)
 				jiangshiCounter++;

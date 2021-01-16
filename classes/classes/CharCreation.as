@@ -179,11 +179,6 @@ import coc.view.MainView;
 			player.esteem = 50;
 			player.will = 80;
 			player.lust = 15;
-			player.statStore.forEachStat(function(stat:IStat):void {
-				if (stat is BuffableStat) {
-					(stat as BuffableStat).removeAllBuffs();
-				}
-			});
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];
 				player.level = 0;
