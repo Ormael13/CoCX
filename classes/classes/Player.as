@@ -12998,21 +12998,123 @@ use namespace CoC;
 			else maxLevel += 90;
 			return maxLevel;
 		}
-
+		public function DualWieldSmallExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = dualWSLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = dualWSLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function dualWieldSmallXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					dualWSXP++;
+					XP--;
+				}
+				else {
+					dualWSXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (dualWSLevel < maxDualWieldSmallLevel() && dualWSXP >= DualWieldSmallExpToLevelUp()) {
+					outputText("\n<b>Dual Wield (Small) skill leveled up to " + (dualWSLevel + 1) + "!</b>\n");
+					dualWSLevel++;
+					dualWSXP = 0;
+				}
+			}
+		}
+		
 		public function maxDualWieldNormalLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
 			return maxLevel;
 		}
-
+		public function DualWieldNormalExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = dualWNLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = dualWNLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function dualWieldNormalXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					dualWNXP++;
+					XP--;
+				}
+				else {
+					dualWNXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (dualWNLevel < maxDualWieldNormalLevel() && dualWNXP >= DualWieldNormalExpToLevelUp()) {
+					outputText("\n<b>Dual Wield (Normal) skill leveled up to " + (dualWNLevel + 1) + "!</b>\n");
+					dualWNLevel++;
+					dualWNXP = 0;
+				}
+			}
+		}
+		
 		public function maxDualWieldLargeLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
 			return maxLevel;
 		}
-
+		public function DualWieldLargeExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = dualWLLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = dualWLLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function dualWieldLargeXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					dualWLXP++;
+					XP--;
+				}
+				else {
+					dualWLXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (dualWLLevel < maxDualWieldLargeLevel() && dualWLXP >= DualWieldLargeExpToLevelUp()) {
+					outputText("\n<b>Dual Wield (Large) skill leveled up to " + (dualWLLevel + 1) + "!</b>\n");
+					dualWLLevel++;
+					dualWLXP = 0;
+				}
+			}
+		}
+    
 		public function maxDualWieldFirearmsLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -13047,7 +13149,7 @@ use namespace CoC;
 				}
 				//Level dat shit up!
 				if (dualWFLevel < maxDualWieldFirearmsLevel() && dualWFXP >= DualWieldFirearmsExpToLevelUp()) {
-					outputText("\n<b>Dao of Axe leveled up to " + (dualWFLevel + 1) + "!</b>\n");
+					outputText("\n<b>Dual Wield (Firearms) skill leveled up to " + (dualWLLevel + 1) + "!</b>\n");
 					dualWFLevel++;
 					dualWFXP = 0;
 				}
