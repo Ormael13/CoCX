@@ -77,6 +77,8 @@ import coc.xlogic.ExecContext;
 					PlayerHasAHammerUnholy:player.weapon == game.weapons.DOCDEST,
 
 					PlayerHasASpear: player.isSpearTypeWeapon(),
+					PlayerHasASpearHoly:player.weapon == game.weapons.SESPEAR,
+					PlayerHasASpearUnholy:player.weapon == game.weapons.DSSPEAR,
 
 					PlayerHasKatana: player.weapon == game.weapons.UGATANA  || player.weapon == game.weapons.NODACHI  || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
 					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.MASAMUN,

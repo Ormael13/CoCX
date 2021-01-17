@@ -648,6 +648,8 @@
 		<cell rect="392,1726,80,90" name="weapon/hammerHoly" dx="38" dy="55"/>
 		<cell rect="392,1832,80,90" name="weapon/hammerUnholy" dx="38" dy="55"/>
         <cell rect="482,1620,80,107" name="weapon/spearGeneric" dx="39" dy="53"/>
+		<cell rect="482,1729,80,107" name="weapon/spearHoly" dx="39" dy="53"/>
+		<cell rect="482,1838,80,107" name="weapon/spearUnholy" dx="39" dy="53"/>
         <cell rect="572,1620,80,90" name="shield/shieldGeneric" dx="66" dy="60"/>
 		<cell rect="572,1726,80,90" name="shield/shieldHoly" dx="66" dy="60"/>
 		<cell rect="572,1832,80,90" name="shield/shieldUnholy" dx="66" dy="60"/>
@@ -1337,7 +1339,15 @@
 			</if>
 			
 			<if test="PlayerHasASpear">
-				<show part="weapon/spearGeneric"/>
+				<if test="PlayerHasASpearHoly">
+					<show part="weapon/spearHoly"/>
+				</if>
+				<if test="PlayerHasASpearUnholy">
+					<show part="weapon/spearUnholy"/>
+				</if>
+				<else>
+					<show part="weapon/spearGeneric"/>
+				</else>
 			</if>
 			
 			<if test="PlayerHasKatana">
