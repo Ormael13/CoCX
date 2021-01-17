@@ -69,8 +69,12 @@ import coc.xlogic.ExecContext;
 					PlayerHasASwordHoly:player.weapon == game.weapons.EXCALIB,
 
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
+					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,
+					PlayerHasAnAxeUnholy:player.weapon == game.weapons.DE_GAXE,
 
 					PlayerHasAHammer: player.isMaceHammerTypeWeapon(),
+					PlayerHasAHammerHoly:player.weapon == game.weapons.POCDEST,
+					PlayerHasAHammerUnholy:player.weapon == game.weapons.DOCDEST,
 
 					PlayerHasASpear: player.isSpearTypeWeapon(),
 
@@ -79,6 +83,8 @@ import coc.xlogic.ExecContext;
 					PlayerHasKatanaUnholy:player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.BLETTER,
 
 					PlayerHasRapier: player.weapon == game.weapons.B_WIDOW || player.weapon == game.weapons.DRAPIER || player.weapon == game.weapons.JRAPIER || player.weapon == game.weapons.Q_GUARD || player.weapon == game.weapons.RRAPIER || player.weapon == game.weapons.LRAPIER,
+					PlayerHasRapierHoly:player.weapon == game.weapons.Q_GUARD,
+					PlayerHasRapierUnholy:player.weapon == game.weapons.B_WIDOW,
 
 					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.SPI_FOC,
 					PlayerHasSanctuary: player.shield == game.shields.SANCTYL || player.shield == game.shields.SANCTYN || player.shield == game.shields.SANCTYD,
