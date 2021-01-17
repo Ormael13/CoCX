@@ -60,15 +60,30 @@ import coc.xlogic.ExecContext;
 
 					//Detect Weapon Skins
 					PlayerHasAWeapon: player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
+
 					PlayerHasAStaff: player.isStaffTypeWeapon(),
+					PlayerHasAStaffHoly:player.weapon == game.weapons.U_STAFF,
+					PlayerHasAStaffUnholy:player.weapon == game.weapons.N_STAFF,
+
 					PlayerHasASword: player.isSwordTypeWeapon(),
+					PlayerHasASwordHoly:player.weapon == game.weapons.EXCALIB,
+
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
+
 					PlayerHasAHammer: player.isMaceHammerTypeWeapon(),
+
 					PlayerHasASpear: player.isSpearTypeWeapon(),
+
 					PlayerHasKatana: player.weapon == game.weapons.UGATANA  || player.weapon == game.weapons.NODACHI  || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
+					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.MASAMUN,
+					PlayerHasKatanaUnholy:player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.BLETTER,
+
 					PlayerHasRapier: player.weapon == game.weapons.B_WIDOW || player.weapon == game.weapons.DRAPIER || player.weapon == game.weapons.JRAPIER || player.weapon == game.weapons.Q_GUARD || player.weapon == game.weapons.RRAPIER || player.weapon == game.weapons.LRAPIER,
+
 					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.SPI_FOC,
-					PlayerHasSanctuary: player.shieldName != "nothing",
+					PlayerHasSanctuary: player.shield == game.shields.SANCTYL || player.shield == game.shields.SANCTYN || player.shield == game.shields.SANCTYD,
+					PlayerHasSanctuaryHoly:player.shield == game.shields.SANCTYL,
+					PlayerHasSanctuaryUnholy:player.shield == game.shields.SANCTYD,
 
 					Antennae: Antennae,
 					Arms: Arms,
