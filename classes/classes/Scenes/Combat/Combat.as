@@ -753,7 +753,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.SoulDrill1)) {
             buttons.add("Soul Drill", soul1Drill).hint("Menu to adjust your Soul Drill spinning speed.");
         }
-        if (!player.isFlying() && monster.isFlying()) {
+        if (!player.isFlying()) {
             if (player.canFly()) {
                 buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
             }
@@ -11765,4 +11765,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}

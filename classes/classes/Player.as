@@ -903,7 +903,7 @@ use namespace CoC;
 		//Wing Slap compatibile wings + tiers of wings for dmg multi
 		public function haveWingsForWingSlap():Boolean
 		{
-			return Wings[wings.type].wingSlap ;
+			return Wings.Types[wings.type].wingSlap;
 		}
 		public function thirdtierWingsForWingSlap():Boolean
 		{
