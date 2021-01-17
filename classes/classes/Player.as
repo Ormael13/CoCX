@@ -488,7 +488,7 @@ use namespace CoC;
 		//Unhindered related acceptable armor types
 		public function meetUnhinderedReq():Boolean
 		{
-			return armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "bimbo skirt" || armorName == "desert naga pink and black silk dress" || hasPerk(PerkLib.BerserkerArmor) || armor == ArmorLib.NOTHING ;
+			return armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "bimbo skirt" || armorName == "desert naga pink and black silk dress" || hasPerk(PerkLib.ScandalousSuccubusClothing) || hasPerk(PerkLib.BerserkerArmor) || hasPerk(PerkLib.TamamoNoMaeCursedKimono) || hasPerk(PerkLib.InariBlessedKimono) || armor == ArmorLib.NOTHING ;
 		}
 		//override public function get armors
 		override public function get armorName():String {

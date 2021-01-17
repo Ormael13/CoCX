@@ -11440,6 +11440,13 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) modss += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
         if (player.hasPerk(PerkLib.SeersInsight)) modss += player.perkv1(PerkLib.SeersInsight);
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
+        if (player.hasPerk(PerkLib.InariBlessedKimono)){
+            var mod1:Number = 0.5;
+            mod1 -= player.cor / 10;
+            if (mod1 < 0.1) mod1 = 0.1;
+            modss += mod1;
+        }
+        if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modss += (player.cor * .01)/2;
         if (player.necklaceName == "Yin Yang Amulet") modss += .15;
         if (player.armorName == "Traditional clothes") modss += .4;
         modss = Math.round(modss * 100) / 100;
@@ -11454,6 +11461,13 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssp += .6;
         if (player.hasPerk(PerkLib.BodyCultivatorsFocus)) modssp += player.perkv1(PerkLib.BodyCultivatorsFocus);
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssp *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
+        if (player.hasPerk(PerkLib.InariBlessedKimono)){
+            var mod1:Number = 0.5;
+            mod1 -= player.cor / 10;
+            if (mod1 < 0.1) mod1 = 0.1;
+            modssp += mod1;
+        }
+        if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modssp += (player.cor * .01)/2;
         if (player.necklaceName == "Yin Yang Amulet") modssp += .15;
         if (player.armorName == "Traditional clothes") modssp += .4;
         modssp = Math.round(modssp * 100) / 100;
@@ -11491,6 +11505,13 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) modssm += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
         if (player.hasPerk(PerkLib.SeersInsight)) modssm += player.perkv1(PerkLib.SeersInsight);
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssm *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
+        if (player.hasPerk(PerkLib.InariBlessedKimono)){
+            var mod1:Number = 0.5;
+            mod1 -= player.cor / 10;
+            if (mod1 < 0.1) mod1 = 0.1;
+            modssm += mod1;
+        }
+        if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) modssm += (player.cor * .01)/2;
         if (player.necklaceName == "Yin Yang Amulet") modssm += .15;
         if (player.shieldName == "spirit focus") modssm += .25;
         if (player.armorName == "Traditional clothes") modssm += .4;

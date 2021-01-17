@@ -3697,11 +3697,27 @@
 				<if test="(legCount!=4) and (showLegClothing)">
 					<show part="clotheLegs/blackKimonoBottom"/>
 				</if>
-				<if test="showLegClothing">
+				<if test="showArmClothing">
 					<show part="clothe/blackKimonoSleeves"/>
 				</if>
 			</if>
 		</if>
+		<!-- Kimono Legendary -->
+		<if test="legendKimono">
+			<if test="showClothing">
+				<show part="clothe/TamamoeNoMaeKimonoTop"/>
+				<if test="(legCount!=4) and (showLegClothing)">
+					<show part="clothe/TamamoeNoMaeKimonoLowerTop"/>
+					<show part="clotheLegs/TamamoeNoMaeKimonoLegs"/>
+					<show part="clothCape/TamamoeNoMaeKimonoUnder"/>
+				</if>
+				<if test="showArmClothing">
+					<show part="clothe/TamamoeNoMaeKimonoSleeves"/>
+					<show part="clothCape/TamamoeNoMaeKimonoCollar"/>
+				</if>
+			</if>
+		</if>
+
 
 		<!-- Platemail, Marae armor and Ebonweave platemail -->
 		<if test="platemail">
@@ -3893,7 +3909,7 @@
 			</if>
 		</if>
 		<if test="comfyBikiniPanty">
-			<if test="showClothing">
+			<if test="showLegClothing">
 				<show part="panty/comfortablePanty"/>
 				<hide part="penis/*"/>
 				<hide part="balls/*"/>

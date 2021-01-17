@@ -110,6 +110,7 @@ import coc.xlogic.ExecContext;
 					redKimono: player.armor == game.armors.RKIMONO,
 					purpleKimono: player.armor == game.armors.PKIMONO,
 					blackKimono: player.armor == game.armors.BLKIMONO,
+					legendKimono: player.armor == game.armors.IBKIMO || player.armor == game.armors.TCKIMO,
 					blueQipao: player.armor == game.armors.B_QIPAO,
 					greenQipao: player.armor == game.armors.G_QIPAO,
 					purpleQipao: player.armor == game.armors.P_QIPAO,

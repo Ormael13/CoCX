@@ -1695,6 +1695,9 @@ public class PerkLib
 		public static const ImprovingNaturesBlueprintsApexPredator:PerkType = mk("Improving Nature's Blueprints (Apex Predator)", "Improving Nature's Blueprints (Apex Predator)",
 				"Changing negative bonuses to max Int and Wis from Job: Beast Warrior is the same value positive bonuses. While using Crinos shape increasing natural regeneration by 2% of max HP per turn.",
 				"You've chosen the 'Improving Nature's Blueprints (Apex Predator)' perk, allowing you to become an Apex Predator that isn't dull and slow witted along with increased regeneration while using Crinos Shape.").withBuffs({'int.mult':0.10,'wis.mult':0.10});
+		public static const InariBlessedKimono:PerkType = mk("Inari Blessed Kimono", "Inari Blessed Kimono",
+				"Increase the potency of all spells and soulskills by up to 50% based on purity and empower all kitsunes ability. reduce spellcasting cost by 60%.",
+				"Increase the potency of all spells and soulskills by up to 50% based on purity and empower all kitsunes ability. reduce spellcasting cost by 60%.");
 		public static const InControl:PerkType = mk("In Control", "In Control",
 				"You are in control of your desires, that's it... except another 10% soul force gain.",
 				"You've chosen the 'In Control' perk, gaining +10% max Soulforce.");
@@ -2854,6 +2857,9 @@ public class PerkLib
 		public static const TankVI:PerkType = mk("Tank VI", "Tank VI",
 				"+3 extra HP per point of toughness.",
 				"You've chosen the 'Tank VI' perk, granting +3 extra maximum HP for each point of toughness.");
+		public static const TamamoNoMaeCursedKimono:PerkType = mk("Tamamo no Mae Cursed Kimono", "Tamamo no Mae Cursed Kimono",
+				"Increase the potency of all spells and soulskills by up to 50% based on corruption and empower all kitsunes ability. reduce spellcasting cost by 60%.",
+				"Increase the potency of all spells and soulskills by up to 50% based on corruption and empower all kitsunes ability. reduce spellcasting cost by 60%.");
 		public static const Teacher:PerkType = mk("Teacher", "Teacher",
 				"Instead of being taught, now you teach others. Your skill allows you to increase max mana by 10%.",
 				"You've chosen the 'Teacher' perk, gaining +10% max Mana.");
