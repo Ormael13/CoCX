@@ -66,7 +66,8 @@ import coc.xlogic.ExecContext;
 					PlayerHasAStaffUnholy:player.weapon == game.weapons.N_STAFF,
 
 					PlayerHasASword: player.isSwordTypeWeapon(),
-					PlayerHasASwordHoly:player.weapon == game.weapons.EXCALIB,
+					PlayerHasASwordHoly:player.weapon == game.weapons.EXCALIB || game.weapons.NPHBLDE,
+					PlayerHasASwordunholy:player.weapon == game.weapons.EBNYBLD,
 
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
 					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,

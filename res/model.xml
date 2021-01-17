@@ -1306,8 +1306,8 @@
 				<if test="PlayerHasAswordHoly">
 					<show part="weapon/swordHoly"/>
 				</if>
-				<if test="PlayerHasAStaffUnholy">
-					<show part="weapon/staffUnholy"/>
+				<if test="PlayerHasASwordUnholy">
+					<show part="weapon/swordUnholy"/>
 				</if>
 				<else>
 					<show part="weapon/swordGeneric"/>
