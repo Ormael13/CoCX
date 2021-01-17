@@ -107,7 +107,8 @@ package classes.Scenes
 			outputText("-Race & body part organization + enhanced body part editor (change by aimozg).\n");
 			outputText("-Added conversation about Luna to Aunt Nancy. (change by Scary Dragon Mom)\n");
 			outputText("-Game now knows if the full round attack is done in or includes feral ……combat. (change by Liadri)\n");
-			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
+			outputText("-New Updated Kitsune score (caps to 26 on NG+). (change by Liadri)\n");
+			outputText("-Two New legendary kimono availlable at Kaiba shop for a limited time. (change by Liadri)\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
