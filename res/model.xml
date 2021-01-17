@@ -551,6 +551,7 @@
         <cell rect="935,101,40,50" name="clothe/purpleKimonoTop" dx="83" dy="72"/>
         <cell rect="981,101,40,50" name="clothe/blackKimonoTop" dx="83" dy="72"/>
         <cell rect="1591,216,80,108" name="clothe/TamamoeNoMaeKimonoTop" dx="65" dy="63"/>
+		<cell rect="1673,216,80,108" name="clothe/TamamoeNoMaeKimonoLowerTop" dx="65" dy="63"/>
         <cell rect="1017,325,80,104" name="clothe/goblinTechnomancerClothe" dx="64" dy="55"/>
         <cell rect="722,543,130,90" name="clothe/fairyQueenDressFront" dx="40" dy="62"/>
         <cell rect="853,434,80,104" name="clothe/qipaoRedClothe" dx="64" dy="55"/>

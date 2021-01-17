@@ -3256,7 +3256,7 @@ use namespace CoC;
 			if (TopRace == "kitsune") {
 				if (TopScore >= 5) {
 					if (tailType == 13 && tailCount >= 2 && kitsuneScore() >= 9) {
-						if (TopScore >= 21) {
+						if (TopScore >= 26) {
 							if (tailCount == 9 && isTaur()) {
 								race = "Inari-taur";
 							} else if (tailCount == 9) {
@@ -3264,7 +3264,7 @@ use namespace CoC;
 							} else {
 								race = "kitsune";
 							}
-						} else if (TopScore >= 18) {
+						} else if (TopScore >= 21) {
 							if (tailCount == 9 && isTaur()) {
 								race = "nine tailed kitsune-taur of balance";
 							} else if (tailCount == 9) {
@@ -3272,7 +3272,7 @@ use namespace CoC;
 							} else {
 								race = "kitsune";
 							}
-						} else if (TopScore >= 14) {
+						} else if (TopScore >= 18) {
 							if (tailCount == 9 && isTaur()) {
 								race = "nine tailed kitsune-taur";
 							} else if (tailCount == 9) {
@@ -5230,7 +5230,7 @@ use namespace CoC;
 				fairyCounter+=4;
 			if (hairType == Hair.FAIRY)
 				fairyCounter++;
-			if (hasCock() > 0 && fairyCounter > 0)
+			if (!hasCock() && fairyCounter > 0)
 				fairyCounter++;
 			if (breastRows.length > 1 && fairyCounter > 0)
 				fairyCounter++;
@@ -5238,7 +5238,6 @@ use namespace CoC;
 				fairyCounter++;
 			if (breastRows.length == 4 && fairyCounter > 0)
 				fairyCounter++;
-			//Fur only counts if some canine features are present
 			if (!hasCoat() && fairyCounter > 0)
 				fairyCounter++;
 			if (skinType == Skin.PLAIN && skinAdj == "flawless")
@@ -10998,10 +10997,10 @@ use namespace CoC;
 					maxIntCap2 += 25;
 				}
 			}
-			if (fairyScore() >= 19) {
+			if (fairyScore() >= 23) {
 				maxStrCap2 -= 25;
-				maxTouCap2 -= 25;
-				maxSpeCap2 += 155;
+				maxTouCap2 -= 10;
+				maxSpeCap2 += 200;
 				maxIntCap2 += 200;
 				currentSen += 20;
 			}//+10/10-20
@@ -11243,6 +11242,14 @@ use namespace CoC;
 			if (kitsuneScore() >= 5) {
 				if (kitsuneScore() >= 9 && tailType == 13 && tailCount >= 2) {
 					if (kitsuneScore() >= 14 && tailCount == 9) {
+						if (kitsuneScore() >= 26 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+							maxStrCap2 -= 50;
+							maxSpeCap2 += 40;
+							maxIntCap2 += 170;
+							maxWisCap2 += 170;
+							maxLibCap2 += 110;
+							currentSen += 60;
+						}
 						if (kitsuneScore() >= 21 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
 							maxStrCap2 -= 50;
 							maxSpeCap2 += 40;
@@ -11251,7 +11258,7 @@ use namespace CoC;
 							maxLibCap2 += 80;
 							currentSen += 60;
 						}//315(425)
-						else if (kitsuneScore() >= 18 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+						else if (kitsuneScore() >= 18) {
 							maxStrCap2 -= 45;
 							maxSpeCap2 += 35;
 							maxIntCap2 += 120;
