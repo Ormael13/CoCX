@@ -3430,7 +3430,7 @@ public class PerkLib
 		public static const Necromancy:PerkType = mk("Necromancy", "Necromancy",
 				"Black magic effectiveness is increased by 50%. Soulforce regenerate passively by 2%.");//, Hex and Necromancy		 and recharge 1 round faster
 		public static const NinetailsKitsuneOfBalance:PerkType = mk("Nine-tails Kitsune of Balance", "Nine-tails Kitsune of Balance",
-				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  You tread narrow path between corruption and true enlightment maintaining balance that allow to fuse both sides powers.",null,true);
+				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  You tread the narrow path between corruption and true enlightment maintaining a balance that allow to fuse both sides powers.",null,true);
 		public static const Oviposition:PerkType = mk("Oviposition", "Oviposition",
 				"Causes you to regularly lay eggs when not otherwise pregnant.");
 		public static const PhantomShooting:PerkType = mk("Phantom Shooting", "Phantom Shooting",

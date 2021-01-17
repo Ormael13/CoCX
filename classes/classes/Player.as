@@ -910,7 +910,7 @@ use namespace CoC;
 			return wings.type == Wings.BAT_LIKE_LARGE_2 || wings.type == Wings.DRACONIC_HUGE;
 		}
 		//Natural Claws (arm types and weapons that can substitude them)
-		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.Types[lowerBody.type].claw;}
+		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.Types[lowerBody].claw;}
 		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws";}
 		//Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
@@ -5715,22 +5715,23 @@ use namespace CoC;
 				kitsuneCounter++;
 				kitsuneCounter2++;
 			if (tailType == Tail.FOX && tailCount >= 4 && tailCount < 6)
-				kitsuneCounter += 2;
+				kitsuneCounter += 4;
 				kitsuneCounter2 += 2;
 			if (tailType == Tail.FOX && tailCount >= 6 && tailCount < 9)
-				kitsuneCounter += 3;
+				kitsuneCounter += 6;
 				kitsuneCounter2 += 3;
 			if (tailType == Tail.FOX && tailCount == 9)
-				kitsuneCounter += 4;
+				kitsuneCounter += 9;
 				kitsuneCounter2 += 4;
 			if (tailType != Tail.FOX || (tailType == Tail.FOX && tailCount < 2))
 				kitsuneCounter -= 7;
 			if (skin.base.pattern == Skin.PATTERN_MAGICAL_TATTOO || hasFur())
 				kitsuneCounter++;
 				kitsuneCounter2++;
-			//If the character has fur, scales, or gooey skin, -1
-		//	if (skinType == FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
-		//		kitsuneCounter--;
+			if (skin.base.type == Skin.PLAIN)
+				kitsuneCounter ++;
+			if (InCollection(hairColor, KitsuneScene.basicKitsuneHair) || InCollection(hairColor, KitsuneScene.elderKitsuneColors))
+				kitsuneCounter++;
 			if (hasCoat() && !hasCoatOfType(Skin.FUR))
 				kitsuneCounter -= 2;
 			if (skin.base.type != Skin.PLAIN)
@@ -5751,12 +5752,13 @@ use namespace CoC;
 			//If the character has a 'vag of holding', +1
 			if (vaginalCapacity() >= 8000)
 				kitsuneCounter++;
-			//If the character has "blonde","black","red","white", or "silver" hair, +1
-		//	if (kitsuneCounter > 0 && (InCollection(furColor, KitsuneScene.basicKitsuneHair) || InCollection(furColor, KitsuneScene.elderKitsuneColors)))
-		//		kitsuneCounter++;
+			//When character get Hoshi no tama
 			if (findPerk(PerkLib.StarSphereMastery) >= 0)
 				kitsuneCounter++;
-			//When character get Hoshi no tama
+			if (findPerk(PerkLib.EnlightenedKitsune) >= 0 || findPerk(PerkLib.CorruptedKitsune) >= 0)
+				kitsuneCounter++;
+			if (findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0)
+				kitsuneCounter++;
 			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0)
 				kitsuneCounter++;
 			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0)
