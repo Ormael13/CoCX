@@ -610,6 +610,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TrollDefeatsCounter:StatusEffectType            = mk("Troll Defeats Counter");
 		public static const TF2:StatusEffectType                            = mk("TF2");
 		public static const TFDealer1:StatusEffectType                      = mk("TF Dealer 1");
+		public static const TFDealer2:StatusEffectType                      = mk("TF Dealer 2");
 		public static const TookBlessedBow:StatusEffectType               	= mk("Took Blessed Bow");
 		public static const TookBlessedShield:StatusEffectType              = mk("Took Blessed Shield");
 		public static const TookBlessedStaff:StatusEffectType               = mk("Took Blessed Staff");

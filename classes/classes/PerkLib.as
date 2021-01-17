@@ -965,14 +965,17 @@ public class PerkLib
 				"Allows you to wield two weapons.",
 				"You've chosen the 'Dual Wield' perk, training skill of using two weapons.");
 		public static const DualWieldFirearms:PerkType = mk("Dual Wield (Firearms)", "Dual Wield (Firearms)",
-				"Allows you to wield two firearms (non 2H ones).",
-				"You've chosen the 'Dual Wield (Firearms)' perk, training skill of using two firearms (non 2H ones).");
+				"Allows you to wield two firearms (non 2H ones) more effectively. (damage and accuracy penalties decreased by 20% and 10%)",
+				"You've chosen the 'Dual Wield (Firearms)' perk, training skill of using two firearms (non 2H ones). (damage and accuracy penalties decreased by 20% and 10%)");
 		public static const DualWieldLarge:PerkType = mk("Dual Wield (Large)", "Dual Wield (Large)",
-				"Allows you to wield two large sized melee weapons.",
-				"You've chosen the 'Dual Wield (Large)' perk, training skill of using two large melee weapons.");
+				"Allows you to wield two large sized melee weapons more effectively. (damage and accuracy penalties decreased by 20% and 10%)",
+				"You've chosen the 'Dual Wield (Large)' perk, training skill of using two large melee weapons. (damage and accuracy penalties decreased by 20% and 10%)");
+		public static const DualWieldNormal:PerkType = mk("Dual Wield (Normal)", "Dual Wield (Normal)",
+				"Allows you to wield two normal sized melee weapons more effectively. (damage and accuracy penalties decreased by 20% and 10%)",
+				"You've chosen the 'Dual Wield (Normal)' perk, training skill of using two normal sized melee weapons. (damage and accuracy penalties decreased by 20% and 10%)");
 		public static const DualWieldSmall:PerkType = mk("Dual Wield (Small)", "Dual Wield (Small)",
-				"Allows you to wield two small sized melee weapons.",
-				"You've chosen the 'Dual Wield (Small)' perk, training skill of using two small melee weapons.");
+				"Allows you to wield two small sized melee weapons more effectively. (damage and accuracy penalties decreased by 20% and 10%)",
+				"You've chosen the 'Dual Wield (Small)' perk, training skill of using two small melee weapons. (damage and accuracy penalties decreased by 20% and 10%)");
 		public static const EasterBunnyBalls:PerkType = mk("Easter bunny balls", "Easter bunny balls",
 				"Your balls constantly grows until emptied through your cock, producing eggs.",
 				"Your balls constantly grows until emptied through your cock, producing eggs.");
@@ -1340,7 +1343,7 @@ public class PerkLib
 				"Gain an ability to wield four large weapons as long you have 4 or more arms.",
 				"You've chosen the 'Gigant's Grip (Su)' perk, gaining an ability to wield large weapons in each hands no mather how many you got.").withBuffs({'str.mult':0.5,'tou.mult':0.5,'spe.mult':0.5});
 		public static const GiantsReach:PerkType = mk("Giant's Reach", "Giant's Reach",
-				"When fighting groups of enemies with Large weapons it creates small shockwaves increasing range (and damage) of Aoe attacks.",
+				"When fighting groups of enemies with Large weapons it creates small shockwaves increasing range (and damage) of AoE attacks.",
 				"You've chosen the 'Giant's Reach' perk. Increase range of attacks with large weapons in fights against group enemies.");
 		public static const GiftOfLust:PerkType = mk("Gift of Lust", "Gift of Lust",
 				"You enhanced your Transference special to transfer 25% of your current arousal to your opponent at 25% lower fatigue cost.",
@@ -4320,6 +4323,9 @@ public class PerkLib
                     .requireLevel(6);
             StarlightStrikes.requirePerk(JobRogue)
                     .requireSpe(60)
+                    .requireLevel(6);
+            DualWieldNormal.requirePerk(DualWield)
+					.requireAnyPerk(JobDervish, JobWarrior)
                     .requireLevel(6);
             /*Brawler.requireMinSpe(60)
 					.requireMinStr(60);*/ //Would it be fitting to have Urta teach you?

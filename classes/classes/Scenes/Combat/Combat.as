@@ -166,16 +166,34 @@ public class Combat extends BaseContent {
         return player.SpearExpToLevelUp();
     }
 	
-	public function maxDualWieldSmallLevel():Number {
+	public function dualWSLevel():Number {
+        return player.dualWSLevel;
+    }
+    public function maxDualWieldSmallLevel():Number {
         return player.maxDualWieldSmallLevel();
     }
+    public function DualWieldSmallExpToLevelUp():Number {
+        return player.DualWieldSmallExpToLevelUp();
+    }
 	
+    public function dualWNLevel():Number {
+        return player.dualWNLevel;
+    }
     public function maxDualWieldNormalLevel():Number {
         return player.maxDualWieldNormalLevel();
     }
+    public function DualWieldNormalExpToLevelUp():Number {
+        return player.DualWieldNormalExpToLevelUp();
+    }
 	
+    public function dualWLLevel():Number {
+        return player.dualWLLevel;
+    }
     public function maxDualWieldLargeLevel():Number {
         return player.maxDualWieldLargeLevel();
+    }
+    public function DualWieldLargeExpToLevelUp():Number {
+        return player.DualWieldLargeExpToLevelUp();
     }
 	
     public function dualWFLevel():Number {
@@ -2240,6 +2258,9 @@ public class Combat extends BaseContent {
 		if (player.isMaceHammerTypeWeapon()) accmod += Math.round((masteryMaceHammerLevel() - 1) / 2);
 		if (player.isDuelingTypeWeapon()) accmod += Math.round((masteryDuelingSwordLevel() - 1) / 2);
 		if (player.isSpearTypeWeapon()) accmod += Math.round((masterySpearLevel() - 1) / 2);
+		if (player.weaponPerk == "Dual Small") accmod += Math.round((dualWSLevel() - 1) / 2);
+		if (player.weaponPerk == "Dual") accmod += Math.round((dualWNLevel() - 1) / 2);
+		if (player.weaponPerk == "Dual Large") accmod += Math.round((dualWLLevel() - 1) / 2);
         return accmod;
     }
 
@@ -2253,13 +2274,16 @@ public class Combat extends BaseContent {
 	public function meleeDualWieldAccuracyPenalty():Number {
 		var accmdwmodpenalty:Number = 0;
         if (player.weaponPerk == "Dual") {
-			accmdwmodpenalty -= 25;
+			if (player.hasPerk(PerkLib.DualWieldNormal)) accmdwmodpenalty -= 15;
+			else accmdwmodpenalty -= 25;
 		}
         if (player.weaponPerk == "Dual Large") {
-			accmdwmodpenalty -= 25;
+			if (player.hasPerk(PerkLib.DualWieldLarge)) accmdwmodpenalty -= 15;
+			else accmdwmodpenalty -= 25;
 		}
         if (player.weaponPerk == "Dual Small") {
-			accmdwmodpenalty -= 25;
+			if (player.hasPerk(PerkLib.DualWieldSmall)) accmdwmodpenalty -= 15;
+			else accmdwmodpenalty -= 25;
 		}
         if (player.weaponPerk == "Quad") {
 			accmdwmodpenalty -= 75;
@@ -2270,13 +2294,16 @@ public class Combat extends BaseContent {
 	public function meleeDualWieldDamagePenalty():Number {
 		var dmgmdwmodpenalty:Number = 1;
         if (player.weaponPerk == "Dual") {
-			dmgmdwmodpenalty -= 0.5;
+			if (player.hasPerk(PerkLib.DualWieldNormal)) dmgmdwmodpenalty -= 0.3;
+			else dmgmdwmodpenalty -= 0.5;
 		}
         if (player.weaponPerk == "Dual Large") {
-			dmgmdwmodpenalty -= 0.5;
+			if (player.hasPerk(PerkLib.DualWieldLarge)) dmgmdwmodpenalty -= 0.3;
+			else dmgmdwmodpenalty -= 0.5;
 		}
         if (player.weaponPerk == "Dual Small") {
-			dmgmdwmodpenalty -= 0.5;
+			if (player.hasPerk(PerkLib.DualWieldSmall)) dmgmdwmodpenalty -= 0.3;
+			else dmgmdwmodpenalty -= 0.5;
 		}
         if (player.weaponPerk == "Quad") {
 			dmgmdwmodpenalty -= 0.9;
@@ -2345,7 +2372,8 @@ public class Combat extends BaseContent {
 	public function firearmsDualWieldAccuracyPenalty():Number {
 		var accfdwmodpenalty:Number = 0;
         if (player.weaponPerk == "Dual Firearms") {
-			accfdwmodpenalty -= 25;
+			if (player.hasPerk(PerkLib.DualWieldSmall)) accfdwmodpenalty -= 15;
+			else accfdwmodpenalty -= 25;
 		}
         if (player.weaponPerk == "Quad Firearms") {
 			accfdwmodpenalty -= 75;
@@ -2356,7 +2384,8 @@ public class Combat extends BaseContent {
 	public function firearmsDualWieldDamagePenalty():Number {
 		var dmgfdwmodpenalty:Number = 1;
         if (player.weaponPerk == "Dual Firearms") {
-			dmgfdwmodpenalty -= 0.5;
+			if (player.hasPerk(PerkLib.DualWieldFirearms)) dmgfdwmodpenalty -= 0.3;
+			else dmgfdwmodpenalty -= 0.5;
 		}
         if (player.weaponPerk == "Quad Firearms") {
 			dmgfdwmodpenalty -= 0.9;
@@ -4380,6 +4409,9 @@ public class Combat extends BaseContent {
 			if (player.isMaceHammerTypeWeapon()) damage *= (1 + (0.01 * masteryMaceHammerLevel()));
 			if (player.isDuelingTypeWeapon()) damage *= (1 + (0.01 * masteryDuelingSwordLevel()));
 			if (player.isSpearTypeWeapon()) damage *= (1 + (0.01 * masterySpearLevel()));
+			if (player.weaponPerk == "Dual Small") damage *= (1 + (0.01 * dualWSLevel()));
+			if (player.weaponPerk == "Dual") damage *= (1 + (0.01 * dualWNLevel()));
+			if (player.weaponPerk == "Dual Large") damage *= (1 + (0.01 * dualWLLevel()));
 			//Determine if critical hit!
             var crit:Boolean = false;
             var critChance:int = 5;
@@ -4646,6 +4678,18 @@ public class Combat extends BaseContent {
 				if (player.isSpearTypeWeapon()) {
 					if (crit) spearXP(1);
 					spearXP(1);
+				}
+				if (player.weaponPerk == "Dual Small") {
+					if (crit) dualWieldSmallXP(1);
+					dualWieldSmallXP(1);
+				}
+				if (player.weaponPerk == "Dual") {
+					if (crit) dualWieldNormalXP(1);
+					dualWieldNormalXP(1);
+				}
+				if (player.weaponPerk == "Dual Large") {
+					if (crit) dualWieldLargeXP(1);
+					dualWieldLargeXP(1);
 				}
             }
             if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75) {
@@ -8905,6 +8949,21 @@ public class Combat extends BaseContent {
         player.spearXP(XP);
     }
 	
+	public function dualWieldSmallXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.dualWieldSmallXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldSmallXP(XP);
+        player.dualWieldSmallXP(XP);
+    }
+	public function dualWieldNormalXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.dualWieldNormalXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldNormalXP(XP);
+        player.dualWieldNormalXP(XP);
+    }
+	public function dualWieldLargeXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.dualWieldLargeXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldLargeXP(XP);
+        player.dualWieldLargeXP(XP);
+    }
 	public function dualWieldFirearmsXP(XP:Number = 0):void {
         if (player.humanScore() == player.humanMaxScore()) player.dualWieldFirearmsXP(XP);
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldFirearmsXP(XP);
@@ -11706,4 +11765,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}

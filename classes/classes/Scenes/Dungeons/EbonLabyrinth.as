@@ -257,15 +257,20 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			else player.createStatusEffect(StatusEffects.TFDealer1, 0, 0, 1, 0);
 			cleanupAfterCombat();
 		}
-		public function defeatedByBoosNo4():void {
+		public function defeatedByEyeTyrant():void {
 			clearOutput();
-			outputText("\n\n");
+			outputText("You fall to the ground defeated yet for some reason you are not reduced to ashes by the gazer. Instead your gaze is caught once more into its all encompassing eye.\n\n");
+			outputText("\"<i>Stay here… with me</i>\"\n\n");
+			outputText("Afterward you begin to lose the notion of time. You've been living in the depths with this thing for years now, satisfying its many appetites as they come. When she's hungry you go get her food and when she's in the mood you willingly offer your body to please her. She has all but subdued your willpower entirely making you its permanent willing slave. All you care about is to please the mistress now. ");
+			outputText("Every now and then the mistress rewards you and feeds you off course, can't exactly let you starve to death. You think you're forgetting something important however... didn't you have a mission, a duty? It does not matter though so long as your mistress is happy you are happy.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
-		public function defeatBoosNo4():void {
+		public function defeatEyeTyrant():void {
 			clearOutput();
-			outputText("\n\n");
+			outputText("You watch in confusion as the omni eyed girl simply vanishes from existence with a growl of anger. Well the passage ahead of you is free now so might as well take it.\n\n");
+			//if (player.hasStatusEffect(StatusEffects.TFDealer2) && player.statusEffectv1(StatusEffects.TFDealer2) < 1) player.addStatusValue(StatusEffects.TFDealer2, 1, 1);
+			//else player.createStatusEffect(StatusEffects.TFDealer2, 1, 0, 0, 0); - kiedy bedzie dodane gazer tf
 			cleanupAfterCombat();
 		}
 		public function defeatedByBoosNo5():void {
@@ -510,11 +515,11 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		public function HellfireSnailSex():void {
 			outputText("The she snail giggle at your pleasant attention and begin to grind her lubricated pussy against "+(player.hasCock() ? "your burning cock" : "yours")+" in earnest. Blazing goop and other fluids begins to mingle as the two of you make it out the other residents of the labyrinth either oblivious or too scared to interfere with your smoldering mating session. ");
 			outputText("This might also be because the both of you spray fire and lava everywhere as part of mating and despite you both being immune to each other the unlooker likely wouldn't. The mating is deliberately slow, gentle and calculated with no single movement wasted as unlike most of Mareth denizen your current partner likes it nice and slow taking her time to make everything count.\n\n");
-			outputText("You reach your peak and erupt in orgasm your partner following short mere seconds after");
+			outputText("You reach your peak and erupt in orgasm, your partner following short mere seconds after");
 			if (player.hasCock()) outputText(" as you fill her smoldering lovehole with "+player.race+" seeds");
 			if (!player.hasCock()) outputText(" as your girl juice mix with hers");
 			outputText(".\n\n\"<i>Uwaaa so long since last I had real sex, most of my partners dies before I even reach the climax. Thank you so much hun for helping me out.</i>\"\n\n");
-			outputText("Hey if this can help her be less of a hazard to everyone around her then why not, your glad she appreciates it.\n\n");
+			outputText("Hey if this can help her be less of a hazard to everyone around her then why not, you're glad she appreciates it.\n\n");
 			outputText("\"<i>Hey before you go have a vial of this, I don't know if you will find it useful but who knows.</i>\"\n\n");
 			outputText("She hands you a vial of her saliva before you head out back in the labyrinth and resume your exploration.\n\n");
 			player.orgasm();
@@ -522,10 +527,119 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		
 		private function encountersRuletteBossesEL2():void {
 			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
-			outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
-			outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
-			startCombat(new DisplacerBeast(), true);
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 4) {
+				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,90,0,0,0);
+				//encountersRuletteBossesEL1HellSnail();
+				outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
+				outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
+				startCombat(new DisplacerBeast(), true);
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 5) {
+				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,90,0,0,0);
+				//encountersRuletteBossesEL1Hydra();
+				outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
+				outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
+				startCombat(new DisplacerBeast(), true);
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 6) {
+				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,90,0,0,0);
+				//encountersRuletteBossesEL1HellSnail();
+				outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
+				outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
+				startCombat(new DisplacerBeast(), true);
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 7) {
+				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,90,0,0,0);
+				encountersRuletteBossesEL2EyeTyrant();
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 8) {
+				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,90,0,0,0);
+				//encountersRuletteBossesEL1Hydra();
+				outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
+				outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
+				startCombat(new DisplacerBeast(), true);
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 9) {
+				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,90,0,0,0);
+				encountersRuletteBossesEL2EyeTyrant();
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 1) {
+				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,85,0,0,0);
+				if (rand(2) == 0) {
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 3);
+					//encountersRuletteBossesEL1Hydra();
+					outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
+					outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
+					startCombat(new DisplacerBeast(), true);
+				}
+				else {
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 4);
+					//encountersRuletteBossesEL1HellSnail();
+					outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
+					outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
+					startCombat(new DisplacerBeast(), true);
+				}
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 2) {
+				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,85,0,0,0);
+				if (rand(2) == 0) {
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 4);
+					encountersRuletteBossesEL2EyeTyrant();
+				}
+				else {
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 5);
+					//encountersRuletteBossesEL1HellSnail();
+					outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
+					outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
+					startCombat(new DisplacerBeast(), true);
+				}
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 3) {
+				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,85,0,0,0);
+				if (rand(2) == 0) {
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 5);
+					encountersRuletteBossesEL2EyeTyrant();
+				}
+				else {
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 6);
+					//encountersRuletteBossesEL1Hydra();
+					outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
+					outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
+					startCombat(new DisplacerBeast(), true);
+				}
+			}
+			if (!player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) {
+				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,80,0,0,0);
+				var choice:Number = rand(3);
+				if (choice == 0) {
+					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss2, 1, 0, 0, 0);
+					encountersRuletteBossesEL2EyeTyrant();
+				}
+				if (choice == 1) {
+					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss2, 2, 0, 0, 0);
+					//encountersRuletteBossesEL1Hydra();
+					outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
+					outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
+					startCombat(new DisplacerBeast(), true);
+				}
+				if (choice == 2) {
+					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss2, 3, 0, 0, 0);
+					//encountersRuletteBossesEL1HellSnail();
+					outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
+					outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
+					startCombat(new DisplacerBeast(), true);
+				}
+			}
 		}
+		private function encountersRuletteBossesEL2EyeTyrant():void {
+			outputText("While exploring the depth of the labyrinth you hear the sound of something dripping on the ground in the far distance. As you turn the corner you run into a black rippling form of tentacle mounted eyestalks. Tar-like fluids drip from the creature to the ground in constant drops. You're too stunned by this eldritch oddity to notice the eyestalks all stopped moving to point and stare at you, ");
+			outputText("the floating horror turning over itself gaze unblinking to reveal the form of a pale beautiful human half dripping with black goop. Everything about her body would look normal if not for the single all encompassing red eye below her black hairs and above her nose. She smiles revealing sharp teeth before a voice echo in your head coming from seemingly nowhere.\n\n");
+			outputText("\"<i>Yes… that is it stare into my eye… lose yourself inside, there is nothing but this eye you should ever look into.</i>\"\n\n");
+			outputText("For a moment you succumb, mumbling incoherently and walking to this beautiful eye calling to you, but the sound of the dripping fluid on the ground suddenly jars you to reality. You swiftly back away just before she tries and wraps her arms around you. Realising you snapped out of her dominating gaze the woman attacked.\n\n");
+			outputText("<b>It's too late to escape now, it's a fight!</b>");
+			startCombat(new EyeTyrant(), true);
+		}
+		
 		private function encountersRuletteEL1():void {
 			if ((rand(100) < player.statusEffectv1(StatusEffects.EbonLabyrinthA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				var reset:Number = 10;
@@ -776,15 +890,21 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 50 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 100 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 150) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersRuletteBossesEL1();
-			}/*
-			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 200 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 250 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 300) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			}
+			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 2 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 4 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 6) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			//else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 200 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 250 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 300) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersRuletteBossesEL2();
+			}/*
+			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 350 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 400 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 450) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
+				encountersRuletteBossesEL3();
 			}*/
 			else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 295 && player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv1(StatusEffects.RathazulAprilFool) == 0 && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersFountainOfPurity();
 			}
+			//else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 14 && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne) && rand(10) == 0) supriseencounter();
 			else encountersRuletteEL1();
 		}
 		public function checkingELAchievs():void {
