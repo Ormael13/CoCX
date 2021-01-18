@@ -5730,6 +5730,9 @@ public class PerkLib
 			ElvishPeripheralNervSys.requirePerk(ElvenSense).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 4;
             }, "Elf race");
+			FeyArcaneBloodstream.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+				return player.fairyScore() >= 20;
+			}, "Fairy race");
 			FloralOvaries.requireOvariesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.alrauneScore() >= 13;
 			}, "Alraune race");
@@ -5916,6 +5919,9 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.yukiOnnaScore() >= 14;
             }, "Yuki onna race");
+			FeyArcaneBloodstreamEvolved.requireLevel(12).requirePerk(FeyArcaneBloodstream).requireCustomFunction(function (player:Player):Boolean {
+				return player.fairyScore() >= 21;
+			}, "Fairy race");
 			FloralOvariesEvolved.requireLevel(6).requirePerk(FloralOvaries).requireCustomFunction(function (player:Player):Boolean {
 				return player.alrauneScore() >= 13;
 			}, "Alraune race");
@@ -6405,6 +6411,9 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.yukiOnnaScore() >= 14;
             }, "Yuki onna race");
+			FeyArcaneBloodstreamFinalForm.requireLevel(24).requirePerk(FeyArcaneBloodstreamEvolved).requireCustomFunction(function (player:Player):Boolean {
+				return player.fairyScore() >= 22;
+			}, "Fairy race");
 			FloralOvariesFinalForm.requireLevel(24).requirePerk(FloralOvariesEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.alrauneScore() >= 13;
 			}, "Alraune race");
