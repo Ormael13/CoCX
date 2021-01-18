@@ -13,13 +13,19 @@ package classes.Items.Weapons
 		
 		public function DualWhip() 
 		{
-			super("P.Whip ", "P.Whip", "pair of coiled whips", "a pair of coiled whips", "whip-crack", 5, 400, "A pair of coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it!");
+			super("P.Whip ", "P.Whip", "pair of coiled whips", "a pair of coiled whips", "whip-crack", 5, 400, "A pair of coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it!", "Dual");
 		}
 		
 		override public function get attack():Number {
 			var boost:int = 0;
 			if (game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 2;
 			return (5 + boost); 
+		}
+		
+		override public function canUse():Boolean {
+			if (game.player.findPerk(PerkLib.DualWield) >= 0) return true;
+			outputText("You aren't skilled enough to handle this pair of weapons!  ");
+			return false;
 		}
 	}
 }

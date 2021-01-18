@@ -86,7 +86,13 @@ use namespace CoC;
 			clearOutput();
 			EngineCore.displayHeader("Inventory");
 			outputText("<b><u>Equipment:</u></b>\n");
-			outputText("<b>Weapon (Melee):</b> " + player.weapon.name + " (Attack: " + player.weaponAttack + ")\n");
+			outputText("<b>Weapon (Melee):</b> " + player.weapon.name + " (Attack: " + player.weaponAttack + ")");
+			if (player.isSwordTypeWeapon()) outputText(" (Sword-type weapon)");
+			if (player.isAxeTypeWeapon()) outputText(" (Axe-type weapon)");
+			if (player.isMaceHammerTypeWeapon()) outputText(" (Mace/Hammer-type weapon)");
+			if (player.isDuelingTypeWeapon()) outputText(" (Dueling Sword-type weapon)");
+			if (player.isSpearTypeWeapon()) outputText(" (Spear-type weapon)");
+			outputText("\n");
 			outputText("<b>Weapon (Range):</b> " + player.weaponRange.name + " (Attack: " + player.weaponRangeAttack + ")\n");
 			outputText("<b>Shield:</b> " + player.shield.name + " (Block Rating: " + player.shieldBlock + ")\n");
 			outputText("<b>Armour:</b> " + player.armor.name + " (Physical / Magical Defense: " + player.armorDef + " / " + player.armorMDef + ")\n");
@@ -117,7 +123,7 @@ use namespace CoC;
 			if (page == 1) {
 				for (x = 0; x < 10; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
-						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x);
+						addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), doWhatWithItem, x);
 						//foundItem = true;
 					}
 				}
@@ -126,7 +132,7 @@ use namespace CoC;
 			if (page == 2) {
 				for (x = 10; x < 20; x++) {
 					if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
-						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x);
+						addButton(x-10, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), doWhatWithItem, x);
 						//foundItem = true;
 					}
 				}
@@ -792,26 +798,54 @@ use namespace CoC;
 				pearlStorage.push(newSlot);
 			}
 		}
-
-		private function useItemInInventory(slotNum:int):void {
+		private function doWhatWithItem(slotNum:int):void {
 			clearOutput();
 			if (player.itemSlots[slotNum].itype is Useable) {
 				var item:Useable = player.itemSlots[slotNum].itype as Useable;
+			if (flags[kFLAGS.INVT_MGMT_TYPE] == 0){
 				if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
 					deleteItemPrompt(item, slotNum);
-					return;
+				return;
 				}
 				if (item.canUse()) { //If an item cannot be used then canUse should provide a description of why the item cannot be used
 					if (!debug) player.itemSlots[slotNum].removeOneItem();
 					useItem(item, player.itemSlots[slotNum]);
 					return;
 				}
-			}
-			else {
+				itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
+			}	else {
+				if (item.canUse()) {
+					outputText("You grab " + player.itemSlots[slotNum].itype.longName + " and consider what you will do with it.\n\n"
+							+ "Do you use it, or destroy it?\n\n");
+					menu();	//Can't get the menu to pop up...
+					addButton(0, "Use it", handleItemInInventory, 0, item, slotNum);
+					addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
+				} else {
+					menu();
+					addButton(0, "Next", itemGoNext);
+					addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
+					//itemGoNext();
+				}
+				}
+			}else {
 				outputText("You cannot use " + player.itemSlots[slotNum].itype.longName + "!\n\n");
+				itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
 			}
-			itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
+			}
+
+
+		private function handleItemInInventory(x:int, item:Useable, slotNum:int):void{
+			switch(x){
+				case 0:
+					if (!debug) player.itemSlots[slotNum].removeOneItem();
+					useItem(item, player.itemSlots[slotNum]);
+				return;
+				case 1:
+					deleteItemPrompt(item, slotNum);
+				return;
+			}
 		}
+
 
 		private function inventoryCombatHandler():void {
 			//Check if the battle is over. If not then go to the enemy's action.
@@ -1140,30 +1174,39 @@ use namespace CoC;
 				addButton(13, "-2-", manageEquipment, page + 1);
 			}
 			if (page == 2) {
-				if (player.jewelry != JewelryLib.NOTHING) {
-					addButton(0, "Ring 1", unequipJewel1).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
-				}
-				else addButtonDisabled(0, "Ring 1", "You not have equipped any ring.");
-				if (player.jewelry2 != JewelryLib.NOTHING) {
-					addButton(1, "Ring 2", unequipJewel2).hint(player.jewelry2.description, capitalizeFirstLetter(player.jewelry2.name));
-				}
-				else addButtonDisabled(1, "Ring 2", "You not have equipped any ring.");
-				if (player.jewelry3 != JewelryLib.NOTHING) {
-					addButton(2, "Ring 3", unequipJewel3).hint(player.jewelry3.description, capitalizeFirstLetter(player.jewelry3.name));
-				}
-				else addButtonDisabled(2, "Ring 3", "You not have equipped any ring.");
-				if (player.jewelry4 != JewelryLib.NOTHING) {
-					addButton(3, "Ring 4", unequipJewel4).hint(player.jewelry4.description, capitalizeFirstLetter(player.jewelry4.name));
-				}
-				else addButtonDisabled(3, "Ring 4", "You not have equipped any ring.");
 				if (player.headJewelry != HeadJewelryLib.NOTHING) {
-					addButton(5, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
+					addButton(0, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
 				}
-				else addButtonDisabled(5, "Head Acc", "You not have equipped any head accesory.");
+				else addButtonDisabled(0, "Head Acc", "You not have equipped any head accesory.");
 				if (player.necklace != NecklaceLib.NOTHING) {
-					addButton(6, "Necklace", unequipNecklace).hint(player.necklace.description, capitalizeFirstLetter(player.necklace.name));
+					addButton(1, "Necklace", unequipNecklace).hint(player.necklace.description, capitalizeFirstLetter(player.necklace.name));
 				}
-				else addButtonDisabled(6, "Necklace", "You not have equipped any necklace.");
+				else addButtonDisabled(1, "Necklace", "You not have equipped any necklace.");
+				if (player.jewelry != JewelryLib.NOTHING) {
+					addButton(5, "Ring 1", unequipJewel1).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
+				}
+				else addButtonDisabled(5, "Ring 1", "You not have equipped any ring.");
+				if (player.jewelry3 != JewelryLib.NOTHING) {
+					addButton(6, "Ring 3", unequipJewel3).hint(player.jewelry3.description, capitalizeFirstLetter(player.jewelry3.name));
+				}
+				else {
+					if (player.hasPerk(PerkLib.ThirdRing)) addButtonDisabled(6, "Ring 3", "You not have equipped any ring.");
+					else addButtonDisabled(6, "Ring 3", "You not have equipped any ring. (Req. lvl 60+ perk: Third Ring)");
+				}
+				if (player.jewelry2 != JewelryLib.NOTHING) {
+					addButton(10, "Ring 2", unequipJewel2).hint(player.jewelry2.description, capitalizeFirstLetter(player.jewelry2.name));
+				}
+				else {
+					if (player.hasPerk(PerkLib.SecondRing)) addButtonDisabled(10, "Ring 2", "You not have equipped any ring.");
+					else addButtonDisabled(10, "Ring 2", "You not have equipped any ring. (Req. lvl 30+ perk: Second Ring)");
+				}
+				if (player.jewelry4 != JewelryLib.NOTHING) {
+					addButton(11, "Ring 4", unequipJewel4).hint(player.jewelry4.description, capitalizeFirstLetter(player.jewelry4.name));
+				}
+				else {
+					if (player.hasPerk(PerkLib.FourthRing)) addButtonDisabled(11, "Ring 4", "You not have equipped any ring.");
+					else addButtonDisabled(11, "Ring 4", "You not have equipped any ring. (Req. lvl 90+ perk: Fourth Ring)");
+				}
 				addButton(13, "-1-", manageEquipment, page - 1);
 			}
 			/*if (player.jewelry != JewelryLib.NOTHING) {

@@ -210,18 +210,11 @@ public class PlayerInfo extends BaseContent {
 			else miscStats += "<b>Day of the Moon Cycle:</b> " + flags[kFLAGS.LUNA_MOON_CYCLE];
 			miscStats += "\n";
 		}
-	
 		miscStats += "<b>Exp needed to lvl up:</b> ";
 		if (player.level < CoC.instance.levelCap) miscStats += "" + player.requiredXP() + "\n";
 		else miscStats += "N/A (You already at max lvl)\n";
-		if (player.herbalismLevel < player.maxHerbalismLevel())
-			miscStats += "<b>Herbalism Skill:</b>  " + player.herbalismLevel + " / " + player.maxHerbalismLevel() + " (Exp: " + player.herbalismXP + " / " + player.HerbExpToLevelUp() + ")\n";
-		else
-			miscStats += "<b>Herbalism Skill:</b>  " + player.herbalismLevel + " / " + player.maxHerbalismLevel() + " (Exp: MAX)\n";
-		
 		miscStats += "<b>Ascension points (curently possesed):</b> " + player.ascensionPerkPoints + "\n";
 		miscStats += "<b>Ascension points (possible to gain during next ascension):</b> " + camp.possibleToGainAscensionPoints() + "\n";
-
 		
 		if (miscStats != "")
 			outputText("\n<b><u>Miscellaneous Stats</u></b>\n" + miscStats);
@@ -368,6 +361,7 @@ public class PlayerInfo extends BaseContent {
 		addButton(11, "Combat", displayStatsCombat);
 		addButton(12, "NPC's", displayStatsNpcs);
 		addButton(13, "Children", displayStatsChildren);
+		addButton(14, "Mastery", displayStatsmastery);
 	}
 	public function displayStatsCombat():void {
 		spriteSelect(-1);
@@ -404,15 +398,15 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Black Heals Cost:</b> " + combat.healCostBlack(100) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Accuracy (1st melee attack):</b> " + (combat.meleeAccuracy() / 2) + "%\n";
-		if (player.findPerk(PerkLib.DoubleAttackSmall) >= 0 || player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0) combatStats += "<b>Accuracy (2nd melee attack):</b> " + ((combat.meleeAccuracy() / 2) - combat.meleeAccuracyPenalty()) + "%\n";
-		if (player.findPerk(PerkLib.TripleAttackSmall) >= 0 || player.findPerk(PerkLib.TripleAttack) >= 0 || player.findPerk(PerkLib.TripleAttackLarge) >= 0) combatStats += "<b>Accuracy (3rd melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 2)) + "%\n";
-		if (player.findPerk(PerkLib.QuadrupleAttackSmall) >= 0 || player.findPerk(PerkLib.QuadrupleAttack) >= 0) combatStats += "<b>Accuracy (4th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 3)) + "%\n";
-		if (player.findPerk(PerkLib.PentaAttackSmall) >= 0 || player.findPerk(PerkLib.PentaAttack) >= 0) combatStats += "<b>Accuracy (5th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 4)) + "%\n";
-		if (player.findPerk(PerkLib.HexaAttackSmall) >= 0 || player.findPerk(PerkLib.HexaAttack) >= 0) combatStats += "<b>Accuracy (6th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 5)) + "%\n";
-		if (player.findPerk(PerkLib.HectaAttackSmall) >= 0) combatStats += "<b>Accuracy (7th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 6)) + "%\n";
-		if (player.findPerk(PerkLib.OctaAttackSmall) >= 0) combatStats += "<b>Accuracy (8th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 7)) + "%\n";
-		if (player.findPerk(PerkLib.NonaAttackSmall) >= 0) combatStats += "<b>Accuracy (9th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 8)) + "%\n";
-		if (player.findPerk(PerkLib.DecaAttackSmall) >= 0) combatStats += "<b>Accuracy (10th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() * 9)) + "%\n";
+		if (player.findPerk(PerkLib.DoubleAttackSmall) >= 0 || player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0) combatStats += "<b>Accuracy (2nd melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty())) + "%\n";
+		if (player.findPerk(PerkLib.TripleAttackSmall) >= 0 || player.findPerk(PerkLib.TripleAttack) >= 0 || player.findPerk(PerkLib.TripleAttackLarge) >= 0) combatStats += "<b>Accuracy (3rd melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 2)) + "%\n";
+		if (player.findPerk(PerkLib.QuadrupleAttackSmall) >= 0 || player.findPerk(PerkLib.QuadrupleAttack) >= 0) combatStats += "<b>Accuracy (4th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 3)) + "%\n";
+		if (player.findPerk(PerkLib.PentaAttackSmall) >= 0 || player.findPerk(PerkLib.PentaAttack) >= 0) combatStats += "<b>Accuracy (5th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 4)) + "%\n";
+		if (player.findPerk(PerkLib.HexaAttackSmall) >= 0 || player.findPerk(PerkLib.HexaAttack) >= 0) combatStats += "<b>Accuracy (6th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 5)) + "%\n";
+		if (player.findPerk(PerkLib.HectaAttackSmall) >= 0) combatStats += "<b>Accuracy (7th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 6)) + "%\n";
+		if (player.findPerk(PerkLib.OctaAttackSmall) >= 0) combatStats += "<b>Accuracy (8th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 7)) + "%\n";
+		if (player.findPerk(PerkLib.NonaAttackSmall) >= 0) combatStats += "<b>Accuracy (9th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 8)) + "%\n";
+		if (player.findPerk(PerkLib.DecaAttackSmall) >= 0) combatStats += "<b>Accuracy (10th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 9)) + "%\n";
 		combatStats += "\n";
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kindra) < 1)
@@ -435,9 +429,9 @@ public class PlayerInfo extends BaseContent {
 		if (player.hasPerk(PerkLib.DoubleStrike)) combatStats += "<b>Throwed Weapon Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 15) + "%\n";
 		if (player.hasPerk(PerkLib.TripleStrike)) combatStats += "<b>Throwed Weapon Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 30) + "%\n";
 		combatStats += "<b>Firearms Accuracy (1st range attack):</b> " + (combat.firearmsAccuracy() / 2) + "%\n";
-		if (player.hasPerk(PerkLib.AmateurGunslinger)) combatStats += "<b>Firearms Accuracy (2nd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 10) + "%\n";
-		if (player.hasPerk(PerkLib.ExpertGunslinger)) combatStats += "<b>Firearms Accuracy (3rd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 20) + "%\n";
-		if (player.hasPerk(PerkLib.MasterGunslinger)) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((combat.firearmsAccuracy() / 2) - 30) + "%\n";
+		if (player.hasPerk(PerkLib.AmateurGunslinger)) combatStats += "<b>Firearms Accuracy (2nd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - (combat.firearmsAccuracyPenalty() + combat.firearmsDualWieldAccuracyPenalty())) + "%\n";
+		if (player.hasPerk(PerkLib.ExpertGunslinger)) combatStats += "<b>Firearms Accuracy (3rd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - ((combat.firearmsAccuracyPenalty() + combat.firearmsDualWieldAccuracyPenalty()) * 2)) + "%\n";
+		if (player.hasPerk(PerkLib.MasterGunslinger)) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((combat.firearmsAccuracy() / 2) - ((combat.firearmsAccuracyPenalty() + combat.firearmsDualWieldAccuracyPenalty()) * 3)) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMod()) + "%\n";
 		combatStats += "<b>Physical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillPhysicalMod()) + "%\n";
@@ -445,13 +439,6 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost()) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
-		if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0) combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
-
-		if (player.teaseLevel < combat.maxTeaseLevel())
-			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + combat.teaseExpToLevelUp() + ")\n";
-		else
-			combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)\n";
-		combatStats += "\n";
 		var mins:Object = player.getAllMinStats();
 		combatStats += "<b>Strength Cap:</b> " + Math.floor(player.strStat.max) + "\n";
 		combatStats += "<i>Ghost Strength:</i> +" + Math.floor(combat.ghostStrength()) + "\n";
@@ -515,6 +502,7 @@ public class PlayerInfo extends BaseContent {
 		addButtonDisabled(11, "Combat", "You are currently at this stats page.");
 		addButton(12, "NPC's", displayStatsNpcs);
 		addButton(13, "Children", displayStatsChildren);
+		addButton(14, "Mastery", displayStatsmastery);
 	}
 	public function displayStatsNpcs():void {
 		spriteSelect(-1);
@@ -999,6 +987,7 @@ public class PlayerInfo extends BaseContent {
 		addButton(11, "Combat", displayStatsCombat);
 		addButtonDisabled(12, "NPC's", "You are currently at this stats page.");
 		addButton(13, "Children", displayStatsChildren);
+		addButton(14, "Mastery", displayStatsmastery);
 	}
 	public function displayStatsChildren():void {
 		spriteSelect(-1);
@@ -1154,6 +1143,74 @@ public class PlayerInfo extends BaseContent {
 		addButton(11, "Combat", displayStatsCombat);
 		addButton(12, "NPC's", displayStatsNpcs);
 		addButtonDisabled(13, "Children", "You are currently at this stats page.");
+		addButton(14, "Mastery", displayStatsmastery);
+	}
+	public function displayStatsmastery():void {
+		spriteSelect(-1);
+		clearOutput();
+		displayHeader("Mastery Stats");
+		// Begin Mastery Stats
+		var masteryStats:String = "";
+		if (player.masterySwordLevel < combat.maxSwordLevel())
+			masteryStats += "<b>Swords Mastery / Dao of Sword:</b>  " + player.masterySwordLevel + " / " + combat.maxSwordLevel() + " (Exp: " + player.masterySwordXP + " / " + combat.SwordExpToLevelUp() + ")\n<i>(Effects: +" + player.masterySwordLevel + "% damage, +" + (0.5 * Math.round((player.masterySwordLevel - 1) / 2)) + "% accuracy)</i>\n";
+		else
+			masteryStats += "<b>Swords Mastery / Dao of Sword:</b>  " + player.masterySwordLevel + " / " + combat.maxSwordLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masterySwordLevel + "% damage, +" + (0.5 * Math.round((player.masterySwordLevel - 1) / 2)) + "% accuracy)</i>\n";
+		if (player.masteryAxeLevel < combat.maxAxeLevel())
+			masteryStats += "<b>Axes Mastery / Dao of Axe:</b>  " + player.masteryAxeLevel + " / " + combat.maxAxeLevel() + " (Exp: " + player.masteryAxeXP + " / " + combat.AxeExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryAxeLevel + "% damage, +" + (0.5 * Math.round((player.masteryAxeLevel - 1) / 2)) + "% accuracy)</i>\n";
+		else
+			masteryStats += "<b>Axes Mastery / Dao of Axe:</b>  " + player.masteryAxeLevel + " / " + combat.maxAxeLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryAxeLevel + "% damage, +" + (0.5 * Math.round((player.masteryAxeLevel - 1) / 2)) + "% accuracy)</i>\n";
+		if (player.masteryMaceHammerLevel < combat.maxMaceHammerLevel())
+			masteryStats += "<b>Maces/Hammers Mastery / Dao of Mace/Hammer:</b>  " + player.masteryMaceHammerLevel + " / " + combat.maxMaceHammerLevel() + " (Exp: " + player.masteryMaceHammerXP + " / " + combat.MaceHammerExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryMaceHammerLevel + "% damage, +" + (0.5 * Math.round((player.masteryMaceHammerLevel - 1) / 2)) + "% accuracy)</i>\n";
+		else
+			masteryStats += "<b>Maces/Hammers Mastery / Dao of Mace/Hammer:</b>  " + player.masteryMaceHammerLevel + " / " + combat.maxMaceHammerLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryMaceHammerLevel + "% damage, +" + (0.5 * Math.round((player.masteryMaceHammerLevel - 1) / 2)) + "% accuracy)</i>\n";
+		if (player.masteryDuelingSwordLevel < combat.maxDuelingSwordLevel())
+			masteryStats += "<b>Dueling Swords Mastery / Dao of Dueling Sword:</b>  " + player.masteryDuelingSwordLevel + " / " + combat.maxDuelingSwordLevel() + " (Exp: " + player.masteryDuelingSwordXP + " / " + combat.DuelingSwordExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryDuelingSwordLevel + "% damage, +" + (0.5 * Math.round((player.masteryDuelingSwordLevel - 1) / 2)) + "% accuracy)</i>\n";
+		else
+			masteryStats += "<b>Dueling Swords Mastery / Dao of Dueling Sword:</b>  " + player.masteryDuelingSwordLevel + " / " + combat.maxDuelingSwordLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryDuelingSwordLevel + "% damage, +" + (0.5 * Math.round((player.masteryDuelingSwordLevel - 1) / 2)) + "% accuracy)</i>\n";
+		if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0) masteryStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
+		if (player.masterySpearLevel < combat.maxSpearLevel())
+			masteryStats += "<b>Spears Mastery / Dao of Spear:</b>  " + player.masterySpearLevel + " / " + combat.maxSpearLevel() + " (Exp: " + player.masterySpearXP + " / " + combat.SpearExpToLevelUp() + ")\n<i>(Effects: +" + player.masterySpearLevel + "% damage, +" + (0.5 * Math.round((player.masterySpearLevel - 1) / 2)) + "% accuracy)</i>\n";
+		else
+			masteryStats += "<b>Spears Mastery / Dao of Spear:</b>  " + player.masterySpearLevel + " / " + combat.maxSpearLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masterySpearLevel + "% damage, +" + (0.5 * Math.round((player.masterySpearLevel - 1) / 2)) + "% accuracy)</i>\n";
+		masteryStats += "\n";
+		if (player.hasPerk(PerkLib.DualWield)) {
+			if (player.dualWSLevel < combat.maxDualWieldSmallLevel())
+				masteryStats += "<b>Dual Wield (Small) Skill:</b>  " + player.dualWSLevel + " / " + combat.maxDualWieldSmallLevel() + " (Exp: " + player.dualWSXP + " / " + combat.DualWieldSmallExpToLevelUp() + ")\n<i>(Effects: +" + player.dualWSLevel + "% damage, +" + (0.5 * Math.round((player.dualWSLevel - 1) / 2)) + "% accuracy)</i>\n";
+			else
+				masteryStats += "<b>Dual Wield (Small) Skill:</b>  " + player.dualWSLevel + " / " + combat.maxDualWieldSmallLevel() + "(Exp: MAX)\n<i>(Effects: +" + player.dualWSLevel + "% damage, +" + (0.5 * Math.round((player.dualWSLevel - 1) / 2)) + "% accuracy)</i>\n";
+			if (player.dualWNLevel < combat.maxDualWieldNormalLevel())
+				masteryStats += "<b>Dual Wield (Normal) Skill:</b>  " + player.dualWNLevel + " / " + combat.maxDualWieldNormalLevel() + " (Exp: " + player.dualWNXP + " / " + combat.DualWieldNormalExpToLevelUp() + ")\n<i>(Effects: +" + player.dualWNLevel + "% damage, +" + (0.5 * Math.round((player.dualWNLevel - 1) / 2)) + "% accuracy)</i>\n";
+			else
+				masteryStats += "<b>Dual Wield (Normal) Skill:</b>  " + player.dualWNLevel + " / " + combat.maxDualWieldNormalLevel() + "(Exp: MAX)\n<i>(Effects: +" + player.dualWNLevel + "% damage, +" + (0.5 * Math.round((player.dualWNLevel - 1) / 2)) + "% accuracy)</i>\n";
+			if (player.dualWLLevel < combat.maxDualWieldLargeLevel())
+				masteryStats += "<b>Dual Wield (Large) Skill:</b>  " + player.dualWLLevel + " / " + combat.maxDualWieldLargeLevel() + " (Exp: " + player.dualWLXP + " / " + combat.DualWieldLargeExpToLevelUp() + ")\n<i>(Effects: +" + player.dualWLLevel + "% damage, +" + (0.5 * Math.round((player.dualWLLevel - 1) / 2)) + "% accuracy)</i>\n";
+			else
+				masteryStats += "<b>Dual Wield (Large) Skill:</b>  " + player.dualWLLevel + " / " + combat.maxDualWieldLargeLevel() + "(Exp: MAX)\n<i>(Effects: +" + player.dualWLLevel + "% damage, +" + (0.5 * Math.round((player.dualWLLevel - 1) / 2)) + "% accuracy)</i>\n";
+			if (player.dualWFLevel < combat.maxDualWieldFirearmsLevel())
+				masteryStats += "<b>Dual Wield (Firearms) Skill:</b>  " + player.dualWFLevel + " / " + combat.maxDualWieldFirearmsLevel() + " (Exp: " + player.dualWFXP + " / " + combat.DualWieldFirearmsExpToLevelUp() + ")\n<i>(Effects: +" + player.dualWFLevel + "% damage, +" + (0.5 * Math.round((player.dualWFLevel - 1) / 2)) + "% accuracy)</i>\n";
+			else
+				masteryStats += "<b>Dual Wield (Firearms) Skill:</b>  " + player.dualWFLevel + " / " + combat.maxDualWieldFirearmsLevel() + "(Exp: MAX)\n<i>(Effects: +" + player.dualWFLevel + "% damage, +" + (0.5 * Math.round((player.dualWFLevel - 1) / 2)) + "% accuracy)</i>\n";
+			masteryStats += "\n";
+		}
+		if (player.teaseLevel < combat.maxTeaseLevel())
+			masteryStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + combat.teaseExpToLevelUp() + ")\n";
+		else
+			masteryStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)\n";
+		masteryStats += "\n";
+		if (player.herbalismLevel < player.maxHerbalismLevel())
+			masteryStats += "<b>Herbalism Skill:</b>  " + player.herbalismLevel + " / " + player.maxHerbalismLevel() + " (Exp: " + player.herbalismXP + " / " + player.HerbExpToLevelUp() + ")\n";
+		else
+			masteryStats += "<b>Herbalism Skill:</b>  " + player.herbalismLevel + " / " + player.maxHerbalismLevel() + " (Exp: MAX)\n";
+		if (masteryStats != "")
+			outputText("\n<b><u>Mastery</u></b>\n" + masteryStats);
+		// End Mastery Stats
+		menu();
+		addButton(0, "Next", playerMenu);
+		addButton(10, "General", displayStats);
+		addButton(11, "Combat", displayStatsCombat);
+		addButton(12, "NPC's", displayStatsNpcs);
+		addButton(13, "Children", displayStatsChildren);
+		addButtonDisabled(14, "Mastery", "You are currently at this stats page.");
 	}
 
 	//------------

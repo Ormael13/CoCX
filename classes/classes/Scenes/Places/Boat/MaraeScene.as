@@ -50,6 +50,7 @@ public function encounterMarae():void {
 		//First meeting
 		if(flags[kFLAGS.MET_MARAE] <= 0) {
 			flags[kFLAGS.MET_MARAE] = 1;
+			flags[kFLAGS.MARAE_ISLAND] = 1;
 			outputText("You approach the tree and note that its bark is unusually smooth.  Every leaf of the tree is particularly vibrant, bright green with life and color.   You reach out to touch the bark and circle around it, noting a complete lack of knots or discoloration.  As you finish the circle, you are surprised to see the silhouette of a woman growing from the bark.  The transformation stops, exposing the front half a woman from the waist up.   You give a start when she opens her eyes – revealing totally white irises, the only part of her NOT textured with bark.\n\n");
 			if(player.cor > 66 + player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!");
 			//Explain the dungeon scenario

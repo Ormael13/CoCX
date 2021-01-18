@@ -10,7 +10,6 @@ import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.ISexyPart;
 import classes.BodyParts.LowerBody;
-import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
@@ -96,6 +95,26 @@ use namespace CoC;
 		//Lust vulnerability
 		//TODO: Kept for backwards compatibility reasons but should be phased out.
 		public var lustVuln:Number = 1;
+
+		//Mastery attributes
+		public var masterySwordLevel:Number = 0;
+		public var masterySwordXP:Number = 0;
+		public var masteryAxeLevel:Number = 0;
+		public var masteryAxeXP:Number = 0;
+		public var masteryMaceHammerLevel:Number = 0;
+		public var masteryMaceHammerXP:Number = 0;
+		public var masteryDuelingSwordLevel:Number = 0;
+		public var masteryDuelingSwordXP:Number = 0;
+		public var masterySpearLevel:Number = 0;
+		public var masterySpearXP:Number = 0;
+		public var dualWSLevel:Number = 0;
+		public var dualWSXP:Number = 0;
+		public var dualWNLevel:Number = 0;
+		public var dualWNXP:Number = 0;
+		public var dualWLLevel:Number = 0;
+		public var dualWLXP:Number = 0;
+		public var dualWFLevel:Number = 0;
+		public var dualWFXP:Number = 0;
 
 		//Herbalism attributes
 		public var herbalismLevel:Number = 0;
@@ -469,7 +488,7 @@ use namespace CoC;
 		//Unhindered related acceptable armor types
 		public function meetUnhinderedReq():Boolean
 		{
-			return armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "bimbo skirt" || armorName == "desert naga pink and black silk dress" || hasPerk(PerkLib.BerserkerArmor) || armor == ArmorLib.NOTHING ;
+			return armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "bimbo skirt" || armorName == "desert naga pink and black silk dress" || hasPerk(PerkLib.ScandalousSuccubusClothing) || hasPerk(PerkLib.BerserkerArmor) || hasPerk(PerkLib.TamamoNoMaeCursedKimono) || hasPerk(PerkLib.InariBlessedKimono) || armor == ArmorLib.NOTHING ;
 		}
 		//override public function get armors
 		override public function get armorName():String {
@@ -884,47 +903,30 @@ use namespace CoC;
 		//Wing Slap compatibile wings + tiers of wings for dmg multi
 		public function haveWingsForWingSlap():Boolean
 		{
-			return wings.type == Wings.BAT_LIKE_LARGE || wings.type == Wings.FEATHERED_LARGE || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.BAT_LIKE_LARGE_2 || wings.type == Wings.DRACONIC_HUGE || wings.type == Wings.FEATHERED_PHOENIX || wings.type == Wings.FEATHERED_ALICORN || wings.type == Wings.GARGOYLE_LIKE_LARGE || wings.type == Wings.MANTICORE_LIKE_LARGE
-			 || wings.type == Wings.BAT_ARM || wings.type == Wings.VAMPIRE || wings.type == Wings.FEATHERED_AVIAN || wings.type == Wings.NIGHTMARE || wings.type == Wings.FEATHERED_SPHINX || wings.type == Wings.DEVILFEATHER;
+			return Wings.Types[wings.type].wingSlap;
 		}
 		public function thirdtierWingsForWingSlap():Boolean
 		{
 			return wings.type == Wings.BAT_LIKE_LARGE_2 || wings.type == Wings.DRACONIC_HUGE;
 		}
 		//Natural Claws (arm types and weapons that can substitude them)
-		public function haveNaturalClaws():Boolean
-		{
-			return arms.type == Arms.KITSUNE || arms.type == Arms.CAT || arms.type == Arms.DEVIL || arms.type == Arms.DISPLACER || arms.type == Arms.DRAGON || arms.type == Arms.FOX || arms.type == Arms.GARGOYLE || arms.type == Arms.LION || arms.type == Arms.WOLF || arms.type == Arms.LIZARD || arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_2
-			 || arms.type == Arms.RED_PANDA || arms.type == Arms.SALAMANDER || arms.type == Arms.HYDRA || arms.type == Arms.JIANGSHI || arms.type == Arms.FROSTWYRM || arms.type == Arms.BEAR || arms.type == Arms.MANTIS || arms.type == Arms.KAMAITACHI || arms.type == Arms.SQUIRREL || arms.type == Arms.WEASEL || arms.type == Arms.WENDIGO;
-		}
-		public function haveNaturalClawsTypeWeapon():Boolean
-		{
-			return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws";
-		}
+		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.Types[lowerBody].claw;}
+		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws";}
 		//Other natural weapon checks
-		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || faceType == Face.VAMPIRE ||
-				faceType == Face.SHARK_TEETH || faceType == Face.WOLF_FANGS || faceType == Face.PANDA || faceType == Face.YETI_FANGS ||
-				faceType == Face.WOLF || faceType == Face.SPIDER_FANGS || faceType == Face.ANIMAL_TOOTHS || faceType == Face.CAT_CANINES ||
-				faceType == Face.CAT || faceType == Face.MANTICORE || faceType == Face.SALAMANDER_FANGS || faceType == Face.WEASEL ||
-				faceType == Face.SNAKE_FANGS || faceType == Face.FOX || faceType == Face.BEAR || faceType == Face.DRAGON_FANGS ||
-				faceType == Face.DRAGON || faceType == Face.DOG || faceType == Face.FERRET || faceType == Face.ORCA || faceType == Face.LIZARD ||
-				faceType == Face.DEVIL_FANGS || faceType == Face.SQUIRREL || faceType == Face.BUNNY || faceType == Face.SMUG
-				|| faceType == Face.BUCKTEETH || faceType == Face.BUCKTOOTH);}
-		public function hasAWingAttack():Boolean { return (wings.type == Wings.DRACONIC_HUGE || wings.type == Wings.NIGHTMARE
-				|| wings.type == Wings.MANTICORE_LIKE_LARGE || wings.type == Wings.GARGOYLE_LIKE_LARGE);}
-		public function hasAGoreAttack():Boolean { return (horns.type == Horns.UNICORN || horns.type == Horns.BICORN
-				|| horns.type == Horns.COW_MINOTAUR || horns.type == Horns.FROSTWYRM);}
-		public function hasATailSlapAttack():Boolean { return (tail.type == Tail.DRACONIC || tail.type == Tail.LIZARD
-				|| tail.type == Tail.SALAMANDER || tail.type == Tail.ORCA || tail.type == Tail.SHARK || tail.type == Tail.CAVE_WYRM
-				|| tail.type == Tail.GARGOYLE || tail.type == Tail.GARGOYLE_2 || tail.type == Tail.MANTICORE_PUSSYTAIL
-				|| tail.type == Tail.SCORPION || tail.type == Tail.BEE_ABDOMEN || lowerBody == LowerBody.FROSTWYRM
-				|| lowerBody == LowerBody.NAGA);}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasPerk(PerkLib.MorphicWeaponry) || isAlraune() || isScylla() || isKraken());}
+		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
+		public function hasAWingAttack():Boolean { return (Wings.Types[wings.type].wingSlap);}
+		public function hasAGoreAttack():Boolean { return (Horns.Types[horns.type].gore);}
+		public function hasATailSlapAttack():Boolean { return (Tail.Types[tail.type].tailSlam || Tail.Types[tail.type].stinger || LowerBody.Types[lowerBody].tailSlam);}
+		public function hasTalonsAttack():Boolean{return lowerBody == LowerBody.HARPY;}
+		public function hasTentacleAttacks():Boolean{return LowerBody.Types[lowerBody].tentacle || hasPerk(PerkLib.MorphicWeaponry);}
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasTentacleAttacks || isTaur());}
 		//Some other checks
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
+		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
+		public function isHarpy():Boolean { return (harpyScore() > 10 || thunderbirdScore() > 15 || phoenixScore() > 15); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
 		public function isNightCreature():Boolean { return (vampireScore() >= 10 || batScore() >= 6 || jiangshiScore() >= 20); }
-		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }	
+		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }
 		//Weapons for Whirlwind
 		public function isWeaponForWhirlwind():Boolean
 		{
@@ -2258,6 +2260,9 @@ use namespace CoC;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			if (hasStatusEffect(StatusEffects.WinterClaw)) {
+				mult += 100;
+			}
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -3251,7 +3256,7 @@ use namespace CoC;
 			if (TopRace == "kitsune") {
 				if (TopScore >= 5) {
 					if (tailType == 13 && tailCount >= 2 && kitsuneScore() >= 9) {
-						if (TopScore >= 21) {
+						if (TopScore >= 26) {
 							if (tailCount == 9 && isTaur()) {
 								race = "Inari-taur";
 							} else if (tailCount == 9) {
@@ -3259,7 +3264,7 @@ use namespace CoC;
 							} else {
 								race = "kitsune";
 							}
-						} else if (TopScore >= 18) {
+						} else if (TopScore >= 21) {
 							if (tailCount == 9 && isTaur()) {
 								race = "nine tailed kitsune-taur of balance";
 							} else if (tailCount == 9) {
@@ -3267,7 +3272,7 @@ use namespace CoC;
 							} else {
 								race = "kitsune";
 							}
-						} else if (TopScore >= 14) {
+						} else if (TopScore >= 18) {
 							if (tailCount == 9 && isTaur()) {
 								race = "nine tailed kitsune-taur";
 							} else if (tailCount == 9) {
@@ -3655,9 +3660,9 @@ use namespace CoC;
 					}
 				}
 			}
-			if (TopRace == "coualt") {
+			if (TopRace == "couatl") {
 				if (TopScore >= 11) {
-					if (TopScore >= 19) race = "greater coualt";
+					if (TopScore >= 19) race = "greater couatl";
 					else {
 						race = "couatl";
 					}
@@ -3665,7 +3670,7 @@ use namespace CoC;
 			}
 			if (TopRace == "vouivre") {
 				if (TopScore >= 11) {
-					if (TopScore >= 19) race = "greater vouivre";
+					if (TopScore >= 21) race = "greater vouivre";
 					else {
 						if (TopScore >= 16) race = "vouivre";
 						else {
@@ -3703,8 +3708,14 @@ use namespace CoC;
 			}
 			if (TopRace == "phoenix") {
 				if (TopScore >= 10) {
-					if (isTaur()) race = "phoenix-taur";
-					else race = "phoenix";
+					if (TopScore >= 21) {
+						if (isTaur()) race = "Greater phoenix-taur";
+						else race = "Greater phoenix";
+					}
+					else{
+						if (isTaur()) race = "phoenix-taur";
+						else race = "phoenix";
+					}
 				}
 			}
 			if (TopRace == "scylla") {
@@ -3791,22 +3802,28 @@ use namespace CoC;
 			if (TopRace == "kamaitachi") {
 				if (TopScore >= 7) {
 					if (TopScore >= 18) {
-						race = "greater kamaitachi";
+						if (isTaur()) race = "greater kamaitachi-taur";
+						else race = "greater kamaitachi";
 					} else if (TopScore >= 14) {
-						race = "kamaitachi";
+						if (isTaur()) race = "kamaitachi-taur";
+						else race = "kamaitachi";
 					} else {
-						race = "half kamaitachi";
+						if (isTaur()) race = "half kamaitachi-taur";
+						else race = "half kamaitachi";
 					}
 				}
 			}
 			if (TopRace == "ratatoskr") {
 				if (TopScore >= 6) {
 					if (TopScore >= 18) {
-						race = "ratatoskr";
+						if (isTaur()) race = "ratatoskr-taur";
+						else race = "ratatoskr";
 					} else if (TopScore >= 12) {
-						race = "squirrel morph";
+						if (isTaur()) race = "squirrel-taur";
+						else race = "squirrel morph";
 					} else {
-						race = "half squirrel morph";
+						if (isTaur()) race = "half squirrel-taur";
+						else race = "half squirrel morph";
 					}
 				}
 			}
@@ -3829,8 +3846,9 @@ use namespace CoC;
 			}
 			if (TopRace == "thunderbird") {
 				if (TopScore >= 12) {
-					if (TopScore >= 15) race = "greater thunderbird";
-					else race = "thunderbird";
+					if (TopScore >= 21) race = "greater thunderbird";
+					else if (TopScore >= 16) race = "thunderbird";
+					else race = "half thunderbird";
 				}
 			}
 			//<mod>
@@ -3892,14 +3910,14 @@ use namespace CoC;
 			if (TopRace == "manticore") {
 				if (TopScore >= 7) {
 					if (isTaur() && lowerBody == LowerBody.LION) {
-						if (TopScore >= 20)
+						if (TopScore >= 22)
 							race = "true manticore-taur";
 						else if (TopScore >= 15)
 							race = "manticore-taur";
 						else
 							race = "half manticore-taur";
 					}
-					else if (TopScore >= 20)
+					else if (TopScore >= 22)
 						race = "true manticore";
 					else if (TopScore >= 15)
 						race = "manticore";
@@ -3937,8 +3955,13 @@ use namespace CoC;
 			}
 			if (TopRace == "siren") {
 				if (TopScore >= 10) {
-					if (isTaur()) race = "siren-taur";
-					else race = "siren";
+					if (TopScore >= 16) {
+						if (isTaur()) race = "Greater siren-taur";
+						else race = "Greater siren";
+					} else {
+						if (isTaur()) race = "siren-taur";
+						else race = "siren";
+					}
 				}
 			}
 			if (TopRace == "gargoyle") {
@@ -4074,6 +4097,7 @@ use namespace CoC;
 				humanCounter++;
 			humanCounter += (109 - internalChimeraScore());
 			if (isGargoyle()) humanCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) humanCounter = 0;
 			End("Player","racialScore");
 			return humanCounter;
 		}
@@ -4130,6 +4154,12 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 14;//	104-r99	119	135	152	180	199	219(potem legendary/mythical stages?)
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				internalChimeraRatingCounter -= 20;
+			if (jewelryName == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
+			if (jewelryName2 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
+			if (jewelryName3 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
+			if (jewelryName4 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
+			if (headjewelryName == "Ezekiel's Crown") internalChimeraRatingCounter -= 4;
+			if (necklaceName == "Ezekiel's Necklace") internalChimeraRatingCounter -= 5;
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) internalChimeraRatingCounter -= 3;//6
 			//if (flags[kFLAGS.GAME_DIFFICULTY] == 1) internalChimeraRatingCounter -= 3;//tyle ile stopni perków rasowych
 			if (internalChimeraRatingCounter < 0 || flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) internalChimeraRatingCounter = 0;
@@ -4573,7 +4603,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (orcScore() >= 11)
 				grandchimeraCounter++;
-*/			if (thunderbirdScore() >= 15)
+*/			if (thunderbirdScore() >= 16)
 				grandchimeraCounter++;
 			if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI)
 				grandchimeraCounter++;
@@ -4608,7 +4638,7 @@ use namespace CoC;
 			var jiangshiCounter:Number = 0;
 			if (hasPlainSkinOnly() && skinTone != "slippery")
 				jiangshiCounter++;
-			if (skinTone == "ghostly pale" || skinTone == "light blue")
+			if (skinTone == "ghostly pale" || skinTone == "light blue" || skinTone == "snow white")
 				jiangshiCounter++;
 			if (hairType == Hair.NORMAL)
 				jiangshiCounter++;
@@ -4713,6 +4743,7 @@ use namespace CoC;
 				demonCounter+=1;
 			if (demonCounter2 < 5) demonCounter = demonCounter2;
 			if (isGargoyle()) demonCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) demonCounter = 0;
 			demonCounter = finalRacialScore(demonCounter, Race.DEMON);
 			End("Player","racialScore");
 			return demonCounter;
@@ -4774,6 +4805,7 @@ use namespace CoC;
 				devilkinCounter++;
 			if (devilkinCounter2 < 5) devilkinCounter = devilkinCounter2;
 			if (isGargoyle()) devilkinCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) devilkinCounter = 0;
 			devilkinCounter = finalRacialScore(devilkinCounter, Race.DEVIL);
 			End("Player","racialScore");
 			return devilkinCounter;
@@ -4834,6 +4866,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && cowCounter >= 8)
 				cowCounter += 1;
 			if (isGargoyle()) cowCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) cowCounter = 0;
 			cowCounter = finalRacialScore(cowCounter, Race.COW);
 			End("Player","racialScore");
 			return cowCounter;
@@ -4890,6 +4923,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && minoCounter >= 8)
 				minoCounter += 1;
 			if (isGargoyle()) minoCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) minoCounter = 0;
 			minoCounter = finalRacialScore(minoCounter, Race.MINOTAUR);
 			End("Player","racialScore");
 			return minoCounter;
@@ -4912,6 +4946,7 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.Uniball))
 				counter++;
 			if (isGargoyle()) counter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) counter = 0;
 			counter = finalRacialScore(counter, Race.SANDTRAP);
 			End("Player","racialScore");
 			return counter;
@@ -4960,6 +4995,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && beeCounter >= 8)
 				beeCounter += 1;
 			if (isGargoyle()) beeCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) beeCounter = 0;
 			beeCounter = finalRacialScore(beeCounter, Race.BEE);
 			End("Player","racialScore");
 			return beeCounter;
@@ -4978,6 +5014,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				counter += 50;
 			if (isGargoyle()) counter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) counter = 0;
 			counter = finalRacialScore(counter, Race.FERRET);
 			End("Player","racialScore");
 			return counter;
@@ -5013,6 +5050,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && dogCounter >= 8)
 				dogCounter += 1;
 			if (isGargoyle()) dogCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) dogCounter = 0;
 			dogCounter = finalRacialScore(dogCounter, Race.DOG);
 			End("Player","racialScore");
 			return dogCounter;
@@ -5064,6 +5102,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && mouseCounter >= 8)
 				mouseCounter += 1;
 			if (isGargoyle()) mouseCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) mouseCounter = 0;
 			mouseCounter = finalRacialScore(mouseCounter, Race.MOUSE);
 			End("Player","racialScore");
 			return mouseCounter;
@@ -5121,6 +5160,7 @@ use namespace CoC;
 			if (tailType != Tail.RACCOON)
 				coonCounter = 0;
 			if (isGargoyle()) coonCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) coonCounter = 0;
 			coonCounter = finalRacialScore(coonCounter, Race.RACCOON);
 			End("Player","racialScore");
 			return coonCounter;
@@ -5162,6 +5202,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && foxCounter >= 8)
 				foxCounter += 1;
 			if (isGargoyle()) foxCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) foxCounter = 0;
 			foxCounter = finalRacialScore(foxCounter, Race.FOX);
 			End("Player","racialScore");
 			return foxCounter;
@@ -5189,7 +5230,7 @@ use namespace CoC;
 				fairyCounter+=4;
 			if (hairType == Hair.FAIRY)
 				fairyCounter++;
-			if (hasCock() > 0 && fairyCounter > 0)
+			if (!hasCock() && fairyCounter > 0)
 				fairyCounter++;
 			if (breastRows.length > 1 && fairyCounter > 0)
 				fairyCounter++;
@@ -5197,7 +5238,6 @@ use namespace CoC;
 				fairyCounter++;
 			if (breastRows.length == 4 && fairyCounter > 0)
 				fairyCounter++;
-			//Fur only counts if some canine features are present
 			if (!hasCoat() && fairyCounter > 0)
 				fairyCounter++;
 			if (skinType == Skin.PLAIN && skinAdj == "flawless")
@@ -5211,6 +5251,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.TransformationImmunity))
 				fairyCounter += 5;
 			if (isGargoyle()) fairyCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) fairyCounter = 0;
 			fairyCounter = finalRacialScore(fairyCounter, Race.FAIRY);
 			End("Player","racialScore");
 			return fairyCounter;
@@ -5270,9 +5311,10 @@ use namespace CoC;
 				catCounter += 1;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && catCounter >= 8)
 				catCounter += 1;
-			if (tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || rearBody.type == RearBody.LION_MANE || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING
+			if (arms.type == Arms.SPHINX || wings.type == Wings.FEATHERED_SPHINX || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || rearBody.type == RearBody.LION_MANE || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING
 			 || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) catCounter = 0;
 			if (isGargoyle()) catCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) catCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				catCounter += 50;
 			catCounter = finalRacialScore(catCounter, Race.CAT);
@@ -5330,6 +5372,7 @@ use namespace CoC;
 				nekomataCounter += 1;
 			if (catScore() >= 4 || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) nekomataCounter = 0;
 			if (isGargoyle()) nekomataCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) nekomataCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				nekomataCounter += 50;
 			nekomataCounter = finalRacialScore(nekomataCounter, Race.NEKOMATA);
@@ -5380,6 +5423,7 @@ use namespace CoC;
 			if (catScore() >= 4 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING || tailType == Tail.TWINKASHA
 			 || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) cheshireCounter = 0;
 			if (isGargoyle()) cheshireCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) cheshireCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				cheshireCounter += 50;
 			cheshireCounter = finalRacialScore(cheshireCounter, Race.CHESHIRE);
@@ -5436,6 +5480,7 @@ use namespace CoC;
 			if (catScore() >= 4 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type != Eyes.INFERNAL || hairType != Hair.BURNING || (tailType != Tail.BURNING && tailType != Tail.TWINKASHA)
 			 || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) hellcatCounter = 0;
 			if (isGargoyle()) hellcatCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) hellcatCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				hellcatCounter += 50;
 			hellcatCounter = finalRacialScore(hellcatCounter, Race.HELLCAT);
@@ -5493,8 +5538,9 @@ use namespace CoC;
 				displacerbeastCounter += 1;
 			if (catScore() >= 4 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || rearBody.type == RearBody.LION_MANE || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING) displacerbeastCounter = 0;
 			if (isGargoyle()) displacerbeastCounter = 0;
-			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
-				displacerbeastCounter += 50;
+			if (hasPerk(PerkLib.ElementalBody)) displacerbeastCounter = 0;
+			if (arms.type != Arms.DISPLACER || rearBody.type != RearBody.DISPLACER_TENTACLES) displacerbeastCounter = 0;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0) displacerbeastCounter += 50;
 			displacerbeastCounter = finalRacialScore(displacerbeastCounter, Race.DISPLACERBEAST);
 			End("Player","racialScore");
 			return displacerbeastCounter;
@@ -5543,6 +5589,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && lizardCounter >= 8)
 				lizardCounter += 1;
 			if (isGargoyle()) lizardCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) lizardCounter = 0;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0) lizardCounter += 50;
 			lizardCounter = finalRacialScore(lizardCounter, Race.LIZARD);
 			End("Player","racialScore");
 			return lizardCounter;
@@ -5598,6 +5646,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && spiderCounter >= 8)
 				spiderCounter += 1;
 			if (isGargoyle()) spiderCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) spiderCounter = 0;
 			spiderCounter = finalRacialScore(spiderCounter, Race.SPIDER);
 			End("Player","racialScore");
 			return spiderCounter;
@@ -5641,6 +5690,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && horseCounter >= 8)
 				horseCounter += 1;
 			if (isGargoyle()) horseCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) horseCounter = 0;
 			horseCounter = finalRacialScore(horseCounter, Race.HORSE);
 			End("Player","racialScore");
 			return horseCounter;
@@ -5664,22 +5714,23 @@ use namespace CoC;
 				kitsuneCounter++;
 				kitsuneCounter2++;
 			if (tailType == Tail.FOX && tailCount >= 4 && tailCount < 6)
-				kitsuneCounter += 2;
+				kitsuneCounter += 4;
 				kitsuneCounter2 += 2;
 			if (tailType == Tail.FOX && tailCount >= 6 && tailCount < 9)
-				kitsuneCounter += 3;
+				kitsuneCounter += 6;
 				kitsuneCounter2 += 3;
 			if (tailType == Tail.FOX && tailCount == 9)
-				kitsuneCounter += 4;
+				kitsuneCounter += 9;
 				kitsuneCounter2 += 4;
 			if (tailType != Tail.FOX || (tailType == Tail.FOX && tailCount < 2))
 				kitsuneCounter -= 7;
 			if (skin.base.pattern == Skin.PATTERN_MAGICAL_TATTOO || hasFur())
 				kitsuneCounter++;
 				kitsuneCounter2++;
-			//If the character has fur, scales, or gooey skin, -1
-		//	if (skinType == FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
-		//		kitsuneCounter--;
+			if (skin.base.type == Skin.PLAIN)
+				kitsuneCounter ++;
+			if (InCollection(hairColor, KitsuneScene.basicKitsuneHair) || InCollection(hairColor, KitsuneScene.elderKitsuneColors))
+				kitsuneCounter++;
 			if (hasCoat() && !hasCoatOfType(Skin.FUR))
 				kitsuneCounter -= 2;
 			if (skin.base.type != Skin.PLAIN)
@@ -5700,12 +5751,13 @@ use namespace CoC;
 			//If the character has a 'vag of holding', +1
 			if (vaginalCapacity() >= 8000)
 				kitsuneCounter++;
-			//If the character has "blonde","black","red","white", or "silver" hair, +1
-		//	if (kitsuneCounter > 0 && (InCollection(furColor, KitsuneScene.basicKitsuneHair) || InCollection(furColor, KitsuneScene.elderKitsuneColors)))
-		//		kitsuneCounter++;
+			//When character get Hoshi no tama
 			if (findPerk(PerkLib.StarSphereMastery) >= 0)
 				kitsuneCounter++;
-			//When character get Hoshi no tama
+			if (findPerk(PerkLib.EnlightenedKitsune) >= 0 || findPerk(PerkLib.CorruptedKitsune) >= 0)
+				kitsuneCounter++;
+			if (findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0)
+				kitsuneCounter++;
 			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0)
 				kitsuneCounter++;
 			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0)
@@ -5728,6 +5780,7 @@ use namespace CoC;
 				kitsuneCounter++;
 			if (kitsuneCounter2 < 5) kitsuneCounter = kitsuneCounter2;
 			if (isGargoyle()) kitsuneCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) kitsuneCounter = 0;
 			kitsuneCounter = finalRacialScore(kitsuneCounter, Race.KITSUNE);
 			End("Player","racialScore");
 			return kitsuneCounter;
@@ -5827,6 +5880,7 @@ use namespace CoC;
 				dragonCounter++;
 			if (dragonCounter2 < 5) dragonCounter = dragonCounter2;
 			if (isGargoyle()) dragonCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) dragonCounter = 0;
 			dragonCounter = finalRacialScore(dragonCounter, Race.DRAGON);
 			End("Player","racialScore");
 			return dragonCounter;
@@ -5900,6 +5954,7 @@ use namespace CoC;
 				jabberwockyCounter += 1;
 			if ((faceType != Face.JABBERWOCKY && faceType != Face.BUCKTOOTH) || wings.type != Wings.FEY_DRAGON_WINGS || lowerBody == LowerBody.FROSTWYRM) jabberwockyCounter = 0;
 			if (isGargoyle()) jabberwockyCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) jabberwockyCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				jabberwockyCounter += 50;
 			jabberwockyCounter = finalRacialScore(jabberwockyCounter, Race.JABBERWOCKY);
@@ -5964,6 +6019,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				goblinCounter += 50;
 			if (isGargoyle()) goblinCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) goblinCounter = 0;
 			goblinCounter = finalRacialScore(goblinCounter, Race.GOBLIN);
 			End("Player","racialScore");
 			return goblinCounter;
@@ -6052,6 +6108,7 @@ use namespace CoC;
 			if (ears.type != Ears.GREMLIN)
 				gremlinCounter=0;
 			if (isGargoyle()) gremlinCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) gremlinCounter = 0;
 			gremlinCounter = finalRacialScore(gremlinCounter, Race.GREMLIN);
 			End("Player","racialScore");
 			return gremlinCounter;
@@ -6105,6 +6162,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && gooCounter >= 8)
 				gooCounter += 1;
 			if (isGargoyle()) gooCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) gooCounter = 0;
 			gooCounter = finalRacialScore(gooCounter, Race.SLIME);
 			End("Player","racialScore");
 			return gooCounter;
@@ -6158,6 +6216,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && magmagooCounter >= 8)
 				magmagooCounter += 1;
 			if (isGargoyle()) magmagooCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) magmagooCounter = 0;
 			magmagooCounter = finalRacialScore(magmagooCounter, Race.MAGMASLIME);
 			End("Player","racialScore");
 			return magmagooCounter;
@@ -6213,6 +6272,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && darkgooCounter >= 8)
 				darkgooCounter += 1;
 			if (isGargoyle()) darkgooCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) darkgooCounter = 0;
 			darkgooCounter = finalRacialScore(darkgooCounter, Race.DARKSLIME);
 			End("Player","racialScore");
 			return darkgooCounter;
@@ -6253,12 +6313,13 @@ use namespace CoC;
 				nagaCounter++;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && nagaCounter >= 8)
 				nagaCounter += 1;
-			if (hairType == Hair.GORGON || eyes.type == Eyes.GORGON || horns.type == Horns.DRACONIC_X4_12_INCH_LONG || horns.type == Horns.DRACONIC_X2 || tongue.type == Tongue.DRACONIC || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE || hairType == Hair.FEATHER || arms.type == Arms.HARPY || wings.type == Wings.FEATHERED_LARGE
+			if (!isNaga() || hairType == Hair.GORGON || eyes.type == Eyes.GORGON || horns.type == Horns.DRACONIC_X4_12_INCH_LONG || horns.type == Horns.DRACONIC_X2 || tongue.type == Tongue.DRACONIC || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE || hairType == Hair.FEATHER || arms.type == Arms.HARPY || wings.type == Wings.FEATHERED_LARGE
 			 || lowerBody == LowerBody.HYDRA || arms.type == Arms.HYDRA)
 				nagaCounter = 0;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				nagaCounter += 50;
 			if (isGargoyle()) nagaCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) nagaCounter = 0;
 			nagaCounter = finalRacialScore(nagaCounter, Race.NAGA);
 			End("Player","racialScore");
 			return nagaCounter;
@@ -6312,6 +6373,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				gorgonCounter += 50;
 			if (isGargoyle()) gorgonCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) gorgonCounter = 0;
+			if (lowerBody != LowerBody.NAGA || wings.type == Wings.FEATHERED_LARGE || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE) gorgonCounter = 0;
 			gorgonCounter = finalRacialScore(gorgonCounter, Race.GORGON);
 			End("Player","racialScore");
 			return gorgonCounter;
@@ -6370,6 +6433,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				vouivreCounter += 50;
 			if (isGargoyle()) vouivreCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) vouivreCounter = 0;
+			if (lowerBody != LowerBody.NAGA || wings.type == Wings.FEATHERED_LARGE || (wings.type != Wings.DRACONIC_SMALL && wings.type != Wings.DRACONIC_LARGE && wings.type != Wings.DRACONIC_HUGE)) vouivreCounter = 0;
 			vouivreCounter = finalRacialScore(vouivreCounter, Race.VOUIVRE);
 			End("Player","racialScore");
 			return vouivreCounter;
@@ -6424,6 +6489,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				couatlCounter += 50;
 			if (isGargoyle()) couatlCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) couatlCounter = 0;
+			if (lowerBody != LowerBody.NAGA || wings.type != Wings.FEATHERED_LARGE || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE) couatlCounter = 0;
 			couatlCounter = finalRacialScore(couatlCounter, Race.COUATL);
 			End("Player","racialScore");
 			return couatlCounter;
@@ -6501,6 +6568,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				hydraCounter += 50;
 			if (isGargoyle()) hydraCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) hydraCounter = 0;
 			hydraCounter = finalRacialScore(hydraCounter, Race.HYDRA);
 			End("Player","racialScore");
 			return hydraCounter;
@@ -6539,6 +6607,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				firesnailCounter += 50;
 			if (isGargoyle()) firesnailCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) firesnailCounter = 0;
 			firesnailCounter = finalRacialScore(firesnailCounter, Race.FIRESNAILS);
 			End("Player","racialScore");
 			return firesnailCounter;
@@ -6591,6 +6660,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				poltergeistCounter += 50;
 			if (isGargoyle()) poltergeistCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) poltergeistCounter = 0;
 			poltergeistCounter = finalRacialScore(poltergeistCounter, Race.POLTERGEIST);
 			End("Player","racialScore");
 			return poltergeistCounter;
@@ -6605,6 +6675,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				bansheeCounter += 50;
 			if (isGargoyle()) bansheeCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) bansheeCounter = 0;
 			bansheeCounter = finalRacialScore(bansheeCounter, Race.BANSHEE);
 			End("Player","racialScore");
 			return bansheeCounter;
@@ -6651,6 +6722,7 @@ use namespace CoC;
 			if (ears.type != Ears.BUNNY)
 				bunnyCounter = 0;
 			if (isGargoyle()) bunnyCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) bunnyCounter = 0;
 			bunnyCounter = finalRacialScore(bunnyCounter, Race.BUNNY);
 			End("Player","racialScore");
 			return bunnyCounter;
@@ -6683,6 +6755,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.EasterBunnyBalls) && balls >= 2)
 				centipedeCounter = 0;
 			if (isGargoyle()) centipedeCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) centipedeCounter = 0;
 			centipedeCounter = finalRacialScore(centipedeCounter, Race.CENTIPEDE);
 			End("Player","racialScore");
 			return centipedeCounter;
@@ -6737,6 +6810,7 @@ use namespace CoC;
 			if (ears.type != Ears.BUNNY)
 				EbunnyCounter = 0;
 			if (isGargoyle()) EbunnyCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) EbunnyCounter = 0;
 			EbunnyCounter = finalRacialScore(EbunnyCounter, Race.EASTERBUNNY);
 			End("Player","racialScore");
 			return EbunnyCounter;
@@ -6751,20 +6825,26 @@ use namespace CoC;
 			if (hairType == Hair.FEATHER)
 				harpy++;
 			if (wings.type == Wings.FEATHERED_LARGE)
-				harpy += 2;
+				harpy += 4;
 			if (tailType == Tail.HARPY)
 				harpy++;
-			if (tailType == Tail.SHARK || tailType == Tail.SALAMANDER)
-				harpy -= 5;
 			if (lowerBody == LowerBody.HARPY)
 				harpy++;
-			if (lowerBody == LowerBody.SALAMANDER)
-				harpy--;
-			if (harpy >= 2 && faceType == Face.HUMAN)
+			if (hasVagina())
 				harpy++;
-			if (faceType == Face.SHARK_TEETH)
-				harpy--;
+			if (harpy >= 2 && (faceType == Face.HUMAN || faceType == Face.ANIMAL_TOOTHS))
+				harpy++;
 			if (harpy >= 2 && (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN))
+				harpy++;
+			if (hasCoatOfType(Skin.COVERAGE_NONE))
+				harpy++;
+			if (hasPerk(PerkLib.HarpyWomb))
+				harpy++;
+			if (hasPerk(PerkLib.HarpyHollowBones))
+				harpy++;
+			if (hasPerk(PerkLib.HarpyHollowBonesEvolved))
+				harpy++;
+			if (hasPerk(PerkLib.HarpyHollowBonesFinalForm))
 				harpy++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				harpy += 50;
@@ -6773,6 +6853,10 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && harpy >= 8)
 				harpy += 1;
 			if (isGargoyle()) harpy = 0;
+			if (tailType == Tail.SHARK || tailType == Tail.SALAMANDER || lowerBody == LowerBody.SALAMANDER || faceType == Face.SHARK_TEETH)
+				harpy = 0;
+			if (hasPerk(PerkLib.ElementalBody)) harpy = 0;
+			if (wings.type == Wings.FEATHERED_PHOENIX || tail.type == Tail.THUNDERBIRD) harpy = 0;
 			harpy = finalRacialScore(harpy, Race.HARPY);
 			End("Player","racialScore");
 			return harpy;
@@ -6797,6 +6881,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				kanga += 50;
 			if (isGargoyle()) kanga = 0;
+			if (hasPerk(PerkLib.ElementalBody)) kanga = 0;
 			kanga = finalRacialScore(kanga, Race.KANGAROO);
 			End("Player","racialScore");
 			return kanga;
@@ -6837,6 +6922,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && sharkCounter >= 8)
 				sharkCounter += 1;
 			if (isGargoyle()) sharkCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) sharkCounter = 0;
 			sharkCounter = finalRacialScore(sharkCounter, Race.SHARK);
 			End("Player","racialScore");
 			return sharkCounter;
@@ -6899,6 +6985,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && orcaCounter >= 8)
 				orcaCounter += 1;
 			if (isGargoyle()) orcaCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) orcaCounter = 0;
 			orcaCounter = finalRacialScore(orcaCounter, Race.ORCA);
 			End("Player","racialScore");
 			return orcaCounter;
@@ -6959,6 +7046,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && oniCounter >= 8)
 				oniCounter += 1;
 			if (isGargoyle()) oniCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) oniCounter = 0;
 			oniCounter = finalRacialScore(oniCounter, Race.ONI);
 			End("Player","racialScore");
 			return oniCounter;
@@ -7001,6 +7089,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && oomukadeCounter >= 8)
 				oomukadeCounter += 1;
 			if (isGargoyle()) oomukadeCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) oomukadeCounter = 0;
 			oomukadeCounter = finalRacialScore(oomukadeCounter, Race.OOMUKADE);
 			End("Player","racialScore");
 			return oomukadeCounter;
@@ -7069,6 +7158,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && elfCounter >= 8)
 				elfCounter += 1;
 			if (isGargoyle()) elfCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) elfCounter = 0;
 			elfCounter = finalRacialScore(elfCounter, Race.ELF);
 			End("Player","racialScore");
 			return elfCounter;
@@ -7161,6 +7251,7 @@ use namespace CoC;
 				frostWyrmCounter += 1;
 			if (frostWyrmCounter2 < 5) frostWyrmCounter = frostWyrmCounter2;
 			if (isGargoyle()) frostWyrmCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) frostWyrmCounter = 0;
 			frostWyrmCounter = finalRacialScore(frostWyrmCounter, Race.FROSTWYRM);
 			End("Player","racialScore");
 			return frostWyrmCounter;
@@ -7225,6 +7316,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && orcCounter >= 8)
 				orcCounter += 1;
 			if (isGargoyle()) orcCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) orcCounter = 0;
 			if (tallness < 48) orcCounter = 0;
 			orcCounter = finalRacialScore(orcCounter, Race.ORC);
 			End("Player","racialScore");
@@ -7278,6 +7370,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && raijuCounter >= 8)
 				raijuCounter += 1;
 			if (isGargoyle()) raijuCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) raijuCounter = 0;
 			raijuCounter = finalRacialScore(raijuCounter, Race.RAIJU);
 			End("Player","racialScore");
 			return raijuCounter;
@@ -7338,6 +7431,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && ratatoskrCounter >= 8)
 				ratatoskrCounter += 1;
 			if (isGargoyle()) ratatoskrCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) ratatoskrCounter = 0;
 			ratatoskrCounter = finalRacialScore(ratatoskrCounter, Race.RATATOSKR);
 			End("Player","racialScore");
 			return ratatoskrCounter;
@@ -7356,7 +7450,7 @@ use namespace CoC;
 			if (arms.type == Arms.HARPY)
 				thunderbirdCounter++;
 			if (wings.type == Wings.FEATHERED_LARGE)
-				thunderbirdCounter += 2;
+				thunderbirdCounter += 4;
 			if (lowerBody == LowerBody.HARPY)
 				thunderbirdCounter++;
 			if (tailType == Tail.THUNDERBIRD)
@@ -7375,11 +7469,19 @@ use namespace CoC;
 				thunderbirdCounter++;
 			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
 				thunderbirdCounter++;
-			if (findPerk(PerkLib.HeartOfTheStorm) >= 0 && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
+			if (findPerk(PerkLib.HarpyWomb) >= 0)
 				thunderbirdCounter++;
-			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
+			if (findPerk(PerkLib.HarpyHollowBones) >= 0)
 				thunderbirdCounter++;
-			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0 && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
+			if (findPerk(PerkLib.HarpyHollowBonesEvolved) >= 0)
+				thunderbirdCounter++;
+			if (findPerk(PerkLib.HarpyHollowBonesFinalForm) >= 0)
+				thunderbirdCounter++;
+			if ((findPerk(PerkLib.HeartOfTheStorm) >= 0 || findPerk(PerkLib.HarpyHollowBones) >= 0) && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
+				thunderbirdCounter++;
+			if ((findPerk(PerkLib.HeartOfTheStormEvolved) >= 0 || findPerk(PerkLib.HarpyHollowBonesEvolved) >= 0) && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
+				thunderbirdCounter++;
+			if ((findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0 || findPerk(PerkLib.HarpyHollowBonesFinalForm) >= 0) && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
 				thunderbirdCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				thunderbirdCounter += 50;
@@ -7388,6 +7490,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && thunderbirdCounter >= 8)
 				thunderbirdCounter += 1;
 			if (isGargoyle()) thunderbirdCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) thunderbirdCounter = 0;
+			if (tailType != Tail.THUNDERBIRD || hairType != Hair.STORM) thunderbirdCounter = 0;
 			thunderbirdCounter = finalRacialScore(thunderbirdCounter, Race.THUNDERBIRD);
 			End("Player","racialScore");
 			return thunderbirdCounter;
@@ -7442,6 +7546,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && KamaitachiCounter >= 8)
 				KamaitachiCounter += 1;
 			if (isGargoyle()) KamaitachiCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) KamaitachiCounter = 0;
 			KamaitachiCounter = finalRacialScore(KamaitachiCounter, Race.KAMAITACHI);
 			End("Player","racialScore");
 			return KamaitachiCounter;
@@ -7511,6 +7616,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && gazerCounter >= 8)
 				gazerCounter += 1;
 			if (isGargoyle()) gazerCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) gazerCounter = 0;
 			gazerCounter = finalRacialScore(gazerCounter, Race.GAZER);
 			End("Player","racialScore");
 			return gazerCounter;
@@ -7549,6 +7655,7 @@ use namespace CoC;
 					mutantCounter--;
 			}
 			if (isGargoyle()) mutantCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) mutantCounter = 0;
 			End("Player","racialScore");
 			return mutantCounter;
 		}
@@ -7570,6 +7677,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				trollCounter += 50;
 			if (isGargoyle()) trollCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) trollCounter = 0;
 			trollCounter = finalRacialScore(trollCounter, Race.TROLL);
 			End("Player","racialScore");
 			return trollCounter;
@@ -7592,6 +7700,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				scorpionCounter += 50;
 			if (isGargoyle()) scorpionCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) scorpionCounter = 0;
 			scorpionCounter = finalRacialScore(scorpionCounter, Race.SCORPION);
 			End("Player","racialScore");
 			return scorpionCounter;
@@ -7650,6 +7759,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && mantisCounter >= 8)
 				mantisCounter += 1;
 			if (isGargoyle()) mantisCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) mantisCounter = 0;
 			mantisCounter = finalRacialScore(mantisCounter, Race.MANTIS);
 			End("Player","racialScore");
 			return mantisCounter;
@@ -7713,6 +7823,9 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && salamanderCounter >= 8)
 				salamanderCounter += 1;
 			if (isGargoyle()) salamanderCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) salamanderCounter = 0;
+			if (wings.type == Wings.FEATHERED_PHOENIX)
+				salamanderCounter = 0;
 			salamanderCounter = finalRacialScore(salamanderCounter, Race.SALAMANDER);
 			End("Player","racialScore");
 			return salamanderCounter;
@@ -7771,6 +7884,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && cavewyrmCounter >= 8)
 				cavewyrmCounter += 1;
 			if (isGargoyle()) cavewyrmCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) cavewyrmCounter = 0;
 			cavewyrmCounter = finalRacialScore(cavewyrmCounter, Race.CAVEWYRM);
 			End("Player","racialScore");
 			return cavewyrmCounter;
@@ -7811,6 +7925,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				yetiCounter += 50;
 			if (isGargoyle()) yetiCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) yetiCounter = 0;
 			yetiCounter = finalRacialScore(yetiCounter, Race.YETI);
 			End("Player","racialScore");
 			return yetiCounter;
@@ -7861,6 +7976,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				yukiOnnaCounter += 50;
 			if (isGargoyle()) yukiOnnaCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) yukiOnnaCounter = 0;
 			yukiOnnaCounter = finalRacialScore(yukiOnnaCounter, Race.YUKIONNA);
 			End("Player","racialScore");
 			return yukiOnnaCounter;
@@ -7907,6 +8023,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				wendigoCounter += 50;
 			if (isGargoyle()) wendigoCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) wendigoCounter = 0;
 			wendigoCounter = finalRacialScore(wendigoCounter, Race.WENDIGO);
 			End("Player","racialScore");
 			return wendigoCounter;
@@ -7971,6 +8088,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && melkieCounter >= 8)
 				melkieCounter += 1;
 			if (isGargoyle()) melkieCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) melkieCounter = 0;
 			melkieCounter = finalRacialScore(melkieCounter, Race.MELKIE);
 			End("Player","racialScore");
 			return melkieCounter;
@@ -8031,6 +8149,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && centaurCounter >= 8)
 				centaurCounter += 1;
 			if (isGargoyle()) centaurCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) centaurCounter = 0;
 			centaurCounter = finalRacialScore(centaurCounter, Race.CENTAUR);
 			End("Player","racialScore");
 			return centaurCounter;
@@ -8089,6 +8208,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && cancerCounter >= 8)
 				cancerCounter += 1;
 			if (isGargoyle()) cancerCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) cancerCounter = 0;
 			if (lowerBody != LowerBody.CRAB && lowerBody != LowerBody.CANCER) cancerCounter = 0;
 			cancerCounter = finalRacialScore(cancerCounter, Race.CANCER);
 			End("Player","racialScore");
@@ -8115,8 +8235,6 @@ use namespace CoC;
 			}
 			if (eyes.type == Eyes.CAT_SLITS)
 				sphinxCounter++;
-			if (ears.type == Ears.LION)
-				sphinxCounter++;
 			if (tongue.type == Tongue.CAT)
 				sphinxCounter++;
 			if (tailType == Tail.CAT)
@@ -8131,6 +8249,14 @@ use namespace CoC;
 				sphinxCounter += 4;
 			if (catCocks() > 0)
 				sphinxCounter++;
+			if (hasPartialCoat(Skin.FUR) || hasPlainSkinOnly())
+				sphinxCounter++;
+			if (findPerk(PerkLib.TwinHeart) > 0)
+				sphinxCounter += 2;
+			if (findPerk(PerkLib.TwinHeartEvolved) > 0)
+				sphinxCounter += 2;
+			if (findPerk(PerkLib.TwinHeartFinalForm) > 0)
+				sphinxCounter += 2;
 			if (findPerk(PerkLib.Flexibility) > 0)
 				sphinxCounter++;
 			if (findPerk(PerkLib.CatlikeNimbleness) > 0)
@@ -8152,6 +8278,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && sphinxCounter >= 8)
 				sphinxCounter += 1;
 			if (isGargoyle()) sphinxCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) sphinxCounter = 0;
+			if (arms.type != Arms.SPHINX || wings.type != Wings.FEATHERED_SPHINX) sphinxCounter = 0;
 			sphinxCounter = finalRacialScore(sphinxCounter, Race.SPHINX);
 			End("Player","racialScore");
 			return sphinxCounter;
@@ -8236,6 +8364,7 @@ use namespace CoC;
 			if (horns.type != Horns.UNICORN && horns.type != Horns.BICORN)
 				unicornCounter = 0;
 			if (isGargoyle()) unicornCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) unicornCounter = 0;
 			unicornCounter = finalRacialScore(unicornCounter, Race.UNICORN);
 			End("Player","racialScore");
 			return unicornCounter;
@@ -8287,11 +8416,11 @@ use namespace CoC;
 			}
 			if (wings.type == Wings.NONE)
 				unicornCounter += 2;
-			if (hasPlainSkinOnly())
-				unicornCounter++;
 			if (horseCocks() > 0)
 				unicornCounter++;
 			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
+				unicornCounter++;
+			if (hasPlainSkinOnly())
 				unicornCounter++;
 			if (findPerk(PerkLib.TwinHeart) > 0)
 				unicornCounter += 2;
@@ -8324,6 +8453,7 @@ use namespace CoC;
 			if (horns.type != Horns.UNICORN && horns.type != Horns.BICORN)
 				unicornCounter = 0;
 			if (isGargoyle()) unicornCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) unicornCounter = 0;
 			unicornCounter = finalRacialScore(unicornCounter, Race.UNICORN);
 			End("Player","racialScore");
 			return unicornCounter;
@@ -8412,6 +8542,7 @@ use namespace CoC;
 					alicornCounter = 0;
 			}
 			if (isGargoyle()) alicornCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) alicornCounter = 0;
 			alicornCounter = finalRacialScore(alicornCounter, Race.UNICORN);
 			End("Player","racialScore");
 			return alicornCounter;
@@ -8506,6 +8637,7 @@ use namespace CoC;
 					alicornCounter = 0;
 			}
 			if (isGargoyle()) alicornCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) alicornCounter = 0;
 			alicornCounter = finalRacialScore(alicornCounter, Race.UNICORN);
 			End("Player","racialScore");
 			return alicornCounter;
@@ -8516,19 +8648,19 @@ use namespace CoC;
 			Begin("Player","racialScore","phoenix");
 			var phoenixCounter:Number = 0;
 			if (wings.type == Wings.FEATHERED_PHOENIX)
-				phoenixCounter++;
+				phoenixCounter += 4;
 			if (arms.type == Arms.PHOENIX)
 				phoenixCounter++;
 			if (hairType == Hair.FEATHER) {
 				phoenixCounter++;
-				if (faceType == Face.HUMAN && phoenixCounter > 2)
+				if ((faceType == Face.HUMAN || faceType == Face.SALAMANDER_FANGS) && phoenixCounter > 2)
 					phoenixCounter++;
-				if (ears.type == Ears.HUMAN && phoenixCounter > 2)
+				if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN || ears.type == Ears.LIZARD || ears.type == Ears.DRAGON && phoenixCounter > 2)
 					phoenixCounter++;
 			}
 			if (eyes.type == Eyes.REPTILIAN)
 				phoenixCounter++;
-			if (lowerBody == LowerBody.SALAMANDER)
+			if (lowerBody == LowerBody.SALAMANDER || lowerBody == LowerBody.HARPY)
 				phoenixCounter++;
 			if (tailType == Tail.SALAMANDER)
 				phoenixCounter++;
@@ -8538,6 +8670,20 @@ use namespace CoC;
 				phoenixCounter++;
 			if (findPerk(PerkLib.PhoenixFireBreath) >= 0)
 				phoenixCounter++;
+			if (hasPerk(PerkLib.HarpyWomb))
+				phoenixCounter++;
+			if (hasPerk(PerkLib.HarpyHollowBones))
+				phoenixCounter++;
+			if (hasPerk(PerkLib.HarpyHollowBonesEvolved))
+				phoenixCounter++;
+			if (hasPerk(PerkLib.HarpyHollowBonesFinalForm))
+				phoenixCounter++;
+			if (hasPerk(PerkLib.SalamanderAdrenalGlands))
+				phoenixCounter++;
+			if (hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved))
+				phoenixCounter++;
+			if (hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm))
+				phoenixCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				phoenixCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && phoenixCounter >= 4)
@@ -8545,7 +8691,9 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && phoenixCounter >= 8)
 				phoenixCounter += 1;
 			if (isGargoyle()) phoenixCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) phoenixCounter = 0;
 			phoenixCounter = finalRacialScore(phoenixCounter, Race.PHOENIX);
+			if (wings.type != Wings.FEATHERED_PHOENIX) phoenixCounter = 0;
 			End("Player","racialScore");
 			return phoenixCounter;
 		}
@@ -8607,6 +8755,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && scyllaCounter >= 8)
 				scyllaCounter += 1;
 			if (isGargoyle()) scyllaCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) scyllaCounter = 0;
 			if (!isScylla() && !isKraken()) scyllaCounter = 0;
 			scyllaCounter = finalRacialScore(scyllaCounter, Race.SCYLLA);
 			End("Player","racialScore");
@@ -8675,6 +8824,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				kitshooCounter += 50;
 			if (isGargoyle()) kitshooCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) kitshooCounter = 0;
 			End("Player","racialScore");
 			return kitshooCounter;
 		}
@@ -8722,6 +8872,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && plantCounter >= 8)
 				plantCounter += 1;
 			if (isGargoyle()) plantCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) plantCounter = 0;
 			plantCounter = finalRacialScore(plantCounter, Race.PLANT);
 			End("Player","racialScore");
 			return plantCounter;
@@ -8767,6 +8918,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				alrauneCounter += 50;
 			if (isGargoyle()) alrauneCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) alrauneCounter = 0;
 			alrauneCounter = finalRacialScore(alrauneCounter, Race.ALRAUNE);
 			End("Player","racialScore");
 			return alrauneCounter;
@@ -8801,6 +8953,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				yggdrasilCounter += 50;
 			if (isGargoyle()) yggdrasilCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) yggdrasilCounter = 0;
 			yggdrasilCounter = finalRacialScore(yggdrasilCounter, Race.YGGDRASIL);
 			End("Player","racialScore");
 			return yggdrasilCounter;
@@ -8849,6 +9002,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				wolfCounter += 50;
 			if (isGargoyle()) wolfCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) wolfCounter = 0;
 			wolfCounter = finalRacialScore(wolfCounter, Race.WOLF);
 			End("Player","racialScore");
 			return wolfCounter;
@@ -8895,6 +9049,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				werewolfCounter += 50;
 			if (isGargoyle()) werewolfCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) werewolfCounter = 0;
 			werewolfCounter = finalRacialScore(werewolfCounter, Race.WEREWOLF);
 			End("Player","racialScore");
 			return werewolfCounter;
@@ -8912,7 +9067,7 @@ use namespace CoC;
 			if (tailType == Tail.SHARK)
 				sirenCounter++;
 			if (wings.type == Wings.FEATHERED_LARGE)
-				sirenCounter += 2;
+				sirenCounter += 4;
 			if (arms.type == Arms.HARPY)
 				sirenCounter++;
 			if (lowerBody == LowerBody.SHARK)
@@ -8923,6 +9078,12 @@ use namespace CoC;
 				sirenCounter++;
 			if (eyes.type == Eyes.HUMAN)
 				sirenCounter++;
+			if (hasPerk(PerkLib.HarpyHollowBones))
+				sirenCounter++;
+			if (hasPerk(PerkLib.HarpyHollowBonesEvolved))
+				sirenCounter++;
+			if (hasPerk(PerkLib.HarpyHollowBonesFinalForm))
+				sirenCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				sirenCounter += 50;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && sirenCounter >= 4)
@@ -8930,6 +9091,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && sirenCounter >= 8)
 				sirenCounter += 1;
 			if (isGargoyle()) sirenCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) sirenCounter = 0;
 			sirenCounter = finalRacialScore(sirenCounter, Race.SIREN);
 			End("Player","racialScore");
 			return sirenCounter;
@@ -8993,6 +9155,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && pigCounter >= 10)
 				pigCounter += 1;
 			if (isGargoyle()) pigCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) pigCounter = 0;
 			pigCounter = finalRacialScore(pigCounter, Race.PIG);
 			End("Player","racialScore");
 			return pigCounter;
@@ -9022,6 +9185,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && satyrCounter >= 8)
 				satyrCounter += 1;
 			if (isGargoyle()) satyrCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) satyrCounter = 0;
 			satyrCounter = finalRacialScore(satyrCounter, Race.SATYR);
 			End("Player","racialScore");
 			return satyrCounter;
@@ -9049,6 +9213,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && rhinoCounter >= 8)
 				rhinoCounter += 1;
 			if (isGargoyle()) rhinoCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) rhinoCounter = 0;
 			rhinoCounter = finalRacialScore(rhinoCounter, Race.RHINO);
 			End("Player","racialScore");
 			return rhinoCounter;
@@ -9074,6 +9239,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				echidnaCounter += 50;
 			if (isGargoyle()) echidnaCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) echidnaCounter = 0;
 			echidnaCounter = finalRacialScore(echidnaCounter, Race.ECHIDNA);
 			End("Player","racialScore");
 			return echidnaCounter;
@@ -9103,6 +9269,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				ushionnaCounter += 50;
 			if (isGargoyle()) ushionnaCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) ushionnaCounter = 0;
 			ushionnaCounter = finalRacialScore(ushionnaCounter, Race.USHIONNA);
 			End("Player","racialScore");
 			return ushionnaCounter;
@@ -9132,6 +9299,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && deerCounter >= 8)
 				deerCounter += 1;
 			if (isGargoyle()) deerCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) deerCounter = 0;
 			deerCounter = finalRacialScore(deerCounter, Race.DEER);
 			End("Player","racialScore");
 			return deerCounter;
@@ -9160,6 +9328,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				dragonneCounter += 50;
 			if (isGargoyle()) dragonneCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) dragonneCounter = 0;
 			dragonneCounter = finalRacialScore(dragonneCounter, Race.DRAGONNE);
 			End("Player","racialScore");
 			return dragonneCounter;
@@ -9192,7 +9361,7 @@ use namespace CoC;
 			if (wings.type == Wings.MANTICORE_LIKE_SMALL)
 				manticoreCounter++;
 			if (wings.type == Wings.MANTICORE_LIKE_LARGE)
-				manticoreCounter += 2;
+				manticoreCounter += 4;
 			if (!hasCock())
 				manticoreCounter++;
 			if (cocks.length > 0)
@@ -9220,6 +9389,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && manticoreCounter >= 8)
 				manticoreCounter += 1;
 			if (isGargoyle()) manticoreCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) manticoreCounter = 0;
+			if (tailType != Tail.MANTICORE_PUSSYTAIL) manticoreCounter = 0;
 			manticoreCounter = finalRacialScore(manticoreCounter, Race.MANTICORE);
 			End("Player","racialScore");
 			return manticoreCounter;
@@ -9250,6 +9421,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				redpandaCounter += 50;
 			if (isGargoyle()) redpandaCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) redpandaCounter = 0;
 			redpandaCounter = finalRacialScore(redpandaCounter, Race.REDPANDA);
 			End("Player","racialScore");
 			return redpandaCounter;
@@ -9284,6 +9456,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && bearpandaCounter >= 8)
 				bearpandaCounter += 1;
 			if (isGargoyle()) bearpandaCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) bearpandaCounter = 0;
 			bearpandaCounter = finalRacialScore(bearpandaCounter, Race.BEARANDPANDA);
 			End("Player","racialScore");
 			return bearpandaCounter;
@@ -9318,6 +9491,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && avianCounter >= 8)
 				avianCounter += 1;
 			if (isGargoyle()) avianCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) avianCounter = 0;
 			avianCounter = finalRacialScore(avianCounter, Race.AVIAN);
 			End("Player","racialScore");
 			return avianCounter;
@@ -9352,6 +9526,7 @@ use namespace CoC;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				counter += 50;
 			if (isGargoyle()) counter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) counter = 0;
 			counter = finalRacialScore(counter, Race.BAT);
 			End("Player","racialScore");
 			return counter < 0? 0:counter;
@@ -9409,8 +9584,8 @@ use namespace CoC;
 				counter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				counter += 50;
-			if (isGargoyle())
-				counter = 0;
+			if (isGargoyle()) counter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) counter = 0;
 			counter = finalRacialScore(counter, Race.VAMPIRE);
 			End("Player","racialScore");
 			return counter < 0? 0:counter;
@@ -9821,6 +9996,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.LizanMarrow) >= 0)
 				bonesandmarrowMutations--;
 			if (findPerk(PerkLib.DraconicBones) >= 0)
+				bonesandmarrowMutations--;
+			if (findPerk(PerkLib.HarpyHollowBones) >= 0)
 				bonesandmarrowMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				bonesandmarrowMutations++;
@@ -10820,10 +10997,10 @@ use namespace CoC;
 					maxIntCap2 += 25;
 				}
 			}
-			if (fairyScore() >= 19) {
+			if (fairyScore() >= 23) {
 				maxStrCap2 -= 25;
-				maxTouCap2 -= 25;
-				maxSpeCap2 += 155;
+				maxTouCap2 -= 10;
+				maxSpeCap2 += 200;
 				maxIntCap2 += 200;
 				currentSen += 20;
 			}//+10/10-20
@@ -10862,13 +11039,13 @@ use namespace CoC;
 				}
 			}//+10 / 10 - 20
 			if (sphinxScore() >= 14) {
-				if (sphinxScore() >= 23) {
-					maxStrCap2 += 80;
+				if (sphinxScore() >= 26) {
+					maxStrCap2 += 110;
 					maxTouCap2 -= 20;
 					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 70;
 					else maxSpeCap2 += 60;
 					maxIntCap2 += 130;
-					maxWisCap2 += 95;
+					maxWisCap2 += 110;
 				}
 				else {
 					maxStrCap2 += 50;
@@ -10913,13 +11090,23 @@ use namespace CoC;
 					currentSen += 25;
 				}
 			}
-			if (displacerbeastScore() >= 14) {
-				maxStrCap2 += 95
-				if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 110;
-				else maxSpeCap2 += 100;
-				maxIntCap2 -= 25;
-				maxWisCap2 -= 20;
-				maxLibCap2 += 60;
+			if (displacerbeastScore() >= 14){
+				if (displacerbeastScore() >= 20) {
+					maxStrCap2 += 140
+					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 150;
+					else maxSpeCap2 += 140;
+					maxIntCap2 -= 30;
+					maxWisCap2 -= 30;
+					maxLibCap2 += 80;
+				}
+				else{
+					maxStrCap2 += 95
+					if (findPerk(PerkLib.Flexibility) > 0) maxSpeCap2 += 110;
+					else maxSpeCap2 += 100;
+					maxIntCap2 -= 25;
+					maxWisCap2 -= 20;
+					maxLibCap2 += 60;
+				}
 			}
 			if (bunnyScore() >= 10) {
 					maxStrCap2 -= 20;
@@ -11055,6 +11242,14 @@ use namespace CoC;
 			if (kitsuneScore() >= 5) {
 				if (kitsuneScore() >= 9 && tailType == 13 && tailCount >= 2) {
 					if (kitsuneScore() >= 14 && tailCount == 9) {
+						if (kitsuneScore() >= 26 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+							maxStrCap2 -= 50;
+							maxSpeCap2 += 40;
+							maxIntCap2 += 170;
+							maxWisCap2 += 170;
+							maxLibCap2 += 110;
+							currentSen += 60;
+						}
 						if (kitsuneScore() >= 21 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
 							maxStrCap2 -= 50;
 							maxSpeCap2 += 40;
@@ -11063,7 +11258,7 @@ use namespace CoC;
 							maxLibCap2 += 80;
 							currentSen += 60;
 						}//315(425)
-						else if (kitsuneScore() >= 18 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+						else if (kitsuneScore() >= 18) {
 							maxStrCap2 -= 45;
 							maxSpeCap2 += 35;
 							maxIntCap2 += 120;
@@ -11162,7 +11357,12 @@ use namespace CoC;
 				}
 			}//+10/10-20
 			if (harpyScore() >= 4) {
-				if (harpyScore() >= 8) {
+				if (harpyScore() >= 15) {
+					maxTouCap2 -= 30;
+					maxSpeCap2 += 150;
+					maxLibCap2 += 105;
+				}
+				else if (harpyScore() >= 8) {
 					maxTouCap2 -= 20;
 					maxSpeCap2 += 80;
 					maxLibCap2 += 60;
@@ -11214,9 +11414,16 @@ use namespace CoC;
 				}
 			}
 			if (sirenScore() >= 10) {
-				maxStrCap2 += 40;
-				maxSpeCap2 += 70;
-				maxIntCap2 += 40;
+				if (sirenScore() >= 16) {
+					maxStrCap2 += 70;
+					maxTouCap2 += 100;
+					maxSpeCap2 += 70;
+				}
+				else {
+					maxStrCap2 += 40;
+					maxSpeCap2 += 70;
+					maxIntCap2 += 40;
+				}
 			}//+20/10-20
 			if (orcaScore() >= 6) {
 				if (orcaScore() >= 20) {
@@ -11337,14 +11544,19 @@ use namespace CoC;
 				}
 			}//+10/10-20
 			if (thunderbirdScore() >= 12) {
-				if (thunderbirdScore() >= 15) {
+				if (thunderbirdScore() >= 21) {
+					maxTouCap2 -= 25;
+					maxSpeCap2 += 155;
+					maxLibCap2 += 185;
+				}
+				else if (thunderbirdScore() >= 16) {
 					maxTouCap2 -= 20;
-					maxSpeCap2 += 115;
-					maxLibCap2 += 130;
+					maxSpeCap2 += 120;
+					maxLibCap2 += 140;
 				}
 				else {
-					maxTouCap2 -= 20;
-					maxSpeCap2 += 100;
+					maxTouCap2 -= 15;
+					maxSpeCap2 += 95;
 					maxLibCap2 += 100;
 				}
 			}//+10/10-20
@@ -11403,10 +11615,10 @@ use namespace CoC;
 				maxSpeCap2 += 5;
 			}//+10/10-20
 			if (manticoreScore() >= 7) {
-				if (manticoreScore() >= 20) {
-					maxSpeCap2 += 145;
+				if (manticoreScore() >= 22) {
+					maxSpeCap2 += 160;
 					maxIntCap2 += 90;
-					maxLibCap2 += 125;
+					maxLibCap2 += 140;
 					currentSen += 60;
 				}
 				else if (manticoreScore() >= 15) {
@@ -11588,10 +11800,18 @@ use namespace CoC;
 				maxIntCap2 += 75;
 			}//+(30)55/(30-40)50-60
 			if (phoenixScore() >= 10) {
-				maxStrCap2 += 20;
-				maxTouCap2 += 20;
-				maxSpeCap2 += 70;
-				maxLibCap2 += 40;
+				if (phoenixScore() >= 21) {
+					maxStrCap2 += 40;
+					maxTouCap2 += 20;
+					maxSpeCap2 += 150;
+					maxLibCap2 += 105;
+				}
+				else{
+					maxStrCap2 += 20;
+					maxTouCap2 += 20;
+					maxSpeCap2 += 70;
+					maxLibCap2 += 40;
+				}
 			}//+30/30-40
 			if (scyllaScore() >= 4 && (isScylla() || isKraken())) {
 				if (scyllaScore() >= 12 && isKraken()) {
@@ -11794,9 +12014,9 @@ use namespace CoC;
 				}
 			}//+30/30-40
 			if (vouivreScore() >= 11) {
-				if (vouivreScore() >= 22) {
+				if (vouivreScore() >= 21) {
 					maxStrCap2 += 130;
-					maxTouCap2 += 95;
+					maxTouCap2 += 80;
 					maxSpeCap2 += 100;
 					maxIntCap2 += 20;
 					maxWisCap2 -= 20;
@@ -12105,6 +12325,9 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.Cauterize)) {
 				removeStatusEffect(StatusEffects.Cauterize);
+			}
+			if(hasStatusEffect(StatusEffects.WinterClaw)) {
+				removeStatusEffect(StatusEffects.WinterClaw);
 			}
 			if(CoC.instance.monster.hasStatusEffect(StatusEffects.TailWhip)) {
 				CoC.instance.monster.removeStatusEffect(StatusEffects.TailWhip);
@@ -12550,7 +12773,6 @@ use namespace CoC;
 				// No cocks, can't go into rut.
 				return false;
 			}
-
 			//Has rut, intensify it!
 			if (inRut) {
 				if(output) {
@@ -12566,16 +12788,382 @@ use namespace CoC;
 				if(output) {
 					outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!");
 				}
-
 				//v1 - bonus cum production
 				//v2 - bonus libido
 				//v3 - time remaining!
 				createStatusEffect(StatusEffects.Rut, 150 * intensity, (50 * intensity)/100, 100 * intensity, 0);
 			}
-
 			return true;
 		}
 
+		public function maxSwordLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function SwordExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masterySwordLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masterySwordLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function swordXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masterySwordXP++;
+					XP--;
+				}
+				else {
+					masterySwordXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masterySwordLevel < maxSwordLevel() && masterySwordXP >= SwordExpToLevelUp()) {
+					outputText("\n<b>Dao of Sword leveled up to " + (masterySwordLevel + 1) + "!</b>\n");
+					masterySwordLevel++;
+					masterySwordXP = 0;
+				}
+			}
+		}
+
+		public function maxAxeLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function AxeExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryAxeLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryAxeLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function axeXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryAxeXP++;
+					XP--;
+				}
+				else {
+					masteryAxeXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryAxeLevel < maxAxeLevel() && masteryAxeXP >= AxeExpToLevelUp()) {
+					outputText("\n<b>Dao of Axe leveled up to " + (masteryAxeLevel + 1) + "!</b>\n");
+					masteryAxeLevel++;
+					masteryAxeXP = 0;
+				}
+			}
+		}
+
+		public function maxMaceHammerLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function MaceHammerExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryMaceHammerLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryMaceHammerLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function macehammerXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryMaceHammerXP++;
+					XP--;
+				}
+				else {
+					masteryMaceHammerXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryMaceHammerLevel < maxMaceHammerLevel() && masteryMaceHammerXP >= MaceHammerExpToLevelUp()) {
+					outputText("\n<b>Dao of Mace/Hammer leveled up to " + (masteryMaceHammerLevel + 1) + "!</b>\n");
+					masteryMaceHammerLevel++;
+					masteryMaceHammerXP = 0;
+				}
+			}
+		}
+
+		public function maxDuelingSwordLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function DuelingSwordExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryDuelingSwordLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryDuelingSwordLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function duelingswordXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryDuelingSwordXP++;
+					XP--;
+				}
+				else {
+					masteryDuelingSwordXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryDuelingSwordLevel < maxDuelingSwordLevel() && masteryDuelingSwordXP >= DuelingSwordExpToLevelUp()) {
+					outputText("\n<b>Dao of Dueling Sword leveled up to " + (masteryDuelingSwordLevel + 1) + "!</b>\n");
+					masteryDuelingSwordLevel++;
+					masteryDuelingSwordXP = 0;
+				}
+			}
+		}
+
+		public function maxSpearLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function SpearExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masterySpearLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masterySpearLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function spearXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masterySpearXP++;
+					XP--;
+				}
+				else {
+					masterySpearXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masterySpearLevel < maxSpearLevel() && masterySpearXP >= SpearExpToLevelUp()) {
+					outputText("\n<b>Dao of Spear leveled up to " + (masterySpearLevel + 1) + "!</b>\n");
+					masterySpearLevel++;
+					masterySpearXP = 0;
+				}
+			}
+		}
+
+		public function maxDualWieldSmallLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function DualWieldSmallExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = dualWSLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = dualWSLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function dualWieldSmallXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					dualWSXP++;
+					XP--;
+				}
+				else {
+					dualWSXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (dualWSLevel < maxDualWieldSmallLevel() && dualWSXP >= DualWieldSmallExpToLevelUp()) {
+					outputText("\n<b>Dual Wield (Small) skill leveled up to " + (dualWSLevel + 1) + "!</b>\n");
+					dualWSLevel++;
+					dualWSXP = 0;
+				}
+			}
+		}
+		
+		public function maxDualWieldNormalLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function DualWieldNormalExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = dualWNLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = dualWNLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function dualWieldNormalXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					dualWNXP++;
+					XP--;
+				}
+				else {
+					dualWNXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (dualWNLevel < maxDualWieldNormalLevel() && dualWNXP >= DualWieldNormalExpToLevelUp()) {
+					outputText("\n<b>Dual Wield (Normal) skill leveled up to " + (dualWNLevel + 1) + "!</b>\n");
+					dualWNLevel++;
+					dualWNXP = 0;
+				}
+			}
+		}
+		
+		public function maxDualWieldLargeLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function DualWieldLargeExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = dualWLLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = dualWLLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function dualWieldLargeXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					dualWLXP++;
+					XP--;
+				}
+				else {
+					dualWLXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (dualWLLevel < maxDualWieldLargeLevel() && dualWLXP >= DualWieldLargeExpToLevelUp()) {
+					outputText("\n<b>Dual Wield (Large) skill leveled up to " + (dualWLLevel + 1) + "!</b>\n");
+					dualWLLevel++;
+					dualWLXP = 0;
+				}
+			}
+		}
+    
+		public function maxDualWieldFirearmsLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function DualWieldFirearmsExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = dualWFLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = dualWFLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function dualWieldFirearmsXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					dualWFXP++;
+					XP--;
+				}
+				else {
+					dualWFXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (dualWFLevel < maxDualWieldFirearmsLevel() && dualWFXP >= DualWieldFirearmsExpToLevelUp()) {
+					outputText("\n<b>Dual Wield (Firearms) skill leveled up to " + (dualWLLevel + 1) + "!</b>\n");
+					dualWFLevel++;
+					dualWFXP = 0;
+				}
+			}
+		}
 
 		public function maxHerbalismLevel():Number {
 			var maxLevel:Number = 2;
@@ -12815,7 +13403,6 @@ use namespace CoC;
 			dynStats("lus=", 0, "sca", false);
 			hoursSinceCum = 0;
 			flags[kFLAGS.TIMES_ORGASMED]++;
-
 			if (countCockSocks("gilded") > 0) {
 				var randomCock:int = rand( cocks.length );
 				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
@@ -12846,11 +13433,9 @@ use namespace CoC;
 				case 'VaginalAnal':
 					orgasm((hasVagina() ? 'Vaginal' : 'Anal'), real);
 					return; // Prevent calling orgasmReal() twice
-
 				case 'DickAnal':
 					orgasm((rand(2) == 0 ? 'Dick' : 'Anal'), real);
 					return;
-
 				case 'Default':
 				case 'Generic':
 				default:
@@ -12858,12 +13443,10 @@ use namespace CoC;
 						orgasm('Anal'); // Failsafe for genderless PCs
 						return;
 					}
-
 					if (hasVagina() && hasCock()) {
 						orgasm((rand(2) == 0 ? 'Vaginal' : 'Dick'), real);
 						return;
 					}
-
 					orgasm((hasVagina() ? 'Vaginal' : 'Dick'), real);
 					return;
 			}
@@ -12890,16 +13473,13 @@ use namespace CoC;
 				display:true,
 				orgasm:false
 			},options||{});
-
 			if (where.host != null && where.host != this) {
 				trace("Penetration confusion! Host is "+where.host);
 				return;
 			}
-
 			var size:Number = 8;
 			if ('size' in options) size = options.size;
 			else if (tool is Cock) size = (tool as Cock).cArea();
-
 			var otype:String = 'Default';
 			if (where is AssClass) {
 				buttChange(size, options.display);
@@ -12916,8 +13496,8 @@ use namespace CoC;
 		public function EnergyDependentRestore():void {
 			var intBuff:Number = buff("Energy Vampire").getValueOfStatBuff("int.mult");
 			var speBuff:Number = buff("Energy Vampire").getValueOfStatBuff("spe.mult");
-			if (intBuff < +0.9) {
-				buff("Energy Vampire").addStats({ "int.mult": +0.05 }).withText("Energy Vampire");
+			if (intBuff < +1.8) {
+				buff("Energy Vampire").addStats({ "int.mult": +0.10 }).withText("Energy Vampire");
 			}
 			if (speBuff < +0.9) {
 				buff("Energy Vampire").addStats({ "spe.mult": +0.05 }).withText("Energy Vampire");
@@ -12925,6 +13505,19 @@ use namespace CoC;
 			soulforce += maxSoulforce() * 0.04;
 			if (soulforce > maxSoulforce()) soulforce = maxSoulforce();
 			outputText(" You feel slightly more alive from the soulforce you vampirised from your sexual partner orgasm.");
+		}
+
+		public function hasUniquePregnancy():Boolean{
+			if (isSlime() || isHarpy() || isGoblinoid() || isAlraune()) return true;
+			else return false;
+		}
+
+		public function impregnationRacialCheck():void
+		{
+		    if (isGoblinoid()) knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			else if (isSlime()) knockUp(PregnancyStore.PREGNANCY_GOO_GIRL, PregnancyStore.INCUBATION_GOO_GIRL);
+			else if (isHarpy()) knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS); //until we get a real harpy knock up
+			else if (isAlraune()) knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 		}
 
 		protected override function maxHP_base():Number {
@@ -12937,7 +13530,7 @@ use namespace CoC;
 			if (horseScore() >= 7) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (manticoreScore() >= 6) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (manticoreScore() >= 15) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (manticoreScore() >= 20) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (manticoreScore() >= 22) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (rhinoScore() >= 4) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));

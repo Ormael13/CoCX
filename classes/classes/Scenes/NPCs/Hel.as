@@ -180,7 +180,7 @@ public class Hel extends Monster
 			this.long = "You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.";
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_NORMAL);
 			createStatusEffect(StatusEffects.BonusVCapacity,85,0,0,0);
-			createBreastRow(Appearance.breastCupInverse("E+"));
+			createBreastRow(Appearance.breastCupInverse("E"));
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,85,0,0,0);
@@ -196,8 +196,8 @@ public class Hel extends Monster
 			this.weaponVerb="slashing blade";
 			this.weaponAttack = 26;
 			this.armorName = "scales";
-			this.armorDef = 21;
-			this.armorMDef = 2;
+			this.armorDef = 22;
+			this.armorMDef = 3;
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 300;

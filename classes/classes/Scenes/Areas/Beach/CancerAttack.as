@@ -125,7 +125,7 @@ public class CancerAttack extends Monster
 
 		private function BubbleSplash():void {
 			if (this.hasVagina()) outputText("The cancer gasps in pleasure as her mandible opens revealing her pussy. Out of nowhere, she suddenly splashes you right in the face with a powerful gushing jet of foaming juices. <b>You’re blinded!</b>\n\n");
-			if (this.hasCock()) outputText("The cancer gasps in pleasure as his mandible opens revealing her pussy. Out of nowhere, she suddenly splashes you right in the face with a powerful gushing jet of foaming juices. <b>You’re blinded!</b>\n\n");
+			if (this.hasCock()) outputText("The cancer gasps in pleasure as his mandible opens revealing his cock. Out of nowhere, he suddenly splashes you right in the face with a powerful gushing jet of foaming juices. <b>You’re blinded!</b>\n\n");
 			player.createStatusEffect(StatusEffects.Blind, 6, 0, 0, 0);
 		}
 		
@@ -137,8 +137,7 @@ public class CancerAttack extends Monster
 			this.long= "You are fighting a cancer, a centaur mixing the upper body of a human with the bottom body of a large crab. " +
 					"Its pincers stands at the ready looking for the opportunity of a swift and likely fatal grapple. " +
 					"While your opponent torso is pretty bare it’s obvious the crab part is sturdier than any steel plating. " +
-					"The creepiest thing about all of this is that her/his facial expression seems frozen in a constant blank state.";
-			//
+					"The creepiest thing about all of this is that "+(IsFemale ? "her":"his")+" facial expression seems frozen in a constant blank state.";
 			if (IsFemale) {
 				this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_LOOSE);
 				this.createBreastRow(1);

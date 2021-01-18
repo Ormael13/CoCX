@@ -105,10 +105,11 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			}
 			menu();
 			addButton(0, "Potions", potionMenu);
-			addButton(1, "Books/Misc", bookMenu);
+			addButton(1, "Books", bookMenu);
 			addButton(2, "Erotica", eroticaMenu);
-			if (player.hasStatusEffect(StatusEffects.WormOffer) && player.hasStatusEffect(StatusEffects.Infested)) addButton(3, "Worm Cure", wormRemovalOffer);
-			addButton(4, "Leave", camp.returnToCampUseOneHour);
+			addButton(3, "Misc", miscMenu);
+			if (player.hasStatusEffect(StatusEffects.WormOffer) && player.hasStatusEffect(StatusEffects.Infested)) addButton(5, "Worm Cure", wormRemovalOffer);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 			statScreenRefresh();
 		}
 		
@@ -152,13 +153,10 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			if (flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] > 0) addButton(3, "Yoga Guide", pitchYogaGuide);
 			addButton(5, "White Book", pitchWhiteBook);
 			addButton(6, "Black Book", pitchBlackBook);
-			if (player.findPerk(PerkLib.PrestigeJobGreySage) >= 0) addButton(7, "Grey Book", pitchGreyBook);
-			else addButtonDisabled(7, "???", "Req. Prestige Job: Grey Sage");
-			if (Holidays.nieveHoliday()) {
-				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(8, "Mysterious Seed", pitchMysteriousSeed);
-				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 5) addButton(9, "Decorations", pitchDecorations);
-			}
-			addButton(10, "Torch", pitchTorch);
+			addButton(7, "Grey Book", pitchGreyBook);
+			addButton(8, "Red Manuscript", pitchRedManuscript);
+			addButton(9, "Crimson Jade", pitchCrimsonJade);
+			addButton(10, "E. Tome", pitchElementalistsTome).hint("Elementalist’s Tome");
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
@@ -177,7 +175,19 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			if (player.hasCock() && player.hasVagina()) addButton(6, "AN Onahole", pitchAllNaturalOnahole);
 			addButton(7, "Condom", pitchCondom);
 			addButton(14, "Back", giacomoEncounter);
-
+			statScreenRefresh();
+		}
+		
+		private function miscMenu():void {
+			spriteSelect(23);
+			clearOutput();
+			if (Holidays.nieveHoliday()) {
+				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(11, "Mysterious Seed", pitchMysteriousSeed);
+				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 5) addButton(12, "Decorations", pitchDecorations);
+			}
+			addButton(13, "Torch", pitchTorch);
+			menu();
+			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
 		
@@ -420,7 +430,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(23);
 			clearOutput();
 			outputText("\"<i>Ah, that. That's just a seed I acquired from someone on my travels. They said planting it will result in something truly extraordinary to happen but I haven't really had the time to get around to it. Perhaps it'll be better suited for someone with more time on their hands? Maybe for let's say… 30 gems?</i>\"");
-			doYesNo(buyMysteriousSeed, bookMenu);
+			doYesNo(buyMysteriousSeed, miscMenu);
 		}
 		
 		private function buyMysteriousSeed():void {
@@ -428,7 +438,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			clearOutput();
 			if (player.gems < 30) {
 				outputText("\n\nGiacomo sighs, indicating you need 30 gem to purchase this item.");
-				doNext(bookMenu);
+				doNext(miscMenu);
 			}
 			else {
 				outputText("\n\nYou decided to buy the seed. It’s actually fairly large and light brown in color. Other than that it just looks like an ordinary seed. Maybe you'll plant it later to see what it'll grow into. <b>You acquired the Mysterious Seed.</b>");
@@ -436,7 +446,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				statScreenRefresh();
 				flags[kFLAGS.CHRISTMAS_TREE_LEVEL] = 1;
 				player.createKeyItem("Mysterious Seed", 0, 0, 0, 0);
-				doNext(bookMenu);
+				doNext(miscMenu);
 			}
 		}
 		
@@ -444,7 +454,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(23);
 			clearOutput();
 			outputText("\"<i>Ah, yes! I make sure to keep these in stock for the season! Though not many people around here really buy these anymore… I can sell these to you for a decent price. Let's say about 100 gems?</i>\"");
-			doYesNo(buyDecorations, bookMenu);
+			doYesNo(buyDecorations, miscMenu);
 		}
 		
 		private function buyDecorations():void {
@@ -452,7 +462,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			clearOutput();
 			if (player.gems < 100) {
 				outputText("\n\nGiacomo sighs, indicating you need 100 gem to purchase this item.");
-				doNext(bookMenu);
+				doNext(miscMenu);
 			}
 			else {
 				outputText("\n\nYou decided to buy the seed. It’s actually fairly large and light brown in color. Other than that it just looks like an ordinary seed. Maybe you'll plant it later to see what it'll grow intoYou buy the package filled with holiday decorations. Inside are shiny, colorful ornaments, garland, and lights. You can't help but think this will be perfect for decorating the tree back at camp. <b>You acquired Holiday Decorations.</b>");
@@ -460,7 +470,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				statScreenRefresh();
 				flags[kFLAGS.CHRISTMAS_TREE_LEVEL] = 6;
 				player.createKeyItem("Decorations", 0, 0, 0, 0);
-				doNext(bookMenu);
+				doNext(miscMenu);
 			}
 		}
 		
@@ -469,11 +479,11 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			clearOutput();
 			if (player.hasKeyItem("Torch") > 0) {
 				outputText("<b>You already have Torch.</b>");
-				doNext(bookMenu);
+				doNext(miscMenu);
 				return;
 			}
 			outputText("Giacomo shrugs.  \"<i>You may think this item to be unnecessary but it’s in the kit of any smart adventurers wishing to explore nowadays, who knows it might even save your life. Only 100 gems, I recommend it, really.</i>\"");
-			doYesNo(buyTorch, bookMenu);
+			doYesNo(buyTorch, miscMenu);
 		}
 		
 		private function buyTorch():void {
@@ -481,14 +491,14 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			clearOutput();
 			if (player.gems < 100) {
 				outputText("\n\nGiacomo sighs, indicating you need 100 gem to purchase this item.");
-				doNext(bookMenu);
+				doNext(miscMenu);
 			}
 			else {
 				outputText("The crazy merchant nods satisfied when you hand him over hundred gems and in exchange gives you a torch.");
 				player.gems -= 100;
 				statScreenRefresh();
 				player.createKeyItem("Torch", 0, 0, 0, 0);
-				doNext(bookMenu);
+				doNext(miscMenu);
 			}
 		}
 		
@@ -555,6 +565,72 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				player.gems -= 100;
 				statScreenRefresh();
 				inventory.takeItem(consumables.B__BOOK, bookMenu);
+			}
+		}
+		
+		private function pitchRedManuscript():void {
+			spriteSelect(23);
+			clearOutput();
+			outputText("Giacomo holds up a red manuscript.  \"<i>While you may not find value in this as a simple manuscript,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some usefull spell!  I will offer the super-cheap price of 125 gem!</i>\"");
+			doYesNo(buyRedManuscript, bookMenu);
+		}
+		
+		private function buyRedManuscript():void {
+			spriteSelect(23);
+			clearOutput();
+			if (player.gems < 125) {
+				outputText("\n\nGiacomo sighs, indicating you need 125 gem to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nThe crazy merchant nods satisfied when you hand him over a one hundred twenty five gems and in exchange gives you a red manuscript.");
+				player.gems -= 125;
+				statScreenRefresh();
+				inventory.takeItem(consumables.RMANUSC, bookMenu);
+			}
+		}
+		
+		private function pitchCrimsonJade():void {
+			spriteSelect(23);
+			clearOutput();
+			outputText("Giacomo holds up a crimson jade.  \"<i>While you may not find value in this as a simple jade,</i>\", Giacomo waves, \"<i>you never know what you may learn from it!  Maybe even some usefull soulskill!  I will offer the super-cheap price of 125 gem!</i>\"");
+			doYesNo(buyCrimsonJade, bookMenu);
+		}
+		
+		private function buyCrimsonJade():void {
+			spriteSelect(23);
+			clearOutput();
+			if (player.gems < 125) {
+				outputText("\n\nGiacomo sighs, indicating you need 125 gem to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nThe crazy merchant nods satisfied when you hand him over a one hundred twenty five gems and in exchange gives you a red manuscript.");
+				player.gems -= 125;
+				statScreenRefresh();
+				inventory.takeItem(consumables.CRIMS_J, bookMenu);
+			}
+		}
+		
+		private function pitchElementalistsTome():void {
+			spriteSelect(23);
+			clearOutput();
+			outputText("Giacomo holds up an Elementalist’s Tome.  \"<i>While you may not find value in this as a simple tome,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  I will offer the super-cheap price of 1,000 gem!</i>\"");
+			doYesNo(buyElementalistsTome, bookMenu);
+		}
+		
+		private function buyElementalistsTome():void {
+			spriteSelect(23);
+			clearOutput();
+			if (player.gems < 1000) {
+				outputText("\n\nGiacomo sighs, indicating you need 1,000 gem to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nThe crazy merchant nods satisfied when you hand him over thousand gems and in exchange gives you an Elementalist’s Tome.");
+				player.gems -= 1000;
+				statScreenRefresh();
+				inventory.takeItem(weaponsrange.E_TOME_, bookMenu);
 			}
 		}
 		

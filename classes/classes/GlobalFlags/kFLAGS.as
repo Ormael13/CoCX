@@ -1299,14 +1299,14 @@ public static const EXCELLIA_MALE_COW_KIDS:int                                  
 public static const EXCELLIA_FEMALE_KIDS:int                                   		= 1291;
 public static const EXCELLIA_MALE_KIDS:int                                   		= 1292;
 public static const EASTER_BUNNY_EGGS_STORED:int                                   	= 1293;
-public static const UNKNOWN_FLAG_NUMBER_01294:int                                   = 1294;
+public static const UNKNOWN_FLAG_NUMBER_01294:int 		                            = 1294;
 public static const UNKNOWN_FLAG_NUMBER_01295:int                                   = 1295;
 public static const UNKNOWN_FLAG_NUMBER_01296:int                                   = 1296;
 public static const UNKNOWN_FLAG_NUMBER_01297:int                                   = 1297;
 public static const UNKNOWN_FLAG_NUMBER_01298:int                                   = 1298;
 public static const UNKNOWN_FLAG_NUMBER_01299:int                                   = 1299;
 public static const KAIBA_SHELFS:int                                   				= 1300;
-public static const UNKNOWN_FLAG_NUMBER_01301:int                                   = 1301;
+public static const MARAE_ISLAND:int                                   				= 1301;
 public static const UNKNOWN_FLAG_NUMBER_01302:int                                   = 1302;
 public static const UNKNOWN_FLAG_NUMBER_01303:int                                   = 1303;
 public static const UNKNOWN_FLAG_NUMBER_01304:int                                   = 1304;
@@ -2410,14 +2410,14 @@ public static const AYANE_FOLLOWER:int                               			    = 24
 public static const AYANE_02396:int                                   = 2402;				//Not Yet Used Flag
 public static const AYANE_02397:int                                   = 2403;				//Not Yet Used Flag
 public static const AYANE_02404:int                                   = 2404;				//Not Yet Used Flag
-public static const AYANE_02405:int                                   = 2405;				//Not Yet Used Flag
-public static const AYANE_02406:int                                   = 2406;				//Not Yet Used Flag
-public static const LULA_AFFECTION:int            			                        = 2407;	//Not Yet Used Flag
-public static const LULA_FOLLOWER:int                       			            = 2408;	//Not Yet Used Flag
-public static const LULA_LVL_UP:int                                   				= 2409;	//Not Yet Used Flag
-public static const LULA_DEFEATS_COUNTER:int                                   		= 2410;	//Not Yet Used Flag
-public static const LULA_02411:int                                   = 2411;				//Not Yet Used Flag
-public static const LULA_02412:int                                   = 2412;				//Not Yet Used Flag
+public static const ASUKA_AFFECTION:int                               				= 2405;	//Not Yet Used Flag
+public static const ASUKA_FOLLOWER:int                                				= 2406;	//Not Yet Used Flag
+public static const ASUKA_LVL_UP:int            			          				= 2407;	//Not Yet Used Flag
+public static const ASUKA_DEFEATS_COUNTER:int						  				= 2408;	//Not Yet Used Flag
+public static const LULA_AFFECTION:int                                				= 2409;	//Not Yet Used Flag
+public static const LULA_FOLLOWER:int                                 				= 2410;	//Not Yet Used Flag
+public static const LULA_LVL_UP:int                                   				= 2411;	//Not Yet Used Flag
+public static const LULA_DEFEATS_COUNTER:int                          				= 2412;	//Not Yet Used Flag
 public static const CEANI_AFFECTION:int                               			    = 2413;
 public static const CEANI_FOLLOWER:int                           			        = 2414;
 public static const CEANI_ARCHERY_TRAINING:int                         	            = 2415;
@@ -2618,7 +2618,7 @@ public static const UNKNOWN_FLAG_NUMBER_02609:int                               
 public static const UNKNOWN_FLAG_NUMBER_02610:int                                   = 2610;//lvl 72		//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02611:int                                   = 2611;//lvl 102	//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02612:int                                   = 2612;//lvl 102	//Not Yet Used Flag
-public static const TED_02613:int                                   = 2613;								//Not Yet Used Flag
+public static const TED_02613:int                                   				= 2613;				//Not Yet Used Flag
 public static const TED_WRATH:int                                   				= 2614;
 public static const TED_DEFEATS_COUNTER:int                                   		= 2615;
 public static const TED_LVL_UP:int                                   				= 2616;
@@ -2642,9 +2642,9 @@ public static const DINAH_HIPS_ASS_SIZE:int                                   		
 public static const DINAH_SPELLS_CASTED:int                                   		= 2634;
 public static const UNKNOWN_FLAG_NUMBER_02635:int                                   = 2635;//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02636:int                                   = 2636;//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02637:int                                   = 2637;//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02638:int                                   = 2638;//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02639:int                                   = 2639;//Not Yet Used Flag
+public static const DARKKITSUNE_WARN_INT:int                                 	  	= 2637;//Warning to PC INT is lower than 15% + disables looping
+public static const DARKKITSUNE_WARN_WIS:int                                   		= 2638;//Warning to PC WIS is lower than 15% + disables looping
+public static const AIKO_DONE_KITSUNETJ:int                                  		= 2639;
 public static const AIKO_SPAR_VICTORIES:int                                   		= 2640;
 public static const AIKO_TIMES_MET:int                                   			= 2641;
 public static const AIKO_CORRUPTION:int                                   			= 2642;
@@ -2805,7 +2805,7 @@ public static const UNKNOWN_FLAG_NUMBER_02796:int                               
 public static const UNKNOWN_FLAG_NUMBER_02797:int                                   = 2797;
 public static const UNKNOWN_FLAG_NUMBER_02798:int                                   = 2798;
 public static const UNKNOWN_FLAG_NUMBER_02799:int                                   = 2799;
-public static const UNKNOWN_FLAG_NUMBER_02800:int                                   = 2800;
+public static const LUNA_TRIED_WORKING_AS_BARMAID:int								= 2800; // if the player didn't hire Luna at first, they suggest she try working at the Wet Bitch. If so, the player can ask Aunt Nancy how *that* went to read a funny scene   
 public static const UNKNOWN_FLAG_NUMBER_02801:int                                   = 2801;
 public static const UNKNOWN_FLAG_NUMBER_02802:int                                   = 2802;
 public static const UNKNOWN_FLAG_NUMBER_02803:int                                   = 2803;
@@ -2972,7 +2972,7 @@ public static const UNKNOWN_FLAG_NUMBER_02963:int                               
 public static const UNKNOWN_FLAG_NUMBER_02964:int                                   = 2964;
 public static const SECONDARY_STATS_SCALING:int                                     = 2965;
 public static const MELEE_DAMAGE_OVERHAUL:int                                   	= 2966;
-public static const UNKNOWN_FLAG_NUMBER_02967:int                                   = 2967;
+public static const INVT_MGMT_TYPE:int                                   			= 2967;//Toggles Inventory Management type between existing and new.
 public static const SPEED_SCALLING:int                                   			= 2968;
 public static const STRENGTH_SCALLING:int                                   		= 2969;
 public static const SPELLS_COOLDOWNS:int                                   			= 2970;
@@ -3006,4 +3006,4 @@ public static const LOW_STANDARDS_FOR_ALL:int                                   
 public static const HYPER_HAPPY:int                                                 = 2998;
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
 	}    
-}
+}

@@ -885,7 +885,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests4)) {
 					if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) > 4) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 1, -3);
-					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) > 6) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 2, -3);
+					if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) > 4) player.addStatusValue(StatusEffects.AdventureGuildQuests3, 2, -3);
 				}
 				if (flags[kFLAGS.AURORA_LVL] > 0.3 && flags[kFLAGS.AURORA_LVL] < 0.7) flags[kFLAGS.AURORA_LVL] += 0.05;
 				//Zenji training conuters
@@ -1267,7 +1267,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Kitsune hunger perk
 			if (player.kitsuneScore() >= 10) { //Check for being a kitsune enough
 				if (player.findPerk(PerkLib.KitsuneEnergyThirst) < 0) {
-					outputText("\nYou begin fantasising about pussies and cocks foaming at the idea of fucking or getting fucked. It would look like you aquired the kitsunes hunger for sex and can now feed from the life force extracted of the orgasms of your partners. \n\n(<b>Gained Perk: Kitsune Hunger</b>)\n");
+					outputText("\nYou begin fantasizing about pussies and cocks, foaming at the idea of fucking or getting fucked. It looks like you acquired the kitsune's hunger for sex and can now feed off the life force extracted from the orgasms of your partners. \n\n(<b>Gained Perk: Kitsune Hunger</b>)\n");
 					player.createPerk(PerkLib.KitsuneEnergyThirst, 0, 0, 0, 0);
 					needNext = true;
 				}
@@ -1275,10 +1275,63 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Kitsune hunger perk
 			if (player.kitsuneScore() < 10) { //Check for being a kitsune enough
 				if (player.findPerk(PerkLib.KitsuneEnergyThirst) > 0) {
-					outputText("\nYour mind clears up as becoming less of a kitsune you also lost the hunger for life force only sex could provide you. \n\n(<b>Lost Perk: Kitsune Hunger</b>)\n");
+					outputText("\nYour mind clears up as you become less of a kitsune. You also lost the hunger for life force only sex could provide you. \n\n(<b>Lost Perk: Kitsune Hunger</b>)\n");
 					player.removePerk(PerkLib.KitsuneEnergyThirst);
 					needNext = true;
 				}
+			}
+			/*
+			//Insane/corrupted Kitsune warning //No longer in dev. Just didn't work with the theme.
+			if (player.findPerk(PerkLib.DarkenedKitsune) >= 0 && player.inte/player.intStat.max <= 0.85 && flags[kFLAGS.DARKKITSUNE_WARN_INT] != 1){ //warning at 15 % loss. Considering by the time you get to kitsune tier, you should probably have a decent amount of each, 15% margin should be good.
+				SceneLib.darkenedKitsuneScene.splitPersonalityWarning(1)
+				flags[kFLAGS.DARKKITSUNE_WARN_INT] = 1;
+				needNext = true;
+			}
+			else if (player.findPerk(PerkLib.DarkenedKitsune) >= 0 && player.wis/player.wisStat.max <= 0.85 && flags[kFLAGS.DARKKITSUNE_WARN_WIS] != 1){
+				SceneLib.darkenedKitsuneScene.splitPersonalityWarning(2)
+				flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 1;
+				needNext = true;
+			}
+			//Insane/corrupted Kitsune random events
+			if (player.findPerk(PerkLib.DarkenedKitsune) >= 0) {
+				if (rand(5)==0){
+				SceneLib.darkenedKitsuneScene.splitPersonalityRandom()
+				}
+				SceneLib.darkenedKitsuneScene.splitPersonalityStatchange()
+				needNext = true;
+			}
+			//Insane/corrupted Kitsune perk
+			if (player.kitsuneScore() >= 9 ){
+				if(player.cor >= 50 && player.findPerk(PerkLib.DarkenedKitsune) < 0) { //Check for being kitsune enough + high enough corruption
+					SceneLib.darkenedKitsuneScene.splitPersonalityFirstEncounter()
+					player.createPerk(PerkLib.DarkenedKitsune, 0,0,0,0);
+					outputText("<b>Gained Perk: Darkened Kitsune!</b>\n")
+					needNext = true;
+				}
+				else if (player.cor >= 95 && player.findPerk(PerkLib.DarkenedKitsune) >= 0 && player.inte/player.intStat.max < 0.75 && player.wis/player.wisStat.max < 0.75 && (rand(4)==0)){ //Bad end roll. Most likely will be tweaked since this is really small case.
+						SceneLib.darkenedKitsuneScene.splitPersonalityTakesOver()
+						//needNext = true;
+				}
+				else if (player.cor < 50 && player.findPerk(PerkLib.DarkenedKitsune) >= 0){ //Remove due to low corruption //Why is it triggering DarkKitsune random event here????
+					SceneLib.darkenedKitsuneScene.splitPersonalityLost(1)
+					player.removePerk(PerkLib.DarkenedKitsune);
+					outputText("<b>Lost Perk: Darkened Kitsune!</b>\n")
+					flags[kFLAGS.DARKKITSUNE_WARN_INT] = 0;
+					flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 0;
+					needNext = true;
+				}
+			}
+			else if (player.findPerk(PerkLib.DarkenedKitsune) >= 0){// Remove due to not kitsune
+				SceneLib.darkenedKitsuneScene.splitPersonalityLost(2)
+				player.removePerk(PerkLib.DarkenedKitsune);
+				outputText("<b>Lost Perk: Darkened Kitsune!</b>\n")
+				flags[kFLAGS.DARKKITSUNE_WARN_INT] = 0;
+				flags[kFLAGS.DARKKITSUNE_WARN_WIS] = 0;
+				needNext = true;
+			}
+			*/
+			if (player.findPerk(PerkLib.DarkenedKitsune) >=0){ //Just in case someone else has it, this will remove it. No longer in use. Read above.
+				player.removePerk(PerkLib.DarkenedKitsune);
 			}
 			//Kitsune energy thirst
 			if (player.hasStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)) {
@@ -1320,14 +1373,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Lustzerker perk
-			if ((player.tailType == Tail.SALAMANDER && player.lowerBody == LowerBody.SALAMANDER && player.arms.type == Arms.SALAMANDER) || (player.findPerk(PerkLib.Lustzerker) < 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
+			if ((player.salamanderScore() >= 9 || player.phoenixScore() >= 10) && (!player.hasPerk(PerkLib.Lustzerker))) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (player.findPerk(PerkLib.Lustzerker) < 0) {
 					outputText("\nAfter drinking the last drop another hip flask of firewater you starts to feel a weird, maybe slightly unpleasant feeling inside your body.  Like many tiny flames cursing inside your veins making you ponder whats just happening with your body.  Remembering about salamanders natural talent to enter a berserk-like state you quess that should be it.\n\n(<b>Gained Perk: Lustzerker</b>)");
 					player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
 					needNext = true;
 				}
 			}
-			else if (player.tailType != Tail.SALAMANDER && player.lowerBody != LowerBody.SALAMANDER && player.arms.type != Arms.SALAMANDER && player.findPerk(PerkLib.Lustzerker) >= 0 && player.perkv4(PerkLib.Lustzerker) == 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) < 0) { //Remove lustzerker perk if not meeting requirements
+			else if (player.salamanderScore() < 9 && player.phoenixScore() < 10 && player.findPerk(PerkLib.Lustzerker) >= 0 && player.perkv4(PerkLib.Lustzerker) == 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) < 0) { //Remove lustzerker perk if not meeting requirements
 				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that slight warm feeling inside your body anymore meaning for now no more lustzerking.\n\n(<b>Lost Perk: Lustzerker</b>)");
 				player.removePerk(PerkLib.Lustzerker);
 				needNext = true;
@@ -1395,29 +1448,33 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//needNext = true;
 			}
 			//Freezing Breath
-			if (player.faceType == Face.WOLF && player.findPerk(PerkLib.FreezingBreath) < 0 && player.hasKeyItem("Fenrir Collar") >= 0) {
+			if (player.faceType == Face.WOLF && player.findPerk(PerkLib.FreezingBreath) < 0 && player.hasKeyItem("Gleipnir Collar") >= 0) {
 				outputText("\nYou suddenly feel something raging in you wanting to be unleashed as it slowly climbs out of your chest. It rushes through your throat and you scream a titanic primordial roar as the air in front of you ondulate with a massive drop of temperature and everything covers with a thick layer of solid ice. You massage your throat for a moment noticing as thin volume of condensation constantly escape from your maw.\n\n(<b>Gained Perk: Freezing Breath</b>)\n");
 				player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.faceType != Face.WOLF && player.findPerk(PerkLib.FreezingBreath) >= 0 && player.hasKeyItem("Fenrir Collar") >= 0) {
-				outputText("\nAs you no longer are wolf like enough to maintain the form of a full Fenrir your breath no longer freeze the ambient air.\n\n<b>(Lost Perk: Freezing Breath)</b>\n");
+			else if (player.faceType != Face.WOLF && player.findPerk(PerkLib.FreezingBreath) >= 0 && player.hasKeyItem("Gleipnir Collar") >= 0) {
+				outputText("\nAs you no longer are wolf like enough to maintain the form of a full Fenrir your breath no longer freezes the ambient air.\n\n<b>(Lost Perk: Freezing Breath)</b>\n");
 				player.removePerk(PerkLib.FreezingBreath);
 				needNext = true;
 			}
+			//Fenrir Soulbite
+			if (player.faceType == Face.WOLF && player.findPerk(PerkLib.FenrirSpiritstrike) < 0 && player.hasKeyItem("Gleipnir Collar") >= 0) {
+				outputText("\nLike Fenrir you have aquired the ability to not only see souls but also tear them devouring your opponent very essence with every particularly devastating bite.\n\n(<b>Gained Perk: Spirit strike</b>)\n");
+				player.createPerk(PerkLib.FenrirSpiritstrike, 0, 0, 0, 0);
+				needNext = true;
+			}
 			//Fenrir Eyes
-			if (player.eyes.type != Eyes.FENRIR && player.hasKeyItem("Fenrir Collar") >= 0) {
-				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");
-				outputText("\n\n\"<i>How dare you throw away my gifts...</i>\"");
-				outputText("\n\nThe collar power suddenly forcefully surge through your body transforming you back. \"<b>You now have glowing icy eyes.</b>\"\n");
+			if (player.eyes.type != Eyes.FENRIR && player.hasKeyItem("Gleipnir Collar") >= 0) {
+				outputText("\nYou feel an icy chill run through your body as your divine nature reasserts itself over your body. You won't escape your destiny as the Fenrir so easily, it seems.");
+				outputText("\n\nYou cry out in pain as your eyes once more freeze over, eventually settling back into their proper form. \"<b>You now have glowing icy eyes.</b>\"\n");
 				CoC.instance.mutations.setEyeTypeAndColor(Eyes.FENRIR, "glacial blue");
 				needNext = true;
 			}
 			//Fenrir Back Ice Shards
-			if (player.rearBody.type != RearBody.FENRIR_ICE_SPIKES && player.hasKeyItem("Fenrir Collar") >= 0) {
-				outputText("\nThe bone chilling voice of Fenrir ring in the back of your mind.");
-				outputText("\n\n\"<i>How dare you throw away my gift...</i>\"");
-				outputText("\n\nThe collar power suddenly forcefully surge through your body transforming you back.\"<b>Your back is now covered with sharp ice spike constantly cooling the air around you. (Gained Frozen Waste and Cold Mastery perks)</b>\"\n");
+			if (player.rearBody.type != RearBody.FENRIR_ICE_SPIKES && player.hasKeyItem("Gleipnir Collar") >= 0) {
+				outputText("\nYou feel an icy chill run through your body as your divine nature reasserts itself over your body. You won't escape your destiny as the Fenrir so easily, it seems.");
+				outputText("\n\nYou double over as ice once more bursts from your skin down your spine, covering your back in frozen spikes.\"<b>Your back is now covered with sharp ice spike, constantly cooling the air around you. (Gained Frozen Waste and Cold Mastery perks)</b>\"\n");
 				player.rearBody.type = RearBody.FENRIR_ICE_SPIKES;
 				needNext = true;
 			}
@@ -1448,7 +1505,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText(")</b>\n");
 				needNext = true;
 			}
-			if ((player.sirenScore() >=  10 || player.harpyScore() >=  8) && !player.hasPerk(PerkLib.HarpySong)) {
+			if ((player.sirenScore() >=  10 || player.harpyScore() >=  8 || player.phoenixScore() >=  10 || player.thunderbirdScore() >=  10) && !player.hasPerk(PerkLib.HarpySong)) {
 				outputText("\n Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies. <b>Gained Perks: Harpy Song</b>)\n");
 				player.createPerk(PerkLib.HarpySong, 0, 0, 0, 0);
 				needNext = true;
@@ -1459,7 +1516,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.MelkieSong);
 				needNext = true;
 			}
-			if (player.sirenScore() < 10 && player.harpyScore() < 8 && player.hasPerk(PerkLib.HarpySong) && !player.hasPerk(PerkLib.MelkieLung)) {
+			if (player.sirenScore() < 10 && player.harpyScore() < 8 && player.phoenixScore() < 10 && player.thunderbirdScore() <  10 && player.hasPerk(PerkLib.HarpySong) && !player.hasPerk(PerkLib.HarpyHollowBones)) {
 				outputText("\n Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria. <b>Lost Perks: Harpy Song</b>)\n");
 				player.removePerk(PerkLib.HarpySong);
 				needNext = true;
@@ -1687,6 +1744,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.TitanicStrength);
 				needNext = true;
 			}
+			//VerdantMight
+			if ((player.plantScore() >= 11 || player.alrauneScore() >= 11) && !player.hasPerk(PerkLib.VerdantMight)) {
+				outputText("\nRaw green power flows throught your veins while being a plant hasnt done so much to improve your muscle your general sturdyness more then makes up for it allowing you to use your toughness instead of your strength when delivering blows. \n\n<b>(gained the Verdant Might perk!)</b>\n");
+				player.createPerk(PerkLib.VerdantMight,0,0,0,0);
+				needNext = true;
+			}
+			if (player.plantScore() < 11 && player.alrauneScore() < 11 && player.findPerk(PerkLib.VerdantMight) >= 0) {
+				outputText("\nBeing less of a plant you loose the ability to add your own sturdyness to your attacks.\n\n<b>(Lost the Verdant Might perk!)</b>\n");
+				player.removePerk(PerkLib.VerdantMight);
+				needNext = true;
+			}
 			//Enigma
 			if (player.sphinxScore() >= 14 && player.findPerk(PerkLib.Enigma) < 0) {
 				outputText("\nBeing a sphinx has granted you insight on many things including various secrets to martial combat, guess this is what they mean about using your smarts before your brawn.\n\n<b>(Gained Enigma perk!)</b>\n");
@@ -1698,7 +1766,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Enigma);
 				needNext = true;
 			}
-			//Lacta bovine immubities
+			//Lacta bovine immunities
 			if (player.cowScore() >= 10 && player.findPerk(PerkLib.LactaBovineImmunity) < 0) {
 				outputText("\nAs you become more of a lacta bovine you become increasingly obsessed with thoughts of horsecocks and cum sloshing balls, namely minotaur balls. While you are aware you naturally became addicted to minotaur cum you also know your nature as a lacta bovine will protect you from most of its harmful effects allowing you to sample the substance to your heart's content without risks.");
 				outputText(".\n\n<b>(Gained the Lacta Bovine Immunity perk!)</b>\n");
@@ -2123,12 +2191,24 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Harpy
-			if (player.lowerBody == LowerBody.HARPY && player.tailType == Tail.HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0) { //Make eggs big if harpied!
+			if ((player.lowerBody == LowerBody.HARPY || player.lowerBody == LowerBody.SALAMANDER) && (player.tailType == Tail.HARPY || player.tailType == Tail.THUNDERBIRD || player.tailType == Tail.SALAMANDER) && player.findPerk(PerkLib.HarpyWomb) >= 0) { //Make eggs big if harpied!
 				if (player.hasStatusEffect(StatusEffects.Eggs) && player.statusEffectv2(StatusEffects.Eggs) == 0) {
 					player.changeStatusValue(StatusEffects.Eggs, 2, 1);
 					outputText("\n<b>A familiar, motherly rumble lets you know that your harpy-like womb is growing your eggs nice and large.</b>\n");
 					needNext = true;
 				}
+			}
+			//Pregomania
+			if(player.isPregnant() && (player.isHarpy() || player.isGoblinoid()) && !player.statStore.hasBuff("Pregomania")){
+				player.statStore.removeBuffs("Impregnate me!!!");
+				player.statStore.addBuffObject({"tou.mult":0.20,"lib.mult":0.20}, "Pregomania",{text:"Your motherly instincs gives you increased resiliance and resolve."});
+				outputText("\nYou pat your belly in motherly delight instinctively knowing that you have been impregnated. Your body seldom radiates motherly wellbeing making you hardyer in order to protect your beloved children to be.\n");
+			}
+			if(!player.isPregnant() && (player.isHarpy() || player.isGoblinoid()) && player.statStore.hasBuff("Pregomania")){
+				player.statStore.removeBuffs("Pregomania");
+				outputText("\nNo longuer pregnant you feel a void in your belly as the need to be impregnated again claw at your mind.\n");
+				player.statStore.addBuffObject({lib:50}, "Impregnate me!!!",{text:"You strongly desire to be impregnated."});
+
 			}
 			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) { //All the hourly bee cock checks except the 'seek out the bee girl' check. That's in timeChangeLarge
 				if (player.cocks.length > 1) {

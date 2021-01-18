@@ -878,6 +878,25 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.lust = player.lust;
 		saveFile.data.teaseLevel = player.teaseLevel;
 		saveFile.data.teaseXP = player.teaseXP;
+		//Mastery
+		saveFile.data.masterySwordLevel = player.masterySwordLevel;
+		saveFile.data.masterySwordXP = player.masterySwordXP;
+		saveFile.data.masteryAxeLevel = player.masteryAxeLevel;
+		saveFile.data.masteryAxeXP = player.masteryAxeXP;
+		saveFile.data.masteryMaceHammerLevel = player.masteryMaceHammerLevel;
+		saveFile.data.masteryMaceHammerXP = player.masteryMaceHammerXP;
+		saveFile.data.masteryDuelingSwordLevel = player.masteryDuelingSwordLevel;
+		saveFile.data.masteryDuelingSwordXP = player.masteryDuelingSwordXP;
+		saveFile.data.masterySpearLevel = player.masterySpearLevel;
+		saveFile.data.masterySpearXP = player.masterySpearXP;
+		saveFile.data.dualWSLevel = player.dualWSLevel;
+		saveFile.data.dualWSXP = player.dualWSXP;
+		saveFile.data.dualWNLevel = player.dualWNLevel;
+		saveFile.data.dualWNXP = player.dualWNXP;
+		saveFile.data.dualWLLevel = player.dualWLLevel;
+		saveFile.data.dualWLXP = player.dualWLXP;
+		saveFile.data.dualWFLevel = player.dualWFLevel;
+		saveFile.data.dualWFXP = player.dualWFXP;
 		//Herbalism
 		saveFile.data.herbalismLevel = player.herbalismLevel;
 		saveFile.data.herbalismXP = player.herbalismXP;
@@ -1805,6 +1824,79 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.teaseLevel = 0;
 		else
 			player.teaseLevel = saveFile.data.teaseLevel;
+		//Mastery
+		if (saveFile.data.masterySwordXP == undefined)
+			player.masterySwordXP = 0;
+		else
+			player.masterySwordXP = saveFile.data.masterySwordXP;
+		if (saveFile.data.masterySwordLevel == undefined)
+			player.masterySwordLevel = 0;
+		else
+			player.masterySwordLevel = saveFile.data.masterySwordLevel;
+		if (saveFile.data.masteryAxeXP == undefined)
+			player.masteryAxeXP = 0;
+		else
+			player.masteryAxeXP = saveFile.data.masteryAxeXP;
+		if (saveFile.data.masteryAxeLevel == undefined)
+			player.masteryAxeLevel = 0;
+		else
+			player.masteryAxeLevel = saveFile.data.masteryAxeLevel;
+		if (saveFile.data.masteryMaceHammerXP == undefined)
+			player.masteryMaceHammerXP = 0;
+		else
+			player.masteryMaceHammerXP = saveFile.data.masteryMaceHammerXP;
+		if (saveFile.data.masteryMaceHammerLevel == undefined)
+			player.masteryMaceHammerLevel = 0;
+		else
+			player.masteryMaceHammerLevel = saveFile.data.masteryMaceHammerLevel;
+		if (saveFile.data.masteryDuelingSwordXP == undefined)
+			player.masteryDuelingSwordXP = 0;
+		else
+			player.masteryDuelingSwordXP = saveFile.data.masteryDuelingSwordXP;
+		if (saveFile.data.masteryDuelingSwordLevel == undefined)
+			player.masteryDuelingSwordLevel = 0;
+		else
+			player.masteryDuelingSwordLevel = saveFile.data.masteryDuelingSwordLevel;
+		if (saveFile.data.masterySpearXP == undefined)
+			player.masterySpearXP = 0;
+		else
+			player.masterySpearXP = saveFile.data.masterySpearXP;
+		if (saveFile.data.masterySpearLevel == undefined)
+			player.masterySpearLevel = 0;
+		else
+			player.masterySpearLevel = saveFile.data.masterySpearLevel;
+		if (saveFile.data.dualWSXP == undefined)
+			player.dualWSXP = 0;
+		else
+			player.dualWSXP = saveFile.data.dualWSXP;
+		if (saveFile.data.dualWSLevel == undefined)
+			player.dualWSLevel = 0;
+		else
+			player.dualWSLevel = saveFile.data.dualWSLevel;
+		if (saveFile.data.dualWNXP == undefined)
+			player.dualWNXP = 0;
+		else
+			player.dualWNXP = saveFile.data.dualWNXP;
+		if (saveFile.data.dualWNLevel == undefined)
+			player.dualWNLevel = 0;
+		else
+			player.dualWNLevel = saveFile.data.dualWNLevel;
+		if (saveFile.data.dualWLXP == undefined)
+			player.dualWLXP = 0;
+		else
+			player.dualWLXP = saveFile.data.dualWLXP;
+		if (saveFile.data.dualWLLevel == undefined)
+			player.dualWLLevel = 0;
+		else
+			player.dualWLLevel = saveFile.data.dualWLLevel;
+		if (saveFile.data.dualWFXP == undefined)
+			player.dualWFXP = 0;
+		else
+			player.dualWFXP = saveFile.data.dualWFXP;
+		if (saveFile.data.dualWFLevel == undefined)
+			player.dualWFLevel = 0;
+		else
+			player.dualWFLevel = saveFile.data.dualWFLevel;
 		//Herbalism
 		if (saveFile.data.herbalismXP == undefined)
 			player.herbalismXP = 0;

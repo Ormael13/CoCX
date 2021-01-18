@@ -1081,7 +1081,7 @@ import classes.lists.Gender;
 				outputText("\n\nThe two of you talk, holding an engaging conversation that discusses a range of unimportant but interesting topics. When his dick and knot finally deflate and send a cascade of satyr spunk dripping from your used hole you stay for a minute and enjoy his company. After a short time the two of you rise and you reward him with a kiss before grabbing your [armor] and pulling it on as you head back to camp.");
 			}
 			if (player.hasVagina()) {
-				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR, 50); //2x chance of pregnancy
 			}
 			else player.buttKnockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR, 50);
@@ -1375,7 +1375,7 @@ import classes.lists.Gender;
 			player.orgasm();
 			fatigue(25);
 			dynStats("lib", 1, "sens", 2, "cor", 1);
-			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 			else if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR);
 			player.buttKnockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR);
 			player.sexReward("cum","Anal");
@@ -1454,41 +1454,30 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Transformations
-			if (rand(3) == 0 && changes < changeLimit && player.skin.hasCoatOfType(Skin.SCALES)) {
-				outputText("\n\nYou feel an odd rolling sensation as your scales begin to shift, spreading and reforming as they grow and disappear, <b>becoming normal human skin</b>.");
-				player.skin.base.type = Skin.PLAIN;
-				player.skin.setBaseOnly();
-				changes++;
-			}
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.arms.type != Arms.HUMAN) {
-				outputText("\n\nYou feel a pleasant heat in your arms as smoke rises from them, <b>leaving normal human arms</b>.");
-				player.arms.type = Arms.HUMAN;
-				changes++;
-			}
-			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.lowerBody != LowerBody.CLOVEN_HOOFED) {
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.lowerBody != LowerBody.CLOVEN_HOOFED) {
 				outputText("\n\nYou feel an odd sensation in your lower region. Your [feet] shift and you hear bones cracking as they reform. Fur grows on your legs and soon you're looking at a <b>new pair of goat legs</b>.");
 				player.legCount = 2;
 				CoC.instance.mutations.setLowerBody(LowerBody.CLOVEN_HOOFED);
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CLOVEN_HOOFED && player.horns.type == Horns.GOAT && player.faceType != Face.HUMAN) {
-				outputText("\n\nYour face grows warm as suddenly your vision is engulfed in smoke, coughing and beating the smoke back you noticed a marked change in your features. Touching yourself you confirm you have a <b>normal human shaped face once again</b>.");
-				player.faceType = Face.HUMAN;
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CLOVEN_HOOFED && player.arms.type != Arms.HUMAN) {
+				outputText("\n\nYou feel a pleasant heat in your arms as smoke rises from them, <b>leaving normal human arms</b>.");
+				player.arms.type = Arms.HUMAN;
 				changes++;
 			}
-			if (rand(4) == 0 && changes < changeLimit && !player.hasScales() && player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.ELFIN) {
-				outputText("\n\nYou feel an odd shifting sensation on the side of your head and, reaching up to inspect it, find a <b>pair of fleshy pointed ears</b>. "); 
-				if (player.hasFur()) outputText("As you examine your new elvish ears you feel fur grow around them, matching the rest of you.");
-				CoC.instance.mutations.setEarType(Ears.ELFIN);
+			if (rand(3) == 0 && changes < changeLimit && player.tailType == 0) {
+				outputText("You feel an odd itchy sensation just above your [ass]. Twisting around to inspect it you find a short stubby tail that wags when you're happy. <b>You now have a goat tail.</b>");
+				CoC.instance.mutations.setTailType(Tail.GOAT);
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.horns.type == Horns.NONE) {
-				outputText("You begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
-				CoC.instance.mutations.setHornType(Horns.GOAT);
+			if (rand(3) == 0 && changes < changeLimit && player.tailType > 0 && player.lowerBody != LowerBody.GARGOYLE && player.tailType != Tail.GOAT) {
+				outputText("You [tail] suddenly goes numb. Looking back you see it changing, twisting and reforming into a <b>short stubby goat-like tail</b>.");
+				CoC.instance.mutations.setTailType(Tail.GOAT);
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.horns.type != Horns.GOAT && player.lowerBody != LowerBody.GARGOYLE && player.horns.type != Horns.ORCHID) {
-				outputText("You begin to feel an odd itching sensation as you feel your horns repositioning. Once it's over, you reach up and find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
+			if (rand(3) == 0 && changes < changeLimit && player.horns.type != Horns.GOAT && player.horns.type != Horns.ORCHID) {
+				if (player.horns.type == Horns.NONE)outputText("You begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
+				else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning. Once it's over, you reach up and find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
 				player.horns.count = 1;
 				CoC.instance.mutations.setHornType(Horns.GOAT);
 				changes++;
@@ -1498,7 +1487,22 @@ import classes.lists.Gender;
 				player.horns.count = 2;
 				changes++;
 			}
-			if (rand(4) == 0 && changes < changeLimit && player.antennae.type != Antennae.NONE) {
+			if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.GOAT && player.faceType != Face.HUMAN) {
+				outputText("\n\nYour face grows warm as suddenly your vision is engulfed in smoke, coughing and beating the smoke back you noticed a marked change in your features. Touching yourself you confirm you have a <b>normal human shaped face once again</b>.");
+				player.faceType = Face.HUMAN;
+				changes++;
+			}
+			if (rand(3) == 0 && changes < changeLimit && player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN) {
+				outputText("\n\nYou feel an odd shifting sensation on the side of your head and, reaching up to inspect it, find a <b>pair of fleshy pointed ears</b>. "); 
+				if (player.hasFur()) outputText("As you examine your new elvish ears you feel fur grow around them, matching the rest of you.");
+				CoC.instance.mutations.setEarType(Ears.ELFIN);
+				changes++;
+			}
+			if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0 && player.faceType == Face.HUMAN) {
+				CoC.instance.mutations.humanizeSkin();
+				changes++;
+			}
+			if (rand(3) == 0 && changes < changeLimit && player.antennae.type != Antennae.NONE) {
 				outputText("You feel heat blooming in your head, centered at your antennae.type. It is a feeling similar to the burn of alcohol. When you reach up to inspect them your hands find nothing but quickly dispersing smoke. <b>You no longer have a pair of antennae.type.</b>");
 				player.antennae.type = Antennae.NONE;
 				changes++;
@@ -1516,16 +1520,6 @@ import classes.lists.Gender;
 						break;
 					}
 				}
-				changes++;
-			}
-			if (rand(3) == 0 && changes < changeLimit && player.tailType == 0) {
-				outputText("You feel an odd itchy sensation just above your [ass]. Twisting around to inspect it you find a short stubby tail that wags when you're happy. <b>You now have a goat tail.</b>");
-				CoC.instance.mutations.setTailType(Tail.GOAT);
-				changes++;
-			}
-			if (rand(3) == 0 && changes < changeLimit && player.tailType > 0 && player.lowerBody != LowerBody.GARGOYLE && player.tailType != Tail.GOAT) {
-				outputText("You [tail] suddenly goes numb. Looking back you see it changing, twisting and reforming into a <b>short stubby goat-like tail</b>.");
-				CoC.instance.mutations.setTailType(Tail.GOAT);
 				changes++;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;

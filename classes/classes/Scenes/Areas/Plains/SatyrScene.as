@@ -431,7 +431,7 @@ private function willinglyBoneSatyr():void {
 //Pregnancy Stuff (Z)
 private function satyrPreggo():void {
 	if (player.hasVagina()) {
-		if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+		if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
         else player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR); //Satyrs can now fertilize eggs for ovipositing players
 	}
 	else {

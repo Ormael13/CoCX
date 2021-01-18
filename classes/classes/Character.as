@@ -242,7 +242,7 @@ import classes.Items.JewelryLib;
 		public function isPregnant():Boolean { return _pregnancyType != 0; }
 
 		public function isButtPregnant():Boolean { return _buttPregnancyType != 0; }
-	
+
 		//fertility must be >= random(0-beat)
 		//If arg == 1 then override any contraceptives and guarantee fertilization
 		public function knockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
@@ -736,6 +736,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.AscensionEndurance) >= 0) max += perkv1(PerkLib.AscensionEndurance) * 30;
 			max += level * 5;
+			if (level <= 6) max += level * 5;
 			if (findPerk(PerkLib.UnlockEndurance) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockEndurance2ndStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockEndurance3rdStage) >= 0) max += level * 5;
@@ -831,6 +832,8 @@ import classes.Items.JewelryLib;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude3;//+100
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude4;//+100
 			if (necklaceName == "soulmetal necklace") max += necklaceEffectMagnitude;//+100
+			max += level * 5;
+			if (level <= 6) max += level * 5;
 			if (findPerk(PerkLib.UnlockSpirit) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockSpirit2ndStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockSpirit3rdStage) >= 0) max += level * 5;
@@ -958,6 +961,8 @@ import classes.Items.JewelryLib;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude3;//+75 to +175
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude4;//+75 to +175
 			if (jewelryName == "Undefeated King's Signet" || jewelryName3 == "Undefeated King's Signet") max += 150;
+			max += level;
+			if (level <= 6) max += level;
 			if (findPerk(PerkLib.UnlockId) >= 0) max += level;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
 			if (findPerk(PerkLib.UnlockId3rdStage) >= 0) max += level;
@@ -1078,6 +1083,7 @@ import classes.Items.JewelryLib;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude3;
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude4;
 			max += level * 10;
+			if (level <= 6) max += level * 10;
 			if (findPerk(PerkLib.UnlockForce) >= 0) max += level * 10;
 			if (findPerk(PerkLib.UnlockForce2ndStage) >= 0) max += level * 10;
 			if (findPerk(PerkLib.UnlockForce3rdStage) >= 0) max += level * 10;
