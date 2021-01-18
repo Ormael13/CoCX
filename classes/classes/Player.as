@@ -2948,7 +2948,7 @@ use namespace CoC;
 				{name: 'wolf', score: wolfScore(), minscore: 4},
 				{name: 'werewolf', score: werewolfScore(), minscore: 12},
 				{name: 'fox', score: foxScore(), minscore: 4},
-				{name: 'fairy', score: fairyScore(), minscore: 19},
+				{name: 'fairy', score: fairyScore(), minscore: 23},
 				{name: 'ferret', score: ferretScore(), minscore: 4},
 				{name: 'cat', score: catScore(), minscore: 4},
 				{name: 'sphinx', score: sphinxScore(), minscore: 14},
@@ -3241,8 +3241,13 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "fairy") {
-				if (TopScore >= 19) {
-					race = "great fairy";
+				if (TopScore >= 23) {
+					if (TopScore >= 26) {
+						race = "fairy queen";
+					}
+					else{
+						race = "great fairy";
+					}
 				}
 			}
 			if (TopRace == "ferret") {
@@ -5241,6 +5246,12 @@ use namespace CoC;
 			if (!hasCoat() && fairyCounter > 0)
 				fairyCounter++;
 			if (skinType == Skin.PLAIN && skinAdj == "flawless")
+				fairyCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstream))
+				fairyCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstreamEvolved))
+				fairyCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstreamFinalForm))
 				fairyCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				fairyCounter += 50;
@@ -10998,11 +11009,22 @@ use namespace CoC;
 				}
 			}
 			if (fairyScore() >= 23) {
-				maxStrCap2 -= 25;
-				maxTouCap2 -= 10;
-				maxSpeCap2 += 200;
-				maxIntCap2 += 200;
-				currentSen += 20;
+				if (fairyScore() >= 26) {
+					maxStrCap2 -= 25;
+					maxTouCap2 -= 10;
+					maxSpeCap2 += 200;
+					maxIntCap2 += 200;
+					maxWisCap2 += 45;
+					currentSen += 20;
+				}
+				else { 345
+					maxStrCap2 -= 25;
+					maxTouCap2 -= 10;
+					maxSpeCap2 += 185;
+					maxIntCap2 += 185;
+					maxWisCap2 += 30;
+					currentSen += 20;
+				}
 			}//+10/10-20
 			if (cancerScore() >= 8) {
 				if (cancerScore() >= 20) {
