@@ -1291,102 +1291,122 @@
 		<if test="playerHasWeaponBannedArms">
 		
 			<if test="PlayerHasAStaff">
-				<if test="PlayerHasAStaffHoly">
-					<show part="weapon/staffHoly"/>
+				<if test="PlayerHasAStaffHoly or PlayerHasAStaffUnholy">
+					<if test="PlayerHasAStaffHoly">
+						<show part="weapon/staffHoly"/>
+					</if>
+					<if test="PlayerHasAStaffUnholy">
+						<show part="weapon/staffUnholy"/>
+					</if>
+					<else>
+						<show part="weapon/staffGeneric"/>
+					</else>
 				</if>
-				<if test="PlayerHasAStaffUnholy">
-					<show part="weapon/staffUnholy"/>
-				</if>
-				<else>
-					<show part="weapon/staffGeneric"/>
-				</else>
 			</if>
 			
 			<if test="PlayerHasASword">
-				<if test="PlayerHasAswordHoly">
-					<show part="weapon/swordHoly"/>
+				<if test="PlayerHasAswordHoly or PlayerHasASwordUnholy">
+					<if test="PlayerHasAswordHoly">
+						<show part="weapon/swordHoly"/>
+					</if>
+					<if test="PlayerHasASwordUnholy">
+						<show part="weapon/swordUnholy"/>
+					</if>
+					<else>
+						<show part="weapon/swordGeneric"/>
+					</else>
 				</if>
-				<if test="PlayerHasASwordUnholy">
-					<show part="weapon/swordUnholy"/>
-				</if>
-				<else>
-					<show part="weapon/swordGeneric"/>
-				</else>
 			</if>
 			
 			<if test="PlayerHasAnAxe">
-				<if test="PlayerHasAnAxeHoly">
-					<show part="weapon/axeHoly"/>
+				<if test="PlayerHasAnAxeHoly or PlayerHasAnAxeUnholy">
+					<if test="PlayerHasAnAxeHoly">
+						<show part="weapon/axeHoly"/>
+					</if>
+					<if test="PlayerHasAnAxeUnholy">
+						<show part="weapon/axeUnholy"/>
+					</if>
+					<else>
+						<show part="weapon/axeGeneric"/>
+					</else>
 				</if>
-				<if test="PlayerHasAnAxeUnholy">
-					<show part="weapon/axeUnholy"/>
-				</if>
-				<else>
-					<show part="weapon/axeGeneric"/>
-				</else>
 			</if>
 			
 			<if test="PlayerHasAHammer">
-				<if test="PlayerHasAHammerHoly">
-					<show part="weapon/hammerHoly"/>
+				<if test="PlayerHasAHammerHoly or PlayerHasAHammerUnholy">
+					<if test="PlayerHasAHammerHoly">
+						<show part="weapon/hammerHoly"/>
+					</if>
+					<if test="PlayerHasAHammerUnholy">
+						<show part="weapon/hammerUnholy"/>
+					</if>
+					<else>
+						<show part="weapon/hammerGeneric"/>
+					</else>
 				</if>
-				<if test="PlayerHasAHammerUnholy">
-					<show part="weapon/hammerUnholy"/>
-				</if>
-				<else>
-					<show part="weapon/hammerGeneric"/>
-				</else>
 			</if>
 			
 			<if test="PlayerHasASpear">
-				<if test="PlayerHasASpearHoly">
-					<show part="weapon/spearHoly"/>
+				<if test="PlayerHasASpearHoly or PlayerHasASpearUnholy">
+					<if test="PlayerHasASpearHoly">
+						<show part="weapon/spearHoly"/>
+					</if>
+					<if test="PlayerHasASpearUnholy">
+						<show part="weapon/spearUnholy"/>
+					</if>
+					<else>
+						<show part="weapon/spearGeneric"/>
+					</else>
 				</if>
-				<if test="PlayerHasASpearUnholy">
-					<show part="weapon/spearUnholy"/>
-				</if>
-				<else>
-					<show part="weapon/spearGeneric"/>
-				</else>
 			</if>
 			
 			<if test="PlayerHasKatana">
-				<if test="PlayerHasKatanaHoly">
-					<show part="weapon/katanaHoly"/>
+				<if test="PlayerHasKatanaHoly or PlayerHasKatanaUnholy">
+					<if test="PlayerHasKatanaHoly">
+						<show part="weapon/katanaHoly"/>
+					</if>
+					<if test="PlayerHasKatanaUnholy">
+						<show part="weapon/katanaUnholy"/>
+					</if>
+					<else>
+						<show part="weapon/katanaGeneric"/>
+					</else>
 				</if>
-				<if test="PlayerHasKatanaUnholy">
-					<show part="weapon/katanaUnholy"/>
-				</if>
-				<else>
-					<show part="weapon/katanaGeneric"/>
-				</else>
 			</if>
 			
 			<if test="PlayerHasRapier">			
-				<if test="PlayerHasRapierHoly">
-					<show part="weapon/rapierHoly"/>
+				<if test="PlayerHasRapierHoly or PlayerHasRapierUnholy">
+					<if test="PlayerHasRapierHoly">
+						<show part="weapon/rapierHoly"/>
+					</if>
+					<if test="PlayerHasRapierUnholy">
+						<show part="weapon/rapierUnholy"/>
+					</if>
+					<else>
+						<show part="weapon/rapierGeneric"/>
+					</else>
 				</if>
-				<if test="PlayerHasRapierUnholy">
-					<show part="weapon/rapierUnholy"/>
-				</if>
-				<else>
-					<show part="weapon/rapierGeneric"/>
-				</else>
 			</if>
 			
 			<if test="PlayerHasAShield">
-				<if test="PlayerHasSanctuary">
-					<if test="PlayerHasSanctuaryPure">
-						<show part="shield/shieldHoly"/>
-					</if>
-					<if test="PlayerHasSanctuaryCorrupt">
-						<show part="shield/shieldUnholy"/>
-					</if>
+				<if test="PlayerHasSanctuary">					
+					<if test="PlayerHasSanctuaryPure or PlayerHasSanctuaryCorrupt">
+						<if test="PlayerHasSanctuaryPure">
+							<show part="weapon/shieldHoly"/>
+						</if>
+						<if test="PlayerHasRapierUnholy">
+							<show part="weapon/shieldUnholy"/>
+						</if>
+						<else>
+							<show part="weapon/shieldHoly"/>
+						</else>
+					</if>				
 					<else>
 						<show part="shield/shieldGeneric"/>
 					</else>
 				</if>
 			</if>
+			
 		</if>
 
 		<!-- ANTENNAE AREA -->
