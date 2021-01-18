@@ -4590,7 +4590,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (ferretScore() >= 4)
 				grandchimeraCounter++;
-			if (kitsuneScore() >= 14 && tailType == 13 && tailCount == 9)
+			if (kitsuneScore() >= 18 && tailType == 13 && tailCount == 9)
 				grandchimeraCounter++;
 			if (demonScore() >= 16 && hasPerk(PerkLib.Phylactery))
 				grandchimeraCounter++;
@@ -11263,7 +11263,7 @@ use namespace CoC;
 			}//+20/10-20
 			if (kitsuneScore() >= 5) {
 				if (kitsuneScore() >= 9 && tailType == 13 && tailCount >= 2) {
-					if (kitsuneScore() >= 14 && tailCount == 9) {
+					if (kitsuneScore() >= 18 && tailCount == 9) {
 						if (kitsuneScore() >= 26 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
 							maxStrCap2 -= 50;
 							maxSpeCap2 += 40;
