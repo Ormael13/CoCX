@@ -15284,6 +15284,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0 && changes < changeLimit && player.arms.type == Arms.DEVIL) {
             if (player.horns.type == Horns.NONE) {
                 outputText("You begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of tall-standing goat horns. <b>You now have a pair of goat horns.</b>");
+                setHornType(Horns.GOAT, 2);
             } else if (player.horns.type == Horns.GOAT) {
                 outputText("\n\n");
                 outputText("You groan in pleasure mixed pains as your horns begins to split into a second pair ornating the side of your head. If the original pair made you look fiendish your four horns now definitively denounce your demonic nature. <b> You now have four devil horns curving backward behind your head.</b>");
