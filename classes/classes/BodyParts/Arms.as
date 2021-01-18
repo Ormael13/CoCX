@@ -34,9 +34,9 @@ public class Arms extends BodyPart {
 	public static const GARGOYLE:int		= 9;
 	EnumValue.add(Types, GARGOYLE, "GARGOYLE", {name:"gargoyle", armSlam: true});
 	public static const WOLF:int			= 10;
-	EnumValue.add(Types, WOLF, "WOLF", {name:"wolf", claw: true});
+	EnumValue.add(Types, WOLF, "WOLF", {name:"wolf", claw: true, canPounce: true});
 	public static const LION:int			= 11;
-	EnumValue.add(Types, LION, "LION", {name:"lion", claw: true});
+	EnumValue.add(Types, LION, "LION", {name:"lion", claw: true, canPounce: true});
 	public static const KITSUNE:int			= 12;
 	EnumValue.add(Types, KITSUNE, "KITSUNE", {name:"kitsune", claw: true});
 	public static const FOX:int				= 13;
@@ -64,7 +64,7 @@ public class Arms extends BodyPart {
 	public static const GARGOYLE_2:int		= 24;
 	EnumValue.add(Types, GARGOYLE_2, "GARGOYLE_2", {name:"gargoyle", claw: true});
 	public static const CAT:int				= 25;
-	EnumValue.add(Types, CAT, "CAT", {name:"cat", claw: true});
+	EnumValue.add(Types, CAT, "CAT", {name:"cat", claw: true, canPounce: true});
 	public static const AVIAN:int			= 26;
 	EnumValue.add(Types, AVIAN, "AVIAN", {name:"avian"});
 	public static const GRYPHON:int			= 27;
@@ -78,7 +78,7 @@ public class Arms extends BodyPart {
 	public static const ORC:int				= 31;
 	EnumValue.add(Types, ORC, "ORC", {name:"orc"});
 	public static const DISPLACER:int		= 32;
-	EnumValue.add(Types, DISPLACER, "DISPLACER", {name:"displacer", claw: true});
+	EnumValue.add(Types, DISPLACER, "DISPLACER", {name:"displacer", claw: true, canPounce: true});
 	public static const CAVE_WYRM:int		= 33;
 	EnumValue.add(Types, CAVE_WYRM, "CAVE_WYRM", {name:"cave wyrm", claw: true});
 	public static const HINEZUMI:int		= 34;

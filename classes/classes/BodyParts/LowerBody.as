@@ -38,7 +38,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const GOO:int                   = 8;
 	EnumValue.add(Types, GOO, "GOO", {name: "goo"});
 	public static const CAT:int                   = 9;
-	EnumValue.add(Types, CAT, "CAT", {name: "cat"});
+	EnumValue.add(Types, CAT, "CAT", {name: "cat",canPounce: true});
 	public static const LIZARD:int                = 10;
 	EnumValue.add(Types, LIZARD, "LIZARD", {name: "lizard"});
 	public static const PONY:int                  = 11;
@@ -84,11 +84,11 @@ public class LowerBody extends SaveableBodyPart {
 	public static const PLANT_ROOT_CLAWS:int      = 32;
 	EnumValue.add(Types, PLANT_ROOT_CLAWS, "PLANT_ROOT_CLAWS", {name: "root feet"});
 	public static const WOLF:int                  = 33;
-	EnumValue.add(Types, WOLF, "WOLF", {name: "wolf"});
+	EnumValue.add(Types, WOLF, "WOLF", {name: "wolf",canPounce: true});
 	public static const PLANT_FLOWER:int          = 34;
 	EnumValue.add(Types, PLANT_FLOWER, "PLANT_FLOWER", {name: "plant flower", tentacle: true});
 	public static const LION:int                  = 35;
-	EnumValue.add(Types, LION, "LION", {name: "lion"});
+	EnumValue.add(Types, LION, "LION", {name: "lion",canPounce: true});
 	public static const YETI:int                  = 36;
 	EnumValue.add(Types, YETI, "YETI", {name: "yeti"});
 	public static const ORCA:int                  = 37;

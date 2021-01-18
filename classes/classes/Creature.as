@@ -2850,60 +2850,18 @@ public class Creature extends Utils
 			return (cocks[0].cockLength >= 20);
 		}
 
-		public static const canFlyWings:Array = [
-			Wings.BEE_LIKE_LARGE,
-			Wings.BAT_LIKE_LARGE,
-			Wings.BAT_LIKE_LARGE_2,
-			Wings.FEATHERED_LARGE,
-			Wings.FEATHERED_PHOENIX,
-			Wings.DRACONIC_LARGE,
-			Wings.DRACONIC_HUGE,
-			Wings.GIANT_DRAGONFLY,
-			Wings.MANTIS_LIKE_LARGE,
-			Wings.MANTIS_LIKE_LARGE_2,
-			Wings.MANTICORE_LIKE_LARGE,
-			Wings.GARGOYLE_LIKE_LARGE,
-			Wings.BAT_ARM,
-			Wings.VAMPIRE,
-			Wings.FEY_DRAGON_WINGS,
-			Wings.FEATHERED_AVIAN,
-			Wings.FEATHERED_SPHINX,
-			Wings.FEATHERED_ALICORN,
-			Wings.NIGHTMARE,
-			Wings.ETHEREAL_WINGS,
-			Wings.DEVILFEATHER,
-			Wings.FAIRY,
-			//Wings.,
-			//Wings.,
-			//Wings.,
-		];
-
 		//PC can fly?
 		public function canFly():Boolean
 		{
 			//web also makes false!
 			if (hasStatusEffect(StatusEffects.Web))
 				return false;
-			return canFlyWings.indexOf(wings.type) != -1;
+			return Wings.Types[wings.type].canFly;
 		}
-
-		public static const canPounceLeg:Array = [
-			LowerBody.CAT,
-			LowerBody.LION,
-			LowerBody.WOLF,
-		];
-
-		public static const canPounceArms:Array = [
-			Arms.CAT,
-			Arms.DISPLACER,
-			Arms.LION,
-			Arms.SPHINX,
-			Arms.WOLF,
-		];
 
 		public function canPounce():Boolean
 		{
-			return canPounceLeg.indexOf(lowerBody) != -1 && canPounceArms.indexOf(arms.type) != -1;
+			return (LowerBody.Types[lowerBody].canPounce && Arms.Types[arms.type].canPounce);
 		}
 
 

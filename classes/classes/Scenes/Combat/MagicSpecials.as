@@ -3311,6 +3311,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.shieldName == "spirit focus") basicfoxfiredmgmulti += .2;
 		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") basicfoxfiredmgmulti += .2;
 		if (player.headjewelryName == "fox hairpin") basicfoxfiredmgmulti += .2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) basicfoxfiredmgmulti += .4;
 		if (player.hasPerk(PerkLib.StarSphereMastery)) basicfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) basicfoxfiredmgmulti += .5;
 		//Hosohi No Tama and bonus damage
@@ -3364,6 +3365,7 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmg *= 0.25;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.4;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
@@ -3425,6 +3427,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.shieldName == "spirit focus") corruptedfoxfiredmgmulti += .2;
 		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") corruptedfoxfiredmgmulti += .2;
 		if (player.headjewelryName == "fox hairpin") corruptedfoxfiredmgmulti += .2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) corruptedfoxfiredmgmulti += .4;
 		if (player.hasPerk(PerkLib.StarSphereMastery)) corruptedfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) corruptedfoxfiredmgmulti += .25;
 		//Hosohi No Tama bonus damage
@@ -3547,6 +3550,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.shieldName == "spirit focus") fusedfoxfiredmgmulti += .2;
 		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") fusedfoxfiredmgmulti += .2;
 		if (player.headjewelryName == "fox hairpin") fusedfoxfiredmgmulti += .2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) fusedfoxfiredmgmulti += .4;
 		if (player.hasPerk(PerkLib.StarSphereMastery)) fusedfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) fusedfoxfiredmgmulti += .5;
 		//Hosohi No Tama and Fusion bonus damage
@@ -3603,6 +3607,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.KitsuneThyroidGlandEvolved) && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.4;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
@@ -3663,6 +3668,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.shieldName == "spirit focus") purefoxfiredmgmulti += .2;
 		if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono" || player.armorName == "black kimono") purefoxfiredmgmulti += .2;
 		if (player.headjewelryName == "fox hairpin") purefoxfiredmgmulti += .2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) purefoxfiredmgmulti += .4;
 		if (player.hasPerk(PerkLib.StarSphereMastery)) purefoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) purefoxfiredmgmulti += .25;
 		//Hosohi No Tama bonus damage
@@ -3724,6 +3730,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.KitsuneThyroidGlandEvolved) && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.4;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
@@ -3780,16 +3787,18 @@ public class MagicSpecials extends BaseCombatContent {
 		kitsuneTerror2();
 	}
 	public function kitsuneTerror2():void {
+		var ItemMod:Number = 0;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) ItemMod += 1;
 		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.hasPerk(PerkLib.KitsuneThyroidGland)) {
-			player.createStatusEffect(StatusEffects.CooldownTerror, 3, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.CooldownTerror, 5-ItemMod, 0, 0, 0);
 			fatigue(200, USEFATG_MAGIC_NOBM);
 		}
 		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.hasPerk(PerkLib.KitsuneThyroidGland)) {
-			player.createStatusEffect(StatusEffects.CooldownTerror, 6, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.CooldownTerror, 6-ItemMod, 0, 0, 0);
 			fatigue(100, USEFATG_MAGIC_NOBM);
 		}
 		else {
-			player.createStatusEffect(StatusEffects.CooldownTerror, 9, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.CooldownTerror, 10-ItemMod, 0, 0, 0);
 			fatigue(50, USEFATG_MAGIC_NOBM);
 		}
 		//Inflicts fear and reduces enemy SPD.
@@ -3803,8 +3812,12 @@ public class MagicSpecials extends BaseCombatContent {
 			if (monster.spe >= 21) speedDebuff += 20;
 			else speedDebuff += 20 - monster.spe;
 		}
+		if (player.hasPerk(PerkLib.RacialParagon)) speedDebuff *= 1.5;
+		if (player.hasPerk(PerkLib.Apex)) speedDebuff *= 1.5;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) speedDebuff *= 1.5;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) speedDebuff *= 1.5;
 		monster.speStat.core.value -= speedDebuff;
-		monster.createStatusEffect(StatusEffects.Fear, 2, speedDebuff, 0, 0);
+		monster.createStatusEffect(StatusEffects.Fear, 2+ItemMod, speedDebuff, 0, 0);
 		enemyAI();
 	}
 
@@ -3823,16 +3836,18 @@ public class MagicSpecials extends BaseCombatContent {
 		kitsuneIllusion2();
 	}
 	public function kitsuneIllusion2():void {
+		var ItemMod:Number = 0;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) ItemMod += 2;
 		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.hasPerk(PerkLib.KitsuneThyroidGland)) {
-			player.createStatusEffect(StatusEffects.CooldownIllusion,3,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownIllusion,5-ItemMod,0,0,0);
 			fatigue(200, USEFATG_MAGIC_NOBM);
 		}
 		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.hasPerk(PerkLib.KitsuneThyroidGland)) {
-			player.createStatusEffect(StatusEffects.CooldownIllusion,6,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownIllusion,6-ItemMod,0,0,0);
 			fatigue(100, USEFATG_MAGIC_NOBM);
 		}
 		else {
-			player.createStatusEffect(StatusEffects.CooldownIllusion,9,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownIllusion,10-ItemMod,0,0,0);
 			fatigue(50, USEFATG_MAGIC_NOBM);
 		}
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -3842,7 +3857,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Decrease enemy speed and increase their susceptibility to lust attacks if already 110% or more
 		outputText("The world begins to twist and distort around you as reality bends to your will, " + monster.a + monster.short + "'s mind blanketed in the thick fog of your illusions.");
-		player.createStatusEffect(StatusEffects.Illusion,3,0,0,0);
+		player.createStatusEffect(StatusEffects.Illusion,3+ItemMod,0,0,0);
 //	//Check for success rate. Maximum 100% with over 90 Intelligence difference between PC and monster. There are diminishing returns. The more you cast, the harder it is to apply another layer of illusion.
 //	if(player.inte/10 + rand(20) > monster.inte/10 + 9 + monster.statusEffectv1(StatusEffects.Illusion) * 2) {
 //	//Reduce speed down to -20. Um, are there many monsters with 110% lust vulnerability?
@@ -3891,7 +3906,11 @@ public class MagicSpecials extends BaseCombatContent {
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.5;
+		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.5;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.5;
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 2;
 		lustDmg *= 0.1;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);

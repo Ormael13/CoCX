@@ -551,6 +551,7 @@
         <cell rect="935,101,40,50" name="clothe/purpleKimonoTop" dx="83" dy="72"/>
         <cell rect="981,101,40,50" name="clothe/blackKimonoTop" dx="83" dy="72"/>
         <cell rect="1591,216,80,108" name="clothe/TamamoeNoMaeKimonoTop" dx="65" dy="63"/>
+		<cell rect="1673,216,80,108" name="clothe/TamamoeNoMaeKimonoLowerTop" dx="65" dy="63"/>
         <cell rect="1017,325,80,104" name="clothe/goblinTechnomancerClothe" dx="64" dy="55"/>
         <cell rect="722,543,130,90" name="clothe/fairyQueenDressFront" dx="40" dy="62"/>
         <cell rect="853,434,80,104" name="clothe/qipaoRedClothe" dx="64" dy="55"/>
@@ -635,13 +636,29 @@
         <cell rect="296,1490,49,29" name="breasts/Dliliraune" dx="43" dy="68"/>
         <cell rect="296,1520,49,29" name="breasts/Fliliraune" dx="43" dy="68"/>
         <cell rect="122,1620,80,102" name="weapon/staffGeneric" dx="38" dy="55"/>
+		<cell rect="122,1726,80,102" name="weapon/staffHoly" dx="38" dy="55"/>
+		<cell rect="122,1832,80,102" name="weapon/staffUnholy" dx="38" dy="55"/>
         <cell rect="212,1620,80,90" name="weapon/swordGeneric" dx="38" dy="55"/>
+		<cell rect="212,1726,80,90" name="weapon/swordHoly" dx="38" dy="55"/>
+		<cell rect="212,1832,80,90" name="weapon/swordUnholy" dx="38" dy="55"/>
         <cell rect="302,1620,80,90" name="weapon/axeGeneric" dx="38" dy="55"/>
+		<cell rect="302,1726,80,90" name="weapon/axeHoly" dx="38" dy="55"/>
+		<cell rect="302,1832,80,90" name="weapon/axeUnholy" dx="38" dy="55"/>
         <cell rect="392,1620,80,90" name="weapon/hammerGeneric" dx="38" dy="55"/>
+		<cell rect="392,1726,80,90" name="weapon/hammerHoly" dx="38" dy="55"/>
+		<cell rect="392,1832,80,90" name="weapon/hammerUnholy" dx="38" dy="55"/>
         <cell rect="482,1620,80,107" name="weapon/spearGeneric" dx="39" dy="53"/>
+		<cell rect="482,1729,80,107" name="weapon/spearHoly" dx="39" dy="53"/>
+		<cell rect="482,1838,80,107" name="weapon/spearUnholy" dx="39" dy="53"/>
         <cell rect="572,1620,80,90" name="shield/shieldGeneric" dx="66" dy="60"/>
+		<cell rect="572,1726,80,90" name="shield/shieldHoly" dx="66" dy="60"/>
+		<cell rect="572,1832,80,90" name="shield/shieldUnholy" dx="66" dy="60"/>
         <cell rect="662,1620,80,90" name="weapon/rapierGeneric" dx="38" dy="55"/>
+		<cell rect="662,1726,80,90" name="weapon/rapierHoly" dx="38" dy="55"/>
+		<cell rect="662,1832,80,90" name="weapon/rapierUnholy" dx="38" dy="55"/>
         <cell rect="752,1620,80,90" name="weapon/katanaGeneric" dx="38" dy="55"/>
+		<cell rect="752,1726,80,90" name="weapon/katanaHoly" dx="38" dy="55"/>
+		<cell rect="752,1832,80,90" name="weapon/katanaUnholy" dx="38" dy="55"/>
     </spritemap>
     <spritemap file="hair.png">
         <cell rect="1,70,59,65" name="hair/0" dx="75" dy="21"/>
@@ -1272,29 +1289,103 @@
 
 		<!-- WEAPON AREA -->
 		<if test="playerHasWeaponBannedArms">
+		
 			<if test="PlayerHasAStaff">
-				<show part="weapon/staffGeneric"/>
+				<if test="PlayerHasAStaffHoly">
+					<show part="weapon/staffHoly"/>
+				</if>
+				<if test="PlayerHasAStaffUnholy">
+					<show part="weapon/staffUnholy"/>
+				</if>
+				<else>
+					<show part="weapon/staffGeneric"/>
+				</else>
 			</if>
+			
 			<if test="PlayerHasASword">
-				<show part="weapon/swordGeneric"/>
+				<if test="PlayerHasAswordHoly">
+					<show part="weapon/swordHoly"/>
+				</if>
+				<if test="PlayerHasASwordUnholy">
+					<show part="weapon/swordUnholy"/>
+				</if>
+				<else>
+					<show part="weapon/swordGeneric"/>
+				</else>
 			</if>
+			
 			<if test="PlayerHasAnAxe">
-				<show part="weapon/axeGeneric"/>
+				<if test="PlayerHasAnAxeHoly">
+					<show part="weapon/axeHoly"/>
+				</if>
+				<if test="PlayerHasAnAxeUnholy">
+					<show part="weapon/axeUnholy"/>
+				</if>
+				<else>
+					<show part="weapon/axeGeneric"/>
+				</else>
 			</if>
+			
 			<if test="PlayerHasAHammer">
-				<show part="weapon/hammerGeneric"/>
+				<if test="PlayerHasAHammerHoly">
+					<show part="weapon/hammerHoly"/>
+				</if>
+				<if test="PlayerHasAHammerUnholy">
+					<show part="weapon/hammerUnholy"/>
+				</if>
+				<else>
+					<show part="weapon/hammerGeneric"/>
+				</else>
 			</if>
+			
 			<if test="PlayerHasASpear">
-				<show part="weapon/spearGeneric"/>
+				<if test="PlayerHasASpearHoly">
+					<show part="weapon/spearHoly"/>
+				</if>
+				<if test="PlayerHasASpearUnholy">
+					<show part="weapon/spearUnholy"/>
+				</if>
+				<else>
+					<show part="weapon/spearGeneric"/>
+				</else>
 			</if>
+			
 			<if test="PlayerHasKatana">
-				<show part="weapon/katanaGeneric"/>
+				<if test="PlayerHasKatanaHoly">
+					<show part="weapon/katanaHoly"/>
+				</if>
+				<if test="PlayerHasKatanaUnholy">
+					<show part="weapon/katanaUnholy"/>
+				</if>
+				<else>
+					<show part="weapon/katanaGeneric"/>
+				</else>
 			</if>
-			<if test="PlayerHasRapier">
-				<show part="weapon/rapierGeneric"/>
+			
+			<if test="PlayerHasRapier">			
+				<if test="PlayerHasRapierHoly">
+					<show part="weapon/rapierHoly"/>
+				</if>
+				<if test="PlayerHasRapierUnholy">
+					<show part="weapon/rapierUnholy"/>
+				</if>
+				<else>
+					<show part="weapon/rapierGeneric"/>
+				</else>
 			</if>
+			
 			<if test="PlayerHasAShield">
-				<show part="shield/shieldGeneric"/>
+				<if test="PlayerHasSanctuary">
+					<if test="PlayerHasSanctuaryPure">
+						<show part="shield/shieldHoly"/>
+					</if>
+					<if test="PlayerHasSanctuaryCorrupt">
+						<show part="shield/shieldUnholy"/>
+					</if>
+					<else>
+						<show part="shield/shieldGeneric"/>
+					</else>
+				</if>
 			</if>
 		</if>
 
@@ -3696,11 +3787,27 @@
 				<if test="(legCount!=4) and (showLegClothing)">
 					<show part="clotheLegs/blackKimonoBottom"/>
 				</if>
-				<if test="showLegClothing">
+				<if test="showArmClothing">
 					<show part="clothe/blackKimonoSleeves"/>
 				</if>
 			</if>
 		</if>
+		<!-- Kimono Legendary -->
+		<if test="legendKimono">
+			<if test="showClothing">
+				<show part="clothe/TamamoeNoMaeKimonoTop"/>
+				<if test="(legCount!=4) and (showLegClothing)">
+					<show part="clothe/TamamoeNoMaeKimonoLowerTop"/>
+					<show part="clotheLegs/TamamoeNoMaeKimonoLegs"/>
+					<show part="clothCape/TamamoeNoMaeKimonoUnder"/>
+				</if>
+				<if test="showArmClothing">
+					<show part="clothe/TamamoeNoMaeKimonoSleeves"/>
+					<show part="clothCape/TamamoeNoMaeKimonoCollar"/>
+				</if>
+			</if>
+		</if>
+
 
 		<!-- Platemail, Marae armor and Ebonweave platemail -->
 		<if test="platemail">
@@ -3892,7 +3999,7 @@
 			</if>
 		</if>
 		<if test="comfyBikiniPanty">
-			<if test="showClothing">
+			<if test="showLegClothing">
 				<show part="panty/comfortablePanty"/>
 				<hide part="penis/*"/>
 				<hide part="balls/*"/>

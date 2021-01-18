@@ -116,6 +116,8 @@ package classes.Items
 				PerkLib.WizardsEndurance,30,0,0,0);
 		public const SSARMOR:Armor = new Armor("SSArmor","SS.Armor","spider-silk armor","a suit of spider-silk armor",25,0,1500,"This armor is as white as the driven snow.  It's crafted out of thousands of strands of spider-silk into an impenetrable protective suit.  The surface is slightly spongy, but so tough you wager most blows would bounce right off.","Heavy");
 		public const SCANSC:ArmorWithPerk = new ScandalousSuccubusClothing();
+		public const TCKIMO:ArmorWithPerk = new TamamoNoMaeCursedKimono();
+		public const IBKIMO:ArmorWithPerk = new InariBlessedKimono();
 		public const SWHBIKNI:ArmorWithPerk = new ArmorWithPerk("SWhBikini","S Wh Bikini","Sexy White Bikini","a Sexy White Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your revealing chain bikini allows you access to 'Seduce', an improved form of 'Tease'.", false, false);
 		public const SYEBIKNI:ArmorWithPerk = new ArmorWithPerk("SYeBikini","S Ye Bikini","Sexy Yellow Bikini","a Sexy Yellow Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light",
