@@ -1134,13 +1134,13 @@ public class PerkLib
 				"You've chosen the 'Elements of the orthodox Path' perk, your time spent on studing elements allowing you to call those mentioned in more orthodox writings.");
 		public static const ElvishPeripheralNervSys:PerkType = mk("Elvish Peripheral NervSys", "Elvish Peripheral NervSys",
 				"Your Elvish Peripheral NervSys is giving you +5% of max core Spe as phantom Spe and allow to keep Elven Sense even without elf arms/legs.",
-				"You've chosen the 'Elvish Peripheral NervSys' perk, due to repeadly balancing on line between life and death your peripheral nervous system started to work like that of elfs.").withBuffs({'spe.mult':0.05});
+				"You've chosen the 'Elvish Peripheral NervSys' perk, due to repeadly balancing on line between life and death your peripheral nervous system started to work like that of elfs.")
 		public static const ElvishPeripheralNervSysEvolved:PerkType = mk("Elvish Peripheral NervSys (Evolved)", "Elvish Peripheral NervSys (Evolved)",
 				"Your Elvish Peripheral NervSys is giving you +10% of max core Spe as phantom Spe.",
-				"You've chosen the 'Elvish Peripheral NervSys (Evolved)' perk, your peripheral nervous system continue subtile changes leading to be more elf-like.").withBuffs({'spe.mult':0.10});
+				"You've chosen the 'Elvish Peripheral NervSys (Evolved)' perk, your peripheral nervous system continue subtile changes leading to be more elf-like.")
 		public static const ElvishPeripheralNervSysFinalForm:PerkType = mk("Elvish Peripheral NervSys (Final Form)", "Elvish Peripheral NervSys (Final Form)",
 				"Your Elvish Peripheral NervSys is giving you +15% of max core Spe as phantom Spe, increase your natural evasion, decrease melee/range accuracy penalty when using multiattack options.",
-				"You've chosen the 'Elvish Peripheral NervSys (Final Form)' perk, your peripheral nervous system reached it final changes to reassamble elvish peripheral nervous system.").withBuffs({'spe.mult':0.15});
+				"You've chosen the 'Elvish Peripheral NervSys (Final Form)' perk, your peripheral nervous system reached it final changes to reassamble elvish peripheral nervous system.")
 		public static const Embodiment:PerkType = mk("Embodiment", "Embodiment",
 				"You embody the principles of the monks... as usual you should only expect the 10% soulforce gain.",
 				"You've chosen the 'Embodiment' perk, gaining +10% max Soulforce.");
@@ -1280,14 +1280,14 @@ public class PerkLib
 				"Increases fertility rating by 15 and cum volume by up to 50%.",
 				"You've chosen the 'Fertility+' perk, making it easier to get pregnant.  It also increases your cum volume by up to 50% (if appropriate)!");
 		public static const FeyArcaneBloodstream:PerkType = mk("Fey Arcane Bloodstream", "Fey Arcane Bloodstream",
-				"Your Fey Arcane Bloodstream is granting you along with an eternal lifespan increased mana recovery.",
-				"You've chosen the 'Fey Arcane Bloodstream' perk, gaining along with an eternal lifespan increased mana recovery.").withBuffs({'int.mult':0.05});;
+				"Your Fey Arcane Bloodstream is granting you along with an eternal lifespan increased mana recovery and increased magical power.",
+				"You've chosen the 'Fey Arcane Bloodstream' perk, gaining along with an eternal lifespan increased mana recovery and increased magical power.").withBuffs({'int.mult':0.05});;
 		public static const FeyArcaneBloodstreamEvolved:PerkType = mk("Fey Arcane Bloodstream (Evolved)", "Fey Arcane Bloodstream (Evolved)",
-				"Your Fey Arcane Bloodstream is granting you an even greater mana recovery. Furthermore your chaotic magic is more likely to explode into additionnal effects.",
-				"You've chosen the 'Fey Arcane Bloodstream (Evolved)' perk, gaining an even greater mana recovery. Furthermore your chaotic magic is more likely to explode into additionnal effects.").withBuffs({'int.mult':0.10});
+				"Your Fey Arcane Bloodstream is granting you an even greater mana recovery and further increased magical power. Furthermore your chaotic magic is more likely to explode into additionnal effects.",
+				"You've chosen the 'Fey Arcane Bloodstream (Evolved)' perk, gaining an even greater mana recovery and further increased magical power. Furthermore your chaotic magic is more likely to explode into additionnal effects.").withBuffs({'int.mult':0.10});
 		public static const FeyArcaneBloodstreamFinalForm:PerkType = mk("Fey Arcane Bloodstream (Final Form)", "Fey Arcane Bloodstream (Final Form)",
-				"Your Fey Arcane Bloodstream grants you an even greater mana recovery. Furthermore your chaotic magic is more likely to explode into additionnal effects and its damage is increased by 50%.",
-				"You've chosen the 'Fey Arcane Bloodstream (Final Form)' perk, gaining an even greater mana recovery. Furthermore your chaotic magic is more likely to explode into additionnal effects and its damage is increased by 50%.").withBuffs({'int.mult':0.15});
+				"Your Fey Arcane Bloodstream grants you an even greater mana recovery and further increased magical power. Furthermore your chaotic magic is more likely to explode into additionnal effects and its damage is increased by 50%.",
+				"You've chosen the 'Fey Arcane Bloodstream (Final Form)' perk, gaining an even greater mana recovery and further increased magical power. Furthermore your chaotic magic is more likely to explode into additionnal effects and its damage is increased by 50%.").withBuffs({'int.mult':0.20});
 		public static const FirstAttackElementals:PerkType = mk("First Attack: Elementals", "First Attack: Elementals",
 				"Instead of melee attacking in PC place one of summoned elementals will attack before PC allowing latter to take any action even personaly attaking with melee weapon.",
 				"You've chosen the 'First Attack: Elementals' perk, allowing your summoned elementals to attack independly from you.");
