@@ -170,6 +170,7 @@ use namespace CoC;
 		{
 			this.a = " ";
 			this.short = "Chaos Chimera";
+			this.imageName = "chaoschimera";
 			this.long = "You are fighting a twelve-foot tall chimera. The beast has no less than four heads, a dragon, a lion, a goat, and a snake. All of them are ready to tear you apart. Its massive dragon-like wings hint at its ability to fly and the snake head on its tail is likely highly venomous. The goat head seems to regularly chant an incantation too, you can’t dismiss the likelihood that this beast uses magic.";
 			this.tallness = 12 * 9;
 			this.createCock(24, 5, CockTypesEnum.DEMON);

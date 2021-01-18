@@ -425,6 +425,26 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireDragonMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxDragonMutations() > 0;
+				},
+				text: "Free Dragon Mutation Slot",
+				type: "dragonmutation"
+			});
+			return this;
+		}
+		public function requireKitsuneMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxKitsuneMutations() > 0;
+				},
+				text: "Free Kitsune Mutation Slot",
+				type: "kitsunemutation"
+			});
+			return this;
+		}
 		public function requireHungerEnabled():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {
