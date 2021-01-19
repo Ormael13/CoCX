@@ -11034,7 +11034,7 @@ use namespace CoC;
 					maxWisCap2 += 45;
 					currentSen += 20;
 				}
-				else { 345
+				else {
 					maxStrCap2 -= 25;
 					maxTouCap2 -= 10;
 					maxSpeCap2 += 185;
