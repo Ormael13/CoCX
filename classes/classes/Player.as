@@ -9871,6 +9871,8 @@ use namespace CoC;
 				bloodsteamMutations--;
 			if (findPerk(PerkLib.HinezumiBurningBlood) >= 0)
 				bloodsteamMutations--;
+			if (findPerk(PerkLib.FeyArcaneBloodstream) >= 0)
+				bloodsteamMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				bloodsteamMutations++;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
