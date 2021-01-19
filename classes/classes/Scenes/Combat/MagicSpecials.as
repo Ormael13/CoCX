@@ -120,16 +120,18 @@ public class MagicSpecials extends BaseCombatContent {
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			// Terror
 			bd = buttons.add("Terror", kitsuneTerror,"Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  ");
+			var terror:Number = 9;
+			if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) terror -= 1;
 			if (player.tailCount == 9 && player.hasPerk(PerkLib.KitsuneThyroidGland)) {
-				bd.toolTipText += "\nWould go into cooldown after use for: 3 rounds\n";
+				bd.toolTipText += "\nWould go into cooldown after use for: "+(terror-4)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 				bd.requireFatigue(200);
 			} else if (player.tailCount == 9 || player.hasPerk(PerkLib.KitsuneThyroidGland)) {
-				bd.toolTipText += "\nWould go into cooldown after use for: 6 rounds\n";
+				bd.toolTipText += "\nWould go into cooldown after use for: "+(terror-2)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 				bd.requireFatigue(100);
 			} else {
-				bd.toolTipText += "\nWould go into cooldown after use for: 9 rounds\n";
+				bd.toolTipText += "\nWould go into cooldown after use for: "+terror+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 				bd.requireFatigue(50);
 			}
@@ -148,17 +150,19 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			// Illusion
-			bd = buttons.add("Illusion",kitsuneIllusion,"Warp the reality around your opponent to temporary boost your evasion for 3 rounds and arouse target slightly.");
+			bd = buttons.add("Illusion", kitsuneIllusion, "Warp the reality around your opponent to temporary boost your evasion for 3 rounds and arouse target slightly.");
+			var illusion:Number = 9;
+			if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) illusion -= 1;
 			if (player.tailType == 13 && player.tailCount == 9 && player.hasPerk(PerkLib.KitsuneThyroidGland)) {
-				bd.toolTipText += "\nWould go into cooldown after use for: 3 rounds\n";
+				bd.toolTipText += "\nWould go into cooldown after use for: "+(illusion-4)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 				bd.requireFatigue(200);
 			} else if ((player.tailType == 13 && player.tailCount == 9) || player.hasPerk(PerkLib.KitsuneThyroidGland)) {
-				bd.toolTipText += "\nWould go into cooldown after use for: 6 rounds\n";
+				bd.toolTipText += "\nWould go into cooldown after use for: "+(illusion-2)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 				bd.requireFatigue(100);
 			} else {
-				bd.toolTipText += "\nWould go into cooldown after use for: 9 rounds\n";
+				bd.toolTipText += "\nWould go into cooldown after use for: "+illusion+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 				bd.requireFatigue(50);
 			}
@@ -3794,11 +3798,11 @@ public class MagicSpecials extends BaseCombatContent {
 			fatigue(200, USEFATG_MAGIC_NOBM);
 		}
 		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.hasPerk(PerkLib.KitsuneThyroidGland)) {
-			player.createStatusEffect(StatusEffects.CooldownTerror, 6-ItemMod, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.CooldownTerror, 7-ItemMod, 0, 0, 0);
 			fatigue(100, USEFATG_MAGIC_NOBM);
 		}
 		else {
-			player.createStatusEffect(StatusEffects.CooldownTerror, 10-ItemMod, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.CooldownTerror, 9-ItemMod, 0, 0, 0);
 			fatigue(50, USEFATG_MAGIC_NOBM);
 		}
 		//Inflicts fear and reduces enemy SPD.
@@ -3837,17 +3841,17 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function kitsuneIllusion2():void {
 		var ItemMod:Number = 0;
-		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) ItemMod += 2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) ItemMod += 1;
 		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.hasPerk(PerkLib.KitsuneThyroidGland)) {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,5-ItemMod,0,0,0);
 			fatigue(200, USEFATG_MAGIC_NOBM);
 		}
 		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.hasPerk(PerkLib.KitsuneThyroidGland)) {
-			player.createStatusEffect(StatusEffects.CooldownIllusion,6-ItemMod,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownIllusion,7-ItemMod,0,0,0);
 			fatigue(100, USEFATG_MAGIC_NOBM);
 		}
 		else {
-			player.createStatusEffect(StatusEffects.CooldownIllusion,10-ItemMod,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownIllusion,9-ItemMod,0,0,0);
 			fatigue(50, USEFATG_MAGIC_NOBM);
 		}
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {

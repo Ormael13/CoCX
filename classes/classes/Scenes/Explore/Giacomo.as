@@ -181,12 +181,12 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		private function miscMenu():void {
 			spriteSelect(23);
 			clearOutput();
+			menu();
 			if (Holidays.nieveHoliday()) {
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(11, "Mysterious Seed", pitchMysteriousSeed);
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 5) addButton(12, "Decorations", pitchDecorations);
 			}
 			addButton(13, "Torch", pitchTorch);
-			menu();
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}

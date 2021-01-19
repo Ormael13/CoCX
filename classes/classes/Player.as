@@ -765,7 +765,7 @@ use namespace CoC;
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorMDef += (2 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRAGON) armorMDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER) armorMDef += (4 * newGamePlusMod);
-			if (findPerk(PerkLib.Vulpesthropy) >= 0) armorMDef += 10 * newGamePlusMod;
+			//if (findPerk(PerkLib.Vulpesthropy) >= 0) armorMDef += 10 * newGamePlusMod;
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
 				if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorMDef += (10 * newGamePlusMod);
 				if (tailType == Tail.GARGOYLE || tailType == Tail.GARGOYLE_2) armorMDef += (10 * newGamePlusMod);
@@ -3272,7 +3272,7 @@ use namespace CoC;
 							} else {
 								race = "kitsune";
 							}
-						} else if (TopScore >= 18) {
+						} else if (TopScore >= 16) {
 							if (tailCount == 9 && isTaur()) {
 								race = "nine tailed kitsune-taur";
 							} else if (tailCount == 9) {
@@ -4410,7 +4410,7 @@ use namespace CoC;
 			var chimeraCounter:Number = 0;
 			if (catScore() >= 8)
 				chimeraCounter++;
-			if (nekomataScore() >= 12)
+			if (nekomataScore() >= 10)
 				chimeraCounter++;
 			if (cheshireScore() >= 11)
 				chimeraCounter++;
@@ -4573,6 +4573,8 @@ use namespace CoC;
 		public function grandchimeraScore():Number {
 			Begin("Player","racialScore","grandchimera");
 			var grandchimeraCounter:Number = 0;
+			if (nekomataScore() >= 12)
+				grandchimeraCounter++;
 			if (dragonScore() >= 24)
 				grandchimeraCounter++;
 			if (jabberwockyScore() >= 20)
@@ -4585,7 +4587,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (ferretScore() >= 4)
 				grandchimeraCounter++;
-			if (kitsuneScore() >= 14 && tailType == 13 && tailCount == 9)
+			if (kitsuneScore() >= 16 && tailType == 13 && tailCount == 9)
 				grandchimeraCounter++;
 			if (demonScore() >= 16 && hasPerk(PerkLib.Phylactery))
 				grandchimeraCounter++;
@@ -5710,18 +5712,9 @@ use namespace CoC;
 			//If the character has ears other than fox ears, -1
 			if (ears.type != Ears.FOX)
 				kitsuneCounter--;
-			if (tailType == Tail.FOX && tailCount >= 2 && tailCount < 4)
-				kitsuneCounter++;
-				kitsuneCounter2++;
-			if (tailType == Tail.FOX && tailCount >= 4 && tailCount < 6)
-				kitsuneCounter += 4;
-				kitsuneCounter2 += 2;
-			if (tailType == Tail.FOX && tailCount >= 6 && tailCount < 9)
-				kitsuneCounter += 6;
-				kitsuneCounter2 += 3;
-			if (tailType == Tail.FOX && tailCount == 9)
-				kitsuneCounter += 9;
-				kitsuneCounter2 += 4;
+			if (tailType == Tail.FOX && tailCount >= 2)
+				kitsuneCounter += tailCount;
+				kitsuneCounter2 += tailCount;
 			if (tailType != Tail.FOX || (tailType == Tail.FOX && tailCount < 2))
 				kitsuneCounter -= 7;
 			if (skin.base.pattern == Skin.PATTERN_MAGICAL_TATTOO || hasFur())
@@ -5752,31 +5745,37 @@ use namespace CoC;
 			if (vaginalCapacity() >= 8000)
 				kitsuneCounter++;
 			//When character get Hoshi no tama
-			if (findPerk(PerkLib.StarSphereMastery) >= 0)
+			if (hasPerk(PerkLib.StarSphereMastery))
 				kitsuneCounter++;
-			if (findPerk(PerkLib.EnlightenedKitsune) >= 0 || findPerk(PerkLib.CorruptedKitsune) >= 0)
+			if (hasPerk(PerkLib.EnlightenedKitsune) || hasPerk(PerkLib.CorruptedKitsune))
 				kitsuneCounter++;
-			if (findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0)
+			if (hasPerk(PerkLib.NinetailsKitsuneOfBalance))
 				kitsuneCounter++;
-			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0)
+			if (hasPerk(PerkLib.KitsuneThyroidGland))
 				kitsuneCounter++;
-			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0)
+			if (hasPerk(PerkLib.KitsuneThyroidGlandEvolved))
 				kitsuneCounter++;
-			if (findPerk(PerkLib.KitsuneThyroidGlandFinalForm) >= 0)
+			if (hasPerk(PerkLib.KitsuneThyroidGlandFinalForm))
 				kitsuneCounter++;
-			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0 && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
+			if (hasPerk(PerkLib.KitsuneParathyroidGlands))
 				kitsuneCounter++;
-			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
+			if (hasPerk(PerkLib.KitsuneParathyroidGlandsEvolved))
 				kitsuneCounter++;
-			if (findPerk(PerkLib.KitsuneThyroidGlandFinalForm) >= 0 && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
+			if (hasPerk(PerkLib.KitsuneParathyroidGlandsFinalForm))
 				kitsuneCounter++;
-			if (findPerk(PerkLib.KitsunesDescendant) >= 0 || findPerk(PerkLib.BloodlineKitsune) >= 0)
+			if ((hasPerk(PerkLib.KitsuneThyroidGland) || hasPerk(PerkLib.KitsuneParathyroidGlands)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+				kitsuneCounter++;
+			if ((hasPerk(PerkLib.KitsuneThyroidGlandEvolved) || hasPerk(PerkLib.KitsuneParathyroidGlandsEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+				kitsuneCounter++;
+			if ((hasPerk(PerkLib.KitsuneThyroidGlandFinalForm) || hasPerk(PerkLib.KitsuneParathyroidGlandsFinalForm)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+				kitsuneCounter++;
+			if (hasPerk(PerkLib.KitsunesDescendant) || hasPerk(PerkLib.BloodlineKitsune))
 				kitsuneCounter += 2;
-			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				kitsuneCounter += 50;
-			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && kitsuneCounter >= 4)
+			if (hasPerk(PerkLib.AscensionHybridTheory) && kitsuneCounter >= 4)
 				kitsuneCounter++;
-			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && kitsuneCounter >= 8)
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && kitsuneCounter >= 8)
 				kitsuneCounter++;
 			if (kitsuneCounter2 < 5) kitsuneCounter = kitsuneCounter2;
 			if (isGargoyle()) kitsuneCounter = 0;
@@ -10041,6 +10040,22 @@ use namespace CoC;
 				parathyroidglandMutations++;
 			return parathyroidglandMutations;
 		}
+		public function maxDragonMutations():Number {
+			var dragonMutations:Number = 1;
+			if (findPerk(PerkLib.DraconicBones) >= 0) dragonMutations--;
+			if (findPerk(PerkLib.DraconicHeart) >= 0) dragonMutations--;
+			if (findPerk(PerkLib.DraconicLungs) >= 0) dragonMutations--;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) dragonMutations++;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) dragonMutations++;
+			return dragonMutations;
+		}
+		public function maxKitsuneMutations():Number {
+			var kitsuneMutations:Number = 1;
+			if (findPerk(PerkLib.KitsuneParathyroidGlands) >= 0) kitsuneMutations--;
+			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0) kitsuneMutations--;
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) kitsuneMutations++;
+			return kitsuneMutations;
+		}
 
 		public function lactationQ():Number
 		{
@@ -11241,36 +11256,30 @@ use namespace CoC;
 			}//+20/10-20
 			if (kitsuneScore() >= 5) {
 				if (kitsuneScore() >= 9 && tailType == 13 && tailCount >= 2) {
-					if (kitsuneScore() >= 14 && tailCount == 9) {
-						if (kitsuneScore() >= 26 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-							maxStrCap2 -= 50;
-							maxSpeCap2 += 40;
-							maxIntCap2 += 170;
-							maxWisCap2 += 170;
-							maxLibCap2 += 110;
-							currentSen += 60;
-						}
+					if (kitsuneScore() >= 16 && tailCount == 9) {
 						if (kitsuneScore() >= 21 && findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-							maxStrCap2 -= 50;
-							maxSpeCap2 += 40;
-							maxIntCap2 += 135;
-							maxWisCap2 += 170;
-							maxLibCap2 += 80;
-							currentSen += 60;
-						}//315(425)
-						else if (kitsuneScore() >= 18) {
-							maxStrCap2 -= 45;
-							maxSpeCap2 += 35;
-							maxIntCap2 += 120;
-							maxWisCap2 += 145;
-							maxLibCap2 += 60;
-							currentSen += 45;
+							if (kitsuneScore() >= 26) {
+								maxStrCap2 -= 50;
+								maxSpeCap2 += 50;
+								maxIntCap2 += 140;
+								maxWisCap2 += 200;
+								maxLibCap2 += 110;
+								currentSen += 60;
+							}
+							else {
+								maxStrCap2 -= 45;
+								maxSpeCap2 += 40;
+								maxIntCap2 += 125;
+								maxWisCap2 += 160;
+								maxLibCap2 += 80;
+								currentSen += 45;
+							}
 						}
 						else {
 							maxStrCap2 -= 40;
 							maxSpeCap2 += 30;
-							maxIntCap2 += 95;
-							maxWisCap2 += 110;
+							maxIntCap2 += 110;
+							maxWisCap2 += 125;
 							maxLibCap2 += 45;
 							currentSen += 30;
 						}
@@ -11279,7 +11288,7 @@ use namespace CoC;
 						maxStrCap2 -= 35;
 						maxSpeCap2 += 25;
 						maxIntCap2 += 60;
-						maxWisCap2 += 70;
+						maxWisCap2 += 75;
 						maxLibCap2 += 30;
 						currentSen += 20;
 					}
