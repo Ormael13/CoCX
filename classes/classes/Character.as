@@ -673,7 +673,7 @@ import classes.Items.JewelryLib;
 			if (game.player.kitsuneScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
 				max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (game.player.kitsuneScore() >= 18 && game.player.tailCount == 9) {
+				if (game.player.kitsuneScore() >= 16 && game.player.tailCount == 9) {
 					max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 					if (game.player.kitsuneScore() >= 21 && findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0) {
 						max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -845,7 +845,7 @@ import classes.Items.JewelryLib;
 			if (game.player.kitsuneScore() >= 5) multimax += 0.1;
 			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
 				multimax += 0.1;
-				if (game.player.kitsuneScore() >= 18 && game.player.tailCount == 9) {
+				if (game.player.kitsuneScore() >= 16 && game.player.tailCount == 9) {
 					multimax += 0.2;
 					if (game.player.kitsuneScore() >= 21 && findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0) {
 						multimax += 0.25;
