@@ -5747,10 +5747,10 @@ use namespace CoC;
 				kitsuneCounter2++;
 			if (lowerBody != LowerBody.HUMAN && lowerBody != LowerBody.FOX)
 				kitsuneCounter--;
-			if (faceType == Face.HUMAN || faceType == Face.FOX || faceType == Face.ANIMAL_TOOTHS)
+			if (faceType == Face.HUMAN || faceType == Face.FOX)
 				kitsuneCounter++;
 				kitsuneCounter2++;
-			if (faceType != Face.HUMAN && faceType != Face.FOX && faceType != Face.ANIMAL_TOOTHS)
+			if (faceType != Face.HUMAN && faceType != Face.FOX)
 				kitsuneCounter--;
 			//If the character has a 'vag of holding', +1
 			if (vaginalCapacity() >= 8000)
