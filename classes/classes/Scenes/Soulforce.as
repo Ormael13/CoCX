@@ -2953,7 +2953,7 @@ use namespace CoC;
 			var SFR00:Number = 0;
 			if (player.kitsuneScore() >= 5) {
 				if (player.kitsuneScore() >= 9 && player.tailType == 13 && player.tailCount >= 2) {
-					if (player.kitsuneScore() >= 18) {
+					if (player.kitsuneScore() >= 16) {
 						if (player.kitsuneScore() >= 21 && player.tailCount == 9 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
 							if (player.kitsuneScore() >= 26) SFR00 += 200;
 							else SFR00 += 150;
