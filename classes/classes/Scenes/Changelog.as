@@ -88,8 +88,12 @@ package classes.Scenes
 			outputText("-Jtecx many typo corrections.\n");
 			outputText("-Fixed bugs: Liadri bugfixes, Pyro bugfixes/typo corrections, Cold Fish Soup missing it main intendeed effect (libido lowering), super perk points not reseting on ascension, gremlin tf text error, some of the scenes only looking for correct size of 1st cock ignoring any other PC could have\n\n");
 			outputText("<b>Version 0.8p:</b>\n\n");
+			outputText("-New tier 1 speed lvl-up perk: Dual Wield (Normal). Req. Dual Wield and Job: Dervish/Warrior perks. Effect: decrease penalty to accuracy from 25% to 15% and decrease damage penalty from 50% to 30% when usiong normal sized dual wield melee weapons.\n");
 			outputText("-New range weapon/tome (by Ormael): Golemancy Evocation Manuscript - buyable at golemancer shop in He'Xin'Dao. Cost 200 gems. Increase golems damage by 50% of base value.\n");
 			outputText("-New range weapon/tome (by Ormael): Elementalist’s Tome - buyable at Giacomo. Cost 200 gems. Increase elementals damage by 50% of base value.\n");
+			outputText("-New ring (by Ormael): Ezekiel's Signet - buyable at Felix in Journey to the East inn. Cost 10 spirit stones. Negate 1 racial perk point negative effect.\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): Ezekiel's Crown - buyable at Felix in Journey to the East inn. Cost 40 spirit stones. Negate up to 4 racial perk points negative effects.\n");
+			outputText("-New necklace (by Ormael): Ezekiel's Necklace - buyable at Felix in Journey to the East inn. Cost 50 spirit stones. Negate up to 5 racial perk points negative effects.\n");
 			outputText("-Bit of increased secondary stat bars gains for monsters at milestones to keep them protected from nuking by PC.\n");
 			outputText("-With too large diff in levels damage reduction will return 1 point of dmg instead of 0. With some effects form items or perks that will still give chance to get few points of dmg even if PC is vastly underleveled compared to enemy.\n");
 			outputText("-Huge, Gigantic, Colossal type of enemies gained now natural lvl diff bonus (it mean for level difference between PC and enemy they treated as few levels higher enemies than their displayed level). Huge +2, Gigantic +5, Colossal +10.\n");
@@ -101,12 +105,30 @@ package classes.Scenes
 			outputText("-Spectral Scream have additional effect of dealing magic damage to enemy. Enemy Wendigo scream also would deal dmg on top of causing fear.\n");
 			outputText("-Fenrir collar been renamed to Gleipnir collar. Also there is slight diff scene after 2nd time finding the shrine.\n");
 			outputText("-Added passive gains of soulforce (5) and lust/wrath (1) on level up. Also first 6 level up would grant 5x more increase to max HP, Fatigue, Mana, Soulforce, Wrath and Lust.\n");
+			outputText("-Change to handling dual weapons. No need to get tons of dual wield perks and only one to rule them all... Dual Wield perk is all what PC would need. Of course now that will mean dual wielding would have penalties: -50% damage and -25% accuracy. There would be two ways to offset those: get specific for that type of weapons perk ");
+			outputText("(so current dual wield (type of weapon) perks will have role but not of 'I need it to use this type of weapons) or simply training/using them to gain better mastery of using them.\n");
+			outputText("-Added mastery tracker for various types of meele weapons to 5th subpage of Stats.\n");
+			outputText("-Dual Wield perks like (Small), (Large), etc. that aren't based ones now have added req. to also have Dual Wield perk.\n");
+			outputText("-Added two new skill to Fenrir Soulstrike and Winter Claw.\n");
+			outputText("-Tooltips for 2nd to 4th ring have added text if PC not yet have perk unlocking those slots.\n");
+			outputText("-Added greyed out buttons for all undiscovered dungeons. Also fixed missing check for Ebon Labyrinth to add button for dungeons submenu in Places.\n");
+			outputText("-Newly added masteries (seen on Mastery subpage of Stats) can be trained by using type of weapon they are related to. Each gained level in mastery/dao will increase that type of weapon dmg by 1%. Each 2 levels accuracy will increase by 0.5%. Current cap is 10 + PC level (capped at lvl 90). Having human score at max 9 pts below max humanity will double mastery exp gaines, ");
+			outputText("having max humanity will tripple exp gains. Dealing critical damage double exp gains.\n");
+			outputText("-Sleeping with Luna will lower her jelousity meter at the same speed as it's rising during the day. But it will not never drop below 0 after night sleep thou.\n");
+			outputText("-On inventory page at melee weapon line would be added weapon type desc if PC use weapon that belong to one of major weapon types (it's related to mastery/dao on Masteries subpage so player will know which mastery will gain using that melee weapon).\n");
+			outputText("-Unlock req. for Vulcanic Crag been changed form finding Glacial Rift to Beach (as GR now have way higher than VC lvl enemies and thus it was near cockblock tier of troll to keep GR as part of unlock req.)\n");
+			outputText("-Dual Wield (Small), Dual Wield (Large) and Dual Wield (Firearms) new effects: decrease penalty to accuracy from 25% to 15% and decrease damage penalty from 50% to 30%.\n");// They would allow to increase ?training efficiency/max level of respective dual wield skill/both? put this on Ex or Su ver of those perks?
+			outputText("-Alvina cave and Twin Dart pistol parts been moved from Blight Ridge to Defiled Ravine.\n");
 			outputText("-New scene for Aiko and PC with kitsune tails by Jtexc.\n");
 			outputText("-Jtecx small addition to kitsunes about corruption effects on PC appearance.\n");
+			outputText("-Inventory now has an extra sub-menu for using/deleting items. It can be toggled on or off. By default it's not toggled on. Toggle to change it is in settings. So now mobile users can delete items even when not having Shift button ^^ (change by Jtexc)\n");
 			outputText("-Revisions/corrections to Luna, Kitsune, Fenrir Collar content by Scary Dragon Mom.\n");
 			outputText("-Race & body part organization + enhanced body part editor (change by aimozg).\n");
 			outputText("-Added conversation about Luna to Aunt Nancy. (change by Scary Dragon Mom)\n");
 			outputText("-Game now knows if the full round attack is done in or includes feral ……combat. (change by Liadri)\n");
+			outputText("-New mutation perk: Verdant Might. Req. 11+ in plant/alraune score. Effects: As a plant when using natural weapon your damage scaling is based on Toughness instead of strength. (change by Liadri)\n");
+			outputText("-3 new perk for harpies and score update for all members of the harpy family tree. (change by Liadri)\n");
+			outputText("-New effect for pregnancy crazy races Pregomania. (change by Liadri)\n");
 			outputText("-New Updated Kitsune score (caps to 26 on NG+). (change by Liadri)\n");
 			outputText("-Two New legendary kimono availlable at Kaiba shop for a limited time. (change by Liadri)\n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
@@ -118,29 +140,16 @@ package classes.Scenes
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
-			outputText("-Change to handling dual weapons. No need to get tons of dual wield perks and only one to rule them all... Dual Wield perk is all what PC would need. Of course now that will mean dual wielding would have penalties: -50% damage and -25% accuracy. There would be two ways to offset those: get specific for that type of weapons perk ");
-			outputText("(so current dual wield (type of weapon) perks will have role but not of 'I need it to use this type of weapons) or simply training/using them to gain better mastery of using them.\n");
-			outputText("-Added mastery tracker for various types of meele weapons to 5th subpage of Stats.\n");
-			outputText("-Dual Wield perks like (Small), (Large), etc. that aren't based ones now have added req. to also have Dual Wield perk.\n");
-			outputText("-Added two new skill to Fenrir Soulstrike and Winter Claw.\n");
-			outputText("-New mutation perk: Verdant Might. Req. 11+ in plant/alraune score. Effects: As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.\n");
-			outputText("-New ring (by Ormael): Ezekiel's Signet - buyable at Felix in Journey to the East inn. Cost 10 spirit stones. Negate 1 racial perk point negative effect.\n");
-			outputText("-3 new perk for harpies and score update for all members of the harpy family tree.\n");
-			outputText("-New effect for pregnancy crazy races Pregomania. (change by Liadri)\n");
-			outputText("-New head jewelery/accesory/misc (by Ormael): Ezekiel's Crown - buyable at Felix in Journey to the East inn. Cost 40 spirit stones. Negate up to 4 racial perk points negative effects.\n");
-			outputText("-New necklace (by Ormael): Ezekiel's Necklace - buyable at Felix in Journey to the East inn. Cost 50 spirit stones. Negate up to 5 racial perk points negative effects.\n");
-			outputText("-Inventory now has an extra sub-menu for using/deleting items. It can be toggled on or off. By default it's not toggled on. Toggle to change it is in settings. So now mobile users can delete items even when not having Shift button ^^ (change by Jtexc)\n");
-			outputText("-Tooltips for 2nd to 4th ring have added text if PC not yet have perk unlocking those slots.\n");
-			outputText("-Moved all interactions with Marae after first meeting from using Boat in Places to using Marae Islan also located in Places (and it will unlock after first time meeting Marae obviously).\n");
-			outputText("-Added greyed out buttons for all undiscovered dungeons. Also fixed missing check for Ebon Labyrinth to add button for dungeons submenu in Places.\n");
-			outputText("-Newly added masteries (seen on Mastery subpage of Stats) can be trained by using type of weapon they are related to. Each gained level in mastery/dao will increase that type of weapon dmg by 1%. Each 2 levels accuracy will increase by 0.5%. Current cap is 10 + PC level (capped at lvl 90). Having human score at max 9 pts below max humanity will double mastery exp gaines, ");
-			outputText("having max humanity will tripple exp gains. Dealing critical damage double exp gains.\n");
-			outputText("-Sleeping with Luna will lower her jelousity meter at the same speed as it's rising during the day. But it will not never drop below 0 after night sleep thou.\n");
-			outputText("-On inventory page at melee weapon line would be added weapon type desc if PC use weapon that belong to one of major weapon types (it's related to mastery/dao on Masteries subpage so player will know which mastery will gain using that melee weapon).\n");
-			outputText("-Unlock req. for Vulcanic Crag been changed form finding Glacial Rift to Beach (as GR now have way higher than VC lvl enemies and thus it was near cockblock tier of troll to keep GR as part of unlock req.)\n");
-			outputText("-New tier 1 speed lvl-up perk: Dual Wield (Normal). Req. Dual Wield and Job: Dervish/Warrior perks. Effect: decrease penalty to accuracy from 25% to 15% and decrease damage penalty from 50% to 30% when usiong normal sized dual wield melee weapons.\n");
-			outputText("-Dual Wield (Small), Dual Wield (Large) and Dual Wield (Firearms) new effects: decrease penalty to accuracy from 25% to 15% and decrease damage penalty from 50% to 30%.\n");// They would allow to increase ?training efficiency/max level of respective dual wield skill/both? put this on Ex or Su ver of those perks?
-			outputText("-Alvina cave and Twin Dart pistol parts been moved from Blight Ridge to Defiled Ravine.\n");
+			outputText("-Moved all interactions with Marae after first meeting from using Boat in Places to using Marae Island also located in Places (and it will unlock after first time meeting Marae obviously).\n");
+			outputText("-Dragon and Kitsune racial perks unlock been limited now by New Game tier in which PC is currently. Those that get all three 3 perks for dragons in NG or NG+... well you lucky until next ascension you not need worry on limits to get all 3 perklines for dragons.\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -156,18 +165,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Some shady person appeared in Journey to the East inn that sells items currently. Maybe he will talk in future more too ^^\n");
-			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

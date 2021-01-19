@@ -325,12 +325,6 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
-		if (player.hasPerk(PerkLib.InariBlessedKimono)){
-			var mod1:Number = 0.5;
-			mod1 -= player.cor / 10;
-			if (mod1 < 0.1) mod1 = 0.1;
-			mod += mod1;
-		}
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -355,6 +349,12 @@ public class CombatMagic extends BaseCombatContent {
 			mod1 -= player.cor / 10;
 			if (mod1 < 0.1) mod1 = 0.1;
 			mod += mod1;
+		}
+		if (player.hasPerk(PerkLib.InariBlessedKimono)){
+			var mod2:Number = 0.5;
+			mod2 -= player.cor / 10;
+			if (mod1 < 0.1) mod2 = 0.1;
+			mod += mod2;
 		}
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
@@ -467,12 +467,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
 		if (player.hasPerk(PerkLib.HexKnowledge)) mod -= .4;
 		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
-		if (player.hasPerk(PerkLib.InariBlessedKimono)){
-			var mod1:Number = 0.5;
-			mod1 -= player.cor / 10;
-			if (mod1 < 0.1) mod1 = 0.1;
-			mod += mod1;
-		}
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -497,6 +491,12 @@ public class CombatMagic extends BaseCombatContent {
 			mod1 -= player.cor / 10;
 			if (mod1 < 0.1) mod1 = 0.1;
 			mod += mod1;
+		}
+		if (player.hasPerk(PerkLib.InariBlessedKimono)){
+			var mod2:Number = 0.5;
+			mod2 -= player.cor / 10;
+			if (mod1 < 0.1) mod2 = 0.1;
+			mod += mod2;
 		}
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
@@ -595,12 +595,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
 		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
 		if (player.hasPerk(PerkLib.HexKnowledge)) mod += .2;
-		if (player.hasPerk(PerkLib.InariBlessedKimono)){
-			var mod1:Number = 0.5;
-			mod1 -= player.cor / 10;
-			if (mod1 < 0.1) mod1 = 0.1;
-			mod += mod1;
-		}
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -625,6 +619,12 @@ public class CombatMagic extends BaseCombatContent {
 			mod1 -= player.cor / 10;
 			if (mod1 < 0.1) mod1 = 0.1;
 			mod += mod1;
+		}
+		if (player.hasPerk(PerkLib.InariBlessedKimono)){
+			var mod2:Number = 0.5;
+			mod2 -= player.cor / 10;
+			if (mod1 < 0.1) mod2 = 0.1;
+			mod += mod2;
 		}
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
@@ -857,6 +857,8 @@ public class CombatMagic extends BaseCombatContent {
 			bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
@@ -879,6 +881,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsMeteorShower)) {
@@ -903,6 +907,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
@@ -925,6 +931,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
@@ -947,6 +955,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBlind)) {
@@ -969,6 +979,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
@@ -989,6 +1001,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
 				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
@@ -1009,6 +1023,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
 				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeal)) {
@@ -1021,6 +1037,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your chosen path of magic locked out this spell.");
 			} else if(player.mana < healCostWhite(30)) {
 				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
@@ -1043,6 +1061,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 	}

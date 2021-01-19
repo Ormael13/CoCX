@@ -379,7 +379,7 @@ public class PerkLib
 				".",
 				"You've chosen the 'Cave Wyrm Lungs (Final Form)' perk, .");
 		public static const KitsuneParathyroidGlands:PerkType = mk("Kitsune Parathyroid Glands", "Kitsune Parathyroid Glands",
-				".",
+				".",//decrease terror/ilussions cooldown instead of thyroid gland - rise wis or bonus sf regen or mana regen and thyroid gland instead regering sf?
 				"You've chosen the 'Kitsune Parathyroid Glands' perk, .");
 		public static const KitsuneParathyroidGlandsEvolved:PerkType = mk("Kitsune Parathyroid Glands (Evolved)", "Kitsune Parathyroid Glands (Evolved)",
 				".",
@@ -1707,9 +1707,6 @@ public class PerkLib
 		public static const ImprovingNaturesBlueprintsApexPredator:PerkType = mk("Improving Nature's Blueprints (Apex Predator)", "Improving Nature's Blueprints (Apex Predator)",
 				"Changing negative bonuses to max Int and Wis from Job: Beast Warrior is the same value positive bonuses. While using Crinos shape increasing natural regeneration by 2% of max HP per turn.",
 				"You've chosen the 'Improving Nature's Blueprints (Apex Predator)' perk, allowing you to become an Apex Predator that isn't dull and slow witted along with increased regeneration while using Crinos Shape.").withBuffs({'int.mult':0.10,'wis.mult':0.10});
-		public static const InariBlessedKimono:PerkType = mk("Inari Blessed Kimono", "Inari Blessed Kimono",
-				"Increase the potency of all spells and soulskills by up to 50% based on purity and empower all kitsunes ability. reduce spellcasting cost by 60%.",
-				"Increase the potency of all spells and soulskills by up to 50% based on purity and empower all kitsunes ability. reduce spellcasting cost by 60%.");
 		public static const InControl:PerkType = mk("In Control", "In Control",
 				"You are in control of your desires, that's it... except another 10% soul force gain.",
 				"You've chosen the 'In Control' perk, gaining +10% max Soulforce.");
@@ -2869,9 +2866,6 @@ public class PerkLib
 		public static const TankVI:PerkType = mk("Tank VI", "Tank VI",
 				"+3 extra HP per point of toughness.",
 				"You've chosen the 'Tank VI' perk, granting +3 extra maximum HP for each point of toughness.");
-		public static const TamamoNoMaeCursedKimono:PerkType = mk("Tamamo no Mae Cursed Kimono", "Tamamo no Mae Cursed Kimono",
-				"Increase the potency of all spells and soulskills by up to 50% based on corruption and empower all kitsunes ability. reduce spellcasting cost by 60%.",
-				"Increase the potency of all spells and soulskills by up to 50% based on corruption and empower all kitsunes ability. reduce spellcasting cost by 60%.");
 		public static const Teacher:PerkType = mk("Teacher", "Teacher",
 				"Instead of being taught, now you teach others. Your skill allows you to increase max mana by 10%.",
 				"You've chosen the 'Teacher' perk, gaining +10% max Mana.");
@@ -3222,11 +3216,15 @@ public class PerkLib
 		public static const DaoistsFocus:DaoistsFocusPerk = new DaoistsFocusPerk();
 		public static const DexterousSwordsmanship:PerkType = mk("Dexterous swordsmanship", "Dexterous swordsmanship",
 				"Increases parry chance by 10% while wielding a weapon.",null,true);
+		public static const InariBlessedKimono:PerkType = mk("Inari Blessed Kimono", "Inari Blessed Kimono",
+				"Increase the potency of all spells and soulskills by up to 50% based on purity and empower all kitsunes ability. reduce spellcasting cost by 60%.",null,true);
 		public static const MageWarden:PerkType = mk("Mage-Warden", "Mage-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
 		public static const SagesKnowledge:SagesKnowledgePerk = new SagesKnowledgePerk();
 		public static const StrifeWarden:PerkType = mk("Strife-Warden", "Strife-Warden",
 				"Enables Beat of War soul skill while equipped: Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.",null,true);
+		public static const TamamoNoMaeCursedKimono:PerkType = mk("Tamamo no Mae Cursed Kimono", "Tamamo no Mae Cursed Kimono",
+				"Increase the potency of all spells and soulskills by up to 50% based on corruption and empower all kitsunes ability. reduce spellcasting cost by 60%.",null,true);
 		public static const WildWarden:PerkType = mk("Wild-Warden", "Wild-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
 		public static const WizardsAndDaoistsFocus:WizardsAndDaoistsFocusPerk = new WizardsAndDaoistsFocusPerk();
@@ -3321,6 +3319,8 @@ public class PerkLib
 		public static const DarkCharm:PerkType = mk("Dark Charm", "Dark Charm",
 				"Allows access to demons charm attacks.");
 		public static const DarkenedKitsune:DarkenedKitsunePerk = new DarkenedKitsunePerk();
+		public static const DarkSlimeCore:PerkType = mk("Dark Slime Core", "Dark Slime Core",
+				"Grants more control over your slimy body, allowing you to go twice as long without fluids.");
 		public static const DeadMetabolism:PerkType = mk("Dead metabolism", "Dead metabolism",
 				"Kills off hunger. (hunger meter wouldn't decay with time)");
 		public static const DemonEnergyThirst:PerkType = mk("Demonic hunger", "Demonic hunger",
@@ -3418,10 +3418,10 @@ public class PerkLib
 				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, your skin is more resistant to physical damage and your claws are sharper than normal.");
 		public static const LycanthropyDormant:PerkType = mk("Dormant Lycanthropy", "Dormant Lycanthropy",
 				"You sometimes hear echoes of the call of the moon. If you were more of a werewolf you likely would feel its pull again. A lycanthrope is never truly cured.");
-		public static const Vulpesthropy:PerkType = mk("Vulpesthropy", "Vulpesthropy",
-				"Your strength and urges are directly tied to the cycle of the moon. Furthermore, your skin is more resistant to magical damage       .");
-		public static const VulpesthropyDormant:PerkType = mk("Dormant Vulpesthropy", "Dormant Vulpesthropy",
-				"You sometimes hear echoes of the call of the moon. If you were more of a werefox you likely would feel its pull again. A vulpesthrope is never truly cured.")
+		//public static const Vulpesthropy:PerkType = mk("Vulpesthropy", "Vulpesthropy",
+		//		"Your strength and urges are directly tied to the cycle of the moon. Furthermore, your skin is more resistant to magical damage       .");
+		//public static const VulpesthropyDormant:PerkType = mk("Dormant Vulpesthropy", "Dormant Vulpesthropy",
+		//		"You sometimes hear echoes of the call of the moon. If you were more of a werefox you likely would feel its pull again. A vulpesthrope is never truly cured.")
 		public static const LactaBovineImmunity:PerkType = mk("Lacta Bovine Immunity", "Lacta Bovine Immunity",
 				"You are seldom immune to all the dangerous effect of minotaur cum but you are also naturaly addicted to it.");
 		public static const LightningAffinity:PerkType = mk("Lightning Affinity", "Lightning Affinity",
@@ -3468,8 +3468,6 @@ public class PerkLib
 		public static const SatyrSexuality:PerkType = mk("Satyr Sexuality", "Satyr Sexuality",
 				"Thanks to your satyr biology, you now have the ability to impregnate both vaginas and asses. Also increases your virility rating. (Anal impregnation not implemented yet)");
 		public static const SlimeCore:PerkType = mk("Slime Core", "Slime Core",
-				"Grants more control over your slimy body, allowing you to go twice as long without fluids.");
-		public static const DarkSlimeCore:PerkType = mk("Dark Slime Core", "Dark Slime Core",
 				"Grants more control over your slimy body, allowing you to go twice as long without fluids.");
 		public static const SpiderOvipositor:PerkType = mk("Spider Ovipositor", "Spider Ovipositor",
 				"Allows you to lay eggs through a special organ on your arachnid abdomen, though you need at least 10 eggs to lay.");
@@ -5691,7 +5689,7 @@ public class PerkLib
 			DisplacerMetabolism.requireMetabolismMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.displacerbeastScore() >= 8;
 			}, "Displacer beast");
-			DraconicBones.requireBonesAndMarrowMutationSlot()
+			DraconicBones.requireDragonMutationSlot().requireBonesAndMarrowMutationSlot()
 				.requireCustomFunction(function (player:Player):Boolean {
                 return (player.arms.type == Arms.DRAGON || player.arms.type == Arms.FROSTWYRM);
 				}, "Dragon race or its variants arms")
@@ -5704,13 +5702,13 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10);
             }, "Dragon race or its variants");
-			DraconicHeart.requireHeartMutationSlot()
+			DraconicHeart.requireDragonMutationSlot().requireHeartMutationSlot()
                 .requirePerk(DraconicBones)
                 .requireAnyPerk(DraconicLungs, DrakeLungs)
 				.requireCustomFunction(function (player:Player):Boolean {
                 return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10);
             }, "Dragon race or its variants");
-			DraconicLungs.requireLungsMutationSlot()
+			DraconicLungs.requireDragonMutationSlot().requireLungsMutationSlot()
 				.requirePerk(DragonFireBreath)
                 .requirePerk(DragonIceBreath)
                 .requirePerk(DragonLightningBreath)
@@ -5770,7 +5768,7 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.vampireScore() >= 4;//potem dodać mosquito race i ew. inne co mogą wypijać krew
             }, "Vampire race");
-            KitsuneThyroidGland.requireThyroidGlandMutationSlot().requireAnyPerk(EnlightenedKitsune, CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
+            KitsuneThyroidGland.requireKitsuneMutationSlot().requireThyroidGlandMutationSlot().requireAnyPerk(EnlightenedKitsune, CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
                 return player.kitsuneScore() >= 5;
             }, "Kitsune race");
             LactaBovinaOvaries.requireOvariesMutationSlot().requireCustomFunction(function (player:Player):Boolean {

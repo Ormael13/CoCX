@@ -46,6 +46,7 @@ import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.EbonLabyrinth.ChaosChimera;
 import classes.Scenes.Dungeons.EbonLabyrinth.DarkSlimeEmpress;
 import classes.Scenes.Dungeons.EbonLabyrinth.HellfireSnail;
+import classes.Scenes.Dungeons.EbonLabyrinth.LivingFailure;
 import classes.Scenes.Dungeons.HelDungeon.HarpyMob;
 import classes.Scenes.Dungeons.HelDungeon.HarpyQueen;
 import classes.Scenes.NPCs.*;
@@ -6477,7 +6478,7 @@ public class Combat extends BaseContent {
                 if (player.statusEffectv1(StatusEffects.Sealed) <= 0) player.removeStatusEffect(StatusEffects.Sealed);
                 else {
                     outputText("<b>One of your combat abilities is currently sealed by ");
-                    if (monster is ChaosChimera) outputText("curse");
+                    if (monster is ChaosChimera || monster is LivingFailure) outputText("curse");
                     else outputText("magic");
                     outputText("!</b>\n\n");
                 }
@@ -6650,6 +6651,7 @@ public class Combat extends BaseContent {
             }
             dynStats("lus", player.statusEffectv1(StatusEffects.LustStones) + 4);
         }
+		if (player.hasStatusEffect(StatusEffects.LustTransferance)) dynStats("lus", player.statusEffectv1(StatusEffects.LustTransferance) + 4);
         if (player.hasStatusEffect(StatusEffects.WebSilence)) {
             if (player.statusEffectv1(StatusEffects.WebSilence) >= 2 || rand(20) + 1 + player.str / 10 >= 15) {
                 outputText("You rip off the webbing that covers your mouth with a cry of pain, finally able to breathe normally again!  Now you can cast spells!\n\n");
