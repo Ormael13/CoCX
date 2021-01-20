@@ -725,6 +725,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.LUNA_MEAL] > 0) flags[kFLAGS.LUNA_MEAL] = 0;
 				//Reset Diva Red Vial daiy limit
 				DivaScene.instance.tookVialToday = false;
+				//Refill Sand Witches items storage
+				if (flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] > 0) flags[kFLAGS.SAND_WITCH_LOOT_TAKEN]--;
 				//Clear sidewinder cooldown
 				if (player.hasStatusEffect(StatusEffects.CooldownSideWinder)) player.removeStatusEffect(StatusEffects.CooldownSideWinder);
 				//Energy Dependent
