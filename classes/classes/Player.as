@@ -3256,23 +3256,27 @@ use namespace CoC;
 			if (TopRace == "kitsune") {
 				if (TopScore >= 5) {
 					if (tailType == 13 && tailCount >= 2 && kitsuneScore() >= 9) {
-						if (TopScore >= 26) {
-							if (tailCount == 9 && isTaur()) {
-								race = "Inari-taur";
-							} else if (tailCount == 9) {
-								race = "Inari";
-							}
-						} else if (TopScore >= 21) {
-							if (tailCount == 9 && isTaur()) {
-								race = "nine tailed kitsune-taur of balance";
-							} else if (tailCount == 9) {
-								race = "nine tailed kitsune of balance";
-							}
-						}if (TopScore >= 16 && tailCount == 9) {
-							if (isTaur()) {
-								race = "nine tailed kitsune-taur";
+						if (TopScore >= 16 && tailCount == 9) {
+							if (TopScore >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
+								if (TopScore >= 26 && tailCount >= 9) {
+									if (isTaur()) {
+										race = "Inari-taur";
+									} else {
+										race = "Inari";
+									}
+								} else {
+									if (isTaur()) {
+										race = "nine tailed kitsune-taur of balance";
+									} else {
+										race = "nine tailed kitsune of balance";
+									}
+								}
 							} else {
-								race = "nine tailed kitsune";
+								if (isTaur()) {
+									race = "nine tailed kitsune-taur";
+								} else {
+									race = "nine tailed kitsune";
+								}
 							}
 						} else {
 							if (isTaur()) {
