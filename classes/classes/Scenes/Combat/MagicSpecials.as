@@ -4103,6 +4103,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.FeyArcaneBloodstreamFinalForm)) damage *= 1.50;
 		damage = Math.round(damage);
 		damage = doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -4117,6 +4118,8 @@ public class MagicSpecials extends BaseCombatContent {
 		EffectList.push(FaeStormSleep);
 		var ProcChance:Number = 50;
 		if (player.hasPerk(PerkLib.FairyQueenRegalia)) ProcChance = 25;
+		if (player.hasPerk(PerkLib.FeyArcaneBloodstreamEvolved)) ProcChance -= 5;
+		if (player.hasPerk(PerkLib.FeyArcaneBloodstreamFinalForm)) ProcChance -= 5;
 		var procCount:int = 0;
 		for (var i:int = 0; i < 6; i++) {
 			if (rand(100) >= ProcChance) {

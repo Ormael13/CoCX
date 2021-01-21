@@ -8396,6 +8396,9 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.DraconicHeart)) manaregen += 5;
         if (player.hasPerk(PerkLib.DraconicHeartEvolved)) manaregen += 5;
         if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) manaregen += 5;
+        if (player.hasPerk(PerkLib.FeyArcaneBloodstream)) manaregen += 5;
+        if (player.hasPerk(PerkLib.FeyArcaneBloodstream)) manaregen += 10;
+        if (player.hasPerk(PerkLib.FeyArcaneBloodstream)) manaregen += 15;
         if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm) && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 2);
         return manaregen;
     }

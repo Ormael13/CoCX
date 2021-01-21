@@ -2948,7 +2948,7 @@ use namespace CoC;
 				{name: 'wolf', score: wolfScore(), minscore: 4},
 				{name: 'werewolf', score: werewolfScore(), minscore: 12},
 				{name: 'fox', score: foxScore(), minscore: 4},
-				{name: 'fairy', score: fairyScore(), minscore: 19},
+				{name: 'fairy', score: fairyScore(), minscore: 23},
 				{name: 'ferret', score: ferretScore(), minscore: 4},
 				{name: 'cat', score: catScore(), minscore: 4},
 				{name: 'sphinx', score: sphinxScore(), minscore: 14},
@@ -3241,8 +3241,13 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "fairy") {
-				if (TopScore >= 19) {
-					race = "great fairy";
+				if (TopScore >= 23) {
+					if (TopScore >= 26) {
+						race = "fairy queen";
+					}
+					else{
+						race = "great fairy";
+					}
 				}
 			}
 			if (TopRace == "ferret") {
@@ -4093,7 +4098,7 @@ use namespace CoC;
 				humanCounter++;
 			if (skin.base.pattern == Skin.PATTERN_NONE)
 				humanCounter++;
-			humanCounter += (109 - internalChimeraScore());
+			humanCounter += (112 - internalChimeraScore());
 			if (isGargoyle()) humanCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) humanCounter = 0;
 			End("Player","racialScore");
@@ -4101,7 +4106,7 @@ use namespace CoC;
 		}
 
 		public function humanMaxScore():Number {
-			var humanMaxCounter:Number = 126;//17 + 109 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
+			var humanMaxCounter:Number = 129;//17 + 109 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
 			return humanMaxCounter;
 		}
 
@@ -4228,6 +4233,12 @@ use namespace CoC;
 			if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstream) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstreamEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstreamFinalForm) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.FloralOvaries) >= 0)
 				internalChimeraCounter++;
@@ -5241,6 +5252,12 @@ use namespace CoC;
 			if (!hasCoat() && fairyCounter > 0)
 				fairyCounter++;
 			if (skinType == Skin.PLAIN && skinAdj == "flawless")
+				fairyCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstream))
+				fairyCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstreamEvolved))
+				fairyCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstreamFinalForm))
 				fairyCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				fairyCounter += 50;
@@ -9858,6 +9875,8 @@ use namespace CoC;
 				bloodsteamMutations--;
 			if (findPerk(PerkLib.HinezumiBurningBlood) >= 0)
 				bloodsteamMutations--;
+			if (findPerk(PerkLib.FeyArcaneBloodstream) >= 0)
+				bloodsteamMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				bloodsteamMutations++;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
@@ -11011,11 +11030,22 @@ use namespace CoC;
 				}
 			}
 			if (fairyScore() >= 23) {
-				maxStrCap2 -= 25;
-				maxTouCap2 -= 10;
-				maxSpeCap2 += 200;
-				maxIntCap2 += 200;
-				currentSen += 20;
+				if (fairyScore() >= 26) {
+					maxStrCap2 -= 25;
+					maxTouCap2 -= 10;
+					maxSpeCap2 += 200;
+					maxIntCap2 += 200;
+					maxWisCap2 += 45;
+					currentSen += 20;
+				}
+				else {
+					maxStrCap2 -= 25;
+					maxTouCap2 -= 10;
+					maxSpeCap2 += 185;
+					maxIntCap2 += 185;
+					maxWisCap2 += 30;
+					currentSen += 20;
+				}
 			}//+10/10-20
 			if (cancerScore() >= 8) {
 				if (cancerScore() >= 20) {

@@ -839,7 +839,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.UnlockSpirit3rdStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockSpirit4thStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 6;
-			if (findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) max += level * 6;
+			if (findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) max += level * 6
 			var multimax:Number = 1;
 			if (game.player.alicornScore() >= 12) multimax += 0.2;
 			if (game.player.kitsuneScore() >= 5) multimax += 0.1;

@@ -2634,7 +2634,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.foxScore() >= 1) outputText("\n<font color=\"#008000\">Half Fox: " + player.foxScore() + "</font>");
 		else if (player.foxScore() < 1) outputText("\n<font color=\"#ff0000\">Half Fox: 0</font>");
 		//Fairy
-		if (player.fairyScore() >= 23) outputText("\n<font color=\"#0000a0\">Greater Fairy: " + player.fairyScore() + " (-25% to Str racial multi, -10% to Tou racial multi, +200% to Spe racial multi, +200% to Int racial multi, +20 min Sens)</font>");
+		if (player.fairyScore() >= 26) outputText("\n<font color=\"#0000a0\">Fairy Queen: " + player.fairyScore() + " (-25% to Str racial multi, -10% to Tou racial multi, +200% to Spe racial multi, +200% to Int racial multi, +45% to Wis racial multi, +20 min Sens)</font>");
+		if (player.fairyScore() >= 23) outputText("\n<font color=\"#0000a0\">Greater Fairy: " + player.fairyScore() + " (-25% to Str racial multi, -10% to Tou racial multi, +185% to Spe racial multi, +185% to Int racial multi, +30% to Wis racial multi, +20 min Sens)</font>");
 		else if (player.fairyScore() >= 1) outputText("\n<font color=\"#008000\">Greater Fairy: " + player.fairyScore() + "</font>");
 		else if (player.fairyScore() < 1) outputText("\n<font color=\"#ff0000\">Greater Fairy: 0</font>");
 		//Frost Wyrm
