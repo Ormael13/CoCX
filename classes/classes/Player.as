@@ -4098,7 +4098,7 @@ use namespace CoC;
 				humanCounter++;
 			if (skin.base.pattern == Skin.PATTERN_NONE)
 				humanCounter++;
-			humanCounter += (109 - internalChimeraScore());
+			humanCounter += (112 - internalChimeraScore());
 			if (isGargoyle()) humanCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) humanCounter = 0;
 			End("Player","racialScore");
@@ -4106,7 +4106,7 @@ use namespace CoC;
 		}
 
 		public function humanMaxScore():Number {
-			var humanMaxCounter:Number = 126;//17 + 109 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
+			var humanMaxCounter:Number = 129;//17 + 109 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
 			return humanMaxCounter;
 		}
 
@@ -4233,6 +4233,12 @@ use namespace CoC;
 			if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstream) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstreamEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstreamFinalForm) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.FloralOvaries) >= 0)
 				internalChimeraCounter++;
