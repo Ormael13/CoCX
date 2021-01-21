@@ -2106,6 +2106,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.VampiricBloodsteamFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.FeyArcaneBloodstream)) {
+				player.removePerk(PerkLib.FeyArcaneBloodstream);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.FeyArcaneBloodstreamEvolved)) {
+				player.removePerk(PerkLib.FeyArcaneBloodstreamEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.FeyArcaneBloodstreamFinalForm)) {
+				player.removePerk(PerkLib.FeyArcaneBloodstreamFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.EclipticMind)) {
 				player.removePerk(PerkLib.EclipticMind);
 				player.perkPoints += 1;

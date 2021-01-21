@@ -2634,7 +2634,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.foxScore() >= 1) outputText("\n<font color=\"#008000\">Half Fox: " + player.foxScore() + "</font>");
 		else if (player.foxScore() < 1) outputText("\n<font color=\"#ff0000\">Half Fox: 0</font>");
 		//Fairy
-		if (player.fairyScore() >= 23) outputText("\n<font color=\"#0000a0\">Greater Fairy: " + player.fairyScore() + " (-25% to Str racial multi, -10% to Tou racial multi, +200% to Spe racial multi, +200% to Int racial multi, +20 min Sens)</font>");
+		if (player.fairyScore() >= 26) outputText("\n<font color=\"#0000a0\">Fairy Queen: " + player.fairyScore() + " (-25% to Str racial multi, -10% to Tou racial multi, +200% to Spe racial multi, +200% to Int racial multi, +45% to Wis racial multi, +20 min Sens)</font>");
+		if (player.fairyScore() >= 23) outputText("\n<font color=\"#0000a0\">Greater Fairy: " + player.fairyScore() + " (-25% to Str racial multi, -10% to Tou racial multi, +185% to Spe racial multi, +185% to Int racial multi, +30% to Wis racial multi, +20 min Sens)</font>");
 		else if (player.fairyScore() >= 1) outputText("\n<font color=\"#008000\">Greater Fairy: " + player.fairyScore() + "</font>");
 		else if (player.fairyScore() < 1) outputText("\n<font color=\"#ff0000\">Greater Fairy: 0</font>");
 		//Frost Wyrm
@@ -2772,9 +2773,9 @@ public class PlayerAppearance extends BaseContent {
 		//else if (player.kitshooScore() < 1) outputText("\n<font color=\"#ff0000\">Kitshoo: 0</font>");
 		//Kitsune
 		if (player.kitsuneScore() >= 9 && player.tailType == Tail.FOX && player.tailCount >= 2) {
-			if (player.kitsuneScore() >= 16) {
-				if (player.tailCount == 9 && player.kitsuneScore() >= 21 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-					if (player.kitsuneScore() >= 26) outputText("\n<font color=\"#0000a0\">Inari: " + player.kitsuneScore() + " (-50% to Str racial multi, +50% to Spe racial multi, +140% to Int racial multi, +200% to Wis racial multi, +110% to Lib racial multi, +60 to min Sens, +" + (1000 * (1 + player.newGamePlusMod())) + " max Fatigue, +100% max Soulforce)</font>");
+			if (player.kitsuneScore() >= 16 && player.tailCount == 9) {
+				if (player.kitsuneScore() >= 21 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+					if (player.kitsuneScore() >= 26 && player.tailCount >= 9) outputText("\n<font color=\"#0000a0\">Inari: " + player.kitsuneScore() + " (-50% to Str racial multi, +50% to Spe racial multi, +140% to Int racial multi, +200% to Wis racial multi, +110% to Lib racial multi, +60 to min Sens, +" + (1000 * (1 + player.newGamePlusMod())) + " max Fatigue, +100% max Soulforce)</font>");
 					else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune of Balance: " + player.kitsuneScore() + " (-45% to Str racial multi, +40% to Spe racial multi, +125% to Int racial multi, +160% to Wis racial multi, +80% to Lib racial multi, +45 to min Sens, +" + (500 * (1 + player.newGamePlusMod())) + " max Fatigue, +65% max Soulforce)</font>");
 				}
 				else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune: " + player.kitsuneScore() + " (-40% to Str racial multi, +30% to Spe racial multi, +110% to Int racial multi, +125% to Wis racial multi, +45% to Lib racial multi, +30 to min Sens, +" + (300 * (1 + player.newGamePlusMod())) + " max Fatigue, +40% max Soulforce)</font>");
@@ -3158,4 +3159,4 @@ public class PlayerAppearance extends BaseContent {
 		}
 	}
 }
-}
+}

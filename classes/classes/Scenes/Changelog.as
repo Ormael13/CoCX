@@ -145,8 +145,8 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-A bit higher req. to get ninetail kitunse stag of race bonuses and 2 tiers above this stage. Also way kitsune score is calculated is changed to allow to get few more points on averange.\n");
+			outputText("-Sand Witches chest with La Bova and Lactacid now hold two items more items and it properly get slowly refilled with each passing day just as text ingame suggest.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -165,7 +165,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Some shady person appeared in Journey to the East inn that sells items currently. Maybe he will talk in future more too ^^\n");
-			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-Diana can cure curses now. Both causing set flat vlaue lost form stats (-10 str) and bonus multi related one curses (-10% to str). She also can heal to max HP even if PC have overmaxHP more than 0.\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");

@@ -2948,7 +2948,7 @@ use namespace CoC;
 				{name: 'wolf', score: wolfScore(), minscore: 4},
 				{name: 'werewolf', score: werewolfScore(), minscore: 12},
 				{name: 'fox', score: foxScore(), minscore: 4},
-				{name: 'fairy', score: fairyScore(), minscore: 19},
+				{name: 'fairy', score: fairyScore(), minscore: 23},
 				{name: 'ferret', score: ferretScore(), minscore: 4},
 				{name: 'cat', score: catScore(), minscore: 4},
 				{name: 'sphinx', score: sphinxScore(), minscore: 14},
@@ -3241,8 +3241,13 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "fairy") {
-				if (TopScore >= 19) {
-					race = "great fairy";
+				if (TopScore >= 23) {
+					if (TopScore >= 26) {
+						race = "fairy queen";
+					}
+					else{
+						race = "great fairy";
+					}
 				}
 			}
 			if (TopRace == "ferret") {
@@ -3256,29 +3261,27 @@ use namespace CoC;
 			if (TopRace == "kitsune") {
 				if (TopScore >= 5) {
 					if (tailType == 13 && tailCount >= 2 && kitsuneScore() >= 9) {
-						if (TopScore >= 26) {
-							if (tailCount == 9 && isTaur()) {
-								race = "Inari-taur";
-							} else if (tailCount == 9) {
-								race = "Inari";
+						if (TopScore >= 16 && tailCount == 9) {
+							if (TopScore >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
+								if (TopScore >= 26 && tailCount >= 9) {
+									if (isTaur()) {
+										race = "Inari-taur";
+									} else {
+										race = "Inari";
+									}
+								} else {
+									if (isTaur()) {
+										race = "nine tailed kitsune-taur of balance";
+									} else {
+										race = "nine tailed kitsune of balance";
+									}
+								}
 							} else {
-								race = "kitsune";
-							}
-						} else if (TopScore >= 21) {
-							if (tailCount == 9 && isTaur()) {
-								race = "nine tailed kitsune-taur of balance";
-							} else if (tailCount == 9) {
-								race = "nine tailed kitsune of balance";
-							} else {
-								race = "kitsune";
-							}
-						} else if (TopScore >= 16) {
-							if (tailCount == 9 && isTaur()) {
-								race = "nine tailed kitsune-taur";
-							} else if (tailCount == 9) {
-								race = "nine tailed kitsune";
-							} else {
-								race = "kitsune";
+								if (isTaur()) {
+									race = "nine tailed kitsune-taur";
+								} else {
+									race = "nine tailed kitsune";
+								}
 							}
 						} else {
 							if (isTaur()) {
@@ -4095,7 +4098,7 @@ use namespace CoC;
 				humanCounter++;
 			if (skin.base.pattern == Skin.PATTERN_NONE)
 				humanCounter++;
-			humanCounter += (109 - internalChimeraScore());
+			humanCounter += (112 - internalChimeraScore());
 			if (isGargoyle()) humanCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) humanCounter = 0;
 			End("Player","racialScore");
@@ -4103,7 +4106,7 @@ use namespace CoC;
 		}
 
 		public function humanMaxScore():Number {
-			var humanMaxCounter:Number = 126;//17 + 109 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
+			var humanMaxCounter:Number = 129;//17 + 112 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
 			return humanMaxCounter;
 		}
 
@@ -4230,6 +4233,12 @@ use namespace CoC;
 			if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstream) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstreamEvolved) >= 0)
+				internalChimeraCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstreamFinalForm) >= 0)
 				internalChimeraCounter++;
 			if (findPerk(PerkLib.FloralOvaries) >= 0)
 				internalChimeraCounter++;
@@ -5243,6 +5252,12 @@ use namespace CoC;
 			if (!hasCoat() && fairyCounter > 0)
 				fairyCounter++;
 			if (skinType == Skin.PLAIN && skinAdj == "flawless")
+				fairyCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstream))
+				fairyCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstreamEvolved))
+				fairyCounter++;
+			if (findPerk(PerkLib.FeyArcaneBloodstreamFinalForm))
 				fairyCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				fairyCounter += 50;
@@ -9860,6 +9875,8 @@ use namespace CoC;
 				bloodsteamMutations--;
 			if (findPerk(PerkLib.HinezumiBurningBlood) >= 0)
 				bloodsteamMutations--;
+			if (findPerk(PerkLib.FeyArcaneBloodstream) >= 0)
+				bloodsteamMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				bloodsteamMutations++;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
@@ -11013,11 +11030,22 @@ use namespace CoC;
 				}
 			}
 			if (fairyScore() >= 23) {
-				maxStrCap2 -= 25;
-				maxTouCap2 -= 10;
-				maxSpeCap2 += 200;
-				maxIntCap2 += 200;
-				currentSen += 20;
+				if (fairyScore() >= 26) {
+					maxStrCap2 -= 25;
+					maxTouCap2 -= 10;
+					maxSpeCap2 += 200;
+					maxIntCap2 += 200;
+					maxWisCap2 += 45;
+					currentSen += 20;
+				}
+				else {
+					maxStrCap2 -= 25;
+					maxTouCap2 -= 10;
+					maxSpeCap2 += 185;
+					maxIntCap2 += 185;
+					maxWisCap2 += 30;
+					currentSen += 20;
+				}
 			}//+10/10-20
 			if (cancerScore() >= 8) {
 				if (cancerScore() >= 20) {
@@ -13615,7 +13643,6 @@ use namespace CoC;
 		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
 			//Easy mode cuts lust gains!
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && dlust > 0 && scale) dlust /= 10;
-
 			//Set original values to begin tracking for up/down values if
 			//they aren't set yet.
 			//These are reset when up/down arrows are hidden with
@@ -13647,14 +13674,11 @@ use namespace CoC;
 					if (dlib > 0) dlib *= 2;
 					if (dlib < 0) dlib /= 2;
 				}
-
 				// Uma's Perkshit
 				if (findPerk(PerkLib.ChiReflowLust) >= 0 && dlib > 0) dlib *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
 				if (findPerk(PerkLib.ChiReflowLust) >= 0 && dsens > 0) dsens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
-
 				//Apply lust changes in NG+.
 				dlust *= 1 + (newGamePlusMod() * 0.2);
-
 				//lust resistance
 				if (dlust > 0 && scale) dlust *= EngineCore.lustPercent() / 100;
 				if (dlib > 0 && findPerk(PerkLib.PurityBlessing) >= 0) dlib *= 0.75;
@@ -13664,15 +13688,12 @@ use namespace CoC;
 				if (findPerk(PerkLib.AscensionMoralShifter) >= 0) dcor *= 1 + (perkv1(PerkLib.AscensionMoralShifter) * 0.2);
 				if (findPerk(PerkLib.Lycanthropy) >= 0) dcor *= 1.2;
 				if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) dcor *= 2;
-
 				if (sens > 50 && dsens > 0) dsens /= 2;
 				if (sens > 75 && dsens > 0) dsens /= 2;
 				if (sens > 90 && dsens > 0) dsens /= 2;
 				if (sens > 50 && dsens < 0) dsens *= 2;
 				if (sens > 75 && dsens < 0) dsens *= 2;
 				if (sens > 90 && dsens < 0) dsens *= 2;
-
-
 				//Bonus gain for perks!
 				if (findPerk(PerkLib.Strong) >= 0) dstr += dstr * perk(findPerk(PerkLib.Strong)).value1;
 				if (findPerk(PerkLib.Tough) >= 0) dtou += dtou * perk(findPerk(PerkLib.Tough)).value1;
@@ -13681,7 +13702,6 @@ use namespace CoC;
 				if (findPerk(PerkLib.Wise) >= 0) dwis += dwis * perk(findPerk(PerkLib.Wise)).value1;
 				if (findPerk(PerkLib.Lusty) >= 0) dlib += dlib * perk(findPerk(PerkLib.Lusty)).value1;
 				if (findPerk(PerkLib.Sensitive) >= 0) dsens += dsens * perk(findPerk(PerkLib.Sensitive)).value1;
-
 				// Uma's Str Cap from Perks (Moved to max stats)
 				/*if (findPerk(PerkLib.ChiReflowSpeed) >= 0)
 				{
@@ -13706,4 +13726,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

@@ -679,9 +679,18 @@ public function mainCampMenu():void {
 	addButton(0, "Appearance", dianaAppearance);
 	//1 - Talk
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(2, "Spar", dianaSparsWithPC).hint("Ask Diana for a mock battle.");
-	if (player.HP < player.maxHP()) addButton(3, "Healing", HealingScene);
-	else addButtonDisabled(3, "Healing", "You're fully healed already.");
+	//3 - ??
 	addButton(4, "Sex", mainSexMenu);
+	if (player.HP < player.maxOverHP()) addButton(5, "Healing", HealingScene);
+	else addButtonDisabled(5, "Healing", "You're fully healed already.");
+	if (player.buff("Curse").isPresent()) {
+		addButton(6, "C.C.(A)", CuringCurseScene1).hint("Cure curses that affect stats non-multiplier bonuses.");
+		addButton(7, "C.C.(B)", CuringCurseScene2).hint("Cure curses that affect stats multiplier bonsues.");
+	}
+	else {
+		addButtonDisabled(6, "C.C.(A)", "You not have any curses to cure. (Type A)");
+		addButtonDisabled(7, "C.C.(B)", "You not have any curses to cure. (Type B)");
+	}
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -765,6 +774,35 @@ public function HealingScene():void {
 	dynStats("lus", 33);
 	HPChange(player.maxHP(), true);
 	EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.5)));
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function CuringCurseScene1():void {	//value related curses removal
+	clearOutput();
+	outputText("You asked Diana if she could heals you, and she said yes. Diana gestures you to come into her arms, which you do, allowing her to hold you against her wonderful body.\n\n");
+	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your pain and injuries.\n\n");
+	outputText("Diana starts to rub her chest against yours, causing more of the strange feeling as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move to your intimate area, sparks of pleasure shooting up your spine as across your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
+	outputText("But soon it is all over, she lets go of you, all your wounds and injuries all healed, although now you feel rather aroused.\n\n");
+	dynStats("lus", 50);
+	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+		player.removeCurse(stat, 10);
+	}
+	doNext(camp.returnToCampUseOneHour);
+}
+public function CuringCurseScene2():void {	//bonus multi related curses removal
+	clearOutput();
+	outputText("You asked Diana if she could heals you, and she said yes. Diana gestures you to come into her arms, which you do, allowing her to hold you against her wonderful body.\n\n");
+	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your pain and injuries.\n\n");
+	outputText("Diana starts to rub her chest against yours, causing more of the strange feeling as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move to your intimate area, sparks of pleasure shooting up your spine as across your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
+	outputText("But soon it is all over, she lets go of you, all your wounds and injuries all healed, although now you feel rather aroused.\n\n");
+	dynStats("lus", 50);
+	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+		player.removeCurse(stat, 10);
+		if (stat != "sens")
+		{
+			player.removeCurse(stat+".mult", 0.10);
+		}
+	}
 	doNext(camp.returnToCampUseOneHour);
 }
 

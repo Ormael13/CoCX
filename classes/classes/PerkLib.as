@@ -1279,6 +1279,15 @@ public class PerkLib
 		public static const FertilityPlus:PerkType = mk("Fertility+", "Fertility+",
 				"Increases fertility rating by 15 and cum volume by up to 50%.",
 				"You've chosen the 'Fertility+' perk, making it easier to get pregnant.  It also increases your cum volume by up to 50% (if appropriate)!");
+		public static const FeyArcaneBloodstream:PerkType = mk("Fey Arcane Bloodstream", "Fey Arcane Bloodstream",
+				"Your Fey Arcane Bloodstream is granting you along with an eternal lifespan increased mana recovery and increased magical power.",
+				"You've chosen the 'Fey Arcane Bloodstream' perk, gaining along with an eternal lifespan increased mana recovery and increased magical power.").withBuffs({'int.mult':0.05});;
+		public static const FeyArcaneBloodstreamEvolved:PerkType = mk("Fey Arcane Bloodstream (Evolved)", "Fey Arcane Bloodstream (Evolved)",
+				"Your Fey Arcane Bloodstream is granting you an even greater mana recovery and further increased magical power. Furthermore your chaotic magic is more likely to explode into additionnal effects.",
+				"You've chosen the 'Fey Arcane Bloodstream (Evolved)' perk, gaining an even greater mana recovery and further increased magical power. Furthermore your chaotic magic is more likely to explode into additionnal effects.").withBuffs({'int.mult':0.10});
+		public static const FeyArcaneBloodstreamFinalForm:PerkType = mk("Fey Arcane Bloodstream (Final Form)", "Fey Arcane Bloodstream (Final Form)",
+				"Your Fey Arcane Bloodstream grants you an even greater mana recovery and further increased magical power. Furthermore your chaotic magic is more likely to explode into additionnal effects and its damage is increased by 50%.",
+				"You've chosen the 'Fey Arcane Bloodstream (Final Form)' perk, gaining an even greater mana recovery and further increased magical power. Furthermore your chaotic magic is more likely to explode into additionnal effects and its damage is increased by 50%.").withBuffs({'int.mult':0.20});
 		public static const FirstAttackElementals:PerkType = mk("First Attack: Elementals", "First Attack: Elementals",
 				"Instead of melee attacking in PC place one of summoned elementals will attack before PC allowing latter to take any action even personaly attaking with melee weapon.",
 				"You've chosen the 'First Attack: Elementals' perk, allowing your summoned elementals to attack independly from you.");
@@ -5719,6 +5728,9 @@ public class PerkLib
 			ElvishPeripheralNervSys.requirePerk(ElvenSense).requireCustomFunction(function (player:Player):Boolean {
                 return player.elfScore() >= 4;
             }, "Elf race");
+			FeyArcaneBloodstream.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+				return player.fairyScore() >= 20;
+			}, "Fairy race");
 			FloralOvaries.requireOvariesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.alrauneScore() >= 13;
 			}, "Alraune race");
@@ -5905,6 +5917,9 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.yukiOnnaScore() >= 14;
             }, "Yuki onna race");
+			FeyArcaneBloodstreamEvolved.requireLevel(12).requirePerk(FeyArcaneBloodstream).requireCustomFunction(function (player:Player):Boolean {
+				return player.fairyScore() >= 21;
+			}, "Fairy race");
 			FloralOvariesEvolved.requireLevel(6).requirePerk(FloralOvaries).requireCustomFunction(function (player:Player):Boolean {
 				return player.alrauneScore() >= 13;
 			}, "Alraune race");
@@ -6394,6 +6409,9 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.yukiOnnaScore() >= 14;
             }, "Yuki onna race");
+			FeyArcaneBloodstreamFinalForm.requireLevel(24).requirePerk(FeyArcaneBloodstreamEvolved).requireCustomFunction(function (player:Player):Boolean {
+				return player.fairyScore() >= 22;
+			}, "Fairy race");
 			FloralOvariesFinalForm.requireLevel(24).requirePerk(FloralOvariesEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.alrauneScore() >= 13;
 			}, "Alraune race");
