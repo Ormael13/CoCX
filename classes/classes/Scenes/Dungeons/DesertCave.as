@@ -2153,7 +2153,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			addButton(2,"Cum Witches",discussCumWitches).hint("Ask the Sand Mother about the Cum Witches.", "Talk: Cum Witches");
 			addButton(3,"CovenStatus",currentStateOfInterwebs).hint("Ask the Sand Mother about the status of the coven.", "Talk: Coven Status");
 			addButton(4,"History",sandWitchHistory).hint("Ask the Sand Mother about the history of the Sand Witches.", "Talk: History");
-			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 5) {
+			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 10) {
 				addButton(5,"Get LaBova",getLaBova).hint(consumables.LABOVA_.description);
 				addButton(6,"Get Lactaid",getLactaidFromWitches).hint(consumables.LACTAID.description);
 			}
@@ -2297,7 +2297,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 					if(player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(3,"Fuck Her",fuckTheSandMothersCunt).hint("Fuck the Sand Mother's cunt with your cock.");
 				}
 			}
-			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 5) {
+			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 10) {
 				addButton(5,"Get LaBova",takeLaBovaOrLactaid, false, null, null, consumables.LABOVA_.description);
 				addButton(6,"Get Lactaid",takeLaBovaOrLactaid, true, null, null, consumables.LACTAID.description);
 			}
@@ -2321,7 +2321,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 				outputText("The Sand Mother glares down at you from atop her throne, but does not dare lift a finger against you, not after her previous defeat.  She hisses, \"<i>You've already plundered my coven!  What more do you want from us?</i>\"  even as her chest heaves in a panic.  Four mountainous peaks jut from the witch's silken robe... you have a few ideas, and the Queen Witch seems to have some of her own.");
 				//Resisting Options
 				outputText("\n\nThe Sand Mother cringes back in her throne, eyeing you warily.  It appears you've made an enemy, however, at least it is an enemy that fears you.  There's a chest full of potions of La Bova and Lactaid behind her throne");
-				if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] >= 5) outputText(", though right now it sits empty.  You'll need to wait for them to restock it");
+				if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] >= 10) outputText(", though right now it sits empty.  You'll need to wait for them to restock it");
 				else outputText(", and noone could stop you from taking them");
 				outputText(".");
 				sandMotherPOMenu();

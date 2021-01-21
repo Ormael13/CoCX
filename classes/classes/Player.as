@@ -3261,29 +3261,27 @@ use namespace CoC;
 			if (TopRace == "kitsune") {
 				if (TopScore >= 5) {
 					if (tailType == 13 && tailCount >= 2 && kitsuneScore() >= 9) {
-						if (TopScore >= 26) {
-							if (tailCount == 9 && isTaur()) {
-								race = "Inari-taur";
-							} else if (tailCount == 9) {
-								race = "Inari";
+						if (TopScore >= 16 && tailCount == 9) {
+							if (TopScore >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
+								if (TopScore >= 26 && tailCount >= 9) {
+									if (isTaur()) {
+										race = "Inari-taur";
+									} else {
+										race = "Inari";
+									}
+								} else {
+									if (isTaur()) {
+										race = "nine tailed kitsune-taur of balance";
+									} else {
+										race = "nine tailed kitsune of balance";
+									}
+								}
 							} else {
-								race = "kitsune";
-							}
-						} else if (TopScore >= 21) {
-							if (tailCount == 9 && isTaur()) {
-								race = "nine tailed kitsune-taur of balance";
-							} else if (tailCount == 9) {
-								race = "nine tailed kitsune of balance";
-							} else {
-								race = "kitsune";
-							}
-						} else if (TopScore >= 16) {
-							if (tailCount == 9 && isTaur()) {
-								race = "nine tailed kitsune-taur";
-							} else if (tailCount == 9) {
-								race = "nine tailed kitsune";
-							} else {
-								race = "kitsune";
+								if (isTaur()) {
+									race = "nine tailed kitsune-taur";
+								} else {
+									race = "nine tailed kitsune";
+								}
 							}
 						} else {
 							if (isTaur()) {
@@ -13639,7 +13637,6 @@ use namespace CoC;
 		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
 			//Easy mode cuts lust gains!
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && dlust > 0 && scale) dlust /= 10;
-
 			//Set original values to begin tracking for up/down values if
 			//they aren't set yet.
 			//These are reset when up/down arrows are hidden with
@@ -13671,14 +13668,11 @@ use namespace CoC;
 					if (dlib > 0) dlib *= 2;
 					if (dlib < 0) dlib /= 2;
 				}
-
 				// Uma's Perkshit
 				if (findPerk(PerkLib.ChiReflowLust) >= 0 && dlib > 0) dlib *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
 				if (findPerk(PerkLib.ChiReflowLust) >= 0 && dsens > 0) dsens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
-
 				//Apply lust changes in NG+.
 				dlust *= 1 + (newGamePlusMod() * 0.2);
-
 				//lust resistance
 				if (dlust > 0 && scale) dlust *= EngineCore.lustPercent() / 100;
 				if (dlib > 0 && findPerk(PerkLib.PurityBlessing) >= 0) dlib *= 0.75;
@@ -13688,15 +13682,12 @@ use namespace CoC;
 				if (findPerk(PerkLib.AscensionMoralShifter) >= 0) dcor *= 1 + (perkv1(PerkLib.AscensionMoralShifter) * 0.2);
 				if (findPerk(PerkLib.Lycanthropy) >= 0) dcor *= 1.2;
 				if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) dcor *= 2;
-
 				if (sens > 50 && dsens > 0) dsens /= 2;
 				if (sens > 75 && dsens > 0) dsens /= 2;
 				if (sens > 90 && dsens > 0) dsens /= 2;
 				if (sens > 50 && dsens < 0) dsens *= 2;
 				if (sens > 75 && dsens < 0) dsens *= 2;
 				if (sens > 90 && dsens < 0) dsens *= 2;
-
-
 				//Bonus gain for perks!
 				if (findPerk(PerkLib.Strong) >= 0) dstr += dstr * perk(findPerk(PerkLib.Strong)).value1;
 				if (findPerk(PerkLib.Tough) >= 0) dtou += dtou * perk(findPerk(PerkLib.Tough)).value1;
@@ -13705,7 +13696,6 @@ use namespace CoC;
 				if (findPerk(PerkLib.Wise) >= 0) dwis += dwis * perk(findPerk(PerkLib.Wise)).value1;
 				if (findPerk(PerkLib.Lusty) >= 0) dlib += dlib * perk(findPerk(PerkLib.Lusty)).value1;
 				if (findPerk(PerkLib.Sensitive) >= 0) dsens += dsens * perk(findPerk(PerkLib.Sensitive)).value1;
-
 				// Uma's Str Cap from Perks (Moved to max stats)
 				/*if (findPerk(PerkLib.ChiReflowSpeed) >= 0)
 				{
