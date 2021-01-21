@@ -28,21 +28,21 @@ use namespace CoC;
 		
 		private function eyeTyrantOmnicast():void {
 			outputText("The gazer suddenly fixates you with all of its eye unleashing a barrage of rays at you! ");
-			if (!player.getEvasionRoll() || player.hasStatusEffect(StatusEffects.Stunned)) eyeTyrantOmnicastD();
-			if (!player.getEvasionRoll() || player.hasStatusEffect(StatusEffects.Stunned)) eyeTyrantOmnicastD();
-			if (!player.getEvasionRoll() || player.hasStatusEffect(StatusEffects.Stunned)) eyeTyrantOmnicastD();
-			if (!player.getEvasionRoll() || player.hasStatusEffect(StatusEffects.Stunned)) eyeTyrantOmnicastD();
-			if (!player.getEvasionRoll() || player.hasStatusEffect(StatusEffects.Stunned)) eyeTyrantOmnicastD();
-			if (!player.getEvasionRoll() || player.hasStatusEffect(StatusEffects.Stunned)) eyeTyrantOmnicastD();
-			if (!player.getEvasionRoll() || player.hasStatusEffect(StatusEffects.Stunned)) eyeTyrantOmnicastD();
-			if (!player.getEvasionRoll() || player.hasStatusEffect(StatusEffects.Stunned)) eyeTyrantOmnicastD();
-			if (!player.getEvasionRoll() || player.hasStatusEffect(StatusEffects.Stunned)) eyeTyrantOmnicastD();
-			if (!player.getEvasionRoll() || player.hasStatusEffect(StatusEffects.Stunned)) eyeTyrantOmnicastD();
+			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
+			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
+			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
+			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
+			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
+			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
+			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
+			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
+			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
+			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
 			outputText("\n\n");
 		}
 		private function eyeTyrantOmnicastD():void {
-			var damage:Number = eBaseIntelligenceDamage() * 0.1;
-			damage += eBaseWisdomDamage() * 0.1;
+			var damage:Number = eBaseIntelligenceDamage() * 0.15;
+			damage += eBaseWisdomDamage() * 0.15;
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
 		}
@@ -68,8 +68,8 @@ use namespace CoC;
 		public function EyeTyrant()
 		{
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 80) {
-				initStrTouSpeInte(134, 350, 157, 342);
-				initWisLibSensCor(175, 250, 150, 40);
+				initStrTouSpeInte(134, 342, 157, 390);
+				initWisLibSensCor(175, 250, 150, 60);
 				this.armorDef = 80;
 				this.armorMDef = 300;
 				this.bonusHP = 5000;
@@ -78,8 +78,8 @@ use namespace CoC;
 				this.gems = 350 + rand(110);
 			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 85) {
-				initStrTouSpeInte(168, 390, 184, 363);
-				initWisLibSensCor(196, 280, 190, 40);
+				initStrTouSpeInte(168, 363, 184, 430);
+				initWisLibSensCor(196, 280, 190, 60);
 				this.armorDef = 100;
 				this.armorMDef = 350;
 				this.bonusHP = 7500;
@@ -88,8 +88,8 @@ use namespace CoC;
 				this.gems = 400 + rand(120);
 			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 90) {
-				initStrTouSpeInte(204, 430, 211, 384);
-				initWisLibSensCor(217, 310, 230, 40);
+				initStrTouSpeInte(204, 384, 211, 470);
+				initWisLibSensCor(217, 310, 230, 60);
 				this.armorDef = 120;
 				this.armorMDef = 400;
 				this.bonusHP = 10000;

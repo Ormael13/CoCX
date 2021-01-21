@@ -4106,7 +4106,7 @@ use namespace CoC;
 		}
 
 		public function humanMaxScore():Number {
-			var humanMaxCounter:Number = 129;//17 + 109 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
+			var humanMaxCounter:Number = 129;//17 + 112 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
 			return humanMaxCounter;
 		}
 
@@ -13726,4 +13726,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

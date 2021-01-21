@@ -36,7 +36,7 @@ use namespace CoC;
 			outputText("The creature waves a red magical sigil and suddenly you feel the urge to hurt yourself really hard. In your confusion you strike yourself on a nearby rock taking ");
 			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			player.takePhysDamage(100, true);
-			outputText("damage.\n\n");
+			outputText(" damage.\n\n");
 		}
 		
 		private function livingFailureMadness():void {

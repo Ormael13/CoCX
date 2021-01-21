@@ -3109,7 +3109,7 @@ public final class Mutations extends MutationsHelper {
             outputText("You no longer feel the symptoms of withdrawal.\n\n");
         }
         //Heals the player 70-100 health
-        HPChange(70 + rand(31), true);
+        HPChange((70 + rand(31) * (1 + player.newGamePlusMod())), true);
         //Restores a portion of fatigue (once implemented)
         EngineCore.changeFatigue(-25);
         //If the player is addicted, this item negates the withdrawal effects for a few hours (suggest 6), there will need to be a check here to make sure the withdrawal effect doesn't reactivate while the player is under the effect of 'Marble's Milk'.
@@ -11110,7 +11110,7 @@ public final class Mutations extends MutationsHelper {
         MutagenBonus("lib", 10);
         //Health/HP(Large increase; always occurs):
         outputText("\n\nYou feel suddenly invigorated by the potent beverage, like you could take on a whole horde of barbarians or giants and come out victorious!");
-        HPChange(Math.round(player.maxHP()), false);
+        HPChange(Math.round(player.maxOverHP()), false);
         dynStats("lus=", 50 + rand(16));
         if (rand(3) == 0) {
             outputText("\n\nThe alcohol fills your limbs with vigor, making you feel like you could take on the world with just your fists!");
