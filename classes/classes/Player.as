@@ -4098,7 +4098,7 @@ use namespace CoC;
 				humanCounter++;
 			if (skin.base.pattern == Skin.PATTERN_NONE)
 				humanCounter++;
-			humanCounter += (112 - internalChimeraScore());
+			humanCounter += (115 - internalChimeraScore());
 			if (isGargoyle()) humanCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) humanCounter = 0;
 			End("Player","racialScore");
@@ -4106,7 +4106,7 @@ use namespace CoC;
 		}
 
 		public function humanMaxScore():Number {
-			var humanMaxCounter:Number = 129;//17 + 112 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
+			var humanMaxCounter:Number = 132;//17 + 115 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
 			return humanMaxCounter;
 		}
 
@@ -4174,239 +4174,251 @@ use namespace CoC;
 		public function internalChimeraScore():Number {
 			Begin("Player","racialScore","internalChimeraScore");
 			var internalChimeraCounter:Number = 0;
-			if (findPerk(PerkLib.BlackHeart) >= 0)
+			if (hasPerk(PerkLib.BlackHeart))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.BlackHeartEvolved) >= 0)
+			if (hasPerk(PerkLib.BlackHeartEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.BlackHeartFinalForm) >= 0)
+			if (hasPerk(PerkLib.BlackHeartFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.CatlikeNimbleness) >= 0)
+			if (hasPerk(PerkLib.CatlikeNimbleness))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.CatlikeNimblenessEvolved) >= 0)
+			if (hasPerk(PerkLib.CatlikeNimblenessEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.CatlikeNimblenessFinalForm) >= 0)
+			if (hasPerk(PerkLib.CatlikeNimblenessFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.DisplacerMetabolism) >= 0)
+			if (hasPerk(PerkLib.DisplacerMetabolism))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.DisplacerMetabolismEvolved) >= 0)
+			if (hasPerk(PerkLib.DisplacerMetabolismEvolved))
 				internalChimeraCounter++;
-			//if (findPerk(PerkLib.) >= 0)
+			//if (hasPerk(PerkLib.))
 			//	internalChimeraCounter++;
-			if (findPerk(PerkLib.DraconicBones) >= 0)
+			if (hasPerk(PerkLib.DraconicBones))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.DraconicBonesEvolved) >= 0)
+			if (hasPerk(PerkLib.DraconicBonesEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.DraconicBonesFinalForm) >= 0)
+			if (hasPerk(PerkLib.DraconicBonesFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.DraconicHeart) >= 0)
+			if (hasPerk(PerkLib.DraconicHeart))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.DraconicHeartEvolved) >= 0)
+			if (hasPerk(PerkLib.DraconicHeartEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.DraconicHeartFinalForm) >= 0)
+			if (hasPerk(PerkLib.DraconicHeartFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.DraconicLungs) >= 0)
+			if (hasPerk(PerkLib.DraconicLungs))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.DraconicLungsEvolved) >= 0)
+			if (hasPerk(PerkLib.DraconicLungsEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.DraconicLungsFinalForm) >= 0)
+			if (hasPerk(PerkLib.DraconicLungsFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.DrakeLungs) >= 0)
+			if (hasPerk(PerkLib.DrakeLungs))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.DrakeLungsEvolved) >= 0)
+			if (hasPerk(PerkLib.DrakeLungsEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.DrakeLungsFinalForm) >= 0)
+			if (hasPerk(PerkLib.DrakeLungsFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.EasterBunnyEggBag) >= 0)
+			if (hasPerk(PerkLib.EasterBunnyEggBag))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.EasterBunnyEggBagEvolved) >= 0)
+			if (hasPerk(PerkLib.EasterBunnyEggBagEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.EasterBunnyEggBagFinalForm) >= 0)
+			if (hasPerk(PerkLib.EasterBunnyEggBagFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.EclipticMind) >= 0)
+			if (hasPerk(PerkLib.EclipticMind))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.EclipticMindEvolved) >= 0)
+			if (hasPerk(PerkLib.EclipticMindEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.EclipticMindFinalForm) >= 0)
+			if (hasPerk(PerkLib.EclipticMindFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.ElvishPeripheralNervSys) >= 0)
+			if (hasPerk(PerkLib.ElvishPeripheralNervSys))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0)
+			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0)
+			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.FeyArcaneBloodstream) >= 0)
+			if (hasPerk(PerkLib.FeyArcaneBloodstream))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.FeyArcaneBloodstreamEvolved) >= 0)
+			if (hasPerk(PerkLib.FeyArcaneBloodstreamEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.FeyArcaneBloodstreamFinalForm) >= 0)
+			if (hasPerk(PerkLib.FeyArcaneBloodstreamFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.FloralOvaries) >= 0)
+			if (hasPerk(PerkLib.FloralOvaries))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.FloralOvariesEvolved) >= 0)
+			if (hasPerk(PerkLib.FloralOvariesEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.FloralOvariesFinalForm) >= 0)
+			if (hasPerk(PerkLib.FloralOvariesFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.FrozenHeart) >= 0)
+			if (hasPerk(PerkLib.FrozenHeart))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.FrozenHeartEvolved) >= 0)
+			if (hasPerk(PerkLib.FrozenHeartEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.FrozenHeartFinalForm) >= 0)
+			if (hasPerk(PerkLib.FrozenHeartFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.GazerEye) >= 0)
+			if (hasPerk(PerkLib.GazerEye))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.GazerEyeEvolved) >= 0)
+			if (hasPerk(PerkLib.GazerEyeEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.GazerEyeFinalForm) >= 0)
+			if (hasPerk(PerkLib.GazerEyeFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.GorgonsEyes) >= 0)
+			if (hasPerk(PerkLib.GorgonsEyes))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.GorgonsEyesEvolved) >= 0)
+			if (hasPerk(PerkLib.GorgonsEyesEvolved))
 				internalChimeraCounter++;
-			//if (findPerk(PerkLib.) >= 0)
+			//if (hasPerk(PerkLib.))
 			//	internalChimeraCounter++;
-			if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
+			if (hasPerk(PerkLib.HarpyHollowBones))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
+			if (hasPerk(PerkLib.HarpyHollowBonesEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
+			if (hasPerk(PerkLib.HarpyHollowBonesFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.HinezumiBurningBlood) >= 0)
+			if (hasPerk(PerkLib.HeartOfTheStorm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.HinezumiBurningBloodEvolved) >= 0)
+			if (hasPerk(PerkLib.HeartOfTheStormEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.HinezumiBurningBloodFinalForm) >= 0)
+			if (hasPerk(PerkLib.HeartOfTheStormFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.HeartOfTheStorm) >= 0)
+			if (hasPerk(PerkLib.HinezumiBurningBlood))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
+			if (hasPerk(PerkLib.HinezumiBurningBloodEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
+			if (hasPerk(PerkLib.HinezumiBurningBloodFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.HollowFangs) >= 0)
+			if (hasPerk(PerkLib.HeartOfTheStorm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.HollowFangsEvolved) >= 0)
+			if (hasPerk(PerkLib.HeartOfTheStormEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.HollowFangsFinalForm) >= 0)
+			if (hasPerk(PerkLib.HeartOfTheStormFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0)
+			if (hasPerk(PerkLib.HollowFangs))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.KitsuneThyroidGlandEvolved) >= 0)
+			if (hasPerk(PerkLib.HollowFangsEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.KitsuneThyroidGlandFinalForm) >= 0)
+			if (hasPerk(PerkLib.HollowFangsFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.LactaBovinaOvaries) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.LactaBovinaOvariesEvolved) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.LactaBovinaOvariesFinalForm) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.LizanMarrow) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.LizanMarrowEvolved) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.LizanMarrowFinalForm) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.ManticoreMetabolism) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0)
-				internalChimeraCounter++;
-			//if (findPerk(PerkLib.) >= 0)
+			//if (hasPerk(PerkLib.))
 			//	internalChimeraCounter++;
-			if (findPerk(PerkLib.MantislikeAgility) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.MantislikeAgilityEvolved) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.MantislikeAgilityFinalForm) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.MelkieLung) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.MelkieLungEvolved) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.MelkieLungFinalForm) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.MinotaurTesticles) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.MinotaurTesticlesEvolved) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.MinotaurTesticlesFinalForm) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.NaturalPunchingBag) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.NaturalPunchingBagEvolved) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.NaturalPunchingBagFinalForm) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.NukiNuts) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.NukiNutsEvolved) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.NukiNutsFinalForm) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.ObsidianHeart) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.ObsidianHeartEvolved) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.ObsidianHeartFinalForm) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.OniMusculature) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.OniMusculatureEvolved) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.OniMusculatureFinalForm) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.OrcAdrenalGlands) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.OrcAdrenalGlandsEvolved) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.OrcAdrenalGlandsFinalForm) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.PigBoarFat) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.PigBoarFatEvolved) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.PigBoarFatFinalForm) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.SalamanderAdrenalGlandsEvolved) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.SalamanderAdrenalGlandsFinalForm) >= 0)
-				internalChimeraCounter++;
-			if (findPerk(PerkLib.ScyllaInkGlands) >= 0)
-				internalChimeraCounter++;
-			//if (findPerk(PerkLib.) >= 0)
+			//if (hasPerk(PerkLib.))
 			//	internalChimeraCounter++;
-			//if (findPerk(PerkLib.) >= 0)
+			//if (hasPerk(PerkLib.))
 			//	internalChimeraCounter++;
-			if (findPerk(PerkLib.TrachealSystem) >= 0)
+			if (hasPerk(PerkLib.KitsuneThyroidGland))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.TrachealSystemEvolved) >= 0)
+			if (hasPerk(PerkLib.KitsuneThyroidGlandEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.TrachealSystemFinalForm) >= 0)
+			if (hasPerk(PerkLib.KitsuneThyroidGlandFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.TwinHeart) >= 0)
+			if (hasPerk(PerkLib.LactaBovinaOvaries))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.TwinHeartEvolved) >= 0)
+			if (hasPerk(PerkLib.LactaBovinaOvariesEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.TwinHeartFinalForm) >= 0)
+			if (hasPerk(PerkLib.LactaBovinaOvariesFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.VampiricBloodsteam) >= 0)
+			if (hasPerk(PerkLib.LizanMarrow))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.VampiricBloodsteamEvolved) >= 0)
+			if (hasPerk(PerkLib.LizanMarrowEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.VampiricBloodsteamFinalForm) >= 0)
+			if (hasPerk(PerkLib.LizanMarrowFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.VenomGlands) >= 0)
+			if (hasPerk(PerkLib.ManticoreMetabolism))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.VenomGlandsEvolved) >= 0)
+			if (hasPerk(PerkLib.ManticoreMetabolismEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.VenomGlandsFinalForm) >= 0)
+			//if (hasPerk(PerkLib.))
+			//	internalChimeraCounter++;
+			if (hasPerk(PerkLib.MantislikeAgility))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.WhaleFat) >= 0)
+			if (hasPerk(PerkLib.MantislikeAgilityEvolved))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.WhaleFatEvolved) >= 0)
+			if (hasPerk(PerkLib.MantislikeAgilityFinalForm))
 				internalChimeraCounter++;
-			if (findPerk(PerkLib.WhaleFatFinalForm) >= 0)
+			if (hasPerk(PerkLib.MelkieLung))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.MelkieLungEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.MelkieLungFinalForm))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.MinotaurTesticles))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.MinotaurTesticlesEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.MinotaurTesticlesFinalForm))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.NaturalPunchingBag))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.NaturalPunchingBagEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.NaturalPunchingBagFinalForm))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.NukiNuts))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.NukiNutsEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.NukiNutsFinalForm))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.ObsidianHeart))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.ObsidianHeartEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.ObsidianHeartFinalForm))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.OniMusculature))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.OniMusculatureEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.OniMusculatureFinalForm))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.OrcAdrenalGlands))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.OrcAdrenalGlandsEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.OrcAdrenalGlandsFinalForm))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.PigBoarFat))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.PigBoarFatEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.PigBoarFatFinalForm))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.SalamanderAdrenalGlands))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.ScyllaInkGlands))
+				internalChimeraCounter++;
+			//if (hasPerk(PerkLib.))
+			//	internalChimeraCounter++;
+			//if (hasPerk(PerkLib.))
+			//	internalChimeraCounter++;
+			if (hasPerk(PerkLib.TrachealSystem))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.TrachealSystemEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.TrachealSystemFinalForm))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.TwinHeart))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.TwinHeartEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.TwinHeartFinalForm))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.VampiricBloodsteam))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.VampiricBloodsteamEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.VampiricBloodsteamFinalForm))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.VenomGlands))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.VenomGlandsEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.VenomGlandsFinalForm))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.WhaleFat))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.WhaleFatEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.WhaleFatFinalForm))
 				internalChimeraCounter++;
 
 			End("Player","racialScore");
