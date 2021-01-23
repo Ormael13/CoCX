@@ -894,8 +894,8 @@ package classes.Scenes.Places.HeXinDao
 			outputText("(<b>Neisa has been added to the Followers menu!</b>)\n\n");
 			if (flags[kFLAGS.NEISA_FOLLOWER] < 6) {
 				flags[kFLAGS.NEISA_LVL_UP] = 1;
-				flags[kFLAGS.NEISA_AFFECTION] = 1;
 				flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 0;
+				if (flags[kFLAGS.NEISA_AFFECTION] < 10) flags[kFLAGS.NEISA_AFFECTION] = 1;
 			}
 			flags[kFLAGS.NEISA_FOLLOWER] = 7;
 			doNext(camp.returnToCampUseOneHour);
