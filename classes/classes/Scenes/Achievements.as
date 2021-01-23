@@ -301,7 +301,7 @@ public class Achievements extends BaseContent
 			//odblokowanie pierwszego animal ancestory starting bonus at chara creation
 			addAchievement("My own Demon Weapon", kACHIEVEMENTS.EPIC_MY_OWN_DEMON_WEAPON, "Find an evolving weapon.", "", true);
 			//znalezienie ewolującą zbroje
-			addAchievement("Me Evolve", kACHIEVEMENTS.EPIC_ME_EVOLVE, "Find one evolving items.", "", true);
+			addAchievement("Me Evolve", kACHIEVEMENTS.EPIC_ME_EVOLVE, "Find one evolving item.", "", true);
 			addAchievement("Us Evolve", kACHIEVEMENTS.EPIC_US_EVOLVE, "Find two evolving items.", "", true);
 			//znalezienie 4 ewolujących przedmiotów
 			//znalezienie 8 ewolujących przedmiotów

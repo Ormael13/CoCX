@@ -147,17 +147,6 @@ public class Camp extends NPCAwareContent {
 	protected var heliaJoinsStream:Boolean;
 	protected var amilyJoinsStream:Boolean;
 
-	public function EzekielCurseQuickFix():void {
-		clearOutput();
-		outputText("Like with a magic wand touch some divine being has blessed you. And before leaving meantioned about never again selling or discarding odd fruits.");
-		if (player.findPerk(PerkLib.EzekielBlessing) < 0) player.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
-		if (player.hasStatusEffect(StatusEffects.EzekielCurse)) player.removeStatusEffect(StatusEffects.EzekielCurse);
-		statScreenRefresh();
-		dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "lib", 5);
-		doCamp();
-
-	}
-
 	public var IsSleeping: Boolean = false;
 	public var CanDream: Boolean = false;
 	public var HadNightEvent: Boolean = false;
@@ -995,12 +984,13 @@ public class Camp extends NPCAwareContent {
 				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
 			}
 		}
-		//	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && player.findPerk(PerkLib.EzekielBlessing) < 0) addButton(13, "Remov. Curse", EzekielCurseQuickFix).hint("Quick fix for Ezekiel curse when ezekiel fruit was lost.");
-
+		
 		//Remove buttons according to conditions.
 		if (isNightTime) {
 			if (model.time.hours >= 22 || model.time.hours < 6) {
-				removeButton(7); //Slaves
+				if (nightTimeActiveFollowers() == 0) removeButton(5); //Followers
+				if (nightTimeActiveLovers() == 0) removeButton(6); //Lovers
+				if (nightTimeActiveSlaves() == 0) removeButton(7); //Slaves
 				removeButton(8); //Camp Actions
 			}
 		}
@@ -1203,6 +1193,23 @@ public class Camp extends NPCAwareContent {
 		if (followerHel()) counter++;
 		if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
 		if (followerKiha()) counter++;
+		return counter;
+	}
+	
+	public function nightTimeActiveFollowers():Number {
+		var counter:Number = 0;
+		if (followerShouldra()) counter++;
+		if (flags[kFLAGS.LUNA_FOLLOWER] > 10 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
+		return counter;
+	}
+	
+	public function nightTimeActiveLovers():Number {
+		var counter:Number = 0;
+		return counter;
+	}
+	
+	public function nightTimeActiveSlaves():Number {
+		var counter:Number = 0;
 		return counter;
 	}
 

@@ -55,7 +55,7 @@ public function repeatPlainsEnc():void {
 }
 public function repeatBattlefieldEnc():void {
 	clearOutput();
-	outputText("As you explore the outer battlefield area, you run into ");
+	outputText("As you explore the battlefield area, you run into ");
 	if (flags[kFLAGS.DIANA_AFFECTION] >= 95) outputText("Diana");
 	else outputText("an unicorn");
 	outputText(".\n\nAt first she doesn’t notice you, she’s to busy examining a flower. You walk to her to greet her, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled expression and grabs her staff to defend herself, lunging for a set of preemptive strikes as she begins to attack you.\n\n");
@@ -74,6 +74,9 @@ public function postNameForestEnc():void {
 	outputText("As you explore the forest area, you run into Diana.\n\n");
 	outputText("At first she doesn’t notice you, to busy examining a flower. You walk to her to say hi, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled  expression and grabs her staff to defend herself, but relax as she realise it’s you.\n\n");
 	outputText("\"<i>Oh hello [name]! I didn’t expect you. Say while you happen to be there I’m in need of a sparring partner would you mind having a friendly fight with me?</i>\"\n\n");
+	menu();
+	addButton(1, "Sure", postNameForestEncSure);
+	addButton(3, "Not Now", postNameForestEncNotNow);
 }
 public function postNameForestEncSure():void {
 	outputText("Well why not? You could use a warmup yourself.\n\n");
@@ -469,50 +472,50 @@ public function lostToDiana():void {
 private function levelingHerself():void {
 	flags[kFLAGS.DIANA_DEFEATS_COUNTER]++;
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DIANA_LVL_UP] == 0) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 18);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 18);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 6);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 6);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 1;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DIANA_LVL_UP] == 1) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 21);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 21);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 7);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 7);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 2;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.DIANA_LVL_UP] == 2) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 24);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 24);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 8);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 8);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 3;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.DIANA_LVL_UP] == 3) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 27);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 27);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 9);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 9);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 4;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.DIANA_LVL_UP] == 4) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 30);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 30);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 10);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 10);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 5;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.DIANA_LVL_UP] == 5) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 33);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 33);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 11);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 11);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 6;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.DIANA_LVL_UP] == 6) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 36);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 36);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 12);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 12);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 7;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.DIANA_LVL_UP] == 7) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 39);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 39);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 13);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 13);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 8;
 	}

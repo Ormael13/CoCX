@@ -34,13 +34,13 @@ use namespace CoC;
 
 			
 			//Izma
-			if (player.level >= 3 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && (player.exploredLake >= 10) && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0 && player.exploredLake % 8 == 0) {
+			if (player.level >= 3 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && (player.exploredLake >= 10) && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0 && player.exploredLake % 6 == 0) {
 				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				SceneLib.izmaScene.meetIzmaAtLake();
 				return;
 			}
 			//Diana
-			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(10) == 0) {
+			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0) {
 				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				SceneLib.dianaScene.repeatLakeEnc();
 				return;
@@ -57,24 +57,24 @@ use namespace CoC;
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
-			if (player.exploredLake % 20 == 0) {
+			if (player.exploredLake % 15 == 0) {
 				calluScene.ottahGirl();
 				return;
 			}
 			//Sword/Bow/Staff/Shield Discovery
-			if (!player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken) && rand(5) == 0) {
+			if (!player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken) && rand(5) == 0) {// && player.hasPerk(PerkLib.JobWarrior)
 				swordInStone.findSwordInStone();
 				return;
 			}
-			if (!player.hasStatusEffect(StatusEffects.TookBlessedBow) && !player.hasStatusEffect(StatusEffects.BBowBroken) && rand(5) == 0) {
+			if (!player.hasStatusEffect(StatusEffects.TookBlessedBow) && !player.hasStatusEffect(StatusEffects.BBowBroken) && player.hasPerk(PerkLib.JobRanger) && rand(3) == 0) {
 				swordInStone.findBowInStone();
 				return;
 			}
-			if (!player.hasStatusEffect(StatusEffects.TookBlessedStaff) && !player.hasStatusEffect(StatusEffects.BStaffBroken) && rand(5) == 0) {
+			if (!player.hasStatusEffect(StatusEffects.TookBlessedStaff) && !player.hasStatusEffect(StatusEffects.BStaffBroken) && player.hasPerk(PerkLib.JobSorcerer) && rand(3) == 0) {
 				swordInStone.findStaffInStone();
 				return;
 			}
-			if (!player.hasStatusEffect(StatusEffects.TookBlessedShield) && !player.hasStatusEffect(StatusEffects.BShieldBroken) && rand(5) == 0) {
+			if (!player.hasStatusEffect(StatusEffects.TookBlessedShield) && !player.hasStatusEffect(StatusEffects.BShieldBroken) && player.hasPerk(PerkLib.JobGuardian) && rand(3) == 0) {
 				swordInStone.findShieldInStone();
 				return;
 			}

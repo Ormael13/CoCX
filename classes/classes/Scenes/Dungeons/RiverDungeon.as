@@ -201,7 +201,7 @@ import classes.StatusEffects;
 			addButton(1, "Come", takeAetherSister1b);
 		}
 		public function takeAetherSister1a():void {
-			outputText("You tell the voice to wait at the camp. The moment you say it from golem gaunlet extends a thin tendril that wrap around you for a moment and then it returns. Between extending and reciding all the other tendrils, which was covering golem also receeded into the gaunlet. Then it vanish in flash of light leaving behind damaged golem.\n\n");
+			outputText("\n\nYou tell the voice to wait at the camp. The moment you say it from golem gaunlet extends a thin tendril that wrap around you for a moment and then it returns. Between extending and reciding all the other tendrils, which was covering golem also receeded into the gaunlet. Then it vanish in flash of light leaving behind damaged golem.");
 			flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
 			cleanupAfterCombat();
 			doNext(playerMenu);
@@ -229,7 +229,7 @@ import classes.StatusEffects;
 			addButton(1, "Come", takeAetherSister2b);
 		}
 		public function takeAetherSister2a():void {
-			outputText("You tell the voice to wait at the camp. The moment you say it from golem gaunlet extends a thin tendril that wrap around you for a moment and then it returns. Between extending and reciding all the other tendrils, which was covering golem also receeded into the gaunlet. Then it vanish in flash of light leaving behind damaged golem.\n\n");
+			outputText("\n\nYou tell the voice to wait at the camp. The moment you say it from golem gaunlet extends a thin tendril that wrap around you for a moment and then it returns. Between extending and reciding all the other tendrils, which was covering golem also receeded into the gaunlet. Then it vanish in flash of light leaving behind damaged golem.");
 			flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
 			cleanupAfterCombat();
 			doNext(playerMenu);
@@ -324,9 +324,9 @@ import classes.StatusEffects;
 			encountersRuletteA();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u>Entrance</u></b>\n");
-			outputText("You run into an old campsite. by the looks of it an adventurer must have rested there, through the fire likely died a month ago by the look of it. What a peculiar fire too, just who the hell would grab bones, set them in a stone circle and then impale a skull on a rusty longsword before setting fire to it?");
+			outputText("You run into an old campsite. By the looks of it an adventurer must have rested there, through the fire likely died a month ago by the look of it. What a peculiar fire too, just who the hell would grab bones, set them in a stone circle and then impale a skull on a rusty longsword before setting fire to it?");
 			dungeons.setDungeonButtonsRD(null, null, null, roomA02);
-			if (flags[kFLAGS.NEISA_AFFECTION] < 10) addButtonDisabled(10, "Up", "You would leave now but you have yet to find enough to pay Neisa."); 
+			if (flags[kFLAGS.NEISA_AFFECTION] < 10 && flags[kFLAGS.NEISA_FOLLOWER] < 4) addButtonDisabled(10, "Up", "You would leave now but you have yet to find enough to pay Neisa."); 
 			else addButton(10, "Up", exitDungeon);
 		}
 		public function roomA02():void {
@@ -346,7 +346,7 @@ import classes.StatusEffects;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You spot a small lizard lazily resting on the cold hard stone above you. The air is humid and cold. On the walls are old graffiti likely left by ancient civilisations of animal morphs.");
 			dungeons.setDungeonButtonsRD(roomA08, roomA02, null, roomA04);
-			if (flags[kFLAGS.NEISA_AFFECTION] < 5) tresureRoom1A();
+			if (flags[kFLAGS.NEISA_AFFECTION] < 5 && flags[kFLAGS.NEISA_FOLLOWER] < 4) tresureRoom1A();
 		}
 		public function roomA04():void {
 			dungeonLoc = 71;
@@ -413,7 +413,7 @@ import classes.StatusEffects;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You spot a small lizard lazily resting on the cold hard stone above you. The air is humid and cold. On the walls are old graffiti likely left by ancient civilisations of animal morphs.");
 			dungeons.setDungeonButtonsRD(null, roomA09, null, null);
-			if (flags[kFLAGS.NEISA_AFFECTION] == 5) tresureRoom2A();
+			if (flags[kFLAGS.NEISA_AFFECTION] == 5 && flags[kFLAGS.NEISA_FOLLOWER] < 4) tresureRoom2A();
 		}
 		public function roomA11():void {
 			dungeonLoc = 78;
