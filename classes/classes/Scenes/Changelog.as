@@ -147,7 +147,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-A bit higher req. to get ninetail kitunse stag of race bonuses and 2 tiers above this stage. Also way kitsune score is calculated is changed to allow to get few more points on averange.\n");
 			outputText("-Sand Witches chest with La Bova and Lactacid now hold two items more items and it properly get slowly refilled with each passing day just as text ingame suggest.\n");
-			outputText("-\n");
+			outputText("-Moga Hen decided to buy more oddities i mean... valuable items form PC. Like Purple Crystal Shards. I mean since PC still not found use for them so then why not sell them to Moga and get sweet spirit stones instead?\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -165,7 +165,16 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Some shady person appeared in Journey to the East inn that sells items currently. Maybe he will talk in future more too ^^\n");
-			outputText("-Diana can cure curses now. Both causing set flat vlaue lost form stats (-10 str) and bonus multi related one curses (-10% to str). She also can heal to max HP even if PC have overmaxHP more than 0.\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-Diana can cure curses now. Both causing set flat vlaue lost form stats (-10 str) and bonus multi related one curses (-10% to str). She also can heal to max HP even if PC have overmaxHP more than 0.\n");
+			outputText("-Ayane also could help with curses. Not as good as Diana but it's still something, right? Also isn't it spounds like curses could become more common now that we got more than 'Only Luna' curse curing options? Nah probably you all and mine imagination...\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
@@ -174,17 +183,8 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons, Izmael three bugs, Kiha scene checking for wrong cock type, making golem showing error if golem core(s) isn't(aren't) in PC intentory and instead in pc 'golem bag', disabling Golems submenu if PC not have temporal golems left to use, ");
-			outputText("displacer beast eyes blocking gaining fur tf, cancer enemy minor bugs, ascension stats and buffs lingering post ascension\n");/*ostatni punkt changelogu
+			outputText("displacer beast eyes blocking gaining fur tf, cancer enemy minor bugs, ascension stats and buffs lingering post ascension, Metal Plate finds on battlefield glitch\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -523,6 +523,8 @@ public class HeXinDao extends BaseContent
         menu();
         if (player.hasItem(useables.GOLCORE, 1)) addButton(0, "Sell 1", sellOneGolemCore).hint("Sell 1 golem core.");
         if (player.hasItem(useables.GOLCORE, 5)) addButton(1, "Sell 5", sellFiveGolemCores).hint("Sell 5 golem cores.");
+        if (player.hasItem(useables.PCSHARD, 1)) addButton(5, "Sell 1", sellOnePurpleCrystalShard).hint("Sell 1 purple crystal shard.");
+        if (player.hasItem(useables.PCSHARD, 5)) addButton(6, "Sell 5", sellFivePurpleCrystalShards).hint("Sell 5 purple crystal shards.");
         addButton(14, "Back", mogahenmerchant);
     }
 
@@ -533,11 +535,24 @@ public class HeXinDao extends BaseContent
         flags[kFLAGS.SPIRIT_STONES]++;
         doNext(sellItemsForSpiritStones);
     }
-
     public function sellFiveGolemCores():void {
         clearOutput();
         outputText("\"<i>Golem cores. Let me check...yes all of them seems to be in decent shape,</i>\" after examination he walks away and return shortly. \"<i>Here are your five stones for them.</i>\"");
         player.destroyItems(useables.GOLCORE, 5);
+        flags[kFLAGS.SPIRIT_STONES] += 5;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellOnePurpleCrystalShard():void {
+        clearOutput();
+        outputText("\"<i>A single purple crystal shard. It's still glowing, so that will be a single spirit stone,</i>\" he states after examining the shard. Moments after he went to put away the shard Moga returns and gives you a single stone.");
+        player.destroyItems(useables.PCSHARD, 1);
+        flags[kFLAGS.SPIRIT_STONES]++;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellFivePurpleCrystalShards():void {
+        clearOutput();
+        outputText("\"<i>Purple crystal shards. Let me check...yes all of them seems to be in decent state,</i>\" after examination he walks away and return shortly. \"<i>Here are your five stones for them.</i>\"");
+        player.destroyItems(useables.PCSHARD, 5);
         flags[kFLAGS.SPIRIT_STONES] += 5;
         doNext(sellItemsForSpiritStones);
     }
