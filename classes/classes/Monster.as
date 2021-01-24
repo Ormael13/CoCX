@@ -1898,18 +1898,18 @@ import flash.utils.getQualifiedClassName;
 		/**
 		 * Called if monster is stunned. Should return true if stun is ignored and need to proceed with ai.
 		 */
+
 		protected function handleStun():Boolean
 		{
-			if (hasStatusEffect(StatusEffects.SoulTear)) {
-				removeStatusEffect(StatusEffects.SoulTear);
-				createStatusEffect(StatusEffects.AbilityCooldown4,6,0,0,0);
-			}
+			interruptAbility();
 			if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
 			else addStatusValue(StatusEffects.Stunned, 1, -1);
+			if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Stunned,1,-5);
 			if (statusEffectv1(StatusEffects.StunnedTornado) <= 0) removeStatusEffect(StatusEffects.StunnedTornado);
 			else {
 				EngineCore.outputText(capitalA + short + " is still caught in the tornado.");
 				addStatusValue(StatusEffects.StunnedTornado, 1, -1);
+				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.StunnedTornado,1,-5);
 			}
 			if (hasStatusEffect(StatusEffects.InkBlind)) {
 				if (plural) EngineCore.outputText("Your foes are busy trying to remove the ink and therefore does no other action than flay their hand about its faces.");
@@ -1945,6 +1945,14 @@ import flash.utils.getQualifiedClassName;
 				}
 			}
 			return false;
+		}
+
+		/**
+		 * This method is called after a stun interupted an ability.
+		 * Default: Does nothing this is monster specific
+		 */
+		public function interruptAbility():void {
+			// Generic monster does nothing (has no channelable abilities)
 		}
 
 		/**
@@ -2212,7 +2220,7 @@ import flash.utils.getQualifiedClassName;
 
 		public function combatRoundUpdate():void
 		{
-			
+
 			//regeneration perks for monsters
 			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.LizanMarrowFinalForm) >= 0 || findPerk(PerkLib.DraconicHeartFinalForm) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0
 			|| findPerk(PerkLib.HydraRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0 || findPerk(PerkLib.GreaterLifeline) >= 0 || findPerk(PerkLib.EpicLifeline) >= 0 || findPerk(PerkLib.IcyFlesh) >= 0 || findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0
@@ -2305,7 +2313,7 @@ import flash.utils.getQualifiedClassName;
 				manaRecovery *= manaRecoveryMulti;
 				addMana(manaRecovery);
 			}
-			
+
 			if(hasStatusEffect(StatusEffects.MilkyUrta)) {
 				SceneLib.urtaQuest.milkyUrtaTic();
 			}
@@ -2359,6 +2367,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.InkBlind)) {
 				addStatusValue(StatusEffects.InkBlind,1,-1);
+				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.InkBlind,1,-5);
 				if(statusEffectv1(StatusEffects.InkBlind) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer blind!</b>\n\n");
 					removeStatusEffect(StatusEffects.InkBlind);
@@ -2374,6 +2383,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.FrozenSolid)) {
 				addStatusValue(StatusEffects.FrozenSolid,1,-1);
+				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.FrozenSolid,1,-5);
 				if(statusEffectv1(StatusEffects.FrozenSolid) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer encased in the ice prison!</b>\n\n");
 					removeStatusEffect(StatusEffects.FrozenSolid);
@@ -2382,14 +2392,33 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.Polymorphed)) {
 				addStatusValue(StatusEffects.Polymorphed,1,-1);
+				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Polymorphed,1,-5);
 				if(statusEffectv1(StatusEffects.Polymorphed) <= 0) {
 					outputText("<b>" + capitalA + short + " has freed " + pronoun2 + "self from the curse!</b>\n\n");
 					removeStatusEffect(StatusEffects.Polymorphed);
 				}
 				else outputText("<b>" + capitalA + short + " is fighting against the curse.</b>\n\n");
 			}
+			if(hasStatusEffect(StatusEffects.Sleep)) {
+				addStatusValue(StatusEffects.Sleep,1,-1);
+				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Sleep,1,-5);
+				if(statusEffectv1(StatusEffects.Sleep) <= 0) {
+					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer asleep!</b>\n\n");
+					removeStatusEffect(StatusEffects.Sleep);
+				}
+				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently asleep!</b>\n\n");
+			}
+			if(hasStatusEffect(StatusEffects.InvisibleOrStealth)) {
+				addStatusValue(StatusEffects.InvisibleOrStealth,1,-1);
+				if(statusEffectv1(StatusEffects.InvisibleOrStealth) <= 0) {
+					outputText("<b>" + capitalA + short + (plural ? " have" : " has") + " found you!</b>\n\n");
+					removeStatusEffect(StatusEffects.InvisibleOrStealth);
+				}
+				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " looking for you!</b>\n\n");
+			}
 			if(hasStatusEffect(StatusEffects.Distracted)) {
 				addStatusValue(StatusEffects.Distracted,1,-1);
+				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Distracted,1,-5);
 				if(statusEffectv1(StatusEffects.Distracted) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer distracted!</b>\n\n");
 					removeStatusEffect(StatusEffects.Distracted);
@@ -2398,6 +2427,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.HypnosisNaga)) {
 				addStatusValue(StatusEffects.HypnosisNaga,1,-1);
+				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.HypnosisNaga,1,-5);
 				if(statusEffectv1(StatusEffects.HypnosisNaga) <= 0) {
 					outputText("<b>You try to prolong the trance but " + a + short + " finally snaps out.</b>\n\n");
 					removeStatusEffect(StatusEffects.HypnosisNaga);
@@ -2939,7 +2969,7 @@ import flash.utils.getQualifiedClassName;
 				}
 				else addStatusValue(StatusEffects.IceArmor,1,-1);
 			}
-			
+
 			//Flame Blade
 			if (hasStatusEffect(StatusEffects.FlameBlade)) {
 				if (statusEffectv1(StatusEffects.FlameBlade) <= 0) {

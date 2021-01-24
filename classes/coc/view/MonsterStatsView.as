@@ -12,7 +12,7 @@ import flash.text.TextField;
 import flash.text.TextFormat;
 
 public class MonsterStatsView extends Block {
-	
+
 	private var sideBarBG:BitmapDataSprite;
 	private var nameText:TextField;
 	private var levelBar:StatBar;
@@ -27,7 +27,7 @@ public class MonsterStatsView extends Block {
 	private var generalTypeValue:TextField;
 	private var elementalTypeLabel:TextField;
 	private var elementalTypeValue:TextField;
-	
+
 	public function MonsterStatsView(mainView:MainView) {
 		super({
 			x           : MainView.MONSTER_X,
@@ -55,7 +55,10 @@ public class MonsterStatsView extends Block {
 			borderRadius: 2
 		}, {ignore: true});
 		nameText  = addTextField({
-			defaultTextFormat: StatsView.LABEL_FORMAT
+			defaultTextFormat: StatsView.LABEL_FORMAT,
+			width  : MainView.MONSTER_W,
+			multiline        : true,
+			wordWrap         : true
 		});
 		addElement(levelBar = new StatBar({
 			statName: "Level:",
@@ -112,19 +115,20 @@ public class MonsterStatsView extends Block {
 			defaultTextFormat: StatsView.TEXT_FORMAT
 		});
 	}
-	
+
 	public function show():void {
 		this.visible = true;
 	}
-	
+
 	public function hide():void {
 		this.visible = false;
 	}
-	
+
 	public function refreshStats(game:CoC):void {
 		var player:Player     = game.player;
 		var monster:Monster   = game.monster;
 		nameText.text         = Utils.capitalizeFirstLetter(monster.short);
+		nameText.height       = nameText.textHeight+5;
 		levelBar.value        = monster.level;
 		hpBar.maxValue        = monster.maxHP();
 		hpBar.value           = monster.HP;
@@ -144,7 +148,7 @@ public class MonsterStatsView extends Block {
 		wrathBar.visible      = player.hasPerk(PerkLib.SenseWrath);
 		corBar.value          = monster.cor;
 		corBar.visible        = player.hasPerk(PerkLib.SenseCorruption);
-		
+
 		invalidateLayout();
 	}
 	public function setMonsterTypes(generalTypes:/*String*/Array, elementalTypes:/*String*/Array):void {
@@ -162,7 +166,7 @@ public class MonsterStatsView extends Block {
 		sideBarBG.borderColor = style.statBorderColor;
 		sideBarBG.fillColor = style.statGlass;
 		sideBarBG.fillAlpha = style.statGlassAlpha;
-		
+
 		var dtf:TextFormat;
 		for (var ci:int = 0, cn:int = this.numElements; ci < cn; ci++) {
 			var e:StatBar = this.getElementAt(ci) as StatBar;

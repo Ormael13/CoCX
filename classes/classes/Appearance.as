@@ -306,7 +306,7 @@ public class Appearance extends Utils
 				}
 				//Just lactating!
 				else if (i_creature.biggestLactation() > 0) {
-					//Light lactation
+					//Light lactationf
 					if (i_creature.biggestLactation() <= 1) {
 						options = ["milk moistened ",
 							"slightly lactating ",

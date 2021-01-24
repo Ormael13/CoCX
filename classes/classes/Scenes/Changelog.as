@@ -147,6 +147,8 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-A bit higher req. to get ninetail kitunse stag of race bonuses and 2 tiers above this stage. Also way kitsune score is calculated is changed to allow to get few more points on averange.\n");
 			outputText("-Sand Witches chest with La Bova and Lactacid now hold two items more items and it properly get slowly refilled with each passing day just as text ingame suggest.\n");
+			outputText("-Fix health bar beyond 100 000 not showing properly. (Liadri)\n");
+			outputText("-Fix Alvina combat moves she will no longuer randomly one shot players witheout prejudice but will still require a very powerful character to defeat. (Liadri)\n");
 			outputText("-Moga Hen decided to buy more oddities i mean... valuable items from PC. Like Purple Crystal Shards. I mean since PC still not found use for them so then why not sell them to Moga and get sweet spirit stones instead?\n");
 			outputText("-Meeting Izma or otter girl was changed from each 8th/20th explore to each 6th/15th exploration of the Lake.\n");
 			outputText("-Finding Beautiful Bow / Staff / Shield been now limited to having matching starting job: Ranger / Sorcerer / Guardian. Also chance to find them was increased a bit.\n");
