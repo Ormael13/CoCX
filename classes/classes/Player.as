@@ -1193,6 +1193,11 @@ use namespace CoC;
 		{
 			return weaponRange == game.weaponsrange.BOWGUID || weaponRange == game.weaponsrange.BOWHODR;
 		}
+		//Is Bows
+		public function isBowTypeWeapon():Boolean
+		{
+			return weaponRangePerk == "Bow";
+		}
 		//Using Tome
 		public function isUsingTome():Boolean
 		{
@@ -13078,7 +13083,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function maxDualWieldNormalLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -13119,7 +13124,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function maxDualWieldLargeLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -13160,7 +13165,7 @@ use namespace CoC;
 				}
 			}
 		}
-    
+
 		public function maxDualWieldFirearmsLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
