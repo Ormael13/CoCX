@@ -147,8 +147,8 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-A bit higher req. to get ninetail kitunse stag of race bonuses and 2 tiers above this stage. Also way kitsune score is calculated is changed to allow to get few more points on averange.\n");
 			outputText("-Sand Witches chest with La Bova and Lactacid now hold two items more items and it properly get slowly refilled with each passing day just as text ingame suggest.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fix health bar beyond 100 000 not showing properly. (Liadri)\n");
+			outputText("-Fix Alvina combat moves she will no longuer randomly one shot players witheout prejudice but will still require a very powerful character to defeat. (Liadri)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
