@@ -27,8 +27,8 @@ package classes.Items.Shields
 			var desc:String = _description;
 			//Type
 			desc += "\n\nType: ";
-			if (game.player.statusEffectv4(StatusEffects.AetherTwins1) == 1) "Shield";
-			else "Shield";
+			if (game.player.statusEffectv4(StatusEffects.AetherTwins1) == 1) desc += "Shield";
+			else desc += "Shield";
 			//Block Rating
 			desc += "\nBlock: " + String(block);
 			//Value

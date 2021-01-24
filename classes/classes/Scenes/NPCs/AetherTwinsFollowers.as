@@ -147,7 +147,8 @@ public function aethertwinsFollowersFeedMaterial():void {
 	outputText("\n\n");
 	outputText("\n\n");
 	outputText("\"<i></i>\"\n\n");
-	doNext(camp.returnToCampUseOneHour);
+	doNext(aethertwinsFollowersFeed);
+	cheatTime(1/4);
 }
 	}
-}//do 165 linii na razie dodawać ^^
+}//do 305 linii na razie dodawać ^^
