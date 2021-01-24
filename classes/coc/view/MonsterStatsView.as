@@ -128,7 +128,7 @@ public class MonsterStatsView extends Block {
 		var player:Player     = game.player;
 		var monster:Monster   = game.monster;
 		nameText.text         = Utils.capitalizeFirstLetter(monster.short);
-		nameText.height       = nameText.textHeight;
+		nameText.height       = nameText.textHeight+5;
 		levelBar.value        = monster.level;
 		hpBar.maxValue        = monster.maxHP();
 		hpBar.value           = monster.HP;
