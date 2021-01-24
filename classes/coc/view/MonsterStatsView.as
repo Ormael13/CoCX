@@ -55,7 +55,10 @@ public class MonsterStatsView extends Block {
 			borderRadius: 2
 		}, {ignore: true});
 		nameText  = addTextField({
-			defaultTextFormat: StatsView.LABEL_FORMAT
+			defaultTextFormat: StatsView.LABEL_FORMAT,
+			width  : MainView.MONSTER_W,
+			multiline        : true,
+			wordWrap         : true
 		});
 		addElement(levelBar = new StatBar({
 			statName: "Level:",

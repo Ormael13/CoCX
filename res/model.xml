@@ -3936,16 +3936,16 @@
 							<hide part="breasts/*"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-							<show part="bra/merchantClotheBraMedium"/>
+							<show part="bra_fg/merchantClotheBraMedium"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-							<show part="bra/merchantClotheBraMedium"/>
+							<show part="bra_fg/merchantClotheBraMedium"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-							<show part="bra/merchantClotheBraLarge"/>
+							<show part="bra_fg/merchantClotheBraLarge"/>
 						</case>
 						<default>
-							<show part="bra/merchantClotheBraLarge"/>
+							<show part="bra_fg/merchantClotheBraLarge"/>
 						</default>
 					</switch>
 				</if>
