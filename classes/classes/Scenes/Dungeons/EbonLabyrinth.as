@@ -273,15 +273,16 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			//else player.createStatusEffect(StatusEffects.TFDealer2, 1, 0, 0, 0); - kiedy bedzie dodane gazer tf
 			cleanupAfterCombat();
 		}
-		public function defeatedByBoosNo5():void {
+		public function defeatedByAtlachNacha():void {
 			clearOutput();
-			outputText("\n\n");
+			outputText(" You fall to the ground defeated " + (player.lust >= player.maxLust() ? "by your growing lust":"") + ((player.inte <= 0 || player.wis <= 0) ? "as you lose your grip on reality going insane":"") + ". The last thing anyone will hear from you is your tortured screams as the nightmarish spiders cocoons you. ");
+			outputText("What will happen to you from now on is perhaps too horrible to be told and you will lose your sanity long before you die of fatigue, serving as this creature's plaything until you no longer can go on with your life.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
-		public function defeatBoosNo5():void {
+		public function defeatAtlachNacha():void {
 			clearOutput();
-			outputText("\n\n");
+			outputText("You barely manage to force the spider back into the back of the room as you finally escape the web rushing for the exit, your nightmarish pursuer only meters away from you as you finally leave the room. It claws and flail but you prove faster and manage to outrun it. This was a close one but now you can keep on exploring the labyrinth.\n\n");
 			cleanupAfterCombat();
 		}
 		public function defeatedByLivingFailure():void {
@@ -620,9 +621,10 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			startCombat(new EyeTyrant(), true);
 		}
 		private function encountersRuletteBossesEL2AtlachNacha():void {
-			outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
-			outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
-			startCombat(new DisplacerBeast(), true);
+			outputText("As you enter the next room you become increasingly wary of the environment. Webs intermingles everywhere in a complex and haunting display sometimes forming something not unlike eldritch symbols and patterns. The room is vast and you can even spot what appears to be shining treasure to the far end, however there is little doubt that this conveniently placed loot is well guarded. ");
+			outputText("As you approach to grab the items your foot gets glued to the web and in an effort to pull it off you cause the webbing to shake on the entirety of the room. You try and back off as countless amounts of red lights appear in the darkness in front of you, the disgusting sounds of tentacles rubbing one after another being heard as a nightmarish creature slowly skitters moves out of the shadow as to access its prey.\n\n");
+			outputText("This horror has the body of a spider but way too many eyes to be one. It has eyes on its leg head and even backs but the most horrifying is its face. The thing's face has no mouth, just a wriggling amalgam of rapidly moving tentacles which flail about wildly in anticipation! You got caught into its web and there's little way you can escape unless you defeat it if only temporarily.\n\n");
+			startCombat(new AtlachNacha(), true);
 		}
 		private function encountersRuletteBossesEL2LivingFailure():void {
 			outputText("As you enter the room you are greeted right away by a monstrosity not meant to exist in the waking world.\n\n");
@@ -631,6 +633,12 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("two free hand palm to palm as if praying. You're just about to leave when the thing suddenly speaks arcane power sealing your exit with a barrier. Behind the pleasure glazed expression of its eyes you can see it's malevolent intensions. It's not going to let you leave.\n\n");
 			startCombat(new LivingFailure(), true);
 		}
+		
+		/*private function encountersRuletteBossesEL2AtlachNacha():void {
+			outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
+			outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
+			startCombat(new DisplacerBeast(), true);
+		}*/
 		
 		private function encountersRuletteEL1():void {
 			if ((rand(100) < player.statusEffectv1(StatusEffects.EbonLabyrinthA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {

@@ -147,17 +147,6 @@ public class Camp extends NPCAwareContent {
 	protected var heliaJoinsStream:Boolean;
 	protected var amilyJoinsStream:Boolean;
 
-	public function EzekielCurseQuickFix():void {
-		clearOutput();
-		outputText("Like with a magic wand touch some divine being has blessed you. And before leaving meantioned about never again selling or discarding odd fruits.");
-		if (player.findPerk(PerkLib.EzekielBlessing) < 0) player.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
-		if (player.hasStatusEffect(StatusEffects.EzekielCurse)) player.removeStatusEffect(StatusEffects.EzekielCurse);
-		statScreenRefresh();
-		dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "lib", 5);
-		doCamp();
-
-	}
-
 	public var IsSleeping: Boolean = false;
 	public var CanDream: Boolean = false;
 	public var HadNightEvent: Boolean = false;
@@ -995,12 +984,13 @@ public class Camp extends NPCAwareContent {
 				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
 			}
 		}
-		//	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && player.findPerk(PerkLib.EzekielBlessing) < 0) addButton(13, "Remov. Curse", EzekielCurseQuickFix).hint("Quick fix for Ezekiel curse when ezekiel fruit was lost.");
-
+		
 		//Remove buttons according to conditions.
 		if (isNightTime) {
 			if (model.time.hours >= 22 || model.time.hours < 6) {
-				removeButton(7); //Slaves
+				if (nightTimeActiveFollowers() == 0) removeButton(5); //Followers
+				if (nightTimeActiveLovers() == 0) removeButton(6); //Lovers
+				if (nightTimeActiveSlaves() == 0) removeButton(7); //Slaves
 				removeButton(8); //Camp Actions
 			}
 		}
@@ -1203,6 +1193,23 @@ public class Camp extends NPCAwareContent {
 		if (followerHel()) counter++;
 		if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
 		if (followerKiha()) counter++;
+		return counter;
+	}
+	
+	public function nightTimeActiveFollowers():Number {
+		var counter:Number = 0;
+		if (followerShouldra()) counter++;
+		if (flags[kFLAGS.LUNA_FOLLOWER] > 10 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
+		return counter;
+	}
+	
+	public function nightTimeActiveLovers():Number {
+		var counter:Number = 0;
+		return counter;
+	}
+	
+	public function nightTimeActiveSlaves():Number {
+		var counter:Number = 0;
 		return counter;
 	}
 
@@ -3266,7 +3273,8 @@ private function SparrableNPCsMenu():void {
 	
 	private function maraeIsland():void {
 		menu();
-		addButton(0, "Visit", marae.encounterMarae).hint("Normal visit on godess island.");
+		if (flags[kFLAGS.MARAE_QUEST_COMPLETE] < 1 && flags[kFLAGS.MET_MARAE_CORRUPTED] < 2 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] < 1) addButton(0, "Visit", marae.encounterMarae).hint("Normal visit on godess island.");
+		else addButtonDisabled(0, "Visit", "Visitation hours are closed till futher notice.");
 		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] != 1 && flags[kFLAGS.LETHICE_DEFEATED] > 0 && flags[kFLAGS.PURE_MARAE_ENDGAME] < 2) addButton(1, "P. Marae", marae.encounterPureMaraeEndgame).hint("");
 		else addButtonDisabled(1, "P. Marae", "");
 		if (flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0) {
@@ -3274,14 +3282,14 @@ private function SparrableNPCsMenu():void {
 			if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0) addButton(2, "C. Marae", marae.level2MaraeEncounter).hint("");
 		}
 		else addButtonDisabled(2, "C. Marae", "");
-		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] == 1) addButton(3, "Minerva", marae.talkToMaraeAboutMinervaPurification).hint("Visit godess island to talk about helpf for Minerva.");
+		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] == 1) addButton(3, "Minerva", marae.talkToMaraeAboutMinervaPurification).hint("Visit godess island to talk about help for Minerva.");
 		else addButtonDisabled(3, "Minerva", "");
 		if (player.plantScore() >= 7 && (player.gender == 2 || player.gender == 3) && flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4 || flags[kFLAGS.FLOWER_LEVEL] == 4) && flags[kFLAGS.CORRUPTED_MARAE_KILLED] == 0) addButton(4, "Alraune", marae.alraunezeMe).hint("Visit godess island to turn yourself into Alraune.");
 		else addButtonDisabled(4, "Alraune", "");
 		addButton(14, "Back", places);
 	}
 
-		private function exgartuanCampUpdate():void {
+	private function exgartuanCampUpdate():void {
 		//Update Exgartuan stuff
 		if (player.hasStatusEffect(StatusEffects.Exgartuan)) {
 			trace("EXGARTUAN V1: " + player.statusEffectv1(StatusEffects.Exgartuan) + " V2: " + player.statusEffectv2(StatusEffects.Exgartuan));

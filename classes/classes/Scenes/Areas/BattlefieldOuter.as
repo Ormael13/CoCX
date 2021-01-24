@@ -39,7 +39,7 @@ use namespace CoC;
 				return;
 			}
 			//Diana
-			if (flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(10) == 0) {
+			if (flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0) {
 				SceneLib.dianaScene.repeatBattlefieldEnc();
 				return;
 			}
@@ -112,6 +112,7 @@ use namespace CoC;
 						outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plate draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
 						outputText("<b>You found a metal plate.</b>");
 						flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]++;
+						doNext(camp.returnToCampUseOneHour);
 					}
 					break;
 				default:
