@@ -913,7 +913,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.lowerBody == LowerBody.KANGAROO)
 			outputText("  Your " + num2Text(player.legCount) + " furry legs have short thighs and long calves, with even longer feet ending in prominently-nailed toes.");
 		else if (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS)
-			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a reflective black, insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
+			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a reflective "+player.coatColor+", insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
 		else if (player.lowerBody == LowerBody.CRAB)
 			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a reflective "+player.coatColor+", crab like carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
 		else if (player.lowerBody == LowerBody.FOX)
@@ -1024,7 +1024,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.tailType == Tail.COW)
 			outputText("  A long cowtail with a puffy tip swishes back and forth as if swatting at flies.");
 		if (player.tailType == Tail.SPIDER_ADBOMEN) {
-			outputText("  A large, spherical spider-abdomen has grown out from your backside, covered in shiny black chitin.  Though it's heavy and bobs with every motion, it doesn't seem to slow you down.");
+			outputText("  A large, spherical spider-abdomen has grown out from your backside, covered in shiny "+player.coatColor+" chitin.  Though it's heavy and bobs with every motion, it doesn't seem to slow you down.");
 			if (player.tailVenom > 50 && player.tailVenom < 80)
 				outputText("  Your bulging arachnid posterior feels fairly full of webbing.");
 			if (player.tailVenom >= 80 && player.tailVenom < 100)
@@ -1192,7 +1192,7 @@ public class PlayerAppearance extends BaseContent {
 		if (armType == Arms.PHOENIX)
 			outputText("  Crimson feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.");
 		else if (armType == Arms.SPIDER)
-			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves from a distance.");
+			outputText("  Shining "+player.coatColor+" exoskeleton covers your arms from the biceps down, resembling a pair of long "+player.coatColor+" gloves from a distance.");
 		else if (armType == Arms.MANTIS)
 			outputText("  Shining "+player.coatColor+" exoskeleton covers your arms from the biceps down with a long and sharp scythes extending from the wrists.");
 		else if (armType == Arms.KAMAITACHI)
@@ -3159,4 +3159,4 @@ public class PlayerAppearance extends BaseContent {
 		}
 	}
 }
-}
+}
