@@ -81,7 +81,7 @@ public function encounterMarae():void {
 			outputText("You approach Marae's tree, watching the goddess flow out of the tree's bark as if it was made of liquid.  Just as before, she appears as the top half of a woman, naked from the waist up, with her back merging into the tree's trunk.\n\n");
 			if(player.cor > 66 + player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
 				outputText("She bellows in rage, \"<i>I told you, begone!</i>\"\n\nYou turn tail and head back to your boat, knowing you cannot compete with her power directly.");
-				if (player.level >= 30) outputText("  f course, you could probably try to overthrow her.");
+				if (player.level >= 30) outputText(" Of course, you could probably try to overthrow her.");
 				doNext(camp.returnToCampUseOneHour);
 			}
 			else
@@ -354,37 +354,20 @@ public function winAgainstMarae():void {
 	outputText(images.showImage("marae-defeated"));
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 		outputText("\"<i>NO! How can a mortal defeat me?! That's IMPOSSIBLE!</i>\" Marae yells. You tell her that just because she's a goddess doesn't mean a mortal can't defeat her.");
-		if (silly())
-		{
-			outputText("\n\n<b>Did you just punch out Cthulhu? Or in this case, Marae?</b>\n\n");
-		}
-		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0)
-		{
-			outputText("You summon your magical fire and finish off Marae for the last time. You can hear her screaming as she's withering and shriveling up. While she's on fire, you turn your attention elsewhere.");
-		}
-		else
-		{
-			outputText("You raise your [weapon] and finish off Marae at last. The corrupted goddess is no more. All the tentacles shrivel up and die. Afterwards, you turn your attention elsewhere.");
-		}
-		if (!player.hasKeyItem("Marae's Lethicite") >= 0)
-		{
-			outputText("\n\nSomething shiny catches your eye. Clearly, this has to be Marae's lethicite!");
-			outputText("\n<b>(Key Item Gained: Marae's Lethicite!)</b>");
-
-			player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
-		}
-		outputText("\n\nAfter the death of a corrupted physical goddess, you see something odd. There is a pile of intact shards of bark. They looks large and thick enough to be workable. You give it an experiment punch. ");
+		if (silly()) outputText("\n\n<b>Did you just punch out Cthulhu? Or in this case, Marae?</b>\n\n");
+		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasPerk(PerkLib.DragonFireBreath)) outputText("You summon your magical fire and finish off Marae for the last time. You can hear her screaming as she's withering and shriveling up. While she's on fire, you turn your attention elsewhere.");
+		else outputText("You raise your [weapon] and finish off Marae at last. The corrupted goddess is no more. All the tentacles shrivel up. Afterwards, you turn your attention elsewhere.");
 		if (player.str < 40) outputText("You scream as your hand hits the chitin. Maybe it's because you're not strong enough? ");
 		if (player.str >= 40 && player.str < 70) outputText("In spite of your decent strength, the bark refuses to bend or break. ");
 		if (player.str >= 70) outputText("Despite your incredible strength, the bark refuses to bend or break. ");
 		outputText("The bark is quite strong. Maybe someone can work this into armor? However, there are tentacles attached, still alive. You're not sure if you want armor that has tentacles in it.");
 		outputText("\n<b>(Item Gained: Tentacled Bark Plates!)</b>");
 		outputText("\n\nWith the tentacles blocking your boat gone, you get into your boat and sail back to the shore and return to your camp.");
+		outputText("\n\n<b>Deep within the earth where Marae once was, life will blossom anew. A root trembles from below, breathing in the surrounding soil. It quivers with ferocity before erupting from the soil. Marae's influence will not be shattered so easily, and when the life is fully grown, a new presence will be in her stead.</b>");
 		awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER, true, true);
 		flags[kFLAGS.CORRUPTED_MARAE_KILLED] = 1;
 		cleanupAfterCombat();
 		inventory.takeItem(useables.TBAPLAT, camp.returnToCampUseOneHour);
-	//	doNext(camp.returnToCampUseOneHour);
 	}
 	else {
 		if (monster.HP <= 0) outputText("Marae reels back from the incredible amount of damage you've dealt to her.");
@@ -397,6 +380,33 @@ public function winAgainstMarae():void {
 		flags[kFLAGS.PURE_MARAE_ENDGAME] = 2;
 		cleanupAfterCombat();
 		inventory.takeItem(useables.DBAPLAT, camp.returnToCampUseOneHour);
+	}
+}
+public function winAgainstMarae2ndRound():void {
+	clearOutput();
+	outputText(images.showImage("marae-defeated"));
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
+		
+	}
+	else {
+		
+	}
+}
+public function winAgainstMarae3rdRound():void {
+	clearOutput();
+	outputText(images.showImage("marae-defeated"));
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
+		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasPerk(PerkLib.DragonFireBreath)) outputText("You summon your magical fire and finish off Marae for the last time. You can hear her screaming as she's withering and shriveling up. While she's on fire, you turn your attention elsewhere.");
+		else outputText("You raise your [weapon] and finish off Marae at last. The corrupted goddess is no more. All the tentacles shrivel up and die. Afterwards, you turn your attention elsewhere.");
+		if (!player.hasKeyItem("Marae's Lethicite") >= 0) {
+			outputText("\n\nSomething shiny catches your eye. Clearly, this has to be Marae's lethicite!");
+			outputText("\n<b>(Key Item Gained: Marae's Lethicite!)</b>");
+			player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
+		}
+		outputText("\n\nAfter the death of a corrupted physical goddess, you see something odd. There is a pile of intact shards of bark. They looks large and thick enough to be workable. You give it an experiment punch. ");
+	}
+	else {
+		
 	}
 }
 
@@ -435,21 +445,21 @@ private function maraeBadEnd():void {
 	EventParser.gameOver();
 }
 
-	private function maraeStealLethicite(deliberate:Boolean = false):void {
-		spriteSelect(40);
-		clearOutput();
-		//(SUCCESS)
-		if ((player.spe > 35 && (rand(player.spe / 3 + 30) > 20) || player.spe > 35 && player.findPerk(PerkLib.Evade) >= 0 && rand(3) < 2) && !deliberate) {
-			outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You evade the gauntlet of grabbing tentacles that hang from the branches, snatch the large gem in both arms and run for the beach.  You do not hear the sounds of pursuit, only a disappointed sigh.");
-			player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
-		}
-		//(FAIL)
-		else {
-			player.slimeFeed();
-			player.orgasm('Generic');
-			if (!deliberate) outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You try to slip by the gauntlet of grabbing tentacles, but fail, getting tripped and ensnared in them like a fly in a spider's web.  You are pulled up and lifted to the other side of the tree, where you are slammed against it.  The tentacles pull your arms and legs wide, exposing you totally and locking you into a spread-eagle position.  You cringe as Marae strides around, free from the confines of her tree.\n\n");
-			else outputText("A mischievous idea reaches you, and you decide to play a prank on the corrupted goddess. You dart to the side, diving into a roll that bring you up behind the tree, aiming for her lethicite. You try to make your robbery attempt look real, and succeed; perhaps too well. Caught by surprise by her honest hostile reaction, you're ensnared by several tentacles like a fly in a spider's web. You are pulled up and lifted to the other side of the tree, where you are slammed against it.  The tentacles pull your arms and legs wide, exposing you totally and locking you into a spread-eagle position.  You cringe as Marae strides around, free from the confines of her tree. This was most definitely a bad idea.\n\n");
+private function maraeStealLethicite(deliberate:Boolean = false):void {
+	spriteSelect(40);
+	clearOutput();
+	//(SUCCESS)
+	if ((player.spe > 35 && (rand(player.spe / 3 + 30) > 20) || player.spe > 35 && player.findPerk(PerkLib.Evade) >= 0 && rand(3) < 2) && !deliberate) {
+		outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You evade the gauntlet of grabbing tentacles that hang from the branches, snatch the large gem in both arms and run for the beach.  You do not hear the sounds of pursuit, only a disappointed sigh.");
+		player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
+		doNext(camp.returnToCampUseOneHour);
+	}
+	//(FAIL)
+	else {
+		player.slimeFeed();
+		player.orgasm('Generic');
+		if (!deliberate) outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You try to slip by the gauntlet of grabbing tentacles, but fail, getting tripped and ensnared in them like a fly in a spider's web.  You are pulled up and lifted to the other side of the tree, where you are slammed against it.  The tentacles pull your arms and legs wide, exposing you totally and locking you into a spread-eagle position.  You cringe as Marae strides around, free from the confines of her tree.\n\n");
+		else outputText("A mischievous idea reaches you, and you decide to play a prank on the corrupted goddess. You dart to the side, diving into a roll that bring you up behind the tree, aiming for her lethicite. You try to make your robbery attempt look real, and succeed; perhaps too well. Caught by surprise by her honest hostile reaction, you're ensnared by several tentacles like a fly in a spider's web. You are pulled up and lifted to the other side of the tree, where you are slammed against it.  The tentacles pull your arms and legs wide, exposing you totally and locking you into a spread-eagle position.  You cringe as Marae strides around, free from the confines of her tree. This was most definitely a bad idea.\n\n");
 		outputText("\"<i>Awwww, what a nasty deceitful little " + player.mf("boy", "girl"));
 		outputText(" you are.  You turn me into a steaming hot sex-pot, then have the nerve to come here and try to walk off with my lethicite, all WITHOUT fucking me?  Tsk tsk tsk,</i>\" she scolds, \"<i>I appreciate your ambition, but I can't just let a mortal walk all over me like that.  I'll be taking that,</i>\" she says as she grabs the crystal, and lugs it to the tree underneath you.  She strokes the wood surface lovingly, and a knot dilates until it forms a hole large enough to contain the lethicite.  Marae shoves it inside, and strokes the wood like a pet creature, humming while the bark flows closed, totally concealing the crystal.\n\n");
 		outputText("\"<i>Now, that should keep it safe from swift little play-toys like yourself.  What you tried was a bold move, and I respect that; initiative is to be rewarded.   So I'll let you go, just like that,</i>\" she says, snapping her fingers for emphasis.\n\n");

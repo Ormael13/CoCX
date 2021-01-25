@@ -592,7 +592,7 @@ public class Combat extends BaseContent {
     public function isPlayerBound():Boolean {
         var bound:Boolean = false;
         if (player.hasStatusEffect(StatusEffects.HarpyBind) || player.hasStatusEffect(StatusEffects.GooBind) || player.hasStatusEffect(StatusEffects.TentacleBind) || player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind) || monster.hasStatusEffect(StatusEffects.QueenBind)
-             || player.hasStatusEffect(StatusEffects.WolfHold) || player.hasStatusEffect(StatusEffects.TrollHold) || player.hasStatusEffect(StatusEffects.PossessionWendigo) || monster.hasStatusEffect(StatusEffects.PCTailTangle)) bound = true;
+             || player.hasStatusEffect(StatusEffects.WolfHold) || player.hasStatusEffect(StatusEffects.TrollHold) || player.hasStatusEffect(StatusEffects.PossessionWendigo) || player.hasStatusEffect(StatusEffects.ArcaneWeb) || monster.hasStatusEffect(StatusEffects.PCTailTangle)) bound = true;
         if (player.hasStatusEffect(StatusEffects.HolliConstrict)) bound = true;
         if (player.hasStatusEffect(StatusEffects.GooArmorBind)) bound = true;
         if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
@@ -2095,7 +2095,16 @@ public class Combat extends BaseContent {
                 else player.takePhysDamage(.15 * player.maxHP(), true);
             }
             skipMonsterAction = true;
-        } else if (player.hasStatusEffect(StatusEffects.HarpyBind)) {
+        } else if (player.hasStatusEffect(StatusEffects.ArcaneWeb)) {
+			clearOutput();
+			outputText("You struggle against your magical bonds");
+			if (rand(3) == 0 || rand(80) < player.str) {
+				outputText(" breaking free of the insidious spell");
+				player.removeStatusEffect(StatusEffects.ArcaneWeb);
+			}
+			else outputText(".");
+			skipMonsterAction = true;
+		} else if (player.hasStatusEffect(StatusEffects.HarpyBind)) {
             (monster as HarpyMob).harpyHordeGangBangStruggle();
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
@@ -6785,6 +6794,15 @@ public class Combat extends BaseContent {
             var slap:Number = 3 + (player.maxHP() * 0.02);
             outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
         }
+        if (monster.hasStatusEffect(StatusEffects.AuraOfMadness) && !player.hasPerk(PerkLib.Insanity)) {
+			player.addCurse("int", 2);
+			player.addCurse("wis", 2);
+            outputText("<b>As the battle draws on you feel yourself slowly losing your grip on reality.</b>\n\n");
+			if (player.inte <= 1 || player.wis <= 1) {
+                doNext(endHpLoss);
+                return;
+            }
+        }
         if (player.hasPerk(PerkLib.ArousingAura) && monster.lustVuln > 0 && player.cor >= 70) {
             if (monster.lust < (monster.maxLust() * 0.5)) outputText("Your aura seeps into [monster a] [monster name] but does not have any visible effects just yet.\n\n");
             else if (monster.lust < (monster.maxLust() * 0.6)) {
@@ -6834,11 +6852,10 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
             else monster.lust += monster.lustVuln * (2 + rand(4));
         }
-
+		
         //Unicorn and Bicorn aura
         //Unicorn
         if (player.hasPerk(PerkLib.AuraOfPurity)) {
-
             if (monster.cor > 20) {
                 var damage:Number = (scalingBonusIntelligence() * 1);
                 //Determine if critical hit!
@@ -7538,6 +7555,11 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.Flying);
             }
         }
+		//Flying disabled
+		if (player.hasStatusEffect(StatusEffects.FlyingDisabled)) {
+			player.addStatusValue(StatusEffects.FlyingDisabled, 1, -1);
+			if (player.statusEffectv1(StatusEffects.Flying) <= 0) player.removeStatusEffect(StatusEffects.FlyingDisabled);
+		}
         //Baleful Polymorph
         if (player.hasStatusEffect(StatusEffects.CooldownBalefulPolymorph)) {
             if (player.statusEffectv1(StatusEffects.CooldownBalefulPolymorph) <= 0) {

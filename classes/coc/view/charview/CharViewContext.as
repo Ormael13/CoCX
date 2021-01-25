@@ -21,6 +21,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.CoC;
+import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Player;
 import classes.StatusEffects;
@@ -93,6 +94,12 @@ import coc.xlogic.ExecContext;
 					PlayerHasSanctuary: player.shield == game.shields.SANCTYL || player.shield == game.shields.SANCTYN || player.shield == game.shields.SANCTYD,
 					PlayerHasSanctuaryHoly:player.shield == game.shields.SANCTYL,
 					PlayerHasSanctuaryUnholy:player.shield == game.shields.SANCTYD,
+
+					PlayerHasABow: player.isBowTypeWeapon(),
+					PlayerHasABowHoly:player.weaponRange == game.weaponsrange.ARTEMIS,
+					PlayerHasABowUnholy:player.weaponRange == game.weaponsrange.WILDHUN,
+
+					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],
 
 					Antennae: Antennae,
 					Arms: Arms,
@@ -193,6 +200,7 @@ import coc.xlogic.ExecContext;
 			]);
 			this.charview = charview;
 		}
+
 	}
 }
 
