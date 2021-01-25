@@ -621,6 +621,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			startCombat(new EyeTyrant(), true);
 		}
 		private function encountersRuletteBossesEL2AtlachNacha():void {
+			spriteSelect(SpriteDb.s_Atlach_16bit);
 			outputText("As you enter the next room you become increasingly wary of the environment. Webs intermingles everywhere in a complex and haunting display sometimes forming something not unlike eldritch symbols and patterns. The room is vast and you can even spot what appears to be shining treasure to the far end, however there is little doubt that this conveniently placed loot is well guarded. ");
 			outputText("As you approach to grab the items your foot gets glued to the web and in an effort to pull it off you cause the webbing to shake on the entirety of the room. You try and back off as countless amounts of red lights appear in the darkness in front of you, the disgusting sounds of tentacles rubbing one after another being heard as a nightmarish creature slowly skitters moves out of the shadow as to access its prey.\n\n");
 			outputText("This horror has the body of a spider but way too many eyes to be one. It has eyes on its leg head and even backs but the most horrifying is its face. The thing's face has no mouth, just a wriggling amalgam of rapidly moving tentacles which flail about wildly in anticipation! You got caught into its web and there's little way you can escape unless you defeat it if only temporarily.\n\n");

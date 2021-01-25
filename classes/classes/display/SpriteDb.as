@@ -59,6 +59,8 @@ public class SpriteDb {
 	public static function get s_assmole(): Class {
 		return s_assmole_8bit;
 	}
+	[Embed(source="../../../res/sprites/Atlach.png")]
+	public static var s_Atlach_16bit:Class;
 	[Embed(source="../../../res/sprites/ayane.png")]
 	public static var s_ayane:Class;
 	[Embed(source="../../../res/sprites/ayane_nude.png")]
