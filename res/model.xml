@@ -2976,7 +2976,7 @@
                 <show part="legs_fg/snail"/>
             </case>
 			<case values="LowerBody.WENDIGO">
-                <hide part="legs/wendigo"/>
+                <show part="legs/wendigo"/>
             </case>
             <!--<case values="LowerBody.YGG_ROOT_CLAWS">TODO </case>-->
             <case values="'never'"><!--TODO liliraune-->
