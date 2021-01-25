@@ -6974,6 +6974,7 @@ public class Combat extends BaseContent {
                 if (!monster.plural) outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begins to shake and steal glances at your body.");
                 else outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begin to shake and steal glances at your body.");
             }
+            if (lustDmgA > (monster.maxLust()/10)) lustDmgA = Math.round(monster.maxLust()/10);
             lustDmgA = Math.round(lustDmgA);
             monster.teased(lustDmgA, false);
             outputText("\n\n");
