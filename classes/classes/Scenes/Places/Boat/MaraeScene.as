@@ -194,7 +194,7 @@ private function alraunezeMeYes():void {
 		outputText("<i>\"Very well. But first, my lovely daughter to be, you will have to earn your place at my side.</i>\"\n\n");
 		outputText("Marae coos with pleasure and allows a nectar-slicked tentacle to slip free of her flower. Her sweet, corrupted smell fills the air, like pollen carried on a spring breeze, clinging to your senses like a heavenly blanket. The goddess' fingers trace the outline of her budding clit, and you watch, enraptured, as it swells up turning purple as it peeks out of her floral slit. A clear ridge forms underneath the tip, delineating the underside of a newly grown cock-tip. Marae bats her eyelashes and strokes the newly-formed growth as it fills out, surpassing the length of any mortal man. ");
 		outputText("The crown is a shiny, almost slick purple color, fading to green the further down the stalk-like shaft it goes. She climbs to her feet, fingernails tracing the outline of the newly-formed urethral bulge on her shaft as she glides closer to you.\n\n");
-		outputText("Paralyzed by worry (yet somehow aroused), you don’t manage a single backwards step before the warm bulge is rubbing at your crotch insistently, and her sap-drooling teats are crushed into your\n\n");
+		outputText("Paralyzed by worry (yet somehow aroused), you don’t manage a single backwards step before the warm bulge is rubbing at your crotch insistently, and her sap-drooling teats are crushed into your");
 		if (player.tallness > 96) outputText("chest");
 		else outputText("face");
 		outputText(". Unbidden, your own nipples grow hard ");

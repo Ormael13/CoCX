@@ -26,9 +26,7 @@ package classes.Items.Shields
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
-			desc += "\n\nType: ";
-			if (game.player.statusEffectv4(StatusEffects.AetherTwins1) == 1) desc += "Shield";
-			else desc += "Shield";
+			desc += "\n\nType: Weapon (Gauntlet)";
 			//Block Rating
 			desc += "\nBlock: " + String(block);
 			//Value

@@ -14,7 +14,17 @@ import classes.internals.SaveableState;
 	{
 		public static var AetherTwinsShape:String;
 		public static var AetherTwinsCount:Number;
+		public static var AetherTwinsTalkMenu:Number;
 		public static var AetherTwinsFoodMenu:Boolean;
+		public static var AetherTwinsFoodMenuBuckler:Boolean;
+		public static var AetherTwinsFoodMenuSpikeLShield:Boolean;
+		public static var AetherTwinsFoodMenuSGauntlet:Boolean;
+		public static var AetherTwinsFoodMenuClaws:Boolean;
+		public static var AetherTwinsFoodMenuHGaunt:Boolean;
+		public static var AetherTwinsFoodMenuBFGauntlets:Boolean;
+		public static var AetherTwinsFoodMenuLustyClaws:Boolean;
+		public static var AetherTwinsFoodMenu2:Boolean;
+		public static var AetherTwinsFoodMenu1:Boolean;
 		
 		public function stateObjectName():String {
 			return "AetherTwinsScenes";
@@ -23,14 +33,34 @@ import classes.internals.SaveableState;
 		public function resetState():void {
 			AetherTwinsShape = "";
 			AetherTwinsCount = 0;
+			AetherTwinsTalkMenu = 0;
 			AetherTwinsFoodMenu = false;
+			AetherTwinsFoodMenuBuckler = false;
+			AetherTwinsFoodMenuSpikeLShield = false;
+			AetherTwinsFoodMenuSGauntlet = false;
+			AetherTwinsFoodMenuClaws = false;
+			AetherTwinsFoodMenuHGaunt = false;
+			AetherTwinsFoodMenuBFGauntlets = false;
+			AetherTwinsFoodMenuLustyClaws = false;
+			AetherTwinsFoodMenu2 = false;
+			AetherTwinsFoodMenu1 = false;
 		}
 		
 		public function saveToObject():Object {
 			return {
 				"AetherTwinsShape": AetherTwinsShape,
 				"AetherTwinsCount": AetherTwinsCount,
-				"AetherTwinsFoodMenu": AetherTwinsFoodMenu
+				"AetherTwinsTalkMenu": AetherTwinsTalkMenu,
+				"AetherTwinsFoodMenu": AetherTwinsFoodMenu,
+				"AetherTwinsFoodMenuBuckler": AetherTwinsFoodMenuBuckler,
+				"AetherTwinsFoodMenuSpikeLShield": AetherTwinsFoodMenuSpikeLShield,
+				"AetherTwinsFoodMenuSGauntlet": AetherTwinsFoodMenuSGauntlet,
+				"AetherTwinsFoodMenuClaws": AetherTwinsFoodMenuClaws,
+				"AetherTwinsFoodMenuHGaunt": AetherTwinsFoodMenuHGaunt,
+				"AetherTwinsFoodMenuBFGauntlets": AetherTwinsFoodMenuBFGauntlets,
+				"AetherTwinsFoodMenuLustyClaws": AetherTwinsFoodMenuLustyClaws,
+				"AetherTwinsFoodMenu2": AetherTwinsFoodMenu2,
+				"AetherTwinsFoodMenu1": AetherTwinsFoodMenu1
 			};
 		}
 		
@@ -38,7 +68,17 @@ import classes.internals.SaveableState;
 			if (o) {
 				AetherTwinsShape = o["AetherTwinsShape"];
 				AetherTwinsCount = o["AetherTwinsCount"];
+				AetherTwinsTalkMenu = o["AetherTwinsTalkMenu"];
 				AetherTwinsFoodMenu = o["AetherTwinsFoodMenu"];
+				AetherTwinsFoodMenuBuckler = o["AetherTwinsFoodMenuBuckler"];
+				AetherTwinsFoodMenuSpikeLShield = o["AetherTwinsFoodMenuSpikeLShield"];
+				AetherTwinsFoodMenuSGauntlet = o["AetherTwinsFoodMenuSGauntlet"];
+				AetherTwinsFoodMenuClaws = o["AetherTwinsFoodMenuClaws"];
+				AetherTwinsFoodMenuHGaunt = o["AetherTwinsFoodMenuHGaunt"];
+				AetherTwinsFoodMenuBFGauntlets = o["AetherTwinsFoodMenuBFGauntlets"];
+				AetherTwinsFoodMenuLustyClaws = o["AetherTwinsFoodMenuLustyClaws"];
+				AetherTwinsFoodMenu2 = o["AetherTwinsFoodMenu2"];
+				AetherTwinsFoodMenu1 = o["AetherTwinsFoodMenu1"];
 			} else {
 				// loading from old save
 				resetState();
@@ -98,6 +138,8 @@ public function aethertwinsFollowersTalk():void {
 	outputText("\"<i>So what you wanna talk about?</i>\" Sentient weapon"+(AetherTwinsCount > 1 ? "s":"")+" ask"+(AetherTwinsCount > 1 ? "s":"")+". \"<i>Or you wanna go smash someone till they are reduced to blood pulp?</i>\"\n\n");
 	menu();
 	addButton(0, "Them", aethertwinsFollowersTalkThem);
+	if (AetherTwinsTalkMenu > 0) addButton(1, "Evolutions", aethertwinsFollowersTalkEvolutions);
+	else addButtonDisabled(1, "???", "Twins memories related to this topic are still sealed.");
 	addButton(14, "Back", aethertwinsFollowers);
 }
 public function aethertwinsFollowersTalkThem():void {
@@ -109,14 +151,14 @@ public function aethertwinsFollowersTalkThem():void {
 	outputText("\"<i>Hella no. "+(AetherTwinsCount > 1 ? "We":"I")+" not interested in food you eating. Bring "+(AetherTwinsCount > 1 ? "us":"me")+" all those tasty metals or equipment like swords or shields. That should be enough</i>\"\n\n");
 	outputText("That certainly would make thigns easier... or harder? As long "+(AetherTwinsCount > 1 ? "their":"her")+" 'appetite' won't be bottomless.\n\n");
 	outputText("\"<i>So then ummm.. did you brought some snacks?</i>\" "+(AetherTwinsCount > 1 ? "Their":"Her")+" voice sounds like "+(AetherTwinsCount > 1 ? "they":"she")+" expecting to get some 'food' now. Making excuse of need to go bring it you ends this conversation.\n\n");
-	if (!AetherTwinsFoodMenu) {
+	if (!AetherTwinsFoodMenu && flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] >= 1 && flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] >= 1) {
 		outputText("<b>Feed Option has been unlocked!!!</b>\n\n");
 		AetherTwinsFoodMenu = true;
 	}
 	doNext(aethertwinsFollowersTalk);
 	cheatTime(1/4);
 }
-public function aethertwinsFollowersTalk2():void {
+public function aethertwinsFollowersTalkEvolutions():void {
 	clearOutput();
 	outputText("\n\n");
 	doNext(aethertwinsFollowersTalk);
@@ -132,21 +174,62 @@ public function aethertwinsFollowersTalk3():void {
 public function aethertwinsFollowersFeed():void {
 	clearOutput();
 	outputText("\"<i>You brought somethng tasty for "+(AetherTwinsCount > 1 ? "us":"me")+" to eat?</i>\" "+(AetherTwinsCount > 1 ? "They":"She")+" ask"+(AetherTwinsCount > 1 ? "s":"")+".\n\n");
+	outputText("\n\nEaten equipment:");
+	if (AetherTwinsFoodMenuBuckler) outputText("\n-Buckler");
+	if (AetherTwinsFoodMenuSpikeLShield) outputText("\n-Spiked Light Shield");
+	if (AetherTwinsFoodMenuSGauntlet) outputText("\n-Spiked Gauntlet");
+	if (AetherTwinsFoodMenuClaws) outputText("\n-Claws");
+	if (AetherTwinsFoodMenuHGaunt) outputText("\n-Hooked Gauntlets");
+	if (AetherTwinsFoodMenuBFGauntlets) outputText("\n-Big Fucking Gauntlets");
+	if (AetherTwinsFoodMenuLustyClaws) outputText("\n-Lusty Claws");
 	menu();
+	var btn:int = 0;
+	//if (player.hasItem(useables.S_INGOT, 1)) addButton(btn, useables.S_INGOT.shortName, aethertwinsFollowersFeedMaterial, useables.S_INGOT);
+	//btn++;
+	//if (player.hasItem(shields.BUCKLER, 1) && !AetherTwinsFoodMenuBuckler) addButton(btn, shields.BUCKLER.shortName, aethertwinsFollowersFeedEquipment, shields.BUCKLER);
+	//btn++;
+	//if (player.hasItem(shields.SPIL_SH, 1) && !AetherTwinsFoodMenuSpikeLShield) addButton(btn, shields.SPIL_SH.shortName, aethertwinsFollowersFeedEquipment, shields.SPIL_SH);
+	//btn++;
+	//if (player.hasItem(weapons.S_GAUNT, 1) && !AetherTwinsFoodMenuSGauntlet) addButton(btn, weapons.S_GAUNT.shortName, aethertwinsFollowersFeedEquipment, weapons.S_GAUNT);
+	//btn++;
+	//if (player.hasItem(weapons.CLAWS, 1) && !AetherTwinsFoodMenuClaws) addButton(btn, weapons.CLAWS.shortName, aethertwinsFollowersFeedEquipment, weapons.CLAWS);
+	//btn++;
+	//if (player.hasItem(weapons.H_GAUNT, 1) && !AetherTwinsFoodMenuHGaunt) addButton(btn, weapons.H_GAUNT.shortName, aethertwinsFollowersFeedEquipment, weapons.H_GAUNT);
+	//btn++;
+	//if (player.hasItem(weapons.BFGAUNT, 1) && !AetherTwinsFoodMenuBFGauntlets) addButton(btn, weapons.BFGAUNT.shortName, aethertwinsFollowersFeedEquipment, weapons.BFGAUNT);
+	//btn++;
+	//if (player.hasItem(weapons.L_CLAWS, 1) && !AetherTwinsFoodMenuLustyClaws) addButton(btn, weapons.L_CLAWS.shortName, aethertwinsFollowersFeedEquipment, weapons.L_CLAWS);
+	//btn++;
 	addButton(14, "Back", aethertwinsFollowers);
 }
-public function aethertwinsFollowersFeedEquipment():void {
-	clearOutput();
-	outputText("Placeholder text.\n\n");
-	outputText("\"<i>Contracted writer not wrote text yet.</i>\" "+(AetherTwinsCount > 1 ? "one of the":"both")+" twins shrugs.\n\n");
-	doNext(aethertwinsFollowersFeed);
-	cheatTime(1/4);
-}
-public function aethertwinsFollowersFeedMaterial():void {
+public function aethertwinsFollowersFeedMaterial(itype:ItemType):void {
 	clearOutput();
 	outputText("\n\n");
 	outputText("\n\n");
 	outputText("\"<i></i>\"\n\n");
+	player.destroyItems(itype, 1);
+	doNext(aethertwinsFollowersFeed);
+	cheatTime(1/4);
+}
+public function aethertwinsFollowersFeedEquipment(itype:ItemType):void {
+	clearOutput();
+	outputText("You deposit the item on the ground and approach the aether twins from it. Not to your surprise the item begins to melt as if turning to sludge as the twins zap them with some unknown magic the twins growing something not unlike magical teeth with which it begins munching at this new material. Before long the item is fully assimilated into the twins which acquires some of its powers.\n\n");
+	outputText("\"<i>Thank you for the meal.</i>\" they grins.\n\n");
+	if (player.hasItem(shields.BUCKLER, 1)) AetherTwinsFoodMenuBuckler = true;
+	if (player.hasItem(shields.SPIL_SH, 1)) AetherTwinsFoodMenuSpikeLShield = true;
+	if (player.hasItem(weapons.S_GAUNT, 1)) AetherTwinsFoodMenuSGauntlet = true;
+	if (player.hasItem(weapons.CLAWS, 1)) AetherTwinsFoodMenuClaws = true;
+	if (player.hasItem(weapons.H_GAUNT, 1)) AetherTwinsFoodMenuHGaunt = true;
+	if (player.hasItem(weapons.BFGAUNT, 1)) AetherTwinsFoodMenuBFGauntlets = true;
+	if (player.hasItem(weapons.L_CLAWS, 1)) AetherTwinsFoodMenuLustyClaws = true;
+	player.destroyItems(itype, 1);
+	if (AetherTwinsFoodMenuBuckler && AetherTwinsFoodMenuSGauntlet && AetherTwinsFoodMenuSGauntlet) {
+		outputText("\"<i>Woohoo we're evolving.</i>\" they exclaims. \"<i>We going Faster Harder Better Stronger Curvier!!!</i>\"\n\n");
+		outputText("<b>Aether Twins base form evolved unlocking some of their sealed memories.</b>\n\n");
+		player.addStatusValue(StatusEffects.AetherTwins1, 2, 5);
+		AetherTwinsShape = "Human-tier Gaunlets";
+		AetherTwinsTalkMenu = 1;
+	}
 	doNext(aethertwinsFollowersFeed);
 	cheatTime(1/4);
 }

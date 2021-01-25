@@ -56,6 +56,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			dungeonLoc = 131;
 			player.createStatusEffect(StatusEffects.EbonLabyrinthA, 10, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.EbonLabyrinthB, 1, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.EbonLabyrinthBoss, 65, 0, 0, 0);
 			playerMenu();
 		}
 		public function exitDungeon():void {
@@ -65,6 +66,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
+			player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss);
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
 			doNext(camp.returnToCampUseOneHour);
@@ -372,31 +374,31 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			}
 			else {
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 4) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					encountersRuletteBossesEL1HellSnail();
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 5) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					encountersRuletteBossesEL1Hydra();
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 6) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					encountersRuletteBossesEL1HellSnail();
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 7) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					encountersRuletteBossesEL1DarkSlimeEmpress();
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 8) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					encountersRuletteBossesEL1Hydra();
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 9) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					encountersRuletteBossesEL1DarkSlimeEmpress();
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 1) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					if (rand(2) == 0) {
 						player.addStatusValue(StatusEffects.EbonLabyrinthBoss1, 1, 3);
 						encountersRuletteBossesEL1Hydra();
@@ -407,7 +409,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 					}
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 2) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					if (rand(2) == 0) {
 						player.addStatusValue(StatusEffects.EbonLabyrinthBoss1, 1, 4);
 						encountersRuletteBossesEL1DarkSlimeEmpress();
@@ -418,7 +420,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 					}
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 3) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					if (rand(2) == 0) {
 						player.addStatusValue(StatusEffects.EbonLabyrinthBoss1, 1, 5);
 						encountersRuletteBossesEL1DarkSlimeEmpress();
@@ -429,7 +431,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 					}
 				}
 				if (!player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,65,0,0,0);
 					var choice:Number = rand(3);
 					if (choice == 0) {
 						player.createStatusEffect(StatusEffects.EbonLabyrinthBoss1, 1, 0, 0, 0);
@@ -540,31 +541,31 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		private function encountersRuletteBossesEL2():void {
 			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 4) {
-				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,90,0,0,0);
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 				encountersRuletteBossesEL2LivingFailure();
 			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 5) {
-				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,90,0,0,0);
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 				encountersRuletteBossesEL2AtlachNacha();
 			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 6) {
-				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,90,0,0,0);
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 				encountersRuletteBossesEL2LivingFailure();
 			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 7) {
-				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,90,0,0,0);
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 				encountersRuletteBossesEL2EyeTyrant();
 			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 8) {
-				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,90,0,0,0);
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 				encountersRuletteBossesEL2AtlachNacha();
 			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 9) {
-				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,90,0,0,0);
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 				encountersRuletteBossesEL2EyeTyrant();
 			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 1) {
-				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,85,0,0,0);
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 				if (rand(2) == 0) {
 					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 3);
 					encountersRuletteBossesEL2AtlachNacha();
@@ -575,7 +576,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				}
 			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 2) {
-				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,85,0,0,0);
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 				if (rand(2) == 0) {
 					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 4);
 					encountersRuletteBossesEL2EyeTyrant();
@@ -586,7 +587,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				}
 			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 3) {
-				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,85,0,0,0);
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 				if (rand(2) == 0) {
 					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 5);
 					encountersRuletteBossesEL2EyeTyrant();
@@ -597,7 +598,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				}
 			}
 			if (!player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) {
-				player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,80,0,0,0);
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 				var choice:Number = rand(3);
 				if (choice == 0) {
 					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss2, 1, 0, 0, 0);
@@ -889,15 +890,17 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				encountersLootChest();
 			}
 			//else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 14 && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne) && rand(10) == 0) supriseencounter();
-			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 50 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 100 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 150) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 2 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 4 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 6) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			//else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 50 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 100 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 150) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersRuletteBossesEL1();
 			}
-			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 2 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 4 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 6) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 12 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 14 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 16) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 			//else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 200 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 250 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 300) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersRuletteBossesEL2();
 			}/*
+			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 22 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 24 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 26) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 350 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 400 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 450) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersRuletteBossesEL3();
