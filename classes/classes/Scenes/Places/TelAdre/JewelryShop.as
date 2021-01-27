@@ -74,7 +74,7 @@ public class JewelryShop extends Shop {
         menu();
         var button:int = 0;
         addButton(button++, headjewelries.PHYSCRO.shortName, confirmBuy, headjewelries.PHYSCRO);
-        addButton(button++, headjewelries.MAGICRO.shortName, confirmBuy, headjewelries.MAGICRO);
+        addButton(button++, headjewelries.CROWLIB.shortName, confirmBuy, headjewelries.CROWLIB);
         addButton(button++, necklaces.PHYSNEC.shortName, confirmBuy, necklaces.PHYSNEC);
         addButton(button++, necklaces.MAGINEC.shortName, confirmBuy, necklaces.MAGINEC);
         addButton(14, "Back", inside);
