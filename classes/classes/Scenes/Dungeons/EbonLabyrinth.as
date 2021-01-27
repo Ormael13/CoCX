@@ -54,9 +54,10 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		public function enterDungeon():void {
 			inDungeon = true;
 			dungeonLoc = 131;
+			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss);
+			player.createStatusEffect(StatusEffects.EbonLabyrinthBoss, 65, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.EbonLabyrinthA, 10, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.EbonLabyrinthB, 1, 0, 0, 0);
-			player.createStatusEffect(StatusEffects.EbonLabyrinthBoss, 65, 0, 0, 0);
 			playerMenu();
 		}
 		public function exitDungeon():void {
@@ -66,7 +67,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-			player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss);
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
 			doNext(camp.returnToCampUseOneHour);
@@ -461,7 +461,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		public function encountersRuletteBossesEL1Hydra():void {
 			if (flags[kFLAGS.CODEX_ENTRY_HYDRA] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_HYDRA] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Hydra!</b>");
+				outputText("<b>New codex entry unlocked: Hydra!</b>\n\n");
 			}
 			spriteSelect(SpriteDb.s_hydra_16bit);
 			outputText("The first telltale that something might have gone really wrong is the hissing which seems to come from all around the room. The only warning you get of the impending attack is a sudden move of the shadows as a massive snake head bites the air mere inches from your face. You ready for battle as several huge snakes comes out of the shadow, each connected to a single junction to what appears to be the body of a very tall woman.\n\n");
@@ -830,6 +830,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You walk into an empty corridor thankfully it seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
+			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomDDD, roomDDD, roomBBB, roomBBB, roomCCC, roomCCC);
 		}
 		public function roomBBB():void {
@@ -841,6 +842,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You turn the corner wandering into a new corridor which thankfully seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
+			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomCCC, roomCCC, roomAAA, roomAAA, roomDDD, roomDDD);
 		}
 		public function roomCCC():void {
@@ -852,6 +854,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You walk into an empty corridor thankfully it seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
+			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomBBB, roomBBB, roomDDD, roomDDD, roomAAA, roomAAA);
 		}
 		public function roomDDD():void {
@@ -863,6 +866,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You turn the corner wandering into a new corridor which thankfully seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
+			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomAAA, roomAAA, roomCCC, roomCCC, roomBBB, roomBBB);
 		}
 		public function checkingTodayMenu():void {
