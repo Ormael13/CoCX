@@ -521,7 +521,7 @@ package classes.Scenes.NPCs
 			outputText(" having a bit of trouble getting her wide flare in, but once it has past your entrance, most of her meat slides down your mouth, aided a lot by the salty horse pre that she’s leaking.\n\n");
 			outputText("While you do your best to suck and please her cock, she does the same with yours, teasingly playing with your cumslit");
 			if (player.balls > 0) outputText(" and kneading your balls with one of her free hands");
-			outputText(". From a sudden, she soaks one of her digits in saliva, and slips it on your asshole, naughtily fingering your [analcapacity] hole. You moan in delight, feeling her large fingers prodding your vulnerable anus and playing with your insides.\n\n");
+			outputText(". From a sudden, she soaks one of her digits in saliva, and slips it on your asshole, naughtily fingering your [asshole]. You moan in delight, feeling her large fingers prodding your vulnerable anus and playing with your insides.\n\n");
 			outputText("Her meat forces its way through your mouth, and you can see (and feel) it going down your throat. Resting above your forehead, her heavy nuts churning, on top of the increasing pace of her thrusts, alert you that she’s close to coming. You have little time to prepare, though, as her finger finds its way to your prostate, sending you over the edge, and making you blast your ");
 			if (player.cumQ() > 1500) outputText("copious ");
 			outputText("load inside Sidonie’s mouth, which she drinks down ");
