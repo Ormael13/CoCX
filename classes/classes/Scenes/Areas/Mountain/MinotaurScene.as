@@ -44,8 +44,6 @@ public function minoVictoryRapeChoices():void {
 	else {
 		if(monster.lust >= monster.maxLust()) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.");
 		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.");
-		cleanupAfterCombat();
-		return;
 	}
 	postfightoptions();
 }
