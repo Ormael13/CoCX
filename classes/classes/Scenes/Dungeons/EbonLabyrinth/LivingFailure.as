@@ -107,11 +107,13 @@ use namespace CoC;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
+			player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss);
 			SceneLib.dungeons.ebonlabyrinth.defeatLivingFailure();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
+			player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss);
 			SceneLib.dungeons.ebonlabyrinth.defeatedByLivingFailure();
 		}
 		
