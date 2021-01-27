@@ -26,7 +26,7 @@ package classes.Items.Shields
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
-			desc += "\n\nType: Weapon (Gauntlet)";
+			desc += "\n\nType: Shield";
 			//Block Rating
 			desc += "\nBlock: " + String(block);
 			//Value
