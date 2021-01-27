@@ -601,7 +601,7 @@ public class PlayerAppearance extends BaseContent {
 	menu();
 	addButton(0, "Next", playerMenu);
 	if (player.hasPerk(PerkLib.RacialParagon)) addButton(1, "Set Race.", ApexRaceSetting);
-	addButton(2, "Weap Wiew", WeaponDisplay);
+	addButton(2, "Weap View", WeaponDisplay);
 	addButton(7, "Reflect", campActionsReflect).hint("Reflect on your current state and future plans. (Also would make your body fully adjust to any sudden changes to natural limits of your attributes after eating any odd things and etc.)");
 	addButton(11, "Gender Set.", GenderForcedSetting);
 	addButton(10, "RacialScores", RacialScores);
@@ -610,7 +610,7 @@ public class PlayerAppearance extends BaseContent {
 
 	public function	WeaponDisplay():void {
 		clearOutput();
-		outputText("Select wich display of weapon you would prefer in the character portrait.");
+		outputText("Select which weapon type you would prefer to see in the character portrait.");
 		if (flags[kFLAGS.WEAPON_DISPLAY_FLAG] == 0) outputText("\n\nDisplay Style: <b>Melee</b>");
 		if (flags[kFLAGS.WEAPON_DISPLAY_FLAG] == 1) outputText("\n\nDisplay Style: <b>Ranged</b>");
 		mainView.hideAllMenuButtons();
