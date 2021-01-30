@@ -2,7 +2,7 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="CoC-debug">
     <configurations>
-      <configuration name="CoC-debug" main-class="classes.CoC" output-file="CoC-debug.swf" output-folder="$USER_HOME$/Compiled/CoC-Xianxia/SWF">
+      <configuration name="CoC-debug" main-class="classes.CoC" output-file="CoC-debug.swf" output-folder="$MODULE_DIR$">
         <dependencies target-player="11.1" component-set="MxOnly" framework-linkage="Merged">
           <entries>
             <entry library-name="lib" library-level="project">
@@ -43,7 +43,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="CoC-Mobile" target-platform="Mobile" main-class="classes.CoC" output-file="CoC-Mobile.swf" output-folder="$USER_HOME$/Compiled/CoC-Xianxia/apk">
+      <configuration name="CoC-Mobile" target-platform="Mobile" main-class="classes.CoC" output-file="CoC-Mobile.swf" output-folder="$MODULE_DIR$">
         <dependencies>
           <entries>
             <entry library-name="lib" library-level="project">
@@ -59,7 +59,7 @@
           <option name="resourceFilesMode" value="None" />
         </compiler-options>
         <packaging-air-desktop />
-        <packaging-android enabled="true" package-file-name="CoC-Mobile">
+        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/CoC-Mobile-android-descriptor.xml" package-file-name="CoC-Mobile">
           <AirSigningOptions keystore-path="$MODULE_DIR$/coc.keystore" use-temp-certificate="false" />
         </packaging-android>
         <packaging-ios package-file-name="CoC-Mobile" />
