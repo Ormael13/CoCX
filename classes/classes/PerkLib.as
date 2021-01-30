@@ -5692,7 +5692,7 @@ public class PerkLib
 			DisplacerMetabolism.requireMetabolismMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.displacerbeastScore() >= 8;
 			}, "Displacer beast");
-			DraconicBones.requireDragonMutationSlot().requireBonesAndMarrowMutationSlot()
+			DraconicBones.requireBonesAndMarrowMutationSlot()
 				.requireCustomFunction(function (player:Player):Boolean {
                 return (player.arms.type == Arms.DRAGON || player.arms.type == Arms.FROSTWYRM);
 				}, "Dragon race or its variants arms")
@@ -5705,13 +5705,13 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10);
             }, "Dragon race or its variants");
-			DraconicHeart.requireDragonMutationSlot().requireHeartMutationSlot()
+			DraconicHeart.requireHeartMutationSlot()
                 .requirePerk(DraconicBones)
                 .requireAnyPerk(DraconicLungs, DrakeLungs)
 				.requireCustomFunction(function (player:Player):Boolean {
                 return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10);
             }, "Dragon race or its variants");
-			DraconicLungs.requireDragonMutationSlot().requireLungsMutationSlot()
+			DraconicLungs.requireLungsMutationSlot()
 				.requirePerk(DragonFireBreath)
                 .requirePerk(DragonIceBreath)
                 .requirePerk(DragonLightningBreath)
@@ -5771,7 +5771,7 @@ public class PerkLib
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.vampireScore() >= 4;//potem dodać mosquito race i ew. inne co mogą wypijać krew
             }, "Vampire race");
-            KitsuneThyroidGland.requireKitsuneMutationSlot().requireThyroidGlandMutationSlot().requireAnyPerk(EnlightenedKitsune, CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
+            KitsuneThyroidGland.requireThyroidGlandMutationSlot().requireAnyPerk(EnlightenedKitsune, CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
                 return player.kitsuneScore() >= 5;
             }, "Kitsune race");
             LactaBovinaOvaries.requireOvariesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
