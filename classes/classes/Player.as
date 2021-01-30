@@ -12347,8 +12347,8 @@ use namespace CoC;
 			if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':((0.01 * Math.round(inte/2))+(0.01 * Math.round(wis/2))),'tou.mult':((0.01 * Math.round(inte/2))+(0.01 * Math.round(wis/2)))}, 'Enigma', { text: 'Enigma' });
 			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
+			var power:Number = 0;
 			if (hasPerk(PerkLib.BullStrength)){
-				var power:Number = 0;
 				if(cowScore() >=15) power = lactationQ()*0.001;
 				if(minotaurScore() >=15) power = cumCapacity()*0.001;
 				if (power > 0.5) power = 0.5;
@@ -12356,7 +12356,6 @@ use namespace CoC;
 			}
 			if (!hasPerk(PerkLib.BullStrength) && statStore.hasBuff('Bull Strength')) statStore.removeBuffs('Bull Strength');
 			if (hasPerk(PerkLib.UnnaturalStrength)){
-				var power:Number;
 				if (flags[kFLAGS.HUNGER_ENABLED] > 0) power = maxHunger()*0.01;
 				else power = maxLust()*0.01;
 				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Unnatural Strength', { text: 'Unnatural Strength' });
