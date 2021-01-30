@@ -4403,7 +4403,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
-	
+
 	public function possess():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
