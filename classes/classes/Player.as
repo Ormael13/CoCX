@@ -1387,7 +1387,7 @@ use namespace CoC;
 		//Shields for Bash
 		public function isShieldsForShieldBash():Boolean
 		{
-			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shieldPerk == "Large" || shieldPerk == "Massive";
+			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.SPIL_SH || shieldPerk == "Large" || shieldPerk == "Massive" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets");
 		}
 		//override public function get shields
 		override public function get shieldName():String {
@@ -3042,6 +3042,8 @@ use namespace CoC;
 				{name: 'ratatoskr', score: ratatoskrScore(), minscore: 6},
 				{name: 'wendigo', score: wendigoScore(), minscore: 10},
 				{name: 'troll', score: trollScore(), minscore: 5},
+				{name: 'cyclop', score: cyclopScore(), minscore: 6},
+				{name: 'gazer', score: gazerScore(), minscore: 7},
 			];
 
 			ScoreList = ScoreList.filter(function(element:Object, index:int, array:Array):Boolean {
@@ -3105,7 +3107,6 @@ use namespace CoC;
 						race = "Kasha";
 					} else {
 						race = "hellcat";
-
 					}
 				}
 			}
@@ -3202,6 +3203,24 @@ use namespace CoC;
 						if (isTaur()) race = "lesser jabberwocky-taur";
 						else race = "lesser jabberwocky";
 					}
+				}
+			}
+			if (TopRace == "cyclop") {
+				if (TopScore >= 6) {
+					if (TopScore >= 12)
+						race = "cyclop";
+					else
+						race = "half-cyclop"
+				}
+			}
+			if (TopRace == "gazer") {
+				if (TopScore >= 7) {
+					if (TopScore >= 21 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10)
+						race = "Eye Tyrant";
+					else if (TopScore >= 14 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6)
+						race = "gazer";
+					else
+						race = "half-gazer";
 				}
 			}
 			if (TopRace == "raccoon") {
@@ -7602,6 +7621,50 @@ use namespace CoC;
 			return KamaitachiCounter;
 		}
 
+		//Cyclop score
+		public function cyclopScore():Number {
+			Begin("Player","racialScore","cyclop");
+			var cyclopCounter:Number = 0;
+			if (hasCoatOfType(Skin.COVERAGE_NONE))
+				cyclopCounter++;
+			if (eyes.type == Eyes.MONOEYE) {
+				cyclopCounter += 3;
+				if (arms.type == Arms.HUMAN)
+					cyclopCounter++;
+				if (lowerBody == LowerBody.HUMAN)
+					cyclopCounter++;
+			}
+			if (faceType == Face.ANIMAL_TOOTHS)
+				cyclopCounter++;
+			if (wings.type == Wings.NONE)
+				cyclopCounter++;
+			if (tailType == Tail.NONE)
+				cyclopCounter++;
+			if (tone >= 90)
+				cyclopCounter++;
+			if (tone >= 120 && cyclopCounter >= 4)
+				cyclopCounter++;
+			if (tallness > 72 && cyclopCounter >= 4)
+				cyclopCounter++;
+			if (tallness > 96 && cyclopCounter >= 6)
+				cyclopCounter++;
+			if (tallness > 120 && cyclopCounter >= 8)
+				cyclopCounter++;
+			if (rearBody.type == RearBody.TENTACLE_EYESTALKS && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2)
+				cyclopCounter -= 10;
+			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+				cyclopCounter += 50;
+			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && cyclopCounter >= 4)
+				cyclopCounter += 1;
+			if (findPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && cyclopCounter >= 8)
+				cyclopCounter += 1;
+			if (isGargoyle()) cyclopCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) cyclopCounter = 0;
+			cyclopCounter = finalRacialScore(cyclopCounter, Race.GAZER);
+			End("Player","racialScore");
+			return cyclopCounter;
+		}
+
 		//Gazer score
 		public function gazerScore():Number {
 			Begin("Player","racialScore","gazer");
@@ -7612,8 +7675,8 @@ use namespace CoC;
 				gazerCounter++;
 			if (hasCoatOfType(Skin.COVERAGE_NONE))
 				gazerCounter++;
-			if (eyes.type == Eyes.GAZER)
-				gazerCounter += 2;
+			if (eyes.type == Eyes.MONOEYE)
+				gazerCounter++;
 			if (eyes.colour == "red")
 				gazerCounter++;
 			if (skin.base.pattern == Skin.PATTERN_OIL)
@@ -7628,24 +7691,18 @@ use namespace CoC;
 				gazerCounter++;
 			if (skin.base.pattern == Skin.PATTERN_OIL)
 				gazerCounter++;
-			if (wings.type == Wings.GAZER && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2) {
+			if (wings.type == Wings.LEVITATION)
+				gazerCounter += 3;
+			if (rearBody.type == RearBody.TENTACLE_EYESTALKS && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2) {
 				gazerCounter += 2;
-				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 3)
-					gazerCounter++;
 				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 4)
-					gazerCounter++;
-				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 5)
-					gazerCounter++;
+					gazerCounter += 2;
 				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6)
-					gazerCounter++;
-				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 7)
-					gazerCounter++;
+					gazerCounter += 2;
 				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8)
-					gazerCounter++;
-				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 9)
-					gazerCounter++;
+					gazerCounter += 2;
 				if (statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10)
-					gazerCounter++;
+					gazerCounter += 2;
 			}
 			if (findPerk(PerkLib.GazerEye) >= 0)
 				gazerCounter++;
@@ -11481,6 +11538,36 @@ use namespace CoC;
 					maxIntCap2 += 20;
 					maxWisCap2 += 40;
 					currentSen += 10;
+				}
+			}
+			if (cyclopScore() >= 6) {
+				if (cyclopScore() >= 12) {
+					maxStrCap2 += 90;
+					maxTouCap2 += 90;
+				}
+				else {
+					maxStrCap2 += 45;
+					maxTouCap2 += 45;
+				}
+			}
+			if (gazerScore() >= 7) {
+				if (gazerScore() >= 21 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					maxTouCap2 += 80;
+					maxSpeCap2 -= 75;
+					maxIntCap2 += 180;
+					maxLibCap2 += 130;
+				}
+				else if (gazerScore() >= 14 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6) {
+					maxTouCap2 += 55;
+					maxSpeCap2 -= 65;
+					maxIntCap2 += 130;
+					maxLibCap2 += 90;
+				}
+				else {
+					maxTouCap2 += 30;
+					maxSpeCap2 -= 55;
+					maxIntCap2 += 80;
+					maxLibCap2 += 50;
 				}
 			}
 			if (ratatoskrScore() >= 6) {

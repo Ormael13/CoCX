@@ -252,13 +252,15 @@ public function aethertwinsFollowersFeedEquipment(itype:ItemType):void {
 	clearOutput();
 	outputText("You deposit the item on the ground and approach the aether twins from it. Not to your surprise the item begins to melt as if turning to sludge as the twins zap them with some unknown magic the twins growing something not unlike magical teeth with which it begins munching at this new material. Before long the item is fully assimilated into the twins which acquires some of its powers.\n\n");
 	outputText("\"<i>Thank you for the meal.</i>\" they grins.\n\n");
-	if (player.hasItem(shields.BUCKLER, 1)) AetherTwinsFoodMenuBuckler = true;
-	if (player.hasItem(shields.SPIL_SH, 1)) AetherTwinsFoodMenuSpikeLShield = true;
-	if (player.hasItem(weapons.S_GAUNT, 1)) AetherTwinsFoodMenuSGauntlet = true;
-	if (player.hasItem(weapons.CLAWS, 1)) AetherTwinsFoodMenuClaws = true;
-	if (player.hasItem(weapons.H_GAUNT, 1)) AetherTwinsFoodMenuHGaunt = true;
-	if (player.hasItem(weapons.BFGAUNT, 1)) AetherTwinsFoodMenuBFGauntlets = true;
-	if (player.hasItem(weapons.L_CLAWS, 1)) AetherTwinsFoodMenuLustyClaws = true;
+	switch (itype) {
+		case shields.BUCKLER:	AetherTwinsFoodMenuBuckler = true;		break;
+		case shields.SPIL_SH:	AetherTwinsFoodMenuSpikeLShield = true;	break;
+		case weapons.S_GAUNT:	AetherTwinsFoodMenuSGauntlet = true;	break;
+		case weapons.CLAWS:		AetherTwinsFoodMenuClaws = true;		break;
+		case weapons.H_GAUNT:	AetherTwinsFoodMenuHGaunt = true;		break;
+		case weapons.BFGAUNT:	AetherTwinsFoodMenuBFGauntlets = true;	break;
+		case weapons.L_CLAWS:	AetherTwinsFoodMenuLustyClaws = true;	break;
+	}
 	player.destroyItems(itype, 1);
 	if (AetherTwinsFoodMenuBuckler && AetherTwinsFoodMenuSGauntlet && AetherTwinsFoodMenuSGauntlet) {
 		outputText("\"<i>Woohoo we're evolving.</i>\" they exclaims. \"<i>We going Faster Harder Better Stronger Curvier!!!</i>\"\n\n");
@@ -272,4 +274,4 @@ public function aethertwinsFollowersFeedEquipment(itype:ItemType):void {
 	cheatTime(1/4);
 }
 	}
-}//do 305 linii na razie dodawać ^^
+}//do 549 linii na razie dodawać ^^

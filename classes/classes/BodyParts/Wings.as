@@ -82,8 +82,8 @@ public class Wings extends BodyPart {
 	EnumValue.add(Types, FAIRY, "FAIRY", {name:"fairy",canFly: true});
 	public static const WINDY_AURA:int    	 	 = 35;
 	EnumValue.add(Types, WINDY_AURA, "WINDY_AURA", {name:"windy aura",canFly: true});
-	public static const GAZER:int    	 	 	 = 36;
-	EnumValue.add(Types, GAZER, "GAZER", {name:"gazer",canFly: true});
+	//public static const :int    	 	 	 = 36;
+	//EnumValue.add(Types, , "", {name:"",canFly: true});
 
 	public var desc:String = "non-existant";
 	public function Wings() {

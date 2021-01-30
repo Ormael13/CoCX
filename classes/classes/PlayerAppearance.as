@@ -370,8 +370,8 @@ public class PlayerAppearance extends BaseContent {
 			if (player.skin.hasMagicalTattoo()) sdesc = " covered by magical tattoo";
 			else if (player.skin.hasBattleTattoo()) sdesc = " covered by battle tattoo";
 			else if (player.skin.hasLightningShapedTattoo()) sdesc = " covered with a few glowing lightning tattoos";
-			else if(player.skin.hasWindSweptScars()) sdesc = " covered with scars as if your skin was cut in various place by a windstorm";
-			else if(player.skin.hasOilySkin()) sdesc =" dripping with oily black fluids.";
+			else if (player.skin.hasWindSweptScars()) sdesc = " covered with scars as if your skin was cut in various place by a windstorm";
+			else if (player.skin.hasOilySkin()) sdesc =" dripping with oily black fluids.";
 			else if (player.skin.hasScarShapedTattoo()) sdesc = " covered by scar tattoos";
 			else if (player.skin.hasVenomousMarking()) sdesc = " covered by venomous marking";
 			else if (player.skin.hasWhiteBlackVeins()) sdesc = " covered by [base.color2] veins";
@@ -1366,6 +1366,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.rearBody.type == RearBody.FUR_COAT) {
 			outputText("  On your back you wear a thick fur coat, not unlike a mantle complete with a hood always worn over your head it has a pair of holes just to let a pair of horns or rather antlers juts through it.");
 		}
+		else if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS) {
+			outputText(" A set of "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" tentacle eyestalks expand from your back giving you all around vision. They're gazes are charged with lethal magical powers.");
+		}
 	}
 	public function describeWings():void {
 	//WINGS!
@@ -1402,9 +1405,9 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Large wings sprout from your shoulders.  When unfurled they stretch further than your arm span, and a single beat of them is all you need to set out toward the sky.  They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.");
 		else if (wingType == Wings.DRACONIC_HUGE)
 			outputText("  Magnificent huge wings sprout from your shoulders.  When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky.  They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.");
-		else if (wingType == Wings.GIANT_DRAGONFLY)
+		if (wingType == Wings.GIANT_DRAGONFLY)
 			outputText("  Giant dragonfly wings hang from your shoulders.  At a whim, you could twist them into a whirring rhythm fast enough to lift you off the ground and allow you to fly.");
-		else if (wingType == Wings.GARGOYLE_LIKE_LARGE) {
+		if (wingType == Wings.GARGOYLE_LIKE_LARGE) {
 			outputText("  Large ");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
@@ -1413,11 +1416,8 @@ public class PlayerAppearance extends BaseContent {
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) outputText("bat");
 			outputText(" wings and, although they were made of stone, they allow you to fly around with excellent aerial agility.");
 		}
-		else if (wingType == Wings.PLANT) {
+		if (wingType == Wings.PLANT) {
 			outputText("  Three pairs of oily, prehensile phalluses sprout from your shoulders and back. From afar, they may look like innocent vines, but up close, each tentacle contain a bulbous head with a leaking cum-slit, perfect for mass breeding.");
-		}
-		else if (wingType == Wings.GAZER) {
-			outputText(" A set of "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" tentacle eyestalks expand from your back giving you all around vision. They're gazes are charged with lethal magical powers..");
 		}
 		if (wingType == Wings.BAT_ARM){
 			outputText("  Your large winged arms allow you to fly in a similar fashion to the bats they resemble. You sometimes wrap them around you like a cape when you walk around, so as to keep them from encumbering you. That being said, you far prefer using them for their intended purpose, traveling by flight whenever you can.");
@@ -1664,7 +1664,7 @@ public class PlayerAppearance extends BaseContent {
 		else if(eyeType == Eyes.GEMSTONES){
 			outputText("  Instead of regular eyes you see through a pair of gemstones that change hue based on your mood.");
 		}
-		else if(eyeType == Eyes.GAZER){
+		else if(eyeType == Eyes.MONOEYE){
 			outputText("  Your eye sockets have merged together to reform into a single cyclopean eye charged with powerful magical powers. Your almighty gaze is as peerless as its unsettling.");
 		}
 		else if(eyeType == Eyes.FERAL){
@@ -1730,12 +1730,12 @@ public class PlayerAppearance extends BaseContent {
 			else {
 				outputText("  You are totally bald, showing only shiny " + player.skinTone + " [skin.type]");
 				if(player.skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo");
-				else if(player.skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
-				else if(player.skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(player.skin.hasWindSweptScars()) outputText(" covered with scars as if your skin was cut in various place by a windstorm");
-				else if(player.skin.hasOilySkin()) outputText(" dripping with oily black fluids.");
-				else if(player.skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
-				else if(player.skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				else if (player.skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
+				else if (player.skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
+				else if (player.skin.hasWindSweptScars()) outputText(" covered with scars as if your skin was cut in various place by a windstorm");
+				else if (player.skin.hasOilySkin()) outputText(" dripping with oily black fluids.");
+				else if (player.skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
+				else if (player.skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 				outputText(" where your hair should be.");
 			}
 			if(earType == Ears.HORSE)
@@ -2005,8 +2005,8 @@ public class PlayerAppearance extends BaseContent {
 		if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 		else if (player.skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
 		else if (player.skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-		else if(player.skin.hasWindSweptScars()) outputText(" covered with scars as if your skin was cut in various place by a windstorm");
-		else if(player.skin.hasOilySkin())outputText(" dripping with oily black fluids");
+		else if (player.skin.hasWindSweptScars()) outputText(" covered with scars as if your skin was cut in various place by a windstorm");
+		else if (player.skin.hasOilySkin())outputText(" dripping with oily black fluids");
 		else if (player.skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
 		else if (player.skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 	}
@@ -2575,6 +2575,11 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.cowScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Cow-morph: " + player.cowScore() + " (+60% to Str racial multi, +10% to Tou racial multi, -20% to Spe racial multi, -10% to Int racial multi, +20% to Lib racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		else if (player.cowScore() >= 1) outputText("\n<font color=\"#008000\">Half Cow-morph: " + player.cowScore() + "</font>");
 		else if (player.cowScore() < 1) outputText("\n<font color=\"#ff0000\">Half Cow-morph: 0</font>");
+		//Cyclop
+		if (player.cyclopScore() >= 12) outputText("\n<font color=\"#0000a0\">Cyclop: " + player.cyclopScore() + " (+90% to Str racial multi, +90% to Tou racial multi)</font>");
+		else if (player.cyclopScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Cyclop: " + player.cyclopScore() + " (+45% to Str racial multi, +45% to Tou racial multi)</font>");
+		else if (player.cyclopScore() >= 1) outputText("\n<font color=\"#008000\">Half Cyclop: " + player.cyclopScore() + "</font>");
+		else if (player.cyclopScore() < 1) outputText("\n<font color=\"#ff0000\">Half Cyclop: 0</font>");
 		//Dark Goo
 		if (player.darkgooScore() >= 17) outputText("\n<font color=\"#0000a0\">Dark Slime Queen: " + player.darkgooScore() + " (+115% to Tou racial multi, -50% to Spe racial multi, +45% to Int racial multi, +145% to Lib racial multi)</font>");
 		else if (player.darkgooScore() >= 13) outputText("\n<font color=\"#0000a0\">Dark Slime: " + player.darkgooScore() + " (+90% to Tou racial multi, -40% to Spe racial multi, +45% to Int racial multi, +100% to Lib racial multi)</font>");
@@ -2684,6 +2689,12 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.gargoyleScore() >= 1) outputText("\n<font color=\"#008000\">GARGOYLE: " + player.gargoyleScore() + "</font>");
 		else if (player.gargoyleScore() < 1) outputText("\n<font color=\"#ff0000\">GARGOYLE: 0</font>");
+		//Gazer
+		if (player.gazerScore() >= 21 && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) outputText("\n<font color=\"#0000a0\">Eye Tyrant: " + player.gazerScore() + " (+80% to Tou racial multi, -75% to Spe racial multi, +180% to Int racial multi, +130% to Lib racial multi)</font>");
+		else if (player.gazerScore() >= 14 && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6) outputText("\n<font color=\"#0000a0\">Gazer: " + player.gazerScore() + " (+55% to Tou racial multi, -65% to Spe racial multi, +130% to Int racial multi, +90% to Lib racial multi)</font>");
+		else if (player.gazerScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Gazer: " + player.gazerScore() + " (+30% to Tou racial multi, -55% to Spe racial multi, +80% to Int racial multi, +50% to Lib racial multi)</font>");
+		else if (player.gazerScore() >= 1) outputText("\n<font color=\"#008000\">Half Gazer: " + player.gazerScore() + "</font>");
+		else if (player.gazerScore() < 1) outputText("\n<font color=\"#ff0000\">Half Gazer: 0</font>");
 		//Goblin
 		if (player.goblinScore() >= 10) outputText("\n<font color=\"#0000a0\">Goblin: " + player.goblinScore() + " (-50% to Str racial multi, +75% to Spe racial multi, +100% to Int racial multi, +25% to Lib racial multi)</font>");
 		else if (player.goblinScore() >= 1) outputText("\n<font color=\"#008000\">Goblin: " + player.goblinScore() + "</font>");

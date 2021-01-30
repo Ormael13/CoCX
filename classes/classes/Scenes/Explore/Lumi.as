@@ -73,6 +73,7 @@ public class Lumi extends BaseContent {
             [consumables.C_VEMOM,consumables.P_VEMOM],
 			[consumables.BLACKIN,consumables.ABYSSIN],
             [consumables.ECTOPLS,consumables.PROTPLS],
+            [consumables.EYEDROP,consumables.ME_DROP],
         ];
         if(justCheck){
             for each(var improvable:Array in improvables){
@@ -1792,4 +1793,4 @@ public class Lumi extends BaseContent {
 		else doNext(camp.returnToCampUseFourHours);
 	}*/
 }
-}
+}

@@ -9951,6 +9951,150 @@ public final class Mutations extends MutationsHelper {
         }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
+	
+	public function eyeDrops(type:Number, player:Player):void {
+        player.slimeFeed();
+        clearOutput();
+        var changes:Number = 0;
+        var changeLimit:Number = 2;
+        var temp2:Number = 0;
+        if (rand(2) == 0) changeLimit++;
+        if (rand(3) == 0) changeLimit++;
+        changeLimit += additionalTransformationChances();
+        outputText("You apply the eyedrops to your eye"+(player.eyes.type == Eyes.MONOEYE ? "":"s")+" pointlessly hoping it can help you wash away all the dirty things you have seen on mareth. For a few seconds, your vision becomes… clearer? However this is not without other changes.");
+        //Stats
+		if (rand(3) == 0 && changes < changeLimit) {
+            //(low str)
+            if (player.str < 40) outputText("\n\nShivering, you feel a feverish sensation that reminds you of the last time you got sick. Thankfully, it passes swiftly, leaving slightly enhanced strength in its wake.");
+            //(hi str – 50+)
+            else outputText("\n\nHeat builds in your muscles, their already-potent mass shifting slightly as they gain even more strength.");
+            //Faster until 40 str.
+            if (player.str < 40) MutagenBonus("str", 0.5);
+            MutagenBonus("str", 0.5);
+            changes++;
+        }
+		if (rand(3) == 0 && changes < changeLimit && type == 0) {
+            outputText("\n\nYour body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher it has gotten.");
+            MutagenBonus("tou", 1);
+            changes++;
+        }
+		if (rand(3) == 0 && changes < changeLimit && type == 1) {
+            outputText("\n\nIt seems not only your eyes see better, your mind is clearer too. A paranoid thought suddenly comes to you as you realise just about anyone you know could be plotting your demise in secret"+((flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 || flags[kFLAGS.MET_MARAE_CORRUPTED] >= 1) ? " after all your village elders sold you off to the demons as a sacrifice":"")+". Come to think of it, who are your true friends even?");
+            MutagenBonus("int", 2);
+            if (player.inte < 60) MutagenBonus("int", 2);
+            changes++;
+        }
+        if (changes < changeLimit && rand(3) == 0 && player.spe > 15 && type == 1) {
+            outputText("\n\nUgh why are you even in such a hurry all the time you should just relax and take your time instead of rushing ahead. The world ain't gonna end overnight.");
+			if (player.wings.type != Wings.LEVITATION) outputText(" Heck walking takes so much effort, if you could levitate you would skip on that too.");
+            dynStats("spe", -1);
+            if (player.str > 60) dynStats("spe", -1);
+            if (player.str > 80) dynStats("spe", -1);
+            if (player.str > 90) dynStats("spe", -1);
+            changes++;
+        }
+		if (rand(4) == 0 && changes < changeLimit && type == 1) {
+            outputText("\n\nYou can't help but think that if you wanted you could easily peep on someone having sex at any time. This whole place is an open sex display. All you need to do is keep your eye open and listen for the sound of a nearby orgy to find one. Then it's all about peeping without being spotted. The more you think about it the more this whole voyeurism fantasy has you aroused.");
+            MutagenBonus("lib", 2);
+            if (player.lib < 60) MutagenBonus("lib", 2);
+            changes++;
+        }
+		if (blockingBodyTransformations()) changeLimit = 0;
+        //Physical
+		if (player.eyes.type == Eyes.MONOEYE && player.eyes.colour != "red" && changes < changeLimit && rand(3) == 0) {
+            player.eyes.colour = "red";
+            outputText("\n\nBright lights flash into your vision as your eyes glow with light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment, but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>[eyecolor] monoeye staring back at you.</b>");
+            changes++;
+        }
+        if (player.eyes.type != Eyes.MONOEYE && changes < changeLimit && rand(3) == 0) {
+            if (player.eyes.type == Eyes.HUMAN) {
+                outputText("\n\nYou gasp in discomfort as your vision troubles and blurr for a moment. You pass your hand to feel for your face and discover to your absolute surprise you can't feel your nose ridge heck as you poke yourself in the eye and recoil back in surprise. " +
+                        "<b>Seems your eyes merged together into one single all encompassing eye like that of some cyclopean creature.</b>");
+                setEyeType(Eyes.MONOEYE);
+            }
+			else humanizeEyes();
+            changes++;
+        }
+		if (player.faceType != Face.ANIMAL_TOOTHS && rand(3) == 0 && changes < changeLimit) {
+            outputText("\n\n");
+            if (player.faceType != Face.HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
+            outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. <b>Your mouth is now filled with wolf like canines.</b>");
+            setFaceType(Face.ANIMAL_TOOTHS);
+            changes++;
+        }
+		if (((!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.NONE) && type == 0) || (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.LEVITATION, Wings.NONE) && type == 1)) && rand(3) == 0 && changes < changeLimit) {
+            outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!");
+            setWingType(Wings.NONE, "non-existant");
+            changes++;
+        }
+        if (player.tailType > Tail.NONE && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+            outputText("\n\nYou feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground.  <b>You no longer have a tail!</b>");
+            setTailType(Tail.NONE, 0);
+            player.tailVenom = 0;
+            player.tailRecharge = 5;
+            changes++;
+        }
+		if (player.wings.type == Wings.NONE && player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.GAZER && player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2 && changes < changeLimit && rand(3) == 0 && type == 1) {
+            outputText("\n\nYou feel so tired you could fall on your knees but to your surprise you don't. Instead of actually hitting the ground you simply float in the air. Your legs begin to sweat and drip at high rate until they cover in some kind of oily black fluids just like those of a gazer.  <b>You are now naturally levitating.</b>");
+			setWingType(Wings.LEVITATION, "levitation");
+			setLowerBody(LowerBody.GAZER);
+            changes++;
+        }
+		if (player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            humanizeLowerBody();
+            changes++;
+        }
+		if (changes < changeLimit && player.lowerBody == LowerBody.GAZER && player.arms.type == Arms.HUMAN && player.arms.type != Arms.GAZER && rand(3) == 0 && type == 1) {
+            outputText("\n\nYour arms begin to sweat and drip at high rate until they cover in some kind of oily ink black mucus. It drops from your hands down to the ground oozing like tar. You would say ew but for some reason it doesn't smell so bad, heck taking a whiff it almost smells like perfume or rather aphrodisiacs. Heck thinking on it now from a far glance it looks like you are wearing sleeved gloves.  <b>Your arms are now covered from the forearm to the digits into tar like fluids.</b>");
+			setArmType(Arms.GAZER);
+            changes++;
+        }
+		if (changes < changeLimit && ((!InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && type == 0) || (!InCollection(player.arms.type, Arms.HUMAN, Arms.GAZER, Arms.GARGOYLE) && type == 1)) && rand(3) == 0) {
+            humanizeArms();
+            changes++;
+        }
+        if (!player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
+            if (player.skinAdj != "") player.skinAdj = "";
+            humanizeSkin();
+        }
+		if (type == 1) {
+			if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) < 10 && changes < changeLimit && rand(3) == 0) {
+				player.addStatusValue(StatusEffects.GazerEyeStalksPlayer, 1, 2);
+				outputText("\n\nYou gasp in alien pleasure as two new eye mounted tentacle stalks explode from your back joining your previous set. At first you're a little disoriented from being able to see in all those directions but eventually manage to adapt to the new change, the set dripping black oily fluids. <b>You now have "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" eye mounted tentacle stalks on your back.</b>"); 
+				changes++;
+			}
+			if (player.rearBody.type != RearBody.TENTACLE_EYESTALKS && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou gasp in alien pleasure as two large protrusions explode from your back freeing a pair of black tentacle stalks. The tips open to a set of eyes the same color as yours gazing at the world. These eyes share their vision with your central eye allowing you to see the world in a full peripheral view. <b>You now have two eye mounted tentacle stalks on your back.</b>"); 
+				player.createStatusEffect(StatusEffects.GazerEyeStalksPlayer, 2, 0, 0, 0);
+				setRearBody(RearBody.TENTACLE_EYESTALKS);
+				changes++;
+			}
+			if (!player.skin.hasOilySkin() && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nThe black tar like substance begins to drip everywhere around your body now, from your ass, your shoulders and even your chest Soon your torso looks like it bathed into tar some of it dripping down your body. The fluids however are regularly produced like sweat from your skin so you never run out. <b>Your body now drips black fluids.</b>");
+				/*if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
+					outputText("\n\n<b>Genetic Memory: Lighting Tattooed Skin - Memorized!</b>\n\n");
+					player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
+				}*/
+				player.skin.base.pattern = Skin.PATTERN_OIL;
+				player.skin.base.adj = "oily skin";
+				changes++;
+			}
+			var tone:Array = ["snow white", "red", "pale white"];
+			if (!InCollection(player.skinTone, tone) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit) {
+				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
+				player.skinTone = randomChoice(tone);
+				outputText("[skin]!</b>");
+				changes++;
+			}
+			var Gazer_Colour:Array = ["black", "midnight", "midnight black"];
+			if (!InCollection(player.hairColor, Gazer_Colour) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				player.hairColor = randomChoice(Gazer_Colour);
+				outputText("\n\nYour hair tingles as the strands turns <b>[haircolor]!</b>");
+			}
+		}
+		if (changes == 0) outputText(" Or so you thought, guess it was all in your imagination after all.");
+        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+    }
 
     public function smartyNuts(player:Player):void {
         clearOutput();
@@ -10003,7 +10147,6 @@ public final class Mutations extends MutationsHelper {
             player.hairColor = randomChoice(Ratatoskr_Colour);
             outputText("\n\nYour hair tingles as the strands turns <b>[haircolor]!</b>");
         }
-
         if (!player.hasFur() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             var color1:String = randomChoice(Ratatoskr_Colour);
             if (player.hasScales()) {
@@ -10020,7 +10163,6 @@ public final class Mutations extends MutationsHelper {
             }
             player.skin.growCoat(Skin.FUR, {color: color1}, Skin.COVERAGE_LOW);
         }
-
         //get partial fur from full if pc face is human
         if (player.hasFur() && rand(3) == 0 && changes < changeLimit && (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH)) {
             var color2:String = randomChoice(Ratatoskr_Colour);
@@ -10057,7 +10199,6 @@ public final class Mutations extends MutationsHelper {
 			else humanizeArms();
             changes++;
         }
-
         if (player.faceType != Face.SMUG && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nY");
             if (player.faceType != Face.HUMAN) outputText("our face begins to change as if melting, becoming more human however");

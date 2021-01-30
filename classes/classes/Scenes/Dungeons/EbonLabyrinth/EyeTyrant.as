@@ -122,7 +122,7 @@ use namespace CoC;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = NO_DROP;
-			//this.drop = new WeightedDrop(consumables.HYDRASC, 1);
+			this.drop = new WeightedDrop(consumables.ME_DROP, 1);
 			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
