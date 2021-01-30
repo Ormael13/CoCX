@@ -141,24 +141,24 @@
 
     <!-- Listing of file types for which the application can register. Optional. -->
     <!--<fileTypes>-->
-    <!-- Defines one file type. Optional. -->
-    <!--<fileType>-->
-    <!-- The name that the system displays for the registered file type. Required. -->
-    <!--<name></name>-->
-    <!-- The extension to register. Required. -->
-    <!--<extension></extension>-->
-    <!-- The description of the file type. Optional. -->
-    <!--<description></description>-->
-    <!-- The MIME content type. -->
-    <!--<contentType></contentType>-->
-    <!-- The icon to display for the file type. Optional. -->
-    <icon>
-        <image29x29>devTools/icons/icon_29.png</image29x29>
-        <image57x57>devTools/icons/icon_57.png</image57x57>
-        <image72x72>devTools/icons/icon_72.png</image72x72>
-        <image144x144>devTools/icons/icon_144.png</image144x144>
-        <image512x512>devTools/icons/icon_512.png</image512x512>
-    </icon>
+        <!-- Defines one file type. Optional. -->
+        <!--<fileType>-->
+            <!-- The name that the system displays for the registered file type. Required. -->
+            <!--<name></name>-->
+            <!-- The extension to register. Required. -->
+            <!--<extension></extension>-->
+            <!-- The description of the file type. Optional. -->
+            <!--<description></description>-->
+            <!-- The MIME content type. -->
+            <!--<contentType></contentType>-->
+            <!-- The icon to display for the file type. Optional. -->
+            <!--<icon>
+            <image29x29>devTools/icons/icon_29.png</image29x29>
+            <image57x57>devTools/icons/icon_57.png</image57x57>
+            <image72x72>devTools/icons/icon_72.png</image72x72>
+            <image144x144>devTools/icons/icon_144.png</image144x144>
+            <image512x512>devTools/icons/icon_512.png</image512x512>
+            </icon>-->
     <!--</fileType>-->
     <!--</fileTypes>-->
 
