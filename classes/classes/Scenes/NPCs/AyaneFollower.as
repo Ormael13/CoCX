@@ -228,12 +228,14 @@ public function ayaneAnal():void
 
 public function ayaneCuringCurse():void {
 	clearOutput();
-	outputText("Placeholder text for when Ayane curing PC out of curses.\n\n");
+	outputText("You tell Ayane that you are in dire need of healing to lift the power of a curse and request that she use her magic on you at once.\n\n");
+	outputText("\"<i>With due haste my " + player.mf("lord", "lady") + " I will alleviate your wounds and break some of the curses afflicting you.</i>\"\n\n");
+	outputText("On this she lifts her staff and begins a ritual. A few seconds later you feel infinitely better as the kitsune shrine maiden curative magic does its work alleviating your wounds both physical and spiritual.\n\n");
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
 		player.removeCurse(stat, 5);
 		if (stat != "sens")
 		{
-			player.removeCurse(stat+".mult", 0.5);
+			player.removeCurse(stat+".mult", 0.05);
 		}
 	}
 	doNext(camp.returnToCampUseOneHour);

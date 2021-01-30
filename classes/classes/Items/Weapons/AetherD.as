@@ -26,9 +26,7 @@ package classes.Items.Weapons
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
-			desc += "\n\nType: Weapon ";
-			if (game.player.statusEffectv4(StatusEffects.AetherTwins1) == 1) desc += "(Gauntlet)";
-			else desc += "(Gauntlet)";
+			desc += "\n\nType: Weapon (Gauntlet)";
 			//Attack
 			desc += "\nAttack: " + String(attack);
 			//Value

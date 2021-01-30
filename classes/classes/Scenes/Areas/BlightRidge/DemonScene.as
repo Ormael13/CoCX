@@ -36,7 +36,7 @@ import classes.Scenes.UniqueSexScenes;
 		//Incubus
 		public function IncubusEncounter():void {
 			clearOutput();
-			outputText("As you wander in the ridge, from behind one of trees ahead comes out a purple skinned person.  Or more to be precise a male person.  When he is approaching closer you can clearly see his dick hangging free.  \"<i>I can feel tasty soul in you.  Give it to me!</i>\" he directly command with a manly voice.  Look like there is no way around it, you ready your [weapon] for the fight.");
+			outputText("As you wander in the ridge, from behind one of trees ahead comes out a purple skinned person.  To be more precise, a male person.  When he is approaching closer you can clearly see his dick hanging free.  \"<i>I can feel tasty soul in you.  Give it to me!</i>\" he directly command with a manly voice.  Look like there is no way around it, you ready your [weapon] for the fight.");
 			startCombat(new Incubus());
 			doNext(playerMenu);
 		}
@@ -555,7 +555,7 @@ import classes.Scenes.UniqueSexScenes;
 		
 		public function CowSuccubusEncounter():void {
 			clearOutput();
-			outputText("As you wander in the ridge, from behind one of trees ahead comes out a blue skinned person covered in fur.  Or more to be precise a cow that felt that grass must be greener on the dark side.  When she is approaching closer despite rags covering some of her body you not notice any 'addition' at her crotch.  \"<i>A yummy soul in you I can feel.  Would you kindly give it to me?</i>\" she blurt directly.  Look like there is no way around it, you ready your [weapon] for the fight.");
+			outputText("As you wander in the ridge, from behind one of trees ahead comes out a blue skinned person covered in fur.  To be more precise, a cow that felt that grass must be greener on the dark side.  When she is approaching closer despite rags covering some of her body you not notice any 'addition' at her crotch.  \"<i>A yummy soul in you I can feel.  Would you kindly give it to me?</i>\" she blurt directly.  Look like there is no way around it, you ready your [weapon] for the fight.");
 			if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
 				outputText("\n\n<b>New codex entry unlocked: Succubus!</b>")
@@ -567,7 +567,7 @@ import classes.Scenes.UniqueSexScenes;
 		//Succubus
 		public function SuccubusEncounter():void {
 			clearOutput();
-			outputText("As you wander in the ridge, from behind one of trees ahead comes out a blue skinned person.  Or more to be precise a female person.  When she is approaching closer despite rags covering some of her body you not notice any 'addition' at her crotch.  \"<i>I can feel yummy soul in you.  Would you kindly give it to me?</i>\" she blurt directly.  Look like there is no way around it, you ready your [weapon] for the fight.");
+			outputText("As you wander in the ridge, from behind one of trees ahead comes out a blue skinned person.  To be more precise, a female person.  When she is approaching closer despite rags covering some of her body you not notice any 'addition' at her crotch.  \"<i>I can feel yummy soul in you.  Would you kindly give it to me?</i>\" she blurt directly.  Look like there is no way around it, you ready your [weapon] for the fight.");
 			if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
 				outputText("\n\n<b>New codex entry unlocked: Succubus!</b>")

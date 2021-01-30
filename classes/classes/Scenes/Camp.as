@@ -5026,6 +5026,11 @@ public function wakeFromBadEnd():void {
 		if (EvolvingItems >= 2) awardAchievement("Us Evolve", kACHIEVEMENTS.EPIC_US_EVOLVE);
 		//if (EvolvingItems >= 4) awardAchievement("They Evolve", kACHIEVEMENTS.EPIC_THEY_EVOLVE);
 		//if (EvolvingItems >= 8) awardAchievement("Everyone Evolve", kACHIEVEMENTS.EPIC_EVERYONE_EVOLVE);
+		var EvolutionsCount:int = 0;
+		if (AetherTwinsFollowers.AetherTwinsTalkMenu > 0) EvolutionsCount++;
+		if (EvolutionsCount >= 1) awardAchievement("Faster Harder Better Stronger Curvier!!! (1)", kACHIEVEMENTS.EPIC_F_H_B_S_CURVIER_1);
+		//if (EvolutionsCount >= 2) awardAchievement("Faster Harder Better Stronger Curvier!!! (2)", kACHIEVEMENTS.EPIC_F_H_B_S_CURVIER_2);
+		//if (EvolutionsCount >= 4) awardAchievement("Faster Harder Better Stronger Curvier!!! (3)", kACHIEVEMENTS.EPIC_F_H_B_S_CURVIER_3);
 
 		if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) awardAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME);
 		if (player.hasPerk(PerkLib.Phylactery)) awardAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA);
