@@ -14,7 +14,7 @@
     <id>classes.CoC</id>
 
     <!-- Used as the filename for the application. Required. -->
-    <filename>CoC</filename>
+    <filename>Corruption of Champion X</filename>
 
     <!-- The name that is displayed in the AIR application installer. May have multiple values for each language. See samples or xsd schema file. Optional. -->
     <name>CoC</name>

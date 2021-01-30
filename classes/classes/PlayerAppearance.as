@@ -3086,7 +3086,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.vouivreScore() >= 1) outputText("\n<font color=\"#008000\">Lesser Vouivre: " + player.vouivreScore() + "</font>");
 		else if (player.vouivreScore() < 1) outputText("\n<font color=\"#ff0000\">Lesser Vouivre: 0</font>");
 		//Yeti
-		if (player.yetiScore() >= 14) outputText("\n<font color=\"#0000a0\">Yeti: " + player.yetiScore() + " (+100% to Str racial multi, +80% to Tou racial multi, +50% to Spe racial multi, -70% to Int racial multi, +50% to Lib racial multi)</font>");
+		if (player.yetiScore() >= 17) outputText("\n<font color=\"#0000a0\">True Yeti: " + player.yetiScore() + " (+130% to Str racial multi, +100% to Tou racial multi, +65% to Spe racial multi, -90% to Int racial multi, +50% to Lib racial multi)</font>");
+		else if (player.yetiScore() >= 14) outputText("\n<font color=\"#0000a0\">Yeti: " + player.yetiScore() + " (+100% to Str racial multi, +80% to Tou racial multi, +50% to Spe racial multi, -70% to Int racial multi, +50% to Lib racial multi)</font>");
 		else if (player.yetiScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Yeti: " + player.yetiScore() + " (+50% to Str racial multi, +40% to Tou racial multi, +25% to Spe racial multi, -35% to Int racial multi, +25% to Lib racial multi)</font>");
 		else if (player.yetiScore() >= 1) outputText("\n<font color=\"#008000\">Half Yeti: " + player.yetiScore() + "</font>");
 		else if (player.yetiScore() < 1) outputText("\n<font color=\"#ff0000\">Half Yeti: 0</font>");

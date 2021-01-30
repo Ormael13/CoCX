@@ -1281,7 +1281,7 @@ public class PerkLib
 				"You've chosen the 'Fertility+' perk, making it easier to get pregnant.  It also increases your cum volume by up to 50% (if appropriate)!");
 		public static const FeyArcaneBloodstream:PerkType = mk("Fey Arcane Bloodstream", "Fey Arcane Bloodstream",
 				"Your Fey Arcane Bloodstream is granting you along with an eternal lifespan increased mana recovery and increased magical power.",
-				"You've chosen the 'Fey Arcane Bloodstream' perk, gaining along with an eternal lifespan increased mana recovery and increased magical power.").withBuffs({'int.mult':0.05});;
+				"You've chosen the 'Fey Arcane Bloodstream' perk, gaining along with an eternal lifespan increased mana recovery and increased magical power.").withBuffs({'int.mult':0.05});
 		public static const FeyArcaneBloodstreamEvolved:PerkType = mk("Fey Arcane Bloodstream (Evolved)", "Fey Arcane Bloodstream (Evolved)",
 				"Your Fey Arcane Bloodstream is granting you an even greater mana recovery and further increased magical power. Furthermore your chaotic magic is more likely to explode into additionnal effects.",
 				"You've chosen the 'Fey Arcane Bloodstream (Evolved)' perk, gaining an even greater mana recovery and further increased magical power. Furthermore your chaotic magic is more likely to explode into additionnal effects.").withBuffs({'int.mult':0.10});
@@ -1408,6 +1408,15 @@ public class PerkLib
 		public static const GorgonsEyesEvolved:PerkType = mk("Gorgon's Eyes (Evolved)", "Gorgon's Eyes (Evolved)",
 				"Another mutation of your eyes allows you to move a bit faster, increase the duration of Petrify and change negative effect of resistance to basilisks and similar effects into positive effect.",
 				"You've chosen the 'Gorgon's Eyes (Evolved)' perk. Increases the duration of Petrify and change negative effect of resistance to basilisks and similar effects into positive effect.").withBuffs({'spe.mult':0.10,'sens':10});
+		public static const GrabbingGrandmaster:PerkType = mk("Grabbing Grandmaster", "Grabbing Grandmaster",
+				"The toss to the floor from Grabbing Styles comes with such power that the foe is left out of breath. Scaling with strength, up to 20% chance of stunning the opponent for 1 round after the toss. This only work when fighting unarmed with no shield equiped.",
+				"You've chosen the 'Grabbing Grandmaster' perk, wich makes the toss to the floor from Grabbing Styles increase in power to the point that the foe is left out of breath. Scaling with strength, up to 20% chance of stunning the opponent for 1 round after the toss. This only work when fighting unarmed with no shield equiped.");
+		public static const GrabbingMaster:PerkType = mk("Grabbing Master", "Grabbing Master",
+				"Double the chances of activating grabbing style. And double your strenght modifier to determine the maximum size you can grapple. This only work when fighting unarmed with no shield equiped.",
+				"You've chosen the 'Grabbing Master' perk. This double the chances of activating grabbing style. And double the maximum size you can grapple. This only work when fighting unarmed with no shield equiped.");
+		public static const GrabbingStyle:PerkType = mk("Grabbing Style", "Grabbing Style",
+				"Add a chance per unarmed strike hit based on strength to chain the attack with a second strike, grabbing and slamming your foe around. Higher strengths lets you grab larger foes. This only work when fighting unarmed with no shield equiped.",
+				"You've chosen the 'Grabbing Style' perk, wich adds a chance per unarmed strike hit based on strength to chain the attack with a second strike, grabbing and slamming your foe around. Higher strengths lets you grab larger foes. This only work when fighting unarmed with no shield equiped.");
 		public static const GrandArchmage:PerkType = mk("Grand Archmage", "Grand Archmage",
 				"[if (player.inte>=125)" +
 						"Increases base spell strength by 40%, mana pool by 75 and lust bar by 20." +
@@ -1794,6 +1803,15 @@ public class PerkLib
 		/*public static const IronStomach:PerkType = mk("Iron Stomach", "Iron Stomach",
 				"Reduces the fatigue cost of physical specials by 50%.",
 				"You've chosen the 'Iron Stomach' perk, reducing the fatigue cost of physical special attacks by 50%");*/
+		public static const JabbingGrandmaster:PerkType = mk("Jabbing Grandmaster", "Jabbing Grandmaster",
+				"Gain up to 10% chance (scaling with speed) of doing 1 extra attack on each unarmed strike. This only work when fighting unarmed with no shield equiped.",
+				"You've chosen the 'Jabbing Grandmaster' perk, wich grants up to 10% chance (scaling with speed) of doing 1 extra attack on each unarmed strike. This only work when fighting unarmed with no shield equiped.");
+		public static const JabbingMaster:PerkType = mk("Jabbing Master", "Jabbing Master",
+				"Double the damage bonus from Jabbing style. This only work when fighting unarmed with no shield equiped.",
+				"You've chosen the 'Jabbing Master' perk. This double the damage bonus from Jabbing style. This only work when fighting unarmed with no shield equiped.");
+		public static const JabbingStyle:PerkType = mk("Jabbing Style", "Jabbing Style",
+				"Make each unarmed strike successive blow deadlier by striking the same area multiple times. Damage of each successful attack when full attacking increases exponentially by a percentage based on your speed (up to 25%). This only work when fighting unarmed with no shield equiped.",
+				"You've chosen the 'Jabbing Style' perk, wich makes each unarmed strike successive blow deadlier by striking the same area multiple times. Damage of each successful attack when full attacking increases exponentially by a percentage based on your speed (up to 10%). This only work when fighting unarmed with no shield equiped.");
 		public static const JobAllRounder:PerkType = mk("Job: All-Rounder", "Job: All-Rounder",
 				"You've combined all basic jobs training effects into an all-round fighting style. +10% to all stats",
 				"You've chosen the 'Job: All-Rounder' perk, to combine effects of training in all six basic jobs. +10% to all stats").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':6}, false);
@@ -2125,6 +2143,9 @@ public class PerkLib
 		public static const Metamorphable:PerkType = mk("Metamorphable", "Metamorphable",
 				"You can manipulate your soul force to change your body... but this increases your soul force by 10%.",
 				"You've chosen the 'Metamorphable' perk, gaining +10% max Soulforce.");
+		public static const MeteorStrike:PerkType = mk("Meteor Strike", "Meteor Strike",
+				"Double the chance for Jabbing grandmaster to do extra attacks and doubling the damage from grabbing style. This only work when fighting unarmed with no shield equiped.",
+				"You've chosen the 'Meteor Strike' perk, doubling the chance for Jabbing grandmaster to do extra attacks and doubling the damage from grabbing style. This only work when fighting unarmed with no shield equiped.");
 		public static const MindOfSteel:PerkType = mk("Mind of Steel", "Mind of Steel",
 				"Careful now, you're becoming too much like a weapon. You're mindset has become that of a weapon, allowing you to connect with your melee weapon to deal even more damage. (+10% melee phys dmg)",
 				"You've chosen the 'Mind of Steel' perk, gaining +10% melee phys dmg.");
@@ -3132,6 +3153,15 @@ public class PerkLib
 		public static const Wizened:PerkType = mk("Wizened", "Wizened",
 				"You are wise, what did you expect, something wise? You do get 10% more soulforce though.",
 				"You've chosen the 'Wizened' perk, gaining +10% max Soulforce.");
+		public static const YetiFat:PerkType = mk("Yeti Fat", "Yeti Fat",
+				"Gain damage reduction against attacks and increase the strenght of the yeti ice breath by 50%.",
+				"You've chosen the 'Yeti Fat' perk, gaining damage reduction against attacks and increase the strenght of the yeti ice breath by 50%.");
+		public static const YetiFatEvolved:PerkType = mk("Yeti Fat (Evolved)", "Yeti Fat (Evolved)",
+				"Gain further damage reduction against attacks and increase the potency of Big Hand And Feet by 50%.",
+				"You've chosen the 'Yeti Fat Evolved' perk, gaining further damage reduction against attacks and increase the potency of Big Hand And Feet by 50%.");
+		public static const YetiFatFinalForm:PerkType = mk("Yeti Fat (Final Form)", "Yeti Fat (Final Form)",
+				"Gain further damage reduction against attacks, further increase the potency of Big Hand And Feet by 50% and increase the duration of yeti breath stun by 1 round.",
+				"You've chosen the 'Yeti Fat Final Form' perk, gaining further damage reduction against attacks, further increase the potency of Big Hand And Feet by 50% and increase the duration of yeti breath stun by 1 round while also reducing its cooldown by 3 rounds.");
 		public static const ZZZ:PerkType = mk("ZZZ", "ZZZ",
 				"Sample Text Here/+20% fatigue recovery rate",
 				"You've chosen the 'ZZZ' perk, gaining +20% fatigue recovery rate.");
@@ -3154,7 +3184,7 @@ public class PerkLib
 		public static const JobBarbarian:PerkType = mk("Job: Barbarian", "Job: Barbarian",
 				"You've trained in using large weapons in fights.",
 				"You chose 'Job: Barbarian' perk, training yourself to become a Barbarian.").withBuffs({'str.mult':0.20});
-		
+
 		// Needlework perks
 		public static const ChiReflowAttack:PerkType = mk("Chi Reflow - Attack", "Chi Reflow - Attack",
 				"Regular attacks boosted, but damage resistance decreased.");
@@ -3166,7 +3196,7 @@ public class PerkLib
 				"Magic attacks boosted, but regular attacks are weaker.");
 		public static const ChiReflowSpeed:PerkType = mk("Chi Reflow - Speed", "Chi Reflow - Speed",
 				"Speed reductions are halved but at the cost of strength").withBuffs({'str.mult': -0.20});
-		
+
 		// Piercing perks
 		public static const PiercedCrimstone:PiercedCrimstonePerk = new PiercedCrimstonePerk();
 		public static const PiercedIcestone:PiercedIcestonePerk = new PiercedIcestonePerk();
@@ -3185,7 +3215,7 @@ public class PerkLib
 				"Increases the effects of penis-enlarging transformations.");
 		public static const PhallicRestraint:PerkType = mk("Phallic Restraint", "Phallic Restraint",
 				"Reduces the effects of penis-enlarging transformations.");
-		
+
 		// Non-weapon equipment perks
 		public static const Ambition:AmbitionPerk = new AmbitionPerk();
 		public static const BlindImmunity:PerkType = mk("Blind Immunity", "Blind Immunity", "Gives PC immunity to enemy blinding effects.");
@@ -3206,7 +3236,7 @@ public class PerkLib
 		public static const WizardsEnduranceAndSluttySeduction:WizardsEnduranceAndSluttySeductionPerk = new WizardsEnduranceAndSluttySeductionPerk();
 		public static const WizardsAndDaoistsEndurance:WizardsAndDaoistsEndurancePerk = new WizardsAndDaoistsEndurancePerk();
 		public static const WizardsEndurance:WizardsEndurancePerk = new WizardsEndurancePerk();
-		
+
 		// Melee & Range weapon perks
 		public static const Accuracy1:Accuracy1Perk = new Accuracy1Perk();
 		public static const Accuracy2:Accuracy2Perk = new Accuracy2Perk();
@@ -3229,7 +3259,7 @@ public class PerkLib
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
 		public static const WizardsAndDaoistsFocus:WizardsAndDaoistsFocusPerk = new WizardsAndDaoistsFocusPerk();
 		public static const WizardsFocus:WizardsFocusPerk = new WizardsFocusPerk();
-		
+
 		// Achievement perks
 		public static const BowShooting:BowShootingPerk = new BowShootingPerk();
 		public static const BroodMother:PerkType = mk("Brood Mother", "Brood Mother",
@@ -3238,7 +3268,7 @@ public class PerkLib
 		public static const Cultivation:PerkType = mk("Cultivation", "Cultivation",
 				"Allow to cultivate powers of the soul.",
 				"You've chosen the 'Cultivation' perk, starting your journey on the soul cultivation path!");//potem przerobić na coć innego - moze jak perki do czarów i łuku bedzie dawać jakieś korzyści do soul skills po odpowiednio dużej ilości ich użycia czy cos xD
-		
+
 		// Hidden Jobs perks
 		public static const HiddenJobBloodDemon:PerkType = mk("Hidden Job: Blood Demon", "Hidden Job: Blood Demon",
 				"You've trained in the art of blood demons. Beings that reached mastery of using their own or others blood to great effect. (+5x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power)");
@@ -3266,7 +3296,7 @@ public class PerkLib
 				".");
 		public static const HiddenJob1:PerkType = mk("Hidden Job: 1", "Hidden Job: 1",
 				".");
-		
+
 		// Mutation perks
 		public static const AcidSpit:PerkType = mk("Acid Spit", "Acid Spit",
 				"Allows access to a cave wyrm acid spit attack.");
@@ -5027,6 +5057,36 @@ public class PerkLib
                     .requireWis(75)
                     .requireSpe(50)
                     .requireLevel(12);
+			GrabbingStyle.requirePerk(JobMonk)
+					.requireWis(75)
+					.requireSpe(50)
+					.requireLevel(12);
+			GrabbingMaster.requirePerk(GrabbingStyle)
+					.requireWis(75)
+					.requireSpe(50)
+					.requireLevel(16);
+			GrabbingGrandmaster.requirePerk(GrabbingMaster)
+					.requireWis(75)
+					.requireSpe(50)
+					.requireLevel(20);
+			JabbingStyle.requirePerk(JobMonk)
+					.requirePerk(PerkLib.SpeedDemon)
+					.requireWis(75)
+					.requireSpe(50)
+					.requireLevel(12);
+			JabbingMaster.requirePerk(JabbingStyle)
+					.requireWis(75)
+					.requireSpe(50)
+					.requireLevel(16);
+			JabbingGrandmaster.requirePerk(JabbingMaster)
+					.requireWis(75)
+					.requireSpe(50)
+					.requireLevel(20);
+			MeteorStrike.requirePerk(JabbingGrandmaster)
+					.requirePerk(GrabbingGrandmaster)
+					.requireWis(75)
+					.requireSpe(50)
+					.requireLevel(24);
             ElementalContractRank3.requirePerk(ElementalContractRank2)
                     .requireWis(75)
                     .requireLevel(12);

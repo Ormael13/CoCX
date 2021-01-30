@@ -126,7 +126,7 @@ public class Combat extends BaseContent {
     public function SwordExpToLevelUp():Number {
         return player.SwordExpToLevelUp();
     }
-	
+
 	public function masteryAxeLevel():Number {
         return player.masteryAxeLevel;
     }
@@ -136,7 +136,7 @@ public class Combat extends BaseContent {
     public function AxeExpToLevelUp():Number {
         return player.AxeExpToLevelUp();
     }
-	
+
     public function masteryMaceHammerLevel():Number {
         return player.masteryMaceHammerLevel;
     }
@@ -146,7 +146,7 @@ public class Combat extends BaseContent {
     public function MaceHammerExpToLevelUp():Number {
         return player.MaceHammerExpToLevelUp();
     }
-	
+
 	public function masteryDuelingSwordLevel():Number {
         return player.masteryDuelingSwordLevel;
     }
@@ -156,7 +156,7 @@ public class Combat extends BaseContent {
     public function DuelingSwordExpToLevelUp():Number {
         return player.DuelingSwordExpToLevelUp();
     }
-	
+
 	public function masterySpearLevel():Number {
         return player.masterySpearLevel;
     }
@@ -166,7 +166,7 @@ public class Combat extends BaseContent {
     public function SpearExpToLevelUp():Number {
         return player.SpearExpToLevelUp();
     }
-	
+
 	public function dualWSLevel():Number {
         return player.dualWSLevel;
     }
@@ -176,7 +176,7 @@ public class Combat extends BaseContent {
     public function DualWieldSmallExpToLevelUp():Number {
         return player.DualWieldSmallExpToLevelUp();
     }
-	
+
     public function dualWNLevel():Number {
         return player.dualWNLevel;
     }
@@ -186,7 +186,7 @@ public class Combat extends BaseContent {
     public function DualWieldNormalExpToLevelUp():Number {
         return player.DualWieldNormalExpToLevelUp();
     }
-	
+
     public function dualWLLevel():Number {
         return player.dualWLLevel;
     }
@@ -196,7 +196,7 @@ public class Combat extends BaseContent {
     public function DualWieldLargeExpToLevelUp():Number {
         return player.DualWieldLargeExpToLevelUp();
     }
-	
+
     public function dualWFLevel():Number {
         return player.dualWFLevel;
     }
@@ -2280,7 +2280,7 @@ public class Combat extends BaseContent {
         if (accmmodpenalty < 0) accmmodpenalty = 0;
         return accmmodpenalty;
     }
-	
+
 	public function meleeDualWieldAccuracyPenalty():Number {
 		var accmdwmodpenalty:Number = 0;
         if (player.weaponPerk == "Dual") {
@@ -2300,7 +2300,7 @@ public class Combat extends BaseContent {
 		}
         return accmdwmodpenalty;
 	}
-	
+
 	public function meleeDualWieldDamagePenalty():Number {
 		var dmgmdwmodpenalty:Number = 1;
         if (player.weaponPerk == "Dual") {
@@ -2378,7 +2378,7 @@ public class Combat extends BaseContent {
         if (accfmodpenalty < 0) accfmodpenalty = 0;
         return accfmodpenalty;
     }
-	
+
 	public function firearmsDualWieldAccuracyPenalty():Number {
 		var accfdwmodpenalty:Number = 0;
         if (player.weaponPerk == "Dual Firearms") {
@@ -2390,7 +2390,7 @@ public class Combat extends BaseContent {
 		}
         return accfdwmodpenalty;
 	}
-	
+
 	public function firearmsDualWieldDamagePenalty():Number {
 		var dmgfdwmodpenalty:Number = 1;
         if (player.weaponPerk == "Dual Firearms") {
@@ -4336,10 +4336,17 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.HarpyHollowBonesEvolved)) damage *= 1.3;
                 if (player.hasPerk(PerkLib.HarpyHollowBonesEvolved)) damage *= 1.5;
             }
-            if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
+            if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()){
+                damage *= 2;
+                if (player.hasPerk(PerkLib.YetiFatEvolved)) damage *= 1.5;
+                if (player.hasPerk(PerkLib.YetiFatFinalForm)) damage *= 1.5;
+            }
             if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
                 damage += player.spe;
                 damage += scalingBonusSpeed() * 0.20;
+                if(player.hasStatusEffect(StatusEffects.JabbingStyle)){
+                    damage += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
+                }
             }
             if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small")) {
                 damage += (player.spe / 2);
@@ -4668,6 +4675,7 @@ public class Combat extends BaseContent {
                     if (player.spe >= 225) damage += damage;
                     if (player.spe >= 300) damage += damage;
                 }
+                JabbingStyleIncrement();
                 if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage += Math.round(damage * 0.3);
 				if (player.isSwordTypeWeapon()) {
 					if (crit) swordXP(1);
@@ -4940,6 +4948,64 @@ public class Combat extends BaseContent {
             if (monster is DisplacerBeast) outputText("\n\nThe displacer beast teleports, dodging your attack.\n");
             else outputText("\n\nYou swing your [weapon] ferociously, confident that you can strike a crushing blow. In the end you fails to actually hit anything.\n");
         }
+
+        //Damage Unarmed Strike chaining combos.
+        var extraHitChance:Number;
+        var extraHitDamage:Number;
+        var extraHitDamage2:Number;
+        if (crit){
+            extraHitDamage = damage / critDamage;
+            extraHitDamage2 = damage / critDamage;
+        }
+        else {
+            extraHitDamage = damage;
+            extraHitDamage2 = damage;
+        }
+        if (player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING){
+            if (player.hasPerk(PerkLib.JabbingStyle)){
+                if (player.hasPerk(PerkLib.JabbingGrandmaster)){
+                    extraHitChance = 10;
+                    if (player.hasPerk(PerkLib.MeteorStrike)) extraHitChance = 20
+                    if (rand(100) < extraHitChance){
+                        //var critJab:Boolean = false;
+                        var critJab:Boolean = CritRoll()
+                        extraHitDamage = CritDamage(extraHitDamage, critJab);
+                        //Deal the fellow up blow!
+                        outputText(" You chain up the jab with a second blow! ");
+                        doDamage(extraHitDamage, true ,true);
+                        if (critJab) outputText("<b>Critical! </b>");
+                        JabbingStyleIncrement();
+                    }
+                }
+            }
+            if (player.hasPerk(PerkLib.GrabbingStyle)){
+                extraHitChance = 10;
+                var playerMaxCarry = player.str+(player.tallness/12*100)
+                if (player.hasPerk(PerkLib.GrabbingMaster)) playerMaxCarry += player.str;
+                var ennemyMaxSize:Boolean = playerMaxCarry > (monster.tallness/12*100)
+                if (player.hasPerk(PerkLib.GrabbingMaster)) extraHitChance = 20;
+                if (rand(100) < extraHitChance){
+                    //Determine if critical hit!
+                    var critGrab:Boolean = CritRoll()
+                    extraHitDamage2 = CritDamage(extraHitDamage2, critJab);
+                    //Deal the fellow up blow!
+                    outputText(" You grab your opponent mid swing and supplex it against the ground! ");
+                    if (player.hasPerk(PerkLib.MeteorStrike)) extraHitDamage2 *= 2;
+                    doDamage(extraHitDamage2, true ,true);
+                    if (critGrab) outputText("<b>Critical! </b>");
+                    if (player.hasPerk(PerkLib.GrabbingGrandmaster)){
+                        var extraHitStunChance = 20;
+                        if (rand(100) < extraHitStunChance){
+                            outputText("The concusion leaves your opponent dazed! ");
+                            monster.createStatusEffect(StatusEffects.Stunned, 1,0,0,0);
+                        }
+                    }
+                    JabbingStyleIncrement();
+                }
+            }
+        }
+
+
         if (monster.HP <= monster.minHP()) {
             doNext(endHpVictory);
             return;
@@ -4975,6 +5041,37 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
+    public function JabbingStyleIncrement(){
+        if (player.hasPerk(PerkLib.JabbingStyle)){
+            var JabbingValue:Number = 0.02;
+            if (player.hasPerk(PerkLib.JabbingMaster)) JabbingValue = 0.04;
+            if(!player.hasStatusEffect(StatusEffects.JabbingStyle)) player.createStatusEffect(StatusEffects.JabbingStyle,JabbingValue,0,0,0);
+            else player.addStatusValue(StatusEffects.JabbingStyle,1,JabbingValue);
+        }
+    }
+
+    public function CritRoll(BonusCritChance:Number = 0):Boolean{
+        //Determine if critical hit!
+        var crit:Boolean = false;
+        var critChance:int = 5;
+        critChance += BonusCritChance;
+        critChance += combatPhysicalCritical();
+        if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+        if (rand(100) < critChance) {
+            crit = true;
+        }
+        return crit;
+    }
+
+    public function CritDamage(Damage:Number, WasItACrit:Boolean, CritDamageMultiplierBoost:Number = 0):Number{
+        //Multiply damage
+        var critDamage:Number = 1.75;
+        critDamage += CritDamageMultiplierBoost;
+        if (WasItACrit) {
+            Damage *= critDamage;
+        }
+        return Damage;
+    }
 
     public function ExtraNaturalWeaponAttack(FeraldamageMultiplier:Number = 1, SpecialEffect:String = ""):void {
         var accMelee:Number = 0;
@@ -5565,7 +5662,7 @@ public class Combat extends BaseContent {
 		if (monster.hasPerk(PerkLib.EnemyHugeType)) monsterLvlAdjustment += 2;
 		if (monster.hasPerk(PerkLib.EnemyGigantType)) monsterLvlAdjustment += 5;
 		if (monster.hasPerk(PerkLib.EnemyColossalType)) monsterLvlAdjustment += 10;
-		//if (player.hasPerk(PerkLib.EnemyGodType)) 
+		//if (player.hasPerk(PerkLib.EnemyGodType))
         return monsterLvlAdjustment;
     }
 
@@ -6852,7 +6949,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
             else monster.lust += monster.lustVuln * (2 + rand(4));
         }
-		
+
         //Unicorn and Bicorn aura
         //Unicorn
         if (player.hasPerk(PerkLib.AuraOfPurity)) {
@@ -7592,6 +7689,10 @@ public class Combat extends BaseContent {
             } else {
                 player.addStatusValue(StatusEffects.CooldownFlicker, 1, -1);
             }
+        }
+        //Jabbing Style Periodic removal
+        if (player.hasStatusEffect(StatusEffects.JabbingStyle)) {
+            player.removeStatusEffect(StatusEffects.JabbingStyle);
         }
         //Play
         if (player.hasStatusEffect(StatusEffects.CooldownPlay)) {
@@ -8950,7 +9051,7 @@ public class Combat extends BaseContent {
         if (player.armor == armors.SCANSC) player.SexXP(XP);
         player.SexXP(XP);
     }
-	
+
 	public function swordXP(XP:Number = 0):void {
         if (player.humanScore() == player.humanMaxScore()) player.swordXP(XP);
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.swordXP(XP);
@@ -8976,7 +9077,7 @@ public class Combat extends BaseContent {
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.spearXP(XP);
         player.spearXP(XP);
     }
-	
+
 	public function dualWieldSmallXP(XP:Number = 0):void {
         if (player.humanScore() == player.humanMaxScore()) player.dualWieldSmallXP(XP);
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.dualWieldSmallXP(XP);
@@ -11706,7 +11807,7 @@ public class Combat extends BaseContent {
         ghostRealSpe += ghostSpeed();
         return ghostRealSpe;
     }
-	
+
 	public function ghostToughness():Number {
 		var ghostTou:Number = player.touStat.core.value;
         var ghostTouMulti:Number = 0;

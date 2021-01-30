@@ -8,10 +8,10 @@
 
 **Tick** - time unit of buff.
 
-Str,Tou,Spe,Int,Wis,Lib are all "Primary stats". 
+Str,Tou,Spe,Int,Wis,Lib are all "Primary stats".
 
 **Primary Stat** - a complex stat, consisting of:
-* core - counter for levelup points and training. 1-100(*). Cannot hold buffs. 
+* core - counter for levelup points and training. 1-100(*). Cannot hold buffs.
 * bonus - part with additive buffs.
 * mult - part with multiplicative buffs.
 
@@ -43,8 +43,8 @@ After that, total value of `player.str` would be calculated as:
 * str.mult = 1.2
   - 1.0 initial value
   - 0.2 from "Racial" buff
-  
-Total = 20 * 1.2 + 15 = 24 + 15 = 39  
+
+Total = 20 * 1.2 + 15 = 24 + 15 = 39
 
 ## Stat names
 
@@ -84,7 +84,7 @@ player.buff("Poison").addStat("str", -10, -50, 0);
 ```
 Buff the stat. If buff already present, **increase** it.
 
-Otional `min` and `max` arguments control the limits of total buff value. Buff is removed if its value becomes 0.
+Optional `min` and `max` arguments control the limits of total buff value. Buff is removed if its value becomes 0.
 
 ----
 
@@ -110,7 +110,7 @@ Buff multiple stats. If buff already present, **reset** it.
 Will not remove buffs from other stats! Example:
 ```js
 player.buff("Poison").setStats( {"str": -10, "spe": -10} );
-player.buff("Poison").setStats( {"str": -20, "int": -20} ); 
+player.buff("Poison").setStats( {"str": -20, "int": -20} );
 // will NOT clear "spe" debuff!
 // total buff will be { "str": -20, "spe": -10, "int": -20 }
 ```
@@ -193,7 +193,7 @@ Remove this buff, if present, but only from one stat.
 
 ### Buff testing
 
-These functions are **non-chainable**, they must be only or last item in chain. 
+These functions are **non-chainable**, they must be only or last item in chain.
 
 ----
 
@@ -215,13 +215,13 @@ For temporary buffs, return number of ticks remaining. For permanent, returns 0.
 
 ```js
 var currentSpeDebuff: Number = buff("Poison").getValueOfStatBuff("spe");
-// currentSpeDebuff = -10 
+// currentSpeDebuff = -10
 ```
 If this buff is present on stat, return its value; otherwise return 0.
 
 ### Notes on using BuffBuilder
 
-Whenever possible, these function should be chained. 
+Whenever possible, these function should be chained.
 
 ```js
 // BAD
@@ -276,7 +276,7 @@ if (poisonAffectInt) {
 // BEST SOLUTION
 var poisonDebuffs:Object = { "str": -10, "spe": -10 };
 if (poisonAffectInt) {
-    poisonDebuffs["int"] = -10;    
+    poisonDebuffs["int"] = -10;
 }
 player.buff("Poison")
       .setStats(poisonDebuffs)
@@ -312,7 +312,7 @@ Will reduce power of wisdom Curse debuff by 20. If current wisdom curse power is
 
 ----
 
-Sensitivity is "bad" stat, and sensitivity curses will increase it instead. 
+Sensitivity is "bad" stat, and sensitivity curses will increase it instead.
 
 #### dynStats
 
@@ -337,7 +337,7 @@ Give a cumulative 1% bonus to stat multiplier, capped at 20% (in each category).
 **Example**:
 ```js
 player.MutagenBonus("int", 5);
-``` 
+```
 Will reduce "int" curse by 5. If "Alchemical" buff to "int.mult" is < 0.20, increase by 0.01.
 
 ## StatStore
@@ -415,7 +415,7 @@ Add multiple buffs to stats, increasing those which exist.
 ```js
 player.statStore.addBuffObject(
     {"str":-2,"tou":-2,"spe":-2,"int":-1},
-    "Poison", 
+    "Poison",
     {text:"Poisoned!",time:Buff.RATE_HOURS, tick:4}
 );
 ```
@@ -429,7 +429,7 @@ Add multiple buffs to stats, replacing those which exist. **Will not remove stat
 **Example**
 ```js
 player.statStore.replaceBuffObject(
-    {"wis.mult":0.10,"int.mult":0.10}, 
+    {"wis.mult":0.10,"int.mult":0.10},
     "KitsuneShrine",
     {text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7}
 );
@@ -439,7 +439,7 @@ player.statStore.replaceBuffObject(
 
 ## Primary stats
 
-Primary stat objects are kept `strStat`, `touStat` and other variables in Creature. Use them to manage primary stat directly, if needed. `str`, `tou` etc are used to get **current total value**. 
+Primary stat objects are kept `strStat`, `touStat` and other variables in Creature. Use them to manage primary stat directly, if needed. `str`, `tou` etc are used to get **current total value**.
 
 ### Core value
 

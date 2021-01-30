@@ -1318,7 +1318,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 				{
 					backupAborted = true;
 					clearOutput();
-					outputText("Failed to write to file: " + airFile.url + " (" + error.message + ")");
+					outputText("Failed to write to file: " + airFile.url + " (" + error.message + ") Go to application and change CoC permission to allow storage of data");
 					doNext(playerMenu);
 				}
 			}
@@ -2270,13 +2270,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 
 		// Fixup missing History: Whore perk IF AND ONLY IF the flag used to track the prior selection of a history perk has been set
-		if (hasHistoryPerk == false && flags[kFLAGS.HISTORY_PERK_SELECTED] != 1)
+		if (!hasHistoryPerk && flags[kFLAGS.HISTORY_PERK_SELECTED] != 1)
 		{
 			player.createPerk(PerkLib.HistoryWhore, 0, 0, 0, 0);
 		}
 
 		// Fixup missing Lusty Regeneration perk, if the player has an equipped viridian cock sock and does NOT have the Lusty Regeneration perk
-		if (hasViridianCockSock == true && hasLustyRegenPerk == false)
+		if (hasViridianCockSock && !hasLustyRegenPerk)
 		{
 			player.createPerk(PerkLib.LustyRegeneration, 0, 0, 0, 0);
 		}

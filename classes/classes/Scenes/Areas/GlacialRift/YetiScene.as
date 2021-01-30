@@ -1,5 +1,5 @@
-//Courtesy of 
-package classes.Scenes.Areas.GlacialRift 
+//Courtesy of
+package classes.Scenes.Areas.GlacialRift
 {
 import classes.*;
 import classes.BodyParts.LowerBody;
@@ -10,11 +10,52 @@ import classes.Scenes.UniqueSexScenes;
 public class YetiScene extends BaseContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
-		public function YetiScene() 
+
+		public function YetiScene()
 		{
 		}
-		
+
+		public function FemalePCMeetYeti():void {
+			outputText(". A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the iced caverns with ease as you stare the beast down. The white blur of an ice yeti heads for you but stops his charge midway, curious.");
+			if (flags[kFLAGS.MET_YETI_FIRST_TIME] == 1) outputText(" Looks like this tought male mistook you for something else and aware of his mistake has already started softening his stance.\n\n");
+			else{
+				outputText(" To your surprise the thing you at first identified as a stupid beast speaks up.\n\n");
+				flags[kFLAGS.MET_YETI_FIRST_TIME] = 1;
+			}
+			outputText("\"<i>Thought some other dumb intruder got in home but me lucky today, female must've came here by accident so will patch roof later. Female alone, no male scent on her so may forgive intrusion and let out if snu snu. No fun in days and gal look like could use warmth.</i>\"\n\n" +
+					"He makes you what you imagine and know instinctively is a seductive yet fanged smile, offering his massive hand forward in invitation. This here is yeti courtship if you've seen one before. You have to admit that by yeti standards this guy is quite handsome. How are you going to handle him? ");
+			menu();
+			addButton(0, "Snu Snu", SnuSnu);
+			addButton(1, "No", NoSnuSnu);
+		}
+
+		public function NoSnuSnu():void {
+			clearOutput();
+			outputText("Ain't no damn male making you his mate of the day so easily. How dare he! Totally not interested in his offer you roar in indignation and charge at him.");
+			startCombat(new Yeti());
+		}
+
+		public function SnuSnu():void {
+			outputText("Well he fits your tastes as far as yeti standards goes and besides, he's right, you could use some relief." +
+					" You put your equally large hand into his as he guides you deeper into the cave to his bedroom. As far as yeti culture goes he's quite the gentleman, already set the whole place for a mate even by lining the icy bed with warm furs and readying a fireplace." +
+					" Guess he just wasn't lucky in finding one. Not that you can judge him since the blizzard would make anyone blind in this frozen landscape." +
+					" Your instincts kicking in full swing you take a whiff of his musky scent, smiling in contentment, that's the smell of a strong man, one worthy of fathering your offsprings." +
+					" You lay down in bed, spreading your two furry legs apart, your arms open for a hug, in invitation for the courting male to proceed." +
+					" His impressive -yeti size cock- inch rod stands proudly, warm cum bubbling from the tip and you just almost beg him with your eyes to put it in." +
+					" He starts by teasing your entrance, aligning his glan for a powerful first strike, you make a frustrated groan annoyed by the delay, urging him to get down to business." +
+					" You want to be bred and won't take any delay or further teasing.\n\n" +
+					"On cue the male thrust his yeti rod in your pussy, making you coo in delight as you put your massive hands on his shoulder and wrap your legs around his torso, the male beginning to mate you in earnest and you respond positively by impaling yourself back on his cock at every opportunity." +
+					" His thrusts are powerful and accurate, hitting the spot on every strike and confirming to you that he's a good mate.\n\n" +
+					"\"\"<i>Girl be eager, me like that. Give you strong offspring.</i>\"\n\n" +
+					"His cock reacts favorably to your ministrations, twitching in your pussy. Reaching for the climax your mate roars as he fills you with a mighty jet of yeti cum, warming up your womb with his seeds." +
+					" The strength of his ejaculation is all you need to reach over the edge, achieving your own orgasm as the male bottoms up in you filling you to the brim with his virile seed, giving a solid shot at his paternity.\n\n" +
+					"A few seconds later he escorts you to the exit. You are positively beaming, pondering whether the seed of your mate took as you leave the cave." +
+					" Probably not since most yeti intercourse would fail to conceive a child but who knows, you could get lucky eventually. Thoroughly satisfied you head back to camp.");
+			player.sexReward("cum","Vaginal");
+			player.sexReward("cum","Vaginal");
+			doNext(camp.returnToCampUseOneHour);
+		}
+
 		public function loseToYeti():void {
 			clearOutput();
 			if (doSFWloss()) return;
@@ -25,7 +66,7 @@ public class YetiScene extends BaseContent
 			//else getFuckedByYetiFacial();
 			getFuckedByYetiDoggyStyle();
 		}
-		
+
 		private function getFuckedByYetiDoggyStyle():void {
 			outputText("Your body is pinned completely under the large beast, his hand roughly feeling you up through your armor as his monstrous prick slides from the furred sheath to grind over you. All the forceful touching and groping sends shivers down your spine, but despite all that, the warmth of his body pressed against yours is oddly soothing and you find yourself relaxing into it to avoid the cold. WIth a grunt, his large hands cup over your " + buttDescript() + " and fondle your ass through your [armor]. His forceful touch combined with the heat of his monstrous slick cock grinding over you excites your body, and the scent of the beasts rutting musk edges you even further, ");
 			//Genderless PCs
@@ -64,7 +105,7 @@ public class YetiScene extends BaseContent
 			player.orgasm();
 			cleanupAfterCombat();
 		}*/
-		
+
 		public function winAgainstYeti():void {
 			clearOutput();
 			if (monster.HP <= 0) outputText("The yeti beast’s bruised and battered body stares you down, though it’s obvious his muscles are giving out. With a loud thump he falls on his back, and lays there, vulnerable. A bellowed groan of defeat echoes the cavern walls and the threat passes. What do you do now?");
@@ -82,7 +123,7 @@ public class YetiScene extends BaseContent
 			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
-		
+
 		private function fuckYetiInTheAss():void {
 			clearOutput();
 			outputText("You walk closer to the vulnerable form of the yeti beast, his body laid out on his back before you. A desire wells up in your gut as your gaze lowers down to the beast’s genitals and beyond, at his legs slightly parted, his muscled asscheeks on display. You kneel down to push the large legs aside, and when the beast offers no resistance to your touch, you expose his large rump fully. Your hands feel up the beast’s furred cheeks, the fur surprisingly soft and warm to your touch, and kneading with your fingers you coax the firm mounds apart to expose his tight puckered entrance. \n\n");
@@ -102,7 +143,7 @@ public class YetiScene extends BaseContent
 			player.sexReward("Default","Dick",true,false);
 			cleanupAfterCombat();
 		}
-		
+
 		private function rideYetisCock():void {
 			clearOutput();
 			outputText("More than a little wet yourself, you decide to give the fallen beast a nice, warm sheath for his vulnerable rod. You pull open your [armor] just enough to expose your [vagina] as you straddle the downed yeti. He looks up at you with wary, yet hopeful eyes. Grinning, you take his big, furry hands in yours and push them back from his stiff red prick. The yeti gives a little yelp as the cold air assaults him, but you’re quick to line yourself up with him and drop down, burying his length inside you in one powerful motion. \n\n");
@@ -121,7 +162,7 @@ public class YetiScene extends BaseContent
 			player.sexReward("cum","Vaginal");
 			cleanupAfterCombat();
 		}
-		
+
 	}
 
 }
