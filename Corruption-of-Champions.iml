@@ -50,7 +50,7 @@
               <dependency linkage="Merged" />
             </entry>
           </entries>
-          <sdk name="FLEX" />
+          <sdk name="Air SDK" />
         </dependencies>
         <compiler-options>
           <map>
@@ -59,7 +59,7 @@
           <option name="resourceFilesMode" value="None" />
         </compiler-options>
         <packaging-air-desktop />
-        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/CoC-Mobile-android-descriptor.xml" package-file-name="CoC-Mobile">
+        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/CoC-Android.xml" package-file-name="CoC-Mobile">
           <AirSigningOptions keystore-path="$MODULE_DIR$/coc.keystore" use-temp-certificate="false" />
         </packaging-android>
         <packaging-ios package-file-name="CoC-Mobile" />
@@ -79,7 +79,7 @@
       <excludeFolder url="file://$MODULE_DIR$/generated" />
       <excludeFolder url="file://$MODULE_DIR$/obj" />
     </content>
-    <orderEntry type="jdk" jdkName="FLEX" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="jdk" jdkName="FLEX&#9;Air SDK" jdkType="__CompositeFlexSdk__" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="lib" level="project" />
   </component>
