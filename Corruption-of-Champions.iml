@@ -59,7 +59,10 @@
           <option name="resourceFilesMode" value="None" />
         </compiler-options>
         <packaging-air-desktop />
-        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/CoC-Android.xml" package-file-name="CoC-Mobile">
+        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/lib/CoC-Android.xml" package-file-name="CoC-Mobile">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/devTools/icons" path-in-package="devTools/icons" />
+          </files-to-package>
           <AirSigningOptions keystore-path="$MODULE_DIR$/coc.keystore" use-temp-certificate="false" />
         </packaging-android>
         <packaging-ios package-file-name="CoC-Mobile" />
