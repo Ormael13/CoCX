@@ -4980,7 +4980,7 @@ public class Combat extends BaseContent {
             }
             if (player.hasPerk(PerkLib.GrabbingStyle)){
                 extraHitChance = 10;
-                var playerMaxCarry = player.str+(player.tallness/12*100)
+                var playerMaxCarry:Number = player.str+(player.tallness/12*100)
                 if (player.hasPerk(PerkLib.GrabbingMaster)) playerMaxCarry += player.str;
                 var ennemyMaxSize:Boolean = playerMaxCarry > (monster.tallness/12*100)
                 if (player.hasPerk(PerkLib.GrabbingMaster)) extraHitChance = 20;
@@ -4994,7 +4994,7 @@ public class Combat extends BaseContent {
                     doDamage(extraHitDamage2, true ,true);
                     if (critGrab) outputText("<b>Critical! </b>");
                     if (player.hasPerk(PerkLib.GrabbingGrandmaster)){
-                        var extraHitStunChance = 20;
+                        var extraHitStunChance:Number = 20;
                         if (rand(100) < extraHitStunChance){
                             outputText("The concusion leaves your opponent dazed! ");
                             monster.createStatusEffect(StatusEffects.Stunned, 1,0,0,0);
@@ -5041,7 +5041,7 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
-    public function JabbingStyleIncrement(){
+    public function JabbingStyleIncrement():void{
         if (player.hasPerk(PerkLib.JabbingStyle)){
             var JabbingValue:Number = 0.02;
             if (player.hasPerk(PerkLib.JabbingMaster)) JabbingValue = 0.04;
