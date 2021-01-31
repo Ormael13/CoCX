@@ -36,6 +36,7 @@ public class YetiScene extends BaseContent
 		}
 
 		public function SnuSnu():void {
+			clearOutput();
 			outputText("Well he fits your tastes as far as yeti standards goes and besides, he's right, you could use some relief." +
 					" You put your equally large hand into his as he guides you deeper into the cave to his bedroom. As far as yeti culture goes he's quite the gentleman, already set the whole place for a mate even by lining the icy bed with warm furs and readying a fireplace." +
 					" Guess he just wasn't lucky in finding one. Not that you can judge him since the blizzard would make anyone blind in this frozen landscape." +
