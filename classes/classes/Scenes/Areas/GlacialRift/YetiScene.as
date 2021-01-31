@@ -42,12 +42,12 @@ public class YetiScene extends BaseContent
 					" Guess he just wasn't lucky in finding one. Not that you can judge him since the blizzard would make anyone blind in this frozen landscape." +
 					" Your instincts kicking in full swing you take a whiff of his musky scent, smiling in contentment, that's the smell of a strong man, one worthy of fathering your offsprings." +
 					" You lay down in bed, spreading your two furry legs apart, your arms open for a hug, in invitation for the courting male to proceed." +
-					" His impressive -yeti size cock- inch rod stands proudly, warm cum bubbling from the tip and you just almost beg him with your eyes to put it in." +
+					" His impressive twelve inch rod stands proudly, warm cum bubbling from the tip and you just almost beg him with your eyes to put it in." +
 					" He starts by teasing your entrance, aligning his glan for a powerful first strike, you make a frustrated groan annoyed by the delay, urging him to get down to business." +
 					" You want to be bred and won't take any delay or further teasing.\n\n" +
 					"On cue the male thrust his yeti rod in your pussy, making you coo in delight as you put your massive hands on his shoulder and wrap your legs around his torso, the male beginning to mate you in earnest and you respond positively by impaling yourself back on his cock at every opportunity." +
 					" His thrusts are powerful and accurate, hitting the spot on every strike and confirming to you that he's a good mate.\n\n" +
-					"\"\"<i>Girl be eager, me like that. Give you strong offspring.</i>\"\n\n" +
+					"\"<i>Girl be eager, me like that. Give you strong offspring.</i>\"\n\n" +
 					"His cock reacts favorably to your ministrations, twitching in your pussy. Reaching for the climax your mate roars as he fills you with a mighty jet of yeti cum, warming up your womb with his seeds." +
 					" The strength of his ejaculation is all you need to reach over the edge, achieving your own orgasm as the male bottoms up in you filling you to the brim with his virile seed, giving a solid shot at his paternity.\n\n" +
 					"A few seconds later he escorts you to the exit. You are positively beaming, pondering whether the seed of your mate took as you leave the cave." +
