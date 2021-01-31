@@ -4967,6 +4967,13 @@ public class Combat extends BaseContent {
                     extraHitChance = 10;
                     if (player.hasPerk(PerkLib.MeteorStrike)) extraHitChance = 20
                     if (rand(100) < extraHitChance){
+                        if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
+                            damage += player.spe;
+                            damage += scalingBonusSpeed() * 0.20;
+                            if(player.hasStatusEffect(StatusEffects.JabbingStyle)){
+                                damage += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
+                            }
+                        }
                         //var critJab:Boolean = false;
                         var critJab:Boolean = CritRoll()
                         extraHitDamage = CritDamage(extraHitDamage, critJab);
@@ -4985,6 +4992,13 @@ public class Combat extends BaseContent {
                 var ennemyMaxSize:Boolean = playerMaxCarry > (monster.tallness/12*100)
                 if (player.hasPerk(PerkLib.GrabbingMaster)) extraHitChance = 20;
                 if (rand(100) < extraHitChance){
+                    if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
+                        damage += player.spe;
+                        damage += scalingBonusSpeed() * 0.20;
+                        if(player.hasStatusEffect(StatusEffects.JabbingStyle)){
+                            damage += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
+                        }
+                    }
                     //Determine if critical hit!
                     var critGrab:Boolean = CritRoll()
                     extraHitDamage2 = CritDamage(extraHitDamage2, critJab);
