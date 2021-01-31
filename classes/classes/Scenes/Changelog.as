@@ -157,8 +157,8 @@ package classes.Scenes
 			outputText("-New TF Items: Eye Dops & Magic Eye Drops. First can be found in cave areas and second is enhanced by Lumi verison of eye drops or drops from one of Ebon Labyrinth bosses. Cost 50 gems and would change user into Cyclop/Gazer.\n");
 			outputText("-Cyclop // Gazer race bonus stats for reaching (6/12+)//(7/14/21+) pts in score: +45/90% to str racial multi, +45/90% to tou racial multi // +30/55/80% to tou racial multi, -55/65/75% to spe racial multi, +80/130/180% to int racial multi, +50/90/130% to lib racial multi (gazer and Eye Tyrant stages req. to have 6/10 eye stalk tentacles)\n");
 			outputText("-New body parts for cyclop/gazer (by Liadri).\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New updates to Yuu and Yeti TF\n");
+			outputText("-7 new unarmed combat perks!\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
