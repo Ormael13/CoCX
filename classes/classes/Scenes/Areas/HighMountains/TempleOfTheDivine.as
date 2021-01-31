@@ -2154,6 +2154,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.WhaleFatFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.YetiFat)) {
+				player.removePerk(PerkLib.YetiFat);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.YetiFatEvolved)) {
+				player.removePerk(PerkLib.YetiFatEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.YetiFatFinalForm)) {
+				player.removePerk(PerkLib.YetiFatFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.ChimericalBodyInitialStage)){
 				player.removePerk(PerkLib.ChimericalBodyInitialStage);
 				player.perkPoints += 1;

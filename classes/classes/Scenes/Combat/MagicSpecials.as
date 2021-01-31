@@ -722,7 +722,9 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		fatigue(50, USEFATG_MAGIC_NOBM);
-		player.createStatusEffect(StatusEffects.CooldownFreezingBreathYeti,10,0,0,0);
+		var cooldown:Number = 10;
+		if (player.hasPerk(PerkLib.YetiFatFinalForm)) cooldown -= 3;
+		player.createStatusEffect(StatusEffects.CooldownFreezingBreathYeti,cooldown,0,0,0);
 		var damage:Number = 0;
 		if (player.tou >= 21 && player.tou < 41) damage += (player.tou / 2 + rand((player.tou * 3) / 4));
 		if (player.tou >= 41 && player.tou < 61) damage += ((player.tou * 2) / 3 + rand(player.tou));
@@ -752,6 +754,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.YetiFat)) damage *= 1.50;
 		damage = Math.round(damage);
 		outputText("You inhale deeply, then blow a freezing breath attack at your opponent, encasing it in ice!");
 		//Shell
@@ -798,7 +801,9 @@ public class MagicSpecials extends BaseCombatContent {
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
 				outputText(" frozen solid!");
-				monster.createStatusEffect(StatusEffects.FrozenSolid,3,0,0,0);
+				var freezetime:Number = 3;
+				if (player.hasPerk(PerkLib.YetiFatFinalForm)) freezetime += 1;
+				monster.createStatusEffect(StatusEffects.FrozenSolid,freezetime,0,0,0);
 			}
 			else {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
@@ -2874,7 +2879,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		outputText("You purposely utter a sentence so weird and messed up " + monster.a + monster.short + " grabs [monster his] head with both hands in pain. Ouch, that’s what one calls harmful information. ");
-		damage = doMagicDamage(damage, true, true);
+		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		enemyAI();
@@ -4398,7 +4403,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
-	
+
 	public function possess():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
@@ -4492,7 +4497,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		damage = Math.round(damage);
-		damage = doMagicDamage(damage, true, true);
+		doMagicDamage(damage, true, true);
 		monster.createStatusEffect(StatusEffects.Fear,1+rand(3),0,0,0);
 		enemyAI();
 	}

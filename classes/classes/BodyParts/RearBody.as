@@ -53,6 +53,8 @@ public class RearBody extends BodyPart {
 	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {name: "frostwyrm rear"});
 	public static const FUR_COAT:int			= 21;
 	EnumValue.add(Types, FUR_COAT, "FUR_COAT", {name: "fur coat"});
+	public static const TENTACLE_EYESTALKS:int	= 22;
+	EnumValue.add(Types, TENTACLE_EYESTALKS, "TENTACLE_EYESTALKS", {name: "tentacle eyestalks"});
 	
 	public function RearBody() {
 		super(null, null);

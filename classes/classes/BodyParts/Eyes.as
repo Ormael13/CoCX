@@ -82,8 +82,8 @@ public class Eyes extends BodyPart {
 	EnumValue.add(Types, GREMLIN, "GREMLIN", {name:"gremlin"})
 	public static const WEASEL:int               = 35;
 	EnumValue.add(Types, WEASEL, "WEASEL", {name:"weasel"})
-	public static const GAZER:int                = 36;
-	EnumValue.add(Types, GAZER, "GAZER", {name:"gazer"})
+	public static const MONOEYE:int              = 36;
+	EnumValue.add(Types, MONOEYE, "MONOEYE", {name:"monoeye"})
 	public static const RATATOSKR:int            = 37;
 	EnumValue.add(Types, RATATOSKR, "RATATOSKR", {name:"ratatoskr"})
 	public static const FIENDISH:int             = 38;

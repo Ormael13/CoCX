@@ -141,11 +141,11 @@ package classes.Scenes
 			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			outputText("-Moved all interactions with Marae after first meeting from using Boat in Places to using Marae Island also located in Places (and it will unlock after first time meeting Marae obviously).\n");
-			outputText("-Dragon and Kitsune racial perks unlock been limited now by New Game tier in which PC is currently. Those that get all three 3 perks for dragons in NG or NG+... well you lucky until next ascension you not need worry on limits to get all 3 perklines for dragons.\n");
+			//outputText("-Dragon and Kitsune racial perks unlock been limited now by New Game tier in which PC is currently. Those that get all three 3 perks for dragons in NG or NG+... well you lucky until next ascension you not need worry on limits to get all 3 perklines for dragons.\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-A bit higher req. to get ninetail kitunse stag of race bonuses and 2 tiers above this stage. Also way kitsune score is calculated is changed to allow to get few more points on averange.\n");
+			outputText("-A bit higher req. to get ninetail kitunse stage of race bonuses and 2 tiers above this stage. Also way kitsune score is calculated is changed to allow to get few more points on averange.\n");
 			outputText("-Sand Witches chest with La Bova and Lactacid now hold two items more items and it properly get slowly refilled with each passing day just as text ingame suggest.\n");
 			outputText("-Moga Hen decided to buy more oddities i mean... valuable items from PC. Like Purple Crystal Shards. I mean since PC still not found use for them so then why not sell them to Moga and get sweet spirit stones instead?\n");
 			outputText("-Meeting Izma or otter girl was changed from each 8th/20th explore to each 6th/15th exploration of the Lake.\n");
@@ -154,10 +154,11 @@ package classes.Scenes
 			outputText("-Fix health bar beyond 100 000 not showing properly. (Liadri)\n");
 			outputText("-Fix Alvina combat moves she will no longuer randomly one shot players witheout prejudice but will still require a very powerful character to defeat. (Liadri)\n");
 			outputText("-1 new achievment. (shadow one)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New TF Items: Eye Dops & Magic Eye Drops. First can be found in cave areas and second is enhanced by Lumi verison of eye drops or drops from one of Ebon Labyrinth bosses. Cost 50 gems and would change user into Cyclop/Gazer.\n");
+			outputText("-Cyclop // Gazer race bonus stats for reaching (6/12+)//(7/14/21+) pts in score: +45/90% to str racial multi, +45/90% to tou racial multi // +30/55/80% to tou racial multi, -55/65/75% to spe racial multi, +80/130/180% to int racial multi, +50/90/130% to lib racial multi (gazer and Eye Tyrant stages req. to have 6/10 eye stalk tentacles)\n");
+			outputText("-New body parts for cyclop/gazer (by Liadri).\n");
+			outputText("-New updates to Yuu and Yeti TF\n");
+			outputText("-7 new unarmed combat perks!\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -174,15 +175,15 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons, Izmael three bugs, Kiha scene checking for wrong cock type, making golem showing error if golem core(s) isn't(aren't) in PC intentory and instead in pc 'golem bag', disabling Golems submenu if PC not have temporal golems left to use, ");
 			outputText("displacer beast eyes blocking gaining fur tf, cancer enemy minor bugs, ascension stats and buffs lingering post ascension, Metal Plate finds on battlefield glitch, missing choices for Diana encounter in forest, Neisa looting in RD again after hiring her, goblin assassin having wrong sprite during fight, Chi Chi training req. core stat values instead of total stat values, Claws weapon having ");
 			outputText("100% not 10% chance to trigger bleed, lusty claws not have chance to apply bleed, magic crown not been sold in jewelry shop in TA, minotaurs sometimes missing post fight options\n");/*ostatni punkt changelogu

@@ -3,7 +3,7 @@
  * Glacial Rift is a area with level 70-100 (outer) or 105-140 (inner) encounters
  * Please see this project. (This is not mine.) http://forum.fenoxo.com/thread-10719.html
  */
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -21,7 +21,7 @@ import classes.Scenes.NPCs.GooArmor;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
-	
+
 	public class GlacialRift extends BaseContent
 	{
 		public var yukionnaScene:YukiOnnaScene = new YukiOnnaScene();
@@ -29,18 +29,18 @@ use namespace CoC;
 		public var giantScene:FrostGiantScene = new FrostGiantScene();
 		public var winterwolfScene:WinterWolfScene = new WinterWolfScene();
 		public var wendigoScene:WendigoScene = new WendigoScene();
-		
-		public function GlacialRift() 
+
+		public function GlacialRift()
 		{
 		}
-		
+
 		public function exploreGlacialRift():void {
 			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT]++;
 			doNext(playerMenu);
-			
+
 			var choice:Array = [];
 			var select:int;
-			
+
 			//Build choice list!
 			choice[choice.length] = 0; //Yuki Onna (lvl 71) OR Frost Giant (lvl 89)
 			choice[choice.length] = 1; //Yeti (lvl 76)
@@ -53,7 +53,7 @@ use namespace CoC;
 			if (rand(3) == 0) choice[choice.length] = 8; //Freebie items!
 			if (rand(15) == 0) choice[choice.length] = 9; //Ornate Chest or cache of gems/pile of stones
 			choice[choice.length] = 10; //Find nothing!
-			
+
 			//DLC april fools
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
                 Holidays.DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
@@ -111,8 +111,16 @@ use namespace CoC;
 					outputText("Hearing a thunderous roar, you ready yourself for a fight");
 					if (player.weaponName != "fists") outputText(", holding your [weapon] at the ready");
 					outputText(". A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the iced caverns with ease as you stare the beast down. The white blur of an ice yeti attacks you!");
-					startCombat(new Yeti());
-					break;
+
+					if (player.yetiScore() > 14 && player.hasVagina() && player.femininity > 40) {
+						yetiScene.FemalePCMeetYeti();
+						break;
+					}
+					else {
+						outputText(". A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the iced caverns with ease as you stare the beast down. The white blur of an ice yeti attacks you!");
+						startCombat(new Yeti());
+						break;
+					}
 				case 2: //Frost Giant
 					clearOutput();
 					outputText("You wander the frozen landscape of the Rift, frozen rocks, frosted hills and forested mountains your only landmarks. As you cross the peak of a rather large, lightly forested hill, you come face to gigantic face with a Frost Giant! He belches fiercely at you and you tumble back down the hill. He mostly steps over it as you come to your senses. You quickly draw your [weapon] and withdraw from the hill to prepare for battle.\n\n");
@@ -157,7 +165,7 @@ use namespace CoC;
 						}
 						else if (itemChooser == 1) {
 							outputText("As you make your way across the icy wastes, you notice a small corked ivory horns half-buried under the snow, filled with a thick sweet-looking liquor. You stop and dig it up, sniffing curiously at the liquid. The scent reminds you of the honey secreted by the bee-girls of Mareth, though with hints of alcohol and... something else. You place the horns of mead in your bag and continue on your way. ");
-							inventory.takeItem(consumables.GODMEAD, camp.returnToCampUseOneHour);					
+							inventory.takeItem(consumables.GODMEAD, camp.returnToCampUseOneHour);
 						}
 					//}
 					break;
@@ -215,13 +223,13 @@ use namespace CoC;
 					doNext(camp.returnToCampUseOneHour);
 			}
 		}
-		
+
 		private function fightValeria():void {
 			clearOutput();
 			outputText("You ready your [weapon] for a fight!");
 			startCombat(new GooArmor());
 		}
-		
+
 		private function FenrirRuinedShrine():void {
 			clearOutput();
 			if (flags[kFLAGS.FENRIR_COLLAR] == 2) {
@@ -262,7 +270,7 @@ use namespace CoC;
 				addButton(1, "Leave", leaveShrine);
 			}
 		}
-		
+
 		private function putTheCollar():void {
 			clearOutput();
 			outputText("Moving with the weight of destiny, you pull on the chains where they emerge from the icy floor. Strangely, they break easily in your hands, shattering like the shell of ice over a frozen puddle, then hanging limply from the collar. Fenrir remains silent, but you feel his presence pounding with expectation as you approach the statue's gaping mouth to pull the collar over it. You try to remove the chains, but for whatever reason what remains of them feels as unyielding as the hardest steel, even though they are, as you expected, nearly weightless. The collar is supple even after however many hundreds or thousands of years it has sat in this frozen, forgotten place, and it slips over the wolf's head easily, as if its size were a matter of context. Indeed, as you slip it over your own head in your final act of acceptance of the dark god's offer, you find that once it is around your neck it fits you as if it were made for you, and by no effort can you get it back off again. You will not be removing this collar, perhaps ever.\n\n");
@@ -282,7 +290,7 @@ use namespace CoC;
 			dynStats("cor", 100);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function leaveShrine():void {
 			clearOutput();
 			if (flags[kFLAGS.FENRIR_COLLAR] == 1) outputText("You turn to leave, still refusing Fenrir's offer. His voice echoes softly behind you. \"<i>Until next time, feeble one. May you live until the thread of Urdr draws you here once more.</i>\"");
