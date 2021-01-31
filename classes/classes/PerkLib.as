@@ -5918,6 +5918,9 @@ public class PerkLib
 			WhaleFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.orcaScore() >= 6;
 			}, "Orca race");
+			YetiFatEvolved.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+				return player.yetiScore() >= 14;
+			}, "Yeti race");
             /*
 			if (player.() >=  && ) {
 			_add(new PerkClass(PerkLib.));
@@ -6262,6 +6265,9 @@ public class PerkLib
 			WhaleFatEvolved.requireLevel(12).requirePerk(WhaleFat).requireCustomFunction(function (player:Player):Boolean {
 				return player.orcaScore() >= 9;
 			}, "Orca race");
+			YetiFatEvolved.requireLevel(12).requirePerk(YetiFat).requireCustomFunction(function (player:Player):Boolean {
+				return player.yetiScore() >= 15;
+			}, "Yeti race");
 			ChimericalBodySemiBasicStage.requirePerk(ChimericalBodyInitialStage)
                     .requireLevel(12)
                     .requireCustomFunction(function (player:Player):Boolean {
@@ -6498,6 +6504,9 @@ public class PerkLib
 			WhaleFatFinalForm.requireLevel(24).requirePerk(WhaleFatEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.orcaScore() >= 12;
 			}, "Orca race");
+			YetiFatFinalForm.requireLevel(24).requirePerk(YetiFatEvolved).requireCustomFunction(function (player:Player):Boolean {
+				return player.yetiScore() >= 16;
+			}, "Yeti race");
 			ChimericalBodySemiImprovedStage.requirePerk(ChimericalBodyBasicStage)
                     .requireLevel(24)
                     .requireCustomFunction(function (player:Player):Boolean {
