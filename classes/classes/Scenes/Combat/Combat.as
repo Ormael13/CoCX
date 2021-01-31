@@ -4969,10 +4969,8 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.MeteorStrike)) extraHitChance = 20
                     if (rand(100) < extraHitChance){
                         if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
-                            damage += player.spe;
-                            damage += scalingBonusSpeed() * 0.20;
                             if(player.hasStatusEffect(StatusEffects.JabbingStyle)){
-                                damage += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
+                                extraHitDamage += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
                             }
                         }
                         //var critJab:Boolean = false;
@@ -4983,6 +4981,7 @@ public class Combat extends BaseContent {
                         extraHitDamage2 = Math.round(extraHitDamage);
                         doDamage(extraHitDamage, true ,true);
                         if (critJab) outputText("<b>Critical! </b>");
+                        outputText("\n");
                         JabbingStyleIncrement();
                     }
                 }
@@ -4995,10 +4994,8 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.GrabbingMaster)) extraHitChance = 20;
                 if (rand(100) < extraHitChance){
                     if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
-                        damage += player.spe;
-                        damage += scalingBonusSpeed() * 0.20;
                         if(player.hasStatusEffect(StatusEffects.JabbingStyle)){
-                            damage += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
+                            extraHitDamage2 += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
                         }
                     }
                     //Determine if critical hit!
@@ -5017,6 +5014,7 @@ public class Combat extends BaseContent {
                             monster.createStatusEffect(StatusEffects.Stunned, 1,0,0,0);
                         }
                     }
+                    outputText("\n");
                     JabbingStyleIncrement();
                 }
             }
