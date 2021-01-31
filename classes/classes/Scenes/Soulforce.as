@@ -1661,7 +1661,8 @@ use namespace CoC;
 			if (page == 1) {
 				addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
 				addButton(1, "CDI", AddCurrentDebugItem).hint("Add 1 Gun.");
-				addButton(2, "TrollFig", AddTrollFig).hint("Add 1 Troll Fig.");
+				//addButton(2, "TrollFig", AddTrollFig).hint("Add 1 Troll Fig.");
+				addButton(2, "CyclopTF", AddTrollFig).hint("Add 1 cyclop TF.");
 				//addButton(3, "", ).hint("Add 1 .");
 				//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 				//addButton(5, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
@@ -1901,8 +1902,10 @@ use namespace CoC;
 			inventory.takeItem(consumables.FREFISH, curry(NonEquipmentMenu, 2));
 		}
 		public function AddTrollFig():void {
-			outputText("\n\n<b>(Gained 1 Troll Fig!)</b>\n\n");
-			inventory.takeItem(consumables.TROLFIG, curry(NonEquipmentMenu, 1));
+			//outputText("\n\n<b>(Gained 1 Troll Fig!)</b>\n\n");
+			//inventory.takeItem(consumables.TROLFIG, curry(NonEquipmentMenu, 1));
+			outputText("\n\n<b>(Gained 1 Cyclop TF)</b>\n\n");
+			inventory.takeItem(consumables.EYEDROP, curry(NonEquipmentMenu, 1));
 		}
 		public function AddVoltageTopaz():void {
 			outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");

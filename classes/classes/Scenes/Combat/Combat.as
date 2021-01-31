@@ -1179,7 +1179,7 @@ public class Combat extends BaseContent {
         if (SceneLib.urtaQuest.isUrta()) {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
         }
-        if ((player.weaponPerk == "" || player.weaponPerk != "Dual") && !isWieldingRangedWeapon()) {
+        if ((player.weaponPerk == "" || player.weaponPerk == "Dual" || player.weaponPerk == "Hybrid") && !isWieldingRangedWeapon()) {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
                 if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) {
                     if (player.hasPerk(PerkLib.HexaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
@@ -1228,7 +1228,6 @@ public class Combat extends BaseContent {
                             else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
                         }
                     }
-
                 }
             } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
         }
@@ -3140,7 +3139,7 @@ public class Combat extends BaseContent {
             else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
             else if (player.weaponRangeAttack >= 201 && player.weaponRangeAttack < 251) damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
             else damage *= (6 + ((player.weaponRangeAttack - 250) * 0.005));
-			firearmsDualWieldAccuracyPenalty();
+			damage *= firearmsDualWieldDamagePenalty();
             //any aoe effect from firearms
             if (monster.plural) {
                 if (player.weaponRange == weaponsrange.ADBSCAT) damage *= 2;
@@ -4345,8 +4344,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
                 damage += player.spe;
                 damage += scalingBonusSpeed() * 0.20;
-                if(player.hasStatusEffect(StatusEffects.JabbingStyle)){
-                    damage += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
+                if(player.hasStatusEffect(StatusEffects.JabbingStyle)) {
+                    damage += player.spe * player.statusEffectv1(StatusEffects.JabbingStyle);
                 }
             }
             if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small")) {
@@ -4361,7 +4360,7 @@ public class Combat extends BaseContent {
             else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
             else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
             else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
-			meleeDualWieldDamagePenalty();
+			damage *= meleeDualWieldDamagePenalty();
             //Bonus sand trap damage!
             if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
             //All special weapon effects like...fire/ice
@@ -4441,8 +4440,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
             if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
             if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive") {
-                if (player.str >= 100) critChance += 10;
-                if (player.str >= 140) critChance += 10;
+                if (player.hasPerk(PerkLib.WeaponMastery) && player.str >= 100) critChance += 10;
+                if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.str >= 140) critChance += 10;
             }
             if (player.weapon == weapons.MASAMUN || (player.weapon == weapons.WG_GAXE && monster.cor > 66) || ((player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) && monster.cor < 33)) critChance += 10;
             if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
@@ -6907,12 +6906,8 @@ public class Combat extends BaseContent {
             outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
         }
         if (monster.hasStatusEffect(StatusEffects.AuraOfMadness) && !player.hasPerk(PerkLib.Insanity)) {
-			player.addCurse("int", 5);
-			player.addCurse("wis", 5);
-            if (monster.short == "Atlach Nacha"){
-                player.addCurse("int", 15);
-                player.addCurse("wis", 15);
-            }
+			player.addCurse("int", monster.statusEffectv1(StatusEffects.AuraOfMadness));//non bosses have it 5
+			player.addCurse("wis", monster.statusEffectv2(StatusEffects.AuraOfMadness));//bosses have it at 20
             outputText("<b>As the battle draws on you feel yourself slowly losing your grip on reality.</b>\n\n");
 			if (player.inte <= 1 || player.wis <= 1) {
                 doNext(endHpLoss);
