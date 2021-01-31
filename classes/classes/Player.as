@@ -1955,6 +1955,15 @@ use namespace CoC;
 			if (hasPerk(PerkLib.WhaleFatFinalForm)) {
 				mult -= 20;
 			}
+			if (hasPerk(PerkLib.YetiFat)) {
+				mult -= 5;
+			}
+			if (hasPerk(PerkLib.YetiFatEvolved)) {
+				mult -= 10;
+			}
+			if (hasPerk(PerkLib.YetiFatFinalForm)) {
+				mult -= 20;
+			}
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
 				mult -= 15;
 			}
@@ -3665,7 +3674,11 @@ use namespace CoC;
 			}
 			if (TopRace == "yeti") {
 				if (TopScore >= 7) {
-					if (TopScore >= 14) {
+					if (TopScore >= 17) {
+						if (isTaur()) race = "true yeti-taur";
+						else race = "true yeti";
+					}
+					else if (TopScore >= 14) {
 						if (isTaur()) race = "yeti-taur";
 						else race = "yeti";
 					} else {
@@ -4123,7 +4136,7 @@ use namespace CoC;
 				humanCounter++;
 			if (skin.base.pattern == Skin.PATTERN_NONE)
 				humanCounter++;
-			humanCounter += (115 - internalChimeraScore());
+			humanCounter += (118 - internalChimeraScore());
 			if (isGargoyle()) humanCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) humanCounter = 0;
 			End("Player","racialScore");
@@ -4131,7 +4144,7 @@ use namespace CoC;
 		}
 
 		public function humanMaxScore():Number {
-			var humanMaxCounter:Number = 132;//17 + 115 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
+			var humanMaxCounter:Number = 135;//17 + 115 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
 			return humanMaxCounter;
 		}
 
@@ -4445,7 +4458,12 @@ use namespace CoC;
 				internalChimeraCounter++;
 			if (hasPerk(PerkLib.WhaleFatFinalForm))
 				internalChimeraCounter++;
-
+			if (hasPerk(PerkLib.YetiFat))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.YetiFatEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.YetiFatFinalForm))
+				internalChimeraCounter++;
 			End("Player","racialScore");
 			return internalChimeraCounter;
 		}
@@ -8011,6 +8029,18 @@ use namespace CoC;
 				yetiCounter++;
 			if (butt.type >= 10)
 				yetiCounter++;
+			if (findPerk(PerkLib.YetiFat) >= 0)
+				yetiCounter++;
+			if (findPerk(PerkLib.YetiFatEvolved) >= 0)
+				yetiCounter++;
+			if (findPerk(PerkLib.YetiFatFinalForm) >= 0)
+				yetiCounter++;
+			if (findPerk(PerkLib.YetiFat) >= 0 && findPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
+				yetiCounter++;
+			if (findPerk(PerkLib.YetiFatEvolved) >= 0 && findPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
+				yetiCounter++;
+			if (findPerk(PerkLib.YetiFatFinalForm) >= 0 && findPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
+				yetiCounter++;
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
 				yetiCounter += 50;
 			if (isGargoyle()) yetiCounter = 0;
@@ -9969,6 +9999,8 @@ use namespace CoC;
 			if (findPerk(PerkLib.NaturalPunchingBag) >= 0)
 				fattissueMutations--;
 			if (findPerk(PerkLib.WhaleFat) >= 0)
+				fattissueMutations--;
+			if (findPerk(PerkLib.YetiFat) >= 0)
 				fattissueMutations--;
 			if (findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
 				fattissueMutations++;
@@ -12026,7 +12058,14 @@ use namespace CoC;
 				maxLibCap2 += 95;
 			}//+20/10-20
 			if (yetiScore() >= 7) {
-				if (yetiScore() >= 14) {
+				if (yetiScore() >= 17) {
+					maxStrCap2 += 130;
+					maxTouCap2 += 100;
+					maxSpeCap2 += 65;
+					maxIntCap2 -= 90;
+					maxLibCap2 += 50;
+				}
+				else if (yetiScore() >= 14) {
 					maxStrCap2 += 100;
 					maxTouCap2 += 80;
 					maxSpeCap2 += 50;
@@ -12395,8 +12434,8 @@ use namespace CoC;
 			if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':((0.01 * Math.round(inte/2))+(0.01 * Math.round(wis/2))),'tou.mult':((0.01 * Math.round(inte/2))+(0.01 * Math.round(wis/2)))}, 'Enigma', { text: 'Enigma' });
 			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
+			var power:Number = 0;
 			if (hasPerk(PerkLib.BullStrength)){
-				var power:Number = 0;
 				if(cowScore() >=15) power = lactationQ()*0.001;
 				if(minotaurScore() >=15) power = cumCapacity()*0.001;
 				if (power > 0.5) power = 0.5;
@@ -12404,10 +12443,9 @@ use namespace CoC;
 			}
 			if (!hasPerk(PerkLib.BullStrength) && statStore.hasBuff('Bull Strength')) statStore.removeBuffs('Bull Strength');
 			if (hasPerk(PerkLib.UnnaturalStrength)){
-				var powar:Number = 0;
-				if (flags[kFLAGS.HUNGER_ENABLED] > 0) powar = maxHunger()*0.01;
-				else powar = maxLust()*0.01;
-				statStore.replaceBuffObject({'str.mult':(Math.round(powar))}, 'Unnatural Strength', { text: 'Unnatural Strength' });
+				if (flags[kFLAGS.HUNGER_ENABLED] > 0) power = maxHunger()*0.01;
+				else power = maxLust()*0.01;
+				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Unnatural Strength', { text: 'Unnatural Strength' });
 			}
 			if (!hasPerk(PerkLib.UnnaturalStrength) && statStore.hasBuff('Unnatural Strength')) statStore.removeBuffs('Unnatural Strength');
 			statStore.replaceBuffObject({
@@ -13458,7 +13496,6 @@ use namespace CoC;
 
 		public function slimeGrowth():void {
 			if (hasStatusEffect(StatusEffects.SlimeCraving)) {
-				var time:Number = 4;
 				if (hasPerk(PerkLib.SlimeMetabolismEvolved)) {
 					buff("Fluid Growth").addStats({"tou.mult": 0.02}).withText("Fluid Growth!");
 					if (hasPerk(PerkLib.DarkSlimeCore)){

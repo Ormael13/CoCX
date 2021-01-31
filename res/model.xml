@@ -280,7 +280,7 @@
 
 
 	<!-- LOCATION IN SCREEN AREA -->
-    <spritemap file="body.png">
+        <spritemap file="body.png">
         <cell rect="1,90,49,59" name="torso/human" dx="79" dy="64"/>
         <cell rect="51,90,49,59" name="torso/fur" dx="79" dy="64"/>
         <cell rect="101,90,49,59" name="torso/chitin" dx="79" dy="64"/>
@@ -330,6 +330,7 @@
         <cell rect="501,150,49,59" name="arms_bg_pattern/Blightning" dx="56" dy="64"/>
         <cell rect="601,150,49,59" name="arms_bg_pattern/Btatoo" dx="56" dy="64"/>
         <cell rect="951,150,49,59" name="arms_bg_pattern/Bvenom" dx="56" dy="64"/>
+        <cell rect="1,1364,49,59" name="arms_bg/gazer" dx="65" dy="65"/>
         <cell rect="1,210,49,59" name="arms/human" dx="104" dy="64"/>
         <cell rect="51,210,49,59" name="arms/fur" dx="104" dy="64"/>
         <cell rect="551,210,49,59" name="arms/furracoon" dx="104" dy="64"/>
@@ -370,6 +371,7 @@
         <cell rect="501,1184,99,119" name="arms/hinezumistanced_orca" dx="58" dy="55"/>
         <cell rect="601,210,49,59" name="arms/crabStance" dx="78" dy="64"/>
         <cell rect="820,520,90,90" name="arms/elemental" dx="60" dy="46"/>
+        <cell rect="51,1364,49,59" name="arms/gazer" dx="92" dy="65"/>
         <cell rect="851,210,49,59" name="arms_fg/demonlewd" dx="100" dy="53"/>
         <cell rect="638,702,90,90" name="arms_fg/manticore_sit" dx="60" dy="61"/>
         <cell rect="451,210,49,59" name="arms_pattern/Bstripe" dx="104" dy="64"/>
@@ -458,6 +460,7 @@
         <cell rect="274,611,90,90" name="legs/manticore_sit_pscales" dx="60" dy="61"/>
         <cell rect="365,611,90,90" name="legs/manticore_sit_chitin" dx="60" dy="61"/>
         <cell rect="547,611,90,90" name="legs/gargoyle_sit" dx="60" dy="61"/>
+        <cell rect="1,1304,90,59" name="legs/gazer" dx="41" dy="98"/>
         <cell rect="729,611,90,90" name="legs/elemental" dx="57" dy="97"/>
         <cell rect="451,390,49,59" name="legs_pattern/Bstripe" dx="79" dy="115"/>
         <cell rect="501,390,49,59" name="legs_pattern/Blightning" dx="79" dy="115"/>
@@ -530,6 +533,7 @@
         <cell rect="162,27,54,31" name="neck/centipede" dx="77" dy="49"/>
         <cell rect="217,27,54,31" name="rearbody/shark" dx="84" dy="72"/>
         <cell rect="61,689,100,100" name="rearbody/snail" dx="87" dy="82"/>
+        <cell rect="992,641,173,156" name="wings/gazer" dx="22" dy="10"/>
         <cell rect="296,641,173,156" name="aura/windyaura" dx="21" dy="28"/>
         <cell rect="470,641,173,156" name="aura/ghostlyaura" dx="21" dy="28"/>
         <cell rect="644,641,173,156" name="aura/wraithaura" dx="21" dy="28"/>
@@ -1645,6 +1649,9 @@
 			<case values="Eyes.RATATOSKR">
                 <show part="eyes/centipede"/>
             </case>
+			<case values="Eyes.MONOEYE">
+                <show part="eyes/gazer"/>
+            </case>
             <default>
                 <show part="eyes/human"/>
             </default>
@@ -1693,6 +1700,9 @@
             </case>
 			<case values="RearBody.SNAIL_SHELL">
                 <show part="rearBody/snail"/>
+            </case>
+			<case values="RearBody.GAZER">
+                <show part="wings/gazer"/>
             </case>
 			<case values="RearBody.FUR_COAT">
                 <show part="armorNeck/wendigoCloak"/>
@@ -2474,6 +2484,10 @@
                 <show part="hands/wendigo"/>
                 <show part="hands_bg/wendigo"/>
             </case>
+			<case values="Arms.GAZER">
+                <show part="arms/gazer"/>
+                <show part="arms_bg/gazer"/>
+            </case>
             <default>
                 <!--see switch[value=skinType]-->
             </default>
@@ -2977,6 +2991,9 @@
             </case>
 			<case values="LowerBody.WENDIGO">
                 <show part="legs/wendigo"/>
+            </case>
+			<case values="LowerBody.GAZER">
+                <show part="legs_fg/gazer"/>
             </case>
             <!--<case values="LowerBody.YGG_ROOT_CLAWS">TODO </case>-->
             <case values="'never'"><!--TODO liliraune-->
@@ -3540,6 +3557,9 @@
                 <show part="torso_pattern/Bvenom"/>
                 <show part="arms_pattern/Bvenom"/>
                 <show part="arms_bg_pattern/Bvenom"/>
+            </case>
+			<case values="Skin.PATTERN_OIL">
+                <show part="torso_pattern/BgazerTar"/>
             </case>
             <default>
                 <hide part="breasts_pattern/*"/>
