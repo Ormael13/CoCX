@@ -5918,7 +5918,7 @@ public class PerkLib
 			WhaleFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.orcaScore() >= 6;
 			}, "Orca race");
-			YetiFatEvolved.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+			YetiFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.yetiScore() >= 14;
 			}, "Yeti race");
             /*
