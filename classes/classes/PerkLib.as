@@ -5070,7 +5070,7 @@ public class PerkLib
 					.requireSpe(50)
 					.requireLevel(20);
 			JabbingStyle.requirePerk(JobMonk)
-					.requirePerk(PerkLib.SpeedDemon)
+					.requirePerk(SpeedDemon)
 					.requireWis(75)
 					.requireSpe(50)
 					.requireLevel(12);
