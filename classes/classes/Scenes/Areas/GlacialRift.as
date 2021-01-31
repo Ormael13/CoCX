@@ -110,8 +110,6 @@ use namespace CoC;
 					}
 					outputText("Hearing a thunderous roar, you ready yourself for a fight");
 					if (player.weaponName != "fists") outputText(", holding your [weapon] at the ready");
-					outputText(". A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the iced caverns with ease as you stare the beast down. The white blur of an ice yeti attacks you!");
-
 					if (player.yetiScore() > 14 && player.hasVagina() && player.femininity > 40) {
 						yetiScene.FemalePCMeetYeti();
 						break;
