@@ -914,6 +914,7 @@ public class Combat extends BaseContent {
         var power:Number = CalcAlchemyPower();
         power += (player.maxHP()*0.25)+(power*0.01*player.maxHP());
         if (player.hasPerk(PerkLib.NaturalHerbalism)) power *= 2;
+        Math.round(power);
         HPChange(power,false);
         outputText("You apply the poultice, your wounds closing at high speed. Healed for "+power+"");
     }
@@ -4979,6 +4980,7 @@ public class Combat extends BaseContent {
                         extraHitDamage = CritDamage(extraHitDamage, critJab);
                         //Deal the fellow up blow!
                         outputText(" You chain up the jab with a second blow! ");
+                        extraHitDamage2 = Math.round(extraHitDamage);
                         doDamage(extraHitDamage, true ,true);
                         if (critJab) outputText("<b>Critical! </b>");
                         JabbingStyleIncrement();
@@ -5005,6 +5007,7 @@ public class Combat extends BaseContent {
                     //Deal the fellow up blow!
                     outputText(" You grab your opponent mid swing and supplex it against the ground! ");
                     if (player.hasPerk(PerkLib.MeteorStrike)) extraHitDamage2 *= 2;
+                    extraHitDamage2 = Math.round(extraHitDamage2);
                     doDamage(extraHitDamage2, true ,true);
                     if (critGrab) outputText("<b>Critical! </b>");
                     if (player.hasPerk(PerkLib.GrabbingGrandmaster)){
