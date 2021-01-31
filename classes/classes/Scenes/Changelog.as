@@ -164,6 +164,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Some shady person appeared in Journey to the East inn that sells items currently. Maybe he will talk in future more too ^^\n");
 			outputText("-Diana encounter chance been increased and she takes much faster to level up. She can cure curses now too. Both causing set flat value lost from stats (-10 str) and bonus multi related one curses (-10% to str). She also can heal to max HP even if PC have overmaxHP more than 0.\n");
 			outputText("-Ayane also could help with curses. Not as good as Diana but it's still something, right? Also isn't it spounds like curses could become more common now that we got more than 'Only Luna' curse curing options? Nah probably you all and mine imagination...\n");

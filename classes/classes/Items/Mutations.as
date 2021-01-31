@@ -14223,10 +14223,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Fur
-        if (player.hairType == Hair.FLUFFY && player.rearBody.type == RearBody.YETI_FUR && !player.skin.checkProps({
-            coverage: Skin.COVERAGE_LOW,
-            coat: {type: Skin.FUR}
-        }) && changes < changeLimit && rand(4) == 0) {
+        if (player.hairType == Hair.FLUFFY && (player.rearBody.type != RearBody.YETI_FUR || !player.skin.checkProps({coverage: Skin.COVERAGE_LOW, coat: {type: Skin.FUR}})) && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nThick hair starts to grow in random areas all over your body. ");
             if (player.breastRows.length > 0) outputText("Your breasts in particular cover with hair forming into what can only be described as a natural bikini.");
             outputText(" Furthermore, your hair natural color turns to white. Your body is now <b>partially covered with thick white fur!</b>");
@@ -14240,7 +14237,7 @@ public final class Mutations extends MutationsHelper {
             humanizeEyes();
             changes++;
         }
-        if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN && (player.eyes.colour != "silver" || player.eyes.colour != "grey")) {
+        if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN && (player.eyes.colour != "silver" && player.eyes.colour != "grey")) {
             if (rand(2) == 0) player.eyes.colour = "silver";
             else player.eyes.colour = "grey";
             outputText("\n\nYour eyes begin to water for a moment. When your view clears up you move on to a puddle and notice their coloration changed to a " + player.eyes.colour + " hue. <b>You now have " + player.eyes.colour + " pupils.</b>");
