@@ -6892,8 +6892,12 @@ public class Combat extends BaseContent {
             outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
         }
         if (monster.hasStatusEffect(StatusEffects.AuraOfMadness) && !player.hasPerk(PerkLib.Insanity)) {
-			player.addCurse("int", 2);
-			player.addCurse("wis", 2);
+			player.addCurse("int", 5);
+			player.addCurse("wis", 5);
+            if (monster.short == "Atlach Nacha"){
+                player.addCurse("int", 15);
+                player.addCurse("wis", 15);
+            }
             outputText("<b>As the battle draws on you feel yourself slowly losing your grip on reality.</b>\n\n");
 			if (player.inte <= 1 || player.wis <= 1) {
                 doNext(endHpLoss);
