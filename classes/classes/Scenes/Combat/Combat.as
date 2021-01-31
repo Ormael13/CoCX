@@ -914,6 +914,7 @@ public class Combat extends BaseContent {
         var power:Number = CalcAlchemyPower();
         power += (player.maxHP()*0.25)+(power*0.01*player.maxHP());
         if (player.hasPerk(PerkLib.NaturalHerbalism)) power *= 2;
+        Math.round(power);
         HPChange(power,false);
         outputText("You apply the poultice, your wounds closing at high speed. Healed for "+power+"");
     }
@@ -4967,11 +4968,19 @@ public class Combat extends BaseContent {
                     extraHitChance = 10;
                     if (player.hasPerk(PerkLib.MeteorStrike)) extraHitChance = 20
                     if (rand(100) < extraHitChance){
+                        if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
+                            damage += player.spe;
+                            damage += scalingBonusSpeed() * 0.20;
+                            if(player.hasStatusEffect(StatusEffects.JabbingStyle)){
+                                damage += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
+                            }
+                        }
                         //var critJab:Boolean = false;
                         var critJab:Boolean = CritRoll()
                         extraHitDamage = CritDamage(extraHitDamage, critJab);
                         //Deal the fellow up blow!
                         outputText(" You chain up the jab with a second blow! ");
+                        extraHitDamage2 = Math.round(extraHitDamage);
                         doDamage(extraHitDamage, true ,true);
                         if (critJab) outputText("<b>Critical! </b>");
                         JabbingStyleIncrement();
@@ -4985,12 +4994,20 @@ public class Combat extends BaseContent {
                 var ennemyMaxSize:Boolean = playerMaxCarry > (monster.tallness/12*100)
                 if (player.hasPerk(PerkLib.GrabbingMaster)) extraHitChance = 20;
                 if (rand(100) < extraHitChance){
+                    if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
+                        damage += player.spe;
+                        damage += scalingBonusSpeed() * 0.20;
+                        if(player.hasStatusEffect(StatusEffects.JabbingStyle)){
+                            damage += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
+                        }
+                    }
                     //Determine if critical hit!
                     var critGrab:Boolean = CritRoll()
                     extraHitDamage2 = CritDamage(extraHitDamage2, critJab);
                     //Deal the fellow up blow!
                     outputText(" You grab your opponent mid swing and supplex it against the ground! ");
                     if (player.hasPerk(PerkLib.MeteorStrike)) extraHitDamage2 *= 2;
+                    extraHitDamage2 = Math.round(extraHitDamage2);
                     doDamage(extraHitDamage2, true ,true);
                     if (critGrab) outputText("<b>Critical! </b>");
                     if (player.hasPerk(PerkLib.GrabbingGrandmaster)){
@@ -6892,8 +6909,12 @@ public class Combat extends BaseContent {
             outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
         }
         if (monster.hasStatusEffect(StatusEffects.AuraOfMadness) && !player.hasPerk(PerkLib.Insanity)) {
-			player.addCurse("int", 2);
-			player.addCurse("wis", 2);
+			player.addCurse("int", 5);
+			player.addCurse("wis", 5);
+            if (monster.short == "Atlach Nacha"){
+                player.addCurse("int", 15);
+                player.addCurse("wis", 15);
+            }
             outputText("<b>As the battle draws on you feel yourself slowly losing your grip on reality.</b>\n\n");
 			if (player.inte <= 1 || player.wis <= 1) {
                 doNext(endHpLoss);

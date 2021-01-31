@@ -294,7 +294,7 @@
         <cell rect="501,90,49,59" name="torso_pattern/Blightning" dx="79" dy="64"/>
         <cell rect="551,90,49,59" name="torso_pattern/Btatoo" dx="79" dy="64"/>
         <cell rect="801,90,49,59" name="torso_pattern/Bvenom" dx="79" dy="64"/>
-        <cell rect="951,90,49,59" name="torso_pattern/BgazerTar" dx="79" dy="64"/>
+        <cell rect="951,90,49,59" name="breasts_pattern/BgazerTar" dx="79" dy="64"/>
         <cell rect="1001,90,49,59" name="torso_pattern/BwindScars" dx="79" dy="64"/>
         <cell rect="911,611,90,90" name="full_pattern/undine" dx="59" dy="35"/>
         <cell rect="101,1304,99,119" name="full_pattern/gnome" dx="53" dy="20"/>
@@ -460,7 +460,7 @@
         <cell rect="274,611,90,90" name="legs/manticore_sit_pscales" dx="60" dy="61"/>
         <cell rect="365,611,90,90" name="legs/manticore_sit_chitin" dx="60" dy="61"/>
         <cell rect="547,611,90,90" name="legs/gargoyle_sit" dx="60" dy="61"/>
-        <cell rect="1,1304,90,59" name="legs/gazer" dx="41" dy="98"/>
+        <cell rect="1,1304,90,59" name="legs_truefg/gazer" dx="41" dy="98"/>
         <cell rect="729,611,90,90" name="legs/elemental" dx="57" dy="97"/>
         <cell rect="451,390,49,59" name="legs_pattern/Bstripe" dx="79" dy="115"/>
         <cell rect="501,390,49,59" name="legs_pattern/Blightning" dx="79" dy="115"/>
@@ -1200,6 +1200,7 @@
 		<layer name="overhands_bg"/>
         <layer name="hands_bg"/>
 		<layer name="arms_bg_pattern"/>
+		<layer name="legs_truefg"/>
         <layer name="arms_bg"/>
 		<layer name="uniquePlantBath"/>
 		<layer name="legs_fg"/>
@@ -1701,7 +1702,7 @@
 			<case values="RearBody.SNAIL_SHELL">
                 <show part="rearBody/snail"/>
             </case>
-			<case values="RearBody.GAZER">
+			<case values="RearBody.TENTACLE_EYESTALKS">
                 <show part="wings/gazer"/>
             </case>
 			<case values="RearBody.FUR_COAT">
@@ -2485,6 +2486,8 @@
                 <show part="hands_bg/wendigo"/>
             </case>
 			<case values="Arms.GAZER">
+				<hide part="arms/*"/>
+                <hide part="arms_bg/*"/>
                 <show part="arms/gazer"/>
                 <show part="arms_bg/gazer"/>
             </case>
@@ -2993,7 +2996,8 @@
                 <show part="legs/wendigo"/>
             </case>
 			<case values="LowerBody.GAZER">
-                <show part="legs_fg/gazer"/>
+				<hide part="legs/*"/>
+                <show part="legs_truefg/gazer"/>
             </case>
             <!--<case values="LowerBody.YGG_ROOT_CLAWS">TODO </case>-->
             <case values="'never'"><!--TODO liliraune-->
@@ -3559,7 +3563,7 @@
                 <show part="arms_bg_pattern/Bvenom"/>
             </case>
 			<case values="Skin.PATTERN_OIL">
-                <show part="torso_pattern/BgazerTar"/>
+                <show part="breasts_pattern/BgazerTar"/>
             </case>
             <default>
                 <hide part="breasts_pattern/*"/>

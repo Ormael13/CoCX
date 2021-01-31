@@ -69,7 +69,7 @@ use namespace CoC;
 			player.takePhysDamage(this.str, true);
 			player.dynStats("lus", 60);
 			if (!player.hasPerk(PerkLib.Insanity)) {
-				player.buff("Poison").addStats({"tou":-10, "int":-10, "wis":-10}).withText("Poisoned!").forHours(24);
+				player.buff("Poison").addStats({"tou":-20, "int":-20, "wis":-20}).withText("Poisoned!").forHours(24);
 				showStatDown( 'tou' );
 				showStatDown( 'int' );
 				showStatDown( 'wis' );
