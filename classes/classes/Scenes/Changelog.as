@@ -159,7 +159,7 @@ package classes.Scenes
 			outputText("-New body parts for cyclop/gazer (by Liadri).\n");
 			outputText("-New updates to Yuu and Yeti TF\n");
 			outputText("-7 new unarmed combat perks!\n");
-			outputText("-\n");
+			outputText("-Hybdryd weapons using mutliattack cap as those of normal sized not large sized weapons.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -186,7 +186,7 @@ package classes.Scenes
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons, Izmael three bugs, Kiha scene checking for wrong cock type, making golem showing error if golem core(s) isn't(aren't) in PC intentory and instead in pc 'golem bag', disabling Golems submenu if PC not have temporal golems left to use, ");
 			outputText("displacer beast eyes blocking gaining fur tf, cancer enemy minor bugs, ascension stats and buffs lingering post ascension, Metal Plate finds on battlefield glitch, missing choices for Diana encounter in forest, Neisa looting in RD again after hiring her, goblin assassin having wrong sprite during fight, Chi Chi training req. core stat values instead of total stat values, Claws weapon having ");
-			outputText("100% not 10% chance to trigger bleed, lusty claws not have chance to apply bleed, magic crown not been sold in jewelry shop in TA, minotaurs sometimes missing post fight options\n");/*ostatni punkt changelogu
+			outputText("100% not 10% chance to trigger bleed, lusty claws not have chance to apply bleed, magic crown not been sold in jewelry shop in TA, minotaurs sometimes missing post fight options, Firesnail sex scene error for male PC\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

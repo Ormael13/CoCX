@@ -280,7 +280,7 @@
 
 
 	<!-- LOCATION IN SCREEN AREA -->
-        <spritemap file="body.png">
+    <spritemap file="body.png">
         <cell rect="1,90,49,59" name="torso/human" dx="79" dy="64"/>
         <cell rect="51,90,49,59" name="torso/fur" dx="79" dy="64"/>
         <cell rect="101,90,49,59" name="torso/chitin" dx="79" dy="64"/>
@@ -806,6 +806,7 @@
         <cell rect="631,330,87,65" name="horns_bg/devilquad" dx="59" dy="2"/>
         <cell rect="181,396,29,30" name="horns_bg/frostWyrm" dx="105" dy="23"/>
         <cell rect="181,429,29,30" name="horns_bg/frostWyrmLeft" dx="73" dy="23"/>
+        <cell rect="241,396,59,65" name="horns_fg/balrog" dx="73" dy="25"/>
         <cell rect="301,396,59,65" name="horns_overclothe/deer" dx="74" dy="-5"/>
         <cell rect="1,470,59,65" name="antennae/bee" dx="75" dy="4"/>
         <cell rect="301,70,29,32" name="faceShading/faceShading" dx="90" dy="37"/>
@@ -1059,6 +1060,8 @@
         <cell rect="1,421,168,69" name="tail/reptile_fire_taur" dx="67" dy="102"/>
         <cell rect="170,421,168,69" name="tail/cow" dx="20" dy="90"/>
         <cell rect="170,421,168,69" name="tail/cow_taur" dx="74" dy="93"/>
+		<cell rect="508,421,168,69" name="tail/balrog" dx="20" dy="90"/>
+        <cell rect="508,421,168,69" name="tail/balrog_taur" dx="74" dy="93"/>
         <cell rect="1,491,83,69" name="tail/bunny" dx="95" dy="90"/>
         <cell rect="1,491,83,69" name="tail/bunny_taur" dx="141" dy="97"/>
         <cell rect="86,491,83,69" name="tail/goat" dx="94" dy="103"/>
@@ -1149,6 +1152,7 @@
 		<layer name="glove_fg"/>
 		<layer name="arms_fg"/>
 		<layer name="eyes_fg"/>
+		<layer name="horns_fg"/>
 		<layer name="clotheScarf"/>
 
 		<layer name="armorNeck"/>
@@ -2993,6 +2997,7 @@
                 <show part="legs_fg/snail"/>
             </case>
 			<case values="LowerBody.WENDIGO">
+				<hide part="legs/*"/>
                 <show part="legs/wendigo"/>
             </case>
 			<case values="LowerBody.GAZER">
