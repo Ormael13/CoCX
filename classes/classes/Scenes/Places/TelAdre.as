@@ -232,11 +232,10 @@ private function armorShops():void {
 	addButton(4, "Jewelry", new JewelryShop().enter);
 	addButton(5, "Carpenter", carpentryShopEntry);
 	addButton(6, "Oddities", kaibaShopMainMenu);
-	addButton(7, "Gunshop", tripxiShopMainMenu);
-	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 1)
-	{
-		addButton(10, "Clinic", umasShop.enterClinic);
-	}
+	if (player.statusEffectv3(StatusEffects.TelAdreTripxi) > 0) addButtonDisabled(7, "Gunshop", "Tripixi is busy. Come back later.");
+	else addButton(7, "Gunshop", tripxiShopMainMenu);
+	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 1) addButton(10, "Clinic", umasShop.enterClinic);
+	else addButtonDisabled(10, "???", "???");
 	addButton(14,"Back",telAdreMenu);
 }
 
@@ -1202,47 +1201,49 @@ private function buyItemNo():void {
 //-----------------
 public function tripxiShopMainMenu():void {
 	clearOutput();
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxi) == 2) {
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxi) > 0) {
 		outputText("You enter the shop and deliver the gun parts to Tripxi who overjoyed begins to rebuild the gun immediately drawing schematics in the process.\n\n");
 		outputText("\"<i>Great job with this we are one step closer to restoring what was lost in the demon war all thanks to you! Come back tomorrow and I will have a brand new gun ready for you.</i>\"\n\n");
-		player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
-		if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 1) {
+		if (model.time.hours >= 15) player.addStatusValue(StatusEffects.TelAdreTripxi, 3, 16);
+		else player.addStatusValue(StatusEffects.TelAdreTripxi, 3, 8);
+		player.addStatusValue(StatusEffects.TelAdreTripxi, 2, -1);
+		if (player.hasKeyItem("Desert Eagle") >= 0) {
 			player.removeKeyItem("Desert Eagle");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 1, 1);
 		}
-		if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) == 1) {
+		if (player.hasKeyItem("M1 Cerberus") >= 0) {
 			player.removeKeyItem("M1 Cerberus");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 1, 1);
 		}
-		if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) == 1) {
+		if (player.hasKeyItem("Tripxi Fatbilly") >= 0) {
 			player.removeKeyItem("Tripxi Fatbilly");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 1, 1);
 		}
-		if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) == 1) {
+		if (player.hasKeyItem("Snippler") >= 0) {
 			player.removeKeyItem("Snippler");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns4, 1, 1);
 		}
-		if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) == 1) {
+		if (player.hasKeyItem("Touhouna M3") >= 0) {
 			player.removeKeyItem("Touhouna M3");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 1, 1);
 		}
-		if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) == 1) {
+		if (player.hasKeyItem("Twin Grakaturd") >= 0) {
 			player.removeKeyItem("Twin Grakaturd");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 1, 1);
 		}
-		if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) == 1) {
+		if (player.hasKeyItem("Dart pistol") >= 0) {
 			player.removeKeyItem("Dart pistol");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 2, 1);
 		}
-		if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) == 1) {
+		if (player.hasKeyItem("Twin Dart pistol") >= 0) {
 			player.removeKeyItem("Twin Dart pistol");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 2, 1);
 		}
-		if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) == 1) {
+		if (player.hasKeyItem("Harpoon gun") >= 0) {
 			player.removeKeyItem("Harpoon gun");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 2, 1);
 		}
-		if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) == 1) {
+		if (player.hasKeyItem("Derpnade Launcher") >= 0) {
 			player.removeKeyItem("Derpnade Launcher");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 2, 1);
 		}
@@ -1269,56 +1270,46 @@ public function tripxiShopMainMenu2a():void {
 	menu();
 	addButton(0, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.FLINTLK);
 	addButton(1, weaponsrange.BLUNDER.shortName, buyItemT1, weaponsrange.BLUNDER);
-	addButton(2, weaponsrange.DUEL_P_.shortName, buyItemT1, weaponsrange.DUEL_P_);
-	addButton(3, weaponsrange.ADBSHOT.shortName, buyItemT1, weaponsrange.ADBSHOT);
-	addButton(4, weaponsrange.ADBSCAT.shortName, buyItemT1, weaponsrange.ADBSCAT);
-	addButton(5, weaponsrange.IVIARG_.shortName, buyItemT1, weaponsrange.IVIARG_);
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) > 2) addButton(6, weaponsrange.DESEAGL.shortName, buyItemT1, weaponsrange.DESEAGL);
-	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 2) addButtonDisabled(6, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(6, "???", "Search the Desert.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) > 2) addButton(7, weaponsrange.M1CERBE.shortName, buyItemT1, weaponsrange.M1CERBE);
-	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) == 2) addButtonDisabled(7, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(7, "???", "Search the Forest.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) > 2) addButton(8, weaponsrange.TRFATBI.shortName, buyItemT1, weaponsrange.TRFATBI);
-	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) == 2) addButtonDisabled(8, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(8, "???", "Search the Volcanic Crag.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) > 2) addButton(9, weaponsrange.SNIPPLE.shortName, buyItemT1, weaponsrange.SNIPPLE);
-	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) == 2) addButtonDisabled(9, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) addButtonDisabled(9, "???", "Search the Deepwoods.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(2, weaponsrange.DESEAGL.shortName, buyItemT1, weaponsrange.DESEAGL);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Desert.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(3, weaponsrange.M1CERBE.shortName, buyItemT1, weaponsrange.M1CERBE);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Forest.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(4, weaponsrange.TRFATBI.shortName, buyItemT1, weaponsrange.TRFATBI);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(4, "???", "Search the Volcanic Crag.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) > 0) addButton(5, weaponsrange.SNIPPLE.shortName, buyItemT1, weaponsrange.SNIPPLE);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) addButtonDisabled(5, "???", "Search the Deepwoods.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(6, weaponsrange.TOUHOM3.shortName, buyItemT2, weaponsrange.TOUHOM3);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(6, "???", "Search the Caves.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) > 0) addButton(7, weaponsrange.TWINGRA.shortName, buyItemT2, weaponsrange.TWINGRA);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) addButtonDisabled(7, "???", "Search the Battlefield(O).");
 	addButtonDisabled(10, "-1-", "Shelf 1");
 	addButton(11, "-2-", tripxiShopMainMenu2b);
-	//addButton(12, "-3-", tripxiShopMainMenu2c);
+	addButton(12, "-3-", tripxiShopMainMenu2c);
 	addButton(13, "Talk", tripxiShopTalk);
 	addButton(14, "Leave", telAdreMenu);
 }
 public function tripxiShopMainMenu2b():void {
 	menu();
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) > 2) addButton(0, weaponsrange.TOUHOM3.shortName, buyItemT2, weaponsrange.TOUHOM3);
-	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) == 2) addButtonDisabled(0, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(0, "???", "Search the Caves.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) > 2) addButton(1, weaponsrange.TWINGRA.shortName, buyItemT2, weaponsrange.TWINGRA);
-	else if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) == 2) addButtonDisabled(1, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) addButtonDisabled(1, "???", "Search the Battlefield(O).");
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) > 2) addButton(2, weaponsrange.DPISTOL.shortName, buyItemT2, weaponsrange.DPISTOL);
-	else if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) == 2) addButtonDisabled(2, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
+	addButton(0, weaponsrange.ADBSHOT.shortName, buyItemT1, weaponsrange.ADBSHOT);
+	addButton(1, weaponsrange.ADBSCAT.shortName, buyItemT1, weaponsrange.ADBSCAT);
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(2, weaponsrange.DPISTOL.shortName, buyItemT2, weaponsrange.DPISTOL);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Blight Ridge.");
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) > 2) addButton(3, weaponsrange.TDPISTO.shortName, buyItemT2, weaponsrange.TDPISTO);
-	else if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) == 2) addButtonDisabled(3, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Blight Ridge.");
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) > 2) addButton(5, weaponsrange.HARPGUN.shortName, buyItemT2, weaponsrange.HARPGUN);
-	else if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) == 2) addButtonDisabled(5, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(3, weaponsrange.TDPISTO.shortName, buyItemT2, weaponsrange.TDPISTO);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Defiled Ravine.");
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(5, weaponsrange.HARPGUN.shortName, buyItemT2, weaponsrange.HARPGUN);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(5, "???", "Search the Beach.");
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) > 2) addButton(6, weaponsrange.DERPLAU.shortName, buyItemT2, weaponsrange.DERPLAU);
-	else if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) == 2) addButtonDisabled(6, "???", "Wait till tomorrow so Tripxi can restore this firearm.");
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(6, weaponsrange.DERPLAU.shortName, buyItemT2, weaponsrange.DERPLAU);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(6, "???", "Search the Mountains.");
 	addButton(10, "-1-", tripxiShopMainMenu2a);
 	addButtonDisabled(11, "-2-", "Shelf 2");
-	//addButton(12, "-2-", tripxiShopMainMenu2c);
+	addButton(12, "-2-", tripxiShopMainMenu2c);
 	addButton(14, "Leave", telAdreMenu);
 }
 
 public function tripxiShopMainMenu2c():void {
 	menu();
+	addButton(0, weaponsrange.DUEL_P_.shortName, buyItemT1, weaponsrange.DUEL_P_);
+	addButton(1, weaponsrange.IVIARG_.shortName, buyItemT1, weaponsrange.IVIARG_);
 	//addButton(0, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 	//addButton(1, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 	
@@ -1437,7 +1428,7 @@ private function tripxiShopTalkSmallSelection():void {
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns5, 0, 0, 0, 0);
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns6, 0, 0, 0, 0);
 	player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
-	doNext(tripxiShopTalk2)
+	doNext(tripxiShopTalk2);
 }
 
 //[Invetigate]

@@ -782,10 +782,10 @@ public function HealingScene():void {
 
 public function CuringCurseScene1():void {	//value related curses removal
 	clearOutput();
-	outputText("You asked Diana if she could heals you, and she said yes. Diana gestures you to come into her arms, which you do, allowing her to hold you against her wonderful body.\n\n");
-	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your pain and injuries.\n\n");
+	outputText("You asked Diana if she could cure your curses, and she said yes. Diana gestures you to come into her arms, which you do, allowing her to hold you against her wonderful body.\n\n");
+	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your curses.\n\n");
 	outputText("Diana starts to rub her chest against yours, causing more of the strange feeling as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move to your intimate area, sparks of pleasure shooting up your spine as across your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
-	outputText("But soon it is all over, she lets go of you, all your wounds and injuries all healed, although now you feel rather aroused.\n\n");
+	outputText("But soon it is all over, she lets go of you, your curses are partialy removed, although now you feel rather aroused.\n\n");
 	dynStats("lus", 50);
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
 		player.removeCurse(stat, 10);
@@ -794,10 +794,10 @@ public function CuringCurseScene1():void {	//value related curses removal
 }
 public function CuringCurseScene2():void {	//bonus multi related curses removal
 	clearOutput();
-	outputText("You asked Diana if she could heals you, and she said yes. Diana gestures you to come into her arms, which you do, allowing her to hold you against her wonderful body.\n\n");
-	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your pain and injuries.\n\n");
+	outputText("You asked Diana if she could cure your curses, and she said yes. Diana gestures you to come into her arms, which you do, allowing her to hold you against her wonderful body.\n\n");
+	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your curses.\n\n");
 	outputText("Diana starts to rub her chest against yours, causing more of the strange feeling as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move to your intimate area, sparks of pleasure shooting up your spine as across your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
-	outputText("But soon it is all over, she lets go of you, all your wounds and injuries all healed, although now you feel rather aroused.\n\n");
+	outputText("But soon it is all over, she lets go of you, your curses are partialy removed, although now you feel rather aroused.\n\n");
 	dynStats("lus", 50);
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
 		player.removeCurse(stat, 10);
@@ -961,4 +961,4 @@ public function SexMenuTitsfuck():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 	}
-}
+}

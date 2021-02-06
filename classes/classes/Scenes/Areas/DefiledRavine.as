@@ -28,7 +28,7 @@ use namespace CoC;
 			if (player.cor < 71) dynStats("cor", 1.5);
 			
 			//Twin Dart pistol
-			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("Twin Dart pistol") < 0 && rand(2) == 0) {
 				partsofTwinDartPistol();
 				return;
 			}
@@ -89,7 +89,6 @@ use namespace CoC;
 			clearOutput();
 			outputText("As you explore the blight ridge you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
 			outputText("You carefully put the pieces of the Twin Dart pistol in your back and head back to your camp.\n\n");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 2, 1);
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Twin Dart pistol", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
