@@ -9,8 +9,9 @@ package classes.Scenes.Areas.GlacialRift
 	import classes.Items.WeaponLib;
 	import classes.CoC;
 	import classes.BodyParts.*;
+import classes.display.SpriteDb;
 
-	public class YukiOnnaScene extends BaseContent
+public class YukiOnnaScene extends BaseContent
 	{
 
 		public function YukiOnnaScene()
@@ -19,6 +20,7 @@ package classes.Scenes.Areas.GlacialRift
 
 		public function encounterYukiOnna():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_YukiOnna);
 			if (player.hasStatusEffect(StatusEffects.MetYukiOnna)) {
 				if (player.yukiOnnaScore() >= 14 && player.hasPerk(PerkLib.IcyFlesh)) {
 					outputText("As you explore the glacial rift the weather begins to take a turn for the worse, your visibility dimming out until you can barely see a few meters ahead of yourself. You begin considering going back to camp when a sweet female voice begins to sing amidst the blizzard. You know this song, melancholic, tragic even and something stirs you to fellow the song to its source, a Yuki Onna enjoying the blizzard standing next to a cliff, her snowish white silk like hair floating softly in the wind. She turns to you smiling, waving you to come closer.\n\n");
