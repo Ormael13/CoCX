@@ -231,6 +231,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Zenji loneliness
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) player.addStatusValue(StatusEffects.ZenjiModificationsList, 1, 1);
+			//Tripxi firearms restoration progress
+			if (player.statusEffectv3(StatusEffects.TelAdreTripxi) > 0) player.addStatusValue(StatusEffects.TelAdreTripxi, 3, -1);
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
@@ -740,34 +742,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						player.buff("Energy Vampire").addStats({ "spe.mult": -0.05 }).withText("Energy Vampire");
 					}
 				}
-				//Tripxi firearms selection update
-				if (player.statusEffectv2(StatusEffects.TelAdreTripxi) == 3) {
-					player.addStatusValue(StatusEffects.TelAdreTripxi, 2, -2);
-					if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 1, 1);
-					if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 2, 1);
-					if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 3, 1);
-					if (player.statusEffectv4(StatusEffects.TelAdreTripxiGuns1) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 4, 1);
-					if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 1, 1);
-					if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 2, 1);
-					if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 3, 1);
-					if (player.statusEffectv4(StatusEffects.TelAdreTripxiGuns2) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 4, 1);
-					if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 1, 1);
-					if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 2, 1);
-					if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns3) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 3, 1);
-					if (player.statusEffectv4(StatusEffects.TelAdreTripxiGuns3) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 4, 1);
-					if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns4, 1, 1);
-					if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns4) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns4, 2, 1);
-					if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns4) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns4, 3, 1);
-					if (player.statusEffectv4(StatusEffects.TelAdreTripxiGuns4) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns4, 4, 1);
-					if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 1, 1);
-					if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 2, 1);
-					if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns5) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 3, 1);
-					if (player.statusEffectv4(StatusEffects.TelAdreTripxiGuns5) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 4, 1);
-					if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 1, 1);
-					if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns6) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 2, 1);
-					if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns6) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 3, 1);
-					if (player.statusEffectv4(StatusEffects.TelAdreTripxiGuns6) == 2) player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 4, 1);
-				}
 				//Daily Fishery production
 				if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) {
 					if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
@@ -909,10 +883,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 					ZenjiScenes.ZenjiFood = false;
 				}
-
 				//Kaiba daily buy limit refresh
 				if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) player.removeStatusEffect(StatusEffects.KaibaDailyLimit);
-
 				//Player overheat is intensifying
 				if (player.statusEffectv1(StatusEffects.Overheat) == 1) {
 					var intensified:Boolean
@@ -941,7 +913,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 					needNext = true;
 				}
-
 				//Player overheat is progressing toward active
 				if (player.statusEffectv1(StatusEffects.Overheat) == 0 && player.statusEffectv2(StatusEffects.Overheat) > 0) {
 					player.addStatusValue(StatusEffects.Overheat, 2, -1);
@@ -953,7 +924,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						needNext = true;
 					}
 				}
-
 				//Easter bunny egg balls
 				if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.balls >=2) {
 					outputText("\n<b>Your balls grow as your eggs increase in size.</b>\n");
@@ -973,7 +943,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						outputText("\n\nYou begin penting in wanton lust, thought of filling some welcoming wet holes flooding your head, as the size of your increasingly growing balls remind you that you need to expel those eggs one way or another before they become too big.\n");
 					}
 				}
-
 				//Armor daily event
 				//Scandalous succubus armor corruption updates
 				if (player.armor == armors.SCANSC && player.cor < 100) {
@@ -981,13 +950,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.cor += 5;
 				}
 			}
-
 			//Easter bunny egg balls Loosing
 			if (player.easterbunnyScore() < 10 && player.hasPerk(PerkLib.EasterBunnyBalls) && !player.hasPerk(PerkLib.EasterBunnyEggBag)) {
 				outputText("\nSomething changes in your balls you can feel them as if they stopped growing. Guess you're no longer enough of a easter bunny to produce eggs.\n\n");
 				player.removePerk(PerkLib.EasterBunnyBalls)
 			}
-
 			//Easter bunny egg balls Cumming the eggs out
 			if (player.hasStatusEffect(StatusEffects.EasterBunnyCame)) { //Easter bunny cumming its eggs out
 				if (player.balls == 2)outputText("\nYou sigh in relief as your balls now empty of their eggs dangle under your cock two new way smaller eggs sliding " +
@@ -1003,7 +970,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\n\n<b>You currently have "+flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]+" eggs stored</b>\n");
 				needNext = true;
 			}
-
 			if (CoC.instance.model.time.hours == 6) {
 				var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
 				if (vthirst != null) {
@@ -1353,13 +1319,33 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("You feel energised and empowered by the life force drained out of the fluids of your recent blind date. What a meal!");
 				player.removeStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)
 			}
+			//Gazer perks
+			if (player.eyes.type == Eyes.MONOEYE && !player.hasPerk(PerkLib.TrueSeeing)) {
+				outputText("\nAs part of acquiring an all seeing eye your sight has improved greatly. It would seem you now possess the innate ability to dismiss illusions and falsehood seeing the world as it truly is. <b>You acquired True Seeing.</b> \n\n(<b>Gained Perk: True seeing</b>)");
+				player.createPerk(PerkLib.TrueSeeing, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.eyes.type != Eyes.MONOEYE && player.hasPerk(PerkLib.TrueSeeing)) {
+				outputText("\nYour sigh is not what it used to be. No longer having a cyclopean vision you have lost the power of true sight. \n\n(<b>Lost Perk: True seeing</b>)");
+				player.removePerk(PerkLib.TrueSeeing);
+				needNext = true;
+			}
+			if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6 && !player.hasPerk(PerkLib.Omnicaster)) {
+				outputText("\nSomething weird is happening with your magic! Just to confirm you use a standard magic bolt and watch in surprise as you instinctively split the spell using your eyes to launch multiple projectiles at once. <b>It would seem you acquired the ability to omnicast!</b> \n\n(<b>Gained Perk: Omnicaster</b>)");
+				player.createPerk(PerkLib.Omnicaster, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.rearBody.type != RearBody.TENTACLE_EYESTALKS && player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasStatusEffect(StatusEffects.GazerEyeStalksPlayer)) player.removeStatusEffect(StatusEffects.GazerEyeStalksPlayer);
+				outputText("\nNo text yet. \n\n(<b>Lost Perk: Omnicaster</b>)");
+				player.removePerk(PerkLib.Omnicaster);
+				needNext = true;
+			}
 			//Greed Perk
-			if (player.raccoonScore() >= 13 && !player.hasPerk(PerkLib.Greedy)) { //Check for gain of lizan regeneration - requires legs, arms and tail
-				{
-					outputText("\nYou are feeling absurdly lucky today so lucky there's no way fortune could turn against you. You nature as a tanuki has improved your ability to generate wealth, wherever there is more gems to make you will find and collect them. \n\n(<b>Gained Perk: Greedy</b>)");
-					player.createPerk(PerkLib.Greedy, 0, 0, 0, 0);
-					needNext = true;
-				}
+			if (player.raccoonScore() >= 13 && !player.hasPerk(PerkLib.Greedy)) {
+				outputText("\nYou are feeling absurdly lucky today so lucky there's no way fortune could turn against you. You nature as a tanuki has improved your ability to generate wealth, wherever there is more gems to make you will find and collect them. \n\n(<b>Gained Perk: Greedy</b>)");
+				player.createPerk(PerkLib.Greedy, 0, 0, 0, 0);
+				needNext = true;
 			}
 			//Lizan Regeneration perk
 			if ((player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && player.arms.type == Arms.LIZARD) || (player.findPerk(PerkLib.LizanRegeneration) < 0 && player.findPerk(PerkLib.LizanMarrow) >= 0)) { //Check for gain of lizan regeneration - requires legs, arms and tail
@@ -1735,12 +1721,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Titanic Strength
-			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.scyllaScore() >= 12 || player.frostWyrmScore() >= 10) && player.tallness >= 80 && player.findPerk(PerkLib.TitanicStrength) < 0) {
+			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.scyllaScore() >= 12 || player.frostWyrmScore() >= 10 || player.cyclopScore() >= 12) && player.tallness >= 80 && player.findPerk(PerkLib.TitanicStrength) < 0) {
 				outputText("\nWhoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
 				player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
 				needNext = true;
 			}
-				if (((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 && player.scyllaScore() < 12 && player.frostWyrmScore() < 10) || player.tallness < 80) && player.findPerk(PerkLib.TitanicStrength) >= 0) {
+				if (((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 && player.scyllaScore() < 12 && player.frostWyrmScore() < 10 && player.cyclopScore() < 12) || player.tallness < 80) && player.findPerk(PerkLib.TitanicStrength) >= 0) {
 				if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				player.removePerk(PerkLib.TitanicStrength);

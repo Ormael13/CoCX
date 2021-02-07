@@ -980,6 +980,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownCurseOfDesire:StatusEffectType             	= mkCombat("Cooldown Curse of Desire");
 		public static const CooldownCurseOfWeeping:StatusEffectType            	= mkCombat("Cooldown Curse of Weeping");
 		public static const CooldownCursedRiddle:StatusEffectType        		= mkCombat("Cooldown Cursed Riddle");
+		public static const CooldownChaosBeams:StatusEffectType                	= mkCombat("Cooldown Chaos beams");
 		public static const CooldownCharging:StatusEffectType           		= mkCombat("Cooldown Charging");
 		public static const CooldownDisplacement:StatusEffectType     			= mkCombat("Cooldown Displacement");
 		public static const CooldownDynapunchGlove:StatusEffectType      		= mkCombat("Cooldown Dynapunch Glove");

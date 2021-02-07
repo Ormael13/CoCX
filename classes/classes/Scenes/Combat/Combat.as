@@ -2261,7 +2261,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Aerobatics)) accmod += 40;
             if (player.hasPerk(PerkLib.AdvancedAerobatics)) accmod += 100;
         }
-        if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
+		if (player.hasPerk(PerkLib.TrueSeeing)) accmod += 40;
+        if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
 		if (player.isSwordTypeWeapon()) accmod += Math.round((masterySwordLevel() - 1) / 2);
 		if (player.isAxeTypeWeapon()) accmod += Math.round((masteryAxeLevel() - 1) / 2);
@@ -2271,6 +2272,7 @@ public class Combat extends BaseContent {
 		if (player.weaponPerk == "Dual Small") accmod += Math.round((dualWSLevel() - 1) / 2);
 		if (player.weaponPerk == "Dual") accmod += Math.round((dualWNLevel() - 1) / 2);
 		if (player.weaponPerk == "Dual Large") accmod += Math.round((dualWLLevel() - 1) / 2);
+		accmod += meleeDualWieldAccuracyPenalty();
         return accmod;
     }
 
@@ -2348,7 +2350,8 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Aerobatics)) accmod += 40;
             if (player.hasPerk(PerkLib.AdvancedAerobatics)) accmod += 100;
         }
-        if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
+		if (player.hasPerk(PerkLib.TrueSeeing)) accmod += 40;
+        if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of deadeye aim") accmod += 40;
         if (player.weaponRangeName == "Touhouna M3") accmod -= 20;
         return accmod;
@@ -2370,6 +2373,7 @@ public class Combat extends BaseContent {
         if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) faccmod += 60;
         if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) faccmod += 80;
 		if (player.weaponRangePerk == "Dual Firearms") faccmod += Math.round((dualWFLevel() - 1) / 2);
+		faccmod += firearmsDualWieldAccuracyPenalty();
         return faccmod;
     }
 
@@ -3408,7 +3412,6 @@ public class Combat extends BaseContent {
             if (player.ammo > 0) {
                 flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
                 flags[kFLAGS.ARROWS_ACCURACY] += firearmsAccuracyPenalty();
-				flags[kFLAGS.ATTACKS_ACCURACY] += firearmsDualWieldAccuracyPenalty();
                 shootWeapon();
             } else {
                 outputText("<b>Your firearm clip is empty.</b>\n\n");
@@ -5031,7 +5034,6 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 2) {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]--;
             flags[kFLAGS.ATTACKS_ACCURACY] += meleeAccuracyPenalty();
-            flags[kFLAGS.ATTACKS_ACCURACY] += meleeDualWieldAccuracyPenalty();
             attack2();
             return;
         }
@@ -8237,6 +8239,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownTornadoStrike);
             } else {
                 player.addStatusValue(StatusEffects.CooldownTornadoStrike, 1, -1);
+            }
+        }
+        //Chaos beams
+        if (player.hasStatusEffect(StatusEffects.CooldownChaosBeams)) {
+            if (player.statusEffectv1(StatusEffects.CooldownChaosBeams) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownChaosBeams);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownChaosBeams, 1, -1);
             }
         }
         //Sextuple Thrust

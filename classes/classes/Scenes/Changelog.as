@@ -159,7 +159,7 @@ package classes.Scenes
 			outputText("-New body parts for cyclop/gazer (by Liadri).\n");
 			outputText("-New updates to Yuu and Yeti TF\n");
 			outputText("-7 new unarmed combat perks!\n");
-			outputText("-Hybdryd weapons using mutliattack cap as those of normal sized not large sized weapons.\n");
+			outputText("-Hybryd weapons using multiattack cap as those of normal sized not large sized weapons.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

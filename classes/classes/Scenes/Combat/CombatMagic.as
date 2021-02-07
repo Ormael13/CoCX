@@ -2004,7 +2004,27 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doIceDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+			}
+		}
+		else doIceDamage(damage, true, true);
 		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
@@ -2070,7 +2090,27 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doDarknessDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doDarknessDamage(damage, true, true);
+				doDarknessDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doDarknessDamage(damage, true, true);
+				doDarknessDamage(damage, true, true);
+			}
+		}
+		else doDarknessDamage(damage, true, true);
 		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
@@ -2222,7 +2262,27 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doIceDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+			}
+		}
+		else doIceDamage(damage, true, true);
 		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
@@ -2286,7 +2346,27 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doDarknessDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doDarknessDamage(damage, true, true);
+				doDarknessDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doDarknessDamage(damage, true, true);
+				doDarknessDamage(damage, true, true);
+			}
+		}
+		else doDarknessDamage(damage, true, true);
 		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
@@ -2600,10 +2680,70 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		if (monster.plural) damage *= 5;
 		outputText(monster.capitalA + monster.short + " takes ");
-		doIceDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+			}
+		}
+		else doIceDamage(damage, true, true);
 		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) {
-			doIceDamage(damage, true, true);
-			doIceDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doIceDamage(damage, true, true);
+					doIceDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doIceDamage(damage, true, true);
+					doIceDamage(damage, true, true);
+				}
+			}
+			else doIceDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doIceDamage(damage, true, true);
+					doIceDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doIceDamage(damage, true, true);
+					doIceDamage(damage, true, true);
+				}
+			}
+			else doIceDamage(damage, true, true);
 		}
 		outputText(" damage.");
 		//Using fire attacks on the goo]
@@ -2654,7 +2794,27 @@ public class CombatMagic extends BaseCombatContent {
 			//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bedą dostawać bonusowe obrażenia
 			//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 			if (monster.plural) damage *= 5;
-			doIceDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doIceDamage(damage, true, true);
+					doIceDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doIceDamage(damage, true, true);
+					doIceDamage(damage, true, true);
+				}
+			}
+			else doIceDamage(damage, true, true);
 			outputText(" damage!");
 			//Using fire attacks on the goo]
 			//if(monster.short == "goo-girl") {
@@ -2749,10 +2909,70 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.plural) damage *= 5;
 		damage = Math.round(damage);
 		outputText(monster.capitalA + monster.short + " takes ");
-		doFireDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+			}
+		}
+		else doFireDamage(damage, true, true);
 		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) {
-			doFireDamage(damage, true, true);
-			doFireDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+			}
+			else doFireDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+			}
+			else doFireDamage(damage, true, true);
 		}
 		outputText(" damage.");
 		//Using fire attacks on the goo]
@@ -2802,7 +3022,27 @@ public class CombatMagic extends BaseCombatContent {
 					crit = true;
 					damage *= 1.75;
 				}
-				doFireDamage(damage, true, true);
+				if (player.hasPerk(PerkLib.Omnicaster)) {
+					if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+					else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+					else damage *= 0.2;
+					damage = Math.round(damage);
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+					if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+						doFireDamage(damage, true, true);
+						doFireDamage(damage, true, true);
+					}
+					if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+						doFireDamage(damage, true, true);
+						doFireDamage(damage, true, true);
+					}
+				}
+				else doFireDamage(damage, true, true);
 			}
 			outputText(" damage!");
 			//Using fire attacks on the goo]
@@ -3250,9 +3490,29 @@ public class CombatMagic extends BaseCombatContent {
 			damage *= 1.75;
 			if (player.armor == armors.BLIZZ_K) damage *= 0.5;
 			if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
-			damage = doFireDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+			}
+			else doFireDamage(damage, true, true);
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
-			if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+			if (monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 			outputText("\n\n");
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 			checkAchievementDamage(damage);
@@ -3302,7 +3562,27 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 		damage = Math.round(damage);
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doFireDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+			}
+		}
+		else doFireDamage(damage, true, true);
 		outputText(" damage.");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		//Using fire attacks on the goo]
@@ -3361,7 +3641,27 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doLightingDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doLightingDamage(damage, true, true);
+				doLightingDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doLightingDamage(damage, true, true);
+				doLightingDamage(damage, true, true);
+			}
+		}
+		else doLightingDamage(damage, true, true);
 		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
@@ -3415,7 +3715,27 @@ public class CombatMagic extends BaseCombatContent {
 			damage *= 1.75;
 			if (player.armor == armors.BLIZZ_K) damage *= 0.5;
 			if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
-			damage = doFireDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+			}
+			else doFireDamage(damage, true, true);
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 		}
 		else
@@ -3440,7 +3760,27 @@ public class CombatMagic extends BaseCombatContent {
 			if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 			damage = Math.round(damage);
 			outputText(monster.capitalA + monster.short + " takes ");
-			damage = doFireDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+			}
+			else doFireDamage(damage, true, true);
 			outputText(" damage.");
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			//Using fire attacks on the goo]
@@ -3512,7 +3852,27 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText("for ");
-		damage = doLightingDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doLightingDamage(damage, true, true);
+				doLightingDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doLightingDamage(damage, true, true);
+				doLightingDamage(damage, true, true);
+			}
+		}
+		else doLightingDamage(damage, true, true);
 		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
