@@ -472,50 +472,38 @@ public function lostToDiana():void {
 private function levelingHerself():void {
 	flags[kFLAGS.DIANA_DEFEATS_COUNTER]++;
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DIANA_LVL_UP] == 0) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 6);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 6);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 1;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DIANA_LVL_UP] == 1) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 7);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 7);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 6);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 6);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 2;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.DIANA_LVL_UP] == 2) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 8);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 8);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 3;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.DIANA_LVL_UP] == 3) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 9);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 9);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 4;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.DIANA_LVL_UP] == 4) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 10);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 10);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 5;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.DIANA_LVL_UP] == 5) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 11);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 11);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 6;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.DIANA_LVL_UP] == 6) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 12);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 12);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 7;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.DIANA_LVL_UP] == 7) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 13);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 13);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 12);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 12);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 8;
 	}
