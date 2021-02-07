@@ -155,14 +155,14 @@ package classes.Scenes
 			outputText("-Fix Alvina combat moves she will no longuer randomly one shot players witheout prejudice but will still require a very powerful character to defeat. (Liadri)\n");
 			outputText("-1 new achievment. (shadow one)\n");
 			outputText("-New TF Items: Eye Dops & Magic Eye Drops. First can be found in cave areas and second is enhanced by Lumi verison of eye drops or drops from one of Ebon Labyrinth bosses. Cost 50 gems and would change user into Cyclop/Gazer.\n");
-			outputText("-Cyclop // Gazer race bonus stats for reaching (6/12+)//(7/14/21+) pts in score: +45/90% to str racial multi, +45/90% to tou racial multi // +30/55/80% to tou racial multi, -55/65/75% to spe racial multi, +80/130/180% to int racial multi, +50/90/130% to lib racial multi (gazer and Eye Tyrant stages req. to have 6/10 eye stalk tentacles)\n");
-			outputText("-New body parts for cyclop/gazer (by Liadri).\n");
-			outputText("-New updates to Yuu and Yeti TF\n");
-			outputText("-7 new unarmed combat perks!\n");
+			outputText("-Cyclop // Gazer race bonus stats for reaching (6/12+)//(7/14/21+) pts in score: +45/90% to str racial multi, +45/90% to tou racial multi // +30/55/80% to tou racial multi, -55/65/75% to spe racial multi, +80/130/180% to int racial multi, +50/90/130% to lib racial multi (Gazer and Eye Tyrant stages req. to have 6/10 eye stalk tentacles)\n");
+			outputText("-New body parts for cyclop/gazer. (by Liadri)\n");
+			outputText("-New updates to Yuu and Yeti TF. (by Liadri)\n");
+			outputText("-7 new unarmed combat perks! (by Liadri)\n");
 			outputText("-Hybryd weapons using multiattack cap as those of normal sized not large sized weapons.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New M. Specials for Gazer race: Chaos beams, Dominating Gaze. First is attacking enemy with use of eye stalks dealing randomn effects by ech of them (and then 12 turns long cooldown). Second is power stun for 2 turns (none of enemies can resist it but not expect that some that can resist or even... turn the table could appear ingame).\n");
+			outputText("-New mutation perk: Omnicaster. Gained after having 6+ gazer eyestalks. Split casted damage dealing spells among all eyestalks. Each splitted spell deal 20% of orginal damage.\n");
+			outputText("-New mutation perk: True Seeing. Req. to gain monoeye. PC gain 20% to accuracy for melee and range attacks. Also negate evasion bonus for enemies using unconventional ways of evasion like displacement.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Some shady person appeared in Journey to the East inn that sells items currently. Maybe he will talk in future more too ^^\n");
@@ -186,7 +186,7 @@ package classes.Scenes
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons, Izmael three bugs, Kiha scene checking for wrong cock type, making golem showing error if golem core(s) isn't(aren't) in PC intentory and instead in pc 'golem bag', disabling Golems submenu if PC not have temporal golems left to use, ");
 			outputText("displacer beast eyes blocking gaining fur tf, cancer enemy minor bugs, ascension stats and buffs lingering post ascension, Metal Plate finds on battlefield glitch, missing choices for Diana encounter in forest, Neisa looting in RD again after hiring her, goblin assassin having wrong sprite during fight, Chi Chi training req. core stat values instead of total stat values, Claws weapon having ");
-			outputText("100% not 10% chance to trigger bleed, lusty claws not have chance to apply bleed, magic crown not been sold in jewelry shop in TA, minotaurs sometimes missing post fight options, Firesnail sex scene error for male PC\n");/*ostatni punkt changelogu
+			outputText("100% not 10% chance to trigger bleed, lusty claws not have chance to apply bleed, magic crown not been sold in jewelry shop in TA, minotaurs sometimes missing post fight options, Firesnail sex scene error for male PC, Luna scene error with PC name\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

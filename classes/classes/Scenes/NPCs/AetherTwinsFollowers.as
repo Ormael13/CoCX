@@ -15,8 +15,30 @@ import classes.internals.SaveableState;
 		public static var AetherTwinsShape:String;
 		public static var AetherTwinsCount:Number;
 		public static var AetherTwinsTalkMenu:Number;
+		public static var AetherTwinsFoodMenuTin:Number;
+		public static var AetherTwinsFoodMenuTinCap:Number;
+		public static var AetherTwinsFoodMenuCopper:Number;
+		public static var AetherTwinsFoodMenuCopperCap:Number;
+		public static var AetherTwinsFoodMenuIron:Number;
+		public static var AetherTwinsFoodMenuIronCap:Number;
 		public static var AetherTwinsFoodMenuSilver:Number;
 		public static var AetherTwinsFoodMenuSilverCap:Number;
+		public static var AetherTwinsFoodMenuGold:Number;
+		public static var AetherTwinsFoodMenuGoldCap:Number;
+		public static var AetherTwinsFoodMenuWorldTreeBranch:Number;
+		public static var AetherTwinsFoodMenuWorldTreeBranchCap:Number;
+		public static var AetherTwinsFoodMenuDiamond:Number;
+		public static var AetherTwinsFoodMenuDiamondCap:Number;
+		public static var AetherTwinsFoodMenuAmethyst:Number;
+		public static var AetherTwinsFoodMenuAmethystCap:Number;
+		public static var AetherTwinsFoodMenuMoonstone:Number;
+		public static var AetherTwinsFoodMenuMoonstoneCap:Number;
+		public static var AetherTwinsFoodMenuSkymetal:Number;
+		public static var AetherTwinsFoodMenuSkymetalCap:Number;
+		public static var AetherTwinsFoodMenuAdamantine:Number;
+		public static var AetherTwinsFoodMenuAdamantineCap:Number;
+		public static var AetherTwinsFoodMenuOrichalcum:Number;
+		public static var AetherTwinsFoodMenuOrichalcumCap:Number;
 		public static var AetherTwinsFoodMenu:Boolean;
 		public static var AetherTwinsFoodMenuBuckler:Boolean;
 		public static var AetherTwinsFoodMenuSpikeLShield:Boolean;
@@ -36,8 +58,30 @@ import classes.internals.SaveableState;
 			AetherTwinsShape = "";
 			AetherTwinsCount = 0;
 			AetherTwinsTalkMenu = 0;
+			AetherTwinsFoodMenuTin = 0;
+			AetherTwinsFoodMenuTinCap = 0;
+			AetherTwinsFoodMenuCopper = 0;
+			AetherTwinsFoodMenuCopperCap = 0;
+			AetherTwinsFoodMenuIron = 0;
+			AetherTwinsFoodMenuIronCap = 0;
 			AetherTwinsFoodMenuSilver = 0;
 			AetherTwinsFoodMenuSilverCap = 0;
+			AetherTwinsFoodMenuGold = 0;
+			AetherTwinsFoodMenuGoldCap = 0;
+			AetherTwinsFoodMenuWorldTreeBranch = 0;
+			AetherTwinsFoodMenuWorldTreeBranchCap = 0;
+			AetherTwinsFoodMenuDiamond = 0;
+			AetherTwinsFoodMenuDiamondCap = 0;
+			AetherTwinsFoodMenuAmethyst = 0;
+			AetherTwinsFoodMenuAmethystCap = 0;
+			AetherTwinsFoodMenuMoonstone = 0;
+			AetherTwinsFoodMenuMoonstoneCap = 0;
+			AetherTwinsFoodMenuSkymetal = 0;
+			AetherTwinsFoodMenuSkymetalCap = 0;
+			AetherTwinsFoodMenuAdamantine = 0;
+			AetherTwinsFoodMenuAdamantineCap = 0;
+			AetherTwinsFoodMenuOrichalcum = 0;
+			AetherTwinsFoodMenuOrichalcumCap = 0;
 			AetherTwinsFoodMenu = false;
 			AetherTwinsFoodMenuBuckler = false;
 			AetherTwinsFoodMenuSpikeLShield = false;
@@ -55,8 +99,30 @@ import classes.internals.SaveableState;
 				"AetherTwinsShape": AetherTwinsShape,
 				"AetherTwinsCount": AetherTwinsCount,
 				"AetherTwinsTalkMenu": AetherTwinsTalkMenu,
+				"AetherTwinsFoodMenuTin": AetherTwinsFoodMenuTin,
+				"AetherTwinsFoodMenuTinCap": AetherTwinsFoodMenuTinCap,
+				"AetherTwinsFoodMenuCopper": AetherTwinsFoodMenuCopper,
+				"AetherTwinsFoodMenuCopperCap": AetherTwinsFoodMenuCopperCap,
+				"AetherTwinsFoodMenuIron": AetherTwinsFoodMenuIron,
+				"AetherTwinsFoodMenuIronCap": AetherTwinsFoodMenuIronCap,
 				"AetherTwinsFoodMenuSilver": AetherTwinsFoodMenuSilver,
 				"AetherTwinsFoodMenuSilverCap": AetherTwinsFoodMenuSilverCap,
+				"AetherTwinsFoodMenuGold": AetherTwinsFoodMenuGold,
+				"AetherTwinsFoodMenuGoldCap": AetherTwinsFoodMenuGoldCap,
+				"AetherTwinsFoodMenuWorldTreeBranch": AetherTwinsFoodMenuWorldTreeBranch,
+				"AetherTwinsFoodMenuWorldTreeBranchCap": AetherTwinsFoodMenuWorldTreeBranchCap,
+				"AetherTwinsFoodMenuDiamond": AetherTwinsFoodMenuDiamond,
+				"AetherTwinsFoodMenuDiamondCap": AetherTwinsFoodMenuDiamondCap,
+				"AetherTwinsFoodMenuAmethyst": AetherTwinsFoodMenuAmethyst,
+				"AetherTwinsFoodMenuAmethystCap": AetherTwinsFoodMenuAmethystCap,
+				"AetherTwinsFoodMenuMoonstone": AetherTwinsFoodMenuMoonstone,
+				"AetherTwinsFoodMenuMoonstoneCap": AetherTwinsFoodMenuMoonstoneCap,
+				"AetherTwinsFoodMenuSkymetal": AetherTwinsFoodMenuSkymetal,
+				"AetherTwinsFoodMenuSkymetalCap": AetherTwinsFoodMenuSkymetalCap,
+				"AetherTwinsFoodMenuAdamantine": AetherTwinsFoodMenuAdamantine,
+				"AetherTwinsFoodMenuAdamantineCap": AetherTwinsFoodMenuAdamantineCap,
+				"AetherTwinsFoodMenuOrichalcum": AetherTwinsFoodMenuOrichalcum,
+				"AetherTwinsFoodMenuOrichalcumCap": AetherTwinsFoodMenuOrichalcumCap,
 				"AetherTwinsFoodMenu": AetherTwinsFoodMenu,
 				"AetherTwinsFoodMenuBuckler": AetherTwinsFoodMenuBuckler,
 				"AetherTwinsFoodMenuSpikeLShield": AetherTwinsFoodMenuSpikeLShield,
@@ -75,8 +141,30 @@ import classes.internals.SaveableState;
 				AetherTwinsShape = o["AetherTwinsShape"];
 				AetherTwinsCount = o["AetherTwinsCount"];
 				AetherTwinsTalkMenu = o["AetherTwinsTalkMenu"];
+				AetherTwinsFoodMenuTin = o["AetherTwinsFoodMenuTin"];
+				AetherTwinsFoodMenuTinCap = o["AetherTwinsFoodMenuTinCap"];
+				AetherTwinsFoodMenuCopper = o["AetherTwinsFoodMenuCopper"];
+				AetherTwinsFoodMenuCopperCap = o["AetherTwinsFoodMenuCopperCap"];
+				AetherTwinsFoodMenuIron = o["AetherTwinsFoodMenuIron"];
+				AetherTwinsFoodMenuIronCap = o["AetherTwinsFoodMenuIronCap"];
 				AetherTwinsFoodMenuSilver = o["AetherTwinsFoodMenuSilver"];
 				AetherTwinsFoodMenuSilverCap = o["AetherTwinsFoodMenuSilverCap"];
+				AetherTwinsFoodMenuGold = o["AetherTwinsFoodMenuGold"];
+				AetherTwinsFoodMenuGoldCap = o["AetherTwinsFoodMenuGoldCap"];
+				AetherTwinsFoodMenuWorldTreeBranch = o["AetherTwinsFoodMenuWorldTreeBranch"];
+				AetherTwinsFoodMenuWorldTreeBranchCap = o["AetherTwinsFoodMenuWorldTreeBranchCap"];
+				AetherTwinsFoodMenuDiamond = o["AetherTwinsFoodMenuDiamond"];
+				AetherTwinsFoodMenuDiamondCap = o["AetherTwinsFoodMenuDiamondCap"];
+				AetherTwinsFoodMenuAmethyst = o["AetherTwinsFoodMenuAmethyst"];
+				AetherTwinsFoodMenuAmethystCap = o["AetherTwinsFoodMenuAmethystCap"];
+				AetherTwinsFoodMenuMoonstone = o["AetherTwinsFoodMenuMoonstone"];
+				AetherTwinsFoodMenuMoonstoneCap = o["AetherTwinsFoodMenuMoonstoneCap"];
+				AetherTwinsFoodMenuSkymetal = o["AetherTwinsFoodMenuSkymetal"];
+				AetherTwinsFoodMenuSkymetalCap = o["AetherTwinsFoodMenuSkymetalCap"];
+				AetherTwinsFoodMenuAdamantine = o["AetherTwinsFoodMenuAdamantine"];
+				AetherTwinsFoodMenuAdamantineCap = o["AetherTwinsFoodMenuAdamantineCap"];
+				AetherTwinsFoodMenuOrichalcum = o["AetherTwinsFoodMenuOrichalcum"];
+				AetherTwinsFoodMenuOrichalcumCap = o["AetherTwinsFoodMenuOrichalcumCap"];
 				AetherTwinsFoodMenu = o["AetherTwinsFoodMenu"];
 				AetherTwinsFoodMenuBuckler = o["AetherTwinsFoodMenuBuckler"];
 				AetherTwinsFoodMenuSpikeLShield = o["AetherTwinsFoodMenuSpikeLShield"];
@@ -147,8 +235,8 @@ public function aethertwinsFollowersTalk():void {
 	menu();
 	addButton(0, "Them", aethertwinsFollowersTalkThem);
 	if (AetherTwinsTalkMenu > 0) {
-		addButtonDisabled(1, "Evolutions", "Still unwritten talk subject.");//addButton(1, "Evolutions", aethertwinsFollowersTalkEvolutions);
-		addButtonDisabled(2, "Past", "Still unwritten talk subject.");//addButton(1, "Past", aethertwinsFollowersTalkPast);
+		addButton(1, "Evolutions", aethertwinsFollowersTalkEvolutions);
+		addButton(2, "Past", aethertwinsFollowersTalkPast);
 	}
 	else {
 		addButtonDisabled(1, "???", "Twins memories related to this topic are still sealed.");
@@ -174,24 +262,31 @@ public function aethertwinsFollowersTalkThem():void {
 }
 public function aethertwinsFollowersTalkEvolutions():void {
 	clearOutput();
-	outputText("\n\n");
+	outputText("\"<i>That what makes "+(AetherTwinsCount > 1 ? "us":"me")+" special, right? To keep devour and evolve reaching pinnacle.</i>\" Reaching pinnacle? But why? \"<i>That a silly question isn't it? Because...</i>\" "+(AetherTwinsCount > 1 ? "they":"she")+" fall silent for very long moment as if trying recall reason. \"<i>... because it's purpose of ");
+	outputText((AetherTwinsCount > 1 ? "our":"my")+" existance.</i>\"\n\nJust like that? Merely existing to devour and evolve? nothign more to "+(AetherTwinsCount > 1 ? "their":"her")+" evolutions than this?\n\n");
+	outputText("\"<i>Doesn't you also changed since comming to this realm? You also evolve in your own way so why you think "+(AetherTwinsCount > 1 ? "our":"my")+" evolutions have no purpose. Survival of the fittest, right?</i>\"\n\n");
+	outputText("You fall silent thinking over that. Yes you changed since comming here. Before you can continue conversation "+(AetherTwinsCount > 1 ? "they":"she")+" ends it, \"<i>"+(AetherTwinsCount > 1 ? "We're":"I'm")+" bored. Let get find someone to beat or something to eat. Come on... talking is so boring!!!</i>\"\n\n");
 	doNext(aethertwinsFollowersTalk);
 	cheatTime(1/4);
 }
 public function aethertwinsFollowersTalkPast():void {
 	clearOutput();
-	outputText("\n\n");
+	outputText("\"<i>Past?</i>\" "+(AetherTwinsCount > 1 ? "They":"She")+" focusing for a longer moment trying recall it. It last very long moment before "+(AetherTwinsCount > 1 ? "they":"she")+" stay silent.\n\n\"<i>All "+(AetherTwinsCount > 1 ? "we":"i")+" could recall is awaking ");
+	outputText("inside dungeon next to the golem that "+(AetherTwinsCount > 1 ? "we":"i")+" bonded with and started controling like "+(AetherTwinsCount > 1 ? "our":"my")+" own bod"+(AetherTwinsCount > 1 ? "ies":"y")+". Anything before that time still is veiled like some sort of mist covering "+(AetherTwinsCount > 1 ? "our":"my")+" older memories.</i>\"\n\n");
+	outputText("Well that wasn't much. You ends converstaion assuring "+(AetherTwinsCount > 1 ? "them":"her")+" that with more evolutions "+(AetherTwinsCount > 1 ? "they":"she")+" will recall more details about "+(AetherTwinsCount > 1 ? "their":"her")+" past.\n\n");
 	doNext(aethertwinsFollowersTalk);
 	cheatTime(1/4);
 }
 public function aethertwinsFollowersTalk2():void {
 	clearOutput();
+	outputText("\"<i></i>\"\n\n");
 	outputText("\n\n");
 	doNext(aethertwinsFollowersTalk);
 	cheatTime(1/4);
 }
 public function aethertwinsFollowersTalk1():void {
 	clearOutput();
+	outputText("\"<i></i>\"\n\n");
 	outputText("\n\n");
 	doNext(aethertwinsFollowersTalk);
 	cheatTime(1/4);
@@ -199,9 +294,12 @@ public function aethertwinsFollowersTalk1():void {
 
 public function aethertwinsFollowersFeed():void {
 	clearOutput();
-	outputText("\"<i>You brought somethng tasty for "+(AetherTwinsCount > 1 ? "us":"me")+" to eat?</i>\" "+(AetherTwinsCount > 1 ? "They":"She")+" ask"+(AetherTwinsCount > 1 ? "s":"")+".\n\n");
-	outputText("\n\nEaten materials:");
-	outputText("\n-Silver ingot ("+AetherTwinsFoodMenuSilver+"/"+AetherTwinsFoodMenuSilverCap+")");
+	outputText("\"<i>You brought somethng tasty for "+(AetherTwinsCount > 1 ? "us":"me")+" to eat?</i>\" "+(AetherTwinsCount > 1 ? "They":"She")+" ask"+(AetherTwinsCount > 1 ? "s":"")+".");
+	outputText("\n\n-------");
+	if (AetherTwinsTalkMenu > 0) {
+		outputText("\n\nEaten materials:");
+		outputText("\n-Silver ingot ("+AetherTwinsFoodMenuSilver+"/"+AetherTwinsFoodMenuSilverCap+")");
+	}
 	outputText("\n\nEaten equipment:");
 	if (AetherTwinsFoodMenuBuckler) outputText("\n-Buckler");
 	if (AetherTwinsFoodMenuSpikeLShield) outputText("\n-Spiked Light Shield");
@@ -220,12 +318,18 @@ public function aethertwinsFollowersFeed():void {
 		else addButtonDisabled(btn, useables.S_INGOT.shortName, "They can't eat this type of metal before first evolution.");
 	}
 	btn++;
-	if (player.hasItem(shields.BUCKLER, 1) && !AetherTwinsFoodMenuBuckler) addButton(btn, shields.BUCKLER.shortName, aethertwinsFollowersFeedEquipment, shields.BUCKLER);
-	btn++;
-	if (player.hasItem(weapons.S_GAUNT, 1) && !AetherTwinsFoodMenuSGauntlet) addButton(btn, weapons.S_GAUNT.shortName, aethertwinsFollowersFeedEquipment, weapons.S_GAUNT);
-	btn++;
-	if (player.hasItem(weapons.CLAWS, 1) && !AetherTwinsFoodMenuClaws) addButton(btn, weapons.CLAWS.shortName, aethertwinsFollowersFeedEquipment, weapons.CLAWS);
-	btn++;
+	if (player.hasItem(shields.BUCKLER, 1) && !AetherTwinsFoodMenuBuckler) {
+		addButton(btn, shields.BUCKLER.shortName, aethertwinsFollowersFeedEquipment, shields.BUCKLER);
+		btn++;
+	}
+	if (player.hasItem(weapons.S_GAUNT, 1) && !AetherTwinsFoodMenuSGauntlet) {
+		addButton(btn, weapons.S_GAUNT.shortName, aethertwinsFollowersFeedEquipment, weapons.S_GAUNT);
+		btn++;
+	}
+	if (player.hasItem(weapons.CLAWS, 1) && !AetherTwinsFoodMenuClaws) {
+		addButton(btn, weapons.CLAWS.shortName, aethertwinsFollowersFeedEquipment, weapons.CLAWS);
+		btn++;
+	}
 	//if (AetherTwinsTalkMenu > 0) {
 		//if (player.hasItem(shields.SPIL_SH, 1) && !AetherTwinsFoodMenuSpikeLShield) addButton(btn, shields.SPIL_SH.shortName, aethertwinsFollowersFeedEquipment, shields.SPIL_SH);
 		//btn++;
@@ -262,16 +366,26 @@ public function aethertwinsFollowersFeedEquipment(itype:ItemType):void {
 		case weapons.L_CLAWS:	AetherTwinsFoodMenuLustyClaws = true;	break;
 	}
 	player.destroyItems(itype, 1);
-	if (AetherTwinsFoodMenuBuckler && AetherTwinsFoodMenuSGauntlet && AetherTwinsFoodMenuSGauntlet) {
+	if (AetherTwinsFoodMenuBuckler && AetherTwinsFoodMenuSGauntlet && AetherTwinsFoodMenuClaws) {
 		outputText("\"<i>Woohoo we're evolving.</i>\" they exclaims. \"<i>We going Faster Harder Better Stronger Curvier!!!</i>\"\n\n");
 		outputText("<b>Aether Twins base form evolved unlocking some of their sealed memories.</b>\n\n");
-		player.addStatusValue(StatusEffects.AetherTwins1, 2, 5);
+		player.createStatusEffect(StatusEffects.AetherTwins1, 0, 5, 0, 0);
+		//player.addStatusValue(StatusEffects.AetherTwins1, 2, 5);
 		AetherTwinsShape = "Human-tier Gaunlets";
-		AetherTwinsFoodMenuSilverCap = 4;
+		AetherTwinsFoodMenuTin = 0;
+		AetherTwinsFoodMenuTinCap = 2;
+		AetherTwinsFoodMenuCopper = 0;
+		AetherTwinsFoodMenuCopperCap = 2;
+		AetherTwinsFoodMenuIron = 0;
+		AetherTwinsFoodMenuIronCap = 2;
+		AetherTwinsFoodMenuSilver = 0;
+		AetherTwinsFoodMenuSilverCap = 2;
+		AetherTwinsFoodMenuGold = 0;
+		AetherTwinsFoodMenuGoldCap = 2;
 		AetherTwinsTalkMenu = 1;
 	}
 	doNext(aethertwinsFollowersFeed);
 	cheatTime(1/4);
 }
 	}
-}//do 549 linii na razie dodawać ^^
+}//do 781 linii na razie dodawać ^^

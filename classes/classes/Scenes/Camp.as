@@ -4512,7 +4512,7 @@ public function wakeFromBadEnd():void {
 	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 30) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 31;
 			clearOutput();
-			outputText("What time is it? Time to get Re-Collared ^^ Unless you over been wolfy & godly emo collar user. Then no re-collaring for you. Also free bonus secondary stats for everyone. Everyones loves it? Or not? Also let bring Izmael form farm if he stuck there.");
+			outputText("What time is it? Time to get Re-Collared ^^ Unless you over been wolfy & godly emo collar user. Then no re-collaring for you. Also free bonus secondary stats for everyone. Everyones loves it? Or not? Also let bring Izmael from farm if he stuck there. Tripxi also getting fresh start ;)");
 			if (player.hasKeyItem("Fenrir Collar") >= 0) {
 				player.removeKeyItem("Fenrir Collar");
 				player.createKeyItem("Gleipnir Collar", 0, 0, 0, 0);
@@ -4535,6 +4535,15 @@ public function wakeFromBadEnd():void {
 			}
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1 && flags[kFLAGS.IZMA_BROFIED] == 1) flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 0;
 			if (flags[kFLAGS.MARAE_ISLAND] < 1 && flags[kFLAGS.MET_MARAE] == 1) flags[kFLAGS.MARAE_ISLAND] = 1;
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
+				player.removeStatusEffect(StatusEffects.TelAdreTripxi);
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns1);
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns2);
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns3);
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns4);
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns5);
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns6);
+			}
 			doNext(doCamp);
 			return;
 		}

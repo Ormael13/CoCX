@@ -1400,7 +1400,10 @@ use namespace CoC;
 				else if (shieldPerk == "Large") block += 2;
 				else block += 1;
 			}
-			if (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD) block += 1;
+			if (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD) {
+				if (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets") block += 2;
+				block += 1;
+			}
 			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0) {
 				if (shieldPerk == "Massive") block += 3;
 				else if (shieldPerk == "Large") block += 2;

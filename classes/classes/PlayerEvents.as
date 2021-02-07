@@ -1319,6 +1319,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("You feel energised and empowered by the life force drained out of the fluids of your recent blind date. What a meal!");
 				player.removeStatusEffect(StatusEffects.KitsuneEnergyThirstFeed)
 			}
+			//Hydra heads
+			if (player.lowerBody == LowerBody.HYDRA && player.hasStatusEffect(StatusEffects.HydraTailsPlayer)) player.removeStatusEffect(StatusEffects.HydraTailsPlayer);
 			//Gazer perks
 			if (player.eyes.type == Eyes.MONOEYE && !player.hasPerk(PerkLib.TrueSeeing)) {
 				outputText("\nAs part of acquiring an all seeing eye your sight has improved greatly. It would seem you now possess the innate ability to dismiss illusions and falsehood seeing the world as it truly is. <b>You acquired True Seeing.</b> \n\n(<b>Gained Perk: True seeing</b>)");

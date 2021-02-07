@@ -65,6 +65,7 @@ public class DarkElfScene extends BaseContent
 		
 		public function wonWithDarkElf():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_DarkElf);
 			outputText("You manage to force the dark skinned bitch on her back, so she falls to the ground defeated, yet smirking. Just as you are about to grab her, she throws a smoke bomb on the ground and uses the screen to cover her escape. Blast! She’s fast, there is no way you will catch her now.\n\n");
 			cleanupAfterCombat();
 		}
