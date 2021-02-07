@@ -136,6 +136,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
 			player.tailType = Tail.FOX;
 			player.tailCount = 9;
+			player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
 			player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
 			player.breastRows[0].breastRating = 5;
 			player.femininity = 100;
@@ -266,6 +267,7 @@ import classes.Items.*;
 			player.fertility = 15;
 			player.tailType = Tail.FOX;
 			player.tailCount = 9;
+			player.createPerk(PerkLib.EnlightenedKitsune,0,0,0,0);
 			player.createPerk(PerkLib.EnlightenedNinetails,0,0,0,0);
 			//if possible with fur, Hair color: "midnight black", Skin/Fur color: "ashen grayish-blue",  Height: 65", Tone: 100, Thickness: 0, Hip rating: 6, Butt rating: 3,Feminimity: 50,  ( 4 rows of breasts (Descending from the top ones: D,C,B,A), nipple length: 0.1", Fuckable, 1 nipple per breast, Tongue type: demon
 			player.hairColor = "midnight black";
@@ -379,6 +381,7 @@ import classes.Items.*;
 			//-Cat with (black and orange tiger fur if possible) if not just Orange fur
 			player.hairColor = "black and orange";
 			player.skin.growFur({});
+			player.coatColor = "black and orange";
 			//-Chainmail armor
 			player.setArmor(armors.FULLCHN);
 			//-Large Claymore (i understand 40 Strength is need so if he could start with that would be great if not hit the gyms)"
@@ -546,7 +549,6 @@ import classes.Items.*;
 			player.setWeapon(weapons.W_STAFF);
 			player.itemSlot1.setItemAndQty(consumables.B__BOOK, 1);
 			player.itemSlot2.setItemAndQty(consumables.W__BOOK, 2);
-	
 			player.createBreastRow();
 			player.createVagina();
 			player.breastRows[0].breastRating = 4;
@@ -787,8 +789,8 @@ import classes.Items.*;
 			//Ears = Horse
 			player.ears.type = Ears.HORSE;
 			//Horns = Dragon
-			player.horns.type = Horns.DRACONIC_X4_12_INCH_LONG;
-			player.horns.count = 12;
+			player.horns.type = Horns.UNICORN;
+			player.horns.count = 10;
 			//Face = Horse
 			player.faceType = Face.HORSE;
 			//Skin type = Black Fur
@@ -888,8 +890,7 @@ import classes.Items.*;
 			player.setArmor(armors.FULLPLT);
 			//-Large Claymore (i understand 40 Strength is need so if he could start with that would be great if not hit the gyms)"
 			player.setWeapon(weapons.CLAYMOR);
-
-			player.strStat.core.value = 41;
+			player.strStat.core.value = 40;
 			//femininity: 95
 			player.femininity = 95;
 			//(0 lust cum production: 10000)
@@ -968,6 +969,7 @@ import classes.Items.*;
 			player.lowerBody = LowerBody.DRAGON;
 			player.tongue.type = Tongue.DRACONIC;
 			player.hairLength = 45;
+			player.createPerk(PerkLib.EnlightenedKitsune,0,0,0,0);
 			player.createPerk(PerkLib.EnlightenedNinetails,0,0,0,0);
 		}
 		
@@ -1026,9 +1028,9 @@ import classes.Items.*;
 			player.skin.growFur({});
 			player.skinTone = "light";
 			player.hairColor = "silver";
+			player.coatColor = "white";
 			player.hairLength=10;
 			//shoulder length silver hair
-	
 			player.balls = 0;
 			player.cumMultiplier = 2;
 			player.ballSize = 0;
@@ -1261,7 +1263,7 @@ import classes.Items.*;
 		}
 		
 		private function customSora3():void {
-			//Character Creation	Female,virgin	A human with cow/mintaur bloodline	Sora
+			//Character Creation	Female,virgin	A human with cow/minotaur bloodline	Sora
 			player.createPerk(PerkLib.BloodlineMinotaur,0,0,0,0);
 			if (player.hasVagina()) player.vaginas[0].virgin = true;
 			if (!player.hasPerk(PerkLib.PastLifeAlchemist)) player.createPerk(PerkLib.HistoryAlchemist,0,0,0,0);
@@ -1409,7 +1411,6 @@ import classes.Items.*;
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
 			player.createKeyItem("Equipment Storage - Jewelry Box",0,0,0,0);
 			player.createStatusEffect(StatusEffects.KnowsWhitefire, 0, 0, 0, 0);
-			
 			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter, 		0, 0, 0, 0);
 			player.createPerk(PerkLib.Acclimation, 			0, 0, 0, 0);
 			player.createPerk(PerkLib.Berzerker, 			0, 0, 0, 0);
@@ -1429,15 +1430,10 @@ import classes.Items.*;
 			player.createPerk(PerkLib.ThunderousStrikes,	0, 0, 0, 0);
 			player.createPerk(PerkLib.WeaponMastery,		0, 0, 0, 0);
 			player.createPerk(PerkLib.WellAdjusted,			0, 0, 0, 0);
-			
 			player.createPerk(PerkLib.SensualLover, 		0, 0, 0, 0);
-			player.createPerk(PerkLib.SensualLover, 		0, 0, 0, 0);
-			
 			flags[kFLAGS.VALARIA_AT_CAMP] = 1;
-			
 			player.gems += 30000;
 			outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
-			
 			player.itemSlot6.unlocked = true;
 			player.itemSlot7.unlocked = true;
 			player.itemSlot8.unlocked = true;
@@ -1674,15 +1670,13 @@ import classes.Items.*;
 			player.hips.type = 3;
 			player.createBreastRow();
 			player.skinTone = "fair";
-
 			player.setArmor(armors.H_GARB_);
 			player.setShield(shields.BLASPHE);
 			player.setJewelry(jewelries.MSIGNIT);
 			player.setUndergarment(undergarments.C_LOIN);
 			player.createKeyItem("Dark Mage’s Grimoire",0,0,0,0);
-			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 3, 0, 0, 0);
+			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 4, 0, 0, 0);
 			player.itemSlot1.setItemAndQty(consumables.H_BISCU, 5);
-
 			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeHealer)) player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
 			player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
@@ -1758,7 +1752,6 @@ import classes.Items.*;
 			player.femininity  = 50; // androgynous
 			player.beardLength = 0;
 			player.beardStyle  = 0;
-			
 			player.ears.type = Ears.FOX;
 			player.tailType = Tail.FOX; // soft fur feels so lovely... too bad having too much fox fur would make you dumber, and while you would enjoy feline body, channeling magic using nine tails is great benefit which is hard to give up
 			player.tailCount = 9;
@@ -1773,7 +1766,6 @@ import classes.Items.*;
 			player.wisStat.core.value = 55; // your mind is your power!
 			player.libStat.core.value = 85; // yes, you have problems
 			player.cor += 31; // have high initial corruption, but also have religious history to meditate
-			
 			// bow and concealing leather armor with robes, also can handle rapier well, but doesn't have one
 			if (player.armor == ArmorLib.NOTHING || player.armor == armors.C_CLOTH) player.setArmor(armors.LTHRROB); // you like concealing clothes, your body is your masterpiece, but your extra benefits are more fun when not expected... ok, you are a bit shy of your tentacles
 			if (player.weapon == WeaponLib.FISTS) player.setWeapon(weapons.SUCWHIP); // have succubus whip, to get corruption quickly when desired
@@ -1795,7 +1787,6 @@ import classes.Items.*;
 			if (player.hasKeyItem("Camp - Ornate Chest") < 0) { player.createKeyItem("Camp - Ornate Chest", 0, 0, 0, 0); for (i = 0; i < 4; i++) inventory.createStorage(); }			
 			if (player.hasKeyItem("Equipment Rack - Weapons") < 0) { player.createKeyItem("Equipment Rack - Weapons", 0, 0, 0, 0); flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1; }			
 			if (player.hasKeyItem("Equipment Rack - Armor") < 0) { player.createKeyItem("Equipment Rack - Armor", 0, 0, 0, 0); flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1; }			
-			
 			// have lots of different traits
 			if (!player.hasPerk(PerkLib.PastLifeReligious) && player.findPerk(PerkLib.HistoryReligious) < 0) player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0); // abandoned religion after obtaining nine tails and being disappointed in achieved enlightment
 			if (!player.hasPerk(PerkLib.PastLifeFighter) && player.findPerk(PerkLib.HistoryAlchemist) < 0) player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0); // and resorted to your hobby - alchemy
@@ -1816,6 +1807,7 @@ import classes.Items.*;
 			if (player.findPerk(PerkLib.Channeling) < 0) player.createPerk(PerkLib.Channeling, 0, 0, 0, 0); // despite strong magic affinity wasn't actually much interested in combat magic before, so only can use fox fire as offensive spell
 			if (player.findPerk(PerkLib.Spellpower) < 0) player.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
 			// have some racial traits
+			if (player.findPerk(PerkLib.EnlightenedKitsune) < 0) player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
 			if (player.findPerk(PerkLib.EnlightenedNinetails) < 0) player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);			
 			if (player.findPerk(PerkLib.DragonFireBreath) < 0) player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);				
 			if (player.findPerk(PerkLib.DragonIceBreath) < 0) player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);				

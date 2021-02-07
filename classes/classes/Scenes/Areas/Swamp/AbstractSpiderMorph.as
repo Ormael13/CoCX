@@ -6,7 +6,7 @@ package classes.Scenes.Areas.Swamp
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.WeaponLib;
-import classes.StatusEffects.Combat.WebDebuff;
+	import classes.StatusEffects.Combat.WebDebuff;
 
 public class AbstractSpiderMorph extends Monster
 	{
@@ -69,7 +69,6 @@ public class AbstractSpiderMorph extends Monster
 					outputText("The silky strands hit you, weighing you down and restricting your movement even further.\n");
 				}
 				web.increase();
-
 			}
 		}
 

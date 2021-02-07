@@ -325,6 +325,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -348,6 +349,12 @@ public class CombatMagic extends BaseCombatContent {
 			mod1 -= player.cor / 10;
 			if (mod1 < 0.1) mod1 = 0.1;
 			mod += mod1;
+		}
+		if (player.hasPerk(PerkLib.InariBlessedKimono)){
+			var mod2:Number = 0.5;
+			mod2 -= player.cor / 10;
+			if (mod1 < 0.1) mod2 = 0.1;
+			mod += mod2;
 		}
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
@@ -460,6 +467,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
 		if (player.hasPerk(PerkLib.HexKnowledge)) mod -= .4;
 		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -483,6 +491,12 @@ public class CombatMagic extends BaseCombatContent {
 			mod1 -= player.cor / 10;
 			if (mod1 < 0.1) mod1 = 0.1;
 			mod += mod1;
+		}
+		if (player.hasPerk(PerkLib.InariBlessedKimono)){
+			var mod2:Number = 0.5;
+			mod2 -= player.cor / 10;
+			if (mod1 < 0.1) mod2 = 0.1;
+			mod += mod2;
 		}
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
@@ -581,6 +595,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
 		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
 		if (player.hasPerk(PerkLib.HexKnowledge)) mod += .2;
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -604,6 +619,12 @@ public class CombatMagic extends BaseCombatContent {
 			mod1 -= player.cor / 10;
 			if (mod1 < 0.1) mod1 = 0.1;
 			mod += mod1;
+		}
+		if (player.hasPerk(PerkLib.InariBlessedKimono)){
+			var mod2:Number = 0.5;
+			mod2 -= player.cor / 10;
+			if (mod1 < 0.1) mod2 = 0.1;
+			mod += mod2;
 		}
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
@@ -836,6 +857,8 @@ public class CombatMagic extends BaseCombatContent {
 			bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
@@ -858,6 +881,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsMeteorShower)) {
@@ -882,6 +907,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
@@ -904,6 +931,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
@@ -926,6 +955,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBlind)) {
@@ -948,6 +979,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
@@ -968,6 +1001,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < (spellCostWhite(30) * spellChargeWeaponCostMultiplier())) {
 				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
@@ -988,6 +1023,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < (spellCostWhite(40) * spellChargeArmorCostMultiplier())) {
 				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeal)) {
@@ -1000,6 +1037,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your chosen path of magic locked out this spell.");
 			} else if(player.mana < healCostWhite(30)) {
 				bd.disable("Your mana is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
@@ -1022,6 +1061,8 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+				bd.disable("Your ability to use white magic was sealed.");
 			}
 		}
 	}
@@ -1963,7 +2004,27 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doIceDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+			}
+		}
+		else doIceDamage(damage, true, true);
 		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
@@ -2029,7 +2090,27 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doDarknessDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doDarknessDamage(damage, true, true);
+				doDarknessDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doDarknessDamage(damage, true, true);
+				doDarknessDamage(damage, true, true);
+			}
+		}
+		else doDarknessDamage(damage, true, true);
 		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
@@ -2181,7 +2262,27 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doIceDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+			}
+		}
+		else doIceDamage(damage, true, true);
 		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
@@ -2245,7 +2346,27 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doDarknessDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doDarknessDamage(damage, true, true);
+				doDarknessDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doDarknessDamage(damage, true, true);
+				doDarknessDamage(damage, true, true);
+			}
+		}
+		else doDarknessDamage(damage, true, true);
 		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
@@ -2559,10 +2680,70 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		if (monster.plural) damage *= 5;
 		outputText(monster.capitalA + monster.short + " takes ");
-		doIceDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+			}
+		}
+		else doIceDamage(damage, true, true);
 		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) {
-			doIceDamage(damage, true, true);
-			doIceDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doIceDamage(damage, true, true);
+					doIceDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doIceDamage(damage, true, true);
+					doIceDamage(damage, true, true);
+				}
+			}
+			else doIceDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doIceDamage(damage, true, true);
+					doIceDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doIceDamage(damage, true, true);
+					doIceDamage(damage, true, true);
+				}
+			}
+			else doIceDamage(damage, true, true);
 		}
 		outputText(" damage.");
 		//Using fire attacks on the goo]
@@ -2613,7 +2794,27 @@ public class CombatMagic extends BaseCombatContent {
 			//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bedą dostawać bonusowe obrażenia
 			//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 			if (monster.plural) damage *= 5;
-			doIceDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				doIceDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doIceDamage(damage, true, true);
+					doIceDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doIceDamage(damage, true, true);
+					doIceDamage(damage, true, true);
+				}
+			}
+			else doIceDamage(damage, true, true);
 			outputText(" damage!");
 			//Using fire attacks on the goo]
 			//if(monster.short == "goo-girl") {
@@ -2708,10 +2909,70 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.plural) damage *= 5;
 		damage = Math.round(damage);
 		outputText(monster.capitalA + monster.short + " takes ");
-		doFireDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+			}
+		}
+		else doFireDamage(damage, true, true);
 		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) {
-			doFireDamage(damage, true, true);
-			doFireDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+			}
+			else doFireDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+			}
+			else doFireDamage(damage, true, true);
 		}
 		outputText(" damage.");
 		//Using fire attacks on the goo]
@@ -2761,7 +3022,27 @@ public class CombatMagic extends BaseCombatContent {
 					crit = true;
 					damage *= 1.75;
 				}
-				doFireDamage(damage, true, true);
+				if (player.hasPerk(PerkLib.Omnicaster)) {
+					if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+					else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+					else damage *= 0.2;
+					damage = Math.round(damage);
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+					if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+						doFireDamage(damage, true, true);
+						doFireDamage(damage, true, true);
+					}
+					if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+						doFireDamage(damage, true, true);
+						doFireDamage(damage, true, true);
+					}
+				}
+				else doFireDamage(damage, true, true);
 			}
 			outputText(" damage!");
 			//Using fire attacks on the goo]
@@ -3209,9 +3490,29 @@ public class CombatMagic extends BaseCombatContent {
 			damage *= 1.75;
 			if (player.armor == armors.BLIZZ_K) damage *= 0.5;
 			if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
-			damage = doFireDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+			}
+			else doFireDamage(damage, true, true);
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
-			if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+			if (monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 			outputText("\n\n");
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 			checkAchievementDamage(damage);
@@ -3261,7 +3562,27 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 		damage = Math.round(damage);
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doFireDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+			}
+		}
+		else doFireDamage(damage, true, true);
 		outputText(" damage.");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		//Using fire attacks on the goo]
@@ -3320,7 +3641,27 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doLightingDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doLightingDamage(damage, true, true);
+				doLightingDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doLightingDamage(damage, true, true);
+				doLightingDamage(damage, true, true);
+			}
+		}
+		else doLightingDamage(damage, true, true);
 		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
@@ -3374,7 +3715,27 @@ public class CombatMagic extends BaseCombatContent {
 			damage *= 1.75;
 			if (player.armor == armors.BLIZZ_K) damage *= 0.5;
 			if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
-			damage = doFireDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+			}
+			else doFireDamage(damage, true, true);
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 		}
 		else
@@ -3399,7 +3760,27 @@ public class CombatMagic extends BaseCombatContent {
 			if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 			damage = Math.round(damage);
 			outputText(monster.capitalA + monster.short + " takes ");
-			damage = doFireDamage(damage, true, true);
+			if (player.hasPerk(PerkLib.Omnicaster)) {
+				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+				else damage *= 0.2;
+				damage = Math.round(damage);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+					doFireDamage(damage, true, true);
+					doFireDamage(damage, true, true);
+				}
+			}
+			else doFireDamage(damage, true, true);
 			outputText(" damage.");
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			//Using fire attacks on the goo]
@@ -3471,7 +3852,27 @@ public class CombatMagic extends BaseCombatContent {
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText("for ");
-		damage = doLightingDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doLightingDamage(damage, true, true);
+				doLightingDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doLightingDamage(damage, true, true);
+				doLightingDamage(damage, true, true);
+			}
+		}
+		else doLightingDamage(damage, true, true);
 		outputText(" damage.");
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {

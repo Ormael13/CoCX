@@ -58,7 +58,7 @@ package classes.Scenes
 			outputText("in middle of combat been treated as new turn, Zenji Food option not always resetting, soultraining ring not been accounted for when cultivating, Akbal lust victory not showing any post combat options sometimes, some of enemies like hellhoud been seen as valid target for tailpeg unique sex scene, Yara's Piercing Studio Rare menu Back button not sending back even to main menu, green slime able to lower it ");
 			outputText("lust below 0, Drider Incubus Anal sex giving PC imps pregnancy, bunny herm scenes on plains still TF-ing PC despite been undead/gargoyle, goblin ale huminizing effect not taking into account PC resistance to been TF'd, missing fatigue cost check on Money Strike, Diana not able to level up after joining camp, Many Birds soulskill dealing damage twice, some of attacks incorrect texts, some enemy perks ");
 			outputText("been wrong labeled as player perks in few specials/attacks, eastern bunny perk bugging free balls mutation slot, able to fuck Tamani daughters without having cock, certain Beast Warrior perks not allowing cast Charge Weapon or Charge Armor with all other req. meet, mana not regenerating with elemental conjuer job\n\n");
-			outputText("<b>Version 0.8o4:</b>\n\n");
+			outputText("<b>Version 0.8o4 (Wendigo TF, Tundra area and other fixes):</b>\n\n");
 			outputText("-New mutation perk: Wendigo Curse. Gained as part of transformation into Wendigo. Effects: Your body and soul has been cursed by a wendigo. Transformative no longer have an effect on you.\n");
 			outputText("-New mutation perk: Unnatural Strength. Req. 10+ in wendigo score. Effects: The more sated you are the stronger you get, although your satisfaction is fleeting (+1% to str multi per 1% of lust/hunger).\n");
 			outputText("-New mutation perk: Endless Hunger. Req. 10+ in wendigo score. Effects: Your hunger progress at twice the normal speed but must be sated through oral sex. As a result, you are completely unable to obtain a body shape larger than a thin frame. (also for all difficulty settings that not have enabled hunger will enable it)\n");
@@ -86,11 +86,79 @@ package classes.Scenes
 			outputText("-Easy mode enabled would totaly remove negative HP regen from having racial mutation perks.\n");
 			outputText("-1 new achievment. (shadow one)\n");
 			outputText("-Jtecx many typo corrections.\n");
-			outputText("-Fixed bugs: Liadri bugfixes, Pyro bugfixes/typo corrections, Cold Fish Soup missing it main intendeed effect (libido lowering), super perk points not reseting on ascension, gremlin tf text error, some of the scenes only looking for correct size of 1st cock ignoring any other PC could have\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fixed bugs: Liadri bugfixes, Pyro bugfixes/typo corrections, Cold Fish Soup missing it main intendeed effect (libido lowering), super perk points not reseting on ascension, gremlin tf text error, some of the scenes only looking for correct size of 1st cock ignoring any other PC could have\n\n");
+			outputText("<b>Version 0.8p:</b>\n\n");
+			outputText("-New tier 1 speed lvl-up perk: Dual Wield (Normal). Req. Dual Wield and Job: Dervish/Warrior perks. Effect: decrease penalty to accuracy from 25% to 15% and decrease damage penalty from 50% to 30% when usiong normal sized dual wield melee weapons.\n");
+			outputText("-New mutation perk: Omnicaster. Gained after having 6+ gazer eyestalks. Split casted damage dealing spells among all eyestalks. Each splitted spell deal 20% of orginal damage.\n");
+			outputText("-New mutation perk: True Seeing. Req. to gain monoeye. PC gain 20% to accuracy for melee and range attacks. Also negate evasion bonus for enemies using unconventional ways of evasion like displacement.\n");
+			outputText("-New mutation perk: Verdant Might. Req. 11+ in plant/alraune score. Effects: As a plant when using natural weapon your damage scaling is based on Toughness instead of strength. (change by Liadri)\n");
+			outputText("-3 new perk for harpies and score update for all members of the harpy family tree. (change by Liadri)\n");
+			outputText("-7 new unarmed combat perks! (by Liadri)\n");
+			outputText("-New range weapon/tome (by Ormael): Golemancy Evocation Manuscript - buyable at golemancer shop in He'Xin'Dao. Cost 200 gems. Increase golems damage by 50% of base value.\n");
+			outputText("-New range weapon/tome (by Ormael): Elementalist’s Tome - buyable at Giacomo. Cost 200 gems. Increase elementals damage by 50% of base value.\n");
+			outputText("-New ring (by Ormael): Ezekiel's Signet - buyable at Felix in Journey to the East inn. Cost 10 spirit stones. Negate 1 racial perk point negative effect.\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): Ezekiel's Crown - buyable at Felix in Journey to the East inn. Cost 40 spirit stones. Negate up to 4 racial perk points negative effects.\n");
+			outputText("-New necklace (by Ormael): Ezekiel's Necklace - buyable at Felix in Journey to the East inn. Cost 50 spirit stones. Negate up to 5 racial perk points negative effects.\n");
+			outputText("-New M. Specials for Gazer race: Chaos beams, Dominating Gaze. First is attacking enemy with use of eye stalks dealing randomn effects by ech of them (and then 12 turns long cooldown). Second is power stun for 2 turns (none of enemies can resist it but not expect that some that can resist or even... turn the table could appear ingame).\n");
+			outputText("-New TF Items: Eye Dops & Magic Eye Drops. First can be found in cave areas and second is enhanced by Lumi verison of eye drops or drops from one of Ebon Labyrinth bosses. Cost 50 gems and would change user into Cyclop/Gazer.\n");
+			outputText("-Cyclop // Gazer race bonus stats for reaching (6/12+)//(7/14/21+) pts in score: +45/90% to str racial multi, +45/90% to tou racial multi // +30/55/80% to tou racial multi, -55/65/75% to spe racial multi, +80/130/180% to int racial multi, +50/90/130% to lib racial multi (Gazer and Eye Tyrant stages req. to have 6/10 eye stalk tentacles)\n");
+			outputText("-Bit of increased secondary stat bars gains for monsters at milestones to keep them protected from nuking by PC.\n");
+			outputText("-With too large diff in levels damage reduction will return 1 point of dmg instead of 0. With some effects form items or perks that will still give chance to get few points of dmg even if PC is vastly underleveled compared to enemy.\n");
+			outputText("-Huge, Gigantic, Colossal type of enemies gained now natural lvl diff bonus (it mean for level difference between PC and enemy they treated as few levels higher enemies than their displayed level). Huge +2, Gigantic +5, Colossal +10.\n");
+			outputText("-Boost to elementals dmg related to amount of summoned elementals gained another tier after pc summon 13th elemental (currently max amount of diff elementals to summon). Base damage that elemental deal when attacking was increased 2x.\n");
+			outputText("-Job: Elemental Conjuer now allow to summon 2 elementals.\n");
+			outputText("-Added Envocation Tome option to elementals summonig menu - it would allow to read informations about elementals that PC can currently summon. So to give some idea which elemental would be most useful to be summoned in current situation PC is.\n");
+			outputText("-Moved Elementals specials and Golems attack options into 2 menus in Other submenu in combat menu.\n");
+			outputText("-5th subpage on Stats page having all various trackers for mastery / skill progress.\n");
+			outputText("-Spectral Scream have additional effect of dealing magic damage to enemy. Enemy Wendigo scream also would deal dmg on top of causing fear.\n");
+			outputText("-Fenrir collar been renamed to Gleipnir collar. Also there is slight diff scene after 2nd time finding the shrine.\n");
+			outputText("-Added passive gains of soulforce (5) and lust/wrath (1) on level up. Also first 6 level up would grant 5x more increase to max HP, Fatigue, Mana, Soulforce, Wrath and Lust.\n");
+			outputText("-Change to handling dual weapons. No need to get tons of dual wield perks and only one to rule them all... Dual Wield perk is all what PC would need. Of course now that will mean dual wielding would have penalties: -50% damage and -25% accuracy. There would be two ways to offset those: get specific for that type of weapons perk ");
+			outputText("(so current dual wield (type of weapon) perks will have role but not of 'I need it to use this type of weapons) or simply training/using them to gain better mastery of using them.\n");
+			outputText("-Added mastery tracker for various types of meele weapons to 5th subpage of Stats.\n");
+			outputText("-Dual Wield perks like (Small), (Large), etc. that aren't based ones now have added req. to also have Dual Wield perk.\n");
+			outputText("-Added two new skill to Fenrir Soulstrike and Winter Claw.\n");
+			outputText("-Tooltips for 2nd to 4th ring have added text if PC not yet have perk unlocking those slots.\n");
+			outputText("-Added greyed out buttons for all undiscovered dungeons. Also fixed missing check for Ebon Labyrinth to add button for dungeons submenu in Places.\n");
+			outputText("-Newly added masteries (seen on Mastery subpage of Stats) can be trained by using type of weapon they are related to. Each gained level in mastery/dao will increase that type of weapon dmg by 1%. Each 2 levels accuracy will increase by 0.5%. Current cap is 10 + PC level (capped at lvl 90). Having human score at max 9 pts below max humanity will double mastery exp gaines, ");
+			outputText("having max humanity will tripple exp gains. Dealing critical damage double exp gains.\n");
+			outputText("-Sleeping with Luna will lower her jelousity meter at the same speed as it's rising during the day. But it will not never drop below 0 after night sleep thou.\n");
+			outputText("-On inventory page at melee weapon line would be added weapon type desc if PC use weapon that belong to one of major weapon types (it's related to mastery/dao on Masteries subpage so player will know which mastery will gain using that melee weapon).\n");
+			outputText("-Unlock req. for Vulcanic Crag been changed form finding Glacial Rift to Beach (as GR now have way higher than VC lvl enemies and thus it was near cockblock tier of troll to keep GR as part of unlock req.)\n");
+			outputText("-Dual Wield (Small), Dual Wield (Large) and Dual Wield (Firearms) new effects: decrease penalty to accuracy from 25% to 15% and decrease damage penalty from 50% to 30%.\n");// They would allow to increase ?training efficiency/max level of respective dual wield skill/both? put this on Ex or Su ver of those perks?
+			outputText("-Alvina cave and Twin Dart pistol parts been moved from Blight Ridge to Defiled Ravine.\n");
+			outputText("-New scene for Aiko and PC with kitsune tails by Jtexc.\n");
+			outputText("-Jtecx small addition to kitsunes about corruption effects on PC appearance.\n");
+			outputText("-Inventory now has an extra sub-menu for using/deleting items. It can be toggled on or off. By default it's not toggled on. Toggle to change it is in settings. So now mobile users can delete items even when not having Shift button ^^ (change by Jtexc)\n");
+			outputText("-Revisions/corrections to Luna, Kitsune, Fenrir Collar content by Scary Dragon Mom.\n");
+			outputText("-Race & body part organization + enhanced body part editor (change by aimozg).\n");
+			outputText("-Added conversation about Luna to Aunt Nancy. (change by Scary Dragon Mom)\n");
+			outputText("-Game now knows if the full round attack is done in or includes feral ……combat. (change by Liadri)\n");
+			outputText("-New effect for pregnancy crazy races Pregomania. (change by Liadri)\n");
+			outputText("-New Updated Kitsune score (caps to 26 on NG+). (change by Liadri)\n");
+			outputText("-Two New legendary kimono availlable at Kaiba shop for a limited time. (change by Liadri)\n");
+			outputText("-Fix health bar beyond 100 000 not showing properly. (Liadri)\n");
+			outputText("-New body parts for cyclop/gazer. (by Liadri)\n");
+			outputText("-New updates to Yuu and Yeti TF. (by Liadri)\n");
+			outputText("-Fix Alvina combat moves she will no longuer randomly one shot players witheout prejudice but will still require a very powerful character to defeat. (Liadri)\n");
+			outputText("-Moved all interactions with Marae after first meeting from using Boat in Places to using Marae Island also located in Places (and it will unlock after first time meeting Marae obviously).\n");
+			outputText("-A bit higher req. to get ninetail kitunse stage of race bonuses and 2 tiers above this stage. Also way kitsune score is calculated is changed to allow to get few more points on averange.\n");
+			outputText("-Sand Witches chest with La Bova and Lactacid now hold two items more items and it properly get slowly refilled with each passing day just as text ingame suggest.\n");
+			outputText("-Moga Hen decided to buy more oddities i mean... valuable items from PC. Like Purple Crystal Shards. I mean since PC still not found use for them so then why not sell them to Moga and get sweet spirit stones instead?\n");
+			outputText("-Meeting Izma or otter girl was changed from each 8th/20th explore to each 6th/15th exploration of the Lake.\n");
+			outputText("-Finding Beautiful Bow / Staff / Shield been now limited to having matching starting job: Ranger / Sorcerer / Guardian. Also chance to find them was increased a bit.\n");
+			outputText("-When PC not have in camp night time active npc's it will not keep still clickable Followers / Lovers / Slaves buttons that would lead to empty menu with only Back / Leave button.\n");
+			outputText("-1 new shadow achievment.\n");
+			outputText("-Hybryd weapons using multiattack cap as those of normal sized not large sized weapons.\n");
+			outputText("-Some shady person appeared in Journey to the East inn that sells items currently. Maybe he will talk in future more too ^^\n");
+			outputText("-Diana encounter chance been increased and she takes much faster to level up (so determined player could get her into camp with good rng in like 2-3 ingame days). She can cure curses now too. Both causing set flat value lost from stats (-10 str) and bonus multi related one curses (-10% to str). She also can heal to max HP even if PC have overmaxHP more than 0.\n");
+			outputText("-Ayane also could help with curses. Not as good as Diana but it's still something, right? Also isn't it spounds like curses could become more common now that we got more than 'Only Luna' curse curing options? Nah probably you all and mine imagination...\n");
+			outputText("-Aether Twins get new options in their menu: Talk (3 subjects) and Feed (on equipment or materials). Feed allow to give twins some specific melee or shield equipment to make them eat it and gain new properties after reaching evolution.\n");
+			outputText("-First evolution for Twins enabled (req. only 3 items feed to them) - it will allow twins to stun or apply bleed to attacked enemeis and their block value rising to 5. After Evolution they can eat materials like silver ignots and they unlocks 2 additional talk options.\n");
+			outputText("-Three new bosses can be found in room 200/250/300 of Ebon Labyrinth.\n");
+			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons, Izmael three bugs, Kiha scene checking for wrong cock type, making golem showing error if golem core(s) isn't(aren't) in PC intentory and instead in pc 'golem bag', disabling Golems submenu if PC not have temporal golems left to use, ");
+			outputText("displacer beast eyes blocking gaining fur tf, cancer enemy minor bugs, ascension stats and buffs lingering post ascension, Metal Plate finds on battlefield glitch, missing choices for Diana encounter in forest, Neisa looting in RD again after hiring her, goblin assassin having wrong sprite during fight, Chi Chi training req. core stat values instead of total stat values, Claws weapon having ");
+			outputText("100% not 10% chance to trigger bleed, lusty claws not have chance to apply bleed, magic crown not been sold in jewelry shop in TA, minotaurs sometimes missing post fight options, Firesnail sex scene error for male PC, Luna scene error with PC name\n");/*ostatni punkt changelogu
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -98,20 +166,27 @@ package classes.Scenes
 			//outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
 			//outputText("-New tier 20 sensitivity lvl-up perk: Mythical Desensitization. Req. Legendary Desensitization perk and 200+ sens. Effect: Negative effects of sensitivity are reduced by 25%.\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
+			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			//outputText("-Dragon and Kitsune racial perks unlock been limited now by New Game tier in which PC is currently. Those that get all three 3 perks for dragons in NG or NG+... well you lucky until next ascension you not need worry on limits to get all 3 perklines for dragons.\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
-			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -183,37 +258,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -243,7 +288,7 @@ package classes.Scenes
 			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
 			outputText("\n");aqua seed - item mający być siren tf item
 			outputText("\n");
-			outputText("<b>Version 0.8p:</b>\n\n");
+			outputText("<b>Version 0.8r:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("\n");
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bedą one wcześniej już za czesto wypadać
@@ -252,43 +297,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -2162,8 +2170,8 @@ package classes.Scenes
 			outputText("-New tier 0 wisdom lvl-up perk: Job: Elemental Conjurer. Req. 10+ wis. Effect: Allow to summon 4 basic type of elementals for helping PC in fight, +5 to max wisdom (scalable)\n");
 			outputText("-New tier 0 wisdom lvl-up perk: Elemental Conjurer Resolve. Req. Job: Elemental Conjurer and 20+ wis. Effect: +30 max Wis, +20 max Int, -15 max Str/Tou/Spe (scalable), +10% of elementals attacks dmg\n");
 			outputText("-New tier 0 wisdom lvl-up perk: Elemental Contract Rank 1. Req. perk Elemental Conjurer Resolve and 25+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 1\n");
-			outputText("-New tier 0 wisdom lvl-up perk: Elements of the Ortodox Path Req. perk Elemental Contract Rank 1 and 30+ wis. Effect: Increase limit of summoned elementals by 1 and unlock summoning of ice, lightning and darkness elementals\n");
-			outputText("-New tier 0 wisdom lvl-up perk: Elements of Mareth: Basics. Req. perk Elements of the Ortodox Path and 35+ wis. Effect: Increase limit of summoned elementals by 1 and unlock summoning of ether, wood and metal elementals\n");
+			outputText("-New tier 0 wisdom lvl-up perk: Elements of the orthodox Path Req. perk Elemental Contract Rank 1 and 30+ wis. Effect: Increase limit of summoned elementals by 1 and unlock summoning of ice, lightning and darkness elementals\n");
+			outputText("-New tier 0 wisdom lvl-up perk: Elements of Mareth: Basics. Req. perk Elements of the orthodox Path and 35+ wis. Effect: Increase limit of summoned elementals by 1 and unlock summoning of ether, wood and metal elementals\n");
 			outputText("-New tier 0 intelligence lvl-up perk: Basic Spirituality. Req. 30+ int and 20+ wis. Effect: Increase max mana by 45\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Half-step-to Improved Spirituality. Req. Basic Spirituality perk, 60+ int and 40+ wis. Effect: Increase max mana by 75\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Arcane Regeneration (Minor). Req. Mage perk and 50+ int. Effect: Increase max mana by 10% and recovery rate by 5\n");

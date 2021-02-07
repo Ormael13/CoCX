@@ -21,6 +21,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.CoC;
+import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Player;
 import classes.StatusEffects;
@@ -48,27 +49,57 @@ import coc.xlogic.ExecContext;
 					CancerCrabStance: player.hasStatusEffect(StatusEffects.CancerCrabStance),
 					SlimeCore: player.hasPerk(PerkLib.SlimeCore),
 					DarkSlimeCore: player.hasPerk(PerkLib.DarkSlimeCore),
-					showClothing: [Arms.DISPLACER].indexOf(player.arms.type) == -1 && !player.isSitStancing(),
-					showArmClothing: [Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance) && !player.isStancing(),
-					showLegClothing: [LowerBody.YETI, LowerBody.HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.DRIDER, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
+					showClothing: [Arms.GAZER, Arms.DISPLACER].indexOf(player.arms.type) == -1 && !player.isSitStancing(),
+					showArmClothing: [Arms.GAZER, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance) && !player.isStancing(),
+					showLegClothing: [LowerBody.GAZER, LowerBody.YETI, LowerBody.HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.DRIDER, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
 					PlayerHasViewableOutfit: player.isWearingArmor(),
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),
-					playerHasWeaponBannedArms: [Arms.YETI, Arms.DISPLACER, Arms.GARGOYLE, Arms.FROSTWYRM, Arms.CANCER].indexOf(player.arms.type) == -1 && !player.isStancing(),
+					playerHasWeaponBannedArms: [Arms.GAZER, Arms.YETI, Arms.DISPLACER, Arms.GARGOYLE, Arms.FROSTWYRM, Arms.CANCER].indexOf(player.arms.type) == -1 && !player.isStancing(),
 					playerHasLargeLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) != -1,
 					playerHasWeirdLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.HYDRA, LowerBody.NAGA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN].indexOf(player.lowerBody) != -1,
 
 					//Detect Weapon Skins
 					PlayerHasAWeapon: player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
+
 					PlayerHasAStaff: player.isStaffTypeWeapon(),
+					PlayerHasAStaffHoly:player.weapon == game.weapons.U_STAFF,
+					PlayerHasAStaffUnholy:player.weapon == game.weapons.N_STAFF,
+
 					PlayerHasASword: player.isSwordTypeWeapon(),
+					PlayerHasASwordHoly:player.weapon == game.weapons.EXCALIB || game.weapons.NPHBLDE,
+					PlayerHasASwordunholy:player.weapon == game.weapons.EBNYBLD,
+
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
+					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,
+					PlayerHasAnAxeUnholy:player.weapon == game.weapons.DE_GAXE,
+
 					PlayerHasAHammer: player.isMaceHammerTypeWeapon(),
+					PlayerHasAHammerHoly:player.weapon == game.weapons.POCDEST,
+					PlayerHasAHammerUnholy:player.weapon == game.weapons.DOCDEST,
+
 					PlayerHasASpear: player.isSpearTypeWeapon(),
+					PlayerHasASpearHoly:player.weapon == game.weapons.SESPEAR,
+					PlayerHasASpearUnholy:player.weapon == game.weapons.DSSPEAR,
+
 					PlayerHasKatana: player.weapon == game.weapons.UGATANA  || player.weapon == game.weapons.NODACHI  || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
+					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.MASAMUN,
+					PlayerHasKatanaUnholy:player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.BLETTER,
+
 					PlayerHasRapier: player.weapon == game.weapons.B_WIDOW || player.weapon == game.weapons.DRAPIER || player.weapon == game.weapons.JRAPIER || player.weapon == game.weapons.Q_GUARD || player.weapon == game.weapons.RRAPIER || player.weapon == game.weapons.LRAPIER,
+					PlayerHasRapierHoly:player.weapon == game.weapons.Q_GUARD,
+					PlayerHasRapierUnholy:player.weapon == game.weapons.B_WIDOW,
+
 					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.SPI_FOC,
-					PlayerHasSanctuary: player.shieldName != "nothing",
+					PlayerHasSanctuary: player.shield == game.shields.SANCTYL || player.shield == game.shields.SANCTYN || player.shield == game.shields.SANCTYD,
+					PlayerHasSanctuaryHoly:player.shield == game.shields.SANCTYL,
+					PlayerHasSanctuaryUnholy:player.shield == game.shields.SANCTYD,
+
+					PlayerHasABow: player.isBowTypeWeapon(),
+					PlayerHasABowHoly:player.weaponRange == game.weaponsrange.ARTEMIS,
+					PlayerHasABowUnholy:player.weaponRange == game.weaponsrange.WILDHUN,
+
+					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],
 
 					Antennae: Antennae,
 					Arms: Arms,
@@ -110,6 +141,7 @@ import coc.xlogic.ExecContext;
 					redKimono: player.armor == game.armors.RKIMONO,
 					purpleKimono: player.armor == game.armors.PKIMONO,
 					blackKimono: player.armor == game.armors.BLKIMONO,
+					legendKimono: player.armor == game.armors.IBKIMO || player.armor == game.armors.TCKIMO,
 					blueQipao: player.armor == game.armors.B_QIPAO,
 					greenQipao: player.armor == game.armors.G_QIPAO,
 					purpleQipao: player.armor == game.armors.P_QIPAO,
@@ -168,6 +200,7 @@ import coc.xlogic.ExecContext;
 			]);
 			this.charview = charview;
 		}
+
 	}
 }
 

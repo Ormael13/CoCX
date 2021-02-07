@@ -86,6 +86,7 @@ package classes.Items
 		public const RINGSTR:RingOfStrength = new RingOfStrength();
 		public const RINGTOU:RingOfToughness = new RingOfToughness();
 		public const RINGWIS:RingOfWisdom = new RingOfWisdom();
+		public const EZEKIELS:Jewelry = new Jewelry("EzekielS", "EzekielSignet", "Ezekiel's Signet", "an Ezekiel's Signet", 0, 0, 100, "A signet rumored to be blessed by the Ezekiel himself. Is that real one or just another fake signet merchant sold you? \n\nType: Jewelry (Ring) \nBase value: 100","Ring");
 		//public const RINGWIS:Bullseye = new RingWisdom();
 			
 		//Normal ring

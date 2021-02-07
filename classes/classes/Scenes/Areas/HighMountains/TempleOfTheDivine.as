@@ -266,7 +266,7 @@ use namespace CoC;
 				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(1, "Taoth", rebuildTaothAltair);
 				else addButtonDisabled(1, "Taoth", "You not have enough stones.");
 			}
-			if (player.hasKeyItem("Fenrir Collar") >= 0 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1) {
+			if (player.hasKeyItem("Gleipnir Collar") >= 0 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1) {
 				if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) addButton(2, "Fenrir", rebuildFenrirAltair);
 				else addButtonDisabled(2, "Fenrir", "You not have enough stones.");
 			}
@@ -1838,6 +1838,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.GorgonsEyesEvolved);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.HarpyHollowBones)) {
+				player.removePerk(PerkLib.HarpyHollowBones);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HarpyHollowBonesEvolved)) {
+				player.removePerk(PerkLib.HarpyHollowBonesEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.HarpyHollowBonesFinalForm)) {
+				player.removePerk(PerkLib.HarpyHollowBonesFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.HeartOfTheStorm)) {
 				player.removePerk(PerkLib.HeartOfTheStorm);
 				player.perkPoints += 1;
@@ -2094,6 +2106,18 @@ use namespace CoC;
 				player.removePerk(PerkLib.VampiricBloodsteamFinalForm);
 				player.perkPoints += 1;
 			}
+			if (player.hasPerk(PerkLib.FeyArcaneBloodstream)) {
+				player.removePerk(PerkLib.FeyArcaneBloodstream);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.FeyArcaneBloodstreamEvolved)) {
+				player.removePerk(PerkLib.FeyArcaneBloodstreamEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.FeyArcaneBloodstreamFinalForm)) {
+				player.removePerk(PerkLib.FeyArcaneBloodstreamFinalForm);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.EclipticMind)) {
 				player.removePerk(PerkLib.EclipticMind);
 				player.perkPoints += 1;
@@ -2128,6 +2152,18 @@ use namespace CoC;
 			}
 			if (player.hasPerk(PerkLib.WhaleFatFinalForm)) {
 				player.removePerk(PerkLib.WhaleFatFinalForm);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.YetiFat)) {
+				player.removePerk(PerkLib.YetiFat);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.YetiFatEvolved)) {
+				player.removePerk(PerkLib.YetiFatEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.YetiFatFinalForm)) {
+				player.removePerk(PerkLib.YetiFatFinalForm);
 				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.ChimericalBodyInitialStage)){

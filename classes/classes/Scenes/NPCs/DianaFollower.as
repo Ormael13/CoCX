@@ -55,7 +55,7 @@ public function repeatPlainsEnc():void {
 }
 public function repeatBattlefieldEnc():void {
 	clearOutput();
-	outputText("As you explore the outer battlefield area, you run into ");
+	outputText("As you explore the battlefield area, you run into ");
 	if (flags[kFLAGS.DIANA_AFFECTION] >= 95) outputText("Diana");
 	else outputText("an unicorn");
 	outputText(".\n\nAt first she doesn’t notice you, she’s to busy examining a flower. You walk to her to greet her, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled expression and grabs her staff to defend herself, lunging for a set of preemptive strikes as she begins to attack you.\n\n");
@@ -74,6 +74,9 @@ public function postNameForestEnc():void {
 	outputText("As you explore the forest area, you run into Diana.\n\n");
 	outputText("At first she doesn’t notice you, to busy examining a flower. You walk to her to say hi, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled  expression and grabs her staff to defend herself, but relax as she realise it’s you.\n\n");
 	outputText("\"<i>Oh hello [name]! I didn’t expect you. Say while you happen to be there I’m in need of a sparring partner would you mind having a friendly fight with me?</i>\"\n\n");
+	menu();
+	addButton(1, "Sure", postNameForestEncSure);
+	addButton(3, "Not Now", postNameForestEncNotNow);
 }
 public function postNameForestEncSure():void {
 	outputText("Well why not? You could use a warmup yourself.\n\n");
@@ -469,50 +472,38 @@ public function lostToDiana():void {
 private function levelingHerself():void {
 	flags[kFLAGS.DIANA_DEFEATS_COUNTER]++;
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DIANA_LVL_UP] == 0) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 18);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 18);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 1;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DIANA_LVL_UP] == 1) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 21);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 21);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 6);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 6);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 2;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.DIANA_LVL_UP] == 2) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 24);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 24);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 3;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.DIANA_LVL_UP] == 3) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 27);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 27);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 4;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.DIANA_LVL_UP] == 4) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 30);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 30);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 5;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.DIANA_LVL_UP] == 5) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 33);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 33);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 6;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.DIANA_LVL_UP] == 6) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 36);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 36);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 7;
 	}
 	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.DIANA_LVL_UP] == 7) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 39);
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 39);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, 12);
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, 12);
 		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.DIANA_LVL_UP] = 8;
 	}
@@ -679,9 +670,18 @@ public function mainCampMenu():void {
 	addButton(0, "Appearance", dianaAppearance);
 	//1 - Talk
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(2, "Spar", dianaSparsWithPC).hint("Ask Diana for a mock battle.");
-	if (player.HP < player.maxHP()) addButton(3, "Healing", HealingScene);
-	else addButtonDisabled(3, "Healing", "You're fully healed already.");
+	//3 - ??
 	addButton(4, "Sex", mainSexMenu);
+	if (player.HP < player.maxOverHP()) addButton(5, "Healing", HealingScene);
+	else addButtonDisabled(5, "Healing", "You're fully healed already.");
+	if (player.buff("Curse").isPresent()) {
+		addButton(6, "C.C.(A)", CuringCurseScene1).hint("Cure curses that affect stats non-multiplier bonuses.");
+		addButton(7, "C.C.(B)", CuringCurseScene2).hint("Cure curses that affect stats multiplier bonsues.");
+	}
+	else {
+		addButtonDisabled(6, "C.C.(A)", "You not have any curses to cure. (Type A)");
+		addButtonDisabled(7, "C.C.(B)", "You not have any curses to cure. (Type B)");
+	}
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -765,6 +765,35 @@ public function HealingScene():void {
 	dynStats("lus", 33);
 	HPChange(player.maxHP(), true);
 	EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.5)));
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function CuringCurseScene1():void {	//value related curses removal
+	clearOutput();
+	outputText("You asked Diana if she could cure your curses, and she said yes. Diana gestures you to come into her arms, which you do, allowing her to hold you against her wonderful body.\n\n");
+	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your curses.\n\n");
+	outputText("Diana starts to rub her chest against yours, causing more of the strange feeling as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move to your intimate area, sparks of pleasure shooting up your spine as across your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
+	outputText("But soon it is all over, she lets go of you, your curses are partialy removed, although now you feel rather aroused.\n\n");
+	dynStats("lus", 50);
+	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+		player.removeCurse(stat, 10);
+	}
+	doNext(camp.returnToCampUseOneHour);
+}
+public function CuringCurseScene2():void {	//bonus multi related curses removal
+	clearOutput();
+	outputText("You asked Diana if she could cure your curses, and she said yes. Diana gestures you to come into her arms, which you do, allowing her to hold you against her wonderful body.\n\n");
+	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your curses.\n\n");
+	outputText("Diana starts to rub her chest against yours, causing more of the strange feeling as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move to your intimate area, sparks of pleasure shooting up your spine as across your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
+	outputText("But soon it is all over, she lets go of you, your curses are partialy removed, although now you feel rather aroused.\n\n");
+	dynStats("lus", 50);
+	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+		player.removeCurse(stat, 10);
+		if (stat != "sens")
+		{
+			player.removeCurse(stat+".mult", 0.10);
+		}
+	}
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -920,4 +949,4 @@ public function SexMenuTitsfuck():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 	}
-}
+}

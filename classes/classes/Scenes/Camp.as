@@ -17,6 +17,8 @@ import classes.Scenes.Camp.*;
 import classes.Scenes.Dungeons.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao;
+import classes.Scenes.Places.Boat.MaraeScene;
+import classes.Scenes.Soulforce;
 import classes.lists.Gender;
 import classes.display.SpriteDb;
 
@@ -76,6 +78,7 @@ public class Camp extends NPCAwareContent {
 	public var Magnolia:MagnoliaFollower = new MagnoliaFollower();
 	public var HolliPure:HolliPureScene = new HolliPureScene();
 	public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
+	public var marae:MaraeScene = new MaraeScene();
 
 	private static var _campFollowers:Vector.<XXCNPC> = new Vector.<XXCNPC>;
 
@@ -143,17 +146,6 @@ public class Camp extends NPCAwareContent {
 	protected var marbleJoinsStream:Boolean;
 	protected var heliaJoinsStream:Boolean;
 	protected var amilyJoinsStream:Boolean;
-
-	public function EzekielCurseQuickFix():void {
-		clearOutput();
-		outputText("Like with a magic wand touch some divine being has blessed you. And before leaving meantioned about never again selling or discarding odd fruits.");
-		if (player.findPerk(PerkLib.EzekielBlessing) < 0) player.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
-		if (player.hasStatusEffect(StatusEffects.EzekielCurse)) player.removeStatusEffect(StatusEffects.EzekielCurse);
-		statScreenRefresh();
-		dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "lib", 5);
-		doCamp();
-
-	}
 
 	public var IsSleeping: Boolean = false;
 	public var CanDream: Boolean = false;
@@ -992,12 +984,13 @@ public class Camp extends NPCAwareContent {
 				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
 			}
 		}
-		//	if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && player.findPerk(PerkLib.EzekielBlessing) < 0) addButton(13, "Remov. Curse", EzekielCurseQuickFix).hint("Quick fix for Ezekiel curse when ezekiel fruit was lost.");
-
+		
 		//Remove buttons according to conditions.
 		if (isNightTime) {
 			if (model.time.hours >= 22 || model.time.hours < 6) {
-				removeButton(7); //Slaves
+				if (nightTimeActiveFollowers() == 0) removeButton(5); //Followers
+				if (nightTimeActiveLovers() == 0) removeButton(6); //Lovers
+				if (nightTimeActiveSlaves() == 0) removeButton(7); //Slaves
 				removeButton(8); //Camp Actions
 			}
 		}
@@ -1200,6 +1193,23 @@ public class Camp extends NPCAwareContent {
 		if (followerHel()) counter++;
 		if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
 		if (followerKiha()) counter++;
+		return counter;
+	}
+	
+	public function nightTimeActiveFollowers():Number {
+		var counter:Number = 0;
+		if (followerShouldra()) counter++;
+		if (flags[kFLAGS.LUNA_FOLLOWER] > 10 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
+		return counter;
+	}
+	
+	public function nightTimeActiveLovers():Number {
+		var counter:Number = 0;
+		return counter;
+	}
+	
+	public function nightTimeActiveSlaves():Number {
+		var counter:Number = 0;
 		return counter;
 	}
 
@@ -2830,6 +2840,8 @@ private function SparrableNPCsMenu():void {
 				outputText("\n\n\"<i>See you in the morning [name]...</i>\"\n");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Luna" && flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
 				outputText("You head to bed, Luna following you. ");
+				flags[kFLAGS.LUNA_JEALOUSY] -= (timeQ * 2);
+				if (flags[kFLAGS.LUNA_JEALOUSY] < -timeQ) flags[kFLAGS.LUNA_JEALOUSY] = -timeQ;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] >= 9) {
 					SceneLib.lunaFollower.sleepingFullMoon();
 					return;
@@ -3082,11 +3094,12 @@ private function SparrableNPCsMenu():void {
 	}
 
 	private function dungeonFound():Boolean { //Returns true as soon as any known dungeon is found
-		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) return true;
 		if (flags[kFLAGS.FACTORY_FOUND] > 0) return true;
-		if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) return true;
+		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) return true;
 		if (flags[kFLAGS.D3_DISCOVERED] > 0) return true;
+		if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) return true;
 		if (SceneLib.dungeons.checkPhoenixTowerClear()) return true;
+		if (flags[kFLAGS.EBON_LABYRINTH] > 0) return true;
 		if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) return true;
 		if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) return true;
 		if (flags[kFLAGS.LUMI_MET] > 0) return true;
@@ -3151,8 +3164,11 @@ private function SparrableNPCsMenu():void {
 		}
 		menu();
 		if (dungeonFound()) addButton(0, "Dungeons", dungeons).hint("Delve into dungeons.");
+		if (flags[kFLAGS.MARAE_ISLAND] > 0) addButton(2, "Marae", maraeIsland).hint("Visit the Marae's Islan in middle of the Lake.");
+		else addButtonDisabled(2, "???", "???");
 		if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(3, "Boat", SceneLib.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 12");
 		else addButtonDisabled(3, "???", "???");
+		addButton(4, "Next", placesPage2);
 		
 		if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(5, "Tel'Adre", SceneLib.telAdre.telAdreMenu).hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
 		else addButtonDisabled(5, "???", "???");
@@ -3160,9 +3176,9 @@ private function SparrableNPCsMenu():void {
 		else addButtonDisabled(6, "???", "???");
 		if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(7, "Owca", SceneLib.owca.gangbangVillageStuff).hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.");
 		else addButtonDisabled(7, "???", "???");
+		
 		if (flags[kFLAGS.HEXINDAO_UNLOCKED] == 1) addButton(10, "He'Xin'Dao", hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, place where all greenhorn soul cultivators come together.");
 		else addButtonDisabled(10, "???", "???");
-		addButton(4, "Next", placesPage2);
 		addButton(14, "Back", playerMenu);
 		return true;
 	}
@@ -3181,7 +3197,8 @@ private function SparrableNPCsMenu():void {
 		else addButtonDisabled(2, "???", "???");
 		if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) addButton(3, "Salon", SceneLib.mountain.salon.salonGreeting).hint("Visit the salon for hair services.");
 		else addButtonDisabled(3, "???", "???");
-		
+		addButton(4, "Next", placesPage3);
+
 		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) addButton(5, "Shrine", SceneLib.kitsuneScene.kitsuneShrine).hint("Visit the kitsune shrine in the deepwoods.");
 		else addButtonDisabled(5, "???", "???");
 		if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
@@ -3190,13 +3207,12 @@ private function SparrableNPCsMenu():void {
 		else addButtonDisabled(7, "???", "???");
 		if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");
 		else addButtonDisabled(8, "???", "???");
+		addButton(9, "Previous", placesToPage1);
 		
 		if (flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(10, "Great Tree", SceneLib.aikoScene.encounterAiko).hint("Visit the Great Tree in the Deep Woods where Aiko lives.");
 		else addButtonDisabled(10, "???", "???");
 //	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", CoC.instance.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
 		if (debug) addButton(13, "Ingnam", SceneLib.ingnam.returnToIngnam).hint("Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
-		addButton(4, "Next", placesPage3);
-		addButton(9, "Previous", placesToPage1);
 		addButton(14, "Back", playerMenu);
 	}
 
@@ -3230,20 +3246,46 @@ private function SparrableNPCsMenu():void {
 
 	private function dungeons():void {
 		menu();
-		//Turn on dungeon 1
+		//Main story dungeons
 		if (flags[kFLAGS.FACTORY_FOUND] > 0) addButton(0, "Factory", dungeon1.enterDungeon).hint("Visit the demonic factory in the mountains." + (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 ? "\n\nYou've managed to shut down the factory." : "The factory is still running. Marae wants you to shut down the factory!") + (SceneLib.dungeons.checkFactoryClear() ? "\n\nCLEARED!" : ""));
-		//Turn on dungeon 2
+		else addButtonDisabled(0, "???", "???");
 		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", dungeon2.enterDungeon).hint("Visit the cave you've found in the Deepwoods." + (flags[kFLAGS.DEFEATED_ZETAZ] > 0 ? "\n\nYou've defeated Zetaz, your old rival." : "") + (SceneLib.dungeons.checkDeepCaveClear() ? "\n\nCLEARED!" : ""));
-		//Turn on dungeon 3
+		else addButtonDisabled(1, "???", "???");
 		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", SceneLib.d3.enterD3).hint("Visit the stronghold in the high mountains that belongs to Lethice, the demon queen." + ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "") + (SceneLib.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""));
+		else addButtonDisabled(2, "???", "???");
 		//Side dungeons
 		if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
+		else addButtonDisabled(5, "???", "???");
 		if (SceneLib.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon).hint("Re-visit the tower you went there as part of Helia's quest." + (SceneLib.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
+		else addButtonDisabled(6, "???", "???");
 		if (flags[kFLAGS.EBON_LABYRINTH] > 0) addButton(9, "EbonLabyrinth", dungeonEL.enterDungeon).hint("Visit Ebon Labyrinth." + (SceneLib.dungeons.checkEbonLabyrinthClear() ? "\n\nSEMI-CLEARED!" : ""));
+		else addButtonDisabled(9, "???", "???");
 		if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) addButton(10, "Hidden Cave", dungeonHC.enterDungeon).hint("Visit the hidden cave in the hills." + (SceneLib.dungeons.checkHiddenCaveClear() ? "\n\nCLEARED!" : ""));
+		else addButtonDisabled(10, "???", "???");
 		if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) addButton(11, "Den of Desire", dungeonDD.enterDungeon).hint("Visit the den in blight ridge." + (SceneLib.dungeons.checkDenOfDesireClear() ? "\n\nCLEARED!" : ""));
+		else addButtonDisabled(11, "???", "???");
 		if (flags[kFLAGS.LUMI_MET] > 0) addButton(12, "Lumi's Lab", SceneLib.lumi.lumiEncounter).hint("Visit Lumi's laboratory.");
+		else addButtonDisabled(12, "???", "???");
 		if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0) addButton(13, "Anzu's Palace", dungeonAP.enterDungeon).hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.");
+		else addButtonDisabled(13, "???", "???");
+		addButton(14, "Back", places);
+	}
+	
+	private function maraeIsland():void {
+		menu();
+		if (flags[kFLAGS.MARAE_QUEST_COMPLETE] < 1 && flags[kFLAGS.MET_MARAE_CORRUPTED] < 2 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] < 1) addButton(0, "Visit", marae.encounterMarae).hint("Normal visit on godess island.");
+		else addButtonDisabled(0, "Visit", "Visitation hours are closed till futher notice.");
+		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] != 1 && flags[kFLAGS.LETHICE_DEFEATED] > 0 && flags[kFLAGS.PURE_MARAE_ENDGAME] < 2) addButton(1, "P. Marae", marae.encounterPureMaraeEndgame).hint("");
+		else addButtonDisabled(1, "P. Marae", "");
+		if (flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0) {
+			if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 2) addButton(2, "C. Marae", marae.level3MaraeEncounter).hint("");
+			if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0) addButton(2, "C. Marae", marae.level2MaraeEncounter).hint("");
+		}
+		else addButtonDisabled(2, "C. Marae", "");
+		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] == 1) addButton(3, "Minerva", marae.talkToMaraeAboutMinervaPurification).hint("Visit godess island to talk about help for Minerva.");
+		else addButtonDisabled(3, "Minerva", "");
+		if (player.plantScore() >= 7 && (player.gender == 2 || player.gender == 3) && flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4 || flags[kFLAGS.FLOWER_LEVEL] == 4) && flags[kFLAGS.CORRUPTED_MARAE_KILLED] == 0) addButton(4, "Alraune", marae.alraunezeMe).hint("Visit godess island to turn yourself into Alraune.");
+		else addButtonDisabled(4, "Alraune", "");
 		addButton(14, "Back", places);
 	}
 
@@ -3652,11 +3694,19 @@ public function wakeFromBadEnd():void {
 				var hp:int = 15;
 				var fatigue:int = 5;
 				var mana:int = 10;
-				var soulforce:int = 0;
-				var wrath:int = 0;
-				var lust:int = 0;
+				var soulforce:int = 5;
+				var wrath:int = 1;
+				var lust:int = 1;
 				var statpoints:int = 5;
 				var perkpoints:int = 1;
+				if (player.level <= 6) {
+					hp += 15;
+					fatigue += 5;
+					mana += 10;
+					soulforce += 5;
+					wrath += 1;
+					lust += 1;
+				}
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
 					hp += 20;
 					lust += 2;
@@ -3705,7 +3755,7 @@ public function wakeFromBadEnd():void {
 					statpoints += 5;
 					perkpoints += 1;
 				}
-				mainView.levelButton.toolTipText = "Level up to increase your maximum HP by " + hp + ", maximum Fatigue by " + fatigue + ", maximum Mana by " + mana + ", maximum Soulforce by " + soulforce + ", maximum Wrath by " + wrath + " and maximum Lust by " + lust + "; gain " + statpoints + " attribute points and " + perkpoints + " perk points.";
+				mainView.levelButton.toolTipText = "Level up to increase your maximum: HP by " + hp + ", Lust by " + lust + ", Wrath by " + wrath + ", Fatigue by " + fatigue + ", Mana by " + mana + " and Soulforce by " + soulforce + "; gain " + statpoints + " attribute points and " + perkpoints + " perk points.";
 				if (flags[kFLAGS.AUTO_LEVEL] > 0 && allowAutoLevelTransition) {
 					CoC.instance.playerInfo.levelUpGo();
 					return true; //True indicates that you should be routed to level-up.
@@ -4459,14 +4509,45 @@ public function wakeFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 30) {
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 30) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 31;
 			clearOutput();
-			outputText("Text.");
+			outputText("What time is it? Time to get Re-Collared ^^ Unless you over been wolfy & godly emo collar user. Then no re-collaring for you. Also free bonus secondary stats for everyone. Everyones loves it? Or not? Also let bring Izmael from farm if he stuck there. Tripxi also getting fresh start ;)");
+			if (player.hasKeyItem("Fenrir Collar") >= 0) {
+				player.removeKeyItem("Fenrir Collar");
+				player.createKeyItem("Gleipnir Collar", 0, 0, 0, 0);
+			}
+			if (player.level > 6) {
+				player.HP += (15 * (6 + player.level));
+				player.fatigue += (5 * (6 + player.level));
+				player.mana += (10 * (6 + player.level));
+				player.soulforce += (5 * (6 + player.level));
+				player.wrath += (6 + player.level);
+				player.lust += (6 + player.level);
+			}
+			else {
+				player.HP += (15 * player.level);
+				player.fatigue += (5 * player.level);
+				player.mana += (10 * player.level);
+				player.soulforce += (5 * player.level);
+				player.wrath += player.level;
+				player.lust += player.level;
+			}
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1 && flags[kFLAGS.IZMA_BROFIED] == 1) flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 0;
+			if (flags[kFLAGS.MARAE_ISLAND] < 1 && flags[kFLAGS.MET_MARAE] == 1) flags[kFLAGS.MARAE_ISLAND] = 1;
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
+				player.removeStatusEffect(StatusEffects.TelAdreTripxi);
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns1);
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns2);
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns3);
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns4);
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns5);
+				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns6);
+			}
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 31) {
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 31) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 32;
 			clearOutput();
 			outputText("Text.");
@@ -4954,11 +5035,17 @@ public function wakeFromBadEnd():void {
 		if (EvolvingItems >= 2) awardAchievement("Us Evolve", kACHIEVEMENTS.EPIC_US_EVOLVE);
 		//if (EvolvingItems >= 4) awardAchievement("They Evolve", kACHIEVEMENTS.EPIC_THEY_EVOLVE);
 		//if (EvolvingItems >= 8) awardAchievement("Everyone Evolve", kACHIEVEMENTS.EPIC_EVERYONE_EVOLVE);
+		var EvolutionsCount:int = 0;
+		if (AetherTwinsFollowers.AetherTwinsTalkMenu > 0) EvolutionsCount++;
+		if (EvolutionsCount >= 1) awardAchievement("Faster Harder Better Stronger Curvier!!! (1)", kACHIEVEMENTS.EPIC_F_H_B_S_CURVIER_1);
+		//if (EvolutionsCount >= 2) awardAchievement("Faster Harder Better Stronger Curvier!!! (2)", kACHIEVEMENTS.EPIC_F_H_B_S_CURVIER_2);
+		//if (EvolutionsCount >= 4) awardAchievement("Faster Harder Better Stronger Curvier!!! (3)", kACHIEVEMENTS.EPIC_F_H_B_S_CURVIER_3);
 
 		if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) awardAchievement("Guardian of Notre-Dame", kACHIEVEMENTS.EPIC_GUARDIAN_OF_NOTRE_DAME);
 		if (player.hasPerk(PerkLib.Phylactery)) awardAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA);
 		if (player.jiangshiScore() >= 20) awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
 		if (player.yukiOnnaScore() >= 14) awardAchievement("Let It Go", kACHIEVEMENTS.EPIC_LET_IT_GO);
+		//wendigo achiev
 
 		if (player.hasStatusEffect(StatusEffects.AchievementsNormalShadowTotal)) {
 			//Shadow
@@ -4987,4 +5074,4 @@ public function wakeFromBadEnd():void {
         }
         */
 	}
-}
+}

@@ -152,7 +152,7 @@ private function calledShot():void {
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 85, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("E+"));
+			createBreastRow(Appearance.breastCupInverse("DD"));
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,85,0,0,0);
@@ -171,8 +171,8 @@ private function calledShot():void {
 				'scimitar and shield': "slash"}[weapon];
 			this.weaponAttack = 20;
 			this.armorName = "scales";
-			this.armorDef = 12;
-			this.armorMDef = 1;
+			this.armorDef = 18;
+			this.armorMDef = 2;
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 175;

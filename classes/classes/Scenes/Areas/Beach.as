@@ -39,8 +39,9 @@ import classes.Scenes.SceneLib;
 			_beachEncounters = Encounters.group("beach",{
 				name: "harpoonGun",
 				when: function():Boolean {
-					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1;
+					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) == 0 && player.hasKeyItem("Harpoon gun") < 0;
 				},
+				chance: 30,
 				call: partsofHarpoonGun
 			}, {
 				//Helia monogamy fucks
@@ -192,7 +193,6 @@ import classes.Scenes.SceneLib;
 			clearOutput();
 			outputText("As you explore the beach you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
 			outputText("You carefully put the pieces of the Harpoon gun in your back and head back to your camp.\n\n");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 2, 1);
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Harpoon gun", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);

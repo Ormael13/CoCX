@@ -18,17 +18,15 @@ package classes.Items.Shields
 		}
 		
 		override public function get block():Number { 
-			var temp:int = 0;
-			temp += game.player.statusEffectv2(StatusEffects.AetherTwins1);
-			return temp; 
+			var boost:int = 0;
+			boost += game.player.statusEffectv2(StatusEffects.AetherTwins1);
+			return (0 + boost); 
 		}
 		
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
-			desc += "\n\nType: ";
-			if (game.player.statusEffectv4(StatusEffects.AetherTwins1) == 1) "Shield";
-			else "Shield";
+			desc += "\n\nType: Weapon (Gauntlet)";
 			//Block Rating
 			desc += "\nBlock: " + String(block);
 			//Value
