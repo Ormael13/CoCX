@@ -24,7 +24,7 @@ use namespace CoC;
 		public function exploreOuterBattlefield():void {
 			flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD]++;
 			//Twin Grakaturd
-			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) == 0 && player.hasKeyItem("Twin Grakaturd") < 0 && rand(2) == 0) {
 				partsofTwinGrakaturd();
 				return;
 			}
@@ -144,7 +144,6 @@ use namespace CoC;
 			clearOutput();
 			outputText("As you explore the (outer) battlefield, you run into what appears to be the half buried remains of an old contraption. This might just be what that gun vendor was talking about! You proceed to dig up the items realizing this to indeed be the remains of a broken firearm.\n\n");
 			outputText("You carefully put the pieces of the Twin Grakaturd in your back and head back to your camp.\n\n");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 1, 1);
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Twin Grakaturd", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);

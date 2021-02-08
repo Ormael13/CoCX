@@ -98,7 +98,7 @@ package classes.Scenes.Places.HeXinDao
 
 		private function shadyPerson():void {
 			clearOutput();//Felix - male beffy bro nekomata twin herald npc
-			outputText("\"<i>Wanna buy something?</i>\" askes the cat head while dog one adds almost barking \"<i>Or get lost...</i>\"\n\n");
+			outputText("\"<i>Wanna buy something?</i>\" askes the cat head while dog one adds almost barking, \"<i>Or get lost...</i>\"\n\n");
 			menu();
 			addButton(10, necklaces.EZEKIELN.shortName, itemBuy, necklaces.EZEKIELN);
 			addButton(11, headjewelries.EZEKIELC.shortName, itemBuy, headjewelries.EZEKIELC);

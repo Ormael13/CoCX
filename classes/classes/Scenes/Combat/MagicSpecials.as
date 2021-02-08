@@ -5,6 +5,7 @@ import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hair;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
@@ -261,6 +262,22 @@ public class MagicSpecials extends BaseCombatContent {
 			if(player.hasStatusEffect(StatusEffects.CooldownWindScythe)) {
 				bd.disable("You need time to gather enough winds to unleash a wind scythe again.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		}
+		if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2) {
+			bd = buttons.add("Chaos beams", ChaosBeams).hint("Unleash a salvo of random eye beams at your opponent. \n", "Chaos beams");
+			bd.requireFatigue(spellCost((player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) * 10)));
+			//Not Ready Yet:
+			if(player.hasStatusEffect(StatusEffects.CooldownChaosBeams)) {
+				bd.disable("You need time to gather enough winds to unleash a Chaos beams again.");
+			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		}
+		if (player.eyes.type == Eyes.MONOEYE && !monster.plural) {
+			bd = buttons.add("Dominating Gaze", DominatingGaze).hint("Obliterate your foe sense of self with your powerful gaze. \n", "Dominating Gaze");
+			bd.requireFatigue(spellCost(50));
+			//Not Ready Yet:
+			/*if(player.hasStatusEffect(StatusEffects.CooldownWindScythe)) {
+				bd.disable("You need time to gather enough winds to unleash a wind scythe again.");
+			} else */if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.hasPerk(PerkLib.DragonFireBreath)) {
 			bd = buttons.add("Dragon(Fire)", dragonfireBreath);
@@ -539,7 +556,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Displacement again.\n\n");
 			}
 		}
-		if (player.raccoonScore()>=14 && !monster.plural) {
+		if (player.raccoonScore() >= 14 && !monster.plural) {
 			bd = buttons.add("Prank", Prank).hint("Distract the enemy for 1 round interupting its action. \n\nWould go into cooldown after use for: 5 rounds", "Prank");
 			if (player.hasStatusEffect(StatusEffects.CooldownPrank)) {
 				bd.disable("You need more time before you can prank your opponent again.");
@@ -4198,9 +4215,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.teased(lustDmg, false);
 	}
 	private function FaeStormSleep(damage:Number):void{
-		if(monster.plural) {
-			outputText("are sent straight to the dream lands by the spell’s powerful hypnotic effects");
-		}
+		if (monster.plural) outputText("are sent straight to the dream lands by the spell’s powerful hypnotic effects");
 		else outputText("is sent straight to the dream lands by the spell’s powerful hypnotic effects");
 		monster.createStatusEffect(StatusEffects.Sleep,2,0,0,0);
 	}
@@ -4771,6 +4786,112 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 		}
 		else combatRoundOver();
+	}
+	
+	public function ChaosBeams():void {
+		clearOutput();
+		player.createStatusEffect(StatusEffects.CooldownChaosBeams,12,0,0,0);
+		fatigue((player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) * 10), USEFATG_MAGIC_NOBM);
+		outputText("You shoot a salvo of chaotic eye beams at your foe. ");
+		ChaosBeamsRulette();
+		ChaosBeamsRulette();
+		if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 4) {
+			ChaosBeamsRulette();
+			ChaosBeamsRulette();
+		}
+		if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6) {
+			ChaosBeamsRulette();
+			ChaosBeamsRulette();
+		}
+		if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+			ChaosBeamsRulette();
+			ChaosBeamsRulette();
+		}
+		if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+			ChaosBeamsRulette();
+			ChaosBeamsRulette();
+		}
+		outputText("\n\n");
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	public function ChaosBeamsRulette():void {
+		var damage:Number = scalingBonusIntelligence() * spellModWhite();
+		switch (rand(10)) {
+			case 0:
+				outputText(monster.capitalA + monster.short + " takes heavy electricity damage from the eyebeam! ");
+				doLightingDamage((damage * 3), true, true);
+				break;
+			case 1:
+				outputText(monster.capitalA + monster.short + "  starts to burn as " + monster.pronoun3 + " body catches fire from the eyebeam! ");
+				doFireDamage(damage, true, true);
+				if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
+				else monster.createStatusEffect(StatusEffects.BurnDoT, 2, 0.01, 0, 0);
+				break;
+			case 2:
+				outputText(monster.capitalA + monster.short + "  turns green as a potent poison inflicted by the eyebeam saps " + monster.pronoun3 + " strength! ");
+				doPoisonDamage(damage, true, true);
+				var strDebuff:Number = 0;
+				if (monster.spe >= 6) strDebuff += 5;
+				else strDebuff += 5 - monster.spe;
+				monster.strStat.core.value -= strDebuff;
+				var speDebuff:Number = 0;
+				if (monster.spe >= 6) speDebuff += 5;
+				else speDebuff += 5 - monster.spe;
+				monster.speStat.core.value -= speDebuff;
+				break;
+			case 3:
+				outputText(monster.capitalA + monster.short + "  skin is covered with ice from the eyebeam as the air surrounding " + monster.pronoun2 + " freezes solid! ");
+				doIceDamage(damage, true, true);
+				if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
+				else monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				break;
+			case 4:
+				outputText(monster.capitalA + monster.short + "  takes heavy cold damage! ");
+				doIceDamage((damage * 3), true, true);
+				break;
+			case 5:
+				outputText(monster.capitalA + monster.short + "  is magically aroused by the eyebeam. ");
+				var lustDmg:Number = player.lib / 10;
+				monster.teased(lustDmg);
+				break;
+			case 6:
+				outputText("The eyebeam’s powerful hypnotic effects send your target straight to the dream lands! ");
+				if (monster.hasStatusEffect(StatusEffects.Sleep)) monster.addStatusValue(StatusEffects.Sleep, 1, 1);
+				else monster.createStatusEffect(StatusEffects.Sleep,2,0,0,0);
+				break;
+			case 7:
+				outputText(monster.capitalA + monster.short + " is turned to stone by the petrification ray shooting from your eyestalk! It's going to be immobile for a while. ");
+				if (monster.hasStatusEffect(StatusEffects.Stunned)) monster.addStatusValue(StatusEffects.Stunned, 1, 1);
+				else monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+				break;
+			case 8:
+				outputText(monster.capitalA + monster.short + " takes heavy fire damage being seared by the ray shooting from one of your eyestalks! ");
+				doFireDamage((damage * 3), true, true);
+				break;
+			case 9:
+				outputText(monster.capitalA + monster.short + " is struck by your disintegration ray! ");
+				if (rand(2) == 0) {
+					outputText("It manages to avoid most of the beam damage. ");
+					doMagicDamage((damage * 2), true, true);
+				}
+				else {
+					outputText("It takes tremendous damage as the beam creates a hole in " + monster.pronoun3 + " body! ");
+					doMagicDamage((damage * 10), true, true);
+				}
+				break;
+		}
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+	}
+	
+	public function DominatingGaze():void {
+		clearOutput();
+		fatigue(50, USEFATG_MAGIC_NOBM);
+		outputText("You gaze deep into " + monster.a + monster.short + " eyes smashing " + monster.pronoun3 + " thoughts and resolve to nothingness along the way. " + monster.Pronoun3 + " is nothing, you are everything. " + monster.capitalA + monster.short + " is left stunned by the experience.\n\n");
+		//player.createStatusEffect(StatusEffects.CooldownNet,8,0,0,0);
+		monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+		enemyAI();
 	}
 
 	public function ElementalAspectAir():void {

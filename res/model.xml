@@ -618,7 +618,7 @@
         <cell rect="1444,158,40,55" name="clothCape/TamamoeNoMaeKimonoUnder" dx="85" dy="121"/>
         <cell rect="1013,56,40,13" name="clothCape/TamamoeNoMaeKimonoCollar" dx="85" dy="68"/>
         <cell rect="1509,216,80,100" name="clothCape_bg/merchantClotheCape_bg" dx="65" dy="64"/>
-        <cell rect="150,91,35,25" name="eyes/SpecialForeheadShadow" dx="81" dy="35"/>
+        <cell rect="150,91,35,25" name="forehead/SpecialForeheadShadow" dx="81" dy="35"/>
         <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="1318,158,20,55" name="glove_fg/vampireClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="517,1550,30,20" name="glove_fg/fairyQueenDressArmFront" dx="105" dy="75"/>
@@ -1993,9 +1993,9 @@
 
         <!--In the event player corruption is maxed enter yandere mode forehead-->
         <if test="cor &gt;=100">
-            <show part="eyes/SpecialForeheadShadow"/>
+            <show part="forehead/SpecialForeheadShadow"/>
             <if test="eyes.type= Eyes.CENTIPEDE">
-                <hide part="eyes/SpecialForeheadShadow"/>
+                <hide part="forehead/SpecialForeheadShadow"/>
             </if>
         </if>
 

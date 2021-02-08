@@ -10040,7 +10040,7 @@ public final class Mutations extends MutationsHelper {
 			setLowerBody(LowerBody.GAZER);
             changes++;
         }
-		if (player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+		if (player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.GARGOYLE && ((type == 0) || (player.lowerBody != LowerBody.GAZER && type == 1)) && changes < changeLimit && rand(3) == 0) {
             humanizeLowerBody();
             changes++;
         }

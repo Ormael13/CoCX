@@ -59,6 +59,7 @@ package classes.Scenes.Areas.GlacialRift
 		
 		public function loseToWendigo():void {
 			clearOutput();
+			if (!player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger)) player.createStatusEffect(StatusEffects.WendigoPsychosis,168,0,0,0);
 			outputText("You fall on the ground defeated and the wendigo howls victoriously, which only helps in preventing you from escaping. The thing begins to speak in a very psychotic manner.\n\n");
 			outputText("\"<i>Hungry… so HUNGRY! Give me... GIVE ME!</i>\"\n\n");
 			outputText("Just how hungry is she.. is she about to devour you alive?! Your question is swiftly answered as she strips and tosses your equipment to the side zeroing right up onto your crotch.\n\n");

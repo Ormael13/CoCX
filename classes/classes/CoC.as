@@ -69,7 +69,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 30;
+    public var modSaveVersion:Number = 31;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
@@ -248,7 +248,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8p";
-			version = ver + " (<b></b>)";
+			version = ver + " (<b>Cyclop/Gazer TF, Aether Twins first evo, New Bosses in Ebon Labyrinth, Mastery for melee weapons (part 1), many small changes and bugfixes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
