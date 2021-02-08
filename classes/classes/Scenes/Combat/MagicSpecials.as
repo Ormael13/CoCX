@@ -4811,6 +4811,7 @@ public class MagicSpecials extends BaseCombatContent {
 			ChaosBeamsRulette();
 			ChaosBeamsRulette();
 		}
+		outputText("\n\n");
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
@@ -4887,7 +4888,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function DominatingGaze():void {
 		clearOutput();
 		fatigue(50, USEFATG_MAGIC_NOBM);
-		outputText("You gaze deep into " + monster.a + monster.short + " eyes smashing " + monster.pronoun3 + " thoughts and resolve to nothingness along the way. " + monster.Pronoun3 + " is nothing, you are everything. " + monster.capitalA + monster.short + " is left stunned by the experience.");
+		outputText("You gaze deep into " + monster.a + monster.short + " eyes smashing " + monster.pronoun3 + " thoughts and resolve to nothingness along the way. " + monster.Pronoun3 + " is nothing, you are everything. " + monster.capitalA + monster.short + " is left stunned by the experience.\n\n");
 		//player.createStatusEffect(StatusEffects.CooldownNet,8,0,0,0);
 		monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 		enemyAI();

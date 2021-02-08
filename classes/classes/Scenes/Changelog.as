@@ -89,11 +89,19 @@ package classes.Scenes
 			outputText("-Fixed bugs: Liadri bugfixes, Pyro bugfixes/typo corrections, Cold Fish Soup missing it main intendeed effect (libido lowering), super perk points not reseting on ascension, gremlin tf text error, some of the scenes only looking for correct size of 1st cock ignoring any other PC could have\n\n");
 			outputText("<b>Version 0.8p:</b>\n\n");
 			outputText("-New tier 1 speed lvl-up perk: Dual Wield (Normal). Req. Dual Wield and Job: Dervish/Warrior perks. Effect: decrease penalty to accuracy from 25% to 15% and decrease damage penalty from 50% to 30% when usiong normal sized dual wield melee weapons.\n");
+			outputText("-New mutation perk: Omnicaster. Gained after having 6+ gazer eyestalks. Split casted damage dealing spells among all eyestalks. Each splitted spell deal 20% of orginal damage.\n");
+			outputText("-New mutation perk: True Seeing. Req. to gain monoeye. PC gain 20% to accuracy for melee and range attacks. Also negate evasion bonus for enemies using unconventional ways of evasion like displacement.\n");
+			outputText("-New mutation perk: Verdant Might. Req. 11+ in plant/alraune score. Effects: As a plant when using natural weapon your damage scaling is based on Toughness instead of strength. (change by Liadri)\n");
+			outputText("-3 new perk for harpies and score update for all members of the harpy family tree. (change by Liadri)\n");
+			outputText("-7 new unarmed combat perks! (by Liadri)\n");
 			outputText("-New range weapon/tome (by Ormael): Golemancy Evocation Manuscript - buyable at golemancer shop in He'Xin'Dao. Cost 200 gems. Increase golems damage by 50% of base value.\n");
 			outputText("-New range weapon/tome (by Ormael): Elementalist’s Tome - buyable at Giacomo. Cost 200 gems. Increase elementals damage by 50% of base value.\n");
 			outputText("-New ring (by Ormael): Ezekiel's Signet - buyable at Felix in Journey to the East inn. Cost 10 spirit stones. Negate 1 racial perk point negative effect.\n");
 			outputText("-New head jewelery/accesory/misc (by Ormael): Ezekiel's Crown - buyable at Felix in Journey to the East inn. Cost 40 spirit stones. Negate up to 4 racial perk points negative effects.\n");
 			outputText("-New necklace (by Ormael): Ezekiel's Necklace - buyable at Felix in Journey to the East inn. Cost 50 spirit stones. Negate up to 5 racial perk points negative effects.\n");
+			outputText("-New M. Specials for Gazer race: Chaos beams, Dominating Gaze. First is attacking enemy with use of eye stalks dealing randomn effects by ech of them (and then 12 turns long cooldown). Second is power stun for 2 turns (none of enemies can resist it but not expect that some that can resist or even... turn the table could appear ingame).\n");
+			outputText("-New TF Items: Eye Dops & Magic Eye Drops. First can be found in cave areas and second is enhanced by Lumi verison of eye drops or drops from one of Ebon Labyrinth bosses. Cost 50 gems and would change user into Cyclop/Gazer.\n");
+			outputText("-Cyclop // Gazer race bonus stats for reaching (6/12+)//(7/14/21+) pts in score: +45/90% to str racial multi, +45/90% to tou racial multi // +30/55/80% to tou racial multi, -55/65/75% to spe racial multi, +80/130/180% to int racial multi, +50/90/130% to lib racial multi (Gazer and Eye Tyrant stages req. to have 6/10 eye stalk tentacles)\n");
 			outputText("-Bit of increased secondary stat bars gains for monsters at milestones to keep them protected from nuking by PC.\n");
 			outputText("-With too large diff in levels damage reduction will return 1 point of dmg instead of 0. With some effects form items or perks that will still give chance to get few points of dmg even if PC is vastly underleveled compared to enemy.\n");
 			outputText("-Huge, Gigantic, Colossal type of enemies gained now natural lvl diff bonus (it mean for level difference between PC and enemy they treated as few levels higher enemies than their displayed level). Huge +2, Gigantic +5, Colossal +10.\n");
@@ -126,11 +134,31 @@ package classes.Scenes
 			outputText("-Race & body part organization + enhanced body part editor (change by aimozg).\n");
 			outputText("-Added conversation about Luna to Aunt Nancy. (change by Scary Dragon Mom)\n");
 			outputText("-Game now knows if the full round attack is done in or includes feral ……combat. (change by Liadri)\n");
-			outputText("-New mutation perk: Verdant Might. Req. 11+ in plant/alraune score. Effects: As a plant when using natural weapon your damage scaling is based on Toughness instead of strength. (change by Liadri)\n");
-			outputText("-3 new perk for harpies and score update for all members of the harpy family tree. (change by Liadri)\n");
 			outputText("-New effect for pregnancy crazy races Pregomania. (change by Liadri)\n");
 			outputText("-New Updated Kitsune score (caps to 26 on NG+). (change by Liadri)\n");
 			outputText("-Two New legendary kimono availlable at Kaiba shop for a limited time. (change by Liadri)\n");
+			outputText("-Fix health bar beyond 100 000 not showing properly. (Liadri)\n");
+			outputText("-New body parts for cyclop/gazer. (by Liadri)\n");
+			outputText("-New updates to Yuu and Yeti TF. (by Liadri)\n");
+			outputText("-Fix Alvina combat moves she will no longuer randomly one shot players witheout prejudice but will still require a very powerful character to defeat. (Liadri)\n");
+			outputText("-Moved all interactions with Marae after first meeting from using Boat in Places to using Marae Island also located in Places (and it will unlock after first time meeting Marae obviously).\n");
+			outputText("-A bit higher req. to get ninetail kitunse stage of race bonuses and 2 tiers above this stage. Also way kitsune score is calculated is changed to allow to get few more points on averange.\n");
+			outputText("-Sand Witches chest with La Bova and Lactacid now hold two items more items and it properly get slowly refilled with each passing day just as text ingame suggest.\n");
+			outputText("-Moga Hen decided to buy more oddities i mean... valuable items from PC. Like Purple Crystal Shards. I mean since PC still not found use for them so then why not sell them to Moga and get sweet spirit stones instead?\n");
+			outputText("-Meeting Izma or otter girl was changed from each 8th/20th explore to each 6th/15th exploration of the Lake.\n");
+			outputText("-Finding Beautiful Bow / Staff / Shield been now limited to having matching starting job: Ranger / Sorcerer / Guardian. Also chance to find them was increased a bit.\n");
+			outputText("-When PC not have in camp night time active npc's it will not keep still clickable Followers / Lovers / Slaves buttons that would lead to empty menu with only Back / Leave button.\n");
+			outputText("-1 new shadow achievment.\n");
+			outputText("-Hybryd weapons using multiattack cap as those of normal sized not large sized weapons.\n");
+			outputText("-Some shady person appeared in Journey to the East inn that sells items currently. Maybe he will talk in future more too ^^\n");
+			outputText("-Diana encounter chance been increased and she takes much faster to level up (so determined player could get her into camp with good rng in like 2-3 ingame days). She can cure curses now too. Both causing set flat value lost from stats (-10 str) and bonus multi related one curses (-10% to str). She also can heal to max HP even if PC have overmaxHP more than 0.\n");
+			outputText("-Ayane also could help with curses. Not as good as Diana but it's still something, right? Also isn't it spounds like curses could become more common now that we got more than 'Only Luna' curse curing options? Nah probably you all and mine imagination...\n");
+			outputText("-Aether Twins get new options in their menu: Talk (3 subjects) and Feed (on equipment or materials). Feed allow to give twins some specific melee or shield equipment to make them eat it and gain new properties after reaching evolution.\n");
+			outputText("-First evolution for Twins enabled (req. only 3 items feed to them) - it will allow twins to stun or apply bleed to attacked enemeis and their block value rising to 5. After Evolution they can eat materials like silver ignots and they unlocks 2 additional talk options.\n");
+			outputText("-Three new bosses can be found in room 200/250/300 of Ebon Labyrinth.\n");
+			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons, Izmael three bugs, Kiha scene checking for wrong cock type, making golem showing error if golem core(s) isn't(aren't) in PC intentory and instead in pc 'golem bag', disabling Golems submenu if PC not have temporal golems left to use, ");
+			outputText("displacer beast eyes blocking gaining fur tf, cancer enemy minor bugs, ascension stats and buffs lingering post ascension, Metal Plate finds on battlefield glitch, missing choices for Diana encounter in forest, Neisa looting in RD again after hiring her, goblin assassin having wrong sprite during fight, Chi Chi training req. core stat values instead of total stat values, Claws weapon having ");
+			outputText("100% not 10% chance to trigger bleed, lusty claws not have chance to apply bleed, magic crown not been sold in jewelry shop in TA, minotaurs sometimes missing post fight options, Firesnail sex scene error for male PC, Luna scene error with PC name\n");/*ostatni punkt changelogu
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -140,36 +168,11 @@ package classes.Scenes
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
 			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
-			outputText("-Moved all interactions with Marae after first meeting from using Boat in Places to using Marae Island also located in Places (and it will unlock after first time meeting Marae obviously).\n");
 			//outputText("-Dragon and Kitsune racial perks unlock been limited now by New Game tier in which PC is currently. Those that get all three 3 perks for dragons in NG or NG+... well you lucky until next ascension you not need worry on limits to get all 3 perklines for dragons.\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-A bit higher req. to get ninetail kitunse stage of race bonuses and 2 tiers above this stage. Also way kitsune score is calculated is changed to allow to get few more points on averange.\n");
-			outputText("-Sand Witches chest with La Bova and Lactacid now hold two items more items and it properly get slowly refilled with each passing day just as text ingame suggest.\n");
-			outputText("-Moga Hen decided to buy more oddities i mean... valuable items from PC. Like Purple Crystal Shards. I mean since PC still not found use for them so then why not sell them to Moga and get sweet spirit stones instead?\n");
-			outputText("-Meeting Izma or otter girl was changed from each 8th/20th explore to each 6th/15th exploration of the Lake.\n");
-			outputText("-Finding Beautiful Bow / Staff / Shield been now limited to having matching starting job: Ranger / Sorcerer / Guardian. Also chance to find them was increased a bit.\n");
-			outputText("-When PC not have in camp night time active npc's it will not keep still clickable Followers / Lovers / Slaves buttons that would lead to empty menu with only Back / Leave button.\n");
-			outputText("-Fix health bar beyond 100 000 not showing properly. (Liadri)\n");
-			outputText("-Fix Alvina combat moves she will no longuer randomly one shot players witheout prejudice but will still require a very powerful character to defeat. (Liadri)\n");
-			outputText("-1 new achievment. (shadow one)\n");
-			outputText("-New TF Items: Eye Dops & Magic Eye Drops. First can be found in cave areas and second is enhanced by Lumi verison of eye drops or drops from one of Ebon Labyrinth bosses. Cost 50 gems and would change user into Cyclop/Gazer.\n");
-			outputText("-Cyclop // Gazer race bonus stats for reaching (6/12+)//(7/14/21+) pts in score: +45/90% to str racial multi, +45/90% to tou racial multi // +30/55/80% to tou racial multi, -55/65/75% to spe racial multi, +80/130/180% to int racial multi, +50/90/130% to lib racial multi (gazer and Eye Tyrant stages req. to have 6/10 eye stalk tentacles)\n");
-			outputText("-New body parts for cyclop/gazer (by Liadri).\n");
-			outputText("-New updates to Yuu and Yeti TF\n");
-			outputText("-7 new unarmed combat perks!\n");
-			outputText("-Hybryd weapons using multiattack cap as those of normal sized not large sized weapons.\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Some shady person appeared in Journey to the East inn that sells items currently. Maybe he will talk in future more too ^^\n");
-			outputText("-Diana encounter chance been increased and she takes much faster to level up. She can cure curses now too. Both causing set flat value lost from stats (-10 str) and bonus multi related one curses (-10% to str). She also can heal to max HP even if PC have overmaxHP more than 0.\n");
-			outputText("-Ayane also could help with curses. Not as good as Diana but it's still something, right? Also isn't it spounds like curses could become more common now that we got more than 'Only Luna' curse curing options? Nah probably you all and mine imagination...\n");
-			outputText("-Aether Twins get new options in their menu: Talk (1 subject) and Feed (on equipment or materials). Feed allow to give twins some specific melee or shield equipment to make them eat it and gain new properties after reaching evolution.\n");
-			outputText("-First evolution for Twins enabled (req. only 3 items feed to them) - it will allow twins to stun or apply bleed to attacked enemeis and their block value rising to 5. After Evolution they can eat materials like silver ignots and they unlocks 2 additional talk options.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -184,9 +187,6 @@ package classes.Scenes
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed bugs: choice for getting job perks from past life always appearing during character creation, missing check for dual wield perk on two whip type weapons, Izmael three bugs, Kiha scene checking for wrong cock type, making golem showing error if golem core(s) isn't(aren't) in PC intentory and instead in pc 'golem bag', disabling Golems submenu if PC not have temporal golems left to use, ");
-			outputText("displacer beast eyes blocking gaining fur tf, cancer enemy minor bugs, ascension stats and buffs lingering post ascension, Metal Plate finds on battlefield glitch, missing choices for Diana encounter in forest, Neisa looting in RD again after hiring her, goblin assassin having wrong sprite during fight, Chi Chi training req. core stat values instead of total stat values, Claws weapon having ");
-			outputText("100% not 10% chance to trigger bleed, lusty claws not have chance to apply bleed, magic crown not been sold in jewelry shop in TA, minotaurs sometimes missing post fight options, Firesnail sex scene error for male PC\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

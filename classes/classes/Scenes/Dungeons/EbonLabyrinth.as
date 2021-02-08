@@ -894,13 +894,13 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				encountersLootChest();
 			}
 			//else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 14 && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne) && rand(10) == 0) supriseencounter();
-			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 2 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 4 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 6) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
-			//else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 50 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 100 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 150) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			//else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 2 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 4 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 6) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 50 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 100 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 150) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersRuletteBossesEL1();
 			}
-			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 12 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 14 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 16) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
-			//else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 200 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 250 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 300) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			//else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 12 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 14 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 16) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 200 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 250 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 300) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersRuletteBossesEL2();
 			}/*

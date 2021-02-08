@@ -1247,23 +1247,26 @@ public function tripxiShopMainMenu():void {
 			player.removeKeyItem("Derpnade Launcher");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 2, 1);
 		}
-	}
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
-		outputText("As you enter ringing the shop bell Tripxi move on from whatever weird experiment she was on to greet you at the counter.\n\n");
-		outputText("\"<i>Day [name] did you waltz over to buy firearms?</i>\"\n\n");
+		doNext(telAdreMenu);
 	}
 	else {
-		outputText("You approach a weird shop sign that says 'Tripxi's bombs and guns emporium' as you enter you hear something not unlike a kaboom inside.\n\n");
-		outputText("\"<i>NO NO NO NO and NO that's not it! Why mom didn't had the brain cells to just keep a sample of this tech when she was still sane!</i>\"\n\n");
-		outputText("A goblin is sitting by a workbench her face is darkened somewhat by what appears to be the aftermath of a recent explosion, firearms parts all around the table. She sigh in exasperation and turn toward the counter to handle her customer, namely you.\n\n");
-		outputText("\"<i>Welcome to Tripxi's bombs and guns emporium my name is Tripxi, how may I help you?</i>\"\n\n");
-		player.createStatusEffect(StatusEffects.TelAdreTripxi, 0, 0, 0, 0);
+		if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
+			outputText("As you enter ringing the shop bell Tripxi move on from whatever weird experiment she was on to greet you at the counter.\n\n");
+			outputText("\"<i>Day [name] did you waltz over to buy firearms?</i>\"\n\n");
+		}
+		else {
+			outputText("You approach a weird shop sign that says 'Tripxi's bombs and guns emporium' as you enter you hear something not unlike a kaboom inside.\n\n");
+			outputText("\"<i>NO NO NO NO and NO that's not it! Why mom didn't had the brain cells to just keep a sample of this tech when she was still sane!</i>\"\n\n");
+			outputText("A goblin is sitting by a workbench her face is darkened somewhat by what appears to be the aftermath of a recent explosion, firearms parts all around the table. She sigh in exasperation and turn toward the counter to handle her customer, namely you.\n\n");
+			outputText("\"<i>Welcome to Tripxi's bombs and guns emporium my name is Tripxi, how may I help you?</i>\"\n\n");
+			player.createStatusEffect(StatusEffects.TelAdreTripxi, 0, 0, 0, 0);
+		}
+		if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
+			flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
+			outputText("<b>New codex entry unlocked: Goblins!</b>")
+		}
+		tripxiShopMainMenu2a();
 	}
-	if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-		outputText("<b>New codex entry unlocked: Goblins!</b>")
-	}
-	tripxiShopMainMenu2a();
 }
 
 public function tripxiShopMainMenu2a():void {
@@ -1427,7 +1430,7 @@ private function tripxiShopTalkSmallSelection():void {
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns4, 0, 0, 0, 0);
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns5, 0, 0, 0, 0);
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns6, 0, 0, 0, 0);
-	player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+	player.addStatusValue(StatusEffects.TelAdreTripxi, 1, 1);
 	doNext(tripxiShopTalk2);
 }
 
