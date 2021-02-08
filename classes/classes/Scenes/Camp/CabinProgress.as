@@ -271,26 +271,37 @@ import classes.Scenes.SceneLib;
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		private function quarrySitePickaxe():void {
-			outputText("\n\nYou pick up the old mining tool. This should prove useful when digging up gems or stone from the landscape.");
+			outputText("\n\nYou pick up the old mining tool. This should prove useful when digging up gems, ore or stone from the landscape.");
 			player.createKeyItem("Old Pickaxe", 0, 0, 0, 0);
 			doNext(quarrySite);
 		}
 		private function quarrySiteMine():void {
 			if (player.fatigue > player.maxFatigue() - 50) {
-				outputText("\n\n<b>You are too tired to consider mining the stones. Perhaps some rest will suffice?</b>");
+				outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			outputText("\n\nYou begin slamming your pickaxe against the stone, spending the better part of the next few hours mining. This done, you bring back your prize to camp. ");
-			incrementStoneSupply(13 + Math.floor(player.str / 7));
-			if (rand (10) == 0) {
-				var gemsMined:Number = 1 + rand(4);
-				outputText(" Along with the stone you managed to dig up " + gemsMined + " gems!");
-				player.gems += gemsMined;
-			}
-			flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += (13 + Math.floor(player.str / 7));
+			var minedStones:Number = 13 + Math.floor(player.str / 7);
+			minedStones = Math.round(minedStones);
 			fatigue(50, USEFATG_PHYSICAL);
-			doNext(camp.returnToCampUseTwoHours);
+			if (rand(4) == 0) {
+				//if (minedStones > 50) minedStones = 50;
+				incrementStoneSupply(minedStones);
+				if (rand(2) == 0) inventory.takeItem(useables.TIN_ORE, camp.returnToCampUseTwoHours);
+				else inventory.takeItem(useables.COP_ORE, camp.returnToCampUseTwoHours);
+			}
+			else {
+				//if (minedStones > 50) minedStones = 50;
+				incrementStoneSupply(minedStones);
+				if (rand (10) == 0) {
+					var gemsMined:Number = 1 + rand(4);
+					outputText(" Along with the stone you managed to dig up " + gemsMined + " gems!");
+					player.gems += gemsMined;
+				}
+				flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += minedStones;
+				doNext(camp.returnToCampUseTwoHours);
+			}
 		}
 		
 		private function findOre():void { //Not used, will be in 1.1

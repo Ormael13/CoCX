@@ -247,8 +247,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8p";
-			version = ver + " (<b>Cyclop/Gazer TF, Aether Twins first evo, New Bosses in Ebon Labyrinth, Mastery for melee weapons (part 1), many small changes and bugfixes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8r";
+			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
