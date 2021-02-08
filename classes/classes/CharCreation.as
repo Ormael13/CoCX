@@ -26,6 +26,8 @@ import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
+import classes.Stats.BuffableStat;
+import classes.Stats.IStat;
 
 import coc.view.MainView;
 
@@ -161,6 +163,13 @@ import coc.view.MainView;
             }
 
 			model.player = player;
+			player.strStat.core.value = 15;
+			player.touStat.core.value = 15;
+			player.speStat.core.value = 15;
+			player.intStat.core.value = 15;
+			player.wisStat.core.value = 15;
+			player.libStat.core.value = 15;
+			player.sensStat.redefine({base:15});
 			player.cor = 15;
 			player.soulforce = 50;
 			player.wrath = 0;
@@ -363,6 +372,7 @@ import coc.view.MainView;
 			for (var i:int = 0; i < player.statusEffects.length; i++) {
 				if (isSpecialStatus(player.statusEffects[i])) statusTemp.push(player.statusEffects[i]);
 			}
+			player.cleanAllBuffs();
 			player.removeStatuses();
 			if (statusTemp.length > 0) {
 				for (i = 0; i < statusTemp.length; i++) {
@@ -1678,7 +1688,8 @@ import coc.view.MainView;
 			CoC.instance.saves.loadPermObject();
 			flags[kFLAGS.MOD_SAVE_VERSION] = CoC.instance.modSaveVersion;
 			statScreenRefresh();
-			chooseToPlayHalf();
+			if (player.hasPerk(PerkLib.PastLifeCultivator) || player.hasPerk(PerkLib.PastLifeFighter) || player.hasPerk(PerkLib.PastLifeScout) || player.hasPerk(PerkLib.PastLifeScholar) || player.hasPerk(PerkLib.PastLifeSmith) || player.hasPerk(PerkLib.PastLifeTactician) || player.hasPerk(PerkLib.PastLifeWhore)) chooseToPlayHalf();
+			else chooseToPlay();
 			return;
 		}
 
@@ -3639,6 +3650,24 @@ import coc.view.MainView;
 			player.tailType = Tail.NONE;
 			player.tailRecharge = 0;
 			player.level = 0;
+			player.masterySwordLevel = 0;
+			player.masterySwordXP = 0;
+			player.masteryAxeLevel = 0;
+			player.masteryAxeXP = 0;
+			player.masteryMaceHammerLevel = 0;
+			player.masteryMaceHammerXP = 0;
+			player.masteryDuelingSwordLevel = 0;
+			player.masteryDuelingSwordXP = 0;
+			player.masterySpearLevel = 0;
+			player.masterySpearXP = 0;
+			player.dualWSLevel = 0;
+			player.dualWSXP = 0;
+			player.dualWNLevel = 0;
+			player.dualWNXP = 0;
+			player.dualWLLevel = 0;
+			player.dualWLXP = 0;
+			player.dualWFLevel = 0;
+			player.dualWFXP = 0;
 			player.teaseLevel = 0;
 			player.teaseXP = 0;
 			player.herbalismLevel = 0;

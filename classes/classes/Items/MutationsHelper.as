@@ -465,7 +465,6 @@ import classes.BodyParts.Wings;
 		[Eyes.FOUR_SPIDER_EYES, StatusEffects.UnlockedSpiderFourEyes],
 		[Eyes.FOX, StatusEffects.UnlockedFoxEyes],
 		[Eyes.FROSTWYRM, null],
-		[Eyes.GAZER, null],
 		[Eyes.GEMSTONES, null],
 		[Eyes.GHOST, null],
 		[Eyes.GOAT, null],
@@ -478,6 +477,7 @@ import classes.BodyParts.Wings;
 		[Eyes.JIANGSHI, null],
 		[Eyes.KRAKEN, null],
 		[Eyes.MANTICORE, StatusEffects.UnlockedManticoreEyes],
+		[Eyes.MONOEYE, null],
 		[Eyes.ONI, StatusEffects.UnlockedOniEyes],
 		[Eyes.ORC, StatusEffects.UnlockedOrcEyes],
 		[Eyes.RAIJU, StatusEffects.UnlockedRaijuEyes],
@@ -700,6 +700,7 @@ import classes.BodyParts.Wings;
 		[RearBody.RAIJU_MANE, StatusEffects.UnlockedRaijuMane],
 		[RearBody.SHARK_FIN, StatusEffects.UnlockedSharkFin],
 		[RearBody.SNAIL_SHELL, null],
+		[RearBody.TENTACLE_EYESTALKS, null],
 		[RearBody.WOLF_COLLAR, null],
 		[RearBody.YETI_FUR, null],
 	]);

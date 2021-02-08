@@ -1,7 +1,8 @@
-﻿package classes {
+package classes {
 import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.SceneLib;
 
 import coc.xxc.BoundStory;
 import coc.xxc.Story;
@@ -37,6 +38,7 @@ public class PlayerAppearance extends BaseContent {
 		describeBeard();
 		describeTongue();
 		describeHorns();
+		describeVisage();
 		outputText("[pg]");
 		describeBodyShape();
 		describeWings();
@@ -230,7 +232,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText(Measurements.shortSuffix(int(player.nippleLength*10)/10));
 			//if (flags[kFLAGS.USE_METRICS] > 0 ) outputText(int(player.nippleLength * 2.54 * 10) / 10 + "-cm "); //Centimeter
 			//else outputText(int(player.nippleLength * 10) / 10 + "-inch "); //Inches
-			outputText(nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? " each." : "s each.")); //Description and Plural
+			outputText(" " + nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? " each." : "s each.")); //Description and Plural
 			if(player.breastRows[temp].breastRating >= 1)
 				outputText("  They could easily fill a " + player.breastCup(temp) + " bra.");
 			if(player.breastRows[temp].milkFullness > 75)
@@ -271,251 +273,9 @@ public class PlayerAppearance extends BaseContent {
 	}
 	if(player.lowerBody == LowerBody.MELKIE)
 	{
-		outputText("\nYou have a outer set of vaginal lips at the junction between your human body and seal tail in wich your internal sex and human legs and are hidden when not in uses.\n");
+		outputText("\nYou have a outer set of vaginal lips at the junction between your human body and seal tail in which your internal sex and human legs are hidden when not in use\n");
 	}
 	//Cock stuff!
-/*	temp       = 0;
-	var cock:* = player.cocks[temp];
-	if(player.cocks.length == 1)
-	{
-		if(player.isTaur())
-			outputText("\nYour equipment has shifted to lie between your hind legs, like a feral animal.");
-		if (player.isScylla())
-			outputText("\nYour equipment has shifted to lie between your front tentacles.");
-		if (player.isAlraune())
-			outputText("\nYour equipment has shifted to lie below your pitcher now in the form of a mass of tentacle vine.");
-		outputText("\nYour " + cockDescript(temp) + " is " + Measurements.inchesOrCentimetres(int(10*cock.cockLength)/10) + " long and ");
-		if(player.isTaur())
-			outputText("\nBetween hind legs of your bestial body you have grown " + player.multiCockDescript() + "!\n");
-		else if (player.isScylla())
-			outputText("\nBetween front tentacles of your bestial body you have grown " + player.multiCockDescript() + "!\n");
-		else outputText("\nWhere a penis would normally be located, you have instead grown " + player.multiCockDescript() + "!\n");
-
-        outputText(Measurements.inchesOrCentimetres(Math.round(10*cock.cockThickness)/10));
-		outputText((Math.round(10*cock.cockThickness)/10) < 10 ? " thick.":" wide.");
-
-		//Horsecock flavor
-		if(cock.cockType == CockTypesEnum.HORSE)
-		{
-			outputText("  It's mottled black and brown in a very animalistic pattern.  The 'head' of your shaft flares proudly, just like a horse's.");
-		}
-		//dog cock flavor
-		if((cock.cockType == CockTypesEnum.DOG) || (cock.cockType == CockTypesEnum.FOX) || (cock.cockType == CockTypesEnum.WOLF))
-		{
-			if(cock.knotMultiplier >= 1.8)
-				outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(temp) + " looks almost too big for your cock.");
-			else if(cock.knotMultiplier >= 1.4)
-				outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(temp) + ", to ensure it stays where it belongs during mating.");
-			else if(cock.knotMultiplier > 1)
-				outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge it inside a female.");
-			//List thickness
-			outputText("  The knot is " + Math.round(cock.cockThickness * cock.knotMultiplier * 10)/10 + " inches wide when at full size.");
-		}
-		//
-		//Demon cock flavor
-		if(cock.cockType == CockTypesEnum.DEMON) outputText("  The crown is ringed with a circle of rubbery protrusions that grow larger as you get more aroused.  The entire thing is shiny and covered with tiny, sensitive nodules that leave no doubt about its demonic origins.");
-		//Tentacle cock flavor
-		if(cock.cockType == CockTypesEnum.TENTACLE) outputText("  The entirety of its green surface is covered in perspiring beads of slick moisture.  It frequently shifts and moves of its own volition, the slightly oversized and mushroom-like head shifting in coloration to purplish-red whenever you become aroused.");
-		//Stamen cock flavor
-		if(cock.cockType == CockTypesEnum.STAMEN) outputText("  It is dark green, tampered, and crowned by several colorful balls near the tip that secrete pollen when aroused.");
-		//Cat cock flavor
-		if(cock.cockType == CockTypesEnum.CAT) outputText("  It ends in a single point, much like a spike, and is covered in small, fleshy barbs. The barbs are larger at the base and shrink in size as they get closer to the tip.  Each of the spines is soft and flexible, and shouldn't be painful for any of your partners.");
-		//Snake cock flavor
-		if(cock.cockType == CockTypesEnum.LIZARD) outputText("  It's a deep, iridescent purple in color.  Unlike a human penis, the shaft is not smooth, and is instead patterned with multiple bulbous bumps.");
-		//Anemone cock flavor
-		if(cock.cockType == CockTypesEnum.ANEMONE) outputText("  The crown is surrounded by tiny tentacles with a venomous, aphrodisiac payload.  At its base a number of similar, longer tentacles have formed, guaranteeing that pleasure will be forced upon your partners.");
-		//Kangawang flavor
-		if(cock.cockType == CockTypesEnum.KANGAROO) outputText("  It usually lies coiled inside a sheath, but undulates gently and tapers to a point when erect, somewhat like a taproot.");
-		//Draconic Cawk Flava flav
-		if(cock.cockType == CockTypesEnum.DRAGON) outputText("  With its tapered tip, there are few holes you wouldn't be able to get into.  It has a strange, knot-like bulb at its base, but doesn't usually flare during arousal as a dog's knot would.");
-		//Bee flavor
-		if (cock.cockType == CockTypesEnum.BEE) outputText("  It's a long, smooth black shaft that's rigid to the touch.  Its base is ringed with a layer of four inch long soft bee hair.  The tip has a much finer layer of short yellow hairs.  The tip is very sensitive, and it hurts constantly if you don’t have bee honey on it.");
-		//Pig flavor
-		if (cock.cockType == CockTypesEnum.PIG) outputText("  It's bright pinkish red, ending in a prominent corkscrew shape at the tip.");
-		//Avian flavor
-		if (cock.cockType == CockTypesEnum.AVIAN) outputText("  It's a red, tapered cock that ends in a tip.  It rests nicely in a sheath.");
-		//Rhino flavor
-		if (cock.cockType == CockTypesEnum.RHINO) outputText("  It's a smooth, tough pink colored and takes on a long and narrow shape with an oval shaped bulge along the center.");
-		//Echidna flavor
-		if (cock.cockType == CockTypesEnum.ECHIDNA) outputText("  It is quite a sight to behold, coming well-equiped with four heads.");
-		//Red Panda flavor
-		if (cock.cockType == CockTypesEnum.ECHIDNA) outputText("  It lies protected in a soft, fuzzy sheath.");
-		//Worm flavor
-		if(player.hasStatusEffect(StatusEffects.Infested))
-			outputText("  Every now and again a slimy worm coated in spunk slips partway out of your [cock], tasting the air like a snake's tongue.");
-		if(cock.sock)
-			sockDescript(temp);
-		//DONE WITH COCKS, moving on!
-		outputText("\n");
-	}
-	if(player.cocks.length > 1)
-	{
-		temp = 0;
-		rando = rand(4);
-		if(player.isTaur())
-			outputText("\nBetween hind legs of your bestial body you have grown " + player.multiCockDescript() + "!\n");
-		else if (player.isScylla())
-			outputText("\nBetween front tentacles of your bestial body you have grown " + player.multiCockDescript() + "!\n");
-		else outputText("\nWhere a penis would normally be located, you have instead grown " + player.multiCockDescript() + "!\n");
-		while(temp < player.cocks.length)
-
-		{
-
-			//middle cock description
-			if(rando == 0)
-			{
-				if(temp == 0)outputText("--Your first ");
-				else outputText("--Your next ");
-				outputText(player.cockDescript(temp));
-				outputText(" is ");
-				outputText(int(10*cock.cockLength)/10 + " inches long and ");
-				if(Math.floor(cock.cockThickness) >= 2)
-					outputText(num2Text(Math.round(cock.cockThickness * 10)/10) + " inches wide.");
-				else
-				{
-					if(cock.cockThickness == 1)
-						outputText("one inch wide.");
-					else outputText(Math.round(cock.cockThickness*10)/10 + " inches wide.");
-				}
-			}
-			if(rando == 1)
-			{
-				outputText("--One of your ");
-				outputText(player.cockDescript(temp) + "s is " + Math.round(10*cock.cockLength)/10 + " inches long and ");
-				if(Math.floor(cock.cockThickness) >= 2)
-					outputText(num2Text(Math.round(cock.cockThickness * 10)/10) + " inches thick.");
-				else
-				{
-					if(cock.cockThickness == 1)
-						outputText("one inch thick.");
-					else outputText(Math.round(cock.cockThickness*10)/10 + " inches thick.");
-				}
-			}
-			if(rando == 2)
-			{
-				if(temp > 0)
-					outputText("--Another of your ");
-				else outputText("--One of your ");
-				outputText(player.cockDescript(temp) + "s is " + Math.round(10*cock.cockLength)/10 + " inches long and ");
-				if(Math.floor(cock.cockThickness) >= 2)
-					outputText(num2Text(Math.round(cock.cockThickness * 10)/10) + " inches thick.");
-				else
-				{
-					if(cock.cockThickness == 1)
-						outputText("one inch thick.");
-					else outputText(Math.round(cock.cockThickness*10)/10 + " inches thick.");
-				}
-			}
-			if(rando == 3)
-			{
-				if(temp > 0)
-					outputText("--Your next ");
-				else outputText("--Your first ");
-				outputText(player.cockDescript(temp) + " is " + Math.round(10*cock.cockLength)/10 + " inches long and ");
-				if(Math.floor(cock.cockThickness) >= 2)
-					outputText(num2Text(Math.round(cock.cockThickness * 10)/10) + " inches in diameter.");
-				else
-				{
-					if(Math.round(cock.cockThickness*10)/10 == 1)
-						outputText("one inch in diameter.");
-					else outputText(Math.round(cock.cockThickness*10)/10 + " inches in diameter.");
-				}
-			}
-			//horse cock flavor
-			if(cock.cockType == CockTypesEnum.HORSE)
-			{
-				outputText("  It's mottled black and brown in a very animalistic pattern.  The 'head' of your " + player.cockDescript(temp) + " flares proudly, just like a horse's.");
-			}
-			//dog cock flavor
-			if((cock.cockType == CockTypesEnum.DOG) || (cock.cockType == CockTypesEnum.WOLF) || (cock.cockType == CockTypesEnum.FOX))
-			{
-				outputText("  It is shiny, pointed, and covered in veins, just like a large ");
-				if (cock.cockType == CockTypesEnum.DOG)
-					outputText("dog's cock.");
-				else if (cock.cockType == CockTypesEnum.WOLF)
-					outputText("wolf's cock.");
-				else
-					outputText("fox's cock.");
-			}
-			//Demon cock flavor
-			if(cock.cockType == CockTypesEnum.DEMON)
-			{
-				outputText("  The crown is ringed with a circle of rubbery protrusions that grow larger as you get more aroused.  The entire thing is shiny and covered with tiny, sensitive nodules that leave no doubt about its demonic origins.");
-			}
-			//Tentacle cock flavor
-			if(cock.cockType == CockTypesEnum.TENTACLE)
-			{
-				outputText("  The entirety of its green surface is covered in perspiring beads of slick moisture.  It frequently shifts and moves of its own volition, the slightly oversized and mushroom-like head shifting in coloration to purplish-red whenever you become aroused.");
-			}
-			//Stamen cock flavor
-			if(cock.cockType == CockTypesEnum.STAMEN)
-			{
-				outputText("  It is dark green, tampered, and crowned by several colorful balls near the tip that secrete pollen when aroused.");
-			}
-			//Cat cock flavor
-			if(cock.cockType == CockTypesEnum.CAT)
-			{
-				outputText("  It ends in a single point, much like a spike, and is covered in small, fleshy barbs. The barbs are larger at the base and shrink in size as they get closer to the tip.  Each of the spines is soft and flexible, and shouldn't be painful for any of your partners.");
-			}
-			//Snake cock flavor
-			if(cock.cockType == CockTypesEnum.LIZARD)
-			{
-				outputText("  It's a deep, iridescent purple in color.  Unlike a human penis, the shaft is not smooth, and is instead patterned with multiple bulbous bumps.");
-			}
-			//Anemone cock flavor
-			if(cock.cockType == CockTypesEnum.ANEMONE)
-			{
-				outputText("  The crown is surrounded by tiny tentacles with a venomous, aphrodisiac payload.  At its base a number of similar, longer tentacles have formed, guaranteeing that pleasure will be forced upon your partners.");
-			}
-			//Kangwang flavor
-			if(cock.cockType == CockTypesEnum.KANGAROO)
-			{
-				outputText("  It usually lies coiled inside a sheath, but undulates gently and tapers to a point when erect, somewhat like a taproot.");
-			}
-			//Draconic Cawk Flava flav
-			if(cock.cockType == CockTypesEnum.DRAGON)
-			{
-				outputText("  With its tapered tip, there are few holes you wouldn't be able to get into.  It has a strange, knot-like bulb at its base, but doesn't usually flare during arousal as a dog's knot would.");
-			}
-			//Bee flavor
-			if (cock.cockType == CockTypesEnum.BEE) {
-				outputText("  It's a long, smooth black shaft that's rigid to the touch.  Its base is ringed with a layer of four inch long soft bee hair.  The tip has a much finer layer of short yellow hairs.  The tip is very sensitive, and it hurts constantly if you don’t have bee honey on it.");
-			}
-			//Pig flavor
-			if (cock.cockType == CockTypesEnum.PIG) {
-				outputText("  It's bright pinkish red, ending in a prominent corkscrew shape at the tip.");
-			}
-			//Avian flavor
-			if (cock.cockType == CockTypesEnum.AVIAN) {
-				outputText("  It's a red, tapered cock that ends in a tip.  It rests nicely in a sheath.");
-			}
-
-			if(cock.knotMultiplier > 1) {
-				if(cock.knotMultiplier >= 1.8)
-					outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(temp) + " looks almost comically mismatched for your " + player.cockDescript(temp) + ".");
-				else if(cock.knotMultiplier >= 1.4)
-					outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(temp) + ", to ensure it stays where it belongs during mating.");
-				else
-					outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge your " + player.cockDescript(temp) + " inside a female.");
-				//List knot thickness
-				outputText("  The knot is " + Math.floor(cock.cockThickness * cock.knotMultiplier * 10) / 10 + " inches thick when at full size.");
-			}
-
-			if(cock.sock != "" && cock.sock != null)	// I dunno what was happening, but it looks like .sock is null, as it doesn't exist. I guess this is probably more left over from some of the restucturing.
-			{																		// Anyways, check against null values, and stuff works again.
-				trace("Found a sock description (WTF even is a sock?)", cock.sock);
-				sockDescript(temp);
-			}
-			temp++;
-			rando++;
-			outputText("\n");
-			if(rando > 3) rando = 0;
-		}
-		//Worm flavor
-		if(player.hasStatusEffect(StatusEffects.Infested))
-			outputText("Every now and again slimy worms coated in spunk slip partway out of your [cocks], tasting the air like tongues of snakes.\n");
-		//DONE WITH COCKS, moving on!
-	}*/
 	if (player.hasCock()) {
 		rando = rand(100);
 		//outputText("\nYour " + cockDescript(temp) + " is " + Measurements.inchesOrCentimetres(int(10*cock.cockLength)/10) + " long and ");
@@ -610,8 +370,8 @@ public class PlayerAppearance extends BaseContent {
 			if (player.skin.hasMagicalTattoo()) sdesc = " covered by magical tattoo";
 			else if (player.skin.hasBattleTattoo()) sdesc = " covered by battle tattoo";
 			else if (player.skin.hasLightningShapedTattoo()) sdesc = " covered with a few glowing lightning tattoos";
-			else if(player.skin.hasWindSweptScars()) sdesc = " covered with scars as if your skin was cut in various place by a windstorm";
-			else if(player.skin.hasOilySkin()) sdesc =" dripping with oily black fluids.";
+			else if (player.skin.hasWindSweptScars()) sdesc = " covered with scars as if your skin was cut in various place by a windstorm";
+			else if (player.skin.hasOilySkin()) sdesc =" dripping with oily black fluids.";
 			else if (player.skin.hasScarShapedTattoo()) sdesc = " covered by scar tattoos";
 			else if (player.skin.hasVenomousMarking()) sdesc = " covered by venomous marking";
 			else if (player.skin.hasWhiteBlackVeins()) sdesc = " covered by [base.color2] veins";
@@ -626,140 +386,169 @@ public class PlayerAppearance extends BaseContent {
 			else if (player.skinType == Skin.STONE) outputText("A stone-solid sack with [balls] swings heavily" + swingsWhere);
 			else if (player.skinType == Skin.GOO) outputText("An oozing, semi-solid sack with [balls] swings heavily" + swingsWhere);
 		}
+
 		outputText("  You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ");
 		if(Math.round(player.ballSize) == 1)
 			outputText("inch");
 		else outputText("inches");
 		outputText(" across.\n");
+		//Worms extra descript. To match as seen in infested hellhounds.
+		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) outputText("Across it's surface, random lumps move rapidly around, further proof of your infested sack, and it's wormy inhabitants that both boost and increase your cum production.\n")
+	} else {
+		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) outputText("Deep within your prostate you feel the worms moving, constantly rubbing against your trigger button, keeping you aroused and constantly churning up cum to be spewed out at a moment's notice.\n")
 	}
 	//VAGOOZ
-	if(player.vaginas.length > 0)
-	{
-		if(player.gender == 2 && player.isTaur() && player.lowerBody != 26)
+	//Handling multiple vagooz.
+	if (player.vaginas.length > 0){
+		var vagLoop:int = 0
+		var clitExists:int = 0
+		if((player.gender == 2 || player.gender == 3) && player.isTaur() && player.lowerBody != 26)//26 is scylla.
 			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.");
-		if(player.gender == 2 && (player.isScylla() || player.isKraken()))
+		if((player.gender == 2 || player.gender == 3) && (player.isScylla() || player.isKraken()))
 			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.");
-		outputText("\n");
 		if (player.vaginas.length == 1){
-			if(player.vaginaType() == VaginaClass.EQUINE){
-				outputText("Your " + vaginaDescript(0) + " is deep and wide just like that of a horse. Sometime you lament that most of your partners are no longer big enough to satisfy you. Inside you have a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+			if (player.lowerBody == LowerBody.MELKIE){
+				outputText("\nYou have a set of vaginal lips, "); //one twice as big as the other and hiding the smaller within its folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+			} else {
+				outputText("\nYour " + vaginaDescript(0));
 			}
-			else if (player.lowerBody == LowerBody.MELKIE){
-				outputText("You have two set of vaginal lips one twice as bigger then the other and hidding the smaller within it folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
-			}
-			else if(player.vaginaType() == VaginaClass.CANCER){
-				outputText("You have a foaming " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
-			}
-			else if (player.vaginaType() == VaginaClass.SCYLLA){
-				outputText("you have a " + vaginaDescript(0) + " with no clit. Instead, several concentric rings of small nubs line up the walls of your gaping maw of a vagina, each easily as sensitive as a human clitoris would be.");
-			}
-			else if (player.vaginaType() == VaginaClass.MANTICORE){
-				outputText("You have a ultrasensitive " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit. " +
-						"Your manticore vagina is so sensitive that you can't help but moan musical note out loud when touching yourself.");
-			}
-			else{
-            	outputText("You have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+		} else {
+			if (player.lowerBody == LowerBody.MELKIE){
+				outputText("\nYou have two sets of vaginal lips, the first set"); //set in pairs, one twice as big as the other and hiding the smaller within its folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit, and behind your second set of lips, you have a " + vaginaDescript(1) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit");
+			} else {
+				outputText("\nYour first " + vaginaDescript(0));
 			}
 		}
-		if(player.vaginas[0].virgin) outputText(" and an intact hymen");
-		outputText(".  ");
-		if (player.vaginas.length > 1){
-            outputText("You have " + player.vaginas.length+ " " + vaginaDescript(0) + "s, with " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clits each.  ");
-		}
-		if (player.vaginaType() == VaginaClass.CAVE_WYRM){
-			outputText("It constantly drools with acid. ");
-		}
-		if (player.vaginaType() == VaginaClass.VENOM_DRIPPING){
-			outputText("It constantly drools with aphrodisiac venom. ");
-		}
-		if (player.vaginaType() == VaginaClass.ALRAUNE){
-			outputText("Your vagina secretes aphrodisiac-like nectar, ensuring any stamen that parts your petals are sufficiently lubricated and ready to fertilize you. ");
-		}
-		if (player.vaginaType() == VaginaClass.CANCER){
-			outputText("It is constantly foaming in anticipation of a potential mate. ");
-		}
-		if(player.vaginaType() == VaginaClass.DEMONIC){
-			outputText("Your demonic vagina, unlike a normal pussy, feels and acts akin to a mouth that allows you to taste and savor the flavor of the cum injected within as if it landed on your tongue. Your sensitive walls are also prehensile, and you can control them to milk a cock just as well as your hand could. ");
-		}
-		if(player.lib < 50 && player.lust < 50) //not particularly horny
+		for(var i:int=0; i<player.vaginas.length; i++){
+			var vagType:int = player.vaginaType(-1, i) //It's not iterating properly to register the second pussy.
+			switch(vagType){ //missing black sand trap, maybe melkie.
+				case VaginaClass.EQUINE:
+					outputText(" is deep and wide just like that of a horse. Sometime you lament that most of your partners are no longer big enough to satisfy you. Inside you have a ");
+					break;
+				case VaginaClass.CANCER:
+					outputText(" is constantly foaming, in anticipation for a potential mate. Hidden within is a ");
+					break;
+				case VaginaClass.SCYLLA:
+					outputText(" has no clit. Instead, several concentric rings of small nubs line up the walls of your gaping maw of a vagina, each easily as sensitive as a human clitoris would be.");
+					clitExists++
+					break;
+				case LowerBody.MELKIE:
+					outputText(" set is twice as big as the other, and the other hidden within it's folds. Your outer lips hide a")
+					break;
+				case VaginaClass.MANTICORE:
+					outputText(" is ultrasensitive, even the slightest touch is enough to make you moan out a melody. Your song-box hides a ");
+					break;
+				case VaginaClass.CAVE_WYRM:
+					outputText(" constantly drools acid, small puffs of dissolving matter wafting up from beneath where you're standing. Your dissolving chamber hides a ");
+					break;
+				case VaginaClass.VENOM_DRIPPING:
+					outputText(" constantly drools an aphrodisiac venom, forcing any potential mates to be ready regardless of their physical state. Your lust-enhancers hides a ");
+					break;
+				case VaginaClass.ALRAUNE:
+					outputText(" constantly secretes aphrodisiac-like nectar, ensuring any stamen that parts your petals are sufficiently lubricated and ready to fertilize you. Your flower hides a ");
+					break;
+				case VaginaClass.DEMONIC:
+					outputText(", unlike a normal pussy, feels and acts akin to a mouth that allows you to taste and savor the flavor of the cum injected within as if it landed on your tongue. Your sensitive walls are also prehensile, and you can control them to milk a cock just as well as your hand could.  Your dexterous, cum-hungry twat hides a ");
+					break;
+				default:
+					outputText(" hides a ");
+					break;
+			}
+			//Clit check. Only for Scylla for now.
+			if (clitExists == 0) outputText(Measurements.shortSuffix(int(player.clitLength * 10) / 10) + " clit");
+			//Hymen check.
+			if(player.vaginas[i].virgin) {
+				outputText(". It's hymen is intact. ");
+			} else{
+				outputText(". ");
+			}
+			//Wetness check.
+			if(player.lib < 50 && player.lust < 50) //not particularly horny
+			{
+				//Wetness
+				if(player.vaginas[i].vaginalWetness >= VaginaClass.WETNESS_WET && player.vaginas[i].vaginalWetness< VaginaClass.WETNESS_DROOLING)
+					outputText("Moisture gleams in ");
+				if(player.vaginas[i].vaginalWetness>= VaginaClass.WETNESS_DROOLING)
+				{
+					outputText("Occasional beads of ");
+					outputText("lubricant drip from ");
+				}
+				//Different description based on vag looseness
+				if(player.vaginas[i].vaginalWetness>= VaginaClass.WETNESS_WET)
+				{
+					if(player.vaginas[i].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
+						outputText("your " + vaginaDescript(i) + ". ");
+					if(player.vaginas[i].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[i].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
+						outputText("your " + vaginaDescript(i) + ", its lips slightly parted. ");
+					if(player.vaginas[i].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
+						outputText("the massive hole that is your " + vaginaDescript(0) + ".  ");
+				}
+			}
+			if((player.lib>=50 || player.lust >=50) && (player.lib< 80 && player.lust < 80)) //kinda horny
 
-		{
-			//Wetness
-			if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_WET && player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_DROOLING)
-				outputText("Moisture gleams in ");
-			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_DROOLING)
 			{
-				outputText("Occasional beads of ");
-				outputText("lubricant drip from ");
-			}
-			//Different description based on vag looseness
-			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_WET)
-			{
-				if(player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
-					outputText("your " + vaginaDescript(0) + ". ");
-				if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
-					outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ");
-				if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
+				//Wetness
+				if(player.vaginas[i].vaginalWetness< VaginaClass.WETNESS_WET)
+					outputText("Moisture gleams in ");
+				if(player.vaginas[i].vaginalWetness>= VaginaClass.WETNESS_WET && player.vaginas[i].vaginalWetness< VaginaClass.WETNESS_DROOLING)
+				{
+					outputText("Occasional beads of ");
+					outputText("lubricant drip from ");
+				}
+				if(player.vaginas[i].vaginalWetness>= VaginaClass.WETNESS_DROOLING)
+				{
+					outputText("Thin streams of ");
+					outputText("lubricant occasionally dribble from ");
+				}
+				//Different description based on vag looseness
+				if(player.vaginas[i].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
+					outputText("your " + vaginaDescript(i) + ". ");
+				if(player.vaginas[i].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[i].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
+					outputText("your " + vaginaDescript(i) + ", its lips slightly parted. ");
+				if(player.vaginas[i].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
 					outputText("the massive hole that is your " + vaginaDescript(0) + ".  ");
 			}
-		}
-		if((player.lib>=50 || player.lust >=50) && (player.lib< 80 && player.lust < 80)) //kinda horny
-
-		{
-			//Wetness
-			if(player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_WET)
-				outputText("Moisture gleams in ");
-			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_WET && player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_DROOLING)
-			{
-				outputText("Occasional beads of ");
-				outputText("lubricant drip from ");
-			}
-			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_DROOLING)
-			{
-				outputText("Thin streams of ");
-				outputText("lubricant occasionally dribble from ");
-			}
-			//Different description based on vag looseness
-			if(player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
-				outputText("your " + vaginaDescript(0) + ". ");
-			if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
-				outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ");
-			if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
-				outputText("the massive hole that is your " + vaginaDescript(0) + ".  ");
-		}
-		if((player.lib> 80 || player.lust > 80)) //WTF horny!
-
-		{
-			//Wetness
-			if(player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_WET)
+			if((player.lib> 80 || player.lust > 80)) //WTF horny!
 
 			{
-				outputText("Occasional beads of ");
-				outputText("lubricant drip from ");
-			}
-			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_WET && player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_DROOLING)
+				//Wetness
+				if(player.vaginas[i].vaginalWetness< VaginaClass.WETNESS_WET)
 
-			{
-				outputText("Thin streams of ");
-				outputText("lubricant occasionally dribble from ");
-			}
-			if(player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_DROOLING)
+				{
+					outputText("Occasional beads of ");
+					outputText("lubricant drip from ");
+				}
+				if(player.vaginas[i].vaginalWetness>= VaginaClass.WETNESS_WET && player.vaginas[i].vaginalWetness< VaginaClass.WETNESS_DROOLING)
 
-			{
-				outputText("Thick streams of ");
-				outputText("lubricant drool constantly from ");
+				{
+					outputText("Thin streams of ");
+					outputText("lubricant occasionally dribble from ");
+				}
+				if(player.vaginas[i].vaginalWetness>= VaginaClass.WETNESS_DROOLING)
+
+				{
+					outputText("Thick streams of ");
+					outputText("lubricant drool constantly from ");
+				}
+				//Different description based on vag looseness
+				if(player.vaginas[i].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
+					outputText("your " + vaginaDescript(i) + ". ");
+				if(player.vaginas[i].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[i].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
+					outputText("your " + vaginaDescript(i) + ", its lips slightly parted. ");
+				if(player.vaginas[i].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
+					outputText("the massive hole that is your cunt.  ");
 			}
-			//Different description based on vag looseness
-			if(player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE)
-				outputText("your " + vaginaDescript(0) + ". ");
-			if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE)
-				outputText("your " + vaginaDescript(0) + ", its lips slightly parted. ");
-			if(player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE)
-				outputText("the massive hole that is your cunt.  ");
+
+			if (player.vaginas.length > 1 && vagLoop == 0){
+				outputText("\n\nYour second " + vaginaDescript(1)+ " ");
+				vagLoop++
+				clitExists = 0
+			}
 		}
 		//Line Drop for next descript!
 		outputText("\n");
 	}
+
 	//Genderless lovun'
 	if(player.cockTotal() == 0 && player.vaginas.length == 0)
 		outputText("\nYou have a curious lack of any sexual endowments.\n");
@@ -812,11 +601,30 @@ public class PlayerAppearance extends BaseContent {
 	menu();
 	addButton(0, "Next", playerMenu);
 	if (player.hasPerk(PerkLib.RacialParagon)) addButton(1, "Set Race.", ApexRaceSetting);
+	addButton(2, "Weap View", WeaponDisplay);
 	addButton(7, "Reflect", campActionsReflect).hint("Reflect on your current state and future plans. (Also would make your body fully adjust to any sudden changes to natural limits of your attributes after eating any odd things and etc.)");
 	addButton(11, "Gender Set.", GenderForcedSetting);
 	addButton(10, "RacialScores", RacialScores);
 	flushOutputTextToGUI();
 }
+
+	public function	WeaponDisplay():void {
+		clearOutput();
+		outputText("Select which weapon type you would prefer to see in the character portrait.");
+		if (flags[kFLAGS.WEAPON_DISPLAY_FLAG] == 0) outputText("\n\nDisplay Style: <b>Melee</b>");
+		if (flags[kFLAGS.WEAPON_DISPLAY_FLAG] == 1) outputText("\n\nDisplay Style: <b>Ranged</b>");
+		mainView.hideAllMenuButtons();
+		menu();
+		addButton(0, "Melee", WeaponDisplaySwitch, 0).disableIf(flags[kFLAGS.WEAPON_DISPLAY_FLAG] == 0, "You are already displaying Melee weapons");
+		addButton(1, "Ranged", WeaponDisplaySwitch, 1).disableIf(flags[kFLAGS.WEAPON_DISPLAY_FLAG] == 1, "You are already displaying Ranged weapons");
+		addButton(14, "Back", appearance);
+	}
+
+	public function	WeaponDisplaySwitch(Display:Number):void {
+		flags[kFLAGS.WEAPON_DISPLAY_FLAG] = Display;
+		WeaponDisplay();
+	}
+
 	public function ApexRaceSetting():void {
 		clearOutput();
 		mainView.hideAllMenuButtons();
@@ -881,10 +689,10 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.necklaceName != "nothing")
 			outputText(" On your neck is a " + player.necklaceName + ".");
-		if (player.hasKeyItem("Fenrir Collar") >= 0) {
+		if (player.hasKeyItem("Gleipnir Collar") >= 0) {
 			if (player.necklaceName != "nothing") outputText(" Benath it is ");
 			else outputText(" On your neck is ");
-			outputText("a Fenrir spiked Collar its chain still hanging down from it and clinking with an ominous metallic sound as you walk around.");
+			outputText("Fenrir's spiked Collar, pieces of the spectral chain Gleipnir still dangling from it, floating weightlessly and tracing your movements.");
 		}
 		if (player.jewelryName != "nothing") {
 			outputText(" At one of your right hand fingers is a " + player.jewelryName + "");
@@ -1124,7 +932,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.lowerBody == LowerBody.KANGAROO)
 			outputText("  Your " + num2Text(player.legCount) + " furry legs have short thighs and long calves, with even longer feet ending in prominently-nailed toes.");
 		else if (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS)
-			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a reflective black, insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
+			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a reflective "+player.coatColor+", insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
 		else if (player.lowerBody == LowerBody.CRAB)
 			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a reflective "+player.coatColor+", crab like carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
 		else if (player.lowerBody == LowerBody.FOX)
@@ -1235,7 +1043,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.tailType == Tail.COW)
 			outputText("  A long cowtail with a puffy tip swishes back and forth as if swatting at flies.");
 		if (player.tailType == Tail.SPIDER_ADBOMEN) {
-			outputText("  A large, spherical spider-abdomen has grown out from your backside, covered in shiny black chitin.  Though it's heavy and bobs with every motion, it doesn't seem to slow you down.");
+			outputText("  A large, spherical spider-abdomen has grown out from your backside, covered in shiny "+player.coatColor+" chitin.  Though it's heavy and bobs with every motion, it doesn't seem to slow you down.");
 			if (player.tailVenom > 50 && player.tailVenom < 80)
 				outputText("  Your bulging arachnid posterior feels fairly full of webbing.");
 			if (player.tailVenom >= 80 && player.tailVenom < 100)
@@ -1403,7 +1211,7 @@ public class PlayerAppearance extends BaseContent {
 		if (armType == Arms.PHOENIX)
 			outputText("  Crimson feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.");
 		else if (armType == Arms.SPIDER)
-			outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves from a distance.");
+			outputText("  Shining "+player.coatColor+" exoskeleton covers your arms from the biceps down, resembling a pair of long "+player.coatColor+" gloves from a distance.");
 		else if (armType == Arms.MANTIS)
 			outputText("  Shining "+player.coatColor+" exoskeleton covers your arms from the biceps down with a long and sharp scythes extending from the wrists.");
 		else if (armType == Arms.KAMAITACHI)
@@ -1508,7 +1316,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 	public function describeRearBody():void {
 		if (player.rearBody.type == RearBody.FENRIR_ICE_SPIKES) {
-			outputText("  Jagged ice shards grows out of your back providing both excellent defence and giving you a menacing look.");
+			outputText("  Jagged ice shards grows out of your back, providing excellent defence and chilling the air around you.");
 		}
 		else if (player.rearBody.type == RearBody.LION_MANE) {
 			outputText("  Around your neck there is a thick mane of [skin coat.color] fur. It looks great on you.");
@@ -1558,6 +1366,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.rearBody.type == RearBody.FUR_COAT) {
 			outputText("  On your back you wear a thick fur coat, not unlike a mantle complete with a hood always worn over your head it has a pair of holes just to let a pair of horns or rather antlers juts through it.");
 		}
+		else if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS) {
+			outputText(" A set of "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" tentacle eyestalks expand from your back giving you all around vision. They're gazes are charged with lethal magical powers.");
+		}
 	}
 	public function describeWings():void {
 	//WINGS!
@@ -1594,9 +1405,9 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Large wings sprout from your shoulders.  When unfurled they stretch further than your arm span, and a single beat of them is all you need to set out toward the sky.  They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.");
 		else if (wingType == Wings.DRACONIC_HUGE)
 			outputText("  Magnificent huge wings sprout from your shoulders.  When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky.  They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.");
-		else if (wingType == Wings.GIANT_DRAGONFLY)
+		if (wingType == Wings.GIANT_DRAGONFLY)
 			outputText("  Giant dragonfly wings hang from your shoulders.  At a whim, you could twist them into a whirring rhythm fast enough to lift you off the ground and allow you to fly.");
-		else if (wingType == Wings.GARGOYLE_LIKE_LARGE) {
+		if (wingType == Wings.GARGOYLE_LIKE_LARGE) {
 			outputText("  Large ");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
@@ -1605,11 +1416,8 @@ public class PlayerAppearance extends BaseContent {
 			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) outputText("bat");
 			outputText(" wings and, although they were made of stone, they allow you to fly around with excellent aerial agility.");
 		}
-		else if (wingType == Wings.PLANT) {
+		if (wingType == Wings.PLANT) {
 			outputText("  Three pairs of oily, prehensile phalluses sprout from your shoulders and back. From afar, they may look like innocent vines, but up close, each tentacle contain a bulbous head with a leaking cum-slit, perfect for mass breeding.");
-		}
-		else if (wingType == Wings.GAZER) {
-			outputText(" A set of "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" tentacle eyestalks expand from your back giving you all around vision. They're gazes are charged with lethal magical powers..");
 		}
 		if (wingType == Wings.BAT_ARM){
 			outputText("  Your large winged arms allow you to fly in a similar fashion to the bats they resemble. You sometimes wrap them around you like a cape when you walk around, so as to keep them from encumbering you. That being said, you far prefer using them for their intended purpose, traveling by flight whenever you can.");
@@ -1825,7 +1633,7 @@ public class PlayerAppearance extends BaseContent {
 		else if(eyeType == Eyes.GORGON)
 			outputText("  Your [eyecolor] eyes are similar to those of snake-like gorgons with ability to temporally petrify.");
 		else if(eyeType == Eyes.FENRIR)
-			outputText("  Your [eyecolor] eyes glows with a freezing blue light, icy smoke rising in the air around it.");
+			outputText("  Your [eyecolor] eyes glow with a freezing blue light, and wisps of icy mist drift from them.");
 		else if(eyeType == Eyes.MANTICORE)
 			outputText("  Your eyes are similar to those of a cat, with slit pupils. However, their [eyecolor] iris dismiss any links to the regular felines in favor of something way more ominous.");
 		else if(eyeType == Eyes.FOX)
@@ -1856,7 +1664,7 @@ public class PlayerAppearance extends BaseContent {
 		else if(eyeType == Eyes.GEMSTONES){
 			outputText("  Instead of regular eyes you see through a pair of gemstones that change hue based on your mood.");
 		}
-		else if(eyeType == Eyes.GAZER){
+		else if(eyeType == Eyes.MONOEYE){
 			outputText("  Your eye sockets have merged together to reform into a single cyclopean eye charged with powerful magical powers. Your almighty gaze is as peerless as its unsettling.");
 		}
 		else if(eyeType == Eyes.FERAL){
@@ -1922,12 +1730,12 @@ public class PlayerAppearance extends BaseContent {
 			else {
 				outputText("  You are totally bald, showing only shiny " + player.skinTone + " [skin.type]");
 				if(player.skin.hasMagicalTattoo()) outputText(" covered with [skin color2] magical tattoo");
-				else if(player.skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
-				else if(player.skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-				else if(player.skin.hasWindSweptScars()) outputText(" covered with scars as if your skin was cut in various place by a windstorm");
-				else if(player.skin.hasOilySkin()) outputText(" dripping with oily black fluids.");
-				else if(player.skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
-				else if(player.skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
+				else if (player.skin.hasBattleTattoo()) outputText(" covered with [skin color2] battle tattoo");
+				else if (player.skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
+				else if (player.skin.hasWindSweptScars()) outputText(" covered with scars as if your skin was cut in various place by a windstorm");
+				else if (player.skin.hasOilySkin()) outputText(" dripping with oily black fluids.");
+				else if (player.skin.hasScarShapedTattoo()) outputText(" covered with a few [skin color2] scar tattoos");
+				else if (player.skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 				outputText(" where your hair should be.");
 			}
 			if(earType == Ears.HORSE)
@@ -2197,8 +2005,8 @@ public class PlayerAppearance extends BaseContent {
 		if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 		else if (player.skin.hasBattleTattoo()) outputText(" covered with battle tattoo");
 		else if (player.skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos");
-		else if(player.skin.hasWindSweptScars()) outputText(" covered with scars as if your skin was cut in various place by a windstorm");
-		else if(player.skin.hasOilySkin())outputText(" dripping with oily black fluids");
+		else if (player.skin.hasWindSweptScars()) outputText(" covered with scars as if your skin was cut in various place by a windstorm");
+		else if (player.skin.hasOilySkin())outputText(" dripping with oily black fluids");
 		else if (player.skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos");
 		else if (player.skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins");
 	}
@@ -2424,17 +2232,17 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.WOLF) {
 			if (!player.hasCoat()) {
 				outputText("  You have a wolf-like face, complete with a wet nose.  ");
-				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
+				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("Your breath freezes the air, and cold mist leaks from your jaws.   ");
 				outputText("The odd visage is hairless and covered with [skin coat]");
 				tattooAndPatternGeneric();
 				outputText(".");
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeth.  ");
-				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ");
+				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("Your breath freezes the air, and cold mist leaks from your jaws.   ");
 				outputText("You've got [skin coat], hiding your [skin noadj] underneath your furry visage.");
 			} else {
 				outputText("  You have the facial structure of a wolf, wet nose and all, but overlaid with glittering patches of [skin coat].");
-				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("  Cold blue mist seems to periodically escape from your mouth.");
+				if (player.hasKeyItem("Gleipnir Collar") >= 0) outputText("  Your breath freezes the air, and cold mist leaks from your jaws.");
 			}
 		}
 		if (faceType == Face.WOLF_FANGS) {
@@ -2767,6 +2575,11 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.cowScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Cow-morph: " + player.cowScore() + " (+60% to Str racial multi, +10% to Tou racial multi, -20% to Spe racial multi, -10% to Int racial multi, +20% to Lib racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		else if (player.cowScore() >= 1) outputText("\n<font color=\"#008000\">Half Cow-morph: " + player.cowScore() + "</font>");
 		else if (player.cowScore() < 1) outputText("\n<font color=\"#ff0000\">Half Cow-morph: 0</font>");
+		//Cyclop
+		if (player.cyclopScore() >= 12) outputText("\n<font color=\"#0000a0\">Cyclop: " + player.cyclopScore() + " (+90% to Str racial multi, +90% to Tou racial multi)</font>");
+		else if (player.cyclopScore() >= 6) outputText("\n<font color=\"#0000a0\">Half Cyclop: " + player.cyclopScore() + " (+45% to Str racial multi, +45% to Tou racial multi)</font>");
+		else if (player.cyclopScore() >= 1) outputText("\n<font color=\"#008000\">Half Cyclop: " + player.cyclopScore() + "</font>");
+		else if (player.cyclopScore() < 1) outputText("\n<font color=\"#ff0000\">Half Cyclop: 0</font>");
 		//Dark Goo
 		if (player.darkgooScore() >= 17) outputText("\n<font color=\"#0000a0\">Dark Slime Queen: " + player.darkgooScore() + " (+115% to Tou racial multi, -50% to Spe racial multi, +45% to Int racial multi, +145% to Lib racial multi)</font>");
 		else if (player.darkgooScore() >= 13) outputText("\n<font color=\"#0000a0\">Dark Slime: " + player.darkgooScore() + " (+90% to Tou racial multi, -40% to Spe racial multi, +45% to Int racial multi, +100% to Lib racial multi)</font>");
@@ -2793,9 +2606,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.devilkinScore() >= 1) outputText("\n<font color=\"#008000\">Half fiend: " + player.devilkinScore() + "</font>");
 		else if (player.devilkinScore() < 1) outputText("\n<font color=\"#ff0000\">Half fiend: 0</font>");
 		//Displacer beast
-		if (player.displacerbeastScore() >= 14) {
-			outputText("\n<font color=\"#0000a0\">Displacer Beast: " + player.displacerbeastScore() + " (+95% to Str racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "100":"110")+"% to Spe racial multi, -25% to Int racial multi, -20% to Wis racial multi, +60% to Lib racial multi)</font>");
-		}
+		if (player.displacerbeastScore() >= 20) outputText("\n<font color=\"#0000a0\">Displacer Beast: " + player.displacerbeastScore() + " (+140% to Str racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "150":"140")+"% to Spe racial multi, -30% to Int racial multi, -30% to Wis racial multi, +80% to Lib racial multi)</font>");
+		else if (player.displacerbeastScore() >= 14) outputText("\n<font color=\"#0000a0\">Displacer Beast: " + player.displacerbeastScore() + " (+95% to Str racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "100":"110")+"% to Spe racial multi, -25% to Int racial multi, -20% to Wis racial multi, +60% to Lib racial multi)</font>");
 		else if (player.displacerbeastScore() >= 1) outputText("\n<font color=\"#008000\">Displacer Beast: " + player.displacerbeastScore() + "</font>");
 		else if (player.displacerbeastScore() < 1) outputText("\n<font color=\"#ff0000\">Displacer Beast: 0</font>");
 		//Dog
@@ -2846,7 +2658,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.foxScore() >= 1) outputText("\n<font color=\"#008000\">Half Fox: " + player.foxScore() + "</font>");
 		else if (player.foxScore() < 1) outputText("\n<font color=\"#ff0000\">Half Fox: 0</font>");
 		//Fairy
-		if (player.fairyScore() >= 19) outputText("\n<font color=\"#0000a0\">Greater Fairy: " + player.fairyScore() + " (-25% to Str / Tou racial multi, +155% to Spe racial multi, +200% to Int racial multi, +20 min Sens)</font>");
+		if (player.fairyScore() >= 26) outputText("\n<font color=\"#0000a0\">Fairy Queen: " + player.fairyScore() + " (-25% to Str racial multi, -10% to Tou racial multi, +200% to Spe racial multi, +200% to Int racial multi, +45% to Wis racial multi, +20 min Sens)</font>");
+		if (player.fairyScore() >= 23) outputText("\n<font color=\"#0000a0\">Greater Fairy: " + player.fairyScore() + " (-25% to Str racial multi, -10% to Tou racial multi, +185% to Spe racial multi, +185% to Int racial multi, +30% to Wis racial multi, +20 min Sens)</font>");
 		else if (player.fairyScore() >= 1) outputText("\n<font color=\"#008000\">Greater Fairy: " + player.fairyScore() + "</font>");
 		else if (player.fairyScore() < 1) outputText("\n<font color=\"#ff0000\">Greater Fairy: 0</font>");
 		//Frost Wyrm
@@ -2876,6 +2689,12 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.gargoyleScore() >= 1) outputText("\n<font color=\"#008000\">GARGOYLE: " + player.gargoyleScore() + "</font>");
 		else if (player.gargoyleScore() < 1) outputText("\n<font color=\"#ff0000\">GARGOYLE: 0</font>");
+		//Gazer
+		if (player.gazerScore() >= 21 && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) outputText("\n<font color=\"#0000a0\">Eye Tyrant: " + player.gazerScore() + " (+80% to Tou racial multi, -75% to Spe racial multi, +180% to Int racial multi, +130% to Lib racial multi)</font>");
+		else if (player.gazerScore() >= 14 && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6) outputText("\n<font color=\"#0000a0\">Gazer: " + player.gazerScore() + " (+55% to Tou racial multi, -65% to Spe racial multi, +130% to Int racial multi, +90% to Lib racial multi)</font>");
+		else if (player.gazerScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Gazer: " + player.gazerScore() + " (+30% to Tou racial multi, -55% to Spe racial multi, +80% to Int racial multi, +50% to Lib racial multi)</font>");
+		else if (player.gazerScore() >= 1) outputText("\n<font color=\"#008000\">Half Gazer: " + player.gazerScore() + "</font>");
+		else if (player.gazerScore() < 1) outputText("\n<font color=\"#ff0000\">Half Gazer: 0</font>");
 		//Goblin
 		if (player.goblinScore() >= 10) outputText("\n<font color=\"#0000a0\">Goblin: " + player.goblinScore() + " (-50% to Str racial multi, +75% to Spe racial multi, +100% to Int racial multi, +25% to Lib racial multi)</font>");
 		else if (player.goblinScore() >= 1) outputText("\n<font color=\"#008000\">Goblin: " + player.goblinScore() + "</font>");
@@ -2899,7 +2718,8 @@ public class PlayerAppearance extends BaseContent {
 		//GRAND CHIMERA
 		outputText("\nGRAND CHIMERA: " + player.grandchimeraScore());
 		//Harpy
-		if (player.harpyScore() >= 8) outputText("\n<font color=\"#0000a0\">Harpy: " + player.harpyScore() + " (-20% to Tou racial multi, +80% to Spe racial multi, +60% to Lib racial multi)</font>");
+		if (player.harpyScore() >= 15) outputText("\n<font color=\"#0000a0\">Harpy Queen: " + player.harpyScore() + " (-30% to Tou racial multi, +150% to Spe racial multi, +105% to Lib racial multi)</font>");
+		else if (player.harpyScore() >= 8) outputText("\n<font color=\"#0000a0\">Harpy: " + player.harpyScore() + " (-20% to Tou racial multi, +80% to Spe racial multi, +60% to Lib racial multi)</font>");
 		else if (player.harpyScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Harpy: " + player.harpyScore() + " (-10% to Tou racial multi, +40% to Spe racial multi, +30% to Lib racial multi)</font>");
 		else if (player.harpyScore() >= 1) outputText("\n<font color=\"#008000\">Half Harpy: " + player.harpyScore() + "</font>");
 		else if (player.harpyScore() < 1) outputText("\n<font color=\"#ff0000\">Half Harpy: 0</font>");
@@ -2983,14 +2803,14 @@ public class PlayerAppearance extends BaseContent {
 		//else if (player.kitshooScore() < 1) outputText("\n<font color=\"#ff0000\">Kitshoo: 0</font>");
 		//Kitsune
 		if (player.kitsuneScore() >= 9 && player.tailType == Tail.FOX && player.tailCount >= 2) {
-			if (player.kitsuneScore() >= 14) {
-				if (player.tailCount == 9 && player.kitsuneScore() >= 18 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-					if (player.kitsuneScore() >= 21) outputText("\n<font color=\"#0000a0\">Inari: " + player.kitsuneScore() + " (-50% to Str racial multi, +40% to Spe racial multi, +135% to Int racial multi, +170% to Wis racial multi, +80% to Lib racial multi, +60 to min Sens, +" + (1000 * (1 + player.newGamePlusMod())) + " max Fatigue, +100% max Soulforce)</font>");
-					else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune of Balance: " + player.kitsuneScore() + " (-45% to Str racial multi, +35% to Spe racial multi, +120% to Int racial multi, +145% to Wis racial multi, +60% to Lib racial multi, +45 to min Sens, +" + (500 * (1 + player.newGamePlusMod())) + " max Fatigue, +65% max Soulforce)</font>");
+			if (player.kitsuneScore() >= 16 && player.tailCount == 9) {
+				if (player.kitsuneScore() >= 21 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+					if (player.kitsuneScore() >= 26 && player.tailCount >= 9) outputText("\n<font color=\"#0000a0\">Inari: " + player.kitsuneScore() + " (-50% to Str racial multi, +50% to Spe racial multi, +140% to Int racial multi, +200% to Wis racial multi, +110% to Lib racial multi, +60 to min Sens, +" + (1000 * (1 + player.newGamePlusMod())) + " max Fatigue, +100% max Soulforce)</font>");
+					else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune of Balance: " + player.kitsuneScore() + " (-45% to Str racial multi, +40% to Spe racial multi, +125% to Int racial multi, +160% to Wis racial multi, +80% to Lib racial multi, +45 to min Sens, +" + (500 * (1 + player.newGamePlusMod())) + " max Fatigue, +65% max Soulforce)</font>");
 				}
-				else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune: " + player.kitsuneScore() + " (-40% to Str racial multi, +30% to Spe racial multi, +95% to Int racial multi, +110% to Wis racial multi, +45% to Lib racial multi, +30 to min Sens, +" + (300 * (1 + player.newGamePlusMod())) + " max Fatigue, +40% max Soulforce)</font>");
+				else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune: " + player.kitsuneScore() + " (-40% to Str racial multi, +30% to Spe racial multi, +110% to Int racial multi, +125% to Wis racial multi, +45% to Lib racial multi, +30 to min Sens, +" + (300 * (1 + player.newGamePlusMod())) + " max Fatigue, +40% max Soulforce)</font>");
 			}
-			else outputText("\n<font color=\"#0000a0\">Kitsune: " + player.kitsuneScore() + " (-35% to Str racial multi, +25% to Spe racial multi, +60% to Int racial multi, +70% to Wis racial multi, +30% to Lib racial multi, +20 to min Sens, +" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
+			else outputText("\n<font color=\"#0000a0\">Kitsune: " + player.kitsuneScore() + " (-35% to Str racial multi, +25% to Spe racial multi, +60% to Int racial multi, +75% to Wis racial multi, +30% to Lib racial multi, +20 to min Sens, +" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
 		}
 		else if (player.kitsuneScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Kitsune: " + player.kitsuneScore() + " (-30% to Str racial multi, +20% to Spe racial multi, +35% to Int racial multi, +40% to Wis racial multi, +25% to Lib racial multi, +15 to min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max Fatigue, +10% max Soulforce)</font>");
 		else if (player.kitsuneScore() >= 1) outputText("\n<font color=\"#008000\">Half Kitsune: " + player.kitsuneScore() + "</font>");
@@ -3007,7 +2827,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.magmagooScore() >= 1) outputText("\n<font color=\"#008000\">Half Magma Slime: " + player.magmagooScore() + "</font>");
 		else if (player.magmagooScore() < 1) outputText("\n<font color=\"#ff0000\">Half Magma Slime: 0</font>");
 		//Manticore
-		if (player.manticoreScore() >= 20) outputText("\n<font color=\"#0000a0\">True Manticore: " + player.manticoreScore() + " (+145% to Spe racial multi, +90% to Int racial multi, +125% to Lib racial multi, +60 min Sens, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+		if (player.manticoreScore() >= 22) outputText("\n<font color=\"#0000a0\">True Manticore: " + player.manticoreScore() + " (+160% to Spe racial multi, +90% to Int racial multi, +140% to Lib racial multi, +60 min Sens, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 		else if (player.manticoreScore() >= 15) outputText("\n<font color=\"#0000a0\">Manticore: " + player.manticoreScore() + " (+110% to Spe racial multi, +70% to Int racial multi, +90% to Lib racial multi, +45 min Sens, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 		else if (player.manticoreScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Manticore: " + player.manticoreScore() + " (+65% to Spe racial multi, +30% to Int racial multi, +40% to Lib racial multi, +30 min Sens, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 		else if (player.manticoreScore() >= 1) outputText("\n<font color=\"#008000\">Half Manticore: " + player.manticoreScore() + "</font>");
@@ -3083,7 +2903,8 @@ public class PlayerAppearance extends BaseContent {
 		//Nekomata
 		if (player.nekomataScore() >= 10) {
 			if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) outputText("\n<font color=\"#0000a0\">Elder Nekomata: " + player.nekomataScore() + " (+");
-			else outputText("\n<font color=\"#0000a0\">Nekomata: " + player.nekomataScore() + " (+"+(player.hasPerk(PerkLib.Flexibility) ? "40":"50")+"");
+			else outputText("\n<font color=\"#0000a0\">Nekomata: " + player.nekomataScore() + " (+");
+			outputText(""+(player.hasPerk(PerkLib.Flexibility) ? "40":"50")+"");
 			if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) outputText("% to Spe racial multi, +40% to Int racial multi, +100% to Wis racial multi, +20% max Soulforce)</font>");
 			else outputText("% to Spe racial multi, +30% to Int racial multi, +80% to Wis racial multi, +10% max Soulforce)</font>");
 		}
@@ -3120,7 +2941,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.poltergeistScore() >= 1) outputText("\n<font color=\"#008000\">Phantom: " + player.poltergeistScore() + "</font>");
 		else if (player.poltergeistScore() < 1) outputText("\n<font color=\"#ff0000\">Phantom: 0</font>");
 		//Phoenix
-		if (player.phoenixScore() >= 10) outputText("\n<font color=\"#0000a0\">Phoenix: " + player.phoenixScore() + " (+20% to Str racial multi, +20% to Tou racial multi, +70% to Spe racial multi, +40% to Lib racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		if (player.phoenixScore() >= 21) outputText("\n<font color=\"#0000a0\">Greater Phoenix: " + player.phoenixScore() + " (+40% to Str racial multi, +20% to Tou racial multi, +150% to Spe racial multi, +105% to Lib racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		else if (player.phoenixScore() >= 10) outputText("\n<font color=\"#0000a0\">Phoenix: " + player.phoenixScore() + " (+20% to Str racial multi, +20% to Tou racial multi, +70% to Spe racial multi, +40% to Lib racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		else if (player.phoenixScore() >= 1) outputText("\n<font color=\"#008000\">Phoenix: " + player.phoenixScore() + "</font>");
 		else if (player.phoenixScore() < 1) outputText("\n<font color=\"#ff0000\">Phoenix: 0</font>");
 		//Pig
@@ -3198,11 +3020,12 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.sharkScore() >= 1) outputText("\n<font color=\"#008000\">Half Shark-morph: " + player.sharkScore() + "</font>");
 		else if (player.sharkScore() < 1) outputText("\n<font color=\"#ff0000\">Half Shark-morph: 0</font>");
 		//Siren
-		if (player.sirenScore() >= 10) outputText("\n<font color=\"#0000a0\">Siren: " + player.sirenScore() + " (+40% to Str racial multi, +70% to Spe racial multi, +40% to Int racial multi)</font>");
+		if (player.sirenScore() >= 16) outputText("\n<font color=\"#0000a0\">Greater Siren: " + player.sirenScore() + " (+70% to Str racial multi, +100% to Spe racial multi, +70% to Int racial multi)</font>");
+		else if (player.sirenScore() >= 10) outputText("\n<font color=\"#0000a0\">Siren: " + player.sirenScore() + " (+40% to Str racial multi, +70% to Spe racial multi, +40% to Int racial multi)</font>");
 		else if (player.sirenScore() >= 1) outputText("\n<font color=\"#008000\">Siren: " + player.sirenScore() + "</font>");
 		else if (player.sirenScore() < 1) outputText("\n<font color=\"#ff0000\">Siren: 0</font>");
 		//Sphinx
-		if (player.sphinxScore() >= 23) outputText("\n<font color=\"#0000a0\">Greater Sphinx: " + player.sphinxScore() + " (+80% to Str racial multi, -20% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "70":"60")+"% to Spe racial multi, +130% to Int racial multi, +95% to Wis racial multi)</font>");
+		if (player.sphinxScore() >= 26) outputText("\n<font color=\"#0000a0\">Greater Sphinx: " + player.sphinxScore() + " (+110% to Str racial multi, -20% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "70":"60")+"% to Spe racial multi, +130% to Int racial multi, +110% to Wis racial multi)</font>");
 		if (player.sphinxScore() >= 14) outputText("\n<font color=\"#0000a0\">Sphinx: " + player.sphinxScore() + " (+50% to Str racial multi, -10% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "50":"40")+"% to Spe racial multi, +90% to Int racial multi, +40% to Wis racial multi)</font>");
 		else if (player.sphinxScore() >= 1) outputText("\n<font color=\"#008000\">Sphinx: " + player.sphinxScore() + "</font>");
 		else if (player.sphinxScore() < 1) outputText("\n<font color=\"#ff0000\">Sphinx: 0</font>");
@@ -3212,10 +3035,11 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.spiderScore() >= 1) outputText("\n<font color=\"#008000\">Half Spider-morph: " + player.spiderScore() + "</font>");
 		else if (player.spiderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>");
 		//Thunderbird
-		if (player.thunderbirdScore() >= 15) outputText("\n<font color=\"#0000a0\">Greater Thunderbird: " + player.thunderbirdScore() + " (-20% to Tou racial multi, +115% to Spe racial multi, +130% to Lib racial multi)</font>");
-		else if (player.thunderbirdScore() >= 12) outputText("\n<font color=\"#0000a0\">Thunderbird: " + player.thunderbirdScore() + " (-20% to Tou racial multi, +100% to Spe racial multi, +100% to Lib racial multi)</font>");
-		else if (player.thunderbirdScore() >= 1) outputText("\n<font color=\"#008000\">Thunderbird: " + player.thunderbirdScore() + "</font>");
-		else if (player.thunderbirdScore() < 1) outputText("\n<font color=\"#ff0000\">Thunderbird: 0</font>");
+		if (player.thunderbirdScore() >= 21) outputText("\n<font color=\"#0000a0\">Greater Thunderbird: " + player.thunderbirdScore() + " (-25% to Tou racial multi, +155% to Spe racial multi, +185% to Lib racial multi)</font>");
+		else if (player.thunderbirdScore() >= 16) outputText("\n<font color=\"#0000a0\">Thunderbird: " + player.thunderbirdScore() + " (-15% to Tou racial multi, +120% to Spe racial multi, +140% to Lib racial multi)</font>");
+		else if (player.thunderbirdScore() >= 12) outputText("\n<font color=\"#0000a0\">Half Thunderbird: " + player.thunderbirdScore() + " (-15% to Tou racial multi, +95% to Spe racial multi, +100% to Lib racial multi)</font>");
+		else if (player.thunderbirdScore() >= 1) outputText("\n<font color=\"#008000\">Half Thunderbird: " + player.thunderbirdScore() + "</font>");
+		else if (player.thunderbirdScore() < 1) outputText("\n<font color=\"#ff0000\">Half Thunderbird: 0</font>");
 		//Troll
 		if (player.trollScore() >= 10) outputText("\n<font color=\"#0000a0\">Troll: " + player.trollScore() + " (-20% to Str racial multi, +50% to Tou racial multi, +75% to Int racial multi)</font>");
 		else if (player.trollScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Troll: " + player.trollScore() + " (-10% to Str racial multi, +30% to Tou racial multi, +40% to Int racial multi)</font>");
@@ -3235,14 +3059,14 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.ushionnaScore() >= 1) outputText("\n<font color=\"#008000\">Ushi-Onna: " + player.ushionnaScore() + "</font>");
 		else if (player.ushionnaScore() < 1) outputText("\n<font color=\"#ff0000\">Ushi-Onna: 0</font>");
 		//Wendigo
-		if (player.wendigoScore() >= 25) outputText("\n<font color=\"#0000a0\">Greater Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis raciaol multi, +50% to Lib racial multi, +50 min sens)</font>");
-		else if (player.wendigoScore() >= 10) outputText("\n<font color=\"#0000a0\">Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis raciaol multi, +50% to Lib racial multi, +50 min sens)</font>");
+		if (player.wendigoScore() >= 25) outputText("\n<font color=\"#0000a0\">Greater Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis racial multi, +50% to Lib racial multi, +50 min sens)</font>");
+		else if (player.wendigoScore() >= 10) outputText("\n<font color=\"#0000a0\">Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis racial multi, +50% to Lib racial multi, +50 min sens)</font>");
 		else if (player.wendigoScore() >= 1) outputText("\n<font color=\"#008000\">Wendigo: " + player.wendigoScore() + "</font>");
 		else if (player.wendigoScore() < 1) outputText("\n<font color=\"#ff0000\">Wendigo: 0</font>");
 		//Werewolf
 		if (player.werewolfScore() >= 12) outputText("\n<font color=\"#0000a0\">Werewolf: " + player.werewolfScore() + " (+100% to Str racial multi, +40% to Tou racial multi, +60% to Spe racial multi, -20% to Int racial multi)</font>");
-		else if (player.wolfScore() >= 1) outputText("\n<font color=\"#008000\">Werewolf: " + player.werewolfScore() + "</font>");
-		else if (player.wolfScore() < 1) outputText("\n<font color=\"#ff0000\">Werewolf: 0</font>");
+		else if (player.werewolfScore() >= 1) outputText("\n<font color=\"#008000\">Werewolf: " + player.werewolfScore() + "</font>");
+		else if (player.werewolfScore() < 1) outputText("\n<font color=\"#ff0000\">Werewolf: 0</font>");
 		//Wolf
 		if (player.wolfScore() >= 23) outputText("\n<font color=\"#0000a0\">Fenrir: " + player.wolfScore() + " (+135% to Str racial multi, +80% to Tou racial multi, +100% to Spe racial multi, -10% to Int racial multi)</font>");
 		else if (player.wolfScore() >= 7 && player.coatColor == "glacial white") outputText("\n<font color=\"#0000a0\">Winter wolf: " + player.wolfScore() + " (+30% to Str racial multi, +20% to Tou racial multi, +30% to Spe racial multi, -10% to Int racial multi)</font>");
@@ -3267,13 +3091,14 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.vampireScore() >= 1) outputText("\n<font color=\"#008000\">Dhampir: " + player.vampireScore() + "</font>");
 		else if (player.vampireScore() < 1) outputText("\n<font color=\"#ff0000\">Dhampir: 0</font>");
 		//Vouivre
-		if (player.vouivreScore() >= 22) outputText("\n<font color=\"#0000a0\">Greater Vouivre: " + player.vouivreScore() + " (+"+(player.isNaga() ? "145":"130")+"% to Str racial multi, +95% to Tou racial multi, +"+(player.isNaga() ? "115":"100")+"% to Spe racial multi, +20% to Int racial multi, -20% to Wis racial multi)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
+		if (player.vouivreScore() >= 21) outputText("\n<font color=\"#0000a0\">Greater Vouivre: " + player.vouivreScore() + " (+"+(player.isNaga() ? "145":"130")+"% to Str racial multi, +95% to Tou racial multi, +"+(player.isNaga() ? "115":"100")+"% to Spe racial multi, +20% to Int racial multi, -20% to Wis racial multi)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
 		else if (player.vouivreScore() >= 16) outputText("\n<font color=\"#0000a0\">Vouivre: " + player.vouivreScore() + " (+"+(player.isNaga() ? "115":"100")+"% to Str racial multi, +65% to Tou racial multi, +"+(player.isNaga() ? "85":"70")+"% to Spe racial multi, +15% to Int racial multi, -15% to Wis racial multi)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
 		else if (player.vouivreScore() >= 11) outputText("\n<font color=\"#0000a0\">Lesser Vouivre: " + player.vouivreScore() + " (+"+(player.isNaga() ? "85":"70")+"% to Str racial multi, +45% to Tou racial multi, +"+(player.isNaga() ? "60":"45")+"% to Spe racial multi, +10% to Int racial multi, -10% to Wis racial multi)</font>");//, +" + (50 * (1 + player.newGamePlusMod())) + " max HP
 		else if (player.vouivreScore() >= 1) outputText("\n<font color=\"#008000\">Lesser Vouivre: " + player.vouivreScore() + "</font>");
 		else if (player.vouivreScore() < 1) outputText("\n<font color=\"#ff0000\">Lesser Vouivre: 0</font>");
 		//Yeti
-		if (player.yetiScore() >= 14) outputText("\n<font color=\"#0000a0\">Yeti: " + player.yetiScore() + " (+100% to Str racial multi, +80% to Tou racial multi, +50% to Spe racial multi, -70% to Int racial multi, +50% to Lib racial multi)</font>");
+		if (player.yetiScore() >= 17) outputText("\n<font color=\"#0000a0\">True Yeti: " + player.yetiScore() + " (+130% to Str racial multi, +100% to Tou racial multi, +65% to Spe racial multi, -90% to Int racial multi, +50% to Lib racial multi)</font>");
+		else if (player.yetiScore() >= 14) outputText("\n<font color=\"#0000a0\">Yeti: " + player.yetiScore() + " (+100% to Str racial multi, +80% to Tou racial multi, +50% to Spe racial multi, -70% to Int racial multi, +50% to Lib racial multi)</font>");
 		else if (player.yetiScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Yeti: " + player.yetiScore() + " (+50% to Str racial multi, +40% to Tou racial multi, +25% to Spe racial multi, -35% to Int racial multi, +25% to Lib racial multi)</font>");
 		else if (player.yetiScore() >= 1) outputText("\n<font color=\"#008000\">Half Yeti: " + player.yetiScore() + "</font>");
 		else if (player.yetiScore() < 1) outputText("\n<font color=\"#ff0000\">Half Yeti: 0</font>");
@@ -3358,5 +3183,11 @@ public class PlayerAppearance extends BaseContent {
 
 		else outputText("<b>Yo, this is an error.</b>");
 	}
+
+	public function describeVisage():void{ //expressions!
+		if (player.findPerk(PerkLib.DarkenedKitsune) > 0) {
+			outputText(SceneLib.darkenedKitsuneScene.darkenedKitsuneExpression());
+		}
+	}
 }
-}
+}

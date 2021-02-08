@@ -25,6 +25,8 @@ public function ayaneCampMenu():void
 	addButton(1, "Talk", ayaneTalkMenu).hint("Ask Ayane about something.");
 	addButton(2, "Shop", ayaneShop).hint("Check Ayane shop.");
 	addButton(3, "Sex", ayaneSexMenu).hint("Have some sex with Ayane.");
+	if (player.buff("Curse").isPresent()) addButton(5, "Cure C.", ayaneCuringCurse).hint("WIP tooltip: Cure curse effect.");
+	else addButtonDisabled(5, "Cure C.", "WIP tooltip: You not have any curses to cure.");
 	addButton(14, "Back", camp.campFollowers);
 }
 
@@ -221,6 +223,21 @@ public function ayaneAnal():void
 	outputText("\"<i>Ahh... So wonderful... To be filled with your seed is a blessing...</i>\"\n\n");
 	outputText("You clean your cock on one of her silky white tails, making her gasp, as the both of you slowly proceed to redress.");
 	player.sexReward("Default","Default",true,false);
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function ayaneCuringCurse():void {
+	clearOutput();
+	outputText("You tell Ayane that you are in dire need of healing to lift the power of a curse and request that she use her magic on you at once.\n\n");
+	outputText("\"<i>With due haste my " + player.mf("lord", "lady") + " I will alleviate your wounds and break some of the curses afflicting you.</i>\"\n\n");
+	outputText("On this she lifts her staff and begins a ritual. A few seconds later you feel infinitely better as the kitsune shrine maiden curative magic does its work alleviating your wounds both physical and spiritual.\n\n");
+	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+		player.removeCurse(stat, 5);
+		if (stat != "sens")
+		{
+			player.removeCurse(stat+".mult", 0.05);
+		}
+	}
 	doNext(camp.returnToCampUseOneHour);
 }
 

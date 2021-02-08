@@ -270,7 +270,8 @@ use namespace CoC;
 			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
 			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
 			addButton(7, "Body State", BodyStateMenu).hint("For more precisely adjusting a few other body values or parts than Stats Adj option.");
-			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Unlock all Metamorph options.")
+			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Unlock all Metamorph options.");
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) addButton(9, "GunsShopReset", AddMaxBackpack032).hint("Reset Tripixi firearmas restored tracker(s).");
 			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that don't fit anywhere else and etc.");
 			addButton(11, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
 			addButton(12, "FairyTest", FairyTest).hint("Become a fairy.");
@@ -284,7 +285,7 @@ use namespace CoC;
 			addButton(2, "Hex-Mate", AddMaxBackpack02).hint("Hex-Mate");
 			addButton(3, "WendigoTrigger", AddMaxBackpack4).hint("Trigger Wendigo transformation. (Without active Wendigo Psychosis will do nothing ;) )");
 			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) addButton(4, "ClickItOnce", AddMaxBackpack3).hint("Fixing Lover Zenji missing one status effect needed for his sex scenes menu.");
-			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2 && !player.hasStatusEffect(StatusEffects.TrainingNPCsTimersReduction)) addButton(5, "ClickItDoIt", AddMaxBackpack2).hint("Adding one status effect needed for sparring ring upgrades effect.");
+			if (player.hasKeyItem("Fenrir Collar") >= 0) addButton(5, "Re-Collaring", AddMaxBackpack2).hint("Changing one godly collar to other godly collar.");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
 			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
@@ -292,8 +293,24 @@ use namespace CoC;
 			addButton(10, "All4Prestige", AddMaxBackpack03).hint("A11 th4t Prestige is Y0urs to T4ke!!!");
 			addButton(11, "PerkGalore1", PerkGalore1);
 			addButton(12, "PerkGalore2", PerkGalore2);
-			//addButton(13, "ClickItOnce", AddMaxBackpack3).hint("");
+			if (flags[kFLAGS.MARAE_ISLAND] < 1 && flags[kFLAGS.MET_MARAE] == 1) addButton(13, "ClickItOnce", AddMaxBackpack033).hint("Fix Marae Island");
 			addButton(14, "Back", SoulforceCheats);
+		}
+		public function AddMaxBackpack032():void {
+			outputText("\n\nReset completed");
+			player.removeStatusEffect(StatusEffects.TelAdreTripxi);
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns1);
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns2);
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns3);
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns4);
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns5);
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) player.removeStatusEffect(StatusEffects.TelAdreTripxiGuns6);
+			doNext(SoulforceCheats);
+		}
+		public function AddMaxBackpack033():void {
+			outputText("\n\nFix completed");
+			flags[kFLAGS.MARAE_ISLAND] = 1;
+			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack03():void {
 			outputText("\n\nA11 th4t Prestige is Y0urs to T4ke!!!");
@@ -333,7 +350,8 @@ use namespace CoC;
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack2():void {
-			player.createStatusEffect(StatusEffects.TrainingNPCsTimersReduction, 6, 0, 0, 0);
+			if (player.hasKeyItem("Fenrir Collar") >= 0) player.removeKeyItem("Fenrir Collar");
+			player.createKeyItem("Gleipnir Collar", 0, 0, 0, 0);
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack3():void {
@@ -1625,7 +1643,7 @@ use namespace CoC;
 				addButton(7, "HB Mech", AddHBMech).hint("Add 1 Howling Banshee Mech for testing purposes.");
 				addButton(8, "GobMechPrime", AddGoblinMechPrime).hint("Add 1 Goblin Mech Prime for testing purposes.");
 				addButton(9, "GiantSlayerMech", AddGiantSlayerMech).hint("Add 1 Giant Slayer Mech for testing purposes.");
-				//10
+				addButton(10, "E. Tome", AddTheElementalistsTome).hint("Add 1 Elementalist’s Tome.");
 				addButton(11, "Evelyn", AddTheEvelyn).hint("Add 1 Evelyn Crossbow.");
 				addButton(12, "InqTome", AddTheInquisitorsTome).hint("Add 1 Inquisitor's Tome.");
 				addButton(13, "-2-", EquipmentMenu, page + 1);
@@ -1655,7 +1673,8 @@ use namespace CoC;
 			if (page == 1) {
 				addButton(0, "Fox Jewel", AddFoxJewel).hint("Add 1 Fox Jewel.");
 				addButton(1, "CDI", AddCurrentDebugItem).hint("Add 1 Gun.");
-				addButton(2, "TrollFig", AddTrollFig).hint("Add 1 Troll Fig.");
+				//addButton(2, "TrollFig", AddTrollFig).hint("Add 1 Troll Fig.");
+				addButton(2, "CyclopTF", AddTrollFig).hint("Add 1 cyclop TF.");
 				//addButton(3, "", ).hint("Add 1 .");
 				//addButton(4, "AbyssalInk", "Not yet ready for test and just for future use put here already ^^ (Add 1 Abyssal Ink.)");
 				//addButton(5, "D.Fruit", AddDisplacerFruit).hint("Add 1 Displacer Fruit.");
@@ -1805,6 +1824,10 @@ use namespace CoC;
 			outputText("\n\n<b>(Gained 1 Giant Slayer Mech!)</b>\n\n");
 			inventory.takeItem(vehicles.GS_MECH, curry(EquipmentMenu, 1));
 		}
+		public function AddTheElementalistsTome():void {
+			outputText("\n\n<b>(Gained 1 Elementalist’s Tome!)</b>\n\n");
+			inventory.takeItem(weaponsrange.E_TOME_, curry(EquipmentMenu, 1));
+		}
 		public function AddTheEvelyn():void {
 			outputText("\n\n<b>(Gained 1 Evelyn Crossbow!)</b>\n\n");
 			inventory.takeItem(weaponsrange.EVELYN_, curry(EquipmentMenu, 1));
@@ -1891,8 +1914,10 @@ use namespace CoC;
 			inventory.takeItem(consumables.FREFISH, curry(NonEquipmentMenu, 2));
 		}
 		public function AddTrollFig():void {
-			outputText("\n\n<b>(Gained 1 Troll Fig!)</b>\n\n");
-			inventory.takeItem(consumables.TROLFIG, curry(NonEquipmentMenu, 1));
+			//outputText("\n\n<b>(Gained 1 Troll Fig!)</b>\n\n");
+			//inventory.takeItem(consumables.TROLFIG, curry(NonEquipmentMenu, 1));
+			outputText("\n\n<b>(Gained 1 Cyclop TF)</b>\n\n");
+			inventory.takeItem(consumables.EYEDROP, curry(NonEquipmentMenu, 1));
 		}
 		public function AddVoltageTopaz():void {
 			outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");
@@ -2943,9 +2968,9 @@ use namespace CoC;
 			var SFR00:Number = 0;
 			if (player.kitsuneScore() >= 5) {
 				if (player.kitsuneScore() >= 9 && player.tailType == 13 && player.tailCount >= 2) {
-					if (player.kitsuneScore() >= 14) {
-						if (player.kitsuneScore() >= 18 && player.tailCount == 9 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-							if (player.kitsuneScore() >= 21) SFR00 += 200;
+					if (player.kitsuneScore() >= 16) {
+						if (player.kitsuneScore() >= 21 && player.tailCount == 9 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+							if (player.kitsuneScore() >= 26) SFR00 += 200;
 							else SFR00 += 150;
 						}
 						else SFR00 += 80;
@@ -3302,9 +3327,9 @@ use namespace CoC;
 			var costPercent:Number = 100;
 			if (player.kitsuneScore() >= 5) {
 				if (player.kitsuneScore() >= 9 && player.tailType == 13 && player.tailCount >= 2) {
-					if (player.kitsuneScore() >= 14) {
-						if (player.kitsuneScore() >= 18 && player.tailCount == 9 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-							if (player.kitsuneScore() >= 21) costPercent += 1000;
+					if (player.kitsuneScore() >= 16) {
+						if (player.kitsuneScore() >= 21 && player.tailCount == 9 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+							if (player.kitsuneScore() >= 26) costPercent += 1000;
 							else costPercent += 650;
 						}
 						else costPercent += 400;

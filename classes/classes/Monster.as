@@ -2,9 +2,17 @@
 {
 import classes.BaseContent;
 import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Beard;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ArmorLib;
@@ -34,6 +42,7 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
+import classes.internals.EnumValue;
 import classes.internals.RandomDrop;
 import classes.internals.Utils;
 import classes.internals.WeightedDrop;
@@ -650,14 +659,14 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EnemyEliteType) >= 0) temp += 1;
 			if (findPerk(PerkLib.EnemyChampionType) >= 0) temp += 2;
 			if (findPerk(PerkLib.EnemyBossType) >= 0) temp += 3;
-			if (this.level >= 25) temp += 1;
-			if (this.level >= 50) temp += 2;
-			if (this.level >= 75) temp += 3;
-			if (this.level >= 100) temp += 4;
-			if (this.level >= 125) temp += 5;
-			if (this.level >= 150) temp += 6;
-			if (this.level >= 175) temp += 7;
-			if (this.level >= 200) temp += 8;
+			if (this.level >= 25) temp *= 2;
+			if (this.level >= 50) temp *= 2.5;
+			if (this.level >= 75) temp *= 3;
+			if (this.level >= 100) temp *= 3.5;
+			if (this.level >= 125) temp *= 4;
+			if (this.level >= 150) temp *= 4.5;
+			if (this.level >= 175) temp *= 5;
+			if (this.level >= 200) temp *= 5.5;
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 1.5;
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 2;
 			if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 3;
@@ -962,6 +971,9 @@ import flash.utils.getQualifiedClassName;
 		 */
 		public function calcDamage():int{
 			return player.reducePhysDamage(eBaseDamage());
+		}
+		public function calcFireDamage():int{
+			return player.reduceFireDamage(eBaseDamage());
 		}
 
 		public function totalXP(playerLevel:Number=-1):Number
@@ -1414,8 +1426,14 @@ import flash.utils.getQualifiedClassName;
 		public function eOneAttack():int
 		{
 			//Determine damage - str modified by enemy toughness!
-			var damage:int = calcDamage();
-			if (damage > 0) damage = player.takePhysDamage(damage);
+			if (hasStatusEffect(StatusEffects.FlameBlade)) {
+				var damageF:int = calcFireDamage();
+				if (damageF > 0) player.takeFireDamage(damageF);
+			}
+			else {
+				var damage:int = calcDamage();
+				if (damage > 0) player.takePhysDamage(damage);
+			}
 			return damage;
 		}
 
@@ -1685,6 +1703,9 @@ import flash.utils.getQualifiedClassName;
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
 				if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
 			}
+			if (player.findPerk(PerkLib.DarkenedKitsune)>0) {//&& rand(4) ==0){
+				if (SceneLib.darkenedKitsuneScene.darkKitsuneCombat()) EngineCore.outputText("\n\n")
+			}
 			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug)) {
 				if (!handleConstricted()) return;
 			}
@@ -1877,18 +1898,18 @@ import flash.utils.getQualifiedClassName;
 		/**
 		 * Called if monster is stunned. Should return true if stun is ignored and need to proceed with ai.
 		 */
+
 		protected function handleStun():Boolean
 		{
-			if (hasStatusEffect(StatusEffects.SoulTear)) {
-				removeStatusEffect(StatusEffects.SoulTear);
-				createStatusEffect(StatusEffects.AbilityCooldown4,6,0,0,0);
-			}
+			interruptAbility();
 			if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
 			else addStatusValue(StatusEffects.Stunned, 1, -1);
+			if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Stunned,1,-5);
 			if (statusEffectv1(StatusEffects.StunnedTornado) <= 0) removeStatusEffect(StatusEffects.StunnedTornado);
 			else {
 				EngineCore.outputText(capitalA + short + " is still caught in the tornado.");
 				addStatusValue(StatusEffects.StunnedTornado, 1, -1);
+				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.StunnedTornado,1,-5);
 			}
 			if (hasStatusEffect(StatusEffects.InkBlind)) {
 				if (plural) EngineCore.outputText("Your foes are busy trying to remove the ink and therefore does no other action than flay their hand about its faces.");
@@ -1924,6 +1945,14 @@ import flash.utils.getQualifiedClassName;
 				}
 			}
 			return false;
+		}
+
+		/**
+		 * This method is called after a stun interupted an ability.
+		 * Default: Does nothing this is monster specific
+		 */
+		public function interruptAbility():void {
+			// Generic monster does nothing (has no channelable abilities)
 		}
 
 		/**
@@ -2083,38 +2112,38 @@ import flash.utils.getQualifiedClassName;
 			result += Heis + Appearance.inchesAndFeetsAndInches(tallness) + " tall with " +
 			          Appearance.describeByScale(hips.type,Appearance.DEFAULT_HIP_RATING_SCALES,"thinner than","wider than") + " hips and " +
 			          Appearance.describeByScale(butt.type,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than") + " butt.\n";
-			result +=Pronoun3+" lower body is "+(Appearance.DEFAULT_LOWER_BODY_NAMES[lowerBody]||("lowerBody#"+lowerBody));
-			result += ", "+pronoun3+" arms are "+(Appearance.DEFAULT_ARM_NAMES[arms.type] || ("arms.type#" + arms.type));
+			result += Pronoun3+" lower body is "+Object(LowerBody.Types[lowerBody]||{}).name;
+			result += ", "+pronoun3+" arms are "+Object(Arms.Types[arms.type]||{}).name;
 			result += ", "+pronoun1+" "+have+" "+skinTone+" "+skinAdj+" "+skinDesc+
-					  " (base "+(Appearance.DEFAULT_SKIN_NAMES[skin.baseType()]||("skinType#"+skin.baseType()))+")." +
-					  " (coat "+(Appearance.DEFAULT_SKIN_NAMES[skin.coatType()]||("skinType#"+skin.coatType()))+")." +
+					  " (base "+Object(Skin.SkinTypes[skin.baseType()]||{}).id+")." +
+					  " (coat "+Object(Skin.SkinTypes[skin.coatType()]||{}).id+")." +
 					  "\n";
 			result += Hehas;
 			if (hairLength>0){
-				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(hairLength)+" long "+(Appearance.DEFAULT_HAIR_NAMES[hairType]||("hairType#"+hairType))+" hair.\n";
+				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(hairLength)+" long "+Object(Hair.Types[hairType]||{}).name+" hair.\n";
 			} else {
 				result += "no hair.\n";
 			}
 			result += Hehas;
 			if (beardLength>0){
-				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(beardLength)+" long "+(Appearance.DEFAULT_BEARD_NAMES[beardStyle]||("beardType#"+beardStyle))+".\n";
+				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(beardLength)+" long "+Object(Beard.Types[beardStyle]||{}).name+" beard.\n";
 			} else {
 				result += "no beard.\n";
 			}
 			result += Hehas
-			          + (Appearance.DEFAULT_FACE_NAMES[faceType]||("faceType#"+faceType)) + " face, "
-			          + (Appearance.DEFAULT_EARS_NAMES[ears.type] || ("earType#" + ears.type)) + " ears, "
-			          + (Appearance.DEFAULT_TONGUE_NAMES[tongue.type] || ("tongue.type#" + tongue.type)) + " tongue and "
-			          + (Appearance.DEFAULT_EYES_NAMES[eyes.type] || ("eyes.type#" + eyes.type)) + " eyes.\n";
+			          + Object(Face.Types[faceType]||{}).name + " face, "
+			          + Object(Ears.Types[ears.type]||{}).name + " ears, "
+			          + Object(Tongue.Types[tongue.type]||{}).name + " tongue and "
+			          + Object(Eyes.Types[eyes.type]||{}).name + " eyes.\n";
 			result += Hehas;
 			if (tailType == Tail.NONE) result += "no tail, ";
-			else result+=(Appearance.DEFAULT_TAIL_NAMES[tailType]||("tailType#"+tailType))+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
+			else result+=Object(Tail.Types[tailType]||{}).name+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
 			if (horns.type == Horns.NONE) result += "no horns, ";
-			else result += horns.count + " " + (Appearance.DEFAULT_HORNS_NAMES[horns.type] || ("horns.type#" + horns.type)) + " horns, ";
+			else result += horns.count + " " + Object(Horns.Types[horns.type]||{}).name + " horns, ";
 			if (wings.type == Wings.NONE) result += "no wings, ";
-			else result += wings.desc + " wings (type " + (Appearance.DEFAULT_WING_NAMES[wings.type] || ("wings.type#" + wings.type)) + "), ";
+			else result += wings.desc + " wings (type " + Object(Wings.Types[wings.type]||{}).name + "), ";
 			if (antennae.type == Antennae.NONE) result += "no antennae.type.\n\n";
-			else result += (Appearance.DEFAULT_ANTENNAE_NAMES[antennae.type] || ("antennaeType#" + antennae.type)) + " antennae.type.\n\n";
+			else result += Object(Antennae.Types[antennae.type]||{}).name + " antennae.type.\n\n";
 
 			// GENITALS AND BREASTS
 			for (var i:int = 0; i<cocks.length; i++){
@@ -2191,7 +2220,7 @@ import flash.utils.getQualifiedClassName;
 
 		public function combatRoundUpdate():void
 		{
-			
+
 			//regeneration perks for monsters
 			if (((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.LizanMarrowEvolved) >= 0 || findPerk(PerkLib.LizanMarrowFinalForm) >= 0 || findPerk(PerkLib.DraconicHeartFinalForm) >= 0 || findPerk(PerkLib.EnemyPlantType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0 || findPerk(PerkLib.MonsterRegeneration) >= 0
 			|| findPerk(PerkLib.HydraRegeneration) >= 0 || findPerk(PerkLib.Lifeline) >= 0 || findPerk(PerkLib.ImprovedLifeline) >= 0 || findPerk(PerkLib.GreaterLifeline) >= 0 || findPerk(PerkLib.EpicLifeline) >= 0 || findPerk(PerkLib.IcyFlesh) >= 0 || findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0
@@ -2284,7 +2313,7 @@ import flash.utils.getQualifiedClassName;
 				manaRecovery *= manaRecoveryMulti;
 				addMana(manaRecovery);
 			}
-			
+
 			if(hasStatusEffect(StatusEffects.MilkyUrta)) {
 				SceneLib.urtaQuest.milkyUrtaTic();
 			}
@@ -2338,6 +2367,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.InkBlind)) {
 				addStatusValue(StatusEffects.InkBlind,1,-1);
+				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.InkBlind,1,-5);
 				if(statusEffectv1(StatusEffects.InkBlind) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer blind!</b>\n\n");
 					removeStatusEffect(StatusEffects.InkBlind);
@@ -2353,6 +2383,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.FrozenSolid)) {
 				addStatusValue(StatusEffects.FrozenSolid,1,-1);
+				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.FrozenSolid,1,-5);
 				if(statusEffectv1(StatusEffects.FrozenSolid) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer encased in the ice prison!</b>\n\n");
 					removeStatusEffect(StatusEffects.FrozenSolid);
@@ -2361,14 +2392,33 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.Polymorphed)) {
 				addStatusValue(StatusEffects.Polymorphed,1,-1);
+				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Polymorphed,1,-5);
 				if(statusEffectv1(StatusEffects.Polymorphed) <= 0) {
 					outputText("<b>" + capitalA + short + " has freed " + pronoun2 + "self from the curse!</b>\n\n");
 					removeStatusEffect(StatusEffects.Polymorphed);
 				}
 				else outputText("<b>" + capitalA + short + " is fighting against the curse.</b>\n\n");
 			}
+			if(hasStatusEffect(StatusEffects.Sleep)) {
+				addStatusValue(StatusEffects.Sleep,1,-1);
+				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Sleep,1,-5);
+				if(statusEffectv1(StatusEffects.Sleep) <= 0) {
+					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer asleep!</b>\n\n");
+					removeStatusEffect(StatusEffects.Sleep);
+				}
+				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently asleep!</b>\n\n");
+			}
+			if(hasStatusEffect(StatusEffects.InvisibleOrStealth)) {
+				addStatusValue(StatusEffects.InvisibleOrStealth,1,-1);
+				if(statusEffectv1(StatusEffects.InvisibleOrStealth) <= 0) {
+					outputText("<b>" + capitalA + short + (plural ? " have" : " has") + " found you!</b>\n\n");
+					removeStatusEffect(StatusEffects.InvisibleOrStealth);
+				}
+				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " looking for you!</b>\n\n");
+			}
 			if(hasStatusEffect(StatusEffects.Distracted)) {
 				addStatusValue(StatusEffects.Distracted,1,-1);
+				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Distracted,1,-5);
 				if(statusEffectv1(StatusEffects.Distracted) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer distracted!</b>\n\n");
 					removeStatusEffect(StatusEffects.Distracted);
@@ -2377,6 +2427,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.HypnosisNaga)) {
 				addStatusValue(StatusEffects.HypnosisNaga,1,-1);
+				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.HypnosisNaga,1,-5);
 				if(statusEffectv1(StatusEffects.HypnosisNaga) <= 0) {
 					outputText("<b>You try to prolong the trance but " + a + short + " finally snaps out.</b>\n\n");
 					removeStatusEffect(StatusEffects.HypnosisNaga);
@@ -2917,6 +2968,15 @@ import flash.utils.getQualifiedClassName;
 					outputText("<b>" + capitalA + short + " ice armor has thawed out.</b>\n\n");
 				}
 				else addStatusValue(StatusEffects.IceArmor,1,-1);
+			}
+
+			//Flame Blade
+			if (hasStatusEffect(StatusEffects.FlameBlade)) {
+				if (statusEffectv1(StatusEffects.FlameBlade) <= 0) {
+					removeStatusEffect(StatusEffects.FlameBlade);
+					outputText("<b>" + capitalA + short + "'s Flame Blade effect wore off.</b>\n\n");
+				}
+				else addStatusValue(StatusEffects.FlameBlade,1,-1);
 			}
 
 			//Consuming darkness

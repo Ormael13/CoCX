@@ -27,6 +27,21 @@ use namespace CoC;
 			flags[kFLAGS.DISCOVERED_DEFILED_RAVINE]++;
 			if (player.cor < 71) dynStats("cor", 1.5);
 			
+			//Twin Dart pistol
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("Twin Dart pistol") < 0 && rand(2) == 0) {
+				partsofTwinDartPistol();
+				return;
+			}
+			//Alvina
+			if (flags[kFLAGS.ALVINA_FOLLOWER] < 12 && player.hasKeyItem("Zetaz's Map") >= 0 && ((rand(10) == 0) || (flags[kFLAGS.LETHICE_DEFEATED] > 0 && rand(2) == 0))) {
+				SceneLib.alvinaFollower.alvinaThirdEncounter();
+				return;
+			}
+			if (((flags[kFLAGS.ALVINA_FOLLOWER] > 8 && flags[kFLAGS.ALVINA_FOLLOWER] < 12 && player.hasKeyItem("Zetaz's Map") >= 0) || player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) && rand(2) == 0) {
+				SceneLib.alvinaFollower.alvinaThirdEncounter();
+				return;
+			}
+			
 			var choice:Array = [];
 			var select:int;
 			//Dragon Demon, Demon Soldier, Demon Pristress, even stronger imp variants (ayo/flesh golem versions?), Kitsune Demon - Kumiho, Salamander Demon
@@ -68,6 +83,15 @@ use namespace CoC;
 					dynStats("lib", 1);
 					doNext(camp.returnToCampUseOneHour);
 			}
+		}
+		
+		public function partsofTwinDartPistol():void {
+			clearOutput();
+			outputText("As you explore the blight ridge you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("You carefully put the pieces of the Twin Dart pistol in your back and head back to your camp.\n\n");
+			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+			player.createKeyItem("Twin Dart pistol", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

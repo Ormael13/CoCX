@@ -3167,7 +3167,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\"<i>Flatterer.</i>\" Is all that she says, but she's smiling happily, even as you both clean up and go your seperate ways again.");
 			//PREGGO CHECK HERE
 			if(flags[kFLAGS.AMILY_ALLOWS_FERTILITY] == 1) {
-				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_AMILY, PregnancyStore.INCUBATION_MOUSE);
 			}
 			player.sexReward("cum", "Vaginal");
@@ -3339,7 +3339,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("Slowly, she raises her head and pecks you affectionately on the lips. \"<i>Thank you,</i>\" is all she says, continuing to lay there with you for a while. Then she picks herself up and walks away, and you do the same.");
 				//PREGGO CHECK HERE
 				if(flags[kFLAGS.AMILY_ALLOWS_FERTILITY] == 1) {
-					if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+					if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 					else player.knockUp(PregnancyStore.PREGNANCY_AMILY, PregnancyStore.INCUBATION_MOUSE);
 				}
 				player.sexReward("cum","Dick");
@@ -4864,7 +4864,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//(else)
 			else outputText("  If she did, you'll just have to tie her up and get someone to return the favor...");
 			//Preg chanceeee
-			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
             else player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE);
 			player.sexReward("cum","Vaginal");
 			dynStats("sen", -2, "cor", 2);
@@ -5085,7 +5085,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			else {
 				outputText("\"<i>Let's see if you'll be a mommy from this load... If not, well, I guess we'll have to try again.");
 				//PREGGO CHECK HERE
-				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_AMILY, PregnancyStore.INCUBATION_MOUSE);
 			}
 			outputText("</i>\"  Chuckling softly, you lay there and embrace your lover for a time and then, reluctantly, you get dressed and leave.");

@@ -252,19 +252,19 @@ private function useTheSexMachine():void {
 		player.sexReward("cum","Vaginal");
 		switch(rand(6)) {
 			case 0:
-				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
 				break;
 			case 1:
-				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE);
 				break;
 			case 2:
-				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE); //I'm betting this was meant to be dog morph chance
 				break;
 			default:
-				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_CENTAUR, PregnancyStore.INCUBATION_CENTAUR);
 				break;
 		}

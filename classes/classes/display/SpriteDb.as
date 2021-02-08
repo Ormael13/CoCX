@@ -59,6 +59,8 @@ public class SpriteDb {
 	public static function get s_assmole(): Class {
 		return s_assmole_8bit;
 	}
+	[Embed(source="../../../res/sprites/Atlach.png")]
+	public static var s_Atlach_16bit:Class;
 	[Embed(source="../../../res/sprites/ayane.png")]
 	public static var s_ayane:Class;
 	[Embed(source="../../../res/sprites/ayane_nude.png")]
@@ -165,6 +167,8 @@ public class SpriteDb {
 	public static var s_crabgirlShop:Class;
 	[Embed(source="../../../res/sprites/crabboy.png")]
 	public static var s_crabboy:Class;
+	[Embed(source="../../../res/sprites/Dark_Elf_Ranger-1.png")]
+	public static var s_DarkElf:Class;
 	[Embed(source="../../../res/sprites/dickworms.png")]
 	public static var s_dickworms_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/worms-old.png")]
@@ -838,6 +842,8 @@ public class SpriteDb {
 	public static function get s_yvonne(): Class {
 		return is8bit ? s_yvonne_8bit : s_yvonne_16bit;
 	}
+	[Embed(source="../../../res/sprites/Yuki Onna.png")]
+	public static var s_YukiOnna:Class;
 	[Embed(source="../../../res/sprites/zenji_sprite.png")]
 	public static var s_zenji:Class;
 

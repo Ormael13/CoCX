@@ -946,7 +946,7 @@ private function dontEatIzamsLeafAfterRape():void {
 	outputText("Izma cringes.  \"<i>Sorry!  I just don't want to go fathering children with someone who's not my mate!  Please, please take it!</i>\"\n\n");
 	
 	outputText("You slap the leaf out of her hand.  \"<i>Try getting stronger before you impose your decisions on others!</i>\" you bark.  \"<i>Whether I decide to have your kids or not is none of your business; you should be grateful at the chance to father them with someone tougher than you!</i>\"  She shivers and nods meekly, and you turn about and pick your way back to camp.\n\n");
-	if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+	if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
     else player.knockUp(PregnancyStore.PREGNANCY_IZMA, PregnancyStore.INCUBATION_IZMA);
 	cleanupAfterCombat();
 	//(Izmafight +1)
@@ -1740,8 +1740,10 @@ public function izmaFollowerMenu():void {
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] != 1 && !pregnancy.isPregnant) addButton(8, "Farm Work", sendToFarm);
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 0) addButton(8, "Go Camp", backToCamp);
 	}
-	if (player.hasItem(consumables.BROBREW) && flags[kFLAGS.IZMA_BROFIED] == 0) addButton(9, "Brotize", izmaelScene.brotizeIzma);
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 1 && flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] != 1 && flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) addButton(10, "Fishery", sendToFishery);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 1 && flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] != 1) {
+		if (player.hasItem(consumables.BROBREW) && flags[kFLAGS.IZMA_BROFIED] == 0) addButton(9, "Brotize", izmaelScene.brotizeIzma);
+		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) addButton(10, "Fishery", sendToFishery);
+	}
 	addButton(14, "Back", camp.campLoversMenu);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
 }
@@ -2846,7 +2848,7 @@ private function inCampRideIzmasDickDongTheWitchIsDead():void {
  
 	outputText("Izma waves at you and smirks as you go to leave, and you have to wonder if Izma was only acting helpless in order to get off...");
 	if(flags[kFLAGS.IZMA_PREGNANCY_ENABLED] > 0) {
-		if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+		if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
         else player.knockUp(PregnancyStore.PREGNANCY_IZMA, PregnancyStore.INCUBATION_IZMA);
 	}
 	if(player.hasCock())player.sexReward("Default","Dick",true,false);

@@ -27,7 +27,7 @@ use namespace CoC;
 			flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE]++;
 			if (player.cor < 66) dynStats("cor", 1);
 			
-			//Discover Blight Ridge
+			//Discover Defiled Ravine
 			if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && rand(3) == 0 && player.level >= 36) {
 				player.explored++;
 				clearOutput();
@@ -40,13 +40,8 @@ use namespace CoC;
 			}
 			
 			//Dart pistol
-			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Dart pistol") < 0 && rand(2) == 0) {
 				partsofDartPistol();
-				return;
-			}
-			//Twin Dart pistol
-			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
-				partsofTwinDartPistol();
 				return;
 			}
 			//Ignis intro
@@ -73,15 +68,6 @@ use namespace CoC;
 				menu();
                 addButton(0, "Yes", SceneLib.dungeons.enterDenOfDesire);
                 addButton(1, "No", camp.returnToCampUseOneHour);
-				return;
-			}
-			//Alvina
-			if (flags[kFLAGS.ALVINA_FOLLOWER] < 12 && player.hasKeyItem("Zetaz's Map") >= 0 && ((rand(10) == 0) || (flags[kFLAGS.LETHICE_DEFEATED] > 0 && rand(2) == 0))) {
-				SceneLib.alvinaFollower.alvinaThirdEncounter();
-				return;
-			}
-			if (((flags[kFLAGS.ALVINA_FOLLOWER] > 8 && flags[kFLAGS.ALVINA_FOLLOWER] < 12 && player.hasKeyItem("Zetaz's Map") >= 0) || player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) && rand(2) == 0) {
-				SceneLib.alvinaFollower.alvinaThirdEncounter();
 				return;
 			}
 			//Siegweird
@@ -154,19 +140,8 @@ use namespace CoC;
 			clearOutput();
 			outputText("As you explore the blight ridge you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
 			outputText("You carefully put the pieces of the Dart pistol in your back and head back to your camp.\n\n");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 2, 1);
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Dart pistol", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
-		}
-		
-		public function partsofTwinDartPistol():void {
-			clearOutput();
-			outputText("As you explore the blight ridge you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
-			outputText("You carefully put the pieces of the Twin Dart pistol in your back and head back to your camp.\n\n");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 2, 1);
-			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
-			player.createKeyItem("Twin Dart pistol", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

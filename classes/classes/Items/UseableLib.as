@@ -23,7 +23,7 @@ use namespace CoC;
 			"A Perfect Diamond.",
 			"You look over the perfect diamond. Likely worth a lot of gems.");
 		public const S_INGOT:SimpleUseable = new SimpleUseable("S.Ingot", "Silver ingot", "a Silver ingot", 500, 
-			"A Silver ingot.",
+			"A Silver ingot.",//weight around 3-3,2 kg (Gold Ingot weight around 11-13 kg)
 			"You look over the Silver ingot. Likely usefull to making some accesories.");
 		public const B_CHITN:SimpleUseable = new SimpleUseable("B.Chitn", "B.Chitn", "a large shard of chitinous plating", 100,
 			"A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it.",

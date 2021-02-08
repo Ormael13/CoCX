@@ -16,7 +16,8 @@ public class Marae extends Monster
 				outputText("but you fail and get hit instead! The feel of the tentacles left your groin slightly warmer. ");
 				var damage:int = (eBaseStrengthDamage() + rand(str));
 				damage = Math.round(damage);
-				player.dynStats("lust", rand(15) + 75);
+				player.dynStats("lust", rand(25) + 100);
+				player.takePhysDamage(damage, true);
 				player.takePhysDamage(damage, true);
 				player.takePhysDamage(damage, true);
 				player.takePhysDamage(damage, true);
@@ -29,7 +30,7 @@ public class Marae extends Monster
 			else if (evade != null) outputText("You manage to avoid her tentacles thanks to your superior evasion!");
 			else {
 				outputText("You attempt to slap away the tentacles but it's too late! The tentacles tickle your groin and you can feel your [ass] being teased! \"<i>You know you want me!</i>\" Marae giggles. ");
-				var lustDmg:int = (100 + rand(player.cor / 5) + rand(player.effectiveSensitivity() / 5) + rand(player.lib / 5) + rand(50)) * (EngineCore.lustPercent() / 100);
+				var lustDmg:int = (150 + rand(player.cor / 5) + rand(player.effectiveSensitivity() / 5) + rand(player.lib / 5) + rand(50)) * (EngineCore.lustPercent() / 100);
 				player.dynStats("lust", lustDmg, "scale", false);
 				outputText("(+" + lustDmg + " lust)");
 				
@@ -52,6 +53,9 @@ public class Marae extends Monster
 				outputText("but you fail and get hit instead! ");
 				var damage:int = (eBaseStrengthDamage() + rand(str));
 				damage = Math.round(damage);
+				player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
 				player.takePhysDamage(damage, true);
 				player.takePhysDamage(damage, true);
 				player.takePhysDamage(damage, true);
@@ -126,46 +130,43 @@ public class Marae extends Monster
 				this.long = "This being is known as the goddess of Mareth. She is corrupted due to the aftermath of the factory valves being blown up. She's white all over and textured with bark. The \"flower\" below her belly button resembles more of a vagina than a flower. Her G-cup sized breasts jiggle with every motion.";
 				this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("G"));
-				initStrTouSpeInte(400, 400, 370, 260);
-				initWisLibSensCor(260, 600, 410, 100);
+				initStrTouSpeInte(420, 420, 400, 270);
+				initWisLibSensCor(270, 800, 610, 100);
 				this.weaponName = "tentacles";
 				this.weaponVerb="slap";
-				this.armorDef = 1500;
-				this.armorMDef = 1500;
-				this.weaponAttack = 100;
-				this.bonusHP += 7500;
-				this.bonusLust = 1115;
-				this.additionalXP = 3000;
-				this.special1 = tentacleAttack;
-				this.special2 = tentacleRape;
+				this.armorDef = 2000;
+				this.armorMDef = 2000;
+				this.weaponAttack = 120;
+				this.bonusLust = 1550;
+				this.additionalXP = 4000;
 				this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
-				this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
+				this.createPerk(PerkLib.MonsterRegeneration, 3, 0, 0, 0);
 			}
 			else {
 				this.long = "This being is known as the goddess of Mareth. She is no longer corrupted thanks to your actions at the factory. She's white all over and textured with bark. Her breasts are modestly sized.";
 				this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("DD"));
-				initStrTouSpeInte(540, 540, 420, 310);
-				initWisLibSensCor(310, 120, 290, 0);
+				initStrTouSpeInte(640, 640, 440, 390);
+				initWisLibSensCor(390, 150, 320, 0);
 				this.weaponName = "fists";
 				this.weaponVerb="wrathful punch";
-				this.armorDef = 2100;
-				this.armorMDef = 2100;
-				this.weaponAttack = 150;
-				this.bonusHP += 30000;
-				this.bonusLust = 515;
-				this.additionalXP = 4000;
-				this.special1 = smite;
+				this.armorDef = 3000;
+				this.armorMDef = 3000;
+				this.weaponAttack = 180;
+				this.bonusHP += 35000;
+				this.bonusLust = 610;
+				this.additionalXP = 6000;
 				if (game.flags[kFLAGS.MINERVA_TOWER_TREE] > 0) {
-					this.armorDef = 900;
-					this.armorMDef = 900;
-					this.strStat.core.value += 260;
-					this.touStat.core.value += 260;
-					this.bonusHP += 20000;
+					this.armorDef += 1100;
+					this.armorMDef += 1100;
+					this.strStat.core.value += 290;
+					this.touStat.core.value += 290;
+					this.weaponAttack += 40;
+					this.bonusHP += 25000;
 					this.additionalXP += 2000;
-					this.createPerk(PerkLib.MonsterRegeneration, 9, 0, 0, 0);
+					this.createPerk(PerkLib.MonsterRegeneration, 11, 0, 0, 0);
 				}
-				else this.createPerk(PerkLib.MonsterRegeneration, 5, 0, 0, 0);
+				else this.createPerk(PerkLib.MonsterRegeneration, 6, 0, 0, 0);
 			}
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 1;
@@ -178,11 +179,11 @@ public class Marae extends Monster
 			this.weaponPerk = "";
 			this.weaponValue = 70;
 			this.armorName = "bark";
-			this.bonusHP = 5000;
+			this.bonusHP = 17500;
 			this.lust = 30;
 			this.lustVuln = .04;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 105;
+			this.level = 140;
 			this.drop = NO_DROP;
 			this.gems = 1000;
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

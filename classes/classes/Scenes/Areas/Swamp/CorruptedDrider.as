@@ -102,7 +102,7 @@ import classes.internals.*;
 		
 		public function driderMasturbate():void {
 			//-Masturbate - (Lowers lust by 50, raises PC lust)
-			lust -= 30;
+			lust -= (50 + (10 * player.newGamePlusMod()));
 			player.dynStats("lus", (10+player.lib/20));
 			outputText("The spider-woman skitters back and gives you a lusty, hungry expression.  She shudders and moans, \"<i>Mmm, just watch what you're missing out on...</i>\"\n\n");
 			outputText("As soon as she finishes, her large clit puffs up, balloon-like.  A second later, it slides forward, revealing nine inches of glossy, girl-spunk-soaked shaft.  Nodules ring the corrupted penis' surface, while the tiny cum-slit perched atop the tip dribbles heavy flows of pre-cum.  She pumps at the fleshy organ while her other hand paws at her jiggling breasts, tugging on the hard ");

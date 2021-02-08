@@ -40,6 +40,7 @@ package classes.Scenes.Places.HeXinDao
 			}
 			menu();
 			addButton(0, "Drink", drinkAlcohol);
+			addButton(2, "???", shadyPerson).hint("A strange two headed morph with two tails is sitting at one of the tables.");
 			addButton(4, "Adv.Guild", BoardkeeperYangMain);
 			//addButtonDisabled(5, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
 			//addButtonDisabled(6, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
@@ -93,6 +94,36 @@ package classes.Scenes.Places.HeXinDao
 			statScreenRefresh();
 			outputText("\n\nThe barman hands over the drink you ordered. ");
 			inventory.takeItem(drink, drinkAlcohol);
+		}
+
+		private function shadyPerson():void {
+			clearOutput();//Felix - male beffy bro nekomata twin herald npc
+			outputText("\"<i>Wanna buy something?</i>\" askes the cat head while dog one adds almost barking, \"<i>Or get lost...</i>\"\n\n");
+			menu();
+			addButton(10, necklaces.EZEKIELN.shortName, itemBuy, necklaces.EZEKIELN);
+			addButton(11, headjewelries.EZEKIELC.shortName, itemBuy, headjewelries.EZEKIELC);
+			addButton(12, jewelries.EZEKIELS.shortName, itemBuy, jewelries.EZEKIELS);
+			addButton(14, "Back", curry(enteringInn,false));
+			statScreenRefresh();
+		}
+		private function itemBuy(itype:ItemType):void {
+			clearOutput();
+			outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
+			//outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
+			if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
+				outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
+				//Goto shop main menu
+				doNext(shadyPerson);
+				return;
+			}
+			else outputText("\n\nDo you buy it?\n\n");
+			//Go to debit/update function or back to shop window
+			doYesNo(curry(debitItem,itype), shadyPerson);
+		}
+		private function debitItem(itype:ItemType):void {
+			flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
+			statScreenRefresh();
+			inventory.takeItem(itype, shadyPerson);
 		}
 
 		public function BoardkeeperYangMain():void {
@@ -863,8 +894,8 @@ package classes.Scenes.Places.HeXinDao
 			outputText("(<b>Neisa has been added to the Followers menu!</b>)\n\n");
 			if (flags[kFLAGS.NEISA_FOLLOWER] < 6) {
 				flags[kFLAGS.NEISA_LVL_UP] = 1;
-				flags[kFLAGS.NEISA_AFFECTION] = 1;
 				flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 0;
+				if (flags[kFLAGS.NEISA_AFFECTION] < 10) flags[kFLAGS.NEISA_AFFECTION] = 1;
 			}
 			flags[kFLAGS.NEISA_FOLLOWER] = 7;
 			doNext(camp.returnToCampUseOneHour);
@@ -950,7 +981,9 @@ package classes.Scenes.Places.HeXinDao
 			outputText("You let him fall limply on the ground and look at him, he has foam at the mouth. Geeze your nails are poisonous too? While you doubt you killed him, you don't want him to just get away with this either so you dump him in the box he originally reserved for you and lock him up.\n\n");
 			outputText("Thinking your problems to be over, you attempt to remove the cursed spell tag on your forehead but to your surprise it just doesn't come off. Guess you're stuck into this weird zombie like existence until you can find someone to help you with this. You literally hop out of the mage’s house, arm stretched forward, and head back to camp.\n\n");
 			outputText("(<b>Gained Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent</b>)\n\n");
-			if (rand(2) == 0) player.skinTone = "ghostly pale";
+			var skincolor:Number = rand(3);
+			if (skincolor == 0) player.skinTone = "snow white";
+			else if (skincolor == 1) player.skinTone = "ghostly pale";
 			else player.skinTone = "light blue";
 			player.faceType = Face.JIANGSHI;
 			player.eyes.type = Eyes.JIANGSHI;

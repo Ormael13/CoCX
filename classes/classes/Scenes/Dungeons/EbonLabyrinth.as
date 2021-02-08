@@ -54,6 +54,8 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		public function enterDungeon():void {
 			inDungeon = true;
 			dungeonLoc = 131;
+			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss);
+			player.createStatusEffect(StatusEffects.EbonLabyrinthBoss, 65, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.EbonLabyrinthA, 10, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.EbonLabyrinthB, 1, 0, 0, 0);
 			playerMenu();
@@ -257,37 +259,43 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			else player.createStatusEffect(StatusEffects.TFDealer1, 0, 0, 1, 0);
 			cleanupAfterCombat();
 		}
-		public function defeatedByBoosNo4():void {
+		public function defeatedByEyeTyrant():void {
 			clearOutput();
-			outputText("\n\n");
+			outputText("You fall to the ground defeated yet for some reason you are not reduced to ashes by the gazer. Instead your gaze is caught once more into its all encompassing eye.\n\n");
+			outputText("\"<i>Stay here… with me</i>\"\n\n");
+			outputText("Afterward you begin to lose the notion of time. You've been living in the depths with this thing for years now, satisfying its many appetites as they come. When she's hungry you go get her food and when she's in the mood you willingly offer your body to please her. She has all but subdued your willpower entirely making you its permanent willing slave. All you care about is to please the mistress now. ");
+			outputText("Every now and then the mistress rewards you and feeds you off course, can't exactly let you starve to death. You think you're forgetting something important however... didn't you have a mission, a duty? It does not matter though so long as your mistress is happy you are happy.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
-		public function defeatBoosNo4():void {
+		public function defeatEyeTyrant():void {
 			clearOutput();
-			outputText("\n\n");
+			outputText("You watch in confusion as the omni eyed girl simply vanishes from existence with a growl of anger. Well the passage ahead of you is free now so might as well take it.\n\n");
+			//if (player.hasStatusEffect(StatusEffects.TFDealer2) && player.statusEffectv1(StatusEffects.TFDealer2) < 1) player.addStatusValue(StatusEffects.TFDealer2, 1, 1);
+			//else player.createStatusEffect(StatusEffects.TFDealer2, 1, 0, 0, 0); - kiedy bedzie dodane gazer tf
 			cleanupAfterCombat();
 		}
-		public function defeatedByBoosNo5():void {
+		public function defeatedByAtlachNacha():void {
 			clearOutput();
-			outputText("\n\n");
+			outputText(" You fall to the ground defeated " + (player.lust >= player.maxLust() ? "by your growing lust":"") + ((player.inte <= 0 || player.wis <= 0) ? "as you lose your grip on reality going insane":"") + ". The last thing anyone will hear from you is your tortured screams as the nightmarish spiders cocoons you. ");
+			outputText("What will happen to you from now on is perhaps too horrible to be told and you will lose your sanity long before you die of fatigue, serving as this creature's plaything until you no longer can go on with your life.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
-		public function defeatBoosNo5():void {
+		public function defeatAtlachNacha():void {
 			clearOutput();
-			outputText("\n\n");
+			outputText("You barely manage to force the spider back into the back of the room as you finally escape the web rushing for the exit, your nightmarish pursuer only meters away from you as you finally leave the room. It claws and flail but you prove faster and manage to outrun it. This was a close one but now you can keep on exploring the labyrinth.\n\n");
 			cleanupAfterCombat();
 		}
-		public function defeatedByBoosNo6():void {
+		public function defeatedByLivingFailure():void {
 			clearOutput();
-			outputText("\n\n");
+			outputText("As you fall defeated by the fiend the last thing you see is the opening orifice of his massive dick as it proceeds to swallow you in. Past this point your death is left to speculation but most scholars agreed that these details were best left ignored and forgotten just like the horror you fought.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
-		public function defeatBoosNo6():void {
+		public function defeatLivingFailure():void {
 			clearOutput();
-			outputText("\n\n");
+			outputText("The fiend concentration wavers as one of his rebeling vagina tentacles encapsulate one of his erupting cock. The monster loses control of his magic if only for an instant causing the barrier to shatter. Not one to miss an opportunity you run away escaping this fiend back in the labyrinth however by chance you manage to bottle some of that oozing black fluid it was cuming.\n\n");
 			cleanupAfterCombat();
 		}
 		public function defeatedByBoosNo7():void {
@@ -319,6 +327,17 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			EventParser.gameOver();
 		}
 		public function defeatBoosNo9():void {
+			clearOutput();
+			outputText("\n\n");
+			cleanupAfterCombat();
+		}
+		public function defeatedByBoosNo10():void {
+			clearOutput();
+			outputText("\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
+		}
+		public function defeatBoosNo10():void {
 			clearOutput();
 			outputText("\n\n");
 			cleanupAfterCombat();
@@ -355,31 +374,31 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			}
 			else {
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 4) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					encountersRuletteBossesEL1HellSnail();
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 5) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					encountersRuletteBossesEL1Hydra();
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 6) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					encountersRuletteBossesEL1HellSnail();
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 7) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					encountersRuletteBossesEL1DarkSlimeEmpress();
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 8) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					encountersRuletteBossesEL1Hydra();
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 9) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					encountersRuletteBossesEL1DarkSlimeEmpress();
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 1) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					if (rand(2) == 0) {
 						player.addStatusValue(StatusEffects.EbonLabyrinthBoss1, 1, 3);
 						encountersRuletteBossesEL1Hydra();
@@ -390,7 +409,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 					}
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 2) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					if (rand(2) == 0) {
 						player.addStatusValue(StatusEffects.EbonLabyrinthBoss1, 1, 4);
 						encountersRuletteBossesEL1DarkSlimeEmpress();
@@ -401,7 +420,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 					}
 				}
 				if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss1) == 3) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
 					if (rand(2) == 0) {
 						player.addStatusValue(StatusEffects.EbonLabyrinthBoss1, 1, 5);
 						encountersRuletteBossesEL1DarkSlimeEmpress();
@@ -412,7 +431,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 					}
 				}
 				if (!player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) {
-					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,65,0,0,0);
 					var choice:Number = rand(3);
 					if (choice == 0) {
 						player.createStatusEffect(StatusEffects.EbonLabyrinthBoss1, 1, 0, 0, 0);
@@ -443,7 +461,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		public function encountersRuletteBossesEL1Hydra():void {
 			if (flags[kFLAGS.CODEX_ENTRY_HYDRA] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_HYDRA] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Hydra!</b>");
+				outputText("<b>New codex entry unlocked: Hydra!</b>\n\n");
 			}
 			spriteSelect(SpriteDb.s_hydra_16bit);
 			outputText("The first telltale that something might have gone really wrong is the hissing which seems to come from all around the room. The only warning you get of the impending attack is a sudden move of the shadows as a massive snake head bites the air mere inches from your face. You ready for battle as several huge snakes comes out of the shadow, each connected to a single junction to what appears to be the body of a very tall woman.\n\n");
@@ -510,11 +528,11 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		public function HellfireSnailSex():void {
 			outputText("The she snail giggle at your pleasant attention and begin to grind her lubricated pussy against "+(player.hasCock() ? "your burning cock" : "yours")+" in earnest. Blazing goop and other fluids begins to mingle as the two of you make it out the other residents of the labyrinth either oblivious or too scared to interfere with your smoldering mating session. ");
 			outputText("This might also be because the both of you spray fire and lava everywhere as part of mating and despite you both being immune to each other the unlooker likely wouldn't. The mating is deliberately slow, gentle and calculated with no single movement wasted as unlike most of Mareth denizen your current partner likes it nice and slow taking her time to make everything count.\n\n");
-			outputText("You reach your peak and erupt in orgasm your partner following short mere seconds after");
-			if (player.hasCock()) outputText(" as you fill her smoldering lovehole with "+player.race+" seeds");
+			outputText("You reach your peak and erupt in orgasm, your partner following short mere seconds after");
+			if (player.hasCock()) outputText(" as you fill her smoldering lovehole with "+player.race()+" seeds");
 			if (!player.hasCock()) outputText(" as your girl juice mix with hers");
 			outputText(".\n\n\"<i>Uwaaa so long since last I had real sex, most of my partners dies before I even reach the climax. Thank you so much hun for helping me out.</i>\"\n\n");
-			outputText("Hey if this can help her be less of a hazard to everyone around her then why not, your glad she appreciates it.\n\n");
+			outputText("Hey if this can help her be less of a hazard to everyone around her then why not, you're glad she appreciates it.\n\n");
 			outputText("\"<i>Hey before you go have a vial of this, I don't know if you will find it useful but who knows.</i>\"\n\n");
 			outputText("She hands you a vial of her saliva before you head out back in the labyrinth and resume your exploration.\n\n");
 			player.orgasm();
@@ -522,10 +540,108 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		
 		private function encountersRuletteBossesEL2():void {
 			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 4) {
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
+				encountersRuletteBossesEL2LivingFailure();
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 5) {
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
+				encountersRuletteBossesEL2AtlachNacha();
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 6) {
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
+				encountersRuletteBossesEL2LivingFailure();
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 7) {
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
+				encountersRuletteBossesEL2EyeTyrant();
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 8) {
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
+				encountersRuletteBossesEL2AtlachNacha();
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 9) {
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
+				encountersRuletteBossesEL2EyeTyrant();
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 1) {
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
+				if (rand(2) == 0) {
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 3);
+					encountersRuletteBossesEL2AtlachNacha();
+				}
+				else {
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 4);
+					encountersRuletteBossesEL2LivingFailure();
+				}
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 2) {
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
+				if (rand(2) == 0) {
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 4);
+					encountersRuletteBossesEL2EyeTyrant();
+				}
+				else {
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 5);
+					encountersRuletteBossesEL2LivingFailure();
+				}
+			}
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss2) == 3) {
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
+				if (rand(2) == 0) {
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 5);
+					encountersRuletteBossesEL2EyeTyrant();
+				}
+				else {
+					player.addStatusValue(StatusEffects.EbonLabyrinthBoss2, 1, 6);
+					encountersRuletteBossesEL2AtlachNacha();
+				}
+			}
+			if (!player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) {
+				player.addStatusValue(StatusEffects.EbonLabyrinthBoss, 1, 5);
+				var choice:Number = rand(3);
+				if (choice == 0) {
+					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss2, 1, 0, 0, 0);
+					encountersRuletteBossesEL2EyeTyrant();
+				}
+				if (choice == 1) {
+					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss2, 2, 0, 0, 0);
+					encountersRuletteBossesEL2AtlachNacha();
+				}
+				if (choice == 2) {
+					player.createStatusEffect(StatusEffects.EbonLabyrinthBoss2, 3, 0, 0, 0);
+					encountersRuletteBossesEL2LivingFailure();
+				}
+			}
+		}
+		private function encountersRuletteBossesEL2EyeTyrant():void {
+			outputText("While exploring the depth of the labyrinth you hear the sound of something dripping on the ground in the far distance. As you turn the corner you run into a black rippling form of tentacle mounted eyestalks. Tar-like fluids drip from the creature to the ground in constant drops. You're too stunned by this eldritch oddity to notice the eyestalks all stopped moving to point and stare at you, ");
+			outputText("the floating horror turning over itself gaze unblinking to reveal the form of a pale beautiful human half dripping with black goop. Everything about her body would look normal if not for the single all encompassing red eye below her black hairs and above her nose. She smiles revealing sharp teeth before a voice echo in your head coming from seemingly nowhere.\n\n");
+			outputText("\"<i>Yes… that is it stare into my eye… lose yourself inside, there is nothing but this eye you should ever look into.</i>\"\n\n");
+			outputText("For a moment you succumb, mumbling incoherently and walking to this beautiful eye calling to you, but the sound of the dripping fluid on the ground suddenly jars you to reality. You swiftly back away just before she tries and wraps her arms around you. Realising you snapped out of her dominating gaze the woman attacked.\n\n");
+			startCombat(new EyeTyrant(), true);
+		}
+		private function encountersRuletteBossesEL2AtlachNacha():void {
+			spriteSelect(SpriteDb.s_Atlach_16bit);
+			outputText("As you enter the next room you become increasingly wary of the environment. Webs intermingles everywhere in a complex and haunting display sometimes forming something not unlike eldritch symbols and patterns. The room is vast and you can even spot what appears to be shining treasure to the far end, however there is little doubt that this conveniently placed loot is well guarded. ");
+			outputText("As you approach to grab the items your foot gets glued to the web and in an effort to pull it off you cause the webbing to shake on the entirety of the room. You try and back off as countless amounts of red lights appear in the darkness in front of you, the disgusting sounds of tentacles rubbing one after another being heard as a nightmarish creature slowly skitters moves out of the shadow as to access its prey.\n\n");
+			outputText("This horror has the body of a spider but way too many eyes to be one. It has eyes on its leg head and even backs but the most horrifying is its face. The thing's face has no mouth, just a wriggling amalgam of rapidly moving tentacles which flail about wildly in anticipation! You got caught into its web and there's little way you can escape unless you defeat it if only temporarily.\n\n");
+			startCombat(new AtlachNacha(), true);
+		}
+		private function encountersRuletteBossesEL2LivingFailure():void {
+			outputText("As you enter the room you are greeted right away by a monstrosity not meant to exist in the waking world.\n\n");
+			outputText("In front of you, sitting in the middle of a pond of ever flowing cum is a 15 feet tall abomination. The creature has the body of a grown man with the head and hooved legs of a goat and that would be weird enough if not for the quartet of bat wings and tentacles at its back. The heart tipped tail alone is enough to hint at its demonic origin but you could have figured that out simply from how ");
+			outputText("vigorously its first set of claw tipped hands jerk its two massive erupting horse cocks under which a quarter of melon sized balls constantly churn with more vile fluids. The thing seems locked in constant orgasm as if the corruption within its body was so unstable the only option was to constantly cum it out yet at the same time it is frozen in a meditative pose, both legs crossed and its ");
+			outputText("two free hand palm to palm as if praying. You're just about to leave when the thing suddenly speaks arcane power sealing your exit with a barrier. Behind the pleasure glazed expression of its eyes you can see it's malevolent intensions. It's not going to let you leave.\n\n");
+			startCombat(new LivingFailure(), true);
+		}
+		
+		/*private function encountersRuletteBossesEL2AtlachNacha():void {
 			outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
 			outputText("<b>It's placeholder encounter to test procing boss fight!</b>");
 			startCombat(new DisplacerBeast(), true);
-		}
+		}*/
+		
 		private function encountersRuletteEL1():void {
 			if ((rand(100) < player.statusEffectv1(StatusEffects.EbonLabyrinthA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				var reset:Number = 10;
@@ -714,6 +830,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You walk into an empty corridor thankfully it seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
+			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomDDD, roomDDD, roomBBB, roomBBB, roomCCC, roomCCC);
 		}
 		public function roomBBB():void {
@@ -725,6 +842,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You turn the corner wandering into a new corridor which thankfully seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
+			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomCCC, roomCCC, roomAAA, roomAAA, roomDDD, roomDDD);
 		}
 		public function roomCCC():void {
@@ -736,6 +854,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You walk into an empty corridor thankfully it seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
+			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomBBB, roomBBB, roomDDD, roomDDD, roomAAA, roomAAA);
 		}
 		public function roomDDD():void {
@@ -747,6 +866,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You turn the corner wandering into a new corridor which thankfully seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
+			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomAAA, roomAAA, roomCCC, roomCCC, roomBBB, roomBBB);
 		}
 		public function checkingTodayMenu():void {
@@ -773,13 +893,21 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersLootChest();
 			}
+			//else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 14 && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne) && rand(10) == 0) supriseencounter();
+			//else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 2 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 4 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 6) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 50 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 100 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 150) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersRuletteBossesEL1();
-			}/*
+			}
+			//else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 12 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 14 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 16) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 200 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 250 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 300) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersRuletteBossesEL2();
+			}/*
+			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 22 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 24 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 26) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			else if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 350 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 400 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 450) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
+				encountersRuletteBossesEL3();
 			}*/
 			else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 295 && player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv1(StatusEffects.RathazulAprilFool) == 0 && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);

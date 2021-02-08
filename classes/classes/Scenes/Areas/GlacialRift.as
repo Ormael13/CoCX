@@ -3,7 +3,7 @@
  * Glacial Rift is a area with level 70-100 (outer) or 105-140 (inner) encounters
  * Please see this project. (This is not mine.) http://forum.fenoxo.com/thread-10719.html
  */
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -21,7 +21,7 @@ import classes.Scenes.NPCs.GooArmor;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
-	
+
 	public class GlacialRift extends BaseContent
 	{
 		public var yukionnaScene:YukiOnnaScene = new YukiOnnaScene();
@@ -29,18 +29,18 @@ use namespace CoC;
 		public var giantScene:FrostGiantScene = new FrostGiantScene();
 		public var winterwolfScene:WinterWolfScene = new WinterWolfScene();
 		public var wendigoScene:WendigoScene = new WendigoScene();
-		
-		public function GlacialRift() 
+
+		public function GlacialRift()
 		{
 		}
-		
+
 		public function exploreGlacialRift():void {
 			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT]++;
 			doNext(playerMenu);
-			
+
 			var choice:Array = [];
 			var select:int;
-			
+
 			//Build choice list!
 			choice[choice.length] = 0; //Yuki Onna (lvl 71) OR Frost Giant (lvl 89)
 			choice[choice.length] = 1; //Yeti (lvl 76)
@@ -53,7 +53,7 @@ use namespace CoC;
 			if (rand(3) == 0) choice[choice.length] = 8; //Freebie items!
 			if (rand(15) == 0) choice[choice.length] = 9; //Ornate Chest or cache of gems/pile of stones
 			choice[choice.length] = 10; //Find nothing!
-			
+
 			//DLC april fools
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
                 Holidays.DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
@@ -80,7 +80,7 @@ use namespace CoC;
 				return;
 			}
 			//Fenrir ruined shrine
-			if (player.faceType == Face.WOLF && player.ears.type == Ears.WOLF && player.arms.type == Arms.WOLF && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0 && rand(5) == 0) {
+			if (player.faceType == Face.WOLF && player.ears.type == Ears.WOLF && player.arms.type == Arms.WOLF && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Gleipnir Collar") < 0 && rand(5) == 0) {
 				FenrirRuinedShrine();
 				return;
 			}
@@ -110,9 +110,15 @@ use namespace CoC;
 					}
 					outputText("Hearing a thunderous roar, you ready yourself for a fight");
 					if (player.weaponName != "fists") outputText(", holding your [weapon] at the ready");
-					outputText(". A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the iced caverns with ease as you stare the beast down. The white blur of an ice yeti attacks you!");
-					startCombat(new Yeti());
-					break;
+					if (player.yetiScore() > 14 && player.hasVagina() && player.femininity > 40) {
+						yetiScene.FemalePCMeetYeti();
+						break;
+					}
+					else {
+						outputText(". A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the iced caverns with ease as you stare the beast down. The white blur of an ice yeti attacks you!");
+						startCombat(new Yeti());
+						break;
+					}
 				case 2: //Frost Giant
 					clearOutput();
 					outputText("You wander the frozen landscape of the Rift, frozen rocks, frosted hills and forested mountains your only landmarks. As you cross the peak of a rather large, lightly forested hill, you come face to gigantic face with a Frost Giant! He belches fiercely at you and you tumble back down the hill. He mostly steps over it as you come to your senses. You quickly draw your [weapon] and withdraw from the hill to prepare for battle.\n\n");
@@ -157,7 +163,7 @@ use namespace CoC;
 						}
 						else if (itemChooser == 1) {
 							outputText("As you make your way across the icy wastes, you notice a small corked ivory horns half-buried under the snow, filled with a thick sweet-looking liquor. You stop and dig it up, sniffing curiously at the liquid. The scent reminds you of the honey secreted by the bee-girls of Mareth, though with hints of alcohol and... something else. You place the horns of mead in your bag and continue on your way. ");
-							inventory.takeItem(consumables.GODMEAD, camp.returnToCampUseOneHour);					
+							inventory.takeItem(consumables.GODMEAD, camp.returnToCampUseOneHour);
 						}
 					//}
 					break;
@@ -197,7 +203,7 @@ use namespace CoC;
 						}
 						else {
 							var gemsFound2:int = 40 + rand(160);
-							outputText("As you wander the rift your foot hits something burrowed under the snow. It is a treasure chest and it looks packed to the brim.\n\nInside was " + String(gemsFound) + " gems! ");
+							outputText("As you wander the rift your foot hits something burrowed under the snow. It is a treasure chest and it looks packed to the brim.\n\n Inside was " + String(gemsFound) + " gems! ");
 							player.gems += gemsFound2;
 							statScreenRefresh();
 						}
@@ -215,64 +221,83 @@ use namespace CoC;
 					doNext(camp.returnToCampUseOneHour);
 			}
 		}
-		
+
 		private function fightValeria():void {
 			clearOutput();
 			outputText("You ready your [weapon] for a fight!");
 			startCombat(new GooArmor());
 		}
-		
+
 		private function FenrirRuinedShrine():void {
 			clearOutput();
-			if (flags[kFLAGS.FENRIR_COLLAR] == 1) {
-				outputText("On your way to the glacial rift you find your way back to the temple again and the menacing voice of Fenrir echoes.");
-				outputText("\n\n\"<i>’So have you reconsidered my offer? You can take your time, I have an eternity ahead of me.</i>\"");
-				outputText("The collar is still patiently waiting on the altar. Will you take the collar and allow the black god the freedom he craves or will you ignore it and leave?");
-				addButton(0, "Put the collar", putTheCollar);
+			if (flags[kFLAGS.FENRIR_COLLAR] == 2) {
+				outputText("Once more you are drawn into the Temple of Fenrir, and the collar stands before you on Fenrir's petrified form. The god does not speak, but you feel him watching you, silently posing his dreadful question again.\n\n");
+				outputText("Will you take the collar and inherit the dark god's will, or will you refuse, for now?\n\n");
+				addButton(0, "Take It", putTheCollar);
+				addButton(1, "Leave", leaveShrine);
+			}
+			else if (flags[kFLAGS.FENRIR_COLLAR] == 1) {
+				outputText("Wandering the Glacial Rift you find yourself drawn once more to the ruins of the Temple of Fenrir. You enter it again, drawn by the thread of Urdr, and the menacing voice of Fenrir echoes in your mind.\n\n");
+				outputText("\"<i>Welcome, feeble one. You see my words were true, as they always are. Shall you reconsider my offer? So long as you bear the shape of my fallen children the choice shall remain open to you.</i>\"\n\n");
+				outputText("The chained collar still sits around the neck of Fenrir's petrified form. Will you take the collar and inherit the dark god's will, or will you refuse, for now?\n\n");
+				flags[kFLAGS.FENRIR_COLLAR]++;
+				addButton(0, "Take It", putTheCollar);
 				addButton(1, "Leave", leaveShrine);
 			}
 			else {
-				outputText("As you walk in the Glacial rift you spot what looks like an old ruin covered in snow, the entrance barely visible from the outside. Clearing some of the snow you open yourself a path. You walk inside what looks to be a room of which the walls are made out of magical ice. The circular room has several pillars, some of them shattered as if a great battle had raged here. At the bottom of the room stands the statue of a fearsome looking wolf made out of what appears to be a diamond like structure, at the foot of which is an altar on which has been placed what looks like a collar made for a huge animal.  ");
-				outputText("The collar is bound to the altar with chains and, despite the fact the place has likely been abandoned for centuries, they seems to be quite strong. As you approach the altar, a powerful masculine voice echos throughout the room making the ancient structure shake with its power alone.");
-				outputText("\n\n\"<i>You who dares to approach my ruined shrine and enter the boundary of my prison... speak up... why have you come here?</i>\"");
-				outputText("\n\nYou present yourself telling you're a champion sent to Mareth to defeat the demons.");
-				outputText("\n\n\"<i>Defeating the demons eh? Have the gods sunk so low as to fear vermins now?</i>\" The voice roars in an unsettling laugh making the icy chamber shake.");
-				outputText("\n\nYou ask just who or what is talking.");
-				outputText("\n\n\"<i>You mortals have forgotten the gods and their battle. I am what one could call... a fallen deity... a divinity who had been sealed by the other gods for fear of its power because they could not control me, they couldn't TAME me. ");
-				outputText("I am the cold hand of winter, the howling blizzard, the treasonous chill of death. I am Fenrir, and I am the deity of this blasted lost glacial land... Or rather, I was until the pantheon itself teamed up to seal me in this ridiculous collar, destroying my body and scattering its remnants across the glacial rift in the form of puppies. I fear no demons, I was there before them and will still be there after them. Right now I only wish one of those fiends would come here and set me free so that I could exact my vengeance.</i>\"");
-				outputText("\n\nFaced with such a malevolent being you prepare to leave as the voice rise again.");
-				outputText("\n\n\"<i>’I will never be able to fully take form again. However, as your body is close enough to my original form, I have a favor to ask that only you mortals could do. Take this collar and wear it so that at least what is left of my once mighty spirit can see the world again through your eyes. In exchange, I will grant you a fraction of my once almighty divine power. For it is power that you seek is it not?</i>\"");
-				outputText("\n\nThe voice has a sinister laugh for a moment then falls silent leaving you a choice. Will you leave the shrine or will you take the risk and put on the collar?");
-				addButton(0, "Put the collar", putTheCollar);
+				outputText("As you explore the frigid wasteland at the foot of the icy mountains, you realize that for the last few minutes your steps have been guided by something; not a smell of the kind you've found so vibrantly part of your new lupine awareness, but some sort of call that reaches similarly into you and pulls you onward with the weight of destiny, or doom. You attempt to redirect yourself several times, but somehow the minute your mind wanders again from conscious resistance you find yourself facing the same way again, and after a time you give up, submitting yourself to the mysterious attraction and whatever awaits you at its source.\n\n");
+				outputText("Cresting a small hill, the ice beneath you suddenly cracks, and you tumble down a steep slope; fortunately you come to rest without harm, and when you regain your footing you find yourself at the bottom of a small well in the ice. The air here is clear, cold, and still; you can see the perpetual ice-storm blowing dozens of feet above your head, obscuring your view of the sky and the mountains, but straight ahead you can see clear to the other side of the depression, hundreds of feet. There, standing from the frozen ground in ghastly relief you can see a ruined building. In fact, you can see little else; your eyes are drawn magnetically to it and before you even gather your thoughts you are standing nearly at the threshold, your feet having carried you there on their own. It is a building of gray stone, with cruel, brutal lines, as if the twisted peak of an unclimbable mountain were snapped off by a malevolent giant and placed here in the realm of the earthbound as a mockery, or a warning. A yawning archway, symmetrical and carved with an unfamiliar, harshly angular script opens into darkness, and you step inside.\n\n");
+				outputText("Somehow, beyond the forbidding entryway the interior is not dark; or perhaps your eyes have somehow adjusted to the gloom. There is only one way forward, and you follow the smooth, stone passage into a great gallery, much larger than the structure's appearance would have indicated; perhaps you have descended and are underneath the frozen surface? Certainly the walls appear coated with a thick layer of ice cold enough to have acquired dust, and a muted, chilly luminescence drifts down from the ceiling, making it difficult to tell exactly how high the room goes. The floor, too, is coated in ice, but some feet below you can see a stone floor, gouged and cracked from some terrible movement of the earth, or perhaps some other violence of similar power. Carved pillars of stone stretch up around the perimeter, some shattered similarly to the floor.\n\n");
+				outputText("At the far end of the room there is a statue of pale, faintly marbled stone carven in the shape of a wolf. Or, not <i>a</i> wolf, surely <i>the</i> wolf, you think; the form of all that is lupine. Its lips are parted and peeled in a feral snarl, revealing sharp fangs that seem dripping with hunger even in this lifeless form. Its eyes are open and focused forward with all the intensity of the most terrifying predator, and draw you in with shuddering magnetism despite being only a shape carved in the statue's surface. Its lean, haggard, but ruggedly muscled form is half-turned sideways, as if it were circling you, cutting off any escape, and ready to pounce on your exhausted spirit. You approach it in a mixture of fear and reverence; something in your wolfish instincts resonates to this terrible form, and you approach it despite your misgivings.\n\n");
+				outputText("The only part of the statue not carved of the same pale stone is a great collar of black leather, lined with great white spikes jutting outward, each several inches long, wickedly sharp, and scored with runes similar to those lining the entrance of this place and the pillars. Thick chains trail down from it, anchoring the wolf's neck to something below the ice; glancing down, you realize the raised bed of stone on which the statue sits is really the top of an imposing dais or altar. Moved by a strange impulse to reach out and touch the collar.\n\n");
+				outputText("\n\n\"<i>Hold, feeble one!</i>\" A voice, seemingly without source, cuts through your body like a chill wind. It sounds infinitely distant, but somehow all around you, and something in its quality suggests the same curled-back, snarling lips and knife-like fangs of the gaping mouth in front of you.\n\n");
+				outputText("You stop your paw, unable to resist the command; the voice takes hold of your body from the inside-out, nearly driving your own will and consciousness from you. By an intense act of will you keep yourself conscious enough to listen as the voice continues its icy proclamation.");
+				outputText("\"<i>Full many ages has it been since aught but ghosts trod these cursed, forbidden halls. You, mortal, you are of the tribe of men, yet by some magic you wear the form of my lost children, long scattered and reduced to mere beasts. Willingly, it would seem; I smell no geas upon you. What drew you to my prison, my grave? Speak, I command you, and do not remain silent, for I am Fenrir!</i>\"\n\n");
+				outputText("You speak, and do not remain silent, humbly introducing yourself and explaining your quest to free Mareth of its demonic oppressors. Fenrir's voice does not interrupt you, yet you feel the pressure of his judgment against your body all the same. When you have finished your explanation, Fenrir gives a scornful chuckle.\n\n");
+				outputText("\"<i>Heh heh heh... to think, those who came after I slaughtered my ancient enemies, to rebuild the ruins of the old world, who feared my strength yet were strong enough to chain me here for all their age, have fallen so far as to fear mere vermin? These false immortals, cursed bodies kept alive only by the loss of that which would carry them beyond death? Would a great warrior cast away his weapons and save his life at the cost of his lasting glory? What poets would sing of him, save in mockery, until his very name were a shape of laughter? Would not his fall rob even his children of that which would grant them immortality? Such fools could be a threat only to the weakest of the weak. Ha ha ha... HAAA HAAAAA HAAAAAAAA!</i>\"\n\n");
+				outputText("You shudder at the malice dripping from the voice's cruel, vindictive speech, and the harsh, mocking laughter with which he dismisses all the pain and suffering you've seen during your travels. Yet, somehow, you also find it attractive; surely this is the voice of true strength, laughing at the weak and their struggles? You ask the voice who it really is. Is the wolf on the alter him? You have not heard the name Fenrir before, in any of the stories from your own world nor here in Mareth.\n\n");
+				outputText("\"<i>It is no surprise that the usurpers have buried my name, as they buried my prison, terrified as they were of my prowess. Know this, feeble one: I am Fenrir! The Deadly Bite of Winter's Chill, Son of Giants, the God-Beast most feared by the Aesir behind the All-Devouring Serpent himself. At the last I swallowed the Sun and plunged the world of men into eternal darkness, and proved the bane of the Chief of the Aesir, whose one eye could not follow my speed nor his magical spear find my hide. With his blood I whetted my appetite for death, and on death did I feast until nought remained, and the world went silent save for my howling, until the usurpers arose to begin the great cycle anew.</i>\n\n");
+				outputText("Somehow despite the obvious boasts coming from the voice, which seems to crawl into your skin and dance up your spine with cold claws until you are left rattling with a cold that your fur cannot protect you from, you are left with absolutely no doubt that every word it speaks is the ungarnished truth. Surely you have uncovered an ancient evil that must not be released upon the world? You turn to leave, but the voice commands you once more.\n\n");
+				outputText("\"<i>Halt, mortal. I am not finished.</i>\" Once more you obey despite yourself; again it is all you can manage just to keep your mind mostly in charge of your body. The voice continues. \"<i>What I have spoken is true, but it is also true that my confinement has done what no god's spear or ancient warrior's blade could do, and my true strength has waned far from what it was. I will never again take form in this world, even if you were to release me from Gleipnir, this cursed chain forged of the sound of cat's silent steps and other falsities, against which I am powerless. But... I could let the last of my power into those chains, and the collar that binds me. Those you could take, and inherit my will and my power; you could unleash the wild howl of winter across this world once more, and sweep the Demons you so fear away like the last leaves of autumn before the blizzard! Come, will you take my offer? My power, the power of a god, yours to command?</i>\"\n\n");
+				outputText("You ask if this would not mean his death.\n\n");
+				outputText("\"<i>Ha ha ha! Fool! I am a god! I fear no death, for my being lies in my power, not in my thoughts, memory, or shape. Those can pass away into the forgotten past, yet if my power continues to shape the world whoever wields it will be but writing the new chapter of my saga, and their deeds will carry me forward into the immortal future. But I am not my father; no weaver of pleasant lies or cunning traps am I. My power is in strength, cruelty, the ferocity of the hunter who tears the throat of its prey from the front. See what is before you with my eyes, and decide for yourself what you wish to do. I will not trick you or force you; an unwilling vessel for my power would write but a poor tale to glorify me.</i>\"\n\n");
+				outputText("With a rush of cold you feel something take hold of your body, and suddenly you see the wolf statue, the collar, and the chain in front of you with eyes that understand. The wolf statue seems blurred, overlaid with itself in a wavering fashion, and you realize that, far from a statue, it is truly all that remains of Fenrir as he once was; his spirit weakly clings to it but cannot shake free of the chains that bind him.\n\n");
+				outputText("The chain glows with a ghostly, pale light, and it is nearly transparent; what looked to your mortal eyes like heavy metal links now looks more like rings of air coated in thinly laid spidersilk. Surely they must be light as a feather, weightless, yet you understand that it is their very ephemerality that makes them strong: how can you break what never held together in the first place? You cannot grapple with smoke, so what if smoke grappled with you? You shudder at the thought of being bound with those chains. The spikes on the collar with their runic carvings you can now read and understand; they are curses of finality, of inescapability. You know that once you put on that collar your fate will be irrevocably changed. There will be no going back from this decision. And yet, for all that, you see, or at least feel, the sheer vastness of the power you are being offered. It is a violent, cruel power; the power to destroy, to devour, to drive the life and light from the world. You doubt that your use of that power can lead to a truly happy end... and yet, you can easily see Lethice and her Demon army scattering before it, so vast is its potential even in this diminshed state.\n\n");
+				outputText("You hear Fenrir's voice chuckle one more time as he tempts you, yet you do not doubt that what you have seen is the truth of the matter. Will you assume the mantle of the evil god of winter and darkness, or will you retain what is left of your humanity?\n\n");
+				addButton(0, "Wear It", putTheCollar);
 				addButton(1, "Leave", leaveShrine);
 			}
 		}
-		
+
 		private function putTheCollar():void {
 			clearOutput();
-			outputText("You pull against the chains binding the collar to the table, and using a warhammer left nearby shatter the binding extremities on the ground and pick the collar up, for some reason the chains still tied to the collar refuse to break, alluding to it's indestructibility. You open and fasten the collar around your neck and the voice of the sealed deity washs over your mind.");
-			outputText("\n\n\"<i>Free... I am FREE! I have thousands of years of retribution to enact on this world and you will help me with it! You want power, I will grant you all the power you want as long as you use it in the most destructive way possible to further my goal.</i>\"");
-			outputText("\n\nThe black god didn't lie, you feel power like you could never have imagined pouring into you, altering you into a creature people could only fear or kneel to in silent awe. You are not just a regular wolf now… no you are THE Fenrir, a beast of legend that had terrorised both gods and mortals for thousands of years. It is high time they remember your existence, an existence they thought forgotten and forever sealed and with the new power you obtained it is something well within your reach.");
-			outputText("\n\nFor a few seconds, cold air washs against your eyes and no matter how much you try to cover them with your hands to end the freezing sensation it won't stop. As your eyes begins to water the chilling finally ends, you remove your hand as everything before you looks way clearer, especially the snow which no longer blinds you. As you look at your reflection in the water you discover that not only do your eyes glow with an unsettling blue aura, from your eyes now emanate a pair of bluish smoke of cold air in contrast with the ambient heat. <b>You now have glowing icy eyes!</b>");
-			outputText("\n\nYou feel the air freeze and condensate around you, specifically behind your shoulder blades and along the length of your spine. Jagged Ice spikes seems to have covered your back but oddly enough you don't feel the cold. <b>Your back is now covered with sharp ice spike constantly cooling the air around you. (Gained Frozen Waste and Cold Mastery perks)</b>");
-			outputText("\n\nYou suddenly feel something raging in you wanting to be unleashed as it slowly climbs out of your chest. It rushes through your throat and you scream a titanic primordial roar as the air in front of you changes with a massive drop of temperature and everything is covered with a thick layer of solid ice. You massage your throat for a moment, noticing as thin volumes of condensation constantly escape from your maw. <b>You can now use Freezing Breath and Frostbite.</b>");
+			outputText("Moving with the weight of destiny, you pull on the chains where they emerge from the icy floor. Strangely, they break easily in your hands, shattering like the shell of ice over a frozen puddle, then hanging limply from the collar. Fenrir remains silent, but you feel his presence pounding with expectation as you approach the statue's gaping mouth to pull the collar over it. You try to remove the chains, but for whatever reason what remains of them feels as unyielding as the hardest steel, even though they are, as you expected, nearly weightless. The collar is supple even after however many hundreds or thousands of years it has sat in this frozen, forgotten place, and it slips over the wolf's head easily, as if its size were a matter of context. Indeed, as you slip it over your own head in your final act of acceptance of the dark god's offer, you find that once it is around your neck it fits you as if it were made for you, and by no effort can you get it back off again. You will not be removing this collar, perhaps ever.\n\n");
+			outputText("\"<i>IT IS DONE!!!!!</i>\" echoes Fenrir's voice, with such force that patches of ice on the walls and floor around you begin to shatter and crumble. The room trembles ominously, and you run quickly to the exit, the rumbling increasing in intensity behind you. Something prevents you from looking back, but you strongly suspect that no one, mortal or otherwise, will be entering that chamber ever again.\n\n");
+			outputText("You feel power flowing into your limbs and, somehow, into your soul. The black god speaks up once more. \"<i>So you see, I spoke no lie to you, feeble one... no, little godling. You shall not hear my voice again; henceforth your voice shall be the voice of Fenrir, bringing terror to the weak, drawing to fierce battle the courageous who dare stand against you. You shall write the story of my glory for the new age, and ages to come. Rejoice, godling, <b>you are the Fenrir</b>. Go forth and hunt, and taste deeply of death. With my last words I give you my blessing, before I pass beyond time and memory: your enemies shall know the bite of winter's chill.</i>\"\n\n");
+			outputText("Fenrir's last act, or the old god's last act, is a mighty howl that surely must echo across all of the Glacial Rift and beyond; you see the mountaintops shaking and hear the sound of a hundred avalanches as the dread sound disturbs the frozen peace of this place; and then, like a passing dream, it is gone, and you hear no more. Then you feel many strange sensations hit you all at once, beginning with your eyes, which suddenly begin to freeze over in an amazingly painful way. You try to blink, to rub them, to claw the ice away, but nothing works, and you collapse to your knees howling in agony until suddenly the pain ceases, and once more you can see and blink. Your eyes still feel cold, but the sensation no longer registers as pain, as if it were your natural state. <b>You now have glowing icy eyes!</b>\n\n");
+			outputText("The feeling then sprouts along the back of your neck and down your spine, and you pitch forward in simliar agony as you feel something pierce through your skin outward, freezing and burning its way out and down all the way to the base of your lupine tail. Once more you howl in pain, then once more the pain abruptly ceases, but not the feeling of the cold. Indeed, you notice that even the cold of the air and the frozen ground no longer feel painful; they feel comfortable, in fact. The chill air is bracing and energizing, and you are filled with the urge to race forward and chase, corner, bite, devour, kill. The frozen wastes of the world belong to <b>you</b>. They are <b>your</b> hunting ground, <b>your</b> kingdom, and let all who dare to trespass fear your wrath! <b>Your back is now covered with sharp ice spike constantly cooling the air around you and protecting you from the cold. (Gained Frozen Waste and Cold Mastery perks)</b>\n\n");
+			outputText("Then, suddenly, you feel even the warmth inside your own body die out, replaced by a creeping chill that starts at your extremities and creeps inward, killing the heat of life, the palpable kindness of living warmth, and replacing it with the cruel chill of the dead, still air of a lightless winter night. As it spreads up your torso something forces its way up and out, and you howl one last time, not in pain but in exultation, and the very air before you stills its movement as your voice saps the life and warmth from it. <b>You can now use Freezing Breath and Frostbite.</b>\n\n");
+			outputText("With a new sense of purpose and the thrill of the coming hunt you return to your camp. Let Lethice and her Demons tremble in the cold of the coming winter; Mareth has something far greater to fear now. Your ice will spread and cover the world of the living until all know and shiver at the name of <b>Fenrir</b>.\n\n");
             CoC.instance.mutations.setEyeTypeAndColor(Eyes.FENRIR, "glacial blue");
             player.rearBody.type = RearBody.FENRIR_ICE_SPIKES;
 			player.createPerk(PerkLib.ColdMastery, 0, 0, 0, 0);
 			player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);
 			player.createPerk(PerkLib.FromTheFrozenWaste, 0, 0, 0, 0);
 			player.createPerk(PerkLib.FenrirSpikedCollar, 0, 0, 0, 0);
-			player.createKeyItem("Fenrir Collar", 0, 0, 0, 0);
+			player.createKeyItem("Gleipnir Collar", 0, 0, 0, 0);
 			dynStats("cor", 100);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function leaveShrine():void {
 			clearOutput();
-			outputText("You're not sure if putting this collar on is the brightest idea especially considering it's an item belonging to an evil deity. You decide to leave and go back when you're ready to make a choice however Fenrir still manage to reply a sinister promise as you leave the cave.");
-			outputText("\n\n\"<i>It doesn't matter how long it takes you to make the choice. I have waited hundred of years and will still wait as long as it takes for someone to set me free. If not you then even a demon would do. Would you rather have my power in the hands of your foes? I promise you that if a demon unbinds me you'll be the first prey I'll devour.</i>\"");
-			outputText("\n\nOn those word Fenrir fall silent again as you make your way back to your camp.");
-			if (flags[kFLAGS.FENRIR_COLLAR] < 1) flags[kFLAGS.FENRIR_COLLAR] = 1;
+			if (flags[kFLAGS.FENRIR_COLLAR] == 1) outputText("You turn to leave, still refusing Fenrir's offer. His voice echoes softly behind you. \"<i>Until next time, feeble one. May you live until the thread of Urdr draws you here once more.</i>\"");
+			else if (flags[kFLAGS.FENRIR_COLLAR] < 1) {
+				outputText("This seems like a bad idea. You don't doubt that the dark god has shown you the truth, but you've come this far without making choices you can't take back, and this choice in particular doesn't feel like the place to start. You return your paw to your side and move to leave the cavern, and Fenrir's voice echoes around you one more time.");
+				outputText("\n\n\"<i>Your choice is your own, feeble one. I speak the truth; I shall not force you. You will be a fitting vessel for my power only if you take it willingly, and knowing full well what it entails. Until you decide differently I will wait here, patiently. But know this: it was the weight of Urdr's thread that brought you to this place, and you may find resisting it as hard a burden as the one you already bear. Make no mistake, so long as you bear the shape of my scattered children we will meet here again, and you will have to choose once more.</i>\"");
+				outputText("\n\nOn those word Fenrir falls silent again as you make your way back to your camp.");
+				flags[kFLAGS.FENRIR_COLLAR] = 1;
+			}
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

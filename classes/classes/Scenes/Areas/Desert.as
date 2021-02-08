@@ -112,7 +112,7 @@ use namespace CoC;
 					}, {
 						name: "desert eagle",
 						when: function ():Boolean {
-							return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1;
+							return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Desert Eagle") < 0;
 						},
 						chance: 30,
 						call: partsofDesertEagle
@@ -239,7 +239,6 @@ use namespace CoC;
 			clearOutput();
 			outputText("As you explore the desert you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
 			outputText("You carefully put the pieces of the Desert Eagle in your back and head back to your camp.\n\n");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 1, 1);
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Desert Eagle", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);

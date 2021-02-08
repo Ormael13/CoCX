@@ -31,7 +31,7 @@ use namespace CoC;
 			flags[kFLAGS.DISCOVERED_CAVES]++;
 			
 			//Harpoon gun
-			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) == 0 && player.statusEffectv2(StatusEffects.TelAdreTripxi) == 1 && rand(2) == 0) {
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) == 0 && player.hasKeyItem("Touhouna M3") < 0 && rand(2) == 0) {
 				partsofTouhounaM3();
 				return;
 			}
@@ -75,7 +75,7 @@ use namespace CoC;
 			choice[choice.length] = 2; //3Dark Slime (lvl 55)
 			choice[choice.length] = 3; //4Displacer Beast (lvl 60)
 			choice[choice.length] = 4; //5Ebonbloom
-			choice[choice.length] = 5; //6Methir Crystal
+			choice[choice.length] = 5; //6Methir Crystal OR Magical eye drops
 			if (rand(4) == 0) choice[choice.length] = 6; //7Find nothing!
 			
 			select = choice[rand(choice.length)];
@@ -111,8 +111,14 @@ use namespace CoC;
 					break;
 				case 5://6
 					clearOutput();
-					outputText("As you explore the cave, you run into a weird neon blue crystal that glow in the dark. You pack it in your backpack in case it could be sold for a decent amount"+(silly() ? ", perhaps to a drug dealer" : "")+". ");
-					inventory.takeItem(consumables.METHIRC, camp.returnToCampUseOneHour);
+					if (rand(2) == 0) {
+						outputText("As you explore the cave, you run into a weird neon blue crystal that glow in the dark. You pack it in your backpack in case it could be sold for a decent amount"+(silly() ? ", perhaps to a drug dealer" : "")+". ");
+						inventory.takeItem(consumables.METHIRC, camp.returnToCampUseOneHour);
+					}
+					else {
+						outputText("As you explore the cave, you run into a bottle of eye drops. You pack it in your backpack in case it could be sold for a decent amount. ");
+						inventory.takeItem(consumables.ME_DROP, camp.returnToCampUseOneHour);
+					}
 					break;
 				default:
 					clearOutput();
@@ -126,7 +132,6 @@ use namespace CoC;
 			clearOutput();
 			outputText("As you explore the caves you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
 			outputText("You carefully put the pieces of the Touhouna M3 in your back and head back to your camp.\n\n");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 1, 1);
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Touhouna M3", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);

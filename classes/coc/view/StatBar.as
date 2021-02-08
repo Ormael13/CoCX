@@ -168,6 +168,15 @@ public class StatBar extends Block {
 	}
 	private function renderValue():void {
 		valueText = '' + Math.floor(value) + (showMax ? '/' + Math.floor(maxValue) : '');
+		if (value > 100000){
+			valueText = '' + Math.floor(value/1000) + 'k' + (showMax ? '/' + Math.floor(maxValue/1000) + 'k' : '');
+		}
+		if (value > 100000000){
+			valueText = '' + Math.floor(value/1000000) + 'kk' + (showMax ? '/' + Math.floor(maxValue/1000000) + 'kk' : '');
+		}
+		if (value > 100000000000){
+			valueText = '' + Math.floor(value/1000000000) + 'kkk' + (showMax ? '/' + Math.floor(maxValue/1000000000) + 'kkk' : '');
+		}
 	}
 	public function get value():Number {
 		return _value;

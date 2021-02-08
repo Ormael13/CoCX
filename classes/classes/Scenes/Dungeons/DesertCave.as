@@ -1185,7 +1185,7 @@ public class DesertCave extends DungeonAbstractContent
 				outputText("\n\nRising slowly, you withdraw yourself from the goo-glazed pussy beneath you and try to ignore the matching river of white that pours out from betwixt your thighs.  You make sure to lean over your onyx lover, salting her with her own dripping seed until the flow slows to a trickle.  She meekly protests at first, then gives up with a lusty sigh, smearing her skin with pristine white as her mind slides back into the gutter.  You make sure to admire your work while you get dressed.");
 				//(cum, then +5 lust){preg check for sammitches}
 				//sand witch preg
-				if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 				else player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
 				player.sexReward("vaginalFluids");
 				player.sexReward("cum");
@@ -1321,7 +1321,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			
 			outputText("\n\nThe orgasm drives your body relentlessly, and you're forced to ride the hermaphrodite like a bucking bronco, milking her cock relentlessly.  You hips thump wetly atop the chocolate lady's thighs, and it isn't until you make that final, echoing smack of soaked flesh on flesh that you come down, sagging weakly into the comfortable tits below.  The witch sighs contently and begins to stroke your [hair], but her fingers fall away after a second as her eyes flutter closed.");
 			outputText("\n\nYou recover after a few minutes and rise up, legs shaking at the overpowering sensation of the witch's withdrawing phallus, but you make it up with spunk pouring from your [vagina].  What a victory!");
-			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
             else player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
 			player.sexReward("cum", "Vaginal");
 			player.orgasm();
@@ -1441,7 +1441,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			dynStats("sen", 2);
 			cleanupAfterCombat();
 			//knock up hurrrr
-			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
             else player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
 		}
 		//Do Nothing
@@ -1459,7 +1459,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			player.orgasm();
 			dynStats("sen", 2);
 			//knock up hurrrr
-			if (player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 			else player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
 			player.sexReward("cum");
 			cleanupAfterCombat();
@@ -2153,7 +2153,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			addButton(2,"Cum Witches",discussCumWitches).hint("Ask the Sand Mother about the Cum Witches.", "Talk: Cum Witches");
 			addButton(3,"CovenStatus",currentStateOfInterwebs).hint("Ask the Sand Mother about the status of the coven.", "Talk: Coven Status");
 			addButton(4,"History",sandWitchHistory).hint("Ask the Sand Mother about the history of the Sand Witches.", "Talk: History");
-			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 5) {
+			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 10) {
 				addButton(5,"Get LaBova",getLaBova).hint(consumables.LABOVA_.description);
 				addButton(6,"Get Lactaid",getLactaidFromWitches).hint(consumables.LACTAID.description);
 			}
@@ -2297,7 +2297,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 					if(player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(3,"Fuck Her",fuckTheSandMothersCunt).hint("Fuck the Sand Mother's cunt with your cock.");
 				}
 			}
-			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 5) {
+			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 10) {
 				addButton(5,"Get LaBova",takeLaBovaOrLactaid, false, null, null, consumables.LABOVA_.description);
 				addButton(6,"Get Lactaid",takeLaBovaOrLactaid, true, null, null, consumables.LACTAID.description);
 			}
@@ -2321,7 +2321,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 				outputText("The Sand Mother glares down at you from atop her throne, but does not dare lift a finger against you, not after her previous defeat.  She hisses, \"<i>You've already plundered my coven!  What more do you want from us?</i>\"  even as her chest heaves in a panic.  Four mountainous peaks jut from the witch's silken robe... you have a few ideas, and the Queen Witch seems to have some of her own.");
 				//Resisting Options
 				outputText("\n\nThe Sand Mother cringes back in her throne, eyeing you warily.  It appears you've made an enemy, however, at least it is an enemy that fears you.  There's a chest full of potions of La Bova and Lactaid behind her throne");
-				if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] >= 5) outputText(", though right now it sits empty.  You'll need to wait for them to restock it");
+				if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] >= 10) outputText(", though right now it sits empty.  You'll need to wait for them to restock it");
 				else outputText(", and noone could stop you from taking them");
 				outputText(".");
 				sandMotherPOMenu();

@@ -301,14 +301,17 @@ public class Achievements extends BaseContent
 			//odblokowanie pierwszego animal ancestory starting bonus at chara creation
 			addAchievement("My own Demon Weapon", kACHIEVEMENTS.EPIC_MY_OWN_DEMON_WEAPON, "Find an evolving weapon.", "", true);
 			//znalezienie ewolującą zbroje
-			addAchievement("Me Evolve", kACHIEVEMENTS.EPIC_ME_EVOLVE, "Find one evolving items.", "", true);
+			addAchievement("Me Evolve", kACHIEVEMENTS.EPIC_ME_EVOLVE, "Find one evolving item.", "", true);
 			addAchievement("Us Evolve", kACHIEVEMENTS.EPIC_US_EVOLVE, "Find two evolving items.", "", true);
 			//znalezienie 4 ewolujących przedmiotów
 			//znalezienie 8 ewolujących przedmiotów
-			//przeprowadzenie 1 ewolucji przedmiotu
+			addAchievement("Faster Harder Better Stronger Curvier!!! (1)", kACHIEVEMENTS.EPIC_F_H_B_S_CURVIER_1, "Trigger one evolution of evolving items.", "", true);
 			//przeprowadzenie 2 ewolucji przedmiotu
 			//przeprowadzenie 4 ewolucji przedmiotu
 			//przeprowadzenie 8 ewolucji przedmiotu
+			//przeprowadzenie 16 ewolucji przedmiotu
+			//przeprowadzenie 32 ewolucji przedmiotu
+			//przeprowadzenie 64 ewolucji przedmiotu
 			addAchievement("Let's go fishing!", kACHIEVEMENTS.EPIC_LETS_GO_FISHING, "Beat down Kaiju type enemy in Mech.", "", true);
 			addAchievement("Achievementception", kACHIEVEMENTS.EPIC_ACHIEVEMENTCEPTION, "Unlocking 10 achievements.", "", true);
 			addAchievement("Achievement within Achievement", kACHIEVEMENTS.EPIC_ACHIEVEMENT_WITHIN_ACHIEVEMENT, "Unlocking 30 achievements.", "", true);

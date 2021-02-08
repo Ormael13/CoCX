@@ -124,6 +124,8 @@ public class SceneLib {
 
     public static var ceaniScene:CeaniScene = new CeaniScene();
 
+    public static var darkenedKitsuneScene:HydeKitsuneScene = new HydeKitsuneScene();
+
     public static var dianaScene:DianaFollower = new DianaFollower();
 
     public static var dinahScene:DinahFollower = new DinahFollower();

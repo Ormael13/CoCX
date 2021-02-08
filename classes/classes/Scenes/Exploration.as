@@ -29,6 +29,7 @@ import classes.Scenes.Explore.KitsuneAncestor;
 import classes.Scenes.Explore.SeabedAlrauneBoss;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Ocean.Scylla;
+import classes.display.SpriteDb;
 
 //import classes.Scenes.Areas.nazwa lokacji;
 	//import classes.Scenes.Areas.nazwa lokacji;
@@ -364,7 +365,7 @@ public class Exploration extends BaseContent
 					//Goblin assassin!
 					if (goblinChooser >= 30 && goblinChooser < 50) {
 						SceneLib.goblinAssassinScene.goblinAssassinEncounter();
-						spriteSelect(24);
+						spriteSelect(SpriteDb.s_goblinAssassin);
 						return;
 					}
 					//Goblin warrior! (Equal chance with Goblin Shaman)
@@ -690,7 +691,7 @@ public class Exploration extends BaseContent
 					return;
 				}
 				//Discover Volcanic Crag! - do przeniesienia do Caves exploration
-				if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && rand(3) == 0 && player.level >= 25) {
+				if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0 && rand(3) == 0 && player.level >= 25) {
 					flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
 					player.explored++;
 					clearOutput();

@@ -73,7 +73,7 @@ public class ManticoreVenom extends Consumable {
 				boobsGrew = true;
 			}
 		}
-		if (player.sens > 20 && player.vaginaType() != VaginaClass.MANTICORE && changes < changeLimit && rand(3) == 0) {
+		if (player.hasVagina() && player.sens > 20 && player.vaginaType() != VaginaClass.MANTICORE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nYou suddenly became exceedingly aware of your surroundings, feeling the caress of the wind on your skin and especially its passage next to your endowment. " +
 					"Out of curiosity you slid a single digit inside your pussy to test your new sensitiveness and yelp a sound note unlike a singing. " +
 					"Your pussy has reached the sensitiveness of a manticore and the mere act of touching it will now cause you to moan an entire partition!" +
@@ -96,7 +96,7 @@ public class ManticoreVenom extends Consumable {
 		if (player.lowerBody == LowerBody.LION && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.LION) && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			if (player.arms.type != Arms.HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
-			outputText("Your hands suddenly start to hurt as your arms grow a thick coat of -fur color- fur up to your shoulders where it turns -hair color-. You watch, enthralled, as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have leonine paw hands.</b>");
+			outputText("Your hands suddenly start to hurt as your arms grow a thick coat of "+player.coatColor+" fur up to your shoulders where it turns "+player.hairColor+". You watch, enthralled, as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have leonine paw hands.</b>");
 			mutations.setArmType(Arms.LION);
 			changes++;
 		}
