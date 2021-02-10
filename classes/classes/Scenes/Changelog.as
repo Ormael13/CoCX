@@ -35,6 +35,9 @@ package classes.Scenes
 		private function Changelog35():void {
 			clearOutput();
 			outputText("<b>Version 0.8r:</b>\n\n");
+			outputText("-New material: Gold ingot. Costs 800 gems. Buyable in Tel'Adre jewelry shop.\n");
+			outputText("-Silver ingot price reduced form 500 to 200 gems, World Tree Branch price increased from 100 to 200 gems, Marae barks price increased from 1000 to 3000 gems, Wood price of buy/sell reduced from 10/5 to 5/2, Stone price of buy/sell reduced from 20/10 to 10/4.\n");
+			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
@@ -48,19 +51,17 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-Silver ingot price reduced form 500 to 200 gems, World Tree Branch price increased from 100 to 200 gems, Marae barks price increased from 1000 to 3000 gems, Wood price of buy/sell reduced from 10/5 to 5/2, Stone price of buy/sell reduced from 20/10 to 10/4.\n");
-			outputText("-New material: Gold ingot. Costs 800 gems. Buyable in Tel'Adre jewelry shop.\n");
 			outputText("-New material: Copper ore. Costs 40 gems. Minable in Quarry.\n");
 			outputText("-New material: Tin ore. Costs 40 gems. Minable in Quarry.\n");
 			outputText("-Aether Twins can now after evolution eat new materials: Gold ingot, Copper ore, Tin ore.\n");
+			outputText("-Added mastery for gauntlet, dagfer and exotic type weapons.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: \n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.

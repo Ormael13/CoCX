@@ -1151,6 +1151,10 @@ public class PlayerInfo extends BaseContent {
 		displayHeader("Mastery Stats");
 		// Begin Mastery Stats
 		var masteryStats:String = "";
+		if (player.masteryGauntletLevel < combat.maxGauntletLevel())
+			masteryStats += "<b>Gauntlets Mastery / Dao of Gauntlet:</b>  " + player.masteryGauntletLevel + " / " + combat.maxGauntletLevel() + " (Exp: " + player.masteryGauntletXP + " / " + combat.GauntletExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryGauntletLevel + "% damage, +" + (0.5 * Math.round((player.masteryGauntletLevel - 1) / 2)) + "% accuracy)</i>\n";
+		else
+			masteryStats += "<b>Gauntlets Mastery / Dao of Gauntlet:</b>  " + player.masteryGauntletLevel + " / " + combat.maxGauntletLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryGauntletLevel + "% damage, +" + (0.5 * Math.round((player.masteryGauntletLevel - 1) / 2)) + "% accuracy)</i>\n";
 		if (player.masterySwordLevel < combat.maxSwordLevel())
 			masteryStats += "<b>Swords Mastery / Dao of Sword:</b>  " + player.masterySwordLevel + " / " + combat.maxSwordLevel() + " (Exp: " + player.masterySwordXP + " / " + combat.SwordExpToLevelUp() + ")\n<i>(Effects: +" + player.masterySwordLevel + "% damage, +" + (0.5 * Math.round((player.masterySwordLevel - 1) / 2)) + "% accuracy)</i>\n";
 		else
@@ -1172,6 +1176,14 @@ public class PlayerInfo extends BaseContent {
 			masteryStats += "<b>Spears Mastery / Dao of Spear:</b>  " + player.masterySpearLevel + " / " + combat.maxSpearLevel() + " (Exp: " + player.masterySpearXP + " / " + combat.SpearExpToLevelUp() + ")\n<i>(Effects: +" + player.masterySpearLevel + "% damage, +" + (0.5 * Math.round((player.masterySpearLevel - 1) / 2)) + "% accuracy)</i>\n";
 		else
 			masteryStats += "<b>Spears Mastery / Dao of Spear:</b>  " + player.masterySpearLevel + " / " + combat.maxSpearLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masterySpearLevel + "% damage, +" + (0.5 * Math.round((player.masterySpearLevel - 1) / 2)) + "% accuracy)</i>\n";
+		if (player.masteryDaggerLevel < combat.maxDaggerLevel())
+			masteryStats += "<b>Daggers Mastery / Dao of Dagger:</b>  " + player.masteryDaggerLevel + " / " + combat.maxDaggerLevel() + " (Exp: " + player.masteryDaggerXP + " / " + combat.DaggerExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryDaggerLevel + "% damage, +" + (0.5 * Math.round((player.masteryDaggerLevel - 1) / 2)) + "% accuracy)</i>\n";
+		else
+			masteryStats += "<b>Daggers Mastery / Dao of Dagger:</b>  " + player.masteryDaggerLevel + " / " + combat.maxDaggerLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryDaggerLevel + "% damage, +" + (0.5 * Math.round((player.masteryDaggerLevel - 1) / 2)) + "% accuracy)</i>\n";
+		if (player.masteryExoticLevel < combat.maxExoticLevel())
+			masteryStats += "<b>Exotic Weapons Mastery / Dao of Exotic Weapons:</b>  " + player.masteryExoticLevel + " / " + combat.maxExoticLevel() + " (Exp: " + player.masteryExoticXP + " / " + combat.ExoticExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryExoticLevel + "% damage, +" + (0.5 * Math.round((player.masteryExoticLevel - 1) / 2)) + "% accuracy)</i>\n";
+		else
+			masteryStats += "<b>Exotic Weapons Mastery / Dao of Exotic Weapons:</b>  " + player.masteryExoticLevel + " / " + combat.maxExoticLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryExoticLevel + "% damage, +" + (0.5 * Math.round((player.masteryExoticLevel - 1) / 2)) + "% accuracy)</i>\n";
 		masteryStats += "\n";
 		if (player.hasPerk(PerkLib.DualWield)) {
 			if (player.dualWSLevel < combat.maxDualWieldSmallLevel())

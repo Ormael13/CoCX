@@ -117,6 +117,16 @@ public class Combat extends BaseContent {
         return mod;
     }
 
+    public function masteryGauntletLevel():Number {
+        return player.masteryGauntletLevel;
+    }
+    public function maxGauntletLevel():Number {
+        return player.maxGauntletLevel();
+    }
+    public function GauntletExpToLevelUp():Number {
+        return player.GauntletExpToLevelUp();
+    }
+
     public function masterySwordLevel():Number {
         return player.masterySwordLevel;
     }
@@ -165,6 +175,26 @@ public class Combat extends BaseContent {
     }
     public function SpearExpToLevelUp():Number {
         return player.SpearExpToLevelUp();
+    }
+
+	public function masteryDaggerLevel():Number {
+        return player.masteryDaggerLevel;
+    }
+    public function maxDaggerLevel():Number {
+        return player.maxDaggerLevel();
+    }
+    public function DaggerExpToLevelUp():Number {
+        return player.DaggerExpToLevelUp();
+    }
+
+	public function masteryExoticLevel():Number {
+        return player.masteryExoticLevel;
+    }
+    public function maxExoticLevel():Number {
+        return player.maxExoticLevel();
+    }
+    public function ExoticExpToLevelUp():Number {
+        return player.ExoticExpToLevelUp();
     }
 
 	public function dualWSLevel():Number {
@@ -4680,6 +4710,10 @@ public class Combat extends BaseContent {
                 }
                 JabbingStyleIncrement();
                 if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage += Math.round(damage * 0.3);
+				if (player.isGauntletWeapon()) {
+					if (crit) gauntletXP(1);
+					gauntletXP(1);
+				}
 				if (player.isSwordTypeWeapon()) {
 					if (crit) swordXP(1);
 					swordXP(1);
@@ -4699,6 +4733,14 @@ public class Combat extends BaseContent {
 				if (player.isSpearTypeWeapon()) {
 					if (crit) spearXP(1);
 					spearXP(1);
+				}
+				if (player.isDaggerTypeWeapon()) {
+					if (crit) daggerXP(1);
+					daggerXP(1);
+				}
+				if (player.isExoticTypeWeapon()) {
+					if (crit) exoticXP(1);
+					exoticXP(1);
 				}
 				if (player.weaponPerk == "Dual Small") {
 					if (crit) dualWieldSmallXP(1);
@@ -9076,6 +9118,11 @@ public class Combat extends BaseContent {
         player.SexXP(XP);
     }
 
+	public function gauntletXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.gauntletXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.gauntletXP(XP);
+        player.gauntletXP(XP);
+    }
 	public function swordXP(XP:Number = 0):void {
         if (player.humanScore() == player.humanMaxScore()) player.swordXP(XP);
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.swordXP(XP);
@@ -9100,6 +9147,16 @@ public class Combat extends BaseContent {
         if (player.humanScore() == player.humanMaxScore()) player.spearXP(XP);
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.spearXP(XP);
         player.spearXP(XP);
+    }
+	public function daggerXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.daggerXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.daggerXP(XP);
+        player.daggerXP(XP);
+    }
+	public function exoticXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.exoticXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.exoticXP(XP);
+        player.exoticXP(XP);
     }
 
 	public function dualWieldSmallXP(XP:Number = 0):void {

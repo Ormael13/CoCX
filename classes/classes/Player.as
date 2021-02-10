@@ -98,6 +98,8 @@ use namespace CoC;
 		public var lustVuln:Number = 1;
 
 		//Mastery attributes
+		public var masteryGauntletLevel:Number = 0;
+		public var masteryGauntletXP:Number = 0;
 		public var masterySwordLevel:Number = 0;
 		public var masterySwordXP:Number = 0;
 		public var masteryAxeLevel:Number = 0;
@@ -108,6 +110,10 @@ use namespace CoC;
 		public var masteryDuelingSwordXP:Number = 0;
 		public var masterySpearLevel:Number = 0;
 		public var masterySpearXP:Number = 0;
+		public var masteryDaggerLevel:Number = 0;
+		public var masteryDaggerXP:Number = 0;
+		public var masteryExoticLevel:Number = 0;
+		public var masteryExoticXP:Number = 0;
 		public var dualWSLevel:Number = 0;
 		public var dualWSXP:Number = 0;
 		public var dualWNLevel:Number = 0;
@@ -977,10 +983,12 @@ use namespace CoC;
 			return ;
 		}*/
 		//Fists and fist weapons
-		public function isFistOrFistWeapon():Boolean
-		{
-			return weaponName == "fists" || weapon == game.weapons.S_GAUNT || weapon == game.weapons.H_GAUNT || weapon == game.weapons.MASTGLO || weapon == game.weapons.KARMTOU || weapon == game.weapons.YAMARG || weapon == game.weapons.CLAWS || weapon == game.weapons.L_CLAWS || weapon == game.weapons.BFGAUNT
-			 || (shield == game.shields.AETHERS && flags[kFLAGS.AETHER_SINISTER_EVO] == 1 && weapon == game.weapons.AETHERD && flags[kFLAGS.AETHER_DEXTER_EVO] == 1);
+		public function isFistOrFistWeapon():Boolean {
+			return weaponName == "fists" || isGauntletWeapon();
+		}
+		public function isGauntletWeapon():Boolean {
+			return weapon == game.weapons.S_GAUNT || weapon == game.weapons.H_GAUNT || weapon == game.weapons.MASTGLO || weapon == game.weapons.KARMTOU || weapon == game.weapons.YAMARG || weapon == game.weapons.CLAWS || weapon == game.weapons.L_CLAWS || weapon == game.weapons.BFGAUNT
+			 || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && (AetherTwinsFollowers.AetherTwinsShape == "" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets"));
 		}
 		//Sword-type weapons
 		public function isSwordTypeWeapon():Boolean {
@@ -1005,12 +1013,19 @@ use namespace CoC;
 			return weapon == game.weapons.DSSPEAR || weapon == game.weapons.GUANDAO || weapon == game.weapons.HALBERD || weapon == game.weapons.LANCE || weapon == game.weapons.PTCHFRK || weapon == game.weapons.SESPEAR || weapon == game.weapons.SKYPIER || weapon == game.weapons.SPEAR || weapon == game.weapons.TRIDENT || weapon == game.weapons.URTAHLB;
 		}
 		//Scythe-type DEMSCYT LHSCYTH
+		//Dagger-type weapons
+		public function isDaggerTypeWeapon():Boolean {
+			return weapon == game.weapons.ADAGGER || weapon == game.weapons.DAGGER || weapon == game.weapons.DAGWHIP || weapon == game.weapons.L_DAGGR || weapon == game.weapons.RDAGGER || weapon == game.weapons.SDAGGER || weapon == game.weapons.TODAGGER || weapon == game.weapons.TDAGGER || weapon == game.weapons.TRIDAG || weapon == game.weapons.ANGSTD || weapon == game.weapons.DDAGGER;
+		}
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isStaffTypeWeapon():Boolean {
 			return weapon == game.weapons.ASCENSU || weapon == game.weapons.DEPRAVA || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEMSCYT;
 		}
 		//Ribbon ERIBBON RIBBON
-		//bronie co nie jestem pewien co do klasyfikacji obecnie: FLYWHIS (dla Sword Immortal gra musi sprawdzić czy używa Sword type lub Dueling sword type weapons bo tak)
+		//Exotic-type weapons
+		public function isExoticTypeWeapon():Boolean {
+			return weapon == game.weapons.NORTHIP || weapon == game.weapons.FLYWHIS;
+		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
 		{
@@ -1020,6 +1035,7 @@ use namespace CoC;
 		{
 			return weaponRangePerk == "Bow" || weaponRange == game.weaponsrange.M1CERBE || weaponRange == game.weaponsrange.SNIPPLE;
 		}
+		//(dla Sword Immortal gra musi sprawdzić czy używa Sword type lub Dueling sword type weapons bo tak)
 		//Throwable melee weapons
 		public function haveThrowableMeleeWeapon():Boolean
 		{
@@ -12979,6 +12995,47 @@ use namespace CoC;
 			return true;
 		}
 
+		public function maxGauntletLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function GauntletExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryGauntletLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryGauntletLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function gauntletXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryGauntletXP++;
+					XP--;
+				}
+				else {
+					masteryGauntletXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryGauntletLevel < maxGauntletLevel() && masteryGauntletXP >= GauntletExpToLevelUp()) {
+					outputText("\n<b>Dao of Gauntlet leveled up to " + (masteryGauntletLevel + 1) + "!</b>\n");
+					masteryGauntletLevel++;
+					masteryGauntletXP = 0;
+				}
+			}
+		}
+
 		public function maxSwordLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -13180,6 +13237,88 @@ use namespace CoC;
 					outputText("\n<b>Dao of Spear leveled up to " + (masterySpearLevel + 1) + "!</b>\n");
 					masterySpearLevel++;
 					masterySpearXP = 0;
+				}
+			}
+		}
+
+		public function maxDaggerLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function DaggerExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryDaggerLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryDaggerLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function daggerXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryDaggerXP++;
+					XP--;
+				}
+				else {
+					masteryDaggerXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryDaggerLevel < maxDaggerLevel() && masteryDaggerXP >= DaggerExpToLevelUp()) {
+					outputText("\n<b>Dao of Dagger leveled up to " + (masteryDaggerLevel + 1) + "!</b>\n");
+					masteryDaggerLevel++;
+					masteryDaggerXP = 0;
+				}
+			}
+		}
+
+		public function maxExoticLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function ExoticExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryExoticLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryExoticLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function exoticXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryExoticXP++;
+					XP--;
+				}
+				else {
+					masteryExoticXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryExoticLevel < maxExoticLevel() && masteryExoticXP >= ExoticExpToLevelUp()) {
+					outputText("\n<b>Dao of Exotic Weapons leveled up to " + (masteryExoticLevel + 1) + "!</b>\n");
+					masteryExoticLevel++;
+					masteryExoticXP = 0;
 				}
 			}
 		}
