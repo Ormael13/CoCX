@@ -28,9 +28,9 @@ use namespace CoC;
 		public const S_INGOT:SimpleUseable = new SimpleUseable("S.Ingot", "Silver ingot", "a Silver ingot", 200, 
 			"A Silver ingot.",//weight around 3-3,2 kg
 			"You look over the Silver ingot. Likely usefull to making some accesories.");
-		public const COP_ORE:SimpleUseable = new SimpleUseable("Cop.Ore", "Copper ore", "a Cooper ore", 40, 
-			"A Cooper ore.",
-			"You look over the chunk of Cooper ore. Likely usefull to making some equipment.");
+		public const COP_ORE:SimpleUseable = new SimpleUseable("Cop.Ore", "Copper ore", "a Copper ore", 40, 
+			"A Copper ore.",
+			"You look over the chunk of Copper ore. Likely usefull to making some equipment.");
 		public const TIN_ORE:SimpleUseable = new SimpleUseable("Tin Ore", "Tin ore", "a Tin ore", 40, 
 			"A Tin ore.",
 			"You look over the chunk of Tin ore. Likely usefull to making some equipment.");
