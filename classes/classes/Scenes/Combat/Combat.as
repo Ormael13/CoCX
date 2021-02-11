@@ -1686,7 +1686,7 @@ public class Combat extends BaseContent {
             }
         }
         //Blind
-        if (player.hasStatusEffect(StatusEffects.Blind)) {
+        if (player.playerIsBlinded()) {
             outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
         }
         if (monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0 && !isWieldingRangedWeapon()) {
@@ -1737,7 +1737,7 @@ public class Combat extends BaseContent {
             return;
         }
         //Determine if dodged!
-        if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
             //Akbal dodges special education
             if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your " + weapon + " against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your " + weapon + " as if betrayed.\n");
@@ -2602,7 +2602,7 @@ public class Combat extends BaseContent {
             return;
         }
         //Blind miss chance
-        if (player.hasStatusEffect(StatusEffects.Blind)) {
+        if (player.playerIsBlinded()) {
             outputText("The ");
             if (player.weaponRangePerk == "Bow") outputText("arrow");
             if (player.weaponRangePerk == "Crossbow") outputText("bolt");
@@ -3734,7 +3734,7 @@ public class Combat extends BaseContent {
             }
         }
         //Blind
-        if (player.hasStatusEffect(StatusEffects.Blind)) {
+        if (player.playerIsBlinded()) {
             outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
         }
         if (monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0 && !isWieldingRangedWeapon()) {
@@ -3786,7 +3786,7 @@ public class Combat extends BaseContent {
         }
 
         //Determine if dodged!
-        if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
             //Akbal dodges special education
             if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
@@ -4231,7 +4231,7 @@ public class Combat extends BaseContent {
             }
         }
         //Blind
-        if (player.hasStatusEffect(StatusEffects.Blind)) {
+        if (player.playerIsBlinded()) {
             outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
         }
         if (monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0 && !isWieldingRangedWeapon()) {
@@ -4283,7 +4283,7 @@ public class Combat extends BaseContent {
         }
 
         //Determine if dodged!
-        if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
             //Akbal dodges special education
             if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
@@ -6830,7 +6830,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.UBERWEB))
             outputText("<b>You're pinned under a pile of webbing!  You should probably struggle out of it and get back in the fight!</b>\n\n");
-        if (player.hasStatusEffect(StatusEffects.Blind) && !monster.hasStatusEffect(StatusEffects.Sandstorm) && !player.hasStatusEffect(StatusEffects.PurpleHaze)) {
+        if (player.playerIsBlinded() && !monster.hasStatusEffect(StatusEffects.Sandstorm) && !player.hasStatusEffect(StatusEffects.PurpleHaze)) {
             if (player.hasStatusEffect(StatusEffects.SheilaOil)) {
                 if (player.statusEffectv1(StatusEffects.Blind) <= 0) {
                     outputText("<b>You finish wiping the demon's tainted oils away from your eyes; though the smell lingers, you can at least see.  Sheila actually seems happy to once again be under your gaze.</b>\n\n");
@@ -6932,6 +6932,7 @@ public class Combat extends BaseContent {
                 outputText("You manage to grab your weapon back!\n\n");
             }
         }
+		if (player.hasStatusEffect(StatusEffects.SubZeroConditions) && !player.hasPerk(PerkLib.ColdAffinity)) SceneLib.glacialRift.SubZeroConditionsTick();
         if (player.hasStatusEffect(StatusEffects.UnderwaterOutOfAir)) {
             var deoxigen:Number = 0;
             deoxigen += (player.maxHP() * 0.05);
@@ -8832,7 +8833,7 @@ public class Combat extends BaseContent {
         }
         outputText("<b>You are fighting ");
         outputText(monster.a + monster.short + ":</b> \n");
-        if (player.hasStatusEffect(StatusEffects.Blind)) {
+        if (player.playerIsBlinded()) {
             outputText("It's impossible to see anything!\n");
         } else {
             outputText(monster.long + "\n\n");

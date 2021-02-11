@@ -9,6 +9,7 @@ package classes.Scenes.Areas.GlacialRift
 	import classes.Items.WeaponLib;
 	import classes.CoC;
 	import classes.BodyParts.*;
+	import classes.Scenes.SceneLib;
 
 	public class WendigoScene extends BaseContent
 	{
@@ -46,6 +47,7 @@ package classes.Scenes.Areas.GlacialRift
 					outputText("You walk steadily toward the lost girl to offer her support.\n\n");
 					outputText("It's only when she gets closer that you identify what you mistook for an open helmet as a pair of deer antlers jutting from under the creature's fur hood through a set of holes! Not to mention the claws, the cold glowing dead stare, or the emaciated body bordering anorexia. Your eyes are drawn to its lower body as you notice this monster hovers above the snow, its leg ending with furry forelimbs and a notable absence of feet!\n\n");
 					outputText("Smiling wide with a stare that betrays an endless hunger for pleasures that can never be fully sated, the creature lunges at you with its greedy claws.\n\n");
+					SceneLib.glacialRift.GlacialRiftConditions();
 					startCombat(new Wendigo());
 				}
 			}

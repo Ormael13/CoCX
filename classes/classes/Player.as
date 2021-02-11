@@ -1093,6 +1093,10 @@ use namespace CoC;
 		{
 			return isSpearTypeWeapon() || weaponName == "demonic scythe";
 		}
+		public function playerIsBlinded():Boolean
+		{
+			return hasStatusEffect(StatusEffects.Blind) || hasStatusEffect(StatusEffects.Snowstorms);
+		}
 		//override public function get weapons
 		override public function get weaponName():String {
 			return _weapon.name;

@@ -36,6 +36,7 @@ use namespace CoC;
 
 		public function exploreGlacialRift():void {
 			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT]++;
+			if (!player.hasPerk(PerkLib.ColdAffinity)) SubZeroConditionsTick();
 			doNext(playerMenu);
 
 			var choice:Array = [];
@@ -61,11 +62,13 @@ use namespace CoC;
 			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
+				GlacialRiftConditions();
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
+				GlacialRiftConditions();
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
@@ -88,9 +91,12 @@ use namespace CoC;
 			switch(select) {
 				case 0: //Yuki Onna OR Frost Gigant
 					clearOutput();
-					if (rand(2) == 0 && flags[kFLAGS.YU_SHOP] > 0) yukionnaScene.encounterYukiOnna();
+					if (rand(2) == 0 && flags[kFLAGS.YU_SHOP] > 0) {
+						yukionnaScene.encounterYukiOnna();
+					}
 					else {
 						outputText("You wander the frozen landscape of the Rift, frozen rocks, frosted hills and forested mountains your only landmarks. As you cross the peak of a rather large, lightly forested hill, you come face to gigantic face with a Frost Giant! He belches fiercely at you and you tumble back down the hill. He mostly steps over it as you come to your senses. You quickly draw your [weapon] and withdraw from the hill to prepare for battle.\n\n");
+						GlacialRiftConditions();
 						startCombat(new FrostGiant());
 					}
 					break;
@@ -116,22 +122,26 @@ use namespace CoC;
 					}
 					else {
 						outputText(". A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the iced caverns with ease as you stare the beast down. The white blur of an ice yeti attacks you!");
+						GlacialRiftConditions();
 						startCombat(new Yeti());
 						break;
 					}
 				case 2: //Frost Giant
 					clearOutput();
 					outputText("You wander the frozen landscape of the Rift, frozen rocks, frosted hills and forested mountains your only landmarks. As you cross the peak of a rather large, lightly forested hill, you come face to gigantic face with a Frost Giant! He belches fiercely at you and you tumble back down the hill. He mostly steps over it as you come to your senses. You quickly draw your [weapon] and withdraw from the hill to prepare for battle.\n\n");
+					GlacialRiftConditions();
 					startCombat(new FrostGiant());
 					break;
 				case 3: //Winter Wolf
 					clearOutput();
 					outputText("A titanic howling sound is heard nearby as an enormous shape jump off a nearby cliff into the snow right in front of you. As the flying snow clear off you see a wolf of immaculate pelt and size bordering the absurd. You likely accidentally stepped into its hunting territory and to clearly show its displeasure the ten feet tall monster growl at you showing its dagger-like teeth then start running in your direction howling what sounds to be a challenge.\n\n");
+					GlacialRiftConditions();
 					startCombat(new WinterWolf());
 					break;
 				case 4: //True Ice Golems
 					clearOutput();
 					outputText("As you take a stroll, out of the nearby glaciers emerge a group of golems. Looks like you have encountered some true ice golems! You ready your [weapon] for a fight!");
+					GlacialRiftConditions();
 					startCombat(new GolemsTrueIce());
 					break;
 				case 5:
@@ -222,9 +232,31 @@ use namespace CoC;
 			}
 		}
 
+		public function GlacialRiftConditions():void {
+			player.createStatusEffect(StatusEffects.Snowstorms,0,0,0,0);
+			player.createStatusEffect(StatusEffects.Snow,0,0,0,0);
+			player.createStatusEffect(StatusEffects.SubZeroConditions,0,0,0,0);
+		}
+
+		public function SubZeroConditionsTick():void {
+			var HPD:Number = 0;
+			if ((Math.round(player.damageIcePercent())) > 50) HPD += 0.1;
+			if ((Math.round(player.damageIcePercent())) > 60) HPD -= 0.01;
+			if ((Math.round(player.damageIcePercent())) > 70) HPD -= 0.01;
+			if ((Math.round(player.damageIcePercent())) > 80) HPD -= 0.01;
+			if ((Math.round(player.damageIcePercent())) > 90) HPD -= 0.01;
+			if (player.hasPerk(PerkLib.FireAffinity) && HPD > 0) HPD *= 2;
+			if (HPD > 0) {
+				HPD *= player.maxHP();
+				HPD = Math.round(HPD);
+				HPChange(HPD, true);
+			}
+		}
+
 		private function fightValeria():void {
 			clearOutput();
 			outputText("You ready your [weapon] for a fight!");
+			GlacialRiftConditions();
 			startCombat(new GooArmor());
 		}
 
