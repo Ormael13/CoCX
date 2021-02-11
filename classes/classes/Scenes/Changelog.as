@@ -55,19 +55,20 @@ package classes.Scenes
 			outputText("-New material: Tin ore. Costs 40 gems. Minable in Quarry.\n");
 			outputText("-Aether Twins can now after evolution eat new materials: Gold ingot, Copper ore, Tin ore.\n");
 			outputText("-Added mastery for gauntlet, dagfer and exotic type weapons.\n");
+			outputText("-When exploring Glacial Rift PC can suffer form 1 to 3 new area effects: Snowstorms (work as PC would be perma blinded), Snow (PC below 7 feet tall have increased difficulty to run away form fights and lowered evasion by 50%), Sub zero conditions (if PC resistance to ice/cold damage is below 60% will take 10% of max HP damage, ");
+			outputText("when having 55%+/70%+/80%+/90%+/95%+ resistance damage taken is decreased to 9/8/7/6/5%. Having Fire affinity will double taken damage while having cold affinity will make PC not taking any damage).\n");
+			outputText("-New head accesory (by Liadri): Ski goggles - buyable in Yu shop. Cost 400 gems. Prevents form blinding effect of Snowstorms in Glacial Rift.\n");
+			outputText("-New range weapon (by Liadri): Double barreled dragon gun - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Vulcanic Crag area. Cost 1060 gems. Base atk is 50 and ammo clip size 2. Can be used with sneak range attack and it deal AoE damage. It's 2H Firearm type range weapon.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: \n");/*ostatni punkt changelogu
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-Fixed bugs: \n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

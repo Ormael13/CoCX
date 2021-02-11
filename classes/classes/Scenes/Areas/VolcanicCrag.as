@@ -50,6 +50,11 @@ public class VolcanicCrag extends BaseContent
 				partsofTripxiFatbilly();
 				return;
 			}
+			//Double barreled dragon gun (later move to Ashland)
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Double barreled dragon gun") < 0 && rand(2) == 0) {
+				partsofTripxiDoubleBarreledDragonGun();
+				return;
+			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();
@@ -106,9 +111,17 @@ public class VolcanicCrag extends BaseContent
 			}
 		}
 		
+		public function partsofTripxiDoubleBarreledDragonGun():void {
+			clearOutput();
+			outputText("As you explore the vulcanic crag you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("You carefully put the pieces of the Double barreled dragon gun in your back and head back to your camp.\n\n");
+			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+			player.createKeyItem("Double barreled dragon gun", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
+		}
 		public function partsofTripxiFatbilly():void {
 			clearOutput();
-			outputText("As you explore the vu;lcanic crag you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("As you explore the vulcanic crag you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
 			outputText("You carefully put the pieces of the Tripxi Fatbilly in your back and head back to your camp.\n\n");
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Tripxi Fatbilly", 0, 0, 0, 0);

@@ -235,16 +235,16 @@ use namespace CoC;
 		public function GlacialRiftConditions():void {
 			player.createStatusEffect(StatusEffects.Snowstorms,0,0,0,0);
 			player.createStatusEffect(StatusEffects.Snow,0,0,0,0);
-			player.createStatusEffect(StatusEffects.SubZeroConditions,0,0,0,0);
+			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createStatusEffect(StatusEffects.SubZeroConditions,0,0,0,0);
 		}
 
 		public function SubZeroConditionsTick():void {
-			var HPD:Number = 0;
-			if ((Math.round(player.damageIcePercent())) > 50) HPD += 0.1;
-			if ((Math.round(player.damageIcePercent())) > 60) HPD -= 0.01;
-			if ((Math.round(player.damageIcePercent())) > 70) HPD -= 0.01;
-			if ((Math.round(player.damageIcePercent())) > 80) HPD -= 0.01;
-			if ((Math.round(player.damageIcePercent())) > 90) HPD -= 0.01;
+			var HPD:Number = 0.1;
+			if ((Math.round(player.damageIcePercent())) >= 55) HPD -= 0.01;
+			if ((Math.round(player.damageIcePercent())) >= 70) HPD -= 0.01;
+			if ((Math.round(player.damageIcePercent())) >= 80) HPD -= 0.01;
+			if ((Math.round(player.damageIcePercent())) >= 90) HPD -= 0.01;
+			if ((Math.round(player.damageIcePercent())) >= 95) HPD -= 0.01;
 			if (player.hasPerk(PerkLib.FireAffinity) && HPD > 0) HPD *= 2;
 			if (HPD > 0) {
 				HPD *= player.maxHP();
