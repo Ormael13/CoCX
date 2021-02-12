@@ -525,7 +525,7 @@ public function minoPheromones():void {
 	//sometimes get hit with the pre for stronger effect!
 	if(rand(3) == 0) {
 		outputText("slapping into your face before you can react!  You wipe the slick snot-like stuff out of your eyes and nose, ");
-		if(player.lust > 75) {
+		if(player.lust > player.maxLust() * 0.75) {
 			outputText("swallowing it into your mouth without thinking.  ");
 			dynStats("lus", 10 + player.lib/10);
 		}

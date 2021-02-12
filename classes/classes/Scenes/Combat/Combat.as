@@ -4879,13 +4879,10 @@ public class Combat extends BaseContent {
                     if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
                         outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
                         var lustdamage:Number = 35 + rand(player.lib / 10);
-                        if (player.level < 10) damage += 20 + (player.level * 3);
-                        else if (player.level < 20) damage += 50 + (player.level - 10) * 2;
-                        else if (player.level < 30) damage += 70 + (player.level - 20) * 1;
-                        else damage += 80;
-                        if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-                        if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-                        if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+                        if (player.level < 10) lustdamage += 20 + (player.level * 3);
+                        else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
+                        else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
+                        else lustdamage += 80;
                         if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= 1.50;
                         if (player.hasPerk(PerkLib.Apex)) lustdamage *= 1.50;
                         if (player.hasPerk(PerkLib.AlphaAndOmega)) lustdamage *= 1.50;
@@ -5305,7 +5302,7 @@ public class Combat extends BaseContent {
             }
         }
         //10% Bleed chance
-        if (player.weapon == weapons.CLAWS || player.weapon == weapons.L_CLAWS || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) bleedChance += 10;
+        if (player.weapon == weapons.CLAWS || player.weapon == weapons.L_CLAWS || player.weapon == weapons.VENCLAW || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) bleedChance += 10;
         //25% Bleed chance
         if ((player.weapon == weapons.H_GAUNT || player.weapon == weapons.CNTWHIP || player.weapon == weapons.TRIDAG)) bleedChance += 25;
         //100% bleed chance
@@ -5336,6 +5333,15 @@ public class Combat extends BaseContent {
             else if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") HPChange(Math.round(player.maxHP() * 0.02), false);
             else if (player.weaponPerk == "Massive") HPChange(Math.round(player.maxHP() * 0.04), false);
             else HPChange(Math.round(player.maxHP() * 0.01), false);
+        }
+		if (player.weapon == weapons.VENCLAW) {
+            outputText("\n[monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+            var Ldamage:Number = 8 + rand(3);
+            monster.teased(monster.lustVuln * Ldamage);
+            monster.statStore.addBuffObject({tou:-1}, "Poison",{text:"Poison"});
+            if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+                monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+            } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
         }
     }
 

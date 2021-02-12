@@ -293,12 +293,13 @@ use namespace CoC;
 			addButton(10, "All4Prestige", AddMaxBackpack03).hint("A11 th4t Prestige is Y0urs to T4ke!!!");
 			addButton(11, "PerkGalore1", PerkGalore1);
 			addButton(12, "PerkGalore2", PerkGalore2);
-			if (flags[kFLAGS.MARAE_ISLAND] < 1 && flags[kFLAGS.MET_MARAE] == 1) addButton(13, "ClickItOnce", AddMaxBackpack033).hint("Fix Marae Island");
+			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(13, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock form Michiko for future clarity.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function AddMaxBackpack033():void {
 			outputText("\n\nFix completed");
-			flags[kFLAGS.MARAE_ISLAND] = 1;
+			flags[kFLAGS.MARRIAGE_FLAG] = 0;
+			flags[kFLAGS.MICHIKO_TALK_MARRIAGE] = 1;
 			doNext(submenucuzwhynot);
 		}
 		public function AddMaxBackpack03():void {
@@ -4159,4 +4160,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}

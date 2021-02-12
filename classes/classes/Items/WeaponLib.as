@@ -127,6 +127,7 @@ package classes.Items
 		public const UGATANA:Weapon = new Weapon("Uchigatana ","Uchigatana","Uchigatana","a Uchigatana","keen cut",15,680,"A one handed curved bladed weapon that cuts through flesh with the greatest of ease. Can also be wielded with both hands.", "Hybrid");
 		public const URTAHLB:Weapon = new Weapon("UrtaHlb","UrtaHlb","halberd","a halberd","slash",50,2000,"Urta's halberd. How did you manage to get this?","Large");
 		public const VBLADE :Weapon = new Weapon("V.Blade","V.Blade", "V.Blade", "a V.Blade", "slash", 28, 2240, "A peculiar sword. The letter V is engraved into the blade perhaps its former owner name.");
+		public const VENCLAW:Weapon = new Weapon("VenClaw","Venoclaw","Venoclaw","a Venoclaw","rend",0,200,"This set of catclaw gloves was tempered using Etna's own venom and reinforced using some of her tail bone spikes, a proof of her eternal love to you.");
 		public const W_STAFF:WizardsStaff = new WizardsStaff();
 		public const WARHAMR:HugeWarhammer = new HugeWarhammer();
 		public const WHIP   :Whip = new Whip();

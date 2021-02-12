@@ -275,6 +275,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EnemyColossalType) >= 0) temp *= 3;
 			if (findPerk(PerkLib.EnemyGroupType) >= 0) temp *= 5;
 			if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) temp *= 10;
+			if (findPerk(PerkLib.Enemy300Type) >= 0) temp *= 15;
 			temp *= stats_multi_based_on_misc();
 			temp = Math.round(temp);
 			return temp;
@@ -397,6 +398,7 @@ import flash.utils.getQualifiedClassName;
 			var anotherOne:Number = this.bonusLust;
 			if (findPerk(PerkLib.EnemyGroupType) >= 0) anotherOne *= 5;
 			if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) anotherOne *= 10;
+			if (findPerk(PerkLib.Enemy300Type) >= 0) anotherOne *= 15;
 			anotherOne *= (1 + newGamePlusMod());
 			temp += anotherOne;
 			var multimax:Number = 1;
@@ -582,6 +584,7 @@ import flash.utils.getQualifiedClassName;
 				temp += 500;
 				if (findPerk(PerkLib.EnemyGroupType) >= 0) temp += 2000;
 				if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) temp += 4000;
+				if (findPerk(PerkLib.Enemy300Type) >= 0) temp += 60000;
 			}
 			var multimax:Number = 1;
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
@@ -962,6 +965,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EnemyHugeType) >= 0) datNumber *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) datNumber *= 4;
 			if (findPerk(PerkLib.EnemyColossalType) >= 0) datNumber *= 6;
+			if (findPerk(PerkLib.Enemy300Type) >= 0) datNumber *= 15;
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) datNumber = 1;
 			return datNumber;
 		}
@@ -1012,6 +1016,7 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.EnemyColossalType) >= 0) minXP *= 6;
 				if (findPerk(PerkLib.EnemyGroupType) >= 0) minXP *= 5;
 				if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) minXP *= 10;
+				if (findPerk(PerkLib.Enemy300Type) >= 0) minXP *= 15;
 				if (this.humanityBoostExpValue() > 0) minXP += this.humanityBoostExpValue();
 				return Math.round(minXP);
 			}
@@ -1038,6 +1043,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EnemyColossalType) >= 0) specENtypes *= 6;
 			if (findPerk(PerkLib.EnemyGroupType) >= 0) specENtypes *= 5;
 			if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) specENtypes *= 10;
+			if (findPerk(PerkLib.Enemy300Type) >= 0) specENtypes *= 15;
 			return specENtypes;
 		}
 		protected function humanity():Number

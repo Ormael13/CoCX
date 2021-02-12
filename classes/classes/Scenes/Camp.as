@@ -4550,12 +4550,23 @@ public function wakeFromBadEnd():void {
 	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 31) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 32;
 			clearOutput();
-			outputText("Text.");
+			outputText("Matters of heart are... complicated and tangled so we gonna pull them wide till they get all straight like string ^^");
+			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) {
+				flags[kFLAGS.MARRIAGE_FLAG] = 0;
+				flags[kFLAGS.MICHIKO_TALK_MARRIAGE] = 1;
+			}
 			doNext(doCamp);
 			return;
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 33;
+			clearOutput();
+			outputText("Text.");
+			doNext(doCamp);
+			return;
+		}
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
 			clearOutput();
 			outputText("Text.");
 			doNext(doCamp);
@@ -5074,4 +5085,4 @@ public function wakeFromBadEnd():void {
         }
         */
 	}
-}
+}
