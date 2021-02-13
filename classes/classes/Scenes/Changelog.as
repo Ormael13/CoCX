@@ -62,17 +62,17 @@ package classes.Scenes
 			outputText("-Tripxi have 2 new talk subjects.\n");
 			outputText("-After months, years of wait... 2nd wedding partner is finaly here.... it's our local neighbour yandere Etna. After PC know about marriages (Michiko helps here), have ring to propose and know some friendly priest can now marry Etna. It will not be easy and maybe like with Chi Chi as someone could crash wedding... as long it not 300 of them right? So ekhm... after PC manage to finish weeding will make resident manticore into wife.\n");
 			outputText("-New melee weapon (by Liadri): Venoclaw - obtainable after making Etna PC waifu. Cost 200 gems. Base atk is 0. Each attack that would deal damage to enemy would apply a small dose of aphrodisiac similary to manticore poison. It also compatibile to be used with feral combat.\n");
+			outputText("-New tier 2 misc lvl-up perk: Natural Instincts. Req. Job: Beast Warrior perk. Effect: All racial ability cooldowns are reduced by one.\n");
+			outputText("-New tier 3 misc lvl-up perk: Natural Arsenal. Req. Natural Instincts perk and 60+ str/tou. Effect: All natural weapon based racial abilities gain a +50% damage bonus.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Put limit on how much PC can mine at one visit in quarry to 60. Each new NG tier increase it by 20 up to 160.\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: \n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fixed bugs: Dual wield firearms mastery granted when suing any firearms\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			//outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. ");

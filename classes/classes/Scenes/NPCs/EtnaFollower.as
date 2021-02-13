@@ -7,6 +7,7 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.BodyParts.Tail;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Areas.HighMountains.MinotaurMob;
 	import classes.Scenes.Monsters.Manticore;
 	import classes.display.SpriteDb;
 	import classes.Scenes.UniqueSexScenes;
@@ -696,7 +697,8 @@ public function etnaMarriageYes2():void
 	outputText("\"<i>Boys, don’t you know it’s not rape when it's consensual? Hey [name] I don’t know about you but they are interrupting the wedding. It’d be nice if you could dispose of them.</i>\"\n\n");
 	outputText("You step forward to save your marriage, there's no way you're going to let these huge pricks ruin your special day or hers!\n\n");
 	flags[kFLAGS.ETNA_FOLLOWER] = 3;
-	
+	startCombat(new MinotaurMob());
+	doNext(playerMenu);
 }
 public function etnaMarriageYes3():void
 {

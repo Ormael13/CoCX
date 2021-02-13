@@ -286,13 +286,13 @@ import classes.Scenes.SceneLib;
 			minedStones = Math.round(minedStones);
 			fatigue(50, USEFATG_PHYSICAL);
 			if (rand(4) == 0) {
-				//if (minedStones > 50) minedStones = 50;
+				if (minedStones > (60 + (20 * player.newGamePlusMod()))) minedStones = (60 + (20 * player.newGamePlusMod()));
 				incrementStoneSupply(minedStones);
 				if (rand(2) == 0) inventory.takeItem(useables.TIN_ORE, camp.returnToCampUseTwoHours);
 				else inventory.takeItem(useables.COP_ORE, camp.returnToCampUseTwoHours);
 			}
 			else {
-				//if (minedStones > 50) minedStones = 50;
+				if (minedStones > (60 + (20 * player.newGamePlusMod()))) minedStones = (60 + (20 * player.newGamePlusMod()));
 				incrementStoneSupply(minedStones);
 				if (rand (10) == 0) {
 					var gemsMined:Number = 1 + rand(4);

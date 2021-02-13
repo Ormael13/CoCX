@@ -2780,11 +2780,11 @@ public class Combat extends BaseContent {
                 else if (monster.plural)
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) damage = doFireDamage(damage, true, true);
-                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) damage = doIceDamage(damage, true, true);
-                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) damage = doLightingDamage(damage, true, true);
-                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) damage = doDarknessDamage(damage, true, true);
-                else damage = doDamage(damage, true, true);
+                if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
+                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
+                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
+                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
+                else doDamage(damage, true, true);
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
                 checkAchievementDamage(damage);
@@ -2799,11 +2799,11 @@ public class Combat extends BaseContent {
                 }
                 if (!MSGControll) {
                     outputText(".  It's clearly very painful. ");
-                    if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) damage = doFireDamage(damage, true, true);
-                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) damage = doIceDamage(damage, true, true);
-                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) damage = doLightingDamage(damage, true, true);
-                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) damage = doDarknessDamage(damage, true, true);
-                    else damage = doDamage(damage, true, true);
+                    if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
+                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
+                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
+                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
+                    else doDamage(damage, true, true);
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 heroBaneProc(damage);
@@ -3101,7 +3101,7 @@ public class Combat extends BaseContent {
             } else {
                 if (!MSGControll) {
                     outputText(".  It's clearly very painful. ");
-                    damage = doDamage(damage, true, true);
+                    doDamage(damage, true, true);
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
@@ -3355,10 +3355,12 @@ public class Combat extends BaseContent {
                 else if (monster.plural)
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                damage = doDamage(damage, true, true);
+                doDamage(damage, true, true);
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
-				if (crit) dualWieldFirearmsXP(1);
-				dualWieldFirearmsXP(1);
+				if (player.weaponRangePerk == "Dual Firearms") {
+					if (crit) dualWieldFirearmsXP(1);
+					dualWieldFirearmsXP(1);
+				}
                 if (player.weaponRange == weaponsrange.TOUHOM3) {
                     outputText(" ");
                     doDamage(damage, true, true);
@@ -3395,16 +3397,20 @@ public class Combat extends BaseContent {
                 if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
                     outputText(".  It's clearly very painful. ");
                     doDamage(damage, true, true);
-					if (crit) dualWieldFirearmsXP(1);
-					dualWieldFirearmsXP(1);
+					if (player.weaponRangePerk == "Dual Firearms") {
+						if (crit) dualWieldFirearmsXP(1);
+						dualWieldFirearmsXP(1);
+					}
                 } else {
                     if (!MSGControll) {
                         outputText(".  It's clearly very painful. ");
                         doDamage(damage, true, true);
                     }
                     if (crit) outputText(" <b>*Critical Hit!*</b>");
-					if (crit) dualWieldFirearmsXP(1);
-					dualWieldFirearmsXP(1);
+					if (player.weaponRangePerk == "Dual Firearms") {
+						if (crit) dualWieldFirearmsXP(1);
+						dualWieldFirearmsXP(1);
+					}
                     //	if (flaga dla efektu arouse arrow) outputText(" tekst dla arouse arrow effect.");
                     //	if (flaga dla efektu poison arrow) outputText(" tekst dla poison arrow effect.");
                 }
@@ -4566,7 +4572,7 @@ public class Combat extends BaseContent {
                     if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
                     if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
                     if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-                    if (damage > 0) damage = doDamage(damage, false);
+                    if (damage > 0) doDamage(damage, false);
                     (monster as Doppleganger).mirrorAttack(damage);
                     return;
                 }
@@ -4689,22 +4695,22 @@ public class Combat extends BaseContent {
                     else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
                 }
                 //Damage is delivered HERE
-                if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doFireDamage(damage, true, true);
-                else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doIceDamage(damage, true, true);
-                else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doLightingDamage(damage, true, true);
-                else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doDarknessDamage(damage, true, true);
-                else damage = doDamage(damage, true, true);
-                if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage = doLightingDamage(Math.round(damage * 0.3), true, true);
+                if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doFireDamage(damage, true, true);
+                else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doIceDamage(damage, true, true);
+                else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doLightingDamage(damage, true, true);
+                else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doDarknessDamage(damage, true, true);
+                else doDamage(damage, true, true);
+                if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                 if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
-                    damage = doDamage(damage, true, true);
-                    if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage = doLightingDamage(Math.round(damage * 0.3), true, true);
+                    doDamage(damage, true, true);
+                    if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                     if (player.spe >= 225) {
-                        damage = doDamage(damage, true, true);
-                        if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage = doLightingDamage(Math.round(damage * 0.3), true, true);
+                        doDamage(damage, true, true);
+                        if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                     }
                     if (player.spe >= 300) {
-                        damage = doDamage(damage, true, true);
-                        if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage = doLightingDamage(Math.round(damage * 0.3), true, true);
+                        doDamage(damage, true, true);
+                        if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                     }
                     damage += damage;
                     if (player.spe >= 225) damage += damage;
@@ -4712,50 +4718,19 @@ public class Combat extends BaseContent {
                 }
                 JabbingStyleIncrement();
                 if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage += Math.round(damage * 0.3);
-				if (player.isGauntletWeapon()) {
-					if (crit) gauntletXP(1);
-					gauntletXP(1);
-				}
-				if (player.isSwordTypeWeapon()) {
-					if (crit) swordXP(1);
-					swordXP(1);
-				}
-				if (player.isAxeTypeWeapon()) {
-					if (crit) axeXP(1);
-					axeXP(1);
-				}
-				if (player.isMaceHammerTypeWeapon()) {
-					if (crit) macehammerXP(1);
-					macehammerXP(1);
-				}
-				if (player.isDuelingTypeWeapon()) {
-					if (crit) duelingswordXP(1);
-					duelingswordXP(1);
-				}
-				if (player.isSpearTypeWeapon()) {
-					if (crit) spearXP(1);
-					spearXP(1);
-				}
-				if (player.isDaggerTypeWeapon()) {
-					if (crit) daggerXP(1);
-					daggerXP(1);
-				}
-				if (player.isExoticTypeWeapon()) {
-					if (crit) exoticXP(1);
-					exoticXP(1);
-				}
-				if (player.weaponPerk == "Dual Small") {
-					if (crit) dualWieldSmallXP(1);
-					dualWieldSmallXP(1);
-				}
-				if (player.weaponPerk == "Dual") {
-					if (crit) dualWieldNormalXP(1);
-					dualWieldNormalXP(1);
-				}
-				if (player.weaponPerk == "Dual Large") {
-					if (crit) dualWieldLargeXP(1);
-					dualWieldLargeXP(1);
-				}
+				var meleeMasteryEXPgains:Number = 1;
+				if (crit) meleeMasteryEXPgains *= 2;
+				if (player.isGauntletWeapon()) gauntletXP(meleeMasteryEXPgains);
+				if (player.isSwordTypeWeapon()) swordXP(meleeMasteryEXPgains);
+				if (player.isAxeTypeWeapon()) axeXP(meleeMasteryEXPgains);
+				if (player.isMaceHammerTypeWeapon()) macehammerXP(meleeMasteryEXPgains);
+				if (player.isDuelingTypeWeapon()) duelingswordXP(meleeMasteryEXPgains);
+				if (player.isSpearTypeWeapon()) spearXP(meleeMasteryEXPgains);
+				if (player.isDaggerTypeWeapon()) daggerXP(meleeMasteryEXPgains);
+				if (player.isExoticTypeWeapon()) exoticXP(meleeMasteryEXPgains);
+				if (player.weaponPerk == "Dual Small") dualWieldSmallXP(meleeMasteryEXPgains);
+				if (player.weaponPerk == "Dual") dualWieldNormalXP(meleeMasteryEXPgains);
+				if (player.weaponPerk == "Dual Large") dualWieldLargeXP(meleeMasteryEXPgains);
             }
             if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75) {
                 if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [monster a] [monster name]'s defenses!");
@@ -5221,7 +5196,7 @@ public class Combat extends BaseContent {
                     if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
                     if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
                     if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-                    if (damage > 0) damage = doDamage(damage, false);
+                    if (damage > 0) doDamage(damage, false);
                     (monster as Doppleganger).mirrorAttack(damage);
                     return;
                 }
@@ -8614,8 +8589,8 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.OniRampage)) gainedwrath += 12 * BonusWrathMult;
             if (player.statStore.hasBuff("CrinosShape")) {
                 gainedwrath += 2;
-                if (player.hasPerk(PerkLib.ImprovedCrinosShape)) gainedwrath += 4 * BonusWrathMult;
-                if (player.hasPerk(PerkLib.GreaterCrinosShape)) gainedwrath += 6 * BonusWrathMult;
+                if (player.hasPerk(PerkLib.ImprovedCrinosShape)) gainedwrath += 2 * BonusWrathMult;
+                if (player.hasPerk(PerkLib.GreaterCrinosShape)) gainedwrath += 4 * BonusWrathMult;
                 if (player.hasPerk(PerkLib.MasterCrinosShape)) gainedwrath += 8 * BonusWrathMult;
             }
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) gainedwrath *= 2 * BonusWrathMult;
@@ -10962,7 +10937,7 @@ public class Combat extends BaseContent {
             damage *= 1.75;
         }
         damage = Math.round(damage);
-        damage = doDamage(damage);
+        doDamage(damage);
         outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
         if (crit) outputText(" <b>Critical!</b>");
         if (player.hasPerk(PerkLib.PhantomStrike)) doDamage(damage, true, true);
@@ -11596,7 +11571,7 @@ public class Combat extends BaseContent {
             else damage *= 1.75;
         }
         damage = Math.round(damage);
-        damage = doDamage(damage, true, true);
+        doDamage(damage, true, true);
         if (crit) {
             outputText("<b>Critical! </b>");
             if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);

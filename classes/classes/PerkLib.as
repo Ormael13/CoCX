@@ -333,7 +333,18 @@ public class PerkLib
 		//public static const BloodSacrifice:PerkType = mk("Blood Sacrifice", "Blood Sacrifice",
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
-		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
+		public static const NaturalArsenal:PerkType = mk("Natural Arsenal", "Natural Arsenal",
+				"All natural weapon based racial abilities gain a +50% damage bonus.",
+				"You've chosen the 'Natural Arsenal' perk, all natural weapon based racial abilities gain a +50% damage bonus.");
+		public static const NaturalInstincts:PerkType = mk("Natural Instincts", "Natural Instincts",
+				"All racial ability cooldowns are reduced by one.",
+				"You've chosen the 'Natural Instincts' perk, all racial ability cooldowns are reduced by one.");
+		/*public static const JobBeastlord:PerkType = mk("Job: Beastlord", "Job: Beastlord",
+				".",
+				"You've chosen the 'Job: Beastlord' perk, .");
+				"You've trained to use of your own body and natural weapons to their limits in fights.",
+				"You've chosen the 'Job: Beast Warrior' perk, training yourself in the art of feral combat.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05, "int.mult":-0.05, "wis.mult":-0.05});
+		*/public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
 				"+600 to max Wrath.",//stay alive when berserking at cost of super fast 20% max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
 				"You've chosen the 'Too Angry to Die' perk, .");
 		public static const GazerEye:PerkType = mk("Gazer Eye", "Gazer Eye",
@@ -390,6 +401,21 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -6301,6 +6327,8 @@ public class PerkLib
                     .requirePerk(JobEromancer);
             WhirlwindFeral.requireLevel(12)
                     .requirePerk(JobBeastWarrior);
+            NaturalInstincts.requireLevel(12)
+                    .requirePerk(JobBeastWarrior);
             ArcanePoolIV.requireLevel(12)
                     .requireInt(60)
                     .requireWis(60)
@@ -6461,6 +6489,10 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
 					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
 					}, "Any natural weapon");
+            NaturalArsenal.requireLevel(18)
+					.requireStr(60)
+					.requireSpe(60)
+                    .requirePerk(NaturalInstincts);
 			SpinAttack.requireLevel(18)
 					.requirePerk(Aerobatics)
 					.requireStr(60)
