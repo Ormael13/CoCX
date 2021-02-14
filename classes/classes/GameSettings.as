@@ -42,7 +42,7 @@ public class GameSettings extends BaseContent {
 	//------------
 	// GAMEPLAY
 	//------------
-	public function settingsScreenGameSettings():void {
+	public function settingsScreenGameSettings(page:int = 1):void {
 		clearOutput();
 		displayHeader("Gameplay Settings");
 
@@ -214,54 +214,54 @@ public class GameSettings extends BaseContent {
 			outputText("No Blood Mode: <font color=\"#800000\"><b>OFF</b></font>\n Excesive Bloody or Gore scenes variants are enabled.");
 
 		menu();
-		addButton(0, "Toggle Debug", toggleDebug).hint("Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
-		if (player) {
-			addButton(1, "Difficulty", difficultySelectionMenu).hint("Adjust the game difficulty to make it easier or harder.");
-			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(7, "Easy Mode", toggleEasyModeFlag).hint("Toggles easy mode.  Enemy damage is 10% of normal and bad-ends can be ignored.");
-			else addButtonDisabled(7, "Easy Mode", "Diffulty setting is too high to allow toggle easy mod.");
+		if (page == 1) {
+			addButton(0, "Toggle Debug", toggleDebug).hint("Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
+			if (player) {
+				addButton(1, "Difficulty", difficultySelectionMenu).hint("Adjust the game difficulty to make it easier or harder.");
+				if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(7, "Easy Mode", toggleEasyModeFlag).hint("Toggles easy mode.  Enemy damage is 10% of normal and bad-ends can be ignored.");
+				else addButtonDisabled(7, "Easy Mode", "Diffulty setting is too high to allow toggle easy mod.");
+			}
+			addButton(2, "Silly Toggle", toggleSillyFlag).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
+			addButton(3, "Low Standards", toggleStandards);
+			addButton(4, "Hyper Happy", toggleHyperHappy);
+			addButton(5, "SFW Toggle", toggleSFW).hint("Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
+			addButton(6, "Auto level", toggleAutoLevel).hint("Toggles automatic leveling when you accumulate sufficient experience.");
+			if (player) addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
+			if (player) addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
+			
+			addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
+			if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5) {
+				removeButton(8);
+			}
+			if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
+				removeButton(9);
+			}
+			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
+				removeButton(0);
+				removeButton(1);
+				removeButton(3);
+				removeButton(4);
+				debug                               = false;
+				flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
+				flags[kFLAGS.HYPER_HAPPY]           = 0;
+				flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
+			}
+			addButton(13, "-2-", settingsScreenGameSettings, page + 1);
+			addButton(14, "Back", settingsScreenMain);
 		}
-		addButton(2, "Silly Toggle", toggleSillyFlag).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
-		addButton(3, "Low Standards", toggleStandards);
-		addButton(4, "Hyper Happy", toggleHyperHappy);
-
-		addButton(5, "SFW Toggle", toggleSFW).hint("Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
-		addButton(6, "Auto level", toggleAutoLevel).hint("Toggles automatic leveling when you accumulate sufficient experience.");
-		if (player) addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
-		if (player) addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
-		
-		addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
-		addButton(12, "Other Settings", settingsScreenGameSettings2);
-
-		if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5) {
-			removeButton(8);
+		if (page == 2) {
+			addButton(0, "Eternal Holiday", toggleEternalHoliday).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. would happen at any day of the year.");
+			addButton(1, "No Blood Toggle", toggleNOGORE).hint("Toggles No Blood Mode. If enabled, scenes could have more gruesome/bloody variants showed. Not for the weak of heart players.");
+			addButton(3, "Wis scalling", toggleWisScaling).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generaly a bit higher values on averange.");
+			addButton(4, "Int scalling", toggleIntScaling).hint("Toggles Intelligance scalling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
+			addButton(5, "Damage Overhaul", toggleDamageOverhaul).hint("Toggles Damage Overhaul. If enabled, melee and range attacks would deal random damage between 15% to 115%. Int and Wis could increase both values.");
+			addButton(6, "Spells Cooldowns", toggleSpellsCooldowns).hint("Toggles Spells cooldowns. If enabled, spells would have cooldowns and they will be stronger.");
+			addButton(8, "Str scalling", toggleStrScaling).hint("Toggles Strength scalling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
+			addButton(9, "Spe scalling", toggleSpeScaling).hint("Toggles Speed scalling for all attacks using it. If enabled, speed scaling would be less random with values being a bit higher on average.");
+			addButton(10, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
+			addButton(13, "-1-", settingsScreenGameSettings, page - 1);
+			addButton(14, "Back", settingsScreenMain);
 		}
-		if (flags[kFLAGS.HUNGER_ENABLED] >= 1) {
-			removeButton(9);
-		}
-		if (flags[kFLAGS.HARDCORE_MODE] > 0) {
-			removeButton(0);
-			removeButton(1);
-			removeButton(3);
-			removeButton(4);
-			debug                               = false;
-			flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
-			flags[kFLAGS.HYPER_HAPPY]           = 0;
-			flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
-		}
-		addButton(14, "Back", settingsScreenMain);
-	}
-	public function settingsScreenGameSettings2():void {
-		menu();
-		addButton(0, "Eternal Holiday", toggleEternalHoliday).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. would happen at any day of the year.");
-		addButton(1, "No Blood Toggle", toggleNOGORE).hint("Toggles No Blood Mode. If enabled, scenes could have more gruesome/bloody variants showed. Not for the weak of heart players.");
-		addButton(3, "Wis scalling", toggleWisScaling).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generaly a bit higher values on averange.");
-		addButton(4, "Int scalling", toggleIntScaling).hint("Toggles Intelligance scalling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
-		addButton(5, "Damage Overhaul", toggleDamageOverhaul).hint("Toggles Damage Overhaul. If enabled, melee and range attacks would deal random damage between 15% to 115%. Int and Wis could increase both values.");
-		addButton(6, "Spells Cooldowns", toggleSpellsCooldowns).hint("Toggles Spells cooldowns. If enabled, spells would have cooldowns and they will be stronger.");
-		addButton(8, "Str scalling", toggleStrScaling).hint("Toggles Strength scalling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
-		addButton(9, "Spe scalling", toggleSpeScaling).hint("Toggles Speed scalling for all attacks using it. If enabled, speed scaling would be less random with values being a bit higher on average.");
-		addButton(10, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
-		addButton(14, "Back", settingsScreenGameSettings);
 	}
 
 	public function toggleDebug():void {
@@ -269,7 +269,7 @@ public class GameSettings extends BaseContent {
 		debug = !debug;
 
 		mainView.showMenuButton(MainView.MENU_DATA);
-		settingsScreenGameSettings();
+		curry(settingsScreenGameSettings, 1);
 
 	}
 
@@ -303,12 +303,12 @@ public class GameSettings extends BaseContent {
 		addButton(2, "Nightmare", chooseDifficulty, 2);
 		addButton(3, "EXTREME", chooseDifficulty, 3);
 		addButton(4, "XIANXIA", chooseDifficulty, 4);
-		addButton(14, "Back", settingsScreenGameSettings);
+		addButton(14, "Back", curry(settingsScreenGameSettings, 1));
 	}
 
 	public function chooseDifficulty(difficulty:int = 0):void {
 		flags[kFLAGS.GAME_DIFFICULTY] = difficulty;
-		settingsScreenGameSettings();
+		curry(settingsScreenGameSettings, 1);
 	}
 	
 	public function difficultySelectionMenu2():void {
@@ -325,103 +325,97 @@ public class GameSettings extends BaseContent {
 		addButton(2, "Nightmare", chooseDifficulty2, 2);
 		addButton(3, "EXTREME", chooseDifficulty2, 3);
 		addButton(4, "XIANXIA", chooseDifficulty2, 4);
-		addButton(14, "Back", settingsScreenGameSettings2);
+		addButton(14, "Back", curry(settingsScreenGameSettings, 2));
 	}
 
 	public function chooseDifficulty2(difficulty:int = 0):void {
 		flags[kFLAGS.SECONDARY_STATS_SCALING] = difficulty;
-		settingsScreenGameSettings2();
+		curry(settingsScreenGameSettings, 2);
 	}
 
 	public function toggleEasyModeFlag():void {
 		//toggle easy mode
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 0) flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
 		else flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
-		settingsScreenGameSettings();
+		curry(settingsScreenGameSettings, 1);
 	}
 
 	public function toggleSillyFlag():void {
 		//toggle silly mode
 		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = !flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
-		settingsScreenGameSettings();
+		curry(settingsScreenGameSettings, 1);
 	}
 
 	public function toggleStandards():void {
 		//toggle low standards
 		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = !flags[kFLAGS.LOW_STANDARDS_FOR_ALL];
-		settingsScreenGameSettings();
+		curry(settingsScreenGameSettings, 1);
 	}
 
 	public function toggleHyperHappy():void {
 		//toggle hyper happy
 		flags[kFLAGS.HYPER_HAPPY] = !flags[kFLAGS.HYPER_HAPPY];
-		settingsScreenGameSettings();
+		curry(settingsScreenGameSettings, 1);
 	}
 
 	public function toggleEternalHoliday():void {
 		//toggle eternal holiday
 		flags[kFLAGS.ITS_EVERY_DAY] = !flags[kFLAGS.ITS_EVERY_DAY];
-		settingsScreenGameSettings2();
+		curry(settingsScreenGameSettings, 2);
 	}
 
 	public function toggleSFW():void {
 		if (flags[kFLAGS.SFW_MODE] < 1) flags[kFLAGS.SFW_MODE] = 1;
 		else flags[kFLAGS.SFW_MODE] = 0;
-		settingsScreenGameSettings();
+		curry(settingsScreenGameSettings, 1);
 	}
 
 	public function toggleNOGORE():void {
 		if (flags[kFLAGS.NO_GORE_MODE] < 1) flags[kFLAGS.NO_GORE_MODE] = 1;
 		else flags[kFLAGS.NO_GORE_MODE] = 0;
-		settingsScreenGameSettings2();
+		curry(settingsScreenGameSettings, 2);
 	}
 
 	public function toggleStrScaling():void {
 		if (flags[kFLAGS.STRENGTH_SCALLING] < 1) flags[kFLAGS.STRENGTH_SCALLING] = 1;
 		else flags[kFLAGS.STRENGTH_SCALLING] = 0;
-		settingsScreenGameSettings2();
+		curry(settingsScreenGameSettings, 2);
 	}
 
 	public function toggleSpeScaling():void {
 		if (flags[kFLAGS.SPEED_SCALLING] < 1) flags[kFLAGS.SPEED_SCALLING] = 1;
 		else flags[kFLAGS.SPEED_SCALLING] = 0;
-		settingsScreenGameSettings2();
+		curry(settingsScreenGameSettings, 2);
 	}
 
 	public function toggleWisScaling():void {
 		if (flags[kFLAGS.WISDOM_SCALLING] < 1) flags[kFLAGS.WISDOM_SCALLING] = 1;
 		else flags[kFLAGS.WISDOM_SCALLING] = 0;
-		settingsScreenGameSettings2();
+		curry(settingsScreenGameSettings, 2);
 	}
 
 	public function toggleIntScaling():void {
 		if (flags[kFLAGS.INTELLIGENCE_SCALLING] < 1) flags[kFLAGS.INTELLIGENCE_SCALLING] = 1;
 		else flags[kFLAGS.INTELLIGENCE_SCALLING] = 0;
-		settingsScreenGameSettings2();
+		curry(settingsScreenGameSettings, 2);
 	}
 
 	public function toggleDamageOverhaul():void {
 		if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] < 1) flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = 1;
 		else flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = 0;
-		settingsScreenGameSettings2();
+		curry(settingsScreenGameSettings, 2);
 	}
 
 	public function toggleSpellsCooldowns():void {
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] < 1) flags[kFLAGS.SPELLS_COOLDOWNS] = 1;
 		else flags[kFLAGS.SPELLS_COOLDOWNS] = 0;
-		settingsScreenGameSettings2();
-	}
-
-	public function toggleWatersports():void {
-		if (flags[kFLAGS.WATERSPORTS_ENABLED] < 1) flags[kFLAGS.WATERSPORTS_ENABLED] = 1;
-		else flags[kFLAGS.WATERSPORTS_ENABLED] = 0;
-		settingsScreenGameSettings();
+		curry(settingsScreenGameSettings, 2);
 	}
 
 	public function toggleAutoLevel():void {
 		if (flags[kFLAGS.AUTO_LEVEL] < 1) flags[kFLAGS.AUTO_LEVEL] = 1;
 		else flags[kFLAGS.AUTO_LEVEL] = 0;
-		settingsScreenGameSettings();
+		curry(settingsScreenGameSettings, 1);
 	}
 
 	public function fetishSubMenu():void {
@@ -429,7 +423,13 @@ public class GameSettings extends BaseContent {
 		addButton(0, "Watersports", toggleWatersports).hint("Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
 		if (player.hasStatusEffect(StatusEffects.WormsOn) || player.hasStatusEffect(StatusEffects.WormsOff)) addButton(1, "Worms", toggleWormsMenu).hint("Enable or disable worms. This will NOT cure infestation, if you have any.");
 		else addButtonDisabled(1, "Worms", "Find the sign depicting the worms in the mountains to unlock this.");
-		addButton(4, "Back", settingsScreenGameSettings);
+		addButton(4, "Back", curry(settingsScreenGameSettings, 1));
+	}
+
+	public function toggleWatersports():void {
+		if (flags[kFLAGS.WATERSPORTS_ENABLED] < 1) flags[kFLAGS.WATERSPORTS_ENABLED] = 1;
+		else flags[kFLAGS.WATERSPORTS_ENABLED] = 0;
+		fetishSubMenu();
 	}
 
 	private function toggleWormsMenu():void {
@@ -470,7 +470,7 @@ public class GameSettings extends BaseContent {
 		clearOutput();
 		outputText("Are you sure you want to enable Survival Mode?\n\n");
 		outputText("You will NOT be able to turn it off! (Unless you reload immediately.)");
-		doYesNo(enableSurvivalForReal, settingsScreenGameSettings);
+		doYesNo(enableSurvivalForReal, curry(settingsScreenGameSettings, 1));
 	}
 
 	public function enableSurvivalForReal():void {
@@ -478,7 +478,7 @@ public class GameSettings extends BaseContent {
 		outputText("Survival mode is now enabled.");
 		player.hunger                = 80;
 		flags[kFLAGS.HUNGER_ENABLED] = 0.5;
-		doNext(settingsScreenGameSettings);
+		doNext(curry(settingsScreenGameSettings, 1));
 	}
 
 //Realistic Mode
@@ -486,14 +486,14 @@ public class GameSettings extends BaseContent {
 		clearOutput();
 		outputText("Are you sure you want to enable Realistic Mode?\n\n");
 		outputText("You will NOT be able to turn it off! (Unless you reload immediately.)");
-		doYesNo(enableRealisticForReal, settingsScreenGameSettings);
+		doYesNo(enableRealisticForReal, curry(settingsScreenGameSettings, 1));
 	}
 
 	public function enableRealisticForReal():void {
 		clearOutput();
 		outputText("Realistic mode is now enabled.");
 		flags[kFLAGS.HUNGER_ENABLED] = 1;
-		doNext(settingsScreenGameSettings);
+		doNext(curry(settingsScreenGameSettings, 1));
 	}
 
 

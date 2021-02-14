@@ -43,7 +43,8 @@ public class PerkMenu extends BaseContent {
 		}
 		addButton(2, "SuperPerk Up", CoC.instance.playerInfo.superPerkBuyMenu);
 		addButton(4, "Database", perkDatabase);
-		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()))) {
+		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) ||
+			(player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.jiangshiScore() >= 20) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",doubleAttackOptions);
 		}
@@ -116,6 +117,20 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] == 0 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 1) outputText("Manual");
 			outputText("</b>");
 		}
+		if (player.hasPerk(PerkLib.NaturalInstincts)) {
+			outputText("\n\nYou can choose between starting fight with Crinos Shape active or not.");
+			outputText("\n\nCrinos Shape: <b>");
+			if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 1) outputText("Autocast");
+			if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 0) outputText("Manual");
+			outputText("</b>");
+		}
+		if (player.hasPerk(PerkLib.WayOfTheWarrior)) {
+			outputText("\n\nYou can choose between starting fight with warrior's rage active or not.");
+			outputText("\n\nWarrior's Rage: <b>");
+			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] == 1) outputText("Autocast");
+			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] == 0) outputText("Manual");
+			outputText("</b>");
+		}
 		if (player.findPerk(PerkLib.Poisoning) >= 0) {
 			outputText("\n\nIf you can naturaly produce venom then you could add it effects to weapon. (Working only with small weapons)");
 			if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 0) outputText("\n\nVenom effect added: <b>No</b>");
@@ -174,7 +189,8 @@ public class PerkMenu extends BaseContent {
 			if (maxCurrentAttacks < 10) addButtonDisabled(13, "All Deca", "You current melee weapon not allow to use this option");
 			else addButton(13, "All Deca", doubleAttackStyle,9);
 		}
-		addButton(9, "Others", doubleAttackOptions2);
+		addButton(4, "Others(1)", doubleAttackOptions2);
+		addButton(9, "Others(2)", doubleAttackOptions3);
 
 		if (CoC.instance.inCombat) addButton(14, "Back", combat.combatMenu, false);
         else addButton(14, "Back", displayPerks);
@@ -202,19 +218,32 @@ public class PerkMenu extends BaseContent {
 			|| player.faceType == Face.SNAKE_FANGS
 			|| player.faceType == Face.SPIDER_FANGS)
 			&& flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 1) {
-            addButton(4, "Venom", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,true);
-		}
-		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 || player.jiangshiScore() >= 20) {
-			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(5, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
-			if (((player.weaponName == "fists" && player.hasNaturalWeapons) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(8, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
-			else addButtonDisabled(8, "Feral", "You do not meet all req. to use this. You need to be unarmed and possess a natural weapon OR to have equipped gaunlet with any type of artifical claws.");
+            addButton(3, "Venom", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,true);
 		}
 		if (player.findPerk(PerkLib.Poisoning) >= 0 && flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 0) addButton(9, "None", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,false);
+		if (player.findPerk(PerkLib.JobBeastWarrior) >= 0 || player.jiangshiScore() >= 20) {
+			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(4, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
+			if (((player.weaponName == "fists" && player.hasNaturalWeapons) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
+			else addButtonDisabled(9, "Feral", "You do not meet all req. to use this. You need to be unarmed and possess a natural weapon OR to have equipped gaunlet with any type of artifical claws.");
+		}
 		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 0) addButton(10, "None", zerkingStyle,0);
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 1) addButton(11, "Berserking", zerkingStyle,1);
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 2) addButton(12, "Lustzerking", zerkingStyle,2);
 			if (flags[kFLAGS.ZERKER_COMBAT_MODE] != 3) addButton(13, "Both", zerkingStyle,3);
+		}
+		addButton(14, "Back", doubleAttackOptions);
+	}
+	public function doubleAttackOptions3():void {
+		var toggleflag:Function = curry(toggleFlag, doubleAttackOptions3);
+		menu();
+		if (player.hasPerk(PerkLib.NaturalInstincts)) {
+			if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] != 0) addButton(0, "Manual", toggleflag,kFLAGS.CRINOS_SHAPE_COMBAT_MODE,false);
+			if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] != 1) addButton(1, "Autocast", toggleflag,kFLAGS.CRINOS_SHAPE_COMBAT_MODE,true);
+		}
+		if (player.hasPerk(PerkLib.WayOfTheWarrior)) {
+			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] != 0) addButton(0, "Manual", toggleflag,kFLAGS.WARRIORS_RAGE_COMBAT_MODE,false);
+			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] != 1) addButton(1, "Autocast", toggleflag,kFLAGS.WARRIORS_RAGE_COMBAT_MODE,true);
 		}
 		addButton(14, "Back", doubleAttackOptions);
 	}
