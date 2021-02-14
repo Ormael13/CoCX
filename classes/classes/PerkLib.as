@@ -333,21 +333,24 @@ public class PerkLib
 		//public static const BloodSacrifice:PerkType = mk("Blood Sacrifice", "Blood Sacrifice",
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
+		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
+				"+600 to max Wrath.",//stay alive when berserking at cost of super fast 20% max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
+				"You've chosen the 'Too Angry to Die' perk, .");
 		public static const NaturalArsenal:PerkType = mk("Natural Arsenal", "Natural Arsenal",
 				"All natural weapon based racial abilities gain a +50% damage bonus.",
 				"You've chosen the 'Natural Arsenal' perk, all natural weapon based racial abilities gain a +50% damage bonus.");
 		public static const NaturalInstincts:PerkType = mk("Natural Instincts", "Natural Instincts",
-				"All racial ability cooldowns are reduced by one.",
-				"You've chosen the 'Natural Instincts' perk, all racial ability cooldowns are reduced by one.");
+				"All racial ability cooldowns are reduced by one. Enable autocast of Crinos Shape at start of combat.",
+				"You've chosen the 'Natural Instincts' perk, all racial ability cooldowns are reduced by one. Enable autocast of Crinos Shape at start of combat.");
+		public static const WayOfTheWarrior:PerkType = mk("Way of the Warrior", "Way of the Warrior",
+				"Enable autocast of Warrior's rage and boost it based on PC current stats. (+1 per 10 pts of core stat value)",
+				"You've chosen the 'Way of the Warrior' perk, allowing to enable autocast of Warrior's rage and boost it based on PC current stats.");
 		/*public static const JobBeastlord:PerkType = mk("Job: Beastlord", "Job: Beastlord",
 				".",
 				"You've chosen the 'Job: Beastlord' perk, .");
 				"You've trained to use of your own body and natural weapons to their limits in fights.",
 				"You've chosen the 'Job: Beast Warrior' perk, training yourself in the art of feral combat.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05, "int.mult":-0.05, "wis.mult":-0.05});
-		*/public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
-				"+600 to max Wrath.",//stay alive when berserking at cost of super fast 20% max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
-				"You've chosen the 'Too Angry to Die' perk, .");
-		public static const GazerEye:PerkType = mk("Gazer Eye", "Gazer Eye",
+		*/public static const GazerEye:PerkType = mk("Gazer Eye", "Gazer Eye",
 				"Keep true seeing at all times and empower gaze attacks.",
 				"You've chosen the 'Gazer Eye' perk, .").withBuffs({'int.mult':0.05});
 		public static const GazerEyeEvolved:PerkType = mk("Gazer Eye (Evolved)", "Gazer Eye (Evolved)",
@@ -401,6 +404,12 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -1494,7 +1503,7 @@ public class PerkLib
 				"You have greatly improved your striking strength. (+60% of max core Str as phantom Str)",
 				"You've chosen the 'Greater Brute' perk, greatly improving your striking strength. (+60% of max core Str as phantom Str)");
 		public static const GreaterCrinosShape:PerkType = mk("Greater Crinos Shape", "Greater Crinos Shape",
-				"Crinos Shape increase to physical might rise to 80% of str/tou/spe.",
+				"Crinos Shape increase to physical might rise to 80% of core str/tou/spe.",
 				"You've chosen the 'Greater Crinos Shape' perk, gaining another increase to phys stats boost in Crinos Shape (+80%).");
 		public static const GreaterDesensitization:PerkType = mk("Greater Desensitization", "Greater Desensitization",
 				"Negative effects of sensitivity are reduced by 10%.",
@@ -1710,7 +1719,7 @@ public class PerkLib
 				"You have improved your striking strength. (+40% of max core Str as phantom Str)",
 				"You've chosen the 'Improved Brute' perk, improving your striking strength. (+40% of max core Str as phantom Str)");
 		public static const ImprovedCrinosShape:PerkType = mk("Improved Crinos Shape", "Improved Crinos Shape",
-				"Crinos Shape increase to physical might rise to 40% of str/tou/spe.",
+				"Crinos Shape increase to physical might rise to 40% of core str/tou/spe.",
 				"You've chosen the 'Improved Crinos Shape' perk, increasing boost recived by using Crinos Shape (+40%).");
 		public static const ImprovedDiehard:PerkType = mk("Improved Diehard", "Improved Diehard",
 				"You can't loose by HP until reaching droping into negative health larger than 4% of max HP + 400(scalable). HP limit cumulative with other Diehard perks.",
@@ -2134,7 +2143,7 @@ public class PerkLib
 				"Limit of advanced job you can learn is increased by 3.",
 				"You've chosen the 'Master All-Rounder Education' perk, expanding amount of advanced jobs you can learn. (+3)");
 		public static const MasterCrinosShape:PerkType = mk("Master Crinos Shape", "Master Crinos Shape",
-				"Crinos Shape increase to physical might rise to 160% of str/tou/spe.",
+				"Crinos Shape increase to physical might rise to 160% of core str/tou/spe.",
 				"You've chosen the 'Master Crinos Shape' perk, once again increasing boost gained in Crinos Shape (+160%).");
 		public static const MasteredDefenceStance:PerkType = mk("Mastered Defence Stance", "Mastered Defence Stance",
 				"Defend move now futher reduce incoming damage and allow for slight improved fatigue/mana/soulforce recovery.",
@@ -3806,6 +3815,8 @@ public class PerkLib
                     .requirePerk(Berzerker)
                     .requirePerk(ImprovedSelfControl)
                     .requireStr(75);
+            WayOfTheWarrior.requireLevel(18)
+                    .requirePerk(JobWarrior);
             GigantGrip.requireLevel(18)
                     .requirePerk(WeaponMastery)
                     .requireStr(100);
@@ -7095,3 +7106,4 @@ public class PerkLib
 	initDependencies();
 }
 }
+
