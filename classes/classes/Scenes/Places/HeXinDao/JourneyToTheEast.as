@@ -785,14 +785,14 @@ package classes.Scenes.Places.HeXinDao
 			clearOutput();
 			if (player.keyItemv1("Adventurer Guild: Copper plate") > 1) {
 				if (flags[kFLAGS.SPIRIT_STONES] >= 10) {
-					outputText("Yang nod. \"<i>Yep it’s definitely time we promoted hou. You pass from Copper plate to Iron, congratulations!</i>\"\n\n");
-					outputText("She hand you over a new necklace which you proceed to don up.\n\n");
+					outputText("Yang nods, \"<i>Yep, it’s definitely time we promoted you. You pass from Copper plate to Iron, congratulations!</i>\"\n\n");
+					outputText("She hands you a new necklace, which you proceed to don up.\n\n");
 					player.removeKeyItem("Adventurer Guild: Copper plate");
 					player.createKeyItem("Adventurer Guild: Iron plate", 0, 0, 0, 0);
 					flags[kFLAGS.SPIRIT_STONES] -= 10;
 				}
 				else {
-					outputText("Yeah sure, you will get promoted. Or rather you would like to but you lack the required spirit stones for the promotion fee.\n\n");
+					outputText("Yeah sure, you will get promoted. Or rather, you would like to but you lack the required spirit stones for the promotion fee.\n\n");
 					outputText("\"<i>Its ok just go to Moga Hen, he should be able to exchange those gem of yours for the local currency.</i>\"");
 				}
 			}

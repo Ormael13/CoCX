@@ -7,6 +7,7 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.BodyParts.Tail;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Areas.HighMountains.MinotaurMob;
 	import classes.Scenes.Monsters.Manticore;
 	import classes.display.SpriteDb;
 	import classes.Scenes.UniqueSexScenes;
@@ -587,6 +588,7 @@ public function etnaCampMenu():void
 		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Etna about accompaning you.");
 	}
 	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
+	if (flags[kFLAGS.MICHIKO_TALK_MARRIAGE] == 1 && flags[kFLAGS.ETNA_FOLLOWER] < 3) addButton(6, "Marriage", etnaMarriage);
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -633,6 +635,105 @@ public function etnaTalkManticores():void
 	outputText("\"<i>I see where you're getting at. You wonder if I'm actually as corrupt as the cows out there. Well... in a sense, I suppose I am, after all, it’s not like we haven't been banging the demons too. Heck, we’ve been banging them so much that to reward our interest into sucking them off, they pretty much gave us a boon so we could suck them even better. Namely this tail pussy that everyone in my race shares. It is our sign of a deal with them. I,  myself, consider it an improvement, as it allows me to consume twice as much cum as I would with my pretty mouth. Is there anything else you want to know?</i>\"\n\n");
 	doNext(etnaTalkMenu);
 	cheatTime(1/4);
+}
+
+public function etnaMarriage():void
+{
+	clearOutput();
+	outputText("You want to propose to Etna, your love with her is true however you take the time to question yourself. You ");//outputText("");
+	if (!player.hasItem(jewelries.ENDGRNG, 1)) {
+		outputText("realize however that to properly propose to her, you would need an engagement ring, preferably a ruby one.");
+		doNext(etnaCampMenu);
+	}
+	else if (flags[kFLAGS.SAPPHIRE_TALKS] < 4) {
+		if (!player.hasItem(jewelries.ENDGRNG, 1)) outputText("realize however that to properly propose to her, you would need an engagement ring, preferably a ruby one also ");
+		outputText("realise to your annoyance that the two of you will need a holy place to recite your vows, one with a still working altar of Marae and active priestess likely.");
+		doNext(etnaCampMenu);
+	}
+	else {
+		outputText("have the ruby ring on you, but is this really the time?\n\n");
+		menu();
+		addButton(1, "Yes", etnaMarriageYes).hint("Taking this step leads to a fight. Save your game!");
+		addButton(3, "No", etnaMarriageNo);
+	}
+}
+public function etnaMarriageNo():void
+{
+	outputText("Such a thing as a wedding is no triviality, even in messed up land like Mareth. You need to thoroughly think this through first.");
+	doNext(etnaCampMenu);
+}
+public function etnaMarriageYes():void
+{
+	outputText("You drop down on one knee before Etna as she gives you a troubled stare before you open a small box containing the ruby ring. This begins in the same way as every Love Tale as you gather the courage and propose under her astonished expression.\n\n");
+	if (flags[kFLAGS.MARRIAGE_FLAG] != 0) {
+		outputText("Etna slowly shakes her head as she pushes the ring away, \"<i>Sorry [name]... You’ve already sworn your heart to someone else… You can still feed me, but I don’t feel right taking the role of your spouse when someone has already claimed your heart.</i>\"\n\n");
+		outputText("You nod your head sadly. While her rejection stings, her words carry merit and it’s not right to betray the trust of "+flags[kFLAGS.MARRIAGE_FLAG]+".\n\n");
+		doNext(etnaCampMenu);
+	}
+	else {
+		outputText("You drop down on one knee before Etna as she gives you a troubled stare before you open a small box containing the ruby ring. This begins in the same way as every Love Tale as you gather the courage and propose under her astonished expression.\n\n");
+		outputText("\"<i>F..for me? [name] out of everyone else you’ve chosen me?! Yes...yes my answer is YES! I will be your favored wife forever and ever.</i>\"\n\n");
+		player.destroyItems(jewelries.ENDGRNG, 1);
+		player.HP = player.maxHP();
+		player.lust = 0;
+		player.wrath = 0;
+		player.fatigue = 0;
+		player.mana = player.maxMana();
+		player.soulforce = player.maxSoulforce();
+		model.time.days += 3;
+		doNext(etnaMarriageYes2);
+	}
+}
+public function etnaMarriageYes2():void
+{
+	clearOutput();
+	outputText("\n\n");
+	outputText("\"<i>If anyone objects to this union, may they speak now or stay silent forever!</i>\"\n\n");
+	outputText("Just as she finishes her sentence, the door of the building flies open as a thunderous voice rings out over the place.\n\n");
+	outputText("\"<i>FUCK THAT BITCH! IT’S REVENGE TIME BOYS!!!!!</i>\"\n\n");
+	outputText("At the door stands, not one, not two but a full herd of enraged minotaurs! They are all staring at Etna with angry glares.\n\n");
+	outputText("\"<i>You damn slut! You have been raping us for years but this time around we will be victorious, bring you back to the village and tie you to our totem so we can take turns raping your twin cunts!</i>\"\n\n");
+	outputText("Etna laughs, looking at them like they’re joking.\n\n");
+	outputText("\"<i>Boys, don’t you know it’s not rape when it's consensual? Hey [name] I don’t know about you but they are interrupting the wedding. It’d be nice if you could dispose of them.</i>\"\n\n");
+	outputText("You step forward to save your marriage, there's no way you're going to let these huge pricks ruin your special day or hers!\n\n");
+	flags[kFLAGS.ETNA_FOLLOWER] = 3;
+	startCombat(new MinotaurMob());
+	doNext(playerMenu);
+}
+public function etnaMarriageYes3():void
+{
+	spriteSelect(SpriteDb.s_etna);
+	clearOutput();
+	outputText("\"<i>[name]!</i>\" Etna cries in shock, kneeling over you, \"<i>No… are you…</i>\" Her words are interrupted by the gang of minotaurs stampeding toward her.\n\n");
+	outputText("Etna sighs mournfully before taking flight, escaping through a window as the minotaurs chase after her. Seems your wedding is canceled at least for today but at least you can try again in a week.\n\n");
+	flags[kFLAGS.ETNA_FOLLOWER] = 2;
+	cleanupAfterCombat();
+}
+public function etnaMarriageYes4():void
+{
+	spriteSelect(SpriteDb.s_etna);
+	clearOutput();
+	outputText("The herd runs out of the chapel, screaming like terrified cattle before your might. Etna shrugs before returning to position in order for the ceremony to resume.\n\n");
+	outputText("\"<i>I could have flown away like I always do but honestly it would've ruined the mood and the wedding. Thank you for solving that.</i>\"\n\n");
+	outputText("The two of you voice out your vows again under the eyes of the somewhat confused priestess.\n\n");
+	outputText("Sapphire speaks up, \"<i>Etna, do you wish to take [name] as your spouse, now and forever?</i>\"\n\n");
+	outputText("Etna nods, tears welling up in her eyes as she stares deeply into yours, \"<i>I do.</i>\"\n\n");
+	outputText("\"<i>[name],</i>\" Sapphire speaks, \"<i>Do you wish to take Etna as your spouse, now and forever?</i>\"\n\n");
+	outputText("Your mind is set, you know deep within your being that there is nobody else you’d rather spend eternity with.\n\n");
+	outputText("\"<i>I do.</i>\" You state.\n\n");
+	outputText("Tears begin streaming down Etna’s face as Sapphire speaks up, \"<i>By the power vested in me, I now pronounce you soulmates.</i>\"\n\n");
+	outputText("Etna wraps her svelte arms around you as you wrap yours around her waist. She pulls you in  for a loving kiss, locking your [lips] with hers. If only the moment could last an eternity, but before you know it, Etna pulls away, staring back at you with beams of hope in her eyes.\n\n");
+	outputText("\"<i>I love you, [name]... I want you to never forget that.</i>\"\n\n");
+	outputText("You smile back at her, letting her know that you love her as well.\n\n");
+	outputText("You spend a moment celebrating the marriage until night falls and it is time to return back to camp. You bring Etna home and ready yourself to consummate your love with the manticore.\n\n");
+	etnaPussyOpera2();
+	outputText("\n\nEtna, still entangled with you, kisses you.\n\n");
+	outputText("\"<i>You know [name], I took the time to actually make you a wedding gift. I would like to give you this weapon that was tempered using some of my venom and bone spikes by a blacksmith. Please accept this gift.</i>\"\n\n");
+	model.time.days++;
+	model.time.hours = 6;
+	flags[kFLAGS.ETNA_FOLLOWER] = 4;
+	flags[kFLAGS.MARRIAGE_FLAG] = "Etna";
+	inventory.takeItem(weapons.VENCLAW, cleanupAfterCombat);
 }
 
 public function etnaHenchmanOption():void
@@ -701,6 +802,11 @@ public function etnaKittyTitFuck():void
 public function etnaPussyOpera():void
 {
 	clearOutput();
+	etnaPussyOpera2();
+	doNext(camp.returnToCampUseOneHour);
+}
+public function etnaPussyOpera2():void
+{
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] < 3) {
 		outputText("You ask Etna if she feels like trying something different for once. She looks at you inquisitively until you point the somewhat very obvious hole between her legs. To your surprise, she blushes and hides it with both paws. You ask her how she can be shy about using her main pussy, after all, she has been basically fucking you for weeks now.\n\n");
 		outputText("\"<i>That's not the same thing at all! While my tail does feel like a pussy, there is a very large difference between feeding and having true sex; pregnancy and well... the other things that are part of it. I'm a virgin and, unlike you, I’ve been saving myself up.</i>\"\n\n");
@@ -723,7 +829,6 @@ public function etnaPussyOpera():void
 	if (player.cumQ() < 10000) player.cumMultiplier += 2;
 	player.sexReward("vaginalFluids","Dick");
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] < 3) flags[kFLAGS.ETNA_TALKED_ABOUT_HER] = 3;
-	doNext(camp.returnToCampUseOneHour);
 }
 
 public function etnaShareDrink():void

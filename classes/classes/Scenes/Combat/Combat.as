@@ -117,6 +117,16 @@ public class Combat extends BaseContent {
         return mod;
     }
 
+    public function masteryGauntletLevel():Number {
+        return player.masteryGauntletLevel;
+    }
+    public function maxGauntletLevel():Number {
+        return player.maxGauntletLevel();
+    }
+    public function GauntletExpToLevelUp():Number {
+        return player.GauntletExpToLevelUp();
+    }
+
     public function masterySwordLevel():Number {
         return player.masterySwordLevel;
     }
@@ -165,6 +175,26 @@ public class Combat extends BaseContent {
     }
     public function SpearExpToLevelUp():Number {
         return player.SpearExpToLevelUp();
+    }
+
+	public function masteryDaggerLevel():Number {
+        return player.masteryDaggerLevel;
+    }
+    public function maxDaggerLevel():Number {
+        return player.maxDaggerLevel();
+    }
+    public function DaggerExpToLevelUp():Number {
+        return player.DaggerExpToLevelUp();
+    }
+
+	public function masteryExoticLevel():Number {
+        return player.masteryExoticLevel;
+    }
+    public function maxExoticLevel():Number {
+        return player.maxExoticLevel();
+    }
+    public function ExoticExpToLevelUp():Number {
+        return player.ExoticExpToLevelUp();
     }
 
 	public function dualWSLevel():Number {
@@ -542,6 +572,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
+		if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
         if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
         if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;
@@ -1656,7 +1687,7 @@ public class Combat extends BaseContent {
             }
         }
         //Blind
-        if (player.hasStatusEffect(StatusEffects.Blind)) {
+        if (player.playerIsBlinded()) {
             outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
         }
         if (monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0 && !isWieldingRangedWeapon()) {
@@ -1707,7 +1738,7 @@ public class Combat extends BaseContent {
             return;
         }
         //Determine if dodged!
-        if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
             //Akbal dodges special education
             if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your " + weapon + " against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your " + weapon + " as if betrayed.\n");
@@ -2491,7 +2522,7 @@ public class Combat extends BaseContent {
             else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
             else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
             if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TRFATBI || player.weaponRange == weaponsrange.HARPGUN || player.weaponRange == weaponsrange.SNIPPLE || player.weaponRange == weaponsrange.TOUHOM3 || player.weaponRange == weaponsrange.DERPLAU || player.weaponRange == weaponsrange.DUEL_P_ || player.weaponRange == weaponsrange.FLINTLK) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
-            if ((player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.ADBSHOT) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
+            if ((player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.ADBSHOT || player.weaponRange == weaponsrange.DBDRAGG) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
             if (player.weaponRangePerk == "Dual Firearms") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 2;
         }
 		if (player.vehicles == vehicles.HB_MECH) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
@@ -2572,7 +2603,7 @@ public class Combat extends BaseContent {
             return;
         }
         //Blind miss chance
-        if (player.hasStatusEffect(StatusEffects.Blind)) {
+        if (player.playerIsBlinded()) {
             outputText("The ");
             if (player.weaponRangePerk == "Bow") outputText("arrow");
             if (player.weaponRangePerk == "Crossbow") outputText("bolt");
@@ -2749,11 +2780,11 @@ public class Combat extends BaseContent {
                 else if (monster.plural)
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) damage = doFireDamage(damage, true, true);
-                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) damage = doIceDamage(damage, true, true);
-                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) damage = doLightingDamage(damage, true, true);
-                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) damage = doDarknessDamage(damage, true, true);
-                else damage = doDamage(damage, true, true);
+                if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
+                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
+                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
+                else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
+                else doDamage(damage, true, true);
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
                 checkAchievementDamage(damage);
@@ -2768,11 +2799,11 @@ public class Combat extends BaseContent {
                 }
                 if (!MSGControll) {
                     outputText(".  It's clearly very painful. ");
-                    if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) damage = doFireDamage(damage, true, true);
-                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) damage = doIceDamage(damage, true, true);
-                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) damage = doLightingDamage(damage, true, true);
-                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) damage = doDarknessDamage(damage, true, true);
-                    else damage = doDamage(damage, true, true);
+                    if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
+                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
+                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
+                    else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
+                    else doDamage(damage, true, true);
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 heroBaneProc(damage);
@@ -3070,7 +3101,7 @@ public class Combat extends BaseContent {
             } else {
                 if (!MSGControll) {
                     outputText(".  It's clearly very painful. ");
-                    damage = doDamage(damage, true, true);
+                    doDamage(damage, true, true);
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
@@ -3146,7 +3177,7 @@ public class Combat extends BaseContent {
 			damage *= firearmsDualWieldDamagePenalty();
             //any aoe effect from firearms
             if (monster.plural) {
-                if (player.weaponRange == weaponsrange.ADBSCAT) damage *= 2;
+                if (player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.DBDRAGG) damage *= 2;
                 if (player.weaponRange == weaponsrange.TRFATBI || player.weaponRange == weaponsrange.DERPLAU) damage *= 5;
             }
             if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
@@ -3324,10 +3355,12 @@ public class Combat extends BaseContent {
                 else if (monster.plural)
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                damage = doDamage(damage, true, true);
+                doDamage(damage, true, true);
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
-				if (crit) dualWieldFirearmsXP(1);
-				dualWieldFirearmsXP(1);
+				if (player.weaponRangePerk == "Dual Firearms") {
+					if (crit) dualWieldFirearmsXP(1);
+					dualWieldFirearmsXP(1);
+				}
                 if (player.weaponRange == weaponsrange.TOUHOM3) {
                     outputText(" ");
                     doDamage(damage, true, true);
@@ -3364,16 +3397,20 @@ public class Combat extends BaseContent {
                 if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
                     outputText(".  It's clearly very painful. ");
                     doDamage(damage, true, true);
-					if (crit) dualWieldFirearmsXP(1);
-					dualWieldFirearmsXP(1);
+					if (player.weaponRangePerk == "Dual Firearms") {
+						if (crit) dualWieldFirearmsXP(1);
+						dualWieldFirearmsXP(1);
+					}
                 } else {
                     if (!MSGControll) {
                         outputText(".  It's clearly very painful. ");
                         doDamage(damage, true, true);
                     }
                     if (crit) outputText(" <b>*Critical Hit!*</b>");
-					if (crit) dualWieldFirearmsXP(1);
-					dualWieldFirearmsXP(1);
+					if (player.weaponRangePerk == "Dual Firearms") {
+						if (crit) dualWieldFirearmsXP(1);
+						dualWieldFirearmsXP(1);
+					}
                     //	if (flaga dla efektu arouse arrow) outputText(" tekst dla arouse arrow effect.");
                     //	if (flaga dla efektu poison arrow) outputText(" tekst dla poison arrow effect.");
                 }
@@ -3442,6 +3479,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
+		if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
         if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
         if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;
@@ -3704,7 +3742,7 @@ public class Combat extends BaseContent {
             }
         }
         //Blind
-        if (player.hasStatusEffect(StatusEffects.Blind)) {
+        if (player.playerIsBlinded()) {
             outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
         }
         if (monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0 && !isWieldingRangedWeapon()) {
@@ -3756,7 +3794,7 @@ public class Combat extends BaseContent {
         }
 
         //Determine if dodged!
-        if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
             //Akbal dodges special education
             if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
@@ -4201,7 +4239,7 @@ public class Combat extends BaseContent {
             }
         }
         //Blind
-        if (player.hasStatusEffect(StatusEffects.Blind)) {
+        if (player.playerIsBlinded()) {
             outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
         }
         if (monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0 && !isWieldingRangedWeapon()) {
@@ -4253,7 +4291,7 @@ public class Combat extends BaseContent {
         }
 
         //Determine if dodged!
-        if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
             //Akbal dodges special education
             if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
@@ -4534,7 +4572,7 @@ public class Combat extends BaseContent {
                     if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
                     if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
                     if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-                    if (damage > 0) damage = doDamage(damage, false);
+                    if (damage > 0) doDamage(damage, false);
                     (monster as Doppleganger).mirrorAttack(damage);
                     return;
                 }
@@ -4657,22 +4695,22 @@ public class Combat extends BaseContent {
                     else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
                 }
                 //Damage is delivered HERE
-                if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doFireDamage(damage, true, true);
-                else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doIceDamage(damage, true, true);
-                else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doLightingDamage(damage, true, true);
-                else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) damage = doDarknessDamage(damage, true, true);
-                else damage = doDamage(damage, true, true);
-                if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage = doLightingDamage(Math.round(damage * 0.3), true, true);
+                if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doFireDamage(damage, true, true);
+                else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doIceDamage(damage, true, true);
+                else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doLightingDamage(damage, true, true);
+                else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doDarknessDamage(damage, true, true);
+                else doDamage(damage, true, true);
+                if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                 if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
-                    damage = doDamage(damage, true, true);
-                    if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage = doLightingDamage(Math.round(damage * 0.3), true, true);
+                    doDamage(damage, true, true);
+                    if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                     if (player.spe >= 225) {
-                        damage = doDamage(damage, true, true);
-                        if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage = doLightingDamage(Math.round(damage * 0.3), true, true);
+                        doDamage(damage, true, true);
+                        if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                     }
                     if (player.spe >= 300) {
-                        damage = doDamage(damage, true, true);
-                        if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage = doLightingDamage(Math.round(damage * 0.3), true, true);
+                        doDamage(damage, true, true);
+                        if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                     }
                     damage += damage;
                     if (player.spe >= 225) damage += damage;
@@ -4680,38 +4718,19 @@ public class Combat extends BaseContent {
                 }
                 JabbingStyleIncrement();
                 if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage += Math.round(damage * 0.3);
-				if (player.isSwordTypeWeapon()) {
-					if (crit) swordXP(1);
-					swordXP(1);
-				}
-				if (player.isAxeTypeWeapon()) {
-					if (crit) axeXP(1);
-					axeXP(1);
-				}
-				if (player.isMaceHammerTypeWeapon()) {
-					if (crit) macehammerXP(1);
-					macehammerXP(1);
-				}
-				if (player.isDuelingTypeWeapon()) {
-					if (crit) duelingswordXP(1);
-					duelingswordXP(1);
-				}
-				if (player.isSpearTypeWeapon()) {
-					if (crit) spearXP(1);
-					spearXP(1);
-				}
-				if (player.weaponPerk == "Dual Small") {
-					if (crit) dualWieldSmallXP(1);
-					dualWieldSmallXP(1);
-				}
-				if (player.weaponPerk == "Dual") {
-					if (crit) dualWieldNormalXP(1);
-					dualWieldNormalXP(1);
-				}
-				if (player.weaponPerk == "Dual Large") {
-					if (crit) dualWieldLargeXP(1);
-					dualWieldLargeXP(1);
-				}
+				var meleeMasteryEXPgains:Number = 1;
+				if (crit) meleeMasteryEXPgains *= 2;
+				if (player.isGauntletWeapon()) gauntletXP(meleeMasteryEXPgains);
+				if (player.isSwordTypeWeapon()) swordXP(meleeMasteryEXPgains);
+				if (player.isAxeTypeWeapon()) axeXP(meleeMasteryEXPgains);
+				if (player.isMaceHammerTypeWeapon()) macehammerXP(meleeMasteryEXPgains);
+				if (player.isDuelingTypeWeapon()) duelingswordXP(meleeMasteryEXPgains);
+				if (player.isSpearTypeWeapon()) spearXP(meleeMasteryEXPgains);
+				if (player.isDaggerTypeWeapon()) daggerXP(meleeMasteryEXPgains);
+				if (player.isExoticTypeWeapon()) exoticXP(meleeMasteryEXPgains);
+				if (player.weaponPerk == "Dual Small") dualWieldSmallXP(meleeMasteryEXPgains);
+				if (player.weaponPerk == "Dual") dualWieldNormalXP(meleeMasteryEXPgains);
+				if (player.weaponPerk == "Dual Large") dualWieldLargeXP(meleeMasteryEXPgains);
             }
             if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75) {
                 if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [monster a] [monster name]'s defenses!");
@@ -4835,13 +4854,10 @@ public class Combat extends BaseContent {
                     if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
                         outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
                         var lustdamage:Number = 35 + rand(player.lib / 10);
-                        if (player.level < 10) damage += 20 + (player.level * 3);
-                        else if (player.level < 20) damage += 50 + (player.level - 10) * 2;
-                        else if (player.level < 30) damage += 70 + (player.level - 20) * 1;
-                        else damage += 80;
-                        if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-                        if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-                        if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+                        if (player.level < 10) lustdamage += 20 + (player.level * 3);
+                        else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
+                        else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
+                        else lustdamage += 80;
                         if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= 1.50;
                         if (player.hasPerk(PerkLib.Apex)) lustdamage *= 1.50;
                         if (player.hasPerk(PerkLib.AlphaAndOmega)) lustdamage *= 1.50;
@@ -5180,7 +5196,7 @@ public class Combat extends BaseContent {
                     if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
                     if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
                     if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-                    if (damage > 0) damage = doDamage(damage, false);
+                    if (damage > 0) doDamage(damage, false);
                     (monster as Doppleganger).mirrorAttack(damage);
                     return;
                 }
@@ -5261,7 +5277,7 @@ public class Combat extends BaseContent {
             }
         }
         //10% Bleed chance
-        if (player.weapon == weapons.CLAWS || player.weapon == weapons.L_CLAWS || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) bleedChance += 10;
+        if (player.weapon == weapons.CLAWS || player.weapon == weapons.L_CLAWS || player.weapon == weapons.VENCLAW || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets")) bleedChance += 10;
         //25% Bleed chance
         if ((player.weapon == weapons.H_GAUNT || player.weapon == weapons.CNTWHIP || player.weapon == weapons.TRIDAG)) bleedChance += 25;
         //100% bleed chance
@@ -5292,6 +5308,15 @@ public class Combat extends BaseContent {
             else if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") HPChange(Math.round(player.maxHP() * 0.02), false);
             else if (player.weaponPerk == "Massive") HPChange(Math.round(player.maxHP() * 0.04), false);
             else HPChange(Math.round(player.maxHP() * 0.01), false);
+        }
+		if (player.weapon == weapons.VENCLAW) {
+            outputText("\n[monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+            var Ldamage:Number = 8 + rand(3);
+            monster.teased(monster.lustVuln * Ldamage);
+            monster.statStore.addBuffObject({tou:-1}, "Poison",{text:"Poison"});
+            if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+                monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+            } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
         }
     }
 
@@ -6788,7 +6813,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.UBERWEB))
             outputText("<b>You're pinned under a pile of webbing!  You should probably struggle out of it and get back in the fight!</b>\n\n");
-        if (player.hasStatusEffect(StatusEffects.Blind) && !monster.hasStatusEffect(StatusEffects.Sandstorm) && !player.hasStatusEffect(StatusEffects.PurpleHaze)) {
+        if (player.playerIsBlinded() && !monster.hasStatusEffect(StatusEffects.Sandstorm) && !player.hasStatusEffect(StatusEffects.PurpleHaze)) {
             if (player.hasStatusEffect(StatusEffects.SheilaOil)) {
                 if (player.statusEffectv1(StatusEffects.Blind) <= 0) {
                     outputText("<b>You finish wiping the demon's tainted oils away from your eyes; though the smell lingers, you can at least see.  Sheila actually seems happy to once again be under your gaze.</b>\n\n");
@@ -6890,6 +6915,7 @@ public class Combat extends BaseContent {
                 outputText("You manage to grab your weapon back!\n\n");
             }
         }
+		if (player.hasStatusEffect(StatusEffects.SubZeroConditions) && !player.hasPerk(PerkLib.ColdAffinity)) SceneLib.glacialRift.SubZeroConditionsTick();
         if (player.hasStatusEffect(StatusEffects.UnderwaterOutOfAir)) {
             var deoxigen:Number = 0;
             deoxigen += (player.maxHP() * 0.05);
@@ -8563,8 +8589,8 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.OniRampage)) gainedwrath += 12 * BonusWrathMult;
             if (player.statStore.hasBuff("CrinosShape")) {
                 gainedwrath += 2;
-                if (player.hasPerk(PerkLib.ImprovedCrinosShape)) gainedwrath += 4 * BonusWrathMult;
-                if (player.hasPerk(PerkLib.GreaterCrinosShape)) gainedwrath += 6 * BonusWrathMult;
+                if (player.hasPerk(PerkLib.ImprovedCrinosShape)) gainedwrath += 2 * BonusWrathMult;
+                if (player.hasPerk(PerkLib.GreaterCrinosShape)) gainedwrath += 4 * BonusWrathMult;
                 if (player.hasPerk(PerkLib.MasterCrinosShape)) gainedwrath += 8 * BonusWrathMult;
             }
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) gainedwrath *= 2 * BonusWrathMult;
@@ -8688,6 +8714,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
+        if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
         if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
         if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;
@@ -8755,6 +8782,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
         if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
         if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
+		if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
         if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
         if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;
@@ -8790,7 +8818,7 @@ public class Combat extends BaseContent {
         }
         outputText("<b>You are fighting ");
         outputText(monster.a + monster.short + ":</b> \n");
-        if (player.hasStatusEffect(StatusEffects.Blind)) {
+        if (player.playerIsBlinded()) {
             outputText("It's impossible to see anything!\n");
         } else {
             outputText(monster.long + "\n\n");
@@ -9076,6 +9104,11 @@ public class Combat extends BaseContent {
         player.SexXP(XP);
     }
 
+	public function gauntletXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.gauntletXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.gauntletXP(XP);
+        player.gauntletXP(XP);
+    }
 	public function swordXP(XP:Number = 0):void {
         if (player.humanScore() == player.humanMaxScore()) player.swordXP(XP);
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.swordXP(XP);
@@ -9100,6 +9133,16 @@ public class Combat extends BaseContent {
         if (player.humanScore() == player.humanMaxScore()) player.spearXP(XP);
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.spearXP(XP);
         player.spearXP(XP);
+    }
+	public function daggerXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.daggerXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.daggerXP(XP);
+        player.daggerXP(XP);
+    }
+	public function exoticXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.exoticXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.exoticXP(XP);
+        player.exoticXP(XP);
     }
 
 	public function dualWieldSmallXP(XP:Number = 0):void {
@@ -10894,7 +10937,7 @@ public class Combat extends BaseContent {
             damage *= 1.75;
         }
         damage = Math.round(damage);
-        damage = doDamage(damage);
+        doDamage(damage);
         outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
         if (crit) outputText(" <b>Critical!</b>");
         if (player.hasPerk(PerkLib.PhantomStrike)) doDamage(damage, true, true);
@@ -11208,6 +11251,7 @@ public class Combat extends BaseContent {
         if (player.canFly()) escapeMod -= 20;
         if (player.tailType == Tail.RACCOON && player.ears.type == Ears.RACCOON && player.hasPerk(PerkLib.Runner)) escapeMod -= 25;
         if (monster.hasStatusEffect(StatusEffects.Stunned)) escapeMod -= 50;
+		if (player.hasStatusEffect(StatusEffects.Snow) && player.tallness < 84) escapeMod += 200;
         if (player.hasKeyItem("Nitro Boots") >= 0 && player.tallness < 48 && player.isBiped()) escapeMod -= 20;
         if (player.hasKeyItem("Rocket Boots") >= 0 && player.tallness < 48 && player.isBiped()) escapeMod -= 40;
         if (player.hasKeyItem("Spring Boots") >= 0 && player.tallness < 48 && player.isBiped()) escapeMod -= 60;
@@ -11527,7 +11571,7 @@ public class Combat extends BaseContent {
             else damage *= 1.75;
         }
         damage = Math.round(damage);
-        damage = doDamage(damage, true, true);
+        doDamage(damage, true, true);
         if (crit) {
             outputText("<b>Critical! </b>");
             if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);

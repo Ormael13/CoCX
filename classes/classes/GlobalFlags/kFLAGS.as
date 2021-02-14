@@ -2709,7 +2709,7 @@ public static const PC_GOBLIN_DAUGHTERS:int                                     
 public static const WILL_O_THE_WISP:int                                   			= 2701;
 public static const IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED:int                   = 2702;
 public static const MICHIKO_FOLLOWER:int                                   			= 2703;
-public static const MICHIKO_02704:int                                   			= 2704;	//Not Yet Used Flag
+public static const MICHIKO_TALK_MARRIAGE:int                                   	= 2704;
 public static const MICHIKO_02705:int                                   			= 2705;	//Not Yet Used Flag
 public static const MICHIKO_02706:int                                   			= 2706;	//Not Yet Used Flag
 public static const MICHIKO_02707:int                                   			= 2707;	//Not Yet Used Flag

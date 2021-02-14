@@ -1523,7 +1523,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		outputText(monster.capitalA + monster.short + " takes ");
-		damage = doMagicDamage(damage, true, true);
+		doMagicDamage(damage, true, true);
 		outputText(" damage.");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
