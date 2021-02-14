@@ -8,6 +8,7 @@ package classes.Scenes.Areas.Bog
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Areas.GlacialRift.GlacialFemaleTroll;
 	import classes.Scenes.Areas.GlacialRift.GlacialMaleTroll;
+	import classes.Scenes.SceneLib;
 	
 	public class TrollScenes extends BaseContent
 	{
@@ -211,6 +212,7 @@ package classes.Scenes.Areas.Bog
 		public function encounterAdultGlacialMaleTroll():void {
 			clearOutput();
 			outputText("As you are wandering through the glacial rift you are suddenly halted by the sound of footsteps crunching in the snow. You turn around and see a large man leaping towards you. You barely have enough time to dodge her as he tumbles around the snow with you. The man gives you a hostile snarl as you shake him off before the both of you enter a combat stance.\n\n");
+			SceneLib.glacialRift.GlacialRiftConditions();
 			startCombat(new GlacialMaleTroll());
 		}
 		public function encounterAdultGlacialMaleTrollLost():void {
@@ -280,6 +282,7 @@ package classes.Scenes.Areas.Bog
 		public function encounterAdultGlacialFemaleTroll():void {
 			clearOutput();
 			outputText("As you are wandering through the glacial rift you are suddenly halted by the sound of footsteps crunching in the snow. You turn around and see a large woman leaping towards you. You barely have enough time to dodge her as she tumbles around the snow with you. The woman gives you a hostile snarl as you shake her off before the both of you enter a combat stance.\n\n");
+			SceneLib.glacialRift.GlacialRiftConditions();
 			startCombat(new GlacialFemaleTroll());
 		}
 		public function encounterAdultGlacialFemaleTrollLost():void {

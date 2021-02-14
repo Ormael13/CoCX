@@ -4131,6 +4131,7 @@ public class Creature extends Utils
 				if (findPerk(PerkLib.GigantGrip) < 0) chance -= 75;
 				else chance -= 30;
 			}
+			if (game.player.hasStatusEffect(StatusEffects.Snow) && game.player.tallness < 84) chance -= 50;
 			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
 			return chance;
 		}

@@ -210,7 +210,7 @@ public function campMichikoTalkMarriage():void {
 	outputText("Whoever you chose becomes the official queen or king of your would be harem by principe. Loving people equally? Ah... what a lie, everyone has a favorite whether they want to admit it or not.</i>\"\n\n");
 	outputText("So in order to marry someone you just need an engagement ring?\n\n");
 	outputText("\"<i>That you do but a fair bit of warning, weddings attracts a lot of people and are handled in public churches dedicated to Marae thus it also tends to drag the attention of troublemakers. Your foes will be well aware of the wedding going on just as well as if you would have screamed it out loud, they simply will know. Be prepared to defend your happy day at any time, I've yet to see one going well from start to finish.</i>\"\n\n");
-	if (flags[kFLAGS.MARRIAGE_FLAG] == 0) flags[kFLAGS.MARRIAGE_FLAG] = 1;
+	if (flags[kFLAGS.MICHIKO_TALK_MARRIAGE] == 0) flags[kFLAGS.MICHIKO_TALK_MARRIAGE] = 1;
 	doNext(campMichikoTalkMM);
 	cheatTime2(15);
 }

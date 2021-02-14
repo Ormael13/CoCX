@@ -117,27 +117,70 @@ import classes.Scenes.SceneLib;
 			game.spriteSelect(94);
 			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck " + player.mf("him", "her") + ",</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!");
 		}
+		//
+		private function minosPheromones():void {
+			game.spriteSelect(94);
+			outputText("The minotaurs smiles at you and lifts their loincloth, flicking them at you.  Thick ropes of pre-cum fly through the air, ");
+			//sometimes get hit with the pre for stronger effect!
+			if(rand(3) == 0) {
+				outputText("slapping into your face before you can react!  You wipe the slick snot-like stuff out of your eyes and nose, ");
+				if(player.lust > player.maxLust() * 0.75) {
+					outputText("swallowing it into your mouth without thinking.  ");
+					dynStats("lus", 100 + player.lib);
+				}
+				else {
+					outputText("feeling your heart beat with desire as your tongue licks the residue from your lips.  ");
+					dynStats("lus", 50 + player.lib/2);
+				}
+			}
+			else outputText("right past your head.  ");
+			outputText("The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin.");
+			dynStats("lus", 100 + player.lib/2);
+			if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) {
+				if(rand(2) == 0) outputText("\n<b>You shiver with need, wanting nothing more than to bury your face under one of those loincloth and slurp out every drop of goopey goodness.</b>");
+				else outputText("\n<b>You groan and lick your lips over and over, craving the taste of them in your mouth.</b>");
+				dynStats("lus", 50+rand(50));
+			}
+		}
+		//This is sparta
+		private function minotaurThisIsSparta():void {
+			game.spriteSelect(94);
+			outputText("One of the minotaurs in golden armor with a helmet, a round shield and a gladius jumps out of the lot and kicks you in the face throwing you to the ground screaming.\n\n");
+			outputText("\"<i>This.. is… <b>MY FUUUUCK!!!!</b></i>\"");
+			player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+		}
 
 		override protected function performCombatAction():void
 		{
 			game.spriteSelect(94);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
-			var select:Number = rand(7);
-			if(select <= 2) precumTease();
-			else if(select <= 4) minotaurGangGropeAttack();
-			else if(select == 5) minotaurGangGangGropeAttack();
-			else minotaurGangWaste();
+			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) {
+				var select1:Number = rand(5);
+				if(select1 <= 2) eAttack();
+				else if (select1 == 3) minosPheromones();
+				else minotaurThisIsSparta();
+			}
+			else {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
+				var select:Number = rand(7);
+				if(select <= 2) precumTease();
+				else if(select <= 4) minotaurGangGropeAttack();
+				else if(select == 5) minotaurGangGangGropeAttack();
+				else minotaurGangWaste();
+			}
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.highMountains.minotaurMobScene.victoryMinotaurGang();
+			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) SceneLib.etnaScene.etnaMarriageYes4();
+			else SceneLib.highMountains.minotaurMobScene.victoryMinotaurGang();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (pcCameWorms) {
+			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) {
+				SceneLib.etnaScene.etnaMarriageYes3();
+			} else if (pcCameWorms) {
 				outputText("\n\nThe minutaurs share a laugh while you cum, but their throbbing erections don't subside in the slightest.");
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
@@ -148,12 +191,17 @@ import classes.Scenes.SceneLib;
 		public function MinotaurMob()
 		{
 			this.a = "the ";
+			if (flags[kFLAGS.ETNA_FOLLOWER] == 3)
+				this.short = "300 jealous minotaurs Ex-es";
 			if (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20)
 				this.short = "minotaur gang";
 			else
 				this.short = "minotaur tribe";
 			this.imageName = "minotaurmob";
-			this.long = Num2Text(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":"");
+			if (flags[kFLAGS.ETNA_FOLLOWER] == 3)
+				this.long = "Whoa, it looks like all of Etna’s sexual partners have amassed in one group to take her and you down. The bull men are all over the chapel!";
+			else 
+				this.long = Num2Text(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":"");
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
@@ -184,10 +232,14 @@ import classes.Scenes.SceneLib;
 			this.armorName = "thick fur";
 			this.armorDef = 30;
 			this.armorMDef = 5;
-			var bonusHP:Number = 600 + 50 * (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
+			var bonusHP:Number = 600;
 			var lustVuln:Number = 0.45;
-			if((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) lustVuln = .3;
-			else lustVuln -= (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
+			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) lustVuln -= 0.4;
+			else {
+				bonusHP += 50 * (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
+				if((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) lustVuln = .3;
+				else lustVuln -= (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
+			}
 			this.bonusHP = bonusHP;
 			this.bonusLust = 115 * Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
 			this.lust = 30;
@@ -200,7 +252,8 @@ import classes.Scenes.SceneLib;
 			this.tailType = Tail.COW;
 			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.drop = NO_DROP;
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] > 20) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
+			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) this.createPerk(PerkLib.Enemy300Type, 0, 0, 0, 0);
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] > 20 || flags[kFLAGS.ETNA_FOLLOWER] == 3) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			else this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();

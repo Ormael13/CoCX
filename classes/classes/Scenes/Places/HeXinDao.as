@@ -63,15 +63,47 @@ public class HeXinDao extends BaseContent
 	}
 	public function riverislandVillageStuffLunar():void {
 		clearOutput();
-		flags[kFLAGS.LUNAR_NEW_YEAR] = date.fullYear;
-		if (flags[kFLAGS.LUNAR_NEW_YEAR] <= 2015) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "goat";
-		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2016) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "monkey";
-		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2017) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rooster";
-		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2018) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "dog";
-		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2019) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "pig";
-		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2020) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rat";
-		else if (flags[kFLAGS.LUNAR_NEW_YEAR] >= 2021) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "ox";
-		outputText("You go deeper in town and discover the whole place is indeed covered in red. The big question now is what should you check upon first?");
+		flags[kFLAGS.LUNAR_NEW_YEAR] = date.fullYear%12;
+        switch (flags[kFLAGS.LUNAR_NEW_YEAR]){
+            case 0:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "monkey"
+                break;
+            case 1:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rooster"
+                break;
+            case 2:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "dog"
+                break;
+            case 3:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "pig"
+                break;
+            case 4:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rat"
+                break;
+            case 5:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "ox"
+                break;
+            case 6:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "tiger"
+                break;
+            case 7:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rabbit"
+                break;
+            case 8:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "dragon"
+                break;
+            case 9:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "snake"
+                break;
+            case 10:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "horse"
+                break;
+            case 11:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "goat"
+                break;
+        }
+
+        outputText("You go deeper in town and discover the whole place is indeed covered in red. The big question now is what should you check upon first?");
 		menu();
 		if (!player.hasStatusEffect(StatusEffects.CanGetLunarGift)) addButton(0, "Gifts", riverislandVillageStuffLunarGifts);
 		addButton(1, "Food", riverislandVillageStuffLunarFood);
