@@ -533,6 +533,10 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 200000) EngineCore.awardAchievement("Reiterpallasch", kACHIEVEMENTS.COMBAT_REITERPALLASCH);
         if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 1000000) EngineCore.awardAchievement("Uncanny Bloodletter", kACHIEVEMENTS.COMBAT_UNCANNY_BLOOD_LETTER);
         if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 5000000) EngineCore.awardAchievement("Uncanny Reiterpallasch", kACHIEVEMENTS.COMBAT_UNCANNY_REITERPALLASCH);
+        /*if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 500000000) EngineCore.awardAchievement("Re:Bloodletter", kACHIEVEMENTS.COMBAT_BLOOD_LETTER);
+        if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 2000000000) EngineCore.awardAchievement("Re:Reiterpallasch", kACHIEVEMENTS.COMBAT_REITERPALLASCH);
+        if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 10000000000) EngineCore.awardAchievement("Re:Uncanny Bloodletter", kACHIEVEMENTS.COMBAT_UNCANNY_BLOOD_LETTER);
+        if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_TOTAL_DAMAGE] >= 50000000000) EngineCore.awardAchievement("Re:Uncanny Reiterpallasch", kACHIEVEMENTS.COMBAT_UNCANNY_REITERPALLASCH);*/
         if (damage >= 50) EngineCore.awardAchievement("Pain", kACHIEVEMENTS.COMBAT_PAIN);
         if (damage >= 100) EngineCore.awardAchievement("Fractured Limbs", kACHIEVEMENTS.COMBAT_FRACTURED_LIMBS);
         if (damage >= 250) EngineCore.awardAchievement("Broken Bones", kACHIEVEMENTS.COMBAT_BROKEN_BONES);
@@ -540,6 +544,13 @@ public class Combat extends BaseContent {
         if (damage >= 1000) EngineCore.awardAchievement("Meat Pasty", kACHIEVEMENTS.COMBAT_MEAT_PASTY);
         if (damage >= 2500) EngineCore.awardAchievement("Pulverize", kACHIEVEMENTS.COMBAT_PULVERIZE);
         if (damage >= 5000) EngineCore.awardAchievement("Erase", kACHIEVEMENTS.COMBAT_ERASE);
+        /*if (damage >= 50000) EngineCore.awardAchievement("Re:Pain", kACHIEVEMENTS.COMBAT_PAIN);
+        if (damage >= 100000) EngineCore.awardAchievement("Re:Fractured Limbs", kACHIEVEMENTS.COMBAT_FRACTURED_LIMBS);
+        if (damage >= 250000) EngineCore.awardAchievement("Re:Broken Bones", kACHIEVEMENTS.COMBAT_BROKEN_BONES);
+        if (damage >= 500000) EngineCore.awardAchievement("Re:Overkill", kACHIEVEMENTS.COMBAT_OVERKILL);
+        if (damage >= 1000000) EngineCore.awardAchievement("Re:Meat Pasty", kACHIEVEMENTS.COMBAT_MEAT_PASTY);
+        if (damage >= 2500000) EngineCore.awardAchievement("Re:Pulverize", kACHIEVEMENTS.COMBAT_PULVERIZE);
+        if (damage >= 5000000) EngineCore.awardAchievement("Re:Erase", kACHIEVEMENTS.COMBAT_ERASE);*/
     }
 
     /*public function checkMinionsAchievementDamage(damage:Number):void
@@ -1848,6 +1859,7 @@ public class Combat extends BaseContent {
         }
         outputText("\n");
         checkAchievementDamage(damage);
+		WrathGenerationPerHit2(5);
         heroBaneProc(damage);
         EruptingRiposte();
         if (monster.HP <= monster.minHP()) {
@@ -2806,6 +2818,7 @@ public class Combat extends BaseContent {
                     else doDamage(damage, true, true);
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
+				WrathGenerationPerHit(damage);
                 heroBaneProc(damage);
             }
             if (flags[kFLAGS.CUPID_ARROWS] == 1) {
@@ -2908,7 +2921,7 @@ public class Combat extends BaseContent {
             outputText("\n");
             if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
             flags[kFLAGS.ARROWS_SHOT]++;
-            WrathWeaponsProc();
+			WrathWeaponsProc();
             bowPerkUnlock();
         } else {
             if (monster is DisplacerBeast) outputText("\n\nThe displacer beast teleports, dodging your attack.\n");
@@ -3105,6 +3118,7 @@ public class Combat extends BaseContent {
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
+				WrathGenerationPerHit(damage);
                 heroBaneProc(damage);
             }
         } else {
@@ -3349,6 +3363,7 @@ public class Combat extends BaseContent {
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też*/
             damage = Math.round(damage);
             checkAchievementDamage(damage);
+			WrathGenerationPerHit(damage);
             if (monster.HP <= monster.minHP()) {
                 if (monster.short == "pod")
                     outputText(". ");
@@ -3361,35 +3376,6 @@ public class Combat extends BaseContent {
 					if (crit) dualWieldFirearmsXP(1);
 					dualWieldFirearmsXP(1);
 				}
-                if (player.weaponRange == weaponsrange.TOUHOM3) {
-                    outputText(" ");
-                    doDamage(damage, true, true);
-                    if (crit) outputText(" <b>*Critical Hit!*</b>");
-                    if (player.hasPerk(PerkLib.AmateurGunslinger)) {
-                        outputText(" ");
-                        doDamage(damage, true, true);
-                        if (crit) outputText(" <b>*Critical Hit!*</b>");
-                        outputText(" ");
-                        doDamage(damage, true, true);
-                        if (crit) outputText(" <b>*Critical Hit!*</b>");
-                    }
-                    if (player.hasPerk(PerkLib.ExpertGunslinger)) {
-                        outputText(" ");
-                        doDamage(damage, true, true);
-                        if (crit) outputText(" <b>*Critical Hit!*</b>");
-                        outputText(" ");
-                        doDamage(damage, true, true);
-                        if (crit) outputText(" <b>*Critical Hit!*</b>");
-                    }
-                    if (player.hasPerk(PerkLib.MasterGunslinger)) {
-                        outputText(" ");
-                        doDamage(damage, true, true);
-                        if (crit) outputText(" <b>*Critical Hit!*</b>");
-                        outputText(" ");
-                        doDamage(damage, true, true);
-                        if (crit) outputText(" <b>*Critical Hit!*</b>");
-                    }
-                }
                 outputText("\n\n");
                 doNext(endHpVictory);
                 return;
@@ -3413,6 +3399,35 @@ public class Combat extends BaseContent {
 					}
                     //	if (flaga dla efektu arouse arrow) outputText(" tekst dla arouse arrow effect.");
                     //	if (flaga dla efektu poison arrow) outputText(" tekst dla poison arrow effect.");
+					if (player.weaponRange == weaponsrange.TOUHOM3) {
+						outputText(" ");
+						doDamage(damage, true, true);
+						if (crit) outputText(" <b>*Critical Hit!*</b>");
+						if (player.hasPerk(PerkLib.AmateurGunslinger)) {
+							outputText(" ");
+							doDamage(damage, true, true);
+							if (crit) outputText(" <b>*Critical Hit!*</b>");
+							outputText(" ");
+							doDamage(damage, true, true);
+							if (crit) outputText(" <b>*Critical Hit!*</b>");
+						}
+						if (player.hasPerk(PerkLib.ExpertGunslinger)) {
+							outputText(" ");
+							doDamage(damage, true, true);
+							if (crit) outputText(" <b>*Critical Hit!*</b>");
+							outputText(" ");
+							doDamage(damage, true, true);
+							if (crit) outputText(" <b>*Critical Hit!*</b>");
+						}
+						if (player.hasPerk(PerkLib.MasterGunslinger)) {
+							outputText(" ");
+							doDamage(damage, true, true);
+							if (crit) outputText(" <b>*Critical Hit!*</b>");
+							outputText(" ");
+							doDamage(damage, true, true);
+							if (crit) outputText(" <b>*Critical Hit!*</b>");
+						}
+					}
                 }
                 outputText("\n\n");
                 heroBaneProc(damage);
@@ -4924,6 +4939,7 @@ public class Combat extends BaseContent {
             outputText(" ");
             if (MDOCount == maxCurrentAttacks()) outputText("\n");
             checkAchievementDamage(damage);
+			WrathGenerationPerHit(damage);
             WrathWeaponsProc();
             heroBaneProc(damage);
             EruptingRiposte();
@@ -5355,7 +5371,23 @@ public class Combat extends BaseContent {
             else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [armor] leave behind.");
 		}
     }
-
+	
+	public function WrathGenerationPerHit(damage:int = 0):void {
+		if (damage > 0) {
+			var generatedWrath:Number = 0;
+			generatedWrath += damage / 10;
+			generatedWrath = Math.sqrt(generatedWrath);
+			generatedWrath = Math.round(generatedWrath);
+			if (generatedWrath > 0) player.wrath += generatedWrath;
+			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
+		}
+	}
+	
+	public function WrathGenerationPerHit2(damage:int = 0):void {
+		player.wrath += damage;
+		if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
+	}
+	
     public function WrathWeaponsProc():void {
         if (player.weapon == weapons.BLETTER || player.weapon == weapons.C_BLADE) {
             player.takePhysDamage(player.maxHP() * 0.02);
@@ -5774,7 +5806,7 @@ public class Combat extends BaseContent {
 				player.HP += damage;
 				player.wrath += WrathGains;
 				if (player.HP > (player.maxHP() + player.maxOverHP())) player.HP = player.maxHP() + player.maxOverHP();
-				if (player.wrath > player.maxWrath()) player.wrath = player.maxWrath();
+				if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
 			}
 			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
@@ -8760,6 +8792,10 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.GreyMage) && player.lust < 30) player.lust = 30;
             if (player.findPerk(PerkLib.GreyMage) < 0 && player.lust < 50) player.lust = 50;
         }
+		/*if (player.hasPerk(PerkLib.WellspringOfLust)) {//place to make starting wraith higher due to perks
+            if (player.hasPerk(PerkLib.GreyMage) && player.lust < 30) player.lust = 30;
+            if (player.findPerk(PerkLib.GreyMage) < 0 && player.lust < 50) player.lust = 50;
+        }*/
         magic.applyAutocast();
         mspecials.applyAutocast2();
         //Adjust lust vulnerability in New Game+.

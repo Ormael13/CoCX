@@ -986,6 +986,17 @@ import classes.Items.JewelryLib;
 			if (max > 69999) max = 69999;
 			return max;
 		}
+		public override function maxOverWrath():Number {
+			var max1:Number = maxWrath();
+			var max2:Number = 2;
+			max1 *= max2;
+			return max1;
+		}
+		public function maxSafeWrath():Number {
+			var max:Number = maxWrath();
+			
+			return max;
+		}
 		
 		public override function maxMana():Number
 		{
