@@ -1233,6 +1233,7 @@ public class PlayerInfo extends BaseContent {
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 		//Level up
+		/*
         if (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap) {
             player.XP -= player.requiredXP();
 			player.level++;
@@ -1253,6 +1254,62 @@ public class PlayerInfo extends BaseContent {
 			}
 			if (player.level > 6) outputText("\n\nYou have gained one perk point!");
 			else outputText("\n\nYou have gained two perk points!");
+
+			if (player.statPoints>0) {
+				doNext(attributeMenu);
+			} else if (player.perkPoints > 0) {
+				doNext(perkBuyMenu);
+			} else {
+				doNext(playerMenu);
+			}
+		}*/
+		//Level up bulk/individual
+		if (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap){
+			if (flags[kFLAGS.LVL_UP_FAST] > 0){
+				var lvlinc:int = 0;
+				var perkLvl:int = player.perkPoints;
+				var statLvl:int = player.statPoints;
+				while (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap){
+					player.XP -= player.requiredXP();
+					player.level++;
+					lvlinc++
+					if (player.level <=6){
+						player.perkPoints+=2
+						player.statPoints+=10
+					}
+					else {
+						player.perkPoints++
+						player.statPoints+=5
+					}
+				}
+				clearOutput()
+				outputText("<b>You have gained " +lvlinc.toString() + " levels, and are now level " + num2Text(player.level)+"!</b>");
+				var perkRes:int = player.perkPoints - perkLvl
+				var statRes:int = player.statPoints - statLvl
+				outputText("\n\n You have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!")
+			}
+			else {
+				player.XP -= player.requiredXP();
+				player.level++;
+				player.perkPoints++;
+				if (player.level <= 6) player.perkPoints++;
+				//if (player.level % 2 == 0) player.ascensionPerkPoints++;
+				//przerobić aby z asc perk co ?6/3/1? lvl dostawać another perk point?
+				//może też dodać ascension perk aby móc dostawać 6 lub nawet wiecej stat points na lvl up?
+				clearOutput();
+				outputText("<b>You are now level " + num2Text(player.level) + "!</b>");
+				if (player.level > 6) {
+					player.statPoints += 5;
+					outputText("\n\nYou have gained five attribute points and one perk point!");
+				}
+				else {
+					player.statPoints += 10;
+					outputText("\n\nYou have gained ten attribute points and two perk points!");
+				}
+				//What is this one for? V
+				if (player.level > 6) outputText("\n\nYou have gained one perk point!");
+				else outputText("\n\nYou have gained two perk points!");
+			}
 
 			if (player.statPoints>0) {
 				doNext(attributeMenu);
