@@ -2082,7 +2082,7 @@ use namespace CoC;
 					var gainedWrath:Number = 0;
 					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
 					wrath += gainedWrath;
-					if (wrath > maxWrath()) wrath = maxWrath();
+					if (wrath > maxOverWrath()) wrath = maxOverWrath();
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2226,7 +2226,7 @@ use namespace CoC;
 					var gainedWrath:Number = 0;
 					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
 					wrath += gainedWrath;
-					if (wrath > maxWrath()) wrath = maxWrath();
+					if (wrath > maxOverWrath()) wrath = maxOverWrath();
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2328,7 +2328,7 @@ use namespace CoC;
 					var gainedWrath:Number = 0;
 					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
 					wrath += gainedWrath;
-					if (wrath > maxWrath()) wrath = maxWrath();
+					if (wrath > maxOverWrath()) wrath = maxOverWrath();
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2439,7 +2439,7 @@ use namespace CoC;
 					var gainedWrath:Number = 0;
 					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
 					wrath += gainedWrath;
-					if (wrath > maxWrath()) wrath = maxWrath();
+					if (wrath > maxOverWrath()) wrath = maxOverWrath();
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2540,7 +2540,7 @@ use namespace CoC;
 					var gainedWrath:Number = 0;
 					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
 					wrath += gainedWrath;
-					if (wrath > maxWrath()) wrath = maxWrath();
+					if (wrath > maxOverWrath()) wrath = maxOverWrath();
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2633,7 +2633,7 @@ use namespace CoC;
 					var gainedWrath:Number = 0;
 					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
 					wrath += gainedWrath;
-					if (wrath > maxWrath()) wrath = maxWrath();
+					if (wrath > maxOverWrath()) wrath = maxOverWrath();
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2728,7 +2728,7 @@ use namespace CoC;
 					var gainedWrath:Number = 0;
 					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
 					wrath += gainedWrath;
-					if (wrath > maxWrath()) wrath = maxWrath();
+					if (wrath > maxOverWrath()) wrath = maxOverWrath();
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
