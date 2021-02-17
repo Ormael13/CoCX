@@ -71,11 +71,11 @@ package classes.Scenes
 			outputText("-Added to almost all soulskill tooltips indicator if it's physical or magical soulskill (to make easier questting which critical chance modifiers and stats would make soulskill effect stronger).\n");
 			outputText("-New tier 3 str lvl-up perk: Way of the Warrior. Req. Job: Warrior perk. Effect: Enable autocast of Warrior's rage and boost it based on PC current stats. (+1 per 10 pts of core stat value)\n");
 			outputText("-Attacking with melee, range base attacks would generate various amount of wrath (depending on damage dealt). Using some specials or other ways of attack like using mech melee weapon would generate small fixed amount of wrath.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Toggle to allow level up multiple times with one click. It would level up Pc to highest possible level that can be attained using currently saved/banked exp points. (by Jtexc)\n");
+			outputText("-New subtab on stats page that would list all racial mutation slots and racial perks that already occupy those slots. (by Jtexc)\n");
+			outputText("-Venom Glands racial perks req. for naga score was lowered from 4/8/12 to 4/6/8.\n");
+			outputText("-\n");//Adrenaline Rush - req. Job: warrior?
+			outputText("-\n");//Furious strikes  - req. Adrenaline Rush?
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -83,7 +83,7 @@ package classes.Scenes
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk form training with him, some aoe attacks not avialable for underwater pack of sharks\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

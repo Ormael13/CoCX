@@ -2307,11 +2307,14 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.TrueSeeing)) accmod += 40;
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
+		if (player.isGauntletWeapon()) accmod += Math.round((masteryGauntletLevel() - 1) / 2);
 		if (player.isSwordTypeWeapon()) accmod += Math.round((masterySwordLevel() - 1) / 2);
 		if (player.isAxeTypeWeapon()) accmod += Math.round((masteryAxeLevel() - 1) / 2);
 		if (player.isMaceHammerTypeWeapon()) accmod += Math.round((masteryMaceHammerLevel() - 1) / 2);
 		if (player.isDuelingTypeWeapon()) accmod += Math.round((masteryDuelingSwordLevel() - 1) / 2);
 		if (player.isSpearTypeWeapon()) accmod += Math.round((masterySpearLevel() - 1) / 2);
+		if (player.isDaggerTypeWeapon()) accmod += Math.round((masteryDaggerLevel() - 1) / 2);
+		if (player.isExoticTypeWeapon()) accmod += Math.round((masteryExoticLevel() - 1) / 2);
 		if (player.weaponPerk == "Dual Small") accmod += Math.round((dualWSLevel() - 1) / 2);
 		if (player.weaponPerk == "Dual") accmod += Math.round((dualWNLevel() - 1) / 2);
 		if (player.weaponPerk == "Dual Large") accmod += Math.round((dualWLLevel() - 1) / 2);
@@ -4477,11 +4480,14 @@ public class Combat extends BaseContent {
             }
             if (player.weapon == weapons.BFGAUNT) damage *= 4;
             if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
+			if (player.isGauntletWeapon()) damage *= (1 + (0.01 * masteryGauntletLevel()));
 			if (player.isSwordTypeWeapon()) damage *= (1 + (0.01 * masterySwordLevel()));
 			if (player.isAxeTypeWeapon()) damage *= (1 + (0.01 * masteryAxeLevel()));
 			if (player.isMaceHammerTypeWeapon()) damage *= (1 + (0.01 * masteryMaceHammerLevel()));
 			if (player.isDuelingTypeWeapon()) damage *= (1 + (0.01 * masteryDuelingSwordLevel()));
 			if (player.isSpearTypeWeapon()) damage *= (1 + (0.01 * masterySpearLevel()));
+			if (player.isDaggerTypeWeapon()) damage *= (1 + (0.01 * masteryDaggerLevel()));
+			if (player.isExoticTypeWeapon()) damage *= (1 + (0.01 * masteryExoticLevel()));
 			if (player.weaponPerk == "Dual Small") damage *= (1 + (0.01 * dualWSLevel()));
 			if (player.weaponPerk == "Dual") damage *= (1 + (0.01 * dualWNLevel()));
 			if (player.weaponPerk == "Dual Large") damage *= (1 + (0.01 * dualWLLevel()));

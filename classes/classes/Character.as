@@ -993,9 +993,10 @@ import classes.Items.JewelryLib;
 			return max1;
 		}
 		public function maxSafeWrath():Number {
-			var max:Number = maxWrath();
-			
-			return max;
+			var max1:Number = maxWrath();
+			var max2:Number = 1;
+			max1 *= max2;
+			return max1;
 		}
 		
 		public override function maxMana():Number

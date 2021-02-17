@@ -233,7 +233,7 @@ use namespace CoC;
 		}
 
 		public function GlacialRiftConditions():void {
-			player.createStatusEffect(StatusEffects.Snowstorms,0,0,0,0);
+			if (!player.headJewelry == headjewelries.SKIGOGG) player.createStatusEffect(StatusEffects.Snowstorms,0,0,0,0);
 			player.createStatusEffect(StatusEffects.Snow,0,0,0,0);
 			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createStatusEffect(StatusEffects.SubZeroConditions,0,0,0,0);
 		}

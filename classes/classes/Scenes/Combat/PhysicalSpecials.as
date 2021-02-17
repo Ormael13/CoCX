@@ -1175,10 +1175,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		if (player.weapon == weapons.PRURUMI) {
-			doDamage(damage, true, true);
 			if (player.spe >= 150) doDamage(damage, true, true);
+			combat.WrathGenerationPerHit2(5);
 			if (player.spe >= 225) doDamage(damage, true, true);
+			combat.WrathGenerationPerHit2(5);
 			if (player.spe >= 300) doDamage(damage, true, true);
+			combat.WrathGenerationPerHit2(5);
 		}
 		checkForElementalEnchantmentAndDoDamage(damage, false, false);
 		if (crit) {
@@ -1191,6 +1193,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.heroBaneProc(damage);
+		combat.WrathGenerationPerHit2(5);
 		combat.EruptingRiposte();
 		if (monster.canMonsterBleed()) {
 			if (monster.hasStatusEffect(StatusEffects.IzmaBleed)) {
@@ -1355,6 +1358,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(5);
 		combat.WrathWeaponsProc();
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
@@ -1464,6 +1468,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (crit) outputText("<b>Critical! </b>");
 		outputText("\n\n");
 		combat.checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		if (player.weaponRangePerk == "Bow") {
 			flags[kFLAGS.ARROWS_SHOT]++;
@@ -1563,6 +1568,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.DevastatingCharge) && !monster.hasPerk(PerkLib.Resolute) && rand(10) > 7) monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 		outputText("\n\n");
 		combat.checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(5);
 		combat.WrathWeaponsProc();
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
@@ -1671,6 +1677,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		enemyAI();
@@ -1761,6 +1768,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		enemyAI();
@@ -1866,6 +1874,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		enemyAI();
@@ -1915,6 +1924,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Clean up down to 1 decimal point
 			damage = Math.round(damage*10)/10;
 			monster.teased(damage);
+			combat.WrathGenerationPerHit2(5);
 		}
 		//New lines and moving on!
 		outputText("\n\n");
@@ -1947,6 +1957,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if(player.tailType == Tail.RACCOON) monster.addStatusValue(StatusEffects.CoonWhip,2,2);
 		}
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		enemyAI();
 	}
 
@@ -1996,6 +2007,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			checkAchievementDamage(damage);
 		}
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		enemyAI();
@@ -2022,6 +2034,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			else outputText("back in pain but hold steady despite the impact.");
 		}
+		combat.WrathGenerationPerHit2(5);
 		outputText("\n\n");
 		enemyAI();
 	}
@@ -2086,6 +2099,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		enemyAI();
 	}
@@ -2118,6 +2132,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		awardAchievement("Cum Cannon", kACHIEVEMENTS.COMBAT_CUM_CANNON);
 		enemyAI();
@@ -2176,6 +2191,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (silly()) outputText(" The force causes you to literally bounce off of " + monster.a + monster.short + ", allowing the camera to get a nice shot of " + monster.a + monster.short + " twitching in an indent in their general shape.");
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(slamDmg);
 		combat.EruptingRiposte();
 		enemyAI();
@@ -2254,6 +2270,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		monster.statStore.addBuffObject({spe:-15}, "Poison",{text:"Poison"});
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		combat.WrathGenerationPerHit2(5);
 		enemyAI();
 	}
 	
@@ -2310,6 +2327,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			checkAchievementDamage(damage);
 		}
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		enemyAI();
@@ -2788,6 +2806,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage);
 		doDamage(damage);
+		combat.WrathGenerationPerHit2(5);
 		outputText("You tighten your vines around your opponent's neck to strangle it. " + monster.capitalA + monster.short + " struggles against your natural noose, getting obvious marks on its neck and " + damage + " damage for their trouble.\n\n");
 		enemyAI();
 	}
@@ -2811,6 +2830,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		doNext(playerMenu);
@@ -2907,6 +2927,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			EggThrowLustDamageRepeat();
 		}
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		if (!combatIsOver()) enemyAI();
 	}
 
@@ -2933,6 +2954,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		if (!combatIsOver()) enemyAI();
 	}
 
@@ -3009,6 +3031,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		enemyAI();
@@ -3090,6 +3113,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		enemyAI();
@@ -3166,6 +3190,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		enemyAI();
@@ -3242,6 +3267,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		enemyAI();
@@ -3304,6 +3330,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		enemyAI();
@@ -3358,6 +3385,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		enemyAI();
 	}
@@ -3768,6 +3796,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
@@ -3866,6 +3895,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			checkAchievementDamage(damage);
 			outputText("\n\n");
+			combat.WrathGenerationPerHit2(5);
 			combat.heroBaneProc(damage);
 			combat.EruptingRiposte();
 			monster.createStatusEffect(StatusEffects.Pounce, 4 + rand(2), 0, 0, 0);
@@ -3879,6 +3909,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else {
 			//Failure (-10 HPs) -
 			outputText("As you attempt to grapple your target it slips out of your reach delivering a glancing blow to your limbs. Unable to grab your opponent flap your wing and resume flight.");
+			combat.WrathGenerationPerHit2(5);
 			player.takePhysDamage(5, true);
 			if(player.HP <= player.minHP()) {
 				doNext(endHpLoss);
@@ -3956,6 +3987,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) HBD *= 1.50;
 		HBD = Math.round(HBD);
 		doDamage(HBD, true, true);
+		combat.WrathGenerationPerHit2(5);
 	}
 	public function nagaBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -3992,6 +4024,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("You lunge headfirst, fangs bared. Your attempt fails horrendously, as " + monster.a + monster.short + " manages to counter your lunge, knocking your head away with enough force to make your ears ring.");
 		}
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		player.tailVenom -= 25;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		if (!combatIsOver()) enemyAI();
@@ -4043,6 +4076,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("You lunge headfirst, fangs bared. Your attempt fails horrendously, as " + monster.a + monster.short + " manages to counter your lunge, pushing you back out of range.");
 		}
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		player.tailVenom -= 25;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		if (!combatIsOver()) enemyAI();
@@ -4092,6 +4126,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("You lunge headfirst, maw open for a bite. Your attempt fails horrendously, as " + monster.a + monster.short + " manages to counter your lunge, knocking your head away with enough force to make your ears ring.");
 		}
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		if (!combatIsOver()) enemyAI();
 	}
 
@@ -4208,6 +4243,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 2;
 		}
 		outputText("\n");
+		combat.WrathGenerationPerHit2(5);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
@@ -4365,6 +4401,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//New line before monster attack
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
@@ -4490,6 +4527,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//New line before monster attack
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
@@ -4573,6 +4611,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		 }*/
 		//New line before monster attack
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		//Use tail mp
 		player.tailVenom -= 25;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
@@ -4645,6 +4684,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Use tail mp
 		player.tailVenom -= 25;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 	}
 
@@ -4949,6 +4989,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
 		outputText(" " + monster.capitalA + monster.short + " bleeds profusely from the many bloody bite marks you leave behind.");
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
@@ -5125,6 +5166,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
@@ -5307,6 +5349,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		flags[kFLAGS.ARROWS_SHOT]++;
 		bowPerkUnlock();
+		combat.WrathGenerationPerHit2(5);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		enemyAI();
@@ -5369,6 +5412,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		flags[kFLAGS.ARROWS_SHOT] += 6;
 		bowPerkUnlock();
+		combat.WrathGenerationPerHit2(5);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		if (monster.HP <= monster.minHP() || flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1) enemyAI();
@@ -5427,6 +5471,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		flags[kFLAGS.ARROWS_SHOT] += 6;
 		bowPerkUnlock();
+		combat.WrathGenerationPerHit2(5);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		if (monster.HP <= monster.minHP() || flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1) enemyAI();

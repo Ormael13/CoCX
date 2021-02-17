@@ -536,6 +536,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(5);
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) flags[kFLAGS.HERO_BANE_DAMAGE_BANK] += damage;
 		if (player.hasStatusEffect(StatusEffects.EruptingRiposte)) flags[kFLAGS.ERUPTING_RIPOSTE_DAMAGE_BANK] += monster.tou + monster.inte + monster.wis;
 	}
@@ -652,6 +653,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -1007,6 +1009,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", which they ignore. It is probably best you don’t use this technique against the pure.\n\n");
 		}
 		monster.HP -= damage;
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		statScreenRefresh();
@@ -1079,6 +1082,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			outputText("too resolute to be frozen by your attack.</b>");
 		}
 		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		outputText("\n\n");
@@ -1132,6 +1136,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		else doFireDamage(damage, true, true);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		outputText("\n\n");
@@ -1219,6 +1224,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -1463,6 +1469,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText(" damage.");
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(15);
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -1502,6 +1509,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText(" damage.");
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(15);
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -1597,6 +1605,8 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 	 outputText("\n");
 	 checkAchievementDamage(damage);
+	 combat.heroBaneProc(damage);
+	 combat.WrathGenerationPerHit2(5);
 	 if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 0) {
 	 outputText("\n");
 	 enemyAI();
@@ -1686,6 +1696,8 @@ public class CombatSoulskills extends BaseCombatContent {
 	 doDamage(damage);
 	 outputText("Your [weapon] hits thrice against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 	 checkAchievementDamage(damage);
+	 combat.WrathGenerationPerHit2(5);
+	 combat.heroBaneProc(damage);
 	 outputText("\n\n");
 	 if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 	 else enemyAI();

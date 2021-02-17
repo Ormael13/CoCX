@@ -357,184 +357,12 @@ public class PlayerInfo extends BaseContent {
 			outputText("\n\n<b>You have " + num2Text(player.statPoints) + " attribute point" + (player.statPoints == 1 ? "" : "s") + " to distribute.</b>");
 			addButton(1, "Stat Up", attributeMenu);
 		}
-		addButton(2, "Mutations", displayMutationsUsed);
-		addButtonDisabled(10, "General", "You are currently at this stats page.");
-		addButton(11, "Combat", displayStatsCombat);
-		addButton(12, "NPC's", displayStatsNpcs);
-		addButton(13, "Children", displayStatsChildren);
-		addButton(14, "Mastery", displayStatsmastery);
-	}
-	public function displayMutationsUsed():void{
-		spriteSelect(-1);
-		clearOutput()
-		displayHeader("Mutation Stats");
-		var mutationCount:Number = 1
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
-			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
-			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
-			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation04) >= 0)
-			mutationCount++;
-		outputText("\nYou have " + mutationCount + " mutation slots per part."+
-		"\nNote: Not all body parts will use all available slots.")
-		//Probably a better way than this to check. Perhaps a helper function to use as a template to check. This'll do for a rudimentary proof of concept.
-		//Can't auto-keep track of body max mutations per part, since body mutations can be added as needed, but nothing to definitively check.
-		//That means I'd have to keep updating this if Orm or Lia adds a new mutation.
-		//Also, when Orm reworks perks to use v1/v2/v3 things, can also display the current tier.
-
-		//Heart Mutations
-		outputText("\n\nHeart Mutations:")
-		if (player.findPerk(PerkLib.BlackHeart) >= 0)
-			outputText("\nBlack Heart: Acquired.")
-		if (player.findPerk(PerkLib.FrozenHeart) >= 0)
-			outputText("\nFrozen Heart: Acquired.")
-		if (player.findPerk(PerkLib.ObsidianHeart) >= 0)
-			outputText("\nObsidian Heart: Acquired.")
-		if (player.findPerk(PerkLib.TwinHeart) >= 0)
-			outputText("\nTwin Heart: Acquired.")
-		if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0)
-			outputText("\nHeart of the storm: Acquired.")
-		if (player.findPerk(PerkLib.DraconicHeart) >= 0)
-			outputText("\nDragonic Heart: Acquired.")
-
-		//Muscle Mutations
-		outputText("\n\nMuscle Mutations:")
-		if (player.findPerk(PerkLib.MantislikeAgility) >= 0)
-			outputText("\nMantis Agility: Acquired.")
-		if (player.findPerk(PerkLib.OniMusculature) >= 0)
-			outputText("\nOni Musculature: Acquired.")
-
-		//Mouth Mutations
-		outputText("\n\nMouth Mutations:")
-		if (player.findPerk(PerkLib.VenomGlands) >= 0)
-			outputText("\nVenom Glands: Acquired.")
-		if (player.findPerk(PerkLib.HollowFangs) >= 0)
-			outputText("\nHollow Fangs: Acquired.")
-
-		//Adrenal Glands Mutations
-		outputText("\n\nAdrenal Gland Mutations:")
-		if (player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)
-			outputText("\nSalamander Adrenal Glands: Acquired.")
-		if (player.findPerk(PerkLib.OrcAdrenalGlands) >= 0)
-			outputText("\nOrc Adrenal Glands: Acquired.")
-
-		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
-		outputText("\n\nBloodstream Mutations:")
-		if (player.findPerk(PerkLib.VampiricBloodsteam) >= 0)
-			outputText("\nVampiric Bloodstream: Acquired.")
-		if (player.findPerk(PerkLib.HinezumiBurningBlood) >= 0)
-			outputText("\nHinezume Burning Bloodstream: Acquired.")
-		if (player.findPerk(PerkLib.FeyArcaneBloodstream) >=0)
-			outputText("\nFey Arcane Bloodstream: Acquired.")
-
-		//Fat tissue Mutations
-		outputText("\n\nFat and Tissue Mutations:")
-		if (player.findPerk(PerkLib.PigBoarFat) >= 0)
-			outputText("\nPig/Boar Fat: Acquired.")
-		if (player.findPerk(PerkLib.NaturalPunchingBag) >= 0)
-			outputText("\nNatural Punching Bag: Acquired.")
-		if (player.findPerk(PerkLib.WhaleFat) >= 0)
-			outputText("\nWhale Fat: Acquired.")
-		if (player.findPerk(PerkLib.YetiFat) >= 0)
-			outputText("\nYeti Fat: Acquired.")
-
-		//Lungs Mutations
-		outputText("\n\nLungs Mutations:")
-		if (player.findPerk(PerkLib.DraconicLungs) >= 0)
-			outputText("\nDraconic Lungs: Acquired.")
-		if (player.findPerk(PerkLib.CaveWyrmLungs) >= 0)
-			outputText("\nCave Wyrm Lungs: Acquired.")
-		if (player.findPerk(PerkLib.MelkieLung) >= 0)
-			outputText("\nMelkie Lungs: Acquired.")
-		if (player.findPerk(PerkLib.DrakeLungs) >= 0)
-			outputText("\nDrake Lungs: Acquired.")
-
-		//Metabolism Mutations
-		outputText("\n\nMetabolism Mutations:")
-		if (player.findPerk(PerkLib.ManticoreMetabolism) >= 0)
-			outputText("\nManticore Metabolism: Acquired.")
-		if (player.findPerk(PerkLib.DisplacerMetabolism) >= 0)
-			outputText("\nDisplacer Metabolism: Acquired.")
-
-		//Ovaries Mutations
-		outputText("\n\nOvaries Mutations:")
-		if (player.findPerk(PerkLib.LactaBovinaOvaries) >= 0)
-			outputText("\nLacta Bovine Ovaries: Acquired.")
-		if (player.findPerk(PerkLib.FloralOvaries) >= 0)
-			outputText("\nFloral Ovaries: Acquired.")
-
-		//Testicle Mutations
-		outputText("\n\nBalls Mutations:")
-		if (player.findPerk(PerkLib.MinotaurTesticles) >= 0)
-			outputText("\nMinotaur Testicles: Acquired.")
-		if (player.findPerk(PerkLib.EasterBunnyEggBag) >= 0)
-			outputText("\nEaster Bunny Balls: Acquired.")
-		if (player.findPerk(PerkLib.NukiNuts) >= 0)
-			outputText("\nNuki Nuts: Acquired.")
-
-		//Eyes Mutations
-		outputText("\n\nEye Mutations:")
-		if (player.findPerk(PerkLib.GorgonsEyes) >= 0)
-			outputText("\nGorgon Eyes: Acquired.")
-		if (player.findPerk(PerkLib.GazerEye) >= 0)
-			outputText("\nGazer Eyes: Acquired.")
-
-		//Peripheral/NervSys Mutations
-		outputText("\n\nPeripheral Nervous System Mutations:")
-		if (player.findPerk(PerkLib.ElvishPeripheralNervSys) >= 0)
-			outputText("\nElvish Nervous System: Acquired.")
-
-		//Bones and Marrow Mutations
-		outputText("\n\nBones and Marrow Mutations:")
-		if (player.findPerk(PerkLib.LizanMarrow) >= 0)
-			outputText("\nLizan Marrow: Acquired.")
-		if (player.findPerk(PerkLib.DraconicBones) >= 0)
-			outputText("\nDraconic Bones: Acquired.")
-		if (player.findPerk(PerkLib.HarpyHollowBones) >= 0)
-			outputText("\nHarpy Hollow Bones: Acquired.")
-
-		//Thyroid Glands Mutations
-		outputText("\n\nThyroid Gland Mutations:")
-		if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0)
-			outputText("\nKitsune Thyroid Gland: Acquired.")
-		if (player.findPerk(PerkLib.NekomataThyroidGland) >= 0)
-			outputText("\nNekomata Thyroid Gland: Acquired.")
-
-		//ParaThyroid Glands Mutations. What's the difference between this and the above???
-		outputText("\n\nParaThyroid Glands Mutations:")
-		if (player.findPerk(PerkLib.KitsuneParathyroidGlands) >= 0)
-			outputText("\nKitsune Para-Thyroid Glands: Acquired.")
-		if (player.findPerk(PerkLib.HellcatParathyroidGlands) >= 0)
-			outputText("\nHellcat Para-Thyroid Glands: Acquired.")
-
-		//Dragon Mutations
-		outputText("\n\nDragon Mutations:")
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+")
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++")
-		if (player.findPerk(PerkLib.DraconicBones) >= 0)
-			outputText("\nDraconic Bones: Acquired.")
-		if (player.findPerk(PerkLib.DraconicHeart) >= 0)
-			outputText("\nDraconic Heart: Acquired.")
-		if (player.findPerk(PerkLib.DraconicLungs) >= 0)
-			outputText("\nDraconic Lungst: Acquired.")
-
-		//Kitsune Mutations
-		outputText("\n\nKitsune Mutations:")
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+")
-		if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0)
-			outputText("\nKitsune Thyroid Gland: Acquired.")
-		if (player.findPerk(PerkLib.KitsuneParathyroidGlands) >= 0)
-			outputText("\nKitsune Para-Thyroid Glands: Acquired.")
-
-		menu();
-		addButton(0, "Next", playerMenu);
-		addButton(10, "General", displayStats);
-		addButtonDisabled(11, "Combat", "You are currently at this stats page.");
-		addButton(12, "NPC's", displayStatsNpcs);
-		addButton(13, "Children", displayStatsChildren);
-		addButton(14, "Mastery", displayStatsmastery);
+		addButtonDisabled(5, "General", "You are currently at this stats page.");
+		addButton(6, "Combat", displayStatsCombat);
+		addButton(7, "NPC's", displayStatsNpcs);
+		addButton(8, "Children", displayStatsChildren);
+		addButton(9, "Mastery", displayStatsmastery);
+		addButton(10, "Mutations", displayMutationsUsed);
 	}
 	public function displayStatsCombat():void {
 		spriteSelect(-1);
@@ -673,12 +501,12 @@ public class PlayerInfo extends BaseContent {
 		
 		menu();
 		addButton(0, "Next", playerMenu);
-		addButton(2, "Mutations", displayMutationsUsed);
-		addButton(10, "General", displayStats);
-		addButtonDisabled(11, "Combat", "You are currently at this stats page.");
-		addButton(12, "NPC's", displayStatsNpcs);
-		addButton(13, "Children", displayStatsChildren);
-		addButton(14, "Mastery", displayStatsmastery);
+		addButton(5, "General", displayStats);
+		addButtonDisabled(6, "Combat", "You are currently at this stats page.");
+		addButton(7, "NPC's", displayStatsNpcs);
+		addButton(8, "Children", displayStatsChildren);
+		addButton(9, "Mastery", displayStatsmastery);
+		addButton(10, "Mutations", displayMutationsUsed);
 	}
 	public function displayStatsNpcs():void {
 		spriteSelect(-1);
@@ -1159,12 +987,12 @@ public class PlayerInfo extends BaseContent {
 		// End Outside camp NPC's Stats
 		menu();
 		addButton(0, "Next", playerMenu);
-		addButton(2, "Mutations", displayMutationsUsed);
-		addButton(10, "General", displayStats);
-		addButton(11, "Combat", displayStatsCombat);
-		addButtonDisabled(12, "NPC's", "You are currently at this stats page.");
-		addButton(13, "Children", displayStatsChildren);
-		addButton(14, "Mastery", displayStatsmastery);
+		addButton(5, "General", displayStats);
+		addButton(6, "Combat", displayStatsCombat);
+		addButtonDisabled(7, "NPC's", "You are currently at this stats page.");
+		addButton(8, "Children", displayStatsChildren);
+		addButton(9, "Mastery", displayStatsmastery);
+		addButton(10, "Mutations", displayMutationsUsed);
 	}
 	public function displayStatsChildren():void {
 		spriteSelect(-1);
@@ -1316,12 +1144,12 @@ public class PlayerInfo extends BaseContent {
 		// End Children Stats
 		menu();
 		addButton(0, "Next", playerMenu);
-		addButton(2, "Mutations", displayMutationsUsed);
-		addButton(10, "General", displayStats);
-		addButton(11, "Combat", displayStatsCombat);
-		addButton(12, "NPC's", displayStatsNpcs);
-		addButtonDisabled(13, "Children", "You are currently at this stats page.");
-		addButton(14, "Mastery", displayStatsmastery);
+		addButton(5, "General", displayStats);
+		addButton(6, "Combat", displayStatsCombat);
+		addButton(7, "NPC's", displayStatsNpcs);
+		addButtonDisabled(8, "Children", "You are currently at this stats page.");
+		addButton(9, "Mastery", displayStatsmastery);
+		addButton(10, "Mutations", displayMutationsUsed);
 	}
 	public function displayStatsmastery():void {
 		spriteSelect(-1);
@@ -1396,12 +1224,185 @@ public class PlayerInfo extends BaseContent {
 		// End Mastery Stats
 		menu();
 		addButton(0, "Next", playerMenu);
-		addButton(2, "Mutations", displayMutationsUsed);
-		addButton(10, "General", displayStats);
-		addButton(11, "Combat", displayStatsCombat);
-		addButton(12, "NPC's", displayStatsNpcs);
-		addButton(13, "Children", displayStatsChildren);
-		addButtonDisabled(14, "Mastery", "You are currently at this stats page.");
+		addButton(5, "General", displayStats);
+		addButton(6, "Combat", displayStatsCombat);
+		addButton(7, "NPC's", displayStatsNpcs);
+		addButton(8, "Children", displayStatsChildren);
+		addButtonDisabled(9, "Mastery", "You are currently at this stats page.");
+		addButton(10, "Mutations", displayMutationsUsed);
+	}
+	public function displayMutationsUsed():void{
+		spriteSelect(-1);
+		clearOutput()
+		displayHeader("Mutation Stats");
+		var mutationCount:Number = 1
+		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
+			mutationCount++;
+		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
+			mutationCount++;
+		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
+			mutationCount++;
+		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation04) >= 0)
+			mutationCount++;
+		outputText("\nYou have " + mutationCount + " mutation slots per part."+
+		"\nNote: Not all body parts will use all available slots.")
+		//Probably a better way than this to check. Perhaps a helper function to use as a template to check. This'll do for a rudimentary proof of concept.
+		//Can't auto-keep track of body max mutations per part, since body mutations can be added as needed, but nothing to definitively check.
+		//That means I'd have to keep updating this if Orm or Lia adds a new mutation.
+		//Also, when Orm reworks perks to use v1/v2/v3 things, can also display the current tier.
+
+		//Heart Mutations
+		outputText("\n\nHeart Mutations:")
+		if (player.findPerk(PerkLib.BlackHeart) >= 0)
+			outputText("\nBlack Heart: Acquired.")
+		if (player.findPerk(PerkLib.FrozenHeart) >= 0)
+			outputText("\nFrozen Heart: Acquired.")
+		if (player.findPerk(PerkLib.ObsidianHeart) >= 0)
+			outputText("\nObsidian Heart: Acquired.")
+		if (player.findPerk(PerkLib.TwinHeart) >= 0)
+			outputText("\nTwin Heart: Acquired.")
+		if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0)
+			outputText("\nHeart of the storm: Acquired.")
+		if (player.findPerk(PerkLib.DraconicHeart) >= 0)
+			outputText("\nDragonic Heart: Acquired.")
+
+		//Muscle Mutations
+		outputText("\n\nMuscle Mutations:")
+		if (player.findPerk(PerkLib.MantislikeAgility) >= 0)
+			outputText("\nMantis Agility: Acquired.")
+		if (player.findPerk(PerkLib.OniMusculature) >= 0)
+			outputText("\nOni Musculature: Acquired.")
+
+		//Mouth Mutations
+		outputText("\n\nMouth Mutations:")
+		if (player.findPerk(PerkLib.VenomGlands) >= 0)
+			outputText("\nVenom Glands: Acquired.")
+		if (player.findPerk(PerkLib.HollowFangs) >= 0)
+			outputText("\nHollow Fangs: Acquired.")
+
+		//Adrenal Glands Mutations
+		outputText("\n\nAdrenal Gland Mutations:")
+		if (player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)
+			outputText("\nSalamander Adrenal Glands: Acquired.")
+		if (player.findPerk(PerkLib.OrcAdrenalGlands) >= 0)
+			outputText("\nOrc Adrenal Glands: Acquired.")
+
+		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
+		outputText("\n\nBloodstream Mutations:")
+		if (player.findPerk(PerkLib.VampiricBloodsteam) >= 0)
+			outputText("\nVampiric Bloodstream: Acquired.")
+		if (player.findPerk(PerkLib.HinezumiBurningBlood) >= 0)
+			outputText("\nHinezume Burning Bloodstream: Acquired.")
+		if (player.findPerk(PerkLib.FeyArcaneBloodstream) >=0)
+			outputText("\nFey Arcane Bloodstream: Acquired.")
+
+		//Fat tissue Mutations
+		outputText("\n\nFat and Tissue Mutations:")
+		if (player.findPerk(PerkLib.PigBoarFat) >= 0)
+			outputText("\nPig/Boar Fat: Acquired.")
+		if (player.findPerk(PerkLib.NaturalPunchingBag) >= 0)
+			outputText("\nNatural Punching Bag: Acquired.")
+		if (player.findPerk(PerkLib.WhaleFat) >= 0)
+			outputText("\nWhale Fat: Acquired.")
+		if (player.findPerk(PerkLib.YetiFat) >= 0)
+			outputText("\nYeti Fat: Acquired.")
+
+		//Lungs Mutations
+		outputText("\n\nLungs Mutations:")
+		if (player.findPerk(PerkLib.DraconicLungs) >= 0)
+			outputText("\nDraconic Lungs: Acquired.")
+		if (player.findPerk(PerkLib.CaveWyrmLungs) >= 0)
+			outputText("\nCave Wyrm Lungs: Acquired.")
+		if (player.findPerk(PerkLib.MelkieLung) >= 0)
+			outputText("\nMelkie Lungs: Acquired.")
+		if (player.findPerk(PerkLib.DrakeLungs) >= 0)
+			outputText("\nDrake Lungs: Acquired.")
+
+		//Metabolism Mutations
+		outputText("\n\nMetabolism Mutations:")
+		if (player.findPerk(PerkLib.ManticoreMetabolism) >= 0)
+			outputText("\nManticore Metabolism: Acquired.")
+		if (player.findPerk(PerkLib.DisplacerMetabolism) >= 0)
+			outputText("\nDisplacer Metabolism: Acquired.")
+
+		//Ovaries Mutations
+		outputText("\n\nOvaries Mutations:")
+		if (player.findPerk(PerkLib.LactaBovinaOvaries) >= 0)
+			outputText("\nLacta Bovine Ovaries: Acquired.")
+		if (player.findPerk(PerkLib.FloralOvaries) >= 0)
+			outputText("\nFloral Ovaries: Acquired.")
+
+		//Testicle Mutations
+		outputText("\n\nBalls Mutations:")
+		if (player.findPerk(PerkLib.MinotaurTesticles) >= 0)
+			outputText("\nMinotaur Testicles: Acquired.")
+		if (player.findPerk(PerkLib.EasterBunnyEggBag) >= 0)
+			outputText("\nEaster Bunny Balls: Acquired.")
+		if (player.findPerk(PerkLib.NukiNuts) >= 0)
+			outputText("\nNuki Nuts: Acquired.")
+
+		//Eyes Mutations
+		outputText("\n\nEye Mutations:")
+		if (player.findPerk(PerkLib.GorgonsEyes) >= 0)
+			outputText("\nGorgon Eyes: Acquired.")
+		if (player.findPerk(PerkLib.GazerEye) >= 0)
+			outputText("\nGazer Eyes: Acquired.")
+
+		//Peripheral/NervSys Mutations
+		outputText("\n\nPeripheral Nervous System Mutations:")
+		if (player.findPerk(PerkLib.ElvishPeripheralNervSys) >= 0)
+			outputText("\nElvish Nervous System: Acquired.")
+
+		//Bones and Marrow Mutations
+		outputText("\n\nBones and Marrow Mutations:")
+		if (player.findPerk(PerkLib.LizanMarrow) >= 0)
+			outputText("\nLizan Marrow: Acquired.")
+		if (player.findPerk(PerkLib.DraconicBones) >= 0)
+			outputText("\nDraconic Bones: Acquired.")
+		if (player.findPerk(PerkLib.HarpyHollowBones) >= 0)
+			outputText("\nHarpy Hollow Bones: Acquired.")
+
+		//Thyroid Glands Mutations
+		outputText("\n\nThyroid Gland Mutations:")
+		if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0)
+			outputText("\nKitsune Thyroid Gland: Acquired.")
+		if (player.findPerk(PerkLib.NekomataThyroidGland) >= 0)
+			outputText("\nNekomata Thyroid Gland: Acquired.")
+
+		//ParaThyroid Glands Mutations. What's the difference between this and the above???
+		outputText("\n\nParaThyroid Glands Mutations:")
+		if (player.findPerk(PerkLib.KitsuneParathyroidGlands) >= 0)
+			outputText("\nKitsune Para-Thyroid Glands: Acquired.")
+		if (player.findPerk(PerkLib.HellcatParathyroidGlands) >= 0)
+			outputText("\nHellcat Para-Thyroid Glands: Acquired.")
+
+		//Dragon Mutations
+		outputText("\n\nDragon Mutations:")
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+")
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++")
+		if (player.findPerk(PerkLib.DraconicBones) >= 0)
+			outputText("\nDraconic Bones: Acquired.")
+		if (player.findPerk(PerkLib.DraconicHeart) >= 0)
+			outputText("\nDraconic Heart: Acquired.")
+		if (player.findPerk(PerkLib.DraconicLungs) >= 0)
+			outputText("\nDraconic Lungst: Acquired.")
+
+		//Kitsune Mutations
+		outputText("\n\nKitsune Mutations:")
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+")
+		if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0)
+			outputText("\nKitsune Thyroid Gland: Acquired.")
+		if (player.findPerk(PerkLib.KitsuneParathyroidGlands) >= 0)
+			outputText("\nKitsune Para-Thyroid Glands: Acquired.")
+
+		menu();
+		addButton(0, "Next", playerMenu);
+		addButton(5, "General", displayStats);
+		addButton(6, "Combat", displayStatsCombat);
+		addButton(7, "NPC's", displayStatsNpcs);
+		addButton(8, "Children", displayStatsChildren);
+		addButton(9, "Mastery", displayStatsmastery);
+		addButtonDisabled(10, "Mutations", "You are currently at this stats page.");
 	}
 
 	//------------
