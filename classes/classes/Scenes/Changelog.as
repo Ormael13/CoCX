@@ -62,17 +62,33 @@ package classes.Scenes
 			outputText("-Tripxi have 2 new talk subjects.\n");
 			outputText("-After months, years of wait... 2nd wedding partner is finaly here.... it's our local neighbour yandere Etna. After PC know about marriages (Michiko helps here), have ring to propose and know some friendly priest can now marry Etna. It will not be easy and maybe like with Chi Chi as someone could crash wedding... as long it not 300 of them right? So ekhm... after PC manage to finish weeding will make resident manticore into wife.\n");
 			outputText("-New melee weapon (by Liadri): Venoclaw - obtainable after making Etna PC waifu. Cost 200 gems. Base atk is 0. Each attack that would deal damage to enemy would apply a small dose of aphrodisiac similary to manticore poison. It also compatibile to be used with feral combat.\n");
-			outputText("-New tier 2 misc lvl-up perk: Natural Instincts. Req. Job: Beast Warrior perk. Effect: All racial ability cooldowns are reduced by one.\n");
+			outputText("-New tier 2 misc lvl-up perk: Natural Instincts. Req. Job: Beast Warrior perk. Effect: All racial ability cooldowns are reduced by one. Enable autocast of Crinos Shape at start of combat.\n");
 			outputText("-New tier 3 misc lvl-up perk: Natural Arsenal. Req. Natural Instincts perk and 60+ str/tou. Effect: All natural weapon based racial abilities gain a +50% damage bonus.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Put limit on how much PC can mine at one visit in quarry to 60. Each new NG tier increase it by 20 up to 160.\n");
+			outputText("-Crinos Shape bonuses are now counted from core stat not total values. We heard Liari think old CS was too OP so well we need cut bit of it power, right? Or that it was meme already by been super OP at late game.\n");
+			outputText("-Warrior's Rage bonuses from additional perks was increased to 15/20 from 5. So warriors zerker would now be a bit more helpful later on too than fall off hard in terms of boosting stats temporaly.\n");
+			outputText("-Small changes in setting menu small changes that makes seeing changes in some setting happening without need to return 1-2 menu up.\n");
+			outputText("-Added to almost all soulskill tooltips indicator if it's physical or magical soulskill (to make easier questting which critical chance modifiers and stats would make soulskill effect stronger).\n");
+			outputText("-New tier 3 str lvl-up perk: Way of the Warrior. Req. Job: Warrior perk. Effect: Enable autocast of Warrior's rage and boost it based on PC current stats. (+1 per 10 pts of core stat value)\n");
+			outputText("-Attacking with melee, range base attacks would generate various amount of wrath (depending on damage dealt). Using some specials or other ways of attack like using mech melee weapon would generate small fixed amount of wrath.\n");
+			outputText("-Toggle to allow level up multiple times with one click. It would level up Pc to highest possible level that can be attained using currently saved/banked exp points. (by Jtexc)\n");
+			outputText("-New subtab on stats page that would list all racial mutation slots and racial perks that already occupy those slots. (by Jtexc)\n");
+			outputText("-Venom Glands racial perks req. for naga score was lowered from 4/8/12 to 4/6/8.\n");
+			outputText("-\n");//Adrenaline Rush - req. Job: warrior?
+			outputText("-\n");//Furious strikes  - req. Adrenaline Rush?
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed bugs: Dual wield firearms mastery granted when suing any firearms\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk form training with him, some aoe attacks not avialable for underwater pack of sharks\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			//outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. ");
@@ -133,10 +149,10 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -176,6 +192,21 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

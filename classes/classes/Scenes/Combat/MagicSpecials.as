@@ -45,6 +45,16 @@ public class MagicSpecials extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
 			outputText("<b>Lustzerking was used succesfully.</b>\n\n");
 		}
+		if (player.wrath >= crinosshapeCost() && flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 1) {
+			player.wrath -= crinosshapeCost();
+			outputText("<b>Crinos Shape was activated succesfully.</b>\n\n");
+			assumeCrinosShape007();
+		}
+		if (player.wrath >= 50 && flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] == 1) {
+			player.wrath -= 50;
+			outputText("<b>Warrior's rage was used succesfully.</b>\n\n");
+			warriorsrage007();
+		}
 	}
 	//------------
 	// M. SPECIALS
@@ -2759,32 +2769,43 @@ public class MagicSpecials extends BaseCombatContent {
 	public function warriorsrage():void {
 		clearOutput();
 		player.wrath -= 50;
+		outputText("You roar and unleash your warrior's rage in order to destroy your foe!\n\n");
+		warriorsrage007();
+		statScreenRefresh();
+		enemyAI();
+	}
+	public function warriorsrage007():void {
 		var temp:Number;
 		var tempStr:Number;
-		var tempTouSpe:Number;
+		var tempTou:Number;
+		var tempSpe:Number;
 		var warriorsrageDuration:Number = 10;
 		var WarriorsRageBoost:Number = 10;
-		if (player.hasPerk(PerkLib.JobSwordsman)) WarriorsRageBoost += 5;
-		if (player.hasPerk(PerkLib.JobBrawler)) WarriorsRageBoost += 5;
-		if (player.hasPerk(PerkLib.Berzerker)) WarriorsRageBoost += 5;
-		if (player.hasPerk(PerkLib.Lustzerker)) WarriorsRageBoost += 5;
-	//	WarriorsRageBoost += player.tou / 10;player.tou * 0.1 - im wytrzymalesze ciało tym wiekszy bonus może udźwignąć
-		outputText("You roar and unleash your dwarf rage in order to destroy your foe!\n\n");
+		if (player.hasPerk(PerkLib.JobSwordsman)) WarriorsRageBoost += 15;
+		if (player.hasPerk(PerkLib.JobBrawler)) WarriorsRageBoost += 15;
+		if (player.hasPerk(PerkLib.Berzerker)) WarriorsRageBoost += 20;
+		if (player.hasPerk(PerkLib.Lustzerker)) WarriorsRageBoost += 20;
 		var oldHPratio:Number = player.hp100/100;
 		temp = WarriorsRageBoost;
-		tempStr = temp * 2;
-		tempTouSpe = temp;
+		tempStr = temp;
+		tempTou = temp;
+		tempSpe = temp;
+		if (player.hasPerk(PerkLib.WayOfTheWarrior)) {
+			tempStr += Math.round(player.strStat.core.value * 0.1);
+			tempTou += Math.round(player.touStat.core.value * 0.1);
+			tempSpe += Math.round(player.speStat.core.value * 0.1);
+		}
+		tempStr *= 2;
 		mainView.statsView.showStatUp('str');
 		mainView.statsView.showStatUp('tou');
 		mainView.statsView.showStatUp('spe');
 		if (player.hasPerk(PerkLib.BerserkerArmor)){
 			tempStr = tempStr*1.5;
-			tempTouSpe = tempTouSpe*1.5;
+			tempTou = tempTou*1.5;
+			tempSpe = tempSpe*1.5;
 		}
-		player.buff("WarriorsRage").addStats({str:tempStr,tou:tempTouSpe,spe:tempTouSpe}).withText("Warriors Rage").combatTemporary(warriorsrageDuration);
+		player.buff("WarriorsRage").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Warriors Rage").combatTemporary(warriorsrageDuration);
 		player.HP = oldHPratio*player.maxHP();
-		statScreenRefresh();
-		enemyAI();
 	}
 
 	public function crinosshapeCost():Number {
@@ -2798,51 +2819,50 @@ public class MagicSpecials extends BaseCombatContent {
 	public function assumeCrinosShape():void {
 		clearOutput();
 		player.wrath -= crinosshapeCost();
+		outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
+		assumeCrinosShape007();
+		statScreenRefresh();
+		enemyAI();
+	}
+	public function assumeCrinosShape007():void {
 		var temp1:Number = 0;
 		var temp2:Number = 0;
 		var temp3:Number = 0;
 		var tempStr:Number;
 		var tempTou:Number;
 		var tempSpe:Number;
+		temp1 += player.strStat.core.value * 0.2;
+		temp2 += player.touStat.core.value * 0.2;
+		temp3 += player.speStat.core.value * 0.2;
 		if (player.hasPerk(PerkLib.ImprovedCrinosShape)) {
-			if (player.hasPerk(PerkLib.GreaterCrinosShape)) {
-				if (player.hasPerk(PerkLib.MasterCrinosShape)) {
-					temp1 += player.str * 1.6;
-					temp2 += player.tou * 1.6;
-					temp3 += player.spe * 1.6;
-				}
-				else {
-					temp1 += player.str * 0.8;
-					temp2 += player.tou * 0.8;
-					temp3 += player.spe * 0.8;
-				}
-			}
-			else {
-				temp1 += player.str * 0.4;
-				temp2 += player.tou * 0.4;
-				temp3 += player.spe * 0.4;
-			}
+			temp1 += player.strStat.core.value * 0.2;
+			temp2 += player.touStat.core.value * 0.2;
+			temp3 += player.speStat.core.value * 0.2;
 		}
-		else {
-			temp1 += player.str * 0.2;
-			temp2 += player.tou * 0.2;
-			temp3 += player.spe * 0.2;
+		if (player.hasPerk(PerkLib.GreaterCrinosShape)) {
+			temp1 += player.strStat.core.value * 0.4;
+			temp2 += player.touStat.core.value * 0.4;
+			temp3 += player.speStat.core.value * 0.4;
+		}
+		if (player.hasPerk(PerkLib.MasterCrinosShape)) {
+			temp1 += player.strStat.core.value * 0.8;
+			temp2 += player.touStat.core.value * 0.8;
+			temp3 += player.speStat.core.value * 0.8;
 		}
 		if (player.hasPerk(PerkLib.JobBeastWarrior) && player.necklaceName == "Crinos Shape necklace") {
-			temp1 += player.str * 0.2;
-			temp2 += player.tou * 0.2;
-			temp3 += player.spe * 0.2;
+			temp1 += player.strStat.core.value * 0.2;
+			temp2 += player.touStat.core.value * 0.2;
+			temp3 += player.speStat.core.value * 0.2;
 		}
 		temp1 = Math.round(temp1);
 		temp2 = Math.round(temp2);
 		temp3 = Math.round(temp3);
-		outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
 		var oldHPratio:Number = player.hp100/100;
-		tempStr = temp1; //
+		tempStr = temp1;
 		tempTou = temp2;
 		tempSpe = temp3;
 		if (player.hasPerk(PerkLib.BerserkerArmor)){
-			tempStr = tempStr*1.5;
+			tempStr = temp1*1.5;
 			tempTou = temp2*1.5;
 			tempSpe = temp3*1.5;
 		}
@@ -2851,8 +2871,6 @@ public class MagicSpecials extends BaseCombatContent {
 		mainView.statsView.showStatUp('spe');
 		player.buff("CrinosShape").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Crinos Shape").combatPermanent();
 		player.HP = oldHPratio*player.maxHP();
-		statScreenRefresh();
-		enemyAI();
 	}
 	public function returnToNormalShape():void {
 		clearOutput();

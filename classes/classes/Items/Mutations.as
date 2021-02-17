@@ -228,7 +228,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You pop the small pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?\n\n(Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) ? "40" : "20") + ")");
         if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wrath += 40;
         else player.wrath += 20;
-        if (player.wrath > player.maxWrath()) player.wrath = player.maxWrath();
+        if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
         statScreenRefresh();
     }
 
@@ -237,7 +237,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You pop the medium pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?\n\n(Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) ? "120" : "60") + ")");
         if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wrath += 120;
         else player.wrath += 60;
-        if (player.wrath > player.maxWrath()) player.wrath = player.maxWrath();
+        if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
         statScreenRefresh();
     }
 
@@ -246,7 +246,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You pop the big pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?\n\n(Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) ? "360" : "180") + ")");
         if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wrath += 360;
         else player.wrath += 180;
-        if (player.wrath > player.maxWrath()) player.wrath = player.maxWrath();
+        if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
         statScreenRefresh();
     }
 
@@ -2410,29 +2410,35 @@ public final class Mutations extends MutationsHelper {
 
     public function impFood(player:Player):void {
         clearOutput();
+		var changes:Number = 0;
+        var changeLimit:Number = 1;
+		if (blockingBodyTransformations()) changeLimit = 0;
         if (player.cocks.length > 0) {
             outputText("The food tastes strange and corrupt - you can't really think of a better word for it, but it's unclean.");
             player.refillHunger(20);
-            if (player.cocks[0].cockLength < 12) {
+            if (player.cocks[0].cockLength < 12 && changes < changeLimit) {
                 var cIdx:int = player.increaseCock(0, rand(2) + 2);
                 outputText("\n\n");
                 player.lengthChange(cIdx, 1);
+				changes++;
             }
             outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
             HPChange(30 + player.tou / 3, true);
             dynStats("lus", 3, "cor", 1);
             //Shrinkage!
-            if (rand(2) == 0 && player.tallness > 42) {
+            if (rand(2) == 0 && player.tallness > 42 && changes < changeLimit) {
                 outputText("\n\nYour skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!\n");
                 player.tallness -= 1 + rand(3);
+				changes++;
             }
             //Red skin!
-            if (rand(30) == 0 && player.skinTone != "red" && !player.isGargoyle()) {
+            if (rand(30) == 0 && changes < changeLimit && player.skinTone != "red" && !player.isGargoyle()) {
                 if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ");
                 else outputText("\n\nYour [skin.type] ");
                 if (rand(2) == 0) player.skinTone = "red";
                 else player.skinTone = "orange";
                 outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".");
+				changes++;
             }
             return;
         } else {
@@ -2442,18 +2448,19 @@ public final class Mutations extends MutationsHelper {
             dynStats("lus", 3, "cor", 1);
         }
         //Red skin!
-        if (rand(30) == 0 && player.skinTone != "red" && !player.isGargoyle()) {
+        if (rand(30) == 0 && changes < changeLimit && player.skinTone != "red" && !player.isGargoyle()) {
             if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ");
             else outputText("\n\nYour [skin.type] ");
             if (rand(2) == 0) player.skinTone = "red";
             else player.skinTone = "orange";
             outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".");
+			changes++;
         }
-
         //Shrinkage!
-        if (rand(2) == 0 && player.tallness > 42) {
+        if (rand(2) == 0 && player.tallness > 42 && changes < changeLimit) {
             outputText("\n\nYour skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!");
             player.tallness -= 1 + rand(3);
+			changes++;
         }
     }
 

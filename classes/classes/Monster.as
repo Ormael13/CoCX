@@ -598,6 +598,12 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience)) temp = 0;
 			return temp;
 		}
+		public override function maxOverWrath():Number {
+			var temp1:Number = this.maxWrath();
+			var temp2:Number = 2;
+			temp1 *= temp2;
+			return temp1;
+		}
 
 		public override function maxMana():Number {
 			//Base mana

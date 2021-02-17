@@ -693,6 +693,9 @@ public class Creature extends Utils
 		public function maxWrath():Number {
 			return 0;
 		}
+		public function maxOverWrath():Number {
+			return 0;
+		}
 		public function maxSoulforce():Number {
 			return 0;
 		}
