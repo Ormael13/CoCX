@@ -90,6 +90,13 @@ public class GameSettings extends BaseContent {
 		else
 			outputText("Automatic Leveling: <font color=\"#800000\"><b>OFF</b></font>\n Leveling up is done manually.");
 		outputText("\n\n");
+
+		if (flags[kFLAGS.LVL_UP_FAST])
+			outputText("Instant Leveling: <font color=\"#008000\"><b>ON</b></font>\n Instantly levels you up to the highest possible given your xp.");
+		else
+			outputText("Instant Leveling: <font color=\"#800000\"><b>OFF</b></font>\n Individual levelling up, i.e. One level click at a time.");
+		outputText("\n\n");
+
 		outputText("<b>The following flags are not fully implemented yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n");
 		outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.");
 		outputText("\n\n");
@@ -127,6 +134,7 @@ public class GameSettings extends BaseContent {
 		addButton(6, "Auto level", toggleAutoLevel).hint("Toggles automatic leveling when you accumulate sufficient experience.");
 		if (player) addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
 		if (player) addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
+		addButton(10, "Fast Lvl", toggleInstaLvl).hint("Immediately level to highest possible from XP instead of spamming next.");
 		addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5) {
 			removeButton(8);
@@ -304,6 +312,13 @@ public class GameSettings extends BaseContent {
 	public function toggleAutoLevel():void {
 		if (flags[kFLAGS.AUTO_LEVEL] < 1) flags[kFLAGS.AUTO_LEVEL] = 1;
 		else flags[kFLAGS.AUTO_LEVEL] = 0;
+		settingsScreenGameSettings();
+	}
+
+	public function toggleInstaLvl():void {
+		//toggle Instant levelling
+		if (flags[kFLAGS.LVL_UP_FAST] == 0) flags[kFLAGS.LVL_UP_FAST] = 1;
+		else flags[kFLAGS.LVL_UP_FAST] = 0;
 		settingsScreenGameSettings();
 	}
 
