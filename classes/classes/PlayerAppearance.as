@@ -1,5 +1,6 @@
 package classes {
 import classes.BodyParts.*;
+import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
@@ -449,6 +450,11 @@ public class PlayerAppearance extends BaseContent {
 					break;
 				case VaginaClass.DEMONIC:
 					outputText(", unlike a normal pussy, feels and acts akin to a mouth that allows you to taste and savor the flavor of the cum injected within as if it landed on your tongue. Your sensitive walls are also prehensile, and you can control them to milk a cock just as well as your hand could.  Your dexterous, cum-hungry twat hides a ");
+					break;
+				case VaginaClass.NAGA:
+					outputText(" is deep and wide enought to insert your entire arm lenght inside and some more. Sometime you lament that most of your partners are no longer big enough to satisfy you");
+					if (player.lowerBody = LowerBody.NAGA) outputText("as your hot spot is now way further inside your lenghtly canal requiring quite a longer member to reach");
+							outputText(". Inside you have a ");
 					break;
 				default:
 					outputText(" hides a ");
