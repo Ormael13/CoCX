@@ -588,8 +588,10 @@
         <cell rect="1427,216,70,100" name="clotheLegs/merchantClotheBootsMale" dx="65" dy="72"/>
         <cell rect="1402,158,40,55" name="clotheLegs/TamamoeNoMaeKimonoLegs" dx="85" dy="121"/>
         <cell rect="776,12,45,25" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
+		<cell rect="728,12,45,25" name="armorNeck/fullplatetopFemaleLarge" dx="80" dy="63"/>
         <cell rect="833,12,45,25" name="armorNeck/fullplatetopMale" dx="80" dy="63"/>
 		<cell rect="1104,12,45,25" name="armorNeck/blackFullplatetopFemale" dx="80" dy="63"/>
+		<cell rect="1156,12,45,25" name="armorNeck/blackFullplatetopFemaleLarge" dx="80" dy="63"/>
         <cell rect="1161,12,45,25" name="armorNeck/blackFullplatetopMale" dx="80" dy="63"/>
         <cell rect="644,798,173,156" name="armorNeck/walpurgisClothes" dx="20" dy="12"/>
         <cell rect="992,798,173,156" name="armorNeck/wendigoCloak" dx="20" dy="12"/>
@@ -3919,9 +3921,21 @@
 				<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
 					<show part="armorNeck/fullplatetopMale"/>
 				</case>
-				<default>
+				<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+					<show part="armorNeck/fullplatetopMale"/>
+				</case>
+				<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
 					<show part="armorNeck/fullplatetopFemale"/>
-				</default>
+				</case>
+				<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+					<show part="armorNeck/fullplatetopFemale"/>
+				</case>
+				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+					<show part="armorNeck/fullplatetopFemaleLarge"/>
+				</case>
+				<default>
+					<show part="armorNeck/fullplatetopFemaleLarge"/>
+				</default>		
 			</switch>
 			</if>
 			<show part="armorChest/fullplatebottom"/>
@@ -3940,12 +3954,24 @@
 				<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
 					<show part="armorNeck/blackFullplatetopMale"/>
 				</case>
-				<default>
+				<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+					<show part="armorNeck/blackFullplatetopMale"/>
+				</case>
+				<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
 					<show part="armorNeck/blackFullplatetopFemale"/>
-				</default>
+				</case>
+				<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+					<show part="armorNeck/blackFullplatetopFemale"/>
+				</case>
+				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+					<show part="armorNeck/blackFullplatetopFemaleLarge"/>
+				</case>
+				<default>
+					<show part="armorNeck/blackFullplatetopFemaleLarge"/>
+				</default>		
 			</switch>
 			</if>
-			<show part="armorChest/fullplatebottom"/>
+			<show part="armorChest/blackFullplatebottom"/>
 			<if test="showArmClothing">
 				<show part="armorLeftArm/blackFullplateleftarm"/>
 				<show part="armorRightArm/blackFullplaterightarm"/>
