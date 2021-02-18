@@ -1221,7 +1221,7 @@ public class Combat extends BaseContent {
         if (SceneLib.urtaQuest.isUrta()) {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
         }
-        if ((player.weaponPerk == "" || player.weaponPerk == "Dual" || player.weaponPerk == "Hybrid") && !isWieldingRangedWeapon()) {
+        if ((player.weaponPerk == "" || player.weaponPerk == "Dual" || player.weaponPerk == "Hybrid")) {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
                 if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) {
                     if (player.hasPerk(PerkLib.HexaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
@@ -1668,7 +1668,7 @@ public class Combat extends BaseContent {
         var weapon:String = "";
         if (player.isInGoblinMech()) weapon = "saw blade";
 		if (player.vehicles == vehicles.HB_MECH) weapon = "power blade";
-        if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0 && !isWieldingRangedWeapon()) {
+        if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
             outputText("You attempt to attack, but at the last moment your mech wrenches away, preventing you from even coming close to landing a blow!  ");
             if (monster is ChaosChimera) outputText("Curse");
             else outputText("The kitsune's seals");
@@ -1682,12 +1682,12 @@ public class Combat extends BaseContent {
             return;
         }
         //Amily!
-        if (monster.hasStatusEffect(StatusEffects.Concentration) && !isWieldingRangedWeapon()) {
+        if (monster.hasStatusEffect(StatusEffects.Concentration)) {
             outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
             enemyAI();
             return;
         }
-        if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack) && !isWieldingRangedWeapon()) {
+        if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack)) {
             if (monster is SandTrap) {
                 outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
                 (monster as SandTrap).trapLevel(-4);
@@ -1701,7 +1701,7 @@ public class Combat extends BaseContent {
         if (player.playerIsBlinded()) {
             outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
         }
-        if (monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0 && !isWieldingRangedWeapon()) {
+        if (monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0) {
             if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind))
                 outputText("Blind basilisk can't use his eyes, so you can actually aim your strikes!  ");
             //basilisk counter attack (block attack, significant speed loss):
@@ -4411,7 +4411,7 @@ public class Combat extends BaseContent {
                 damage += (player.spe / 2);
                 damage += scalingBonusSpeed() * 0.10;
             }
-            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
             if (damage < 10) damage = 10;
             //Weapon addition!
             if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
@@ -8730,6 +8730,10 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.GreyMage) && player.lust < 30) player.lust = 30;
             if (player.findPerk(PerkLib.GreyMage) < 0 && player.lust < 50) player.lust = 50;
         }
+		if (player.hasPerk(PerkLib.AdrenalineRush)) {
+			player.wrath += 100;
+			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
+		}
         magic.applyAutocast();
         mspecials.applyAutocast2();
         //Adjust lust vulnerability in New Game+.
@@ -9427,7 +9431,7 @@ public class Combat extends BaseContent {
             fatigue(20, USEFATG_PHYSICAL);
             var damage:Number = player.str;
             damage += scalingBonusStrength() * 0.25;
-            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
             if (damage < 10) damage = 10;
             if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
             else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -9488,7 +9492,7 @@ public class Combat extends BaseContent {
             if (player.level >= 30) SAMulti += 1;
             if (player.level >= 36) SAMulti += 1;
             damage += scalingBonusStrength() * 0.25;
-            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
             if (damage < 10) damage = 10;
             if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
             else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));

@@ -1024,7 +1024,7 @@ use namespace CoC;
 		//Ribbon ERIBBON RIBBON
 		//Exotic-type weapons
 		public function isExoticTypeWeapon():Boolean {
-			return weapon == game.weapons.NORTHIP || weapon == game.weapons.FLYWHIS;
+			return weapon == game.weapons.NORTHIP || weapon == game.weapons.FLYWHIS || weapon == game.weapons.SDRILL || weapon == game.weapons.G_SHURI;
 		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
@@ -1039,7 +1039,7 @@ use namespace CoC;
 		//Throwable melee weapons
 		public function haveThrowableMeleeWeapon():Boolean
 		{
-			return weapon == game.weapons.FRTAXE || weapon == game.weapons.TDAGGER || weapon == game.weapons.CHAKRAM;//wrath large weapon that can be throwed or used in melee xD
+			return weapon == game.weapons.FRTAXE || weapon == game.weapons.TDAGGER || weapon == game.weapons.CHAKRAM || weapon == game.weapons.G_SHURI;//wrath large weapon that can be throwed or used in melee xD
 		}
 		//Cleave compatibile weapons
 		public function haveWeaponForCleave():Boolean
