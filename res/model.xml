@@ -587,12 +587,12 @@
         <cell rect="1345,216,70,100" name="clotheLegs/merchantClotheBoots" dx="65" dy="72"/>
         <cell rect="1427,216,70,100" name="clotheLegs/merchantClotheBootsMale" dx="65" dy="72"/>
         <cell rect="1402,158,40,55" name="clotheLegs/TamamoeNoMaeKimonoLegs" dx="85" dy="121"/>
-        <cell rect="776,12,45,25" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
-		<cell rect="728,12,45,25" name="armorNeck/fullplatetopFemaleLarge" dx="80" dy="63"/>
-        <cell rect="833,12,45,25" name="armorNeck/fullplatetopMale" dx="80" dy="63"/>
-		<cell rect="1104,12,45,25" name="armorNeck/blackFullplatetopFemale" dx="80" dy="63"/>
-		<cell rect="1156,12,45,25" name="armorNeck/blackFullplatetopFemaleLarge" dx="80" dy="63"/>
-        <cell rect="1161,12,45,25" name="armorNeck/blackFullplatetopMale" dx="80" dy="63"/>
+        <cell rect="776,12,45,27" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
+		<cell rect="728,12,45,27" name="armorNeck/fullplatetopFemaleLarge" dx="80" dy="63"/>
+        <cell rect="833,12,45,27" name="armorNeck/fullplatetopMale" dx="80" dy="63"/>
+		<cell rect="1104,12,45,27" name="armorNeck/blackFullplatetopFemale" dx="80" dy="63"/>
+		<cell rect="1056,12,45,27" name="armorNeck/blackFullplatetopFemaleLarge" dx="80" dy="63"/>
+        <cell rect="1161,12,45,27" name="armorNeck/blackFullplatetopMale" dx="80" dy="63"/>
         <cell rect="644,798,173,156" name="armorNeck/walpurgisClothes" dx="20" dy="12"/>
         <cell rect="992,798,173,156" name="armorNeck/wendigoCloak" dx="20" dy="12"/>
         <cell rect="1013,70,40,28" name="armorNeck/merchantClotheCape_fg" dx="85" dy="59"/>
