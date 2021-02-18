@@ -1142,6 +1142,7 @@ public function kaibaShopMainMenu2():void {
 			addButton(6, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
 			addButton(7, "T.C.Kimono", buyItem, armors.TCKIMO).hint("Tamamo no Mae Cursed Kimono - Slutty seduction 15, Count as naked, An unique find buy it while you can because this won't last forever!");
 			addButton(8, "I.B.Kimono", buyItem, armors.IBKIMO).hint("Inari Blessed Kimono - Slutty seduction 15, Count as naked, An unique find buy it while you can because this won't last forever!");
+			addButton(9, "C.B.G.Armor", buyItem, armors.CTBGUAR).hint("Centaur Blackguard Armor - Count as a light and heavy armor, An unique find buy it while you can because this won't last forever!");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(13, "-1-", kaibaShopMainMenuPage1);
