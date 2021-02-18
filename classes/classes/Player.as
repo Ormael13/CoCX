@@ -6375,7 +6375,7 @@ use namespace CoC;
 			Begin("Player","racialScore","naga");
 			var nagaCounter:Number = 0;
 			if (isNaga()) {
-				nagaCounter += 2;
+				nagaCounter += 3;
 				if (arms.type == Arms.HUMAN)
 					nagaCounter++;
 			}
@@ -6388,6 +6388,8 @@ use namespace CoC;
 			if (eyes.type == Eyes.SNAKE)
 				nagaCounter++;
 			if (ears.type == Ears.SNAKE)
+				nagaCounter++;
+			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
 				nagaCounter++;
 			if (findPerk(PerkLib.VenomGlands) >= 0)
 				nagaCounter++;
@@ -6422,7 +6424,7 @@ use namespace CoC;
 			Begin("Player","racialScore","gorgon");
 			var gorgonCounter:Number = 0;
 			if (isNaga())
-				gorgonCounter += 2;
+				gorgonCounter += 3;
 			if (tongue.type == Tongue.SNAKE)
 				gorgonCounter++;
 			if (faceType == Face.SNAKE_FANGS)
@@ -6439,6 +6441,8 @@ use namespace CoC;
 				gorgonCounter += 2;
 			if (hairType == Hair.GORGON)
 				gorgonCounter += 2;
+			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
+				gorgonCounter++;
 			if (findPerk(PerkLib.GorgonsEyes) >= 0)
 				gorgonCounter++;
 			if (findPerk(PerkLib.GorgonsEyesEvolved) >= 0)
@@ -6477,7 +6481,7 @@ use namespace CoC;
 			Begin("Player","racialScore","vouivre");
 			var vouivreCounter:Number = 0;
 			if (isNaga())
-				vouivreCounter += 2;
+				vouivreCounter += 3;
 			if (tongue.type == Tongue.SNAKE || tongue.type == Tongue.DRACONIC)
 				vouivreCounter++;
 			if (faceType == Face.SNAKE_FANGS)
@@ -6496,6 +6500,8 @@ use namespace CoC;
 				vouivreCounter++;
 			if (wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE)
 				vouivreCounter += 4;
+			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
+				vouivreCounter++;
 			if (vouivreCounter >= 11 && hasPerk(PerkLib.DragonFireBreath))
 				vouivreCounter++;
 			if (findPerk(PerkLib.DrakeLungs) >= 0)
@@ -6537,7 +6543,7 @@ use namespace CoC;
 			Begin("Player","racialScore","couatl");
 			var couatlCounter:Number = 0;
 			if (isNaga())
-				couatlCounter += 2;
+				couatlCounter += 3;
 			if (tongue.type == Tongue.SNAKE)
 				couatlCounter++;
 			if (faceType == Face.SNAKE_FANGS)
@@ -6554,6 +6560,8 @@ use namespace CoC;
 				couatlCounter++;
 			if (wings.type == Wings.FEATHERED_LARGE)
 				couatlCounter += 4;
+			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
+				couatlCounter++;
 			if (findPerk(PerkLib.VenomGlands) >= 0)
 				couatlCounter++;
 			if (findPerk(PerkLib.VenomGlandsEvolved) >= 0)
@@ -6632,6 +6640,8 @@ use namespace CoC;
 			if (wings.type == Wings.NONE)
 				hydraCounter += 2;
 			if (tallness >= 120)
+				hydraCounter++;
+			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
 				hydraCounter++;
 			if (findPerk(PerkLib.LizanRegeneration) >= 0)
 				hydraCounter++;

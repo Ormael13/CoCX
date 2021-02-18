@@ -4780,6 +4780,8 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         var changes:Number = 0;
         var changeLimit:Number = 1;
+        var temp:Number = 0;
+        var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         changeLimit += additionalTransformationChances();
@@ -4800,6 +4802,122 @@ public final class Mutations extends MutationsHelper {
             removeWings();
             changes++;
         }
+
+        //Snek Penis and Gina
+        if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
+            //Find the first non-lizzy dick
+            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+                //Stop loopahn when dick be found
+                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
+            }
+            outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ");
+            if (player.hasSheath()) outputText("sheath ");
+            else outputText("base ");
+            outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ");
+            if (player.cor < 33) outputText("horrifies you.");
+            else if (player.cor < 66) outputText("is a little strange for your tastes.");
+            else {
+                outputText("looks like it might be more fun to receive than use on others.  ");
+                if (player.hasVagina()) outputText("Maybe you could find someone else with one to ride?");
+                else outputText("Maybe you should test it out on someone and ask them exactly how it feels?");
+            }
+            outputText("  <b>You now have a bulbous, reptile-like cock.</b>");
+            //Actually xform it nau
+            if (player.hasSheath()) {
+                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+                if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
+            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //(CHANGE OTHER DICK)
+        //Requires 1 lizard cock, multiple cocks
+        if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\nA familiar tingle starts in your crotch, and before you can miss the show, you pull open your [armor].  As if operating on a cue, ");
+            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+                //Stop loopahn when dick be found
+                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
+            }
+            if (player.cockTotal() == 2) outputText("your other dick");
+            else outputText("another one of your dicks");
+            outputText(" starts to change into the strange reptilian shape you've grown familiar with.  It warps visibly, trembling and radiating pleasurable feelings back to you as the transformation progresses.  ");
+            if (player.cumQ() < 50) outputText("pre-cum oozes from the tip");
+            else if (player.cumQ() < 700) outputText("Thick pre-cum rains from the tip");
+            else outputText("A wave of pre-cum splatters on the ground");
+            outputText(" from the pleasure of the change.  In moments <b>you have a bulbous, lizard-like cock.</b>");
+            //(REMOVE SHEATH IF NECESSARY)
+            if (player.hasSheath()) {
+                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+                if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
+            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //-Grows second lizard dick if only 1 dick
+        if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\nA knot of pressure forms in your groin, forcing you off your [feet] as you try to endure it.  You examine the affected area and see a lump starting to bulge under your [skin.type], adjacent to your [cock].  The flesh darkens, turning purple");
+            if (player.hasCoat())
+                outputText(" and shedding " + player.coatColor);
+            outputText(" as the bulge lengthens, pushing out from your body.  Too surprised to react, you can only pant in pain and watch as the fleshy lump starts to take on a penis-like appearance.  <b>You're growing a second lizard-cock!</b>  It doesn't stop growing until it's just as long as its brother and the same shade of shiny purple.  A dribble of cum oozes from its tip, and you feel relief at last.");
+
+            player.createCock();
+            player.cocks[1].cockType = CockTypesEnum.LIZARD;
+            player.cocks[1].cockLength = player.cocks[0].cockLength;
+            player.cocks[1].cockThickness = player.cocks[0].cockThickness;
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //--Worms leave if 100% lizard dicks?
+        //Require mammals?
+        if (player.lizardCocks() == player.cockTotal() && changes < changeLimit && player.hasStatusEffect(StatusEffects.Infested)) {
+            outputText("\n\nLike rats from a sinking ship, worms escape from your body in a steady stream.  Surprisingly, the sensation is remarkably pleasant, similar to the pleasure of sexual release in a way.  Though they seem inexhaustible, the tiny, cum-slimed invertebrates slow to a trickle.  The larger worm-kin inside you stirs as if disturbed from a nap, coming loose from whatever moorings it had attached itself to in the interior of your form.  It slowly works its way up your urethra, stretching to an almost painful degree with every lurching motion.  Your dick bloats out around the base, stretched like the ovipositor on a bee-girl in order to handle the parasitic creature, but thankfully, the ordeal is a brief one.");
+            if (player.balls > 1) outputText("  The remaining " + num2Text(player.balls - 1) + " slither out the pre-stretched holes with ease, though the last one hangs from your tip for a moment before dropping to the ground.");
+            outputText("  The white creature joins its kin on the ground and slowly slithers away.  Perhaps they prefer mammals? In any event, <b>you are no longer infected with worms</b>.");
+            player.removeStatusEffect(StatusEffects.Infested);
+            changes++;
+        }
+
+        //[Increase Vaginal Capacity] - requires vagina, of course
+        if (player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 200) {
+            outputText("\n\nA gurgling sound issues from your abdomen, and you double over as a trembling ripple passes through your womb.  The flesh of your stomach roils as your internal organs begin to shift, and when the sensation finally passes, you are instinctively aware that your [vagina] is a bit deeper than it was before.");
+            if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) {
+                player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
+            }
+            player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5 + rand(10));
+        }
+
+        if (player.vaginas.length == 1) {
+            if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_DROOLING && changes < changeLimit && rand(2) == 0) {
+                temp = player.vaginas.length;
+                while (temp > 0) {
+                    temp--;
+                    if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) player.vaginas[temp].vaginalWetness++;
+                    changes++;
+                }
+                if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) {
+                    outputText("\n\nYour pussy feels hot and juicy, aroused and tender.  You cannot resist as your hands dive into your [vagina].  You quickly orgasm, squirting fluids everywhere.  <b>You are now a squirter</b>.");
+                    player.orgasm();
+                }
+                if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) {
+                    outputText("\n\nWow your wet down there just what on going on. When you put your hand to your " + vaginaDescript(temp) + ". Surprised you discover it's twice as more lubricated then before.");
+                }
+            }
+            if (player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina] has grown larger, in depth AND size.");
+                player.vaginas[0].vaginalLooseness++;
+                changes++;
+            }
+            if (player.lowerBody == LowerBody.NAGA && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nSomething fundamental changes in your " + vaginaDescript() + " as the insides begins to heat up. Out of curiosity you take a peak and notice amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. Intrigued you literally shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm. <b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>");
+                player.vaginaType(12);
+                player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
+                changes++;
+            }
+        }
+
         //Removes antennae
         if (player.antennae.type > Antennae.NONE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nThe muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead.  When it passes, you touch yourself and discover your [antennae] have vanished!");
@@ -4882,19 +5000,6 @@ public final class Mutations extends MutationsHelper {
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
 
-        //9e) Penis
-        /*
-         if(player.cockTotal() > 0) {
-         //(If multiple penis, insert "one of your")
-         outputText("\n\nAs the liquid takes effect, ");
-         //(if multicock)
-         if(player.cockTotal() > 1) outputText("one of ");
-         outputText("your [cocks] starts to throb painfully and swell to its full size.  With a horrifying ripping sensation, your cock splits down the middle, the pain causing you to black out momentarily.");
-         outputText("When you awaken, you quickly look down to see that where ");
-         //(if multicock)
-         if(player.cockTotal() > 1) outputText("one of ");
-         outputText("your [cocks] was, you now have two pointed reptilian cocks, still stiff and pulsing.");
-         }*/
         //Default change - blah
         if (changes == 0) outputText("\n\nRemakarbly, the snake-oil has no effect.  Should you really be surprised at snake-oil NOT doing anything?");
         player.refillHunger(5);
@@ -4910,6 +5015,8 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         var changes:Number = 0;
         var changeLimit:Number = 1;
+        var temp:Number = 0;
+        var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         changeLimit += additionalTransformationChances();
@@ -4940,6 +5047,122 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (blockingBodyTransformations()) changeLimit = 0;
+
+        //Snek Penis and Gina
+        if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
+            //Find the first non-lizzy dick
+            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+                //Stop loopahn when dick be found
+                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
+            }
+            outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ");
+            if (player.hasSheath()) outputText("sheath ");
+            else outputText("base ");
+            outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ");
+            if (player.cor < 33) outputText("horrifies you.");
+            else if (player.cor < 66) outputText("is a little strange for your tastes.");
+            else {
+                outputText("looks like it might be more fun to receive than use on others.  ");
+                if (player.hasVagina()) outputText("Maybe you could find someone else with one to ride?");
+                else outputText("Maybe you should test it out on someone and ask them exactly how it feels?");
+            }
+            outputText("  <b>You now have a bulbous, reptile-like cock.</b>");
+            //Actually xform it nau
+            if (player.hasSheath()) {
+                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+                if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
+            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //(CHANGE OTHER DICK)
+        //Requires 1 lizard cock, multiple cocks
+        if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\nA familiar tingle starts in your crotch, and before you can miss the show, you pull open your [armor].  As if operating on a cue, ");
+            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+                //Stop loopahn when dick be found
+                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
+            }
+            if (player.cockTotal() == 2) outputText("your other dick");
+            else outputText("another one of your dicks");
+            outputText(" starts to change into the strange reptilian shape you've grown familiar with.  It warps visibly, trembling and radiating pleasurable feelings back to you as the transformation progresses.  ");
+            if (player.cumQ() < 50) outputText("pre-cum oozes from the tip");
+            else if (player.cumQ() < 700) outputText("Thick pre-cum rains from the tip");
+            else outputText("A wave of pre-cum splatters on the ground");
+            outputText(" from the pleasure of the change.  In moments <b>you have a bulbous, lizard-like cock.</b>");
+            //(REMOVE SHEATH IF NECESSARY)
+            if (player.hasSheath()) {
+                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+                if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
+            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //-Grows second lizard dick if only 1 dick
+        if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\nA knot of pressure forms in your groin, forcing you off your [feet] as you try to endure it.  You examine the affected area and see a lump starting to bulge under your [skin.type], adjacent to your [cock].  The flesh darkens, turning purple");
+            if (player.hasCoat())
+                outputText(" and shedding " + player.coatColor);
+            outputText(" as the bulge lengthens, pushing out from your body.  Too surprised to react, you can only pant in pain and watch as the fleshy lump starts to take on a penis-like appearance.  <b>You're growing a second lizard-cock!</b>  It doesn't stop growing until it's just as long as its brother and the same shade of shiny purple.  A dribble of cum oozes from its tip, and you feel relief at last.");
+
+            player.createCock();
+            player.cocks[1].cockType = CockTypesEnum.LIZARD;
+            player.cocks[1].cockLength = player.cocks[0].cockLength;
+            player.cocks[1].cockThickness = player.cocks[0].cockThickness;
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //--Worms leave if 100% lizard dicks?
+        //Require mammals?
+        if (player.lizardCocks() == player.cockTotal() && changes < changeLimit && player.hasStatusEffect(StatusEffects.Infested)) {
+            outputText("\n\nLike rats from a sinking ship, worms escape from your body in a steady stream.  Surprisingly, the sensation is remarkably pleasant, similar to the pleasure of sexual release in a way.  Though they seem inexhaustible, the tiny, cum-slimed invertebrates slow to a trickle.  The larger worm-kin inside you stirs as if disturbed from a nap, coming loose from whatever moorings it had attached itself to in the interior of your form.  It slowly works its way up your urethra, stretching to an almost painful degree with every lurching motion.  Your dick bloats out around the base, stretched like the ovipositor on a bee-girl in order to handle the parasitic creature, but thankfully, the ordeal is a brief one.");
+            if (player.balls > 1) outputText("  The remaining " + num2Text(player.balls - 1) + " slither out the pre-stretched holes with ease, though the last one hangs from your tip for a moment before dropping to the ground.");
+            outputText("  The white creature joins its kin on the ground and slowly slithers away.  Perhaps they prefer mammals? In any event, <b>you are no longer infected with worms</b>.");
+            player.removeStatusEffect(StatusEffects.Infested);
+            changes++;
+        }
+
+        //[Increase Vaginal Capacity] - requires vagina, of course
+        if (player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 200) {
+            outputText("\n\nA gurgling sound issues from your abdomen, and you double over as a trembling ripple passes through your womb.  The flesh of your stomach roils as your internal organs begin to shift, and when the sensation finally passes, you are instinctively aware that your [vagina] is a bit deeper than it was before.");
+            if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) {
+                player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
+            }
+            player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5 + rand(10));
+        }
+
+        if (player.vaginas.length == 1) {
+            if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_DROOLING && changes < changeLimit && rand(2) == 0) {
+                temp = player.vaginas.length;
+                while (temp > 0) {
+                    temp--;
+                    if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) player.vaginas[temp].vaginalWetness++;
+                    changes++;
+                }
+                if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) {
+                    outputText("\n\nYour pussy feels hot and juicy, aroused and tender.  You cannot resist as your hands dive into your [vagina].  You quickly orgasm, squirting fluids everywhere.  <b>You are now a squirter</b>.");
+                    player.orgasm();
+                }
+                if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) {
+                    outputText("\n\nWow your wet down there just what on going on. When you put your hand to your " + vaginaDescript(temp) + ". Surprised you discover it's twice as more lubricated then before.");
+                }
+            }
+            if (player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina] has grown larger, in depth AND size.");
+                player.vaginas[0].vaginalLooseness++;
+                changes++;
+            }
+            if (player.lowerBody == LowerBody.NAGA && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nSomething fundamental changes in your " + vaginaDescript() + " as the insides begins to heat up. Out of curiosity you take a peak and notice amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. Intrigued you literally shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm. <b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>");
+                player.vaginaType(12);
+                player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
+                changes++;
+            }
+        }
+
         //Snake tounge
         if (player.tongue.type != Tongue.SNAKE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
             if (player.tongue.type == Tongue.HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.");
@@ -13311,7 +13534,7 @@ public final class Mutations extends MutationsHelper {
                     changes++;
                 }
                 if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && changes < changeLimit && rand(3) == 0) {
-                    outputText("\n\nSomething fundamental changes in your vagina(descript) as the insides begins to heat up. Out of curiosity you take a peak and notice amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. Intrigued you literally shove your entire fist inside and gasp as the sensitive rings instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm.");
+                    outputText("\n\nSomething fundamental changes in your "+vaginaDescript()+" as the insides begins to heat up. Out of curiosity you take a peak and notice amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. Intrigued you literally shove your entire fist inside and gasp as the sensitive rings instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm.");
                     player.vaginaType(12);
                     changes++;
                 }
