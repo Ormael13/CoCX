@@ -1406,13 +1406,13 @@
 					<if test="PlayerHasSanctuary">					
 						<if test="PlayerHasSanctuaryPure or PlayerHasSanctuaryCorrupt">
 							<if test="PlayerHasSanctuaryPure">
-								<show part="weapon/shieldHoly"/>
+								<show part="shield/shieldHoly"/>
 							</if>
 							<if test="PlayerHasRapierUnholy">
-								<show part="weapon/shieldUnholy"/>
+								<show part="shield/shieldUnholy"/>
 							</if>
 							<else>
-								<show part="weapon/shieldHoly"/>
+								<show part="shield/shieldGeneric"/>
 							</else>
 						</if>				
 						<else>
