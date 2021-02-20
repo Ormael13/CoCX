@@ -804,13 +804,29 @@ public class Combat extends BaseContent {
             buttons.add("Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
         }
         if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
+            bd = buttons.add("Flames of Love", flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
+            if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
+                bd.disable("You need more time before you can use Flames of Love again.");
+            } else if (player.lust < 50) {
+                bd.disable("Your current lust is too low.");
+            }
+        }/*
+        if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
             bd = buttons.add("Flames of Love", flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
             if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
                 bd.disable("You need more time before you can use Flames of Love again.");
             } else if (player.lust < 50) {
                 bd.disable("Your current lust is too low.");
             }
-        }
+        }*/
+        if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
+            bd = buttons.add("Icicles of Love", iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
+            if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
+                bd.disable("You need more time before you can use Icicles of Love again.");
+            } else if (player.lust < 50) {
+                bd.disable("Your current lust is too low.");
+            }
+        }/*
         if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
             bd = buttons.add("Icicles of Love", iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
             if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
@@ -818,7 +834,23 @@ public class Combat extends BaseContent {
             } else if (player.lust < 50) {
                 bd.disable("Your current lust is too low.");
             }
-        }
+        }*/
+		if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
+			bd = buttons.add("Storm of Sisterhood", stormOfSisterhood).hint("Use a little bit of wrath to transform it into storm of sisterhood that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			if (player.hasStatusEffect(StatusEffects.CooldownStormOfSisterhood)) {
+				bd.disable("You need more time before you can use Storm of Sisterhood again.");
+			} else if (player.wrath < 50) {
+				bd.disable("Your current wrath is too low.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
+			bd = buttons.add("Night of Brotherhood", nightOfBrotherhood).hint("Use a little bit of wrath to transform it into night of brotherhood that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			if (player.hasStatusEffect(StatusEffects.CooldownNightOfBrotherhood)) {
+				bd.disable("You need more time before you can use Night of Brotherhood again.");
+			} else if (player.wrath < 50) {
+				bd.disable("Your current wrath is too low.");
+			}
+		}
         if (player.hasStatusEffect(StatusEffects.KnowsHeavensDevourer)) {
             bd = buttons.add("Devourer", heavensDevourer).hint("Form a small sphere inscribed by symbols to drain from enemy a bit of lust and/or wrath.  \n\nWould go into cooldown after use for: 3 rounds");
             if (player.hasStatusEffect(StatusEffects.CooldownHeavensDevourer)) {
@@ -1216,7 +1248,7 @@ public class Combat extends BaseContent {
             if (monster as DriderIncubus) taintedMindAttackAttempt();
             return;
         }
-
+		
         clearOutput();
         if (SceneLib.urtaQuest.isUrta()) {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
@@ -4949,7 +4981,7 @@ public class Combat extends BaseContent {
             WrathWeaponsProc();
             heroBaneProc(damage);
             EruptingRiposte();
-            if (player.hasPerk(PerkLib.SwiftCasting) && player.isOneHandedWeapons() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
+            if (player.hasPerk(PerkLib.SwiftCasting) && player.isOneHandedWeapons() && player.isHavingFreeOffHand() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && player.mana >= spellCostWhite(40)) {
                     if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
                     else useMana(40, 5);
@@ -5384,8 +5416,7 @@ public class Combat extends BaseContent {
 			generatedWrath += damage / 10;
 			generatedWrath = Math.sqrt(generatedWrath);
 			generatedWrath = Math.round(generatedWrath);
-			if (generatedWrath > 0) player.wrath += generatedWrath;
-			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
+			if (generatedWrath > 0) EngineCore.WrathChange(generatedWrath, false);
 		}
 	}
 	
@@ -5393,8 +5424,7 @@ public class Combat extends BaseContent {
 		var addedWrath:Number = damage;
 		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath += damage;
 		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath += damage;
-		player.wrath += addedWrath;
-		if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
+		EngineCore.WrathChange(addedWrath, false);
 	}
 	
     public function WrathWeaponsProc():void {
@@ -5408,6 +5438,7 @@ public class Combat extends BaseContent {
         if (player.isLowGradeWrathWeapon()) {
             if (player.wrath >= 1) player.wrath -= 1;
             else {
+				
                 player.takePhysDamage(10);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
@@ -5418,6 +5449,7 @@ public class Combat extends BaseContent {
         if (player.isDualLowGradeWrathWeapon()) {
             if (player.wrath >= 2) player.wrath -= 2;
             else {
+				
                 player.takePhysDamage(20);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
@@ -5813,9 +5845,8 @@ public class Combat extends BaseContent {
 			 || monster.hasStatusEffect(StatusEffects.HemorrhageShield) || monster.hasStatusEffect(StatusEffects.Hemorrhage2))
 			 && player.hasPerk(PerkLib.YourPainMyPower)) {
 				player.HP += damage;
-				player.wrath += WrathGains;
 				if (player.HP > (player.maxHP() + player.maxOverHP())) player.HP = player.maxHP() + player.maxOverHP();
-				if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
+				EngineCore.WrathChange(WrathGains, false);
 			}
 			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
@@ -8622,7 +8653,7 @@ public class Combat extends BaseContent {
         var gainedwrath:Number = 0;
         if (combat) {
             var BonusWrathMult:Number = 1;
-            if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.2;
+            if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 0.2;
             gainedwrath += wrathregeneration2() * 2 * BonusWrathMult;
             if (player.hasStatusEffect(StatusEffects.Berzerking)) gainedwrath += 6 * BonusWrathMult;
             if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 6 * BonusWrathMult;
@@ -8638,8 +8669,10 @@ public class Combat extends BaseContent {
             EngineCore.WrathChange(gainedwrath, false);
         }
 		else {
-            gainedwrath += wrathregeneration2();
-            EngineCore.WrathChange(gainedwrath, false);
+			var LostWrathPerTick:Number = player.maxWrath();
+			LostWrathPerTick *= -0.6;
+			LostWrathPerTick = Math.round(LostWrathPerTick);
+            EngineCore.WrathChange(LostWrathPerTick, false);
         }
     }
 
@@ -8805,10 +8838,10 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.GreyMage) && player.lust < 30) player.lust = 30;
             if (player.findPerk(PerkLib.GreyMage) < 0 && player.lust < 50) player.lust = 50;
         }
-		/*if (player.hasPerk(PerkLib.WellspringOfLust)) {//place to make starting wraith higher due to perks
-            if (player.hasPerk(PerkLib.GreyMage) && player.lust < 30) player.lust = 30;
-            if (player.findPerk(PerkLib.GreyMage) < 0 && player.lust < 50) player.lust = 50;
-        }*/
+		if (player.hasPerk(PerkLib.AdrenalineRush)) {
+			player.wrath += 100;
+			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
+		}
         magic.applyAutocast();
         mspecials.applyAutocast2();
         //Adjust lust vulnerability in New Game+.
@@ -11644,13 +11677,14 @@ public class Combat extends BaseContent {
     public function flamesOfLove():void {
         clearOutput();
         var fireDMG:Number = 0;
-        fireDMG += Math.round(player.lust * 0.9);
-        player.createStatusEffect(StatusEffects.CooldownFlamesOfLove, 4, 0, 0, 0);
+        fireDMG += Math.round(player.lust * 0.3);
+        player.createStatusEffect(StatusEffects.CooldownFlamesOfLove, 2, 0, 0, 0);
         player.lust -= fireDMG;
-        fireDMG *= 2;
+        fireDMG *= 10;
+		if (monster.plural) fireDMG *= 2;
         outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing flames of love with enemy. Shortly after that lust starts to gather around your hands getting hotter and hotter till it envelop your hands in flames.\n\n");
         outputText("And with almost orgasmic joy, you sends a wave of flames toward " + monster.a + monster.short + " while mumbling about 'sharing the flames of love'.");
-		doDamage(fireDMG);
+		doFireDamage(fireDMG);
         outputText("\n\n");
         enemyAI();
     }
@@ -11658,13 +11692,44 @@ public class Combat extends BaseContent {
     public function iciclesOfLove():void {
         clearOutput();
         var iceDMG:Number = 0;
-        iceDMG += Math.round(player.lust * 0.9);
-        player.createStatusEffect(StatusEffects.CooldownIciclesOfLove, 4, 0, 0, 0);
+        iceDMG += Math.round(player.lust * 0.3);
+        player.createStatusEffect(StatusEffects.CooldownIciclesOfLove, 2, 0, 0, 0);
         player.lust -= iceDMG;
-        iceDMG *= 2;
+        iceDMG *= 10;
+        if (monster.plural) iceDMG *= 2;
         outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing icicles of love with enemy. Shortly after that lust starts to gather around your hands getting colder and colder till it envelop your hands in icicles.\n\n");
         outputText("And with almost orgasmic joy, you sends a wave of ice shards toward " + monster.a + monster.short + " while mumbling about 'sharing the icicles of love'.");
-		doDamage(iceDMG);
+		doIceDamage(iceDMG);
+        outputText("\n\n");
+        enemyAI();
+    }
+
+    public function stormOfSisterhood():void {
+        clearOutput();
+        var lightingDMG:Number = 0;
+        lightingDMG += Math.round(player.wrath * 0.3);
+        player.createStatusEffect(StatusEffects.CooldownStormOfSisterhood, 2, 0, 0, 0);
+        player.wrath -= lightingDMG;
+        lightingDMG *= 10;
+        if (monster.plural) lightingDMG *= 2;
+        outputText("You start concentrate on the wrath flowing in your body, your veins while imaging a joy of sharing storm of sisterhood with enemy. Shortly after that wrath starts to gather around your hands till it envelop your hands in ligthing.\n\n");
+        outputText("With joy, you sends a mass of ligthing toward " + monster.a + monster.short + " while mumbling about 'sharing the storm of sisterhood'.");
+		doLightingDamage(lightingDMG);
+        outputText("\n\n");
+        enemyAI();
+    }
+
+    public function nightOfBrotherhood():void {
+        clearOutput();
+        var darknessDMG:Number = 0;
+        darknessDMG += Math.round(player.wrath * 0.3);
+        player.createStatusEffect(StatusEffects.CooldownNightOfBrotherhood, 2, 0, 0, 0);
+        player.wrath -= darknessDMG;
+        darknessDMG *= 10;
+        if (monster.plural) darknessDMG *= 2;
+        outputText("You start concentrate on the wrath flowing in your body, your veins while imaging a joy of sharing night of brotherhood with enemy. Shortly after that wrath starts to gather around your hands till it envelop your hands in darkness.\n\n");
+        outputText("With joy, you sends a mass of darkness toward " + monster.a + monster.short + " while mumbling about 'sharing the night of brotherhood'.");
+		doDarknessDamage(darknessDMG);
         outputText("\n\n");
         enemyAI();
     }

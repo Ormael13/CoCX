@@ -457,29 +457,29 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<i>Sensitivity Minimum:</i> " + mins.sens + "\n";
 		combatStats += "<i>Corruption Minimum:</i> " + mins.cor + "\n";
 		combatStats += "\n";
-		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
-		if (vthirst != null) {
-			combatStats += "<b>Vampire Thirst:</b> " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
-			if (vthirst.currentBoost > 0) combatStats += "(+" + vthirst.currentBoost + " to str / spe / int / lib)";
-			combatStats += "\n\n";
-		}
-		combatStats += "<b>Minimum HP (reaching it mean HP based defeat):</b> " + player.minHP() + "\n";
-		combatStats += "<b>Over HP (HP amount that can be reached beyond default 100% of Health bar):</b> " + (player.maxOverHP() - player.maxHP()) + "\n";
 		combatStats += "<b>HP Regeneration (%):</b> ~ " + combat.PercentBasedRegeneration() + " % / " + combat.maximumRegeneration() + " % (turn), ~ " + combat.PercentBasedRegeneration() * 2 + " % / " + combat.maximumRegeneration() * 2 + " % (hour)\n";
 		combatStats += "<b>HP Regeneration (Total):</b> ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) + " HP /  turn, ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) * 2 + " HP /  hour\n";
 		combatStats += "<b>Fatigue Recovery:</b> " + combat.fatigueRecovery2() + " / turn\n";
-		combatStats += "<b>Wrath Generation:</b> " + combat.wrathregeneration2() * 2 + " / turn, " + combat.wrathregeneration2() + " / hour\n";
-		combatStats += "<b>Maximum Safe Wrath (Wrath amount that will not hinder PC ability to perfrom mental tasks like using spells or using magical soulskills):</b> " + player.maxSafeWrath() + "\n";
-		combatStats += "<b>Over Wrath (Wrath amount that can be reached beyond default 100% of Wrath bar):</b> " + (player.maxOverWrath() - player.maxWrath()) + "\n";
+		combatStats += "<b>Wrath Generation:</b> " + combat.wrathregeneration2() * 2 + " / turn, - 60 % / hour\n";
 		combatStats += "<b>Mana Regeneration:</b> " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) + " / turn, " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) * 2 + " / hour\n";
 		combatStats += "<b>Soulforce Regeneration:</b> " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) + " / turn, " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) * 2 + " / hour\n";
-
+		combatStats += "\n";
+		combatStats += "<b>Minimum HP (reaching it mean HP based defeat):</b> " + player.minHP() + "\n";
+		combatStats += "<b>Over HP (HP amount that can be reached beyond default 100% of Health bar):</b> " + (player.maxOverHP() - player.maxHP()) + "\n";
+		combatStats += "<b>Maximum Safe Wrath (treshold after which spells and magic specials are unaccesable):</b> " + player.maxSafeWrath() + "\n";
+		combatStats += "<b>Over Wrath (Wrath amount that can be reached beyond default 100% of Wrath bar):</b> " + (player.maxOverWrath() - player.maxWrath()) + "\n";
 		combatStats += "\n";
 		combatStats += "<b>Base evasion:</b> " + player.getEvasionChance() + " %\n";
 		combatStats += "<b>Base block chance:</b> " + combat.combatBlock2() + " %\n";
 		combatStats += "<b>Base parry chance:</b> " + combat.combatParry2() + " %\n";
 		combatStats += "<b>Base physical attacks critical chance:</b> " + combat.combatPhysicalCritical() + " %\n";
 		combatStats += "<b>Base magical attacks critical chance:</b> " + combat.combatMagicalCritical() + " %\n";
+		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+		if (vthirst != null) {
+			combatStats += "<b>Vampire Thirst:</b> " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
+			if (vthirst.currentBoost > 0) combatStats += "(+" + vthirst.currentBoost + " to str / spe / int / lib)";
+			combatStats += "\n";
+		}
 
 		if (combatStats != "")
 			outputText("\n<b><u>Combat Stats</u></b>\n" + combatStats);
@@ -1836,6 +1836,13 @@ public class PlayerInfo extends BaseContent {
 				}
 				//addButton(3, "MBFBP", ).hint("Choose the 'My Blood for Blood Puppies' super perk. ");
 				//addButtonDisabled(3, "MBFBP", "Soon.");
+				//addButton(4, "", ).hint("Choose the '' super perk. ");
+				//addButtonDisabled(4, "", "Soon.");
+				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(5, "HJ:A", "You already have this super perk.");
+				else {
+					if (player.freeHiddenJobsSlots() > 0) addButton(5, "HJ:A", perkHiddenJobBloodDemon).hint("Choose the 'Hidden Job: Asura' super perk. You've trained in arts of asuras. Beings that reached mastery of unleashing wrath to great effect. (+10% of OverMax Wrath)");//, -10% blood spells cost, +20% blood spells power
+					else addButtonDisabled(5, "HJ:A", "You do not have a free slot for this hidden job.");
+				}
 			}
 			else {
 				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this perk.");
@@ -1846,6 +1853,10 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(2, "YPMP", "You do not have enough super perk points to obtain this perk.");
 				//if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) addButtonDisabled(3, "MBFBP", "You already have this perk.");
 				//else addButtonDisabled(3, "MBFBP", "You do not have enough super perk points to obtain this perk.");
+				//if (player.hasPerk(PerkLib.)) addButtonDisabled(4, "", "You already have this perk.");
+				//else addButtonDisabled(4, "", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(5, "HJ:A", "You already have this perk.");
+				else addButtonDisabled(5, "HJ:A", "You do not have enough super perk points to obtain this perk.");
 			}
 			//10 -> page + 1 button
 			//11 -> page - 1 button
@@ -1886,6 +1897,13 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(PerkLib.YourPainMyPower,0,0,0,0);
 		clearOutput();
 		outputText("You gained Your Pain My Power super perk.");
+		doNext(curry(superPerkBuyMenu, 1));
+	}
+	private function perkHiddenJobAsura():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.HiddenJobAsura,0,0,0,0);
+		clearOutput();
+		outputText("You gained Hidden Job: Asura super perk.");
 		doNext(curry(superPerkBuyMenu, 1));
 	}
 }

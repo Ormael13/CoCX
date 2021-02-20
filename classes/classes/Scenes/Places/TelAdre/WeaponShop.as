@@ -22,7 +22,7 @@ public class WeaponShop extends Shop {
         addButton(6, weapons.MACE.shortName, confirmBuy, weapons.MACE);
         addButton(7, weapons.FLAIL.shortName, confirmBuy, weapons.FLAIL);
 		addButton(8, weapons.HALBERD.shortName, confirmBuy, weapons.HALBERD);
-		addButton(10, weapons.G_SHURI.shortName, confirmBuy, weapons.G_SHURI);
+		addButton(9, weapons.G_SHURI.shortName, confirmBuy, weapons.G_SHURI);
 		addButton(10, weapons.DSWORD_.shortName, confirmBuy, weapons.DSWORD_);
         addButton(11, weapons.D_WHAM_.shortName, confirmBuy, weapons.D_WHAM_);
         if (player.hasKeyItem("Sheila's Lethicite") >= 0 || flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] > 0) {

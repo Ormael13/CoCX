@@ -988,8 +988,9 @@ import classes.Items.JewelryLib;
 		}
 		public override function maxOverWrath():Number {
 			var max1:Number = maxWrath();
-			//var max2:Number = 2;
-			//max1 *= max2;
+			var max2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobAsura)) max2 += 0.1;
+			max1 *= max2;
 			max1 = Math.round(max1);
 			if (max1 > 69999) max1 = 69999;
 			return max1;
@@ -997,7 +998,7 @@ import classes.Items.JewelryLib;
 		public function maxSafeWrath():Number {
 			var max1:Number = maxWrath();
 			var max2:Number = 1;
-			max1 -= 1;
+			if (!hasPerk(PerkLib.HiddenJobAsura)) max1 -= 1;
 			max1 *= max2;
 			return max1;
 		}

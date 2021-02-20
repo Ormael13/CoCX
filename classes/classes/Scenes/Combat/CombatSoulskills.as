@@ -149,19 +149,51 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
+			bd = buttons.add("Flames of Love", combat.flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
+			if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
+				bd.disable("You need more time before you can use Flames of Love again.");
+			} else if (player.lust < 50) {
+				bd.disable("Your current lust is too low.");
+			}
+		}/*
+		if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
 			bd = buttons.add("Flames of Love", combat.flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
 			if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
 				bd.disable("You need more time before you can use Flames of Love again.");
 			} else if (player.lust < 50) {
 				bd.disable("Your current lust is too low.");
 			}
-		}
+		}*/
+		if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
+			bd = buttons.add("Icicles of Love", combat.iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
+			if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
+				bd.disable("You need more time before you can use Icicles of Love again.");
+			} else if (player.lust < 50) {
+				bd.disable("Your current lust is too low.");
+			}
+		}/*
 		if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
 			bd = buttons.add("Icicles of Love", combat.iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
 			if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
 				bd.disable("You need more time before you can use Icicles of Love again.");
 			} else if (player.lust < 50) {
 				bd.disable("Your current lust is too low.");
+			}
+		}*/
+		if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
+			bd = buttons.add("Storm of Sisterhood", combat.stormOfSisterhood).hint("Use a little bit of wrath to transform it into storm of sisterhood that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			if (player.hasStatusEffect(StatusEffects.CooldownStormOfSisterhood)) {
+				bd.disable("You need more time before you can use Storm of Sisterhood again.");
+			} else if (player.wrath < 50) {
+				bd.disable("Your current wrath is too low.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
+			bd = buttons.add("Night of Brotherhood", combat.nightOfBrotherhood).hint("Use a little bit of wrath to transform it into night of brotherhood that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			if (player.hasStatusEffect(StatusEffects.CooldownNightOfBrotherhood)) {
+				bd.disable("You need more time before you can use Night of Brotherhood again.");
+			} else if (player.wrath < 50) {
+				bd.disable("Your current wrath is too low.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeavensDevourer)) {
@@ -1703,4 +1735,4 @@ public class CombatSoulskills extends BaseCombatContent {
 	 else enemyAI();
 	 }*/
 }
-}
+}

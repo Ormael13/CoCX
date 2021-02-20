@@ -763,7 +763,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.soulforce += 50;
 					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 				}
-				if (player.perkv1(PerkLib.Metamorph) < 18) player.addPerkValue(PerkLib.Metamorph, 1, 1)
+				if (player.hasPerk(PerkLib.Metamorph) && player.perkv1(PerkLib.Metamorph) < 18) player.addPerkValue(PerkLib.Metamorph, 1, 1)
 				//Daily regeneration of mana for non mages
 				if (player.findPerk(PerkLib.JobSorcerer) < 0 && player.findPerk(PerkLib.JobElementalConjurer) < 0 && (player.mana < player.maxMana())) {
 					player.mana += 100;
