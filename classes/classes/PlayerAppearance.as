@@ -453,7 +453,7 @@ public class PlayerAppearance extends BaseContent {
 					break;
 				case VaginaClass.NAGA:
 					outputText(" is deep and wide enought to insert your entire arm lenght inside and some more. Sometime you lament that most of your partners are no longer big enough to satisfy you");
-					if (player.lowerBody = LowerBody.NAGA) outputText("as your hot spot is now way further inside your lenghtly canal requiring quite a longer member to reach");
+					if (player.lowerBody == LowerBody.NAGA) outputText("as your hot spot is now way further inside your lenghtly canal requiring quite a longer member to reach");
 							outputText(". Inside you have a ");
 					break;
 				default:

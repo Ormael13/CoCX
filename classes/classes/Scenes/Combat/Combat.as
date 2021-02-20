@@ -5390,7 +5390,10 @@ public class Combat extends BaseContent {
 	}
 	
 	public function WrathGenerationPerHit2(damage:int = 0):void {
-		player.wrath += damage;
+		var addedWrath:Number = damage;
+		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath += damage;
+		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath += damage;
+		player.wrath += addedWrath;
 		if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
 	}
 	

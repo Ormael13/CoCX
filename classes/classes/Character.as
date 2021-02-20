@@ -639,7 +639,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.EpicDiehard) >= 0) {
 				min -= maxHP() * 0.08;
 				min -= (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			}//nastepny diehard to 5% i 1000
+			}//nastepny diehard to 10% i 1000 a potem 12% i 1200
 			if (findPerk(PerkLib.LizanMarrowFinalForm) >= 0) min -= maxHP() * 0.05;
 			if (findPerk(PerkLib.OrcAdrenalGlandsFinalForm) >= 0 || game.player.orcScore() >= 11) {
 				if (findPerk(PerkLib.Ferocity) >= 0) min -= maxHP() * 0.07;
@@ -988,13 +988,16 @@ import classes.Items.JewelryLib;
 		}
 		public override function maxOverWrath():Number {
 			var max1:Number = maxWrath();
-			var max2:Number = 2;
-			max1 *= max2;
+			//var max2:Number = 2;
+			//max1 *= max2;
+			max1 = Math.round(max1);
+			if (max1 > 69999) max1 = 69999;
 			return max1;
 		}
 		public function maxSafeWrath():Number {
 			var max1:Number = maxWrath();
 			var max2:Number = 1;
+			max1 -= 1;
 			max1 *= max2;
 			return max1;
 		}
