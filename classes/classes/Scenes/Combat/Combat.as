@@ -127,6 +127,16 @@ public class Combat extends BaseContent {
         return player.GauntletExpToLevelUp();
     }
 
+	public function masteryDaggerLevel():Number {
+        return player.masteryDaggerLevel;
+    }
+    public function maxDaggerLevel():Number {
+        return player.maxDaggerLevel();
+    }
+    public function DaggerExpToLevelUp():Number {
+        return player.DaggerExpToLevelUp();
+    }
+
     public function masterySwordLevel():Number {
         return player.masterySwordLevel;
     }
@@ -177,14 +187,14 @@ public class Combat extends BaseContent {
         return player.SpearExpToLevelUp();
     }
 
-	public function masteryDaggerLevel():Number {
-        return player.masteryDaggerLevel;
+	public function masteryWhipLevel():Number {
+        return player.masteryWhipLevel;
     }
-    public function maxDaggerLevel():Number {
-        return player.maxDaggerLevel();
+    public function maxWhipLevel():Number {
+        return player.maxWhipLevel();
     }
-    public function DaggerExpToLevelUp():Number {
-        return player.DaggerExpToLevelUp();
+    public function WhipExpToLevelUp():Number {
+        return player.WhipExpToLevelUp();
     }
 
 	public function masteryExoticLevel():Number {
@@ -195,6 +205,36 @@ public class Combat extends BaseContent {
     }
     public function ExoticExpToLevelUp():Number {
         return player.ExoticExpToLevelUp();
+    }
+
+	public function masteryArcheryLevel():Number {
+        return player.masteryArcheryLevel;
+    }
+    public function maxArcheryLevel():Number {
+        return player.maxArcheryLevel();
+    }
+    public function ArcheryExpToLevelUp():Number {
+        return player.ArcheryExpToLevelUp();
+    }
+
+	public function masteryThrowingLevel():Number {
+        return player.masteryThrowingLevel;
+    }
+    public function maxThrowingLevel():Number {
+        return player.maxThrowingLevel();
+    }
+    public function ThrowingExpToLevelUp():Number {
+        return player.ThrowingExpToLevelUp();
+    }
+
+	public function masteryFirearmsLevel():Number {
+        return player.masteryFirearmsLevel;
+    }
+    public function maxFirearmsLevel():Number {
+        return player.maxFirearmsLevel();
+    }
+    public function FirearmsExpToLevelUp():Number {
+        return player.FirearmsExpToLevelUp();
     }
 
 	public function dualWSLevel():Number {
@@ -2346,6 +2386,7 @@ public class Combat extends BaseContent {
 		if (player.isDuelingTypeWeapon()) accmod += Math.round((masteryDuelingSwordLevel() - 1) / 2);
 		if (player.isSpearTypeWeapon()) accmod += Math.round((masterySpearLevel() - 1) / 2);
 		if (player.isDaggerTypeWeapon()) accmod += Math.round((masteryDaggerLevel() - 1) / 2);
+		if (player.isWhipTypeWeapon()) accmod += Math.round((masteryWhipLevel() - 1) / 2);
 		if (player.isExoticTypeWeapon()) accmod += Math.round((masteryExoticLevel() - 1) / 2);
 		if (player.weaponPerk == "Dual Small") accmod += Math.round((dualWSLevel() - 1) / 2);
 		if (player.weaponPerk == "Dual") accmod += Math.round((dualWNLevel() - 1) / 2);
@@ -2400,38 +2441,44 @@ public class Combat extends BaseContent {
 		}
         return dmgmdwmodpenalty;
 	}
-
-    public function arrowsAccuracy():Number {
-        var accmod:Number = 80;
-        if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) accmod += 40;
+	
+	public function baseRangeAccuracy():Number {
+		var baccmod:Number = 80;
+        if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) baccmod += 40;
         if (player.hasPerk(PerkLib.Accuracy1)) {
-            accmod += player.perkv1(PerkLib.Accuracy1);
+            baccmod += player.perkv1(PerkLib.Accuracy1);
         }
         if (player.hasPerk(PerkLib.Accuracy2)) {
-            accmod -= player.perkv1(PerkLib.Accuracy2);
+            baccmod -= player.perkv1(PerkLib.Accuracy2);
         }
         if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
-            if (player.statusEffectv1(StatusEffects.Kelt) <= 100) accmod += player.statusEffectv1(StatusEffects.Kelt);
-            else accmod += 100;
+            if (player.statusEffectv1(StatusEffects.Kelt) <= 100) baccmod += player.statusEffectv1(StatusEffects.Kelt);
+            else baccmod += 100;
         }
         if (player.statusEffectv1(StatusEffects.Kindra) > 0) {
-            if (player.statusEffectv1(StatusEffects.Kindra) <= 150) accmod += player.statusEffectv1(StatusEffects.Kindra);
-            else accmod += 150;
+            if (player.statusEffectv1(StatusEffects.Kindra) <= 150) baccmod += player.statusEffectv1(StatusEffects.Kindra);
+            else baccmod += 150;
         }
         if (player.inte > 50 && player.hasPerk(PerkLib.JobHunter)) {
-            if (player.inte <= 150) accmod += (player.inte - 50);
-            else accmod += 100;
+            if (player.inte <= 150) baccmod += (player.inte - 50);
+            else baccmod += 100;
         }
-        if (player.hasPerk(PerkLib.CarefulButRecklessAimAndShooting)) accmod += 60;
+        if (player.hasPerk(PerkLib.CarefulButRecklessAimAndShooting)) baccmod += 60;
         if (player.isFlying()) {
-            if (player.jewelryName != "Ring of deadeye aim") accmod -= 100;
-            if (player.hasPerk(PerkLib.Aerobatics)) accmod += 40;
-            if (player.hasPerk(PerkLib.AdvancedAerobatics)) accmod += 100;
+            if (player.jewelryName != "Ring of deadeye aim") baccmod -= 100;
+            if (player.hasPerk(PerkLib.Aerobatics)) baccmod += 40;
+            if (player.hasPerk(PerkLib.AdvancedAerobatics)) baccmod += 100;
         }
-		if (player.hasPerk(PerkLib.TrueSeeing)) accmod += 40;
-        if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
-        if (player.jewelryName == "Ring of deadeye aim") accmod += 40;
-        if (player.weaponRangeName == "Touhouna M3") accmod -= 20;
+		if (player.hasPerk(PerkLib.TrueSeeing)) baccmod += 40;
+        if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) baccmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
+        if (player.jewelryName == "Ring of deadeye aim") baccmod += 40;
+		return baccmod;
+	}
+
+    public function arrowsAccuracy():Number {
+        var accmod:Number = 0;
+		accmod += baseRangeAccuracy();
+		accmod += Math.round((masteryArcheryLevel() - 1) / 2);
         return accmod;
     }
 
@@ -2444,12 +2491,21 @@ public class Combat extends BaseContent {
         return accrmodpenalty;
     }
 
+    public function throwingAccuracy():Number {
+        var taccmod:Number = 0;
+		taccmod += arrowsAccuracy();
+		taccmod += Math.round((masteryThrowingLevel() - 1) / 2);
+        return taccmod;
+    }
+
     public function firearmsAccuracy():Number {
         var faccmod:Number = 0;
         faccmod += arrowsAccuracy();
         if (player.hasKeyItem("Gun Scope") >= 0) faccmod += 40;
         if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) faccmod += 60;
         if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) faccmod += 80;
+		faccmod += Math.round((masteryFirearmsLevel() - 1) / 2);
+        if (player.weaponRangeName == "Touhouna M3") faccmod -= 20;
 		if (player.weaponRangePerk == "Dual Firearms") faccmod += Math.round((dualWFLevel() - 1) / 2);
 		faccmod += firearmsDualWieldAccuracyPenalty();
         return faccmod;
@@ -2733,6 +2789,7 @@ public class Combat extends BaseContent {
 					if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.05;
 				}
 			}
+			damage *= (1 + (0.01 * masteryArcheryLevel()));
             if (damage == 0) {
                 if (monster.inte > 0) {
                     outputText(monster.capitalA + monster.short + " shrugs as the " + ammoWord + " bounces off them harmlessly.\n\n");
@@ -2832,7 +2889,11 @@ public class Combat extends BaseContent {
                 else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
                 else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
                 else doDamage(damage, true, true);
-                if (crit) outputText(" <b>*Critical Hit!*</b>");
+                if (crit) {
+					outputText(" <b>*Critical Hit!*</b>");
+					archeryXP(1);
+				}
+				archeryXP(1);
                 outputText("\n\n");
                 checkAchievementDamage(damage);
                 flags[kFLAGS.ARROWS_SHOT]++;
@@ -2851,6 +2912,8 @@ public class Combat extends BaseContent {
                     else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
                     else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
                     else doDamage(damage, true, true);
+					if (crit) archeryXP(1);
+					archeryXP(1);
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
 				WrathGenerationPerHit(damage);
@@ -2949,9 +3012,7 @@ public class Combat extends BaseContent {
                 }
                 outputText("\n");
             }
-            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < 10) {
-                outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
-            }
+            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < 10) outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
             if (player.weaponRangeName == "Hodr's bow" && !monster.hasStatusEffect(StatusEffects.Blind)) monster.createStatusEffect(StatusEffects.Blind, 1, 0, 0, 0);
             outputText("\n");
             if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
@@ -3010,7 +3071,7 @@ public class Combat extends BaseContent {
     public function throwWeapon():void {
         var fc:Number = oneThrowTotalCost();
         var accRange:Number = 0;
-        accRange += (arrowsAccuracy() / 2);
+        accRange += (throwingAccuracy() / 2);
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
         if (player.hasPerk(PerkLib.PhantomShooting))
         {
@@ -3047,6 +3108,7 @@ public class Combat extends BaseContent {
                 else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
                 else damage = Math.round(damage * 1.4);
             }
+			damage *= (1 + (0.01 * masteryThrowingLevel()));
             if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
                 //if (damage == 0) {
                 if (monster.inte > 0) {
@@ -3142,7 +3204,11 @@ public class Combat extends BaseContent {
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
                 doDamage(damage, true, true);
-                if (crit) outputText(" <b>*Critical Hit!*</b>");
+                if (crit) {
+					outputText(" <b>*Critical Hit!*</b>");
+					throwingXP(1);
+				}
+				throwingXP(1);
                 outputText("\n\n");
                 doNext(endHpVictory);
                 return;
@@ -3150,6 +3216,8 @@ public class Combat extends BaseContent {
                 if (!MSGControll) {
                     outputText(".  It's clearly very painful. ");
                     doDamage(damage, true, true);
+					if (crit) throwingXP(1);
+					throwingXP(1);
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
@@ -3306,6 +3374,7 @@ public class Combat extends BaseContent {
                     }
 				}
             }
+			damage *= (1 + (0.01 * masteryFirearmsLevel()));
 			if (player.weaponRangePerk == "Dual Firearms") damage *= (1 + (0.01 * dualWFLevel()));
             if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
                 //if ((damage == 0) ){
@@ -3406,7 +3475,11 @@ public class Combat extends BaseContent {
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
                 doDamage(damage, true, true);
-                if (crit) outputText(" <b>*Critical Hit!*</b>");
+                if (crit) {
+					outputText(" <b>*Critical Hit!*</b>");
+					firearmsXP(1);
+				}
+				firearmsXP(1);
 				if (player.weaponRangePerk == "Dual Firearms") {
 					if (crit) dualWieldFirearmsXP(1);
 					dualWieldFirearmsXP(1);
@@ -3418,6 +3491,8 @@ public class Combat extends BaseContent {
                 if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
                     outputText(".  It's clearly very painful. ");
                     doDamage(damage, true, true);
+					if (crit) firearmsXP(1);
+					firearmsXP(1);
 					if (player.weaponRangePerk == "Dual Firearms") {
 						if (crit) dualWieldFirearmsXP(1);
 						dualWieldFirearmsXP(1);
@@ -3427,7 +3502,11 @@ public class Combat extends BaseContent {
                         outputText(".  It's clearly very painful. ");
                         doDamage(damage, true, true);
                     }
-                    if (crit) outputText(" <b>*Critical Hit!*</b>");
+                    if (crit) {
+						outputText(" <b>*Critical Hit!*</b>");
+						firearmsXP(1);
+					}
+					firearmsXP(1);
 					if (player.weaponRangePerk == "Dual Firearms") {
 						if (crit) dualWieldFirearmsXP(1);
 						dualWieldFirearmsXP(1);
@@ -4519,6 +4598,7 @@ public class Combat extends BaseContent {
 			if (player.isDuelingTypeWeapon()) damage *= (1 + (0.01 * masteryDuelingSwordLevel()));
 			if (player.isSpearTypeWeapon()) damage *= (1 + (0.01 * masterySpearLevel()));
 			if (player.isDaggerTypeWeapon()) damage *= (1 + (0.01 * masteryDaggerLevel()));
+			if (player.isWhipTypeWeapon()) damage *= (1 + (0.01 * masteryWhipLevel()));
 			if (player.isExoticTypeWeapon()) damage *= (1 + (0.01 * masteryExoticLevel()));
 			if (player.weaponPerk == "Dual Small") damage *= (1 + (0.01 * dualWSLevel()));
 			if (player.weaponPerk == "Dual") damage *= (1 + (0.01 * dualWNLevel()));
@@ -4780,6 +4860,7 @@ public class Combat extends BaseContent {
 				if (player.isDuelingTypeWeapon()) duelingswordXP(meleeMasteryEXPgains);
 				if (player.isSpearTypeWeapon()) spearXP(meleeMasteryEXPgains);
 				if (player.isDaggerTypeWeapon()) daggerXP(meleeMasteryEXPgains);
+				if (player.isWhipTypeWeapon()) whipXP(meleeMasteryEXPgains);
 				if (player.isExoticTypeWeapon()) exoticXP(meleeMasteryEXPgains);
 				if (player.weaponPerk == "Dual Small") dualWieldSmallXP(meleeMasteryEXPgains);
 				if (player.weaponPerk == "Dual") dualWieldNormalXP(meleeMasteryEXPgains);
@@ -9221,10 +9302,31 @@ public class Combat extends BaseContent {
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.daggerXP(XP);
         player.daggerXP(XP);
     }
+	public function whipXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.whipXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.whipXP(XP);
+        player.whipXP(XP);
+    }
 	public function exoticXP(XP:Number = 0):void {
         if (player.humanScore() == player.humanMaxScore()) player.exoticXP(XP);
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.exoticXP(XP);
         player.exoticXP(XP);
+    }
+	
+	public function archeryXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.archeryXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.archeryXP(XP);
+        player.archeryXP(XP);
+    }
+	public function throwingXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.throwingXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.throwingXP(XP);
+        player.throwingXP(XP);
+    }
+	public function firearmsXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.firearmsXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.firearmsXP(XP);
+        player.firearmsXP(XP);
     }
 
 	public function dualWieldSmallXP(XP:Number = 0):void {

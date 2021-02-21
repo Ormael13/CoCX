@@ -4673,10 +4673,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		monster.teased(monster.lustVuln * lustdamage, false);
 		if (crit) outputText(" <b>Critical!</b>");
 		monster.statStore.addBuffObject({spe:-10}, "Poison",{text:"Poison"});
-		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
-		{
-			monster.addStatusValue(StatusEffects.NagaVenom,3,5);
-		}
+		if (monster.hasStatusEffect(StatusEffects.NagaVenom)) monster.addStatusValue(StatusEffects.NagaVenom,3,5);
 		else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 5, 0);
 		//if (!monster.hasStatusEffect(StatusEffects.lustvenom)) monster.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
 		//New line before monster attack

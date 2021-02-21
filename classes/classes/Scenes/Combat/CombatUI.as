@@ -113,17 +113,17 @@ public class CombatUI extends BaseCombatContent {
 			}
 			else {
 				if (monster.isFlying()) {
-					if (player.isFlying() || player.haveThrowableMeleeWeapon() || (player.isStaffTypeWeapon() && player.hasPerk(PerkLib.StaffChanneling))) {
+					if (player.isFlying() || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || (player.isStaffTypeWeapon() && player.hasPerk(PerkLib.StaffChanneling))) {
 						if (player.isFlying()) {
-							if (player.hasPerk(PerkLib.AerialCombat)) {
+							if (player.hasPerk(PerkLib.AerialCombat) || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || (player.isStaffTypeWeapon() && player.hasPerk(PerkLib.StaffChanneling))) {
 								if (player.wings.type == Wings.BAT_ARM) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
 								else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
 							}
-							else btnMelee.disable("No way you could hit enemy with melee attacks while flying.");
+							else btnMelee.disable("No way you could hit enemy with melee attacks while flying. Req. Aerial Combat perk or having melee weapon that could be used for range attack too.");
 						}
 						else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
 					}
-					else btnMelee.disable("No way you could reach enemy in air with melee attacks.");
+					else btnMelee.disable("No way you could reach enemy in air with melee attacks. Unless you have melee weapon that could be used for range attack too.");
 				}
 				else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
 			}
