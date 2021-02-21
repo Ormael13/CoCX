@@ -57,7 +57,7 @@ public class Shield extends Useable //Equipable
 				outputText("Your current range weapon requires two hands. Unequip your current range weapon or switch to one-handed before equipping this shield. ");
 				return false;
 			}
-			else if ((game.player.weaponPerk == "Large" && game.player.findPerk(PerkLib.GigantGrip) < 0) || game.player.weaponPerk == "Massive" || game.player.weaponPerk == "Dual" || game.player.weaponPerk == "Dual Large") {
+			else if ((game.player.weaponPerk == "Large" && game.player.findPerk(PerkLib.GigantGrip) < 0) || game.player.weaponPerk == "Massive" || game.player.weaponPerk == "Dual Small" || game.player.weaponPerk == "Dual" || game.player.weaponPerk == "Dual Large") {
 				outputText("Your current melee weapon requires two hands. Unequip your current melee weapon or switch to one-handed before equipping this shield. ");
 				return false;
 			}

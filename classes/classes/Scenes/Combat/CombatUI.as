@@ -113,7 +113,7 @@ public class CombatUI extends BaseCombatContent {
 			}
 			else {
 				if (monster.isFlying()) {
-					if (player.isFlying() || player.haveThrowableMeleeWeapon()) {
+					if (player.isFlying() || player.haveThrowableMeleeWeapon() || (player.isStaffTypeWeapon() && player.hasPerk(PerkLib.StaffChanneling))) {
 						if (player.isFlying()) {
 							if (player.hasPerk(PerkLib.AerialCombat)) {
 								if (player.wings.type == Wings.BAT_ARM) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");

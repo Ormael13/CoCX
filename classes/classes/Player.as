@@ -982,6 +982,11 @@ use namespace CoC;
 		{
 			return ;
 		}*/
+		//Free off-hand for spellcasting and etc.
+		public function isHavingFreeOffHand():Boolean
+		{
+			return !isShieldsForShieldBash() && shield == game.shields.BATTNET && shield == game.shields.Y_U_PAN;
+		}
 		//Fists and fist weapons
 		public function isFistOrFistWeapon():Boolean {
 			return weaponName == "fists" || isGauntletWeapon();
@@ -1024,7 +1029,7 @@ use namespace CoC;
 		//Ribbon ERIBBON RIBBON
 		//Exotic-type weapons
 		public function isExoticTypeWeapon():Boolean {
-			return weapon == game.weapons.NORTHIP || weapon == game.weapons.FLYWHIS;
+			return weapon == game.weapons.NORTHIP || weapon == game.weapons.FLYWHIS || weapon == game.weapons.SDRILL || weapon == game.weapons.G_SHURI;
 		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
@@ -1039,7 +1044,7 @@ use namespace CoC;
 		//Throwable melee weapons
 		public function haveThrowableMeleeWeapon():Boolean
 		{
-			return weapon == game.weapons.FRTAXE || weapon == game.weapons.TDAGGER || weapon == game.weapons.CHAKRAM;//wrath large weapon that can be throwed or used in melee xD
+			return weapon == game.weapons.FRTAXE || weapon == game.weapons.TDAGGER || weapon == game.weapons.CHAKRAM || weapon == game.weapons.G_SHURI;//wrath large weapon that can be throwed or used in melee xD
 		}
 		//Cleave compatibile weapons
 		public function haveWeaponForCleave():Boolean
@@ -1407,7 +1412,8 @@ use namespace CoC;
 		//Shields for Bash
 		public function isShieldsForShieldBash():Boolean
 		{
-			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.SPIL_SH || shieldPerk == "Large" || shieldPerk == "Massive" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets");
+			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.SPIL_SH || shield == game.shields.SANCTYN || shield == game.shields.SANCTYL || shield == game.shields.SANCTYD
+			 || shieldPerk == "Large" || shieldPerk == "Massive" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets");
 		}
 		//override public function get shields
 		override public function get shieldName():String {
@@ -9872,6 +9878,8 @@ use namespace CoC;
 			var hiddenJobs1:Number = 0;
 			if (findPerk(PerkLib.HiddenJobBloodDemon) >= 0)
 				hiddenJobs1++;
+			if (findPerk(PerkLib.HiddenJobAsura) >= 0)
+				hiddenJobs1++;
 			return hiddenJobs1;
 		}
 		public function maxHiddenJobs():Number {
@@ -12476,8 +12484,8 @@ use namespace CoC;
 			}
 			if (!hasPerk(PerkLib.BullStrength) && statStore.hasBuff('Bull Strength')) statStore.removeBuffs('Bull Strength');
 			if (hasPerk(PerkLib.UnnaturalStrength)){
-				if (flags[kFLAGS.HUNGER_ENABLED] > 0) power = maxHunger()*0.01;
-				else power = maxLust()*0.01;
+				if (flags[kFLAGS.HUNGER_ENABLED] > 0) power = (hunger/maxHunger())*0.01;
+				else power = (lust/maxLust())*0.01;
 				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Unnatural Strength', { text: 'Unnatural Strength' });
 			}
 			if (!hasPerk(PerkLib.UnnaturalStrength) && statStore.hasBuff('Unnatural Strength')) statStore.removeBuffs('Unnatural Strength');
