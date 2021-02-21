@@ -13,7 +13,7 @@ package classes.Items.Shields
 		
 		public function SanctuaryN()
 		{
-			super("SanctN", "Sanctuary", "Sanctuary", "a Sanctuary", 21, 1050, "The legendary shield", "Large");
+			super("SanctN", "Sanctuary", "Sanctuary", "a Sanctuary", 21, 1050, "The legendary shield sanctuary. Its power is currently dormant and would require a powerful source of magic to fully unlock.", "Large");
 		}
 		
 		override public function get block():Number {

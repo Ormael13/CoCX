@@ -14,7 +14,7 @@ package classes.Items.Shields
 		public function Sanctuary() 
 		{
 			super("SanctL", "Sanctuary", "Sanctuary shield", "a Sanctuary shield", 29, 2900,
-					"Shining in snow-white ivory with a silver trim, this legendary shield is said to heal and protect a knight of pure heart. Embellishments carved on the ivory cover most of its surface.",
+					"Shining in snow-white ivory with a silver trim, this legendary shield is said to heal and protect a knight of pure heart. Embellishments carved on the ivory cover most of its surface. Thanks to holy power it has been fully restored to its former glory.",
 					"Large", PerkLib.Sanctuary, 1, 0, 0, 0);
 		}
 		

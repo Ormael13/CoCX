@@ -100,6 +100,7 @@ import coc.xlogic.ExecContext;
 					PlayerHasABowUnholy:player.weaponRange == game.weaponsrange.WILDHUN,
 
 					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],
+					FireBuff: player.hasStatusEffect(StatusEffects.FlameBlade),
 
 					Antennae: Antennae,
 					Arms: Arms,
@@ -134,6 +135,7 @@ import coc.xlogic.ExecContext;
 					playerWearsAStanceBannedArmor: player.armor == game.armors.CTPALAD || player.armor == game.armors.BERA || player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
 					ComfyCLothes: player.armor == game.armors.C_CLOTH,
+					MageRobe: player.armor == game.armors.M_ROBES || player.armor == game.armors.I_ROBES || player.armor == game.armors.I_CORST || player.armor == game.armors.EWROBE_ || player.armor == game.armors.A_ROBE_,
 					yukiDress: player.armor == game.armors.BLIZZ_K,
 					sakuraPetalKimono: player.armor == game.armors.SPKIMO,
 					whiteKimono: player.armor == game.armors.WKIMONO,
