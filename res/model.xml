@@ -660,6 +660,7 @@
         <cell rect="212,1620,80,90" name="weapon/swordGeneric" dx="38" dy="55"/>
         <cell rect="212,1726,80,90" name="weapon/swordHoly" dx="38" dy="55"/>
         <cell rect="212,1832,80,90" name="weapon/swordUnholy" dx="38" dy="55"/>
+        <cell rect="212,1938,80,90" name="weaponBuff/swordFireBuff" dx="34" dy="31"/>
         <cell rect="302,1620,80,90" name="weapon/axeGeneric" dx="38" dy="55"/>
         <cell rect="302,1726,80,90" name="weapon/axeHoly" dx="38" dy="55"/>
         <cell rect="302,1832,80,90" name="weapon/axeUnholy" dx="38" dy="55"/>
@@ -675,9 +676,11 @@
         <cell rect="662,1620,80,90" name="weapon/rapierGeneric" dx="38" dy="55"/>
         <cell rect="662,1726,80,90" name="weapon/rapierHoly" dx="38" dy="55"/>
         <cell rect="662,1832,80,90" name="weapon/rapierUnholy" dx="38" dy="55"/>
+        <cell rect="662,1938,80,90" name="weaponBuff/rapierFireBuff" dx="38" dy="55"/>
         <cell rect="752,1620,80,90" name="weapon/katanaGeneric" dx="38" dy="55"/>
         <cell rect="752,1726,80,90" name="weapon/katanaHoly" dx="38" dy="55"/>
         <cell rect="752,1832,80,90" name="weapon/katanaUnholy" dx="38" dy="55"/>
+        <cell rect="752,1938,80,90" name="weaponBuff/katanaFireBuff" dx="25" dy="35"/>
         <cell rect="932,1620,80,107" name="weapon/bowGeneric" dx="51" dy="54"/>
         <cell rect="932,1729,80,107" name="weapon/bowHoly" dx="51" dy="54"/>
         <cell rect="932,1838,80,107" name="weapon/bowUnholy" dx="51" dy="54"/>
@@ -1166,6 +1169,7 @@
 		<layer name="overclothe"/>
 		<layer name="shield"/>
 		<layer name="weapon"/>
+		<layer name="weaponBuff"/>
 		<layer name="hands_fg"/>
 		<layer name="glove_fg"/>
 		<layer name="arms_fg"/>
@@ -1348,6 +1352,9 @@
 							<show part="weapon/swordGeneric"/>
 						</else>
 					</if>
+					<if test="FireBuff">
+						<show part="weaponBuff/swordFireBuff"/>
+					</if>
 				</if>
 			
 				<if test="PlayerHasAnAxe">
@@ -1404,6 +1411,9 @@
 							<show part="weapon/katanaGeneric"/>
 						</else>
 					</if>
+					<if test="FireBuff">
+						<show part="weaponBuff/katanaFireBuff"/>
+					</if>
 				</if>
 			
 				<if test="PlayerHasRapier">			
@@ -1417,6 +1427,9 @@
 						<else>
 							<show part="weapon/rapierGeneric"/>
 						</else>
+					</if>
+					<if test="FireBuff">
+						<show part="weaponBuff/rapierFireBuff"/>
 					</if>
 				</if>
 			

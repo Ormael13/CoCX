@@ -100,6 +100,7 @@ import coc.xlogic.ExecContext;
 					PlayerHasABowUnholy:player.weaponRange == game.weaponsrange.WILDHUN,
 
 					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],
+					FireBuff: player.hasStatusEffect(StatusEffects.FlameBlade),
 
 					Antennae: Antennae,
 					Arms: Arms,
