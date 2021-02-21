@@ -3484,7 +3484,7 @@
                     </if>
                 </default>
             </switch>
-            <if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE">
+            <if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE or lowerBody == LowerBody.GAZER">
                 <hide part="penis/*"/>
 				<hide part="penis_taur/*"/>
             </if>
@@ -3512,7 +3512,7 @@
             </default>
             </switch>
             <show part="balls$taur/B$skinx$ballsz$taur"/>
-			<if test="lowerBody == LowerBody.NAGA or lowerBody == LowerBody.HYDRA or lowerBody == LowerBody.FROSTWYRM or lowerBody == LowerBody.MELKIE or lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE">
+			<if test="lowerBody == LowerBody.NAGA or lowerBody == LowerBody.HYDRA or lowerBody == LowerBody.FROSTWYRM or lowerBody == LowerBody.MELKIE or lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE or lowerBody == LowerBody.GAZER">
 				<hide part="balls/*"/>
 				<hide part="balls_taur/*"/>
 			</if>
