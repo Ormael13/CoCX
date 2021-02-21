@@ -3994,7 +3994,7 @@
 		<if test="goblinTechnomancerClothe">
 			<if test="showClothing">
 				<show part="clothe/goblinTechnomancerClothe"/>
-				<if test="(legCount!=4) and (showLegClothing)">
+				<if test="showArmClothing">
 					<show part="clothe/goblinTechnomancerClotheArms"/>
 				</if>
 				<if test="showLegClothing">
@@ -4032,6 +4032,47 @@
 				<hide part="penis/*"/>
 				<hide part="balls/*"/>
 			</if>
+		</if>
+		
+		
+		<!--Mage set -->
+		<if test="goblinTechnomancerClothe">
+			<if test="showClothing">
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="bra/mageRobeBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="bra/mageRobeBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra/mageRobeBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra/mageRobeBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra/mageRobeBraLarge"/>
+						</case>
+						<default>
+							<show part="bra/mageRobeBraLarge"/>
+						</default>
+					</switch>
+				</if>
+				<show part="clotheUnderAmulet/mageRobe"/>
+				<show part="clothe/mageRobe"/>
+				<if test="showArmClothing">
+					<show part="clotheRightArm/mageRobe"/>
+					<show part="clotheLeftArm/mageRobe"/>
+				</if>
+				<if test="showLegClothing">
+					<show part="clotheLegs/mageRobe"/>
+				</if>
+			</if>
+		</if>
+		<if test="goblinTechnomancerBra">
+			
 		</if>
 
 		<!--Tanuki set -->
