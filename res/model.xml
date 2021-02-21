@@ -1435,11 +1435,11 @@
 			
 				<if test="PlayerHasAShield">
 					<if test="PlayerHasSanctuary">					
-						<if test="PlayerHasSanctuaryPure or PlayerHasSanctuaryCorrupt">
-							<if test="PlayerHasSanctuaryPure">
+						<if test="PlayerHasSanctuaryHoly or PlayerHasSanctuaryCorrupt">
+							<if test="PlayerHasSanctuaryHoly">
 								<show part="shield/shieldHoly"/>
 							</if>
-							<if test="PlayerHasRapierUnholy">
+							<if test="PlayerHasSanctuaryCorrupt">
 								<show part="shield/shieldUnholy"/>
 							</if>
 							<else>
