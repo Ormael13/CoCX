@@ -6459,7 +6459,7 @@ public final class Mutations extends MutationsHelper {
         }
         //-Skin color change – dark gray
         if (player.skinTone != "dark gray" && !player.isGargoyle() && changes < changeLimit && rand(3) == 0 && type == 3) {
-            outputText("\n\nIt takes a while for you to notice, but");
+            outputText("\n\nIt takes a while for you to notice, but ");
             if (player.hasFur()) outputText("the skin under your <b>[skin coat.color]</b>" + player.skinDesc);
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become <b>dark gray</b> colored.");

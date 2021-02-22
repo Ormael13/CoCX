@@ -8396,6 +8396,14 @@ public class Combat extends BaseContent {
                 outputText("<b>Earth Stance effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.EarthStance, 1, -1);
         }
+        //Punishing Kick
+        if (player.hasStatusEffect(StatusEffects.CooldownPunishingKick)) {
+            if (player.statusEffectv1(StatusEffects.CooldownPunishingKick) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownPunishingKick);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownPunishingKick, 1, -1);
+            }
+        }
         //Eclipsing shadow
         if (player.hasStatusEffect(StatusEffects.CooldownEclipsingShadow)) {
             if (player.statusEffectv1(StatusEffects.CooldownEclipsingShadow) <= 0) {
@@ -8466,6 +8474,38 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownSoulBlast);
             } else {
                 player.addStatusValue(StatusEffects.CooldownSoulBlast, 1, -1);
+            }
+        }
+		//Flames of Love
+		if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
+            if (player.statusEffectv1(StatusEffects.CooldownFlamesOfLove) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownFlamesOfLove);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownFlamesOfLove, 1, -1);
+            }
+        }
+		//Icicles of Love
+		if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
+            if (player.statusEffectv1(StatusEffects.CooldownIciclesOfLove) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownIciclesOfLove);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownIciclesOfLove, 1, -1);
+            }
+        }
+		//Storm of Sisterhood
+		if (player.hasStatusEffect(StatusEffects.CooldownStormOfSisterhood)) {
+            if (player.statusEffectv1(StatusEffects.CooldownStormOfSisterhood) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownStormOfSisterhood);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownStormOfSisterhood, 1, -1);
+            }
+        }
+		//Night of Brotherhood
+		if (player.hasStatusEffect(StatusEffects.CooldownNightOfBrotherhood)) {
+            if (player.statusEffectv1(StatusEffects.CooldownNightOfBrotherhood) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownNightOfBrotherhood);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownNightOfBrotherhood, 1, -1);
             }
         }
         //Second Wind Regen

@@ -35,9 +35,16 @@ package classes.Scenes
 		private function Changelog35():void {
 			clearOutput();
 			outputText("<b>Version 0.8r:</b>\n\n");
+			outputText("-New head accesory (by Liadri): Ski goggles - buyable in Yu shop. Cost 400 gems. Prevents form blinding effect of Snowstorms in Glacial Rift.\n");
+			outputText("-New range weapon (by Liadri): Double barreled dragon gun - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Vulcanic Crag area. Cost 1060 gems. Base atk is 50 and ammo clip size 2. Can be used with sneak range attack and it deal AoE damage. It's 2H Firearm type range weapon.\n");
 			outputText("-New material: Gold ingot. Costs 800 gems. Buyable in Tel'Adre jewelry shop.\n");
+			outputText("-New material: Copper ore. Costs 40 gems. Minable in Quarry.\n");
+			outputText("-New material: Tin ore. Costs 40 gems. Minable in Quarry.\n");
 			outputText("-Silver ingot price reduced form 500 to 200 gems, World Tree Branch price increased from 100 to 200 gems, Marae barks price increased from 1000 to 3000 gems, Wood price of buy/sell reduced from 10/5 to 5/2, Stone price of buy/sell reduced from 20/10 to 10/4.\n");
 			outputText("-Aether Twins can now after evolution eat new materials: Gold ingot, Copper ore, Tin ore.\n");
+			outputText("-Tripxi have 2 new talk subjects.\n");
+			outputText("-When exploring Glacial Rift PC can suffer form 1 to 3 new area effects: Snowstorms (work as PC would be perma blinded), Snow (PC below 7 feet tall have increased difficulty to run away form fights and lowered evasion by 50%), Sub zero conditions (if PC resistance to ice/cold damage is below 60% will take 10% of max HP damage, ");
+			outputText("when having 55%+/70%+/80%+/90%+/95%+ resistance damage taken is decreased to 9/8/7/6/5%. Having Fire affinity will double taken damage while having cold affinity will make PC not taking any damage).\n");
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
@@ -52,14 +59,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-New material: Copper ore. Costs 40 gems. Minable in Quarry.\n");
-			outputText("-New material: Tin ore. Costs 40 gems. Minable in Quarry.\n");
 			outputText("-Added mastery for gauntlet, dagger, exotic, whip, bow/crossbows, thrown and firearms type weapons.\n");
-			outputText("-When exploring Glacial Rift PC can suffer form 1 to 3 new area effects: Snowstorms (work as PC would be perma blinded), Snow (PC below 7 feet tall have increased difficulty to run away form fights and lowered evasion by 50%), Sub zero conditions (if PC resistance to ice/cold damage is below 60% will take 10% of max HP damage, ");
-			outputText("when having 55%+/70%+/80%+/90%+/95%+ resistance damage taken is decreased to 9/8/7/6/5%. Having Fire affinity will double taken damage while having cold affinity will make PC not taking any damage).\n");
-			outputText("-New head accesory (by Liadri): Ski goggles - buyable in Yu shop. Cost 400 gems. Prevents form blinding effect of Snowstorms in Glacial Rift.\n");
-			outputText("-New range weapon (by Liadri): Double barreled dragon gun - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Vulcanic Crag area. Cost 1060 gems. Base atk is 50 and ammo clip size 2. Can be used with sneak range attack and it deal AoE damage. It's 2H Firearm type range weapon.\n");
-			outputText("-Tripxi have 2 new talk subjects.\n");
 			outputText("-After months, years of wait... 2nd wedding partner is finaly here.... it's our local neighbour yandere Etna. After PC know about marriages (Michiko helps here), have ring to propose and know some friendly priest can now marry Etna. It will not be easy and maybe like with Chi Chi as someone could crash wedding... as long it not 300 of them right? So ekhm... after PC manage to finish weeding will make resident manticore into wife.\n");
 			outputText("-New melee weapon (by Liadri): Venoclaw - obtainable after making Etna PC waifu. Cost 200 gems. Base atk is 0. Each attack that would deal damage to enemy would apply a small dose of aphrodisiac similary to manticore poison. It also compatibile to be used with feral combat.\n");
 			outputText("-New tier 2 misc lvl-up perk: Natural Instincts. Req. Job: Beast Warrior perk. Effect: All racial ability cooldowns are reduced by one. Enable autocast of Crinos Shape at start of combat.\n");
@@ -87,8 +87,8 @@ package classes.Scenes
 			outputText("-Whip and Ribbon type weapons been added to list of melee weapons that can attack flying enemeis without need for PC to fly.\n");
 			outputText("-While flying if PC not have Aerial Combat still can use the same throwable weapons or other melee weapons that could be used to perform range attack.\n");
 			outputText("-2nd to 4th ring slot will be seen on Inventory list (just in case PC not yet bought correct perk it will be listed as LOCKED and having note which perk must be picked to unlock this ring slot).\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Enemies below lvl 6 will have max lust halfed.\n");
+			outputText("-Added tracker for current/max venom and venom recharge rate per hour.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -98,7 +98,7 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk form training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in sheild slot), one of req. for Prestige Job: Spell Knight, ");
-			outputText("Flames of Love and Icicles of Love not dealing increased dmg to group enemies\n");/*ostatni punkt changelogu
+			outputText("Flames of Love and Icicles of Love not dealing increased dmg to group enemies, beautiful items aside sword and excalibur not been dropped with high corruption, beautiful sword / excalibur not been working properly with multiattack settings, centipeded tf small correction, added missing cooldown countdown for Flames/Icicles of Love and Punishing Kick soulskills, many smol fixes\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

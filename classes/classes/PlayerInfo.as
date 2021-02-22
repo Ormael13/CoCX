@@ -443,6 +443,9 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost()) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
+		combatStats += "<b>Venom:</b> " + Math.floor(player.tailVenom) + " / " + player.maxVenom() + "\n";
+		combatStats += "<b>Venom Recharge:</b> +" + player.tailRecharge + " / hour\n";
+		combatStats += "\n";
 		var mins:Object = player.getAllMinStats();
 		combatStats += "<b>Strength Cap:</b> " + Math.floor(player.strStat.max) + "\n";
 		combatStats += "<i>Ghost Strength:</i> +" + Math.floor(combat.ghostStrength()) + "\n";
