@@ -45,8 +45,7 @@ public class MagicSpecials extends BaseCombatContent {
 			player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
 			outputText("<b>Lustzerking was used succesfully.</b>\n\n");
 		}
-		if (player.wrath >= crinosshapeCost() && flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 1) {
-			player.wrath -= crinosshapeCost();
+		if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 1) {
 			outputText("<b>Crinos Shape was activated succesfully.</b>\n\n");
 			assumeCrinosShape007();
 		}
@@ -2854,6 +2853,11 @@ public class MagicSpecials extends BaseCombatContent {
 			temp2 += player.touStat.core.value * 0.2;
 			temp3 += player.speStat.core.value * 0.2;
 		}
+		if (player.hasPerk(PerkLib.BerserkerArmor)){
+			temp1 *= 1.5;
+			temp2 *= 1.5;
+			temp3 *= 1.5;
+		}
 		temp1 = Math.round(temp1);
 		temp2 = Math.round(temp2);
 		temp3 = Math.round(temp3);
@@ -2861,11 +2865,6 @@ public class MagicSpecials extends BaseCombatContent {
 		tempStr = temp1;
 		tempTou = temp2;
 		tempSpe = temp3;
-		if (player.hasPerk(PerkLib.BerserkerArmor)){
-			tempStr = temp1*1.5;
-			tempTou = temp2*1.5;
-			tempSpe = temp3*1.5;
-		}
 		mainView.statsView.showStatUp('str');
 		mainView.statsView.showStatUp('tou');
 		mainView.statsView.showStatUp('spe');

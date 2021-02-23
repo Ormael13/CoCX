@@ -83,7 +83,37 @@ import classes.internals.*;
 				this.weaponName = "pair of deadly battle axes";
 				this.weaponVerb = "cleave";
 				this.armorName = "steel full plate";
-				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
+				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 250) {
+					initStrTouSpeInte(475, 400, 275, 125);
+					initWisLibSensCor(125, 170 + this.ballSize * 5, 70 + this.ballSize * 5, 35);
+					this.weaponAttack = 154;
+					this.armorDef = 200;
+					this.armorMDef = 40;
+					this.bonusHP = 450 + rand(this.ballSize * 5);
+					this.bonusLust = 325 + this.ballSize * 16 + rand(this.ballSize * 9);
+					this.level = 85;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 200) {
+					initStrTouSpeInte(450, 380, 255, 120);
+					initWisLibSensCor(120, 160 + this.ballSize * 7, 65 + this.ballSize * 7, 35);
+					this.weaponAttack = 154;
+					this.armorDef = 175;
+					this.armorMDef = 35;
+					this.bonusHP = 400 + rand(this.ballSize * 5);
+					this.bonusLust = 306 + this.ballSize * 14 + rand(this.ballSize * 8);
+					this.level = 81;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 150) {
+					initStrTouSpeInte(425, 360, 235, 115);
+					initWisLibSensCor(115, 150 + this.ballSize * 6, 60 + this.ballSize * 6, 35);
+					this.weaponAttack = 154;
+					this.armorDef = 150;
+					this.armorMDef = 30;
+					this.bonusHP = 350 + rand(this.ballSize * 5);
+					this.bonusLust = 287 + this.ballSize * 12 + rand(this.ballSize * 7);
+					this.level = 77;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
 					initStrTouSpeInte(400, 340, 215, 110);
 					initWisLibSensCor(110, 140 + this.ballSize * 5, 55 + this.ballSize * 5, 35);
 					this.weaponAttack = 154;

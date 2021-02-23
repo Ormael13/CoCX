@@ -37,9 +37,42 @@ use namespace CoC;
 		{
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 				this.short = "stray omnibus";
-				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
-					initStrTouSpeInte(304, 275, 240, 175);
-					initWisLibSensCor(175, 200, 106, 100);
+				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 250) {
+					initStrTouSpeInte(340, 320, 295, 200);
+					initWisLibSensCor(200, 230, 130, 100);
+					this.weaponAttack = 77;
+					this.armorDef = 108;
+					this.armorMDef = 18;
+					this.bonusHP = 6900;
+					this.bonusLust = 446;
+					this.level = 86;
+					this.additionalXP = 2450;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 200) {
+					initStrTouSpeInte(328, 305, 270, 195);
+					initWisLibSensCor(195, 220, 122, 100);
+					this.weaponAttack = 72;
+					this.armorDef = 96;
+					this.armorMDef = 16;
+					this.bonusHP = 5750;
+					this.bonusLust = 424;
+					this.level = 82;
+					this.additionalXP = 2100;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 150) {
+					initStrTouSpeInte(316, 290, 255, 190);
+					initWisLibSensCor(190, 210, 114, 100);
+					this.weaponAttack = 67;
+					this.armorDef = 84;
+					this.armorMDef = 14;
+					this.bonusHP = 4600;
+					this.bonusLust = 402;
+					this.level = 78;
+					this.additionalXP = 1750;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
+					initStrTouSpeInte(304, 275, 240, 185);
+					initWisLibSensCor(185, 200, 106, 100);
 					this.weaponAttack = 62;
 					this.armorDef = 72;
 					this.armorMDef = 12;
@@ -49,8 +82,8 @@ use namespace CoC;
 					this.additionalXP = 1400;
 				}
 				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
-					initStrTouSpeInte(292, 260, 225, 175);
-					initWisLibSensCor(175, 190, 98, 100);
+					initStrTouSpeInte(292, 260, 225, 180);
+					initWisLibSensCor(180, 190, 98, 100);
 					this.weaponAttack = 57;
 					this.armorDef = 60;
 					this.armorMDef = 10;

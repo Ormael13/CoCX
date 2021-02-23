@@ -127,10 +127,10 @@ import classes.Scenes.SceneLib;
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					discoverSeaBoat();
 				},
-				chance: 1,
 				when: function ():Boolean {
 					return flags[kFLAGS.DISCOVERED_BEACH] >= 10 && flags[kFLAGS.DISCOVERED_OCEAN] <= 0;
-				}
+				},
+				chance: Encounters.ALWAYS
 			}, {
 				// Find Orca sunscreen
 				name: "orca sunscreen",
