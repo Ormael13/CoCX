@@ -4939,7 +4939,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //[Increase Vaginal Capacity] - requires vagina, of course
-        if (player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 200) {
+        if (player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 200 && changes < changeLimit) {
             outputText("\n\nA gurgling sound issues from your abdomen, and you double over as a trembling ripple passes through your womb.  The flesh of your stomach roils as your internal organs begin to shift, and when the sensation finally passes, you are instinctively aware that your [vagina] is a bit deeper than it was before.");
             if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) {
                 player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
@@ -4947,7 +4947,7 @@ public final class Mutations extends MutationsHelper {
             player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5 + rand(10));
         }
 
-        if (player.vaginas.length == 1) {
+        if (player.vaginas.length == 1 && changes < changeLimit) {
             if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_DROOLING && changes < changeLimit && rand(2) == 0) {
                 temp = player.vaginas.length;
                 while (temp > 0) {
@@ -4969,7 +4969,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             if ((player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.HYDRA) && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) {
-                outputText("\n\nSomething fundamental changes in your " + vaginaDescript() + " as the insides begins to heat up. Out of curiosity you take a peak and notice amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. Intrigued you literally shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm. <b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>");
+                outputText("\n\nSomething fundamental changes in your " + vaginaDescript() + " as the insides begins to heat up. Out of curiosity you take a peak and notice amazed that the interior of your cunt has deepened to ridiculus extent running all the way farther into your tail. Intrigued you literally shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in heck you could easily insert a good part of your own tail inside and still find space. It takes all of your willpower not to fist yourself to orgasm. <b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>");
                 player.vaginaType(13);
                 player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
                 changes++;
