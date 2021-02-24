@@ -4968,9 +4968,9 @@ public final class Mutations extends MutationsHelper {
                 player.vaginas[0].vaginalLooseness++;
                 changes++;
             }
-            if (player.lowerBody == LowerBody.NAGA && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && changes < changeLimit && rand(3) == 0) {
+            if ((player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.HYDRA) && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nSomething fundamental changes in your " + vaginaDescript() + " as the insides begins to heat up. Out of curiosity you take a peak and notice amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. Intrigued you literally shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm. <b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>");
-                player.vaginaType(12);
+                player.vaginaType(13);
                 player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
                 changes++;
             }
