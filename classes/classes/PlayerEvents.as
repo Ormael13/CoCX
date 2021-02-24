@@ -1370,10 +1370,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Recharge tail
 			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) { //Spider, Bee, Scorpion, Manticore and Naga Venom Recharge
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
+				if (player.findPerk(PerkLib.ImprovedVenomGland) >= 0) player.tailRecharge += 5;
+				if (player.findPerk(PerkLib.VenomGlandsEvolved) >= 0) player.tailRecharge += 2;
+				if (player.findPerk(PerkLib.VenomGlandsFinalForm) >= 0) player.tailRecharge += 8;
 				player.tailVenom += player.tailRecharge;
-				if (player.findPerk(PerkLib.ImprovedVenomGland) >= 0) player.tailVenom += 5;
-				if (player.findPerk(PerkLib.VenomGlandsEvolved) >= 0) player.tailVenom += 2;
-				if (player.findPerk(PerkLib.VenomGlandsFinalForm) >= 0) player.tailVenom += 8;
 				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 			}
 			//Satyr Sexuality

@@ -52,7 +52,7 @@ public class Scorpinum extends Consumable {
 			if (player.tailRecharge < 10) player.tailRecharge += 2;
 			if (player.tailRecharge < 15) player.tailRecharge += 2;
 			player.tailVenom += 50;
-			if (player.tailVenom > 150) player.tailVenom = 150;
+			if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 			outputText("\n\nYour tail swells with vitality and a drop of venom escapes your stinger as it begins producing it in slightly larger quantities.");
 			changes++;
 		}

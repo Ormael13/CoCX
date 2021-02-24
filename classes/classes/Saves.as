@@ -881,6 +881,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//Mastery
 		saveFile.data.masteryGauntletLevel = player.masteryGauntletLevel;
 		saveFile.data.masteryGauntletXP = player.masteryGauntletXP;
+		saveFile.data.masteryDaggerLevel = player.masteryDaggerLevel;
+		saveFile.data.masteryDaggerXP = player.masteryDaggerXP;
 		saveFile.data.masterySwordLevel = player.masterySwordLevel;
 		saveFile.data.masterySwordXP = player.masterySwordXP;
 		saveFile.data.masteryAxeLevel = player.masteryAxeLevel;
@@ -891,10 +893,16 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.masteryDuelingSwordXP = player.masteryDuelingSwordXP;
 		saveFile.data.masterySpearLevel = player.masterySpearLevel;
 		saveFile.data.masterySpearXP = player.masterySpearXP;
-		saveFile.data.masteryDaggerLevel = player.masteryDaggerLevel;
-		saveFile.data.masteryDaggerXP = player.masteryDaggerXP;
+		saveFile.data.masteryWhipLevel = player.masteryWhipLevel;
+		saveFile.data.masteryWhipXP = player.masteryWhipXP;
 		saveFile.data.masteryExoticLevel = player.masteryExoticLevel;
 		saveFile.data.masteryExoticXP = player.masteryExoticXP;
+		saveFile.data.masteryArcheryLevel = player.masteryArcheryLevel;
+		saveFile.data.masteryArcheryXP = player.masteryArcheryXP;
+		saveFile.data.masteryThrowingLevel = player.masteryThrowingLevel;
+		saveFile.data.masteryThrowingXP = player.masteryThrowingXP;
+		saveFile.data.masteryFirearmsLevel = player.masteryFirearmsLevel;
+		saveFile.data.masteryFirearmsXP = player.masteryFirearmsXP;
 		saveFile.data.dualWSLevel = player.dualWSLevel;
 		saveFile.data.dualWSXP = player.dualWSXP;
 		saveFile.data.dualWNLevel = player.dualWNLevel;
@@ -1839,6 +1847,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.masteryGauntletLevel = 0;
 		else
 			player.masteryGauntletLevel = saveFile.data.masteryGauntletLevel;
+		if (saveFile.data.masteryDaggerXP == undefined)
+			player.masteryDaggerXP = 0;
+		else
+			player.masteryDaggerXP = saveFile.data.masteryDaggerXP;
+		if (saveFile.data.masteryDaggerLevel == undefined)
+			player.masteryDaggerLevel = 0;
+		else
+			player.masteryDaggerLevel = saveFile.data.masteryDaggerLevel;
 		if (saveFile.data.masterySwordXP == undefined)
 			player.masterySwordXP = 0;
 		else
@@ -1863,14 +1879,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.masteryMaceHammerLevel = 0;
 		else
 			player.masteryMaceHammerLevel = saveFile.data.masteryMaceHammerLevel;
-		if (saveFile.data.masteryDaggerXP == undefined)
-			player.masteryDaggerXP = 0;
+		if (saveFile.data.masteryWhipXP == undefined)
+			player.masteryWhipXP = 0;
 		else
-			player.masteryDaggerXP = saveFile.data.masteryDaggerXP;
-		if (saveFile.data.masteryDaggerLevel == undefined)
-			player.masteryDaggerLevel = 0;
+			player.masteryWhipXP = saveFile.data.masteryWhipXP;
+		if (saveFile.data.masteryWhipLevel == undefined)
+			player.masteryWhipLevel = 0;
 		else
-			player.masteryDaggerLevel = saveFile.data.masteryDaggerLevel;
+			player.masteryWhipLevel = saveFile.data.masteryWhipLevel;
 		if (saveFile.data.masteryExoticXP == undefined)
 			player.masteryExoticXP = 0;
 		else
@@ -1879,6 +1895,30 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.masteryExoticLevel = 0;
 		else
 			player.masteryExoticLevel = saveFile.data.masteryExoticLevel;
+		if (saveFile.data.masteryArcheryXP == undefined)
+			player.masteryArcheryXP = 0;
+		else
+			player.masteryArcheryXP = saveFile.data.masteryArcheryXP;
+		if (saveFile.data.masteryArcheryLevel == undefined)
+			player.masteryArcheryLevel = 0;
+		else
+			player.masteryArcheryLevel = saveFile.data.masteryArcheryLevel;
+		if (saveFile.data.masteryThrowingXP == undefined)
+			player.masteryThrowingXP = 0;
+		else
+			player.masteryThrowingXP = saveFile.data.masteryThrowingXP;
+		if (saveFile.data.masteryThrowingLevel == undefined)
+			player.masteryThrowingLevel = 0;
+		else
+			player.masteryThrowingLevel = saveFile.data.masteryThrowingLevel;
+		if (saveFile.data.masteryFirearmsXP == undefined)
+			player.masteryFirearmsXP = 0;
+		else
+			player.masteryFirearmsXP = saveFile.data.masteryFirearmsXP;
+		if (saveFile.data.masteryFirearmsLevel == undefined)
+			player.masteryFirearmsLevel = 0;
+		else
+			player.masteryFirearmsLevel = saveFile.data.masteryFirearmsLevel;
 		if (saveFile.data.masteryDuelingSwordXP == undefined)
 			player.masteryDuelingSwordXP = 0;
 		else
@@ -2952,4 +2992,4 @@ public function unFuckSave():void
 	}
 
 }
-}
+}

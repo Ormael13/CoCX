@@ -61,9 +61,9 @@ package classes.Scenes.Places.HeXinDao
 			clearOutput();
 			outputText("You go sit at the counter and the barman comes over to take your order.\n\n");
 			outputText("\"<i>Good ");
-			if (model.time.hours >= 16) outputText("afternoon ");
+			if (model.time.hours >= 16) outputText("afternoon");
 			else outputText("morning");
-			outputText("" + player.mf("mister", "miss") + ", what can I get you?</i>\"\n\n");
+			outputText(" " + player.mf("mister", "miss") + ", what can I get you?</i>\"\n\n");
 			menu();
 			addButton(0, "ManUp B", buyDrink, consumables.MANUP_B);
 			addButton(1, "Gob.Ale", buyDrink, consumables.GOB_ALE);

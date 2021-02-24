@@ -112,8 +112,16 @@ use namespace CoC;
 		public var masterySpearXP:Number = 0;
 		public var masteryDaggerLevel:Number = 0;
 		public var masteryDaggerXP:Number = 0;
+		public var masteryWhipLevel:Number = 0;
+		public var masteryWhipXP:Number = 0;
 		public var masteryExoticLevel:Number = 0;
 		public var masteryExoticXP:Number = 0;
+		public var masteryArcheryLevel:Number = 0;
+		public var masteryArcheryXP:Number = 0;
+		public var masteryThrowingLevel:Number = 0;
+		public var masteryThrowingXP:Number = 0;
+		public var masteryFirearmsLevel:Number = 0;
+		public var masteryFirearmsXP:Number = 0;
 		public var dualWSLevel:Number = 0;
 		public var dualWSXP:Number = 0;
 		public var dualWNLevel:Number = 0;
@@ -1026,10 +1034,17 @@ use namespace CoC;
 		public function isStaffTypeWeapon():Boolean {
 			return weapon == game.weapons.ASCENSU || weapon == game.weapons.DEPRAVA || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEMSCYT;
 		}
-		//Ribbon ERIBBON RIBBON
+		//Whip-type weapons
+		public function isWhipTypeWeapon():Boolean {
+			return weapon == game.weapons.L_WHIP || weapon == game.weapons.SUCWHIP || weapon == game.weapons.PSWHIP || weapon == game.weapons.WHIP || weapon == game.weapons.PWHIP || weapon == game.weapons.BFWHIP || weapon == game.weapons.DBFWHIP || weapon == game.weapons.NTWHIP || weapon == game.weapons.CNTWHIP;
+		}
+		//Ribbon-type weapons
+		public function isRibbonTypeWeapon():Boolean {
+			return weapon == game.weapons.RIBBON || weapon == game.weapons.ERIBBON;
+		}
 		//Exotic-type weapons
 		public function isExoticTypeWeapon():Boolean {
-			return weapon == game.weapons.NORTHIP || weapon == game.weapons.FLYWHIS || weapon == game.weapons.SDRILL || weapon == game.weapons.G_SHURI;
+			return isRibbonTypeWeapon() || weapon == game.weapons.NORTHIP || weapon == game.weapons.FLYWHIS || weapon == game.weapons.SDRILL || weapon == game.weapons.G_SHURI || weapon == game.weapons.CHAKRAM;
 		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
@@ -13304,6 +13319,47 @@ use namespace CoC;
 			}
 		}
 
+		public function maxWhipLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function WhipExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryWhipLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryWhipLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function whipXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryWhipXP++;
+					XP--;
+				}
+				else {
+					masteryWhipXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryWhipLevel < maxWhipLevel() && masteryWhipXP >= WhipExpToLevelUp()) {
+					outputText("\n<b>Dao of Whip leveled up to " + (masteryWhipLevel + 1) + "!</b>\n");
+					masteryWhipLevel++;
+					masteryWhipXP = 0;
+				}
+			}
+		}
+
 		public function maxExoticLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -13341,6 +13397,129 @@ use namespace CoC;
 					outputText("\n<b>Dao of Exotic Weapons leveled up to " + (masteryExoticLevel + 1) + "!</b>\n");
 					masteryExoticLevel++;
 					masteryExoticXP = 0;
+				}
+			}
+		}
+
+		public function maxArcheryLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function ArcheryExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryArcheryLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryArcheryLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function archeryXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryArcheryXP++;
+					XP--;
+				}
+				else {
+					masteryArcheryXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryArcheryLevel < maxArcheryLevel() && masteryArcheryXP >= ArcheryExpToLevelUp()) {
+					outputText("\n<b>Dao of Archery leveled up to " + (masteryArcheryLevel + 1) + "!</b>\n");
+					masteryArcheryLevel++;
+					masteryArcheryXP = 0;
+				}
+			}
+		}
+
+		public function maxThrowingLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function ThrowingExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryThrowingLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryThrowingLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function throwingXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryThrowingXP++;
+					XP--;
+				}
+				else {
+					masteryThrowingXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryThrowingLevel < maxThrowingLevel() && masteryThrowingXP >= ThrowingExpToLevelUp()) {
+					outputText("\n<b>Dao of Exotic Weapons leveled up to " + (masteryThrowingLevel + 1) + "!</b>\n");
+					masteryThrowingLevel++;
+					masteryThrowingXP = 0;
+				}
+			}
+		}
+
+		public function maxFirearmsLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function FirearmsExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryFirearmsLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryFirearmsLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function firearmsXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryFirearmsXP++;
+					XP--;
+				}
+				else {
+					masteryFirearmsXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryFirearmsLevel < maxFirearmsLevel() && masteryFirearmsXP >= FirearmsExpToLevelUp()) {
+					outputText("\n<b>Dao of Exotic Weapons leveled up to " + (masteryFirearmsLevel + 1) + "!</b>\n");
+					masteryFirearmsLevel++;
+					masteryFirearmsXP = 0;
 				}
 			}
 		}
