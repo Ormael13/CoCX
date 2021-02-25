@@ -1050,29 +1050,29 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  A long cowtail with a puffy tip swishes back and forth as if swatting at flies.");
 		if (player.tailType == Tail.SPIDER_ADBOMEN) {
 			outputText("  A large, spherical spider-abdomen has grown out from your backside, covered in shiny "+player.coatColor+" chitin.  Though it's heavy and bobs with every motion, it doesn't seem to slow you down.");
-			if (player.tailVenom > 50 && player.tailVenom < 80)
+			if (player.tailVenom > (player.maxVenom() * 0.5) && player.tailVenom < (player.maxVenom() * 0.8))
 				outputText("  Your bulging arachnid posterior feels fairly full of webbing.");
-			if (player.tailVenom >= 80 && player.tailVenom < 100)
+			if (player.tailVenom >= (player.maxVenom() * 0.8) && player.tailVenom < player.maxVenom())
 				outputText("  Your arachnid rear bulges and feels very full of webbing.");
-			if (player.tailVenom == 100)
+			if (player.tailVenom == player.maxVenom())
 				outputText("  Your swollen spider-butt is distended with the sheer amount of webbing it's holding.");
 		}
 		if (player.tailType == Tail.BEE_ABDOMEN) {
 			outputText("  A large insectile bee-abdomen dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard chitin with black and yellow stripes, and tipped with a dagger-like stinger.");
-			if (player.tailVenom > 50 && player.tailVenom < 80)
+			if (player.tailVenom > (player.maxVenom() * 0.5) && player.tailVenom < (player.maxVenom() * 0.8))
 				outputText("  A single drop of poison hangs from your exposed stinger.");
-			if (player.tailVenom >= 80 && player.tailVenom < 100)
+			if (player.tailVenom >= (player.maxVenom() * 0.8) && player.tailVenom < player.maxVenom())
 				outputText("  Poisonous bee venom coats your stinger completely.");
-			if (player.tailVenom == 100)
+			if (player.tailVenom == player.maxVenom())
 				outputText("  Venom drips from your poisoned stinger regularly.");
 		}
 		if (player.tailType == Tail.SCORPION) {
 			outputText("  A large insectile scorpion-like tail dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard chitin and tipped with a stinger.");
-			if (player.tailVenom > 75 && player.tailVenom < 120)
+			if (player.tailVenom > (player.maxVenom() * 0.5) && player.tailVenom < (player.maxVenom() * 0.8))
 				outputText("  A single drop of poison hangs from your exposed stinger.");
-			if (player.tailVenom >= 120 && player.tailVenom < 150)
+			if (player.tailVenom >= (player.maxVenom() * 0.8) && player.tailVenom < player.maxVenom())
 				outputText("  Poisonous bee venom coats your stinger completely.");
-			if (player.tailVenom == 150)
+			if (player.tailVenom == player.maxVenom())
 				outputText("  Venom drips from your poisoned stinger regularly.");
 		}
 		if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
@@ -3197,3 +3197,4 @@ public class PlayerAppearance extends BaseContent {
 	}
 }
 }
+

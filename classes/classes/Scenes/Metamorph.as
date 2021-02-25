@@ -1461,7 +1461,7 @@ private function metamorphScorpionTail():void {
 	player.tailType = Tail.SCORPION;
 	player.tailCount = 1;
 	player.tailVenom = 15;
-	player.tailRecharge = 3;
+	player.tailRecharge = 5;
 	doNext(accessPage3TailMenu);
 }
 private function metamorphLionArms():void {
@@ -2952,7 +2952,7 @@ private function metamorphBeeTail():void {
 	else outputText("\n\nPainful swelling just above your " + buttDescript() + " doubles you over.  It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and rounding with a series of pops until you have a bulbous abdomen hanging just above your butt.  The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide.  You sigh as your stinger slides into place with a 'snick', finishing the transformation.  <b>You have a bee's abdomen.</b>");
 	player.tailType = Tail.BEE_ABDOMEN;
 	player.tailVenom = 10;
-	player.tailRecharge = 2;
+	player.tailRecharge = 5;
 	doNext(accessPage1TailMenu);
 }
 private function metamorphBeeArms():void {
