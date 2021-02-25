@@ -10261,7 +10261,7 @@ public class Combat extends BaseContent {
         if (monster.hasCock() && monster.hasVagina()) outputText("s");
         outputText(" with your demonic powers at the rhythm of [monster a] [monster name] owns heartbeat. " +
                 "The unholy transformation even if temporary arouses [monster a] [monster name] to no end.");
-        StraddleDamage *= 1+(scalingBonusIntelligence()*2/100);
+        StraddleDamage *= 1+((scalingBonusIntelligence()*2)/100);
         StraddleDamage = Math.round(StraddleDamage);
         monster.teased(monster.lustVuln * StraddleDamage);
         if (Randomcrit) outputText(" <b>Critical!</b>");
