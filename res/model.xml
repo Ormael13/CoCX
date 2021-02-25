@@ -4049,7 +4049,7 @@
 		
 		
 		<!--Mage set -->
-		<if test="goblinTechnomancerClothe">
+		<if test="MageRobe">
 			<if test="showClothing">
 				<if test="breastRows.length gt 0">
 					<switch>
