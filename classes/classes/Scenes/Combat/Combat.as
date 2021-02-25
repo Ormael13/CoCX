@@ -127,6 +127,16 @@ public class Combat extends BaseContent {
         return player.GauntletExpToLevelUp();
     }
 
+	public function masteryDaggerLevel():Number {
+        return player.masteryDaggerLevel;
+    }
+    public function maxDaggerLevel():Number {
+        return player.maxDaggerLevel();
+    }
+    public function DaggerExpToLevelUp():Number {
+        return player.DaggerExpToLevelUp();
+    }
+
     public function masterySwordLevel():Number {
         return player.masterySwordLevel;
     }
@@ -177,14 +187,14 @@ public class Combat extends BaseContent {
         return player.SpearExpToLevelUp();
     }
 
-	public function masteryDaggerLevel():Number {
-        return player.masteryDaggerLevel;
+	public function masteryWhipLevel():Number {
+        return player.masteryWhipLevel;
     }
-    public function maxDaggerLevel():Number {
-        return player.maxDaggerLevel();
+    public function maxWhipLevel():Number {
+        return player.maxWhipLevel();
     }
-    public function DaggerExpToLevelUp():Number {
-        return player.DaggerExpToLevelUp();
+    public function WhipExpToLevelUp():Number {
+        return player.WhipExpToLevelUp();
     }
 
 	public function masteryExoticLevel():Number {
@@ -195,6 +205,36 @@ public class Combat extends BaseContent {
     }
     public function ExoticExpToLevelUp():Number {
         return player.ExoticExpToLevelUp();
+    }
+
+	public function masteryArcheryLevel():Number {
+        return player.masteryArcheryLevel;
+    }
+    public function maxArcheryLevel():Number {
+        return player.maxArcheryLevel();
+    }
+    public function ArcheryExpToLevelUp():Number {
+        return player.ArcheryExpToLevelUp();
+    }
+
+	public function masteryThrowingLevel():Number {
+        return player.masteryThrowingLevel;
+    }
+    public function maxThrowingLevel():Number {
+        return player.maxThrowingLevel();
+    }
+    public function ThrowingExpToLevelUp():Number {
+        return player.ThrowingExpToLevelUp();
+    }
+
+	public function masteryFirearmsLevel():Number {
+        return player.masteryFirearmsLevel;
+    }
+    public function maxFirearmsLevel():Number {
+        return player.maxFirearmsLevel();
+    }
+    public function FirearmsExpToLevelUp():Number {
+        return player.FirearmsExpToLevelUp();
     }
 
 	public function dualWSLevel():Number {
@@ -804,13 +844,29 @@ public class Combat extends BaseContent {
             buttons.add("Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
         }
         if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
+            bd = buttons.add("Flames of Love", flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
+            if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
+                bd.disable("You need more time before you can use Flames of Love again.");
+            } else if (player.lust < 50) {
+                bd.disable("Your current lust is too low.");
+            }
+        }/*
+        if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
             bd = buttons.add("Flames of Love", flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
             if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
                 bd.disable("You need more time before you can use Flames of Love again.");
             } else if (player.lust < 50) {
                 bd.disable("Your current lust is too low.");
             }
-        }
+        }*/
+        if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
+            bd = buttons.add("Icicles of Love", iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
+            if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
+                bd.disable("You need more time before you can use Icicles of Love again.");
+            } else if (player.lust < 50) {
+                bd.disable("Your current lust is too low.");
+            }
+        }/*
         if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
             bd = buttons.add("Icicles of Love", iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
             if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
@@ -818,7 +874,23 @@ public class Combat extends BaseContent {
             } else if (player.lust < 50) {
                 bd.disable("Your current lust is too low.");
             }
-        }
+        }*/
+		if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
+			bd = buttons.add("Storm of Sisterhood", stormOfSisterhood).hint("Use a little bit of wrath to transform it into storm of sisterhood that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			if (player.hasStatusEffect(StatusEffects.CooldownStormOfSisterhood)) {
+				bd.disable("You need more time before you can use Storm of Sisterhood again.");
+			} else if (player.wrath < 50) {
+				bd.disable("Your current wrath is too low.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
+			bd = buttons.add("Night of Brotherhood", nightOfBrotherhood).hint("Use a little bit of wrath to transform it into night of brotherhood that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			if (player.hasStatusEffect(StatusEffects.CooldownNightOfBrotherhood)) {
+				bd.disable("You need more time before you can use Night of Brotherhood again.");
+			} else if (player.wrath < 50) {
+				bd.disable("Your current wrath is too low.");
+			}
+		}
         if (player.hasStatusEffect(StatusEffects.KnowsHeavensDevourer)) {
             bd = buttons.add("Devourer", heavensDevourer).hint("Form a small sphere inscribed by symbols to drain from enemy a bit of lust and/or wrath.  \n\nWould go into cooldown after use for: 3 rounds");
             if (player.hasStatusEffect(StatusEffects.CooldownHeavensDevourer)) {
@@ -1216,12 +1288,12 @@ public class Combat extends BaseContent {
             if (monster as DriderIncubus) taintedMindAttackAttempt();
             return;
         }
-
+		
         clearOutput();
         if (SceneLib.urtaQuest.isUrta()) {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
         }
-        if ((player.weaponPerk == "" || player.weaponPerk == "Dual" || player.weaponPerk == "Hybrid") && !isWieldingRangedWeapon()) {
+        if ((player.weaponPerk == "" || player.weaponPerk == "Dual" || player.weaponPerk == "Hybrid")) {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
                 if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) {
                     if (player.hasPerk(PerkLib.HexaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
@@ -1668,7 +1740,7 @@ public class Combat extends BaseContent {
         var weapon:String = "";
         if (player.isInGoblinMech()) weapon = "saw blade";
 		if (player.vehicles == vehicles.HB_MECH) weapon = "power blade";
-        if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0 && !isWieldingRangedWeapon()) {
+        if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
             outputText("You attempt to attack, but at the last moment your mech wrenches away, preventing you from even coming close to landing a blow!  ");
             if (monster is ChaosChimera) outputText("Curse");
             else outputText("The kitsune's seals");
@@ -1682,12 +1754,12 @@ public class Combat extends BaseContent {
             return;
         }
         //Amily!
-        if (monster.hasStatusEffect(StatusEffects.Concentration) && !isWieldingRangedWeapon()) {
+        if (monster.hasStatusEffect(StatusEffects.Concentration)) {
             outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
             enemyAI();
             return;
         }
-        if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack) && !isWieldingRangedWeapon()) {
+        if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack)) {
             if (monster is SandTrap) {
                 outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
                 (monster as SandTrap).trapLevel(-4);
@@ -1701,7 +1773,7 @@ public class Combat extends BaseContent {
         if (player.playerIsBlinded()) {
             outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
         }
-        if (monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0 && !isWieldingRangedWeapon()) {
+        if (monster is Basilisk && player.findPerk(PerkLib.BasiliskResistance) < 0) {
             if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind))
                 outputText("Blind basilisk can't use his eyes, so you can actually aim your strikes!  ");
             //basilisk counter attack (block attack, significant speed loss):
@@ -2307,11 +2379,15 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.TrueSeeing)) accmod += 40;
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
+		if (player.isGauntletWeapon()) accmod += Math.round((masteryGauntletLevel() - 1) / 2);
 		if (player.isSwordTypeWeapon()) accmod += Math.round((masterySwordLevel() - 1) / 2);
 		if (player.isAxeTypeWeapon()) accmod += Math.round((masteryAxeLevel() - 1) / 2);
 		if (player.isMaceHammerTypeWeapon()) accmod += Math.round((masteryMaceHammerLevel() - 1) / 2);
 		if (player.isDuelingTypeWeapon()) accmod += Math.round((masteryDuelingSwordLevel() - 1) / 2);
 		if (player.isSpearTypeWeapon()) accmod += Math.round((masterySpearLevel() - 1) / 2);
+		if (player.isDaggerTypeWeapon()) accmod += Math.round((masteryDaggerLevel() - 1) / 2);
+		if (player.isWhipTypeWeapon()) accmod += Math.round((masteryWhipLevel() - 1) / 2);
+		if (player.isExoticTypeWeapon()) accmod += Math.round((masteryExoticLevel() - 1) / 2);
 		if (player.weaponPerk == "Dual Small") accmod += Math.round((dualWSLevel() - 1) / 2);
 		if (player.weaponPerk == "Dual") accmod += Math.round((dualWNLevel() - 1) / 2);
 		if (player.weaponPerk == "Dual Large") accmod += Math.round((dualWLLevel() - 1) / 2);
@@ -2365,38 +2441,44 @@ public class Combat extends BaseContent {
 		}
         return dmgmdwmodpenalty;
 	}
-
-    public function arrowsAccuracy():Number {
-        var accmod:Number = 80;
-        if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) accmod += 40;
+	
+	public function baseRangeAccuracy():Number {
+		var baccmod:Number = 80;
+        if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) baccmod += 40;
         if (player.hasPerk(PerkLib.Accuracy1)) {
-            accmod += player.perkv1(PerkLib.Accuracy1);
+            baccmod += player.perkv1(PerkLib.Accuracy1);
         }
         if (player.hasPerk(PerkLib.Accuracy2)) {
-            accmod -= player.perkv1(PerkLib.Accuracy2);
+            baccmod -= player.perkv1(PerkLib.Accuracy2);
         }
         if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
-            if (player.statusEffectv1(StatusEffects.Kelt) <= 100) accmod += player.statusEffectv1(StatusEffects.Kelt);
-            else accmod += 100;
+            if (player.statusEffectv1(StatusEffects.Kelt) <= 100) baccmod += player.statusEffectv1(StatusEffects.Kelt);
+            else baccmod += 100;
         }
         if (player.statusEffectv1(StatusEffects.Kindra) > 0) {
-            if (player.statusEffectv1(StatusEffects.Kindra) <= 150) accmod += player.statusEffectv1(StatusEffects.Kindra);
-            else accmod += 150;
+            if (player.statusEffectv1(StatusEffects.Kindra) <= 150) baccmod += player.statusEffectv1(StatusEffects.Kindra);
+            else baccmod += 150;
         }
         if (player.inte > 50 && player.hasPerk(PerkLib.JobHunter)) {
-            if (player.inte <= 150) accmod += (player.inte - 50);
-            else accmod += 100;
+            if (player.inte <= 150) baccmod += (player.inte - 50);
+            else baccmod += 100;
         }
-        if (player.hasPerk(PerkLib.CarefulButRecklessAimAndShooting)) accmod += 60;
+        if (player.hasPerk(PerkLib.CarefulButRecklessAimAndShooting)) baccmod += 60;
         if (player.isFlying()) {
-            if (player.jewelryName != "Ring of deadeye aim") accmod -= 100;
-            if (player.hasPerk(PerkLib.Aerobatics)) accmod += 40;
-            if (player.hasPerk(PerkLib.AdvancedAerobatics)) accmod += 100;
+            if (player.jewelryName != "Ring of deadeye aim") baccmod -= 100;
+            if (player.hasPerk(PerkLib.Aerobatics)) baccmod += 40;
+            if (player.hasPerk(PerkLib.AdvancedAerobatics)) baccmod += 100;
         }
-		if (player.hasPerk(PerkLib.TrueSeeing)) accmod += 40;
-        if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
-        if (player.jewelryName == "Ring of deadeye aim") accmod += 40;
-        if (player.weaponRangeName == "Touhouna M3") accmod -= 20;
+		if (player.hasPerk(PerkLib.TrueSeeing)) baccmod += 40;
+        if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) baccmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
+        if (player.jewelryName == "Ring of deadeye aim") baccmod += 40;
+		return baccmod;
+	}
+
+    public function arrowsAccuracy():Number {
+        var accmod:Number = 0;
+		accmod += baseRangeAccuracy();
+		accmod += Math.round((masteryArcheryLevel() - 1) / 2);
         return accmod;
     }
 
@@ -2409,12 +2491,21 @@ public class Combat extends BaseContent {
         return accrmodpenalty;
     }
 
+    public function throwingAccuracy():Number {
+        var taccmod:Number = 0;
+		taccmod += arrowsAccuracy();
+		taccmod += Math.round((masteryThrowingLevel() - 1) / 2);
+        return taccmod;
+    }
+
     public function firearmsAccuracy():Number {
         var faccmod:Number = 0;
         faccmod += arrowsAccuracy();
         if (player.hasKeyItem("Gun Scope") >= 0) faccmod += 40;
         if (player.hasKeyItem("Gun Scope with Aim tech") >= 0) faccmod += 60;
         if (player.hasKeyItem("Gun Scope with Aimbot") >= 0) faccmod += 80;
+		faccmod += Math.round((masteryFirearmsLevel() - 1) / 2);
+        if (player.weaponRangeName == "Touhouna M3") faccmod -= 20;
 		if (player.weaponRangePerk == "Dual Firearms") faccmod += Math.round((dualWFLevel() - 1) / 2);
 		faccmod += firearmsDualWieldAccuracyPenalty();
         return faccmod;
@@ -2698,6 +2789,7 @@ public class Combat extends BaseContent {
 					if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.05;
 				}
 			}
+			damage *= (1 + (0.01 * masteryArcheryLevel()));
             if (damage == 0) {
                 if (monster.inte > 0) {
                     outputText(monster.capitalA + monster.short + " shrugs as the " + ammoWord + " bounces off them harmlessly.\n\n");
@@ -2797,7 +2889,11 @@ public class Combat extends BaseContent {
                 else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
                 else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
                 else doDamage(damage, true, true);
-                if (crit) outputText(" <b>*Critical Hit!*</b>");
+                if (crit) {
+					outputText(" <b>*Critical Hit!*</b>");
+					archeryXP(1);
+				}
+				archeryXP(1);
                 outputText("\n\n");
                 checkAchievementDamage(damage);
                 flags[kFLAGS.ARROWS_SHOT]++;
@@ -2816,6 +2912,8 @@ public class Combat extends BaseContent {
                     else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
                     else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
                     else doDamage(damage, true, true);
+					if (crit) archeryXP(1);
+					archeryXP(1);
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
 				WrathGenerationPerHit(damage);
@@ -2914,9 +3012,7 @@ public class Combat extends BaseContent {
                 }
                 outputText("\n");
             }
-            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < 10) {
-                outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
-            }
+            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < 10) outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
             if (player.weaponRangeName == "Hodr's bow" && !monster.hasStatusEffect(StatusEffects.Blind)) monster.createStatusEffect(StatusEffects.Blind, 1, 0, 0, 0);
             outputText("\n");
             if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
@@ -2975,7 +3071,7 @@ public class Combat extends BaseContent {
     public function throwWeapon():void {
         var fc:Number = oneThrowTotalCost();
         var accRange:Number = 0;
-        accRange += (arrowsAccuracy() / 2);
+        accRange += (throwingAccuracy() / 2);
         if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
         if (player.hasPerk(PerkLib.PhantomShooting))
         {
@@ -3012,6 +3108,7 @@ public class Combat extends BaseContent {
                 else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
                 else damage = Math.round(damage * 1.4);
             }
+			damage *= (1 + (0.01 * masteryThrowingLevel()));
             if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
                 //if (damage == 0) {
                 if (monster.inte > 0) {
@@ -3107,7 +3204,11 @@ public class Combat extends BaseContent {
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
                 doDamage(damage, true, true);
-                if (crit) outputText(" <b>*Critical Hit!*</b>");
+                if (crit) {
+					outputText(" <b>*Critical Hit!*</b>");
+					throwingXP(1);
+				}
+				throwingXP(1);
                 outputText("\n\n");
                 doNext(endHpVictory);
                 return;
@@ -3115,6 +3216,8 @@ public class Combat extends BaseContent {
                 if (!MSGControll) {
                     outputText(".  It's clearly very painful. ");
                     doDamage(damage, true, true);
+					if (crit) throwingXP(1);
+					throwingXP(1);
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
@@ -3271,6 +3374,7 @@ public class Combat extends BaseContent {
                     }
 				}
             }
+			damage *= (1 + (0.01 * masteryFirearmsLevel()));
 			if (player.weaponRangePerk == "Dual Firearms") damage *= (1 + (0.01 * dualWFLevel()));
             if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
                 //if ((damage == 0) ){
@@ -3371,7 +3475,11 @@ public class Combat extends BaseContent {
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
                 doDamage(damage, true, true);
-                if (crit) outputText(" <b>*Critical Hit!*</b>");
+                if (crit) {
+					outputText(" <b>*Critical Hit!*</b>");
+					firearmsXP(1);
+				}
+				firearmsXP(1);
 				if (player.weaponRangePerk == "Dual Firearms") {
 					if (crit) dualWieldFirearmsXP(1);
 					dualWieldFirearmsXP(1);
@@ -3383,6 +3491,8 @@ public class Combat extends BaseContent {
                 if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
                     outputText(".  It's clearly very painful. ");
                     doDamage(damage, true, true);
+					if (crit) firearmsXP(1);
+					firearmsXP(1);
 					if (player.weaponRangePerk == "Dual Firearms") {
 						if (crit) dualWieldFirearmsXP(1);
 						dualWieldFirearmsXP(1);
@@ -3392,7 +3502,11 @@ public class Combat extends BaseContent {
                         outputText(".  It's clearly very painful. ");
                         doDamage(damage, true, true);
                     }
-                    if (crit) outputText(" <b>*Critical Hit!*</b>");
+                    if (crit) {
+						outputText(" <b>*Critical Hit!*</b>");
+						firearmsXP(1);
+					}
+					firearmsXP(1);
 					if (player.weaponRangePerk == "Dual Firearms") {
 						if (crit) dualWieldFirearmsXP(1);
 						dualWieldFirearmsXP(1);
@@ -4408,7 +4522,7 @@ public class Combat extends BaseContent {
                 damage += (player.spe / 2);
                 damage += scalingBonusSpeed() * 0.10;
             }
-            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
             if (damage < 10) damage = 10;
             //Weapon addition!
             if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
@@ -4477,11 +4591,15 @@ public class Combat extends BaseContent {
             }
             if (player.weapon == weapons.BFGAUNT) damage *= 4;
             if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
+			if (player.isGauntletWeapon()) damage *= (1 + (0.01 * masteryGauntletLevel()));
 			if (player.isSwordTypeWeapon()) damage *= (1 + (0.01 * masterySwordLevel()));
 			if (player.isAxeTypeWeapon()) damage *= (1 + (0.01 * masteryAxeLevel()));
 			if (player.isMaceHammerTypeWeapon()) damage *= (1 + (0.01 * masteryMaceHammerLevel()));
 			if (player.isDuelingTypeWeapon()) damage *= (1 + (0.01 * masteryDuelingSwordLevel()));
 			if (player.isSpearTypeWeapon()) damage *= (1 + (0.01 * masterySpearLevel()));
+			if (player.isDaggerTypeWeapon()) damage *= (1 + (0.01 * masteryDaggerLevel()));
+			if (player.isWhipTypeWeapon()) damage *= (1 + (0.01 * masteryWhipLevel()));
+			if (player.isExoticTypeWeapon()) damage *= (1 + (0.01 * masteryExoticLevel()));
 			if (player.weaponPerk == "Dual Small") damage *= (1 + (0.01 * dualWSLevel()));
 			if (player.weaponPerk == "Dual") damage *= (1 + (0.01 * dualWNLevel()));
 			if (player.weaponPerk == "Dual Large") damage *= (1 + (0.01 * dualWLLevel()));
@@ -4742,6 +4860,7 @@ public class Combat extends BaseContent {
 				if (player.isDuelingTypeWeapon()) duelingswordXP(meleeMasteryEXPgains);
 				if (player.isSpearTypeWeapon()) spearXP(meleeMasteryEXPgains);
 				if (player.isDaggerTypeWeapon()) daggerXP(meleeMasteryEXPgains);
+				if (player.isWhipTypeWeapon()) whipXP(meleeMasteryEXPgains);
 				if (player.isExoticTypeWeapon()) exoticXP(meleeMasteryEXPgains);
 				if (player.weaponPerk == "Dual Small") dualWieldSmallXP(meleeMasteryEXPgains);
 				if (player.weaponPerk == "Dual") dualWieldNormalXP(meleeMasteryEXPgains);
@@ -4943,7 +5062,7 @@ public class Combat extends BaseContent {
             WrathWeaponsProc();
             heroBaneProc(damage);
             EruptingRiposte();
-            if (player.hasPerk(PerkLib.SwiftCasting) && player.isOneHandedWeapons() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
+            if (player.hasPerk(PerkLib.SwiftCasting) && player.isOneHandedWeapons() && player.isHavingFreeOffHand() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && player.mana >= spellCostWhite(40)) {
                     if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
                     else useMana(40, 5);
@@ -5378,14 +5497,15 @@ public class Combat extends BaseContent {
 			generatedWrath += damage / 10;
 			generatedWrath = Math.sqrt(generatedWrath);
 			generatedWrath = Math.round(generatedWrath);
-			if (generatedWrath > 0) player.wrath += generatedWrath;
-			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
+			if (generatedWrath > 0) EngineCore.WrathChange(generatedWrath, false);
 		}
 	}
 	
 	public function WrathGenerationPerHit2(damage:int = 0):void {
-		player.wrath += damage;
-		if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
+		var addedWrath:Number = damage;
+		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath += damage;
+		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath += damage;
+		EngineCore.WrathChange(addedWrath, false);
 	}
 	
     public function WrathWeaponsProc():void {
@@ -5399,6 +5519,7 @@ public class Combat extends BaseContent {
         if (player.isLowGradeWrathWeapon()) {
             if (player.wrath >= 1) player.wrath -= 1;
             else {
+				
                 player.takePhysDamage(10);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
@@ -5409,6 +5530,7 @@ public class Combat extends BaseContent {
         if (player.isDualLowGradeWrathWeapon()) {
             if (player.wrath >= 2) player.wrath -= 2;
             else {
+				
                 player.takePhysDamage(20);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
@@ -5804,9 +5926,8 @@ public class Combat extends BaseContent {
 			 || monster.hasStatusEffect(StatusEffects.HemorrhageShield) || monster.hasStatusEffect(StatusEffects.Hemorrhage2))
 			 && player.hasPerk(PerkLib.YourPainMyPower)) {
 				player.HP += damage;
-				player.wrath += WrathGains;
 				if (player.HP > (player.maxHP() + player.maxOverHP())) player.HP = player.maxHP() + player.maxOverHP();
-				if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
+				EngineCore.WrathChange(WrathGains, false);
 			}
 			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
@@ -8275,6 +8396,14 @@ public class Combat extends BaseContent {
                 outputText("<b>Earth Stance effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.EarthStance, 1, -1);
         }
+        //Punishing Kick
+        if (player.hasStatusEffect(StatusEffects.CooldownPunishingKick)) {
+            if (player.statusEffectv1(StatusEffects.CooldownPunishingKick) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownPunishingKick);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownPunishingKick, 1, -1);
+            }
+        }
         //Eclipsing shadow
         if (player.hasStatusEffect(StatusEffects.CooldownEclipsingShadow)) {
             if (player.statusEffectv1(StatusEffects.CooldownEclipsingShadow) <= 0) {
@@ -8345,6 +8474,38 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownSoulBlast);
             } else {
                 player.addStatusValue(StatusEffects.CooldownSoulBlast, 1, -1);
+            }
+        }
+		//Flames of Love
+		if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
+            if (player.statusEffectv1(StatusEffects.CooldownFlamesOfLove) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownFlamesOfLove);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownFlamesOfLove, 1, -1);
+            }
+        }
+		//Icicles of Love
+		if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
+            if (player.statusEffectv1(StatusEffects.CooldownIciclesOfLove) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownIciclesOfLove);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownIciclesOfLove, 1, -1);
+            }
+        }
+		//Storm of Sisterhood
+		if (player.hasStatusEffect(StatusEffects.CooldownStormOfSisterhood)) {
+            if (player.statusEffectv1(StatusEffects.CooldownStormOfSisterhood) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownStormOfSisterhood);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownStormOfSisterhood, 1, -1);
+            }
+        }
+		//Night of Brotherhood
+		if (player.hasStatusEffect(StatusEffects.CooldownNightOfBrotherhood)) {
+            if (player.statusEffectv1(StatusEffects.CooldownNightOfBrotherhood) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownNightOfBrotherhood);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownNightOfBrotherhood, 1, -1);
             }
         }
         //Second Wind Regen
@@ -8613,7 +8774,7 @@ public class Combat extends BaseContent {
         var gainedwrath:Number = 0;
         if (combat) {
             var BonusWrathMult:Number = 1;
-            if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.2;
+            if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 0.2;
             gainedwrath += wrathregeneration2() * 2 * BonusWrathMult;
             if (player.hasStatusEffect(StatusEffects.Berzerking)) gainedwrath += 6 * BonusWrathMult;
             if (player.hasStatusEffect(StatusEffects.Lustzerking)) gainedwrath += 6 * BonusWrathMult;
@@ -8629,8 +8790,10 @@ public class Combat extends BaseContent {
             EngineCore.WrathChange(gainedwrath, false);
         }
 		else {
-            gainedwrath += wrathregeneration2();
-            EngineCore.WrathChange(gainedwrath, false);
+			var LostWrathPerTick:Number = player.maxWrath();
+			LostWrathPerTick *= -0.6;
+			LostWrathPerTick = Math.round(LostWrathPerTick);
+            EngineCore.WrathChange(LostWrathPerTick, false);
         }
     }
 
@@ -8724,6 +8887,10 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.GreyMage) && player.lust < 30) player.lust = 30;
             if (player.findPerk(PerkLib.GreyMage) < 0 && player.lust < 50) player.lust = 50;
         }
+		if (player.hasPerk(PerkLib.AdrenalineRush)) {
+			player.wrath += 100;
+			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
+		}
         magic.applyAutocast();
         mspecials.applyAutocast2();
         //Adjust lust vulnerability in New Game+.
@@ -8792,10 +8959,10 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.GreyMage) && player.lust < 30) player.lust = 30;
             if (player.findPerk(PerkLib.GreyMage) < 0 && player.lust < 50) player.lust = 50;
         }
-		/*if (player.hasPerk(PerkLib.WellspringOfLust)) {//place to make starting wraith higher due to perks
-            if (player.hasPerk(PerkLib.GreyMage) && player.lust < 30) player.lust = 30;
-            if (player.findPerk(PerkLib.GreyMage) < 0 && player.lust < 50) player.lust = 50;
-        }*/
+		if (player.hasPerk(PerkLib.AdrenalineRush)) {
+			player.wrath += 100;
+			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
+		}
         magic.applyAutocast();
         mspecials.applyAutocast2();
         //Adjust lust vulnerability in New Game+.
@@ -9175,10 +9342,31 @@ public class Combat extends BaseContent {
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.daggerXP(XP);
         player.daggerXP(XP);
     }
+	public function whipXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.whipXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.whipXP(XP);
+        player.whipXP(XP);
+    }
 	public function exoticXP(XP:Number = 0):void {
         if (player.humanScore() == player.humanMaxScore()) player.exoticXP(XP);
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.exoticXP(XP);
         player.exoticXP(XP);
+    }
+	
+	public function archeryXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.archeryXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.archeryXP(XP);
+        player.archeryXP(XP);
+    }
+	public function throwingXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.throwingXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.throwingXP(XP);
+        player.throwingXP(XP);
+    }
+	public function firearmsXP(XP:Number = 0):void {
+        if (player.humanScore() == player.humanMaxScore()) player.firearmsXP(XP);
+		else if (player.humanScore() >= player.humanMaxScore() - 9) player.firearmsXP(XP);
+        player.firearmsXP(XP);
     }
 
 	public function dualWieldSmallXP(XP:Number = 0):void {
@@ -9421,7 +9609,7 @@ public class Combat extends BaseContent {
             fatigue(20, USEFATG_PHYSICAL);
             var damage:Number = player.str;
             damage += scalingBonusStrength() * 0.25;
-            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
             if (damage < 10) damage = 10;
             if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
             else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -9482,7 +9670,7 @@ public class Combat extends BaseContent {
             if (player.level >= 30) SAMulti += 1;
             if (player.level >= 36) SAMulti += 1;
             damage += scalingBonusStrength() * 0.25;
-            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING) damage *= 1.2;
             if (damage < 10) damage = 10;
             if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
             else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -11631,13 +11819,14 @@ public class Combat extends BaseContent {
     public function flamesOfLove():void {
         clearOutput();
         var fireDMG:Number = 0;
-        fireDMG += Math.round(player.lust * 0.9);
-        player.createStatusEffect(StatusEffects.CooldownFlamesOfLove, 4, 0, 0, 0);
+        fireDMG += Math.round(player.lust * 0.3);
+        player.createStatusEffect(StatusEffects.CooldownFlamesOfLove, 2, 0, 0, 0);
         player.lust -= fireDMG;
-        fireDMG *= 2;
+        fireDMG *= 10;
+		if (monster.plural) fireDMG *= 2;
         outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing flames of love with enemy. Shortly after that lust starts to gather around your hands getting hotter and hotter till it envelop your hands in flames.\n\n");
         outputText("And with almost orgasmic joy, you sends a wave of flames toward " + monster.a + monster.short + " while mumbling about 'sharing the flames of love'.");
-		doDamage(fireDMG);
+		doFireDamage(fireDMG);
         outputText("\n\n");
         enemyAI();
     }
@@ -11645,13 +11834,44 @@ public class Combat extends BaseContent {
     public function iciclesOfLove():void {
         clearOutput();
         var iceDMG:Number = 0;
-        iceDMG += Math.round(player.lust * 0.9);
-        player.createStatusEffect(StatusEffects.CooldownIciclesOfLove, 4, 0, 0, 0);
+        iceDMG += Math.round(player.lust * 0.3);
+        player.createStatusEffect(StatusEffects.CooldownIciclesOfLove, 2, 0, 0, 0);
         player.lust -= iceDMG;
-        iceDMG *= 2;
+        iceDMG *= 10;
+        if (monster.plural) iceDMG *= 2;
         outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing icicles of love with enemy. Shortly after that lust starts to gather around your hands getting colder and colder till it envelop your hands in icicles.\n\n");
         outputText("And with almost orgasmic joy, you sends a wave of ice shards toward " + monster.a + monster.short + " while mumbling about 'sharing the icicles of love'.");
-		doDamage(iceDMG);
+		doIceDamage(iceDMG);
+        outputText("\n\n");
+        enemyAI();
+    }
+
+    public function stormOfSisterhood():void {
+        clearOutput();
+        var lightingDMG:Number = 0;
+        lightingDMG += Math.round(player.wrath * 0.3);
+        player.createStatusEffect(StatusEffects.CooldownStormOfSisterhood, 2, 0, 0, 0);
+        player.wrath -= lightingDMG;
+        lightingDMG *= 10;
+        if (monster.plural) lightingDMG *= 2;
+        outputText("You start concentrate on the wrath flowing in your body, your veins while imaging a joy of sharing storm of sisterhood with enemy. Shortly after that wrath starts to gather around your hands till it envelop your hands in ligthing.\n\n");
+        outputText("With joy, you sends a mass of ligthing toward " + monster.a + monster.short + " while mumbling about 'sharing the storm of sisterhood'.");
+		doLightingDamage(lightingDMG);
+        outputText("\n\n");
+        enemyAI();
+    }
+
+    public function nightOfBrotherhood():void {
+        clearOutput();
+        var darknessDMG:Number = 0;
+        darknessDMG += Math.round(player.wrath * 0.3);
+        player.createStatusEffect(StatusEffects.CooldownNightOfBrotherhood, 2, 0, 0, 0);
+        player.wrath -= darknessDMG;
+        darknessDMG *= 10;
+        if (monster.plural) darknessDMG *= 2;
+        outputText("You start concentrate on the wrath flowing in your body, your veins while imaging a joy of sharing night of brotherhood with enemy. Shortly after that wrath starts to gather around your hands till it envelop your hands in darkness.\n\n");
+        outputText("With joy, you sends a mass of darkness toward " + monster.a + monster.short + " while mumbling about 'sharing the night of brotherhood'.");
+		doDarknessDamage(darknessDMG);
         outputText("\n\n");
         enemyAI();
     }

@@ -357,184 +357,12 @@ public class PlayerInfo extends BaseContent {
 			outputText("\n\n<b>You have " + num2Text(player.statPoints) + " attribute point" + (player.statPoints == 1 ? "" : "s") + " to distribute.</b>");
 			addButton(1, "Stat Up", attributeMenu);
 		}
-		addButton(2, "Mutations", displayMutationsUsed);
-		addButtonDisabled(10, "General", "You are currently at this stats page.");
-		addButton(11, "Combat", displayStatsCombat);
-		addButton(12, "NPC's", displayStatsNpcs);
-		addButton(13, "Children", displayStatsChildren);
-		addButton(14, "Mastery", displayStatsmastery);
-	}
-	public function displayMutationsUsed():void{
-		spriteSelect(-1);
-		clearOutput()
-		displayHeader("Mutation Stats");
-		var mutationCount:Number = 1
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
-			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
-			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
-			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation04) >= 0)
-			mutationCount++;
-		outputText("\nYou have " + mutationCount + " mutation slots per part."+
-		"\nNote: Not all body parts will use all available slots.")
-		//Probably a better way than this to check. Perhaps a helper function to use as a template to check. This'll do for a rudimentary proof of concept.
-		//Can't auto-keep track of body max mutations per part, since body mutations can be added as needed, but nothing to definitively check.
-		//That means I'd have to keep updating this if Orm or Lia adds a new mutation.
-		//Also, when Orm reworks perks to use v1/v2/v3 things, can also display the current tier.
-
-		//Heart Mutations
-		outputText("\n\nHeart Mutations:")
-		if (player.findPerk(PerkLib.BlackHeart) >= 0)
-			outputText("\nBlack Heart: Acquired.")
-		if (player.findPerk(PerkLib.FrozenHeart) >= 0)
-			outputText("\nFrozen Heart: Acquired.")
-		if (player.findPerk(PerkLib.ObsidianHeart) >= 0)
-			outputText("\nObsidian Heart: Acquired.")
-		if (player.findPerk(PerkLib.TwinHeart) >= 0)
-			outputText("\nTwin Heart: Acquired.")
-		if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0)
-			outputText("\nHeart of the storm: Acquired.")
-		if (player.findPerk(PerkLib.DraconicHeart) >= 0)
-			outputText("\nDragonic Heart: Acquired.")
-
-		//Muscle Mutations
-		outputText("\n\nMuscle Mutations:")
-		if (player.findPerk(PerkLib.MantislikeAgility) >= 0)
-			outputText("\nMantis Agility: Acquired.")
-		if (player.findPerk(PerkLib.OniMusculature) >= 0)
-			outputText("\nOni Musculature: Acquired.")
-
-		//Mouth Mutations
-		outputText("\n\nMouth Mutations:")
-		if (player.findPerk(PerkLib.VenomGlands) >= 0)
-			outputText("\nVenom Glands: Acquired.")
-		if (player.findPerk(PerkLib.HollowFangs) >= 0)
-			outputText("\nHollow Fangs: Acquired.")
-
-		//Adrenal Glands Mutations
-		outputText("\n\nAdrenal Gland Mutations:")
-		if (player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)
-			outputText("\nSalamander Adrenal Glands: Acquired.")
-		if (player.findPerk(PerkLib.OrcAdrenalGlands) >= 0)
-			outputText("\nOrc Adrenal Glands: Acquired.")
-
-		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
-		outputText("\n\nBloodstream Mutations:")
-		if (player.findPerk(PerkLib.VampiricBloodsteam) >= 0)
-			outputText("\nVampiric Bloodstream: Acquired.")
-		if (player.findPerk(PerkLib.HinezumiBurningBlood) >= 0)
-			outputText("\nHinezume Burning Bloodstream: Acquired.")
-		if (player.findPerk(PerkLib.FeyArcaneBloodstream) >=0)
-			outputText("\nFey Arcane Bloodstream: Acquired.")
-
-		//Fat tissue Mutations
-		outputText("\n\nFat and Tissue Mutations:")
-		if (player.findPerk(PerkLib.PigBoarFat) >= 0)
-			outputText("\nPig/Boar Fat: Acquired.")
-		if (player.findPerk(PerkLib.NaturalPunchingBag) >= 0)
-			outputText("\nNatural Punching Bag: Acquired.")
-		if (player.findPerk(PerkLib.WhaleFat) >= 0)
-			outputText("\nWhale Fat: Acquired.")
-		if (player.findPerk(PerkLib.YetiFat) >= 0)
-			outputText("\nYeti Fat: Acquired.")
-
-		//Lungs Mutations
-		outputText("\n\nLungs Mutations:")
-		if (player.findPerk(PerkLib.DraconicLungs) >= 0)
-			outputText("\nDraconic Lungs: Acquired.")
-		if (player.findPerk(PerkLib.CaveWyrmLungs) >= 0)
-			outputText("\nCave Wyrm Lungs: Acquired.")
-		if (player.findPerk(PerkLib.MelkieLung) >= 0)
-			outputText("\nMelkie Lungs: Acquired.")
-		if (player.findPerk(PerkLib.DrakeLungs) >= 0)
-			outputText("\nDrake Lungs: Acquired.")
-
-		//Metabolism Mutations
-		outputText("\n\nMetabolism Mutations:")
-		if (player.findPerk(PerkLib.ManticoreMetabolism) >= 0)
-			outputText("\nManticore Metabolism: Acquired.")
-		if (player.findPerk(PerkLib.DisplacerMetabolism) >= 0)
-			outputText("\nDisplacer Metabolism: Acquired.")
-
-		//Ovaries Mutations
-		outputText("\n\nOvaries Mutations:")
-		if (player.findPerk(PerkLib.LactaBovinaOvaries) >= 0)
-			outputText("\nLacta Bovine Ovaries: Acquired.")
-		if (player.findPerk(PerkLib.FloralOvaries) >= 0)
-			outputText("\nFloral Ovaries: Acquired.")
-
-		//Testicle Mutations
-		outputText("\n\nBalls Mutations:")
-		if (player.findPerk(PerkLib.MinotaurTesticles) >= 0)
-			outputText("\nMinotaur Testicles: Acquired.")
-		if (player.findPerk(PerkLib.EasterBunnyEggBag) >= 0)
-			outputText("\nEaster Bunny Balls: Acquired.")
-		if (player.findPerk(PerkLib.NukiNuts) >= 0)
-			outputText("\nNuki Nuts: Acquired.")
-
-		//Eyes Mutations
-		outputText("\n\nEye Mutations:")
-		if (player.findPerk(PerkLib.GorgonsEyes) >= 0)
-			outputText("\nGorgon Eyes: Acquired.")
-		if (player.findPerk(PerkLib.GazerEye) >= 0)
-			outputText("\nGazer Eyes: Acquired.")
-
-		//Peripheral/NervSys Mutations
-		outputText("\n\nPeripheral Nervous System Mutations:")
-		if (player.findPerk(PerkLib.ElvishPeripheralNervSys) >= 0)
-			outputText("\nElvish Nervous System: Acquired.")
-
-		//Bones and Marrow Mutations
-		outputText("\n\nBones and Marrow Mutations:")
-		if (player.findPerk(PerkLib.LizanMarrow) >= 0)
-			outputText("\nLizan Marrow: Acquired.")
-		if (player.findPerk(PerkLib.DraconicBones) >= 0)
-			outputText("\nDraconic Bones: Acquired.")
-		if (player.findPerk(PerkLib.HarpyHollowBones) >= 0)
-			outputText("\nHarpy Hollow Bones: Acquired.")
-
-		//Thyroid Glands Mutations
-		outputText("\n\nThyroid Gland Mutations:")
-		if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0)
-			outputText("\nKitsune Thyroid Gland: Acquired.")
-		if (player.findPerk(PerkLib.NekomataThyroidGland) >= 0)
-			outputText("\nNekomata Thyroid Gland: Acquired.")
-
-		//ParaThyroid Glands Mutations. What's the difference between this and the above???
-		outputText("\n\nParaThyroid Glands Mutations:")
-		if (player.findPerk(PerkLib.KitsuneParathyroidGlands) >= 0)
-			outputText("\nKitsune Para-Thyroid Glands: Acquired.")
-		if (player.findPerk(PerkLib.HellcatParathyroidGlands) >= 0)
-			outputText("\nHellcat Para-Thyroid Glands: Acquired.")
-
-		//Dragon Mutations
-		outputText("\n\nDragon Mutations:")
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+")
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++")
-		if (player.findPerk(PerkLib.DraconicBones) >= 0)
-			outputText("\nDraconic Bones: Acquired.")
-		if (player.findPerk(PerkLib.DraconicHeart) >= 0)
-			outputText("\nDraconic Heart: Acquired.")
-		if (player.findPerk(PerkLib.DraconicLungs) >= 0)
-			outputText("\nDraconic Lungst: Acquired.")
-
-		//Kitsune Mutations
-		outputText("\n\nKitsune Mutations:")
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+")
-		if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0)
-			outputText("\nKitsune Thyroid Gland: Acquired.")
-		if (player.findPerk(PerkLib.KitsuneParathyroidGlands) >= 0)
-			outputText("\nKitsune Para-Thyroid Glands: Acquired.")
-
-		menu();
-		addButton(0, "Next", playerMenu);
-		addButton(10, "General", displayStats);
-		addButtonDisabled(11, "Combat", "You are currently at this stats page.");
-		addButton(12, "NPC's", displayStatsNpcs);
-		addButton(13, "Children", displayStatsChildren);
-		addButton(14, "Mastery", displayStatsmastery);
+		addButtonDisabled(5, "General", "You are currently at this stats page.");
+		addButton(6, "Combat", displayStatsCombat);
+		addButton(7, "NPC's", displayStatsNpcs);
+		addButton(8, "Children", displayStatsChildren);
+		addButton(9, "Mastery", displayStatsmastery);
+		addButton(10, "Mutations", displayMutationsUsed);
 	}
 	public function displayStatsCombat():void {
 		spriteSelect(-1);
@@ -580,7 +408,7 @@ public class PlayerInfo extends BaseContent {
 		if (player.findPerk(PerkLib.OctaAttackSmall) >= 0) combatStats += "<b>Accuracy (8th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 7)) + "%\n";
 		if (player.findPerk(PerkLib.NonaAttackSmall) >= 0) combatStats += "<b>Accuracy (9th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 8)) + "%\n";
 		if (player.findPerk(PerkLib.DecaAttackSmall) >= 0) combatStats += "<b>Accuracy (10th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 9)) + "%\n";
-		combatStats += "\n";
+		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Archery Mastery)</i>\n";
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kindra) < 1)
 				combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusEffectv1(StatusEffects.Kelt)) + " / 100\n";
@@ -598,13 +426,16 @@ public class PlayerInfo extends BaseContent {
 		if (player.hasPerk(PerkLib.Manyshot)) combatStats += "<b>Bow/Crossbow Accuracy (4th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 3)) + "%\n";
 		if (player.hasPerk(PerkLib.WildQuiver)) combatStats += "<b>Bow/Crossbow Accuracy (5th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 4)) + "%\n";
 		if (player.hasPerk(PerkLib.Multishot)) combatStats += "<b>Bow/Crossbow Accuracy (6th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - (combat.arrowsAccuracyPenalty() * 5)) + "%\n";
-		combatStats += "<b>Throwed Weapon Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
-		if (player.hasPerk(PerkLib.DoubleStrike)) combatStats += "<b>Throwed Weapon Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 15) + "%\n";
-		if (player.hasPerk(PerkLib.TripleStrike)) combatStats += "<b>Throwed Weapon Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 30) + "%\n";
+		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Archery Mastery)</i>\n";
+		combatStats += "<b>Throwed Weapon Accuracy (1st range attack):</b> " + (combat.throwingAccuracy() / 2) + "%\n";
+		if (player.hasPerk(PerkLib.DoubleStrike)) combatStats += "<b>Throwed Weapon Accuracy (2nd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 15) + "%\n";
+		if (player.hasPerk(PerkLib.TripleStrike)) combatStats += "<b>Throwed Weapon Accuracy (3rd range attack):</b> " + ((combat.throwingAccuracy() / 2) - 30) + "%\n";
+		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Throwing Weapons Mastery)</i>\n";
 		combatStats += "<b>Firearms Accuracy (1st range attack):</b> " + (combat.firearmsAccuracy() / 2) + "%\n";
 		if (player.hasPerk(PerkLib.AmateurGunslinger)) combatStats += "<b>Firearms Accuracy (2nd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - (combat.firearmsAccuracyPenalty() + combat.firearmsDualWieldAccuracyPenalty())) + "%\n";
 		if (player.hasPerk(PerkLib.ExpertGunslinger)) combatStats += "<b>Firearms Accuracy (3rd range attack):</b> " + ((combat.firearmsAccuracy() / 2) - ((combat.firearmsAccuracyPenalty() + combat.firearmsDualWieldAccuracyPenalty()) * 2)) + "%\n";
 		if (player.hasPerk(PerkLib.MasterGunslinger)) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((combat.firearmsAccuracy() / 2) - ((combat.firearmsAccuracyPenalty() + combat.firearmsDualWieldAccuracyPenalty()) * 3)) + "%\n";
+		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Firearms Mastery)</i>\n";
 		combatStats += "\n";
 		combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMod()) + "%\n";
 		combatStats += "<b>Physical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillPhysicalMod()) + "%\n";
@@ -612,6 +443,9 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost()) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
+		combatStats += "<b>Venom:</b> " + Math.floor(player.tailVenom) + " / " + player.maxVenom() + "\n";
+		combatStats += "<b>Venom Recharge:</b> +" + player.tailRecharge + " / hour\n";
+		combatStats += "\n";
 		var mins:Object = player.getAllMinStats();
 		combatStats += "<b>Strength Cap:</b> " + Math.floor(player.strStat.max) + "\n";
 		combatStats += "<i>Ghost Strength:</i> +" + Math.floor(combat.ghostStrength()) + "\n";
@@ -629,29 +463,29 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<i>Sensitivity Minimum:</i> " + mins.sens + "\n";
 		combatStats += "<i>Corruption Minimum:</i> " + mins.cor + "\n";
 		combatStats += "\n";
-		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
-		if (vthirst != null) {
-			combatStats += "<b>Vampire Thirst:</b> " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
-			if (vthirst.currentBoost > 0) combatStats += "(+" + vthirst.currentBoost + " to str / spe / int / lib)";
-			combatStats += "\n\n";
-		}
-		combatStats += "<b>Minimum HP (reaching it mean HP based defeat):</b> " + player.minHP() + "\n";
-		combatStats += "<b>Over HP (HP amount that can be reached beyond default 100% of Health bar):</b> " + (player.maxOverHP() - player.maxHP()) + "\n";
 		combatStats += "<b>HP Regeneration (%):</b> ~ " + combat.PercentBasedRegeneration() + " % / " + combat.maximumRegeneration() + " % (turn), ~ " + combat.PercentBasedRegeneration() * 2 + " % / " + combat.maximumRegeneration() * 2 + " % (hour)\n";
 		combatStats += "<b>HP Regeneration (Total):</b> ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) + " HP /  turn, ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) * 2 + " HP /  hour\n";
 		combatStats += "<b>Fatigue Recovery:</b> " + combat.fatigueRecovery2() + " / turn\n";
-		combatStats += "<b>Wrath Generation:</b> " + combat.wrathregeneration2() * 2 + " / turn, " + combat.wrathregeneration2() + " / hour\n";
-		combatStats += "<b>Maximum Safe Wrath (Wrath amount that will not hinder PC ability to perfrom mental tasks like using spells or using magical soulskills):</b> " + player.maxSafeWrath() + "\n";
-		combatStats += "<b>Over Wrath (Wrath amount that can be reached beyond default 100% of Wrath bar):</b> " + (player.maxOverWrath() - player.maxWrath()) + "\n";
+		combatStats += "<b>Wrath Generation:</b> " + combat.wrathregeneration2() * 2 + " / turn, - 60 % / hour\n";
 		combatStats += "<b>Mana Regeneration:</b> " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) + " / turn, " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) * 2 + " / hour\n";
 		combatStats += "<b>Soulforce Regeneration:</b> " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) + " / turn, " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) * 2 + " / hour\n";
-
+		combatStats += "\n";
+		combatStats += "<b>Minimum HP (reaching it mean HP based defeat):</b> " + player.minHP() + "\n";
+		combatStats += "<b>Over HP (HP amount that can be reached beyond default 100% of Health bar):</b> " + (player.maxOverHP() - player.maxHP()) + "\n";
+		combatStats += "<b>Maximum Safe Wrath (treshold after which spells and magic specials are unaccesable):</b> " + player.maxSafeWrath() + "\n";
+		combatStats += "<b>Over Wrath (Wrath amount that can be reached beyond default 100% of Wrath bar):</b> " + (player.maxOverWrath() - player.maxWrath()) + "\n";
 		combatStats += "\n";
 		combatStats += "<b>Base evasion:</b> " + player.getEvasionChance() + " %\n";
 		combatStats += "<b>Base block chance:</b> " + combat.combatBlock2() + " %\n";
 		combatStats += "<b>Base parry chance:</b> " + combat.combatParry2() + " %\n";
 		combatStats += "<b>Base physical attacks critical chance:</b> " + combat.combatPhysicalCritical() + " %\n";
 		combatStats += "<b>Base magical attacks critical chance:</b> " + combat.combatMagicalCritical() + " %\n";
+		var vthirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
+		if (vthirst != null) {
+			combatStats += "<b>Vampire Thirst:</b> " + vthirst.value1 + "/" + vthirst.maxThirst() + " ";
+			if (vthirst.currentBoost > 0) combatStats += "(+" + vthirst.currentBoost + " to str / spe / int / lib)";
+			combatStats += "\n";
+		}
 
 		if (combatStats != "")
 			outputText("\n<b><u>Combat Stats</u></b>\n" + combatStats);
@@ -673,12 +507,12 @@ public class PlayerInfo extends BaseContent {
 		
 		menu();
 		addButton(0, "Next", playerMenu);
-		addButton(2, "Mutations", displayMutationsUsed);
-		addButton(10, "General", displayStats);
-		addButtonDisabled(11, "Combat", "You are currently at this stats page.");
-		addButton(12, "NPC's", displayStatsNpcs);
-		addButton(13, "Children", displayStatsChildren);
-		addButton(14, "Mastery", displayStatsmastery);
+		addButton(5, "General", displayStats);
+		addButtonDisabled(6, "Combat", "You are currently at this stats page.");
+		addButton(7, "NPC's", displayStatsNpcs);
+		addButton(8, "Children", displayStatsChildren);
+		addButton(9, "Mastery", displayStatsmastery);
+		addButton(10, "Mutations", displayMutationsUsed);
 	}
 	public function displayStatsNpcs():void {
 		spriteSelect(-1);
@@ -1159,12 +993,12 @@ public class PlayerInfo extends BaseContent {
 		// End Outside camp NPC's Stats
 		menu();
 		addButton(0, "Next", playerMenu);
-		addButton(2, "Mutations", displayMutationsUsed);
-		addButton(10, "General", displayStats);
-		addButton(11, "Combat", displayStatsCombat);
-		addButtonDisabled(12, "NPC's", "You are currently at this stats page.");
-		addButton(13, "Children", displayStatsChildren);
-		addButton(14, "Mastery", displayStatsmastery);
+		addButton(5, "General", displayStats);
+		addButton(6, "Combat", displayStatsCombat);
+		addButtonDisabled(7, "NPC's", "You are currently at this stats page.");
+		addButton(8, "Children", displayStatsChildren);
+		addButton(9, "Mastery", displayStatsmastery);
+		addButton(10, "Mutations", displayMutationsUsed);
 	}
 	public function displayStatsChildren():void {
 		spriteSelect(-1);
@@ -1316,12 +1150,12 @@ public class PlayerInfo extends BaseContent {
 		// End Children Stats
 		menu();
 		addButton(0, "Next", playerMenu);
-		addButton(2, "Mutations", displayMutationsUsed);
-		addButton(10, "General", displayStats);
-		addButton(11, "Combat", displayStatsCombat);
-		addButton(12, "NPC's", displayStatsNpcs);
-		addButtonDisabled(13, "Children", "You are currently at this stats page.");
-		addButton(14, "Mastery", displayStatsmastery);
+		addButton(5, "General", displayStats);
+		addButton(6, "Combat", displayStatsCombat);
+		addButton(7, "NPC's", displayStatsNpcs);
+		addButtonDisabled(8, "Children", "You are currently at this stats page.");
+		addButton(9, "Mastery", displayStatsmastery);
+		addButton(10, "Mutations", displayMutationsUsed);
 	}
 	public function displayStatsmastery():void {
 		spriteSelect(-1);
@@ -1333,6 +1167,10 @@ public class PlayerInfo extends BaseContent {
 			masteryStats += "<b>Gauntlets Mastery / Dao of Gauntlet:</b>  " + player.masteryGauntletLevel + " / " + combat.maxGauntletLevel() + " (Exp: " + player.masteryGauntletXP + " / " + combat.GauntletExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryGauntletLevel + "% damage, +" + (0.5 * Math.round((player.masteryGauntletLevel - 1) / 2)) + "% accuracy)</i>\n";
 		else
 			masteryStats += "<b>Gauntlets Mastery / Dao of Gauntlet:</b>  " + player.masteryGauntletLevel + " / " + combat.maxGauntletLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryGauntletLevel + "% damage, +" + (0.5 * Math.round((player.masteryGauntletLevel - 1) / 2)) + "% accuracy)</i>\n";
+		if (player.masteryDaggerLevel < combat.maxDaggerLevel())
+			masteryStats += "<b>Daggers Mastery / Dao of Dagger:</b>  " + player.masteryDaggerLevel + " / " + combat.maxDaggerLevel() + " (Exp: " + player.masteryDaggerXP + " / " + combat.DaggerExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryDaggerLevel + "% damage, +" + (0.5 * Math.round((player.masteryDaggerLevel - 1) / 2)) + "% accuracy)</i>\n";
+		else
+			masteryStats += "<b>Daggers Mastery / Dao of Dagger:</b>  " + player.masteryDaggerLevel + " / " + combat.maxDaggerLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryDaggerLevel + "% damage, +" + (0.5 * Math.round((player.masteryDaggerLevel - 1) / 2)) + "% accuracy)</i>\n";
 		if (player.masterySwordLevel < combat.maxSwordLevel())
 			masteryStats += "<b>Swords Mastery / Dao of Sword:</b>  " + player.masterySwordLevel + " / " + combat.maxSwordLevel() + " (Exp: " + player.masterySwordXP + " / " + combat.SwordExpToLevelUp() + ")\n<i>(Effects: +" + player.masterySwordLevel + "% damage, +" + (0.5 * Math.round((player.masterySwordLevel - 1) / 2)) + "% accuracy)</i>\n";
 		else
@@ -1354,14 +1192,27 @@ public class PlayerInfo extends BaseContent {
 			masteryStats += "<b>Spears Mastery / Dao of Spear:</b>  " + player.masterySpearLevel + " / " + combat.maxSpearLevel() + " (Exp: " + player.masterySpearXP + " / " + combat.SpearExpToLevelUp() + ")\n<i>(Effects: +" + player.masterySpearLevel + "% damage, +" + (0.5 * Math.round((player.masterySpearLevel - 1) / 2)) + "% accuracy)</i>\n";
 		else
 			masteryStats += "<b>Spears Mastery / Dao of Spear:</b>  " + player.masterySpearLevel + " / " + combat.maxSpearLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masterySpearLevel + "% damage, +" + (0.5 * Math.round((player.masterySpearLevel - 1) / 2)) + "% accuracy)</i>\n";
-		if (player.masteryDaggerLevel < combat.maxDaggerLevel())
-			masteryStats += "<b>Daggers Mastery / Dao of Dagger:</b>  " + player.masteryDaggerLevel + " / " + combat.maxDaggerLevel() + " (Exp: " + player.masteryDaggerXP + " / " + combat.DaggerExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryDaggerLevel + "% damage, +" + (0.5 * Math.round((player.masteryDaggerLevel - 1) / 2)) + "% accuracy)</i>\n";
+		if (player.masteryWhipLevel < combat.maxWhipLevel())
+			masteryStats += "<b>Whip Mastery / Dao of Whip:</b>  " + player.masteryWhipLevel + " / " + combat.maxWhipLevel() + " (Exp: " + player.masteryWhipXP + " / " + combat.WhipExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryWhipLevel + "% damage, +" + (0.5 * Math.round((player.masteryWhipLevel - 1) / 2)) + "% accuracy)</i>\n";
 		else
-			masteryStats += "<b>Daggers Mastery / Dao of Dagger:</b>  " + player.masteryDaggerLevel + " / " + combat.maxDaggerLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryDaggerLevel + "% damage, +" + (0.5 * Math.round((player.masteryDaggerLevel - 1) / 2)) + "% accuracy)</i>\n";
+			masteryStats += "<b>Whip Mastery / Dao of Whip:</b>  " + player.masteryWhipLevel + " / " + combat.maxWhipLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryWhipLevel + "% damage, +" + (0.5 * Math.round((player.masteryWhipLevel - 1) / 2)) + "% accuracy)</i>\n";
 		if (player.masteryExoticLevel < combat.maxExoticLevel())
 			masteryStats += "<b>Exotic Weapons Mastery / Dao of Exotic Weapons:</b>  " + player.masteryExoticLevel + " / " + combat.maxExoticLevel() + " (Exp: " + player.masteryExoticXP + " / " + combat.ExoticExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryExoticLevel + "% damage, +" + (0.5 * Math.round((player.masteryExoticLevel - 1) / 2)) + "% accuracy)</i>\n";
 		else
 			masteryStats += "<b>Exotic Weapons Mastery / Dao of Exotic Weapons:</b>  " + player.masteryExoticLevel + " / " + combat.maxExoticLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryExoticLevel + "% damage, +" + (0.5 * Math.round((player.masteryExoticLevel - 1) / 2)) + "% accuracy)</i>\n";
+		masteryStats += "\n";
+		if (player.masteryArcheryLevel < combat.maxArcheryLevel())
+			masteryStats += "<b>Archery Mastery / Dao of Archery:</b>  " + player.masteryArcheryLevel + " / " + combat.maxArcheryLevel() + " (Exp: " + player.masteryArcheryXP + " / " + combat.ArcheryExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryArcheryLevel + "% damage, +" + (0.5 * Math.round((player.masteryArcheryLevel - 1) / 2)) + "% accuracy)</i>\n";
+		else
+			masteryStats += "<b>Archery Mastery / Dao of Archery:</b>  " + player.masteryArcheryLevel + " / " + combat.maxArcheryLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryArcheryLevel + "% damage, +" + (0.5 * Math.round((player.masteryArcheryLevel - 1) / 2)) + "% accuracy)</i>\n";
+		if (player.masteryThrowingLevel < combat.maxThrowingLevel())
+			masteryStats += "<b>Throwing Weapons Mastery / Dao of Throwing Weapons:</b>  " + player.masteryThrowingLevel + " / " + combat.maxThrowingLevel() + " (Exp: " + player.masteryThrowingXP + " / " + combat.ThrowingExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryThrowingLevel + "% damage, +" + (0.5 * Math.round((player.masteryThrowingLevel - 1) / 2)) + "% accuracy)</i>\n";
+		else
+			masteryStats += "<b>Throwing Weapons Mastery / Dao of Throwing Weapons:</b>  " + player.masteryThrowingLevel + " / " + combat.maxThrowingLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryThrowingLevel + "% damage, +" + (0.5 * Math.round((player.masteryThrowingLevel - 1) / 2)) + "% accuracy)</i>\n";
+		if (player.masteryFirearmsLevel < combat.maxFirearmsLevel())
+			masteryStats += "<b>Firearms Mastery / Dao of Firearms:</b>  " + player.masteryFirearmsLevel + " / " + combat.maxFirearmsLevel() + " (Exp: " + player.masteryFirearmsXP + " / " + combat.FirearmsExpToLevelUp() + ")\n<i>(Effects: +" + player.masteryFirearmsLevel + "% damage, +" + (0.5 * Math.round((player.masteryFirearmsLevel - 1) / 2)) + "% accuracy)</i>\n";
+		else
+			masteryStats += "<b>Firearms Mastery / Dao of Firearms:</b>  " + player.masteryFirearmsLevel + " / " + combat.maxFirearmsLevel() + " (Exp: MAX)\n<i>(Effects: +" + player.masteryFirearmsLevel + "% damage, +" + (0.5 * Math.round((player.masteryFirearmsLevel - 1) / 2)) + "% accuracy)</i>\n";
 		masteryStats += "\n";
 		if (player.hasPerk(PerkLib.DualWield)) {
 			if (player.dualWSLevel < combat.maxDualWieldSmallLevel())
@@ -1396,12 +1247,185 @@ public class PlayerInfo extends BaseContent {
 		// End Mastery Stats
 		menu();
 		addButton(0, "Next", playerMenu);
-		addButton(2, "Mutations", displayMutationsUsed);
-		addButton(10, "General", displayStats);
-		addButton(11, "Combat", displayStatsCombat);
-		addButton(12, "NPC's", displayStatsNpcs);
-		addButton(13, "Children", displayStatsChildren);
-		addButtonDisabled(14, "Mastery", "You are currently at this stats page.");
+		addButton(5, "General", displayStats);
+		addButton(6, "Combat", displayStatsCombat);
+		addButton(7, "NPC's", displayStatsNpcs);
+		addButton(8, "Children", displayStatsChildren);
+		addButtonDisabled(9, "Mastery", "You are currently at this stats page.");
+		addButton(10, "Mutations", displayMutationsUsed);
+	}
+	public function displayMutationsUsed():void{
+		spriteSelect(-1);
+		clearOutput()
+		displayHeader("Mutation Stats");
+		var mutationCount:Number = 1
+		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
+			mutationCount++;
+		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
+			mutationCount++;
+		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
+			mutationCount++;
+		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation04) >= 0)
+			mutationCount++;
+		outputText("\nYou have " + mutationCount + " mutation slots per part."+
+		"\nNote: Not all body parts will use all available slots.")
+		//Probably a better way than this to check. Perhaps a helper function to use as a template to check. This'll do for a rudimentary proof of concept.
+		//Can't auto-keep track of body max mutations per part, since body mutations can be added as needed, but nothing to definitively check.
+		//That means I'd have to keep updating this if Orm or Lia adds a new mutation.
+		//Also, when Orm reworks perks to use v1/v2/v3 things, can also display the current tier.
+
+		//Heart Mutations
+		outputText("\n\nHeart Mutations:")
+		if (player.findPerk(PerkLib.BlackHeart) >= 0)
+			outputText("\nBlack Heart: Acquired.")
+		if (player.findPerk(PerkLib.FrozenHeart) >= 0)
+			outputText("\nFrozen Heart: Acquired.")
+		if (player.findPerk(PerkLib.ObsidianHeart) >= 0)
+			outputText("\nObsidian Heart: Acquired.")
+		if (player.findPerk(PerkLib.TwinHeart) >= 0)
+			outputText("\nTwin Heart: Acquired.")
+		if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0)
+			outputText("\nHeart of the storm: Acquired.")
+		if (player.findPerk(PerkLib.DraconicHeart) >= 0)
+			outputText("\nDragonic Heart: Acquired.")
+
+		//Muscle Mutations
+		outputText("\n\nMuscle Mutations:")
+		if (player.findPerk(PerkLib.MantislikeAgility) >= 0)
+			outputText("\nMantis Agility: Acquired.")
+		if (player.findPerk(PerkLib.OniMusculature) >= 0)
+			outputText("\nOni Musculature: Acquired.")
+
+		//Mouth Mutations
+		outputText("\n\nMouth Mutations:")
+		if (player.findPerk(PerkLib.VenomGlands) >= 0)
+			outputText("\nVenom Glands: Acquired.")
+		if (player.findPerk(PerkLib.HollowFangs) >= 0)
+			outputText("\nHollow Fangs: Acquired.")
+
+		//Adrenal Glands Mutations
+		outputText("\n\nAdrenal Gland Mutations:")
+		if (player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)
+			outputText("\nSalamander Adrenal Glands: Acquired.")
+		if (player.findPerk(PerkLib.OrcAdrenalGlands) >= 0)
+			outputText("\nOrc Adrenal Glands: Acquired.")
+
+		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
+		outputText("\n\nBloodstream Mutations:")
+		if (player.findPerk(PerkLib.VampiricBloodsteam) >= 0)
+			outputText("\nVampiric Bloodstream: Acquired.")
+		if (player.findPerk(PerkLib.HinezumiBurningBlood) >= 0)
+			outputText("\nHinezume Burning Bloodstream: Acquired.")
+		if (player.findPerk(PerkLib.FeyArcaneBloodstream) >=0)
+			outputText("\nFey Arcane Bloodstream: Acquired.")
+
+		//Fat tissue Mutations
+		outputText("\n\nFat and Tissue Mutations:")
+		if (player.findPerk(PerkLib.PigBoarFat) >= 0)
+			outputText("\nPig/Boar Fat: Acquired.")
+		if (player.findPerk(PerkLib.NaturalPunchingBag) >= 0)
+			outputText("\nNatural Punching Bag: Acquired.")
+		if (player.findPerk(PerkLib.WhaleFat) >= 0)
+			outputText("\nWhale Fat: Acquired.")
+		if (player.findPerk(PerkLib.YetiFat) >= 0)
+			outputText("\nYeti Fat: Acquired.")
+
+		//Lungs Mutations
+		outputText("\n\nLungs Mutations:")
+		if (player.findPerk(PerkLib.DraconicLungs) >= 0)
+			outputText("\nDraconic Lungs: Acquired.")
+		if (player.findPerk(PerkLib.CaveWyrmLungs) >= 0)
+			outputText("\nCave Wyrm Lungs: Acquired.")
+		if (player.findPerk(PerkLib.MelkieLung) >= 0)
+			outputText("\nMelkie Lungs: Acquired.")
+		if (player.findPerk(PerkLib.DrakeLungs) >= 0)
+			outputText("\nDrake Lungs: Acquired.")
+
+		//Metabolism Mutations
+		outputText("\n\nMetabolism Mutations:")
+		if (player.findPerk(PerkLib.ManticoreMetabolism) >= 0)
+			outputText("\nManticore Metabolism: Acquired.")
+		if (player.findPerk(PerkLib.DisplacerMetabolism) >= 0)
+			outputText("\nDisplacer Metabolism: Acquired.")
+
+		//Ovaries Mutations
+		outputText("\n\nOvaries Mutations:")
+		if (player.findPerk(PerkLib.LactaBovinaOvaries) >= 0)
+			outputText("\nLacta Bovine Ovaries: Acquired.")
+		if (player.findPerk(PerkLib.FloralOvaries) >= 0)
+			outputText("\nFloral Ovaries: Acquired.")
+
+		//Testicle Mutations
+		outputText("\n\nBalls Mutations:")
+		if (player.findPerk(PerkLib.MinotaurTesticles) >= 0)
+			outputText("\nMinotaur Testicles: Acquired.")
+		if (player.findPerk(PerkLib.EasterBunnyEggBag) >= 0)
+			outputText("\nEaster Bunny Balls: Acquired.")
+		if (player.findPerk(PerkLib.NukiNuts) >= 0)
+			outputText("\nNuki Nuts: Acquired.")
+
+		//Eyes Mutations
+		outputText("\n\nEye Mutations:")
+		if (player.findPerk(PerkLib.GorgonsEyes) >= 0)
+			outputText("\nGorgon Eyes: Acquired.")
+		if (player.findPerk(PerkLib.GazerEye) >= 0)
+			outputText("\nGazer Eyes: Acquired.")
+
+		//Peripheral/NervSys Mutations
+		outputText("\n\nPeripheral Nervous System Mutations:")
+		if (player.findPerk(PerkLib.ElvishPeripheralNervSys) >= 0)
+			outputText("\nElvish Nervous System: Acquired.")
+
+		//Bones and Marrow Mutations
+		outputText("\n\nBones and Marrow Mutations:")
+		if (player.findPerk(PerkLib.LizanMarrow) >= 0)
+			outputText("\nLizan Marrow: Acquired.")
+		if (player.findPerk(PerkLib.DraconicBones) >= 0)
+			outputText("\nDraconic Bones: Acquired.")
+		if (player.findPerk(PerkLib.HarpyHollowBones) >= 0)
+			outputText("\nHarpy Hollow Bones: Acquired.")
+
+		//Thyroid Glands Mutations
+		outputText("\n\nThyroid Gland Mutations:")
+		if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0)
+			outputText("\nKitsune Thyroid Gland: Acquired.")
+		if (player.findPerk(PerkLib.NekomataThyroidGland) >= 0)
+			outputText("\nNekomata Thyroid Gland: Acquired.")
+
+		//ParaThyroid Glands Mutations. What's the difference between this and the above???
+		outputText("\n\nParaThyroid Glands Mutations:")
+		if (player.findPerk(PerkLib.KitsuneParathyroidGlands) >= 0)
+			outputText("\nKitsune Para-Thyroid Glands: Acquired.")
+		if (player.findPerk(PerkLib.HellcatParathyroidGlands) >= 0)
+			outputText("\nHellcat Para-Thyroid Glands: Acquired.")
+
+		//Dragon Mutations
+		outputText("\n\nDragon Mutations:")
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+")
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++")
+		if (player.findPerk(PerkLib.DraconicBones) >= 0)
+			outputText("\nDraconic Bones: Acquired.")
+		if (player.findPerk(PerkLib.DraconicHeart) >= 0)
+			outputText("\nDraconic Heart: Acquired.")
+		if (player.findPerk(PerkLib.DraconicLungs) >= 0)
+			outputText("\nDraconic Lungst: Acquired.")
+
+		//Kitsune Mutations
+		outputText("\n\nKitsune Mutations:")
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+")
+		if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0)
+			outputText("\nKitsune Thyroid Gland: Acquired.")
+		if (player.findPerk(PerkLib.KitsuneParathyroidGlands) >= 0)
+			outputText("\nKitsune Para-Thyroid Glands: Acquired.")
+
+		menu();
+		addButton(0, "Next", playerMenu);
+		addButton(5, "General", displayStats);
+		addButton(6, "Combat", displayStatsCombat);
+		addButton(7, "NPC's", displayStatsNpcs);
+		addButton(8, "Children", displayStatsChildren);
+		addButton(9, "Mastery", displayStatsmastery);
+		addButtonDisabled(10, "Mutations", "You are currently at this stats page.");
 	}
 
 	//------------
@@ -1835,6 +1859,13 @@ public class PlayerInfo extends BaseContent {
 				}
 				//addButton(3, "MBFBP", ).hint("Choose the 'My Blood for Blood Puppies' super perk. ");
 				//addButtonDisabled(3, "MBFBP", "Soon.");
+				//addButton(4, "", ).hint("Choose the '' super perk. ");
+				//addButtonDisabled(4, "", "Soon.");
+				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(5, "HJ:A", "You already have this super perk.");
+				else {
+					if (player.freeHiddenJobsSlots() > 0) addButton(5, "HJ:A", perkHiddenJobBloodDemon).hint("Choose the 'Hidden Job: Asura' super perk. You've trained in arts of asuras. Beings that reached mastery of unleashing wrath to great effect. (+10% of OverMax Wrath)");//, -10% blood spells cost, +20% blood spells power
+					else addButtonDisabled(5, "HJ:A", "You do not have a free slot for this hidden job.");
+				}
 			}
 			else {
 				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this perk.");
@@ -1845,6 +1876,10 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(2, "YPMP", "You do not have enough super perk points to obtain this perk.");
 				//if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) addButtonDisabled(3, "MBFBP", "You already have this perk.");
 				//else addButtonDisabled(3, "MBFBP", "You do not have enough super perk points to obtain this perk.");
+				//if (player.hasPerk(PerkLib.)) addButtonDisabled(4, "", "You already have this perk.");
+				//else addButtonDisabled(4, "", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(5, "HJ:A", "You already have this perk.");
+				else addButtonDisabled(5, "HJ:A", "You do not have enough super perk points to obtain this perk.");
 			}
 			//10 -> page + 1 button
 			//11 -> page - 1 button
@@ -1885,6 +1920,13 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(PerkLib.YourPainMyPower,0,0,0,0);
 		clearOutput();
 		outputText("You gained Your Pain My Power super perk.");
+		doNext(curry(superPerkBuyMenu, 1));
+	}
+	private function perkHiddenJobAsura():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.HiddenJobAsura,0,0,0,0);
+		clearOutput();
+		outputText("You gained Hidden Job: Asura super perk.");
 		doNext(curry(superPerkBuyMenu, 1));
 	}
 }

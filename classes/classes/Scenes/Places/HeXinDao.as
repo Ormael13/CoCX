@@ -299,6 +299,14 @@ public class HeXinDao extends BaseContent
 					sayLine2(consumables.IOLBMAN,"It's a manual for Icicles of Love (Basic Rank), this simple technique allows you to covert excess lust into icicles."),
 					"\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
 			).hint("Icicles of Love (Basic Rank) Manual.");
+			addButton(2, "Storm of Sisterhood (B)", buyItem2,consumables.SOSBMAN,
+					sayLine2(consumables.SOSBMAN,"It's a manual for Storm of Sisterhood (Basic Rank), this simple technique allows you to convert excess wrath into ligthing."),
+					"\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
+			).hint("Storm of Sisterhood (Basic Rank) Manual.");
+			addButton(3, "Night of Brotherhood (B)", buyItem2,consumables.NOBBMAN,
+					sayLine2(consumables.NOBBMAN,"It's a manual for Night of Brotherhood (Basic Rank), this simple technique allows you to covert excess wrath into darkness."),
+					"\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
+			).hint("Night of Brotherhood (Basic Rank) Manual.");
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) {
 				addButton(4, "Sextuple Thrust", buyItem2,consumables.SEXTMAN,
 						sayLine2(consumables.SEXTMAN,"It's a manual for Sextuple Thrust, this simple technique allows you to unleash six thrusts that will become stronger and stronger as you train your body and soul."),

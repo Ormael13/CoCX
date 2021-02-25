@@ -671,7 +671,6 @@ public function etnaMarriageYes():void
 		doNext(etnaCampMenu);
 	}
 	else {
-		outputText("You drop down on one knee before Etna as she gives you a troubled stare before you open a small box containing the ruby ring. This begins in the same way as every Love Tale as you gather the courage and propose under her astonished expression.\n\n");
 		outputText("\"<i>F..for me? [name] out of everyone else you’ve chosen me?! Yes...yes my answer is YES! I will be your favored wife forever and ever.</i>\"\n\n");
 		player.destroyItems(jewelries.ENDGRNG, 1);
 		player.HP = player.maxHP();
@@ -687,7 +686,10 @@ public function etnaMarriageYes():void
 public function etnaMarriageYes2():void
 {
 	clearOutput();
-	outputText("\n\n");
+	outputText("It’s been three days since and now both of you are standing quietly in the chapel of Marae. Etna is dressed in a formal wedding dress, which is something people hadn't seen in Mareth for a long time. Both of you are standing by Sapphire who once again has taken the role of priestess for the occasion as you recite your vows");
+	if (camp.loversCount() > 0 || camp.followersCount() > 0) outputText(". All of your friends came to attend");
+	if (camp.loversCount() > 0) outputText(" which is not so surprising considering the strength of your relationship with them");
+	outputText(".\n\n");
 	outputText("\"<i>If anyone objects to this union, may they speak now or stay silent forever!</i>\"\n\n");
 	outputText("Just as she finishes her sentence, the door of the building flies open as a thunderous voice rings out over the place.\n\n");
 	outputText("\"<i>FUCK THAT BITCH! IT’S REVENGE TIME BOYS!!!!!</i>\"\n\n");
@@ -698,6 +700,7 @@ public function etnaMarriageYes2():void
 	outputText("You step forward to save your marriage, there's no way you're going to let these huge pricks ruin your special day or hers!\n\n");
 	flags[kFLAGS.ETNA_FOLLOWER] = 3;
 	startCombat(new MinotaurMob());
+	spriteSelect(94);
 	doNext(playerMenu);
 }
 public function etnaMarriageYes3():void

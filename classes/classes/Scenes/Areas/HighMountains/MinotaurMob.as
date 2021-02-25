@@ -191,12 +191,9 @@ import classes.Scenes.SceneLib;
 		public function MinotaurMob()
 		{
 			this.a = "the ";
-			if (flags[kFLAGS.ETNA_FOLLOWER] == 3)
-				this.short = "300 jealous minotaurs Ex-es";
-			if (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20)
-				this.short = "minotaur gang";
-			else
-				this.short = "minotaur tribe";
+			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) this.short = "300 jealous minotaurs Ex-es";
+			else if (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20) this.short = "minotaur gang";
+			else this.short = "minotaur tribe";
 			this.imageName = "minotaurmob";
 			if (flags[kFLAGS.ETNA_FOLLOWER] == 3)
 				this.long = "Whoa, it looks like all of Etna’s sexual partners have amassed in one group to take her and you down. The bull men are all over the chapel!";
@@ -234,25 +231,29 @@ import classes.Scenes.SceneLib;
 			this.armorMDef = 5;
 			var bonusHP:Number = 600;
 			var lustVuln:Number = 0.45;
-			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) lustVuln -= 0.4;
+			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) {
+				lustVuln -= 0.4;
+				this.bonusLust = 145;
+				this.level = 30;
+				this.createPerk(PerkLib.Enemy300Type, 0, 0, 0, 0);
+			}
 			else {
 				bonusHP += 50 * (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
 				if((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) lustVuln = .3;
 				else lustVuln -= (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
+				this.bonusLust = 115 * Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
+				var level:int = 26 + Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
+				if(level > 29) level = 29;
+				this.level = level;
 			}
 			this.bonusHP = bonusHP;
-			this.bonusLust = 115 * Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
 			this.lust = 30;
 			this.lustVuln = lustVuln;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			var level:int = 26 + Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
-			if(level > 29) level = 29;
-			this.level = level;
 			this.gems = rand(50) + 100;
 			this.tailType = Tail.COW;
 			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.drop = NO_DROP;
-			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) this.createPerk(PerkLib.Enemy300Type, 0, 0, 0, 0);
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] > 20 || flags[kFLAGS.ETNA_FOLLOWER] == 3) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			else this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);

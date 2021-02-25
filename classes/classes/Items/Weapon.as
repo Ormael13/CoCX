@@ -44,11 +44,11 @@ public class Weapon extends Useable //Equipable
 			else if (perk == "Dual Large") desc += "(Dual Large)";
 			else if (perk == "Dual Small") desc += "(Dual Small)";
 			else if (perk == "Quad") desc += "(Quad)";
-			else if (verb.indexOf("whip") >= 0) desc += "(Whip)";
+			/*else if (verb.indexOf("whip") >= 0) desc += "(Whip)";
 			else if (verb.indexOf("punch") >= 0) desc += "(Gauntlet)";
 			else if (verb == "slash" || verb == "keen cut") desc += "(Sword)";
 			else if (verb == "stab") desc += "(Dagger)";
-			else if (verb == "smash") desc += "(Blunt)";
+			else if (verb == "smash") desc += "(Blunt)";*/
 			//Attack
 			desc += "\nAttack: " + String(attack);
 			//Value

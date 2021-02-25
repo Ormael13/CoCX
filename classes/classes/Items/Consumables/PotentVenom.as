@@ -144,15 +144,6 @@ public class PotentVenom extends Consumable {
 					"It doesn't stop until your skin is covered in intricate purple designs. You can feel your venom pumping through them. " +
 					"<b>Your skin is covered in venomous body markings.</b>");
 			player.skin.base.pattern = Skin.PATTERN_VENOMOUS_MARKINGS;
-			player.skin.base.adj = "lightning shaped tattooed";
-			changes++;
-		}
-		//Tatoo
-		if (player.eyes.type == Eyes.CENTIPEDE && !player.skin.hasVenomousMarking() && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYou feel an unusual warmth in your chest. You look down to see a purple blot form on your chest and then begin to spread out across your skin like brushstrokes. " +
-					"It doesn't stop until your skin is covered in intricate purple designs. You can feel your venom pumping through them. " +
-					"<b>Your skin is covered in venomous body markings.</b>");
-			player.skin.base.pattern = Skin.PATTERN_VENOMOUS_MARKINGS;
 			player.skin.base.adj = "venomous marking covered";
 			changes++;
 		}

@@ -155,7 +155,40 @@ use namespace CoC;
 		public function DarkSlime() 
 		{
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
+				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 250) {
+					initStrTouSpeInte(195, 290, 120, 175);
+					initWisLibSensCor(175, 370, 300, 10);
+					this.weaponAttack = 45;
+					this.armorDef = 45;
+					this.armorMDef = 135;
+					this.bonusHP = 1400;
+					this.bonusMana = 350;
+					this.bonusLust = 750;
+					this.level = 80;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 200) {
+					initStrTouSpeInte(188, 272, 120, 170);
+					initWisLibSensCor(170, 346, 280, 10);
+					this.weaponAttack = 43;
+					this.armorDef = 40;
+					this.armorMDef = 120;
+					this.bonusHP = 1200;
+					this.bonusMana = 300;
+					this.bonusLust = 702;
+					this.level = 76;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 150) {
+					initStrTouSpeInte(181, 254, 130, 165);
+					initWisLibSensCor(165, 322, 260, 10);
+					this.weaponAttack = 41;
+					this.armorDef = 35;
+					this.armorMDef = 105;
+					this.bonusHP = 1000;
+					this.bonusMana = 250;
+					this.bonusLust = 654;
+					this.level = 72;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
 					initStrTouSpeInte(174, 236, 120, 160);
 					initWisLibSensCor(160, 298, 240, 10);
 					this.weaponAttack = 39;

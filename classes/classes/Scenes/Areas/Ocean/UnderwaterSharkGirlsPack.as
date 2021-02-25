@@ -56,7 +56,7 @@ public class UnderwaterSharkGirlsPack extends Monster
 			this.short = "shark-girls pack";
 			this.imageName = "izma";
 			this.long = "You're under attack by a frenzy of shark girls and the worst part is they all look hungry for sex! The tigershark alpha lead, the pack directing its assault as they all circle around you looking for an opening to draw blood.";
-			this.plural = false;
+			this.plural = true;
 			this.createCock(15,2.2);
 			this.balls = 4;
 			this.ballSize = 3;

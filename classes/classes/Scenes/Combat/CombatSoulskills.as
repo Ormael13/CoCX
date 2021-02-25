@@ -149,19 +149,51 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
+			bd = buttons.add("Flames of Love", combat.flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
+			if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
+				bd.disable("You need more time before you can use Flames of Love again.");
+			} else if (player.lust < 50) {
+				bd.disable("Your current lust is too low.");
+			}
+		}/*
+		if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
 			bd = buttons.add("Flames of Love", combat.flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
 			if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
 				bd.disable("You need more time before you can use Flames of Love again.");
 			} else if (player.lust < 50) {
 				bd.disable("Your current lust is too low.");
 			}
-		}
+		}*/
+		if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
+			bd = buttons.add("Icicles of Love", combat.iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
+			if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
+				bd.disable("You need more time before you can use Icicles of Love again.");
+			} else if (player.lust < 50) {
+				bd.disable("Your current lust is too low.");
+			}
+		}/*
 		if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
 			bd = buttons.add("Icicles of Love", combat.iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
 			if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
 				bd.disable("You need more time before you can use Icicles of Love again.");
 			} else if (player.lust < 50) {
 				bd.disable("Your current lust is too low.");
+			}
+		}*/
+		if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
+			bd = buttons.add("Storm of Sisterhood", combat.stormOfSisterhood).hint("Use a little bit of wrath to transform it into storm of sisterhood that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			if (player.hasStatusEffect(StatusEffects.CooldownStormOfSisterhood)) {
+				bd.disable("You need more time before you can use Storm of Sisterhood again.");
+			} else if (player.wrath < 50) {
+				bd.disable("Your current wrath is too low.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
+			bd = buttons.add("Night of Brotherhood", combat.nightOfBrotherhood).hint("Use a little bit of wrath to transform it into night of brotherhood that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			if (player.hasStatusEffect(StatusEffects.CooldownNightOfBrotherhood)) {
+				bd.disable("You need more time before you can use Night of Brotherhood again.");
+			} else if (player.wrath < 50) {
+				bd.disable("Your current wrath is too low.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeavensDevourer)) {
@@ -536,6 +568,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(5);
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) flags[kFLAGS.HERO_BANE_DAMAGE_BANK] += damage;
 		if (player.hasStatusEffect(StatusEffects.EruptingRiposte)) flags[kFLAGS.ERUPTING_RIPOSTE_DAMAGE_BANK] += monster.tou + monster.inte + monster.wis;
 	}
@@ -652,6 +685,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -1007,6 +1041,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			outputText("You thrust your palm forward, causing a blast of pure energy to slam against " + monster.a + monster.short + ", which they ignore. It is probably best you don’t use this technique against the pure.\n\n");
 		}
 		monster.HP -= damage;
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		statScreenRefresh();
@@ -1079,6 +1114,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			outputText("too resolute to be frozen by your attack.</b>");
 		}
 		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		outputText("\n\n");
@@ -1132,6 +1168,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		else doFireDamage(damage, true, true);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		outputText("\n\n");
@@ -1212,6 +1249,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
+		damage = Math.round(damage);
 		doDamage(damage);
 		monster.createStatusEffect(StatusEffects.PunishingKick, 5, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.CooldownPunishingKick, 10, 0, 0, 0);
@@ -1219,6 +1257,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		checkAchievementDamage(damage);
 		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -1257,6 +1296,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage *= (monster.damagePercent() / 100);
 		player.createStatusEffect(StatusEffects.CooldownSoulBlast, 15, 0, 0, 0);
 		outputText("You wave the sign of the gate, tiger and serpent as you unlock all of your soulforce for an attack. " + monster.capitalA + monster.short + " can’t figure out what you are doing until a small sphere of energy explodes at the end of your fist in a massive beam of condensed soulforce. ");
+		damage = Math.round(damage);
 		doMagicDamage(damage, true, true);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
@@ -1463,6 +1503,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText(" damage.");
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(15);
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -1502,6 +1543,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText(" damage.");
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(15);
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -1597,6 +1639,8 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 	 outputText("\n");
 	 checkAchievementDamage(damage);
+	 combat.heroBaneProc(damage);
+	 combat.WrathGenerationPerHit2(5);
 	 if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 0) {
 	 outputText("\n");
 	 enemyAI();
@@ -1686,9 +1730,11 @@ public class CombatSoulskills extends BaseCombatContent {
 	 doDamage(damage);
 	 outputText("Your [weapon] hits thrice against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 	 checkAchievementDamage(damage);
+	 combat.WrathGenerationPerHit2(5);
+	 combat.heroBaneProc(damage);
 	 outputText("\n\n");
 	 if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 	 else enemyAI();
 	 }*/
 }
-}
+}

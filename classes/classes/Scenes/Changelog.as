@@ -35,9 +35,16 @@ package classes.Scenes
 		private function Changelog35():void {
 			clearOutput();
 			outputText("<b>Version 0.8r:</b>\n\n");
+			outputText("-New head accesory (by Liadri): Ski goggles - buyable in Yu shop. Cost 400 gems. Prevents form blinding effect of Snowstorms in Glacial Rift.\n");
+			outputText("-New range weapon (by Liadri): Double barreled dragon gun - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Vulcanic Crag area. Cost 1060 gems. Base atk is 50 and ammo clip size 2. Can be used with sneak range attack and it deal AoE damage. It's 2H Firearm type range weapon.\n");
 			outputText("-New material: Gold ingot. Costs 800 gems. Buyable in Tel'Adre jewelry shop.\n");
+			outputText("-New material: Copper ore. Costs 40 gems. Minable in Quarry.\n");
+			outputText("-New material: Tin ore. Costs 40 gems. Minable in Quarry.\n");
 			outputText("-Silver ingot price reduced form 500 to 200 gems, World Tree Branch price increased from 100 to 200 gems, Marae barks price increased from 1000 to 3000 gems, Wood price of buy/sell reduced from 10/5 to 5/2, Stone price of buy/sell reduced from 20/10 to 10/4.\n");
 			outputText("-Aether Twins can now after evolution eat new materials: Gold ingot, Copper ore, Tin ore.\n");
+			outputText("-Tripxi have 2 new talk subjects.\n");
+			outputText("-When exploring Glacial Rift PC can suffer form 1 to 3 new area effects: Snowstorms (work as PC would be perma blinded), Snow (PC below 7 feet tall have increased difficulty to run away form fights and lowered evasion by 50%), Sub zero conditions (if PC resistance to ice/cold damage is below 60% will take 10% of max HP damage, ");
+			outputText("when having 55%+/70%+/80%+/90%+/95%+ resistance damage taken is decreased to 9/8/7/6/5%. Having Fire affinity will double taken damage while having cold affinity will make PC not taking any damage).\n");
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+600 max Wrath)\n");
@@ -52,14 +59,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-New material: Copper ore. Costs 40 gems. Minable in Quarry.\n");
-			outputText("-New material: Tin ore. Costs 40 gems. Minable in Quarry.\n");
-			outputText("-Added mastery for gauntlet, dagger and exotic type weapons.\n");
-			outputText("-When exploring Glacial Rift PC can suffer form 1 to 3 new area effects: Snowstorms (work as PC would be perma blinded), Snow (PC below 7 feet tall have increased difficulty to run away form fights and lowered evasion by 50%), Sub zero conditions (if PC resistance to ice/cold damage is below 60% will take 10% of max HP damage, ");
-			outputText("when having 55%+/70%+/80%+/90%+/95%+ resistance damage taken is decreased to 9/8/7/6/5%. Having Fire affinity will double taken damage while having cold affinity will make PC not taking any damage).\n");
-			outputText("-New head accesory (by Liadri): Ski goggles - buyable in Yu shop. Cost 400 gems. Prevents form blinding effect of Snowstorms in Glacial Rift.\n");
-			outputText("-New range weapon (by Liadri): Double barreled dragon gun - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Vulcanic Crag area. Cost 1060 gems. Base atk is 50 and ammo clip size 2. Can be used with sneak range attack and it deal AoE damage. It's 2H Firearm type range weapon.\n");
-			outputText("-Tripxi have 2 new talk subjects.\n");
+			outputText("-Added mastery for gauntlet, dagger, exotic, whip, bow/crossbows, thrown and firearms type weapons.\n");
 			outputText("-After months, years of wait... 2nd wedding partner is finaly here.... it's our local neighbour yandere Etna. After PC know about marriages (Michiko helps here), have ring to propose and know some friendly priest can now marry Etna. It will not be easy and maybe like with Chi Chi as someone could crash wedding... as long it not 300 of them right? So ekhm... after PC manage to finish weeding will make resident manticore into wife.\n");
 			outputText("-New melee weapon (by Liadri): Venoclaw - obtainable after making Etna PC waifu. Cost 200 gems. Base atk is 0. Each attack that would deal damage to enemy would apply a small dose of aphrodisiac similary to manticore poison. It also compatibile to be used with feral combat.\n");
 			outputText("-New tier 2 misc lvl-up perk: Natural Instincts. Req. Job: Beast Warrior perk. Effect: All racial ability cooldowns are reduced by one. Enable autocast of Crinos Shape at start of combat.\n");
@@ -71,6 +71,30 @@ package classes.Scenes
 			outputText("-Added to almost all soulskill tooltips indicator if it's physical or magical soulskill (to make easier questting which critical chance modifiers and stats would make soulskill effect stronger).\n");
 			outputText("-New tier 3 str lvl-up perk: Way of the Warrior. Req. Job: Warrior perk. Effect: Enable autocast of Warrior's rage and boost it based on PC current stats. (+1 per 10 pts of core stat value)\n");
 			outputText("-Attacking with melee, range base attacks would generate various amount of wrath (depending on damage dealt). Using some specials or other ways of attack like using mech melee weapon would generate small fixed amount of wrath.\n");
+			outputText("-Toggle to allow level up multiple times with one click. It would level up Pc to highest possible level that can be attained using currently saved/banked exp points. (by Jtexc)\n");
+			outputText("-New subtab on stats page that would list all racial mutation slots and racial perks that already occupy those slots. (by Jtexc)\n");
+			outputText("-Venom Glands racial perks req. for naga score was lowered from 4/8/12 to 4/6/8.\n");
+			outputText("-New melee weapon (by Ormael): Giant Shuriken - buyable at weapon shop in Tel'Adre. Cost 2080 gems with base atk of 52. Massive type exotic weapon that can be thrown at flying enemy, max attack value reached at 250+ strength stat.\n");
+			outputText("-Staff Channeling perk now allows to use staff melee weapon to attack flying enemy without need to fly and having aerial combat perk.\n");
+			outputText("-New tier 1 str lvl-up perk: Furious strikes. Req. Job: Warrior perk and 30+ str. Effect: Wrath generated by abilities increases by 100% of base amount.\n");
+			outputText("-New tier 2 str lvl-up perk: Adrenaline Rush. Req. Adrenaline Rush perk. Effect: Always start combat with 100 more points of wrath.\n");
+			outputText("-New tier 3 str lvl-up perk: Unlimited rage. Req. Furious strikes perk and 60+ str. Effect: Wrath generated by abilities increases by 100% of base amount.\n");
+			outputText("-When out of combat PC wrath will decay at rate of 60% of max warth per hour.\n");
+			outputText("-New magical soulskill: Storm of Sisterhood (Basic Rank). Req. buying manual from golem merchant for 20 spirit stones. Deal lighting damage, against group enemies deal 2x more damage, using ~30% of current PC wrath creates flames that deals 1000% dmg of used wrath. (1 wrath used = 10 pts of lighting dmg) Cooldown: 1 turn.\n");
+			outputText("-New magical soulskill: Night of Brotherhood (Basic Rank). Req. buying manual from golem merchant for 20 spirit stones. Deal darkness damage, against group enemies deal 2x more damage, using ~30% of current PC wrath creates flames that deals 1000% dmg of used wrath. (1 wrath used = 10 pts of darkness dmg) Cooldown: 1 turn.\n");
+			outputText("-Flames of Love and Icicles of Love soulskills cost, dmg, cooldown was adjusted to ~30%, 1000% and 1 turn.\n");
+			outputText("-New event perk: Hidden Job: Asura. Gained by spending 1 super perk point. Effects: Allow to reach OverMax Wrath equal to 110% of current max wrath.\n");
+			outputText("-Whip and Ribbon type weapons been added to list of melee weapons that can attack flying enemeis without need for PC to fly.\n");
+			outputText("-While flying if PC not have Aerial Combat still can use the same throwable weapons or other melee weapons that could be used to perform range attack.\n");
+			outputText("-2nd to 4th ring slot will be seen on Inventory list (just in case PC not yet bought correct perk it will be listed as LOCKED and having note which perk must be picked to unlock this ring slot).\n");
+			outputText("-Enemies below lvl 6 will have max lust halfed.\n");
+			outputText("-Added tracker for current/max venom and venom recharge rate per hour.\n");
+			outputText("-First page areas unlock have added condition to instant unlock them if pc is few levels above lowest level enemy in that area to stop bad rng that makes pc find those areas when far long ago outleveled enemies there. Also connected areas to areas in 1st page all jsut need to reach req. lvl to have nearly 100% chance to proc right away discovery of next area.\n");
+			outputText("-Monsters in Ebon Labyrinth will scale up with level and stats until rooms 251+.\n");
+			outputText("-Player Goblin Daughters Workshop now count toward gaining ascension perk points giving same points as camp kitsune shrine (+2).\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -83,7 +107,11 @@ package classes.Scenes
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk form training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in sheild slot), one of req. for Prestige Job: Spell Knight, ");
+			outputText("Flames of Love and Icicles of Love not dealing increased dmg to group enemies, beautiful items aside sword and excalibur not been dropped with high corruption, beautiful sword / excalibur not been working properly with multiattack settings, centipeded tf small correction, added missing cooldown countdown for Flames/Icicles of Love and Punishing Kick soulskills, missing Ebon Labyrinth bosses in rooms ");
+			outputText("200 / 250 / 300, many smol fixes\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -149,10 +177,12 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -192,16 +222,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
