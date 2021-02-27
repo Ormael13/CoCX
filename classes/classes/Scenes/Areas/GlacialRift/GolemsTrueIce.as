@@ -17,7 +17,7 @@ package classes.Scenes.Areas.GlacialRift
 		public function backhand():void {
 			outputText("The golems visage twists into a grimace of irritation, and few of them flyby you swinging their hands at you in a vicious backhand.");
 			var damage:Number = int (((str + weaponAttack) * 5) - rand(player.tou) - player.armorDef);
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.1;
+			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
 			damage = Math.round(damage);
 			//Dodge
@@ -26,7 +26,7 @@ package classes.Scenes.Areas.GlacialRift
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" They hits you square in the chest from a few different angles. ");
-				damage = player.takePhysDamage(damage, true);
+				damage = player.takeIceDamage(damage, true);
 			}
 		}
 		
@@ -34,7 +34,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Raising their fists high overhead, golems swiftly dives down brings their fists down in a punishing strike!");
 			
 			var damage:Number = 100 + int(((str + weaponAttack) * 5) - rand(player.tou) - player.armorDef);
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.1;
+			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
 			damage = Math.round(damage);
 			if (damage <= 0 || rand(100) < 25 || player.getEvasionRoll()) outputText(" You're able to sidestep it just in time.");
@@ -42,7 +42,7 @@ package classes.Scenes.Areas.GlacialRift
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The concussive strikes impacts you with a bonecrushing force. ");
-				damage = player.takePhysDamage(damage, true);
+				damage = player.takeIceDamage(damage, true);
 			}
 		}
 		

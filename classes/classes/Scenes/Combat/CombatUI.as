@@ -208,7 +208,7 @@ public class CombatUI extends BaseCombatContent {
 		// Submenu - Spells
 		BuildSpellBookMenu(spellBookButtons);
 		if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
-		if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrath()) {
+		if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathSpellcasting()) {
 			btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
 		} else if (!combat.canUseMagic()) btnMagic.disable();
 		// Submenu - Soulskills

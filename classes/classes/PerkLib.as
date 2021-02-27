@@ -3672,9 +3672,10 @@ public class PerkLib
 		public static const Enemy300Type:PerkType = mk("300-type enemy", "300-type enemy", "");
 		public static const EnemyBeastOrAnimalMorphType:PerkType = mk("Beast or Animal-morph enemy type", "Beast or Animal-morph enemy type", "");
 		public static const EnemyBossType:PerkType = mk("Boss-type enemy", "Boss-type enemy", "");
-		public static const EnemyChampionType:PerkType = mk("Champion-type enemy", "Champion-type enemy", "");//50+ ft. tall   //NYU
-		public static const EnemyColossalType:PerkType = mk("Colossal-sized type enemy", "Colossal-sized type enemy", "");//NYU
+		public static const EnemyChampionType:PerkType = mk("Champion-type enemy", "Champion-type enemy", "");//NYU
+		public static const EnemyColossalType:PerkType = mk("Colossal-sized type enemy", "Colossal-sized type enemy", "");//50+ ft. tall   //NYU
 		public static const EnemyConstructType:PerkType = mk("Construct-type enemy", "Construct-type enemy", "");
+		public static const EnemyElementalType:PerkType = mk("Elemental-type enemy", "Elemental-type enemy", "");
 		public static const EnemyEliteType:PerkType = mk("Elite-type enemy", "Elite-type enemy", "");//NYU
 		public static const EnemyFeralType:PerkType = mk("Feral-type enemy", "Feral-type enemy", "");
 		public static const EnemyFleshConstructType:PerkType = mk("Flesh Construct-type enemy", "Flesh Construct-type enemy", "");
@@ -3701,7 +3702,6 @@ public class PerkLib
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
 		public static const UniqueNPC:PerkType = mk("Unique npc", "Unique npc", "");
-		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");
 		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");undead?
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", "");

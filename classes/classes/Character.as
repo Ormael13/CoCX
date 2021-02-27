@@ -995,9 +995,16 @@ import classes.Items.JewelryLib;
 			if (max1 > 69999) max1 = 69999;
 			return max1;
 		}
-		public function maxSafeWrath():Number {
+		public function maxSafeWrathMagicalAbilities():Number {
 			var max1:Number = maxWrath();
 			var max2:Number = 1;
+			if (!hasPerk(PerkLib.HiddenJobAsura)) max1 -= 1;
+			max1 *= max2;
+			return max1;
+		}
+		public function maxSafeWrathSpellcasting():Number {
+			var max1:Number = maxWrath();
+			var max2:Number = 0.8;
 			if (!hasPerk(PerkLib.HiddenJobAsura)) max1 -= 1;
 			max1 *= max2;
 			return max1;

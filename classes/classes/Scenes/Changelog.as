@@ -87,7 +87,7 @@ package classes.Scenes
 			outputText("-Whip and Ribbon type weapons been added to list of melee weapons that can attack flying enemeis without need for PC to fly.\n");
 			outputText("-While flying if PC not have Aerial Combat still can use the same throwable weapons or other melee weapons that could be used to perform range attack.\n");
 			outputText("-2nd to 4th ring slot will be seen on Inventory list (just in case PC not yet bought correct perk it will be listed as LOCKED and having note which perk must be picked to unlock this ring slot).\n");
-			outputText("-Enemies below lvl 6 will have max lust halfed.\n");
+			outputText("-Enemies below lvl 6 will have 1/2 of max lust that they should had normaly and below level 3 1/4 of max lust they should had normaly.\n");
 			outputText("-Added tracker for current/max venom and venom recharge rate per hour.\n");
 			outputText("-First page areas unlock have added condition to instant unlock them if pc is few levels above lowest level enemy in that area to stop bad rng that makes pc find those areas when far long ago outleveled enemies there. Also connected areas to areas in 1st page all jsut need to reach req. lvl to have nearly 100% chance to proc right away discovery of next area.\n");
 			outputText("-Monsters in Ebon Labyrinth will scale up with level and stats until rooms 251+.\n");
@@ -95,13 +95,13 @@ package classes.Scenes
 			outputText("-Wrath cost of multiattacks fixed to be 1 point each time and deducted at the attack end (check for them deducted at attack start was making easy locking out multiattacks at combat start due to lack of wrath).\n");
 			outputText("-Having Manticore Metabolism would add another p. special Omni Tail Spike instead of changing Tail Spike special. That new special would req. at least 50+ venom and would consist of 2 to 6 tail spikes shoot at once. For each perk of feral multiattack increase amount of shoot spikes above 2. Still need to have 25 points of venom for each additional spike after 2nd. (So full 6 spikes volley will req. 150 pts of venom)\n");
 			outputText("-Spider race p. special Web cost of use was decreased from 30 to 25 pts.\n");
-			outputText("-Effects that was giving effect of increase venom recharge rate was adjusted to even in case of newly gained venom producing parts been set to 5 (compared to some of them been starting at 2/3). Also max boost form using tf items for venom recharge rate for scorpion and manticore tails was increased by 5 to 20.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Effects that was giving effect of increase venom recharge rate was adjusted to even in case of newly gained venom producing parts been set to 5 (compared to some of them been starting at 2/3). Also max boost from using tf items for venom recharge rate for scorpion and manticore tails was increased by 5 to 20.\n");
+			outputText("-Finding Fenrir shrine in glacial rift would be possible now with either wolf face or animal tooth. After putting on collar if pc still have animal tooth it will change pc face to wolf one.\n");
+			outputText("-Added new classification of enemies - Elemental type. It would be immune to critical dmages (unless PC got perk to deal crit dmg to such enemies) and are lust immune (only nonsentient ones elementals).\n");
+			outputText("-New material: Elemental Shard. Cost 50 gems. Could drop from defeated elementals.\n");// It can be used to rank up summoned elemental.
+			outputText("-Winter Wols and Frost Gigant exp reward been bit lowered (other enemies was jelaous of their large xp rewards but we can't say it aloud okay?).\n");
+			outputText("-Our brave goblin (s)explorers came back intact from 2nd strata of River Dungeon. Sadly they looked too much sex staved and pissed off to tell what they seen there so... well all other brave adventures and masses of PC's must check it out on their own.\n");
+			outputText("-New enemies: Fire/Water/Air/Earth Elemental. They are lvl 12/15/18/21 and could be found in 2nd strata of River Dungeon.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's

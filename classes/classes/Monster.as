@@ -992,7 +992,7 @@ import flash.utils.getQualifiedClassName;
 			var multiplier:Number = 1;
 			multiplier += game.player.perkv1(PerkLib.AscensionWisdom) * 0.2;
 			if (playerLevel == -1) playerLevel = game.player.level;
-			// 1) Nerf xp gains by 10% per level after first one level difference up to 90% at 10 lvl diff!
+			// 1) Nerf xp gains by 5% per level after first one level difference up to 95% at 19 lvl diff!
 			// 2) Bonuses for underlevel all the way to 20 lvl's below enemy! Above 20 lvl diff bonus is fixed at 300%! With underdog it increase to 40 lvl diff and caps at 900%!
 			// 3) Super high level folks (over 10 levels) only get 1 xp!
 			var difference:Number = 1;
@@ -1005,16 +1005,26 @@ import flash.utils.getQualifiedClassName;
 				if (diff2 >= 20) difference += 2;
 				if (diff2 >= 1 && diff2 < 20) difference += diff2 * 0.1;
 			}
+			if (diff2 == -1) difference -= 0.05;
 			if (diff2 == -2) difference -= 0.1;
-			if (diff2 == -3) difference -= 0.2;
-			if (diff2 == -4) difference -= 0.3;
-			if (diff2 == -5) difference -= 0.4;
-			if (diff2 == -6) difference -= 0.5;
-			if (diff2 == -7) difference -= 0.6;
-			if (diff2 == -8) difference -= 0.7;
-			if (diff2 == -9) difference -= 0.8;
-			if (diff2 == -10) difference -= 0.9;
-			if (diff2 < -10) {
+			if (diff2 == -3) difference -= 0.15;
+			if (diff2 == -4) difference -= 0.2;
+			if (diff2 == -5) difference -= 0.25;
+			if (diff2 == -6) difference -= 0.3;
+			if (diff2 == -7) difference -= 0.35;
+			if (diff2 == -8) difference -= 0.4;
+			if (diff2 == -9) difference -= 0.45;
+			if (diff2 == -10) difference -= 0.5;
+			if (diff2 == -11) difference -= 0.55;
+			if (diff2 == -12) difference -= 0.6;
+			if (diff2 == -13) difference -= 0.65;
+			if (diff2 == -14) difference -= 0.7;
+			if (diff2 == -15) difference -= 0.75;
+			if (diff2 == -16) difference -= 0.8;
+			if (diff2 == -17) difference -= 0.85;
+			if (diff2 == -18) difference -= 0.9;
+			if (diff2 == -19) difference -= 0.99;
+			if (diff2 < -20) {
 				var minXP:Number = 1;
 				if (findPerk(PerkLib.ShieldWielder) >= 0) minXP *= 1.5;
 				if (findPerk(PerkLib.EnemyBossType) >= 0) minXP *= 2;

@@ -9044,7 +9044,9 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType)) generalTypes.push("Beast or Animal-morph");
                 if (monster.hasPerk(PerkLib.EnemyColossalType)) generalTypes.push("Colossal");
                 if (monster.hasPerk(PerkLib.EnemyConstructType)) generalTypes.push("Construct");
+                if (monster.hasPerk(PerkLib.EnemyElementalType)) generalTypes.push("Elemental");
                 if (monster.hasPerk(PerkLib.EnemyFeralType)) generalTypes.push("Feral");
+                if (monster.hasPerk(PerkLib.EnemyFleshConstructType)) generalTypes.push("Flesh Construct");
                 if (monster.hasPerk(PerkLib.EnemyGhostType)) generalTypes.push("Ghost");
                 if (monster.hasPerk(PerkLib.EnemyGigantType)) generalTypes.push("Gigant");
                 if (monster.hasPerk(PerkLib.EnemyGooType)) generalTypes.push("Goo");
@@ -9052,6 +9054,7 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.EnemyHugeType)) generalTypes.push("Huge");
                 if (monster.hasPerk(PerkLib.EnemyLargeGroupType)) generalTypes.push("Large Group");
                 if (monster.hasPerk(PerkLib.EnemyPlantType)) generalTypes.push("Plant");
+                if (monster.hasPerk(PerkLib.EnemyTrueDemon)) generalTypes.push("True Demon");
             }
             if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) {
                 if (monster.hasPerk(PerkLib.EnemyBossType)) generalTypes.push("Boss");
@@ -10191,7 +10194,7 @@ public class Combat extends BaseContent {
         if (monster.hasCock() && monster.hasVagina()) outputText("s");
         outputText(" with your demonic powers at the rhythm of [monster a] [monster name] owns heartbeat. " +
                 "The unholy transformation even if temporary arouses [monster a] [monster name] to no end.");
-        StraddleDamage *= 1+(scalingBonusIntelligence()*2/100);
+        StraddleDamage *= 1+((player.intStat.core.max*2)/100);
         StraddleDamage = Math.round(StraddleDamage);
         monster.teased(monster.lustVuln * StraddleDamage);
         if (Randomcrit) outputText(" <b>Critical!</b>");

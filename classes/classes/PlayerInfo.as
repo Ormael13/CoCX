@@ -472,7 +472,8 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "\n";
 		combatStats += "<b>Minimum HP (reaching it mean HP based defeat):</b> " + player.minHP() + "\n";
 		combatStats += "<b>Over HP (HP amount that can be reached beyond default 100% of Health bar):</b> " + (player.maxOverHP() - player.maxHP()) + "\n";
-		combatStats += "<b>Maximum Safe Wrath (treshold after which spells and magic specials are unaccesable):</b> " + player.maxSafeWrath() + "\n";
+		combatStats += "<b>Maximum Safe Wrath I (treshold after which spells are unaccesable):</b> " + player.maxSafeWrathSpellcasting() + "\n";
+		combatStats += "<b>Maximum Safe Wrath II (treshold after which magic specials are unaccesable):</b> " + player.maxSafeWrathMagicalAbilities() + "\n";
 		combatStats += "<b>Over Wrath (Wrath amount that can be reached beyond default 100% of Wrath bar):</b> " + (player.maxOverWrath() - player.maxWrath()) + "\n";
 		combatStats += "\n";
 		combatStats += "<b>Base evasion:</b> " + player.getEvasionChance() + " %\n";
