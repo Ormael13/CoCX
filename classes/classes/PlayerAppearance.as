@@ -2952,9 +2952,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.phoenixScore() >= 1) outputText("\n<font color=\"#008000\">Phoenix: " + player.phoenixScore() + "</font>");
 		else if (player.phoenixScore() < 1) outputText("\n<font color=\"#ff0000\">Phoenix: 0</font>");
 		//Pig
-		if (player.pigScore() >= 15) outputText("\n<font color=\"#0000a0\">Boar-morph: " + player.pigScore() + " (+125% to Str racial multi, +125 to% to Tou racial multi, -15 to% to Spe racial multi, -10% to Int racial multi)</font>");
-		else if (player.pigScore() >= 10) outputText("\n<font color=\"#0000a0\">Pig-morph: " + player.pigScore() + " (+60% to Str racial multi, +120 to% to Tou racial multi, -15 to% to Spe racial multi, -10% to Int racial multi, -5% to Wis racial multi)</font>");
-		else if (player.pigScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Pig-morph: " + player.pigScore() + " (+30% to Str racial multi, +60 to% to Tou racial multi, -10 to% to Spe racial multi, -5% to Int racial multi)</font>");
+		if (player.pigScore() >= 15) outputText("\n<font color=\"#0000a0\">Boar-morph: " + player.pigScore() + " (+125% to Str racial multi, +125 to Tou racial multi, -15 to Spe racial multi, -10% to Int racial multi)</font>");
+		else if (player.pigScore() >= 10) outputText("\n<font color=\"#0000a0\">Pig-morph: " + player.pigScore() + " (+60% to Str racial multi, +120 to Tou racial multi, -15 to Spe racial multi, -10% to Int racial multi, -5% to Wis racial multi)</font>");
+		else if (player.pigScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Pig-morph: " + player.pigScore() + " (+30% to Str racial multi, +60 to Tou racial multi, -10 to Spe racial multi, -5% to Int racial multi)</font>");
 		else if (player.pigScore() >= 1) outputText("\n<font color=\"#008000\">Half Pig-morph: " + player.pigScore() + "</font>");
 		else if (player.pigScore() < 1) outputText("\n<font color=\"#ff0000\">Half Pig-morph: 0</font>");
 		//Treant/Dryad
