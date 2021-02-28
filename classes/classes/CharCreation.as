@@ -1652,21 +1652,6 @@ import coc.view.MainView;
 			addButton(14, "Back", chooseGameModes);
 		}
 
-		private function chooseModeSoulMelter():void {
-			clearOutput();
-			outputText("You have chosen Soul Melter Mode. This locks the games to the hardest difficulty along with hunger, hardcore and realistic mode furthermore all enemies hit points are multiplied by 10 times and some opponents may have new mechanics. You are an eternal underdog in an unforgivable world designed to defeat and take your soul yet can you rise up to the challenge? \n\n<b>Difficulty is locked to <i>XIANXIA</i> with highly increased monster hit points but new loot and harder bosses awaits you. Experiance and Gems is also multiplied five fold</b>");
-			flags[kFLAGS.HARDCORE_MODE] = 1;
-			flags[kFLAGS.HUNGER_ENABLED] = 1;
-			flags[kFLAGS.GAME_DIFFICULTY] = 4;
-			flags[kFLAGS.SOUL_MELTER_MODE] = 1;
-			player.hunger = 80;
-			menu();
-			for (var i:int = 0; i < 14; i++) {
-				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
-			}
-			addButton(14, "Back", chooseGameModes);
-		}
-
 		//Choose Hardcore slot.
 		private function chooseSlotHardcore(num:int):void {
 			flags[kFLAGS.HARDCORE_SLOT] = "CoC_" + num;
@@ -1692,7 +1677,6 @@ import coc.view.MainView;
 			addButton(4, "Hardcore", chooseModeHardcore);
 			addButton(5, "Brutal HC", chooseModeBrutalHardcore);
 			addButton(6, "Xianxia MC", chooseModeXianxia);
-			addButton(7, "Soul Melter", chooseModeSoulMelter);
 		}
 
 		private function startTheGame():void {

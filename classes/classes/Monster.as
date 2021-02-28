@@ -277,7 +277,6 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) temp *= 10;
 			if (findPerk(PerkLib.Enemy300Type) >= 0) temp *= 15;
 			temp *= stats_multi_based_on_misc();
-			if (flags[kFLAGS.SOUL_MELTER_MODE] == 1) temp *= 10;
 			temp = Math.round(temp);
 			return temp;
 		}

@@ -552,9 +552,7 @@ public class Combat extends BaseContent {
                 }
                 //BUNUS XPZ
                 if (flags[kFLAGS.COMBAT_BONUS_XP_VALUE] > 0) {
-                    var ExpMultiplier:Number = 1;
-                    if (flags[kFLAGS.SOUL_MELTER_MODE] == 1) ExpMultiplier = 5;
-                    player.XP += flags[kFLAGS.COMBAT_BONUS_XP_VALUE]*ExpMultiplier;
+                    player.XP += flags[kFLAGS.COMBAT_BONUS_XP_VALUE];
                     outputText("  Somehow you managed to gain " + flags[kFLAGS.COMBAT_BONUS_XP_VALUE] + " XP from the situation.");
                     flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = 0;
                 }
@@ -6759,9 +6757,7 @@ public class Combat extends BaseContent {
         }
         dropItem(monster, nextFunc);
         inCombat = false;
-        var GemMultiplier:Number = 1;
-        if (flags[kFLAGS.SOUL_MELTER_MODE] == 1) GemMultiplier = 5;
-        player.gems += monster.gems*GemMultiplier;
+        player.gems += monster.gems;
         player.XP += monster.XP;
         mainView.statsView.showStatUp('xp');
         dynStats("lust", 0, "scale", false); //Forces up arrow.
