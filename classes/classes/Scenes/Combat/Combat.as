@@ -5598,11 +5598,11 @@ public class Combat extends BaseContent {
     public function combatBlock(doFatigue:Boolean = false):Boolean {
         //Set chance
         var blockChance:int = 20 + player.shieldBlock + Math.floor((player.str - monster.str) / 5);
-        if (player.hasPerk(PerkLib.ShieldMastery) && player.tou >= 50) {
+        if (player.hasPerk(PerkLib.ShieldMastery) && player.tou >= 50 && player.isShieldsForShieldBash()) {
             if (player.tou < 100) blockChance += (player.tou - 50) / 5;
             else blockChance += 10;
         }
-        if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100) {
+        if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100 && player.isShieldsForShieldBash()) {
             if (player.tou < 150) blockChance += (player.tou - 100) / 5;
             else blockChance += 10;
         }
@@ -5620,11 +5620,11 @@ public class Combat extends BaseContent {
 
     public function combatBlock2():Number {
         var blockChance2:Number = 20 + player.shieldBlock;
-        if (player.hasPerk(PerkLib.ShieldMastery) && player.tou >= 50) {
+        if (player.hasPerk(PerkLib.ShieldMastery) && player.tou >= 50 && player.isShieldsForShieldBash()) {
             if (player.tou < 100) blockChance2 += (player.tou - 50) / 5;
             else blockChance2 += 10;
         }
-        if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100) {
+        if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100 && player.isShieldsForShieldBash()) {
             if (player.tou < 150) blockChance2 += (player.tou - 100) / 5;
             else blockChance2 += 10;
         }

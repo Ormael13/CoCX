@@ -402,7 +402,6 @@ import flash.utils.getQualifiedClassName;
 			anotherOne *= (1 + newGamePlusMod());
 			temp += anotherOne;
 			var multimax:Number = 1;
-			if (this.level < 6) multimax -= 0.5;
 			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
 			if (statusEffectv3(StatusEffects.SaiyanNumber1a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber1a);
@@ -410,6 +409,8 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv3(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber3a);
 			temp *= multimax;
 			temp *= stats_multi_based_on_misc();
+			if (this.level < 6) temp *= 0.5;
+			if (this.level < 3) temp *= 0.5;
 			temp = Math.round(temp);
 			return temp;
 		}
@@ -3255,3 +3256,4 @@ import flash.utils.getQualifiedClassName;
 		}
 	}
 }
+

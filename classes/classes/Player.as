@@ -642,8 +642,8 @@ use namespace CoC;
 			}
 			armorDef += toughnessBonus;
 			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0 && armorPerk == "Heavy") armorDef += _armor.def;
-			if (findPerk(PerkLib.ShieldExpertise) >= 0 && shieldName != "nothing") {
-				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock);
+			if (findPerk(PerkLib.ShieldExpertise) >= 0 && shieldName != "nothing" && isShieldsForShieldBash()) {
+				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock * 0.25);
 				else armorDef += 1;
 			}
 			//Acupuncture effect
@@ -2035,7 +2035,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && armorPerk == "Heavy") {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.ShieldHarmony) && tou >= 100 && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
+			if (hasPerk(PerkLib.ShieldHarmony) && tou >= 100 && isShieldsForShieldBash() && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && meetUnhinderedReq()) {

@@ -976,7 +976,7 @@ public class PerkLib
 				"You got promoted to a doctor, allowing you to cure a wider variety of ailments. This knowledge allows you to heal yourself better, increasing health regen.",
 				"You've chosen the 'Doctor' perk, increasing HP gains by 20%.");
 		public static const DoubleAttack:PerkType = mk("Double Attack", "Double Attack",
-				"Allows you to perform two melee attacks with non-large weapons per round.",
+				"Allows you to perform two melee attacks with normal sized weapons per round.",
 				"You've chosen the 'Double Attack' perk.  This allows you to make two melee attacks with non-large weapons.");
 		public static const DoubleAttackLarge:PerkType = mk("Double Attack (Large)", "Double Attack (Large)",
 				"Allows you to perform two melee attacks with large weapons per round.",
@@ -1655,7 +1655,7 @@ public class PerkLib
 				"Allows you to deal double damage toward boss or gigant sized enemies.",
 				"You've chosen the 'Heroism' perk. Due to your heroic stance you can now deal more damage toward boss or gigant type enemies.");
 		public static const HexaAttack:PerkType = mk("Hexa Attack", "Hexa Attack",
-				"Allows you to perform six melee attacks with non-large weapons per round.",
+				"Allows you to perform six melee attacks with normal sized weapons per round.",
 				"You've chosen the 'Hexa Attack' perk. This allows you to make six melee attacks with non-large weapons.");
 		public static const HexaAttackSmall:PerkType = mk("Hexa Attack (Small)", "Hexa Attack (Small)",
 				"Allows you to perform six melee attacks with small weapons per round.",
@@ -2411,7 +2411,7 @@ public class PerkLib
 				"Increases maximum wrath by 500.",
 				"You've chosen the 'Peerless Tranquilness' perk. Thanks to your peerless anger managment training, your maximum mana has been increased by 500!</b>");
 		public static const PentaAttack:PerkType = mk("Penta Attack", "Penta Attack",
-				"Allows you to perform five melee attacks with non-large weapons per round.",
+				"Allows you to perform five melee attacks with normal sized weapons per round.",
 				"You've chosen the 'Penta Attack' perk.  This allows you to make five melee attacks with non-large weapons.");
 		public static const PentaAttackSmall:PerkType = mk("Penta Attack (Small)", "Penta Attack (Small)",
 				"Allows you to perform five melee attacks with small weapons per round.",
@@ -2532,7 +2532,7 @@ public class PerkLib
 				"Mmmphmm! (No idea what he? is trying to say... but same rules apply... +10% ranged damage buff)",
 				"You've chosen the 'Pyro's Friend' perk, gaining +10% range phys dmg.");
 		public static const QuadrupleAttack:PerkType = mk("Quadruple Attack", "Quadruple Attack",
-				"Allows you to perform four melee attacks with non-large weapons per round.",
+				"Allows you to perform four melee attacks with normal sized weapons per round.",
 				"You've chosen the 'Quadruple Attack' perk.  This allows you to make four melee attacks with non-large weapons.");
 		public static const QuadrupleAttackSmall:PerkType = mk("Quadruple Attack (Small)", "Quadruple Attack (Small)",
 				"Allows you to perform four melee attacks with small weapons per round.",
@@ -2668,24 +2668,28 @@ public class PerkLib
 				"Allow to increase non-bow range weapons attack up to 200% (Intelligence-based).",
 				"You've chosen the 'Sharpshooter' perk, allowing to slightly increase non-bow range weapons attack.");
 		public static const ShieldCombat:PerkType = mk("Shield Combat", "Shield Combat",
-				"When you block an attack riposte with a shield bash damaging your opponent. Also minimaly improve block chance.",
+				"When you block an attack riposte with a shield bash (need to wear shield allowing to use this move) damaging your opponent. Also minimaly improve block chance.",
 				"You've chosen the 'Shield Combat' perk, allowing to riposte with a shield bash when you block an attack. Also minimaly improve block chance.");
 		public static const ShieldExpertise:PerkType = mk("Shield Expertise", "Shield Expertise",
-				"When you wearing a shield add quarter of block value to your armor (at least 1).",
+				"When you wearing a shield (one that allow use of shield bash) add quarter of block value to your armor (at least 1).",
 				"You've chosen the 'Shield Expertise' perk, allowing to increase you armor when using shield.");
 		public static const ShieldGrandmastery:PerkType = mk("Shield Grandmastery", "Shield Grandmastery",
 				"[if(player.tou>=100)" +
-						"Increases block chance by up to 10% while using a shield (Toughness-based) and lowering by 50% fatigue cost." +
+						"Increases block chance by up to 10% while using a shield (one that allow use of shield bash / Toughness-based) and lowering by 50% fatigue cost." +
 						"|" +
 						"<b>You are not durable enough to gain benefit from this perk.</b>" +
 						"]",
 				"You've chosen the 'Shield Grandmastery' perk, lowering fatigue cost and increasing block chance as long as you're wielding a shield (Toughness-based).");
 		public static const ShieldHarmony:PerkType = mk("Shield Harmony", "Shield Harmony",
-				"When you using shield and isn't stunned, you gain 10% phys damage reduction.",
+				"[if(player.tou>=100)" +
+						"When you using shield (one that allow use of shield bash) and isn't stunned, you gain 10% phys damage reduction." +
+						"|" +
+						"<b>You are not durable enough to gain benefit from this perk.</b>" +
+						"]",
 				"You've chosen the 'Shield Harmony' perk, allowing to reduce recived phys damage when using shield.");
 		public static const ShieldMastery:PerkType = mk("Shield Mastery", "Shield Mastery",
 				"[if(player.tou>=50)" +
-						"Increases block chance by up to 10% while using a shield (Toughness-based)." +
+						"Increases block chance by up to 10% while using a shield (one that allow use of shield bash /Toughness-based)." +
 						"|" +
 						"<b>You are not durable enough to gain benefit from this perk.</b>" +
 						"]",
@@ -2694,7 +2698,7 @@ public class PerkLib
 				"Reduces shield bash diminishing returns by 50% and increases bash damage by 20%.",
 				"You've chosen the 'Shield Slam' perk.  Stun diminishing returns is reduced by 50% and shield bash damage is increased by 20%.");
 		public static const ShieldWard:PerkType = mk("Shield Ward", "Shield Ward",
-				"When you wearing a shield lower chance to be knocked back or disarmed by enemy attacks.",
+				"When you wearing a shield (one that allow use of shield bash) lower chance to be knocked back or disarmed by enemy attacks.",
 				"You've chosen the 'Shield Ward' perk, allowing to lower chance to be knocked back or disarmed when using shield.");
 		public static const ShitYouTouchedSasha:PerkType = mk("SHIT YOU TOUCHED SASHA!!!", "SHIT YOU TOUCHED SASHA!!!",
 				"DIE!!! (You're fucked... not even this final +10% ranged damage buff will save your sorry ass...)",
@@ -2992,7 +2996,7 @@ public class PerkLib
 				"Double gems gained from selling items and gems found. Gem based abilities are more powerful.",
 				"Double gems gained from selling items and gems found. Gem based abilities are more powerful.");
 		public static const TripleAttack:PerkType = mk("Triple Attack", "Triple Attack",
-				"Allows you to perform three melee attacks with non-large weapons per round.",
+				"Allows you to perform three melee attacks with normal sized weapons per round.",
 				"You've chosen the 'Triple Attack' perk.  This allows you to make three melee attacks with non-large weapons.");
 		public static const TripleAttackLarge:PerkType = mk("Triple Attack (Large)", "Triple Attack (Large)",
 				"Allows you to perform three melee attacks with large weapons per round.",
