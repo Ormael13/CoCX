@@ -59,7 +59,7 @@ public class EarthElemental extends Monster
 			}
 		}
 		
-		override public function defeated(hpVictory:Boolean):void
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			SceneLib.dungeons.riverdungeon.defeatedByEarthElemental();
 		}

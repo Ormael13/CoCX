@@ -3253,7 +3253,11 @@ import flash.utils.getQualifiedClassName;
 				armorDef += Math.round(armorDef * 0.5);
 				armorMDef += Math.round(armorMDef * 0.5);
 			}
+			if (level < 6) {
+				if (level < 3) this.lust *= 0.25;
+				else this.lust *= 0.5;
+				this.lust = Math.round(this.lust);
+			}
 		}
 	}
 }
-

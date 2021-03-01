@@ -167,6 +167,7 @@ import classes.StatusEffects;
 		public function defeatedByFeralImp():void {
 			clearOutput();
 			outputText("Your opponent done toying with your body it carries you all the way back to the dungeon entrance and drop you there. Guess it's back to square one.\n\n");
+			//cleanupAfterCombat();
 			inDungeon = true;
 			dungeonLoc = 68;
 			playerMenu();
