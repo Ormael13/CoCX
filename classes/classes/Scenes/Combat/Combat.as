@@ -6700,7 +6700,7 @@ public class Combat extends BaseContent {
 //Update combat status effects
     private function combatStatusesUpdate():void {
         //Reset menuloc
-//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+        //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
         hideUpDown();
         if (player.hasStatusEffect(StatusEffects.MinotaurKingMusk)) {
             dynStats("lus", 3);
