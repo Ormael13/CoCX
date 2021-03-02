@@ -65,6 +65,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			clearOutput();
 			outputText("You leave the Ebon Labyrinth behind and take off back towards the camp.");
 			if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
@@ -102,6 +103,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			SceneLib.caves.darkslimeScene.LetzRape();
 			cleanupAfterCombat();
 			dungeonLoc = 131;
+			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
 			player.createStatusEffect(StatusEffects.EbonLabyrinthB, 0, 0, 0, 0);
 			playerMenu();
@@ -182,6 +184,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				player.HP = player.maxHP();
 				//(gain 20 intakes - for goo crawling)
 				dungeonLoc = 131;
+				if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 				player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
 				player.createStatusEffect(StatusEffects.EbonLabyrinthB, 0, 0, 0, 0);
 				playerMenu();
@@ -917,10 +920,16 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				flags[kFLAGS.EBON_LABYRINTH] = 2;
 			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 100) awardAchievement("Got lost?", kACHIEVEMENTS.DUNGEON_GOT_LOST);
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 150) awardAchievement("Hug the left wall", kACHIEVEMENTS.DUNGEON_HUG_THE_LEFT_WALL);
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 150) {
+				awardAchievement("Hug the left wall", kACHIEVEMENTS.DUNGEON_HUG_THE_LEFT_WALL);
+				if (flags[kFLAGS.EBON_LABYRINTH] == 3) flags[kFLAGS.EBON_LABYRINTH] = 4;
+			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 200) awardAchievement("Pan ain't got nothing on you", kACHIEVEMENTS.DUNGEON_PAN_AINT_GOT_NOTHING_ON_YOU);
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 250) awardAchievement("Master of the labyrinth", kACHIEVEMENTS.DUNGEON_MASTER_OF_THE_LABYRINT);
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 300) awardAchievement("Why are you here?", kACHIEVEMENTS.DUNGEON_WHY_ARE_YOU_HERE);
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 300) {
+				awardAchievement("Why are you here?", kACHIEVEMENTS.DUNGEON_WHY_ARE_YOU_HERE);
+				if (flags[kFLAGS.EBON_LABYRINTH] == 5) flags[kFLAGS.EBON_LABYRINTH] = 6;
+			}
 			/*if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 350) awardAchievement("", kACHIEVEMENTS.);
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 400) awardAchievement("", kACHIEVEMENTS.);
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 450) awardAchievement("", kACHIEVEMENTS.);

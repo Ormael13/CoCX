@@ -210,6 +210,7 @@ public class PlayerInfo extends BaseContent {
 			else miscStats += "<b>Day of the Moon Cycle:</b> " + flags[kFLAGS.LUNA_MOON_CYCLE];
 			miscStats += "\n";
 		}
+		miscStats += "<b>Ebon Labyrinth:</b> Explored up to " + flags[kFLAGS.EBON_LABYRINTH_RECORD] + " room\n";
 		miscStats += "<b>Exp needed to lvl up:</b> ";
 		if (player.level < CoC.instance.levelCap) miscStats += "" + player.requiredXP() + "\n";
 		else miscStats += "N/A (You already at max lvl)\n";

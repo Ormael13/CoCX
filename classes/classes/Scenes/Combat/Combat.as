@@ -9998,7 +9998,7 @@ public class Combat extends BaseContent {
                 EngineCore.SoulforceChange(100 + (player.wis*2), true);
             }
         }
-        if(player.hasStatusEffect(StatusEffects.StraddleRoundLeft)) {
+        if (player.hasStatusEffect(StatusEffects.StraddleRoundLeft)) {
             player.addStatusValue(StatusEffects.StraddleRoundLeft, 1, -1);
             if (player.statusEffectv1(StatusEffects.StraddleRoundLeft) <= 0) {
                 monster.removeStatusEffect(StatusEffects.Straddle);
@@ -11068,6 +11068,14 @@ public class Combat extends BaseContent {
         }
         outputText("\n\n");
         if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) monster.removeStatusEffect(StatusEffects.HypnosisNaga);
+        if (player.hasStatusEffect(StatusEffects.StraddleRoundLeft)) {
+            player.addStatusValue(StatusEffects.StraddleRoundLeft, 1, -1);
+            if (player.statusEffectv1(StatusEffects.StraddleRoundLeft) <= 0) {
+                monster.removeStatusEffect(StatusEffects.Straddle);
+                player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
+                outputText("\n\nYour opponent finally manages to struggle free of your grapple!\n\n");
+            }
+        }
         enemyAI();
     }
 

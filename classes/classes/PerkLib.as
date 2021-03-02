@@ -1011,12 +1011,9 @@ public class PerkLib
 		public static const DualWieldSmall:PerkType = mk("Dual Wield (Small)", "Dual Wield (Small)",
 				"Allows you to wield two small sized melee weapons more effectively. (damage and accuracy penalties decreased by 20% and 10%)",
 				"You've chosen the 'Dual Wield (Small)' perk, training skill of using two small melee weapons. (damage and accuracy penalties decreased by 20% and 10%)");
-		public static const EasterBunnyBalls:PerkType = mk("Easter bunny balls", "Easter bunny balls",
-				"Your balls constantly grows until emptied through your cock, producing eggs.",
-				"Your balls constantly grows until emptied through your cock, producing eggs.");
 		public static const EasterBunnyEggBag:PerkType = mk("Easter Bunny egg bag", "Easter Bunny egg bag",
 				"Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one egg per round. Double cum production.",
-				"You've chosen the 'Ecliptic Mind' perk. Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one egg per round. Double cum production.");
+				"You've chosen the 'Easter bunny balls' perk. Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one egg per round. Double cum production.");
 		public static const EasterBunnyEggBagEvolved:PerkType = mk("Easter bunny balls (Evolved)", "Easter bunny balls (Evolved)",
 				"Raise libido by a percentage based on current balls size. Triple cum production.",
 				"You've chosen the 'Easter bunny balls (Evolved)' perk. Raise libido by a percentage based on current balls size. Triple cum production.");
@@ -3406,6 +3403,8 @@ public class PerkLib
 				"Allows access to a dragon ice breath attack.");
 		public static const DragonLightningBreath:PerkType = mk("Dragon lightning breath", "Dragon lightning breath",
 				"Allows access to a dragon lightning breath attack.");
+		public static const EasterBunnyBalls:PerkType = mk("Easter bunny balls", "Easter bunny balls",
+				"Your balls constantly grows until emptied through your cock, producing eggs.");
 		public static const ElectrifiedDesire:PerkType = mk("Electrified Desire", "Electrified Desire",
 				"Masturbating only makes you hornier. Furthermore, your ability to entice, tease and zap things is enhanced the more horny you are.");
 		public static const ElementalConjurerMindAndBodyDedication:PerkType = mk("Elemental Conjurer Mind and Body Dedication", "Elemental Conjurer Mind and Body Dedication",

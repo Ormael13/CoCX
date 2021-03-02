@@ -102,9 +102,9 @@ package classes.Scenes
 			outputText("-Winter Wols and Frost Gigant exp reward been bit lowered (other enemies was jelaous of their large xp rewards but we can't say it aloud okay?).\n");
 			outputText("-Our brave goblin (s)explorers came back intact from 2nd strata of River Dungeon. Sadly they looked too much sex staved and pissed off to tell what they seen there so... well all other brave adventures and masses of PC's must check it out on their own.\n");
 			outputText("-New enemies: Fire/Water/Air/Earth Elemental. They are lvl 12/15/18/21 and could be found in 2nd strata of River Dungeon.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-After reaching lvl 42/102/180 PC will gain 1 more asc point for reached level. Also up to 25 asc points can be gained form leveling tease mastery.\n");
+			outputText("-On General stats subpage was added counter how far PC reached in Ebon Labyrinth.\n");
+			outputText("-Reaching room 150+/300+ in Labirinth will grant PC new rewards from Questlog (but need to pick them order without skipping or getting few rewards at once).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -117,7 +117,7 @@ package classes.Scenes
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk form training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in sheild slot), one of req. for Prestige Job: Spell Knight, ");
 			outputText("Flames of Love and Icicles of Love not dealing increased dmg to group enemies, beautiful items aside sword and excalibur not been dropped with high corruption, beautiful sword / excalibur not been working properly with multiattack settings, centipeded tf small correction, added missing cooldown countdown for Flames/Icicles of Love and Punishing Kick soulskills, missing Ebon Labyrinth bosses in rooms ");
-			outputText("200 / 250 / 300, succubus special no longer affecting lust immune enemies, no reseting on 2nd to 4th ring in case PC had any equipped, shield perks working with all shields not only those that allows use of shield bash, many smol fixes and typos corrected\n");/*ostatni punkt changelogu
+			outputText("200 / 250 / 300, succubus special no longer affecting lust immune enemies, no reseting on 2nd to 4th ring in case PC had any equipped, shield perks working with all shields not only those that allows use of shield bash, EL questolog reward after 50th room wrong unlock req., many smol fixes and typos corrected\n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

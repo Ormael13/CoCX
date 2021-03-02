@@ -89,6 +89,7 @@ public class EventParser {
 
 		if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+			if (CoC.instance.flags[kFLAGS.EBON_LABYRINTH_RECORD] < CoC.instance.player.statusEffectv1(StatusEffects.EbonLabyrinthB)) CoC.instance.flags[kFLAGS.EBON_LABYRINTH_RECORD] = CoC.instance.player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 			CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
 			CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
