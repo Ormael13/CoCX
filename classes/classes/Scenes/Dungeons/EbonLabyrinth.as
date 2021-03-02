@@ -830,7 +830,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You walk into an empty corridor thankfully it seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
-			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomDDD, roomDDD, roomBBB, roomBBB, roomCCC, roomCCC);
 		}
 		public function roomBBB():void {
@@ -842,7 +841,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You turn the corner wandering into a new corridor which thankfully seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
-			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomCCC, roomCCC, roomAAA, roomAAA, roomDDD, roomDDD);
 		}
 		public function roomCCC():void {
@@ -854,7 +852,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You walk into an empty corridor thankfully it seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
-			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomBBB, roomBBB, roomDDD, roomDDD, roomAAA, roomAAA);
 		}
 		public function roomDDD():void {
@@ -866,7 +863,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You turn the corner wandering into a new corridor which thankfully seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
-			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomAAA, roomAAA, roomCCC, roomCCC, roomBBB, roomBBB);
 		}
 		public function checkingTodayMenu():void {

@@ -4939,7 +4939,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //[Increase Vaginal Capacity] - requires vagina, of course
-        if (player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 200 && changes < changeLimit) {
+        if (player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 200 && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nA gurgling sound issues from your abdomen, and you double over as a trembling ripple passes through your womb.  The flesh of your stomach roils as your internal organs begin to shift, and when the sensation finally passes, you are instinctively aware that your [vagina] is a bit deeper than it was before.");
             if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) {
                 player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
@@ -4947,7 +4947,7 @@ public final class Mutations extends MutationsHelper {
             player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5 + rand(10));
         }
 
-        if (player.vaginas.length == 1 && changes < changeLimit) {
+        if (player.vaginas.length == 1 && changes < changeLimit && rand(3) == 0) {
             if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_DROOLING && changes < changeLimit && rand(2) == 0) {
                 temp = player.vaginas.length;
                 while (temp > 0) {

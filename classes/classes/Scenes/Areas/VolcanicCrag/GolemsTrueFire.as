@@ -26,7 +26,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" They hits you square in the chest from a few different angles. ");
-				damage = player.takePhysDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
 			}
 		}
 		
@@ -42,7 +42,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The concussive strikes impacts you with a bonecrushing force. ");
-				damage = player.takePhysDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
 			}
 		}
 		

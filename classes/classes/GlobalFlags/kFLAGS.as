@@ -2699,7 +2699,7 @@ public static const AETHER_SINISTER_TWIN_AT_CAMP:int                            
 public static const UNKNOWN_FLAG_NUMBER_02691:int                                   = 2691;	//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02692:int                                   = 2692;	//Not Yet Used Flag
 public static const UNKNOWN_FLAG_NUMBER_02693:int                                   = 2693;	//Not Yet Used Flag
-public static const UNKNOWN_FLAG_NUMBER_02694:int                                   = 2694;	//Not Yet Used Flag
+public static const RIVER_DUNGEON_ELEMENTAL_MIXER:int                               = 2694;
 public static const ALVINA_DIARY:int                                   				= 2695;
 public static const HELLFIRE_SNAIL_ENC:int                                   		= 2696;
 public static const CURSE_OF_THE_JIANGSHI:int                                   	= 2697;

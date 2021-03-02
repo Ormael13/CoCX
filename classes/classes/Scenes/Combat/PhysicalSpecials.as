@@ -91,14 +91,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.lowerBody == LowerBody.HYDRA) {
 					bd = buttons.add("HydraBite", hydraBiteAttack).hint("Deal as many attacks as pc got heads. Also delivers naga poison for as many time as pc got heads. (lower enemy str and spe)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 					if (player.tailVenom < 25) {
-						bd.disable("You do not have enough venom to use hydra bite right now!");
+						bd.disable("You do not have enough venom to use hydra bite right now! (Req. 25+)");
 					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					bd.requireFatigue(physicalCost(10 * player.statusEffectv1(StatusEffects.HydraTailsPlayer)));
 				}
 				else {
 					bd = buttons.add("SnakeBite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom. (lower enemy str and spe)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 					if (player.tailVenom < 25) {
-						bd.disable("You do not have enough venom to use snake bite right now!");
+						bd.disable("You do not have enough venom to use snake bite right now! (Req. 25+)");
 					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
@@ -227,27 +227,24 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				bd.hint("Attempt to use your " + stingername + " on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on " + period + ", you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
 				if (player.tailVenom < 25) {
-					bd.disable("You do not have enough venom to sting right now!");
+					bd.disable("You do not have enough venom to sting right now! (Req. 25+)");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
+				bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+				if (player.tailVenom < 25) {
+					bd.disable("You do not have enough venom to shoot a spike right now! (Req. 25+)");
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				if (player.hasPerk(PerkLib.ManticoreMetabolism)) {
-					bd = buttons.add("Tail Spike", playerOmniTailSpike).hint("Shoot a volley of envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-					if (player.tailVenom < 50) {
-						bd.disable("You do not have enough venom to shoot multiple spikes right now!");
-					}
-					else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-				}
-				else {
-					bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-					if (player.tailVenom < 25) {
-						bd.disable("You do not have enough venom to shoot a spike right now!");
+					bd = buttons.add("Omni Tail Spike", playerOmniTailSpike).hint("Shoot a volley of envenomed spikes at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+					if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
+						bd.disable("You do not have enough venom to shoot multiple spikes right now! (Req. 50+)");
 					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
 			if (player.tailType == Tail.SPIDER_ADBOMEN) {
 				bd = buttons.add("Web", PCWebAttack).hint("Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-				if (player.tailVenom < 30) {
+				if (player.tailVenom < 25) {
 					bd.disable("You do not have enough webbing to shoot right now!");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -3389,7 +3386,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		//Keep logic sane if this attack brings victory
-		player.tailVenom -= 30;
+		player.tailVenom -= 25;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
@@ -4712,7 +4709,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//Sting successful!
 		outputText("You drop on all fours, flinging your tail forward and shooting an envenomed spike at " + monster.a + monster.short + ".");
-		if (player.hasPerk(PerkLib.ClawTraining)) tailspikedamage();
 		tailspikedamage();
 		outputText("\n\n");
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
@@ -4754,22 +4750,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//deal damage repeatedly
 		tailspikedamage();
 		tailspikedamage();
-		if(player.hasPerk(PerkLib.ClawTraining) && player.tailVenom >= 50){
-			tailspikedamage();
-			tailspikedamage();
-		}
-		if(player.hasPerk(PerkLib.ExtraClawAttack) && player.tailVenom >= 50){
-			tailspikedamage();
-			tailspikedamage();
-		}
-		if(player.hasPerk(PerkLib.MultiClawAttack) && player.tailVenom >= 50){
-			tailspikedamage();
-			tailspikedamage();
-		}
-		if(player.hasPerk(PerkLib.ClawingFlurry) && player.tailVenom >= 50){
-			tailspikedamage();
-			tailspikedamage();
-		}
+		if (player.hasPerk(PerkLib.ClawTraining) && player.tailVenom >= 25) tailspikedamage();
+		if (player.hasPerk(PerkLib.ExtraClawAttack) && player.tailVenom >= 25) tailspikedamage();
+		if (player.hasPerk(PerkLib.MultiClawAttack) && player.tailVenom >= 25) tailspikedamage();
+		if (player.hasPerk(PerkLib.ClawingFlurry) && player.tailVenom >= 25) tailspikedamage();
 		outputText("\n\n");
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else doNext(endLustVictory);

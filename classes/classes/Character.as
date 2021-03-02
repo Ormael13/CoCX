@@ -990,15 +990,25 @@ import classes.Items.JewelryLib;
 			var max1:Number = maxWrath();
 			var max2:Number = 1;
 			if (hasPerk(PerkLib.HiddenJobAsura)) max2 += 0.1;
+			//if (hasPerk(PerkLib.)) max2 += 0.1;
 			max1 *= max2;
 			max1 = Math.round(max1);
-			if (max1 > 69999) max1 = 69999;
+			if (max1 > 79999) max1 = 79999;
 			return max1;
 		}
-		public function maxSafeWrath():Number {
+		public function maxSafeWrathMagicalAbilities():Number {
 			var max1:Number = maxWrath();
-			var max2:Number = 1;
-			if (!hasPerk(PerkLib.HiddenJobAsura)) max1 -= 1;
+			var max2:Number = 0.95;
+			//if (hasPerk(PerkLib.)) max2 += 0.1;
+			//if (hasPerk(PerkLib.)) max2 += 0.1;
+			max1 *= max2;
+			return max1;
+		}
+		public function maxSafeWrathSpellcasting():Number {
+			var max1:Number = maxWrath();
+			var max2:Number = 0.75;
+			//if (hasPerk(PerkLib.)) max2 += 0.1;
+			//if (hasPerk(PerkLib.)) max2 += 0.1;
 			max1 *= max2;
 			return max1;
 		}
