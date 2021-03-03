@@ -760,6 +760,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Pounce:StatusEffectType  				= mk("Pounce");
 		public static const RaijuUltReady:StatusEffectType      	= mk("Raiju Ult Ready");
 		public static const RisingInferno:StatusEffectType      	= mk("Rising inferno");
+		public static const RivereDungeonIB:StatusEffectType  		= mk("River Dungeon Incense Burners");
 		public static const Round:StatusEffectType              	= mk("Round");
 		public static const round:StatusEffectType              	= mk("round");
 		public static const RunDisabled:StatusEffectType        	= mk("Run Disabled");

@@ -642,8 +642,8 @@ use namespace CoC;
 			}
 			armorDef += toughnessBonus;
 			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0 && armorPerk == "Heavy") armorDef += _armor.def;
-			if (findPerk(PerkLib.ShieldExpertise) >= 0 && shieldName != "nothing") {
-				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock);
+			if (findPerk(PerkLib.ShieldExpertise) >= 0 && shieldName != "nothing" && isShieldsForShieldBash()) {
+				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock * 0.25);
 				else armorDef += 1;
 			}
 			//Acupuncture effect
@@ -1968,6 +1968,18 @@ use namespace CoC;
 			if (hasPerk(PerkLib.FuelForTheFire)) WHmulti *= 2;
 			return WHmulti;
 		}
+		public function wrathFromBeenPunchingBag(damage:Number):void {
+			if (damage > 0) {
+				var gainedWrath:Number = 0;
+				gainedWrath += Math.sqrt(damage / wrathRatioToHP());
+				gainedWrath = Math.round(gainedWrath * wrathFromHPmulti());
+				if (gainedWrath > 0) EngineCore.WrathChange(gainedWrath, false);
+			}
+			/*var gainedWrath:Number = 0;
+			gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
+			wrath += gainedWrath;
+			if (wrath > maxOverWrath()) wrath = maxOverWrath();*/
+		}
 		public override function damagePercent():Number {
 			var mult:Number = 100;
 			var armorMod:Number = armorDef;
@@ -2023,7 +2035,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && armorPerk == "Heavy") {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.ShieldHarmony) && tou >= 100 && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
+			if (hasPerk(PerkLib.ShieldHarmony) && tou >= 100 && isShieldsForShieldBash() && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && meetUnhinderedReq()) {
@@ -2100,10 +2112,7 @@ use namespace CoC;
 				else {
 					damage = reducePhysDamage(damage);
 					//Wrath
-					var gainedWrath:Number = 0;
-					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-					wrath += gainedWrath;
-					if (wrath > maxOverWrath()) wrath = maxOverWrath();
+					wrathFromBeenPunchingBag(damage);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2244,10 +2253,7 @@ use namespace CoC;
 				else {
 					damage = reduceMagicDamage(damage);
 					//Wrath
-					var gainedWrath:Number = 0;
-					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-					wrath += gainedWrath;
-					if (wrath > maxOverWrath()) wrath = maxOverWrath();
+					wrathFromBeenPunchingBag(damage);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2346,10 +2352,7 @@ use namespace CoC;
 				else {
 					damage = reduceFireDamage(damage);
 					//Wrath
-					var gainedWrath:Number = 0;
-					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-					wrath += gainedWrath;
-					if (wrath > maxOverWrath()) wrath = maxOverWrath();
+					wrathFromBeenPunchingBag(damage);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2457,10 +2460,7 @@ use namespace CoC;
 				else {
 					damage = reduceIceDamage(damage);
 					//Wrath
-					var gainedWrath:Number = 0;
-					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-					wrath += gainedWrath;
-					if (wrath > maxOverWrath()) wrath = maxOverWrath();
+					wrathFromBeenPunchingBag(damage);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2558,10 +2558,7 @@ use namespace CoC;
 				else {
 					damage = reduceLightningDamage(damage);
 					//Wrath
-					var gainedWrath:Number = 0;
-					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-					wrath += gainedWrath;
-					if (wrath > maxOverWrath()) wrath = maxOverWrath();
+					wrathFromBeenPunchingBag(damage);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2651,10 +2648,7 @@ use namespace CoC;
 				else {
 					damage = reduceDarknessDamage(damage);
 					//Wrath
-					var gainedWrath:Number = 0;
-					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-					wrath += gainedWrath;
-					if (wrath > maxOverWrath()) wrath = maxOverWrath();
+					wrathFromBeenPunchingBag(damage);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2746,10 +2740,7 @@ use namespace CoC;
 				else {
 					damage = reducePoisonDamage(damage);
 					//Wrath
-					var gainedWrath:Number = 0;
-					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-					wrath += gainedWrath;
-					if (wrath > maxOverWrath()) wrath = maxOverWrath();
+					wrathFromBeenPunchingBag(damage);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {

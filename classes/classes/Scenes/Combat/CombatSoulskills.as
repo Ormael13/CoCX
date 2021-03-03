@@ -222,7 +222,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			bd = buttons.add("AvatarOfTheSong", AvatarOfTheSong).hint("Doublecast Charged Weapon and Might. Casts blind if charged weapon is already active. Casts Heal if Might is already active.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: 200");
 			if (player.soulforce < 200) {
 				bd.disable("Your current soulforce is too low.");
-			} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrath()) {
+			} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
 				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
 			}
 		}
@@ -234,7 +234,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsManyBirds)) {
 			bd = buttons.add("Many Birds", ManyBirds).hint("Project a figment of your soulforce as a crystal traveling at extreme speeds.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
-			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrath()) {
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
 				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
 			} else if ((player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 				bd.disable("Your current soulforce is too low.");
@@ -245,7 +245,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsComet)) {
 			bd = buttons.add("Comet", Comet).hint("Project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
-			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrath()) {
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
 				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
 			} else if ((player.soulforce < 60 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 				bd.disable("Your current soulforce is too low.");
@@ -255,7 +255,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHailOfBlades)) {
 			bd = buttons.add("Hail of Blades", HailOfBlades1).hint("Form six weapons from your soulforce traveling at extreme speeds.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(50 * soulskillCost() * soulskillcostmulti()));
-			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrath()) {
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
 				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
 			} else if ((player.soulforce < 50 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 				bd.disable("Your current soulforce is too low.");
@@ -268,7 +268,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			bd = buttons.add("G.Hail of Blades", HailOfBlades2).hint("Form eighteen weapons from your soulforce traveling at extreme speeds.  \n\nWould go into cooldown after use for: 3 rounds  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(200 * soulskillCost() * soulskillcostmulti()));
 			if (player.hasStatusEffect(StatusEffects.CooldownGrandioseHailOfBlades)) {
 				bd.disable("You need more time before you can use Grandiose Hail of Blades again.");
-			} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrath()) {
+			} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
 				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
 			} else if ((player.soulforce < 200 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 				bd.disable("Your current soulforce is too low.");
@@ -281,7 +281,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			bd = buttons.add("G.Hail of M.Blades", HailOfBlades3).hint("Form fifty four weapons from your soulforce traveling at extreme speeds.  \n\nWould go into cooldown after use for: 9 rounds  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(800 * soulskillCost() * soulskillcostmulti()));
 			if (player.hasStatusEffect(StatusEffects.CooldownGrandioseHailOfMoonBlades)) {
 				bd.disable("You need more time before you can use Grandiose Hail of Moon Blades again.");
-			} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrath()) {
+			} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
 				bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
 			} else if ((player.soulforce < 800 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 				bd.disable("Your current soulforce is too low.");
@@ -306,7 +306,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd = buttons.add("Trance", TranceTransformation).hint("Activate Trance state, whcih enhancing physical and mental abilities at constant cost of soulforce.  \n\n(MAGICAL SOULSKILL)  \n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
 				if (player.soulforce < 100) {
 					bd.disable("Your current soulforce is too low.");
-				} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrath()) {
+				} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
 					bd.disable("You are too angry to think straight. Smash your puny opponents first and think later.");
 				}
 			} else {
@@ -1737,4 +1737,4 @@ public class CombatSoulskills extends BaseCombatContent {
 	 else enemyAI();
 	 }*/
 }
-}
+}

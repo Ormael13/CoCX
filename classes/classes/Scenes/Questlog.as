@@ -64,14 +64,14 @@ public class Questlog extends BaseContent
 				if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) outputText("Completed (Reward taken)");
 				else outputText("Completed");
 			}
-			else outputText("Not Started/In Progress");/*
-			outputText("\n<b>2nd Floor:</b> ");
+			else outputText("Not Started/In Progress");
+			outputText("\n<b>2nd Floor:</b> ");/*
 			if (SceneLib.dungeons.checkRiverDungeon2ndFloorClear()) {
 				if (player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) > 1) outputText("Completed (Reward taken)");
 				else outputText("Completed");
 			}
-			else outputText("Not Started/In Progress");
-			outputText("\n<i><b>3rd Floor:</b> Soon</i>");*/
+			else */outputText("Not Started/In Progress");
+			outputText("\n<i><b>3rd Floor:</b> Soon</i>");
 			outputText("\n\n<u><b>Adventure Guild Quests</b></u>");
 			outputText("\n<b>Imps Hunt:</b> ");
 			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 2 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 4 || player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 7) outputText("Completed (for today)");
@@ -125,7 +125,14 @@ public class Questlog extends BaseContent
 			if (SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) addButton(6, "Phoenix Tower", takeRewardForPhoenixTower);
 			//button 7 - ???
 			if (SceneLib.dungeons.checkRiverDungeon1stFloorClear() && !player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) addButton(8, "River Dungeon", takeRewardForRiverDungeon1stFloor).hint("1st floor");
-			if (SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.EBON_LABYRINTH] < 3) addButton(9, "Ebon Labyrinth", takeRewardForEbonLabyrinth);
+			if (SceneLib.dungeons.checkRiverDungeon2ndFloorClear() && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) < 1) addButton(8, "River Dungeon", takeRewardForRiverDungeon2ndFloor).hint("2nd floor");
+			//3rd floor
+			//4th floor
+			if (SceneLib.dungeons.checkEbonLabyrinthClear() && flags[kFLAGS.EBON_LABYRINTH] < 3) addButton(9, "Ebon Labyrinth", takeRewardForEbonLabyrinth50th).hint("For first 50th rooms");
+			if (flags[kFLAGS.EBON_LABYRINTH] == 4) addButton(9, "Ebon Labyrinth", takeRewardForEbonLabyrinth150th).hint("For first 150th rooms");
+			if (flags[kFLAGS.EBON_LABYRINTH] == 6) addButton(9, "Ebon Labyrinth", takeRewardForEbonLabyrinth300th).hint("For first 300th rooms");
+			if (flags[kFLAGS.EBON_LABYRINTH] == 8) addButton(9, "Ebon Labyrinth", takeRewardForEbonLabyrinth450th).hint("For first 450th rooms");
+			if (flags[kFLAGS.EBON_LABYRINTH] == 10) addButton(9, "Ebon Labyrinth", takeRewardForEbonLabyrinth600th).hint("For first 600th rooms");
 			if (SceneLib.dungeons.checkHiddenCaveClear() && flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 6) addButton(10, "Hidden Cave", takeRewardForHiddenCave);
 			if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear() && flags[kFLAGS.HIDDEN_CAVE_BOSSES] < 3) addButton(10, "Hidden C.(HS)", takeRewardForHiddenCaveHiddenStage).hint("Hidden Cave (Hidden Stage bonus)");
 			if (SceneLib.dungeons.checkDenOfDesireClear() && flags[kFLAGS.DEN_OF_DESIRE_QUEST] < 2) addButton(11, "Den of Desire", takeRewardForDenOfDesire);
@@ -197,21 +204,61 @@ public class Questlog extends BaseContent
 		public function takeRewardForRiverDungeon2ndFloor():void {
 			clearOutput();
 			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 2 perk points and 10 stat points</b>");
-			player.perkPoints = player.perkPoints + 2;
-			player.statPoints = player.statPoints + 10;
+			outputText("<b>Gained 1 perk point and 5 stat points</b>");
+			player.perkPoints = player.perkPoints + 1;
+			player.statPoints = player.statPoints + 5;
 			statScreenRefresh();
 			player.addStatusValue(StatusEffects.RiverDungeonFloorRewards,1,1);
 			doNext(accessQuestlogMainMenu);
 		}
-		public function takeRewardForEbonLabyrinth():void {
+		public function takeRewardForEbonLabyrinth50th():void {
 			clearOutput();
 			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 2 perk points and 10 stat points</b>");
-			player.perkPoints = player.perkPoints + 2;
-			player.statPoints = player.statPoints + 10;
+			outputText("<b>Gained 1 perk points and 5 stat points</b>");
+			player.perkPoints = player.perkPoints + 1;
+			player.statPoints = player.statPoints + 5;
 			statScreenRefresh();
 			flags[kFLAGS.EBON_LABYRINTH] = 3;
+			doNext(accessQuestlogMainMenu);
+		}
+		public function takeRewardForEbonLabyrinth150th():void {
+			clearOutput();
+			outputText("Your contribution in changing Mareth have been noticed.\n\n");
+			outputText("<b>Gained 1 perk points and 5 stat points</b>");
+			player.perkPoints = player.perkPoints + 1;
+			player.statPoints = player.statPoints + 5;
+			statScreenRefresh();
+			flags[kFLAGS.EBON_LABYRINTH] = 5;
+			doNext(accessQuestlogMainMenu);
+		}
+		public function takeRewardForEbonLabyrinth300th():void {
+			clearOutput();
+			outputText("Your contribution in changing Mareth have been noticed.\n\n");
+			outputText("<b>Gained 1 perk points and 5 stat points</b>");
+			player.perkPoints = player.perkPoints + 1;
+			player.statPoints = player.statPoints + 5;
+			statScreenRefresh();
+			flags[kFLAGS.EBON_LABYRINTH] = 7;
+			doNext(accessQuestlogMainMenu);
+		}
+		public function takeRewardForEbonLabyrinth450th():void {
+			clearOutput();
+			outputText("Your contribution in changing Mareth have been noticed.\n\n");
+			outputText("<b>Gained 1 perk points and 5 stat points</b>");
+			player.perkPoints = player.perkPoints + 1;
+			player.statPoints = player.statPoints + 5;
+			statScreenRefresh();
+			flags[kFLAGS.EBON_LABYRINTH] = 9;
+			doNext(accessQuestlogMainMenu);
+		}
+		public function takeRewardForEbonLabyrinth600th():void {
+			clearOutput();
+			outputText("Your contribution in changing Mareth have been noticed.\n\n");
+			outputText("<b>Gained 1 perk points and 5 stat points</b>");
+			player.perkPoints = player.perkPoints + 1;
+			player.statPoints = player.statPoints + 5;
+			statScreenRefresh();
+			flags[kFLAGS.EBON_LABYRINTH] = 11;
 			doNext(accessQuestlogMainMenu);
 		}
 		public function takeRewardForHiddenCave():void {

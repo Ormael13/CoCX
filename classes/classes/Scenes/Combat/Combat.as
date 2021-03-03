@@ -1312,36 +1312,11 @@ public class Combat extends BaseContent {
                     else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
-                var multimeleeattacksCost:Number = 0;
-                //multiple melee attacks costs
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) multimeleeattacksCost += 30;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) multimeleeattacksCost += 20;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) multimeleeattacksCost += 12;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) multimeleeattacksCost += 6;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) multimeleeattacksCost += 2;
-                if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponPerk == "Dual") {
-                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) multimeleeattacksCost += 2;
-                    else multimeleeattacksCost *= 2;
-                    flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
-                }
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
-                    if (player.wrath < multimeleeattacksCost) {
-                        if (player.weaponPerk == "Dual") {
-                            outputText("You're too <b>'calm'</b> to attack more than twice in this turn!\n\n");
-                            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
-                            player.HP -= 20;
-                        } else {
-                            outputText("You're too <b>'calm'</b> to attack more than once in this turn!\n\n");
-                            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                        }
-                    } else {
-                        player.wrath -= multimeleeattacksCost;
-                        if (player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponPerk == "Dual") {
-                            if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 9) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 6;
-                            else if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
-                            else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
-                        }
-                    }
+                if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponPerk == "Dual") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponPerk == "Dual") {
+                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 9) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 6;
+                    else if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
+                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
                 }
             } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
         }
@@ -1355,32 +1330,10 @@ public class Combat extends BaseContent {
                     else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
-                var multimeleelargeattacksCost:Number = 0;
-                //multiple melee large attacks costs
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) multimeleelargeattacksCost += 9;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) multimeleelargeattacksCost += 3;
-                if (player.weaponPerk == "Dual Large") {
-                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) multimeleelargeattacksCost += 3;
-                    else multimeleelargeattacksCost *= 2;
-                    flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
-                }
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
-                    if (player.wrath < multimeleelargeattacksCost) {
-                        if (player.weaponPerk == "Dual Large") {
-                            outputText("You're too <b>'calm'</b> to attack more than twice in this turn!\n\n");
-                            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
-                            player.HP -= 30;
-                        } else {
-                            outputText("You're too <b>'calm'</b> to attack more than once in this turn!\n\n");
-                            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                        }
-                    } else {
-                        player.wrath -= multimeleelargeattacksCost;
-                        if (player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponPerk == "Dual Large") {
-                            if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 9) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
-                            else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
-                        }
-                    }
+                if (player.weaponPerk == "Dual Large") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponPerk == "Dual Large") {
+                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 9) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
+                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
                 }
             } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
         }
@@ -1414,40 +1367,13 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.DoubleAttackSmall)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
                     else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                var multimeleesmallattacksCost:Number = 0;
-                //multiple melee small attacks costs
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 10) multimeleesmallattacksCost += 45;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 9) multimeleesmallattacksCost += 36;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 8) multimeleesmallattacksCost += 28;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 7) multimeleesmallattacksCost += 21;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) multimeleesmallattacksCost += 15;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) multimeleesmallattacksCost += 10;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) multimeleesmallattacksCost += 6;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) multimeleesmallattacksCost += 3;
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) multimeleesmallattacksCost += 1;
-                if (player.weaponPerk == "Dual Small") {
-                    if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 1) multimeleesmallattacksCost += 1;
-                    else multimeleesmallattacksCost *= 2;
-                }
-                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
-                    if (player.wrath < multimeleesmallattacksCost) {
-                        if (player.weaponPerk == "Dual Small") {
-                            outputText("You're too <b>'calm'</b> to attack more than twice in this turn!\n\n");
-                            player.HP -= 10;
-                        } else outputText("You're too <b>'calm'</b> to attack more than once in this turn!\n\n");
-                        flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                    } else {
-                        player.wrath -= multimeleesmallattacksCost;
-                        if (player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponPerk == "Dual Small") {
-                            if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 8) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 6;
-                            else if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
-                            else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
-                        }
-                    }
+                if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponPerk == "Dual Small") {
+					if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 8) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 6;
+					else if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
+					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
                 }
                 if (player.weaponPerk == "Dual Small") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
             } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-
         }
         if (player.weaponPerk == "Massive") {
             //	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
@@ -2916,7 +2842,7 @@ public class Combat extends BaseContent {
 					archeryXP(1);
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
-				WrathGenerationPerHit(damage);
+				WrathGenerationPerHit1(damage);
                 heroBaneProc(damage);
             }
             if (flags[kFLAGS.CUPID_ARROWS] == 1) {
@@ -3221,7 +3147,7 @@ public class Combat extends BaseContent {
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
-				WrathGenerationPerHit(damage);
+				WrathGenerationPerHit1(damage);
                 heroBaneProc(damage);
             }
         } else {
@@ -3467,7 +3393,7 @@ public class Combat extends BaseContent {
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też*/
             damage = Math.round(damage);
             checkAchievementDamage(damage);
-			WrathGenerationPerHit(damage);
+			WrathGenerationPerHit1(damage);
             if (monster.HP <= monster.minHP()) {
                 if (monster.short == "pod")
                     outputText(". ");
@@ -5058,7 +4984,7 @@ public class Combat extends BaseContent {
             outputText(" ");
             if (MDOCount == maxCurrentAttacks()) outputText("\n");
             checkAchievementDamage(damage);
-			WrathGenerationPerHit(damage);
+			WrathGenerationPerHit1(damage);
             WrathWeaponsProc();
             heroBaneProc(damage);
             EruptingRiposte();
@@ -5172,8 +5098,6 @@ public class Combat extends BaseContent {
                 }
             }
         }
-
-
         if (monster.HP <= monster.minHP()) {
             doNext(endHpVictory);
             return;
@@ -5183,10 +5107,14 @@ public class Combat extends BaseContent {
             return;
         }
         if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] >= 2) {
-            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]--;
-            flags[kFLAGS.ATTACKS_ACCURACY] += meleeAccuracyPenalty();
-            attack2();
-            return;
+			if (player.wrath > 0) {
+				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE]--;
+				flags[kFLAGS.ATTACKS_ACCURACY] += meleeAccuracyPenalty();
+				player.wrath -= 1;
+				attack2();
+				return;
+			}
+            else outputText("\nYou're too <b>'calm'</b> to attack again in this turn!");
         }
         if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
             attack2();
@@ -5501,10 +5429,16 @@ public class Combat extends BaseContent {
 		}
 	}
 	
+	public function WrathGenerationPerHit1(damage:int = 0):void {
+		var addedWrath:Number = damage;
+		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath *= 2;
+		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath *= 2;
+		EngineCore.WrathChange(addedWrath, false);
+	}
 	public function WrathGenerationPerHit2(damage:int = 0):void {
 		var addedWrath:Number = damage;
-		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath += damage;
-		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath += damage;
+		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath *= 2;
+		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath *= 2;
 		EngineCore.WrathChange(addedWrath, false);
 	}
 	
@@ -5664,11 +5598,11 @@ public class Combat extends BaseContent {
     public function combatBlock(doFatigue:Boolean = false):Boolean {
         //Set chance
         var blockChance:int = 20 + player.shieldBlock + Math.floor((player.str - monster.str) / 5);
-        if (player.hasPerk(PerkLib.ShieldMastery) && player.tou >= 50) {
+        if (player.hasPerk(PerkLib.ShieldMastery) && player.tou >= 50 && player.isShieldsForShieldBash()) {
             if (player.tou < 100) blockChance += (player.tou - 50) / 5;
             else blockChance += 10;
         }
-        if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100) {
+        if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100 && player.isShieldsForShieldBash()) {
             if (player.tou < 150) blockChance += (player.tou - 100) / 5;
             else blockChance += 10;
         }
@@ -5686,11 +5620,11 @@ public class Combat extends BaseContent {
 
     public function combatBlock2():Number {
         var blockChance2:Number = 20 + player.shieldBlock;
-        if (player.hasPerk(PerkLib.ShieldMastery) && player.tou >= 50) {
+        if (player.hasPerk(PerkLib.ShieldMastery) && player.tou >= 50 && player.isShieldsForShieldBash()) {
             if (player.tou < 100) blockChance2 += (player.tou - 50) / 5;
             else blockChance2 += 10;
         }
-        if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100) {
+        if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100 && player.isShieldsForShieldBash()) {
             if (player.tou < 150) blockChance2 += (player.tou - 100) / 5;
             else blockChance2 += 10;
         }
@@ -9110,7 +9044,9 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType)) generalTypes.push("Beast or Animal-morph");
                 if (monster.hasPerk(PerkLib.EnemyColossalType)) generalTypes.push("Colossal");
                 if (monster.hasPerk(PerkLib.EnemyConstructType)) generalTypes.push("Construct");
+                if (monster.hasPerk(PerkLib.EnemyElementalType)) generalTypes.push("Elemental");
                 if (monster.hasPerk(PerkLib.EnemyFeralType)) generalTypes.push("Feral");
+                if (monster.hasPerk(PerkLib.EnemyFleshConstructType)) generalTypes.push("Flesh Construct");
                 if (monster.hasPerk(PerkLib.EnemyGhostType)) generalTypes.push("Ghost");
                 if (monster.hasPerk(PerkLib.EnemyGigantType)) generalTypes.push("Gigant");
                 if (monster.hasPerk(PerkLib.EnemyGooType)) generalTypes.push("Goo");
@@ -9118,6 +9054,7 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.EnemyHugeType)) generalTypes.push("Huge");
                 if (monster.hasPerk(PerkLib.EnemyLargeGroupType)) generalTypes.push("Large Group");
                 if (monster.hasPerk(PerkLib.EnemyPlantType)) generalTypes.push("Plant");
+                if (monster.hasPerk(PerkLib.EnemyTrueDemon)) generalTypes.push("True Demon");
             }
             if (player.hasPerk(PerkLib.EyesOfTheHunterAdept) && player.sens >= 50) {
                 if (monster.hasPerk(PerkLib.EnemyBossType)) generalTypes.push("Boss");
@@ -10061,7 +9998,7 @@ public class Combat extends BaseContent {
                 EngineCore.SoulforceChange(100 + (player.wis*2), true);
             }
         }
-        if(player.hasStatusEffect(StatusEffects.StraddleRoundLeft)) {
+        if (player.hasStatusEffect(StatusEffects.StraddleRoundLeft)) {
             player.addStatusValue(StatusEffects.StraddleRoundLeft, 1, -1);
             if (player.statusEffectv1(StatusEffects.StraddleRoundLeft) <= 0) {
                 monster.removeStatusEffect(StatusEffects.Straddle);
@@ -10257,7 +10194,8 @@ public class Combat extends BaseContent {
         if (monster.hasCock() && monster.hasVagina()) outputText("s");
         outputText(" with your demonic powers at the rhythm of [monster a] [monster name] owns heartbeat. " +
                 "The unholy transformation even if temporary arouses [monster a] [monster name] to no end.");
-        StraddleDamage *= 1+(scalingBonusIntelligence()*2/100);
+        StraddleDamage *= 1+((scalingBonusIntelligence()*2)/100);
+		//StraddleDamage *= 1+((player.intStat.core.max*2)/100);
         StraddleDamage = Math.round(StraddleDamage);
         monster.teased(monster.lustVuln * StraddleDamage);
         if (Randomcrit) outputText(" <b>Critical!</b>");
@@ -11130,6 +11068,14 @@ public class Combat extends BaseContent {
         }
         outputText("\n\n");
         if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) monster.removeStatusEffect(StatusEffects.HypnosisNaga);
+        if (player.hasStatusEffect(StatusEffects.StraddleRoundLeft)) {
+            player.addStatusValue(StatusEffects.StraddleRoundLeft, 1, -1);
+            if (player.statusEffectv1(StatusEffects.StraddleRoundLeft) <= 0) {
+                monster.removeStatusEffect(StatusEffects.Straddle);
+                player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
+                outputText("\n\nYour opponent finally manages to struggle free of your grapple!\n\n");
+            }
+        }
         enemyAI();
     }
 

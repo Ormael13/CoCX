@@ -3673,8 +3673,15 @@ public function wakeFromBadEnd():void {
 		childPerformance += (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren() + flags[kFLAGS.ZENJI_KIDS]);
 		childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4) + (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] / 4) + (flags[kFLAGS.MITZI_DAUGHTERS] / 4));
 		performancePointsPrediction += Math.sqrt(childPerformance);
-		//Level
+		//Various Level trackers
 		performancePointsPrediction += player.level;
+		if (player.level >= 42) performancePointsPrediction += (player.level - 41);
+		if (player.level >= 102) performancePointsPrediction += (player.level - 101);
+		if (player.level >= 180) performancePointsPrediction += (player.level - 179);
+		if (player.teaseLevel >= 25) {
+			performancePointsPrediction += 25;
+		}
+		else performancePointsPrediction += player.teaseLevel;
 		performancePointsPrediction = Math.round(performancePointsPrediction);
 		return performancePointsPrediction;
 	}
