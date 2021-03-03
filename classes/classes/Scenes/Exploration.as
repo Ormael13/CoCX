@@ -214,16 +214,27 @@ public class Exploration extends BaseContent
 				else if (player.level < 16 && impChooser >= 80) impChooser = 79;
 				//Imp Lord
 				if (impChooser >= 50 && impChooser < 70) {
-					if (rand(4) == 0) SceneLib.impScene.impLordFeralEncounter();
-					else SceneLib.impScene.impLordEncounter();
+					if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) {
+						if (rand(4) == 0) SceneLib.impScene.impLordEncounter();
+						else SceneLib.impScene.impLordFeralEncounter();
+					}
+					else {
+						if (rand(4) == 0) SceneLib.impScene.impLordFeralEncounter();
+						else SceneLib.impScene.impLordEncounter();
+					}
 					spriteSelect(29);
-					
 					return;
 				}
 				//Imp Warlord
 				else if (impChooser >= 70 && impChooser < 90) {
-					if (rand(4) == 0) SceneLib.impScene.impWarlordFeralEncounter();
-					else SceneLib.impScene.impWarlordEncounter();
+					if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) {
+						if (rand(4) == 0) SceneLib.impScene.impWarlordEncounter();
+						else SceneLib.impScene.impWarlordFeralEncounter();
+					}
+					else {
+						if (rand(4) == 0) SceneLib.impScene.impWarlordFeralEncounter();
+						else SceneLib.impScene.impWarlordEncounter();
+					}
 					spriteSelect(125);
 					return;
 				}
@@ -235,25 +246,45 @@ public class Exploration extends BaseContent
 				}
 				else {
 					clearOutput();
-					if (rand(4) == 0) {
-						outputText("A feral imp wings out of the sky and attacks!");
-						if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-							outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+					if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) {
+						if (rand(4) == 0) {
+							outputText("An imp wings out of the sky and attacks!");
+							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+								outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+							}
+							startCombat(new Imp());
 						}
-						flags[kFLAGS.FERAL_EXTRAS] = 1;
-						startCombat(new FeralImps());
-						spriteSelect(29);
+						else {
+							outputText("A feral imp wings out of the sky and attacks!");
+							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+								outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+							}
+							flags[kFLAGS.FERAL_EXTRAS] = 1;
+							startCombat(new FeralImps());
+						}
 					}
 					else {
-						outputText("An imp wings out of the sky and attacks!");
-						if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-							outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+						if (rand(4) == 0) {
+							outputText("A feral imp wings out of the sky and attacks!");
+							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+								outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+							}
+							flags[kFLAGS.FERAL_EXTRAS] = 1;
+							startCombat(new FeralImps());
 						}
-						startCombat(new Imp());
-						spriteSelect(29);
+						else {
+							outputText("An imp wings out of the sky and attacks!");
+							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+								outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+							}
+							startCombat(new Imp());
+						}
 					}
+					spriteSelect(29);
 				}
 				return;
 			}

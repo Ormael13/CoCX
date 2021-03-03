@@ -13789,8 +13789,8 @@ use namespace CoC;
 		}
 
 		public function manticoreFeed():void {
-			if (findPerk(PerkLib.ManticoreMetabolism) >= 0) {
-				if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0) {
+			if (hasPerk(PerkLib.ManticoreMetabolism)) {
+				if (hasPerk(PerkLib.ManticoreMetabolismEvolved)) {
 					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50 + (10 * (1 + newGamePlusMod()))) {
 						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(15);
 					}
@@ -13806,11 +13806,15 @@ use namespace CoC;
 			var Ammount:Number = 100;
 			if ((hunger+Ammount)>maxHunger()) Ammount = (maxHunger()-hunger-1);
 			refillHunger(Ammount);
+			var Amm2:Number = 25;
+			if (hasPerk(PerkLib.ManticoreMetabolismEvolved)) Amm2 *= 2;
+			tailVenom += Amm2;
+			if (tailVenom > maxVenom()) tailVenom = maxVenom();
 		}
 
 		public function displacerFeed():void {
-			if (findPerk(PerkLib.DisplacerMetabolism) >= 0) {
-				if (findPerk(PerkLib.DisplacerMetabolismEvolved) >= 0) {
+			if (hasPerk(PerkLib.DisplacerMetabolism)) {
+				if (hasPerk(PerkLib.DisplacerMetabolismEvolved)) {
 					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50 + (10 * (1 + newGamePlusMod()))) {
 						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(15);
 					}

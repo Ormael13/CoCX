@@ -102,7 +102,7 @@ public class Questlog extends BaseContent
 			if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 2 || player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 5) outputText("Completed (for today)");
 			else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 1 || player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 4) outputText("In Progress");
 			else outputText("Not Started");
-			outputText("\n<i><b>Spider-silk Gathering:</b> Soon</i>");
+			outputText("\n<i><b>Spider-silk Gathering:</b> Very Soon</i>");
 			//outputText("\n<i><b>Dragonscale Gathering:</b> Soon</i>");
 			outputText("\n<i><b>Ebonbloom Gathering:</b> Soon</i>");
 			//outputText("\n<i><b>World Tree Branch Gathering:</b> Soon</i>");
@@ -112,7 +112,7 @@ public class Questlog extends BaseContent
 			else if (flags[kFLAGS.GALIA_LVL_UP] >= 0.05 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) outputText("In Progress (" + Math.round(flags[kFLAGS.GALIA_LVL_UP] * 20) + " / 10)");
 			else if (flags[kFLAGS.GALIA_LVL_UP] >= 0.01 && flags[kFLAGS.GALIA_LVL_UP] < 0.05) outputText("In Progress (0 / 10)");
 			else outputText("Not Started");
-			outputText("\n<i><b>Feral Tentacle Beasts Capture:</b> Soon</i>");
+			outputText("\n<i><b>Feral Tentacle Beasts Capture:</b> Very Soon</i>");
 			/*if () outputText("\n\n<u><b>The New Dawn</b></u>");
 			else outputText("\n<b>???</b>");*/
 			menu();

@@ -70,7 +70,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-Added mastery for gauntlet, dagger, exotic, whip, bow/crossbows, thrown and firearms type weapons.\n");
 			outputText("-After months, years of wait... 2nd wedding partner is finaly here.... it's our local neighbour yandere Etna. After PC know about marriages (Michiko helps here), have ring to propose and know some friendly priest can now marry Etna. It will not be easy and maybe like with Chi Chi as someone could crash wedding... as long it not 300 of them right? So ekhm... after PC manage to finish weeding will make resident manticore into wife.\n");
-			outputText("-New melee weapon (by Liadri): Venoclaw - obtainable after making Etna PC waifu. Cost 200 gems. Base atk is 0. Each attack that would deal damage to enemy would apply a small dose of aphrodisiac similary to manticore poison. It also compatibile to be used with feral combat.\n");
+			outputText("-New melee weapon (by Liadri): Venoclaw - obtainable after making Etna PC waifu. Cost 400 gems. Base atk is 0. Each attack that would deal damage to enemy would apply a small dose of aphrodisiac similary to manticore poison. It also compatibile to be used with feral combat and increase feral damage by 20%.\n");
 			outputText("-Put limit on how much PC can mine at one visit in quarry to 60. Each new NG tier increase it by 20 up to 160.\n");
 			outputText("-Crinos Shape bonuses are now counted from core stat not total values. We heard Liari think old CS was too OP so well we need cut bit of it power, right? Or that it was meme already by been super OP at late game.\n");
 			outputText("-Warrior's Rage bonuses from additional perks was increased to 15/20 from 5. So warriors zerker would now be a bit more helpful later on too than fall off hard in terms of boosting stats temporaly.\n");
@@ -105,8 +105,8 @@ package classes.Scenes
 			outputText("-After reaching lvl 42/102/180 PC will gain 1 more asc point for reached level. Also up to 25 asc points can be gained form leveling tease mastery.\n");
 			outputText("-On General stats subpage was added counter how far PC reached in Ebon Labyrinth.\n");
 			outputText("-Reaching room 150+/300+ in Labirinth will grant PC new rewards from Questlog (but need to pick them order without skipping or getting few rewards at once).\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-When PC have active quest of capture feral imps chances to meet normal and feral one imp become reverted (meaning that most of imps pc meet will be feral ones).\n");
+			outputText("-Manticore feed special gained additional effect of recharging venom by 25 pts. Having Manticore Metabolism (Evolved) perk would increase this recharge rate 2x.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

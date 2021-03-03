@@ -3887,7 +3887,7 @@ public class Combat extends BaseContent {
         }
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
         //Natural weapon Full attack list
-        if ((flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) || player.isGargoyle())){
+        if ((flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) || player.isGargoyle())) {
             IsFeralCombat = true;
             //DOING BITE ATTACKS
             if (player.hasABiteAttack()) {
@@ -4517,6 +4517,7 @@ public class Combat extends BaseContent {
             }
             if (player.weapon == weapons.BFGAUNT) damage *= 4;
             if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
+			if (player.weapon == weapons.VENCLAW && flags[kFLAGS.FERAL_COMBAT_MODE] == 1) damage *= 1.2;
 			if (player.isGauntletWeapon()) damage *= (1 + (0.01 * masteryGauntletLevel()));
 			if (player.isSwordTypeWeapon()) damage *= (1 + (0.01 * masterySwordLevel()));
 			if (player.isAxeTypeWeapon()) damage *= (1 + (0.01 * masteryAxeLevel()));
