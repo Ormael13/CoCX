@@ -106,8 +106,8 @@ package classes.Scenes
 			outputText("-On General stats subpage was added counter how far PC reached in Ebon Labyrinth.\n");
 			outputText("-Reaching room 150+/300+ in Labirinth will grant PC new rewards from Questlog (but need to pick them order without skipping or getting few rewards at once).\n");
 			outputText("-When PC have active quest of capture feral imps chances to meet normal and feral one imp become reverted (meaning that most of imps pc meet will be feral ones).\n");
-			outputText("-Manticore feed special gained additional effect of recharging venom by 25 pts. Having Manticore Metabolism (Evolved) perk would increase this recharge rate 2x.\n");
-			outputText("-\n");
+			outputText("-Manticore feed special gained additional effect of recharging venom by 50 pts. Having Manticore Metabolism (Evolved) perk would increase this recharge rate 2x.\n");
+			outputText("-Manticore and Displacer feed effect after rewaching max stacks would be extended by 2/3 (w/ Race Metabolism (Evovlved) perk) hours after each feed. Also both feeding bonus to speed from having (Evolved) racial perk will be +50% not +1000%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -115,7 +115,7 @@ package classes.Scenes
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk form training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in sheild slot), one of req. for Prestige Job: Spell Knight, ");
+			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk from training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in sheild slot), one of req. for Prestige Job: Spell Knight, ");
 			outputText("Flames of Love and Icicles of Love not dealing increased dmg to group enemies, beautiful items aside sword and excalibur not been dropped with high corruption, beautiful sword / excalibur not been working properly with multiattack settings, centipeded tf small correction, added missing cooldown countdown for Flames/Icicles of Love and Punishing Kick soulskills, missing Ebon Labyrinth bosses in rooms ");
 			outputText("200 / 250 / 300, succubus special no longer affecting lust immune enemies, no reseting on 2nd to 4th ring in case PC had any equipped, shield perks working with all shields not only those that allows use of shield bash, EL questolog reward after 50th room wrong unlock req., many smol fixes and typos corrected\n");/*ostatni punkt changelogu
 			outputText("-\n");
