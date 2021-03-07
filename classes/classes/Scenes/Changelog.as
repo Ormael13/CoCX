@@ -108,6 +108,13 @@ package classes.Scenes
 			outputText("-When PC have active quest of capture feral imps chances to meet normal and feral one imp become reverted (meaning that most of imps pc meet will be feral ones).\n");
 			outputText("-Manticore feed special gained additional effect of recharging venom by 50 pts. Having Manticore Metabolism (Evolved) perk would increase this recharge rate 2x.\n");
 			outputText("-Manticore and Displacer feed effect after rewaching max stacks would be extended by 2/3 (w/ Race Metabolism (Evovlved) perk) hours after each feed. Also both feeding bonus to speed from having (Evolved) racial perk will be +50% not +1000%.\n");
+			outputText("-Tank and Refined Body perks was switched meaning first will be accesable Tank and it would be req. to unlock Refined Body perk. Also Refined Body perks effect was changed from giving 50 HP to 5% of base HP.\n");
+			outputText("-Demonic Desire and Inhuman Desire perks effects was switched and effect of Demonic Desire (formely Inhuman Desire) perks was changed from +20 max lust to +5% of max lust.\n");
+			outputText("-New event perk: 'My Blood for Blood Puppies'. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Allow to reach OverMax HP equal to 5x current Tou score, -5% blood spells/soulskills cost, +10% blood spells/soulskills power, ");
+			outputText("During fight small part of your blood from into blood puppies that can attack on your behalf with blood soulskills. When you grow in mastery of blood they would grow stronger with you.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -118,6 +125,8 @@ package classes.Scenes
 			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk from training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in sheild slot), one of req. for Prestige Job: Spell Knight, ");
 			outputText("Flames of Love and Icicles of Love not dealing increased dmg to group enemies, beautiful items aside sword and excalibur not been dropped with high corruption, beautiful sword / excalibur not been working properly with multiattack settings, centipeded tf small correction, added missing cooldown countdown for Flames/Icicles of Love and Punishing Kick soulskills, missing Ebon Labyrinth bosses in rooms ");
 			outputText("200 / 250 / 300, succubus special no longer affecting lust immune enemies, no reseting on 2nd to 4th ring in case PC had any equipped, shield perks working with all shields not only those that allows use of shield bash, EL questolog reward after 50th room wrong unlock req., many smol fixes and typos corrected\n");/*ostatni punkt changelogu
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -186,7 +195,11 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -224,18 +237,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

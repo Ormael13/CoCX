@@ -1975,10 +1975,6 @@ use namespace CoC;
 				gainedWrath = Math.round(gainedWrath * wrathFromHPmulti());
 				if (gainedWrath > 0) EngineCore.WrathChange(gainedWrath, false);
 			}
-			/*var gainedWrath:Number = 0;
-			gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-			wrath += gainedWrath;
-			if (wrath > maxOverWrath()) wrath = maxOverWrath();*/
 		}
 		public override function damagePercent():Number {
 			var mult:Number = 100;
@@ -14065,7 +14061,7 @@ use namespace CoC;
 			if (scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 12) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (unicornScore() >= 12) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxLust_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);
+			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxHP_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);
 			return max;
 		}
 		protected override function maxLust_base():Number {
@@ -14218,4 +14214,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

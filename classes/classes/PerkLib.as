@@ -940,23 +940,23 @@ public class PerkLib
 				"You're Munchkin, an ultimate being that possess a god-like body and powers. +25% to all stats.",
 				"You've chosen the 'Deity Job: Munchkin' perk, becoming an ultimate being with a god-like body and powers. +25% to all stats.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,"int.mult":0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':25}, false);
 		public static const DemonicDesireI:PerkType = mk("Demonic Desire I", "Demonic Desire I",
-				"+1 extra LP per point of libido.",
-				"You've chosen the 'Demonic Desire I' perk, granting an extra maximum LP for each point of libido.");
+				"Raises max lust by 5% of base value.",
+				"You've chosen the 'Demonic Desire I' perk, giving you an additional 5% of base value to max lust!");
 		public static const DemonicDesireII:PerkType = mk("Demonic Desire II", "Demonic Desire II",
-				"+1 extra LP per point of libido.",
-				"You've chosen the 'Demonic Desire II' perk, granting an extra maximum LP for each point of libido.");
+				"Raises max lust by 5% of base value.",
+				"You've chosen the 'Demonic Desire II' perk, giving you an additional 5% of base value to max lust!");
 		public static const DemonicDesireIII:PerkType = mk("Demonic Desire III", "Demonic Desire III",
-				"+1 extra LP per point of libido.",
-				"You've chosen the 'Demonic Desire III' perk, granting an extra maximum LP for each point of libido.");
+				"Raises max lust by 5% of base value.",
+				"You've chosen the 'Demonic Desire III' perk, giving you an additional 5% of base value to max lust!");
 		public static const DemonicDesireIV:PerkType = mk("Demonic Desire IV", "Demonic Desire IV",
-				"+1 extra LP per point of libido.",
-				"You've chosen the 'Demonic Desire IV' perk, granting an extra maximum LP for each point of libido.");
+				"Raises max lust by 5% of base value.",
+				"You've chosen the 'Demonic Desire IV' perk, giving you an additional 5% of base value to max lust!");
 		public static const DemonicDesireV:PerkType = mk("Demonic Desire V", "Demonic Desire V",
-				"+1 extra LP per point of libido.",
-				"You've chosen the 'Demonic Desire V' perk, granting an extra maximum LP for each point of libido.");
+				"Raises max lust by 5% of base value.",
+				"You've chosen the 'Demonic Desire V' perk, giving you an additional 5% of base value to max lust!");
 		public static const DemonicDesireVI:PerkType = mk("Demonic Desire VI", "Demonic Desire VI",
-				"+1 extra LP per point of libido.",
-				"You've chosen the 'Demonic Desire VI' perk, granting an extra maximum LP for each point of libido.");
+				"Raises max lust by 5% of base value.",
+				"You've chosen the 'Demonic Desire VI' perk, giving you an additional 5% of base value to max lust!");
 		public static const Desensitization:PerkType = mk("Desensitization", "Desensitization",
 				"Negative effects of sensitivity are reduced by 5%.",
 				"You've chosen the 'Desensitization' perk, decreasing negative effects of sensitivity by 5%.");
@@ -1752,23 +1752,23 @@ public class PerkLib
 				"You are in control of your desires, that's it... except another 10% soul force gain.",
 				"You've chosen the 'In Control' perk, gaining +10% max Soulforce.");
 		public static const InhumanDesireI:PerkType = mk("Inhuman Desire I", "Inhuman Desire I",
-				"Raises max lust by 20.",
-				"You've chosen the 'Inhuman Desire I' perk, giving you an additional 20 LP!");
+				"+1 extra LP per point of libido.",
+				"You've chosen the 'Inhuman Desire I' perk, granting an extra maximum LP for each point of libido.");
 		public static const InhumanDesireII:PerkType = mk("Inhuman Desire II", "Inhuman Desire II",
-				"Raises max lust by 20.",
-				"You've chosen the 'Inhuman Desire II' perk, giving you an additional 20 LP!");
+				"+1 extra LP per point of libido.",
+				"You've chosen the 'Inhuman Desire II' perk, granting an extra maximum LP for each point of libido.");
 		public static const InhumanDesireIII:PerkType = mk("Inhuman Desire III", "Inhuman Desire III",
-				"Raises max lust by 20.",
-				"You've chosen the 'Inhuman Desire III' perk, giving you an additional 20 LP!");
+				"+1 extra LP per point of libido.",
+				"You've chosen the 'Inhuman Desire III' perk, granting an extra maximum LP for each point of libido.");
 		public static const InhumanDesireIV:PerkType = mk("Inhuman Desire IV", "Inhuman Desire IV",
-				"Raises max lust by 20.",
-				"You've chosen the 'Inhuman Desire IV' perk, giving you an additional 20 LP!");
+				"+1 extra LP per point of libido.",
+				"You've chosen the 'Inhuman Desire IV' perk, granting an extra maximum LP for each point of libido.");
 		public static const InhumanDesireV:PerkType = mk("Inhuman Desire V", "Inhuman Desire V",
-				"Raises max lust by 20.",
-				"You've chosen the 'Inhuman Desire V' perk, giving you an additional 20 LP!");
+				"+1 extra LP per point of libido.",
+				"You've chosen the 'Inhuman Desire V' perk, granting an extra maximum LP for each point of libido.");
 		public static const InhumanDesireVI:PerkType = mk("Inhuman Desire VI", "Inhuman Desire VI",
-				"Raises max lust by 20.",
-				"You've chosen the 'Inhuman Desire VI' perk, giving you an additional 20 LP!");
+				"+1 extra LP per point of libido.",
+				"You've chosen the 'Inhuman Desire VI' perk, granting an extra maximum LP for each point of libido.");
 		public static const InhumanEndurance:PerkType = mk("Inhuman Endurance", "Inhuman Endurance",
 				"Increases maximum fatigue by 2000.",
 				"You've chosen the 'Inhuman Endurance' perk. Thanks to your inhuman physical conditioning, your maximum fatigue has been increased by 2000!");
@@ -2562,23 +2562,23 @@ public class PerkLib
 				"Gain +100% boost to health and fatigue recovery during sleep.",
 				"You've chosen the 'Recuperation Sleep' perk, boosting your health and fatigue recovery rate while sleeping!");
 		public static const RefinedBodyI:PerkType = mk("Refined Body I", "Refined Body I",
-				"Raises max HP by 50.",
-				"You've chosen the 'Refined Body I' perk, giving you an additional 50 HP!");
+				"Raises max HP by 5% of base value.",
+				"You've chosen the 'Refined Body I' perk, giving you an additional 5% to base HP!");
 		public static const RefinedBodyII:PerkType = mk("Refined Body II", "Refined Body II",
-				"Raises max HP by 50.",
-				"You've chosen the 'Refined Body II' perk, giving you an additional 50 HP!");
+				"Raises max HP by 5% of base value.",
+				"You've chosen the 'Refined Body II' perk, giving you an additional 5% to base HP!");
 		public static const RefinedBodyIII:PerkType = mk("Refined Body III", "Refined Body III",
-				"Raises max HP by 50.",
-				"You've chosen the 'Refined Body III' perk, giving you an additional 50 HP!");
+				"Raises max HP by 5% of base value.",
+				"You've chosen the 'Refined Body III' perk, giving you an additional 5% to base HP!");
 		public static const RefinedBodyIV:PerkType = mk("Refined Body IV", "Refined Body IV",
-				"Raises max HP by 50.",
-				"You've chosen the 'Refined Body IV' perk, giving you an additional 50 HP!");
+				"Raises max HP by 5% of base value.",
+				"You've chosen the 'Refined Body IV' perk, giving you an additional 5% to base HP!");
 		public static const RefinedBodyV:PerkType = mk("Refined Body V", "Refined Body V",
-				"Raises max HP by 50.",
-				"You've chosen the 'Refined Body V' perk, giving you an additional 50 HP!");
+				"Raises max HP by 5% of base value.",
+				"You've chosen the 'Refined Body V' perk, giving you an additional 5% to base HP!");
 		public static const RefinedBodyVI:PerkType = mk("Refined Body VI", "Refined Body VI",
-				"Raises max HP by 50.",
-				"You've chosen the 'Refined Body VI' perk, giving you an additional 50 HP!");
+				"Raises max HP by 5% of base value.",
+				"You've chosen the 'Refined Body VI' perk, giving you an additional 5% to base HP!");
 		public static const Refinement:PerkType = mk("Refinement", "Refinement",
 				"Using your acquired knowledge, you refine each item to increase its effects on your body, further increasing the changes +1 effect.",
 				"You've chosen the 'Refinement' perk, number of possible effects of transformatives +1.");
@@ -3313,7 +3313,7 @@ public class PerkLib
 		public static const YourPainMyPower:PerkType = mk("Your Pain My Power", "Your Pain My Power",
 				"You absorb all the blood spilled and wrath generated by enemy under Bleed effects into yourself. (+5x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power)");
 		public static const MyBloodForBloodPuppies:PerkType = mk("My Blood for Blood Puppies", "My Blood for Blood Puppies",
-				". (+5x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power)");
+				"During fight small part of your blood from into blood puppies that can attack on your behalf with blood soulskills. When you grow in mastery of blood they would grow stronger with you. (+5x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power)");
 		public static const HiddenJobAsura:PerkType = mk("Hidden Job: Asura", "Hidden Job: Asura",
 				". (+10% of OverMax Wrath)");
 		public static const HiddenJob8:PerkType = mk("Hidden Job: 8", "Hidden Job: 8",
@@ -4029,13 +4029,13 @@ public class PerkLib
             // TOUGHNESS
             //------------
             JobGuardian.requireTou(10);
-            RefinedBodyI.requirePerk(JobGuardian)
+            TankI.requirePerk(JobGuardian)
                     .requireTou(25);
-            RefinedBodyII.requirePerk(RefinedBodyI)
+            TankII.requirePerk(TankI)
                     .requireTou(40)
                     .requireLevel(2)
                     .requireNGPlus(1);
-            RefinedBodyIII.requirePerk(RefinedBodyII)
+            TankIII.requirePerk(TankII)
                     .requireTou(55)
                     .requireLevel(4)
                     .requireNGPlus(2);
@@ -4052,15 +4052,15 @@ public class PerkLib
                     .requireStr(20);
             UnlockBody.requireTou(20);
             //Tier 1 Toughness Perks
-            RefinedBodyIV.requirePerk(RefinedBodyIII)
+            TankIV.requirePerk(TankIII)
                     .requireTou(70)
                     .requireNGPlus(3)
                     .requireLevel(6);
-            RefinedBodyV.requirePerk(RefinedBodyIV)
+            TankV.requirePerk(TankIV)
                     .requireTou(85)
                     .requireLevel(8)
                     .requireNGPlus(4);
-            RefinedBodyVI.requirePerk(RefinedBodyV)
+            TankVI.requirePerk(TankV)
                     .requireTou(100)
                     .requireLevel(10)
                     .requireNGPlus(5);
@@ -4076,14 +4076,14 @@ public class PerkLib
                     .requireTou(150)
                     .requireLevel(10)
                     .requireNGPlus(5);
-            TankI.requirePerk(RefinedBodyI)
+            RefinedBodyI.requirePerk(TankI)
                     .requireTou(60)
                     .requireLevel(6);
-            TankII.requirePerk(TankI)
+            RefinedBodyII.requirePerk(RefinedBodyI)
                     .requireTou(80)
                     .requireLevel(8)
                     .requireNGPlus(1);
-            TankIII.requirePerk(TankII)
+            RefinedBodyIII.requirePerk(RefinedBodyII)
                     .requireTou(100)
                     .requireLevel(10)
                     .requireNGPlus(2);
@@ -4116,15 +4116,15 @@ public class PerkLib
                     .requireLevel(12);
             IronMan.requireTou(60)
                     .requireLevel(12);
-            TankIV.requirePerk(TankIII)
+            RefinedBodyIV.requirePerk(RefinedBodyIII)
                     .requireTou(120)
                     .requireNGPlus(3)
                     .requireLevel(12);
-            TankV.requirePerk(TankIV)
+            RefinedBodyV.requirePerk(RefinedBodyIV)
                     .requireTou(140)
                     .requireLevel(14)
                     .requireNGPlus(4);
-            TankVI.requirePerk(TankV)
+            RefinedBodyVI.requirePerk(RefinedBodyV)
                     .requireTou(140)
                     .requireLevel(16)
                     .requireNGPlus(5);
