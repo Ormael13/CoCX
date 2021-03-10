@@ -1437,42 +1437,11 @@ public class PlayerInfo extends BaseContent {
 		clearOutput();
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
-		//Level up
-		/*
-        if (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap) {
-            player.XP -= player.requiredXP();
-			player.level++;
-			player.perkPoints++;
-			if (player.level <= 6) player.perkPoints++;
-			//if (player.level % 2 == 0) player.ascensionPerkPoints++;
-			//przerobić aby z asc perk co ?6/3/1? lvl dostawać another perk point?
-			//może też dodać ascension perk aby móc dostawać 6 lub nawet wiecej stat points na lvl up?
-			clearOutput();
-			outputText("<b>You are now level " + num2Text(player.level) + "!</b>");
-			if (player.level > 6) {
-				player.statPoints += 5;
-				outputText("\n\nYou have gained five attribute points and one perk point!");
-			}
-			else {
-				player.statPoints += 10;
-				outputText("\n\nYou have gained ten attribute points and two perk points!");
-			}
-			if (player.level > 6) outputText("\n\nYou have gained one perk point!");
-			else outputText("\n\nYou have gained two perk points!");
-
-			if (player.statPoints>0) {
-				doNext(attributeMenu);
-			} else if (player.perkPoints > 0) {
-				doNext(perkBuyMenu);
-			} else {
-				doNext(playerMenu);
-			}
-		}*/
-		//Level up bulk/individual
 		if (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap){
 			if (flags[kFLAGS.LVL_UP_FAST] > 0){
-				var lvlinc:int = 0;
-				var perkLvl:int = player.perkPoints;
+				var limiter:int = 0;	//Lvl to set as limit: Not implemented, no idea how to save values for other functions to use without making it "global" in this file, or cheating by using a flag.
+				var lvlinc:int = 0;		//Level increment tracking
+				var perkLvl:int = player.perkPoints;	//Cheating by keeping track of changes by subtraction.
 				var statLvl:int = player.statPoints;
 				while (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap){
 					player.XP -= player.requiredXP();
@@ -1537,6 +1506,28 @@ public class PlayerInfo extends BaseContent {
 			doNext(playerMenu);
 		}
 	}
+
+	//Sub-menus for limited levelling.
+	/*
+	private function lvlUpGoSm1():void {
+		clearOutput()
+		outputText("Do you want to level up to a specific level, or all at once?")
+		menu()
+		addButton(0,"Specific", lvlUpGoSm2);
+		addButton(1,"All In", lvlUpGoSm3);
+	}
+	private function lvlUpGoSm2():void {
+		outputText("\nHow many levels do you want to go up?")
+		menu()
+		addbutton(0,"1",lUGSm2b1);
+		addbutton(0,"2",lUGSm2b2);
+		addbutton(0,"5",lUGSm2b5);
+		addbutton(0,"10",lUGSm2b10);
+	}
+	private function lvlUpGoSm3():void {
+		outputText("\nGoing all in.")
+	}
+	 */
 
 //Attribute menu
 	private function attributeMenu():void {
