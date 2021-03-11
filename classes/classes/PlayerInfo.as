@@ -1438,8 +1438,7 @@ public class PlayerInfo extends BaseContent {
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 		if (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap){
-			if (flags[kFLAGS.LVL_UP_FAST] > 0){
-				var limiter:int = 0;	//Lvl to set as limit: Not implemented, no idea how to save values for other functions to use without making it "global" in this file, or cheating by using a flag.
+			if (flags[kFLAGS.LVL_UP_FAST] > 0){ /*
 				var lvlinc:int = 0;		//Level increment tracking
 				var perkLvl:int = player.perkPoints;	//Cheating by keeping track of changes by subtraction.
 				var statLvl:int = player.statPoints;
@@ -1460,7 +1459,9 @@ public class PlayerInfo extends BaseContent {
 				outputText("<b>You have gained " +lvlinc.toString() + " levels, and are now level " + num2Text(player.level)+"!</b>");
 				var perkRes:int = player.perkPoints - perkLvl
 				var statRes:int = player.statPoints - statLvl
-				outputText("\n\n You have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!")
+				outputText("\n\n You have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!") */
+				lvlUpFastSubMenu()
+				return;
 			}
 			else {
 				player.XP -= player.requiredXP();
@@ -1508,26 +1509,70 @@ public class PlayerInfo extends BaseContent {
 	}
 
 	//Sub-menus for limited levelling.
-	/*
-	private function lvlUpGoSm1():void {
+	public function lvlUpFastSubMenu():void{
+		spriteSelect(-1);
+		outputText("Fast levelling, just keep clicking on the button to level up by that number. Or press LvlMax to just get all the levels.")
+		outputText("\n\nThis will <b><i>not</i></b> bring you automatically to stat/ perk allocation menu, you can click on the stats page to do that afterwards.")
+		menu();
+		addButton(0, "Lvl +1", lUFSM1);
+		addButton(1,"Lvl +2", lUFSM2);
+		addButton(2,"Lvl +5", lUFSM5);
+		addButton(3,"Lvl +10", lUFSM10);
+		addButton(4,"LvlMax", lUFSMX);
+		addButton(14, "Done", playerMenu);
+	}
+
+	public function lUFSM1():void{
+		lUFSMM(1);
+	}
+
+	public function lUFSM2():void{
+		lUFSMM(2);
+	}
+
+	public function lUFSM5():void{
+		lUFSMM(5);
+	}
+
+	public function lUFSM10():void{
+		lUFSMM(10);
+	}
+
+	public function lUFSMX():void{
+		lUFSMM(999);
+	}
+
+	public function lUFSMM(incmax:int = 999):void{
+		var lvlinc:int = 0;		//Level increment tracking
+		var perkLvl:int = player.perkPoints;	//Cheating by keeping track of changes by subtraction.
+		var statLvl:int = player.statPoints;
 		clearOutput()
-		outputText("Do you want to level up to a specific level, or all at once?")
-		menu()
-		addButton(0,"Specific", lvlUpGoSm2);
-		addButton(1,"All In", lvlUpGoSm3);
+		if (player.XP < player.requiredXP()){ 	//This doesn't work. God knows why, but I have my suspicions.
+			outputText("Max level reached. Unable to increase further.");
+		}
+		else {
+			while (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap && lvlinc < incmax) {
+				player.XP -= player.requiredXP();
+				player.level++;
+				lvlinc++
+				if (player.level <= 6) {
+					player.perkPoints += 2
+					player.statPoints += 10
+				}
+				else {
+					player.perkPoints++
+					player.statPoints += 5
+				}
+			}
+			outputText("<b>You have gained " +lvlinc.toString() + " levels, and are now level " + num2Text(player.level)+"!</b>");
+			var perkRes:int = player.perkPoints - perkLvl
+			var statRes:int = player.statPoints - statLvl
+			outputText("\n\nYou have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!\n\n")
+		}
+		//outputText("Debug: incmax val =" + incmax.toString()+"\n\n");
+		lvlUpFastSubMenu();
 	}
-	private function lvlUpGoSm2():void {
-		outputText("\nHow many levels do you want to go up?")
-		menu()
-		addbutton(0,"1",lUGSm2b1);
-		addbutton(0,"2",lUGSm2b2);
-		addbutton(0,"5",lUGSm2b5);
-		addbutton(0,"10",lUGSm2b10);
-	}
-	private function lvlUpGoSm3():void {
-		outputText("\nGoing all in.")
-	}
-	 */
+
 
 //Attribute menu
 	private function attributeMenu():void {
