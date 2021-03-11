@@ -1548,7 +1548,7 @@ public class PlayerInfo extends BaseContent {
 		var statLvl:int = player.statPoints;
 		clearOutput()
 		if (player.XP < player.requiredXP()){ 	//This doesn't work. God knows why, but I have my suspicions.
-			outputText("Max level reached. Unable to increase further.");
+			outputText("Max level reached. Unable to increase further.\n\n");
 		}
 		else {
 			while (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap && lvlinc < incmax) {
