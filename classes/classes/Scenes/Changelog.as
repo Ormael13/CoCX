@@ -99,7 +99,7 @@ package classes.Scenes
 			outputText("-Finding Fenrir shrine in glacial rift would be possible now with either wolf face or animal tooth. After putting on collar if pc still have animal tooth it will change pc face to wolf one.\n");
 			outputText("-Added new classification of enemies - Elemental type. It would be immune to critical dmages (unless PC got perk to deal crit dmg to such enemies) and are lust immune (only nonsentient ones elementals).\n");
 			outputText("-New material: Elemental Shard. Cost 50 gems. Could drop from defeated elementals.\n");// It can be used to rank up summoned elemental.
-			outputText("-Winter Wols and Frost Gigant exp reward been bit lowered (other enemies was jelaous of their large xp rewards but we can't say it aloud okay?).\n");
+			outputText("-Winter Wolfs and Frost Gigant exp reward been bit lowered (other enemies was jelaous of their large xp rewards but we can't say it aloud okay?).\n");
 			outputText("-Our brave goblin (s)explorers came back intact from 2nd strata of River Dungeon. Sadly they looked too much sex staved and pissed off to tell what they seen there so... well all other brave adventures and masses of PC's must check it out on their own.\n");
 			outputText("-New enemies: Fire/Water/Air/Earth Elemental. They are lvl 12/15/18/21 and could be found in 2nd strata of River Dungeon.\n");
 			outputText("-After reaching lvl 42/102/180 PC will gain 1 more asc point for reached level. Also up to 25 asc points can be gained form leveling tease mastery.\n");
@@ -112,7 +112,7 @@ package classes.Scenes
 			outputText("-Demonic Desire and Inhuman Desire perks effects was switched and effect of Demonic Desire (formely Inhuman Desire) perks was changed from +20 max lust to +5% of max lust.\n");
 			outputText("-New event perk: 'My Blood for Blood Puppies'. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Allow to reach OverMax HP equal to 5x current Tou score, -5% blood spells/soulskills cost, +10% blood spells/soulskills power, ");
 			outputText("During fight small part of your blood from into blood puppies that can attack on your behalf with blood soulskills. When you grow in mastery of blood they would grow stronger with you.\n");
-			outputText("-\n");
+			outputText("-\n");//safe wrath  for spells/magical abilities lowered to 70% and 90%, maximum wrath increased by 100%, amount of wrath gained from been hit been affected by effective sensitivity (each 100 pts in it is equal to 100% of gains)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

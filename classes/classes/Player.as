@@ -1965,6 +1965,7 @@ use namespace CoC;
 		}
 		public function wrathFromHPmulti():Number {
 			var WHmulti:Number = 1;
+			WHmulti *= (effectiveSensitivity() * (1 / 100));
 			if (hasPerk(PerkLib.FuelForTheFire)) WHmulti *= 2;
 			return WHmulti;
 		}
@@ -14214,4 +14215,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

@@ -910,7 +910,10 @@ public class Combat extends BaseContent {
 			bd = buttons.add("B.Puppies", bloodSwipeBloodPuppies).hint("Command Blood Puppies to attack enemy/ies. Would deal 2x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(20) + "");
 			var bloodForBloodGod:Number = (player.HP - player.minHP());
 			if ((bloodForBloodGod - 1) < spellCostBlood(60)) {
-				bd.disable("Your hp is too low to cast this spell.");
+				bd.disable("Your hp is too low to allow Blood Puppies use this soulskill.");
+			}
+			else if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] == 1) {
+				bd.disable("Your already commanded Puppies to attack this turn.");
 			}
 		}/*
 		if (player.hasPerk(PerkLib.HiddenJobAsura)) {

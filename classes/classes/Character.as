@@ -982,8 +982,10 @@ import classes.Items.JewelryLib;
 				//if (upgrade mecha) multimax += 0.1;
 			}
 			max *= multimax;
+			max *= 2;
 			max = Math.round(max);
-			if (max > 69999) max = 69999;
+			//if (max > 69999) max = 69999;
+			if (max > 139999) max = 139999;
 			return max;
 		}
 		public override function maxOverWrath():Number {
@@ -998,7 +1000,7 @@ import classes.Items.JewelryLib;
 		}
 		public function maxSafeWrathMagicalAbilities():Number {
 			var max1:Number = maxWrath();
-			var max2:Number = 0.95;
+			var max2:Number = 0.9;
 			//if (hasPerk(PerkLib.)) max2 += 0.1;
 			//if (hasPerk(PerkLib.)) max2 += 0.1;
 			max1 *= max2;
@@ -1006,7 +1008,7 @@ import classes.Items.JewelryLib;
 		}
 		public function maxSafeWrathSpellcasting():Number {
 			var max1:Number = maxWrath();
-			var max2:Number = 0.75;
+			var max2:Number = 0.7;
 			//if (hasPerk(PerkLib.)) max2 += 0.1;
 			//if (hasPerk(PerkLib.)) max2 += 0.1;
 			max1 *= max2;
