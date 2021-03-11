@@ -1438,30 +1438,9 @@ public class PlayerInfo extends BaseContent {
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 		if (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap){
-			if (flags[kFLAGS.LVL_UP_FAST] > 0){ /*
-				var lvlinc:int = 0;		//Level increment tracking
-				var perkLvl:int = player.perkPoints;	//Cheating by keeping track of changes by subtraction.
-				var statLvl:int = player.statPoints;
-				while (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap){
-					player.XP -= player.requiredXP();
-					player.level++;
-					lvlinc++
-					if (player.level <=6){
-						player.perkPoints+=2
-						player.statPoints+=10
-					}
-					else {
-						player.perkPoints++
-						player.statPoints+=5
-					}
-				}
-				clearOutput()
-				outputText("<b>You have gained " +lvlinc.toString() + " levels, and are now level " + num2Text(player.level)+"!</b>");
-				var perkRes:int = player.perkPoints - perkLvl
-				var statRes:int = player.statPoints - statLvl
-				outputText("\n\n You have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!") */
+			if (flags[kFLAGS.LVL_UP_FAST] > 0){
 				lvlUpFastSubMenu()
-				return;
+				return;	//Not sure if this is what's stopping the thing from moving on, not bothered to check.
 			}
 			else {
 				player.XP -= player.requiredXP();
@@ -1514,7 +1493,7 @@ public class PlayerInfo extends BaseContent {
 		outputText("Fast levelling, just keep clicking on the button to level up by that number. Or press LvlMax to just get all the levels.")
 		outputText("\n\nThis will <b><i>not</i></b> bring you automatically to stat/ perk allocation menu, you can click on the stats page to do that afterwards.")
 		menu();
-		addButton(0, "Lvl +1", lUFSM1);
+		addButton(0,"Lvl +1", lUFSM1);
 		addButton(1,"Lvl +2", lUFSM2);
 		addButton(2,"Lvl +5", lUFSM5);
 		addButton(3,"Lvl +10", lUFSM10);
@@ -1547,7 +1526,7 @@ public class PlayerInfo extends BaseContent {
 		var perkLvl:int = player.perkPoints;	//Cheating by keeping track of changes by subtraction.
 		var statLvl:int = player.statPoints;
 		clearOutput()
-		if (player.XP < player.requiredXP()){ 	//This doesn't work. God knows why, but I have my suspicions.
+		if (player.XP < player.requiredXP()){
 			outputText("Max level reached. Unable to increase further.\n\n");
 		}
 		else {
@@ -1569,7 +1548,6 @@ public class PlayerInfo extends BaseContent {
 			var statRes:int = player.statPoints - statLvl
 			outputText("\n\nYou have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!\n\n")
 		}
-		//outputText("Debug: incmax val =" + incmax.toString()+"\n\n");
 		lvlUpFastSubMenu();
 	}
 
