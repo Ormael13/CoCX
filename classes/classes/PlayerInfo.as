@@ -1437,61 +1437,10 @@ public class PlayerInfo extends BaseContent {
 		clearOutput();
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
-		//Level up
-		/*
-        if (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap) {
-            player.XP -= player.requiredXP();
-			player.level++;
-			player.perkPoints++;
-			if (player.level <= 6) player.perkPoints++;
-			//if (player.level % 2 == 0) player.ascensionPerkPoints++;
-			//przerobić aby z asc perk co ?6/3/1? lvl dostawać another perk point?
-			//może też dodać ascension perk aby móc dostawać 6 lub nawet wiecej stat points na lvl up?
-			clearOutput();
-			outputText("<b>You are now level " + num2Text(player.level) + "!</b>");
-			if (player.level > 6) {
-				player.statPoints += 5;
-				outputText("\n\nYou have gained five attribute points and one perk point!");
-			}
-			else {
-				player.statPoints += 10;
-				outputText("\n\nYou have gained ten attribute points and two perk points!");
-			}
-			if (player.level > 6) outputText("\n\nYou have gained one perk point!");
-			else outputText("\n\nYou have gained two perk points!");
-
-			if (player.statPoints>0) {
-				doNext(attributeMenu);
-			} else if (player.perkPoints > 0) {
-				doNext(perkBuyMenu);
-			} else {
-				doNext(playerMenu);
-			}
-		}*/
-		//Level up bulk/individual
 		if (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap){
 			if (flags[kFLAGS.LVL_UP_FAST] > 0){
-				var lvlinc:int = 0;
-				var perkLvl:int = player.perkPoints;
-				var statLvl:int = player.statPoints;
-				while (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap){
-					player.XP -= player.requiredXP();
-					player.level++;
-					lvlinc++
-					if (player.level <=6){
-						player.perkPoints+=2
-						player.statPoints+=10
-					}
-					else {
-						player.perkPoints++
-						player.statPoints+=5
-					}
-				}
-				clearOutput()
-				outputText("<b>You have gained " +lvlinc.toString() + " levels, and are now level " + num2Text(player.level)+"!</b>");
-				var perkRes:int = player.perkPoints - perkLvl
-				var statRes:int = player.statPoints - statLvl
-				outputText("\n\n You have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!")
+				lvlUpFastSubMenu()
+				return;	//Not sure if this is what's stopping the thing from moving on, not bothered to check.
 			}
 			else {
 				player.XP -= player.requiredXP();
@@ -1537,6 +1486,71 @@ public class PlayerInfo extends BaseContent {
 			doNext(playerMenu);
 		}
 	}
+
+	//Sub-menus for limited levelling.
+	public function lvlUpFastSubMenu():void{
+		spriteSelect(-1);
+		outputText("Fast levelling, just keep clicking on the button to level up by that number. Or press LvlMax to just get all the levels.")
+		outputText("\n\nThis will <b><i>not</i></b> bring you automatically to stat/ perk allocation menu, you can click on the stats page to do that afterwards.")
+		menu();
+		addButton(0,"Lvl +1", lUFSM1);
+		addButton(1,"Lvl +2", lUFSM2);
+		addButton(2,"Lvl +5", lUFSM5);
+		addButton(3,"Lvl +10", lUFSM10);
+		addButton(4,"LvlMax", lUFSMX);
+		addButton(14, "Done", playerMenu);
+	}
+
+	public function lUFSM1():void{
+		lUFSMM(1);
+	}
+
+	public function lUFSM2():void{
+		lUFSMM(2);
+	}
+
+	public function lUFSM5():void{
+		lUFSMM(5);
+	}
+
+	public function lUFSM10():void{
+		lUFSMM(10);
+	}
+
+	public function lUFSMX():void{
+		lUFSMM(999);
+	}
+
+	public function lUFSMM(incmax:int = 999):void{
+		var lvlinc:int = 0;		//Level increment tracking
+		var perkLvl:int = player.perkPoints;	//Cheating by keeping track of changes by subtraction.
+		var statLvl:int = player.statPoints;
+		clearOutput()
+		if (player.XP < player.requiredXP()){
+			outputText("Max level reached. Unable to increase further.\n\n");
+		}
+		else {
+			while (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap && lvlinc < incmax) {
+				player.XP -= player.requiredXP();
+				player.level++;
+				lvlinc++
+				if (player.level <= 6) {
+					player.perkPoints += 2
+					player.statPoints += 10
+				}
+				else {
+					player.perkPoints++
+					player.statPoints += 5
+				}
+			}
+			outputText("<b>You have gained " +lvlinc.toString() + " levels, and are now level " + num2Text(player.level)+"!</b>");
+			var perkRes:int = player.perkPoints - perkLvl
+			var statRes:int = player.statPoints - statLvl
+			outputText("\n\nYou have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!\n\n")
+		}
+		lvlUpFastSubMenu();
+	}
+
 
 //Attribute menu
 	private function attributeMenu():void {
