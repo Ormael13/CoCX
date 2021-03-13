@@ -4012,7 +4012,7 @@ public class Combat extends BaseContent {
                         outputText("\n");
                     }
                     else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12){
-                        biteMultiplier *= 11;
+                        biteMultiplier *= 12;
                         outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
@@ -4217,9 +4217,20 @@ public class Combat extends BaseContent {
             }
 
             //Unique attack Alraune
-            if (player.lowerBody == LowerBody.FLOWER_LILIRAUNE || player.lowerBody == LowerBody.PLANT_FLOWER) {
-                outputText("You lash at your opponent with your many vines striking twele times.");
-                ExtraNaturalWeaponAttack(6);
+            if (player.isAlraune()) {
+                outputText("You lash at your opponent with your many vines striking twelve times.");
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
             }
 
             //Unique TENTACLES STRIKES
