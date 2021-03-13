@@ -1438,9 +1438,12 @@ public class PlayerInfo extends BaseContent {
 		hideMenus();
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 		if (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap){
-			if (flags[kFLAGS.LVL_UP_FAST] > 0){
+			if (flags[kFLAGS.LVL_UP_FAST] == 1){
 				lvlUpFastSubMenu()
 				return;	//Not sure if this is what's stopping the thing from moving on, not bothered to check.
+			}
+			else if (flags[kFLAGS.LVL_UP_FAST] == 2){
+				lUFSMM(999)
 			}
 			else {
 				player.XP -= player.requiredXP();
@@ -1491,14 +1494,14 @@ public class PlayerInfo extends BaseContent {
 	public function lvlUpFastSubMenu():void{
 		spriteSelect(-1);
 		outputText("Fast levelling, just keep clicking on the button to level up by that number. Or press LvlMax to just get all the levels.")
-		outputText("\n\nThis will <b><i>not</i></b> bring you automatically to stat/ perk allocation menu, you can click on the stats page to do that afterwards.")
+		outputText("\n\nPressing \"Done\" will bring you to stat/perk allocation.")
 		menu();
 		addButton(0,"Lvl +1", lUFSM1);
 		addButton(1,"Lvl +2", lUFSM2);
 		addButton(2,"Lvl +5", lUFSM5);
 		addButton(3,"Lvl +10", lUFSM10);
 		addButton(4,"LvlMax", lUFSMX);
-		addButton(14, "Done", playerMenu);
+		addButton(14, "Done", lUFSMAP);
 	}
 
 	public function lUFSM1():void{
@@ -1547,8 +1550,19 @@ public class PlayerInfo extends BaseContent {
 			var perkRes:int = player.perkPoints - perkLvl
 			var statRes:int = player.statPoints - statLvl
 			outputText("\n\nYou have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!\n\n")
+			statScreenRefresh()
 		}
 		lvlUpFastSubMenu();
+	}
+
+	public function lUFSMAP ():void {
+		if (player.statPoints>0) {
+			attributeMenu()
+		} else if (player.perkPoints > 0) {
+			perkBuyMenu()
+		} else {
+			playerMenu()
+		}
 	}
 
 
