@@ -9,12 +9,12 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_DESIRES_LEVEL + ") Increases maximum lust by " + params.value1 * 10 + ".";
+			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_DESIRES_LEVEL + ") Increases maximum lust by " + params.value1 * 30 + ".";
 		}
 		
 		public function AscensionDesiresPerk() 
 		{
-			super("Ascension: Desires", "Ascension: Desires", "", "Increases maximum lust by 10 per level.");
+			super("Ascension: Desires", "Ascension: Desires", "", "Increases maximum lust by 30 per level.");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean 

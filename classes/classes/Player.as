@@ -1959,10 +1959,6 @@ use namespace CoC;
 			if (hasPerk(PerkLib.NaturalPunchingBagFinalForm)) bbDR += 0.2;
 			return bbDR;
 		}
-		public function wrathRatioToHP():Number {
-			var ratioWH:Number = 10;
-			return ratioWH;
-		}
 		public function wrathFromHPmulti():Number {
 			var WHmulti:Number = 1;
 			WHmulti *= (effectiveSensitivity() * (1 / 100));
@@ -1972,7 +1968,7 @@ use namespace CoC;
 		public function wrathFromBeenPunchingBag(damage:Number):void {
 			if (damage > 0) {
 				var gainedWrath:Number = 0;
-				gainedWrath += Math.sqrt(damage / wrathRatioToHP());
+				gainedWrath += Math.sqrt(damage / 10);
 				gainedWrath = Math.round(gainedWrath * wrathFromHPmulti());
 				if (gainedWrath > 0) EngineCore.WrathChange(gainedWrath, false);
 			}

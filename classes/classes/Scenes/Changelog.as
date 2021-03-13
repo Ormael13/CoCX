@@ -112,7 +112,14 @@ package classes.Scenes
 			outputText("-Demonic Desire and Inhuman Desire perks effects was switched and effect of Demonic Desire (formely Inhuman Desire) perks was changed from +20 max lust to +5% of max lust.\n");
 			outputText("-New event perk: 'My Blood for Blood Puppies'. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Allow to reach OverMax HP equal to 5x current Tou score, -5% blood spells/soulskills cost, +10% blood spells/soulskills power, ");
 			outputText("During fight small part of your blood from into blood puppies that can attack on your behalf with blood soulskills. When you grow in mastery of blood they would grow stronger with you.\n");
-			outputText("-\n");//safe wrath  for spells/magical abilities lowered to 70% and 90%, maximum wrath increased by 100%, amount of wrath gained from been hit been affected by effective sensitivity (each 100 pts in it is equal to 100% of gains)
+			outputText("-Starting maximum wrath and health increased twice.\n");
+			outputText("-All perk effects that increase max Wrath and level up increase to max Wrath increased 5 times.\n");
+			outputText("-Primal Fury perks increase max wrath by 5% instead of +10, other effects of this perks stayed unchanged.\n");
+			outputText("-All perk effects that increase max HP and level up increase to max HP increased 4 times.\n");
+			outputText("-All perk effects that increase max Lust and level up increase to max Lust increased 3 times.\n");
+			outputText("-Changed and fixed submitted by Liadri.\n");
+			outputText("-Changed and fixed submitted by Jtexc.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -125,8 +132,6 @@ package classes.Scenes
 			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk from training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in sheild slot), one of req. for Prestige Job: Spell Knight, ");
 			outputText("Flames of Love and Icicles of Love not dealing increased dmg to group enemies, beautiful items aside sword and excalibur not been dropped with high corruption, beautiful sword / excalibur not been working properly with multiattack settings, centipeded tf small correction, added missing cooldown countdown for Flames/Icicles of Love and Punishing Kick soulskills, missing Ebon Labyrinth bosses in rooms ");
 			outputText("200 / 250 / 300, succubus special no longer affecting lust immune enemies, no reseting on 2nd to 4th ring in case PC had any equipped, shield perks working with all shields not only those that allows use of shield bash, EL questolog reward after 50th room wrong unlock req., many smol fixes and typos corrected\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -195,11 +200,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -237,7 +238,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
