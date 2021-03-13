@@ -934,7 +934,7 @@ use namespace CoC;
 		public function hasATailSlapAttack():Boolean { return (Tail.Types[tail.type].tailSlam || Tail.Types[tail.type].stinger || LowerBody.Types[lowerBody].tailSlam);}
 		public function hasTalonsAttack():Boolean{return lowerBody == LowerBody.HARPY;}
 		public function hasTentacleAttacks():Boolean{return LowerBody.Types[lowerBody].tentacle || hasPerk(PerkLib.MorphicWeaponry);}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasTentacleAttacks || isTaur());}
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasTentacleAttacks || isAlraune() || isTaur());}
 		//Some other checks
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
@@ -1959,26 +1959,19 @@ use namespace CoC;
 			if (hasPerk(PerkLib.NaturalPunchingBagFinalForm)) bbDR += 0.2;
 			return bbDR;
 		}
-		public function wrathRatioToHP():Number {
-			var ratioWH:Number = 10;
-			return ratioWH;
-		}
 		public function wrathFromHPmulti():Number {
 			var WHmulti:Number = 1;
+			WHmulti *= (effectiveSensitivity() * (1 / 100));
 			if (hasPerk(PerkLib.FuelForTheFire)) WHmulti *= 2;
 			return WHmulti;
 		}
 		public function wrathFromBeenPunchingBag(damage:Number):void {
 			if (damage > 0) {
 				var gainedWrath:Number = 0;
-				gainedWrath += Math.sqrt(damage / wrathRatioToHP());
+				gainedWrath += Math.sqrt(damage / 10);
 				gainedWrath = Math.round(gainedWrath * wrathFromHPmulti());
 				if (gainedWrath > 0) EngineCore.WrathChange(gainedWrath, false);
 			}
-			/*var gainedWrath:Number = 0;
-			gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-			wrath += gainedWrath;
-			if (wrath > maxOverWrath()) wrath = maxOverWrath();*/
 		}
 		public override function damagePercent():Number {
 			var mult:Number = 100;
@@ -14065,7 +14058,7 @@ use namespace CoC;
 			if (scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 12) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (unicornScore() >= 12) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxLust_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);
+			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxHP_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);
 			return max;
 		}
 		protected override function maxLust_base():Number {
@@ -14218,4 +14211,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

@@ -3699,46 +3699,46 @@ public function wakeFromBadEnd():void {
 				}
 			} else {
 				mainView.setMenuButton(MainView.MENU_LEVEL, "Level Up");
-				var hp:int = 15;
+				var hp:int = 60;
 				var fatigue:int = 5;
 				var mana:int = 10;
 				var soulforce:int = 5;
-				var wrath:int = 1;
-				var lust:int = 1;
+				var wrath:int = 5;
+				var lust:int = 3;
 				var statpoints:int = 5;
 				var perkpoints:int = 1;
 				if (player.level <= 6) {
-					hp += 15;
+					hp += 60;
 					fatigue += 5;
 					mana += 10;
 					soulforce += 5;
-					wrath += 1;
-					lust += 1;
+					wrath += 5;
+					lust += 3;
 				}
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
-					hp += 20;
-					lust += 2;
+					hp += 80;
+					lust += 6;
 					fatigue += 6;
 				}
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) {
-					wrath += 2;
+					wrath += 10;
 					mana += 12;
 					soulforce += 6;
 				}
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) {
-					hp += 20;
-					lust += 2;
+					hp += 80;
+					lust += 6;
 					fatigue += 6;
 				}
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) {
-					wrath += 2;
+					wrath += 10;
 					mana += 12;
 					soulforce += 6;
 				}
-				if (player.findPerk(PerkLib.UnlockBody) >= 0) hp += 15;
-				if (player.findPerk(PerkLib.UnlockBody2ndStage) >= 0) hp += 15;
-				if (player.findPerk(PerkLib.UnlockBody3rdStage) >= 0) hp += 15;
-				if (player.findPerk(PerkLib.UnlockBody4thStage) >= 0) hp += 15;
+				if (player.findPerk(PerkLib.UnlockBody) >= 0) hp += 60;
+				if (player.findPerk(PerkLib.UnlockBody2ndStage) >= 0) hp += 60;
+				if (player.findPerk(PerkLib.UnlockBody3rdStage) >= 0) hp += 60;
+				if (player.findPerk(PerkLib.UnlockBody4thStage) >= 0) hp += 60;
 				if (player.findPerk(PerkLib.UnlockEndurance) >= 0) fatigue += 5;
 				if (player.findPerk(PerkLib.UnlockEndurance2ndStage) >= 0) fatigue += 5;
 				if (player.findPerk(PerkLib.UnlockEndurance3rdStage) >= 0) fatigue += 5;
@@ -3751,14 +3751,14 @@ public function wakeFromBadEnd():void {
 				if (player.findPerk(PerkLib.UnlockSpirit2ndStage) >= 0) soulforce += 5;
 				if (player.findPerk(PerkLib.UnlockSpirit3rdStage) >= 0) soulforce += 5;
 				if (player.findPerk(PerkLib.UnlockSpirit4thStage) >= 0) soulforce += 5;
-				if (player.findPerk(PerkLib.UnlockId) >= 0) wrath += 1;
-				if (player.findPerk(PerkLib.UnlockId2ndStage) >= 0) wrath += 1;
-				if (player.findPerk(PerkLib.UnlockId3rdStage) >= 0) wrath += 1;
-				if (player.findPerk(PerkLib.UnlockId4thStage) >= 0) wrath += 1;
-				if (player.findPerk(PerkLib.UnlockArdor) >= 0) lust += 1;
-				if (player.findPerk(PerkLib.UnlockArdor2ndStage) >= 0) lust += 1;
-				if (player.findPerk(PerkLib.UnlockArdor3rdStage) >= 0) lust += 1;
-				if (player.findPerk(PerkLib.UnlockArdor4thStage) >= 0) lust += 1;
+				if (player.findPerk(PerkLib.UnlockId) >= 0) wrath += 5;
+				if (player.findPerk(PerkLib.UnlockId2ndStage) >= 0) wrath += 5;
+				if (player.findPerk(PerkLib.UnlockId3rdStage) >= 0) wrath += 5;
+				if (player.findPerk(PerkLib.UnlockId4thStage) >= 0) wrath += 5;
+				if (player.findPerk(PerkLib.UnlockArdor) >= 0) lust += 3;
+				if (player.findPerk(PerkLib.UnlockArdor2ndStage) >= 0) lust += 3;
+				if (player.findPerk(PerkLib.UnlockArdor3rdStage) >= 0) lust += 3;
+				if (player.findPerk(PerkLib.UnlockArdor4thStage) >= 0) lust += 3;
 				if (player.level < 6) {
 					statpoints += 5;
 					perkpoints += 1;

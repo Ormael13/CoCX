@@ -318,7 +318,7 @@ public class CombatSoulskills extends BaseCombatContent {
 					.hint("Blood Swipe is simple blood soulskill that will fire three red lines of blood energy from your hand.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(60) + "");
 			if ((bloodForBloodGod - 1) < spellCostBlood(60)) {
-				bd.disable("Your hp is too low to cast this spell.");
+				bd.disable("Your hp is too low to cast this soulskill.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodSwipe)) {
 				bd.disable("You need more time before you can cast this soulskill again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
@@ -332,7 +332,7 @@ public class CombatSoulskills extends BaseCombatContent {
 					.hint("(Soulforce infused) Blood Swipe is simple blood soulskill, which was infused by small amount of soulforce to enhance it power, that will fire three red lines of blood energy from your hand.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(60) + "\n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
 			if ((bloodForBloodGod - 1) < spellCostBlood(60)) {
-				bd.disable("Your hp is too low to cast this spell.");
+				bd.disable("Your hp is too low to cast this soulskill.");
 			} else if (player.soulforce < 60 * soulskillCost() * soulskillcostmulti()) {
 				bd.disable("Your current soulforce is too low.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF)) {

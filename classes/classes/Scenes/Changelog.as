@@ -99,7 +99,7 @@ package classes.Scenes
 			outputText("-Finding Fenrir shrine in glacial rift would be possible now with either wolf face or animal tooth. After putting on collar if pc still have animal tooth it will change pc face to wolf one.\n");
 			outputText("-Added new classification of enemies - Elemental type. It would be immune to critical dmages (unless PC got perk to deal crit dmg to such enemies) and are lust immune (only nonsentient ones elementals).\n");
 			outputText("-New material: Elemental Shard. Cost 50 gems. Could drop from defeated elementals.\n");// It can be used to rank up summoned elemental.
-			outputText("-Winter Wols and Frost Gigant exp reward been bit lowered (other enemies was jelaous of their large xp rewards but we can't say it aloud okay?).\n");
+			outputText("-Winter Wolfs and Frost Gigant exp reward been bit lowered (other enemies was jelaous of their large xp rewards but we can't say it aloud okay?).\n");
 			outputText("-Our brave goblin (s)explorers came back intact from 2nd strata of River Dungeon. Sadly they looked too much sex staved and pissed off to tell what they seen there so... well all other brave adventures and masses of PC's must check it out on their own.\n");
 			outputText("-New enemies: Fire/Water/Air/Earth Elemental. They are lvl 12/15/18/21 and could be found in 2nd strata of River Dungeon.\n");
 			outputText("-After reaching lvl 42/102/180 PC will gain 1 more asc point for reached level. Also up to 25 asc points can be gained form leveling tease mastery.\n");
@@ -108,6 +108,20 @@ package classes.Scenes
 			outputText("-When PC have active quest of capture feral imps chances to meet normal and feral one imp become reverted (meaning that most of imps pc meet will be feral ones).\n");
 			outputText("-Manticore feed special gained additional effect of recharging venom by 50 pts. Having Manticore Metabolism (Evolved) perk would increase this recharge rate 2x.\n");
 			outputText("-Manticore and Displacer feed effect after rewaching max stacks would be extended by 2/3 (w/ Race Metabolism (Evovlved) perk) hours after each feed. Also both feeding bonus to speed from having (Evolved) racial perk will be +50% not +1000%.\n");
+			outputText("-Tank and Refined Body perks was switched meaning first will be accesable Tank and it would be req. to unlock Refined Body perk. Also Refined Body perks effect was changed from giving 50 HP to 5% of base HP.\n");
+			outputText("-Demonic Desire and Inhuman Desire perks effects was switched and effect of Demonic Desire (formely Inhuman Desire) perks was changed from +20 max lust to +5% of max lust.\n");
+			outputText("-New event perk: 'My Blood for Blood Puppies'. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Allow to reach OverMax HP equal to 5x current Tou score, -5% blood spells/soulskills cost, +10% blood spells/soulskills power, ");
+			outputText("During fight small part of your blood from into blood puppies that can attack on your behalf with blood soulskills. When you grow in mastery of blood they would grow stronger with you.\n");
+			outputText("-Starting maximum wrath increased twice.\n");
+			outputText("-All perk effects that increase max Wrath and level up increase to max Wrath increased 5 times.\n");
+			outputText("-Primal Fury perks increase max wrath by 5% instead of +10, other effects of this perks stayed unchanged.\n");
+			outputText("-All perk effects that increase max HP and level up increase to max HP increased 4 times.\n");
+			outputText("-All perk effects that increase max Lust and level up increase to max Lust increased 3 times.\n");
+			outputText("-Changed and fixed submitted by Liadri.\n");
+			outputText("-Changed and fixed submitted by Jtexc.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -224,19 +238,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

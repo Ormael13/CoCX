@@ -754,6 +754,7 @@ public class Combat extends BaseContent {
             flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 0;
+			if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 0;
         }
         mainView.hideMenuButton(MainView.MENU_DATA);
         mainView.hideMenuButton(MainView.MENU_APPEARANCE);
@@ -905,6 +906,19 @@ public class Combat extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.JobGolemancer) && (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0 || flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 0)) bd = buttons.add("Golems", GolemsMenu);
 		if (player.hasPerk(PerkLib.JobElementalConjurer) && player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) bd = buttons.add("Elem.Asp", ElementalAspectsMenu);
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
+			bd = buttons.add("B.Puppies", bloodSwipeBloodPuppies).hint("Command Blood Puppies to attack enemy/ies. Would deal 2x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(20) + "");
+			var bloodForBloodGod:Number = (player.HP - player.minHP());
+			if ((bloodForBloodGod - 1) < spellCostBlood(60)) {
+				bd.disable("Your hp is too low to allow Blood Puppies use this soulskill.");
+			}
+			else if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] == 1) {
+				bd.disable("Your already commanded Puppies to attack this turn.");
+			}
+		}/*
+		if (player.hasPerk(PerkLib.HiddenJobAsura)) {
+			bd = buttons.add("Asura Form", assumeAsuraForm).hint("Command Blood Puppies to attack enemy/ies. Would deal 2x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(20) + "");
+		}*/
     }
 	public function GolemsMenu():void {
 		menu();
@@ -3998,7 +4012,7 @@ public class Combat extends BaseContent {
                         outputText("\n");
                     }
                     else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12){
-                        biteMultiplier *= 11;
+                        biteMultiplier *= 12;
                         outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at " + monster.a + monster.short + " rending flesh and delivering your deadly venom in the process. ");
                         ExtraNaturalWeaponAttack(biteMultiplier);
                         outputText("\n");
@@ -4203,9 +4217,20 @@ public class Combat extends BaseContent {
             }
 
             //Unique attack Alraune
-            if (player.lowerBody == LowerBody.FLOWER_LILIRAUNE || player.lowerBody == LowerBody.PLANT_FLOWER) {
-                outputText("You lash at your opponent with your many vines striking twele times.");
-                ExtraNaturalWeaponAttack(6);
+            if (player.isAlraune()) {
+                outputText("You lash at your opponent with your many vines striking twelve times.");
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
             }
 
             //Unique TENTACLES STRIKES
@@ -5639,7 +5664,8 @@ public class Combat extends BaseContent {
     }
 
 // DamageOverhaul calculation
-    public function DamageOverhaul(damage:Number):Number {
+    /*
+	public function DamageOverhaul(damage:Number):Number {
         /* From here will be XWOLKX's alpha damage overhaul for melee sh*t coding
 	 * Base idea:
 	 * damage varies from 15% to 115%
@@ -5648,7 +5674,7 @@ public class Combat extends BaseContent {
 	 * Speed difference add roll for random
 	 * If player.spe > monster.spe => roll for greater multiplier
 	 * else roll for worser
-	 */
+	 *//*
         if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1) {
             var higher_threshold:Number = 105; // base highest damage multiplier value that deal player
             var lower_threshold:Number = 55; // base lowest
@@ -5689,7 +5715,7 @@ public class Combat extends BaseContent {
             }
             // multiplier math
             /* outputText(percent.toString());
-	outputText("    ");  for test only*/
+	outputText("    ");  for test only*//*
             if (percent != 0) {
                 if (percent < 0) {
                     percent *= (-1);
@@ -5742,6 +5768,92 @@ public class Combat extends BaseContent {
                     if ((random_value > 100) && (random_value < higher_threshold)) outputText("Your mighty blow made [monster a] [monster name] stagger for a moment! ");
                     if (random_value == higher_threshold) outputText("Nimbly shortening the distance, you hit [monster a] [monster name] with overwhelming power! ");
                 } else if (!lock) {
+                    if (random_value <= 20) outputText("You hit your opponent, but defence stance of [monster a] [monster name] almost totally absorbed your attack. ");
+                    if ((random_value > 20) && (random_value <= 40)) outputText("You hit [monster a] [monster name], but [monster.pronoun1] moves so deft that yours strike loses most of its strenght. ");
+                    if ((random_value > 40) && (random_value <= 70)) outputText("As you hurtle toward [monster a] [monster name], you draw your weapon and prepare to hit. Getting close enough, you swing and crush your [weapon] onto [monster.pronoun2]. No matter how agile your foe is, [monster.pronoun1] wasn't able to evade your attack! ");
+                    if ((random_value > 70) && (random_value <= 85)) outputText("You take the [weapon] in steady grip of your hands and widely swing at the foe. " + firstLetterUpperCase("[monster a]") + " [monster name] predicted your attack, but you manage to change it's trajectory just in time! ");
+                    if ((random_value > 85) && (random_value <= 100)) outputText("You miraculously reflected [monster a] [monster name] attack and did riposte to [monster.pronoun2]! ");
+                    if ((random_value > 100) && (random_value < higher_threshold)) outputText("Fighting on the of edge of your capabilities, you managed to deal several certain hits to [monster a] [monster name]! ");
+                    if (random_value == higher_threshold) outputText("You found a gap in [monster a] [monster name]'s defence. Using perfect timing, you put all your strength to break through it! ");
+                }
+            }
+            random_value /= 100; // back to %
+            // damage math
+            damage *= random_value;
+            damage = Math.round(damage);
+            isBowDamageMDO = false;
+        }
+        return damage;
+        // outputText(random_value.toString()); for test only
+        // End of overhaul and of sh*t coding
+    }
+	*/
+	public function DamageOverhaul(damage:Number):Number {
+        /* From here will be XWOLKX's alpha damage overhaul for melee sh*t coding
+	 * Base idea:
+	 * damage varies from 15% to 115%
+	 * Lower threshold scailing from wis up to 10%
+	 * Upper threshold scailing from int up to 10%
+	 * Speed difference add roll for random
+	 * If player.spe > monster.spe => roll for greater multiplier
+	 * else roll for worser
+	 */
+        if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1) {
+            var higher_threshold:Number = 105; // base highest damage multiplier value that deal player
+            var lower_threshold:Number = 55; // base lowest
+            var speed_difference:Number = player.spe - monster.spe;
+            // threshold math
+            if (isBowDamageMDO) {
+                lower_threshold = 35;
+                higher_threshold = 125;
+            } // Bow damage would have higher difference than melee.
+            //speed_difference;
+            if (speed_difference < 0) {
+                lower_threshold += Math.max(-20, Math.round(speed_difference/10));
+            } else {
+                lower_threshold += Math.min(20, Math.round(speed_difference/10));
+                if (speed_difference > 200) {
+                    higher_threshold += Math.round((speed_difference-200)/50);
+                }
+            }
+            // applying stats modificators for thresholds
+            lower_threshold += Math.min(10, Math.round(player.wis / 20)); // + percent damage per 20 wis, maximum at 200 wis
+            higher_threshold += Math.min(10, Math.round(player.inte / 30)); // + percent damage per 30 int, maximum at 300 int
+            if (player.level > monster.level) lower_threshold += Math.min(10, player.level - monster.level); // More reliable damage against lower level foes
+            lower_threshold = Math.min(95, lower_threshold); // Maximum lower threshold is 95%
+            // multiplier math
+            /* outputText(percent.toString());
+	outputText("    ");  for test only*/
+            var random_value:Number = Math.round(Math.random() * (higher_threshold - lower_threshold)) + lower_threshold; // roll multiplier from lower to higher threshold
+
+            function firstLetterUpperCase(strData:String):String  // for text
+            {
+                var strArray:Array = strData.split(' ');
+                var newArray:Array = [];
+                for (var str:String in strArray) {
+                    newArray.push(strArray[str].charAt(0).toUpperCase() + strArray[str].slice(1));
+                }
+                return newArray.join(' ');
+            }
+            // damage dialogs for just attack
+            if ((MDODialogs) && (!isBowDamageMDO) && (MDOCount == 1)) {
+                if (speed_difference > 200) {
+                    if (random_value <= 20) outputText("Due to your recklessness, you barely hit [monster a] [monster name]. ");
+                    if ((random_value > 20) && (random_value <= 40)) outputText("You underestimated [monster a] [monster name]'s moves and just slighty wounded your foe. ");
+                    if ((random_value > 40) && (random_value <= 70)) outputText("As your [weapon] cracked the ground, you wounder how lucky [monster a] [monster name] are. ");
+                    if ((random_value > 70) && (random_value <= 85)) outputText("You rush towards your foe. " + firstLetterUpperCase("[monster a]") + " [monster name] trying to parry your strike, but it's not enough to stop your hard blow! ");
+                    if ((random_value > 85) && (random_value <= 100)) outputText("Your foe watching you coming closer and preparing to deal with your attack. But you move so fast that [monster a] [monster name] did not had time to react on your powerful slash! ");
+                    if ((random_value > 100) && (random_value < higher_threshold)) outputText("As you watch [monster a] [monster name] moves like in the slow motion, you easily hit the vital point of your foe! ");
+                    if (random_value == higher_threshold) outputText("You unleashed a deadly blow with all your might upon [monster a] [monster name]! ");
+                } else if (speed_difference >= 0) {
+                    if (random_value <= 20) outputText("You were tricked by stance and barely hit [monster a] [monster name]. ");
+                    if ((random_value > 20) && (random_value <= 40)) outputText("You underestimated [monster a] [monster name]'s moves and just slighty wounded your foe. "); // copy-pasta
+                    if ((random_value > 40) && (random_value <= 70)) outputText("You face the splendid moves of [monster a] [monster name] which prevent you from attacking! But your will doesn't falter so easily and with the next swing you manage to strike your foe! ");
+                    if ((random_value > 70) && (random_value <= 85)) outputText("You hit [monster a] [monster name]! "); // default one, sorry :D
+                    if ((random_value > 85) && (random_value <= 100)) outputText("Predicting [monster a] [monster name] moves, you strike a powerful blow! ");
+                    if ((random_value > 100) && (random_value < higher_threshold)) outputText("Your mighty blow made [monster a] [monster name] stagger for a moment! ");
+                    if (random_value == higher_threshold) outputText("Nimbly shortening the distance, you hit [monster a] [monster name] with overwhelming power! ");
+                } else  {
                     if (random_value <= 20) outputText("You hit your opponent, but defence stance of [monster a] [monster name] almost totally absorbed your attack. ");
                     if ((random_value > 20) && (random_value <= 40)) outputText("You hit [monster a] [monster name], but [monster.pronoun1] moves so deft that yours strike loses most of its strenght. ");
                     if ((random_value > 40) && (random_value <= 70)) outputText("As you hurtle toward [monster a] [monster name], you draw your weapon and prepare to hit. Getting close enough, you swing and crush your [weapon] onto [monster.pronoun2]. No matter how agile your foe is, [monster.pronoun1] wasn't able to evade your attack! ");
@@ -8735,7 +8847,6 @@ public class Combat extends BaseContent {
     public function wrathregeneration2():Number {
         var wrathregen:Number = 0;
         var BonusWrathMult:Number = 1;
-        if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 1;
         if (player.hasPerk(PerkLib.DoubleAttackSmall)) wrathregen += 1;
         if (player.hasPerk(PerkLib.TripleAttackSmall)) wrathregen += 1;
         if (player.hasPerk(PerkLib.QuadrupleAttackSmall)) wrathregen += 1;
@@ -8790,6 +8901,8 @@ public class Combat extends BaseContent {
         if (player.jewelry4 == jewelries.FLLIRNG) wrathregen += 1;
         if (player.jewelry4 == jewelries.INMORNG) wrathregen += 1;
         if (player.jewelry4 == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS || player.jewelry2 == jewelries.UNDKINS || player.jewelry == jewelries.UNDKINS) wrathregen += 3;
+        if (player.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult += 1;
+        //if (player.hasPerk(PerkLib.HiddenJobAsura)) BonusWrathMult *= 2;
         return wrathregen*BonusWrathMult;
     }
 
@@ -11860,6 +11973,102 @@ public class Combat extends BaseContent {
         statScreenRefresh();
         enemyAI();
     }
+	
+	public function bloodSwipeBloodPuppies():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(spellCostBlood(20), false);
+		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, many red claw-like lines coalesce briefly before being shot from their paws, flying toward " + monster.a + monster.short + ".\n\n");
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.125;
+		if (damage < 10) damage = 10;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		if (monster.plural) damage *= 2;
+		damage = Math.round(damage);
+		outputText(monster.capitalA + monster.short + " takes ");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(15);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 1;
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else {
+			menu();
+			addButton(0, "Next", combatMenu, false);
+		}
+	}
+	
+	public function asuraformCost():Number {
+		var modcsc:Number = 5;
+		if (player.hasPerk(PerkLib.ImprovedCrinosShape)) modcsc += 5;
+		if (player.hasPerk(PerkLib.GreaterCrinosShape)) modcsc += 10;
+		if (player.hasPerk(PerkLib.MasterCrinosShape)) modcsc += 20;
+		if (player.hasPerk(PerkLib.JobBeastWarrior) && player.necklaceName == "Crinos Shape necklace") modcsc += 5;
+		return modcsc;
+	}
+	public function assumeAsuraForm():void {
+		clearOutput();
+		player.wrath -= asuraformCost();
+		outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
+		assumeAsuraForm007();
+		statScreenRefresh();
+		enemyAI();
+	}
+	public function assumeAsuraForm007():void {
+		var temp1:Number = 0;
+		var temp2:Number = 0;
+		var temp3:Number = 0;
+		var tempStr:Number;
+		var tempTou:Number;
+		var tempSpe:Number;
+		temp1 += player.strStat.core.value * 0.2;
+		temp2 += player.touStat.core.value * 0.2;
+		temp3 += player.speStat.core.value * 0.2;
+		if (player.hasPerk(PerkLib.ImprovedCrinosShape)) {
+			temp1 += player.strStat.core.value * 0.2;
+			temp2 += player.touStat.core.value * 0.2;
+			temp3 += player.speStat.core.value * 0.2;
+		}
+		temp1 = Math.round(temp1);
+		temp2 = Math.round(temp2);
+		temp3 = Math.round(temp3);
+		var oldHPratio:Number = player.hp100/100;
+		tempStr = temp1;
+		tempTou = temp2;
+		tempSpe = temp3;
+		mainView.statsView.showStatUp('str');
+		mainView.statsView.showStatUp('tou');
+		mainView.statsView.showStatUp('spe');
+		player.buff("AsuraForm").addStats({str:tempStr,tou:tempTou,spe:tempSpe}).withText("Asura Form").combatPermanent();
+		player.HP = oldHPratio*player.maxHP();
+	}
+	public function returnToNormalShape():void {
+		clearOutput();
+		outputText("Gathering all you willpower you forcefully subduing your inner rage and returning to your normal shape.");
+		player.statStore.removeBuffs("AsuraForm");
+		enemyAI();
+	}
 
     public function oniRampagePowerMulti():Number {
         var oniRampagePowerMulti:Number = 3;
