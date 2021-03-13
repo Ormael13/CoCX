@@ -91,11 +91,16 @@ public class GameSettings extends BaseContent {
 			outputText("Automatic Leveling: <font color=\"#800000\"><b>OFF</b></font>\n Leveling up is done manually.");
 		outputText("\n\n");
 
-		if (flags[kFLAGS.LVL_UP_FAST])
-			outputText("Instant Leveling: <font color=\"#008000\"><b>ON</b></font>\n Instantly levels you up to the highest possible given your xp.");
-		else
-			outputText("Instant Leveling: <font color=\"#800000\"><b>OFF</b></font>\n Individual levelling up, i.e. One level click at a time.");
-		outputText("\n\n");
+		if (flags[kFLAGS.LVL_UP_FAST] == 2) {
+			outputText("Instant Leveling: <font color=\"#008000\"><b>ON, Direct Jump</b></font>\nInstantly levels you up to the highest possible given your xp.");
+		}
+		else if (flags[kFLAGS.LVL_UP_FAST] == 1){
+			outputText("Instant Leveling: <font color=\"#008000\"><b>ON, Manual Increase</b></font>\nIncrease XP by specific amounts.")
+		}
+		else {
+			outputText("Instant Leveling: <font color=\"#800000\"><b>OFF</b></font>\nIndividual leveling up, i.e. One level click at a time.");
+		}
+		outputText("\n\n")
 
 		outputText("<b>The following flags are not fully implemented yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n");
 		outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.");
@@ -317,7 +322,8 @@ public class GameSettings extends BaseContent {
 
 	public function toggleInstaLvl():void {
 		//toggle Instant levelling
-		if (flags[kFLAGS.LVL_UP_FAST] == 0) flags[kFLAGS.LVL_UP_FAST] = 1;
+		if (flags[kFLAGS.LVL_UP_FAST] == 1) flags[kFLAGS.LVL_UP_FAST] = 2;
+		else if (flags[kFLAGS.LVL_UP_FAST] == 0) flags[kFLAGS.LVL_UP_FAST] = 1;
 		else flags[kFLAGS.LVL_UP_FAST] = 0;
 		settingsScreenGameSettings();
 	}
