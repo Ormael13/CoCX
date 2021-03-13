@@ -1439,11 +1439,11 @@ public class PlayerInfo extends BaseContent {
 		mainView.hideMenuButton(MainView.MENU_NEW_MAIN);
 		if (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap){
 			if (flags[kFLAGS.LVL_UP_FAST] == 1){
-				lvlUpFastSubMenu()
+				lvlUpFastSubMenu();
 				return;	//Not sure if this is what's stopping the thing from moving on, not bothered to check.
 			}
 			else if (flags[kFLAGS.LVL_UP_FAST] == 2){
-				lUFSMM(999)
+				lUFSMM(999);
 			}
 			else {
 				player.XP -= player.requiredXP();
@@ -1528,7 +1528,7 @@ public class PlayerInfo extends BaseContent {
 		var lvlinc:int = 0;		//Level increment tracking
 		var perkLvl:int = player.perkPoints;	//Cheating by keeping track of changes by subtraction.
 		var statLvl:int = player.statPoints;
-		clearOutput()
+		clearOutput();
 		if (player.XP < player.requiredXP()){
 			outputText("Max level reached. Unable to increase further.\n\n");
 		}
@@ -1538,30 +1538,30 @@ public class PlayerInfo extends BaseContent {
 				player.level++;
 				lvlinc++
 				if (player.level <= 6) {
-					player.perkPoints += 2
-					player.statPoints += 10
+					player.perkPoints += 2;
+					player.statPoints += 10;
 				}
 				else {
-					player.perkPoints++
-					player.statPoints += 5
+					player.perkPoints++;
+					player.statPoints += 5;
 				}
 			}
 			outputText("<b>You have gained " +lvlinc.toString() + " levels, and are now level " + num2Text(player.level)+"!</b>");
 			var perkRes:int = player.perkPoints - perkLvl
 			var statRes:int = player.statPoints - statLvl
 			outputText("\n\nYou have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!\n\n")
-			statScreenRefresh()
+			statScreenRefresh();
 		}
 		lvlUpFastSubMenu();
 	}
 
 	public function lUFSMAP ():void {
 		if (player.statPoints>0) {
-			attributeMenu()
+			attributeMenu();
 		} else if (player.perkPoints > 0) {
-			perkBuyMenu()
+			perkBuyMenu();
 		} else {
-			playerMenu()
+			playerMenu();
 		}
 	}
 

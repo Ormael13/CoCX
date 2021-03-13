@@ -112,7 +112,7 @@ package classes.Scenes
 			outputText("-Demonic Desire and Inhuman Desire perks effects was switched and effect of Demonic Desire (formely Inhuman Desire) perks was changed from +20 max lust to +5% of max lust.\n");
 			outputText("-New event perk: 'My Blood for Blood Puppies'. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Allow to reach OverMax HP equal to 5x current Tou score, -5% blood spells/soulskills cost, +10% blood spells/soulskills power, ");
 			outputText("During fight small part of your blood from into blood puppies that can attack on your behalf with blood soulskills. When you grow in mastery of blood they would grow stronger with you.\n");
-			outputText("-Starting maximum wrath and health increased twice.\n");
+			outputText("-Starting maximum wrath increased twice.\n");
 			outputText("-All perk effects that increase max Wrath and level up increase to max Wrath increased 5 times.\n");
 			outputText("-Primal Fury perks increase max wrath by 5% instead of +10, other effects of this perks stayed unchanged.\n");
 			outputText("-All perk effects that increase max HP and level up increase to max HP increased 4 times.\n");
