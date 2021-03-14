@@ -1117,6 +1117,10 @@ use namespace CoC;
 		{
 			return hasStatusEffect(StatusEffects.Blind) || hasStatusEffect(StatusEffects.Snowstorms);
 		}
+		public function playerHasFourArms():Boolean
+		{
+			return arms.type == Arms.DISPLACER;
+		}
 		//override public function get weapons
 		override public function get weaponName():String {
 			return _weapon.name;
@@ -14088,7 +14092,7 @@ use namespace CoC;
 
 		public function MutagenBonus(statName: String, bonus: Number):void
 		{
-			removeCurse(statName, bonus)
+			removeCurse(statName, bonus);
 			if (buff("Mutagen").getValueOfStatBuff(""+statName+".mult") < 0.20){
 				buff("Mutagen").addStat(""+statName+".mult",0.01);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
@@ -14098,7 +14102,7 @@ use namespace CoC;
 
 		public function AlchemyBonus(statName: String, bonus: Number):void
 		{
-			removeCurse(statName, bonus)
+			removeCurse(statName, bonus);
 			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < 0.20){
 				buff("Alchemical").addStat(""+statName+".mult",0.01);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
@@ -14108,7 +14112,7 @@ use namespace CoC;
 
 		public function KnowledgeBonus(statName: String, bonus: Number):void
 		{
-			removeCurse(statName, bonus)
+			removeCurse(statName, bonus);
 			if (buff("Knowledge").getValueOfStatBuff(""+statName+".mult") < 0.20){
 				buff("Knowledge").addStat(""+statName+".mult",0.01);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
@@ -14211,4 +14215,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

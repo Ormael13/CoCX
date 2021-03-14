@@ -286,20 +286,20 @@ import flash.utils.getQualifiedClassName;
 		public override function maxOverHP():Number {
 			var maxOver:Number = maxHP();
 			if (findPerk(PerkLib.HiddenJobBloodDemon) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 5);
-				else maxOver += Math.round(this.tou*5);
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
+				else maxOver += Math.round(this.tou*10);
 			}
 			if (findPerk(PerkLib.WayOfTheBlood) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 5);
-				else maxOver += Math.round(this.tou*5);
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
+				else maxOver += Math.round(this.tou*10);
 			}
 			if (findPerk(PerkLib.YourPainMyPower) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 5);
-				else maxOver += Math.round(this.tou*5);
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
+				else maxOver += Math.round(this.tou*10);
 			}
 			if (findPerk(PerkLib.MyBloodForBloodPuppies) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 5);
-				else maxOver += Math.round(this.tou*5);
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
+				else maxOver += Math.round(this.tou*10);
 			}
 			return maxOver;
 		}
@@ -611,7 +611,9 @@ import flash.utils.getQualifiedClassName;
 		}
 		public override function maxOverWrath():Number {
 			var temp1:Number = this.maxWrath();
-			var temp2:Number = 2;
+			var temp2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobAsura)) temp2 += 0.1;
+			//if (hasPerk(PerkLib.)) temp2 += 0.1;
 			temp1 *= temp2;
 			return temp1;
 		}

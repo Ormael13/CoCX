@@ -83,7 +83,7 @@ package classes.Scenes
 			outputText("-New magical soulskill: Storm of Sisterhood (Basic Rank). Req. buying manual from golem merchant for 20 spirit stones. Deal lighting damage, against group enemies deal 2x more damage, using ~30% of current PC wrath creates flames that deals 1000% dmg of used wrath. (1 wrath used = 10 pts of lighting dmg) Cooldown: 1 turn.\n");
 			outputText("-New magical soulskill: Night of Brotherhood (Basic Rank). Req. buying manual from golem merchant for 20 spirit stones. Deal darkness damage, against group enemies deal 2x more damage, using ~30% of current PC wrath creates flames that deals 1000% dmg of used wrath. (1 wrath used = 10 pts of darkness dmg) Cooldown: 1 turn.\n");
 			outputText("-Flames of Love and Icicles of Love soulskills cost, dmg, cooldown was adjusted to ~30%, 1000% and 1 turn.\n");
-			outputText("-New event perk: Hidden Job: Asura. Gained by spending 1 super perk point. Effects: Allow to reach OverMax Wrath equal to 110% of current max wrath.\n");
+			outputText("-New event perk: Hidden Job: Asura. Gained by spending 1 super perk point. Effects: Allow to reach OverMax Wrath equal to 110% of current max wrath. Gain access to Asura Form transformation (3x more melee attacks, +20%/10%/10% of core str/spe/tou stat value).\n");
 			outputText("-Whip and Ribbon type weapons been added to list of melee weapons that can attack flying enemeis without need for PC to fly.\n");
 			outputText("-While flying if PC not have Aerial Combat still can use the same throwable weapons or other melee weapons that could be used to perform range attack.\n");
 			outputText("-2nd to 4th ring slot will be seen on Inventory list (just in case PC not yet bought correct perk it will be listed as LOCKED and having note which perk must be picked to unlock this ring slot).\n");
@@ -110,7 +110,7 @@ package classes.Scenes
 			outputText("-Manticore and Displacer feed effect after rewaching max stacks would be extended by 2/3 (w/ Race Metabolism (Evovlved) perk) hours after each feed. Also both feeding bonus to speed from having (Evolved) racial perk will be +50% not +1000%.\n");
 			outputText("-Tank and Refined Body perks was switched meaning first will be accesable Tank and it would be req. to unlock Refined Body perk. Also Refined Body perks effect was changed from giving 50 HP to 5% of base HP.\n");
 			outputText("-Demonic Desire and Inhuman Desire perks effects was switched and effect of Demonic Desire (formely Inhuman Desire) perks was changed from +20 max lust to +5% of max lust.\n");
-			outputText("-New event perk: 'My Blood for Blood Puppies'. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Allow to reach OverMax HP equal to 5x current Tou score, -5% blood spells/soulskills cost, +10% blood spells/soulskills power, ");
+			outputText("-New event perk: 'My Blood for Blood Puppies'. Gained by spending 1 super perk point and having 'Your Pain My Power' super perk. Effects: Allow to reach OverMax HP equal to 10x current Tou score, -5% blood spells/soulskills cost, +10% blood spells/soulskills power, ");
 			outputText("During fight small part of your blood from into blood puppies that can attack on your behalf with blood soulskills. When you grow in mastery of blood they would grow stronger with you.\n");
 			outputText("-Starting maximum wrath increased twice.\n");
 			outputText("-All perk effects that increase max Wrath and level up increase to max Wrath increased 5 times.\n");
@@ -119,8 +119,8 @@ package classes.Scenes
 			outputText("-All perk effects that increase max Lust and level up increase to max Lust increased 3 times.\n");
 			outputText("-Changed and fixed submitted by Liadri.\n");
 			outputText("-Changed and fixed submitted by Jtexc.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-First 3 perks in Hidden Job: Blood Demon tree have increased bonus to HP based on current Tou form 5x to 10x.\n");
+			outputText("-Power Attack and Power Strike wrath costs due to more options to generate wrath during combat have costs doubled.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
