@@ -568,20 +568,20 @@ public class Creature extends Utils
 		public function maxOverHP():Number {
 			var maxOver:Number = maxHP();
 			if (findPerk(PerkLib.HiddenJobBloodDemon) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 5);
-				else maxOver += Math.round(tou * 5);
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 10);
+				else maxOver += Math.round(tou * 10);
 			}
 			if (findPerk(PerkLib.WayOfTheBlood) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 5);
-				else maxOver += Math.round(tou * 5);
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 10);
+				else maxOver += Math.round(tou * 10);
 			}
 			if (findPerk(PerkLib.YourPainMyPower) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 5);
-				else maxOver += Math.round(tou * 5);
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 10);
+				else maxOver += Math.round(tou * 10);
 			}
 			if (findPerk(PerkLib.MyBloodForBloodPuppies) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 5);
-				else maxOver += Math.round(tou * 5);
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 10);
+				else maxOver += Math.round(tou * 10);
 			}
 			return Math.min(19999999,maxOver);
 		}

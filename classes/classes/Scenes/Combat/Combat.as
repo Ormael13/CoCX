@@ -915,10 +915,20 @@ public class Combat extends BaseContent {
 			else if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] == 1) {
 				bd.disable("Your already commanded Puppies to attack this turn.");
 			}
-		}/*
+		}
 		if (player.hasPerk(PerkLib.HiddenJobAsura)) {
-			bd = buttons.add("Asura Form", assumeAsuraForm).hint("Command Blood Puppies to attack enemy/ies. Would deal 2x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(20) + "");
-		}*/
+			if (player.statStore.hasBuff("AsuraForm")) {
+				buttons.add("Return", returnToNormalShape).hint("Return to normal from Asura form.");
+			} else {
+				bd = buttons.add("Asura Form", assumeAsuraForm).hint("Let your wrath flow thou you, transforming you into Asura! \n\nWrath Cost: " + asuraformCost() + " per turn");//  Greatly increases your strength, speed and fortitude!
+				if (player.wrath < asuraformCost()) {
+					bd.disable("Your wrath is too low to enter this state!");
+				}
+				if (player.statStore.hasBuff("CrinosShape")) {// && !player.hasPerk(PerkLib.HiddenJobAsura)
+					bd.disable("You are under transformantion effect incompatibile with Asura Form!");
+				}
+			}
+		}
     }
 	public function GolemsMenu():void {
 		menu();
@@ -1333,6 +1343,7 @@ public class Combat extends BaseContent {
                     else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
                 }
             } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			if (player.statStore.hasBuff("AsuraForm")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
         }
         if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
@@ -1350,6 +1361,7 @@ public class Combat extends BaseContent {
                     else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
                 }
             } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			if (player.statStore.hasBuff("AsuraForm")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
         }
         if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
@@ -1388,14 +1400,17 @@ public class Combat extends BaseContent {
                 }
                 if (player.weaponPerk == "Dual Small") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
             } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			if (player.statStore.hasBuff("AsuraForm")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
         }
         if (player.weaponPerk == "Massive") {
             //	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			if (player.statStore.hasBuff("AsuraForm")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
         }
         if (player.weaponPerk == "Staff" || player.weaponPerk == "Wand") {
             //	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			if (player.statStore.hasBuff("AsuraForm")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
         }
         if (player.isFistOrFistWeapon()) {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
@@ -1438,6 +1453,7 @@ public class Combat extends BaseContent {
                     }
                 }
             } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			if (player.statStore.hasBuff("AsuraForm")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
         }
         attack();
     }
@@ -2338,26 +2354,24 @@ public class Combat extends BaseContent {
     public function meleeAccuracyPenalty():Number {
         var accmmodpenalty:Number = 10;
         if (player.hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm)) accmmodpenalty -= 5;
+		//if (player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.)) accmmodpenalty -= 5;
         if (accmmodpenalty < 0) accmmodpenalty = 0;
         return accmmodpenalty;
     }
 
 	public function meleeDualWieldAccuracyPenalty():Number {
-		var accmdwmodpenalty:Number = 0;
+		var accmdwmodpenalty:Number = -25;
         if (player.weaponPerk == "Dual") {
-			if (player.hasPerk(PerkLib.DualWieldNormal)) accmdwmodpenalty -= 15;
-			else accmdwmodpenalty -= 25;
+			if (player.hasPerk(PerkLib.DualWieldNormal)) accmdwmodpenalty += 10;
 		}
         if (player.weaponPerk == "Dual Large") {
-			if (player.hasPerk(PerkLib.DualWieldLarge)) accmdwmodpenalty -= 15;
-			else accmdwmodpenalty -= 25;
+			if (player.hasPerk(PerkLib.DualWieldLarge)) accmdwmodpenalty += 10;
 		}
         if (player.weaponPerk == "Dual Small") {
-			if (player.hasPerk(PerkLib.DualWieldSmall)) accmdwmodpenalty -= 15;
-			else accmdwmodpenalty -= 25;
+			if (player.hasPerk(PerkLib.DualWieldSmall)) accmdwmodpenalty += 10;
 		}
         if (player.weaponPerk == "Quad") {
-			accmdwmodpenalty -= 75;
+			accmdwmodpenalty -= 50;
 		}
         return accmdwmodpenalty;
 	}
@@ -6654,6 +6668,7 @@ public class Combat extends BaseContent {
         monster.doAI();
         if (player.statStore.hasBuff("TranceTransformation")) player.soulforce -= 50;
         if (player.statStore.hasBuff("CrinosShape")) player.wrath -= mspecials.crinosshapeCost();
+        if (player.statStore.hasBuff("AsuraForm")) player.wrath -= asuraformCost();
         combatRoundOver();
     }
 
@@ -7853,6 +7868,16 @@ public class Combat extends BaseContent {
             //		outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation regenerative power spreading in your body.</b>\n\n");
             //	}
         }
+        //Asura form
+        if (player.statStore.hasBuff("AsuraForm")) {
+            if (player.wrath < asuraformCost()) {
+                player.statStore.removeBuffs("AsuraForm");
+                outputText("<b>The flow of power through you suddenly stops, as you no longer have the wrath to sustain it.  You drop roughly to the floor, chanches slowly fading away leaving you in your normal form.</b>\n\n");
+            }
+            //	else {
+            //		outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation regenerative power spreading in your body.</b>\n\n");
+            //	}
+        }
         //Displacement
         if (player.hasStatusEffect(StatusEffects.Displacement)) {
             if (player.statusEffectv1(StatusEffects.Displacement) <= 0) {
@@ -8828,11 +8853,14 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Rage)) gainedwrath += 6 * BonusWrathMult;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) gainedwrath += 12 * BonusWrathMult;
             if (player.statStore.hasBuff("CrinosShape")) {
-                gainedwrath += 2;
+                gainedwrath += 2 * BonusWrathMult;
                 if (player.hasPerk(PerkLib.ImprovedCrinosShape)) gainedwrath += 2 * BonusWrathMult;
                 if (player.hasPerk(PerkLib.GreaterCrinosShape)) gainedwrath += 4 * BonusWrathMult;
                 if (player.hasPerk(PerkLib.MasterCrinosShape)) gainedwrath += 8 * BonusWrathMult;
             }
+			if (player.statStore.hasBuff("AsuraForm")) {
+				gainedwrath += 2 * BonusWrathMult;
+			}
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) gainedwrath *= 2 * BonusWrathMult;
             EngineCore.WrathChange(gainedwrath, false);
         }
@@ -12020,17 +12048,18 @@ public class Combat extends BaseContent {
 	}
 	
 	public function asuraformCost():Number {
-		var modcsc:Number = 5;
-		if (player.hasPerk(PerkLib.ImprovedCrinosShape)) modcsc += 5;
+		var modcsc:Number = 10;
+		/*if (player.hasPerk(PerkLib.ImprovedCrinosShape)) modcsc += 5;
 		if (player.hasPerk(PerkLib.GreaterCrinosShape)) modcsc += 10;
 		if (player.hasPerk(PerkLib.MasterCrinosShape)) modcsc += 20;
-		if (player.hasPerk(PerkLib.JobBeastWarrior) && player.necklaceName == "Crinos Shape necklace") modcsc += 5;
+		if (player.hasPerk(PerkLib.JobBeastWarrior) && player.necklaceName == "Crinos Shape necklace") modcsc += 5;*/
 		return modcsc;
 	}
 	public function assumeAsuraForm():void {
 		clearOutput();
 		player.wrath -= asuraformCost();
-		outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
+		outputText("As you starts to unleash your inner wrath two additional faces emerge from head on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
+		outputText("Finishing assuming Asura form you're ready to destroy anyone that would dare to stand in your way!\n\n");
 		assumeAsuraForm007();
 		statScreenRefresh();
 		enemyAI();
@@ -12043,13 +12072,13 @@ public class Combat extends BaseContent {
 		var tempTou:Number;
 		var tempSpe:Number;
 		temp1 += player.strStat.core.value * 0.2;
-		temp2 += player.touStat.core.value * 0.2;
-		temp3 += player.speStat.core.value * 0.2;
+		temp2 += player.touStat.core.value * 0.1;
+		temp3 += player.speStat.core.value * 0.1;/*
 		if (player.hasPerk(PerkLib.ImprovedCrinosShape)) {
 			temp1 += player.strStat.core.value * 0.2;
 			temp2 += player.touStat.core.value * 0.2;
 			temp3 += player.speStat.core.value * 0.2;
-		}
+		}*/
 		temp1 = Math.round(temp1);
 		temp2 = Math.round(temp2);
 		temp3 = Math.round(temp3);

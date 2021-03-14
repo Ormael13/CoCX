@@ -640,7 +640,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				addButton(6, "8x", powerAttack8x).disableIf(player.wrath < (powerfistscoooooost() * 12),"You are too calm to use this special. Req. " + powerfistscoooooost() * 12 + "+ wrath");
 			} else addButtonDisabled(6, "???");
 		}
-		else addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 200,"You are too calm to use this special. Req. 200+ wrath");
+		else addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 400,"You are too calm to use this special. Req. 400+ wrath");
 		addButton(14, "Back", combat.ui.submenuPhySpecials);
 	}
 	public function powerAttack2x():void {
@@ -968,7 +968,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 	public function powerfistscoooooost():Number {
-		var powerfistscostvalue:Number = 50;
+		var powerfistscostvalue:Number = 100;
 		return powerfistscostvalue;
 	}
 	public function powerfistspoweeeeer():Number {
@@ -1042,14 +1042,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 				addButton(6, "8x", powerAttack8x).disableIf(player.wrath < (powerfistscoooooost() * 12),"You are too calm to use this special. Req. " + powerfistscoooooost() * 12 + "+ wrath");
 			} else addButtonDisabled(6, "???");
 		}
-		else */addButton(0, "2x", powerShoot2x).disableIf(player.wrath < 50,"You are too calm to use this special. Req. 50+ wrath");//orginaly 200+
+		else */addButton(0, "2x", powerShoot2x).disableIf(player.wrath < 100,"You are too calm to use this special. Req. 100+ wrath");//orginaly 200+
 		addButton(14, "Back", combat.ui.submenuPhySpecials);
 	}
 	public function powerShoot2x():void {
 		clearOutput();
 		//if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) player.wrath -= powerfistscoooooost();
 		//else player.wrath -= 200;
-		player.wrath -= 50;
+		player.wrath -= 100;
 		outputText("With one smooth motion you draw, nock, and fire your deadly arrow at one of your opponent"+(monster.plural ? "s":"")+" ");
 		var damage:Number = 0;
 		var PSMulti:Number = 2;

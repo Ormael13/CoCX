@@ -493,6 +493,9 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.wrath < crinosshapeCost()) {
 					bd.disable("Your wrath is too low to enter this state!");
 				}
+				if (player.statStore.hasBuff("AsuraForm")) {// && !player.hasPerk(PerkLib.HiddenJobAsura)
+					bd.disable("You are under transformantion effect incompatibile with Crinos Shape!");
+				}
 			}
 		}
 		if (player.oniScore() >= minOniScoreReq()) {
