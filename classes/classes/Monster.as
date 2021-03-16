@@ -307,20 +307,20 @@ import flash.utils.getQualifiedClassName;
 			var min:Number = 0;
 			if (findPerk(PerkLib.Diehard) >= 0) {
 				min -= maxHP() * 0.02;
-				min -= (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				min -= (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (findPerk(PerkLib.ImprovedDiehard) >= 0) {
 				min -= maxHP() * 0.04;
-				min -= (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				min -= (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (findPerk(PerkLib.GreaterDiehard) >= 0) {
 				min -= maxHP() * 0.06;
-				min -= (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				min -= (1800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (findPerk(PerkLib.EpicDiehard) >= 0) {
 				min -= maxHP() * 0.08;
-				min -= (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			}//nastepny diehard to 5% i 1000
+				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}//nastepny diehard to 10% i 3000
 			if (findPerk(PerkLib.Ferocity) >= 0) min -= maxHP() * 0.07;
 			if (findPerk(PerkLib.LizanMarrowFinalForm) >= 0) min -= maxHP() * 0.05;
 			if (findPerk(PerkLib.OrcAdrenalGlands) >= 0) min -= maxHP() * 0.01;

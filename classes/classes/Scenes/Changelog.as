@@ -121,8 +121,8 @@ package classes.Scenes
 			outputText("-Changed and fixed submitted by Jtexc.\n");
 			outputText("-First 3 perks in Hidden Job: Blood Demon tree have increased bonus to HP based on current Tou form 5x to 10x.\n");
 			outputText("-Power Attack and Power Strike wrath costs due to more options to generate wrath during combat have costs doubled.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Diehard perks flat part of effect is 3x more effective (first perk instead of (2%+200) HP is (2%+600) HP).\n");
+			outputText("-Siegweird got sprite added.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
