@@ -123,6 +123,9 @@ package classes.Scenes
 			outputText("-Power Attack and Power Strike wrath costs due to more options to generate wrath during combat have costs doubled.\n");
 			outputText("-Diehard perks flat part of effect is 3x more effective (first perk instead of (2%+200) HP is (2%+600) HP).\n");
 			outputText("-Siegweird got sprite added.\n");
+			outputText("-All perks that increasing mana cap are 3 times more effective. Starting mana is increased from 200 to 300.\n");
+			outputText("-Mind over Body and Mana Affinity perks was switched meaning first will be accesable Mind over Body and it would be req. to unlock Mana Affinity perk. Also Mana Affinity perks effect was changed from giving 35 Mana and 20% boost to mana regeneration to 3% of base mana and 25% boost to mana regeneration.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -132,6 +135,7 @@ package classes.Scenes
 			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk from training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in sheild slot), one of req. for Prestige Job: Spell Knight, ");
 			outputText("Flames of Love and Icicles of Love not dealing increased dmg to group enemies, beautiful items aside sword and excalibur not been dropped with high corruption, beautiful sword / excalibur not been working properly with multiattack settings, centipeded tf small correction, added missing cooldown countdown for Flames/Icicles of Love and Punishing Kick soulskills, missing Ebon Labyrinth bosses in rooms ");
 			outputText("200 / 250 / 300, succubus special no longer affecting lust immune enemies, no reseting on 2nd to 4th ring in case PC had any equipped, shield perks working with all shields not only those that allows use of shield bash, EL questolog reward after 50th room wrong unlock req., many smol fixes and typos corrected\n");/*ostatni punkt changelogu
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -200,9 +204,8 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
