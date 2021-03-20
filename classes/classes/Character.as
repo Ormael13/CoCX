@@ -626,20 +626,20 @@ import classes.Items.JewelryLib;
 			var min:Number = 0;
 			if (findPerk(PerkLib.Diehard) >= 0) {
 				min -= maxHP() * 0.02;
-				min -= (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				min -= (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (findPerk(PerkLib.ImprovedDiehard) >= 0) {
 				min -= maxHP() * 0.04;
-				min -= (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				min -= (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (findPerk(PerkLib.GreaterDiehard) >= 0) {
 				min -= maxHP() * 0.06;
-				min -= (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				min -= (1800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (findPerk(PerkLib.EpicDiehard) >= 0) {
 				min -= maxHP() * 0.08;
-				min -= (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			}//nastepny diehard to 10% i 1000 a potem 12% i 1200
+				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}//nastepny diehard to 10% i 3000 a potem 12% i 3600
 			if (findPerk(PerkLib.LizanMarrowFinalForm) >= 0) min -= maxHP() * 0.05;
 			if (findPerk(PerkLib.OrcAdrenalGlandsFinalForm) >= 0 || game.player.orcScore() >= 11) {
 				if (findPerk(PerkLib.Ferocity) >= 0) min -= maxHP() * 0.07;
@@ -1018,76 +1018,70 @@ import classes.Items.JewelryLib;
 		
 		public override function maxMana():Number
 		{
-			var max:Number = 200;
-			if (findPerk(PerkLib.ManaAffinityI) >= 0) max += 35;
-			if (findPerk(PerkLib.ManaAffinityII) >= 0) max += 35;
-			if (findPerk(PerkLib.ManaAffinityIII) >= 0) max += 35;
-			if (findPerk(PerkLib.ManaAffinityIV) >= 0) max += 35;
-			if (findPerk(PerkLib.ManaAffinityV) >= 0) max += 35;
-			if (findPerk(PerkLib.ManaAffinityVI) >= 0) max += 35;
-			if (findPerk(PerkLib.MindOverBodyI) >= 0) max += Math.round(inte*2);
-			if (findPerk(PerkLib.MindOverBodyII) >= 0) max += Math.round(inte*2);
-			if (findPerk(PerkLib.MindOverBodyIII) >= 0) max += Math.round(inte*2);
-			if (findPerk(PerkLib.MindOverBodyIV) >= 0) max += Math.round(inte*2);
-			if (findPerk(PerkLib.MindOverBodyV) >= 0) max += Math.round(inte*2);
-			if (findPerk(PerkLib.MindOverBodyVI) >= 0) max += Math.round(inte*2);
+			var max:Number = 300;
+			if (findPerk(PerkLib.MindOverBodyI) >= 0) max += Math.round(inte*6);
+			if (findPerk(PerkLib.MindOverBodyII) >= 0) max += Math.round(inte*6);
+			if (findPerk(PerkLib.MindOverBodyIII) >= 0) max += Math.round(inte*6);
+			if (findPerk(PerkLib.MindOverBodyIV) >= 0) max += Math.round(inte*6);
+			if (findPerk(PerkLib.MindOverBodyV) >= 0) max += Math.round(inte*6);
+			if (findPerk(PerkLib.MindOverBodyVI) >= 0) max += Math.round(inte*6);
 			if (findPerk(PerkLib.ArcanePoolI) >= 0) {
-				max += Math.round(inte);
-				max += Math.round(wis);
+				max += Math.round(inte*3);
+				max += Math.round(wis*3);
 			}
 			if (findPerk(PerkLib.ArcanePoolII) >= 0) {
-				max += Math.round(inte);
-				max += Math.round(wis);
+				max += Math.round(inte*3);
+				max += Math.round(wis*3);
 			}
 			if (findPerk(PerkLib.ArcanePoolIII) >= 0) {
-				max += Math.round(inte);
-				max += Math.round(wis);
+				max += Math.round(inte*3);
+				max += Math.round(wis*3);
 			}
 			if (findPerk(PerkLib.ArcanePoolIV) >= 0) {
-				max += Math.round(inte);
-				max += Math.round(wis);
+				max += Math.round(inte*3);
+				max += Math.round(wis*3);
 			}
 			if (findPerk(PerkLib.ArcanePoolV) >= 0) {
-				max += Math.round(inte);
-				max += Math.round(wis);
+				max += Math.round(inte*3);
+				max += Math.round(wis*3);
 			}
 			if (findPerk(PerkLib.ArcanePoolVI) >= 0) {
-				max += Math.round(inte);
-				max += Math.round(wis);
+				max += Math.round(inte*3);
+				max += Math.round(wis*3);
 			}
-			if (findPerk(PerkLib.BasicSpirituality) >= 0) max += 45;
-			if (findPerk(PerkLib.HalfStepToImprovedSpirituality) >= 0) max += 75;
-			if (findPerk(PerkLib.ImprovedSpirituality) >= 0) max += 120;
-			if (findPerk(PerkLib.HalfStepToAdvancedSpirituality) >= 0) max += 180;
-			if (findPerk(PerkLib.AdvancedSpirituality) >= 0) max += 300;
-			if (findPerk(PerkLib.HalfStepToSuperiorSpirituality) >= 0) max += 480;
-			if (findPerk(PerkLib.SuperiorSpirituality) >= 0) max += 750;
-			if (findPerk(PerkLib.HalfStepToPeerlessSpirituality) >= 0) max += 1050;
-			if (findPerk(PerkLib.PeerlessSpirituality) >= 0) max += 1500;
-			if (findPerk(PerkLib.HalfStepToInhumanSpirituality) >= 0) max += 2250;
-			if (findPerk(PerkLib.InhumanSpirituality) >= 0) max += 3000;
-			if (findPerk(PerkLib.HalfStepToEpicSpirituality) >= 0) max += 4500;
-			if (findPerk(PerkLib.EpicSpirituality) >= 0) max += 6750;
-			if (findPerk(PerkLib.HalfStepToLegendarySpirituality) >= 0) max += 10500;
-			if (findPerk(PerkLib.LegendarySpirituality) >= 0) max += 15000;
-			if (findPerk(PerkLib.HalfStepToMythicalSpirituality) >= 0) max += 22500;
-			if (findPerk(PerkLib.MythicalSpirituality) >= 0) max += 30000;
-			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 100) max += 60;
-			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) max += 30;
-			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 125) max += 75;
-			if (findPerk(PerkLib.GrandArchmage2ndCircle) >= 0 && inte >= 150) max += 90;
-			if (findPerk(PerkLib.GrandArchmage3rdCircle) >= 0 && inte >= 175) max += 105;
-			if (findPerk(PerkLib.GrandMage) >= 0 && inte >= 75) max += 45;
-			if (findPerk(PerkLib.GreyArchmage) >= 0 && inte >= 225) max += 200;
-			if (findPerk(PerkLib.GreyMage) >= 0 && inte >= 200) max += 150;
-			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) max += 30;
-			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 15;
-			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 15;
-			if (findPerk(PerkLib.JobHealer) >= 0) max += 30;
-			if (findPerk(PerkLib.SpellpowerHealing) >= 0 && wis >= 50) max += 30;
-			if (findPerk(PerkLib.EromancyBeginner) >= 0) max += Math.round(inte);
-			if (findPerk(PerkLib.EromancyExpert) >= 0) max += Math.round(inte);
-			if (findPerk(PerkLib.EromancyMaster) >= 0) max += Math.round(inte*2);
+			if (findPerk(PerkLib.BasicSpirituality) >= 0) max += 135;
+			if (findPerk(PerkLib.HalfStepToImprovedSpirituality) >= 0) max += 225;
+			if (findPerk(PerkLib.ImprovedSpirituality) >= 0) max += 360;
+			if (findPerk(PerkLib.HalfStepToAdvancedSpirituality) >= 0) max += 540;
+			if (findPerk(PerkLib.AdvancedSpirituality) >= 0) max += 900;
+			if (findPerk(PerkLib.HalfStepToSuperiorSpirituality) >= 0) max += 1440;
+			if (findPerk(PerkLib.SuperiorSpirituality) >= 0) max += 2250;
+			if (findPerk(PerkLib.HalfStepToPeerlessSpirituality) >= 0) max += 3150;
+			if (findPerk(PerkLib.PeerlessSpirituality) >= 0) max += 4500;
+			if (findPerk(PerkLib.HalfStepToInhumanSpirituality) >= 0) max += 6750;
+			if (findPerk(PerkLib.InhumanSpirituality) >= 0) max += 9000;
+			if (findPerk(PerkLib.HalfStepToEpicSpirituality) >= 0) max += 13500;
+			if (findPerk(PerkLib.EpicSpirituality) >= 0) max += 20250;
+			if (findPerk(PerkLib.HalfStepToLegendarySpirituality) >= 0) max += 31500;
+			if (findPerk(PerkLib.LegendarySpirituality) >= 0) max += 45000;
+			if (findPerk(PerkLib.HalfStepToMythicalSpirituality) >= 0) max += 67500;
+			if (findPerk(PerkLib.MythicalSpirituality) >= 0) max += 90000;
+			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 100) max += 180;
+			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) max += 90;
+			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 125) max += 225;
+			if (findPerk(PerkLib.GrandArchmage2ndCircle) >= 0 && inte >= 150) max += 270;
+			if (findPerk(PerkLib.GrandArchmage3rdCircle) >= 0 && inte >= 175) max += 315;
+			if (findPerk(PerkLib.GrandMage) >= 0 && inte >= 75) max += 135;
+			if (findPerk(PerkLib.GreyArchmage) >= 0 && inte >= 225) max += 600;
+			if (findPerk(PerkLib.GreyMage) >= 0 && inte >= 200) max += 450;
+			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) max += 90;
+			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 45;
+			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 45;
+			if (findPerk(PerkLib.JobHealer) >= 0) max += 90;
+			if (findPerk(PerkLib.SpellpowerHealing) >= 0 && wis >= 50) max += 90;
+			if (findPerk(PerkLib.EromancyBeginner) >= 0) max += Math.round(inte*3);
+			if (findPerk(PerkLib.EromancyExpert) >= 0) max += Math.round(inte*3);
+			if (findPerk(PerkLib.EromancyMaster) >= 0) max += Math.round(inte*6);
 			var multimax:Number = 1;
 			if (game.player.elfScore() >= 5) multimax += 0.1;
 			if (game.player.elfScore() >= 11) multimax += 0.1;
@@ -1100,13 +1094,20 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.President) >= 0) multimax += 0.1;
 			if (findPerk(PerkLib.Nerd) >= 0) multimax += 0.1;
 			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0 && inte >= 50) {
-				multimax += 0.1;
-				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0 && inte >= 75) multimax += 0.2;
-				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0 && inte >= 100) multimax += 0.3;
-				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0 && inte >= 125) multimax += 0.4;
+				multimax += 0.05;
+				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0 && inte >= 75) multimax += 0.1;
+				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0 && inte >= 100) multimax += 0.15;
+				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0 && inte >= 125) multimax += 0.2;
+				if (findPerk(PerkLib.ArcaneRegenerationMythical) >= 0 && inte >= 150) multimax += 0.25;
 			}
+			if (findPerk(PerkLib.ManaAffinityI) >= 0) multimax += 0.03;
+			if (findPerk(PerkLib.ManaAffinityII) >= 0) multimax += 0.03;
+			if (findPerk(PerkLib.ManaAffinityIII) >= 0) multimax += 0.03;
+			if (findPerk(PerkLib.ManaAffinityIV) >= 0) multimax += 0.03;
+			if (findPerk(PerkLib.ManaAffinityV) >= 0) multimax += 0.03;
+			if (findPerk(PerkLib.ManaAffinityVI) >= 0) multimax += 0.03;
 			if (findPerk(PerkLib.ZenjisInfluence1) >= 0) multimax += 0.1;
-			if (findPerk(PerkLib.AscensionInnerPower) >= 0) max += perkv1(PerkLib.AscensionInnerPower) * 40;
+			if (findPerk(PerkLib.AscensionInnerPower) >= 0) max += perkv1(PerkLib.AscensionInnerPower) * 120;
 			if (jewelryEffectId == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude3;

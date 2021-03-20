@@ -6564,12 +6564,12 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.3;
         if (player.hasPerk(PerkLib.GreyMage)) multi += 0.5;
         if (player.hasPerk(PerkLib.GreyArchmage)) multi += 1.5;
-        if (player.hasPerk(PerkLib.ManaAffinityI)) multi += 0.2;
-        if (player.hasPerk(PerkLib.ManaAffinityII)) multi += 0.2;
-        if (player.hasPerk(PerkLib.ManaAffinityIII)) multi += 0.2;
-        if (player.hasPerk(PerkLib.ManaAffinityIV)) multi += 0.2;
-        if (player.hasPerk(PerkLib.ManaAffinityV)) multi += 0.2;
-        if (player.hasPerk(PerkLib.ManaAffinityVI)) multi += 0.2;
+        if (player.hasPerk(PerkLib.ManaAffinityI)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityII)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityIII)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityIV)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityV)) multi += 0.25;
+        if (player.hasPerk(PerkLib.ManaAffinityVI)) multi += 0.25;
         if (player.alicornScore() >= 12) multi += 0.1;
         if (player.kitsuneScore() >= 5) {
             if (player.kitsuneScore() >= 10) multi += 1;
@@ -8828,10 +8828,11 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.JobEromancer)) manaregen += 5;
         if (player.hasPerk(PerkLib.JobHealer)) manaregen += 5;
         if (player.hasPerk(PerkLib.JobSorcerer)) manaregen += 10;
-        if (player.hasPerk(PerkLib.ArcaneRegenerationMinor)) manaregen += 5;
-        if (player.hasPerk(PerkLib.ArcaneRegenerationMajor)) manaregen += 10;
-        if (player.hasPerk(PerkLib.ArcaneRegenerationEpic)) manaregen += 15;
-        if (player.hasPerk(PerkLib.ArcaneRegenerationLegendary)) manaregen += 20;
+        if (player.hasPerk(PerkLib.ArcaneRegenerationMinor)) manaregen += 10;
+        if (player.hasPerk(PerkLib.ArcaneRegenerationMajor)) manaregen += 20;
+        if (player.hasPerk(PerkLib.ArcaneRegenerationEpic)) manaregen += 30;
+        if (player.hasPerk(PerkLib.ArcaneRegenerationLegendary)) manaregen += 40;
+        if (player.hasPerk(PerkLib.ArcaneRegenerationMythical)) manaregen += 50;
         if (player.hasPerk(PerkLib.DraconicHeart)) manaregen += 5;
         if (player.hasPerk(PerkLib.DraconicHeartEvolved)) manaregen += 5;
         if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) manaregen += 5;
@@ -12404,3 +12405,4 @@ public class Combat extends BaseContent {
     }
 }
 }
+

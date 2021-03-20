@@ -674,6 +674,8 @@ public class SpriteDb {
 	public static function get s_sharkgirl(): Class {
 		return is8bit ? s_sharkgirl_8bit : s_sharkgirl_16bit;
 	}
+	[Embed(source="../../../res/sprites/siegweird.png")]
+	public static var s_siegweird:Class;
 	[Embed(source="../../../res/sprites/sophie.png")]
 	public static var s_sophie_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/sophie-old.png")]

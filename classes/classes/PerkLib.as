@@ -460,8 +460,8 @@ public class PerkLib
 				"Increases maximum lust by 300.",
 				"You've chosen the 'Advanced Self-Control' perk. Thanks to your advanced mental conditioning, your maximum lust has been increased by 300!");
 		public static const AdvancedSpirituality:PerkType = mk("Advanced Spirituality", "Advanced Spirituality",
-				"Increases maximum mana by 300.",
-				"You've chosen the 'Advanced Spirituality' perk. Thanks to your advanced mystical conditioning, your maximum mana has been increased by 300!");
+				"Increases maximum mana by 900.",
+				"You've chosen the 'Advanced Spirituality' perk. Thanks to your advanced mystical conditioning, your maximum mana has been increased by 900!");
 		public static const AdvancedTranquilness:PerkType = mk("Advanced Tranquilness", "Advanced Tranquilness",
 				"Increases maximum wrath by 500.",
 				"You've chosen the 'Advanced Tranquilness' perk. Thanks to your advanced anger managment training, your maximum wrath has been increased by 500!");
@@ -505,51 +505,58 @@ public class PerkLib
 				"Your proficiency in making golems allows to decrease by 10 mana cost of their creation, lower by 5% chance of core shattering and storing more golems.",
 				"You've chosen the 'Apprentice Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const ArcanePoolI:PerkType = mk("Arcane Pool I", "Arcane Pool I",
-				"+1 extra mana per point of intelligence and wisdom.",
-				"You've chosen the 'Arcane Pool I' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+				"+3 extra mana per point of intelligence and wisdom.",
+				"You've chosen the 'Arcane Pool I' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.");
 		public static const ArcanePoolII:PerkType = mk("Arcane Pool II", "Arcane Pool II",
-				"+1 extra mana per point of intelligence and wisdom.",
-				"You've chosen the 'Arcane Pool II' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+				"+3 extra mana per point of intelligence and wisdom.",
+				"You've chosen the 'Arcane Pool II' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.");
 		public static const ArcanePoolIII:PerkType = mk("Arcane Pool III", "Arcane Pool III",
-				"+1 extra mana per point of intelligence and wisdom.",
-				"You've chosen the 'Arcane Pool III' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+				"+3 extra mana per point of intelligence and wisdom.",
+				"You've chosen the 'Arcane Pool III' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.");
 		public static const ArcanePoolIV:PerkType = mk("Arcane Pool IV", "Arcane Pool IV",
-				"+1 extra mana per point of intelligence and wisdom.",
-				"You've chosen the 'Arcane Pool IV' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+				"+3 extra mana per point of intelligence and wisdom.",
+				"You've chosen the 'Arcane Pool IV' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.");
 		public static const ArcanePoolV:PerkType = mk("Arcane Pool V", "Arcane Pool V",
-				"+1 extra mana per point of intelligence and wisdom.",
-				"You've chosen the 'Arcane Pool V' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+				"+3 extra mana per point of intelligence and wisdom.",
+				"You've chosen the 'Arcane Pool V' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.");
 		public static const ArcanePoolVI:PerkType = mk("Arcane Pool VI", "Arcane Pool VI",
-				"+1 extra mana per point of intelligence and wisdom.",
-				"You've chosen the 'Arcane Pool VI' perk, granting +1 extra maximum mana for each point of intelligence and wisdom.");
+				"+3 extra mana per point of intelligence and wisdom.",
+				"You've chosen the 'Arcane Pool VI' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.");
 		public static const ArcaneRegenerationEpic:PerkType = mk("Arcane Regeneration (Epic)", "Arcane Regeneration (Epic)",
 				"[if (player.inte>=100)" +
-						"Increase by 150% base mana recovery and 30% max mana." +
+						"Increase by 30 base mana recovery and 15% max mana." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
 				"You've chosen the 'Arcane Regeneration (Epic)' perk, increasing mana recovery and mana pool.");
 		public static const ArcaneRegenerationLegendary:PerkType = mk("Arcane Regeneration (Legendary)", "Arcane Regeneration (Legendary)",
 				"[if (player.inte>=125)" +
-						"Increase by 200% base mana recovery and 40% max mana." +
+						"Increase by 40 base mana recovery and 20% max mana." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
 				"You've chosen the 'Arcane Regeneration (Legendary)' perk, increasing mana recovery and mana pool.");
 		public static const ArcaneRegenerationMajor:PerkType = mk("Arcane Regeneration (Major)", "Arcane Regeneration (Major)",
 				"[if (player.inte>=75)" +
-						"Increase by 100% base mana recovery and 20% max mana." +
+						"Increase by 20 base mana recovery and 10% max mana." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
 				"You've chosen the 'Arcane Regeneration (Major)' perk, increasing mana recovery and mana pool.");
 		public static const ArcaneRegenerationMinor:PerkType = mk("Arcane Regeneration (Minor)", "Arcane Regeneration (Minor)",
 				"[if (player.inte>=50)" +
-						"Increase by 50% base mana recovery and 10% max mana." +
+						"Increase by 10 base mana recovery and 5% max mana." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
 				"You've chosen the 'Arcane Regeneration (Minor)' perk, increasing mana recovery and mana pool.");
+		public static const ArcaneRegenerationMythical:PerkType = mk("Arcane Regeneration (Mythical)", "Arcane Regeneration (Mythical)",
+				"[if (player.inte>=150)" +
+						"Increase by 50 base mana recovery and 25% max mana." +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
+				"You've chosen the 'Arcane Regeneration (Mythical)' perk, increasing mana recovery and mana pool.");
 		public static const ArchersStaminaI:PerkType = mk("Archer's Stamina I", "Archer's Stamina I",
 				"+1 extra fatigue per point of speed.",
 				"You've chosen the 'Archer's Stamina I' perk, granting +1 extra maximum fatigue for each point of speed.");
@@ -570,11 +577,11 @@ public class PerkLib
 				"You've chosen the 'Archer's Stamina VI' perk, granting +1 extra maximum fatigue for each point of speed.");
 		public static const Archmage:PerkType = mk("Archmage", "Archmage",
 				"[if (player.inte>=100)" +
-						"Increases base spell strength by 30%, mana pool by 60 and lust bar by 45." +
+						"Increases base spell strength by 30%, mana pool by 180 and lust bar by 45." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Archmage' perk, increasing base spell strength by 30%, base mana pool by 60 and lust bar by 45.");
+				"You've chosen the 'Archmage' perk, increasing base spell strength by 30%, base mana pool by 180 and lust bar by 45.");
 		public static const ArcaneLash:PerkType = mk("Arcane Lash", "Arcane Lash",
 				"Your whip act as a catalyst for your lust inducing spells as well as for magic weapon.",
 				"You've chosen the 'Arcane Lash' perk, causing you to increase effects of lust inducing spells and weapon when using whip.");
@@ -612,8 +619,8 @@ public class PerkLib
 				"Increases maximum lust by 45.",
 				"You've chosen the 'Basic Self-Control' perk. Thanks to your basic mental conditioning, your maximum lust has been increased by 45!");
 		public static const BasicSpirituality:PerkType = mk("Basic Spirituality", "Basic Spirituality",
-				"Increases maximum mana by 45.",
-				"You've chosen the 'Basic Spirituality' perk. Thanks to your basic mystical conditioning, your maximum mana has been increased by 45!");
+				"Increases maximum mana by 135.",
+				"You've chosen the 'Basic Spirituality' perk. Thanks to your basic mystical conditioning, your maximum mana has been increased by 135!");
 		public static const BasicTranquilness:PerkType = mk("Basic Tranquilness", "Basic Tranquilness",
 				"Increases maximum wrath by 75.",
 				"You've chosen the 'Basic Tranquilness' perk. Thanks to your basic anger managment training, your maximum wrath has been increased by 75!");
@@ -730,7 +737,7 @@ public class PerkLib
 				"You've chosen the 'Cat-like Nimbleness (Final Form)' perk. Your nimble body allows you to move with even greater nimbleness than before, further increasing evasion.").withBuffs({'spe.mult':0.20});
 		public static const Channeling:PerkType = mk("Channeling", "Channeling",
 				"[if (player.inte>=60)" +
-						"Increases base spell strength by 20% and base mana pool by 30." +
+						"Increases base spell strength by 20% and base mana pool by 90." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
@@ -964,7 +971,7 @@ public class PerkLib
 				"When using the charge action you have a 20% chance to stun the opponent for a round. Charge is 50% more powerful.",
 				"You've chosen the 'Devastating charge' perk, when using the charge action you have a 20% chance to stun the opponent for a round. Charge is 50% more powerful.");
 		public static const Diehard:PerkType = mk("Diehard", "Diehard",
-				"You can't loose by HP until reaching droping into negative health larger than 2% of max HP + 200(scalable). When below 0 HP would lose 1% of max HP per turn.",
+				"You can't loose by HP until reaching droping into negative health larger than 2% of max HP + 600(scalable). When below 0 HP would lose 1% of max HP per turn.",
 				"You've chosen the 'Diehard' perk, allowing to contiue fight even when below 0 HP.");
 		public static const DisplacerMetabolism:PerkType = mk("Displacer Metabolism", "Displacer Metabolism",
 				"Allows you to gain a boost of speed after an intake of milk and double the damage of displacer beast claws attacks.",
@@ -1201,7 +1208,7 @@ public class PerkLib
 				"Negative effects of sensitivity are reduced by 15%.",
 				"You've chosen the 'Epic Desensitization' perk, decreasing negative effects of sensitivity by 15%.");
 		public static const EpicDiehard:PerkType = mk("Epic Diehard", "Epic Diehard",
-				"You can't loose by HP until reaching droping into negative health larger than 8% of max HP + 800(scalable). HP limit cumulative with other Diehard perks and when below 0 HP will not longer loose 1% of max HP per turn.",
+				"You can't loose by HP until reaching droping into negative health larger than 8% of max HP + 2400(scalable). HP limit cumulative with other Diehard perks and when below 0 HP will not longer loose 1% of max HP per turn.",
 				"You've chosen the 'Epic Diehard' perk, getting third upgrade of Diehard effect.");
 		public static const EpicEndurance:PerkType = mk("Epic Endurance", "Epic Endurance",
 				"Increases maximum fatigue by 4500.",
@@ -1234,8 +1241,8 @@ public class PerkLib
 				"",
 				"You've chosen the 'Epic Speed' perk.").withBuffs({'spe.mult':0.35});
 		public static const EpicSpirituality:PerkType = mk("Epic Spirituality", "Epic Spirituality",
-				"Increases maximum mana by 6750.",
-				"You've chosen the 'Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 6750!");
+				"Increases maximum mana by 20250.",
+				"You've chosen the 'Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 20250!");
 		public static const EpicStrength:PerkType = mk("Epic Strength", "Epic Strength",
 				"",
 				"You've chosen the 'Epic Strength' perk.").withBuffs({'str.mult':0.35});
@@ -1249,14 +1256,14 @@ public class PerkLib
 				"",
 				"You've chosen the 'Epic Wisdom' perk.").withBuffs({'wis.mult':0.35});
 		public static const EromancyBeginner:PerkType = mk("Eromancy (Beginner)", "Eromancy (Beginner)",
-				"+1 extra maximum mana for each point of intelligence and +1 extra maximum fatigue for each point of libido.",
-				"You've chosen the 'Eromancy (Beginner)' perk, granting +1 extra maximum mana for each point of intelligence and +1 extra maximum fatigue for each point of libido.");
+				"+3 extra maximum mana for each point of intelligence and +1 extra maximum fatigue for each point of libido.",
+				"You've chosen the 'Eromancy (Beginner)' perk, granting +3 extra maximum mana for each point of intelligence and +1 extra maximum fatigue for each point of libido.");
 		public static const EromancyExpert:PerkType = mk("Eromancy (Expert)", "Eromancy (Expert)",
-				"+1 extra maximum mana for each point of intelligence and +2 extra maximum fatigue for each point of libido, bonus to lust dmg dealt by m. specials similary to the one given by Arcane Lash.",
-				"You've chosen the 'Eromancy (Expert)' perk, granting +1 extra maximum mana for each point of intelligence and +2 extra maximum fatigue for each point of libido, bonus to lust dmg dealt by m. specials similary to the one given by Arcane Lash.");
+				"+3 extra maximum mana for each point of intelligence and +2 extra maximum fatigue for each point of libido, bonus to lust dmg dealt by m. specials similary to the one given by Arcane Lash.",
+				"You've chosen the 'Eromancy (Expert)' perk, granting +3 extra maximum mana for each point of intelligence and +2 extra maximum fatigue for each point of libido, bonus to lust dmg dealt by m. specials similary to the one given by Arcane Lash.");
 		public static const EromancyMaster:PerkType = mk("Eromancy (Master)", "Eromancy (Master)",
-				"+2 extra maximum mana for each point of intelligence and +2 extra maximum fatigue for each point of libido, tease exp for use of Arouse spell or m. specials dealing lust dmg.",
-				"You've chosen the 'Eromancy (Master)' perk, granting +2 extra maximum mana for each point of intelligence and +2 extra maximum fatigue for each point of libido, tease exp for use of Arouse spell or m. specials dealing lust dmg.");
+				"+6 extra maximum mana for each point of intelligence and +2 extra maximum fatigue for each point of libido, tease exp for use of Arouse spell or m. specials dealing lust dmg.",
+				"You've chosen the 'Eromancy (Master)' perk, granting +6 extra maximum mana for each point of intelligence and +2 extra maximum fatigue for each point of libido, tease exp for use of Arouse spell or m. specials dealing lust dmg.");
 		public static const Escort:PerkType = mk("Escort", "Escort",
 				"You've gotten so good you can now charge people money for having sex with you. There's many tricks you learned, increasing your tease damage by 15%.",
 				"You've chosen the 'Escort' perk, gaining +15% tease dmg.");
@@ -1451,35 +1458,35 @@ public class PerkLib
 				"You've chosen the 'Grabbing Style' perk, wich adds a chance per unarmed strike hit based on strength to chain the attack with a second strike, grabbing and slamming your foe around. Higher strengths lets you grab larger foes. This only work when fighting unarmed with no shield equiped.");
 		public static const GrandArchmage:PerkType = mk("Grand Archmage", "Grand Archmage",
 				"[if (player.inte>=125)" +
-						"Increases base spell strength by 40%, mana pool by 75 and lust bar by 60." +
+						"Increases base spell strength by 40%, mana pool by 225 and lust bar by 60." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grand Archmage' perk, increasing base spell strength by 40%, mana pool by 75 and lust bar by 60.");
+				"You've chosen the 'Grand Archmage' perk, increasing base spell strength by 40%, mana pool by 225 and lust bar by 60.");
 		public static const GrandArchmage2ndCircle:PerkType = mk("Grand Archmage (2nd Circle)", "Grand Archmage (2nd Circle)",
 				"[if (player.inte>=150)" +
-						"Increases base spell strength by 50%, mana pool by 90 and lust bar by 75." +
+						"Increases base spell strength by 50%, mana pool by 270 and lust bar by 75." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grand Archmage (2nd Circle)' perk, increasing base spell strength by 50%, mana pool by 90 and lust bar by 75.");
+				"You've chosen the 'Grand Archmage (2nd Circle)' perk, increasing base spell strength by 50%, mana pool by 270 and lust bar by 75.");
 		public static const GrandArchmage3rdCircle:PerkType = mk("Grand Archmage (3rd Circle)", "Grand Archmage (3rd Circle)",
 				"[if (player.inte>=175)" +
-						"Increases base spell strength by 60%, mana pool by 105 and lust bar by 90." +
+						"Increases base spell strength by 60%, mana pool by 315 and lust bar by 90." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grand Archmage (3rd Circle)' perk, increasing base spell strength by 60%, mana pool by 105 and lust bar by 390.");
+				"You've chosen the 'Grand Archmage (3rd Circle)' perk, increasing base spell strength by 60%, mana pool by 315 and lust bar by 390.");
 		public static const GrandBlademaster:PerkType = mk("Grand Blademaster", "Grand Blademaster",
 				"Gain +15% to critical strike chance when wielding weapon with blade (sword, dueling sword, axe) and not using a shield.",
 				"You've chosen the 'Grand Blademaster' perk.  Your chance of critical hit is increased by 15% as long as you're wielding weapon with blade like sword and not using a shield.");
 		public static const GrandMage:PerkType = mk("Grand Mage", "Grand Mage",
 				"[if (player.inte>=75)" +
-						"Increases base spell strength by 30%, base mana pool by 45 and lust bar by 30." +
+						"Increases base spell strength by 30%, base mana pool by 135 and lust bar by 30." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grand Mage' perk, increasing base spell strength by 30%, mana pool by 45 and lust bar by 30.");
+				"You've chosen the 'Grand Mage' perk, increasing base spell strength by 30%, mana pool by 135 and lust bar by 30.");
 		public static const GrandMasterGolemMaker:PerkType = mk("Grand-Master Golem Maker", "Grand-Master Golem Maker",
 				"Your proficiency in making golems allows to make golems that can attack flying enemies at small cost in mana drawn from it owner (aka PC). Also allowing to store one more in golem bag.",
 				"You've chosen the 'Grand-Master Golem Maker' perk, increasing your proficiency in making golems.");
@@ -1506,7 +1513,7 @@ public class PerkLib
 				"Negative effects of sensitivity are reduced by 10%.",
 				"You've chosen the 'Greater Desensitization' perk, decreasing negative effects of sensitivity by 10%.");
 		public static const GreaterDiehard:PerkType = mk("Greater Diehard", "Greater Diehard",
-				"You can't loose by HP until reaching droping into negative health larger than 6% of max HP + 600(scalable). HP limit cumulative with other Diehard perks.",
+				"You can't loose by HP until reaching droping into negative health larger than 6% of max HP + 1800(scalable). HP limit cumulative with other Diehard perks.",
 				"You've chosen the 'Greater Diehard' perk, getting second increase to limit of maintaining Diehard effects.");
 		public static const GreaterEvade:PerkType = mk("Greater Evade", "Greater Evade",
 				"Increases chances of evading enemy attacks. (+15% to evasion)",
@@ -1525,14 +1532,14 @@ public class PerkLib
 				"Double all gems gained.");
 		public static const GreyArchmage:PerkType = mk("Grey Archmage", "Grey Archmage",
 				"[if (player.inte>=275)" +
-						"Increases base spell strength by 100%, mana pool by 200, lust bar by 150 and regain mana 150% faster." +
+						"Increases base spell strength by 100%, mana pool by 600, lust bar by 150 and regain mana 150% faster." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grey Archmage' perk, increasing base spell strength by 100%, mana pool by 150, lust bar by 150 and boosting mana recovery by large margin.");
+				"You've chosen the 'Grey Archmage' perk, increasing base spell strength by 100%, mana pool by 600, lust bar by 150 and boosting mana recovery by large margin.");
 		public static const GreyMage:PerkType = mk("Grey Mage", "Grey Mage",
 				"[if (player.inte>=225)" +
-						"Increases base spell strength by 80%, mana pool by 150, lust bar by 120, regain it 50% faster, treshold for Black Magic is 30 lust and for White 30 lust below current max." +
+						"Increases base spell strength by 80%, mana pool by 450, lust bar by 120, regain it 50% faster, treshold for Black Magic is 30 lust and for White 30 lust below current max." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
@@ -1547,8 +1554,8 @@ public class PerkLib
 				"Increases maximum lust by 180.",
 				"You've chosen the 'Half-step-to Advanced Self-Control' perk. Thanks to your advanced mental conditioning, your maximum lust has been increased by 180!");
 		public static const HalfStepToAdvancedSpirituality:PerkType = mk("Half-step-to Advanced Spirituality", "Half-step-to Advanced Spirituality",
-				"Increases maximum mana by 180.",
-				"You've chosen the 'Half-step-to Advanced Spirituality' perk. Thanks to your advanced mystical conditioning, your maximum mana has been increased by 180!");
+				"Increases maximum mana by 540.",
+				"You've chosen the 'Half-step-to Advanced Spirituality' perk. Thanks to your advanced mystical conditioning, your maximum mana has been increased by 540!");
 		public static const HalfStepToAdvancedTranquilness:PerkType = mk("Half-step-to Advanced Tranquilness", "Half-step-to Advanced Tranquilness",
 				"Increases maximum wrath by 300.",
 				"You've chosen the 'Half-step-to Advanced Tranquilness' perk. Thanks to your advanced anger managment training, your maximum wrath has been increased by 300!");
@@ -1559,8 +1566,8 @@ public class PerkLib
 				"Increases maximum lust by 4500.",
 				"You've chosen the 'Half-step-to Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 4500!");
 		public static const HalfStepToEpicSpirituality:PerkType = mk("Half-step-to Epic Spirituality", "Half-step-to Epic Spirituality",
-				"Increases maximum mana by 4500.",
-				"You've chosen the 'Half-step-to Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 4500!");
+				"Increases maximum mana by 13500.",
+				"You've chosen the 'Half-step-to Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 13500!");
 		public static const HalfStepToEpicTranquilness:PerkType = mk("Half-step-to Epic Tranquilness", "Half-step-to Epic Tranquilness",
 				"Increases maximum wrath by 7500.",
 				"You've chosen the 'Half-step-to Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 7500!");
@@ -1571,8 +1578,8 @@ public class PerkLib
 				"Increases maximum lust by 75.",
 				"You've chosen the 'Half-step-to Improved Self-Control' perk. Thanks to your improved mental conditioning, your maximum lust has been increased by 75!");
 		public static const HalfStepToImprovedSpirituality:PerkType = mk("Half-step-to Improved Spirituality", "Half-step-to Improved Spirituality",
-				"Increases maximum mana by 75.",
-				"You've chosen the 'Half-step-to Improved Spirituality' perk. Thanks to your improved mystical conditioning, your maximum mana has been increased by 75!");
+				"Increases maximum mana by 225.",
+				"You've chosen the 'Half-step-to Improved Spirituality' perk. Thanks to your improved mystical conditioning, your maximum mana has been increased by 225!");
 		public static const HalfStepToImprovedTranquilness:PerkType = mk("Half-step-to Improved Tranquilness", "Half-step-to Improved Tranquilness",
 				"Increases maximum wrath by 125.",
 				"You've chosen the 'Half-step-to Improved Tranquilness' perk. Thanks to your improved anger managment training, your maximum wrath has been increased by 125!");
@@ -1583,8 +1590,8 @@ public class PerkLib
 				"Increases maximum lust by 2250.",
 				"You've chosen the 'Half-step-to Inhuman Self-Control' perk. Thanks to your inhuman mental conditioning, your maximum lust has been increased by 2250!");
 		public static const HalfStepToInhumanSpirituality:PerkType = mk("Half-step-to Inhuman Spirituality", "Half-step-to Inhuman Spirituality",
-				"Increases maximum mana by 2250.",
-				"You've chosen the 'Half-step-to Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 2250!");
+				"Increases maximum mana by 6750.",
+				"You've chosen the 'Half-step-to Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 6750!");
 		public static const HalfStepToInhumanTranquilness:PerkType = mk("Half-step-to Inhuman Tranquilness", "Half-step-to Inhuman Tranquilness",
 				"Increases maximum wrath by 3750.",
 				"You've chosen the 'Half-step-to Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 3750!");
@@ -1595,8 +1602,8 @@ public class PerkLib
 				"Increases maximum lust by 10500.",
 				"You've chosen the 'Half-step-to Legendary Self-Control' perk. Thanks to your legendary mental conditioning, your maximum lust has been increased by 10500!");
 		public static const HalfStepToLegendarySpirituality:PerkType = mk("Half-step-to Legendary Spirituality", "Half-step-to Legendary Spirituality",
-				"Increases maximum mana by 10500.",
-				"You've chosen the 'Half-step-to Legendary Spirituality' perk. Thanks to your legendary mystical conditioning, your maximum mana has been increased by 10500!");
+				"Increases maximum mana by 31500.",
+				"You've chosen the 'Half-step-to Legendary Spirituality' perk. Thanks to your legendary mystical conditioning, your maximum mana has been increased by 31500!");
 		public static const HalfStepToLegendaryTranquilness:PerkType = mk("Half-step-to Legendary Tranquilness", "Half-step-to Legendary Tranquilness",
 				"Increases maximum wrath by 17500.",
 				"You've chosen the 'Half-step-to Legendary Tranquilness' perk. Thanks to your legendary anger managment training, your maximum wrath has been increased by 17500!");
@@ -1607,8 +1614,8 @@ public class PerkLib
 				"Increases maximum lust by 22500.",
 				"You've chosen the 'Half-step-to Mythical Self-Control' perk. Thanks to your mythical mental conditioning, your maximum lust has been increased by 22500!");
 		public static const HalfStepToMythicalSpirituality:PerkType = mk("Half-step-to Mythical Spirituality", "Half-step-to Mythical Spirituality",
-				"Increases maximum mana by 22500.",
-				"You've chosen the 'Half-step-to Mythical Spirituality' perk. Thanks to your mythical mystical conditioning, your maximum mana has been increased by 22500!");
+				"Increases maximum mana by 67500.",
+				"You've chosen the 'Half-step-to Mythical Spirituality' perk. Thanks to your mythical mystical conditioning, your maximum mana has been increased by 67500!");
 		public static const HalfStepToMythicalTranquilness:PerkType = mk("Half-step-to Mythical Tranquilness", "Half-step-to Mythical Tranquilness",
 				"Increases maximum wrath by 37500.",
 				"You've chosen the 'Half-step-to Mythical Tranquilness' perk. Thanks to your mythical anger managment training, your maximum wrath has been increased by 37500!");
@@ -1619,8 +1626,8 @@ public class PerkLib
 				"Increases maximum lust by 1050.",
 				"You've chosen the 'Half-step-to Peerless Self-Control' perk. Thanks to your peerless mental conditioning, your maximum lust has been increased by 1050!");
 		public static const HalfStepToPeerlessSpirituality:PerkType = mk("Half-step-to Peerless Spirituality", "Half-step-to Peerless Spirituality",
-				"Increases maximum mana by 1050.",
-				"You've chosen the 'Half-step-to Peerless Spirituality' perk. Thanks to your peerless mystical conditioning, your maximum mana has been increased by 1050!");
+				"Increases maximum mana by 3150.",
+				"You've chosen the 'Half-step-to Peerless Spirituality' perk. Thanks to your peerless mystical conditioning, your maximum mana has been increased by 3150!");
 		public static const HalfStepToPeerlessTranquilness:PerkType = mk("Half-step-to Peerless Tranquilness", "Half-step-to Peerless Tranquilness",
 				"Increases maximum wrath by 1750.",
 				"You've chosen the 'Half-step-to Peerless Tranquilness' perk. Thanks to your peerless anger managment training, your maximum wrath has been increased by 1750!");
@@ -1631,8 +1638,8 @@ public class PerkLib
 				"Increases maximum lust by 480.",
 				"You've chosen the 'Half-step-to Superior Self-Control' perk. Thanks to your superior mental conditioning, your maximum lust has been increased by 480!");
 		public static const HalfStepToSuperiorSpirituality:PerkType = mk("Half-step-to Superior Spirituality", "Half-step-to Superior Spirituality",
-				"Increases maximum mana by 480.",
-				"You've chosen the 'Half-step-to Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 480!");
+				"Increases maximum mana by 1440.",
+				"You've chosen the 'Half-step-to Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 1440!");
 		public static const HalfStepToSuperiorTranquilness:PerkType = mk("Half-step-to Superior Tranquilness", "Half-step-to Superior Tranquilness",
 				"Increases maximum wrath by 800.",
 				"You've chosen the 'Half-step-to Superior Tranquilness' perk. Thanks to your superior anger managment training, your maximum wrath has been increased by 800!");
@@ -1719,7 +1726,7 @@ public class PerkLib
 				"Crinos Shape increase to physical might rise to 40% of core str/tou/spe.",
 				"You've chosen the 'Improved Crinos Shape' perk, increasing boost recived by using Crinos Shape (+40%).");
 		public static const ImprovedDiehard:PerkType = mk("Improved Diehard", "Improved Diehard",
-				"You can't loose by HP until reaching droping into negative health larger than 4% of max HP + 400(scalable). HP limit cumulative with other Diehard perks.",
+				"You can't loose by HP until reaching droping into negative health larger than 4% of max HP + 1200(scalable). HP limit cumulative with other Diehard perks.",
 				"You've chosen the 'Improved Diehard' perk, increasing limit on how long you can fight.");
 		public static const ImprovedEndurance:PerkType = mk("Improved Endurance", "Improved Endurance",
 				"Increases maximum fatigue by 80.",
@@ -1734,8 +1741,8 @@ public class PerkLib
 				"Increases maximum lust by 120.",
 				"You've chosen the 'Improved Self-Control' perk. Thanks to your improved mental conditioning, your maximum lust has been increased by 120!");
 		public static const ImprovedSpirituality:PerkType = mk("Improved Spirituality", "Improved Spirituality",
-				"Increases maximum mana by 120.",
-				"You've chosen the 'Improved Spirituality' perk. Thanks to your improved mystical conditioning, your maximum mana has been increased by 120!");
+				"Increases maximum mana by 360.",
+				"You've chosen the 'Improved Spirituality' perk. Thanks to your improved mystical conditioning, your maximum mana has been increased by 360!");
 		public static const ImprovedTranquilness:PerkType = mk("Improved Tranquilness", "Improved Tranquilness",
 				"Increases maximum wrath by 200.",
 				"You've chosen the 'Improved Tranquilness' perk. Thanks to your improved anger managment training, your maximum wrath has been increased by 200!");
@@ -1776,8 +1783,8 @@ public class PerkLib
 				"Increases maximum lust by 3000.",
 				"You've chosen the 'Inhuman Self-Control' perk. Thanks to your inhuman mental conditioning, your maximum lust has been increased by 3000!");
 		public static const InhumanSpirituality:PerkType = mk("Inhuman Spirituality", "Inhuman Spirituality",
-				"Increases maximum mana by 3000.",
-				"You've chosen the 'Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 3000!");
+				"Increases maximum mana by 9000.",
+				"You've chosen the 'Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 9000!");
 		public static const InhumanTranquilness:PerkType = mk("Inhuman Tranquilness", "Inhuman Tranquilness",
 				"Increases maximum wrath by 5000.",
 				"You've chosen the 'Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 5000!");
@@ -1977,8 +1984,8 @@ public class PerkLib
 				"",
 				"You've chosen the 'Legendary Speed' perk.").withBuffs({'spe.mult':0.50});
 		public static const LegendarySpirituality:PerkType = mk("Legendary Spirituality", "Legendary Spirituality",
-				"Increases maximum mana by 15000.",
-				"You've chosen the 'Legendary Spirituality' perk. Thanks to your legendary mystical conditioning, your maximum mana has been increased by 15000!");
+				"Increases maximum mana by 45000.",
+				"You've chosen the 'Legendary Spirituality' perk. Thanks to your legendary mystical conditioning, your maximum mana has been increased by 45000!");
 		public static const LegendaryStrength:PerkType = mk("Legendary Strength", "Legendary Strength",
 				"",
 				"You've chosen the 'Legendary Strength' perk.").withBuffs({'str.mult':0.50});
@@ -2076,11 +2083,11 @@ public class PerkLib
 				"You've chosen the 'Lying Down' perk, gaining +20% fatigue recovery rate.");
 		public static const Mage:PerkType = mk("Mage", "Mage",
 				"[if (player.inte>=50)" +
-						"Increases base spell strength by 10%, mana pool by 30 and lust bar by 15." +
+						"Increases base spell strength by 10%, mana pool by 90 and lust bar by 15." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Mage' perk.  You are able to focus your magical abilities even more keenly, boosting your base spell effects by 10%, mana pool by 30 and lust bar by 15.");
+				"You've chosen the 'Mage' perk.  You are able to focus your magical abilities even more keenly, boosting your base spell effects by 10%, mana pool by 90 and lust bar by 15.");
 		public static const MagicMetabolism:PerkType = mk("Magic Metabolism", "Magic Metabolism",
 				"When your hunger level go down below 50, you start loosing mana (5:1 ratio for mana:hunger decay) instead of hunger when it should happen. If your mana is empty, hunger works as usual.",
 				"You've chosen the 'Magic Metabolism' perk. If PC have enough mana can use it as way to keep hunger around 50 pts.");
@@ -2095,23 +2102,23 @@ public class PerkLib
 				"Increased damage when using specials like Whirlwind/Whipping with dual weapons rather than single weapons.",
 				"You've chosen the 'Make it Double' perk, allowing to make full use of dual weapons when using moves like whirlwind or whipping.");
 		public static const ManaAffinityI:PerkType = mk("Mana Affinity I", "Mana Affinity I",
-				"Raises max mana by 35 and regain it 20% faster.",
-				"You've chosen the 'Mana Affinity I' perk, giving you an additional 35 mana and boosting it recovery rate.");
+				"Raises max mana by 3% of base value and regain it 25% faster.",
+				"You've chosen the 'Mana Affinity I' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
 		public static const ManaAffinityII:PerkType = mk("Mana Affinity II", "Mana Affinity II",
-				"Raises max mana by 35 and regain it 20% faster.",
-				"You've chosen the 'Mana Affinity II' perk, giving you an additional 35 mana and boosting it recovery rate.");
+				"Raises max mana by 3% of base value and regain it 25% faster.",
+				"You've chosen the 'Mana Affinity II' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
 		public static const ManaAffinityIII:PerkType = mk("Mana Affinity III", "Mana Affinity III",
-				"Raises max mana by 35 and regain it 20% faster.",
-				"You've chosen the 'Mana Affinity III' perk, giving you an additional 35 mana and boosting it recovery rate.");
+				"Raises max mana by 3% of base value and regain it 25% faster.",
+				"You've chosen the 'Mana Affinity III' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
 		public static const ManaAffinityIV:PerkType = mk("Mana Affinity IV", "Mana Affinity IV",
-				"Raises max mana by 35 and regain it 20% faster.",
-				"You've chosen the 'Mana Affinity IV' perk, giving you an additional 35 mana and boosting it recovery rate.");
+				"Raises max mana by 3% of base value and regain it 25% faster.",
+				"You've chosen the 'Mana Affinity IV' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
 		public static const ManaAffinityV:PerkType = mk("Mana Affinity V", "Mana Affinity V",
-				"Raises max mana by 35 and regain it 20% faster.",
-				"You've chosen the 'Mana Affinity V' perk, giving you an additional 35 mana and boosting it recovery rate.");
+				"Raises max mana by 3% of base value and regain it 25% faster.",
+				"You've chosen the 'Mana Affinity V' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
 		public static const ManaAffinityVI:PerkType = mk("Mana Affinity VI", "Mana Affinity VI",
-				"Raises max mana by 35 and regain it 20% faster.",
-				"You've chosen the 'Mana Affinity VI' perk, giving you an additional 35 mana and boosting it recovery rate.");
+				"Raises max mana by 3% of base value and regain it 25% faster.",
+				"You've chosen the 'Mana Affinity VI' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
 		public static const ManticoreMetabolism:PerkType = mk("Manticore Metabolism", "Manticore Metabolism",
 				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow atack with many tail spikes at once.",
 				"You've chosen the 'Manticore Metabolism' perk, allows you to gain a boost of speed after an intake of cum and allow atack with many tail spikes at once.");
@@ -2182,23 +2189,23 @@ public class PerkLib
 				"Careful now, you're becoming too much like a weapon. You're mindset has become that of a weapon, allowing you to connect with your melee weapon to deal even more damage. (+10% melee phys dmg)",
 				"You've chosen the 'Mind of Steel' perk, gaining +10% melee phys dmg.");
 		public static const MindOverBodyI:PerkType = mk("Mind over Body I", "Mind over Body I",
-				"+2 extra mana per point of intelligence.",
-				"You've chosen the 'Mind over Body I' perk, granting +2 extra maximum mana for each point of intelligence.");
+				"+6 extra mana per point of intelligence.",
+				"You've chosen the 'Mind over Body I' perk, granting +6 extra maximum mana for each point of intelligence.");
 		public static const MindOverBodyII:PerkType = mk("Mind over Body II", "Mind over Body II",
-				"+2 extra mana per point of intelligence.",
-				"You've chosen the 'Mind over Body II' perk, granting +2 extra maximum mana for each point of intelligence.");
+				"+6 extra mana per point of intelligence.",
+				"You've chosen the 'Mind over Body II' perk, granting +6 extra maximum mana for each point of intelligence.");
 		public static const MindOverBodyIII:PerkType = mk("Mind over Body III", "Mind over Body III",
-				"+2 extra mana per point of intelligence.",
-				"You've chosen the 'Mind over Body III' perk, granting +2 extra maximum mana for each point of intelligence.");
+				"+6 extra mana per point of intelligence.",
+				"You've chosen the 'Mind over Body III' perk, granting +6 extra maximum mana for each point of intelligence.");
 		public static const MindOverBodyIV:PerkType = mk("Mind over Body IV", "Mind over Body IV",
-				"+2 extra mana per point of intelligence.",
-				"You've chosen the 'Mind over Body IV' perk, granting +2 extra maximum mana for each point of intelligence.");
+				"+6 extra mana per point of intelligence.",
+				"You've chosen the 'Mind over Body IV' perk, granting +6 extra maximum mana for each point of intelligence.");
 		public static const MindOverBodyV:PerkType = mk("Mind over Body V", "Mind over Body V",
-				"+2 extra mana per point of intelligence.",
-				"You've chosen the 'Mind over Body V' perk, granting +2 extra maximum mana for each point of intelligence.");
+				"+6 extra mana per point of intelligence.",
+				"You've chosen the 'Mind over Body V' perk, granting +6 extra maximum mana for each point of intelligence.");
 		public static const MindOverBodyVI:PerkType = mk("Mind over Body VI", "Mind over Body VI",
-				"+2 extra mana per point of intelligence.",
-				"You've chosen the 'Mind over Body VI' perk, granting +2 extra maximum mana for each point of intelligence.");
+				"+6 extra mana per point of intelligence.",
+				"You've chosen the 'Mind over Body VI' perk, granting +6 extra maximum mana for each point of intelligence.");
 		public static const MinotaurTesticles:PerkType = mk("Minotaur Testicles", "Minotaur Testicles",
 				"Allow keep Cum Cannon special even if minotaur score is lower than 9. Additionaly your max Lust increase by 10.",
 				"You've chosen the 'Minotaur Testicles' perk. Interaction between permanent body alteration from Bro Brew (maybe Bimbo Liquer too) and your minotaur nature allows you to keep minotaur racial special even if you stop been bull-like.");
@@ -2260,8 +2267,8 @@ public class PerkLib
 				"",
 				"You've chosen the 'Mythical Speed' perk.").withBuffs({'spe.mult':0.65});
 		public static const MythicalSpirituality:PerkType = mk("Mythical Spirituality", "Mythical Spirituality",
-				"Increases maximum mana by 30000.",
-				"You've chosen the 'Mythical Spirituality' perk. Thanks to your mythical mystical conditioning, your maximum mana has been increased by 30000!");
+				"Increases maximum mana by 90000.",
+				"You've chosen the 'Mythical Spirituality' perk. Thanks to your mythical mystical conditioning, your maximum mana has been increased by 90000!");
 		public static const MythicalStrength:PerkType = mk("Mythical Strength", "Mythical Strength",
 				"",
 				"You've chosen the 'Mythical Strength' perk.").withBuffs({'str.mult':0.65});
@@ -2402,8 +2409,8 @@ public class PerkLib
 				"Increases maximum lust by 1500.",
 				"You've chosen the 'Peerless Self-Control' perk. Thanks to your peerless mental conditioning, your maximum lust has been increased by 1500!</b>");
 		public static const PeerlessSpirituality:PerkType = mk("Peerless Spirituality", "Peerless Spirituality",
-				"Increases maximum mana by 1500.",
-				"You've chosen the 'Peerless Spirituality' perk. Thanks to your peerless mystical conditioning, your maximum mana has been increased by 1500!</b>");
+				"Increases maximum mana by 4500.",
+				"You've chosen the 'Peerless Spirituality' perk. Thanks to your peerless mystical conditioning, your maximum mana has been increased by 4500!</b>");
 		public static const PeerlessTranquilness:PerkType = mk("Peerless Tranquilness", "Peerless Tranquilness",
 				"Increases maximum wrath by 2500.",
 				"You've chosen the 'Peerless Tranquilness' perk. Thanks to your peerless anger managment training, your maximum mana has been increased by 2500!</b>");
@@ -2789,18 +2796,18 @@ public class PerkLib
 				"You've chosen the 'Spellarmor' perk. You start every battle with Charge Armor effect, as long as your Lust is not preventing you from casting it before battle.");
 		public static const Spellpower:PerkType = mk("Spellpower", "Spellpower",
 				"[if (player.inte>=50)" +
-						"Increases base spell strength by 10% and mana pool by 15." +
+						"Increases base spell strength by 10% and mana pool by 45." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Spellpower' perk.  Thanks to your sizeable intellect and willpower, you are able to more effectively use magic, boosting base spell effects by 10% and mana pool by 15.");
+				"You've chosen the 'Spellpower' perk.  Thanks to your sizeable intellect and willpower, you are able to more effectively use magic, boosting base spell effects by 10% and mana pool by 45.");
 		public static const SpellpowerHealing:PerkType = mk("Spellpower: Healing", "Spellpower: Healing",
 				"[if (player.wis>=50)" +
-						"Increases base spell strength by 20% and mana pool by 30." +
+						"Increases base spell strength by 20% and mana pool by 90." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Spellpower: Healing' perk.  Thanks to your sizeable intellect and willpower, you are able to more effectively use magic, boosting base healing spell effects by 20% and mana pool by 30.");
+				"You've chosen the 'Spellpower: Healing' perk.  Thanks to your sizeable intellect and willpower, you are able to more effectively use magic, boosting base healing spell effects by 20% and mana pool by 90.");
 		public static const Spellsword:PerkType = mk("Spellsword", "Spellsword",
 				"Start every battle with Charge Weapon enabled, if you meet White Magic requirements before it starts.",
 				"You've chosen the 'Spellsword' perk. You start every battle with Charge Weapon effect, as long as your Lust is not preventing you from casting it before battle.");
@@ -2860,8 +2867,8 @@ public class PerkLib
 				"Increases maximum lust by 750.",
 				"You've chosen the 'Superior Self-Control' perk. Thanks to your superior mental conditioning, your maximum lust has been increased by 750!</b>");
 		public static const SuperiorSpirituality:PerkType = mk("Superior Spirituality", "Superior Spirituality",
-				"Increases maximum mana by 750.",
-				"You've chosen the 'Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 750!</b>");
+				"Increases maximum mana by 2250.",
+				"You've chosen the 'Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 2250!</b>");
 		public static const SuperiorTranquilness:PerkType = mk("Superior Tranquilness", "Superior Tranquilness",
 				"Increases maximum wrath by 1250.",
 				"You've chosen the 'Superior Tranquilness' perk. Thanks to your superior anger managment training, your maximum wrath has been increased by 1250!</b>");
@@ -4658,13 +4665,13 @@ public class PerkLib
             Spellpower.requirePerk(JobSorcerer)
                     .requireInt(50);
             UnlockForce.requireInt(20);
-            ManaAffinityI.requireAnyPerk(JobSorcerer, JobHealer)
+            MindOverBodyI.requireAnyPerk(JobSorcerer, JobHealer)
                     .requireInt(25);
-            ManaAffinityII.requirePerk(ManaAffinityI)
+            MindOverBodyII.requirePerk(MindOverBodyI)
                     .requireInt(45)
                     .requireLevel(2)
                     .requireNGPlus(1);
-            ManaAffinityIII.requirePerk(ManaAffinityII)
+            MindOverBodyIII.requirePerk(MindOverBodyII)
                     .requireInt(65)
                     .requireLevel(4)
                     .requireNGPlus(2);
@@ -4687,26 +4694,26 @@ public class PerkLib
             StaffChanneling.requirePerk(Channeling)
                     .requireInt(60)
                     .requireLevel(6);
-            ManaAffinityIV.requirePerk(ManaAffinityIII)
+            MindOverBodyIV.requirePerk(MindOverBodyIII)
                     .requireInt(85)
                     .requireNGPlus(3)
                     .requireLevel(6);
-            ManaAffinityV.requirePerk(ManaAffinityIV)
+            MindOverBodyV.requirePerk(MindOverBodyIV)
                     .requireInt(105)
                     .requireLevel(8)
                     .requireNGPlus(4);
-            ManaAffinityVI.requirePerk(ManaAffinityV)
+            MindOverBodyVI.requirePerk(MindOverBodyV)
                     .requireInt(125)
                     .requireLevel(10)
                     .requireNGPlus(5);
-            MindOverBodyI.requirePerk(ManaAffinityI)
+            ManaAffinityI.requirePerk(MindOverBodyI)
                     .requireInt(50)
 					.requireLevel(6);
-            MindOverBodyII.requirePerk(MindOverBodyI)
+            ManaAffinityII.requirePerk(ManaAffinityI)
                     .requireInt(70)
                     .requireLevel(8)
                     .requireNGPlus(1);
-            MindOverBodyIII.requirePerk(MindOverBodyII)
+            ManaAffinityIII.requirePerk(ManaAffinityII)
                     .requireInt(90)
                     .requireLevel(10)
                     .requireNGPlus(2);
@@ -4785,15 +4792,15 @@ public class PerkLib
                     .requirePerk(Channeling)
                     .requireInt(80)
                     .requireStatusEffect(StatusEffects.KnowsCharge, "Charge spell");
-            MindOverBodyIV.requirePerk(MindOverBodyIII)
+            ManaAffinityIV.requirePerk(ManaAffinityIII)
                     .requireInt(110)
                     .requireNGPlus(3)
                     .requireLevel(12);
-            MindOverBodyV.requirePerk(MindOverBodyIV)
+            ManaAffinityV.requirePerk(ManaAffinityIV)
                     .requireInt(130)
                     .requireLevel(14)
                     .requireNGPlus(4);
-            MindOverBodyVI.requirePerk(MindOverBodyV)
+            ManaAffinityVI.requirePerk(ManaAffinityV)
                     .requireInt(150)
                     .requireLevel(16)
                     .requireNGPlus(5);
@@ -4906,6 +4913,10 @@ public class PerkLib
                     .requireNGPlus(5);
             EverLastingBuffs.requirePerk(JobEnchanter)
                     .requireInt(160)
+                    .requireLevel(30);
+            ArcaneRegenerationMythical.requirePerk(GrandArchmage2ndCircle)
+                    .requirePerk(ArcaneRegenerationLegendary)
+                    .requireInt(150)
                     .requireLevel(30);
             RagingInfernoEx.requirePerk(GrandArchmage)
                     .requirePerk(RagingInferno)
@@ -7117,3 +7128,4 @@ public class PerkLib
 	initDependencies();
 }
 }
+

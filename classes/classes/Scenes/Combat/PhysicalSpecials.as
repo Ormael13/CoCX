@@ -5104,10 +5104,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Reduce damage
 		damage *= monster.damagePercent() / 100;
 		//(None yet!)
-		if (damage > 0) {
-			doDamage(damage);
-			if (player.hasPerk(PerkLib.PhantomStrike)) doDamage(damage);
-		}
+		damage = Math.round(damage);
 		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		//BLOCKED
 		if (damage <= 0) {
@@ -5120,10 +5117,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//LAND A HIT!
 		else {
 			outputText(monster.capitalA + monster.short);
-			if(!monster.plural) outputText(" reels from the damaging impact! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-			else outputText(" reel from the damaging impact! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			if(!monster.plural) outputText(" reels from the damaging impact! ");
+			else outputText(" reel from the damaging impact! ");
+			doDamage(damage, true);
 			if (player.hasPerk(PerkLib.PhantomStrike)) {
-				outputText(" (<b><font color=\"#800000\">" + damage + "</font></b>)");
+				outputText(" ");
+				doDamage(damage, true);
 				damage *= 2;
 			}
 		}
