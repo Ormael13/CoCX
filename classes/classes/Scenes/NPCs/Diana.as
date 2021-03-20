@@ -574,7 +574,7 @@ package classes.Scenes.NPCs
 					add(consumables.BAGOCA2,1/5).
 					add(consumables.UNICORN,1/2);
 			}
-			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && flags[kFLAGS.DIANA_LVL_UP] < 17 && (flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] >= 6)) {
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && flags[kFLAGS.DIANA_LVL_UP] < 17 && (flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] > 4)) {
 				this.a = "";
 				this.short = "Diana";
 				this.imageName = "diana";
@@ -586,7 +586,7 @@ package classes.Scenes.NPCs
 				this.butt.type = Butt.RATING_JIGGLY+1;
 				this.hairLength = 26;
 			}
-			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && flags[kFLAGS.DIANA_LVL_UP] < 12 && (flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] >= 6)) {
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && flags[kFLAGS.DIANA_LVL_UP] < 12 && (flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] > 4)) {
 				this.gems = rand(6) + 14;
 				this.drop = new ChainedDrop().
 					add(weapons.W_STAFF,1/10).

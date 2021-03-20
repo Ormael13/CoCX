@@ -119,12 +119,17 @@ package classes.Scenes
 			outputText("-All perk effects that increase max Lust and level up increase to max Lust increased 3 times.\n");
 			outputText("-Changed and fixed submitted by Liadri.\n");
 			outputText("-Changed and fixed submitted by Jtexc.\n");
-			outputText("-First 3 perks in Hidden Job: Blood Demon tree have increased bonus to HP based on current Tou form 5x to 10x.\n");
+			outputText("-First 3 perks in Hidden Job: Blood Demon tree have increased bonus to HP based on current Tou from 5x to 10x.\n");
 			outputText("-Power Attack and Power Strike wrath costs due to more options to generate wrath during combat have costs doubled.\n");
 			outputText("-Diehard perks flat part of effect is 3x more effective (first perk instead of (2%+200) HP is (2%+600) HP).\n");
 			outputText("-Siegweird got sprite added.\n");
 			outputText("-All perks that increasing mana cap are 3 times more effective. Starting mana is increased from 200 to 300.\n");
 			outputText("-Mind over Body and Mana Affinity perks was switched meaning first will be accesable Mind over Body and it would be req. to unlock Mana Affinity perk. Also Mana Affinity perks effect was changed from giving 35 Mana and 20% boost to mana regeneration to 3% of base mana and 25% boost to mana regeneration.\n");
+			outputText("-Arcane Regeneration perks descriptions are written more clearly + their % bonus to max mana was half-ed.\n");
+			outputText("-New tier 5 intelligence lvl-up perk: Arcane Regeneration (Mythical). Req. Grand Archmage (2nd Circle), Arcane Regeneration (Legendary) perks and 150+ int Effect: Increase max mana by 25% and recovery rate by 50.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -134,8 +139,8 @@ package classes.Scenes
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed bugs: Dual wield firearms mastery granted when using any firearms, imp food affecting PC with tf immunity, multiple 3rd Zenji perk from training with him, some aoe attacks not avialable for underwater pack of sharks, dual small weapons not blocking ability to put on shield, Swift casting not checking for having free hand (non shield item in sheild slot), one of req. for Prestige Job: Spell Knight, ");
 			outputText("Flames of Love and Icicles of Love not dealing increased dmg to group enemies, beautiful items aside sword and excalibur not been dropped with high corruption, beautiful sword / excalibur not been working properly with multiattack settings, centipeded tf small correction, added missing cooldown countdown for Flames/Icicles of Love and Punishing Kick soulskills, missing Ebon Labyrinth bosses in rooms ");
-			outputText("200 / 250 / 300, succubus special no longer affecting lust immune enemies, no reseting on 2nd to 4th ring in case PC had any equipped, shield perks working with all shields not only those that allows use of shield bash, EL questolog reward after 50th room wrong unlock req., many smol fixes and typos corrected\n");/*ostatni punkt changelogu
-			outputText("-\n");
+			outputText("200 / 250 / 300, succubus special no longer affecting lust immune enemies, no reseting on 2nd to 4th ring in case PC had any equipped, shield perks working with all shields not only those that allows use of shield bash, EL questolog reward after 50th room wrong unlock req., Diana post-rejection offer combat stats errors, many smol fixes and typos corrected\n");/*ostatni punkt changelogu
+			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -204,9 +209,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -222,7 +225,6 @@ package classes.Scenes
 			outputText("\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
 			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
 			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
 			outputText("\n");
@@ -241,8 +243,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -2277,7 +2277,7 @@ package classes.Scenes
 			outputText("-New tier 2 intelligence lvl-up perk: Arcane Regeneration (Major). Req. Archmage, Arcane Regeneration (Minor) perks and 75+ int. Effect: Increase max mana by 10% and recovery rate by 10\n");
 			outputText("-New tier 2 intelligence lvl-up perk: Improved Spirituality. Req. Half-step-to Improved Spirituality perk, 90+ int and 60+ wis. Effect: Increase max mana by 120\n");
 			outputText("-New tier 3 intelligence lvl-up perk: Half-step-to Advanced Spirituality. Req. Improved Spirituality perk, 120+ int and 80+ wis. Effect: Increase max mana by 180\n");
-			outputText("-New tier 3 intelligence lvl-up perk: Arcane Regeneration (Epic). Req.  Effect: Increase max mana by 10% and recovery rate by 15\n");
+			outputText("-New tier 3 intelligence lvl-up perk: Arcane Regeneration (Epic). Req. Archmage, Arcane Regeneration (Major) perks and 100+ int. Effect: Increase max mana by 10% and recovery rate by 15\n");
 			outputText("-New tier 3 misc lvl-up perk: Improving Nature's Blueprints (Natural Armor). Req. Improved Crinos Shape perk, 65+ str, 65+ tou and 65+ spe. Effect: Allow use Charge Armor when PC is naked but have any type of full body natural armor (fur, scales, chitin) and increase by 10% armor when using Crinos Shape\n");
 			outputText("-New tier 3 misc lvl-up perk: Make It Double. Req. Job: Warlord perk, 50+ str, 50+ tou. Effect: when using specials Whirlwind or Whipping with dual type weapons damage is doubled\n");
 			outputText("-New tier 3 misc lvl-up perk: Chimerical Body: Advanced Stage. Req. Chimerical Body: Basic Stage perk and 6+ points in Internal Chimerical Disposition score. Effect: delay by another 4 points appearing effect of negative HP regeneration (instead at 6+ pts it will start from 10+ pts), add one point to racial score of races PC have racial perk already (like draconic lungs) and +10 to max Str/Tou/Spe (scalable)\n");
@@ -2310,7 +2310,7 @@ package classes.Scenes
 			outputText("-New tier 4 wisdom lvl-up perk: Elemental Contract Rank 5. Req. perk Elemental Contract Rank 4 and 125+ wis. Effect: Increase limit of summoned elementals by 1 and unlock rank-up for elementals to rank 5\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Stronger Elemental Bond. Req. Elemental Contract Rank 5, Strong Elemental Bond perks and 125+ wis. Effect: Lower by 30 needed mana to sustain active elemental in combat\n");
 			outputText("-New tier 4 intelligence lvl-up perk (multi-rank): Long(er) Lasting Buffs I-VI. Req. for rank 1: lvl 24+, 120+ int, perk Job: Enchanter. Effect: Increase buff spells duration by 1 turn.\n");
-			outputText("-New tier 4 intelligence lvl-up perk: Arcane Regeneration (Legendary). Req.  Effect: Increase max mana by 10% and recovery rate by 20\n");
+			outputText("-New tier 4 intelligence lvl-up perk: Arcane Regeneration (Legendary). Req. Grand Archmage, Arcane Regeneration (Epic) perks and 125+ int Effect: Increase max mana by 10% and recovery rate by 20\n");
 			outputText("-New tier 4 intelligence lvl-up perk: Advanced Spirituality. Req. Half-step-to Advanced Spirituality perk, 150+ int and 100+ wis. Effect: Increase max mana by 300\n");
 			outputText("-New tier 5 intelligence lvl-up perk: Half-step-to Superior Spirituality. Req. Advanced Spirituality perk, 180+ int and 120+ wis. Effect: Increase max mana by 480\n");
 			outputText("-New tier 5 intelligence lvl-up perk: (Ever)Lasting Buffs. Req. Job: Enchanter perk and 160+ int. Effect: Increase buffs duration by 5 turns and doubles cast costs\n");

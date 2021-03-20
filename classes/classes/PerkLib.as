@@ -524,32 +524,39 @@ public class PerkLib
 				"You've chosen the 'Arcane Pool VI' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.");
 		public static const ArcaneRegenerationEpic:PerkType = mk("Arcane Regeneration (Epic)", "Arcane Regeneration (Epic)",
 				"[if (player.inte>=100)" +
-						"Increase by 150% base mana recovery and 30% max mana." +
+						"Increase by 30 base mana recovery and 15% max mana." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
 				"You've chosen the 'Arcane Regeneration (Epic)' perk, increasing mana recovery and mana pool.");
 		public static const ArcaneRegenerationLegendary:PerkType = mk("Arcane Regeneration (Legendary)", "Arcane Regeneration (Legendary)",
 				"[if (player.inte>=125)" +
-						"Increase by 200% base mana recovery and 40% max mana." +
+						"Increase by 40 base mana recovery and 20% max mana." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
 				"You've chosen the 'Arcane Regeneration (Legendary)' perk, increasing mana recovery and mana pool.");
 		public static const ArcaneRegenerationMajor:PerkType = mk("Arcane Regeneration (Major)", "Arcane Regeneration (Major)",
 				"[if (player.inte>=75)" +
-						"Increase by 100% base mana recovery and 20% max mana." +
+						"Increase by 20 base mana recovery and 10% max mana." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
 				"You've chosen the 'Arcane Regeneration (Major)' perk, increasing mana recovery and mana pool.");
 		public static const ArcaneRegenerationMinor:PerkType = mk("Arcane Regeneration (Minor)", "Arcane Regeneration (Minor)",
 				"[if (player.inte>=50)" +
-						"Increase by 50% base mana recovery and 10% max mana." +
+						"Increase by 10 base mana recovery and 5% max mana." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
 				"You've chosen the 'Arcane Regeneration (Minor)' perk, increasing mana recovery and mana pool.");
+		public static const ArcaneRegenerationMythical:PerkType = mk("Arcane Regeneration (Mythical)", "Arcane Regeneration (Mythical)",
+				"[if (player.inte>=150)" +
+						"Increase by 50 base mana recovery and 25% max mana." +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
+				"You've chosen the 'Arcane Regeneration (Mythical)' perk, increasing mana recovery and mana pool.");
 		public static const ArchersStaminaI:PerkType = mk("Archer's Stamina I", "Archer's Stamina I",
 				"+1 extra fatigue per point of speed.",
 				"You've chosen the 'Archer's Stamina I' perk, granting +1 extra maximum fatigue for each point of speed.");
@@ -2095,22 +2102,22 @@ public class PerkLib
 				"Increased damage when using specials like Whirlwind/Whipping with dual weapons rather than single weapons.",
 				"You've chosen the 'Make it Double' perk, allowing to make full use of dual weapons when using moves like whirlwind or whipping.");
 		public static const ManaAffinityI:PerkType = mk("Mana Affinity I", "Mana Affinity I",
-				"Raises max mana by 3% of base value and regain it 20% faster.",
+				"Raises max mana by 3% of base value and regain it 25% faster.",
 				"You've chosen the 'Mana Affinity I' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
 		public static const ManaAffinityII:PerkType = mk("Mana Affinity II", "Mana Affinity II",
-				"Raises max mana by 3% of base value and regain it 20% faster.",
+				"Raises max mana by 3% of base value and regain it 25% faster.",
 				"You've chosen the 'Mana Affinity II' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
 		public static const ManaAffinityIII:PerkType = mk("Mana Affinity III", "Mana Affinity III",
-				"Raises max mana by 3% of base value and regain it 20% faster.",
+				"Raises max mana by 3% of base value and regain it 25% faster.",
 				"You've chosen the 'Mana Affinity III' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
 		public static const ManaAffinityIV:PerkType = mk("Mana Affinity IV", "Mana Affinity IV",
-				"Raises max mana by 3% of base value and regain it 20% faster.",
+				"Raises max mana by 3% of base value and regain it 25% faster.",
 				"You've chosen the 'Mana Affinity IV' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
 		public static const ManaAffinityV:PerkType = mk("Mana Affinity V", "Mana Affinity V",
-				"Raises max mana by 3% of base value and regain it 20% faster.",
+				"Raises max mana by 3% of base value and regain it 25% faster.",
 				"You've chosen the 'Mana Affinity V' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
 		public static const ManaAffinityVI:PerkType = mk("Mana Affinity VI", "Mana Affinity VI",
-				"Raises max mana by 3% of base value and regain it 20% faster.",
+				"Raises max mana by 3% of base value and regain it 25% faster.",
 				"You've chosen the 'Mana Affinity VI' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
 		public static const ManticoreMetabolism:PerkType = mk("Manticore Metabolism", "Manticore Metabolism",
 				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow atack with many tail spikes at once.",
@@ -4906,6 +4913,10 @@ public class PerkLib
                     .requireNGPlus(5);
             EverLastingBuffs.requirePerk(JobEnchanter)
                     .requireInt(160)
+                    .requireLevel(30);
+            ArcaneRegenerationMythical.requirePerk(GrandArchmage2ndCircle)
+                    .requirePerk(ArcaneRegenerationLegendary)
+                    .requireInt(150)
                     .requireLevel(30);
             RagingInfernoEx.requirePerk(GrandArchmage)
                     .requirePerk(RagingInferno)

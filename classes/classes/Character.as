@@ -1094,10 +1094,11 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.President) >= 0) multimax += 0.1;
 			if (findPerk(PerkLib.Nerd) >= 0) multimax += 0.1;
 			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0 && inte >= 50) {
-				multimax += 0.1;
-				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0 && inte >= 75) multimax += 0.2;
-				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0 && inte >= 100) multimax += 0.3;
-				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0 && inte >= 125) multimax += 0.4;
+				multimax += 0.05;
+				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0 && inte >= 75) multimax += 0.1;
+				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0 && inte >= 100) multimax += 0.15;
+				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0 && inte >= 125) multimax += 0.2;
+				if (findPerk(PerkLib.ArcaneRegenerationMythical) >= 0 && inte >= 150) multimax += 0.25;
 			}
 			if (findPerk(PerkLib.ManaAffinityI) >= 0) multimax += 0.03;
 			if (findPerk(PerkLib.ManaAffinityII) >= 0) multimax += 0.03;
@@ -1106,7 +1107,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.ManaAffinityV) >= 0) multimax += 0.03;
 			if (findPerk(PerkLib.ManaAffinityVI) >= 0) multimax += 0.03;
 			if (findPerk(PerkLib.ZenjisInfluence1) >= 0) multimax += 0.1;
-			if (findPerk(PerkLib.AscensionInnerPower) >= 0) max += perkv1(PerkLib.AscensionInnerPower) * 40;
+			if (findPerk(PerkLib.AscensionInnerPower) >= 0) max += perkv1(PerkLib.AscensionInnerPower) * 120;
 			if (jewelryEffectId == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude3;

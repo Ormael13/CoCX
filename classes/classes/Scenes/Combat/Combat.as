@@ -8828,10 +8828,11 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.JobEromancer)) manaregen += 5;
         if (player.hasPerk(PerkLib.JobHealer)) manaregen += 5;
         if (player.hasPerk(PerkLib.JobSorcerer)) manaregen += 10;
-        if (player.hasPerk(PerkLib.ArcaneRegenerationMinor)) manaregen += 5;
-        if (player.hasPerk(PerkLib.ArcaneRegenerationMajor)) manaregen += 10;
-        if (player.hasPerk(PerkLib.ArcaneRegenerationEpic)) manaregen += 15;
-        if (player.hasPerk(PerkLib.ArcaneRegenerationLegendary)) manaregen += 20;
+        if (player.hasPerk(PerkLib.ArcaneRegenerationMinor)) manaregen += 10;
+        if (player.hasPerk(PerkLib.ArcaneRegenerationMajor)) manaregen += 20;
+        if (player.hasPerk(PerkLib.ArcaneRegenerationEpic)) manaregen += 30;
+        if (player.hasPerk(PerkLib.ArcaneRegenerationLegendary)) manaregen += 40;
+        if (player.hasPerk(PerkLib.ArcaneRegenerationMythical)) manaregen += 50;
         if (player.hasPerk(PerkLib.DraconicHeart)) manaregen += 5;
         if (player.hasPerk(PerkLib.DraconicHeartEvolved)) manaregen += 5;
         if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) manaregen += 5;
