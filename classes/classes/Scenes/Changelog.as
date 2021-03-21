@@ -83,7 +83,7 @@ package classes.Scenes
 			outputText("-New magical soulskill: Storm of Sisterhood (Basic Rank). Req. buying manual from golem merchant for 20 spirit stones. Deal lighting damage, against group enemies deal 2x more damage, using ~30% of current PC wrath creates flames that deals 1000% dmg of used wrath. (1 wrath used = 10 pts of lighting dmg) Cooldown: 1 turn.\n");
 			outputText("-New magical soulskill: Night of Brotherhood (Basic Rank). Req. buying manual from golem merchant for 20 spirit stones. Deal darkness damage, against group enemies deal 2x more damage, using ~30% of current PC wrath creates flames that deals 1000% dmg of used wrath. (1 wrath used = 10 pts of darkness dmg) Cooldown: 1 turn.\n");
 			outputText("-Flames of Love and Icicles of Love soulskills cost, dmg, cooldown was adjusted to ~30%, 1000% and 1 turn.\n");
-			outputText("-New event perk: Hidden Job: Asura. Gained by spending 1 super perk point. Effects: Allow to reach OverMax Wrath equal to 110% of current max wrath. Gain access to Asura Form transformation (3x more melee attacks, +20%/10%/10% of core str/spe/tou stat value).\n");
+			outputText("-New event perk: Hidden Job: Asura. Gained by spending 1 super perk point. Effects: Allow to reach OverMax Wrath equal to 110% of current max wrath. Gain access to Asura Form transformation (3x more melee attacks, +40%/20%/20% of core str/spe/tou stat value - drains 20 wrath per turn to maintains this form).\n");
 			outputText("-Whip and Ribbon type weapons been added to list of melee weapons that can attack flying enemeis without need for PC to fly.\n");
 			outputText("-While flying if PC not have Aerial Combat still can use the same throwable weapons or other melee weapons that could be used to perform range attack.\n");
 			outputText("-2nd to 4th ring slot will be seen on Inventory list (just in case PC not yet bought correct perk it will be listed as LOCKED and having note which perk must be picked to unlock this ring slot).\n");
@@ -126,9 +126,9 @@ package classes.Scenes
 			outputText("-All perks that increasing mana cap are 3 times more effective. Starting mana is increased from 200 to 300.\n");
 			outputText("-Mind over Body and Mana Affinity perks was switched meaning first will be accesable Mind over Body and it would be req. to unlock Mana Affinity perk. Also Mana Affinity perks effect was changed from giving 35 Mana and 20% boost to mana regeneration to 3% of base mana and 25% boost to mana regeneration.\n");
 			outputText("-Arcane Regeneration perks descriptions are written more clearly + their % bonus to max mana was half-ed.\n");
-			outputText("-New tier 5 intelligence lvl-up perk: Arcane Regeneration (Mythical). Req. Grand Archmage (2nd Circle), Arcane Regeneration (Legendary) perks and 150+ int Effect: Increase max mana by 25% and recovery rate by 50.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New tier 5 intelligence lvl-up perk: Arcane Regeneration (Mythical). Req. Grand Archmage (2nd Circle), Arcane Regeneration (Legendary) perks and 150+ int. Effect: Increase max mana by 25% and recovery rate by 50.\n");
+			outputText("-New tier 0 intelligence lvl-up perk: Mage's wrath. Req. Job: Sorcerer, 50+ int. Effect: Magic Bolt (and Elemental Bolt if PC knows it) will be castable in (Ex) version that increase their power 2x while additionaly using 100 wrath. Safe limit for spellcasting increasing by 5%.\n");
+			outputText("-1 new achievment. (shadow one)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

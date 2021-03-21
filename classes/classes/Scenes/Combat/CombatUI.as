@@ -480,6 +480,20 @@ public class CombatUI extends BaseCombatContent {
 			} else if (player.hasStatusEffect(StatusEffects.MonsterDig)) {
 				bd.disable("You cannot use offensive spell against an opponent you cannot see or target.");
 			}
+			if (player.hasPerk(PerkLib.MagesWrath)) {
+				bd = buttons.add("M.Bolt(Ex)", combat.magic.spellEdyMagicBolt);
+				if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Magic Bolt");
+				else bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt.  Damage done is determined by your intelligence.", "Wrath-Empowered Magic Bolt");
+				if (player.mana < spellCost(40)) {
+					bd.disable("Your mana is too low to cast this spell.");
+				} else if (player.wrath < 100) {
+					bd.disable("Your wrath is too low to cast this spell.");
+				} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+					bd.disable("You can only use buff magic while underground.");
+				} else if (player.hasStatusEffect(StatusEffects.MonsterDig)) {
+					bd.disable("You cannot use offensive spell against an opponent you cannot see or target.");
+				}
+			}
 		}
 		if (player.hasPerk(PerkLib.ElementalBolt)) {
 			bd = buttons.add("E.Bolt", combat.magic.spellElementalBolt);
@@ -491,6 +505,20 @@ public class CombatUI extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (player.hasStatusEffect(StatusEffects.MonsterDig)) {
 				bd.disable("You cannot use offensive spell against an opponent you cannot see or target.");
+			}
+			if (player.hasPerk(PerkLib.MagesWrath)) {
+				bd = buttons.add("E.Bolt(Ex)", combat.magic.spellEdgyElementalBolt);
+				if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Elemental Bolt");
+				else bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt.  Damage done is determined by your intelligence.", "Wrath-Empowered Elemental Bolt");
+				if (player.mana < spellCost(80)) {
+					bd.disable("Your mana is too low to cast this spell.");
+				} else if (player.wrath < 100) {
+					bd.disable("Your wrath is too low to cast this spell.");
+				} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+					bd.disable("You can only use buff magic while underground.");
+				} else if (player.hasStatusEffect(StatusEffects.MonsterDig)) {
+					bd.disable("You cannot use offensive spell against an opponent you cannot see or target.");
+				}
 			}
 		}
 		combat.magic.buildWhiteMenu(whiteSpellButtons);

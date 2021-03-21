@@ -3,6 +3,7 @@
  */
 package classes.Scenes.Combat {
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Items.HeadJewelryLib;
 import classes.Items.JewelryLib;
 import classes.PerkLib;
@@ -1557,7 +1558,23 @@ public class CombatMagic extends BaseCombatContent {
 		if(handleShell()){return;}
 		spellMagicBolt2();
 	}
-	public function spellMagicBolt2():void {
+	public function spellEdyMagicBolt():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		useMana(40, 1);
+		player.wrath -= 100;
+		if(handleShell()){return;}
+		spellMagicBolt2(true);
+	}
+	public function spellEdgyElementalBolt():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		useMana(80, 1);
+		player.wrath -= 100;
+		if(handleShell()){return;}
+		spellMagicBolt2(true);
+	}
+	public function spellMagicBolt2(edgy:Boolean = false):void {
 		outputText("You narrow your eyes, focusing your mind with deadly intent.  ");
 		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") outputText("You point your staff and shots magic bolt toward " + monster.a + monster.short + "!\n\n");
 		else outputText("You point your hand toward " + monster.a + monster.short + " and shots magic bolt!\n\n");
@@ -1572,6 +1589,7 @@ public class CombatMagic extends BaseCombatContent {
 			else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
 		}
 		if (player.hasPerk(PerkLib.ElementalBolt)) damage *= 1.25;
+		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1588,6 +1606,9 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		checkAchievementDamage(damage);
+		if (edgy) {
+			awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
+		}
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();

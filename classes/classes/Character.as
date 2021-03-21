@@ -1009,6 +1009,7 @@ import classes.Items.JewelryLib;
 		public function maxSafeWrathSpellcasting():Number {
 			var max1:Number = maxWrath();
 			var max2:Number = 0.7;
+			if (hasPerk(PerkLib.MagesWrath)) max2 += 0.05;
 			//if (hasPerk(PerkLib.)) max2 += 0.1;
 			//if (hasPerk(PerkLib.)) max2 += 0.1;
 			max1 *= max2;
