@@ -12006,7 +12006,7 @@ public class Combat extends BaseContent {
 	public function bloodSwipeBloodPuppies():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(20), false);
+		HPChange(spellCostBlood(60), false);
 		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, many red claw-like lines coalesce briefly before being shot from their paws, flying toward " + monster.a + monster.short + ".\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.125;
 		if (damage < 10) damage = 10;
@@ -12049,7 +12049,7 @@ public class Combat extends BaseContent {
 	}
 	
 	public function asuraformCost():Number {
-		var modcsc:Number = 10;
+		var modcsc:Number = 20;
 		/*if (player.hasPerk(PerkLib.ImprovedCrinosShape)) modcsc += 5;
 		if (player.hasPerk(PerkLib.GreaterCrinosShape)) modcsc += 10;
 		if (player.hasPerk(PerkLib.MasterCrinosShape)) modcsc += 20;
@@ -12072,9 +12072,9 @@ public class Combat extends BaseContent {
 		var tempStr:Number;
 		var tempTou:Number;
 		var tempSpe:Number;
-		temp1 += player.strStat.core.value * 0.2;
-		temp2 += player.touStat.core.value * 0.1;
-		temp3 += player.speStat.core.value * 0.1;/*
+		temp1 += player.strStat.core.value * 0.4;
+		temp2 += player.touStat.core.value * 0.2;
+		temp3 += player.speStat.core.value * 0.2;/*
 		if (player.hasPerk(PerkLib.ImprovedCrinosShape)) {
 			temp1 += player.strStat.core.value * 0.2;
 			temp2 += player.touStat.core.value * 0.2;
