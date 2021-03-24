@@ -129,7 +129,7 @@ package classes.Scenes
 			outputText("-New tier 5 intelligence lvl-up perk: Arcane Regeneration (Mythical). Req. Grand Archmage (2nd Circle), Arcane Regeneration (Legendary) perks and 150+ int. Effect: Increase max mana by 25% and recovery rate by 50.\n");
 			outputText("-New tier 0 intelligence lvl-up perk: Mage's wrath. Req. Job: Sorcerer, 50+ int. Effect: Magic Bolt (and Elemental Bolt if PC knows it) will be castable in (Ex) version that increase their power 2x while additionaly using 100 wrath. Safe limit for spellcasting increasing by 5%.\n");
 			outputText("-1 new achievment. (shadow one)\n");
-			outputText("-\n");
+			outputText("-New tier 0 intelligence lvl-up perk: Mana Core. Req. Job: Sorcerer, 345+ max mana. Effect: Increase max mana by 10% + 10% to 15% (per each attained magical mastery stage) of base value.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
