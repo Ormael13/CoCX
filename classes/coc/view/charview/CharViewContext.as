@@ -56,6 +56,7 @@ import coc.xlogic.ExecContext;
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),
 					playerHasWeaponBannedArms: [Arms.GAZER, Arms.YETI, Arms.DISPLACER, Arms.GARGOYLE, Arms.FROSTWYRM, Arms.CANCER].indexOf(player.arms.type) == -1 && !player.isStancing(),
+					playerHasWeaponWings: [Wings.VAMPIRE].indexOf(player.wings.type) == -1,
 					playerHasLargeLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) != -1,
 					playerHasWeirdLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.HYDRA, LowerBody.NAGA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN].indexOf(player.lowerBody) != -1,
 
