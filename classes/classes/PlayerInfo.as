@@ -467,7 +467,7 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>HP Regeneration (%):</b> ~ " + combat.PercentBasedRegeneration() + " % / " + combat.maximumRegeneration() + " % (turn), ~ " + combat.PercentBasedRegeneration() * 2 + " % / " + combat.maximumRegeneration() * 2 + " % (hour)\n";
 		combatStats += "<b>HP Regeneration (Total):</b> ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) + " HP /  turn, ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) * 2 + " HP /  hour\n";
 		combatStats += "<b>Fatigue Recovery:</b> " + combat.fatigueRecovery2() + " / turn\n";
-		combatStats += "<b>Wrath Generation:</b> " + combat.wrathregeneration2() * 2 + " / turn, - 60 % / hour\n";
+		combatStats += "<b>Wrath Generation:</b> " + combat.wrathregeneration2() * 2 + " / turn, "+(player.hasPerk(PerkLib.AbsoluteStrength) ? ""+combat.wrathregeneration2()+"":"-60%")+" / hour\n";
 		combatStats += "<b>Mana Regeneration:</b> " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) + " / turn, " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) * 2 + " / hour\n";
 		combatStats += "<b>Soulforce Regeneration:</b> " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) + " / turn, " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) * 2 + " / hour\n";
 		combatStats += "\n";
@@ -1867,6 +1867,20 @@ public class PlayerInfo extends BaseContent {
 		menu();
 		if (page == 1) {
 			if (player.superPerkPoints > 0) {
+				addButtonDisabled(0, "DJ:M", "Soon.");//if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "", "You already have this perk.");
+				//else addButtonDisabled(0, "", "You do not have enough super perk points to obtain this perk.");
+			}
+			else {
+				addButtonDisabled(0, "DJ:M", "Soon.");//if (player.hasPerk(PerkLib.)) addButtonDisabled(0, "", "You already have this perk.");
+				//else addButtonDisabled(0, "", "You do not have enough super perk points to obtain this perk.");
+			}
+			addButton(12, "Next", superPerkBuyMenu, page + 1);
+			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);
+			else addButtonDisabled(13, "Convert", "You need at least 3 perk points to convert them.");
+			addButton(14, "Back", playerMenu);
+		}
+		if (page == 2) {
+			if (player.superPerkPoints > 0) {
 				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this super perk.");
 				else {
 					if (player.freeHiddenJobsSlots() > 0) addButton(0, "HJ:BD", perkHiddenJobBloodDemon).hint("Choose the 'Hidden Job: Blood Demon' super perk. You've trained in arts of blood demons. Beings that reached mastery of using their own or others blood to great effect. (+10x Tou of OverMax HP, -10% blood spells cost, +20% blood spells power, can learn Blood Spells form Red Manuscripts)");
@@ -1889,11 +1903,6 @@ public class PlayerInfo extends BaseContent {
 				}
 				//addButton(4, "", ).hint("Choose the '' super perk. ");
 				//addButtonDisabled(4, "", "Soon.");
-				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(5, "HJ:A", "You already have this super perk.");
-				else {
-					if (player.freeHiddenJobsSlots() > 0) addButton(5, "HJ:A", perkHiddenJobAsura).hint("Choose the 'Hidden Job: Asura' super perk. You've trained in way of asuras. Beings that reached mastery of unleashing wrath to great effect. (+10% of OverMax Wrath, access to Asura Form: 3x more melee attacks per turn, +20%/10%/10% of core str/spe/tou stat value)");
-					else addButtonDisabled(5, "HJ:A", "You do not have a free slot for this hidden job.");
-				}
 			}
 			else {
 				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this perk.");
@@ -1906,19 +1915,47 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(3, "MBFBP", "You do not have enough super perk points to obtain this perk.");
 				//if (player.hasPerk(PerkLib.)) addButtonDisabled(4, "", "You already have this perk.");
 				//else addButtonDisabled(4, "", "You do not have enough super perk points to obtain this perk.");
-				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(5, "HJ:A", "You already have this perk.");
-				else addButtonDisabled(5, "HJ:A", "You do not have enough super perk points to obtain this perk.");
 			}
-			//10 -> page + 1 button
-			//11 -> page - 1 button
-			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);
-			else addButtonDisabled(13, "Convert", "You need at least 3 perk points to convert them.");
+			addButton(12, "Next", superPerkBuyMenu, page + 1);
+			addButton(13, "Previous", superPerkBuyMenu, page - 1);
 			addButton(14, "Back", playerMenu);
 		}
-		if (page == 2) {
+		if (page == 3) {
+			if (player.superPerkPoints > 0) {
+				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(0, "HJ:A", "You already have this super perk.");
+				else {
+					if (player.freeHiddenJobsSlots() > 0) addButton(0, "HJ:A", perkHiddenJobAsura).hint("Choose the 'Hidden Job: Asura' super perk. You've trained in way of asuras. Beings that reached mastery of unleashing wrath to great effect. (+10% of OverMax Wrath, access to Asura Form: 3x more melee attacks per turn, +20%/10%/10% of core str/spe/tou stat value)");
+					else addButtonDisabled(0, "HJ:A", "You do not have a free slot for this hidden job.");
+				}
+				if (player.hasPerk(PerkLib.AbsoluteStrength)) addButtonDisabled(1, "AS", "You already have this super perk.");
+				else {
+					if (player.hasPerk(PerkLib.HiddenJobAsura)) addButton(1, "AS", perkAbsoluteStrength).hint("Choose the 'Absolute Strength' super perk. Increase strength based on current amount of wrath. Also wrath outside of combat will not decay and even with correct perks can slowly rise. (+10% of OverMax Wrath, % based multi bonus to str stat equal to 50% of wrath (updated once a day))");
+					else addButtonDisabled(1, "AS", "You need to first have the 'Hidden Job: Asura' super perk.");
+				}
+				addButtonDisabled(2, "LAB", "Soon.");
+				addButtonDisabled(3, "ICAF", "Soon.");
+			}
+			else {
+				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(0, "HJ:A", "You already have this perk.");
+				else addButtonDisabled(0, "HJ:A", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.AbsoluteStrength)) addButtonDisabled(1, "AS", "You already have this perk.");
+				else addButtonDisabled(1, "AS", "You do not have enough super perk points to obtain this perk.");
+				addButtonDisabled(2, "LAB", "Soon.");
+				addButtonDisabled(3, "ICAF", "Soon.");
+			}
+			//12 -> page + 1 button
+			addButton(13, "Previous", superPerkBuyMenu, page - 1);
+			addButton(14, "Back", playerMenu);
+		}
+		if (page == 3) {
 			if (player.superPerkPoints > 0) {
 				
 			}
+			else {
+				
+			}
+			//12 -> page + 1 button
+			//13 -> page - 1 button
 			addButton(14, "Back", playerMenu);
 		}
 	}
@@ -1934,35 +1971,56 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(PerkLib.HiddenJobBloodDemon,0,0,0,0);
 		clearOutput();
 		outputText("You gained Hidden Job: Blood Demon super perk.");
-		doNext(curry(superPerkBuyMenu, 1));
+		doNext(curry(superPerkBuyMenu, 2));
 	}
 	private function perkWayOfTheBlood():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.WayOfTheBlood,0,0,0,0);
 		clearOutput();
 		outputText("You gained Way of the Blood super perk.");
-		doNext(curry(superPerkBuyMenu, 1));
+		doNext(curry(superPerkBuyMenu, 2));
 	}
 	private function perkYourPainMyPower():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.YourPainMyPower,0,0,0,0);
 		clearOutput();
 		outputText("You gained Your Pain My Power super perk.");
-		doNext(curry(superPerkBuyMenu, 1));
+		doNext(curry(superPerkBuyMenu, 2));
 	}
 	private function perkMyBloodForBloodPuppies():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.MyBloodForBloodPuppies,0,0,0,0);
 		clearOutput();
 		outputText("You gained My Blood for Blood Puppies super perk.");
-		doNext(curry(superPerkBuyMenu, 1));
+		doNext(curry(superPerkBuyMenu, 2));
 	}
 	private function perkHiddenJobAsura():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.HiddenJobAsura,0,0,0,0);
 		clearOutput();
 		outputText("You gained Hidden Job: Asura super perk.");
-		doNext(curry(superPerkBuyMenu, 1));
+		doNext(curry(superPerkBuyMenu, 3));
+	}
+	private function perkAbsoluteStrength():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.AbsoluteStrength,0,0,0,0);
+		clearOutput();
+		outputText("You gained Absolute Strength super perk.");
+		doNext(curry(superPerkBuyMenu, 3));
+	}
+	private function perkLikeAnAsuraBoss():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.LikeAnAsuraBoss,0,0,0,0);
+		clearOutput();
+		outputText("You gained Like an Asura Boss super perk.");
+		doNext(curry(superPerkBuyMenu, 3));
+	}
+	private function perkICastAsuraFist():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.ICastAsuraFist,0,0,0,0);
+		clearOutput();
+		outputText("You gained I Cast (Asura) Fist super perk.");
+		doNext(curry(superPerkBuyMenu, 3));
 	}
 }
 }

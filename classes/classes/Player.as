@@ -12480,8 +12480,8 @@ use namespace CoC;
 			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
 			var power:Number = 0;
 			if (hasPerk(PerkLib.BullStrength)){
-				if(cowScore() >=15) power = lactationQ()*0.001;
-				if(minotaurScore() >=15) power = cumCapacity()*0.001;
+				if (cowScore() >=15) power = lactationQ()*0.001;
+				if (minotaurScore() >=15) power = cumCapacity()*0.001;
 				if (power > 0.5) power = 0.5;
 				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Bull Strength', { text: 'Bull Strength' });
 			}
@@ -12492,6 +12492,21 @@ use namespace CoC;
 				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Unnatural Strength', { text: 'Unnatural Strength' });
 			}
 			if (!hasPerk(PerkLib.UnnaturalStrength) && statStore.hasBuff('Unnatural Strength')) statStore.removeBuffs('Unnatural Strength');
+			if (hasPerk(PerkLib.AbsoluteStrength) && (wrath > wrath100 * 0.5)){
+				power = 0.25;
+				if (wrath > wrath100 * 0.6) power += 0.05;
+				if (wrath > wrath100 * 0.7) power += 0.05;
+				if (wrath > wrath100 * 0.8) power += 0.05;
+				if (wrath > wrath100 * 0.9) power += 0.05;
+				if (wrath > wrath100) power += 0.05;
+				if (wrath > wrath100 * 1.1) power += 0.05;
+				if (wrath > wrath100 * 1.2) power += 0.05;
+				if (wrath > wrath100 * 1.3) power += 0.05;
+				if (wrath > wrath100 * 1.4) power += 0.05;
+				//if (hasPerk(PerkLib.)) power *= 2;
+				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Absolute Strength', { text: 'Absolute Strength' });
+			}
+			if (!hasPerk(PerkLib.AbsoluteStrength) && statStore.hasBuff('Absolute Strength')) statStore.removeBuffs('Absolute Strength');
 			statStore.replaceBuffObject({
 				"str.mult":statusEffectv1(StatusEffects.StrTouSpeCounter2)/100,
 				"tou.mult":statusEffectv2(StatusEffects.StrTouSpeCounter2)/100,

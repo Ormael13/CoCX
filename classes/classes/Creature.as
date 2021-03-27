@@ -2609,10 +2609,10 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.FerasBoonAlpha) >= 0) cumCap += 200;
 			if (findPerk(PerkLib.MagicalVirility) >= 0) cumCap += 200;
 			if (findPerk(PerkLib.FerasBoonSeeder) >= 0) cumCap += 1000;
-			cumCap += perkv1(PerkLib.ElvenBounty);
+			if (findPerk(PerkLib.ElvenBounty) >= 0) cumCap += perkv1(PerkLib.ElvenBounty);
 			if (findPerk(PerkLib.BroBody) >= 0) cumCap += 200;
-			cumCap += statusEffectv1(StatusEffects.Rut);
-			cumCap *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
+			if (findPerk(PerkLib.PiercedFertite) >= 0) cumCap *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
+			if (hasStatusEffect(StatusEffects.Rut)) cumCap += statusEffectv1(StatusEffects.Rut);
 			//Alter capacity by accessories.
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY) cumCap *= (1 + (jewelryEffectMagnitude / 100));
 

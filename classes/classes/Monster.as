@@ -613,7 +613,9 @@ import flash.utils.getQualifiedClassName;
 			var temp1:Number = this.maxWrath();
 			var temp2:Number = 1;
 			if (hasPerk(PerkLib.HiddenJobAsura)) temp2 += 0.1;
-			//if (hasPerk(PerkLib.)) temp2 += 0.1;
+			if (hasPerk(PerkLib.AbsoluteStrength)) temp2 += 0.1;
+			if (hasPerk(PerkLib.LikeAnAsuraBoss)) temp2 += 0.1;
+			if (hasPerk(PerkLib.ICastAsuraFist)) temp2 += 0.1;
 			temp1 *= temp2;
 			return temp1;
 		}
@@ -3273,4 +3275,4 @@ import flash.utils.getQualifiedClassName;
 			}
 		}
 	}
-}
+}
