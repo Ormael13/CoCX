@@ -8866,10 +8866,14 @@ public class Combat extends BaseContent {
             EngineCore.WrathChange(gainedwrath, false);
         }
 		else {
-			var LostWrathPerTick:Number = player.maxWrath();
-			LostWrathPerTick *= -0.6;
-			LostWrathPerTick = Math.round(LostWrathPerTick);
-            EngineCore.WrathChange(LostWrathPerTick, false);
+			if (player.hasPerk(PerkLib.AbsoluteStrength)) gainedwrath += wrathregeneration2();
+			else {
+				var LostWrathPerTick:Number = player.maxWrath();
+				LostWrathPerTick *= -0.6;
+				LostWrathPerTick = Math.round(LostWrathPerTick);
+				gainedwrath += LostWrathPerTick;
+			}
+            EngineCore.WrathChange(gainedwrath, false);
         }
     }
 

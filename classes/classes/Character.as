@@ -991,7 +991,9 @@ import classes.Items.JewelryLib;
 			var max1:Number = maxWrath();
 			var max2:Number = 1;
 			if (hasPerk(PerkLib.HiddenJobAsura)) max2 += 0.1;
-			//if (hasPerk(PerkLib.)) max2 += 0.1;
+			if (hasPerk(PerkLib.AbsoluteStrength)) max2 += 0.1;
+			if (hasPerk(PerkLib.LikeAnAsuraBoss)) max2 += 0.1;
+			if (hasPerk(PerkLib.ICastAsuraFist)) max2 += 0.1;
 			max1 *= max2;
 			max1 = Math.round(max1);
 			if (max1 > 79999) max1 = 79999;
@@ -1108,6 +1110,17 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.ManaAffinityV) >= 0) multimax += 0.03;
 			if (findPerk(PerkLib.ManaAffinityVI) >= 0) multimax += 0.03;
 			if (findPerk(PerkLib.ZenjisInfluence1) >= 0) multimax += 0.1;
+			if (hasPerk(PerkLib.ManaCore)) {
+				if (hasPerk(PerkLib.Archmage) && inte >= 100) multimax += 0.15;
+				if (hasPerk(PerkLib.GrandArchmage) && inte >= 125) multimax += 0.15;
+				if (hasPerk(PerkLib.GrandArchmage2ndCircle) && inte >= 150) multimax += 0.15;
+				if (hasPerk(PerkLib.GrandArchmage3rdCircle) && inte >= 175) multimax += 0.15;
+				if (hasPerk(PerkLib.GrandMage) && inte >= 75) multimax += 0.1;
+				//if (hasPerk(PerkLib.GreyArchmage) && inte >= 225) max += 600;
+				//if (hasPerk(PerkLib.GreyMage) && inte >= 200) max += 450;
+				if (hasPerk(PerkLib.Mage) && inte >= 50) multimax += 0.1;
+				if (hasPerk(PerkLib.JobSorcerer)) multimax += 0.1;
+			}
 			if (findPerk(PerkLib.AscensionInnerPower) >= 0) max += perkv1(PerkLib.AscensionInnerPower) * 120;
 			if (jewelryEffectId == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude2;
