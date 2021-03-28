@@ -2758,7 +2758,7 @@ public static const UNKNOWN_FLAG_NUMBER_02749:int                               
 public static const UNKNOWN_FLAG_NUMBER_02750:int                                   = 2750;
 public static const UNKNOWN_FLAG_NUMBER_02751:int                                   = 2751;
 public static const UNKNOWN_FLAG_NUMBER_02752:int                                   = 2752;
-public static const UNKNOWN_FLAG_NUMBER_02753:int                                   = 2753;
+public static const ASURA_FORM_COMBAT_MODE:int                                   	= 2753;
 public static const CRINOS_SHAPE_COMBAT_MODE:int                                   	= 2754;
 public static const WARRIORS_RAGE_COMBAT_MODE:int                                   = 2755;
 public static const MET_YETI_AS_A_GIRL_FIRST_TIME:int                               = 2756;

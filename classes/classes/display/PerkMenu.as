@@ -131,6 +131,13 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] == 0) outputText("Manual");
 			outputText("</b>");
 		}
+		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+			outputText("\n\nYou can choose between starting fight with Asura form active or not.");
+			outputText("\n\nAsura Form: <b>");
+			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 1) outputText("Autocast");
+			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 0) outputText("Manual");
+			outputText("</b>");
+		}
 		if (player.findPerk(PerkLib.Poisoning) >= 0) {
 			outputText("\n\nIf you can naturaly produce venom then you could add it effects to weapon. (Working only with small weapons)");
 			if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 0) outputText("\n\nVenom effect added: <b>No</b>");
@@ -242,8 +249,12 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] != 1) addButton(1, "Autocast", toggleflag,kFLAGS.CRINOS_SHAPE_COMBAT_MODE,true);
 		}
 		if (player.hasPerk(PerkLib.WayOfTheWarrior)) {
-			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] != 0) addButton(0, "Manual", toggleflag,kFLAGS.WARRIORS_RAGE_COMBAT_MODE,false);
-			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] != 1) addButton(1, "Autocast", toggleflag,kFLAGS.WARRIORS_RAGE_COMBAT_MODE,true);
+			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] != 0) addButton(2, "Manual", toggleflag,kFLAGS.WARRIORS_RAGE_COMBAT_MODE,false);
+			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] != 1) addButton(3, "Autocast", toggleflag,kFLAGS.WARRIORS_RAGE_COMBAT_MODE,true);
+		}
+		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 0) addButton(10, "Manual", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,false);
+			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 1) addButton(11, "Autocast", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,true);
 		}
 		addButton(14, "Back", doubleAttackOptions);
 	}

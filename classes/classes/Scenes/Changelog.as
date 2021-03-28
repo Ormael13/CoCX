@@ -131,6 +131,12 @@ package classes.Scenes
 			outputText("-1 new achievment. (shadow one)\n");
 			outputText("-New tier 0 intelligence lvl-up perk: Mana Core. Req. Job: Sorcerer, 345+ max mana. Effect: Increase max mana by 10% + 10% to 15% (per each attained magical mastery stage) of base value.\n");
 			outputText("-New event perk: Absolute Strength. Gained by spending 1 super perk point and having 'Hidden Job: Asura' super perk. Effects: Allow to reach OverMax Wrath equal to 120% of current max wrath. Increase strength based on current amount of wrath as long wrath is above 50% (1:2 ratio). Also wrath outside of combat will not decay and even with correct perks can slowly rise.\n");
+			outputText("-New event perk: Like an Asura Boss. Gained by spending 1 super perk point and having 'Absolute Strength' super perk. Effects: Allow to reach OverMax Wrath equal to 130% of current max wrath. Adds to toggle starting in Asura Form at combat start, increase to physical might rise to 80%/60%/40% of core str/tou/spe.\n");
+			outputText("-New event perk: I Cast (Asura) Fist. Gained by spending 1 super perk point and having 'Like an Asura Boss' super perk. Effects: Allow to reach OverMax Wrath equal to 140% of current max wrath. Safe treshold for magic/m.specials is always 30%/10% below overmax wrath, +50% of base max wrath.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -141,12 +147,6 @@ package classes.Scenes
 			outputText("Flames of Love and Icicles of Love not dealing increased dmg to group enemies, beautiful items aside sword and excalibur not been dropped with high corruption, beautiful sword / excalibur not been working properly with multiattack settings, centipeded tf small correction, added missing cooldown countdown for Flames/Icicles of Love and Punishing Kick soulskills, missing Ebon Labyrinth bosses in rooms ");
 			outputText("200 / 250 / 300, succubus special no longer affecting lust immune enemies, no reseting on 2nd to 4th ring in case PC had any equipped, shield perks working with all shields not only those that allows use of shield bash, EL questolog reward after 50th room wrong unlock req., Diana post-rejection offer combat stats errors, many smol fixes and typos corrected\n");/*ostatni punkt changelogu
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			//outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. ");
 			//outputText("When used with any ayo armor it would increase soulforce drain from armor by 60 units, increase soulforce stored and usable by ayo armor by 1,000 and boost mech meele/range weapon damage by 25%. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");

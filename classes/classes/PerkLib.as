@@ -3341,13 +3341,13 @@ public class PerkLib
 		public static const MyBloodForBloodPuppies:PerkType = mk("My Blood for Blood Puppies", "My Blood for Blood Puppies",
 				"During fight small part of your blood from into blood puppies that can attack on your behalf with blood soulskills. When you grow in mastery of blood they would grow stronger with you. (+10x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power)");
 		public static const LikeAnAsuraBoss:PerkType = mk("Like an Asura Boss", "Like an Asura Boss",
-				"Adds to toggle starting in Asura Form at combat start, . (+10% of OverMax Wrath)");
+				"Adds to toggle starting in Asura Form at combat start, increase to physical might rise to 80%/60%/40% of core str/tou/spe. (+10% of OverMax Wrath)");
 		public static const ICastAsuraFist:PerkType = mk("I Cast (Asura) Fist", "I Cast (Asura) Fist",
-				"Safe treshold for magic/m.specials is always 30%/10% below overmax wrath, . (+10% of OverMax Wrath)");
+				"Safe treshold for magic/m.specials is always 30%/10% below overmax wrath, +50% of base max wrath. (+10% of OverMax Wrath)");
 		public static const HiddenJob8:PerkType = mk("Hidden Job: 8", "Hidden Job: 8",
-				".");
+				"5th Asura super perk. (+10% of OverMax Wrath/Base STR Cap)");
 		public static const HiddenJob7:PerkType = mk("Hidden Job: 7", "Hidden Job: 7",
-				".");
+				"5th Bollod demon super perk. (+10x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power/Base TOU Cap)");
 		public static const HiddenJob6:PerkType = mk("Hidden Job: 6", "Hidden Job: 6",
 				".");
 		public static const HiddenJob5:PerkType = mk("Hidden Job: 5", "Hidden Job: 5",
