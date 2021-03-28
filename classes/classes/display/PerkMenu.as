@@ -44,7 +44,8 @@ public class PerkMenu extends BaseContent {
 		addButton(2, "SuperPerk Up", CoC.instance.playerInfo.superPerkBuyMenu);
 		addButton(4, "Database", perkDatabase);
 		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) ||
-			(player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.jiangshiScore() >= 20) {
+			(player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.hasPerk(PerkLib.LikeAnAsuraBoss) ||
+			player.jiangshiScore() >= 20) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",doubleAttackOptions);
 		}

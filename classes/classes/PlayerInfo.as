@@ -1934,13 +1934,13 @@ public class PlayerInfo extends BaseContent {
 				}
 				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) addButtonDisabled(2, "LAB", "You already have this super perk.");
 				else {
-					if (player.hasPerk(PerkLib.AbsoluteStrength)) addButton(2, "LAB", perkLikeAnAsuraBoss).hint("Choose the 'Like an Asura Boss' super perk. Adds to toggle starting in Asura Form at combat start, increase to physical might rise to 80%/60%/40% of core str/tou/spe. (+10% of OverMax Wrath)");
+					if (player.hasPerk(PerkLib.AbsoluteStrength)) addButton(2, "LAB", perkLikeAnAsuraBoss).hint("Choose the 'Like A-sura Boss' super perk. Adds to toggle starting in Asura Form at combat start, unlocking access specials usable only in asura form, increase to physical might rise to 80%/60%/40% of core str/tou/spe. (+10% of OverMax Wrath)");
 					else addButtonDisabled(2, "LAB", "You need to first have the 'Absolute Strength' super perk.");
 				}
 				if (player.hasPerk(PerkLib.ICastAsuraFist)) addButtonDisabled(3, "ICAF", "You already have this super perk.");
 				else {
 					if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) addButton(3, "ICAF", perkICastAsuraFist).hint("Choose the 'I Cast (Asura) Fist' super perk. Safe treshold for magic/m.specials is always 30%/10% below overmax wrath, +100% of base max wrath. (+10% of OverMax Wrath)");
-					else addButtonDisabled(3, "ICAF", "You need to first have the 'Like an Asura Boss' super perk.");
+					else addButtonDisabled(3, "ICAF", "You need to first have the 'Like A-sura Boss' super perk.");
 				}
 				//addButtonDisabled(4, "", "Soon.");
 			}
@@ -2024,7 +2024,7 @@ public class PlayerInfo extends BaseContent {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.LikeAnAsuraBoss,0,0,0,0);
 		clearOutput();
-		outputText("You gained Like an Asura Boss super perk.");
+		outputText("You gained Like A-sura Boss super perk.");
 		doNext(curry(superPerkBuyMenu, 3));
 	}
 	private function perkICastAsuraFist():void {

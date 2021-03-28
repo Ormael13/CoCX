@@ -928,6 +928,9 @@ public class Combat extends BaseContent {
 					bd.disable("You are under transformantion effect incompatibile with Asura Form!");
 				}
 			}
+			if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+				
+			}
 		}
     }
 	public function GolemsMenu():void {
