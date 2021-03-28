@@ -1273,12 +1273,11 @@ public class PlayerInfo extends BaseContent {
 			mutationCount++;
 		outputText("\nYou have " + mutationCount + " mutation slots per part."+
 		"\nNote: Not all body parts will use all available slots." +
-		"\nPerks may have multiple stages. Due to the number of tiers per perk, currently it will only display the first form, until the Perk-version code is utilized.")
+		"\nPerks may have multiple stages. Due to the number of tiers per perk, currently it will only display the first form, until the cleaner Perk-version code is utilized.")
 
-		//Every time a new mutation is added, I'll have to add it in manually, since there's nowhere I can exactly just pull by itself from.
+		//Every time a new mutation is added, it will need to be added in manually, since there's nowhere I can just pull the information from.
 		//Also, when Orm reworks perks to use v1/v2/v3 things, can also display the current tier.
-		//Okay, no idea if I can just request the description from the file.
-		//Source: Player.as maxHeartMutations/etc. for mutations, PerkLib.as for desc.
+		//Source: Player.as maxHeartMutations/etc. For mutations, PerkLib.as for desc.
 
 		outputText("\n")
 		//Heart Mutations
@@ -1392,13 +1391,13 @@ public class PlayerInfo extends BaseContent {
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
 	public function displayMutationsUsedSpoilers(perkName:PerkType, acquireReq:String = ""):void {
-		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On --Truthiness?
+		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
 			if (player.hasPerk(perkName)) {
 				outputText("\n" + perkName.name + ": Acquired.")
 			} else {
 				outputText("\n" + perkName.name + ": Missing.")
 			}
-			if (acquireReq == "") {
+			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
 				var reqs:Array = []
 				var reqcount:int = 1
 				if (perkName.requirements.length > 0) {
@@ -1408,7 +1407,7 @@ public class PlayerInfo extends BaseContent {
 						}
 						reqcount++;
 					}
-				}	else{
+				}	else{	//Information not available.
 					reqs.push("Missing data. Perhaps Unacquirable?")
 				}
 				outputText("\nPrerequisites/Acquisition:" + reqs.join(", "))
@@ -1421,12 +1420,11 @@ public class PlayerInfo extends BaseContent {
 			if (player.hasPerk(perkName)) {
 				outputText("\n" + perkName.name + ": Acquired.")
 			} else {
-					outputText("\n???: Unknown.")
+					outputText("\n???")
 				}
 		}
 		outputText("\n")
 	}
-
 
 	//------------
 	// LEVEL UP
