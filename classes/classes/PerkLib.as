@@ -415,7 +415,7 @@ public class PerkLib
 				"You've chosen the 'Kitsune Parathyroid Glands' perk, .");
 		public static const KitsuneParathyroidGlandsEvolved:PerkType = mk("Kitsune Parathyroid Glands (Evolved)", "Kitsune Parathyroid Glands (Evolved)",
 				".",
-				"You've chosen the 'Kitsune Parathyroid Glands (EvFolved)' perk, .");
+				"You've chosen the 'Kitsune Parathyroid Glands (Evolved)' perk, .");
 		public static const KitsuneParathyroidGlandsFinalForm:PerkType = mk("Kitsune Parathyroid Glands (Final Form)", "Kitsune Parathyroid Glands (Final Form)",
 				".",
 				"You've chosen the 'Kitsune Parathyroid Glands (Final Form)' perk, .");
@@ -7161,4 +7161,3 @@ public class PerkLib
 	initDependencies();
 }
 }
-

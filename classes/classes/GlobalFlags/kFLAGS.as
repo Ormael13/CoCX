@@ -2968,8 +2968,8 @@ public static const UNKNOWN_FLAG_NUMBER_02959:int                               
 public static const APEX_SELECTED_RACE:int                                   		= 2960;
 public static const UNKNOWN_FLAG_NUMBER_02961:int                                   = 2961;
 public static const UNKNOWN_FLAG_NUMBER_02962:int                                   = 2962;
-public static const UNKNOWN_FLAG_NUMBER_02963:int                                   = 2963;
-public static const LVL_UP_FAST:int                                   				= 2964;
+public static const MUTATIONS_SPOILERS:int                                   		= 2963;//Mutations Help.
+public static const LVL_UP_FAST:int                                   				= 2964;//Bulk/Manual Incremental/Singular Levelling
 public static const SECONDARY_STATS_SCALING:int                                     = 2965;
 public static const MELEE_DAMAGE_OVERHAUL:int                                   	= 2966;
 public static const INVT_MGMT_TYPE:int                                   			= 2967;//Toggles Inventory Management type between existing and new.

@@ -102,6 +102,14 @@ public class GameSettings extends BaseContent {
 		}
 		outputText("\n\n")
 
+		if (flags[kFLAGS.MUTATIONS_SPOILERS] >= 1){
+			outputText("Mutation Assist: <font color=\"#008000\"><b>ON</b></font>\nAll mutations are known, and hints to acquire them are provided.")
+		}
+		else {
+			outputText("Mutation Assist: <font color=\"#800000\"><b>OFF</b></font>\n For players that want to discover the mutations by themselves.")
+		}
+		outputText("\n\n")
+
 		outputText("<b>The following flags are not fully implemented yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n");
 		outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.");
 		outputText("\n\n");
@@ -141,6 +149,7 @@ public class GameSettings extends BaseContent {
 		if (player) addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
 		addButton(10, "Fast Lvl", toggleInstaLvl).hint("Immediately level to highest possible from XP instead of spamming next.");
 		addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
+		addButton(12, "Mutation Assist", mutationSubMenu).hint("Mutation Tracker Spoiler Mode. For when you want to discover mutations by yourself, or with some help.");
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5) {
 			removeButton(8);
 		}
@@ -325,6 +334,12 @@ public class GameSettings extends BaseContent {
 		if (flags[kFLAGS.LVL_UP_FAST] == 1) flags[kFLAGS.LVL_UP_FAST] = 2;
 		else if (flags[kFLAGS.LVL_UP_FAST] == 0) flags[kFLAGS.LVL_UP_FAST] = 1;
 		else flags[kFLAGS.LVL_UP_FAST] = 0;
+		settingsScreenGameSettings();
+	}
+
+	public function mutationSubMenu():void {
+		if (flags[kFLAGS.MUTATIONS_SPOILERS] < 1) flags[kFLAGS.MUTATIONS_SPOILERS] = 1;
+		else flags[kFLAGS.MUTATIONS_SPOILERS] = 0;
 		settingsScreenGameSettings();
 	}
 

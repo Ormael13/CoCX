@@ -27,7 +27,7 @@ public function alvinaFirstEncounter():void
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 	clearOutput();
 
-	outputText("As you travel you meet with a woman in robes with black hair. You didn’t expect to see a fellow human around in Mareth, which is a relief. Perhaps you aren’t alone in this quest. You ask if she could give you directions, as you have no idea what to expect in this realm. As a champion, your job is to fight the demons, but you can’t fight them if you have no idea where to look.\n\n");
+	outputText("Along your travels, you meet a woman in robes with black hair. You didn’t expect to see a fellow human around in Mareth, which is a relief. Perhaps you aren’t alone in this quest. You ask if she could give you directions, as you have no idea what to expect in this realm. As a champion, your job is to fight the demons, but you can’t fight them if you have no idea where to look.\n\n");
 	outputText("\"<i>Directions and demons, hm? There are many places you could visit. If I were you, I would go to the lake and look for a peculiar island at its center. That said, be respectful of whomever you meet there.</i>\"");
 	outputText("You nod and prepare to leave, but ask her who she is in case you should ever see her again.\n\n");
 	outputText("\"<i>Me? I am a person of no consequence.</i>\"");
@@ -40,7 +40,7 @@ public function alvinaSecondEncounter():void
 {
 	//spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
-	outputText("As you pass by the road you spot the woman from before sitting on a nearby wooden log. You sit right next to her, she closes her book in response. You thank her for the information regarding Marae’s whereabouts");
+	outputText("As you pass by the road you spot the woman from before sitting on a nearby wooden log. You sit right next to her, and she closes her book in response. You thank her for the information regarding Marae’s whereabouts");
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText(" though it ended in disaster, thanks to your actions");
 	outputText(". That said you are still looking for ways to fight the demons.\n\n");
 	outputText("\"<i>Fighting the demons? Well... You could try and find their leader’s fortress on your own, however, how do you plan to find a demon willing to risk everything to betray the mastermind above?</i>\"\n\n");
@@ -69,7 +69,7 @@ public function alvinaSecondEncounterTalkHer():void
 	outputText("\"<i>I know what you’re thinking, a human on Mareth is something next to nobody sees. There are other humans across the world. I hear the hidden city Tel'adre has several true humans. I myself am a breakaway from the sand witch coven. I didn’t like the weird turn in the practice of late, so I left and used some hummus to properly revert any possible changes.</i>\"\n\n");
 	outputText("Well, that explains a lot. So she was born with two set of breasts and a second vagina?\n\n");
 	outputText("\"<i>You could say it like that, yes, though I had these traits corrected since.</i>\"\n\n");
-	if (player.inte > 150) outputText("There’s something she’s not telling you, likely it is related to her relation with the sand witches. She probably left in very bad terms. Regardless, you find it more prudent to talk about something else.\n\n");
+	if (player.inte > 150) outputText("There’s something she’s not telling you, likely it being related to her relation with the sand witches. She probably left in very bad terms. Regardless, you find it more prudent to talk about something else.\n\n");
 	doNext(alvinaSecondEncounterTalk);
 }
 public function alvinaSecondEncounterTalkHobby():void
@@ -117,7 +117,7 @@ public function alvinaThirdEncounterYes():void
 	outputText("At the other side of the laboratory stands Alvina. She's smiling under her hood.\n\n");
 	outputText("\"<i>I see you finally made it here [name], you did… An excellent job. I can only applaud your competence. </i>");
 	if (flags[kFLAGS.DEFEATED_ZETAZ] > 0) {
-		outputText("<i>Though you had no idea that I set you on this path on purpose all along, did you? You could have gone anywhere, or got defeated by a random fiend and lost yourself, but you gladly acted like a perfect pawn and did everything just as I had planned shuting down the factory and</i>");
+		outputText("<i>Though you had no idea that I set you on this path on purpose all along, did you? You could have gone anywhere, or got defeated by a random fiend and lost yourself, but you gladly acted like a perfect pawn and did everything just as I had planned, shuting down the factory and</i>");
 		if (flags[kFLAGS.MET_MARAE_CORRUPTED] > 0) {
 			outputText("<i> corrupted Marae into a demon.</i>");
 		}
@@ -127,7 +127,7 @@ public function alvinaThirdEncounterYes():void
 		}
 		outputText("<i> setting up the stage for my plans.</i>");
 	}
-	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("<i>You even defeated Lethice for me, which I will admit is highly convenient she was way to hardheaded for me to properly redirect as I pleased.</i>");
+	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("<i>You even defeated Lethice for me, which I will admit is highly convenient. She was way to hardheaded for me to properly redirect as I pleased.</i>");
 	outputText("\"");
 	doNext(alvinaThirdEncounterYesContinue);
 }
@@ -144,8 +144,8 @@ public function alvinaThirdEncounterYesContinue():void
 	outputText("A greater calling? Like what?\n\n");
 	outputText("\"<i>Power, pure and simple. You desire power, and to further increase it, the only proper path is to beseech those that possess it. Most academics seek to obtain true mastery of magic, although most are not willing to sacrifice everything for their study. After many years of researching forbidden knowledge, performing tedious experiments and depraved rituals, I came to one conclusion: ");
 	outputText("The demons came very close to harnessing true power but ultimately failed, turning into insatiable creatures unable to satisfy their endless thirst for souls and sex, in the end, they lack a soul entirely. To achieve perfection and immortality one needs their soul to be attached to its body so to… Regardless, this is nothing you should concern yourself with yet.</i>\"\n\n");
-	outputText("Ok so why does it matter? It’s not like you have anything to do with this right?\n\n");
-	outputText("\"<i>On the contrary, you coming here is no hazard. You seek forbidden knowledge and I, Alvina Shadowmantle, founder of what is today black magic seek someone to impart it… For a price. So how about joining me and becoming my apprentice? You have proven way more than a mere pawn, so surely you are worthy of my time.</i>\"\n\n");
+	outputText("Ok, so why does it matter? It’s not like you have anything to do with this right?\n\n");
+	outputText("\"<i>On the contrary, you coming here is no hazard. You seek forbidden knowledge and I, Alvina Shadowmantle, founder of what is today black magic seek someone to impart it… For a price. So how about joining me and becoming my apprentice? You have proven to be way more than a mere pawn, so surely you are worthy of my time.</i>\"\n\n");
 	if (flags[kFLAGS.CODEX_ENTRY_DEVIL] <= 0) {
 		flags[kFLAGS.CODEX_ENTRY_DEVIL] = 1;
 		outputText("\n\n<b>New codex entry unlocked: Devil!</b>");
@@ -190,7 +190,7 @@ public function alvinaThirdEncounterYesNeverWon():void
 	outputText("\"<i>Hey, why are you looking at my breasts you idiot?! Look me in the face before you die!</i>\"\n\n");
 	outputText("That does it, she definitely is afraid. In a desperate last attempt, you strike at the succubus one final time, striking directly at the pendant hanging from her neck. Alvina screams in horror as the crystal shatters.\n\n");
 	outputText("\"<i>My phylactery! No! What have you done to my phylactery!!!!!</i>\"\n\n");
-	outputText("Her body starts to bloat as the immense powers she used to control overwhelms her. Alvina makes one last anguished scream before exploding in a conflagration of arcane magic turning to ashes.\n\n");
+	outputText("Her body starts to bloat as the immense powers she used to control overwhelms her. Alvina makes one last anguished scream before exploding in a conflagration of arcane magic before being reduced to nothing more than ashes.\n\n");
 	outputText("You turn your eyes away, nauseated at the scene… This is what happens to those who play with forbidden powers, quite a fitting end. You leave the cave feeling like you have rid Mareth of a powerful villain.\n\n");
 	outputText("<b>Found Alvina's Shattered Phylactery</b>\n\n");
 	player.createKeyItem("Alvina's Shattered Phylactery", 0, 0, 0, 0);
@@ -215,21 +215,21 @@ public function alvinaMainCampMenu():void
 	addButton(0, "Appearance", alvinaMainCampMenuAppearance).hint("Examine Alvina detailed appearance.");
 	if (flags[kFLAGS.ALVINA_DIARY] < 5) addButton(1, "Diary", alvinaMainCampMenuDiary);
 	if (flags[kFLAGS.ALVINA_DIARY] == 5) addButton(1, "Diary", alvinaMainCampMenuDiaryAreYouSure);
-	if (flags[kFLAGS.ALVINA_DIARY] == 6) addButtonDisabled(1, "Diary", "You already readed it.");
+	if (flags[kFLAGS.ALVINA_DIARY] == 6) addButtonDisabled(1, "Diary", "You've already read it.");
 	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 4 && flags[kFLAGS.ALVINA_FOLLOWER] >= 16) {
 		if (flags[kFLAGS.ALVINA_FOLLOWER] >= 19) addButton(2, "Sex", alvinaMainCampSexMenu);
-		if (flags[kFLAGS.ALVINA_FOLLOWER] == 16 || flags[kFLAGS.ALVINA_FOLLOWER] == 18) addButton(2, "Confession", alvinaMainCampMenuConfession).hint("If you not know what it mean then... whatever I lost faith in your player intelligance.");
+		if (flags[kFLAGS.ALVINA_FOLLOWER] == 16 || flags[kFLAGS.ALVINA_FOLLOWER] == 18) addButton(2, "Confession", alvinaMainCampMenuConfession).hint("If you don't know what this means... I have lost faith in your intelligence."); //Just cleaning this up.
 	}
-	else addButtonDisabled(2, "???", "Need to finish Advanced Study to unlock this option.");
+	else addButtonDisabled(2, "???", "You need to finish Advanced Study to unlock this option.");
 	if (flags[kFLAGS.ALVINA_FOLLOWER] >= 19) {
 		if (player.hasPerk(PerkLib.BasicLeadership)) {
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", alvinaHenchmanOption).hint("Ask Alvina to join you in adventures outside camp.");
 			else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") addButton(5, "Team", alvinaHenchmanOption).hint("Ask Alvina to stay in camp.");
-			else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Alvina about accompaning you.");
+			else addButtonDisabled(5, "Team", "You already have other henchmen accompanying you. Ask him/her to stay at camp before you talk with Alvina about accompanying you.");
 		}
 		else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
 	}
-	if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) addButtonDisabled(10, "Study", "You already completed basic Study.");
+	if (player.hasStatusEffect(StatusEffects.AlvinaTraining)) addButtonDisabled(10, "Study", "You have already completed basic Study.");
 	else addButton(10, "Study", alvinaCampStudy);
 	if (player.hasStatusEffect(StatusEffects.AlvinaTraining) && player.statusEffectv1(StatusEffects.AlvinaTraining2) < 2) addButton(11, "Advanced Study", alvinaCampAdvancedStudy);
 	else {
@@ -239,9 +239,9 @@ public function alvinaMainCampMenu():void
 		}
 		if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3) {
 			if (player.hasKeyItem("Siegweird's holy symbol") >= 0) addButton(11, "Advanced Study", alvinaCampAdvancedStudy);
-			else addButtonDisabled(11, "Advanced Study", "You need to go kill certain annoying paladin in Blight Ridge.");
+			else addButtonDisabled(11, "Advanced Study", "You need to go kill a certain annoying paladin in Blight Ridge.");
 		}
-		if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 4) addButtonDisabled(11, "Advanced Study", "You already completed Advanced Study.");
+		if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 4) addButtonDisabled(11, "Advanced Study", "You have already completed Advanced Study.");
 	}
 	if (flags[kFLAGS.ALVINA_FOLLOWER] >= 20) addButton(14, "Back", camp.campLoversMenu);
 	else addButton(14, "Back", camp.campFollowers);
@@ -252,7 +252,7 @@ public function alvinaMainCampMenuAppearance():void
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
 	outputText("From your knowledge Alvina is of a rare demonic offshoot known as devils. While you are aware that, like most demons, she has advanced shapeshifting abilities, Alvina favors the appearance of a little girl several centuries younger than her true age, mostly for convenience. Alvina’s raven black hair are parted by two heavy goat horns and small furry ears, you ponder at the time why ");
-	outputText("demons and devils got such variants in their physiognomy. Beneath her hair, two pupils glowing like molten embers stare back at you from behind a pair of glasses or at least they do when she's not busy reading some dusty arcane text. Her smug, playful lips hides fangs better suited to a beast than a human and a practiced tongue who has spent centuries wording out some of the most powerful incantations in the realm. \n\n");
+	outputText("demons and devils develop such variants in their physiognomy. Beneath her hair, two pupils glowing like molten embers stare back at you from behind a pair of glasses, or at least they do when she's not busy reading some dusty arcane text. Her smug, playful lips hides fangs better suited to a beast than a human and a practiced tongue who has spent centuries wording out some of the most powerful incantations in the realm. \n\n");
 	outputText("Beneath her neck Alvina’s body is somewhat human-like however her forearms ends in furry four fingered claws while her legs are those of a goat. On her back rests a pair of folded demon wings she doesn't use that often, mainly because flying magically or levitating is, as a general rule more convenient. Beneath her wings is her tail, unlike demons, ");
 	outputText("devils tend to have goat tails instead of the sinuous spade and Alvina’s own goat tail motion reflects her state of mind, becoming agitated during unrest or when she loses her patience.\n\n");
 	outputText("Alvina’s breasts are, surprisingly for a female demon, only an A cup. Anytime you would ask her why she keeps them so small she replies it's because, while a prodigious chest assist in the powers of lust and temptation based spells, a smaller chest is more practical both for the body and the spirit as a larger pair tend to obscure view, ");
@@ -270,22 +270,22 @@ public function alvinaMainCampMenuDiary():void
 {
 	clearOutput();
 	if (flags[kFLAGS.ALVINA_DIARY] == 4) {
-		outputText("While Alvina is busy out of view you open her diary and keep on reading curiosity getting the better of you.\n\n");
+		outputText("While Alvina is busy out of view you open her diary and keep on reading, curiosity getting the better of you.\n\n");
 		outputText("<i>Day 120 year 84\n\n");
 		outputText("Thanks to working actively with the fiend I discovered a new form of magic. A source so far prohibited that draws on the power of desires, lust and the soul itself. It is powerful… So powerful it could actually change spellcasting as we know it. I knew my quest was not in vain and with this new discovery I am one step closer to my goal. I shall make many spells designed around it and develop ");
 		outputText("it to its full extent. This year the king died and his daughter, Lethice took over the throne. She should be easy to manipulate in order to justify any measure I need to take for my researches. Once me and her are ‘best friends’ it will be simple to convince her to assist me in anything I need or want.\n\n");
 		outputText("Day 135 year 89\n\n");
-		outputText("It has been five year since I began my research but I am this close to uncovering the secret of true immortality and power. Lust and desire seems to draw the soul temporarily closer to the heart before stressing it into producing a massive amount of energy. I need to find a way to reproduce this reaction infinitely and, to this end, ");
-		outputText("more live test subject will be needed. It doesn't matter anymore how many die in the process, I’m about to realise my greatest dream!\n\n");
+		outputText("It has been five years since I began my research but I am this close to uncovering the secret of true immortality and power. Lust and desire seems to draw the soul temporarily closer to the heart before stressing it into producing a massive amount of energy. I need to find a way to reproduce this reaction infinitely and, to this end, ");
+		outputText("more live test subjects will be needed. It doesn't matter anymore how many die in the process, I’m about to realise my greatest dream!\n\n");
 		outputText("Day 170 year 91\n\n");
-		outputText("After two years of experimentations I finally created an immortal. However the demon as I call it lacks a moral compass and is obsessed with sex. It is a curious creature. It does not hunger, thirst or even seem to age.It also seems to naturally have an affinity for magic. The stone produced out of the subject seems to be a source of immense powers and so I took it with me in order to research it. ");
-		outputText("However it seems the test subject’s condition is highly contagious and might destroy the entire kingdom if allowed to roam, as I already lost two apprentices to him, it clearly cannot be contained without resorting to force. For this reason I caged the fiend and my now transformed apprentices in order to study the condition further. Truth be told I am genuinely intrigued by this development.\n\n");
+		outputText("After two years of experimentations I have finally created an immortal. However the \"demon\" as I call it lacks a moral compass and is obsessed with sex. It is a curious creature. It does not hunger, thirst or even seem to age. It also seems to naturally have an affinity for magic. The stone produced out of the subject seems to be a source of immense powers and so I took it with me in order to research it. ");
+		outputText("However it seems the test subject’s condition is highly contagious and might destroy the entire kingdom if allowed to roam, and as I have already lost two apprentices to him, it clearly cannot be contained without resorting to force. For this reason I caged the fiend and my now transformed apprentices in order to study the condition further. Truth be told I am genuinely intrigued by this development.\n\n");
 		outputText("Day 171 year 91\n\n");
 		outputText("Just as I suspected, this experiment is a failure. While powerful, the creature I now call demon cannot draw on the power of a soul to bolster his black magic as he lacks one entirely. Black magic when used at its maximum output begins to melt the soul out of the body as it tries to escape its container. ");
-		outputText("I need to find a way to attain the maximum pleasure and power without losing my soul like him in order to obtain the power I seek. Perhaps encasing the soul in an artificial countainment from which It won’t be able to escape is the solution.\n\n");
+		outputText("I need to find a way to attain the maximum pleasure and power without losing my soul like him in order to obtain the power I seek. Perhaps encasing the soul in an artificial containment from which it won’t be able to escape is the solution.\n\n");
 		outputText("Day 170 year 125\n\n");
-		outputText("Dear journal, It has been many years since I fled the capital city. And I did so just in time, as my creations began to rampage after some idiot let them out of their cages. Fools are all obsessed with sex and lust now, clear signs of black magic abuse! I told those idiots that without further researches black magic would destroy them and did they listen? No! ");
-		outputText("Even Lethice seem to have fell prey to this madness as she started calling BDSM and fetishes the new trend. Therefore I fled the capital as everything was going to hell. Regardless, I have made a breakthrough! After separating one of these furry savages from its soul, I found how to bind it to an object that I will call a phylactery. ");
+		outputText("Dear journal, It has been many years since I fled the capital city. And I did so just in time, as my creations began to rampage after some idiot let them out of their cages. Fools are all obsessed with sex and lust now, clear signs of black magic abuse! I told those idiots that without further research black magic would destroy them and did they listen? No! ");
+		outputText("Even Lethice seems to have fallen prey to this madness as she started calling BDSM and fetishes the new trend. Therefore I fled the capital as everything was going to hell. Regardless, I have made a breakthrough! After separating one of these furry savages from its soul, I found how to bind it to an object that I will call a phylactery. ");
 		outputText("I intend to bind mine soon in order to achieve the power of the demons along with the perfect clarity of mind I need to control my new powers without falling prey to this weird madness that has clouded my colleagues judgements.\n\n");
 		outputText("Day 150 year 130\n\n");
 		outputText("Dear journal, after much calculation and experimentation I created a new form of fiend. My creation shall be small and combine the characteristic of the wise revered goat with those of the current demon model. I thought I would be less inclined to carnal activity and wastes of time if I used a body closer to my purpose as a wizard and I was right all along, this form will suit me well. ");
@@ -304,21 +304,21 @@ public function alvinaMainCampMenuDiary():void
 	else if (flags[kFLAGS.ALVINA_DIARY] == 3) {
 		outputText("While Alvina is busy out of view you open her diary and keep on reading. The journal continues detailing Alvina vile progress toward wizardhood but, uninterested in the next sixty years which consist mostly of laboratory log and magical experiment, you skip a few pages.\n\n");
 		outputText("<i>Day 213 Year 70\n\n");
-		outputText("I finally found what I needed as a final ingredient and my sister conveniently happens to have it within her bosom. Only blood can call to blood and in the current case her heart is the component I need in order to get young again so I can continue on my work. That said I considered my options time and time again. In the end it's my life or hers and I am not ready to die just yet, ");
+		outputText("I finally found what I needed as a final ingredient and my sister conveniently happens to have it within her bosom. Only blood can call to blood and in the current case her heart is the component I need in order to become young again so I can continue on my work. That said I considered my options time and time again. In the end it's my life or hers and I am not ready to die just yet, ");
 		outputText("she might just be 2 years younger than me but she will do regardless. Am I a monster? No... It's the world around me that is cruel and so long as I don’t find a way to fix it, sacrifices will need to be made. Stopping here and now would make the deaths of everyone who willingly or unwillingly gave their life for me to get this far be in vain.\n\n");
 		outputText("Day 215 year 71\n\n");
 		outputText("Elizabeth proved little of a challenge for my magic… I stormed her house and ran right to her. What does she have to lose? 65 years old, her kids are gone and she lived happily, she is likely going to die anyway in a few years from a common disease so might as well sacrifice her so I can become young again right? It didn’t go that well. ");
-		outputText("At first I tried to end her life in the most humanly possible way but these words... Those horrible words she and her husband threw at me. I am not a monster and I didn’t kill mom and dad! How dare she tell me this?! In that moment, something snapped in me and I lost all pretence of restraint. ");
+		outputText("At first I tried to end her life in the most humanly possible way but these words... Those horrible words she and her husband threw at me. I am not a monster and I didn’t kill mom and dad! How dare she tell me this?! In that moment, something snapped in me and I lost all pretense of restraint. ");
 		outputText("I ripped the bitch’s heart out once her head was no more. For me to recover all those years I have lost researching untold magic I need to perform this ritual and in order to extend my remaining time I need her heart. It is a sacrifice I am willing to make in the name of accomplishing my dreams.\n\n");
 		outputText("Day 216 year 71\n\n");
-		outputText("I did it, I’m young again as If I was 18. Now all I need is the financial support to resume my experiments as I look toward a more permanent solution to this silly disease called aging. That said the fiend I previously summoned offered to train me further in the magical arts. Perhaps I can learn from him something even the best wizards ignore.\n\n");
+		outputText("I did it, I’m young again as if I was 18. Now all I need is the financial support to resume my experiments as I look toward a more permanent solution to this silly disease called aging. That said the fiend I previously summoned offered to train me further in the magical arts. Perhaps I can learn from him something even the best wizards ignore.\n\n");
 		outputText("Day 170 year 72\n\n");
-		outputText("This is all too perfect. That idiotic court mage up at the king's stronghold took me in as an apprentice. Soon I will have unlimited access to the royal library and of course the old bastard own notes. That said he has very little useful information to give. The people here are way to pious and pure it reminds me of that old teacher I killed so long ago. ");
+		outputText("This is all too perfect. That idiotic court mage up at the king's stronghold took me in as an apprentice. Soon I will have unlimited access to the royal library and of course the old bastard's own notes. That said he has very little useful information to give. The people here are way to pious and pure, it reminds me of that old teacher I killed so long ago. ");
 		outputText("I have seen the power of darkness firsthand and clearly those fools know nothing about true magic.</i>\n\n");
 		outputText("You skip a few pages to see what happened.\n\n");
 		outputText("<i>Day 102 year 80\n\n");
 		outputText("I was finally named archmage out of all the fools at the palace. Truth be told, poisoning the old codgers with undetectable toxins turned out to be perfect because most people think the wizards died from aging. I can now fully devote my time to my research using all the old man had at his disposal.</i>\n\n");
-		outputText("Alvina almost catches you this time but you manage to act like you didn't open her diary or read in it. This is starting to become dangerous maybe you should stop your reading now? You head back to camp.\n\n");
+		outputText("Alvina almost catches you this time but you manage to act like you didn't open her diary or read it. This is starting to become dangerous, maybe you should stop your reading now? You head back to camp.\n\n");
 		flags[kFLAGS.ALVINA_DIARY] = 4;
 		doNext(camp.campFollowers);
 		cheatTime2(20);
@@ -330,12 +330,12 @@ public function alvinaMainCampMenuDiary():void
 		outputText("Fact is I was selected amongst many to become a wizard due to my high intelligence, though no one suspected I still heard the voice of Mephi from time to time in my mind. However the school where I study is so boring and way too strict. The teachers are stubborn and close minded… Restricted area they say? ");
 		outputText("There's no such thing as a restricted area in the library for me… What if a ritual to revive papa and mama was in there? Sooner or later I will find these secret books.\n\n");
 		outputText("Day 35 Year 7\n\n");
-		outputText("I finally deciphered a ritual in the books and just in time too! The teacher had it confiscated but not before I managed to transcribe a copy. I finally found how to summon that creature I met five years ago. This is very creepy magic but I’m willing to pay any price to have my parent back and if that Mephi thing can help I will seek him out. ");
+		outputText("I finally deciphered a ritual in the books and just in time too! The teacher had it confiscated but not before I managed to transcribe a copy. I finally found how to summon that creature I met five years ago. This is very creepy magic but I’m willing to pay any price to have my parents back and if that Mephi thing can help I will seek him out. ");
 		outputText("Heck the teacher is likely just jealous or afraid I will actually surpass him thanks to Mephi’s help, how short sighted!\n\n");
 		outputText("Day 65 Year 7\n\n");
 		outputText("Mephi killed a few students, said it was the price of my debt and that either I had to pay it or they would, I took the wise option. He offered to mentor me but only in exchange for an even greater sacrifice, I am not willing to do such a thing just yet. Since Mephi won’t help without me paying even more I decided not to rely on him for now although he said I would inevitably call him again ");
-		outputText("in due time. I need to continue researching for a way to revive my parent so I will keep looking over these books. At worse I could also revive those dead students so long as I have their corpse right? The teachers are none the wiser, they think someone accidentally summoned that creature in the school and that it started going on a rampage. ");
-		outputText("They know little of the fact I traded the lives of my comrades to him in order to gain the information I wanted.\n\n");
+		outputText("in due time. I need to continue researching for a way to revive my parents so I will keep looking over these books. At worse I could also revive those dead students so long as I have their corpse right? The teachers are none the wiser, they think someone accidentally summoned that creature in the school and that it started going on a rampage. ");
+		outputText("They know little of the fact I traded the lives of my classmates to him in order to gain the information I wanted.\n\n");
 		outputText("Day 110 Year 7\n\n");
 		outputText("How dare they! I got expelled from the mage school just as I finally found what I needed. The principal called me an undisciplined little witch while the bullies laughed behind my back, well fine I will show them how much of a witch I am! Tonight I will summon Mephi like I did several months ago and this time I will let it feast on everyone. ");
 		outputText("Once they are all dead I will pick up the tome the teacher took from me and attempt this resurrection ritual.\n\n");
@@ -354,7 +354,7 @@ public function alvinaMainCampMenuDiary():void
 		outputText("<i>Day 335 Year 2\n\n");
 		outputText("I have begun to hear voices.. terrifying voices calling my name. I don’t know how to reply to them however and I am scared. The man is getting increasingly impatient as if waiting for something. Daddy and mommy are ok for now, praise lady Marae, they have stabilised but this could change at any time.\n\n");
 		outputText("Day 348 Year 2\n\n");
-		outputText("The man is evil, he wants to hurt me. I heard him talk about sacrificing me if things don’t happen within time. The voices are still there too, desperate for me to reach them. I hope this all ends soon. Daddy and mommy look terrible now why did Sis ever open the window!\n\n");
+		outputText("The man is evil, he wants to hurt me. I heard him talk about sacrificing me if things don’t happen in time. The voices are still there too, desperate for me to reach them. I hope this all ends soon. Daddy and mommy look terrible now why did Sis ever open the window!\n\n");
 		outputText("Day 349 Year 2\n\n");
 		outputText("Blood, there was blood everywhere. When the man tried to hit me with a knife, I screamed and something out of my worst nightmare appeared. The man bowed to it but the creature who in my mind told me to be the lord of the pacts, Mephi-something, killed him turning him into a disturbing mess of gore and blood on the ground before me. I screamed but the monster didn’t kill me too, ");
 		outputText("instead he just walked to me and pat me on the head. At that moment I felt strange… as if hot water poured into my body drop by drop, it felt so horribly wrong yet so great. He left saying he would be back in a few years when whatever he did to me would have grown enough that I would be able to call him again, he also said I am indebted to him now but I guess since he saved my life it is not so bad right?</i>\n\n");
@@ -371,7 +371,7 @@ public function alvinaMainCampMenuDiary():void
 		outputText("<i>Day 316 Year 2\n\n");
 		outputText("Mommy and daddy fell sick. The doctor said only the gods can save them but I’m sure he’s lying. He knows we don’t have the money to buy medicine and I heard a weird man in the neighborhood has offered to help me gather the money so I will seek him out and make do on whatever he wants to save mommy and daddy!\n\n");
 		outputText("Day 322 Year 2\n\n");
-		outputText("It hurts… it hurts so much. But the man said I have to endure it if I want the money. I heard people who actively accept to work for him have a tendency to disappear and I am scared. Today he used me as part of some strange thing he call a summoning ritual. ");
+		outputText("It hurts… it hurts so much. But the man said I have to endure it if I want the money. I heard people who actively accept to work for him have a tendency to disappear and I am scared. Today he used me as part of some strange thing he called a summoning ritual. ");
 		outputText("He said he's desperate to talk to someone and needs me for it. My arm is still in pain from the hot iron he marked me with to inscribe some weird drawing into my skin.</i>\n\n");
 		outputText("You decide to close the book before Alvina catches you reading it. Thankfully she didn’t notice and so you head back to camp.\n\n");
 		flags[kFLAGS.ALVINA_DIARY] = 1;
@@ -396,7 +396,7 @@ public function alvinaMainCampMenuDiaryYes():void
 {
 	outputText("You resume reading the book, whatever is in there you need to know.\n\n");
 	outputText("<i>Day 234 year 131\n\n");
-	outputText("Damn it all! I should have known this couldn't be perfect. My body is safe but if my soul was to be destroyed I would disappear into nothingness undone by the very powers that keeps me alive. No one shall ever learn of this weakness. I need to protect the....</i>\n\n");
+	outputText("Damn it all! I should have known this couldn't be perfect. My body is safe but if my soul was to be destroyed I would disappear into nothingness, undone by the very powers that keeps me alive. No one shall ever learn of this weakness. I need to protect the....</i>\n\n");
 	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) > 2) {
 		outputText("Bah you read the rest but can’t find anything useful in her journal to grow any more powerful. Alvina, of course, left most of the details of her weaknesses in the shadow though, since she discussed it with you, you already know the full details of what it is.\n\n");
 		outputText("\"<i>Had a good read?</i>\"\n\n");
@@ -423,7 +423,7 @@ public function alvinaMainCampMenuConfession():void
 	clearOutput();
 	if (flags[kFLAGS.ALVINA_FOLLOWER] == 18) {
 		outputText("You present the flower to Alvina who blushes in surprise. Delicately taking the flower from your hand, she places it in a glass display case.\n\n");
-		outputText("\"<i>I wasn’t sure you would come back alive and with the rose no less, but you did fulfill your end of the bargain and I will fulfill mine. I haven’t had proper sex in a century, so fine, I will give you a try, let’s see what you're made off.</i>\"\n\n");
+		outputText("\"<i>I wasn’t sure you would come back alive and with the rose no less, but you did fulfill your end of the bargain and I will fulfill mine. I haven’t had proper sex in a century, so fine, I will give you a try, let’s see what you're made of.</i>\"\n\n");
 		flags[kFLAGS.ALVINA_FOLLOWER] = 19;
 		if (player.lib > 50) {
 			outputText("You smile perversely and offer to do it right here and right now on your "+(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed" : "bedroll")+".\n\n");
