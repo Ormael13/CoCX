@@ -1393,9 +1393,9 @@ public class PlayerInfo extends BaseContent {
 	public function displayMutationsUsedSpoilers(perkName:PerkType, acquireReq:String = ""):void {
 		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
 			if (player.hasPerk(perkName)) {
-				outputText("\n" + perkName.name + ": Acquired.")
+				outputText("\n" + perkName.name + ": <font color=\"#008000\">Acquired.</font>")
 			} else {
-				outputText("\n" + perkName.name + ": Missing.")
+				outputText("\n" + perkName.name + ": <font color=\"#800000\">Missing.</font>")
 			}
 			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
 				var reqs:Array = []
