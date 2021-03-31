@@ -1604,6 +1604,10 @@ public class PlayerInfo extends BaseContent {
 		if (player.tempWis > 0) addButton(9, "Sub WIS", subtractAttribute, "wis", null, null, "Subtract 1 point (5 points with Shift) from Wisdom.", "Subtract Wisdom");
 		if (player.tempLib > 0) addButton(11, "Sub LIB", subtractAttribute, "lib", null, null, "Subtract 1 point (5 points with Shift) from Libido.", "Subtract Libido");
 
+		hideStats();
+		hideUpDown();
+		mainView.hideAllMenuButtons()
+		mainView.hideComboBox();
 		addButton(13, "Reset", resetAttributes);
 		addButton(14, "Done", finishAttributes);
 	}
