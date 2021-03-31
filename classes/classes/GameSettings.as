@@ -95,7 +95,7 @@ public class GameSettings extends BaseContent {
 			outputText("Instant Leveling: <font color=\"#008000\"><b>ON, Direct Jump</b></font>\nInstantly levels you up to the highest possible given your xp.");
 		}
 		else if (flags[kFLAGS.LVL_UP_FAST] == 1){
-			outputText("Instant Leveling: <font color=\"#008000\"><b>ON, Manual Increase</b></font>\nIncrease XP by specific amounts.")
+			outputText("Instant Leveling: <font color=\"#000080\"><b>ON, Manual Increase</b></font>\nIncrease XP by specific amounts.")
 		}
 		else {
 			outputText("Instant Leveling: <font color=\"#800000\"><b>OFF</b></font>\nIndividual leveling up, i.e. One level click at a time.");

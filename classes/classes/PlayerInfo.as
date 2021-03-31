@@ -1393,9 +1393,9 @@ public class PlayerInfo extends BaseContent {
 	public function displayMutationsUsedSpoilers(perkName:PerkType, acquireReq:String = ""):void {
 		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
 			if (player.hasPerk(perkName)) {
-				outputText("\n" + perkName.name + ": Acquired.")
+				outputText("\n" + perkName.name + ": <font color=\"#008000\">Acquired.</font>")
 			} else {
-				outputText("\n" + perkName.name + ": Missing.")
+				outputText("\n" + perkName.name + ": <font color=\"#800000\">Missing.</font>")
 			}
 			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
 				var reqs:Array = []
@@ -1604,6 +1604,10 @@ public class PlayerInfo extends BaseContent {
 		if (player.tempWis > 0) addButton(9, "Sub WIS", subtractAttribute, "wis", null, null, "Subtract 1 point (5 points with Shift) from Wisdom.", "Subtract Wisdom");
 		if (player.tempLib > 0) addButton(11, "Sub LIB", subtractAttribute, "lib", null, null, "Subtract 1 point (5 points with Shift) from Libido.", "Subtract Libido");
 
+		hideStats();
+		hideUpDown();
+		mainView.hideAllMenuButtons()
+		mainView.hideComboBox();
 		addButton(13, "Reset", resetAttributes);
 		addButton(14, "Done", finishAttributes);
 	}
