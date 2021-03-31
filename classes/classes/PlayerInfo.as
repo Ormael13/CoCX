@@ -1924,7 +1924,7 @@ public class PlayerInfo extends BaseContent {
 			if (player.superPerkPoints > 0) {
 				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(0, "HJ:A", "You already have this super perk.");
 				else {
-					if (player.freeHiddenJobsSlots() > 0) addButton(0, "HJ:A", perkHiddenJobAsura).hint("Choose the 'Hidden Job: Asura' super perk. You've trained in way of asuras. Beings that reached mastery of unleashing wrath to great effect. (+10% of OverMax Wrath, access to Asura Form: 3x more melee attacks per turn, +20%/10%/10% of core str/spe/tou stat value)");
+					if (player.freeHiddenJobsSlots() > 0) addButton(0, "HJ:A", perkHiddenJobAsura).hint("Choose the 'Hidden Job: Asura' super perk. You've trained in way of asuras. Beings that reached mastery of unleashing wrath to great effect. (+10% of OverMax Wrath, access to Asura Form: 3x more melee attacks per turn, +40%/30%/20% of core str/spe/tou stat value)");
 					else addButtonDisabled(0, "HJ:A", "You do not have a free slot for this hidden job.");
 				}
 				if (player.hasPerk(PerkLib.AbsoluteStrength)) addButtonDisabled(1, "AS", "You already have this super perk.");
@@ -1932,16 +1932,28 @@ public class PlayerInfo extends BaseContent {
 					if (player.hasPerk(PerkLib.HiddenJobAsura)) addButton(1, "AS", perkAbsoluteStrength).hint("Choose the 'Absolute Strength' super perk. Increase strength based on current amount of wrath. Also wrath outside of combat will not decay and even with correct perks can slowly rise. (+10% of OverMax Wrath, % based multi bonus to str stat equal to 50% of wrath (updated once a day))");
 					else addButtonDisabled(1, "AS", "You need to first have the 'Hidden Job: Asura' super perk.");
 				}
-				addButtonDisabled(2, "LAB", "Soon.");
-				addButtonDisabled(3, "ICAF", "Soon.");
+				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) addButtonDisabled(2, "LAB", "You already have this super perk.");
+				else {
+					if (player.hasPerk(PerkLib.AbsoluteStrength)) addButton(2, "LAB", perkLikeAnAsuraBoss).hint("Choose the 'Like A-sura Boss' super perk. Adds to toggle starting in Asura Form at combat start, unlocking access specials usable only in asura form, increase to physical might rise to 80%/60%/40% of core str/tou/spe. (+10% of OverMax Wrath)");
+					else addButtonDisabled(2, "LAB", "You need to first have the 'Absolute Strength' super perk.");
+				}
+				if (player.hasPerk(PerkLib.ICastAsuraFist)) addButtonDisabled(3, "ICAF", "You already have this super perk.");
+				else {
+					if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) addButton(3, "ICAF", perkICastAsuraFist).hint("Choose the 'I Cast (Asura) Fist' super perk. Safe treshold for magic/m.specials is always 30%/10% below overmax wrath, +100% of base max wrath. (+10% of OverMax Wrath)");
+					else addButtonDisabled(3, "ICAF", "You need to first have the 'Like A-sura Boss' super perk.");
+				}
+				//addButtonDisabled(4, "", "Soon.");
 			}
 			else {
 				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(0, "HJ:A", "You already have this perk.");
 				else addButtonDisabled(0, "HJ:A", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.AbsoluteStrength)) addButtonDisabled(1, "AS", "You already have this perk.");
 				else addButtonDisabled(1, "AS", "You do not have enough super perk points to obtain this perk.");
-				addButtonDisabled(2, "LAB", "Soon.");
-				addButtonDisabled(3, "ICAF", "Soon.");
+				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) addButtonDisabled(2, "LAB", "You already have this perk.");
+				else addButtonDisabled(2, "LAB", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.ICastAsuraFist)) addButtonDisabled(3, "ICAF", "You already have this perk.");
+				else addButtonDisabled(3, "ICAF", "You do not have enough super perk points to obtain this perk.");
+				//addButtonDisabled(4, "", "Soon.");
 			}
 			//12 -> page + 1 button
 			addButton(13, "Previous", superPerkBuyMenu, page - 1);
@@ -2012,7 +2024,7 @@ public class PlayerInfo extends BaseContent {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.LikeAnAsuraBoss,0,0,0,0);
 		clearOutput();
-		outputText("You gained Like an Asura Boss super perk.");
+		outputText("You gained Like A-sura Boss super perk.");
 		doNext(curry(superPerkBuyMenu, 3));
 	}
 	private function perkICastAsuraFist():void {

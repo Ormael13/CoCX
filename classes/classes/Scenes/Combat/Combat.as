@@ -928,6 +928,9 @@ public class Combat extends BaseContent {
 					bd.disable("You are under transformantion effect incompatibile with Asura Form!");
 				}
 			}
+			if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+				
+			}
 		}
     }
 	public function GolemsMenu():void {
@@ -8861,6 +8864,7 @@ public class Combat extends BaseContent {
             }
 			if (player.statStore.hasBuff("AsuraForm")) {
 				gainedwrath += 2 * BonusWrathMult;
+                if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) gainedwrath += 2 * BonusWrathMult;
 			}
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) gainedwrath *= 2 * BonusWrathMult;
             EngineCore.WrathChange(gainedwrath, false);
@@ -12054,9 +12058,9 @@ public class Combat extends BaseContent {
 	
 	public function asuraformCost():Number {
 		var modcsc:Number = 20;
-		/*if (player.hasPerk(PerkLib.ImprovedCrinosShape)) modcsc += 5;
-		if (player.hasPerk(PerkLib.GreaterCrinosShape)) modcsc += 10;
-		if (player.hasPerk(PerkLib.MasterCrinosShape)) modcsc += 20;
+		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) modcsc += 20;
+		/*if (player.hasPerk(PerkLib.GreaterCrinosShape)) modcsc += 40;
+		if (player.hasPerk(PerkLib.MasterCrinosShape)) modcsc += 80;
 		if (player.hasPerk(PerkLib.JobBeastWarrior) && player.necklaceName == "Crinos Shape necklace") modcsc += 5;*/
 		return modcsc;
 	}
@@ -12076,14 +12080,14 @@ public class Combat extends BaseContent {
 		var tempStr:Number;
 		var tempTou:Number;
 		var tempSpe:Number;
-		temp1 += player.strStat.core.value * 0.4;
-		temp2 += player.touStat.core.value * 0.2;
-		temp3 += player.speStat.core.value * 0.2;/*
-		if (player.hasPerk(PerkLib.ImprovedCrinosShape)) {
-			temp1 += player.strStat.core.value * 0.2;
-			temp2 += player.touStat.core.value * 0.2;
+		temp1 += player.strStat.core.value * 0.6;
+		temp2 += player.touStat.core.value * 0.3;
+		temp3 += player.speStat.core.value * 0.2;
+		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+			temp1 += player.strStat.core.value * 0.6;
+			temp2 += player.touStat.core.value * 0.3;
 			temp3 += player.speStat.core.value * 0.2;
-		}*/
+		}
 		temp1 = Math.round(temp1);
 		temp2 = Math.round(temp2);
 		temp3 = Math.round(temp3);

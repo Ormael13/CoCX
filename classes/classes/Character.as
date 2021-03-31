@@ -974,6 +974,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.PrimalFuryVI) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.ICastAsuraFist) >= 0) multimax += 0.5;
 			if (vehiclesName == "Giant Slayer Mech") {
 				multimax += 0.1;
 				//if (upgrade mecha) multimax += 0.1;
@@ -1000,19 +1001,21 @@ import classes.Items.JewelryLib;
 			return max1;
 		}
 		public function maxSafeWrathMagicalAbilities():Number {
-			var max1:Number = maxWrath();
+			var max1:Number = 0;
+			if (hasPerk(PerkLib.ICastAsuraFist)) max1 += maxOverWrath();
+			else max1 += maxWrath();
 			var max2:Number = 0.9;
-			//if (hasPerk(PerkLib.)) max2 += 0.1;
 			//if (hasPerk(PerkLib.)) max2 += 0.1;
 			max1 *= max2;
 			max1 = Math.round(max1);
 			return max1;
 		}
 		public function maxSafeWrathSpellcasting():Number {
-			var max1:Number = maxWrath();
+			var max1:Number = 0;
+			if (hasPerk(PerkLib.ICastAsuraFist)) max1 += maxOverWrath();
+			else max1 += maxWrath();
 			var max2:Number = 0.7;
 			if (hasPerk(PerkLib.MagesWrath)) max2 += 0.05;
-			//if (hasPerk(PerkLib.)) max2 += 0.1;
 			//if (hasPerk(PerkLib.)) max2 += 0.1;
 			max1 *= max2;
 			max1 = Math.round(max1);

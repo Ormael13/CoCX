@@ -600,6 +600,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.PrimalFuryI) >= 0) multimax += (0.05 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.ICastAsuraFist) >= 0) multimax += 0.5;
 			if (statusEffectv4(StatusEffects.SaiyanNumber1a) > 0) multimax += statusEffectv4(StatusEffects.SaiyanNumber1a);
 			if (statusEffectv4(StatusEffects.SaiyanNumber2a) > 0) multimax += statusEffectv4(StatusEffects.SaiyanNumber2a);
 			if (statusEffectv4(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv4(StatusEffects.SaiyanNumber3a);

@@ -46,8 +46,13 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("<b>Lustzerking was used succesfully.</b>\n\n");
 		}
 		if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 1) {
-			outputText("<b>Crinos Shape was activated succesfully.</b>\n\n");
+			outputText("You roar and unleash your inner beast assuming Crinos Shape in order to destroy your foe!\n\n");
 			assumeCrinosShape007();
+		}
+		if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 1) {
+			outputText("As you starts to unleash your inner wrath two additional faces emerge from head on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
+			outputText("Finishing assuming Asura form you're ready to destroy anyone that would dare to stand in your way!\n\n");
+			combat.assumeAsuraForm007();
 		}
 		if (player.wrath >= 50 && flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] == 1) {
 			player.wrath -= 50;
