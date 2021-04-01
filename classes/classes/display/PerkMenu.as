@@ -133,7 +133,7 @@ public class PerkMenu extends BaseContent {
 			outputText("</b>");
 		}
 		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-			outputText("\n\nYou can choose between starting fight with Asura form active or not.");
+			outputText("\n\nYou can choose between starting fight with Asura form active or not. (If Crinos Shape toggle is set on Autocast this one toggle will be ignored and only crinos Shape would be autocasted)");//"+(player.hasPerk(PerkLib.)?"":"")+"
 			outputText("\n\nAsura Form: <b>");
 			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 1) outputText("Autocast");
 			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 0) outputText("Manual");

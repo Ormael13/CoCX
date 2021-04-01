@@ -131,8 +131,8 @@ package classes.Scenes
 			outputText("-1 new achievment. (shadow one)\n");
 			outputText("-New tier 0 intelligence lvl-up perk: Mana Core. Req. Job: Sorcerer, 345+ max mana. Effect: Increase max mana by 10% + 10% to 15% (per each attained magical mastery stage) of base value.\n");
 			outputText("-New event perk: Absolute Strength. Gained by spending 1 super perk point and having 'Hidden Job: Asura' super perk. Effects: Allow to reach OverMax Wrath equal to 120% of current max wrath. Increase strength based on current amount of wrath as long wrath is above 50% (1:2 ratio). Also wrath outside of combat will not decay and even with correct perks can slowly rise.\n");
-			outputText("-New event perk: Like A-sura Boss. Gained by spending 1 super perk point and having 'Absolute Strength' super perk. Effects: Allow to reach OverMax Wrath equal to 130% of current max wrath. Adds to toggle starting in Asura Form at combat start, unlocking access specials usable only in asura form, increase to physical might rise to 80%/60%/40% of core str/tou/spe.\n");
-			outputText("-New event perk: I Cast (Asura) Fist. Gained by spending 1 super perk point and having 'Like A-sura Boss' super perk. Effects: Allow to reach OverMax Wrath equal to 140% of current max wrath. Safe treshold for magic/m.specials is always 30%/10% below overmax wrath, +50% of base max wrath.\n");
+			outputText("-New event perk: Like A-sura Boss. Gained by spending 1 super perk point and having 'Absolute Strength' super perk. Effects: Allow to reach OverMax Wrath equal to 130% of current max wrath. Adds to toggle starting in Asura Form at combat start, increase to physical might rise to 80%/60%/40% of core str/tou/spe.\n");
+			outputText("-New event perk: I Cast (Asura) Fist. Gained by spending 1 super perk point and having 'Like A-sura Boss' super perk. Effects: Allow to reach OverMax Wrath equal to 140% of current max wrath. Safe treshold for magic/m.specials is magic/m.specials is calculated based on overmax wrath not max wrath, +50% of base max wrath.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -3260,4 +3260,4 @@ package classes.Scenes
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 	}
-}
+}
