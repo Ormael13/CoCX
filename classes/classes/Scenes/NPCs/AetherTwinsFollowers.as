@@ -374,7 +374,13 @@ public function aethertwinsFollowersFeedMaterial(itype:ItemType):void {
 	outputText("You decide it's time to upgrade the twins with some new material. You grab the "+itype.shortName+" out of your bag and slowly let the twin eat it, the material turning liquid as you squeeze it between gauntlets. ");
 	outputText("Before long the now fluid "+itype.shortName+" is coating them entirely. A few seconds later you are done and the "+itype.shortName+" is fully absorbed into the twins.\n\n");
 	outputText("\"<i>Thank you for the meal.</i>\" they grins.\n\n");
-	if (player.hasItem(useables.S_INGOT, 1)) AetherTwinsFoodMenuSilver += 1;
+	switch (itype) {
+		case useables.TIN_ORE: AetherTwinsFoodMenuTin += 1;		break;
+		case useables.COP_ORE: AetherTwinsFoodMenuCopper += 1;	break;
+		//case useables.: AetherTwinsFoodMenuIron += 1;	break;
+		case useables.S_INGOT: AetherTwinsFoodMenuSilver += 1;	break;
+		case useables.G_INGOT: AetherTwinsFoodMenuGold += 1;	break;
+	}
 	player.destroyItems(itype, 1);
 	doNext(aethertwinsFollowersFeed);
 	cheatTime(1/4);

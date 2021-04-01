@@ -919,18 +919,28 @@ public class Combat extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.HiddenJobAsura)) {
 			if (player.statStore.hasBuff("AsuraForm")) {
-				buttons.add("Return", returnToNormalShape).hint("Return to normal from Asura form.");
+				bd = buttons.add("Return", returnToNormalShape).hint("Return to normal from Asura form.");
+				bd = buttons.add("Asura's Howl", asurasHowl).hint("Unleash a howl before giving enemy good punching. \n\nWrath Cost: 50");
+				if (player.wrath < 50) {
+					bd.disable("Your wrath is too low to unleash howl!");
+				}
+				if (player.hasPerk(PerkLib.AbsoluteStrength)) {
+					
+				}
+				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+					
+				}
+				if (player.hasPerk(PerkLib.ICastAsuraFist)) {
+					
+				}
 			} else {
-				bd = buttons.add("Asura Form", assumeAsuraForm).hint("Let your wrath flow thou you, transforming you into Asura! \n\nWrath Cost: " + asuraformCost() + " per turn");//  Greatly increases your strength, speed and fortitude!
+				bd = buttons.add("Asura Form", assumeAsuraForm).hint("Let your wrath flow thou you, transforming you into Asura! \n\nWrath Cost: " + asuraformCost() + " per turn");
 				if (player.wrath < asuraformCost()) {
 					bd.disable("Your wrath is too low to enter this state!");
 				}
 				if (player.statStore.hasBuff("CrinosShape")) {// && !player.hasPerk(PerkLib.HiddenJobAsura)
 					bd.disable("You are under transformantion effect incompatibile with Asura Form!");
 				}
-			}
-			if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-				
 			}
 		}
     }
@@ -12107,6 +12117,34 @@ public class Combat extends BaseContent {
 		outputText("Gathering all you willpower you forcefully subduing your inner rage and returning to your normal shape.");
 		player.statStore.removeBuffs("AsuraForm");
 		enemyAI();
+	}
+	
+	public function asurasHowl():void {
+		clearOutput();
+		player.wrath -= 50;
+		var heal:Number = 0;
+		heal += scalingBonusIntelligence();
+		if (player.hasPerk(PerkLib.WisenedHealer)) heal += scalingBonusWisdom();
+		heal *= healMod();
+		if (player.armorName == "skimpy nurse's outfit") heal *= 1.2;
+		if (player.weaponName == "unicorn staff") heal *= 1.5;
+		if (player.hasPerk(PerkLib.CloseToDeath) && player.HP < (player.maxHP() * 0.25)) {
+			if (player.hasPerk(PerkLib.CheatDeath) && player.HP < (player.maxHP() * 0.1)) heal *= 2.5;
+			else heal *= 1.5;
+		}
+		//Determine if critical heal!
+		var crit:Boolean = false;
+		var critHeal:int = 5;
+		critHeal += combatMagicalCritical();
+		if (rand(100) < critHeal) {
+			crit = true;
+			heal *= 1.75;
+		}
+		heal = Math.round(heal);
+		outputText("Gathering all you wrath you unleash howl while your wounds healing a bit. <b>(<font color=\"#008000\">+" + heal + "</font>)</b>.");
+		if (crit) outputText(" <b>*Critical Heal!*</b>");
+		HPChange(heal,false);
+		basemeleeattacks();
 	}
 
     public function oniRampagePowerMulti():Number {

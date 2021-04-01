@@ -11081,10 +11081,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Sprouting more!
         if (changes < changeLimit && enhanced && player.bRows() < 4 && player.breastRows[player.bRows() - 1].breastRating > 1) {
-            outputText("\n\nYour belly rumbles unpleasantly for a second as the ");
-            if (!enhanced) outputText("berry "); //Why does this exist? Your requirements specifically exclude this.
-            else outputText("drink ");
-            outputText("settles deeper inside you.  A second later, the unpleasant gut-gurgle passes, and you let out a tiny burp of relief.  Before you finish taking a few breaths, there's an itching below your " + allChestDesc() + ".  You idly scratch at it, but gods be damned, it hurts!  You peel off part of your [armor] to inspect the unwholesome itch, ");
+            outputText("\n\nYour belly rumbles unpleasantly for a second as the drink settles deeper inside you.  A second later, the unpleasant gut-gurgle passes, and you let out a tiny burp of relief.  Before you finish taking a few breaths, there's an itching below your " + allChestDesc() + ".  You idly scratch at it, but gods be damned, it hurts!  You peel off part of your [armor] to inspect the unwholesome itch, ");
             if (player.biggestTitSize() >= 8) outputText("it's difficult to see past the wall of tits obscuring your view.");
             else outputText("it's hard to get a good look at.");
             outputText("  A few gentle prods draw a pleasant gasp from your lips, and you realize that you didn't have an itch - you were growing new nipples!");
