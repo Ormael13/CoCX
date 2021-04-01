@@ -248,7 +248,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8r";
-			version = ver + " (<b></b>)";
+			version = ver + " (<b>2nd marriage option, new type of enemeis + 2nd floor of RD opened, wrath changes (part 1), 2nd hidden job, many small QoL changes and bugfixes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
