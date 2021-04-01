@@ -538,6 +538,7 @@ public class Combat extends BaseContent {
                 if (player.hasStatusEffect(StatusEffects.SoulArena) || monster.hasPerk(PerkLib.NoGemsLost)) gemsLost = 0;
 				//Keep gems from going below zero.
                 if (gemsLost > player.gems) gemsLost = player.gems;
+                if (monster.short == "manticore") gemsLost = 0;
                 var timePasses:int = monster.handleCombatLossText(inDungeon, gemsLost); //Allows monsters to customize the loss text and the amount of time lost
                 if (player.hasStatusEffect(StatusEffects.SoulArena) || (monster.short == "Hellfire Snail" && player.hasPerk(PerkLib.FireAffinity))) timePasses = 1;
                 player.gems -= gemsLost;
