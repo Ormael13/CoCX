@@ -405,7 +405,7 @@ import coc.view.MainView;
 			var newFlags:DefaultDict = new DefaultDict();
 			if (player.hasKeyItem("Ascension") >= 0) {
 				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALLING, kFLAGS.INTELLIGENCE_SCALLING, kFLAGS.STRENGTH_SCALLING, kFLAGS.SPEED_SCALLING, kFLAGS.SECONDARY_STATS_SCALING, kFLAGS.SPELLS_COOLDOWNS,
-				kFLAGS.WATERSPORTS_ENABLED, kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL]) {
+				kFLAGS.WATERSPORTS_ENABLED, kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.CHARVIEW_STYLE]) {
 					newFlags[flag] = flags[flag];
 				}
 			}
@@ -3650,6 +3650,10 @@ import coc.view.MainView;
 			player.tailType = Tail.NONE;
 			player.tailRecharge = 0;
 			player.level = 0;
+			player.masteryGauntletLevel = 0;
+			player.masteryGauntletXP = 0;
+			player.masteryDaggerLevel = 0;
+			player.masteryDaggerXP = 0;
 			player.masterySwordLevel = 0;
 			player.masterySwordXP = 0;
 			player.masteryAxeLevel = 0;
@@ -3660,6 +3664,16 @@ import coc.view.MainView;
 			player.masteryDuelingSwordXP = 0;
 			player.masterySpearLevel = 0;
 			player.masterySpearXP = 0;
+			player.masteryWhipLevel = 0;
+			player.masteryWhipXP = 0;
+			player.masteryExoticLevel = 0;
+			player.masteryExoticXP = 0;
+			player.masteryArcheryLevel = 0;
+			player.masteryArcheryXP = 0;
+			player.masteryThrowingLevel = 0;
+			player.masteryThrowingXP = 0;
+			player.masteryFirearmsLevel = 0;
+			player.masteryFirearmsXP = 0;
 			player.dualWSLevel = 0;
 			player.dualWSXP = 0;
 			player.dualWNLevel = 0;
@@ -3683,6 +3697,9 @@ import coc.view.MainView;
 			player.setHeadJewelry(HeadJewelryLib.NOTHING);
 			player.setNecklace(NecklaceLib.NOTHING);
 			player.setJewelry(JewelryLib.NOTHING);
+			player.setJewelry2(JewelryLib.NOTHING);
+			player.setJewelry3(JewelryLib.NOTHING);
+			player.setJewelry4(JewelryLib.NOTHING);
 			player.setVehicle(VehiclesLib.NOTHING);
 			inventory.clearStorage();
 			inventory.clearGearStorage();

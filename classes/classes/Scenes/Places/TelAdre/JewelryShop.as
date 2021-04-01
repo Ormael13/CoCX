@@ -146,6 +146,7 @@ public class JewelryShop extends Shop {
         addButton(button++, useables.AMETIST.shortName, confirmBuy, useables.AMETIST);
         addButton(button++, useables.DIAMOND.shortName, confirmBuy, useables.DIAMOND);
         addButton(button++, useables.S_INGOT.shortName, confirmBuy, useables.S_INGOT);
+        addButton(button++, useables.G_INGOT.shortName, confirmBuy, useables.G_INGOT);
         addButton(14, "Back", inside);
     }
 }

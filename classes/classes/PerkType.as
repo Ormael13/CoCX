@@ -488,6 +488,17 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireMaxMana(value:int):PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxMana() >= value;
+				},
+				text: "Max. Mana "+value,
+				type: "mana",
+				value: value
+			});
+			return this;
+		}
 		private function fnRequireAttr(attrname:String,value:int):Function {
 			return function(player:Player):Boolean {
 				return player[attrname] >= value;

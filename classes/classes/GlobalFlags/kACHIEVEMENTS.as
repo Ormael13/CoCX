@@ -429,7 +429,7 @@ package classes.GlobalFlags
 		public static const EPIC_F_H_B_S_CURVIER_1:int				= 382;
 		public static const EPIC_F_H_B_S_CURVIER_2:int				= 383;
 		public static const EPIC_F_H_B_S_CURVIER_3:int				= 384;
-		public static const UNKNOWN_ACHIEVEMENT_385:int				= 385;
+		public static const COMBAT_EDGY_CASTER:int					= 385;
 		public static const UNKNOWN_ACHIEVEMENT_386:int				= 386;
 		public static const UNKNOWN_ACHIEVEMENT_387:int				= 387;
 		public static const UNKNOWN_ACHIEVEMENT_388:int				= 388;

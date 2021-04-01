@@ -14,7 +14,6 @@ package classes.Items
 		public static const NOTHING:WeaponRange = new Nothing();	//cena broni palnych to: (wart atk * 20) + (ilość naboi w magazynku * 30)
 		//public const TRFATBI:WeaponRange = new WeaponRange("TrFatbi", "TripxiFatbilly", "Tripxi Fatbilly", "a Tripxi Fatbilly", "shot", 260, 5230, "", "2H Firearm");
 		//public const TRFATBI:WeaponRange = new WeaponRange("TrFatbi", "TripxiFatbilly", "Tripxi Fatbilly", "a Tripxi Fatbilly", "shot", 260, 5230, "", "2H Firearm");
-		//public const TRFATBI:WeaponRange = new WeaponRange("TrFatbi", "TripxiFatbilly", "Tripxi Fatbilly", "a Tripxi Fatbilly", "shot", 260, 5230, "", "2H Firearm");
 		//pump action shotgun, Lawgiver (wzorowany na broni z Judge Dreed xD), x
 		public const ADBSCAT:WeaponRangeWithPerk = new WeaponRangeWithPerk("DBScatt", "A.D.B.Scattergun", "antique double barrel scattergun", "an antique double barrel scattergun", "shot", 28, 920, "This is a double barrel scattergun. It's effective at short range but poor at long range. When fighting multiple enemies it bullet splitting after leaving muzzle cause to deal a bit more damage to enemies.", "Rifle",
 				PerkLib.Accuracy2,60,0,0,0);
@@ -40,6 +39,7 @@ package classes.Items
 				PerkLib.Accuracy2,30,0,0,0);
 		public const BOWOLD_:WeaponRangeWithPerk = new WeaponRangeWithPerk("BowOld ", "BowOld ", "old bow", "an old bow", "shot", 1, 50, "This is an old bow. It's barely effective even at short range not to meantion it poor accuracy.", "Bow",
 				PerkLib.Accuracy2,50,0,0,0);
+		public const DBDRAGG:WeaponRange = new WeaponRange("DBDragG", "DoubleBarreledDragonGun", "Double barreled dragon gun", "a Double barreled dragon gun", "shot", 50, 1060, "Also called shotguns the dragon gun can hit multiple targets in a spray shot.", "2H Firearm");
 		public const DERPLAU:WeaponRange = new WeaponRange("DerpLau", "DerpnadeLauncher", "Derpnade Launcher", "a Derpnade Launcher", "shot", 100, 2030, "A firearm as deadly to others as it is to the user. Launches bouncing explosives which deals aoe damage but can also bounce back if not careful!", "2H Firearm");
 		public const DESEAGL:WeaponRange = new WeaponRange("DesEagl", "DesertEagle", "Desert Eagle", "a Desert Eagle", "shot", 25, 620, "A single hand firearm, the desert eagle has the largest bullets out of the pistol family. Its shots are deadly and precises through the gun has one hell of a recoil.", "Pistol");
 		public const DPISTOL:WeaponRange = new WeaponRange("DPistol", "DartPistol", "Dart pistol", "a Dart pistol", "shot", 1, 120, "This weapon is not designed to wound but to deliver loads of chemical into the victim bloodstream.", "Pistol");

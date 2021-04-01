@@ -3666,14 +3666,22 @@ public function wakeFromBadEnd():void {
 		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] > 1) performancePointsPrediction += 2;
 		if (flags[kFLAGS.CAMP_UPGRADES_DAM] > 0) performancePointsPrediction += (flags[kFLAGS.CAMP_UPGRADES_DAM] * 2);
 		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] > 0) performancePointsPrediction += (flags[kFLAGS.CAMP_UPGRADES_FISHERY] * 2);
+		if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) performancePointsPrediction += 2;
 		//Children
 		var childPerformance:int = 0;
 		childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
 		childPerformance += (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren() + flags[kFLAGS.ZENJI_KIDS]);
 		childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4) + (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] / 4) + (flags[kFLAGS.MITZI_DAUGHTERS] / 4));
 		performancePointsPrediction += Math.sqrt(childPerformance);
-		//Level
+		//Various Level trackers
 		performancePointsPrediction += player.level;
+		if (player.level >= 42) performancePointsPrediction += (player.level - 41);
+		if (player.level >= 102) performancePointsPrediction += (player.level - 101);
+		if (player.level >= 180) performancePointsPrediction += (player.level - 179);
+		if (player.teaseLevel >= 25) {
+			performancePointsPrediction += 25;
+		}
+		else performancePointsPrediction += player.teaseLevel;
 		performancePointsPrediction = Math.round(performancePointsPrediction);
 		return performancePointsPrediction;
 	}
@@ -3691,46 +3699,46 @@ public function wakeFromBadEnd():void {
 				}
 			} else {
 				mainView.setMenuButton(MainView.MENU_LEVEL, "Level Up");
-				var hp:int = 15;
+				var hp:int = 60;
 				var fatigue:int = 5;
 				var mana:int = 10;
 				var soulforce:int = 5;
-				var wrath:int = 1;
-				var lust:int = 1;
+				var wrath:int = 5;
+				var lust:int = 3;
 				var statpoints:int = 5;
 				var perkpoints:int = 1;
 				if (player.level <= 6) {
-					hp += 15;
+					hp += 60;
 					fatigue += 5;
 					mana += 10;
 					soulforce += 5;
-					wrath += 1;
-					lust += 1;
+					wrath += 5;
+					lust += 3;
 				}
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
-					hp += 20;
-					lust += 2;
+					hp += 80;
+					lust += 6;
 					fatigue += 6;
 				}
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) {
-					wrath += 2;
+					wrath += 10;
 					mana += 12;
 					soulforce += 6;
 				}
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) {
-					hp += 20;
-					lust += 2;
+					hp += 80;
+					lust += 6;
 					fatigue += 6;
 				}
 				if (player.findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) {
-					wrath += 2;
+					wrath += 10;
 					mana += 12;
 					soulforce += 6;
 				}
-				if (player.findPerk(PerkLib.UnlockBody) >= 0) hp += 15;
-				if (player.findPerk(PerkLib.UnlockBody2ndStage) >= 0) hp += 15;
-				if (player.findPerk(PerkLib.UnlockBody3rdStage) >= 0) hp += 15;
-				if (player.findPerk(PerkLib.UnlockBody4thStage) >= 0) hp += 15;
+				if (player.findPerk(PerkLib.UnlockBody) >= 0) hp += 60;
+				if (player.findPerk(PerkLib.UnlockBody2ndStage) >= 0) hp += 60;
+				if (player.findPerk(PerkLib.UnlockBody3rdStage) >= 0) hp += 60;
+				if (player.findPerk(PerkLib.UnlockBody4thStage) >= 0) hp += 60;
 				if (player.findPerk(PerkLib.UnlockEndurance) >= 0) fatigue += 5;
 				if (player.findPerk(PerkLib.UnlockEndurance2ndStage) >= 0) fatigue += 5;
 				if (player.findPerk(PerkLib.UnlockEndurance3rdStage) >= 0) fatigue += 5;
@@ -3743,14 +3751,14 @@ public function wakeFromBadEnd():void {
 				if (player.findPerk(PerkLib.UnlockSpirit2ndStage) >= 0) soulforce += 5;
 				if (player.findPerk(PerkLib.UnlockSpirit3rdStage) >= 0) soulforce += 5;
 				if (player.findPerk(PerkLib.UnlockSpirit4thStage) >= 0) soulforce += 5;
-				if (player.findPerk(PerkLib.UnlockId) >= 0) wrath += 1;
-				if (player.findPerk(PerkLib.UnlockId2ndStage) >= 0) wrath += 1;
-				if (player.findPerk(PerkLib.UnlockId3rdStage) >= 0) wrath += 1;
-				if (player.findPerk(PerkLib.UnlockId4thStage) >= 0) wrath += 1;
-				if (player.findPerk(PerkLib.UnlockArdor) >= 0) lust += 1;
-				if (player.findPerk(PerkLib.UnlockArdor2ndStage) >= 0) lust += 1;
-				if (player.findPerk(PerkLib.UnlockArdor3rdStage) >= 0) lust += 1;
-				if (player.findPerk(PerkLib.UnlockArdor4thStage) >= 0) lust += 1;
+				if (player.findPerk(PerkLib.UnlockId) >= 0) wrath += 5;
+				if (player.findPerk(PerkLib.UnlockId2ndStage) >= 0) wrath += 5;
+				if (player.findPerk(PerkLib.UnlockId3rdStage) >= 0) wrath += 5;
+				if (player.findPerk(PerkLib.UnlockId4thStage) >= 0) wrath += 5;
+				if (player.findPerk(PerkLib.UnlockArdor) >= 0) lust += 3;
+				if (player.findPerk(PerkLib.UnlockArdor2ndStage) >= 0) lust += 3;
+				if (player.findPerk(PerkLib.UnlockArdor3rdStage) >= 0) lust += 3;
+				if (player.findPerk(PerkLib.UnlockArdor4thStage) >= 0) lust += 3;
 				if (player.level < 6) {
 					statpoints += 5;
 					perkpoints += 1;
@@ -4550,12 +4558,23 @@ public function wakeFromBadEnd():void {
 	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 31) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 32;
 			clearOutput();
-			outputText("Text.");
+			outputText("Matters of heart are... complicated and tangled so we gonna pull them wide till they get all straight like string ^^");
+			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) {
+				flags[kFLAGS.MARRIAGE_FLAG] = 0;
+				flags[kFLAGS.MICHIKO_TALK_MARRIAGE] = 1;
+			}
 			doNext(doCamp);
 			return;
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 32) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 33;
+			clearOutput();
+			outputText("Text.");
+			doNext(doCamp);
+			return;
+		}
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 33) {
+			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
 			clearOutput();
 			outputText("Text.");
 			doNext(doCamp);

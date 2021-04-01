@@ -299,6 +299,9 @@ public function aethertwinsFollowersFeed():void {
 	if (AetherTwinsTalkMenu > 0) {
 		outputText("\n\nEaten materials:");
 		outputText("\n-Silver ingot ("+AetherTwinsFoodMenuSilver+"/"+AetherTwinsFoodMenuSilverCap+")");
+		outputText("\n-Gold ingot ("+AetherTwinsFoodMenuGold+"/"+AetherTwinsFoodMenuGoldCap+")");
+		outputText("\n-Tin ore ("+AetherTwinsFoodMenuTin+"/"+AetherTwinsFoodMenuTinCap+")");
+		outputText("\n-Copper ore ("+AetherTwinsFoodMenuCopper+"/"+AetherTwinsFoodMenuCopperCap+")");
 	}
 	outputText("\n\nEaten equipment:");
 	if (AetherTwinsFoodMenuBuckler) outputText("\n-Buckler");
@@ -316,8 +319,32 @@ public function aethertwinsFollowersFeed():void {
 			else addButtonDisabled(btn, useables.S_INGOT.shortName, "They can't eat more of this type of metal without undergoing evolution.");
 		}
 		else addButtonDisabled(btn, useables.S_INGOT.shortName, "They can't eat this type of metal before first evolution.");
+		btn++;
 	}
-	btn++;
+	if (player.hasItem(useables.G_INGOT, 1)) {
+		if (AetherTwinsTalkMenu > 0) {
+			if (AetherTwinsFoodMenuGold < AetherTwinsFoodMenuGoldCap) addButton(btn, useables.G_INGOT.shortName, aethertwinsFollowersFeedMaterial, useables.G_INGOT);
+			else addButtonDisabled(btn, useables.G_INGOT.shortName, "They can't eat more of this type of metal without undergoing evolution.");
+		}
+		else addButtonDisabled(btn, useables.G_INGOT.shortName, "They can't eat this type of metal before first evolution.");
+		btn++;
+	}
+	if (player.hasItem(useables.TIN_ORE, 1)) {
+		if (AetherTwinsTalkMenu > 0) {
+			if (AetherTwinsFoodMenuTin < AetherTwinsFoodMenuTinCap) addButton(btn, useables.TIN_ORE.shortName, aethertwinsFollowersFeedMaterial, useables.TIN_ORE);
+			else addButtonDisabled(btn, useables.TIN_ORE.shortName, "They can't eat more of this type of metal without undergoing evolution.");
+		}
+		else addButtonDisabled(btn, useables.TIN_ORE.shortName, "They can't eat this type of metal before first evolution.");
+		btn++;
+	}
+	if (player.hasItem(useables.COP_ORE, 1)) {
+		if (AetherTwinsTalkMenu > 0) {
+			if (AetherTwinsFoodMenuCopper < AetherTwinsFoodMenuCopperCap) addButton(btn, useables.COP_ORE.shortName, aethertwinsFollowersFeedMaterial, useables.COP_ORE);
+			else addButtonDisabled(btn, useables.COP_ORE.shortName, "They can't eat more of this type of metal without undergoing evolution.");
+		}
+		else addButtonDisabled(btn, useables.COP_ORE.shortName, "They can't eat this type of metal before first evolution.");
+		btn++;
+	}
 	if (player.hasItem(shields.BUCKLER, 1) && !AetherTwinsFoodMenuBuckler) {
 		addButton(btn, shields.BUCKLER.shortName, aethertwinsFollowersFeedEquipment, shields.BUCKLER);
 		btn++;
@@ -347,7 +374,13 @@ public function aethertwinsFollowersFeedMaterial(itype:ItemType):void {
 	outputText("You decide it's time to upgrade the twins with some new material. You grab the "+itype.shortName+" out of your bag and slowly let the twin eat it, the material turning liquid as you squeeze it between gauntlets. ");
 	outputText("Before long the now fluid "+itype.shortName+" is coating them entirely. A few seconds later you are done and the "+itype.shortName+" is fully absorbed into the twins.\n\n");
 	outputText("\"<i>Thank you for the meal.</i>\" they grins.\n\n");
-	if (player.hasItem(useables.S_INGOT, 1)) AetherTwinsFoodMenuSilver += 1;
+	switch (itype) {
+		case useables.TIN_ORE: AetherTwinsFoodMenuTin += 1;		break;
+		case useables.COP_ORE: AetherTwinsFoodMenuCopper += 1;	break;
+		//case useables.: AetherTwinsFoodMenuIron += 1;	break;
+		case useables.S_INGOT: AetherTwinsFoodMenuSilver += 1;	break;
+		case useables.G_INGOT: AetherTwinsFoodMenuGold += 1;	break;
+	}
 	player.destroyItems(itype, 1);
 	doNext(aethertwinsFollowersFeed);
 	cheatTime(1/4);

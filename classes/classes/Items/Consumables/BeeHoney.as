@@ -232,16 +232,15 @@ public class BeeHoney extends Consumable
 				else outputText("\n\nPainful swelling just above your " + Appearance.buttDescription(player) + " doubles you over.  It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and rounding with a series of pops until you have a bulbous abdomen hanging just above your butt.  The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide.  You sigh as your stinger slides into place with a 'snick', finishing the transformation.  <b>You have a bee's abdomen.</b>");
 				mutations.setTailType(Tail.BEE_ABDOMEN,1);
 				player.tailVenom = 10;
-				player.tailRecharge = 2;
+				player.tailRecharge = 5;
 				changes++;
 			}
 			//Venom Increase
 			if (changes < changeLimit && player.tailType == Tail.BEE_ABDOMEN && player.tailRecharge < 15 && Utils.rand(2)) {
-				if (player.tailRecharge < 5) player.tailRecharge += 1;
 				if (player.tailRecharge < 10) player.tailRecharge += 1;
 				if (player.tailRecharge < 15) player.tailRecharge += 1;
 				player.tailVenom += 50;
-				if (player.tailVenom > 100) player.tailVenom = 100;
+				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 				outputText("\n\nYour abdomen swells with vitality and a drop of venom escapes your stinger as it begins producing it in slightly larger quantities.");
 				changes++;
 			}

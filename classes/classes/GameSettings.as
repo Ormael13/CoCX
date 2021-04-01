@@ -26,10 +26,11 @@ public class GameSettings extends BaseContent {
 		displayHeader("Settings");
 		outputText("Here, you can adjust the gameplay and interface settings. Setting flags are saved in a special file so you don't have to re-adjust it each time you load a save file.");
 		menu();
-		addButton(0, "Gameplay", settingsScreenGameSettings);
+		addButton(0, "Gameplay(1)", settingsScreenGameSettings);
 		addButton(1, "Interface", settingsScreenInterfaceSettings);
 		addButton(3, "Font Size", fontSettingsMenu);
-		addButton(4, "Controls", displayControls);
+		addButton(4, "Controls", displayControls);		
+		addButton(5, "Gameplay(2)", settingsScreenGameSettings2);
 		addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
         if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 			debug                               = false;
@@ -45,14 +46,10 @@ public class GameSettings extends BaseContent {
 	public function settingsScreenGameSettings():void {
 		clearOutput();
 		displayHeader("Gameplay Settings");
-
 		if (flags[kFLAGS.HARDCORE_MODE] > 0) outputText("<font color=\"#ff0000\">Hardcore mode is enabled. Cheats are disabled.</font>\n\n");
-
 		if (debug) outputText("Debug Mode: <font color=\"#008000\"><b>ON</b></font>\n Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
 		else outputText("Debug Mode: <font color=\"#800000\"><b>OFF</b></font>\n Items consumption will occur as normal.");
-
 		outputText("\n\n");
-
 		if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) {
 			outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent stats modifiers. You can resume from bad-ends with penalties.");
 		}
@@ -68,151 +65,74 @@ public class GameSettings extends BaseContent {
 		else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) {
 			outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 100% damage and gives ~40% more EXP.");
 		}
-
 		outputText("\n\n");
-
-		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) {
-			outputText("Secondary Stats Modifier: <font color=\"#808000\"><b>Normal</b></font>\n No opponent secondary stats modifiers.");
-		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 10x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 25x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-		}
-		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 100x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
-		}
-
-		outputText("\n\n");
-
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) {
 			outputText("Easy Mode: <font color=\"#008000\"><b>ON</b></font>\n Bad-ends can be ignored and combat is as easy that even coc1 and coc2 makers can't breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
 		}
 		else {
 			outputText("Easy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Bad-ends can ruin your game and combat is back to what it should be.");
 		}
-
 		outputText("\n\n");
-
 		if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
 			outputText("Silly Mode: <font color=\"#008000\"><b>ON</b></font>\n Crazy, nonsensical, and possibly hilarious things may occur.");
 		else
 			outputText("Silly Mode: <font color=\"#800000\"><b>OFF</b></font>\n You're an incorrigable stick-in-the-mud with no sense of humor.");
-
 		outputText("\n\n");
-
-		if (flags[kFLAGS.STRENGTH_SCALLING] >= 1) {
-			outputText("Strength Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
-		}
-		else
-			outputText("Strength Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
-
-		outputText("\n\n");
-
-		if (flags[kFLAGS.SPEED_SCALLING] >= 1) {
-			outputText("Speed Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
-		}
-		else
-			outputText("Speed Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
-
-		outputText("\n\n");
-
-		if (flags[kFLAGS.WISDOM_SCALLING] >= 1) {
-			outputText("Wisdom Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
-		}
-		else
-			outputText("Wisdom Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
-
-		outputText("\n\n");
-
-		if (flags[kFLAGS.INTELLIGENCE_SCALLING] >= 1) {
-			outputText("Intelligence Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
-		}
-		else
-			outputText("Intelligence Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
-
-		outputText("\n\n");
-
-		if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] >= 1) {
-			outputText("Damage Overhaul: <font color=\"#008000\"><b>On</b></font>\n Damage uses new calculation system.");
-		}
-		else
-			outputText("Damage Overhaul: <font color=\"#800000\"><b>Off</b></font>\n Damage uses old calculation system.");
-
-		outputText("\n\n");
-
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] >= 1) {
-			outputText("Spells Cooldowns: <font color=\"#008000\"><b>Off</b></font>\n Damage dealing spells not have cooldowns and they keep their default power.");
-		}
-		else
-			outputText("Spells Cooldowns: <font color=\"#800000\"><b>On</b></font>\n Damage dealing spells have cooldowns and they dealing more damage than in default cooldownless variant.");
-
-		outputText("\n\n");
-
-		if (flags[kFLAGS.ITS_EVERY_DAY]) {
-			outputText("Eternal Holiday Mode: <font color=\"#008000\"><b>ON</b></font>\n All holiday events like Eastern/X-mas and etc. would happen at any day of the year.");
-		}
-		else
-			outputText("Eternal Holiday Mode: <font color=\"#800000\"><b>OFF</b></font>\n All holiday events happen only when it's respective holiday time.");
-
-		outputText("\n\n");
-
 		if (flags[kFLAGS.WATERSPORTS_ENABLED] >= 1 && flags[kFLAGS.SFW_MODE] <= 0) {
 			outputText("Watersports: <font color=\"#008000\"><b>Enabled</b></font>\n Watersports scenes are enabled. (You kinky person)");
 		}
 		else
 			outputText("Watersports: <font color=\"#800000\"><b>Disabled</b></font>\n Watersports scenes are disabled.");
-
 		outputText("\n\n");
-
 		if (flags[kFLAGS.AUTO_LEVEL] >= 1) {
 			outputText("Automatic Leveling: <font color=\"#008000\"><b>ON</b></font>\n Leveling up is done automatically once you accumulate enough experience.");
 		}
 		else
 			outputText("Automatic Leveling: <font color=\"#800000\"><b>OFF</b></font>\n Leveling up is done manually.");
-
 		outputText("\n\n");
+
+		if (flags[kFLAGS.LVL_UP_FAST] == 2) {
+			outputText("Instant Leveling: <font color=\"#008000\"><b>ON, Direct Jump</b></font>\nInstantly levels you up to the highest possible given your xp.");
+		}
+		else if (flags[kFLAGS.LVL_UP_FAST] == 1){
+			outputText("Instant Leveling: <font color=\"#000080\"><b>ON, Manual Increase</b></font>\nIncrease XP by specific amounts.")
+		}
+		else {
+			outputText("Instant Leveling: <font color=\"#800000\"><b>OFF</b></font>\nIndividual leveling up, i.e. One level click at a time.");
+		}
+		outputText("\n\n")
+
+		if (flags[kFLAGS.MUTATIONS_SPOILERS] >= 1){
+			outputText("Mutation Assist: <font color=\"#008000\"><b>ON</b></font>\nAll mutations are known, and hints to acquire them are provided.")
+		}
+		else {
+			outputText("Mutation Assist: <font color=\"#800000\"><b>OFF</b></font>\n For players that want to discover the mutations by themselves.")
+		}
+		outputText("\n\n")
 
 		outputText("<b>The following flags are not fully implemented yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n");
 		outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.");
 		outputText("\n\n");
-
 		if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
 			outputText("Low standards Mode: <font color=\"#008000\"><b>ON</b></font>\n NPCs ignore body type preferences.");
 			outputText("\n (Not gender preferences though. You still need the right hole.)");
 		}
 		else
 			outputText("Low standards Mode: <font color=\"#800000\"><b>OFF</b></font>\n NPCs have body-type preferences.");
-
 		outputText("\n\n");
-
 		if (flags[kFLAGS.HYPER_HAPPY]) {
 			outputText("Hyper Happy Mode: <font color=\"#008000\"><b>ON</b></font>\n Only reducto and humus shrink endowments.");
 			outputText("\n Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
 		}
 		else
 			outputText("Hyper Happy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Male enhancement potions shrink female endowments, and vice versa.");
-
 		outputText("\n\n");
-
 		if (flags[kFLAGS.SFW_MODE] >= 1) {
 			outputText("SFW Mode: <font color=\"#008000\"><b>ON</b></font>\n Sex scenes are disabled and adult materials are hidden.");
 		}
 		else
 			outputText("SFW Mode: <font color=\"#800000\"><b>OFF</b></font>\n Sex scenes are enabled.");
-
 		outputText("\n\n");
-
-		if (flags[kFLAGS.NO_GORE_MODE] >= 1) {
-			outputText("No Blood Mode: <font color=\"#008000\"><b>ON</b></font>\n Excesive Bloody or Gore scenes variants are disabled.");
-		}
-		else
-			outputText("No Blood Mode: <font color=\"#800000\"><b>OFF</b></font>\n Excesive Bloody or Gore scenes variants are enabled.");
-
 		menu();
 		addButton(0, "Toggle Debug", toggleDebug).hint("Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
 		if (player) {
@@ -223,15 +143,13 @@ public class GameSettings extends BaseContent {
 		addButton(2, "Silly Toggle", toggleSillyFlag).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
 		addButton(3, "Low Standards", toggleStandards);
 		addButton(4, "Hyper Happy", toggleHyperHappy);
-
 		addButton(5, "SFW Toggle", toggleSFW).hint("Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
 		addButton(6, "Auto level", toggleAutoLevel).hint("Toggles automatic leveling when you accumulate sufficient experience.");
 		if (player) addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
 		if (player) addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
-		
+		addButton(10, "Fast Lvl", toggleInstaLvl).hint("Immediately level to highest possible from XP instead of spamming next.");
 		addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
-		addButton(12, "Other Settings", settingsScreenGameSettings2);
-
+		addButton(12, "Mutation Assist", mutationSubMenu).hint("Mutation Tracker Spoiler Mode. For when you want to discover mutations by yourself, or with some help.");
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5) {
 			removeButton(8);
 		}
@@ -251,6 +169,71 @@ public class GameSettings extends BaseContent {
 		addButton(14, "Back", settingsScreenMain);
 	}
 	public function settingsScreenGameSettings2():void {
+		clearOutput();
+		displayHeader("Gameplay Settings");
+		if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 0) {
+			outputText("Secondary Stats Modifier: <font color=\"#808000\"><b>Normal</b></font>\n No opponent secondary stats modifiers.");
+		}
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
+			outputText("Secondary Stats Modifier: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+		}
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) {
+			outputText("Secondary Stats Modifier: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 10x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+		}
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) {
+			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 25x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+		}
+		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) {
+			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 100x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+		}
+		outputText("\n\n");
+		if (flags[kFLAGS.STRENGTH_SCALLING] >= 1) {
+			outputText("Strength Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
+		}
+		else
+			outputText("Strength Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
+		outputText("\n\n");
+		if (flags[kFLAGS.SPEED_SCALLING] >= 1) {
+			outputText("Speed Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
+		}
+		else
+			outputText("Speed Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
+		outputText("\n\n");
+		if (flags[kFLAGS.WISDOM_SCALLING] >= 1) {
+			outputText("Wisdom Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
+		}
+		else
+			outputText("Wisdom Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
+		outputText("\n\n");
+		if (flags[kFLAGS.INTELLIGENCE_SCALLING] >= 1) {
+			outputText("Intelligence Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
+		}
+		else
+			outputText("Intelligence Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
+		outputText("\n\n");
+		if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] >= 1) {
+			outputText("Damage Overhaul: <font color=\"#008000\"><b>On</b></font>\n Damage uses new calculation system.");
+		}
+		else
+			outputText("Damage Overhaul: <font color=\"#800000\"><b>Off</b></font>\n Damage uses old calculation system.");
+		outputText("\n\n");
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] >= 1) {
+			outputText("Spells Cooldowns: <font color=\"#008000\"><b>Off</b></font>\n Damage dealing spells not have cooldowns and they keep their default power.");
+		}
+		else
+			outputText("Spells Cooldowns: <font color=\"#800000\"><b>On</b></font>\n Damage dealing spells have cooldowns and they dealing more damage than in default cooldownless variant.");
+		outputText("\n\n");
+		if (flags[kFLAGS.ITS_EVERY_DAY]) {
+			outputText("Eternal Holiday Mode: <font color=\"#008000\"><b>ON</b></font>\n All holiday events like Eastern/X-mas and etc. would happen at any day of the year.");
+		}
+		else
+			outputText("Eternal Holiday Mode: <font color=\"#800000\"><b>OFF</b></font>\n All holiday events happen only when it's respective holiday time.");
+		outputText("\n\n");
+		if (flags[kFLAGS.NO_GORE_MODE] >= 1) {
+			outputText("No Blood Mode: <font color=\"#008000\"><b>ON</b></font>\n Excesive Bloody or Gore scenes variants are disabled.");
+		}
+		else
+			outputText("No Blood Mode: <font color=\"#800000\"><b>OFF</b></font>\n Excesive Bloody or Gore scenes variants are enabled.");
 		menu();
 		addButton(0, "Eternal Holiday", toggleEternalHoliday).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. would happen at any day of the year.");
 		addButton(1, "No Blood Toggle", toggleNOGORE).hint("Toggles No Blood Mode. If enabled, scenes could have more gruesome/bloody variants showed. Not for the weak of heart players.");
@@ -261,16 +244,7 @@ public class GameSettings extends BaseContent {
 		addButton(8, "Str scalling", toggleStrScaling).hint("Toggles Strength scalling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
 		addButton(9, "Spe scalling", toggleSpeScaling).hint("Toggles Speed scalling for all attacks using it. If enabled, speed scaling would be less random with values being a bit higher on average.");
 		addButton(10, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
-		addButton(14, "Back", settingsScreenGameSettings);
-	}
-
-	public function toggleDebug():void {
-		//toggle debug
-		debug = !debug;
-
-		mainView.showMenuButton(MainView.MENU_DATA);
-		settingsScreenGameSettings();
-
+		addButton(14, "Back", settingsScreenMain);
 	}
 
 	/* [INTERMOD: Revamp]
@@ -287,6 +261,13 @@ public class GameSettings extends BaseContent {
 	 return;
 	 }
 	 */
+
+	public function toggleDebug():void {
+		//toggle debug
+		debug = !debug;
+		mainView.showMenuButton(MainView.MENU_DATA);
+		settingsScreenGameSettings();
+	}
 
 	public function difficultySelectionMenu():void {
 		clearOutput();
@@ -309,28 +290,6 @@ public class GameSettings extends BaseContent {
 	public function chooseDifficulty(difficulty:int = 0):void {
 		flags[kFLAGS.GAME_DIFFICULTY] = difficulty;
 		settingsScreenGameSettings();
-	}
-	
-	public function difficultySelectionMenu2():void {
-		clearOutput();
-		outputText("You can choose a difficulty to set how hard battles will be.\n");
-		outputText("\n<b>Normal:</b> No stats changes.");
-		outputText("\n<b>Hard:</b> 2x multi for secondary stats for monsters.");
-		outputText("\n<b>Nightmare:</b> 5x multi for secondary stats for monsters.");
-		outputText("\n<b>Extreme:</b> 10x multi for secondary stats for monsters.");
-		outputText("\n<b>Xianxia:</b> 25x multi for secondary stats for monsters.");
-		menu();
-		addButton(0, "Normal", chooseDifficulty2, 0);
-		addButton(1, "Hard", chooseDifficulty2, 1);
-		addButton(2, "Nightmare", chooseDifficulty2, 2);
-		addButton(3, "EXTREME", chooseDifficulty2, 3);
-		addButton(4, "XIANXIA", chooseDifficulty2, 4);
-		addButton(14, "Back", settingsScreenGameSettings2);
-	}
-
-	public function chooseDifficulty2(difficulty:int = 0):void {
-		flags[kFLAGS.SECONDARY_STATS_SCALING] = difficulty;
-		settingsScreenGameSettings2();
 	}
 
 	public function toggleEasyModeFlag():void {
@@ -358,16 +317,114 @@ public class GameSettings extends BaseContent {
 		settingsScreenGameSettings();
 	}
 
-	public function toggleEternalHoliday():void {
-		//toggle eternal holiday
-		flags[kFLAGS.ITS_EVERY_DAY] = !flags[kFLAGS.ITS_EVERY_DAY];
-		settingsScreenGameSettings2();
-	}
-
 	public function toggleSFW():void {
 		if (flags[kFLAGS.SFW_MODE] < 1) flags[kFLAGS.SFW_MODE] = 1;
 		else flags[kFLAGS.SFW_MODE] = 0;
 		settingsScreenGameSettings();
+	}
+
+	public function toggleAutoLevel():void {
+		if (flags[kFLAGS.AUTO_LEVEL] < 1) flags[kFLAGS.AUTO_LEVEL] = 1;
+		else flags[kFLAGS.AUTO_LEVEL] = 0;
+		settingsScreenGameSettings();
+	}
+
+	public function toggleInstaLvl():void {
+		//toggle Instant levelling
+		if (flags[kFLAGS.LVL_UP_FAST] == 1) flags[kFLAGS.LVL_UP_FAST] = 2;
+		else if (flags[kFLAGS.LVL_UP_FAST] == 0) flags[kFLAGS.LVL_UP_FAST] = 1;
+		else flags[kFLAGS.LVL_UP_FAST] = 0;
+		settingsScreenGameSettings();
+	}
+
+	public function mutationSubMenu():void {
+		if (flags[kFLAGS.MUTATIONS_SPOILERS] < 1) flags[kFLAGS.MUTATIONS_SPOILERS] = 1;
+		else flags[kFLAGS.MUTATIONS_SPOILERS] = 0;
+		settingsScreenGameSettings();
+	}
+
+//Survival Mode
+	public function enableSurvivalPrompt():void {
+		clearOutput();
+		outputText("Are you sure you want to enable Survival Mode?\n\n");
+		outputText("You will NOT be able to turn it off! (Unless you reload immediately.)");
+		doYesNo(enableSurvivalForReal, settingsScreenGameSettings);
+	}
+
+	public function enableSurvivalForReal():void {
+		clearOutput();
+		outputText("Survival mode is now enabled.");
+		player.hunger                = 80;
+		flags[kFLAGS.HUNGER_ENABLED] = 0.5;
+		doNext(settingsScreenGameSettings);
+	}
+
+//Realistic Mode
+	public function enableRealisticPrompt():void {
+		clearOutput();
+		outputText("Are you sure you want to enable Realistic Mode?\n\n");
+		outputText("You will NOT be able to turn it off! (Unless you reload immediately.)");
+		doYesNo(enableRealisticForReal, settingsScreenGameSettings);
+	}
+
+	public function enableRealisticForReal():void {
+		clearOutput();
+		outputText("Realistic mode is now enabled.");
+		flags[kFLAGS.HUNGER_ENABLED] = 1;
+		doNext(settingsScreenGameSettings);
+	}
+
+	public function fetishSubMenu():void {
+		menu();
+		addButton(0, "Watersports", toggleWatersports).hint("Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
+		if (player.hasStatusEffect(StatusEffects.WormsOn) || player.hasStatusEffect(StatusEffects.WormsOff)) addButton(1, "Worms", toggleWormsMenu).hint("Enable or disable worms. This will NOT cure infestation, if you have any.");
+		else addButtonDisabled(1, "Worms", "Find the sign depicting the worms in the mountains to unlock this.");
+		addButton(4, "Back", settingsScreenGameSettings);
+	}
+
+	public function toggleWatersports():void {
+		if (flags[kFLAGS.WATERSPORTS_ENABLED] < 1) flags[kFLAGS.WATERSPORTS_ENABLED] = 1;
+		else flags[kFLAGS.WATERSPORTS_ENABLED] = 0;
+		fetishSubMenu();
+	}
+
+	private function toggleWormsMenu():void {
+		clearOutput();
+		if (player.hasStatusEffect(StatusEffects.WormsOn)) {
+			outputText("You have chosen to encounter worms as you find the mountains");
+			if (player.hasStatusEffect(StatusEffects.WormsHalf)) outputText(" albeit at reduced encounter rate");
+			outputText(". You can get infested.");
+		}
+		if (player.hasStatusEffect(StatusEffects.WormsOff)) {
+			outputText("You have chosen to avoid worms. You won't be able to get infested.");
+		}
+		menu();
+		addButton(0, "Enable", setWorms, true, false);
+		addButton(1, "Enable (Half)", setWorms, true, true);
+		addButton(2, "Disable", setWorms, false, false);
+		addButton(4, "Back", fetishSubMenu);
+	}
+
+	private function setWorms(enabled:Boolean, half:Boolean):void {
+		//Clear status effects
+		if (player.hasStatusEffect(StatusEffects.WormsOn)) player.removeStatusEffect(StatusEffects.WormsOn);
+		if (player.hasStatusEffect(StatusEffects.WormsHalf)) player.removeStatusEffect(StatusEffects.WormsHalf);
+		if (player.hasStatusEffect(StatusEffects.WormsOff)) player.removeStatusEffect(StatusEffects.WormsOff);
+		//Set status effects
+		if (enabled) {
+			player.createStatusEffect(StatusEffects.WormsOn, 0, 0, 0, 0);
+			if (half) player.createStatusEffect(StatusEffects.WormsHalf, 0, 0, 0, 0);
+		}
+		else {
+			player.createStatusEffect(StatusEffects.WormsOff, 0, 0, 0, 0);
+		}
+		toggleWormsMenu();
+	}
+
+	public function toggleEternalHoliday():void {
+		//toggle eternal holiday
+		flags[kFLAGS.ITS_EVERY_DAY] = !flags[kFLAGS.ITS_EVERY_DAY];
+		settingsScreenGameSettings2();
 	}
 
 	public function toggleNOGORE():void {
@@ -411,89 +468,27 @@ public class GameSettings extends BaseContent {
 		else flags[kFLAGS.SPELLS_COOLDOWNS] = 0;
 		settingsScreenGameSettings2();
 	}
-
-	public function toggleWatersports():void {
-		if (flags[kFLAGS.WATERSPORTS_ENABLED] < 1) flags[kFLAGS.WATERSPORTS_ENABLED] = 1;
-		else flags[kFLAGS.WATERSPORTS_ENABLED] = 0;
-		settingsScreenGameSettings();
-	}
-
-	public function toggleAutoLevel():void {
-		if (flags[kFLAGS.AUTO_LEVEL] < 1) flags[kFLAGS.AUTO_LEVEL] = 1;
-		else flags[kFLAGS.AUTO_LEVEL] = 0;
-		settingsScreenGameSettings();
-	}
-
-	public function fetishSubMenu():void {
+	
+	public function difficultySelectionMenu2():void {
+		clearOutput();
+		outputText("You can choose a difficulty to set how hard battles will be.\n");
+		outputText("\n<b>Normal:</b> No stats changes.");
+		outputText("\n<b>Hard:</b> 2x multi for secondary stats for monsters.");
+		outputText("\n<b>Nightmare:</b> 5x multi for secondary stats for monsters.");
+		outputText("\n<b>Extreme:</b> 10x multi for secondary stats for monsters.");
+		outputText("\n<b>Xianxia:</b> 25x multi for secondary stats for monsters.");
 		menu();
-		addButton(0, "Watersports", toggleWatersports).hint("Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
-		if (player.hasStatusEffect(StatusEffects.WormsOn) || player.hasStatusEffect(StatusEffects.WormsOff)) addButton(1, "Worms", toggleWormsMenu).hint("Enable or disable worms. This will NOT cure infestation, if you have any.");
-		else addButtonDisabled(1, "Worms", "Find the sign depicting the worms in the mountains to unlock this.");
-		addButton(4, "Back", settingsScreenGameSettings);
+		addButton(0, "Normal", chooseDifficulty2, 0);
+		addButton(1, "Hard", chooseDifficulty2, 1);
+		addButton(2, "Nightmare", chooseDifficulty2, 2);
+		addButton(3, "EXTREME", chooseDifficulty2, 3);
+		addButton(4, "XIANXIA", chooseDifficulty2, 4);
+		addButton(14, "Back", settingsScreenGameSettings2);
 	}
 
-	private function toggleWormsMenu():void {
-		clearOutput();
-		if (player.hasStatusEffect(StatusEffects.WormsOn)) {
-			outputText("You have chosen to encounter worms as you find the mountains");
-			if (player.hasStatusEffect(StatusEffects.WormsHalf)) outputText(" albeit at reduced encounter rate");
-			outputText(". You can get infested.");
-		}
-		if (player.hasStatusEffect(StatusEffects.WormsOff)) {
-			outputText("You have chosen to avoid worms. You won't be able to get infested.");
-		}
-		menu();
-		addButton(0, "Enable", setWorms, true, false);
-		addButton(1, "Enable (Half)", setWorms, true, true);
-		addButton(2, "Disable", setWorms, false, false);
-		addButton(4, "Back", fetishSubMenu);
-	}
-
-	private function setWorms(enabled:Boolean, half:Boolean):void {
-		//Clear status effects
-		if (player.hasStatusEffect(StatusEffects.WormsOn)) player.removeStatusEffect(StatusEffects.WormsOn);
-		if (player.hasStatusEffect(StatusEffects.WormsHalf)) player.removeStatusEffect(StatusEffects.WormsHalf);
-		if (player.hasStatusEffect(StatusEffects.WormsOff)) player.removeStatusEffect(StatusEffects.WormsOff);
-		//Set status effects
-		if (enabled) {
-			player.createStatusEffect(StatusEffects.WormsOn, 0, 0, 0, 0);
-			if (half) player.createStatusEffect(StatusEffects.WormsHalf, 0, 0, 0, 0);
-		}
-		else {
-			player.createStatusEffect(StatusEffects.WormsOff, 0, 0, 0, 0);
-		}
-		toggleWormsMenu();
-	}
-
-//Survival Mode
-	public function enableSurvivalPrompt():void {
-		clearOutput();
-		outputText("Are you sure you want to enable Survival Mode?\n\n");
-		outputText("You will NOT be able to turn it off! (Unless you reload immediately.)");
-		doYesNo(enableSurvivalForReal, settingsScreenGameSettings);
-	}
-
-	public function enableSurvivalForReal():void {
-		clearOutput();
-		outputText("Survival mode is now enabled.");
-		player.hunger                = 80;
-		flags[kFLAGS.HUNGER_ENABLED] = 0.5;
-		doNext(settingsScreenGameSettings);
-	}
-
-//Realistic Mode
-	public function enableRealisticPrompt():void {
-		clearOutput();
-		outputText("Are you sure you want to enable Realistic Mode?\n\n");
-		outputText("You will NOT be able to turn it off! (Unless you reload immediately.)");
-		doYesNo(enableRealisticForReal, settingsScreenGameSettings);
-	}
-
-	public function enableRealisticForReal():void {
-		clearOutput();
-		outputText("Realistic mode is now enabled.");
-		flags[kFLAGS.HUNGER_ENABLED] = 1;
-		doNext(settingsScreenGameSettings);
+	public function chooseDifficulty2(difficulty:int = 0):void {
+		flags[kFLAGS.SECONDARY_STATS_SCALING] = difficulty;
+		settingsScreenGameSettings2();
 	}
 
 

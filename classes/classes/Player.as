@@ -98,6 +98,8 @@ use namespace CoC;
 		public var lustVuln:Number = 1;
 
 		//Mastery attributes
+		public var masteryGauntletLevel:Number = 0;
+		public var masteryGauntletXP:Number = 0;
 		public var masterySwordLevel:Number = 0;
 		public var masterySwordXP:Number = 0;
 		public var masteryAxeLevel:Number = 0;
@@ -108,6 +110,18 @@ use namespace CoC;
 		public var masteryDuelingSwordXP:Number = 0;
 		public var masterySpearLevel:Number = 0;
 		public var masterySpearXP:Number = 0;
+		public var masteryDaggerLevel:Number = 0;
+		public var masteryDaggerXP:Number = 0;
+		public var masteryWhipLevel:Number = 0;
+		public var masteryWhipXP:Number = 0;
+		public var masteryExoticLevel:Number = 0;
+		public var masteryExoticXP:Number = 0;
+		public var masteryArcheryLevel:Number = 0;
+		public var masteryArcheryXP:Number = 0;
+		public var masteryThrowingLevel:Number = 0;
+		public var masteryThrowingXP:Number = 0;
+		public var masteryFirearmsLevel:Number = 0;
+		public var masteryFirearmsXP:Number = 0;
 		public var dualWSLevel:Number = 0;
 		public var dualWSXP:Number = 0;
 		public var dualWNLevel:Number = 0;
@@ -628,8 +642,8 @@ use namespace CoC;
 			}
 			armorDef += toughnessBonus;
 			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0 && armorPerk == "Heavy") armorDef += _armor.def;
-			if (findPerk(PerkLib.ShieldExpertise) >= 0 && shieldName != "nothing") {
-				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock);
+			if (findPerk(PerkLib.ShieldExpertise) >= 0 && shieldName != "nothing" && isShieldsForShieldBash()) {
+				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock * 0.25);
 				else armorDef += 1;
 			}
 			//Acupuncture effect
@@ -912,7 +926,7 @@ use namespace CoC;
 		}
 		//Natural Claws (arm types and weapons that can substitude them)
 		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.Types[lowerBody].claw;}
-		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets");}
+		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets");}
 		//Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
 		public function hasAWingAttack():Boolean { return (Wings.Types[wings.type].wingSlap);}
@@ -920,7 +934,7 @@ use namespace CoC;
 		public function hasATailSlapAttack():Boolean { return (Tail.Types[tail.type].tailSlam || Tail.Types[tail.type].stinger || LowerBody.Types[lowerBody].tailSlam);}
 		public function hasTalonsAttack():Boolean{return lowerBody == LowerBody.HARPY;}
 		public function hasTentacleAttacks():Boolean{return LowerBody.Types[lowerBody].tentacle || hasPerk(PerkLib.MorphicWeaponry);}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasTentacleAttacks || isTaur());}
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasTentacleAttacks || isAlraune() || isTaur());}
 		//Some other checks
 		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
@@ -976,11 +990,18 @@ use namespace CoC;
 		{
 			return ;
 		}*/
-		//Fists and fist weapons
-		public function isFistOrFistWeapon():Boolean
+		//Free off-hand for spellcasting and etc.
+		public function isHavingFreeOffHand():Boolean
 		{
-			return weaponName == "fists" || weapon == game.weapons.S_GAUNT || weapon == game.weapons.H_GAUNT || weapon == game.weapons.MASTGLO || weapon == game.weapons.KARMTOU || weapon == game.weapons.YAMARG || weapon == game.weapons.CLAWS || weapon == game.weapons.L_CLAWS || weapon == game.weapons.BFGAUNT
-			 || (shield == game.shields.AETHERS && flags[kFLAGS.AETHER_SINISTER_EVO] == 1 && weapon == game.weapons.AETHERD && flags[kFLAGS.AETHER_DEXTER_EVO] == 1);
+			return !isShieldsForShieldBash() && shield == game.shields.BATTNET && shield == game.shields.Y_U_PAN;
+		}
+		//Fists and fist weapons
+		public function isFistOrFistWeapon():Boolean {
+			return weaponName == "fists" || isGauntletWeapon();
+		}
+		public function isGauntletWeapon():Boolean {
+			return weapon == game.weapons.S_GAUNT || weapon == game.weapons.H_GAUNT || weapon == game.weapons.MASTGLO || weapon == game.weapons.KARMTOU || weapon == game.weapons.YAMARG || weapon == game.weapons.CLAWS || weapon == game.weapons.L_CLAWS || weapon == game.weapons.VENCLAW || weapon == game.weapons.BFGAUNT
+			 || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && (AetherTwinsFollowers.AetherTwinsShape == "" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets"));
 		}
 		//Sword-type weapons
 		public function isSwordTypeWeapon():Boolean {
@@ -1005,12 +1026,26 @@ use namespace CoC;
 			return weapon == game.weapons.DSSPEAR || weapon == game.weapons.GUANDAO || weapon == game.weapons.HALBERD || weapon == game.weapons.LANCE || weapon == game.weapons.PTCHFRK || weapon == game.weapons.SESPEAR || weapon == game.weapons.SKYPIER || weapon == game.weapons.SPEAR || weapon == game.weapons.TRIDENT || weapon == game.weapons.URTAHLB;
 		}
 		//Scythe-type DEMSCYT LHSCYTH
+		//Dagger-type weapons
+		public function isDaggerTypeWeapon():Boolean {
+			return weapon == game.weapons.ADAGGER || weapon == game.weapons.DAGGER || weapon == game.weapons.DAGWHIP || weapon == game.weapons.L_DAGGR || weapon == game.weapons.RDAGGER || weapon == game.weapons.SDAGGER || weapon == game.weapons.TODAGGER || weapon == game.weapons.TDAGGER || weapon == game.weapons.TRIDAG || weapon == game.weapons.ANGSTD || weapon == game.weapons.DDAGGER;
+		}
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isStaffTypeWeapon():Boolean {
 			return weapon == game.weapons.ASCENSU || weapon == game.weapons.DEPRAVA || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEMSCYT;
 		}
-		//Ribbon ERIBBON RIBBON
-		//bronie co nie jestem pewien co do klasyfikacji obecnie: FLYWHIS (dla Sword Immortal gra musi sprawdzić czy używa Sword type lub Dueling sword type weapons bo tak)
+		//Whip-type weapons
+		public function isWhipTypeWeapon():Boolean {
+			return weapon == game.weapons.L_WHIP || weapon == game.weapons.SUCWHIP || weapon == game.weapons.PSWHIP || weapon == game.weapons.WHIP || weapon == game.weapons.PWHIP || weapon == game.weapons.BFWHIP || weapon == game.weapons.DBFWHIP || weapon == game.weapons.NTWHIP || weapon == game.weapons.CNTWHIP;
+		}
+		//Ribbon-type weapons
+		public function isRibbonTypeWeapon():Boolean {
+			return weapon == game.weapons.RIBBON || weapon == game.weapons.ERIBBON;
+		}
+		//Exotic-type weapons
+		public function isExoticTypeWeapon():Boolean {
+			return isRibbonTypeWeapon() || weapon == game.weapons.NORTHIP || weapon == game.weapons.FLYWHIS || weapon == game.weapons.SDRILL || weapon == game.weapons.G_SHURI || weapon == game.weapons.CHAKRAM;
+		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
 		{
@@ -1020,10 +1055,11 @@ use namespace CoC;
 		{
 			return weaponRangePerk == "Bow" || weaponRange == game.weaponsrange.M1CERBE || weaponRange == game.weaponsrange.SNIPPLE;
 		}
+		//(dla Sword Immortal gra musi sprawdzić czy używa Sword type lub Dueling sword type weapons bo tak)
 		//Throwable melee weapons
 		public function haveThrowableMeleeWeapon():Boolean
 		{
-			return weapon == game.weapons.FRTAXE || weapon == game.weapons.TDAGGER || weapon == game.weapons.CHAKRAM;//wrath large weapon that can be throwed or used in melee xD
+			return weapon == game.weapons.FRTAXE || weapon == game.weapons.TDAGGER || weapon == game.weapons.CHAKRAM || weapon == game.weapons.G_SHURI;//wrath large weapon that can be throwed or used in melee xD
 		}
 		//Cleave compatibile weapons
 		public function haveWeaponForCleave():Boolean
@@ -1076,6 +1112,14 @@ use namespace CoC;
 		public function haveWeaponForJouster():Boolean
 		{
 			return isSpearTypeWeapon() || weaponName == "demonic scythe";
+		}
+		public function playerIsBlinded():Boolean
+		{
+			return hasStatusEffect(StatusEffects.Blind) || hasStatusEffect(StatusEffects.Snowstorms);
+		}
+		public function playerHasFourArms():Boolean
+		{
+			return arms.type == Arms.DISPLACER;
 		}
 		//override public function get weapons
 		override public function get weaponName():String {
@@ -1387,7 +1431,8 @@ use namespace CoC;
 		//Shields for Bash
 		public function isShieldsForShieldBash():Boolean
 		{
-			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.SPIL_SH || shieldPerk == "Large" || shieldPerk == "Massive" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets");
+			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.SPIL_SH || shield == game.shields.SANCTYN || shield == game.shields.SANCTYL || shield == game.shields.SANCTYD
+			 || shieldPerk == "Large" || shieldPerk == "Massive" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets");
 		}
 		//override public function get shields
 		override public function get shieldName():String {
@@ -1918,14 +1963,19 @@ use namespace CoC;
 			if (hasPerk(PerkLib.NaturalPunchingBagFinalForm)) bbDR += 0.2;
 			return bbDR;
 		}
-		public function wrathRatioToHP():Number {
-			var ratioWH:Number = 10;
-			return ratioWH;
-		}
 		public function wrathFromHPmulti():Number {
 			var WHmulti:Number = 1;
+			WHmulti *= (effectiveSensitivity() * (1 / 100));
 			if (hasPerk(PerkLib.FuelForTheFire)) WHmulti *= 2;
 			return WHmulti;
+		}
+		public function wrathFromBeenPunchingBag(damage:Number):void {
+			if (damage > 0) {
+				var gainedWrath:Number = 0;
+				gainedWrath += Math.sqrt(damage / 10);
+				gainedWrath = Math.round(gainedWrath * wrathFromHPmulti());
+				if (gainedWrath > 0) EngineCore.WrathChange(gainedWrath, false);
+			}
 		}
 		public override function damagePercent():Number {
 			var mult:Number = 100;
@@ -1982,7 +2032,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && armorPerk == "Heavy") {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.ShieldHarmony) && tou >= 100 && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
+			if (hasPerk(PerkLib.ShieldHarmony) && tou >= 100 && isShieldsForShieldBash() && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && meetUnhinderedReq()) {
@@ -2059,10 +2109,7 @@ use namespace CoC;
 				else {
 					damage = reducePhysDamage(damage);
 					//Wrath
-					var gainedWrath:Number = 0;
-					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-					wrath += gainedWrath;
-					if (wrath > maxWrath()) wrath = maxWrath();
+					wrathFromBeenPunchingBag(damage);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2203,10 +2250,7 @@ use namespace CoC;
 				else {
 					damage = reduceMagicDamage(damage);
 					//Wrath
-					var gainedWrath:Number = 0;
-					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-					wrath += gainedWrath;
-					if (wrath > maxWrath()) wrath = maxWrath();
+					wrathFromBeenPunchingBag(damage);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2305,10 +2349,7 @@ use namespace CoC;
 				else {
 					damage = reduceFireDamage(damage);
 					//Wrath
-					var gainedWrath:Number = 0;
-					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-					wrath += gainedWrath;
-					if (wrath > maxWrath()) wrath = maxWrath();
+					wrathFromBeenPunchingBag(damage);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2416,10 +2457,7 @@ use namespace CoC;
 				else {
 					damage = reduceIceDamage(damage);
 					//Wrath
-					var gainedWrath:Number = 0;
-					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-					wrath += gainedWrath;
-					if (wrath > maxWrath()) wrath = maxWrath();
+					wrathFromBeenPunchingBag(damage);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2517,10 +2555,7 @@ use namespace CoC;
 				else {
 					damage = reduceLightningDamage(damage);
 					//Wrath
-					var gainedWrath:Number = 0;
-					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-					wrath += gainedWrath;
-					if (wrath > maxWrath()) wrath = maxWrath();
+					wrathFromBeenPunchingBag(damage);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2610,10 +2645,7 @@ use namespace CoC;
 				else {
 					damage = reduceDarknessDamage(damage);
 					//Wrath
-					var gainedWrath:Number = 0;
-					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-					wrath += gainedWrath;
-					if (wrath > maxWrath()) wrath = maxWrath();
+					wrathFromBeenPunchingBag(damage);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2705,10 +2737,7 @@ use namespace CoC;
 				else {
 					damage = reducePoisonDamage(damage);
 					//Wrath
-					var gainedWrath:Number = 0;
-					gainedWrath += (Math.round(damage / wrathRatioToHP())) * wrathFromHPmulti();
-					wrath += gainedWrath;
-					if (wrath > maxWrath()) wrath = maxWrath();
+					wrathFromBeenPunchingBag(damage);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -6355,7 +6384,7 @@ use namespace CoC;
 			Begin("Player","racialScore","naga");
 			var nagaCounter:Number = 0;
 			if (isNaga()) {
-				nagaCounter += 2;
+				nagaCounter += 3;
 				if (arms.type == Arms.HUMAN)
 					nagaCounter++;
 			}
@@ -6368,6 +6397,8 @@ use namespace CoC;
 			if (eyes.type == Eyes.SNAKE)
 				nagaCounter++;
 			if (ears.type == Ears.SNAKE)
+				nagaCounter++;
+			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
 				nagaCounter++;
 			if (findPerk(PerkLib.VenomGlands) >= 0)
 				nagaCounter++;
@@ -6402,7 +6433,7 @@ use namespace CoC;
 			Begin("Player","racialScore","gorgon");
 			var gorgonCounter:Number = 0;
 			if (isNaga())
-				gorgonCounter += 2;
+				gorgonCounter += 3;
 			if (tongue.type == Tongue.SNAKE)
 				gorgonCounter++;
 			if (faceType == Face.SNAKE_FANGS)
@@ -6419,6 +6450,8 @@ use namespace CoC;
 				gorgonCounter += 2;
 			if (hairType == Hair.GORGON)
 				gorgonCounter += 2;
+			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
+				gorgonCounter++;
 			if (findPerk(PerkLib.GorgonsEyes) >= 0)
 				gorgonCounter++;
 			if (findPerk(PerkLib.GorgonsEyesEvolved) >= 0)
@@ -6457,7 +6490,7 @@ use namespace CoC;
 			Begin("Player","racialScore","vouivre");
 			var vouivreCounter:Number = 0;
 			if (isNaga())
-				vouivreCounter += 2;
+				vouivreCounter += 3;
 			if (tongue.type == Tongue.SNAKE || tongue.type == Tongue.DRACONIC)
 				vouivreCounter++;
 			if (faceType == Face.SNAKE_FANGS)
@@ -6476,6 +6509,8 @@ use namespace CoC;
 				vouivreCounter++;
 			if (wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE)
 				vouivreCounter += 4;
+			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
+				vouivreCounter++;
 			if (vouivreCounter >= 11 && hasPerk(PerkLib.DragonFireBreath))
 				vouivreCounter++;
 			if (findPerk(PerkLib.DrakeLungs) >= 0)
@@ -6517,7 +6552,7 @@ use namespace CoC;
 			Begin("Player","racialScore","couatl");
 			var couatlCounter:Number = 0;
 			if (isNaga())
-				couatlCounter += 2;
+				couatlCounter += 3;
 			if (tongue.type == Tongue.SNAKE)
 				couatlCounter++;
 			if (faceType == Face.SNAKE_FANGS)
@@ -6534,6 +6569,8 @@ use namespace CoC;
 				couatlCounter++;
 			if (wings.type == Wings.FEATHERED_LARGE)
 				couatlCounter += 4;
+			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
+				couatlCounter++;
 			if (findPerk(PerkLib.VenomGlands) >= 0)
 				couatlCounter++;
 			if (findPerk(PerkLib.VenomGlandsEvolved) >= 0)
@@ -6612,6 +6649,8 @@ use namespace CoC;
 			if (wings.type == Wings.NONE)
 				hydraCounter += 2;
 			if (tallness >= 120)
+				hydraCounter++;
+			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
 				hydraCounter++;
 			if (findPerk(PerkLib.LizanRegeneration) >= 0)
 				hydraCounter++;
@@ -9842,6 +9881,8 @@ use namespace CoC;
 			var hiddenJobs1:Number = 0;
 			if (findPerk(PerkLib.HiddenJobBloodDemon) >= 0)
 				hiddenJobs1++;
+			if (findPerk(PerkLib.HiddenJobAsura) >= 0)
+				hiddenJobs1++;
 			return hiddenJobs1;
 		}
 		public function maxHiddenJobs():Number {
@@ -12439,18 +12480,33 @@ use namespace CoC;
 			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
 			var power:Number = 0;
 			if (hasPerk(PerkLib.BullStrength)){
-				if(cowScore() >=15) power = lactationQ()*0.001;
-				if(minotaurScore() >=15) power = cumCapacity()*0.001;
+				if (cowScore() >=15) power = lactationQ()*0.001;
+				if (minotaurScore() >=15) power = cumCapacity()*0.001;
 				if (power > 0.5) power = 0.5;
 				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Bull Strength', { text: 'Bull Strength' });
 			}
 			if (!hasPerk(PerkLib.BullStrength) && statStore.hasBuff('Bull Strength')) statStore.removeBuffs('Bull Strength');
 			if (hasPerk(PerkLib.UnnaturalStrength)){
-				if (flags[kFLAGS.HUNGER_ENABLED] > 0) power = maxHunger()*0.01;
-				else power = maxLust()*0.01;
+				if (flags[kFLAGS.HUNGER_ENABLED] > 0) power = (hunger/maxHunger())*0.01;
+				else power = (lust/maxLust())*0.01;
 				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Unnatural Strength', { text: 'Unnatural Strength' });
 			}
 			if (!hasPerk(PerkLib.UnnaturalStrength) && statStore.hasBuff('Unnatural Strength')) statStore.removeBuffs('Unnatural Strength');
+			if (hasPerk(PerkLib.AbsoluteStrength) && (wrath > wrath100 * 0.5)){
+				power = 0.25;
+				if (wrath > wrath100 * 0.6) power += 0.05;
+				if (wrath > wrath100 * 0.7) power += 0.05;
+				if (wrath > wrath100 * 0.8) power += 0.05;
+				if (wrath > wrath100 * 0.9) power += 0.05;
+				if (wrath > wrath100) power += 0.05;
+				if (wrath > wrath100 * 1.1) power += 0.05;
+				if (wrath > wrath100 * 1.2) power += 0.05;
+				if (wrath > wrath100 * 1.3) power += 0.05;
+				if (wrath > wrath100 * 1.4) power += 0.05;
+				//if (hasPerk(PerkLib.)) power *= 2;
+				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Absolute Strength', { text: 'Absolute Strength' });
+			}
+			if (!hasPerk(PerkLib.AbsoluteStrength) && statStore.hasBuff('Absolute Strength')) statStore.removeBuffs('Absolute Strength');
 			statStore.replaceBuffObject({
 				"str.mult":statusEffectv1(StatusEffects.StrTouSpeCounter2)/100,
 				"tou.mult":statusEffectv2(StatusEffects.StrTouSpeCounter2)/100,
@@ -12979,6 +13035,47 @@ use namespace CoC;
 			return true;
 		}
 
+		public function maxGauntletLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function GauntletExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryGauntletLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryGauntletLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function gauntletXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryGauntletXP++;
+					XP--;
+				}
+				else {
+					masteryGauntletXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryGauntletLevel < maxGauntletLevel() && masteryGauntletXP >= GauntletExpToLevelUp()) {
+					outputText("\n<b>Dao of Gauntlet leveled up to " + (masteryGauntletLevel + 1) + "!</b>\n");
+					masteryGauntletLevel++;
+					masteryGauntletXP = 0;
+				}
+			}
+		}
+
 		public function maxSwordLevel():Number {
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
@@ -13180,6 +13277,252 @@ use namespace CoC;
 					outputText("\n<b>Dao of Spear leveled up to " + (masterySpearLevel + 1) + "!</b>\n");
 					masterySpearLevel++;
 					masterySpearXP = 0;
+				}
+			}
+		}
+
+		public function maxDaggerLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function DaggerExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryDaggerLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryDaggerLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function daggerXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryDaggerXP++;
+					XP--;
+				}
+				else {
+					masteryDaggerXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryDaggerLevel < maxDaggerLevel() && masteryDaggerXP >= DaggerExpToLevelUp()) {
+					outputText("\n<b>Dao of Dagger leveled up to " + (masteryDaggerLevel + 1) + "!</b>\n");
+					masteryDaggerLevel++;
+					masteryDaggerXP = 0;
+				}
+			}
+		}
+
+		public function maxWhipLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function WhipExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryWhipLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryWhipLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function whipXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryWhipXP++;
+					XP--;
+				}
+				else {
+					masteryWhipXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryWhipLevel < maxWhipLevel() && masteryWhipXP >= WhipExpToLevelUp()) {
+					outputText("\n<b>Dao of Whip leveled up to " + (masteryWhipLevel + 1) + "!</b>\n");
+					masteryWhipLevel++;
+					masteryWhipXP = 0;
+				}
+			}
+		}
+
+		public function maxExoticLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function ExoticExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryExoticLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryExoticLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function exoticXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryExoticXP++;
+					XP--;
+				}
+				else {
+					masteryExoticXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryExoticLevel < maxExoticLevel() && masteryExoticXP >= ExoticExpToLevelUp()) {
+					outputText("\n<b>Dao of Exotic Weapons leveled up to " + (masteryExoticLevel + 1) + "!</b>\n");
+					masteryExoticLevel++;
+					masteryExoticXP = 0;
+				}
+			}
+		}
+
+		public function maxArcheryLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function ArcheryExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryArcheryLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryArcheryLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function archeryXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryArcheryXP++;
+					XP--;
+				}
+				else {
+					masteryArcheryXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryArcheryLevel < maxArcheryLevel() && masteryArcheryXP >= ArcheryExpToLevelUp()) {
+					outputText("\n<b>Dao of Archery leveled up to " + (masteryArcheryLevel + 1) + "!</b>\n");
+					masteryArcheryLevel++;
+					masteryArcheryXP = 0;
+				}
+			}
+		}
+
+		public function maxThrowingLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function ThrowingExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryThrowingLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryThrowingLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function throwingXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryThrowingXP++;
+					XP--;
+				}
+				else {
+					masteryThrowingXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryThrowingLevel < maxThrowingLevel() && masteryThrowingXP >= ThrowingExpToLevelUp()) {
+					outputText("\n<b>Dao of Exotic Weapons leveled up to " + (masteryThrowingLevel + 1) + "!</b>\n");
+					masteryThrowingLevel++;
+					masteryThrowingXP = 0;
+				}
+			}
+		}
+
+		public function maxFirearmsLevel():Number {
+			var maxLevel:Number = 10;
+			if (level < 90) maxLevel += level;
+			else maxLevel += 90;
+			return maxLevel;
+		}
+		public function FirearmsExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = masteryFirearmsLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = masteryFirearmsLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function firearmsXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					masteryFirearmsXP++;
+					XP--;
+				}
+				else {
+					masteryFirearmsXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (masteryFirearmsLevel < maxFirearmsLevel() && masteryFirearmsXP >= FirearmsExpToLevelUp()) {
+					outputText("\n<b>Dao of Exotic Weapons leveled up to " + (masteryFirearmsLevel + 1) + "!</b>\n");
+					masteryFirearmsLevel++;
+					masteryFirearmsXP = 0;
 				}
 			}
 		}
@@ -13458,14 +13801,20 @@ use namespace CoC;
 		}
 
 		public function manticoreFeed():void {
-			if (findPerk(PerkLib.ManticoreMetabolism) >= 0) {
-				if (findPerk(PerkLib.ManticoreMetabolismEvolved) >= 0) {
-					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50 + (10 * (1 + newGamePlusMod()))) {
+			if (hasPerk(PerkLib.ManticoreMetabolism)) {
+				if (hasPerk(PerkLib.ManticoreMetabolismEvolved)) {
+					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50 + (0.5 * (1 + newGamePlusMod()))) {
 						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(15);
+					}
+					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") == 0.50 + (0.5 * (1 + newGamePlusMod()))) {
+						buff("Feeding Euphoria").addDuration(3);
 					}
 				} else {
 					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50) {
 						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(10);
+					}
+					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") == 0.50) {
+						buff("Feeding Euphoria").addDuration(2);
 					}
 				}
 			}
@@ -13475,17 +13824,27 @@ use namespace CoC;
 			var Ammount:Number = 100;
 			if ((hunger+Ammount)>maxHunger()) Ammount = (maxHunger()-hunger-1);
 			refillHunger(Ammount);
+			var Amm2:Number = 50;
+			if (hasPerk(PerkLib.ManticoreMetabolismEvolved)) Amm2 *= 2;
+			tailVenom += Amm2;
+			if (tailVenom > maxVenom()) tailVenom = maxVenom();
 		}
 
 		public function displacerFeed():void {
-			if (findPerk(PerkLib.DisplacerMetabolism) >= 0) {
-				if (findPerk(PerkLib.DisplacerMetabolismEvolved) >= 0) {
-					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50 + (10 * (1 + newGamePlusMod()))) {
+			if (hasPerk(PerkLib.DisplacerMetabolism)) {
+				if (hasPerk(PerkLib.DisplacerMetabolismEvolved)) {
+					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50 + (0.5 * (1 + newGamePlusMod()))) {
 						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(15);
+					}
+					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") == 0.50 + (0.5 * (1 + newGamePlusMod()))) {
+						buff("Feeding Euphoria").addDuration(3);
 					}
 				} else {
 					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50) {
 						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(10);
+					}
+					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") == 0.50) {
+						buff("Feeding Euphoria").addDuration(2);
 					}
 				}
 			}
@@ -13718,7 +14077,7 @@ use namespace CoC;
 			if (scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 12) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (unicornScore() >= 12) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxLust_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);
+			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxHP_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);
 			return max;
 		}
 		protected override function maxLust_base():Number {
@@ -13748,7 +14107,7 @@ use namespace CoC;
 
 		public function MutagenBonus(statName: String, bonus: Number):void
 		{
-			removeCurse(statName, bonus)
+			removeCurse(statName, bonus);
 			if (buff("Mutagen").getValueOfStatBuff(""+statName+".mult") < 0.20){
 				buff("Mutagen").addStat(""+statName+".mult",0.01);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
@@ -13758,7 +14117,7 @@ use namespace CoC;
 
 		public function AlchemyBonus(statName: String, bonus: Number):void
 		{
-			removeCurse(statName, bonus)
+			removeCurse(statName, bonus);
 			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < 0.20){
 				buff("Alchemical").addStat(""+statName+".mult",0.01);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
@@ -13768,7 +14127,7 @@ use namespace CoC;
 
 		public function KnowledgeBonus(statName: String, bonus: Number):void
 		{
-			removeCurse(statName, bonus)
+			removeCurse(statName, bonus);
 			if (buff("Knowledge").getValueOfStatBuff(""+statName+".mult") < 0.20){
 				buff("Knowledge").addStat(""+statName+".mult",0.01);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);

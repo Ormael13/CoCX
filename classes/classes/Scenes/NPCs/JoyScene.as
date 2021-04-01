@@ -687,7 +687,7 @@ import classes.lists.Gender;
 			outputText("\n\n\"<i>Like, [name]? Are you feeling okay? Your face is all funny-looking.</i>\" The mouse notes.");
 			outputText("\n\nYou snap out of your trance and tell Joy you were just thinking, and that you'll see her later.");
 			outputText("\n\n\"<i>Like, okay, [name]; see you later; maybe we can have some fun when you come back?</i>\" The bimbo mouse giggles with glee at the thought.");
-			outputText("\n\nMaybe you should approach and talk to Joy about changing her back once you have a clear way of doing so...");
+			//outputText("\n\nMaybe you should approach and talk to Joy about changing her back once you have a clear way of doing so...");
 			if (flags[kFLAGS.JOY_INTELLIGENCE] < 40) flags[kFLAGS.JOY_INTELLIGENCE]++;
 			flags[kFLAGS.JOY_TALKED_ABOUT_OLD_LIFE]++;
 			doNext(playerMenu);
@@ -2289,4 +2289,4 @@ import classes.lists.Gender;
 			doNext(playerMenu);
 		}
 	}
-}
+}

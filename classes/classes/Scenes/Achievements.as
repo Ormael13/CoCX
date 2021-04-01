@@ -217,7 +217,7 @@ public class Achievements extends BaseContent
 			addAchievement("Meng Hao", kACHIEVEMENTS.WEALTH_MENG_HAO, "Have 20,000,000 spirit stones.", "Have 20,000,000 spirit stones. You can now exchange tips on getting more spirit stones with Meng Hao himself.", true);
 			//addAchievement("Item Vault", kACHIEVEMENTS.WEALTH_ITEM_VAULT, "Fill up your inventory, chest, jewelry box, weapon and armor racks.");
 			
-			titleAchievementSection("Combat"); //18 achievements
+			titleAchievementSection("Combat"); //19 achievements
 			addAchievement("Are you a Wizard?", kACHIEVEMENTS.COMBAT_ARE_YOU_A_WIZARD, "Cast your first spell.");
 			addAchievement("Gandalf", kACHIEVEMENTS.COMBAT_GANDALF, "Learn all white spells.");
 			addAchievement("Sauron", kACHIEVEMENTS.COMBAT_SAURON, "Learn all black spells.");
@@ -225,6 +225,7 @@ public class Achievements extends BaseContent
 			//learn all grey spells
 			//learn all white/black/grey spells
 			//learn all blood spells
+			addAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER, "Cast your first wrath-empowered spell.", "", true);
 			addAchievement("Cum Cannon", kACHIEVEMENTS.COMBAT_CUM_CANNON, "Cum in the middle of battle.");
 			addAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB, "Fire your webbings at your opponent.");
 			addAchievement("Pain", kACHIEVEMENTS.COMBAT_PAIN, "Deal 50 damage in one hit.");

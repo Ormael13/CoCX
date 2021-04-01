@@ -936,7 +936,7 @@ package classes.Scenes.Camp
 				addButtonDisabled(11, "Purity", "Req. Elements of Mareth: Advanced perk.");
 				addButtonDisabled(12, "Corruption", "Req. Elements of Mareth: Advanced perk.");
 			}
-			addButtonDisabled(13, "???", "You need to take some time to understand what you've learned. Come back later."); //Silly mode tooltip possible? "This isn't a cram school, stop forcing books into your head!"
+			//addButtonDisabled(13, "???", "You need to take some time to understand what you've learned. Come back later."); //Silly mode tooltip possible? "This isn't a cram school, stop forcing books into your head!"
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function evocationTomeAir():void {

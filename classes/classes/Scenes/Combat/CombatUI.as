@@ -113,17 +113,17 @@ public class CombatUI extends BaseCombatContent {
 			}
 			else {
 				if (monster.isFlying()) {
-					if (player.isFlying() || player.haveThrowableMeleeWeapon()) {
+					if (player.isFlying() || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || (player.isStaffTypeWeapon() && player.hasPerk(PerkLib.StaffChanneling))) {
 						if (player.isFlying()) {
-							if (player.hasPerk(PerkLib.AerialCombat)) {
+							if (player.hasPerk(PerkLib.AerialCombat) || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || (player.isStaffTypeWeapon() && player.hasPerk(PerkLib.StaffChanneling))) {
 								if (player.wings.type == Wings.BAT_ARM) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
 								else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
 							}
-							else btnMelee.disable("No way you could hit enemy with melee attacks while flying.");
+							else btnMelee.disable("No way you could hit enemy with melee attacks while flying. Req. Aerial Combat perk or having melee weapon that could be used for range attack too.");
 						}
 						else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
 					}
-					else btnMelee.disable("No way you could reach enemy in air with melee attacks.");
+					else btnMelee.disable("No way you could reach enemy in air with melee attacks. Unless you have melee weapon that could be used for range attack too.");
 				}
 				else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
 			}
@@ -208,7 +208,7 @@ public class CombatUI extends BaseCombatContent {
 		// Submenu - Spells
 		BuildSpellBookMenu(spellBookButtons);
 		if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) {
+		if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathSpellcasting()) {
 			btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
 		} else if (!combat.canUseMagic()) btnMagic.disable();
 		// Submenu - Soulskills
@@ -228,7 +228,7 @@ public class CombatUI extends BaseCombatContent {
 			else btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting goblin mech.");
 		}
 		else if (player.vehicles == vehicles.HB_MECH) btnTease.disable("No way you could make an enemy more aroused by striking a seductive pose and exposing parts of your body while piloting elf mech.");
-		else if (monster.hasStatusEffect(StatusEffects.Stunned) && player.hasPerk(PerkLib.Straddle)) btnTease.show("Straddle", combat.Straddle, "Go to town on your opponent with devastating teases.");
+		else if (monster.lustVuln != 0 && monster.hasStatusEffect(StatusEffects.Stunned) && player.hasPerk(PerkLib.Straddle)) btnTease.show("Straddle", combat.Straddle, "Go to town on your opponent with devastating teases.");
 		else btnTease.show("Tease", combat.teaseAttack, "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.");
 		if (combat.isEnnemyInvisible) btnTease.disable("You cannot tease an opponent you cannot see or target, heck is it even looking at you right now?");
 		btnWait.show("Wait", combat.wait, "Take no action for this round.  Why would you do this?  This is a terrible idea.");
@@ -362,7 +362,7 @@ public class CombatUI extends BaseCombatContent {
 			if (player.arms.type == Arms.DISPLACER)
 			addButton(0, "Ravage", combat.clawsRend).hint("Rend your enemy using your four sets of claws. \n\nFatigue Cost: " + physicalCost(20) + "");
 			else addButton(0, "Claws", combat.clawsRend).hint("Rend your enemy using your claws. \n\nFatigue Cost: " + physicalCost(20) + "");
-			if (!monster.plural && player.hasPerk(PerkLib.Straddle)) addButton(1, "Straddle", combat.Straddle).hint("Change position and initiate a straddling stance");
+			if (monster.lustVuln != 0 && !monster.plural && player.hasPerk(PerkLib.Straddle)) addButton(1, "Straddle", combat.Straddle).hint("Change position and initiate a straddling stance");
 			if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(40))) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(20)))) {
 				button(0).disable("You are too tired to bite " + monster.a + " " + monster.short + ".");
 			}
@@ -480,6 +480,20 @@ public class CombatUI extends BaseCombatContent {
 			} else if (player.hasStatusEffect(StatusEffects.MonsterDig)) {
 				bd.disable("You cannot use offensive spell against an opponent you cannot see or target.");
 			}
+			if (player.hasPerk(PerkLib.MagesWrath)) {
+				bd = buttons.add("M.Bolt(Ex)", combat.magic.spellEdyMagicBolt);
+				if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Magic Bolt");
+				else bd.hint("Attempt to attack the enemy with wrath-empowered magic bolt.  Damage done is determined by your intelligence.", "Wrath-Empowered Magic Bolt");
+				if (player.mana < spellCost(40)) {
+					bd.disable("Your mana is too low to cast this spell.");
+				} else if (player.wrath < 100) {
+					bd.disable("Your wrath is too low to cast this spell.");
+				} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+					bd.disable("You can only use buff magic while underground.");
+				} else if (player.hasStatusEffect(StatusEffects.MonsterDig)) {
+					bd.disable("You cannot use offensive spell against an opponent you cannot see or target.");
+				}
+			}
 		}
 		if (player.hasPerk(PerkLib.ElementalBolt)) {
 			bd = buttons.add("E.Bolt", combat.magic.spellElementalBolt);
@@ -492,6 +506,20 @@ public class CombatUI extends BaseCombatContent {
 			} else if (player.hasStatusEffect(StatusEffects.MonsterDig)) {
 				bd.disable("You cannot use offensive spell against an opponent you cannot see or target.");
 			}
+			if (player.hasPerk(PerkLib.MagesWrath)) {
+				bd = buttons.add("E.Bolt(Ex)", combat.magic.spellEdgyElementalBolt);
+				if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponPerk == "Staff") bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Wrath-Empowered Elemental Bolt");
+				else bd.hint("Attempt to attack the enemy with wrath-empowered elemental bolt.  Damage done is determined by your intelligence.", "Wrath-Empowered Elemental Bolt");
+				if (player.mana < spellCost(80)) {
+					bd.disable("Your mana is too low to cast this spell.");
+				} else if (player.wrath < 100) {
+					bd.disable("Your wrath is too low to cast this spell.");
+				} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+					bd.disable("You can only use buff magic while underground.");
+				} else if (player.hasStatusEffect(StatusEffects.MonsterDig)) {
+					bd.disable("You cannot use offensive spell against an opponent you cannot see or target.");
+				}
+			}
 		}
 		combat.magic.buildWhiteMenu(whiteSpellButtons);
 		combat.magic.buildBlackMenu(blackSpellButtons);
@@ -500,15 +528,9 @@ public class CombatUI extends BaseCombatContent {
 		combat.magic.buildBloodMenu(bloodSpellButtons);
 		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your White magic book");
 		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your Black magic book");
-		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
-			if (greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your Grey magic book");
-		}
-		if (player.hasPerk(PerkLib.HexKnowledge)) {
-			if (hexSpellButtons.length > 0) buttons.add("Hexes", curry(submenu,hexSpellButtons, submenuSpells, 0, false)).hint("Open your Hex grimoire");
-		}
-		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
-			if (bloodSpellButtons.length > 0) buttons.add("Blood Spells", curry(submenu,bloodSpellButtons, submenuSpells, 0, false)).hint("Open your Blood grimoire");
-		}
+		if (player.hasPerk(PerkLib.PrestigeJobGreySage) && greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your Grey magic book");
+		if (player.hasPerk(PerkLib.HexKnowledge) && hexSpellButtons.length > 0) buttons.add("Hexes", curry(submenu,hexSpellButtons, submenuSpells, 0, false)).hint("Open your Hex grimoire");
+		if (player.hasPerk(PerkLib.HiddenJobBloodDemon) && bloodSpellButtons.length > 0) buttons.add("Blood Spells", curry(submenu,bloodSpellButtons, submenuSpells, 0, false)).hint("Open your Blood grimoire");
 	}
 
 	private function isPlayerPlayingWithElementalsOrGolems():Boolean {

@@ -13,12 +13,12 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_HARDINESS_LEVEL + ") Increases maximum HP by " + params.value1 * 100 + ".";
+			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_HARDINESS_LEVEL + ") Increases maximum HP by " + params.value1 * 400 + ".";
 		}
 		
 		public function AscensionHardinessPerk() 
 		{
-			super("Ascension: Hardiness", "Ascension: Hardiness", "", "Increases maximum HP by 100 per level.");
+			super("Ascension: Hardiness", "Ascension: Hardiness", "", "Increases maximum HP by 400 per level.");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean 

@@ -36,6 +36,7 @@ use namespace CoC;
 
 		public function exploreGlacialRift():void {
 			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT]++;
+			if (!player.hasPerk(PerkLib.ColdAffinity)) SubZeroConditionsTick();
 			doNext(playerMenu);
 
 			var choice:Array = [];
@@ -61,11 +62,13 @@ use namespace CoC;
 			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
+				GlacialRiftConditions();
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
+				GlacialRiftConditions();
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
@@ -80,7 +83,7 @@ use namespace CoC;
 				return;
 			}
 			//Fenrir ruined shrine
-			if (player.faceType == Face.WOLF && player.ears.type == Ears.WOLF && player.arms.type == Arms.WOLF && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Gleipnir Collar") < 0 && rand(5) == 0) {
+			if ((player.faceType == Face.WOLF || player.faceType == Face.ANIMAL_TOOTHS) && player.ears.type == Ears.WOLF && player.arms.type == Arms.WOLF && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Gleipnir Collar") < 0 && rand(5) == 0) {
 				FenrirRuinedShrine();
 				return;
 			}
@@ -88,9 +91,12 @@ use namespace CoC;
 			switch(select) {
 				case 0: //Yuki Onna OR Frost Gigant
 					clearOutput();
-					if (rand(2) == 0 && flags[kFLAGS.YU_SHOP] > 0) yukionnaScene.encounterYukiOnna();
+					if (rand(2) == 0 && flags[kFLAGS.YU_SHOP] > 0) {
+						yukionnaScene.encounterYukiOnna();
+					}
 					else {
 						outputText("You wander the frozen landscape of the Rift, frozen rocks, frosted hills and forested mountains your only landmarks. As you cross the peak of a rather large, lightly forested hill, you come face to gigantic face with a Frost Giant! He belches fiercely at you and you tumble back down the hill. He mostly steps over it as you come to your senses. You quickly draw your [weapon] and withdraw from the hill to prepare for battle.\n\n");
+						GlacialRiftConditions();
 						startCombat(new FrostGiant());
 					}
 					break;
@@ -116,22 +122,26 @@ use namespace CoC;
 					}
 					else {
 						outputText(". A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the iced caverns with ease as you stare the beast down. The white blur of an ice yeti attacks you!");
+						GlacialRiftConditions();
 						startCombat(new Yeti());
 						break;
 					}
 				case 2: //Frost Giant
 					clearOutput();
 					outputText("You wander the frozen landscape of the Rift, frozen rocks, frosted hills and forested mountains your only landmarks. As you cross the peak of a rather large, lightly forested hill, you come face to gigantic face with a Frost Giant! He belches fiercely at you and you tumble back down the hill. He mostly steps over it as you come to your senses. You quickly draw your [weapon] and withdraw from the hill to prepare for battle.\n\n");
+					GlacialRiftConditions();
 					startCombat(new FrostGiant());
 					break;
 				case 3: //Winter Wolf
 					clearOutput();
 					outputText("A titanic howling sound is heard nearby as an enormous shape jump off a nearby cliff into the snow right in front of you. As the flying snow clear off you see a wolf of immaculate pelt and size bordering the absurd. You likely accidentally stepped into its hunting territory and to clearly show its displeasure the ten feet tall monster growl at you showing its dagger-like teeth then start running in your direction howling what sounds to be a challenge.\n\n");
+					GlacialRiftConditions();
 					startCombat(new WinterWolf());
 					break;
 				case 4: //True Ice Golems
 					clearOutput();
 					outputText("As you take a stroll, out of the nearby glaciers emerge a group of golems. Looks like you have encountered some true ice golems! You ready your [weapon] for a fight!");
+					GlacialRiftConditions();
 					startCombat(new GolemsTrueIce());
 					break;
 				case 5:
@@ -222,9 +232,31 @@ use namespace CoC;
 			}
 		}
 
+		public function GlacialRiftConditions():void {
+			if (!player.headJewelry == headjewelries.SKIGOGG) player.createStatusEffect(StatusEffects.Snowstorms,0,0,0,0);
+			player.createStatusEffect(StatusEffects.Snow,0,0,0,0);
+			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createStatusEffect(StatusEffects.SubZeroConditions,0,0,0,0);
+		}
+
+		public function SubZeroConditionsTick():void {
+			var HPD:Number = 0.1;
+			if ((Math.round(player.damageIcePercent())) >= 55) HPD -= 0.01;
+			if ((Math.round(player.damageIcePercent())) >= 70) HPD -= 0.01;
+			if ((Math.round(player.damageIcePercent())) >= 80) HPD -= 0.01;
+			if ((Math.round(player.damageIcePercent())) >= 90) HPD -= 0.01;
+			if ((Math.round(player.damageIcePercent())) >= 95) HPD -= 0.01;
+			if (player.hasPerk(PerkLib.FireAffinity) && HPD > 0) HPD *= 2;
+			if (HPD > 0) {
+				HPD *= player.maxHP();
+				HPD = Math.round(HPD);
+				HPChange(HPD, true);
+			}
+		}
+
 		private function fightValeria():void {
 			clearOutput();
 			outputText("You ready your [weapon] for a fight!");
+			GlacialRiftConditions();
 			startCombat(new GooArmor());
 		}
 
@@ -278,8 +310,9 @@ use namespace CoC;
 			outputText("The feeling then sprouts along the back of your neck and down your spine, and you pitch forward in simliar agony as you feel something pierce through your skin outward, freezing and burning its way out and down all the way to the base of your lupine tail. Once more you howl in pain, then once more the pain abruptly ceases, but not the feeling of the cold. Indeed, you notice that even the cold of the air and the frozen ground no longer feel painful; they feel comfortable, in fact. The chill air is bracing and energizing, and you are filled with the urge to race forward and chase, corner, bite, devour, kill. The frozen wastes of the world belong to <b>you</b>. They are <b>your</b> hunting ground, <b>your</b> kingdom, and let all who dare to trespass fear your wrath! <b>Your back is now covered with sharp ice spike constantly cooling the air around you and protecting you from the cold. (Gained Frozen Waste and Cold Mastery perks)</b>\n\n");
 			outputText("Then, suddenly, you feel even the warmth inside your own body die out, replaced by a creeping chill that starts at your extremities and creeps inward, killing the heat of life, the palpable kindness of living warmth, and replacing it with the cruel chill of the dead, still air of a lightless winter night. As it spreads up your torso something forces its way up and out, and you howl one last time, not in pain but in exultation, and the very air before you stills its movement as your voice saps the life and warmth from it. <b>You can now use Freezing Breath and Frostbite.</b>\n\n");
 			outputText("With a new sense of purpose and the thrill of the coming hunt you return to your camp. Let Lethice and her Demons tremble in the cold of the coming winter; Mareth has something far greater to fear now. Your ice will spread and cover the world of the living until all know and shiver at the name of <b>Fenrir</b>.\n\n");
+            if (player.faceType == Face.ANIMAL_TOOTHS) CoC.instance.mutations.setFaceType(Face.WOLF);
             CoC.instance.mutations.setEyeTypeAndColor(Eyes.FENRIR, "glacial blue");
-            player.rearBody.type = RearBody.FENRIR_ICE_SPIKES;
+			CoC.instance.mutations.setRearBody(RearBody.FENRIR_ICE_SPIKES);
 			player.createPerk(PerkLib.ColdMastery, 0, 0, 0, 0);
 			player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);
 			player.createPerk(PerkLib.FromTheFrozenWaste, 0, 0, 0, 0);

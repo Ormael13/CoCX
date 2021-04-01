@@ -1,5 +1,6 @@
 package classes {
 import classes.BodyParts.*;
+import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
@@ -449,6 +450,11 @@ public class PlayerAppearance extends BaseContent {
 					break;
 				case VaginaClass.DEMONIC:
 					outputText(", unlike a normal pussy, feels and acts akin to a mouth that allows you to taste and savor the flavor of the cum injected within as if it landed on your tongue. Your sensitive walls are also prehensile, and you can control them to milk a cock just as well as your hand could.  Your dexterous, cum-hungry twat hides a ");
+					break;
+				case VaginaClass.NAGA:
+					outputText(" is deep and wide enought to insert your entire arm lenght inside and some more. Sometime you lament that most of your partners are no longer big enough to satisfy you");
+					if (player.lowerBody == LowerBody.NAGA) outputText("as your hot spot is now way further inside your lenghtly canal requiring quite a longer member to reach");
+							outputText(". Inside you have a ");
 					break;
 				default:
 					outputText(" hides a ");
@@ -1044,29 +1050,29 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  A long cowtail with a puffy tip swishes back and forth as if swatting at flies.");
 		if (player.tailType == Tail.SPIDER_ADBOMEN) {
 			outputText("  A large, spherical spider-abdomen has grown out from your backside, covered in shiny "+player.coatColor+" chitin.  Though it's heavy and bobs with every motion, it doesn't seem to slow you down.");
-			if (player.tailVenom > 50 && player.tailVenom < 80)
+			if (player.tailVenom > (player.maxVenom() * 0.5) && player.tailVenom < (player.maxVenom() * 0.8))
 				outputText("  Your bulging arachnid posterior feels fairly full of webbing.");
-			if (player.tailVenom >= 80 && player.tailVenom < 100)
+			if (player.tailVenom >= (player.maxVenom() * 0.8) && player.tailVenom < player.maxVenom())
 				outputText("  Your arachnid rear bulges and feels very full of webbing.");
-			if (player.tailVenom == 100)
+			if (player.tailVenom == player.maxVenom())
 				outputText("  Your swollen spider-butt is distended with the sheer amount of webbing it's holding.");
 		}
 		if (player.tailType == Tail.BEE_ABDOMEN) {
 			outputText("  A large insectile bee-abdomen dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard chitin with black and yellow stripes, and tipped with a dagger-like stinger.");
-			if (player.tailVenom > 50 && player.tailVenom < 80)
+			if (player.tailVenom > (player.maxVenom() * 0.5) && player.tailVenom < (player.maxVenom() * 0.8))
 				outputText("  A single drop of poison hangs from your exposed stinger.");
-			if (player.tailVenom >= 80 && player.tailVenom < 100)
+			if (player.tailVenom >= (player.maxVenom() * 0.8) && player.tailVenom < player.maxVenom())
 				outputText("  Poisonous bee venom coats your stinger completely.");
-			if (player.tailVenom == 100)
+			if (player.tailVenom == player.maxVenom())
 				outputText("  Venom drips from your poisoned stinger regularly.");
 		}
 		if (player.tailType == Tail.SCORPION) {
 			outputText("  A large insectile scorpion-like tail dangles from just above your backside, bobbing with its own weight as you shift.  It is covered in hard chitin and tipped with a stinger.");
-			if (player.tailVenom > 75 && player.tailVenom < 120)
+			if (player.tailVenom > (player.maxVenom() * 0.5) && player.tailVenom < (player.maxVenom() * 0.8))
 				outputText("  A single drop of poison hangs from your exposed stinger.");
-			if (player.tailVenom >= 120 && player.tailVenom < 150)
+			if (player.tailVenom >= (player.maxVenom() * 0.8) && player.tailVenom < player.maxVenom())
 				outputText("  Poisonous bee venom coats your stinger completely.");
-			if (player.tailVenom == 150)
+			if (player.tailVenom == player.maxVenom())
 				outputText("  Venom drips from your poisoned stinger regularly.");
 		}
 		if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
@@ -2946,9 +2952,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.phoenixScore() >= 1) outputText("\n<font color=\"#008000\">Phoenix: " + player.phoenixScore() + "</font>");
 		else if (player.phoenixScore() < 1) outputText("\n<font color=\"#ff0000\">Phoenix: 0</font>");
 		//Pig
-		if (player.pigScore() >= 15) outputText("\n<font color=\"#0000a0\">Boar-morph: " + player.pigScore() + " (+125% to Str racial multi, +125 to% to Tou racial multi, -15 to% to Spe racial multi, -10% to Int racial multi)</font>");
-		else if (player.pigScore() >= 10) outputText("\n<font color=\"#0000a0\">Pig-morph: " + player.pigScore() + " (+60% to Str racial multi, +120 to% to Tou racial multi, -15 to% to Spe racial multi, -10% to Int racial multi, -5% to Wis racial multi)</font>");
-		else if (player.pigScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Pig-morph: " + player.pigScore() + " (+30% to Str racial multi, +60 to% to Tou racial multi, -10 to% to Spe racial multi, -5% to Int racial multi)</font>");
+		if (player.pigScore() >= 15) outputText("\n<font color=\"#0000a0\">Boar-morph: " + player.pigScore() + " (+125% to Str racial multi, +125% to Tou racial multi, -15% to Spe racial multi, -10% to Int racial multi)</font>");
+		else if (player.pigScore() >= 10) outputText("\n<font color=\"#0000a0\">Pig-morph: " + player.pigScore() + " (+60% to Str racial multi, +120% to Tou racial multi, -15% to Spe racial multi, -10% to Int racial multi, -5% to Wis racial multi)</font>");
+		else if (player.pigScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Pig-morph: " + player.pigScore() + " (+30% to Str racial multi, +60% to Tou racial multi, -10% to Spe racial multi, -5% to Int racial multi)</font>");
 		else if (player.pigScore() >= 1) outputText("\n<font color=\"#008000\">Half Pig-morph: " + player.pigScore() + "</font>");
 		else if (player.pigScore() < 1) outputText("\n<font color=\"#ff0000\">Half Pig-morph: 0</font>");
 		//Treant/Dryad

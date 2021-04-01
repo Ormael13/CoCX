@@ -9,7 +9,8 @@ package classes.Scenes.Areas.GlacialRift
 	import classes.Items.WeaponLib;
 	import classes.CoC;
 	import classes.BodyParts.*;
-import classes.display.SpriteDb;
+	import classes.display.SpriteDb;
+	import classes.Scenes.SceneLib;
 
 public class YukiOnnaScene extends BaseContent
 	{
@@ -144,12 +145,14 @@ public class YukiOnnaScene extends BaseContent
 			outputText("\"<i>Why couldn't you just stay down in the bed and enjoy yourself a minute longer. I wanted to keep this easy and fast but you had to sniff me out. Guess there's no helping it anymore. If you won't lay still on your own then I will beat you down until you do so.</i>\"\n\n");
 			outputText("Howling winds circle the room as the girl floats into the air, her formerly pale skin bleaching to the complexion of a frozen corpse, her lips bluish and her eyes cold and cruel. An icy spear finally forms in her hands, sharp and deadly.\n\n");
 			outputText("\"<i>Winter is coming!</i>\"\n\n");
+			SceneLib.glacialRift.GlacialRiftConditions();
 			startCombat(new YukiOnna());
 		}
 		public function encounterYukiOnnaNo2():void {
 			outputText("Yea no that icy bitch can burn!"+(player.weaponName != "fists" ? " You draw your [weapon] ready for battle and signify your intent to fight.":"")+" The Yuki Onna notices it and smile.\n\n");
 			outputText("\"<i>Oh.. a survivor? Guess someone botched up. Please allow me to correct the mistake.</i>\"\n\n");
 			outputText("The climate suddenly turn to an all out snowstorm as the Yuki Onna lift from the ground.\n\n");
+			SceneLib.glacialRift.GlacialRiftConditions();
 			startCombat(new YukiOnna());
 		}
 

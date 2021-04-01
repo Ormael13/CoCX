@@ -211,7 +211,7 @@ import flash.utils.getQualifiedClassName;
 
 		protected override function maxHP_base():Number {
 			//Base HP
-			var temp:Number = 100 + this.level * 15 + this.bonusHP;
+			var temp:Number = 100 + this.level * 30 + this.bonusHP;
 			var baseStat:Number = 0;
 			if (findPerk(PerkLib.IcyFlesh) >= 0) baseStat += this.inte;
 			else if (findPerk(PerkLib.HaltedVitals) >= 0) baseStat += this.lib;
@@ -231,38 +231,38 @@ import flash.utils.getQualifiedClassName;
 			//Apply NG+, NG++, NG+++, etc.
 			temp += this.bonusAscMaxHP * newGamePlusMod();
 			//Apply perks
-			if (findPerk(PerkLib.RefinedBodyI) >= 0) temp += (50 * (1 + newGamePlusMod()));
-			if (findPerk(PerkLib.TankI) >= 0) temp += ((baseStat*3) * (1 + newGamePlusMod()));
-			if (findPerk(PerkLib.GoliathI) >= 0) temp += ((this.str*2) * (1 + newGamePlusMod()));
-			if (findPerk(PerkLib.CheetahI) >= 0) temp += (this.spe * (1 + newGamePlusMod()));
-			if (findPerk(PerkLib.JobGuardian) >= 0) temp += 30;
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 150;
-			if (findPerk(PerkLib.BodyCultivator) >= 0) temp += (25 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.TankI) >= 0) temp += ((baseStat*12) * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.GoliathI) >= 0) temp += ((this.str*8) * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.CheetahI) >= 0) temp += ((this.spe*4) * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.JobGuardian) >= 0) temp += 120;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 600;
+			if (findPerk(PerkLib.BodyCultivator) >= 0) temp += (100 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
-				if (findPerk(PerkLib.SoulApprentice) >= 0) temp += (50 * (1 + newGamePlusMod()));
-				if (findPerk(PerkLib.SoulPersonage) >= 0) temp += (50 * (1 + newGamePlusMod()));
-				if (findPerk(PerkLib.SoulWarrior) >= 0) temp += (50 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulApprentice) >= 0) temp += (200 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulPersonage) >= 0) temp += (200 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulWarrior) >= 0) temp += (200 * (1 + newGamePlusMod()));
 			}
 			if (findPerk(PerkLib.FleshBodyWarriorStage) >= 0) {
-				if (findPerk(PerkLib.SoulSprite) >= 0) temp += (75 * (1 + newGamePlusMod()));
-				if (findPerk(PerkLib.SoulScholar) >= 0) temp += (75 * (1 + newGamePlusMod()));
-				if (findPerk(PerkLib.SoulElder) >= 0) temp += (75 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulSprite) >= 0) temp += (300 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulScholar) >= 0) temp += (300 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulElder) >= 0) temp += (300 * (1 + newGamePlusMod()));
 			}
 			if (findPerk(PerkLib.FleshBodyElderStage) >= 0) {
-				if (findPerk(PerkLib.SoulExalt) >= 0) temp += (100 * (1 + newGamePlusMod()));
-				if (findPerk(PerkLib.SoulOverlord) >= 0) temp += (100 * (1 + newGamePlusMod()));
-				if (findPerk(PerkLib.SoulTyrant) >= 0) temp += (100 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulExalt) >= 0) temp += (400 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulOverlord) >= 0) temp += (400 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulTyrant) >= 0) temp += (400 * (1 + newGamePlusMod()));
 			}
 			if (findPerk(PerkLib.FleshBodyOverlordStage) >= 0) {
-				if (findPerk(PerkLib.SoulKing) >= 0) temp += (125 * (1 + newGamePlusMod()));
-				if (findPerk(PerkLib.SoulEmperor) >= 0) temp += (125 * (1 + newGamePlusMod()));
-				if (findPerk(PerkLib.SoulAncestor) >= 0) temp += (125 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulKing) >= 0) temp += (500 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulEmperor) >= 0) temp += (500 * (1 + newGamePlusMod()));
+				if (findPerk(PerkLib.SoulAncestor) >= 0) temp += (500 * (1 + newGamePlusMod()));
 			}
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (150 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (225 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) temp += (300 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) temp += (375 * (1 + newGamePlusMod()));
 			var multimax:Number = 1;
+			if (findPerk(PerkLib.RefinedBodyI) >= 0) multimax += (0.05 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
 			if (statusEffectv2(StatusEffects.SaiyanNumber1a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber1a);
@@ -275,6 +275,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EnemyColossalType) >= 0) temp *= 3;
 			if (findPerk(PerkLib.EnemyGroupType) >= 0) temp *= 5;
 			if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) temp *= 10;
+			if (findPerk(PerkLib.Enemy300Type) >= 0) temp *= 15;
 			temp *= stats_multi_based_on_misc();
 			temp = Math.round(temp);
 			return temp;
@@ -285,20 +286,20 @@ import flash.utils.getQualifiedClassName;
 		public override function maxOverHP():Number {
 			var maxOver:Number = maxHP();
 			if (findPerk(PerkLib.HiddenJobBloodDemon) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 5);
-				else maxOver += Math.round(this.tou*5);
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
+				else maxOver += Math.round(this.tou*10);
 			}
 			if (findPerk(PerkLib.WayOfTheBlood) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 5);
-				else maxOver += Math.round(this.tou*5);
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
+				else maxOver += Math.round(this.tou*10);
 			}
 			if (findPerk(PerkLib.YourPainMyPower) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 5);
-				else maxOver += Math.round(this.tou*5);
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
+				else maxOver += Math.round(this.tou*10);
 			}
 			if (findPerk(PerkLib.MyBloodForBloodPuppies) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 5);
-				else maxOver += Math.round(this.tou*5);
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
+				else maxOver += Math.round(this.tou*10);
 			}
 			return maxOver;
 		}
@@ -306,20 +307,20 @@ import flash.utils.getQualifiedClassName;
 			var min:Number = 0;
 			if (findPerk(PerkLib.Diehard) >= 0) {
 				min -= maxHP() * 0.02;
-				min -= (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				min -= (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (findPerk(PerkLib.ImprovedDiehard) >= 0) {
 				min -= maxHP() * 0.04;
-				min -= (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				min -= (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (findPerk(PerkLib.GreaterDiehard) >= 0) {
 				min -= maxHP() * 0.06;
-				min -= (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				min -= (1800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (findPerk(PerkLib.EpicDiehard) >= 0) {
 				min -= maxHP() * 0.08;
-				min -= (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			}//nastepny diehard to 5% i 1000
+				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}//nastepny diehard to 10% i 3000
 			if (findPerk(PerkLib.Ferocity) >= 0) min -= maxHP() * 0.07;
 			if (findPerk(PerkLib.LizanMarrowFinalForm) >= 0) min -= maxHP() * 0.05;
 			if (findPerk(PerkLib.OrcAdrenalGlands) >= 0) min -= maxHP() * 0.01;
@@ -356,50 +357,59 @@ import flash.utils.getQualifiedClassName;
         }
 		protected override function maxLust_base():Number {
 			//Base lust
-			var temp:Number = 100 + this.level * 2;
-			if (this.level >= 24) temp += (this.level - 23) * 3;
-			if (this.level >= 42) temp += (this.level - 42) * 5;
-			if (this.level >= 72) temp += (this.level - 72) * 10;
-			if (this.level >= 102) temp += (this.level - 102) * 20;
+			var temp:Number = 100 + this.level * 4;
+			if (this.level >= 24) temp += (this.level - 23) * 6;
+			if (this.level >= 42) temp += (this.level - 42) * 10;
+			if (this.level >= 72) temp += (this.level - 72) * 20;
+			if (this.level >= 102) temp += (this.level - 102) * 40;
 			//Apply perks
-			if (findPerk(PerkLib.BasicSelfControl) >= 0) temp += 15;
-			if (findPerk(PerkLib.HalfStepToImprovedSelfControl) >= 0) temp += 25;
-			if (findPerk(PerkLib.ImprovedSelfControl) >= 0) temp += 40;
-			if (findPerk(PerkLib.HalfStepToAdvancedSelfControl) >= 0) temp += 60;
-			if (findPerk(PerkLib.AdvancedSelfControl) >= 0) temp += 100;
-			if (findPerk(PerkLib.HalfStepToSuperiorSelfControl) >= 0) temp += 160;
-			if (findPerk(PerkLib.SuperiorSelfControl) >= 0) temp += 250;
-			if (findPerk(PerkLib.HalfStepToPeerlessSelfControl) >= 0) temp += 350;
-			if (findPerk(PerkLib.PeerlessSelfControl) >= 0) temp += 500;
-			if (findPerk(PerkLib.HalfStepToInhumanSelfControl) >= 0) temp += 750;
-			if (findPerk(PerkLib.InhumanSelfControl) >= 0) temp += 1000;
-			if (findPerk(PerkLib.HalfStepToEpicSelfControl) >= 0) temp += 1500;
-			if (findPerk(PerkLib.EpicSelfControl) >= 0) temp += 2250;
-			if (findPerk(PerkLib.HalfStepToLegendarySelfControl) >= 0) temp += 3500;
-			if (findPerk(PerkLib.LegendarySelfControl) >= 0) temp += 5000;
-			if (findPerk(PerkLib.HalfStepToMythicalSelfControl) >= 0) temp += 7500;
-			if (findPerk(PerkLib.MythicalSelfControl) >= 0) temp += 10000;
-			if (findPerk(PerkLib.InhumanDesireI) >= 0) temp += (20 * (1 + newGamePlusMod()));
-			if (findPerk(PerkLib.DemonicDesireI) >= 0) temp += Math.round(this.lib * (1 + newGamePlusMod()));
-			if (findPerk(PerkLib.JobCourtesan) >= 0) temp += 20;
-			if (findPerk(PerkLib.JobSeducer) >= 0) temp += 10;
-			if (findPerk(PerkLib.PrestigeJobGreySage) >= 0) temp += 100;
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 50;
-			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (50 * (1 + newGamePlusMod()));
-			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (75 * (1 + newGamePlusMod()));
-			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) temp += (100 * (1 + newGamePlusMod()));
-			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) temp += (125 * (1 + newGamePlusMod()));
-			if (findPerk(PerkLib.UnlockArdor) >= 0) temp += level;
-			if (findPerk(PerkLib.UnlockArdor2ndStage) >= 0) temp += level;
-			if (findPerk(PerkLib.UnlockArdor3rdStage) >= 0) temp += level;
-			if (findPerk(PerkLib.UnlockArdor4thStage) >= 0) temp += level;
+			if (findPerk(PerkLib.BasicSelfControl) >= 0) temp += 45;
+			if (findPerk(PerkLib.HalfStepToImprovedSelfControl) >= 0) temp += 75;
+			if (findPerk(PerkLib.ImprovedSelfControl) >= 0) temp += 120;
+			if (findPerk(PerkLib.HalfStepToAdvancedSelfControl) >= 0) temp += 180;
+			if (findPerk(PerkLib.AdvancedSelfControl) >= 0) temp += 300;
+			if (findPerk(PerkLib.HalfStepToSuperiorSelfControl) >= 0) temp += 480;
+			if (findPerk(PerkLib.SuperiorSelfControl) >= 0) temp += 750;
+			if (findPerk(PerkLib.HalfStepToPeerlessSelfControl) >= 0) temp += 1050;
+			if (findPerk(PerkLib.PeerlessSelfControl) >= 0) temp += 1500;
+			if (findPerk(PerkLib.HalfStepToInhumanSelfControl) >= 0) temp += 2250;
+			if (findPerk(PerkLib.InhumanSelfControl) >= 0) temp += 3000;
+			if (findPerk(PerkLib.HalfStepToEpicSelfControl) >= 0) temp += 4500;
+			if (findPerk(PerkLib.EpicSelfControl) >= 0) temp += 6750;
+			if (findPerk(PerkLib.HalfStepToLegendarySelfControl) >= 0) temp += 10500;
+			if (findPerk(PerkLib.LegendarySelfControl) >= 0) temp += 15000;
+			if (findPerk(PerkLib.HalfStepToMythicalSelfControl) >= 0) temp += 22500;
+			if (findPerk(PerkLib.MythicalSelfControl) >= 0) temp += 30000;
+			if (findPerk(PerkLib.Mage) >= 0) temp += 15;
+			if (findPerk(PerkLib.GrandMage) >= 0) temp += 30;
+			if (findPerk(PerkLib.Archmage) >= 0) temp += 45;
+			if (findPerk(PerkLib.GrandArchmage) >= 0) temp += 60;
+			if (findPerk(PerkLib.GrandArchmage2ndCircle) >= 0) temp += 75;
+			if (findPerk(PerkLib.GrandArchmage3rdCircle) >= 0) temp += 90;
+			if (findPerk(PerkLib.GreyMage) >= 0) temp += 120;
+			if (findPerk(PerkLib.GreyArchmage) >= 0) temp += 150;
+			if (findPerk(PerkLib.InhumanDesireI) >= 0) temp += Math.round(this.lib * 3 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.JobCourtesan) >= 0) temp += 60;
+			if (findPerk(PerkLib.JobSeducer) >= 0) temp += 30;
+			if (findPerk(PerkLib.PrestigeJobGreySage) >= 0) temp += 300;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 150;
+			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (150 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (225 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) temp += (300 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) temp += (375 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.UnlockArdor) >= 0) temp += level * 3;
+			if (findPerk(PerkLib.UnlockArdor2ndStage) >= 0) temp += level * 3;
+			if (findPerk(PerkLib.UnlockArdor3rdStage) >= 0) temp += level * 3;
+			if (findPerk(PerkLib.UnlockArdor4thStage) >= 0) temp += level * 3;
 			//Apply NG+, NG++, NG+++, etc.
 			var anotherOne:Number = this.bonusLust;
 			if (findPerk(PerkLib.EnemyGroupType) >= 0) anotherOne *= 5;
 			if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) anotherOne *= 10;
+			if (findPerk(PerkLib.Enemy300Type) >= 0) anotherOne *= 15;
 			anotherOne *= (1 + newGamePlusMod());
 			temp += anotherOne;
 			var multimax:Number = 1;
+			if (findPerk(PerkLib.DemonicDesireI) >= 0) multimax += (0.05 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
 			if (statusEffectv3(StatusEffects.SaiyanNumber1a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber1a);
@@ -407,6 +417,8 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv3(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber3a);
 			temp *= multimax;
 			temp *= stats_multi_based_on_misc();
+			if (this.level < 6) temp *= 0.5;
+			if (this.level < 3) temp *= 0.5;
 			temp = Math.round(temp);
 			return temp;
 		}
@@ -527,65 +539,68 @@ import flash.utils.getQualifiedClassName;
 
 		public override function maxWrath():Number {
 			//Base wrath
-			var temp:Number = 250 + this.bonusWrath;
-			if (findPerk(PerkLib.DoubleAttack) >= 0) temp += 10;
-			if (findPerk(PerkLib.TripleAttack) >= 0) temp += 10;
-			if (findPerk(PerkLib.QuadrupleAttack) >= 0) temp += 10;
-			if (findPerk(PerkLib.PentaAttack) >= 0) temp += 10;
-			if (findPerk(PerkLib.HexaAttack) >= 0) temp += 10;
-			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) temp += 20;
-			if (findPerk(PerkLib.TripleAttackLarge) >= 0) temp += 20;
-			if (findPerk(PerkLib.PrimalFuryI) >= 0) temp += (10 * (1 + newGamePlusMod()));
-			if (findPerk(PerkLib.FeralArmor) >= 0) temp += 20;
-			if (findPerk(PerkLib.ClawTraining) >= 0) temp += 20;
-			if (findPerk(PerkLib.ExtraClawAttack) >= 0) temp += 30;
-			if (findPerk(PerkLib.MultiClawAttack) >= 0) temp += 40;
-			if (findPerk(PerkLib.ClawingFlurry) >= 0) temp += 50;
-			if (findPerk(PerkLib.BasicTranquilness) >= 0) temp += 15;
-			if (findPerk(PerkLib.HalfStepToImprovedTranquilness) >= 0) temp += 25;
-			if (findPerk(PerkLib.ImprovedTranquilness) >= 0) temp += 40;
-			if (findPerk(PerkLib.HalfStepToAdvancedTranquilness) >= 0) temp += 60;
-			if (findPerk(PerkLib.AdvancedTranquilness) >= 0) temp += 100;
-			if (findPerk(PerkLib.HalfStepToSuperiorTranquilness) >= 0) temp += 160;
-			if (findPerk(PerkLib.SuperiorTranquilness) >= 0) temp += 250;
-			if (findPerk(PerkLib.HalfStepToPeerlessTranquilness) >= 0) temp += 350;
-			if (findPerk(PerkLib.PeerlessTranquilness) >= 0) temp += 500;
-			if (findPerk(PerkLib.HalfStepToInhumanTranquilness) >= 0) temp += 750;
-			if (findPerk(PerkLib.InhumanTranquilness) >= 0) temp += 1000;
-			if (findPerk(PerkLib.HalfStepToEpicTranquilness) >= 0) temp += 1500;
-			if (findPerk(PerkLib.EpicTranquilness) >= 0) temp += 2250;
-			if (findPerk(PerkLib.HalfStepToLegendaryTranquilness) >= 0) temp += 3500;
-			if (findPerk(PerkLib.LegendaryTranquilness) >= 0) temp += 5000;
-			if (findPerk(PerkLib.HalfStepToMythicalTranquilness) >= 0) temp += 7500;
-			if (findPerk(PerkLib.MythicalTranquilness) >= 0) temp += 10000;
-			if (findPerk(PerkLib.JobSwordsman) >= 0) temp += 20;
-			if (findPerk(PerkLib.JobBeastWarrior) >= 0) temp += 20;
-			if (findPerk(PerkLib.JobDervish) >= 0) temp += 20;
-			if (findPerk(PerkLib.JobWarlord) >= 0) temp += 20;
-			if (findPerk(PerkLib.JobWarrior) >= 0) temp += 10;
-			if (findPerk(PerkLib.ImprovedCrinosShape) >= 0) temp += 40;
-			if (findPerk(PerkLib.GreaterCrinosShape) >= 0) temp += 80;
-			if (findPerk(PerkLib.MasterCrinosShape) >= 0) temp += 160;
-			if (findPerk(PerkLib.Berzerker) >= 0) temp += 100;
-			if (findPerk(PerkLib.ColdFury) >= 0) temp += 50;
-			if (findPerk(PerkLib.ColderFury) >= 0) temp += 75;
-			if (findPerk(PerkLib.Lustzerker) >= 0) temp += 100;
-			if (findPerk(PerkLib.ColdLust) >= 0) temp += 50;
-			if (findPerk(PerkLib.ColderLust) >= 0) temp += 75;
-			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) temp += 200;
-			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) temp += 100;
-			if (findPerk(PerkLib.Rage) >= 0) temp += 300;
-			if (findPerk(PerkLib.Anger) >= 0) temp += 400;
-			if (findPerk(PerkLib.FuelForTheFire) >= 0) temp += 500;
-			if (findPerk(PerkLib.TooAngryToDie) >= 0) temp += 600;
+			var temp:Number = 500 + (this.bonusWrath * 5);
+			if (findPerk(PerkLib.DoubleAttack) >= 0) temp += 50;
+			if (findPerk(PerkLib.TripleAttack) >= 0) temp += 50;
+			if (findPerk(PerkLib.QuadrupleAttack) >= 0) temp += 50;
+			if (findPerk(PerkLib.PentaAttack) >= 0) temp += 50;
+			if (findPerk(PerkLib.HexaAttack) >= 0) temp += 50;
+			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) temp += 100;
+			if (findPerk(PerkLib.TripleAttackLarge) >= 0) temp += 100;
+			if (findPerk(PerkLib.FeralArmor) >= 0) temp += 100;
+			if (findPerk(PerkLib.ClawTraining) >= 0) temp += 100;
+			if (findPerk(PerkLib.ExtraClawAttack) >= 0) temp += 150;
+			if (findPerk(PerkLib.MultiClawAttack) >= 0) temp += 200;
+			if (findPerk(PerkLib.ClawingFlurry) >= 0) temp += 250;
+			if (findPerk(PerkLib.BasicTranquilness) >= 0) temp += 75;
+			if (findPerk(PerkLib.HalfStepToImprovedTranquilness) >= 0) temp += 125;
+			if (findPerk(PerkLib.ImprovedTranquilness) >= 0) temp += 200;
+			if (findPerk(PerkLib.HalfStepToAdvancedTranquilness) >= 0) temp += 300;
+			if (findPerk(PerkLib.AdvancedTranquilness) >= 0) temp += 500;
+			if (findPerk(PerkLib.HalfStepToSuperiorTranquilness) >= 0) temp += 800;
+			if (findPerk(PerkLib.SuperiorTranquilness) >= 0) temp += 1250;
+			if (findPerk(PerkLib.HalfStepToPeerlessTranquilness) >= 0) temp += 1750;
+			if (findPerk(PerkLib.PeerlessTranquilness) >= 0) temp += 2500;
+			if (findPerk(PerkLib.HalfStepToInhumanTranquilness) >= 0) temp += 3750;
+			if (findPerk(PerkLib.InhumanTranquilness) >= 0) temp += 5000;
+			if (findPerk(PerkLib.HalfStepToEpicTranquilness) >= 0) temp += 7500;
+			if (findPerk(PerkLib.EpicTranquilness) >= 0) temp += 11250;
+			if (findPerk(PerkLib.HalfStepToLegendaryTranquilness) >= 0) temp += 17500;
+			if (findPerk(PerkLib.LegendaryTranquilness) >= 0) temp += 25000;
+			if (findPerk(PerkLib.HalfStepToMythicalTranquilness) >= 0) temp += 37500;
+			if (findPerk(PerkLib.MythicalTranquilness) >= 0) temp += 50000;
+			if (findPerk(PerkLib.JobSwordsman) >= 0) temp += 100;
+			if (findPerk(PerkLib.JobBeastWarrior) >= 0) temp += 100;
+			if (findPerk(PerkLib.JobDervish) >= 0) temp += 100;
+			if (findPerk(PerkLib.JobWarlord) >= 0) temp += 100;
+			if (findPerk(PerkLib.JobWarrior) >= 0) temp += 50;
+			if (findPerk(PerkLib.ImprovedCrinosShape) >= 0) temp += 200;
+			if (findPerk(PerkLib.GreaterCrinosShape) >= 0) temp += 400;
+			if (findPerk(PerkLib.MasterCrinosShape) >= 0) temp += 800;
+			if (findPerk(PerkLib.Berzerker) >= 0) temp += 500;
+			if (findPerk(PerkLib.ColdFury) >= 0) temp += 250;
+			if (findPerk(PerkLib.ColderFury) >= 0) temp += 375;
+			if (findPerk(PerkLib.Lustzerker) >= 0) temp += 500;
+			if (findPerk(PerkLib.ColdLust) >= 0) temp += 250;
+			if (findPerk(PerkLib.ColderLust) >= 0) temp += 375;
+			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) temp += 1000;
+			if (findPerk(PerkLib.Rage) >= 0) temp += 1500;
+			if (findPerk(PerkLib.Anger) >= 0) temp += 2000;
+			if (findPerk(PerkLib.FuelForTheFire) >= 0) temp += 2500;
+			if (findPerk(PerkLib.TooAngryToDie) >= 0) temp += 3000;
+			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) temp += 500;
 			if (findPerk(PerkLib.EnemyFeralType) >= 0) {
-				temp += 500;
-				if (findPerk(PerkLib.EnemyGroupType) >= 0) temp += 2000;
-				if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) temp += 4000;
+				temp += 2500;
+				if (findPerk(PerkLib.EnemyGroupType) >= 0) temp += 10000;
+				if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) temp += 20000;
+				if (findPerk(PerkLib.Enemy300Type) >= 0) temp += 300000;
 			}
+			temp += this.level * 5;
 			var multimax:Number = 1;
+			if (findPerk(PerkLib.PrimalFuryI) >= 0) multimax += (0.05 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.ICastAsuraFist) >= 0) multimax += 0.5;
 			if (statusEffectv4(StatusEffects.SaiyanNumber1a) > 0) multimax += statusEffectv4(StatusEffects.SaiyanNumber1a);
 			if (statusEffectv4(StatusEffects.SaiyanNumber2a) > 0) multimax += statusEffectv4(StatusEffects.SaiyanNumber2a);
 			if (statusEffectv4(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv4(StatusEffects.SaiyanNumber3a);
@@ -595,56 +610,67 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience)) temp = 0;
 			return temp;
 		}
+		public override function maxOverWrath():Number {
+			var temp1:Number = this.maxWrath();
+			var temp2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobAsura)) temp2 += 0.1;
+			if (hasPerk(PerkLib.AbsoluteStrength)) temp2 += 0.1;
+			if (hasPerk(PerkLib.LikeAnAsuraBoss)) temp2 += 0.1;
+			if (hasPerk(PerkLib.ICastAsuraFist)) temp2 += 0.1;
+			temp1 *= temp2;
+			return temp1;
+		}
 
 		public override function maxMana():Number {
 			//Base mana
-			var temp:Number = 200 + this.level * 10 + this.bonusMana;
-			if (findPerk(PerkLib.BasicSpirituality) >= 0) temp += 45;
-			if (findPerk(PerkLib.HalfStepToImprovedSpirituality) >= 0) temp += 75;
-			if (findPerk(PerkLib.ImprovedSpirituality) >= 0) temp += 120;
-			if (findPerk(PerkLib.HalfStepToAdvancedSpirituality) >= 0) temp += 180;
-			if (findPerk(PerkLib.AdvancedSpirituality) >= 0) temp += 300;
-			if (findPerk(PerkLib.HalfStepToSuperiorSpirituality) >= 0) temp += 480;
-			if (findPerk(PerkLib.SuperiorSpirituality) >= 0) temp += 750;
-			if (findPerk(PerkLib.HalfStepToPeerlessSpirituality) >= 0) temp += 1050;
-			if (findPerk(PerkLib.PeerlessSpirituality) >= 0) temp += 1500;
-			if (findPerk(PerkLib.HalfStepToInhumanSpirituality) >= 0) temp += 2250;
-			if (findPerk(PerkLib.InhumanSpirituality) >= 0) temp += 3000;
-			if (findPerk(PerkLib.HalfStepToEpicSpirituality) >= 0) temp += 4500;
-			if (findPerk(PerkLib.EpicSpirituality) >= 0) temp += 6750;
-			if (findPerk(PerkLib.HalfStepToLegendarySpirituality) >= 0) temp += 10500;
-			if (findPerk(PerkLib.LegendarySpirituality) >= 0) temp += 15000;
-			if (findPerk(PerkLib.HalfStepToMythicalSpirituality) >= 0) temp += 22500;
-			if (findPerk(PerkLib.MythicalSpirituality) >= 0) temp += 30000;
-			if (findPerk(PerkLib.ManaAffinityI) >= 0) temp += (35 * (1 + newGamePlusMod()));
-			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte * 2) * (1 + newGamePlusMod()));
+			var temp:Number = 300 + this.level * 10 + this.bonusMana;
+			if (findPerk(PerkLib.BasicSpirituality) >= 0) temp += 135;
+			if (findPerk(PerkLib.HalfStepToImprovedSpirituality) >= 0) temp += 225;
+			if (findPerk(PerkLib.ImprovedSpirituality) >= 0) temp += 360;
+			if (findPerk(PerkLib.HalfStepToAdvancedSpirituality) >= 0) temp += 540;
+			if (findPerk(PerkLib.AdvancedSpirituality) >= 0) temp += 900;
+			if (findPerk(PerkLib.HalfStepToSuperiorSpirituality) >= 0) temp += 1440;
+			if (findPerk(PerkLib.SuperiorSpirituality) >= 0) temp += 2250;
+			if (findPerk(PerkLib.HalfStepToPeerlessSpirituality) >= 0) temp += 3150;
+			if (findPerk(PerkLib.PeerlessSpirituality) >= 0) temp += 4500;
+			if (findPerk(PerkLib.HalfStepToInhumanSpirituality) >= 0) temp += 6750;
+			if (findPerk(PerkLib.InhumanSpirituality) >= 0) temp += 9000;
+			if (findPerk(PerkLib.HalfStepToEpicSpirituality) >= 0) temp += 13500;
+			if (findPerk(PerkLib.EpicSpirituality) >= 0) temp += 20250;
+			if (findPerk(PerkLib.HalfStepToLegendarySpirituality) >= 0) temp += 31500;
+			if (findPerk(PerkLib.LegendarySpirituality) >= 0) temp += 45000;
+			if (findPerk(PerkLib.HalfStepToMythicalSpirituality) >= 0) temp += 67500;
+			if (findPerk(PerkLib.MythicalSpirituality) >= 0) temp += 90000;
+			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte * 6) * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.ArcanePoolI) >= 0) {
-				temp += Math.round(this.inte * (1 + newGamePlusMod()));
-				temp += Math.round(this.wis * (1 + newGamePlusMod()));
+				temp += Math.round(this.inte * (3 + newGamePlusMod()));
+				temp += Math.round(this.wis * (3 + newGamePlusMod()));
 			}
-			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 100) temp += 60;
-			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) temp += 30;
-			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 125) temp += 75;
-			if (findPerk(PerkLib.GrandArchmage2ndCircle) >= 0 && inte >= 150) temp += 90;
-			if (findPerk(PerkLib.GrandArchmage3rdCircle) >= 0 && inte >= 175) temp += 105;
-			if (findPerk(PerkLib.GrandMage) >= 0 && inte >= 75) temp += 45;
-			if (findPerk(PerkLib.GreyArchmage) >= 0 && inte >= 225) temp += 200;
-			if (findPerk(PerkLib.GreyMage) >= 0 && inte >= 200) temp += 150;
-			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) temp += 30;
-			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) temp += 15;
-			if (findPerk(PerkLib.JobSorcerer) >= 0) temp += 15;
-			if (findPerk(PerkLib.JobHealer) >= 0) temp += 30;
-			if (findPerk(PerkLib.SpellpowerHealing) >= 0 && wis >= 50) temp += 30;
-			if (findPerk(PerkLib.EromancyBeginner) >= 0) temp += Math.round(this.inte);
-			if (findPerk(PerkLib.EromancyExpert) >= 0) temp += Math.round(this.inte);
-			if (findPerk(PerkLib.EromancyMaster) >= 0) temp += Math.round(this.inte * 2);
+			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 100) temp += 180;
+			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) temp += 90;
+			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 125) temp += 225;
+			if (findPerk(PerkLib.GrandArchmage2ndCircle) >= 0 && inte >= 150) temp += 270;
+			if (findPerk(PerkLib.GrandArchmage3rdCircle) >= 0 && inte >= 175) temp += 315;
+			if (findPerk(PerkLib.GrandMage) >= 0 && inte >= 75) temp += 135;
+			if (findPerk(PerkLib.GreyArchmage) >= 0 && inte >= 225) temp += 600;
+			if (findPerk(PerkLib.GreyMage) >= 0 && inte >= 200) temp += 450;
+			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) temp += 90;
+			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) temp += 45;
+			if (findPerk(PerkLib.JobSorcerer) >= 0) temp += 45;
+			if (findPerk(PerkLib.JobHealer) >= 0) temp += 90;
+			if (findPerk(PerkLib.SpellpowerHealing) >= 0 && wis >= 50) temp += 90;
+			if (findPerk(PerkLib.EromancyBeginner) >= 0) temp += Math.round(this.inte * 3);
+			if (findPerk(PerkLib.EromancyExpert) >= 0) temp += Math.round(this.inte * 3);
+			if (findPerk(PerkLib.EromancyMaster) >= 0) temp += Math.round(this.inte * 6);
 			var tempmulti:Number = 1;
 			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) {
-				tempmulti += 0.1;
-				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) tempmulti += 0.2;
-				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) tempmulti += 0.3;
-				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) tempmulti += 0.4;
+				tempmulti += 0.05;
+				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) tempmulti += 0.1;
+				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) tempmulti += 0.15;
+				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) tempmulti += 0.2;
+				if (findPerk(PerkLib.ArcaneRegenerationMythical) >= 0) tempmulti += 0.25;
 			}
+			if (findPerk(PerkLib.ManaAffinityI) >= 0) tempmulti += (0.03 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.LimitBreakerSoul1stStage) >= 0) tempmulti += 0.05;
 			if (findPerk(PerkLib.LimitBreakerSoul2ndStage) >= 0) tempmulti += 0.1;
 			temp *= tempmulti;
@@ -962,6 +988,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EnemyHugeType) >= 0) datNumber *= 2;
 			if (findPerk(PerkLib.EnemyGigantType) >= 0) datNumber *= 4;
 			if (findPerk(PerkLib.EnemyColossalType) >= 0) datNumber *= 6;
+			if (findPerk(PerkLib.Enemy300Type) >= 0) datNumber *= 15;
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) datNumber = 1;
 			return datNumber;
 		}
@@ -981,7 +1008,7 @@ import flash.utils.getQualifiedClassName;
 			var multiplier:Number = 1;
 			multiplier += game.player.perkv1(PerkLib.AscensionWisdom) * 0.2;
 			if (playerLevel == -1) playerLevel = game.player.level;
-			// 1) Nerf xp gains by 10% per level after first one level difference up to 90% at 10 lvl diff!
+			// 1) Nerf xp gains by 5% per level after first one level difference up to 95% at 19 lvl diff!
 			// 2) Bonuses for underlevel all the way to 20 lvl's below enemy! Above 20 lvl diff bonus is fixed at 300%! With underdog it increase to 40 lvl diff and caps at 900%!
 			// 3) Super high level folks (over 10 levels) only get 1 xp!
 			var difference:Number = 1;
@@ -994,16 +1021,26 @@ import flash.utils.getQualifiedClassName;
 				if (diff2 >= 20) difference += 2;
 				if (diff2 >= 1 && diff2 < 20) difference += diff2 * 0.1;
 			}
+			if (diff2 == -1) difference -= 0.05;
 			if (diff2 == -2) difference -= 0.1;
-			if (diff2 == -3) difference -= 0.2;
-			if (diff2 == -4) difference -= 0.3;
-			if (diff2 == -5) difference -= 0.4;
-			if (diff2 == -6) difference -= 0.5;
-			if (diff2 == -7) difference -= 0.6;
-			if (diff2 == -8) difference -= 0.7;
-			if (diff2 == -9) difference -= 0.8;
-			if (diff2 == -10) difference -= 0.9;
-			if (diff2 < -10) {
+			if (diff2 == -3) difference -= 0.15;
+			if (diff2 == -4) difference -= 0.2;
+			if (diff2 == -5) difference -= 0.25;
+			if (diff2 == -6) difference -= 0.3;
+			if (diff2 == -7) difference -= 0.35;
+			if (diff2 == -8) difference -= 0.4;
+			if (diff2 == -9) difference -= 0.45;
+			if (diff2 == -10) difference -= 0.5;
+			if (diff2 == -11) difference -= 0.55;
+			if (diff2 == -12) difference -= 0.6;
+			if (diff2 == -13) difference -= 0.65;
+			if (diff2 == -14) difference -= 0.7;
+			if (diff2 == -15) difference -= 0.75;
+			if (diff2 == -16) difference -= 0.8;
+			if (diff2 == -17) difference -= 0.85;
+			if (diff2 == -18) difference -= 0.9;
+			if (diff2 == -19) difference -= 0.99;
+			if (diff2 < -20) {
 				var minXP:Number = 1;
 				if (findPerk(PerkLib.ShieldWielder) >= 0) minXP *= 1.5;
 				if (findPerk(PerkLib.EnemyBossType) >= 0) minXP *= 2;
@@ -1012,6 +1049,7 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.EnemyColossalType) >= 0) minXP *= 6;
 				if (findPerk(PerkLib.EnemyGroupType) >= 0) minXP *= 5;
 				if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) minXP *= 10;
+				if (findPerk(PerkLib.Enemy300Type) >= 0) minXP *= 15;
 				if (this.humanityBoostExpValue() > 0) minXP += this.humanityBoostExpValue();
 				return Math.round(minXP);
 			}
@@ -1038,6 +1076,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.EnemyColossalType) >= 0) specENtypes *= 6;
 			if (findPerk(PerkLib.EnemyGroupType) >= 0) specENtypes *= 5;
 			if (findPerk(PerkLib.EnemyLargeGroupType) >= 0) specENtypes *= 10;
+			if (findPerk(PerkLib.Enemy300Type) >= 0) specENtypes *= 15;
 			return specENtypes;
 		}
 		protected function humanity():Number
@@ -2300,10 +2339,11 @@ import flash.utils.getQualifiedClassName;
 				var manaRecovery:Number = 0;
 				var manaRecoveryMulti:Number = 1;
 				if (findPerk(PerkLib.JobSorcerer) >= 0) manaRecovery += 10;
-				if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) manaRecovery += 5;
-				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) manaRecovery += 10;
-				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) manaRecovery += 15;
-				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) manaRecovery += 20;
+				if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0) manaRecovery += 10;
+				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0) manaRecovery += 20;
+				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0) manaRecovery += 30;
+				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0) manaRecovery += 40;
+				if (findPerk(PerkLib.ArcaneRegenerationMythical) >= 0) manaRecovery += 50;
 				if (findPerk(PerkLib.DraconicHeart) >= 0) manaRecovery += 5;
 				if (findPerk(PerkLib.DraconicHeartEvolved) >= 0) manaRecovery += 5;
 				if (findPerk(PerkLib.DraconicHeartFinalForm) >= 0) manaRecovery += 5;
@@ -3229,6 +3269,11 @@ import flash.utils.getQualifiedClassName;
 				armorDef += Math.round(armorDef * 0.5);
 				armorMDef += Math.round(armorMDef * 0.5);
 			}
+			if (level < 6) {
+				if (level < 3) this.lust *= 0.25;
+				else this.lust *= 0.5;
+				this.lust = Math.round(this.lust);
+			}
 		}
 	}
-}
+}

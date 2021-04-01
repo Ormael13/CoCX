@@ -66,7 +66,37 @@ use namespace CoC;
 		public function DisplacerBeast() 
 		{
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
+				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 250) {
+					initStrTouSpeInte(217, 247, 360, 126);
+					initWisLibSensCor(126, 220, 110, 30);
+					this.weaponAttack = 70;
+					this.armorDef = 55;
+					this.armorMDef = 55;
+					this.bonusHP = 600;
+					this.bonusLust = 404;
+					this.level = 80;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 200) {
+					initStrTouSpeInte(206, 226, 330, 116);
+					initWisLibSensCor(116, 200, 100, 30);
+					this.weaponAttack = 64;
+					this.armorDef = 52;
+					this.armorMDef = 52;
+					this.bonusHP = 500;
+					this.bonusLust = 372;
+					this.level = 76;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 150) {
+					initStrTouSpeInte(195, 205, 300, 106);
+					initWisLibSensCor(06, 180, 90, 30);
+					this.weaponAttack = 58;
+					this.armorDef = 49;
+					this.armorMDef = 49;
+					this.bonusHP = 400;
+					this.bonusLust = 340;
+					this.level = 72;
+				}
+				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
 					initStrTouSpeInte(184, 184, 270, 96);
 					initWisLibSensCor(96, 160, 80, 30);
 					this.weaponAttack = 52;

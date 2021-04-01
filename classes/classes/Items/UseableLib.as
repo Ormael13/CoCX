@@ -22,9 +22,18 @@ use namespace CoC;
 		public const DIAMOND:SimpleUseable = new SimpleUseable("Diamond", "Perfect Diamond", "a Perfect Diamond", 1000, 
 			"A Perfect Diamond.",
 			"You look over the perfect diamond. Likely worth a lot of gems.");
-		public const S_INGOT:SimpleUseable = new SimpleUseable("S.Ingot", "Silver ingot", "a Silver ingot", 500, 
-			"A Silver ingot.",//weight around 3-3,2 kg (Gold Ingot weight around 11-13 kg)
+		public const G_INGOT:SimpleUseable = new SimpleUseable("G.Ingot", "Gold ingot", "a Gold ingot", 800, 
+			"A Gold ingot.",//weight around 11-13 kg
+			"You look over the Gold ingot. Likely usefull to making some accesories.");
+		public const S_INGOT:SimpleUseable = new SimpleUseable("S.Ingot", "Silver ingot", "a Silver ingot", 200, 
+			"A Silver ingot.",//weight around 3-3,2 kg
 			"You look over the Silver ingot. Likely usefull to making some accesories.");
+		public const COP_ORE:SimpleUseable = new SimpleUseable("Cop.Ore", "Copper ore", "a Copper ore", 40, 
+			"A Copper ore.",
+			"You look over the chunk of Copper ore. Likely usefull to making some equipment.");
+		public const TIN_ORE:SimpleUseable = new SimpleUseable("Tin Ore", "Tin ore", "a Tin ore", 40, 
+			"A Tin ore.",
+			"You look over the chunk of Tin ore. Likely usefull to making some equipment.");
 		public const B_CHITN:SimpleUseable = new SimpleUseable("B.Chitn", "B.Chitn", "a large shard of chitinous plating", 100,
 			"A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it.",
 			"You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.");
@@ -40,13 +49,13 @@ use namespace CoC;
 		public const EBONBLO:SimpleUseable = new SimpleUseable("Ebonblo", "Ebonbloom", "an ebonbloom", 600, 
 			"Grey metallic flowers such as these are known to bloom in the deepest caves that run below the mountains of Mareth. Prized by mountain dwellers, these blooms fetch a high price due to their rarity and alchemical value.", 
 			"You look over the grey metallic flowers such as these are known to bloom in the deepest caves that run below the mountains of Mareth. Prized by mountain dwellers, these blooms fetch a high price due to their rarity and alchemical value.");
-		public const WT_BRAN:SimpleUseable = new SimpleUseable("WT.Bran", "W.T.Branch", "a World Tree Branch", 100,
+		public const WT_BRAN:SimpleUseable = new SimpleUseable("WT.Bran", "W.T.Branch", "a World Tree Branch", 200,
 			"A branch from World Tree.  It's infused with small amount of soulforce.",
 			"You look over the branch of World Tree.  Maybe someone else will know how to use it.");
-		public const TBAPLAT:SimpleUseable = new SimpleUseable("TBaPlat", "T.BarkPlates", "a Tentacled Bark Plates", 1000, 
+		public const TBAPLAT:SimpleUseable = new SimpleUseable("TBaPlat", "T.BarkPlates", "a Tentacled Bark Plates", 3000, 
 			"A Tentacled Bark Plates.",
 			"You look over the Tentacled Bark Plates.  Need some better desc I suppose.");
-		public const DBAPLAT:SimpleUseable = new SimpleUseable("DBaPlat", "D.BarkPlates", "a Divine Bark Plates", 1000, 
+		public const DBAPLAT:SimpleUseable = new SimpleUseable("DBaPlat", "D.BarkPlates", "a Divine Bark Plates", 3000, 
 			"A Divine Bark Plates.",
 			"You look over the Divine Bark Plates.  Need some better desc I suppose.");
 		public const LETHITE:SimpleUseable = new SimpleUseable("Lethite", "Lethicite", "a chunk of lethicite", 1000, 
@@ -61,6 +70,9 @@ use namespace CoC;
 		public const PCSHARD:SimpleUseable = new SimpleUseable("PCShard", "Purple Crystal Shard", "a Purple Crystal Shard", 1, 
 			"A Purple Crystal Shard.",
 			"You look at the purple crystal shard. It occasionally glows gently in your hand, but you can't seem to find a use for the shard.");
+		public const ELSHARD:SimpleUseable = new SimpleUseable("ELShard", "Elemental Shard", "an Elemental Shard", 50, 
+			"An Elemental Shard.",
+			"You look at the elemental shard. It occasionally glows gently in your hand.  It may be usefull to rank up your summoned elementals.");
 		//MISCELLANEOUS
 		public const CONDOM :SimpleUseable = new SimpleUseable("Condom ", "Condom", "a packet of condom", 6,
 			"This wrapper contains a latex condom that can be worn over penis. It's designed to prevent pregnancy most of the time. Can be used in certain sex scenes.",
