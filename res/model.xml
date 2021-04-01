@@ -1325,7 +1325,7 @@
 		<if test="playerHasWeaponBannedArms">
 			<if test="WeaponDisplay == 0">		
 				<!-- MELEE WEAPON -->
-				<if test="playerHasWeaponWings == 0">
+				<if test="playerHasWeaponWings">
 					<if test="PlayerHasAStaff">
 						<if test="PlayerHasAStaffHoly or PlayerHasAStaffUnholy">
 							<if test="PlayerHasAStaffHoly">
