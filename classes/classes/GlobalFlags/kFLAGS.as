@@ -2758,7 +2758,7 @@ public static const UNKNOWN_FLAG_NUMBER_02749:int                               
 public static const UNKNOWN_FLAG_NUMBER_02750:int                                   = 2750;
 public static const UNKNOWN_FLAG_NUMBER_02751:int                                   = 2751;
 public static const UNKNOWN_FLAG_NUMBER_02752:int                                   = 2752;
-public static const UNKNOWN_FLAG_NUMBER_02753:int                                   = 2753;
+public static const ASURA_FORM_COMBAT_MODE:int                                   	= 2753;
 public static const CRINOS_SHAPE_COMBAT_MODE:int                                   	= 2754;
 public static const WARRIORS_RAGE_COMBAT_MODE:int                                   = 2755;
 public static const MET_YETI_AS_A_GIRL_FIRST_TIME:int                               = 2756;
@@ -2968,8 +2968,8 @@ public static const UNKNOWN_FLAG_NUMBER_02959:int                               
 public static const APEX_SELECTED_RACE:int                                   		= 2960;
 public static const UNKNOWN_FLAG_NUMBER_02961:int                                   = 2961;
 public static const UNKNOWN_FLAG_NUMBER_02962:int                                   = 2962;
-public static const UNKNOWN_FLAG_NUMBER_02963:int                                   = 2963;
-public static const LVL_UP_FAST:int                                   				= 2964;
+public static const MUTATIONS_SPOILERS:int                                   		= 2963;//Mutations Help.
+public static const LVL_UP_FAST:int                                   				= 2964;//Bulk/Manual Incremental/Singular Levelling
 public static const SECONDARY_STATS_SCALING:int                                     = 2965;
 public static const MELEE_DAMAGE_OVERHAUL:int                                   	= 2966;
 public static const INVT_MGMT_TYPE:int                                   			= 2967;//Toggles Inventory Management type between existing and new.

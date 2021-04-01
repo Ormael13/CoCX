@@ -467,7 +467,7 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>HP Regeneration (%):</b> ~ " + combat.PercentBasedRegeneration() + " % / " + combat.maximumRegeneration() + " % (turn), ~ " + combat.PercentBasedRegeneration() * 2 + " % / " + combat.maximumRegeneration() * 2 + " % (hour)\n";
 		combatStats += "<b>HP Regeneration (Total):</b> ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) + " HP /  turn, ~ " + Math.round((player.maxHP() * combat.PercentBasedRegeneration() / 100) + combat.nonPercentBasedRegeneration()) * 2 + " HP /  hour\n";
 		combatStats += "<b>Fatigue Recovery:</b> " + combat.fatigueRecovery2() + " / turn\n";
-		combatStats += "<b>Wrath Generation:</b> " + combat.wrathregeneration2() * 2 + " / turn, - 60 % / hour\n";
+		combatStats += "<b>Wrath Generation:</b> " + combat.wrathregeneration2() * 2 + " / turn, "+(player.hasPerk(PerkLib.AbsoluteStrength) ? ""+combat.wrathregeneration2()+"":"-60%")+" / hour\n";
 		combatStats += "<b>Mana Regeneration:</b> " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) + " / turn, " + Math.round(combat.manaregeneration2() * combat.manaRecoveryMultiplier()) * 2 + " / hour\n";
 		combatStats += "<b>Soulforce Regeneration:</b> " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) + " / turn, " + Math.round(combat.soulforceregeneration2() * combat.soulforceRecoveryMultiplier()) * 2 + " / hour\n";
 		combatStats += "\n";
@@ -1256,6 +1256,8 @@ public class PlayerInfo extends BaseContent {
 		addButtonDisabled(9, "Mastery", "You are currently at this stats page.");
 		addButton(10, "Mutations", displayMutationsUsed);
 	}
+
+	//Mutations Tracker
 	public function displayMutationsUsed():void{
 		spriteSelect(-1);
 		clearOutput()
@@ -1270,155 +1272,112 @@ public class PlayerInfo extends BaseContent {
 		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation04) >= 0)
 			mutationCount++;
 		outputText("\nYou have " + mutationCount + " mutation slots per part."+
-		"\nNote: Not all body parts will use all available slots.")
-		//Probably a better way than this to check. Perhaps a helper function to use as a template to check. This'll do for a rudimentary proof of concept.
-		//Can't auto-keep track of body max mutations per part, since body mutations can be added as needed, but nothing to definitively check.
-		//That means I'd have to keep updating this if Orm or Lia adds a new mutation.
-		//Also, when Orm reworks perks to use v1/v2/v3 things, can also display the current tier.
+		"\nNote: Not all body parts will use all available slots." +
+		"\nPerks may have multiple stages. Due to the number of tiers per perk, currently it will only display the first form, until the cleaner Perk-version code is utilized.")
 
+		//Every time a new mutation is added, it will need to be added in manually, since there's nowhere I can just pull the information from.
+		//Also, when Orm reworks perks to use v1/v2/v3 things, can also display the current tier.
+		//Source: Player.as maxHeartMutations/etc. For mutations, PerkLib.as for desc.
+
+		outputText("\n")
 		//Heart Mutations
-		outputText("\n\nHeart Mutations:")
-		if (player.findPerk(PerkLib.BlackHeart) >= 0)
-			outputText("\nBlack Heart: Acquired.")
-		if (player.findPerk(PerkLib.FrozenHeart) >= 0)
-			outputText("\nFrozen Heart: Acquired.")
-		if (player.findPerk(PerkLib.ObsidianHeart) >= 0)
-			outputText("\nObsidian Heart: Acquired.")
-		if (player.findPerk(PerkLib.TwinHeart) >= 0)
-			outputText("\nTwin Heart: Acquired.")
-		if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0)
-			outputText("\nHeart of the storm: Acquired.")
-		if (player.findPerk(PerkLib.DraconicHeart) >= 0)
-			outputText("\nDragonic Heart: Acquired.")
+		outputText("<b>\nHeart Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.BlackHeart)
+		displayMutationsUsedSpoilers(PerkLib.FrozenHeart)
+		displayMutationsUsedSpoilers(PerkLib.ObsidianHeart)
+		displayMutationsUsedSpoilers(PerkLib.TwinHeart)
+		displayMutationsUsedSpoilers(PerkLib.HeartOfTheStorm)
+		displayMutationsUsedSpoilers(PerkLib.DraconicHeart)
 
 		//Muscle Mutations
-		outputText("\n\nMuscle Mutations:")
-		if (player.findPerk(PerkLib.MantislikeAgility) >= 0)
-			outputText("\nMantis Agility: Acquired.")
-		if (player.findPerk(PerkLib.OniMusculature) >= 0)
-			outputText("\nOni Musculature: Acquired.")
+		outputText("<b>\nMuscle Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.MantislikeAgility)
+		displayMutationsUsedSpoilers(PerkLib.OniMusculature)
 
 		//Mouth Mutations
-		outputText("\n\nMouth Mutations:")
-		if (player.findPerk(PerkLib.VenomGlands) >= 0)
-			outputText("\nVenom Glands: Acquired.")
-		if (player.findPerk(PerkLib.HollowFangs) >= 0)
-			outputText("\nHollow Fangs: Acquired.")
+		outputText("<b>\nMouth Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.VenomGlands)
+		displayMutationsUsedSpoilers(PerkLib.HollowFangs)
 
 		//Adrenal Glands Mutations
-		outputText("\n\nAdrenal Gland Mutations:")
-		if (player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)
-			outputText("\nSalamander Adrenal Glands: Acquired.")
-		if (player.findPerk(PerkLib.OrcAdrenalGlands) >= 0)
-			outputText("\nOrc Adrenal Glands: Acquired.")
+		outputText("<b>\nAdrenal Gland Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.SalamanderAdrenalGlands)
+		displayMutationsUsedSpoilers(PerkLib.OrcAdrenalGlands)
 
 		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
-		outputText("\n\nBloodstream Mutations:")
-		if (player.findPerk(PerkLib.VampiricBloodsteam) >= 0)
-			outputText("\nVampiric Bloodstream: Acquired.")
-		if (player.findPerk(PerkLib.HinezumiBurningBlood) >= 0)
-			outputText("\nHinezume Burning Bloodstream: Acquired.")
-		if (player.findPerk(PerkLib.FeyArcaneBloodstream) >=0)
-			outputText("\nFey Arcane Bloodstream: Acquired.")
+		outputText("<b>\nBloodstream Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.VampiricBloodsteam)
+		displayMutationsUsedSpoilers(PerkLib.HinezumiBurningBlood)
+		displayMutationsUsedSpoilers(PerkLib.FeyArcaneBloodstream)
 
 		//Fat tissue Mutations
-		outputText("\n\nFat and Tissue Mutations:")
-		if (player.findPerk(PerkLib.PigBoarFat) >= 0)
-			outputText("\nPig/Boar Fat: Acquired.")
-		if (player.findPerk(PerkLib.NaturalPunchingBag) >= 0)
-			outputText("\nNatural Punching Bag: Acquired.")
-		if (player.findPerk(PerkLib.WhaleFat) >= 0)
-			outputText("\nWhale Fat: Acquired.")
-		if (player.findPerk(PerkLib.YetiFat) >= 0)
-			outputText("\nYeti Fat: Acquired.")
+		outputText("<b>\nFat and Tissue Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.PigBoarFat)
+		displayMutationsUsedSpoilers(PerkLib.NaturalPunchingBag)
+		displayMutationsUsedSpoilers(PerkLib.WhaleFat)
+		displayMutationsUsedSpoilers(PerkLib.YetiFat)
 
 		//Lungs Mutations
-		outputText("\n\nLungs Mutations:")
-		if (player.findPerk(PerkLib.DraconicLungs) >= 0)
-			outputText("\nDraconic Lungs: Acquired.")
-		if (player.findPerk(PerkLib.CaveWyrmLungs) >= 0)
-			outputText("\nCave Wyrm Lungs: Acquired.")
-		if (player.findPerk(PerkLib.MelkieLung) >= 0)
-			outputText("\nMelkie Lungs: Acquired.")
-		if (player.findPerk(PerkLib.DrakeLungs) >= 0)
-			outputText("\nDrake Lungs: Acquired.")
+		outputText("<b>\nLungs Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.DraconicLungs)
+		displayMutationsUsedSpoilers(PerkLib.CaveWyrmLungs)
+		displayMutationsUsedSpoilers(PerkLib.MelkieLung)
+		displayMutationsUsedSpoilers(PerkLib.DrakeLungs)
 
 		//Metabolism Mutations
-		outputText("\n\nMetabolism Mutations:")
-		if (player.findPerk(PerkLib.ManticoreMetabolism) >= 0)
-			outputText("\nManticore Metabolism: Acquired.")
-		if (player.findPerk(PerkLib.DisplacerMetabolism) >= 0)
-			outputText("\nDisplacer Metabolism: Acquired.")
+		outputText("<b>\nMetabolism Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.ManticoreMetabolism)
+		displayMutationsUsedSpoilers(PerkLib.DisplacerMetabolism)
 
 		//Ovaries Mutations
-		outputText("\n\nOvaries Mutations:")
-		if (player.findPerk(PerkLib.LactaBovinaOvaries) >= 0)
-			outputText("\nLacta Bovine Ovaries: Acquired.")
-		if (player.findPerk(PerkLib.FloralOvaries) >= 0)
-			outputText("\nFloral Ovaries: Acquired.")
+		outputText("<b>\nOvaries Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.LactaBovinaOvaries)
+		displayMutationsUsedSpoilers(PerkLib.FloralOvaries)
 
 		//Testicle Mutations
-		outputText("\n\nBalls Mutations:")
-		if (player.findPerk(PerkLib.MinotaurTesticles) >= 0)
-			outputText("\nMinotaur Testicles: Acquired.")
-		if (player.findPerk(PerkLib.EasterBunnyEggBag) >= 0)
-			outputText("\nEaster Bunny Balls: Acquired.")
-		if (player.findPerk(PerkLib.NukiNuts) >= 0)
-			outputText("\nNuki Nuts: Acquired.")
+		outputText("<b>\nBalls Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.MinotaurTesticles)
+		displayMutationsUsedSpoilers(PerkLib.EasterBunnyBalls, "Neon Pink Eggs")
+		displayMutationsUsedSpoilers(PerkLib.NukiNuts)
 
 		//Eyes Mutations
-		outputText("\n\nEye Mutations:")
-		if (player.findPerk(PerkLib.GorgonsEyes) >= 0)
-			outputText("\nGorgon Eyes: Acquired.")
-		if (player.findPerk(PerkLib.GazerEye) >= 0)
-			outputText("\nGazer Eyes: Acquired.")
+		outputText("<b>\nEye Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.GorgonsEyes)
+		displayMutationsUsedSpoilers(PerkLib.GazerEye)
 
 		//Peripheral/NervSys Mutations
-		outputText("\n\nPeripheral Nervous System Mutations:")
-		if (player.findPerk(PerkLib.ElvishPeripheralNervSys) >= 0)
-			outputText("\nElvish Nervous System: Acquired.")
+		outputText("<b>\nPeripheral Nervous System Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.ElvishPeripheralNervSys)
 
 		//Bones and Marrow Mutations
-		outputText("\n\nBones and Marrow Mutations:")
-		if (player.findPerk(PerkLib.LizanMarrow) >= 0)
-			outputText("\nLizan Marrow: Acquired.")
-		if (player.findPerk(PerkLib.DraconicBones) >= 0)
-			outputText("\nDraconic Bones: Acquired.")
-		if (player.findPerk(PerkLib.HarpyHollowBones) >= 0)
-			outputText("\nHarpy Hollow Bones: Acquired.")
+		outputText("<b>\nBones and Marrow Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.LizanMarrow)
+		displayMutationsUsedSpoilers(PerkLib.DraconicBones)
+		displayMutationsUsedSpoilers(PerkLib.HarpyHollowBones)
 
 		//Thyroid Glands Mutations
-		outputText("\n\nThyroid Gland Mutations:")
-		if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0)
-			outputText("\nKitsune Thyroid Gland: Acquired.")
-		if (player.findPerk(PerkLib.NekomataThyroidGland) >= 0)
-			outputText("\nNekomata Thyroid Gland: Acquired.")
+		outputText("<b>\nThyroid Gland Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.KitsuneThyroidGland)
+		displayMutationsUsedSpoilers(PerkLib.NekomataThyroidGland)
 
 		//ParaThyroid Glands Mutations. What's the difference between this and the above???
-		outputText("\n\nParaThyroid Glands Mutations:")
-		if (player.findPerk(PerkLib.KitsuneParathyroidGlands) >= 0)
-			outputText("\nKitsune Para-Thyroid Glands: Acquired.")
-		if (player.findPerk(PerkLib.HellcatParathyroidGlands) >= 0)
-			outputText("\nHellcat Para-Thyroid Glands: Acquired.")
+		outputText("<b>\nParaThyroid Glands Mutations:</b>")
+		displayMutationsUsedSpoilers(PerkLib.KitsuneParathyroidGlands)
+		displayMutationsUsedSpoilers(PerkLib.HellcatParathyroidGlands)
 
 		//Dragon Mutations
-		outputText("\n\nDragon Mutations:")
+		outputText("<b>\nDragon Mutations:</b>")
 		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+")
 		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++")
-		if (player.findPerk(PerkLib.DraconicBones) >= 0)
-			outputText("\nDraconic Bones: Acquired.")
-		if (player.findPerk(PerkLib.DraconicHeart) >= 0)
-			outputText("\nDraconic Heart: Acquired.")
-		if (player.findPerk(PerkLib.DraconicLungs) >= 0)
-			outputText("\nDraconic Lungst: Acquired.")
+		displayMutationsUsedSpoilers(PerkLib.DraconicBones)
+		displayMutationsUsedSpoilers(PerkLib.DraconicHeart)
+		displayMutationsUsedSpoilers(PerkLib.DraconicLungs)
 
 		//Kitsune Mutations
-		outputText("\n\nKitsune Mutations:")
+		outputText("<b>\nKitsune Mutations:</b>")
 		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+")
-		if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0)
-			outputText("\nKitsune Thyroid Gland: Acquired.")
-		if (player.findPerk(PerkLib.KitsuneParathyroidGlands) >= 0)
-			outputText("\nKitsune Para-Thyroid Glands: Acquired.")
+		displayMutationsUsedSpoilers(PerkLib.KitsuneThyroidGland)
+		displayMutationsUsedSpoilers(PerkLib.KitsuneParathyroidGlands)
 
 		menu();
 		addButton(0, "Next", playerMenu);
@@ -1428,6 +1387,43 @@ public class PlayerInfo extends BaseContent {
 		addButton(8, "Children", displayStatsChildren);
 		addButton(9, "Mastery", displayStatsmastery);
 		addButtonDisabled(10, "Mutations", "You are currently at this stats page.");
+	}
+
+	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
+	public function displayMutationsUsedSpoilers(perkName:PerkType, acquireReq:String = ""):void {
+		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
+			if (player.hasPerk(perkName)) {
+				outputText("\n" + perkName.name + ": <font color=\"#008000\">Acquired.</font>")
+			} else {
+				outputText("\n" + perkName.name + ": <font color=\"#800000\">Missing.</font>")
+			}
+			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
+				var reqs:Array = []
+				var reqcount:int = 1
+				if (perkName.requirements.length > 0) {
+					for each (var cond:Object in perkName.requirements) {
+						if (reqcount > 1) { //Ignores the "free mutation slot" note.
+							reqs.push("<font color='#000000'>" + cond.text + "</font>");
+						}
+						reqcount++;
+					}
+				}	else{	//Information not available.
+					reqs.push("Missing data. Perhaps Unacquirable?")
+				}
+				outputText("\nPrerequisites/Acquisition:" + reqs.join(", "))
+			}
+			else {
+				outputText("\nPrerequisites/Acquisition:" + acquireReq)
+			}
+		}
+		else { //Help Off
+			if (player.hasPerk(perkName)) {
+				outputText("\n" + perkName.name + ": Acquired.")
+			} else {
+					outputText("\n???")
+				}
+		}
+		outputText("\n")
 	}
 
 	//------------
@@ -1608,6 +1604,10 @@ public class PlayerInfo extends BaseContent {
 		if (player.tempWis > 0) addButton(9, "Sub WIS", subtractAttribute, "wis", null, null, "Subtract 1 point (5 points with Shift) from Wisdom.", "Subtract Wisdom");
 		if (player.tempLib > 0) addButton(11, "Sub LIB", subtractAttribute, "lib", null, null, "Subtract 1 point (5 points with Shift) from Libido.", "Subtract Libido");
 
+		hideStats();
+		hideUpDown();
+		mainView.hideAllMenuButtons()
+		mainView.hideComboBox();
 		addButton(13, "Reset", resetAttributes);
 		addButton(14, "Done", finishAttributes);
 	}
@@ -1867,6 +1867,20 @@ public class PlayerInfo extends BaseContent {
 		menu();
 		if (page == 1) {
 			if (player.superPerkPoints > 0) {
+				addButtonDisabled(0, "DJ:M", "Soon.");//if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "", "You already have this perk.");
+				//else addButtonDisabled(0, "", "You do not have enough super perk points to obtain this perk.");
+			}
+			else {
+				addButtonDisabled(0, "DJ:M", "Soon.");//if (player.hasPerk(PerkLib.)) addButtonDisabled(0, "", "You already have this perk.");
+				//else addButtonDisabled(0, "", "You do not have enough super perk points to obtain this perk.");
+			}
+			addButton(12, "Next", superPerkBuyMenu, page + 1);
+			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);
+			else addButtonDisabled(13, "Convert", "You need at least 3 perk points to convert them.");
+			addButton(14, "Back", playerMenu);
+		}
+		if (page == 2) {
+			if (player.superPerkPoints > 0) {
 				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this super perk.");
 				else {
 					if (player.freeHiddenJobsSlots() > 0) addButton(0, "HJ:BD", perkHiddenJobBloodDemon).hint("Choose the 'Hidden Job: Blood Demon' super perk. You've trained in arts of blood demons. Beings that reached mastery of using their own or others blood to great effect. (+10x Tou of OverMax HP, -10% blood spells cost, +20% blood spells power, can learn Blood Spells form Red Manuscripts)");
@@ -1889,11 +1903,6 @@ public class PlayerInfo extends BaseContent {
 				}
 				//addButton(4, "", ).hint("Choose the '' super perk. ");
 				//addButtonDisabled(4, "", "Soon.");
-				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(5, "HJ:A", "You already have this super perk.");
-				else {
-					if (player.freeHiddenJobsSlots() > 0) addButton(5, "HJ:A", perkHiddenJobAsura).hint("Choose the 'Hidden Job: Asura' super perk. You've trained in way of asuras. Beings that reached mastery of unleashing wrath to great effect. (+10% of OverMax Wrath, access to Asura Form: 3x more melee attacks per turn, +20%/10%/10% of core str/spe/tou stat value)");
-					else addButtonDisabled(5, "HJ:A", "You do not have a free slot for this hidden job.");
-				}
 			}
 			else {
 				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this perk.");
@@ -1906,19 +1915,59 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(3, "MBFBP", "You do not have enough super perk points to obtain this perk.");
 				//if (player.hasPerk(PerkLib.)) addButtonDisabled(4, "", "You already have this perk.");
 				//else addButtonDisabled(4, "", "You do not have enough super perk points to obtain this perk.");
-				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(5, "HJ:A", "You already have this perk.");
-				else addButtonDisabled(5, "HJ:A", "You do not have enough super perk points to obtain this perk.");
 			}
-			//10 -> page + 1 button
-			//11 -> page - 1 button
-			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);
-			else addButtonDisabled(13, "Convert", "You need at least 3 perk points to convert them.");
+			addButton(12, "Next", superPerkBuyMenu, page + 1);
+			addButton(13, "Previous", superPerkBuyMenu, page - 1);
 			addButton(14, "Back", playerMenu);
 		}
-		if (page == 2) {
+		if (page == 3) {
+			if (player.superPerkPoints > 0) {
+				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(0, "HJ:A", "You already have this super perk.");
+				else {
+					if (player.freeHiddenJobsSlots() > 0) addButton(0, "HJ:A", perkHiddenJobAsura).hint("Choose the 'Hidden Job: Asura' super perk. You've trained in way of asuras. Beings that reached mastery of unleashing wrath to great effect. (+10% of OverMax Wrath, access to Asura Form: 3x more melee attacks per turn, +40%/30%/20% of core str/spe/tou stat value)");
+					else addButtonDisabled(0, "HJ:A", "You do not have a free slot for this hidden job.");
+				}
+				if (player.hasPerk(PerkLib.AbsoluteStrength)) addButtonDisabled(1, "AS", "You already have this super perk.");
+				else {
+					if (player.hasPerk(PerkLib.HiddenJobAsura)) addButton(1, "AS", perkAbsoluteStrength).hint("Choose the 'Absolute Strength' super perk. Increase strength based on current amount of wrath. Also wrath outside of combat will not decay and even with correct perks can slowly rise. (+10% of OverMax Wrath, % based multi bonus to str stat equal to 50% of wrath (updated once a day))");
+					else addButtonDisabled(1, "AS", "You need to first have the 'Hidden Job: Asura' super perk.");
+				}
+				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) addButtonDisabled(2, "LAB", "You already have this super perk.");
+				else {
+					if (player.hasPerk(PerkLib.AbsoluteStrength)) addButton(2, "LAB", perkLikeAnAsuraBoss).hint("Choose the 'Like A-sura Boss' super perk. Adds to toggle starting in Asura Form at combat start, increase to physical might rise to 80%/60%/40% of core str/tou/spe. (+10% of OverMax Wrath)");
+					else addButtonDisabled(2, "LAB", "You need to first have the 'Absolute Strength' super perk.");
+				}
+				if (player.hasPerk(PerkLib.ICastAsuraFist)) addButtonDisabled(3, "ICAF", "You already have this super perk.");
+				else {
+					if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) addButton(3, "ICAF", perkICastAsuraFist).hint("Choose the 'I Cast (Asura) Fist' super perk. Safe treshold for magic/m.specials is magic/m.specials is calculated based on overmax wrath not max wrath, +100% of base max wrath. (+10% of OverMax Wrath)");
+					else addButtonDisabled(3, "ICAF", "You need to first have the 'Like A-sura Boss' super perk.");
+				}
+				//addButtonDisabled(4, "", "Soon.");
+			}
+			else {
+				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(0, "HJ:A", "You already have this perk.");
+				else addButtonDisabled(0, "HJ:A", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.AbsoluteStrength)) addButtonDisabled(1, "AS", "You already have this perk.");
+				else addButtonDisabled(1, "AS", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) addButtonDisabled(2, "LAB", "You already have this perk.");
+				else addButtonDisabled(2, "LAB", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.ICastAsuraFist)) addButtonDisabled(3, "ICAF", "You already have this perk.");
+				else addButtonDisabled(3, "ICAF", "You do not have enough super perk points to obtain this perk.");
+				//addButtonDisabled(4, "", "Soon.");
+			}
+			//12 -> page + 1 button
+			addButton(13, "Previous", superPerkBuyMenu, page - 1);
+			addButton(14, "Back", playerMenu);
+		}
+		if (page == 3) {
 			if (player.superPerkPoints > 0) {
 				
 			}
+			else {
+				
+			}
+			//12 -> page + 1 button
+			//13 -> page - 1 button
 			addButton(14, "Back", playerMenu);
 		}
 	}
@@ -1934,35 +1983,56 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(PerkLib.HiddenJobBloodDemon,0,0,0,0);
 		clearOutput();
 		outputText("You gained Hidden Job: Blood Demon super perk.");
-		doNext(curry(superPerkBuyMenu, 1));
+		doNext(curry(superPerkBuyMenu, 2));
 	}
 	private function perkWayOfTheBlood():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.WayOfTheBlood,0,0,0,0);
 		clearOutput();
 		outputText("You gained Way of the Blood super perk.");
-		doNext(curry(superPerkBuyMenu, 1));
+		doNext(curry(superPerkBuyMenu, 2));
 	}
 	private function perkYourPainMyPower():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.YourPainMyPower,0,0,0,0);
 		clearOutput();
 		outputText("You gained Your Pain My Power super perk.");
-		doNext(curry(superPerkBuyMenu, 1));
+		doNext(curry(superPerkBuyMenu, 2));
 	}
 	private function perkMyBloodForBloodPuppies():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.MyBloodForBloodPuppies,0,0,0,0);
 		clearOutput();
 		outputText("You gained My Blood for Blood Puppies super perk.");
-		doNext(curry(superPerkBuyMenu, 1));
+		doNext(curry(superPerkBuyMenu, 2));
 	}
 	private function perkHiddenJobAsura():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.HiddenJobAsura,0,0,0,0);
 		clearOutput();
 		outputText("You gained Hidden Job: Asura super perk.");
-		doNext(curry(superPerkBuyMenu, 1));
+		doNext(curry(superPerkBuyMenu, 3));
+	}
+	private function perkAbsoluteStrength():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.AbsoluteStrength,0,0,0,0);
+		clearOutput();
+		outputText("You gained Absolute Strength super perk.");
+		doNext(curry(superPerkBuyMenu, 3));
+	}
+	private function perkLikeAnAsuraBoss():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.LikeAnAsuraBoss,0,0,0,0);
+		clearOutput();
+		outputText("You gained Like A-sura Boss super perk.");
+		doNext(curry(superPerkBuyMenu, 3));
+	}
+	private function perkICastAsuraFist():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.ICastAsuraFist,0,0,0,0);
+		clearOutput();
+		outputText("You gained I Cast (Asura) Fist super perk.");
+		doNext(curry(superPerkBuyMenu, 3));
 	}
 }
-}
+}
