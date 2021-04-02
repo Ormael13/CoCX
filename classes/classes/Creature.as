@@ -583,6 +583,20 @@ public class Creature extends Utils
 				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 10);
 				else maxOver += Math.round(tou * 10);
 			}
+			if (findPerk(PerkLib.BloodDemonToughness) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 10);
+				else maxOver += Math.round(tou*10);
+			}
+			//
+			if (findPerk(PerkLib.BloodDemonWisdom) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 10);
+				else maxOver += Math.round(tou*10);
+			}
+			//
+			if (findPerk(PerkLib.BloodDemonIntelligence) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 10);
+				else maxOver += Math.round(tou*10);
+			}
 			return Math.min(19999999,maxOver);
 		}
 		public function minHP():Number {

@@ -995,6 +995,11 @@ import classes.Items.JewelryLib;
 			if (hasPerk(PerkLib.AbsoluteStrength)) max2 += 0.1;
 			if (hasPerk(PerkLib.LikeAnAsuraBoss)) max2 += 0.1;
 			if (hasPerk(PerkLib.ICastAsuraFist)) max2 += 0.1;
+			if (hasPerk(PerkLib.AsuraStrength)) max2 += 0.1;
+			//
+			if (hasPerk(PerkLib.AsuraToughness)) max2 += 0.1;
+			//
+			if (hasPerk(PerkLib.AsuraSpeed)) max2 += 0.1;
 			max1 *= max2;
 			max1 = Math.round(max1);
 			if (max1 > 79999) max1 = 79999;

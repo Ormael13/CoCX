@@ -301,6 +301,20 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
 				else maxOver += Math.round(this.tou*10);
 			}
+			if (findPerk(PerkLib.BloodDemonToughness) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
+				else maxOver += Math.round(this.tou*10);
+			}
+			//
+			if (findPerk(PerkLib.BloodDemonWisdom) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
+				else maxOver += Math.round(this.tou*10);
+			}
+			//
+			if (findPerk(PerkLib.BloodDemonIntelligence) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
+				else maxOver += Math.round(this.tou*10);
+			}
 			return maxOver;
 		}
 		public override function minHP():Number {
@@ -617,6 +631,11 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.AbsoluteStrength)) temp2 += 0.1;
 			if (hasPerk(PerkLib.LikeAnAsuraBoss)) temp2 += 0.1;
 			if (hasPerk(PerkLib.ICastAsuraFist)) temp2 += 0.1;
+			if (hasPerk(PerkLib.AsuraStrength)) temp2 += 0.1;
+			//
+			if (hasPerk(PerkLib.AsuraToughness)) temp2 += 0.1;
+			//
+			if (hasPerk(PerkLib.AsuraSpeed)) temp2 += 0.1;
 			temp1 *= temp2;
 			return temp1;
 		}

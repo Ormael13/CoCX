@@ -116,7 +116,12 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) costPercent -= 5;
 		if (player.hasPerk(PerkLib.WayOfTheBlood)) costPercent -= 5;
 		if (player.hasPerk(PerkLib.YourPainMyPower)) costPercent -= 5;
-		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) costPercent -= 5
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) costPercent -= 5;
+		if (player.hasPerk(PerkLib.BloodDemonToughness)) costPercent -= 5;
+		//
+		if (player.hasPerk(PerkLib.BloodDemonWisdom)) costPercent -= 5;
+		//
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) costPercent -= 5;
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
@@ -372,6 +377,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WayOfTheBlood)) mod += .1;
 		if (player.hasPerk(PerkLib.YourPainMyPower)) mod += .1;
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) mod += .1;
+		if (player.hasPerk(PerkLib.BloodDemonToughness)) mod += .1;
+		//
+		if (player.hasPerk(PerkLib.BloodDemonWisdom)) mod += .1;
+		//
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) mod += .1;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -3953,4 +3963,4 @@ public class CombatMagic extends BaseCombatContent {
 		return false;
 	}
 }
-}
+}

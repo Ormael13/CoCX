@@ -69,7 +69,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 31;
+    public var modSaveVersion:Number = 32;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
@@ -247,8 +247,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8r";
-			version = ver + " (<b>2nd marriage option, new type of enemeis + 2nd floor of RD opened, wrath changes (part 1), 2nd hidden job, many small QoL changes and bugfixes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8r2";
+			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
