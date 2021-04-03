@@ -1021,7 +1021,7 @@ import classes.Items.JewelryLib;
 			else max1 += maxWrath();
 			var max2:Number = 0.7;
 			if (hasPerk(PerkLib.MagesWrath)) max2 += 0.05;
-			//if (hasPerk(PerkLib.)) max2 += 0.1;
+			if (hasPerk(PerkLib.MagesWrathEx)) max2 += 0.05;
 			max1 *= max2;
 			max1 = Math.round(max1);
 			return max1;
