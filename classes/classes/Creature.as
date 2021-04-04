@@ -477,7 +477,6 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) max += maxHP_ElementalBondFleshMulti() * 4 * statusEffectv2(StatusEffects.SummonedElementalsCorruption);
 			}
 			if (findPerk(PerkLib.JobGuardian) >= 0) max += 120;
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 600;
 			if (findPerk(PerkLib.BodyCultivator) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
 				if (findPerk(PerkLib.SoulApprentice) >= 0) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -525,6 +524,7 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.RefinedBodyVI) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) multimax += 0.2;
 			max *= multimax;
 			max = Math.round(max);
 			return max;
@@ -656,7 +656,6 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.JobCourtesan) >= 0) max += 60;
 			if (findPerk(PerkLib.JobSeducer) >= 0) max += 30;
 			if (findPerk(PerkLib.PrestigeJobGreySage) >= 0) max += 300;
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 150;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += (225 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -678,6 +677,7 @@ public class Creature extends Utils
 			if (findPerk(PerkLib.DemonicDesireVI) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) multimax += 0.2;
 			max *= multimax;
 			max = Math.round(max);
 			return max;

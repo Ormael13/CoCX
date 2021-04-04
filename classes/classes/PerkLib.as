@@ -961,9 +961,6 @@ public class PerkLib
 		public static const DefenceStance:PerkType = mk("Defence Stance", "Defence Stance",
 				"Defend move now reduce incoming damage a littl more and allow recovering fatigue/mana/soulforce.",
 				"You've chosen the 'Defence Stance' perk, training to master you defence pose.");
-		public static const DeityJobMunchkin:PerkType = mk("Deity Job: Munchkin", "Deity Job: Munchkin",
-				"You're Munchkin, an ultimate being that possess a god-like body and powers. +25% to all stats.",
-				"You've chosen the 'Deity Job: Munchkin' perk, becoming an ultimate being with a god-like body and powers. +25% to all stats.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,"int.mult":0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':25}, false);
 		public static const DemonicDesireI:PerkType = mk("Demonic Desire I", "Demonic Desire I",
 				"Raises max lust by 5% of base value.",
 				"You've chosen the 'Demonic Desire I' perk, giving you an additional 5% of base value to max lust!");
@@ -3330,7 +3327,7 @@ public class PerkLib
 				"Allow to cultivate powers of the soul.",
 				"You've chosen the 'Cultivation' perk, starting your journey on the soul cultivation path!");//potem przerobić na coć innego - moze jak perki do czarów i łuku bedzie dawać jakieś korzyści do soul skills po odpowiednio dużej ilości ich użycia czy cos xD
 
-		// Hidden Jobs perks
+		// Hidden/Deity Jobs perks
 		public static const HiddenJobAsura:PerkType = mk("Hidden Job: Asura", "Hidden Job: Asura",
 				"You've trained in Way of Asura. Being that reached mastery of unleashing wrath to great effect. (+10% of OverMax Wrath)");
 		public static const AbsoluteStrength:PerkType = mk("Absolute Strength", "Absolute Strength",
@@ -3351,6 +3348,8 @@ public class PerkLib
 				"Gain Asura Strength, Asura Form increase to physical might rise to 180%/90%/60% of core str/tou/spe and generate one additional pair of semi-transparent arms. (+10% of OverMax Wrath/Base STR Cap)");
 		public static const BloodDemonToughness:PerkType = mk("Blood Demon Toughness", "Blood Demon Toughness",
 				"Gain Blood Demon Toughness. When below 0 HP it would negate any negative effect of other perks that would cause negative HP regen. (+10x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power/Base TOU Cap, +0,5% HP regen)");
+		public static const DeityJobMunchkin:PerkType = mk("Deity Job: Munchkin", "Deity Job: Munchkin",
+				"You're Munchkin, an ultimate being that possess a god-like body and powers. (+20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up)");
 		public static const AsuraToughness:PerkType = mk("Asura Toughness", "Asura Toughness",
 				"X th Asura super perk. (+10% of OverMax Wrath/Base TOU Cap)");
 		public static const BloodDemonWisdom:PerkType = mk("Blood Demon Wisdom", "Blood Demon Wisdom",
@@ -3359,10 +3358,10 @@ public class PerkLib
 				"X th Asura super perk. (+10% of OverMax Wrath/Base SPE Cap)");
 		public static const BloodDemonIntelligence:PerkType = mk("Blood Demon Intelligence", "Blood Demon Intelligence",
 				"X th Blood demon super perk. (+10x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power/Base INT Cap)");
-		public static const HiddenJob6:PerkType = mk("Hidden Job: 6", "Hidden Job: 6",
-				".");
-		public static const HiddenJob5:PerkType = mk("Hidden Job: 5", "Hidden Job: 5",
-				".");
+		public static const MunchkinAtGym:PerkType = mk("Munchkin @Gym", "Munchkin @Gym",
+				"increase multi caps for mutagen, alchemic, knowledge higher than 20%.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,"int.mult":0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':100}, false);
+		public static const MunchkinAtWork:PerkType = mk("Munchkin @Work", "Munchkin @Work",
+				"+2 prestige job slots, +1 hidden job slot.");//?increase to overmax HP/Wrath/Lust??
 		public static const HiddenJob4:PerkType = mk("Hidden Job: 4", "Hidden Job: 4",
 				".");
 		public static const HiddenJob3:PerkType = mk("Hidden Job: 3", "Hidden Job: 3",
@@ -6806,30 +6805,6 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 18;
                     }, "Eighteen racial perks");
-			/*	DeityJobMunchkin.requirePerk(JobWarlord)
-                                .requirePerk(JobMonk)
-                                .requirePerk(JobKnight)
-                                .requirePerk(JobGolemancer)
-                                .requirePerk(JobHunter)
-                                .requirePerk(JobEromancer)
-                                .requirePerk(JobEnchanter)
-                                .requirePerk(JobElementalConjurer)
-                                .requirePerk(JobCourtesan)
-                                .requirePerk(JobDervish)
-                                .requirePerk(JobDefender)
-                                .requirePerk(JobBrawler)
-                                .requirePerk(JobBeastWarrior)
-                                .requirePerk(JobSwordsman)
-                                .requirePerk(JobAllRounder)
-                                .requireStr(150)
-                                .requireTou(150)
-                                .requireSpe(150)
-                                .requireInt(150)
-                                .requireWis(150)
-                                .requireLib(90)
-								.requireSen(90)
-                                .requireLevel(30); //requirePerk(JobEromancer)
-			*/	//(Still need some other related stuff added to make PC true Munchkin
             //na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)
             CycloneStage3.requireLevel(30)
                     .requireStr(90)

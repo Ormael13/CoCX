@@ -143,13 +143,13 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Mage's Wrath (Ex). Req. Mage's Wrath perk, 75+ int. Effect: Tier 1 elemental spells will be castable in (Ex) version that increase their power 2x while additionaly using 100 wrath. Safe limit for spellcasting increasing by 5%.\n");
 			outputText("-Cooldowns for elemental spells are no longer shared and each spell got it own seperatly tracked cooldown. Whitefire, Pyre Burst, Lightning Bolt, Chain Lighting, Ice Spike, Arctic Gale, Darkness Shard and Dusk Wave spells are classified now as tier 1 elementals spells. Meteor Shower and Polar Midnight are classified now as tier 3 elemental spells.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New event perk: Deity Job: Munchkin. Gained by having merely 1 super perk, lvl 90+, all basic jobs, 6 advanced jobs, 2 prestige jobs, 1 hidden job, 150+ pts in str/tou/spe/int/wis/lib, 100+ in sens. Effects: +20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up.\n");
+			//outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 96+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, \n");
+			outputText("-\n");//Munchkin@Work
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed bugs: \n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Blood Demon toggle to use HP instead of mana resetting after each combat\n");/*ostatni punkt changelogu
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -3261,4 +3261,4 @@ package classes.Scenes
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 	}
-}
+}
