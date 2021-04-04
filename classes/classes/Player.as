@@ -9923,8 +9923,8 @@ use namespace CoC;
 			var prestigeJobs2:Number = 1;
 			if (level >= 72)
 				prestigeJobs2++;
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0)
-				prestigeJobs2++;
+			//if (findPerk(PerkLib.DeityJobMunchkin) >= 0)
+			//	prestigeJobs2++;
 			if (findPerk(PerkLib.AscensionBuildingPrestige01) >= 0)
 				prestigeJobs2++;
 			if (findPerk(PerkLib.AscensionBuildingPrestige02) >= 0)
@@ -14107,8 +14107,9 @@ use namespace CoC;
 
 		public function MutagenBonus(statName: String, bonus: Number):void
 		{
+			var MBCap:Number = 0.2;
 			removeCurse(statName, bonus);
-			if (buff("Mutagen").getValueOfStatBuff(""+statName+".mult") < 0.20){
+			if (buff("Mutagen").getValueOfStatBuff(""+statName+".mult") < MBCap){
 				buff("Mutagen").addStat(""+statName+".mult",0.01);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
@@ -14117,8 +14118,9 @@ use namespace CoC;
 
 		public function AlchemyBonus(statName: String, bonus: Number):void
 		{
+			var ABCap:Number = 0.2;
 			removeCurse(statName, bonus);
-			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < 0.20){
+			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < ABCap){
 				buff("Alchemical").addStat(""+statName+".mult",0.01);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
@@ -14127,8 +14129,9 @@ use namespace CoC;
 
 		public function KnowledgeBonus(statName: String, bonus: Number):void
 		{
+			var KBCap:Number = 0.2;
 			removeCurse(statName, bonus);
-			if (buff("Knowledge").getValueOfStatBuff(""+statName+".mult") < 0.20){
+			if (buff("Knowledge").getValueOfStatBuff(""+statName+".mult") < KBCap){
 				buff("Knowledge").addStat(""+statName+".mult",0.01);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
