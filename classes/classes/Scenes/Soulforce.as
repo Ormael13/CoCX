@@ -180,7 +180,7 @@ use namespace CoC;
 				pLvl += 2;
 				cLvlTier += 1;
 			}
-			outputText("<b>Cultivation stage:</b> " + cultStanding)
+			outputText("<b>Cultivation stage:</b> " + cultStanding + "\n")
 		}
 		public function SoulforceCheats():void {
 			clearOutput();
