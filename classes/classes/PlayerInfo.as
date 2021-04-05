@@ -1857,6 +1857,30 @@ public class PlayerInfo extends BaseContent {
 			doNext(playerMenu);
 		}
 	}
+			/*	DeityJobMunchkin.requirePerk(JobWarlord)
+                                .requirePerk(JobMonk)
+                                .requirePerk(JobKnight)
+                                .requirePerk(JobGolemancer)
+                                .requirePerk(JobHunter)
+                                .requirePerk(JobEromancer)
+                                .requirePerk(JobEnchanter)
+                                .requirePerk(JobElementalConjurer)
+                                .requirePerk(JobCourtesan)
+                                .requirePerk(JobDervish)
+                                .requirePerk(JobDefender)
+                                .requirePerk(JobBrawler)
+                                .requirePerk(JobBeastWarrior)
+                                .requirePerk(JobSwordsman)
+                                .requirePerk(JobAllRounder)
+                                .requireStr(150)
+                                .requireTou(150)
+                                .requireSpe(150)
+                                .requireInt(150)
+                                .requireWis(150)
+                                .requireLib(90)
+								.requireSen(90)
+                                .requireLevel(30); //requirePerk(JobEromancer)
+			*/	//(Still need some other related stuff added to make PC true Munchkin
 	
 	public function superPerkBuyMenu(page:int = 1):void {
 		clearOutput();
@@ -1867,12 +1891,21 @@ public class PlayerInfo extends BaseContent {
 		menu();
 		if (page == 1) {
 			if (player.superPerkPoints > 0) {
-				addButtonDisabled(0, "DJ:M", "Soon.");//if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "", "You already have this perk.");
-				//else addButtonDisabled(0, "", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
+				else {
+					if (player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 && player.lib >= 150 && player.sens >= 100 && player.level >= 90 && player.currentBasicJobs() >= 9 && player.currentAdvancedJobs() >= 6 && player.currentPrestigeJobs() >= 2 && player.currentHiddenJobs() >= 1) {
+						addButton(0, "DJ:M", perkDeityJobMunchkin).hint("Choose the 'Deity Job: Munchkin' super munchkin perk. You're Munchkin, an ultimate being that possess a god-like body and powers. (+20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up)");
+					}
+					else addButtonDisabled(0, "DJ:M", "You do not have one/all of them yet: enough super perk points to obtain this perk, level 90+, 150+ in str/tou/spe/inte/wis/lib, 100+ in sens, 9 basic jobs, 6 advanced jobs, 2 prestige jobs, 1 hidden job.");
+				}
+				addButtonDisabled(1, "M(at)G", "Soon");
+				addButtonDisabled(2, "M(at)W", "Soon");
 			}
 			else {
-				addButtonDisabled(0, "DJ:M", "Soon.");//if (player.hasPerk(PerkLib.)) addButtonDisabled(0, "", "You already have this perk.");
-				//else addButtonDisabled(0, "", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
+				else addButtonDisabled(0, "DJ:M", "You do not have enough super perk points to obtain this perk.");
+				addButtonDisabled(1, "M(at)G", "Soon");
+				addButtonDisabled(2, "M(at)W", "Soon");
 			}
 			addButton(12, "Next", superPerkBuyMenu, page + 1);
 			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);
@@ -1995,6 +2028,27 @@ public class PlayerInfo extends BaseContent {
 		player.perkPoints -= 3;
 		player.superPerkPoints++;
 		doNext(superPerkBuyMenu);
+	}
+	private function perkDeityJobMunchkin():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.DeityJobMunchkin,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Deity Job: Munchkin' super munchkin perk. (Because it too cool to be merely super perk, right?)");
+		doNext(curry(superPerkBuyMenu, 1));
+	}
+	private function perkMunchkinAtGym():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.MunchkinAtGym,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Munchkin @ Gym' super munchkin perk. (Because it too cool to be merely super perk, right?)");
+		doNext(curry(superPerkBuyMenu, 1));
+	}
+	private function perkMunchkinAtWork():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.MunchkinAtWork,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Munchkin @ Work' super munchkin perk. (Because it too cool to be merely super perk, right?)");
+		doNext(curry(superPerkBuyMenu, 1));
 	}
 	private function perkHiddenJobBloodDemon():void {
 		player.superPerkPoints--;
