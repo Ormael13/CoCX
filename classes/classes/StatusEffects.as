@@ -752,7 +752,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Platoon:StatusEffectType            	= mk("platoon");
 		public static const Provoke:StatusEffectType           		= mk("Provoke");
 		public static const QueenBind:StatusEffectType          	= mk("QueenBind");
-		public static const TailSlamWhip:StatusEffectType       	= mk("Tail Slam Whip");
 		public static const OrcaPlay:StatusEffectType  				= mk("Orca Playing");
 		public static const OrcaPlayRoundLeft:StatusEffectType  	= mk("Orca Playing round left");
 		public static const OrcaCanJuggleStill:StatusEffectType 	= mk("Orca has round left to play");
@@ -775,6 +774,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const StunCooldown:StatusEffectType       	= mk("Stun Cooldown");
 		public static const Straddle:StatusEffectType  				= mk("Straddling your opponent");
 		public static const StraddleRoundLeft:StatusEffectType  	= mk("Straddling your opponent Round left");
+		public static const TailSlamWhip:StatusEffectType       	= mk("Tail Slam Whip");
 		public static const TentacleCoolDown:StatusEffectType   	= mk("TentacleCoolDown");
 		public static const Timer:StatusEffectType              	= mk("Timer");
 		public static const TimesBashed:StatusEffectType        	= mk("TimesBashed");
@@ -1139,4 +1139,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}

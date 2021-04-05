@@ -156,10 +156,10 @@ public function losingToHermCaveWyrm():void {
 }
 public function losingToCaveWyrmD():void{
 	if (player.cavewyrmCocks() > 0) {
-		losingToCaveWyrmDCompatible()
+		losingToCaveWyrmDCompatible();
 	}
 	else{
-		losingToCaveWyrmDMelting()
+		losingToCaveWyrmDMelting();
 	}
 }
 

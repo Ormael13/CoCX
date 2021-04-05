@@ -603,6 +603,9 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.FuelForTheFire) >= 0) temp += 2500;
 			if (findPerk(PerkLib.TooAngryToDie) >= 0) temp += 3000;
 			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) temp += 500;
+			if (findPerk(PerkLib.WarMageNovice) >= 0) temp += 50;
+			if (findPerk(PerkLib.WarMageApprentice) >= 0) temp += 50;
+			if (findPerk(PerkLib.WarMageAdept) >= 0) temp += 150;
 			if (findPerk(PerkLib.EnemyFeralType) >= 0) {
 				temp += 2500;
 				if (findPerk(PerkLib.EnemyGroupType) >= 0) temp += 10000;
@@ -2368,6 +2371,8 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.DraconicHeart) >= 0) manaRecovery += 5;
 				if (findPerk(PerkLib.DraconicHeartEvolved) >= 0) manaRecovery += 5;
 				if (findPerk(PerkLib.DraconicHeartFinalForm) >= 0) manaRecovery += 5;
+				if (findPerk(PerkLib.WarMageApprentice) >= 0) manaRecovery += 10;
+				if (findPerk(PerkLib.WarMageAdept) >= 0) manaRecovery += 15;
 				if (findPerk(PerkLib.GreyMage) >= 0) manaRecoveryMulti += 0.5;
 				if (findPerk(PerkLib.GreyArchmage) >= 0) manaRecoveryMulti += 1.5;
 				if (findPerk(PerkLib.ManaAffinityI) >= 0) manaRecoveryMulti += (0.2 * (1 + newGamePlusMod()));

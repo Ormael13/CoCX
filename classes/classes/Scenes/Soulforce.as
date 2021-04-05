@@ -69,7 +69,7 @@ use namespace CoC;
 
 		public function accessSoulforceMenu():void {
 			clearOutput();
-			SoulCultivationLvL()
+			SoulCultivationLvL();
 			var dailySoulforceUsesLimit:Number = 0;
 			if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) dailySoulforceUsesLimit++;
 			if (player.findPerk(PerkLib.SoulWarrior) >= 0) dailySoulforceUsesLimit++;
@@ -148,20 +148,20 @@ use namespace CoC;
 		public function SoulCultivationLvL():void {	//Converted Soul Cultivation level check to a function, easier to update, and much nicer on the eyes than the old block of ifs!
 			//Actually.... Since the tier and lvl have to sync for the soul cult lvl, and is checked for the output tier... I can hijack this and use it to output the tiers as well!
 			var cultTier:Array = [PerkLib.JobSoulCultivator, PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
-			var cultRankTier:Array = ["Late ","Early ","Middle "]
-			var lNeed:Boolean = true
-			var pLvl:int = 6
-			var cLvlTier:int = 0
-			var cultStanding:String = "Mortal"
-			flags[kFLAGS.SOUL_CULTIVATION] = 0
+			var cultRankTier:Array = ["Late ", "Early ", "Middle "];
+			var lNeed:Boolean = true;
+			var pLvl:int = 6;
+			var cLvlTier:int = 0;
+			var cultStanding:String = "Mortal";
+			flags[kFLAGS.SOUL_CULTIVATION] = 0;
 			if (player.level >= 4 && player.findPerk(cultTier[0])){	//Can't think of a better idea than this for now to handle the first three.
 				flags[kFLAGS.SOUL_CULTIVATION] +=3;
 			}	else if (player.level >= 2 && player.findPerk(cultTier[0])){
 				flags[kFLAGS.SOUL_CULTIVATION] +=2;
-				lNeed = false
+				lNeed = false;
 			}	else if (player.level >= 1 && player.findPerk(cultTier[0])){
 				flags[kFLAGS.SOUL_CULTIVATION] +=1;
-				lNeed = false
+				lNeed = false;
 			}
 
 			while (lNeed) {
@@ -169,18 +169,18 @@ use namespace CoC;
 					flags[kFLAGS.SOUL_CULTIVATION] +=1;
 				}
 				else {
-					lNeed = false
+					lNeed = false;
 				}
-				if (cLvlTier == 3) cLvlTier = 0
+				if (cLvlTier == 3) cLvlTier = 0;
 				if (!lNeed){
 					if (flags[kFLAGS.SOUL_CULTIVATION] >=4){
-						cultStanding = cultRankTier[cLvlTier] + cultTier[floor(int((pLvl-2)/6))].name
+						cultStanding = cultRankTier[cLvlTier] + cultTier[floor(int((pLvl-2)/6))].name;
 					}
 				}
 				pLvl += 2;
 				cLvlTier += 1;
 			}
-			outputText("<b>Cultivation stage:</b> " + cultStanding + "\n")
+			outputText("<b>Cultivation stage:</b> " + cultStanding + "\n");
 		}
 		public function SoulforceCheats():void {
 			clearOutput();
