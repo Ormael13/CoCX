@@ -96,10 +96,10 @@ use namespace CoC;
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (flags[kFLAGS.HERM_CAVE_WYRM] == 1) {
-				if (player.hasCock() && rand(3) == 0) cavewyrmScene.losingToCaveWyrmDMelting();
+				if (player.hasCock() && rand(3) == 0) cavewyrmScene.losingToCaveWyrmD();
 				else cavewyrmScene.losingToHermCaveWyrm();
 			}
-			if (player.hasCock() && rand(3) == 0) cavewyrmScene.losingToCaveWyrmDMelting();
+			if (player.hasCock() && rand(3) == 0) cavewyrmScene.losingToCaveWyrmD();
 			else cavewyrmScene.losingToCaveWyrm();
 		}
 		
