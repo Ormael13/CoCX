@@ -52,16 +52,21 @@ public class FireElemental extends Monster
 		
 		override protected function performCombatAction():void
 		{
-			if (hasStatusEffect(StatusEffects.Provoke)) {
-				var choiceP:Number = rand(5);
-				if (choice1 < 5) fluffyOfPunches();
-				if (choiceP == 5) baseElementalAttack();
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
+				
 			}
 			else {
-				var choice1:Number = rand(5);
-				if (choice1 < 3) fluffyOfPunches();
-				if (choice1 == 3 || choice1 == 4) baseElementalAttack();
-				if (choice1 == 5) eAttack();
+				if (hasStatusEffect(StatusEffects.Provoke)) {
+					var choiceP:Number = rand(6);
+					if (choiceP < 5) fluffyOfPunches();
+					if (choiceP == 5) baseElementalAttack();
+				}
+				else {
+					var choice1:Number = rand(6);
+					if (choice1 < 3) fluffyOfPunches();
+					if (choice1 == 3 || choice1 == 4) baseElementalAttack();
+					if (choice1 == 5) eAttack();
+				}
 			}
 		}
 		
@@ -121,16 +126,16 @@ public class FireElemental extends Monster
 				this.additionalXP = 125;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {//river dungeon floor 2 subboss
-				this.long = "You're currently fighting fire elemental. It's five feet tall, it body covered with fire and it's using bare fists to fight.";
-				this.tallness = 57;
+				this.long = "You're currently fighting fire elemental. It's nine feet tall, it body covered with fire and it's using bare fists to fight.";
+				this.tallness = 108;
 				initStrTouSpeInte(16, 26, 46, 80);
-				initWisLibSensCor(80, 10, 35, 50);
+				initWisLibSensCor(80, 15, 55, 50);
 				this.weaponAttack = 8;
 				this.armorDef = 8;
 				this.armorMDef = 45;
 				this.level = 24;
 				this.bonusHP = 600;
-				this.additionalXP = 125;
+				this.additionalXP = 190;
 			}
 			this.a = "the ";
 			this.short = "fire elemental";
@@ -146,6 +151,7 @@ public class FireElemental extends Monster
 			this.armorName = "fire skin";
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireNature, 0, 0, 0, 0);
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

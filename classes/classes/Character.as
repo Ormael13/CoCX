@@ -949,6 +949,9 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.FuelForTheFire) >= 0) max += 2500;
 			if (findPerk(PerkLib.TooAngryToDie) >= 0) max += 3000;
 			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) max += 500;
+			if (findPerk(PerkLib.WarMageNovice) >= 0) max += 50;
+			if (findPerk(PerkLib.WarMageApprentice) >= 0) max += 50;
+			if (findPerk(PerkLib.WarMageAdept) >= 0) max += 150;
 			if (findPerk(PerkLib.AscensionFury) >= 0) max += perkv1(PerkLib.AscensionFury) * 100;
 			if (jewelryEffectId == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude;//+75 to +175
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude2;//+75 to +175
@@ -1023,6 +1026,11 @@ import classes.Items.JewelryLib;
 			var max2:Number = 0.7;
 			if (hasPerk(PerkLib.MagesWrath)) max2 += 0.05;
 			if (hasPerk(PerkLib.MagesWrathEx)) max2 += 0.05;
+			if (hasPerk(PerkLib.WarMageNovice)) max2 += 0.05;
+			if (hasPerk(PerkLib.WarMageApprentice)) max2 += 0.05;
+			if (hasPerk(PerkLib.WarMageAdept)) max2 += 0.05;
+			if (hasPerk(PerkLib.WarMageExpert)) max2 += 0.05;
+			if (hasPerk(PerkLib.WarMageMaster)) max2 += 0.05;
 			max1 *= max2;
 			max1 = Math.round(max1);
 			return max1;

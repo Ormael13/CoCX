@@ -325,11 +325,14 @@ public class PerkLib
 				"Allow to cast hex magic spells as long corruption is 80+, locks out access to white spells and deal 20% more dmg when using black or hex magic to attack pure enemies.",
 				"You've chosen the 'Hex Knowledge' perk, gaining access to hex magic.");
 		public static const MagesWrath:PerkType = mk("Mage's Wrath", "Mage's Wrath",
-				"Magic Bolt (and Elemental Bolt if PC knows it) will be castable in (Ex) version that increase their power 2x while additionaly using 100 wrath. Safe limit for spellcasting increasing by 5%.",
+				"Magic Bolt (and Elemental Bolt if PC knows it) will be castable in (Ex) version that increase their power 2x while additionaly using 100 wrath. Safe limit for spellcasting increased by 5%.",
 				"You've chosen the 'Mage's Wrath' perk, allowing to cast some simple spells with using wrath to enpower them and increase safe limit of wrath for spellcasting.");
 		public static const MagesWrathEx:PerkType = mk("Mage's Wrath (Ex)", "Mage's Wrath (Ex)",
-				"Tier 1 elemental spells will be castable in (Ex) version that increase their power 2x while additionaly using 100 wrath. Safe limit for spellcasting increasing by 5%.",
+				"Tier 1 elemental spells will be castable in (Ex) version that increase their power 2x while additionaly using 100 wrath. Safe limit for spellcasting increased by 5%.",
 				"You've chosen the 'Mage's Wrath (Ex)' perk, allowing to cast tier 1 elemental spells with using wrath to enpower them and increase safe limit of wrath for spellcasting.");
+		public static const ManaCore:PerkType = mk("Mana Core", "Mana Core",
+				"Increase max mana by 10% + 10% to 15% (per each attained magical mastery stage) of base value.",
+				"You've chosen the 'Mana Core' perk. As a result of extended magical training and exercises you managed to form mana core in your body, which resulted in increased capacity to store mana.");
 		public static const NaturalArsenal:PerkType = mk("Natural Arsenal", "Natural Arsenal",
 				"All natural weapon based racial abilities gain a +50% damage bonus.",
 				"You've chosen the 'Natural Arsenal' perk, all natural weapon based racial abilities gain a +50% damage bonus.");
@@ -355,17 +358,26 @@ public class PerkLib
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
 		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
-				"+600 to max Wrath.",//stay alive when berserking at cost of super fast 20% max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
+				"+3000 to max Wrath.",//stay alive when berserking at cost of super fast 20% max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
 				"You've chosen the 'Too Angry to Die' perk, .");
 		public static const AdvancedGolemancyTheory:PerkType = mk("Advanced Golemancy Theory", "Advanced Golemancy Theory",
 				"Enable option to make steel golems and store 1 such golem.",
 				"You've chosen the 'Advanced Golemancy Theory' perk, allowing to make steel golems.");
-		public static const ManaCore:PerkType = mk("Mana Core", "Mana Core",
-				"Increase max mana by 10% + 10% to 15% (per each attained magical mastery stage) of base value.",
-				"You've chosen the 'Mana Core' perk. As a result of extended magical training and exercises you managed to form mana core in your body, which resulted in increased capacity to store mana.");
 		public static const WarMageNovice:PerkType = mk("Novice War Mage", "Novice War Mage",
-				".",
-				"You've chosen the 'Novice War Mage' perk, .");
+				"Increases wrath bar by 50. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Novice War Mage' perk, increasing wrath bar by 50 and safe limit for spellcasting increasing by 5%.");
+		public static const WarMageApprentice:PerkType = mk("Apprentice War Mage", "Apprentice War Mage",
+				"Increases wrath bar by 50. In-combat mana recovery increased by 10. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Apprentice War Mage' perk, increasing wrath bar by 50, increasing in-combat mana recovery by 10 and safe limit for spellcasting increasing by 5%.");
+		public static const WarMageAdept:PerkType = mk("Adept War Mage", "Adept War Mage",
+				"Increases wrath bar by 150. In-combat mana recovery increased by 15. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Adept War Mage' perk, increasing wrath bar by 150, increasing in-combat mana recovery by 15 and safe limit for spellcasting increasing by 5%.");
+		public static const WarMageExpert:PerkType = mk("Expert War Mage", "Expert War Mage",
+				". Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Expert War Mage' perk, . Safe limit for spellcasting increased by 5%.");
+		public static const WarMageMaster:PerkType = mk("Master War Mage", "Master War Mage",
+				". Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Master War Mage' perk, . Safe limit for spellcasting increased by 5%.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -425,9 +437,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -4707,6 +4716,8 @@ public class PerkLib
                     .requireInt(50);
             ManaCore.requirePerk(JobSorcerer)
                     .requireMaxMana(345);
+            WarMageNovice.requireAnyPerk(JobSorcerer, JobHealer)
+                    .requireInt(40);
             UnlockForce.requireInt(20);
             MindOverBodyI.requireAnyPerk(JobSorcerer, JobHealer)
                     .requireInt(25);
@@ -4862,6 +4873,9 @@ public class PerkLib
 					.requirePerk(Channeling)
                     .requireInt(75)
                     .requireLevel(12);
+            WarMageApprentice.requirePerk(WarMageNovice)
+                    .requireInt(80)
+                    .requireLevel(12);
             //Tier 3 Intelligence perks
             Archmage.requirePerk(GrandMage)
                     .requireInt(100).requireLevel(18);
@@ -4936,6 +4950,9 @@ public class PerkLib
                     .requireLevel(24);
 			ElementalBolt.requireAnyPerk(RagingInferno, GlacialStorm, HighVoltage, EclipsingShadow)
                     .requireInt(125)
+                    .requireLevel(24);
+            WarMageAdept.requirePerk(WarMageApprentice)
+                    .requireInt(120)
                     .requireLevel(24);
             //Tier 5 Intelligence perks
             GrandArchmage2ndCircle.requirePerk(GrandArchmage)

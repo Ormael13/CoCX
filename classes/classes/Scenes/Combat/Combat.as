@@ -8976,6 +8976,8 @@ public class Combat extends BaseContent {
         var gainedmana:Number = 0;
         if (combat) {
             gainedmana += manaregeneration2();
+			if (player.hasPerk(PerkLib.WarMageApprentice)) gainedmana += 10;
+			if (player.hasPerk(PerkLib.WarMageAdept)) gainedmana += 15;
             if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedmana += 10;
             if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedmana += 10;
             gainedmana *= manaRecoveryMultiplier();
