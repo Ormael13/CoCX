@@ -12595,12 +12595,12 @@ public class Combat extends BaseContent {
     }
 
     public function scalingBonusStrength():Number {
-        if (flags[kFLAGS.STRENGTH_SCALLING] == 1) return touSpeStrScale(ghostRealStrength());
+        if (flags[kFLAGS.STRENGTH_SCALING] == 1) return touSpeStrScale(ghostRealStrength());
         else return inteWisLibScale(ghostRealStrength());
     }
 
     public function scalingBonusStrengthCompanion():Number {
-        if (flags[kFLAGS.STRENGTH_SCALLING] == 1) return touSpeStrScale(ghostRealStrengthCompanion());
+        if (flags[kFLAGS.STRENGTH_SCALING] == 1) return touSpeStrScale(ghostRealStrengthCompanion());
         else return inteWisLibScale(ghostRealStrengthCompanion());
     }
 
@@ -12609,22 +12609,22 @@ public class Combat extends BaseContent {
     }
 
     public function scalingBonusSpeed():Number {
-        if (flags[kFLAGS.SPEED_SCALLING] == 1) return touSpeStrScale(ghostRealSpeed());
+        if (flags[kFLAGS.SPEED_SCALING] == 1) return touSpeStrScale(ghostRealSpeed());
         else return inteWisLibScale(ghostRealSpeed());
     }
 
     public function scalingBonusWisdom():Number {
-        if (flags[kFLAGS.WISDOM_SCALLING] == 1) return touSpeStrScale(player.wis);
+        if (flags[kFLAGS.WISDOM_SCALING] == 1) return touSpeStrScale(player.wis);
         else return inteWisLibScale(player.wis);
     }
 
     public function scalingBonusIntelligence():Number {
-        if (flags[kFLAGS.INTELLIGENCE_SCALLING] == 1) return touSpeStrScale(player.inte);
+        if (flags[kFLAGS.INTELLIGENCE_SCALING] == 1) return touSpeStrScale(player.inte);
         else return inteWisLibScale(player.inte);
     }
 
     public function scalingBonusIntelligenceCompanion():Number {
-        if (flags[kFLAGS.INTELLIGENCE_SCALLING] == 1) return touSpeStrScale(ghostRealIntelligenceCompanion());
+        if (flags[kFLAGS.INTELLIGENCE_SCALING] == 1) return touSpeStrScale(ghostRealIntelligenceCompanion());
         else return inteWisLibScale(ghostRealIntelligenceCompanion());
     }
 

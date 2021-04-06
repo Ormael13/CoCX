@@ -975,9 +975,9 @@ package classes.Scenes
 			outputText("-Character viewer was updated again due to hard work of Liadri and aimozg. It have now much more body parts or options that will more closely show PC appearance that would match desc in text. Still there are many places where chara viewer is lacking but it would be soon fixed.\n");
 			outputText("-In case player not buy goblin mech form Lumi there will be still option to buy it later on.\n");
 			outputText("-Fixed bugs: Wrong time passed by change in Eva and Alvi camp options, reseting alicorn/nightmare score down to 0, Manticore Metabolism perk causing venom to go into negative values, some Vala not progressing time at all, two lust fueled soulskills removing other combat options, Lumi Workshop and Garage options working properly without needless re-buying blueprints, ");
-			outputText("Inability to unequip vechicle when having any headgear, mech upgrade for more armor and HP when in mech not working, wrong desc intelligence scalling toggle in settings menu\n\n");
+			outputText("Inability to unequip vechicle when having any headgear, mech upgrade for more armor and HP when in mech not working, wrong desc intelligence scaling toggle in settings menu\n\n");
 			outputText("<b>Version 0.8n3 (Aurora, Aether Twins, character viewer update (p.3) and bugfixing):</b>\n\n");
-			outputText("-Added similary to wisdom/intelligence scalling setting in game menu options to choose strength and speed scalings too. Either less randomn or with larger margin to be randomn.\n");
+			outputText("-Added similary to wisdom/intelligence scaling setting in game menu options to choose strength and speed scalings too. Either less randomn or with larger margin to be randomn.\n");
 			outputText("-Removed recommended level from tooltips in exploration menu.\n");
 			outputText("-13 new achievments (4 shadow ones). Dungeon achiev for 8 dungeons cleared is now possible to attain.\n");
 			outputText("-New melee weapon (by Ormael): Aether (Dex) - obtained by beating one of bosses on 1st floor of River Dungeon. Cost 0 gems. Base atk is 0. When weared with Aether (Sin) shield will have 20% chance to stun and will get all benefits of gaunlet type weapon.\n");
@@ -1928,7 +1928,7 @@ package classes.Scenes
 			outputText("-Bimbo Shirt now also count for compatible armors with Unhindered perk.\n");
 			outputText("-Fixed bugs: Struggle/Climb option in Alraune/Sand Trap fights, reseting PC skin in Drider fight, unrepeatable Gaunlet 2, post ascension perk related issue, demon TF wing effects not triggering on others than bee wings, missing unlock for fox face in metamorph menu, HP above max HP after working on Ignam farm, glitched switch for autocasting Blink, missing setting option to choose Hard mode ");
 			outputText("on chara creation, Francisca throwing axe and Zweihander been sold in wrong places (they were both switched for place where PC could buy them), missing lvl req. on Deadly Throw, Dual and Dual Large weapons capped at 1 attack per turn even with multi attack perks, missing lvl req. on few racial mutation perks, possibility of picking both Peacock and Griffon Statues in 2 visits, ");
-			outputText("range/melee weapons applying armor ignoring/armor lowering effect regardless of used type (melee/range) of attack, min Sens gained form racial scores not scalling with NG tiers, been locked out from progressing on chara creation if PC have already all History perks made perm into Past Life perks, dragon race bonuses been nearly duplicated");
+			outputText("range/melee weapons applying armor ignoring/armor lowering effect regardless of used type (melee/range) of attack, min Sens gained form racial scores not scaling with NG tiers, been locked out from progressing on chara creation if PC have already all History perks made perm into Past Life perks, dragon race bonuses been nearly duplicated");
 			addButton(0, "Next", Changelog20);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
@@ -1999,7 +1999,7 @@ package classes.Scenes
 			outputText("-Each 7 days if PC sleep with her and her affection is at 50% or more can proc special event 'Full Moon', where PC can accept Luna feeling or reject (it would lead to fight with her and if PC is partialy dog/wold-morph will also be unable to resist).\n");
 			outputText("-After Full Moon event PC would be able to choose one of Luna sex scenes or just... headpat her if not corrupted to much.\n");
 			outputText("-Spells and Magic Healing costs would rise by 1% each 10% spell/healpower increase instead of each 100%. Also after reaching lvl 24, 42, 60 and 78 costs would increase by 50% of base value if int is high enough. For heals it's 25% increase when int (and wis if PC have Wisened Healer perk) will pass those tresholds.\n");
-			outputText("-Tease and few other lust dealing attacks scalling was changed to use libido scaling instead lvl based one + in case of alraune it will have toughness scaling too.\n");
+			outputText("-Tease and few other lust dealing attacks scaling was changed to use libido scaling instead lvl based one + in case of alraune it will have toughness scaling too.\n");
 			outputText("-Giacomo was added to possible encounters in Soul Sense menu. Also Lumi Lab after first time visiting it would be moved to Dungeons submenu (since it should been like Sean shop inside one of dungeons).\n");
 			outputText("-Celess related events in forest would be temporaly unaccesable (not affecting anything if PC already have Celess in camp).\n");
 			outputText("-Fixed bugs: Patchouli not leading PC to Wonderland from camp, Sidewinder not having daily cooldown counter, Anzu missing from his palace, Chi Chi not dropping M.Gloves after first/second fight on soul arena, missing option to buy Taoth statue in Jewelery shop in Tel'Adre\n\n");
@@ -2014,7 +2014,7 @@ package classes.Scenes
 			outputText("-Beast Warrior Crinos Shape bonuses was increased from 5/10/15/20% of current str/tou/spe to 20/40/80/160%.\n");
 			outputText("-Metamorph perk would grant increase max soulforce by 50 and grant access to Metamorph option even if PC not yet have perk Job: Soul Cultivator.\n");
 			outputText("-Starting mana cap rised from 100 to 200 and starting fatigue cap from 100 to 150. Feral Whirlwind base dmg increased by 50%. Archery base accuracy increased from 30% to 40%. Fly-Whisk price lowered by half. Shield Bash req. not proper type of shield not just any item in shield slot like mana bracer.\n");
-			outputText("-Attacks using intelligence and wisdom scalling would now use scalling used by attack using str/tou/spe, which mean at stat values above 100 it would be weaker effect.\n");
+			outputText("-Attacks using intelligence and wisdom scaling would now use scaling used by attack using str/tou/spe, which mean at stat values above 100 it would be weaker effect.\n");
 			outputText("-Req. for perks from corruption tree lowered: Corrupted Libido, Seduction, Nymphomania, Acclimation, Sense Corruption, Sadist, Arousing Aura\n");
 			outputText("-Monsters base lust cap lowered from 100 to 70. Also now they will get a few points to max cap each lvl (at begining 2, then 5, 10, 20).\n");
 			outputText("-Fixed bugs: Werewolf full fur instead of partial, Luna bugs fixed, Raiju lust nukes nerfed, Temple of the Divine rebulding bugfixing, removed req. of Heroism perk for perk Job: Countresan, missing Anzu in his Palace");
@@ -2036,8 +2036,8 @@ package classes.Scenes
 			outputText("-New melee weapon (by Liadri): Ebony Destroyer - obtainable by giving B.F.Sword to Corrupted Celess to corrupt. Increased by 6 base dmg, added scaling based on corruption, deal bonus dmg to pure enemies and each attack will slowly corrupt user.\n");
 			outputText("-New melee weapon (by Liadri): Masamune - obtainable by giving Katana to Pure Celess to purify. 18 base atk and up to 12 bonus atk based on pure scaling, higher crit rate than normal +10% and deal increased damage against the corrupt.\n");
 			outputText("-New melee weapon (by Liadri): Blood-letter - obtainable by giving Katana to Corrupted Celess to corrupt. 22 base atk and up to 18 atk scaling with corruption, using this weapon damage the user health by 2% per swing and deal increased damage against the pure.\n");
-			outputText("-New melee weapon (by Liadri): Seraph Spear - obtainable by giving Spear to Pure Celess to purify. Added purity scalling that can add up to 10 on base 10 atk of spear, using it will give 2/4% regeneration (in/out of combat) and deal increased damage against the corrupt.\n");
-			outputText("-New melee weapon (by Liadri): Demon Snakespear - obtainable by giving Spear to Corrupted Celess to corrupt. Added corruption scalling that can add up to 10 on base 10 atk of spear, each attack deal poison damage like naga bite and deal increased damage against the pure.\n");
+			outputText("-New melee weapon (by Liadri): Seraph Spear - obtainable by giving Spear to Pure Celess to purify. Added purity scaling that can add up to 10 on base 10 atk of spear, using it will give 2/4% regeneration (in/out of combat) and deal increased damage against the corrupt.\n");
+			outputText("-New melee weapon (by Liadri): Demon Snakespear - obtainable by giving Spear to Corrupted Celess to corrupt. Added corruption scaling that can add up to 10 on base 10 atk of spear, each attack deal poison damage like naga bite and deal increased damage against the pure.\n");
 			outputText("-New melee weapon (by Liadri): Queen's Guard - obtainable by giving Jeweled Rapier to Pure Celess to purify. Base atk inc to 20 and additionaly scale on purity and masculinity gaining up to 5 atk from both (that makes max atk caps at 30). Bonus from rapier training apply as usual too.\n");
 			outputText("-New melee weapon (by Liadri): Black Widow - obtainable by giving Jeweled Rapier to Corrupted Celess to corrupt. Base atk inc to 20 and additionaly scale on corruption and feminity gaining up to 5 atk from both (that makes max atk caps at 30). Bonus from rapier training apply as usual too.\n");
 			outputText("-New melee weapon (by Liadri): Purified Oni Chieftain Destroyer - obtainable by giving Oni Tetsubo to Pure Celess to purify. Base atk up to 40 and additional atk scaling on purity (in total up to 60 atk) plus increased to 15% stun chance. Req. 210+ str for full atk value.\n");
@@ -2053,8 +2053,8 @@ package classes.Scenes
 			outputText("-New range weapon (by Liadri): Kraken Slayer Harpoons - obtainable by giving Sea Huntress Harpoons to Pure Celess to purify. (item properties desc).\n");
 			outputText("-New range weapon (by Liadri): Leviathan Harpoons - obtainable by giving Sea Huntress Harpoons to Corrupted Celess to corrupt. (item properties desc).\n");
 			outputText("-New shield (by Liadri): Sanctuary - obtainable form encounter in forest/deepword with guardian adter picking option to take shield instead of become mother for Celess. Block chance 20, no other properties.\n");
-			outputText("-New shield (by Liadri): Sanctuary - obtainable by giving Sanctuary to Pure Celess to purify. Block chance fully scalling on purity and adding regeneration effect also scalling on purity (on averange it's ~1%).\n");
-			outputText("-New shield (by Liadri): Dark Aegis - obtainable by giving Sanctuary to Corrupted Celess to corrupt. Block chance fully scalling on corruption and adding regeneration effect also scalling on corruption (on averange it's ~1%).\n");
+			outputText("-New shield (by Liadri): Sanctuary - obtainable by giving Sanctuary to Pure Celess to purify. Block chance fully scaling on purity and adding regeneration effect also scaling on purity (on averange it's ~1%).\n");
+			outputText("-New shield (by Liadri): Dark Aegis - obtainable by giving Sanctuary to Corrupted Celess to corrupt. Block chance fully scaling on corruption and adding regeneration effect also scaling on corruption (on averange it's ~1%).\n");
 			outputText("-New melee weapon (by Liadri): V. Blade - obtainable by winning against Jabberwocky by taking it HP down to 0. 28 atk, and with each attack have 1% chance to trigger penta damage.\n");
 			outputText("-New melee weapon (by Coalsack): Zweihander - buyable in Benoit shop at 100% affection. 31 atk (below 105 str atk drops to 20), costs 2000 gems, 30% chance to stun enemy for 3 rounds, large type weapon.\n");
 			outputText("-New melee weapon (by Coalsack): Francisca throwing axe - buyable at He'Xin'Dao shop with melee weapons. 25 atk, costs 2000 gems, increase dmg to flying enemies by 50%, can be used to attack flying enemies when PC itself not flying, large type weapon.\n");
@@ -2877,7 +2877,7 @@ package classes.Scenes
 			outputText("-New possible to gain perks: Cold Mastery (increasing all ice based attacks power 3x) and From The Frozen Waste (increasing taken dmg from fire attacks 3x but decreasing dmg recived from ice attacks 10x)\n");
 			outputText("-Wearing Fenrir Collar giving 10% damage reduction.\n");
 			outputText("-Two new specials: Frostbite (similar to naga bite when PC that have wolf face can bite enemy to deal dmg and lower str and spe), Freezing Breath (10 turns cooldown and in addition to dealing dmg can encase enemy in ice (stun) for 3 turns)\n");
-			outputText("-Having any of soul cultivator line perks will add 5 to str, tou, spe, int and +3 to lib. This bonus isn't scalling with NG tiers always staying the same (well having this perk got other advantages so this lil boost to max stats will make this feel less like lackcluster choice).\n");
+			outputText("-Having any of soul cultivator line perks will add 5 to str, tou, spe, int and +3 to lib. This bonus isn't scaling with NG tiers always staying the same (well having this perk got other advantages so this lil boost to max stats will make this feel less like lackcluster choice).\n");
 			outputText("-Lowered armor bonus from Charge Armor spell. From 5 + int/10 to 4 + int/15 so the efect will be lower by ~30%. If it still would feel too stong it will be nerfed again.\n");
 			outputText("-New upper underwear given at start for all who not qualify to get comfortable bra: comfortable shirt.\n");
 			outputText("-New tier 0 misc lvl-up perks: Unlock: Body (+15 hp per lvl-up), Unlock: Id (+1 lust per lvl-up) and Unlock: Mind (+5 fatigue per lvl-up). All of them req. min 20 in respective stat (tou, int, lib) and will be grant bonus points to respective stat bar retroactively.\n");
@@ -2911,7 +2911,7 @@ package classes.Scenes
 			outputText("-Having both pure and corrupted version of 9 tail perks and Hoshi No Tama perk would grant even mroe than usual increased fatigue regeneration during fight reaching whooping +7-10 fatigue per turn.\n");
 			outputText("-PC is reseted to almost same point it was at NG start with exception of few differences. He will retain gathered gems and items stored in Sky Poison Pearl (assuming PC got this pearl) plus all things buyed with ascension perk points.\n");
 			outputText("-PC max lvl was increased to 150 from 120. Also ascension perk points are granted for each lvl PC have so now max amount gainned for lvl would be 150 points. Yup if PC grind all way to max before ascending it will be many perk points to spend on stuff at ascension menu.\n");
-			outputText("-Monsters stats and hp increase by fixed values scalling with each ascension.\n");
+			outputText("-Monsters stats and hp increase by fixed values scaling with each ascension.\n");
 			outputText("-Monsters exp rewards system was changed. Most changes is that for special type of enemies (aka enemy having one of those perks: Boss, Gigant, Group, Shiled wielder exp will be increased acording to how much more hp those enemies got compared to enemy without any of those perks. So in case PC run into enemy that got more than one of those perks reward exp will be multiplied further).\n");
 			outputText("-Now it's possible to get more exp for fighting enemies up to 20 lvl above with +10% to base exp gains for each lvl that PC is under enemy lvl (to max bonus of 200% more exp). With rare ascension perk Underdog this bonus increase to 20% per lvl diff and max amount of lvl that will count for adding more exp is not 20 but 40 giving in result additional 800% more exp.\n");
 			outputText("-Removed moving all storages aside Sky Poison Pearl moved throu ascension. Also no learned spell is carried over (yes dear player it's now good idea to farm few White/Grey/Black Books to use after PC ascend).\n");
@@ -2932,7 +2932,7 @@ package classes.Scenes
 			outputText("-Deer-morphs now getting +20 to max speed if Deer Score is 4 or higher.\n");
 			outputText("-Bee-morphs now req. 5 not 4 points and their race bonuses changed from +5 spe and +5 tou to - 10 str, +20 tou and +30 spe.\n");
 			outputText("-Added Plant racial Score and Mara Fruit (plant TF). If Plant score is 6 or higher PC is called depending of gender as Dryad/Trent instead of plant-morph. In case PC got taur lower body race name would be changed on appearance screen to reflect this. Currently possible to obtain from Moga Hen shop or once a day from Holli.\n");
-			outputText("-Bonuses from plant score (as usual scalling with each NG tier): at 4 it's +30 tou, -10 spe, +2 armor; at 5 it's +10 str, +50 tou, -20 spe, +4 armor; at 6 it's +20 str, +80 tou, -40 spe, +8 armor; at 7+ it's +25 str, +100 tou, -50 spe, +10 armor.\n");
+			outputText("-Bonuses from plant score (as usual scaling with each NG tier): at 4 it's +30 tou, -10 spe, +2 armor; at 5 it's +10 str, +50 tou, -20 spe, +4 armor; at 6 it's +20 str, +80 tou, -40 spe, +8 armor; at 7+ it's +25 str, +100 tou, -50 spe, +10 armor.\n");
 			outputText("-New possible plant type body parts to gain: Oak Horns, Orchid Flowers, Leaf Hair (moss beard if PC have one), Plant Arms, Root Claws, Oak High Heels and Cockvines Wings. Orchid Flowers occupy horns slot and like oak horns are for male-like PC flowers are for female-like PC's.\n");
 			outputText("Leaf hair removable by any TF that can remove feathery hair, plant arms by any changing non-human arm types to human and both plant type legs by any that also change demonic type legs, cockvines wings removable by any TF that can remove or change to different type wings, oak horns removable by any TF htat can change or remove any type of horns while Orchid Flowers only by normal or super hummus.\n");
 			outputText("-New possible body part to gain: Shark Arms (removable by any TF that chaning arms to human type).\n");
@@ -3008,7 +3008,7 @@ package classes.Scenes
 			outputText("-Having unicorn or alicorn score high enough would add bonus to healing spell effect (+50% to effect for each point of racial score over 5 and 6 respectively - also those two racial scores bonuses can add to each other giving at max uni and ali scores +550% of effect power) and Violet Pupil Transformation (instead of giving +50% effect it adds 25 hp healed per turn). Tooltip for VPT would be always updating acording to changes in both racial scores.\n");
 			outputText("-Unicornum and Alicornum can be only crafted with Evangeline help for now.\n");
 			outputText("-Horse-morphs and Rhino-morphs got bonus to max HP (respectively 70 and 100 HP per NG tier).\n");
-			outputText("-Kitsune got now new penatly to stats: -10 tou at 9 tails (same value of penatly with each tail like str) and to make up for this going along lines of them been quite attuned to soulforce they recived +500 max soulforce and +200 max fatigue (both scalling with each NG+ tier)\n");
+			outputText("-Kitsune got now new penatly to stats: -10 tou at 9 tails (same value of penatly with each tail like str) and to make up for this going along lines of them been quite attuned to soulforce they recived +500 max soulforce and +200 max fatigue (both scaling with each NG+ tier)\n");
 			outputText("-Having alicorn, kitsune or unicorn racial score high enough to have racial bonuses would also increase soulforce regeneration rate during cultivating. Respectively it's 50%, 500% and 100% of base regeneration rate (for one hour it's 10, 2 hours - 30 and 4 hours - 70).\n");
 			outputText("-Having alicorn, kitsune or unicorn racial score high enough to have racial bonuses would boost fatigue recovery speed just like speedy recovery perk is doing (respectively by 50%, 500% and 100%)\n");
 			outputText("-Added Mantis racial score and Blade Grass (mantis TF).\n");
@@ -3114,8 +3114,8 @@ package classes.Scenes
 			outputText("-New body part version: Mantis arms - will be accessable when mantis TF would be added (similar like spider or bee arms covered in chitin giving bonus armor and possesing long scythe adding 15 bonus dmg fighting without using any weapon).\n");
 			outputText("-Fur giving now 2 pts of armor, chitin 4 pts and scales 6 pts. Drider lower body/Spider abdomen(tail type) giving also same bonus armor like spider/bee lower body part.\n");
 			outputText("-Aside of spider arms also bee/mantis arms are giving bonus 2 pts of armor.\n");
-			outputText("-All bonuses to armor due to tougher skin (thick skin perk, scales, etc.) are now scalling with each NG+ tier.\n");
-			outputText("-Bonus to dmg from Job: Monk or having Mantis arms scalling with each NG+.\n");
+			outputText("-All bonuses to armor due to tougher skin (thick skin perk, scales, etc.) are now scaling with each NG+ tier.\n");
+			outputText("-Bonus to dmg from Job: Monk or having Mantis arms scaling with each NG+.\n");
 			outputText("-Each new NG+ adds +15 to Beserker bonus (so it will add +45 in NG+, +60 in NG++ etc. instead of just +30)\n");
 			outputText("-Blizzard spell now properly expire after it duration. Additionaly some of fire attacks aside of having their power lowered to 20% also causing spell to expire faster. Also all enemy npc that can use fire-type attacks (Akbal, Kitsune, Minerva, Phoenix, HellHound, Sand Mother, Phoenix Platoon, Goblin Elder, Goblin Shaman, Imp Lord, Imp Overlord, Ember, Kiha) would deal 20% of dmg (but in case it will deal lust dmg this one won't be lowered).\n");
 			outputText("-Change to explore page 1 menu (making place for to be added in future first Wuxia-related area so I won't later need to change menu confusing again people).\n");
@@ -3199,7 +3199,7 @@ package classes.Scenes
 			outputText("-Marble Hammer price increased to 500 and increased up to 18 atk value.\n");
 			outputText("-Added new starting History: Cultivation perk (all aside bonus item gained at the start implemented)\n");
 			outputText("-Added 4 higher ranks for 4 lvl-up perks: Demonic Desire, Inhuman Desire, Mana Affinity and Mind Over Body (each unlockable in higher NG+ tiers up to NG++++)\n");
-			outputText("-Kitsune bonus Int decreased from +5 to +4 at 1 tail and from +25 to +20 at 9 tail, at same time their gains 50 fatigue scalling into NG+ and up.\n");
+			outputText("-Kitsune bonus Int decreased from +5 to +4 at 1 tail and from +25 to +20 at 9 tail, at same time their gains 50 fatigue scaling into NG+ and up.\n");
 			outputText("-Demons bonus to max lust now scale with each NG tier nd it's +50.\n");
 			outputText("-Dragon-morphs bonus Tou decreased from +20 to +10 and their gaining +100 max HP per each NG tier.\n");
 			outputText("-Samewise as kitsune fox-morphs gains +20 max fatigue and lizard-morphs +30 max fatigue.\n");
