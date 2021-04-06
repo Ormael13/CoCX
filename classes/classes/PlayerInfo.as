@@ -1260,7 +1260,7 @@ public class PlayerInfo extends BaseContent {
 	//Mutations Tracker
 	public function displayMutationsUsed():void{
 		spriteSelect(-1);
-		clearOutput()
+		clearOutput();
 		displayHeader("Mutation Stats");
 		var mutationCount:Number = 1
 		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
@@ -1273,111 +1273,111 @@ public class PlayerInfo extends BaseContent {
 			mutationCount++;
 		outputText("\nYou have " + mutationCount + " mutation slots per part."+
 		"\nNote: Not all body parts will use all available slots." +
-		"\nPerks may have multiple stages. Due to the number of tiers per perk, currently it will only display the first form, until the cleaner Perk-version code is utilized.")
+		"\nPerks may have multiple stages. Due to the number of tiers per perk, currently it will only display the first form, until the cleaner Perk-version code is utilized.");
 
 		//Every time a new mutation is added, it will need to be added in manually, since there's nowhere I can just pull the information from.
 		//Also, when Orm reworks perks to use v1/v2/v3 things, can also display the current tier.
 		//Source: Player.as maxHeartMutations/etc. For mutations, PerkLib.as for desc.
 
-		outputText("\n")
+		outputText("\n");
 		//Heart Mutations
-		outputText("<b>\nHeart Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.BlackHeart)
-		displayMutationsUsedSpoilers(PerkLib.FrozenHeart)
-		displayMutationsUsedSpoilers(PerkLib.ObsidianHeart)
-		displayMutationsUsedSpoilers(PerkLib.TwinHeart)
-		displayMutationsUsedSpoilers(PerkLib.HeartOfTheStorm)
-		displayMutationsUsedSpoilers(PerkLib.DraconicHeart)
+		outputText("<b>\nHeart Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.BlackHeart);
+		displayMutationsUsedSpoilers(PerkLib.FrozenHeart);
+		displayMutationsUsedSpoilers(PerkLib.ObsidianHeart);
+		displayMutationsUsedSpoilers(PerkLib.TwinHeart);
+		displayMutationsUsedSpoilers(PerkLib.HeartOfTheStorm);
+		displayMutationsUsedSpoilers(PerkLib.DraconicHeart);
 
 		//Muscle Mutations
-		outputText("<b>\nMuscle Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.MantislikeAgility)
-		displayMutationsUsedSpoilers(PerkLib.OniMusculature)
+		outputText("<b>\nMuscle Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.MantislikeAgility);
+		displayMutationsUsedSpoilers(PerkLib.OniMusculature);
 
 		//Mouth Mutations
-		outputText("<b>\nMouth Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.VenomGlands)
-		displayMutationsUsedSpoilers(PerkLib.HollowFangs)
+		outputText("<b>\nMouth Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.VenomGlands);
+		displayMutationsUsedSpoilers(PerkLib.HollowFangs);
 
 		//Adrenal Glands Mutations
-		outputText("<b>\nAdrenal Gland Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.SalamanderAdrenalGlands)
-		displayMutationsUsedSpoilers(PerkLib.OrcAdrenalGlands)
+		outputText("<b>\nAdrenal Gland Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.SalamanderAdrenalGlands);
+		displayMutationsUsedSpoilers(PerkLib.OrcAdrenalGlands);
 
 		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
-		outputText("<b>\nBloodstream Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.VampiricBloodsteam)
-		displayMutationsUsedSpoilers(PerkLib.HinezumiBurningBlood)
-		displayMutationsUsedSpoilers(PerkLib.FeyArcaneBloodstream)
+		outputText("<b>\nBloodstream Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.VampiricBloodsteam);
+		displayMutationsUsedSpoilers(PerkLib.HinezumiBurningBlood);
+		displayMutationsUsedSpoilers(PerkLib.FeyArcaneBloodstream);
 
 		//Fat tissue Mutations
-		outputText("<b>\nFat and Tissue Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.PigBoarFat)
-		displayMutationsUsedSpoilers(PerkLib.NaturalPunchingBag)
-		displayMutationsUsedSpoilers(PerkLib.WhaleFat)
-		displayMutationsUsedSpoilers(PerkLib.YetiFat)
+		outputText("<b>\nFat and Tissue Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.PigBoarFat);
+		displayMutationsUsedSpoilers(PerkLib.NaturalPunchingBag);
+		displayMutationsUsedSpoilers(PerkLib.WhaleFat);
+		displayMutationsUsedSpoilers(PerkLib.YetiFat);
 
 		//Lungs Mutations
-		outputText("<b>\nLungs Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.DraconicLungs)
-		displayMutationsUsedSpoilers(PerkLib.CaveWyrmLungs)
-		displayMutationsUsedSpoilers(PerkLib.MelkieLung)
-		displayMutationsUsedSpoilers(PerkLib.DrakeLungs)
+		outputText("<b>\nLungs Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.DraconicLungs);
+		displayMutationsUsedSpoilers(PerkLib.CaveWyrmLungs);
+		displayMutationsUsedSpoilers(PerkLib.MelkieLung);
+		displayMutationsUsedSpoilers(PerkLib.DrakeLungs);
 
 		//Metabolism Mutations
-		outputText("<b>\nMetabolism Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.ManticoreMetabolism)
-		displayMutationsUsedSpoilers(PerkLib.DisplacerMetabolism)
+		outputText("<b>\nMetabolism Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.ManticoreMetabolism);
+		displayMutationsUsedSpoilers(PerkLib.DisplacerMetabolism);
 
 		//Ovaries Mutations
-		outputText("<b>\nOvaries Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.LactaBovinaOvaries)
-		displayMutationsUsedSpoilers(PerkLib.FloralOvaries)
+		outputText("<b>\nOvaries Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.LactaBovinaOvaries);
+		displayMutationsUsedSpoilers(PerkLib.FloralOvaries);
 
 		//Testicle Mutations
-		outputText("<b>\nBalls Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.MinotaurTesticles)
-		displayMutationsUsedSpoilers(PerkLib.EasterBunnyBalls, "Neon Pink Eggs")
-		displayMutationsUsedSpoilers(PerkLib.NukiNuts)
+		outputText("<b>\nBalls Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.MinotaurTesticles);
+		displayMutationsUsedSpoilers(PerkLib.EasterBunnyBalls, "Neon Pink Eggs");
+		displayMutationsUsedSpoilers(PerkLib.NukiNuts);
 
 		//Eyes Mutations
-		outputText("<b>\nEye Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.GorgonsEyes)
-		displayMutationsUsedSpoilers(PerkLib.GazerEye)
+		outputText("<b>\nEye Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.GorgonsEyes);
+		displayMutationsUsedSpoilers(PerkLib.GazerEye);
 
 		//Peripheral/NervSys Mutations
-		outputText("<b>\nPeripheral Nervous System Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.ElvishPeripheralNervSys)
+		outputText("<b>\nPeripheral Nervous System Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.ElvishPeripheralNervSys);
 
 		//Bones and Marrow Mutations
-		outputText("<b>\nBones and Marrow Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.LizanMarrow)
-		displayMutationsUsedSpoilers(PerkLib.DraconicBones)
-		displayMutationsUsedSpoilers(PerkLib.HarpyHollowBones)
+		outputText("<b>\nBones and Marrow Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.LizanMarrow);
+		displayMutationsUsedSpoilers(PerkLib.DraconicBones);
+		displayMutationsUsedSpoilers(PerkLib.HarpyHollowBones);
 
 		//Thyroid Glands Mutations
-		outputText("<b>\nThyroid Gland Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.KitsuneThyroidGland)
-		displayMutationsUsedSpoilers(PerkLib.NekomataThyroidGland)
+		outputText("<b>\nThyroid Gland Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.KitsuneThyroidGland);
+		displayMutationsUsedSpoilers(PerkLib.NekomataThyroidGland);
 
 		//ParaThyroid Glands Mutations. What's the difference between this and the above???
-		outputText("<b>\nParaThyroid Glands Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.KitsuneParathyroidGlands)
-		displayMutationsUsedSpoilers(PerkLib.HellcatParathyroidGlands)
+		outputText("<b>\nParaThyroid Glands Mutations:</b>");
+		displayMutationsUsedSpoilers(PerkLib.KitsuneParathyroidGlands);
+		displayMutationsUsedSpoilers(PerkLib.HellcatParathyroidGlands);
 
 		//Dragon Mutations
-		outputText("<b>\nDragon Mutations:</b>")
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+")
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++")
-		displayMutationsUsedSpoilers(PerkLib.DraconicBones)
-		displayMutationsUsedSpoilers(PerkLib.DraconicHeart)
-		displayMutationsUsedSpoilers(PerkLib.DraconicLungs)
+		outputText("<b>\nDragon Mutations:</b>");
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
+		displayMutationsUsedSpoilers(PerkLib.DraconicBones);
+		displayMutationsUsedSpoilers(PerkLib.DraconicHeart);
+		displayMutationsUsedSpoilers(PerkLib.DraconicLungs);
 
 		//Kitsune Mutations
-		outputText("<b>\nKitsune Mutations:</b>")
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+")
-		displayMutationsUsedSpoilers(PerkLib.KitsuneThyroidGland)
-		displayMutationsUsedSpoilers(PerkLib.KitsuneParathyroidGlands)
+		outputText("<b>\nKitsune Mutations:</b>");
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
+		displayMutationsUsedSpoilers(PerkLib.KitsuneThyroidGland);
+		displayMutationsUsedSpoilers(PerkLib.KitsuneParathyroidGlands);
 
 		menu();
 		addButton(0, "Next", playerMenu);
@@ -1393,13 +1393,13 @@ public class PlayerInfo extends BaseContent {
 	public function displayMutationsUsedSpoilers(perkName:PerkType, acquireReq:String = ""):void {
 		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
 			if (player.hasPerk(perkName)) {
-				outputText("\n" + perkName.name + ": <font color=\"#008000\">Acquired.</font>")
+				outputText("\n" + perkName.name + ": <font color=\"#008000\">Acquired.</font>");
 			} else {
-				outputText("\n" + perkName.name + ": <font color=\"#800000\">Missing.</font>")
+				outputText("\n" + perkName.name + ": <font color=\"#800000\">Missing.</font>");
 			}
 			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
-				var reqs:Array = []
-				var reqcount:int = 1
+				var reqs:Array = [];
+				var reqcount:int = 1;
 				if (perkName.requirements.length > 0) {
 					for each (var cond:Object in perkName.requirements) {
 						if (reqcount > 1) { //Ignores the "free mutation slot" note.
@@ -1407,23 +1407,24 @@ public class PlayerInfo extends BaseContent {
 						}
 						reqcount++;
 					}
-				}	else{	//Information not available.
-					reqs.push("Missing data. Perhaps Unacquirable?")
 				}
-				outputText("\nPrerequisites/Acquisition:" + reqs.join(", "))
+				else{	//Information not available.
+					reqs.push("Missing data. Perhaps Unacquirable?");
+				}
+				outputText("\nPrerequisites/Acquisition:" + reqs.join(", "));
 			}
 			else {
-				outputText("\nPrerequisites/Acquisition:" + acquireReq)
+				outputText("\nPrerequisites/Acquisition:" + acquireReq);
 			}
 		}
 		else { //Help Off
 			if (player.hasPerk(perkName)) {
-				outputText("\n" + perkName.name + ": Acquired.")
+				outputText("\n" + perkName.name + ": Acquired.");
 			} else {
-					outputText("\n???")
+					outputText("\n???");
 				}
 		}
-		outputText("\n")
+		outputText("\n");
 	}
 
 	//------------
@@ -1480,7 +1481,7 @@ public class PlayerInfo extends BaseContent {
 			perkBuyMenu();
 		}
 		else {
-			outputText("<b>ERROR.  LEVEL UP PUSHED WHEN PC CANNOT LEVEL OR GAIN PERKS.  PLEASE REPORT THE STEPS TO REPRODUCE THIS BUG TO ORMAEL@GMAIL.COM OR THE FENOXO.COM XIANXIA MOD THREAD.</b>");
+			outputText("<b>ERROR. LEVEL UP PUSHED WHEN PC CANNOT LEVEL OR GAIN PERKS.  PLEASE REPORT THE STEPS TO REPRODUCE THIS BUG TO ORMAEL@GMAIL.COM OR THE FENOXO.COM XIANXIA MOD THREAD.</b>");
 			doNext(playerMenu);
 		}
 	}
@@ -1488,8 +1489,8 @@ public class PlayerInfo extends BaseContent {
 	//Sub-menus for limited levelling.
 	public function lvlUpFastSubMenu():void{
 		spriteSelect(-1);
-		outputText("Fast levelling, just keep clicking on the button to level up by that number. Or press LvlMax to just get all the levels.")
-		outputText("\n\nPressing \"Done\" will bring you to stat/perk allocation.")
+		outputText("Fast levelling, just keep clicking on the button to level up by that number. Or press LvlMax to just get all the levels.");
+		outputText("\n\nPressing \"Done\" will bring you to stat/perk allocation.");
 		menu();
 		addButton(0,"Lvl +1", lUFSM1);
 		addButton(1,"Lvl +2", lUFSM2);
@@ -1527,7 +1528,7 @@ public class PlayerInfo extends BaseContent {
 			while (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap && lvlinc < incmax) {
 				player.XP -= player.requiredXP();
 				player.level++;
-				lvlinc++
+				lvlinc++;
 				if (player.level <= 6) {
 					player.perkPoints += 2;
 					player.statPoints += 10;
@@ -1538,9 +1539,9 @@ public class PlayerInfo extends BaseContent {
 				}
 			}
 			outputText("<b>You have gained " +lvlinc.toString() + " levels, and are now level " + num2Text(player.level)+"!</b>");
-			var perkRes:int = player.perkPoints - perkLvl
-			var statRes:int = player.statPoints - statLvl
-			outputText("\n\nYou have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!\n\n")
+			var perkRes:int = player.perkPoints - perkLvl;
+			var statRes:int = player.statPoints - statLvl;
+			outputText("\n\nYou have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!\n\n");
 			statScreenRefresh();
 		}
 		lvlUpFastSubMenu();
