@@ -157,7 +157,7 @@ use namespace CoC;
 			flags[kFLAGS.SOUL_CULTIVATION] = 0;
 			if (player.level >= 4 && player.hasPerk(cultTier[0])){	//Can't think of a better idea than this for now to handle the first three.
 				flags[kFLAGS.SOUL_CULTIVATION] +=3;
-			}	else if (player.level >= 2 && player.hasPerk(cultTier[0])){
+			}	else if (player.level >= 2 && player.hasPerk(cultTier[0])){	//Actually.... I can also get rid of the checks for the cultTier here, since you have to have that perk beforehand to get to this menu in the first place...
 				flags[kFLAGS.SOUL_CULTIVATION] +=2;
 				lNeed = false;
 			}	else if (player.level >= 1 && player.hasPerk(cultTier[0])){
