@@ -1832,7 +1832,7 @@ public class Appearance extends Utils
 					options = ["insatiable ",
 						"greedy ",
 						"demanding ",
-						"rapacious"];
+						"rapacious "];
 					description += randomChoice(options);
 					haveDescription = true;
 				}

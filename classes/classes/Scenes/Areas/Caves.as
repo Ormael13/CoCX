@@ -35,7 +35,7 @@ use namespace CoC;
 				partsofTouhounaM3();
 				return;
 			}
-			//Wild manticore/malicore
+			//Wild manticore/malikore
 			if (flags[kFLAGS.ETNA_AFFECTION] >= 5 && rand(4) == 0) {
 				player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 				if (rand(2) == 0) {
