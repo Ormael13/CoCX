@@ -148,6 +148,7 @@ use namespace CoC;
 		public function SoulCultivationLvL():void {	//Converted Soul Cultivation level check to a function, easier to update, and much nicer on the eyes than the old block of ifs!
 			//Actually.... Since the tier and lvl have to sync for the soul cult lvl, and is checked for the output tier... I can hijack this and use it to output the tiers as well!
 			var cultTier:Array = [PerkLib.JobSoulCultivator, PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
+			var pLvlMax:int = 76;	//Should only need to change this and above array for future expansion.
 			var cultRankTier:Array = ["Late ", "Early ", "Middle "];
 			var lNeed:Boolean = true;
 			var pLvl:int = 6;
@@ -165,7 +166,7 @@ use namespace CoC;
 			}
 
 			while (lNeed) {
-				if (player.level >= pLvl && pLvl <= 76 && player.hasPerk(cultTier[floor(pLvl /6)])){
+				if (player.level >= pLvl && pLvl <= pLvlMax && player.hasPerk(cultTier[floor(pLvl /6)])){
 					flags[kFLAGS.SOUL_CULTIVATION] +=1;
 				}
 				else {
