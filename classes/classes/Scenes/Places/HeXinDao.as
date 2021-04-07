@@ -63,46 +63,9 @@ public class HeXinDao extends BaseContent
 	}
 	public function riverislandVillageStuffLunar():void {
 		clearOutput();
+        var zodiacName:Array = ["monkey", "rooster", "dog", "pig", "rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "goat"]
 		flags[kFLAGS.LUNAR_NEW_YEAR] = date.fullYear%12;
-        switch (flags[kFLAGS.LUNAR_NEW_YEAR]){
-            case 0:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "monkey"
-                break;
-            case 1:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rooster"
-                break;
-            case 2:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "dog"
-                break;
-            case 3:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "pig"
-                break;
-            case 4:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rat"
-                break;
-            case 5:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "ox"
-                break;
-            case 6:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "tiger"
-                break;
-            case 7:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rabbit"
-                break;
-            case 8:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "dragon"
-                break;
-            case 9:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "snake"
-                break;
-            case 10:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "horse"
-                break;
-            case 11:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "goat"
-                break;
-        }
-
+        flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = zodiacName[int(flags[kFLAGS.LUNAR_NEW_YEAR])]
         outputText("You go deeper in town and discover the whole place is indeed covered in red. The big question now is what should you check upon first?");
 		menu();
 		if (!player.hasStatusEffect(StatusEffects.CanGetLunarGift)) addButton(0, "Gifts", riverislandVillageStuffLunarGifts);

@@ -63,7 +63,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Feint", feint).hint("Attempt to feint an opponent into dropping its guard.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			bd = buttons.add("Charge", charging).hint("Charge your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
+			bd = buttons.add("Charge", charging).hint("Charge at your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
 			if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
 				bd.disable("<b>You need more time before you can perform Charge again.</b>\n\n");
 			}
@@ -1482,7 +1482,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.CooldownCharging,5,0,0,0);
 		}
 		else player.createStatusEffect(StatusEffects.CooldownCharging,6,0,0,0);
-		outputText("You take some distance before making a U-turn and charging your opponent with all your might impaling it on your [weapon]. ");
+		outputText("You take some distance before making a U-turn and charge at your opponent with all your might, impaling them on your [weapon]. ");
 		var damage:Number = 0;
 		var SAMulti:Number = 1;
 		if (player.level >= 6) SAMulti += 1;
