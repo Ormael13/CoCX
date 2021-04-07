@@ -755,7 +755,7 @@ public class HeXinDao extends BaseContent
 	}
 	public function ermaswiftarrowmerchantarcherytrainingYes():void {
 		if (player.statusEffectv1(StatusEffects.Kelt) > 99) {
-			outputText("\"<i>Need more training? Sure, but it's 100 gems, and as usual paid up front.</i>\"");
+			outputText("\n\nShe looks up and down at you, and says \"<i>I'm sorry, but I don't think I have much more that I can teach you that you don't already know.</i>\"");
 			doNext(ermaswiftarrowmerchant);
 		}
 		else {
