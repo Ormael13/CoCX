@@ -63,9 +63,9 @@ public class HeXinDao extends BaseContent
 	}
 	public function riverislandVillageStuffLunar():void {
 		clearOutput();
-        var zodiacName:Array = ["monkey", "rooster", "dog", "pig", "rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "goat"]
+        var zodiacName:Array = ["monkey", "rooster", "dog", "pig", "rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "goat"];
 		flags[kFLAGS.LUNAR_NEW_YEAR] = date.fullYear%12;
-        flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = zodiacName[int(flags[kFLAGS.LUNAR_NEW_YEAR])]
+        flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = zodiacName[int(flags[kFLAGS.LUNAR_NEW_YEAR])];
         outputText("You go deeper in town and discover the whole place is indeed covered in red. The big question now is what should you check upon first?");
 		menu();
 		if (!player.hasStatusEffect(StatusEffects.CanGetLunarGift)) addButton(0, "Gifts", riverislandVillageStuffLunarGifts);
