@@ -1629,7 +1629,7 @@ public class PlayerAppearance extends BaseContent {
 	public function describeEyes():void {
 		var eyeType:Number = player.eyes.type;
 		if(eyeType == Eyes.FOUR_SPIDER_EYES)
-			outputText("  In addition to your primary two [eyecolor] eyes, you have a second, smaller pair on your forehead.");
+			outputText("  In addition to your primary two [eyecolor] eyes, you have two smaller pairs going up your forehead.");
 		else if(eyeType == Eyes.BLACK_EYES_SAND_TRAP)
 			outputText("  Your eyes are solid spheres of inky, alien darkness.");
 		else if(eyeType == Eyes.CAT_SLITS)
