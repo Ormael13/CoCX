@@ -413,6 +413,7 @@ private function aikoDisableCor():void {
 private function toggleCorruption():void {
 	flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] ^= 1;
 	flags[kFLAGS.AIKO_TIMES_MET]--;
+	outputText("Aiko's corruption is now set to "+(flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] ==0?"off":"on"))
 	doNext(encounterAiko);
 }
 
