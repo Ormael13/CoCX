@@ -280,7 +280,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				//[(Flexibility cat perk)
 				if (player.findPerk(PerkLib.Flexibility) >= 0) outputText("You lean down and take the anemone's cock in your own mouth as she continues orgasming, swallowing the cool, slippery jism -- it tastes not salty and fishy as you'd hoped but somewhat faintly like algae.  The anemone, recovering her wits a bit, looks at you blankly, as though she can't fathom why anyone would want to drink <i>her</i> ejaculate instead of the other way around.  Your eyes twinkle mirthfully in response as you suck and swallow the last of her jizz.  ");
 				player.sexReward("cum","Vaginal");
-				outputText("Your own orgasm takes a bit longer, but the convulsing walls of her pussy do their best to help you arrive and the feelers along her labia writhe against your [cocks] in the same tempo, injecting the last of their venom.  With a deep, final thrust, " + sMultiCockDesc() + " erupts in her pussy.  ");
+				outputText("Your orgasm takes a bit longer, but the convulsing walls of her pussy do their best to help you arrive and the feelers along her labia writhe against your [cocks] in the same tempo, injecting the last of their venom.  With a deep, final thrust, " + sMultiCockDesc() + " erupts in her pussy.  ");
 				//[(big skeet)
 				if (player.cumQ() > 500) {
 					outputText("You continue to pour into her even after her convulsions stop, stretching her belly");
@@ -307,7 +307,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				outputText(".  Unfastening your garments, you stroke " + sMultiCockDesc() + " to full hardness and approach her.  The anemone looks up at you, still somewhat befogged; then, as you stand ");
 				if (player.tallness > 48) outputText("over");
 				else outputText("before");
-				outputText(" her, her eyes widen as she beholds the sheer amount of cock you have.\n\n");
+				outputText(" her, her eyes widen as she witnesses the sheer amount of cock you have.\n\n");
 
 				outputText("You smile at how stunned she is by you, and waggle your erect [cocks] from side-to-side.  The anemone obediently watches it swing, like a hypnotist's pendulum; her mouth reflexively opens as all her conscious thought is temporarily sidetracked.  You push on the shaft with one hand and move the tip down relative to her body, watching bemused as the girl tries to keep her mouth in line with it until it goes too low for her neck and snaps her out of her daze.  She closes her mouth and looks at you quizzically.  <i>\"No?\"</i> she asks.  You answer by pushing forward slightly, bumping the head of your [cock] against her <i>mons pubis</i>.  The skin on her face darkens a bit as she realizes your intention... which turns out to be a blush, by the looks of the shy glance she gives you next!  <i>\"Umm.\"</i>  She gives it a moment of concerned study before her natural instincts take over and the anemone's fingers");
 				//[(HP defeat)
@@ -327,10 +327,10 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				if (player.cocks[0].cockLength > 60) outputText(", despite being unable to look anywhere except over her head thanks to the giant ridge running up the front of her body,");
 				outputText(" has clearly been enjoying the treatment; soon she begins twitching in orgasm and her pussy spasms against the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ", flicking its venomous feelers into it, as she kneads her breasts in her hands.  Her body attempts to convulse, bending your [cock] slightly, while her neglected dick gives a little squirt of pearly semen which lands on the raised line in the center of her body and makes a little trail as it rolls down.  The pressure of her twisting and the sensation of her pussy lapping at your shaft with aphrodisiac is enough to send you over the edge as well.  Your [cock] twitches as you unload into your blue partner");
 				//[(big skeet)
-				if (player.cumQ() > 500) outputText(" until it puffs out her cheeks");
+				if (player.cumQ() > 500) outputText(" until flows past her lips");
 				outputText(".");
 				//[(mega skeet)
-				if (player.cumQ() > 1500) outputText("  Eventually she can't hold in the sheer volume of your ejaculate, and it erupts from her mouth in a white spray.  Spurt after spurt goes into and then out of her, dribbling out of her slack mouth and down her face until her hair is covered with seed.");
+				if (player.cumQ() > 1500) outputText("  Eventually, she can't hold in the sheer volume of your ejaculate, and cascades past her lips onto the ground beneath you.  Spurt after spurt goes into and then out of her, pooling into the massive puddle of cum beneath the two of you.");
 				outputText("  She takes the opportunity to squeeze along the length of your cock, pushing out as much semen as you have to offer as she moans in orgiastic delight at the fluid injection.");
 				outputText("\n\n");
 
