@@ -868,7 +868,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"You approach your girl’s massive tool and give it a few experimental strokes, making " + _name + " gasp in surprise.\n"+
 		"You lick the flared tip to get a taste. Satisfied with it you then proceed to put the thing in your mouth proper. " + _name + " moans as her horse dong throbs in appreciation for the attention you’re giving it.\n"+
 		"You suck on her cock until she finally orgasms, the sweet cum flooding your throat.");
-		outputText("\t\t\t\tWeirdly enough, you feel something change in you as the corrupted cum reaches your stomach. ")
+		outputText("\t\t\t\tWeirdly enough, you feel something change in you as the corrupted cum reaches your stomach. ");
+		doNext(camp.returnToCampUseOneHour);
 	}
 
 	private function incestMasturbate():void{
@@ -924,34 +925,36 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	private function celessChildAppearance():void{
-		outputText("Your daughter "+ _name +" is a");
+		clearOutput();
+		outputText("Your daughter "+ _name +" is a ");
 		if (isCorrupt){
-			outputText("bicorn with abyssal black fur. \n" +
-			"Her red eyes shine with a glimmer of sinister mischief and depravity, you sometimes ponder whether or not she is the spawn of a demon rather than you. Her hairs are silver.\n" +
-			"She wanders around in a black dress. By the look of it, you'd think she stole it from a nun of the church of the fetish as it emphasises her generous "+
-			(isAdult?"E":"D") + " cup breasts and put the focus on her assets.");
+			outputText("bicorn with abyssal black fur. " +
+			"Her red eyes shine with a glimmer of sinister mischief and depravity, you sometimes ponder whether or not she is the spawn of a demon rather than you. \n\n"+
+			"Her hairs are silver. She wanders around in a black dress. By the look of it, you'd think she stole it from a nun of the church of the fetish as it emphasises her generous "+
+			(isAdult?"E":"D") + " cup breasts and put the focus on her assets.\n\n");
 		}
 		else{
-			outputText("unicorn with immaculate white fur. \n"+
-			"Her blue eyes are the most innocent you've seen on Mareth, if angels did exist, she would be one. Her hairs are platinum blonde.\n" +
+			outputText("unicorn with immaculate white fur. "+
+			"Her blue eyes are the most innocent you've seen on Mareth, if angels did exist, she would be one. Her hairs are platinum blonde.\n\n" +
 			"She wanders around in a white dress that covers her more than decent" +
-			(isAdult?"E":"D") + " cup breasts, though where she found it is a mystery even to you. Maybe it was a gift from her father, though she never returned "+ (silly()?"from her cigarrette run ":"") +"to reclaim her.");
+			(isAdult?"E":"D") + " cup breasts, though where she found it is a mystery even to you. Maybe it was a gift from her father, though she never returned "+ (silly()?"from her cigarrette run ":"") +"to reclaim her.\n\n");
 		}
 		outputText(_name + " inherited a massive horsecock from her father. Easily "+
-		(isAdult?"25":"15") + " inches long, this beast can apparently, if the tales are true, pierce through anything.");
+		(isAdult?"25":"15") + " inches long, this beast can apparently, if the tales are true, pierce through anything. ");
 		if (isCorrupt){
-			outputText("She regularly uses it to fuck any imps and goblins alike unfortunate enough to be near when she is horny.");
+			outputText("She regularly uses it to fuck any imps and goblins alike unfortunate enough to be near when she is horny.\n\n");
 		}
 		else{
-			outputText("She tends to be afraid of it, still too young and pure to understand how to properly use it.");
+			outputText("She tends to be afraid of it, still too young and pure to understand how to properly use it.\n\n");
 		}
-		outputText("Just like all centauresses, " + _name + " has a horse vagina behind her hindquarter.");
+		outputText("Just like all centauresses, " + _name + " has a horse vagina behind her hindquarter. ");
 		if (isCorrupt){
-			outputText("Knowing her well, she likely already has taken enough cock down that way to beat a succubus at the art of fucking. Your lascivious daughter is far from virgin.");
+			outputText("Knowing her well, she likely already has taken enough cock down that way to beat a succubus at the art of fucking. Your lascivious daughter is far from virgin.\n\n");
 		}
 		else{
-			outputText("You pray that she will not lose her virginity to some corrupt creature. It will be your duty as a parent to preserve her innocence for as long as possible in this messed up world.");
+			outputText("You pray that she will not lose her virginity to some corrupt creature. It will be your duty as a parent to preserve her innocence for as long as possible in this messed up world.\n\n");
 		}
+		doNext(campInteraction);
 	}
 
 
