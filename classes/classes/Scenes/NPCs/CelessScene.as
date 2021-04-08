@@ -21,6 +21,7 @@ import flash.utils.getQualifiedClassName;
 /**
  * ...
  * @author Oxdeception, aimozg, Ormael
+ * --Leftover code migrated by Jtex (Sorry if something is broken... I'm putting my name here for accountability.)
  */
 public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	private static const _ageIsAdult:int = -1;
