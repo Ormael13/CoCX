@@ -1951,7 +1951,7 @@ public class PlayerInfo extends BaseContent {
 				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this perk.");
 				else addButtonDisabled(0, "HJ:BD", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.WayOfTheBlood)) addButtonDisabled(1, "WOTB", "You already have this perk.");
-				else addButtonDisabled(1, "WOTB", "YYou do not have enough super perk points to obtain this perk.");
+				else addButtonDisabled(1, "WOTB", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.YourPainMyPower)) addButtonDisabled(2, "YPMP", "You already have this perk.");
 				else addButtonDisabled(2, "YPMP", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) addButtonDisabled(3, "MBFBP", "You already have this perk.");
