@@ -101,6 +101,7 @@ public class PlayerInfo extends BaseContent {
 
 			bodyStats += "<b>Total Cock Length:</b> " + Math.round(totalCockLength) + " inches\n";
 			bodyStats += "<b>Total Cock Girth:</b> " + Math.round(totalCockGirth) + " inches\n";
+			bodyStats += "<b>Hours since last cum:</b> " + player.hoursSinceCum + "\n";
 
 		}
 
