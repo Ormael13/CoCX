@@ -155,7 +155,7 @@ use namespace CoC;
 			else if (flags[kFLAGS.TED_LVL_UP] >= 3 && flags[kFLAGS.TED_LVL_UP] < 6) this.drop = new WeightedDrop(consumables.BAGOCA2, 1);
 			else this.drop = new WeightedDrop(consumables.BAGOCA1, 1);
 			this.imageName = "mysterious dragon-boy";
-			this.long = "Before you stands a dragon-boy.  Though he stands only six and half feet tall, he is covered in lean muscle and moves with grace no less than most skilled ballet dancers.  He wears armor made of green dragon scales and fights using an oversized hammer that inscribed on it has the words 'bam' and 'hammer'. Truth be told, the word 'bam' looks like it was originally supposed to say 'ban'.";
+			this.long = "Before you stands a dragon-boy.  Though he stands only six and half feet tall, he is covered in lean muscle and moves with grace no lesser than most skilled balet dancers.  He wears armor made of green dragon scales and fight using an oversized hammer that got inscribed on it words 'bam' and 'hammer'. Thou to be truth to be said word 'bam' looks like it was orginaly word 'ban'.";
 			// this.plural = false;
 			this.createCock(4,1);
 			this.balls = 2;
