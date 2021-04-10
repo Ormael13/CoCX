@@ -17,7 +17,7 @@ import classes.VaginaClass;
 
 public class MaraFruit extends Consumable{
 	public function MaraFruit() {
-		super("MaraFru", "MaraFruit", "an apple-shaped fruit", 10, "This green apple-shaped fruit that spread delicious scent around.  Thou it may as many thing in this realm also posses some transformative properties.");
+		super("MaraFru", "MaraFruit", "an apple-shaped fruit", 10, "A green, apple-shaped fruit that emits a delicious scent.  Though it may, as many things in this realm, also possess some transformative properties.");
 	}
 
 	override public function useItem():Boolean {
