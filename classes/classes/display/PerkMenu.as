@@ -622,8 +622,8 @@ public class PerkMenu extends BaseContent {
 				"\nNote: Not all body parts will use all available slots.");
 
 		//Every time a new mutation is added, it will need to be added in manually, since there's nowhere I can just pull the information from.
-		//Also, when Orm reworks perks to use v1/v2/v3 things, can me made simplier. Current workaround to make it easier for player to use mutation menu.
-		//Source: Player.as maxHeartMutations/etc. For mutations, PerkLib.as for desc.
+		//Also, when Orm reworks perks to use v1/v2/v3 things, can be made simplier. Current workaround to make it easier for player to use mutation menu.
+		//Source: Player.as for maxHeartMutations/etc. For mutations, PerkLib.as for desc.
 
 		outputText("\n");
 		//Heart Mutations
@@ -772,7 +772,7 @@ public class PerkMenu extends BaseContent {
 				outputText("\nPrerequisites/Acquisition:" + acquireReq + ".");
 			}
 			//Description of mutations.
-			if (!perkCount == 0){	//Otherwise, overflow if max.
+			if (!perkCount == 0){	//De-sync between desc.
 				perkCount -= 1;
 			}
 			outputText("\nDescription: ");
@@ -784,12 +784,16 @@ public class PerkMenu extends BaseContent {
 			}
 		}
 		else { //Help Off
-			if (!perkCount == 0){
-				perkCount -= 1;
-			}
 			if (player.hasPerk(perkName[0])) {
 				outputText("\n" + perkName[0].name + ": <font color=\"#008000\">Acquired.</font>");
-				outputText("\nDescription: " + perkName[perkCount].desc());
+				outputText("\nTier: " + String(perkCount));
+				if (!perkCount == 0){	//De-sync between desc.
+					perkCount -= 1;
+				}
+				outputText("\nDescription: ");
+				if(perkName[perkCount].desc().length == 1) {	//Some desc. contains only "."
+					outputText("No description available.");
+				}
 			} else {
 				outputText("\n???" + "\nDescription: ???");
 			}
