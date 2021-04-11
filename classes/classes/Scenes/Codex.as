@@ -1127,7 +1127,7 @@ package classes.Scenes
 		private function codexEntryTrolls():void {
 			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Trolls";
 			clearOutput();
-			headerMain("Shark-Girls & Tigershark-Girls");
+			headerMain("Trolls");
 			outputText("<b>Genders:</b> Male, Female.\n");
 			outputText("<b>Height:</b> 7’3 - 7’9”. Females generally tend to be slightly shorter.\n");
 			outputText("<b>Build:</b> Lithe, athletic, muscular. Most trolls have a more rectangular body shape, including females. It is extremely rare for a female troll to be busty or have an hourglass figure. Female trolls commonly have B cup breasts or smaller as infantile trolls do not need much milk to develop.\n");

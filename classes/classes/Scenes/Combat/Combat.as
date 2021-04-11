@@ -934,6 +934,9 @@ public class Combat extends BaseContent {
 				if (player.hasPerk(PerkLib.ICastAsuraFist)) {
 					
 				}
+				if (player.hasPerk(PerkLib.AsuraStrength)) {
+					
+				}
 			} else {
 				bd = buttons.add("Asura Form", assumeAsuraForm).hint("Let your wrath flow thou you, transforming you into Asura! \n\nWrath Cost: " + asuraformCost() + " per turn");
 				if (player.wrath < asuraformCost()) {
@@ -942,6 +945,61 @@ public class Combat extends BaseContent {
 				if (player.statStore.hasBuff("CrinosShape")) {// && !player.hasPerk(PerkLib.HiddenJobAsura)
 					bd.disable("You are under transformantion effect incompatibile with Asura Form!");
 				}
+			}
+		}
+		if (player.hasPerk(PerkLib.JobWarrior)) {
+			bd = buttons.add("WarriorRage", mspecials.warriorsrage).hint("Throw yourself into a warrior's rage!  Greatly increases your strength, speed and fortitude! \n", "Warrior's Rage");
+			bd.requireWrath(50);
+			if(player.statStore.hasBuff("WarriorsRage")) {
+				bd.disable("You already raging!");
+			}
+		}
+		if (player.hasPerk(PerkLib.Berzerker)) {
+			bd = buttons.add("Berserk", mspecials.berzerk);
+			if (player.hasPerk(PerkLib.ColderFury)) {
+				bd.hint("Throw yourself into a cold(er) rage!  Greatly increases the strength of your weapon and increases lust resistance. \n");
+			} else if (player.hasPerk(PerkLib.ColdFury)) {
+				bd.hint("Throw yourself into a cold rage!  Greatly increases the strength of your weapon and increases lust resistance, but your magical resistance is reduced to zero! \n");
+			} else {
+				bd.hint("Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense and magical resistance are reduced to zero! \n");
+			}
+			bd.requireWrath(50);
+			if (player.hasStatusEffect(StatusEffects.Berzerking)) {
+				bd.disable("You're already pretty goddamn mad!");
+			}
+		}
+		if (player.hasPerk(PerkLib.Lustzerker) || player.jewelryName == "Flame Lizard ring" || player.jewelryName2 == "Flame Lizard ring" || player.jewelryName3 == "Flame Lizard ring" || player.jewelryName4 == "Flame Lizard ring") {
+			bd = buttons.add("Lustserk", mspecials.lustzerk);
+			if (player.hasPerk(PerkLib.ColderLust)) {
+				bd.hint("Throw yourself into a cold(er) lust rage!  Greatly increases the strength of your weapon and increases armor defense. \n");
+			} else if (player.hasPerk(PerkLib.ColdLust)) {
+				bd.hint("Throw yourself into a cold lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your magical resistance is reduced to zero! \n");
+			} else {
+				bd.hint("Throw yourself into a lust rage!  Greatly increases the strength of your weapon and increases armor defense, but your lust and magical resistances are reduced to zero! \n")
+			}
+			bd.requireWrath(50);
+			if (player.hasStatusEffect(StatusEffects.Lustzerking)) {
+				bd.disable("You're already pretty goddamn mad & lustfull!");
+			}
+		}
+		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.necklaceName == "Crinos Shape necklace") {
+			if (player.statStore.hasBuff("CrinosShape")) {
+				buttons.add("Return", mspecials.returnToNormalShape).hint("Return to normal from Crinos Shape.");
+			} else {
+				bd = buttons.add("CrinosShape", mspecials.assumeCrinosShape).hint("Let your wrath flow thou you, transforming you into more bestial shape!  Greatly increases your strength, speed and fortitude! \n\nWrath Cost: " + mspecials.crinosshapeCost() + " per turn");
+				if (player.wrath < mspecials.crinosshapeCost()) {
+					bd.disable("Your wrath is too low to enter this state!");
+				}
+				if (player.statStore.hasBuff("AsuraForm")) {// && !player.hasPerk(PerkLib.HiddenJobAsura)
+					bd.disable("You are under transformantion effect incompatibile with Crinos Shape!");
+				}
+			}
+		}
+		if (player.oniScore() >= mspecials.minOniScoreReq()) {
+			bd = buttons.add("Oni Rampage", mspecials.startOniRampage).hint("Increase all damage done by a massive amount but silences you preventing using spells or magical oriented soulskills.");
+			bd.requireFatigue(spellCost(50));
+			if(player.hasStatusEffect(StatusEffects.OniRampage)) {
+				bd.disable("You already rampaging!");
 			}
 		}
     }
@@ -1358,7 +1416,10 @@ public class Combat extends BaseContent {
                     else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
                 }
             } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-			if (player.statStore.hasBuff("AsuraForm")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
+			if (player.statStore.hasBuff("AsuraForm")) {
+				if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
+			}
         }
         if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
@@ -1376,7 +1437,10 @@ public class Combat extends BaseContent {
                     else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
                 }
             } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-			if (player.statStore.hasBuff("AsuraForm")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
+			if (player.statStore.hasBuff("AsuraForm")) {
+				if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
+			}
         }
         if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
@@ -1415,17 +1479,26 @@ public class Combat extends BaseContent {
                 }
                 if (player.weaponPerk == "Dual Small") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
             } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-			if (player.statStore.hasBuff("AsuraForm")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
+			if (player.statStore.hasBuff("AsuraForm")) {
+				if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
+			}
         }
         if (player.weaponPerk == "Massive") {
             //	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-			if (player.statStore.hasBuff("AsuraForm")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
+			if (player.statStore.hasBuff("AsuraForm")) {
+				if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
+			}
         }
         if (player.weaponPerk == "Staff" || player.weaponPerk == "Wand") {
             //	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-			if (player.statStore.hasBuff("AsuraForm")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
+			if (player.statStore.hasBuff("AsuraForm")) {
+				if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
+			}
         }
         if (player.isFistOrFistWeapon()) {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
@@ -1468,7 +1541,10 @@ public class Combat extends BaseContent {
                     }
                 }
             } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-			if (player.statStore.hasBuff("AsuraForm")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
+			if (player.statStore.hasBuff("AsuraForm")) {
+				if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
+			}
         }
         attack();
     }
@@ -5604,7 +5680,7 @@ public class Combat extends BaseContent {
                 else outputText("Despite the rents you've torn in its exterior, [monster a] [monster name] does not bleed.");
             } else {
                 if (player.weapon == weapons.MACGRSW || player.weapon == weapons.RIPPER1 || player.weapon == weapons.RIPPER2) {
-                    monster.removeStatusEffect(StatusEffects.Hemorrhage);
+					if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
                     if (player.weapon == weapons.MACGRSW) monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.02, 0, 0);
                     else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
                 } else {
@@ -8513,46 +8589,123 @@ public class Combat extends BaseContent {
             }
         }
         //Spells
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier1)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellBlackTier1) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellBlackTier1);
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellIceSpike)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellIceSpike) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellIceSpike);
             } else {
-                player.addStatusValue(StatusEffects.CooldownSpellBlackTier1, 1, -1);
+                player.addStatusValue(StatusEffects.CooldownSpellIceSpike, 1, -1);
             }
         }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier2)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellBlackTier2) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellBlackTier2);
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellIceSpikeEx)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellIceSpikeEx) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellIceSpikeEx);
             } else {
-                player.addStatusValue(StatusEffects.CooldownSpellBlackTier2, 1, -1);
+                player.addStatusValue(StatusEffects.CooldownSpellIceSpikeEx, 1, -1);
             }
         }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier3)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellBlackTier3) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellBlackTier3);
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellDarknessShard)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellDarknessShard) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellDarknessShard);
             } else {
-                player.addStatusValue(StatusEffects.CooldownSpellBlackTier3, 1, -1);
+                player.addStatusValue(StatusEffects.CooldownSpellDarknessShard, 1, -1);
             }
         }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier1)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellWhiteTier1) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellWhiteTier1);
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellDarknessShardEx)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellDarknessShardEx) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellDarknessShardEx);
             } else {
-                player.addStatusValue(StatusEffects.CooldownSpellWhiteTier1, 1, -1);
+                player.addStatusValue(StatusEffects.CooldownSpellDarknessShardEx, 1, -1);
             }
         }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier2)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellWhiteTier2) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellWhiteTier2);
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellArcticGale)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellArcticGale) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellArcticGale);
             } else {
-                player.addStatusValue(StatusEffects.CooldownSpellWhiteTier2, 1, -1);
+                player.addStatusValue(StatusEffects.CooldownSpellArcticGale, 1, -1);
             }
         }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier3)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellWhiteTier3) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellWhiteTier3);
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellArcticGaleEx)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellArcticGaleEx) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellArcticGaleEx);
             } else {
-                player.addStatusValue(StatusEffects.CooldownSpellWhiteTier3, 1, -1);
+                player.addStatusValue(StatusEffects.CooldownSpellArcticGaleEx, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellDuskWave)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellDuskWave) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellDuskWave);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellDuskWave, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellDuskWaveEx)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellDuskWaveEx) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellDuskWaveEx);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellDuskWaveEx, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellPolarMidnight)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellPolarMidnight) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellPolarMidnight);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellPolarMidnight, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellWhitefire)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellWhitefire) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellWhitefire);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellWhitefire, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellWhitefireEx)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellWhitefireEx) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellWhitefireEx);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellWhitefireEx, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellLightningBolt)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellLightningBolt) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellLightningBolt);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellLightningBolt, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellLightningBoltEx)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellLightningBoltEx) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellLightningBoltEx);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellLightningBoltEx, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellPyreBurst)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellPyreBurst) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellPyreBurst);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellPyreBurst, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellPyreBurstEx)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellPyreBurstEx) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellPyreBurstEx);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellPyreBurstEx, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLightingEx)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellChainLightingEx) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellChainLightingEx);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellChainLightingEx, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellMeteorShower)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellMeteorShower) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellMeteorShower);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellMeteorShower, 1, -1);
             }
         }
         if (player.hasStatusEffect(StatusEffects.CooldownSpellRegenerate)) {
@@ -8817,6 +8970,7 @@ public class Combat extends BaseContent {
         var healingPercent:Number;
         if (combat) {
             //Regeneration
+			var negativeHPRegen:Number = 0;
             healingPercent = 0;
             healingPercent += PercentBasedRegeneration();
             if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
@@ -8833,9 +8987,10 @@ public class Combat extends BaseContent {
             }
             if (player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) healingPercent += 1;
             if (player.hasStatusEffect(StatusEffects.Overlimit)) healingPercent -= 10;
-            if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) healingPercent -= 1;
-            if (player.hasPerk(PerkLib.Diehard) && !player.hasPerk(PerkLib.EpicDiehard) && player.HP < 1) healingPercent -= 1;
-            if (player.hasPerk(PerkLib.LizanMarrowFinalForm) && player.HP < 1) healingPercent -= 1;
+            if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) negativeHPRegen -= 1;
+            if (player.hasPerk(PerkLib.Diehard) && !player.hasPerk(PerkLib.EpicDiehard) && player.HP < 1) negativeHPRegen -= 1;
+            if (player.hasPerk(PerkLib.LizanMarrowFinalForm) && player.HP < 1) negativeHPRegen -= 1;
+			if (negativeHPRegen < 0 && !player.hasPerk(PerkLib.BloodDemonToughness)) healingPercent += negativeHPRegen;
             if (healingPercent > maximumRegeneration()) healingPercent = maximumRegeneration();
             HPChange(Math.round((player.maxHP() * healingPercent / 100) + nonPercentBasedRegeneration()), false);
         }
@@ -8878,6 +9033,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
         if (player.hasPerk(PerkLib.BodyCultivator)) maxPercentRegen += 0.5;
+		if (player.hasPerk(PerkLib.BloodDemonToughness)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) maxPercentRegen += 0.5;
@@ -9022,6 +9178,8 @@ public class Combat extends BaseContent {
         var gainedmana:Number = 0;
         if (combat) {
             gainedmana += manaregeneration2();
+			if (player.hasPerk(PerkLib.WarMageApprentice)) gainedmana += 10;
+			if (player.hasPerk(PerkLib.WarMageAdept)) gainedmana += 15;
             if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.MasteredDefenceStance)) gainedmana += 10;
             if (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.PerfectDefenceStance)) gainedmana += 10;
             gainedmana *= manaRecoveryMultiplier();
@@ -9078,6 +9236,7 @@ public class Combat extends BaseContent {
 			if (player.statStore.hasBuff("AsuraForm")) {
 				gainedwrath += 2 * BonusWrathMult;
                 if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) gainedwrath += 2 * BonusWrathMult;
+				if (player.hasPerk(PerkLib.AsuraStrength)) gainedwrath += 2 * BonusWrathMult;
 			}
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) gainedwrath *= 2 * BonusWrathMult;
             EngineCore.WrathChange(gainedwrath, false);
@@ -12231,6 +12390,9 @@ public class Combat extends BaseContent {
 		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, many red claw-like lines coalesce briefly before being shot from their paws, flying toward " + monster.a + monster.short + ".\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.125;
 		if (damage < 10) damage = 10;
+		var puppies:Number = 1;
+		if (player.hasPerk(PerkLib.AsuraStrength)) puppies += 0.1;
+		damage *= puppies;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -12238,7 +12400,7 @@ public class Combat extends BaseContent {
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			damage *= 1.75;
+			damage *= ((puppies / 2) + 1.25);
 		}
 		if (monster.plural) damage *= 2;
 		damage = Math.round(damage);
@@ -12256,6 +12418,11 @@ public class Combat extends BaseContent {
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave many bloody gashes.");
+		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		combat.WrathGenerationPerHit2(15);
@@ -12272,15 +12439,20 @@ public class Combat extends BaseContent {
 	public function asuraformCost():Number {
 		var modcsc:Number = 20;
 		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) modcsc += 20;
-		/*if (player.hasPerk(PerkLib.GreaterCrinosShape)) modcsc += 40;
-		if (player.hasPerk(PerkLib.MasterCrinosShape)) modcsc += 80;
-		if (player.hasPerk(PerkLib.JobBeastWarrior) && player.necklaceName == "Crinos Shape necklace") modcsc += 5;*/
+		if (player.hasPerk(PerkLib.AsuraStrength)) modcsc += 20;
+		//if (player.hasPerk(PerkLib.)) modcsc += 20;
+		//if (player.hasPerk(PerkLib.)) modcsc += 20;
 		return modcsc;
 	}
 	public function assumeAsuraForm():void {
 		clearOutput();
 		player.wrath -= asuraformCost();
 		outputText("As you starts to unleash your inner wrath two additional faces emerge from head on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
+		if (player.hasPerk(PerkLib.AsuraStrength)) {
+			outputText("Additionaly from your back emerge ");
+			outputText("pair ");
+			outputText("of semi-transparent arms. ");
+		}
 		outputText("Finishing assuming Asura form you're ready to destroy anyone that would dare to stand in your way!\n\n");
 		assumeAsuraForm007();
 		statScreenRefresh();
@@ -12297,6 +12469,11 @@ public class Combat extends BaseContent {
 		temp2 += player.touStat.core.value * 0.3;
 		temp3 += player.speStat.core.value * 0.2;
 		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+			temp1 += player.strStat.core.value * 0.6;
+			temp2 += player.touStat.core.value * 0.3;
+			temp3 += player.speStat.core.value * 0.2;
+		}
+		if (player.hasPerk(PerkLib.AsuraStrength)) {
 			temp1 += player.strStat.core.value * 0.6;
 			temp2 += player.touStat.core.value * 0.3;
 			temp3 += player.speStat.core.value * 0.2;
@@ -12334,6 +12511,10 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.CheatDeath) && player.HP < (player.maxHP() * 0.1)) heal *= 2.5;
 			else heal *= 1.5;
 		}
+		if (player.hasPerk(PerkLib.AbsoluteStrength)) heal *= 1.1;
+		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) heal *= 1.2;
+		if (player.hasPerk(PerkLib.ICastAsuraFist)) heal *= 1.3;
+		if (player.hasPerk(PerkLib.AsuraStrength)) heal *= 1.4;
 		//Determine if critical heal!
 		var crit:Boolean = false;
 		var critHeal:int = 5;
@@ -12616,12 +12797,12 @@ public class Combat extends BaseContent {
     }
 
     public function scalingBonusStrength():Number {
-        if (flags[kFLAGS.STRENGTH_SCALLING] == 1) return touSpeStrScale(ghostRealStrength());
+        if (flags[kFLAGS.STRENGTH_SCALING] == 1) return touSpeStrScale(ghostRealStrength());
         else return inteWisLibScale(ghostRealStrength());
     }
 
     public function scalingBonusStrengthCompanion():Number {
-        if (flags[kFLAGS.STRENGTH_SCALLING] == 1) return touSpeStrScale(ghostRealStrengthCompanion());
+        if (flags[kFLAGS.STRENGTH_SCALING] == 1) return touSpeStrScale(ghostRealStrengthCompanion());
         else return inteWisLibScale(ghostRealStrengthCompanion());
     }
 
@@ -12630,22 +12811,22 @@ public class Combat extends BaseContent {
     }
 
     public function scalingBonusSpeed():Number {
-        if (flags[kFLAGS.SPEED_SCALLING] == 1) return touSpeStrScale(ghostRealSpeed());
+        if (flags[kFLAGS.SPEED_SCALING] == 1) return touSpeStrScale(ghostRealSpeed());
         else return inteWisLibScale(ghostRealSpeed());
     }
 
     public function scalingBonusWisdom():Number {
-        if (flags[kFLAGS.WISDOM_SCALLING] == 1) return touSpeStrScale(player.wis);
+        if (flags[kFLAGS.WISDOM_SCALING] == 1) return touSpeStrScale(player.wis);
         else return inteWisLibScale(player.wis);
     }
 
     public function scalingBonusIntelligence():Number {
-        if (flags[kFLAGS.INTELLIGENCE_SCALLING] == 1) return touSpeStrScale(player.inte);
+        if (flags[kFLAGS.INTELLIGENCE_SCALING] == 1) return touSpeStrScale(player.inte);
         else return inteWisLibScale(player.inte);
     }
 
     public function scalingBonusIntelligenceCompanion():Number {
-        if (flags[kFLAGS.INTELLIGENCE_SCALLING] == 1) return touSpeStrScale(ghostRealIntelligenceCompanion());
+        if (flags[kFLAGS.INTELLIGENCE_SCALING] == 1) return touSpeStrScale(ghostRealIntelligenceCompanion());
         else return inteWisLibScale(ghostRealIntelligenceCompanion());
     }
 

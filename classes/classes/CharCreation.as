@@ -404,7 +404,7 @@ import coc.view.MainView;
 			//player.perkPoints = player.level - 1;
 			var newFlags:DefaultDict = new DefaultDict();
 			if (player.hasKeyItem("Ascension") >= 0) {
-				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALLING, kFLAGS.INTELLIGENCE_SCALLING, kFLAGS.STRENGTH_SCALLING, kFLAGS.SPEED_SCALLING, kFLAGS.SECONDARY_STATS_SCALING, kFLAGS.SPELLS_COOLDOWNS,
+				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALING, kFLAGS.INTELLIGENCE_SCALING, kFLAGS.STRENGTH_SCALING, kFLAGS.SPEED_SCALING, kFLAGS.SECONDARY_STATS_SCALING, kFLAGS.SPELLS_COOLDOWNS,
 				kFLAGS.WATERSPORTS_ENABLED, kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.CHARVIEW_STYLE]) {
 					newFlags[flag] = flags[flag];
 				}
@@ -2029,12 +2029,12 @@ import coc.view.MainView;
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionHybridTheory) < 0) addButtonDisabled(btn, "C Chimera's T", "You need to buy Hybrid Theory perk first.");
 			else addButtonDisabled(btn, "C Chimera's T", "You need ascend more times to buy this perk.");
 			btn++;
-			if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionHerosHeritage) < 0) addButton(btn, "HeroHeritage", perkHerosHeritage).hint("Perk giving you an additional 3 perk points and 15 stat points at the start of the game (scalling with current NG tier).\n\nCost: 5 points");
+			if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionHerosHeritage) < 0) addButton(btn, "HeroHeritage", perkHerosHeritage).hint("Perk giving you an additional 3 perk points and 15 stat points at the start of the game (scaling with current NG tier).\n\nCost: 5 points");
 			else if (player.ascensionPerkPoints < 5 && player.findPerk(PerkLib.AscensionHerosHeritage) < 0) addButtonDisabled(btn, "HeroHeritage", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "HeroHeritage", "You already bought Hero's Heritage perk.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionHerosHeritage) >= 0) {
-				if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionHerosLineage) < 0) addButton(btn, "HeroLineage", perkHerosLineage).hint("Perk giving you an additional 2 perk points and 10 stat points at the start of the game (scalling with current NG tier).\n\nCost: 5 points");
+				if (player.ascensionPerkPoints >= 5 && player.findPerk(PerkLib.AscensionHerosLineage) < 0) addButton(btn, "HeroLineage", perkHerosLineage).hint("Perk giving you an additional 2 perk points and 10 stat points at the start of the game (scaling with current NG tier).\n\nCost: 5 points");
 				else if (player.ascensionPerkPoints < 5) button(btn).disable("You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "HeroLineage", "You already bought Hero's Lineage perk.");
 			}

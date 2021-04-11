@@ -51,6 +51,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 1 && flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 0) {
 			outputText("As you starts to unleash your inner wrath two additional faces emerge from head on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
+			if (player.hasPerk(PerkLib.AsuraStrength)) {
+				outputText("Additionaly from your back emerge ");
+				outputText("pair ");
+				outputText("of semi-transparent arms. ");
+			}
 			outputText("Finishing assuming Asura form you're ready to destroy anyone that would dare to stand in your way!\n\n");
 			combat.assumeAsuraForm007();
 		}
@@ -4624,7 +4629,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownSpectralScream,5,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownSpectralScream,6,0,0,0);
-		outputText("You let out a soul-chilling scream freezing your opponent" + (monster.plural ? "s":"") + " in " + monster.pronoun1 + " tracks from sheer terror. This also seems to have damaged " + monster.pronoun1 + " sanity. ");
+		outputText("You let out a soul-chilling scream freezing your opponent" + (monster.plural ? "s":"") + " in " + monster.pronoun3 + " tracks from sheer terror. This also seems to have damaged " + monster.pronoun3 + " sanity. ");
 		var damage:Number = 0;
 		damage += scalingBonusIntelligence() * spellMod();
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;

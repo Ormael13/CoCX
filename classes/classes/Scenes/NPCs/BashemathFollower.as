@@ -26,7 +26,7 @@ public function repeatEnc():void
 	//outputText("\"<i>Why won't you just stay still and get shot like everyone else? Well whatever! I’m gonna take my time toying with you once I've poisoned you into a good fuckpet.</i>\"");
 	outputText("\n\nYou're under attack by ");
 	/*if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Bashemath!");
-	else */outputText("a malicore!");
+	else */outputText("a malikore!");
 	/*if (player.hasStatusEffect(StatusEffects.WildMalikore)) */startCombat(new Malikore());
 	//else startCombat(new Bashemath());
 	doNext(playerMenu);

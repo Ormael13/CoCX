@@ -443,8 +443,8 @@ package classes.Scenes
 		public function HeatTransfer():void {
 			clearOutput();
 			outputText("You ponder what to do with your defeated opponent then realize your body is on the brink of overheating with lust. Your opponent shudders as you grab [monster him] by the neck." +
-					"\"<i>Do you know how hot I am right now? I’ll need to get rid of that before I loose my mind. Thankfully you came along at the perfect moment.</i>\"\n\n" +
-					"Your opponent only understands what you mean when you kiss [monster him], your flames starting to lick his/her skin, leaving a tingle of pleasure and arousal as you start to vent your heat out." +
+					"You ask if [monster he] can feel the heat you radiate. You truly are thankful to be gifted the sight of your new victim. You must purge the bubbling warmth, and you wonder if [monster he] knows what you're about to do.\n\n" +
+					"Your opponent only realizes your intent when you kiss [monster him], your flames starting to lick his/her skin, leaving a tingle of pleasure and arousal as you start to vent your heat out." +
 					"Your flames stretch out from your ");
 			if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText("coat,");
 			else outputText("body,");
@@ -459,11 +459,11 @@ package classes.Scenes
 			else outputText("fire ");
 			outputText("out of yourself.\n\n" +
 					"Your victim, however, is not so lucky. As you pour in your lust it begins to completely lose control attempting to fiercely masturbate this excess of desire out, to no avail. " +
-					"As you are close to done your partner is a writing mess on the floor desperate to cum but unable to achieve complete release as the supernatural fire keeps fueling [monster his] desire " +
+					"As you draw closer to the end, your partner is a writing mess on the floor. Desperate to cum but unable to achieve complete release as the supernatural fire keeps fueling [monster his] desire " +
 					"way beyond normal obliterating self-restraint and pride along the way. You move away from " + monster.a + monster.short + " just as [monster his] hands begin to draw fluids out of [monster his] lust filled endowment. " +
-					"You stay clear as your victim lust explode spewing fluids");
-			if (monster.biggestTitSize() >= 1)outputText(" and milk ");
-			outputText("everywhere in the vicinity. You can see the pulse of your flames as a small embery glow in every thrust of [monster his] hips as [monster he] keeps fiercely masturbating in an attempt to expel the lust.\n\n" +
+					"You move back as your victim reaches the height of their orgasm.");
+			if (monster.biggestTitSize() >= 1)outputText(" You notice [monster his] breasts begin to dribble milk as well. ");
+			outputText("There are fluids everywhere in the vicinity. You can see the pulse of your flames as a small embery glow in every thrust of [monster his] hips as [monster he] keeps fiercely masturbating in an attempt to expel the lust.\n\n" +
 					"You leave your writhing lust receptacle there, it's unlikely [monster he] will stop masturbating anytime soon.");
 			//We give both sex reward so to end player rut or heat in the event pc has either
 			if (monster.hasCock()) player.sexReward("cum");

@@ -324,9 +324,15 @@ public class PerkLib
 		public static const HexKnowledge:PerkType = mk("Hex Knowledge", "Hex Knowledge",
 				"Allow to cast hex magic spells as long corruption is 80+, locks out access to white spells and deal 20% more dmg when using black or hex magic to attack pure enemies.",
 				"You've chosen the 'Hex Knowledge' perk, gaining access to hex magic.");
-		public static const MagesWrath:PerkType = mk("Mage's wrath", "Mage's wrath",
-				"Magic Bolt (and Elemental Bolt if PC knows it) will be castable in (Ex) version that increase their power 2x while additionaly using 100 wrath. Safe limit for spellcasting increasing by 5%.",
-				"You've chosen the 'Mage's wrath' perk, allowing to cast some simple spells with using wrath to enpower them and increase safe limit of wrath for spellcasting.");
+		public static const MagesWrath:PerkType = mk("Mage's Wrath", "Mage's Wrath",
+				"Magic Bolt (and Elemental Bolt if PC knows it) will be castable in (Ex) version that increase their power 2x while additionaly using 100 wrath. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Mage's Wrath' perk, allowing to cast some simple spells with using wrath to enpower them and increase safe limit of wrath for spellcasting.");
+		public static const MagesWrathEx:PerkType = mk("Mage's Wrath (Ex)", "Mage's Wrath (Ex)",
+				"Tier 1 elemental spells will be castable in (Ex) version that increase their power 2x while additionaly using 100 wrath. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Mage's Wrath (Ex)' perk, allowing to cast tier 1 elemental spells with using wrath to enpower them and increase safe limit of wrath for spellcasting.");
+		public static const ManaCore:PerkType = mk("Mana Core", "Mana Core",
+				"Increase max mana by 10% + 10% to 15% (per each attained magical mastery stage) of base value.",
+				"You've chosen the 'Mana Core' perk. As a result of extended magical training and exercises you managed to form mana core in your body, which resulted in increased capacity to store mana.");
 		public static const NaturalArsenal:PerkType = mk("Natural Arsenal", "Natural Arsenal",
 				"All natural weapon based racial abilities gain a +50% damage bonus.",
 				"You've chosen the 'Natural Arsenal' perk, all natural weapon based racial abilities gain a +50% damage bonus.");
@@ -352,17 +358,26 @@ public class PerkLib
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
 		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
-				"+600 to max Wrath.",//stay alive when berserking at cost of super fast 20% max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
+				"+3000 to max Wrath.",//stay alive when berserking at cost of super fast 20% max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
 				"You've chosen the 'Too Angry to Die' perk, .");
 		public static const AdvancedGolemancyTheory:PerkType = mk("Advanced Golemancy Theory", "Advanced Golemancy Theory",
 				"Enable option to make steel golems and store 1 such golem.",
 				"You've chosen the 'Advanced Golemancy Theory' perk, allowing to make steel golems.");
-		public static const ManaCore:PerkType = mk("Mana Core", "Mana Core",
-				"Increase max mana by 10% + 10% to 15% (per each attained magical mastery stage) of base value.",
-				"You've chosen the 'Mana Core' perk. As a result of extended magical training and exercises you managed to form mana core in your body, which resulted in increased capacity to store mana.");
 		public static const WarMageNovice:PerkType = mk("Novice War Mage", "Novice War Mage",
-				".",
-				"You've chosen the 'Novice War Mage' perk, .");
+				"Increases wrath bar by 50. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Novice War Mage' perk, increasing wrath bar by 50 and safe limit for spellcasting increasing by 5%.");
+		public static const WarMageApprentice:PerkType = mk("Apprentice War Mage", "Apprentice War Mage",
+				"Increases wrath bar by 50. In-combat mana recovery increased by 10. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Apprentice War Mage' perk, increasing wrath bar by 50, increasing in-combat mana recovery by 10 and safe limit for spellcasting increasing by 5%.");
+		public static const WarMageAdept:PerkType = mk("Adept War Mage", "Adept War Mage",
+				"Increases wrath bar by 150. In-combat mana recovery increased by 15. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Adept War Mage' perk, increasing wrath bar by 150, increasing in-combat mana recovery by 15 and safe limit for spellcasting increasing by 5%.");
+		public static const WarMageExpert:PerkType = mk("Expert War Mage", "Expert War Mage",
+				". Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Expert War Mage' perk, . Safe limit for spellcasting increased by 5%.");
+		public static const WarMageMaster:PerkType = mk("Master War Mage", "Master War Mage",
+				". Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Master War Mage' perk, . Safe limit for spellcasting increased by 5%.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -422,9 +437,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -958,9 +970,6 @@ public class PerkLib
 		public static const DefenceStance:PerkType = mk("Defence Stance", "Defence Stance",
 				"Defend move now reduce incoming damage a littl more and allow recovering fatigue/mana/soulforce.",
 				"You've chosen the 'Defence Stance' perk, training to master you defence pose.");
-		public static const DeityJobMunchkin:PerkType = mk("Deity Job: Munchkin", "Deity Job: Munchkin",
-				"You're Munchkin, an ultimate being that possess a god-like body and powers. +25% to all stats.",
-				"You've chosen the 'Deity Job: Munchkin' perk, becoming an ultimate being with a god-like body and powers. +25% to all stats.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,"int.mult":0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':25}, false);
 		public static const DemonicDesireI:PerkType = mk("Demonic Desire I", "Demonic Desire I",
 				"Raises max lust by 5% of base value.",
 				"You've chosen the 'Demonic Desire I' perk, giving you an additional 5% of base value to max lust!");
@@ -3327,13 +3336,13 @@ public class PerkLib
 				"Allow to cultivate powers of the soul.",
 				"You've chosen the 'Cultivation' perk, starting your journey on the soul cultivation path!");//potem przerobić na coć innego - moze jak perki do czarów i łuku bedzie dawać jakieś korzyści do soul skills po odpowiednio dużej ilości ich użycia czy cos xD
 
-		// Hidden Jobs perks
+		// Hidden/Deity Jobs perks
 		public static const HiddenJobAsura:PerkType = mk("Hidden Job: Asura", "Hidden Job: Asura",
-				"You've trained in way of asuras. Beings that reached mastery of unleashing wrath to great effect. (+10% of OverMax Wrath)");
+				"You've trained in Way of Asura. Being that reached mastery of unleashing wrath to great effect. (+10% of OverMax Wrath)");
 		public static const AbsoluteStrength:PerkType = mk("Absolute Strength", "Absolute Strength",
 				"Increase strength based on current amount of wrath as long wrath is above 50% (1:2 ratio). Also wrath outside of combat will not decay and even with correct perks can slowly rise. (+10% of OverMax Wrath)");
 		public static const LikeAnAsuraBoss:PerkType = mk("Like A-sura Boss", "Like A-sura Boss",
-				"Adds to toggle starting in Asura Form at combat start, increase to physical might rise to 80%/60%/40% of core str/tou/spe. (+10% of OverMax Wrath)");
+				"Adds to toggle starting in Asura Form at combat start, increase to physical might rise to 120%/60%/40% of core str/tou/spe. (+10% of OverMax Wrath)");
 		public static const ICastAsuraFist:PerkType = mk("I Cast (Asura) Fist", "I Cast (Asura) Fist",
 				"Safe treshold for magic/m.specials is calculated based on overmax wrath not max wrath, +50% of base max wrath. (+10% of OverMax Wrath)");
 		public static const HiddenJobBloodDemon:PerkType = mk("Hidden Job: Blood Demon", "Hidden Job: Blood Demon",
@@ -3344,14 +3353,24 @@ public class PerkLib
 				"You absorb all the blood spilled and wrath generated by enemy under Bleed effects into yourself. (+10x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power)");
 		public static const MyBloodForBloodPuppies:PerkType = mk("My Blood for Blood Puppies", "My Blood for Blood Puppies",
 				"During fight small part of your blood from into blood puppies that can attack on your behalf with blood soulskills. When you grow in mastery of blood they would grow stronger with you. (+10x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power)");
-		public static const HiddenJob8:PerkType = mk("Hidden Job: 8", "Hidden Job: 8",
-				"5th Asura super perk. (+10% of OverMax Wrath/Base STR Cap)");
-		public static const HiddenJob7:PerkType = mk("Hidden Job: 7", "Hidden Job: 7",
-				"5th Bollod demon super perk. (+10x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power/Base TOU Cap)");
-		public static const HiddenJob6:PerkType = mk("Hidden Job: 6", "Hidden Job: 6",
-				".");
-		public static const HiddenJob5:PerkType = mk("Hidden Job: 5", "Hidden Job: 5",
-				".");
+		public static const AsuraStrength:PerkType = mk("Asura Strength", "Asura Strength",
+				"Gain Asura Strength, Asura Form increase to physical might rise to 180%/90%/60% of core str/tou/spe and generate one additional pair of semi-transparent arms. (+10% of OverMax Wrath/Base STR Cap)");
+		public static const BloodDemonToughness:PerkType = mk("Blood Demon Toughness", "Blood Demon Toughness",
+				"Gain Blood Demon Toughness. When below 0 HP it would negate any negative effect of other perks that would cause negative HP regen. (+10x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power/Base TOU Cap, +0,5% HP regen)");
+		public static const DeityJobMunchkin:PerkType = mk("Deity Job: Munchkin", "Deity Job: Munchkin",
+				"You're Munchkin, an ultimate being that possess a god-like body and powers. (+20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up)");
+		public static const AsuraToughness:PerkType = mk("Asura Toughness", "Asura Toughness",
+				"X th Asura super perk. (+10% of OverMax Wrath/Base TOU Cap)");
+		public static const BloodDemonWisdom:PerkType = mk("Blood Demon Wisdom", "Blood Demon Wisdom",
+				"X th Blood demon super perk. (+10x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power/Base WIS Cap)");
+		public static const AsuraSpeed:PerkType = mk("Asura Speed", "Asura Speed",
+				"X th Asura super perk. (+10% of OverMax Wrath/Base SPE Cap)");
+		public static const BloodDemonIntelligence:PerkType = mk("Blood Demon Intelligence", "Blood Demon Intelligence",
+				"X th Blood demon super perk. (+10x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power/Base INT Cap)");
+		public static const MunchkinAtGym:PerkType = mk("Munchkin @Gym", "Munchkin @Gym",
+				"increase multi caps for mutagen, alchemic, knowledge higher than 20%.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,"int.mult":0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':100}, false);
+		public static const MunchkinAtWork:PerkType = mk("Munchkin @Work", "Munchkin @Work",
+				"+2 prestige job slots, +1 hidden job slot.");//?increase to overmax HP/Wrath/Lust??
 		public static const HiddenJob4:PerkType = mk("Hidden Job: 4", "Hidden Job: 4",
 				".");
 		public static const HiddenJob3:PerkType = mk("Hidden Job: 3", "Hidden Job: 3",
@@ -4697,6 +4716,8 @@ public class PerkLib
                     .requireInt(50);
             ManaCore.requirePerk(JobSorcerer)
                     .requireMaxMana(345);
+            WarMageNovice.requireAnyPerk(JobSorcerer, JobHealer)
+                    .requireInt(40);
             UnlockForce.requireInt(20);
             MindOverBodyI.requireAnyPerk(JobSorcerer, JobHealer)
                     .requireInt(25);
@@ -4726,6 +4747,9 @@ public class PerkLib
             Medicine.requireInt(60);
             StaffChanneling.requirePerk(Channeling)
                     .requireInt(60)
+                    .requireLevel(6);
+            MagesWrathEx.requirePerk(MagesWrath)
+                    .requireInt(75)
                     .requireLevel(6);
             MindOverBodyIV.requirePerk(MindOverBodyIII)
                     .requireInt(85)
@@ -4849,6 +4873,9 @@ public class PerkLib
 					.requirePerk(Channeling)
                     .requireInt(75)
                     .requireLevel(12);
+            WarMageApprentice.requirePerk(WarMageNovice)
+                    .requireInt(80)
+                    .requireLevel(12);
             //Tier 3 Intelligence perks
             Archmage.requirePerk(GrandMage)
                     .requireInt(100).requireLevel(18);
@@ -4923,6 +4950,9 @@ public class PerkLib
                     .requireLevel(24);
 			ElementalBolt.requireAnyPerk(RagingInferno, GlacialStorm, HighVoltage, EclipsingShadow)
                     .requireInt(125)
+                    .requireLevel(24);
+            WarMageAdept.requirePerk(WarMageApprentice)
+                    .requireInt(120)
                     .requireLevel(24);
             //Tier 5 Intelligence perks
             GrandArchmage2ndCircle.requirePerk(GrandArchmage)
@@ -6792,30 +6822,6 @@ public class PerkLib
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 18;
                     }, "Eighteen racial perks");
-			/*	DeityJobMunchkin.requirePerk(JobWarlord)
-                                .requirePerk(JobMonk)
-                                .requirePerk(JobKnight)
-                                .requirePerk(JobGolemancer)
-                                .requirePerk(JobHunter)
-                                .requirePerk(JobEromancer)
-                                .requirePerk(JobEnchanter)
-                                .requirePerk(JobElementalConjurer)
-                                .requirePerk(JobCourtesan)
-                                .requirePerk(JobDervish)
-                                .requirePerk(JobDefender)
-                                .requirePerk(JobBrawler)
-                                .requirePerk(JobBeastWarrior)
-                                .requirePerk(JobSwordsman)
-                                .requirePerk(JobAllRounder)
-                                .requireStr(150)
-                                .requireTou(150)
-                                .requireSpe(150)
-                                .requireInt(150)
-                                .requireWis(150)
-                                .requireLib(90)
-								.requireSen(90)
-                                .requireLevel(30); //requirePerk(JobEromancer)
-			*/	//(Still need some other related stuff added to make PC true Munchkin
             //na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)
             CycloneStage3.requireLevel(30)
                     .requireStr(90)

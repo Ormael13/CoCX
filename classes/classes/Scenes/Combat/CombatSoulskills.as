@@ -1501,6 +1501,11 @@ public class CombatSoulskills extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave many bloody gashes.");
+		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		combat.WrathGenerationPerHit2(15);
@@ -1541,6 +1546,11 @@ public class CombatSoulskills extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave many bloody gashes.");
+		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		combat.WrathGenerationPerHit2(15);

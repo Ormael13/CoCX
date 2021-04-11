@@ -35,7 +35,7 @@ use namespace CoC;
 				partsofTouhounaM3();
 				return;
 			}
-			//Wild manticore/malicore
+			//Wild manticore/malikore
 			if (flags[kFLAGS.ETNA_AFFECTION] >= 5 && rand(4) == 0) {
 				player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 				if (rand(2) == 0) {
@@ -88,7 +88,7 @@ use namespace CoC;
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
 					//antworker.();
 					clearOutput();
-					//outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling of becoming slight tougher counts.");
+					//outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling like you are becoming slightly tougher counts.");
 					break;*/
 				case 1://2:
 					player.createStatusEffect(StatusEffects.InsideSmallSpace,0,0,0,0);
@@ -122,7 +122,7 @@ use namespace CoC;
 					break;
 				default:
 					clearOutput();
-					outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling of becoming slight tougher counts.");
+					outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling like you are becoming slightly tougher counts.");
 					dynStats("tou", .5);
 					doNext(camp.returnToCampUseOneHour);
 			}
