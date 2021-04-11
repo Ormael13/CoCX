@@ -747,7 +747,7 @@ public class PerkMenu extends BaseContent {
 			} else {
 				outputText("\n" + perkName[0].name + ": <font color=\"#800000\">Missing.</font>");
 			}
-			outputText("\nTier: " + String(perkCount));
+			outputText("\nTier: " + String(perkCount) + " of " + String(perkName.length) + ".");
 			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
 				var reqs:Array = [];
 				if (perkCount != perkName.length && perkName[perkCount].requirements.length > 0) {
@@ -764,10 +764,10 @@ public class PerkMenu extends BaseContent {
 				else{	//Information not available.
 					reqs.push("Missing data. Perhaps Unacquirable?");
 				}
-				outputText("\nPrerequisites/Acquisition:" + reqs.join(", ") + ".");
+				outputText("\nRequirements for next tier: " + reqs.join(", ") + ".");
 			}
 			else {	//Manual done this way.
-				outputText("\nPrerequisites/Acquisition:" + acquireReq + ".");
+				outputText("\nRequirements for next tier: " + acquireReq + ".");
 			}
 			//Description of mutations.
 			if (!perkCount == 0){	//De-sync between desc.
