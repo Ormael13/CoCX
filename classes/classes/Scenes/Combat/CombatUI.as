@@ -395,16 +395,16 @@ public class CombatUI extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) addButton(10, "Poison", combat.baseelementalattacks, Combat.POISON);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(11, "Purity", combat.baseelementalattacks, Combat.PURITY);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(12, "Corruption", combat.baseelementalattacks, Combat.CORRUPTION);
-		} else if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.pernamentgolemsendcost()) {
+		} else if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) {
 			menu();
-			addButton(0, "Send P.Gol/1", combat.pspecials.sendPernamentGolem1);
+			addButton(0, "Send P.Gol/1", combat.pspecials.sendPermanentGolem1);
 			if (monster.plural) {
-				if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 2) {
-					if (player.mana >= combat.pspecials.pernamentgolemsendcost() * 3) addButton(1, "Send P.Gol/3", combat.pspecials.sendPernamentGolem3);
+				if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 2) {
+					if (player.mana >= combat.pspecials.permanentgolemsendcost() * 3) addButton(1, "Send P.Gol/3", combat.pspecials.sendPermanentGolem3);
 					else addButtonDisabled(1, "Send P.Gol/3", "Not enough mana.");
 				}
-				if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 4) {
-					if (player.mana >= combat.pspecials.pernamentgolemsendcost() * 5) addButton(2, "Send P.Gol/5", combat.pspecials.sendPernamentGolem5);
+				if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 4) {
+					if (player.mana >= combat.pspecials.permanentgolemsendcost() * 5) addButton(2, "Send P.Gol/5", combat.pspecials.sendPermanentGolem5);
 					else addButtonDisabled(2, "Send P.Gol/5", "Not enough mana.");
 				}
 			}
@@ -536,7 +536,7 @@ public class CombatUI extends BaseCombatContent {
 	private function isPlayerPlayingWithElementalsOrGolems():Boolean {
 	var dancingwithminions:Boolean = false;
 	if (player.hasPerk(PerkLib.FirstAttackElementals) && flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] != 1) dancingwithminions = true;
-	if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.pernamentgolemsendcost()) dancingwithminions = true;
+	if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) dancingwithminions = true;
 	return dancingwithminions;
 }
 	

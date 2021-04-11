@@ -42,7 +42,8 @@ public class PerkMenu extends BaseContent {
 			outputText(" to spend.</b>");
 		}
 		addButton(2, "SuperPerk Up", CoC.instance.playerInfo.superPerkBuyMenu);
-		addButton(4, "Database", perkDatabase);
+		addButton(3, "Mutations Database", mutationsDatabase);
+		addButton(4, "Perks Database", perkDatabase);
 		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) ||
 			(player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.hasPerk(PerkLib.LikeAnAsuraBoss) ||
 			player.jiangshiScore() >= 20) {
@@ -61,8 +62,8 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
 			addButton(8, "Elementals",summonsbehaviourOptions);
 		}
-		if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 0 && player.hasPerk(PerkLib.FirstAttackGolems)) {
-			outputText("\n<b>You can adjust your pernament golems behaviour during combat.</b>");
+		if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 && player.hasPerk(PerkLib.FirstAttackGolems)) {
+			outputText("\n<b>You can adjust your permanent golems behaviour during combat.</b>");
 			addButton(9, "P.Golems",golemsbehaviourOptions);
 		}
 		addButton(10, "Number of", EngineCore.doNothing);
@@ -502,8 +503,8 @@ public class PerkMenu extends BaseContent {
 	public function golemsbehaviourOptions():void {
 		clearOutput();
 		menu();
-		outputText("You can choose how your pernament golems will behave during each fight.\n\n");
-		outputText("\n<b>Pernament golems behavious:</b>\n");
+		outputText("You can choose how your permanent golems will behave during each fight.\n\n");
+		outputText("\n<b>Permanent golems behavious:</b>\n");
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) outputText("Attacking at the begining of each turn (owner would need to just choose how many of them will be sent).");
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] < 1) outputText("Waiting for the owner to give an attack command each turn.");
 		if (flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) addButton(10, "Waiting", golemsAttacking,false);
@@ -602,6 +603,198 @@ public class PerkMenu extends BaseContent {
             flags[kFLAGS.WILL_O_THE_WISP] = (attacking)?1:0;
             WOTWbehaviourOptions();
         }
+	}
+
+	public function mutationsDatabase():void{
+		spriteSelect(-1);
+		clearOutput();
+		displayHeader("Mutation Stats");
+		var mutationCount:Number = 1
+		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
+			mutationCount++;
+		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
+			mutationCount++;
+		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
+			mutationCount++;
+		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation04) >= 0)
+			mutationCount++;
+		outputText("\nYou have " + mutationCount + " mutation slots per part."+
+				"\nNote: Not all body parts will use all available slots.");
+
+		//Every time a new mutation is added, it will need to be added in manually, since there's nowhere I can just pull the information from.
+		//Also, when Orm reworks perks to use v1/v2/v3 things, can me made simplier. Current workaround to make it easier for player to use mutation menu.
+		//Source: Player.as maxHeartMutations/etc. For mutations, PerkLib.as for desc.
+
+		outputText("\n");
+		//Heart Mutations
+		outputText("<b>\nHeart Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.BlackHeart, PerkLib.BlackHeartEvolved, PerkLib.BlackHeartFinalForm]);
+		mutationsDatabaseVerify([PerkLib.FrozenHeart, PerkLib.FrozenHeartEvolved, PerkLib.FrozenHeartFinalForm]);
+		mutationsDatabaseVerify([PerkLib.ObsidianHeart, PerkLib.ObsidianHeartEvolved, PerkLib.ObsidianHeartFinalForm]);
+		mutationsDatabaseVerify([PerkLib.TwinHeart, PerkLib.TwinHeartEvolved, PerkLib.TwinHeartFinalForm]);
+		mutationsDatabaseVerify([PerkLib.HeartOfTheStorm, PerkLib.HeartOfTheStormEvolved, PerkLib.HeartOfTheStormFinalForm]);
+		mutationsDatabaseVerify([PerkLib.DraconicHeart, PerkLib.DraconicHeartEvolved, PerkLib.DraconicHeartFinalForm]);
+
+		//Muscle Mutations
+		outputText("<b>\nMuscle Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.MantislikeAgility, PerkLib.MantislikeAgilityEvolved, PerkLib.MantislikeAgilityFinalForm]);
+		mutationsDatabaseVerify([PerkLib.OniMusculature, PerkLib.OniMusculatureEvolved, PerkLib.OniMusculatureFinalForm]);
+
+		//Mouth Mutations
+		outputText("<b>\nMouth Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.VenomGlands, PerkLib.VenomGlandsEvolved, PerkLib.VenomGlandsFinalForm]);
+		mutationsDatabaseVerify([PerkLib.HollowFangs, PerkLib.HollowFangsEvolved, PerkLib.HollowFangsFinalForm]);
+
+		//Adrenal Glands Mutations
+		outputText("<b>\nAdrenal Gland Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.SalamanderAdrenalGlands, PerkLib.SalamanderAdrenalGlandsEvolved, PerkLib.SalamanderAdrenalGlandsFinalForm]);
+		mutationsDatabaseVerify([PerkLib.OrcAdrenalGlands, PerkLib.OrcAdrenalGlandsEvolved, PerkLib.OrcAdrenalGlandsFinalForm]);
+
+		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
+		outputText("<b>\nBloodstream Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.VampiricBloodsteam, PerkLib.VampiricBloodsteamEvolved, PerkLib.VampiricBloodsteamFinalForm]);
+		mutationsDatabaseVerify([PerkLib.HinezumiBurningBlood, PerkLib.HinezumiBurningBloodEvolved, PerkLib.HinezumiBurningBloodFinalForm]);
+		mutationsDatabaseVerify([PerkLib.FeyArcaneBloodstream, PerkLib.FeyArcaneBloodstreamEvolved, PerkLib.FeyArcaneBloodstreamFinalForm]);
+
+		//Fat tissue Mutations
+		outputText("<b>\nFat and Tissue Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.PigBoarFat, PerkLib.PigBoarFatEvolved, PerkLib.PigBoarFatFinalForm]);
+		mutationsDatabaseVerify([PerkLib.NaturalPunchingBag, PerkLib.NaturalPunchingBagEvolved, PerkLib.NaturalPunchingBagFinalForm]);
+		mutationsDatabaseVerify([PerkLib.WhaleFat, PerkLib.WhaleFatEvolved, PerkLib.WhaleFatFinalForm]);
+		mutationsDatabaseVerify([PerkLib.YetiFat, PerkLib.YetiFatEvolved, PerkLib.YetiFatFinalForm]);
+
+		//Lungs Mutations
+		outputText("<b>\nLungs Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.DraconicLungs, PerkLib.DraconicLungsEvolved, PerkLib.DraconicLungsFinalForm]);
+		mutationsDatabaseVerify([PerkLib.CaveWyrmLungs, PerkLib.CaveWyrmLungsEvolved, PerkLib.CaveWyrmLungsFinalForm]);
+		mutationsDatabaseVerify([PerkLib.MelkieLung, PerkLib.MelkieLungEvolved, PerkLib.MelkieLungFinalForm]);
+		mutationsDatabaseVerify([PerkLib.DrakeLungs, PerkLib.DrakeLungsEvolved, PerkLib.DrakeLungsFinalForm]);
+
+		//Metabolism Mutations
+		outputText("<b>\nMetabolism Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.ManticoreMetabolism, PerkLib.ManticoreMetabolismEvolved]);
+		mutationsDatabaseVerify([PerkLib.DisplacerMetabolism, PerkLib.DisplacerMetabolismEvolved]);
+
+		//Ovaries Mutations
+		outputText("<b>\nOvaries Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.LactaBovinaOvaries, PerkLib.LactaBovinaOvariesEvolved, PerkLib.LactaBovinaOvariesFinalForm]);
+		mutationsDatabaseVerify([PerkLib.FloralOvaries, PerkLib.FloralOvariesEvolved, PerkLib.FloralOvariesFinalForm]);
+
+		//Testicle Mutations
+		outputText("<b>\nBalls Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.MinotaurTesticles, PerkLib.MinotaurTesticlesEvolved, PerkLib.MinotaurTesticlesFinalForm]);
+		mutationsDatabaseVerify([PerkLib.EasterBunnyBalls], "Neon Pink Eggs");
+		mutationsDatabaseVerify([PerkLib.NukiNuts, PerkLib.NukiNutsEvolved, PerkLib.NukiNutsFinalForm]);
+
+		//Eyes Mutations
+		outputText("<b>\nEye Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.GorgonsEyes, PerkLib.GorgonsEyesEvolved]);
+		mutationsDatabaseVerify([PerkLib.GazerEye, PerkLib.GazerEyeEvolved, PerkLib.GazerEyeFinalForm]);
+
+		//Peripheral/NervSys Mutations
+		outputText("<b>\nPeripheral Nervous System Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.ElvishPeripheralNervSys, PerkLib.ElvishPeripheralNervSysEvolved, PerkLib.ElvishPeripheralNervSysFinalForm]);
+
+		//Bones and Marrow Mutations
+		outputText("<b>\nBones and Marrow Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.LizanMarrow, PerkLib.LizanMarrowEvolved, PerkLib.LizanMarrowFinalForm]);
+		mutationsDatabaseVerify([PerkLib.DraconicBones, PerkLib.DraconicBonesEvolved, PerkLib.DraconicBonesFinalForm]);
+		mutationsDatabaseVerify([PerkLib.HarpyHollowBones, PerkLib.HarpyHollowBonesEvolved, PerkLib.HarpyHollowBonesFinalForm]);
+
+		//Thyroid Glands Mutations
+		outputText("<b>\nThyroid Gland Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.KitsuneThyroidGland, PerkLib.KitsuneThyroidGlandEvolved, PerkLib.KitsuneThyroidGlandFinalForm]);
+		mutationsDatabaseVerify([PerkLib.NekomataThyroidGland, PerkLib.NekomataThyroidGlandEvolved, PerkLib.NekomataThyroidGlandFinalForm]);
+
+		//ParaThyroid Glands Mutations. What's the difference between this and the above???
+		outputText("<b>\nParaThyroid Glands Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.KitsuneParathyroidGlands, PerkLib.KitsuneParathyroidGlandsEvolved, PerkLib.KitsuneParathyroidGlandsFinalForm]);
+		mutationsDatabaseVerify([PerkLib.HellcatParathyroidGlands, PerkLib.HellcatParathyroidGlandsEvolved, PerkLib.HellcatParathyroidGlandsFinalForm]);
+
+		//Dragon Mutations
+		outputText("<b>\nDragon Mutations:</b>");
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
+		mutationsDatabaseVerify([PerkLib.DraconicBones, PerkLib.DraconicBonesEvolved, PerkLib.DraconicBonesFinalForm]);
+		mutationsDatabaseVerify([PerkLib.DraconicHeart, PerkLib.DraconicHeartEvolved, PerkLib.DraconicHeartFinalForm]);
+		mutationsDatabaseVerify([PerkLib.DraconicLungs, PerkLib.DraconicLungsEvolved, PerkLib.DraconicLungsFinalForm]);
+
+		//Kitsune Mutations
+		outputText("<b>\nKitsune Mutations:</b>");
+		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
+		mutationsDatabaseVerify([PerkLib.KitsuneThyroidGland, PerkLib.KitsuneThyroidGlandEvolved, PerkLib.KitsuneThyroidGlandFinalForm]);
+		mutationsDatabaseVerify([PerkLib.KitsuneParathyroidGlands, PerkLib.KitsuneParathyroidGlandsEvolved, PerkLib.KitsuneParathyroidGlandsFinalForm]);
+
+		addButton(9, "Back", displayPerks);
+	}
+
+	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
+	public function mutationsDatabaseVerify(perkName:Array, acquireReq:String = ""):void {
+		var perkCount:int = 0;
+		if(perkName.length > 1){	//Checks if perk has tiers. Temp solution until Orm uses the perk versioning system.
+			for each(var perkTier:PerkType in perkName) {
+				if (player.hasPerk(perkTier)){
+					perkCount += 1;
+				}
+				else{
+					break;
+				}
+			}
+		}
+		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
+			var perkYesNo:Boolean = false;
+			if (player.hasPerk(perkName[0])) {	//Just checking if you have the base.
+				outputText("\n" + perkName[0].name + ": <font color=\"#008000\">Acquired.</font>");
+				perkYesNo = true;
+			} else {
+				outputText("\n" + perkName[0].name + ": <font color=\"#800000\">Missing.</font>");
+			}
+			outputText("\nTier: " + String(perkCount));
+			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
+				var reqs:Array = [];
+				if (perkCount != perkName.length && perkName[perkCount].requirements.length > 0) {
+					for each (var cond:Object in perkName[perkCount].requirements) {
+						var reqStr:String = cond.text;
+						if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
+							reqs.push("<font color='#000000'>" + cond.text + "</font>");
+						}
+					}
+				}
+				else if (perkCount == perkName.length){	//Highest tier.
+					reqs.push("You already have the highest tier");
+				}
+				else{	//Information not available.
+					reqs.push("Missing data. Perhaps Unacquirable?");
+				}
+				outputText("\nPrerequisites/Acquisition:" + reqs.join(", ") + ".");
+			}
+			else {	//Manual done this way.
+				outputText("\nPrerequisites/Acquisition:" + acquireReq + ".");
+			}
+			//Description of mutations.
+			if (!perkCount == 0){	//Otherwise, overflow if max.
+				perkCount -= 1;
+			}
+			outputText("\nDescription: ");
+			if(perkName[perkCount].desc().length == 1) {	//Some desc. contains only "."
+				outputText("No description available.");
+			}
+			else{
+				outputText(perkName[perkCount].desc());
+			}
+		}
+		else { //Help Off
+			if (!perkCount == 0){
+				perkCount -= 1;
+			}
+			if (player.hasPerk(perkName[0])) {
+				outputText("\n" + perkName[0].name + ": <font color=\"#008000\">Acquired.</font>");
+				outputText("\nDescription: " + perkName[perkCount].desc());
+			} else {
+				outputText("\n???" + "\nDescription: ???");
+			}
+		}
+		outputText("\n");
 	}
 
 	public function perkDatabase(page:int=0, count:int=20):void {
