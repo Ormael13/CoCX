@@ -3533,7 +3533,7 @@ public class PerkLib
 		public static const LightningAffinity:PerkType = mk("Lightning Affinity", "Lightning Affinity",
 				"Increase all damage dealt with lightning spells by 100% and reduce lightning damage taken by 50%.");
 		public static const LightningClaw:PerkType = mk("Lightning claw", "Lightning claw",
-				"Your natural weapons are charged with raiju electricity adding a lusty effect to all attacks.");
+				"Your natural weapons are charged with raiju electricity adding a lusty discharge effect to all attacks.");
 		public static const LizanRegeneration:PerkType = mk("Lizan Regeneration", "Lizan Regeneration",
 				"Regenerates 1.5% of HP per round in combat and 3% of HP per hour and additional slightly increasing maximal attainable natural healing rate.");
 		public static const FromTheFrozenWaste:PerkType = mk("From the frozen waste", "Lord of the Frozen Wastes",
