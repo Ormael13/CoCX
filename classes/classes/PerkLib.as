@@ -319,8 +319,8 @@ public class PerkLib
 				"Further increase the power of all Wind and Lightning abilities and Increase wind and electricity resistance by 10%.",
 				"You've chosen the 'Heart of the storm (Evolved)' perk. Further increase the power of all Wind and Lightning abilities and Increase wind and electricity resistance by 10%.").withBuffs({'spe.mult':0.10});
 		public static const HeartOfTheStormFinalForm:PerkType = mk("Heart of the storm (Final Form)", "Heart of the storm (Final Form)",
-				"Further increase the power of all Wind and Lightning abilities and Increases wind and electricity resistance by another 30%. You may fly without end so long as you got the ability to fly.",
-				"You've chosen the 'Heart of the storm (Final Form)' perk. Further increase the power of all Wind and Lightning abilities and Increases wind and electricity resistance by another 30%. You may fly without end so long as you got the ability to fly.").withBuffs({'spe.mult':0.20});
+				"Further increase the power of all Wind and Lightning abilities and Increases wind and electricity resistance by another 30%. You may fly without end so long as you got the ability to fly. If you got energy attacks you have now a chance to stun your opponents with them.",
+				"You've chosen the 'Heart of the storm (Final Form)' perk. Further increase the power of all Wind and Lightning abilities and Increases wind and electricity resistance by another 30%. You may fly without end so long as you got the ability to fly. If you got energy attacks you have now a chance to stun your opponents with them.").withBuffs({'spe.mult':0.20});
 		public static const HexKnowledge:PerkType = mk("Hex Knowledge", "Hex Knowledge",
 				"Allow to cast hex magic spells as long corruption is 80+, locks out access to white spells and deal 20% more dmg when using black or hex magic to attack pure enemies.",
 				"You've chosen the 'Hex Knowledge' perk, gaining access to hex magic.");

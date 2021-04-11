@@ -1046,7 +1046,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (crit) outputText(" <b>Critical!</b>");
 			outputText("\n\n");
 			if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-			if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+			if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,5,0,0,0);
 			player.removeStatusEffect(StatusEffects.ChanneledAttack);
 			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
 			enemyAI();
@@ -1181,6 +1181,11 @@ public class MagicSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)){
+			if (rand(100) < 10) {
+				if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+			}
+		}
 		else enemyAI();
 	}
 
@@ -1284,6 +1289,11 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.bonusExpAfterSuccesfullTease();
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)){
+			if (rand(100) < 10) {
+				if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+			}
+		}
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
