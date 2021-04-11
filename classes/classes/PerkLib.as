@@ -386,7 +386,8 @@ public class PerkLib
 				"You've chosen the 'Job: Beastlord' perk, .");
 				"You've trained to use of your own body and natural weapons to their limits in fights.",
 				"You've chosen the 'Job: Beast Warrior' perk, training yourself in the art of feral combat.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05, "int.mult":-0.05, "wis.mult":-0.05});
-		*/public static const GazerEye:PerkType = mk("Gazer Eye", "Gazer Eye",
+		*/
+		public static const GazerEye:PerkType = mk("Gazer Eye", "Gazer Eye",
 				"Keep true seeing at all times and empower gaze attacks.",
 				"You've chosen the 'Gazer Eye' perk, .").withBuffs({'int.mult':0.05});
 		public static const GazerEyeEvolved:PerkType = mk("Gazer Eye (Evolved)", "Gazer Eye (Evolved)",
@@ -1398,7 +1399,7 @@ public class PerkLib
 				"You've chosen the 'Frozen heart (Evolved)' perk, deepening your heart freezing.");
 		public static const FrozenHeartFinalForm:PerkType = mk("Frozen heart (Final Form)", "Frozen heart (Final Form)",
 				"Ice barrage and hungering cold abilities increase their damage by another 30%, hungering cold last for 3 additional turn and recharge 3 turn faster. Gain an extra modifier from your intelligence to health. (Increase original value by 50%).",
-				"You've chosen the 'Frozen heart (Final Form)' perk, goying beyond just a very frozen heart.");
+				"You've chosen the 'Frozen heart (Final Form)' perk, going beyond just a very frozen heart.");
 		public static const Furnace:PerkType = mk("Furnace", "Furnace",
 				"I don't know how you worked without one, but now you have a furnace! Now take your upgraded armor proficiency while I get answers... (+5% phys/mag resistance)",
 				"You've chosen the 'Furnace' perk, increasing armor proficiency. (+5% phys/mag resistance)");
@@ -2526,7 +2527,7 @@ public class PerkLib
 				"You've trained in prestige art of hex magic. (+60 to max int, +20 to max lib - scalable; +20% to black magic spellpower, -40% to white magic spellpower)",
 				"You've chosen the 'Prestige Job: Warlock' perk, training yourself to became Warlock.").withBuffs({'int.mult':0.60,'lib.mult':0.20});
 		public static const Priest:PerkType = mk("Priest", "Priest",
-				"You now speak during mass, your words of wisdom empowerin others and you to have a lower minimum libido and boost lust resistance. (-2 min libido/+5% to lust resistance)",
+				"You now speak during mass, your words of wisdom empowering others and you to have a lower minimum libido and boost lust resistance. (-2 min libido/+5% to lust resistance)",
 				"You've chosen the 'Priest' perk, lowering min libido by 2 and rise lust resistance by 5%.");
 		public static const PrimalFuryI:PerkType = mk("Primal Fury I", "Primal Fury I",
 				"Raises max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.",
@@ -6273,7 +6274,7 @@ public class PerkLib
 					.requireInt(50)
 					.requireWis(50)
 					.requireCustomFunction(function (player:Player):Boolean {
-					return (player.statusEffectv1(StatusEffects.SummonedElementals) + player.flags[kFLAGS.PERNAMENT_GOLEMS_BAG]) >= 3;
+					return (player.statusEffectv1(StatusEffects.SummonedElementals) + player.flags[kFLAGS.PERMANENT_GOLEMS_BAG]) >= 3;
 					}, "3+ pets/minions");
             ShootTheLoadAndHitTheRoad.requireLevel(6)
                     .requirePerk(JobLeader)
@@ -6714,7 +6715,7 @@ public class PerkLib
 					.requireInt(100)
 					.requireWis(100)
 					.requireCustomFunction(function (player:Player):Boolean {
-					return (player.statusEffectv1(StatusEffects.SummonedElementals) + player.flags[kFLAGS.PERNAMENT_GOLEMS_BAG]) >= 6;
+					return (player.statusEffectv1(StatusEffects.SummonedElementals) + player.flags[kFLAGS.PERMANENT_GOLEMS_BAG]) >= 6;
 					}, "6+ pets/minions");
 			Fusion.requireLevel(24)
 					.requirePerk(Enhancement);
@@ -6933,7 +6934,7 @@ public class PerkLib
 					.requireInt(150)
 					.requireWis(150)
 					.requireCustomFunction(function (player:Player):Boolean {
-					return (player.statusEffectv1(StatusEffects.SummonedElementals) + player.flags[kFLAGS.PERNAMENT_GOLEMS_BAG]) >= 10;
+					return (player.statusEffectv1(StatusEffects.SummonedElementals) + player.flags[kFLAGS.PERMANENT_GOLEMS_BAG]) >= 10;
 					}, "10+ pets/minions");
             MotivationSu.requireLevel(36)
                     .requirePerk(MotivationEx);//.requirePerk(AdvancedLeadership)
@@ -7032,7 +7033,7 @@ public class PerkLib
 					.requireInt(200)
 					.requireWis(200)
 					.requireCustomFunction(function (player:Player):Boolean {
-					return (player.statusEffectv1(StatusEffects.SummonedElementals) + player.flags[kFLAGS.PERNAMENT_GOLEMS_BAG]) >= 15;
+					return (player.statusEffectv1(StatusEffects.SummonedElementals) + player.flags[kFLAGS.PERMANENT_GOLEMS_BAG]) >= 15;
 					}, "15+ pets/minions");
 			Refinement.requireLevel(72)
 					.requirePerk(Enchantment);

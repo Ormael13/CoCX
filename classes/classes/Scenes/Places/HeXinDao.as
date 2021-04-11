@@ -194,7 +194,7 @@ public class HeXinDao extends BaseContent
     }
     public function golemmerchant():void {
         clearOutput();
-        outputText("You enter a shop titled 'Soul Items' from the sign on its entrance. Inside you see a few shelves with many different items on display.  It doesn't seem like this merchant has a wide choice of things to sell, but for someone at the beginning of their soul cultivation path, it's probably enough.  Sensing motion from a corner of the shop pernamently covered in darkness, a person appears without making a sound.  'He' is around five feet tall with the appearance of some kind of demonic monster.");
+        outputText("You enter a shop titled 'Soul Items' from the sign on its entrance. Inside you see a few shelves with many different items on display.  It doesn't seem like this merchant has a wide choice of things to sell, but for someone at the beginning of their soul cultivation path, it's probably enough.  Sensing motion from a corner of the shop permanently covered in darkness, a person appears without making a sound.  'He' is around five feet tall with the appearance of some kind of demonic monster.");
         if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) outputText(" But he does look quite similar to the gargoyle from the cathedral.");
         outputText("\n\n\"<i>Welcome to my master's shop, dear customer. Feel free to look around,</i>\" he says. \n\n");
         if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {

@@ -13881,7 +13881,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.lowerBody == LowerBody.CLOVEN_HOOFED) outputText("\n\nYour lower half suddenly transform back into two human legs. You so missed having normal legs like before.");
                 if (player.lowerBody == LowerBody.NAGA) outputText("\n\nYour tail split in two and turn into a pair of legs. You missed behing able to walk instead of slithering around.");
                 if (player.lowerBody == LowerBody.MELKIE) humanizeLowerBody();
-                outputText("<b>  You now have human legs in place of your feet!</b>");
+                outputText("\n\n<b>You now have human legs in place of your feet!</b>");
                 setLowerBody(LowerBody.HUMAN);
                 player.legCount = 2;
                 MutagenBonus("spe", 1);
@@ -14332,7 +14332,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.lowerBody == LowerBody.CLOVEN_HOOFED) outputText("\n\nYour lower half suddenly transform back into two human legs. You so missed having normal legs like before.");
                 if (player.lowerBody == LowerBody.NAGA) outputText("\n\nYour tail split in two and turn into a pair of legs. You missed behing able to walk instead of slithering around.");
                 if (player.lowerBody == LowerBody.MELKIE) humanizeLowerBody();
-                outputText("<b>  You now have human legs in place of your feet!</b>");
+                outputText("\n\n<b>You now have human legs in place of your feet!</b>");
                 setLowerBody(LowerBody.HUMAN);
                 player.legCount = 2;
                 MutagenBonus("spe", 1);

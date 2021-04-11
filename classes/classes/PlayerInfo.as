@@ -101,6 +101,7 @@ public class PlayerInfo extends BaseContent {
 
 			bodyStats += "<b>Total Cock Length:</b> " + Math.round(totalCockLength) + " inches\n";
 			bodyStats += "<b>Total Cock Girth:</b> " + Math.round(totalCockGirth) + " inches\n";
+			bodyStats += "<b>Hours since last cum:</b> " + player.hoursSinceCum + "\n";
 
 		}
 
@@ -305,7 +306,7 @@ public class PlayerInfo extends BaseContent {
 			statEffects += "Eating in 'Shira of the east' restaurant effect - " + player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) + " hours remaining. (Increased stats and elemental resistance)\n";
 
 		if (player.statusEffectv1(StatusEffects.RaijuLightningStatus) > 0)
-			statEffects += "Raiju Lightning - " + player.statusEffectv1(StatusEffects.RaijuLightningStatus) + " hours remaining. (During masturbation: rise instead lowering lust and extend duration of this effect by few hours. Could also cause uncontroled slowly transformation into raiju.)\n";
+			statEffects += "Raiju Lightning - " + player.statusEffectv1(StatusEffects.RaijuLightningStatus) + " hours remaining. (During masturbation: Increase lust rather than dropping and extends duration of this effect by a few hours. Can also cause uncontrolled transformations into a raiju.)\n";
 
 		if (player.statusEffectv1(StatusEffects.KonstantinArmorPolishing) > 0)
 			statEffects += "Armor Polishing - " + player.statusEffectv1(StatusEffects.KonstantinArmorPolishing) + " hours remaining. (+" + player.statusEffectv2(StatusEffects.KonstantinArmorPolishing) + "% to armor)\n";
@@ -333,19 +334,19 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		if (player.statusEffectv1(StatusEffects.Bammed1) > 0) {
-			if (player.statusEffectv1(StatusEffects.Bammed1) == 3) statEffects += "Bammed <b>(Disables melee attacks pernamently)</b>\n";
+			if (player.statusEffectv1(StatusEffects.Bammed1) == 3) statEffects += "Bammed <b>(Disables melee attacks permanently)</b>\n";
 			else statEffects += "Bammed - " + player.statusEffectv3(StatusEffects.Bammed1) + " hours remaining. (Disables melee attacks)\n";
 		}
 		if (player.statusEffectv2(StatusEffects.Bammed1) > 0) {
-			if (player.statusEffectv2(StatusEffects.Bammed1) == 3) statEffects += "Bammed <b>(Disables range attacks pernamently)</b>\n";
+			if (player.statusEffectv2(StatusEffects.Bammed1) == 3) statEffects += "Bammed <b>(Disables range attacks permanently)</b>\n";
 			else statEffects += "Bammed - " + player.statusEffectv4(StatusEffects.Bammed1) + " hours remaining. (Disables range attacks)\n";
 		}
 		if (player.statusEffectv1(StatusEffects.Bammed2) > 0) {
-			if (player.statusEffectv1(StatusEffects.Bammed2) == 3) statEffects += "Bammed <b>(Disables physical specials pernamently)</b>\n";
+			if (player.statusEffectv1(StatusEffects.Bammed2) == 3) statEffects += "Bammed <b>(Disables physical specials permanently)</b>\n";
 			else statEffects += "Bammed - " + player.statusEffectv3(StatusEffects.Bammed2) + " hours remaining. (Disables physical specials)\n";
 		}
 		if (player.statusEffectv2(StatusEffects.Bammed2) > 0) {
-			if (player.statusEffectv2(StatusEffects.Bammed2) == 3) statEffects += "Bammed <b>(Disables magic specials pernamently)</b>\n";
+			if (player.statusEffectv2(StatusEffects.Bammed2) == 3) statEffects += "Bammed <b>(Disables magic specials permanently)</b>\n";
 			else statEffects += "Bammed - " + player.statusEffectv4(StatusEffects.Bammed2) + " hours remaining. (Disables magic specials)\n";
 		}
 
@@ -363,8 +364,7 @@ public class PlayerInfo extends BaseContent {
 		addButton(7, "NPC's", displayStatsNpcs);
 		addButton(8, "Children", displayStatsChildren);
 		addButton(9, "Mastery", displayStatsmastery);
-		addButton(10, "Mutations", displayMutationsUsed);
-	}
+		}
 	public function displayStatsCombat():void {
 		spriteSelect(-1);
 		clearOutput();
@@ -514,7 +514,6 @@ public class PlayerInfo extends BaseContent {
 		addButton(7, "NPC's", displayStatsNpcs);
 		addButton(8, "Children", displayStatsChildren);
 		addButton(9, "Mastery", displayStatsmastery);
-		addButton(10, "Mutations", displayMutationsUsed);
 	}
 	public function displayStatsNpcs():void {
 		spriteSelect(-1);
@@ -1000,7 +999,6 @@ public class PlayerInfo extends BaseContent {
 		addButtonDisabled(7, "NPC's", "You are currently at this stats page.");
 		addButton(8, "Children", displayStatsChildren);
 		addButton(9, "Mastery", displayStatsmastery);
-		addButton(10, "Mutations", displayMutationsUsed);
 	}
 	public function displayStatsChildren():void {
 		spriteSelect(-1);
@@ -1157,7 +1155,6 @@ public class PlayerInfo extends BaseContent {
 		addButton(7, "NPC's", displayStatsNpcs);
 		addButtonDisabled(8, "Children", "You are currently at this stats page.");
 		addButton(9, "Mastery", displayStatsmastery);
-		addButton(10, "Mutations", displayMutationsUsed);
 	}
 	public function displayStatsmastery():void {
 		spriteSelect(-1);
@@ -1254,177 +1251,6 @@ public class PlayerInfo extends BaseContent {
 		addButton(7, "NPC's", displayStatsNpcs);
 		addButton(8, "Children", displayStatsChildren);
 		addButtonDisabled(9, "Mastery", "You are currently at this stats page.");
-		addButton(10, "Mutations", displayMutationsUsed);
-	}
-
-	//Mutations Tracker
-	public function displayMutationsUsed():void{
-		spriteSelect(-1);
-		clearOutput();
-		displayHeader("Mutation Stats");
-		var mutationCount:Number = 1
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
-			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
-			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
-			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation04) >= 0)
-			mutationCount++;
-		outputText("\nYou have " + mutationCount + " mutation slots per part."+
-		"\nNote: Not all body parts will use all available slots." +
-		"\nPerks may have multiple stages. Due to the number of tiers per perk, currently it will only display the first form, until the cleaner Perk-version code is utilized.");
-
-		//Every time a new mutation is added, it will need to be added in manually, since there's nowhere I can just pull the information from.
-		//Also, when Orm reworks perks to use v1/v2/v3 things, can also display the current tier.
-		//Source: Player.as maxHeartMutations/etc. For mutations, PerkLib.as for desc.
-
-		outputText("\n");
-		//Heart Mutations
-		outputText("<b>\nHeart Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.BlackHeart);
-		displayMutationsUsedSpoilers(PerkLib.FrozenHeart);
-		displayMutationsUsedSpoilers(PerkLib.ObsidianHeart);
-		displayMutationsUsedSpoilers(PerkLib.TwinHeart);
-		displayMutationsUsedSpoilers(PerkLib.HeartOfTheStorm);
-		displayMutationsUsedSpoilers(PerkLib.DraconicHeart);
-
-		//Muscle Mutations
-		outputText("<b>\nMuscle Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.MantislikeAgility);
-		displayMutationsUsedSpoilers(PerkLib.OniMusculature);
-
-		//Mouth Mutations
-		outputText("<b>\nMouth Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.VenomGlands);
-		displayMutationsUsedSpoilers(PerkLib.HollowFangs);
-
-		//Adrenal Glands Mutations
-		outputText("<b>\nAdrenal Gland Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.SalamanderAdrenalGlands);
-		displayMutationsUsedSpoilers(PerkLib.OrcAdrenalGlands);
-
-		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
-		outputText("<b>\nBloodstream Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.VampiricBloodsteam);
-		displayMutationsUsedSpoilers(PerkLib.HinezumiBurningBlood);
-		displayMutationsUsedSpoilers(PerkLib.FeyArcaneBloodstream);
-
-		//Fat tissue Mutations
-		outputText("<b>\nFat and Tissue Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.PigBoarFat);
-		displayMutationsUsedSpoilers(PerkLib.NaturalPunchingBag);
-		displayMutationsUsedSpoilers(PerkLib.WhaleFat);
-		displayMutationsUsedSpoilers(PerkLib.YetiFat);
-
-		//Lungs Mutations
-		outputText("<b>\nLungs Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.DraconicLungs);
-		displayMutationsUsedSpoilers(PerkLib.CaveWyrmLungs);
-		displayMutationsUsedSpoilers(PerkLib.MelkieLung);
-		displayMutationsUsedSpoilers(PerkLib.DrakeLungs);
-
-		//Metabolism Mutations
-		outputText("<b>\nMetabolism Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.ManticoreMetabolism);
-		displayMutationsUsedSpoilers(PerkLib.DisplacerMetabolism);
-
-		//Ovaries Mutations
-		outputText("<b>\nOvaries Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.LactaBovinaOvaries);
-		displayMutationsUsedSpoilers(PerkLib.FloralOvaries);
-
-		//Testicle Mutations
-		outputText("<b>\nBalls Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.MinotaurTesticles);
-		displayMutationsUsedSpoilers(PerkLib.EasterBunnyBalls, "Neon Pink Eggs");
-		displayMutationsUsedSpoilers(PerkLib.NukiNuts);
-
-		//Eyes Mutations
-		outputText("<b>\nEye Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.GorgonsEyes);
-		displayMutationsUsedSpoilers(PerkLib.GazerEye);
-
-		//Peripheral/NervSys Mutations
-		outputText("<b>\nPeripheral Nervous System Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.ElvishPeripheralNervSys);
-
-		//Bones and Marrow Mutations
-		outputText("<b>\nBones and Marrow Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.LizanMarrow);
-		displayMutationsUsedSpoilers(PerkLib.DraconicBones);
-		displayMutationsUsedSpoilers(PerkLib.HarpyHollowBones);
-
-		//Thyroid Glands Mutations
-		outputText("<b>\nThyroid Gland Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.KitsuneThyroidGland);
-		displayMutationsUsedSpoilers(PerkLib.NekomataThyroidGland);
-
-		//ParaThyroid Glands Mutations. What's the difference between this and the above???
-		outputText("<b>\nParaThyroid Glands Mutations:</b>");
-		displayMutationsUsedSpoilers(PerkLib.KitsuneParathyroidGlands);
-		displayMutationsUsedSpoilers(PerkLib.HellcatParathyroidGlands);
-
-		//Dragon Mutations
-		outputText("<b>\nDragon Mutations:</b>");
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
-		displayMutationsUsedSpoilers(PerkLib.DraconicBones);
-		displayMutationsUsedSpoilers(PerkLib.DraconicHeart);
-		displayMutationsUsedSpoilers(PerkLib.DraconicLungs);
-
-		//Kitsune Mutations
-		outputText("<b>\nKitsune Mutations:</b>");
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
-		displayMutationsUsedSpoilers(PerkLib.KitsuneThyroidGland);
-		displayMutationsUsedSpoilers(PerkLib.KitsuneParathyroidGlands);
-
-		menu();
-		addButton(0, "Next", playerMenu);
-		addButton(5, "General", displayStats);
-		addButton(6, "Combat", displayStatsCombat);
-		addButton(7, "NPC's", displayStatsNpcs);
-		addButton(8, "Children", displayStatsChildren);
-		addButton(9, "Mastery", displayStatsmastery);
-		addButtonDisabled(10, "Mutations", "You are currently at this stats page.");
-	}
-
-	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
-	public function displayMutationsUsedSpoilers(perkName:PerkType, acquireReq:String = ""):void {
-		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
-			if (player.hasPerk(perkName)) {
-				outputText("\n" + perkName.name + ": <font color=\"#008000\">Acquired.</font>");
-			} else {
-				outputText("\n" + perkName.name + ": <font color=\"#800000\">Missing.</font>");
-			}
-			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
-				var reqs:Array = [];
-				var reqcount:int = 1;
-				if (perkName.requirements.length > 0) {
-					for each (var cond:Object in perkName.requirements) {
-						if (reqcount > 1) { //Ignores the "free mutation slot" note.
-							reqs.push("<font color='#000000'>" + cond.text + "</font>");
-						}
-						reqcount++;
-					}
-				}
-				else{	//Information not available.
-					reqs.push("Missing data. Perhaps Unacquirable?");
-				}
-				outputText("\nPrerequisites/Acquisition:" + reqs.join(", "));
-			}
-			else {
-				outputText("\nPrerequisites/Acquisition:" + acquireReq);
-			}
-		}
-		else { //Help Off
-			if (player.hasPerk(perkName)) {
-				outputText("\n" + perkName.name + ": Acquired.");
-			} else {
-					outputText("\n???");
-				}
-		}
-		outputText("\n");
 	}
 
 	//------------
@@ -1950,7 +1776,7 @@ public class PlayerInfo extends BaseContent {
 				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this perk.");
 				else addButtonDisabled(0, "HJ:BD", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.WayOfTheBlood)) addButtonDisabled(1, "WOTB", "You already have this perk.");
-				else addButtonDisabled(1, "WOTB", "YYou do not have enough super perk points to obtain this perk.");
+				else addButtonDisabled(1, "WOTB", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.YourPainMyPower)) addButtonDisabled(2, "YPMP", "You already have this perk.");
 				else addButtonDisabled(2, "YPMP", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) addButtonDisabled(3, "MBFBP", "You already have this perk.");
