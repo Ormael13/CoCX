@@ -742,10 +742,8 @@ public class PerkMenu extends BaseContent {
 			}
 		}
 		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
-			var perkYesNo:Boolean = false;
 			if (player.hasPerk(perkName[0])) {	//Just checking if you have the base.
 				outputText("\n" + perkName[0].name + ": <font color=\"#008000\">Acquired.</font>");
-				perkYesNo = true;
 			} else {
 				outputText("\n" + perkName[0].name + ": <font color=\"#800000\">Missing.</font>");
 			}
