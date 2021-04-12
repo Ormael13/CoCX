@@ -2989,13 +2989,13 @@ public class PerkLib
 				"Increase your armor by 2 and magic resistance by 1 so long as you have scale chitin fur or other natural armor. (boost scalable with ng tiers)",
 				"You've chosen the 'Tough Hide' perk, increase your armor and magic resistance as long you have any natural armor!");
 		public static const TrachealSystem:PerkType = mk("Tracheal System", "Tracheal System",
-				"Your body posses rudimentary respiratory system of the insects.",
+				"Your body possesses rudimentary respiratory system of the insects.",
 				"You've chosen the 'Tracheal System' perk, by becoming much more insect-like your body started to denvelop crude version of insects breathing system.");
 		public static const TrachealSystemEvolved:PerkType = mk("Tracheal System (Evolved)", "Tracheal System (Evolved)",
-				"Your body posses half developed respiratory system of the insects. (+5 to max str (scalable))",
+				"Your body possesses half developed respiratory system of the insects. (+5 to max str (scalable))",
 				"You've chosen the 'Tracheal System (Evolved)' perk, continuous exposition to insectoidal changes caused your tracheal system evolution into more complete form.").withBuffs({'str.mult':0.05});
 		public static const TrachealSystemFinalForm:PerkType = mk("Tracheal System (Final Form)", "Tracheal System (Final Form)",
-				"Your body posses fully developed respiratory system of the insects. (+10 to max spe (scalable))",
+				"Your body possesses fully developed respiratory system of the insects. (+10 to max spe (scalable))",
 				"You've chosen the 'Tracheal System (Final Form)' perk, continued exposition to insectoidal changes caused your tracheal system evolution into it final form.").withBuffs({'spe.mult':0.10});
 		public static const TraditionalMageI:PerkType = mk("Traditional Mage I", "Traditional Mage I",
 				"You gain 100% spell effect multiplier while using a staff and either a tome or no ranged weapon.",
@@ -3136,14 +3136,14 @@ public class PerkLib
 				"Your bloodsteam fully adapted to presence of vampiric blood. Increases the maximum numbers of stacks of Vampire Thirst by 60 and increase their potency by 50%.",
 				"You've chosen the 'Vampiric Bloodsteam (Final Form)' perk. Your bloodsteam fully adapted to presence of vampiric blood. Increases the maximum numbers of stacks of Vampire Thirst by 60 and increase their potency by 50%.").withBuffs({'lib.mult':0.15});
 		public static const VenomGlands:PerkType = mk("Venom Glands", "Venom Glands",
-				"Your body posses rudimentary venom glands along with changes in teeth to been able use this venom when biting.",
-				"You've chosen the 'Venom Glands' perk. Your body posses rudimentary venom glands along with changes in teeth to been able use this venom when biting.").withBuffs({'tou.mult':0.05});
+				"Your body possesses rudimentary venom glands along with changes in teeth to been able use this venom when biting.",
+				"You've chosen the 'Venom Glands' perk. Your body possesses rudimentary venom glands along with changes in teeth to been able use this venom when biting.").withBuffs({'tou.mult':0.05});
 		public static const VenomGlandsEvolved:PerkType = mk("Venom Glands (Evolved)", "Venom Glands (Evolved)",
-				"Your body posses half developed venom glands increasing their capacity. +5% poison resistance.",
-				"You've chosen the 'Venom Glands (Evolved)' perk. Your body posses half developed venom glands increasing their capacity. +5% poison resistance.").withBuffs({'tou.mult':0.10});
+				"Your body possesses half developed venom glands increasing their capacity. +5% poison resistance.",
+				"You've chosen the 'Venom Glands (Evolved)' perk. Your body possesses half developed venom glands increasing their capacity. +5% poison resistance.").withBuffs({'tou.mult':0.10});
 		public static const VenomGlandsFinalForm:PerkType = mk("Venom Glands (Final Form)", "Venom Glands (Final Form)",
-				"Your body posses fully developed venom glands with large reservoir of venom and good recharge speed. (+10% to poison resistance)",
-				"You've chosen the 'Venom Glands (Final Form)' perk. Your body posses fully developed venom glands with large reservoir of venom and good recharge speed. also raises poison resistance by +10%").withBuffs({'tou.mult':0.15});
+				"Your body possesses fully developed venom glands with large reservoir of venom and good recharge speed. (+10% to poison resistance)",
+				"You've chosen the 'Venom Glands (Final Form)' perk. Your body possesses fully developed venom glands with large reservoir of venom and good recharge speed. also raises poison resistance by +10%").withBuffs({'tou.mult':0.15});
 		public static const VerdantMight:PerkType = mk("Verdant Might", "Verdant Might",
 				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.",
 				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.");

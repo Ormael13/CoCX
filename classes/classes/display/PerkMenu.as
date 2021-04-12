@@ -610,13 +610,13 @@ public class PerkMenu extends BaseContent {
 		clearOutput();
 		displayHeader("Mutation Stats");
 		var mutationCount:Number = 1
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
+		if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
 			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
+		if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
 			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
+		if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation03))
 			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation04) >= 0)
+		if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
 			mutationCount++;
 		outputText("\nYou have " + mutationCount + " mutation slots per part."+
 				"\nNote: Not all body parts will use all available slots.");
