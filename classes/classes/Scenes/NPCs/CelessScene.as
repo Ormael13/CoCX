@@ -159,7 +159,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		doNext(camp.returnToCampUseOneHour);
 		//display("strings/campInteraction", myLocals);
 		outputText(_name + " sees you coming over from afar and cheers up right away.\n\n"+
-		"<i>\"Mom did you come over to see me?!\"</i>");
+		"<i>\"Mom, did you come over to see me?!\"</i>");
+		menu();
 		//addButton(0, "Appearance", scene, "strings/appearance", myLocals, campInteraction);
 		addButton(0,"Appearance",celessChildAppearance)
 		if (isAdult) {
@@ -540,6 +541,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				player.fertility += 10;
 				player.createVagina();
                 player.clitLength = .25;
+				menu();
 				//addButton(0, "Next", celessUnicornIntro1, 3, true);
 				addButton(0,"Next",celessGuardOkayFemale,true);
 				break;
@@ -593,6 +595,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					player.removeCock(0, 1);
 				}
 				player.createVagina();
+				menu();
 				//addButton(0, "Next", celessUnicornIntro2, 3, true);
 				addButton(0,"Next",celessGuardOkayFemale,true);
 				break;
@@ -966,6 +969,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		if (sceneName == "pureIncest" && player.cor > 80) {
 			_corruption++;
 			if (isCorrupt) {
+				menu();
 				addButton(0, "Next", incestScene, "pureCorruption");
 				addButton(0, "Next", incestPureCorruption);
 			}
