@@ -179,6 +179,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		function incestMenu():void {
 			if (isCorrupt) {
 				clearOutput();
+				outputText("How do you want to play with your daughter?");
 				var menu:ButtonDataList = new ButtonDataList();
 				//display("strings/incest/corruptMenu", myLocals);
 				menu.add("Suck her off", incestSuckHerOff);
