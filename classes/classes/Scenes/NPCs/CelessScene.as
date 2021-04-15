@@ -251,6 +251,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				""+_name+" whines as she finally orgasms, her sweet cum flooding your throat. It tastes like cake icing, making it an exercise on willpower to keep from desperately trying to get more. " +
 				"As her erection finally dies down, you feel something change in you as the cum reaches your stomach.");
 		CelessGoIntoHeatRut();
+		pureChildCorruption();
 		doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -569,7 +570,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		spriteSelect(SpriteDb.s_celessWhite);
 		switch (stage2) {
 			case 0:
-				scene("strings/forest-unicorn/intro/introAfterNightmareShowProof");
+				//scene("strings/forest-unicorn/intro/introAfterNightmareShowProof");
 				celessGuardNightmareShowProof();
 				menu();
 				addButton(0, "Okay", celessUnicornIntro2, (player.isMale() || player.isGenderless()) ? 2 : 3);
@@ -963,7 +964,24 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		doNext(campInteraction);
 	}
 
+	public function pureChildCorruption():void{
+		if (player.cor > 80){
+			_corruption++;
+			if (isCorrupt) {
+				menu();
+				//addButton(0, "Next", incestScene, "pureCorruption");
+				addButton(0, "Next", incestPureCorruption);
+			}
+			else {
+				outputText("Just as you're about to go, however, you catch a glimpse of" + _name +"’s horse dong as it resumes acting up, just as you wanted. " +
+						"You’ll need to keep her constantly aroused to educate her properly and set her on the path to depravity if she's to become a proper daughter of yours.");
+				dynStats("cor", -1);
+				doNext(camp.returnToCampUseOneHour);
+			}
+		}
+	}
 
+	/*
 	private function incestScene(sceneName:String):void {
 		var toDisplay:String = "strings/incest/" + sceneName;
 		scene(toDisplay, myLocals);
@@ -982,7 +1000,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			}
 		}
 	}
-	//*/
+	*/
 	
 	private function get myLocals():*{
 		return {
