@@ -1,4 +1,4 @@
-﻿//CoC Creature.as
+//CoC Creature.as
 package classes
 {
 import classes.BodyParts.Antennae;
@@ -1125,7 +1125,7 @@ public class Creature extends Utils
 			ass.host      = this;
 			breastRows    = [];
 			_perks        = new PerkManager(this);
-			statusEffects = [];
+			_statusEffects = new StatusEffectManager(this);
 			this.strStat.core.value = 15;
 			this.touStat.core.value = 15;
 			this.speStat.core.value = 15;
@@ -1280,11 +1280,6 @@ public class Creature extends Utils
 		public function get numPerks():int {
 			return _perks.count();
 		}
-		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
-		//Someone call the grammar police!
-		//TODO: Move monster status effects into perks. Needs investigation though.
-		public var statusEffects:Array;
-
 
 		//Functions
 
@@ -1317,7 +1312,6 @@ public class Creature extends Utils
 		 */
 		public function findPerk(ptype:PerkType):Number
 		{
-			trace("Find perk :( - " + ptype.id);
 			var perk:PerkClass = this._perks.get(ptype);
 			if (perk) {
 				return this._perks.asArray().indexOf(perk);
@@ -1392,126 +1386,94 @@ public class Creature extends Utils
 		{
 			return this._perks.getPerkValue(ptype, 4);
 		}
-
 		/*
 
 		[    S T A T U S   E F F E C T S    ]
 
 		*/
 		//{region StatusEffects
+
+		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
+		//Someone call the grammar police!
+		//TODO: Move monster status effects into perks. Needs investigation though.
+		private var _statusEffects:StatusEffectManager;
+
+		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
+		//Someone call the grammar police!
+		//TODO: Move monster status effects into perks. Needs investigation though.
+		/**
+		 * List of all status effects.
+		 */
+		public function get statusEffects():Array {
+			return this._statusEffects.asArray();
+		}
 		public function createOrFindStatusEffect(stype:StatusEffectType):StatusEffectClass
 		{
-			var sec:StatusEffectClass = statusEffectByType(stype);
-			if (!sec) sec = createStatusEffect(stype,0,0,0,0);
-			return sec;
+			return this._statusEffects.createOrFindStatusEffect(stype);
 		}
-		//Create a status
 		public function createStatusEffect(stype:StatusEffectType, value1:Number, value2:Number, value3:Number, value4:Number, fireEvent:Boolean = true):StatusEffectClass
 		{
-			var newStatusEffect:StatusEffectClass = stype.create(value1,value2,value3,value4);
-			statusEffects.push(newStatusEffect);
-			newStatusEffect.addedToHostList(this,fireEvent);
-			return newStatusEffect;
+			return this._statusEffects.createStatusEffect(stype, value1, value2, value3, value4, fireEvent);
 		}
-		public function addStatusEffect(sec:StatusEffectClass/*,fireEvent:Boolean = true*/):void {
-			if (sec.host != this) {
-				sec.remove();
-				sec.attach(this/*,fireEvent*/);
-			} else {
-				statusEffects.push(sec);
-				sec.addedToHostList(this,true);
-			}
+		public function addStatusEffect(sec:StatusEffectClass/*,fireEvent:Boolean = true*/):void
+		{
+			return this._statusEffects.addStatusEffect(sec);
 		}
-		//Remove a status
 		public function removeStatusEffect(stype:StatusEffectType/*, fireEvent:Boolean = true*/):StatusEffectClass
 		{
-			var counter:Number = indexOfStatusEffect(stype);
-			if (counter < 0) return null;
-			var sec:StatusEffectClass = statusEffects[counter];
-			statusEffects.splice(counter, 1);
-			sec.removedFromHostList(true);
-			return sec;
+			return this._statusEffects.removeStatusEffect(stype);
 		}
-		public function removeStatusEffectInstance(sec:StatusEffectClass/*, fireEvent:Boolean = true*/):void {
-			var i:int = statusEffects.indexOf(sec);
-			if (i < 0) return;
-			statusEffects.splice(i, 1);
-			sec.removedFromHostList(true);
+		public function removeStatusEffectInstance(sec:StatusEffectClass/*, fireEvent:Boolean = true*/):void
+		{
+			return this._statusEffects.removeStatusEffectInstance(sec);
 		}
 
-		public function indexOfStatusEffect(stype:StatusEffectType):int {
-			for (var counter:int = 0; counter < statusEffects.length; counter++) {
-				if ((statusEffects[counter] as StatusEffectClass).stype == stype)
-					return counter;
-			}
-			return -1;
-		}
-		public function statusEffectByType(stype:StatusEffectType):StatusEffectClass {
-			var idx:int = indexOfStatusEffect(stype);
-			return idx<0 ? null : statusEffects[idx];
+		public function statusEffectByType(stype:StatusEffectType):StatusEffectClass
+		{
+			return this._statusEffects.statusEffectByType(stype);
 		}
 		public function hasStatusEffect(stype:StatusEffectType):Boolean {
-			return indexOfStatusEffect(stype) >= 0;
+			return this._statusEffects.hasStatusEffect(stype);
 		}
-		//}endregion
-
-
 		public function changeStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, newNum:Number = 0):void
 		{
-			if (statusValueNum < 1 || statusValueNum > 4) {
-				CoC_Settings.error("ChangeStatusValue called with invalid status value number.");
-				return;
-			}
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			//Various Errors preventing action
-			if (!sac)return;
-			if (statusValueNum == 1) sac.value1 = newNum;
-			if (statusValueNum == 2) sac.value2 = newNum;
-			if (statusValueNum == 3) sac.value3 = newNum;
-			if (statusValueNum == 4) sac.value4 = newNum;
+			return this._statusEffects.changeStatusValue(stype, statusValueNum, newNum);
 		}
-
 		public function addStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, bonus:Number = 0):void
 		{
-			if (statusValueNum < 1 || statusValueNum > 4) {
-				CoC_Settings.error("ChangeStatusValue called with invalid status value number.");
-				return;
-			}
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			//Various Errors preventing action
-			if (!sac)return;
-			if (statusValueNum == 1) sac.value1 += bonus;
-			if (statusValueNum == 2) sac.value2 += bonus;
-			if (statusValueNum == 3) sac.value3 += bonus;
-			if (statusValueNum == 4) sac.value4 += bonus;
-		}
-
-		public function statusEffectByIndex(idx:int):StatusEffectClass {
-			return statusEffects[idx];
+			return this._statusEffects.addStatusValue(stype, statusValueNum, bonus);
 		}
 
 		public function statusEffectv1(stype:StatusEffectType):Number
 		{
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			return sac?sac.value1:0;
+			if (this._statusEffects.hasStatusEffect(stype)) {
+				return this._statusEffects.getStatusValue(stype, 1);
+			}
+			return 0;
 		}
 
 		public function statusEffectv2(stype:StatusEffectType):Number
 		{
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			return sac?sac.value2:0
+			if (this._statusEffects.hasStatusEffect(stype)) {
+				return this._statusEffects.getStatusValue(stype, 2);
+			}
+			return 0;
 		}
 
 		public function statusEffectv3(stype:StatusEffectType):Number
 		{
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			return sac?sac.value3:0
+			if (this._statusEffects.hasStatusEffect(stype)) {
+				return this._statusEffects.getStatusValue(stype, 3);
+			}
+			return 0;
 		}
 
 		public function statusEffectv4(stype:StatusEffectType):Number
 		{
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			return sac?sac.value4:0
+			if (this._statusEffects.hasStatusEffect(stype)) {
+				return this._statusEffects.getStatusValue(stype, 4);
+			}
+			return 0;
 		}
 
 		public function cleanAllBuffs():void
@@ -1524,8 +1486,9 @@ public class Creature extends Utils
 
 		public function removeStatuses():void
 		{
-			statusEffects = [];
+			this._statusEffects.removeStatuses();
 		}
+
 
 		/**
 		 * Applies (creates or increases) a combat-long debuff to stat.

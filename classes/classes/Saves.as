@@ -1076,21 +1076,16 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.perks.push(savePerk);
 		});
 
-		//Set Status Array
-		for (i = 0; i < player.statusEffects.length; i++)
-		{
-			saveFile.data.statusAffects.push([]);
-				//trace("Saveone statusEffects");
-		}
 		//Populate Status Array
-		for (i = 0; i < player.statusEffects.length; i++)
-		{
-			//trace("Populate One statusEffects");
-			saveFile.data.statusAffects[i].statusAffectName = player.statusEffectByIndex(i).stype.id;
-			saveFile.data.statusAffects[i].value1 = player.statusEffectByIndex(i).value1;
-			saveFile.data.statusAffects[i].value2 = player.statusEffectByIndex(i).value2;
-			saveFile.data.statusAffects[i].value3 = player.statusEffectByIndex(i).value3;
-			saveFile.data.statusAffects[i].value4 = player.statusEffectByIndex(i).value4;
+		for each(var statusEffect:StatusEffectClass in player.statusEffects) {
+			var saveStatusEffect: Object = {
+				statusAffectName: statusEffect.stype.id,
+				value1: statusEffect.value1,
+				value2: statusEffect.value2,
+				value3: statusEffect.value3,
+				value4: statusEffect.value4
+			};
+			saveFile.data.statusAffects.push(saveStatusEffect);
 		}
 		//Set keyItem Array
 		for (i = 0; i < player.keyItems.length; i++)
