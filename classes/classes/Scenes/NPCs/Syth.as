@@ -38,7 +38,7 @@ public class Syth extends Monster
 			var damage:Number = 0;
 			damage += eBaseStrengthDamage();
 			damage *= 2;
-			outputText(capitalA + short + " lift it weapons with all his strenght and smash them on your head. ");
+			outputText(capitalA + short + " lift it weapons with all his strength and smash them on your head. ");
 			if(damage > 0) damage = player.takePhysDamage(damage, true);
 			statScreenRefresh();
 			outputText("\n");

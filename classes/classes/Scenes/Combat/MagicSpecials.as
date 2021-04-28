@@ -563,7 +563,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.fairyScore() >= 18 && !player.hasStatusEffect(StatusEffects.Minimise)) {
-			bd = buttons.add("Minimise", Minimise).hint("Shrink to the size of 5 inches, gaining highly increased evasion but reducing melee and ranged damage as well as physical strenght.");
+			bd = buttons.add("Minimise", Minimise).hint("Shrink to the size of 5 inches, gaining highly increased evasion but reducing melee and ranged damage as well as physical strength.");
 			bd.requireMana(spellCost(50));
 		}
 		if (player.fairyScore() >= 18 && player.hasStatusEffect(StatusEffects.Minimise)) {
@@ -4768,7 +4768,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,(player.spe*5)+(player.inte*5),1,0,0);
 			else{
 				monster.createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
-				outputText("\n\nThe strenght of the hurricane winds has increased even further.");
+				outputText("\n\nThe strength of the hurricane winds has increased even further.");
 			}
 			combatRoundOver();
 			return;
@@ -4801,7 +4801,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,(player.spe*5)+(player.inte*5),0,0,0);
 			else {
 				monster.createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
-				outputText("\n\nThe strenght of the hurricane winds has increased even further.");
+				outputText("\n\nThe strength of the hurricane winds has increased even further.");
 			}
 		}
 		outputText("\n\n");

@@ -2599,7 +2599,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\"<i>Soy un hombre lechero de conocer a alguien como tú.</i>\"\n\n");
 				outputText("You even see him start to lean closer to her, almost as if he were about to make a move. His tail gently caresses her hips, she seems flustered by his touch.\n\n");
 				outputText("You cough loudly to assert your presence, both of them turn toward you as you do so.\n\n");
-				outputText("\"<i>[player]!</i>\" Amily says, slightly startled, \"<i>I was just getting to know your friend here, he’s really quite a chatterbox, I have never seen anyone like him before.</i>\"\n\n");
+				outputText("\"<i>[name]!</i>\" Amily says, slightly startled, \"<i>I was just getting to know your friend here, he’s really quite a chatterbox, I have never seen anyone like him before.</i>\"\n\n");
 				outputText("Zenji gives you a nonchalant grin, \"<i>Yeah… just getting ta know dis little girlie here…</i>\"\n\n");
 				outputText("Amily rolls her eyes as Zenji leaves her alone with you.\n\n");
 				amilyMenu(true);

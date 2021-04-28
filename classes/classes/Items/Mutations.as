@@ -14798,7 +14798,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You apply the sunscreen on your skin and suddenly feel some of your worries fly as you laugh cheerfully at the thought of taking a vacation day or two to rest and swim at the beach. Your body seems to react weirdly to the sunscreen.");
 
-        //Strenght
+        //Strength
         if (rand(4) == 0) {
             MutagenBonus("str", 1 + rand(3));
             changes++;
@@ -17582,7 +17582,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         var power:Number = 10; //needs to be calculated in game
         var duration:Number = Math.round(power/100)+5;
-        //strenght then Duration in hours
+        //strength then Duration in hours
         player.createStatusEffect(StatusEffects.ArmorPotion,power,duration,0,0);
         outputText("You eat up the weed, feeling any lingering pain recede as your skin hardens like stone.");
         player.refillHunger(15)
