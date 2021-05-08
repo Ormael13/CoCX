@@ -1403,6 +1403,9 @@ public class MagicSpecials extends BaseCombatContent {
 				onirampageDuration += 3;
 				onirampageCooldown -= 1;
 			}
+			if (player.hasPerk(PerkLib.OniEnlightenedKimono) || player.hasPerk(PerkLib.OniTyrantKimono)) {
+				onirampageDuration += 4;
+			}
 			if (player.armor == armors.SPKIMO) onirampageDuration += 2;
 			if (player.necklace == necklaces.OBNECK) onirampageDuration += 1;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) onirampageCooldown -= 1;

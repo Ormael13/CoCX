@@ -142,6 +142,7 @@ import coc.xlogic.ExecContext;
 					MageRobe: player.armor == game.armors.M_ROBES || player.armor == game.armors.I_ROBES || player.armor == game.armors.I_CORST || player.armor == game.armors.EWROBE_ || player.armor == game.armors.A_ROBE_,
 					yukiDress: player.armor == game.armors.BLIZZ_K,
 					sakuraPetalKimono: player.armor == game.armors.SPKIMO,
+					OniLegendaryKimono: player.armor == game.armors.OEKIMO || player.armor == game.armors.OTKIMO,
 					whiteKimono: player.armor == game.armors.WKIMONO,
 					blueKimono: player.armor == game.armors.BKIMONO,
 					redKimono: player.armor == game.armors.RKIMONO,

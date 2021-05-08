@@ -15,7 +15,7 @@ import classes.Player;
 		
 		public function OniGourd()
 		{
-			super("OniDJug", "OniDJug", "Oni enchanted drinking jug", "an Oni enchanted drinking jug", JewelryLib.MODIFIER_R_ATTACK_POWER, 30, 10000, "This jug grants an infinite supply of non transformative alcohol and greatly increase attack power. Furthermore drunken power duration is doubled.","Ring");
+			super("OniDJug", "OniDJug", "Oni enchanted drinking jug", "an Oni enchanted drinking jug", JewelryLib.MODIFIER_R_ATTACK_POWER, 30, 10000, "This jug grants an infinite supply of non transformative alcohol and greatly increase attack power. Furthermore drunken power duration is doubled when drinking from the gourd.","Ring");
 		}
 
 		override public function playerEquip():Jewelry {

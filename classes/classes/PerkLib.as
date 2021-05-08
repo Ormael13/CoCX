@@ -2393,6 +2393,10 @@ public class PerkLib
 		public static const OctaAttackSmall:PerkType = mk("Octa Attack (Small)", "Octa Attack (Small)",
 				"Allows you to perform eight melee attacks with small weapons per round.",
 				"You've chosen the 'Octa Attack (Small)' perk. This allows you to make eight melee attacks with small weapons.");
+		public static const OniTyrantKimono:PerkType = mk("Oni Tyrant Kimono", "Oni Tyrant Kimono",
+				"Increase rampage duration by 4 rounds and add +40% to melee physical damage.");
+		public static const OniEnlightenedKimono:PerkType = mk("Oni Noble Kimono", "Oni Noble Kimono",
+				"Increase rampage duration by 4 rounds and add +40% to melee physical damage.");
 		public static const OniDrinkingJug:PerkType = mk("Oni enchanted drinking jug", "Oni enchanted drinking jug",
 				"Grant an infinite supply of non transformative alcohol. Furthermore drunken power duration is doubled.");
 		public static const OniMusculature:PerkType = mk("Oni Musculature", "Oni Musculature",
