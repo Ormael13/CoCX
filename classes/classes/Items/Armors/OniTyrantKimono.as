@@ -13,7 +13,7 @@ import classes.Player;
 		
 		public function OniTyrantKimono()
 		{
-			super("OE Kimo", "OniEnlightenedKimono", "Oni Tyrant kimono", "a oni tyrant kimono", 0, 20, 10000, "This deceptively sturdy kimono belonged to a tyrant amonst oni nobility. In their homeland oni rules over lesser race with an iron fist. Might makes right or so they say.", "Light");
+			super("OT Kimo", "OniTyrantKimono", "Oni Tyrant kimono", "a oni tyrant kimono", 0, 20, 10000, "This deceptively sturdy kimono belonged to a tyrant amonst oni nobility. In their homeland oni rules over lesser race with an iron fist. Might makes right or so they say.", "Light");
 		}
 		
 		override public function canUse():Boolean {
