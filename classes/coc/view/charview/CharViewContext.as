@@ -75,9 +75,12 @@ import coc.xlogic.ExecContext;
 					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,
 					PlayerHasAnAxeUnholy:player.weapon == game.weapons.DE_GAXE,
 
-					PlayerHasAHammer: player.isMaceHammerTypeWeapon(),
-					PlayerHasAHammerHoly:player.weapon == game.weapons.POCDEST,
-					PlayerHasAHammerUnholy:player.weapon == game.weapons.DOCDEST,
+					PlayerHasAHammer: player.isMaceHammerTypeWeapon() && !player.isTetsubo(),
+					//PlayerHasAHammerHoly:player.weapon == game.weapons.POCDEST,
+					//PlayerHasAHammerUnholy:player.weapon == game.weapons.DOCDEST,
+					PlayerHasATetsu: player.weapon == game.weapons.OTETSU,
+					PlayerHasATetsuHoly:player.weapon == game.weapons.POCDEST,
+					PlayerHasATetsuUnholy:player.weapon == game.weapons.DOCDEST,
 
 					PlayerHasASpear: player.isSpearTypeWeapon(),
 					PlayerHasASpearHoly:player.weapon == game.weapons.SESPEAR,
@@ -179,6 +182,9 @@ import coc.xlogic.ExecContext;
 					goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
 					dragonscaleBikiniPanty: player.lowerGarment == game.undergarments.DSTHONG,
 					comfyBikiniPanty: player.lowerGarment == game.undergarments.C_PANTY || player.lowerGarment == game.undergarments.C_LOIN,
+
+					//Unique Accessories
+					oniGourd: player.jewelry == game.jewelries.ONIGOURD,
 
 					// Viewable neck Accessory lists
 					blueScarf: player.necklace == game.necklaces.BWSCARF,
