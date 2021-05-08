@@ -7121,7 +7121,7 @@ use namespace CoC;
 				oniCounter++;
 			if (eyes.type == Eyes.ONI && InCollection(eyes.colour,Mutations.oniEyeColors))
 				oniCounter++;
-			if (skinTone == "red" || skinTone == "reddish orange" || skinTone == "purple" || skinTone == "blue")
+			if (skinTone == "red" || skinTone == "reddish-orange" || skinTone == "purple" || skinTone == "blue")
 				oniCounter++;
 			if (skin.base.pattern == Skin.PATTERN_BATTLE_TATTOO)
 				oniCounter++;
