@@ -2444,7 +2444,7 @@ public class PerkLib
 				"You've chosen the 'Peerless Spirituality' perk. Thanks to your peerless mystical conditioning, your maximum mana has been increased by 4500!</b>");
 		public static const PeerlessTranquilness:PerkType = mk("Peerless Tranquilness", "Peerless Tranquilness",
 				"Increases maximum wrath by 2500.",
-				"You've chosen the 'Peerless Tranquilness' perk. Thanks to your peerless anger managment training, your maximum mana has been increased by 2500!</b>");
+				"You've chosen the 'Peerless Tranquilness' perk. Thanks to your peerless anger managment training, your maximum wrath has been increased by 2500!</b>");
 		public static const PentaAttack:PerkType = mk("Penta Attack", "Penta Attack",
 				"Allows you to perform five melee attacks with normal sized weapons per round.",
 				"You've chosen the 'Penta Attack' perk.  This allows you to make five melee attacks with non-large weapons.");
