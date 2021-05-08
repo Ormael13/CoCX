@@ -663,7 +663,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 2;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -709,7 +709,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 3;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -755,7 +755,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 4;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -801,7 +801,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 5;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -847,7 +847,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 6;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -893,7 +893,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 7;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -939,7 +939,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 8;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -1019,7 +1019,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.spe >= 225) powerfistsmultipowervalue += 1;
 			if (player.spe >= 300) powerfistsmultipowervalue += 1;
 		}
-		if (player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) {
+		if (player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
 			powerfistsmultipowervalue += 1;
 		}
 		return powerfistsmultipowervalue;
