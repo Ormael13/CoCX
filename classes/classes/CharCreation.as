@@ -2633,7 +2633,7 @@ import coc.view.MainView;
 		private function ascensionMetamorphPermeryMenu(page:int = 1):void {
 			clearOutput();
 			outputText("For the price of five points, you can make unlocked Metamorph options permanent (up to current limit) and they will carry over in future ascensions.");
-			outputText("\n\nCurent amount of pernament options / Max cap for pernament options: " + player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) + " / " + player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory) + "");
+			outputText("\n\nCurent amount of permanent options / Max cap for permanent options: " + player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) + " / " + player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory) + "");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			if (page == 1) {

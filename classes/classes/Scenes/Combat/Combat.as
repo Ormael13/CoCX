@@ -824,8 +824,8 @@ public class Combat extends BaseContent {
         if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
             buttons.add("Elementals", CoC.instance.perkMenu.summonsbehaviourOptions, "You can adjust your elemental summons behaviour during combat.");
         }
-        if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 0) {
-            buttons.add("P.Golems", CoC.instance.perkMenu.golemsbehaviourOptions, "You can adjust your pernament golems behaviour during combat.");
+        if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0) {
+            buttons.add("P.Golems", CoC.instance.perkMenu.golemsbehaviourOptions, "You can adjust your permanent golems behaviour during combat.");
         }
         if (CoC_Settings.debugBuild && !debug) {
             buttons.add("Inspect", combat.debugInspect).hint("Use your debug powers to inspect your enemy.");
@@ -906,7 +906,7 @@ public class Combat extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 3)) {
 			bd = buttons.add("Heal Zenji", HealZenji);
 		}
-		if (player.hasPerk(PerkLib.JobGolemancer) && (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0 || flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 0)) bd = buttons.add("Golems", GolemsMenu);
+		if (player.hasPerk(PerkLib.JobGolemancer) && (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0)) bd = buttons.add("Golems", GolemsMenu);
 		if (player.hasPerk(PerkLib.JobElementalConjurer) && player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) bd = buttons.add("Elem.Asp", ElementalAspectsMenu);
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
 			bd = buttons.add("B.Puppies", bloodSwipeBloodPuppies).hint("Command Blood Puppies to attack enemy/ies. Would deal 2x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(20) + "");
@@ -1027,7 +1027,7 @@ public class Combat extends BaseContent {
 					.hint("Send all temporal golems from your bag to attack the enemy. <b>After attacking, the golems will fall apart!</b>");
 			}
 		}
-        if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 0) {
+        if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0) {
             if (monster.isFlying() && !player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
 				addButtonDisabled(4, "Send P.Gol/1", "Your golems can't attack flying targets. (Only golems made by a grand-master golem maker can do this!)");
 				if (monster.plural) {
@@ -1036,18 +1036,18 @@ public class Combat extends BaseContent {
 				}
             }
 			else {
-				addButton(4, "Send P.Gol/1", combat.pspecials.sendPernamentGolem1)
+				addButton(4, "Send P.Gol/1", combat.pspecials.sendPermanentGolem1)
 					.hint("Send one stone golem from your bag to attack the enemy.");
 				if (monster.plural) {
-					if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 2) addButton(5, "Send P.Gol/3", combat.pspecials.sendPernamentGolem3)
+					if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 2) addButton(5, "Send P.Gol/3", combat.pspecials.sendPermanentGolem3)
 						.hint("Send three stone golems from your bag to attack the enemy.");
-					if (flags[kFLAGS.PERNAMENT_GOLEMS_BAG] > 4) addButton(6, "Send P.Gol/5", combat.pspecials.sendPernamentGolem5)
+					if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 4) addButton(6, "Send P.Gol/5", combat.pspecials.sendPermanentGolem5)
 						.hint("Send five stone golems from your bag to attack the enemy.");
 				}
 			}
         }
-        if (flags[kFLAGS.IMPROVED_PERNAMENT_GOLEMS_BAG] > 0) {
-            addButton(7, "Send I.P.Gol/1", combat.pspecials.sendPernamentImprovedGolem1)
+        if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0) {
+            addButton(7, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem1)
 				.hint("Send one improved stone golem from your bag to attack the enemy.");
         }
 		addButton(14, "Back", combat.combatMenu, false);
@@ -10397,7 +10397,7 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.StraddleRoundLeft,1,monster.statusEffectv1(StatusEffects.Pounce)-3);
                 monster.removeStatusEffect(StatusEffects.Pounce);
                 outputText("You change position and straddle your opponent in order to prepare for mating.");
-            } else outputText("You take hold of your dazed opponent and gently pull [monster him] to the ground, straddling him as you get into position.");
+            } else outputText("You take hold of your dazed opponent and gently pull [monster him] to the ground, straddling [monster him] as you get into position.");
             if (player.hasPerk(PerkLib.StraddleImproved)) player.addStatusValue(StatusEffects.StraddleRoundLeft, 1, +2);
             enemyAI();
     }

@@ -2571,27 +2571,27 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 	
-	public function pernamentgolemsendcost():Number {
-		var pernamentgolemsendcost:Number = 10;
-		if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) pernamentgolemsendcost += 5;
-		if (player.findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) pernamentgolemsendcost += 15;
-		if (player.findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) pernamentgolemsendcost += 40;
-		return pernamentgolemsendcost;
+	public function permanentgolemsendcost():Number {
+		var permanentgolemsendcost:Number = 10;
+		if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) permanentgolemsendcost += 5;
+		if (player.findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) permanentgolemsendcost += 15;
+		if (player.findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) permanentgolemsendcost += 40;
+		return permanentgolemsendcost;
 	}
-	public function pernamentimprovedgolemsendcost():Number {
-		var pernamentimprovedgolemsendcost:Number = 250;
-		return pernamentimprovedgolemsendcost;
+	public function permanentimprovedgolemsendcost():Number {
+		var permanentimprovedgolemsendcost:Number = 250;
+		return permanentimprovedgolemsendcost;
 	}
-	public function sendPernamentGolem1():void {
+	public function sendPermanentGolem1():void {
 		clearOutput();
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-			if (player.mana < pernamentgolemsendcost()) {
+			if (player.mana < permanentgolemsendcost()) {
 				outputText("Your mana is too low to make your golem attack.");
 				menu();
 				addButton(0, "Next", combatMenu, false);
 				return;
 			}
-			else useMana(pernamentgolemsendcost());
+			else useMana(permanentgolemsendcost());
 		}
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
@@ -2627,16 +2627,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else enemyAI();
 	}
-	public function sendPernamentGolem3():void {
+	public function sendPermanentGolem3():void {
 		clearOutput();
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-			if (player.mana < pernamentgolemsendcost() * 3) {
+			if (player.mana < permanentgolemsendcost() * 3) {
 				outputText("Your mana is too low to make your golems attack.");
 				menu();
 				addButton(0, "Next", combatMenu, false);
 				return;
 			}
-			else useMana(pernamentgolemsendcost() * 3);
+			else useMana(permanentgolemsendcost() * 3);
 		}
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
@@ -2673,16 +2673,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else enemyAI();
 	}
-	public function sendPernamentGolem5():void {
+	public function sendPermanentGolem5():void {
 		clearOutput();
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-			if (player.mana < pernamentgolemsendcost() * 5) {
+			if (player.mana < permanentgolemsendcost() * 5) {
 				outputText("Your mana is too low to make your golems attack.");
 				menu();
 				addButton(0, "Next", combatMenu, false);
 				return;
 			}
-			else useMana(pernamentgolemsendcost() * 5);
+			else useMana(permanentgolemsendcost() * 5);
 		}
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
@@ -2719,15 +2719,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else enemyAI();
 	}
-	public function sendPernamentImprovedGolem1():void {
+	public function sendPermanentImprovedGolem1():void {
 		clearOutput();
-		if (player.mana < pernamentimprovedgolemsendcost()) {
+		if (player.mana < permanentimprovedgolemsendcost()) {
 			outputText("Your mana is too low to make your golem attack.");
 			menu();
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		else useMana(pernamentimprovedgolemsendcost());
+		else useMana(permanentimprovedgolemsendcost());
 		var damage:Number = 0;
 		var dmgamp:Number = 2.5;
 		damage += 15000 + rand(3001);
