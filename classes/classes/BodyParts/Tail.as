@@ -91,7 +91,7 @@ public class Tail extends SaveableBodyPart {
 	public static const YGGDRASIL:int           = 32;
 	EnumValue.add(Types, YGGDRASIL, "YGGDRASIL", {name:"yggdrasil"});
 	public static const RAIJU:int               = 33;
-	EnumValue.add(Types, RAIJU, "RAIJU", {name:"raiju"});
+	EnumValue.add(Types, RAIJU, "RAIJU", {name:"raiju", energy: true});
 	public static const RED_PANDA:int           = 34;
 	EnumValue.add(Types, RED_PANDA, "RED_PANDA", {name:"red-panda"});
 	public static const GARGOYLE_2:int          = 35;
@@ -113,7 +113,7 @@ public class Tail extends SaveableBodyPart {
 	public static const HINEZUMI:int			= 43;
 	EnumValue.add(Types, HINEZUMI, "HINEZUMI", {name:"hinezumi"});
 	public static const THUNDERBIRD:int			= 44;
-	EnumValue.add(Types, THUNDERBIRD, "THUNDERBIRD", {name:"thunderbird"});
+	EnumValue.add(Types, THUNDERBIRD, "THUNDERBIRD", {name:"thunderbird", energy: true});
 	public static const BEAR:int				= 45;
 	EnumValue.add(Types, BEAR, "BEAR", {name:"bear"});
 	public static const TWINKASHA:int			= 46;

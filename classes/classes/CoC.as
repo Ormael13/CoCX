@@ -94,9 +94,6 @@ public class CoC extends MovieClip
     public var headjewelries:HeadJewelryLib		= new HeadJewelryLib();
     public var necklaces:NecklaceLib			= new NecklaceLib();
     public var jewelries:JewelryLib				= new JewelryLib();
-    public var jewelries2:JewelryLib			= new JewelryLib();
-    public var jewelries3:JewelryLib			= new JewelryLib();
-    public var jewelries4:JewelryLib			= new JewelryLib();
     public var shields:ShieldLib				= new ShieldLib();
     public var vehicles:VehiclesLib				= new VehiclesLib();
 
