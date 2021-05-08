@@ -32,5 +32,10 @@ import classes.Player;
 			while (game.player.findPerk(PerkLib.OniTyrantKimono) >= 0) game.player.removePerk(PerkLib.OniTyrantKimono);
 			return super.playerRemove();
 		}
+
+		override public function get def():Number{
+			var mod:int = game.player.cor/10;
+			return 13 + mod;
+		}
 	}
 }
