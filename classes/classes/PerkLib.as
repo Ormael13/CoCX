@@ -2392,6 +2392,8 @@ public class PerkLib
 		public static const OctaAttackSmall:PerkType = mk("Octa Attack (Small)", "Octa Attack (Small)",
 				"Allows you to perform eight melee attacks with small weapons per round.",
 				"You've chosen the 'Octa Attack (Small)' perk. This allows you to make eight melee attacks with small weapons.");
+		public static const OniDrinkingJug:PerkType = mk("Oni enchanted drinking jug", "Oni enchanted drinking jug",
+				"Grant an infinite supply of non transformative alcohol. Furthermore drunken power duration is doubled.");
 		public static const OniMusculature:PerkType = mk("Oni Musculature", "Oni Musculature",
 				"Your altered musculature allows to increase your natural strenght and tone. Oni Rampage and Drunker Power can be used at Half-Oni score.",
 				"You've chosen the 'Oni Musculature' perk, by becoming much more oni-like your body musculature started to slowly adapt to oni lifestyle.").withBuffs({'str.mult':0.05});

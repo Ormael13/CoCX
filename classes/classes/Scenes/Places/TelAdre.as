@@ -1108,6 +1108,7 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(4, "Soul Drill", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "Hodr's bow", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "Avelynn", "You already bought item from Kaiba today.");
+			addButtonDisabled(7, "Oni enchanted drinking jug", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(0, "FlameLizR", buyItem, jewelries.FLLIRNG).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
@@ -1117,6 +1118,7 @@ public function kaibaShopMainMenu2():void {
 			addButton(4, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
 			addButton(5, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
 			addButton(6, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional bolts each time.");
+			addButton(7, "Oni enchanted drinking jug", buyItem, jewelries.ONIGOURD).hint("A magical drinking jug beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(13, "-3-", kaibaShopMainMenuPage3);
