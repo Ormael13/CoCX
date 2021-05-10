@@ -1152,7 +1152,7 @@ public class Combat extends BaseContent {
         clearOutput();
         var power:Number = (CalcAlchemyPower()*0.05)+10; //needs to be calculated in game
         var duration:Number = Math.round(power/100)+5;
-        //strenght then Duration in hours
+        //strength then Duration in hours
         player.createStatusEffect(StatusEffects.ArmorPotion,power,duration,0,0);
         outputText("You drink up the medicine, feeling any lingering pain recede as your skin hardens like stone. "+power+" "+duration+"");
     }
@@ -1161,7 +1161,7 @@ public class Combat extends BaseContent {
         clearOutput();
         var power:Number = (CalcAlchemyPower()*0.05)+10; //needs to be calculated in game
         var duration:Number = Math.round(power/100)+5;
-        //strenght then Duration in hours
+        //strength then Duration in hours
         player.createStatusEffect(StatusEffects.AttackPotion,power,duration,0,0);
         outputText("You drink up the medicine, feeling stronger and more agile already. "+power+" "+duration+"");
     }
@@ -1170,7 +1170,7 @@ public class Combat extends BaseContent {
         clearOutput();
         var power:Number = (CalcAlchemyPower()*0.05)+10; //needs to be calculated in game
         var duration:Number = Math.round(power/100)+5;
-        //strenght then Duration in hours
+        //strength then Duration in hours
         if (!player.isAlraune()){
             outputText("You grab your bottle of Alraune perfume and spray yourself knowingly. Your opponent is going to have issues resisting your charms now. "+power+" "+duration+"");
             player.createStatusEffect(StatusEffects.ArousalPotion,power,duration,0,0);
@@ -6071,7 +6071,7 @@ public class Combat extends BaseContent {
                     if (random_value == higher_threshold) outputText("Nimbly shortening the distance, you hit [monster a] [monster name] with overwhelming power! ");
                 } else if (!lock) {
                     if (random_value <= 20) outputText("You hit your opponent, but defence stance of [monster a] [monster name] almost totally absorbed your attack. ");
-                    if ((random_value > 20) && (random_value <= 40)) outputText("You hit [monster a] [monster name], but [monster.pronoun1] moves so deft that yours strike loses most of its strenght. ");
+                    if ((random_value > 20) && (random_value <= 40)) outputText("You hit [monster a] [monster name], but [monster.pronoun1] moves so deft that yours strike loses most of its strength. ");
                     if ((random_value > 40) && (random_value <= 70)) outputText("As you hurtle toward [monster a] [monster name], you draw your weapon and prepare to hit. Getting close enough, you swing and crush your [weapon] onto [monster.pronoun2]. No matter how agile your foe is, [monster.pronoun1] wasn't able to evade your attack! ");
                     if ((random_value > 70) && (random_value <= 85)) outputText("You take the [weapon] in steady grip of your hands and widely swing at the foe. " + firstLetterUpperCase("[monster a]") + " [monster name] predicted your attack, but you manage to change it's trajectory just in time! ");
                     if ((random_value > 85) && (random_value <= 100)) outputText("You miraculously reflected [monster a] [monster name] attack and did riposte to [monster.pronoun2]! ");
@@ -6157,7 +6157,7 @@ public class Combat extends BaseContent {
                     if (random_value == higher_threshold) outputText("Nimbly shortening the distance, you hit [monster a] [monster name] with overwhelming power! ");
                 } else  {
                     if (random_value <= 20) outputText("You hit your opponent, but defence stance of [monster a] [monster name] almost totally absorbed your attack. ");
-                    if ((random_value > 20) && (random_value <= 40)) outputText("You hit [monster a] [monster name], but [monster.pronoun1] moves so deft that yours strike loses most of its strenght. ");
+                    if ((random_value > 20) && (random_value <= 40)) outputText("You hit [monster a] [monster name], but [monster.pronoun1] moves so deft that yours strike loses most of its strength. ");
                     if ((random_value > 40) && (random_value <= 70)) outputText("As you hurtle toward [monster a] [monster name], you draw your weapon and prepare to hit. Getting close enough, you swing and crush your [weapon] onto [monster.pronoun2]. No matter how agile your foe is, [monster.pronoun1] wasn't able to evade your attack! ");
                     if ((random_value > 70) && (random_value <= 85)) outputText("You take the [weapon] in steady grip of your hands and widely swing at the foe. " + firstLetterUpperCase("[monster a]") + " [monster name] predicted your attack, but you manage to change it's trajectory just in time! ");
                     if ((random_value > 85) && (random_value <= 100)) outputText("You miraculously reflected [monster a] [monster name] attack and did riposte to [monster.pronoun2]! ");
@@ -10688,7 +10688,7 @@ public class Combat extends BaseContent {
         if (monster.hasCock()) outputText("Not one to waste any potential seed you sit [monster him] deeper in the bath and wrap your tight around [monster his]" +
                 " waist impaling your pistil on [monster his] already drooling stamen so to pollinate yourself with [monster his] fertile pollen. ");
         outputText("\n\nThe sex is mind melting but short lived as suddenly aware of what is going on [monster a] [monster name] " +
-                "begins trashing about eventualy forcing [monster him]self out of your grip with enough strenght to force the both of you back into the previous position. " +
+                "begins trashing about eventualy forcing [monster him]self out of your grip with enough strength to force the both of you back into the previous position. " +
                 "You will mate eventually… it's just a matter of time now.");
         //(Add a toughness modifier and double lust damage)
         StraddleDamage *= 1+(scalingBonusToughness()*2/100);

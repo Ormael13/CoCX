@@ -100,6 +100,7 @@ public class GameSettings extends BaseContent {
 		else {
 			outputText("Instant Leveling: <font color=\"#800000\"><b>OFF</b></font>\nIndividual leveling up, i.e. One level click at a time.");
 		}
+		outputText("\nThis setting has three modes: Default(Levelling up one at a time), Direct(Auto-calculates your highest and allocates accordingly), and Manual(You are given the option to increase levels in increments.)")
 		outputText("\n\n")
 
 		if (flags[kFLAGS.MUTATIONS_SPOILERS] >= 1){

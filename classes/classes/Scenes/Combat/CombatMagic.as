@@ -900,7 +900,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
 			bd = buttons.add("Pyre Burst", spellPyreBurst)
-					.hint("Teach your foes a lesson with the strenght of a firestorm.  \n\n<b>AoE Spell.</b>  " +
+					.hint("Teach your foes a lesson with the strength of a firestorm.  \n\n<b>AoE Spell.</b>  " +
 							"\n\nMana Cost: " + spellCostWhite(200) + "");
 			if (badLustForWhite) {
 				bd.disable("You are far too aroused to focus on white magic.");
@@ -923,7 +923,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.MagesWrathEx)) {
 				bd = buttons.add("Pyre Burst(Ex)", spellPyreBurst2)
-						.hint("Teach your foes a lesson with the strenght of a wrath-enpowered firestorm.  \n\n<b>AoE Spell.</b>  " +
+						.hint("Teach your foes a lesson with the strength of a wrath-enpowered firestorm.  \n\n<b>AoE Spell.</b>  " +
 								"\n\nMana Cost: " + spellCostWhite(200) + ", Wrath Cost: 100");
 				if (badLustForWhite) {
 					bd.disable("You are far too aroused to focus on white magic.");

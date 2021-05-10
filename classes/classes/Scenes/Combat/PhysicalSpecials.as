@@ -660,7 +660,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("run");
 			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
 		}
-		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 2;
 		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
@@ -706,7 +706,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("run");
 			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
 		}
-		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 3;
 		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
@@ -752,7 +752,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("run");
 			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
 		}
-		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 4;
 		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
@@ -798,7 +798,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("run");
 			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
 		}
-		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 5;
 		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
@@ -844,7 +844,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("run");
 			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
 		}
-		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 6;
 		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
@@ -890,7 +890,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("run");
 			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
 		}
-		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 7;
 		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
@@ -936,7 +936,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("run");
 			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
 		}
-		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 8;
 		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
