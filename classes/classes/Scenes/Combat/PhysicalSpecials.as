@@ -9,9 +9,11 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
+import classes.CoC;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
+import classes.Items.Mutations;
 import classes.Items.ShieldLib;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
@@ -22,6 +24,7 @@ import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.NPCs.Anemone;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 import classes.StatusEffects;
 
 import coc.view.ButtonData;
@@ -124,6 +127,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 					bd.disable("<b>You can't dig in open water!</b>\n\n");
 				}
+			}
+			if (player.hasPerk(PerkLib.OniDrinkingJug)){
+				bd = buttons.add("Drink", Drink).hint("Drink down some sake from your drinking jug. \n\nSpecial: May have additionnal effects on an oni.");
 			}
 			//Engulf
 			if (player.lowerBody == LowerBody.GOO) {
@@ -657,7 +663,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 2;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -703,7 +709,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 3;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -749,7 +755,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 4;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -795,7 +801,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 5;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -841,7 +847,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 6;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -887,7 +893,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 7;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -933,7 +939,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 8;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -1013,7 +1019,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.spe >= 225) powerfistsmultipowervalue += 1;
 			if (player.spe >= 300) powerfistsmultipowervalue += 1;
 		}
-		if (player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) {
+		if (player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
 			powerfistsmultipowervalue += 1;
 		}
 		return powerfistsmultipowervalue;
@@ -4990,6 +4996,39 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You dig yourself into the ground, moving out of your opponent’s reach.");
 		monster.createStatusEffect(StatusEffects.Dig,5,0,0,0);
 		enemyAI();
+	}
+
+	public function Drink():void {
+		clearOutput();
+		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+		outputText("You merrily chug from the gourd quenching your thirst for sake.");
+		monster.createStatusEffect(StatusEffects.Dig,5,0,0,0);
+		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore()) outputText("\n\nOOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze your muscle filling with extra alchoholic might. Now you're totaly going to destroy whoever was stupid enought to challange you.");
+		enemyAI();
+	}
+
+	public function DrunkenPowerEmpower():void {
+		var bonusempower:Number = 60;
+		var bonusdepower:Number = 20;
+		var durationhour:Number = 4;
+		if (player.spe < 21 || player.inte < 21) {
+			if (player.inte < 21) bonusdepower -= (player.inte - 1);
+			else bonusdepower -= (player.spe - 1);
+		}
+		bonusempower += (20 * (1 + player.newGamePlusMod()));
+		player.statStore.addBuffObject({
+			str: bonusempower,
+			spe: -bonusdepower,
+			inte: -bonusdepower,
+			lib: bonusempower
+		}, "DrunkenPowerEmpower", {text: "Drunken Power", time: Buff.RATE_HOURS, tick: durationhour});
+	}
+
+	public function DrunkenPowerEmpowerOni():Number {
+		var bonusempoweroni:Number = 12;
+		if (player.hasPerk(PerkLib.OniMusculature)) bonusempoweroni -= 6;
+		if (player.hasPerk(PerkLib.OniMusculatureEvolved)) bonusempoweroni -= 3;
+		return bonusempoweroni;
 	}
 
 	public function kick():void {

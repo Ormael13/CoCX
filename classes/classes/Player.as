@@ -929,9 +929,9 @@ use namespace CoC;
 		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets");}
 		//Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
-		public function hasAWingAttack():Boolean { return (Wings.Types[wings.type].wingSlap);}
+		public function hasAWingAttack():Boolean { return (Wings.Types[wings.type].wingSlap || wings.type == Wings.THUNDEROUS_AURA || wings.type == Wings.WINDY_AURA);}
 		public function hasAGoreAttack():Boolean { return (Horns.Types[horns.type].gore);}
-		public function hasATailSlapAttack():Boolean { return (Tail.Types[tail.type].tailSlam || Tail.Types[tail.type].stinger || LowerBody.Types[lowerBody].tailSlam);}
+		public function hasATailSlapAttack():Boolean { return (Tail.Types[tail.type].tailSlam || Tail.Types[tail.type].stinger || Tail.Types[tail.type].Energy || LowerBody.Types[lowerBody].tailSlam);}
 		public function hasTalonsAttack():Boolean{return lowerBody == LowerBody.HARPY;}
 		public function hasTentacleAttacks():Boolean{return LowerBody.Types[lowerBody].tentacle || hasPerk(PerkLib.MorphicWeaponry);}
 		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasTentacleAttacks || isAlraune() || isTaur());}
@@ -1016,6 +1016,9 @@ use namespace CoC;
 		//Mace/Hammer-type weapons
 		public function isMaceHammerTypeWeapon():Boolean {
 			return weapon == game.weapons.D_WHAM_ || weapon == game.weapons.DOCDEST || weapon == game.weapons.FLAIL || weapon == game.weapons.L_HAMMR || weapon == game.weapons.MACE || weapon == game.weapons.OTETSU || weapon == game.weapons.PIPE || weapon == game.weapons.POCDEST || weapon == game.weapons.WARHAMR || weapon == game.weapons.UDKDEST;
+		}
+		public function isTetsubo():Boolean {
+			return weapon == game.weapons.OTETSU || weapon == game.weapons.DOCDEST || weapon == game.weapons.POCDEST;
 		}
 		//Dueling sword-type weapons (rapier & katana)
 		public function isDuelingTypeWeapon():Boolean {
@@ -7118,7 +7121,7 @@ use namespace CoC;
 				oniCounter++;
 			if (eyes.type == Eyes.ONI && InCollection(eyes.colour,Mutations.oniEyeColors))
 				oniCounter++;
-			if (skinTone == "red" || skinTone == "reddish orange" || skinTone == "purple" || skinTone == "blue")
+			if (skinTone == "red" || skinTone == "reddish-orange" || skinTone == "purple" || skinTone == "blue")
 				oniCounter++;
 			if (skin.base.pattern == Skin.PATTERN_BATTLE_TATTOO)
 				oniCounter++;

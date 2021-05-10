@@ -83,6 +83,8 @@ package classes.Items
 		public const NURSECL:ArmorWithPerk = new ArmorWithPerk("NurseCl","NurseCl","skimpy nurse's outfit","a nurse's outfit",0,0,100,"This borderline obscene nurse's outfit would barely cover your hips and crotch.  The midriff is totally exposed, and the white top leaves plenty of room for cleavage.  A tiny white hat tops off the whole ensemble.  It would grant a small regeneration to your HP.","Light",
 				PerkLib.SluttySeduction,8,0,0,0,"Your fetishy nurse outfit allows you access to an improved form of 'Tease'.");
 		public const OVERALL:Armor = new Armor("Overall", "Overalls", "white shirt and overalls", "a white shirt and overalls", 0, 0, 25, "A simple white shirt and overalls.", "Light", true);
+		public const OEKIMO :OniEnlightenedKimono = new OniEnlightenedKimono();
+		public const OTKIMO :OniTyrantKimono = new OniTyrantKimono();
 		public const P_CHANG:Armor = new Armor("P.Chang","PurpleChangshan","Purple Lunar new year dress (m)","a Purple Lunar new year dress (m)",0,0,100,"A simple yet elegant purple changshan with dragon motif. This clothing is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const P_QIPAO:Armor = new Armor("P.Qipao","PurpleQipao","Purple Lunar new year dress (f)","a Purple Lunar new year dress (f)",0,0,100,"A simple yet elegant purple qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const PKIMONO:ArmorWithPerk = new ArmorWithPerk("P.Kimono","P.Kimono","purple kimono","a purple kimono",0,1,200,"This lovely purple kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",

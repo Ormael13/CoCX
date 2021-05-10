@@ -1,4 +1,4 @@
-﻿//CoC Creature.as
+//CoC Creature.as
 package classes
 {
 import classes.BodyParts.Antennae;
@@ -1124,8 +1124,8 @@ public class Creature extends Utils
 			ass           = new AssClass();
 			ass.host      = this;
 			breastRows    = [];
-			_perks        = [];
-			statusEffects = [];
+			_perks        = new PerkManager(this);
+			_statusEffects = new StatusEffectManager(this);
 			this.strStat.core.value = 15;
 			this.touStat.core.value = 15;
 			this.speStat.core.value = 15;
@@ -1248,108 +1248,49 @@ public class Creature extends Utils
 		*/
 		//Monsters have few perks, which I think should be a status effect for clarity's sake.
 		//TODO: Move perks into monster status effects.
-		private var _perks:Array;
-		public function perk(i:int):PerkClass{
-			return _perks[i];
-		}
-		public function get perks():Array {
-			return _perks;
-		}
-		public function get numPerks():int {
-			return _perks.length;
-		}
-		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
-		//Someone call the grammar police!
-		//TODO: Move monster status effects into perks. Needs investigation though.
-		public var statusEffects:Array;
+		private var _perks:PerkManager;
 
+		public function get perkManager():PerkManager
+		{
+			return this._perks;
+		}
+
+		/**
+		 * STOP USING THIS! Use getPerk instead!
+		 * @deprecated
+		 * @param i
+		 * @return
+		 */
+		public function perk(i:int):PerkClass {
+			return _perks.asArray()[i];
+		}
+
+		/**
+		 * Perks as an array. Only use this when needing a full list of active perks.
+		 * If searching for a perk, use hasPerk or getPerk instead.
+		 */
+		public function get perks():Array {
+			return _perks.asArray();
+		}
+
+		/**
+		 * Get count of active perks
+		 * @return {Number} Number of active perks.
+		 */
+		public function get numPerks():int {
+			return _perks.count();
+		}
 
 		//Functions
 
 		//Create a perk
 		public function createPerk(ptype:PerkType, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{
-			var newKeyItem:PerkClass = new PerkClass(ptype);
-			//used to denote that the array has already had its new spot pushed on.
-			var arrayed:Boolean = false;
-			//used to store where the array goes
-			var keySlot:Number = 0;
-			var counter:Number = 0;
-			//Start the array if its the first bit
-			if (perks.length == 0)
-			{
-				//trace("New Perk Started Array! " + keyName);
-				perks.push(newKeyItem);
-				arrayed = true;
-				keySlot = 0;
-			}
-			//If it belongs at the end, push it on
-			if (perk(perks.length - 1).perkName < ptype.name && !arrayed)
-			{
-				//trace("New Perk Belongs at the end!! " + keyName);
-				perks.push(newKeyItem);
-				arrayed = true;
-				keySlot = perks.length - 1;
-			}
-			//If it belongs in the beginning, splice it in
-			if (perk(0).perkName > ptype.name && !arrayed)
-			{
-				//trace("New Perk Belongs at the beginning! " + keyName);
-				perks.splice(0, 0, newKeyItem);
-				arrayed = true;
-				keySlot = 0;
-			}
-			//Find the spot it needs to go in and splice it in.
-			if (!arrayed)
-			{
-				//trace("New Perk using alphabetizer! " + keyName);
-				counter = perks.length;
-				while (counter > 0 && !arrayed)
-				{
-					counter--;
-					//If the current slot is later than new key
-					if (perk(counter).perkName > ptype.name)
-					{
-						//If the earlier slot is earlier than new key && a real spot
-						if (counter - 1 >= 0)
-						{
-							//If the earlier slot is earlier slot in!
-							if (perk(counter - 1).perkName <= ptype.name)
-							{
-								arrayed = true;
-								perks.splice(counter, 0, newKeyItem);
-								keySlot = counter;
-							}
-						}
-						//If the item after 0 slot is later put here!
-						else
-						{
-							//If the next slot is later we are go
-							if (perk(counter).perkName <= ptype.name) {
-								arrayed = true;
-								perks.splice(counter, 0, newKeyItem);
-								keySlot = counter;
-							}
-						}
-					}
-				}
-			}
-			//Fallback
-			if (!arrayed)
-			{
-				//trace("New Perk Belongs at the end!! " + keyName);
-				perks.push(newKeyItem);
-				keySlot = perks.length - 1;
-			}
-			if (ptype.buffs != null)
-			{
-				statStore.addBuffObject(ptype.buffs, "perk_"+ptype.id, {text:ptype.name, save:false});
-			}
-			perk(keySlot).value1 = value1;
-			perk(keySlot).value2 = value2;
-			perk(keySlot).value3 = value3;
-			perk(keySlot).value4 = value4;
-			//trace("NEW PERK FOR PLAYER in slot " + keySlot + ": " + perk(keySlot).perkName);
+			this._perks.createPerk(ptype, value1, value2, value3, value4);
+		}
+
+		public function addPerkInstance(pclass:PerkClass):void {
+			this._perks.add(pclass);
 		}
 
 		/**
@@ -1357,281 +1298,182 @@ public class Creature extends Utils
 		 */
 		public function removePerk(ptype:PerkType):Boolean
 		{
-			var counter:Number = perks.length;
-			//Various Errors preventing action
-			if (perks.length <= 0)
-			{
-				return false;
-			}
-			if (perkv4(ptype) > 0)
-			{
-				// trace('ERROR! Attempted to remove permanent "' + ptype.name + '" perk.');
-				return false;
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (perk(counter).ptype == ptype)
-				{
-					perks.splice(counter, 1);
-					//trace("Attempted to remove \"" + perkName + "\" perk.");
-					if (ptype.buffs != null)
-					{
-						statStore.removeBuffs("perk_"+ptype.id);
-					}
-					return true;
-				}
-			}
-			return false;
+			return this._perks.remove(ptype);
 		}
 
-		//has perk?
+		/**
+		 * STOP USING THIS! Use Creature.hasPerk or Creature.getPerk instead!
+		 * Perks are no longer stored as an array this is an extremely slow compatibility measure.
+		 * @deprecated
+		 * @see Creature.hasPerk
+		 * @see Creature.getPerk
+		 * @param ptype
+		 * @return {Number} Index of perk in array if it exists. -1 if perk does not exist.
+		 */
 		public function findPerk(ptype:PerkType):Number
 		{
-			if (perks.length <= 0)
-				return -2;
-			for (var counter:int = 0; counter<perks.length; counter++)
-			{
-				if (perk(counter).ptype.id == ptype.id)
-					return counter;
+			var perk:PerkClass = this._perks.get(ptype);
+			if (perk) {
+				return this._perks.asArray().indexOf(perk);
 			}
 			return -1;
 		}
+
+		/**
+		 * Check if this creature has a perk.
+		 * @param ptype {PerkType}
+		 * @return {Boolean} True if creature has the perk, otherwise false.
+		 */
 		public function hasPerk(ptype:PerkType):Boolean {
-			return findPerk(ptype) >= 0;
+			return this._perks.has(ptype);
 		}
 
-		//Duplicate perk
-		//Deprecated?
+		/**
+		 * Get the instance of a perk.
+		 * @param {PerkType} ptype
+		 */
+		public function getPerk(ptype:PerkType):PerkClass {
+			return this._perks.get(ptype);
+		}
+
+		/**
+		 * Check if a perk is duplicated.
+		 * Always returns false as PerkManager forbids duplicates. Attempting to add an existing perk keeps the original
+		 * perk and aborts adding the new one.
+		 * @deprecated
+		 * @return {Boolean} False.
+		 */
 		public function perkDuplicated(ptype:PerkType):Boolean
 		{
-			var timesFound:int = 0;
-			if (perks.length <= 0)
-				return false;
-			for (var counter:int = 0; counter<perks.length; counter++)
-			{
-				if (perk(counter).ptype == ptype)
-					timesFound++;
-			}
-			return (timesFound > 1);
+			return false;
 		}
 
 		//remove all perks
 		public function removePerks():void
 		{
-			for each(var pc:PerkClass in _perks){
-				this.statStore.removeBuffs("perk_"+pc.ptype.id);
+			for each(var pc:PerkClass in _perks.asArray()){
+				this._perks.remove(pc.ptype);
 			}
-			_perks = [];
+			_perks.clear(); // Clean up anything else, just in case.
 		}
 
 		public function addPerkValue(ptype:PerkType, valueIdx:Number = 1, bonus:Number = 0): void
 		{
-			var counter:int = findPerk(ptype);
-			if (counter < 0) {
-				trace("ERROR? Looking for perk '" + ptype + "' to change value " + valueIdx + ", and player does not have the perk.");
-				return;
-			}
-			if (valueIdx < 1 || valueIdx > 4) {
-				CoC_Settings.error("addPerkValue(" + ptype.id + ", " + valueIdx + ", " + bonus + ").");
-				return;
-			}
-			if (valueIdx == 1)
-				perk(counter).value1 += bonus;
-			if (valueIdx == 2)
-				perk(counter).value2 += bonus;
-			if (valueIdx == 3)
-				perk(counter).value3 += bonus;
-			if (valueIdx == 4)
-				perk(counter).value4 += bonus;
+			this._perks.addPerkValue(ptype, valueIdx, bonus);
 		}
 
 		public function setPerkValue(ptype:PerkType, valueIdx:Number = 1, newNum:Number = 0): void
 		{
-			var counter:Number = findPerk(ptype);
-			//Various Errors preventing action
-			if (counter < 0) {
-				trace("ERROR? Looking for perk '" + ptype + "' to change value " + valueIdx + ", and player does not have the perk.");
-				return;
-			}
-			if (valueIdx < 1 || valueIdx > 4)
-			{
-				CoC_Settings.error("setPerkValue(" + ptype.id + ", " + valueIdx + ", " + newNum + ").");
-				return;
-			}
-			if (valueIdx == 1)
-				perk(counter).value1 = newNum;
-			if (valueIdx == 2)
-				perk(counter).value2 = newNum;
-			if (valueIdx == 3)
-				perk(counter).value3 = newNum;
-			if (valueIdx == 4)
-				perk(counter).value4 = newNum;
+			this._perks.setPerkValue(ptype, valueIdx, newNum);
 		}
 
 		public function perkv1(ptype:PerkType):Number
 		{
-			var counter:Number = findPerk(ptype);
-			if (counter < 0)
-			{
-				// trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
-				return 0;
-			}
-			return perk(counter).value1;
+			return this._perks.getPerkValue(ptype, 1);
 		}
 
-	public function perkv2(ptype:PerkType):Number
-	{
-		var counter:Number = findPerk(ptype);
-		if (counter < 0)
+		public function perkv2(ptype:PerkType):Number
 		{
-			// trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
-			return 0;
+			return this._perks.getPerkValue(ptype, 2);
 		}
-		return perk(counter).value2;
-	}
 
-	public function perkv3(ptype:PerkType):Number
-	{
-		var counter:Number = findPerk(ptype);
-		if (counter < 0)
+		public function perkv3(ptype:PerkType):Number
 		{
-			trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
-			return 0;
+			return this._perks.getPerkValue(ptype, 3);
 		}
-		return perk(counter).value3;
-	}
 
-	public function perkv4(ptype:PerkType):Number
-	{
-		var counter:Number = findPerk(ptype);
-		if (counter < 0)
+		public function perkv4(ptype:PerkType):Number
 		{
-			// trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
-			return 0;
+			return this._perks.getPerkValue(ptype, 4);
 		}
-		return perk(counter).value4;
-	}
-
 		/*
 
 		[    S T A T U S   E F F E C T S    ]
 
 		*/
 		//{region StatusEffects
+
+		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
+		//Someone call the grammar police!
+		//TODO: Move monster status effects into perks. Needs investigation though.
+		private var _statusEffects:StatusEffectManager;
+
+		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
+		//Someone call the grammar police!
+		//TODO: Move monster status effects into perks. Needs investigation though.
+		/**
+		 * List of all status effects.
+		 */
+		public function get statusEffects():Array {
+			return this._statusEffects.asArray();
+		}
 		public function createOrFindStatusEffect(stype:StatusEffectType):StatusEffectClass
 		{
-			var sec:StatusEffectClass = statusEffectByType(stype);
-			if (!sec) sec = createStatusEffect(stype,0,0,0,0);
-			return sec;
+			return this._statusEffects.createOrFindStatusEffect(stype);
 		}
-		//Create a status
 		public function createStatusEffect(stype:StatusEffectType, value1:Number, value2:Number, value3:Number, value4:Number, fireEvent:Boolean = true):StatusEffectClass
 		{
-			var newStatusEffect:StatusEffectClass = stype.create(value1,value2,value3,value4);
-			statusEffects.push(newStatusEffect);
-			newStatusEffect.addedToHostList(this,fireEvent);
-			return newStatusEffect;
+			return this._statusEffects.createStatusEffect(stype, value1, value2, value3, value4, fireEvent);
 		}
-		public function addStatusEffect(sec:StatusEffectClass/*,fireEvent:Boolean = true*/):void {
-			if (sec.host != this) {
-				sec.remove();
-				sec.attach(this/*,fireEvent*/);
-			} else {
-				statusEffects.push(sec);
-				sec.addedToHostList(this,true);
-			}
+		public function addStatusEffect(sec:StatusEffectClass/*,fireEvent:Boolean = true*/):void
+		{
+			return this._statusEffects.addStatusEffect(sec);
 		}
-		//Remove a status
 		public function removeStatusEffect(stype:StatusEffectType/*, fireEvent:Boolean = true*/):StatusEffectClass
 		{
-			var counter:Number = indexOfStatusEffect(stype);
-			if (counter < 0) return null;
-			var sec:StatusEffectClass = statusEffects[counter];
-			statusEffects.splice(counter, 1);
-			sec.removedFromHostList(true);
-			return sec;
+			return this._statusEffects.removeStatusEffect(stype);
 		}
-		public function removeStatusEffectInstance(sec:StatusEffectClass/*, fireEvent:Boolean = true*/):void {
-			var i:int = statusEffects.indexOf(sec);
-			if (i < 0) return;
-			statusEffects.splice(i, 1);
-			sec.removedFromHostList(true);
+		public function removeStatusEffectInstance(sec:StatusEffectClass/*, fireEvent:Boolean = true*/):void
+		{
+			return this._statusEffects.removeStatusEffectInstance(sec);
 		}
 
-		public function indexOfStatusEffect(stype:StatusEffectType):int {
-			for (var counter:int = 0; counter < statusEffects.length; counter++) {
-				if ((statusEffects[counter] as StatusEffectClass).stype == stype)
-					return counter;
-			}
-			return -1;
-		}
-		public function statusEffectByType(stype:StatusEffectType):StatusEffectClass {
-			var idx:int = indexOfStatusEffect(stype);
-			return idx<0 ? null : statusEffects[idx];
+		public function statusEffectByType(stype:StatusEffectType):StatusEffectClass
+		{
+			return this._statusEffects.statusEffectByType(stype);
 		}
 		public function hasStatusEffect(stype:StatusEffectType):Boolean {
-			return indexOfStatusEffect(stype) >= 0;
+			return this._statusEffects.hasStatusEffect(stype);
 		}
-		//}endregion
-
-
 		public function changeStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, newNum:Number = 0):void
 		{
-			if (statusValueNum < 1 || statusValueNum > 4) {
-				CoC_Settings.error("ChangeStatusValue called with invalid status value number.");
-				return;
-			}
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			//Various Errors preventing action
-			if (!sac)return;
-			if (statusValueNum == 1) sac.value1 = newNum;
-			if (statusValueNum == 2) sac.value2 = newNum;
-			if (statusValueNum == 3) sac.value3 = newNum;
-			if (statusValueNum == 4) sac.value4 = newNum;
+			return this._statusEffects.changeStatusValue(stype, statusValueNum, newNum);
 		}
-
 		public function addStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, bonus:Number = 0):void
 		{
-			if (statusValueNum < 1 || statusValueNum > 4) {
-				CoC_Settings.error("ChangeStatusValue called with invalid status value number.");
-				return;
-			}
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			//Various Errors preventing action
-			if (!sac)return;
-			if (statusValueNum == 1) sac.value1 += bonus;
-			if (statusValueNum == 2) sac.value2 += bonus;
-			if (statusValueNum == 3) sac.value3 += bonus;
-			if (statusValueNum == 4) sac.value4 += bonus;
-		}
-
-		public function statusEffectByIndex(idx:int):StatusEffectClass {
-			return statusEffects[idx];
+			return this._statusEffects.addStatusValue(stype, statusValueNum, bonus);
 		}
 
 		public function statusEffectv1(stype:StatusEffectType):Number
 		{
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			return sac?sac.value1:0;
+			if (this._statusEffects.hasStatusEffect(stype)) {
+				return this._statusEffects.getStatusValue(stype, 1);
+			}
+			return 0;
 		}
 
 		public function statusEffectv2(stype:StatusEffectType):Number
 		{
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			return sac?sac.value2:0
+			if (this._statusEffects.hasStatusEffect(stype)) {
+				return this._statusEffects.getStatusValue(stype, 2);
+			}
+			return 0;
 		}
 
 		public function statusEffectv3(stype:StatusEffectType):Number
 		{
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			return sac?sac.value3:0
+			if (this._statusEffects.hasStatusEffect(stype)) {
+				return this._statusEffects.getStatusValue(stype, 3);
+			}
+			return 0;
 		}
 
 		public function statusEffectv4(stype:StatusEffectType):Number
 		{
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			return sac?sac.value4:0
+			if (this._statusEffects.hasStatusEffect(stype)) {
+				return this._statusEffects.getStatusValue(stype, 4);
+			}
+			return 0;
 		}
 
 		public function cleanAllBuffs():void
@@ -1644,8 +1486,9 @@ public class Creature extends Utils
 
 		public function removeStatuses():void
 		{
-			statusEffects = [];
+			this._statusEffects.removeStatuses();
 		}
+
 
 		/**
 		 * Applies (creates or increases) a combat-long debuff to stat.

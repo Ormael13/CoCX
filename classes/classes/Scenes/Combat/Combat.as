@@ -40,6 +40,7 @@ import classes.Scenes.Areas.HighMountains.Harpy;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
+import classes.Scenes.Combat.MagicSpecials;
 import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Dungeons.D3.*;
@@ -2882,6 +2883,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
             if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
             if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+            if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1 + (40 / 100);
             if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
                 if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
                 else {
@@ -4208,13 +4210,28 @@ public class Combat extends BaseContent {
             //DEALING WING ATTACKS
             if (player.hasAWingAttack())
             {
-                outputText("You batter your foe with your two powerful wings");
-                if (player.wings.type == Wings.GARGOYLE_LIKE_LARGE){
-                    //(If gargoyle stun proc)
-                    outputText(" the stony impact sending it reel to the side, dazed");
+                if (player.wings.type == Wings.THUNDEROUS_AURA){
+                    outputText("You zap your opponent with your aura, delivering a set of arousing discharge");
+                    LustyEnergyNaturalWeaponAttack(0.20)
+                    LustyEnergyNaturalWeaponAttack(0.20)
+                    LustyEnergyNaturalWeaponAttack(0.20)
+                    LustyEnergyNaturalWeaponAttack(0.20)
+                    LustyEnergyNaturalWeaponAttack(0.20)
                 }
-                outputText(".");
-                ExtraNaturalWeaponAttack(0.5);
+                else{
+                    if (player.wings.type == Wings.WINDY_AURA){
+                        outputText("You unleash your sharp winds on your opponent delivering bruise and cuts");
+                    }
+                    else{
+                        outputText("You batter your foe with your two powerful wings");
+                    }
+                    if (player.wings.type == Wings.GARGOYLE_LIKE_LARGE){
+                        //(If gargoyle stun proc)
+                        outputText(" the stony impact sending it reel to the side, dazed");
+                    }
+                    outputText(".");
+                    ExtraNaturalWeaponAttack(0.5);
+                }
                 outputText("\n");
             }
             //DOING HORN ATACK
@@ -4261,6 +4278,11 @@ public class Combat extends BaseContent {
                     outputText(".")
                     ExtraNaturalWeaponAttack(0.5);
                     ExtraNaturalWeaponAttack(0.5);
+                    outputText("\n")
+                }
+                if (player.tail.type == Tail.RAIJU || player.tail.type == Tail.THUNDERBIRD){
+                    outputText("You overcharge your tail in order to deliver a pleasant but electrifying caress to your opponent.");
+                    LustyEnergyNaturalWeaponAttack(1);
                     outputText("\n")
                 }
                 else if (player.tail.type == Tail.SCORPION || player.tail.type == Tail.BEE_ABDOMEN ){
@@ -4359,6 +4381,9 @@ public class Combat extends BaseContent {
         }
         // Do all other attacks
         meleeDamageAcc(IsFeralCombat);
+        if (player.hasPerk(PerkLib.LightningClaw)){
+            outputText(" The residual electricity leaves your foe skin tingling with pleasure.");
+        }
     }
 
     public function attack2():void {
@@ -5430,6 +5455,72 @@ public class Combat extends BaseContent {
                 //Damage is delivered HERE
                 damage *= FeraldamageMultiplier;
                 doDamage(damage, true, true);
+                if (player.hasPerk(PerkLib.LightningClaw)) {
+                    damage = 6 + rand(3);
+                    if (player.findPerk(PerkLib.SensualLover) >= 0) damage += 2;
+                    if (player.findPerk(PerkLib.Seduction) >= 0) damage += 5;
+                    //+ slutty armor bonus
+                    if (player.findPerk(PerkLib.SluttySeduction) >= 0) damage += player.perkv1(PerkLib.SluttySeduction);
+                    if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+                    if (player.findPerk(PerkLib.BimboBody) >= 0 || player.findPerk(PerkLib.BroBody) >= 0 || player.findPerk(PerkLib.FutaForm) >= 0) damage += 5;
+                    if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
+                    damage += scalingBonusLibido() * 0.1;
+                    if (player.findPerk(PerkLib.JobSeducer) >= 0) damage += player.teaseLevel * 3;
+                    else damage += player.teaseLevel * 2;
+                    //partial skins bonuses
+                    switch (player.coatType()) {
+                        case Skin.FUR:
+                            damage += (1 + player.newGamePlusMod());
+                            break;
+                        case Skin.SCALES:
+                            damage += (2 * (1 + player.newGamePlusMod()));
+                            break;
+                        case Skin.CHITIN:
+                            damage += (3 * (1 + player.newGamePlusMod()));
+                            break;
+                        case Skin.BARK:
+                            damage += (4 * (1 + player.newGamePlusMod()));
+                            break;
+                    }
+                    //slutty simplicity bonus
+                    if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") damage *= (1 + ((10 + rand(11)) / 100));
+                    damage *= .7;
+                    var damagemultiplier:Number = 1;
+                    if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
+                    if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
+                    if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
+                    if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
+                    if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
+                    damage *= damagemultiplier;
+                    //Determine if critical tease!
+                    var crit1:Boolean = false;
+                    var critChance1:int = 5;
+                    if (player.hasPerk(PerkLib.CriticalPerformance)) {
+                        if (player.lib <= 100) critChance1 += player.lib / 5;
+                        if (player.lib > 100) critChance1 += 20;
+                    }
+                    if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance1 = 0;
+                    if (rand(100) < critChance1) {
+                        crit1 = true;
+                        damage *= 1.75;
+                    }
+                    if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+                    if (player.findPerk(PerkLib.RacialParagon) >= 0) damage *= 1.5;
+                    if (player.findPerk(PerkLib.Apex) >= 0) damage *= 1.5;
+                    if (player.findPerk(PerkLib.AlphaAndOmega) >= 0) damage *= 1.5;
+                    damage = damage * 0.33 * monster.lustVuln;
+                    damage = Math.round(damage);
+                    monster.teased(damage);
+                    if (crit1) outputText(" <b>Critical!</b>");
+                    outputText(" ");
+                    if (player.hasPerk(PerkLib.SuperSensual) && player.hasPerk(PerkLib.Sensual)) teaseXP(2);
+                    else teaseXP(1);
+                    if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)){
+                        if (rand(100) < 5) {
+                            if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+                        }
+                    }
+                }
             }
             if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75) {
                 if (monster.armorDef - 5 > 0) monster.armorDef -= 5;
@@ -5440,6 +5531,113 @@ public class Combat extends BaseContent {
         fatigueRecovery();
         manaregeneration();
         soulforceregeneration();
+    }
+
+    public function LustyEnergyNaturalWeaponAttack(FeraldamageMultiplier:Number = 1, stunChance:Number = 10){
+        var damage:Number = scalingBonusIntelligence() * spellModWhite();
+        damage = damage*FeraldamageMultiplier;
+        //Determine if critical hit!
+        var crit1:Boolean = false;
+        var critChance1:int = 5;
+        critChance1 += combatMagicalCritical();
+        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
+        if (rand(100) < critChance1) {
+            crit1 = true;
+            damage *= 1.75;
+        }
+        //High damage to goes.
+        damage = combat.magic.calcVoltageModImpl(damage);
+        if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+        if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+        if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+        if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+        if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+        if (player.hasPerk(PerkLib.FloralOvaries)) damage *= 1.25;
+        if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+        damage = Math.round(damage);
+        doLightingDamage(damage, true, true);
+        if (crit1) outputText(" <b>*Critical Hit!*</b>");
+        dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
+        var lustDmgF:Number = 20 + rand(6);
+        var lustBoostToLustDmg:Number = 0;
+        var bimbo:Boolean   = false;
+        var bro:Boolean     = false;
+        var futa:Boolean    = false;
+        if (player.findPerk(PerkLib.SensualLover) >= 0) {
+            lustDmgF += 2;
+        }
+        if (player.findPerk(PerkLib.Seduction) >= 0) lustDmgF += 5;
+        if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustDmgF += player.perkv1(PerkLib.SluttySeduction);
+        if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustDmgF += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+        if (bimbo || bro || futa) {
+            lustDmgF += 5;
+        }
+        if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustDmgF += 10;
+        lustDmgF += scalingBonusLibido() * 0.1;
+        if (player.hasPerk(PerkLib.EromancyExpert)) lustDmgF *= 1.5;
+        if (player.findPerk(PerkLib.JobSeducer) >= 0) lustDmgF += player.teaseLevel * 3;
+        else lustDmgF += player.teaseLevel * 2;
+        if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) lustDmgF *= 1.2;
+        switch (player.coatType()) {
+            case Skin.FUR:
+                lustDmgF += (1 + player.newGamePlusMod());
+                break;
+            case Skin.SCALES:
+                lustDmgF += (2 * (1 + player.newGamePlusMod()));
+                break;
+            case Skin.CHITIN:
+                lustDmgF += (3 * (1 + player.newGamePlusMod()));
+                break;
+            case Skin.BARK:
+                lustDmgF += (4 * (1 + player.newGamePlusMod()));
+                break;
+        }
+        if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
+        if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
+            lustDmgF *= (1 + (player.lust100 * 0.01));
+        }
+        if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) {
+            lustDmgF *= (1 + combat.historyWhoreBonus());
+        }
+        lustBoostToLustDmg += lustDmgF * 0.01;
+        lustDmgF *= 0.2;
+        if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
+        else if (player.lust100 * 0.01 < 0.2) lustDmgF += (lustBoostToLustDmg * 140);
+        else lustDmgF += (lustBoostToLustDmg * 2 * (20 - (player.lust100 * 0.01)));
+        //Determine if critical tease!
+        var crit2:Boolean = false;
+        var critChance2:int = 5;
+        if (player.findPerk(PerkLib.CriticalPerformance) >= 0) {
+            if (player.lib <= 100) critChance2 += player.lib / 5;
+            if (player.lib > 100) critChance2 += 20;
+        }
+        if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance2 = 0;
+        if (rand(100) < critChance2) {
+            crit2 = true;
+            lustDmgF *= 1.75;
+        }
+        if (player.findPerk(PerkLib.ChiReflowLust) >= 0) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+        if (player.findPerk(PerkLib.ArouseTheAudience) >= 0 && (monster.findPerk(PerkLib.EnemyGroupType) >= 0 || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmgF *= 1.5;
+        if (player.findPerk(PerkLib.HeartOfTheStorm) >= 0) damage *= 1.1;
+        if (player.findPerk(PerkLib.HeartOfTheStormEvolved) >= 0) damage *= 1.2;
+        if (player.findPerk(PerkLib.HeartOfTheStormFinalForm) >= 0) damage *= 1.3;
+        if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
+        if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
+        if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+        if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
+        lustDmgF = lustDmgF * monster.lustVuln;
+        lustDmgF = Math.round(lustDmgF);
+        monster.teased(lustDmgF);
+        combat.bonusExpAfterSuccesfullTease();
+        if (crit2) outputText(" <b>Critical!</b>");
+        outputText("\n\n");
+        if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+        if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+        if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)){
+            if (rand(100) < stunChance) {
+                if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+            }
+        }
     }
 
     public function WeaponMeleeStatusProcs():void {
@@ -7520,6 +7718,11 @@ public class Combat extends BaseContent {
             outputText(" as a bolt falls from the sky!\n\n");
             combat.bonusExpAfterSuccesfullTease();
             if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+            if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)){
+                if (rand(100) < 10) {
+                    if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+                }
+            }
             checkAchievementDamage(damage0);
             statScreenRefresh();
             if (monster.HP <= monster.minHP()) doNext(endHpVictory);
