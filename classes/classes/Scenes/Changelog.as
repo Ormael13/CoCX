@@ -149,7 +149,12 @@ package classes.Scenes
 			outputText("-New tier 2 intelligence lvl-up perk: Apprentice War Mage. Req. Novice War Mage perk, 80+ int. Effect: Increases wrath bar by 50. In-combat mana recovery increased by 10. Safe limit for spellcasting increased by 5%.\n");
 			outputText("-New tier 4 intelligence lvl-up perk: Adept War Mage. Req. Apprentice War Mage perk, 120+ int. Effect: Increases wrath bar by 150. In-combat mana recovery increased by 15. Safe limit for spellcasting increased by 5%.\n");
 			outputText("-Changes to code by Jtexc.\n");
-			outputText("-Two bosses appeared in 2nd floor of River Dungeon ready to wrestle with any brave adventures that goes into this floor. Be carefull if your team is ot yet ready to face them ;)\n");
+			outputText("-Four bosses appeared in 2nd floor of River Dungeon ready to wrestle with any brave adventures that goes into this floor. Be carefull if your team is ot yet ready to face them ;)\n");
+			outputText("-New tier 0 strength lvl-up perk: Challenging shout. Req. Job: Warrior perk, 25+ str. Effect: Allow to use Warrior Shout p.special.\n");
+			outputText("-New P. Special: Warrior Shout. Req. Challenging shout perk. Embolden yourself with a mighty shout. Generate 20% of max/overmax wrath on use as a free action. 10 turns colldown after use.\n");
+			//outputText("-New tier  strength lvl-up perk: Balance breaker. Req. . Effect: Hits from maces/hammers leaves your opponent disoriented nullifying their stability. (Maces/Hammers ignore stun immunity their stun now considered as power stuns)\n");
+			outputText("-Delays when having alot perks or/and status effects decreased thanks to grmb-bit code changes.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
@@ -248,11 +253,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

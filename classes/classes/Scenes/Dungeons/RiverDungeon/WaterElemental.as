@@ -74,23 +74,23 @@ public class WaterElemental extends Monster
 		{
 			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 				if (hasStatusEffect(StatusEffects.Provoke)) {
-					var choiceP1:Number = rand(6);
-					if (choiceP1 < 3) fluffyOfPunches();
-					if (choiceP1 == 3) baseElementalAttack();
-					if (choiceP1 > 3) subbossSpecial();
+					var choiceP1:Number = rand(5);
+					if (choiceP1 == 0) fluffyOfPunches();
+					if (choiceP1 == 1) baseElementalAttack();
+					if (choiceP1 > 1) subbossSpecial();
 				}
 				else {
 					var choice11:Number = rand(6);
-					if (choice11 < 3) fluffyOfPunches();
-					if (choice11 == 3 || choice11 == 4) baseElementalAttack();
-					if (choice11 == 5) subbossSpecial();
+					if (choice11 < 2) fluffyOfPunches();
+					if (choice11 == 2 || choice11 == 3) baseElementalAttack();
+					if (choice11 > 3) subbossSpecial();
 				}
 			}
 			else {
 				if (hasStatusEffect(StatusEffects.Provoke)) {
-					var choiceP:Number = rand(6);
-					if (choiceP < 5) fluffyOfPunches();
-					if (choiceP == 5) baseElementalAttack();
+					var choiceP:Number = rand(5);
+					if (choiceP < 4) fluffyOfPunches();
+					if (choiceP == 4) baseElementalAttack();
 				}
 				else {
 					var choice1:Number = rand(6);

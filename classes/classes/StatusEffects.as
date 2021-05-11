@@ -1092,6 +1092,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownTazer:StatusEffectType               		= mkCombat("Cooldown Tazer");
 		public static const CooldownTornadoStrike:StatusEffectType       		= mkCombat("Cooldown Tornado Strike");
 		public static const CooldownTerror:StatusEffectType              		= mkCombat("Cooldown Terror");
+		public static const CooldownWarriorShout:StatusEffectType               = mkCombat("Cooldown Warrior Shout");
 		public static const CooldownWeirdWords:StatusEffectType           		= mkCombat("Cooldown Weird words");
 		public static const CooldownWindScythe:StatusEffectType       			= mkCombat("Cooldown Wind Scythe");
 		public static const CooldownHurricane:StatusEffectType       			= mkCombat("Cooldown Hurricane");

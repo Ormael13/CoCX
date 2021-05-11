@@ -14,7 +14,7 @@ import classes.Scenes.SceneLib;
 public class FireElemental extends Monster
 	{
 		public function baseElementalAttack():void {
-			outputText("Fire elemental concentrate fire on it fist and send punch toward you.");
+			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Ifrit":"Fire elemental")+" concentrate fire on it fist and send punch toward you.");
 			var damage:Number = inte + wis;
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
@@ -31,7 +31,7 @@ public class FireElemental extends Monster
 		}
 		
 		public function fluffyOfPunches():void {
-			outputText("Fire elemental concentrate fire on it fists and goes wild at you sending flurry of punches.");
+			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Ifrit":"Fire elemental")+" concentrate fire on it fists and goes wild at you sending flurry of punches.");
 			var damage:Number = inte + wis;
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
@@ -50,16 +50,57 @@ public class FireElemental extends Monster
 			}
 		}
 		
+		public function subbossSpecial():void {
+			outputText("Ifrit solidify ambient elemental energy into many medium sized fireballs and with a wave of it hands sends toward you.");
+			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
+			else {
+				var damage:Number = inte + wis;
+				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
+				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+				damage *= 3.75;
+				damage = Math.round(damage);
+				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
+				outputText(" They hits you all over the body. ");
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+				damage = player.takeFireDamage(damage, true);
+			}
+		}
+		
 		override protected function performCombatAction():void
 		{
 			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
-				
+				if (hasStatusEffect(StatusEffects.Provoke)) {
+					var choiceP1:Number = rand(5);
+					if (choiceP1 == 0) fluffyOfPunches();
+					if (choiceP1 == 1) baseElementalAttack();
+					if (choiceP1 > 1) subbossSpecial();
+				}
+				else {
+					var choice11:Number = rand(6);
+					if (choice11 < 2) fluffyOfPunches();
+					if (choice11 == 2 || choice11 == 3) baseElementalAttack();
+					if (choice11 > 3) subbossSpecial();
+				}
 			}
 			else {
 				if (hasStatusEffect(StatusEffects.Provoke)) {
-					var choiceP:Number = rand(6);
-					if (choiceP < 5) fluffyOfPunches();
-					if (choiceP == 5) baseElementalAttack();
+					var choiceP:Number = rand(5);
+					if (choiceP < 4) fluffyOfPunches();
+					if (choiceP == 4) baseElementalAttack();
 				}
 				else {
 					var choice1:Number = rand(6);
@@ -70,14 +111,23 @@ public class FireElemental extends Monster
 			}
 		}
 		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) SceneLib.dungeons.riverdungeon.defeatFireElementalSubBoss();
+			else cleanupAfterCombat();
+		}
+		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.riverdungeon.defeatedByFireElemental();
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) SceneLib.dungeons.riverdungeon.defeatedByFireElementalSubBoss();
+			else SceneLib.dungeons.riverdungeon.defeatedByFireElemental();
 		}
 		
 		public function FireElemental() 
 		{
 			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 0) {
+				this.short = "fire elemental";
+				this.imageName = "fire elemental";
 				this.long = "You're currently fighting fire elemental. It's four feet tall, it body covered with fire and it's using bare fists to fight.";
 				this.tallness = 48;
 				initStrTouSpeInte(10, 20, 40, 50);
@@ -90,6 +140,8 @@ public class FireElemental extends Monster
 				this.additionalXP = 50;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 1) {
+				this.short = "fire elemental";
+				this.imageName = "fire elemental";
 				this.long = "You're currently fighting fire elemental. It's four feet and three inches tall, it body covered with fire and it's using bare fists to fight.";
 				this.tallness = 51;
 				initStrTouSpeInte(12, 22, 42, 60);
@@ -102,6 +154,8 @@ public class FireElemental extends Monster
 				this.additionalXP = 75;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 2) {
+				this.short = "fire elemental";
+				this.imageName = "fire elemental";
 				this.long = "You're currently fighting fire elemental. It's four and half feet tall, it body covered with fire and it's using bare fists to fight.";
 				this.tallness = 54;
 				initStrTouSpeInte(14, 24, 44, 70);
@@ -114,6 +168,8 @@ public class FireElemental extends Monster
 				this.additionalXP = 100;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 3) {
+				this.short = "fire elemental";
+				this.imageName = "fire elemental";
 				this.long = "You're currently fighting fire elemental. It's four feet and nine iches tall, it body covered with fire and it's using bare fists to fight.";
 				this.tallness = 57;
 				initStrTouSpeInte(16, 26, 46, 80);
@@ -125,8 +181,10 @@ public class FireElemental extends Monster
 				this.bonusHP = 550;
 				this.additionalXP = 125;
 			}
-			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {//river dungeon floor 2 subboss
-				this.long = "You're currently fighting fire elemental. It's nine feet tall, it body covered with fire and it's using bare fists to fight.";
+			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
+				this.short = "ifrit";
+				this.imageName = "fire ifrit";
+				this.long = "You're currently fighting 'female' ifrit. It's nine feet tall, it body covered with fire and it's using bare fists to fight.";
 				this.tallness = 108;
 				initStrTouSpeInte(16, 26, 46, 80);
 				initWisLibSensCor(80, 15, 55, 50);
@@ -138,8 +196,6 @@ public class FireElemental extends Monster
 				this.additionalXP = 190;
 			}
 			this.a = "the ";
-			this.short = "fire elemental";
-			this.imageName = "fire elemental";
 			this.plural = false;
 			this.lustVuln = 0;
 			this.drop = new ChainedDrop()

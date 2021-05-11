@@ -10,6 +10,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.CoC;
+import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
@@ -65,6 +66,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Feint)) {
 				bd = buttons.add("Feint", feint).hint("Attempt to feint an opponent into dropping its guard.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			if (player.hasPerk(PerkLib.ChallengingShout)) {
+				bd = buttons.add("Warrior Shout", warriorShout).hint("Embolden yourself with a mighty shout. Generate 20% of max/overmax wrath on use as a free action.\nWould go into cooldown after use for: 10 rounds");//"+(player.hasPerk(PerkLib.NaturalInstincts) ? "1":"2")+"
+				if (player.hasStatusEffect(StatusEffects.CooldownWarriorShout)) {
+					bd.disable("<b>You need more time before you can perform Warrior Shout again.</b>\n\n");
+				}
 			}
 			bd = buttons.add("Charge", charging).hint("Charge at your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
 			if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
@@ -1474,6 +1481,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 			bowPerkUnlock();
 		}
 		enemyAI();
+	}
+	
+	public function warriorShout():void {
+		clearOutput();
+		player.createStatusEffect(StatusEffects.CooldownWarriorShout, 10, 0, 0, 0);
+		outputText("You let out a primal shout that lets your enemies know you won’t be easily defeated.\n\n");
+		var wsr:Number = 0.2;
+		wsr *= player.maxOverWrath();
+		EngineCore.WrathChange(wsr, true);
+		menu();
+		addButton(0, "Next", combatMenu, false);
 	}
 	
 	public function charging():void {

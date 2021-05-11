@@ -5533,7 +5533,7 @@ public class Combat extends BaseContent {
         soulforceregeneration();
     }
 
-    public function LustyEnergyNaturalWeaponAttack(FeraldamageMultiplier:Number = 1, stunChance:Number = 10){
+    public function LustyEnergyNaturalWeaponAttack(FeraldamageMultiplier:Number = 1, stunChance:Number = 10):void {
         var damage:Number = scalingBonusIntelligence() * spellModWhite();
         damage = damage*FeraldamageMultiplier;
         //Determine if critical hit!
@@ -8248,6 +8248,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownFlicker);
             } else {
                 player.addStatusValue(StatusEffects.CooldownFlicker, 1, -1);
+            }
+        }
+        //Warrior Shout
+        if (player.hasStatusEffect(StatusEffects.CooldownWarriorShout)) {
+            if (player.statusEffectv1(StatusEffects.CooldownWarriorShout) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownWarriorShout);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownWarriorShout, 1, -1);
             }
         }
         //Jabbing Style Periodic removal
