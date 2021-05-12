@@ -584,7 +584,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulPersonage) && player.hasStatusEffect(StatusEffects.KnowsHailOfBlades)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades)) {
-                outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Sextuple Thrust.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+                outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Grandiose Hail of Blades.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Grandiose Hail of Blades.</b>");
                 player.createStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades, 0, 0, 0, 0);
                 return;
@@ -604,7 +604,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulPersonage) && player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades)) {
-                outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Sextuple Thrust.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+                outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Grandiose Hail of Moon Blades.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Grandiose Hail of Moon Blades.</b>");
                 player.createStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades, 0, 0, 0, 0);
                 return;
