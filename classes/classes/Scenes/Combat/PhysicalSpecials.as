@@ -10,6 +10,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.CoC;
+import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
@@ -65,6 +66,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Feint)) {
 				bd = buttons.add("Feint", feint).hint("Attempt to feint an opponent into dropping its guard.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			if (player.hasPerk(PerkLib.ChallengingShout)) {
+				bd = buttons.add("Warrior Shout", warriorShout).hint("Embolden yourself with a mighty shout. Generate 20% of max/overmax wrath on use as a free action.\nWould go into cooldown after use for: 10 rounds");//"+(player.hasPerk(PerkLib.NaturalInstincts) ? "1":"2")+"
+				if (player.hasStatusEffect(StatusEffects.CooldownWarriorShout)) {
+					bd.disable("<b>You need more time before you can perform Warrior Shout again.</b>\n\n");
+				}
 			}
 			bd = buttons.add("Charge", charging).hint("Charge at your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
 			if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
@@ -323,7 +330,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			if (player.isShieldsForShieldBash()) {
 				bd = buttons.add("Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
-				bd.requireFatigue(physicalCost(20));
+				bd.requireWrath(30);
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.shieldName == "Battle Net") {
@@ -1474,6 +1481,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 			bowPerkUnlock();
 		}
 		enemyAI();
+	}
+	
+	public function warriorShout():void {
+		clearOutput();
+		player.createStatusEffect(StatusEffects.CooldownWarriorShout, 10, 0, 0, 0);
+		outputText("You let out a primal shout that lets your enemies know you won’t be easily defeated.\n\n");
+		var wsr:Number = 0.2;
+		wsr *= player.maxOverWrath();
+		EngineCore.WrathChange(wsr, true);
+		menu();
+		addButton(0, "Next", combatMenu, false);
 	}
 	
 	public function charging():void {
@@ -5002,7 +5020,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
 		outputText("You merrily chug from the gourd quenching your thirst for sake.");
-		monster.createStatusEffect(StatusEffects.Dig,5,0,0,0);
 		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore()) outputText("\n\nOOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze your muscle filling with extra alchoholic might. Now you're totaly going to destroy whoever was stupid enought to challange you.");
 		enemyAI();
 	}
@@ -5189,6 +5206,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function shieldBash():void {
 		clearOutput();
+		EngineCore.WrathChange(-30, true);
 		outputText("You ready your [shield] and prepare to slam it towards " + monster.a + monster.short + ".  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
@@ -5216,7 +5234,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else monster.addStatusValue(StatusEffects.TimesBashed, 1, player.hasPerk(PerkLib.ShieldSlam) ? 0.5 : 1);
 		}
 		checkAchievementDamage(damage);
-		fatigue(20, USEFATG_PHYSICAL);
 		if (player.shield == shields.SPIL_SH || player.shield == shields.SPIH_SH || player.shield == shields.SPIM_SH) {
 			if (monster.hasStatusEffect(StatusEffects.HemorrhageShield)) monster.addStatusValue(StatusEffects.HemorrhageShield, 1, 3);
 			else monster.createStatusEffect(StatusEffects.HemorrhageShield, 3, 0.02, 0, 0);
