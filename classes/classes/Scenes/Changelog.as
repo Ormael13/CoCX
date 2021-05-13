@@ -155,7 +155,7 @@ package classes.Scenes
 			//outputText("-New tier  strength lvl-up perk: Balance breaker. Req. . Effect: Hits from maces/hammers leaves your opponent disoriented nullifying their stability. (Maces/Hammers ignore stun immunity their stun now considered as power stuns)\n");
 			outputText("-Delays when having alot perks or/and status effects decreased thanks to grmb-bit code changes.\n");
 			outputText("-New update for Oni including sprited tetsubo, a gourd accessory and two high level kimono at Kaiba (by Liadri)\n");
-			outputText("-Shield bash cost changed from 20 fatigue to 30 wrath. Blocking use 10 wrath and will now check for having shield that can be used to block (it mean all that can be used to shield bash too).\n");
+			outputText("-Shield bash cost changed from 20 fatigue to 15 wrath. Blocking use 6 wrath and will now check for having shield that can be used to block (it mean all that can be used to shield bash too). If PC use large or massive shield shield bash and block wrath costs increasing by: 15/30 and 4/8\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's

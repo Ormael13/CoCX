@@ -5940,10 +5940,13 @@ public class Combat extends BaseContent {
         }
         if (blockChance < 10) blockChance = 10;
         //Wrath limit
-        if (blockChance >= (rand(100) + 1) && player.wrath >= 10 && player.shieldName != "nothing" && player.isShieldsForShieldBash()) {// && player.weaponRange != weaponsrange.M1CERBE
+		var wrathShieldSize:int = 6;
+		if (player.shieldPerk == "Large") wrathShieldSize += 4;
+		if (player.shieldPerk == "Massive") wrathShieldSize += 4;
+        if (blockChance >= (rand(100) + 1) && player.wrath >= wrathShieldSize && player.shieldName != "nothing" && player.isShieldsForShieldBash()) {// && player.weaponRange != weaponsrange.M1CERBE
             if (doFatigue) {
-                if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100) EngineCore.WrathChange(5, true);
-                else EngineCore.WrathChange(10, true);
+                if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100) EngineCore.WrathChange((wrathShieldSize * 0.5), true);
+                else EngineCore.WrathChange(wrathShieldSize, true);
             }
             return true;
         } else return false;
