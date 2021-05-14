@@ -5036,8 +5036,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function Drink():void {
 		clearOutput();
 		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
-		outputText("You merrily chug from the gourd quenching your thirst for sake.");
-		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore()) outputText("\n\nOOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze your muscle filling with extra alchoholic might. Now you're totaly going to destroy whoever was stupid enought to challange you.");
+		outputText("You merrily chug from the gourd quenching your thirst for sake.\n\n");
+		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore()) outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze your muscle filling with extra alchoholic might. Now you're totaly going to destroy whoever was stupid enought to challange you.\n\n");
 		enemyAI();
 	}
 
