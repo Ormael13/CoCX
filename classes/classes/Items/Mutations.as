@@ -52,7 +52,7 @@ public final class Mutations extends MutationsHelper {
             else bonusdepower -= (player.spe - 1);
         }
         bonusempower += (20 * (1 + player.newGamePlusMod()));
-        player.statStore.addBuffObject({
+        player.statStore.replaceBuffObject({
             str: bonusempower,
             spe: -bonusdepower,
             inte: -bonusdepower,
