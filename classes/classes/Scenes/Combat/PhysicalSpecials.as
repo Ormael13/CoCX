@@ -330,7 +330,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			if (player.isShieldsForShieldBash()) {
 				bd = buttons.add("Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
-				bd.requireFatigue(physicalCost(20));
+				bd.requireWrath(shieldbashcostly());
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.shieldName == "Battle Net") {
@@ -628,6 +628,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage = Math.round(damage);
 			doDamage(damage, true, true);
 		}
+	}
+	
+	private function shieldbashcostly():Number {
+		var BCW:Number = 15;
+		if (player.shieldPerk == "Large") BCW += 15;
+		if (player.shieldPerk == "Massive") BCW += 15;
+		return BCW;
 	}
 	
 	public function powerAttackMenu():void {
@@ -5224,6 +5231,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function shieldBash():void {
 		clearOutput();
+		EngineCore.WrathChange(-shieldbashcostly(), true);
 		outputText("You ready your [shield] and prepare to slam it towards " + monster.a + monster.short + ".  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
@@ -5251,7 +5259,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else monster.addStatusValue(StatusEffects.TimesBashed, 1, player.hasPerk(PerkLib.ShieldSlam) ? 0.5 : 1);
 		}
 		checkAchievementDamage(damage);
-		fatigue(20, USEFATG_PHYSICAL);
 		if (player.shield == shields.SPIL_SH || player.shield == shields.SPIH_SH || player.shield == shields.SPIM_SH) {
 			if (monster.hasStatusEffect(StatusEffects.HemorrhageShield)) monster.addStatusValue(StatusEffects.HemorrhageShield, 1, 3);
 			else monster.createStatusEffect(StatusEffects.HemorrhageShield, 3, 0.02, 0, 0);

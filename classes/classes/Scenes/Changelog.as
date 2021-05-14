@@ -154,16 +154,20 @@ package classes.Scenes
 			outputText("-New P. Special: Warrior Shout. Req. Challenging shout perk. Embolden yourself with a mighty shout. Generate 20% of max/overmax wrath on use as a free action. 10 turns colldown after use.\n");
 			//outputText("-New tier  strength lvl-up perk: Balance breaker. Req. . Effect: Hits from maces/hammers leaves your opponent disoriented nullifying their stability. (Maces/Hammers ignore stun immunity their stun now considered as power stuns)\n");
 			outputText("-Delays when having alot perks or/and status effects decreased thanks to grmb-bit code changes.\n");
+			outputText("-New update for Oni including sprited tetsubo, a gourd accessory and two high level kimono at Kaiba (by Liadri)\n");
+			outputText("-Shield bash cost changed from 20 fatigue to 15 wrath. Blocking use 6 wrath and will now check for having shield that can be used to block (it mean all that can be used to shield bash too). If PC use large or massive shield shield bash and block wrath costs increasing by: 15/30 and 4/8\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-New update for Oni including sprited tetsubo, a gourd accessory and two high level kimono at Kaiba\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed bugs: Blood Demon toggle to use HP instead of mana resetting after each combat\n");/*ostatni punkt changelogu
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -224,9 +228,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -254,8 +256,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

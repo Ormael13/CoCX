@@ -5662,7 +5662,8 @@ public class Combat extends BaseContent {
         if (player.weapon == weapons.ZWNDER && !monster.hasStatusEffect(StatusEffects.Stunned)) stunChance += 30;
         //40% Stun chance
         if (player.weapon == weapons.BFGAUNT && player.hasPerk(PerkLib.MightyFist)) stunChance += 40;
-        if ((rand(100) < stunChance) && !monster.hasPerk(PerkLib.Resolute)) stun = true;
+		if (player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.BalanceBreaker)) stunChance *= 0.5;
+        if ((rand(100) < stunChance) && (!monster.hasPerk(PerkLib.Resolute) || (monster.hasPerk(PerkLib.Resolute) && player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.BalanceBreaker)))) stun = true;
         if (stun) {
             outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
             if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
@@ -5938,12 +5939,14 @@ public class Combat extends BaseContent {
             else blockChance += 10;
         }
         if (blockChance < 10) blockChance = 10;
-        //Fatigue limit
-        var fatigueLimit:int = player.maxFatigue() - physicalCost(10);
-        if (blockChance >= (rand(100) + 1) && player.fatigue <= fatigueLimit && player.shieldName != "nothing") {// && player.weaponRange != weaponsrange.M1CERBE
+        //Wrath limit
+		var wrathShieldSize:int = 6;
+		if (player.shieldPerk == "Large") wrathShieldSize += 4;
+		if (player.shieldPerk == "Massive") wrathShieldSize += 4;
+        if (blockChance >= (rand(100) + 1) && player.wrath >= wrathShieldSize && player.shieldName != "nothing" && player.isShieldsForShieldBash()) {// && player.weaponRange != weaponsrange.M1CERBE
             if (doFatigue) {
-                if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100) fatigue(5);
-                else fatigue(10);
+                if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100) EngineCore.WrathChange((wrathShieldSize * 0.5), true);
+                else EngineCore.WrathChange(wrathShieldSize, true);
             }
             return true;
         } else return false;
