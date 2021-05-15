@@ -4960,7 +4960,7 @@ use namespace CoC;
 				cowCounter++;
 			if (hasPerk(PerkLib.MinotaursDescendant) || hasPerk(PerkLib.BloodlineMinotaur))
 				cowCounter += 2;
-			if (hasPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				cowCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && cowCounter >= 4)
 				cowCounter += 1;
@@ -5689,7 +5689,7 @@ use namespace CoC;
 				lizardCounter++;
 			if (hasPerk(PerkLib.LizanMarrowFinalForm) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				lizardCounter++;
-			if (hasPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				lizardCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && lizardCounter >= 4)
 				lizardCounter += 1;
@@ -6759,17 +6759,17 @@ use namespace CoC;
 				poltergeistCounter++;
 			if (hasGhostSkin() && (skinAdj == "milky" || skinAdj == "ashen"))
 				poltergeistCounter++;
-			if (hasPerk(PerkLib.Incorporeality) >= 0)
+			if (hasPerk(PerkLib.Incorporeality))
 				poltergeistCounter++;
-			if (hasPerk(PerkLib.Ghostslinger) >= 0)
+			if (hasPerk(PerkLib.Ghostslinger))
 				poltergeistCounter++;
-			if (hasPerk(PerkLib.PhantomShooting) >= 0)
+			if (hasPerk(PerkLib.PhantomShooting))
 				poltergeistCounter++;
-			if (hasPerk(PerkLib.AscensionHybridTheory) >= 0 && poltergeistCounter >= 4)
+			if (hasPerk(PerkLib.AscensionHybridTheory) && poltergeistCounter >= 4)
 				poltergeistCounter += 1;
-			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && poltergeistCounter >= 8)
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && poltergeistCounter >= 8)
 				poltergeistCounter += 1;
-			if (hasPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				poltergeistCounter += 50;
 			if (isGargoyle()) poltergeistCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) poltergeistCounter = 0;
