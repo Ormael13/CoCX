@@ -5062,7 +5062,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			spe: -bonusdepower,
 			inte: -bonusdepower,
 			lib: bonusempower
-		}, "DrunkenPowerEmpower", {text: "Drunken Power", time: Buff.RATE_HOURS, tick: durationhour});
+		}, "DrunkenPowerEmpower", {text: "Drunken Power", rate: Buff.RATE_HOURS, tick: durationhour});
 	}
 
 	public function DrunkenPowerEmpowerOni():Number {
