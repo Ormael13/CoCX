@@ -1318,7 +1318,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         if (rando >= 90 && changeLimit != 0) {
-            if (player.skin.base.color == "blue" || player.skin.base.color == "grey" || player.skin.base.color == "red" || player.skin.base.color == "purple" || player.skin.base.color == "light purple" || player.skin.base.color == "ghostly white" || player.skin.base.color == "indigo" || player.skin.base.color == "sky blue" || player.skin.base.color == "shiny black") {
+            if (player.skin.base.color == "blue" || player.skin.base.color == "gray" || player.skin.base.color == "red" || player.skin.base.color == "purple" || player.skin.base.color == "light purple" || player.skin.base.color == "ghostly white" || player.skin.base.color == "indigo" || player.skin.base.color == "sky blue" || player.skin.base.color == "shiny black") {
                 if (player.vaginas.length > 0) {
                     outputText("\n\nYour heart begins beating harder and harder as heat floods to your groin.  You feel your clit peeking out from under its hood, growing larger and longer as it takes in more and more blood.");
                     if (player.clitLength > 3 && player.findPerk(PerkLib.BigClit) < 0) outputText("  After some time it shrinks, returning to its normal aroused size.  You guess it can't get any bigger.");
@@ -1360,7 +1360,7 @@ public final class Mutations extends MutationsHelper {
                         player.skin.base.color = "red";
                         break;
                     case 7:
-                        player.skin.base.color = "grey";
+                        player.skin.base.color = "gray";
                         break;
                     default:
                         player.skin.base.color = "blue";
@@ -9874,7 +9874,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
             var color:String;
-            color = randomChoice("green", "grey", "brown", "red", "sandy tan");
+            color = randomChoice("green", "gray", "brown", "red", "sandy tan");
             player.skin.base.color = color;
             outputText("\n\nWhoah, that was weird.  You just hallucinated that your " + player.skinDesc + " turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
             changes++;
@@ -13443,7 +13443,7 @@ public final class Mutations extends MutationsHelper {
             else if (skinChoosen == 1) furToBeChosen = "dark brown";
             else if (skinChoosen == 2) furToBeChosen = "black";
             else if (skinChoosen == 3) furToBeChosen = "red";
-            else furToBeChosen = "grey";
+            else furToBeChosen = "gray";
             outputText("\n\nYou shiver, feeling a bit cold.  Just as you begin to wish for something to cover up with, it seems your request is granted; thick, bushy fur begins to grow all over your body!  You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft.  Huh.  ");
             player.skin.growCoat(Skin.FUR, {color: furToBeChosen});
             outputText("<b>You now have a warm coat of [skin coat.color] boar fur!</b>");
@@ -14522,9 +14522,9 @@ public final class Mutations extends MutationsHelper {
             humanizeEyes();
             changes++;
         }
-        if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN && (player.eyes.colour != "silver" && player.eyes.colour != "grey")) {
+        if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN && (player.eyes.colour != "silver" && player.eyes.colour != "gray")) {
             if (rand(2) == 0) player.eyes.colour = "silver";
-            else player.eyes.colour = "grey";
+            else player.eyes.colour = "gray";
             outputText("\n\nYour eyes begin to water for a moment. When your view clears up you move on to a puddle and notice their coloration changed to a " + player.eyes.colour + " hue. <b>You now have " + player.eyes.colour + " pupils.</b>");
             changes++;
         }
@@ -14965,7 +14965,7 @@ public final class Mutations extends MutationsHelper {
         var changes:Number = 0;
         var changeLimit:Number = 1;
         var temp:Number = 0;
-        var wyrmCoatColor:Array = ["bluish black", "dark grey", "black", "midnight black", "midnight"];
+        var wyrmCoatColor:Array = ["bluish black", "dark gray", "black", "midnight black", "midnight"];
         var wyrmHairColor:Array = ["white", "snow white", "glacial white", "silver", "platinum silver"];
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
@@ -16468,7 +16468,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You use all the courage you can muster and in one go, swallow the gossamer. At that very moment, your stomach groans as you feel your body changing...");
 
 
-        //public static const ushionnaSkinColors:Array = ["", "red", "grey", "sandy-tan", "pale", "purple"];
+        //public static const ushionnaSkinColors:Array = ["", "red", "gray", "sandy-tan", "pale", "purple"];
         //public static const ushionnaHairColors:Array = ["", "dark red", "blue", "brown", "white", "black"];
 
         if (changes < changeLimit && rand(2) == 0 && player.tallness < 84) {
@@ -17032,9 +17032,9 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now red.");
             changes++;
         }
-        if ((type == 6 || type == 7 || type == 8) && player.eyes.colour != "grey" && changes < changeLimit && rand(2) == 0) {
-            player.eyes.colour = "grey";
-            outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now grey.");
+        if ((type == 6 || type == 7 || type == 8) && player.eyes.colour != "gray" && changes < changeLimit && rand(2) == 0) {
+            player.eyes.colour = "gray";
+            outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now gray.");
             changes++;
         }
         if ((type == 9 || type == 10 || type == 11) && player.eyes.colour != "brown" && changes < changeLimit && rand(2) == 0) {
@@ -17311,7 +17311,7 @@ public final class Mutations extends MutationsHelper {
             }
             //Partial fur
             var color:String;
-            var melkie_FurColor:Array = ["grey", "silver", "white", "glacial white", "light grey"];
+            var melkie_FurColor:Array = ["gray", "silver", "white", "glacial white", "light gray"];
             if (!player.hasPartialCoat(Skin.FUR) && player.lowerBody == LowerBody.MELKIE && changes < changeLimit && rand(4) == 0) {
                 //(scales and chitin)
                 color = randomChoice(melkie_FurColor);
