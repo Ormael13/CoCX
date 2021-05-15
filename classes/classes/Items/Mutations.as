@@ -1318,7 +1318,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         if (rando >= 90 && changeLimit != 0) {
-            if (player.skinTone == "blue" || player.skinTone == "grey" || player.skinTone == "red" || player.skinTone == "purple" || player.skinTone == "light purple" || player.skinTone == "ghostly white" || player.skinTone == "indigo" || player.skinTone == "sky blue" || player.skinTone == "shiny black") {
+            if (player.skin.base.color == "blue" || player.skin.base.color == "grey" || player.skin.base.color == "red" || player.skin.base.color == "purple" || player.skin.base.color == "light purple" || player.skin.base.color == "ghostly white" || player.skin.base.color == "indigo" || player.skin.base.color == "sky blue" || player.skin.base.color == "shiny black") {
                 if (player.vaginas.length > 0) {
                     outputText("\n\nYour heart begins beating harder and harder as heat floods to your groin.  You feel your clit peeking out from under its hood, growing larger and longer as it takes in more and more blood.");
                     if (player.clitLength > 3 && player.findPerk(PerkLib.BigClit) < 0) outputText("  After some time it shrinks, returning to its normal aroused size.  You guess it can't get any bigger.");
@@ -1339,31 +1339,31 @@ public final class Mutations extends MutationsHelper {
             } else {
                 switch (rand(10)) {
                     case 0:
-                        player.skinTone = "shiny black";
+                        player.skin.base.color = "shiny black";
                         break;
                     case 1:
-                        player.skinTone = "sky blue";
+                        player.skin.base.color = "sky blue";
                         break;
                     case 2:
-                        player.skinTone = "indigo";
+                        player.skin.base.color = "indigo";
                         break;
                     case 3:
-                        player.skinTone = "ghostly white";
+                        player.skin.base.color = "ghostly white";
                         break;
                     case 4:
-                        player.skinTone = "light purple";
+                        player.skin.base.color = "light purple";
                         break;
                     case 5:
-                        player.skinTone = "purple";
+                        player.skin.base.color = "purple";
                         break;
                     case 6:
-                        player.skinTone = "red";
+                        player.skin.base.color = "red";
                         break;
                     case 7:
-                        player.skinTone = "grey";
+                        player.skin.base.color = "grey";
                         break;
                     default:
-                        player.skinTone = "blue";
+                        player.skin.base.color = "blue";
                 }
                 outputText("\n\nA tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + player.skinTone + " in color.</b>");
                 if (tainted) dynStats("cor", 1);
@@ -2472,11 +2472,11 @@ public final class Mutations extends MutationsHelper {
 				changes++;
             }
             //Red skin!
-            if (rand(30) == 0 && changes < changeLimit && player.skinTone != "red" && !player.isGargoyle()) {
+            if (rand(30) == 0 && changes < changeLimit && player.skin.base.color != "red" && !player.isGargoyle()) {
                 if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ");
                 else outputText("\n\nYour [skin.type] ");
-                if (rand(2) == 0) player.skinTone = "red";
-                else player.skinTone = "orange";
+                if (rand(2) == 0) player.skin.base.color = "red";
+                else player.skin.base.color = "orange";
                 outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".");
 				changes++;
             }
@@ -2488,11 +2488,11 @@ public final class Mutations extends MutationsHelper {
             dynStats("lus", 3, "cor", 1);
         }
         //Red skin!
-        if (rand(30) == 0 && changes < changeLimit && player.skinTone != "red" && !player.isGargoyle()) {
+        if (rand(30) == 0 && changes < changeLimit && player.skin.base.color != "red" && !player.isGargoyle()) {
             if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ");
             else outputText("\n\nYour [skin.type] ");
-            if (rand(2) == 0) player.skinTone = "red";
-            else player.skinTone = "orange";
+            if (rand(2) == 0) player.skin.base.color = "red";
+            else player.skin.base.color = "orange";
             outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".");
 			changes++;
         }
@@ -4203,8 +4203,8 @@ public final class Mutations extends MutationsHelper {
         }
         //skinTone
         var gremlin_skin_color:Array = ["emerald", "dark green", "green", "aqua", "light green"];
-        if (player.skinTone != "light" && player.skinTone != "tan" && player.skinTone != "dark" && changes < changeLimit && rand(2) == 0) {
-            player.skinTone = randomChoice(gremlin_skin_color);
+        if (player.skin.base.color != "light" && player.skin.base.color != "tan" && player.skin.base.color != "dark" && changes < changeLimit && rand(2) == 0) {
+            player.skin.base.color = randomChoice(gremlin_skin_color);
             outputText("\n\nWhoah, that was weird.  You just hallucinated that your ");
             if (player.hasFur()) outputText("skin");
             else outputText(player.skinDesc);
@@ -4406,16 +4406,16 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //skinTone
-        if (player.skinTone != "green" && player.skinTone != "grayish-blue" && player.skinTone != "dark green" && player.skinTone != "pale yellow" && player.skinTone != "emerald" && !player.isGargoyle() && changes < changeLimit && rand(2) == 0) {
+        if (player.skin.base.color != "green" && player.skin.base.color != "grayish-blue" && player.skin.base.color != "dark green" && player.skin.base.color != "pale yellow" && player.skin.base.color != "emerald" && !player.isGargoyle() && changes < changeLimit && rand(2) == 0) {
             if (rand(10) != 0) {
-                if (rand(4) != 0) player.skinTone = "dark green";
+                if (rand(4) != 0) player.skin.base.color = "dark green";
                 else {
-                    if (rand(5) < 2) player.skinTone = "emerald";
-                    else player.skinTone = "green";
+                    if (rand(5) < 2) player.skin.base.color = "emerald";
+                    else player.skin.base.color = "green";
                 }
             } else {
-                if (rand(2) == 0) player.skinTone = "pale yellow";
-                else player.skinTone = "grayish-blue";
+                if (rand(2) == 0) player.skin.base.color = "pale yellow";
+                else player.skin.base.color = "grayish-blue";
             }
             changes++;
             outputText("\n\nWhoah, that was weird.  You just hallucinated that your ");
@@ -4747,7 +4747,7 @@ public final class Mutations extends MutationsHelper {
             player.hairColorOnly = "silver";
         }
         //Skin
-        if (((player.skinTone != "rough gray" && player.skinTone != "dark gray" && player.skinTone != "grayish-blue" && player.skinTone != "iridescent gray" && player.skinTone != "ashen grayish-blue" && player.skinTone != "gray" && player.skinTone != "orange") || !player.hasScales()) && !player.isGargoyle() && rand(7) == 0 && changes < changeLimit) {
+        if (((player.coatColor != "rough gray" && player.coatColor != "dark gray" && player.coatColor != "grayish-blue" && player.coatColor != "iridescent gray" && player.coatColor != "ashen grayish-blue" && player.coatColor != "gray" && player.coatColor != "orange") || !player.hasScales()) && !player.isGargoyle() && rand(7) == 0 && changes < changeLimit) {
             outputText("\n\n");
             if (player.hasFur()) outputText("Your [skin.type] falls out, collecting on the floor and exposing your scale covered skin underneath.  ");
             else if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidy into a more normal form. ");
@@ -5698,7 +5698,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Skin color change – tan, olive, dark, light
-        if ((player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "dark" && player.skinTone != "light") && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+        if ((player.skin.base.color != "tan" && player.skin.base.color != "olive" && player.skin.base.color != "dark" && player.skin.base.color != "light") && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
             changes++;
             outputText("\n\nIt takes a while for you to notice, but <b>");
             if (player.hasFur()) outputText("the skin under your [skin coat.color] " + player.skinDesc);
@@ -5706,16 +5706,16 @@ public final class Mutations extends MutationsHelper {
             outputText(" has changed to become ");
             switch (rand(4)) {
                 case 0:
-                    player.skinTone = "tan";
+                    player.skin.base.color = "tan";
                     break;
                 case 1:
-                    player.skinTone = "olive";
+                    player.skin.base.color = "olive";
                     break;
                 case 2:
-                    player.skinTone = "dark";
+                    player.skin.base.color = "dark";
                     break;
                 case 3:
-                    player.skinTone = "light";
+                    player.skin.base.color = "light";
                     break;
             }
             outputText(player.skinTone + " colored.</b>");
@@ -6458,23 +6458,23 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //-Skin color change – dark gray
-        if (player.skinTone != "dark gray" && !player.isGargoyle() && changes < changeLimit && rand(3) == 0 && type == 3) {
+        if (player.skin.base.color != "dark gray" && !player.isGargoyle() && changes < changeLimit && rand(3) == 0 && type == 3) {
             outputText("\n\nIt takes a while for you to notice, but ");
             if (player.hasFur()) outputText("the skin under your <b>[skin coat.color]</b>" + player.skinDesc);
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become <b>dark gray</b> colored.");
-            player.skinTone = "dark gray";
+            player.skin.base.color = "dark gray";
             changes++;
         }
         //TURN INTO A FURRAH!  OH SHIT
         if ((player.eyes.type == Eyes.CAT_SLITS || player.eyes.type == Eyes.DISPLACER) && rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
-            humanizeSkin();
+            if (!player.hasCoatOfType(Skin.FUR)) humanizeSkin();
             if (type == 1) {
                 player.skin.growCoat(Skin.FUR, {color: randomChoice(["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"])}, Skin.COVERAGE_LOW);
                 outputText("\n\nYou feel your skin tickle as fur grow in various place over your body. It doesn’t cover your skin entirely but sure feels nice and silky to the touch wherever it has grown. Funnily the fur patterns looks nice on you and only helps your animalistic charm. <b>Some area of your body are now partially covered with fur!</b>");
             } else {
                 outputText("\n\nYour [skin.type] begins to tingle, then itch. ");
-                if (type == 3) player.skin.growCoat(Skin.FUR, {color: randomChoice(["black", "midnight black"])}, Skin.COVERAGE_COMPLETE);
+                if (type == 3) player.skin.growCoat(Skin.FUR, {color: randomChoice(["black", "midnight black", "midnight"])}, Skin.COVERAGE_COMPLETE);
                 else player.skin.growCoat(Skin.FUR, {color: randomChoice(["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"])}, Skin.COVERAGE_COMPLETE);
                 outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of [skin coat.color] fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
             }
@@ -7290,9 +7290,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Skin color change
-        if (player.skinTone != "grayish-blue" && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.skin.base.color != "grayish-blue" && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou skin begin to itch as it darkens taking on <b>a grayish-blue color.</b>");
-            player.skinTone = "grayish-blue";
+            player.skin.base.color = "grayish-blue";
             changes++;
         }
         //Acid Spit
@@ -8280,7 +8280,7 @@ public final class Mutations extends MutationsHelper {
             outputText(player.modFem(85, 3 + rand(5)));
         }
         //-Skin color change – tan, olive, dark, light
-        if ((player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "dark" && player.skinTone != "light") && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(5) == 0) {
+        if ((player.skin.base.color != "tan" && player.skin.base.color != "olive" && player.skin.base.color != "dark" && player.skin.base.color != "light") && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(5) == 0) {
             changes++;
             outputText("\n\nIt takes a while for you to notice, but <b>");
             if (player.hasFur()) outputText("the skin under your " + player.coatColor + " " + player.skinDesc);
@@ -8288,19 +8288,19 @@ public final class Mutations extends MutationsHelper {
             outputText(" has changed to become ");
             switch (rand(4)) {
                 case 0:
-                    player.skinTone = "tan";
+                    player.skin.base.color = "tan";
                     break;
 
                 case 1:
-                    player.skinTone = "olive";
+                    player.skin.base.color = "olive";
                     break;
 
                 case 2:
-                    player.skinTone = "dark";
+                    player.skin.base.color = "dark";
                     break;
 
                 case 3:
-                    player.skinTone = "light";
+                    player.skin.base.color = "light";
                     break;
             }
             outputText(player.skinTone + " colored.</b>");
@@ -9472,7 +9472,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Skin
-        if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && (player.skinTone != "sable" && player.skinTone != "white")) {
+        if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && (player.skin.base.color != "sable" && player.skin.base.color != "white")) {
             outputText("\n\nA warmth begins in your belly, slowly spreading through your torso and appendages. The heat builds, becoming uncomfortable, then painful, then nearly unbearable. Your eyes unfocus from the pain, and by the time the burning sensation fades, you can already tell something's changed. ");
             var tone:String;
             var adj:String;
@@ -9530,7 +9530,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Incorporeality perk
-        if (changes < changeLimit && rand(3) == 0 && player.findPerk(PerkLib.Incorporeality) < 0 && (player.skinTone == "white" || player.skinTone == "sable") && player.hairType == 2) {
+        if (changes < changeLimit && rand(3) == 0 && player.findPerk(PerkLib.Incorporeality) < 0 && (player.skin.base.color == "white" || player.skin.base.color == "sable") && player.hairType == 2) {
             //(ghost-legs!  Absolutely no problem with regular encounters, though! [if you somehow got this with a centaur it'd probably do nothing cuz you're not supposed to be a centaur with ectoplasm ya dingus])
             outputText("\n\nAn otherworldly sensation begins in your belly, working its way to your [hips]. Before you can react, your [legs] begin to tingle, and you fall on your rump as a large shudder runs through them. As you watch, your lower body shimmers, becoming ethereal, wisps rising from the newly ghost-like [legs]. You manage to rise, surprised to find your new, ghostly form to be as sturdy as its former corporeal version. Suddenly, like a dam breaking, fleeting visions and images flow into your head, never lasting long enough for you to concentrate on one. You don't even realize it, but your arms fly up to your head, grasping your temples as you groan in pain. As fast as the mental bombardment came, it disappears, leaving you with a surprising sense of spiritual superiority.  <b>You have ghost legs!</b>\n\n");
             outputText("<b>(Gained Perk: Incorporeality</b>)");
@@ -9585,21 +9585,21 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Skin pattern - black or white veins pattern - adv ghost tf
-        if (!player.skin.hasWhiteBlackVeins() && player.hasGhostSkin() && (player.skinTone == "white" || player.skinTone == "sable") && rand(3) == 0 && changes < changeLimit && type == 1) {
+        if (!player.skin.hasWhiteBlackVeins() && player.hasGhostSkin() && (player.skin.base.color == "white" || player.skin.base.color == "sable") && rand(3) == 0 && changes < changeLimit && type == 1) {
             outputText("\n\nYour skin tingles and itches faintly. You look down to see ");
-            if (player.skinTone == "sable") outputText("white");
-            if (player.skinTone == "white") outputText("black");
+            if (player.skin.base.color == "sable") outputText("white");
+            if (player.skin.base.color == "white") outputText("black");
             outputText(" veins etching deep into your skin across the entirety of your body. <b>You now have ");
-            if (player.skinTone == "sable") outputText("white");
-            if (player.skinTone == "white") outputText("black");
+            if (player.skin.base.color == "sable") outputText("white");
+            if (player.skin.base.color == "white") outputText("black");
             outputText(" veins.</b>");/*
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
 					outputText("\n\n<b>Genetic Memory: White/Black Veins - Memorized!</b>\n\n");
 					player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
 				}*/
             player.skin.base.pattern = Skin.PATTERN_WHITE_BLACK_VEINS;
-            if (player.skinTone == "sable") player.skin.base.color2 = "white";
-            if (player.skinTone == "white") player.skin.base.color2 = "black";
+            if (player.skin.base.color == "sable") player.skin.base.color2 = "white";
+            if (player.skin.base.color == "white") player.skin.base.color2 = "black";
             player.skin.base.adj = "veined";
             changes++;
         }
@@ -9744,7 +9744,7 @@ public final class Mutations extends MutationsHelper {
         if (player.lowerBody == LowerBody.ELF && player.arms.type == Arms.ELF && player.hasPlainSkinOnly() && !player.isGargoyle() && player.skinAdj != "flawless" && changes < changeLimit && rand(3) == 0) {
             var color:String;
             color = randomChoice("dark", "light", "tan");
-            player.skinTone = color;
+            player.skin.base.color = color;
             outputText("\n\nYour skin begins to change again, impurities, scars and bruises disappearing entirely as your skin color changes to a " + player.skinTone + " tone. You examine your body discovering with surprise your skin is now extremely sensitive but also flawless just like that of an elf. ");
             outputText("It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your " + player.skinTone + " skin is now flawless just like that of the elves.</b>");
             if (player.findPerk(PerkLib.FlawlessBody) < 0) {
@@ -9875,7 +9875,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
             var color:String;
             color = randomChoice("green", "grey", "brown", "red", "sandy tan");
-            player.skinTone = color;
+            player.skin.base.color = color;
             outputText("\n\nWhoah, that was weird.  You just hallucinated that your " + player.skinDesc + " turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
             changes++;
         }
@@ -10142,7 +10142,7 @@ public final class Mutations extends MutationsHelper {
         }
         //SPECIAL:
         //Harpy Womb – All eggs are automatically upgraded to large, requires legs + tail to be harpy.
-        if (player.findPerk(PerkLib.HarpyWomb) < 0 && player.lowerBody == LowerBody.HARPY && player.tailType == Tail.THUNDERBIRD && rand(4) == 0 && changes < changeLimit) {
+        if (player.hasPerk(PerkLib.HarpyWomb) < 0 && player.lowerBody == LowerBody.HARPY && player.tailType == Tail.THUNDERBIRD && rand(4) == 0 && changes < changeLimit) {
             player.createPerk(PerkLib.HarpyWomb, 0, 0, 0, 0);
             outputText("\n\nThere's a rumbling in your womb, signifying that some strange change has taken place in your most feminine area. No doubt something in it has changed to be more like a harpy. (<b>You've gained the Harpy Womb perk! All the eggs you lay will always be large so long as you have harpy legs and a harpy tail.</b>)");
             changes++;
@@ -10368,9 +10368,9 @@ public final class Mutations extends MutationsHelper {
 				changes++;
 			}
 			var tone:Array = ["snow white", "red", "pale white"];
-			if (!InCollection(player.skinTone, tone) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit) {
+			if (!InCollection(player.skin.base.color, tone) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit) {
 				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
-				player.skinTone = randomChoice(tone);
+                player.skin.base.color = randomChoice(tone);
 				outputText("[skin]!</b>");
 				changes++;
 			}
@@ -10878,12 +10878,12 @@ public final class Mutations extends MutationsHelper {
             //appearance screen: replace 'hair' with 'tentacle-hair'
         }
         //-feathery gills sprout from chest and drape sensually over nipples (cumulative swimming power boost with fin, if swimming is implemented)
-        if (rand(5) == 0 && player.gills.type != Gills.ANEMONE && player.skinTone == "aphotic blue-black" && changes < changeLimit)
+        if (rand(5) == 0 && player.gills.type != Gills.ANEMONE && player.skin.base.color == "aphotic blue-black" && changes < changeLimit)
             updateGills(Gills.ANEMONE);
         //-[aphotic] skin tone (blue-black)
-        if (rand(5) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.skinTone != "aphotic blue-black") {
+        if (rand(5) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.skin.base.color != "aphotic blue-black") {
             outputText("\n\nYou absently bite down on the last of the tentacle, then pull your hand away, wincing in pain.  How did you bite your finger so hard?  Looking down, the answer becomes obvious; <b>your hand, along with the rest of your skin, is now the same aphotic color as the dormant tentacle was!</b>");
-            player.skinTone = "aphotic blue-black";
+            player.skin.base.color = "aphotic blue-black";
             changes++;
         }
         //-eat more, grow more 'hair':
@@ -11870,14 +11870,14 @@ public final class Mutations extends MutationsHelper {
             else if (player.hasScales()) outputText("  You stare in horror as you pull your fingers away holding a handful of dried up scales!  Your scales continue to flake and peel off your skin in thick patches, revealing the tender " + player.skinTone + " skin underneath.");
             outputText("  Your skin slowly turns raw and red under your severe scratching, the tingling sensations raising goosebumps across your whole body.  Over time, the itching fades, and your flushed skin resolves into a natural-looking ");
             player.skin.setBaseOnly({type: Skin.PLAIN});
-            if (!InCollection(player.skinTone, tone)) player.skinTone = randomChoice(tone);
+            if (!InCollection(player.skin.base.color, tone)) player.skin.base.color = randomChoice(tone);
             outputText(player.skinTone + " complexion.");
             outputText("  <b>You now have [skin]!</b>");
         });
         //Change skin tone if not changed you!
-        if (!changed) mutationStep(!InCollection(player.skinTone, tone) && player.lowerBody != LowerBody.GARGOYLE, mystic ? 2 : 3, function ():void {
+        if (!changed) mutationStep(!InCollection(player.skin.base.color, tone) && player.lowerBody != LowerBody.GARGOYLE, mystic ? 2 : 3, function ():void {
             outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
-            player.skinTone = randomChoice(tone);
+            player.skin.base.color = randomChoice(tone);
             outputText("[skin]!</b>");
         });
         //[Change Skin Color: add "Tattoos"]
@@ -12576,7 +12576,7 @@ public final class Mutations extends MutationsHelper {
                 }
                 outputText("Shaking your head a bit, you wait for your energy to return, then examine your appearance.  ");
                 //(if player skinTone = ebony/black/ebony with tats and no fur/scales or if black/midnight fur or if black scales
-                if (((player.skinTone == "ebony" || player.skinTone == "black") && !player.hasCoat()) || ((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) {
+                if (((player.skin.base.color == "ebony" || player.skin.base.color == "black") && !player.hasCoat()) || ((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) {
                     outputText("Nothing seems different at first.  Strange... you look closer and discover a darker, mask-line outline on your already inky visage. Furthermore your canines have slightly alongated not unlike those of an animal. <b>You now have a barely-visible raccoon mask and sharp canines like those of a raccoon.</b>");
                 } else outputText("A dark, almost black mask shades the " + player.skinFurScales() + " around your eyes and over the topmost portion of your nose, lending you a criminal air! Furthermore your canines have slightly alongated not unlike those of an animal. <b>You now have a raccoon mask and sharp canines like those of a raccoon!</b>");
             }
@@ -12585,7 +12585,7 @@ public final class Mutations extends MutationsHelper {
                 outputText("\n\nA sudden migraine sweeps over you and you clutch your head in agony as your nose collapses back to human dimensions.  A worrying numb spot grows around your eyes, and you entertain several horrible premonitions until it passes as suddenly as it came.  Checking your reflection in your water barrel, you find ");
                 //[(if black/midnight fur or if black scales)
                 if (((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) outputText("your face apparently returned to normal shape, albeit still covered in " + player.skinFurScales() + ".  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your otherwise normal human face.</b>");
-                else if ((player.skinTone == "ebony" || player.skinTone == "black") && (!player.hasCoat())) outputText("your face apparently returned to normal shape.  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your normal human face.</b>");
+                else if ((player.skin.base.color == "ebony" || player.skin.base.color == "black") && (!player.hasCoat())) outputText("your face apparently returned to normal shape.  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your normal human face.</b>");
                 else outputText("your face returned to human dimensions, but shaded by a black mask around the eyes and over the nose!  <b>You now have a humanoid face with a raccoon mask!</b>");
             }
             setFaceType(Face.RACCOON_MASK);
@@ -13467,7 +13467,7 @@ public final class Mutations extends MutationsHelper {
                 else skinToBeChosen = "sable";
             }
             outputText("\n\nYour skin tingles ever so slightly as you skin’s color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + skinToBeChosen + ".");
-            player.skinTone = skinToBeChosen;
+            player.skin.base.color = skinToBeChosen;
             changes++;
         }
         if (changes == 0) {
@@ -14467,9 +14467,9 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Skin
-        if (player.skinTone != "dark" && player.skinTone != "tan" && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-            if (rand(2) == 0) player.skinTone = "dark";
-            else player.skinTone = "tan";
+        if (player.skin.base.color != "dark" && player.skin.base.color != "tan" && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+            if (rand(2) == 0) player.skin.base.color = "dark";
+            else player.skin.base.color = "tan";
             outputText("\n\nYour skin suddenly darkens. Doesn’t look like much, but darker skin will likely help soak up more sunlight and keep you warmer.<b> You now have " + player.skinTone + " skin.</b>");
             changes++;
         }
@@ -14716,11 +14716,11 @@ public final class Mutations extends MutationsHelper {
             setRearBody(RearBody.GLACIAL_AURA);
             changes++;
         }
-        if (player.hasPlainSkinOnly() && !player.isGargoyle() && player.skinTone != "glacial white" && player.skinTone != "pale blue" && player.skinTone != "snow white" && player.skinAdj != "cold" && changes < changeLimit && rand(3) == 0) {
-            if (rand(3) == 0) player.skinTone = "glacial white";
+        if (player.hasPlainSkinOnly() && !player.isGargoyle() && player.skin.base.color != "glacial white" && player.skin.base.color != "pale blue" && player.skin.base.color != "snow white" && player.skinAdj != "cold" && changes < changeLimit && rand(3) == 0) {
+            if (rand(3) == 0) player.skin.base.color = "glacial white";
             else {
-                if (rand(2) == 0) player.skinTone = "pale blue";
-                else player.skinTone = "snow white";
+                if (rand(2) == 0) player.skin.base.color = "pale blue";
+                else player.skin.base.color = "snow white";
             }
             player.skinAdj = "cold";
             outputText("\n\nYou feel a rush of goosebumps spreading over your body. When you look down at yourself you see that your skin has been bleached of all color, not unlike someone who froze to death. <b>You now have snow white skin.</b>");
@@ -16051,10 +16051,10 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Red/Orange skin!
-        if ((player.skinTone != "red" || player.skinTone != "orange") && player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+        if ((player.skin.base.color != "red" || player.skin.base.color != "orange") && player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYour [skin.type] ");
-            if (rand(2) == 0) player.skinTone = "red";
-            else player.skinTone = "orange";
+            if (rand(2) == 0) player.skin.base.color = "red";
+            else player.skin.base.color = "orange";
             outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".");
         }
         //Legs
@@ -16830,8 +16830,8 @@ public final class Mutations extends MutationsHelper {
 
 
         }
-        if ((type == 0 || type == 1 || type == 2) && player.hasPlainSkinOnly() && player.skinTone != "green" && changes < changeLimit && rand(3) == 0) {
-            player.skinTone = "green";
+        if ((type == 0 || type == 1 || type == 2) && player.hasPlainSkinOnly() && player.skin.base.color != "green" && changes < changeLimit && rand(3) == 0) {
+            player.skin.base.color = "green";
             outputText("\n\nYour skin tingles ever so slightly as you skin’s color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + player.skinTone + ".");
             changes++;
         }
@@ -17235,8 +17235,8 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             var melkie_skinTone:Array = ["light", "fair", "pale"];
-            if ((!InCollection(player.skinTone, melkie_skinTone) && changes < changeLimit && rand(4) == 0)) {
-                player.skinTone = randomChoice(melkie_skinTone);
+            if ((!InCollection(player.skin.base.color, melkie_skinTone) && changes < changeLimit && rand(4) == 0)) {
+                player.skin.base.color = randomChoice(melkie_skinTone);
                 outputText("\n\nYour skin suddenly lightens. While lighter skin won't help you against cold weither you got the feeling that, despite this and against all logic, you won't die from freezing either, must be something related to Melkies.<b> You now have " + player.skinTone + " skin.</b>");
                 changes++;
             }

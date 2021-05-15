@@ -5619,7 +5619,7 @@ use namespace CoC;
 				displacerbeastCounter++;
 			if (coatColor == "black" || coatColor == "midnight black" || coatColor == "midnight")
 				displacerbeastCounter++;
-			if (skinTone == "dark grey")
+			if (skin.base.color == "dark gray")
 				displacerbeastCounter++;
 			if (findPerk(PerkLib.Flexibility) > 0)
 				displacerbeastCounter++;
