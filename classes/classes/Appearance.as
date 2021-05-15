@@ -29,7 +29,7 @@ public class Appearance extends Utils
 				return "hair";
 		}
 
-		public static function hairDescription(i_creature:Creature):String
+		public static function hairDescription(i_creature:Creature, shortDesc:Boolean = false):String
 		{
 			var description:String = "";
 			var options:Array;
@@ -45,25 +45,25 @@ public class Appearance extends Utils
 				description = randomChoice(options) + " head";
 				return description;
 			}
-			if (i_creature.hairLength < 1) {
+			else if (i_creature.hairLength < 1) {
 				options = ["close-cropped, ",
 					"trim, ",
 					"very short, "];
 				description += randomChoice(options);
 			}
-			if (i_creature.hairLength >= 1 && i_creature.hairLength < 3) description += "short, ";
-			if (i_creature.hairLength >= 3 && i_creature.hairLength < 6) description += "shaggy, ";
-			if (i_creature.hairLength >= 6 && i_creature.hairLength < 10) description += "moderately long, ";
-			if (i_creature.hairLength >= 10 && i_creature.hairLength < 16) {
+			else if (i_creature.hairLength >= 1 && i_creature.hairLength < 3) description += "short, ";
+			else if (i_creature.hairLength >= 3 && i_creature.hairLength < 6) description += "shaggy, ";
+			else if (i_creature.hairLength >= 6 && i_creature.hairLength < 10) description += "moderately long, ";
+			else if (i_creature.hairLength >= 10 && i_creature.hairLength < 16) {
 				if (rand(2) == 0) description += "long, ";
 				else description += "shoulder-length, ";
 			}
-			if (i_creature.hairLength >= 16 && i_creature.hairLength < 26) {
+			else if (i_creature.hairLength >= 16 && i_creature.hairLength < 26) {
 				if (rand(2) == 0) description += "very long, ";
 				else description += "flowing locks of ";
 			}
-			if (i_creature.hairLength >= 26 && i_creature.hairLength < 40) description += "ass-length, ";
-			if (i_creature.hairLength >= 40 && i_creature.hairLength < i_creature.tallness) description += "obscenely long, ";
+			else if (i_creature.hairLength >= 26 && i_creature.hairLength < 40) description += "ass-length, ";
+			else if (i_creature.hairLength >= 40 && i_creature.hairLength < i_creature.tallness) description += "obscenely long, ";
 			else if (i_creature.hairLength >= i_creature.tallness) {
 				if (rand(2) == 0) description += "floor-length, ";
 				else description += "floor-dragging, ";
@@ -75,55 +75,26 @@ public class Appearance extends Utils
 			//
 			// HAIR WORDS
 			//
+			
+			const hairObj: Object = Hair.Types[i_creature.hairType];
+			
+			var hair:String = hairObj.replace || "hair";
+			
 			//If furry and longish hair sometimes call it a mane (50%)
 			if (i_creature.hasFur() == 1 && i_creature.hairLength > 3 && rand(2) == 0) {
-				if (i_creature.hairType == Hair.FEATHER) description += "feather-";
-				else if (i_creature.hairType == Hair.GHOST) description += "transparent ";
-				else if (i_creature.hairType == Hair.GOO) description += "goo-";
-				else if (i_creature.hairType == Hair.ANEMONE) description += "tentacle-";
-				else if (i_creature.hairType == Hair.QUILL) description += "quill-";
-				else if (i_creature.hairType == Hair.GORGON) description += "snakes that replaced your ";
-				else if (i_creature.hairType == Hair.LEAF) description += "leaf-";
-				else if (i_creature.hairType == Hair.FLUFFY) description += "fluffy ";
-				else if (i_creature.hairType == Hair.GRASS) description += "grass-";
-				else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
-				else if (i_creature.hairType == Hair.FAIRY) description += "otherworldly, silk-like and almost translucent ";
-				else if (i_creature.hairType == Hair.BURNING) description += "burning ";
-				else if (i_creature.hairType == Hair.SNOWY) description += "snowy ";
-				else if (i_creature.hairType == Hair.CRAZY) description += "crazy ";
-				description += "mane";
-				if (i_creature.hairType == Hair.STORM) description += ". The tips ends with glowing lightning shaped locks";
-				if (i_creature.hairType == Hair.RATATOSKR) description += ". They are stripped at the center with light tips not unlike the head of a chipmunk or Ratatoskr.";
-				return description;
+				hair += "mane";
 			}
-			//if medium length refer to as locks sometimes
-			//CUT - locks is plural and screws up tense.
-			/*if(creature.hairLength >= 3 && creature.hairLength < 16 && rand(2) == 0) {
-			 descript += "locks of hair";
-			 return descript;
-			 }*/
-			//If nothing else used, use hair!
-			if (i_creature.hairType == Hair.FEATHER) description += "feather-";
-			else if (i_creature.hairType == Hair.GHOST) description += "transparent ";
-			else if (i_creature.hairType == Hair.GOO) description += "goo-";
-			else if (i_creature.hairType == Hair.ANEMONE) description += "tentacle-";
-			else if (i_creature.hairType == Hair.QUILL) description += "quill-";
-			else if (i_creature.hairType == Hair.GORGON) description += "snakes that replaced your ";
-			else if (i_creature.hairType == Hair.LEAF) description += "leaf-";
-			else if (i_creature.hairType == Hair.FLUFFY) description += "fluffy ";
-			else if (i_creature.hairType == Hair.GRASS) description += "grass-";
-			else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
-			else if (i_creature.hairType == Hair.FAIRY) description += "otherworldly, silk-like and almost translucent ";
-			else if (i_creature.hairType == Hair.SNOWY) description += "snowy ";
-			else if (i_creature.hairType == Hair.CRAZY) description += "crazy ";
-			if (i_creature.hairType == Hair.BURNING) description += "mane of fire that burns things only when you wish it to";
-			else description += "hair";
-			if (i_creature.hairType == Hair.STORM) description += ". The tips ends with glowing lightning shaped locks";
-			if (i_creature.hairType == Hair.RATATOSKR) description += ". They are stripped at the center with light tips not unlike the head of a chipmunk or Ratatoskr.";
-			else if (i_creature.hairType == Hair.SNOWY) {
-				description += " are human in appearance but snow flurries regularly nest within them";
-				if (i_creature.rearBody.type == RearBody.GLACIAL_AURA) description += " your bone chilling aura might have something to do with that";
+			
+			if (shortDesc) {
+				description += (hairObj.shortDesc || hairObj.longDesc || "hair").replace('{hair}', hair);
+			} else {
+				description += (hairObj.longDesc || hairObj.shortDesc || "hair").replace('{hair}', hair);
 			}
+			
+			if (i_creature.hairType == Hair.SNOWY && i_creature.rearBody.type == RearBody.GLACIAL_AURA) {
+				description += ", which might be related to your bone chilling aura";
+			}
+
 			return description;
 		}
 		
@@ -143,20 +114,20 @@ public class Appearance extends Utils
 				description = randomChoice(options) + " chin and cheeks";
 				return description;
 			}
-			if (i_creature.beardLength < 0.2) {
+			else if (i_creature.beardLength < 0.2) {
 				options = ["close-cropped, ",
 					"trim, ",
 					"very short, "];
 				description += randomChoice(options);
 			}
-			if (i_creature.beardLength >= 0.2 && i_creature.beardLength < 0.5) description += "short, ";
-			if (i_creature.beardLength >= 0.5 && i_creature.beardLength < 1.5) description += "medium, ";
-			if (i_creature.beardLength >= 1.5 && i_creature.beardLength < 3) description += "moderately long, ";
-			if (i_creature.beardLength >= 3 && i_creature.beardLength < 6) {
+			else if (i_creature.beardLength >= 0.2 && i_creature.beardLength < 0.5) description += "short, ";
+			else if (i_creature.beardLength >= 0.5 && i_creature.beardLength < 1.5) description += "medium, ";
+			else if (i_creature.beardLength >= 1.5 && i_creature.beardLength < 3) description += "moderately long, ";
+			else if (i_creature.beardLength >= 3 && i_creature.beardLength < 6) {
 				if (rand(2) == 0) description += "long, ";
 				else description += "neck-length, ";
 			}
-			if (i_creature.beardLength >= 6) {
+			else if (i_creature.beardLength >= 6) {
 				if (rand(2) == 0) description += "very long, ";
 				description += "chest-length, ";
 			}
@@ -167,16 +138,13 @@ public class Appearance extends Utils
 			//
 			// BEARD WORDS
 			// Follows hair type.
-			if (i_creature.hairType == 1) description += "";
-			else if (i_creature.hairType == 2) description += "transparent ";
-			else if (i_creature.hairType == 3) description += "gooey ";
-			else if (i_creature.hairType == 4) description += "tentacley ";
-			else if (i_creature.hairType == 7) description += "moss ";
+			const hairObj: Object = Hair.Types[i_creature.hairType];
 			
-			if (i_creature.beardStyle == 0) description += "beard";
-			else if (i_creature.beardStyle == 1) description += "goatee";
-			else if (i_creature.beardStyle == 2) description += "clean-cut beard";
-			else if (i_creature.beardStyle == 3) description += "mountain-man beard";
+			description += hairObj.beardDesc || "";
+			
+			const beardStyles: Array = ["beard", "goatee", "clean-cut beard", "mountain-man beard"];
+			
+			description += beardStyles[i_creature.beardStyle];
 
 			return description;
 		}
@@ -184,14 +152,8 @@ public class Appearance extends Utils
 		public static function hairStyleDescription(i_creature:Creature):String
 		{
 			var description:String = "";
-			var options:Array;
-			//
-			if (i_creature.hairStyle == 0) description += "plain";
-			else if (i_creature.hairStyle == 1) description += "wild";
-			else if (i_creature.hairStyle == 2) description += "ponytail";
-			else if (i_creature.hairStyle == 3) description += "Long tied up";
-			else if (i_creature.hairStyle == 4) description += "twin pigtail";
-			else if (i_creature.hairStyle == 5) description += "dwarven";
+			var options: Array = ["plain", "wild", "ponytail", "long tied up", "twin pigtail", "dwarven"];
+			description += options[i_creature.hairStyle];
 
 			return description;
 		}

@@ -30,7 +30,9 @@ public class PlayerAppearance extends BaseContent {
 			mainViewManager.showPlayerDoll(debug);
 		}
 		describeRace();
+		outputText("\n\n");
 		describeGear();
+		outputText("\n\n");
 		describeFaceShape();
 		outputText("  It has " + player.faceDesc() + "."); //M/F stuff!
 		describeEyes();
@@ -683,7 +685,7 @@ public class PlayerAppearance extends BaseContent {
 
 	public function describeGear():void {
 		// story.display("gear");
-		outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + ". Using [weapon] as a melee weapon");
+		outputText("<b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + ". Using [weapon] as a melee weapon");
 		if (player.weaponRangeName != "nothing")
 			outputText(", [weaponrangename] as range weapon");
 		if (player.shieldName != "nothing")
@@ -1863,100 +1865,100 @@ public class PlayerAppearance extends BaseContent {
 		else
 		{
 			if(earType == Ears.HUMAN)
-				outputText("  Your [hair] looks good on you, accentuating your features well.");
+				outputText("  Your [hair longdesc] looks good on you, accentuating your features well.");
 			else if(earType == Ears.FERRET)
-				outputText("  A pair of small, rounded ferret ears burst through the top of your [hair].");
+				outputText("  A pair of small, rounded ferret ears burst through the top of your [hair longdesc].");
 			else if(earType == Ears.HORSE)
-				outputText("  The [hair] on your head parts around a pair of very horse-like ears that grow up from your head.");
+				outputText("  The [hair longdesc] on your head parts around a pair of very horse-like ears that grow up from your head.");
 			else if(earType == Ears.DOG)
-				outputText("  The [hair] on your head is overlapped by a pair of pointed dog ears.");
+				outputText("  The [hair longdesc] on your head is overlapped by a pair of pointed dog ears.");
 			else if(earType == Ears.COW)
-				outputText("  The [hair] on your head is parted by a pair of " + player.hairColor + " rounded cow ears that stick out sideways.");
+				outputText("  The [hair longdesc] on your head is parted by a pair of " + player.hairColor + " rounded cow ears that stick out sideways.");
 			else if(earType == Ears.ELFIN)
-				outputText("  The [hair] on your head is parted by a pair of cute pointed ears, bigger than your old human ones.");
+				outputText("  The [hair longdesc] on your head is parted by a pair of cute pointed ears, bigger than your old human ones.");
 			else if(earType == Ears.CAT)
-				outputText("  The [hair] on your head is parted by a pair of cute, fuzzy cat ears, sprouting from atop your head and pivoting towards any sudden noises.");
+				outputText("  The [hair longdesc] on your head is parted by a pair of cute, fuzzy cat ears, sprouting from atop your head and pivoting towards any sudden noises.");
 			else if(earType == Ears.LIZARD)
-				outputText("  The [hair] atop your head makes it nigh-impossible to notice the two small rounded openings that are your ears.");
+				outputText("  The [hair longdesc] atop your head makes it nigh-impossible to notice the two small rounded openings that are your ears.");
 			else if(earType == Ears.BUNNY)
-				outputText("  A pair of floppy rabbit ears stick up out of your [hair], bouncing around as you walk.");
+				outputText("  A pair of floppy rabbit ears stick up out of your [hair longdesc], bouncing around as you walk.");
 			else if(earType == Ears.KANGAROO)
-				outputText("  The [hair] atop your head is parted by a pair of long, furred kangaroo ears that stick out at an angle.");
+				outputText("  The [hair longdesc] atop your head is parted by a pair of long, furred kangaroo ears that stick out at an angle.");
 			else if(earType == Ears.FOX)
-				outputText("  The [hair] atop your head is parted by a pair of large, adept fox ears that always seem to be listening.");
+				outputText("  The [hair longdesc] atop your head is parted by a pair of large, adept fox ears that always seem to be listening.");
 			else if(earType == Ears.DRAGON)
-				outputText("  The [hair] atop your head is parted by a pair of rounded protrusions with small holes on the sides of your head serve as your ears.  Bony fins sprout behind them.");
+				outputText("  The [hair longdesc] atop your head is parted by a pair of rounded protrusions with small holes on the sides of your head serve as your ears.  Bony fins sprout behind them.");
 			else if(earType == Ears.RACCOON)
-				outputText("  The [hair] on your head parts around a pair of egg-shaped, furry raccoon ears.");
+				outputText("  The [hair longdesc] on your head parts around a pair of egg-shaped, furry raccoon ears.");
 			else if(earType == Ears.MOUSE)
-				outputText("  The [hair] atop your head is funneled between and around a pair of large, dish-shaped mouse ears that stick up prominently.");
+				outputText("  The [hair longdesc] atop your head is funneled between and around a pair of large, dish-shaped mouse ears that stick up prominently.");
 			else if(earType == Ears.PIG)
-				outputText("  The [hair] on your head is parted by a pair of pointy, floppy pig ears. They often flick about when you’re not thinking about it.");
+				outputText("  The [hair longdesc] on your head is parted by a pair of pointy, floppy pig ears. They often flick about when you’re not thinking about it.");
 			else if(earType == Ears.RHINO)
-				outputText("  The [hair] on your head is parted by a pair of tubular rhino ears.");
+				outputText("  The [hair longdesc] on your head is parted by a pair of tubular rhino ears.");
 			else if (earType == Ears.SQUIRREL)
-				outputText("  The [hair] on your head is parted by a pair of sideways round squirrel ears that flick toward every slight sound.");
+				outputText("  The [hair longdesc] on your head is parted by a pair of sideways round squirrel ears that flick toward every slight sound.");
 			else if(earType == Ears.ECHIDNA)
-				outputText("  Your [hair] makes it near-impossible to see the small, rounded openings that are your ears.");
+				outputText("  Your [hair longdesc] makes it near-impossible to see the small, rounded openings that are your ears.");
 			else if(earType == Ears.DEER)
-				outputText("  The [hair] on your head parts around a pair of deer-like ears that grow up from your head.");
+				outputText("  The [hair longdesc] on your head parts around a pair of deer-like ears that grow up from your head.");
 			else if(earType == Ears.WOLF)
-				outputText("  The [hair] on your head is overlapped by a pair of pointed wolf ears.");
+				outputText("  The [hair longdesc] on your head is overlapped by a pair of pointed wolf ears.");
 			else if(earType == Ears.LION)
-				outputText("  The [hair] is parted by a pair of lion ears that listen to every sound.");
+				outputText("  The [hair longdesc] is parted by a pair of lion ears that listen to every sound.");
 			else if(earType == Ears.YETI)
-				outputText("  The [hair] is parted by a pair of yeti ears, bigger than your old human ones.");
+				outputText("  The [hair longdesc] is parted by a pair of yeti ears, bigger than your old human ones.");
 			else if(earType == Ears.ORCA)
-				outputText("  The [hair] on your head is parted by a pair of very large fin at least twice as large as your head which help you orient yourself underwater. Their underside is white while the top is black.");
+				outputText("  The [hair longdesc] on your head is parted by a pair of very large fin at least twice as large as your head which help you orient yourself underwater. Their underside is white while the top is black.");
 			else if(earType == Ears.SNAKE)
-				outputText("  The [hair] on your head is parted by a pair of cute pointed ears covered in small scales, bigger than your old human ones.");
+				outputText("  The [hair longdesc] on your head is parted by a pair of cute pointed ears covered in small scales, bigger than your old human ones.");
 			else if(earType == Ears.GOAT)
-				outputText("  The [hair] on your head is parted by a pair of ears looking similar to those of a goat, flapping from time to time in response to sounds.");
+				outputText("  The [hair longdesc] on your head is parted by a pair of ears looking similar to those of a goat, flapping from time to time in response to sounds.");
 			else if(earType == Ears.ONI)
-				outputText("  The [hair] on your head is parted by a pair of pointed elf-like oni ears.");
+				outputText("  The [hair longdesc] on your head is parted by a pair of pointed elf-like oni ears.");
 			else if(earType == Ears.ELVEN) {
-				outputText("  The [hair] is parted by a pair of cute, long, elven, pointy ears, bigger than your old human ones and alert to every sound.");
+				outputText("  The [hair longdesc] is parted by a pair of cute, long, elven, pointy ears, bigger than your old human ones and alert to every sound.");
 				//if (player.hairType == SILKEN) outputText(" .");
 			}
 			else if(earType == Ears.GREMLIN){
-				outputText("  The [hair] is parted by a pair of sideways leaning furry ears that flick toward every slight sound. They don’t belong to any known animal but like anything demonic related help improve your devilish charm.");
+				outputText("  The [hair longdesc] is parted by a pair of sideways leaning furry ears that flick toward every slight sound. They don’t belong to any known animal but like anything demonic related help improve your devilish charm.");
 				if (silly()){
 					outputText(" With ears like that anyone would be hard pressed to resist the urge to headpat you.");
 				}
 			}
 			else if(earType == Ears.RAIJU)
-				outputText("  Your [hair] is parted by two sideways leaning raiju ears that flick toward every slight sound.");
+				outputText("  Your [hair longdesc] is parted by two sideways leaning raiju ears that flick toward every slight sound.");
 			else if(earType == Ears.WEASEL)
-				outputText("  Your [hair] is parted by two sideways leaning weasel ears that flick toward every slight sound.");
+				outputText("  Your [hair longdesc] is parted by two sideways leaning weasel ears that flick toward every slight sound.");
 			if (earType == Ears.BAT){
-				outputText("  The [hair] on your head is parted by large bat ears atop your head, always perked up to catch any stray sound.");
+				outputText("  The [hair longdesc] on your head is parted by large bat ears atop your head, always perked up to catch any stray sound.");
 			}
 			if (earType == Ears.VAMPIRE){
-				outputText("  The [hair] on your head is  parted by pointed elfin ears powerful enough to catch even the heartbeat of those around you.")
+				outputText("  The [hair longdesc] on your head is  parted by pointed elfin ears powerful enough to catch even the heartbeat of those around you.")
 			}
 			if (earType == Ears.RED_PANDA) {
 				outputText("  Big, white furred, red-panda ears lie atop your head, keeping you well aware to your surroundings.")
 			}
 			if (earType == Ears.AVIAN){
-				outputText("  The [hair] atop your head compliments you quite well, and two small holes at each side of your head serve you as ears. Hidden by tufts of feathers, they’re almost unnoticeable.");
+				outputText("  The [hair longdesc] atop your head compliments you quite well, and two small holes at each side of your head serve you as ears. Hidden by tufts of feathers, they’re almost unnoticeable.");
 			}
 			if (earType == Ears.GRYPHON){
-				outputText("  Two triangular ears part your [hair] at each side of your head. They’re streamlined and adapted to fly, and are quite useful to locate sounds. They’re covered in soft, [skin coat.color] fur and end in tufts.");
+				outputText("  Two triangular ears part your [hair longdesc] at each side of your head. They’re streamlined and adapted to fly, and are quite useful to locate sounds. They’re covered in soft, [skin coat.color] fur and end in tufts.");
 			}
 			if (earType == Ears.CAVE_WYRM){
 				outputText("  Your ears are furry yet they do not actually belong to any known type of mammal. You suspect them to be related to an ancestry closer to that of the serpentine dragons they emulate.");
 			}
 			if (earType == Ears.BEAR){
-				outputText(" The [hair] on your head is parted by a pair of two round fuzzy bear ears covered with [skin coat.color] and alert to sound.");
+				outputText(" The [hair longdesc] on your head is parted by a pair of two round fuzzy bear ears covered with [skin coat.color] and alert to sound.");
 			}
 			if (earType == Ears.PANDA){
-				outputText(" The [hair] on your head is parted by a pair of two round fuzzy panda ears covered with black fur just like a panda and alert to sound.");
+				outputText(" The [hair longdesc] on your head is parted by a pair of two round fuzzy panda ears covered with black fur just like a panda and alert to sound.");
 			}
 			if (earType == Ears.DISPLACER){
-				outputText(" The [hair] on your head is parted by large long furry ears atop your head, always perked up to catch any stray sound.");
+				outputText(" The [hair longdesc] on your head is parted by large long furry ears atop your head, always perked up to catch any stray sound.");
 			}
 			if (earType == Ears.MELKIE){
-				outputText("The [hair] on your head is parted by your long and flat furry Melkie ears, reaching all the way down to your waist.");
+				outputText("The [hair longdesc] on your head is parted by your long and flat furry Melkie ears, reaching all the way down to your waist.");
 			}
 			//</mod>
 			if(player.antennae.type == Antennae.MANTIS)
@@ -2029,7 +2031,7 @@ public class PlayerAppearance extends BaseContent {
 				odd++;
 			}
 			if (skin.coverage<Skin.COVERAGE_COMPLETE) {
-				outputText("  Your face is human in shape and structure, with [skin]"+skinAndSomething);
+				outputText("Your face is human in shape and structure, with [skin]"+skinAndSomething);
 				if (skin.hasMagicalTattoo()) {
 					outputText(" covered with [skin color2] magical tattoo");
 					odd++;
@@ -2065,20 +2067,20 @@ public class PlayerAppearance extends BaseContent {
 				}
 			} else if (skin.hasCoatOfType(Skin.FUR)) {
 				odd++;
-				outputText("  Under your [skin coat]");
+				outputText("Under your [skin coat]");
 				if (skin.coat.pattern == Skin.PATTERN_TIGER_STRIPES) {
 					outputText(" with [skin coat.color2] stripes");
 					odd++;
 				}
-				outputText("  you have a human-shaped head with [skin base]"+skinAndSomething);
+				outputText("you have a human-shaped head with [skin base]"+skinAndSomething);
 			} else if (skin.hasCoat() && !skinAndSomething) {
 				odd++;
-				outputText("  Your face is fairly human in shape, but is covered in [skin coat]");
+				outputText("Your face is fairly human in shape, but is covered in [skin coat]");
 				if (skin.coat.pattern == Skin.PATTERN_TIGER_STRIPES) {
 					outputText(" with [skin coat.color2] stripes");
 					odd++;
 				}
-			} else outputText("  Your face is human in shape and structure, with [skin full]"+skinAndSomething);
+			} else outputText("Your face is human in shape and structure, with [skin full]"+skinAndSomething);
 				if (skin.coat.pattern == Skin.PATTERN_TIGER_STRIPES) {
 					outputText(" and [skin coat.color2] stripes");
 					odd++;

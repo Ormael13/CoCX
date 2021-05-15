@@ -4,14 +4,15 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="CoC-AIR.swf" />
+    <movie path="..\CoC-Mod.swf" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
-    <movie version="3" />
-    <movie minorVersion="1" />
-    <movie platform="AIR Mobile" />
+    <movie version="28" />
+    <movie minorVersion="0" />
+    <movie platform="Flash Player" />
     <movie background="#000000" />
+    <movie preferredSDK="Flex 4.6.0, AIR 32.0;4.6.0, 32.0;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
