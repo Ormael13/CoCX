@@ -6784,7 +6784,7 @@ use namespace CoC;
 			var bansheeCounter:Number = 0;
 			if (hairType == Hair.GHOST)
 				bansheeCounter++;
-			if (hasPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				bansheeCounter += 50;
 			if (isGargoyle()) bansheeCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) bansheeCounter = 0;
