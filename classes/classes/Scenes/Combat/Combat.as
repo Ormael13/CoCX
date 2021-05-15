@@ -10518,7 +10518,7 @@ public class Combat extends BaseContent {
         }
         if (monster.hasCock()) {
             TeaseFunctionList.push(RandomTeaseIfEnnemyCock);
-            if (!player.hasVirginVagina()) TeaseFunctionList.push(RandomTeaseIfEnnemyCockIfPCNoVirgin);
+            if (player.hasVagina() && !player.hasVirginVagina()) TeaseFunctionList.push(RandomTeaseIfEnnemyCockIfPCNoVirgin);
         }
         var ChosenTease:Function = randomChoice(TeaseFunctionList);
         ChosenTease();
