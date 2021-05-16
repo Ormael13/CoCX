@@ -18,6 +18,7 @@ import classes.Items.*;
 import classes.Parser.Parser;
 import classes.Scenes.*;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 import classes.display.SpriteDb;
@@ -83,19 +84,21 @@ public class CoC extends MovieClip
     public var charCreation:CharCreation         = new CharCreation();
     public var saves:Saves                       = new Saves(gameStateDirectGet, gameStateDirectSet);
     public var playerAppearance:PlayerAppearance = new PlayerAppearance();
+    // Libraries
+    public var mutations:Mutations               = new Mutations();
+    public var transformations:TransformationLib = new TransformationLib();
     // Items/
-    public var mutations:Mutations				= new Mutations();
-    public var consumables:ConsumableLib		= new ConsumableLib();
+    public var consumables:ConsumableLib         = new ConsumableLib();
     public var useables:UseableLib;
-    public var weapons:WeaponLib				= new WeaponLib();
-    public var weaponsrange:WeaponRangeLib		= new WeaponRangeLib();
-    public var armors:ArmorLib					= new ArmorLib();
-    public var undergarments:UndergarmentLib	= new UndergarmentLib();
-    public var headjewelries:HeadJewelryLib		= new HeadJewelryLib();
-    public var necklaces:NecklaceLib			= new NecklaceLib();
-    public var jewelries:JewelryLib				= new JewelryLib();
-    public var shields:ShieldLib				= new ShieldLib();
-    public var vehicles:VehiclesLib				= new VehiclesLib();
+    public var weapons:WeaponLib                 = new WeaponLib();
+    public var weaponsrange:WeaponRangeLib       = new WeaponRangeLib();
+    public var armors:ArmorLib                   = new ArmorLib();
+    public var undergarments:UndergarmentLib     = new UndergarmentLib();
+    public var headjewelries:HeadJewelryLib      = new HeadJewelryLib();
+    public var necklaces:NecklaceLib             = new NecklaceLib();
+    public var jewelries:JewelryLib              = new JewelryLib();
+    public var shields:ShieldLib                 = new ShieldLib();
+    public var vehicles:VehiclesLib              = new VehiclesLib();
 
 
     // Force updates in Pepper Flash ahuehue

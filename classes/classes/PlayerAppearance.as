@@ -1375,6 +1375,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS) {
 			outputText(" A set of "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" tentacle eyestalks expand from your back giving you all around vision. Their gazes are charged with lethal magical powers.");
 		}
+		else if (player.rearBody.type == RearBody.ATLACH_NACHA) {
+			outputText(" Two pairs of chitinous, black spider legs sprout from your shoulders and back. Red eyes blink and close at the tips.")
+		}
 	}
 	public function describeWings():void {
 	//WINGS!

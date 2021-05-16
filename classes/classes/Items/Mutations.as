@@ -21,6 +21,9 @@ import classes.PerkLib;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
+import classes.Transformations.PossibleEffect;
+import classes.Transformations.Transformation;
+import classes.Transformations.TransformationUtils;
 
 public final class Mutations extends MutationsHelper {
     public function Mutations() {
@@ -8979,8 +8982,8 @@ public final class Mutations extends MutationsHelper {
         //*************
         //(If speed<70, increases speed)
         if (changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour reflexes feel much faster. Experimentally, you make a grab at a fly on a nearby rock and quickly snatch it out of the air.  A compulsion to stuff it in your mouth and eat it surfaces, but you resist the odd desire.  Why would you ever want to do something like that?");
-            MutagenBonus("spe", 1.5);
+			outputText("\n\n");
+			transformations.MutagenSpeSpider.applyEffect();
             changes++;
         }
         //(If speed>80, decreases speed down to minimum of 80)
@@ -8991,20 +8994,20 @@ public final class Mutations extends MutationsHelper {
         }
         //(increases sensitivity)
         if (changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nThe hairs on your arms and legs stand up straight for a few moments, detecting the airflow around you. Touch appears to be more receptive from now on.");
-            dynStats("sen", 1);
+			outputText("\n\n");
+			transformations.SensUpSpider.applyEffect()
             changes++;
         }
         //(Increase libido)
         if (changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou suddenly feel slightly needier, and your loins stir in quiet reminder that they could be seen to. The aftertaste hangs on your tongue and your teeth.  You wish there had been more.");
-            MutagenBonus("lib", 1);
+			outputText("\n\n");
+			transformations.MutagenLibSpider.applyEffect();
             changes++;
         }
         //(increase toughness to 60)
         if (changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nStretching languidly, you realize you're feeling a little tougher than before, almost as if you had a full-body shell of armor protecting your internal organs.  How strange.  You probe at yourself, and while your " + player.skinFurScales() + " doesn't feel much different, the underlying flesh does seem tougher.");
-            MutagenBonus("tou", 1);
+			outputText("\n\n");
+			transformations.MutagenTouSpider.applyEffect();
             changes++;
         }
         //(decrease strength to 70)
@@ -9022,63 +9025,40 @@ public final class Mutations extends MutationsHelper {
         //Increase venom recharge
         if (player.tailType == Tail.SPIDER_ADBOMEN && player.tailRecharge < 25 && changes < changeLimit) {
             changes++;
-            outputText("\n\nThe spinnerets on your abdomen twitch and drip a little webbing.  The entirety of its heavy weight shifts slightly, and somehow you know you'll produce webs faster now.");
-            player.tailRecharge += 5;
+			outputText("\n\n");
+			transformations.VenomRechargeSpider.applyEffect();
         }
         //(tightens vagina to 1, increases lust/libido)
         if (player.hasVagina()) {
             if (player.looseness() > 1 && changes < changeLimit && rand(3) == 0) {
-                outputText("\n\nWith a gasp, you feel your [vagina] tightening, making you leak sticky girl-juice. After a few seconds, it stops, and you rub on your [vagina] excitedly. You can't wait to try this out!");
-                dynStats("lus", 25);
-                MutagenBonus("lib", 2);
+				outputText("\n\n");
+				transformations.VaginaTightenAndMutagenLib.applyEffect();
                 changes++;
-                player.vaginas[0].vaginalLooseness--;
             }
         }
         //(tightens asshole to 1, increases lust)
         if (player.ass.analLooseness > 1 && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou let out a small cry as your [asshole] shrinks, becoming smaller and tighter. When it's done, you feel much hornier and eager to stretch it out again.");
-            dynStats("lus", 25);
-            MutagenBonus("lib", 2);
+			outputText("\n\n");
+			transformations.AssholeTightenAndMutagenLib.applyEffect();
             changes++;
-            player.ass.analLooseness--;
         }
         //[Requires penises]
         //(Thickens all cocks to a ratio of 1\" thickness per 5.5\"
         if (player.hasCock() && changes < changeLimit && rand(4) == 0) {
-            //Use chosen to see if any dicks can be thickened
-            var chosen:int = 0;
-            counter = 0;
-            while (counter < player.cockTotal()) {
-                if (player.cocks[counter].cockThickness * 5.5 < player.cocks[counter].cockLength) {
-                    player.cocks[counter].cockThickness += .1;
-                    chosen = 1;
-                }
-                counter++;
-            }
-            //If something got thickened
-            if (chosen == 1) {
-                outputText("\n\nYou can feel your [cocks] filling out in your [armor]. Pulling ");
-                if (player.cockTotal() == 1) outputText("it");
-                else outputText("them");
-                outputText(" out, you look closely.  ");
-                if (player.cockTotal() == 1) outputText("It's");
-                else outputText("They're");
-                outputText(" definitely thicker.");
-                var counter:Number;
-                changes++;
-            }
+			outputText("\n\n");
+			transformations.CocksThickenAll.applyEffect();
+            changes++;
         }
         //[Increase to Breast Size] - up to Large DD
         if (player.smallestTitSize() < 6 && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nAfter eating it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.");
-            player.breastRows[player.smallestTitRow()].breastRating++;
+			outputText("\n\nAfter eating it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.");
+            transformations.BreastsGrowUpToDD.applyEffect(false); // better not mention eating in generic TF tet
             changes++;
         }
         //[Increase to Ass Size] - to 11
         if (player.butt.type < 11 && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYou look over your shoulder at your " + buttDescript() + " only to see it expand just slightly. You gape in confusion before looking back at the remaining silk in your hands. You finish it anyway. Dammit!");
-            player.butt.type++;
+			outputText("\n\n");
+			transformations.AssGrowUpTo11.applyEffect()
             changes++;
         }
         //***************
@@ -9086,93 +9066,63 @@ public final class Mutations extends MutationsHelper {
         //***************
         //(Ears become pointed if not human)
         if (player.ears.type != Ears.ELFIN && rand(4) == 0 && changes < changeLimit) {
-            outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>");
-            setEarType(Ears.ELFIN);
+			outputText("\n\n");
+			transformations.EarsElfin.applyEffect();
             changes++;
         }
         //(Fur/Scales fall out replaced by chitin)
         if (!player.hasCoatOfType(Skin.CHITIN) && (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-            if (player.hasCoat()) {
-                outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your [skin coat] [skin coat.isare] falling to the ground, revealing flawless, black chitin underneath.");
-            } else outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.");
-            outputText("  <b>You now have black chitin exoskeleton partialy covering your body.</b>");
-            player.skin.growCoat(Skin.CHITIN, {color: "black"}, Skin.COVERAGE_LOW);
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
-                outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
-            }
+			outputText("\n\n");
+			transformations.SkinChitin.applyEffect();
             changes++;
         }
         //(Gain human face)
         if (player.hasCoatOfType(Skin.CHITIN) && (player.faceType != Face.SPIDER_FANGS && player.faceType != Face.HUMAN) && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nWracked by pain, your face slowly reforms into a perfect human shape.  Awed by the transformation, you run your fingers delicately over the new face, marvelling at the change.  <b>You have a human face again!</b>");
-            setFaceType(Face.HUMAN);
+			outputText("\n\n");
+			transformations.FaceHuman.applyEffect();
             changes++;
         }
         //-Remove breast rows over 2.
         if (changes < changeLimit && player.bRows() > 2 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
+			outputText("\n\n");
+			transformations.BreastRowsRemoveToOne.applyEffect();
             changes++;
-            outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-            if (player.bRows() >= 3) outputText("abdomen");
-            else outputText("chest");
-            outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
-            if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-            else outputText(player.skinTone + " " + player.skinDesc);
-            outputText(" remains. <b>You've lost a row of breasts!</b>");
-            dynStats("sen", -5);
-            player.removeBreastRow(player.breastRows.length - 1, 1);
         }
         //-Nipples reduction to 1 per tit.
         if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nA chill runs over your [allbreasts] and vanishes.  You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ");
-            if (player.biggestTitSize() < 1) outputText("'breast'.");
-            else outputText("breast.");
+			outputText("\n\n");
+			transformations.NipplesPerBreastOne.applyEffect();
             changes++;
-            //Loop through and reset nipples
-            for (chosen = 0; chosen < player.breastRows.length; chosen++) {
-                player.breastRows[chosen].nipplesPerBreast = 1;
-            }
         }
         //Nipples Turn Black:
         if (!player.hasStatusEffect(StatusEffects.BlackNipples) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-            outputText("\n\nA tickling sensation plucks at your nipples and you cringe, trying not to giggle.  Looking down you are in time to see the last spot of flesh tone disappear from your [nipples].  They have turned an onyx black!");
-            player.createStatusEffect(StatusEffects.BlackNipples, 0, 0, 0, 0);
+			outputText("\n\n");
+			transformations.NipplesBlack.applyEffect();
             changes++;
         }
         //eyes!
+		// (player.faceType != Face.SPIDER_FANGS || player.faceType != Face.HUMAN) makes no sense btw
         if (player.hasCoatOfType(Skin.CHITIN) && (player.faceType != Face.SPIDER_FANGS || player.faceType != Face.HUMAN) && player.eyes.type == Eyes.HUMAN && rand(4) == 0 && changes < changeLimit) {
-            outputText("\n\nYou suddenly get the strangest case of double vision.  Stumbling and blinking around, you clutch at your face, but you draw your hands back when you poke yourself in the eye.  Wait, those fingers were on your forehead!  You tentatively run your fingertips across your forehead, not quite believing what you felt.  <b>There's a pair of eyes on your forehead, positioned just above your normal ones!</b>  This will take some getting used to!");
-            setEyeType(Eyes.FOUR_SPIDER_EYES);
-            MutagenBonus("int", 5);
+			outputText("\n\n");
+			transformations.EyesSpiderAndMutagenInt.applyEffect();
             changes++;
         }
         //(Gain spider fangs)
         if (player.faceType == Face.HUMAN && player.hasCoatOfType(Skin.CHITIN) && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nTension builds within your upper gum, just above your canines.  You open your mouth and prod at the affected area, pricking your finger on the sharpening tooth.  It slides down while you're touching it, lengthening into a needle-like fang.  You check the other side and confirm your suspicions.  <b>You now have a pair of pointy spider-fangs, complete with their own venom!</b>");
-            setFaceType(Face.SPIDER_FANGS);
-            if (player.tailRecharge < 5) player.tailRecharge = 5;
+			outputText("\n\n");
+			transformations.FaceSpiderFangs.applyEffect();
             changes++;
         }
         //(Arms to carapace-covered arms)
         if (player.arms.type != Arms.SPIDER && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
-            if (player.arms.type == Arms.HARPY || player.arms.type == Arms.HUMAN) {
-                //(Bird pretext)
-                if (player.arms.type == Arms.HARPY) outputText("The feathers covering your arms fall away, leaving them to return to a far more human appearance.  ");
-                outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.");
-            } else {
-                if (player.arms.type == Arms.BEE) outputText("The fizz covering your upper arms starting to fall down leaving only shiny black chitin clad arms.");
-                else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRAGON) outputText("The scales covering your upper arms starting to fall down leaving only shiny black chitin clad arms.");
-                else if (player.arms.type == Arms.MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.");
-                else outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.");
-            }
-            setArmType(Arms.SPIDER);
-            player.coatColor = "black";
+			transformations.ArmsSpider.applyEffect();
             changes++;
         }
         if ((player.isTaur() || player.isGoo() || player.isNaga() || player.isScylla() || player.isAlraune())
                 && changes < changeLimit && rand(4) == 0) {
-            humanizeLowerBody();
+			outputText("\n\n");
+			transformations.LegsHuman.applyEffect();
             changes++;
         }
         //Drider butt
@@ -9221,7 +9171,10 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         // Remove gills
-        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+        if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
+			outputText("\n\n");
+			transformations.GillsNone.applyEffect();
+		}
 
         if (changes == 0) {
             outputText("\n\nThe sweet silk energizes you, leaving you feeling refreshed.");
@@ -9251,6 +9204,25 @@ public final class Mutations extends MutationsHelper {
 
             }
     */
+	
+	public function midnightGossamer():void {
+		clearOutput();
+
+		var changes:Number = 0;
+		var changeLimit:Number = 1;
+		if (rand(2) == 0) changeLimit++;
+		if (rand(2) == 0) changeLimit++;
+		changeLimit += additionalTransformationChances();
+
+		outputText("You wad up the sweet, midnight gossamer and eat it, finding it to be delicious and chewy, almost like licorice.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat. ")
+		while (changes < changeLimit) {
+			var tf: PossibleEffect = TransformationUtils.randomPossibleEffect(transformations.List_AtlachNacha);
+			if (!tf) break;
+			outputText("\n\n");
+			tf.applyEffect();
+			changes++;
+		}
+	}
 
     public function broBrew(player:Player):void {
         player.slimeFeed();
@@ -10348,11 +10320,11 @@ public final class Mutations extends MutationsHelper {
 		if (type == 1) {
 			if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) < 10 && changes < changeLimit && rand(3) == 0) {
 				player.addStatusValue(StatusEffects.GazerEyeStalksPlayer, 1, 2);
-				outputText("\n\nYou gasp in alien pleasure as two new eye mounted tentacle stalks explode from your back joining your previous set. At first you're a little disoriented from being able to see in all those directions but eventually manage to adapt to the new change, the set dripping black oily fluids. <b>You now have "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" eye mounted tentacle stalks on your back.</b>"); 
+				outputText("\n\nYou gasp in alien pleasure as two new eye mounted tentacle stalks explode from your back joining your previous set. At first you're a little disoriented from being able to see in all those directions but eventually manage to adapt to the new change, the set dripping black oily fluids. <b>You now have "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" eye mounted tentacle stalks on your back.</b>");
 				changes++;
 			}
 			if (player.rearBody.type != RearBody.TENTACLE_EYESTALKS && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou gasp in alien pleasure as two large protrusions explode from your back freeing a pair of black tentacle stalks. The tips open to a set of eyes the same color as yours gazing at the world. These eyes share their vision with your central eye allowing you to see the world in a full peripheral view. <b>You now have two eye mounted tentacle stalks on your back.</b>"); 
+				outputText("\n\nYou gasp in alien pleasure as two large protrusions explode from your back freeing a pair of black tentacle stalks. The tips open to a set of eyes the same color as yours gazing at the world. These eyes share their vision with your central eye allowing you to see the world in a full peripheral view. <b>You now have two eye mounted tentacle stalks on your back.</b>");
 				player.createStatusEffect(StatusEffects.GazerEyeStalksPlayer, 2, 0, 0, 0);
 				setRearBody(RearBody.TENTACLE_EYESTALKS);
 				changes++;

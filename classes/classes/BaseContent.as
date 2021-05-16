@@ -10,6 +10,7 @@ import classes.Scenes.Inventory;
 import classes.Scenes.Places.Ingnam;
 import classes.Scenes.Places.Prison;
 import classes.Scenes.SceneLib;
+import classes.Transformations.TransformationLib;
 import classes.internals.Utils;
 
 import coc.model.GameModel;
@@ -265,17 +266,17 @@ import coc.xxc.StoryContext;
 
 		// Needed in a few rare cases for dumping text coming from a source that can't properly escape it's brackets
 		// (Mostly traceback printing, etc...)
-		protected function rawOutputText(output:String, purgeText:Boolean = false):void
+		protected static function rawOutputText(output:String, purgeText:Boolean = false):void
 		{
 			EngineCore.rawOutputText(output, purgeText);
 		}
 
-		protected function outputText(output:String):void
+		protected static function outputText(output:String):void
 		{
 			EngineCore.outputText(output);
 		}
 
-		protected function clearOutput():void
+		protected static function clearOutput():void
 		{
 			EngineCore.clearOutputTextOnly();
 		}
@@ -722,7 +723,7 @@ import coc.xxc.StoryContext;
 
 		protected function playerMenu():void { EventParser.playerMenu(); }
 
-		protected function get player():Player
+		protected static function get player():Player
 		{
 			return CoC.instance.player;
 		}
@@ -782,6 +783,9 @@ import coc.xxc.StoryContext;
 			CoC.instance.monster = val;
 		}
 
+		protected function get transformations():TransformationLib {
+			return CoC.instance.transformations;
+		}
 		protected function get consumables():ConsumableLib{
 			return CoC.instance.consumables;
 		}

@@ -19,7 +19,9 @@ package classes.Items.Consumables
 		
 		override public function useItem():Boolean {
 			clearOutput();
-			effect(game.player);
+			if (effect.length === 1) effect(game.player);
+			else if (effect.length === 0) effect();
+			else trace("ERROR Consumable "+id+" has bad callback function signature");
 			return(false); //Any normal consumable does not have a sub-menu. Return false so that the inventory runs the itemDoNext function after useItem.
 		}
 	}
