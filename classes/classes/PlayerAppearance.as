@@ -732,20 +732,28 @@ public class PlayerAppearance extends BaseContent {
 		}
 	}
 	public function describeLowerBody():void {
+		//Defines Gargoyle's material, 1 or 2 if successful
+		const gargoyleFlag = flags[kFLAGS.GARGOYLE_BODY_MATERIAL] && flags[kFLAGS.GARGOYLE_BODY_MATERIAL] > 0 ? flags[kFLAGS.GARGOYLE_BODY_MATERIAL] - 1 : 0;
+		var gargoyleMaterials = ["marble","alabaster"];
+
 		const lowerBodyOpts:Object = {
 			id: player.lowerBody,
 			legCount: num2Text(player.legCount),
 			legCountMinusTwo: num2Text(player.legCount - 2),
 			doubleHeight: Measurements.footInchOrMetres(player.tallness * 2),
 			quadrupleHeight: Measurements.footInchOrMetres(player.tallness * 4),
-			hydraHeads: num2Text(player.statusEffectv1(StatusEffects.HydraTailsPlayer))
+			hydraHeads: num2Text(player.statusEffectv1(StatusEffects.HydraTailsPlayer)),
+			gargoyleMaterial: gargoyleMaterials[gargoyleFlag]
 		};
 
 		//LOWERBODY DEFAULT
-		outputText(" " + LowerBody.getAppearanceDescription(lowerBodyOpts) || "");
-		if (player.isTaur()) {
-			outputText(" " + LowerBody.getAppearanceDescriptionTaur(lowerBodyOpts) || "");
+		outputText(LowerBody.getAppearanceDescription(lowerBodyOpts));
+		if (player.isBiped()) {
+			outputText(LowerBody.getAppearanceDescriptionBiped(lowerBodyOpts));
+		} else if (player.isTaur()) {
+			outputText(LowerBody.getAppearanceDescriptionTaur(lowerBodyOpts));
 		}
+
 		//Hip info only displays if you aren't a centaur.
 		if (player.isBiped() || player.isNaga()) {
 			if (player.thickness > 70) {
@@ -888,107 +896,16 @@ public class PlayerAppearance extends BaseContent {
 		describeTail();
 		//</mod>
 		//LOWERBODY SPECIAL
-		outputText(" " + LowerBody.getAppearanceDescriptionSpecial(lowerBodyOpts) || "");
+		outputText(LowerBody.getAppearanceDescriptionSpecial(lowerBodyOpts));
+		if (player.isBiped()) {
+			outputText(LowerBody.getAppearanceDescriptionSpecialBiped(lowerBodyOpts));
+		} else if (player.isTaur()) {
+			outputText(LowerBody.getAppearanceDescriptionSpecialTaur(lowerBodyOpts));
+		}
+
+		// Special cases
 		if (player.lowerBody == LowerBody.FROSTWYRM && player.tallness > 120)
 			outputText(" Your body is so large it's no wonder your passage underground can cause tremors.");
-
-		if (player.lowerBody == LowerBody.CAT)
-			"{legCount} digitigrade legs grow downwards from your waist, ending in soft, padded cat-paws."
-		else if (player.lowerBody == LowerBody.LIZARD)
-			"{legCount} digitigrade legs grow down from your [hips], ending in clawed feet. There are three long toes on the front, and a small hind-claw on the back."
-		else if (player.lowerBody == LowerBody.SALAMANDER)
-			"{legCount} digitigrade legs covered in thick, leathery red scales up to the mid-thigh grow down from your [hips], ending in clawed feet. There are three long toes on the front, and a small hind-claw on the back."
-		else if (player.lowerBody == LowerBody.CAVE_WYRM)
-			"{legCount} digitigrade legs covered in thick, leathery black scales up to the mid-thigh grow down from your [hips], ending in clawed feet. There are three long toes on the front, and a small hind-claw on the back."
-		else if (player.lowerBody == LowerBody.BUNNY)
-			"Your {legCount} legs thicken below the waist as they turn into soft-furred rabbit-like legs. You even have large bunny feet that make hopping around a little easier than walking."
-		else if (player.lowerBody == LowerBody.HARPY)
-			"Your {legCount} legs are covered with [haircolor] plumage. Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons."
-		else if (player.lowerBody == LowerBody.KANGAROO)
-			"Your {legCount} furry legs have short thighs and long calves, with even longer feet ending in prominently-nailed toes."
-		else if (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS)
-			"Your {legCount} legs are covered in a reflective [skin coat.color], insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton."
-		else if (player.lowerBody == LowerBody.CRAB)
-			"Your {legCount} legs are covered in a reflective [skin coat.color], crab like carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton."
-		else if (player.lowerBody == LowerBody.DRAGON)
-			"{legCount} human-like legs grow down from your [hips], sheathed in scales and ending in clawed feet. There are three long toes on the front, and a small hind-claw on the back."
-		else if (player.lowerBody == LowerBody.RACCOON)
-			"Your {legCount} legs, though covered in fur, are humanlike. Long feet on the ends bear equally long toes, and the pads on the bottoms are quite sensitive to the touch."
-		else if (player.lowerBody == LowerBody.CLOVEN_HOOFED)
-			"{legCount} digitigrade legs form below your [hips], ending in cloven hooves."
-		else if (player.lowerBody == LowerBody.MANTIS)
-			"Your {legCount} legs are covered in a shimmering [skin coat.color], insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton."
-		else if (player.lowerBody == LowerBody.SHARK && !player.isTaur())
-			"Your {legCount} legs are mostly human save for the webing between your toes."
-		else if (player.lowerBody == LowerBody.SHARK && player.isTaur())
-			"Your {legCount} legs ends up with three toed scaled paws with webing between the toes and an even larger webbing running en the entire lenght. It looks like the body of some kind of sea monster."
-		else if (player.lowerBody == LowerBody.GARGOYLE) {
-			"Your {legCount} digitigrade "
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble"
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster"
-			"legs end in sharp-clawed stone feet. There are three long toes on the front, and a small hind claw on the back."
-		}
-		else if (player.lowerBody == LowerBody.GARGOYLE_2) {
-			"Your {legCount} "
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble"
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster"
-			"legs aside of their stone structure look pretty much human."
-		}
-		else if (player.lowerBody == LowerBody.PLANT_HIGH_HEELS)
-			"Your {legCount} perfect lissome legs end in human feet, apart from delicate vines covered in spade-like leaves crawling around them on the whole length."
-		else if (player.lowerBody == LowerBody.PLANT_ROOT_CLAWS)
-			"Your {legCount} legs looks quite normal aside feet. They turned literally into roots only vaguely retaining the shape of the feet."
-//	else if(player.lowerBody == PLANT_FLOWER)
-//		"Around your waist just under your nectar coated pussy expends the petals of a large orchid big enough to engulf you entirely. While you don't technically have legs you can walk around on your " + num2Text(player.legCount)+ " vines which pretty much look like tentacle cocks."
-		else if (player.lowerBody == LowerBody.LION)
-			"Your {legCount} legs are covered in [skin coat.color] fur up to the thigh where it fades to white. They end with digitigrade lion paws. You can dash on all fours as gracefully as you would on two legs."
-		else if (player.lowerBody == LowerBody.YETI)
-			"Your {legCount} fur covered legs end with a pair of very large yeti feet, leaving large tracks and granting you easy mobility in the snow."
-		else if (player.lowerBody == LowerBody.ORCA)
-			"Your {legCount} legs are mostly human save for the webbing between your toes that assists you in swimming."
-		else if (player.lowerBody == LowerBody.YGG_ROOT_CLAWS)
-			"Your {legCount} legs looks quite normal until your feet. Your roots have condensed into a self-contained shape of three clawed toes on the front, and a small hind-claw in the back. You doubt they can gather moisture very well like this, but at least you have an excellent grip."
-		else if (player.lowerBody == LowerBody.ONI)
-			"Your {legCount} legs are covered with a set of warlike tattoo and your feet end with sharp black nails."
-		else if (player.lowerBody == LowerBody.GAZER)
-			"Your {legCount} are human in appearance but drips with oily black fluids. You've not been using them just as much as of late since you are constantly levitating anyway."
-		else if (player.lowerBody == LowerBody.RAIJU)
-			"You have {legCount} fluffy, furred legs that look vaguely like knee high socks. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs. A thick strand of darkly colored fur breaks out from your ankles, emulating a bolt of lighting in appearance."
-		else if (player.lowerBody == LowerBody.SQUIRREL)
-			"You have {legCount} fluffy, furred legs are covered in [skin coat.color] fur up to the thigh. They end with digitigrade squirrel paws."
-		else if (player.lowerBody == LowerBody.WEASEL)
-			"You have {legCount} fluffy, furred legs like those of a weasel. Your pawed feet end in four thick toes, which serve as your main source of balance. You can walk on them as normally as your old plantigrade legs."
-		else if (player.lowerBody == LowerBody.RED_PANDA)
-			"Your {legCount} legs are equally covered in [skin coat.color] fur, ending on red-panda paws with short claws. They have a nimble and strong build, in case you need to escape from something."
-		else if (player.lowerBody == LowerBody.AVIAN)
-			"You have strong thighs perfect for launching you into the air which end in slender, bird-like legs, covered with a [skin coat.color] plumage down to your knees and slightly rough, [skin] below. You have digitigrade feet, with toes that end in sharp talons."
-		else if (player.lowerBody == LowerBody.GRYPHON)
-			"You have strong thighs perfect for launching you into the air ending in furred, feline legs, covered with a coat of soft, [skin coat.color2] fur. Your have digitigrade feet, lion-like, with soft, pink soles and paw pads, with feline toes ending in sharp, retractile claws."
-		else if (player.lowerBody == LowerBody.ORC)
-			"Your {legCount} bowed legs are covered with a set of scar-like tattoos and your feet end with sharp, pointed nails."
-		else if (player.lowerBody == LowerBody.MOUSE)
-			"You stand on {legCount} digitigrade mouse legs ending in five toed clawed paws."
-		else if (player.lowerBody == LowerBody.HINEZUMI)
-			"Your {legCount} digitigrade mouse legs are covered in flames up to your knee. Your kicks leave a vicious burn on those who cross you, which they are sure to remember."
-		else if (player.lowerBody == LowerBody.BEAR)
-			"Your {legCount} legs are covered with [skin coat.color] fur. They end with powerful bear-like paws."
-		else if (player.lowerBody == LowerBody.HYDRA) {
-			"Below your waist your flesh is fused together into the body of a snake which split into {hydraHeads} {doubleHeight} long serpentine coils each ending with a snake head. Your many heads tend to hiss when you are in pain or angry."
-		}
-		else if (player.lowerBody == LowerBody.FIRE_SNAIL)
-			"Below your waist your flesh is fused together into the fat tail of a snail, with a flat wet underbelly that glistens continuously."
-		else if (player.lowerBody == LowerBody.GHOST)
-			"You have {legCount} partially transparent due to their ghostly nature human legs grow down from your waist, ending in normal human feet."
-		else if (player.lowerBody == LowerBody.GHOST_2)
-			"Below your waist, your body fuses and fades away, like a ghost."
-		else if (player.lowerBody == LowerBody.JIANGSHI)
-			"While your legs are human in appearance your body is so rigid due to this pseudo rigor mortis that the only way you found for movement is by hopping around."
-		else if (player.lowerBody == LowerBody.YUKI_ONNA)
-			"Your legs are human in appearance albeit for the bluish nails."
-		else if (player.lowerBody == LowerBody.USHI_ONI_ONNA)
-			"You have the lower body of a Ushi-"+player.mf("oni","onna")+", it is like the one of a drider except that it is covered in fur with the exoskeleton under it, the usually black sheen legs of a drider are replaced with rough bone ones of an ushi-"+player.mf("oni","onna")+"."
-		else if (player.lowerBody == LowerBody.WENDIGO)
-			"Your legs are covered in fur up to the knee however they are entirely devoid of feet."
 	}
 
 	public function describeTail():void {
