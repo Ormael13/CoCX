@@ -235,7 +235,6 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.GoliathI) >= 0) temp += ((this.str*8) * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.CheetahI) >= 0) temp += ((this.spe*4) * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.JobGuardian) >= 0) temp += 120;
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 600;
 			if (findPerk(PerkLib.BodyCultivator) >= 0) temp += (100 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
 				if (findPerk(PerkLib.SoulApprentice) >= 0) temp += (200 * (1 + newGamePlusMod()));
@@ -265,6 +264,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.RefinedBodyI) >= 0) multimax += (0.05 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) multimax += 0.2;
 			if (statusEffectv2(StatusEffects.SaiyanNumber1a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber1a);
 			if (statusEffectv2(StatusEffects.SaiyanNumber2a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber2a);
 			if (statusEffectv2(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber3a);
@@ -298,6 +298,20 @@ import flash.utils.getQualifiedClassName;
 				else maxOver += Math.round(this.tou*10);
 			}
 			if (findPerk(PerkLib.MyBloodForBloodPuppies) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
+				else maxOver += Math.round(this.tou*10);
+			}
+			if (findPerk(PerkLib.BloodDemonToughness) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
+				else maxOver += Math.round(this.tou*10);
+			}
+			//
+			if (findPerk(PerkLib.BloodDemonWisdom) >= 0) {
+				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
+				else maxOver += Math.round(this.tou*10);
+			}
+			//
+			if (findPerk(PerkLib.BloodDemonIntelligence) >= 0) {
 				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(this.inte * 10);
 				else maxOver += Math.round(this.tou*10);
 			}
@@ -392,7 +406,6 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.JobCourtesan) >= 0) temp += 60;
 			if (findPerk(PerkLib.JobSeducer) >= 0) temp += 30;
 			if (findPerk(PerkLib.PrestigeJobGreySage) >= 0) temp += 300;
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 150;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (150 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (225 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) temp += (300 * (1 + newGamePlusMod()));
@@ -412,6 +425,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.DemonicDesireI) >= 0) multimax += (0.05 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) multimax += 0.2;
 			if (statusEffectv3(StatusEffects.SaiyanNumber1a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber1a);
 			if (statusEffectv3(StatusEffects.SaiyanNumber2a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber2a);
 			if (statusEffectv3(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber3a);
@@ -448,7 +462,6 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.NaturesSpringI) >= 0) temp += (20 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.JobHunter) >= 0) temp += 50;
 			if (findPerk(PerkLib.JobRanger) >= 0) temp += 5;
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) temp += 100;
 			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) temp += 600;
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) temp += 150;
 			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) temp += 900;
@@ -462,6 +475,7 @@ import flash.utils.getQualifiedClassName;
 			var multimax:Number = 1;
 			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) multimax += 0.1;
 			temp *= multimax;
 			temp *= stats_multi_based_on_misc();
 			temp = Math.round(temp);
@@ -589,6 +603,9 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.FuelForTheFire) >= 0) temp += 2500;
 			if (findPerk(PerkLib.TooAngryToDie) >= 0) temp += 3000;
 			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) temp += 500;
+			if (findPerk(PerkLib.WarMageNovice) >= 0) temp += 50;
+			if (findPerk(PerkLib.WarMageApprentice) >= 0) temp += 50;
+			if (findPerk(PerkLib.WarMageAdept) >= 0) temp += 150;
 			if (findPerk(PerkLib.EnemyFeralType) >= 0) {
 				temp += 2500;
 				if (findPerk(PerkLib.EnemyGroupType) >= 0) temp += 10000;
@@ -600,6 +617,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.PrimalFuryI) >= 0) multimax += (0.05 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) multimax += 0.2;
 			if (findPerk(PerkLib.ICastAsuraFist) >= 0) multimax += 0.5;
 			if (statusEffectv4(StatusEffects.SaiyanNumber1a) > 0) multimax += statusEffectv4(StatusEffects.SaiyanNumber1a);
 			if (statusEffectv4(StatusEffects.SaiyanNumber2a) > 0) multimax += statusEffectv4(StatusEffects.SaiyanNumber2a);
@@ -617,6 +635,11 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.AbsoluteStrength)) temp2 += 0.1;
 			if (hasPerk(PerkLib.LikeAnAsuraBoss)) temp2 += 0.1;
 			if (hasPerk(PerkLib.ICastAsuraFist)) temp2 += 0.1;
+			if (hasPerk(PerkLib.AsuraStrength)) temp2 += 0.1;
+			//
+			if (hasPerk(PerkLib.AsuraToughness)) temp2 += 0.1;
+			//
+			if (hasPerk(PerkLib.AsuraSpeed)) temp2 += 0.1;
 			temp1 *= temp2;
 			return temp1;
 		}
@@ -673,6 +696,7 @@ import flash.utils.getQualifiedClassName;
 			if (findPerk(PerkLib.ManaAffinityI) >= 0) tempmulti += (0.03 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.LimitBreakerSoul1stStage) >= 0) tempmulti += 0.05;
 			if (findPerk(PerkLib.LimitBreakerSoul2ndStage) >= 0) tempmulti += 0.1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) tempmulti += 0.1;
 			temp *= tempmulti;
 			temp *= stats_multi_based_on_misc();
 			temp = Math.round(temp);
@@ -2347,6 +2371,8 @@ import flash.utils.getQualifiedClassName;
 				if (findPerk(PerkLib.DraconicHeart) >= 0) manaRecovery += 5;
 				if (findPerk(PerkLib.DraconicHeartEvolved) >= 0) manaRecovery += 5;
 				if (findPerk(PerkLib.DraconicHeartFinalForm) >= 0) manaRecovery += 5;
+				if (findPerk(PerkLib.WarMageApprentice) >= 0) manaRecovery += 10;
+				if (findPerk(PerkLib.WarMageAdept) >= 0) manaRecovery += 15;
 				if (findPerk(PerkLib.GreyMage) >= 0) manaRecoveryMulti += 0.5;
 				if (findPerk(PerkLib.GreyArchmage) >= 0) manaRecoveryMulti += 1.5;
 				if (findPerk(PerkLib.ManaAffinityI) >= 0) manaRecoveryMulti += (0.2 * (1 + newGamePlusMod()));
@@ -3276,4 +3302,4 @@ import flash.utils.getQualifiedClassName;
 			}
 		}
 	}
-}
+}

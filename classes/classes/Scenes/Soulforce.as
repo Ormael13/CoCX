@@ -65,124 +65,11 @@ use namespace CoC;
 		public var tamaniDaughtersScene:TamainsDaughtersScene = new TamainsDaughtersScene();
 		public var tamaniScene:TamaniScene = new TamaniScene();
 		public var izumiScenes:IzumiScene = new IzumiScene();
-		public var wolrdtreeScene:WorldTree = new WorldTree();
+		public var worldtreeScene:WorldTree = new WorldTree();
 
 		public function accessSoulforceMenu():void {
 			clearOutput();
-			if (player.level >= 1 && player.findPerk(PerkLib.JobSoulCultivator) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 0) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 2 && player.findPerk(PerkLib.JobSoulCultivator) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 1) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 4 && player.findPerk(PerkLib.JobSoulCultivator) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 2) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 6 && player.findPerk(PerkLib.SoulApprentice) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 3) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 8 && player.findPerk(PerkLib.SoulApprentice) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 4) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 10 && player.findPerk(PerkLib.SoulApprentice) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 5) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 12 && player.findPerk(PerkLib.SoulPersonage) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 6) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 14 && player.findPerk(PerkLib.SoulPersonage) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 7) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 16 && player.findPerk(PerkLib.SoulPersonage) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 8) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 18 && player.findPerk(PerkLib.SoulWarrior) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 9) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 20 && player.findPerk(PerkLib.SoulWarrior) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 10) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 22 && player.findPerk(PerkLib.SoulWarrior) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 11) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 24 && player.findPerk(PerkLib.SoulSprite) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 12) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 26 && player.findPerk(PerkLib.SoulSprite) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 13) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 28 && player.findPerk(PerkLib.SoulSprite) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 14) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 30 && player.findPerk(PerkLib.SoulScholar) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 15) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 32 && player.findPerk(PerkLib.SoulScholar) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 16) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 34 && player.findPerk(PerkLib.SoulScholar) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 17) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 36 && player.findPerk(PerkLib.SoulElder) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 18) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 38 && player.findPerk(PerkLib.SoulElder) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 19) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 40 && player.findPerk(PerkLib.SoulElder) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 20) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 42 && player.findPerk(PerkLib.SoulExalt) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 21) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 44 && player.findPerk(PerkLib.SoulExalt) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 22) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 46 && player.findPerk(PerkLib.SoulExalt) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 23) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 48 && player.findPerk(PerkLib.SoulOverlord) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 24) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 50 && player.findPerk(PerkLib.SoulOverlord) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 25) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 52 && player.findPerk(PerkLib.SoulOverlord) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 26) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 54 && player.findPerk(PerkLib.SoulTyrant) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 27) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 56 && player.findPerk(PerkLib.SoulTyrant) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 28) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 58 && player.findPerk(PerkLib.SoulTyrant) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 29) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 60 && player.findPerk(PerkLib.SoulKing) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 30) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 62 && player.findPerk(PerkLib.SoulKing) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 31) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 64 && player.findPerk(PerkLib.SoulKing) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 32) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 66 && player.findPerk(PerkLib.SoulEmperor) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 33) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 68 && player.findPerk(PerkLib.SoulEmperor) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 34) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 70 && player.findPerk(PerkLib.SoulEmperor) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 35) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 72 && player.findPerk(PerkLib.SoulAncestor) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 36) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 74 && player.findPerk(PerkLib.SoulAncestor) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 37) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			if (player.level >= 76 && player.findPerk(PerkLib.SoulAncestor) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 38) flags[kFLAGS.SOUL_CULTIVATION] += 1;
-			outputText("<b>Cultivation stage:</b> ");
-			if (player.findPerk(PerkLib.SoulAncestor) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 39)
-				outputText("Late Soul Ancestor\n");
-			else if (player.findPerk(PerkLib.SoulAncestor) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 38)
-				outputText("Middle Soul Ancestor\n");
-			else if (player.findPerk(PerkLib.SoulAncestor) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 37)
-				outputText("Early Soul Ancestor\n");
-			else if (player.findPerk(PerkLib.SoulEmperor) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 36)
-				outputText("Late Soul Emperor\n");
-			else if (player.findPerk(PerkLib.SoulEmperor) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 35)
-				outputText("Middle Soul Emperor\n");
-			else if (player.findPerk(PerkLib.SoulEmperor) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 34)
-				outputText("Early Soul Emperor\n");
-			else if (player.findPerk(PerkLib.SoulKing) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 33)
-				outputText("Late Soul King\n");
-			else if (player.findPerk(PerkLib.SoulKing) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 32)
-				outputText("Middle Soul King\n");
-			else if (player.findPerk(PerkLib.SoulKing) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 31)
-				outputText("Early Soul King\n");
-			else if (player.findPerk(PerkLib.SoulTyrant) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 30)
-				outputText("Late Soul Tyrant\n");
-			else if (player.findPerk(PerkLib.SoulTyrant) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 29)
-				outputText("Middle Soul Tyrant\n");
-			else if (player.findPerk(PerkLib.SoulTyrant) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 28)
-				outputText("Early Soul Tyrant\n");
-			else if (player.findPerk(PerkLib.SoulOverlord) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 27)
-				outputText("Late Soul Overlord\n");
-			else if (player.findPerk(PerkLib.SoulOverlord) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 26)
-				outputText("Middle Soul Overlord\n");
-			else if (player.findPerk(PerkLib.SoulOverlord) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 25)
-				outputText("Early Soul Overlord\n");
-			else if (player.findPerk(PerkLib.SoulExalt) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 24)
-				outputText("Late Soul Exalt\n");
-			else if (player.findPerk(PerkLib.SoulExalt) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 23)
-				outputText("Middle Soul Exalt\n");
-			else if (player.findPerk(PerkLib.SoulExalt) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 22)
-				outputText("Early Soul Exalt\n");
-			else if (player.findPerk(PerkLib.SoulElder) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 21)
-				outputText("Late Soul Elder\n");
-			else if (player.findPerk(PerkLib.SoulElder) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 20)
-				outputText("Middle Soul Elder\n");
-			else if (player.findPerk(PerkLib.SoulElder) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 19)
-				outputText("Early Soul Elder\n");
-			else if (player.findPerk(PerkLib.SoulScholar) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 18)
-				outputText("Late Soul Scholar\n");
-			else if (player.findPerk(PerkLib.SoulScholar) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 17)
-				outputText("Middle Soul Scholar\n");
-			else if (player.findPerk(PerkLib.SoulScholar) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 16)
-				outputText("Early Soul Scholar\n");
-			else if (player.findPerk(PerkLib.SoulSprite) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 15)
-				outputText("Late Soul Sprite\n");
-			else if (player.findPerk(PerkLib.SoulSprite) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 14)
-				outputText("Middle Soul Sprite\n");
-			else if (player.findPerk(PerkLib.SoulSprite) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 13)
-				outputText("Early Soul Sprite\n");
-			else if (player.findPerk(PerkLib.SoulWarrior) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 12)
-				outputText("Late Soul Warrior\n");
-			else if (player.findPerk(PerkLib.SoulWarrior) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 11)
-				outputText("Middle Soul Warrior\n");
-			else if (player.findPerk(PerkLib.SoulWarrior) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 10)
-				outputText("Early Soul Warrior\n");
-			else if (player.findPerk(PerkLib.SoulPersonage) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 9)
-				outputText("Late Soul Personage\n");
-			else if (player.findPerk(PerkLib.SoulPersonage) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 8)
-				outputText("Middle Soul Personage\n");
-			else if (player.findPerk(PerkLib.SoulPersonage) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 7)
-				outputText("Early Soul Personage\n");
-			else if (player.findPerk(PerkLib.SoulApprentice) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 6)
-				outputText("Late Soul Apprentice\n");
-			else if (player.findPerk(PerkLib.SoulApprentice) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 5)
-				outputText("Middle Soul Apprentice\n");
-			else if (player.findPerk(PerkLib.SoulApprentice) >= 0 && flags[kFLAGS.SOUL_CULTIVATION] == 4)
-				outputText("Early Soul Apprentice\n");
-			else
-				outputText("Mortal\n");
+			SoulCultivationLvL();
 			var dailySoulforceUsesLimit:Number = 0;
 			if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) dailySoulforceUsesLimit++;
 			if (player.findPerk(PerkLib.SoulWarrior) >= 0) dailySoulforceUsesLimit++;
@@ -251,12 +138,52 @@ use namespace CoC;
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.hasPerk(PerkLib.Metamorph)) {
 				if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) addButtonDisabled(6, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
-				else addButton(6, "Metamorph", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold freely your body.");//używanie metamorfowania z użyciem soulforce
+				else addButton(6, "Metamorph", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold your body.");//używanie metamorfowania z użyciem soulforce
 			}
-			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounter."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
-			//addButton(10, "Cheats", SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
+			if (player.findPerk(PerkLib.SoulSense) >= 0) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounters."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
+			addButton(10, "Cheats", SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
+
+		public function SoulCultivationLvL():void {	//Converted Soul Cultivation level check to a function, easier to update, and much nicer on the eyes than the old block of ifs!
+			//Actually.... Since the tier and lvl have to sync for the soul cult lvl, and is checked for the output tier... I can hijack this and use it to output the tiers as well!
+			var cultTier:Array = [PerkLib.JobSoulCultivator, PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
+			var pLvlMax:int = 76;	//Should only need to change this and above array for future expansion.
+			var cultRankTier:Array = ["Late ", "Early ", "Middle "];
+			var lNeed:Boolean = true;
+			var pLvl:int = 6;
+			var cLvlTier:int = 0;
+			var cultStanding:String = "Mortal";
+			flags[kFLAGS.SOUL_CULTIVATION] = 0;
+			if (player.level >= 4 && player.hasPerk(cultTier[0])){	//Can't think of a better idea than this for now to handle the first three.
+				flags[kFLAGS.SOUL_CULTIVATION] +=3;
+			}	else if (player.level >= 2 && player.hasPerk(cultTier[0])){	//Actually.... I can also get rid of the checks for the cultTier here, since you have to have that perk beforehand to get to this menu in the first place...
+				flags[kFLAGS.SOUL_CULTIVATION] +=2;
+				lNeed = false;
+			}	else if (player.level >= 1 && player.hasPerk(cultTier[0])){
+				flags[kFLAGS.SOUL_CULTIVATION] +=1;
+				lNeed = false;
+			}
+
+			while (lNeed) {
+				if (player.level >= pLvl && pLvl <= pLvlMax && player.hasPerk(cultTier[floor(pLvl /6)])){
+					flags[kFLAGS.SOUL_CULTIVATION] +=1;
+				}
+				else {
+					lNeed = false;
+				}
+				if (cLvlTier == 3) cLvlTier = 0;
+				if (!lNeed){
+					if (flags[kFLAGS.SOUL_CULTIVATION] >=4){
+						cultStanding = cultRankTier[cLvlTier] + cultTier[floor(int((pLvl-2)/6))].name;
+					}
+				}
+				pLvl += 2;
+				cLvlTier += 1;
+			}
+			outputText("<b>Cultivation stage:</b> " + cultStanding + "\n");
+		}
+
 		public function SoulforceCheats():void {
 			clearOutput();
 			outputText("Collection of current used cheats that with time will be removed or replaced by new ones.");
@@ -4125,7 +4052,7 @@ use namespace CoC;
 			if (player.soulforce >= 100) {
 				player.soulforce -= 100;
 				statScreenRefresh();
-				wolrdtreeScene.YggdrasilDiscovery();
+				worldtreeScene.YggdrasilDiscovery();
 			}
 			else {
 				outputText("\n\nYour current soulforce is too low.");

@@ -33,6 +33,7 @@ public class Appearance extends Utils
 		{
 			var description:String = "";
 			var options:Array;
+			var hairscale:Number;
 			//
 			// LENGTH ADJECTIVE!
 			//
@@ -45,28 +46,44 @@ public class Appearance extends Utils
 				description = randomChoice(options) + " head";
 				return description;
 			}
-			else if (i_creature.hairLength < 1) {
-				options = ["close-cropped, ",
-					"trim, ",
-					"very short, "];
-				description += randomChoice(options);
-			}
-			else if (i_creature.hairLength >= 1 && i_creature.hairLength < 3) description += "short, ";
-			else if (i_creature.hairLength >= 3 && i_creature.hairLength < 6) description += "shaggy, ";
-			else if (i_creature.hairLength >= 6 && i_creature.hairLength < 10) description += "moderately long, ";
-			else if (i_creature.hairLength >= 10 && i_creature.hairLength < 16) {
-				if (rand(2) == 0) description += "long, ";
-				else description += "shoulder-length, ";
-			}
-			else if (i_creature.hairLength >= 16 && i_creature.hairLength < 26) {
-				if (rand(2) == 0) description += "very long, ";
-				else description += "flowing locks of ";
-			}
-			else if (i_creature.hairLength >= 26 && i_creature.hairLength < 40) description += "ass-length, ";
-			else if (i_creature.hairLength >= 40 && i_creature.hairLength < i_creature.tallness) description += "obscenely long, ";
-			else if (i_creature.hairLength >= i_creature.tallness) {
-				if (rand(2) == 0) description += "floor-length, ";
-				else description += "floor-dragging, ";
+			else {
+				hairscale = int((i_creature.hairLength/i_creature.tallness)*100)/100
+				if (hairscale <= 0.05){	//Values roughly based on actual human ratios.
+					options = ["close-cropped, ",
+						"trim, ",
+						"very short, "];
+					description += randomChoice(options);
+				}
+				else if (hairscale > 0.05 && hairscale <= 0.1){
+					description += "short, ";
+				}
+				else if (hairscale > 0.1 && hairscale <= 0.14){
+					description += "shaggy, ";
+				}
+				else if (hairscale > 0.14 && hairscale <= 0.17){
+					description += "moderately long, ";
+				}
+				else if (hairscale > 0.17 && hairscale <= 0.2){
+					if (rand(2) == 0) description += "long, ";
+					else description += "shoulder-length, ";
+				}
+				else if (hairscale > 0.2 && hairscale <= 0.25){
+					if (rand(2) == 0) description += "very long, ";
+					else description += "flowing locks of ";
+				}
+				else if (hairscale > 0.25 && hairscale <= 0.4){
+					description += "back-covering, ";
+				}
+				else if (hairscale > 0.4 && hairscale <= 0.5){
+					description += "ass-length, ";
+				}
+				else if (hairscale > 0.5 && hairscale <= 1){
+					description += "obscenely long, "
+				}
+				else if (hairscale > 1 ){
+					if (rand(2) == 0) description += "floor-length, ";
+					else description += "floor-dragging, ";
+				}
 			}
 			//
 			// COLORS
@@ -1794,7 +1811,7 @@ public class Appearance extends Utils
 					options = ["insatiable ",
 						"greedy ",
 						"demanding ",
-						"rapacious"];
+						"rapacious "];
 					description += randomChoice(options);
 					haveDescription = true;
 				}

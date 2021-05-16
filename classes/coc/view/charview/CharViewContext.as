@@ -51,7 +51,7 @@ import coc.xlogic.ExecContext;
 					DarkSlimeCore: player.hasPerk(PerkLib.DarkSlimeCore),
 					showClothing: [Arms.GAZER, Arms.DISPLACER].indexOf(player.arms.type) == -1 && !player.isSitStancing(),
 					showArmClothing: [Arms.GAZER, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance) && !player.isStancing(),
-					showLegClothing: [LowerBody.GAZER, LowerBody.YETI, LowerBody.HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.DRIDER, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
+					showLegClothing: [LowerBody.GAZER, LowerBody.YETI, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.DRIDER, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
 					PlayerHasViewableOutfit: player.isWearingArmor(),
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),
@@ -75,9 +75,12 @@ import coc.xlogic.ExecContext;
 					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,
 					PlayerHasAnAxeUnholy:player.weapon == game.weapons.DE_GAXE,
 
-					PlayerHasAHammer: player.isMaceHammerTypeWeapon(),
-					PlayerHasAHammerHoly:player.weapon == game.weapons.POCDEST,
-					PlayerHasAHammerUnholy:player.weapon == game.weapons.DOCDEST,
+					PlayerHasAHammer: player.isMaceHammerTypeWeapon() && !player.isTetsubo(),
+					//PlayerHasAHammerHoly:player.weapon == game.weapons.POCDEST,
+					//PlayerHasAHammerUnholy:player.weapon == game.weapons.DOCDEST,
+					PlayerHasATetsu: player.weapon == game.weapons.OTETSU,
+					PlayerHasATetsuHoly:player.weapon == game.weapons.POCDEST,
+					PlayerHasATetsuUnholy:player.weapon == game.weapons.DOCDEST,
 
 					PlayerHasASpear: player.isSpearTypeWeapon(),
 					PlayerHasASpearHoly:player.weapon == game.weapons.SESPEAR,
@@ -99,6 +102,12 @@ import coc.xlogic.ExecContext;
 					PlayerHasABow: player.isBowTypeWeapon(),
 					PlayerHasABowHoly:player.weaponRange == game.weaponsrange.ARTEMIS,
 					PlayerHasABowUnholy:player.weaponRange == game.weaponsrange.WILDHUN,
+
+					PlayerHasAThrownWeapon: player.isThrownTypeWeapon(),
+					PlayerHasAJavelin: player.weaponRange == game.weaponsrange.TRJAVEL || player.weaponRange == game.weaponsrange.GTHRSPE || player.weaponRange == game.weaponsrange.KSLHARP || player.weaponRange == game.weaponsrange.LEVHARP,
+					PlayerHasAJavelinHoly:player.weaponRange == game.weaponsrange.KSLHARP,
+					PlayerHasAJavelinUnholy:player.weaponRange == game.weaponsrange.LEVHARP,
+					PlayerHasAThrownAxe:player.weaponRange == game.weaponsrange.GTHRAXE,
 
 					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],
 					FireBuff: player.hasStatusEffect(StatusEffects.FlameBlade),
@@ -139,6 +148,7 @@ import coc.xlogic.ExecContext;
 					MageRobe: player.armor == game.armors.M_ROBES || player.armor == game.armors.I_ROBES || player.armor == game.armors.I_CORST || player.armor == game.armors.EWROBE_ || player.armor == game.armors.A_ROBE_,
 					yukiDress: player.armor == game.armors.BLIZZ_K,
 					sakuraPetalKimono: player.armor == game.armors.SPKIMO,
+					OniLegendaryKimono: player.armor == game.armors.OEKIMO || player.armor == game.armors.OTKIMO,
 					whiteKimono: player.armor == game.armors.WKIMONO,
 					blueKimono: player.armor == game.armors.BKIMONO,
 					redKimono: player.armor == game.armors.RKIMONO,
@@ -179,6 +189,9 @@ import coc.xlogic.ExecContext;
 					goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
 					dragonscaleBikiniPanty: player.lowerGarment == game.undergarments.DSTHONG,
 					comfyBikiniPanty: player.lowerGarment == game.undergarments.C_PANTY || player.lowerGarment == game.undergarments.C_LOIN,
+
+					// Unique ring Accessories
+					oniGourd: player.jewelry == game.jewelries.ONIGOURD || player.jewelry2 == game.jewelries.ONIGOURD || player.jewelry3 == game.jewelries.ONIGOURD || player.jewelry4 == game.jewelries.ONIGOURD,
 
 					// Viewable neck Accessory lists
 					blueScarf: player.necklace == game.necklaces.BWSCARF,

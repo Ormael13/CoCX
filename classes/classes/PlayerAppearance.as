@@ -1375,7 +1375,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  On your back you wear a thick fur coat, not unlike a mantle complete with a hood always worn over your head it has a pair of holes just to let a pair of horns or rather antlers juts through it.");
 		}
 		else if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS) {
-			outputText(" A set of "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" tentacle eyestalks expand from your back giving you all around vision. They're gazes are charged with lethal magical powers.");
+			outputText(" A set of "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" tentacle eyestalks expand from your back giving you all around vision. Their gazes are charged with lethal magical powers.");
 		}
 	}
 	public function describeWings():void {
@@ -1631,7 +1631,7 @@ public class PlayerAppearance extends BaseContent {
 	public function describeEyes():void {
 		var eyeType:Number = player.eyes.type;
 		if(eyeType == Eyes.FOUR_SPIDER_EYES)
-			outputText("  In addition to your primary two [eyecolor] eyes, you have a second, smaller pair on your forehead.");
+			outputText("  In addition to your primary two [eyecolor] eyes, you have two smaller pairs going up your forehead.");
 		else if(eyeType == Eyes.BLACK_EYES_SAND_TRAP)
 			outputText("  Your eyes are solid spheres of inky, alien darkness.");
 		else if(eyeType == Eyes.CAT_SLITS)

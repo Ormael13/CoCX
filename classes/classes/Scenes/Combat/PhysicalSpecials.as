@@ -9,9 +9,12 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
+import classes.CoC;
+import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
+import classes.Items.Mutations;
 import classes.Items.ShieldLib;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
@@ -22,6 +25,7 @@ import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.NPCs.Anemone;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
+import classes.Stats.Buff;
 import classes.StatusEffects;
 
 import coc.view.ButtonData;
@@ -63,7 +67,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Feint", feint).hint("Attempt to feint an opponent into dropping its guard.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			bd = buttons.add("Charge", charging).hint("Charge your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
+			if (player.hasPerk(PerkLib.ChallengingShout)) {
+				bd = buttons.add("Warrior Shout", warriorShout).hint("Embolden yourself with a mighty shout. Generate 20% of max/overmax wrath on use as a free action.\nWould go into cooldown after use for: 10 rounds");//"+(player.hasPerk(PerkLib.NaturalInstincts) ? "1":"2")+"
+				if (player.hasStatusEffect(StatusEffects.CooldownWarriorShout)) {
+					bd.disable("<b>You need more time before you can perform Warrior Shout again.</b>\n\n");
+				}
+			}
+			bd = buttons.add("Charge", charging).hint("Charge at your opponent for massive damage. Deals more damage if using a spear or lance. Gains extra damage from the usage of a horn or a pair of horns.");
 			if (player.hasStatusEffect(StatusEffects.CooldownCharging)) {
 				bd.disable("<b>You need more time before you can perform Charge again.</b>\n\n");
 			}
@@ -124,6 +134,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 					bd.disable("<b>You can't dig in open water!</b>\n\n");
 				}
+			}
+			if (player.hasPerk(PerkLib.OniDrinkingJug)){
+				bd = buttons.add("Drink", Drink).hint("Drink down some sake from your drinking jug. \n\nSpecial: May have additionnal effects on an oni.");
 			}
 			//Engulf
 			if (player.lowerBody == LowerBody.GOO) {
@@ -317,7 +330,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			if (player.isShieldsForShieldBash()) {
 				bd = buttons.add("Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
-				bd.requireFatigue(physicalCost(20));
+				bd.requireWrath(shieldbashcostly());
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.shieldName == "Battle Net") {
@@ -617,6 +630,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 	}
 	
+	private function shieldbashcostly():Number {
+		var BCW:Number = 15;
+		if (player.shieldPerk == "Large") BCW += 15;
+		if (player.shieldPerk == "Massive") BCW += 15;
+		return BCW;
+	}
+	
 	public function powerAttackMenu():void {
 		menu();
 		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) {
@@ -654,10 +674,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("run");
 			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
 		}
-		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 2;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -700,10 +720,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("run");
 			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
 		}
-		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 3;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -746,10 +766,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("run");
 			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
 		}
-		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 4;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -792,10 +812,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("run");
 			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
 		}
-		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 5;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -838,10 +858,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("run");
 			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
 		}
-		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 6;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -884,10 +904,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("run");
 			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
 		}
-		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 7;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -930,10 +950,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else outputText("run");
 			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
 		}
-		else outputText("You lift your [weapon] with all of your strenght and smash it on your foe head. ");
+		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
 		var PAMulti:Number = 8;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
 		damage += powerfistspoweeeeer();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -1013,7 +1033,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.spe >= 225) powerfistsmultipowervalue += 1;
 			if (player.spe >= 300) powerfistsmultipowervalue += 1;
 		}
-		if (player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries3.UNDKINS) {
+		if (player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
 			powerfistsmultipowervalue += 1;
 		}
 		return powerfistsmultipowervalue;
@@ -1146,6 +1166,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -1238,6 +1259,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -1470,6 +1492,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 	
+	public function warriorShout():void {
+		clearOutput();
+		player.createStatusEffect(StatusEffects.CooldownWarriorShout, 10, 0, 0, 0);
+		outputText("You let out a primal shout that lets your enemies know you won’t be easily defeated.\n\n");
+		var wsr:Number = 0.2;
+		wsr *= player.maxOverWrath();
+		EngineCore.WrathChange(wsr, true);
+		menu();
+		addButton(0, "Next", combatMenu, false);
+	}
+	
 	public function charging():void {
 		clearOutput();
 		var costvalue:Number = chargingcoooooost();
@@ -1482,7 +1515,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.CooldownCharging,5,0,0,0);
 		}
 		else player.createStatusEffect(StatusEffects.CooldownCharging,6,0,0,0);
-		outputText("You take some distance before making a U-turn and charging your opponent with all your might impaling it on your [weapon]. ");
+		outputText("You take some distance before making a U-turn and charge at your opponent with all your might, impaling them on your [weapon]. ");
 		var damage:Number = 0;
 		var SAMulti:Number = 1;
 		if (player.level >= 6) SAMulti += 1;
@@ -1520,6 +1553,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -1618,6 +1652,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.PowerSweep)) {
 			if (player.isWeaponForWhirlwind()) damage *= 1.25;
@@ -1711,6 +1746,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") {
 			if (player.hasPerk(PerkLib.MakeItDouble)) damage *= 2;
@@ -1816,6 +1852,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -2565,27 +2602,27 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 	
-	public function pernamentgolemsendcost():Number {
-		var pernamentgolemsendcost:Number = 10;
-		if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) pernamentgolemsendcost += 5;
-		if (player.findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) pernamentgolemsendcost += 15;
-		if (player.findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) pernamentgolemsendcost += 40;
-		return pernamentgolemsendcost;
+	public function permanentgolemsendcost():Number {
+		var permanentgolemsendcost:Number = 10;
+		if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) permanentgolemsendcost += 5;
+		if (player.findPerk(PerkLib.EpicGolemMaker2ndCircle) >= 0) permanentgolemsendcost += 15;
+		if (player.findPerk(PerkLib.EpicGolemMaker3rdCircle) >= 0) permanentgolemsendcost += 40;
+		return permanentgolemsendcost;
 	}
-	public function pernamentimprovedgolemsendcost():Number {
-		var pernamentimprovedgolemsendcost:Number = 250;
-		return pernamentimprovedgolemsendcost;
+	public function permanentimprovedgolemsendcost():Number {
+		var permanentimprovedgolemsendcost:Number = 250;
+		return permanentimprovedgolemsendcost;
 	}
-	public function sendPernamentGolem1():void {
+	public function sendPermanentGolem1():void {
 		clearOutput();
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-			if (player.mana < pernamentgolemsendcost()) {
+			if (player.mana < permanentgolemsendcost()) {
 				outputText("Your mana is too low to make your golem attack.");
 				menu();
 				addButton(0, "Next", combatMenu, false);
 				return;
 			}
-			else useMana(pernamentgolemsendcost());
+			else useMana(permanentgolemsendcost());
 		}
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
@@ -2621,16 +2658,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else enemyAI();
 	}
-	public function sendPernamentGolem3():void {
+	public function sendPermanentGolem3():void {
 		clearOutput();
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-			if (player.mana < pernamentgolemsendcost() * 3) {
+			if (player.mana < permanentgolemsendcost() * 3) {
 				outputText("Your mana is too low to make your golems attack.");
 				menu();
 				addButton(0, "Next", combatMenu, false);
 				return;
 			}
-			else useMana(pernamentgolemsendcost() * 3);
+			else useMana(permanentgolemsendcost() * 3);
 		}
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
@@ -2667,16 +2704,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else enemyAI();
 	}
-	public function sendPernamentGolem5():void {
+	public function sendPermanentGolem5():void {
 		clearOutput();
 		if (player.hasPerk(PerkLib.GrandMasterGolemMaker)) {
-			if (player.mana < pernamentgolemsendcost() * 5) {
+			if (player.mana < permanentgolemsendcost() * 5) {
 				outputText("Your mana is too low to make your golems attack.");
 				menu();
 				addButton(0, "Next", combatMenu, false);
 				return;
 			}
-			else useMana(pernamentgolemsendcost() * 5);
+			else useMana(permanentgolemsendcost() * 5);
 		}
 		var damage:Number = 0;
 		var dmgamp:Number = 1;
@@ -2713,15 +2750,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else enemyAI();
 	}
-	public function sendPernamentImprovedGolem1():void {
+	public function sendPermanentImprovedGolem1():void {
 		clearOutput();
-		if (player.mana < pernamentimprovedgolemsendcost()) {
+		if (player.mana < permanentimprovedgolemsendcost()) {
 			outputText("Your mana is too low to make your golem attack.");
 			menu();
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		else useMana(pernamentimprovedgolemsendcost());
+		else useMana(permanentimprovedgolemsendcost());
 		var damage:Number = 0;
 		var dmgamp:Number = 2.5;
 		damage += 15000 + rand(3001);
@@ -2987,6 +3024,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -3065,6 +3103,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -3140,6 +3179,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -3217,6 +3257,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -3285,6 +3326,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -3752,6 +3794,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -3853,6 +3896,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 			if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 			if (player.armor == armors.SPKIMO) damage *= 1.2;
+			if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
@@ -4196,6 +4240,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -4342,6 +4387,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 				if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 				if (player.armor == armors.SPKIMO) damage *= 1.2;
+				if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 				if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 				if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 				if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
@@ -4470,6 +4516,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 				if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 				if (player.armor == armors.SPKIMO) damage *= 1.2;
+				if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 				if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 				if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 				if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
@@ -4934,6 +4981,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 			if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 			if (player.armor == armors.SPKIMO) damage *= 1.2;
+			if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 			if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
@@ -4990,6 +5038,38 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You dig yourself into the ground, moving out of your opponent’s reach.");
 		monster.createStatusEffect(StatusEffects.Dig,5,0,0,0);
 		enemyAI();
+	}
+
+	public function Drink():void {
+		clearOutput();
+		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+		outputText("You merrily chug from the gourd quenching your thirst for sake.\n\n");
+		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore()) outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alchoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.\n\n");
+		enemyAI();
+	}
+
+	public function DrunkenPowerEmpower():void {
+		var bonusempower:Number = 60;
+		var bonusdepower:Number = 20;
+		var durationhour:Number = 4;
+		if (player.spe < 21 || player.inte < 21) {
+			if (player.inte < 21) bonusdepower -= (player.inte - 1);
+			else bonusdepower -= (player.spe - 1);
+		}
+		bonusempower += (20 * (1 + player.newGamePlusMod()));
+		player.statStore.replaceBuffObject({
+			str: bonusempower,
+			spe: -bonusdepower,
+			inte: -bonusdepower,
+			lib: bonusempower
+		}, "DrunkenPowerEmpower", {text: "Drunken Power", rate: Buff.RATE_HOURS, tick: durationhour});
+	}
+
+	public function DrunkenPowerEmpowerOni():Number {
+		var bonusempoweroni:Number = 12;
+		if (player.hasPerk(PerkLib.OniMusculature)) bonusempoweroni -= 6;
+		if (player.hasPerk(PerkLib.OniMusculatureEvolved)) bonusempoweroni -= 3;
+		return bonusempoweroni;
 	}
 
 	public function kick():void {
@@ -5092,6 +5172,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
@@ -5150,6 +5231,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function shieldBash():void {
 		clearOutput();
+		EngineCore.WrathChange(-shieldbashcostly(), true);
 		outputText("You ready your [shield] and prepare to slam it towards " + monster.a + monster.short + ".  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
@@ -5177,7 +5259,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else monster.addStatusValue(StatusEffects.TimesBashed, 1, player.hasPerk(PerkLib.ShieldSlam) ? 0.5 : 1);
 		}
 		checkAchievementDamage(damage);
-		fatigue(20, USEFATG_PHYSICAL);
 		if (player.shield == shields.SPIL_SH || player.shield == shields.SPIH_SH || player.shield == shields.SPIM_SH) {
 			if (monster.hasStatusEffect(StatusEffects.HemorrhageShield)) monster.addStatusValue(StatusEffects.HemorrhageShield, 1, 3);
 			else monster.createStatusEffect(StatusEffects.HemorrhageShield, 3, 0.02, 0, 0);

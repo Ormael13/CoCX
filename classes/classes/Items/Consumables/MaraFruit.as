@@ -17,7 +17,7 @@ import classes.VaginaClass;
 
 public class MaraFruit extends Consumable{
 	public function MaraFruit() {
-		super("MaraFru", "MaraFruit", "an apple-shaped fruit", 10, "This green apple-shaped fruit that spread delicious scent around.  Thou it may as many thing in this realm also posses some transformative properties.");
+		super("MaraFru", "MaraFruit", "an apple-shaped fruit", 10, "This green apple-shaped fruit that spread delicious scent around. You have second thoughts about eating it as this may alter your form in some way like many other fruits.");
 	}
 
 	override public function useItem():Boolean {
@@ -42,7 +42,7 @@ public class MaraFruit extends Consumable{
 		outputText("Biting into it, sweet juices seem to explode from the flesh, dribbling down your chin.  It tastes like a dessert and you chow down, happily munching away.  In no time flat, you're down to just a core.");
 		//-Increase strength up to 80.
 		if (changes < changeLimit && rand(4) == 0) {
-			outputText("\n\nYour fill your muscles filling with plants might.");
+			outputText("\n\nYou feel a bit stronger as you take in a deep breath. You reflexively think about taking in more sunlight.");
 			player.MutagenBonus("str", 1);
 			changes++;
 		}

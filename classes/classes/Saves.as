@@ -638,10 +638,10 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.USE_METRICS] = flags[kFLAGS.USE_METRICS];
 		saveFile.data.flags[kFLAGS.AUTO_LEVEL] = flags[kFLAGS.AUTO_LEVEL];
 		saveFile.data.flags[kFLAGS.NO_GORE_MODE] = flags[kFLAGS.NO_GORE_MODE];
-		saveFile.data.flags[kFLAGS.STRENGTH_SCALLING] = flags[kFLAGS.STRENGTH_SCALLING];
-		saveFile.data.flags[kFLAGS.SPEED_SCALLING] = flags[kFLAGS.SPEED_SCALLING];
-		saveFile.data.flags[kFLAGS.WISDOM_SCALLING] = flags[kFLAGS.WISDOM_SCALLING];
-		saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING] = flags[kFLAGS.INTELLIGENCE_SCALLING];
+		saveFile.data.flags[kFLAGS.STRENGTH_SCALING] = flags[kFLAGS.STRENGTH_SCALING];
+		saveFile.data.flags[kFLAGS.SPEED_SCALING] = flags[kFLAGS.SPEED_SCALING];
+		saveFile.data.flags[kFLAGS.WISDOM_SCALING] = flags[kFLAGS.WISDOM_SCALING];
+		saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING] = flags[kFLAGS.INTELLIGENCE_SCALING];
 		saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = flags[kFLAGS.MELEE_DAMAGE_OVERHAUL];
 		saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING] = flags[kFLAGS.SECONDARY_STATS_SCALING];
 		saveFile.data.flags[kFLAGS.SPELLS_COOLDOWNS] = flags[kFLAGS.SPELLS_COOLDOWNS];
@@ -699,10 +699,10 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.USE_METRICS] != undefined) flags[kFLAGS.USE_METRICS] = saveFile.data.flags[kFLAGS.USE_METRICS];
 			if (saveFile.data.flags[kFLAGS.AUTO_LEVEL] != undefined) flags[kFLAGS.AUTO_LEVEL] = saveFile.data.flags[kFLAGS.AUTO_LEVEL];
 			if (saveFile.data.flags[kFLAGS.NO_GORE_MODE] != undefined) flags[kFLAGS.NO_GORE_MODE] = saveFile.data.flags[kFLAGS.NO_GORE_MODE];
-			if (saveFile.data.flags[kFLAGS.STRENGTH_SCALLING] != undefined) flags[kFLAGS.STRENGTH_SCALLING] = saveFile.data.flags[kFLAGS.STRENGTH_SCALLING];
-			if (saveFile.data.flags[kFLAGS.SPEED_SCALLING] != undefined) flags[kFLAGS.SPEED_SCALLING] = saveFile.data.flags[kFLAGS.SPEED_SCALLING];
-			if (saveFile.data.flags[kFLAGS.WISDOM_SCALLING] != undefined) flags[kFLAGS.WISDOM_SCALLING] = saveFile.data.flags[kFLAGS.WISDOM_SCALLING];
-			if (saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING] != undefined) flags[kFLAGS.INTELLIGENCE_SCALLING] = saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALLING];
+			if (saveFile.data.flags[kFLAGS.STRENGTH_SCALING] != undefined) flags[kFLAGS.STRENGTH_SCALING] = saveFile.data.flags[kFLAGS.STRENGTH_SCALING];
+			if (saveFile.data.flags[kFLAGS.SPEED_SCALING] != undefined) flags[kFLAGS.SPEED_SCALING] = saveFile.data.flags[kFLAGS.SPEED_SCALING];
+			if (saveFile.data.flags[kFLAGS.WISDOM_SCALING] != undefined) flags[kFLAGS.WISDOM_SCALING] = saveFile.data.flags[kFLAGS.WISDOM_SCALING];
+			if (saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING] != undefined) flags[kFLAGS.INTELLIGENCE_SCALING] = saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING];
 			if (saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] != undefined) flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL];
 			if (saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING] != undefined) flags[kFLAGS.SECONDARY_STATS_SCALING] = saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING];
 			if (saveFile.data.flags[kFLAGS.SPELLS_COOLDOWNS] != undefined) flags[kFLAGS.SPELLS_COOLDOWNS] = saveFile.data.flags[kFLAGS.SPELLS_COOLDOWNS];
@@ -1065,35 +1065,27 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		}
 		//Set Perk Array
 		//Populate Perk Array
-		for (i = 0; i < player.perks.length; i++)
-		{
-			saveFile.data.perks.push([]);
-			//trace("Saveone Perk");
-			//trace("Populate One Perk");
-			saveFile.data.perks[i].id = player.perk(i).ptype.id;
-			//saveFile.data.perks[i].perkName = player.perk(i).ptype.id; //uncomment for backward compatibility
-			saveFile.data.perks[i].value1 = player.perk(i).value1;
-			saveFile.data.perks[i].value2 = player.perk(i).value2;
-			saveFile.data.perks[i].value3 = player.perk(i).value3;
-			saveFile.data.perks[i].value4 = player.perk(i).value4;
-			//saveFile.data.perks[i].perkDesc = player.perk(i).perkDesc; // uncomment for backward compatibility
-		}
+		player.perks.forEach(function (perk:PerkClass, ...args):void {
+			var savePerk: Object = {
+				id: perk.ptype.id,
+				value1: perk.value1,
+				value2: perk.value2,
+				value3: perk.value3,
+				value4: perk.value4
+			};
+			saveFile.data.perks.push(savePerk);
+		});
 
-		//Set Status Array
-		for (i = 0; i < player.statusEffects.length; i++)
-		{
-			saveFile.data.statusAffects.push([]);
-				//trace("Saveone statusEffects");
-		}
 		//Populate Status Array
-		for (i = 0; i < player.statusEffects.length; i++)
-		{
-			//trace("Populate One statusEffects");
-			saveFile.data.statusAffects[i].statusAffectName = player.statusEffectByIndex(i).stype.id;
-			saveFile.data.statusAffects[i].value1 = player.statusEffectByIndex(i).value1;
-			saveFile.data.statusAffects[i].value2 = player.statusEffectByIndex(i).value2;
-			saveFile.data.statusAffects[i].value3 = player.statusEffectByIndex(i).value3;
-			saveFile.data.statusAffects[i].value4 = player.statusEffectByIndex(i).value4;
+		for each(var statusEffect:StatusEffectClass in player.statusEffects) {
+			var saveStatusEffect: Object = {
+				statusAffectName: statusEffect.stype.id,
+				value1: statusEffect.value1,
+				value2: statusEffect.value2,
+				value3: statusEffect.value3,
+				value4: statusEffect.value4
+			};
+			saveFile.data.statusAffects.push(saveStatusEffect);
 		}
 		//Set keyItem Array
 		for (i = 0; i < player.keyItems.length; i++)
@@ -2326,24 +2318,25 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			} else {
 				trace("Creating perk : " + ptype);
-				player.createPerk(ptype, value1, value2, value3, value4);
+				var cperk:PerkClass = new PerkClass(ptype, value1, value2, value3, value4);
 
-				if (isNaN(player.perk(player.numPerks - 1).value1)) {
-					if (player.perk(player.numPerks - 1).perkName == "Wizard's Focus") {
-						player.perk(player.numPerks - 1).value1 = .3;
+				if (isNaN(cperk.value1)) {
+					if (cperk.perkName == "Wizard's Focus") {
+						cperk.value1 = .3;
 					} else {
-						player.perk(player.numPerks).value1 = 0;
+						cperk.value1 = 0;
 					}
 
-					trace("NaN byaaaatch: " + player.perk(player.numPerks - 1).value1);
+					trace("NaN byaaaatch: " + cperk.value1);
 				}
 
-				if (player.perk(player.numPerks - 1).perkName == "Wizard's Focus") {
-					if (player.perk(player.numPerks - 1).value1 == 0 || player.perk(player.numPerks - 1).value1 < 0.1) {
+				if (cperk.perkName == "Wizard's Focus") {
+					if (cperk.value1 == 0 || cperk.value1 < 0.1) {
 						trace("Wizard's Focus boosted up to par (.5)");
-						player.perk(player.numPerks - 1).value1 = .5;
+						cperk.value1 = .5;
 					}
 				}
+				player.addPerkInstance(cperk);
 			}
 		}
 

@@ -148,7 +148,7 @@
             <color name="light blue">#b1c8ec</color>
             <color name="light gray">#dddadd</color>
             <color name="light green">#c5eec3</color>
-            <color name="light grey">#c4d1d9</color>
+            <color name="light gray">#c4d1d9</color>
             <color name="light purple">#e4cdf3</color>
             <color name="lime green">#73df72</color>
             <color name="mediterranean-toned">#ac7339</color>
@@ -557,6 +557,8 @@
         <cell rect="981,101,40,50" name="clothe/blackKimonoTop" dx="83" dy="72"/>
         <cell rect="1591,216,80,108" name="clothe/TamamoeNoMaeKimonoTop" dx="65" dy="63"/>
         <cell rect="1673,216,80,108" name="clothe/TamamoeNoMaeKimonoLowerTop" dx="65" dy="63"/>
+		<cell rect="1919,216,80,108" name="clothe/OniKimonoTop" dx="65" dy="63"/>
+        <cell rect="2001,216,80,108" name="clothe/OniKimonoLowerTop" dx="65" dy="63"/>
         <cell rect="1017,325,80,104" name="clothe/goblinTechnomancerClothe" dx="64" dy="55"/>
         <cell rect="722,543,130,90" name="clothe/fairyQueenDressFront" dx="40" dy="62"/>
         <cell rect="853,434,80,104" name="clothe/qipaoRedClothe" dx="64" dy="55"/>
@@ -569,6 +571,7 @@
         <cell rect="1099,216,80,105" name="clothe/purpleKimonoSleeves" dx="64" dy="72"/>
         <cell rect="853,325,80,105" name="clothe/blackKimonoSleeves" dx="64" dy="72"/>
         <cell rect="771,222,80,85" name="clothe/TamamoeNoMaeKimonoSleeves" dx="64" dy="78"/>
+		<cell rect="1837,222,80,85" name="clothe/OniKimonoSleeves" dx="64" dy="78"/>
         <cell rect="1181,216,80,105" name="clothe/vampireTop" dx="65" dy="63"/>
         <cell rect="1263,216,80,105" name="clothe/merchantClothe" dx="65" dy="57"/>
         <cell rect="935,325,80,104" name="clothe/goblinTechnomancerClotheArms" dx="64" dy="72"/>
@@ -630,7 +633,9 @@
         <cell rect="1166,798,173,156" name="clothCape/wendigoCloakBack" dx="19" dy="12"/>
         <cell rect="935,543,150,80" name="clothCape/fairyQueenDressUnder" dx="22" dy="61"/>
         <cell rect="1444,158,40,55" name="clothCape/TamamoeNoMaeKimonoUnder" dx="85" dy="121"/>
+		<cell rect="1696,158,40,55" name="clothCape/OniKimonoUnder" dx="85" dy="121"/>
         <cell rect="1013,56,40,13" name="clothCape/TamamoeNoMaeKimonoCollar" dx="85" dy="68"/>
+		<cell rect="229,13,40,13" name="clothCape/OniKimonoCollar" dx="85" dy="68"/>
         <cell rect="1509,216,80,100" name="clothCape_bg/merchantClotheCape_bg" dx="65" dy="64"/>
         <cell rect="1755,216,80,100" name="clothCape_bg/mageClotheCape_bg" dx="65" dy="64"/>
         <cell rect="150,91,35,25" name="forehead/SpecialForeheadShadow" dx="81" dy="35"/>
@@ -681,9 +686,13 @@
         <cell rect="752,1726,80,90" name="weapon/katanaHoly" dx="38" dy="55"/>
         <cell rect="752,1832,80,90" name="weapon/katanaUnholy" dx="38" dy="55"/>
         <cell rect="752,1938,80,90" name="weaponBuff/katanaFireBuff" dx="25" dy="35"/>
+		<cell rect="842,1620,80,90" name="weapon/tetsuGeneric" dx="38" dy="55"/>
+        <cell rect="842,1726,80,90" name="weapon/tetsuHoly" dx="38" dy="55"/>
+        <cell rect="842,1832,80,90" name="weapon/tetsuUnholy" dx="38" dy="55"/>
         <cell rect="932,1620,80,107" name="weapon/bowGeneric" dx="51" dy="54"/>
         <cell rect="932,1729,80,107" name="weapon/bowHoly" dx="51" dy="54"/>
         <cell rect="932,1838,80,107" name="weapon/bowUnholy" dx="51" dy="54"/>
+        <cell rect="842,1938,80,90" name="backAccessory/oniGourd" dx="74" dy="52"/>
     </spritemap>
     <spritemap file="hair.png">
         <cell rect="1,70,59,65" name="hair/0" dx="75" dy="21"/>
@@ -1254,6 +1263,7 @@
         <layer name="tail_fg"/>
         <layer name="tail"/>
 		<layer name="clothCape_bg"/>
+		<layer name="backAccessory"/>
         <layer name="wings_bg"/>
 		<layer name="legs_bg"/>
 		<layer name="aura"/>
@@ -1384,6 +1394,34 @@
 							</else>
 						</if>
 					</if>
+					
+					<if test="PlayerHasATetsu">
+						<if test="PlayerHasAHammerHoly or PlayerHasAHammerUnholy">
+							<if test="PlayerHasATetsuHoly">
+								<show part="weapon/tetsuHoly"/>
+							</if>
+							<if test="PlayerHasATetsuUnholy">
+								<show part="weapon/tetsuUnholy"/>
+							</if>
+							<else>
+								<show part="weapon/tetsuGeneric"/>
+							</else>
+						</if>
+					</if>
+					
+					<if test="PlayerHasAHammer">
+						<if test="PlayerHasAHammerHoly or PlayerHasAHammerUnholy">
+							<if test="PlayerHasAHammerHoly">
+								<show part="weapon/hammerHoly"/>
+							</if>
+							<if test="PlayerHasAHammerUnholy">
+								<show part="weapon/hammerUnholy"/>
+							</if>
+							<else>
+								<show part="weapon/hammerGeneric"/>
+							</else>
+						</if>
+					</if>
 			
 					<if test="PlayerHasASpear">
 						<if test="PlayerHasASpearHoly or PlayerHasASpearUnholy">
@@ -1453,7 +1491,8 @@
 				</if>
 				<else>
 				<!-- RANGED WEAPON -->
-					<if test="playerHasWeaponWings == 0">	
+					<if test="playerHasWeaponWings">	
+						<!-- Bows -->
 						<if test="PlayerHasABow">			
 							<if test="PlayerHasABowHoly or PlayerHasABowUnholy">
 								<if test="PlayerHasABowHoly">
@@ -1467,7 +1506,33 @@
 								</else>
 							</if>
 						</if>
+						
+						<!-- Thrown -->	
+						<if test="PlayerHasAThrownWeapon">	
+							<!-- Javelin -->						
+							<if test="PlayerHasAJavelin">	
+								<if test="PlayerHasAJavelinHoly or PlayerHasAJavelinUnholy">
+									<if test="PlayerHasAJavelinHoly">
+										<show part="weapon/spearHoly"/>
+									</if>
+									<if test="PlayerHasAJavelinUnholy">
+										<show part="weapon/spearUnholy"/>
+									</if>
+									<else>
+										<show part="weapon/spearGeneric"/>
+									</else>
+								</if>
+							</if>						
+							<!-- Axe -->
+							<if test="PlayerHasAThrownAxe">				
+								<show part="weapon/axeGeneric"/>
+							</if>						
+						</if>
+						
+						<!-- Guns -->	
+						
 					</if>
+					
 				</else>
 			</if>	
 		</if>
@@ -2185,14 +2250,21 @@
 								<if test="skin.coverage==Skin.COVERAGE_NONE">
 									<hide part="hands/*"/>
 									<hide part="arms/*"/>
-									<show part="arms/demonlewd"/>
-									<show part="arms_fg/demonlewd"/>
 									<if test="PlayerHasAWeapon">
 										<show part="arms_bg/human"/>
 										<else>
 											<hide part="arms_bg/*"/>
 											<hide part="hands_bg/*"/>
 											<show part="arms_bg/demonlewd"/>
+										</else>
+									</if>
+									<if test="PlayerHasAShield">
+										<show part="arms/human"/>
+										<else>
+											<hide part="arms/*"/>
+											<hide part="hands/*"/>
+											<show part="arms/demonlewd"/>
+											<show part="arms_fg/demonlewd"/>
 										</else>
 									</if>
 								</if>
@@ -2206,14 +2278,21 @@
 									<if test="showClothing">
 										<hide part="hands/*"/>
 										<hide part="arms/*"/>
-										<show part="arms/demonlewd"/>
-										<show part="arms_fg/demonlewd"/>
 										<if test="PlayerHasAWeapon">
 											<show part="arms_bg/human"/>
 											<else>
 												<hide part="arms_bg/*"/>
 												<hide part="hands_bg/*"/>
 												<show part="arms_bg/demonlewd"/>
+											</else>
+										</if>
+										<if test="PlayerHasAShield">
+											<show part="arms/human"/>
+											<else>
+												<hide part="arms/*"/>
+												<hide part="hands/*"/>
+												<show part="arms/demonlewd"/>
+												<show part="arms_fg/demonlewd"/>
 											</else>
 										</if>
 									</if>
@@ -2242,6 +2321,15 @@
 							<hide part="arms_bg/*"/>
 							<hide part="hands_bg/*"/>
 							<show part="arms_bg/demonlewd"/>
+						</else>
+					</if>
+					<if test="PlayerHasAShield">
+						<show part="arms/human"/>
+						<else>
+							<hide part="arms/*"/>
+							<hide part="hands/*"/>
+							<show part="arms/demonlewd"/>
+							<show part="arms_fg/demonlewd"/>
 						</else>
 					</if>
 				</if>
@@ -3794,6 +3882,11 @@
 		<if test="sphinxRegalia">
 			<show part="clotheUnderAmulet/sphinxregalia"/>
 		</if>
+		
+		<!-- Oni Gourd -->
+		<if test="oniGourd">
+			<show part="backAccessory/oniGourd"/>
+		</if>
 
 		<!-- Yuki Onna Dress -->
 		<if test="yukiDress">
@@ -3907,6 +4000,19 @@
 				<if test="showArmClothing">
 					<show part="clothe/TamamoeNoMaeKimonoSleeves"/>
 					<show part="clothCape/TamamoeNoMaeKimonoCollar"/>
+				</if>
+			</if>
+		</if>
+		<if test="OniLegendaryKimono">
+			<if test="showClothing">
+				<show part="clothe/OniKimonoTop"/>
+				<if test="(legCount!=4) and (showLegClothing)">
+					<show part="clothe/OniKimonoLowerTop"/>
+					<show part="clothCape/OniKimonoUnder"/>
+				</if>
+				<if test="showArmClothing">
+					<show part="clothe/OniKimonoSleeves"/>
+					<show part="clothCape/OniKimonoCollar"/>
 				</if>
 			</if>
 		</if>

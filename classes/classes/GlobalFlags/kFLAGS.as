@@ -2541,7 +2541,7 @@ public static const DEN_OF_DESIRE_BOSSES:int                  						= 2532;
 public static const MALE_OR_FEMALE:int                                   			= 2533;
 public static const D3_DEMONIC_SCYTHE:int                                   		= 2534;
 public static const TEMPORAL_GOLEMS_BAG:int                                   		= 2535;
-public static const PERNAMENT_GOLEMS_BAG:int                                   		= 2536;
+public static const PERMANENT_GOLEMS_BAG:int                                   		= 2536;
 public static const REUSABLE_GOLEM_CORES_BAG:int                                   	= 2537;
 public static const ELEMENTAL_CONJUER_SUMMONS:int                                   = 2538;
 public static const ATTACKING_ELEMENTAL_TYPE:int                                   	= 2539;
@@ -2742,9 +2742,9 @@ public static const UNKNOWN_FLAG_NUMBER_02733:int                               
 public static const UNKNOWN_FLAG_NUMBER_02734:int                                   = 2734;
 public static const UNKNOWN_FLAG_NUMBER_02735:int                                   = 2735;
 public static const UNKNOWN_FLAG_NUMBER_02736:int                                   = 2736;
-public static const IMPROVED_PERNAMENT_GOLEMS_BAG:int                               = 2737;
-public static const PERNAMENT_STEEL_GOLEMS_BAG:int                                  = 2738;
-public static const IMPROVED_PERNAMENT_STEEL_GOLEMS_BAG:int                         = 2739;
+public static const IMPROVED_PERMANENT_GOLEMS_BAG:int                               = 2737;
+public static const PERMANENT_STEEL_GOLEMS_BAG:int                                  = 2738;
+public static const IMPROVED_PERMANENT_STEEL_GOLEMS_BAG:int                         = 2739;
 public static const UNKNOWN_FLAG_NUMBER_02740:int                                   = 2740;
 public static const WEAPON_DISPLAY_FLAG:int                                   	    = 2741;
 public static const UNKNOWN_FLAG_NUMBER_02742:int                                   = 2742;
@@ -2973,11 +2973,11 @@ public static const LVL_UP_FAST:int                                   				= 2964
 public static const SECONDARY_STATS_SCALING:int                                     = 2965;
 public static const MELEE_DAMAGE_OVERHAUL:int                                   	= 2966;
 public static const INVT_MGMT_TYPE:int                                   			= 2967;//Toggles Inventory Management type between existing and new.
-public static const SPEED_SCALLING:int                                   			= 2968;
-public static const STRENGTH_SCALLING:int                                   		= 2969;
+public static const SPEED_SCALING:int                                   			= 2968;
+public static const STRENGTH_SCALING:int                                   		= 2969;
 public static const SPELLS_COOLDOWNS:int                                   			= 2970;
-public static const WISDOM_SCALLING:int                                   			= 2971;
-public static const INTELLIGENCE_SCALLING:int                                   	= 2972;
+public static const WISDOM_SCALING:int                                   			= 2971;
+public static const INTELLIGENCE_SCALING:int                                   	= 2972;
 public static const NO_GORE_MODE:int                                   				= 2973;
 public static const SPARRABLE_NPCS_TRAINING:int                                     = 2974;
 public static const STAT_GAIN_MODE:int                                              = 2975;
@@ -3006,4 +3006,4 @@ public static const LOW_STANDARDS_FOR_ALL:int                                   
 public static const HYPER_HAPPY:int                                                 = 2998;
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
 	}
-}
+}

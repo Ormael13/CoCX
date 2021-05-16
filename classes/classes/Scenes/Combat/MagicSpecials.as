@@ -51,6 +51,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 1 && flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] == 0) {
 			outputText("As you starts to unleash your inner wrath two additional faces emerge from head on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
+			if (player.hasPerk(PerkLib.AsuraStrength)) {
+				outputText("Additionaly from your back emerge ");
+				outputText("pair ");
+				outputText("of semi-transparent arms. ");
+			}
 			outputText("Finishing assuming Asura form you're ready to destroy anyone that would dare to stand in your way!\n\n");
 			combat.assumeAsuraForm007();
 		}
@@ -558,7 +563,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.fairyScore() >= 18 && !player.hasStatusEffect(StatusEffects.Minimise)) {
-			bd = buttons.add("Minimise", Minimise).hint("Shrink to the size of 5 inches, gaining highly increased evasion but reducing melee and ranged damage as well as physical strenght.");
+			bd = buttons.add("Minimise", Minimise).hint("Shrink to the size of 5 inches, gaining highly increased evasion but reducing melee and ranged damage as well as physical strength.");
 			bd.requireMana(spellCost(50));
 		}
 		if (player.fairyScore() >= 18 && player.hasStatusEffect(StatusEffects.Minimise)) {
@@ -1046,7 +1051,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (crit) outputText(" <b>Critical!</b>");
 			outputText("\n\n");
 			if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-			if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+			if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,5,0,0,0);
 			player.removeStatusEffect(StatusEffects.ChanneledAttack);
 			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
 			enemyAI();
@@ -1181,6 +1186,11 @@ public class MagicSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)){
+			if (rand(100) < 10) {
+				if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+			}
+		}
 		else enemyAI();
 	}
 
@@ -1284,6 +1294,11 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.bonusExpAfterSuccesfullTease();
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)){
+			if (rand(100) < 10) {
+				if (monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+			}
+		}
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
@@ -1387,6 +1402,9 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.OniMusculatureFinalForm)) {
 				onirampageDuration += 3;
 				onirampageCooldown -= 1;
+			}
+			if (player.hasPerk(PerkLib.OniEnlightenedKimono) || player.hasPerk(PerkLib.OniTyrantKimono)) {
+				onirampageDuration += 4;
 			}
 			if (player.armor == armors.SPKIMO) onirampageDuration += 2;
 			if (player.necklace == necklaces.OBNECK) onirampageDuration += 1;
@@ -4614,7 +4632,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownSpectralScream,5,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownSpectralScream,6,0,0,0);
-		outputText("You let out a soul-chilling scream freezing your opponent" + (monster.plural ? "s":"") + " in " + monster.pronoun1 + " tracks from sheer terror. This also seems to have damaged " + monster.pronoun1 + " sanity. ");
+		outputText("You let out a soul-chilling scream freezing your opponent" + (monster.plural ? "s":"") + " in " + monster.pronoun3 + " tracks from sheer terror. This also seems to have damaged " + monster.pronoun3 + " sanity. ");
 		var damage:Number = 0;
 		damage += scalingBonusIntelligence() * spellMod();
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
@@ -4763,7 +4781,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,(player.spe*5)+(player.inte*5),1,0,0);
 			else{
 				monster.createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
-				outputText("\n\nThe strenght of the hurricane winds has increased even further.");
+				outputText("\n\nThe strength of the hurricane winds has increased even further.");
 			}
 			combatRoundOver();
 			return;
@@ -4796,7 +4814,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,(player.spe*5)+(player.inte*5),0,0,0);
 			else {
 				monster.createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
-				outputText("\n\nThe strenght of the hurricane winds has increased even further.");
+				outputText("\n\nThe strength of the hurricane winds has increased even further.");
 			}
 		}
 		outputText("\n\n");

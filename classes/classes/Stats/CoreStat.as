@@ -15,18 +15,29 @@ public class CoreStat extends RawStat{
 		switch (statName) {
 			case 'str.core':
 				base += 8 * host.perkv1(PerkLib.AscensionTranshumanismStr);
+				if (host.hasPerk(PerkLib.AsuraStrength)) base *= 1.1;
+				base = Math.round(base);
 				break;
 			case 'tou.core':
 				base += 8 * host.perkv1(PerkLib.AscensionTranshumanismTou);
+				if (host.hasPerk(PerkLib.AsuraToughness)) base *= 1.1;
+				if (host.hasPerk(PerkLib.BloodDemonToughness)) base *= 1.1;
+				base = Math.round(base);
 				break;
 			case 'spe.core':
 				base += 8 * host.perkv1(PerkLib.AscensionTranshumanismSpe);
+				if (host.hasPerk(PerkLib.AsuraSpeed)) base *= 1.1;
+				base = Math.round(base);
 				break;
 			case 'int.core':
 				base += 8 * host.perkv1(PerkLib.AscensionTranshumanismInt);
+				if (host.hasPerk(PerkLib.BloodDemonIntelligence)) base *= 1.1;
+				base = Math.round(base);
 				break;
 			case 'wis.core':
 				base += 8 * host.perkv1(PerkLib.AscensionTranshumanismWis);
+				if (host.hasPerk(PerkLib.BloodDemonWisdom)) base *= 1.1;
+				base = Math.round(base);
 				break;
 			case 'lib.core':
 				base += 8 * host.perkv1(PerkLib.AscensionTranshumanismLib);
