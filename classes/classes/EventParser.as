@@ -1,5 +1,6 @@
 package classes {
 import classes.BodyParts.Hair;
+import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ArmorLib;
@@ -346,7 +347,7 @@ public class EventParser {
         }
         //Unequip undergarment if you have bizarre lower body.
         if (player.lowerGarment != UndergarmentLib.NOTHING) {
-            if (player.isTaur() || player.isDrider() || player.isScylla() || (player.isNaga() && player.lowerGarmentPerk != "NagaWearable")) {
+            if (player.isTaur() || player.isDrider() || player.isScylla() || (player.isNaga() && player.lowerGarmentPerk != "NagaWearable") || player.lowerBody == LowerBody.GHOST_2) {
                 EngineCore.outputText("You feel something slipping off as if by magic. Looking down on the ground, you realize it's your [lowergarment]. Looking down at your lower body, you let out a sigh and pick up your [lowergarment]. ");
                 SceneLib.inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 1), playerMenu);
                 return true;

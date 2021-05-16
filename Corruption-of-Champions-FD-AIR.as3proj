@@ -4,12 +4,12 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\CoC-Mod.swf" />
+    <movie path="..\..\Desktop\CoC_Xianxia_0.8r2" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
-    <movie version="28" />
-    <movie minorVersion="0" />
+    <movie version="10" />
+    <movie minorVersion="3" />
     <movie platform="Flash Player" />
     <movie background="#000000" />
     <movie preferredSDK="Flex 4.6.0, AIR 32.0;4.6.0, 32.0;" />
@@ -88,7 +88,7 @@
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
-    <option testMovie="Custom" />
+    <option testMovie="Default" />
     <option testMovieCommand="$(FlexSDK)\bin\adl.exe -profile mobileDevice -screensize 800x600:800x600 $(OutputDir)\application.xml" />
   </options>
   <!-- Plugin storage -->

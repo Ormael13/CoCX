@@ -4848,6 +4848,7 @@ public class Combat extends BaseContent {
             if (rand(100) < critChance) {
                 crit = true;
                 if ((player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critDamage += 0.1;
+				if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.shield == ShieldLib.NOTHING) critDamage += 0.2;
                 damage *= critDamage;
             }
             //Apply AND DONE!
@@ -6020,6 +6021,10 @@ public class Combat extends BaseContent {
             else parryChance2 += 10;
             if (player.hasPerk(PerkLib.BladeBarrier) && (player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large")) parryChance2 += 15;
         }
+		if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.shield == ShieldLib.NOTHING) {
+			if (player.spe <= 100) parryChance2 += player.spe / 10;
+            else parryChance2 += 10;
+		}
         if (player.weaponPerk == "Massive") parryChance2 += 5;
         if (player.weaponName == "Undefeated King's Destroyer") parryChance2 += 15;
         if (player.hasPerk(PerkLib.DexterousSwordsmanship)) parryChance2 += 10;
