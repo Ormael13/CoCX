@@ -599,9 +599,9 @@ import coc.xxc.StoryContext;
 			return Appearance.biggestBreastSizeDescript(player);
 		}
 
-		protected function hairDescript(shortDesc:Boolean = false):String
+		protected function hairDescript(longDesc:Boolean = false):String
 		{
-			return Appearance.hairDescription(player, shortDesc);
+			return Appearance.hairDescription(player, longDesc);
 		}
 
 		protected function beardDescript():String
