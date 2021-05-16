@@ -148,7 +148,7 @@
             <color name="light blue">#b1c8ec</color>
             <color name="light gray">#dddadd</color>
             <color name="light green">#c5eec3</color>
-            <color name="light grey">#c4d1d9</color>
+            <color name="light gray">#c4d1d9</color>
             <color name="light purple">#e4cdf3</color>
             <color name="lime green">#73df72</color>
             <color name="mediterranean-toned">#ac7339</color>
@@ -1491,7 +1491,8 @@
 				</if>
 				<else>
 				<!-- RANGED WEAPON -->
-					<if test="playerHasWeaponWings == 0">	
+					<if test="playerHasWeaponWings">	
+						<!-- Bows -->
 						<if test="PlayerHasABow">			
 							<if test="PlayerHasABowHoly or PlayerHasABowUnholy">
 								<if test="PlayerHasABowHoly">
@@ -1505,7 +1506,33 @@
 								</else>
 							</if>
 						</if>
+						
+						<!-- Thrown -->	
+						<if test="PlayerHasAThrownWeapon">	
+							<!-- Javelin -->						
+							<if test="PlayerHasAJavelin">	
+								<if test="PlayerHasAJavelinHoly or PlayerHasAJavelinUnholy">
+									<if test="PlayerHasAJavelinHoly">
+										<show part="weapon/spearHoly"/>
+									</if>
+									<if test="PlayerHasAJavelinUnholy">
+										<show part="weapon/spearUnholy"/>
+									</if>
+									<else>
+										<show part="weapon/spearGeneric"/>
+									</else>
+								</if>
+							</if>						
+							<!-- Axe -->
+							<if test="PlayerHasAThrownAxe">				
+								<show part="weapon/axeGeneric"/>
+							</if>						
+						</if>
+						
+						<!-- Guns -->	
+						
 					</if>
+					
 				</else>
 			</if>	
 		</if>
@@ -2223,14 +2250,21 @@
 								<if test="skin.coverage==Skin.COVERAGE_NONE">
 									<hide part="hands/*"/>
 									<hide part="arms/*"/>
-									<show part="arms/demonlewd"/>
-									<show part="arms_fg/demonlewd"/>
 									<if test="PlayerHasAWeapon">
 										<show part="arms_bg/human"/>
 										<else>
 											<hide part="arms_bg/*"/>
 											<hide part="hands_bg/*"/>
 											<show part="arms_bg/demonlewd"/>
+										</else>
+									</if>
+									<if test="PlayerHasAShield">
+										<show part="arms/human"/>
+										<else>
+											<hide part="arms/*"/>
+											<hide part="hands/*"/>
+											<show part="arms/demonlewd"/>
+											<show part="arms_fg/demonlewd"/>
 										</else>
 									</if>
 								</if>
@@ -2244,14 +2278,21 @@
 									<if test="showClothing">
 										<hide part="hands/*"/>
 										<hide part="arms/*"/>
-										<show part="arms/demonlewd"/>
-										<show part="arms_fg/demonlewd"/>
 										<if test="PlayerHasAWeapon">
 											<show part="arms_bg/human"/>
 											<else>
 												<hide part="arms_bg/*"/>
 												<hide part="hands_bg/*"/>
 												<show part="arms_bg/demonlewd"/>
+											</else>
+										</if>
+										<if test="PlayerHasAShield">
+											<show part="arms/human"/>
+											<else>
+												<hide part="arms/*"/>
+												<hide part="hands/*"/>
+												<show part="arms/demonlewd"/>
+												<show part="arms_fg/demonlewd"/>
 											</else>
 										</if>
 									</if>
@@ -2280,6 +2321,15 @@
 							<hide part="arms_bg/*"/>
 							<hide part="hands_bg/*"/>
 							<show part="arms_bg/demonlewd"/>
+						</else>
+					</if>
+					<if test="PlayerHasAShield">
+						<show part="arms/human"/>
+						<else>
+							<hide part="arms/*"/>
+							<hide part="hands/*"/>
+							<show part="arms/demonlewd"/>
+							<show part="arms_fg/demonlewd"/>
 						</else>
 					</if>
 				</if>
