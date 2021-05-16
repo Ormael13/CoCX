@@ -10,12 +10,10 @@ public class Hair extends BodyPart {
 	 * - value: numerical id (0, 1)
 	 * - id: name of the constant ("NORMAL", "FEATHER")
 	 * - name: human-readable default name, ("normal", "feather")
+	 * - shortDesc: simple description of the hair
+	 * - longDesc: detailed description of the hair
+	 * - beardDesc: description of the beard linked to the hair type
 	 */
-	public static var HairDictionary: Dictionary = new Dictionary();
-	HairDictionary["STORM"] = {
-		name:"glowing lightning shaped",
-		hairDescAfter: ", whose tips ends with glowing lightning shaped locks, "
-	};
 
 	public static var Types:/*EnumValue*/Array = [];
 
