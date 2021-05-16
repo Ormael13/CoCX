@@ -100,6 +100,7 @@ public class GameSettings extends BaseContent {
 		else {
 			outputText("Instant Leveling: <font color=\"#800000\"><b>OFF</b></font>\nIndividual leveling up, i.e. One level click at a time.");
 		}
+		outputText("\nThis setting has three modes: Default(Levelling up one at a time), Direct(Auto-calculates your highest and allocates accordingly), and Manual(You are given the option to increase levels in increments.)")
 		outputText("\n\n")
 
 		if (flags[kFLAGS.MUTATIONS_SPOILERS] >= 1){
@@ -187,29 +188,29 @@ public class GameSettings extends BaseContent {
 			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 100x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		outputText("\n\n");
-		if (flags[kFLAGS.STRENGTH_SCALLING] >= 1) {
-			outputText("Strength Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
+		if (flags[kFLAGS.STRENGTH_SCALING] >= 1) {
+			outputText("Strength Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less random and a bit higher on average than in old scaling.");
 		}
 		else
-			outputText("Strength Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
+			outputText("Strength Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more random and a bit lower on average than in new scaling.");
 		outputText("\n\n");
-		if (flags[kFLAGS.SPEED_SCALLING] >= 1) {
-			outputText("Speed Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
+		if (flags[kFLAGS.SPEED_SCALING] >= 1) {
+			outputText("Speed Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less random and a bit higher on average than in old scaling.");
 		}
 		else
-			outputText("Speed Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
+			outputText("Speed Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more random and a bit lower on average than in new scaling.");
 		outputText("\n\n");
-		if (flags[kFLAGS.WISDOM_SCALLING] >= 1) {
-			outputText("Wisdom Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
+		if (flags[kFLAGS.WISDOM_SCALING] >= 1) {
+			outputText("Wisdom Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less random and a bit higher on average than in old scaling.");
 		}
 		else
-			outputText("Wisdom Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
+			outputText("Wisdom Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more random and a bit lower on average than in new scaling.");
 		outputText("\n\n");
-		if (flags[kFLAGS.INTELLIGENCE_SCALLING] >= 1) {
-			outputText("Intelligence Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less randomn and a bit higher on averange than in old scalling.");
+		if (flags[kFLAGS.INTELLIGENCE_SCALING] >= 1) {
+			outputText("Intelligence Scaling: <font color=\"#008000\"><b>New</b></font>\n Values are less random and a bit higher on average than in old scaling.");
 		}
 		else
-			outputText("Intelligence Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more randomn and a bit lower on averange than in new scalling.");
+			outputText("Intelligence Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more random and a bit lower on average than in new scaling.");
 		outputText("\n\n");
 		if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] >= 1) {
 			outputText("Damage Overhaul: <font color=\"#008000\"><b>On</b></font>\n Damage uses new calculation system.");
@@ -218,31 +219,31 @@ public class GameSettings extends BaseContent {
 			outputText("Damage Overhaul: <font color=\"#800000\"><b>Off</b></font>\n Damage uses old calculation system.");
 		outputText("\n\n");
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] >= 1) {
-			outputText("Spells Cooldowns: <font color=\"#008000\"><b>Off</b></font>\n Damage dealing spells not have cooldowns and they keep their default power.");
+			outputText("Spells Cooldowns: <font color=\"#008000\"><b>Off</b></font>\n Damage dealing spells do not have cooldowns and they keep their default power.");
 		}
 		else
-			outputText("Spells Cooldowns: <font color=\"#800000\"><b>On</b></font>\n Damage dealing spells have cooldowns and they dealing more damage than in default cooldownless variant.");
+			outputText("Spells Cooldowns: <font color=\"#800000\"><b>On</b></font>\n Damage dealing spells have cooldowns and they deal more damage than their default cooldownless counterparts.");
 		outputText("\n\n");
 		if (flags[kFLAGS.ITS_EVERY_DAY]) {
-			outputText("Eternal Holiday Mode: <font color=\"#008000\"><b>ON</b></font>\n All holiday events like Eastern/X-mas and etc. would happen at any day of the year.");
+			outputText("Eternal Holiday Mode: <font color=\"#008000\"><b>ON</b></font>\n All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
 		}
 		else
-			outputText("Eternal Holiday Mode: <font color=\"#800000\"><b>OFF</b></font>\n All holiday events happen only when it's respective holiday time.");
+			outputText("Eternal Holiday Mode: <font color=\"#800000\"><b>OFF</b></font>\n All holiday events happen only during their respective holiday times.");
 		outputText("\n\n");
 		if (flags[kFLAGS.NO_GORE_MODE] >= 1) {
-			outputText("No Blood Mode: <font color=\"#008000\"><b>ON</b></font>\n Excesive Bloody or Gore scenes variants are disabled.");
+			outputText("No Blood Mode: <font color=\"#008000\"><b>ON</b></font>\n Excessive Bloody or Gore scenes variants are disabled.");
 		}
 		else
-			outputText("No Blood Mode: <font color=\"#800000\"><b>OFF</b></font>\n Excesive Bloody or Gore scenes variants are enabled.");
+			outputText("No Blood Mode: <font color=\"#800000\"><b>OFF</b></font>\n Excessive Bloody or Gore scenes variants are enabled.");
 		menu();
-		addButton(0, "Eternal Holiday", toggleEternalHoliday).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. would happen at any day of the year.");
+		addButton(0, "Eternal Holiday", toggleEternalHoliday).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
 		addButton(1, "No Blood Toggle", toggleNOGORE).hint("Toggles No Blood Mode. If enabled, scenes could have more gruesome/bloody variants showed. Not for the weak of heart players.");
-		addButton(3, "Wis scalling", toggleWisScaling).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generaly a bit higher values on averange.");
-		addButton(4, "Int scalling", toggleIntScaling).hint("Toggles Intelligance scalling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
+		addButton(3, "Wis scaling", toggleWisScaling).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generally a bit higher values on average.");
+		addButton(4, "Int scaling", toggleIntScaling).hint("Toggles Intelligance scaling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
 		addButton(5, "Damage Overhaul", toggleDamageOverhaul).hint("Toggles Damage Overhaul. If enabled, melee and range attacks would deal random damage between 15% to 115%. Int and Wis could increase both values.");
 		addButton(6, "Spells Cooldowns", toggleSpellsCooldowns).hint("Toggles Spells cooldowns. If enabled, spells would have cooldowns and they will be stronger.");
-		addButton(8, "Str scalling", toggleStrScaling).hint("Toggles Strength scalling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
-		addButton(9, "Spe scalling", toggleSpeScaling).hint("Toggles Speed scalling for all attacks using it. If enabled, speed scaling would be less random with values being a bit higher on average.");
+		addButton(8, "Str scaling", toggleStrScaling).hint("Toggles Strength scaling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
+		addButton(9, "Spe scaling", toggleSpeScaling).hint("Toggles Speed scaling for all attacks using it. If enabled, speed scaling would be less random with values being a bit higher on average.");
 		addButton(10, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
 		addButton(14, "Back", settingsScreenMain);
 	}
@@ -434,26 +435,26 @@ public class GameSettings extends BaseContent {
 	}
 
 	public function toggleStrScaling():void {
-		if (flags[kFLAGS.STRENGTH_SCALLING] < 1) flags[kFLAGS.STRENGTH_SCALLING] = 1;
-		else flags[kFLAGS.STRENGTH_SCALLING] = 0;
+		if (flags[kFLAGS.STRENGTH_SCALING] < 1) flags[kFLAGS.STRENGTH_SCALING] = 1;
+		else flags[kFLAGS.STRENGTH_SCALING] = 0;
 		settingsScreenGameSettings2();
 	}
 
 	public function toggleSpeScaling():void {
-		if (flags[kFLAGS.SPEED_SCALLING] < 1) flags[kFLAGS.SPEED_SCALLING] = 1;
-		else flags[kFLAGS.SPEED_SCALLING] = 0;
+		if (flags[kFLAGS.SPEED_SCALING] < 1) flags[kFLAGS.SPEED_SCALING] = 1;
+		else flags[kFLAGS.SPEED_SCALING] = 0;
 		settingsScreenGameSettings2();
 	}
 
 	public function toggleWisScaling():void {
-		if (flags[kFLAGS.WISDOM_SCALLING] < 1) flags[kFLAGS.WISDOM_SCALLING] = 1;
-		else flags[kFLAGS.WISDOM_SCALLING] = 0;
+		if (flags[kFLAGS.WISDOM_SCALING] < 1) flags[kFLAGS.WISDOM_SCALING] = 1;
+		else flags[kFLAGS.WISDOM_SCALING] = 0;
 		settingsScreenGameSettings2();
 	}
 
 	public function toggleIntScaling():void {
-		if (flags[kFLAGS.INTELLIGENCE_SCALLING] < 1) flags[kFLAGS.INTELLIGENCE_SCALLING] = 1;
-		else flags[kFLAGS.INTELLIGENCE_SCALLING] = 0;
+		if (flags[kFLAGS.INTELLIGENCE_SCALING] < 1) flags[kFLAGS.INTELLIGENCE_SCALING] = 1;
+		else flags[kFLAGS.INTELLIGENCE_SCALING] = 0;
 		settingsScreenGameSettings2();
 	}
 

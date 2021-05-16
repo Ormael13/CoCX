@@ -101,6 +101,7 @@ public class PlayerInfo extends BaseContent {
 
 			bodyStats += "<b>Total Cock Length:</b> " + Math.round(totalCockLength) + " inches\n";
 			bodyStats += "<b>Total Cock Girth:</b> " + Math.round(totalCockGirth) + " inches\n";
+			bodyStats += "<b>Hours since last cum:</b> " + player.hoursSinceCum + "\n";
 
 		}
 
@@ -305,7 +306,7 @@ public class PlayerInfo extends BaseContent {
 			statEffects += "Eating in 'Shira of the east' restaurant effect - " + player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) + " hours remaining. (Increased stats and elemental resistance)\n";
 
 		if (player.statusEffectv1(StatusEffects.RaijuLightningStatus) > 0)
-			statEffects += "Raiju Lightning - " + player.statusEffectv1(StatusEffects.RaijuLightningStatus) + " hours remaining. (During masturbation: rise instead lowering lust and extend duration of this effect by few hours. Could also cause uncontroled slowly transformation into raiju.)\n";
+			statEffects += "Raiju Lightning - " + player.statusEffectv1(StatusEffects.RaijuLightningStatus) + " hours remaining. (During masturbation: Increase lust rather than dropping and extends duration of this effect by a few hours. Can also cause uncontrolled transformations into a raiju.)\n";
 
 		if (player.statusEffectv1(StatusEffects.KonstantinArmorPolishing) > 0)
 			statEffects += "Armor Polishing - " + player.statusEffectv1(StatusEffects.KonstantinArmorPolishing) + " hours remaining. (+" + player.statusEffectv2(StatusEffects.KonstantinArmorPolishing) + "% to armor)\n";
@@ -333,19 +334,19 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		if (player.statusEffectv1(StatusEffects.Bammed1) > 0) {
-			if (player.statusEffectv1(StatusEffects.Bammed1) == 3) statEffects += "Bammed <b>(Disables melee attacks pernamently)</b>\n";
+			if (player.statusEffectv1(StatusEffects.Bammed1) == 3) statEffects += "Bammed <b>(Disables melee attacks permanently)</b>\n";
 			else statEffects += "Bammed - " + player.statusEffectv3(StatusEffects.Bammed1) + " hours remaining. (Disables melee attacks)\n";
 		}
 		if (player.statusEffectv2(StatusEffects.Bammed1) > 0) {
-			if (player.statusEffectv2(StatusEffects.Bammed1) == 3) statEffects += "Bammed <b>(Disables range attacks pernamently)</b>\n";
+			if (player.statusEffectv2(StatusEffects.Bammed1) == 3) statEffects += "Bammed <b>(Disables range attacks permanently)</b>\n";
 			else statEffects += "Bammed - " + player.statusEffectv4(StatusEffects.Bammed1) + " hours remaining. (Disables range attacks)\n";
 		}
 		if (player.statusEffectv1(StatusEffects.Bammed2) > 0) {
-			if (player.statusEffectv1(StatusEffects.Bammed2) == 3) statEffects += "Bammed <b>(Disables physical specials pernamently)</b>\n";
+			if (player.statusEffectv1(StatusEffects.Bammed2) == 3) statEffects += "Bammed <b>(Disables physical specials permanently)</b>\n";
 			else statEffects += "Bammed - " + player.statusEffectv3(StatusEffects.Bammed2) + " hours remaining. (Disables physical specials)\n";
 		}
 		if (player.statusEffectv2(StatusEffects.Bammed2) > 0) {
-			if (player.statusEffectv2(StatusEffects.Bammed2) == 3) statEffects += "Bammed <b>(Disables magic specials pernamently)</b>\n";
+			if (player.statusEffectv2(StatusEffects.Bammed2) == 3) statEffects += "Bammed <b>(Disables magic specials permanently)</b>\n";
 			else statEffects += "Bammed - " + player.statusEffectv4(StatusEffects.Bammed2) + " hours remaining. (Disables magic specials)\n";
 		}
 
@@ -363,8 +364,7 @@ public class PlayerInfo extends BaseContent {
 		addButton(7, "NPC's", displayStatsNpcs);
 		addButton(8, "Children", displayStatsChildren);
 		addButton(9, "Mastery", displayStatsmastery);
-		addButton(10, "Mutations", displayMutationsUsed);
-	}
+		}
 	public function displayStatsCombat():void {
 		spriteSelect(-1);
 		clearOutput();
@@ -514,7 +514,6 @@ public class PlayerInfo extends BaseContent {
 		addButton(7, "NPC's", displayStatsNpcs);
 		addButton(8, "Children", displayStatsChildren);
 		addButton(9, "Mastery", displayStatsmastery);
-		addButton(10, "Mutations", displayMutationsUsed);
 	}
 	public function displayStatsNpcs():void {
 		spriteSelect(-1);
@@ -1000,7 +999,6 @@ public class PlayerInfo extends BaseContent {
 		addButtonDisabled(7, "NPC's", "You are currently at this stats page.");
 		addButton(8, "Children", displayStatsChildren);
 		addButton(9, "Mastery", displayStatsmastery);
-		addButton(10, "Mutations", displayMutationsUsed);
 	}
 	public function displayStatsChildren():void {
 		spriteSelect(-1);
@@ -1157,7 +1155,6 @@ public class PlayerInfo extends BaseContent {
 		addButton(7, "NPC's", displayStatsNpcs);
 		addButtonDisabled(8, "Children", "You are currently at this stats page.");
 		addButton(9, "Mastery", displayStatsmastery);
-		addButton(10, "Mutations", displayMutationsUsed);
 	}
 	public function displayStatsmastery():void {
 		spriteSelect(-1);
@@ -1254,176 +1251,6 @@ public class PlayerInfo extends BaseContent {
 		addButton(7, "NPC's", displayStatsNpcs);
 		addButton(8, "Children", displayStatsChildren);
 		addButtonDisabled(9, "Mastery", "You are currently at this stats page.");
-		addButton(10, "Mutations", displayMutationsUsed);
-	}
-
-	//Mutations Tracker
-	public function displayMutationsUsed():void{
-		spriteSelect(-1);
-		clearOutput()
-		displayHeader("Mutation Stats");
-		var mutationCount:Number = 1
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation01) >= 0)
-			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation02) >= 0)
-			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation03) >= 0)
-			mutationCount++;
-		if (player.findPerk(PerkLib.AscensionAdditionalOrganMutation04) >= 0)
-			mutationCount++;
-		outputText("\nYou have " + mutationCount + " mutation slots per part."+
-		"\nNote: Not all body parts will use all available slots." +
-		"\nPerks may have multiple stages. Due to the number of tiers per perk, currently it will only display the first form, until the cleaner Perk-version code is utilized.")
-
-		//Every time a new mutation is added, it will need to be added in manually, since there's nowhere I can just pull the information from.
-		//Also, when Orm reworks perks to use v1/v2/v3 things, can also display the current tier.
-		//Source: Player.as maxHeartMutations/etc. For mutations, PerkLib.as for desc.
-
-		outputText("\n")
-		//Heart Mutations
-		outputText("<b>\nHeart Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.BlackHeart)
-		displayMutationsUsedSpoilers(PerkLib.FrozenHeart)
-		displayMutationsUsedSpoilers(PerkLib.ObsidianHeart)
-		displayMutationsUsedSpoilers(PerkLib.TwinHeart)
-		displayMutationsUsedSpoilers(PerkLib.HeartOfTheStorm)
-		displayMutationsUsedSpoilers(PerkLib.DraconicHeart)
-
-		//Muscle Mutations
-		outputText("<b>\nMuscle Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.MantislikeAgility)
-		displayMutationsUsedSpoilers(PerkLib.OniMusculature)
-
-		//Mouth Mutations
-		outputText("<b>\nMouth Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.VenomGlands)
-		displayMutationsUsedSpoilers(PerkLib.HollowFangs)
-
-		//Adrenal Glands Mutations
-		outputText("<b>\nAdrenal Gland Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.SalamanderAdrenalGlands)
-		displayMutationsUsedSpoilers(PerkLib.OrcAdrenalGlands)
-
-		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
-		outputText("<b>\nBloodstream Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.VampiricBloodsteam)
-		displayMutationsUsedSpoilers(PerkLib.HinezumiBurningBlood)
-		displayMutationsUsedSpoilers(PerkLib.FeyArcaneBloodstream)
-
-		//Fat tissue Mutations
-		outputText("<b>\nFat and Tissue Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.PigBoarFat)
-		displayMutationsUsedSpoilers(PerkLib.NaturalPunchingBag)
-		displayMutationsUsedSpoilers(PerkLib.WhaleFat)
-		displayMutationsUsedSpoilers(PerkLib.YetiFat)
-
-		//Lungs Mutations
-		outputText("<b>\nLungs Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.DraconicLungs)
-		displayMutationsUsedSpoilers(PerkLib.CaveWyrmLungs)
-		displayMutationsUsedSpoilers(PerkLib.MelkieLung)
-		displayMutationsUsedSpoilers(PerkLib.DrakeLungs)
-
-		//Metabolism Mutations
-		outputText("<b>\nMetabolism Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.ManticoreMetabolism)
-		displayMutationsUsedSpoilers(PerkLib.DisplacerMetabolism)
-
-		//Ovaries Mutations
-		outputText("<b>\nOvaries Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.LactaBovinaOvaries)
-		displayMutationsUsedSpoilers(PerkLib.FloralOvaries)
-
-		//Testicle Mutations
-		outputText("<b>\nBalls Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.MinotaurTesticles)
-		displayMutationsUsedSpoilers(PerkLib.EasterBunnyBalls, "Neon Pink Eggs")
-		displayMutationsUsedSpoilers(PerkLib.NukiNuts)
-
-		//Eyes Mutations
-		outputText("<b>\nEye Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.GorgonsEyes)
-		displayMutationsUsedSpoilers(PerkLib.GazerEye)
-
-		//Peripheral/NervSys Mutations
-		outputText("<b>\nPeripheral Nervous System Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.ElvishPeripheralNervSys)
-
-		//Bones and Marrow Mutations
-		outputText("<b>\nBones and Marrow Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.LizanMarrow)
-		displayMutationsUsedSpoilers(PerkLib.DraconicBones)
-		displayMutationsUsedSpoilers(PerkLib.HarpyHollowBones)
-
-		//Thyroid Glands Mutations
-		outputText("<b>\nThyroid Gland Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.KitsuneThyroidGland)
-		displayMutationsUsedSpoilers(PerkLib.NekomataThyroidGland)
-
-		//ParaThyroid Glands Mutations. What's the difference between this and the above???
-		outputText("<b>\nParaThyroid Glands Mutations:</b>")
-		displayMutationsUsedSpoilers(PerkLib.KitsuneParathyroidGlands)
-		displayMutationsUsedSpoilers(PerkLib.HellcatParathyroidGlands)
-
-		//Dragon Mutations
-		outputText("<b>\nDragon Mutations:</b>")
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+")
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++")
-		displayMutationsUsedSpoilers(PerkLib.DraconicBones)
-		displayMutationsUsedSpoilers(PerkLib.DraconicHeart)
-		displayMutationsUsedSpoilers(PerkLib.DraconicLungs)
-
-		//Kitsune Mutations
-		outputText("<b>\nKitsune Mutations:</b>")
-		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+")
-		displayMutationsUsedSpoilers(PerkLib.KitsuneThyroidGland)
-		displayMutationsUsedSpoilers(PerkLib.KitsuneParathyroidGlands)
-
-		menu();
-		addButton(0, "Next", playerMenu);
-		addButton(5, "General", displayStats);
-		addButton(6, "Combat", displayStatsCombat);
-		addButton(7, "NPC's", displayStatsNpcs);
-		addButton(8, "Children", displayStatsChildren);
-		addButton(9, "Mastery", displayStatsmastery);
-		addButtonDisabled(10, "Mutations", "You are currently at this stats page.");
-	}
-
-	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
-	public function displayMutationsUsedSpoilers(perkName:PerkType, acquireReq:String = ""):void {
-		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
-			if (player.hasPerk(perkName)) {
-				outputText("\n" + perkName.name + ": <font color=\"#008000\">Acquired.</font>")
-			} else {
-				outputText("\n" + perkName.name + ": <font color=\"#800000\">Missing.</font>")
-			}
-			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
-				var reqs:Array = []
-				var reqcount:int = 1
-				if (perkName.requirements.length > 0) {
-					for each (var cond:Object in perkName.requirements) {
-						if (reqcount > 1) { //Ignores the "free mutation slot" note.
-							reqs.push("<font color='#000000'>" + cond.text + "</font>");
-						}
-						reqcount++;
-					}
-				}	else{	//Information not available.
-					reqs.push("Missing data. Perhaps Unacquirable?")
-				}
-				outputText("\nPrerequisites/Acquisition:" + reqs.join(", "))
-			}
-			else {
-				outputText("\nPrerequisites/Acquisition:" + acquireReq)
-			}
-		}
-		else { //Help Off
-			if (player.hasPerk(perkName)) {
-				outputText("\n" + perkName.name + ": Acquired.")
-			} else {
-					outputText("\n???")
-				}
-		}
-		outputText("\n")
 	}
 
 	//------------
@@ -1480,7 +1307,7 @@ public class PlayerInfo extends BaseContent {
 			perkBuyMenu();
 		}
 		else {
-			outputText("<b>ERROR.  LEVEL UP PUSHED WHEN PC CANNOT LEVEL OR GAIN PERKS.  PLEASE REPORT THE STEPS TO REPRODUCE THIS BUG TO ORMAEL@GMAIL.COM OR THE FENOXO.COM XIANXIA MOD THREAD.</b>");
+			outputText("<b>ERROR. LEVEL UP PUSHED WHEN PC CANNOT LEVEL OR GAIN PERKS.  PLEASE REPORT THE STEPS TO REPRODUCE THIS BUG TO ORMAEL@GMAIL.COM OR THE FENOXO.COM XIANXIA MOD THREAD.</b>");
 			doNext(playerMenu);
 		}
 	}
@@ -1488,8 +1315,8 @@ public class PlayerInfo extends BaseContent {
 	//Sub-menus for limited levelling.
 	public function lvlUpFastSubMenu():void{
 		spriteSelect(-1);
-		outputText("Fast levelling, just keep clicking on the button to level up by that number. Or press LvlMax to just get all the levels.")
-		outputText("\n\nPressing \"Done\" will bring you to stat/perk allocation.")
+		outputText("Fast levelling, just keep clicking on the button to level up by that number. Or press LvlMax to just get all the levels.");
+		outputText("\n\nPressing \"Done\" will bring you to stat/perk allocation.");
 		menu();
 		addButton(0,"Lvl +1", lUFSM1);
 		addButton(1,"Lvl +2", lUFSM2);
@@ -1527,7 +1354,7 @@ public class PlayerInfo extends BaseContent {
 			while (player.XP >= player.requiredXP() && player.level < CoC.instance.levelCap && lvlinc < incmax) {
 				player.XP -= player.requiredXP();
 				player.level++;
-				lvlinc++
+				lvlinc++;
 				if (player.level <= 6) {
 					player.perkPoints += 2;
 					player.statPoints += 10;
@@ -1538,9 +1365,9 @@ public class PlayerInfo extends BaseContent {
 				}
 			}
 			outputText("<b>You have gained " +lvlinc.toString() + " levels, and are now level " + num2Text(player.level)+"!</b>");
-			var perkRes:int = player.perkPoints - perkLvl
-			var statRes:int = player.statPoints - statLvl
-			outputText("\n\nYou have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!\n\n")
+			var perkRes:int = player.perkPoints - perkLvl;
+			var statRes:int = player.statPoints - statLvl;
+			outputText("\n\nYou have gained " + statRes.toString() + " attribute points and " + perkRes.toString() + " perk points!\n\n");
 			statScreenRefresh();
 		}
 		lvlUpFastSubMenu();
@@ -1857,6 +1684,30 @@ public class PlayerInfo extends BaseContent {
 			doNext(playerMenu);
 		}
 	}
+			/*	DeityJobMunchkin.requirePerk(JobWarlord)
+                                .requirePerk(JobMonk)
+                                .requirePerk(JobKnight)
+                                .requirePerk(JobGolemancer)
+                                .requirePerk(JobHunter)
+                                .requirePerk(JobEromancer)
+                                .requirePerk(JobEnchanter)
+                                .requirePerk(JobElementalConjurer)
+                                .requirePerk(JobCourtesan)
+                                .requirePerk(JobDervish)
+                                .requirePerk(JobDefender)
+                                .requirePerk(JobBrawler)
+                                .requirePerk(JobBeastWarrior)
+                                .requirePerk(JobSwordsman)
+                                .requirePerk(JobAllRounder)
+                                .requireStr(150)
+                                .requireTou(150)
+                                .requireSpe(150)
+                                .requireInt(150)
+                                .requireWis(150)
+                                .requireLib(90)
+								.requireSen(90)
+                                .requireLevel(30); //requirePerk(JobEromancer)
+			*/	//(Still need some other related stuff added to make PC true Munchkin
 	
 	public function superPerkBuyMenu(page:int = 1):void {
 		clearOutput();
@@ -1867,12 +1718,21 @@ public class PlayerInfo extends BaseContent {
 		menu();
 		if (page == 1) {
 			if (player.superPerkPoints > 0) {
-				addButtonDisabled(0, "DJ:M", "Soon.");//if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "", "You already have this perk.");
-				//else addButtonDisabled(0, "", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
+				else {
+					if (player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 && player.lib >= 150 && player.sens >= 100 && player.level >= 90 && player.currentBasicJobs() >= 9 && player.currentAdvancedJobs() >= 6 && player.currentPrestigeJobs() >= 2 && player.currentHiddenJobs() >= 1) {
+						addButton(0, "DJ:M", perkDeityJobMunchkin).hint("Choose the 'Deity Job: Munchkin' super munchkin perk. You're Munchkin, an ultimate being that possess a god-like body and powers. (+20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up)");
+					}
+					else addButtonDisabled(0, "DJ:M", "You do not have one/all of them yet: enough super perk points to obtain this perk, level 90+, 150+ in str/tou/spe/inte/wis/lib, 100+ in sens, 9 basic jobs, 6 advanced jobs, 2 prestige jobs, 1 hidden job.");
+				}
+				addButtonDisabled(1, "M(at)G", "Soon");
+				addButtonDisabled(2, "M(at)W", "Soon");
 			}
 			else {
-				addButtonDisabled(0, "DJ:M", "Soon.");//if (player.hasPerk(PerkLib.)) addButtonDisabled(0, "", "You already have this perk.");
-				//else addButtonDisabled(0, "", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
+				else addButtonDisabled(0, "DJ:M", "You do not have enough super perk points to obtain this perk.");
+				addButtonDisabled(1, "M(at)G", "Soon");
+				addButtonDisabled(2, "M(at)W", "Soon");
 			}
 			addButton(12, "Next", superPerkBuyMenu, page + 1);
 			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);
@@ -1896,25 +1756,33 @@ public class PlayerInfo extends BaseContent {
 					if (player.hasPerk(PerkLib.WayOfTheBlood)) addButton(2, "YPMP", perkYourPainMyPower).hint("Choose the 'Your Pain My Power' super perk. You can absorb all of blood spilled and wrath generated by enemy under Bleed effects into yourself. (+10x Tou of OverMax HP, -10% blood spells cost, +20% blood spells power)");
 					else addButtonDisabled(2, "YPMP", "You need to first have the 'Way of the Blood' super perk.");
 				}
-				if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) addButtonDisabled(2, "MBFBP", "You already have this super perk.");
+				if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) addButtonDisabled(3, "MBFBP", "You already have this super perk.");
 				else {
 					if (player.hasPerk(PerkLib.YourPainMyPower)) addButton(3, "MBFBP", perkMyBloodForBloodPuppies).hint("Choose the 'My Blood for Blood Puppies' super perk. During fight small part of your blood from into blood puppies that can attack on your behalf with blood magic/soulskills. When you grow in mastery of blood they would grow stronger with you. (+10x Tou of OverMax HP, -10% blood spells cost, +20% blood spells power)");
 					else addButtonDisabled(3, "MBFBP", "You need to first have the 'Your Pain My Power' super perk.");
 				}
-				//addButton(4, "", ).hint("Choose the '' super perk. ");
-				//addButtonDisabled(4, "", "Soon.");
+				if (player.level >= 30) {
+					if (player.hasPerk(PerkLib.BloodDemonToughness)) addButtonDisabled(4, "BDT", "You already have this super perk.");
+					else {
+						if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) addButton(4, "BDT", perkBloodDemonToughness).hint("Choose the 'Blood Demon Toughness' super perk. When below 0 HP it would negate any negative effect of other perks that would cause negative HP regen. (+10x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power/Base TOU Cap, +0,5% HP regen)");
+						else addButtonDisabled(4, "BDT", "You need to first have the 'My Blood for Blood Puppies' super perk.");
+					}
+				}
+				else {
+					addButtonDisabled(4, "BDT", "You need to reach level 30 first.");
+				}
 			}
 			else {
 				if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) addButtonDisabled(0, "HJ:BD", "You already have this perk.");
 				else addButtonDisabled(0, "HJ:BD", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.WayOfTheBlood)) addButtonDisabled(1, "WOTB", "You already have this perk.");
-				else addButtonDisabled(1, "WOTB", "YYou do not have enough super perk points to obtain this perk.");
+				else addButtonDisabled(1, "WOTB", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.YourPainMyPower)) addButtonDisabled(2, "YPMP", "You already have this perk.");
 				else addButtonDisabled(2, "YPMP", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) addButtonDisabled(3, "MBFBP", "You already have this perk.");
 				else addButtonDisabled(3, "MBFBP", "You do not have enough super perk points to obtain this perk.");
-				//if (player.hasPerk(PerkLib.)) addButtonDisabled(4, "", "You already have this perk.");
-				//else addButtonDisabled(4, "", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.BloodDemonToughness)) addButtonDisabled(4, "BDT", "You already have this perk.");
+				else addButtonDisabled(4, "BDT", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(12, "Next", superPerkBuyMenu, page + 1);
 			addButton(13, "Previous", superPerkBuyMenu, page - 1);
@@ -1942,7 +1810,16 @@ public class PlayerInfo extends BaseContent {
 					if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) addButton(3, "ICAF", perkICastAsuraFist).hint("Choose the 'I Cast (Asura) Fist' super perk. Safe treshold for magic/m.specials is magic/m.specials is calculated based on overmax wrath not max wrath, +100% of base max wrath. (+10% of OverMax Wrath)");
 					else addButtonDisabled(3, "ICAF", "You need to first have the 'Like A-sura Boss' super perk.");
 				}
-				//addButtonDisabled(4, "", "Soon.");
+				if (player.level >= 30) {
+					if (player.hasPerk(PerkLib.AsuraStrength)) addButtonDisabled(4, "ASTR", "You already have this super perk.");
+					else {
+						if (player.hasPerk(PerkLib.ICastAsuraFist)) addButton(4, "ASTR", perkAsuraStrength).hint("Choose the 'Asura Strength' super perk. Gain Asura Strength, Asura Form increase to physical might rise to 180%/90%/60% of core str/tou/spe and generate one additional pair of semi-transparent arms. (+10% of OverMax Wrath/Base STR Cap)");
+						else addButtonDisabled(4, "ASTR", "You need to first have the 'I Cast (Asura) Fist' super perk.");
+					}
+				}
+				else {
+					addButtonDisabled(4, "ASTR", "You need to reach level 30 first.");
+				}
 			}
 			else {
 				if (player.hasPerk(PerkLib.HiddenJobAsura)) addButtonDisabled(0, "HJ:A", "You already have this perk.");
@@ -1953,7 +1830,8 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(2, "LAB", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.ICastAsuraFist)) addButtonDisabled(3, "ICAF", "You already have this perk.");
 				else addButtonDisabled(3, "ICAF", "You do not have enough super perk points to obtain this perk.");
-				//addButtonDisabled(4, "", "Soon.");
+				if (player.hasPerk(PerkLib.AsuraStrength)) addButtonDisabled(4, "ASTR", "You already have this perk.");
+				else addButtonDisabled(4, "ASTR", "You do not have enough super perk points to obtain this perk.");
 			}
 			//12 -> page + 1 button
 			addButton(13, "Previous", superPerkBuyMenu, page - 1);
@@ -1978,61 +1856,96 @@ public class PlayerInfo extends BaseContent {
 		player.superPerkPoints++;
 		doNext(superPerkBuyMenu);
 	}
+	private function perkDeityJobMunchkin():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.DeityJobMunchkin,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Deity Job: Munchkin' super munchkin perk. (Because it too cool to be merely super perk, right?)");
+		doNext(curry(superPerkBuyMenu, 1));
+	}
+	private function perkMunchkinAtGym():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.MunchkinAtGym,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Munchkin @ Gym' super munchkin perk. (Because it too cool to be merely super perk, right?)");
+		doNext(curry(superPerkBuyMenu, 1));
+	}
+	private function perkMunchkinAtWork():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.MunchkinAtWork,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Munchkin @ Work' super munchkin perk. (Because it too cool to be merely super perk, right?)");
+		doNext(curry(superPerkBuyMenu, 1));
+	}
 	private function perkHiddenJobBloodDemon():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.HiddenJobBloodDemon,0,0,0,0);
 		clearOutput();
-		outputText("You gained Hidden Job: Blood Demon super perk.");
+		outputText("You gained 'Hidden Job: Blood Demon' super perk.");
 		doNext(curry(superPerkBuyMenu, 2));
 	}
 	private function perkWayOfTheBlood():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.WayOfTheBlood,0,0,0,0);
 		clearOutput();
-		outputText("You gained Way of the Blood super perk.");
+		outputText("You gained 'Way of the Blood' super perk.");
 		doNext(curry(superPerkBuyMenu, 2));
 	}
 	private function perkYourPainMyPower():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.YourPainMyPower,0,0,0,0);
 		clearOutput();
-		outputText("You gained Your Pain My Power super perk.");
+		outputText("You gained 'Your Pain My Power' super perk.");
 		doNext(curry(superPerkBuyMenu, 2));
 	}
 	private function perkMyBloodForBloodPuppies():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.MyBloodForBloodPuppies,0,0,0,0);
 		clearOutput();
-		outputText("You gained My Blood for Blood Puppies super perk.");
+		outputText("You gained 'My Blood for Blood Puppies' super perk.");
+		doNext(curry(superPerkBuyMenu, 2));
+	}
+	private function perkBloodDemonToughness():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.BloodDemonToughness,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Blood Demon Toughness' super perk.");
 		doNext(curry(superPerkBuyMenu, 2));
 	}
 	private function perkHiddenJobAsura():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.HiddenJobAsura,0,0,0,0);
 		clearOutput();
-		outputText("You gained Hidden Job: Asura super perk.");
+		outputText("You gained 'Hidden Job: Asura' super perk.");
 		doNext(curry(superPerkBuyMenu, 3));
 	}
 	private function perkAbsoluteStrength():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.AbsoluteStrength,0,0,0,0);
 		clearOutput();
-		outputText("You gained Absolute Strength super perk.");
+		outputText("You gained 'Absolute Strength' super perk.");
 		doNext(curry(superPerkBuyMenu, 3));
 	}
 	private function perkLikeAnAsuraBoss():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.LikeAnAsuraBoss,0,0,0,0);
 		clearOutput();
-		outputText("You gained Like A-sura Boss super perk.");
+		outputText("You gained 'Like A-sura Boss' super perk.");
 		doNext(curry(superPerkBuyMenu, 3));
 	}
 	private function perkICastAsuraFist():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.ICastAsuraFist,0,0,0,0);
 		clearOutput();
-		outputText("You gained I Cast (Asura) Fist super perk.");
+		outputText("You gained 'I Cast (Asura) Fist' super perk.");
+		doNext(curry(superPerkBuyMenu, 3));
+	}
+	private function perkAsuraStrength():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.AsuraStrength,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Asura Strength' super perk.");
 		doNext(curry(superPerkBuyMenu, 3));
 	}
 }
-}
+}

@@ -822,7 +822,7 @@ public class MainView extends Block {
 		this.mainText.htmlText = text; // Altering htmlText can cause changes in defaultTextFormat
 		var fmtnew:TextFormat  = this.mainText.defaultTextFormat;
 		this.mainText.defaultTextFormat = fmt;
-		if (fmtnew.bold != fmt.bold || fmtnew.italic != fmt.italic || fmtnew.underline != fmt.underline) {this.mainText.htmlText += " /!\\ UNCLOSED TAG DETECTED (When reporting this bug, give information on your previous actions. You can check text history by pressing [H] (on mobile version option of checking text hostory is unavialable)) /!\\ "
+		if (fmtnew.bold != fmt.bold || fmtnew.italic != fmt.italic || fmtnew.underline != fmt.underline) {this.mainText.htmlText += " /!\\ UNCLOSED TAG DETECTED (When reporting this bug, give information on your previous actions. You can check text history by pressing [H] (Mobile version does not support this).) /!\\ "
 		}
 		this.scrollBar.update();
 	}

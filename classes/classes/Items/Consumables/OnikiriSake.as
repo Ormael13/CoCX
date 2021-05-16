@@ -192,9 +192,9 @@ public class OnikiriSake extends Consumable {
 			changes++;
 		}
 		//Skin
-		if (player.skinTone != "red" && player.skinTone != "reddish orange" && player.skinTone != "purple" && player.skinTone != "blue" && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
+		if (player.skinTone != "red" && player.skinTone != "reddish-orange" && player.skinTone != "purple" && player.skinTone != "blue" && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
 			var colorSkin:String;
-			colorSkin = randomChoice("purple","reddish orange","red","blue");
+			colorSkin = randomChoice("purple","reddish-orange","red","blue");
 			player.skinTone = colorSkin;
 			changes++;
 			outputText("\n\nThe heat of the alcohol is getting to you; it's like if your ");

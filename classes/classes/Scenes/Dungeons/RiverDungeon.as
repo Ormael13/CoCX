@@ -109,6 +109,7 @@ import classes.StatusEffects;
 			inDungeon = true;
 			dungeonLoc = 68;
 			player.createStatusEffect(StatusEffects.RiverDungeonA, 10, 0, 0, 0);
+			if (!player.hasStatusEffect(StatusEffects.RivereDungeonIB)) player.createStatusEffect(StatusEffects.RivereDungeonIB, 0, 0, 0, 0);
 			playerMenu();
 		}
 		public function exitDungeon():void {
@@ -401,15 +402,70 @@ import classes.StatusEffects;
 			inDungeon = true;
 			dungeonLoc = 104;
 			playerMenu();
+		}
+		public function defeatedByFireElementalSubBoss():void {
+			clearOutput();
+			outputText("Placeholder Bad End.\n\n");
+			outputText("Death by Fireballs!\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
+		}
+		public function defeatedByWaterElementalSubBoss():void {
+			clearOutput();
+			outputText("You collapse from your wounds, unable to fight any longer as Undine presses the attack, freely flicking sharp, crescent-shaped shards of water at you.\n\n");
+			outputText("As your [skin] is carved away from the jets of water, your mind swirls as your journey comes to an end.\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
+		}
+		public function defeatedByAirElementalSubBoss():void {
+			clearOutput();
+			outputText("Placeholder Bad End.\n\n");
+			outputText("Death by Air Getsuga Tenshou!\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
+		}
+		public function defeatedByEarthElementalSubBoss():void {
+			clearOutput();
+			outputText("As you collapse, unable to fight any longer you notice numerous pointed stones circle around the air. Golem swings her hand in a fluid somatic motion before the razor-like stones dig into you.\n\n");
+			outputText("You don't have enough time to scream as the lacerations quickly rip you to shreds.\n\n");
+			//[GAME OVER]
+			EventParser.gameOver();
 		}/*
 		public function defeatedBy<Boss enemy>():void {
 			clearOutput();
 			outputText("Placeholder Bad End.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
+		}*/
+		public function defeatFireElementalSubBoss():void {
+			clearOutput();
+			outputText("Placeholder Good End.\n\n");
+			player.createKeyItem("Fire Ifrit Core", 0, 0, 0, 0);
+			player.addStatusValue(StatusEffects.RivereDungeonIB, 1, 1);
+			doNext(roomB18);
 		}
-		
-		public function defeatedBy<Boss enemy>():void {
+		public function defeatWaterElementalSubBoss():void {
+			clearOutput();
+			outputText("Placeholder Good End.\n\n");
+			player.createKeyItem("Water Undine Core", 0, 0, 0, 0);
+			player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
+			doNext(roomB21);
+		}
+		public function defeatAirElementalSubBoss():void {
+			clearOutput();
+			outputText("Placeholder Good End.\n\n");
+			player.createKeyItem("Air Sylph Core", 0, 0, 0, 0);
+			player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
+			doNext(roomB24);
+		}
+		public function defeatEarthElementalSubBoss():void {
+			clearOutput();
+			outputText("Placeholder Good End.\n\n");
+			player.createKeyItem("Earth Golem Core", 0, 0, 0, 0);
+			player.addStatusValue(StatusEffects.RivereDungeonIB, 4, 1);
+			doNext(roomB27);
+		}/*
+		public function defeat<Boss enemy>():void {
 			clearOutput();
 			outputText("Placeholder Bad End.\n\n");
 			//[GAME OVER]
@@ -752,7 +808,12 @@ import classes.StatusEffects;
 		public function roomB08():void {
 			dungeonLoc = 111;
 			clearOutput();//boss room
-			encountersRuletteB();
+			/*if (flags[kFLAGS.AETHER_SINISTER_EVO] < 1) {
+				flags[kFLAGS.AETHER_SINISTER_EVO] = 0.5;
+				outputText("As you peek into a room, out of nearby shadow emerge golem. Looks like you have encountered aether golem! You ready your [weapon] for a fight!");
+				startCombat(new GolemDummyImproved(), true);
+			}
+			else */encountersRuletteB();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
@@ -857,8 +918,14 @@ import classes.StatusEffects;
 		}
 		public function roomB18():void {
 			dungeonLoc = 121;
-			clearOutput();//room with trigger for fire boss
-			encountersRuletteBFire();
+			clearOutput();
+			if (player.statusEffectv1(StatusEffects.RivereDungeonIB) == 0) {
+				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large ball of flame rushing towards you!  Actualy it's looking very large one compared to ones you meet earlier.  Realizing it's been spotted, the elemental's body reform into a humanoid form.  ");
+				outputText("As if to confirm your supsicions about unusual large mass it morph into nine feet tall ifrit shape with clear femine features.  'Her' eyes focus at you and moment both of you gazes meet 'she' let out roar and attacks!");
+				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
+				startCombat(new FireElemental(), true);
+			}
+			else encountersRuletteBFire();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("As you enter this new area, your breathing immediately gets harder. Heat washes over you, each side of the room is lined with an orange glow. Periodically, you hear a loud hissing, more puffs of steam filling the air. Coughing, you continue through the tunnels, on high alert the entire way.");
@@ -886,8 +953,14 @@ import classes.StatusEffects;
 		}
 		public function roomB21():void {
 			dungeonLoc = 124;
-			clearOutput();//room with trigger for water boss
-			encountersRuletteBWater();
+			clearOutput();
+			if (player.statusEffectv2(StatusEffects.RivereDungeonIB) == 0) {
+				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large blob of water rushing towards you!  Actualy it's looking very large one compared to ones you meet earlier.  Realizing it's been spotted, the elemental's body reform into a humanoid form.  ");
+				outputText("As if to confirm your supsicions about unusual large mass it morph into nine feet tall undine shape with clear masculine features.  'His' eyes focus at you and moment both of you gazes meet 'he' let out roar and attacks!");
+				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
+				startCombat(new WaterElemental(), true);
+			}
+			else encountersRuletteBWater();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("As you step into the next room, you hear an audible sucking noise, your [feet] sinking an inch or so into the floor. The entire room smells like a bog, and your vision is almost completely useless now, thick roiling fog collecting everywhere, forcing you to wipe it out of your eyes every few steps. ");
@@ -916,8 +989,14 @@ import classes.StatusEffects;
 		}
 		public function roomB24():void {
 			dungeonLoc = 127;
-			clearOutput();//room with trigger for air boss
-			encountersRuletteBAir();
+			clearOutput();
+			if (player.statusEffectv3(StatusEffects.RivereDungeonIB) == 0) {
+				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large gust of wind rushing towards you!  Actualy it's looking very large one compared to ones you meet earlier.  Realizing it's been spotted, the elemental's body reform into a humanoid form.  ");
+				outputText("As if to confirm your supsicions about unusual large mass it morph into nine feet tall sylph shape with clear masculine features.  'His' eyes focus at you and moment both of you gazes meet 'he' let out roar and attacks!");
+				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
+				startCombat(new AirElemental(), true);
+			}
+			else encountersRuletteBAir();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("The entire upper half of this room is covered in thick clouds, not unlike the black thunderclouds back home in Ignam. Bolts of electricity frequently strike, from the ceiling to the floor, lighting up a surprisingly small area and sending every hair on your body on end. Gusts of air blast at random, forcing you to hunker down or be thrown across the room like a ragdoll. ");
@@ -946,8 +1025,14 @@ import classes.StatusEffects;
 		}
 		public function roomB27():void {
 			dungeonLoc = 130;
-			clearOutput();//room with trigger for earth boss
-			encountersRuletteBEarth();
+			clearOutput();
+			if (player.statusEffectv4(StatusEffects.RivereDungeonIB) == 0) {
+				outputText("A soft shuffling sound catches your attention and you turn around, spotting large mass of earth rushing towards you!  Actualy it's looking very large one compared to ones you meet earlier.  Realizing it's been spotted, the elemental's body start reforming into a humanoid form.  ");
+				outputText("As if to confirm your supsicions about unusual large mass it morph into nine feet tall golem shape with clear femine features.  'Her' eyes focus at you and moment both of you gazes meet 'she' let out roar and attacks!");
+				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
+				startCombat(new EarthElemental(), true);
+			}
+			else encountersRuletteBEarth();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("You step into an area that reminds you, almost violently, of the desert storms. Your body is buffeted by sand, whirled about by an odd wind emanating from the walls and floor. You frequently have to close your eyes to stop the sand from blinding you, and the sounds of a sandstorm overwhelm any other sounds you could have heard. ");

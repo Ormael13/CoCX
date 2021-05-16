@@ -79,7 +79,7 @@ use namespace CoC;
 					break;
 				default:
 					clearOutput();
-					outputText("You spend one hour exploring the tainted ravine but you don't manage to find anything interesting, unless feeling of becoming slight more horny counts.");
+					outputText("You spend one hour exploring the tainted ravine but you don't manage to find anything interesting, unless feeling like you are becoming slightly more horny counts.");
 					dynStats("lib", 1);
 					doNext(camp.returnToCampUseOneHour);
 			}

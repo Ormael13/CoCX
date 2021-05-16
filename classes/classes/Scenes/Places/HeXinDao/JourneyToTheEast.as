@@ -920,7 +920,7 @@ package classes.Scenes.Places.HeXinDao
 				outputText("\"<i>I am a researcher studying the flow of Chi in the human body, the spiritual energy outsiders calls soulforce. I would like you to assist me in proving my thesis that humans are naturally disposed to soulforce.</i>\"\n\n");
 				outputText("What is in it for you?\n\n");
 				outputText("\"<i>Gems… how about three thousand? I know you outsiders have no interest in spirit stones and all I need is your collaboration here and now.</i>\"\n\n");
-				outputText("Why now… he sure did make an interesting offer. Do you shake hands and seal the deal with him?"+(flags[kFLAGS.PATCHOULI_FOLLOWER] >= 2 ? " Something tells you cats morph aren't exactly the most trustworthy of people. It might be Patchouli who's getting in your head again.":"")+"\n\n");
+				outputText("Why now… he sure did make an interesting offer. Do you shake hands and seal the deal with him?"+(flags[kFLAGS.PATCHOULI_FOLLOWER] >= 2 ? " Something tells you catmorphs aren't exactly the most trustworthy of people. It might be Patchouli who's getting in your head again.":"")+"\n\n");
 			}
 			menu();
 			addButton(1, "No", firstTimeMeetingNekomataBoyNo);
@@ -945,13 +945,13 @@ package classes.Scenes.Places.HeXinDao
 			clearOutput();
 			outputText("You wake up a few minutes later strapped to what appears to be a table. Your mind feels hazy, as if you were floating in the fog.\n\n");
 			outputText("\"<i>Awake so soon? Well I guess that’s fine, it’s not like I don't enjoy when they struggle anyway. Can you even hear me in there? Well that's unlikely, what with all the sedative I injected in you, couldn't afford you waking and putting up a fight while I was playing dress up right?</i>\"\n\n");
-			outputText("The cat morph chuckles to himself and you indeed notice the guy took his time to rid you of your armor, weaponry and other troublesome equipment. You're now dressed in what appears to be traditional oriental clothes fit for a "+player.mf("man","woman albeit of a somewhat riské style")+", he even took the time to braid your hair.\n\n");
-			outputText("\"<i>See I have a client up there who is VERY fond of humans… human sex slaves that is. This guy likes his slaves obedient and always ready to serve with the bare minimum willpower yet willing and capable of defending him. Friend, it so happens that the slave market is an ever evolving business, one I intend to get rich with, so you’re going to help me with that. Did you know that by ");
-			outputText("violently stripping potential slaves of their life forces, pouring a decent amount of corruption and making them energy dependant, you can create effiencient and willing sex zombies? You of all people shall become the fruit of my years of research into creating the perfect slave, I call this new model of sex zombie, Jiangshi. First things first though, let's make you better looking.</i>\"\n\n");
+			outputText("The cat morph chuckles to himself and you indeed notice the guy took his time to rid you of your armor, weaponry and other troublesome equipment. You're now dressed in what appears to be traditional oriental clothes fit for a "+player.mf("man","woman albeit of a somewhat risqué style")+", he even took the time to braid your hair.\n\n");
+			outputText("\"<i>See, I have a client up there who is VERY fond of humans… human sex slaves that is. This guy likes his slaves obedient and always ready to serve with the bare minimum willpower yet willing and capable of defending him. Friend, it so happens that the slave market is an ever evolving business, one I intend to get rich with, so you’re going to help me with that. Did you know that by ");
+			outputText("violently stripping potential slaves of their life forces, pouring a decent amount of corruption and making them energy dependant, you can create efficient and willing sex zombies? You of all people shall become the fruit of my years of research into creating the perfect slave, I call this new model of sex zombie, Jiangshi. First things first though, let's make you better looking.</i>\"\n\n");
 			outputText("You try to protest but before you know it the mad cat grabs what appears to be a paper tag and sticks it to your forehead. The cat chuckles.\n\n");
 			outputText("\"<i>Don't you worry it will all be over soon, the suffering is momentary if there is any. All you will think about is sex and within seconds you will be too empty headed to care about anything else.</i>\"\n\n");
 			if (player.gender > 1 && player.biggestTitSize() > 0) {
-				outputText("You moan, confused as your breast begin to heat up and inflate, your nipples stiffening as your boobs balloons in to ");
+				outputText("You moan, confused as your breast begins to heat up and inflate, your nipples stiffening as your boobs balloons in to ");
 				if (player.biggestTitSize() < 7) {
 					outputText("a pretty impressive E.");
 					player.growTits((7 - player.biggestTitSize()), 1, false, 3);

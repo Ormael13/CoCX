@@ -413,6 +413,7 @@ private function aikoDisableCor():void {
 private function toggleCorruption():void {
 	flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] ^= 1;
 	flags[kFLAGS.AIKO_TIMES_MET]--;
+	outputText("\n\nAiko's corruption is now set to "+(flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] ==0?"off":"on"));
 	doNext(encounterAiko);
 }
 
@@ -1189,7 +1190,7 @@ public function aikoConsSex():void {
 		addButton(3, "Get Licked", aikoSexCunni).hint("Let her explore the soft folds of your pussy with her tongue.");
 	if (flags[kFLAGS.AIKO_AFFECTION]>= 75 && player.hasCock())
 		addButton(4, "Tailjob", aikoSexTailjob).hint("Ask her to surround your cock with her luxurious tails");
-	if (flags[kFLAGS.AIKO_AFFECTION]>= 75 && player.kitsuneScore() > 6 && player.tailType == 13 && player.hasCock() || player.hasVagina())
+	if (flags[kFLAGS.AIKO_AFFECTION]>= 75 && player.kitsuneScore() > 6 && player.tailType == 13 && (player.hasCock() || player.hasVagina()))
 		addButton(5,"Kitsune Tailjob", aikoSexKitsuneTailjob).hint(silly()? "Kitsune tailplay! Floofing all the floofs!": "Kitsune tailplay, in the way only Kitsunes can understand.");
 	if (flags[kFLAGS.AIKO_CORRUPTION] > 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0) {
 		addButton(9, "Submit", submitToAiko).hint("Submit to Aiko and see what she does with you");
