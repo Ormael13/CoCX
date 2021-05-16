@@ -398,11 +398,11 @@ Options are
  * `show`, default true. If false, then the buff will be hidden in detalization. You'll still see total value but not the reason.
  * `save`, default true. If false, then the buff will not be saved. It is useable for buffs from races, perks, and items - they should be auto-added
  * `rate`, default Buff.RATE_PERMANENT. Other options are: RATE_ROUNDS, RATE_HOURS, RATE_DAYS. Used with ticks, see below.
- * `ticks`, default 0. How many units of time (see rate) the buff will last until it will be auto-removed
+ * `tick`, default 0. How many units of time (see rate) the buff will last until it will be auto-removed
 
 **Example**
 ```js
-player.statStore.addBuff("str",-amount,"Poison", {text:"Poisoned!",time:Buff.RATE_HOURS, tick:4})
+player.statStore.addBuff("str",-amount,"Poison", {text:"Poisoned!",rate:Buff.RATE_HOURS, tick:4})
 ```
 
 **BE CAREFUL**. Option names **ARE NOT CHECKED**. If you type `ticks: 4` or `Text: "Buff"` it will compile but **WON'T WORK PROPERLY**. Therefore, it is highly recommended to use BuffBuilder instead.
@@ -416,7 +416,7 @@ Add multiple buffs to stats, increasing those which exist.
 player.statStore.addBuffObject(
     {"str":-2,"tou":-2,"spe":-2,"int":-1},
     "Poison",
-    {text:"Poisoned!",time:Buff.RATE_HOURS, tick:4}
+    {text:"Poisoned!",rate:Buff.RATE_HOURS, tick:4}
 );
 ```
 
