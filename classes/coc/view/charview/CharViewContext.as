@@ -103,6 +103,12 @@ import coc.xlogic.ExecContext;
 					PlayerHasABowHoly:player.weaponRange == game.weaponsrange.ARTEMIS,
 					PlayerHasABowUnholy:player.weaponRange == game.weaponsrange.WILDHUN,
 
+					PlayerHasAThrownWeapon: player.isThrownTypeWeapon(),
+					PlayerHasAJavelin: player.weaponRange == game.weaponsrange.TRJAVEL || player.weaponRange == game.weaponsrange.GTHRSPE || player.weaponRange == game.weaponsrange.KSLHARP || player.weaponRange == game.weaponsrange.LEVHARP,
+					PlayerHasAJavelinHoly:player.weaponRange == game.weaponsrange.KSLHARP,
+					PlayerHasAJavelinUnholy:player.weaponRange == game.weaponsrange.LEVHARP,
+					PlayerHasAThrownAxe:player.weaponRange == game.weaponsrange.GTHRAXE,
+
 					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],
 					FireBuff: player.hasStatusEffect(StatusEffects.FlameBlade),
 
