@@ -525,7 +525,7 @@ public function minoPheromones():void {
 	//sometimes get hit with the pre for stronger effect!
 	if(rand(3) == 0) {
 		outputText("slapping into your face before you can react!  You wipe the slick snot-like stuff out of your eyes and nose, ");
-		if(player.lust > 75) {
+		if(player.lust > player.maxLust() * 0.75) {
 			outputText("swallowing it into your mouth without thinking.  ");
 			dynStats("lus", 10 + player.lib/10);
 		}
@@ -679,6 +679,7 @@ if (doSFWloss() && CoC.instance.inCombat) { //No rape in SFW mode.
     if (CoC.instance.inCombat) {
 		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 			outputText("\n\nUnsatisfied with fucking you silly the beast forcefeeds you a full vial of his cum. You feel something in you flip as you acquire an addiction for the nefarious compound! <b>You are now addicted to minotaur cum!</b>");
+			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
@@ -727,6 +728,7 @@ private function getOralRapedByMinotaur():void {
     if (CoC.instance.inCombat) {
 		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 			outputText("\n\nUnsatisfied with fucking you silly the beast forcefeed you a full vial of his cum. You feel something in you flip as you acquire an addiction for the nefarious compound! <b>You are now addicted to minotaur cum!</b>");
+			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
@@ -1181,6 +1183,7 @@ private function getMinoHawtDawged():void {
 	player.sexReward("cum","Anal");
 	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 		outputText("\n\nUnsatisfied with fucking you silly the beast forcefeed you a full vial of his cum. You feel something in you flip as you acquire an addiction for the nefarious compound! <b>You are now addicted to minotaur cum!</b>");
+		if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 		player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
 		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
 		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);

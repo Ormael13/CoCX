@@ -18,11 +18,11 @@ import classes.internals.*;
 			if (PolarMidnightSequance > 0 || SoulTearInitiated)
 			{
 				if (PolarMidnightSequance > 1){
-					outputText("<b>Throught some miracle Alvina was stopped from finishing you off in your vulnerable state just enought for you to escape!</b>\n\n");
+					outputText("<b>By some miracle Alvina was stopped from finishing you off in your vulnerable state, just enough for you to escape!</b>\n\n");
 					PolarMidnightSequance = 0;
 				}
 				else{
-					outputText("<b>Alvina recoils in frustration as she is forced to interupt her incantation!</b>\n\n");
+					outputText("<b>Alvina recoils in frustration as she is forced to interrupt her incantation!</b>\n\n");
 					PolarMidnightSequance = 0;
 					SoulTearCooldown = 5;
 					SoulTearInitiated = false;
@@ -122,13 +122,13 @@ import classes.internals.*;
 
 		private function alvinaCreepingDoom():void {
 			outputText("Alvina weaves a circle with her scythe which opens a portal to some weird dimension. At first, you ponder what exactly she is trying to do until a wriggling mass of larva starts pouring out of the portal. Alvina grabs and affectionately pets one before throwing it at you.\n\n");
-			outputText("\"<i>Don’t worry my little friends will take good care of you...</i>\"\n\n");
+			outputText("\"<i>Don’t worry, my little friends will take good care of you...</i>\"\n\n");
 			outputText("Before you know it the things are swarming you, trying to enter your every orifice and teasing your skin! You need to get rid of these pests before they take you down!\n\n");
 			createStatusEffect(StatusEffects.CreepingDoom, 0, 0, 0, 0);
 		}
 
 		private function alvinaReapersVerdict():void {
-			outputText("\"<i>Perish you insect!!!</i>\"\n\n");
+			outputText("\"<i>Perish, you insect!!!</i>\"\n\n");
 			outputText("Alvina spins her scythe around her head, and you feel the room filling with nothing short of death itself, you can feel your very life slipping out of you. You barely manage to stand upright and stay conscious, noting how Alvina also seems exhausted, she likely will have to rest for a moment.\n\n");
 			VerdictCooldown = 5;
 			hasChanneledVerdict = 3;
@@ -151,20 +151,20 @@ import classes.internals.*;
 		private function alvinaTimeStop():void {
 			outputText("\"<i>Enough!</i>\"\n\n");
 			outputText("Alvina snaps her finger and suddenly you find yourself unable to move as if frozen in time yet you are conscious of your surroundings, horrifyingly so even as Alvina casually walk to you, cupping your chin with her claws.\n\n");
-			outputText("\"<i>I could behead you with a single swing but where would be the satisfaction with that. I'm impressed that you managed to last this long, however this all ends now. I can only admire your tenacity making it this far, so I will give you the honor of watching the entire orchestration of your impending demise.</i>\"\n\n");
-			outputText("Alvina lift your time frozen body telekinetically in the air. Being an object frozen in time of course you don't fall down. ");
+			outputText("\"<i>I could behead you with a single swing, but where would be the satisfaction with that. I'm impressed that you managed to last this long, however this all ends now. I can only admire your tenacity making it this far, so I will give you the honor of watching the entire orchestration of your impending demise.</i>\"\n\n");
+			outputText("Alvina lifts your time frozen body telekinetically in the air. Being an object frozen in time of course you don't fall down. ");
 			if (player.hasPerk(PerkLib.Mage)) outputText("Your magic might be strong but this is on a whole new level, she is actually playing with the very fabric of reality and time right before your eyes. ");
 			outputText("She walks to the side and starts weavings her hands in so many arcane patterns it becomes hard for you to fellow, not unlike a maestro weaving a symphony of death come to think of it as thousands of ethereal swords appears out of thin air all around you, circling around in a perfect spherical shape, ");
-			outputText("all pointing in your direction. There's so many of them you don't believe you'd be able to dodge everything if you could dodge at all!\n\n");
+			outputText("all pointing in your direction. There's so many of them you don't believe you'd be able to dodge everything, if you could dodge at all!\n\n");
 			outputText("\"<i>Let's see if this is your limit [name]. Will you be found wanting?</i>\"\n\n");
 			outputText("Alvina snaps her finger again and all the blades suddenly converge in your direction!\n\n");
 			if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
-				outputText("Little she know that you have the ability to completely remove yourself from existence if only for a brief moment thanks to ");
-				if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere)) outputText("being everywhere and nowhere at the same time, a living paradox");
-				outputText(". You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
+				outputText("Little does she know that you have the ability to completely remove yourself from existence if only for a brief moment thanks to "
+						+ "being everywhere and nowhere at the same time, a living paradox"
+						+ ". You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
 			}
-			else if (player.fairyScore() >= 18) outputText("You avoid the attack thanks to your Faerie magic flickering out of reality just as the blades collides.\n\n");
-			else if (player.displacerbeastScore() >= 13) outputText("Little she know that you have the ability to displace yourself out of such deadly attacks, You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
+			else if (player.fairyScore() >= 18) outputText("You avoid the attack thanks to your Faerie magic, flickering out of reality just as the blades collides.\n\n");
+			else if (player.displacerbeastScore() >= 13) outputText("Little does she know that you have the ability to displace yourself out of such deadly attacks, You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
 			else {
 				var damage:Number = player.maxHP() * 1.1;
 				if (player.minHP() < 0) damage += player.minHP();
@@ -172,9 +172,9 @@ import classes.internals.*;
 				if (player.shieldBlock > 0) damage -= 0.01 * player.maxHP() * combatBlock2();
 				if (damage < 1) damage = 0;
 				player.HP -= damage;
-				if (player.HP <= player.minHP()) outputText("You dodge, deflect, parry and block as good as you can to take as little damage as possible yet are still impaled a fair hundred times!");
+				if (player.HP <= player.minHP()) outputText("You dodge, deflect, parry and block as best as you can to take as little damage as possible yet are still impaled a few hundred times!"); //This seems rather boring of a death message.
 				else {
-					outputText("Realising that you are still alive Alvina applaud your resilience in annoyance. The fight is far from over but what matters is that you can win.");
+					outputText("Realising that you are still alive Alvina applauds your resilience in annoyance. The fight is far from over but what matters is that you can win.");
 				}
 				outputText(" (" + damage + ")\n\n");
 			}
@@ -291,7 +291,7 @@ import classes.internals.*;
 			this.a = "";
 			this.short = "Archmage Alvina Shadowmantle, Mother of Black Magic";
 			this.imageName = "alvina";
-			this.long = "Alvina is a goat-like succubus. While she is barely taller than 3 and a half feet, she is obviously an accomplished spellcaster.  From the way she holds her scythe in one hand and her spellbook in the other you also expect her to be very strong,  despite the fact she wears glasses. A powerful aura of black magic emanates from her.";
+			this.long = "Alvina is a goat-like succubus. While she is barely taller than 3 and a half feet, she is obviously an accomplished spellcaster.  From the way she holds her scythe in one hand and her spellbook in the other you also expect her to be very strong,  despite the fact that she wears glasses. A powerful aura of black magic emanates from her.";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);

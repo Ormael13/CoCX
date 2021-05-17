@@ -65,6 +65,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			clearOutput();
 			outputText("You leave the Ebon Labyrinth behind and take off back towards the camp.");
 			if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
@@ -102,6 +103,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			SceneLib.caves.darkslimeScene.LetzRape();
 			cleanupAfterCombat();
 			dungeonLoc = 131;
+			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
 			player.createStatusEffect(StatusEffects.EbonLabyrinthB, 0, 0, 0, 0);
 			playerMenu();
@@ -182,6 +184,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				player.HP = player.maxHP();
 				//(gain 20 intakes - for goo crawling)
 				dungeonLoc = 131;
+				if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 				player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
 				player.createStatusEffect(StatusEffects.EbonLabyrinthB, 0, 0, 0, 0);
 				playerMenu();
@@ -830,7 +833,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You walk into an empty corridor thankfully it seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
-			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomDDD, roomDDD, roomBBB, roomBBB, roomCCC, roomCCC);
 		}
 		public function roomBBB():void {
@@ -842,7 +844,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You turn the corner wandering into a new corridor which thankfully seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
-			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomCCC, roomCCC, roomAAA, roomAAA, roomDDD, roomDDD);
 		}
 		public function roomCCC():void {
@@ -854,7 +855,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You walk into an empty corridor thankfully it seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
-			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomBBB, roomBBB, roomDDD, roomDDD, roomAAA, roomAAA);
 		}
 		public function roomDDD():void {
@@ -866,16 +866,15 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("<b><u>Corridor</u></b>\n");
 			outputText("You turn the corner wandering into a new corridor which thankfully seems to be void of monsters so far.");
 			outputText("\n\nRooms Explored: " + player.statusEffectv1(StatusEffects.EbonLabyrinthB));
-			outputText("\n\nBoss Trigger: " + player.statusEffectv1(StatusEffects.EbonLabyrinthBoss));
 			dungeons.setDungeonButtonsEL(roomAAA, roomAAA, roomCCC, roomCCC, roomBBB, roomBBB);
 		}
 		public function checkingTodayMenu():void {
 			if ((player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 10 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 20 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 30 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 40 || 
 			player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 60 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 70 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 80 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 90 || 
 			player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 110 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 120 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 130 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 140 || 
-			player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 160 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 170 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 180 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 190 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 200 || 
-			player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 210 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 220 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 230 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 240 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 250 || 
-			player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 260 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 270 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 280 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 290 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 300 || 
+			player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 160 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 170 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 180 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 190 || 
+			player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 210 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 220 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 230 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 240 || 
+			player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 260 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 270 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 280 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 290 || 
 			player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 310 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 320 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 330 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 340 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 350 || 
 			player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 360 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 370 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 380 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 390 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 400 || 
 			player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 410 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 420 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 430 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 440 || player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 450 || 
@@ -921,10 +920,16 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				flags[kFLAGS.EBON_LABYRINTH] = 2;
 			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 100) awardAchievement("Got lost?", kACHIEVEMENTS.DUNGEON_GOT_LOST);
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 150) awardAchievement("Hug the left wall", kACHIEVEMENTS.DUNGEON_HUG_THE_LEFT_WALL);
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 150) {
+				awardAchievement("Hug the left wall", kACHIEVEMENTS.DUNGEON_HUG_THE_LEFT_WALL);
+				if (flags[kFLAGS.EBON_LABYRINTH] == 3) flags[kFLAGS.EBON_LABYRINTH] = 4;
+			}
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 200) awardAchievement("Pan ain't got nothing on you", kACHIEVEMENTS.DUNGEON_PAN_AINT_GOT_NOTHING_ON_YOU);
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 250) awardAchievement("Master of the labyrinth", kACHIEVEMENTS.DUNGEON_MASTER_OF_THE_LABYRINT);
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 300) awardAchievement("Why are you here?", kACHIEVEMENTS.DUNGEON_WHY_ARE_YOU_HERE);
+			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 300) {
+				awardAchievement("Why are you here?", kACHIEVEMENTS.DUNGEON_WHY_ARE_YOU_HERE);
+				if (flags[kFLAGS.EBON_LABYRINTH] == 5) flags[kFLAGS.EBON_LABYRINTH] = 6;
+			}
 			/*if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 350) awardAchievement("", kACHIEVEMENTS.);
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 400) awardAchievement("", kACHIEVEMENTS.);
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 450) awardAchievement("", kACHIEVEMENTS.);

@@ -452,9 +452,9 @@ public function wonOverDianaRape():void {
 public function wonOverDianaSpare():void {
 	clearOutput();
 	if (flags[kFLAGS.DIANA_LVL_UP] == 7 && flags[kFLAGS.DIANA_AFFECTION] == 95) {
-		outputText("You tell the girl you will let her go. You have no business with her. The horse morph however decide not to leave right away.\n\n");
-		outputText("\"<i>Thank you I may have been to hasty to judge you and I think it’s high time we truly gets aquainted. My name’s Diana I just wanted to let you know because.</i>\"\n\n");
-		outputText("Well Diana, that’s one name you ain’t about to forget, still she better be off on her way now. She nods and run off disapearing in the forest.\n\n");
+		outputText("You tell the girl you will let her go. You have no business with her. The horse morph however doesn't leave right away.\n\n");
+		outputText("\"<i>Thank you. I may have been too hasty to judge you and I think it’s high time we truly gets acquainted. I just wanted you to know that my name's Diana.</i>\"\n\n");
+		outputText("Well Diana, that’s one name you ain’t about to forget, still she better be off on her way now. She nods and runs off disappearing in the forest.\n\n");
 	}
 	else {
 		outputText("You tell the girl you will let her go. You have no business with her.\n\n");
@@ -949,4 +949,4 @@ public function SexMenuTitsfuck():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 	}
-}
+}

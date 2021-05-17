@@ -228,7 +228,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You pop the small pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?\n\n(Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) ? "40" : "20") + ")");
         if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wrath += 40;
         else player.wrath += 20;
-        if (player.wrath > player.maxWrath()) player.wrath = player.maxWrath();
+        if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
         statScreenRefresh();
     }
 
@@ -237,7 +237,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You pop the medium pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?\n\n(Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) ? "120" : "60") + ")");
         if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wrath += 120;
         else player.wrath += 60;
-        if (player.wrath > player.maxWrath()) player.wrath = player.maxWrath();
+        if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
         statScreenRefresh();
     }
 
@@ -246,7 +246,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You pop the big pill into your mouth and swallow. You feel bit more angry now. So would you kindly go and kill something now?\n\n(Gained wrath: " + ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) ? "360" : "180") + ")");
         if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) player.wrath += 360;
         else player.wrath += 180;
-        if (player.wrath > player.maxWrath()) player.wrath = player.maxWrath();
+        if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
         statScreenRefresh();
     }
 
@@ -495,7 +495,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
             }
         } else {
-            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
             outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
@@ -515,7 +515,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
             }
         } else {
-            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
             outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
@@ -595,7 +595,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
             }
         } else {
-            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
             outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsHailOfBlades)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
@@ -615,7 +615,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
             }
         } else {
-            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
             outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
@@ -635,7 +635,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
             }
         } else {
-            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
             outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
@@ -656,7 +656,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
             }
         } else {
-            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
             outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
@@ -676,7 +676,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
             }
         } else {
-            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
             outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
@@ -703,7 +703,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
             }
         } else {
-            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
             outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
@@ -730,7 +730,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
             }
         } else {
-            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a momnet whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
             outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
@@ -740,6 +740,46 @@ public final class Mutations extends MutationsHelper {
         outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into (freezing cold) icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
         outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love ( Rank).</b>");
         player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
+    }
+
+    public function basicstormofsisterhoodmanual(player:Player):void {
+        clearOutput();
+        if (player.hasPerk(PerkLib.SoulApprentice)) {
+            if (!player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
+                outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into lighting.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Storm of Sisterhood (Basic Rank).</b>");
+                player.createStatusEffect(StatusEffects.KnowsStormOfSisterhood, 1, 0, 0, 0);
+                return;
+            }
+            if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
+                outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+                player.soulforce += 50;
+                if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            }
+        } else {
+            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+        }
+    }
+
+    public function basicnightofbrotherhoodmanual(player:Player):void {
+        clearOutput();
+        if (player.hasPerk(PerkLib.SoulApprentice)) {
+            if (!player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
+                outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into darkness.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Night of Brotherhood (Basic Rank).</b>");
+                player.createStatusEffect(StatusEffects.KnowsNightOfBrotherhood, 1, 0, 0, 0);
+                return;
+            }
+            if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
+                outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+                player.soulforce += 50;
+                if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            }
+        } else {
+            outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
+            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+        }
     }
 
     public function devourermanual(player:Player):void {
@@ -2410,29 +2450,35 @@ public final class Mutations extends MutationsHelper {
 
     public function impFood(player:Player):void {
         clearOutput();
+		var changes:Number = 0;
+        var changeLimit:Number = 1;
+		if (blockingBodyTransformations()) changeLimit = 0;
         if (player.cocks.length > 0) {
             outputText("The food tastes strange and corrupt - you can't really think of a better word for it, but it's unclean.");
             player.refillHunger(20);
-            if (player.cocks[0].cockLength < 12) {
+            if (player.cocks[0].cockLength < 12 && changes < changeLimit) {
                 var cIdx:int = player.increaseCock(0, rand(2) + 2);
                 outputText("\n\n");
                 player.lengthChange(cIdx, 1);
+				changes++;
             }
             outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
             HPChange(30 + player.tou / 3, true);
             dynStats("lus", 3, "cor", 1);
             //Shrinkage!
-            if (rand(2) == 0 && player.tallness > 42) {
+            if (rand(2) == 0 && player.tallness > 42 && changes < changeLimit) {
                 outputText("\n\nYour skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!\n");
                 player.tallness -= 1 + rand(3);
+				changes++;
             }
             //Red skin!
-            if (rand(30) == 0 && player.skinTone != "red" && !player.isGargoyle()) {
+            if (rand(30) == 0 && changes < changeLimit && player.skinTone != "red" && !player.isGargoyle()) {
                 if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ");
                 else outputText("\n\nYour [skin.type] ");
                 if (rand(2) == 0) player.skinTone = "red";
                 else player.skinTone = "orange";
                 outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".");
+				changes++;
             }
             return;
         } else {
@@ -2442,18 +2488,19 @@ public final class Mutations extends MutationsHelper {
             dynStats("lus", 3, "cor", 1);
         }
         //Red skin!
-        if (rand(30) == 0 && player.skinTone != "red" && !player.isGargoyle()) {
+        if (rand(30) == 0 && changes < changeLimit && player.skinTone != "red" && !player.isGargoyle()) {
             if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ");
             else outputText("\n\nYour [skin.type] ");
             if (rand(2) == 0) player.skinTone = "red";
             else player.skinTone = "orange";
             outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".");
+			changes++;
         }
-
         //Shrinkage!
-        if (rand(2) == 0 && player.tallness > 42) {
+        if (rand(2) == 0 && player.tallness > 42 && changes < changeLimit) {
             outputText("\n\nYour skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!");
             player.tallness -= 1 + rand(3);
+			changes++;
         }
     }
 
@@ -3879,19 +3926,19 @@ public final class Mutations extends MutationsHelper {
 				return;
 			}/*
 			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
 				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
 				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
 				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
 				return;
@@ -3903,7 +3950,25 @@ public final class Mutations extends MutationsHelper {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Swipe.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodSwipeSF, 0, 0, 0, 0);
 				return;
+			}/*
+			//Smart enough for  and doesnt have it
+			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
+				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+				return;
 			}
+			//Smart enough for  and doesnt have it
+			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
+				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for  and doesnt have it
+			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
+				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+				return;
+			}*/
 		}
 	}
 
@@ -4773,6 +4838,8 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         var changes:Number = 0;
         var changeLimit:Number = 1;
+        var temp:Number = 0;
+        var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         changeLimit += additionalTransformationChances();
@@ -4793,6 +4860,122 @@ public final class Mutations extends MutationsHelper {
             removeWings();
             changes++;
         }
+
+        //Snek Penis and Gina
+        if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
+            //Find the first non-lizzy dick
+            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+                //Stop loopahn when dick be found
+                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
+            }
+            outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ");
+            if (player.hasSheath()) outputText("sheath ");
+            else outputText("base ");
+            outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ");
+            if (player.cor < 33) outputText("horrifies you.");
+            else if (player.cor < 66) outputText("is a little strange for your tastes.");
+            else {
+                outputText("looks like it might be more fun to receive than use on others.  ");
+                if (player.hasVagina()) outputText("Maybe you could find someone else with one to ride?");
+                else outputText("Maybe you should test it out on someone and ask them exactly how it feels?");
+            }
+            outputText("  <b>You now have a bulbous, reptile-like cock.</b>");
+            //Actually xform it nau
+            if (player.hasSheath()) {
+                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+                if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
+            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //(CHANGE OTHER DICK)
+        //Requires 1 lizard cock, multiple cocks
+        if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\nA familiar tingle starts in your crotch, and before you can miss the show, you pull open your [armor].  As if operating on a cue, ");
+            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+                //Stop loopahn when dick be found
+                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
+            }
+            if (player.cockTotal() == 2) outputText("your other dick");
+            else outputText("another one of your dicks");
+            outputText(" starts to change into the strange reptilian shape you've grown familiar with.  It warps visibly, trembling and radiating pleasurable feelings back to you as the transformation progresses.  ");
+            if (player.cumQ() < 50) outputText("pre-cum oozes from the tip");
+            else if (player.cumQ() < 700) outputText("Thick pre-cum rains from the tip");
+            else outputText("A wave of pre-cum splatters on the ground");
+            outputText(" from the pleasure of the change.  In moments <b>you have a bulbous, lizard-like cock.</b>");
+            //(REMOVE SHEATH IF NECESSARY)
+            if (player.hasSheath()) {
+                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+                if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
+            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //-Grows second lizard dick if only 1 dick
+        if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\nA knot of pressure forms in your groin, forcing you off your [feet] as you try to endure it.  You examine the affected area and see a lump starting to bulge under your [skin.type], adjacent to your [cock].  The flesh darkens, turning purple");
+            if (player.hasCoat())
+                outputText(" and shedding " + player.coatColor);
+            outputText(" as the bulge lengthens, pushing out from your body.  Too surprised to react, you can only pant in pain and watch as the fleshy lump starts to take on a penis-like appearance.  <b>You're growing a second lizard-cock!</b>  It doesn't stop growing until it's just as long as its brother and the same shade of shiny purple.  A dribble of cum oozes from its tip, and you feel relief at last.");
+
+            player.createCock();
+            player.cocks[1].cockType = CockTypesEnum.LIZARD;
+            player.cocks[1].cockLength = player.cocks[0].cockLength;
+            player.cocks[1].cockThickness = player.cocks[0].cockThickness;
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //--Worms leave if 100% lizard dicks?
+        //Require mammals?
+        if (player.lizardCocks() == player.cockTotal() && changes < changeLimit && player.hasStatusEffect(StatusEffects.Infested)) {
+            outputText("\n\nLike rats from a sinking ship, worms escape from your body in a steady stream.  Surprisingly, the sensation is remarkably pleasant, similar to the pleasure of sexual release in a way.  Though they seem inexhaustible, the tiny, cum-slimed invertebrates slow to a trickle.  The larger worm-kin inside you stirs as if disturbed from a nap, coming loose from whatever moorings it had attached itself to in the interior of your form.  It slowly works its way up your urethra, stretching to an almost painful degree with every lurching motion.  Your dick bloats out around the base, stretched like the ovipositor on a bee-girl in order to handle the parasitic creature, but thankfully, the ordeal is a brief one.");
+            if (player.balls > 1) outputText("  The remaining " + num2Text(player.balls - 1) + " slither out the pre-stretched holes with ease, though the last one hangs from your tip for a moment before dropping to the ground.");
+            outputText("  The white creature joins its kin on the ground and slowly slithers away.  Perhaps they prefer mammals? In any event, <b>you are no longer infected with worms</b>.");
+            player.removeStatusEffect(StatusEffects.Infested);
+            changes++;
+        }
+
+        //[Increase Vaginal Capacity] - requires vagina, of course
+        if (player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 200 && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\nA gurgling sound issues from your abdomen, and you double over as a trembling ripple passes through your womb.  The flesh of your stomach roils as your internal organs begin to shift, and when the sensation finally passes, you are instinctively aware that your [vagina] is a bit deeper than it was before.");
+            if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) {
+                player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
+            }
+            player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5 + rand(10));
+        }
+
+        if (player.vaginas.length == 1 && changes < changeLimit && rand(3) == 0) {
+            if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_DROOLING && changes < changeLimit && rand(2) == 0) {
+                temp = player.vaginas.length;
+                while (temp > 0) {
+                    temp--;
+                    if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) player.vaginas[temp].vaginalWetness++;
+                    changes++;
+                }
+                if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) {
+                    outputText("\n\nYour pussy feels hot and juicy, aroused and tender.  You cannot resist as your hands dive into your [vagina].  You quickly orgasm, squirting fluids everywhere.  <b>You are now a squirter</b>.");
+                    player.orgasm();
+                }
+                if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) {
+                    outputText("\n\nWow your wet down there just what on going on. When you put your hand to your " + vaginaDescript(temp) + ". Surprised you discover it's twice as more lubricated then before.");
+                }
+            }
+            if (player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina] has grown larger, in depth AND size.");
+                player.vaginas[0].vaginalLooseness++;
+                changes++;
+            }
+            if ((player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.HYDRA) && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) {
+                outputText("\n\nSomething fundamental changes in your " + vaginaDescript() + " as the insides begins to heat up. Out of curiosity you take a peak and notice amazed that the interior of your cunt has deepened to ridiculus extent running all the way farther into your tail. Intrigued you literally shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in heck you could easily insert a good part of your own tail inside and still find space. It takes all of your willpower not to fist yourself to orgasm. <b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>");
+                player.vaginaType(13);
+                player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
+                changes++;
+            }
+        }
+
         //Removes antennae
         if (player.antennae.type > Antennae.NONE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nThe muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead.  When it passes, you touch yourself and discover your [antennae] have vanished!");
@@ -4875,19 +5058,6 @@ public final class Mutations extends MutationsHelper {
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
 
-        //9e) Penis
-        /*
-         if(player.cockTotal() > 0) {
-         //(If multiple penis, insert "one of your")
-         outputText("\n\nAs the liquid takes effect, ");
-         //(if multicock)
-         if(player.cockTotal() > 1) outputText("one of ");
-         outputText("your [cocks] starts to throb painfully and swell to its full size.  With a horrifying ripping sensation, your cock splits down the middle, the pain causing you to black out momentarily.");
-         outputText("When you awaken, you quickly look down to see that where ");
-         //(if multicock)
-         if(player.cockTotal() > 1) outputText("one of ");
-         outputText("your [cocks] was, you now have two pointed reptilian cocks, still stiff and pulsing.");
-         }*/
         //Default change - blah
         if (changes == 0) outputText("\n\nRemakarbly, the snake-oil has no effect.  Should you really be surprised at snake-oil NOT doing anything?");
         player.refillHunger(5);
@@ -4903,6 +5073,8 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         var changes:Number = 0;
         var changeLimit:Number = 1;
+        var temp:Number = 0;
+        var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         changeLimit += additionalTransformationChances();
@@ -4933,6 +5105,122 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (blockingBodyTransformations()) changeLimit = 0;
+
+        //Snek Penis and Gina
+        if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
+            //Find the first non-lizzy dick
+            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+                //Stop loopahn when dick be found
+                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
+            }
+            outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ");
+            if (player.hasSheath()) outputText("sheath ");
+            else outputText("base ");
+            outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ");
+            if (player.cor < 33) outputText("horrifies you.");
+            else if (player.cor < 66) outputText("is a little strange for your tastes.");
+            else {
+                outputText("looks like it might be more fun to receive than use on others.  ");
+                if (player.hasVagina()) outputText("Maybe you could find someone else with one to ride?");
+                else outputText("Maybe you should test it out on someone and ask them exactly how it feels?");
+            }
+            outputText("  <b>You now have a bulbous, reptile-like cock.</b>");
+            //Actually xform it nau
+            if (player.hasSheath()) {
+                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+                if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
+            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //(CHANGE OTHER DICK)
+        //Requires 1 lizard cock, multiple cocks
+        if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\nA familiar tingle starts in your crotch, and before you can miss the show, you pull open your [armor].  As if operating on a cue, ");
+            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+                //Stop loopahn when dick be found
+                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
+            }
+            if (player.cockTotal() == 2) outputText("your other dick");
+            else outputText("another one of your dicks");
+            outputText(" starts to change into the strange reptilian shape you've grown familiar with.  It warps visibly, trembling and radiating pleasurable feelings back to you as the transformation progresses.  ");
+            if (player.cumQ() < 50) outputText("pre-cum oozes from the tip");
+            else if (player.cumQ() < 700) outputText("Thick pre-cum rains from the tip");
+            else outputText("A wave of pre-cum splatters on the ground");
+            outputText(" from the pleasure of the change.  In moments <b>you have a bulbous, lizard-like cock.</b>");
+            //(REMOVE SHEATH IF NECESSARY)
+            if (player.hasSheath()) {
+                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+                if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
+            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //-Grows second lizard dick if only 1 dick
+        if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\nA knot of pressure forms in your groin, forcing you off your [feet] as you try to endure it.  You examine the affected area and see a lump starting to bulge under your [skin.type], adjacent to your [cock].  The flesh darkens, turning purple");
+            if (player.hasCoat())
+                outputText(" and shedding " + player.coatColor);
+            outputText(" as the bulge lengthens, pushing out from your body.  Too surprised to react, you can only pant in pain and watch as the fleshy lump starts to take on a penis-like appearance.  <b>You're growing a second lizard-cock!</b>  It doesn't stop growing until it's just as long as its brother and the same shade of shiny purple.  A dribble of cum oozes from its tip, and you feel relief at last.");
+
+            player.createCock();
+            player.cocks[1].cockType = CockTypesEnum.LIZARD;
+            player.cocks[1].cockLength = player.cocks[0].cockLength;
+            player.cocks[1].cockThickness = player.cocks[0].cockThickness;
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //--Worms leave if 100% lizard dicks?
+        //Require mammals?
+        if (player.lizardCocks() == player.cockTotal() && changes < changeLimit && player.hasStatusEffect(StatusEffects.Infested)) {
+            outputText("\n\nLike rats from a sinking ship, worms escape from your body in a steady stream.  Surprisingly, the sensation is remarkably pleasant, similar to the pleasure of sexual release in a way.  Though they seem inexhaustible, the tiny, cum-slimed invertebrates slow to a trickle.  The larger worm-kin inside you stirs as if disturbed from a nap, coming loose from whatever moorings it had attached itself to in the interior of your form.  It slowly works its way up your urethra, stretching to an almost painful degree with every lurching motion.  Your dick bloats out around the base, stretched like the ovipositor on a bee-girl in order to handle the parasitic creature, but thankfully, the ordeal is a brief one.");
+            if (player.balls > 1) outputText("  The remaining " + num2Text(player.balls - 1) + " slither out the pre-stretched holes with ease, though the last one hangs from your tip for a moment before dropping to the ground.");
+            outputText("  The white creature joins its kin on the ground and slowly slithers away.  Perhaps they prefer mammals? In any event, <b>you are no longer infected with worms</b>.");
+            player.removeStatusEffect(StatusEffects.Infested);
+            changes++;
+        }
+
+        //[Increase Vaginal Capacity] - requires vagina, of course
+        if (player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 200) {
+            outputText("\n\nA gurgling sound issues from your abdomen, and you double over as a trembling ripple passes through your womb.  The flesh of your stomach roils as your internal organs begin to shift, and when the sensation finally passes, you are instinctively aware that your [vagina] is a bit deeper than it was before.");
+            if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) {
+                player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
+            }
+            player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5 + rand(10));
+        }
+
+        if (player.vaginas.length == 1) {
+            if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_DROOLING && changes < changeLimit && rand(2) == 0) {
+                temp = player.vaginas.length;
+                while (temp > 0) {
+                    temp--;
+                    if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) player.vaginas[temp].vaginalWetness++;
+                    changes++;
+                }
+                if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) {
+                    outputText("\n\nYour pussy feels hot and juicy, aroused and tender.  You cannot resist as your hands dive into your [vagina].  You quickly orgasm, squirting fluids everywhere.  <b>You are now a squirter</b>.");
+                    player.orgasm();
+                }
+                if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) {
+                    outputText("\n\nWow your wet down there just what on going on. When you put your hand to your " + vaginaDescript(temp) + ". Surprised you discover it's twice as more lubricated then before.");
+                }
+            }
+            if (player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina] has grown larger, in depth AND size.");
+                player.vaginas[0].vaginalLooseness++;
+                changes++;
+            }
+            if (player.lowerBody == LowerBody.NAGA && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nSomething fundamental changes in your " + vaginaDescript() + " as the insides begins to heat up. Out of curiosity you take a peak and notice amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. Intrigued you literally shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm. <b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>");
+                player.vaginaType(12);
+                player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
+                changes++;
+            }
+        }
+
         //Snake tounge
         if (player.tongue.type != Tongue.SNAKE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
             if (player.tongue.type == Tongue.HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.");
@@ -6171,7 +6459,7 @@ public final class Mutations extends MutationsHelper {
         }
         //-Skin color change – dark gray
         if (player.skinTone != "dark gray" && !player.isGargoyle() && changes < changeLimit && rand(3) == 0 && type == 3) {
-            outputText("\n\nIt takes a while for you to notice, but");
+            outputText("\n\nIt takes a while for you to notice, but ");
             if (player.hasFur()) outputText("the skin under your <b>[skin coat.color]</b>" + player.skinDesc);
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become <b>dark gray</b> colored.");
@@ -7672,7 +7960,7 @@ public final class Mutations extends MutationsHelper {
             //Crazy furry TF shit
             outputText("\n\nYour teeth grind on their own, and you feel a strange, insistent pressure just under your nose.  As you open your mouth and run your tongue along them, you can feel ");
             if (player.faceType != Face.HUMAN) outputText("the sharp teeth receding and ");
-            outputText("your incisors lengthening.  It's not long before they're twice as long as their neighbors and the obvious growth stops, but the pressure doesn't go away completely. Well, you now have mouse incisors and your face aches a tiny bit - wonder if they're going to keep growing? <b>Your mouth has taken on some rabbit-like characteristics!</b>");
+            outputText("your incisors lengthening.  It's not long before they're twice as long as their neighbors and the obvious growth stops, but the pressure doesn't go away completely. Well, you now have rodent incisors and your face aches a tiny bit - wonder if they're going to keep growing? <b>Your mouth has taken on some rabbit-like characteristics!</b>");
             setFaceType(Face.BUCKTEETH);
             changes++;
         }
@@ -10793,10 +11081,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Sprouting more!
         if (changes < changeLimit && enhanced && player.bRows() < 4 && player.breastRows[player.bRows() - 1].breastRating > 1) {
-            outputText("\n\nYour belly rumbles unpleasantly for a second as the ");
-            if (!enhanced) outputText("berry ");
-            else outputText("drink ");
-            outputText("settles deeper inside you.  A second later, the unpleasant gut-gurgle passes, and you let out a tiny burp of relief.  Before you finish taking a few breaths, there's an itching below your " + allChestDesc() + ".  You idly scratch at it, but gods be damned, it hurts!  You peel off part of your [armor] to inspect the unwholesome itch, ");
+            outputText("\n\nYour belly rumbles unpleasantly for a second as the drink settles deeper inside you.  A second later, the unpleasant gut-gurgle passes, and you let out a tiny burp of relief.  Before you finish taking a few breaths, there's an itching below your " + allChestDesc() + ".  You idly scratch at it, but gods be damned, it hurts!  You peel off part of your [armor] to inspect the unwholesome itch, ");
             if (player.biggestTitSize() >= 8) outputText("it's difficult to see past the wall of tits obscuring your view.");
             else outputText("it's hard to get a good look at.");
             outputText("  A few gentle prods draw a pleasant gasp from your lips, and you realize that you didn't have an itch - you were growing new nipples!");
@@ -13304,7 +13589,7 @@ public final class Mutations extends MutationsHelper {
                     changes++;
                 }
                 if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && changes < changeLimit && rand(3) == 0) {
-                    outputText("\n\nSomething fundamental changes in your vagina(descript) as the insides begins to heat up. Out of curiosity you take a peak and notice amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. Intrigued you literally shove your entire fist inside and gasp as the sensitive rings instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm.");
+                    outputText("\n\nSomething fundamental changes in your "+vaginaDescript()+" as the insides begins to heat up. Out of curiosity you take a peak and notice amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. Intrigued you literally shove your entire fist inside and gasp as the sensitive rings instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm.");
                     player.vaginaType(12);
                     changes++;
                 }

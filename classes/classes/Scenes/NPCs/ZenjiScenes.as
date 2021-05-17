@@ -855,15 +855,15 @@ public function followerZenjiMainCampMenuTrainingWisdom():void {
 public function followerZenjiMainCampMenuTrainingPerks():void {
 	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) < 30) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 3, 1);
 	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 5 || player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 15 || player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 30) outputText("After you're done training, you feel different, you can't explain it, but something has surely changed, almost as if the training you've done with Zenji is really speaking to you.\n\n");
-	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 5) {
+	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 5 && !player.hasPerk(PerkLib.ZenjisInfluence1)) {
 		outputText("(<b>Gained Perk: Zenji's influence 1</b>)\n\n");
 		player.createPerk(PerkLib.ZenjisInfluence1,0,0,0,0);
 	}
-	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 15) {
+	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 15 && !player.hasPerk(PerkLib.ZenjisInfluence2)) {
 		outputText("(<b>Gained Perk: Zenji's influence 2</b>)\n\n");
 		player.createPerk(PerkLib.ZenjisInfluence2,0,0,0,0);
 	}
-	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 30) {
+	if (player.statusEffectv3(StatusEffects.ZenjiTrainingsCounters2) == 30 && !player.hasPerk(PerkLib.ZenjisInfluence3)) {
 		outputText("(<b>Gained Perk: Zenji's influence 3</b>)\n\n");
 		player.createPerk(PerkLib.ZenjisInfluence3,0,0,0,0);
 	}

@@ -18,7 +18,7 @@ public class SiegweirdFollower extends NPCAwareContent
 
 public function siegweirdFirstEncounter():void
 {
-	//spriteSelect(SpriteDb.);
+	spriteSelect(SpriteDb.s_siegweird);
 	clearOutput();
 	outputText("As you are traveling through the blight ridge you notice something, or someone sticking out like a beacon of light amongst the corpses. It is a tall, masculine figure adorned in full plate armor. The being stands faced away from you, bent toward the ground as if in search of something\n\n");
 	outputText("He radiates a strong divine aura, it is clear that corruption is the furthest thing you could draw from him. Should you approach him? Unfortunately for you, this choice is not yours to make as the figure turns around to face you. The interior of his helmet is too dim to make out who or what is inside.\n\n");
@@ -32,7 +32,7 @@ public function siegweirdFirstEncounter():void
 }
 public function siegweirdFirstEncounterHelpHim():void
 {
-	//spriteSelect(SpriteDb.);
+	spriteSelect(SpriteDb.s_siegweird);
 	clearOutput();
 	outputText("You start searching for the imp in question. Minutes pass and suddenly an imp pops seemingly out of nowhere, trying to attack you with the greatsword you were looking for!\n\n");
 	flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 2;
@@ -47,6 +47,7 @@ public function siegweirdFirstEncounterDoNotHelpHim():void
 
 public function siegweirdFirstEncounterPostFight():void
 {
+	spriteSelect(SpriteDb.s_siegweird);
 	outputText("You kick the imp away and take the sword. You can only hope he’s still near where you last saw him.\n\n");
 	outputText("You eventually find him not too far from where you first met him. He notices you and quickly approaches, the heavy sound of his geaves smash against the ground until he halts before you.\n\n");
 	outputText("\"<i>My sword! Thank you, you have a paladin’s deepest gratitude.</i>\" \n\n He removes his helmet, revealing a purely white ursine face, he appears to be a polar bear. \n\n\"<i>You may call me Siegweird, friend…</i>\" his voice trails off slightly before his eyes regain focus onto you, \"");
@@ -57,6 +58,7 @@ public function siegweirdFirstEncounterPostFight():void
 }
 public function siegweirdFirstEncounterPostFightJoin():void
 {
+	spriteSelect(SpriteDb.s_siegweird);
 	outputText("A paladin?\n\n");
 	outputText("He stands proudly, \"<i>Yes, a righteous, holy warrior… I am trained in white magic as well as with this sword. If you’d let me, I’m sure there’s plenty of things we could teach each other.</i>\"\n\n");
 	outputText("Would you like to invite Siegweird to your camp? The presence of someone so vibrantly holy and devout will surely become a nuisance to those who are far more inclined toward corruption.\n\n");
@@ -66,6 +68,7 @@ public function siegweirdFirstEncounterPostFightJoin():void
 }
 public function siegweirdFirstEncounterPostFightJoinYes():void
 {
+	spriteSelect(SpriteDb.s_siegweird);
 	outputText("You would gladly have someone such as him in your camp.\n\n His face curls into a grin from ear to ear, \“<i>Thank you, [name]. I… I will not disappoint you! Now, lead the way, I will walk alongside you.</i>\”");
 	outputText("\n\n You guide Siegweird to your camp, he smiles softly as he surveys the area.\n\n Once he’s found a place he’s content with he quickly builds a fire pit before reaching into his knapsack and pulling out a large cast iron pot.\n\n");
 	outputText("He sets everything up before igniting the flame.\n\n\"<i>I got some Soup! Call it a hero's feast, [name]. Feel free to ask me for some if you’re ever hungry.</i>\"");
@@ -82,6 +85,7 @@ public function siegweirdFirstEncounterPostFightJoinYes():void
 }
 public function siegweirdFirstEncounterPostFightJoinNo():void
 {
+	spriteSelect(SpriteDb.s_siegweird);
 	outputText("It may not be the best to have such a luminous beacon marching in your camp. Not only does his armor cause a ludicrous amount of noise, his powerful aura will surely illuminate your camp for anyone who wants to corrupt the pure.\n\n");
 	outputText("Siegweird nods softly, \"<i>I understand if you do not wish for me to accompany you, I suppose I shall remain here if you need me.</i>\"\n\n");
 	outputText("You nod respectfully before heading back to camp.\n\n");
@@ -93,12 +97,14 @@ public function siegweirdFirstEncounterPostFightJoinNo():void
 }
 public function siegweirdFirstEncounterPostFightAnotherFight():void
 {
+	spriteSelect(SpriteDb.s_siegweird);
 	outputText("The suit of armor notices your demonic outlook as his helmet slowly illuminates with a brilliant golden light. You can see an enraged expression on his face before it’s too bright to see anything within his helmet.\n\n");
 	outputText("\"<i>No! Can’t believe I was helped out by a demon! Have I been so blind? Was this all a test? NO! I WILL NOT FAIL! I WILL PURGE YOU AND YOUR CORRUPTION FROM THIS LAND, FIEND!”</i>\"");
 	startCombat(new Siegweird());
 }
 public function siegweirdFirstEncounterPostFightAnotherFightWon():void
 {
+	spriteSelect(SpriteDb.s_siegweird);
 	outputText("Siegweird stumbles back, falling to his knees, unable to fight any longer. The glowing radiance from his eyes dim as his helm ceases to glow. He keeps himself propped up as he clutches onto his massive sword, head lowered to the ground. A golden, pearly substance cascades from his helmet, pooling on the ground before him before he falls prone on the ground.\n\n");
 	outputText("The radiance he once emitted has now faded to the dull luster of his blood-stained armor. \"<i>I was too weak…</i>\" he mumbles, not looking up to face you. \“<i>I cannot do anything… I amount to nothing… Who was I fooling..?</i>\"\n\n");
 	outputText("You approach the knight, he’s still mumbling words of self-depreciation, hardly paying any attention to you at this point. \n\n");
@@ -146,7 +152,7 @@ public function siegweirdRepeatEncounterPostFight():void
 
 public function siegweirdMainCampMenu():void
 {
-	//spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	spriteSelect(SpriteDb.s_siegweird);
 	clearOutput();
 	outputText("You wave a hearty hello to Siegweird in which he responds with a respectful nod,");
 	outputText("\"<i>[name]... Is there something you wanted?</i>\"\n\n");
@@ -178,6 +184,7 @@ public function siegweirdMainCampMenu():void
 
 public function siegweirdCampSoup():void
 {
+	spriteSelect(SpriteDb.s_siegweird);
 	clearOutput();
 	if (player.hasStatusEffect(StatusEffects.SiegweirdSoup)) {
 		outputText("You politely ask Siegweird if he could give you a bowl.\n\n");
@@ -219,6 +226,7 @@ public function siegweirdCampSoup():void
 }
 public function siegweirdCampSoup2():void
 {
+	spriteSelect(SpriteDb.s_siegweird);
 	clearOutput();
 	outputText("You ask Siegweird if he wouldn’t mind allowing you to add something to his recipe so that the soup could be better.\n\n");
 	outputText("Siegweird gives you a suspicious glance before redirecting his attention to the item in your grasp, \"<i>I… Um… Okay… Go ahead, [name]. I don’t really see an issue with that ingredient. </i>\"");
@@ -273,7 +281,7 @@ public function siegweirdCampSoup2():void
 
 public function siegweirdCampStudy():void
 {
-	//spriteSelect(SpriteDb.);
+	spriteSelect(SpriteDb.s_siegweird);
 	clearOutput();
 	outputText("You tell Siegweird you would like to learn more about white magic.\n\n");
 	outputText("He looks toward you with hints of worry, \"<i>Yes, right… This is one of the things I can help you with. I’m afraid I’m not the best of teachers, but there are many things I can show you to fight against the demon’s corruptive influences.</i>\"\n\n");
@@ -316,6 +324,7 @@ public function siegweirdCampStudy():void
 
 public function siegweirdAdvancedCampStudy():void
 {
+	spriteSelect(SpriteDb.s_siegweird);
 	if (player.hasStatusEffect(StatusEffects.SiegweirdTraining2)) {
 		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) {
 			player.removeKeyItem("Alvina's Shattered Phylactery");

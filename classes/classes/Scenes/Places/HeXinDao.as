@@ -63,15 +63,47 @@ public class HeXinDao extends BaseContent
 	}
 	public function riverislandVillageStuffLunar():void {
 		clearOutput();
-		flags[kFLAGS.LUNAR_NEW_YEAR] = date.fullYear;
-		if (flags[kFLAGS.LUNAR_NEW_YEAR] <= 2015) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "goat";
-		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2016) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "monkey";
-		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2017) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rooster";
-		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2018) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "dog";
-		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2019) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "pig";
-		else if (flags[kFLAGS.LUNAR_NEW_YEAR] == 2020) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rat";
-		else if (flags[kFLAGS.LUNAR_NEW_YEAR] >= 2021) flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "ox";
-		outputText("You go deeper in town and discover the whole place is indeed covered in red. The big question now is what should you check upon first?");
+		flags[kFLAGS.LUNAR_NEW_YEAR] = date.fullYear%12;
+        switch (flags[kFLAGS.LUNAR_NEW_YEAR]){
+            case 0:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "monkey"
+                break;
+            case 1:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rooster"
+                break;
+            case 2:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "dog"
+                break;
+            case 3:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "pig"
+                break;
+            case 4:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rat"
+                break;
+            case 5:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "ox"
+                break;
+            case 6:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "tiger"
+                break;
+            case 7:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rabbit"
+                break;
+            case 8:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "dragon"
+                break;
+            case 9:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "snake"
+                break;
+            case 10:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "horse"
+                break;
+            case 11:
+                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "goat"
+                break;
+        }
+
+        outputText("You go deeper in town and discover the whole place is indeed covered in red. The big question now is what should you check upon first?");
 		menu();
 		if (!player.hasStatusEffect(StatusEffects.CanGetLunarGift)) addButton(0, "Gifts", riverislandVillageStuffLunarGifts);
 		addButton(1, "Food", riverislandVillageStuffLunarFood);
@@ -267,6 +299,14 @@ public class HeXinDao extends BaseContent
 					sayLine2(consumables.IOLBMAN,"It's a manual for Icicles of Love (Basic Rank), this simple technique allows you to covert excess lust into icicles."),
 					"\n\nIt seems like some sort of art to deal with needless lust by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
 			).hint("Icicles of Love (Basic Rank) Manual.");
+			addButton(2, "Storm of Sisterhood (B)", buyItem2,consumables.SOSBMAN,
+					sayLine2(consumables.SOSBMAN,"It's a manual for Storm of Sisterhood (Basic Rank), this simple technique allows you to convert excess wrath into ligthing."),
+					"\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
+			).hint("Storm of Sisterhood (Basic Rank) Manual.");
+			addButton(3, "Night of Brotherhood (B)", buyItem2,consumables.NOBBMAN,
+					sayLine2(consumables.NOBBMAN,"It's a manual for Night of Brotherhood (Basic Rank), this simple technique allows you to covert excess wrath into darkness."),
+					"\n\nIt seems like some sort of art to deal with needless wrath by changing it into another....more deadly form.  But what does basic rank mean?  Is there a higher rank for this soulskill?  "
+			).hint("Night of Brotherhood (Basic Rank) Manual.");
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) {
 				addButton(4, "Sextuple Thrust", buyItem2,consumables.SEXTMAN,
 						sayLine2(consumables.SEXTMAN,"It's a manual for Sextuple Thrust, this simple technique allows you to unleash six thrusts that will become stronger and stronger as you train your body and soul."),

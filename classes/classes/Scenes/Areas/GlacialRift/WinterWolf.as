@@ -132,7 +132,7 @@ public class WinterWolf extends Monster
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 99;
-			this.additionalXP = 8000;
+			this.additionalXP = 5000;
 			this.gems = 200 + rand(50);
 			this.drop = new WeightedDrop()
 					.add(consumables.CHILLYP, 1)

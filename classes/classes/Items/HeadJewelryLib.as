@@ -39,6 +39,7 @@ package classes.Items
 		public const SATGOG :SATechGoggle = new SATechGoggle();
 		public const SCANGOG:ScannerGoggle = new ScannerGoggle();
 		public const SEERPIN:SeersHairpin = new SeersHairpin();
+		public const SKIGOGG:HeadJewelry = new HeadJewelry("SkiGogg", "Ski goggles", "Ski goggles", "a Ski goggles", 0, 0, 400, "These goggles help shield your eyes against the snowstorms of the glacial rift, allowing you to see correctly in a blizzard like the denizens of the rift. \n\nType: Helm \nBase value: 400","Helmet");
 		public const SNOWFH:SnowflakeHairpin = new SnowflakeHairpin();
 		public const SPHINXAS:SphinxAccessorySet = new SphinxAccessorySet();
 		public const TSHAIR :HeadJewelry = new HeadJewelry("TSHair", "T.S.Hairpin", "training soul hairpin", "training soul hairpin", 0, 0, 200, "This hairpin, made from soulmetal helps to train soulforce to the uttermost limit for novice soul cultivator. \n\nType: Jewelry (Hairpin) \nBase value: 200","Hairpin");

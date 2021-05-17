@@ -626,20 +626,20 @@ import classes.Items.JewelryLib;
 			var min:Number = 0;
 			if (findPerk(PerkLib.Diehard) >= 0) {
 				min -= maxHP() * 0.02;
-				min -= (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				min -= (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (findPerk(PerkLib.ImprovedDiehard) >= 0) {
 				min -= maxHP() * 0.04;
-				min -= (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				min -= (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (findPerk(PerkLib.GreaterDiehard) >= 0) {
 				min -= maxHP() * 0.06;
-				min -= (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				min -= (1800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (findPerk(PerkLib.EpicDiehard) >= 0) {
 				min -= maxHP() * 0.08;
-				min -= (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			}//nastepny diehard to 5% i 1000
+				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}//nastepny diehard to 10% i 3000 a potem 12% i 3600
 			if (findPerk(PerkLib.LizanMarrowFinalForm) >= 0) min -= maxHP() * 0.05;
 			if (findPerk(PerkLib.OrcAdrenalGlandsFinalForm) >= 0 || game.player.orcScore() >= 11) {
 				if (findPerk(PerkLib.Ferocity) >= 0) min -= maxHP() * 0.07;
@@ -899,81 +899,82 @@ import classes.Items.JewelryLib;
 		
 		public override function maxWrath():Number
 		{
-			var max:Number = 250;
-			if (findPerk(PerkLib.DoubleAttack) >= 0) max += 10;
-			if (findPerk(PerkLib.TripleAttack) >= 0) max += 10;
-			if (findPerk(PerkLib.QuadrupleAttack) >= 0) max += 10;
-			if (findPerk(PerkLib.PentaAttack) >= 0) max += 10;
-			if (findPerk(PerkLib.HexaAttack) >= 0) max += 10;
-			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) max += 20;
-			if (findPerk(PerkLib.TripleAttackLarge) >= 0) max += 20;
-			if (findPerk(PerkLib.PrimalFuryI) >= 0) max += 10;
-			if (findPerk(PerkLib.PrimalFuryII) >= 0) max += 10;
-			if (findPerk(PerkLib.PrimalFuryIII) >= 0) max += 10;
-			if (findPerk(PerkLib.PrimalFuryIV) >= 0) max += 10;
-			if (findPerk(PerkLib.PrimalFuryV) >= 0) max += 10;
-			if (findPerk(PerkLib.PrimalFuryVI) >= 0) max += 10;
-			if (findPerk(PerkLib.FeralArmor) >= 0) max += 20;
-			if (findPerk(PerkLib.ClawTraining) >= 0) max += 20;
-			if (findPerk(PerkLib.ExtraClawAttack) >= 0) max += 30;
-			if (findPerk(PerkLib.MultiClawAttack) >= 0) max += 40;
-			if (findPerk(PerkLib.ClawingFlurry) >= 0) max += 50;
-			if (findPerk(PerkLib.BasicTranquilness) >= 0) max += 15;
-			if (findPerk(PerkLib.HalfStepToImprovedTranquilness) >= 0) max += 25;
-			if (findPerk(PerkLib.ImprovedTranquilness) >= 0) max += 40;
-			if (findPerk(PerkLib.HalfStepToAdvancedTranquilness) >= 0) max += 60;
-			if (findPerk(PerkLib.AdvancedTranquilness) >= 0) max += 100;
-			if (findPerk(PerkLib.HalfStepToSuperiorTranquilness) >= 0) max += 160;
-			if (findPerk(PerkLib.SuperiorTranquilness) >= 0) max += 250;
-			if (findPerk(PerkLib.HalfStepToPeerlessTranquilness) >= 0) max += 350;
-			if (findPerk(PerkLib.PeerlessTranquilness) >= 0) max += 500;
-			if (findPerk(PerkLib.HalfStepToInhumanTranquilness) >= 0) max += 750;
-			if (findPerk(PerkLib.InhumanTranquilness) >= 0) max += 1000;
-			if (findPerk(PerkLib.HalfStepToEpicTranquilness) >= 0) max += 1500;
-			if (findPerk(PerkLib.EpicTranquilness) >= 0) max += 2250;
-			if (findPerk(PerkLib.HalfStepToLegendaryTranquilness) >= 0) max += 3500;
-			if (findPerk(PerkLib.LegendaryTranquilness) >= 0) max += 5000;
-			if (findPerk(PerkLib.HalfStepToMythicalTranquilness) >= 0) max += 7500;
-			if (findPerk(PerkLib.MythicalTranquilness) >= 0) max += 10000;
-			if (findPerk(PerkLib.JobSwordsman) >= 0) max += 20;
-			if (findPerk(PerkLib.JobBeastWarrior) >= 0) max += 20;
-			if (findPerk(PerkLib.JobDervish) >= 0) max += 20;
-			if (findPerk(PerkLib.JobWarlord) >= 0) max += 20;
-			if (findPerk(PerkLib.JobWarrior) >= 0) max += 10;
-			if (findPerk(PerkLib.ImprovedCrinosShape) >= 0) max += 40;
-			if (findPerk(PerkLib.GreaterCrinosShape) >= 0) max += 80;
-			if (findPerk(PerkLib.MasterCrinosShape) >= 0) max += 160;
-			if (findPerk(PerkLib.Berzerker) >= 0) max += 100;
-			if (findPerk(PerkLib.ColdFury) >= 0) max += 50;
-			if (findPerk(PerkLib.ColderFury) >= 0) max += 75;
-			if (findPerk(PerkLib.Lustzerker) >= 0) max += 100;
-			if (findPerk(PerkLib.ColdLust) >= 0) max += 50;
-			if (findPerk(PerkLib.ColderLust) >= 0) max += 75;
-			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) max += 200;
-			if (findPerk(PerkLib.Rage) >= 0) max += 300;
-			if (findPerk(PerkLib.Anger) >= 0) max += 400;
-			if (findPerk(PerkLib.FuelForTheFire) >= 0) max += 500;
-			if (findPerk(PerkLib.TooAngryToDie) >= 0) max += 600;
-			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) max += 100;
-			if (findPerk(PerkLib.AscensionFury) >= 0) max += perkv1(PerkLib.AscensionFury) * 20;
+			var max:Number = 500;
+			if (findPerk(PerkLib.DoubleAttack) >= 0) max += 50;
+			if (findPerk(PerkLib.TripleAttack) >= 0) max += 50;
+			if (findPerk(PerkLib.QuadrupleAttack) >= 0) max += 50;
+			if (findPerk(PerkLib.PentaAttack) >= 0) max += 50;
+			if (findPerk(PerkLib.HexaAttack) >= 0) max += 50;
+			if (findPerk(PerkLib.DoubleAttackLarge) >= 0) max += 100;
+			if (findPerk(PerkLib.TripleAttackLarge) >= 0) max += 100;
+			if (findPerk(PerkLib.FeralArmor) >= 0) max += 100;
+			if (findPerk(PerkLib.ClawTraining) >= 0) max += 100;
+			if (findPerk(PerkLib.ExtraClawAttack) >= 0) max += 150;
+			if (findPerk(PerkLib.MultiClawAttack) >= 0) max += 200;
+			if (findPerk(PerkLib.ClawingFlurry) >= 0) max += 250;
+			if (findPerk(PerkLib.BasicTranquilness) >= 0) max += 75;
+			if (findPerk(PerkLib.HalfStepToImprovedTranquilness) >= 0) max += 125;
+			if (findPerk(PerkLib.ImprovedTranquilness) >= 0) max += 200;
+			if (findPerk(PerkLib.HalfStepToAdvancedTranquilness) >= 0) max += 300;
+			if (findPerk(PerkLib.AdvancedTranquilness) >= 0) max += 500;
+			if (findPerk(PerkLib.HalfStepToSuperiorTranquilness) >= 0) max += 800;
+			if (findPerk(PerkLib.SuperiorTranquilness) >= 0) max += 1250;
+			if (findPerk(PerkLib.HalfStepToPeerlessTranquilness) >= 0) max += 1750;
+			if (findPerk(PerkLib.PeerlessTranquilness) >= 0) max += 2500;
+			if (findPerk(PerkLib.HalfStepToInhumanTranquilness) >= 0) max += 3750;
+			if (findPerk(PerkLib.InhumanTranquilness) >= 0) max += 5000;
+			if (findPerk(PerkLib.HalfStepToEpicTranquilness) >= 0) max += 7500;
+			if (findPerk(PerkLib.EpicTranquilness) >= 0) max += 11250;
+			if (findPerk(PerkLib.HalfStepToLegendaryTranquilness) >= 0) max += 17500;
+			if (findPerk(PerkLib.LegendaryTranquilness) >= 0) max += 25000;
+			if (findPerk(PerkLib.HalfStepToMythicalTranquilness) >= 0) max += 37500;
+			if (findPerk(PerkLib.MythicalTranquilness) >= 0) max += 50000;
+			if (findPerk(PerkLib.JobSwordsman) >= 0) max += 100;
+			if (findPerk(PerkLib.JobBeastWarrior) >= 0) max += 100;
+			if (findPerk(PerkLib.JobDervish) >= 0) max += 100;
+			if (findPerk(PerkLib.JobWarlord) >= 0) max += 100;
+			if (findPerk(PerkLib.JobWarrior) >= 0) max += 50;
+			if (findPerk(PerkLib.ImprovedCrinosShape) >= 0) max += 200;
+			if (findPerk(PerkLib.GreaterCrinosShape) >= 0) max += 400;
+			if (findPerk(PerkLib.MasterCrinosShape) >= 0) max += 800;
+			if (findPerk(PerkLib.Berzerker) >= 0) max += 500;
+			if (findPerk(PerkLib.ColdFury) >= 0) max += 250;
+			if (findPerk(PerkLib.ColderFury) >= 0) max += 375;
+			if (findPerk(PerkLib.Lustzerker) >= 0) max += 500;
+			if (findPerk(PerkLib.ColdLust) >= 0) max += 250;
+			if (findPerk(PerkLib.ColderLust) >= 0) max += 375;
+			if (findPerk(PerkLib.PrestigeJobBerserker) >= 0) max += 1000;
+			if (findPerk(PerkLib.Rage) >= 0) max += 1500;
+			if (findPerk(PerkLib.Anger) >= 0) max += 2000;
+			if (findPerk(PerkLib.FuelForTheFire) >= 0) max += 2500;
+			if (findPerk(PerkLib.TooAngryToDie) >= 0) max += 3000;
+			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) max += 500;
+			if (findPerk(PerkLib.AscensionFury) >= 0) max += perkv1(PerkLib.AscensionFury) * 100;
 			if (jewelryEffectId == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude;//+75 to +175
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude2;//+75 to +175
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude3;//+75 to +175
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude4;//+75 to +175
 			if (jewelryName == "Undefeated King's Signet" || jewelryName3 == "Undefeated King's Signet") max += 150;
-			max += level;
-			if (level <= 6) max += level;
-			if (findPerk(PerkLib.UnlockId) >= 0) max += level;
-			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level;
-			if (findPerk(PerkLib.UnlockId3rdStage) >= 0) max += level;
-			if (findPerk(PerkLib.UnlockId4thStage) >= 0) max += level;
-			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 2;//~35,730
-			if (findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) max += level * 2;
+			max += level * 5;
+			if (level <= 6) max += level * 5;
+			if (findPerk(PerkLib.UnlockId) >= 0) max += level * 5;
+			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level * 5;
+			if (findPerk(PerkLib.UnlockId3rdStage) >= 0) max += level * 5;
+			if (findPerk(PerkLib.UnlockId4thStage) >= 0) max += level * 5;
+			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 10;//~35,730
+			if (findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) max += level * 10;
 			var multimax:Number = 1;
 			if (game.player.orcScore() >= 5) multimax += 0.1;
 			if (game.player.orcScore() >= 11) multimax += 0.1;
+			if (findPerk(PerkLib.PrimalFuryI) >= 0) multimax += 0.05;
+			if (findPerk(PerkLib.PrimalFuryII) >= 0) multimax += 0.05;
+			if (findPerk(PerkLib.PrimalFuryIII) >= 0) multimax += 0.05;
+			if (findPerk(PerkLib.PrimalFuryIV) >= 0) multimax += 0.05;
+			if (findPerk(PerkLib.PrimalFuryV) >= 0) multimax += 0.05;
+			if (findPerk(PerkLib.PrimalFuryVI) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.ICastAsuraFist) >= 0) multimax += 0.5;
 			if (vehiclesName == "Giant Slayer Mech") {
 				multimax += 0.1;
 				//if (upgrade mecha) multimax += 0.1;
@@ -983,82 +984,110 @@ import classes.Items.JewelryLib;
 			}
 			max *= multimax;
 			max = Math.round(max);
-			if (max > 69999) max = 69999;
+			//if (max > 69999) max = 69999;
+			if (max > 139999) max = 139999;
 			return max;
+		}
+		public override function maxOverWrath():Number {
+			var max1:Number = maxWrath();
+			var max2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobAsura)) max2 += 0.1;
+			if (hasPerk(PerkLib.AbsoluteStrength)) max2 += 0.1;
+			if (hasPerk(PerkLib.LikeAnAsuraBoss)) max2 += 0.1;
+			if (hasPerk(PerkLib.ICastAsuraFist)) max2 += 0.1;
+			max1 *= max2;
+			max1 = Math.round(max1);
+			if (max1 > 79999) max1 = 79999;
+			return max1;
+		}
+		public function maxSafeWrathMagicalAbilities():Number {
+			var max1:Number = 0;
+			if (hasPerk(PerkLib.ICastAsuraFist)) max1 += maxOverWrath();
+			else max1 += maxWrath();
+			var max2:Number = 0.9;
+			//if (hasPerk(PerkLib.)) max2 += 0.1;
+			max1 *= max2;
+			max1 = Math.round(max1);
+			return max1;
+		}
+		public function maxSafeWrathSpellcasting():Number {
+			var max1:Number = 0;
+			if (hasPerk(PerkLib.ICastAsuraFist)) max1 += maxOverWrath();
+			else max1 += maxWrath();
+			var max2:Number = 0.7;
+			if (hasPerk(PerkLib.MagesWrath)) max2 += 0.05;
+			//if (hasPerk(PerkLib.)) max2 += 0.1;
+			max1 *= max2;
+			max1 = Math.round(max1);
+			return max1;
 		}
 		
 		public override function maxMana():Number
 		{
-			var max:Number = 200;
-			if (findPerk(PerkLib.ManaAffinityI) >= 0) max += 35;
-			if (findPerk(PerkLib.ManaAffinityII) >= 0) max += 35;
-			if (findPerk(PerkLib.ManaAffinityIII) >= 0) max += 35;
-			if (findPerk(PerkLib.ManaAffinityIV) >= 0) max += 35;
-			if (findPerk(PerkLib.ManaAffinityV) >= 0) max += 35;
-			if (findPerk(PerkLib.ManaAffinityVI) >= 0) max += 35;
-			if (findPerk(PerkLib.MindOverBodyI) >= 0) max += Math.round(inte*2);
-			if (findPerk(PerkLib.MindOverBodyII) >= 0) max += Math.round(inte*2);
-			if (findPerk(PerkLib.MindOverBodyIII) >= 0) max += Math.round(inte*2);
-			if (findPerk(PerkLib.MindOverBodyIV) >= 0) max += Math.round(inte*2);
-			if (findPerk(PerkLib.MindOverBodyV) >= 0) max += Math.round(inte*2);
-			if (findPerk(PerkLib.MindOverBodyVI) >= 0) max += Math.round(inte*2);
+			var max:Number = 300;
+			if (findPerk(PerkLib.MindOverBodyI) >= 0) max += Math.round(inte*6);
+			if (findPerk(PerkLib.MindOverBodyII) >= 0) max += Math.round(inte*6);
+			if (findPerk(PerkLib.MindOverBodyIII) >= 0) max += Math.round(inte*6);
+			if (findPerk(PerkLib.MindOverBodyIV) >= 0) max += Math.round(inte*6);
+			if (findPerk(PerkLib.MindOverBodyV) >= 0) max += Math.round(inte*6);
+			if (findPerk(PerkLib.MindOverBodyVI) >= 0) max += Math.round(inte*6);
 			if (findPerk(PerkLib.ArcanePoolI) >= 0) {
-				max += Math.round(inte);
-				max += Math.round(wis);
+				max += Math.round(inte*3);
+				max += Math.round(wis*3);
 			}
 			if (findPerk(PerkLib.ArcanePoolII) >= 0) {
-				max += Math.round(inte);
-				max += Math.round(wis);
+				max += Math.round(inte*3);
+				max += Math.round(wis*3);
 			}
 			if (findPerk(PerkLib.ArcanePoolIII) >= 0) {
-				max += Math.round(inte);
-				max += Math.round(wis);
+				max += Math.round(inte*3);
+				max += Math.round(wis*3);
 			}
 			if (findPerk(PerkLib.ArcanePoolIV) >= 0) {
-				max += Math.round(inte);
-				max += Math.round(wis);
+				max += Math.round(inte*3);
+				max += Math.round(wis*3);
 			}
 			if (findPerk(PerkLib.ArcanePoolV) >= 0) {
-				max += Math.round(inte);
-				max += Math.round(wis);
+				max += Math.round(inte*3);
+				max += Math.round(wis*3);
 			}
 			if (findPerk(PerkLib.ArcanePoolVI) >= 0) {
-				max += Math.round(inte);
-				max += Math.round(wis);
+				max += Math.round(inte*3);
+				max += Math.round(wis*3);
 			}
-			if (findPerk(PerkLib.BasicSpirituality) >= 0) max += 45;
-			if (findPerk(PerkLib.HalfStepToImprovedSpirituality) >= 0) max += 75;
-			if (findPerk(PerkLib.ImprovedSpirituality) >= 0) max += 120;
-			if (findPerk(PerkLib.HalfStepToAdvancedSpirituality) >= 0) max += 180;
-			if (findPerk(PerkLib.AdvancedSpirituality) >= 0) max += 300;
-			if (findPerk(PerkLib.HalfStepToSuperiorSpirituality) >= 0) max += 480;
-			if (findPerk(PerkLib.SuperiorSpirituality) >= 0) max += 750;
-			if (findPerk(PerkLib.HalfStepToPeerlessSpirituality) >= 0) max += 1050;
-			if (findPerk(PerkLib.PeerlessSpirituality) >= 0) max += 1500;
-			if (findPerk(PerkLib.HalfStepToInhumanSpirituality) >= 0) max += 2250;
-			if (findPerk(PerkLib.InhumanSpirituality) >= 0) max += 3000;
-			if (findPerk(PerkLib.HalfStepToEpicSpirituality) >= 0) max += 4500;
-			if (findPerk(PerkLib.EpicSpirituality) >= 0) max += 6750;
-			if (findPerk(PerkLib.HalfStepToLegendarySpirituality) >= 0) max += 10500;
-			if (findPerk(PerkLib.LegendarySpirituality) >= 0) max += 15000;
-			if (findPerk(PerkLib.HalfStepToMythicalSpirituality) >= 0) max += 22500;
-			if (findPerk(PerkLib.MythicalSpirituality) >= 0) max += 30000;
-			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 100) max += 60;
-			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) max += 30;
-			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 125) max += 75;
-			if (findPerk(PerkLib.GrandArchmage2ndCircle) >= 0 && inte >= 150) max += 90;
-			if (findPerk(PerkLib.GrandArchmage3rdCircle) >= 0 && inte >= 175) max += 105;
-			if (findPerk(PerkLib.GrandMage) >= 0 && inte >= 75) max += 45;
-			if (findPerk(PerkLib.GreyArchmage) >= 0 && inte >= 225) max += 200;
-			if (findPerk(PerkLib.GreyMage) >= 0 && inte >= 200) max += 150;
-			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) max += 30;
-			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 15;
-			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 15;
-			if (findPerk(PerkLib.JobHealer) >= 0) max += 30;
-			if (findPerk(PerkLib.SpellpowerHealing) >= 0 && wis >= 50) max += 30;
-			if (findPerk(PerkLib.EromancyBeginner) >= 0) max += Math.round(inte);
-			if (findPerk(PerkLib.EromancyExpert) >= 0) max += Math.round(inte);
-			if (findPerk(PerkLib.EromancyMaster) >= 0) max += Math.round(inte*2);
+			if (findPerk(PerkLib.BasicSpirituality) >= 0) max += 135;
+			if (findPerk(PerkLib.HalfStepToImprovedSpirituality) >= 0) max += 225;
+			if (findPerk(PerkLib.ImprovedSpirituality) >= 0) max += 360;
+			if (findPerk(PerkLib.HalfStepToAdvancedSpirituality) >= 0) max += 540;
+			if (findPerk(PerkLib.AdvancedSpirituality) >= 0) max += 900;
+			if (findPerk(PerkLib.HalfStepToSuperiorSpirituality) >= 0) max += 1440;
+			if (findPerk(PerkLib.SuperiorSpirituality) >= 0) max += 2250;
+			if (findPerk(PerkLib.HalfStepToPeerlessSpirituality) >= 0) max += 3150;
+			if (findPerk(PerkLib.PeerlessSpirituality) >= 0) max += 4500;
+			if (findPerk(PerkLib.HalfStepToInhumanSpirituality) >= 0) max += 6750;
+			if (findPerk(PerkLib.InhumanSpirituality) >= 0) max += 9000;
+			if (findPerk(PerkLib.HalfStepToEpicSpirituality) >= 0) max += 13500;
+			if (findPerk(PerkLib.EpicSpirituality) >= 0) max += 20250;
+			if (findPerk(PerkLib.HalfStepToLegendarySpirituality) >= 0) max += 31500;
+			if (findPerk(PerkLib.LegendarySpirituality) >= 0) max += 45000;
+			if (findPerk(PerkLib.HalfStepToMythicalSpirituality) >= 0) max += 67500;
+			if (findPerk(PerkLib.MythicalSpirituality) >= 0) max += 90000;
+			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 100) max += 180;
+			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) max += 90;
+			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 125) max += 225;
+			if (findPerk(PerkLib.GrandArchmage2ndCircle) >= 0 && inte >= 150) max += 270;
+			if (findPerk(PerkLib.GrandArchmage3rdCircle) >= 0 && inte >= 175) max += 315;
+			if (findPerk(PerkLib.GrandMage) >= 0 && inte >= 75) max += 135;
+			if (findPerk(PerkLib.GreyArchmage) >= 0 && inte >= 225) max += 600;
+			if (findPerk(PerkLib.GreyMage) >= 0 && inte >= 200) max += 450;
+			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) max += 90;
+			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 45;
+			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 45;
+			if (findPerk(PerkLib.JobHealer) >= 0) max += 90;
+			if (findPerk(PerkLib.SpellpowerHealing) >= 0 && wis >= 50) max += 90;
+			if (findPerk(PerkLib.EromancyBeginner) >= 0) max += Math.round(inte*3);
+			if (findPerk(PerkLib.EromancyExpert) >= 0) max += Math.round(inte*3);
+			if (findPerk(PerkLib.EromancyMaster) >= 0) max += Math.round(inte*6);
 			var multimax:Number = 1;
 			if (game.player.elfScore() >= 5) multimax += 0.1;
 			if (game.player.elfScore() >= 11) multimax += 0.1;
@@ -1071,13 +1100,31 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.President) >= 0) multimax += 0.1;
 			if (findPerk(PerkLib.Nerd) >= 0) multimax += 0.1;
 			if (findPerk(PerkLib.ArcaneRegenerationMinor) >= 0 && inte >= 50) {
-				multimax += 0.1;
-				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0 && inte >= 75) multimax += 0.2;
-				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0 && inte >= 100) multimax += 0.3;
-				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0 && inte >= 125) multimax += 0.4;
+				multimax += 0.05;
+				if (findPerk(PerkLib.ArcaneRegenerationMajor) >= 0 && inte >= 75) multimax += 0.1;
+				if (findPerk(PerkLib.ArcaneRegenerationEpic) >= 0 && inte >= 100) multimax += 0.15;
+				if (findPerk(PerkLib.ArcaneRegenerationLegendary) >= 0 && inte >= 125) multimax += 0.2;
+				if (findPerk(PerkLib.ArcaneRegenerationMythical) >= 0 && inte >= 150) multimax += 0.25;
 			}
+			if (findPerk(PerkLib.ManaAffinityI) >= 0) multimax += 0.03;
+			if (findPerk(PerkLib.ManaAffinityII) >= 0) multimax += 0.03;
+			if (findPerk(PerkLib.ManaAffinityIII) >= 0) multimax += 0.03;
+			if (findPerk(PerkLib.ManaAffinityIV) >= 0) multimax += 0.03;
+			if (findPerk(PerkLib.ManaAffinityV) >= 0) multimax += 0.03;
+			if (findPerk(PerkLib.ManaAffinityVI) >= 0) multimax += 0.03;
 			if (findPerk(PerkLib.ZenjisInfluence1) >= 0) multimax += 0.1;
-			if (findPerk(PerkLib.AscensionInnerPower) >= 0) max += perkv1(PerkLib.AscensionInnerPower) * 40;
+			if (hasPerk(PerkLib.ManaCore)) {
+				if (hasPerk(PerkLib.Archmage) && inte >= 100) multimax += 0.15;
+				if (hasPerk(PerkLib.GrandArchmage) && inte >= 125) multimax += 0.15;
+				if (hasPerk(PerkLib.GrandArchmage2ndCircle) && inte >= 150) multimax += 0.15;
+				if (hasPerk(PerkLib.GrandArchmage3rdCircle) && inte >= 175) multimax += 0.15;
+				if (hasPerk(PerkLib.GrandMage) && inte >= 75) multimax += 0.1;
+				//if (hasPerk(PerkLib.GreyArchmage) && inte >= 225) max += 600;
+				//if (hasPerk(PerkLib.GreyMage) && inte >= 200) max += 450;
+				if (hasPerk(PerkLib.Mage) && inte >= 50) multimax += 0.1;
+				if (hasPerk(PerkLib.JobSorcerer)) multimax += 0.1;
+			}
+			if (findPerk(PerkLib.AscensionInnerPower) >= 0) max += perkv1(PerkLib.AscensionInnerPower) * 120;
 			if (jewelryEffectId == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude3;

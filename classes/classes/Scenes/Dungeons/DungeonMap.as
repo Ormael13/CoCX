@@ -1089,7 +1089,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[P] [ ]-[ ]-[ ] [ ]");
+					rawOutputText("\n[P] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1101,7 +1101,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[P]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [ ]");
+					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1113,7 +1113,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [ ]");
+					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1125,7 +1125,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [ ]");
+					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [P]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1137,7 +1137,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [P]-[ ]-[ ] [ ]");
+					rawOutputText("\n[ ] [P]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1149,7 +1149,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[P]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [ ]");
+					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1161,7 +1161,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [ ]");
+					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[P]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1173,7 +1173,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[P]-[ ] [ ]");
+					rawOutputText("\n[ ] [ ]-[P]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1185,7 +1185,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[P]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [ ]");
+					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1197,7 +1197,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [ ]");
+					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[P]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1209,7 +1209,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[P] [ ]");
+					rawOutputText("\n[ ] [ ]-[ ]-[P] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1221,7 +1221,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[P]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [ ]");
+					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1233,7 +1233,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [ ]");
+					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1245,7 +1245,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [ ]");
+					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[P]");
 					rawOutputText("\n     |           | ");

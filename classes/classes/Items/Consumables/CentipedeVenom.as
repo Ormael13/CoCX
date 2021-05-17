@@ -108,7 +108,6 @@ public class CentipedeVenom extends Consumable {
 		}
 		//Venom Increase TEMPORARY
 		//if (changes < changeLimit && player.lowerBody == LowerBody.CENTIPEDE && player.tailRecharge < 15 && rand(2) == 0){
-		//if (player.tailRecharge < 5) player.tailRecharge += 2;
 		//if (player.tailRecharge < 10) player.tailRecharge += 2;
 		//if (player.tailRecharge < 15) player.tailRecharge += 2;
 		//player.tailVenom += 50;

@@ -6,6 +6,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 public class YetiScene extends BaseContent
 	{
@@ -32,6 +33,7 @@ public class YetiScene extends BaseContent
 		public function NoSnuSnu():void {
 			clearOutput();
 			outputText("Ain't no damn male making you his mate of the day so easily. How dare he! Totally not interested in his offer you roar in indignation and charge at him.");
+			SceneLib.glacialRift.GlacialRiftConditions();
 			startCombat(new Yeti());
 		}
 
