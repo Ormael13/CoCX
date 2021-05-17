@@ -12,6 +12,7 @@ public class LowerBody extends SaveableBodyPart {
 	 * - id: name of the constant ("HUMAN", "HOOFED")
 	 * - name: human-readable default name, ("human", "hoofed")
 	 * - legCount: number of legs the part has (defaults to 2 if property doesn't exist)
+	 * 
 	 * - legs: what the part's legs are called (defaults to "legs" if property doesn't exist)
 	 * - legsPrefixes: optional list of descriptions to pick randomly before legs (e.g. *vulpine* legs)
 	 * - leg: what the part's leg is called (defaults to "leg" if property doesn't exist)
@@ -21,21 +22,13 @@ public class LowerBody extends SaveableBodyPart {
 	 * - foot: what the part's leg is called (defaults to "leg" if property doesn't exist)
 	 * - footPrefixes: optional list of descriptions to pick randomly before foot (e.g. *vulpine* foot)
 	 * - appearanceDesc: description for the player's Appearance page in the LOWERBODY DEFAULT section (always visible)
-	 * - appearanceDescBiped: same as appearanceDesc, but only shown if player is Biped
-	 * - appearanceDescTaur: same as appearanceDesc, but only shown if player is Taur
+	 * - appearanceDesc[TypeHere]: same as appearanceDesc, but only shown if player is of the specified type (ex: Biped, Taur, Drider)
 	 * - appearanceDescSpecial: description for the player's Appearance page in the LOWERBODY SPECIAL section (always visible)
-	 * - appearanceDescSpecialBiped: same as appearanceDescSpecial, but only shown if player is Biped
-	 * - appearanceDescSpecialTaur: same as appearanceDescSpecial, but only shown if player is Taur
-	 * - claw:
-	 * - tailSlam:
-	 * - tentacle:
-	 * - isDrider: Whether the part counts player as Drider
-	 * - isGoo: Whether the part counts player as Goo
-	 * - isNaga: Whether the part counts player as Naga
-	 * - isScylla: Whether the part counts player as Scylla
-	 * - isKraken: Whether the part counts player as Kraken
-	 * - isAlraune: Whether the part counts player as Alraune
-	 * - isLiliraune: Whether the part counts player as Liliraune
+	 * - appearanceDescSpecial[TypeHere]: same as appearanceDescSpecial, but only shown if player is of the specified type (ex: Biped, Taur, Drider, etc)
+	 * - claw: Whether the part enables claw actions, meant to be checked during scenes
+	 * - tailSlam: Whether the part enables tail slam, meant to be checked during scenes
+	 * - tentacle: Whether the part enables tentacle actions, meant to be checked during scenes
+	 * - is[TypeHere]: Whether the part counts the player as specific type (ex: Drider, Goo, Naga, Scylla, etc), defaults to false with no property
 	 */
 	public static var Types:/*EnumValue*/Array = [];
 
@@ -474,7 +467,8 @@ public class LowerBody extends SaveableBodyPart {
 	public static const CANCER:int = 61;
 	EnumValue.add(Types, CANCER, "CANCER", {
 		name: "cancer",
-		appearanceDescTaur: "Where your legs would normally start, you have grown the body of a crab, with {legCountMinusTwo} chitin plated legs and two large pincers capable of tearing steel plating to shreds. A pair of stalk mounted crab eyes on the front of your shell look at your surroundings, giving you a full peripheral vision.",
+		appearanceDesc: "Where your legs would normally start, you have grown the body of a crab, with {legCountMinusTwo} chitin plated legs and two large pincers capable of tearing steel plating to shreds. A pair of stalk mounted crab eyes on the front of your shell look at your surroundings, giving you a full peripheral vision.",
+		legCount: 6,
 		claw: true,
 		isDrider: true
 	});
