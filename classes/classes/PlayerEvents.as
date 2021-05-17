@@ -1196,13 +1196,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Ghost-slinger perk
 			if (player.poltergeistScore() >= 12 && player.findPerk(PerkLib.Ghostslinger) < 0) {
-				outputText("\nYour head is suddenly filled with strange otherworldly knowledge. Things you didn't think possible before could become a reality now thanks to your supernatural intellect and abilities. You could even apply these newfound abilities to your equipment.\n\n(<b>Gained Perk: Ghost-slinger</b>)");
+				outputText("\nYour head is suddenly filled with strange otherworldly knowledge. Things you didn't think possible before could become a reality now thanks to your supernatural intellect and abilities. You could even apply these newfound abilities to your equipment.\n\n(<b>Gained Perk: Ghost-slinger</b>)\n\n(<b>Gained Perk: Telekinesis</b>)");
 				player.createPerk(PerkLib.Ghostslinger, 0, 0, 0, 0);
+				player.createPerk(PerkLib.Telekinesis, 0, 0, 0, 0);
 				needNext = true;
 			}
 			else if (player.poltergeistScore() < 12 && player.findPerk(PerkLib.Ghostslinger) >= 0) {// && player.findPerk(PerkLib.LizanMarrow) < 0
-				outputText("\nYour supernatural knowledge fades along with the abilities that came with it as you become more corporeal.\n\n(<b>Lost Perk: Ghost-slinger</b>)");
+				outputText("\nYour supernatural knowledge fades along with the abilities that came with it as you become more corporeal.\n\n(<b>Lost Perk: Ghost-slinger</b>)\n\n(<b>Lost Perk: Telekinesis</b>)");
 				player.removePerk(PerkLib.Ghostslinger);
+				player.removePerk(PerkLib.Telekinesis);
 				needNext = true;
 			}
 			//Hydra Regeneration and Hydra acid breath perk

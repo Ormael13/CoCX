@@ -51,7 +51,7 @@ import coc.xlogic.ExecContext;
 					DarkSlimeCore: player.hasPerk(PerkLib.DarkSlimeCore),
 					showClothing: [Arms.GAZER, Arms.DISPLACER].indexOf(player.arms.type) == -1 && !player.isSitStancing(),
 					showArmClothing: [Arms.GAZER, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance) && !player.isStancing(),
-					showLegClothing: [LowerBody.GAZER, LowerBody.YETI, LowerBody.HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.DRIDER, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
+					showLegClothing: [LowerBody.GAZER, LowerBody.YETI, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.DRIDER, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
 					PlayerHasViewableOutfit: player.isWearingArmor(),
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),
@@ -102,6 +102,12 @@ import coc.xlogic.ExecContext;
 					PlayerHasABow: player.isBowTypeWeapon(),
 					PlayerHasABowHoly:player.weaponRange == game.weaponsrange.ARTEMIS,
 					PlayerHasABowUnholy:player.weaponRange == game.weaponsrange.WILDHUN,
+
+					PlayerHasAThrownWeapon: player.isThrownTypeWeapon(),
+					PlayerHasAJavelin: player.weaponRange == game.weaponsrange.TRJAVEL || player.weaponRange == game.weaponsrange.GTHRSPE || player.weaponRange == game.weaponsrange.KSLHARP || player.weaponRange == game.weaponsrange.LEVHARP,
+					PlayerHasAJavelinHoly:player.weaponRange == game.weaponsrange.KSLHARP,
+					PlayerHasAJavelinUnholy:player.weaponRange == game.weaponsrange.LEVHARP,
+					PlayerHasAThrownAxe:player.weaponRange == game.weaponsrange.GTHRAXE,
 
 					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],
 					FireBuff: player.hasStatusEffect(StatusEffects.FlameBlade),

@@ -384,6 +384,12 @@ public class PerkLib
 		public static const BalanceBreaker:PerkType = mk("Balance breaker", "Balance breaker",
 				"Your brutal strikes while wielding maces or hammers may leave your opponents disoriented. (Attacks with maces/hammers can powerstun and ignore stun immunity but with halved stun chance)",
 				"You've chosen the 'Balance breaker' perk. Your brutal strikes while wielding maces or hammers may leave your opponents disoriented. (Attacks with maces/hammers can powerstun and ignore stun immunity but with halved stun chance)");
+		public static const OrthodoxDuelist:PerkType = mk("Orthodox duelist", "Orthodox duelist",
+				"Wielding a dueling sword with no off hand, increase critical damage by 20% and the chance to parry blows by 10% based on speed.",
+				"You've chosen the 'Orthodox duelist' perk. Wielding a dueling sword with no off hand, increase critical damage by 20% and the chance to parry blows by 10% based on speed.");
+		public static const KnightlySword:PerkType = mk("Knightly sword", "Knightly sword",
+				"Regular swords increase damage reduction by 10% and parry chance by 15%.",
+				"You've chosen the 'Knightly sword' perk. Regular swords increase damage reduction by 10% and parry chance by 15%.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -444,12 +450,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -2973,6 +2973,8 @@ public class PerkLib
 		public static const Teacher:PerkType = mk("Teacher", "Teacher",
 				"Instead of being taught, now you teach others. Your skill allows you to increase max mana by 10%.",
 				"You've chosen the 'Teacher' perk, gaining +10% max Mana.");
+		public static const Telekinesis:PerkType = mk("Telekinesis", "Telekinesis",
+				"You have the power to wield and throw objects with your mind alone. Gain a bonus to damage based on inteligence when using thrown weapons and aquire additionnal attacks based on character level.");
 		public static const TemporalGolemsRestructuration:PerkType = mk("Temporal Golems Restructuration", "Temporal Golems Restructuration",
 				"Allow to use option of send all temporary golems to attack in one turn. Adding option to make 5 temporary golems at once and shorten a bit time to make 1 temporary golem.",
 				"You've chosen the 'Temporal Golems Restructuration' perk, adding option to make faster and more temporary golems at once and have option to send them all at once to attack.");
@@ -3853,6 +3855,12 @@ public class PerkLib
             //Tier 2 Strength Perks
             AdrenalineRush.requireLevel(12)
                     .requirePerk(FuriousStrikes);
+            BalanceBreaker.requireLevel(12)
+                    .requireStr(100)
+                    .requirePerk(JobWarrior);
+            OrthodoxDuelist.requireLevel(12)
+                    .requireStr(100)
+                    .requirePerk(JobWarrior);
             IronFistsIV.requireNGPlus(3)
                     .requireLevel(12)
                     .requireStr(105)
@@ -7184,4 +7192,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}
