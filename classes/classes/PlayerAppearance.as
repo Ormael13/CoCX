@@ -733,8 +733,8 @@ public class PlayerAppearance extends BaseContent {
 	}
 	public function describeLowerBody():void {
 		//Defines Gargoyle's material, 1 or 2 if successful
-		const gargoyleFlag = flags[kFLAGS.GARGOYLE_BODY_MATERIAL] && flags[kFLAGS.GARGOYLE_BODY_MATERIAL] > 0 ? flags[kFLAGS.GARGOYLE_BODY_MATERIAL] - 1 : 0;
-		var gargoyleMaterials = ["marble","alabaster"];
+		const gargoyleFlag: int = flags[kFLAGS.GARGOYLE_BODY_MATERIAL] && flags[kFLAGS.GARGOYLE_BODY_MATERIAL] > 0 ? flags[kFLAGS.GARGOYLE_BODY_MATERIAL] - 1 : 0;
+		var gargoyleMaterials: Array = ["marble","alabaster"];
 
 		const lowerBodyOpts:Object = {
 			id: player.lowerBody,
