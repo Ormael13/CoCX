@@ -544,12 +544,12 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				player.createVagina();
                 player.clitLength = .25;
 				menu();
-				//addButton(0, "Next", celessUnicornIntro1, 3, true);
-				addButton(0,"Next",celessGuardOkayFemale,true);
+				addButton(0, "Next", celessUnicornIntro1, 3, true);
+				//doNext(celessGuardOkayFemale);
 				break;
 			case 3:
 				//scene("strings/forest-unicorn/okay-female", { $wasMale: wasMale, $isTaur: player.isTaur() } );
-				celessGuardOkayFemale();
+				celessGuardOkayFemale(wasMale);
 				if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 				player.createPerk(PerkLib.UnicornBlessing, 0, 0, 0, 0);
 				player.cor = 0;
@@ -598,12 +598,12 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				}
 				player.createVagina();
 				menu();
-				//addButton(0, "Next", celessUnicornIntro2, 3, true);
-				addButton(0,"Next",celessGuardOkayFemale,true);
+				addButton(0, "Next", celessUnicornIntro2, 3, true);
+				//doNext(celessGuardOkayFemale);
 				break;
 			case 3:
 				//scene("strings/forest-unicorn/okay-female", { $wasMale: wasMale, $isTaur: player.isTaur() } );
-				celessGuardOkayFemale();
+				celessGuardOkayFemale(wasMale);
 				if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 				player.createPerk(PerkLib.UnicornBlessing, 0, 0, 0, 0);
 				player.cor = 0;
@@ -655,13 +655,14 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				"<i>\"Ahhhn I can’t hold myself! Take it all!\"</i>\n\n"+
 				"As she cums into your ass you feel "+
 				(player.isMale()?"what’s left of your cock and balls continue shrinking inside of you until all that’s left is a slit.":"yourself becoming increasingly feminine up to the point a slit appear where there used to be nothing up your crotch")+
-				"While you were concerned about your" + (player.isMale()?"cock":"new feminine assets")+ "you didn’t notice your chest had changed too, now you're sporting a pair of [breasts]!\n"+
+				"While you were concerned about your" + (player.isMale()?" cock":"new feminine assets")+ " you didn’t notice your chest had changed too, now you're sporting a pair of [breasts]!\n"+
 				"Wait... what the hell!? Did she just change you into a girl?! This wasn’t part of the agreement!\n\n"+
 				"<i>\"We ain’t done yet… here comes part two!\"</i>\n\n"+
 				"You see her looming shadow above your crouched female form, her horse length already hard again and casting a shadow across your face. Well, shit.");
 	}
 
 	private function celessGuardOkayFemale(wasMale:Boolean = false):void{
+		clearOutput();
 		if (player.isTaur() && wasMale){
 			outputText("Well now that she mention it you must admit you indeed have been eyeing her fat horsemeat for a fair while now. "+
 			"Being a centaur makes it difficult for you to find relief especially since you decided not to relinquish your virginity. "+
