@@ -746,12 +746,14 @@ public class PlayerAppearance extends BaseContent {
 			gargoyleMaterial: gargoyleMaterials[gargoyleFlag]
 		};
 
-		//LOWERBODY DEFAULT
-		outputText(LowerBody.getAppearanceDescription(lowerBodyOpts));
+		//LOWERBODY DESCRIPTION SECTION 1
+		outputText(LowerBody.getAppearanceDescription1(lowerBodyOpts));
 		if (player.isBiped()) {
-			outputText(LowerBody.getAppearanceDescriptionBiped(lowerBodyOpts));
+			outputText(LowerBody.getAppearanceDescription1Biped(lowerBodyOpts));
 		} else if (player.isTaur()) {
-			outputText(LowerBody.getAppearanceDescriptionTaur(lowerBodyOpts));
+			outputText(LowerBody.getAppearanceDescription1Taur(lowerBodyOpts));
+		} else if (player.isDrider()) {
+			outputText(LowerBody.getAppearanceDescription1Drider(lowerBodyOpts));
 		}
 
 		//Hip info only displays if you aren't a centaur.
@@ -892,15 +894,18 @@ public class PlayerAppearance extends BaseContent {
 					outputText(" is marvelously large, but completely stacked with muscle.");
 			}
 		}
+
 		//TAILS
 		describeTail();
-		//</mod>
-		//LOWERBODY SPECIAL
-		outputText(LowerBody.getAppearanceDescriptionSpecial(lowerBodyOpts));
+
+		//LOWERBODY DESCRIPTION SECTION 2
+		outputText(LowerBody.getAppearanceDescription2(lowerBodyOpts));
 		if (player.isBiped()) {
-			outputText(LowerBody.getAppearanceDescriptionSpecialBiped(lowerBodyOpts));
+			outputText(LowerBody.getAppearanceDescription2Biped(lowerBodyOpts));
 		} else if (player.isTaur()) {
-			outputText(LowerBody.getAppearanceDescriptionSpecialTaur(lowerBodyOpts));
+			outputText(LowerBody.getAppearanceDescription2Taur(lowerBodyOpts));
+		} else if (player.isDrider()) {
+			outputText(LowerBody.getAppearanceDescription2Drider(lowerBodyOpts));
 		}
 
 		// Special cases
