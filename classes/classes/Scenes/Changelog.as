@@ -133,7 +133,8 @@ package classes.Scenes
 			outputText("-Blood Swipe/Bloode Swipe (SF)/Blood Swipe (SF) used by Blood Puppies have now added 20% chance to triger 2 turn long bleed for 5% of enemy max HP.\n");
 			outputText("-Cooldowns for elemental spells are no longer shared and each spell got it own seperatly tracked cooldown. Whitefire, Pyre Burst, Lightning Bolt, Chain Lighting, Ice Spike, Arctic Gale, Darkness Shard and Dusk Wave spells are classified now as tier 1 elementals spells. Meteor Shower and Polar Midnight are classified now as tier 3 elemental spells.\n");
 			outputText("-New update for Oni including sprited tetsubo, a gourd accessory and two high level kimono at Kaiba (by Liadri)\n");
-			outputText("-Changes to code by Jtexc.\n");
+			outputText("-Many changes to code by Jtexc.\n");
+			outputText("-Liadri tireless changes and corrections.\n");
 			outputText("-Delays when having alot perks or/and status effects decreased thanks to grmb-bit code changes.\n");
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
@@ -158,18 +159,17 @@ package classes.Scenes
 			outputText("-New tier 2 strength lvl-up perk: Balance breaker. Req. Job: Warrior perk, 100+ str. Effect: Your brutal strikes while wielding maces or hammers may leave your opponents disoriented. (Attacks with maces/hammers can powerstun and ignore stun immunity but with halved stun chance)\n");
 			outputText("-New tier 2 strength lvl-up perk: Orthodox duelist. Req. Job: Warrior perk, 100+ str. Effect: Wielding a dueling sword with no off hand, increase critical damage by 20% and the chance to parry blows by 10% based on speed.\n");
 			//outputText("-New tier 2 strength lvl-up perk: Knightly sword. Req. Job: Warrior perk, 100+ str. Effect: Regular swords increase damage reduction by 10% and parry chance by 15%.\n");
-			outputText("-Liadri tireless changes and corrections.\n");
-			outputText("-Zetta refactoring hair desc code.\n");
+			outputText("-Zetta refactoring hair desc, lower body code.\n");
+			outputText("-Many passive sources of gains for wrath in/out of combat been removed due to having other sources (using p.specials or base melee/range attacks mainly) that ended giving way too many wrath per turn.\n");
+			outputText("-Power Attack and Power Shoot have new mechanic: they now will use ALL wrath PC have and deal dmg based how much % of max wrath (max over wrath is not included) was used with increase to dmg of PA/PS by 1:2 ratio. At 100% wrath it mean 200% dmg boost. Having Job: Warrior or Job: Beast Warrior will improve ratio to 1:5 and Prestige Job: Berserker would futher increse ration to 1:10.\n");
+			outputText("-Undefeated King's Signet and Prithviraj urumi would have now modified effects on Power Attack. Both items would only give +50% increase to final Power Attack dmg multiplier instead of previously adding 100%.\n");
+			outputText("-Great Dive special when PC have Death Plunge perk AND Charge special would also add modifier in similar way as power attack using current % of max wrath.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed bugs: Blood Demon toggle to use HP instead of mana resetting after each combat, naga-like lower ghost race body type not causing lower underwear to drop down like on naga PC\n");/*ostatni punkt changelogu
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
 			outputText("-\n");
