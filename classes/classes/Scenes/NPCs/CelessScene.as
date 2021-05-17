@@ -544,12 +544,12 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				player.createVagina();
                 player.clitLength = .25;
 				menu();
-				//addButton(0, "Next", celessUnicornIntro1, 3, true);
-				addButton(0,"Next",celessGuardOkayFemale,true);
+				addButton(0, "Next", celessUnicornIntro1, 3, true);
+				//doNext(celessGuardOkayFemale);
 				break;
 			case 3:
 				//scene("strings/forest-unicorn/okay-female", { $wasMale: wasMale, $isTaur: player.isTaur() } );
-				celessGuardOkayFemale();
+				celessGuardOkayFemale(wasMale);
 				if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 				player.createPerk(PerkLib.UnicornBlessing, 0, 0, 0, 0);
 				player.cor = 0;
@@ -598,12 +598,12 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				}
 				player.createVagina();
 				menu();
-				//addButton(0, "Next", celessUnicornIntro2, 3, true);
-				addButton(0,"Next",celessGuardOkayFemale,true);
+				addButton(0, "Next", celessUnicornIntro2, 3, true);
+				//doNext(celessGuardOkayFemale);
 				break;
 			case 3:
 				//scene("strings/forest-unicorn/okay-female", { $wasMale: wasMale, $isTaur: player.isTaur() } );
-				celessGuardOkayFemale();
+				celessGuardOkayFemale(wasMale);
 				if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 				player.createPerk(PerkLib.UnicornBlessing, 0, 0, 0, 0);
 				player.cor = 0;
@@ -655,13 +655,14 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				"<i>\"Ahhhn I can’t hold myself! Take it all!\"</i>\n\n"+
 				"As she cums into your ass you feel "+
 				(player.isMale()?"what’s left of your cock and balls continue shrinking inside of you until all that’s left is a slit.":"yourself becoming increasingly feminine up to the point a slit appear where there used to be nothing up your crotch")+
-				"While you were concerned about your" + (player.isMale()?"cock":"new feminine assets")+ "you didn’t notice your chest had changed too, now you're sporting a pair of [breasts]!\n"+
+				"While you were concerned about your" + (player.isMale()?" cock":"new feminine assets")+ " you didn’t notice your chest had changed too, now you're sporting a pair of [breasts]!\n"+
 				"Wait... what the hell!? Did she just change you into a girl?! This wasn’t part of the agreement!\n\n"+
 				"<i>\"We ain’t done yet… here comes part two!\"</i>\n\n"+
 				"You see her looming shadow above your crouched female form, her horse length already hard again and casting a shadow across your face. Well, shit.");
 	}
 
 	private function celessGuardOkayFemale(wasMale:Boolean = false):void{
+		clearOutput();
 		if (player.isTaur() && wasMale){
 			outputText("Well now that she mention it you must admit you indeed have been eyeing her fat horsemeat for a fair while now. "+
 			"Being a centaur makes it difficult for you to find relief especially since you decided not to relinquish your virginity. "+
@@ -719,6 +720,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	private function celessGuardNightmareShowProof():void{
+		clearOutput();
 		outputText("You pull the nightmare twin horns out of your bag for the unicorn maiden to see, she nods in approval.\n\n"+
 		"<i>\"What you did today perhaps will help to save what's left of this beautiful forest. Please allow me to perform this small service for you as a reward. I will restore that which you lost to the ravage of this fallen land.\"</i>\n\n"+
 		"Her horn begins to glow a warm soothing light and, as she touches your cheek with her right hand you feel something change in your body as you recover your " + (player.hasPerk(PerkLib.HistoryWhore)?"long":"")+" lost virginity. That said, what happens now that you are pure again?\n\n"+
@@ -734,6 +736,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		if (isCorrupt)spriteSelect(SpriteDb.s_celessBlack);
 		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
 		//scene("strings/forest-unicorn/armorScene");
+		clearOutput();
 		outputText("You stumble upon the forest grove where the shield used to be. "+
 		"The unicorn has long left but you spot a shine on the ground deeper in. "+
 		"It looks like a set of untarnished silvery armor, likely an ancient treasure she left."+
@@ -755,7 +758,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
 
 		//scene("strings/growUp", myLocals);
-
+		clearOutput();
 		outputText("As you wake up this morning, you check the space next to you where "+_name+" usually sleeps, and find it empty.\n\n" +
 				"You almost panic for a moment, before calming down and deciding to go look for her. When you finally find her by the stream, she’s holding her forehead, visibly in pain.\n\n");
 		if (isCorrupt) {
@@ -914,7 +917,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	private function incestCentaurToys():void{
-		outputText("You point at the centaur toys and she swiftly gallops to them with a clear idea of how to use them.\n"+
+		outputText("\n\nYou point at the centaur toys and she swiftly gallops to them with a clear idea of how to use them.\n"+
 		"Well that's one problem solved.");
 		doNext(camp.returnToCampUseOneHour);
 	}
