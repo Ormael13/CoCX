@@ -720,6 +720,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	private function celessGuardNightmareShowProof():void{
+		clearOutput();
 		outputText("You pull the nightmare twin horns out of your bag for the unicorn maiden to see, she nods in approval.\n\n"+
 		"<i>\"What you did today perhaps will help to save what's left of this beautiful forest. Please allow me to perform this small service for you as a reward. I will restore that which you lost to the ravage of this fallen land.\"</i>\n\n"+
 		"Her horn begins to glow a warm soothing light and, as she touches your cheek with her right hand you feel something change in your body as you recover your " + (player.hasPerk(PerkLib.HistoryWhore)?"long":"")+" lost virginity. That said, what happens now that you are pure again?\n\n"+
@@ -735,6 +736,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		if (isCorrupt)spriteSelect(SpriteDb.s_celessBlack);
 		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
 		//scene("strings/forest-unicorn/armorScene");
+		clearOutput();
 		outputText("You stumble upon the forest grove where the shield used to be. "+
 		"The unicorn has long left but you spot a shine on the ground deeper in. "+
 		"It looks like a set of untarnished silvery armor, likely an ancient treasure she left."+
@@ -756,7 +758,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
 
 		//scene("strings/growUp", myLocals);
-
+		clearOutput();
 		outputText("As you wake up this morning, you check the space next to you where "+_name+" usually sleeps, and find it empty.\n\n" +
 				"You almost panic for a moment, before calming down and deciding to go look for her. When you finally find her by the stream, she’s holding her forehead, visibly in pain.\n\n");
 		if (isCorrupt) {
@@ -915,7 +917,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	private function incestCentaurToys():void{
-		outputText("You point at the centaur toys and she swiftly gallops to them with a clear idea of how to use them.\n"+
+		outputText("\n\nYou point at the centaur toys and she swiftly gallops to them with a clear idea of how to use them.\n"+
 		"Well that's one problem solved.");
 		doNext(camp.returnToCampUseOneHour);
 	}
