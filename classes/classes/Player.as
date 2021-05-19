@@ -7222,6 +7222,8 @@ use namespace CoC;
 				elfCounter++;
 			if (eyes.type == Eyes.ELF)
 				elfCounter++;
+			if (faceType == Face.ELF)
+				elfCounter++;
 			if (tongue.type == Tongue.ELF)
 				elfCounter++;
 			if (arms.type == Arms.ELF)

@@ -123,6 +123,8 @@ public class Face extends SaveableBodyPart {
 	EnumValue.add(Types, USHI_ONI_ONNA, "USHI_ONI_ONNA", {name: "ushi-oni", bite: true});
 	public static const FAIRY:int            = 53;
 	EnumValue.add(Types, FAIRY, "FAIRY", {name: "fairy"});
+	public static const ELF:int            = 53;
+	EnumValue.add(Types, ELF, "ELF", {name: "elf"});
 	public static const CRAZY:int            = 54;
 	EnumValue.add(Types, CRAZY, "CRAZY", {name: "crazy"});
 	public static const SMUG:int             = 55;

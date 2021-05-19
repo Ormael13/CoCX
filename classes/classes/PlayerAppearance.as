@@ -2131,7 +2131,13 @@ public class PlayerAppearance extends BaseContent {
 				if (odd == 0){
 					outputText("  Your fairy nature allows you to always display a pure, cheerful, innocent smile that warms the hearts of those around you.");
 				} else {
-					outputText("  In addition, Your fairy nature allows you to always display a pure, cheerful, innocent smile that warms the hearts of those around you.");
+					outputText("  In addition, your fairy nature allows you to always display a pure, cheerful, innocent smile that warms the hearts of those around you.");
+				}
+			} else if(faceType == Face.ELF){
+				if (odd == 0){
+					outputText("  You have an enchanting smile and perfect pearlescent white teeths.");
+				} else {
+					outputText("  In addition, you have an enchanting smile and perfect pearlescent white teeths.");
 				}
 			}
 		}
