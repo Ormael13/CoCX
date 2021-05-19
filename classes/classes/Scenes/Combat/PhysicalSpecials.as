@@ -41,10 +41,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 	internal function buildMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		if (!player.isInGoblinMech() && !player.isInNonGoblinMech()) {
-			bd = buttons.add("PowerAttack", powerAttackMenu).hint("Do a single way more powerfull wrath-enhanced melee strike.");
+			bd = buttons.add("PowerAttack", powerAttack).hint("Do a single way more powerfull wrath-enhanced melee strike.");
 			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			if (player.hasPerk(PerkLib.PowerShot)) {
-				bd = buttons.add("Power Shoot", powerShootMenu).hint("Do a single way more powerfull wrath-enhanced range strike.");
+				bd = buttons.add("Power Shoot", powerShoot).hint("Do a single way more powerfull wrath-enhanced range strike.");
 				if (player.weaponRangePerk != "Bow" && player.weaponRangePerk != "Throwing") {
 					bd.disable("<b>You need to use bow or throwing weapon before you can use Power Shoot.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -637,36 +637,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		return BCW;
 	}
 	
-	public function powerAttackMenu():void {
-		menu();
-		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) {
-			addButton(0, "2x", powerAttack2x).disableIf(player.wrath < powerfistscoooooost(),"You are too calm to use this special. Req. " + powerfistscoooooost() + "+ wrath");
-			if (player.level >= 6) {
-				addButton(1, "3x", powerAttack3x).disableIf(player.wrath < (powerfistscoooooost() * 2),"You are too calm to use this special. Req. " + powerfistscoooooost() * 2 + "+ wrath");
-			} else addButtonDisabled(1, "???");
-			if (player.level >= 12) {
-				addButton(2, "4x", powerAttack4x).disableIf(player.wrath < (powerfistscoooooost() * 4),"You are too calm to use this special. Req. " + powerfistscoooooost() * 4 + "+ wrath");
-			} else addButtonDisabled(2, "???");
-			if (player.level >= 18) {
-				addButton(3, "5x", powerAttack5x).disableIf(player.wrath < (powerfistscoooooost() * 6),"You are too calm to use this special. Req. " + powerfistscoooooost() * 6 + "+ wrath");
-			} else addButtonDisabled(3, "???");
-			if (player.level >= 24) {
-				addButton(4, "6x", powerAttack6x).disableIf(player.wrath < (powerfistscoooooost() * 8),"You are too calm to use this special. Req. " + powerfistscoooooost() * 8 + "+ wrath");
-			} else addButtonDisabled(4, "???");
-			if (player.level >= 30) {
-				addButton(5, "7x", powerAttack7x).disableIf(player.wrath < (powerfistscoooooost() * 10),"You are too calm to use this special. Req. " + powerfistscoooooost() * 10 + "+ wrath");
-			} else addButtonDisabled(5, "???");
-			if (player.level >= 36) {
-				addButton(6, "8x", powerAttack8x).disableIf(player.wrath < (powerfistscoooooost() * 12),"You are too calm to use this special. Req. " + powerfistscoooooost() * 12 + "+ wrath");
-			} else addButtonDisabled(6, "???");
-		}
-		else addButton(0, "2x", powerAttack2x).disableIf(player.wrath < 400,"You are too calm to use this special. Req. 400+ wrath");
-		addButton(14, "Back", combat.ui.submenuPhySpecials);
-	}
-	public function powerAttack2x():void {
+	public function powerAttack():void {
 		clearOutput();
-		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) player.wrath -= powerfistscoooooost();
-		else player.wrath -= 200;
 		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
 		else if (player.isTaur()) {
 			outputText("You ");
@@ -676,405 +648,116 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
-		var PAMulti:Number = 2;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
-		damage += powerfistspoweeeeer();
-		damage *= PAMulti;
-		var crit:Boolean = false;
-		var critChance:int = 5;
-		critChance += combat.combatPhysicalCritical();
-		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
-		if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive") {
-			if (player.str >= 100) critChance += 10;
-			if (player.str >= 140) critChance += 10;
+		var PAMulti:Number = player.wrath100 * 0.02;
+		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) PAMulti *= 2.5;
+		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) PAMulti *= 2;
+		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
+			if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
+				PAMulti += 0.5;
+				if (player.spe >= 225) PAMulti += 0.5;
+				if (player.spe >= 300) PAMulti += 0.5;
+			}
+			if (player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
+				PAMulti += 0.5;
+			}
 		}
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
-			else damage *= 1.75;
-		}
-		checkForElementalEnchantmentAndDoDamage(damage);
-		outputText(" damage. ");
-		if (crit) {
-			outputText("<b>Critical! </b>");
-			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
-		}
-		if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
-			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
-		}
-		outputText("\n\n");
-		combat.heroBaneProc(damage);
-		combat.EruptingRiposte();
-		enemyAI();
-	}
-	public function powerAttack3x():void {
-		clearOutput();
-		player.wrath -= powerfistscoooooost() * 2;
-		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
-		else if (player.isTaur()) {
-			outputText("You ");
-			if (player.lowerBody == LowerBody.HOOFED) outputText("gallop");
-			else outputText("run");
-			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
-		}
-		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
-		var damage:Number = 0;
-		var PAMulti:Number = 3;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
-		damage += powerfistspoweeeeer();
-		damage *= PAMulti;
-		var crit:Boolean = false;
-		var critChance:int = 5;
-		critChance += combat.combatPhysicalCritical();
-		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
-		if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive") {
-			if (player.str >= 100) critChance += 10;
-			if (player.str >= 140) critChance += 10;
-		}
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
-			else damage *= 1.75;
-		}
-		checkForElementalEnchantmentAndDoDamage(damage);
-		outputText(" damage. ");
-		if (crit) {
-			outputText("<b>Critical! </b>");
-			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
-		}
-		if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
-			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
-		}
-		outputText("\n\n");
-		combat.heroBaneProc(damage);
-		combat.EruptingRiposte();
-		enemyAI();
-	}
-	public function powerAttack4x():void {
-		clearOutput();
-		player.wrath -= powerfistscoooooost() * 4;
-		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
-		else if (player.isTaur()) {
-			outputText("You ");
-			if (player.lowerBody == LowerBody.HOOFED) outputText("gallop");
-			else outputText("run");
-			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
-		}
-		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
-		var damage:Number = 0;
-		var PAMulti:Number = 4;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
-		damage += powerfistspoweeeeer();
-		damage *= PAMulti;
-		var crit:Boolean = false;
-		var critChance:int = 5;
-		critChance += combat.combatPhysicalCritical();
-		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
-		if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive") {
-			if (player.str >= 100) critChance += 10;
-			if (player.str >= 140) critChance += 10;
-		}
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
-			else damage *= 1.75;
-		}
-		checkForElementalEnchantmentAndDoDamage(damage);
-		outputText(" damage. ");
-		if (crit) {
-			outputText("<b>Critical! </b>");
-			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
-		}
-		if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
-			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
-		}
-		outputText("\n\n");
-		combat.heroBaneProc(damage);
-		combat.EruptingRiposte();
-		enemyAI();
-	}
-	public function powerAttack5x():void {
-		clearOutput();
-		player.wrath -= powerfistscoooooost() * 6;
-		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
-		else if (player.isTaur()) {
-			outputText("You ");
-			if (player.lowerBody == LowerBody.HOOFED) outputText("gallop");
-			else outputText("run");
-			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
-		}
-		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
-		var damage:Number = 0;
-		var PAMulti:Number = 5;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
-		damage += powerfistspoweeeeer();
-		damage *= PAMulti;
-		var crit:Boolean = false;
-		var critChance:int = 5;
-		critChance += combat.combatPhysicalCritical();
-		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
-		if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive") {
-			if (player.str >= 100) critChance += 10;
-			if (player.str >= 140) critChance += 10;
-		}
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
-			else damage *= 1.75;
-		}
-		checkForElementalEnchantmentAndDoDamage(damage);
-		outputText(" damage. ");
-		if (crit) {
-			outputText("<b>Critical! </b>");
-			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
-		}
-		if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
-			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
-		}
-		outputText("\n\n");
-		combat.heroBaneProc(damage);
-		combat.EruptingRiposte();
-		enemyAI();
-	}
-	public function powerAttack6x():void {
-		clearOutput();
-		player.wrath -= powerfistscoooooost() * 8;
-		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
-		else if (player.isTaur()) {
-			outputText("You ");
-			if (player.lowerBody == LowerBody.HOOFED) outputText("gallop");
-			else outputText("run");
-			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
-		}
-		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
-		var damage:Number = 0;
-		var PAMulti:Number = 6;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
-		damage += powerfistspoweeeeer();
-		damage *= PAMulti;
-		var crit:Boolean = false;
-		var critChance:int = 5;
-		critChance += combat.combatPhysicalCritical();
-		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
-		if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive") {
-			if (player.str >= 100) critChance += 10;
-			if (player.str >= 140) critChance += 10;
-		}
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
-			else damage *= 1.75;
-		}
-		checkForElementalEnchantmentAndDoDamage(damage);
-		outputText(" damage. ");
-		if (crit) {
-			outputText("<b>Critical! </b>");
-			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
-		}
-		if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
-			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
-		}
-		outputText("\n\n");
-		combat.heroBaneProc(damage);
-		combat.EruptingRiposte();
-		enemyAI();
-	}
-	public function powerAttack7x():void {
-		clearOutput();
-		player.wrath -= powerfistscoooooost() * 10;
-		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
-		else if (player.isTaur()) {
-			outputText("You ");
-			if (player.lowerBody == LowerBody.HOOFED) outputText("gallop");
-			else outputText("run");
-			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
-		}
-		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
-		var damage:Number = 0;
-		var PAMulti:Number = 7;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
-		damage += powerfistspoweeeeer();
-		damage *= PAMulti;
-		var crit:Boolean = false;
-		var critChance:int = 5;
-		critChance += combat.combatPhysicalCritical();
-		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
-		if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive") {
-			if (player.str >= 100) critChance += 10;
-			if (player.str >= 140) critChance += 10;
-		}
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
-			else damage *= 1.75;
-		}
-		checkForElementalEnchantmentAndDoDamage(damage);
-		outputText(" damage. ");
-		if (crit) {
-			outputText("<b>Critical! </b>");
-			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
-		}
-		if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
-			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
-		}
-		outputText("\n\n");
-		combat.heroBaneProc(damage);
-		combat.EruptingRiposte();
-		enemyAI();
-	}
-	public function powerAttack8x():void {
-		clearOutput();
-		player.wrath -= powerfistscoooooost() * 12;
-		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
-		else if (player.isTaur()) {
-			outputText("You ");
-			if (player.lowerBody == LowerBody.HOOFED) outputText("gallop");
-			else outputText("run");
-			outputText(" a few meter back and make a U-Turn for a powerful charge, utilizing the full strength and momentum provided by your [race] body. ");
-		}
-		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
-		var damage:Number = 0;
-		var PAMulti:Number = 8;
-		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) PAMulti += powerfistsmultipoweeeeer();
-		damage += powerfistspoweeeeer();
-		damage *= PAMulti;
-		var crit:Boolean = false;
-		var critChance:int = 5;
-		critChance += combat.combatPhysicalCritical();
-		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
-		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
-		if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive") {
-			if (player.str >= 100) critChance += 10;
-			if (player.str >= 140) critChance += 10;
-		}
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
-			else damage *= 1.75;
-		}
-		damage = Math.round(damage);
-		checkForElementalEnchantmentAndDoDamage(damage);
-		outputText(" damage. ");
-		if (crit) {
-			outputText("<b>Critical! </b>");
-			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
-		}
-		if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
-			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
-		}
-		outputText("\n\n");
-		combat.heroBaneProc(damage);
-		combat.EruptingRiposte();
-		enemyAI();
-	}
-	public function powerfistscoooooost():Number {
-		var powerfistscostvalue:Number = 100;
-		return powerfistscostvalue;
-	}
-	public function powerfistspoweeeeer():Number {
-		var powerfistspowervalue:Number = 0;
-		powerfistspowervalue += player.str;
-		powerfistspowervalue += scalingBonusStrength() * 0.25;
+		damage += player.str;
+		damage += scalingBonusStrength() * 0.25;
 		if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
-			powerfistspowervalue += player.spe;
-			powerfistspowervalue += scalingBonusSpeed() * 0.20;
+			damage += player.spe;
+			damage += scalingBonusSpeed() * 0.20;
 		}
 		if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small")) {
-			powerfistspowervalue += (player.spe / 2);
-			powerfistspowervalue += scalingBonusSpeed() * 0.10;
+			damage += (player.spe / 2);
+			damage += scalingBonusSpeed() * 0.10;
 		}
-		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) powerfistspowervalue *= 1.2;
-		if (powerfistspowervalue < 10) powerfistspowervalue = 10;
-		if (player.weaponAttack < 51) powerfistspowervalue *= (1 + (player.weaponAttack * 0.03));
-		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) powerfistspowervalue *= (2.5 + ((player.weaponAttack - 50) * 0.025));
-		else if (player.weaponAttack >= 101 && player.weaponAttack < 151) powerfistspowervalue *= (3.75 + ((player.weaponAttack - 100) * 0.02));
-		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) powerfistspowervalue *= (4.75 + ((player.weaponAttack - 150) * 0.015));
-		else powerfistspowervalue *= (5.5 + ((player.weaponAttack - 200) * 0.01));
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (damage < 10) damage = 10;
+		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
+		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
+		else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
+		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
+		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) powerfistspowervalue *= 2.2;
-			else powerfistspowervalue *= 2;
+			if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			else damage *= 2;
 		}
-		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) powerfistspowervalue *= combat.historyFighterBonus();
-		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) powerfistspowervalue *= 1 + player.perkv1(PerkLib.DemonSlayer);
-		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) powerfistspowervalue *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.hasPerk(PerkLib.JobWarrior)) powerfistspowervalue *= 1.05;
-		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) powerfistspowervalue *= 2;
-		if (player.hasPerk(PerkLib.ZenjisInfluence3)) powerfistspowervalue *= 1.5;
-		if (player.armor == armors.SPKIMO) powerfistspowervalue *= 1.2;
-		if (player.necklace == necklaces.OBNECK) powerfistspowervalue *= 1.2;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) powerfistspowervalue *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit)) powerfistspowervalue *= 2;
-		return powerfistspowervalue;
-	}
-	public function powerfistsmultipoweeeeer():Number {
-		var powerfistsmultipowervalue:Number = 0;
-		if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
-			powerfistsmultipowervalue += 1;
-			if (player.spe >= 225) powerfistsmultipowervalue += 1;
-			if (player.spe >= 300) powerfistsmultipowervalue += 1;
+		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
+		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
+		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
+		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		damage *= (1 + PAMulti);
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combat.combatPhysicalCritical();
+		if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
+		if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
+		if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive") {
+			if (player.str >= 100) critChance += 10;
+			if (player.str >= 140) critChance += 10;
 		}
-		if (player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
-			powerfistsmultipowervalue += 1;
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
+			else damage *= 1.75;
 		}
-		return powerfistsmultipowervalue;
+		checkForElementalEnchantmentAndDoDamage(damage);
+		outputText(" damage. ");
+		if (crit) {
+			outputText("<b>Critical! </b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
+		}
+		outputText("\n\n");
+		player.wrath = 0;
+		combat.heroBaneProc(damage);
+		combat.EruptingRiposte();
+		enemyAI();
 	}
 	
-	public function powerShootMenu():void {
-		menu();
-		/*if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) {
-			addButton(0, "2x", powerAttack2x).disableIf(player.wrath < powerfistscoooooost(),"You are too calm to use this special. Req. " + powerfistscoooooost() + "+ wrath");
-			if (player.level >= 6) {
-				addButton(1, "3x", powerAttack3x).disableIf(player.wrath < (powerfistscoooooost() * 2),"You are too calm to use this special. Req. " + powerfistscoooooost() * 2 + "+ wrath");
-			} else addButtonDisabled(1, "???");
-			if (player.level >= 12) {
-				addButton(2, "4x", powerAttack4x).disableIf(player.wrath < (powerfistscoooooost() * 4),"You are too calm to use this special. Req. " + powerfistscoooooost() * 4 + "+ wrath");
-			} else addButtonDisabled(2, "???");
-			if (player.level >= 18) {
-				addButton(3, "5x", powerAttack5x).disableIf(player.wrath < (powerfistscoooooost() * 6),"You are too calm to use this special. Req. " + powerfistscoooooost() * 6 + "+ wrath");
-			} else addButtonDisabled(3, "???");
-			if (player.level >= 24) {
-				addButton(4, "6x", powerAttack6x).disableIf(player.wrath < (powerfistscoooooost() * 8),"You are too calm to use this special. Req. " + powerfistscoooooost() * 8 + "+ wrath");
-			} else addButtonDisabled(4, "???");
-			if (player.level >= 30) {
-				addButton(5, "7x", powerAttack7x).disableIf(player.wrath < (powerfistscoooooost() * 10),"You are too calm to use this special. Req. " + powerfistscoooooost() * 10 + "+ wrath");
-			} else addButtonDisabled(5, "???");
-			if (player.level >= 36) {
-				addButton(6, "8x", powerAttack8x).disableIf(player.wrath < (powerfistscoooooost() * 12),"You are too calm to use this special. Req. " + powerfistscoooooost() * 12 + "+ wrath");
-			} else addButtonDisabled(6, "???");
-		}
-		else */addButton(0, "2x", powerShoot2x).disableIf(player.wrath < 100,"You are too calm to use this special. Req. 100+ wrath");//orginaly 200+
-		addButton(14, "Back", combat.ui.submenuPhySpecials);
-	}
-	public function powerShoot2x():void {
+	public function powerShoot():void {
 		clearOutput();
-		//if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) player.wrath -= powerfistscoooooost();
-		//else player.wrath -= 200;
-		player.wrath -= 100;
 		outputText("With one smooth motion you draw, nock, and fire your deadly arrow at one of your opponent"+(monster.plural ? "s":"")+" ");
 		var damage:Number = 0;
-		var PSMulti:Number = 2;
-		damage += powershotpoweeeeer();
-		damage *= PSMulti;
+		var PSMulti:Number = player.wrath100 * 0.02;
+		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) PSMulti *= 2.5;
+		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) PSMulti *= 2;
+		damage += player.spe;
+		damage += scalingBonusSpeed() * 0.2;
+		damage += scalingBonusStrength() * 0.4;
+		if (damage < 10) damage = 10;
+		if (player.findPerk(PerkLib.DeadlyAim) < 0) damage *= (monster.damageRangePercent() / 100);
+		if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
+		else if (player.weaponRangeAttack >= 51 && player.weaponRangeAttack < 101) damage *= (2.5 + ((player.weaponRangeAttack - 50) * 0.025));
+		else if (player.weaponRangeAttack >= 101 && player.weaponRangeAttack < 151) damage *= (3.75 + ((player.weaponRangeAttack - 100) * 0.02));
+		else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
+		else damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
+		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= combat.historyScoutBonus();
+		if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
+		if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
+			if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
+			else {
+				if (player.statusEffectv1(StatusEffects.Kindra) > 0) {
+					if (player.statusEffectv1(StatusEffects.Kindra) < 150) damage *= 2 + (0.01 * player.statusEffectv1(StatusEffects.Kindra));
+					else damage *= 3.5;
+				}
+				else damage *= 2;
+			}
+		}
+		if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) damage *= 1.2;
+		if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
+		damage *= (1 + PSMulti);
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
@@ -1097,39 +780,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n\n");
+		player.wrath = 0;
 		combat.heroBaneProc(damage);
 		flags[kFLAGS.ARROWS_SHOT]++;
 		bowPerkUnlock();
 		enemyAI();
-	}
-	public function powershotpoweeeeer():Number {
-		var powershotpowervalue:Number = 0;
-		powershotpowervalue += player.spe;
-		powershotpowervalue += scalingBonusSpeed() * 0.2;
-		powershotpowervalue += scalingBonusStrength() * 0.4;
-		if (powershotpowervalue < 10) powershotpowervalue = 10;
-		if (player.findPerk(PerkLib.DeadlyAim) < 0) powershotpowervalue *= (monster.damageRangePercent() / 100);
-		if (player.weaponRangeAttack < 51) powershotpowervalue *= (1 + (player.weaponRangeAttack * 0.03));
-		else if (player.weaponRangeAttack >= 51 && player.weaponRangeAttack < 101) powershotpowervalue *= (2.5 + ((player.weaponRangeAttack - 50) * 0.025));
-		else if (player.weaponRangeAttack >= 101 && player.weaponRangeAttack < 151) powershotpowervalue *= (3.75 + ((player.weaponRangeAttack - 100) * 0.02));
-		else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) powershotpowervalue *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
-		else powershotpowervalue *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
-		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) powershotpowervalue *= combat.historyScoutBonus();
-		if (player.hasPerk(PerkLib.JobRanger)) powershotpowervalue *= 1.05;
-		if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) powershotpowervalue *= 1 + (player.jewelryEffectMagnitude / 100);
-		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
-			if (player.statusEffectv1(StatusEffects.Kelt) < 100) powershotpowervalue *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
-			else {
-				if (player.statusEffectv1(StatusEffects.Kindra) > 0) {
-					if (player.statusEffectv1(StatusEffects.Kindra) < 150) powershotpowervalue *= 2 + (0.01 * player.statusEffectv1(StatusEffects.Kindra));
-					else powershotpowervalue *= 3.5;
-				}
-				else powershotpowervalue *= 2;
-			}
-		}
-		if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) powershotpowervalue *= 1.2;
-		if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) powershotpowervalue *= 1.1;
-		return powershotpowervalue;
 	}
 	
 	public function pcCleave():void {
@@ -1517,13 +1172,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else player.createStatusEffect(StatusEffects.CooldownCharging,6,0,0,0);
 		outputText("You take some distance before making a U-turn and charge at your opponent with all your might, impaling them on your [weapon]. ");
 		var damage:Number = 0;
-		var SAMulti:Number = 1;
-		if (player.level >= 6) SAMulti += 1;
-		if (player.level >= 12) SAMulti += 1;
-		if (player.level >= 18) SAMulti += 1;
-		if (player.level >= 24) SAMulti += 1;
-		if (player.level >= 30) SAMulti += 1;
-		if (player.level >= 36) SAMulti += 1;
+		var PAM2:Number = player.wrath100 * 0.02;
+		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) PAM2 *= 2.5;
+		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) PAM2 *= 2;
 		damage += player.str;
 		damage += scalingBonusStrength() * 0.25;
 		if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
@@ -1565,7 +1216,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 2;
 		}
 		if (player.hasPerk(PerkLib.DevastatingCharge)) damage *= 1.5;
-		damage *= SAMulti;
+		damage *= (1 + PAM2);
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		var critMulti:Number = 1.75;
