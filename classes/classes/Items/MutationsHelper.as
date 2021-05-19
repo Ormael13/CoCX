@@ -604,6 +604,7 @@ import classes.BodyParts.Wings;
 	}
 	private const METAMORPH_LOWER_BODIES:Object = createMapFromPairs([
 		[LowerBody.AVIAN, null],
+		[LowerBody.ATLACH_NACHA, null],
 		[LowerBody.BEAR, null],
 		[LowerBody.BEE, StatusEffects.UnlockedBeeLegs],
 		[LowerBody.BUNNY, null],

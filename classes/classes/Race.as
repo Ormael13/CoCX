@@ -94,6 +94,7 @@ public class Race {
     public static const RATATOSKR:Race = new Race("Ratatoskr",88, "ratatoskrScore");
     public static const WENDIGO:Race = new Race("Wendigo",89, "wendigoScore");
     public static const TROLL:Race = new Race("Troll",90, "trollScore");
+    public static const ATLAC_NACHA:Race = new Race("Atlach Nacha", 91, "atlachNachaScore");
     
     public var name:String;
     public var id:int;

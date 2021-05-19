@@ -6,13 +6,16 @@ package classes.Transformations {
  * Application: next TF after last present.
  * IsPresent: if last tier is present.
  * IsPossible: if next tier above first missing is possible.
+ *
+ * Use OrderedTransformation when you group DIFFERENT PART tfs and want to establish an order.
+ * Use GradualTransformation when you have tfs of SAME PART and want them to happen one-by-one.
  */
-public class MultiTierTransformation extends Transformation {
+public class GradualTransformation extends Transformation {
 	
 	public var tfs: /*Transformation*/Array;
 	public var tierCount: int;
 	
-	public function MultiTierTransformation(
+	public function GradualTransformation(
 			name:String,
 			tfs: /*Transformation*/Array
 	) {

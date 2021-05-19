@@ -259,7 +259,7 @@ public class TransformationLib extends MutationsHelper {
 				setEarType(Ears.ELFIN);
 			},
 			// is present
-			function(): Boolean {
+			function ():Boolean {
 				return player.ears.type === Ears.ELFIN
 			}
 	)
@@ -271,6 +271,23 @@ public class TransformationLib extends MutationsHelper {
 	 *    ██         ██    ██           ██
 	 *    ███████    ██    ███████ ███████
 	 */
+	
+	public function makeEyeColorTf(colors:/*String*/Array):Transformation {
+		return new SimpleTransformation("Eye color: " + colors.join("|"),
+				// apply effect
+				function (doOutput:Boolean):void {
+					var color:String = randomChoice(colors);
+					player.eyes.colour = color;
+					if (doOutput) {
+						outputText("You feel something fundamental change in your sight when you go check yourself in a puddle you notice that not only do they look human but your irises are now <b>[eyecolor].</b>");
+					}
+				},
+				// is present
+				function ():Boolean {
+					return InCollection(player.eyes.colour, colors);
+				}
+		)
+	}
 	
 	public const EyesSpider:Transformation              = new SimpleTransformation("Spider eyes",
 			// apply effect
@@ -309,7 +326,7 @@ public class TransformationLib extends MutationsHelper {
 	 *    ███████ ███████  ██████  ███████
 	 */
 	
-	public const LegsHuman:Transformation = new SimpleTransformation("Human legs",
+	public const LegsHuman:Transformation  = new SimpleTransformation("Human legs",
 			// apply effect
 			function (doOutput:Boolean):void {
 				if (doOutput) {
@@ -329,6 +346,21 @@ public class TransformationLib extends MutationsHelper {
 			// is present
 			function ():Boolean {
 				return player.lowerBody === LowerBody.HUMAN && player.legCount === 2;
+			}
+	);
+	public const LegsSpider:Transformation = new SimpleTransformation("Chitinous spider legs",
+			// apply effect
+			function (doOutput:Boolean):void {
+				if (doOutput) {
+					outputText("Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs.  From the waist down, your strength completely deserts you, leaving you to fall hard on your [ass] in the dirt.  With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf.  It crests up your knee to envelop the joint in a many-faceted onyx coating.  Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton.  From a distance it would look almost like a black, thigh-high boot, but you know the truth.  <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>");
+				}
+				setLowerBody(LowerBody.CHITINOUS_SPIDER_LEGS);
+				player.legCount  = 2;
+				player.coatColor = "black";
+			},
+			// is present
+			function ():Boolean {
+				return player.lowerBody === LowerBody.CHITINOUS_SPIDER_LEGS && player.legCount === 2;
 			}
 	);
 	
@@ -555,7 +587,7 @@ public class TransformationLib extends MutationsHelper {
 	 *
 	 */
 	
-	public const TieredSpiderFace:MultiTierTransformation = new MultiTierTransformation("Spider face (gradual)", [
+	public const TieredSpiderFace:GradualTransformation = new GradualTransformation("Spider face (gradual)", [
 		FaceHuman,
 		FaceSpiderFangs
 	]);
@@ -585,11 +617,15 @@ public class TransformationLib extends MutationsHelper {
 		EarsElfin,
 		SkinChitin,
 		TieredSpiderFace,
-		EyesSpiderAndMutagenInt,
+		new OrderedTransformation("EyesRedThenSpider", [
+			makeEyeColorTf(["red"]),
+			EyesSpiderAndMutagenInt
+		]),
 		BreastRowsRemoveToOne,
 		NipplesPerBreastOne,
 		NipplesBlack,
 		ArmsSpider,
+		LegsSpider,
 		GillsNone,
 		RearAtlachNacha
 	];

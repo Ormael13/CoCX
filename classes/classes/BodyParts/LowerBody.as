@@ -155,6 +155,8 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, SQUIRREL, "SQUIRREL", {name: "squirrel"});
 	public static const WENDIGO:int               = 68;
 	EnumValue.add(Types, WENDIGO, "WENDIGO", {name: "wendigo"});
+	public static const ATLACH_NACHA:int          = 69;
+	EnumValue.add(Types, ATLACH_NACHA, "ATLACH_NACHA", {name: "atlach nacha"});
 
 	override public function set type(value:int):void {
 		super.type = value;
@@ -219,6 +221,7 @@ public class LowerBody extends SaveableBodyPart {
 				type     = CLOVEN_HOOFED;
 				break;
 			case DRIDER:
+			case ATLACH_NACHA:
 				legCount = 8;
 				break;
 			case PLANT_FLOWER:
@@ -240,7 +243,9 @@ public class LowerBody extends SaveableBodyPart {
 			return num2Text(legCount) + " legs";
 
 		switch (type) {
-			case DRIDER: return num2Text(legCount) + " spider legs";
+			case DRIDER:
+			case ATLACH_NACHA:
+				return num2Text(legCount) + " spider legs";
 			case PLANT_FLOWER: return num2Text(legCount) + " vine-like tentacle stamens";
 			case HUMAN: return "legs";
 			case HOOFED: return "legs";
@@ -427,7 +432,7 @@ public class LowerBody extends SaveableBodyPart {
 		}
 	}
 	public function isDrider():Boolean {
-		return (type == DRIDER || type == CANCER || type == USHI_ONI_ONNA);
+		return (type == DRIDER || type == CANCER || type == USHI_ONI_ONNA || type == ATLACH_NACHA);
 	}
 	public function isGoo():Boolean {
 		return type == GOO;
