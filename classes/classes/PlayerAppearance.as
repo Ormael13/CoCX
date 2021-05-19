@@ -56,8 +56,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\n<b>Your gravid-looking belly is absolutely stuffed full of goo. There's no way you can get pregnant like this, but at the same time, you look like some fat-bellied breeder.</b>\n");
 	}
 	//Pregnancy Shiiiiiitz
-	if((player.buttPregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL) || (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR) || player.isPregnant())
-	{
+	if((player.buttPregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL) || (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR) || player.isPregnant()) {
 		if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)
 		{
 			outputText("<b>");
@@ -199,8 +198,7 @@ public class PlayerAppearance extends BaseContent {
 	if(player.gills.type == Gills.ANEMONE)
 		outputText("A pair of feathery gills are growing out just below your neck, spreading out horizontally and draping down your chest. They allow you to stay in the water for quite a long time. ");
 	//Chesticles..I mean bewbz.
-	if(player.breastRows.length == 1)
-	{
+	if(player.breastRows.length == 1) {
 		outputText("You have " + num2Text(player.breastRows[temp].breasts) + " " + breastDescript(temp) + ", each supporting ");
 		outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " "); //Number of nipples.
 		outputText(Measurements.shortSuffix(int(player.nippleLength *10)/10)+" ");
@@ -246,8 +244,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\n");
 	}
 	//Crotchial stuff - mention snake
-	if(player.isNaga() && player.gender > 0)
-	{
+	if(player.isNaga() && player.gender > 0) {
 		outputText("\nYour sex");
 		if(player.gender == 3 || player.cockTotal() > 1)
 			outputText("es are ");
@@ -255,8 +252,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("concealed within a cavity in your tail when not in use, though when the need arises, you can part your concealing slit and reveal your true self.\n");
 	}
 	//Crotchial stuff - mention scylla
-	if(player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN)
-	{
+	if(player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
 		if(player.gender == 1)
 		{
 			outputText("\nYour sex is concealed between your front octopus tentacle legs dangling freely when not in use.\n");
@@ -274,8 +270,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("concealed between your front octopus tentacle legs dangling freely. Other set is concealed underneath your octopus tentacle legs when not in use, though when the need arises, you can rise some of the tentacles and reveal it.\n");
 		}
 	}
-	if(player.lowerBody == LowerBody.MELKIE)
-	{
+	if(player.lowerBody == LowerBody.MELKIE) {
 		outputText("\nYou have a outer set of vaginal lips at the junction between your human body and seal tail in which your internal sex and human legs are hidden when not in use\n");
 	}
 	//Cock stuff!
@@ -361,8 +356,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.Infested)) outputText("Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n");
 	}
 	//Of Balls and Sacks!
-	if(player.balls > 0)
-	{
+	if(player.balls > 0) {
 		if(player.hasStatusEffect(StatusEffects.Uniball))
 		{
 			if(player.skinType != Skin.GOO) outputText("Your [sack] clings tightly to your groin, holding [balls] snugly against you.");
@@ -563,8 +557,7 @@ public class PlayerAppearance extends BaseContent {
 
 
 	//BUNGHOLIO
-	if(player.ass)
-	{
+	if(player.ass) {
 		outputText("\n");
 		outputText("You have one " + assholeDescript() + ", placed between your butt-cheeks where it belongs.\n");
 	}
@@ -583,8 +576,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\nYour " + nippleDescript(0) + "s ache and tingle with every step, as your heavy " + player.nipplesPShort + " swings back and forth.");
 	else if(player.nipplesPierced > 0)
 		outputText("\nYour " + nippleDescript(0) + "s are pierced with " + player.nipplesPShort + ".");
-	if(player.cockTotal() > 0)
-	{
+	if(player.cockTotal() > 0) {
 		if(player.cocks[0].pierced > 0)
 		{
 			outputText("\nLooking positively perverse, a " + player.cocks[0].pShortDesc + " adorns your [cock].");
@@ -592,8 +584,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] == 1)
 		outputText("\nA magical, ruby-studded bar pierces your belly button, allowing you to summon Ceraph on a whim.");
-	if(player.hasVagina())
-	{
+	if(player.hasVagina()) {
 		if(player.vaginas[0].labiaPierced > 0)
 			outputText("\nYour " + vaginaDescript(0) + " glitters with the " + player.vaginas[0].labiaPShort + " hanging from your lips.");
 		if(player.vaginas[0].clitPierced > 0)
@@ -732,10 +723,6 @@ public class PlayerAppearance extends BaseContent {
 		}
 	}
 	public function describeLowerBody():void {
-		//Defines Gargoyle's material, 1 or 2 if successful
-		const gargoyleFlag: int = flags[kFLAGS.GARGOYLE_BODY_MATERIAL] && flags[kFLAGS.GARGOYLE_BODY_MATERIAL] > 0 ? flags[kFLAGS.GARGOYLE_BODY_MATERIAL] - 1 : 0;
-		var gargoyleMaterials: Array = ["marble","alabaster"];
-
 		const lowerBodyOpts:Object = {
 			id: player.lowerBody,
 			legCount: num2Text(player.legCount),
@@ -743,7 +730,7 @@ public class PlayerAppearance extends BaseContent {
 			doubleHeight: Measurements.footInchOrMetres(player.tallness * 2),
 			quadrupleHeight: Measurements.footInchOrMetres(player.tallness * 4),
 			hydraHeads: num2Text(player.statusEffectv1(StatusEffects.HydraTailsPlayer)),
-			gargoyleMaterial: gargoyleMaterials[gargoyleFlag]
+			gargoyleMaterial: getGargoyleMaterial()
 		};
 
 		//LOWERBODY DESCRIPTION SECTION 1
@@ -925,7 +912,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.tailType == Tail.COW)
 			outputText(" A long cowtail with a puffy tip swishes back and forth as if swatting at flies.");
 		if (player.tailType == Tail.SPIDER_ADBOMEN) {
-			outputText(" A large, spherical spider-abdomen has grown out from your backside, covered in shiny "+player.coatColor+" chitin. Though it's heavy and bobs with every motion, it doesn't seem to slow you down.");
+			outputText(" A large, spherical spider-abdomen has grown out from your backside, covered in shiny [skin coat.color] chitin. Though it's heavy and bobs with every motion, it doesn't seem to slow you down.");
 			if (player.tailVenom > (player.maxVenom() * 0.5) && player.tailVenom < (player.maxVenom() * 0.8))
 				outputText(" Your bulging arachnid posterior feels fairly full of webbing.");
 			if (player.tailVenom >= (player.maxVenom() * 0.8) && player.tailVenom < player.maxVenom())
@@ -956,7 +943,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("The deadly set of spikes covering the tip regularly drips with your potent venom. When impaling your tail spikes in a prey isn’t enough you can fling them at a target on a whim like the most talented archer.");
 		}
 		if (player.tailType == Tail.MANTIS_ABDOMEN)
-			outputText(" A large insectile mantis-abdomen dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard "+player.coatColor+"ish chitinous material.");
+			outputText(" A large insectile mantis-abdomen dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard [skin coat.color]ish chitinous material.");
 		if (player.tailType == Tail.SHARK) {
 			outputText(" A long shark-tail trails down from your backside, swaying to and fro while giving you a dangerous air.");
 		}
@@ -1088,17 +1075,25 @@ public class PlayerAppearance extends BaseContent {
 
 	public function describeArms():void {
 //Wing arms
+		const armsOpts:Object = {
+			id: player.lowerBody,
+			doubleHeight: Measurements.footInchOrMetres(player.tallness * 2),
+			quadrupleHeight: Measurements.footInchOrMetres(player.tallness * 4),
+			hydraHeads: num2Text(player.statusEffectv1(StatusEffects.HydraTailsPlayer)),
+			gargoyleMaterial: getGargoyleMaterial()
+		};
+
 		var armType:Number = player.arms.type;
 		if (armType == Arms.HARPY)
 			outputText(" Feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.");
 		if (armType == Arms.PHOENIX)
 			outputText(" Crimson feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.");
 		else if (armType == Arms.SPIDER)
-			outputText(" Shining "+player.coatColor+" exoskeleton covers your arms from the biceps down, resembling a pair of long "+player.coatColor+" gloves from a distance.");
+			outputText(" Shining [skin coat.color] exoskeleton covers your arms from the biceps down, resembling a pair of long [skin coat.color] gloves from a distance.");
 		else if (armType == Arms.MANTIS)
-			outputText(" Shining "+player.coatColor+" exoskeleton covers your arms from the biceps down with a long and sharp scythes extending from the wrists.");
+			outputText(" Shining [skin coat.color] exoskeleton covers your arms from the biceps down with a long and sharp scythes extending from the wrists.");
 		else if (armType == Arms.KAMAITACHI)
-			outputText(" Your arms are covered in "+player.coatColor+" fur up to your shoulders. They end with a pair of five-toed weasel paws armed with claws. Your forearms fur part ways slightly as a pair of long scythes like blades curves outward toward your elbow, sharper than any sword.");
+			outputText(" Your arms are covered in [skin coat.color] fur up to your shoulders. They end with a pair of five-toed weasel paws armed with claws. Your forearms fur part ways slightly as a pair of long scythes like blades curves outward toward your elbow, sharper than any sword.");
 		else if (armType == Arms.GAZER)
 			outputText(" Your arms are human in appearance but drips with oily black fluid.\n");
 		else if (armType == Arms.BEE)
@@ -3023,6 +3018,15 @@ public class PlayerAppearance extends BaseContent {
 	public function GenderForcedSettingFemale():void {
 		flags[kFLAGS.MALE_OR_FEMALE] = 2;
 		doNext(GenderForcedSetting);
+	}
+
+	public function getGargoyleMaterial(): String {
+		var gargoyleMaterials: Array = ["marble","alabaster"];
+
+		//Defines Gargoyle's material, 1 or 2 if successful
+		const gargoyleFlag: int = flags[kFLAGS.GARGOYLE_BODY_MATERIAL] && flags[kFLAGS.GARGOYLE_BODY_MATERIAL] > 0 ? flags[kFLAGS.GARGOYLE_BODY_MATERIAL] - 1 : 0;
+
+		return gargoyleMaterials[gargoyleFlag];
 	}
 
 	private function campActionsReflect():void {
