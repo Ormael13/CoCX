@@ -4899,7 +4899,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
             if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) damage *= 1.05;
-            if (player.isUsingSpear && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5
+            if (player.isUsingSpear() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5
             //One final round
             damage = Math.round(damage);
             //ANEMONE SHIT
@@ -6062,7 +6062,8 @@ public class Combat extends BaseContent {
 			if (player.spe <= 100) parryChance2 += player.spe / 10;
             else parryChance2 += 10;
 		}
-        if (player.weaponPerk == "Massive") parryChance2 += 5;
+		if (player.hasPerk(PerkLib.KnightlySword) && player.isSwordTypeWeapon() && player.isShieldsForShieldBash()) parryChance2 += 15;
+		if (player.weaponPerk == "Massive") parryChance2 += 5;
         if (player.weaponName == "Undefeated King's Destroyer") parryChance2 += 15;
         if (player.hasPerk(PerkLib.DexterousSwordsmanship)) parryChance2 += 10;
         if (player.hasPerk(PerkLib.CatchTheBlade) && player.spe >= 50 && player.shieldName == "nothing" && player.isFistOrFistWeapon()) parryChance2 += 15;
