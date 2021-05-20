@@ -119,17 +119,17 @@ import flash.utils.Dictionary;
 		}
 
 		public function hasTag(tag:String):Boolean {
-			return this[tags];
+			return this.tags[tag];
 		}
 		public function hasAllTags(...tags:/*String*/Array):Boolean {
 			for each (var tag:String in tags) {
-				if (!this[tags]) return false;
+				if (!this.tags[tag]) return false;
 			}
 			return true;
 		}
 		public function hasAnyTag(...tags:/*String*/Array):Boolean {
 			for each (var tag:String in tags) {
-				if (!this[tags]) return true;
+				if (this.tags[tag]) return true;
 			}
 			return false;
 		}
