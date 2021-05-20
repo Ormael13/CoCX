@@ -2007,9 +2007,9 @@ public class PlayerAppearance extends BaseContent {
 				}
 			} else if(faceType == Face.ELF){
 				if (odd == 0){
-					outputText("  You have an enchanting smile and perfect pearlescent white teeths.");
+					outputText("  You have an enchanting smile and perfect pearlescent white teeth.");
 				} else {
-					outputText("  In addition, you have an enchanting smile and perfect pearlescent white teeths.");
+					outputText("  In addition, you have an enchanting smile and perfect pearlescent white teeth.");
 				}
 			}
 		}

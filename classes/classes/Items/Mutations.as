@@ -9694,7 +9694,7 @@ public final class Mutations extends MutationsHelper {
         //Physical
         if (player.faceType != Face.ELF && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             if (player.faceType == Face.HUMAN) {
-                outputText("\n\nYou feel tingling across your visage as some small changes happen to your visage. Curious you go look down by the nearest pool of water and notice to your amazement that the general shape of your mouth has changed.to a perfect alignment No tooth is misaligned and your disarming innocent smile revealing pearlescent white teeth that would melt the coldest of hearts. <b>Guess your mouth is more like that of an elf now what a beautifull smile!</b>");
+                outputText("\n\nYou feel tingling across your visage as some small changes begin to happen to it. Curious, you go look down by the nearest pool of water and notice to your amazement that the general shape of your mouth has changed to be in perfect alignment! No tooth is misaligned and your disarming, innocent smile revealing pearlescent white teeth would melt the coldest of hearts.<b>Guess your face is more like that of an elf now.</b>");
                 setFaceType(Face.ELF);
             } else humanizeFace();
             changes++;
