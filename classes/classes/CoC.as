@@ -24,6 +24,7 @@ import classes.display.SpriteDb;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
+import coc.view.CoCButton;
 import coc.view.MainView;
 import coc.xxc.Story;
 import coc.xxc.StoryCompiler;
@@ -220,6 +221,12 @@ public class CoC extends MovieClip
         this.mainView.onBottomButtonClick = function(i:int):void {
             textHistory.push("<br>["+EngineCore.button(i).labelText+"]<br>");
         };
+        CoCButton.clickErrorHandler = function(error:Error, button:CoCButton):void {
+            trace(error.getStackTrace());
+            EngineCore.addButton(0, "Rescue", EventParser.playerMenu);
+            mainView.mainText.htmlText +=
+                    "\n----\nError in scene: "+error.message+"\n"+error.getStackTrace()+"\n----\n";
+        }
 
         // Set up all the messy global stuff:
 
