@@ -3753,12 +3753,6 @@ public class Combat extends BaseContent {
 						}
 					}
                 }
-                outputText("\n\n");
-                heroBaneProc(damage);
-                if (player.weaponRange == weaponsrange.DERPLAU && rand(10) == 0) {
-                    outputText(" You shoot but curse your bad luck as the grenade bounce back toward you! ");
-                    player.takePhysDamage(Math.round(damage * 0.2));
-                }
                 //Lust raising weapon bonuses
                 if (monster.lustVuln > 0) {
                     var rangeweaponLustDmg:Number = 0;
@@ -3767,16 +3761,22 @@ public class Combat extends BaseContent {
                         if (rangeweaponLustDmg > 0) {
                             var s:String = monster.plural ? "" : "s";
                             if (player.weaponRange == weaponsrange.LBLASTR){
-                                if (rand(2) == 0) outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and get" + s + " turned on as he is splashed with your milk.");
-                                else outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and moan" + s + " involuntarily highly turned on by your moo moo milk.");
+                                //if (rand(2) == 0) outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and get" + s + " turned on as he is splashed with your milk.");
+                                //else outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and moan" + s + " involuntarily highly turned on by your moo moo milk.");
                             }
                             else{
                                 if (rand(2) == 0) outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and get" + s + " turned on from the injected chemicals.");
                                 else outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and moan" + s + " involuntarily from the injected chemicals effects.");
                             }
                         }
-                        monster.teased(monster.lustVuln * rangeweaponLustDmg);
+                        monster.teased(monster.lustVuln * rangeweaponLustDmg, false);
                     }
+                }
+                outputText("\n\n");
+                heroBaneProc(damage);
+                if (player.weaponRange == weaponsrange.DERPLAU && rand(10) == 0) {
+                    outputText(" You shoot but curse your bad luck as the grenade bounce back toward you! ");
+                    player.takePhysDamage(Math.round(damage * 0.2));
                 }
             }
         } else {
