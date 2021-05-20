@@ -1064,124 +1064,15 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describeArms():void {
-//Wing arms
 		const armsOpts:Object = {
-			id: player.lowerBody,
-			doubleHeight: Measurements.footInchOrMetres(player.tallness * 2),
-			quadrupleHeight: Measurements.footInchOrMetres(player.tallness * 4),
-			hydraHeads: num2Text(player.statusEffectv1(StatusEffects.HydraTailsPlayer)),
+			id: player.arms.type,
+			skinTone: player.skinTone,
 			gargoyleMaterial: getGargoyleMaterial()
 		};
 
-		var armType:Number = player.arms.type;
-		if (armType == Arms.HARPY)
-			outputText(" Feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.");
-		if (armType == Arms.PHOENIX)
-			outputText(" Crimson feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.");
-		else if (armType == Arms.SPIDER)
-			outputText(" Shining [skin coat.color] exoskeleton covers your arms from the biceps down, resembling a pair of long [skin coat.color] gloves from a distance.");
-		else if (armType == Arms.MANTIS)
-			outputText(" Shining [skin coat.color] exoskeleton covers your arms from the biceps down with a long and sharp scythes extending from the wrists.");
-		else if (armType == Arms.KAMAITACHI)
-			outputText(" Your arms are covered in [skin coat.color] fur up to your shoulders. They end with a pair of five-toed weasel paws armed with claws. Your forearms fur part ways slightly as a pair of long scythes like blades curves outward toward your elbow, sharper than any sword.");
-		else if (armType == Arms.GAZER)
-			outputText(" Your arms are human in appearance but drips with oily black fluid.\n");
-		else if (armType == Arms.BEE)
-			outputText(" Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves ended with a yellow fuzz from a distance.");
-		else if (armType == Arms.SALAMANDER)
-			outputText(" Shining thick, leathery red scales covers your arms from the biceps down and your fingernails are now a short curved claws.");
-		else if (armType == Arms.CAVE_WYRM)
-			outputText(" Shining thick, leathery black scales covers your arms from the biceps down and your fingernails are now a short curved claws.");
-		else if (armType == Arms.PLANT)
-			outputText(" Delicate vines crawl down from the upper parts of your arms to your wrists covered in spade-like leaves, that bob whenever you move.");
-		else if (armType == Arms.PLANT2)
-			outputText(" Vines crawl down from your shoulders to your wrists, tipped with slits that drool precum. They look like innocent decorations from a distance.");
-		else if (armType == Arms.SHARK)
-			outputText(" A middle sized shark-like fin has sprouted on each of your forearms near the elbow. Additionaly skin between your fingers forming a small webbings helpful when swimming.");
-		else if (armType == Arms.GARGOYLE) {
-			outputText(" Your ");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
-			outputText(" arms end in stone sharp clawed hands.");
-		}
-		else if (armType == Arms.GARGOYLE_2) {
-			outputText(" Your ");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
-			outputText(" arms end in normal human like hands.");
-		}
-		else if (armType == Arms.WOLF || armType == Arms.FOX)
-			outputText(" Your arms are covered in thick fur ending up with clawed hands with animal like paw pads.");
-		else if (armType == Arms.LION)
-			outputText(" Your arms are covered in [skin coat.color] fur up to your shoulders where it turns to white. They end with a pair of five-toed lion paws armed with lethal claws.");
-		else if (armType == Arms.KITSUNE)
-			outputText(" Your arms are somewhat human save for your sharp nails.");
-		else if (armType == Arms.LIZARD || armType == Arms.DRAGON)
-			outputText(" Shining thick, leathery scales covers your arms from the biceps down and your fingernails are now a short curved claws.");
-		else if (armType == Arms.YETI)
-			outputText(" Your two arms covered with thick fur end with large and powerful yeti hands. You can use them to smash or punch things when you're angry.");
-		else if (armType == Arms.ORCA)
-			outputText(" A middle sized orca-like fin has sprouted on each of your forearms near the elbow. Additionally, the skin between your fingers forms a small webbing that is helpful when swimming.");
-		else if (armType == Arms.DEVIL)
-			outputText(" Your forearms are covered with fur and end with four finger paw-like hands, but armed with claws. Despite their weird shape, you have more than enough manual dexterity to draw even the most complex magical designs when spellcasting.");
-		else if (armType == Arms.ONI)
-			outputText(" Your arms are mostly human, although covered in warlike tattoos. You have human hands with sharp black nails.");
-		else if (armType == Arms.ELF)
-			outputText(" Your delicate elven hands are almost supernaturally dexterous allowing you to manipulate objects or cast spells with inhuman agility.");
-		else if (armType == Arms.RAIJU)
-			outputText(" Your arms and hands are practically human save for the sharp white claws that have replaced your normal nails.");
-		else if (armType == Arms.RAIJU_2)
-			outputText(" Your forearms are covered with dense fur upon which an electric current runs free. Your pawed hands end with sharp claws capable of delivering powerful discharges.");
-		else if (armType == Arms.RED_PANDA)
-			outputText(" Soft, black-brown fluff cover your arms. Your paws have cute, pink paw pads and short claws.");
-		else if (armType == Arms.SQUIRREL)
-			outputText(" Your arms are covered in [skin coat.color] fur up to your shoulder. They end with a pair of five-toed squirrel paws armed with claws which if needed can assist you into climbing trees.\n");
-		else if (armType == Arms.CAT)
-			outputText(" Your arms are covered in [skin coat.color] fur up to your shoulder. They end with a pair of five-toed cat paws armed with lethal claws.");
-		else if (armType == Arms.AVIAN)
-			outputText(" Your arms are covered with [skin coat.color] colored feathers just a bit past your elbow. Your humanoid hands have " + player.skinTone + ", slightly rough skin and end in short claws.");
-		else if (armType == Arms.GRYPHON)
-			outputText(" The feathers on your arms reach a bit past your elbows, the fringe of [skin coat.color] plumage leading to your " + player.skinTone + ", slightly rough skinned hands. They end in short, avian claws.");
-		else if (armType == Arms.SPHINX)
-			outputText(" Your arms are covered with [skin coat.color] fur. They end with somewhat human-like hands armed with lethal claws.");
-		else if (armType == Arms.PIG)
-			outputText(" Your arms looks human enough, aside the fact they're almost comically fat. They end with somewhat human-like hands armed with cloover-like short claws.");
-		else if (armType == Arms.BOAR)
-			outputText(" Your arms are covered in thick [skin coat.color] fur ending up with hands with sharp black nails.");
-		else if (armType == Arms.ORC)
-			outputText(" Your arms looks human enough, aside the fact they're covered in scar-like tattoos and are a bit longer than usual. They end up with hands that have sharp nails on each finger.");
-		else if (armType == Arms.DISPLACER)
-			outputText(" Where a normal creature would have only two arms you instead have four covered with [skin coat.color] fur. They end with a pair of five-toed lion paws armed with lethal claws. You generally use them to move around lightning fast or to seize and rend preys.");
-		else if (armType == Arms.HINEZUMI)
-			outputText(" Your forearms while human in shape are covered in a thick coat of flames that burn depending on your mood.");
-		else if (armType == Arms.BEAR) {
-			outputText(" Your arms are covered with [skin coat.color] fur");
-			if (player.skin.coverage >= Skin.COVERAGE_MEDIUM) outputText(" up to your shoulder and neck");
-			outputText(". They end with a pair of powerful five-toed bear-like paws armed with lethal claws.");
-		}
-		else if (armType == Arms.GOO)
-			outputText(" While human in shape, your constantly dripping arms are actually liquid, allowing you to shape them to your convenience.");
-		else if (armType == Arms.HYDRA)
-			outputText(" Shining plate-like scales cover your arms from the biceps down and your fingernails are now sharp curved claws sharp enough to tear through flesh.");
-		else if (armType == Arms.GHOST)
-			outputText(" Your arms and hands are practically human save for the fact that they are ghastly in nature.");
-		else if (armType == Arms.JIANGSHI)
-			outputText(" Your arms are human in shape and appearance but underneath your purple nail is a thick layer of deadly poison.");
-		else if (armType == Arms.YUKI_ONNA)
-			outputText(" Your arms and hands are human in appearance but your blue nailed hands touch is void of warmth and colder than death.");
-		else if (player.wings.type == Wings.BAT_ARM)
-			outputText(" The bones in your arms are thin and light, as if made of only cartilage, granting you the ability to take flight. Instead of the five fingers you started out with, you now have three that are both larger and stronger. They allow you to hold various items even with your abnormal hands, albeit at the cost of preventing flight while doing so and making some things a little more awkward to grip.");
-		else if (armType == Arms.MELKIE)
-			outputText(" Your arms and hands are human in appearance but your blue nailed hands touch is void of warmth and colder than death.");
-		else if (armType == Arms.CENTIPEDE)
-			outputText(" Your arms and hands are mostly human in shape tipped with sharp purple nails. Intricate flowing purple markings stretch from your hands to your shoulders.");
-		else if (armType == Arms.FROSTWYRM)
-			outputText(" Your forearms are covered with scales which themselves are covered with fur and end with five fingered clawed hands. Your claws are strong enough to dig and tear through next to anything.");
-		else if (armType == Arms.USHI_ONI_ONNA)
-			outputText(" You have Ushi-"+player.mf("oni","onna")+" arms they are longer and thicker than most races, strange pattern of fur begins at you middle biceps and go down until the furred part in your forearms, it extends to your hands where even you fingers had changed to bone like claws.");
-		else if (armType == Arms.WENDIGO)
-			outputText(" Your arms and hands are practically human save for the wicked sharp white claws that have replaced your normal nails.");
+		outputText(Arms.getAppearanceDescription(armsOpts));
 	}
+
 	public function describeRearBody():void {
 		if (player.rearBody.type == RearBody.FENRIR_ICE_SPIKES) {
 			outputText(" Jagged ice shards grows out of your back, providing excellent defence and chilling the air around you.");
@@ -1286,9 +1177,6 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (wingType == Wings.PLANT) {
 			outputText(" Three pairs of oily, prehensile phalluses sprout from your shoulders and back. From afar, they may look like innocent vines, but up close, each tentacle contain a bulbous head with a leaking cum-slit, perfect for mass breeding.");
-		}
-		if (wingType == Wings.BAT_ARM){
-			outputText(" Your large winged arms allow you to fly in a similar fashion to the bats they resemble. You sometimes wrap them around you like a cape when you walk around, so as to keep them from encumbering you. That being said, you far prefer using them for their intended purpose, traveling by flight whenever you can.");
 		}
 		if (wingType == Wings.VAMPIRE){
 			outputText(" Between your shoulder blades rest a pair of large, ominous black wings reminiscent of a bat’s. They can unfurl up to twice your arm’s length, allowing you to gracefully dance in the night sky.");

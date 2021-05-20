@@ -186,6 +186,9 @@ import classes.BodyParts.Wings;
 					if (!degargoylize) return;
 					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
 					break;
+				case Arms.BAT:
+					outputText("You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your bones are breaking down and reforming in a frenzy. Your parchment-like skin begins to fall off in clumps, leaving the mess of malformed bones that are your arms right now naked for all to see. However, even as you watch, dark blood creeps over the bone, properly aligning them before healing them over, although not in their old form. Within seconds, your bones are remade into ones alike those you were born with, in structure if nothing else, the eldritch power of your blood finally ebbing away, but not before the last of it settles and turns into a brand new patch of skin.");
+					break;
 				default:
 					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
 					break;

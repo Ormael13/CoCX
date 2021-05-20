@@ -34,7 +34,7 @@ import coc.view.ButtonDataList;
 public class PhysicalSpecials extends BaseCombatContent {
 
 	public var winionsMaker:CampMakeWinions = new CampMakeWinions();
-	
+
 	//------------
 	// P. SPECIALS
 	//------------
@@ -144,7 +144,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Embrace
-			if ((player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
+			if ((player.arms.type == Arms.BAT || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
 				bd = buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -512,7 +512,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.vehicles == vehicles.HB_MECH) {
-			
+
 		}
 	}
 	internal function buildMenuForFlying(buttons:ButtonDataList):void {
@@ -520,7 +520,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (!player.isInGoblinMech() && !player.isInNonGoblinMech()) {
 			bd = buttons.add("Great Dive", combat.greatDive).hint("Make a Great Dive to deal TONS of damage!");
 			//Embrace
-			if ((player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
+			if ((player.arms.type == Arms.BAT || player.wings.type == Wings.VAMPIRE) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
 				bd = buttons.add("Embrace", vampireEmbrace).hint("Embrace an opponent in your wings.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -528,7 +528,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.canPounce() && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
 				bd = buttons.add("Skyrend", skyPounce).hint("Land into your enemy dealing damage and initiate a grapple combo. End flight.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-			}				
+			}
 			//Tornado Strike
 			if (player.couatlScore() >= 11) {
 				bd = buttons.add("Tornado Strike", TornadoStrike).hint("Use wind to forcefully lift a foe in the air and deal damage.  \n\nWould go into cooldown after use for: 8 rounds");
@@ -601,7 +601,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.vehicles == vehicles.HB_MECH) {
-			
+
 		}
 	}
 
@@ -629,14 +629,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 			doDamage(damage, true, true);
 		}
 	}
-	
+
 	private function shieldbashcostly():Number {
 		var BCW:Number = 15;
 		if (player.shieldPerk == "Large") BCW += 15;
 		if (player.shieldPerk == "Massive") BCW += 15;
 		return BCW;
 	}
-	
+
 	public function powerAttack():void {
 		clearOutput();
 		if (player.canFly()) outputText("You fly by your opponent, striking with your [weapon], utilizing  your full strength in tandem with your flight momentum. ");
@@ -724,7 +724,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.EruptingRiposte();
 		enemyAI();
 	}
-	
+
 	public function powerShoot():void {
 		clearOutput();
 		outputText("With one smooth motion you draw, nock, and fire your deadly arrow at one of your opponent"+(monster.plural ? "s":"")+" ");
@@ -786,7 +786,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		bowPerkUnlock();
 		enemyAI();
 	}
-	
+
 	public function pcCleave():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -872,7 +872,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		enemyAI();
 	}
-	
+
 	public function sneakAttack():void {
 		clearOutput();
 		if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(40) > player.maxFatigue())) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigue + physicalCost(20) > player.maxFatigue()))) {
@@ -1033,7 +1033,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.EruptingRiposte();
 		enemyAI();
 	}
-	
+
 	public function feint():void {
 		clearOutput();
 		outputText("You attempt to feint " + monster.a + " " + monster.short + " into dropping " + monster.pronoun3 + " guards. It ");
@@ -1047,7 +1047,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-	
+
 	public function sneakAttackRange():void {
 		clearOutput();
 		if (player.fatigue + physicalCost(20) > player.maxFatigue()) {
@@ -1146,7 +1146,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		enemyAI();
 	}
-	
+
 	public function warriorShout():void {
 		clearOutput();
 		player.createStatusEffect(StatusEffects.CooldownWarriorShout, 10, 0, 0, 0);
@@ -1157,7 +1157,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		menu();
 		addButton(0, "Next", combatMenu, false);
 	}
-	
+
 	public function charging():void {
 		clearOutput();
 		var costvalue:Number = chargingcoooooost();
@@ -1749,7 +1749,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
-	
+
 	public function milkBlast():void {
 		clearOutput();
 		if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm)) {
@@ -1783,7 +1783,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		enemyAI();
 	}
-	
+
 	public function cumCannon():void {
 		clearOutput();
 		if (player.hasPerk(PerkLib.MinotaurTesticlesFinalForm)) {
@@ -1953,7 +1953,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.WrathGenerationPerHit2(5);
 		enemyAI();
 	}
-	
+
 	public function wingSlapAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -2252,7 +2252,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-	
+
 	public function permanentgolemsendcost():Number {
 		var permanentgolemsendcost:Number = 10;
 		if (player.findPerk(PerkLib.EpicGolemMaker) >= 0) permanentgolemsendcost += 5;
@@ -2878,7 +2878,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.EruptingRiposte();
 		enemyAI();
 	}
-	
+
 	public function TailCleaveAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -3020,7 +3020,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.EruptingRiposte();
 		enemyAI();
 	}
-	
+
 	public function TornadoStrike():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -3262,7 +3262,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-	
+
 	public function vampireEmbrace():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -3296,7 +3296,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-	
+
 	public function catPounce():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -3342,7 +3342,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-	
+
 	public function bearGrab():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -3389,7 +3389,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
-	
+
 	public function bearSlam():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -3864,7 +3864,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 6;
 			}
 			else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 3;
-			
+
 		}
 		else {
 			if (player.hasPerk(PerkLib.MantislikeAgilityFinalForm) && player.hasPerk(PerkLib.TrachealSystemFinalForm)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 2;
@@ -4378,7 +4378,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function playerTailSpike():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		
+
 		//Worms are immune!
 		if (monster.short == "worms") {
 			outputText("Taking advantage of your new natural weapons, you quickly shoot an envenomed spike at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your spike impale the ground behind.\n\n");
@@ -5241,7 +5241,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		return dmgBarrage;
 	}
-	
+
 	public function mechTazer():void {
 		clearOutput();
 		outputText("You press the lightning button and aim, smirking at " + monster.a + monster.short + ", your mech delivering a ");
@@ -5278,7 +5278,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		enemyAI();
 	}
-	
+
 	public function mechOmniMissile():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -5328,7 +5328,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		enemyAI();
 	}
-	
+
 	public function mechStimpackMedicalDispenser():void {
 		clearOutput();
 		if (player.hasKeyItem("Medical Dispenser 2.0") >= 0) player.createStatusEffect(StatusEffects.CooldownStimpackDispenser, 15, 0, 0, 0);
@@ -5359,7 +5359,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		enemyAI();
 	}
-	
+
 	public function mechGravityShots():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -5394,7 +5394,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		enemyAI();
 	}
-	
+
 	public function mechRaijinBlaster():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -5442,7 +5442,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		enemyAI();
 	}
-	
+
 	public function mechSnowballGenerator():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -5474,7 +5474,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		enemyAI();
 	}
-	
+
 	public function mechWhitefireBeamCannon():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -5507,7 +5507,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		enemyAI();
 	}
-	
+
 	public function mechDynapunchGlove():void {
 		clearOutput();
 		outputText("You launch the mech springed glove at " + monster.a + monster.short + " hitting " + monster.pronoun3 + " straight in the face for a K.O. " + monster.a + monster.short + " is hit for ");

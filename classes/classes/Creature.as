@@ -2716,7 +2716,7 @@ public class Creature extends Utils
 			//web also makes false!
 			if (hasStatusEffect(StatusEffects.Web))
 				return false;
-			return Wings.Types[wings.type].canFly;
+			return Arms.Types[arms.type].canFly || Wings.Types[wings.type].canFly;
 		}
 
 		public function canPounce():Boolean
