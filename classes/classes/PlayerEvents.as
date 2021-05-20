@@ -277,7 +277,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.addStatusValue(StatusEffects.Feeder, 2, 1); //Increase 'time since breastfed'
 					//trace("Feeder status: " + player.statusEffectv2(StatusEffects.Feeder) + " (modded " + ((player.statusEffectv2(StatusEffects.Feeder)) - 70) + ")");
 					//After 3 days without feeding someone sensitivity jumps.
-                    if (player.statusEffectv2(StatusEffects.Feeder) >= 72 && CoC.instance.model.time.hours == 14) {
+                    if (player.statusEffectv2(StatusEffects.Feeder) >= 72 && CoC.instance.model.time.hours == 14 && player.weaponRange != weaponsrange.LBLASTR) {
                         outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n");
 						player.dynStats("sen", 2 + (((player.statusEffectv2(StatusEffects.Feeder)) - 70) / 20));
 						needNext = true;

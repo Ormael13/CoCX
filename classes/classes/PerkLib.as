@@ -7194,4 +7194,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}
