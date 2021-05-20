@@ -14,7 +14,7 @@ import classes.Items.ItemTags;
 
 		public function ElvenRangerArmor()
 		{
-			super("ERA", "ElvenRangerArmor", "Elven Ranger Armor", "a elven ranger armor", 0, 18, 10000, "An armor typically worn by wood elves on the rare occasion where they go to battle. This outfit is made of green spider silk specially treated for extra elasticity in order to offer good armor while preserving the user's own agility. Unsurprisingly of an elven armor it is highly revealing and barely tries to hide whatever assets the user may have thus it is as effective for combat as it is for teasing. Several enchantments fortifying archery and spearmanship have been bestowed upon this armor.", "Medium"
+			super("ERA", "ElvenRangerArmor", "Elven Ranger Armor", "a elven ranger armor", 0, 18, 10000, "An armor typically worn by wood elves on the rare occasion where they go to battle. This outfit is made of green spider silk specially treated for extra elasticity in order to offer good armor while preserving the user's own agility. Unsurprisingly for an elven armor it is highly revealing and barely tries to hide whatever assets the user may have thus it is as effective for combat as it is for teasing. Several enchantments fortifying archery and spearmanship have been bestowed upon this armor.", "Medium"
 					, PerkLib.SluttySeduction,10,0,0,0,"Your incredibly revealing outfits allows you access to 'Seduce', an improved form of 'Tease'.",false,false);
 			withTag(ItemTags.REVEALING,ItemTags.AGILE);
 		}
