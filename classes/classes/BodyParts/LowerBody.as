@@ -42,7 +42,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const HUMAN:int = 0;
 	EnumValue.add(Types, HUMAN, "HUMAN", {
 		name: "human",
-		appearanceDesc: "{legCount} normal human legs grow down from your [hips], ending in normal human feet."
+		appearanceDesc: "{legCount} human legs grow down from your [hips], ending in normal human feet."
 	});
 
 	public static const HOOFED:int = 1;
@@ -270,7 +270,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const GARGOYLE:int = 30;//button 0 on 3rd page of metamorph
 	EnumValue.add(Types, GARGOYLE, "GARGOYLE", {
 		name: "gargoyle",
-		appearanceDesc: "Your {legCount} digitigrade {gargoyleMaterial} legs end in sharp-clawed stone feet. There are three long toes on the front, and a small hind claw on the back."
+		appearanceDesc: "Your {legCount} digitigrade [gargoylematerial] legs end in sharp-clawed stone feet. There are three long toes on the front, and a small hind claw on the back."
 	});
 
 	public static const PLANT_HIGH_HEELS:int = 31;
@@ -297,7 +297,7 @@ public class LowerBody extends SaveableBodyPart {
 		name: "plant flower",
 		legCount: 12,
 		legs: "vine-like tentacle stamens",
-		appearanceDesc: "Around your waist, the petals of a large {nakedCoatColor} orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your {legCount} vine-like stamens.",
+		appearanceDesc: "Around your waist, the petals of a large [skin coat.nakedcolor] orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your {legCount} vine-like stamens.",
 		tentacle: true,
 		isAlraune: true
 	});
@@ -354,7 +354,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const GARGOYLE_2:int = 43;
 	EnumValue.add(Types, GARGOYLE_2, "GARGOYLE_2", {
 		name: "gargoyle",
-		appearanceDesc: "Your {legCount} {gargoyleMaterial} legs aside of their stone structure look pretty much human."
+		appearanceDesc: "Your {legCount} [gargoylematerial] legs aside of their stone structure look pretty much human."
 	});
 
 	public static const AVIAN:int = 44;//button 0 on 4th page of metamorph
@@ -407,7 +407,7 @@ public class LowerBody extends SaveableBodyPart {
 		leg: "hydra-tail",
 		feet: "coils",
 		foot: "coiled tail",
-		appearanceDesc: "Below your waist your flesh is fused together into the body of a snake which split into {hydraHeads} {doubleHeight} long serpentine coils each ending with a snake head. Your many heads tend to hiss when you are in pain or angry.",
+		appearanceDesc: "Below your waist your flesh is fused together into the body of a snake which split into [hydraheads] [doubletallness] long serpentine coils each ending with a snake head. Your many heads tend to hiss when you are in pain or angry.",
 		bite: true,
 		isNaga: true
 	});
@@ -459,7 +459,7 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, KRAKEN, "KRAKEN", {
 		name: "kraken",
 		tentacle: true,
-		appearanceDesc: "Where your legs would normally start, you've grown the body of a giant squid, with {legCount} tentacle legs that sprout from your [hips], two of them larger than the others. Your tentacles reach for up to {doubleHeight} feet in length!",
+		appearanceDesc: "Where your legs would normally start, you've grown the body of a giant squid, with {legCount} tentacle legs that sprout from your [hips], two of them larger than the others. Your tentacles reach for up to [doubletallness] feet in length!",
 		isKraken: true
 	});
 
@@ -481,7 +481,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const FROSTWYRM:int = 62;
 	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {
 		name: "frost wyrm",
-		appearanceDesc: "Below your waist your flesh is fused together into a very long snake-like tail easily {quadrupleHeight} feet long. Your entire tail length up to the waist is covered with thick snow white fur, and underneath is a whole layer of [skin coat.color] dragon scales, harder than steel and capable of deflecting most weapons.",
+		appearanceDesc: "Below your waist your flesh is fused together into a very long snake-like tail easily [quadrupletallness] feet long. Your entire tail length up to the waist is covered with thick snow white fur, and underneath is a whole layer of [skin coat.color] dragon scales, harder than steel and capable of deflecting most weapons.",
 		tailSlam: true,
 		isNaga: true
 	});
@@ -658,53 +658,39 @@ public class LowerBody extends SaveableBodyPart {
 	}
 
 	public static function getAppearanceDescription(opts:Object):String {
-		if (Types[opts.id].appearanceDesc) {
-			return formatDescription(Types[opts.id].appearanceDesc, opts);
-		}
+		const id: int = opts.player.lowerBody;
 
-		return "";
+		return formatDescription(Types[id].appearanceDesc || "", opts);
 	}
 
 	public static function getAppearanceDescriptionBiped(opts:Object):String {
-		if (Types[opts.id].appearanceDescBiped) {
-			return formatDescription(Types[opts.id].appearanceDescBiped, opts);
-		}
+		const id: int = opts.player.lowerBody;
 
-		return "";
+		return formatDescription(Types[id].appearanceDescBiped || "", opts);
 	}
 
 	public static function getAppearanceDescriptionTaur(opts:Object):String {
-		if (Types[opts.id].appearanceDescTaur) {
-			return formatDescription(Types[opts.id].appearanceDescTaur, opts);
-		}
+		const id: int = opts.player.lowerBody;
 
-		return "";
+		return formatDescription(Types[id].appearanceDescTaur || "", opts);
 	}
 
 	public static function getAppearanceDescriptionDrider(opts:Object):String {
-		if (Types[opts.id].appearanceDescDrider) {
-			return formatDescription(Types[opts.id].appearanceDescDrider, opts);
-		}
+		const id: int = opts.player.lowerBody;
 
-		return "";
+		return formatDescription(Types[id].appearanceDescDrider || "", opts);
 	}
 
 	private static function formatDescription(desc:String, opts: Object): String {
+		const player:* = opts.player;
+
 		const upperCasePattern:RegExp = /^./;
 		const legCountPattern:RegExp = /{legCount}/g;
 		const legCountMinusTwoPattern:RegExp = /{legCountMinusTwo}/g;
-		const doubleHeightPattern:RegExp = /{doubleHeight}/g;
-		const quadrupleHeightPattern:RegExp = /{quadrupleHeight}/g;
-		const hydraHeadsPattern:RegExp = /{hydraHeads}/g;
-		const gargoyleMaterialPattern:RegExp = /{gargoyleMaterial}/g;
 
 		return " " + desc
-			.replace(legCountPattern, opts.legCount)
-			.replace(legCountMinusTwoPattern, opts.legCountMinusTwo)
-			.replace(doubleHeightPattern, opts.doubleHeight)
-			.replace(quadrupleHeightPattern, opts.quadrupleHeight)
-			.replace(hydraHeadsPattern, opts.hydraHeads)
-			.replace(gargoyleMaterialPattern, opts.gargoyleMaterial)
+			.replace(legCountPattern, num2Text(player.legCount))
+			.replace(legCountMinusTwoPattern, num2Text(player.legCount - 2))
 			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }

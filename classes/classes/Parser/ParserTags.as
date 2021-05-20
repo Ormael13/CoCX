@@ -4,7 +4,10 @@ import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Measurements;
+import classes.internals.Utils;
 import classes.Scenes.SceneLib;
+import classes.StatusEffects
+import classes.PlayerAppearance
 
 public class ParserTags {
 
@@ -57,8 +60,9 @@ public class ParserTags {
         "feet"                  : function ():* { return CoC.instance.player.feet(); },
         "foot"                  : function ():* { return CoC.instance.player.foot(); },
         "fullchest"             : function ():* { return CoC.instance.player.allChestDesc(); },
+        "gargoylematerial"      : function ():* { return PlayerAppearance.getGargoyleMaterial(CoC.instance.flags[kFLAGS.GARGOYLE_BODY_MATERIAL]); },
         "hair"                  : function ():* { return CoC.instance.player.hairDescript(); },
-        "hairlongdesc"         : function ():* { return CoC.instance.player.hairDescript(true); },
+        "hairlongdesc"          : function ():* { return CoC.instance.player.hairDescript(true); },
         "haircolor"             : function ():* { return CoC.instance.player.hairColor; },
         "hairorfur"             : function ():* { return CoC.instance.player.hairOrFur(); },
         "he"                    : function ():* { return CoC.instance.player.mf("he", "she"); },
@@ -73,6 +77,7 @@ public class ParserTags {
         "hisher"                : function ():* { return CoC.instance.player.mf("his", "her"); },
         "his2"                  : function ():* { return CoC.instance.player2.mf("his", "her"); },
         "horns"                 : function ():* { return CoC.instance.player.hornDescript(); },
+        "hydraheads"            : function ():* { return Utils.num2Text(CoC.instance.player.statusEffectv1(StatusEffects.HydraTailsPlayer)); },
         "leg"                   : function ():* { return CoC.instance.player.leg(); },
         "legs"                  : function ():* { return CoC.instance.player.legs(); },
         "lowergarment"          : function ():* { return CoC.instance.player.lowerGarmentName; },
@@ -103,6 +108,8 @@ public class ParserTags {
         "skinfurscales"         : function ():* { return CoC.instance.player.skin.describe('coat'); },
         "skintone"              : function ():* { return CoC.instance.player.skinTone; },
         "tallness"              : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness); },
+        "doubletallness"        : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 2); },
+        "quadrupletallness"     : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 2); },
         "teasetext"             : function ():* { return SceneLib.combat.teaseText(); },
         "tongue"                : function ():* { return Appearance.tongueDescription(CoC.instance.player); },
         "uppergarment"          : function ():* { return CoC.instance.player.upperGarmentName; },
@@ -398,6 +405,7 @@ public class ParserTags {
         "coat.isare"  : function ():* {return CoC.instance.player.skin.coat.isAre();},
         "coat.color"  : function ():* {return CoC.instance.player.coatColor;},
         "coat.color2" : function ():* {return CoC.instance.player.skin.coat.color2;},
+        "coat.nakedcolor"  : function ():* {return CoC.instance.player.nakedCoatColor;},
         "full"        : skinDescriptionFn("full", false, false),
         "full.noadj"  : skinDescriptionFn("full", true, false),
         "full.notone" : skinDescriptionFn("full", false, true),

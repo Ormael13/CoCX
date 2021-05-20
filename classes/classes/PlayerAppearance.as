@@ -724,13 +724,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 	public function describeLowerBody():void {
 		const lowerBodyOpts:Object = {
-			id: player.lowerBody,
-			legCount: num2Text(player.legCount),
-			legCountMinusTwo: num2Text(player.legCount - 2),
-			doubleHeight: Measurements.footInchOrMetres(player.tallness * 2),
-			quadrupleHeight: Measurements.footInchOrMetres(player.tallness * 4),
-			hydraHeads: num2Text(player.statusEffectv1(StatusEffects.HydraTailsPlayer)),
-			gargoyleMaterial: getGargoyleMaterial()
+			player: player
 		};
 
 		//LOWERBODY DESCRIPTION
@@ -891,14 +885,19 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describeTail():void {
+		const tailOpts:Object = {
+			player: player,
+			buttDescript: buttDescript()
+		};
+
 		if (player.tailType == Tail.HORSE)
-			outputText(" A long [skin coat.color] horsetail hangs from your " + buttDescript() + ", smooth and shiny.");
+			outputText(" A long [skin coat.color] horsetail hangs from your [butt], smooth and shiny.");
 		if (player.tailType == Tail.FERRET)
 			outputText(" A long ferret tail sprouts from above your [butt]. It is thin, tapered, and covered in shaggy [skin coat.color] fur.");
 		if (player.tailType == Tail.DOG)
-			outputText(" A fuzzy [skin coat.color] dogtail sprouts just above your " + buttDescript() + ", wagging to and fro whenever you are happy.");
+			outputText(" A fuzzy [skin coat.color] dogtail sprouts just above your [butt], wagging to and fro whenever you are happy.");
 		if (player.tailType == Tail.DEMONIC)
-			outputText(" A narrow tail ending in a spaded tip curls down from your " + buttDescript() + ", wrapping around your [leg] sensually at every opportunity.");
+			outputText(" A narrow tail ending in a spaded tip curls down from your [butt], wrapping around your [leg] sensually at every opportunity.");
 		if (player.tailType == Tail.COW)
 			outputText(" A long cowtail with a puffy tip swishes back and forth as if swatting at flies.");
 		if (player.tailType == Tail.SPIDER_ADBOMEN) {
@@ -938,14 +937,14 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" A long shark-tail trails down from your backside, swaying to and fro while giving you a dangerous air.");
 		}
 		if (player.tailType == Tail.CAT) {
-			if (player.tailCount <= 1) outputText(" A soft [skin coat.color] cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
-			else outputText(" Pair of soft [skin coat.color] cat-tails sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
+			if (player.tailCount <= 1) outputText(" A soft [skin coat.color] cat-tail sprouts just above your [butt], curling and twisting with every step to maintain perfect balance.");
+			else outputText(" Pair of soft [skin coat.color] cat-tails sprouts just above your [butt], curling and twisting with every step to maintain perfect balance.");
 		}
 		if (player.tailType == Tail.NEKOMATA_FORKED_1_3) {
-			outputText(" A soft [skin coat.color] forked on its one third length cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
+			outputText(" A soft [skin coat.color] forked on its one third length cat-tail sprouts just above your [butt], curling and twisting with every step to maintain perfect balance.");
 		}
 		if (player.tailType == Tail.NEKOMATA_FORKED_2_3) {
-			outputText(" A soft [skin coat.color] forked on its two thirds length cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
+			outputText(" A soft [skin coat.color] forked on its two thirds length cat-tail sprouts just above your [butt], curling and twisting with every step to maintain perfect balance.");
 		}
 		if (player.tailType == Tail.LIZARD) {
 			outputText(" A tapered tail hangs down from just above your " + assDescript() + ". It sways back and forth, assisting you with keeping your balance.");
@@ -954,7 +953,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" A tapered, covered in red scales tail hangs down from just above your " + assDescript() + ". It sways back and forth, assisting you with keeping your balance. When you are in battle or when you want could set ablaze whole tail in red-hot fire.");
 		}
 		if (player.tailType == Tail.CAVE_WYRM) {
-			outputText(" A large newt tail trails down from your " + buttDescript() + ", tapering on the ground behind you. While it is heavy and plump, it can allow you to swim underwater like any fish if necessary, just like a newt.");
+			outputText(" A large newt tail trails down from your [butt], tapering on the ground behind you. While it is heavy and plump, it can allow you to swim underwater like any fish if necessary, just like a newt.");
 		}
 		if (player.tailType == Tail.RABBIT)
 			outputText(" A short, soft bunny tail sprouts just above your " + assDescript() + ", twitching constantly whenever you don't think about it.");
@@ -1065,9 +1064,7 @@ public class PlayerAppearance extends BaseContent {
 
 	public function describeArms():void {
 		const armsOpts:Object = {
-			id: player.arms.type,
-			skinTone: player.skinTone,
-			gargoyleMaterial: getGargoyleMaterial()
+			player: player
 		};
 
 		outputText(Arms.getAppearanceDescription(armsOpts));
@@ -1307,7 +1304,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.horns.type == Horns.ORCHID) {
 			if (player.horns.count > 0)
-				outputText(" A huge pair of "+player.NakedCoatColor+" orchids grows on each side of your head, their big long petals flopping gaily when you move.");
+				outputText(" A huge pair of "+player.nakedCoatColor+" orchids grows on each side of your head, their big long petals flopping gaily when you move.");
 		}
 		if (player.horns.type == Horns.ONI_X2) {
 			if (player.horns.count > 0)
@@ -2904,13 +2901,10 @@ public class PlayerAppearance extends BaseContent {
 		doNext(GenderForcedSetting);
 	}
 
-	public function getGargoyleMaterial(): String {
+	public static function getGargoyleMaterial(gargoyleFlag: int): String {
 		var gargoyleMaterials: Array = ["marble","alabaster"];
 
-		//Defines Gargoyle's material, 1 or 2 if successful
-		const gargoyleFlag: int = flags[kFLAGS.GARGOYLE_BODY_MATERIAL] && flags[kFLAGS.GARGOYLE_BODY_MATERIAL] > 0 ? flags[kFLAGS.GARGOYLE_BODY_MATERIAL] - 1 : 0;
-
-		return gargoyleMaterials[gargoyleFlag];
+		return gargoyleMaterials[gargoyleFlag] || gargoyleMaterials[0];
 	}
 
 	private function campActionsReflect():void {

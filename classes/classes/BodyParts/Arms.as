@@ -74,7 +74,7 @@ public class Arms extends BodyPart {
 	public static const GARGOYLE:int = 9;
 	EnumValue.add(Types, GARGOYLE, "GARGOYLE", {
 		name:"gargoyle", armSlam: true,
-		appearanceDesc: "Your {gargoyleMaterial} arms end in stone sharp clawed hands."
+		appearanceDesc: "Your [gargoylematerial] arms end in stone sharp clawed hands."
 	});
 
 	public static const WOLF:int = 10;
@@ -178,7 +178,7 @@ public class Arms extends BodyPart {
 	public static const GARGOYLE_2:int = 24;
 	EnumValue.add(Types, GARGOYLE_2, "GARGOYLE_2", {
 		name:"gargoyle",
-		appearanceDesc: "Your {gargoyleMaterial} arms end in normal human like hands.",
+		appearanceDesc: "Your [gargoylematerial] arms end in normal human like hands.",
 		claw: true
 	});
 
@@ -393,21 +393,17 @@ public class Arms extends BodyPart {
 	}
 
 	public static function getAppearanceDescription(opts:Object):String {
-		if (Types[opts.id].appearanceDesc) {
-			return formatDescription(Types[opts.id].appearanceDesc, opts);
-		}
+		const id: int = opts.player.arms.type;
 
-		return "";
+		return formatDescription(Types[id].appearanceDesc || "", opts);
 	}
 
 	private static function formatDescription(desc:String, opts: Object): String {
 		const upperCasePattern:RegExp = /^./;
 		const skinTonePattern:RegExp = /{skinTone}/g;
-		const gargoyleMaterialPattern:RegExp = /{gargoyleMaterial}/g;
 
 		return " " + desc
-			.replace(skinTonePattern, opts.skinTone)
-			.replace(gargoyleMaterialPattern, opts.gargoyleMaterial)
+			.replace(skinTonePattern, opts.player.skinTone)
 			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }
