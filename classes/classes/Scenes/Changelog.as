@@ -164,8 +164,9 @@ package classes.Scenes
 			outputText("-Power Attack and Power Shoot have new mechanic: they now will use ALL wrath PC have and deal dmg based how much % of max wrath (max over wrath is not included) was used with increase to dmg of PA/PS by 1:2 ratio. At 100% wrath it mean 200% dmg boost. Having Job: Warrior or Job: Beast Warrior will improve ratio to 1:5 and Prestige Job: Berserker would futher increse ration to 1:10.\n");
 			outputText("-Undefeated King's Signet and Prithviraj urumi would have now modified effects on Power Attack. Both items would only give +50% increase to final Power Attack dmg multiplier instead of previously adding 100%.\n");
 			outputText("-Great Dive special when PC have Death Plunge perk AND Charge special would also add modifier in similar way as power attack using current % of max wrath.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New Elven Ranger Armor at Kaiba with sprite\n");
+			outputText("-New Lactoblaster at Kaiba with sprite\n");
+			outputText("-New face bodypart for elf\n");
 			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk

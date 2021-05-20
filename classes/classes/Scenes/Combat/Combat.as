@@ -21,6 +21,7 @@ import classes.Items.JewelryLib;
 import classes.Items.ShieldLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
+import classes.Items.WeaponsRange.LactoBlasters;
 import classes.Monster;
 import classes.PerkLib;
 import classes.PotionType;
@@ -614,6 +615,11 @@ public class Combat extends BaseContent {
         clearOutput();
         outputText("You close the distance between you and [monster a] [monster name] as quickly as possible.\n\n");
         player.removeStatusEffect(StatusEffects.KnockedBack);
+        if (player.weaponRange == weaponsrange.LBLASTR){
+            var milkAmmo:Number = player.lactationQ()/100
+            if (milkAmmo > 20) milkAmmo = 20;
+            player.ammo = milkAmmo;
+        }
         if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
@@ -634,7 +640,12 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.SNIPPLE) player.ammo = 1;
         if (player.weaponRange == weaponsrange.TOUHOM3) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DERPLAU) player.ammo = 1;
-        outputText("At the same time, you open the magazine of your " + player.weaponRangeName + " to reload the ammunition.");
+        if (player.weaponRange == weaponsrange.LBLASTR){
+            outputText("At the same time, you moo in pleasures as milk flows from your udders, pumped by the suction cup all the way to the tank on your back.");
+            var lustDmg:int = rand(player.lib / 10) + 20;
+            player.dynStats("lus", lustDmg);
+        }
+        else outputText("At the same time, you open the magazine of your " + player.weaponRangeName + " to reload the ammunition.");
         if (!player.hasPerk(PerkLib.RapidReload)) {
             outputText("  This takes up a turn.\n\n");
             enemyAI();
@@ -2681,6 +2692,9 @@ public class Combat extends BaseContent {
         var weaponRangeName:String = player.weaponRangeName;
         var ammoWord:String;
         switch (weaponRangeName) {
+            case "Lactoblaster":
+                ammoWord = "milky streams";
+                break;
             case "Touhouna M3":
                 ammoWord = "bullets";
                 break;
@@ -2929,6 +2943,8 @@ public class Combat extends BaseContent {
                 if (player.inte >= 150) damage += player.inte * 0.1;
                 if (player.inte >= 200) damage += player.inte * 0.1;
             }
+            //Section for item damage modifiers
+            if (weaponRangePerk == "Bow" && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
             damage = Math.round(damage);
             if (monster.HP <= monster.minHP()) {
                 if (monster.short == "pod")
@@ -3455,6 +3471,9 @@ public class Combat extends BaseContent {
         var weaponRangeName:String = player.weaponRangeName;
         var ammoWord:String;
         switch (weaponRangeName) {
+            case "Lactoblaster":
+                ammoWord = "milky streams";
+                break;
             case "Touhouna M3":
                 ammoWord = "bullets";
                 break;
@@ -3734,24 +3753,30 @@ public class Combat extends BaseContent {
 						}
 					}
                 }
+                //Lust raising weapon bonuses
+                if (monster.lustVuln > 0) {
+                    var rangeweaponLustDmg:Number = 0;
+                    if (player.weaponRange == weaponsrange.TDPISTO || player.weaponRange == weaponsrange.DPISTOL || player.weaponRange == weaponsrange.LBLASTR) {
+                        rangeweaponLustDmg = (20 + player.cor / 15); // 20-26.7
+                        if (rangeweaponLustDmg > 0) {
+                            var s:String = monster.plural ? "" : "s";
+                            if (player.weaponRange == weaponsrange.LBLASTR){
+                                //if (rand(2) == 0) outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and get" + s + " turned on as he is splashed with your milk.");
+                                //else outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and moan" + s + " involuntarily highly turned on by your moo moo milk.");
+                            }
+                            else{
+                                if (rand(2) == 0) outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and get" + s + " turned on from the injected chemicals.");
+                                else outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and moan" + s + " involuntarily from the injected chemicals effects.");
+                            }
+                        }
+                        monster.teased(monster.lustVuln * rangeweaponLustDmg, false);
+                    }
+                }
                 outputText("\n\n");
                 heroBaneProc(damage);
                 if (player.weaponRange == weaponsrange.DERPLAU && rand(10) == 0) {
                     outputText(" You shoot but curse your bad luck as the grenade bounce back toward you! ");
                     player.takePhysDamage(Math.round(damage * 0.2));
-                }
-                //Lust raising weapon bonuses
-                if (monster.lustVuln > 0) {
-                    var rangeweaponLustDmg:Number = 0;
-                    if (player.weaponRange == weaponsrange.TDPISTO || player.weaponRange == weaponsrange.DPISTOL) {
-                        rangeweaponLustDmg = (20 + player.cor / 15); // 20-26.7
-                        if (rangeweaponLustDmg > 0) {
-                            var s:String = monster.plural ? "" : "s";
-                            if (rand(2) == 0) outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and get" + s + " turned on from the injected chemicals.");
-                            else outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and moan" + s + " involuntarily from the injected chemicals effects.");
-                        }
-                        monster.teased(monster.lustVuln * rangeweaponLustDmg);
-                    }
                 }
             }
         } else {
@@ -3771,12 +3796,14 @@ public class Combat extends BaseContent {
                 flags[kFLAGS.ARROWS_ACCURACY] += firearmsAccuracyPenalty();
                 shootWeapon();
             } else {
-                outputText("<b>Your firearm clip is empty.</b>\n\n");
+                if (player.weaponRange == weaponsrange.LBLASTR) outputText("<b>Your milk tank is empty.</b>\n\n");
+                else outputText("<b>Your firearm clip is empty.</b>\n\n");
                 reloadWeapon2();
             }
         } else {
             if (player.ammo == 0) {
-                outputText("<b>Your firearm clip is empty.</b>\n\n");
+                if (player.weaponRange == weaponsrange.LBLASTR) outputText("<b>Your milk tank is empty.</b>\n\n");
+                else outputText("<b>Your firearm clip is empty.</b>\n\n");
                 reloadWeapon2();
             } else enemyAI();
         }
@@ -3788,6 +3815,11 @@ public class Combat extends BaseContent {
     }
 
     public function reloadWeapon():void {
+        if (player.weaponRange == weaponsrange.LBLASTR){
+            var milkAmmo:Number = player.lactationQ()/100
+            if (milkAmmo > 20) milkAmmo = 20;
+            player.ammo = milkAmmo;
+        }
         if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
@@ -3808,7 +3840,11 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.SNIPPLE) player.ammo = 1;
         if (player.weaponRange == weaponsrange.TOUHOM3) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DERPLAU) player.ammo = 1;
-        outputText("You open the magazine of your " + player.weaponRangeName + " to reload the ammunition.");
+        if (player.weaponRange == weaponsrange.LBLASTR){
+            outputText("You moo in pleasures as milk flows from your udders, pumped by the suction cup all the way to the tank on your back. Almost immediately fresh cream fills your blasters, you're ready to resume shooting!");
+            var lustDmg:int = rand(player.lib / 10) + 20;
+            player.dynStats("lus", lustDmg);
+        } else outputText("You open the magazine of your " + player.weaponRangeName + " to reload the ammunition.");
     }
 
     public function reloadWeapon1():void {
@@ -4863,6 +4899,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
             if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) damage *= 1.05;
+            if (player.isUsingSpear && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5
             //One final round
             damage = Math.round(damage);
             //ANEMONE SHIT
@@ -9500,6 +9537,11 @@ public class Combat extends BaseContent {
         monster.mana = monster.maxMana();
         monster.soulforce = monster.maxSoulforce();
         monster.XP = monster.totalXP();
+        if (player.weaponRange == weaponsrange.LBLASTR){
+            var milkAmmo:Number = player.lactationQ()/100
+            if (milkAmmo > 20) milkAmmo = 20;
+            player.ammo = milkAmmo;
+        }
         if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;

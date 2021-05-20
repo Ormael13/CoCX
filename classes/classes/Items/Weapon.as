@@ -12,14 +12,16 @@ public class Weapon extends Useable //Equipable
 		private var _verb:String;
 		private var _attack:Number;
 		private var _perk:String;
+		private var _type:String;
 		private var _name:String;
 		
-		public function Weapon(id:String, shortName:String, name:String,longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "") {
+		public function Weapon(id:String, shortName:String, name:String,longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "", type:String = "") {
 			super(id, shortName, longName, value, description);
 			this._name = name;
 			this._verb = verb;
 			this._attack = attack;
 			this._perk = perk;
+			this._type = type;
 		}
 		
 		public function get verb():String { return _verb; }
@@ -27,6 +29,8 @@ public class Weapon extends Useable //Equipable
 		public function get attack():Number { return _attack; }
 		
 		public function get perk():String { return _perk; }
+
+		public function get type():String { return _type; }
 		
 		public function get name():String { return _name; }
 		

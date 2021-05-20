@@ -41,6 +41,7 @@ import flash.utils.Dictionary;
 		protected var _longName:String;
 		protected var _description:String;
 		protected var _value:Number;
+		protected var _tags:Object;
 
 		/**
 		 * Short name to be displayed on buttons
@@ -82,6 +83,11 @@ import flash.utils.Dictionary;
 			return _id;
 		}
 
+		public function get tags():Object
+		{
+			return _tags;
+		}
+
 		public function ItemType(_id:String,_shortName:String=null,_longName:String=null,_value:Number=0,_description:String=null)
 		{
 
@@ -90,6 +96,7 @@ import flash.utils.Dictionary;
 			this._longName = _longName || this.shortName;
 			this._description = _description || this.longName;
 			this._value = _value;
+			this._tags = {};
 			if (ITEM_LIBRARY[_id] != null) {
 				CoC_Settings.error("Duplicate itemid "+_id+", old item is "+(ITEM_LIBRARY[_id] as ItemType).longName);
 			}
@@ -100,6 +107,32 @@ import flash.utils.Dictionary;
 			ITEM_SHORT_LIBRARY[this._shortName] = this;
 		}
 
+		/**
+		 * Add tag to this item type. Use only when registering new item type!
+		 * @return this
+		 */
+		public function withTag(...tags:/*String*/Array):ItemType {
+			for each(var tag:String in tags) {
+				this.tags[tag] = true;
+			}
+			return this;
+		}
+
+		public function hasTag(tag:String):Boolean {
+			return this.tags[tag];
+		}
+		public function hasAllTags(...tags:/*String*/Array):Boolean {
+			for each (var tag:String in tags) {
+				if (!this.tags[tag]) return false;
+			}
+			return true;
+		}
+		public function hasAnyTag(...tags:/*String*/Array):Boolean {
+			for each (var tag:String in tags) {
+				if (this.tags[tag]) return true;
+			}
+			return false;
+		}
 
 		public function toString():String
 		{
