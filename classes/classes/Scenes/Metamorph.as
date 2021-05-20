@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes 
+package classes.Scenes
 {
 import classes.*;
 import classes.BodyParts.Antennae;
@@ -22,15 +22,15 @@ import classes.BodyParts.Wings;
 import classes.Items.MutationsHelper;
 
 use namespace CoC;
-	
+
 	public class Metamorph extends BaseContent
 	{
-		
-		public function Metamorph() 
+
+		public function Metamorph()
 		{
-			
+
 		}
-	
+
 public function accessMetamorphMenu():void {
 	clearOutput();
 	outputText("Using some of soulforce to re-gain any body parts that your body remembered in it genetic memory.\n");
@@ -591,6 +591,10 @@ private function accessPage3ArmsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms2) && player.arms.type == Arms.RAIJU_2) addButtonDisabled(12, "Raiju Paws", "You already have raiju paws.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms2) && player.arms.type != Arms.RAIJU_2 && player.soulforce < 100) addButtonDisabled(12, "Raiju Paws", "You do not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(12, "???", "You have not yet unlocked this metamorphosis!");
+	if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.arms.type != Arms.BAT && player.soulforce >= 100) addButton(9, "Bat", metamorphBatWings);
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.arms.type == Arms.BAT) addButtonDisabled(9, "Bat", "You already have winged bat arms.");
+	else if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.arms.type != Arms.BAT && player.soulforce < 100) addButtonDisabled(9, "Bat", "You do not have enough Soulforce for this metamorphosis.");
+	else addButtonDisabled(9, "???", "You have not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage1WingsMenu():void {
@@ -670,10 +674,6 @@ private function accessPage2WingsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedManticoreWingsLarge) && player.wings.type != Wings.MANTICORE_LIKE_LARGE && player.soulforce < 200) addButtonDisabled(8, "Manticore(L)", "You do not have enough Soulforce for this metamorphosis.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedManticoreWingsLarge) && player.wings.type != Wings.MANTICORE_LIKE_SMALL) addButtonDisabled(8, "Manticore(L)", "You do not have proper type of wings for this metamorphosis.");
 	else addButtonDisabled(8, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.wings.type != Wings.BAT_ARM && player.soulforce >= 100) addButton(9, "Bat", metamorphBatWings);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.wings.type == Wings.BAT_ARM) addButtonDisabled(9, "Bat", "You already have bat wings.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.wings.type != Wings.BAT_ARM && player.soulforce < 100) addButtonDisabled(9, "Bat", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(9, "???", "You have not yet unlocked this metamorphosis!");
 	if (player.hasStatusEffect(StatusEffects.UnlockedVampireWings) && player.wings.type != Wings.VAMPIRE && player.soulforce >= 100) addButton(10, "Vampire", metamorphVampireWings);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireWings) && player.wings.type == Wings.VAMPIRE) addButtonDisabled(10, "Vampire", "You already have vampire wings.");
 	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireWings) && player.wings.type != Wings.VAMPIRE && player.soulforce < 100) addButtonDisabled(10, "Vampire", "You do not have enough Soulforce for this metamorphosis.");
@@ -1292,50 +1292,50 @@ private function metamorphHair1D():void {
 private function metamorph000Fur():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-	
+
+
 	doNext(accessMetamorphMenu);
 }
 private function metamorph001Fur():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-	
+
+
 	doNext(accessMetamorphMenu);
 }
 private function metamorph002Fur():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-	
+
+
 	doNext(accessMetamorphMenu);
 }/*
 private function metamorph1Fur():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-	
+
+
 	doNext(accessMetamorphMenu);
 }
 private function metamorph1Fur():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-	
+
+
 	doNext(accessMetamorphMenu);
 }
 private function metamorph1Fur():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-	
+
+
 	doNext(accessMetamorphMenu);
 }
 private function metamorph1Fur():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-	
+
+
 	doNext(accessMetamorphMenu);
 }*/
 
@@ -1345,50 +1345,50 @@ private function metamorph1Fur():void {
 private function metamorph1Fur():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-	
+
+
 	doNext(accessMetamorphMenu);
 }
 private function metamorph1Fur():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-	
+
+
 	doNext(accessMetamorphMenu);
 }
 private function metamorphGoo():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-	
+
+
 	doNext(accessMetamorphMenu);
 }
 private function metamorphGoo():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-	
+
+
 	doNext(accessMetamorphMenu);
 }
 private function metamorphGoo():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-	
+
+
 	doNext(accessMetamorphMenu);
 }
 private function metamorphGoo():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-	
+
+
 	doNext(accessMetamorphMenu);
 }
 private function metamorphGoo():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
-	
+
+
 	doNext(accessMetamorphMenu);
 }*/
 private function metamorphSphinxArms():void {
@@ -2075,15 +2075,18 @@ private function metamorphVampireEyes():void {
 private function metamorphVampireWings():void {
 	clearOutput();
 	player.soulforce -= 100;
-	if (player.wings.type == Wings.BAT_ARM) {
-		outputText("\n\nYou cry out as your arms creak and twist, your bones breaking down and reforming in a frenzy. Your parchment-like skin begins to fall off in clumps, leaving the mess of malformed bones that are your arms right now naked for all to see. However, even as you watch, dark blood creeps over the bone, properly aligning them before healing them over, although not in their old form. Within seconds, the pain is gone, as your bones are remade into ones alike those you were born with, in structure if nothing else, the eldritch power of your blood finally ebbing away, but not before the last of it settles and turns into a brand new patch of skin. It's still sensitive, but you'll get used to it. ");
-		outputText("You catch something moving on the edge of your peripheral vision, causing your hard-won instincts to kick in, muscle memory forcing you into a lunge away from whatever it was before you’re even fully aware of what’s happening. Instead of dodging with your usual grace, you stumble and roll, landing on your wings... Wait, <i>wings??</i> It seems that, while you were fascinated by your bloody shenanigans, you failed to notice that you were growing wings. Understandable, since your arms breaking themselves several times over tends to take priority over such things, attention-wise. You shakily stand up, your balance still thrown off by the new limb, inwardly grumbling at how long is it going to take you to get used to them. ");
-		outputText("Distracted as you are, both from the ordeal and your inner grumbling, your first attempt at walking inevitably ends with an intimate reunion of your face and the ground. This time, you don’t bother to keep your cursing to the confines of your own mind. <b>You will now be able to enjoy nightly flights with your brand new vampire wings.</b>");
-	}
-	else {
-		outputText("\n\nA terrible pain flares in the center of your back, a pain so intense that you black out briefly, coming back to your senses as you hit your head against the ground. You hear a horrifying ripping noise as your back stretches and tears to allow new bones to expand, black as tar and far lighter than most of the bones in your body. These new bones shift under your shoulder blade skin as you fall on all groaning in pain and clawing at the ground. In a flash of pain they violently break out of your skin sending blood everywhere as you make a chilling scream your wounds slowly closing on their own. Still panting from the pain, you take a look at your new appendage. It's a pair of large vampire wings of impressive size. ");
-		outputText("Feeling chilly you fold them back on your body and you ought to admit they indeed look like a large cape. <b>You will be able to enjoy nightly flight using your brand new vampire wings.</b>");
-	}
+	// if (player.wings.type == Wings.BAT_ARM) {
+	// 	outputText("\n\nYou cry out as your arms creak and twist, your bones breaking down and reforming in a frenzy. Your parchment-like skin begins to fall off in clumps, leaving the mess of malformed bones that are your arms right now naked for all to see. However, even as you watch, dark blood creeps over the bone, properly aligning them before healing them over, although not in their old form. Within seconds, the pain is gone, as your bones are remade into ones alike those you were born with, in structure if nothing else, the eldritch power of your blood finally ebbing away, but not before the last of it settles and turns into a brand new patch of skin. It's still sensitive, but you'll get used to it. ");
+	// 	outputText("You catch something moving on the edge of your peripheral vision, causing your hard-won instincts to kick in, muscle memory forcing you into a lunge away from whatever it was before you’re even fully aware of what’s happening. Instead of dodging with your usual grace, you stumble and roll, landing on your wings... Wait, <i>wings??</i> It seems that, while you were fascinated by your bloody shenanigans, you failed to notice that you were growing wings. Understandable, since your arms breaking themselves several times over tends to take priority over such things, attention-wise. You shakily stand up, your balance still thrown off by the new limb, inwardly grumbling at how long is it going to take you to get used to them. ");
+	// 	outputText("Distracted as you are, both from the ordeal and your inner grumbling, your first attempt at walking inevitably ends with an intimate reunion of your face and the ground. This time, you don’t bother to keep your cursing to the confines of your own mind. <b>You will now be able to enjoy nightly flights with your brand new vampire wings.</b>");
+	// }
+	// else {
+	// 	outputText("\n\nA terrible pain flares in the center of your back, a pain so intense that you black out briefly, coming back to your senses as you hit your head against the ground. You hear a horrifying ripping noise as your back stretches and tears to allow new bones to expand, black as tar and far lighter than most of the bones in your body. These new bones shift under your shoulder blade skin as you fall on all groaning in pain and clawing at the ground. In a flash of pain they violently break out of your skin sending blood everywhere as you make a chilling scream your wounds slowly closing on their own. Still panting from the pain, you take a look at your new appendage. It's a pair of large vampire wings of impressive size. ");
+	// 	outputText("Feeling chilly you fold them back on your body and you ought to admit they indeed look like a large cape. <b>You will be able to enjoy nightly flight using your brand new vampire wings.</b>");
+	// }
+	outputText("\n\nA terrible pain flares in the center of your back, a pain so intense that you black out briefly, coming back to your senses as you hit your head against the ground. You hear a horrifying ripping noise as your back stretches and tears to allow new bones to expand, black as tar and far lighter than most of the bones in your body. These new bones shift under your shoulder blade skin as you fall on all groaning in pain and clawing at the ground. In a flash of pain they violently break out of your skin sending blood everywhere as you make a chilling scream your wounds slowly closing on their own. Still panting from the pain, you take a look at your new appendage. It's a pair of large vampire wings of impressive size. ");
+	outputText("Feeling chilly you fold them back on your body and you ought to admit they indeed look like a large cape. <b>You will be able to enjoy nightly flight using your brand new vampire wings.</b>");
+
 	player.wings.type = Wings.VAMPIRE;
 	player.wings.desc = "large bat";
 	doNext(accessPage2WingsMenu);
@@ -2109,10 +2112,8 @@ private function metamorphBatWings():void {
 	clearOutput();
 	player.soulforce -= 100;
 	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
-	outputText("\n\nLarge bones surge out of your wrists and elbows. You can feel your bones shifting and grinding all over your body as your skeletal structure begins changing into one more fit for a flying creature, with light, hollow bones. You collapse to the ground as they begin shifting proportions becoming thinner and longer to maximize area while reducing their density. Leathery flesh begins to cover your new bony protrusions, spreading between each of them like creeping moss.");
-	outputText(" Eventually, the skin stops growing and you admire your new arms. They are very obviously bat wings. You close them around your waist, like this they could easily be mistaken for a large cape when seen from afar. <b>You now have large bat wings.</b>");
-	player.wings.type = Wings.BAT_ARM;
-	player.wings.desc = "bat";
+	outputText("\n\nLarge bones surge out of your wrists and elbows. You can feel your bones shifting and grinding all over your body as your skeletal structure begins changing into one more fit for a flyincreature, with light, hollow bones. You collapse to the ground as they begin shifting proportions, becoming thinner and longer to maximize area while reducing their density. Leathery flesh begins to cover your new bony protrusions, spreading between each of them like creeping moss. Eventually, the skin stops growing and you admire your new arms. They are very obviously winged bat arms. You close them around your waist, and like this they could easily be mistaken for a large cape when seen from afar. <b>You now have large winged bat arms.</b>");
+	player.arms.type = Arms.BAT;
 	doNext(accessPage2WingsMenu);
 }
 private function metamorphBatEars():void {
@@ -3292,7 +3293,7 @@ private function metamorphFishGills():void {
 /*private function metamorphTattoed():void {
 	clearOutput();
 	player.soulforce -= 100;
-	
+
 	doNext(accessMetamorphMenu);
 }*/
 private function metamorphDragonScales():void {
@@ -3467,6 +3468,9 @@ private function restoreHumanArms():void {
 	}
 	if (player.arms.type == Arms.ELF || player.arms.type == Arms.KITSUNE || player.arms.type == Arms.ONI || player.arms.type == Arms.RAIJU || player.arms.type == Arms.PIG) {
 		outputText("arms' claws retracting back into ordinary nails. You hand looks human again.");
+	}
+	if (player.arms.type == Arms.BAT) {
+		outputText("bones are breaking down and reforming in a frenzy. Your parchment-like skin begins to fall off in clumps, leaving the mess of malformed bones that are your arms right now naked for all to see. However, even as you watch, dark blood creeps over the bone, properly aligning them before healing them over, although not in their old form. Within seconds, your bones are remade into ones alike those you were born with, in structure if nothing else, the eldritch power of your blood finally ebbing away, but not before the last of it settles and turns into a brand new patch of skin.");
 	}
 	outputText("\n\n");
 	player.arms.type = Arms.HUMAN;

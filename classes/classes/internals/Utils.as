@@ -40,7 +40,7 @@ package classes.internals
 			for (var x:int = 1; x < stringList.length - 1; x++) concat += ", " + stringList[x];
 			return concat + " and " + stringList[stringList.length - 1];
 		}
-		
+
 		/**
 		 * @return input if it is not null or undefined, otherwise defaultValue
 		 */
@@ -121,7 +121,7 @@ package classes.internals
 			target.push.apply(target, values);
 			return target;
 		}
-		
+
 		/**
 		 * @return src.find( el => el[propName] == propValue ) || defaultValue
 		 */
@@ -131,7 +131,7 @@ package classes.internals
 			}
 			return defaultValue;
 		}
-		
+
 		/**
 		 * @return src.filter( el => el && el[propName] == propValue )
 		 */
@@ -161,6 +161,13 @@ package classes.internals
 				if (!el) continue;
 				result.push({label: propname ? el[propname] : (""+el), data:el});
 			}
+			result.sort(function(a:*, b:*):int {
+				if (a.label > b.label) {
+					return 1;
+				} else {
+					return -1;
+				}
+			});
 			return result;
 		}
 		/**
