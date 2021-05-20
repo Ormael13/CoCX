@@ -4850,6 +4850,7 @@ public class Combat extends BaseContent {
             if (rand(100) < critChance) {
                 crit = true;
                 if ((player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critDamage += 0.1;
+				if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.shield == ShieldLib.NOTHING) critDamage += 0.2;
                 damage *= critDamage;
             }
             //Apply AND DONE!
@@ -6023,6 +6024,10 @@ public class Combat extends BaseContent {
             else parryChance2 += 10;
             if (player.hasPerk(PerkLib.BladeBarrier) && (player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large")) parryChance2 += 15;
         }
+		if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.shield == ShieldLib.NOTHING) {
+			if (player.spe <= 100) parryChance2 += player.spe / 10;
+            else parryChance2 += 10;
+		}
         if (player.weaponPerk == "Massive") parryChance2 += 5;
         if (player.weaponName == "Undefeated King's Destroyer") parryChance2 += 15;
         if (player.hasPerk(PerkLib.DexterousSwordsmanship)) parryChance2 += 10;
@@ -9420,37 +9425,12 @@ public class Combat extends BaseContent {
     public function wrathregeneration2():Number {
         var wrathregen:Number = 0;
         var BonusWrathMult:Number = 1;
-        if (player.hasPerk(PerkLib.DoubleAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.TripleAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.QuadrupleAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.PentaAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.HexaAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.HectaAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.OctaAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.NonaAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.DecaAttackSmall)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.DoubleAttack)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.TripleAttack)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.QuadrupleAttack)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.PentaAttack)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.HexaAttack)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.DoubleAttackLarge)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.TripleAttackLarge)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.ClawTraining)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.ExtraClawAttack)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.MultiClawAttack)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.ClawingFlurry)) wrathregen += 1;
-        if (player.hasPerk(PerkLib.JobBeastWarrior)) wrathregen += 2;
         if (player.hasPerk(PerkLib.PrimalFuryI)) wrathregen += 2;
         if (player.hasPerk(PerkLib.PrimalFuryII)) wrathregen += 2;
         if (player.hasPerk(PerkLib.PrimalFuryIII)) wrathregen += 2;
         if (player.hasPerk(PerkLib.PrimalFuryIV)) wrathregen += 2;
         if (player.hasPerk(PerkLib.PrimalFuryV)) wrathregen += 2;
         if (player.hasPerk(PerkLib.PrimalFuryVI)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.Berzerker)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.Lustzerker)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.Rage)) wrathregen += 2;
-        if (player.hasPerk(PerkLib.Anger)) wrathregen += 2;
         if (player.hasPerk(PerkLib.DraconicHeart)) wrathregen += 1;
         if (player.hasPerk(PerkLib.DraconicHeartEvolved)) wrathregen += 1;
         if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) wrathregen += 1;
@@ -12397,13 +12377,10 @@ public class Combat extends BaseContent {
                 if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 60) && player.hasPerk(PerkLib.Naturaljouster)) || (player.spe >= 150 && player.hasPerk(PerkLib.Naturaljouster))) damage *= 3;
                 if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 180) && player.hasPerk(PerkLib.NaturaljousterMastergrade)) || (player.spe >= 450 && player.hasPerk(PerkLib.NaturaljousterMastergrade))) damage *= 5;
             }
-            if (player.level >= 36) damage *= 8;
-            else if (player.level >= 30) damage *= 7;
-            else if (player.level >= 24) damage *= 6;
-            else if (player.level >= 18) damage *= 5;
-            else if (player.level >= 12) damage *= 4;
-            else if (player.level >= 6) damage *= 3;
-            else damage *= 2;
+			var PAM1:Number = player.wrath100 * 0.02;
+			if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) PAM1 *= 2.5;
+			if (player.hasPerk(PerkLib.PrestigeJobBerserker)) PAM1 *= 2;
+            damage *= (1 + PAM1);
         } else {
             if (player.lowerBody == LowerBody.HARPY) {
                 outputText("making a bloody trail with your talons ");

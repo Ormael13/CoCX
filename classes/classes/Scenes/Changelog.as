@@ -123,12 +123,19 @@ package classes.Scenes
 			outputText("Flames of Love and Icicles of Love not dealing increased dmg to group enemies, beautiful items aside sword and excalibur not been dropped with high corruption, beautiful sword / excalibur not been working properly with multiattack settings, centipeded tf small correction, added missing cooldown countdown for Flames/Icicles of Love and Punishing Kick soulskills, missing Ebon Labyrinth bosses in rooms ");
 			outputText("200 / 250 / 300, succubus special no longer affecting lust immune enemies, no reseting on 2nd to 4th ring in case PC had any equipped, shield perks working with all shields not only those that allows use of shield bash, EL questolog reward after 50th room wrong unlock req., Diana post-rejection offer combat stats errors, many smol fixes and typos corrected\n");
 			outputText("<b>Version 0.8r2:</b>\n\n");
+			outputText("-New tier 0 intelligence lvl-up perk: Novice War Mage. Req. Job: Sorcerer or Job: Healer perk, 40+ int. Effect: Increases wrath bar by 50. Safe limit for spellcasting increased by 5%.\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Mage's Wrath (Ex). Req. Mage's Wrath perk, 75+ int. Effect: Tier 1 elemental spells will be castable in (Ex) version that increase their power 2x while additionaly using 100 wrath. Safe limit for spellcasting increasing by 5%.\n");
+			outputText("-New tier 2 intelligence lvl-up perk: Apprentice War Mage. Req. Novice War Mage perk, 80+ int. Effect: Increases wrath bar by 50. In-combat mana recovery increased by 10. Safe limit for spellcasting increased by 5%.\n");
+			outputText("-New tier 4 intelligence lvl-up perk: Adept War Mage. Req. Apprentice War Mage perk, 120+ int. Effect: Increases wrath bar by 150. In-combat mana recovery increased by 15. Safe limit for spellcasting increased by 5%.\n");
 			outputText("-New event perk: Asura Strength. Gained by spending 1 super perk point, lvl 30+ and having 'I Cast (Asura) Fist' super perk. Effects: Allow to reach OverMax Wrath equal to 150% of current max wrath. Asura Form increase to physical might rise to 180%/90%/60% of core str/tou/spe and generate one additional pair of semi-transparent arms. (+10% of Base STR Cap)\n");
 			outputText("-New event perk: Blood Demon Toughness. Gained by spending 1 super perk point, lvl 30+ and having 'My Blood for Blood Puppies' super perk. Effects: Gain Blood Demon Toughness. When below 0 HP it would negate any negative effect of other perks that would cause negative HP regen. (+10x Tou of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power/Base TOU Cap, +0,5% HP regen)\n");
 			outputText("-Warrior Rage, Berzerker, Lustzerker, Oni Rampage m.specials can be accessed now also from Others actions submenu in combat menu (for times when PC is too angry aka too high wrath to access m.specials menu).\n");
 			outputText("-Blood Swipe/Bloode Swipe (SF)/Blood Swipe (SF) used by Blood Puppies have now added 20% chance to triger 2 turn long bleed for 5% of enemy max HP.\n");
 			outputText("-Cooldowns for elemental spells are no longer shared and each spell got it own seperatly tracked cooldown. Whitefire, Pyre Burst, Lightning Bolt, Chain Lighting, Ice Spike, Arctic Gale, Darkness Shard and Dusk Wave spells are classified now as tier 1 elementals spells. Meteor Shower and Polar Midnight are classified now as tier 3 elemental spells.\n");
+			outputText("-New update for Oni including sprited tetsubo, a gourd accessory and two high level kimono at Kaiba (by Liadri)\n");
+			outputText("-Many changes to code by Jtexc.\n");
+			outputText("-Liadri tireless changes and corrections.\n");
+			outputText("-Delays when having alot perks or/and status effects decreased thanks to grmb-bit code changes.\n");
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
@@ -145,30 +152,26 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New event perk: Deity Job: Munchkin. Gained by having merely 1 super perk, lvl 90+, all basic jobs, 6 advanced jobs, 2 prestige jobs, 1 hidden job, 150+ pts in str/tou/spe/int/wis/lib, 100+ in sens. Effects: +20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up.\n");
 			//outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 96+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, \n");
-			outputText("-New tier 0 intelligence lvl-up perk: Novice War Mage. Req. Job: Sorcerer or Job: Healer perk, 40+ int. Effect: Increases wrath bar by 50. Safe limit for spellcasting increased by 5%.\n");
-			outputText("-New tier 2 intelligence lvl-up perk: Apprentice War Mage. Req. Novice War Mage perk, 80+ int. Effect: Increases wrath bar by 50. In-combat mana recovery increased by 10. Safe limit for spellcasting increased by 5%.\n");
-			outputText("-New tier 4 intelligence lvl-up perk: Adept War Mage. Req. Apprentice War Mage perk, 120+ int. Effect: Increases wrath bar by 150. In-combat mana recovery increased by 15. Safe limit for spellcasting increased by 5%.\n");
-			outputText("-Changes to code by Jtexc.\n");
 			outputText("-Four bosses appeared in 2nd floor of River Dungeon ready to wrestle with any brave adventures that goes into this floor. Be carefull if your team is ot yet ready to face them ;)\n");
 			outputText("-New tier 0 strength lvl-up perk: Challenging shout. Req. Job: Warrior perk, 25+ str. Effect: Allow to use Warrior Shout p.special.\n");
 			outputText("-New P. Special: Warrior Shout. Req. Challenging shout perk. Embolden yourself with a mighty shout. Generate 20% of max/overmax wrath on use as a free action. 10 turns colldown after use.\n");
-			//outputText("-New tier  strength lvl-up perk: Balance breaker. Req. . Effect: Hits from maces/hammers leaves your opponent disoriented nullifying their stability. (Maces/Hammers ignore stun immunity their stun now considered as power stuns)\n");
-			outputText("-Delays when having alot perks or/and status effects decreased thanks to grmb-bit code changes.\n");
-			outputText("-New update for Oni including sprited tetsubo, a gourd accessory and two high level kimono at Kaiba (by Liadri)\n");
 			outputText("-Shield bash cost changed from 20 fatigue to 15 wrath. Blocking use 6 wrath and will now check for having shield that can be used to block (it mean all that can be used to shield bash too). If PC use large or massive shield shield bash and block wrath costs increasing by: 15/30 and 4/8\n");
+			outputText("-New tier 2 strength lvl-up perk: Balance breaker. Req. Job: Warrior perk, 100+ str. Effect: Your brutal strikes while wielding maces or hammers may leave your opponents disoriented. (Attacks with maces/hammers can powerstun and ignore stun immunity but with halved stun chance)\n");
+			outputText("-New tier 2 strength lvl-up perk: Orthodox duelist. Req. Job: Warrior perk, 100+ str. Effect: Wielding a dueling sword with no off hand, increase critical damage by 20% and the chance to parry blows by 10% based on speed.\n");
+			//outputText("-New tier 2 strength lvl-up perk: Knightly sword. Req. Job: Warrior perk, 100+ str. Effect: Regular swords increase damage reduction by 10% and parry chance by 15%.\n");
+			outputText("-Zetta refactoring hair desc, lower body code.\n");
+			outputText("-Many passive sources of gains for wrath in/out of combat been removed due to having other sources (using p.specials or base melee/range attacks mainly) that ended giving way too many wrath per turn.\n");
+			outputText("-Power Attack and Power Shoot have new mechanic: they now will use ALL wrath PC have and deal dmg based how much % of max wrath (max over wrath is not included) was used with increase to dmg of PA/PS by 1:2 ratio. At 100% wrath it mean 200% dmg boost. Having Job: Warrior or Job: Beast Warrior will improve ratio to 1:5 and Prestige Job: Berserker would futher increse ration to 1:10.\n");
+			outputText("-Undefeated King's Signet and Prithviraj urumi would have now modified effects on Power Attack. Both items would only give +50% increase to final Power Attack dmg multiplier instead of previously adding 100%.\n");
+			outputText("-Great Dive special when PC have Death Plunge perk AND Charge special would also add modifier in similar way as power attack using current % of max wrath.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Blood Demon toggle to use HP instead of mana resetting after each combat\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Blood Demon toggle to use HP instead of mana resetting after each combat, naga-like lower ghost race body type not causing lower underwear to drop down like on naga PC\n");/*ostatni punkt changelogu
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -227,9 +230,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -256,6 +257,23 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -358,7 +358,7 @@ public class PerkLib
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
 		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
-				"+3000 to max Wrath.",//stay alive when berserking at cost of super fast 20% max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
+				"+3000 to max Wrath.",//stay alive when berserking at cost of super fast 20%(or 25%) max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
 				"You've chosen the 'Too Angry to Die' perk, .");
 		public static const AdvancedGolemancyTheory:PerkType = mk("Advanced Golemancy Theory", "Advanced Golemancy Theory",
 				"Enable option to make steel golems and store 1 such golem.",
@@ -384,6 +384,12 @@ public class PerkLib
 		public static const BalanceBreaker:PerkType = mk("Balance breaker", "Balance breaker",
 				"Your brutal strikes while wielding maces or hammers may leave your opponents disoriented. (Attacks with maces/hammers can powerstun and ignore stun immunity but with halved stun chance)",
 				"You've chosen the 'Balance breaker' perk. Your brutal strikes while wielding maces or hammers may leave your opponents disoriented. (Attacks with maces/hammers can powerstun and ignore stun immunity but with halved stun chance)");
+		public static const OrthodoxDuelist:PerkType = mk("Orthodox duelist", "Orthodox duelist",
+				"Wielding a dueling sword with no off hand, increase critical damage by 20% and the chance to parry blows by 10% based on speed.",
+				"You've chosen the 'Orthodox duelist' perk. Wielding a dueling sword with no off hand, increase critical damage by 20% and the chance to parry blows by 10% based on speed.");
+		public static const KnightlySword:PerkType = mk("Knightly sword", "Knightly sword",
+				"Regular swords increase damage reduction by 10% and parry chance by 15%.",
+				"You've chosen the 'Knightly sword' perk. Regular swords increase damage reduction by 10% and parry chance by 15%.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -444,12 +450,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -3857,6 +3857,12 @@ public class PerkLib
             //Tier 2 Strength Perks
             AdrenalineRush.requireLevel(12)
                     .requirePerk(FuriousStrikes);
+            BalanceBreaker.requireLevel(12)
+                    .requireStr(100)
+                    .requirePerk(JobWarrior);
+            OrthodoxDuelist.requireLevel(12)
+                    .requireStr(100)
+                    .requirePerk(JobWarrior);
             IronFistsIV.requireNGPlus(3)
                     .requireLevel(12)
                     .requireStr(105)
@@ -7188,4 +7194,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}
