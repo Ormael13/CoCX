@@ -73,6 +73,7 @@ public class Creature extends Utils
 		private var _weaponVerb:String = "";
 		private var _weaponAttack:Number = 0;
 		private var _weaponPerk:String = "";
+		private var _weaponType:String = "";
 		private var _weaponValue:Number = 0;
 		public function get weaponName():String { return _weaponName; }
 		public function get weaponVerb():String { return _weaponVerb; }
