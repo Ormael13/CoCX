@@ -78,6 +78,7 @@ public class Creature extends Utils
 		public function get weaponVerb():String { return _weaponVerb; }
 		public function get weaponAttack():Number { return _weaponAttack; }
 		public function get weaponPerk():String { return _weaponPerk; }
+		public function get weaponType():String { return _weaponType; }
 		public function get weaponValue():Number { return _weaponValue; }
 		public function set weaponName(value:String):void { _weaponName = value; }
 		public function set weaponVerb(value:String):void { _weaponVerb = value; }
