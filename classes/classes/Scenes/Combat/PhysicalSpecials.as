@@ -1129,6 +1129,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) powershotpowervalue *= 1.2;
 		if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) powershotpowervalue *= 1.1;
+		if (player.weaponRangePerk == "Bow" && player.hasPerk(PerkLib.ElvenRangerArmor)) powershotpowervalue *= 1.5;
 		return powershotpowervalue;
 	}
 	

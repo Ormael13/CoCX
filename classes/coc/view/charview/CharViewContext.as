@@ -179,6 +179,7 @@ import coc.xlogic.ExecContext;
 					travelingMerchantOutfit: player.armor == game.armors.TRMOUTF,
 					chainMailBikini: player.armor == game.armors.CHBIKNI || player.armor == game.armors.LMARMOR,
 					platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
+					elfClothing: player.armor == game.armors.ERA,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,

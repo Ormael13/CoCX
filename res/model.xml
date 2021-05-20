@@ -703,6 +703,9 @@
         <cell rect="932,1620,80,107" name="weapon/bowGeneric" dx="51" dy="54"/>
         <cell rect="932,1729,80,107" name="weapon/bowHoly" dx="51" dy="54"/>
         <cell rect="932,1838,80,107" name="weapon/bowUnholy" dx="51" dy="54"/>
+        <cell rect="1022,1620,80,90" name="backAccessory/LactoblasterTank" dx="59" dy="34"/>
+        <cell rect="1022,1726,85,45" name="weapon/LactoblasterGun" dx="60" dy="97"/>
+        <cell rect="1022,1776,80,45" name="weapon/LactoblasterMilker" dx="59" dy="62"/>
         <cell rect="842,1938,80,90" name="backAccessory/oniGourd" dx="74" dy="52"/>
     </spritemap>
     <spritemap file="hair.png">
@@ -4850,6 +4853,79 @@
                         <hide part="balls/*"/>
                         <show part="panty/scandalousSuccubusClothingPanty"/>
 					</else>
+				</if>
+			</if>
+		</if>
+		
+		<if test="elfClothing">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/elfClothingBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/elfClothingBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/elfClothingBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/elfClothingBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/elfClothingBraLarge"/>
+					</default>
+				</switch>
+			</if>
+			<if test="showClothing">
+				<show part="clothe/elfClothing"/>
+				<show part="clothe/elfClothingSkirt"/>
+				<show part="clothcape/elfClotheCape_bg"/>
+				<show part="armorNeck/elfClotheCape_fg"/>
+				<if test="showArmClothing">
+					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+						<switch value="arms.type">
+							<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
+								<show part="clothRightArm/elfClothingRightArmLewd"/>
+								<if test="PlayerHasAWeapon">
+									<show part="clothLeftArm/elfClothingleftArm"/>
+									<else>
+										<show part="clothLeftArm/elfClothingleftArmLewd"/>
+									</else>
+								</if>
+								<show part="glove_fg/elfClothingRightArmFront"/>
+							</case>
+							<default>
+								<show part="clothLeftArm/elfClothingleftArm"/>
+								<show part="clothRightArm/elfClothingRightArm"/>
+							</default>
+						</switch>
+						<else>
+							<show part="clothLeftArm/elfClothingleftArm"/>
+							<show part="clothRightArm/elfClothingRightArm"/>
+						</else>
+					</if>
+				</if>
+				<if test="showLegClothing">
+					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+						<switch value="lowerBody">
+							<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
+								<switch value="arms.type">
+									<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
+										<show part="clotheLegs/scandalousSuccubusClothinglegsLewd"/>
+									</case>
+									<default>
+										<show part="clotheLegs/elfClothinglegs"/>
+									</default>
+								</switch>
+							</case>
+						</switch>
+						<else>
+							<show part="clotheLegs/elfClothinglegs"/>
+						</else>
+					</if>
 				</if>
 			</if>
 		</if>

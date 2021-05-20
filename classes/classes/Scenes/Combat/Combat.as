@@ -2929,6 +2929,8 @@ public class Combat extends BaseContent {
                 if (player.inte >= 150) damage += player.inte * 0.1;
                 if (player.inte >= 200) damage += player.inte * 0.1;
             }
+            //Section for item damage modifiers
+            if (weaponRangePerk == "Bow" && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
             damage = Math.round(damage);
             if (monster.HP <= monster.minHP()) {
                 if (monster.short == "pod")
@@ -4862,6 +4864,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
             if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) damage *= 1.05;
+            if (player.isUsingSpear && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5
             //One final round
             damage = Math.round(damage);
             //ANEMONE SHIT
