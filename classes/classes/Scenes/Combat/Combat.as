@@ -3463,6 +3463,9 @@ public class Combat extends BaseContent {
             case "M1 Cerberus":
                 ammoWord = "pellets";
                 break;
+            case "LactoBlasters":
+                ammoWord = "milky streams";
+                break;
             case "Harpoon gun" :
                 ammoWord = "harpoon";
                 break;
@@ -3745,12 +3748,18 @@ public class Combat extends BaseContent {
                 //Lust raising weapon bonuses
                 if (monster.lustVuln > 0) {
                     var rangeweaponLustDmg:Number = 0;
-                    if (player.weaponRange == weaponsrange.TDPISTO || player.weaponRange == weaponsrange.DPISTOL) {
+                    if (player.weaponRange == weaponsrange.TDPISTO || player.weaponRange == weaponsrange.DPISTOL || player.weaponRange == weaponsrange.LBLASTR) {
                         rangeweaponLustDmg = (20 + player.cor / 15); // 20-26.7
                         if (rangeweaponLustDmg > 0) {
                             var s:String = monster.plural ? "" : "s";
-                            if (rand(2) == 0) outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and get" + s + " turned on from the injected chemicals.");
-                            else outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and moan" + s + " involuntarily from the injected chemicals effects.");
+                            if (player.weaponRange == weaponsrange.LBLASTR){
+                                if (rand(2) == 0) outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and get" + s + " turned on as he is splashed with your milk.");
+                                else outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and moan" + s + " involuntarily highly turned on by your moo moo milk.");
+                            }
+                            else{
+                                if (rand(2) == 0) outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and get" + s + " turned on from the injected chemicals.");
+                                else outputText("\n" + monster.capitalA + monster.short + " shiver" + s + " and moan" + s + " involuntarily from the injected chemicals effects.");
+                            }
                         }
                         monster.teased(monster.lustVuln * rangeweaponLustDmg);
                     }
@@ -3773,12 +3782,14 @@ public class Combat extends BaseContent {
                 flags[kFLAGS.ARROWS_ACCURACY] += firearmsAccuracyPenalty();
                 shootWeapon();
             } else {
-                outputText("<b>Your firearm clip is empty.</b>\n\n");
+                if (player.weaponName == "LactoBlaster") outputText("<b>Your milk tank is empty.</b>\n\n");
+                else outputText("<b>Your firearm clip is empty.</b>\n\n");
                 reloadWeapon2();
             }
         } else {
             if (player.ammo == 0) {
-                outputText("<b>Your firearm clip is empty.</b>\n\n");
+                if (player.weaponName == "LactoBlaster") outputText("<b>Your milk tank is empty.</b>\n\n");
+                else outputText("<b>Your firearm clip is empty.</b>\n\n");
                 reloadWeapon2();
             } else enemyAI();
         }
@@ -3790,6 +3801,11 @@ public class Combat extends BaseContent {
     }
 
     public function reloadWeapon():void {
+        if (player.weaponRange == weaponsrange.LBLASTR){
+            var milkAmmo:Number = player.lactationQ()/100
+            if (milkAmmo > 20) milkAmmo = 20;
+            player.ammo = milkAmmo;
+        }
         if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
         if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
         if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
@@ -3810,7 +3826,12 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.SNIPPLE) player.ammo = 1;
         if (player.weaponRange == weaponsrange.TOUHOM3) player.ammo = 1;
         if (player.weaponRange == weaponsrange.DERPLAU) player.ammo = 1;
-        outputText("You open the magazine of your " + player.weaponRangeName + " to reload the ammunition.");
+        if (player.weaponName == "LactoBlaster"){
+            outputText("You moo in pleasures as milk flows from your udders, pumped by the suction cup all the way to the tank on your back. Almost immediately fresh cream fills your blasters, you're ready to resume shooting!");
+            var lustDmg:int = rand(player.lib / 10) + 20;
+            player.dynStats("lus", lustDmg);
+        }
+        else outputText("You open the magazine of your " + player.weaponRangeName + " to reload the ammunition.");
     }
 
     public function reloadWeapon1():void {

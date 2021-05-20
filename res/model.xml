@@ -1558,6 +1558,11 @@
 						</if>
 						
 						<!-- Guns -->	
+						<if test="PlayerHasLactoBlaster">	
+							<show part="backAccessory/LactoblasterTank"/>
+							<show part="weapon/LactoblasterGun"/>
+							<show part="weapon/LactoblasterMilker"/>
+						</if>
 						
 					</if>
 					
@@ -2200,7 +2205,7 @@
 			<case values="Face.COW_MINOTAUR">
                 <show part="face/bovine"/>
             </case>
-			<case values="Face.FAIRY,Face.CRAZY,Face.SMUG,Face.ELF,">
+			<case values="Face.FAIRY,Face.CRAZY,Face.SMUG,Face.ELF">
                 <show part="face/fairySmile"/>
             </case>
 			<case values="Face.GHOST">
