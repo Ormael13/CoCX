@@ -21,6 +21,7 @@ import classes.Items.Armor;
 import classes.Items.ArmorLib;
 import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
+import classes.Items.ItemTags;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
 import classes.Items.Mutations;
@@ -503,7 +504,7 @@ use namespace CoC;
 		//Unhindered related acceptable armor types
 		public function meetUnhinderedReq():Boolean
 		{
-			return armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "bimbo skirt" || armorName == "desert naga pink and black silk dress" || hasPerk(PerkLib.ScandalousSuccubusClothing) || hasPerk(PerkLib.BerserkerArmor) || hasPerk(PerkLib.TamamoNoMaeCursedKimono) || hasPerk(PerkLib.InariBlessedKimono) || armor == ArmorLib.NOTHING ;
+			return armor.hasTag(ItemTags.AGILE);
 		}
 		//override public function get armors
 		override public function get armorName():String {
@@ -628,7 +629,7 @@ use namespace CoC;
 			armorDef += speedBonus;
 			//Feral armor boosts armor ratings!
 			var toughnessBonus:int = 0;
-			if (hasPerk(PerkLib.FeralArmor) && haveNaturalArmor() && meetUnhinderedReq()) {
+			if (hasPerk(PerkLib.FeralArmor) && haveNaturalArmor() && armor.hasTag(ItemTags.AGILE)) {
 				toughnessBonus += Math.round(tou / 20);
 			}
 			if (hasPerk(PerkLib.NukiNuts)) {
@@ -656,11 +657,11 @@ use namespace CoC;
 			if (hasPerk(PerkLib.PigBoarFatFinalForm)) armorDef += (12 * newGamePlusMod);
 			if (hasPerk(PerkLib.GoblinoidBlood)) {
 				var goblinbracerBonus:int = 0;
-				if (hasKeyItem("Powboy") >= 0 && meetUnhinderedReq()) {
+				if (hasKeyItem("Powboy") >= 0) {
 					goblinbracerBonus += Math.round(inte / 10);
 					if (goblinbracerBonus > (10 * newGamePlusMod)) goblinbracerBonus = (10 * newGamePlusMod);
 				}
-				if (hasKeyItem("M.G.S. bracer") >= 0 && meetUnhinderedReq()) {
+				if (hasKeyItem("M.G.S. bracer") >= 0) {
 					goblinbracerBonus += Math.round(inte / 10);
 					if (goblinbracerBonus > (20 * newGamePlusMod)) goblinbracerBonus = (20 * newGamePlusMod);
 				}
@@ -848,11 +849,11 @@ use namespace CoC;
 			if (hasPerk(PerkLib.PigBoarFatFinalForm)) armorMDef += (12 * newGamePlusMod);
 			if (hasPerk(PerkLib.GoblinoidBlood)) {
 				var goblinbracerBonus:int = 0;
-				if (hasKeyItem("Powboy") >= 0 && meetUnhinderedReq()) {
+				if (hasKeyItem("Powboy") >= 0) {
 					goblinbracerBonus += Math.round(inte / 10);
 					if (goblinbracerBonus > (10 * newGamePlusMod)) goblinbracerBonus = (10 * newGamePlusMod);
 				}
-				if (hasKeyItem("M.G.S. bracer") >= 0 && meetUnhinderedReq()) {
+				if (hasKeyItem("M.G.S. bracer") >= 0) {
 					goblinbracerBonus += Math.round(inte / 10);
 					if (goblinbracerBonus > (20 * newGamePlusMod)) goblinbracerBonus = (20 * newGamePlusMod);
 				}
@@ -1233,6 +1234,9 @@ use namespace CoC;
 		override public function get weaponPerk():String {
 			return _weapon.perk || "";
 		}
+		override public function get weaponType():String {
+			return _weapon.type || "";
+		}
 		override public function get weaponValue():Number {
 			return _weapon.value;
 		}
@@ -1255,6 +1259,11 @@ use namespace CoC;
 		public function isUsingTome():Boolean
 		{
 			return weaponRangeName == "nothing" || weaponRangeName == "Inquisitor’s Tome" || weaponRangeName == "Sage’s Sketchbook";
+		}
+		//Using a spear
+		public function isUsingSpear():Boolean
+		{
+			return weaponType == "Spear";
 		}
 		//Using Staff
 		public function isUsingStaff():Boolean
@@ -2043,7 +2052,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.ShieldHarmony) && tou >= 100 && isShieldsForShieldBash() && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && meetUnhinderedReq()) {
+			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.REVEALING)) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.FluidBody) && meetUnhinderedReq()) {
@@ -2183,7 +2192,7 @@ use namespace CoC;
 			//--BASE--
 			mult -= armorMMod;
 			//--PERKS--
-			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) {
+			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.REVEALING)) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.DraconicBonesEvolved)) {
@@ -7221,6 +7230,8 @@ use namespace CoC;
 			if (ears.type == Ears.ELVEN)
 				elfCounter++;
 			if (eyes.type == Eyes.ELF)
+				elfCounter++;
+			if (faceType == Face.ELF)
 				elfCounter++;
 			if (tongue.type == Tongue.ELF)
 				elfCounter++;

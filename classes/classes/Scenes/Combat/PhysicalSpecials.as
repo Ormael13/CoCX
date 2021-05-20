@@ -724,7 +724,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.EruptingRiposte();
 		enemyAI();
 	}
-	
+
 	public function powerShoot():void {
 		clearOutput();
 		outputText("With one smooth motion you draw, nock, and fire your deadly arrow at one of your opponent"+(monster.plural ? "s":"")+" ");

@@ -4,13 +4,15 @@
 package classes.Items.Armors
 {
 	import classes.Items.Armor;
-	import classes.PerkLib;
+import classes.Items.ItemTags;
+import classes.PerkLib;
 	import classes.Player;
 
 	public final class InquisitorsCorset extends Armor {
 		
 		public function InquisitorsCorset() {
 			super("I.Corst", "I.Corst", "inquisitor's corset", "an inquisitor's corset", 0, 16, 2000, "This sexualized and feminine red and gold ensemble carries with it the hopes of a shamed sorcerer.  Wearing it will allow cast blood magic spells.", "Light", false, false);
+			withTag(ItemTags.REVEALING);
 		}
 		
 		override public function useText():void {
