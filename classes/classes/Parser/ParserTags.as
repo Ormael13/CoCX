@@ -131,6 +131,8 @@ public class ParserTags {
         "wings"                 : function ():* { return CoC.instance.player.wingsDescript(); },
         "tail"                  : function ():* { return CoC.instance.player.tailDescript(); },
         "onetail"               : function ():* { return CoC.instance.player.oneTailDescript(); },
+        "tailcount"             : function ():* { return Utils.num2Text(CoC.instance.player.tailCount); },
+        "Tailcount"             : function ():* { return Utils.Num2Text(CoC.instance.player.tailCount); },
 
         //Prisoner
         "captortitle": function ():* { return SceneLib.prison.prisonCaptor.captorTitle; },
@@ -239,7 +241,7 @@ public class ParserTags {
         "foot"                  : function ():* { return CoC.instance.monster.foot(); },
         "fullchest"             : function ():* { return CoC.instance.monster.allChestDesc(); },
         "hair"                  : function ():* { return CoC.instance.monster.hairDescript(); },
-        "hairlongdesc"         : function ():* { return CoC.instance.monster.hairDescript(true); },
+        "hairlongdesc"          : function ():* { return CoC.instance.monster.hairDescript(true); },
         "haircolor"             : function ():* { return CoC.instance.monster.hairColor; },
         "hairorfur"             : function ():* { return CoC.instance.monster.hairOrFur(); },
         "he"                    : function ():* { return CoC.instance.monster.pronoun1; },

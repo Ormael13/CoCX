@@ -11,7 +11,9 @@ public class Hair extends BodyPart {
 	 * - id: name of the constant ("NORMAL", "FEATHER")
 	 * - name: human-readable default name, ("normal", "feather")
 	 * - shortDesc: simple description of the hair
+	 * - shortDescFunc: function that returns a simple description of the hair (shortDesc is ignored if this exists)
 	 * - longDesc: detailed description of the hair
+	 * - longDescFunc: function that returns a detailed description of the hair (longDesc is ignored if this exists)
 	 * - beardDesc: description of the beard linked to the hair type
 	 */
 
@@ -105,7 +107,15 @@ public class Hair extends BodyPart {
 	EnumValue.add(Types, SNOWY, "SNOWY", {
 		name:"snowy",
 		shortDesc: "snowy {hair}",
-		longDesc: "snowy {hair}, human in appearance but still regularly used as a nest by snow flurries"
+		longDescFunc: function(creature: *): String {
+			var desc: String = "snowy {hair} is human in appearance, but still regularly used as a nest by snow flurries,";
+
+			if (creature.rearBody.type == RearBody.GLACIAL_AURA) {
+				desc += ", which might be related to your bone-chilling aura";
+			}
+
+			return desc;
+		}
 	});
 
 	public static const FAIRY:int = 14;
@@ -151,6 +161,35 @@ public class Hair extends BodyPart {
 		super.restore();
 		color = "no";
 		length = 0.0;
+	}
+
+	public static function getAppearanceDescription(creature: *, longDesc: Boolean = false): String {
+		const id: int = creature.hairType;
+
+		var desc: String = "";
+		var hair:String = "hair";
+
+		//If furry and longish hair sometimes call it a mane (50%)
+		if (creature.hasFur() == 1 && creature.hairLength > 3 && rand(2) == 0) {
+			hair = "mane";
+		}
+
+		if (longDesc) {
+			desc += formatDescription((Types[id].longDescFunc ? Types[id].longDescFunc(creature) : Types[id].longDesc) || "", creature, hair);
+		}
+
+		if (!hair) {
+			desc += formatDescription((Types[id].shortDescFunc ? Types[id].shortDescFunc(creature) : Types[id].shortDesc) || "", creature, hair);
+		}
+
+		return desc;
+	}
+
+	private static function formatDescription(desc: String, creature: *, hair: String): String {
+		const hairPattern:RegExp = /{hair}/g;
+
+		return " " + desc
+			.replace(hairPattern, hair);
 	}
 }
 }

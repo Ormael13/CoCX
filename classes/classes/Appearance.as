@@ -93,24 +93,7 @@ public class Appearance extends Utils
 			// HAIR WORDS
 			//
 
-			const hairObj: Object = Hair.Types[i_creature.hairType];
-
-			var hair:String = "hair";
-
-			//If furry and longish hair sometimes call it a mane (50%)
-			if (i_creature.hasFur() == 1 && i_creature.hairLength > 3 && rand(2) == 0) {
-				hair += "mane";
-			}
-
-			if (longDesc) {
-				description += (hairObj.longDesc || hairObj.shortDesc || "hair").replace('{hair}', hair);
-			} else {
-				description += (hairObj.shortDesc || hairObj.longDesc || "hair").replace('{hair}', hair);
-			}
-
-			if (i_creature.hairType == Hair.SNOWY && i_creature.rearBody.type == RearBody.GLACIAL_AURA) {
-				description += ", which might be related to your bone chilling aura";
-			}
+			description += Hair.getAppearanceDescription(i_creature, longDesc);
 
 			return description;
 		}
