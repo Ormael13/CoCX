@@ -683,7 +683,7 @@ import classes.Scenes.SceneLib;
 					" she says chidingly in a voice that can’t hide her affection. " +
 					"\"<i>In that case, let’s get you set up properly.</i>\"" +
 					" She reaches over to the end of the bed and retrieves a familiar golden-green object, twelve inches long, gently curved, and rounded at the ends. " +
-					"\"<i>You remember this toy, don't you little sister? It's the one we used when we first met,  crafted from the very sap of the sacred tree itself. Come on, I know you two want to use it; why hold back?</i>\"" +
+					"\"<i>You remember this toy, don't you little sister? It's the one we used when we first met, crafted from the very sap of the sacred tree itself. Come on, I know you two want to use it; why hold back?</i>\"" +
 					"\n\nYou find yourself fixated on it, and glancing away for a moment you see Alyssa is as well. After a few seconds she turns back to face you, her flushed cheeks inches from yours. " +
 					"\"<i>Um… [name]... I want to-</i>\"" +
 					" You don’t let her finish, instead grabbing her cheeks and pulling her in for another kiss. Elenwen chuckles at the two of you and brings the toy to Alyssa’s tight snatch first." +
