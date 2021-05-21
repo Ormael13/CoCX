@@ -68,7 +68,7 @@
 			//[Ask about elves] [Leave]
 			menu();
 			addButton(0, "About elves", AskAboutElves);
-			//addButton(1, "Leave", LeaveStartElfFight);
+			addButton(1, "Leave", LeaveStartElfFight);
 		}
 
 		public function AskAboutElves():void {
@@ -84,7 +84,23 @@
 			//[Ask about elves] [Leave]
 			menu();
 			addButton(0, "Submit", YouAreAlreadyElfSubmit);
-			//addButton(1, "Resist", StartElfFight);
+			addButton(1, "Resist", StartElfFight);
+		}
+
+		public function LeaveStartElfFight():void {
+			clearOutput();
+			outputText("You decide to turn and exit the area." +
+					"\n\nThe elf speaks up as you attempt to leave, \"<i>Oh my, you wish to leave already? I’m very sorry, but you won’t be going anywhere at the moment, not so long as we have you surrounded. There's so many things left we'd like to talk about and besides... I don't think <b>he</b> would agree to let you leave either. Please don’t hold it against us, though - this is all for your own good, I promise. By the end of it you will be thanking us for it.</i>\"\n\n" +
+					"The elves tighten their circle around you to prevent any chance of escape as their sinister intentions become clear.");
+			if (silly) outputText(" Those dastardly ladies! Of all things you're in the midst of a circle of hedonistic elves!")
+			outputText(" You brace for the incoming combat.");
+			doNext(StartElfFight);
+		}
+
+		public function StartElfFight():void {
+			clearOutput();
+			outputText("Fighting the elves is temporarily disabled until the monster is implemented thank you trying out wood elves! ");
+			doNext(camp.returnToCamp);
 		}
 
 		public function YouAreAlreadyElfSubmit():void {
