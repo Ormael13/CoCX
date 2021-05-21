@@ -238,8 +238,8 @@ import classes.Scenes.SceneLib;
 			clearOutput();
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			outputText("You awaken a short while later. Still dazed, you crawl your way to the pond to take a look at yourself, only to find a stunningly beautiful elf girl looking back at you. " +
-					"She has "+player.breastCup(0)+" cup breasts, round and firm and tipped with pink, blushing nipples, and clear, smooth skin as unblemished as the crystal waters of a forest stream, fairer than any mortal. " +
-					"Her "+ player.hairColor +" silken hairs are "+ Appearance.hairDescription(player) +", " +
+					"She has "+player.breastCup(0)+" breasts, round and firm and tipped with pink, blushing nipples, and clear, smooth skin as unblemished as the crystal waters of a forest stream, fairer than any mortal. " +
+					"Her "+ Appearance.hairDescription(player) +" are like silk, " +
 					"and her eyes are the emerald green of fresh leaves in early spring. Slowly your waking mind begins to piece together that this beautiful elven girl is actualy you, the ressemblance with the elves who found you earlyer is shocking! " +
 					"\n\n\"<i>Oh heavens, Alyssa was right: you turned out just adorable<b>~♥</b></i>\"\n\n" +
 					"The elf girl who seemed to be the leader of the others speaks from behind you, and you turn to face her. " +
