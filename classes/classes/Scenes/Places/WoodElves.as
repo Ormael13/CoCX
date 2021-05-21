@@ -233,13 +233,13 @@
 					"\n\n\"<i>Mmmm, she sure is, Elenwen!</i>\"replies Alyssa, \"<i>And I bet she’s <b>really</b> going to enjoy this…</i>\"\n\n" +
 					"You shudder in delighted pleasure as Alyssa runs her tongue down your belly, from your sternum down to just above your glistening lower lips," +
 					" which you are still mindlessly plowing with your own slender fingers." +
-					" The thought of becoming more like your Elven sisters carries you to new heights of arousal, and your hips buck as you gasp from a small orgasm that leaves your body trembling with the promise of more to come." +
+					" The thought of becoming more like your elven sisters carries you to new heights of arousal, and your hips buck as you gasp from a small orgasm that leaves your body trembling with the promise of more to come." +
 					" Meanwhile, Elenwen pulls back to retrieve something from the end of the bed: a double-ended dildo made of a translucent green-gold substance." +
 					"\n\nAlyssa whispers in your ear. \"<i>That lovely thing is made from the very sap of the tree you fell from. With its help, everything will go even faster. Just lay still, and let the tree’s sap work its magic, little sis. You’re going to <b>love</b> it.</i>\"\n\n" +
 					"Even if you wanted to resist, you’re much too far gone; the pleasure has paralyzed your mind and body and all you can do is writhe in ecstasy as Allyssa pins you under her." +
 					" Her pert palm-sized breasts and stiff nipples press against your own as Elenwen inserts one end of the toy into her own welcoming slit then pushes the other tip of the golden length between your pink," +
 					" dripping lips. For a moment the entire world seems to pause in anticipation, then you gasp and let your mouth gape open as Elenwen fully slides the toy in, the blonde color running higher up your hair strands. Why does it feel so <b>good</b>?" +
-					"You didn’t think anything could feel this good! You lose yourself entirely in the experience as Elenwen thrusts into you again and again, moaning as with each shock of pleasure your [pchaircolor] hair becomes a little more blonde. Just before you reach orgasm, the last of the [pchaircolor] fades, leaving your hair fully golden blonde." +
+					"You didn’t think anything could feel this good! You lose yourself entirely in the experience as Elenwen thrusts into you again and again, moaning as with each shock of pleasure your "+player.hairColor+" hair becomes a little more blonde. Just before you reach orgasm, the last of the "+player.hairColor+" fades, leaving your hair fully golden blonde." +
 					" Elenwen stops her thrusting and  whispers sweetly in your sensitive ear as your juices run freely down the toy, twitching with each spasm of your drenched pussy around it as it begs for your impending climax." +
 					"\n\n\"<i>Tell me, little sister, what is it that you want right now? Is it something cute, fun, or pleasurable? Whatever it is we'll do it for you, as much as you like, as often as you like, from now on. All you have to do… is… ask<b>~♥</b></i>\" She punctuates the end of her sultry proposal by brushing her fingers against your clitoris, making you jump.\n\n" +
 					"What do you want? You only want her to finish, to push you over the edge, tumbling into the mind-shattering orgasm you feel coming, don’t you? There wasn’t anything else… before all this… Just as you start to waver Elenwen gives the golden dildo a little twist inside you and the question evaporates.. No, of course, you are an elf;" +
@@ -247,7 +247,7 @@
 					"\n\n\"<i>Awww, Alyssa, she’s so cute~! Now I want to have her…</i>\" Elenwen pouts as she complains to Alyssa, who giggles on top of you and begins kissing your lips.\n\n" +
 					"\n\n\"<i>Hee hee, too laa~aate sister, you already assigned her to me<b>~♥</b></i>\" She says in between kisses.\n\n" +
 					"Still pouting, Elenwen obliges you, thrusting and twisting the magical toy while she teases your clit with her fingers, and you sail over the edge into the most intense orgasm you can remember; your vision goes pure white and you scream while Alyssa gently restrains your thrashing limbs, kissing your cheeks and nibbling at your lips and ears." +
-					" For a few blissful moments your mind is filled only with the shock of orgasm, love for your sisters, and happiness at having finally come home; then, as you come down, the two Elven women cuddle you until you fall asleep, whispering and cooing in your ears as they praise you for a job well done.");
+					" For a few blissful moments your mind is filled only with the shock of orgasm, love for your sisters, and happiness at having finally come home; then, as you come down, the two elven women cuddle you until you fall asleep, whispering and cooing in your ears as they praise you for a job well done.");
 			player.hairColor = "golden blonde";
 			doNext(YouAreAlreadyElf3);
 		}
@@ -265,7 +265,7 @@
 					" For the first time the thought doesn’t immediately evaporate, and you seize the opportunity by grabbing a bow and a few arrows from their rack." +
 					" A small row of targets stands not far from you and, with practiced movements you nock a delicate shaft, draw the surprisingly weighty bow, and fire." +
 					" Your arrow strikes true and sinks deeply into your target; not a bulls-eye but a respectable shot for someone who can’t remember ever drawing a bow before." +
-					"\n\n\"<i>Woah, what a shot, little sister! You almost looked like a real Elven huntress just then<b>~♥</b></i>\"\n\n" +
+					"\n\n\"<i>Woah, what a shot, little sister! You almost looked like a real elven huntress just then<b>~♥</b></i>\"\n\n" +
 					"Startled, you turn around to see Merisiel standing behind you - you must have been too focused on your shot to hear her approach." +
 					" Your face, driven by instinct, blushes at her praise as you smile happily and nock another arrow, drawing your bow and aiming it directly at your captor’s lovely breasts." +
 					" The thoughts still aren’t fully coherent but somehow it’s coming together in your head that your beautiful sister is an enemy, that she and the rest of the Elves are keeping you from..." +
@@ -295,7 +295,7 @@
 
 		public function ElvesTopic():void {
 			clearOutput();
-			outputText("You ask the three Elves about the Elven race: why is there so little information about them? Have they always been hidden away or is something else going on?" +
+			outputText("You ask the three elves about the elven race: why is there so little information about them? Have they always been hidden away or is something else going on?" +
 					"\n\nMerisiel responds first. \"<i>Like many other races and peoples in Mareth, we are not originally from here. Like you, we came from another world, though for us it was… a one-way trip.</i>\"" +
 					"\n\nAlyssa continues. \"<i>It was an accident. Our village was caught in a magical disaster after a summoning ceremony went wrong, and dozens of us were brought here at once, with no way to get back. We tried, but…</i>\"" +
 					"\n\nElenwen takes over. \"<i>Magic doesn’t seem to work the same way here. Clearly it’s possible to cross the borders of worlds in Mareth; it may even be easier than it was in our original world, in fact, considering how many travelers seem to end up here one way or another. But we can’t… “find” our original world. We have no way of reaching out to it without an active connection to it, and the force that brought us here ended as soon as it did, leaving us stranded.</i>\"" +
@@ -406,7 +406,7 @@
 					" You did grow close to them over the last couple of days, and you think you may miss them too," +
 					" even if what they did to you was rude, more or less by Mareth’s twisted standards anyways." +
 					" Once you’ve made sure all is well at your camp and resumed your duties as Champion, perhaps you’ll take them up on your offer." +
-					" With a goodbye for now to the three girls, you collect your old equipment and leave the Elven Grove." +
+					" With a goodbye for now to the three girls, you collect your old equipment and leave the elven Grove." +
 					" The voices of your would-be sisters fading into the distance behind you as you return to your camp. As you tread back," +
 					" the paths slowly become familiar as the last of your brainwashing fades, and you remember your name." +
 					" You won’t forget it again; you’ll live or die as [name], the Champion of Ingnam. But, you think with a faint smile," +
@@ -596,7 +596,7 @@
 				player.sexReward("vaginalFluids", "Vaginal");
 				player.buff("Sisterly bathing").addStats({int:20,wis:20}).withText("Sisterly bathing").forDays(1);
 			} else {
-				outputText("You approach the clear, spritely waters of the stream that runs through the Elven Village to clean yourself off again." +
+				outputText("You approach the clear, spritely waters of the stream that runs through the elven Village to clean yourself off again." +
 						" There are a few Elves enjoying themselves nearby, but they seem very focused on each other and their pleasures," +
 						" and you still have things to do, so you opt to leave them be and simply enjoy the cool, refreshing water as it washes you clean of" +
 						" the sweat and grime you’ve accumulated. The gasps and cries of your sisters upstream leave you feeling a little aroused, but you" +
