@@ -2102,16 +2102,17 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.gills.type = Gills.NONE;
 		else
 			player.gills.type = saveFile.data.gills ? Gills.ANEMONE : Gills.NONE;
-		if (saveFile.data.armType == undefined)
-			player.arms.type = Arms.HUMAN;
-		else
-			player.arms.type = saveFile.data.armType;
 		player.hairLength = saveFile.data.hairLength;
 		player.lowerBodyPart.loadFromSaveData(data);
+		player.wings.loadFromSaveData(data);
 		player.skin.loadFromSaveData(data);
 		player.clawsPart.loadFromSaveData(data);
 		player.facePart.loadFromSaveData(data);
 		player.tail.loadFromSaveData(data);
+		if (saveFile.data.armType == undefined)
+			player.arms.type = Arms.HUMAN;
+		else
+			player.arms.type = saveFile.data.armType;
 		if (saveFile.data.tongueType == undefined)
 			player.tongue.type = Tongue.HUMAN;
 		else

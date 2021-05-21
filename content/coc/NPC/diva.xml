@@ -590,53 +590,54 @@
         </lib>
         <lib name="tfText">
             <text name="wings.type">
-                <if test="$pure">
-                    <if test="player.wings.type eq BAT_LIKE_LARGE">
-                        As you finish the blood, intense pain flares in your wing-arms.
-                        You drop the vial, the empty reinforced glass tinkling as it bounces on the ground.
-                        You cry out as your arms creak and twist, your bones breaking down and reforming in a frenzy.
-                        Your parchment-like skin begins to fall off in clumps, leaving the mess of malformed bones that are your arms right now naked for all to see.
-                        However, even as you watch, dark blood creeps over the bone, properly aligning them before healing them over, although not in their old form.
-                        Within seconds, the pain is gone, as your bones are remade into ones alike those you were born with, in structure if nothing else, the eldritch power of your blood finally ebbing away, but not before the last of it settles and turns into a brand new patch of skin.
-                        It's still sensitive, but you'll get used to it.
-                        You catch something moving on the edge of your peripheral vision, causing your hard-won instincts to kick in, muscle memory forcing you into a lunge away from whatever it was before you’re even fully aware of what’s happening.
-                        Instead of dodging with your usual grace, you stumble and roll, landing on your wings… Wait, wings??
-                        It seems that, while you were fascinated by your bloody shenanigans, you failed to notice that you were growing wings.
-                        Understandable, since your arms breaking themselves several times over tends to take priority over such things, attention-wise.
-                        You shakily stand up, your balance still thrown off by the new limb, inwardly grumbling at how long is it going to take you to get used to them. Distracted as you are, both from the ordeal and your inner grumbling, your first attempt at walking inevitably ends with an intimate reunion of your face and the ground.
-                        This time, you don’t bother to keep your cursing to the confines of your own mind.
-                        <else>
-                            <if test="player.isVampire()">
-                                As soon as the last drop of blood passes your now crimson lips, a terrible pain flares in the center of your back, a pain so intense that you black out briefly, coming back to your senses as you hit your head against the ground.
-                                You hear a horrifying ripping noise as your back stretches and tears to allow new bones to expand, black as tar and far lighter than most of the bones in your body.
-                                These new bones shift under your shoulder blade skin as you fall on all groaning in pain and clawing at the ground.
-                                In a flash of pain they violently break out of your skin sending blood everywhere as you make a chilling scream your wounds slowly closing on their own.
-                                Still panting from the pain, you take a look at your new appendage.
-                                It's a pair of large vampire wings of impressive size.
-                                Feeling chilly you fold them back on your body and you ought to admit they indeed look like a large cape.
-                                <else>
-                                    You drop the vial, the glass shattering, as intense pain flares around your shoulder blades.
-                                    The pain intensifies, causing you to drop to the ground, clawing and screaming in agony as your back suddenly explodes with a wet ripping noise, blood splattering around you as a large pair of black leathery wings emerge from the bloody ruin that is your back right now, stretching to their full span.
-                                    The pain finally starts to recede, leaving a bone-deep weariness in it’s wake.
-                                    After a while, you manage to recover enough to be sure that trying to stand up won’t result in graceless, and painful, flopping, so you do just that, wrapping your new wings around you on instinct as you rise.
-                                    Huh, wrapped like this you could probably pass them off as a long cape so long as nobody looks too closely, but you are certain they are the real deal.
-                                    After all that pain, flying better be worth it.
-                                </else>
-                            </if>
-                        </else>
-                    </if>
-                    <b>You will be able to enjoy nightly flight using your brand new vampire wings.</b>
+                <if test="player.wings.type eq BAT_LIKE_LARGE">
+                    As you finish the blood, intense pain flares in your wing-arms.
+                    You drop the vial, the empty reinforced glass tinkling as it bounces on the ground.
+                    You cry out as your arms creak and twist, your bones breaking down and reforming in a frenzy.
+                    Your parchment-like skin begins to fall off in clumps, leaving the mess of malformed bones that are your arms right now naked for all to see.
+                    However, even as you watch, dark blood creeps over the bone, properly aligning them before healing them over, although not in their old form.
+                    Within seconds, the pain is gone, as your bones are remade into ones alike those you were born with, in structure if nothing else, the eldritchpower of your blood finally ebbing away, but not before the last of it settles and turns into a brand new patch of skin.
+                    It's still sensitive, but you'll get used to it.
+                    You catch something moving on the edge of your peripheral vision, causing your hard-won instincts to kick in, muscle memory forcing you into alunge away from whatever it was before you’re even fully aware of what’s happening.
+                    Instead of dodging with your usual grace, you stumble and roll, landing on your wings… Wait, wings??
+                    It seems that, while you were fascinated by your bloody shenanigans, you failed to notice that you were growing wings.
+                    Understandable, since your arms breaking themselves several times over tends to take priority over such things, attention-wise.
+                    You shakily stand up, your balance still thrown off by the new limb, inwardly grumbling at how long is it going to take you to get used to them.Distracted as you are, both from the ordeal and your inner grumbling, your first attempt at walking inevitably ends with an intimate reunion ofyour face and the ground.
+                    This time, you don’t bother to keep your cursing to the confines of your own mind.
                     <else>
-                        Large bones surge out of your wrists and elbows.
-                        You can feel your bones shifting and grinding all over your body as your skeletal structure begins changing into one more fit for a flying creature, with light, hollow bones.
-                        You collapse to the ground as they begin shifting proportions becoming thinner and longer to maximize area while reducing their density.
-                        Leathery flesh begins to cover your new bony protrusions, spreading between each of them like creeping moss.
-                        Eventually, the skin stops growing and you admire your new arms.
-                        They are very obviously bat wings. You close them around your waist, like this they could easily be mistaken for a large cape when seen from afar.
-                        <b>You now have large bat wings.</b>
+                        <if test="player.isVampire()">
+                            As soon as the last drop of blood passes your now crimson lips, a terrible pain flares in the center of your back, a pain so intense thatyou black out briefly, coming back to your senses as you hit your head against the ground.
+                            You hear a horrifying ripping noise as your back stretches and tears to allow new bones to expand, black as tar and far lighter than mostof the bones in your body.
+                            These new bones shift under your shoulder blade skin as you fall on all groaning in pain and clawing at the ground.
+                            In a flash of pain they violently break out of your skin sending blood everywhere as you make a chilling scream your wounds slowlyclosing on their own.
+                            Still panting from the pain, you take a look at your new appendage.
+                            It's a pair of large vampire wings of impressive size.
+                            Feeling chilly you fold them back on your body and you ought to admit they indeed look like a large cape.
+                            <else>
+                                You drop the vial, the glass shattering, as intense pain flares around your shoulder blades.
+                                The pain intensifies, causing you to drop to the ground, clawing and screaming in agony as your back suddenly explodes with a wetripping noise, blood splattering around you as a large pair of black leathery wings emerge from the bloody ruin that is your backright now, stretching to their full span.
+                                The pain finally starts to recede, leaving a bone-deep weariness in it’s wake.
+                                After a while, you manage to recover enough to be sure that trying to stand up won’t result in graceless, and painful, flopping, soyou do just that, wrapping your new wings around you on instinct as you rise.
+                                Huh, wrapped like this you could probably pass them off as a long cape so long as nobody looks too closely, but you are certain theyare the real deal.
+                                After all that pain, flying better be worth it.
+                            </else>
+                        </if>
                     </else>
                 </if>
-
+                <b>You will be able to enjoy nightly flight using your brand new vampire wings.</b>
+            </text>
+            <text name="arms.type">
+                <if test="$pure">
+                    <else>
+                        Large bones surge out of your wrists and elbows.
+                        You can feel your bones shifting and grinding all over your body as your skeletal structure begins changing into one more fit for a flyincreature, with light, hollow bones.
+                        You collapse to the ground as they begin shifting proportions, becoming thinner and longer to maximize area while reducing their density.
+                        Leathery flesh begins to cover your new bony protrusions, spreading between each of them like creeping moss.
+                        Eventually, the skin stops growing and you admire your new arms.
+                        They are very obviously winged bat arms. You close them around your waist, and like this they could easily be mistaken for a large cape when seen from afar.
+                        <b>You now have large winged bat arms.</b>
+                    </else>
+                </if>
             </text>
             <text name="ears.type">
                 <if test="$pure">
@@ -676,7 +677,7 @@
                 Or just the blood, really. You aren’t picky.
                 Really, it’s up to you whether just rip off some poor sod’s throat and drink straight from the tap or drink blood from a wineglass, what with <b>your new vampire fangs!</b>
             </text>
-            <text name="noChange">Odd.  You don't feel any different.</text>
+            <text name="noChange">Odd. You don't feel any different.</text>
         </lib>
     </lib>
 </story>

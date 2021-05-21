@@ -30,10 +30,10 @@ import coc.view.ButtonDataList;
 import coc.view.CoCButton;
 
 public class CombatUI extends BaseCombatContent {
-	
+
 	public function CombatUI() {
 	}
-	
+
 	private var magspButtons:ButtonDataList = new ButtonDataList();
 	private var physpButtons:ButtonDataList = new ButtonDataList();
 	private var spellBookButtons:ButtonDataList = new ButtonDataList();
@@ -116,7 +116,7 @@ public class CombatUI extends BaseCombatContent {
 					if (player.isFlying() || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || (player.isStaffTypeWeapon() && player.hasPerk(PerkLib.StaffChanneling))) {
 						if (player.isFlying()) {
 							if (player.hasPerk(PerkLib.AerialCombat) || player.haveThrowableMeleeWeapon() || player.isWhipTypeWeapon() || player.isRibbonTypeWeapon() || (player.isStaffTypeWeapon() && player.hasPerk(PerkLib.StaffChanneling))) {
-								if (player.wings.type == Wings.BAT_ARM) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
+								if (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly) btnMelee.disable("No way you could use your melee weapon with those arms while flying.");
 								else btnMelee.show("Attack", combat.basemeleeattacks, "Attempt to attack the enemy with your " + player.weaponName+".  Damage done is determined by your strength and weapon.");
 							}
 							else btnMelee.disable("No way you could hit enemy with melee attacks while flying. Req. Aerial Combat perk or having melee weapon that could be used for range attack too.");
@@ -159,7 +159,7 @@ public class CombatUI extends BaseCombatContent {
 				btnRanged.showDisabled("Shoot", "You cannot use ranged combat without a ranged weapon equiped");
 				if (combat.isEnnemyInvisible) btnRanged.disable("You cannot use shoot an opponent you cannot see or target.");
 		}
-		if (player.isFlying() && player.wings.type == Wings.BAT_ARM){btnRanged.disable("It would be rather difficult to aim while flapping your arms."); }
+		if (player.isFlying() && (!Wings.Types[player.wings.type].canFly && Arms.Types[player.arms.type].canFly)){btnRanged.disable("It would be rather difficult to aim while flapping your arms."); }
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0) {
 				if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") {
@@ -217,7 +217,7 @@ public class CombatUI extends BaseCombatContent {
 		// Submenu - Other
 		combat.buildOtherActions(otherButtons);
 		if (otherButtons.length > 0) btnOther.show("Other", submenuOther, "Combat options and uncategorized actions");
-		
+
 		btnFantasize.show("Fantasize", combat.fantasize, "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Lustnade Launcher") >= 0) {
@@ -234,7 +234,7 @@ public class CombatUI extends BaseCombatContent {
 		btnWait.show("Wait", combat.wait, "Take no action for this round.  Why would you do this?  This is a terrible idea.");
 		if (monster.hasStatusEffect(StatusEffects.CreepingDoom)) btnRun.show("Struggle", combat.struggleCreepingDoom, "Shake away the pests.");
 		else btnRun.show("Run", combat.runAway, "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.");
-		
+
 		// Modifications - full or partial replacements
 		if (isPlayerBound()) {
 			mainMenuWhenBound();
@@ -439,7 +439,7 @@ public class CombatUI extends BaseCombatContent {
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Siegweird") combat.comfoll.siegweirdCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Zenji") combat.comfoll.zenjiCombatActions();
 		}
-		
+
 		// Modifications - monster-special actions
 		if (!isPlayerPlayingWithElementalsOrGolems()) {
 			if (monster is SandTrap) {
@@ -539,7 +539,7 @@ public class CombatUI extends BaseCombatContent {
 	if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) dancingwithminions = true;
 	return dancingwithminions;
 }
-	
+
 	internal function mainMenuWhenBound():void {
 		menu();
 		var btnStruggle:CoCButton  = addButton(0, "Struggle", combat.struggle);
@@ -579,7 +579,7 @@ public class CombatUI extends BaseCombatContent {
 			outputText("\n<b>Lethice's tentacles have a firm grip of your limbs!</b>");
 			addButton(0, "Struggle", (monster as Lethice).grappleStruggle);
 			addButton(1, "Wait", (monster as Lethice).grappleWait);
-			
+
 			var whitefireLustCap:int = player.maxLust() * 0.75;
 			if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap += (player.maxLust() * 0.1);
 			if (player.findPerk(PerkLib.FocusedMind) >= 0 && player.findPerk(PerkLib.GreyMage) < 0) whitefireLustCap += (player.maxLust() * 0.1);
@@ -591,7 +591,7 @@ public class CombatUI extends BaseCombatContent {
 			}
 		}
 	}
-	
+
 	internal function mainMenuWhenChanneling():void {
 		menu();
 		var chatk:StatusEffectClass  = player.statusEffectByType(StatusEffects.ChanneledAttack);

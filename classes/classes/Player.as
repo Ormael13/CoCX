@@ -919,7 +919,7 @@ use namespace CoC;
 		//Wing Slap compatibile wings + tiers of wings for dmg multi
 		public function haveWingsForWingSlap():Boolean
 		{
-			return Wings.Types[wings.type].wingSlap;
+			return Arms.Types[arms.type].wingSlap || Wings.Types[wings.type].wingSlap;
 		}
 		public function thirdtierWingsForWingSlap():Boolean
 		{
@@ -2050,6 +2050,9 @@ use namespace CoC;
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.ShieldHarmony) && tou >= 100 && isShieldsForShieldBash() && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
+				mult -= 10;
+			}
+			if (hasPerk(PerkLib.KnightlySword) && isSwordTypeWeapon() && isShieldsForShieldBash()) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.REVEALING)) {
@@ -9772,8 +9775,8 @@ use namespace CoC;
 				counter++;
 			if (ears.type == Ears.VAMPIRE)
 				counter -= 10;
-			if (wings.type == Wings.BAT_ARM)
-				counter += 4;
+			if (arms.type == Arms.BAT)
+				counter += 5;
 			if (faceType == Face.VAMPIRE)
 				counter += 2;
 			if (eyes.type == Eyes.VAMPIRE)
@@ -9781,8 +9784,6 @@ use namespace CoC;
 			if (rearBody.type == RearBody.BAT_COLLAR)
 				counter++;
 			if (counter >= 8) {
-				if (arms.type == Arms.HUMAN)
-					counter++;
 				if (lowerBody == LowerBody.HUMAN)
 					counter++;
 			}
