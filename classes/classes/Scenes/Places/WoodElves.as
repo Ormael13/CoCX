@@ -1,0 +1,511 @@
+﻿package classes.Scenes.Places{
+	import classes.*;
+	import classes.BodyParts.Antennae;
+	import classes.BodyParts.Arms;
+	import classes.BodyParts.Ears;
+	import classes.BodyParts.Eyes;
+	import classes.BodyParts.Face;
+	import classes.BodyParts.Hair;
+	import classes.BodyParts.Horns;
+	import classes.BodyParts.LowerBody;
+	import classes.BodyParts.RearBody;
+	import classes.BodyParts.Skin;
+	import classes.BodyParts.Tail;
+	import classes.BodyParts.Tongue;
+	import classes.BodyParts.Wings;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.SceneLib;
+	import classes.internals.SaveableState;
+
+	public class WoodElves extends BaseContent implements SaveableState{
+
+		public static var WoodElvesQuest:int;
+		public static const QUEST_STAGE_NOT_STARTED:int = 0;
+		public static const QUEST_STAGE_METELF:int = 1;
+		public static const QUEST_STAGE_LOSTTOELF:int = 2;
+		public static const QUEST_STAGE_TOPICUNLOCKED:int = 3;
+		public static const QUEST_STAGE_PCELF:int = 4;
+		public static const QUEST_STAGE_PCNOTELF:int = 5;
+		public static const QUEST_STAGE_PCFUCKOFF:int = 6;
+
+		public function stateObjectName():String {
+			return "WoodElves";
+		}
+
+		public function resetState():void {
+			WoodElvesQuest = QUEST_STAGE_NOT_STARTED;
+		}
+
+		public function saveToObject():Object {
+			return {
+				"stage": WoodElvesQuest
+			};
+		}
+
+		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+			if (o) {
+				WoodElvesQuest = o["stage"];
+			} else {
+				// loading from old save
+				resetState();
+			}
+		}
+
+		public function WoodElves(){
+			Saves.registerSaveableState(this);
+		}
+
+		//[Find Elves]
+		public function findElves():void {
+			clearOutput();
+			WoodElvesQuest = QUEST_STAGE_METELF;
+			outputText("As you explore the woods, you find a grove with a small pond in the middle and a large, vibrant tree growing in the corner. The tree isn’t a kind you recall seeing in the past. You examine the tree and fail to properly remember which variety it belongs to, not to mention the small green lights that dance around it, a bit like the faerie fires in a bog. As you are examining the tree you hear a crystal clear, beautiful laugh to your left, followed by the sounds of shuffling leaves. You ready yourself for combat and turn around just in time to see a blonde woman with pointed ears and green eyes staring at you from the middle of the clearing. She wears an outfit of white silk that covers her but does little to hide her feminine curves, which stand out on her delicate and ethereal frame in a way no human could match. You imagine even most succubi would be jealous of the natural way she wears her beauty, as if some goddess had sculpted her form from marble stone, clear water and living wood, then animated it with the lithe spirit of a fairy. You are still gazing, spellbound by her appearance, when she calls out to you in a clear, musical voice." +
+					"\n\n\"<i>Welcome to our sacred grove traveler. Are you perhaps lost?</i>\"\n\n" +
+					"Not lost, you reply, though you don’t recall ever seeing this grove before; but you were simply wandering the forest looking for whatever might cross your path. You ask her who or what she may be." +
+					"\n\n\"<i>We have our own name for ourselves, but others call us Elves. And, a question for a question: who might you be, and what is the aim of your wandering?</i>\"\n\n" +
+					"You briefly explain your origin and quest to the beautiful woman, her peaceful bearing and unearthly beauty having allayed your usual suspicion. As you do, you hear more chime-like laughter to both sides, and notice that you have more company now. More light-skinned, blonde, green-eyed elven girls seem to pop out of nowhere all around you, some perched in the trees, others standing right behind the bushes." +
+					"\n\n\"<i>Such a valiant quest! How noble of you!</i>\", the lovely elf who first addressed you says unctuously.");
+			//[Ask about elves] [Leave]
+			menu();
+			addButton(0, "About elves", AskAboutElves);
+			//addButton(1, "Leave", LeaveStartElfFight);
+		}
+
+		public function AskAboutElves():void {
+			clearOutput();
+			outputText("You press the beautiful elf for more information about her people. " +
+					"While the word is familiar enough to you from stories even in your old world, you’ve never met one, even in Mareth, and know nothing of their nature or goals. " +
+					"How have they remained hidden from the demonic threat even in these tainted woods?." +
+					"\n\n\"<i>Oh goodness, what a curious little darling you are! But how should we answer so freely in such dangerous times? If our positions were reversed, would you tell a stranger about yourself, and maybe endanger your friends and way of life?</i>\"\n\n" +
+					"She casts a meaningful look at a pair of elves in the tree above you, which you follow. One is cupping her cheeks with her hands, her face filled with mocking surprise, while the other grins widely and nods back to her companion in front of you, who addresses you once more, now sporting a less benevolent smile than previously." +
+					"\n\n\"<i>Ah, but it seems there is a way for you to find out what you wish to know! You can simply see for yourself. Although, I’m afraid once you do you likely won’t be going back.</i>\"\n\n" +
+					"As soon as she finishes speaking a pair of green vines grapple your torso from behind and you turn just in time to cry out as a normal-looking knot on the tree grows tentacles that begin to crawl toward you. " +
+					"This must be yet another damn breed of tentacle plant, one you haven’t seen yet! Will you resist despite your disadvantage, outnumbered and restrained, or will you submit to your capture, though the elves are clearly planning something untoward?");
+			//[Ask about elves] [Leave]
+			menu();
+			addButton(0, "Submit", YouAreAlreadyElfSubmit);
+			//addButton(1, "Resist", StartElfFight);
+		}
+
+		public function YouAreAlreadyElfSubmit():void {
+			clearOutput();
+			outputText("You decide to let the elven lady proceed. ");
+			YouAreAlreadyElf1();
+		}
+
+		public function YouAreAlreadyElfLose():void {
+			clearOutput();
+			outputText("Bested in combat and unable to continue fighting, the horde of elven ladies encroach upon you. ");
+			YouAreAlreadyElf1();
+		}
+
+		public function YouAreAlreadyElf1():void {
+			outputText("The elf leader raises an hand and tentacle-like vines whip around you as the elves encircling you smirk and giggle among each other. " +
+					"\n\n\"<i>See you again soon, my cute little adventurer.</i>\" says the leader playfully. \"<i>Try not to struggle too much, you’ll spoil the fun~♥</i>\"\n\n" +
+					"A vine wraps around your mouth, silencing any further objections you might have. Your restraints prevent you from looking anywhere but straight ahead, but you feel a great load of sticky resin fall on you from above, presumably from the tree; you feel it even more than you might have expected, because somehow the vines grappling you stripped you naked! As if galvanized by the warm, golden ooze now covering you the vines begin swirling and slithering over your body, teasing and tickling you until you begin to feel sensitive and aroused despite your situation." +
+					" You clench in anticipation as one explores between the cheeks of your "+player.assDescript()+", then pushes its way into your "+player.assholeDescript()+"," +
+					", its tapered end swirling about provocatively inside. The vine already gagging you stifles your cry of indignation as it works its way into your mouth, acting much the same way. As it does it begins releasing a sticky, faintly sweet sap that trickles down your throat and coats your tongue, making you feel dizzy and flushed.");
+			if (player.hasVagina()) outputText("You continue to thrash helplessly as a third tentacle winds its way into your "+player.vaginaDescript()+", and despite yourself your hips start to twitch and buck as it eagerly explores your wet cavity, tickling your sensitive places and slowly filling you with  more sticky fluid; it clings to your walls and makes them feel warm and tingly, and before long your slit is engorged and drooling with a mixture of the plant’s secretions and your own feminine fluids.");
+			outputText("With a muffled gasp of terror and arousal you realize yet another tentacle is pressing against your belly-button, and you squeal against the tentacle invading your throat as it actually penetrates through you and begins, impossibly, to move about inside your stomach, tickling and teasing you from inside. Insanely, rather than the pain of your stomach being impaled it brings a feeling of soothing warmth - almost relief. ");
+			if (player.hasCoat()) outputText("With a shock you look down at your body to see your "+player.coatType()+" melting away and washing off, replaced by smooth, silky skin. ");
+			if (player.tailType == Tail.NONE || player.wings.type != Wings.NONE || player.legCount != 2) outputText("Soon after, your other extra, unneeded appendages begin to shrivel and melt away as well. ");
+			if (player.hasCoat() || player.tailType == Tail.NONE || player.wings.type != Wings.NONE || player.legCount != 2) outputText("despite the radical changes your form is undergoing, ");
+			else outputText("Despite being violated in every hole you have, and some you don’t, ");
+			outputText("a wave of peace and well-being comes over you, dispelling your panic and all sense of urgency as it does. How can this be a violation when it feels so <b>good</b>? ");
+			if (player.cocks.length > 0){
+				outputText("You sigh in pleasure as you feel a vine wrapping slowly about the base of your male organ");
+				if (player.cocks.length > 1) outputText("s");
+				outputText(", and don’t even flinch as it pulls ");
+				if (player.cocks.length == 1) outputText("it ");
+				if (player.cocks.length > 1) outputText("them ");
+				outputText("off as easily as one might pluck a ripe fruit from a tree. You never needed ");
+				if (player.cocks.length == 1) outputText("it ");
+				if (player.cocks.length > 1) outputText("them ");
+				outputText("anyway, ridiculous, ugly thing");
+				if (player.cocks.length > 1) outputText("s");
+				outputText("; you’re much better off without ");
+				if (player.cocks.length == 1) outputText("it.");
+				if (player.cocks.length > 1) outputText("them.");
+				if (!player.hasVagina()) {
+					outputText(" Instead you feel a rising sense of ecstatic rightness as a new slit forms where ");
+					if (player.cocks.length == 1) outputText("it");
+					if (player.cocks.length > 1) outputText("they");
+					outputText(" once hideously stuck out of you. Ah, this is much more fitting! And <b>so</b> much more pleasurable!");
+				}
+			}
+			outputText(" You feel as if you are being reshaped into the form you were always meant to have, the form your old" +
+					", ugly self was hiding, caked over like dried mud. Now you are clean, pure, truly yourself. " +
+					"Under the loving, tender caress of your rescuers, the holy vines, caressed by the warm sap of the sacred tree, " +
+					"the relaxation and pleasure and euphoria finally drive you over the edge, and you cry out ecstatically in your sweet, clear voice as you cum, " +
+					"twitching and shuddering against the embrace that holds you as your pussy splashes clear, sweet liquid onto the vines." +
+					" Then, you are gently released to the ground, where you lie in bliss until a light sleep takes you.");
+			player.ears.type = Ears.ELVEN;
+			player.horns.type = Horns.NONE;
+			player.antennae.type = Antennae.NONE;
+			player.tongue.type = Tongue.ELF;
+			player.eyes.type = Eyes.ELF;
+			player.eyes.colour = "green";
+			player.hairType = Hair.SILKEN;
+			player.wings.type = Wings.NONE;
+			player.faceType = Face.ELF;
+			player.arms.type = Arms.ELF;
+			player.lowerBody = LowerBody.ELF;
+			player.tailType = Tail.NONE;
+			player.skinType = Skin.PLAIN;
+			player.skinAdj = "flawless";
+			player.skin.base.color = "light";
+			player.rearBody.type = RearBody.NONE;
+			player.femininity = 80;
+			player.tone = 0;
+			player.thickness = 20;
+			player.killCocks(player.cocks.length);
+			player.balls = 0;
+			player.ballSize = 0;
+			if (!player.hasVagina()) player.createVagina();
+			if (player.breastRows.length >= 2) player.removeBreastRow(player.breastRows.length - 1,player.breastRows.length-1);
+			if (player.biggestTitSize() <= 2) player.growTits(2 + rand(2), 1, false, 3)
+			player.createPerk(PerkLib.FlawlessBody,0,0,0,0);
+			player.createPerk(PerkLib.ElvenSense,0,0,0,0);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			WoodElvesQuest = QUEST_STAGE_LOSTTOELF;
+			doNext(YouAreAlreadyElf2);
+		}
+
+		public function YouAreAlreadyElf2():void {
+			clearOutput();
+			outputText("You awaken a short while later. Still dazed, you crawl your way to the pond to take a look at yourself, only to find a stunningly beautiful elf girl looking back at you. " +
+					"She has "+player.breastCup(0)+" cup breasts, round and firm and tipped with pink, blushing nipples, and clear, smooth skin as unblemished as the crystal waters of a forest stream, fairer than any mortal. " +
+					"Her "+ player.hairColor +" silken hairs are "+ Appearance.hairDescription(player) +", " +
+					"and her eyes are the emerald green of fresh leaves in early spring. Slowly your waking mind begins to piece together that this beautiful elven girl is actualy you, the ressemblance with the elves who found you earlyer is shocking! " +
+					"\n\n\"<i>Oh heavens, Alyssa was right: you turned out just adorable<b>~♥</b></i>\"\n\n" +
+					"The elf girl who seemed to be the leader of the others speaks from behind you, and you turn to face her. " +
+					"She is gazing at you with eyes full of affection and approval. She is also alone; the other elves seem to have already left. " +
+					"As you gaze up at her she reaches a hand out to you. With no real reason not to, you accept her offer and she helps you to your feet. " +
+					"Then, gently but firmly holding your hand, the elf woman leads you out of the clearing. Still dazed, you ask her where she's taking you. " +
+					"\n\n\"<i>Why, silly girl, I'm taking you home, of course! You wanted to see what elvish life is like, and now you will, little sister! Besides, the others are dying to see you. Oh, right! My name is Merisiel.</i></b>\"\n\n" +
+					"Far, far back in the recesses of your mind a little fly buzzes; is it worry? Alarm? What could be causing that? After all, your big sister is finally taking you home! Everything is going to be okay now. With a shake of your head you dismiss the strange fancy and listen to Merisiel as she tells you how cute you look now. You smile and blush shyly at your big sister’s praise, happier than you’ve ever been that she thinks so highly of you.\n\n" +
+					"After a few minutes’ walk the two of you reach a clearing filled with small tents, tables, soft mats for resting, and, most of all: Elves!" +
+					" So many beautiful, lithe, smooth-skinned Elves, and not an ugly male in sight to mar the beauty! Most of them have stopped what they were doing," +
+					" turning their lovely faces your way to give you quiet, curious stares. For a moment you feel the icy grip of fear on your heart;" +
+					" is something wrong with you? Are you going to be cast out from this very heart of the world’s beauty before you even enter?" +
+					" But before you can work yourself up into a panic Merisiel leads you to a large tent and motions you to enter," +
+					" smiling warmly at you to quell your worries. Inside you see  two elves sitting on a bed of soft pillows heaped together and covered with a warm," +
+					" pink blanket - dimly you recognize them as the two Merisiel consulted in the tree when you were… before you… where were you before this? What were you doing?" +
+					" The thought troubles you for an instant, but the sweet voice of one of the two women in front of you quickly drives it away as she welcomes you." +
+					"\n\n\"<i>It’s nice to meet you, little sister. My name is Elenwen. Please, join us in the bed and relax.</i>\"\n\n" +
+					"Elenwen has short hair, blond like all of the others, and her eyes are slightly slanted, giving her a slightly piercing gaze that contrasts with her soft, gentle voice. Her hips and breasts are full and womanly, and also exposed - neither she nor her neighbor are wearing a stitch between them." +
+					" Distantly you realize that you aren’t either, though the thought brings no embarrassment with it - after all, you’re all sisters here, right?");
+			if (player.armor != armors.NOTHING) outputText(" Wait, didn’t you have some things with you before? Important things…?");
+			outputText("\n\n\"<i>And I'm Alyssa,</i>\" says the elf sitting next to Elenwen, her chiming tone driving away your hesitation again. Her blond hair is done up in adorable braided twintails, accentuating her slender, girlish build, and her eyes are large and filled with gentle curiosity. \"<i>Oh look, Elenwen, her hair is still...</i>\"\n\n" +
+					"With a shock you realize why everyone must have been staring at you! Your hair is "+ player.hairColor +", not blonde like it should be! Your face becomes hot with shame and tears begin to fill your eyes as you realize something is separating you from your sisters. However, Elenwen quickly speaks to you to soothe your worries." +
+					"\n\n\"<i>Don’t worry, little sister! We’ll make it all right. Just let Alyssa and I take care of everything.</i>\" She turns to face her companion. \"<i>Alyssa, you manage her after we’re finished here, okay? I did the last one, after all; it’s only fair.</i>\"\n\n" +
+					"That didn’t sound quite right, you think, but you don’t have time to work through your misgivings as Elenwen addresses you again with a loving smile that almost reaches her lovely, slanted eyes." +
+					"\n\n\"<i>Come, new little sister. Let’s clean all that sticky sap off you, hmm?</i>\"\n\n" +
+					"Merisiel quietly leaves the tent as Elenwen pulls you onto the bed and lays you down between her and Alyssa." +
+					" She nibbles at your long, pointed ears, which you now realize are <b>very</b> sensitive as the feeling of her lips and teeth forces a soft gasp from you." +
+					" Alyssa wastes no time watching, instead softly, teasingly licking at your left breast, starting at the nipple and slowly circling her way outward, gently cleaning the sap from your skin." +
+					" Leaving your trembling ear, Elenwen traces a delightful trail down your neck with her soft, pink tongue, then turns your head toward her with her slender hands to cup your cheeks and kiss you." +
+					" Her lips are so soft, warm, and sweet that you fail to notice Alyssa’s delicate fingers take hold of your hand and guide it into your pussy," +
+					" until she starts pushing and pulling with leading movements until you are fingering yourself, slowly but lustfully, and you moan in arousal into Elenwen’s passionate kiss." +
+					" By the time Alyssa removes her hand from yours the movements have become automatic, and you pleasure yourself eagerly, moaning and gasping in delight while the two women continue to lick and caress you all over." +
+					"\n\n\"<i>Hee hee, goodness! Our little sister has taken to it like a fish to water; I dare say she’s going to fit right in here.</i>\"\n\n" +
+					"Elenwen pulls a lock of your "+ player.hairColor +" hair in front of your eyes between her lovely fingers, and to your surprise they have started to turn golden blonde, just like that of all the other elves." +
+					"\n\n\"<i>Mmmm, she sure is, Elenwen!</i>\"replies Alyssa, \"<i>And I bet she’s <b>really</b> going to enjoy this…</i>\"\n\n" +
+					"You shudder in delighted pleasure as Alyssa runs her tongue down your belly, from your sternum down to just above your glistening lower lips," +
+					" which you are still mindlessly plowing with your own slender fingers." +
+					" The thought of becoming more like your Elven sisters carries you to new heights of arousal, and your hips buck as you gasp from a small orgasm that leaves your body trembling with the promise of more to come." +
+					" Meanwhile, Elenwen pulls back to retrieve something from the end of the bed: a double-ended dildo made of a translucent green-gold substance." +
+					"\n\nAlyssa whispers in your ear. \"<i>That lovely thing is made from the very sap of the tree you fell from. With its help, everything will go even faster. Just lay still, and let the tree’s sap work its magic, little sis. You’re going to <b>love</b> it.</i>\"\n\n" +
+					"Even if you wanted to resist, you’re much too far gone; the pleasure has paralyzed your mind and body and all you can do is writhe in ecstasy as Allyssa pins you under her." +
+					" Her pert palm-sized breasts and stiff nipples press against your own as Elenwen inserts one end of the toy into her own welcoming slit then pushes the other tip of the golden length between your pink," +
+					" dripping lips. For a moment the entire world seems to pause in anticipation, then you gasp and let your mouth gape open as Elenwen fully slides the toy in, the blonde color running higher up your hair strands. Why does it feel so <b>good</b>?" +
+					"You didn’t think anything could feel this good! You lose yourself entirely in the experience as Elenwen thrusts into you again and again, moaning as with each shock of pleasure your [pchaircolor] hair becomes a little more blonde. Just before you reach orgasm, the last of the [pchaircolor] fades, leaving your hair fully golden blonde." +
+					" Elenwen stops her thrusting and  whispers sweetly in your sensitive ear as your juices run freely down the toy, twitching with each spasm of your drenched pussy around it as it begs for your impending climax." +
+					"\n\n\"<i>Tell me, little sister, what is it that you want right now? Is it something cute, fun, or pleasurable? Whatever it is we'll do it for you, as much as you like, as often as you like, from now on. All you have to do… is… ask<b>~♥</b></i>\" She punctuates the end of her sultry proposal by brushing her fingers against your clitoris, making you jump.\n\n" +
+					"What do you want? You only want her to finish, to push you over the edge, tumbling into the mind-shattering orgasm you feel coming, don’t you? There wasn’t anything else… before all this… Just as you start to waver Elenwen gives the golden dildo a little twist inside you and the question evaporates.. No, of course, you are an elf;" +
+					" you are Elenwen and Alyssa’s youngest and dearly beloved little sister. All you want, all you ever wanted, all you will want is for your big sisters to love you more… play with you more… make love to you, always and forever, here in this paradise. You beg her to push you over the edge, to drown you in pleasure and never let you come back up." +
+					"\n\n\"<i>Awww, Alyssa, she’s so cute~! Now I want to have her…</i>\" Elenwen pouts as she complains to Alyssa, who giggles on top of you and begins kissing your lips.\n\n" +
+					"\n\n\"<i>Hee hee, too laa~aate sister, you already assigned her to me<b>~♥</b></i>\" She says in between kisses.\n\n" +
+					"Still pouting, Elenwen obliges you, thrusting and twisting the magical toy while she teases your clit with her fingers, and you sail over the edge into the most intense orgasm you can remember; your vision goes pure white and you scream while Alyssa gently restrains your thrashing limbs, kissing your cheeks and nibbling at your lips and ears." +
+					" For a few blissful moments your mind is filled only with the shock of orgasm, love for your sisters, and happiness at having finally come home; then, as you come down, the two Elven women cuddle you until you fall asleep, whispering and cooing in your ears as they praise you for a job well done.");
+			player.hairColor = "golden blonde";
+			doNext(YouAreAlreadyElf2);
+		}
+
+		public function YouAreAlreadyElf3():void {
+			clearOutput();
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+			outputText("The next few days pass like a happy dream as you play with your sisters, collect flowers, and have 'fun time' with Alyssa, and sometimes Elenwen and even Merisiel." +
+					" However, something nags at your mind… something very important, you think, but like a wisp of smoke it keeps twisting and dissipating every time you try to grasp hold of it." +
+					" It’s certainly not enough to ruin the enjoyment of your new, perfect life, but as the only sour note to your experience in the Elves’ secluded grove you can’t bring yourself to ignore it.\n\n" +
+					"Then, one day, you come across the Elves’ armory: gracefully curved hunting bows carved from dark, rich-grained forest wood and strung with Elf-hair;" +
+					" slender, barb-tipped arrows fletched with lovely, bright feathers; broad-bladed knives and glittering spears with wickedly sharp edges and tips to belie the beautiful, pale gleam of the silvery metal," +
+					" the intricate carvings along the shafts and the soft leather-wrapped hilts. The first indication of violence, of anything besides peaceful days and nights of singing and cuddling and bathing with your sisters," +
+					" shocks your memory and you recall that before you came here you too were… what were you? Some kind of warrior…? You had something to protect… a duty that mattered more than anything else…" +
+					" For the first time the thought doesn’t immediately evaporate, and you seize the opportunity by grabbing a bow and a few arrows from their rack." +
+					" A small row of targets stands not far from you and, with practiced movements you nock a delicate shaft, draw the surprisingly weighty bow, and fire." +
+					" Your arrow strikes true and sinks deeply into your target; not a bulls-eye but a respectable shot for someone who can’t remember ever drawing a bow before." +
+					"\n\n\"<i>Woah, what a shot, little sister! You almost looked like a real Elven huntress just then<b>~♥</b></i>\"\n\n" +
+					"Startled, you turn around to see Merisiel standing behind you - you must have been too focused on your shot to hear her approach." +
+					" Your face, driven by instinct, blushes at her praise as you smile happily and nock another arrow, drawing your bow and aiming it directly at your captor’s lovely breasts." +
+					" The thoughts still aren’t fully coherent but somehow it’s coming together in your head that your beautiful sister is an enemy, that she and the rest of the Elves are keeping you from..." +
+					" what was it? Unbidden, the image comes to your mind of a glowing, purple scar torn into the very air, as if a magical knife had cut a circle out of the world into… somewhere?" +
+					" Somewhere important,.. somewhere you must protect, no matter the cost.\n\n" +
+					"Merisiel slowly raises her hands as you keep your shot trained on her, your arms trembling ever so slightly as you strain to keep the bow drawn." +
+					" Her warm smile slowly fades to a blank expression as she watches you slowly recover yourself." +
+					"\n\n\"<i>Ah.</i>\" she says, then gives you another smile, this one significantly more strained.\"<i>Okay, so before we do anything that can’t be undone, can we talk? I’ll call Alyssa and Elenwen over and we can discuss things peacefully, okay?</i>\"\n\n" +
+					"Despite how obviously suspicious her statement is, all things considered, something in your transformation and pleasure-addled brain still resists the idea of shooting the lovely girl in front of you in cold blood, so you nod and slowly lower the bow." +
+					" Merisiel laughs nervously and beckons you to follow her. Even so, you grab a knife as you do." +
+					"\n\n\"<i>Uh oh,</i>\" Elenwen says, then side-eyes her companion. \"<i>I thought you said <b>you</b> wanted to take care of her!</i>\"" +
+					"\n\n\"<i>I <b>did</b>,</i>\" Alyssa replies. \"<i>I did everything I was supposed to! This shouldn’t have happened!</i>\"" +
+					" Then she turns her head toward you and talks to you in a conciliatory voice. \"<i>Okay little sister… or, adventurer, I guess… we don’t know your old name and your naming ceremony was tomorrow. You can put down the bow, we won’t try to start anything. I promise.</i>\"\n\n" +
+					"Merisiel chimes in as Alyssa finishes. \"<i>No Elf has killed another since we founded this village, and we’ve got no intention of starting now. And if you’re recovering your memory there’s nothing we can do. The Sacred Tree’s… ‘blessing’, only works once. It can’t transform you twice. So it’s over; the only thing we ask is that you not hurt our sisters. We won’t stop you if you want to leave.</i>\"\n\n" +
+					"Elenwen speaks up after Merisel. \"<i>I’m sure you have some questions for us. We’ll answer you as best we can. Please don’t hate us for this; I know you must be angry but we have our circumstances as well. We’re trying to survive, just like everyone else in Mareth.</i>\"\n\n" +
+					"Something about the way the three are speaking to you makes you feel like you can trust them, and it isn’t just the lingering fog in your brain. You still can’t quite remember your name, but other things have been flowing back into your mind as they’ve been talking to you: Ingnam, your old world, your camp, the people you’ve met in Mareth before now." +
+					" You lower your bow and take a seat with the others, and they await your questions as they pass uncomfortable looks back and forth.");
+			menu();
+			addButton(0, "Elves", ElvesTopic);
+			addButton(1, "The Tree", TheTreeTopic);
+			addButton(2, "The Grove", TheGroveTopic);
+			addButton(3, "Demons", DemonsTopic);
+			addButton(4, "Ceremony?", CeremonyTopic);
+			addButton(5, "Need2Go", Need2GoEndElfQuest);
+			//addButton(6, "Want2Stay", Want2Stay);
+		}
+
+		public function ElvesTopic():void {
+			clearOutput();
+			outputText("You ask the three Elves about the Elven race: why is there so little information about them? Have they always been hidden away or is something else going on?" +
+					"\n\nMerisiel responds first. \"<i>Like many other races and peoples in Mareth, we are not originally from here. Like you, we came from another world, though for us it was… a one-way trip.</i>\"" +
+					"\n\nAlyssa continues. \"<i>It was an accident. Our village was caught in a magical disaster after a summoning ceremony went wrong, and dozens of us were brought here at once, with no way to get back. We tried, but…</i>\"" +
+					"\n\nElenwen takes over. \"<i>Magic doesn’t seem to work the same way here. Clearly it’s possible to cross the borders of worlds in Mareth; it may even be easier than it was in our original world, in fact, considering how many travelers seem to end up here one way or another. But we can’t… “find” our original world. We have no way of reaching out to it without an active connection to it, and the force that brought us here ended as soon as it did, leaving us stranded.</i>\"" +
+					"\n\nMerisiel finishes the story as her sisters trail into sad silence. \"<i>This happened only a few years before the demons came down from the mountains. Some of us did leave to explore the world before that, but most of us remained here, and, well, you can see what became of us after the demons found us.</i>\"\n\n" +
+					"She glances at her sisters, a mixture of emotion visible in her face in which lust plays no small part. Clearly the priority among these Elves of the wood is no longer on exploration and diplomacy - you’ve experienced that much yourself by now.");
+			menu();
+			addButton(1, "The Tree", TheTreeTopic);
+			addButton(2, "The Grove", TheGroveTopic);
+			addButton(3, "Demons", DemonsTopic);
+			addButton(4, "Ceremony?", CeremonyTopic);
+			addButton(5, "Need2Go", Need2GoEndElfQuest);
+			//addButton(6, "Want2Stay", Want2Stay);
+			if (WoodElvesQuest == QUEST_STAGE_TOPICUNLOCKED){
+				addButton(7, "<b>Do Ceremony!</b>", Ceremony1);
+				addButton(8, "<b>Keep name</b>", KeepName);
+			}
+		}
+
+		public function TheTreeTopic():void {
+			clearOutput();
+			outputText("You tell them to explain what is going on with that bizarre tree." +
+					"\n\nAlyssa responds first. \"<i>The Sacred Tree grew from a sapling we brought with us from our original world. It is, or it was, I suppose, a core part of our culture; we Elves are forest spirits deeply connected to the trees and animals of the woods, and the Sacred Tree was like our patron. When a new Elf was born, we would place it underneath the tree, and it would be blessed with the spirit of the forest, growing into a true Elf.</i>\"\n\n" +
+					"\n\nElenwen continues. \"<i>When the demons found it, though, they changed all that. They corrupted it, turned it into… something else. They also corrupted us. You may have noticed that there are no male Elves here; or at least none you would easily recognize as such without… checking.</i>\"" +
+					"\n\nMerisiel nods. \"<i>The Sacred Tree, or I suppose the Corrupted Tree, now... it eats men. Or, it eats the ‘male’ out of men, I guess… in the process changing them into one of us. We can’t reproduce among ourselves anymore - the few of us that still have some of the right equipment are sterile. And when we breed with other races, the children aren’t Elves. So the only way we can replenish our numbers from losses is by letting the Tree have its way with travelers we find… like we did with you.</i>\"" +
+					"\n\n\"<i>But we really do care for them afterward!</i>\" Alyssa interjects. \"<i>Just like we did with you… or tried to, at least. We really did consider you to be one of us. I still do… little sister.</i>\" She trails off as she looks away from you sadly.");
+			menu();
+			addButton(0, "Elves", ElvesTopic);
+			addButton(2, "The Grove", TheGroveTopic);
+			addButton(3, "Demons", DemonsTopic);
+			addButton(4, "Ceremony?", CeremonyTopic);
+			addButton(5, "Need2Go", Need2GoEndElfQuest);
+			//addButton(6, "Want2Stay", Want2Stay);
+			if (WoodElvesQuest == QUEST_STAGE_TOPICUNLOCKED){
+				addButton(7, "<b>Do Ceremony!</b>", Ceremony1);
+				addButton(8, "<b>Keep name</b>", KeepName);
+			}
+		}
+
+		public function TheGroveTopic():void {
+			clearOutput();
+			outputText("You ask about the Grove." +
+					"\n\n\"<i>It’s been our home for years, of course,</i>\" says Elenwen. \"<i>This is where we first came to Mareth, where we planted the sapling of the Sacred Tree. Most of us stayed here; some left to explore before the demons came, so it’s possible that there may be a few pure Elves still wandering the world, if the demons didn’t catch them, and a few of us that were… that got twisted a bit worse than the rest of us left to join Lethice’s army as soldiers or slaves,  but otherwise we’re all here.</i>\"" +
+					"\n\nMerisiel adds, \"<i>It’s a beautiful place, even after the corruption, I think. Nature thrives here; the plants and animals are healthy and free, and we live mostly in peace, aside from catching an adventurer every so often to replenish our numbers.</i>\"\n\n" +
+					"Like they did with you, you add." +
+					"\n\nThe three girls look a little guilty for a minute and nod. Alyssa says \"<i>We really did love you though. I… I still love you, and I wish you would stay with us. It’s not so bad here, is it?<i>\"\n\n" +
+					"Unable to truthfully answer yes with certitude, you hold your silence and move on.");
+			menu();
+			addButton(0, "Elves", ElvesTopic);
+			addButton(1, "The Tree", TheTreeTopic);
+			addButton(3, "Demons", DemonsTopic);
+			addButton(4, "Ceremony?", CeremonyTopic);
+			addButton(5, "Need2Go", Need2GoEndElfQuest);
+			//addButton(6, "Want2Stay", Want2Stay);
+			if (WoodElvesQuest == QUEST_STAGE_TOPICUNLOCKED){
+				addButton(7, "<b>Do Ceremony!</b>", Ceremony1);
+				addButton(8, "<b>Keep name</b>", KeepName);
+			}
+		}
+
+		public function DemonsTopic():void {
+			clearOutput()
+			outputText("You ask about the Elves’ relationship to the Demons." +
+					"\n\nMerisiel answers you first. \"<i>When the demons invaded Mareth it didn’t take them long to find us here in the forest.</i>\" she says, sadly. \"<i>They… changed our Sacred Tree, and when they did we changed with it. We became much more sexually active, and our men mostly turned into women. Those of us that were affected the worst they took with them to be… toys, I suppose, or maybe soldiers; we don’t really know. Since then they’ve left us alone, I’m sure because they know we’re not a threat.</i>\"" +
+					"\n\nAlyssa interjects. \"<i>But we’re not allied with them! We hate Lethice for what she did to our Sacred Tree… even if we, um… kind of enjoy the sex now.</i>\"" +
+					"\n\nElenwen smiles dreamily. \"<i>Yeah, I’m not really sure I’d want to go back now if I could… it just feels so good, and everyone gets along even better than they did before, hee hee…</i>\"\n\n" +
+					"The three girls break off into giggling and staring lustily at each other, and you; sighing, you abandon the topic. It’s unlikely you’re going to get more out of them about the demons. Oh well, at least they’re not working with Lethice actively.");
+			menu();
+			addButton(0, "Elves", ElvesTopic);
+			addButton(1, "The Tree", TheTreeTopic);
+			addButton(2, "The Grove", TheGroveTopic);
+			addButton(4, "Ceremony?", CeremonyTopic);
+			addButton(5, "Need2Go", Need2GoEndElfQuest);
+			//addButton(6, "Want2Stay", Want2Stay);
+			if (WoodElvesQuest == QUEST_STAGE_TOPICUNLOCKED){
+				addButton(7, "<b>Do Ceremony!</b>", Ceremony1);
+				addButton(8, "<b>Keep name</b>", KeepName);
+			}
+		}
+
+		public function CeremonyTopic():void {
+			clearOutput();
+			outputText("You ask Merisiel what this naming ceremony is about. She uncomfortably shifts in place before answering you." +
+					"\n\n\"<i>Well it's a big event first and foremost, all new elves get a name given to them by the sacred trees. As we told you before, we elves are bonded to the forests. When a sister is ready to become a true wood elf she must undergo the naming ceremony which consists in fully bonding with an offshoot of the sacred tree in body and soul. Your elven name is something that will come to you naturally though in exchange you will fully bond with the sacred tree and your soul will merge with that of the forest.</i>\"\n\n" +
+					"Merge with the forest? She could not possibly mean... Sensing your confusion Merisiel, with an almost ironic, somewhat deadpan soulless glare clarifies the rest for you.\n\n" +
+					"\n\n\"<i>If I was not clear enough your soul will safely stay bound within the tree, out of your body. So long as the forest lives you will never age again.</i>\"\n\n" +
+					"You think for a moment, unite your soul with the forest in exchange for a timeless body and a new elven name? Is this what you truly want?");
+
+			menu();
+			addButton(0, "Elves", ElvesTopic);
+			addButton(1, "The Tree", TheTreeTopic);
+			addButton(2, "The Grove", TheGroveTopic);
+			addButton(3, "Demons", DemonsTopic);
+			addButton(5, "Need2Go", Need2GoEndElfQuest);
+			//addButton(6, "Want2Stay", Want2Stay);
+			addButton(7, "<b>Do Ceremony!</b>", Ceremony1);
+			addButton(8, "<b>Keep name</b>", KeepName);
+			WoodElvesQuest = QUEST_STAGE_TOPICUNLOCKED;
+		}
+
+		public function Need2GoEndElfQuest():void {
+			clearOutput();
+			WoodElvesQuest = QUEST_STAGE_PCFUCKOFF;
+		}
+
+		public function KeepName():void {
+			clearOutput();
+			outputText("Despite everything that happened in this time together, you still smile at the three misty-eyed Elven girls." +
+					" You did grow close to them over the last couple of days, and you think you may miss them too," +
+					" even if what they did to you was rude, more or less by Mareth’s twisted standards anyways." +
+					" Once you’ve made sure all is well at your camp and resumed your duties as Champion, perhaps you’ll take them up on your offer." +
+					" With a goodbye for now to the three girls, you collect your old equipment and leave the Elven Grove." +
+					" The voices of your would-be sisters fading into the distance behind you as you return to your camp. As you tread back," +
+					" the paths slowly become familiar as the last of your brainwashing fades, and you remember your name." +
+					" You won’t forget it again; you’ll live or die as [name], the Champion of Ingnam. But, you think with a faint smile," +
+					" you certainly wouldn’t mind coming back now and again to spend more time with the lovely Elves," +
+					" now that you’ve sorted out their rather forceful welcome. The thought manages to bring a stirring heat deep within you.");
+			WoodElvesQuest = QUEST_STAGE_PCNOTELF;
+			doNext(camp.returnToCampUseOneHour);
+		}
+
+		public function Ceremony1():void {
+			clearOutput();
+			outputText("While you do want to continue your quest you feel a strong tie to your sisters. Maybe it's the elven brainwashing magic that compels you ");
+			if (flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] > 0) outputText(", maybe it's your disillusion toward mankind after the elders of your village almost sold you into slavery to fiends all for their own gain ");
+			outputText("or maybe it's just that you really love your elder sis that much. Regardless, your old name holds little meaning to you now and you are more than ready to discard it, just as you would your past as a human. If relinquishing your soul to the forest can make you that much closer to your dear sisters then all the better. You announce your decision to take on the naming ceremony and become a true elf like them, however you will pursue your original quest as well; if not for Ingnam who never deserved your efforts in the first place then for the elves so they can one day be free of demonic influence." +
+					"\n\nAlyssa claps her hand togueter overjoyed \"<i>Sister, you are the best, you know that? Despite everything that happened you still haven't given up on living together with us.</i>\"\n\n" +
+					"As if you would. This little paradise is what's truly worth fighting for.");
+			doNext(Ceremony2);
+		}
+
+		public function Ceremony2():void {
+			clearOutput();
+			outputText("On the following day, the elven community assembles next to the tree line. You stand amongst a few other antsy sisters. " +
+					"You feel slightly tense, but at least you are not alone in getting a new name today. One after another, " +
+					"the young elves head toward the trees. You are unable to see much given you are at the back of the crowd. " +
+					"Though, the cheers and encouraging words from your sisters are telling that they passed the ceremony effortlessly. " +
+					"Eventually, your turn arrives. Your caretaker gently ushers you toward the front of the crowd." +
+					"\n\nAlyssa, being your eldest, encourages you with a gentle whisper, \"<i>Do not let fear or doubts consume you. Approach and embrace a tree. It will do the rest. Trust it. Relinquish yourself to it. Let the bonding happen naturally. It will be a pleasant experience. All your sisters know you are ready. Your other sisters and I are all cheering for you.</i>\"\n\n" +
+					"With an assured nod, you slowly walk toward the treeline. Unsurprisingly, those trees are very similar to the tree that made you what you are now. They are smaller but nearly as corrupted. " +
+					"Were you any different; you would walk toward these things with a weapon drawn, but that was the old you. " +
+					"You are different now. You know what you want to do now. This tree calls to you in earnest, and you will gladly accept its call.");
+			doNext(Ceremony3);
+		}
+
+		public function Ceremony3():void {
+			clearOutput();
+			outputText("The first time you met one of the tentacle trees, you were dragged against your will and fought back with all you had." +
+					" Now, you walk toward the tentacle tree with focused will and determination, discarding your ephemeral elven clothes as you press your naked form against the bark of the tree. " +
+					"\n\nYou sigh in delight as you make contact. Unlike a typical tree, the warm trunk is smooth against your elven skin." +
+					" Vines crawl from above to gently press you against the tree into a soothing embrace like you are a long-missed lover." +
+					" Feeling safe in the tree's embrace, you abandon yourself to your verdant lover's ministrations." +
+					" A tendril gently wraps itself around your left leg, teasing the entryway to your elven nether lips as if asking for your permission." +
+					" You coax the vine with a slow caress from your right hand, relinquishing control entirely." +
+					"\n\nIt is a slow but gentle penetration as the vine parts your lips, inserting itself into you with several inches, following the pulse of your heartbeat." +
+					" A second vine fondles the entryway to your anus before it proceeds softly digging into you." +
+					" Your mind trails, lost in the thought of giving yourself to the gentleness of the tree." +
+					"\n\nYou open your eyes, barely spying a faint green glow coming from your pussy where the vine is embedded as the glow from your cunt slowly transfers to the vine then through the tree." +
+					" The tree permeates with a warm, green glow as foreign yet incredible sensations overwhelm your entire body." +
+					"\n\nYou can hear the pulse of the sap, the slow movement of a tainted source of water underground." +
+					" The mating calls of faraway birds, the breeze caressing a whole field of open flowers, pistils brushing against one another as pollen flies in the air. You hear the forest, or rather, you are the forest." +
+					" The sensory overload causes you to clench as your climax hits. You reflexively clamp around the vine within you as the green light funnels into the tree. A soft moan escapes your lips as the vine pumps sap directly into your womb." +
+					" Within the high of your climax, you hear the whisper of a name in the rustling of leaves." +
+					" Your mind sharpens at the sound as if given a moment of clarity. What is it that you heard?");
+			doNext(chooseName);
+		}
+
+		public function Ceremony4():void {
+			clearOutput();
+			outputText("This name, whispered to you by the spirit of the forest, was...");
+
+			menu();
+			mainView.nameBox.x = mainView.mainText.x + 5;
+			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
+
+			//OLD
+			//mainView.nameBox.x = 510;
+			//mainView.nameBox.y = 265;
+			mainView.nameBox.text = "";
+			mainView.nameBox.maxChars = 16;
+			mainView.nameBox.restrict = null;
+
+			addButton(0, "OK", chooseName);
+			doNext(camp.returnToCampUseOneHour);
+		}
+
+		public function chooseName():void {
+			if (mainView.nameBox.text == "") {
+				outputText("\n\n\n<b>You try to listen again for the name you heard in the rustling leaves what is it you heard?</b>");
+				doNext(Ceremony4);
+			}
+			clearOutput();
+			mainView.hideComboBox();
+			mainView.nameBox.visible = false;
+			player.short = mainView.nameBox.text;
+			Ceremony5();
+		}
+
+		public function Ceremony5():void {
+			outputText("[name]! Yes, that is you. You are [name], beloved child of the forest, and this is the tree which initiated you." +
+					" The tree is now vibrant with green light, your soul in the safekeeping of its woods along those of the many elves who came here before you, your body having none left to give." +
+					" With tender care, the vines slowly disentangle you from its embrace before allowing you to escape." +
+					"\n\nYou can still feel the connection between you and the forest, leaving you with enhanced senses. The overwhelming sensations dim down over time," +
+					" becoming easier to bear and allowing you to regain a semblance of control over yourself, though it never dies out completely." +
+					"\n\nYour pussy still slowly dripping a small stream of sap, you walk back to your sisters smiling serenely." +
+					" Sex is such a taboo concept for most, but having achieved inner harmony and symbiosis with the forest has granted you insight into your sexuality like never before." +
+					" Would you be able to go back to being a prude boring human after tasting this and finding your calling? No, certainly not, and even if you could, your form is now wholly body and soul that of a wood elf, the wood elf named [name]." +
+					" With your new name and heightened resolve, you heard back from the treeline.");
+			doNext(Ceremony6);
+		}
+
+		public function Ceremony6():void {
+			clearOutput();
+			outputText("Alyssa welcomes you back with a loving hug as you come running out of the woods toward her. Her hand pleasantly ruffles through your hairs while the upcoming uninitiated head for the woods." +
+					"\n\n\"<i>See? That wasn't too bad, and now we truly are connected both by blood and soul; that of the forest. I will clean you up so you can be ready for the evening meal. I know you will likely want to resume your old quest tomorrow. Merisiel, Elenwen, and I have already retrieved your things. You will be ready and up for adventure again in no time.</i>\"\n\n" +
+					"What about home, though? Is this goodbye?" +
+					"\n\n\"<i>You're joking aren't you? You're free to take a break from your world trekking anytime and come back here to visit. No one here will judge you if you truly decided to retire from adventuring and stay here permanently. Honestly, I think a cute girl like you doesn't belong out there fighting monsters and demons. But since this is the choice you made, all we can do is make sure this adventure won't cost you anything. And should things become impossible, you can always come back here and lay on your big sister's shoulder for moral support.</i>\"\n\n" +
+					"This evening, you eat fresh fishes caught from the stream and berries, sharing this final meal with your sisters. Knowing you might not see them for a long while, you want to spend another moment of intimacy with them. The four of you playfully share the comfy pillow bed one last time. You doze off within your sisters' arms, feeling both bliss and security." +
+					"\n\nThe day after, you pick up your gear and get ready to resume your quest. With a heartfelt goodbye for now to the three girls, you leave the elven grove." +
+					" The voices of your sisters fade into the forest behind you as you return to your camp. The paths slowly become familiar while you tread as the last of your brainwashing fades. " +
+					"As you pass a nearby running river, you look into it as your reflection stares back at you. Your reflection carries two bright green eyes, like shining emeralds." +
+					" Something about it is deeply unsettling. The reflection shines with a foreign luster. Lifeless, hollow, empty... Soulless." +
+					" Chills run down your body as your mind trails, knowing your soul is lingering in the trees with all the other elves." +
+					" Trying not to think about it, you turn your gaze from the river before you resume your walk. You turn your head over your shoulder; the soulless reflection stares back at you with glistening eyes." +
+					" You shake your head as you focus your mind on the road in front of you. The gentle trickle of water echoes behind you as the sound fades with distance." +
+					"\n\nThe world around you already looks less colorful and happy. The grove, despite its corruption, is an oasis of love and happiness in the middle of the bleak desert of sadness that is Mareth. " +
+					"It takes great effort from you not to turn back right away and give up, but you are determined to see this through, at least for now.");
+			WoodElvesQuest = QUEST_STAGE_PCELF;
+			player.createPerk(PerkLib.BlessingOfTheAncestorTree,0,0,0,0);
+			doNext(camp.returnToCampUseSixteenHours);
+		}
+	}
+
+}

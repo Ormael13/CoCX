@@ -3039,6 +3039,7 @@ use namespace CoC;
 				{name: 'orca', score: orcaScore(), minscore: 6},
 				{name: 'oni', score: oniScore(), minscore: 6},
 				{name: 'elf', score: elfScore(), minscore: 5},
+				{name: 'wood elf', score: woodElfScore(), minscore: 17},
 				{name: 'frost wyrm', score: frostWyrmScore(), minscore: 10},
 				{name: 'orc', score: orcScore(), minscore: 5},
 				{name: 'raiju', score: raijuScore(), minscore: 5},
@@ -3867,6 +3868,17 @@ use namespace CoC;
 					}
 				}
 			}
+			if (TopRace == "wood elf") {
+				if (TopScore >= 17) {
+					if (TopScore >= 25) {
+						if (isTaur()) race = "wood elf-taur";
+						else race = "wood elf";
+					} else {
+						if (isTaur()) race = "half wood elf-taur";
+						else race = "half wood elf";
+					}
+				}
+			}
 			if (TopRace == "frost wyrm") {
 				if (TopScore >= 10) {
 					if (TopScore >= 29) {
@@ -4578,6 +4590,8 @@ use namespace CoC;
 			if (oniScore() >= 12)
 				chimeraCounter++;
 			if (elfScore() >= 11)
+				chimeraCounter++;
+			if (woodElfScore() >= 17)
 				chimeraCounter++;
 			if (orcScore() >= 11)
 				chimeraCounter++;
@@ -7289,6 +7303,79 @@ use namespace CoC;
 				elfCounter += 1;
 			if (isGargoyle()) elfCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) elfCounter = 0;
+			elfCounter = finalRacialScore(elfCounter, Race.ELF);
+			End("Player","racialScore");
+			return elfCounter;
+		}
+
+		//Elf score
+		public function woodElfScore():Number {
+			Begin("Player","racialScore","wood elf");
+			var elfCounter:Number = 0;
+			if (ears.type == Ears.ELVEN)
+				elfCounter++;
+			if (eyes.type == Eyes.ELF)
+				elfCounter++;
+			if (faceType == Face.ELF)
+				elfCounter++;
+			if (tongue.type == Tongue.ELF)
+				elfCounter++;
+			if (arms.type == Arms.ELF)
+				elfCounter++;
+			if (lowerBody == LowerBody.ELF)
+				elfCounter++;
+			if (hairType == Hair.SILKEN)
+				elfCounter++;
+			if (wings.type == Wings.NONE)
+				elfCounter++;
+			if (elfCounter >= 2) {
+				if (InCollection(hairColor, ["golden blonde"]))
+					elfCounter++;
+				if (eyes.colour == "green")
+					elfCounter++;
+				if (InCollection(skin.base.color, ["light"]))
+					elfCounter++;
+				if (skinType == Skin.PLAIN && skinAdj == "flawless")
+					elfCounter++;
+				if (tone <= 60)
+					elfCounter++;
+				if (thickness <= 50)
+					elfCounter++;
+				if (hasCock() && cocks.length < 6)
+					elfCounter++;
+				if (hasVagina() && biggestTitSize() >= 3)
+					elfCounter++;
+			}
+			if (cor >= 50)
+				elfCounter++;
+			if (hasPerk(PerkLib.FlawlessBody))
+				elfCounter++;
+			if (hasPerk(PerkLib.ElvenSense))
+				elfCounter++;
+			if (hasPerk(PerkLib.BlessingOfTheAncestorTree))
+				elfCounter+= 4;
+			if (hasPerk(PerkLib.ElvishPeripheralNervSys))
+				elfCounter++;
+			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved))
+				elfCounter++;
+			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm))
+				elfCounter++;
+			if (hasPerk(PerkLib.ElvishPeripheralNervSys) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+				elfCounter++;
+			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+				elfCounter++;
+			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+				elfCounter++;
+			if (hasPerk(PerkLib.ElfsDescendant) || hasPerk(PerkLib.BloodlineElf))
+				elfCounter += 2;
+			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
+				elfCounter += 50;
+			if (hasPerk(PerkLib.AscensionHybridTheory) && elfCounter >= 4)
+				elfCounter += 1;
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && elfCounter >= 8)
+				elfCounter += 1;
+			if (isGargoyle()) elfCounter = 0;
+			if (cor < 50 || eyes.colour != "green" || !InCollection(hairColor, ["golden blonde"]) || hasPerk(PerkLib.ElementalBody)) elfCounter = 0;
 			elfCounter = finalRacialScore(elfCounter, Race.ELF);
 			End("Player","racialScore");
 			return elfCounter;
@@ -10863,6 +10950,7 @@ use namespace CoC;
 				if (this.hasKeyItem("M.G.S. bracer") >= 0) minSen += 15;
 			}
 			if (hasPerk(PerkLib.Phylactery)) minCor = 100;
+			if (hasPerk(PerkLib.BlessingOfTheAncestorTree)) minCor = 50;
 			if (this.hasPerk(PerkLib.PurityElixir)) minCor -= (this.perkv1(PerkLib.PurityElixir) * 20);
 			if (minLib < 1) minLib = 1;
 			if (minCor < 0) minCor = 0;
@@ -11714,6 +11802,23 @@ use namespace CoC;
 					maxIntCap2 += 45;
 					maxWisCap2 += 30;
 					currentSen += 15;
+				}
+			}
+			if (woodElfScore() >= 17) {
+				if (woodElfScore() >= 25) {
+					maxStrCap2 -= 10;
+					maxTouCap2 -= 15;
+					maxSpeCap2 += 150;
+					maxIntCap2 += 125;
+					maxLibCap2 += 100;
+					currentSen += 50;
+				} else {
+					maxStrCap2 -= 10;
+					maxTouCap2 -= 15;
+					maxSpeCap2 += 100;
+					maxIntCap2 += 100;
+					maxLibCap2 += 100;
+					currentSen += 50;
 				}
 			}
 			if (frostWyrmScore() >= 10) {
