@@ -726,6 +726,7 @@ public class PlayerAppearance extends BaseContent {
 
 	public function describeLowerBody():void {
 
+		outputText("\n\n");
 		outputText(LowerBody.getAppearanceDescription(player));
 
 		//Hip info only displays if you aren't a centaur.
@@ -866,9 +867,9 @@ public class PlayerAppearance extends BaseContent {
 					outputText(" is marvelously large, but completely stacked with muscle.");
 			}
 		}
-		outputText("\n");
 
 		//TAILS
+		outputText("\n\n");
 		describeTail();
 	}
 
