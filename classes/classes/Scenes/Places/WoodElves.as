@@ -488,8 +488,9 @@
 			//mainView.hideComboBox();
 			//mainView.nameBox.visible = false;
 			//player.short = mainView.nameBox.text;
+			//Ceremony5();
 			outputText("NAMING SCENE IS CURRENTLY A CODE WIP");
-			Ceremony5();
+			doNext(Ceremony5);
 		}
 
 		public function Ceremony5():void {
