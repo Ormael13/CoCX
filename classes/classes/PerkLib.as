@@ -1210,6 +1210,22 @@ public class PerkLib
 				"You've chosen the 'Elements of the orthodox Path' perk, your time spent on studing elements allowing you to call those mentioned in more orthodox writings.");
 		public static const ElvenRangerArmor:PerkType = mk("Elven Ranger Armor", "Elven Ranger Armor",
 				"+50% to Bow and spear damage, Count as naked, Slutty seduction +8.");
+		public static const ELFArcherCovenant:PerkType = mk("Archer Covenant", "Archer Covenant",
+				"As an elf, gain a 25% increase to bow damage when not wielding a shield or a melee weapon other than a Spear.");
+		public static const ELFMasterShot:PerkType = mk("Master Shot", "Master Shot",
+				"As an elf, add one extra attack to archery full attacks.");
+		public static const ELFElvenBattleStyle:PerkType = mk("Elven Battle Style", "Elven Battle Style",
+				"As an elf, substitute your strenght to your intelligence modifier for spear damage when full attacking.");
+		public static const ELFElvenSpearDancingFlurry:PerkType = mk("Elven Spear Dancing Flurry", "Elven Spear Dancing Flurry",
+				"As an elf add 1 extra attacks when full attacking using a one handed or two handed spear with no shield equipped. and increase spear damage by 20% when full attacking.");
+		public static const ELFElvenSpearDancingFlurryII:PerkType = mk("Elven Spear Dancing Flurry II", "Elven Spear Dancing Flurry II",
+				"As an elf add 2 extra attacks when full attacking using a one handed or two handed spear with no shield equipped. and increase spear damage by 20% when full attacking.");
+		public static const ELFElvenSpearDancingFlurryIII:PerkType = mk("Elven Spear Dancing Flurry III", "Elven Spear Dancing Flurry III",
+				"As an elf add 3 extra attacks when full attacking using a one handed or two handed spear with no shield equipped. and increase spear damage by 20% when full attacking.");
+		public static const ELFElvenSpearDancingFlurryIV:PerkType = mk("Elven Spear Dancing Flurry IV", "Elven Spear Dancing Flurry IV",
+				"As an elf add 4 extra attacks when full attacking using a one handed or two handed spear with no shield equipped. and increase spear damage by 20% when full attacking.");
+		public static const ELFElvenSpearDancingTechnique:PerkType = mk("Elven Spear Dancing Technique", "Elven Spear Dancing Technique",
+				"As an elf, deal additional tease damage based on your speed while wielding a spear.");
 		public static const ElvishPeripheralNervSys:PerkType = mk("Elvish Peripheral NervSys", "Elvish Peripheral NervSys",
 				"Your Elvish Peripheral NervSys is giving you +5% of max core Spe as phantom Spe and allow to keep Elven Sense even without elf arms/legs.",
 				"You've chosen the 'Elvish Peripheral NervSys' perk, due to repeadly balancing on line between life and death your peripheral nervous system started to work like that of elfs.");
@@ -1217,8 +1233,8 @@ public class PerkLib
 				"Your Elvish Peripheral NervSys is giving you +10% of max core Spe as phantom Spe.",
 				"You've chosen the 'Elvish Peripheral NervSys (Evolved)' perk, your peripheral nervous system continue subtile changes leading to be more elf-like.").withBuffs({'spe.mult':0.05});
 		public static const ElvishPeripheralNervSysFinalForm:PerkType = mk("Elvish Peripheral NervSys (Final Form)", "Elvish Peripheral NervSys (Final Form)",
-				"Your Elvish Peripheral NervSys is giving you +15% of max core Spe as phantom Spe, increase your natural evasion, decrease melee/range accuracy penalty when using multiattack options.",
-				"You've chosen the 'Elvish Peripheral NervSys (Final Form)' perk, your peripheral nervous system reached it final changes to reassamble elvish peripheral nervous system.").withBuffs({'spe.mult':0.05});
+				"Your Elvish Peripheral NervSys is giving you +15% of max core Spe as phantom Spe, increase your natural evasion, decrease melee/range accuracy penalty when using multiattack options. Furthermore elven signature abilities will keep working weither you are a full blooded elf or not.",
+				"You've chosen the 'Elvish Peripheral NervSys (Final Form)' perk, your peripheral nervous system reached it final changes to reassamble elvish peripheral nervous system. Furthermore elven signature abilities will keep working weither you are a full blooded elf or not.").withBuffs({'spe.mult':0.05});
 		public static const Embodiment:PerkType = mk("Embodiment", "Embodiment",
 				"You embody the principles of the monks... as usual you should only expect the 10% soulforce gain.",
 				"You've chosen the 'Embodiment' perk, gaining +10% max Soulforce.");

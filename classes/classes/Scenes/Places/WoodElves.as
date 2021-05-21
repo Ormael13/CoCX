@@ -14,7 +14,8 @@
 	import classes.BodyParts.Tongue;
 	import classes.BodyParts.Wings;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.SceneLib;
+import classes.Items.Armors.Nothing;
+import classes.Scenes.SceneLib;
 	import classes.internals.SaveableState;
 
 	public class WoodElves extends BaseContent implements SaveableState{
@@ -29,23 +30,59 @@
 		public static const QUEST_STAGE_PCNOTELF:int = 6;
 		public static const QUEST_STAGE_PCCAMEBACK:int = 7;
 
+		public static var WoodElfBowTraining:int;
+		public static const QUEST_STAGE_BOWTRAINING0:int = 0;
+		public static const QUEST_STAGE_BOWTRAINING1:int = 1;
+		public static const QUEST_STAGE_BOWTRAINING2:int = 2;
+		public static const QUEST_STAGE_BOWTRAINING3:int = 3;
+		public static const QUEST_STAGE_BOWTRAINING4:int = 4;
+
+		public static var WoodElfSpearTraining:int;
+		public static const QUEST_STAGE_SPEARTRAININGFIRST:int = 0;
+		public static const QUEST_STAGE_SPEARTRAINING0:int = 1;
+		public static const QUEST_STAGE_SPEARTRAINING1:int = 2;
+		public static const QUEST_STAGE_SPEARTRAINING2:int = 3;
+		public static const QUEST_STAGE_SPEARTRAINING3:int = 4;
+		public static const QUEST_STAGE_SPEARTRAINING4:int = 5;
+
+		public static var hasTrainedToday:Boolean;
+		public static var hasTrainedTodayCooldown:int;
+
 		public function stateObjectName():String {
 			return "WoodElves";
 		}
 
 		public function resetState():void {
+			hasTrainedToday = false;
+			hasTrainedTodayCooldown = 0;
 			WoodElvesQuest = QUEST_STAGE_NOT_STARTED;
+			WoodElfBowTraining = QUEST_STAGE_BOWTRAINING0;
+			WoodElfSpearTraining = QUEST_STAGE_SPEARTRAININGFIRST;
 		}
 
 		public function saveToObject():Object {
 			return {
-				"stage": WoodElvesQuest
+				"stage": WoodElvesQuest,
+				"stageBow": WoodElfBowTraining,
+				"stageSpear": WoodElfSpearTraining,
+				"elfHasTrainedToday": hasTrainedToday,
+				"elfHasTrainedTodayCooldown": hasTrainedTodayCooldown
 			};
 		}
 
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
 				WoodElvesQuest = o["stage"];
+				WoodElfBowTraining = o["stageBow"];
+				WoodElfSpearTraining = o["stageSpear"];
+				hasTrainedToday = o["elfHasTrainedToday"];
+				if ("elfHasTrainedTodayCooldown" in o) {
+					// new save, can load
+					hasTrainedTodayCooldown = o["elfHasTrainedTodayCooldown"];
+				} else {
+					// old save, still need to set NursedCooldown  to something
+					hasTrainedTodayCooldown = 0;
+				}
 			} else {
 				// loading from old save
 				resetState();
@@ -101,7 +138,7 @@
 		public function StartElfFight():void {
 			clearOutput();
 			outputText("Fighting the elves is temporarily disabled until the monster is implemented thank you trying out wood elves! ");
-			doNext(camp.returnToCamp);
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function YouAreAlreadyElfSubmit():void {
@@ -537,24 +574,37 @@
 		}
 
 		public function GroveLayout():void {
-			outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO FOR VISITING AGAIN FIRST TIME");
-			WoodElvesQuest = QUEST_STAGE_PCCAMEBACK
+			clearOutput()
+			if (WoodElvesQuest != QUEST_STAGE_PCCAMEBACK){
+				outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO FOR VISITING AGAIN FIRST TIME BLA BLA BLA WELCOME");
+				WoodElvesQuest = QUEST_STAGE_PCCAMEBACK
+				GroveLayout2(true);
+			}
+			else GroveLayout2();
 		}
 
 
 		///ELF VILLAGE SECTION///
-		public function GroveLayout2():void {
-			outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO");
+		public function GroveLayout2(isFirstTime:Boolean = false):void {
+			if (!isFirstTime)outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO");
 			menu();
 			addButton(0, "River", River);
+			if ((player.elfScore() <=10 && player.woodElfScore() <=16) || !player.hasVagina()) addButtonDisabled(0,"River","You need to be an elf and female or herm in order to go bath with the girls just what where you thinking?");
 			addButton(1, "Tent", Tent);
-			addButton(2, "Fletching table", Fletching);
+			if ((player.elfScore() <=10 && player.woodElfScore() <=16) || !player.hasVagina()) addButtonDisabled(0,"Tent","You need to be an elf and female or herm  in order to use the tents.");
+			//addButton(2, "Fletching table", Fletching);
+			addButtonDisabled(2,"Fletching table","Under Construction.");
 			addButton(3, "Elenwen", Elenwen);
-			addButton(4, "Allyssa", Allyssa);
-			addButton(5, "Leave", LeaveStartElfFight);
+			if (hasTrainedToday) addButtonDisabled(3,"Elenwen","You need a break from your recent training before you can train again.");
+		    else if (!player.isElf || !player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train maybe you should make yourself more elf like.");
+			addButton(4, "Alyssa", Alyssa);
+			if (hasTrainedToday) addButtonDisabled(4,"Alyssa","You need a break from your recent training before you can train again.");
+			else if (!player.isElf || !player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train maybe you should make yourself more elf like.");
+			addButton(5, "Leave", camp.returnToCampUseOneHour);
 		}
 
 		public function River():void {
+			clearOutput()
 			if (!player.statStore.hasBuff("Sisterly bathing")) {
 				outputText("You learned to love bathing in this stream during your days spent living with the Wood elves;" +
 						" its clear, cool waters always left you feeling refreshed and clear-headed. More importantly," +
@@ -596,7 +646,7 @@
 						"\n\n\"<i>Mmmmm… that was <b>wonderful</b>, little [name]... thank you. I’m glad we ran across each other; my day just doesn’t feel right without spending some time with my adorable little sister.</i>\"" +
 						" You respond by planting a kiss on her sternum and nuzzling even more snugly between her perfect tits. Her warmth and softness, the cool, peaceful water, the sounds of the river, and your relaxed," +
 						" synchronized breathing as she lovingly embraces and supports you soon have you drifting into a blissful sleep, but before your world goes totally dark she gently rouses you with a hand, gently petting your head and neck to keep you just away from sleep." +
-						"\n\n\"<i>Ahhhh, you’re such a good, sweet [girl/boy], [name],</i>\" she coos softly into your sensitive ear." +
+						"\n\n\"<i>Ahhhh, you’re such a good, sweet girl, [name],</i>\" she coos softly into your sensitive ear." +
 						"\"<i>You know I’d love nothing more than to let you nap on top of me, but I do have other things to do today, and I’m sure you do as well. Go on, return to your duties as Champion, and I’ll continue my work. We can always have a nice nap together - and other things, hee hee - some other time.</i>\"" +
 						"You drowsily agree, and stand yourself up despite the protest of your body against leaving its blissful perch on top of the lovely Elf woman. You offer her a hand and she gracefully pulls herself up as well," +
 						" and the two of you share one more sweet kiss before you wade back to your equipment and prepare to continue your day.");
@@ -614,10 +664,11 @@
 						" resist the urge to join them, for now; you can always find another release later, when you’re a little less busy.")
 				player.dynStats("lus",+30);
 			}
-			doNext(GroveLayout);
+			doNext(GroveLayout2);
 		}
 
 		public function Tent():void {
+			clearOutput()
 			outputText("This tent only really gets used for one thing, and it’s just what you want right now. Alyssa and Elenwen notice you entering, and you smile as they glance at each other and leave off their work to follow you in." +
 					" Before long, the three of you are stripped naked and laying together on the bed, already feeling each other up and preparing for the fun you’re about to have." +
 					"\n\n\"<i>This brings back memories, doesn’t it, [name]?</i>\"says Elenwen, smiling nostalgically." +
@@ -679,24 +730,202 @@
 			player.sexReward("vaginalFluids", "Vaginal");
 			player.sexReward("vaginalFluids", "Vaginal");
 			player.sexReward("vaginalFluids", "Vaginal");
-			doNext(GroveLayout);
+			doNext(GroveLayout2);
 		}
 
 		public function Fletching():void {
-			outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO FOR VISITING AGAIN FIRST TIME");
+			clearOutput()
+			outputText("TEMPORARY PLACEHOLDER STUB FLETCHING TABLE");
+			doNext(GroveLayout2);
+		}
 
+		//Elenwen is as skilled as Kindra but is very picky on who she teaches to. Better be an elf also her training is slower as she tends to fool around
+		private function bowSkill(diff:Number):Number {
+			player.addStatusValue(StatusEffects.Kindra,1,diff);
+			//if (player.statusEffectv1(StatusEffects.Kindra) >= 95 && flags[kFLAGS.KINDRA_ADV_ARCHERY] < 3) player.changeStatusValue(StatusEffects.Kindra,1,95);
+			//if (player.statusEffectv1(StatusEffects.Kindra) >= 140 && flags[kFLAGS.KINDRA_ADV_ARCHERY] < 5) player.changeStatusValue(StatusEffects.Kindra,1,140);
+			if (player.statusEffectv1(StatusEffects.Kindra) >= 150) player.changeStatusValue(StatusEffects.Kindra,1,150);
+			return player.statusEffectv1(StatusEffects.Kindra);
 		}
 
 		public function Elenwen():void {
-			outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO FOR VISITING AGAIN FIRST TIME" +
-					"");
-
+			clearOutput()
+			outputText("At the archery range, you find Elenwen practicing with her bow. Her posture is poised and masterful as she aims at a target before nocking an arrow." +
+					" She releases the arrow in a single smooth motion that leaves her long, golden hair fluttering. The arrow flies directly into the center of her mark," +
+					" joining several other perfect shots on the many targets that surround her. Her demeanor is serious and focused," +
+					" a far cry from her usual teasing, seductive attitude when you and Alyssa are together with her." +
+					" You walk up to her before asking if she would be willing to train you in Elven archery techniques." +
+					"\n\n\"<i>Ah, little sister, of course! I’m delighted that you asked,</i>\" she replies, fixing you with her slanted eyes. \"<i>Come on over and we’ll see what you can do.</i>\"" +
+					"\n\nUnder her guidance, you spend some time firing at targets, as well as fruits in trees dotted about the range." +
+					" She gently corrects your posture with her long, elegant fingers, pushing and pulling on your limbs and torso." +
+					" It reminisces of her usual playful touching, but her body language and sheer focus give you a different thought." +
+					"\n\nToward the end of your training, however, she begins taking a somewhat more teasing attitude." +
+					" As your posture becomes consistent enough that she no longer needs to correct it often," +
+					" she starts lightly brushing your sensitive places with her hands or nibbling at your ears just as you are taking aim," +
+					" causing you to blush and jerk with the sensation." +
+					"\n\nWhen you complain about the sudden change in her behavior, she replies, teasingly, " +
+					"\"<i>[name] dear, if my teasing is enough to disrupt your posture, how do you intend to shoot accurately against demons using eromancy? Your focus needs to be perfect no matter what pain or pleasure you’re in. Be it from movement, wind against your form or facing one to many foes.</i>\"" +
+					"You can’t deny that she has a point, but her playful attacks have got your blood so hot that Elenwen is starting to make you want to drop the bow and work on her instead." +
+					" Oh well, all work and no play makes a dull Champion, right?" +
+					"\n\nJust as she leans in to brush her fingers against your sensitive breasts again," +
+					" you drop your bow and grab her hands, earning a satisfying cute squeak of surprise from your teasing elder sister." +
+					" Using her as leverage to spin around in her arms, you plant a kiss on her lips and press your hands into the soft," +
+					" yielding curves of her ample rear." +
+					" She moans in arousal under your sudden turnabout but quickly recovers and pulls away from the kiss." +
+					" \"<i>Oh, playing dominant now are we, [name]? Let’s see how long you can keep that up~♥</i>\"" +
+					"\n\nHer hand drifts down your body as she speaks, sliding ");
+					if (player.armor == armors.NOTHING) outputText("down to your glistening slit");
+					else outputText("under your equipment to your glistening slit");
+			outputText(" to give you a loving stroke, ending in her finger rubbing on your stiff, sensitive button." +
+					" You gasp at the stimulation but manage to retaliate by slipping a hand under her white dress to prod at her lips as well." +
+					" The two of you continue briefly, moaning pleasurably and bucking your hips against each other's hands as you kiss and gently nibble at each other's lips," +
+					" but then Elenwen takes her hand from your dripping snatch and lightly pulls your hand from hers." +
+					"\n\n\"<i>Mmm.... that was fun, sweet little sister, but we should get back to work. If you can manage to hit a bullseye as excited as you are now, I’ll be satisfied with your practice for today. Then, if you want, we can continue this later~♥</i>\"" +
+					"\n\nYou nod, a bit disappointed at being cut off before climax, and take up your bow again. After several tries, you ");
+			if (player.statusEffectv1(StatusEffects.Kindra) <= 100) outputText("manage to make a shot Elenwen considers fair for her standards.");
+			if (player.statusEffectv1(StatusEffects.Kindra) >= 100) outputText("hit a bullseye, and Elenwen praises your efforts before you say your goodbyes.");
+			outputText("\n\nAs you leave for your camp Elenwen waves at you with a \"<i>See you later, sister. We can do something more fun next time~♥</i>\"" +
+					" With a hint of regret, you wave and head back home, seriously considering taking her up on the offer before the day is up.");
+			player.trainStat("tou", +1, 50);
+			player.trainStat("tou", +1, 50);
+			player.trainStat("tou", +1, 50);
+			player.trainStat("tou", +1, 50);
+			player.trainStat("spe", +1, 100);
+			player.trainStat("spe", +1, 100);
+			player.trainStat("spe", +1, 100);
+			player.trainStat("spe", +1, 100);
+			player.trainStat("int", +1, 80);
+			player.trainStat("int", +1, 80);
+			player.trainStat("int", +1, 80);
+			player.trainStat("int", +1, 80);
+			if (player.spe >= 50 && player.statusEffectv1(StatusEffects.Kindra) >= 25 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING0 && !hasTrainedToday){
+				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING1;
+				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Pin down ability! <b>Gained P.Ability: Pin Down</b>");
+				hasTrainedToday = true;
+				hasTrainedTodayCooldown = 24;
+			}
+			else if (player.spe >= 100 && player.statusEffectv1(StatusEffects.Kindra) >= 50 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING1 && !hasTrainedToday){
+				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING2;
+				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Elven Eye ability! <b>Gained P.Ability: Elven Eye</b>");
+				hasTrainedToday = true;
+				hasTrainedTodayCooldown = 24;
+			}
+			else if (player.spe >= 150 && player.statusEffectv1(StatusEffects.Kindra) >= 100 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING2 && !hasTrainedToday){
+				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING3;
+				player.createPerk(PerkLib.ELFMasterShot,0,0,0,0);
+				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Master Shot Perk! <b>Gained Perk: Master Shot</b>");
+				hasTrainedToday = true;
+				hasTrainedTodayCooldown = 24;
+			}
+			else if (player.spe >= 200 && player.statusEffectv1(StatusEffects.Kindra) >= 150 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING3 && !hasTrainedToday){
+				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING4;
+				player.createPerk(PerkLib.ELFArcherCovenant,0,0,0,0);
+				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Archer Covenant Perk! <b>Gained Perk: Archer Covenant</b>");
+				hasTrainedToday = true;
+				hasTrainedTodayCooldown = 24;
+			}
+			else{
+				hasTrainedToday = true;
+				hasTrainedTodayCooldown = 24;
+			}
+			bowSkill(5);
+			doNext(GroveLayout2);
 		}
 
-		public function Allyssa():void {
-			outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO FOR VISITING AGAIN FIRST TIME");
-
+		public function Alyssa():void {
+			clearOutput()
+			outputText("On the sparring grounds, you find Alyssa practicing her spear technique." +
+					" She moves elegantly, alternating between smooth, dance-like footwork with broad sweeps and twirls of her long spear and sharp," +
+					" snapping thrusts that seem to pierce the air itself. She is naked, and her petite, slender frame seems to emanate vitality and grace" +
+					" in a way that feels almost pure, very unlike the typical atmosphere of corruption that permeates the Elven Village." +
+					" You approach her and ask her if she would be willing to train you in Elven spearwomanship." +
+					" She pauses her exercises and wipes her brow before smiling at you and replying. " +
+					"\"<i>Of course, little sis! Let’s dance together!</i>\"");
+			if (WoodElfSpearTraining == QUEST_STAGE_SPEARTRAININGFIRST){
+				if (player.armor == armors.NOTHING) outputText("\n\nShe looks approvingly at your lack of clothing, not with her standard expression of perverted lust but with a serious glance.");
+				else outputText("\n\nHer first instruction is to strip. Unlike her usual, somewhat perverted expression when she says that, she appears serious.");
+			}
+			outputText("\n\n\"<i>Remember, [name], we Elves are fundamentally spiritual creatures. Elves do not fight with strength but rather by listening to the voices around us. Elves become one with the voices of the wind and the forest. To do that, you have to be able to feel the air around you, and the easiest way to learn to do that is, well, to have nothing between you and it. Once you’re confident with your abilities, you can wear clothes, but beginners must always learn naked, even before we came to Mareth. I still practice that way, as you can see.</i>\"" +
+					"\n\nWith that, you take up a practice spear and begin training your posture and movements." +
+					" Alyssa alternates between watching you and correcting your posture with her hands." +
+					" Though she constantly tells you not to force your movement in favor of feeling where the wind is directing you," +
+					" you still find yourself flushed and sweating from the exertion. As she directs your form," +
+					" you can't help but relish her soft, warm fingers gently adjusting your limbs and torso are very arousing." +
+					"\n\n\"<i>You’re doing well, [name]!</i>\"" +
+					"she cheerfully states. Though, you feel as if you’ve done nothing but mess up. Alyssa continues, " +
+					"\n\n\"<i>It is always hard for a young elf to learn to let go and listen to the spirits, but I can see your movements getting more refined and natural even after a few hours. Keep it up and you’ll be dancing with the best of us!</i>\"" +
+					"\n\nAs she says this, she corrects your posture from behind. Her movements are professional and intentional," +
+					" but even so, you feel her small palm-sized breasts and stiff pink nipples pressing into your back." +
+					" After all of that stimulation and with your already accelerated pulse, the sensation is too much." +
+					"Every fiber of your being tells you to drop your spear and turn around. You can imagine grabbing her and pulling " +
+					"her to the ground on top of you, pulling her in for a kiss as you wrap your arms around her." +
+					"\n\nAlyssa speaks up \"<i>Hey, lil sis, try to focus. We can worry about... other forms of training later, but for now I'm your instructor.</i>\"" +
+					"\n\nYou feel yourself blushing as she speaks up, redirecting your attention, " +
+					"\"<i>Let’s try a different stance, shall we?</i>\" She spins you around to face her." +
+					"\n\nShe pulls you closer to her with her delicate fingers. Wasting no time, you begin kissing her soft lips, pulling her face closer to yours." +
+					" She reaches a hand down to your nethers," +
+					" gently prodding at your clit, slowly rubbing it in gentle, circular motions." +
+					"\n\nYou clamp reflexively, but she hasn't dipped any fingers into your nethers. You give a slight whine of protest in the passionate kiss before Alyssa breaks the embrace." +
+					"\n\n\"<i>We still have to a little left to practice, [name]</i>\" she states, stepping away. \"<i>Besides, a bit of arousal can actually make it easier to feel the spirits. Still,</i>\"" +
+					" she adds, \"<i>you can always come and find me later. We can go all the way whenever you want. You know I’m always looking forward to it.</i>\"" +
+					"\n\nShe gives you a gentle peck on the lips before turning and picking up her training spear to continue her practice." +
+					"The two of you practice for a few more minutes before she nods respectfully, " +
+					"\"<i>I hope you now feel more comfortable about handling an Elven spear.</i>\"" +
+					"\n\nAs you leave, waving goodbye, the kiss resonates with you, perhaps there are many ways to think about how to handle melee combat.");
+			player.trainStat("str", +1, 80);
+			player.trainStat("str", +1, 80);
+			player.trainStat("str", +1, 80);
+			player.trainStat("str", +1, 80);
+			player.trainStat("spe", +1, 100);
+			player.trainStat("spe", +1, 100);
+			player.trainStat("spe", +1, 100);
+			player.trainStat("spe", +1, 100);
+			player.trainStat("tou", +1, 80);
+			player.trainStat("tou", +1, 80);
+			player.trainStat("tou", +1, 80);
+			player.trainStat("tou", +1, 80);
+			if (player.spe >= 50 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING0 && !hasTrainedToday){
+				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING1;
+				player.createPerk(PerkLib.ELFElvenSpearDancingTechnique,0,0,0,0);
+				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Spear Dancing Flurry Perk! <b>Gained Perk:Elven Spear Dancing Flurry</b>");
+				hasTrainedToday = true;
+				hasTrainedTodayCooldown = 24;
+			}
+			else if (player.spe >= 100 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING1 && !hasTrainedToday){
+				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING2;
+				player.createPerk(PerkLib.ELFElvenBattleStyle,0,0,0,0);
+				player.createPerk(PerkLib.ELFElvenSpearDancingFlurryII,0,0,0,0);
+				player.removePerk(PerkLib.ELFElvenSpearDancingFlurry);
+				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Battle Style and Elven Spear Dancing Flurry IV Perk! <b>Gained Perk: Elven Battle Style and Elven Spear Dancing Flurry II</b>");
+				hasTrainedToday = true;
+				hasTrainedTodayCooldown = 24;
+			}
+			else if (player.spe >= 150 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING2 && !hasTrainedToday){
+				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING3;
+				player.createPerk(PerkLib.ELFElvenSpearDancingFlurryIII,0,0,0,0);
+				player.removePerk(PerkLib.ELFElvenSpearDancingFlurryII);
+				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Spear Dancing Flurry III Perk! <b>Gained Perk: Elven Spear Dancing Flurry III</b>");
+				hasTrainedToday = true;
+			}
+			else if (player.spe >= 200 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING3 && !hasTrainedToday){
+				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING4;
+				player.createPerk(PerkLib.ELFElvenSpearDancingTechnique,0,0,0,0);
+				player.createPerk(PerkLib.ELFElvenSpearDancingFlurryIV,0,0,0,0);
+				player.removePerk(PerkLib.ELFElvenSpearDancingFlurryIII);
+				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Spear Dancing Technique and Elven Spear Dancing Flurry IV Perk! <b>Gained Perk: Spear Dancing Technique and Elven Spear Dancing Flurry IV</b>");
+				hasTrainedToday = true;
+				hasTrainedTodayCooldown = 24;
+			}
+			else{
+				hasTrainedToday = true;
+				hasTrainedTodayCooldown = 24;
+			}
+			doNext(GroveLayout2);
 		}
+
+
+
+
 
 	}
 

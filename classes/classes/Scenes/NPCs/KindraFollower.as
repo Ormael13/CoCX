@@ -23,8 +23,8 @@ public function kindraAffection(changes:Number = 0):Number
 
 private function bowSkill(diff:Number):Number {
 	player.addStatusValue(StatusEffects.Kindra,1,diff);
-	if (player.statusEffectv1(StatusEffects.Kindra) >= 95 && flags[kFLAGS.KINDRA_ADV_ARCHERY] < 3) player.changeStatusValue(StatusEffects.Kindra,1,95);
-	if (player.statusEffectv1(StatusEffects.Kindra) >= 140 && flags[kFLAGS.KINDRA_ADV_ARCHERY] < 5) player.changeStatusValue(StatusEffects.Kindra,1,140);
+	//if (player.statusEffectv1(StatusEffects.Kindra) >= 95 && flags[kFLAGS.KINDRA_ADV_ARCHERY] < 3) player.changeStatusValue(StatusEffects.Kindra,1,95);
+	//if (player.statusEffectv1(StatusEffects.Kindra) >= 140 && flags[kFLAGS.KINDRA_ADV_ARCHERY] < 5) player.changeStatusValue(StatusEffects.Kindra,1,140);
 	if (player.statusEffectv1(StatusEffects.Kindra) >= 150) player.changeStatusValue(StatusEffects.Kindra,1,150);
 	return player.statusEffectv1(StatusEffects.Kindra);
 }

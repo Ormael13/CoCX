@@ -3258,6 +3258,9 @@ public class Creature extends Utils
 		public function isKraken():Boolean { return lowerBodyPart.isKraken(); }
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
+		public function isElf():Boolean {
+			return hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm) || game.player.elfScore() >= 10 || game.player.woodElfScore() >= 17
+		}
 
 		public function isFlying():Boolean {
 			return hasStatusEffect(StatusEffects.Flying);
