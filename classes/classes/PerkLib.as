@@ -5969,7 +5969,7 @@ public class PerkLib
 				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
 			}, "Unicorn or Bicorn race");
 			ElvishPeripheralNervSys.requirePerk(ElvenSense).requireCustomFunction(function (player:Player):Boolean {
-                return player.elfScore() >= 4;
+                return player.elfScore() >= 4 || player.woodElfScore() >= 17;
             }, "Elf race");
 			FeyArcaneBloodstream.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.fairyScore() >= 20;
@@ -6389,7 +6389,7 @@ public class PerkLib
 				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
 			}, "Unicorn or Bicorn race");
 			ElvishPeripheralNervSysEvolved.requireLevel(12).requirePerk(ElvishPeripheralNervSys).requireCustomFunction(function (player:Player):Boolean {
-                return player.elfScore() >= 8;
+                return player.elfScore() >= 8 || player.woodElfScore() >= 17;
             }, "Elf race");
 			HollowFangsEvolved.requireLevel(12).requirePerk(HollowFangs)
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -6824,7 +6824,7 @@ public class PerkLib
 				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
 			}, "Unicorn or Bicorn race");
 			ElvishPeripheralNervSysFinalForm.requireLevel(30).requirePerk(ElvishPeripheralNervSysEvolved).requireCustomFunction(function (player:Player):Boolean {
-                return player.elfScore() >= 12;
+                return player.elfScore() >= 12 || player.woodElfScore() >= 17;
             }, "Elf race");
 			HollowFangsFinalForm.requireLevel(30).requirePerk(HollowFangsEvolved)
 				.requireCustomFunction(function (player:Player):Boolean {
