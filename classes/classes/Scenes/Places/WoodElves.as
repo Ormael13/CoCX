@@ -495,6 +495,7 @@
 		}
 
 		public function Ceremony5():void {
+			clearOutput();
 			outputText("[name]! Yes, that is you. You are [name], beloved child of the forest, and this is the tree which initiated you." +
 					" The tree is now vibrant with green light, your soul in the safekeeping of its woods along those of the many elves who came here before you, your body having none left to give." +
 					" With tender care, the vines slowly disentangle you from its embrace before allowing you to escape." +
