@@ -379,7 +379,7 @@
 			clearOutput();
 			outputText("You ask Merisiel what this naming ceremony is about. She uncomfortably shifts in place before answering you." +
 					"\n\n\"<i>Well it's a big event first and foremost, all new elves get a name given to them by the sacred trees. As we told you before, we elves are bonded to the forests. When a sister is ready to become a true wood elf she must undergo the naming ceremony which consists in fully bonding with an offshoot of the sacred tree in body and soul. Your elven name is something that will come to you naturally though in exchange you will fully bond with the sacred tree and your soul will merge with that of the forest.</i>\"\n\n" +
-					"Merge with the forest? She could not possibly mean... Sensing your confusion Merisiel, with an almost ironic, somewhat deadpan soulless glare clarifies the rest for you.\n\n" +
+					"Merge with the forest? She could not possibly mean... Sensing your confusion Merisiel, with an almost ironic, somewhat deadpan soulless glare clarifies the rest for you." +
 					"\n\n\"<i>If I was not clear enough your soul will safely stay bound within the tree, out of your body. So long as the forest lives you will never age again.</i>\"\n\n" +
 					"You think for a moment, unite your soul with the forest in exchange for a timeless body and a new elven name? Is this what you truly want?");
 
