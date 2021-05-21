@@ -2410,8 +2410,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.elfScore() >= 1) outputText("\n<font color=\"#008000\">Half Elf: " + player.elfScore() + "</font>");
 		else if (player.elfScore() < 1) outputText("\n<font color=\"#ff0000\">Half Elf: 0</font>");
 		//Wood Elf
-		if (player.woodElfScore() >= 25) outputText("\n<font color=\"#0000a0\">Wood Elf Sister: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +150% to Spe racial multi, +125% to Int racial multi, +100% to Lib racial multi, +50 min Sens, +20% max Mana)</font>");
-		else if (player.woodElfScore() >= 17) outputText("\n<font color=\"#0000a0\">Wood Elf Neophite: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +100% to Spe / Int / Lib racial multi, +50 min Sens, +10% max Mana)</font>");
+		if (player.woodElfScore() >= 25) outputText("\n<font color=\"#0000a0\">Wood Elf: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +150% to Spe racial multi, +125% to Int racial multi, +100% to Lib racial multi, +50 min Sens, +20% max Mana)</font>");
+		else if (player.woodElfScore() >= 17) outputText("\n<font color=\"#0000a0\">Wood Elf little sister: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +100% to Spe / Int / Lib racial multi, +50 min Sens, +10% max Mana)</font>");
 		else if (player.woodElfScore() >= 1) outputText("\n<font color=\"#008000\">Wood Elf: " + player.woodElfScore() + "</font>");
 		else if (player.woodElfScore() < 1) outputText("\n<font color=\"#ff0000\">Wood Elf: 0</font>");
 		//Ferret

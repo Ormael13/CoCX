@@ -3875,10 +3875,10 @@ use namespace CoC;
 				if (TopScore >= 17) {
 					if (TopScore >= 25) {
 						if (isTaur()) race = "wood elf-taur";
-						else race = "wood elf sister";
+						else race = "wood elf";
 					} else {
 						if (isTaur()) race = "Wood Elf-taur";
-						else race = "Wood Elf neophite";
+						else race = "Wood elf little sister";
 					}
 				}
 			}
