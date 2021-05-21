@@ -63,7 +63,7 @@
 			outputText("As you explore the woods, you find a grove with a small pond in the middle and a large, vibrant tree growing in the corner. The tree isn’t a kind you recall seeing in the past. You examine the tree and fail to properly remember which variety it belongs to, not to mention the small green lights that dance around it, a bit like the faerie fires in a bog. As you are examining the tree you hear a crystal clear, beautiful laugh to your left, followed by the sounds of shuffling leaves. You ready yourself for combat and turn around just in time to see a blonde woman with pointed ears and green eyes staring at you from the middle of the clearing. She wears an outfit of white silk that covers her but does little to hide her feminine curves, which stand out on her delicate and ethereal frame in a way no human could match. You imagine even most succubi would be jealous of the natural way she wears her beauty, as if some goddess had sculpted her form from marble stone, clear water and living wood, then animated it with the lithe spirit of a fairy. You are still gazing, spellbound by her appearance, when she calls out to you in a clear, musical voice." +
 					"\n\n\"<i>Welcome to our sacred grove traveler. Are you perhaps lost?</i>\"\n\n" +
 					"Not lost, you reply, though you don’t recall ever seeing this grove before; but you were simply wandering the forest looking for whatever might cross your path. You ask her who or what she may be." +
-					"\n\n\"<i>We have our own name for ourselves, but others call us Elves. And, a question for a question: who might you be, and what is the aim of your wandering?</i>\"\n\n" +
+					"\n\n\"<i>We have our own name for ourselves, but others call us elves. And, a question for a question: who might you be, and what is the aim of your wandering?</i>\"\n\n" +
 					"You briefly explain your origin and quest to the beautiful woman, her peaceful bearing and unearthly beauty having allayed your usual suspicion. As you do, you hear more chime-like laughter to both sides, and notice that you have more company now. More light-skinned, blonde, green-eyed elven girls seem to pop out of nowhere all around you, some perched in the trees, others standing right behind the bushes." +
 					"\n\n\"<i>Such a valiant quest! How noble of you!</i>\", the lovely elf who first addressed you says unctuously.");
 			//[Ask about elves] [Leave]
@@ -204,8 +204,8 @@
 					"Then, gently but firmly holding your hand, the elf woman leads you out of the clearing. Still dazed, you ask her where she's taking you. " +
 					"\n\n\"<i>Why, silly girl, I'm taking you home, of course! You wanted to see what elvish life is like, and now you will, little sister! Besides, the others are dying to see you. Oh, right! My name is Merisiel.</i></b>\"\n\n" +
 					"Far, far back in the recesses of your mind a little fly buzzes; is it worry? Alarm? What could be causing that? After all, your big sister is finally taking you home! Everything is going to be okay now. With a shake of your head you dismiss the strange fancy and listen to Merisiel as she tells you how cute you look now. You smile and blush shyly at your big sister’s praise, happier than you’ve ever been that she thinks so highly of you.\n\n" +
-					"After a few minutes’ walk the two of you reach a clearing filled with small tents, tables, soft mats for resting, and, most of all: Elves!" +
-					" So many beautiful, lithe, smooth-skinned Elves, and not an ugly male in sight to mar the beauty! Most of them have stopped what they were doing," +
+					"After a few minutes’ walk the two of you reach a clearing filled with small tents, tables, soft mats for resting, and, most of all: elves!" +
+					" So many beautiful, lithe, smooth-skinned elves, and not an ugly male in sight to mar the beauty! Most of them have stopped what they were doing," +
 					" turning their lovely faces your way to give you quiet, curious stares. For a moment you feel the icy grip of fear on your heart;" +
 					" is something wrong with you? Are you going to be cast out from this very heart of the world’s beauty before you even enter?" +
 					" But before you can work yourself up into a panic Merisiel leads you to a large tent and motions you to enter," +
@@ -257,8 +257,8 @@
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			outputText("The next few days pass like a happy dream as you play with your sisters, collect flowers, and have 'fun time' with Alyssa, and sometimes Elenwen and even Merisiel." +
 					" However, something nags at your mind… something very important, you think, but like a wisp of smoke it keeps twisting and dissipating every time you try to grasp hold of it." +
-					" It’s certainly not enough to ruin the enjoyment of your new, perfect life, but as the only sour note to your experience in the Elves’ secluded grove you can’t bring yourself to ignore it.\n\n" +
-					"Then, one day, you come across the Elves’ armory: gracefully curved hunting bows carved from dark, rich-grained forest wood and strung with Elf-hair;" +
+					" It’s certainly not enough to ruin the enjoyment of your new, perfect life, but as the only sour note to your experience in the elves’ secluded grove you can’t bring yourself to ignore it.\n\n" +
+					"Then, one day, you come across the elves’ armory: gracefully curved hunting bows carved from dark, rich-grained forest wood and strung with Elf-hair;" +
 					" slender, barb-tipped arrows fletched with lovely, bright feathers; broad-bladed knives and glittering spears with wickedly sharp edges and tips to belie the beautiful, pale gleam of the silvery metal," +
 					" the intricate carvings along the shafts and the soft leather-wrapped hilts. The first indication of violence, of anything besides peaceful days and nights of singing and cuddling and bathing with your sisters," +
 					" shocks your memory and you recall that before you came here you too were… what were you? Some kind of warrior…? You had something to protect… a duty that mattered more than anything else…" +
@@ -268,7 +268,7 @@
 					"\n\n\"<i>Woah, what a shot, little sister! You almost looked like a real elven huntress just then<b>~♥</b></i>\"\n\n" +
 					"Startled, you turn around to see Merisiel standing behind you - you must have been too focused on your shot to hear her approach." +
 					" Your face, driven by instinct, blushes at her praise as you smile happily and nock another arrow, drawing your bow and aiming it directly at your captor’s lovely breasts." +
-					" The thoughts still aren’t fully coherent but somehow it’s coming together in your head that your beautiful sister is an enemy, that she and the rest of the Elves are keeping you from..." +
+					" The thoughts still aren’t fully coherent but somehow it’s coming together in your head that your beautiful sister is an enemy, that she and the rest of the elves are keeping you from..." +
 					" what was it? Unbidden, the image comes to your mind of a glowing, purple scar torn into the very air, as if a magical knife had cut a circle out of the world into… somewhere?" +
 					" Somewhere important,.. somewhere you must protect, no matter the cost.\n\n" +
 					"Merisiel slowly raises her hands as you keep your shot trained on her, your arms trembling ever so slightly as you strain to keep the bow drawn." +
@@ -300,7 +300,7 @@
 					"\n\nAlyssa continues. \"<i>It was an accident. Our village was caught in a magical disaster after a summoning ceremony went wrong, and dozens of us were brought here at once, with no way to get back. We tried, but…</i>\"" +
 					"\n\nElenwen takes over. \"<i>Magic doesn’t seem to work the same way here. Clearly it’s possible to cross the borders of worlds in Mareth; it may even be easier than it was in our original world, in fact, considering how many travelers seem to end up here one way or another. But we can’t… “find” our original world. We have no way of reaching out to it without an active connection to it, and the force that brought us here ended as soon as it did, leaving us stranded.</i>\"" +
 					"\n\nMerisiel finishes the story as her sisters trail into sad silence. \"<i>This happened only a few years before the demons came down from the mountains. Some of us did leave to explore the world before that, but most of us remained here, and, well, you can see what became of us after the demons found us.</i>\"\n\n" +
-					"She glances at her sisters, a mixture of emotion visible in her face in which lust plays no small part. Clearly the priority among these Elves of the wood is no longer on exploration and diplomacy - you’ve experienced that much yourself by now.");
+					"She glances at her sisters, a mixture of emotion visible in her face in which lust plays no small part. Clearly the priority among these elves of the wood is no longer on exploration and diplomacy - you’ve experienced that much yourself by now.");
 			menu();
 			addButton(1, "The Tree", TheTreeTopic);
 			addButton(2, "The Grove", TheGroveTopic);
@@ -317,9 +317,9 @@
 		public function TheTreeTopic():void {
 			clearOutput();
 			outputText("You tell them to explain what is going on with that bizarre tree." +
-					"\n\nAlyssa responds first. \"<i>The Sacred Tree grew from a sapling we brought with us from our original world. It is, or it was, I suppose, a core part of our culture; we Elves are forest spirits deeply connected to the trees and animals of the woods, and the Sacred Tree was like our patron. When a new Elf was born, we would place it underneath the tree, and it would be blessed with the spirit of the forest, growing into a true Elf.</i>\"" +
-					"\n\nElenwen continues. \"<i>When the demons found it, though, they changed all that. They corrupted it, turned it into… something else. They also corrupted us. You may have noticed that there are no male Elves here; or at least none you would easily recognize as such without… checking.</i>\"" +
-					"\n\nMerisiel nods. \"<i>The Sacred Tree, or I suppose the Corrupted Tree, now... it eats men. Or, it eats the ‘male’ out of men, I guess… in the process changing them into one of us. We can’t reproduce among ourselves anymore - the few of us that still have some of the right equipment are sterile. And when we breed with other races, the children aren’t Elves. So the only way we can replenish our numbers from losses is by letting the Tree have its way with travelers we find… like we did with you.</i>\"" +
+					"\n\nAlyssa responds first. \"<i>The Sacred Tree grew from a sapling we brought with us from our original world. It is, or it was, I suppose, a core part of our culture; we elves are forest spirits deeply connected to the trees and animals of the woods, and the Sacred Tree was like our patron. When a new Elf was born, we would place it underneath the tree, and it would be blessed with the spirit of the forest, growing into a true Elf.</i>\"" +
+					"\n\nElenwen continues. \"<i>When the demons found it, though, they changed all that. They corrupted it, turned it into… something else. They also corrupted us. You may have noticed that there are no male elves here; or at least none you would easily recognize as such without… checking.</i>\"" +
+					"\n\nMerisiel nods. \"<i>The Sacred Tree, or I suppose the Corrupted Tree, now... it eats men. Or, it eats the ‘male’ out of men, I guess… in the process changing them into one of us. We can’t reproduce among ourselves anymore - the few of us that still have some of the right equipment are sterile. And when we breed with other races, the children aren’t elves. So the only way we can replenish our numbers from losses is by letting the Tree have its way with travelers we find… like we did with you.</i>\"" +
 					"\n\n\"<i>But we really do care for them afterward!</i>\" Alyssa interjects. \"<i>Just like we did with you… or tried to, at least. We really did consider you to be one of us. I still do… little sister.</i>\" She trails off as she looks away from you sadly.");
 			menu();
 			addButton(0, "Elves", ElvesTopic);
@@ -337,7 +337,7 @@
 		public function TheGroveTopic():void {
 			clearOutput();
 			outputText("You ask about the Grove." +
-					"\n\n\"<i>It’s been our home for years, of course,</i>\" says Elenwen. \"<i>This is where we first came to Mareth, where we planted the sapling of the Sacred Tree. Most of us stayed here; some left to explore before the demons came, so it’s possible that there may be a few pure Elves still wandering the world, if the demons didn’t catch them, and a few of us that were… that got twisted a bit worse than the rest of us left to join Lethice’s army as soldiers or slaves,  but otherwise we’re all here.</i>\"" +
+					"\n\n\"<i>It’s been our home for years, of course,</i>\" says Elenwen. \"<i>This is where we first came to Mareth, where we planted the sapling of the Sacred Tree. Most of us stayed here; some left to explore before the demons came, so it’s possible that there may be a few pure elves still wandering the world, if the demons didn’t catch them, and a few of us that were… that got twisted a bit worse than the rest of us left to join Lethice’s army as soldiers or slaves,  but otherwise we’re all here.</i>\"" +
 					"\n\nMerisiel adds, \"<i>It’s a beautiful place, even after the corruption, I think. Nature thrives here; the plants and animals are healthy and free, and we live mostly in peace, aside from catching an adventurer every so often to replenish our numbers.</i>\"\n\n" +
 					"Like they did with you, you add." +
 					"\n\nThe three girls look a little guilty for a minute and nod. Alyssa says \"<i>We really did love you though. I… I still love you, and I wish you would stay with us. It’s not so bad here, is it?</i>\"\n\n" +
@@ -357,7 +357,7 @@
 
 		public function DemonsTopic():void {
 			clearOutput()
-			outputText("You ask about the Elves’ relationship to the Demons." +
+			outputText("You ask about the elves’ relationship to the Demons." +
 					"\n\nMerisiel answers you first. \"<i>When the demons invaded Mareth it didn’t take them long to find us here in the forest.</i>\" she says, sadly. \"<i>They… changed our Sacred Tree, and when they did we changed with it. We became much more sexually active, and our men mostly turned into women. Those of us that were affected the worst they took with them to be… toys, I suppose, or maybe soldiers; we don’t really know. Since then they’ve left us alone, I’m sure because they know we’re not a threat.</i>\"" +
 					"\n\nAlyssa interjects. \"<i>But we’re not allied with them! We hate Lethice for what she did to our Sacred Tree… even if we, um… kind of enjoy the sex now.</i>\"" +
 					"\n\nElenwen smiles dreamily. \"<i>Yeah, I’m not really sure I’d want to go back now if I could… it just feels so good, and everyone gets along even better than they did before, hee hee…</i>\"\n\n" +
@@ -410,7 +410,7 @@
 					" The voices of your would-be sisters fading into the distance behind you as you return to your camp. As you tread back," +
 					" the paths slowly become familiar as the last of your brainwashing fades, and you remember your name." +
 					" You won’t forget it again; you’ll live or die as [name], the Champion of Ingnam. But, you think with a faint smile," +
-					" you certainly wouldn’t mind coming back now and again to spend more time with the lovely Elves," +
+					" you certainly wouldn’t mind coming back now and again to spend more time with the lovely elves," +
 					" now that you’ve sorted out their rather forceful welcome. The thought manages to bring a stirring heat deep within you.");
 			WoodElvesQuest = QUEST_STAGE_PCNOTELF;
 			doNext(camp.returnToCampUseOneHour);
@@ -545,7 +545,7 @@
 
 		public function River():void {
 			if (!player.statStore.hasBuff("Sisterly bathing")) {
-				outputText("You learned to love bathing in this stream during your days spent living with the Wood Elves;" +
+				outputText("You learned to love bathing in this stream during your days spent living with the Wood elves;" +
 						" its clear, cool waters always left you feeling refreshed and clear-headed. More importantly," +
 						" there was almost always someone else bathing there who was happy to have a little… fun." +
 						" Today is no exception - with a smile you see that Merisiel has left her clothes and hunting gear by the banks and is splashing herself in the shallows," +
@@ -597,7 +597,7 @@
 				player.buff("Sisterly bathing").addStats({int:20,wis:20}).withText("Sisterly bathing").forDays(1);
 			} else {
 				outputText("You approach the clear, spritely waters of the stream that runs through the elven Village to clean yourself off again." +
-						" There are a few Elves enjoying themselves nearby, but they seem very focused on each other and their pleasures," +
+						" There are a few elves enjoying themselves nearby, but they seem very focused on each other and their pleasures," +
 						" and you still have things to do, so you opt to leave them be and simply enjoy the cool, refreshing water as it washes you clean of" +
 						" the sweat and grime you’ve accumulated. The gasps and cries of your sisters upstream leave you feeling a little aroused, but you" +
 						" resist the urge to join them, for now; you can always find another release later, when you’re a little less busy.")
@@ -651,7 +651,7 @@
 					" a flood of her salty-sweet girl juice sprays onto you and she cries out, arching back until her head is below Alyssa’s. Alyssa slams her hips into yours a few more times and cums next, crying out and kissing her sister," +
 					" their heads meeting from opposite ends of your body in a triangle of bodies, and Alyssa’s final thrusts and twitching, flooding pussy rubbing against yours work to finish you off third." +
 					" You cry out and buck your hips upward against Alyssa’s and grab Elenwen’s hips to steady yourself as you thrash from a deep, full-body orgasm. Finally the three of you come down and collapse on each other," +
-					" shuffling until the two beautiful Elves have you sandwiched between them on the pillows." +
+					" shuffling until the two beautiful elves have you sandwiched between them on the pillows." +
 					"\n\nAlyssa gazes at you with her big, green eyes, her cute face twisted and flushed with pleasure." +
 					"\"<i>Mmmmm… that was wonderful, [name]. You’re the best little sister I could have asked for.</i>\"" +
 					" She snuggles closer against you, hugging your arm to her little breasts and wrapping a slender thigh around you." +
