@@ -489,6 +489,7 @@
 			//mainView.nameBox.visible = false;
 			//player.short = mainView.nameBox.text;
 			//Ceremony5();
+			clearOutput();
 			outputText("NAMING SCENE IS CURRENTLY A CODE WIP");
 			doNext(Ceremony5);
 		}
