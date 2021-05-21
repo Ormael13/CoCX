@@ -480,14 +480,15 @@
 		}
 
 		public function chooseName():void {
-			if (mainView.nameBox.text == "") {
-				outputText("\n\n\n<b>You try to listen again for the name you heard in the rustling leaves what is it you heard?</b>");
-				doNext(Ceremony4);
-			}
-			clearOutput();
-			mainView.hideComboBox();
-			mainView.nameBox.visible = false;
-			player.short = mainView.nameBox.text;
+			//if (mainView.nameBox.text == "") {
+			//	outputText("\n\n\n<b>You try to listen again for the name you heard in the rustling leaves what is it you heard?</b>");
+			//	doNext(Ceremony4);
+			//}
+			//clearOutput();
+			//mainView.hideComboBox();
+			//mainView.nameBox.visible = false;
+			//player.short = mainView.nameBox.text;
+			outputText("NAMING SCENE IS CURRENTLY A CODE WIP");
 			Ceremony5();
 		}
 
