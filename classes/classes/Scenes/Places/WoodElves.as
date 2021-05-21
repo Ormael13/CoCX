@@ -249,7 +249,7 @@
 					"Still pouting, Elenwen obliges you, thrusting and twisting the magical toy while she teases your clit with her fingers, and you sail over the edge into the most intense orgasm you can remember; your vision goes pure white and you scream while Alyssa gently restrains your thrashing limbs, kissing your cheeks and nibbling at your lips and ears." +
 					" For a few blissful moments your mind is filled only with the shock of orgasm, love for your sisters, and happiness at having finally come home; then, as you come down, the two Elven women cuddle you until you fall asleep, whispering and cooing in your ears as they praise you for a job well done.");
 			player.hairColor = "golden blonde";
-			doNext(YouAreAlreadyElf2);
+			doNext(YouAreAlreadyElf3);
 		}
 
 		public function YouAreAlreadyElf3():void {
@@ -309,15 +309,15 @@
 			addButton(5, "Need2Go", Need2GoEndElfQuest);
 			//addButton(6, "Want2Stay", Want2Stay);
 			if (WoodElvesQuest == QUEST_STAGE_TOPICUNLOCKED){
-				addButton(7, "<b>Do Ceremony!</b>", Ceremony1);
-				addButton(8, "<b>Keep name</b>", KeepName);
+				addButton(7, "Do Ceremony!", Ceremony1);
+				addButton(8, "Keep name", KeepName);
 			}
 		}
 
 		public function TheTreeTopic():void {
 			clearOutput();
 			outputText("You tell them to explain what is going on with that bizarre tree." +
-					"\n\nAlyssa responds first. \"<i>The Sacred Tree grew from a sapling we brought with us from our original world. It is, or it was, I suppose, a core part of our culture; we Elves are forest spirits deeply connected to the trees and animals of the woods, and the Sacred Tree was like our patron. When a new Elf was born, we would place it underneath the tree, and it would be blessed with the spirit of the forest, growing into a true Elf.</i>\"\n\n" +
+					"\n\nAlyssa responds first. \"<i>The Sacred Tree grew from a sapling we brought with us from our original world. It is, or it was, I suppose, a core part of our culture; we Elves are forest spirits deeply connected to the trees and animals of the woods, and the Sacred Tree was like our patron. When a new Elf was born, we would place it underneath the tree, and it would be blessed with the spirit of the forest, growing into a true Elf.</i>\"" +
 					"\n\nElenwen continues. \"<i>When the demons found it, though, they changed all that. They corrupted it, turned it into… something else. They also corrupted us. You may have noticed that there are no male Elves here; or at least none you would easily recognize as such without… checking.</i>\"" +
 					"\n\nMerisiel nods. \"<i>The Sacred Tree, or I suppose the Corrupted Tree, now... it eats men. Or, it eats the ‘male’ out of men, I guess… in the process changing them into one of us. We can’t reproduce among ourselves anymore - the few of us that still have some of the right equipment are sterile. And when we breed with other races, the children aren’t Elves. So the only way we can replenish our numbers from losses is by letting the Tree have its way with travelers we find… like we did with you.</i>\"" +
 					"\n\n\"<i>But we really do care for them afterward!</i>\" Alyssa interjects. \"<i>Just like we did with you… or tried to, at least. We really did consider you to be one of us. I still do… little sister.</i>\" She trails off as she looks away from you sadly.");
@@ -329,8 +329,8 @@
 			addButton(5, "Need2Go", Need2GoEndElfQuest);
 			//addButton(6, "Want2Stay", Want2Stay);
 			if (WoodElvesQuest == QUEST_STAGE_TOPICUNLOCKED){
-				addButton(7, "<b>Do Ceremony!</b>", Ceremony1);
-				addButton(8, "<b>Keep name</b>", KeepName);
+				addButton(7, "Do Ceremony!", Ceremony1);
+				addButton(8, "Keep name", KeepName);
 			}
 		}
 
@@ -340,7 +340,7 @@
 					"\n\n\"<i>It’s been our home for years, of course,</i>\" says Elenwen. \"<i>This is where we first came to Mareth, where we planted the sapling of the Sacred Tree. Most of us stayed here; some left to explore before the demons came, so it’s possible that there may be a few pure Elves still wandering the world, if the demons didn’t catch them, and a few of us that were… that got twisted a bit worse than the rest of us left to join Lethice’s army as soldiers or slaves,  but otherwise we’re all here.</i>\"" +
 					"\n\nMerisiel adds, \"<i>It’s a beautiful place, even after the corruption, I think. Nature thrives here; the plants and animals are healthy and free, and we live mostly in peace, aside from catching an adventurer every so often to replenish our numbers.</i>\"\n\n" +
 					"Like they did with you, you add." +
-					"\n\nThe three girls look a little guilty for a minute and nod. Alyssa says \"<i>We really did love you though. I… I still love you, and I wish you would stay with us. It’s not so bad here, is it?<i>\"\n\n" +
+					"\n\nThe three girls look a little guilty for a minute and nod. Alyssa says \"<i>We really did love you though. I… I still love you, and I wish you would stay with us. It’s not so bad here, is it?</i>\"\n\n" +
 					"Unable to truthfully answer yes with certitude, you hold your silence and move on.");
 			menu();
 			addButton(0, "Elves", ElvesTopic);
@@ -350,8 +350,8 @@
 			addButton(5, "Need2Go", Need2GoEndElfQuest);
 			//addButton(6, "Want2Stay", Want2Stay);
 			if (WoodElvesQuest == QUEST_STAGE_TOPICUNLOCKED){
-				addButton(7, "<b>Do Ceremony!</b>", Ceremony1);
-				addButton(8, "<b>Keep name</b>", KeepName);
+				addButton(7, "Do Ceremony!", Ceremony1);
+				addButton(8, "Keep name", KeepName);
 			}
 		}
 
@@ -370,8 +370,8 @@
 			addButton(5, "Need2Go", Need2GoEndElfQuest);
 			//addButton(6, "Want2Stay", Want2Stay);
 			if (WoodElvesQuest == QUEST_STAGE_TOPICUNLOCKED){
-				addButton(7, "<b>Do Ceremony!</b>", Ceremony1);
-				addButton(8, "<b>Keep name</b>", KeepName);
+				addButton(7, "Do Ceremony!", Ceremony1);
+				addButton(8, "Keep name", KeepName);
 			}
 		}
 
@@ -390,8 +390,8 @@
 			addButton(3, "Demons", DemonsTopic);
 			addButton(5, "Need2Go", Need2GoEndElfQuest);
 			//addButton(6, "Want2Stay", Want2Stay);
-			addButton(7, "<b>Do Ceremony!</b>", Ceremony1);
-			addButton(8, "<b>Keep name</b>", KeepName);
+			addButton(7, "Do Ceremony!", Ceremony1);
+			addButton(8, "Keep name", KeepName);
 			WoodElvesQuest = QUEST_STAGE_TOPICUNLOCKED;
 		}
 
@@ -476,9 +476,7 @@
 			mainView.nameBox.text = "";
 			mainView.nameBox.maxChars = 16;
 			mainView.nameBox.restrict = null;
-
 			addButton(0, "OK", chooseName);
-			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function chooseName():void {

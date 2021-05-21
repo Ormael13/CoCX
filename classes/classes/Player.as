@@ -7379,7 +7379,7 @@ use namespace CoC;
 				elfCounter += 1;
 			if (isGargoyle()) elfCounter = 0;
 			if (cor < 50 || eyes.colour != "green" || !InCollection(hairColor, ["golden blonde"]) || hasPerk(PerkLib.ElementalBody)) elfCounter = 0;
-			elfCounter = finalRacialScore(elfCounter, Race.ELF);
+			elfCounter = finalRacialScore(elfCounter, Race.WOODELF);
 			End("Player","racialScore");
 			return elfCounter;
 		}

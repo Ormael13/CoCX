@@ -67,7 +67,6 @@ public class Camp extends NPCAwareContent {
 	public var questlog:Questlog = new Questlog();
 	public var soulforce:Soulforce = new Soulforce();
 	public var hexindao:HeXinDao = new HeXinDao();
-	public var woodElves:WoodElves = new WoodElves();
 	public var dungeon1:Factory = new Factory();
 	public var dungeon2:DeepCave = new DeepCave();
 	public var dungeonS:DesertCave = new DesertCave();
@@ -3181,7 +3180,7 @@ private function SparrableNPCsMenu():void {
 		else addButtonDisabled(7, "???", "???");
 		if (flags[kFLAGS.HEXINDAO_UNLOCKED] == 1) addButton(10, "He'Xin'Dao", hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, place where all greenhorn soul cultivators come together.");
 		else addButtonDisabled(10, "???", "???");
-		if (WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_PCELF || WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_PCNOTELF) addButton(11, "Elven grove", woodElves.GroveLayout).hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.");
+		if (WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_PCELF || WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_PCNOTELF) addButton(11, "Elven grove", SceneLib.woodElves.GroveLayout).hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.");
 		else addButtonDisabled(11, "???", "???");
 		addButton(14, "Back", playerMenu);
 		return true;
