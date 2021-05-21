@@ -24,9 +24,9 @@
 		public static const QUEST_STAGE_METELF:int = 1;
 		public static const QUEST_STAGE_LOSTTOELF:int = 2;
 		public static const QUEST_STAGE_TOPICUNLOCKED:int = 3;
-		public static const QUEST_STAGE_PCELF:int = 4;
-		public static const QUEST_STAGE_PCNOTELF:int = 5;
-		public static const QUEST_STAGE_PCFUCKOFF:int = 6;
+		public static const QUEST_STAGE_PCFUCKOFF:int = 4;
+		public static const QUEST_STAGE_PCELF:int = 5;
+		public static const QUEST_STAGE_PCNOTELF:int = 6;
 		public static const QUEST_STAGE_PCCAMEBACK:int = 7;
 
 		public function stateObjectName():String {
@@ -119,7 +119,9 @@
 		public function YouAreAlreadyElf1():void {
 			outputText("The elf leader raises an hand and tentacle-like vines whip around you as the elves encircling you smirk and giggle among each other. " +
 					"\n\n\"<i>See you again soon, my cute little adventurer.</i>\" says the leader playfully. \"<i>Try not to struggle too much, you’ll spoil the fun~♥</i>\"\n\n" +
-					"A vine wraps around your mouth, silencing any further objections you might have. Your restraints prevent you from looking anywhere but straight ahead, but you feel a great load of sticky resin fall on you from above, presumably from the tree; you feel it even more than you might have expected, because somehow the vines grappling you stripped you naked! As if galvanized by the warm, golden ooze now covering you the vines begin swirling and slithering over your body, teasing and tickling you until you begin to feel sensitive and aroused despite your situation." +
+					"A vine wraps around your mouth, silencing any further objections you might have. Your restraints prevent you from looking anywhere but straight ahead, but you feel a great load of sticky resin fall on you from above," +
+					" presumably from the tree; you feel it even more than you might have expected, because somehow the vines grappling you stripped you naked! As if galvanized by the warm" +
+					", golden ooze now covering you the vines begin swirling and slithering over your body, teasing and tickling you until you begin to feel sensitive and aroused despite your situation." +
 					" You clench in anticipation as one explores between the cheeks of your "+player.assDescript()+", then pushes its way into your "+player.assholeDescript()+"" +
 					", its tapered end swirling about provocatively inside. The vine already gagging you stifles your cry of indignation as it works its way into your mouth, acting much the same way. As it does it begins releasing a sticky, faintly sweet sap that trickles down your throat and coats your tongue, making you feel dizzy and flushed.");
 			if (player.hasVagina()) outputText("You continue to thrash helplessly as a third tentacle winds its way into your "+player.vaginaDescript()+", and despite yourself your hips start to twitch and buck as it eagerly explores your wet cavity, tickling your sensitive places and slowly filling you with  more sticky fluid; it clings to your walls and makes them feel warm and tingly, and before long your slit is engorged and drooling with a mixture of the plant’s secretions and your own feminine fluids.");
@@ -183,7 +185,10 @@
 			player.ballSize = 0;
 			if (!player.hasVagina()) player.createVagina();
 			if (player.breastRows.length >= 2) player.removeBreastRow(player.breastRows.length - 1,player.breastRows.length-1);
-			if (player.biggestTitSize() <= 2) player.growTits(2 + rand(2), 1, false, 3)
+			if (player.biggestTitSize() <= 4){
+				var sizeIncrement:Number = 5-player.biggestTitSize();
+				player.growTits(sizeIncrement, 1, false, 3)
+			}
 			player.createPerk(PerkLib.FlawlessBody,0,0,0,0);
 			player.createPerk(PerkLib.ElvenSense,0,0,0,0);
 			WoodElvesQuest = QUEST_STAGE_LOSTTOELF;
@@ -459,39 +464,41 @@
 					" The sensory overload causes you to clench as your climax hits. You reflexively clamp around the vine within you as the green light funnels into the tree. A soft moan escapes your lips as the vine pumps sap directly into your womb." +
 					" Within the high of your climax, you hear the whisper of a name in the rustling of leaves." +
 					" Your mind sharpens at the sound as if given a moment of clarity. What is it that you heard?");
-			doNext(chooseName);
+			doNext(Ceremony4);
 		}
 
 		public function Ceremony4():void {
 			clearOutput();
 			outputText("This name, whispered to you by the spirit of the forest, was...");
 
-			menu();
-			mainView.nameBox.x = mainView.mainText.x + 5;
-			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
-
-			//OLD
-			//mainView.nameBox.x = 510;
-			//mainView.nameBox.y = 265;
+			flushOutputTextToGUI();
 			mainView.nameBox.text = "";
 			mainView.nameBox.maxChars = 16;
-			mainView.nameBox.restrict = null;
+			mainView.nameBox.visible = true;
+			mainView.nameBox.width = 165;
+			// place below currently displayed text
+			mainView.nameBox.x = mainView.mainText.x + 5;
+			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 			addButton(0, "OK", chooseName);
 		}
 
 		public function chooseName():void {
-			//if (mainView.nameBox.text == "") {
-			//	outputText("\n\n\n<b>You try to listen again for the name you heard in the rustling leaves what is it you heard?</b>");
-			//	doNext(Ceremony4);
-			//}
-			//clearOutput();
-			//mainView.hideComboBox();
-			//mainView.nameBox.visible = false;
-			//player.short = mainView.nameBox.text;
-			//Ceremony5();
-			clearOutput();
-			outputText("NAMING SCENE IS CURRENTLY A CODE WIP");
-			doNext(Ceremony5);
+			if (mainView.nameBox.text == "") {
+				clearOutput();
+				outputText("You try to listen again for the name you heard in the rustling leaves what is it you heard? (You must select a name)");
+				doNext(Ceremony4);
+			}
+			else{
+				mainView.hideComboBox();
+				mainView.nameBox.visible = false;
+				player.short = mainView.nameBox.text;
+
+				clearOutput();
+				outputText("Is this realy the name you heard?");
+				menu()
+				addButton(0, "Yes", Ceremony5);
+				addButton(1, "No", Ceremony4);
+			}
 		}
 
 		public function Ceremony5():void {
@@ -681,7 +688,8 @@
 		}
 
 		public function Elenwen():void {
-			outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO FOR VISITING AGAIN FIRST TIME");
+			outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO FOR VISITING AGAIN FIRST TIME" +
+					"");
 
 		}
 
