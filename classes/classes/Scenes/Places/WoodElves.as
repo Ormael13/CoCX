@@ -27,6 +27,7 @@
 		public static const QUEST_STAGE_PCELF:int = 4;
 		public static const QUEST_STAGE_PCNOTELF:int = 5;
 		public static const QUEST_STAGE_PCFUCKOFF:int = 6;
+		public static const QUEST_STAGE_PCCAMEBACK:int = 7;
 
 		public function stateObjectName():String {
 			return "WoodElves";
@@ -119,7 +120,7 @@
 			outputText("The elf leader raises an hand and tentacle-like vines whip around you as the elves encircling you smirk and giggle among each other. " +
 					"\n\n\"<i>See you again soon, my cute little adventurer.</i>\" says the leader playfully. \"<i>Try not to struggle too much, you’ll spoil the fun~♥</i>\"\n\n" +
 					"A vine wraps around your mouth, silencing any further objections you might have. Your restraints prevent you from looking anywhere but straight ahead, but you feel a great load of sticky resin fall on you from above, presumably from the tree; you feel it even more than you might have expected, because somehow the vines grappling you stripped you naked! As if galvanized by the warm, golden ooze now covering you the vines begin swirling and slithering over your body, teasing and tickling you until you begin to feel sensitive and aroused despite your situation." +
-					" You clench in anticipation as one explores between the cheeks of your "+player.assDescript()+", then pushes its way into your "+player.assholeDescript()+"," +
+					" You clench in anticipation as one explores between the cheeks of your "+player.assDescript()+", then pushes its way into your "+player.assholeDescript()+"" +
 					", its tapered end swirling about provocatively inside. The vine already gagging you stifles your cry of indignation as it works its way into your mouth, acting much the same way. As it does it begins releasing a sticky, faintly sweet sap that trickles down your throat and coats your tongue, making you feel dizzy and flushed.");
 			if (player.hasVagina()) outputText("You continue to thrash helplessly as a third tentacle winds its way into your "+player.vaginaDescript()+", and despite yourself your hips start to twitch and buck as it eagerly explores your wet cavity, tickling your sensitive places and slowly filling you with  more sticky fluid; it clings to your walls and makes them feel warm and tingly, and before long your slit is engorged and drooling with a mixture of the plant’s secretions and your own feminine fluids.");
 			outputText("With a muffled gasp of terror and arousal you realize yet another tentacle is pressing against your belly-button, and you squeal against the tentacle invading your throat as it actually penetrates through you and begins, impossibly, to move about inside your stomach, tickling and teasing you from inside. Insanely, rather than the pain of your stomach being impaled it brings a feeling of soothing warmth - almost relief. ");
@@ -155,12 +156,15 @@
 					"the relaxation and pleasure and euphoria finally drive you over the edge, and you cry out ecstatically in your sweet, clear voice as you cum, " +
 					"twitching and shuddering against the embrace that holds you as your pussy splashes clear, sweet liquid onto the vines." +
 					" Then, you are gently released to the ground, where you lie in bliss until a light sleep takes you.");
+			player.sexReward("vaginalFluids", "Vaginal");
+			player.sexReward("vaginalFluids", "Vaginal");
+			player.sexReward("vaginalFluids", "Vaginal");
 			player.ears.type = Ears.ELVEN;
 			player.horns.type = Horns.NONE;
 			player.antennae.type = Antennae.NONE;
 			player.tongue.type = Tongue.ELF;
 			player.eyes.type = Eyes.ELF;
-			player.eyes.colour = "green";
+			player.eyes.colour = "light green";
 			player.hairType = Hair.SILKEN;
 			player.wings.type = Wings.NONE;
 			player.faceType = Face.ELF;
@@ -182,13 +186,13 @@
 			if (player.biggestTitSize() <= 2) player.growTits(2 + rand(2), 1, false, 3)
 			player.createPerk(PerkLib.FlawlessBody,0,0,0,0);
 			player.createPerk(PerkLib.ElvenSense,0,0,0,0);
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			WoodElvesQuest = QUEST_STAGE_LOSTTOELF;
 			doNext(YouAreAlreadyElf2);
 		}
 
 		public function YouAreAlreadyElf2():void {
 			clearOutput();
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			outputText("You awaken a short while later. Still dazed, you crawl your way to the pond to take a look at yourself, only to find a stunningly beautiful elf girl looking back at you. " +
 					"She has "+player.breastCup(0)+" cup breasts, round and firm and tipped with pink, blushing nipples, and clear, smooth skin as unblemished as the crystal waters of a forest stream, fairer than any mortal. " +
 					"Her "+ player.hairColor +" silken hairs are "+ Appearance.hairDescription(player) +", " +
@@ -522,6 +526,168 @@
 			player.createPerk(PerkLib.BlessingOfTheAncestorTree,0,0,0,0);
 			doNext(camp.returnToCampUseSixteenHours);
 		}
+
+		public function GroveLayout():void {
+			outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO FOR VISITING AGAIN FIRST TIME");
+			WoodElvesQuest = QUEST_STAGE_PCCAMEBACK
+		}
+
+
+		///ELF VILLAGE SECTION///
+		public function GroveLayout2():void {
+			outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO");
+			menu();
+			addButton(0, "River", River);
+			addButton(1, "Tent", Tent);
+			addButton(2, "Fletching table", Fletching);
+			addButton(3, "Elenwen", Elenwen);
+			addButton(4, "Allyssa", Allyssa);
+			addButton(5, "Leave", LeaveStartElfFight);
+		}
+
+		public function River():void {
+			if (!player.statStore.hasBuff("Sisterly bathing")) {
+				outputText("You learned to love bathing in this stream during your days spent living with the Wood Elves;" +
+						" its clear, cool waters always left you feeling refreshed and clear-headed. More importantly," +
+						" there was almost always someone else bathing there who was happy to have a little… fun." +
+						" Today is no exception - with a smile you see that Merisiel has left her clothes and hunting gear by the banks and is splashing herself in the shallows," +
+						" cleaning the mud and debris of the hunt from her cream-colored skin and luscious curves." +
+						" You call out to her, already stripping your own gear, and she turns to you with a delighted expression and waves you over." +
+						"\n\nIn a moment you are lovingly washing each other, running your hands over each other’s bodies and gently laving each other’s hair until the clean waters have you both sparkling." +
+						" Then Merisiel takes you by the hand and leads you further into the river until you are up to your breasts in the stream. A bit further downstream the bank overhangs where a tree has grown into a little hillock cut through by the waters, creating a shaded area of calm, eddying water." +
+						" There, the two of you relax, letting the water caress your naked forms. You giggle gleefully as you splash your face a bit, savoring the cool, bracing feeling.. You are free, at one with Mareth's beating heart; what could be better? As if to answer you, a stronger current errantly slides between your legs and rubs against your nethers," +
+						" sending a chill of pleasure that travels up your spine. You blissfully sigh," +
+						" enjoying the sensations against your soft, receptive skin, your entire body like a delicate instrument for nature to strum whimsically. A few fishes approach your naked form curiously, only to retreat back after staring for a few seconds, like little voyeurs afraid of being caught." +
+						"\n\nNoticing your state of heightened arousal, Merisiel gives you a knowing grin and wades over to you. " +
+						"\"<i>Need a little help, [name]? Perhaps we missed a spot earlier.</i>\"" +
+						" With that she wraps an arm around your back and pulls you in for a kiss. Her sweet saliva tickles your senses as your tongues intertwine, and your own hands find their way to her bountiful," +
+						" smooth breasts, eliciting a sweet breath to mark her approval. As you gently fondle her soft chest and hard, pink nipples - fully erect and beautifully sensitive from the cool water before you even started - she maneuvers her other hand down between your thighs and lightly caresses your labia," +
+						" teasing and rubbing until your sex engorges and blooms like a perverted flower. Then, teasing your emerging clitoris with a flexible thumb, she inserts first one, then another, then a third of her long, slender fingers into your hot, wet tunnel. You moan in pleasure," +
+						" leaning away from her as your back arches involuntarily. Then, acclimated to the stimulation, you exchange a loving gaze with her and begin working her face once more," +
+						" kissing slowly up her neck and chin, nibbling and tugging at her full, pink lips, and then with a playful giggle hoisting yourself up on her shoulders, the water supporting you both, and nibbling and licking at her long, pointed ears." +
+						"\n\nShe gasps and laughs at your playful assault and redoubles her own, bending her fingers to stimulate your folds as you contract your pussy around them, and for a moment the two of you playfully wrestle in upright in the water," +
+						" each trying to pleasure the other more, until with a little shriek Merisiel tumbles back into the water with a splash, taking you with her." +
+						"\n\nThe two of you stand back up, laughing at each other, faces flush from arousal and the shock of the cool water, and then with a sweet smile Merisiel leads you to a shallower spot, where the two of you sit facing each other." +
+						"\"<i>Mmmmm… that was fun, [name], but I want something a bit more intimate from my cute little sister. You don’t mind, do you?</i>\"" +
+						"You certainly do not, you tell her, and she lifts one of your legs to scoot her hips closer to you until you are wrapped around each other," +
+						" and in the cool water you feel the hot, slippery sensation of her pink, hairless elven pussy pressing against your own." +
+						" You wrap your arms around each other for a moment, pulling each other close and simply savoring the warm, snuggly feeling of your bodies and pussies pressed together." +
+						" Then Merisiel kisses you again and begins slowly gyrating her hips, up and down, slowly rubbing her lips and clitoris against yours." +
+						"\n\nYour already well-stimulated pussy quivers at the warm, slippery feeling of her lips stroking against yours, and soon you’re moaning in pleasure as you move your hips with hers in a comfortable rhythm," +
+						" each of you seeking to match the other and maximize your shared sensations. All the while Merisiel continues to kiss you, sometimes pressing her soft, pink tongue into your mouth and wrapping it around yours," +
+						" other times nibbling and sucking at your lips. Sometimes she breaks the kiss to give a heavy, sweet breath as her own pleasure mounts, meeting your eyes with her own rich, green ones in a loving gaze before showering you with tiny," +
+						" affectionate kisses on your forehead, cheeks, and lips, only to redouble her grinding as she once more invades your mouth passionately." +
+						"\n\nYou lose track of time as the two of you indulge each other’s bodies, grinding and caressing and kissing and gasping and moaning," +
+						" until finally it becomes too much to endure. Merisiel cums first; she gives a shuddering little gasp and her eyes open wide as she arches her back away from you," +
+						" her hips bucking against yours. Grinning, you take the chance to grab her puffy, pink nipples and give them a firm tweak, shocking her into an even larger orgasm in the middle of her original," +
+						" and she cries out and bucks your hips against yours as she spasms in ecstasy. Her impassioned cries and the movement of her hips pushes you over the edge as well, and as your strength givers over to pleasure Merisiel pulls you down on top of her," +
+						" and the two of you ride out your orgams with your upper bodies resting on the bank of the little sheltered pool, Merisiel gazing up at the tree roots above while you rest your head against her pillowy breasts." +
+						" The two of you lay there cuddling for a few moments, enjoying the afterglow as the gentle currents and eddies of the pool wash your lower halves clean again." +
+						" Merisiel gives you a loving little squeeze, pressing you even harder into her chest." +
+						"\n\n\"<i>Mmmmm… that was <b>wonderful</b>, little [name]... thank you. I’m glad we ran across each other; my day just doesn’t feel right without spending some time with my adorable little sister.</i>\"" +
+						" You respond by planting a kiss on her sternum and nuzzling even more snugly between her perfect tits. Her warmth and softness, the cool, peaceful water, the sounds of the river, and your relaxed," +
+						" synchronized breathing as she lovingly embraces and supports you soon have you drifting into a blissful sleep, but before your world goes totally dark she gently rouses you with a hand, gently petting your head and neck to keep you just away from sleep." +
+						"\n\n\"<i>Ahhhh, you’re such a good, sweet [girl/boy], [name],</i>\" she coos softly into your sensitive ear." +
+						"\"<i>You know I’d love nothing more than to let you nap on top of me, but I do have other things to do today, and I’m sure you do as well. Go on, return to your duties as Champion, and I’ll continue my work. We can always have a nice nap together - and other things, hee hee - some other time.</i>\"" +
+						"You drowsily agree, and stand yourself up despite the protest of your body against leaving its blissful perch on top of the lovely Elf woman. You offer her a hand and she gracefully pulls herself up as well," +
+						" and the two of you share one more sweet kiss before you wade back to your equipment and prepare to continue your day.");
+				player.sexReward("vaginalFluids", "Vaginal");
+				player.sexReward("vaginalFluids", "Vaginal");
+				player.sexReward("vaginalFluids", "Vaginal");
+				player.sexReward("vaginalFluids", "Vaginal");
+				player.sexReward("vaginalFluids", "Vaginal");
+				player.buff("Sisterly bathing").addStats({int:20,wis:20}).withText("Sisterly bathing").forDays(1);
+			} else {
+				outputText("You approach the clear, spritely waters of the stream that runs through the Elven Village to clean yourself off again." +
+						" There are a few Elves enjoying themselves nearby, but they seem very focused on each other and their pleasures," +
+						" and you still have things to do, so you opt to leave them be and simply enjoy the cool, refreshing water as it washes you clean of" +
+						" the sweat and grime you’ve accumulated. The gasps and cries of your sisters upstream leave you feeling a little aroused, but you" +
+						" resist the urge to join them, for now; you can always find another release later, when you’re a little less busy.")
+				player.dynStats("lus",+30);
+			}
+			doNext(GroveLayout);
+		}
+
+		public function Tent():void {
+			outputText("This tent only really gets used for one thing, and it’s just what you want right now. Alyssa and Elenwen notice you entering, and you smile as they glance at each other and leave off their work to follow you in." +
+					" Before long, the three of you are stripped naked and laying together on the bed, already feeling each other up and preparing for the fun you’re about to have." +
+					"\n\n\"<i>This brings back memories, doesn’t it, [name]?</i>\"says Elenwen, smiling nostalgically." +
+					"\n\n\"<i>I… I hope they’re good ones…</i>\" Alyssa says, with a hint of guilt or nervousness in your voice. Considering the circumstances of your “welcome” here that’s understandable, but you smile at the dainty Elf and pull her into an embrace, assuring her that you have no regrets about how things went that day. She smiles and gives you a kiss." +
+					"\n\n\"<i>Hey, I’m here too!</i>\" Elenwen interjects, pouting. \"<i>Don’t just create a mood between the two of you.</i>\"" +
+					"\n\nShe punctuates her teasing complaint by nibbling at the sensitive tips of your pointy ears, just as she always does. Not one to just watch, Alyssa begins licking and cleaning your left breast with her soft, pink tongue." +
+					" Elenwen moves from your eartip, licking a delightful trail to your neck and taking hold of your mouth before gently kissing you. Perhaps moved by their memories of that first sweet meeting, they’re retracing their old movements to pleasure you," +
+					" but this time you’re not a confused, amnesiac neophyte, and you match their loving attacks with your own. Soon the three of you are a tangled, gasping mess on the pillows, hands and tongues gently exploring each other’s sensitive places and rewarding each other with sweet moans and breathy sighs." +
+					"\n\n\"<i>Ah, this is heaven, little sister. I’m so glad you decided to accept us<b>~♥</b></i>\"" +
+					" says Alyssa between the cute noises she makes as you finger her stiff little clit, poking out like a red berry from her pink, hairless slit. She gives you a passionate kiss and grinds her hips against your hand, seeking even deeper pleasure, and Elenwen gives you both an exasperated sigh." +
+					"\n\n\"<i>Alright you lovers, I see how it’s going to be.</i>\"" +
+					" she says chidingly in a voice that can’t hide her affection. " +
+					"\"<i>In that case, let’s get you set up properly.</i>\"" +
+					" She reaches over to the end of the bed and retrieves a familiar golden-green object, twelve inches long, gently curved, and rounded at the ends. " +
+					"\"<i>You remember this toy, don't you little sister? It's the one we used when we first met,  crafted from the very sap of the sacred tree itself. Come on, I know you two want to use it; why hold back?</i>\"" +
+					"\n\nYou find yourself fixated on it, and glancing away for a moment you see Alyssa is as well. After a few seconds she turns back to face you, her flushed cheeks inches from yours. " +
+					"\"<i>Um… [name]... I want to-</i>\"" +
+					" You don’t let her finish, instead grabbing her cheeks and pulling her in for another kiss. Elenwen chuckles at the two of you and brings the toy to Alyssa’s tight snatch first." +
+					"\n\n\"<i>Well, look at you, Alyssa, all ready to go with no delay!</i>\"" +
+					" she says teasingly, slipping the toy inside her sister and twisting it around a bit before sliding it halfway in. Alyssa moans pleasurably into your mouth as the toy slides home. " +
+					"\"<i>Okay, okay, Alyssa, you have to sit up now, or you’ll never get the other end in. Besides,</i>\"" +
+					" she adds, fingering her own dripping pussy with her free hand, " +
+					"\"<i>[name]’s going to need that mouth of hers free so big sister Elenwen doesn’t feel left out.</i>\"" +
+					"\n\nAlyssa nods, blushing and biting her lower lip as she tries to endure the pleasure of the toy filling her. She rears up until she is straddling you, and you see the remaining six inches of the toy protruding from her glistening lips, twitching almost like a real cock as her pleasured spasms move it up and down." +
+					" Elenwen uses a hand to guide the tip to your own hungry opening. " +
+					"\"<i>H-here I come, [name]...</i>\"" +
+					" she squeaks as she pushes her slender hips forward, penetrating you in a smooth motion. You gasp and buck your hips at the pleasure of the insertion, and soon the two of you are grinding against each other, moaning in tandem as you seek pleasure from the stiff, warm rod joining you. Your combined juices froth and drip down from your pussies where they rub together, already soaking the bed below." +
+					"\n\n\"<i>Oh my, isn’t that nice<b>~♥</b></i>\"" +
+					" says Elenwen, gazing in mock admiration at your lewd coupling, though her face is just as red as Alyssa’s. " +
+					"\"<i>But don’t forget big sister Elenwen, little [name], or I’ll be sad.</i>\"" +
+					" So saying she crawls up until her face is just above yours and gives you a kiss; just a light peck on the lips, followed by a smile that takes on a teasing look from her almond-shaped," +
+					" slanting eyes. Then she lifts herself up and straddles your face, her dripping pussy directly over your mouth. " +
+					"\"<i>If you would be so kind, little sister, I’d love it if you’d take care of me down there with your cute little mouth<b>~♥</b></i>\"" +
+					"\n\nYou need no further exhortation, quickly bringing your lips to hers and tending to her heeds as Alyssa continues to grind ecstatically against you." +
+					" Soon Elenwen’s happy moans join the two of yours as you pleasure her clit and her sensitive lips with your tongue and teeth," +
+					" gently but energetically licking, prodding, and nibbling until she is squirming above you, trying to contain her pleasure enough to keep her mounted above you." +
+					"With the three of you finally positioned it doesn’t take long to climax. Alyssa, seeking greater pleasure," +
+					" adds a bouncing movement to her grinding, her moans escalating to cries of pleasure." +
+					" Moved by the increased sensation you redouble your efforts on Elenwen’s flooded pussy; you push your tongue as far as it will go inside her to lick her hot, wet folds," +
+					" while rubbing her stiff clit with your upper lip and teeth. Elenwen gasps and moans, her own hands rubbing her ample breasts and squeezing her stiff, cherry-colored nipples as she builds toward her orgasm." +
+					" Alyssa’s movements cause her own cute palm-sized tits to bounce up and down, and she reaches down to fondle your breasts, trying generously to bring you to a simultaneous orgasm with her. Elenwen comes first;" +
+					" a flood of her salty-sweet girl juice sprays onto you and she cries out, arching back until her head is below Alyssa’s. Alyssa slams her hips into yours a few more times and cums next, crying out and kissing her sister," +
+					" their heads meeting from opposite ends of your body in a triangle of bodies, and Alyssa’s final thrusts and twitching, flooding pussy rubbing against yours work to finish you off third." +
+					" You cry out and buck your hips upward against Alyssa’s and grab Elenwen’s hips to steady yourself as you thrash from a deep, full-body orgasm. Finally the three of you come down and collapse on each other," +
+					" shuffling until the two beautiful Elves have you sandwiched between them on the pillows." +
+					"\n\nAlyssa gazes at you with her big, green eyes, her cute face twisted and flushed with pleasure." +
+					"\"<i>Mmmmm… that was wonderful, [name]. You’re the best little sister I could have asked for.</i>\"" +
+					" She snuggles closer against you, hugging your arm to her little breasts and wrapping a slender thigh around you." +
+					"\n\n\"<i>I agree,</i>\"" +
+					" says Elenwen, doing similarly, her twin melons embracing your upper arm as she wraps a curvaceous thigh around you, topping Alyssa’s. " +
+					"\"<i>You did wonderfully. I hope it was as good for you as it was for us.</i>\"" +
+					" Her slanted eyes are filled with tender affection." +
+					"\n\nYou can only bring yourself to nod as the three of you drift into an exhausted but happy slumber," +
+					" snuggled against each other in the tent. An hour later you awaken. Elenwen seems to have awoken first and left." +
+					" Alyssa is still asleep, hugging you. You give her a gentle kiss on her large forehead and carefully extract yourself to avoid waking her." +
+					" She mumbles a bit in her sleep as your warmth leaves her, but remains there as you dress yourself and exit the tent to continue your day.");
+			player.sexReward("vaginalFluids", "Vaginal");
+			player.sexReward("vaginalFluids", "Vaginal");
+			player.sexReward("vaginalFluids", "Vaginal");
+			player.sexReward("vaginalFluids", "Vaginal");
+			player.sexReward("vaginalFluids", "Vaginal");
+			doNext(GroveLayout);
+		}
+
+		public function Fletching():void {
+			outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO FOR VISITING AGAIN FIRST TIME");
+
+		}
+
+		public function Elenwen():void {
+			outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO FOR VISITING AGAIN FIRST TIME");
+
+		}
+
+		public function Allyssa():void {
+			outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO FOR VISITING AGAIN FIRST TIME");
+
+		}
+
 	}
 
 }

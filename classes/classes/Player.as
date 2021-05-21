@@ -7334,7 +7334,7 @@ use namespace CoC;
 			if (elfCounter >= 2) {
 				if (InCollection(hairColor, ["golden blonde"]))
 					elfCounter++;
-				if (eyes.colour == "green")
+				if (eyes.colour == "light green")
 					elfCounter++;
 				if (InCollection(skin.base.color, ["light"]))
 					elfCounter++;
