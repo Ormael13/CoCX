@@ -3875,10 +3875,10 @@ use namespace CoC;
 				if (TopScore >= 17) {
 					if (TopScore >= 25) {
 						if (isTaur()) race = "wood elf-taur";
-						else race = "wood elf";
+						else race = "wood elf sister";
 					} else {
-						if (isTaur()) race = "half wood elf-taur";
-						else race = "half wood elf";
+						if (isTaur()) race = "Wood Elf-taur";
+						else race = "Wood Elf neophite";
 					}
 				}
 			}
@@ -7306,82 +7306,83 @@ use namespace CoC;
 				elfCounter += 1;
 			if (isGargoyle()) elfCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) elfCounter = 0;
+			if (hasPerk(PerkLib.BlessingOfTheAncestorTree)) elfCounter = 0;
 			elfCounter = finalRacialScore(elfCounter, Race.ELF);
 			End("Player","racialScore");
 			return elfCounter;
 		}
 
-		//Elf score
+		//WoodElf score
 		public function woodElfScore():Number {
 			Begin("Player","racialScore","wood elf");
-			var elfCounter:Number = 0;
+			var WoodElfCounter:Number = 0;
 			if (ears.type == Ears.ELVEN)
-				elfCounter++;
+				WoodElfCounter++;
 			if (eyes.type == Eyes.ELF)
-				elfCounter++;
+				WoodElfCounter++;
 			if (faceType == Face.ELF)
-				elfCounter++;
+				WoodElfCounter++;
 			if (tongue.type == Tongue.ELF)
-				elfCounter++;
+				WoodElfCounter++;
 			if (arms.type == Arms.ELF)
-				elfCounter++;
+				WoodElfCounter++;
 			if (lowerBody == LowerBody.ELF)
-				elfCounter++;
+				WoodElfCounter++;
 			if (hairType == Hair.SILKEN)
-				elfCounter++;
+				WoodElfCounter++;
 			if (wings.type == Wings.NONE)
-				elfCounter++;
-			if (elfCounter >= 2) {
+				WoodElfCounter++;
+			if (WoodElfCounter >= 2) {
 				if (InCollection(hairColor, ["golden blonde"]))
-					elfCounter++;
+					WoodElfCounter++;
 				if (eyes.colour == "light green")
-					elfCounter++;
+					WoodElfCounter++;
 				if (InCollection(skin.base.color, ["light"]))
-					elfCounter++;
+					WoodElfCounter++;
 				if (skinType == Skin.PLAIN && skinAdj == "flawless")
-					elfCounter++;
+					WoodElfCounter++;
 				if (tone <= 60)
-					elfCounter++;
+					WoodElfCounter++;
 				if (thickness <= 50)
-					elfCounter++;
+					WoodElfCounter++;
 				if (hasCock() && cocks.length < 6)
-					elfCounter++;
+					WoodElfCounter++;
 				if (hasVagina() && biggestTitSize() >= 3)
-					elfCounter++;
+					WoodElfCounter++;
 			}
 			if (cor >= 50)
-				elfCounter++;
+				WoodElfCounter++;
 			if (hasPerk(PerkLib.FlawlessBody))
-				elfCounter++;
+				WoodElfCounter++;
 			if (hasPerk(PerkLib.ElvenSense))
-				elfCounter++;
+				WoodElfCounter++;
 			if (hasPerk(PerkLib.BlessingOfTheAncestorTree))
-				elfCounter+= 4;
+				WoodElfCounter+= 4;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSys))
-				elfCounter++;
+				WoodElfCounter++;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved))
-				elfCounter++;
+				WoodElfCounter++;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm))
-				elfCounter++;
+				WoodElfCounter++;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSys) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				elfCounter++;
+				WoodElfCounter++;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				elfCounter++;
+				WoodElfCounter++;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				elfCounter++;
+				WoodElfCounter++;
 			if (hasPerk(PerkLib.ElfsDescendant) || hasPerk(PerkLib.BloodlineElf))
-				elfCounter += 2;
+				WoodElfCounter += 2;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
-				elfCounter += 50;
-			if (hasPerk(PerkLib.AscensionHybridTheory) && elfCounter >= 4)
-				elfCounter += 1;
-			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && elfCounter >= 8)
-				elfCounter += 1;
-			if (isGargoyle()) elfCounter = 0;
-			if (cor < 50 || eyes.colour != "light green" || !InCollection(hairColor, ["golden blonde"]) || hasPerk(PerkLib.ElementalBody)) elfCounter = 0;
-			elfCounter = finalRacialScore(elfCounter, Race.WOODELF);
+				WoodElfCounter += 50;
+			if (hasPerk(PerkLib.AscensionHybridTheory) && WoodElfCounter >= 4)
+				WoodElfCounter += 1;
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && WoodElfCounter >= 8)
+				WoodElfCounter += 1;
+			if (isGargoyle()) WoodElfCounter = 0;
+			if (cor < 50 || eyes.colour != "light green" || !InCollection(hairColor, ["golden blonde"]) || hasPerk(PerkLib.ElementalBody)) WoodElfCounter = 0;
+			WoodElfCounter = finalRacialScore(WoodElfCounter, Race.WOODELF);
 			End("Player","racialScore");
-			return elfCounter;
+			return WoodElfCounter;
 		}
 
 		//Frost Wyrm score
