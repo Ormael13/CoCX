@@ -666,7 +666,7 @@ import classes.Scenes.SceneLib;
 						" resist the urge to join them, for now; you can always find another release later, when you’re a little less busy.")
 				player.dynStats("lus",+30);
 			}
-			doNext(GroveLayout2);
+			doNext(GroveLayout);
 		}
 
 		public function Tent():void {
@@ -732,13 +732,13 @@ import classes.Scenes.SceneLib;
 			player.sexReward("vaginalFluids", "Vaginal");
 			player.sexReward("vaginalFluids", "Vaginal");
 			player.sexReward("vaginalFluids", "Vaginal");
-			doNext(GroveLayout2);
+			doNext(GroveLayout);
 		}
 
 		public function Fletching():void {
 			clearOutput()
 			outputText("TEMPORARY PLACEHOLDER STUB FLETCHING TABLE");
-			doNext(GroveLayout2);
+			doNext(GroveLayout);
 		}
 
 		//Elenwen is as skilled as Kindra but is very picky on who she teaches to. Better be an elf also her training is slower as she tends to fool around
@@ -831,7 +831,7 @@ import classes.Scenes.SceneLib;
 				hasTrainedTodayCooldown = 24;
 			}
 			bowSkill(5);
-			doNext(GroveLayout2);
+			doNext(GroveLayout);
 		}
 
 		public function Alyssa():void {
@@ -922,7 +922,7 @@ import classes.Scenes.SceneLib;
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
-			doNext(GroveLayout2);
+			doNext(GroveLayout);
 		}
 
 
