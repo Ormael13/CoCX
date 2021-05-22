@@ -401,12 +401,30 @@ public class Combat extends BaseContent {
         else return 1;
     }
 
+    public function canSpearDance():Boolean{
+        return ((player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry)
+                || player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryII)
+                || player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIII)
+                || player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIV))
+                && player.isElf())
+    }
+
     public function maxCurrentAttacks():int {
         if (player.weaponPerk == "Staff" || player.weaponPerk == "Wand" || player.weaponPerk == "Massive") return 1;
         else if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") return maxLargeAttacks();
         else if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") return maxSmallAttacks();
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.isFistOrFistWeapon()) return maxFistAttacks();
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
+        else if (canSpearDance() && player.isUsingSpear() && player.shield == ShieldLib.NOTHING){
+            var Special:Number = 0;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry)) Special = 1;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryII)) Special = 2;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIII)) Special = 3;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIV)) Special = 4;
+            if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") return maxLargeAttacks()+Special;
+            else if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") return maxSmallAttacks()+Special;
+            else return maxCommonAttacks()+Special;
+        }
         else return maxCommonAttacks();
     }
 
@@ -442,7 +460,11 @@ public class Combat extends BaseContent {
         if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") return maxFirearmsAttacks();
         else if (player.weaponRangePerk == "Throwing") return maxThrowingAttacks();
         else if (player.weaponRangePerk == "Crossbow") return maxCrossbowAttacks();
-        else if (player.weaponRangePerk == "Bow") return maxBowAttacks();
+        else if (player.weaponRangePerk == "Bow"){
+            var Special:Number = 0;
+            if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot) && player.weaponRangePerk == "Bow") Special += 1;
+            return maxBowAttacks()+Special;
+        }
         else return 1;
     }
 
@@ -2643,7 +2665,7 @@ public class Combat extends BaseContent {
             var fireBowCost:Number = 0;
             fireBowCost += oneArrowTotalCost();
             //multiple arrows shoot costs
-            if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 6) fireBowCost *= 6;
+            if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 6) fireBowCost *= 6;
             if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 5) fireBowCost *= 5;
             if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 4) fireBowCost *= 4;
             if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 3) fireBowCost *= 3;
@@ -2944,7 +2966,10 @@ public class Combat extends BaseContent {
                 if (player.inte >= 200) damage += player.inte * 0.1;
             }
             //Section for item damage modifiers
-            if (weaponRangePerk == "Bow" && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
+            if (weaponRangePerk == "Bow"){
+                if (player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
+                if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isUsingSpear() && player.shield == ShieldLib.NOTHING)  damage *= 1.25;
+            }
             damage = Math.round(damage);
             if (monster.HP <= monster.minHP()) {
                 if (monster.short == "pod")
@@ -4759,8 +4784,14 @@ public class Combat extends BaseContent {
                 damage += scalingBonusToughness() * 0.25;
             }
             else{
-                damage += player.str;
-                damage += scalingBonusStrength() * 0.25;
+                if (player.isElf && player.isUsingSpear() && player.hasPerk(PerkLib.ELFElvenBattleStyle)) {
+                    damage += player.inte;
+                    damage += scalingBonusToughness() * 0.25;
+                }
+                else{
+                    damage += player.str;
+                    damage += scalingBonusStrength() * 0.25;
+                }
             }
             if (player.isFlying()){
                 if (player.hasPerk(PerkLib.HarpyHollowBones)) damage *= 1.2;

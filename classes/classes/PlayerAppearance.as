@@ -1408,6 +1408,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" Your eyes look normal enough save for their fiendish [eyecolor] iris and slitted pupils.");
 		else if(eyeType == Eyes.ELF)
 			outputText(" Your [eyecolor] elven eyes looks somewhat human, save for their cat-like vertical slit which draws light right in, allowing you to see with perfect precision both at day and night time.");
+			if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) outputText(" Despite their otherwordly beauty the misty hollow at the center of your eyes denounce the absence of a soul that wich now resides with the forest.")
 		else if(eyeType == Eyes.RAIJU)
 			outputText(" Your eyes are of an electric [eyecolor] hue that constantly glows with voltage power. They have slitted pupils like those of a beast.");
 		else if(eyeType == Eyes.RATATOSKR)
@@ -2408,6 +2409,11 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.elfScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Elf: " + player.elfScore() + " (-5% to Str racial multi, -10% to Tou racial multi, +45% to Spe / Int racial multi, +30% to Wis racial multi, +15 min Sens, +10% max Mana)</font>");
 		else if (player.elfScore() >= 1) outputText("\n<font color=\"#008000\">Half Elf: " + player.elfScore() + "</font>");
 		else if (player.elfScore() < 1) outputText("\n<font color=\"#ff0000\">Half Elf: 0</font>");
+		//Wood Elf
+		if (player.woodElfScore() >= 25) outputText("\n<font color=\"#0000a0\">Wood Elf: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +150% to Spe racial multi, +125% to Int racial multi, +100% to Lib racial multi, +50 min Sens, +20% max Mana)</font>");
+		else if (player.woodElfScore() >= 17) outputText("\n<font color=\"#0000a0\">Wood Elf little sister: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +100% to Spe / Int / Lib racial multi, +50 min Sens, +10% max Mana)</font>");
+		else if (player.woodElfScore() >= 1) outputText("\n<font color=\"#008000\">Wood Elf: " + player.woodElfScore() + "</font>");
+		else if (player.woodElfScore() < 1) outputText("\n<font color=\"#ff0000\">Wood Elf: 0</font>");
 		//Ferret
 		outputText("\nFerret-morph: " + player.ferretScore());
 		//Fire snail

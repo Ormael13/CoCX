@@ -22,6 +22,7 @@ import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.LunaFollower;
+import classes.Scenes.Places.WoodElves;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
@@ -2687,6 +2688,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && (flags[kFLAGS.LUNA_JEALOUSY] >= 400 || flags[kFLAGS.LUNA_FOLLOWER] > 6) && player.gender > 0 && player.hasStatusEffect(StatusEffects.LunaWasWarned) && !player.hasStatusEffect(StatusEffects.LunaOff)) {
 					LunaFullMoonScene = true;
 					return true;
+				}
+			}
+			//Elf training reset
+			if (WoodElves.hasTrainedToday) {
+				WoodElves.hasTrainedTodayCooldown -= 1
+				if (WoodElves.hasTrainedTodayCooldown == 0)
+				{
+					WoodElves.hasTrainedToday = false;
 				}
 			}
 			//Wrap it up

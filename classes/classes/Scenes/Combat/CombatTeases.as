@@ -83,49 +83,49 @@ public class CombatTeases extends BaseCombatContent {
 		chance += player.upperGarment.sexiness;
 		chance += player.lowerGarment.sexiness;
 		//10% for seduction perk
-		if (player.findPerk(PerkLib.Seduction) >= 0) chance += 10;
+		if (player.hasPerk(PerkLib.Seduction)) chance += 10;
 		//10% for sexy armor types
-		if (player.findPerk(PerkLib.SluttySeduction) >= 0 || player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) chance += 10;
+		if (player.hasPerk(PerkLib.SluttySeduction) || player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) chance += 10;
 		//10% for bimbo shits
-		if (player.findPerk(PerkLib.BimboBody) >= 0) {
+		if (player.hasPerk(PerkLib.BimboBody)) {
 			chance += 10;
 			bimbo = true;
 		}
-		if (player.findPerk(PerkLib.BroBody) >= 0) {
+		if (player.hasPerk(PerkLib.BroBody)) {
 			chance += 10;
 			bro = true;
 		}
-		if (player.findPerk(PerkLib.FutaForm) >= 0) {
+		if (player.hasPerk(PerkLib.FutaForm)) {
 			chance += 10;
 			futa = true;
 		}
 		//2 & 2 for seductive valentines!
-		if (player.findPerk(PerkLib.SensualLover) >= 0) {
+		if (player.hasPerk(PerkLib.SensualLover)) {
 			chance += 2;
 		}
-		if (player.findPerk(PerkLib.FlawlessBody) >= 0) chance += 10;
-		if (player.findPerk(PerkLib.ChiReflowLust) >= 0) chance += UmasShop.NEEDLEWORK_LUST_TEASE_MULTI;
+		if (player.hasPerk(PerkLib.FlawlessBody)) chance += 10;
+		if (player.hasPerk(PerkLib.ChiReflowLust)) chance += UmasShop.NEEDLEWORK_LUST_TEASE_MULTI;
 		//==============================
 		//Determine basic damage.
 		//==============================
 		damage = 6 + rand(3);
-		if (player.findPerk(PerkLib.SensualLover) >= 0) {
+		if (player.hasPerk(PerkLib.SensualLover)) {
 			damage += 2;
 		}
-		if (player.findPerk(PerkLib.Seduction) >= 0) damage += 5;
+		if (player.hasPerk(PerkLib.Seduction)) damage += 5;
 		//+ slutty armor bonus
-		if (player.findPerk(PerkLib.SluttySeduction) >= 0) damage += player.perkv1(PerkLib.SluttySeduction);
-		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
+		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
 		//10% for bimbo shits
 		if (bimbo || bro || futa) {
 			damage += 5;
 			bimbo = true;
 		}
-		if (player.findPerk(PerkLib.FlawlessBody) >= 0) damage += 10;
+		if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
 		damage += scalingBonusLibido() * 0.1;
-		if (player.findPerk(PerkLib.JobSeducer) >= 0) damage += player.teaseLevel * 3;
+		if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 3;
 		else damage += player.teaseLevel * 2;
-		if (player.findPerk(PerkLib.JobCourtesan) >= 0 && monster.findPerk(PerkLib.EnemyBossType) >= 0) damage *= 1.2;
+		if (player.hasPerk(PerkLib.JobCourtesan) && monster.findPerk(PerkLib.EnemyBossType) >= 0) damage *= 1.2;
 		//partial skins bonuses
 		switch (player.coatType()) {
 			case Skin.FUR:
@@ -142,7 +142,9 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 		}
 		//slutty simplicity bonus
-		if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") damage *= (1 + ((10 + rand(11)) / 100));
+		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") damage *= (1 + ((10 + rand(11)) / 100));
+		//Elven Pole Dancing style bonus
+		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isUsingSpear()) damage += scalingBonusSpeed() * 0.1;
 		//==============================
 		//TEASE SELECT CHOICES
 		//==BASICS========

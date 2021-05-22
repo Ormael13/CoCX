@@ -606,7 +606,7 @@ private function keltMainEncounter3():void {
 			outputText("You feel a bloom of warmth as the centaur's cock bursts within you, pumping thick semen straight into your womb.  The quantity is unbelievable, and you orgasm again just from the sensation of his steaming spunk filling your belly.  Each little twitch of his cock sends sprays of seed and juices squelching from your overstuffed pussy, the majority of it being trapped inside.  Your stomach begins to swell slightly from the sheer quantity, and you all but dissolve into a puddle of satiated goo.\r\r");
 			outputText("Some time later, Kelt's enormous cock softens enough to slip out of your abused cunt, a virtual torrent of cum flowing out afterwards.  You lay on the bale of hay, panting tiredly, hands pressed to your full belly.  Kelt looks down at you, and snorts.\r\r");
 			outputText("\"<i>That's a good look for you.  Come back tomorrow if it doesn't take, slut.  I'll be glad to do the job again.</i>\"\r\r");
-			player.slimeFeed();
+			player.sexReward("cum", "Vaginal");
 			player.orgasm();
 			outputText("He leaves you without another word.");
 			//(+5 Submissive)
