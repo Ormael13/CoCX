@@ -741,13 +741,11 @@ import classes.Scenes.SceneLib;
 			doNext(GroveLayout);
 		}
 
-		//Elenwen is as skilled as Kindra but is very picky on who she teaches to. Better be an elf also her training is slower as she tends to fool around
+		//Elenwen is nearly as skilled as Kindra but is very picky on who she teaches to. Better be an elf also her training is slower as she tends to fool around
 		private function bowSkill(diff:Number):Number {
-			player.addStatusValue(StatusEffects.Kindra,1,diff);
-			//if (player.statusEffectv1(StatusEffects.Kindra) >= 95 && flags[kFLAGS.KINDRA_ADV_ARCHERY] < 3) player.changeStatusValue(StatusEffects.Kindra,1,95);
-			//if (player.statusEffectv1(StatusEffects.Kindra) >= 140 && flags[kFLAGS.KINDRA_ADV_ARCHERY] < 5) player.changeStatusValue(StatusEffects.Kindra,1,140);
-			if (player.statusEffectv1(StatusEffects.Kindra) >= 150) player.changeStatusValue(StatusEffects.Kindra,1,150);
-			return player.statusEffectv1(StatusEffects.Kindra);
+			player.addStatusValue(StatusEffects.Kelt,1,diff);
+			if (player.statusEffectv1(StatusEffects.Kelt) >= 150) player.changeStatusValue(StatusEffects.Kelt,1,150);
+			return player.statusEffectv1(StatusEffects.Kelt);
 		}
 
 		public function Elenwen():void {
@@ -784,8 +782,8 @@ import classes.Scenes.SceneLib;
 					" but then Elenwen takes her hand from your dripping snatch and lightly pulls your hand from hers." +
 					"\n\n\"<i>Mmm.... that was fun, sweet little sister, but we should get back to work. If you can manage to hit a bullseye as excited as you are now, I’ll be satisfied with your practice for today. Then, if you want, we can continue this later~♥</i>\"" +
 					"\n\nYou nod, a bit disappointed at being cut off before climax, and take up your bow again. After several tries, you ");
-			if (player.statusEffectv1(StatusEffects.Kindra) <= 100) outputText("manage to make a shot Elenwen considers fair for her standards.");
-			if (player.statusEffectv1(StatusEffects.Kindra) >= 100) outputText("hit a bullseye, and Elenwen praises your efforts before you say your goodbyes.");
+			if (player.statusEffectv1(StatusEffects.Kelt) <= 100) outputText("manage to make a shot Elenwen considers fair for her standards.");
+			if (player.statusEffectv1(StatusEffects.Kelt) >= 100) outputText("hit a bullseye, and Elenwen praises your efforts before you say your goodbyes.");
 			outputText("\n\nAs you leave for your camp Elenwen waves at you with a \"<i>See you later, sister. We can do something more fun next time~♥</i>\"" +
 					" With a hint of regret, you wave and head back home, seriously considering taking her up on the offer before the day is up.");
 			player.trainStat("tou", +1, 50);
@@ -800,26 +798,26 @@ import classes.Scenes.SceneLib;
 			player.trainStat("int", +1, 80);
 			player.trainStat("int", +1, 80);
 			player.trainStat("int", +1, 80);
-			if (player.spe >= 50 && player.statusEffectv1(StatusEffects.Kindra) >= 25 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING0 && !hasTrainedToday){
+			if (player.spe >= 50 && player.statusEffectv1(StatusEffects.Kelt) >= 25 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING0 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING1;
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Pin down ability! <b>Gained P.Ability: Pin Down</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
-			else if (player.spe >= 100 && player.statusEffectv1(StatusEffects.Kindra) >= 50 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING1 && !hasTrainedToday){
+			else if (player.spe >= 100 && player.statusEffectv1(StatusEffects.Kelt) >= 50 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING1 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING2;
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Elven Eye ability! <b>Gained P.Ability: Elven Eye</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
-			else if (player.spe >= 150 && player.statusEffectv1(StatusEffects.Kindra) >= 100 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING2 && !hasTrainedToday){
+			else if (player.spe >= 150 && player.statusEffectv1(StatusEffects.Kelt) >= 100 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING2 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING3;
 				player.createPerk(PerkLib.ELFMasterShot,0,0,0,0);
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Master Shot Perk! <b>Gained Perk: Master Shot</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
-			else if (player.spe >= 200 && player.statusEffectv1(StatusEffects.Kindra) >= 150 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING3 && !hasTrainedToday){
+			else if (player.spe >= 200 && player.statusEffectv1(StatusEffects.Kelt) >= 150 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING3 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING4;
 				player.createPerk(PerkLib.ELFArcherCovenant,0,0,0,0);
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Archer Covenant Perk! <b>Gained Perk: Archer Covenant</b>");
