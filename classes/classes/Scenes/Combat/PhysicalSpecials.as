@@ -42,10 +42,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var bd:ButtonData;
 		if (!player.isInGoblinMech() && !player.isInNonGoblinMech()) {
 			bd = buttons.add("PowerAttack", powerAttack).hint("Do a single way more powerfull wrath-enhanced melee strike.");
-			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			if (player.wrath100 < 1) bd.disable("You're too low on wrath to use Power Attack (below 1%)");
+			else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			if (player.hasPerk(PerkLib.PowerShot)) {
 				bd = buttons.add("Power Shoot", powerShoot).hint("Do a single way more powerfull wrath-enhanced range strike.");
-				if (player.weaponRangePerk != "Bow" && player.weaponRangePerk != "Throwing") {
+				if (player.wrath100 < 1) bd.disable("You're too low on wrath to use Power Shot (below 1%)");
+				else if (player.weaponRangePerk != "Bow" && player.weaponRangePerk != "Throwing") {
 					bd.disable("<b>You need to use bow or throwing weapon before you can use Power Shoot.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -648,9 +650,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else outputText("You lift your [weapon] with all of your strength and smash it on your foe head. ");
 		var damage:Number = 0;
-		var PAMulti:Number = player.wrath100 * 0.02;
-		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) PAMulti *= 2.5;
-		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) PAMulti *= 2;
+		var PAMulti:Number = 1;
+		PAMulti += combat.PASPAS();
 		if ((player.weapon == weapons.PRURUMI && player.spe >= 150) || player.jewelry == jewelries.UNDKINS || player.jewelry3 == jewelries.UNDKINS) {
 			if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
 				PAMulti += 0.5;
@@ -692,7 +693,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-		damage *= (1 + PAMulti);
+		damage *= PAMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
@@ -729,9 +730,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		outputText("With one smooth motion you draw, nock, and fire your deadly arrow at one of your opponent"+(monster.plural ? "s":"")+" ");
 		var damage:Number = 0;
-		var PSMulti:Number = player.wrath100 * 0.02;
-		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) PSMulti *= 2.5;
-		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) PSMulti *= 2;
+		var PSMulti:Number = 1;
+		PSMulti += combat.PASPAS();
 		damage += player.spe;
 		damage += scalingBonusSpeed() * 0.2;
 		damage += scalingBonusStrength() * 0.4;
@@ -757,7 +757,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) damage *= 1.2;
 		if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
-		damage *= (1 + PSMulti);
+		damage *= PSMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combat.combatPhysicalCritical();
@@ -1172,9 +1172,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else player.createStatusEffect(StatusEffects.CooldownCharging,6,0,0,0);
 		outputText("You take some distance before making a U-turn and charge at your opponent with all your might, impaling them on your [weapon]. ");
 		var damage:Number = 0;
-		var PAM2:Number = player.wrath100 * 0.02;
-		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) PAM2 *= 2.5;
-		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) PAM2 *= 2;
+		var PAM2:Number = 1;
+		PAM2 += combat.PASPAS();
 		damage += player.str;
 		damage += scalingBonusStrength() * 0.25;
 		if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
@@ -1216,7 +1215,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 2;
 		}
 		if (player.hasPerk(PerkLib.DevastatingCharge)) damage *= 1.5;
-		damage *= (1 + PAM2);
+		damage *= PAM2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		var critMulti:Number = 1.75;
