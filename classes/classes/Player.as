@@ -9916,6 +9916,13 @@ use namespace CoC;
 			End("Player","racialScore");
 			return gargoyleCounter;
 		}
+
+		public function atlachFullTfCheck():Boolean {
+			return lowerBody === LowerBody.CHITINOUS_SPIDER_LEGS && arms.type === Arms.SPIDER && eyes.type == Eyes.FOUR_SPIDER_EYES
+			&& eyes.colour === "red" && rearBody.type === RearBody.ATLACH_NACHA && faceType === Face.SPIDER_FANGS
+			&& hasCoatOfType(Skin.CHITIN) && coatColor === "midnight purple" && hairColor === "midnight purple"
+			&& hasVagina() && isFemale() && cor >= 50 && canOvipositSpider();
+		}
 		
 		public function atlachNachaScore():int {
 			var score:int = 0;
@@ -9965,10 +9972,30 @@ use namespace CoC;
 			// Ovipositor +1
 			if (canOvipositSpider())
 				score++
-			// TODO Insanity +1 (Gained from merging)
-			// TODO Perk +6 (Arachnid book lung)
-			// TODO Perk +3 (Tracheal)
-			// TODO Perk +3 (Venom gland)
+			// Insanity +1 (Gained from merging)
+			if (hasPerk(PerkLib.Insanity))
+				score++;
+			// Perk +6 (Arachnid book lung)
+			if (hasPerk(PerkLib.ArachnidBookLung))
+				score+=2;
+			if (hasPerk(PerkLib.ArachnidBookLungEvolved))
+				score+=2;
+			if (hasPerk(PerkLib.ArachnidBookLungFinalForm))
+				score+=2;
+			// Perk +3 (Tracheal)
+			if (hasPerk(PerkLib.TrachealSystem))
+				score++;
+			if (hasPerk(PerkLib.TrachealSystemEvolved))
+				score++;
+			if (hasPerk(PerkLib.TrachealSystemFinalForm))
+				score++;
+			// Perk +3 (VenomGland)
+			if (hasPerk(PerkLib.VenomGlands))
+				score++;
+			if (hasPerk(PerkLib.VenomGlandsEvolved))
+				score++;
+			if (hasPerk(PerkLib.VenomGlandsFinalForm))
+				score++;
 			End("Player","racialScore");
 			return score;
 		}

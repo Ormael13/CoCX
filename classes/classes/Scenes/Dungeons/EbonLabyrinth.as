@@ -626,17 +626,54 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		}
 		private function encountersRuletteBossesEL2AtlachNacha():void {
 			spriteSelect(SpriteDb.s_Atlach_16bit);
-			outputText("As you enter the next room you become increasingly wary of the environment. Webs intermingles everywhere in a complex and haunting display sometimes forming something not unlike eldritch symbols and patterns. The room is vast and you can even spot what appears to be shining treasure to the far end, however there is little doubt that this conveniently placed loot is well guarded. ");
-			outputText("As you approach to grab the items your foot gets glued to the web and in an effort to pull it off you cause the webbing to shake on the entirety of the room. You try and back off as countless amounts of red lights appear in the darkness in front of you, the disgusting sounds of tentacles rubbing one after another being heard as a nightmarish creature slowly skitters moves out of the shadow as to access its prey.\n\n");
-			outputText("This horror has the body of a spider but way too many eyes to be one. It has eyes on its leg head and even backs but the most horrifying is its face. The thing's face has no mouth, just a wriggling amalgam of rapidly moving tentacles which flail about wildly in anticipation! You got caught into its web and there's little way you can escape unless you defeat it if only temporarily.\n\n");
+			if (player.atlachFullTfCheck()){
+				outputText("As you enter the next room you recognise it right away." +
+						" These webs, you've been here before! As if on cue red eyes open in the darkness at the other side of the vast room as if staring into your soul." +
+						" You feel a need to submit to this creature as if some deeply ingrained instincts told you it was the rightest thing in the world and to go against it would be the wrongest thing ever." +
+						"\n\nIt would be so easy to give in to the compulsion nagging at your brain right now. On the other hand you could also fight the fiendish spider back again and leave none the worse. What will you do?");
+				menu();
+				addButton(0, "Surender", BecomeAtlach);
+				addButton(1, "Fight", PreCombatAtlach);
+			}
+			else {
+				outputText("As you enter the next room you become increasingly wary of the environment. Webs intermingles everywhere in a complex and haunting display sometimes forming something not unlike eldritch symbols and patterns. The room is vast and you can even spot what appears to be shining treasure to the far end, however there is little doubt that this conveniently placed loot is well guarded. ");
+				outputText("As you approach to grab the items your foot gets glued to the web and in an effort to pull it off you cause the webbing to shake on the entirety of the room. You try and back off as countless amounts of red lights appear in the darkness in front of you, the disgusting sounds of tentacles rubbing one after another being heard as a nightmarish creature slowly skitters moves out of the shadow as to access its prey.\n\n");
+				outputText("This horror has the body of a spider but way too many eyes to be one. It has eyes on its leg head and even backs but the most horrifying is its face. The thing's face has no mouth, just a wriggling amalgam of rapidly moving tentacles which flail about wildly in anticipation! You got caught into its web and there's little way you can escape unless you defeat it if only temporarily.\n\n");
+				startCombat(new AtlachNacha(), true);
+			}
+		}
+		private function BecomeAtlach():void {
+			clearOutput()
+			outputText("You can't fight it anymore, you want this thing. Want it for what? You don't know but as you mindlessly walk toward the beast you muse that you will soon find out." +
+					"\n\nThe spider hisses at your approach, a sound you somehow identify as approval. It gently picks you up and turns you to face away," +
+					" approaching you of the nightmarish tentacular amalgamation that is its face. The tentacle parts way, revealing a large rod not unlike a 16 inch long penis." +
+					" While you admire the thing in awe the spider brutally shove you down into the erect member, hilting itself fully into your pussy." +
+					" You scream in delight seeing white from the deep penetration as the tentacles wrap around your legs pulling them within the writhing mass that is the creature's head." +
+					" Somehow through its penis you begin feeling the rest of the creature's body discovering nerves you didn't know you even had as your spine begins to somehow prolong" +
+					" itself inside the rod that constantly fucks your drooling vagina. Mmm the girl cum that constantly drools from it reminds you of saliva which considering the face of" +
+					" this thing was pretty much a mass of tentacles makes it almost look like you've essentially grown a second foaming mouth." +
+					" The two of you used to be separate entities but are now connected by orgasms like the perfectly aligned piece of the same puzzle." +
+					" Through this connection you feel not only your pussy but a second one beneath your spider abdomen, dripping in excitement." +
+					" Your upper body now locked in a constant copulating state you drool in bliss as you feel something slide out from your lower half which causes an even more intense sensation to overtake you." +
+					" This… this is an ovipositor… this is how you will expel the fertilised eggs you will be producing from now on." +
+					" Clarity dawns on your sex addled mind as you come to the realisation that you are at long last complete." +
+					" It takes you a few minutes to slowly get used to your new state of mind and body and adapt to the pleasure from your constantly orgasming top half," +
+					" now seeking out even greater sensations to feel with your spider genitals." +
+					"");
+		}
+		private function PreCombatAtlach():void {
+			clearOutput()
+			outputText("You ain't gonna let this thing mess with your brain any longer. You draw your weapon prepared to engage it!");
 			startCombat(new AtlachNacha(), true);
 		}
+
+
 		private function encountersRuletteBossesEL2LivingFailure():void {
-			outputText("As you enter the room you are greeted right away by a monstrosity not meant to exist in the waking world.\n\n");
-			outputText("In front of you, sitting in the middle of a pond of ever flowing cum is a 15 feet tall abomination. The creature has the body of a grown man with the head and hooved legs of a goat and that would be weird enough if not for the quartet of bat wings and tentacles at its back. The heart tipped tail alone is enough to hint at its demonic origin but you could have figured that out simply from how ");
-			outputText("vigorously its first set of claw tipped hands jerk its two massive erupting horse cocks under which a quarter of melon sized balls constantly churn with more vile fluids. The thing seems locked in constant orgasm as if the corruption within its body was so unstable the only option was to constantly cum it out yet at the same time it is frozen in a meditative pose, both legs crossed and its ");
-			outputText("two free hand palm to palm as if praying. You're just about to leave when the thing suddenly speaks arcane power sealing your exit with a barrier. Behind the pleasure glazed expression of its eyes you can see it's malevolent intensions. It's not going to let you leave.\n\n");
-			startCombat(new LivingFailure(), true);
+				outputText("As you enter the room you are greeted right away by a monstrosity not meant to exist in the waking world.");
+				outputText("\n\nIn front of you, sitting in the middle of a pond of ever flowing cum is a 15 feet tall abomination. The creature has the body of a grown man with the head and hooved legs of a goat and that would be weird enough if not for the quartet of bat wings and tentacles at its back. The heart tipped tail alone is enough to hint at its demonic origin but you could have figured that out simply from how ");
+				outputText("vigorously its first set of claw tipped hands jerk its two massive erupting horse cocks under which a quarter of melon sized balls constantly churn with more vile fluids. The thing seems locked in constant orgasm as if the corruption within its body was so unstable the only option was to constantly cum it out yet at the same time it is frozen in a meditative pose, both legs crossed and its ");
+				outputText("two free hand palm to palm as if praying. You're just about to leave when the thing suddenly speaks arcane power sealing your exit with a barrier. Behind the pleasure glazed expression of its eyes you can see it's malevolent intensions. It's not going to let you leave.\n\n");
+				startCombat(new LivingFailure(), true);
 		}
 		
 		/*private function encountersRuletteBossesEL2AtlachNacha():void {

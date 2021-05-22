@@ -262,6 +262,7 @@
 		<key src="#FF0000" base="iris"/>
 		<key src="#AA0000" base="iris" transform="darken(25)"/>
         <key src="#FBCAAE" base="skin" transform="darken(25);saturate(25);shiftTo(0,25,25)"/>
+		<key src="#ECB596" base="skin" transform="darken(50);saturate(25);shiftTo(0,25,25)"/>
         <!--<key src="#FFFFFF" base="sclera"/>-->
         <!--<key src="#0026FF" base="iris"/>-->
     </colorkeys>
@@ -2477,7 +2478,7 @@
                 <show part="hands/fur"/>
                 <show part="hands_bg/fur"/>
 				<if test="legCount==2">
-					<if test="lowerBody==LowerBody.WOLF">
+					<if test="(lowerBody==LowerBody.WOLF) and (playerWearsAStanceBannedDress == false) and (playerWearsAStanceBannedArmor == false)">
 						<hide part="arms/*"/>
 						<hide part="arms_bg/*"/>
 						<hide part="hands/*"/>
@@ -2595,7 +2596,7 @@
                 <show part="hands_bg/devil"/>
             </case>
             <case values="Arms.HINEZUMI">
-				<if test="lowerBody==LowerBody.HINEZUMI">
+				<if test="(lowerBody==LowerBody.HINEZUMI) and (playerWearsAStanceBannedDress == false) and (playerWearsAStanceBannedArmor == false)">
 					<hide part="arms/*"/>
 					<hide part="arms_bg/*"/>
 					<hide part="weapon/*"/>
@@ -2769,7 +2770,7 @@
 							</if>
 					</case>
 					<case test="lowerBody==LowerBody.HINEZUMI">
-						<if test="arms.type==Arms.HINEZUMI">
+						<if test="(arms.type==Arms.HINEZUMI) and (playerWearsAStanceBannedDress == false) and (playerWearsAStanceBannedArmor == false)">
 							<hide part="legs/*"/>
 							<hide part="feet/*"/>
 							<else>
@@ -3061,7 +3062,7 @@
                     <show part="legs_fg/cattaur"/>
 					<else>
 						<switch>
-							<case test="arms.type==Arms.WOLF">
+							<case test="(arms.type==Arms.WOLF) and (playerWearsAStanceBannedDress == false) and (playerWearsAStanceBannedArmor == false)">
 								<hide part="legs/*"/>
 								<hide part="feet/*"/>
 								<switch>
@@ -4029,6 +4030,12 @@
 					<show part="clothe/TamamoeNoMaeKimonoLowerTop"/>
 					<show part="clotheLegs/TamamoeNoMaeKimonoLegs"/>
 					<show part="clothCape/TamamoeNoMaeKimonoUnder"/>
+					<else>
+						<if test="showLegClothing==false">
+							<show part="clothe/TamamoeNoMaeKimonoLowerTop"/>
+							<show part="clothCape/TamamoeNoMaeKimonoUnder"/>
+						</if>
+					</else>
 				</if>
 				<if test="showArmClothing">
 					<show part="clothe/TamamoeNoMaeKimonoSleeves"/>
@@ -4036,12 +4043,19 @@
 				</if>
 			</if>
 		</if>
+		
 		<if test="OniLegendaryKimono">
 			<if test="showClothing">
 				<show part="clothe/OniKimonoTop"/>
 				<if test="(legCount!=4) and (showLegClothing)">
 					<show part="clothe/OniKimonoLowerTop"/>
 					<show part="clothCape/OniKimonoUnder"/>
+					<else>
+						<if test="showLegClothing==false">
+							<show part="clothe/TamamoeNoMaeKimonoLowerTop"/>
+							<show part="clothCape/TamamoeNoMaeKimonoUnder"/>
+						</if>
+					</else>
 				</if>
 				<if test="showArmClothing">
 					<show part="clothe/OniKimonoSleeves"/>
