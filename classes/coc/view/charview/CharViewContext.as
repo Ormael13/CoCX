@@ -103,6 +103,13 @@ import coc.xlogic.ExecContext;
 					PlayerHasABowHoly:player.weaponRange == game.weaponsrange.ARTEMIS,
 					PlayerHasABowUnholy:player.weaponRange == game.weaponsrange.WILDHUN,
 
+					PlayerHasAThrownWeapon: player.isThrownTypeWeapon(),
+					PlayerHasAJavelin: player.weaponRange == game.weaponsrange.TRJAVEL || player.weaponRange == game.weaponsrange.GTHRSPE || player.weaponRange == game.weaponsrange.KSLHARP || player.weaponRange == game.weaponsrange.LEVHARP,
+					PlayerHasAJavelinHoly:player.weaponRange == game.weaponsrange.KSLHARP,
+					PlayerHasAJavelinUnholy:player.weaponRange == game.weaponsrange.LEVHARP,
+					PlayerHasAThrownAxe:player.weaponRange == game.weaponsrange.GTHRAXE,
+					PlayerHasLactoBlaster:player.weaponRange == game.weaponsrange.LBLASTR,
+
 					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],
 					FireBuff: player.hasStatusEffect(StatusEffects.FlameBlade),
 
@@ -173,6 +180,7 @@ import coc.xlogic.ExecContext;
 					travelingMerchantOutfit: player.armor == game.armors.TRMOUTF,
 					chainMailBikini: player.armor == game.armors.CHBIKNI || player.armor == game.armors.LMARMOR,
 					platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
+					elfClothing: player.armor == game.armors.ERA,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,

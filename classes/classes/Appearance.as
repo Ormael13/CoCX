@@ -29,7 +29,7 @@ public class Appearance extends Utils
 				return "hair";
 		}
 
-		public static function hairDescription(i_creature:Creature):String
+		public static function hairDescription(i_creature:Creature, longDesc:Boolean = false):String
 		{
 			var description:String = "";
 			var options:Array;
@@ -92,58 +92,29 @@ public class Appearance extends Utils
 			//
 			// HAIR WORDS
 			//
+
+			const hairObj: Object = Hair.Types[i_creature.hairType];
+
+			var hair:String = "hair";
+
 			//If furry and longish hair sometimes call it a mane (50%)
 			if (i_creature.hasFur() == 1 && i_creature.hairLength > 3 && rand(2) == 0) {
-				if (i_creature.hairType == Hair.FEATHER) description += "feather-";
-				else if (i_creature.hairType == Hair.GHOST) description += "transparent ";
-				else if (i_creature.hairType == Hair.GOO) description += "goo-";
-				else if (i_creature.hairType == Hair.ANEMONE) description += "tentacle-";
-				else if (i_creature.hairType == Hair.QUILL) description += "quill-";
-				else if (i_creature.hairType == Hair.GORGON) description += "snakes that replaced your ";
-				else if (i_creature.hairType == Hair.LEAF) description += "leaf-";
-				else if (i_creature.hairType == Hair.FLUFFY) description += "fluffy ";
-				else if (i_creature.hairType == Hair.GRASS) description += "grass-";
-				else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
-				else if (i_creature.hairType == Hair.FAIRY) description += "otherworldly, silk-like and almost translucent ";
-				else if (i_creature.hairType == Hair.BURNING) description += "burning ";
-				else if (i_creature.hairType == Hair.SNOWY) description += "snowy ";
-				else if (i_creature.hairType == Hair.CRAZY) description += "crazy ";
-				description += "mane";
-				if (i_creature.hairType == Hair.STORM) description += ". The tips ends with glowing lightning shaped locks";
-				if (i_creature.hairType == Hair.RATATOSKR) description += ". They are stripped at the center with light tips not unlike the head of a chipmunk or Ratatoskr.";
-				return description;
+				hair += "mane";
 			}
-			//if medium length refer to as locks sometimes
-			//CUT - locks is plural and screws up tense.
-			/*if(creature.hairLength >= 3 && creature.hairLength < 16 && rand(2) == 0) {
-			 descript += "locks of hair";
-			 return descript;
-			 }*/
-			//If nothing else used, use hair!
-			if (i_creature.hairType == Hair.FEATHER) description += "feather-";
-			else if (i_creature.hairType == Hair.GHOST) description += "transparent ";
-			else if (i_creature.hairType == Hair.GOO) description += "goo-";
-			else if (i_creature.hairType == Hair.ANEMONE) description += "tentacle-";
-			else if (i_creature.hairType == Hair.QUILL) description += "quill-";
-			else if (i_creature.hairType == Hair.GORGON) description += "snakes that replaced your ";
-			else if (i_creature.hairType == Hair.LEAF) description += "leaf-";
-			else if (i_creature.hairType == Hair.FLUFFY) description += "fluffy ";
-			else if (i_creature.hairType == Hair.GRASS) description += "grass-";
-			else if (i_creature.hairType == Hair.SILKEN) description += "silk-like ";
-			else if (i_creature.hairType == Hair.FAIRY) description += "otherworldly, silk-like and almost translucent ";
-			else if (i_creature.hairType == Hair.SNOWY) description += "snowy ";
-			else if (i_creature.hairType == Hair.CRAZY) description += "crazy ";
-			if (i_creature.hairType == Hair.BURNING) description += "mane of fire that burns things only when you wish it to";
-			else description += "hair";
-			if (i_creature.hairType == Hair.STORM) description += ". The tips ends with glowing lightning shaped locks";
-			if (i_creature.hairType == Hair.RATATOSKR) description += ". They are stripped at the center with light tips not unlike the head of a chipmunk or Ratatoskr.";
-			else if (i_creature.hairType == Hair.SNOWY) {
-				description += " are human in appearance but snow flurries regularly nest within them";
-				if (i_creature.rearBody.type == RearBody.GLACIAL_AURA) description += " your bone chilling aura might have something to do with that";
+
+			if (longDesc) {
+				description += (hairObj.longDesc || hairObj.shortDesc || "hair").replace('{hair}', hair);
+			} else {
+				description += (hairObj.shortDesc || hairObj.longDesc || "hair").replace('{hair}', hair);
 			}
+
+			if (i_creature.hairType == Hair.SNOWY && i_creature.rearBody.type == RearBody.GLACIAL_AURA) {
+				description += ", which might be related to your bone chilling aura";
+			}
+
 			return description;
 		}
-		
+
 		public static function beardDescription(i_creature:Creature):String
 		{
 			var description:String = "";
@@ -160,20 +131,20 @@ public class Appearance extends Utils
 				description = randomChoice(options) + " chin and cheeks";
 				return description;
 			}
-			if (i_creature.beardLength < 0.2) {
+			else if (i_creature.beardLength < 0.2) {
 				options = ["close-cropped, ",
 					"trim, ",
 					"very short, "];
 				description += randomChoice(options);
 			}
-			if (i_creature.beardLength >= 0.2 && i_creature.beardLength < 0.5) description += "short, ";
-			if (i_creature.beardLength >= 0.5 && i_creature.beardLength < 1.5) description += "medium, ";
-			if (i_creature.beardLength >= 1.5 && i_creature.beardLength < 3) description += "moderately long, ";
-			if (i_creature.beardLength >= 3 && i_creature.beardLength < 6) {
+			else if (i_creature.beardLength >= 0.2 && i_creature.beardLength < 0.5) description += "short, ";
+			else if (i_creature.beardLength >= 0.5 && i_creature.beardLength < 1.5) description += "medium, ";
+			else if (i_creature.beardLength >= 1.5 && i_creature.beardLength < 3) description += "moderately long, ";
+			else if (i_creature.beardLength >= 3 && i_creature.beardLength < 6) {
 				if (rand(2) == 0) description += "long, ";
 				else description += "neck-length, ";
 			}
-			if (i_creature.beardLength >= 6) {
+			else if (i_creature.beardLength >= 6) {
 				if (rand(2) == 0) description += "very long, ";
 				description += "chest-length, ";
 			}
@@ -184,16 +155,13 @@ public class Appearance extends Utils
 			//
 			// BEARD WORDS
 			// Follows hair type.
-			if (i_creature.hairType == 1) description += "";
-			else if (i_creature.hairType == 2) description += "transparent ";
-			else if (i_creature.hairType == 3) description += "gooey ";
-			else if (i_creature.hairType == 4) description += "tentacley ";
-			else if (i_creature.hairType == 7) description += "moss ";
-			
-			if (i_creature.beardStyle == 0) description += "beard";
-			else if (i_creature.beardStyle == 1) description += "goatee";
-			else if (i_creature.beardStyle == 2) description += "clean-cut beard";
-			else if (i_creature.beardStyle == 3) description += "mountain-man beard";
+			const hairObj: Object = Hair.Types[i_creature.hairType];
+
+			description += hairObj.beardDesc || "";
+
+			const beardStyles: Array = ["beard", "goatee", "clean-cut beard", "mountain-man beard"];
+
+			description += beardStyles[i_creature.beardStyle];
 
 			return description;
 		}
@@ -201,14 +169,8 @@ public class Appearance extends Utils
 		public static function hairStyleDescription(i_creature:Creature):String
 		{
 			var description:String = "";
-			var options:Array;
-			//
-			if (i_creature.hairStyle == 0) description += "plain";
-			else if (i_creature.hairStyle == 1) description += "wild";
-			else if (i_creature.hairStyle == 2) description += "ponytail";
-			else if (i_creature.hairStyle == 3) description += "Long tied up";
-			else if (i_creature.hairStyle == 4) description += "twin pigtail";
-			else if (i_creature.hairStyle == 5) description += "dwarven";
+			var options: Array = ["plain", "wild", "ponytail", "long tied up", "twin pigtail", "dwarven"];
+			description += options[i_creature.hairStyle];
 
 			return description;
 		}
@@ -423,28 +385,6 @@ public class Appearance extends Utils
 				else description += "nipple";
 			}
 			return description;
-			/*OLD
-			 if(creature.breastRows[rowNum].lactationMultiplier >= 1.5 && creature.breastRows[rowNum].lactationMultiplier < 1.75) {
-			 if(creature.breastRows[rowNum].milkFullness > 75) return "over-full leaking teat";
-			 if(rand(2) == 0) return "milky teat";
-			 else return "milk spout";
-			 }
-			 if(creature.breastRows[rowNum].lactationMultiplier >= 1.75) {
-			 if(creature.breastRows[rowNum].milkFullness > 75) return "over-full leaking teat";
-			 if(rand(2) == 0) return "milk-drooling teat";
-			 else return "drippy cow-teat";
-			 }
-			 if(creature.lust > 75) {
-			 if(rand(2) == 0) return "painfully hard nipple";
-			 else return "over-stimulated nipple";
-			 }
-			 if(creature.lust > 50) {
-			 if(rand(2) == 0) return "erect nipple";
-			 else return "hard nipple";
-			 }
-			 if(creature.breastRows[rowNum].milkFullness > 75) return "milky over-full nipple";
-			 return "nipple";
-			 */
 		}
 
 		public static function hipDescription(i_creature:Creature):String
@@ -532,74 +472,6 @@ public class Appearance extends Utils
 
 			return description;
 		}
-
-/* This special version was only called from Creature.cockMultiLDescriptionShort, and then only if the creature had just one cock.
-	The cock index of 99 was never used, so the extra cock names at the end of the function were never seen as output.
-	Replaced with a call to the more common cockDesript function.
-		public static function cockDescription(i_creature:Creature, i_cockIndex:Number):String
-		{
-			if (i_creature.totalCocks() == 0) {
-				CoC_Settings.error("<b>ERROR: CockDescript Called But No Cock Present</b>");
-				return "<b>ERROR: CockDescript Called But No Cock Present</b>";
-			}
-			if (i_creature.totalCocks() <= i_cockIndex || (i_cockIndex == 99 || i_cockIndex == -1)) {
-				CoC_Settings.error("<b>ERROR: CockDescript called with index of " + i_cockIndex + " - out of BOUNDS</b>");
-				return "<b>ERROR: CockDescript called with index of " + i_cockIndex + " - out of BOUNDS</b>";
-			}
-
-			//Cocknum 99 to default to boring descriptions!
-			if (i_cockIndex != 99) {
-				switch (i_creature.cocks[i_cockIndex].cockType) {
-					case CockTypesEnum.ANEMONE:
-					case CockTypesEnum.BEE:
-					case CockTypesEnum.CAT:
-					case CockTypesEnum.DEMON:
-					case CockTypesEnum.DISPLACER:
-					case CockTypesEnum.DOG:
-					case CockTypesEnum.DRAGON:
-					case CockTypesEnum.FOX:
-					case CockTypesEnum.HORSE:
-					case CockTypesEnum.HUMAN:
-					case CockTypesEnum.KANGAROO:
-					case CockTypesEnum.LIZARD:
-					case CockTypesEnum.PIG:
-					case CockTypesEnum.TENTACLE:
-						return cockNoun(i_creature.cocks[i_cockIndex].cockType);
-					default:
-						CoC_Settings.error("cockDescription failed to describe your cock");
-						trace("ERROR: Cock type failed to match. " + i_creature.cocks[i_cockIndex].cockType);
-						return "cockDescription failed to describe your cock";
-				}
-			}
-			i_cockIndex = 0; //I'm pretty sure this 99 business never gets used anywhere in the code, so this whole lower part of the function is probably orphaned code.
-
-			var description:String = "";
-			var options:Array;
-
-			//50% of the time add a descriptor
-			if (rand(2) == 0)
-				description += i_creature.cockAdjective(i_cockIndex) + " ";
-			var rando:Number = 0;
-			options = ["cock",
-				"prick",
-				"pecker",
-				"shaft",
-				"dick",
-				"manhood",
-				"member",
-				"meatstick",
-				"schlong",
-				"wang",
-				"fuckpole",
-				"package",
-				"love muscle",
-				"rod",
-				"anaconda"];
-			description += randomChoice(options);
-
-			return description;
-		}
-*/
 
 		public static function cockDescript(creature:Creature, cockIndex:Number = 0):String
 		{
@@ -952,149 +824,6 @@ public class Appearance extends Utils
 			if (girth <= 3.5) return randomChoice("fat", "distended", "wide");
 			return randomChoice("inhumanly distended", "monstrously thick", "bloated");
 		}
-		
-/* Old Version
-		public static function cockAdjective(i_creature:Creature, i_cockIndex:Number = -1):String
-		{
-			var description:String = "";
-			var multi:Boolean = false;
-			var options:Array;
-
-			//If used for multiple cocks, set multi flag
-			if (i_cockIndex < 0) {
-				//Since we have multi dicks lets talk about the biggest!
-				i_cockIndex = i_creature.biggestCockIndex();
-				multi = true;
-			}
-			//Pierced - 1/5 chance
-			if (!multi && rand(5) == 0 && i_creature.cocks[i_cockIndex].pierced > 0) {
-				description += "pierced";
-			}
-			else if (!multi && rand(5) == 0 && i_creature.cocks[i_cockIndex].sock != "") {
-				options = ["sock-sheathed",
-					"garment-wrapped",
-					"smartly dressed",
-					"cloth-shrouded",
-					"fabric swaddled",
-					"covered"];
-				description += randomChoice(options);
-			}
-			//Goo - 1/4 chance
-			else if (i_creature.skinType == 3 && rand(4) == 0) {
-				options = ["goopey",
-					"gooey",
-					"slimy"];
-				description += randomChoice(options);
-			}
-			//Length 1/3 chance
-			else if (rand(3) == 0) {
-				if (i_creature.cocks[i_cockIndex].cockLength < 3) {
-					options = ["little",
-						"toy-sized",
-						"mini",
-						"budding",
-						"tiny"];
-					description += randomChoice(options);
-				}
-				else if (i_creature.cocks[i_cockIndex].cockLength < 5) {
-					description += randomChoice("short", "small");
-				}
-				else if (i_creature.cocks[i_cockIndex].cockLength < 7) {
-					description += randomChoice("fair-sized", "nice");
-				}
-				else if (i_creature.cocks[i_cockIndex].cockLength < 11) {
-					options = ["sizable"];
-
-					if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.HORSE) {
-						options.push("pony-sized", "colt-like");
-					}
-					else
-						options.push("long", "lengthy");
-
-					description += randomChoice(options);
-				}
-				else if (i_creature.cocks[i_cockIndex].cockLength < 14) {
-					options = ["huge", "foot-long"];
-					if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.DOG)
-						options.push("mastiff-like");
-					else
-						options.push("cucumber-length");
-					description += randomChoice(options);
-				}
-				else if (i_creature.cocks[i_cockIndex].cockLength < 18) {
-					description += randomChoice("massive", "knee-length", "forearm-length");
-				}
-				else if (i_creature.cocks[i_cockIndex].cockLength < 30) {
-					description += randomChoice("enormous", "giant", "arm-like");
-				}
-				else {
-					if (i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.TENTACLE && rand(2) == 0)
-						description += "coiled ";
-					else {
-						options = ["towering",
-							"freakish",
-							"monstrous",
-							"massive"];
-						description += randomChoice(options);
-					}
-				}
-			}
-			//Hornyness 1/2
-			else if (i_creature.lust > 75 && rand(2) == 0) {
-				//Uber horny like a baws!
-				if (i_creature.lust > 90) {
-					//Weak as shit cum
-					if (i_creature.cumQ() < 50) {
-						description += randomChoice("throbbing", "pulsating");
-					}
-					//lots of cum? drippy.
-					else if (i_creature.cumQ() < 200) {
-						description += randomChoice("dribbling", "leaking", "drooling");
-					}
-					//Tons of cum
-					else {
-						description += randomChoice("very drippy", "pre-gushing", "cum-bubbling", "pre-slicked", "pre-drooling");
-					}
-				}
-				//A little less lusty, but still lusty.
-				else if (i_creature.lust > 75) {
-					if (i_creature.cumQ() < 50) {
-						description += randomChoice("turgid", "blood-engorged", "rock-hard", "stiff", "eager");
-					}
-					//A little drippy
-					else if (i_creature.cumQ() < 200) {
-						description += randomChoice("turgid", "blood-engorged", "rock-hard", "stiff", "eager", "fluid-beading", "slowly-oozing");
-					}
-					//uber drippy
-					else {
-						description += randomChoice("dribbling", "drooling", "fluid-leaking", "leaking");
-					}
-				}
-			}
-			//Girth - fallback
-			else {
-				if (i_creature.cocks[i_cockIndex].cockThickness <= .75) {
-					description += randomChoice("thin", "slender", "narrow");
-				}
-				else if (i_creature.cocks[i_cockIndex].cockThickness <= 1.2) {
-					description += "ample";
-				}
-				else if (i_creature.cocks[i_cockIndex].cockThickness <= 1.4) {
-					description += randomChoice("ample", "big");
-				}
-				else if (i_creature.cocks[i_cockIndex].cockThickness <= 2) {
-					description += randomChoice("broad", "meaty", "girthy");
-				}
-				else if (i_creature.cocks[i_cockIndex].cockThickness <= 3.5) {
-					description += randomChoice("fat", "distended", "wide");
-				}
-				else if (i_creature.cocks[i_cockIndex].cockThickness > 3.5) {
-					description += randomChoice("inhumanly distended", "monstrously thick", "bloated");
-				}
-			}
-			return description;
-		}
-*/
 
 		//Cock adjectives for single cock
 		private static function cockAdjectives(i_cockLength:Number, i_cockThickness:Number, i_cockType:CockTypesEnum, i_creature:Creature):String
@@ -1403,66 +1132,6 @@ public class Appearance extends Utils
 			return description;
 		}
 
-		//TODO Give Method a better name
-		/**
-		 * Descripes cocks, either singular ("one of"/"one of your") or each ("each of"/"each of your").
-		 * @param    i_creature Creature type, either Player or Monster
-		 * @param    i_capitalised Capitalised for start of sentence.
-		 * @param    i_singular true = "one of", false = "each"
-		 * @return    Short description of cock(s)
-		 */
-		/* No longer used - replaced by the sMultiCockDesc, SMultiCockDesc, oMultiCockDesc, OMultiCockDesc functions in Creature.as
-		public static function cockMultiDesc(i_creature:Creature, i_capitalised:Boolean, i_singular:Boolean):String
-		{
-			var description:String = "";
-			var notCapitalised:Boolean = false;
-			if (i_creature.totalCocks() > 1) {
-				if (i_singular) {
-					(i_capitalised) ? description += "O" : description += "o";
-					description += "ne of ";
-				}
-				else {
-					(i_capitalised) ? description += "E" : description += "e";
-					description += "ach of ";
-				}
-				notCapitalised = true;
-			}
-
-			(i_capitalised && !(notCapitalised)) ? description += "Y" : description += "y";
-			description += "our ";
-
-			description += cockMultiLDescriptionShort(i_creature);
-			return description;
-		}
-
-		public static function cockMultiLDescriptionShort(i_creature:Creature):String
-		{
-			var description:String = "";
-			if (i_creature.cocks.length < 1) {
-				CoC_Settings.error("<b>ERROR: NO WANGS DETECTED for cockMultiLightDesc()</b>");
-				return "<b>ERROR: NO WANGS DETECTED for cockMultiLightDesc()</b>";
-			}
-			if (i_creature.horseCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.HORSE);
-			else if (i_creature.cocks[0] == CockTypesEnum.BEE) description += cockNoun(CockTypesEnum.BEE);
-			else if (i_creature.dogCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.DOG);
-			else if (i_creature.demonCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.DEMON);
-			else if (i_creature.tentacleCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.TENTACLE);
-			else if (i_creature.catCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.CAT);
-			else if (i_creature.lizardCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.LIZARD);
-			else if (i_creature.anemoneCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.ANEMONE);
-			else if (i_creature.kangaCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.KANGAROO);
-			else if (i_creature.dragonCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.DRAGON);
-			else if (i_creature.displacerCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.DISPLACER);
-			else if (i_creature.foxCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.FOX);
-			else description += cockNoun(CockTypesEnum.HUMAN);
-			//Add s if plural
-			if (i_creature.cockTotal() > 1) description += "s";
-			//Reset to normal description if singular
-			else description = cockDescription(i_creature, 0);
-			return description;
-		}
-		*/
-
 		/**
 		 * Describe creatures balls.
 		 * @param    i_forcedSize    Force a description of the size of the balls
@@ -1657,14 +1326,6 @@ public class Appearance extends Utils
 			return description;
 		}
 
-/* Moved to Creature.as
-		public static function sheathDescription(i_character:Character):String
-		{
-			if (i_character.hasSheath()) return "sheath";
-			else return "base";
-		}
-*/
-
 		public static function vaginaDescript(i_creature:Creature, i_vaginaIndex:Number = 0, forceDesc:Boolean=false):String
 		{
 			if (i_vaginaIndex > (i_creature.vaginas.length - 1)) {
@@ -1759,7 +1420,7 @@ public class Appearance extends Utils
 
 			if (description != "")
 				description += " ";
-				
+
 			if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) { //Removes something that might offend sensitive people.
 				options = ["vagina",
 				"pussy",
@@ -1780,7 +1441,7 @@ public class Appearance extends Utils
 			description += randomChoice(options);
 			//Something that would be nice to have but needs a variable in Creature or Character.
 			//if(i_creature.bunnyScore() >= 3) description += "rabbit hole";
-			
+
 			return description;
 		}
 
@@ -2190,7 +1851,7 @@ public class Appearance extends Utils
 						"derriere",
 						"rump",
 						"bottom"];
-			
+
 			description += randomChoice(options);
 			//if(rando == 2) desc += "cheeks";
 			return description;
@@ -2269,12 +1930,12 @@ public class Appearance extends Utils
 		public static function assholeDescript(i_creature:Creature, forceDesc:Boolean=false):String
 		{
 			var description:String = "";
-			
+
 			// The way this was setup didn't work. Trying to inline-define object key-values wasn't looking up the variable *VALUES* it was using the string representation
 			// of the variable name as the key.
 			// ie, querying ANAL_WETNESS_DESCRIPTORS[0] would actually return "undefined" rather than "".
 			// This is just fucking awful but I'm just making things work in the face of bugs I'm running into.
-			
+
 			// 66% Wetness Descript
 			var ANAL_WETNESS_DESCRIPTORS:Object                       = new Object();
 			ANAL_WETNESS_DESCRIPTORS[AssClass.WETNESS_DRY]            = "";
@@ -2283,12 +1944,12 @@ public class Appearance extends Utils
 			ANAL_WETNESS_DESCRIPTORS[AssClass.WETNESS_SLIMY]          = "slimy ";
 			ANAL_WETNESS_DESCRIPTORS[AssClass.WETNESS_DROOLING]       = "drooling ";
 			ANAL_WETNESS_DESCRIPTORS[AssClass.WETNESS_SLIME_DROOLING] = "slime-drooling ";
-			
+
 			if (forceDesc || rand(3) <= 1)
 			{
 				description += ANAL_WETNESS_DESCRIPTORS[i_creature.ass.analWetness];
 			}
-			
+
 			var ANAL_TIGHTNESS_DESCRIPTORS:Object                    = new Object();
 			ANAL_TIGHTNESS_DESCRIPTORS[AssClass.LOOSENESS_VIRGIN]    = "virgin ";
 			ANAL_TIGHTNESS_DESCRIPTORS[AssClass.LOOSENESS_TIGHT]     = "tight ";
@@ -2296,13 +1957,13 @@ public class Appearance extends Utils
 			ANAL_TIGHTNESS_DESCRIPTORS[AssClass.LOOSENESS_LOOSE]     = "roomy ";
 			ANAL_TIGHTNESS_DESCRIPTORS[AssClass.LOOSENESS_STRETCHED] = "stretched ";
 			ANAL_TIGHTNESS_DESCRIPTORS[AssClass.LOOSENESS_GAPING]    = "gaping ";
-			
+
 			//25% tightness description
 			if (forceDesc || rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2))
 			{
 				description += ANAL_TIGHTNESS_DESCRIPTORS[i_creature.ass.analLooseness];
 			}
-			
+
 			//asshole descriptor
 			if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) {
 			description += randomChoice("rear end",
@@ -2318,7 +1979,7 @@ public class Appearance extends Utils
 			}
 			return description;
 		}
-		
+
 		public static function wingsDescript(i_creature:Creature):String
 		{
 			return Wings.Types[i_creature.wings.type].name + " wings";
@@ -2341,114 +2002,6 @@ public class Appearance extends Utils
 			return Antennae.Types[i_creature.antennae.type].name + " antennae";
 		}
 
-/* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().
-		private static function humanDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.HUMAN);
-			return descript;
-		}
-
-		private static function kangaDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.KANGAROO);
-			return descript;
-		}
-
-		public static function dogDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.DOG);
-			return descript;
-		}
-
-		private static function foxDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.FOX);
-			return descript;
-		}
-
-		private static function tentacleDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.TENTACLE);
-			return descript;
-		}
-
-		private static function demonDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.DEMON);
-			return descript;
-		}
-
-
-		//Horsecock + Descript
-		public static function horseDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.HORSE);
-			return descript;
-		}
-
-		private static function catDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.CAT);
-			return descript;
-		}
-
-		private static function anemoneDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.ANEMONE);
-			return descript;
-		}
-
-		private static function dragonDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.DRAGON);
-			return descript;
-		}
-
-		private static function displacerDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.DISPLACER);
-			return descript;
-		}
-
-		private static function snakeDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.LIZARD);
-			return descript;
-		}
-
-		private static function pigDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.PIG);
-			return descript;
-		}
-*/
-		
 		public static const BREAST_CUP_NAMES:Array = [
 			"flat",//0
 			//				1			2			3			4			5				6			7		8			9
@@ -2706,7 +2259,7 @@ public class Appearance extends Utils
 			return storage;
 
 		}
-		
+
 		public static function tailDescript(i_creature:Creature):String
 		{
 			if (i_creature.tailType == Tail.NONE)
@@ -2714,9 +2267,9 @@ public class Appearance extends Utils
 				trace("WARNING: Creature has no tails to describe.");
 				return "<b>!Creature has no tails to describe!</b>";
 			}
-			
+
 			var descript:String = "";
-			
+
 			if (i_creature.tailType == Tail.FOX && i_creature.tailCount >= 1)
 			{
 				// Kitsune tails, we're using tailCount to track tail count
@@ -2727,7 +2280,7 @@ public class Appearance extends Utils
 					else if (i_creature.tailCount == 4) descript += "quartet ";
 					else if (i_creature.tailCount == 5) descript += "quintet ";
 					else if (i_creature.tailCount > 5) descript += "bundle ";
-					
+
 					descript += "of kitsune tails";
 				}
 				else descript += "kitsune tail";
@@ -2743,10 +2296,10 @@ public class Appearance extends Utils
 				descript += Tail.Types[i_creature.tailType].name;
 				descript += " tail";
 			}
-			
+
 			return descript;
 		}
-		
+
 		public static function oneTailDescript(i_creature:Creature):String
 		{
 			if (i_creature.tailType == Tail.NONE)
@@ -2754,9 +2307,9 @@ public class Appearance extends Utils
 				trace("WARNING: Creature has no tails to describe.");
 				return "<b>!Creature has no tails to describe!</b>";
 			}
-			
+
 			var descript:String = "";
-			
+
 			if (i_creature.tailType == Tail.FOX && i_creature.tailCount >= 1)
 			{
 				if (i_creature.tailCount == 1)
@@ -2783,7 +2336,7 @@ public class Appearance extends Utils
 			{
 				descript += "your " + Tail.Types[i_creature.tailType].name + " tail";
 			}
-			
+
 			return descript;
 		}
 
@@ -2878,7 +2431,7 @@ public class Appearance extends Utils
 			}
 			return descript;
 		}
-		
+
 /* Moved to Creature.as
 		public static function chestDesc(creature:Creature):String
 		{

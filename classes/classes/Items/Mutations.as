@@ -41,7 +41,7 @@ public final class Mutations extends MutationsHelper {
     //const BIKINI_ARMOR_BONUS:int = 769;
 
     public var emberTFchanges:EmberTF = new EmberTF();
-	
+
 	public function blockingBodyTransformations():Boolean {
 		return player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.WendigoCurse);
 	}
@@ -3859,7 +3859,7 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
         }*/
     }
-	
+
 	public function redManuscript(player:Player):void {
 		clearOutput();
         outputText("You open the red manuscript and discover it to be an instructional on the use of blood magic.  The book shares generic information about blood magic, generally what you'd expect anyway - how to draw it using your blood as well as the positive and negative effects of repeated use.  It doesn't take long to read a few pages, but before you can stow it away for later, the book vanishes within your hands. The same metallic scent lingers on your [claws], the lingering smell of blood is stained on you... at least for the time being.");
@@ -3903,7 +3903,7 @@ public final class Mutations extends MutationsHelper {
 			}*/
 		}
 	}
-	
+
 	public function crimsonJade(player:Player):void {
 		clearOutput();
         outputText("You touch the crimson jade only to discover that it seems to be an instructional on the use of blood soulskills. The jade shares generic information about blood soulskills. The contents seem to go over the basics; how to draw power using your blood as well as the consequences of repeated use, beneficial or not.\n\n");
@@ -8614,7 +8614,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Wings
         if (player.wings.type != Wings.FEATHERED_AVIAN && player.arms.type == Arms.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
-            if (player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.DRACONIC_HUGE || player.wings.type == Wings.BAT_LIKE_TINY || player.wings.type == Wings.BAT_LIKE_LARGE || player.wings.type == Wings.BAT_LIKE_LARGE_2 || player.wings.type == Wings.BAT_ARM || player.wings.type == Wings.VAMPIRE) {
+            if (player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.DRACONIC_HUGE || player.wings.type == Wings.BAT_LIKE_TINY || player.wings.type == Wings.BAT_LIKE_LARGE || player.wings.type == Wings.BAT_LIKE_LARGE_2 || Arms.canFly(player.arms.type) || player.wings.type == Wings.VAMPIRE) {
                 outputText("\n\nYour wings feel suddenly heavier, and you’re forced to sit down to keep balance. Putting attention to the things happening at your back, you realize that the scales covering them are falling!");
                 outputText("\n\nA bit alarmed, you’re surprised when, not much later, feathers started sprouting everywhere on them. t all the same, as long ones grow at the base, while shorter ones appear on the upper part of them and near your shoulders. When all the growth is finished, your wings are left with a much more bird-like appearance.");
                 outputText("\n\n<b>In the end, your pair of now avian wings will carry you to skies with ease.</b>");
@@ -9662,6 +9662,13 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Physical
+        if (player.faceType != Face.ELF && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            if (player.faceType == Face.HUMAN) {
+                outputText("\n\nYou feel tingling across your visage as some small changes begin to happen to it. Curious, you go look down by the nearest pool of water and notice to your amazement that the general shape of your mouth has changed to be in perfect alignment! No tooth is misaligned and your disarming, innocent smile revealing pearlescent white teeth would melt the coldest of hearts.<b>Guess your face is more like that of an elf now.</b>");
+                setFaceType(Face.ELF);
+            } else humanizeFace();
+            changes++;
+        }
         if (player.lowerBody != LowerBody.ELF && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
                 outputText("\n\nSomething shifts in your legs as you feel almost supernatural agility imbue your steps granting a nymph like grace to your stride. Your feet are no longer rough but delicate and agile like those of an elf. <b>You now have agile elven feet.</b>");
@@ -10209,7 +10216,7 @@ public final class Mutations extends MutationsHelper {
         }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
-	
+
 	public function eyeDrops(type:Number, player:Player):void {
         player.slimeFeed();
         clearOutput();
@@ -17033,7 +17040,7 @@ public final class Mutations extends MutationsHelper {
         }
 
     }
-	
+
 	public function trollFig(type:Number, player:Player):void {
 		player.slimeFeed();
         //init variables

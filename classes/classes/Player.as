@@ -21,6 +21,7 @@ import classes.Items.Armor;
 import classes.Items.ArmorLib;
 import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
+import classes.Items.ItemTags;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
 import classes.Items.Mutations;
@@ -503,7 +504,7 @@ use namespace CoC;
 		//Unhindered related acceptable armor types
 		public function meetUnhinderedReq():Boolean
 		{
-			return armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "bimbo skirt" || armorName == "desert naga pink and black silk dress" || hasPerk(PerkLib.ScandalousSuccubusClothing) || hasPerk(PerkLib.BerserkerArmor) || hasPerk(PerkLib.TamamoNoMaeCursedKimono) || hasPerk(PerkLib.InariBlessedKimono) || armor == ArmorLib.NOTHING ;
+			return armor.hasTag(ItemTags.AGILE);
 		}
 		//override public function get armors
 		override public function get armorName():String {
@@ -628,7 +629,7 @@ use namespace CoC;
 			armorDef += speedBonus;
 			//Feral armor boosts armor ratings!
 			var toughnessBonus:int = 0;
-			if (hasPerk(PerkLib.FeralArmor) && haveNaturalArmor() && meetUnhinderedReq()) {
+			if (hasPerk(PerkLib.FeralArmor) && haveNaturalArmor() && armor.hasTag(ItemTags.AGILE)) {
 				toughnessBonus += Math.round(tou / 20);
 			}
 			if (hasPerk(PerkLib.NukiNuts)) {
@@ -656,11 +657,11 @@ use namespace CoC;
 			if (hasPerk(PerkLib.PigBoarFatFinalForm)) armorDef += (12 * newGamePlusMod);
 			if (hasPerk(PerkLib.GoblinoidBlood)) {
 				var goblinbracerBonus:int = 0;
-				if (hasKeyItem("Powboy") >= 0 && meetUnhinderedReq()) {
+				if (hasKeyItem("Powboy") >= 0) {
 					goblinbracerBonus += Math.round(inte / 10);
 					if (goblinbracerBonus > (10 * newGamePlusMod)) goblinbracerBonus = (10 * newGamePlusMod);
 				}
-				if (hasKeyItem("M.G.S. bracer") >= 0 && meetUnhinderedReq()) {
+				if (hasKeyItem("M.G.S. bracer") >= 0) {
 					goblinbracerBonus += Math.round(inte / 10);
 					if (goblinbracerBonus > (20 * newGamePlusMod)) goblinbracerBonus = (20 * newGamePlusMod);
 				}
@@ -839,8 +840,8 @@ use namespace CoC;
 				else armorDef += 1;
 			}
 			//Acupuncture effect
-			if (hasPerk(PerkLib.ChiReflowDefense) >= 0) armorDef *= UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI;
-			if (hasPerk(PerkLib.ChiReflowAttack) >= 0) armorDef *= UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI;*/
+			if (hasPerk(PerkLib.ChiReflowDefense)) armorDef *= UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI;
+			if (hasPerk(PerkLib.ChiReflowAttack)) armorDef *= UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI;*/
 			//Other bonuses
 			if (hasPerk(PerkLib.ToughHide) && haveNaturalArmor()) armorMDef += (1 * newGamePlusMod);
 			if (hasPerk(PerkLib.PigBoarFat)) armorMDef += (1 * newGamePlusMod);
@@ -848,11 +849,11 @@ use namespace CoC;
 			if (hasPerk(PerkLib.PigBoarFatFinalForm)) armorMDef += (12 * newGamePlusMod);
 			if (hasPerk(PerkLib.GoblinoidBlood)) {
 				var goblinbracerBonus:int = 0;
-				if (hasKeyItem("Powboy") >= 0 && meetUnhinderedReq()) {
+				if (hasKeyItem("Powboy") >= 0) {
 					goblinbracerBonus += Math.round(inte / 10);
 					if (goblinbracerBonus > (10 * newGamePlusMod)) goblinbracerBonus = (10 * newGamePlusMod);
 				}
-				if (hasKeyItem("M.G.S. bracer") >= 0 && meetUnhinderedReq()) {
+				if (hasKeyItem("M.G.S. bracer") >= 0) {
 					goblinbracerBonus += Math.round(inte / 10);
 					if (goblinbracerBonus > (20 * newGamePlusMod)) goblinbracerBonus = (20 * newGamePlusMod);
 				}
@@ -891,7 +892,7 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.Lustzerking) && !hasPerk(PerkLib.ColderLust)) {
 				armorMDef = 0;
 			}
-			//if (hasStatusEffect(StatusEffects.ChargeArmor) && (!isNaked() || (isNaked() && haveNaturalArmor() && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) >= 0))) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
+			//if (hasStatusEffect(StatusEffects.ChargeArmor) && (!isNaked() || (isNaked() && haveNaturalArmor() && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)))) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
 			if (hasStatusEffect(StatusEffects.StoneSkin)) armorMDef += Math.round(statusEffectv1(StatusEffects.StoneSkin));
 			if (hasStatusEffect(StatusEffects.BarkSkin)) armorMDef += Math.round(statusEffectv1(StatusEffects.BarkSkin));
 			if (hasStatusEffect(StatusEffects.MetalSkin)) armorMDef += Math.round(statusEffectv1(StatusEffects.MetalSkin));/*
@@ -899,7 +900,7 @@ use namespace CoC;
 				armorDef -= CoC.instance.monster.statusEffectv1(StatusEffects.TailWhip);
 				if(armorDef < 0) armorDef = 0;
 			}
-			if (hasStatusEffect(StatusEffects.CrinosShape) && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor) >= 0) {
+			if (hasStatusEffect(StatusEffects.CrinosShape) && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)) {
 				armorDef = Math.round(armorDef * 1.1);
 				armorDef += 1;
 			}*/
@@ -918,7 +919,7 @@ use namespace CoC;
 		//Wing Slap compatibile wings + tiers of wings for dmg multi
 		public function haveWingsForWingSlap():Boolean
 		{
-			return Wings.Types[wings.type].wingSlap;
+			return Arms.Types[arms.type].wingSlap || Wings.Types[wings.type].wingSlap;
 		}
 		public function thirdtierWingsForWingSlap():Boolean
 		{
@@ -1210,7 +1211,7 @@ use namespace CoC;
 				zerkersboost += (15 + (15 * newGamePlusMod));
 				if (hasPerk(PerkLib.ColdFury) || hasPerk(PerkLib.ColdLust)) zerkersboost += (5 + (5 * newGamePlusMod));
 				if (hasPerk(PerkLib.ColderFury) || hasPerk(PerkLib.ColderLust)) zerkersboost += (10 + (10 * newGamePlusMod));
-				if (hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm) >= 0) zerkersboost += (30 + (30 * newGamePlusMod));
+				if (hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) zerkersboost += (30 + (30 * newGamePlusMod));
 				if (hasPerk(PerkLib.Lustzerker) && (jewelryName == "Flame Lizard ring" || jewelryName2 == "Flame Lizard ring" || jewelryName3 == "Flame Lizard ring" || jewelryName4 == "Flame Lizard ring")) zerkersboost += (5 + (5 * newGamePlusMod));
 				if (hasPerk(PerkLib.BerserkerArmor)) zerkersboost += (5 + (5 * newGamePlusMod));
 				if (hasStatusEffect(StatusEffects.Berzerking) && hasStatusEffect(StatusEffects.Lustzerking)) {
@@ -1233,6 +1234,9 @@ use namespace CoC;
 		override public function get weaponPerk():String {
 			return _weapon.perk || "";
 		}
+		override public function get weaponType():String {
+			return _weapon.type || "";
+		}
 		override public function get weaponValue():Number {
 			return _weapon.value;
 		}
@@ -1246,10 +1250,20 @@ use namespace CoC;
 		{
 			return weaponRangePerk == "Bow";
 		}
+		//Is Thrown
+		public function isThrownTypeWeapon():Boolean
+		{
+			return weaponRangePerk == "Throwing";
+		}
 		//Using Tome
 		public function isUsingTome():Boolean
 		{
 			return weaponRangeName == "nothing" || weaponRangeName == "Inquisitor’s Tome" || weaponRangeName == "Sage’s Sketchbook";
+		}
+		//Using a spear
+		public function isUsingSpear():Boolean
+		{
+			return weaponType == "Spear";
 		}
 		//Using Staff
 		public function isUsingStaff():Boolean
@@ -2038,7 +2052,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.ShieldHarmony) && tou >= 100 && isShieldsForShieldBash() && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && meetUnhinderedReq()) {
+			if (hasPerk(PerkLib.KnightlySword) && isSwordTypeWeapon() && isShieldsForShieldBash()) {
+				mult -= 10;
+			}
+			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.REVEALING)) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.FluidBody) && meetUnhinderedReq()) {
@@ -2178,7 +2195,7 @@ use namespace CoC;
 			//--BASE--
 			mult -= armorMMod;
 			//--PERKS--
-			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) {
+			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.REVEALING)) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.DraconicBonesEvolved)) {
@@ -5426,9 +5443,9 @@ use namespace CoC;
 				catCounter++;
 			if (hasPerk(PerkLib.CatlikeNimblenessFinalForm) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				catCounter++;
-			if (hasPerk(PerkLib.AscensionHybridTheory) >= 0 && catCounter >= 4)
+			if (hasPerk(PerkLib.AscensionHybridTheory) && catCounter >= 4)
 				catCounter += 1;
-			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && catCounter >= 8)
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && catCounter >= 8)
 				catCounter += 1;
 			if (arms.type == Arms.SPHINX || wings.type == Wings.FEATHERED_SPHINX || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || rearBody.type == RearBody.LION_MANE || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING
 			 || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) catCounter = 0;
@@ -5586,7 +5603,7 @@ use namespace CoC;
 				hellcatCounter++;
 			if (hasPerk(PerkLib.CatlikeNimblenessFinalForm))
 				hellcatCounter++;
-			if (hasPerk(PerkLib.CatlikeNimbleness) >= 0 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+			if (hasPerk(PerkLib.CatlikeNimbleness) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				hellcatCounter++;
 			if (hasPerk(PerkLib.CatlikeNimblenessEvolved) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				hellcatCounter++;
@@ -6269,7 +6286,7 @@ use namespace CoC;
 				gooCounter++;
 			if (hasStatusEffect(StatusEffects.SlimeCraving))
 				gooCounter++;
-			//if (hasPerk(PerkLib.SlimeCore) >= 0)
+			//if (hasPerk(PerkLib.SlimeCore))
 			//	gooCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				gooCounter += 50;
@@ -6323,7 +6340,7 @@ use namespace CoC;
 				magmagooCounter++;
 			if (hasStatusEffect(StatusEffects.SlimeCraving))
 				magmagooCounter++;
-			//if (hasPerk(PerkLib.SlimeCore) >= 0)
+			//if (hasPerk(PerkLib.SlimeCore))
 			//	magmagooCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				magmagooCounter += 50;
@@ -6379,7 +6396,7 @@ use namespace CoC;
 				darkgooCounter++;
 			if (hasStatusEffect(StatusEffects.SlimeCraving))
 				darkgooCounter++;
-			if (hasPerk(PerkLib.DarkSlimeCore) >= 0)
+			if (hasPerk(PerkLib.DarkSlimeCore))
 				darkgooCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				darkgooCounter += 50;
@@ -6479,7 +6496,7 @@ use namespace CoC;
 				gorgonCounter++;
 			if ((hasPerk(PerkLib.GorgonsEyes) || hasPerk(PerkLib.VenomGlands)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				gorgonCounter++;
-			if ((hasPerk(PerkLib.GorgonsEyesEvolved) || hasPerk(PerkLib.VenomGlandsEvolved) >= 0) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if ((hasPerk(PerkLib.GorgonsEyesEvolved) || hasPerk(PerkLib.VenomGlandsEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				gorgonCounter++;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && gorgonCounter >= 4)
 				gorgonCounter++;
@@ -6776,6 +6793,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Ghostslinger))
 				poltergeistCounter++;
 			if (hasPerk(PerkLib.PhantomShooting))
+				poltergeistCounter++;
+			if (hasPerk(PerkLib.Telekinesis))
 				poltergeistCounter++;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && poltergeistCounter >= 4)
 				poltergeistCounter += 1;
@@ -7227,6 +7246,8 @@ use namespace CoC;
 				elfCounter++;
 			if (eyes.type == Eyes.ELF)
 				elfCounter++;
+			if (faceType == Face.ELF)
+				elfCounter++;
 			if (tongue.type == Tongue.ELF)
 				elfCounter++;
 			if (arms.type == Arms.ELF)
@@ -7587,31 +7608,31 @@ use namespace CoC;
 				thunderbirdCounter++;
 			if (InCollection(hairColor, ["purple", "light blue", "yellow", "white", "emerald", "turquoise"]))
 				thunderbirdCounter++;
-			if (hasPerk(PerkLib.HeartOfTheStorm) >= 0)
+			if (hasPerk(PerkLib.HeartOfTheStorm))
 				thunderbirdCounter++;
-			if (hasPerk(PerkLib.HeartOfTheStormEvolved) >= 0)
+			if (hasPerk(PerkLib.HeartOfTheStormEvolved))
 				thunderbirdCounter++;
-			if (hasPerk(PerkLib.HeartOfTheStormFinalForm) >= 0)
+			if (hasPerk(PerkLib.HeartOfTheStormFinalForm))
 				thunderbirdCounter++;
-			if (hasPerk(PerkLib.HarpyWomb) >= 0)
+			if (hasPerk(PerkLib.HarpyWomb))
 				thunderbirdCounter++;
-			if (hasPerk(PerkLib.HarpyHollowBones) >= 0)
+			if (hasPerk(PerkLib.HarpyHollowBones))
 				thunderbirdCounter++;
-			if (hasPerk(PerkLib.HarpyHollowBonesEvolved) >= 0)
+			if (hasPerk(PerkLib.HarpyHollowBonesEvolved))
 				thunderbirdCounter++;
-			if (hasPerk(PerkLib.HarpyHollowBonesFinalForm) >= 0)
+			if (hasPerk(PerkLib.HarpyHollowBonesFinalForm))
 				thunderbirdCounter++;
-			if ((hasPerk(PerkLib.HeartOfTheStorm) >= 0 || hasPerk(PerkLib.HarpyHollowBones) >= 0) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage) >= 0)
+			if ((hasPerk(PerkLib.HeartOfTheStorm) || hasPerk(PerkLib.HarpyHollowBones)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				thunderbirdCounter++;
-			if ((hasPerk(PerkLib.HeartOfTheStormEvolved) >= 0 || hasPerk(PerkLib.HarpyHollowBonesEvolved) >= 0) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage) >= 0)
+			if ((hasPerk(PerkLib.HeartOfTheStormEvolved) || hasPerk(PerkLib.HarpyHollowBonesEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				thunderbirdCounter++;
-			if ((hasPerk(PerkLib.HeartOfTheStormFinalForm) >= 0 || hasPerk(PerkLib.HarpyHollowBonesFinalForm) >= 0) && hasPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
+			if ((hasPerk(PerkLib.HeartOfTheStormFinalForm) || hasPerk(PerkLib.HarpyHollowBonesFinalForm)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				thunderbirdCounter++;
-			if (hasPerk(PerkLib.ChimericalBodyUltimateStage) >= 0)
+			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				thunderbirdCounter += 50;
-			if (hasPerk(PerkLib.AscensionHybridTheory) >= 0 && thunderbirdCounter >= 4)
+			if (hasPerk(PerkLib.AscensionHybridTheory) && thunderbirdCounter >= 4)
 				thunderbirdCounter += 1;
-			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) >= 0 && thunderbirdCounter >= 8)
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && thunderbirdCounter >= 8)
 				thunderbirdCounter += 1;
 			if (isGargoyle()) thunderbirdCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) thunderbirdCounter = 0;
@@ -8607,7 +8628,7 @@ use namespace CoC;
 				unicornCounter++;
 			if (hasPerk(PerkLib.EclipticMindFinalForm))
 				unicornCounter++;
-			if ((hasPerk(PerkLib.TwinHeart) >= 0 || hasPerk(PerkLib.EclipticMind)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+			if ((hasPerk(PerkLib.TwinHeart) || hasPerk(PerkLib.EclipticMind)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				unicornCounter++;
 			if ((hasPerk(PerkLib.TwinHeartEvolved) || hasPerk(PerkLib.EclipticMindEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				unicornCounter++;
@@ -8919,7 +8940,7 @@ use namespace CoC;
 				scyllaCounter++;
 			if (hasPerk(PerkLib.ScyllaInkGlandsEvolved) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				scyllaCounter++;
-			//if (hasPerk(PerkLib.) >= 0 && hasPerk(PerkLib.ChimericalBodySemiEpicStage) >= 0)
+			//if (hasPerk(PerkLib.) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 			//	scyllaCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				scyllaCounter += 50;
@@ -8989,10 +9010,10 @@ use namespace CoC;
 		//	if (tailType != FOX)
 		//		kitshooCounter--;
 			//When character get one of 9-tail perk
-		//	if (kitshooCounter >= 3 && (hasPerk(PerkLib.EnlightenedNinetails) >= 0 || hasPerk(PerkLib.CorruptedNinetails) >= 0))
+		//	if (kitshooCounter >= 3 && (hasPerk(PerkLib.EnlightenedNinetails) || hasPerk(PerkLib.CorruptedNinetails)))
 		//		kitshooCounter += 2;
 			//When character get Hoshi no tama
-		//	if (hasPerk(PerkLib.KitsuneThyroidGland) >= 0)
+		//	if (hasPerk(PerkLib.KitsuneThyroidGland))
 		//		kitshooCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				kitshooCounter += 50;
@@ -9036,7 +9057,7 @@ use namespace CoC;
 				plantCounter -= 7;
 			if (yggdrasilScore() >= 10)
 				plantCounter -= 4;
-		//	if (scorpionCounter > 0 && hasPerk(PerkLib.TrachealSystemEvolved) >= 0)
+		//	if (scorpionCounter > 0 && hasPerk(PerkLib.TrachealSystemEvolved))
 		//		plantCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				plantCounter += 50;
@@ -9213,7 +9234,7 @@ use namespace CoC;
 				werewolfCounter += 2;
 			if (hasPerk(PerkLib.Lycanthropy))
 				werewolfCounter++;
-			//if (hasPerk(PerkLib.LycanthropyDormant) >= 0)
+			//if (hasPerk(PerkLib.LycanthropyDormant))
 				//werewolfCounter -= 11;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && werewolfCounter >= 4)
 				werewolfCounter++;
@@ -9679,8 +9700,8 @@ use namespace CoC;
 				counter++;
 			if (ears.type == Ears.VAMPIRE)
 				counter -= 10;
-			if (wings.type == Wings.BAT_ARM)
-				counter += 4;
+			if (arms.type == Arms.BAT)
+				counter += 5;
 			if (faceType == Face.VAMPIRE)
 				counter += 2;
 			if (eyes.type == Eyes.VAMPIRE)
@@ -9688,8 +9709,6 @@ use namespace CoC;
 			if (rearBody.type == RearBody.BAT_COLLAR)
 				counter++;
 			if (counter >= 8) {
-				if (arms.type == Arms.HUMAN)
-					counter++;
 				if (lowerBody == LowerBody.HUMAN)
 					counter++;
 			}
@@ -9992,7 +10011,7 @@ use namespace CoC;
 			var prestigeJobs2:Number = 1;
 			if (level >= 72)
 				prestigeJobs2++;
-			//if (hasPerk(PerkLib.DeityJobMunchkin) >= 0)
+			//if (hasPerk(PerkLib.DeityJobMunchkin))
 			//	prestigeJobs2++;
 			if (hasPerk(PerkLib.AscensionBuildingPrestige01))
 				prestigeJobs2++;
@@ -10215,7 +10234,7 @@ use namespace CoC;
 			var peripheralnervsysMutations:Number = 1;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSys))
 				peripheralnervsysMutations--;
-			//if (hasPerk(PerkLib.FloralOvaries) >= 0)
+			//if (hasPerk(PerkLib.FloralOvaries))
 			//	peripheralnervsysMutations--;
 			if (hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
 				peripheralnervsysMutations++;
@@ -11977,17 +11996,17 @@ use namespace CoC;
 					maxIntCap2 += 10;
 				}
 			}//+35/30-40
-			if (hasPerk(PerkLib.MantislikeAgility) >= 0) {
+			if (hasPerk(PerkLib.MantislikeAgility)) {
 				if (hasCoatOfType(Skin.CHITIN) && hasPerk(PerkLib.ThickSkin)) maxSpeCap2 += 15;
 				if ((skinType == Skin.SCALES && hasPerk(PerkLib.ThickSkin)) || hasCoatOfType(Skin.CHITIN)) maxSpeCap2 += 10;
 				if (skinType == Skin.SCALES || hasPerk(PerkLib.ThickSkin)) maxSpeCap2 += 5;
 			}
-			if (hasPerk(PerkLib.MantislikeAgilityEvolved) >= 0) {
+			if (hasPerk(PerkLib.MantislikeAgilityEvolved)) {
 				if (hasCoatOfType(Skin.CHITIN) && hasPerk(PerkLib.ThickSkin)) maxSpeCap2 += 30;
 				if ((skinType == Skin.SCALES && hasPerk(PerkLib.ThickSkin)) || hasCoatOfType(Skin.CHITIN)) maxSpeCap2 += 20;
 				if (skinType == Skin.SCALES || hasPerk(PerkLib.ThickSkin)) maxSpeCap2 += 10;
 			}
-			if (hasPerk(PerkLib.MantislikeAgilityFinalForm) >= 0) {
+			if (hasPerk(PerkLib.MantislikeAgilityFinalForm)) {
 				if (hasCoatOfType(Skin.CHITIN) && hasPerk(PerkLib.ThickSkin)) maxSpeCap2 += 45;
 				if ((skinType == Skin.SCALES && hasPerk(PerkLib.ThickSkin)) || hasCoatOfType(Skin.CHITIN)) maxSpeCap2 += 30;
 				if (skinType == Skin.SCALES || hasPerk(PerkLib.ThickSkin)) maxSpeCap2 += 15;

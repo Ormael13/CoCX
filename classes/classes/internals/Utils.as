@@ -42,7 +42,7 @@ public class Utils extends Object
 			for (var x:int = 1; x < stringList.length - 1; x++) concat += ", " + stringList[x];
 			return concat + " and " + stringList[stringList.length - 1];
 		}
-		
+
 		/**
 		 * @return input if it is not null or undefined, otherwise defaultValue
 		 */
@@ -136,7 +136,7 @@ public class Utils extends Object
 			target.push.apply(target, values);
 			return target;
 		}
-		
+
 		/**
 		 * @return src.find( el => el[propName] == propValue ) || defaultValue
 		 */
@@ -146,7 +146,7 @@ public class Utils extends Object
 			}
 			return defaultValue;
 		}
-		
+
 		/**
 		 * @return src.filter( el => el && el[propName] == propValue )
 		 */
@@ -176,6 +176,13 @@ public class Utils extends Object
 				if (!el) continue;
 				result.push({label: propname ? el[propname] : (""+el), data:el});
 			}
+			result.sort(function(a:*, b:*):int {
+				if (a.label > b.label) {
+					return 1;
+				} else {
+					return -1;
+				}
+			});
 			return result;
 		}
 		/**

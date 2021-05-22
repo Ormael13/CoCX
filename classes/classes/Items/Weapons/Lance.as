@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function Lance() 
 		{
-			super("Lance", "Lance", "deadly lance", "a deadly lance", "piercing stab", 12, 480, "A long wooden shaft with a pointed metal head, used as a weapon by knights and cavalry soldiers in charging.  This would ignore most armors.  Req. 100+ speed to unleash full attack power.");
+			super("Lance", "Lance", "deadly lance", "a deadly lance", "piercing stab", 12, 480, "A long wooden shaft with a pointed metal head, used as a weapon by knights and cavalry soldiers in charging.  This would ignore most armors.  Req. 100+ speed to unleash full attack power.", "", "Spear");
 		}
 		
 		override public function get attack():Number {

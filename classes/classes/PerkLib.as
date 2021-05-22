@@ -358,7 +358,7 @@ public class PerkLib
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
 		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
-				"+3000 to max Wrath.",//stay alive when berserking at cost of super fast 20% max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
+				"+3000 to max Wrath.",//stay alive when berserking at cost of super fast 20%(or 25%) max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
 				"You've chosen the 'Too Angry to Die' perk, .");
 		public static const AdvancedGolemancyTheory:PerkType = mk("Advanced Golemancy Theory", "Advanced Golemancy Theory",
 				"Enable option to make steel golems and store 1 such golem.",
@@ -384,6 +384,12 @@ public class PerkLib
 		public static const BalanceBreaker:PerkType = mk("Balance breaker", "Balance breaker",
 				"Your brutal strikes while wielding maces or hammers may leave your opponents disoriented. (Attacks with maces/hammers can powerstun and ignore stun immunity but with halved stun chance)",
 				"You've chosen the 'Balance breaker' perk. Your brutal strikes while wielding maces or hammers may leave your opponents disoriented. (Attacks with maces/hammers can powerstun and ignore stun immunity but with halved stun chance)");
+		public static const OrthodoxDuelist:PerkType = mk("Orthodox duelist", "Orthodox duelist",
+				"Wielding a dueling sword with no off hand, increases critical damage by 20% and the chance to parry blows by 10% based on speed.",
+				"You've chosen the 'Orthodox duelist' perk. Wielding a dueling sword with no off hand, increases critical damage by 20% and the chance to parry blows by 10% based on speed.");
+		public static const KnightlySword:PerkType = mk("Knightly sword", "Knightly sword",
+				"Regular swords increases parry chance by 15% and grants an extra +10% damage reduction when paired with a shield.",
+				"You've chosen the 'Knightly sword' perk. Regular swords increases parry chance by 15% and grants an extra +10% damage reduction when paired with a shield.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -444,12 +450,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -1205,6 +1205,8 @@ public class PerkLib
 		public static const ElementsOfTheOrtodoxPath:PerkType = mk("Elements of the orthodox Path", "Elements of the orthodox Path",
 				"You can now summon and command ether, wood and metal elementals. Also increase elementals command limit by 1.",
 				"You've chosen the 'Elements of the orthodox Path' perk, your time spent on studing elements allowing you to call those mentioned in more orthodox writings.");
+		public static const ElvenRangerArmor:PerkType = mk("Elven Ranger Armor", "Elven Ranger Armor",
+				"+50% to Bow and spear damage, Count as naked, Slutty seduction +8.");
 		public static const ElvishPeripheralNervSys:PerkType = mk("Elvish Peripheral NervSys", "Elvish Peripheral NervSys",
 				"Your Elvish Peripheral NervSys is giving you +5% of max core Spe as phantom Spe and allow to keep Elven Sense even without elf arms/legs.",
 				"You've chosen the 'Elvish Peripheral NervSys' perk, due to repeadly balancing on line between life and death your peripheral nervous system started to work like that of elfs.");
@@ -2973,6 +2975,8 @@ public class PerkLib
 		public static const Teacher:PerkType = mk("Teacher", "Teacher",
 				"Instead of being taught, now you teach others. Your skill allows you to increase max mana by 10%.",
 				"You've chosen the 'Teacher' perk, gaining +10% max Mana.");
+		public static const Telekinesis:PerkType = mk("Telekinesis", "Telekinesis",
+				"You have the power to wield and throw objects with your mind alone. Gain a bonus to damage based on inteligence when using thrown weapons and aquire additionnal attacks based on character level.");
 		public static const TemporalGolemsRestructuration:PerkType = mk("Temporal Golems Restructuration", "Temporal Golems Restructuration",
 				"Allow to use option of send all temporary golems to attack in one turn. Adding option to make 5 temporary golems at once and shorten a bit time to make 1 temporary golem.",
 				"You've chosen the 'Temporal Golems Restructuration' perk, adding option to make faster and more temporary golems at once and have option to send them all at once to attack.");
@@ -3702,7 +3706,7 @@ public class PerkLib
 		public static const MightyFist:PerkType = mk("Mighty Fist", "Mighty Fist",
 				"Regular fist attacks now have a chance to cause stun and fist damage is increased by 5 (x NG tier).");
 		public static const Misdirection:PerkType = mk("Misdirection", "Misdirection",
-				"Grants additional evasion chances while wearing Raphael's red bodysuit.");
+				"Grants additional evasion chances while wearing Raphael's red bodysuit or any other agile armor.");
 		public static const MorphicWeaponry:PerkType = mk("Morphic Weaponry", "Morphic Weaponry",
 				"Gains a number of extra tentacle-like natural weapon attacks based on your level (+1 per 10 level).");
 		public static const OmnibusGift:PerkType = mk("Omnibus' Gift", "Omnibus' Gift",
@@ -3853,6 +3857,15 @@ public class PerkLib
             //Tier 2 Strength Perks
             AdrenalineRush.requireLevel(12)
                     .requirePerk(FuriousStrikes);
+            BalanceBreaker.requireLevel(12)
+                    .requireStr(100)
+                    .requirePerk(JobWarrior);
+            OrthodoxDuelist.requireLevel(12)
+                    .requireStr(100)
+                    .requirePerk(JobWarrior);
+            KnightlySword.requireLevel(12)
+                    .requireStr(100)
+                    .requirePerk(JobWarrior);
             IronFistsIV.requireNGPlus(3)
                     .requireLevel(12)
                     .requireStr(105)

@@ -29,7 +29,11 @@ public class CoCButton extends Block {
 			embedAsCFF='false')]
 	private static const ButtonLabelFont:Class;
 	public static const ButtonLabelFontName:String = (new ButtonLabelFont() as Font).fontName;
-
+	
+	/**
+	 * function(error:Error, button:CoCButton):void
+	 */
+	public static var clickErrorHandler:Function;
 
 	private var _labelField:TextField,
 				_backgroundGraphic:BitmapDataSprite,
@@ -86,10 +90,18 @@ public class CoCButton extends Block {
 
 	public function click(event:MouseEvent = null):void {
 		if (!this.enabled) return;
-		if (this._preCallback != null)
-			this._preCallback(this);
-		if (this._callback != null)
-			this._callback();
+		try {
+			if (this._preCallback != null)
+				this._preCallback(this);
+			if (this._callback != null)
+				this._callback();
+		} catch (e:Error) {
+			if (clickErrorHandler != null) {
+				clickErrorHandler(e, this);
+			} else {
+				throw e;
+			}
+		}
 	}
 
 

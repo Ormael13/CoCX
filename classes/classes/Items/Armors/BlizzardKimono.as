@@ -23,15 +23,12 @@ package classes.Items.Armors
 		}
 		
 		override public function playerEquip():Armor {
-			while (game.player.hasStatusEffect(StatusEffects.PlayerHasViewableOutfit)) game.player.removeStatusEffect(StatusEffects.PlayerHasViewableOutfit);
 			while (game.player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) game.player.removeStatusEffect(StatusEffects.YukiOnnaKimono);
-			game.player.createStatusEffect(StatusEffects.PlayerHasViewableOutfit,0,0,0,0);
 			game.player.createStatusEffect(StatusEffects.YukiOnnaKimono,0,0,0,0);
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Armor {
-			while (game.player.hasStatusEffect(StatusEffects.PlayerHasViewableOutfit)) game.player.removeStatusEffect(StatusEffects.PlayerHasViewableOutfit);
 			while (game.player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) game.player.removeStatusEffect(StatusEffects.YukiOnnaKimono);
 			return super.playerRemove();
 		}
