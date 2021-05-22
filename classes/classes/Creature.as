@@ -3237,8 +3237,8 @@ public class Creature extends Utils
 		public function hasGooSkin():Boolean { return skin.hasGooSkin(); }
 		public function hasGhostSkin():Boolean { return skin.hasGhostSkin(); }
 		public function isGargoyle():Boolean { return skin.hasBaseOnly(Skin.STONE); }
-		public function skinDescript():String { return skin.describe('basic'); }
-		public function skinFurScales():String { return skin.describe('cover'); }
+		public function skinDescript():String { return skin.describe('base'); }
+		public function skinFurScales():String { return skin.describe('coat'); }
 
 		// <mod name="Predator arms" author="Stadler76">
 		public function claws():String { return clawsPart.descriptionFull(); }

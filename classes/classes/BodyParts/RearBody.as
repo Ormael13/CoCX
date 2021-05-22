@@ -7,6 +7,7 @@ public class RearBody extends BodyPart {
 	 * - value: numerical id (0, 1)
 	 * - id: name of the constant ("NONE", "DRACONIC_MANE")
 	 * - name: human-readable default name, ("none", "draconic hairy mane")
+	 * - plural: true/false, is the name plural ("behemoth spikes") or not ("shark fin")
 	 */
 	public static var Types:/*EnumValue*/Array = [];
 	
@@ -17,11 +18,11 @@ public class RearBody extends BodyPart {
 	public static const DRACONIC_SPIKES:int		= 2;
 	EnumValue.add(Types, DRACONIC_SPIKES, "DRACONIC_SPIKES", {name: "draconic spiky mane"});
 	public static const FENRIR_ICE_SPIKES:int	= 3;
-	EnumValue.add(Types, FENRIR_ICE_SPIKES, "FENRIR_ICE_SPIKES", {name: "ice shards"});
+	EnumValue.add(Types, FENRIR_ICE_SPIKES, "FENRIR_ICE_SPIKES", {name: "ice shards", plural: true});
 	public static const LION_MANE:int			= 4;
 	EnumValue.add(Types, LION_MANE, "LION_MANE", {name: "lion mane"});
 	public static const BEHEMOTH:int			= 5;
-	EnumValue.add(Types, BEHEMOTH, "BEHEMOTH", {name: "behemoth spikes"});
+	EnumValue.add(Types, BEHEMOTH, "BEHEMOTH", {name: "behemoth spikes", plural: true});
 	public static const SHARK_FIN:int			= 6;
 	EnumValue.add(Types, SHARK_FIN, "SHARK_FIN", {name: "shark fin"});
 	public static const ORCA_BLOWHOLE:int		= 7;
@@ -33,7 +34,7 @@ public class RearBody extends BodyPart {
 	public static const WOLF_COLLAR:int			= 10;
 	EnumValue.add(Types, WOLF_COLLAR, "WOLF_COLLAR", {name: "wolf collar"});
 	public static const DISPLACER_TENTACLES:int	= 11;
-	EnumValue.add(Types, DISPLACER_TENTACLES, "DISPLACER_TENTACLES", {name: "displacer tentacles"});
+	EnumValue.add(Types, DISPLACER_TENTACLES, "DISPLACER_TENTACLES", {name: "displacer tentacles", plural: true});
 	public static const SNAIL_SHELL:int			= 12;
 	EnumValue.add(Types, SNAIL_SHELL, "SNAIL_SHELL", {name: "snail shell"});
 	public static const METAMORPHIC_GOO:int		= 13;
@@ -54,7 +55,9 @@ public class RearBody extends BodyPart {
 	public static const FUR_COAT:int			= 21;
 	EnumValue.add(Types, FUR_COAT, "FUR_COAT", {name: "fur coat"});
 	public static const TENTACLE_EYESTALKS:int	= 22;
-	EnumValue.add(Types, TENTACLE_EYESTALKS, "TENTACLE_EYESTALKS", {name: "tentacle eyestalks"});
+	EnumValue.add(Types, TENTACLE_EYESTALKS, "TENTACLE_EYESTALKS", {name: "tentacle eyestalks", plural: true});
+	public static const ATLACH_NACHA:int		= 23;
+	EnumValue.add(Types, ATLACH_NACHA, "ATLACH_NACHA", {name: "Atlach Nacha rear"});
 	
 	public function RearBody() {
 		super(null, null);
