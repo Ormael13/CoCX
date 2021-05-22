@@ -43,7 +43,7 @@ public final class Mutations extends MutationsHelper {
     public var emberTFchanges:EmberTF = new EmberTF();
 
 	public function blockingBodyTransformations():Boolean {
-		return player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.WendigoCurse);
+		return player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath) || player.hasPerk(PerkLib.WendigoCurse) || player.hasPerk(PerkLib.BlessingOfTheAncestorTree);
 	}
 
     public function DrunkenPowerEmpower():void {

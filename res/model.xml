@@ -4868,19 +4868,19 @@
 					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="bra/elfClothingBraSmall"/>
+						<show part="bra_fg/elfClothingBraSmall"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="bra/elfClothingBraMedium"/>
+						<show part="bra_fg/elfClothingBraMedium"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="bra/elfClothingBraMedium"/>
+						<show part="bra_fg/elfClothingBraMedium"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="bra/elfClothingBraLarge"/>
+						<show part="bra_fg/elfClothingBraLarge"/>
 					</case>
 					<default>
-						<show part="bra/elfClothingBraLarge"/>
+						<show part="bra_fg/elfClothingBraLarge"/>
 					</default>
 				</switch>
 			</if>
@@ -4919,7 +4919,7 @@
 							<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
 								<switch value="arms.type">
 									<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
-										<show part="clotheLegs/scandalousSuccubusClothinglegsLewd"/>
+										<show part="clotheLegs/elfClothinglegsLewd"/>
 									</case>
 									<default>
 										<show part="clotheLegs/elfClothinglegs"/>

@@ -152,6 +152,8 @@ public class SceneLib {
 
     public static var holliScene:HolliScene = new HolliScene();
 
+    public static var woodElves:WoodElves = new WoodElves();
+
     public static var isabellaScene:IsabellaScene = new IsabellaScene();
 
     public static var isabellaFollowerScene:IsabellaFollowerScene = new IsabellaFollowerScene();
