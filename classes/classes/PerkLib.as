@@ -385,11 +385,17 @@ public class PerkLib
 				"Your brutal strikes while wielding maces or hammers may leave your opponents disoriented. (Attacks with maces/hammers can powerstun and ignore stun immunity but with halved stun chance)",
 				"You've chosen the 'Balance breaker' perk. Your brutal strikes while wielding maces or hammers may leave your opponents disoriented. (Attacks with maces/hammers can powerstun and ignore stun immunity but with halved stun chance)");
 		public static const OrthodoxDuelist:PerkType = mk("Orthodox duelist", "Orthodox duelist",
-				"Wielding a dueling sword with no off hand, increase critical damage by 20% and the chance to parry blows by 10% based on speed.",
-				"You've chosen the 'Orthodox duelist' perk. Wielding a dueling sword with no off hand, increase critical damage by 20% and the chance to parry blows by 10% based on speed.");
+				"Wielding a dueling sword with no off hand, increases critical damage by 20% and the chance to parry blows by 10% based on speed.",
+				"You've chosen the 'Orthodox duelist' perk. Wielding a dueling sword with no off hand, increases critical damage by 20% and the chance to parry blows by 10% based on speed.");
 		public static const KnightlySword:PerkType = mk("Knightly sword", "Knightly sword",
-				"Regular swords increase damage reduction by 10% and parry chance by 15%.",
-				"You've chosen the 'Knightly sword' perk. Regular swords increase damage reduction by 10% and parry chance by 15%.");
+				"Regular swords increases parry chance by 15% and grants an extra +10% damage reduction when paired with a shield.",
+				"You've chosen the 'Knightly sword' perk. Regular swords increases parry chance by 15% and grants an extra +10% damage reduction when paired with a shield.");
+		public static const ImprovedAdrenaline:PerkType = mk("Improved Adrenaline", "Improved Adrenaline",
+				"Wrath generated with using melee/range/specials is converted from +15 wrath to +3% max wrath.",
+				"You've chosen the 'Improved Adrenaline' perk, converting wrath generated on melee/range attacks and specials to % values.");
+		public static const VexedNocking:PerkType = mk("Vexed nocking", "Vexed nocking",
+				"Increase Power Attack/Shoot damage multiplier ratio from 1:2/5/10 to 1:4/10/20. Additional increase initial bonus to damage from 50 to 100%.",
+				"You've chosen the 'Vexed nocking' perk. Increase Power Attack/Shoot damage multiplier ratio from 1:2/5/10 to 1:4/10/20. Additional increase initial bonus to damage from 50 to 100%.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -450,6 +456,12 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -3863,6 +3875,9 @@ public class PerkLib
             OrthodoxDuelist.requireLevel(12)
                     .requireStr(100)
                     .requirePerk(JobWarrior);
+            KnightlySword.requireLevel(12)
+                    .requireStr(100)
+                    .requirePerk(JobWarrior);
             IronFistsIV.requireNGPlus(3)
                     .requireLevel(12)
                     .requireStr(105)
@@ -3930,6 +3945,9 @@ public class PerkLib
             WeaponGrandMastery.requirePerk(WeaponMastery)
                     .requireStr(140)
                     .requireLevel(24);
+            ImprovedAdrenaline.requireLevel(24)
+                    .requireStr(110)
+                    .requirePerk(UnlimitedRage);
             DualWieldLarge.requirePerk(DualWield)
 					.requirePerk(GigantGrip)
                     .requireStr(125)
@@ -6625,6 +6643,9 @@ public class PerkLib
                     .requirePerk(Diehard);
             MotivationEx.requireLevel(18)
                     .requirePerk(Motivation);//.requirePerk(IntermediateLeadership)
+            VexedNocking.requireLevel(18)
+					.requireStr(10)
+					.requireSpe(10);
             //Tier 4
             BlackHeartFinalForm.requireLevel(24)
 				.requirePerk(BlackHeartEvolved)

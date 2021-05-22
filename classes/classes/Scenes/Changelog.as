@@ -125,6 +125,8 @@ package classes.Scenes
 			outputText("<b>Version 0.8r2:</b>\n\n");
 			outputText("-New tier 0 intelligence lvl-up perk: Novice War Mage. Req. Job: Sorcerer or Job: Healer perk, 40+ int. Effect: Increases wrath bar by 50. Safe limit for spellcasting increased by 5%.\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Mage's Wrath (Ex). Req. Mage's Wrath perk, 75+ int. Effect: Tier 1 elemental spells will be castable in (Ex) version that increase their power 2x while additionaly using 100 wrath. Safe limit for spellcasting increasing by 5%.\n");
+			outputText("-New tier 2 strength lvl-up perk: Balance breaker. Req. Job: Warrior perk, 100+ str. Effect: Your brutal strikes while wielding maces or hammers may leave your opponents disoriented. (Attacks with maces/hammers can powerstun and ignore stun immunity but with halved stun chance)\n");
+			outputText("-New tier 2 strength lvl-up perk: Orthodox duelist. Req. Job: Warrior perk, 100+ str. Effect: Wielding a dueling sword with no off hand, increases critical damage by 20% and the chance to parry blows by 10% based on speed.\n");
 			outputText("-New tier 2 intelligence lvl-up perk: Apprentice War Mage. Req. Novice War Mage perk, 80+ int. Effect: Increases wrath bar by 50. In-combat mana recovery increased by 10. Safe limit for spellcasting increased by 5%.\n");
 			outputText("-New tier 4 intelligence lvl-up perk: Adept War Mage. Req. Apprentice War Mage perk, 120+ int. Effect: Increases wrath bar by 150. In-combat mana recovery increased by 15. Safe limit for spellcasting increased by 5%.\n");
 			outputText("-New event perk: Asura Strength. Gained by spending 1 super perk point, lvl 30+ and having 'I Cast (Asura) Fist' super perk. Effects: Allow to reach OverMax Wrath equal to 150% of current max wrath. Asura Form increase to physical might rise to 180%/90%/60% of core str/tou/spe and generate one additional pair of semi-transparent arms. (+10% of Base STR Cap)\n");
@@ -156,23 +158,24 @@ package classes.Scenes
 			outputText("-New tier 0 strength lvl-up perk: Challenging shout. Req. Job: Warrior perk, 25+ str. Effect: Allow to use Warrior Shout p.special.\n");
 			outputText("-New P. Special: Warrior Shout. Req. Challenging shout perk. Embolden yourself with a mighty shout. Generate 20% of max/overmax wrath on use as a free action. 10 turns colldown after use.\n");
 			outputText("-Shield bash cost changed from 20 fatigue to 15 wrath. Blocking use 6 wrath and will now check for having shield that can be used to block (it mean all that can be used to shield bash too). If PC use large or massive shield shield bash and block wrath costs increasing by: 15/30 and 4/8\n");
-			outputText("-New tier 2 strength lvl-up perk: Balance breaker. Req. Job: Warrior perk, 100+ str. Effect: Your brutal strikes while wielding maces or hammers may leave your opponents disoriented. (Attacks with maces/hammers can powerstun and ignore stun immunity but with halved stun chance)\n");
-			outputText("-New tier 2 strength lvl-up perk: Orthodox duelist. Req. Job: Warrior perk, 100+ str. Effect: Wielding a dueling sword with no off hand, increase critical damage by 20% and the chance to parry blows by 10% based on speed.\n");
-			//outputText("-New tier 2 strength lvl-up perk: Knightly sword. Req. Job: Warrior perk, 100+ str. Effect: Regular swords increase damage reduction by 10% and parry chance by 15%.\n");
-			outputText("-Zetta refactoring hair desc, lower body code.\n");
+			outputText("-Zetta refactoring hair desc, lower body, arms code.\n");
 			outputText("-Many passive sources of gains for wrath in/out of combat been removed due to having other sources (using p.specials or base melee/range attacks mainly) that ended giving way too many wrath per turn.\n");
 			outputText("-Power Attack and Power Shoot have new mechanic: they now will use ALL wrath PC have and deal dmg based how much % of max wrath (max over wrath is not included) was used with increase to dmg of PA/PS by 1:2 ratio. At 100% wrath it mean 200% dmg boost. Having Job: Warrior or Job: Beast Warrior will improve ratio to 1:5 and Prestige Job: Berserker would futher increse ration to 1:10.\n");
 			outputText("-Undefeated King's Signet and Prithviraj urumi would have now modified effects on Power Attack. Both items would only give +50% increase to final Power Attack dmg multiplier instead of previously adding 100%.\n");
 			outputText("-Great Dive special when PC have Death Plunge perk AND Charge special would also add modifier in similar way as power attack using current % of max wrath.\n");
+			outputText("-New tier 2 strength lvl-up perk: Knightly sword. Req. Job: Warrior perk, 100+ str. Effect: Regular swords increases parry chance by 15% and grants an extra +10% damage reduction when paired with a shield.\n");
 			outputText("-New Elven Ranger Armor at Kaiba with sprite\n");
 			outputText("-New Lactoblaster at Kaiba with sprite\n");
 			outputText("-New face bodypart for elf\n");
-			outputText("-\n");
+			outputText("-Furious strikes req. slight changed. Instead of req. Job: warrior it would req. either Job: Warrior or Job: Beast warrior. Rest of req. unchanged.\n");
+			outputText("-New tier 4 strength lvl-up perk: Improved Adrenaline. Req. Unlimited rage perk, 110+ str. Effect: Wrath generated with using melee/range/specials is converted from +15 wrath to +3% max wrath.\n");
+			outputText("-New tier 3 misc lvl-up perk: Vexed nocking. Req. 10+ str, 10+ spe. Effect: Increase Power Attack/Shoot damage multiplier ratio from 1:2/5/10 to 1:4/10/20. Additional increase initial bonus to damage from 50% to 100%.\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed bugs: Blood Demon toggle to use HP instead of mana resetting after each combat, naga-like lower ghost race body type not causing lower underwear to drop down like on naga PC\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Blood Demon toggle to use HP instead of mana resetting after each combat, naga-like lower ghost race body type not causing lower underwear to drop down like on naga PC, wrath generated by base melee/range attacks been way of the scale than it was planned\n");/*ostatni punkt changelogu
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -231,7 +234,13 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -258,6 +267,10 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

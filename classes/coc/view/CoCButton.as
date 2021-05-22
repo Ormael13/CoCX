@@ -96,7 +96,7 @@ public class CoCButton extends Block {
 			if (this._callback != null)
 				this._callback();
 		} catch (e:Error) {
-			if (clickErrorHandler) {
+			if (clickErrorHandler != null) {
 				clickErrorHandler(e, this);
 			} else {
 				throw e;

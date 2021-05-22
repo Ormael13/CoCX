@@ -2984,7 +2984,7 @@ public class Combat extends BaseContent {
 					archeryXP(1);
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
-				WrathGenerationPerHit1(damage);
+				WrathGenerationPerHit1(5);
                 heroBaneProc(damage);
             }
             if (flags[kFLAGS.CUPID_ARROWS] == 1) {
@@ -3243,7 +3243,7 @@ public class Combat extends BaseContent {
                         throwingXP(1);
                     }
                     if (crit) hasCritAtLeastOnce = true;
-                    WrathGenerationPerHit1(damage);
+                    WrathGenerationPerHit1(5);
                     heroBaneProc(damage);
                 }
             }
@@ -3428,7 +3428,7 @@ public class Combat extends BaseContent {
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
-				WrathGenerationPerHit1(damage);
+				WrathGenerationPerHit1(5);
                 heroBaneProc(damage);
             }
         } else {
@@ -3677,7 +3677,7 @@ public class Combat extends BaseContent {
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też*/
             damage = Math.round(damage);
             checkAchievementDamage(damage);
-			WrathGenerationPerHit1(damage);
+			WrathGenerationPerHit1(5);
             if (monster.HP <= monster.minHP()) {
                 if (monster.short == "pod")
                     outputText(". ");
@@ -4899,7 +4899,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
             if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) damage *= 1.05;
-            if (player.isUsingSpear && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5
+            if (player.isUsingSpear() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5
             //One final round
             damage = Math.round(damage);
             //ANEMONE SHIT
@@ -5324,7 +5324,7 @@ public class Combat extends BaseContent {
             outputText(" ");
             if (MDOCount == maxCurrentAttacks()) outputText("\n");
             checkAchievementDamage(damage);
-			WrathGenerationPerHit1(damage);
+			WrathGenerationPerHit1(5);
             WrathWeaponsProc();
             heroBaneProc(damage);
             EruptingRiposte();
@@ -5945,17 +5945,27 @@ public class Combat extends BaseContent {
 		}
 	}
 	
-	public function WrathGenerationPerHit1(damage:int = 0):void {
+	public function WrathGenerationPerHit1(damage:int = 0):void {	//base melee/range attacks wrath generation
 		var addedWrath:Number = damage;
 		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath *= 2;
 		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath *= 2;
+		if (player.hasPerk(PerkLib.ImprovedAdrenaline)) addedWrath = Math.round(player.maxWrath() * 0.03);
 		EngineCore.WrathChange(addedWrath, false);
 	}
-	public function WrathGenerationPerHit2(damage:int = 0):void {
+	public function WrathGenerationPerHit2(damage:int = 0):void {	//specials wrath generation
 		var addedWrath:Number = damage;
 		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath *= 2;
 		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath *= 2;
+		if (player.hasPerk(PerkLib.ImprovedAdrenaline)) addedWrath = Math.round(player.maxWrath() * 0.03);
 		EngineCore.WrathChange(addedWrath, false);
+	}
+	public function PASPAS():Number {
+		var PAS:Number = 0.5;
+		PAS += player.wrath100 * 0.02;
+		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) PAS *= 2.5;
+		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) PAS *= 2;
+		if (player.hasPerk(PerkLib.VexedNocking)) PAS *= 2;
+        return PAS;
 	}
 	
     public function WrathWeaponsProc():void {
@@ -6062,7 +6072,8 @@ public class Combat extends BaseContent {
 			if (player.spe <= 100) parryChance2 += player.spe / 10;
             else parryChance2 += 10;
 		}
-        if (player.weaponPerk == "Massive") parryChance2 += 5;
+		if (player.hasPerk(PerkLib.KnightlySword) && player.isSwordTypeWeapon() && player.isShieldsForShieldBash()) parryChance2 += 15;
+		if (player.weaponPerk == "Massive") parryChance2 += 5;
         if (player.weaponName == "Undefeated King's Destroyer") parryChance2 += 15;
         if (player.hasPerk(PerkLib.DexterousSwordsmanship)) parryChance2 += 10;
         if (player.hasPerk(PerkLib.CatchTheBlade) && player.spe >= 50 && player.shieldName == "nothing" && player.isFistOrFistWeapon()) parryChance2 += 15;
@@ -12416,10 +12427,7 @@ public class Combat extends BaseContent {
                 if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 60) && player.hasPerk(PerkLib.Naturaljouster)) || (player.spe >= 150 && player.hasPerk(PerkLib.Naturaljouster))) damage *= 3;
                 if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 180) && player.hasPerk(PerkLib.NaturaljousterMastergrade)) || (player.spe >= 450 && player.hasPerk(PerkLib.NaturaljousterMastergrade))) damage *= 5;
             }
-			var PAM1:Number = player.wrath100 * 0.02;
-			if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) PAM1 *= 2.5;
-			if (player.hasPerk(PerkLib.PrestigeJobBerserker)) PAM1 *= 2;
-            damage *= (1 + PAM1);
+			damage *= (1 + PASPAS());
         } else {
             if (player.lowerBody == LowerBody.HARPY) {
                 outputText("making a bloody trail with your talons ");
