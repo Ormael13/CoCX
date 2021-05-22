@@ -4,8 +4,10 @@
  */
 package classes.Scenes.Dungeons 
 {
+import classes.BodyParts.LowerBody;
 import classes.CockTypesEnum;
 import classes.EventParser;
+import classes.PerkLib;
 import classes.PerkLib;
 import classes.Scenes.UniqueSexScenes;
 import classes.VaginaClass;
@@ -627,10 +629,11 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		private function encountersRuletteBossesEL2AtlachNacha():void {
 			spriteSelect(SpriteDb.s_Atlach_16bit);
 			if (player.atlachFullTfCheck()){
-				outputText("As you enter the next room you recognise it right away." +
-						" These webs, you've been here before! As if on cue red eyes open in the darkness at the other side of the vast room as if staring into your soul." +
-						" You feel a need to submit to this creature as if some deeply ingrained instincts told you it was the rightest thing in the world and to go against it would be the wrongest thing ever." +
-						"\n\nIt would be so easy to give in to the compulsion nagging at your brain right now. On the other hand you could also fight the fiendish spider back again and leave none the worse. What will you do?");
+				outputText("As you enter the next room, you immediately recognize the place. Several nearby webs catch your eye, you know you've been here before!" +
+						"\n\nBlazing red eyes open within the darkness at the other side of the vast room with a piercing gaze directed at you." +
+						" You feel a need to submit to this creature as if some deeply ingrained instincts told you it was the right and most just decision in the world and to go against it would be the worst decision in existence." +
+						"\n\nIt would be so easy to give in to the compulsion nagging at your brain right now." +
+						" On the other hand, you could also fight the fiendish spider back again and leave before things get worse. What will you do?");
 				menu();
 				addButton(0, "Surender", BecomeAtlach);
 				addButton(1, "Fight", PreCombatAtlach);
@@ -644,22 +647,40 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		}
 		private function BecomeAtlach():void {
 			clearOutput()
-			outputText("You can't fight it anymore, you want this thing. Want it for what? You don't know but as you mindlessly walk toward the beast you muse that you will soon find out." +
-					"\n\nThe spider hisses at your approach, a sound you somehow identify as approval. It gently picks you up and turns you to face away," +
-					" approaching you of the nightmarish tentacular amalgamation that is its face. The tentacle parts way, revealing a large rod not unlike a 16 inch long penis." +
-					" While you admire the thing in awe the spider brutally shove you down into the erect member, hilting itself fully into your pussy." +
-					" You scream in delight seeing white from the deep penetration as the tentacles wrap around your legs pulling them within the writhing mass that is the creature's head." +
-					" Somehow through its penis you begin feeling the rest of the creature's body discovering nerves you didn't know you even had as your spine begins to somehow prolong" +
-					" itself inside the rod that constantly fucks your drooling vagina. Mmm the girl cum that constantly drools from it reminds you of saliva which considering the face of" +
-					" this thing was pretty much a mass of tentacles makes it almost look like you've essentially grown a second foaming mouth." +
-					" The two of you used to be separate entities but are now connected by orgasms like the perfectly aligned piece of the same puzzle." +
-					" Through this connection you feel not only your pussy but a second one beneath your spider abdomen, dripping in excitement." +
-					" Your upper body now locked in a constant copulating state you drool in bliss as you feel something slide out from your lower half which causes an even more intense sensation to overtake you." +
-					" This… this is an ovipositor… this is how you will expel the fertilised eggs you will be producing from now on." +
-					" Clarity dawns on your sex addled mind as you come to the realisation that you are at long last complete." +
+			outputText("You find yourself unable to fight it anymore. You want this thing, regardless of what." +
+					" Want it for what? Your body walks to the beast without the permission of your mind. You know that you will find out what it wants soon enough." +
+					"\n\nThe spider hisses in approval at your approach. It gently picks you up, as you face the being. It shifts as you gaze upon its horrid face, it's an unholy bouquet of tentacles, all writhing before you." +
+					" The tentacle parts way, revealing a large rod, not unlike a 16-inch long penis." +
+					"\n\nWhile you admire the thing in awe, the spider brutally shoves you down into the erect member, hilting itself fully into your ");
+			if (player.hasVagina()) outputText(""+player.vaginaDescript()+".");
+			else outputText(""+player.assholeDescript()+".");
+			outputText(" You yelp from the intrusion, before you relish from the deep, throbbing penetration as the tentacles wrap around your legs," +
+					" pulling you to the writhing mass of the creature's head. Through the length within you, you begin feeling the rest of the creature's body," +
+					" discovering nerves you didn't know you even had as your spine begins to somehow prolong itself inside the rod that constantly fucks you." +
+					"\n\nYou can feel your mind intertwining with the arachnid. The two of you used to be separate entities," +
+					" now connected by mutual lust like the perfectly aligned piece of the same puzzle. Through this connection, you feel a ");
+			if (player.hasVagina()) outputText("second cunt");
+			else outputText("slit");
+			outputText("beneath your spider abdomen, dripping in excitement.");
+			if (!player.hasVagina()) outputText(" Such a strange accommodation, one you know you'll get pleasure out of.");
+			outputText(" Your upper body is now locked in a constant copulating state you drool in bliss as you feel" +
+					" something slide out from your lower half which causes an even more intense sensation to overtake you." +
+					"\n\nThis… this is an ovipositor… this is how you will expel the fertilized eggs you will be producing from now on." +
+					" Clarity dawns on your lust-addled mind as you come to the realization that you are at long last complete." +
 					" It takes you a few minutes to slowly get used to your new state of mind and body and adapt to the pleasure from your constantly orgasming top half," +
 					" now seeking out even greater sensations to feel with your spider genitals." +
-					"");
+					"\n\nYou turn around on your eight legs surveilling the room, this was a good nest while it lasted but now you have places to go and eggs to lay." +
+					" You are completely satisfied with merging with your host or perhaps were you the host? Does it matter? You know it doesn't anymore as you head back into the labyrinth.");
+			//TF list
+			player.lowerBody = LowerBody.ATLACH_NACHA
+			if (!player.hasVagina()) player.createVagina();
+			player.vaginaType(5);
+			player.createPerk(PerkLib.SpiderOvipositor,0,0,0,0);
+			player.createPerk(PerkLib.TransformationImmunityAtlach,0,0,0,0);
+			player.createPerk(PerkLib.Insanity,0,0,0,0);
+
+			player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
+			doNext(playerMenu);
 		}
 		private function PreCombatAtlach():void {
 			clearOutput()

@@ -5398,7 +5398,7 @@ use namespace CoC;
 				fairyCounter += 1;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && fairyCounter >= 8)
 				fairyCounter += 1;
-			if (hasPerk(PerkLib.TransformationImmunity))
+			if (hasPerk(PerkLib.TransformationImmunityFairy))
 				fairyCounter += 5;
 			if (isGargoyle()) fairyCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) fairyCounter = 0;
@@ -9918,47 +9918,46 @@ use namespace CoC;
 		}
 
 		public function atlachFullTfCheck():Boolean {
-			return lowerBody === LowerBody.CHITINOUS_SPIDER_LEGS && arms.type === Arms.SPIDER && eyes.type == Eyes.FOUR_SPIDER_EYES
-			&& eyes.colour === "red" && rearBody.type === RearBody.ATLACH_NACHA && faceType === Face.SPIDER_FANGS
-			&& hasCoatOfType(Skin.CHITIN) && coatColor === "midnight purple" && hairColor === "midnight purple"
-			&& hasVagina() && isFemale() && cor >= 50 && canOvipositSpider();
+			return lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && arms.type == Arms.SPIDER && eyes.type == Eyes.FOUR_SPIDER_EYES
+			&& eyes.colour == "red" && rearBody.type == RearBody.ATLACH_NACHA && faceType == Face.SPIDER_FANGS
+			&& hasCoatOfType(Skin.CHITIN) && coatColor == "midnight purple" && hairColor == "midnight purple" && cor >= 50;
 		}
 		
 		public function atlachNachaScore():int {
 			var score:int = 0;
 			Begin("Player","racialScore","atlachNacha");
-			if (lowerBody === LowerBody.CHITINOUS_SPIDER_LEGS) {
+			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS) {
 				// Chitin glove leg 1
 				score++;
-			} else if (lowerBody === LowerBody.ATLACH_NACHA) {
+			} else if (lowerBody == LowerBody.ATLACH_NACHA) {
 				// Atlach drider body with tentacle 2 (From merge)
 				score += 2;
 			}
 			// Chitin glove arm 1
-			if (arms.type === Arms.SPIDER)
+			if (arms.type == Arms.SPIDER)
 				score++;
 			// Omni Eye on forehead 1
-			if (eyes.type === Eyes.FOUR_SPIDER_EYES) {
+			if (eyes.type == Eyes.FOUR_SPIDER_EYES) {
 				score++;
 				// Red eye color 1
-				if (eyes.colour === "red")
+				if (eyes.colour == "red")
 					score++;
 			}
 			// Atlach Spider leg wings 4
-			if (rearBody.type === RearBody.ATLACH_NACHA)
+			if (rearBody.type == RearBody.ATLACH_NACHA)
 				score += 4;
 			// Spider fang face 1
-			if (faceType === Face.SPIDER_FANGS)
+			if (faceType == Face.SPIDER_FANGS)
 				score++;
 			// Partial chitin//chitin 1
 			if (hasCoatOfType(Skin.CHITIN)) {
 				score++;
 				// Midnight purple chitin color 1
-				if (coatColor === "midnight purple")
+				if (coatColor == "midnight purple")
 					score++;
 			}
 			// Midnight purple hair 1
-			if (hairColor === "midnight purple")
+			if (hairColor == "midnight purple")
 				score++;
 			// Pussy 1
 			if (hasVagina())
@@ -9996,6 +9995,9 @@ use namespace CoC;
 				score++;
 			if (hasPerk(PerkLib.VenomGlandsFinalForm))
 				score++;
+			// Perk +3 (TransformationImmunity)
+			if (hasPerk(PerkLib.TransformationImmunity))
+				score+=3;
 			End("Player","racialScore");
 			return score;
 		}
@@ -13990,7 +13992,8 @@ use namespace CoC;
 		}
 
 		public function blockingBodyTransformations():Boolean {
-			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree);
+			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunityFairy) || hasPerk(PerkLib.TransformationImmunityAtlach)
+					|| hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree);
 		}
 
 		public function manticoreFeed():void {
