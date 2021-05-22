@@ -527,7 +527,13 @@ public class LowerBody extends SaveableBodyPart {
 	});
 	
 	public static const ATLACH_NACHA:int          = 69;
-	EnumValue.add(Types, ATLACH_NACHA, "ATLACH_NACHA", {name: "atlach nacha"});
+	EnumValue.add(Types, ATLACH_NACHA, "ATLACH_NACHA", {
+		name: "atlach nacha",
+		legCount: 8,
+		legs: "spider legs",
+		isDrider: true,
+		appearanceDesc: "Where your legs would normally start you have grown the body of a spider, with {legCount} spindly legs that sprout from its sides."
+	});
 
 	override public function set type(value:int):void {
 		super.type = value;

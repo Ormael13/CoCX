@@ -363,6 +363,20 @@ public class TransformationLib extends MutationsHelper {
 				return player.lowerBody === LowerBody.CHITINOUS_SPIDER_LEGS && player.legCount === 2;
 			}
 	);
+	public const LegsAtlachNacha:Transformation = new SimpleTransformation("Atlach Nacha lower body",
+			// apply effect
+			function (doOutput:Boolean):void {
+				if (doOutput) {
+					// No special text outside the event
+					// outputText("");
+				}
+				setLowerBody(LowerBody.ATLACH_NACHA);
+			},
+			// is present
+			function ():Boolean {
+				return player.lowerBody === LowerBody.ATLACH_NACHA;
+			}
+	);
 	
 	/***
 	 *    ██████  ███████  █████  ██████
