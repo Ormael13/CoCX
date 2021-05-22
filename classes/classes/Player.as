@@ -13926,6 +13926,10 @@ use namespace CoC;
 			return flags[kFLAGS.SEXUAL_FLUIDS_LEVEL];
 		}
 
+		public function blockingBodyTransformations():Boolean {
+			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree);
+		}
+
 		public function manticoreFeed():void {
 			if (hasPerk(PerkLib.ManticoreMetabolism)) {
 				if (hasPerk(PerkLib.ManticoreMetabolismEvolved)) {

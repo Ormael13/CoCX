@@ -70,7 +70,7 @@ public class PotentVenom extends Consumable {
 			changes++;
 		}
 		//end of stat change list and starts of body changes
-		if (game.mutations.blockingBodyTransformations()) changeLimit = 0;
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 		//Physical changes
 		//Legs
 		if (player.lowerBody != LowerBody.CENTIPEDE && changes < changeLimit && rand(3) == 0) {

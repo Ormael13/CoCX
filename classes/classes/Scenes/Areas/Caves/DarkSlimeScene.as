@@ -76,7 +76,7 @@ public function LetzRape2():void {
 public function LetzRape(letzRape:Boolean = false):void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
-	if (CoC.instance.mutations.blockingBodyTransformations()) {
+	if (player.blockingBodyTransformations()) {
 		outputText("The slime moves to you, licks you and then recoils in frustration.\n\n");
 		outputText("\"<i>Just what the hell have you done to your body! You’re outright inedible, I can’t actually eat that! Get the hell out back from where you came and tell whatever species you're from not to visit the area. What a waste of my time.</i>\"\n\n");
 		outputText("The slime moves away, grumbling something to herself. Guess you’re having it easy thanks to the permanence of your form.\n\n");
