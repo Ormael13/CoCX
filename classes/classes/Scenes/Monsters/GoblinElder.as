@@ -43,11 +43,11 @@ public class GoblinElder extends Goblin
 			//Blind
 			else if (spellChooser == 1 && (mana + spellCostBlind) <= maxMana()) {
 				outputText("The goblin glares at you and points at you! A bright flash erupts before you!  ");
-				if ((player.findPerk(PerkLib.GorgonsEyes) < 0 && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
+				if ((!player.hasPerk(PerkLib.GorgonsEyes) && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
 					outputText("<b>You are blinded!</b>");
 					player.createStatusEffect(StatusEffects.Blind, 1 + rand(3), 0, 0, 0);
 				}
-				else if (player.findPerk(PerkLib.GorgonsEyes) >= 0) {
+				else if (player.hasPerk(PerkLib.GorgonsEyes)) {
 					outputText("Your mutated eyes not been affected at all by this flash!");
 				}
 				else {
@@ -141,14 +141,6 @@ public class GoblinElder extends Goblin
 			var mult:Number = 1;
 			mult += 0.5 * player.newGamePlusMod();
 			return mult;
-		}
-		
-		override protected function performCombatAction():void {
-			var choice:Number = rand(10);
-			if (choice < 4) eAttack();
-			else if (choice == 4) goblinDrugAttack();
-			else if (choice == 5) goblinTeaseAttack();
-			else castSpell();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -340,6 +332,12 @@ public class GoblinElder extends Goblin
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 9) this.createPerk(PerkLib.EpicLifeline, 0, 0, 0, 0);
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 10) this.createPerk(PerkLib.MythicalToughness, 0, 0, 0, 0);
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] >= 11) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+			this.abilities = [
+				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON], weight:2},
+				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},
+				{ call: goblinTeaseAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+				{ call: castSpell, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]},
+			]
 			checkMonster();
 		}
 		

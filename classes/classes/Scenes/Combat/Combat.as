@@ -8826,6 +8826,14 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownNet, 1, -1);
             }
         }
+        //Pin Down
+        if (player.hasStatusEffect(StatusEffects.CooldownPinDown)) {
+            if (player.statusEffectv1(StatusEffects.CooldownPinDown) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownPinDown);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownPinDown, 1, -1);
+            }
+        }
         //Tazer
         if (player.hasStatusEffect(StatusEffects.CooldownTazer)) {
             if (player.statusEffectv1(StatusEffects.CooldownTazer) <= 0) {

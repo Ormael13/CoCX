@@ -1039,6 +1039,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownNightOfBrotherhood:StatusEffectType        	= mkCombat("Cooldown Night of Brotherhood");
 		public static const CooldownNonupleThrust:StatusEffectType       		= mkCombat("Cooldown Nonuple Thrust");
 		public static const CooldownOniRampage:StatusEffectType          		= mkCombat("Cooldown Oni Rampage");
+		public static const CooldownPinDown:StatusEffectType       	 		 	= mkCombat("Cooldown Pin Down");
 		public static const CooldownPhoenixFireBreath:StatusEffectType   		= mkCombat("Cooldown Phoenix Fire Breath");
 		public static const CooldownPlasmaBlast:StatusEffectType           		= mkCombat("Cooldown Plasma Blast");
 		public static const CooldownPlay:StatusEffectType                		= mkCombat("Cooldown Play");

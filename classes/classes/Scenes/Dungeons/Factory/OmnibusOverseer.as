@@ -111,8 +111,11 @@ public class OmnibusOverseer extends Monster
 			this.gems = rand(35) + 30;
 			this.additionalXP = 200;
 			this.drop = new WeightedDrop(null, 1);
-			this.special1 = lustAura;
-			this.special2 = milkAttack;
+			this.abilities = [
+				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: lustAura, type: ABILITY_TEASE, range: RANGE_SELF, tags:[]},
+				{ call: milkAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},
+			]
 			this.wings.type = Wings.BAT_LIKE_TINY;
 			this.wings.desc = "tiny hidden";
 			this.tailType = Tail.DEMONIC;

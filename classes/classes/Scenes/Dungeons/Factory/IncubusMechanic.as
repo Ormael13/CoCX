@@ -221,8 +221,11 @@ public class IncubusMechanic extends Monster {
 				this.HP = maxHP();
 				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			}
-			this.special1 = cockTripAttack;
-			this.special2 = spoogeAttack;
+			this.abilities = [
+				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: cockTripAttack, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: spoogeAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},
+			]
 			this.tailType = Tail.DEMONIC;
 			this.wings.type = Wings.BAT_LIKE_TINY;
 			this.wings.desc = "tiny hidden";
