@@ -32,6 +32,7 @@ import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
+import classes.Scenes.Dungeons.EbonLabyrinth;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Explore.Pierce;
 import classes.Scenes.Explore.TheDummy;
@@ -201,7 +202,7 @@ use namespace CoC;
 			//9
 			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that don't fit anywhere else and etc.");
 			addButton(11, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
-			addButton(12, "FairyTest", FairyTest).hint("Become a fairy.");
+			addButton(12, "Atlach Test", SceneLib.ebonLabyrinth.encountersRuletteBossesEL2AtlachNachaDBUG).hint("Trigger Atlach scenes.");
 			addButton(13, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(14, "Back", accessSoulforceMenu);
 		}

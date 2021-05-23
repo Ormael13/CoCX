@@ -627,6 +627,10 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			outputText("For a moment you succumb, mumbling incoherently and walking to this beautiful eye calling to you, but the sound of the dripping fluid on the ground suddenly jars you to reality. You swiftly back away just before she tries and wraps her arms around you. Realising you snapped out of her dominating gaze the woman attacked.\n\n");
 			startCombat(new EyeTyrant(), true);
 		}
+		public function encountersRuletteBossesEL2AtlachNachaDBUG():void{
+			clearOutput();
+			encountersRuletteBossesEL2AtlachNacha();
+		}
 		private function encountersRuletteBossesEL2AtlachNacha():void {
 			spriteSelect(SpriteDb.s_Atlach_16bit);
 			if (player.hasPerk(PerkLib.TransformationImmunityAtlach)){
@@ -669,7 +673,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 					" now connected by mutual lust like the perfectly aligned piece of the same puzzle. Through this connection, you feel a ");
 			if (player.hasVagina()) outputText("second cunt");
 			else outputText("slit");
-			outputText("beneath your spider abdomen, dripping in excitement.");
+			outputText(" beneath your spider abdomen, dripping in excitement.");
 			if (!player.hasVagina()) outputText(" Such a strange accommodation, one you know you'll get pleasure out of.");
 			outputText(" Your upper body is now locked in a constant copulating state you drool in bliss as you feel" +
 					" something slide out from your lower half which causes an even more intense sensation to overtake you." +
@@ -680,6 +684,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 					"\n\nYou turn around on your eight legs surveilling the room, this was a good nest while it lasted but now you have places to go and eggs to lay." +
 					" You are completely satisfied with merging with your host or perhaps were you the host? Does it matter? You know it doesn't anymore as you head back into the labyrinth.");
 			//TF list
+			dynStats("cor", 100);
 			player.tailType = Tail.SPIDER_ADBOMEN
 			player.lowerBody = LowerBody.ATLACH_NACHA
 			if (!player.hasVagina()) player.createVagina();

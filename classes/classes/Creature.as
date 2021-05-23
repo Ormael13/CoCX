@@ -931,12 +931,20 @@ public class Creature extends Utils
 			if (!skin.hasCoat()) return hairColor;
 			return skin.coat.color;
 		}
+		public function get coatColor2():String {
+			if (!skin.hasCoat()) return hairColor;
+			return skin.coat.color2;
+		}
 		public function get NakedCoatColor():String {
 			return skin.coat.color;
 		}
 		public function set coatColor(value:String):void {
 			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
 			skin.coat.color = value;
+		}
+		public function set coatColor2(value:String):void {
+			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
+			skin.coat.color2 = value;
 		}
 
 		public var beardStyle:Number = Beard.NORMAL;

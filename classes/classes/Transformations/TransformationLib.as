@@ -171,6 +171,43 @@ public class TransformationLib extends MutationsHelper {
 				return player.hasCock();
 			}
 	);
+
+	public function makeHairColorTf(colors:/*String*/Array):Transformation {
+		return new SimpleTransformation("hair color: " + colors.join("|"),
+				// apply effect
+				function (doOutput:Boolean):void {
+					var color:String = randomChoice(colors);
+					player.hairColorOnly = color;
+					if (doOutput) {
+						outputText("Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!");
+					}
+				},
+				// is present
+				function ():Boolean {
+					return InCollection(player.hairColor, colors);
+				}
+		)
+	}
+
+	public const SpinneretAtlach:Transformation = new SimpleTransformation("Chitinous spider legs",
+			// apply effect
+			function (doOutput:Boolean):void {
+				if (doOutput) {
+					if (player.tailType > Tail.NONE) outputText("Your tail shudders as heat races through it, twitching violently until it feels almost as if it's on fire.  You jump from the pain at your " + buttDescript() + " and grab at it with your hands.  It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape.  The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones.  That may prove useful.  <b>You now have a spider's abdomen hanging from above your " + buttDescript() + "!</b>\n\n");
+					//(No tail)
+					else outputText("A burst of pain hits you just above your " + buttDescript() + ", coupled with a sensation of burning heat and pressure.  You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body.  Reaching back, you grab at it with your hands.  It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape.  The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones.  That may prove useful.  <b>You now have a spider's abdomen hanging from above your " + buttDescript() + "!</b>");
+				}
+				//(Pre-existing tails)
+				setTailType(Tail.SPIDER_ADBOMEN);
+				player.tailVenom = 5;
+				player.tailRecharge = 5;
+				player.coatColor = "midnight black";
+			},
+			// is present
+			function ():Boolean {
+				return player.tailType === Tail.SPIDER_ADBOMEN;
+			}
+	);
 	
 	/***
 	 *    ███████ ██   ██ ██ ███    ██
@@ -186,13 +223,13 @@ public class TransformationLib extends MutationsHelper {
 			function (doOutput:Boolean):void {
 				if (doOutput) {
 					if (player.hasCoat()) {
-						outputText("A slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your [skin coat] [skin coat.isare] falling to the ground, revealing flawless, black chitin underneath.");
+						outputText("A slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your [skin coat] [skin coat.isare] falling to the ground, revealing flawless, midnight purple chitin underneath.");
 					} else {
 						outputText("A slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.");
 					}
-					outputText("  <b>You now have black chitin exoskeleton partialy covering your body.</b>");
+					outputText("  <b>You now have midnight purple chitin exoskeleton partialy covering your body.</b>");
 				}
-				player.skin.growCoat(Skin.CHITIN, {color: "black"}, Skin.COVERAGE_LOW);
+				player.skin.growCoat(Skin.CHITIN, {color: "midnight purple"}, Skin.COVERAGE_LOW);
 				addGeneticMemory(StatusEffects.UnlockedChitin, "Chitin", doOutput);
 			},
 			// is present
@@ -363,6 +400,22 @@ public class TransformationLib extends MutationsHelper {
 				return player.lowerBody === LowerBody.CHITINOUS_SPIDER_LEGS && player.legCount === 2;
 			}
 	);
+	public const LegsAtlach:Transformation = new SimpleTransformation("Chitinous spider legs",
+			// apply effect
+			function (doOutput:Boolean):void {
+				if (doOutput) {
+					outputText("Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs.  From the waist down, your strength completely deserts you, leaving you to fall hard on your [ass] in the dirt.  With nothing else to do, you look down, only to be mesmerized by the sight of midnight purple exoskeleton creeping up a perfectly human-looking calf.  It crests up your knee to envelop the joint in a many-faceted onyx coating.  Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton.  From a distance it would look almost like a dark purple, thigh-high boot, but you know the truth.  <b>You now have human-like legs covered in a midnight purple, arachnid exoskeleton.</b>");
+				}
+				setLowerBody(LowerBody.CHITINOUS_SPIDER_LEGS);
+				player.legCount  = 2;
+				player.coatColor = "midnight purple";
+				player.coatColor2 = "midnight purple";
+			},
+			// is present
+			function ():Boolean {
+				return player.lowerBody === LowerBody.CHITINOUS_SPIDER_LEGS && player.legCount === 2;
+			}
+	);
 	public const LegsAtlachNacha:Transformation = new SimpleTransformation("Atlach Nacha lower body",
 			// apply effect
 			function (doOutput:Boolean):void {
@@ -438,7 +491,32 @@ public class TransformationLib extends MutationsHelper {
 			},
 			// is present
 			function ():Boolean {
-				return player.arms.type !== Arms.SPIDER;
+				return player.arms.type === Arms.SPIDER;
+			}
+	);
+
+	public const ArmsAtlach:Transformation = new SimpleTransformation("Spider arms",
+			// apply effect
+			function (doOutput:Boolean):void {
+				if (doOutput) {
+					if (player.arms.type == Arms.HARPY || player.arms.type == Arms.HUMAN) {
+						//(Bird pretext)
+						if (player.arms.type == Arms.HARPY) outputText("The feathers covering your arms fall away, leaving them to return to a far more human appearance.  ");
+						outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a midnight purple carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.");
+					} else {
+						if (player.arms.type == Arms.BEE) outputText("The fizz covering your upper arms starting to fall down leaving only midnight purple chitin clad arms.");
+						else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRAGON) outputText("The scales covering your upper arms starting to fall down leaving only midnight purple chitin clad arms.");
+						else if (player.arms.type == Arms.MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the [skinfurscales] into a midnight purple carapace</b>.");
+						else outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a midnight purple carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.");
+					}
+				}
+				setArmType(Arms.SPIDER);
+				player.coatColor = "midnight purple";
+				player.coatColor2 = "midnight purple";
+			},
+			// is present
+			function ():Boolean {
+				return player.arms.type === Arms.SPIDER;
 			}
 	);
 	
@@ -627,10 +705,11 @@ public class TransformationLib extends MutationsHelper {
 		CocksThickenAll,
 		BreastsGrowUpToDD,
 		AssGrowUpTo11,
-		
+
 		EarsElfin,
 		SkinChitin,
 		TieredSpiderFace,
+		makeHairColorTf(["midnight purple"]),
 		new OrderedTransformation("EyesRedThenSpider", [
 			makeEyeColorTf(["red"]),
 			EyesSpiderAndMutagenInt
@@ -638,8 +717,9 @@ public class TransformationLib extends MutationsHelper {
 		BreastRowsRemoveToOne,
 		NipplesPerBreastOne,
 		NipplesBlack,
-		ArmsSpider,
-		LegsSpider,
+		ArmsAtlach,
+		LegsAtlach,
+		SpinneretAtlach,
 		GillsNone,
 		RearAtlachNacha
 	];

@@ -1169,7 +1169,7 @@
         <cell rect="170,70,84,139" name="wings_bg/fairy" dx="20" dy="20"/>
         <cell rect="255,70,83,139" name="wings/fairy" dx="105" dy="20"/>
         <cell rect="255,490,83,139" name="wings_front/fairy" dx="105" dy="20"/>
-        <cell rect="677,350,84,139" name="wings_bg/feather_large" dx="20" dy="20"/>
+        <cell rect="339,70,84,139" name="wings_bg/feather_large" dx="20" dy="20"/>
         <cell rect="424,70,83,139" name="wings/feather_large" dx="105" dy="20"/>
         <cell rect="339,490,83,139" name="wings_front/feather_large" dx="105" dy="20"/>
         <cell rect="1,210,84,139" name="wings_bg/scales" dx="20" dy="20"/>
@@ -1191,7 +1191,6 @@
         <cell rect="254,630,168,139" name="overclothe/vampire" dx="20" dy="28"/>
         <cell rect="677,350,83,139" name="wings_bg/atlach" dx="17" dy="-3"/>
         <cell rect="747,350,83,139" name="wings/atlach" dx="87" dy="-3"/>
-        <cell rect="507,490,83,139" name="wings_front/atlach" dx="102" dy="-3"/>
     </spritemap>
 
 	<!-- LAYER AREA -->
@@ -2809,6 +2808,7 @@
             </case>
 			<case values="LowerBody.ATLACH_NACHA">
                 <hide part="legs/*"/>
+				<hide part="tail/*"/>
                 <show part="legs_fg/atlach"/>
 				<show part="overGenitals/atlach"/>
             </case>
@@ -2923,6 +2923,7 @@
                 <show part="legs/chitin2"/>
             </case>
             <case values="LowerBody.DRIDER">
+				<hide part="tail/*"/>
                 <hide part="legs/*"/>
                 <show part="legs_fg/drider"/>
             </case>
@@ -3300,7 +3301,7 @@
 					</else>
 				</if>
             </case>
-            <case values="Tail.SPIDER_ABDOMEN">
+            <case values="Tail.SPIDER_ADBOMEN">
 				<if test="isTaur()">
 					<show part="tail/spider_taur"/>
 					<else>
