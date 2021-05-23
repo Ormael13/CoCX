@@ -4286,6 +4286,12 @@ use namespace CoC;
 		public function internalChimeraScore():Number {
 			Begin("Player","racialScore","internalChimeraScore");
 			var internalChimeraCounter:Number = 0;
+			if (hasPerk(PerkLib.ArachnidBookLung))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.ArachnidBookLungEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.ArachnidBookLungFinalForm))
+				internalChimeraCounter++;
 			if (hasPerk(PerkLib.BlackHeart))
 				internalChimeraCounter++;
 			if (hasPerk(PerkLib.BlackHeartEvolved))
@@ -5767,7 +5773,6 @@ use namespace CoC;
 				spiderCounter--;
 			if (hasPartialCoat(Skin.CHITIN))
 				spiderCounter++;
-			// Perk +6 (Arachnid book lung)
 			if (hasPerk(PerkLib.ArachnidBookLung))
 				spiderCounter+=2;
 			if (hasPerk(PerkLib.ArachnidBookLungEvolved))
@@ -10272,6 +10277,8 @@ use namespace CoC;
 		}
 		public function maxLungsMutations():Number {
 			var lungsMutations:Number = 1;
+			if (hasPerk(PerkLib.ArachnidBookLung))
+				lungsMutations--;
 			if (hasPerk(PerkLib.DraconicLungs))
 				lungsMutations--;
 			if (hasPerk(PerkLib.CaveWyrmLungs))
