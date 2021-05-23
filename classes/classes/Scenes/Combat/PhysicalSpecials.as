@@ -3133,9 +3133,20 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//LAND A HIT!
 		else {
+			var Multiplier = 1;
+			if(player.hasPerk(PerkLib.ArachnidBookLungEvolved)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.ArachnidBookLungFinalForm)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.Apex)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
 			if(!monster.plural) outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
 			else outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
-			monster.statStore.addBuffObject({spe:-45}, "Web",{text:"Web"});
+			monster.statStore.addBuffObject({spe:-45*Multiplier}, "Web",{text:"Web"});
+			if(player.hasPerk(PerkLib.ArachnidBookLungFinalForm)){
+				if(rand(100) > 50) {
+					monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				}
+			}
 		}
 		awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
 		outputText("\n\n");

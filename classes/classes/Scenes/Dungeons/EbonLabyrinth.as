@@ -5,6 +5,7 @@
 package classes.Scenes.Dungeons 
 {
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.CockTypesEnum;
 import classes.EventParser;
 import classes.PerkLib;
@@ -679,6 +680,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 					"\n\nYou turn around on your eight legs surveilling the room, this was a good nest while it lasted but now you have places to go and eggs to lay." +
 					" You are completely satisfied with merging with your host or perhaps were you the host? Does it matter? You know it doesn't anymore as you head back into the labyrinth.");
 			//TF list
+			player.tailType = Tail.SPIDER_ADBOMEN
 			player.lowerBody = LowerBody.ATLACH_NACHA
 			if (!player.hasVagina()) player.createVagina();
 			player.vaginaType(5);

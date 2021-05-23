@@ -8,6 +8,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
+import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
@@ -118,7 +119,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.hasStatusEffect(StatusEffects.lustStorm)) bd.disable("<b>You already unleashed a thunderstorm on the battlefield</b>\n\n");
 			}
 		}
-		if (player.hasPerk(PerkLib.TransformationImmunityAtlach && player.lowerBody == LowerBody.ATLACH_NACHA) && !monster.hasStatusEffect(StatusEffects.MysticWeb)) {
+		if (player.hasPerk(PerkLib.TransformationImmunityAtlach) && player.lowerBody == LowerBody.ATLACH_NACHA && !monster.hasStatusEffect(StatusEffects.MysticWeb)) {
 			bd = buttons.add("'Mystic Web'", MysticWeb, "Spin a thread of animated web using your magic to tie up your victim in place. Also reduce opponent speed after each use. \n");
 			bd.requireMana(spellCost(50));
 			if (player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
@@ -4084,11 +4085,24 @@ public class MagicSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		outputText("ou ready your spinner and weave a spell animating your webbing to immobilise " + monster.a + monster.short + ". ");
+		outputText("You ready your spinner and weave a spell animating your webbing to immobilise " + monster.a + monster.short + ". ");
 		//WRAP IT UPPP
 		if (40 + rand((player.inte+player.lib)/2) > monster.spe) {
 			outputText("A second later [monster he] is firmly tied up by your enchanted thread.");
 			monster.createStatusEffect(StatusEffects.MysticWeb, 4 + rand(2),0,0,0);
+			var Multiplier = 1;
+			if(player.hasPerk(PerkLib.ArachnidBookLungEvolved)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.ArachnidBookLungFinalForm)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.Apex)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
+			monster.statStore.addBuffObject({spe:-45*Multiplier}, "Web",{text:"Web"});
+			if(player.hasPerk(PerkLib.ArachnidBookLungFinalForm)){
+				if(rand(100) > 50) {
+					monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				}
+			}
+			awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
 		}
 		//Failure
 		else outputText("Your target proves too fast for your technique to catch up.");

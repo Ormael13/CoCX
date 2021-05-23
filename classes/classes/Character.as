@@ -1170,19 +1170,22 @@ import classes.Items.JewelryLib;
 			if (game.player.tailType == Tail.SPIDER_ADBOMEN) maxven += 150;
 			if (game.player.tailType == Tail.SCORPION) maxven += 150;
 			if (game.player.tailType == Tail.MANTICORE_PUSSYTAIL) maxven += 200;
-			if (findPerk(PerkLib.ImprovedVenomGland) >= 0) maxven += 100;
-			if (findPerk(PerkLib.VenomGlands) >= 0) maxven += 25;
-			if (findPerk(PerkLib.VenomGlandsEvolved) >= 0) maxven += 100;
-			if (findPerk(PerkLib.VenomGlandsFinalForm) >= 0) {
+			if (hasPerk(PerkLib.ImprovedVenomGland)) maxven += 100;
+			if (hasPerk(PerkLib.VenomGlands)) maxven += 25;
+			if (hasPerk(PerkLib.VenomGlandsEvolved)) maxven += 100;
+			if (hasPerk(PerkLib.VenomGlandsFinalForm)) {
 				maxven += 175;
-				multimaxven += 0.2;
+				multimaxven += 1;
 			}
-			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {
-				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.1;
-				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.15;
-				if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.2;
-				if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.25;
+			if (hasPerk(PerkLib.JobSoulCultivator)) {
+				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) multimaxven += 0.1;
+				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) multimaxven += 0.15;
+				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) multimaxven += 0.2;
+				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimaxven += 0.25;
 			}
+			if (hasPerk(PerkLib.ArachnidBookLung)) multimaxven += 1;
+			if (hasPerk(PerkLib.ArachnidBookLungEvolved)) multimaxven += 1;
+			if (hasPerk(PerkLib.ArachnidBookLungFinalForm)) multimaxven += 1;
 			maxven *= multimaxven;
 			maxven = Math.round(maxven);
 			return maxven;

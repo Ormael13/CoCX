@@ -5767,6 +5767,13 @@ use namespace CoC;
 				spiderCounter--;
 			if (hasPartialCoat(Skin.CHITIN))
 				spiderCounter++;
+			// Perk +6 (Arachnid book lung)
+			if (hasPerk(PerkLib.ArachnidBookLung))
+				spiderCounter+=2;
+			if (hasPerk(PerkLib.ArachnidBookLungEvolved))
+				spiderCounter+=2;
+			if (hasPerk(PerkLib.ArachnidBookLungFinalForm))
+				spiderCounter+=2;
 			if (spiderCounter > 0 && hasPerk(PerkLib.TrachealSystem))
 				spiderCounter++;
 			if (spiderCounter > 4 && hasPerk(PerkLib.TrachealSystemEvolved))
@@ -9943,6 +9950,8 @@ use namespace CoC;
 				if (eyes.colour == "red")
 					score++;
 			}
+			if (tailType = Tail.SPIDER_ADBOMEN)
+				score++;
 			// Atlach Spider leg wings 4
 			if (rearBody.type == RearBody.ATLACH_NACHA)
 				score += 4;
