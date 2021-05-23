@@ -9202,20 +9202,18 @@ public final class Mutations extends MutationsHelper {
 	public function midnightGossamer(player:Player):void {
 		clearOutput();
 
-		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(2) == 0) changeLimit++;
 		if (rand(2) == 0) changeLimit++;
 		changeLimit += additionalTransformationChances();
 
-		outputText("You wad up the sweet, midnight gossamer and eat it, finding it to be delicious and chewy, almost like licorice.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat. ")
-		while (changes < changeLimit) {
-			var tf: PossibleEffect = TransformationUtils.randomPossibleEffect(transformations.List_AtlachNacha);
-			if (!tf) break;
-			outputText("\n\n");
-			tf.applyEffect();
-			changes++;
-		}
+		outputText("You wad up the sweet, midnight gossamer and eat it, finding it to be delicious and chewy, almost like licorice.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat. ");
+		TransformationUtils.pickAndRunMultipleEffects(
+				transformations.List_AtlachNacha,
+				changeLimit,
+				false,
+				true
+		);
 	}
 
     public function broBrew(player:Player):void {
