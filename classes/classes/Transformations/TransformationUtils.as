@@ -1,4 +1,5 @@
 package classes.Transformations {
+import classes.EngineCore;
 import classes.internals.Utils;
 
 public class TransformationUtils {
@@ -39,6 +40,25 @@ public class TransformationUtils {
         var choice: PossibleEffect = Utils.randomChoice(choices);
         trace("Picked "+choice.name+" out of "+Utils.mapOneProp(transformations,'name').join(", "));
         return choice;
+    }
+    
+    /**
+     * Pick `count` effects from `effects` array (if `allowDuplicates` is false, don't pick them twice) and apply
+     * their effects.
+     * @return Number of effects applied
+     */
+    public static function pickAndRunMultipleEffects(effects: /*PossibleEffect*/Array, count:int, allowDuplicates:Boolean, doOutput:Boolean, textSeparator:String = '\n\n'):int {
+        if (!allowDuplicates) effects = effects.slice();
+        var result:int = 0;
+        while (count --> 0) {
+            var tf:PossibleEffect = randomPossibleEffect(effects);
+            if (!tf) break;
+            if (doOutput) EngineCore.outputText(textSeparator);
+            tf.applyEffect(doOutput);
+            if (!allowDuplicates) effects.splice(effects.indexOf(tf), 1);
+            result++;
+        }
+        return result;
     }
 }
 }
