@@ -129,12 +129,12 @@ use namespace CoC;
 			return flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1;
 		}
 
-		public function PlayerRemoveCurses():Boolean {
+		public function PlayerRemoveCurses():void {
 			outputText("You approach one of the many altars, would you like to give a donation of 1000 gems to be freed from your curses and hexes?");
 			doYesNo(PlayerPrayAtTemple, PlayerPrayAtTemple);
 		}
 
-		public function PlayerRemoveCursesYes():Boolean {
+		public function PlayerRemoveCursesYes():void {
 			outputText("Divine powers radiate from the altar banishing the evil that has took a grip on your body to the void.");
 			player.gems -= 1000;
 			player.statStore.removeBuffs("Curse");
