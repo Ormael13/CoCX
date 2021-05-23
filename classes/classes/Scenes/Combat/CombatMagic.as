@@ -1672,12 +1672,13 @@ public class CombatMagic extends BaseCombatContent {
 					else damageB += 80;
 					damageB *= 0.2;
 					damageB *= 1+(poisonScaling/10);
-					monster.teased(monster.lustVuln * damageB);
+					monster.teased(monster.lustVuln * damageB, false);
 					monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
 					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 5;
+					player.tailVenom -= 25;
+					injections++;
 				}
 				outputText(" Your venom is forcefully injected ");
 				if (injections > 1) outputText(""+injections+" times");
@@ -1962,7 +1963,7 @@ public class CombatMagic extends BaseCombatContent {
 			lustDmg *= 1.75;
 		}
 		lustDmg = Math.round(lustDmg);
-		monster.teased(lustDmg);
+		monster.teased(lustDmg, false);
 		if (crit) outputText(" <b>Critical!</b>");
 		MagicAddonEffect();
 		outputText("\n\n");
