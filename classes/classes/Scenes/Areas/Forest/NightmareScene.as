@@ -35,8 +35,8 @@ public class NightmareScene extends BaseContent
 			outputText("The nightmare falls over in incredulity as you stand above her victorious. She looks at you in awe and fear.\n\n");
 			outputText("<i>“You... curse you! This is impossible, nobody should be able to resist the call of corruption! Have mercy! My body is decadent and seductive how can you simply destroy such beauty! Allow me to serve you I can be useful I can...”</i>\n\n");
 			if (silly()) outputText("You step over her with clear intent to finish your work as all the demons turn to watch, and in a single voice, they cry out <b><i>FINISH HER!!!</i></b> Smirking at the vocal support, you declare sternly:");
-			else outputText("You step over her with clear intent to finish your work and declare sternly:\n\n");
-			outputText("<i>“You are a beautiful flower, yes, however your nectar is poison and your scent is a lethal trap. I won’t allow you to spread your malice any further...”</i>\n\n");
+			else outputText("You step over her with clear intent to finish your work, but not without a little beration:\n\n");
+			outputText("Like a beautiful flower, a flora filled with vile poison. You know it's time to rid the forest of this pestilince ridden thing.\n\n");
 			if (silly()) {
 				outputText("You grab her by a single horn and jerk her head to the side, snapping it instantly. An x-ray allows the audience to see the vertebrae in her neck shatter from the force, and you grab the other horn for leverage. Planting a foot on the Nightmare's chest, you heave upwards with all your might, ");
 				outputText("pulling not just her head off, but the entire spine as well. The demons once again speak, screaming out <b><i>FATALITY!!!</i></b> as you walk off with your new trophy.\n\n");
