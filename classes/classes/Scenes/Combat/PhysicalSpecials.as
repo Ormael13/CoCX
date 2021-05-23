@@ -1008,14 +1008,35 @@ public class PhysicalSpecials extends BaseCombatContent {
 					player.tailVenom -= 5;
 				}
 				if (player.faceType == Face.SPIDER_FANGS) {
-					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
-					var lustDmg:int = 6 * monster.lustVuln;
-					monster.teased(lustDmg);
-					if (monster.lustVuln > 0) {
-						monster.lustVuln += 0.01;
-						if (monster.lustVuln > 1) monster.lustVuln = 1;
+					if (player.lowerBody == LowerBody.ATLACH_NACHA){
+						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
+						var damageB:Number = 35 + rand(player.lib / 10);
+						var poisonScaling:Number = 1;
+						poisonScaling += player.lib/100;
+						poisonScaling += player.tou/100;
+						if (player.level < 10) damageB += 20 + (player.level * 3);
+						else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
+						else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
+						else damageB += 80;
+						damageB *= 0.2;
+						damageB *= 1+(poisonScaling/10);
+						monster.teased(monster.lustVuln * damageB);
+						monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
+						if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+						} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+						player.tailVenom -= 5;
 					}
-					player.tailVenom -= 5;
+					else {
+						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+						var lustDmg:int = 6 * monster.lustVuln;
+						monster.teased(lustDmg);
+						if (monster.lustVuln > 0) {
+							monster.lustVuln += 0.01;
+							if (monster.lustVuln > 1) monster.lustVuln = 1;
+						}
+						player.tailVenom -= 5;
+					}
 				}
 				if (monster.lust >= monster.maxLust()) {
 					outputText("\n\n");
@@ -3367,9 +3388,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Gone		menuLoc = 1;
 			menu();
 			addButton(0, "Next", combatMenu, false);
-			return;
+			return
 		}
 		fatigue(10, USEFATG_PHYSICAL);
+		outputText("You attempt to slam both of your powerful forepaws on " + monster.a + monster.short + ". ");
 		//Amily!
 		if (monster.hasStatusEffect(StatusEffects.Concentration)) {
 			clearOutput();
@@ -3377,7 +3399,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You attempt to slam both of your powerful forepaws on " + monster.a + monster.short + ". ");
 		//WRAP IT UPPP
 		if (40 + rand(player.spe) > monster.spe) {
 			outputText("You land both paws on " + monster.a + monster.short + " with brutal power using your claws to grab " + monster.pronoun2 + ".");
@@ -3744,17 +3765,41 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//React
 			if(monster.lustVuln == 0) outputText("  Your aphrodisiac toxin has no effect!");
 			else {
-				if(monster.plural) outputText("  The one you bit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.");
-				else outputText("  " + monster.mf("He","She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.","touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
-				var lustDmg:int = 30 * monster.lustVuln;
-				if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-				if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-				if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
-				if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
-				monster.teased(lustDmg);
-				if (monster.lustVuln > 0) {
-					monster.lustVuln += 0.05;
-					if (monster.lustVuln > 1) monster.lustVuln = 1;
+				if (player.lowerBody == LowerBody.ATLACH_NACHA){
+					if (monster.plural) outputText("  The one you bit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.");
+					else outputText("  " + monster.mf("He", "She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.", "touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
+					var lustDmg:Number = 35 + rand(player.lib / 10);
+					var poisonScaling:Number = 1;
+					poisonScaling += player.lib/100;
+					poisonScaling += player.tou/100;
+					if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
+					if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
+					if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
+					if (player.level < 10) lustDmg += 20 + (player.level * 3);
+					else if (player.level < 20) lustDmg += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) lustDmg += 70 + (player.level - 20) * 1;
+					else lustDmg += 80;
+					lustDmg *= 0.2;
+					lustDmg *= 1+(poisonScaling/10);
+					monster.teased(monster.lustVuln * lustDmg, true);
+					monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
+					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+						monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+				} else {
+					if (monster.plural) outputText("  The one you bit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.");
+					else outputText("  " + monster.mf("He", "She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.", "touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
+					var lustDmg:Number = 35 + rand(player.lib / 10);
+					if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
+					if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
+					if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
+					monster.teased(lustDmg, true);
+					if (monster.lustVuln > 0) {
+						monster.lustVuln += 0.05;
+						if (monster.lustVuln > 1) monster.lustVuln = 1;
+					}
 				}
 			}
 		}

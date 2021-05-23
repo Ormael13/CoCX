@@ -1823,14 +1823,23 @@ import flash.utils.getQualifiedClassName;
 		 */
 		protected function handleConstricted():Boolean
 		{
-			if (hasStatusEffect(StatusEffects.Pounce)) {
-			EngineCore.outputText("" + capitalA + short + " struggle to get free.");
-			if (statusEffectv1(StatusEffects.Pounce) <= 0) {
-				EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove you off.");
-				removeStatusEffect(StatusEffects.Pounce);
+			if (hasStatusEffect(StatusEffects.MysticWeb)) {
+				EngineCore.outputText("" + capitalA + short + " struggle to get free from your web!");
+				if (statusEffectv1(StatusEffects.MysticWeb) <= 0) {
+					EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove you break off your webbing.");
+					removeStatusEffect(StatusEffects.MysticWeb);
+				}
+				addStatusValue(StatusEffects.MysticWeb, 1, -1);
+				return false;
 			}
-			addStatusValue(StatusEffects.Pounce, 1, -1);
-			return false;
+			if (hasStatusEffect(StatusEffects.Pounce)) {
+				EngineCore.outputText("" + capitalA + short + " struggle to get free.");
+				if (statusEffectv1(StatusEffects.Pounce) <= 0) {
+					EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove you off.");
+					removeStatusEffect(StatusEffects.Pounce);
+				}
+				addStatusValue(StatusEffects.Pounce, 1, -1);
+				return false;
 			}
 			if (hasStatusEffect(StatusEffects.ManticorePlug)) {
 				EngineCore.outputText("" + capitalA + short + " pulls to unplug your tail from [monster his] "+cockDescriptShort()+".");

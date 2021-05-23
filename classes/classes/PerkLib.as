@@ -3185,6 +3185,8 @@ public class PerkLib
 		public static const VampiricBloodsteamFinalForm:PerkType = mk("Vampiric Bloodsteam (Final Form)", "Vampiric Bloodsteam (Final Form)",
 				"Your bloodsteam fully adapted to presence of vampiric blood. Increases the maximum numbers of stacks of Vampire Thirst by 60 and increase their potency by 50%.",
 				"You've chosen the 'Vampiric Bloodsteam (Final Form)' perk. Your bloodsteam fully adapted to presence of vampiric blood. Increases the maximum numbers of stacks of Vampire Thirst by 60 and increase their potency by 50%.").withBuffs({'lib.mult':0.15});
+		public static const Venomancy:PerkType = mk("Venomancy", "Venomancy",
+				"Grants the Venomancy ability. While active, apply venom effect to spellcasting the venom benefiting from caster perks multipliers but cost a charge each time.")
 		public static const VenomGlands:PerkType = mk("Venom Glands", "Venom Glands",
 				"Your body possesses rudimentary venom glands along with changes in teeth to been able use this venom when biting.",
 				"You've chosen the 'Venom Glands' perk. Your body possesses rudimentary venom glands along with changes in teeth to been able use this venom when biting.").withBuffs({'tou.mult':0.05});

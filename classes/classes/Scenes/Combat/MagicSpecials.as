@@ -14,6 +14,7 @@ import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
+import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.NPCs.Holli;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Codex;
@@ -116,6 +117,13 @@ public class MagicSpecials extends BaseCombatContent {
 				bd = buttons.add("Lust storm", Luststorm).hint("Supercharge the air with your lusty electricity to unleash a thunderstorm.");
 				if (player.hasStatusEffect(StatusEffects.lustStorm)) bd.disable("<b>You already unleashed a thunderstorm on the battlefield</b>\n\n");
 			}
+		}
+		if (player.hasPerk(PerkLib.TransformationImmunityAtlach && player.lowerBody == LowerBody.ATLACH_NACHA) && !monster.hasStatusEffect(StatusEffects.MysticWeb)) {
+			bd = buttons.add("'Mystic Web'", MysticWeb, "Spin a thread of animated web using your magic to tie up your victim in place. Also reduce opponent speed after each use. \n");
+			bd.requireMana(spellCost(50));
+			if (player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
+				bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
+			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.tailType == Tail.FOX && player.tailCount >= 2 && player.tailCount < 7) {
 			bd = buttons.add("Fox Fire", basicFoxFire, "Unleash fox flame at your opponent for high damage. \n");
@@ -4063,6 +4071,29 @@ public class MagicSpecials extends BaseCombatContent {
 		else {
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
+	}
+
+	public function MysticWeb():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		if (monster is EncapsulationPod) {
+			clearOutput();
+			outputText("You can't web something you're trapped inside of!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		outputText("ou ready your spinner and weave a spell animating your webbing to immobilise " + monster.a + monster.short + ". ");
+		//WRAP IT UPPP
+		if (40 + rand((player.inte+player.lib)/2) > monster.spe) {
+			outputText("A second later [monster he] is firmly tied up by your enchanted thread.");
+			monster.createStatusEffect(StatusEffects.MysticWeb, 4 + rand(2),0,0,0);
+		}
+		//Failure
+		else outputText("Your target proves too fast for your technique to catch up.");
+		outputText("\n\n");
+		enemyAI();
 	}
 	
 	//Slime Bolt

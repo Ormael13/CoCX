@@ -628,6 +628,13 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		}
 		private function encountersRuletteBossesEL2AtlachNacha():void {
 			spriteSelect(SpriteDb.s_Atlach_16bit);
+			if (player.hasPerk(PerkLib.TransformationImmunityAtlach)){
+				outputText("By luck or by sheer irony you stumble upon your old nest. It's been empty for a while now and hasn't been used ever since you left." +
+						" This said some of your old minions came over and paid tribute leaving some treasure by your web. You take the gems and leave back for the labyrinth.");
+				player.gems += 500;
+				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
+				doNext(playerMenu);
+			}
 			if (player.atlachFullTfCheck()){
 				outputText("As you enter the next room, you immediately recognize the place. Several nearby webs catch your eye, you know you've been here before!" +
 						"\n\nBlazing red eyes open within the darkness at the other side of the vast room with a piercing gaze directed at you." +
