@@ -9950,7 +9950,7 @@ use namespace CoC;
 				if (eyes.colour == "red")
 					score++;
 			}
-			if (tailType = Tail.SPIDER_ADBOMEN)
+			if (tailType == Tail.SPIDER_ADBOMEN)
 				score++;
 			// Atlach Spider leg wings 4
 			if (rearBody.type == RearBody.ATLACH_NACHA)
