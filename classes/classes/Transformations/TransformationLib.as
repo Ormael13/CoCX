@@ -201,7 +201,7 @@ public class TransformationLib extends MutationsHelper {
 				setTailType(Tail.SPIDER_ADBOMEN);
 				player.tailVenom = 5;
 				player.tailRecharge = 5;
-				player.coatColor = "midnight black";
+				player.coatColor = "midnight purple";
 			},
 			// is present
 			function ():Boolean {
