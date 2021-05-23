@@ -11,6 +11,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.ConsumableLib;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 import classes.StatusEffects.Combat.WebDebuff;
@@ -187,7 +188,7 @@ use namespace CoC;
 			this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.drop = NO_DROP;
+			this.drop = new WeightedDrop(consumables.M_GOSSR, 1);
 			this.checkMonster();
 		}
 	}
