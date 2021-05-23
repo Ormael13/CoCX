@@ -9199,7 +9199,7 @@ public final class Mutations extends MutationsHelper {
             }
     */
 	
-	public function midnightGossamer():void {
+	public function midnightGossamer(player:Player):void {
 		clearOutput();
 
 		var changes:Number = 0;
