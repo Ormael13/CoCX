@@ -4049,8 +4049,8 @@ public class PerkLib
                     .requireInt(150)
                     .requireLevel(42)
 					.requireCustomFunction(function (player:Player):Boolean {
-                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) >= 3 || player.statusEffectv1(StatusEffects.SiegweirdTraining2) >= 2;
-                    }, "Finished one of the two mages (Alvina/Siegweird) quest lines up to the optional battle");
+                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) >= 1 || player.statusEffectv1(StatusEffects.SiegweirdTraining2) >= 1;
+                    }, "Get menthorship from one of the two greatest mages in mareth (Alvina/Siegweird)");
             HalfStepToPeerlessTranquilness.requireStr(240)
                     .requireTou(80)
                     .requireSpe(80)
