@@ -3783,7 +3783,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function pureFoxFire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		var soulforcecost:int = 40 * soulskillCost() * soulskillcostmulti();
+		var soulforcecost:int = Math.floor(40 * soulskillCost() * soulskillcostmulti());
 		player.soulforce -= soulforcecost;
 		pureFoxFire2();
 	}
@@ -3981,7 +3981,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		var soulforcecost:int = 20 * soulskillCost() * soulskillcostmulti();
+		var soulforcecost:int = Math.floor(20 * soulskillCost() * soulskillcostmulti());
 		player.soulforce -= soulforcecost;
 		kitsuneIllusion2();
 	}
