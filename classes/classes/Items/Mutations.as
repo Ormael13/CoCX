@@ -6147,7 +6147,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("lib", 1);
             changes++;
         }
-        if (player.blockingBodyTransformations()()) changeLimit = 0;
+        if (player.blockingBodyTransformations()) changeLimit = 0;
         //Sexual changes would go here if I wasn't a tard.
         //Heat
         if (rand(4) == 0 && changes < changeLimit) {
