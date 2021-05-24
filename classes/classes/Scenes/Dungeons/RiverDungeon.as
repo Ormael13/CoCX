@@ -405,8 +405,8 @@ import classes.StatusEffects;
 		}
 		public function defeatedByFireElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			outputText("Death by Fireballs!\n\n");
+			outputText("You collapse, unable to fight any longer. That not stops Ifrit as she conjuce more and more fireballs. Only when they surround you from all sides not leaving any retreat path she makes hand gesture sending them all at once toward you.\n\n");
+			outputText("With no escape you feel as they all hits you, first starting to burn and then melt your [skin], then your muscles. By the time they starts to tuns your bones into cinder you brain long ago stopped functioning.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
@@ -419,8 +419,8 @@ import classes.StatusEffects;
 		}
 		public function defeatedByAirElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			outputText("Death by Air Getsuga Tenshou!\n\n");
+			outputText("Despite your will to fight broken and your body bleeding form many of enemy attacks Sylph as nothing happened starts again next attack. Air currents condenses into new crescent-shaped wind blades, covering your paths of retreat. After long moment that feels like eterningty you literlay surrounded by wall of wind blades, that are send toward you with a simple gesture of your enemy.\n\n");
+			outputText("Having barely any strnegth to even move you watch hopelessly as one after another wind blades cuts deeper and deeper into your body turning it into mincemeat.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
@@ -430,47 +430,51 @@ import classes.StatusEffects;
 			outputText("You don't have enough time to scream as the lacerations quickly rip you to shreds.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
-		}/*
-		public function defeatedBy<Boss enemy>():void {
+		}
+		public function defeatedByQuatroElementalBoss():void {
 			clearOutput();
 			outputText("Placeholder Bad End.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
-		}*/
+		}
 		public function defeatFireElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Good End.\n\n");
+			outputText("Defeated Ifrit stand for a moment blankly looking at you. Flames crackle from time to time until whole 'her' body starts to burning brighter and brighter until it's as bright as sun causing you to instinctively turns your eye for a moment.\n\n");
+			outputText("When you looks back again there is nothing left of your enemy. Well almost nothing as in spot where was ifrit moment ago on the floor lay reddish round core.\n\n");
 			player.createKeyItem("Fire Ifrit Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 1, 1);
 			doNext(roomB18);
 		}
 		public function defeatWaterElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Good End.\n\n");
+			outputText("Defeated Undine stops moving completly giving impression of calm water. Well calm water in shape of monster. Then without any signs it just loose if form turning into mass of water that simply spill around like normal pool of water would..\n\n");
+			outputText("Walking thou the shallow pool of water you reach toward navy blue small core.\n\n");
 			player.createKeyItem("Water Undine Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
 			doNext(roomB21);
 		}
 		public function defeatAirElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Good End.\n\n");
+			outputText("Defeated Sylph stops for a moment. Just a moment as few seconds later it sneds strong gust of wind toward you. Bracking yourself for impact you instnctively cross your arms before you. But the wind not hirts you at all simply passing by next to you.\n\n");
+			outputText("After the wind gust is gone you looking toward place where moment ago was still air elemental. Now there is nothing left of it aside it core, which fallen to the floor. Weird you not even heard the sound of it heating the floor...\n\n");
 			player.createKeyItem("Air Sylph Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
 			doNext(roomB24);
 		}
 		public function defeatEarthElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Good End.\n\n");
+			outputText("Defeated Golem stand for a moment blankly looking ahead. Then first stone making up 'her' body fall out, foloowed by another and another. Without any sounds than dropping stones to the floor whole it body crumbles.\n\n");
+			outputText("After nothing more than small mound of rocks left of it you notice something shining between them. Comming closer you moves away few stones to find undamaged golem core.\n\n");
 			player.createKeyItem("Earth Golem Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 4, 1);
 			doNext(roomB27);
-		}/*
-		public function defeat<Boss enemy>():void {
+		}
+		public function defeatQuatroElementalBoss():void {
 			clearOutput();
 			outputText("Placeholder Bad End.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
-		}*/
+		}
 		
 		private function encountersRuletteC():void {
 			/*if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
@@ -808,12 +812,15 @@ import classes.StatusEffects;
 		public function roomB08():void {
 			dungeonLoc = 111;
 			clearOutput();//boss room
-			/*if (flags[kFLAGS.AETHER_SINISTER_EVO] < 1) {
-				flags[kFLAGS.AETHER_SINISTER_EVO] = 0.5;
-				outputText("As you peek into a room, out of nearby shadow emerge golem. Looks like you have encountered aether golem! You ready your [weapon] for a fight!");
-				startCombat(new GolemDummyImproved(), true);
-			}
-			else */encountersRuletteB();
+			if (player.statusEffectv1(StatusEffects.RivereDungeonIB) == 1 && player.statusEffectv2(StatusEffects.RivereDungeonIB) == 1 && player.statusEffectv3(StatusEffects.RivereDungeonIB) == 1 && player.statusEffectv4(StatusEffects.RivereDungeonIB) == 1) {
+				player.addStatusValue(StatusEffects.RivereDungeonIB, 1, 1);
+				player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
+				player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
+				player.addStatusValue(StatusEffects.RivereDungeonIB, 4, 1);
+				outputText("As you step into the room all four flames burning at incense burners intesifies. (silly: yeah definetly now should start play boss fight music theme, right?) nexzt part is one of flames sens embers toward centre of room where form under the floor rise humanoid shape that absorm embers and start fight.");
+				startCombat(new GolemDummyImproved(), true);( each defeat of it would trigger another flame embers absorbed into boss (effectively healing boss, rising max stats caps, adding new attacks to pattern, if fire and water elements embers get added will create fused special that boost explosive increase in firepower of attack. water embers adding regeneration to boss, air embers boost evasion, earth embers boost armor/m.res))
+			}//fire, earth, water, air elements added
+			else encountersRuletteB();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
