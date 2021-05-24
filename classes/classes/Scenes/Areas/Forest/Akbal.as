@@ -135,13 +135,13 @@ public class Akbal extends Monster
 					return;
 				}
 				//Determine if evaded
-				if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 20)
+				if (player.hasPerk(PerkLib.Evade) && rand(100) < 20)
 				{
 					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s fire-breath.");
 					return;
 				}
 				//Determine if flexibilitied
-				if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 10)
+				if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 10)
 				{
 					outputText("Using your cat-like agility, you contort your body to avoid " + a + short + "'s fire-breath.");
 					return;
@@ -368,10 +368,13 @@ public class Akbal extends Monster
 					add(consumables.W_FRUIT,3).
 					add(consumables.AKBALSL,2).
 					add(weapons.PIPE,1);
-			this.special1 = akbalLustAttack;
-			this.special2 = akbalSpecial;
-			this.special3 = akbalHeal;
-			this.tailType = Tail.DOG;
+			this.abilities = [
+				{call: eAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: akbalLustAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+				{call: akbalSpecial, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[TAG_FIRE]},
+				{call: akbalHeal, type: ABILITY_MAGIC, range: RANGE_SELF, tags:[TAG_HEAL]},
+			];
+			this.tailType = Tail.CAT;
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);

@@ -3097,6 +3097,7 @@ use namespace CoC;
 				{name: 'troll', score: trollScore(), minscore: 5},
 				{name: 'cyclop', score: cyclopScore(), minscore: 6},
 				{name: 'gazer', score: gazerScore(), minscore: 7},
+				{name: 'atlach nacha', score: atlachNachaScore(), minscore: 10},
 			];
 
 			ScoreList = ScoreList.filter(function(element:Object, index:int, array:Array):Boolean {
@@ -4149,6 +4150,15 @@ use namespace CoC;
 					race = "Jiangshi";
 				}
 			}
+			if (TopRace == "atlach nacha") {
+				if (TopScore >= 30) {
+					race = "greater Atlach Nacha"
+				} else if (TopScore >= 18) {
+					race = "Atlach Nacha"
+				} else if (TopScore >= 10) {
+					race = "incomplete Atlach Nacha"
+				}
+			}
 			if (chimeraScore() >= 3)
 			{
 				race = "chimera";
@@ -4208,7 +4218,7 @@ use namespace CoC;
 		}
 
 		public function humanMaxScore():Number {
-			var humanMaxCounter:Number = 135;//17 + 115 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
+			var humanMaxCounter:Number = 138;//17 + 115 z perków mutacyjnych (każdy nowy mutation perk wpisywać też do TempleOfTheDivine.as we fragmencie o zostaniu Gargoyle)
 			return humanMaxCounter;
 		}
 
@@ -4276,6 +4286,12 @@ use namespace CoC;
 		public function internalChimeraScore():Number {
 			Begin("Player","racialScore","internalChimeraScore");
 			var internalChimeraCounter:Number = 0;
+			if (hasPerk(PerkLib.ArachnidBookLung))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.ArachnidBookLungEvolved))
+				internalChimeraCounter++;
+			if (hasPerk(PerkLib.ArachnidBookLungFinalForm))
+				internalChimeraCounter++;
 			if (hasPerk(PerkLib.BlackHeart))
 				internalChimeraCounter++;
 			if (hasPerk(PerkLib.BlackHeartEvolved))
@@ -4693,6 +4709,8 @@ use namespace CoC;
 			if (kamaitachiScore() >= 14)
 				chimeraCounter++;
 			if (ratatoskrScore() >= 12)
+				chimeraCounter++;
+			if (atlachNachaScore() >= 12)
 				chimeraCounter++;
 
 			End("Player","racialScore");
@@ -5386,7 +5404,7 @@ use namespace CoC;
 				fairyCounter += 1;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && fairyCounter >= 8)
 				fairyCounter += 1;
-			if (hasPerk(PerkLib.TransformationImmunity))
+			if (hasPerk(PerkLib.TransformationImmunityFairy))
 				fairyCounter += 5;
 			if (isGargoyle()) fairyCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) fairyCounter = 0;
@@ -5755,6 +5773,12 @@ use namespace CoC;
 				spiderCounter--;
 			if (hasPartialCoat(Skin.CHITIN))
 				spiderCounter++;
+			if (hasPerk(PerkLib.ArachnidBookLung))
+				spiderCounter+=2;
+			if (hasPerk(PerkLib.ArachnidBookLungEvolved))
+				spiderCounter+=2;
+			if (hasPerk(PerkLib.ArachnidBookLungFinalForm))
+				spiderCounter+=2;
 			if (spiderCounter > 0 && hasPerk(PerkLib.TrachealSystem))
 				spiderCounter++;
 			if (spiderCounter > 4 && hasPerk(PerkLib.TrachealSystemEvolved))
@@ -9905,6 +9929,93 @@ use namespace CoC;
 			return gargoyleCounter;
 		}
 
+		public function atlachFullTfCheck():Boolean {
+			return lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && arms.type == Arms.SPIDER && eyes.type == Eyes.FOUR_SPIDER_EYES
+			&& eyes.colour == "red" && rearBody.type == RearBody.ATLACH_NACHA && faceType == Face.SPIDER_FANGS
+			&& hasCoatOfType(Skin.CHITIN) && coatColor == "midnight purple" && hairColor == "midnight purple";
+		}
+		
+		public function atlachNachaScore():int {
+			var score:int = 0;
+			Begin("Player","racialScore","atlachNacha");
+			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS) {
+				// Chitin glove leg 1
+				score++;
+			} else if (lowerBody == LowerBody.ATLACH_NACHA) {
+				// Atlach drider body with tentacle 2 (From merge)
+				score += 2;
+			}
+			// Chitin glove arm 1
+			if (arms.type == Arms.SPIDER)
+				score++;
+			// Omni Eye on forehead 1
+			if (eyes.type == Eyes.FOUR_SPIDER_EYES) {
+				score++;
+				// Red eye color 1
+				if (eyes.colour == "red")
+					score++;
+			}
+			if (tailType == Tail.SPIDER_ADBOMEN)
+				score++;
+			// Atlach Spider leg wings 4
+			if (rearBody.type == RearBody.ATLACH_NACHA)
+				score += 4;
+			// Spider fang face 1
+			if (faceType == Face.SPIDER_FANGS)
+				score++;
+			// Partial chitin//chitin 1
+			if (hasCoatOfType(Skin.CHITIN)) {
+				score++;
+				// Midnight purple chitin color 1
+				if (coatColor == "midnight purple")
+					score++;
+			}
+			// Midnight purple hair 1
+			if (hairColor == "midnight purple")
+				score++;
+			// Pussy 1
+			if (hasVagina())
+				score++;
+			// Female 1
+			if (isFemale())
+				score++;
+			// Corruption 50+ 1
+			if (cor >= 50)
+				score++;
+			// Ovipositor +1
+			if (canOvipositSpider())
+				score++
+			// Insanity +1 (Gained from merging)
+			if (hasPerk(PerkLib.Insanity))
+				score++;
+			// Perk +6 (Arachnid book lung)
+			if (hasPerk(PerkLib.ArachnidBookLung))
+				score+=2;
+			if (hasPerk(PerkLib.ArachnidBookLungEvolved))
+				score+=2;
+			if (hasPerk(PerkLib.ArachnidBookLungFinalForm))
+				score+=2;
+			// Perk +3 (Tracheal)
+			if (hasPerk(PerkLib.TrachealSystem))
+				score++;
+			if (hasPerk(PerkLib.TrachealSystemEvolved))
+				score++;
+			if (hasPerk(PerkLib.TrachealSystemFinalForm))
+				score++;
+			// Perk +3 (VenomGland)
+			if (hasPerk(PerkLib.VenomGlands))
+				score++;
+			if (hasPerk(PerkLib.VenomGlandsEvolved))
+				score++;
+			if (hasPerk(PerkLib.VenomGlandsFinalForm))
+				score++;
+			// Perk +3 (TransformationImmunity)
+			if (hasPerk(PerkLib.TransformationImmunity))
+				score+=3;
+			End("Player","racialScore");
+			return score;
+		}
+
 		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan,
 
 		public function currentBasicJobs():Number {
@@ -10166,6 +10277,8 @@ use namespace CoC;
 		}
 		public function maxLungsMutations():Number {
 			var lungsMutations:Number = 1;
+			if (hasPerk(PerkLib.ArachnidBookLung))
+				lungsMutations--;
 			if (hasPerk(PerkLib.DraconicLungs))
 				lungsMutations--;
 			if (hasPerk(PerkLib.CaveWyrmLungs))
@@ -11075,6 +11188,7 @@ use namespace CoC;
 		}
 
 		public function strtouspeintwislibsenCalculation2():void {
+			var score:int;
 			removeStatusEffect(StatusEffects.StrTouSpeCounter2);
 			createStatusEffect(StatusEffects.StrTouSpeCounter2,0,0,0,0);
 			removeStatusEffect(StatusEffects.IntWisCounter2);
@@ -11858,8 +11972,7 @@ use namespace CoC;
 					maxSpeCap2 += 10;
 					maxIntCap2 -= 30;
 					maxLibCap2 += 25;
-				}
-				else {
+				} else {
 					maxStrCap2 += 60;
 					maxTouCap2 += 15;
 					maxSpeCap2 += 5;
@@ -11873,14 +11986,12 @@ use namespace CoC;
 					maxIntCap2 += 50;
 					maxLibCap2 += 120;
 					currentSen += 60;
-				}
-				else if (raijuScore() >= 10) {
+				} else if (raijuScore() >= 10) {
 					maxSpeCap2 += 70;
 					maxIntCap2 += 50;
 					maxLibCap2 += 80;
 					currentSen += 50;
-				}
-				else {
+				} else {
 					maxSpeCap2 += 35;
 					maxIntCap2 += 25;
 					maxLibCap2 += 40;
@@ -11892,13 +12003,11 @@ use namespace CoC;
 					maxTouCap2 -= 25;
 					maxSpeCap2 += 155;
 					maxLibCap2 += 185;
-				}
-				else if (thunderbirdScore() >= 16) {
+				} else if (thunderbirdScore() >= 16) {
 					maxTouCap2 -= 20;
 					maxSpeCap2 += 120;
 					maxLibCap2 += 140;
-				}
-				else {
+				} else {
 					maxTouCap2 -= 15;
 					maxSpeCap2 += 95;
 					maxLibCap2 += 100;
@@ -11909,8 +12018,7 @@ use namespace CoC;
 					maxSpeCap2 += 30;
 					maxIntCap2 += 35;
 					maxLibCap2 += 100;
-				}
-				else {
+				} else {
 					maxSpeCap2 += 15;
 					maxIntCap2 += 15;
 					maxLibCap2 += 45;
@@ -11924,23 +12032,20 @@ use namespace CoC;
 						maxIntCap2 += 180;
 						maxLibCap2 += 120;
 						currentSen += 50;
-					}
-					else {
+					} else {
 						maxStrCap2 += 75;
 						maxSpeCap2 -= 25;
 						maxIntCap2 += 130;
 						maxLibCap2 += 100;
 						currentSen += 40;
 					}
-				}
-				else if (devilkinScore() >= 11) {
+				} else if (devilkinScore() >= 11) {
 					maxStrCap2 += 55;
 					maxSpeCap2 -= 20;
 					maxIntCap2 += 80;
 					maxLibCap2 += 65;
 					currentSen += 15;
-				}
-				else {
+				} else {
 					maxStrCap2 += 35;
 					maxSpeCap2 -= 10;
 					maxIntCap2 += 50;
@@ -11964,14 +12069,12 @@ use namespace CoC;
 					maxIntCap2 += 90;
 					maxLibCap2 += 140;
 					currentSen += 60;
-				}
-				else if (manticoreScore() >= 15) {
+				} else if (manticoreScore() >= 15) {
 					maxSpeCap2 += 110;
 					maxIntCap2 += 70;
 					maxLibCap2 += 90;
 					currentSen += 45;
-				}
-				else {
+				} else {
 					maxSpeCap2 += 65;
 					maxIntCap2 += 30;
 					maxLibCap2 += 40;
@@ -11983,8 +12086,7 @@ use namespace CoC;
 					maxStrCap2 += 15;
 					maxSpeCap2 += 75;
 					maxIntCap2 += 30;
-				}
-				else {
+				} else {
 					maxSpeCap2 += 45;
 					maxIntCap2 += 15;
 				}
@@ -11994,8 +12096,7 @@ use namespace CoC;
 					maxStrCap2 += 100;
 					maxTouCap2 += 70;
 					maxIntCap2 -= 20;
-				}
-				else {
+				} else {
 					maxStrCap2 += 50;
 					maxTouCap2 += 30;
 					maxIntCap2 -= 5;
@@ -12007,15 +12108,13 @@ use namespace CoC;
 					maxTouCap2 += 125;
 					maxSpeCap2 -= 15;
 					maxIntCap2 -= 10;
-				}
-				else if (pigScore() >= 10) {
+				} else if (pigScore() >= 10) {
 					maxStrCap2 += 60;
 					maxTouCap2 += 120;
 					maxSpeCap2 -= 15;
 					maxIntCap2 -= 10;
 					maxWisCap2 -= 5;
-				}
-				else {
+				} else {
 					maxStrCap2 += 30;
 					maxTouCap2 += 60;
 					maxSpeCap2 -= 10;
@@ -12028,8 +12127,7 @@ use namespace CoC;
 					maxSpeCap2 += 70;
 					maxIntCap2 += 50;
 					maxWisCap2 += 100;
-				}
-				else {//75
+				} else {//75
 					maxStrCap2 += 25;
 					maxSpeCap2 += 35;
 					maxIntCap2 += 25;
@@ -12042,8 +12140,7 @@ use namespace CoC;
 					maxTouCap2 += 60;
 					maxSpeCap2 += 140;
 					maxIntCap2 += 20;
-				}
-				else {
+				} else {
 					maxStrCap2 -= 20;
 					maxTouCap2 += 30;
 					maxSpeCap2 += 70;
@@ -12071,13 +12168,11 @@ use namespace CoC;
 					maxTouCap2 += 80;
 					maxLibCap2 += 130;
 					currentSen += 75;
-				}
-				else if (salamanderScore() >= 7) {
+				} else if (salamanderScore() >= 7) {
 					maxStrCap2 += 25;
 					maxTouCap2 += 25;
 					maxLibCap2 += 40;
-				}
-				else {
+				} else {
 					maxStrCap2 += 15;
 					maxTouCap2 += 15;
 					maxLibCap2 += 30;
@@ -12089,8 +12184,7 @@ use namespace CoC;
 					maxTouCap2 += 70;
 					maxWisCap2 -= 30;
 					maxLibCap2 += 50;
-				}
-				else {
+				} else {
 					maxStrCap2 += 30;
 					maxTouCap2 += 35;
 					maxWisCap2 -= 15;
@@ -12103,13 +12197,11 @@ use namespace CoC;
 					maxTouCap2 += 70;
 					maxSpeCap2 += 95;
 					maxIntCap2 += 120;
-				}
-				else if (unicornScore() >= 12){
+				} else if (unicornScore() >= 12) {
 					maxTouCap2 += 35;
 					maxSpeCap2 += 70;
 					maxIntCap2 += 105;
-				}
-				else {
+				} else {
 					maxTouCap2 += 25;
 					maxSpeCap2 += 40;
 					maxIntCap2 += 55;
@@ -12126,13 +12218,11 @@ use namespace CoC;
 					maxTouCap2 += 70;
 					maxSpeCap2 += 120;
 					maxIntCap2 += 110;
-				}
-				else if (alicornScore() >= 12){
+				} else if (alicornScore() >= 12) {
 					maxTouCap2 += 35;
 					maxSpeCap2 += 70;
 					maxIntCap2 += 75;
-				}
-				else {
+				} else {
 					maxTouCap2 += 15;
 					maxSpeCap2 += 50;
 					maxIntCap2 += 55;
@@ -12149,8 +12239,7 @@ use namespace CoC;
 					maxTouCap2 += 20;
 					maxSpeCap2 += 150;
 					maxLibCap2 += 105;
-				}
-				else{
+				} else {
 					maxStrCap2 += 20;
 					maxTouCap2 += 20;
 					maxSpeCap2 += 70;
@@ -12163,17 +12252,14 @@ use namespace CoC;
 						maxStrCap2 += 135;
 						maxTouCap2 += 60;
 						maxIntCap2 += 60;
-					}
-					else {
+					} else {
 						maxStrCap2 += 120;
 						maxIntCap2 += 60;
 					}
-				}
-				else if (scyllaScore() >= 7) {
+				} else if (scyllaScore() >= 7) {
 					maxStrCap2 += 65;
 					maxIntCap2 += 40;
-				}
-				else {
+				} else {
 					maxStrCap2 += 40;
 					maxIntCap2 += 20;
 				}
@@ -12183,18 +12269,15 @@ use namespace CoC;
 					maxStrCap2 += 25;
 					maxTouCap2 += 100;
 					maxSpeCap2 -= 50;
-				}
-				else if (plantScore() == 6) {
+				} else if (plantScore() == 6) {
 					maxStrCap2 += 20;
 					maxTouCap2 += 80;
 					maxSpeCap2 -= 40;
-				}
-				else if (plantScore() == 5) {
+				} else if (plantScore() == 5) {
 					maxStrCap2 += 10;
 					maxTouCap2 += 50;
 					maxSpeCap2 -= 20;
-				}
-				else {
+				} else {
 					maxTouCap2 += 30;
 					maxSpeCap2 -= 10;
 				}
@@ -12234,15 +12317,13 @@ use namespace CoC;
 					maxSpeCap2 += 65;
 					maxIntCap2 -= 90;
 					maxLibCap2 += 50;
-				}
-				else if (yetiScore() >= 14) {
+				} else if (yetiScore() >= 14) {
 					maxStrCap2 += 100;
 					maxTouCap2 += 80;
 					maxSpeCap2 += 50;
 					maxIntCap2 -= 70;
 					maxLibCap2 += 50;
-				}
-				else {
+				} else {
 					maxStrCap2 += 50;
 					maxTouCap2 += 40;
 					maxSpeCap2 += 25;
@@ -12264,8 +12345,7 @@ use namespace CoC;
 					maxWisCap2 -= 50;
 					maxLibCap2 += 50;
 					currentSen += 50;
-				}
-				else {
+				} else {
 					maxStrCap2 += 70;
 					maxTouCap2 += 70;
 					maxIntCap2 += 60;
@@ -12280,21 +12360,19 @@ use namespace CoC;
 					maxIntCap2 += 140;
 					maxLibCap2 += 100;
 					currentSen += 65;
-				}
-				else if (melkieScore() >= 18) {
+				} else if (melkieScore() >= 18) {
 					maxSpeCap2 += 120;
 					maxIntCap2 += 120;
 					maxLibCap2 += 80;
 					currentSen += 50;
-				}
-				else {
+				} else {
 					maxSpeCap2 += 55;
 					maxIntCap2 += 55;
 					maxLibCap2 += 35;
 					currentSen += 25;
 				}
 			}
-
+			
 			if (poltergeistScore() >= 6) {
 				if (poltergeistScore() >= 18) {
 					maxStrCap2 -= 45;
@@ -12302,15 +12380,13 @@ use namespace CoC;
 					maxSpeCap2 += 150;
 					maxIntCap2 += 150;
 					maxWisCap2 += 60;
-				}
-				else if (poltergeistScore() >= 12) {
+				} else if (poltergeistScore() >= 12) {
 					maxStrCap2 -= 25;
 					maxTouCap2 -= 25;
 					maxSpeCap2 += 90;
 					maxIntCap2 += 90;
 					maxWisCap2 += 45;
-				}
-				else {
+				} else {
 					maxStrCap2 -= 15;
 					maxTouCap2 -= 15;
 					maxSpeCap2 += 45;
@@ -12319,7 +12395,7 @@ use namespace CoC;
 				}
 			}
 			if (bansheeScore() >= 4) {
-
+			
 			}
 			if (firesnailScore() >= 15) {
 				maxStrCap2 += 70;
@@ -12333,18 +12409,15 @@ use namespace CoC;
 					maxStrCap2 += 160;
 					maxTouCap2 += 145;
 					maxSpeCap2 += 130;
-				}
-				else if (hydraScore() >= 24) {
+				} else if (hydraScore() >= 24) {
 					maxStrCap2 += 130;
 					maxTouCap2 += 125;
 					maxSpeCap2 += 105;
-				}
-				else if (hydraScore() >= 19) {
+				} else if (hydraScore() >= 19) {
 					maxStrCap2 += 120;
 					maxTouCap2 += 105;
 					maxSpeCap2 += 60;
-				}
-				else {
+				} else {
 					maxStrCap2 += 100;
 					maxTouCap2 += 50;
 					maxSpeCap2 += 60;
@@ -12356,8 +12429,7 @@ use namespace CoC;
 					maxTouCap2 += 45;
 					maxSpeCap2 += 140;
 					maxIntCap2 += 50;
-				}
-				else {
+				} else {
 					maxStrCap2 += 30;
 					maxTouCap2 += 25;
 					maxSpeCap2 += 80;
@@ -12371,15 +12443,13 @@ use namespace CoC;
 					maxSpeCap2 += 100;
 					maxIntCap2 += 20;
 					maxWisCap2 -= 20;
-				}
-				else if (vouivreScore() >= 16) {
+				} else if (vouivreScore() >= 16) {
 					maxStrCap2 += 100;
 					maxTouCap2 += 65;
 					maxSpeCap2 += 70;
 					maxIntCap2 += 15;
 					maxWisCap2 -= 15;
-				}
-				else {
+				} else {
 					maxStrCap2 += 70;
 					maxTouCap2 += 45;
 					maxSpeCap2 += 45;
@@ -12392,21 +12462,18 @@ use namespace CoC;
 					maxStrCap2 += 80;
 					maxTouCap2 += 65;
 					maxSpeCap2 += 110;
-				}
-				else {
+				} else {
 					maxStrCap2 += 50;
 					maxTouCap2 += 45;
 					maxSpeCap2 += 70;
 				}
 			}//+30/30-40
-			if (nagaScore() >= 4)
-			{
+			if (nagaScore() >= 4) {
 				if (nagaScore() >= 8) {
 					maxStrCap2 += 40;
 					maxTouCap2 += 20;
 					maxSpeCap2 += 60;
-				}
-				else {
+				} else {
 					maxStrCap2 += 20;
 					maxSpeCap2 += 40;
 				}
@@ -12419,8 +12486,7 @@ use namespace CoC;
 				if (centipedeScore() >= 8) {
 					maxStrCap2 += 60;
 					maxSpeCap2 += 80;
-				}
-				else {
+				} else {
 					maxStrCap2 += 30;
 					maxSpeCap2 += 40;
 				}
@@ -12432,8 +12498,7 @@ use namespace CoC;
 					maxSpeCap2 += 60;
 					maxLibCap2 += 110;
 					maxWisCap2 -= 50;
-				}
-				else {
+				} else {
 					maxStrCap2 += 75;
 					maxTouCap2 += 40;
 					maxSpeCap2 += 50;
@@ -12446,20 +12511,17 @@ use namespace CoC;
 					maxStrCap2 += 30;
 					maxSpeCap2 += 75;
 					maxIntCap2 += 30;
-				}
-				else {
+				} else {
 					maxStrCap2 += 15;
 					maxSpeCap2 += 30;
 					maxIntCap2 += 15;
 				}
 			}
 			if (isNaga()) {
-				if(lowerBody == LowerBody.FROSTWYRM){
+				if (lowerBody == LowerBody.FROSTWYRM) {
 					maxStrCap2 += 20;
 					maxTouCap2 += 10;
-				}
-				else
-				{
+				} else {
 					maxStrCap2 += 15;
 					maxSpeCap2 += 15;
 				}
@@ -12468,13 +12530,11 @@ use namespace CoC;
 				maxSpeCap2 += 20;
 			}
 			if (isDrider()) {
-				if(lowerBody == LowerBody.CANCER){
+				if (lowerBody == LowerBody.CANCER) {
 					maxStrCap2 += 15;
 					maxSpeCap2 += 5;
 					maxTouCap2 += 10;
-				}
-				else
-				{
+				} else {
 					maxTouCap2 += 15;
 					maxSpeCap2 += 15;
 				}
@@ -12495,30 +12555,27 @@ use namespace CoC;
 				maxTouCap2 += 15;
 				maxLibCap2 += 15;
 			}
-			if (batScore() >= 6){
-				var mod:int = batScore() >= 10 ? 35:20;
+			if (batScore() >= 6) {
+				var mod:int = batScore() >= 10 ? 35 : 20;
 				maxStrCap2 += mod;
 				maxSpeCap2 += mod;
 				maxIntCap2 += mod;
-				maxLibCap2 += (10+mod);
+				maxLibCap2 += (10 + mod);
 			}
-			if (vampireScore() >= 6){
-				if (vampireScore() >= 18)
-				{
+			if (vampireScore() >= 6) {
+				if (vampireScore() >= 18) {
 					mod = 65;
 					maxStrCap2 += mod;
 					maxSpeCap2 += mod;
 					maxIntCap2 += mod;
 					maxLibCap2 += (10 + mod);
-				}
-				else if (vampireScore() >= 10) {
-					mod =  35;
+				} else if (vampireScore() >= 10) {
+					mod = 35;
 					maxStrCap2 += mod;
 					maxSpeCap2 += mod;
 					maxIntCap2 += mod;
 					maxLibCap2 += (10 + mod);
-				}
-				else {
+				} else {
 					mod = 20;
 					maxStrCap2 += mod;
 					maxSpeCap2 += mod;
@@ -12588,6 +12645,30 @@ use namespace CoC;
 					maxWisCap2 -= 10;
 					maxLibCap2 += 80;
 				}
+			}
+			score = atlachNachaScore();
+			if (score >= 30) {
+				//30 Greater Atlach Nacha(360) +115 Strength +135 Toughness +150 Intelligence +150 Libido -50 wisdom +50 min/max sensitivity
+				maxStrCap2 += 115;
+				maxTouCap2 += 135;
+				maxIntCap2 += 150;
+				maxLibCap2 += 150;
+				maxWisCap2 -= 50;
+				currentSen += 50;
+			} else if (score >= 18) {
+				//18 Atlach Nacha(270) +80 Strength +90 Toughness +100 Intelligence +100 Libido -50 wisdom +50 min/max sensitivity
+				maxStrCap2 += 80;
+				maxTouCap2 += 90;
+				maxIntCap2 += 100;
+				maxLibCap2 += 100;
+				maxWisCap2 -= 50;
+				currentSen += 50;
+			} else if (score >= 10) {
+				//10 Incomplete Atlach Nacha(150) +50 toughness +75 intelligence +20 Libido  -20 wisdom
+				maxTouCap2 += 50;
+				maxIntCap2 += 75;
+				maxLibCap2 += 20;
+				maxWisCap2 -= 20;
 			}
 			addStatusValue(StatusEffects.StrTouSpeCounter2, 1, maxStrCap2);
 			addStatusValue(StatusEffects.StrTouSpeCounter2, 2, maxTouCap2);
@@ -13924,6 +14005,11 @@ use namespace CoC;
 			flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] += changes;
 			if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 100) flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] = 100;
 			return flags[kFLAGS.SEXUAL_FLUIDS_LEVEL];
+		}
+
+		public function blockingBodyTransformations():Boolean {
+			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunityFairy) || hasPerk(PerkLib.TransformationImmunityAtlach)
+					|| hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree);
 		}
 
 		public function manticoreFeed():void {

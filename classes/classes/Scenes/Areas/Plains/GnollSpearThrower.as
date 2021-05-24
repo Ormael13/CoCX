@@ -363,9 +363,11 @@ import classes.internals.*;
 			this.level = 14;
 			this.gems = 15 + rand(10);
 			this.drop = new ChainedDrop().add(consumables.GROPLUS,1/5).add(consumables.INCUBID,1/2).add(weaponsrange.GTHRSPE,1/2).elseDrop(consumables.BROWN_D);
-			this.special1 = hyenaJavelinAttack;
-			this.special2 = hyenaSnapKicku;
-			this.special3 = hyenaArousalAttack;
+			this.abilities = [
+				{ call: hyenaJavelinAttack, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_WEAPON]},
+				{ call: hyenaSnapKicku, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: hyenaArousalAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+			]
 			checkMonster();
 		}
 	}

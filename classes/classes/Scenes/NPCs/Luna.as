@@ -33,7 +33,7 @@ package classes.Scenes.NPCs
 		public function usingPounce():void {
 			outputText("Luna pounces on you, pinning you to the ground as she gets in position, claws at the ready.");
 			player.createStatusEffect(StatusEffects.WolfHold,0,0,0,0);
-			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+			if (player.hasPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				if (flags[kFLAGS.LUNA_LVL_UP] >= 15) player.takePhysDamage(18+rand(35));
 				else if (flags[kFLAGS.LUNA_LVL_UP] >= 12) player.takePhysDamage(16+rand(30));
 				else if (flags[kFLAGS.LUNA_LVL_UP] >= 9) player.takePhysDamage(14+rand(25));
@@ -53,17 +53,6 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.LUNA_LVL_UP] >= 15) RavageDmg += eBaseStrengthDamage() * 0.6;
 			RavageDmg = Math.round(RavageDmg);
 			player.takePhysDamage(RavageDmg);
-		}
-		
-		override protected function performCombatAction():void {
-			var choice:Number = rand(7);
-			if (choice < 5) {
-				if (choice < 2) usingRavage();
-				else usingClawCombo();
-			}
-			if (choice >= 5) {
-				if (!player.hasStatusEffect(StatusEffects.WolfHold)) usingPounce();
-			}
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -290,6 +279,12 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.LUNA_LVL_UP] >= 13) this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
 			if (flags[kFLAGS.LUNA_LVL_UP] >= 14) this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
 			if (flags[kFLAGS.LUNA_LVL_UP] >= 15) this.createPerk(PerkLib.MythicalToughness, 0, 0, 0, 0);
+			this.abilities = [
+				{call: usingRavage, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY], weight:2 },
+				{call: usingClawCombo, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: usingPounce, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY], condition: function():Boolean { return !player.hasStatusEffect(StatusEffects.WolfHold) } },
+				{call: usingRavage, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY], condition: function():Boolean { return player.hasStatusEffect(StatusEffects.WolfHold) }, weight:Infinity },
+			];
 			checkMonster();
 		}
 		

@@ -743,6 +743,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MonsterRegen:StatusEffectType       	= mk("Monster Regeneration");//% regen
 		public static const MonsterRegen2:StatusEffectType      	= mk("Monster Regeneration2");//flat regen
 		public static const MonsterVPT:StatusEffectType 			= mk("Monster Violet Pupil Transformation");
+		public static const MysticWeb:StatusEffectType  			= mk("MysticWeb");
 		public static const NoLoot:StatusEffectType             	= mk("No Loot");
 		public static const PCTailTangle:StatusEffectType       	= mk("PCTailTangle");
 		public static const PeachLootLoss:StatusEffectType      	= mk("Peach Loot Loss");
@@ -974,6 +975,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const UBERWEB:StatusEffectType                   = mkCombat("UBERWEB");
 		public static const UnderwaterCombatBoost:StatusEffectType     = mkCombat("UnderwaterCombatBoost");
 		public static const UnderwaterOutOfAir:StatusEffectType        = mkCombat("UnderwaterOutOfAir");
+		public static const Venomancy:StatusEffectType            	   = mkCombat("Venomancy");
 		public static const VioletPupilTransformation:StatusEffectType = mkCombat("Violet Pupil Transformation");
 		public static const Web:StatusEffectType                       = WebDebuff.TYPE;
 		public static const WebSilence:StatusEffectType                = mkCombat("Web-Silence");
@@ -1037,6 +1039,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownNightOfBrotherhood:StatusEffectType        	= mkCombat("Cooldown Night of Brotherhood");
 		public static const CooldownNonupleThrust:StatusEffectType       		= mkCombat("Cooldown Nonuple Thrust");
 		public static const CooldownOniRampage:StatusEffectType          		= mkCombat("Cooldown Oni Rampage");
+		public static const CooldownPinDown:StatusEffectType       	 		 	= mkCombat("Cooldown Pin Down");
 		public static const CooldownPhoenixFireBreath:StatusEffectType   		= mkCombat("Cooldown Phoenix Fire Breath");
 		public static const CooldownPlasmaBlast:StatusEffectType           		= mkCombat("Cooldown Plasma Blast");
 		public static const CooldownPlay:StatusEffectType                		= mkCombat("Cooldown Play");

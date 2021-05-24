@@ -4439,7 +4439,7 @@ public function wakeFromBadEnd():void {
 				player.createStatusEffect(StatusEffects.LibSensCounter2, 0, 0, 0, 0);
 				player.strtouspeintwislibsenCalculation2();
 			}
-			if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) {
+			if (player.blockingBodyTransformations()) {
 				if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
 				if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);
 				if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);

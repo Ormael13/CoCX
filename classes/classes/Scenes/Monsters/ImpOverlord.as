@@ -1,4 +1,4 @@
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -17,7 +17,7 @@ public class ImpOverlord extends Imp
 		public var spellCostArouse:int = 6;
 		public var spellCostHeal:int = 8;
 		public var spellCostMight:int = 10;
-		
+
 		public function castSpell():void {
 			var spellChooser:int = rand(6);
 			//Makes sure to not stack spell effects.
@@ -97,7 +97,7 @@ public class ImpOverlord extends Imp
 				fatigue += spellCostMight;
 			}
 		}
-		
+
 		//Imp Fire
 		protected function impFire():void
 		{
@@ -126,9 +126,9 @@ public class ImpOverlord extends Imp
 			//[-HP(minor) // +Lust]
 			player.dynStats("lus", 25 + player.effectiveSensitivity() / 4 + player.cor / 10);
 		}
-		
+
 		//Cum cannon!
-		protected function impLordCumCannon():void 
+		protected function impLordCumCannon():void
 		{
 			outputText("He moves his loincloth aside and strokes his demonic member quickly. Within moments, he fires a torrent of cum towards you! ");
 			lust -= 20;
@@ -147,7 +147,7 @@ public class ImpOverlord extends Imp
 				player.dynStats("lus", 30 + player.effectiveSensitivity() / 4 + player.cor / 10);
 			}
 		}
-		
+
 		public function clawAttack():void {
 			outputText("The imp overlord suddenly charges at you with his claws ready! ");
 			if (player.getEvasionRoll()) {
@@ -182,13 +182,7 @@ public class ImpOverlord extends Imp
 				player.takePhysDamage(damage, true);
 			}
 		}
-		
-		override protected function performCombatAction():void
-		{
-			var choices:Array = [castSpell, impFire, impLordLustAttack2, impLordLustAttack, clawAttack, doubleAttack, eAttack];
-			choices[rand(choices.length)]();
-		}
-		
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
@@ -199,8 +193,8 @@ public class ImpOverlord extends Imp
 		{
 			SceneLib.impScene.loseToAnImpLord();
 		}
-		
-		public function ImpOverlord() 
+
+		public function ImpOverlord()
 		{
 			super(true);
 			this.a = "the ";
@@ -247,12 +241,22 @@ public class ImpOverlord extends Imp
 					add(consumables.SUCMILK,12).
 					add(weapons.SCIMITR, 1).
 					add(armors.BEEARMR, 1);
+			this.abilities = [
+				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: impLordLustAttack, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]},
+				{call: clawAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: doubleAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON,TAG_BODY]},
+				{call: impLordLustAttack2, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[]},
+				{call: impLordCumCannon, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},
+				{call: impFire, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[TAG_FIRE]},
+				{call: castSpell, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]}
+			];
 			this.wings.type = Wings.IMP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			checkMonster();
 		}
-		
+
 	}
 
 }

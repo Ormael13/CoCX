@@ -960,12 +960,13 @@ import classes.Items.JewelryLib;
 			if (jewelryName == "Undefeated King's Signet" || jewelryName3 == "Undefeated King's Signet") max += 150;
 			max += level * 5;
 			if (level <= 6) max += level * 5;
+			else max += 30;
 			if (findPerk(PerkLib.UnlockId) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockId3rdStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockId4thStage) >= 0) max += level * 5;
-			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 10;//~35,730
-			if (findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) max += level * 10;
+			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 10;
+			if (findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) max += level * 10;//~194,455
 			var multimax:Number = 1;
 			if (game.player.orcScore() >= 5) multimax += 0.1;
 			if (game.player.orcScore() >= 11) multimax += 0.1;
@@ -986,10 +987,9 @@ import classes.Items.JewelryLib;
 				//if (upgrade mecha) multimax += 0.1;
 				//if (upgrade mecha) multimax += 0.1;
 			}
-			max *= multimax;
-			max = Math.round(max);
-			//if (max > 69999) max = 69999;
-			if (max > 139999) max = 139999;
+			max *= multimax;//~245%
+			max = Math.round(max);//476 414,75
+			if (max > 476999) max = 476999;
 			return max;
 		}
 		public override function maxOverWrath():Number {
@@ -1004,9 +1004,9 @@ import classes.Items.JewelryLib;
 			if (hasPerk(PerkLib.AsuraToughness)) max2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraSpeed)) max2 += 0.1;
-			max1 *= max2;
-			max1 = Math.round(max1);
-			if (max1 > 79999) max1 = 79999;
+			max1 *= max2;//~170%
+			max1 = Math.round(max1);//~809 905,5
+			if (max1 > 809999) max1 = 809999;
 			return max1;
 		}
 		public function maxSafeWrathMagicalAbilities():Number {
@@ -1170,19 +1170,22 @@ import classes.Items.JewelryLib;
 			if (game.player.tailType == Tail.SPIDER_ADBOMEN) maxven += 150;
 			if (game.player.tailType == Tail.SCORPION) maxven += 150;
 			if (game.player.tailType == Tail.MANTICORE_PUSSYTAIL) maxven += 200;
-			if (findPerk(PerkLib.ImprovedVenomGland) >= 0) maxven += 100;
-			if (findPerk(PerkLib.VenomGlands) >= 0) maxven += 25;
-			if (findPerk(PerkLib.VenomGlandsEvolved) >= 0) maxven += 100;
-			if (findPerk(PerkLib.VenomGlandsFinalForm) >= 0) {
+			if (hasPerk(PerkLib.ImprovedVenomGland)) maxven += 100;
+			if (hasPerk(PerkLib.VenomGlands)) maxven += 25;
+			if (hasPerk(PerkLib.VenomGlandsEvolved)) maxven += 100;
+			if (hasPerk(PerkLib.VenomGlandsFinalForm)) {
 				maxven += 175;
-				multimaxven += 0.2;
+				multimaxven += 1;
 			}
-			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {
-				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.1;
-				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.15;
-				if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.2;
-				if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) multimaxven += 0.25;
+			if (hasPerk(PerkLib.JobSoulCultivator)) {
+				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) multimaxven += 0.1;
+				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) multimaxven += 0.15;
+				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) multimaxven += 0.2;
+				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimaxven += 0.25;
 			}
+			if (hasPerk(PerkLib.ArachnidBookLung)) multimaxven += 1;
+			if (hasPerk(PerkLib.ArachnidBookLungEvolved)) multimaxven += 1;
+			if (hasPerk(PerkLib.ArachnidBookLungFinalForm)) multimaxven += 1;
 			maxven *= multimaxven;
 			maxven = Math.round(maxven);
 			return maxven;

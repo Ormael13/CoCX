@@ -1,4 +1,4 @@
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -21,7 +21,7 @@ public class GoblinWarrior extends Goblin
 				player.takePhysDamage(damage, true);
 			}
 		}
-		
+
 		public function shieldBash():void {
 			outputText("The goblin charges at you with her shield! ");
 			if (player.getEvasionRoll()) {
@@ -38,12 +38,12 @@ public class GoblinWarrior extends Goblin
 				player.takePhysDamage(damage, true);
 			}
 		}
-		
+
 		public function warriorSpecial():void {
 			if (rand(2) == 0) slash();
 			else shieldBash();
 		}
-		
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.goblinWarriorScene.goblinWarriorRapeIntro1();
@@ -53,13 +53,13 @@ public class GoblinWarrior extends Goblin
 			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
 				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"");
 				SceneLib.combat.cleanupAfterCombatImpl();
-			} 
+			}
 			else {
 				SceneLib.goblinWarriorScene.gobboWarriorBeatYaUp1();
 			}
 		}
-		
-		public function GoblinWarrior() 
+
+		public function GoblinWarrior()
 		{
 			this.a = "the ";
 			this.short = "goblin warrior";
@@ -102,13 +102,16 @@ public class GoblinWarrior extends Goblin
 							consumables.ORANGDY,
 							consumables.GREEN_D,
 							consumables.PURPDYE);
-			this.special1 = goblinDrugAttack;
-			this.special2 = goblinTeaseAttack;
-			this.special3 = warriorSpecial;
+			this.abilities = [
+				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON], weight:2},
+				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},
+				{ call: goblinTeaseAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+				{ call: warriorSpecial, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
+			]
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
 			checkMonster();
 		}
-		
+
 	}
 
 }

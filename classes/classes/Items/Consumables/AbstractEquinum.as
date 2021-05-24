@@ -195,7 +195,7 @@ public class AbstractEquinum extends Consumable {
 			player.MutagenBonus("int", 1);
 			changes++;
 		}
-		if (mutations.blockingBodyTransformations()) changeLimit = 0;
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 		//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
 		if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
 			mutations.humanizeArms();

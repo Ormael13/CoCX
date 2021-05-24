@@ -170,8 +170,11 @@ public class Goblin extends Monster
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
 							consumables.PURPDYE);
-			this.special1 = goblinDrugAttack;
-			this.special2 = goblinTeaseAttack;
+			this.abilities = [
+				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},
+				{ call: goblinTeaseAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+			]
 			checkMonster();
 		}
 

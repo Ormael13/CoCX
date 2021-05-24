@@ -844,6 +844,7 @@ import classes.Scenes.SceneLib;
 			if (WoodElfSpearTraining == QUEST_STAGE_SPEARTRAININGFIRST){
 				if (player.armor == armors.NOTHING) outputText("\n\nShe looks approvingly at your lack of clothing, not with her standard expression of perverted lust but with a serious glance.");
 				else outputText("\n\nHer first instruction is to strip. Unlike her usual, somewhat perverted expression when she says that, she appears serious.");
+				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING0;
 			}
 			outputText("\n\n\"<i>Remember, [name], we Elves are fundamentally spiritual creatures. Elves do not fight with strength but rather by listening to the voices around us. Elves become one with the voices of the wind and the forest. To do that, you have to be able to feel the air around you, and the easiest way to learn to do that is, well, to have nothing between you and it. Once you’re confident with your abilities, you can wear clothes, but beginners must always learn naked, even before we came to Mareth. I still practice that way, as you can see.</i>\"" +
 					"\n\nWith that, you take up a practice spear and begin training your posture and movements." +
@@ -886,8 +887,8 @@ import classes.Scenes.SceneLib;
 			player.trainStat("tou", +1, 80);
 			if (player.spe >= 50 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING0 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING1;
-				player.createPerk(PerkLib.ELFElvenSpearDancingTechnique,0,0,0,0);
-				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Spear Dancing Flurry Perk! <b>Gained Perk:Elven Spear Dancing Flurry</b>");
+				player.createPerk(PerkLib.ELFElvenSpearDancingFlurry,0,0,0,0);
+				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Spear Dancing Flurry! <b>Gained Perk:Elven Spear Dancing Flurry</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
@@ -906,6 +907,7 @@ import classes.Scenes.SceneLib;
 				player.removePerk(PerkLib.ELFElvenSpearDancingFlurryII);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Spear Dancing Flurry III Perk! <b>Gained Perk: Elven Spear Dancing Flurry III</b>");
 				hasTrainedToday = true;
+				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 200 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING3 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING4;

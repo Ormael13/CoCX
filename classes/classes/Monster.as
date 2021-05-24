@@ -182,6 +182,28 @@ import flash.utils.getQualifiedClassName;
 		public var special2:Function = null;
 		public var special3:Function = null;
 
+		/**
+		 * Monster ability descriptors.
+		 * Structure:
+		 * {
+		 *     call: Function - function():void to execute, required
+		 *     type: String - either of ABILITY_XXX constants in Creature.as
+		 *     range: int - either of RANGE_XXX constants in Creature.as
+		 *     tags: String[] - array of extra tags, TAG_XXX in Creature.as
+		 *     condition: Function - function():Boolean to check if monster wants to use the ability
+		 *     weight: number - relative weight, default 1 (2: will use ability twice as often)
+		 * }
+		 *
+		 * Default structure is:
+		 * [
+		 * 	{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE }
+		 * 	{ call: special1, type: ABILITY_PHYSICAL, range: RANGE_MELEE }
+		 * 	{ call: special2, type: ABILITY_PHYSICAL, range: RANGE_MELEE }
+		 * 	{ call: special3, type: ABILITY_PHYSICAL, range: RANGE_MELEE }
+		 * ]
+		 */
+		public var abilities:/*Object*/Array = [];
+
 		//he
 		public var pronoun1:String = "";
 		public function get Pronoun1():String{
@@ -1766,10 +1788,10 @@ import flash.utils.getQualifiedClassName;
 			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
 				if (SceneLib.exgartuan.exgartuanCombatUpdate()) EngineCore.outputText("\n\n");
 			}
-			if (player.findPerk(PerkLib.DarkenedKitsune)>0) {//&& rand(4) ==0){
+			if (player.hasPerk(PerkLib.DarkenedKitsune)>0) {//&& rand(4) ==0){
 				if (SceneLib.darkenedKitsuneScene.darkKitsuneCombat()) EngineCore.outputText("\n\n")
 			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug)) {
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug) || hasStatusEffect(StatusEffects.MysticWeb)) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
@@ -1823,14 +1845,23 @@ import flash.utils.getQualifiedClassName;
 		 */
 		protected function handleConstricted():Boolean
 		{
-			if (hasStatusEffect(StatusEffects.Pounce)) {
-			EngineCore.outputText("" + capitalA + short + " struggle to get free.");
-			if (statusEffectv1(StatusEffects.Pounce) <= 0) {
-				EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove you off.");
-				removeStatusEffect(StatusEffects.Pounce);
+			if (hasStatusEffect(StatusEffects.MysticWeb)) {
+				EngineCore.outputText("" + capitalA + short + " struggle to get free from your web!");
+				if (statusEffectv1(StatusEffects.MysticWeb) <= 0) {
+					EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove you break off your webbing.");
+					removeStatusEffect(StatusEffects.MysticWeb);
+				}
+				addStatusValue(StatusEffects.MysticWeb, 1, -1);
+				return false;
 			}
-			addStatusValue(StatusEffects.Pounce, 1, -1);
-			return false;
+			if (hasStatusEffect(StatusEffects.Pounce)) {
+				EngineCore.outputText("" + capitalA + short + " struggle to get free.");
+				if (statusEffectv1(StatusEffects.Pounce) <= 0) {
+					EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove you off.");
+					removeStatusEffect(StatusEffects.Pounce);
+				}
+				addStatusValue(StatusEffects.Pounce, 1, -1);
+				return false;
 			}
 			if (hasStatusEffect(StatusEffects.ManticorePlug)) {
 				EngineCore.outputText("" + capitalA + short + " pulls to unplug your tail from [monster his] "+cockDescriptShort()+".");
@@ -2018,20 +2049,42 @@ import flash.utils.getQualifiedClassName;
 			// Generic monster does nothing (has no channelable abilities)
 		}
 
+
+
+		/**
+		 * When monster cannot use any attack or ability
+		 */
+		protected function doNothing(useDefaultText:Boolean = true, customText:String = ""):void {
+			if (useDefaultText)
+			{
+				outputText("Unable to do anything [monster a] [monster name] takes a defensive stance ready to prepare for your attacks");
+				if (EngineCore.silly()) outputText(" screaming [race]phobic insults");
+				outputText(".");
+			}
+			else outputText(""+customText+"");
+		}
+
 		/**
 		 * This method is called after all stun/fear/constricted checks.
 		 * Default: Equal chance to do physical or special (if any) attack
 		 */
 		protected function performCombatAction():void
 		{
-			var actions:Array = [eAttack,special1,special2,special3].filter(
-					function(special:Function, idx:int, array:Array):Boolean {
-						return special != null;
-					}
-			);
-			var rando:int = int(Math.random() * (actions.length));
-			var action:Function = actions[rando];
-			action();
+			if (!abilities) {
+				// Old monster, has no tagged abilities configured
+				abilities = [
+					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+					{call: special1, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+					{call: special2, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+					{call: special3, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]}
+				]
+			}
+			var roll:Object = pickRandomAbility(abilities, player);
+			if (!roll) {
+				doNothing();
+				return;
+			}
+			roll.call();
 		}
 
 		/**

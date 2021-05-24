@@ -44,7 +44,7 @@ public class PerkMenu extends BaseContent {
 		addButton(2, "SuperPerk Up", CoC.instance.playerInfo.superPerkBuyMenu);
 		addButton(3, "Mutations DB", mutationsDatabase);
 		addButton(4, "Perks Database", perkDatabase);
-		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) ||
+		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || combat.canSpearDance() ||player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) ||
 			(player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.hasPerk(PerkLib.LikeAnAsuraBoss) ||
 			player.jiangshiScore() >= 20) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
@@ -54,9 +54,10 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your range strike settings.</b>");
 			addButton(6, "Range Opt",doubleStrikeOptions);
 		}
-		if (player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect)) {
-			outputText("\n<b>You can adjust your spell autocast settings.</b>");
-			addButton(7, "Spells Opt",spellautocastOptions);
+		if (player.hasPerk(PerkLib.Venomancy) || player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)||
+			(player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect))) {
+			outputText("\n<b>You can choose and adjust various effect related to your magic.</b>");
+			addButton(7, "Magic Opt",MagicOption);
 		}
 		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
 			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
@@ -68,15 +69,35 @@ public class PerkMenu extends BaseContent {
 		}
 		addButton(10, "Number of", EngineCore.doNothing);
 		addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
-		if (player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
-			if (player.hasPerk(PerkLib.DarkRitual)) outputText("\n<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>");
-			if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) outputText("\n<b>You can adjust your Blood Demon hidden job settings.</b>");
-			addButton(13, "Bloody Opt",DarkRitualOption);
-		}
+
+		//if (player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
+		//	if (player.hasPerk(PerkLib.DarkRitual)) outputText("\n<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>");
+		//	if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) outputText("\n<b>You can adjust your Blood Demon hidden job settings.</b>");
+		//	addButton(13, "Bloody Opt",DarkRitualOption);
+		//}
 		if (player.hasPerk(PerkLib.JobLeader)) {
 			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
 			addButton(14, "Will-o'-the-wisp",WOTWbehaviourOptions);
 		}
+	}
+
+	public function MagicOption(e:MouseEvent = null):void {
+		clearOutput();
+		menu();
+		if (player.hasPerk(PerkLib.Venomancy)) {
+			outputText("\n<b>You can adjust your Venomancy.</b>");
+			addButton(1, "Venomancy Opt",VenomancyOption);
+		}
+		if (player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect)) {
+			outputText("\n<b>You can adjust your spell autocast settings.</b>");
+			addButton(2, "Spells Opt",spellautocastOptions);
+		}
+		if (player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
+			if (player.hasPerk(PerkLib.DarkRitual)) outputText("\n<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>");
+			if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) outputText("\n<b>You can adjust your Blood Demon hidden job settings.</b>");
+			addButton(3, "Bloody Opt",DarkRitualOption);
+		}
+		addButton(14, "Back", displayPerks);
 	}
 
 	public function doubleAttackOptions():void {
@@ -140,12 +161,12 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] == 0) outputText("Manual");
 			outputText("</b>");
 		}
-		if (player.findPerk(PerkLib.Poisoning) >= 0) {
+		if (player.hasPerk(PerkLib.Poisoning)) {
 			outputText("\n\nIf you can naturaly produce venom then you could add it effects to weapon. (Working only with small weapons)");
 			if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 0) outputText("\n\nVenom effect added: <b>No</b>");
 			if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 1) outputText("\n\nVenom effect added: <b>Yes</b>");
 		}
-		if (player.findPerk(PerkLib.SwiftCasting) >= 0) {
+		if (player.hasPerk(PerkLib.SwiftCasting)) {
 			outputText("\n\nIf you learned specific spells you could cast them after doing melee attack. (Working only with one handed weapons and no shield)");
 			outputText("\n\nSpell casted: <b>");
 			switch(flags[kFLAGS.ELEMENTAL_MELEE]){
@@ -420,7 +441,7 @@ public class PerkMenu extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.FortressOfIntellect)) addButton(13, "FoI Off", toggleFortressOfIntelect,false);
 
 		var e:MouseEvent;
-		addButton(14, "Back", displayPerks);
+		addButton(14, "Back", MagicOption);
 
 		function toggleFortressOfIntelect(on:Boolean):void{
 			if(on){player.createStatusEffect(StatusEffects.FortressOfIntellect,0,0,0,0);}
@@ -590,6 +611,36 @@ public class PerkMenu extends BaseContent {
 			player.removeStatusEffect(StatusEffects.BloodCultivator);
 			DarkRitualOption();
 		}
+		addButton(14, "Back", MagicOption);
+	}
+
+	public function VenomancyOption():void {
+		clearOutput();
+		menu();
+		if (player.hasPerk(PerkLib.Venomancy)) {
+			outputText("Set weither you will be using venom to empower your magic or not.\n\n");
+			if (!player.hasStatusEffect(StatusEffects.Venomancy)) {
+				outputText("Venomancy is currently: <b>Inactive</b>.");
+				addButton(10, "On", VenomancyOptionOn);
+			}
+			if (player.hasStatusEffect(StatusEffects.Venomancy)) {
+				outputText("Venomancy is currently: <b>Active</b>.");
+				addButton(11, "Off", VenomancyOptionOff);
+			}
+			outputText("\n\n");
+		}
+		var e:MouseEvent;
+		if (SceneLib.combat.inCombat) addButton(14, "Back", combat.combatMenu, false);
+		else addButton(14, "Back", displayPerks);
+		function VenomancyOptionOn():void {
+			player.createStatusEffect(StatusEffects.Venomancy,0,0,0,0);
+			VenomancyOption();
+		}
+		function VenomancyOptionOff():void {
+			player.removeStatusEffect(StatusEffects.Venomancy);
+			VenomancyOption();
+		}
+		addButton(14, "Back", MagicOption);
 	}
 	
 	public function WOTWbehaviourOptions():void {
