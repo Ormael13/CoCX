@@ -868,6 +868,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DistractedEnemySupporter:StatusEffectType  = mkCombat("Distracted Enemy Supporter");
 		public static const DriderKiss:StatusEffectType                = mkCombat("Drider Kiss");
 		public static const EarthStance:StatusEffectType	           = mkCombat("Earth Stance");
+		public static const ElvenEye:StatusEffectType	           	   = mkCombat("Elven Eye");
 		public static const EnemyLoweredDamageH:StatusEffectType       = mkCombat("Enemy Lowered Damage (H)");
 		public static const EverywhereAndNowhere:StatusEffectType      = mkCombat("Everywhere and nowhere");
 		public static const EzekielCurse:StatusEffectType              = mkCombat("Ezekiel Curse");
