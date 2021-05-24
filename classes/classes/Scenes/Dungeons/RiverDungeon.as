@@ -14,6 +14,7 @@ import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Dungeons.RiverDungeon.AirElemental;
 import classes.Scenes.Dungeons.RiverDungeon.EarthElemental;
 import classes.Scenes.Dungeons.RiverDungeon.FireElemental;
+import classes.Scenes.Dungeons.RiverDungeon.QuatroElementalBoss;
 import classes.Scenes.Dungeons.RiverDungeon.WaterElemental;
 import classes.Scenes.Monsters.FeralImps;
 import classes.CoC;
@@ -405,8 +406,8 @@ import classes.StatusEffects;
 		}
 		public function defeatedByFireElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			outputText("Death by Fireballs!\n\n");
+			outputText("As You collapse, unable to fight any longer, the Ifrit summons several additional blazing spheres. Her hands heat with blazing fire as she continues the somatics, condensing her hands together as the spheres shoot toward you.\n\n");
+			outputText("Your world is set aflame as the fire burns you to ashes. There is nothing left of you but a few burnt remains.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
@@ -419,58 +420,76 @@ import classes.StatusEffects;
 		}
 		public function defeatedByAirElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			outputText("Death by Air Getsuga Tenshou!\n\n");
+			outputText("As you fall, unable to fight any longer, the Sylph advances upon you. The wind around you swirls as the Sylph prepares another strike. Air currents condense into new crescent-shaped wind blades, covering your paths of retreat. You pause, watching in horror as a wall of wind blades surround you. The sylph waves its hand, sending every last blade in your direction.\n\n");
+			outputText("You brace yourself for the lacerations, each blade cuts through you as your journey comes to an end, gone with the wind.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
 		public function defeatedByEarthElementalSubBoss():void {
 			clearOutput();
-			outputText("As you collapse, unable to fight any longer you notice numerous pointed stones circle around the air. Golem swings her hand in a fluid somatic motion before the razor-like stones dig into you.\n\n");
-			outputText("You don't have enough time to scream as the lacerations quickly rip you to shreds.\n\n");
+			outputText("As you collapse, unable to fight any longer, you notice numerous pointed stones circle around the air. The golem swings her hand in a single fluid motion before the razor-like stones dig into you.\n\n");
+			outputText("You don't have enough time to scream as the rocks separate your [skin] from the rest of your body. Buried and crushed beneath the stone, your journey comes to an end.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
-		}/*
-		public function defeatedBy<Boss enemy>():void {
+		}
+		public function defeatedByQuatroElementalBoss():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
+			outputText("You colapse too wounded to continue fighting. Elemental as if enjoying your state approaching you deliberly slowly and grabbing your body with it four larger arms rise it into the air. Then it reach with it smaller pair of arms to your body and grabs your chest. ");
+			if (player.statusEffectv1(StatusEffects.RivereDungeonIB) == 3) outputText("Flames");
+			if (player.statusEffectv4(StatusEffects.RivereDungeonIB) == 3) outputText("Magma");
+			if (player.statusEffectv2(StatusEffects.RivereDungeonIB) == 3) outputText("Magma and steam");
+			if (player.statusEffectv3(StatusEffects.RivereDungeonIB) == 3) outputText("Magma, steam and razor sharp air currents");
+			outputText(" that are covering them starts to slowly ravish your body adding new wounds. It cause that all very slowly as if it would toying with you until you finaly succub to your wounds fomr fight and it torture and close your eyes for the last time.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
-		}*/
+		}
 		public function defeatFireElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Good End.\n\n");
+			outputText("The Ifrit gives you a blank stare, as if deciding her next action. As she stands silently, the flames around her body cackle with embers as her entire form begins shining brightly like a dying star. You're forced to avert your eyes from the painful illumination.\n\n");
+			outputText("The light quickly fades as you turn back to where the Ifrit once stood. The only thing that remains is a reddish core, lying dormant on the ground.\n\n");
 			player.createKeyItem("Fire Ifrit Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 1, 1);
+			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
 			doNext(roomB18);
 		}
 		public function defeatWaterElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Good End.\n\n");
+			outputText("The Undine stops moving, holding its place like a body of undisturbed water. Suddenly, without any signs it the body loses shape, the fluid spills onto the ground in a small puddle.\n\n");
+			outputText("You notice something lying dormantly within the small pool of water. You cautiously approach to retrieve the blue sphere.\n\n");
 			player.createKeyItem("Water Undine Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
+			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
 			doNext(roomB21);
 		}
 		public function defeatAirElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Good End.\n\n");
+			outputText("The Sylph pauses in its tracks. Without warning, it suddenly shoots a strong gust of wind toward you. You reflexively brace yourself for the attack but the wind dissipates before reaching you.\n\n");
+			outputText("You look toward where the air elemental used to be, now nothing but a small, dormant sphere suspended in the air. It slowly descends to the ground as a feather would before you decide to inspect it.\n\n");
 			player.createKeyItem("Air Sylph Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
+			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
 			doNext(roomB24);
 		}
 		public function defeatEarthElementalSubBoss():void {
 			clearOutput();
-			outputText("Placeholder Good End.\n\n");
+			outputText("The Golem stands for a moment as a low rumbling sound enemates from it. Quickly, stones begin sloughing off its body, one by one. As quickly as it started, the humanoid form is lost to a small mound of rubble.\n\n");
+			outputText("A single sphere sticks out from the top of the pile of rocks. It lies dormantly before you before you as you inspect it.\n\n");
 			player.createKeyItem("Earth Golem Core", 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 4, 1);
+			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
 			doNext(roomB27);
-		}/*
-		public function defeat<Boss enemy>():void {
+		}
+		public function defeatQuatroElementalBoss():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			//[GAME OVER]
-			EventParser.gameOver();
-		}*/
+			outputText("Mutated and fused with all four basic elements monster fall barely moving to the gorund. Was it fourth or fifth time it been beaten and each time it been returning strogner and more dangerous than previous time? You slowly starting to loos count but not loosing alertness.\n\n");
+			outputText("<i>“We will be back,”</i> boss utters with it four ovellaping voices and dozens of various colored embers de-fuse form falled body sepping int the dungeon floor. All that is left is empty shell that scatter into dust after you prod it carefully with your [weapon]. ");
+			outputText("Tche that feels such anticlimatic ending of fight. Or maybe it just end of first part of fight and your enemy awaits somewhere on lower floor for you?\n\n");
+			outputText("Feeling bit down you slwoly turns back to continue trave when you notice among ashes something glowing. Or more precise it seems to pulse with red glow. Reaching toward the pile of ash you pulls out object that looks like a heart that pulse pariodicaly with red glow. each time it pulse you also feal feeble wave of heat comming out of it.\n\n");
+			player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
+			player.createKeyItem("Flame Heart", 0, 0, 0, 0);
+			flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS]++;
+			doNext(roomB08);
+		}
 		
 		private function encountersRuletteC():void {
 			/*if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
@@ -808,12 +827,17 @@ import classes.StatusEffects;
 		public function roomB08():void {
 			dungeonLoc = 111;
 			clearOutput();//boss room
-			/*if (flags[kFLAGS.AETHER_SINISTER_EVO] < 1) {
-				flags[kFLAGS.AETHER_SINISTER_EVO] = 0.5;
-				outputText("As you peek into a room, out of nearby shadow emerge golem. Looks like you have encountered aether golem! You ready your [weapon] for a fight!");
-				startCombat(new GolemDummyImproved(), true);
+			if (player.statusEffectv1(StatusEffects.RivereDungeonIB) == 1 && player.statusEffectv2(StatusEffects.RivereDungeonIB) == 1 && player.statusEffectv3(StatusEffects.RivereDungeonIB) == 1 && player.statusEffectv4(StatusEffects.RivereDungeonIB) == 1) {
+				player.addStatusValue(StatusEffects.RivereDungeonIB, 1, 1);
+				player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
+				player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);
+				player.addStatusValue(StatusEffects.RivereDungeonIB, 4, 1);
+				outputText("As you step into the room all four flames burning at incense burners intesifies sending tiny embers all around. Next you hear a wind howling somewhere in nearby tunnels, followed by far away noice as if water would been flowing throu said tunnels toward you. Finaly a weak earhtquake shakes whole room as in middle of it ground splits creating rift. "+(silly() ? "Right now where is that intro to boss fight theme? It should totaly play in background... ":"")+"\n\n");
+				outputText("From the rift crawl out barely humanoid shape, with eggshaped torso and two tiny 'arms' on sides, four larger appendixes groing form spot where those tiny arms shoulder joints are and short tail. It not have legs but when you levitate above gound why would you need them? At centre of torso you notice four verticaly places eyes forming romb shape. Looking slight confused being blinks it four eyes not breaking eye contact with you. ");
+				outputText("Meanwhile embers form red flame as if attracted by some invisible force defy laws of physics and instead of falling to the gorund starts to fly toward beings that left the rigft, which now starts to closing up. Merging with being they set it torso and tiniest pair of arms on fire. Next you see is enemy blinks it eyes before rushing to attacks you.");
+				startCombat(new QuatroElementalBoss(), true);
 			}
-			else */encountersRuletteB();
+			else encountersRuletteB();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
@@ -894,8 +918,8 @@ import classes.StatusEffects;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Your vision is obscured by thick fog. You instinctively tense as the echoes of footsteps bounce off the walls. Enemies could be right next to you, and you wouldn't know unless you bump into one. You break into a light sweat, or is that the moisture condescending onto your [skin]?");
 			dungeons.setDungeonButtonsRD(null, roomB14, null, null);
-			/*if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > ) addButton(6, "Down", );
-			else */addButtonDisabled(6, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButtonDisabled(6, "Down", "You still need to wait for our brave goblins team to clean up stairs leading into lower strata of the dungeon.");//addButton(6, "Down", );
+			else addButtonDisabled(6, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
 			//addButtonDisabled(6, "Down", "You still need to wait for our brave goblins team to come back (alive) to descend into lower strata of the dungeon.");
 		}
 		public function roomB16():void {

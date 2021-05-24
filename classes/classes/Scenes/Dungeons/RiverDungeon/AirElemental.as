@@ -190,13 +190,13 @@ public class AirElemental extends Monster
 				this.imageName = "air sylph";
 				this.long = "You're currently fighting 'male' sylph. It's nine feet tall, it body covered with air currents and it's using bare fists to fight.";
 				this.tallness = 108;
-				initStrTouSpeInte(16, 26, 66, 70);
-				initWisLibSensCor(70, 15, 55, 50);
-				this.weaponAttack = 8;
-				this.armorDef = 8;
-				this.armorMDef = 45;
+				initStrTouSpeInte(24, 39, 99, 105);
+				initWisLibSensCor(105, 15, 55, 50);
+				this.weaponAttack = 10;
+				this.armorDef = 10;
+				this.armorMDef = 60;
 				this.level = 24;
-				this.bonusHP = 600;
+				this.bonusHP = 875;
 				this.additionalXP = 190;
 			}
 			this.a = "the ";
