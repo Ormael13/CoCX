@@ -3411,7 +3411,7 @@ public class PerkLib
 				".");
 		public static const HiddenJob1:PerkType = mk("Hidden Job: 1", "Hidden Job: 1",
 				".");
-				
+
 		// Other super perks
 		public static const SuperPerk1:PerkType = mk("Super Perk 1", "Super Perk 1",
 				".");
@@ -5933,10 +5933,10 @@ public class PerkLib
                 return (player.arms.type == Arms.DRAGON || player.arms.type == Arms.FROSTWYRM);
 				}, "Dragon race or its variants arms")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.lowerBody == LowerBody.DRAGON || player.lowerBody == LowerBody.FROSTWYRM);
+                return (LowerBody.hasDraconicLegs(player));
 				}, "Dragon race or its variants legs")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.tailType == Tail.DRACONIC || player.lowerBody == LowerBody.FROSTWYRM);
+                return (player.tailType == Tail.DRACONIC || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
 				}, "Dragon race or its variants tail")
 				.requireCustomFunction(function (player:Player):Boolean {
                 return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10);
@@ -5983,13 +5983,13 @@ public class PerkLib
                 return player.gorgonScore() >= 5;
             }, "Gorgon race");
 			HinezumiBurningBlood.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-                return player.arms.type == 34;
+                return player.arms.type == Arms.HINEZUMI;
 				}, "Hinezumi arms")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.lowerBody == 49;
+                return player.lowerBody == LowerBody.HINEZUMI;
 				}, "Hinezumi legs")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.tailType == 43;
+                return player.tailType == Tail.HINEZUMI;
 				}, "Hinezumi tail")
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.mouseScore() >= 12;
@@ -6173,13 +6173,13 @@ public class PerkLib
             HinezumiBurningBloodEvolved.requireLevel(6)
 				.requirePerk(HinezumiBurningBlood)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.arms.type == 34;
+                return player.arms.type == Arms.HINEZUMI;
 				}, "Hinezumi arms")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.lowerBody == 49;
+                return player.lowerBody == LowerBody.HINEZUMI;
 				}, "Hinezumi legs")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.tailType == 43;
+                return player.tailType == Tail.HINEZUMI;
 				}, "Hinezumi tail")
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.mouseScore() >= 12;
@@ -6539,13 +6539,13 @@ public class PerkLib
             HinezumiBurningBloodFinalForm.requireLevel(18)
 				.requirePerk(HinezumiBurningBloodEvolved)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.arms.type == 34;
+                return player.arms.type == Arms.HINEZUMI;
 				}, "Hinezumi arms")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.lowerBody == 49;
+                return player.lowerBody == LowerBody.HINEZUMI;
 				}, "Hinezumi legs")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return player.tailType == 43;
+                return player.tailType == Tail.HINEZUMI;
 				}, "Hinezumi tail")
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.mouseScore() >= 12;

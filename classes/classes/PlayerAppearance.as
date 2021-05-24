@@ -252,27 +252,11 @@ public class PlayerAppearance extends BaseContent {
 		outputText("concealed within a cavity in your tail when not in use, though when the need arises, you can part your concealing slit and reveal your true self.\n");
 	}
 	//Crotchial stuff - mention scylla
-	if(player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) {
-		if(player.gender == 1)
-		{
-			outputText("\nYour sex is concealed between your front octopus tentacle legs dangling freely when not in use.\n");
-		}
-		if(player.gender == 2)
-		{
-			outputText("\nYour sex is concealed underneath your octopus tentacle legs when not in use, though when the need arises, you can rise some of the tentacles and reveal your true self.\n");
-		}
-		if(player.gender == 3)
-		{
-			outputText("\nYour sex");
-			if(player.cockTotal() > 1)
-				outputText("es are ");
-			else outputText(" is ");
-			outputText("concealed between your front octopus tentacle legs dangling freely. Other set is concealed underneath your octopus tentacle legs when not in use, though when the need arises, you can rise some of the tentacles and reveal it.\n");
-		}
+	var crotchDesc: String = LowerBody.getCrotchDescription(player);
+	if (crotchDesc) {
+		outputText("\n" + crotchDesc + "\n");
 	}
-	if(player.lowerBody == LowerBody.MELKIE) {
-		outputText("\nYou have a outer set of vaginal lips at the junction between your human body and seal tail in which your internal sex and human legs are hidden when not in use\n");
-	}
+
 	//Cock stuff!
 	if (player.hasCock()) {
 		rando = rand(100);
@@ -355,8 +339,10 @@ public class PlayerAppearance extends BaseContent {
 		//Worm flavor
 		if (player.hasStatusEffect(StatusEffects.Infested)) outputText("Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n");
 	}
+
 	//Of Balls and Sacks!
 	if(player.balls > 0) {
+		outputText("\n");
 		if(player.hasStatusEffect(StatusEffects.Uniball))
 		{
 			if(player.skinType != Skin.GOO) outputText("Your [sack] clings tightly to your groin, holding [balls] snugly against you.");
@@ -392,6 +378,7 @@ public class PlayerAppearance extends BaseContent {
 		//Worms extra descript. To match as seen in infested hellhounds.
 		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) outputText("Across it's surface, random lumps move rapidly around, further proof of your infested sack, and it's wormy inhabitants that both boost and increase your cum production.\n")
 	} else {
+		outputText("\n");
 		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5) outputText("Deep within your prostate you feel the worms moving, constantly rubbing against your trigger button, keeping you aroused and constantly churning up cum to be spewed out at a moment's notice.\n")
 	}
 	//VAGOOZ
@@ -399,7 +386,7 @@ public class PlayerAppearance extends BaseContent {
 	if (player.vaginas.length > 0){
 		var vagLoop:int = 0
 		var clitExists:int = 0
-		if((player.gender == 2 || player.gender == 3) && player.isTaur() && player.lowerBody != 26)//26 is scylla.
+		if((player.gender == 2 || player.gender == 3) && player.isTaur() && !player.isScylla())
 			outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.");
 		if((player.gender == 2 || player.gender == 3) && (player.isScylla() || player.isKraken()))
 			outputText("\nYour womanly parts have shifted to lie underneath your tentacle legs.");
@@ -449,7 +436,7 @@ public class PlayerAppearance extends BaseContent {
 					break;
 				case VaginaClass.NAGA:
 					outputText(" is deep and wide enought to insert your entire arm lenght inside and some more. Sometime you lament that most of your partners are no longer big enough to satisfy you");
-					if (player.lowerBody == LowerBody.NAGA) outputText("as your hot spot is now way further inside your lenghtly canal requiring quite a longer member to reach");
+					if (player.isNaga()) outputText("as your hot spot is now way further inside your lenghtly canal, requiring quite a longer member to reach");
 							outputText(". Inside you have a ");
 					break;
 				default:
@@ -1049,7 +1036,7 @@ public class PlayerAppearance extends BaseContent {
 		//Frost wyrm Horns
 		if (player.horns.type == Horns.FROSTWYRM){
 			outputText(" Two large sized spiraling horns grow from the side of your head, similar to those of a ram or frost wyrm. They kind of look great");
-			if (player.lowerBody == LowerBody.FROSTWYRM) outputText(" especially with your fur which makes you look like a sheep serpantine dragon");
+			if (player.lowerBody == LowerBody.FROSTWYRM) outputText(", especially with your fur, which makes you look like a sheep serpantine dragon");
 			outputText(".");
 		}
 		//Antlers!
