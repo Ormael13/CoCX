@@ -1240,6 +1240,11 @@ use namespace CoC;
 		override public function get weaponValue():Number {
 			return _weapon.value;
 		}
+		//Is DualWield
+		public function isDualWield():Boolean
+		{
+			return weaponRangePerk == "Dual Firearms" || weaponPerk == "Dual Large" || weaponPerk == "Dual Small" || weaponPerk == "Dual";
+		}
 		//Artifacts Bows
 		public function isArtifactBow():Boolean
 		{
