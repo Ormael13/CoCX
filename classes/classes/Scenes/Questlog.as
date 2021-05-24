@@ -124,8 +124,8 @@ public class Questlog extends BaseContent
 			if (SceneLib.dungeons.checkSandCaveClear() && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] < 2) addButton(5, "Sand Cave", takeRewardForSandCave);
 			if (SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) addButton(6, "Phoenix Tower", takeRewardForPhoenixTower);
 			//button 7 - ???
-			if (SceneLib.dungeons.checkRiverDungeon1stFloorClear() && !player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) addButton(8, "River Dungeon", takeRewardForRiverDungeon1stFloor).hint("1st floor");
-			if (SceneLib.dungeons.checkRiverDungeon2ndFloorClear() && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) < 2) addButton(8, "River Dungeon", takeRewardForRiverDungeon2ndFloor).hint("2nd floor");
+			if (SceneLib.dungeons.checkRiverDungeon1stFloorClear() && !player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) addButton(8, "River Dungeon", takeRewardForRiverDungeon1stFloor).hint("1st floor reward");
+			if (SceneLib.dungeons.checkRiverDungeon2ndFloorClear() && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) < 2) addButton(8, "River Dungeon", takeRewardForRiverDungeon2ndFloor).hint("2nd floor reward");
 			//3rd floor
 			//4th floor
 			if (SceneLib.dungeons.checkEbonLabyrinthClear() && flags[kFLAGS.EBON_LABYRINTH] < 3) addButton(9, "Ebon Labyrinth", takeRewardForEbonLabyrinth50th).hint("For first 50th rooms");
