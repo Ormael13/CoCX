@@ -844,6 +844,7 @@ import classes.Scenes.SceneLib;
 			if (WoodElfSpearTraining == QUEST_STAGE_SPEARTRAININGFIRST){
 				if (player.armor == armors.NOTHING) outputText("\n\nShe looks approvingly at your lack of clothing, not with her standard expression of perverted lust but with a serious glance.");
 				else outputText("\n\nHer first instruction is to strip. Unlike her usual, somewhat perverted expression when she says that, she appears serious.");
+				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING0;
 			}
 			outputText("\n\n\"<i>Remember, [name], we Elves are fundamentally spiritual creatures. Elves do not fight with strength but rather by listening to the voices around us. Elves become one with the voices of the wind and the forest. To do that, you have to be able to feel the air around you, and the easiest way to learn to do that is, well, to have nothing between you and it. Once you’re confident with your abilities, you can wear clothes, but beginners must always learn naked, even before we came to Mareth. I still practice that way, as you can see.</i>\"" +
 					"\n\nWith that, you take up a practice spear and begin training your posture and movements." +
