@@ -562,6 +562,8 @@
         <cell rect="1673,216,80,108" name="clothe/TamamoeNoMaeKimonoLowerTop" dx="65" dy="63"/>
         <cell rect="1919,216,80,108" name="clothe/OniKimonoTop" dx="65" dy="63"/>
         <cell rect="2001,216,80,108" name="clothe/OniKimonoLowerTop" dx="65" dy="63"/>
+	    <cell rect="2247,216,80,108" name="clothe/IceQueenKimonoTop" dx="65" dy="63"/>
+        <cell rect="2329,216,80,108" name="clothe/IceQueenKimonoLowerTop" dx="65" dy="63"/>
         <cell rect="1017,325,80,104" name="clothe/goblinTechnomancerClothe" dx="64" dy="55"/>
         <cell rect="722,543,130,90" name="clothe/fairyQueenDressFront" dx="40" dy="62"/>
         <cell rect="853,434,80,104" name="clothe/qipaoRedClothe" dx="64" dy="55"/>
@@ -575,6 +577,7 @@
         <cell rect="853,325,80,105" name="clothe/blackKimonoSleeves" dx="64" dy="72"/>
         <cell rect="771,222,80,85" name="clothe/TamamoeNoMaeKimonoSleeves" dx="64" dy="78"/>
         <cell rect="1837,222,80,85" name="clothe/OniKimonoSleeves" dx="64" dy="78"/>
+		<cell rect="2165,222,80,85" name="clothe/IceQueenKimonoSleeves" dx="64" dy="78"/>
         <cell rect="1181,216,80,105" name="clothe/vampireTop" dx="65" dy="63"/>
         <cell rect="1263,216,80,105" name="clothe/merchantClothe" dx="65" dy="57"/>
         <cell rect="935,325,80,104" name="clothe/goblinTechnomancerClotheArms" dx="64" dy="72"/>
@@ -646,8 +649,10 @@
         <cell rect="935,543,150,80" name="clothCape/fairyQueenDressUnder" dx="22" dy="61"/>
         <cell rect="1444,158,40,55" name="clothCape/TamamoeNoMaeKimonoUnder" dx="85" dy="121"/>
         <cell rect="1696,158,40,55" name="clothCape/OniKimonoUnder" dx="85" dy="121"/>
+		<cell rect="1990,158,40,55" name="clothCape/IceQueenKimonoUnder" dx="85" dy="121"/>
         <cell rect="1013,56,40,13" name="clothCape/TamamoeNoMaeKimonoCollar" dx="85" dy="68"/>
         <cell rect="229,13,40,13" name="clothCape/OniKimonoCollar" dx="85" dy="68"/>
+		<cell rect="607,56,40,13" name="clothCape/IceQueenKimonoCollar" dx="85" dy="68"/>
         <cell rect="1509,216,80,100" name="clothCape_bg/merchantClotheCape_bg" dx="65" dy="64"/>
         <cell rect="1755,216,80,100" name="clothCape_bg/mageClotheCape_bg" dx="65" dy="64"/>
         <cell rect="2083,216,80,100" name="clothCape_bg/elfClotheCape_bg" dx="65" dy="64"/>

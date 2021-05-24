@@ -375,12 +375,6 @@ public class Combat extends BaseContent {
 
     public function maxSmallAttacks():int {
         var extraHits:Number = 0;
-        if (player.isUsingSpear() && canSpearDance){
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry)) extraHits = 1;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryII)) extraHits = 2;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIII)) extraHits = 3
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIV)) extraHits = 4;
-        }
         if (player.hasPerk(PerkLib.DecaAttackSmall)) return 10+extraHits;
         else if (player.hasPerk(PerkLib.NonaAttackSmall)) return 9+extraHits;
         else if (player.hasPerk(PerkLib.OctaAttackSmall)) return 8+extraHits;
@@ -395,12 +389,6 @@ public class Combat extends BaseContent {
 
     public function maxLargeAttacks():int {
         var extraHits:Number = 0;
-        if (player.isUsingSpear() && canSpearDance){
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry)) extraHits = 1;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryII)) extraHits = 2;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIII)) extraHits = 3
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIV)) extraHits = 4;
-        }
         if (player.hasPerk(PerkLib.TripleAttackLarge)) return 3+extraHits;
         else if (player.hasPerk(PerkLib.DoubleAttackLarge)) return 2+extraHits;
         else return 1;
@@ -408,12 +396,6 @@ public class Combat extends BaseContent {
 
     public function maxCommonAttacks():int {
         var extraHits:Number = 0;
-        if (player.isUsingSpear() && canSpearDance){
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry)) extraHits = 1;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryII)) extraHits = 2;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIII)) extraHits = 3
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIV)) extraHits = 4;
-        }
         if (player.hasPerk(PerkLib.HexaAttack)) return 6+extraHits;
         else if (player.hasPerk(PerkLib.PentaAttack)) return 5+extraHits;
         else if (player.hasPerk(PerkLib.QuadrupleAttack)) return 4+extraHits;
@@ -438,10 +420,10 @@ public class Combat extends BaseContent {
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
         else if (canSpearDance() && player.isUsingSpear() && player.shield == ShieldLib.NOTHING){
             var Special:Number = 0;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry)) Special = 2;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryII)) Special = 3;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIII)) Special = 4;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIV)) Special = 5;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry)) Special = 1;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryII)) Special = 2;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIII)) Special = 3;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIV)) Special = 4;
             if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") return maxLargeAttacks()+Special;
             else if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") return maxSmallAttacks()+Special;
             else return maxCommonAttacks()+Special;
@@ -485,7 +467,7 @@ public class Combat extends BaseContent {
         else if (player.weaponRangePerk == "Crossbow") return maxCrossbowAttacks();
         else if (player.weaponRangePerk == "Bow"){
             var Special:Number = 0;
-            if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot) && player.weaponRangePerk == "Bow") Special += 2;
+            if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot) && player.weaponRangePerk == "Bow") Special += 1;
             return maxBowAttacks()+Special;
         }
         else return 1;
@@ -982,16 +964,16 @@ public class Combat extends BaseContent {
 					bd.disable("Your wrath is too low to unleash howl!");
 				}
 				if (player.hasPerk(PerkLib.AbsoluteStrength)) {
-					
+
 				}
 				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-					
+
 				}
 				if (player.hasPerk(PerkLib.ICastAsuraFist)) {
-					
+
 				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
-					
+
 				}
 			} else {
 				bd = buttons.add("Asura Form", assumeAsuraForm).hint("Let your wrath flow thou you, transforming you into Asura! \n\nWrath Cost: " + asuraformCost() + " per turn");
@@ -1441,29 +1423,14 @@ public class Combat extends BaseContent {
             if (monster as DriderIncubus) taintedMindAttackAttempt();
             return;
         }
-		
+
         clearOutput();
         if (SceneLib.urtaQuest.isUrta()) {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
         }
         if ((player.weaponPerk == "" || player.weaponPerk == "Dual" || player.weaponPerk == "Hybrid")) {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
-                if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) {
-                    if (player.hasPerk(PerkLib.HexaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) {
-                    if (player.hasPerk(PerkLib.PentaAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 5;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) {
-                    if (player.hasPerk(PerkLib.QuadrupleAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 4;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
-                    if (player.hasPerk(PerkLib.TripleAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) {
-                    if (player.hasPerk(PerkLib.DoubleAttack)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
-                    else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-                } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+                flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = Math.min(maxCurrentAttacks(), (flags[kFLAGS.DOUBLE_ATTACK_STYLE]||0)+1);
                 if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
                 if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponPerk == "Dual") flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponPerk == "Dual") {
@@ -2542,7 +2509,7 @@ public class Combat extends BaseContent {
 		}
         return dmgmdwmodpenalty;
 	}
-	
+
 	public function baseRangeAccuracy():Number {
 		var baccmod:Number = 80;
         if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) baccmod += 40;
@@ -2673,18 +2640,11 @@ public class Combat extends BaseContent {
         }
         flags[kFLAGS.LAST_ATTACK_TYPE] = 1;
         if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") {
-            if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 5) {
-                if (player.weaponRangePerk == "Crossbow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
-                else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 6;
-            } else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 4) {
-                if (player.weaponRangePerk == "Crossbow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
-                else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 5;
-            } else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 3) {
-                if (player.weaponRangePerk == "Crossbow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
-                else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
-            } else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 2) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
-            else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
-            else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
+            if (player.weaponRangePerk == "Crossbow") {
+                flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.DOUBLE_STRIKE_STYLE] || 0) + 1, 3);
+            } else {
+                flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.DOUBLE_STRIKE_STYLE] || 0) + 1, maxBowAttacks());
+            }
             var fireBowCost:Number = 0;
             fireBowCost += oneArrowTotalCost();
             //multiple arrows shoot costs
@@ -6049,7 +6009,7 @@ public class Combat extends BaseContent {
             else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your [armor] leave behind.");
 		}
     }
-	
+
 	public function WrathGenerationPerHit(damage:int = 0):void {
 		if (damage > 0) {
 			var generatedWrath:Number = 0;
@@ -6059,7 +6019,7 @@ public class Combat extends BaseContent {
 			if (generatedWrath > 0) EngineCore.WrathChange(generatedWrath, false);
 		}
 	}
-	
+
 	public function WrathGenerationPerHit1(damage:int = 0):void {	//base melee/range attacks wrath generation
 		var addedWrath:Number = damage;
 		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath *= 2;
@@ -6082,7 +6042,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.VexedNocking)) PAS *= 2;
         return PAS;
 	}
-	
+
     public function WrathWeaponsProc():void {
         if (player.weapon == weapons.BLETTER || player.weapon == weapons.C_BLADE) {
             player.takePhysDamage(player.maxHP() * 0.02);
@@ -6094,7 +6054,7 @@ public class Combat extends BaseContent {
         if (player.isLowGradeWrathWeapon()) {
             if (player.wrath >= 1) player.wrath -= 1;
             else {
-				
+
                 player.takePhysDamage(10);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
@@ -6105,7 +6065,7 @@ public class Combat extends BaseContent {
         if (player.isDualLowGradeWrathWeapon()) {
             if (player.wrath >= 2) player.wrath -= 2;
             else {
-				
+
                 player.takePhysDamage(20);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
@@ -6698,6 +6658,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage * 2;
+        if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -6786,6 +6747,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
+        if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage * 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
@@ -6870,6 +6832,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
+        if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage * 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
@@ -6953,6 +6916,7 @@ public class Combat extends BaseContent {
 		if (damage < 1) damage = 1;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage * 2;
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage = damage * 2;
+        if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -8051,6 +8015,47 @@ public class Combat extends BaseContent {
             statScreenRefresh();
             if (monster.HP <= monster.minHP()) doNext(endHpVictory);
             if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+        }
+
+        //Black Frost Aura
+        if (player.hasPerk(PerkLib.IceQueenGown) && player.yukiOnnaScore()>=14) {
+            if (!monster.hasPerk(PerkLib.IceNature)) {
+                var damage:Number = (scalingBonusIntelligence() * 1);
+                //Determine if critical hit!
+                var crit:Boolean = false;
+                var critChance:int = 5;
+                critChance += combatMagicalCritical();
+                if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+                if (rand(100) < critChance) {
+                    crit = true;
+                    damage *= 1.75;
+                }
+                damage = magic.calcGlacialModImpl(damage);
+                damage *= 0.5;
+                var SpellMultiplier:Number = 1;
+                SpellMultiplier += spellMod() - 1;
+                damage *= SpellMultiplier;
+                if (monster.cor < 33) damage = Math.round(damage * 1.0);
+                else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+                else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+                else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+                else damage = Math.round(damage * 1.4); //30% more damage against very high corruption.
+                if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+                if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+                if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+                damage = Math.round(damage);
+                if (damage > (monster.maxHP()/10)) damage = Math.round(monster.maxHP()/10);
+                outputText("Your black frost aura chills [monster a] [monster name] to the bone dealing ");
+                doIceDamage(damage, true, true);
+                outputText(" damage!");
+                if (crit) outputText(" <b>*Critical Hit!*</b>");
+                if (monster.plural) outputText(" Your opponent are affected by the freezing cold, slowing down their reflexes and thoughts as ice creeps on their body.");
+                else outputText(" Your opponent is affected by the freezing cold, slowing  down [monster his] reflexes and thoughts as ice creeps on [monster his] body.");
+                monster.statStore.addBuffObject({"spe.mult":-5, "int.mult":-5}, "Black Frost",{text:"Black Frost"});
+                outputText("\n\n");
+            } else {
+                outputText("Your opponent seems not to be affected by the cold of your aura of black frost. Probably because [monster he] is immune to cold temperature effects.");
+            }
         }
 
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
@@ -10133,7 +10138,7 @@ public class Combat extends BaseContent {
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.exoticXP(XP);
         player.exoticXP(XP);
     }
-	
+
 	public function archeryXP(XP:Number = 0):void {
         if (player.humanScore() == player.humanMaxScore()) player.archeryXP(XP);
 		else if (player.humanScore() >= player.humanMaxScore() - 9) player.archeryXP(XP);
@@ -12892,7 +12897,7 @@ public class Combat extends BaseContent {
         statScreenRefresh();
         enemyAI();
     }
-	
+
 	public function bloodSwipeBloodPuppies():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -12945,7 +12950,7 @@ public class Combat extends BaseContent {
 			addButton(0, "Next", combatMenu, false);
 		}
 	}
-	
+
 	public function asuraformCost():Number {
 		var modcsc:Number = 20;
 		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) modcsc += 20;
@@ -13007,7 +13012,7 @@ public class Combat extends BaseContent {
 		player.statStore.removeBuffs("AsuraForm");
 		enemyAI();
 	}
-	
+
 	public function asurasHowl():void {
 		clearOutput();
 		player.wrath -= 50;
