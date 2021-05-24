@@ -374,31 +374,52 @@ public class Combat extends BaseContent {
     }
 
     public function maxSmallAttacks():int {
-        if (player.hasPerk(PerkLib.DecaAttackSmall)) return 10;
-        else if (player.hasPerk(PerkLib.NonaAttackSmall)) return 9;
-        else if (player.hasPerk(PerkLib.OctaAttackSmall)) return 8;
-        else if (player.hasPerk(PerkLib.HectaAttackSmall)) return 7;
-        else if (player.hasPerk(PerkLib.HexaAttackSmall)) return 6;
-        else if (player.hasPerk(PerkLib.PentaAttackSmall)) return 5;
-        else if (player.hasPerk(PerkLib.QuadrupleAttackSmall)) return 4;
-        else if (player.hasPerk(PerkLib.TripleAttackSmall)) return 3;
-        else if (player.hasPerk(PerkLib.DoubleAttackSmall)) return 2;
-        else return 1;
+        var extraHits:Number = 0;
+        if (player.isUsingSpear() && canSpearDance){
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry)) extraHits = 1;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryII)) extraHits = 2;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIII)) extraHits = 3
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIV)) extraHits = 4;
+        }
+        if (player.hasPerk(PerkLib.DecaAttackSmall)) return 10+extraHits;
+        else if (player.hasPerk(PerkLib.NonaAttackSmall)) return 9+extraHits;
+        else if (player.hasPerk(PerkLib.OctaAttackSmall)) return 8+extraHits;
+        else if (player.hasPerk(PerkLib.HectaAttackSmall)) return 7+extraHits;
+        else if (player.hasPerk(PerkLib.HexaAttackSmall)) return 6+extraHits;
+        else if (player.hasPerk(PerkLib.PentaAttackSmall)) return 5+extraHits;
+        else if (player.hasPerk(PerkLib.QuadrupleAttackSmall)) return 4+extraHits;
+        else if (player.hasPerk(PerkLib.TripleAttackSmall)) return 3+extraHits;
+        else if (player.hasPerk(PerkLib.DoubleAttackSmall)) return 2+extraHits;
+        else return 1+extraHits;
     }
 
     public function maxLargeAttacks():int {
-        if (player.hasPerk(PerkLib.TripleAttackLarge)) return 3;
-        else if (player.hasPerk(PerkLib.DoubleAttackLarge)) return 2;
+        var extraHits:Number = 0;
+        if (player.isUsingSpear() && canSpearDance){
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry)) extraHits = 1;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryII)) extraHits = 2;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIII)) extraHits = 3
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIV)) extraHits = 4;
+        }
+        if (player.hasPerk(PerkLib.TripleAttackLarge)) return 3+extraHits;
+        else if (player.hasPerk(PerkLib.DoubleAttackLarge)) return 2+extraHits;
         else return 1;
     }
 
     public function maxCommonAttacks():int {
-        if (player.hasPerk(PerkLib.HexaAttack)) return 6;
-        else if (player.hasPerk(PerkLib.PentaAttack)) return 5;
-        else if (player.hasPerk(PerkLib.QuadrupleAttack)) return 4;
-        else if (player.hasPerk(PerkLib.TripleAttack)) return 3;
-        else if (player.hasPerk(PerkLib.DoubleAttack)) return 2;
-        else return 1;
+        var extraHits:Number = 0;
+        if (player.isUsingSpear() && canSpearDance){
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry)) extraHits = 1;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryII)) extraHits = 2;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIII)) extraHits = 3
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIV)) extraHits = 4;
+        }
+        if (player.hasPerk(PerkLib.HexaAttack)) return 6+extraHits;
+        else if (player.hasPerk(PerkLib.PentaAttack)) return 5+extraHits;
+        else if (player.hasPerk(PerkLib.QuadrupleAttack)) return 4+extraHits;
+        else if (player.hasPerk(PerkLib.TripleAttack)) return 3+extraHits;
+        else if (player.hasPerk(PerkLib.DoubleAttack)) return 2+extraHits;
+        else return 1+extraHits;
     }
 
     public function canSpearDance():Boolean{
@@ -417,10 +438,10 @@ public class Combat extends BaseContent {
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
         else if (canSpearDance() && player.isUsingSpear() && player.shield == ShieldLib.NOTHING){
             var Special:Number = 0;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry)) Special = 1;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryII)) Special = 2;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIII)) Special = 3;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIV)) Special = 4;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry)) Special = 2;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryII)) Special = 3;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIII)) Special = 4;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIV)) Special = 5;
             if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") return maxLargeAttacks()+Special;
             else if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") return maxSmallAttacks()+Special;
             else return maxCommonAttacks()+Special;
@@ -429,12 +450,14 @@ public class Combat extends BaseContent {
     }
 
     public function maxBowAttacks():int {
-        if (player.hasPerk(PerkLib.Multishot)) return 6;
-        else if (player.hasPerk(PerkLib.WildQuiver)) return 5;
-        else if (player.hasPerk(PerkLib.Manyshot)) return 4;
-        else if (player.hasPerk(PerkLib.TripleStrike)) return 3;
-        else if (player.hasPerk(PerkLib.DoubleStrike)) return 2;
-        else return 1;
+        var extraHits:Number = 0;
+        if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot)) extraHits = 1;
+        if (player.hasPerk(PerkLib.Multishot)) return 6+extraHits;
+        else if (player.hasPerk(PerkLib.WildQuiver)) return 5+extraHits;
+        else if (player.hasPerk(PerkLib.Manyshot)) return 4+extraHits;
+        else if (player.hasPerk(PerkLib.TripleStrike)) return 3+extraHits;
+        else if (player.hasPerk(PerkLib.DoubleStrike)) return 2+extraHits;
+        else return 1+extraHits;
     }
 
     public function maxCrossbowAttacks():int {
@@ -462,7 +485,7 @@ public class Combat extends BaseContent {
         else if (player.weaponRangePerk == "Crossbow") return maxCrossbowAttacks();
         else if (player.weaponRangePerk == "Bow"){
             var Special:Number = 0;
-            if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot) && player.weaponRangePerk == "Bow") Special += 1;
+            if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot) && player.weaponRangePerk == "Bow") Special += 2;
             return maxBowAttacks()+Special;
         }
         else return 1;
