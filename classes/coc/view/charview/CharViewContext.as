@@ -184,6 +184,7 @@ import coc.xlogic.ExecContext;
 					chainMailBikini: player.armor == game.armors.CHBIKNI || player.armor == game.armors.LMARMOR,
 					platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 					elfClothing: player.armor == game.armors.ERA,
+					iceQueenGown: player.armor == game.armors.IQG,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,

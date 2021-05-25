@@ -4070,7 +4070,7 @@
 			</if>
 		</if>
 		
-		<if test="IceQueenKimono">
+		<if test="iceQueenGown">
 			<if test="showClothing">
 				<show part="clothe/IceQueenKimonoTop"/>
 				<if test="(legCount!=4) and (showLegClothing)">
