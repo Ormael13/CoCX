@@ -186,13 +186,13 @@ public class FireElemental extends Monster
 				this.imageName = "fire ifrit";
 				this.long = "You're currently fighting 'female' ifrit. It's nine feet tall, it body covered with fire and it's using bare fists to fight.";
 				this.tallness = 108;
-				initStrTouSpeInte(16, 26, 46, 80);
-				initWisLibSensCor(80, 15, 55, 50);
-				this.weaponAttack = 8;
-				this.armorDef = 8;
-				this.armorMDef = 45;
+				initStrTouSpeInte(24, 39, 69, 120);
+				initWisLibSensCor(120, 15, 55, 50);
+				this.weaponAttack = 10;
+				this.armorDef = 10;
+				this.armorMDef = 60;
 				this.level = 24;
-				this.bonusHP = 600;
+				this.bonusHP = 875;
 				this.additionalXP = 190;
 			}
 			this.a = "the ";
