@@ -587,20 +587,29 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				doNext(camp.returnToCampUseOneHour);
 				break;
 			case 2:
-				if (player.bRows() == 0) {
-					player.createBreastRow();
+				if (!player.blockingBodyTransformations()) {
+					if (player.bRows() == 0) {
+						player.createBreastRow();
+					}
+					player.growTits(3, 1, false, 1);
 				}
-				player.growTits(3, 1, false, 1);
 				//scene("strings/forest-unicorn/okay-male");
 				celessGuardOkayMale();
-				while (player.hasCock()) {
-					player.removeCock(0, 1);
+				if (!player.blockingBodyTransformations()){
+					while (player.hasCock()) {
+						player.removeCock(0, 1);
+					}
+					player.createVagina();
+					menu();
+					addButton(0, "Next", celessUnicornIntro2, 3, true);
+					//doNext(celessGuardOkayFemale);
+					break;
+				} else {
+					if (player.hasKeyItem("Nightmare Horns")) player.removeKeyItem("Nightmare Horns");
+					findArmor();
+					inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
+					break;
 				}
-				player.createVagina();
-				menu();
-				addButton(0, "Next", celessUnicornIntro2, 3, true);
-				//doNext(celessGuardOkayFemale);
-				break;
 			case 3:
 				//scene("strings/forest-unicorn/okay-female", { $wasMale: wasMale, $isTaur: player.isTaur() } );
 				celessGuardOkayFemale(wasMale);
@@ -648,8 +657,9 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		outputText("<i>\"A unicorn ‘horns’ can pierce through anything, just relax, it will be easier for you.\"</i> ");
 		if (silly() && player.inte > 70) outputText("Part of you is mildly surprised, and grateful, no Demon has realized this potential application of spatial magic, otherwise they would have pushed to develop it until they learnt how to open portals to other realms by ramming a dick against space-time until they fucked it into submission.")
 		outputText("Without warning she suddenly shoves her huge horsecock inside, stretching your ass wide! "+
-				"As expected it hurts a fair bit, but eventually pain recedes as you acclimate to it. "+
-				"Or are you truly? The pain is slowly turning to pleasure as you start moaning, your "+ (player.isMale()?"cock":"crotch") + " becoming extremely sensitive." +
+				"As expected it hurts a fair bit, but eventually pain recedes as you acclimate to it. ");
+		if (!player.blockingBodyTransformations())		{
+				outputText("Or are you truly? The pain is slowly turning to pleasure as you start moaning, your "+ (player.isMale()?"cock":"crotch") + " becoming extremely sensitive." +
 				(player.isMale()?"You cum once then twice as it starts to shrink, ":"Your body starts to change, ") +
 				"your moans becoming progressively less and less masculine until they sound just like those of a girl. Wait a girl?\n\n"+
 				"<i>\"Ahhhn I can’t hold myself! Take it all!\"</i>\n\n"+
@@ -659,6 +669,14 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				"Wait... what the hell!? Did she just change you into a girl?! This wasn’t part of the agreement!\n\n"+
 				"<i>\"We ain’t done yet… here comes part two!\"</i>\n\n"+
 				"You see her looming shadow above your crouched female form, her horse length already hard again and casting a shadow across your face. Well, shit.");
+		}
+		else {
+			outputText("Well after a few minutes of this the unicorn finaly look like she's reaching her peak."+
+					"\n\n\"<i>Ahhhn I can’t hold myself! Take it all!</i>\"\n\n"+
+					"As she cums into your ass filling you full of horse splonge. The centauress sigh in disapointment for reasons unknown to you." +
+					"\n\n\"<i>It's a shame realy had you been more maleable I could have perhaps granted you a final gift but a deal is a deal, here is your shield. I wish you safe travel hero.</i>\"\n\n"+
+					"She picks up sanctuary from its pedestal and hand it over to you. waving you off. Guess your back on your quest now.");
+		}
 	}
 
 	private function celessGuardOkayFemale(wasMale:Boolean = false):void{
