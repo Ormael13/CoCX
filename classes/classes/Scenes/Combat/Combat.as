@@ -6665,8 +6665,6 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
-        if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage * 2;
-        if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -6694,6 +6692,8 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
         if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
         if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+        if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
+        if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -6755,8 +6755,6 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
-        if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage * 2;
-        if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -6786,6 +6784,8 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
         if (monster.hasPerk(PerkLib.IcyFlesh)) damage *= 0.6;
         if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+        if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
+        if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -6840,8 +6840,6 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
-        if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage * 2;
-        if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -6872,6 +6870,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.HeartOfTheStorm)) damage *= 1.1;
         if (player.hasPerk(PerkLib.HeartOfTheStormEvolved)) damage *= 1.2;
         if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)) damage *= 1.3;
+        if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
+        if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -6922,9 +6922,6 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
-        if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage * 2;
-        if (player.hasPerk(PerkLib.VladimirRegalia)) damage = damage * 2;
-        if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -6951,6 +6948,9 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
         if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
         if (monster.hasPerk(PerkLib.LightningNature)) damage *= 5;
+        if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
+        if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
+        if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
 //	if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
