@@ -391,8 +391,8 @@ public class PerkLib
 				"Regular swords increases parry chance by 15% and grants an extra +10% damage reduction when paired with a shield.",
 				"You've chosen the 'Knightly sword' perk. Regular swords increases parry chance by 15% and grants an extra +10% damage reduction when paired with a shield.");
 		public static const ImprovedAdrenaline:PerkType = mk("Improved Adrenaline", "Improved Adrenaline",
-				"Wrath generated with using melee/range/specials is converted from +15 wrath to +3% max wrath.",
-				"You've chosen the 'Improved Adrenaline' perk, converting wrath generated on melee/range attacks and specials to % values.");
+				"Increase wrath generated with using melee/range/specials by 1% of max wrath.",
+				"You've chosen the 'Improved Adrenaline' perk, increasing wrath generated with using melee/range/specials by 1% of max wrath.");
 		public static const VexedNocking:PerkType = mk("Vexed nocking", "Vexed nocking",
 				"Increase Power Attack/Shoot damage multiplier ratio from 1:2/5/10 to 1:4/10/20. Additional increase initial bonus to damage from 50 to 100%.",
 				"You've chosen the 'Vexed nocking' perk. Increase Power Attack/Shoot damage multiplier ratio from 1:2/5/10 to 1:4/10/20. Additional increase initial bonus to damage from 50 to 100%.");
@@ -3208,6 +3208,8 @@ public class PerkLib
 		public static const WalpurgisIzaliaRobe:PerkType = mk("Walpurgis Izalia Robe", "Walpurgis Izalia Robe",
 				"Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.",
 				"Increase fire damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
+		public static const IceQueenGown:PerkType = mk("Walpurgis Izalia Robe", "Walpurgis Izalia Robe",
+				"Freeze the heart of the wielder and grant a weakness to fire and a resistance to ice but double cold and light damage. A yuki onna also gains greater regeneration and the black frost aura.");
 		public static const WarCaster:PerkType = mk("War caster", "War caster",
 				"Increases magical and physical critical chance by up to 25% based on intelligence.",
 				"You've chosen the 'War caster' perk, increasing magical and physical critical chance by up to 25% based on intelligence.");
@@ -6111,7 +6113,7 @@ public class PerkLib
                 return player.scyllaScore() >= 5;
             }, "Scylla race");
             TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
-                return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4 || player.cancerScore() >= 4;
+                return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4 || player.cancerScore() >= 4 || player.atlachNachaScore() >= 17;
             }, "Any insect race");
             TwinHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.centaurScore() >= 4 || player.unicornScore() >= 8 || player.sphinxScore() >= 15 || player.cancerScore() >= 8;
@@ -6250,7 +6252,7 @@ public class PerkLib
                 return player.scyllaScore() >= 10;
             }, "Scylla race");*/
             TrachealSystemEvolved.requireLevel(6).requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
-                return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8 || player.cancerScore() >= 8;
+                return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8 || player.cancerScore() >= 8 || player.atlachNachaScore() >= 17;
             }, "Any insect race");
             TwinHeartEvolved.requireLevel(6)
 				.requirePerk(TwinHeart)
@@ -6478,7 +6480,7 @@ public class PerkLib
                 return player.vampireScore() >= 8;//potem dodać mosquito race i ew. inne co mogą wypijać krew
             }, "Vampire race");
 			VenomGlandsEvolved.requireLevel(12).requirePerk(VenomGlands).requireCustomFunction(function (player:Player):Boolean {
-                return player.spiderScore() >= 8 || player.nagaScore() >= 6 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
+                return player.spiderScore() >= 8 || player.atlachNachaScore() >= 17 || player.nagaScore() >= 6 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
             }, "Spider or any snake-like race");
 			WhaleFatEvolved.requireLevel(12).requirePerk(WhaleFat).requireCustomFunction(function (player:Player):Boolean {
 				return player.orcaScore() >= 9;
@@ -6723,7 +6725,7 @@ public class PerkLib
 					return player.devilkinScore() >= 14;
             }, "Devil race");
             TrachealSystemFinalForm.requireLevel(24).requirePerk(TrachealSystemEvolved).requireCustomFunction(function (player:Player):Boolean {
-                return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12 || player.cancerScore() >= 12;
+                return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12 || player.cancerScore() >= 12 || player.atlachNachaScore() >= 17;
             }, "Any insect race");
             TwinHeartFinalForm.requireLevel(24)
 				.requirePerk(TwinHeartEvolved)
@@ -6731,7 +6733,7 @@ public class PerkLib
 					return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.sphinxScore() >= 17 || player.cancerScore() >= 12;
             }, "Tauric or Unicorn race");
 			VenomGlandsFinalForm.requireLevel(24).requirePerk(VenomGlandsEvolved).requireCustomFunction(function (player:Player):Boolean {
-                return player.spiderScore() >= 12 || player.nagaScore() >= 8 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
+                return player.spiderScore() >= 12 || player.atlachNachaScore() >= 17 || player.nagaScore() >= 8 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
             }, "Spider or any snake-like race");
 			WhaleFatFinalForm.requireLevel(24).requirePerk(WhaleFatEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.orcaScore() >= 12;

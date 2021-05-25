@@ -95,6 +95,7 @@ import coc.xlogic.ExecContext;
 					PlayerHasRapierUnholy:player.weapon == game.weapons.B_WIDOW,
 
 					PlayerHasAShield: player.shieldName != "nothing" && player.shield != game.shields.SPI_FOC,
+					PlayerDualWield: player.shieldName != "nothing" && player.shield != game.shields.SPI_FOC,
 					PlayerHasSanctuary: player.shield == game.shields.SANCTYL || player.shield == game.shields.SANCTYN || player.shield == game.shields.SANCTYD,
 					PlayerHasSanctuaryHoly:player.shield == game.shields.SANCTYL,
 					PlayerHasSanctuaryUnholy:player.shield == game.shields.SANCTYD,
@@ -109,6 +110,8 @@ import coc.xlogic.ExecContext;
 					PlayerHasAJavelinUnholy:player.weaponRange == game.weaponsrange.LEVHARP,
 					PlayerHasAThrownAxe:player.weaponRange == game.weaponsrange.GTHRAXE,
 					PlayerHasLactoBlaster:player.weaponRange == game.weaponsrange.LBLASTR,
+
+					PlayerHasADualWeapon: player.isDualWield(),
 
 					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],
 					FireBuff: player.hasStatusEffect(StatusEffects.FlameBlade),
@@ -181,6 +184,7 @@ import coc.xlogic.ExecContext;
 					chainMailBikini: player.armor == game.armors.CHBIKNI || player.armor == game.armors.LMARMOR,
 					platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 					elfClothing: player.armor == game.armors.ERA,
+					iceQueenGown: player.armor == game.armors.IQG,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
@@ -197,6 +201,7 @@ import coc.xlogic.ExecContext;
 
 					// Viewable neck Accessory lists
 					blueScarf: player.necklace == game.necklaces.BWSCARF,
+					redScarf: player.necklace == game.necklaces.RWSCARF,
 					greenScarf: player.necklace == game.necklaces.GWSCARF,
 					purpleScarf: player.necklace == game.necklaces.PWSCARF,
 					yellowScarf: player.necklace == game.necklaces.YWSCARF,

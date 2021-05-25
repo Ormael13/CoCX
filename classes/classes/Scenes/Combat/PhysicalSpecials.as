@@ -54,6 +54,23 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need to use bow or throwing weapon before you can use Power Shoot.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+			if (player.statStore.hasBuff("AsuraForm")) {
+				if (player.hasPerk(PerkLib.AbsoluteStrength)) {
+					bd = buttons.add("SFoD", combat.asurasSixFingersOfDestruction).hint("Six Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+					if (player.wrath < (player.maxWrath() * 0.5)) {
+						bd.disable("Your wrath is too low to use Six Fingers of Destruction!");
+					}
+				}
+				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+					
+				}
+				if (player.hasPerk(PerkLib.ICastAsuraFist)) {
+					
+				}
+				if (player.hasPerk(PerkLib.AsuraStrength)) {
+					
+				}
+			}
 			if (player.haveWeaponForCleave() && player.hasStatusEffect(StatusEffects.KnowsCleave)) {
 				bd = buttons.add("Cleave", pcCleave).hint("Deal extra damage to multiple foes. Cause area effect bleed damage.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -343,11 +360,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasStatusEffect(StatusEffects.CooldownNet)) bd.disable("<b>You need more time before you can do it again.</b>\n\n");
 				else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+			//ELF ARCHERY
 			if (player.weaponRangePerk == "Bow" && WoodElves.WoodElfBowTraining >= 1) {
 				bd = buttons.add("Pin Down", ELFarcheryPinDown).hint("Shoot for your opponent legs dealing damage and incapacitating them. (cooldown of 5 rounds before it can be used again)");
 				if (player.hasStatusEffect(StatusEffects.CooldownPinDown)) bd.disable("<b>You need more time before you can do it again.</b>\n\n");
 				else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+			if (player.weaponRangePerk == "Bow" && WoodElves.WoodElfBowTraining >= 2) {
+				bd = buttons.add("Elven Eye", ELFarcheryElvenEye).hint("Elven ability, focus your aim to increase critical chances and greatly raise archery critical damage with bows for 8 rounds.");
+				if (player.hasStatusEffect(StatusEffects.ElvenEye)) bd.disable("<b>You are already focusing your aim.</b>\n\n");
+			}
+			//KINDRA ARCHERY
 			if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
 				bd = buttons.add("Sidewinder", archerSidewinder).hint("The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
 				if (player.hasStatusEffect(StatusEffects.CooldownSideWinder)) bd.disable("<b>You already used Sidewinder today.</b>\n\n");
@@ -771,10 +794,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			damage *= 1.75;
+			var buffMultiplier:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+			damage *= 1.75+buffMultiplier;
 		}
 		damage = Math.round(damage);
 		doDamage(damage, true, true);
@@ -932,12 +958,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var critMulti:Number = 1.75;//coś innego tu wpisać jako perk pozwalający na wyższy mnożnik krytyków
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
-		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
-		critChance *= 2;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			damage *= critMulti;
+			var buffMultiplier:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+			damage *= 1.75+buffMultiplier;
 		}
 		damage = Math.round(damage);
 		doDamage(damage);
@@ -1154,11 +1181,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50 && player.weaponRangePerk == "Bow") critChance += 5;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
 		critChance *= 2;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			damage *= critMulti;
+			var buffMultiplier:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+			damage *= critMulti+buffMultiplier;
 		}
 		damage = Math.round(damage);
 		doDamage(damage);
@@ -4998,6 +5028,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 
+	public function ELFarcheryElvenEye():void {
+		clearOutput()
+		outputText("You focus your vision concentrating on the target and pinpointing weak points to maximise the damage of your arrows!\n\n");
+		player.createStatusEffect(StatusEffects.ElvenEye,8,0,0,0);
+		enemyAI();
+	}
+
 	public function ELFarcheryPinDown():void {
 		clearOutput()
 
@@ -5064,10 +5101,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			critChance += combatPhysicalCritical();
 			if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 			if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;
-				damage *= 1.75;
+				var buffMultiplier:Number = 0;
+				if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+				damage *= 1.75+buffMultiplier;
 			}
 			if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= combat.historyScoutBonus();
 			if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
@@ -5352,10 +5392,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			damage *= 1.75;
+			var buffMultiplier:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+			damage *= 1.75+buffMultiplier;
 		}
 		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= combat.historyScoutBonus();
 		if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
@@ -5461,10 +5504,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			damage *= 1.75;
+			var buffMultiplier:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+			damage *= 1.75+buffMultiplier;
 		}
 		damage = Math.round(damage);
 		doDamage(damage);
@@ -5516,10 +5562,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			damage *= 1.75;
+			var buffMultiplier:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+			damage *= 1.75+buffMultiplier;
 		}
 		damage = Math.round(damage);
 		outputText("Then do it another time showering them with an extra volley of arrows. ");

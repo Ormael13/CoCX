@@ -994,7 +994,7 @@ use namespace CoC;
 		//Free off-hand for spellcasting and etc.
 		public function isHavingFreeOffHand():Boolean
 		{
-			return !isShieldsForShieldBash() && shield == game.shields.BATTNET && shield == game.shields.Y_U_PAN;
+			return !isShieldsForShieldBash() || shield != game.shields.BATTNET || shield != game.shields.Y_U_PAN;
 		}
 		//Fists and fist weapons
 		public function isFistOrFistWeapon():Boolean {
@@ -1239,6 +1239,11 @@ use namespace CoC;
 		}
 		override public function get weaponValue():Number {
 			return _weapon.value;
+		}
+		//Is DualWield
+		public function isDualWield():Boolean
+		{
+			return weaponRangePerk == "Dual Firearms" || weaponPerk == "Dual Large" || weaponPerk == "Dual Small" || weaponPerk == "Dual";
 		}
 		//Artifacts Bows
 		public function isArtifactBow():Boolean
@@ -4210,7 +4215,7 @@ use namespace CoC;
 				humanCounter++;
 			if (skin.base.pattern == Skin.PATTERN_NONE)
 				humanCounter++;
-			humanCounter += (118 - internalChimeraScore());
+			humanCounter += (121 - internalChimeraScore());
 			if (isGargoyle()) humanCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) humanCounter = 0;
 			End("Player","racialScore");

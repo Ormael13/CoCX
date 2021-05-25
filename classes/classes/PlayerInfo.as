@@ -77,14 +77,14 @@ public class PlayerInfo extends BaseContent {
 
 		bodyStats += "<b>Pregnancy Speed Multiplier:</b> ";
 		var preg:Number = 1;
-		if (player.findPerk(PerkLib.Diapause) >= 0)
+		if (player.hasPerk(PerkLib.Diapause))
 			bodyStats += "? (Variable due to Diapause)\n";
 		else {
-			if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) preg++;
-			if (player.findPerk(PerkLib.BroodMother) >= 0) preg++;
-			if (player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) preg++;
-			if (player.findPerk(PerkLib.MagicalFertility) >= 0) preg++;
-			if (player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) preg++;
+			if (player.hasPerk(PerkLib.MaraesGiftFertility)) preg++;
+			if (player.hasPerk(PerkLib.BroodMother)) preg++;
+			if (player.hasPerk(PerkLib.FerasBoonBreedingBitch)) preg++;
+			if (player.hasPerk(PerkLib.MagicalFertility)) preg++;
+			if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) preg++;
 			bodyStats += preg + "\n";
 		}
 
@@ -108,14 +108,14 @@ public class PlayerInfo extends BaseContent {
 		if (player.vaginas.length > 0)
 			bodyStats += "<b>Vaginal Capacity:</b> " + Math.round(player.vaginalCapacity()) + "\n" + "<b>Vaginal Looseness:</b> " + Math.round(player.looseness()) + "\n";
 
-		if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 || player.findPerk(PerkLib.BeeOvipositor) >= 0)
+		if (player.hasPerk(PerkLib.SpiderOvipositor) || player.hasPerk(PerkLib.BeeOvipositor))
 			bodyStats += "<b>Ovipositor Total Egg Count: " + player.eggs() + "\nOvipositor Fertilized Egg Count: " + player.fertilizedEggs() + "</b>\n";
 
 		if (player.hasStatusEffect(StatusEffects.SlimeCraving)) {
 			if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18)
 				bodyStats += "<b>Slime Craving:</b> Active! You are currently losing strength and speed.  You should find fluids.\n";
 			else {
-				if (player.findPerk(PerkLib.SlimeCore) >= 0 || player.findPerk(PerkLib.DarkSlimeCore) >= 0)
+				if (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore))
 					bodyStats += "<b>Slime Stored:</b> " + ((17 - player.statusEffectv1(StatusEffects.SlimeCraving)) * 2) + " hours until you start losing strength.\n";
 				else
 					bodyStats += "<b>Slime Stored:</b> " + (17 - player.statusEffectv1(StatusEffects.SlimeCraving)) + " hours until you start losing strength.\n";
@@ -227,9 +227,9 @@ public class PlayerInfo extends BaseContent {
 		//Marble Milk Addition
 		if (player.statusEffectv3(StatusEffects.Marble) > 0) {
 			addictStats += "<b>Marble Milk:</b> ";
-			if (player.findPerk(PerkLib.MarbleResistant) < 0 && player.findPerk(PerkLib.MarblesMilk) < 0)
+			if (!player.hasPerk(PerkLib.MarbleResistant) && !player.hasPerk(PerkLib.MarblesMilk))
 				addictStats += Math.round(player.statusEffectv2(StatusEffects.Marble)) + "%\n";
-			else if (player.findPerk(PerkLib.MarbleResistant) >= 0)
+			else if (player.hasPerk(PerkLib.MarbleResistant))
 				addictStats += "0%\n";
 			else
 				addictStats += "100%\n";
@@ -241,10 +241,10 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		// Mino Cum Addiction
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || player.findPerk(PerkLib.MinotaurCumResistance) >= 0 || player.findPerk(PerkLib.ManticoreCumAddict) >= 0) {
-			if (player.findPerk(PerkLib.MinotaurCumAddict) < 0)
+		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.hasPerk(PerkLib.MinotaurCumAddict) || player.hasPerk(PerkLib.MinotaurCumResistance) || player.hasPerk(PerkLib.ManticoreCumAddict)) {
+			if (!player.hasPerk(PerkLib.MinotaurCumAddict))
 				addictStats += "<b>Minotaur Cum:</b> " + Math.round(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] * 10) / 10 + "%\n";
-			else if (player.findPerk(PerkLib.MinotaurCumResistance) >= 0 || player.findPerk(PerkLib.ManticoreCumAddict) >= 0)
+			else if (player.hasPerk(PerkLib.MinotaurCumResistance) || player.hasPerk(PerkLib.ManticoreCumAddict))
 				addictStats += "<b>Minotaur Cum:</b> 0% (Immune)\n";
 			else
 				addictStats += "<b>Minotaur Cum:</b> 100+%\n";
