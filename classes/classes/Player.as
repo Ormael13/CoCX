@@ -8586,7 +8586,7 @@ use namespace CoC;
 
 		//Determine Unicornkin Rating
 		public function unicornkinScore():Number {
-			var bicornColorPalette:Array = ["silver", "black", "midnight black", "midnight"];
+			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
 			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
 			var unicornColorPalette:Array = ["white", "pure white"];
 			var unicornHairPalette:Array = ["platinum blonde","silver", "white", "pure white"];
