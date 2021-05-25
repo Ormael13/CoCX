@@ -322,10 +322,8 @@ public class Lethice extends Monster
 			{
 				outputText("Unable to resist your sensual assault, Lethice lets loose a howl of frustration and swoops back to the earth, mounting her throne once again.");
 			}
-
 			outputText("\n\n<i>“I tire of this game!”</i> she shouts, grasping at the arms of her towering throne. Suddenly, her gaze snaps from you, to the horde of demons clamoring in the stands. <i>“What are you waiting for, fools!? Get [himher]!”</i>");
 			outputText("\n\nOh, shit. You look up in time to see a cavalcade of demonic flesh swooping down from on high, bodies practically tumbling one over the other to get at you. The horde takes every physical form imaginable: towering, hulking brutish males, inhumanly curvaceous succubi, and the reverse of both - not to mention hermaphrodites masculine and feminine - and all with every sort of transformation. Bestial creatures, dragon-like incubi, and succubi whose skins range the colors of the rainbow and so, so much more come piling down the throne hall in a ceaseless barrage of flesh and decadence. They won’t stop until they’ve dragged you to the ground and fucked you into submission!");
-
 			// 9999 reconfigure for the group
 			HP   = maxHP();
 			lust = 10;
@@ -336,10 +334,9 @@ public class Lethice extends Monster
 			pronoun1 = "they";
 			pronoun2 = "them";
 			pronoun3 = "their";
-			
 			if (hasStatusEffect(StatusEffects.PhysicalDisabled)) removeStatusEffect(StatusEffects.PhysicalDisabled);
 			if (hasStatusEffect(StatusEffects.AttackDisabled)) removeStatusEffect(StatusEffects.AttackDisabled);
-			
+			SceneLib.combat.combatRoundOver();
 		}
 
 		private function phase2():void
@@ -483,9 +480,7 @@ public class Lethice extends Monster
 			{
 				outputText("Lethice’s minions have all but turned into an orgy, completely forgetting their original intent, no matter how much their draconic queen screeches for them to attack.");
 			}
-
 			outputText("\n\nWhile the demons are down, and Lethice is still recovering from your first skirmish, you have a much-needed moment to relieve the tensions starting to grow within you. Or you could press the attack, and take the fight to the queen.");
-
 			EngineCore.menu();
 			if (player.hasCock() || player.hasVagina()) EngineCore.addButton(0, "DemonFuck", p2DemonFuck, hpVictory);
 			if (player.hasStatusEffect(StatusEffects.KnowsHeal)) EngineCore.addButton(1, "Heal", p2Heal);

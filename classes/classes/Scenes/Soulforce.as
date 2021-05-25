@@ -34,6 +34,7 @@ import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
 import classes.Scenes.Dungeons.EbonLabyrinth;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
+import classes.Scenes.Dungeons.RiverDungeon.QuatroElementalBoss;
 import classes.Scenes.Explore.Pierce;
 import classes.Scenes.Explore.TheDummy;
 import classes.Scenes.Monsters.DarkElfRanger;
@@ -289,6 +290,11 @@ use namespace CoC;
 			player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
 			statScreenRefresh();
 			SoulforceCheats();
+		}
+		public function FightQuatroElementalBoss():void {
+			clearOutput();
+			outputText("Entering battle with Quatro Elemental Boss! Enjoy ^^");
+			startCombat(new QuatroElementalBoss());
 		}
 		public function FightAria():void {
 			clearOutput();
@@ -1692,7 +1698,7 @@ use namespace CoC;
 				addButton(1, "Hydra", FightHydra).hint("Test fight with Hydra.");
 				addButton(2, "HellfireSnail", FightHellfireSnail).hint("Test fight with Hellfire Snail.");
 				addButton(3, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
-				//addButton(4, "", ).hint("Test fight with .");
+				addButton(4, "Q. E. Boss", FightQuatroElementalBoss).hint("Test fight with Quatro Elemental Boss.");
 				//addButton(5, "", ).hint("Test fight with .");
 				addButton(6, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
 				addButton(7, "Neisa", FightNeisa).hint("Test fight with Neisa.");

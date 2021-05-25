@@ -8,6 +8,7 @@ package classes.Scenes.Dungeons.RiverDungeon
 import classes.*;
 import classes.internals.*;
 import classes.CoC;
+//import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
@@ -247,8 +248,9 @@ public class QuatroElementalBoss extends Monster
 			outputText("Unable to resist your assault, elemental fall to the ground. Is that it? It been not much stronger than other strong enemies you battled on this floor. As if to prove you wrong brown flame embers that was previously just from time to time falling on the ground starts to be attracted to fallen enemy. ");
 			outputText("Before you have time to react they converge on elemental giving it sort of armor that then heats up due to flame beneath it. Revived by that change enemy stands up ready to continue fight...");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 1, 1);
-			HP = maxHP();
 			_fightPhase = 2;
+			HP = maxHP();
+			SceneLib.combat.combatRoundOver();
 		}
 		private function phase2Ends():void
 		{
@@ -256,8 +258,9 @@ public class QuatroElementalBoss extends Monster
 			outputText("For second time the elemental falls. When you think it's gfor good... blue flame embers instantly merge with it causing violent reaction between fire and water forming thick laye of steam covering it. Eyes that been previpously at the torso moving to place themself on newly fomed appending on top of it. ");
 			outputText("Looking like it finaly getting proper 'head' with two pairs of normaly horizontaly places eyes with purple glow. It surely not letting you win this fight easily does it?");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 4, 1);
-			HP = maxHP();
 			_fightPhase = 3;
+			HP = maxHP();
+			SceneLib.combat.combatRoundOver();
 		}
 		private function phase3Ends():void
 		{
@@ -266,8 +269,9 @@ public class QuatroElementalBoss extends Monster
 			outputText("Revived by infusion of air element particles enemy stands up again steonger and more dangerous than moment ago.\n\n");
 			outputText("<i>“We would not make any more errors,”</i> all of sudden elemental speaks in voice that sounds like ovelapping of four different voices making it almost impossible to understand. Then it once again rush toward clashing with you for the fourth time...");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
-			HP = maxHP();
 			_fightPhase = 4;
+			HP = maxHP();
+			SceneLib.combat.combatRoundOver();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -289,10 +293,7 @@ public class QuatroElementalBoss extends Monster
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (_fightPhase == 1) SceneLib.dungeons.riverdungeon.defeatedByQuatroElementalBoss();
-			else if (_fightPhase == 2) SceneLib.dungeons.riverdungeon.defeatedByQuatroElementalBoss();
-			else if (_fightPhase == 3) SceneLib.dungeons.riverdungeon.defeatedByQuatroElementalBoss();
-			else SceneLib.dungeons.riverdungeon.defeatedByQuatroElementalBoss();
+			SceneLib.dungeons.riverdungeon.defeatedByQuatroElementalBoss();
 		}
 		
 		public function QuatroElementalBoss() 
