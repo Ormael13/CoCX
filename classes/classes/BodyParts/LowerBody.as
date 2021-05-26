@@ -14,8 +14,7 @@ public class LowerBody extends SaveableBodyPart {
 	 * - id: name of the constant ("HUMAN", "HOOFED")
 	 * - name: human-readable default name, ("human", "hoofed")
 	 *
-	 * OPTIONAL:
-	 * - metamorphFlag: which status effect defines whether the player unlocked the metamorph (if there's none, it can't be metamorphed)
+	 * - metamorphFlag: which status effect defines whether the metamorph was unlocked (if there's none, it can't be unlocked)
 	 * - metamorphCost: how much SF it costs to metamorph this part (defaults to 100)
 	 * - metamorphTitle: name displayed on the metamorph button
 	 * - tfDesc: TF scene for the part
@@ -206,6 +205,7 @@ public class LowerBody extends SaveableBodyPart {
 
 			if (creature.lowerBody != LowerBody.HUMAN) {
 				desc += LowerBody.Types[LowerBody.HUMAN].tfDescFunc(creature);
+				LowerBody.Types[LowerBody.HUMAN].tfFunc(creature);
 				desc += "\n\n";
 			}
 
@@ -232,6 +232,7 @@ public class LowerBody extends SaveableBodyPart {
 
 			if (creature.lowerBody != LowerBody.HUMAN) {
 				desc += LowerBody.Types[LowerBody.HUMAN].tfDescFunc(creature);
+				LowerBody.Types[LowerBody.HUMAN].tfFunc(creature);
 				desc += "\n\n";
 			}
 
@@ -256,6 +257,7 @@ public class LowerBody extends SaveableBodyPart {
 
 			if (creature.lowerBody != LowerBody.HUMAN) {
 				desc += LowerBody.Types[LowerBody.HUMAN].tfDescFunc(creature);
+				LowerBody.Types[LowerBody.HUMAN].tfFunc(creature);
 				desc += "\n\n";
 			}
 
@@ -422,6 +424,7 @@ public class LowerBody extends SaveableBodyPart {
 
 			if (creature.lowerBody != LowerBody.HUMAN) {
 				desc += LowerBody.Types[LowerBody.HUMAN].tfDescFunc(creature);
+				LowerBody.Types[LowerBody.HUMAN].tfFunc(creature);
 				desc += "\n\n";
 			}
 
@@ -447,8 +450,9 @@ public class LowerBody extends SaveableBodyPart {
 			var desc: String = "";
 
 
-			if (creature.lowerBody != LowerBody.HUMAN) {
+			if (creature.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS) {
 				desc += LowerBody.Types[LowerBody.CHITINOUS_SPIDER_LEGS].tfDescFunc(creature);
+				LowerBody.Types[LowerBody.CHITINOUS_SPIDER_LEGS].tfFunc(creature);
 				desc += "\n\n";
 			}
 
@@ -457,7 +461,7 @@ public class LowerBody extends SaveableBodyPart {
 				creature.tailType = Tail.SPIDER_ADBOMEN;
 			}
 
-			desc += "Just like when your legs changed to those of a spider-morph, you find yourself suddenly paralyzed below the waist. Your dark, reflective legs splay out and drop you flat on your back. Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them. Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down. As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs. Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start. Your abdomen has gotten even larger as well. Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance. As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance. That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your [butt] is still positioned just above the start of your arachnid half. <b>You're now a drider.</b>";
+			desc += "You find yourself suddenly paralyzed below the waist. Your dark, reflective legs splay out and drop you flat on your back. Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them. Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down. As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs. Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start. Your abdomen has gotten even larger as well. Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance. As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance. That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your [butt] is still positioned just above the start of your arachnid half. <b>You're now a drider.</b>";
 
 			return desc;
 		},
@@ -713,6 +717,7 @@ public class LowerBody extends SaveableBodyPart {
 
 			if (creature.lowerBody != LowerBody.HUMAN) {
 				desc += LowerBody.Types[LowerBody.HUMAN].tfDescFunc(creature);
+				LowerBody.Types[LowerBody.HUMAN].tfFunc(creature);
 				desc += "\n\n";
 			}
 
@@ -773,6 +778,7 @@ public class LowerBody extends SaveableBodyPart {
 
 			if (creature.lowerBody != LowerBody.HUMAN) {
 				desc += LowerBody.Types[LowerBody.HUMAN].tfDescFunc(creature);
+				LowerBody.Types[LowerBody.HUMAN].tfFunc(creature);
 				desc += "\n\n";
 			}
 
@@ -806,6 +812,7 @@ public class LowerBody extends SaveableBodyPart {
 
 			if (creature.lowerBody != LowerBody.HUMAN) {
 				desc += LowerBody.Types[LowerBody.HUMAN].tfDescFunc(creature);
+				LowerBody.Types[LowerBody.HUMAN].tfFunc(creature);
 				desc += "\n\n";
 			}
 
@@ -836,6 +843,7 @@ public class LowerBody extends SaveableBodyPart {
 
 			if (creature.lowerBody != LowerBody.HUMAN) {
 				desc += LowerBody.Types[LowerBody.HUMAN].tfDescFunc(creature);
+				LowerBody.Types[LowerBody.HUMAN].tfFunc(creature);
 				desc += "\n\n";
 			}
 
@@ -861,6 +869,7 @@ public class LowerBody extends SaveableBodyPart {
 
 			if (creature.lowerBody != LowerBody.HUMAN) {
 				desc += LowerBody.Types[LowerBody.HUMAN].tfDescFunc(creature);
+				LowerBody.Types[LowerBody.HUMAN].tfFunc(creature);
 				desc += "\n\n";
 			}
 
@@ -886,6 +895,7 @@ public class LowerBody extends SaveableBodyPart {
 
 			if (creature.lowerBody != LowerBody.HUMAN) {
 				desc += LowerBody.Types[LowerBody.HUMAN].tfDescFunc(creature);
+				LowerBody.Types[LowerBody.HUMAN].tfFunc(creature);
 				desc += "\n\n";
 			}
 
@@ -957,6 +967,7 @@ public class LowerBody extends SaveableBodyPart {
 
 			if (creature.lowerBody != LowerBody.HUMAN) {
 				desc += LowerBody.Types[LowerBody.HUMAN].tfDescFunc(creature);
+				LowerBody.Types[LowerBody.HUMAN].tfFunc(creature);
 				desc += "\n\n";
 			}
 

@@ -29,73 +29,12 @@ public class Appearance extends Utils
 				return "hair";
 		}
 
-		public static function hairDescription(i_creature:Creature, longDesc:Boolean = false):String
-		{
-			var description:String = "";
-			var options:Array;
-			var hairscale:Number;
-			//
-			// LENGTH ADJECTIVE!
-			//
-			if (i_creature.hairLength == 0) {
-				options = ["shaved",
-					"bald",
-					"smooth",
-					"hairless",
-					"glabrous"];
-				description = randomChoice(options) + " head";
-				return description;
-			}
-			else {
-				hairscale = int((i_creature.hairLength/i_creature.tallness)*100)/100
-				if (hairscale <= 0.05){	//Values roughly based on actual human ratios.
-					options = ["close-cropped, ",
-						"trim, ",
-						"very short, "];
-					description += randomChoice(options);
-				}
-				else if (hairscale > 0.05 && hairscale <= 0.1){
-					description += "short, ";
-				}
-				else if (hairscale > 0.1 && hairscale <= 0.14){
-					description += "shaggy, ";
-				}
-				else if (hairscale > 0.14 && hairscale <= 0.17){
-					description += "moderately long, ";
-				}
-				else if (hairscale > 0.17 && hairscale <= 0.2){
-					if (rand(2) == 0) description += "long, ";
-					else description += "shoulder-length, ";
-				}
-				else if (hairscale > 0.2 && hairscale <= 0.25){
-					if (rand(2) == 0) description += "very long, ";
-					else description += "flowing locks of ";
-				}
-				else if (hairscale > 0.25 && hairscale <= 0.4){
-					description += "back-covering, ";
-				}
-				else if (hairscale > 0.4 && hairscale <= 0.5){
-					description += "ass-length, ";
-				}
-				else if (hairscale > 0.5 && hairscale <= 1){
-					description += "obscenely long, "
-				}
-				else if (hairscale > 1 ){
-					if (rand(2) == 0) description += "floor-length, ";
-					else description += "floor-dragging, ";
-				}
-			}
-			//
-			// COLORS
-			//
-			description += i_creature.hairColor + " ";
-			//
-			// HAIR WORDS
-			//
+		public static function hairDescription(i_creature:Creature):String {
+			return Hair.getDescription(i_creature);
+		}
 
-			description += Hair.getAppearanceDescription(i_creature, longDesc);
-
-			return description;
+		public static function hairShortDescription(i_creature:Creature):String {
+			return Hair.getShortDescription(i_creature);
 		}
 
 		public static function beardDescription(i_creature:Creature):String
@@ -145,15 +84,6 @@ public class Appearance extends Utils
 			const beardStyles: Array = ["beard", "goatee", "clean-cut beard", "mountain-man beard"];
 
 			description += beardStyles[i_creature.beardStyle];
-
-			return description;
-		}
-
-		public static function hairStyleDescription(i_creature:Creature):String
-		{
-			var description:String = "";
-			var options: Array = ["plain", "wild", "ponytail", "long tied up", "twin pigtail", "dwarven"];
-			description += options[i_creature.hairStyle];
 
 			return description;
 		}

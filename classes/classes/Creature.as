@@ -3832,9 +3832,9 @@ public class Creature extends Utils
 			return Appearance.hairOrFur(this);
 		}
 
-		public function hairDescript(longDesc:Boolean = false):String
+		public function hairDescript():String
 		{
-			return Appearance.hairDescription(this, longDesc);
+			return Appearance.hairDescription(this);
 		}
 
 		public function beardDescript():String

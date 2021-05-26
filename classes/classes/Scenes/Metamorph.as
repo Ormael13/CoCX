@@ -38,24 +38,26 @@ public function accessMetamorphMenu():void {
 	outputText("<i>Bonus to Max Soulforce: " + 50 * (1 + player.perkv1(PerkLib.Metamorph)) + "</i>\n\n");
 	outputText("<b>Races added to Metamorph:\n");
 	outputText("Alicorn, Bat, Bee, Bicorn, Boar, Cat, Cheshire Cat, Cow, Couatl, Demon, Devil, Displacer Beast, Dragon, Elf, Fox, Gorgon, Harpy, Hellcat, Horse, Human, Kitsune, Lizard, Manticore, Mantis, Minotaur, Naga, Nekomata, Nightmare, Oni, Orc, Orca, Phoenix, Pig, Raiju, Red Panda, Salamander, Shark, Sphinx, Spider (+Drider), Unicorn, Vampire</b>");
-	menu();/*
-	if (player.hasPerk(PerkLib.MetamorphEx)) {
-		addButton(5, "Page Ex (1)", accessPageEx1MetamorphMenu);
-		//addButton(6, "Page Ex (2)", accessPageEx2MetamorphMenu);
-		//addButton(7, "Page Ex (3)", accessPageEx3MetamorphMenu);
-	}
-	else {
-		addButtonDisabled(5, "Page Ex (1)", "Req. to have Metamorph (Ex) to open this options.");
-		//addButtonDisabled(6, "Page Ex (2)", "Req. to have Metamorph (Ex) to open this options.");
-		//addButtonDisabled(7, "Page Ex (3)", "Req. to have Metamorph (Ex) to open this options.");
-	}*/
+	menu();
+
+	addButton(0, "Hair", accessHairMenu)
 	addButton(8, "Lower Body", accessLowerBodyMenu);;
-	addButton(10, "Page 1", accessPage1MetamorphMenu).hint("Hair, Face, Tongue, Eyes, Ears, Horns");
+	addButton(10, "Page 1", accessPage1MetamorphMenu).hint("Face, Tongue, Eyes, Ears, Horns");
 	addButton(11, "Page 2", accessPage2MetamorphMenu).hint("Arms, Wings");
 	addButton(12, "Page 3", accessPage3MetamorphMenu).hint("Skin, Skin Patterns/Tattoos, Rear Body, Antennae, Gills, Tail");
 	//addButton(13, "Page 4", accessPage4MetamorphMenu);
 	if (player.hasPerk(PerkLib.JobSoulCultivator)) addButton(14, "Back", SceneLib.soulforce.accessSoulforceMenu);
 	else addButton(14, "Back", playerMenu);
+}
+
+private function accessHairMenu(currentPage: int = 0): void {
+	const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Hair</u></font>\n";
+
+	clearOutput();
+	outputText(title);
+	outputText("Choose what you want your hair to morph into.");
+
+	openPaginatedMenu(title, accessLowerBodyMenu, currentPage, Hair.Types, Hair.Types[player.hairType], Hair.getTFDescription);
 }
 
 private function accessLowerBodyMenu(currentPage: int = 0): void {
@@ -65,10 +67,10 @@ private function accessLowerBodyMenu(currentPage: int = 0): void {
 	outputText(title);
 	outputText("Choose what you want your lower body to morph into.");
 
-	openPaginatedMenu(LowerBody.Types, currentPage, accessLowerBodyMenu, title);
+	openPaginatedMenu(title, accessLowerBodyMenu, currentPage, LowerBody.Types, LowerBody.Types[player.lowerBody], LowerBody.getTFDescription);
 }
 
-private function openPaginatedMenu (partsArray:Array, currentPage: int, thisMenu: *, title: String): void {
+private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int, partsArray:Array, currentPart: *, getTFDescription: *): void {
 	menu();
 
 	var partsList: Array = [];
@@ -93,10 +95,10 @@ private function openPaginatedMenu (partsArray:Array, currentPage: int, thisMenu
 			const buttonStr: String = bodyPart.metamorphTitle || "";
 
 			const unlocked: Boolean = player.hasStatusEffect(bodyPart.metamorphFlag);
-			const usingPart: Boolean = LowerBody.Types[player.lowerBody] === bodyPart;
+			const usingPart: Boolean = currentPart === bodyPart;
 			const enoughSF: Boolean = player.soulforce >= bodyPart.metamorphCost;
 
-			if (unlocked && !usingPart && enoughSF) addButton(currentButton, buttonStr, doMetamorph, bodyPart, title);
+			if (unlocked && !usingPart && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, bodyPart, getTFDescription);
 			else if (unlocked && usingPart) addButtonDisabled(currentButton, buttonStr, "You already have this body part.");
 			else if (unlocked && !usingPart && enoughSF) addButtonDisabled(currentButton, buttonStr, "You don't have enough Soulforce for this metamorphosis!");
 			else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
@@ -114,18 +116,19 @@ private function openPaginatedMenu (partsArray:Array, currentPage: int, thisMenu
 	addButton(14, "Back", accessMetamorphMenu);
 }
 
-private function doMetamorph (bodyPart: *, title: String): void {
+private function doMetamorph (title: String, bodyPart: *, getTFDescription: *): void {
 	clearOutput();
 	outputText(title);
-	outputText(LowerBody.getTFDescription(player, bodyPart));
+	outputText(getTFDescription(player, bodyPart));
 	bodyPart.tfFunc(player);
 	player.soulforce -= bodyPart.metamorphCost;
+	CoC.instance.mainViewManager.updateCharviewIfNeeded();
 	doNext(accessMetamorphMenu);
 }
 
 private function accessPage1MetamorphMenu():void {
 	menu();
-	addButton(0, "Hair", accessHairMenu);
+
 	addButton(1, "Face(1)", accessPage1FaceMenu);
 	addButton(2, "Face(2)", accessPage2FaceMenu);
 	addButton(3, "Face(3)", accessPage3FaceMenu);
@@ -140,34 +143,7 @@ private function accessPage1MetamorphMenu():void {
 	addButton(12, "Horns(2)", accessPage2HornsMenu);
 	addButton(14, "Back", accessMetamorphMenu);
 }
-private function accessHairMenu():void {
-	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedHumanHair) && player.hairType != Hair.NORMAL && player.soulforce >= 500) addButton(0, "Human", metamorphHumanHair);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanHair) && player.hairType == Hair.NORMAL) addButtonDisabled(0, "Human", "You already have normal human hair.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanHair) && player.hairType != Hair.NORMAL && player.soulforce < 500) addButtonDisabled(0, "Human", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair) && player.hairType != Hair.FEATHER && player.soulforce >= 100) addButton(1, "Harpy", metamorphHarpyHair);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair) && player.hairType == Hair.FEATHER) addButtonDisabled(1, "Harpy", "You already have harpy hair.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair) && player.hairType != Hair.FEATHER && player.soulforce < 100) addButtonDisabled(1, "Harpy", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(1, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedGorgonHair) && player.hairType != Hair.GORGON && player.soulforce >= 100) addButton(6, "Gorgon", metamorphGorgonHair);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedGorgonHair) && player.hairType == Hair.GORGON) addButtonDisabled(6, "Gorgon", "You already have snake hair.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedGorgonHair) && player.hairType != Hair.GORGON && player.soulforce < 100) addButtonDisabled(6, "Gorgon", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(6, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedElfHair) && player.hairType != Hair.SILKEN && player.soulforce >= 100) addButton(10, "Elf", metamorphElfHair);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedElfHair) && player.hairType == Hair.SILKEN) addButtonDisabled(10, "Elf", "You already have elf silken hair.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedElfHair) && player.hairType != Hair.SILKEN && player.soulforce < 100) addButtonDisabled(10, "Elf", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(10, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuHair) && player.hairType != Hair.STORM && player.soulforce >= 100) addButton(11, "Raiju", metamorphRaijuHair);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuHair) && player.hairType == Hair.STORM) addButtonDisabled(11, "Raiju", "You already have raiju stormy hair.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuHair) && player.hairType != Hair.STORM && player.soulforce < 100) addButtonDisabled(11, "Raiju", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(11, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair) && player.hairType != Hair.BURNING && player.soulforce >= 100) addButton(12, "Hellcat", metamorphHellcatBurningHair);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair) && player.hairType == Hair.BURNING) addButtonDisabled(12, "Hellcat", "You already have hellcat burning hair.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair) && player.hairType != Hair.BURNING && player.soulforce < 100) addButtonDisabled(12, "Hellcat", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(12, "???", "You have not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
-}
+
 private function accessPage1FaceMenu():void {
 	menu();
 	if (player.hasStatusEffect(StatusEffects.UnlockedHumanFace) && player.faceType != Face.HUMAN && player.soulforce >= 500) addButton(0, "Human", metamorphHumanFace);
@@ -758,16 +734,7 @@ private function accessPage3WingsMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuThunderousAura) && player.wings.type != Wings.THUNDEROUS_AURA && player.soulforce < 100) addButtonDisabled(2, "Raiju", "You do not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(2, "???", "You have not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage2MetamorphMenu);
-}/*
-private function accessHairMenu():void {
-	menu();
-	addButton(14, "Back", accessPage2MetamorphMenu);
 }
-private function accessHairMenu():void {
-	menu();
-	addButton(14, "Back", accessPage2MetamorphMenu);
-}
-*/
 private function accessPage3MetamorphMenu():void {
 	menu();
 	addButton(0, "Skin", accessSkinMenu);
@@ -1091,16 +1058,7 @@ private function accessPage5TailMenu():void {
 	else if (player.hasStatusEffect(StatusEffects.UnlockedNekomataForkedTail2) && player.tailType != Tail.NEKOMATA_FORKED_1_3) addButtonDisabled(2, "Forked 2/3", "You do not have proper type of tail for this metamorphosis.");
 	else addButtonDisabled(2, "???", "You have not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage3MetamorphMenu);
-}/*
-private function accessHairMenu():void {
-	menu();
-	addButton(14, "Back", accessPage3MetamorphMenu);
 }
-private function accessHairMenu():void {
-	menu();
-	addButton(14, "Back", accessPage3MetamorphMenu);
-}
-*/
 private function accessPage4MetamorphMenu():void {
 	menu();
 	addButton(0, "Back", accessMetamorphMenu);
@@ -1118,16 +1076,7 @@ private function accessPage4MetamorphMenu():void {
 	addButton(12, "Back", accessMetamorphMenu);
 	addButton(13, "Back", accessMetamorphMenu);
 	addButton(14, "Back", accessMetamorphMenu);
-}/*
-private function accessHairMenu():void {
-	menu();
-	addButton(14, "Back", accessPage4MetamorphMenu);
 }
-private function accessHairMenu():void {
-	menu();
-	addButton(14, "Back", accessPage4MetamorphMenu);
-}
-*/
 private function accessPageEx1MetamorphMenu():void {
 	menu();
 	if (player.soulforce >= 300) addButton(0, "Height +1", metamorphHeight1U);
@@ -1188,7 +1137,6 @@ private function accessPageEx3MetamorphMenu():void {
 	addButton(13, "Back", accessMetamorphMenu);*/
 	addButton(14, "Back", accessMetamorphMenu);
 }
-//color: hair/fur/scales?/skin tone? 3 menu z kolorami dla każdego z tych pozycji jako submenu
 private function metamorphHeight1U():void {
 	clearOutput();
 	player.soulforce -= 300;
@@ -1450,13 +1398,6 @@ private function metamorphNekomataOneThirdForkedTail():void {
 	outputText("\n\nA tingling pressure builds on your backside, and your soft, glossy tail begins to glow with an eerie, ghostly light. With a crackle of electrical energy, it starts splitting into two, stopping once the split reaches a third of the way down the length! <b>You now have a cat tail that is forked on the last third of its length.</b>");
 	player.tailType = Tail.NEKOMATA_FORKED_1_3;
 	doNext(accessPage5TailMenu);
-}
-private function metamorphHellcatBurningHair():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nWarmth then rampage all around body altering your body. In a spectacular explosion your hair is set ablaze, the fire refusing to be put out until it literally replaces them. <b>You now have burning hair.</b>");
-	player.hairType = Hair.BURNING;
-	doNext(accessHairMenu);
 }
 private function metamorphHellcatInfernalEyes():void {
 	clearOutput();
@@ -1798,36 +1739,6 @@ private function metamorphHumanNoAntennae():void {
 	player.antennae.type = Antennae.NONE;
 	doNext(accessAntennaeMenu);
 }
-private function metamorphHumanHair():void {
-	clearOutput();
-	player.soulforce -= 500;
-	if (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) {
-		var word1:String;
-		if (player.hairType == Hair.FEATHER) word1 = "feather";
-		else word1 = "quill";
-		if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft " + word1 + "-hair droops over your eye. Before you can blow the offending down away, you realize the " + word1 + " is collapsing in on itself. It continues to curl inward until all that remains is a normal strand of hair. <b>Your hair is no longer " + word1 + "-like!</b>");
-		else outputText("\n\nYou run your fingers through your downy-soft " + word1 + "-hair while you await the effects of the item you just ingested. While your hand is up there, it detects a change in the texture of your " + word1 + "s. They're completely disappearing, merging down into strands of regular hair. <b>Your hair is no longer " + word1 + "-like!</b>");
-	}
-	if (player.hairType == Hair.ANEMONE) outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your tentacle-hair, only to find out that the tentacles have vanished and replaced with normal hair. <b>Your hair is normal again!</b>");
-	if (player.hairType == Hair.GOO) outputText("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head. Your head is not left bald for long, though. Within moments, a full head of hair sprouts from the skin of your scalp. <b>Your hair is normal again!</b>");
-	if (player.hairType == Hair.GORGON) {
-		player.hairLength = 1;
-		outputText("\n\nAs you finish the root, the scaled critters on your head shake wildly in displeasure. Then, a sudden heat envelopes your scalp. The transformative effects of your spicy meal make themselves notorious, as the writhing mess of snakes start hissing uncontrollably. Many of them go rigid, any kind of life that they could had taken away by the root effects. Soon all the snakes that made your hair are limp and lifeless.");
-		outputText("\n\nTheir dead bodies are separated from you head by a scorching sensation, and start falling to the ground, turning to dust in a matter of seconds. Examining your head on the stream, you realize that you have a normal, healthy scalp, though devoid of any kind of hair.");
-		outputText("\n\nThe effects don’t end here, though as the familiar sensation of hair returns to your head a moment later. After looking yourself on the stream again, you confirm that <b>your once bald head now has normal, short [haircolor] hair</b>.");
-	}
-	if (player.hairType == Hair.GHOST) outputText("\n\nA sensation of weight assaults your scalp. You reach up and grab a handful of hair, confused. Your perplexion only heightens when you actually feel the follicles becoming heavier in your grasp. Plucking a strand, you hold it up before you, surprised to see... it's no longer transparent! You have normal hair!");
-	if (player.hairType == Hair.LEAF) {
-		if (player.hairLength >= 6) outputText("\n\nA lock of your leaf-hair droops over your eye. Before you can blow the offending down away, you realize the leaf is changing until all that remains is a normal strand of hair. <b>Your hair is no longer leaf-like!</b>");
-		else outputText("\n\nYou run your fingers through your leaf-hair while you await the effects of the item you just ingested. While your hand is up there, it detects a change in the texture of your leafs. They're completely disappearing, merging down into strands of regular hair. <b>Your hair is no longer leaf-like!</b>");
-	}
-	if (player.hairType == Hair.FLUFFY) outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your fluffy hair, only to find out that they have vanished and replaced with normal hair. <b>Your hair is normal again!</b>");
-	if (player.hairType == Hair.GRASS) outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your grass-hair, only to find out that the long, soft and leafy blades have vanished and replaced with normal hair. <b>Your hair is normal again!</b>");
-	if (player.hairType == Hair.SILKEN) outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your silken-hair, only to find out that they have changed back to normal hair. <b>Your hair is normal again!</b>");
-	if (player.hairType == Hair.BURNING) outputText("\n\nYou're head begins to cool down until the flames entirely disapears leaving you with ordinary hairs. <b>Your hair is normal again!</b>");
-	player.hairType = Hair.NORMAL;
-	doNext(accessHairMenu);
-}
 private function metamorphHumanNoGills():void {
 	clearOutput();
 	player.soulforce -= 500;
@@ -2042,13 +1953,6 @@ private function metamorphRaijuSkinPattern():void {
 	player.skin.base.adj = "lightning shaped tattooed";
 	doNext(accessSkinPatternsMenu);
 }
-private function metamorphRaijuHair():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nThe ends of your hair seem to split before a quick jolt smacks you in the back of the head. Irritated and confused, you rub the back of your head only to get a small zap in return. You wander over to a puddle and make note of several glowing strands of hair shaped like the typical stylized lightning bolt. There's even a single strand that floats just off the side of your face!");
-	player.hairType = Hair.STORM;
-	doNext(accessHairMenu);
-}
 private function metamorphRaijuEyes():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2179,13 +2083,6 @@ private function metamorphOniArms():void {
 	outputText("The skin on your arms feels like it’s burning as a whole set of intricate warlike tattoos covers them. Furthermore your nails become increasingly pointed turning black just like a set of claws. Well it seems you will have issues hiding your <b>war tattooed arms with sharp nails.</b>");
 	player.arms.type = Arms.ONI;
 	doNext(accessPage2ArmsMenu);
-}
-private function metamorphElfHair():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nSomething changes in your scalp and you pass a hand through to know what is going on. To your surprise your hair texture turned silky, feeling as if you had been tending it for years, the touch is so agreeable you can’t help but idly stroke it with your hand. <b>Your hair has taken on an almost silk-like texture, just like that of an elf!</b>");
-	player.hairType = Hair.SILKEN;
-	doNext(accessHairMenu);
 }
 private function metamorphElfTongue():void {
 	clearOutput();
@@ -2448,19 +2345,6 @@ private function metamorphGorgonEyes():void {
 	player.eyes.type = Eyes.GORGON;
 	doNext(accessPage1EyesMenu);
 }
-private function metamorphGorgonHair():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.hairLength == 0) outputText("\n\nAt first nothing happening. Then you start to feel tingling at your head scalp. You run your fingers over head you feel small numbs fast growning up forming something akin to dull spikes. After brief pause those nubs starts to slowly grown and covered gradualy with....sclaes?");
-	else {
-		outputText("\n\nYou run your fingers through your [hair] while you await the effects of the item you just ingested. While your hand is up there, it detects a change in the texture of your hair. They're completely changing becoming more thick and slowly covered with delicate....scales?");
-		if (player.hairLength < 6) outputText(" Additionaly they seems to lenghten.");
-	}
-	outputText(" What even more worrisome seems at the ends of each strands form something that is similar to very small snake head. Taking one of your hair 'strands' confirm your suspicions. Your hair turned into bunch of tiny snakes similary to those possesed normaly by gorgons. <b>Your hair turned into thin snakes replacing your current hair!</b>");
-	if (player.hairLength < 6) player.hairLength = 6;
-	player.hairType = Hair.GORGON;
-	doNext(accessHairMenu);
-}
 private function metamorphSnakeEars():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2655,13 +2539,6 @@ private function metamorphHarpyWings():void {
 	player.wings.type = Wings.FEATHERED_LARGE;
 	player.wings.desc = "large, feathered";
 	doNext(accessPage1WingsMenu);
-}
-private function metamorphHarpyHair():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a harpy!");
-	player.hairType = Hair.FEATHER;
-	doNext(accessHairMenu);
 }
 private function metamorphHarpyArms():void {
 	clearOutput();
