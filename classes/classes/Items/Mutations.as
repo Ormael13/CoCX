@@ -4660,153 +4660,156 @@ public final class Mutations extends MutationsHelper {
             changes++;
             outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
         }
-        //Smexual stuff!
-        //-TIGGERSHARK ONLY: Grow a cunt (guaranteed if no gender)
-        if (type == 1 && (player.gender == 0 || (!player.hasVagina() && changes < changeLimit && rand(3) == 0))) {
-            changes++;
-            //(balls)
-            if (player.balls > 0) outputText("\n\nAn itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, <b>you lift up your balls to reveal your new vagina.</b>");
-            //(dick)
-            else if (player.hasCock()) outputText("\n\nAn itch starts on your groin, just below your [cocks]. You pull the manhood aside to give you a better view, and you're able to watch as <b>your skin splits to give you a new vagina, complete with a tiny clit.</b>");
-            //(neither)
-            else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>");
-            player.createVagina();
-            player.clitLength = .25;
-            dynStats("sen", 10);
-        }
-        //WANG GROWTH - TIGGERSHARK ONLY
-        if (type == 1 && (!player.hasCock()) && changes < changeLimit && rand(3) == 0) {
-            //Genderless:
-            if (!player.hasVagina()) outputText("\n\nYou feel a sudden stabbing pain in your featureless crotch and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, you are the proud owner of a new human-shaped penis");
-            //Female:
-            else outputText("\n\nYou feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, you are the proud owner of not only a [vagina], but a new human-shaped penis");
-            if (player.balls == 0) {
-                outputText(" and a pair of balls");
-                player.balls = 2;
-                player.ballSize = 2;
+        if (!player.blockingBodyTransformations()) {
+
+            //Smexual stuff!
+            //-TIGGERSHARK ONLY: Grow a cunt (guaranteed if no gender)
+            if (type == 1 && (player.gender == 0 || (!player.hasVagina() && changes < changeLimit && rand(3) == 0))) {
+                changes++;
+                //(balls)
+                if (player.balls > 0) outputText("\n\nAn itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, <b>you lift up your balls to reveal your new vagina.</b>");
+                //(dick)
+                else if (player.hasCock()) outputText("\n\nAn itch starts on your groin, just below your [cocks]. You pull the manhood aside to give you a better view, and you're able to watch as <b>your skin splits to give you a new vagina, complete with a tiny clit.</b>");
+                //(neither)
+                else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>");
+                player.createVagina();
+                player.clitLength = .25;
+                dynStats("sen", 10);
             }
-            outputText("!");
-            player.createCock(7, 1.4);
-            dynStats("sen", 5, "lus", 20);
-            MutagenBonus("lib", 4);
-            changes++;
-        }
-        //(Requires the player having two testicles)
-        if (type == 1 && (player.balls == 0 || player.balls == 2) && player.hasCock() && changes < changeLimit && rand(3) == 0) {
-            if (player.balls == 2) {
-                outputText("\n\nYou gasp in shock as a sudden pain racks your abdomen. Within seconds, two more testes drop down into your [sack], your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new quartet of testes.</b>");
-                player.balls = 4;
-            } else if (player.balls == 0) {
-                outputText("\n\nYou gasp in shock as a sudden pain racks your abdomen. Within seconds, two balls drop down into a new sack, your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new pair of testes.</b>");
-                player.balls = 2;
-                player.ballSize = 2;
-            }
-            dynStats("sen", 3, "lus", 10);
-            MutagenBonus("lib", 2);
-            changes++;
-        }
-        //Transformations:
-        //Mouth TF
-        if (player.faceType != Face.SHARK_TEETH && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\n");
-            if (player.faceType > Face.HUMAN && player.faceType != Face.SHARK_TEETH) outputText("Your [face] explodes with agony, reshaping into a more human-like visage.  ");
-            outputText("You firmly grasp your mouth, an intense pain racking your oral cavity. Your gums shift around and the bones in your jaw reset. You blink a few times wondering what just happened. You move over to a puddle to catch sight of your reflection, and you are thoroughly surprised by what you see. A set of retractable shark fangs have grown in front of your normal teeth, and your face has elongated slightly to accommodate them!  They even scare you a little.\n(Gain: 'Bite' special attack)");
-            setFaceType(Face.SHARK_TEETH);
-            changes++;
-        }
-        //Ear tf
-        if (player.faceType == Face.SHARK_TEETH && player.ears.type != Ears.SHARK && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            if (player.ears.type != Ears.HUMAN) {
-                outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, fin like ears just like those of a shark girl.</b>");
-            } else {
-                outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed fin like ears just like those of a shark girl</b>.  You bet they look cute!");
-            }
-            setEarType(Ears.SHARK);
-            changes++;
-        }
-        //Remove odd eyes
-        if (changes < changeLimit && rand(5) == 0 && player.eyes.type != Eyes.HUMAN) {
-            humanizeEyes();
-            changes++;
-        }
-        //Tail TF
-        if (player.tailType != Tail.SHARK && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
-            changes++;
-            if (player.tailType == Tail.NONE) outputText("\n\nJets of pain shoot down your spine, causing you to gasp in surprise and fall to your hands and knees. Feeling a bulging at the end of your back, you lower your [armor] down just in time for a fully formed shark tail to burst through. You swish it around a few times, surprised by how flexible it is. After some modifications to your clothing, you're ready to go with your brand new shark tail.");
-            else outputText("\n\nJets of pain shoot down your spine into your tail.  You feel the tail bulging out until it explodes into a large and flexible shark-tail.  You swish it about experimentally, and find it quite easy to control.");
-            setTailType(Tail.SHARK);
-        }
-        //Gills TF
-        if (player.gills.type != Gills.FISH && player.tailType == Tail.SHARK && player.faceType == Face.SHARK_TEETH && changes < changeLimit && rand(3) == 0)
-            updateGills(Gills.FISH);
-        //Hair
-        if (player.hairColor != "silver" && player.tailType != Tail.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-            changes++;
-            outputText("\n\nYou feel a tingling in your scalp and reach up to your head to investigate. To your surprise, your hair color has changed into a silvery color, just like that of a shark girl!");
-            player.hairColorOnly = "silver";
-        }
-        //Skin
-        if (((player.coatColor != "rough gray" && player.coatColor != "dark gray" && player.coatColor != "grayish-blue" && player.coatColor != "iridescent gray" && player.coatColor != "ashen grayish-blue" && player.coatColor != "gray" && player.coatColor != "orange") || !player.hasScales()) && !player.isGargoyle() && rand(7) == 0 && changes < changeLimit) {
-            outputText("\n\n");
-            if (player.hasFur()) outputText("Your [skin.type] falls out, collecting on the floor and exposing your scale covered skin underneath.  ");
-            else if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidy into a more normal form. ");
-            else if (player.hasScales()) outputText("Your skin itches and tingles starting to sheed your current scales. Underneath them you can see new smaller gray colored scales.  ");
-            else if (player.hasCoat()) outputText("Your skin itches and tingles starting to sheed your [skin coat]. Underneath them you can see new smaller gray colored scales.  ");
-            else outputText("You abruptly stop moving and gasp sharply as a shudder goes up your entire frame. Your skin begins to shift and morph, growing slightly thicker and became covered with a tiny shiny grey scales.  ");
-            if (type == 0) {
-                var color:String;
-                if (rand(10) == 0) {
-                    color = randomChoice("rough gray");
-                } else {
-                    color = randomChoice("dark gray", "grayish-blue", "iridescent gray", "ashen grayish-blue", "gray");
+            //WANG GROWTH - TIGGERSHARK ONLY
+            if (type == 1 && (!player.hasCock()) && changes < changeLimit && rand(3) == 0) {
+                //Genderless:
+                if (!player.hasVagina()) outputText("\n\nYou feel a sudden stabbing pain in your featureless crotch and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, you are the proud owner of a new human-shaped penis");
+                //Female:
+                else outputText("\n\nYou feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, you are the proud owner of not only a [vagina], but a new human-shaped penis");
+                if (player.balls == 0) {
+                    outputText(" and a pair of balls");
+                    player.balls = 2;
+                    player.ballSize = 2;
                 }
-                outputText("\n\nA tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + color + " in color.</b>");
-                outputText("It feels oddly rough too, comparable to that of a marine mammal. You smile and run your hands across your new shark skin.");
-                player.skin.growCoat(Skin.AQUA_SCALES, {color: color});
-                changes++;
-            } else {
-                outputText("Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like a stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a tigershark!");
-                player.skin.growCoat(Skin.AQUA_SCALES, {
-                    color: "orange",
-                    color2: "black",
-                    pattern: Skin.PATTERN_TIGER_STRIPES
-                });
-                player.skin.base.color2 = "black";
+                outputText("!");
+                player.createCock(7, 1.4);
+                dynStats("sen", 5, "lus", 20);
+                MutagenBonus("lib", 4);
                 changes++;
             }
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedAquaScales)) {
-                outputText("\n\n<b>Genetic Memory: Scales - Memorized!</b>\n\n");
-                player.createStatusEffect(StatusEffects.UnlockedAquaScales, 0, 0, 0, 0);
+            //(Requires the player having two testicles)
+            if (type == 1 && (player.balls == 0 || player.balls == 2) && player.hasCock() && changes < changeLimit && rand(3) == 0) {
+                if (player.balls == 2) {
+                    outputText("\n\nYou gasp in shock as a sudden pain racks your abdomen. Within seconds, two more testes drop down into your [sack], your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new quartet of testes.</b>");
+                    player.balls = 4;
+                } else if (player.balls == 0) {
+                    outputText("\n\nYou gasp in shock as a sudden pain racks your abdomen. Within seconds, two balls drop down into a new sack, your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new pair of testes.</b>");
+                    player.balls = 2;
+                    player.ballSize = 2;
+                }
+                dynStats("sen", 3, "lus", 10);
+                MutagenBonus("lib", 2);
+                changes++;
             }
+            //Transformations:
+            //Mouth TF
+            if (player.faceType != Face.SHARK_TEETH && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+                outputText("\n\n");
+                if (player.faceType > Face.HUMAN && player.faceType != Face.SHARK_TEETH) outputText("Your [face] explodes with agony, reshaping into a more human-like visage.  ");
+                outputText("You firmly grasp your mouth, an intense pain racking your oral cavity. Your gums shift around and the bones in your jaw reset. You blink a few times wondering what just happened. You move over to a puddle to catch sight of your reflection, and you are thoroughly surprised by what you see. A set of retractable shark fangs have grown in front of your normal teeth, and your face has elongated slightly to accommodate them!  They even scare you a little.\n(Gain: 'Bite' special attack)");
+                setFaceType(Face.SHARK_TEETH);
+                changes++;
+            }
+            //Ear tf
+            if (player.faceType == Face.SHARK_TEETH && player.ears.type != Ears.SHARK && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+                if (player.ears.type != Ears.HUMAN) {
+                    outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, fin like ears just like those of a shark girl.</b>");
+                } else {
+                    outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed fin like ears just like those of a shark girl</b>.  You bet they look cute!");
+                }
+                setEarType(Ears.SHARK);
+                changes++;
+            }
+            //Remove odd eyes
+            if (changes < changeLimit && rand(5) == 0 && player.eyes.type != Eyes.HUMAN) {
+                humanizeEyes();
+                changes++;
+            }
+            //Tail TF
+            if (player.tailType != Tail.SHARK && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+                changes++;
+                if (player.tailType == Tail.NONE) outputText("\n\nJets of pain shoot down your spine, causing you to gasp in surprise and fall to your hands and knees. Feeling a bulging at the end of your back, you lower your [armor] down just in time for a fully formed shark tail to burst through. You swish it around a few times, surprised by how flexible it is. After some modifications to your clothing, you're ready to go with your brand new shark tail.");
+                else outputText("\n\nJets of pain shoot down your spine into your tail.  You feel the tail bulging out until it explodes into a large and flexible shark-tail.  You swish it about experimentally, and find it quite easy to control.");
+                setTailType(Tail.SHARK);
+            }
+            //Gills TF
+            if (player.gills.type != Gills.FISH && player.tailType == Tail.SHARK && player.faceType == Face.SHARK_TEETH && changes < changeLimit && rand(3) == 0)
+                updateGills(Gills.FISH);
+            //Hair
+            if (player.hairColor != "silver" && player.tailType != Tail.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+                changes++;
+                outputText("\n\nYou feel a tingling in your scalp and reach up to your head to investigate. To your surprise, your hair color has changed into a silvery color, just like that of a shark girl!");
+                player.hairColorOnly = "silver";
+            }
+            //Skin
+            if (((player.coatColor != "rough gray" && player.coatColor != "dark gray" && player.coatColor != "grayish-blue" && player.coatColor != "iridescent gray" && player.coatColor != "ashen grayish-blue" && player.coatColor != "gray" && player.coatColor != "orange") || !player.hasScales()) && !player.isGargoyle() && rand(7) == 0 && changes < changeLimit) {
+                outputText("\n\n");
+                if (player.hasFur()) outputText("Your [skin.type] falls out, collecting on the floor and exposing your scale covered skin underneath.  ");
+                else if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidy into a more normal form. ");
+                else if (player.hasScales()) outputText("Your skin itches and tingles starting to sheed your current scales. Underneath them you can see new smaller gray colored scales.  ");
+                else if (player.hasCoat()) outputText("Your skin itches and tingles starting to sheed your [skin coat]. Underneath them you can see new smaller gray colored scales.  ");
+                else outputText("You abruptly stop moving and gasp sharply as a shudder goes up your entire frame. Your skin begins to shift and morph, growing slightly thicker and became covered with a tiny shiny grey scales.  ");
+                if (type == 0) {
+                    var color:String;
+                    if (rand(10) == 0) {
+                        color = randomChoice("rough gray");
+                    } else {
+                        color = randomChoice("dark gray", "grayish-blue", "iridescent gray", "ashen grayish-blue", "gray");
+                    }
+                    outputText("\n\nA tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + color + " in color.</b>");
+                    outputText("It feels oddly rough too, comparable to that of a marine mammal. You smile and run your hands across your new shark skin.");
+                    player.skin.growCoat(Skin.AQUA_SCALES, {color: color});
+                    changes++;
+                } else {
+                    outputText("Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like a stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a tigershark!");
+                    player.skin.growCoat(Skin.AQUA_SCALES, {
+                        color: "orange",
+                        color2: "black",
+                        pattern: Skin.PATTERN_TIGER_STRIPES
+                    });
+                    player.skin.base.color2 = "black";
+                    changes++;
+                }
+                if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedAquaScales)) {
+                    outputText("\n\n<b>Genetic Memory: Scales - Memorized!</b>\n\n");
+                    player.createStatusEffect(StatusEffects.UnlockedAquaScales, 0, 0, 0, 0);
+                }
+            }
+            //Legs
+            if (player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.SHARK && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYou feel something change in your feets as webing form between your toes. Well this is sure to help you swim faster. <b>You now have webed feet!</b>");
+                setLowerBody(LowerBody.SHARK);
+                changes++;
+            }
+            if (player.lowerBody != LowerBody.SHARK && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+                humanizeLowerBody();
+                changes++;
+            }
+            //Arms
+            if (player.lowerBody == LowerBody.SHARK && !InCollection(player.arms.type, Arms.SHARK, Arms.GARGOYLE) && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form with exception places between your finger which starting show signs to growing webbing. Soon after you start sweating profusely and panting loudly, feeling the space near your elbows shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from your forearms. You examine them carefully and make a few modifications to your [armor] to accommodate your new fins. <b>You now have shark arms.</b>");
+                setArmType(Arms.SHARK);
+                changes++;
+            }
+            //FINZ
+            if (player.rearBody.type != RearBody.SHARK_FIN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\n");
+                outputText("You groan and slump down in pain, almost instantly regretting eating the tooth. You start sweating profusely and panting loudly, feeling the space between your shoulder blades shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from in-between your shoulders. You examine it carefully and make a few modifications to your [armor] to accommodate your new fin.");
+                setRearBody(RearBody.SHARK_FIN);
+                changes++;
+            }
+            if (changes == 0) {
+                outputText("\n\nNothing happened.  Weird.");
+            }
+            player.refillHunger(5);
+            flags[kFLAGS.TIMES_TRANSFORMED] += changes;
         }
-        //Legs
-        if (player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.SHARK && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou feel something change in your feets as webing form between your toes. Well this is sure to help you swim faster. <b>You now have webed feet!</b>");
-            setLowerBody(LowerBody.SHARK);
-            changes++;
-        }
-        if (player.lowerBody != LowerBody.SHARK && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            humanizeLowerBody();
-            changes++;
-        }
-        //Arms
-        if (player.lowerBody == LowerBody.SHARK && !InCollection(player.arms.type, Arms.SHARK, Arms.GARGOYLE) && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form with exception places between your finger which starting show signs to growing webbing. Soon after you start sweating profusely and panting loudly, feeling the space near your elbows shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from your forearms. You examine them carefully and make a few modifications to your [armor] to accommodate your new fins. <b>You now have shark arms.</b>");
-            setArmType(Arms.SHARK);
-            changes++;
-        }
-        //FINZ
-        if (player.rearBody.type != RearBody.SHARK_FIN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\n");
-            outputText("You groan and slump down in pain, almost instantly regretting eating the tooth. You start sweating profusely and panting loudly, feeling the space between your shoulder blades shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from in-between your shoulders. You examine it carefully and make a few modifications to your [armor] to accommodate your new fin.");
-            setRearBody(RearBody.SHARK_FIN);
-            changes++;
-        }
-        if (changes == 0) {
-            outputText("\n\nNothing happened.  Weird.");
-        }
-        player.refillHunger(5);
-        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
     //9)  Transformation Item - Snake Oil (S. Oil)
