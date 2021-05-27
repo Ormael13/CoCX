@@ -15,7 +15,7 @@ import classes.Scenes.SceneLib;
 public class QuatroElementalBoss extends Monster
 	{
 		public function baseElementalAttack():void {
-			outputText("The elemental concentrates the embers on it fist before sending a swift at you.");
+			outputText("Elemental concentrate fire on it fist and send punch toward you.");
 			var damage:Number = inte + wis;
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
@@ -26,13 +26,13 @@ public class QuatroElementalBoss extends Monster
 			else
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" It hits you square in the chest. ");
+				outputText(" It hit you square in the chest. ");
 				damage = player.takeFireDamage(damage, true);
 			}
 		}
 		
 		public function fluffyOfPunches():void {
-			outputText("The elemental concentrates the flames on it fists before bombarding you with a flurry of strikes.");
+			outputText("Elemental concentrate fire on it fists and goes wild at you sending flurry of punches.");
 			var damage:Number = inte + wis;
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
@@ -43,7 +43,7 @@ public class QuatroElementalBoss extends Monster
 			else
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" You're unable to dodge as the blazing strikes connect. ");
+				outputText(" They hits you all over the body. ");
 				damage = player.takeFireDamage(damage, true);
 				damage = player.takeFireDamage(damage, true);
 				damage = player.takeFireDamage(damage, true);
@@ -52,7 +52,7 @@ public class QuatroElementalBoss extends Monster
 		}
 		
 		public function subbossSpecial1():void {
-			outputText("The elemental solidifies ambient elemental energy into several small before sending the flaming volley toward you.");
+			outputText("Elemental solidify ambient elemental energy into many medium sized fireballs and with a wave of it hands sends toward you.");
 			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
 			else {
 				var damage:Number = inte + wis;
@@ -61,7 +61,7 @@ public class QuatroElementalBoss extends Monster
 				damage *= 3.75;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" The blazing strikes connect with your body. ");
+				outputText(" They hits you all over the body. ");
 				damage = player.takeFireDamage(damage, true);
 				damage = player.takeFireDamage(damage, true);
 				damage = player.takeFireDamage(damage, true);
@@ -81,14 +81,14 @@ public class QuatroElementalBoss extends Monster
 			}
 		}
 		public function subbossSpecial2():void {
-			outputText("The elemental solidifies the nearby ambient elemental energy into countless razor-like shards of earth, each hanging above you. With a downward spin, the elemental shoots the earth at you.");
-			if (player.getEvasionRoll()) outputText(" You slide underneath the incoming barrage!");
+			outputText("Elemental solidify ambient elemental energy into many sharp looking rocks and with a wave of it hands sends toward you.");
+			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
 			else {
 				var damage:Number = inte + wis;
 				damage *= 5;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" The razor-like shards of earth cut into you with countless lacerations. ");
+				outputText(" They hits you all over the body. ");
 				damage = player.takePhysDamage(damage, true);
 				damage = player.takePhysDamage(damage, true);
 				damage = player.takePhysDamage(damage, true);
@@ -100,7 +100,7 @@ public class QuatroElementalBoss extends Monster
 			}
 		}
 		public function subbossSpecial3():void {
-			outputText("The elemental concentrates nearby ambient water into crescent-shaped shards. Throwing its hands toward you, it sends the razor-like water flying.");
+			outputText("Elemental concentrate ambient water it many crescent-shaped shards of water and with a wave of it hands sends toward you.");
 			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
 			else {
 				var damage:Number = inte + wis;
@@ -109,7 +109,7 @@ public class QuatroElementalBoss extends Monster
 				damage *= 3.75;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" The crescent jets of water cut through you. ");
+				outputText(" They hits you all over the body. ");
 				damage = player.takeIceDamage(damage, true);
 				damage = player.takeIceDamage(damage, true);
 				damage = player.takeIceDamage(damage, true);
@@ -121,14 +121,14 @@ public class QuatroElementalBoss extends Monster
 			}
 		}
 		public function subbossSpecial4():void {
-			outputText("The elemental concentrates as surrounding air currents warp into crescent-shaped wind blades. With a forceful gust of a wind, the crescents dart toward you.");
+			outputText("Elemental concentrate surrounding it air currents into many crescent-shaped wind blades and with a wave of it hands sends toward you.");
 			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
 			else {
 				var damage:Number = inte + wis;
 				damage *= 3.175;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" The razor wind cuts through you with each contact. ");
+				outputText(" They hits you all over the body. ");
 				damage = player.takePhysDamage(damage, true);
 				damage = player.takePhysDamage(damage, true);
 				damage = player.takePhysDamage(damage, true);
@@ -245,31 +245,56 @@ public class QuatroElementalBoss extends Monster
 		private function phase1Ends():void
 		{
 			clearOutput();
-			outputText("Unable to resist your assault, the elemental falls to the ground. The shedding embers quickly coalesce back into the fallen elemental.  ");
-			outputText("In a flash of heat, the flames resurge into the revenant's armor, ready to continue fighting.");
+			outputText("Unable to resist your assault, elemental fall to the ground. Is that it? It been not much stronger than other strong enemies you battled on this floor. As if to prove you wrong brown flame embers that was previously just from time to time falling on the ground starts to be attracted to fallen enemy. ");
+			outputText("Before you have time to react they converge on elemental giving it sort of armor that then heats up due to flame beneath it. Revived by that change enemy stands up ready to continue fight...");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 1, 1);
 			_fightPhase = 2;
+			short = "mutated fire-earth elemental";
+			armorName = "magma skin";
+			weaponAttack += 10;
+			armorDef += 10;
+			armorMDef += 60;
+			bonusHP += 125;
+			this.strStat.core.value *= 1.5;
+			this.touStat.core.value *= 1.5;
+			this.removePerk(PerkLib.FireNature);
+			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			HP = maxHP();
 			SceneLib.combat.combatRoundOver();
 		}
 		private function phase2Ends():void
 		{
 			clearOutput();
-			outputText("As the elemental falls for the second time, you notice the blue embers that linger on the ground quickly merge with the remains once more. Steam erupts from the fire and water as eyes that been form at the top of the revenant. ");
-			outputText("It stares at you, as a hunter would to his prey. It looks like it's still not going down without another fight.");
+			outputText("For second time the elemental falls. When you think it's gfor good... blue flame embers instantly merge with it causing violent reaction between fire and water forming thick laye of steam covering it. Eyes that been previpously at the torso moving to place themself on newly fomed appending on top of it. ");
+			outputText("Looking like it finaly getting proper 'head' with two pairs of normaly horizontaly places eyes with purple glow. It surely not letting you win this fight easily does it?");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 4, 1);
 			_fightPhase = 3;
+			short = "tripple-fusion elemental";
+			armorName = "magma skin covered with layer of steam";
+			armorDef += 5;
+			armorMDef = 30;
+			this.wisStat.core.value *= 1.5;
+			this.removePerk(PerkLib.IceVulnerability);
+			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
 			HP = maxHP();
 			SceneLib.combat.combatRoundOver();
 		}
 		private function phase3Ends():void
 		{
 			clearOutput();
-			outputText("As the wind dissipates from the reformed being, you cautiously approach the corpse. A strong gust of wind suddenly causes another resurgence as white embers begin to coalesce from the remains.\n\n");
-			outputText("The revenant rises again from the swirling air, ready to fight once more.\n\n");
-			outputText("It speaks in an amalgamation of conflicting voices, <i>“To error, is human. You should air on the side of caution, lest I overtake you this time.”</i> Its speech is nearly impossible to understand. As you try to listen, it rushes toward you, clashing with you for the fourth time.");
+			outputText("Despite 2nd merge that improved it abilities and innate properties it falled again. For longer moment nothing happens so you cauciously approaching it.... before stporng gust of wing alsmot cause you to tumble. Od course... it had to carry white flame embers with it does it?\n\n");
+			outputText("Revived by infusion of air element particles enemy stands up again steonger and more dangerous than moment ago.\n\n");
+			outputText("<i>“We would not make any more errors,”</i> all of sudden elemental speaks in voice that sounds like ovelapping of four different voices making it almost impossible to understand. Then it once again rush toward clashing with you for the fourth time...");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
 			_fightPhase = 4;
+			short = "quatro elemental";
+			armorName = "magma skin covered with layer of steam and air currents";
+			weaponAttack += 5;
+			armorDef += 5;
+			armorMDef = 30;
+			this.intStat.core.value *= 1.5;
+			this.removePerk(PerkLib.MonsterRegeneration);
+			this.createPerk(PerkLib.MonsterRegeneration, 5, 0, 0, 0);
 			HP = maxHP();
 			SceneLib.combat.combatRoundOver();
 		}
@@ -296,70 +321,44 @@ public class QuatroElementalBoss extends Monster
 			SceneLib.dungeons.riverdungeon.defeatedByQuatroElementalBoss();
 		}
 		
+		override public function get long():String
+		{
+			var str:String = "";
+			if (_fightPhase == 1) str += "You're currently fighting mutated elemental. It's ten feet tall, it body covered with fire and it's using bare fists to fight.";
+			else if (_fightPhase == 2) str += "You're currently fighting mutated elemental. It's ten feet tall, it body covered with fire and earth, it's using bare fists to fight.";
+			else if (_fightPhase == 3) str += "You're currently fighting mutated elemental. It's ten feet tall, it body covered with earth armor and surrounded by thick steam layer, it's using bare fists to fight.";
+			else if (_fightPhase == 4) str += "You're currently fighting mutated elemental. It's ten feet tall, it body covered with mix of four elements and it's using bare fists to fight.";
+			return str;
+		}
+		
 		public function QuatroElementalBoss() 
 		{
-			if (_fightPhase == 1) {
-				this.short = "mutated fire elemental";
-				this.long = "You're currently fighting mutated elemental. It's a ten foot tall body of flame, currently using its bare fists to fight.";
-				this.armorName = "fire skin";
-				initStrTouSpeInte(24, 39, 69, 120);
-				initWisLibSensCor(120, 15, 55, 50);
-				this.weaponAttack = 10;
-				this.armorDef = 10;
-				this.armorMDef = 60;
-				this.bonusHP = 875;
-			}
-			if (_fightPhase == 2) {
-				this.short = "mutated fire-earth elemental";
-				this.long = "You're currently fighting mutated elemental. It's a ten foot tall mixture of flame and earth, currently using its bare fists to fight.";
-				this.armorName = "magma skin";
-				initStrTouSpeInte(34, 59, 69, 120);
-				initWisLibSensCor(120, 15, 55, 50);
-				this.weaponAttack = 20;
-				this.armorDef = 20;
-				this.armorMDef = 120;
-				this.bonusHP = 1000;
-			}
-			if (_fightPhase == 3) {
-				this.short = "tripple-fusion elemental";
-				this.long = "You're currently fighting mutated elemental. Standing ten feet tall, it's body is made of earth, surrounded by an armor of steam while using its bare fists to fight.";
-				this.armorName = "magma skin covered with layer of steam";
-				initStrTouSpeInte(34, 59, 69, 120);
-				initWisLibSensCor(120, 15, 55, 50);
-				this.weaponAttack = 20;
-				this.armorDef = 20;
-				this.armorMDef = 120;
-				this.bonusHP = 1000;
-				this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
-			}
-			if (_fightPhase == 4) {
-				this.short = "quatro elemental";
-				this.long = "You're currently fighting mutated elemental. Standing ten feet tall, its body is covered with a mix of four elements, using its bare fists to fight.";
-				this.armorName = "magma skin covered with layer of steam and air currents";
-				initStrTouSpeInte(34, 59, 92, 120);
-				initWisLibSensCor(120, 15, 55, 50);
-				this.weaponAttack = 25;
-				this.armorDef = 20;
-				this.armorMDef = 120;
-				this.bonusHP = 1000;
-				this.createPerk(PerkLib.MonsterRegeneration, 5, 0, 0, 0);
-			}
 			this.a = "the ";
+			this.short = "mutated fire elemental";
 			this.imageName = "quatro elemental boss";
+			this.long = "";
 			this.tallness = 120;
 			this.plural = false;
+			this.createBreastRow(0, 1);
+			initGenderless();
+			initStrTouSpeInte(24, 40, 70, 120);
+			initWisLibSensCor(120, 15, 55, 50);
+			this.weaponName = "fists";
+			this.weaponVerb = "smash";
+			this.weaponAttack = 10;
+			this.armorName = "fire skin";
+			this.armorDef = 10;
+			this.armorMDef = 60;
+			this.bonusHP = 875;
 			this.lustVuln = 0;
 			this.drop = new ChainedDrop()
 					.add(useables.ELSHARD, 1);
-			this.createBreastRow(0, 1);
-			initGenderless();
-			this.weaponName = "fists";
-			this.weaponVerb = "smash";
 			this.level = 24;
 			this.additionalXP = 200;
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.FireNature, 0, 0, 0, 0);
 			checkMonster();
 		}
 		
