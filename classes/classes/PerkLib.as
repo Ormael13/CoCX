@@ -391,8 +391,8 @@ public class PerkLib
 				"Regular swords increases parry chance by 15% and grants an extra +10% damage reduction when paired with a shield.",
 				"You've chosen the 'Knightly sword' perk. Regular swords increases parry chance by 15% and grants an extra +10% damage reduction when paired with a shield.");
 		public static const ImprovedAdrenaline:PerkType = mk("Improved Adrenaline", "Improved Adrenaline",
-				"Wrath generated with using melee/range/specials is converted from +15 wrath to +3% max wrath.",
-				"You've chosen the 'Improved Adrenaline' perk, converting wrath generated on melee/range attacks and specials to % values.");
+				"Increase wrath generated with using melee/range/specials by 1% of max wrath.",
+				"You've chosen the 'Improved Adrenaline' perk, increasing wrath generated with using melee/range/specials by 1% of max wrath.");
 		public static const VexedNocking:PerkType = mk("Vexed nocking", "Vexed nocking",
 				"Increase Power Attack/Shoot damage multiplier ratio from 1:2/5/10 to 1:4/10/20. Additional increase initial bonus to damage from 50 to 100%.",
 				"You've chosen the 'Vexed nocking' perk. Increase Power Attack/Shoot damage multiplier ratio from 1:2/5/10 to 1:4/10/20. Additional increase initial bonus to damage from 50 to 100%.");
@@ -4015,8 +4015,8 @@ public class PerkLib
                     .requireInt(150)
                     .requireLevel(42)
 					.requireCustomFunction(function (player:Player):Boolean {
-                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) >= 3 || player.statusEffectv1(StatusEffects.SiegweirdTraining2) >= 2;
-                    }, "Finished one of the two mages (Alvina/Siegweird) quest lines up to the optional battle");
+                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) >= 1 || player.statusEffectv1(StatusEffects.SiegweirdTraining2) >= 1;
+                    }, "Get menthorship from one of the two greatest mages in mareth.");
             HalfStepToPeerlessTranquilness.requireStr(240)
                     .requireTou(80)
                     .requireSpe(80)

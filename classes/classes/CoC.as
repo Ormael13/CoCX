@@ -251,7 +251,7 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8r2";
+			ver = "1.0.2_mod_Xianxia_0.8s";
 			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);

@@ -4877,7 +4877,7 @@ public class MagicSpecials extends BaseCombatContent {
 			monster.HP -= damage;
 			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,player.spe*10,1,0,0);
 			else{
-				monster.createStatusEffect(StatusEffects.KamaitachiBleed, player.spe*10, 1, 0, 0);
+				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*10);
 				outputText("\n\nYour attack greatly worsened the bleeding your opponents suffers.");
 			}
 			combatRoundOver();
@@ -4910,7 +4910,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doDamage(damage, true, true);
 			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,player.spe*10,0,0,0);
 			else {
-				monster.createStatusEffect(StatusEffects.KamaitachiBleed, player.spe*10, 1, 0, 0);
+				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*10);
 				outputText("\n\nYour attack greatly worsened the bleeding your opponent suffers.");
 			}
 		}

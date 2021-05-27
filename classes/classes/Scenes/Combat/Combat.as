@@ -937,7 +937,10 @@ public class Combat extends BaseContent {
 					bd.disable("Your wrath is too low to unleash howl!");
 				}
 				if (player.hasPerk(PerkLib.AbsoluteStrength)) {
-					
+					bd = buttons.add("SFoD", asurasSixFingersOfDestruction).hint("Six Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+					if (player.wrath < (player.maxWrath() * 0.5)) {
+						bd.disable("Your wrath is too low to use Six Fingers of Destruction!");
+					}
 				}
 				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
 					
@@ -5333,25 +5336,25 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
                     else useMana(40, 5);
                     outputText("\n\n");
-                    magic.spellWhitefire2();
+                    magic.spellWhitefire3();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 2 && player.mana >= spellCostBlack(40)) {
                     if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
                     else useMana(40, 6);
                     outputText("\n\n");
-                    magic.spellIceSpike2();
+                    magic.spellIceSpike3();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && player.mana >= spellCostWhite(40)) {
                     if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
                     else useMana(40, 5);
                     outputText("\n\n");
-                    magic.spellLightningBolt2();
+                    magic.spellLightningBolt3();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 4 && player.mana >= spellCostBlack(40)) {
                     if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
                     else useMana(40, 6);
                     outputText("\n\n");
-                    magic.spellDarknessShard2();
+                    magic.spellDarknessShard3();
                 }
             }
             if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
@@ -5949,19 +5952,21 @@ public class Combat extends BaseContent {
 		var addedWrath:Number = damage;
 		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath *= 2;
 		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath *= 2;
-		if (player.hasPerk(PerkLib.ImprovedAdrenaline)) addedWrath = Math.round(player.maxWrath() * 0.03);
+		if (player.hasPerk(PerkLib.ImprovedAdrenaline)) addedWrath += Math.round(player.maxWrath() * 0.01);
 		EngineCore.WrathChange(addedWrath, false);
 	}
 	public function WrathGenerationPerHit2(damage:int = 0):void {	//specials wrath generation
 		var addedWrath:Number = damage;
 		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath *= 2;
 		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath *= 2;
-		if (player.hasPerk(PerkLib.ImprovedAdrenaline)) addedWrath = Math.round(player.maxWrath() * 0.03);
+		if (player.hasPerk(PerkLib.ImprovedAdrenaline)) addedWrath += Math.round(player.maxWrath() * 0.01);
 		EngineCore.WrathChange(addedWrath, false);
 	}
 	public function PASPAS():Number {
 		var PAS:Number = 0.5;
-		PAS += player.wrath100 * 0.02;
+		var Wr100:Number = player.wrath100;
+		if (Wr100 > 100) Wr100 = 100;
+		PAS += Wr100 * 0.02;
 		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) PAS *= 2.5;
 		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) PAS *= 2;
 		if (player.hasPerk(PerkLib.VexedNocking)) PAS *= 2;
@@ -12617,8 +12622,8 @@ public class Combat extends BaseContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		combat.WrathGenerationPerHit2(15);
-		combat.heroBaneProc(damage);
+		WrathGenerationPerHit2(15);
+		heroBaneProc(damage);
 		statScreenRefresh();
 		if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 1;
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -12720,6 +12725,61 @@ public class Combat extends BaseContent {
 		if (crit) outputText(" <b>*Critical Heal!*</b>");
 		HPChange(heal,false);
 		basemeleeattacks();
+	}
+	
+	public function asurasSixFingersOfDestruction():void {
+		clearOutput();
+		var SFoDMulti:Number = 1;
+		SFoDMulti += player.wrath100 * 0.03;
+		if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) SFoDMulti *= 2.5;
+		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) SFoDMulti *= 2;
+		if (player.hasPerk(PerkLib.VexedNocking)) SFoDMulti *= 2;
+		player.wrath -= Math.round(player.maxWrath() * 0.5);
+		var damage:Number = unarmedAttack();
+		damage += player.str;
+		damage += ghostStrength();
+		damage += scalingBonusStrength() * 0.25;
+		if (damage < 50) damage = 50;
+		if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+			if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			else damage *= 2;
+		}
+		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
+		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
+		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
+		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		damage *= (1 + SFoDMulti);
+		var crit:Boolean = false;
+		var critChance:int = 65;
+		critChance += combat.combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		outputText("You focus the force of your wrath, pushing the energy to the tip of your fingers. With a deep breath, you release the stored energy, thrusting it upon " + monster.a + monster.short + ". Six finger-shaped constructs materialize before you as they fly toward " + monster.a + monster.short + ". ");
+        doDamage(damage, true, true);
+        doDamage(damage, true, true);
+        doDamage(damage, true, true);
+        doDamage(damage, true, true);
+        doDamage(damage, true, true);
+        doDamage(damage, true, true);
+		if (crit) {
+			outputText("<b>Critical! </b>");
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
+		}
+		outputText("\n\n");
+		heroBaneProc(damage);
+		EruptingRiposte();
+        statScreenRefresh();
+        enemyAI();
 	}
 
     public function oniRampagePowerMulti():Number {
