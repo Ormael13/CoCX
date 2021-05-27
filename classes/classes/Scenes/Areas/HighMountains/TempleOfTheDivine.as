@@ -123,8 +123,6 @@ use namespace CoC;
 			}
 		}
 
-
-
 		private function anyOfAltairsRepaired():Boolean {
 			return flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1;
 		}

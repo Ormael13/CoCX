@@ -77,8 +77,8 @@ public class DemonPackBeach extends Monster
 							consumables.OVIELIX,
 							consumables.B__BOOK);
 			this.abilities = [
-				{call: SceneLib.combat.packAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
-				{call: SceneLib.combat.lustAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+				{call: SceneLib.combat.packAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: SceneLib.combat.lustAttack(), type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 			];
 			this.tailType = Tail.DEMONIC;
 			this.horns.type = Horns.DEMON;
