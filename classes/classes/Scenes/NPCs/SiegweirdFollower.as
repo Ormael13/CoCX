@@ -27,8 +27,8 @@ public function siegweirdFirstEncounter():void
 	outputText("He mumbles softly to himself.\n\nHis gaze shifts back to meet yours, speaking before you have a chance to decide if you want to help him or not. \"<i>An imp has stolen my sword… It’s more than an ordinary sword. It is my holy greatsword. I would be indebted to you if you could find it for me… I would go, but…</i>\"\n\n");
 	outputText("He shakes his head softly before shifting his attention back to you. He doesn’t say a word, so you take this time to decide if you want to help him or not.\n");
 	menu();
-	addButton(1, "Help him", siegweirdFirstEncounterHelpHim).hint("Helping him may lead to recrutiment (if all went according to the plan) so that will lock out chance to get Alvina. So think carefully fi you sure you want get him over Alvina.");
-	addButton(3, "Do not help him", siegweirdFirstEncounterDoNotHelpHim).hint("Later on PC will be still able meet him and get offer to help.");
+	addButton(1, "Help him", siegweirdFirstEncounterHelpHim).hint("Help the divine knight. Perhaps he will become fond of you, but such an ally may not be keen on corruption or the like.");
+	addButton(3, "Do not help him", siegweirdFirstEncounterDoNotHelpHim).hint("Leave him be for now.");
 }
 public function siegweirdFirstEncounterHelpHim():void
 {

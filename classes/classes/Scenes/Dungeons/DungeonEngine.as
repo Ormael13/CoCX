@@ -382,7 +382,7 @@ public class DungeonEngine extends BaseContent
 			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1);//1 - pokonanie 1 golema, 2 pokonanie obu golemów
 		}
 		public function checkRiverDungeon2ndFloorClear():Boolean {
-			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 4);//x - pokonanie chimerycznego żywiołaka
+			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6);//3,4,5,6 - pokonanie każdego z sub-bossów, 7 - pokonanie chimerycznego żywiołaka
 		}
 		public function checkEbonLabyrinthClear():Boolean {
 			return (flags[kFLAGS.EBON_LABYRINTH] > 1);//exploracja 50 pokoi bez porażki

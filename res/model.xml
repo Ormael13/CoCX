@@ -148,7 +148,7 @@
             <color name="light blue">#b1c8ec</color>
             <color name="light gray">#dddadd</color>
             <color name="light green">#c5eec3</color>
-            <color name="light grey">#c4d1d9</color>
+            <color name="light gray">#c4d1d9</color>
             <color name="light purple">#e4cdf3</color>
             <color name="lime green">#73df72</color>
             <color name="mediterranean-toned">#ac7339</color>
@@ -557,6 +557,8 @@
         <cell rect="981,101,40,50" name="clothe/blackKimonoTop" dx="83" dy="72"/>
         <cell rect="1591,216,80,108" name="clothe/TamamoeNoMaeKimonoTop" dx="65" dy="63"/>
         <cell rect="1673,216,80,108" name="clothe/TamamoeNoMaeKimonoLowerTop" dx="65" dy="63"/>
+        <cell rect="1919,216,80,108" name="clothe/OniKimonoTop" dx="65" dy="63"/>
+        <cell rect="2001,216,80,108" name="clothe/OniKimonoLowerTop" dx="65" dy="63"/>
         <cell rect="1017,325,80,104" name="clothe/goblinTechnomancerClothe" dx="64" dy="55"/>
         <cell rect="722,543,130,90" name="clothe/fairyQueenDressFront" dx="40" dy="62"/>
         <cell rect="853,434,80,104" name="clothe/qipaoRedClothe" dx="64" dy="55"/>
@@ -569,12 +571,15 @@
         <cell rect="1099,216,80,105" name="clothe/purpleKimonoSleeves" dx="64" dy="72"/>
         <cell rect="853,325,80,105" name="clothe/blackKimonoSleeves" dx="64" dy="72"/>
         <cell rect="771,222,80,85" name="clothe/TamamoeNoMaeKimonoSleeves" dx="64" dy="78"/>
+        <cell rect="1837,222,80,85" name="clothe/OniKimonoSleeves" dx="64" dy="78"/>
         <cell rect="1181,216,80,105" name="clothe/vampireTop" dx="65" dy="63"/>
         <cell rect="1263,216,80,105" name="clothe/merchantClothe" dx="65" dy="57"/>
         <cell rect="935,325,80,104" name="clothe/goblinTechnomancerClotheArms" dx="64" dy="72"/>
         <cell rect="622,445,40,80" name="clothe/comfortableClothes" dx="79" dy="44"/>
         <cell rect="1263,325,80,104" name="clothe/berserkerArmorTop" dx="64" dy="55"/>
         <cell rect="1612,158,40,55" name="clothe/mageRobe" dx="84" dy="68"/>
+        <cell rect="1969,185,20,27" name="clothe/elfClothing" dx="94" dy="81"/>
+        <cell rect="1927,158,40,55" name="clothe/elfClothingSkirt" dx="84" dy="87"/>
         <cell rect="672,445,45,80" name="clotheLegs/comfortableClothes" dx="79" dy="90"/>
         <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="85" dy="121"/>
         <cell rect="919,158,40,54" name="clotheLegs/blackKimonoBottom" dx="85" dy="121"/>
@@ -590,6 +595,8 @@
         <cell rect="1427,216,70,100" name="clotheLegs/merchantClotheBootsMale" dx="65" dy="72"/>
         <cell rect="1402,158,40,55" name="clotheLegs/TamamoeNoMaeKimonoLegs" dx="85" dy="121"/>
         <cell rect="1654,158,40,56" name="clotheLegs/mageRobe" dx="85" dy="116"/>
+        <cell rect="1843,158,40,55" name="clotheLegs/elfClothinglegs" dx="85" dy="120"/>
+        <cell rect="1885,158,40,55" name="clotheLegs/elfClothinglegsLewd" dx="80" dy="119"/>
         <cell rect="776,12,45,27" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
         <cell rect="728,12,45,27" name="armorNeck/fullplatetopFemaleLarge" dx="80" dy="63"/>
         <cell rect="833,12,45,27" name="armorNeck/fullplatetopMale" dx="80" dy="63"/>
@@ -599,6 +606,7 @@
         <cell rect="644,798,173,156" name="armorNeck/walpurgisClothes" dx="20" dy="12"/>
         <cell rect="992,798,173,156" name="armorNeck/wendigoCloak" dx="20" dy="12"/>
         <cell rect="1013,70,40,28" name="armorNeck/merchantClotheCape_fg" dx="85" dy="59"/>
+        <cell rect="1969,158,20,25" name="armorNeck/elfClotheCape_fg" dx="94" dy="62"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="82" dy="75"/>
         <cell rect="1161,42,45,58" name="armorChest/blackFullplatebottom" dx="82" dy="75"/>
         <cell rect="728,42,45,58" name="armorLegs/fullplateLegs" dx="82" dy="115"/>
@@ -615,10 +623,14 @@
         <cell rect="1272,434,40,44" name="clothLeftArm/berserkerArmorArmsFeralLeft" dx="56" dy="56"/>
         <cell rect="1322,434,40,44" name="clothLeftArm/berserkerArmorArmsFeralQuadLeft" dx="56" dy="56"/>
         <cell rect="1486,158,40,55" name="clothLeftArm/mageRobe" dx="70" dy="59"/>
+        <cell rect="1738,158,20,55" name="clothLeftArm/elfClothingleftArm" dx="81" dy="68"/>
+        <cell rect="1780,158,20,55" name="clothLeftArm/elfClothingleftArmLewd" dx="84" dy="63"/>
         <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="102" dy="66"/>
         <cell rect="1132,42,25,55" name="armorRightArm/blackFullplaterightarm" dx="102" dy="66"/>
         <cell rect="982,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArm" dx="109" dy="69"/>
         <cell rect="1024,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArmLewd" dx="104" dy="52"/>
+        <cell rect="1759,158,20,55" name="clothRightArm/elfClothingRightArm" dx="108" dy="68"/>
+        <cell rect="1801,158,20,55" name="clothRightArm/elfClothingRightArmLewd" dx="104" dy="52"/>
         <cell rect="1255,158,20,55" name="clothRightArm/vampireClothingRightArm" dx="108" dy="68"/>
         <cell rect="1297,158,20,55" name="clothRightArm/vampireClothingRightArmLewd" dx="104" dy="52"/>
         <cell rect="1181,325,55,55" name="clothRightArm/berserkerArmorArms" dx="64" dy="72"/>
@@ -630,13 +642,17 @@
         <cell rect="1166,798,173,156" name="clothCape/wendigoCloakBack" dx="19" dy="12"/>
         <cell rect="935,543,150,80" name="clothCape/fairyQueenDressUnder" dx="22" dy="61"/>
         <cell rect="1444,158,40,55" name="clothCape/TamamoeNoMaeKimonoUnder" dx="85" dy="121"/>
+        <cell rect="1696,158,40,55" name="clothCape/OniKimonoUnder" dx="85" dy="121"/>
         <cell rect="1013,56,40,13" name="clothCape/TamamoeNoMaeKimonoCollar" dx="85" dy="68"/>
+        <cell rect="229,13,40,13" name="clothCape/OniKimonoCollar" dx="85" dy="68"/>
         <cell rect="1509,216,80,100" name="clothCape_bg/merchantClotheCape_bg" dx="65" dy="64"/>
         <cell rect="1755,216,80,100" name="clothCape_bg/mageClotheCape_bg" dx="65" dy="64"/>
+        <cell rect="2083,216,80,100" name="clothCape_bg/elfClotheCape_bg" dx="65" dy="64"/>
         <cell rect="150,91,35,25" name="forehead/SpecialForeheadShadow" dx="81" dy="35"/>
         <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="1318,158,20,55" name="glove_fg/vampireClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="517,1550,30,20" name="glove_fg/fairyQueenDressArmFront" dx="105" dy="75"/>
+        <cell rect="1822,158,20,55" name="glove_fg/elfClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="201,91,15,9" name="tailAccessory/demonTailJewelery" dx="147" dy="132"/>
         <cell rect="296,1550,99,45" name="uniquePlantBath/lilirauneBath" dx="34" dy="88"/>
         <cell rect="546,1430,50,100" name="torso/liliraune" dx="36" dy="26"/>
@@ -681,9 +697,16 @@
         <cell rect="752,1726,80,90" name="weapon/katanaHoly" dx="38" dy="55"/>
         <cell rect="752,1832,80,90" name="weapon/katanaUnholy" dx="38" dy="55"/>
         <cell rect="752,1938,80,90" name="weaponBuff/katanaFireBuff" dx="25" dy="35"/>
+        <cell rect="842,1620,80,90" name="weapon/tetsuGeneric" dx="38" dy="55"/>
+        <cell rect="842,1726,80,90" name="weapon/tetsuHoly" dx="38" dy="55"/>
+        <cell rect="842,1832,80,90" name="weapon/tetsuUnholy" dx="38" dy="55"/>
         <cell rect="932,1620,80,107" name="weapon/bowGeneric" dx="51" dy="54"/>
         <cell rect="932,1729,80,107" name="weapon/bowHoly" dx="51" dy="54"/>
         <cell rect="932,1838,80,107" name="weapon/bowUnholy" dx="51" dy="54"/>
+        <cell rect="1022,1620,80,90" name="backAccessory/LactoblasterTank" dx="59" dy="34"/>
+        <cell rect="1022,1726,85,45" name="weapon/LactoblasterGun" dx="60" dy="97"/>
+        <cell rect="1022,1776,80,45" name="weapon/LactoblasterMilker" dx="59" dy="62"/>
+        <cell rect="842,1938,80,90" name="backAccessory/oniGourd" dx="74" dy="52"/>
     </spritemap>
     <spritemap file="hair.png">
         <cell rect="1,70,59,65" name="hair/0" dx="75" dy="21"/>
@@ -995,6 +1018,9 @@
         <cell rect="1061,410,49,29" name="bra_fg/mageRobeBraSmall" dx="79" dy="68"/>
         <cell rect="1061,440,49,29" name="bra_fg/mageRobeBraMedium" dx="79" dy="68"/>
         <cell rect="1061,470,49,29" name="bra_fg/mageRobeBraLarge" dx="79" dy="68"/>
+        <cell rect="1111,410,49,29" name="bra_fg/elfClothingBraSmall" dx="79" dy="68"/>
+        <cell rect="1111,440,49,29" name="bra_fg/elfClothingBraMedium" dx="79" dy="68"/>
+        <cell rect="1111,470,49,29" name="bra_fg/elfClothingBraLarge" dx="79" dy="68"/>
         <cell rect="11,410,49,29" name="bra/goblinTechnomancerBraSmall" dx="79" dy="68"/>
         <cell rect="11,440,49,29" name="bra/goblinTechnomancerBraMedium" dx="79" dy="68"/>
         <cell rect="11,470,49,29" name="bra/goblinTechnomancerBraLarge" dx="79" dy="68"/>
@@ -1254,6 +1280,7 @@
         <layer name="tail_fg"/>
         <layer name="tail"/>
 		<layer name="clothCape_bg"/>
+		<layer name="backAccessory"/>
         <layer name="wings_bg"/>
 		<layer name="legs_bg"/>
 		<layer name="aura"/>
@@ -1326,6 +1353,8 @@
 			<if test="WeaponDisplay == 0">		
 				<!-- MELEE WEAPON -->
 				<if test="playerHasWeaponWings">
+					
+					<!-- Staff -->
 					<if test="PlayerHasAStaff">
 						<if test="PlayerHasAStaffHoly or PlayerHasAStaffUnholy">
 							<if test="PlayerHasAStaffHoly">
@@ -1340,6 +1369,7 @@
 						</if>
 					</if>
 			
+					<!-- Sword -->
 					<if test="PlayerHasASword">
 						<if test="PlayerHasAswordHoly or PlayerHasASwordUnholy">
 							<if test="PlayerHasAswordHoly">
@@ -1357,6 +1387,7 @@
 						</if>
 					</if>
 			
+					<!-- Axe -->
 					<if test="PlayerHasAnAxe">
 						<if test="PlayerHasAnAxeHoly or PlayerHasAnAxeUnholy">
 							<if test="PlayerHasAnAxeHoly">
@@ -1371,6 +1402,37 @@
 						</if>
 					</if>
 			
+					<!-- Hammer -->
+					<if test="PlayerHasAHammer">
+						<if test="PlayerHasAHammerHoly or PlayerHasAHammerUnholy">
+							<if test="PlayerHasAHammerHoly">
+								<show part="weapon/hammerHoly"/>
+							</if>
+							<if test="PlayerHasAHammerUnholy">
+								<show part="weapon/hammerUnholy"/>
+							</if>
+							<else>
+								<show part="weapon/hammerGeneric"/>
+							</else>
+						</if>
+					</if>
+					
+					<!-- Tetsubo -->
+					<if test="PlayerHasATetsu">
+						<if test="PlayerHasAHammerHoly or PlayerHasAHammerUnholy">
+							<if test="PlayerHasATetsuHoly">
+								<show part="weapon/tetsuHoly"/>
+							</if>
+							<if test="PlayerHasATetsuUnholy">
+								<show part="weapon/tetsuUnholy"/>
+							</if>
+							<else>
+								<show part="weapon/tetsuGeneric"/>
+							</else>
+						</if>
+					</if>
+					
+					<!-- Hammer -->
 					<if test="PlayerHasAHammer">
 						<if test="PlayerHasAHammerHoly or PlayerHasAHammerUnholy">
 							<if test="PlayerHasAHammerHoly">
@@ -1385,6 +1447,7 @@
 						</if>
 					</if>
 			
+					<!-- Spear -->
 					<if test="PlayerHasASpear">
 						<if test="PlayerHasASpearHoly or PlayerHasASpearUnholy">
 							<if test="PlayerHasASpearHoly">
@@ -1399,6 +1462,7 @@
 						</if>
 					</if>
 			
+					<!-- Katana -->
 					<if test="PlayerHasKatana">
 						<if test="PlayerHasKatanaHoly or PlayerHasKatanaUnholy">
 							<if test="PlayerHasKatanaHoly">
@@ -1416,6 +1480,7 @@
 						</if>
 					</if>
 			
+					<!-- Rapiers -->
 					<if test="PlayerHasRapier">			
 						<if test="PlayerHasRapierHoly or PlayerHasRapierUnholy">
 							<if test="PlayerHasRapierHoly">
@@ -1433,6 +1498,7 @@
 						</if>
 					</if>			
 				</if>
+				<!-- Shield -->
 				<if test="PlayerHasAShield">
 					<if test="PlayerHasSanctuary">					
 						<if test="PlayerHasSanctuaryHoly or PlayerHasSanctuaryCorrupt">
@@ -1453,7 +1519,8 @@
 				</if>
 				<else>
 				<!-- RANGED WEAPON -->
-					<if test="playerHasWeaponWings == 0">	
+					<if test="playerHasWeaponWings">	
+						<!-- Bows -->
 						<if test="PlayerHasABow">			
 							<if test="PlayerHasABowHoly or PlayerHasABowUnholy">
 								<if test="PlayerHasABowHoly">
@@ -1467,7 +1534,38 @@
 								</else>
 							</if>
 						</if>
+						
+						<!-- Thrown -->	
+						<if test="PlayerHasAThrownWeapon">	
+							<!-- Javelin -->						
+							<if test="PlayerHasAJavelin">	
+								<if test="PlayerHasAJavelinHoly or PlayerHasAJavelinUnholy">
+									<if test="PlayerHasAJavelinHoly">
+										<show part="weapon/spearHoly"/>
+									</if>
+									<if test="PlayerHasAJavelinUnholy">
+										<show part="weapon/spearUnholy"/>
+									</if>
+									<else>
+										<show part="weapon/spearGeneric"/>
+									</else>
+								</if>
+							</if>						
+							<!-- Axe -->
+							<if test="PlayerHasAThrownAxe">				
+								<show part="weapon/axeGeneric"/>
+							</if>						
+						</if>
+						
+						<!-- Guns -->	
+						<if test="PlayerHasLactoBlaster">	
+							<show part="backAccessory/LactoblasterTank"/>
+							<show part="weapon/LactoblasterGun"/>
+							<show part="weapon/LactoblasterMilker"/>
+						</if>
+						
 					</if>
+					
 				</else>
 			</if>	
 		</if>
@@ -2107,7 +2205,7 @@
 			<case values="Face.COW_MINOTAUR">
                 <show part="face/bovine"/>
             </case>
-			<case values="Face.FAIRY,Face.CRAZY,Face.SMUG">
+			<case values="Face.FAIRY,Face.CRAZY,Face.SMUG,Face.ELF">
                 <show part="face/fairySmile"/>
             </case>
 			<case values="Face.GHOST">
@@ -2185,14 +2283,21 @@
 								<if test="skin.coverage==Skin.COVERAGE_NONE">
 									<hide part="hands/*"/>
 									<hide part="arms/*"/>
-									<show part="arms/demonlewd"/>
-									<show part="arms_fg/demonlewd"/>
 									<if test="PlayerHasAWeapon">
 										<show part="arms_bg/human"/>
 										<else>
 											<hide part="arms_bg/*"/>
 											<hide part="hands_bg/*"/>
 											<show part="arms_bg/demonlewd"/>
+										</else>
+									</if>
+									<if test="PlayerHasAShield">
+										<show part="arms/human"/>
+										<else>
+											<hide part="arms/*"/>
+											<hide part="hands/*"/>
+											<show part="arms/demonlewd"/>
+											<show part="arms_fg/demonlewd"/>
 										</else>
 									</if>
 								</if>
@@ -2206,14 +2311,21 @@
 									<if test="showClothing">
 										<hide part="hands/*"/>
 										<hide part="arms/*"/>
-										<show part="arms/demonlewd"/>
-										<show part="arms_fg/demonlewd"/>
 										<if test="PlayerHasAWeapon">
 											<show part="arms_bg/human"/>
 											<else>
 												<hide part="arms_bg/*"/>
 												<hide part="hands_bg/*"/>
 												<show part="arms_bg/demonlewd"/>
+											</else>
+										</if>
+										<if test="PlayerHasAShield">
+											<show part="arms/human"/>
+											<else>
+												<hide part="arms/*"/>
+												<hide part="hands/*"/>
+												<show part="arms/demonlewd"/>
+												<show part="arms_fg/demonlewd"/>
 											</else>
 										</if>
 									</if>
@@ -2242,6 +2354,15 @@
 							<hide part="arms_bg/*"/>
 							<hide part="hands_bg/*"/>
 							<show part="arms_bg/demonlewd"/>
+						</else>
+					</if>
+					<if test="PlayerHasAShield">
+						<show part="arms/human"/>
+						<else>
+							<hide part="arms/*"/>
+							<hide part="hands/*"/>
+							<show part="arms/demonlewd"/>
+							<show part="arms_fg/demonlewd"/>
 						</else>
 					</if>
 				</if>
@@ -3794,6 +3915,11 @@
 		<if test="sphinxRegalia">
 			<show part="clotheUnderAmulet/sphinxregalia"/>
 		</if>
+		
+		<!-- Oni Gourd -->
+		<if test="oniGourd">
+			<show part="backAccessory/oniGourd"/>
+		</if>
 
 		<!-- Yuki Onna Dress -->
 		<if test="yukiDress">
@@ -3907,6 +4033,19 @@
 				<if test="showArmClothing">
 					<show part="clothe/TamamoeNoMaeKimonoSleeves"/>
 					<show part="clothCape/TamamoeNoMaeKimonoCollar"/>
+				</if>
+			</if>
+		</if>
+		<if test="OniLegendaryKimono">
+			<if test="showClothing">
+				<show part="clothe/OniKimonoTop"/>
+				<if test="(legCount!=4) and (showLegClothing)">
+					<show part="clothe/OniKimonoLowerTop"/>
+					<show part="clothCape/OniKimonoUnder"/>
+				</if>
+				<if test="showArmClothing">
+					<show part="clothe/OniKimonoSleeves"/>
+					<show part="clothCape/OniKimonoCollar"/>
 				</if>
 			</if>
 		</if>
@@ -4719,6 +4858,79 @@
                         <hide part="balls/*"/>
                         <show part="panty/scandalousSuccubusClothingPanty"/>
 					</else>
+				</if>
+			</if>
+		</if>
+		
+		<if test="elfClothing">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/elfClothingBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/elfClothingBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/elfClothingBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/elfClothingBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/elfClothingBraLarge"/>
+					</default>
+				</switch>
+			</if>
+			<if test="showClothing">
+				<show part="clothe/elfClothing"/>
+				<show part="clothe/elfClothingSkirt"/>
+				<show part="clothcape/elfClotheCape_bg"/>
+				<show part="armorNeck/elfClotheCape_fg"/>
+				<if test="showArmClothing">
+					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+						<switch value="arms.type">
+							<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
+								<show part="clothRightArm/elfClothingRightArmLewd"/>
+								<if test="PlayerHasAWeapon">
+									<show part="clothLeftArm/elfClothingleftArm"/>
+									<else>
+										<show part="clothLeftArm/elfClothingleftArmLewd"/>
+									</else>
+								</if>
+								<show part="glove_fg/elfClothingRightArmFront"/>
+							</case>
+							<default>
+								<show part="clothLeftArm/elfClothingleftArm"/>
+								<show part="clothRightArm/elfClothingRightArm"/>
+							</default>
+						</switch>
+						<else>
+							<show part="clothLeftArm/elfClothingleftArm"/>
+							<show part="clothRightArm/elfClothingRightArm"/>
+						</else>
+					</if>
+				</if>
+				<if test="showLegClothing">
+					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+						<switch value="lowerBody">
+							<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
+								<switch value="arms.type">
+									<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
+										<show part="clotheLegs/scandalousSuccubusClothinglegsLewd"/>
+									</case>
+									<default>
+										<show part="clotheLegs/elfClothinglegs"/>
+									</default>
+								</switch>
+							</case>
+						</switch>
+						<else>
+							<show part="clotheLegs/elfClothinglegs"/>
+						</else>
+					</if>
 				</if>
 			</if>
 		</if>

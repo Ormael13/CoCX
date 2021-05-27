@@ -14,7 +14,7 @@ import classes.Scenes.SceneLib;
 public class WaterElemental extends Monster
 	{
 		public function baseElementalAttack():void {
-			outputText("Water elemental concentrate water on it fist and send punch toward you.");
+			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"Water elemental")+" thickens the water on its fist before thrusting it's palm toward you with a violent punch.");
 			var damage:Number = inte + wis;
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
@@ -25,24 +25,46 @@ public class WaterElemental extends Monster
 			else
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" It hit you square in the chest. ");
+				outputText(" It hits you square in the chest. ");
 				damage = player.takeIceDamage(damage, true);
 			}
 		}
 		
 		public function fluffyOfPunches():void {
-			outputText("Water elemental concentrate water on it fists and goes wild at you sending punches.");
+			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"Water elemental")+" tosses a barrage of punches toward you with it's watery fists.");
 			var damage:Number = inte + wis;
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 1.5);
 			damage = Math.round(damage);
 			//Dodge
-			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath it avoiding all punches!");
+			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath it, avoiding all punches!");
 			else
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" They hits you all over the body. ");
+				outputText(" The watery strikes connect with your body. ");
+				damage = player.takeIceDamage(damage, true);
+				damage = player.takeIceDamage(damage, true);
+			}
+		}
+		
+		public function subbossSpecial():void {
+			outputText("The Undine concentrates, coalescing nearby ambient water into crescent-shaped shards of water before hurling them toward you with a flick of his wrist.");
+			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
+			else {
+				var damage:Number = inte + wis;
+				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
+				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
+				damage *= 3.75;
+				damage = Math.round(damage);
+				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
+				outputText(" The watery strikes connect with your body. ");
+				damage = player.takeIceDamage(damage, true);
+				damage = player.takeIceDamage(damage, true);
+				damage = player.takeIceDamage(damage, true);
+				damage = player.takeIceDamage(damage, true);
+				damage = player.takeIceDamage(damage, true);
+				damage = player.takeIceDamage(damage, true);
 				damage = player.takeIceDamage(damage, true);
 				damage = player.takeIceDamage(damage, true);
 			}
@@ -50,28 +72,53 @@ public class WaterElemental extends Monster
 		
 		override protected function performCombatAction():void
 		{
-			if (hasStatusEffect(StatusEffects.Provoke)) {
-				var choiceP:Number = rand(5);
-				if (choice1 < 5) fluffyOfPunches();
-				if (choiceP == 5) baseElementalAttack();
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
+				if (hasStatusEffect(StatusEffects.Provoke)) {
+					var choiceP1:Number = rand(5);
+					if (choiceP1 == 0) fluffyOfPunches();
+					if (choiceP1 == 1) baseElementalAttack();
+					if (choiceP1 > 1) subbossSpecial();
+				}
+				else {
+					var choice11:Number = rand(6);
+					if (choice11 < 2) fluffyOfPunches();
+					if (choice11 == 2 || choice11 == 3) baseElementalAttack();
+					if (choice11 > 3) subbossSpecial();
+				}
 			}
 			else {
-				var choice1:Number = rand(5);
-				if (choice1 < 3) fluffyOfPunches();
-				if (choice1 == 3 || choice1 == 4) baseElementalAttack();
-				if (choice1 == 5) eAttack();
+				if (hasStatusEffect(StatusEffects.Provoke)) {
+					var choiceP:Number = rand(5);
+					if (choiceP < 4) fluffyOfPunches();
+					if (choiceP == 4) baseElementalAttack();
+				}
+				else {
+					var choice1:Number = rand(6);
+					if (choice1 < 3) fluffyOfPunches();
+					if (choice1 == 3 || choice1 == 4) baseElementalAttack();
+					if (choice1 == 5) eAttack();
+				}
 			}
+		}
+		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) SceneLib.dungeons.riverdungeon.defeatWaterElementalSubBoss();
+			else cleanupAfterCombat();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.riverdungeon.defeatedByWaterElemental();
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) SceneLib.dungeons.riverdungeon.defeatedByWaterElementalSubBoss();
+			else SceneLib.dungeons.riverdungeon.defeatedByWaterElemental();
 		}
 		
 		public function WaterElemental() 
 		{
 			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 0) {
-				this.long = "You're currently fighting water elemental. It's four feet tall, it body covered with water and it's using bare fists to fight.";
+				this.short = "water elemental";
+				this.imageName = "water elemental";
+				this.long = "You're currently fighting water elemental. It's a four feet tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 48;
 				initStrTouSpeInte(10, 35, 45, 45);
 				initWisLibSensCor(45, 10, 20, 50);
@@ -83,7 +130,9 @@ public class WaterElemental extends Monster
 				this.additionalXP = 50;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 1) {
-				this.long = "You're currently fighting water elemental. It's four feet and three inches tall, it body covered with water and it's using bare fists to fight.";
+				this.short = "water elemental";
+				this.imageName = "water elemental";
+				this.long = "You're currently fighting water elemental. It's a four foot, three inch tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 51;
 				initStrTouSpeInte(12, 27, 47, 55);
 				initWisLibSensCor(55, 10, 25, 50);
@@ -95,7 +144,9 @@ public class WaterElemental extends Monster
 				this.additionalXP = 75;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 2) {
-				this.long = "You're currently fighting water elemental. It's four and half feet tall, it body covered with water and it's using bare fists to fight.";
+				this.short = "water elemental";
+				this.imageName = "water elemental";
+				this.long = "You're currently fighting water elemental. It's a four and half foot tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 54;
 				initStrTouSpeInte(14, 29, 49, 65);
 				initWisLibSensCor(65, 10, 30, 50);
@@ -107,7 +158,9 @@ public class WaterElemental extends Monster
 				this.additionalXP = 100;
 			}
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 3) {
-				this.long = "You're currently fighting water elemental. It's four feet and nine iches tall, it body covered with water and it's using bare fists to fight.";
+				this.short = "water elemental";
+				this.imageName = "water elemental";
+				this.long = "You're currently fighting water elemental. It's four foot, nine inch tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 57;
 				initStrTouSpeInte(16, 31, 51, 75);
 				initWisLibSensCor(75, 10, 35, 50);
@@ -118,21 +171,21 @@ public class WaterElemental extends Monster
 				this.bonusHP = 520;
 				this.additionalXP = 125;
 			}
-			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {//river dungeon floor 2 subboss
-				this.long = "You're currently fighting water elemental. It's five feet tall, it body covered with water and it's using bare fists to fight.";
-				this.tallness = 57;
-				initStrTouSpeInte(16, 31, 51, 75);
-				initWisLibSensCor(75, 10, 35, 50);
-				this.weaponAttack = 8;
-				this.armorDef = 8;
-				this.armorMDef = 60;
+			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
+				this.short = "undine";
+				this.imageName = "water undine";
+				this.long = "You're currently fighting 'male' undine. It's a nine foot tall body of water shaped into a humanoid form. It's using bare fists to fight.";
+				this.tallness = 108;
+				initStrTouSpeInte(24, 47, 77, 115);
+				initWisLibSensCor(115, 15, 55, 50);
+				this.weaponAttack = 12;
+				this.armorDef = 12;
+				this.armorMDef = 90;
 				this.level = 24;
-				this.bonusHP = 560;
-				this.additionalXP = 125;
+				this.bonusHP = 780;
+				this.additionalXP = 190;
 			}
 			this.a = "the ";
-			this.short = "water elemental";
-			this.imageName = "water elemental";
 			this.plural = false;
 			this.lustVuln = 0;
 			this.drop = new ChainedDrop()
@@ -145,6 +198,7 @@ public class WaterElemental extends Monster
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
+			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

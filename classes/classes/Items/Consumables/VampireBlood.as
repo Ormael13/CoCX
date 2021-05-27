@@ -52,11 +52,11 @@ public class VampireBlood extends Consumable {
 
         var tfArr:Array = [
             {
-                BodyPart: 'wings.type',
-                ChangeTo: pure ? Wings.VAMPIRE : Wings.BAT_ARM,
-                Check   : player.hasGooSkin(),
-                Override: mutations.humanizeSkin,
-                Metamorph: pure ? StatusEffects.UnlockedVampireWings : StatusEffects.UnlockedBatWings
+                BodyPart: 'arms.type',
+                ChangeTo: pure ? Arms.HUMAN : Arms.BAT,
+                Check   : player.ears.type != Arms.HUMAN,
+                Override: mutations.humanizeArms,
+                Metamorph: pure ? StatusEffects.UnlockedHumanArms : StatusEffects.UnlockedBatWings
             }, {
                 BodyPart: 'ears.type',
                 ChangeTo: pure ? Ears.VAMPIRE : Ears.BAT,
@@ -80,7 +80,14 @@ public class VampireBlood extends Consumable {
             }
         ];
         if(pure){
-            tfArr.push({
+            tfArr.push(
+            {
+                BodyPart: 'wings.type',
+                ChangeTo: Wings.VAMPIRE,
+                Check   : player.hasGooSkin(),
+                Override: mutations.humanizeSkin,
+                Metamorph: StatusEffects.UnlockedVampireWings
+            }, {
                 BodyPart: 'skinTone',
                 ChangeTo: "pale",
                 Addition: {
@@ -95,9 +102,6 @@ public class VampireBlood extends Consumable {
                 BodyPart: 'rearBody.type',
                 ChangeTo: RearBody.BAT_COLLAR,
                 Metamorph: StatusEffects.UnlockedBatCollar
-            }, {
-                BodyPart: 'arms.type',
-                ChangeTo: Arms.HUMAN
             });
         }
         changes = 0;

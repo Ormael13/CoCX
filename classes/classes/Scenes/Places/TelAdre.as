@@ -1088,6 +1088,8 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(2, "UnDefKingDest", "You already bought item from Kaiba today.");
 			addButtonDisabled(3, "R.DeadeyeAim", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "R.Ambidexty", "You already bought item from Kaiba today.");
+			addButtonDisabled(5, "E.R.Armor", "You already bought item from Kaiba today.");
+			addButtonDisabled(6, "L.Blaster", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(0, "UnDefKingS", buyItem, jewelries.UNDKINS).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
@@ -1095,6 +1097,9 @@ public function kaibaShopMainMenu2():void {
 			addButton(2, "UnDefKingDest", buyItem, weapons.UDKDEST).hint("Undefeated King's Destroyer - Massive mace weapon that will increase PC parry chance by 20%. Have 20% base chance for stun (3 rounds).");
 			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
 			addButton(4, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
+			addButton(5, "E.R.Armor", buyItem, armors.ERA).hint("Elven Ranger Armor - +50% to Bow and spear damage, Agile, Revealing, Slutty seduction +10.");
+			addButton(5, "L.Blaster", buyItem, weaponsrange.LBLASTR).hint("Lactoblaster - A rare weapon wich may only be in Kaiba inventory for a moment buy it while you can!");
+
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(13, "-2-", kaibaShopMainMenuPage2);
@@ -1108,6 +1113,9 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(4, "Soul Drill", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "Hodr's bow", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "Avelynn", "You already bought item from Kaiba today.");
+			addButtonDisabled(7, "Oni enchanted drinking jug", "You already bought item from Kaiba today.");
+			addButtonDisabled(8, "Oni Noble Kimono", "You already bought item from Kaiba today.");
+			addButtonDisabled(9, "Oni Tyrant Kimono", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(0, "FlameLizR", buyItem, jewelries.FLLIRNG).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
@@ -1117,6 +1125,9 @@ public function kaibaShopMainMenu2():void {
 			addButton(4, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
 			addButton(5, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
 			addButton(6, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional bolts each time.");
+			addButton(7, "Oni enchanted drinking jug", buyItem, jewelries.ONIGOURD).hint("A magical drinking jug beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
+			addButton(8, "Oni Noble Kimono", buyItem, armors.OEKIMO).hint("The garbs of an oni noble. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
+			addButton(9, "Oni Tyrant Kimono", buyItem, armors.OTKIMO).hint("The garbs of an oni tyrant. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(13, "-3-", kaibaShopMainMenuPage3);
@@ -1130,6 +1141,9 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(4, "T.M.Outfit", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "W.I.Cloak", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "S.S.Clothing", "You already bought item from Kaiba today.");
+			addButtonDisabled(7, "T.C.Kimono", "You already bought item from Kaiba today.");
+			addButtonDisabled(8, "I.B.Kimono", "You already bought item from Kaiba today.");
+			addButtonDisabled(9, "C.B.G.Armor", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(0, "HBHelmet", buyItem, headjewelries.HBHELM).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");

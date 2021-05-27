@@ -65,6 +65,7 @@ package classes.Items
 		public const SNIPPLE:WeaponRange = new WeaponRange("Snipple", "Snippler", "Snippler", "a Snippler", "shot", 50, 1030, "Thus named for its ability to hit the center of a nipple with perfect accuracy several hundred yards away, the Snippler perform best in situation were its extreme precision are assets such as from stealth.", "2H Firearm");
 		public const SHUNHAR:SeaHuntressHarpoons = new SeaHuntressHarpoons();
 		public const TDPISTO:TwinDartPistol = new TwinDartPistol();
+		public const LBLASTR:LactoBlasters = new LactoBlasters();
 		public const TOUHOM3:WeaponRange = new WeaponRange("TouhoM3", "TouhounaM3", "Touhouna M3", "a Touhouna M3", "shot", 20, 430, "Pinnacle of goblin engineering, the Touhouna is what goblins call a mechagun. Never needing to be reloaded it shoots bullets in very fast succession achieving with sheer shot number what way more unwieldy or hazardous gun do.", "2H Firearm");
 		public const TRFATBI:WeaponRange = new WeaponRange("TrFatbi", "TripxiFatbilly", "Tripxi Fatbilly", "a Tripxi Fatbilly", "shot", 260, 5230, "Tripxi has one moto… if you can't aim right, deliver an artillery shot so wide it hit everything in the next 200 yard reliably.", "2H Firearm");
 		public const TRJAVEL:WeaponRange = new WeaponRange("TrJavel", "Tra.Javelins", "training javelins", "a training javelins", "shot", 5, 250, "A standard training javelin for ranged combat. You can carry up to 10 on you and need to retrieve them after battles.", "Throwing");

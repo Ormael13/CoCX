@@ -941,7 +941,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			spriteSelect(60);
 			clearOutput();
 			outputText("You announce your decision to a somewhat disappointed Vala but she nods in understanding.\n\n" +
-					"\"<i>It’s ok, [name]. No one will force you to make that choice through I wish you did.<i>\"\n\n" +
+					"\"<i>It’s ok, [name]. No one will force you to make that choice through I wish you did.</i>\"\n\n" +
 					"You wave Vala and the fairies goodbye as you head back to camp. Still you can feel their disappointed eyes on your back as you leave the grove, likely not to return again.\n");
 			ValaFairyQueenQuest = QUEST_STAGE_PCDECLINED;
 			doNext(camp.returnToCampUseOneHour);
