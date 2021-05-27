@@ -696,6 +696,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			player.createPerk(PerkLib.Venomancy,0,0,0,0);
 			player.createPerk(PerkLib.Insanity,0,0,0,0);
 
+			_cuteScene = 1;
 			player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 			doNext(playerMenu);
 		}

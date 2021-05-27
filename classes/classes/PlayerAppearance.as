@@ -2184,12 +2184,18 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (faceType == Face.FIRE_SNAIL) {
 			outputText(" Your face is human in shape and structure");
-			tattooAndPatternGeneric();
+			if (!player.skin.hasNoPattern()){
+				outputText("with ");
+				tattooAndPatternGeneric();
+			}
 			outputText(" but your mouth is drooling from constant arousal.");
 		}
 		if (faceType == Face.GHOST) {
 			outputText(" Your face is in human shape and structure");
-			tattooAndPatternGeneric();
+			if (!player.skin.hasNoPattern()){
+				outputText("with ");
+				tattooAndPatternGeneric();
+			}
 			outputText(". The only thing out of place is the ever present wide smile on your face. Your unsettling smile often hides your true emotions much to the dismay of others.");
 		}
 		if (faceType == Face.JIANGSHI) {
@@ -2198,8 +2204,10 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.KUDERE) {
 			outputText(" Your face is human in shape and structure with " + player.skinTone + ". The most unsettling thing about it is your complete and constant lack of emotion.");
 			if (!player.hasCoat()) {
-				outputText(" The [skin] is");
-				tattooAndPatternGeneric();
+				if (!player.skin.hasNoPattern()){
+					outputText(" The [skin] is");
+					tattooAndPatternGeneric();
+				}
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText(" It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
 			} else {
@@ -2207,10 +2215,12 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 		if (faceType == Face.YUKI_ONNA) {
-			outputText(" Your face is fully human in appearance although your lips are dyed blue by the cold.");
+			outputText(" Your face is fully human in appearance although your lips are dyed blue by the cold. As for your [skin] it yearns for the warmth of life.");
 			if (!player.hasCoat()) {
-				outputText(" Your [skin] is");
-				tattooAndPatternGeneric();
+				if (!player.skin.hasNoPattern()){
+					outputText(" Your [skin] is");
+					tattooAndPatternGeneric();
+				}
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText(" It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
 			} else {

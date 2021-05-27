@@ -786,7 +786,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
-			dungeons.setDungeonButtonsRD(null, roomB04, roomB25, null);
+			dungeons.setDungeonButtonsRD(roomB04, null, roomB25, null);
 		}
 		public function roomB04():void {
 			dungeonLoc = 107;
@@ -890,7 +890,7 @@ import classes.StatusEffects;
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Your vision is obscured by thick fog. You instinctively tense as the echoes of footsteps bounce off the walls. Enemies could be right next to you, and you wouldn't know unless you bump into one. You break into a light sweat, or is that the moisture condescending onto your [skin]?");
-			dungeons.setDungeonButtonsRD(roomB13, roomB12, roomB09, null);
+			dungeons.setDungeonButtonsRD(roomB13, roomB11, roomB09, null);
 		}
 		public function roomB13():void {
 			dungeonLoc = 116;

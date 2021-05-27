@@ -6692,8 +6692,10 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
         if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
         if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+        if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 0.2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
+
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -6784,6 +6786,7 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.FireNature)) damage *= 5;
         if (monster.hasPerk(PerkLib.IcyFlesh)) damage *= 0.6;
         if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+        if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 1.4;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
         damage = DamageOverhaul(damage);
