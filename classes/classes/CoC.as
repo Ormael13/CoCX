@@ -252,7 +252,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8r2";
-			version = ver + " (<b></b>)";
+			version = ver + " (<b>Wrath changes (part 2), 2nd floor of RD main boss, Wait/Sleep delays decreased</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

@@ -52,8 +52,8 @@ public class QuatroElementalBoss extends Monster
 		}
 		
 		public function subbossSpecial1():void {
-			outputText("Elemental solidify ambient elemental energy into many medium sized fireballs and with a wave of it hands sends toward you.");
-			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
+			outputText("Elemental solidiies the ambient elemental energy into countles small fireballs before launching them at you with a thrust of its hands.");
+			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage. Talk about Pyromania!");
 			else {
 				var damage:Number = inte + wis;
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
@@ -61,7 +61,7 @@ public class QuatroElementalBoss extends Monster
 				damage *= 3.75;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" They hits you all over the body. ");
+				outputText(" The flaming spheres explode upon impact with you. Talk about Pyromania! ");
 				damage = player.takeFireDamage(damage, true);
 				damage = player.takeFireDamage(damage, true);
 				damage = player.takeFireDamage(damage, true);
@@ -81,14 +81,14 @@ public class QuatroElementalBoss extends Monster
 			}
 		}
 		public function subbossSpecial2():void {
-			outputText("Elemental solidify ambient elemental energy into many sharp looking rocks and with a wave of it hands sends toward you.");
+			outputText("Elemental unearths the ground beneath itself, reshaping the stone into razor-sharp rocks. It thrusts its arms down, sending the rocks toward you.");
 			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
 			else {
 				var damage:Number = inte + wis;
 				damage *= 5;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" They hits you all over the body. ");
+				outputText(" The razor-like rocks cut into you. ");
 				damage = player.takePhysDamage(damage, true);
 				damage = player.takePhysDamage(damage, true);
 				damage = player.takePhysDamage(damage, true);
@@ -100,7 +100,7 @@ public class QuatroElementalBoss extends Monster
 			}
 		}
 		public function subbossSpecial3():void {
-			outputText("Elemental concentrate ambient water it many crescent-shaped shards of water and with a wave of it hands sends toward you.");
+			outputText("Elemental concentrates, coalescing nearby ambient water into crescent-shaped shards of water before hurling them toward you with a flick of his wrist.");
 			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
 			else {
 				var damage:Number = inte + wis;
@@ -109,7 +109,7 @@ public class QuatroElementalBoss extends Monster
 				damage *= 3.75;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" They hits you all over the body. ");
+				outputText(" The watery strikes connect with your body. ");
 				damage = player.takeIceDamage(damage, true);
 				damage = player.takeIceDamage(damage, true);
 				damage = player.takeIceDamage(damage, true);
@@ -121,14 +121,14 @@ public class QuatroElementalBoss extends Monster
 			}
 		}
 		public function subbossSpecial4():void {
-			outputText("Elemental concentrate surrounding it air currents into many crescent-shaped wind blades and with a wave of it hands sends toward you.");
+			outputText("Elemental concentrates, hardening the air until several crescent-like shards of air coalesce. With a twirl, it aims the razor wind toward you before shooting a gust of wind.");
 			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
 			else {
 				var damage:Number = inte + wis;
 				damage *= 3.175;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" They hits you all over the body. ");
+				outputText(" The wind slices through you. ");
 				damage = player.takePhysDamage(damage, true);
 				damage = player.takePhysDamage(damage, true);
 				damage = player.takePhysDamage(damage, true);
@@ -245,8 +245,7 @@ public class QuatroElementalBoss extends Monster
 		private function phase1Ends():void
 		{
 			clearOutput();
-			outputText("Unable to resist your assault, elemental fall to the ground. Is that it? It been not much stronger than other strong enemies you battled on this floor. As if to prove you wrong brown flame embers that was previously just from time to time falling on the ground starts to be attracted to fallen enemy. ");
-			outputText("Before you have time to react they converge on elemental giving it sort of armor that then heats up due to flame beneath it. Revived by that change enemy stands up ready to continue fight...");
+			outputText("Unable to resist your assault, the elemental collapses to the ground. As the flames die out and the elemental lies dormant, it suddenly resurges with a rumble of earth. Before you have time to react, they rebuild the elemental, forming a chrysalis of rock. The revenant stands before you once more, ready to keep fighting.");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 1, 1);
 			_fightPhase = 2;
 			short = "mutated fire-earth elemental";
@@ -265,8 +264,7 @@ public class QuatroElementalBoss extends Monster
 		private function phase2Ends():void
 		{
 			clearOutput();
-			outputText("For second time the elemental falls. When you think it's gfor good... blue flame embers instantly merge with it causing violent reaction between fire and water forming thick laye of steam covering it. Eyes that been previpously at the torso moving to place themself on newly fomed appending on top of it. ");
-			outputText("Looking like it finaly getting proper 'head' with two pairs of normaly horizontaly places eyes with purple glow. It surely not letting you win this fight easily does it?");
+			outputText("The elemental falls once more, unable to resist your assault. The flames die out and the rocky armor crumbles with it as well. Before you can react, a downpour of rain falls upon you. A stream of water pours directly into the elemental as it surges once more with life. A head-like silhouette faces you as the revenant rises from the ground. Looks like your job here isn't done yet.");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 4, 1);
 			_fightPhase = 3;
 			short = "tripple-fusion elemental";
@@ -282,9 +280,8 @@ public class QuatroElementalBoss extends Monster
 		private function phase3Ends():void
 		{
 			clearOutput();
-			outputText("Despite 2nd merge that improved it abilities and innate properties it falled again. For longer moment nothing happens so you cauciously approaching it.... before stporng gust of wing alsmot cause you to tumble. Od course... it had to carry white flame embers with it does it?\n\n");
-			outputText("Revived by infusion of air element particles enemy stands up again steonger and more dangerous than moment ago.\n\n");
-			outputText("<i>“We would not make any more errors,”</i> all of sudden elemental speaks in voice that sounds like ovelapping of four different voices making it almost impossible to understand. Then it once again rush toward clashing with you for the fourth time...");
+			outputText("The elemental falls again, defeatedly collapsing on the ground. You wonder if you should wait or try to inspect the dormant elemental quickly.Before you can react, a sudden gust of wind shakes the room, causing the remains of the elemental to swirl in a small vortex before spinning back into shape. ");
+			outputText("The revenant rises once more before it speaks to you in a cacophony of different voices, <i>“I will not be aired once more.”</i> Without further warning, it rushes toward you, prepared for combat.");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
 			_fightPhase = 4;
 			short = "quatro elemental";
