@@ -17,6 +17,7 @@ Corruption-of-Champions.as3proj
 node_modules
 *.sol
 *.swc
+*.apk
 /out
 /tmp
 CoC-AIR-app.xml
