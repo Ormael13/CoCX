@@ -14690,10 +14690,10 @@ public final class Mutations extends MutationsHelper {
             setRearBody(RearBody.GLACIAL_AURA);
             changes++;
         }
-        if (player.hasPlainSkinOnly() && !player.isGargoyle() && player.skin.base.color != "glacial white" && player.skin.base.color != "pale blue" && player.skin.base.color != "snow white" && player.skinAdj != "cold" && changes < changeLimit && rand(3) == 0) {
+        if (player.hasPlainSkinOnly() && !player.isGargoyle() && player.skin.base.color != "glacial white" && player.skin.base.color != "light blue" && player.skin.base.color != "snow white" && player.skinAdj != "cold" && changes < changeLimit && rand(3) == 0) {
             if (rand(3) == 0) player.skin.base.color = "glacial white";
             else {
-                if (rand(2) == 0) player.skin.base.color = "pale blue";
+                if (rand(2) == 0) player.skin.base.color = "light blue";
                 else player.skin.base.color = "snow white";
             }
             player.skinAdj = "cold";
@@ -14715,7 +14715,7 @@ public final class Mutations extends MutationsHelper {
                 if (!player.hasPerk(PerkLib.ColdAffinity)) player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
                 changes++;
             }
-            if (player.findPerk(PerkLib.IcyFlesh) < 0 && changes < changeLimit && rand(3) == 0) {
+            if (!player.hasPerk(PerkLib.IcyFlesh) && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\nFolding your arms against your chest, you desperately yearn for warmth and also at the same time for some reason fears it. If you are still alive, your body gives little sign of it, as if it had been dead for months and from the look of your pale frozen flesh you might as well be an icy specter. This said, a whole different form of vitality fills you as if on cue, your frozen flesh begins to harden to a diamond like resilience and your wounds magically begins to close. You don't feel hunger anymore either or the need to drink and even the cold is beginning to subside, ");
                 outputText("leaving you with numbed sensations which makes you yearn for the pleasure of touch all the more. Your body seems to keep itself in a form of unnatural suspended animation, your very heart having came to a halt that could as well just be death yet you still can feel the caress of the cold icy wind on your skin albeit the sensation is no longer so unpleasant to begin with, it might even pass for pleasurable.");
                 outputText("\n\n(<b>Perks Gained: Dead metabolism and Icy Flesh!</b>)");
@@ -15176,7 +15176,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (player.frostWyrmScore() >= 10 && changes < changeLimit && player.findPerk(PerkLib.DragonIceBreath) < 0) {
+        if (player.frostWyrmScore() >= 10 && changes < changeLimit && !player.hasPerk(PerkLib.DragonIceBreath)) {
             outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
             outputText("\n\nIt seems the fafnir tear has awaked some kind of power within you... your throat and chest feel very cold, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
             player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);
@@ -15367,7 +15367,7 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && !player.hasPartialCoat(Skin.CHITIN) && rand(2) == 0) {
             var randomColor:String = randomChoice(MantisColor);
             growPartialChitin(randomColor);
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
                 outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
             }
@@ -15389,7 +15389,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //oviposition (prawdopodobnie podobne do wersji dla bee niż dridera)
-        if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.MantisOvipositor) < 0 && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
+        if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && !player.hasPerk(PerkLib.MantisOvipositor) && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
             outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous mantis part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the end.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, green, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new mantis ovipositor will feel like...");
             outputText("\n\n(<b>Perk Gained:  Mantis Ovipositor - Allows you to lay eggs in your foes!</b>)");
             player.createPerk(PerkLib.MantisOvipositor, 0, 0, 0, 0);
@@ -15446,7 +15446,7 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && player.hasPartialCoat(Skin.CHITIN) && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
             var randomColorF:String = randomChoice(MantisColor);
             growChitin(randomColorF);
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
                 outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
             }
@@ -15975,7 +15975,7 @@ public final class Mutations extends MutationsHelper {
                 player.skin.growCoat(Skin.FUR, {color: furToBeChosen});
                 outputText("[skin coat.color] fur. <b>You are now covered in [skin coat.color] fur from head to toe.</b>");
             }
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                 outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
             }
@@ -16394,7 +16394,7 @@ public final class Mutations extends MutationsHelper {
                 color2: "black",
                 pattern: Skin.PATTERN_RED_PANDA_UNDERBODY
             });
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                 outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
             }

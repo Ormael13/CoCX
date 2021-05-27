@@ -91,7 +91,7 @@ public class YukiOnnaScene extends BaseContent
 			else {
 				if (rand(3) == 0) player.skinTone = "snow white";
 				else {
-					if (rand(2) == 0) player.skinTone = "pale blue";
+					if (rand(2) == 0) player.skinTone = "light blue";
 					else player.skinTone = "glacial white";
 				}
 				player.skinAdj = "cold";

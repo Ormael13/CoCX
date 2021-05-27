@@ -8234,7 +8234,7 @@ use namespace CoC;
 		public function yukiOnnaScore():Number {
 			Begin("Player","racialScore","yuki onna");
 			var yukiOnnaCounter:Number = 0;
-			if (InCollection(skin.base.color, ["snow white", "pale blue", "glacial white"]))
+			if (InCollection(skin.base.color, ["snow white", "light blue", "glacial white"]))
 				yukiOnnaCounter++;
 			if (skinAdj == "cold")
 				yukiOnnaCounter++;
