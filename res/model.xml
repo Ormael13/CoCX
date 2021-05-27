@@ -2822,7 +2822,7 @@
             </case>
 			<case values="LowerBody.ATLACH_NACHA">
                 <hide part="legs/*"/>
-				<hide part="tail/*"/>
+				<hide part="tail/spider"/>
                 <show part="legs_fg/atlach"/>
 				<show part="overGenitals/atlach"/>
             </case>
@@ -2937,7 +2937,7 @@
                 <show part="legs/chitin2"/>
             </case>
             <case values="LowerBody.DRIDER">
-				<hide part="tail/*"/>
+				<hide part="tail/spider"/>
                 <hide part="legs/*"/>
                 <show part="legs_fg/drider"/>
             </case>
