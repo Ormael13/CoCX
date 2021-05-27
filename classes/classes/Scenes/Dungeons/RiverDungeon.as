@@ -928,7 +928,7 @@ import classes.StatusEffects;
 			encountersRuletteBFire();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("As you enter this new area, your breathing immediately gets harder. Heat washes over you, each side of the room is lined with an orange glow. Periodically, you hear a loud hissing, more puffs of steam filling the air. Coughing, you continue through the tunnels, on high alert the entire way.");
+			outputText("As you enter the new area, your breaths grow shallow as you have difficulty breathing in new air. Heat washes over you as the sides of the room glow with an orange hue. \n\nPeriodically, you hear a loud hissing as steam rises in the air. Coughing, you continue through the tunnels, wary of potential dangers.");
 			dungeons.setDungeonButtonsRD(null, roomB02, roomB17, null);
 		}
 		public function roomB17():void {
@@ -937,22 +937,22 @@ import classes.StatusEffects;
 			encountersRuletteBFire();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("As you enter this new area, your breathing immediately gets harder. Heat washes over you, each side of the room is lined with an orange glow. Periodically, you hear a loud hissing, more puffs of steam filling the air. Coughing, you continue through the tunnels, on high alert the entire way.");
+			outputText("As you enter the new area, your breaths grow shallow as you have difficulty breathing in new air. Heat washes over you as the sides of the room glow with an orange hue. \n\nPeriodically, you hear a loud hissing as steam rises in the air. Coughing, you continue through the tunnels, wary of potential dangers.");
 			dungeons.setDungeonButtonsRD(null, roomB18, null, roomB16);
 		}
 		public function roomB18():void {
 			dungeonLoc = 121;
 			clearOutput();
 			if (player.statusEffectv1(StatusEffects.RivereDungeonIB) == 0) {
-				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large ball of flame rushing towards you!  Actualy it's looking very large one compared to ones you meet earlier.  Realizing it's been spotted, the elemental's body reform into a humanoid form.  ");
-				outputText("As if to confirm your supsicions about unusual large mass it morph into nine feet tall ifrit shape with clear femine features.  'Her' eyes focus at you and moment both of you gazes meet 'she' let out roar and attacks!");
+				outputText("A crackling sound emanates from this distance. You turn to face a large ball of fire rushing toward you. The ball shifts, forming itself into a humanoid form in your presence. ");
+				outputText("It morphs into nine-foot-tall ifrit with a clear feminine shape.  Its entire body is alight as it attacks! You must prepare to fight!");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new FireElemental(), true);
 			}
 			else encountersRuletteBFire();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("As you enter this new area, your breathing immediately gets harder. Heat washes over you, each side of the room is lined with an orange glow. Periodically, you hear a loud hissing, more puffs of steam filling the air. Coughing, you continue through the tunnels, on high alert the entire way.");
+			outputText("As you enter the new area, your breaths grow shallow as you have difficulty breathing in new air. Heat washes over you as the sides of the room glow with an orange hue. \n\nPeriodically, you hear a loud hissing as steam rises in the air. Coughing, you continue through the tunnels, wary of potential dangers.");
 			dungeons.setDungeonButtonsRD(roomB17, null, null, null);
 		}
 		public function roomB19():void {
@@ -961,8 +961,8 @@ import classes.StatusEffects;
 			encountersRuletteBWater();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("As you step into the next room, you hear an audible sucking noise, your [feet] sinking an inch or so into the floor. The entire room smells like a bog, and your vision is almost completely useless now, thick roiling fog collecting everywhere, forcing you to wipe it out of your eyes every few steps. ");
-			outputText("ou gingerly use the tip of your [feet] to check for deeper pools of water, and you regularly find them.");
+			outputText("As you step into the next room, your balance is nearly thrown off as you can feel yourself sinking slightly with each second of movement. You look down, noticing the thick mud beneath you. Best not to stand still too long lest you get stuck.\n\nThe room is much like the densest bog you've ever traveled in. The mist is so thick, you can hardly see more than a few feet in front of you. ");
+			outputText("You tread gingerly through the dank room, making sure not to step in anything you wouldn't want to.");
 			dungeons.setDungeonButtonsRD(roomB20, null, roomB13, null);
 		}
 		public function roomB20():void {
@@ -971,24 +971,24 @@ import classes.StatusEffects;
 			encountersRuletteBWater();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("As you step into the next room, you hear an audible sucking noise, your [feet] sinking an inch or so into the floor. The entire room smells like a bog, and your vision is almost completely useless now, thick roiling fog collecting everywhere, forcing you to wipe it out of your eyes every few steps. ");
-			outputText("ou gingerly use the tip of your [feet] to check for deeper pools of water, and you regularly find them.");
+			outputText("As you step into the next room, your balance is nearly thrown off as you can feel yourself sinking slightly with each second of movement. Best not to stand still too long lest you get stuck.\n\nThe room is much like the densest bog you've ever traveled in. The mist is so thick, you can hardly see more than a few feet in front of you. ");
+			outputText("You tread gingerly through the dank room, making sure not to step in anything you wouldn't want to.");
 			dungeons.setDungeonButtonsRD(null, roomB19, roomB21, null);
 		}
 		public function roomB21():void {
 			dungeonLoc = 124;
 			clearOutput();
 			if (player.statusEffectv2(StatusEffects.RivereDungeonIB) == 0) {
-				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large blob of water rushing towards you!  Actualy it's looking very large one compared to ones you meet earlier.  Realizing it's been spotted, the elemental's body reform into a humanoid form.  ");
-				outputText("As if to confirm your supsicions about unusual large mass it morph into nine feet tall undine shape with clear masculine features.  'His' eyes focus at you and moment both of you gazes meet 'he' let out roar and attacks!");
+				outputText("A soft warble emanates from nearby, it sounds much like rolling waves, quickly approaching. You notice a large sphere of water rolling toward you.  It bounces, the ball jiggling with each hop before it quickly begins to take form.  ");
+				outputText("The body of water quickly coalesces into the form a water undine with clear masculine features.  It focuses its attention on you, still dripping with water before it shifts aggressively, prepared to attack. It's a fight!");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new WaterElemental(), true);
 			}
 			else encountersRuletteBWater();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("As you step into the next room, you hear an audible sucking noise, your [feet] sinking an inch or so into the floor. The entire room smells like a bog, and your vision is almost completely useless now, thick roiling fog collecting everywhere, forcing you to wipe it out of your eyes every few steps. ");
-			outputText("ou gingerly use the tip of your [feet] to check for deeper pools of water, and you regularly find them.");
+			outputText("As you step into the next room, your balance is nearly thrown off as you can feel yourself sinking slightly with each second of movement. Best not to stand still too long lest you get stuck.\n\nThe room is much like the densest bog you've ever traveled in. The mist is so thick, you can hardly see more than a few feet in front of you. ");
+			outputText("You tread gingerly through the dank room, making sure not to step in anything you wouldn't want to.");
 			dungeons.setDungeonButtonsRD(null, null, null, roomB20);
 		}
 		public function roomB22():void {
@@ -997,8 +997,8 @@ import classes.StatusEffects;
 			encountersRuletteBAir();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("The entire upper half of this room is covered in thick clouds, not unlike the black thunderclouds back home in Ignam. Bolts of electricity frequently strike, from the ceiling to the floor, lighting up a surprisingly small area and sending every hair on your body on end. Gusts of air blast at random, forcing you to hunker down or be thrown across the room like a ragdoll. ");
-			outputText("Seemingly at random, a whirlwind will form in the room, scattering the clouds each way. For a short while, you can see through the space these whirlwinds come through, but only for a few seconds. Covering your eyes with one arm, you push forward.");
+			outputText("A dense blanket of dark clouds cover the ceiling of the room, not unlike the storms you remember back home in Ignam. Thunder and lightning crash throughout the room at random, accompanied by forceful gusts of wind. If you're not careful, you could be thrown off your feet or struck at any moment. ");
+			outputText("Small vortexes swirl within the room, spawning at random. They briefly clear a visible path for you ahead, but you remain careful as you push forward.");
 			dungeons.setDungeonButtonsRD(roomB14, null, null, roomB23);
 		}
 		public function roomB23():void {
@@ -1007,24 +1007,24 @@ import classes.StatusEffects;
 			encountersRuletteBAir();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("The entire upper half of this room is covered in thick clouds, not unlike the black thunderclouds back home in Ignam. Bolts of electricity frequently strike, from the ceiling to the floor, lighting up a surprisingly small area and sending every hair on your body on end. Gusts of air blast at random, forcing you to hunker down or be thrown across the room like a ragdoll. ");
-			outputText("Seemingly at random, a whirlwind will form in the room, scattering the clouds each way. For a short while, you can see through the space these whirlwinds come through, but only for a few seconds. Covering your eyes with one arm, you push forward.");
+			outputText("A dense blanket of dark clouds cover the ceiling of the room, not unlike the storms you remember back home in Ignam. Thunder and lightning crash throughout the room at random, accompanied by forceful gusts of wind. If you're not careful, you could be thrown off your feet or struck at any moment. ");
+			outputText("Small vortexes swirl within the room, spawning at random. They briefly clear a visible path for you ahead, but you remain careful as you push forward.");
 			dungeons.setDungeonButtonsRD(roomB24, null, roomB22, null);
 		}
 		public function roomB24():void {
 			dungeonLoc = 127;
 			clearOutput();
 			if (player.statusEffectv3(StatusEffects.RivereDungeonIB) == 0) {
-				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large gust of wind rushing towards you!  Actualy it's looking very large one compared to ones you meet earlier.  Realizing it's been spotted, the elemental's body reform into a humanoid form.  ");
-				outputText("As if to confirm your supsicions about unusual large mass it morph into nine feet tall sylph shape with clear masculine features.  'His' eyes focus at you and moment both of you gazes meet 'he' let out roar and attacks!");
+				outputText("A loud howl of wind is heard not far, you turn your attention to the source of the noise as you notice a tornado spinning itself toward you. The tornado is twice the size of the miniature vortexes you've seen earlier. As it draws closer, it quickly shifts into a humanoid form.  ");
+				outputText("As the harsh winds die out, the sylph takes a masculine form.  Its eyes focus upon you before it darts toward you. You brace yourself for combat.");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new AirElemental(), true);
 			}
 			else encountersRuletteBAir();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("The entire upper half of this room is covered in thick clouds, not unlike the black thunderclouds back home in Ignam. Bolts of electricity frequently strike, from the ceiling to the floor, lighting up a surprisingly small area and sending every hair on your body on end. Gusts of air blast at random, forcing you to hunker down or be thrown across the room like a ragdoll. ");
-			outputText("Seemingly at random, a whirlwind will form in the room, scattering the clouds each way. For a short while, you can see through the space these whirlwinds come through, but only for a few seconds. Covering your eyes with one arm, you push forward.");
+			outputText("A dense blanket of dark clouds cover the ceiling of the room, not unlike the storms you remember back home in Ignam. Thunder and lightning crash throughout the room at random, accompanied by forceful gusts of wind. If you're not careful, you could be thrown off your feet or struck at any moment. ");
+			outputText("Small vortexes swirl within the room, spawning at random. They briefly clear a visible path for you ahead, but you remain careful as you push forward.");
 			dungeons.setDungeonButtonsRD(null, roomB23, null, null);
 		}
 		public function roomB25():void {
@@ -1033,8 +1033,8 @@ import classes.StatusEffects;
 			encountersRuletteBEarth();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("You step into an area that reminds you, almost violently, of the desert storms. Your body is buffeted by sand, whirled about by an odd wind emanating from the walls and floor. You frequently have to close your eyes to stop the sand from blinding you, and the sounds of a sandstorm overwhelm any other sounds you could have heard. ");
-			outputText("The odd fog in this dungeon remains, tossed about by this raging maelstrom of sand, but this almost makes it worse, leaving you unable to easily tell where the next barrage of sand will come from. You hunker down, squinting your [eyes] and soldiering on.");
+			outputText("As you tread through the sandy, desert-like area, you're constantly buffeted by swirling sand. Dust devils whirl about from the strange wind emitting from the walls. Your senses are shut as you try to shield your eyes from the rough sand as the howling sandstorm is deafening to the point you can hardly hear anything else. ");
+			outputText("The eerie fog of the dungeon remains, tossed about by the raging fury of disturbed sand. Treading is nearly impossible, but you persevere, mindful of each step you take.");
 			dungeons.setDungeonButtonsRD(null, roomB26, null, roomB03);
 		}
 		public function roomB26():void {
@@ -1043,24 +1043,24 @@ import classes.StatusEffects;
 			encountersRuletteBEarth();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("You step into an area that reminds you, almost violently, of the desert storms. Your body is buffeted by sand, whirled about by an odd wind emanating from the walls and floor. You frequently have to close your eyes to stop the sand from blinding you, and the sounds of a sandstorm overwhelm any other sounds you could have heard. ");
-			outputText("The odd fog in this dungeon remains, tossed about by this raging maelstrom of sand, but this almost makes it worse, leaving you unable to easily tell where the next barrage of sand will come from. You hunker down, squinting your [eyes] and soldiering on.");
+			outputText("As you tread through the sandy, desert-like area, you're constantly buffeted by swirling sand. Dust devils whirl about from the strange wind emitting from the walls. Your senses are shut as you try to shield your eyes from the rough sand as the howling sandstorm is deafening to the point you can hardly hear anything else. ");
+			outputText("The eerie fog of the dungeon remains, tossed about by the raging fury of disturbed sand. Treading is nearly impossible, but you persevere, mindful of each step you take.");
 			dungeons.setDungeonButtonsRD(roomB25, null, null, roomB27);
 		}
 		public function roomB27():void {
 			dungeonLoc = 130;
 			clearOutput();
 			if (player.statusEffectv4(StatusEffects.RivereDungeonIB) == 0) {
-				outputText("A soft shuffling sound catches your attention and you turn around, spotting large mass of earth rushing towards you!  Actualy it's looking very large one compared to ones you meet earlier.  Realizing it's been spotted, the elemental's body start reforming into a humanoid form.  ");
-				outputText("As if to confirm your supsicions about unusual large mass it morph into nine feet tall golem shape with clear femine features.  'Her' eyes focus at you and moment both of you gazes meet 'she' let out roar and attacks!");
+				outputText("An avalanche of rocks rumbles the ground. You glance over and notice a series of stones rolling over each other toward your direction.  It's much larger than the usual elementals.  As it approaches, the stone quickly take shape of a humanoid figure. ");
+				outputText("The rocks roll over, taking on a feminine form. Its eyes focus before it raises a fist. You brace yourself, it looks like the fight is on!");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new EarthElemental(), true);
 			}
 			else encountersRuletteBEarth();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Underground Passage</b>\n");
-			outputText("You step into an area that reminds you, almost violently, of the desert storms. Your body is buffeted by sand, whirled about by an odd wind emanating from the walls and floor. You frequently have to close your eyes to stop the sand from blinding you, and the sounds of a sandstorm overwhelm any other sounds you could have heard. ");
-			outputText("The odd fog in this dungeon remains, tossed about by this raging maelstrom of sand, but this almost makes it worse, leaving you unable to easily tell where the next barrage of sand will come from. You hunker down, squinting your [eyes] and soldiering on.");
+			outputText("As you tread through the sandy, desert-like area, you're constantly buffeted by swirling sand. Dust devils whirl about from the strange wind emitting from the walls. Your senses are shut as you try to shield your eyes from the rough sand as the howling sandstorm is deafening to the point you can hardly hear anything else. ");
+			outputText("The eerie fog of the dungeon remains, tossed about by the raging fury of disturbed sand. Treading is nearly impossible, but you persevere, mindful of each step you take.");
 			dungeons.setDungeonButtonsRD(null, null, roomB26, null);
 		}
 		/*
@@ -1077,17 +1077,17 @@ import classes.StatusEffects;
 		*/
 		private function tresureRoom1A():void {
 			clearOutput();
-			outputText("You notice a small glimmer in the distance and approach it. it is revealed to be a wall covered with gemstones. Neisa is quick to notice it too.\n\n");
-			outputText("\"<i>Heya [name] this right here looks to be my pay. You can thank up Marae that I brought a pair of pickaxe just in case, now lets dig.</i>\"\n\n");
-			outputText("The pair of you proceed to extract the precious gemstones from the wall, Neisa pocketing up the loot.\n\n");
+			outputText("You notice a faint glimmer in the distance and approach it. The glimmer reveals itself to be embedded in a wall covered with gemstones. Neisa is quick to notice it, too.\n\n");
+			outputText("\"<i>Heya, [name] this right here looks to be my pay. You can thank up Marae that I brought a pair of pickaxes just in case, now lets get digging.</i>\"\n\n");
+			outputText("The two of you proceed to carefully extract the precious gemstones from the wall as Nessa pockets her payment.\n\n");
 			flags[kFLAGS.NEISA_AFFECTION] = 5;
 			doNext(roomA03);
 		}
 		private function tresureRoom2A():void {
 			clearOutput();
-			outputText("As you move around you run into what appears to be a pile of loot, likely the hoard and gear of some adventurer before he was taken by the demons or worse. Having seen the horrors of Mareth firsthand you know the risks of adventuring. Neisa is quick to acknowledge the loot as well.\n\n");
-			outputText("\"<i>Aye I guess one person's misfortune is our fortune. Help me put these into a bag this should help cover for my pay.</i>\"\n\n");
-			outputText("Once done the both of you resume moving.\n\n");
+			outputText("As you tread within the dungeon, you run into what appears to be a pile of loot. Is it a trap? Perhaps more likely it's the hoard and gear of some adventurer before he was taken by demons... or worse. Having seen the horrors of Mareth firsthand, you know the risks of adventuring. Neisa is quick to acknowledge the loot as well.\n\n");
+			outputText("\"<i>Aye, I guess one person's misfortune is our benefit. Help me put these into a bag. This should help cover for my pay.</i>\"\n\n");
+			outputText("After a little corpse pilfering, the two of you continue treading.\n\n");
 			flags[kFLAGS.NEISA_AFFECTION] = 10;
 			doNext(roomA10);
 		}
