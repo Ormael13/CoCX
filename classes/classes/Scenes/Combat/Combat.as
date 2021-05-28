@@ -13100,7 +13100,7 @@ public class Combat extends BaseContent {
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		outputText("You focus for a moment gathering all you wrath into tips of your index fingers. Then letting out loud yell you poke with all of them at once toward " + monster.a + monster.short + ". Six large finger shaped constructs materialize before you and follows your finger moves strikes " + monster.a + monster.short + ". ");
+		outputText("You focus the force of your wrath, pushing the energy to the tip of your fingers. With a deep breath, you release the stored energy, thrusting it upon " + monster.a + monster.short + ". Six finger-shaped constructs materialize before you as they fly toward " + monster.a + monster.short + ". ");
         doDamage(damage, true, true);
         doDamage(damage, true, true);
         doDamage(damage, true, true);
