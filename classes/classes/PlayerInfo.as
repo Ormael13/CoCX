@@ -500,6 +500,7 @@ public class PlayerInfo extends BaseContent {
 		killCountStats += "<b>Hellhounds:</b> " + flags[kFLAGS.HELLHOUNDS_KILLED] + "\n";
 		killCountStats += "<b>Imps:</b> " + flags[kFLAGS.IMPS_KILLED] + "\n";
 		killCountStats += "<b>Minotaurs:</b> " + flags[kFLAGS.MINOTAURS_KILLED] + "\n";
+		killCountStats += "<b>True Demons:</b> Soon\n";//" + flags[kFLAGS.IMPS_KILLED] + "
 
 		if (killCountStats != "")
 			outputText("\n<b><u>Kill Counters</u></b>\n" + killCountStats);

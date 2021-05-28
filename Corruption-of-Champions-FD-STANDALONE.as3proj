@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\Desktop\CoC_Xianxia_0.8r2.swf" />
+    <movie path="..\..\Desktop\CoC_Xianxia_0.8s.swf" />
     <movie fps="24" />
     <movie width="1000" />
     <movie height="800" />
