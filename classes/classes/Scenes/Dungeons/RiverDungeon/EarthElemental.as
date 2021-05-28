@@ -14,7 +14,7 @@ import classes.Scenes.SceneLib;
 public class EarthElemental extends Monster
 	{
 		public function baseElementalAttack():void {
-			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Golem":"Earth elemental")+" solidify it fist and send punch toward you.");
+			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Golem":"Earth elemental")+" solidifies its fist within hardened clay before jabbing at you.");
 			var damage:Number = inte + wis;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 3);
 			damage = Math.round(damage);
@@ -23,13 +23,13 @@ public class EarthElemental extends Monster
 			else
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" It hit you square in the chest. ");
+				outputText(" It hits you square in the chest. ");
 				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		
 		public function fluffyOfPunches():void {
-			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Golem":"Earth elemental")+" solidify it fists and goes wild at you sending punches.");
+			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Golem":"Earth elemental")+" wraps its fists within several jagged rocks before launching a flurry of jabs against you.");
 			var damage:Number = inte + wis;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 2);
 			damage = Math.round(damage);
@@ -38,21 +38,21 @@ public class EarthElemental extends Monster
 			else
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" They hits you all over the body. ");
+				outputText(" The strikes connect, hitting you directly in the chest. ");
 				damage = player.takePhysDamage(damage, true);
 				damage = player.takePhysDamage(damage, true);
 			}
 		}
 		
 		public function subbossSpecial():void {
-			outputText("Golem solidify ambient elemental energy into many sharp looking rocks and with a wave of it hands sends toward you.");
+			outputText("The golem unearths the ground beneath itself, reshaping the stone into razor-sharp rocks. It thrusts its arms down, sending the rocks toward you.");
 			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
 			else {
 				var damage:Number = inte + wis;
 				damage *= 5;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
-				outputText(" They hits you all over the body. ");
+				outputText(" The razor-like rocks cut into you. ");
 				damage = player.takePhysDamage(damage, true);
 				damage = player.takePhysDamage(damage, true);
 				damage = player.takePhysDamage(damage, true);
@@ -112,7 +112,7 @@ public class EarthElemental extends Monster
 			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 0) {
 				this.short = "earth elemental";
 				this.imageName = "earth elemental";
-				this.long = "You're currently fighting earth elemental. It's four feet tall, it body covered with earth and it's using bare fists to fight.";
+				this.long = "You're currently fighting earth elemental. It's a four foot tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 48;
 				initStrTouSpeInte(10, 40, 40, 40);
 				initWisLibSensCor(40, 10, 20, 50);
@@ -126,7 +126,7 @@ public class EarthElemental extends Monster
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 1) {
 				this.short = "earth elemental";
 				this.imageName = "earth elemental";
-				this.long = "You're currently fighting earth elemental. It's four feet and three inches tall, it body covered with earth and it's using bare fists to fight.";
+				this.long = "You're currently fighting earth elemental. It's a four foot, three inch tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 51;
 				initStrTouSpeInte(12, 22, 42, 50);
 				initWisLibSensCor(50, 10, 25, 50);
@@ -140,7 +140,7 @@ public class EarthElemental extends Monster
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 2) {
 				this.short = "earth elemental";
 				this.imageName = "earth elemental";
-				this.long = "You're currently fighting earth elemental. It's four and half feet tall, it body covered with earth and it's using bare fists to fight.";
+				this.long = "You're currently fighting earth elemental. It's a four and a half foot tall creature of made of rocks, currently using its bare fists to fight.";
 				this.tallness = 54;
 				initStrTouSpeInte(14, 44, 44, 60);
 				initWisLibSensCor(60, 10, 30, 50);
@@ -154,7 +154,7 @@ public class EarthElemental extends Monster
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 3) {
 				this.short = "earth elemental";
 				this.imageName = "earth elemental";
-				this.long = "You're currently fighting earth elemental. It's four feet and nine iches tall, it body covered with earth and it's using bare fists to fight.";
+				this.long = "You're currently fighting earth elemental. It's a four foot, nine inch tall creature of made of rocks, currently using its bare fists to fight..";
 				this.tallness = 57;
 				initStrTouSpeInte(16, 46, 46, 70);
 				initWisLibSensCor(70, 10, 35, 50);
@@ -168,7 +168,7 @@ public class EarthElemental extends Monster
 			else if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 				this.short = "golem";
 				this.imageName = "earth golem";
-				this.long = "You're currently fighting 'female' golem. It's nine feet tall, it body covered with earth and it's using bare fists to fight.";
+				this.long = "You're currently fighting 'female' golem. It's a nine foot tall creature of made of rocks, currently using its bare fists to fight..";
 				this.tallness = 108;
 				initStrTouSpeInte(24, 69, 69, 105);
 				initWisLibSensCor(105, 15, 55, 50);
