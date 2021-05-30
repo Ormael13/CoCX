@@ -14862,7 +14862,7 @@ public final class Mutations extends MutationsHelper {
                 else {
                     //-If no horns, grow a pair
                     outputText("\n\nYou writhe in pain as two bony extrusions begin to push out of the side of your head. As a skull-splitting headache wracks through you, in an instant, the pain subsides as you feel two large, scale-colored horns on your head. They are as sensitive as they are sturdy.\n\nA quick look at a puddle also reveals they radiate several specks of bioluminescent light along the horns accompanied by red tips. <b>You have about twelve inches of sea dragon-like horns!</b>");
-                    CoC.instance.mutations.setHornType(Horns.DRACONIC_X2, 4);
+                    CoC.instance.mutations.setHornType(Horns.SEADRAGON, 4);
                     changes++;
                 }
         }
@@ -14983,7 +14983,15 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //tail
-        if (player.arms.type == Arms.ORCA && player.tailType != Tail.ORCA && changes < changeLimit && rand(4) == 0) {
+        if (player.arms.type == Arms.ORCA && player.tailType != Tail.ORCA && type == 0 && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\nA large bump starts to grow out of your " + assDescript() + ", making you groan as your spine lengthens for this whole new appendage to form. You finally grow a tail black as midnight with a white underside and a smaller fin closer to your body, likely for hydrodynamism sake. ");
+            outputText("You swing your tail a few times, battering the ground with it and smile as you rush to the stream to take a dip. With the help of your mighty tail you easily reach such a high swim speed you even manage to jump several meters out of the water, laughing with delight at the trill of this aquatic experience. ");
+            outputText("<b>You're going to have a lot of fun swimming with your new Orca tail.</b>");
+            setTailType(Tail.ORCA);
+            changes++;
+        }
+        //dragon tail
+        if (player.arms.type == Arms.SEADRAGON && player.tailType != Tail.ORCA && type == 1 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nA large bump starts to grow out of your " + assDescript() + ", making you groan as your spine lengthens for this whole new appendage to form. You finally grow a tail black as midnight with a white underside and a smaller fin closer to your body, likely for hydrodynamism sake. ");
             outputText("You swing your tail a few times, battering the ground with it and smile as you rush to the stream to take a dip. With the help of your mighty tail you easily reach such a high swim speed you even manage to jump several meters out of the water, laughing with delight at the trill of this aquatic experience. ");
             outputText("<b>You're going to have a lot of fun swimming with your new Orca tail.</b>");

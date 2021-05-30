@@ -2103,8 +2103,11 @@
                     <case values="Skin.PLAIN,Skin.AQUA_RUBBER_LIKE,Skin.AQUA_SCALES">
                         <set var="skinb">human</set>
                         <set var="skinx">human</set>
-                        <if test="skin.base.pattern==Pattern.ORCA_UNDERBODY">
+                        <if test="skin.base.pattern==Pattern.ORCA_UNDERBODY or skin.base.pattern==Pattern.PATTERN_SEADRAGON_UNDERBODY">
                             <set var="skinx">orca</set>
+							<if test="skin.base.pattern==Pattern.PATTERN_SEADRAGON_UNDERBODY">
+								<show part="torso_pattern/Bbioluminescence"/>
+							</if>
                         </if>
                     </case>
                     <case values="Skin.FUR">
