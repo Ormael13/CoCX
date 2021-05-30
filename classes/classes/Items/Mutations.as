@@ -14906,9 +14906,9 @@ public final class Mutations extends MutationsHelper {
         }
 
         var ColorList:Array = [
-            {color: 'aphotic blue', underbellycolor: 'pure white'},
-            {color: 'aphotic blue', underbellycolor: 'snow white'},
-            {color: 'aphotic blue', underbellycolor: 'light blue'},
+            {color: 'aphotic blue-black', underbellycolor: 'pure white'},
+            {color: 'aphotic blue-black', underbellycolor: 'snow white'},
+            {color: 'aphotic blue-black', underbellycolor: 'light blue'},
             {color: 'silky', underbellycolor: 'pure white'},
             {color: 'silky', underbellycolor: 'snow white'},
             {color: 'silky', underbellycolor: 'light blue'},

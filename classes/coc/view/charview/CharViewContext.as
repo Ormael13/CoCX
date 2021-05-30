@@ -237,6 +237,7 @@ class Pattern {
 	public static const NONE:int                    = Skin.PATTERN_NONE;
 	public static const MAGICAL_TATTOO:int          = Skin.PATTERN_MAGICAL_TATTOO;
 	public static const ORCA_UNDERBODY:int          = Skin.PATTERN_ORCA_UNDERBODY;
+	public static const SEADRAGON_UNDERBODY:int     = Skin.PATTERN_SEADRAGON_UNDERBODY;
 	public static const BEE_STRIPES:int             = Skin.PATTERN_BEE_STRIPES;
 	public static const TIGER_STRIPES:int           = Skin.PATTERN_TIGER_STRIPES;
 	public static const BATTLE_TATTOO:int           = Skin.PATTERN_BATTLE_TATTOO;

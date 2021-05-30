@@ -364,6 +364,19 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
+		if (player.hasPerk(PerkLib.DragonWaterBreath)) {
+			bd = buttons.add("Dragon(Fire)", dragonWaterBreath);
+			if (player.hasPerk(PerkLib.DraconicLungs) || player.hasPerk(PerkLib.DrakeLungsFinalForm)) {
+				bd.hint("Unleash water from your mouth. This can only be done once per fight. Massively increase lightning damage taken by the target\n", "Dragon Water Breath");
+			} else {
+				bd.hint("Unleash water from your mouth. This can only be done once a day. Massively increase lightning damage taken by the target \n", "Dragon Water Breath");
+			}
+			bd.requireFatigue(spellCost(50));
+			//Not Ready Yet:
+			if(player.hasStatusEffect(StatusEffects.DragonWaterBreathCooldown)) {
+				bd.disable("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
+			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		}
 		if (player.hasPerk(PerkLib.DraconicLungsFinalForm) || (player.dragonScore() >= 16 && player.hasPerk(PerkLib.DraconicLungs))) {
 			bd = buttons.add("TrueDragonBreath", trueDragonBreath);
 			if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) {
@@ -2332,6 +2345,101 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("too resolute to be stunned by your attack.</b> ");
 			}
 			doDarknessDamage(damage, true, true);
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+		{
+			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			enemyAI();
+		}
+		else combatRoundOver();
+	}
+
+	public function dragonWaterBreath():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		fatigue(50, USEFATG_MAGIC_NOBM);
+		player.createStatusEffect(StatusEffects.DragonDarknessBreathCooldown,0,0,0,0);
+		var damage:Number = 0;
+		var damult:Number = 1;
+		damage += scalingBonusIntelligence();
+		damage += scalingBonusWisdom();
+		damage *= 1 + (rand(51) / 100);
+		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
+			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
+			damage *= 1.5;
+		}
+		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 3;
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 6;
+		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 3;
+		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 3;
+		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 3;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage *= damult;
+		damage = Math.round(damage);
+		//Shell
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+			enemyAI();
+			return;
+		}
+		//Amily!
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
+			enemyAI();
+			return;
+		}
+		if (monster is LivingStatue)
+		{
+			outputText("The water courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of dark glow.");
+			enemyAI();
+			return;
+		}
+		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  " + monster.capitalA + monster.short + " does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.<b>Your opponent is now wet with water!</b>");
+		//Miss:
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+			outputText("  Despite the heavy impact caused by your roar, " + monster.a + monster.short + " manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+		}
+		//Special enemy avoidances
+		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+			outputText("Vala beats her wings with surprising strength, blowing the water breath back at you! ");
+			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
+				outputText("You dive out of the way and evade it!");
+			}
+			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
+				outputText("You use your flexibility to barely fold your body out of the way!");
+			}
+			//Determine if blocked!
+			else if (combatBlock(true)) {
+				outputText("You manage to block your own water with your [shield]!");
+			}
+			else {
+				damage = player.takeMagicDamage(damage);
+				outputText("Your own water smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			}
+			outputText("\n\n");
+		}
+		else {
+			if(!monster.hasPerk(PerkLib.Resolute)) {
+				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back. ");
+				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+			}
+			else {
+				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+				if(!monster.plural) outputText("is ");
+				else outputText("are");
+				outputText("too resolute to be stunned by your attack.</b> ");
+			}
+			doDamage(damage, true, true);
+			monster.createStatusEffect(StatusEffects.DragonWaterBreath,0,0,0,0);
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);

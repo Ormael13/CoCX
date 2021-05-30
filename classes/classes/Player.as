@@ -12940,6 +12940,9 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.DragonLightningBreathCooldown) && (hasPerk(PerkLib.DraconicLungs) || hasPerk(PerkLib.DrakeLungsFinalForm))) {
 				removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 			}
+			if(hasStatusEffect(StatusEffects.DragonWaterBreathCooldown) && (hasPerk(PerkLib.DraconicLungs) || hasPerk(PerkLib.DrakeLungsFinalForm))) {
+				removeStatusEffect(StatusEffects.DragonWaterBreathCooldown);
+			}
 			if(hasStatusEffect(StatusEffects.HeroBane)) {
 				removeStatusEffect(StatusEffects.HeroBane);
 			}
