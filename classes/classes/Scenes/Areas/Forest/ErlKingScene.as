@@ -984,7 +984,7 @@ public class ErlKingScene extends BaseContent
 			if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
-			if (CoC.instance.mutations.blockingBodyTransformations()) changeLimit = 0;
+			if (player.blockingBodyTransformations()) changeLimit = 0;
 			// Main TFs
 			//------------
 			//Gain deer ears

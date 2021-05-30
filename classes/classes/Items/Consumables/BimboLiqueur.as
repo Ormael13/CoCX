@@ -17,14 +17,14 @@ public class BimboLiqueur extends Consumable {
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.findPerk(PerkLib.FutaForm) < 0 && game.player.findPerk(PerkLib.TransformationImmunity) < 0 && game.player.findPerk(PerkLib.Undeath) < 0 && game.player.findPerk(PerkLib.WendigoCurse) < 0) return true;
+			if (!player.blockingBodyTransformations() || !game.player.hasPerk(PerkLib.FutaForm)) return true;
 			outputText("Ugh.  This stuff is so, like... last year.  Maybe you can find someone else to feed it to?\n\n");
-			if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni() && (game.mutations.blockingBodyTransformations())) mutations.DrunkenPowerEmpower();
+			if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni() && (player.blockingBodyTransformations())) mutations.DrunkenPowerEmpower();
 			return false;
 		}
 
 		override public function useItem():Boolean {
-			if (game.player.findPerk(PerkLib.BroBody) >= 0) {
+			if (game.player.hasPerk(PerkLib.BroBody)) {
 				outputText("You wince as the stuff hits your stomach, already feeling the insidious effects beginning to take hold.  A lengthy belch escapes your lips as your stomach gurgles, and you giggle abashedly to yourself.");
 				if (game.player.tallness < 77) {
 					outputText(" ...Did the ground just get farther away?  You glance down and realize, you're growing!  Like a sped-up flower sprout, you keep on getting taller until finally stopping around... six and a half feet, you assume.  Huh.  You didn't expect that to happen!");
@@ -161,11 +161,11 @@ public class BimboLiqueur extends Consumable {
 					}
 					outputText("\n\n");
 				}
-				if (game.player.findPerk(PerkLib.BimboBody) < 0) {
+				if (!game.player.hasPerk(PerkLib.BimboBody)) {
 					outputText("<b>(Bimbo Body - Perk Gained!)</b>\n");
 					game.player.createPerk(PerkLib.BimboBody, 0, 0, 0, 0);
 				}
-				if (game.player.findPerk(PerkLib.BimboBrains) < 0) {
+				if (!game.player.hasPerk(PerkLib.BimboBrains)) {
 					outputText("<b>(Bimbo Brains - Perk Gained!)</b>\n");//int to 20.  max int 50)
 					game.player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
 				}

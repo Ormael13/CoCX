@@ -2074,6 +2074,7 @@ public class Appearance extends Utils
 					[Wings.FEATHERED_LARGE, "large, feathered"],
 					[Wings.DRACONIC_SMALL, "small, draconic"],
 					[Wings.DRACONIC_LARGE, "large, draconic"],
+					[Wings.SEADRAGON, "large, aquatic"],
 					[Wings.GIANT_DRAGONFLY, "giant dragonfly"],
 					[Wings.BAT_LIKE_LARGE_2, "two large pairs of bat-like"],
 					[Wings.DRACONIC_HUGE, "large, majestic draconic"],

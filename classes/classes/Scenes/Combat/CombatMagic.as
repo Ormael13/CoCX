@@ -1655,6 +1655,37 @@ public class CombatMagic extends BaseCombatContent {
 			}
 		}
 	}
+
+	//THIS FEATURE GOVERS EVERY POST CAST EFFECT YOUR SPELLS MAY CAUSE
+	public function MagicAddonEffect(numberOfProcs:Number = 1):void {
+		if (player.hasStatusEffect(StatusEffects.Venomancy)) {
+			if (player.tailVenom >= 25) {
+				var injections:Number = 0;
+				while (player.tailVenom >= 25 && injections < numberOfProcs) {
+					var damageB:Number = 35 + rand(player.lib / 10);
+					var poisonScaling:Number = 1;
+					poisonScaling += player.lib/100;
+					poisonScaling += player.tou/100;
+					if (player.level < 10) damageB += 20 + (player.level * 3);
+					else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
+					else damageB += 80;
+					damageB *= 0.2;
+					damageB *= 1+(poisonScaling/10);
+					monster.teased(monster.lustVuln * damageB, false);
+					monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
+					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+					player.tailVenom -= 25;
+					injections++;
+				}
+				outputText(" Your venom is forcefully injected ");
+				if (injections > 1) outputText(""+injections+" times");
+				outputText(" in " + monster.a + monster.short + " through your magic!");
+			}
+		}
+	}
 	
 	public function spellBloodMissiles():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -1687,6 +1718,7 @@ public class CombatMagic extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
+		MagicAddonEffect(5);
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -1729,6 +1761,7 @@ public class CombatMagic extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		outputText(" damage.");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -1806,6 +1839,7 @@ public class CombatMagic extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		outputText(" damage.");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -1929,8 +1963,9 @@ public class CombatMagic extends BaseCombatContent {
 			lustDmg *= 1.75;
 		}
 		lustDmg = Math.round(lustDmg);
-		monster.teased(lustDmg);
+		monster.teased(lustDmg, false);
 		if (crit) outputText(" <b>Critical!</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -2282,6 +2317,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -2398,6 +2434,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -2484,6 +2521,7 @@ public class CombatMagic extends BaseCombatContent {
 		monster.teased(lustDmg);
 		outputText(" damage.");
 		if (crit) outputText(" <b>Critical!</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -2600,6 +2638,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -2714,6 +2753,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -2811,6 +2851,7 @@ public class CombatMagic extends BaseCombatContent {
 			monster.HP -= lifesiphon;
 			HPChange(lifesiphon, false);
 			player.createStatusEffect(StatusEffects.LifeSiphon, 15, lifesiphon, 0, 0);
+			MagicAddonEffect();
 		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -2860,6 +2901,7 @@ public class CombatMagic extends BaseCombatContent {
 			consumingdarkness = Math.round(consumingdarkness);
 			monster.createStatusEffect(StatusEffects.ConsumingDarkness, 7, consumingdarkness, 0, 0);
 			doDarknessDamage(consumingdarkness, true, true);
+			MagicAddonEffect();
 		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -2916,6 +2958,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (lustDmg < 1) lustDmg = 1;
 			monster.teased(lustDmg, false);
 			dynStats("lus", 10);
+			MagicAddonEffect();
 		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -2966,6 +3009,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) CurseOfWeepingMod = Math.round(CurseOfWeepingMod * 1.2);
 		monster.createStatusEffect(StatusEffects.CurseOfWeeping, 6, CurseOfWeepingMod, 0, 0);
 		doDamage(CurseOfWeepingMod, true, true);
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
@@ -3093,6 +3137,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
@@ -3164,6 +3209,7 @@ public class CombatMagic extends BaseCombatContent {
 			//}
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" " + monster.a + monster.short + " is encased in a thick layer of ice.\n\n");
+			MagicAddonEffect();
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 			if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
 			monster.createStatusEffect(StatusEffects.FrozenSolid,5,0,0,0);
@@ -3322,6 +3368,7 @@ public class CombatMagic extends BaseCombatContent {
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
@@ -3393,6 +3440,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" " + monster.capitalA + monster.short + " reels from the impact, trying to recover from this devastating assault as a meteor crash in the area.\n\n");
+			MagicAddonEffect();
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 			damage *= 10;
 			if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
@@ -3497,6 +3545,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText(", gorging on its owner’s life force to replenish your own. Soon enough the spell is over and your shadow returns to you, leaving you better for the wear. <b>(<font color=\"#800000\">" + nosferatu + "</font>)</b>");
 			monster.HP -= nosferatu;
 			HPChange(nosferatu,false);
+			MagicAddonEffect();
 		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -3768,6 +3817,7 @@ public class CombatMagic extends BaseCombatContent {
 				if(monster.plural && monster.short != "imp horde") outputText("are blinded!</b>");
 				else outputText("is blinded!</b>");
 				monster.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20,0,0,0);
+				MagicAddonEffect();
                 if(monster is Diva){(monster as Diva).handlePlayerSpell("blind");}
 				if(monster.short == "Isabella")
 					if (SceneLib.isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.");
@@ -3909,6 +3959,7 @@ public class CombatMagic extends BaseCombatContent {
 		else doFireDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -3970,6 +4021,7 @@ public class CombatMagic extends BaseCombatContent {
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -4070,6 +4122,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -4187,6 +4240,7 @@ public class CombatMagic extends BaseCombatContent {
 		else doFireDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -4250,6 +4304,7 @@ public class CombatMagic extends BaseCombatContent {
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -4349,6 +4404,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);

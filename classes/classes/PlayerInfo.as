@@ -77,14 +77,14 @@ public class PlayerInfo extends BaseContent {
 
 		bodyStats += "<b>Pregnancy Speed Multiplier:</b> ";
 		var preg:Number = 1;
-		if (player.findPerk(PerkLib.Diapause) >= 0)
+		if (player.hasPerk(PerkLib.Diapause))
 			bodyStats += "? (Variable due to Diapause)\n";
 		else {
-			if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) preg++;
-			if (player.findPerk(PerkLib.BroodMother) >= 0) preg++;
-			if (player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) preg++;
-			if (player.findPerk(PerkLib.MagicalFertility) >= 0) preg++;
-			if (player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) preg++;
+			if (player.hasPerk(PerkLib.MaraesGiftFertility)) preg++;
+			if (player.hasPerk(PerkLib.BroodMother)) preg++;
+			if (player.hasPerk(PerkLib.FerasBoonBreedingBitch)) preg++;
+			if (player.hasPerk(PerkLib.MagicalFertility)) preg++;
+			if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) preg++;
 			bodyStats += preg + "\n";
 		}
 
@@ -108,14 +108,14 @@ public class PlayerInfo extends BaseContent {
 		if (player.vaginas.length > 0)
 			bodyStats += "<b>Vaginal Capacity:</b> " + Math.round(player.vaginalCapacity()) + "\n" + "<b>Vaginal Looseness:</b> " + Math.round(player.looseness()) + "\n";
 
-		if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 || player.findPerk(PerkLib.BeeOvipositor) >= 0)
+		if (player.hasPerk(PerkLib.SpiderOvipositor) || player.hasPerk(PerkLib.BeeOvipositor))
 			bodyStats += "<b>Ovipositor Total Egg Count: " + player.eggs() + "\nOvipositor Fertilized Egg Count: " + player.fertilizedEggs() + "</b>\n";
 
 		if (player.hasStatusEffect(StatusEffects.SlimeCraving)) {
 			if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18)
 				bodyStats += "<b>Slime Craving:</b> Active! You are currently losing strength and speed.  You should find fluids.\n";
 			else {
-				if (player.findPerk(PerkLib.SlimeCore) >= 0 || player.findPerk(PerkLib.DarkSlimeCore) >= 0)
+				if (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore))
 					bodyStats += "<b>Slime Stored:</b> " + ((17 - player.statusEffectv1(StatusEffects.SlimeCraving)) * 2) + " hours until you start losing strength.\n";
 				else
 					bodyStats += "<b>Slime Stored:</b> " + (17 - player.statusEffectv1(StatusEffects.SlimeCraving)) + " hours until you start losing strength.\n";
@@ -227,9 +227,9 @@ public class PlayerInfo extends BaseContent {
 		//Marble Milk Addition
 		if (player.statusEffectv3(StatusEffects.Marble) > 0) {
 			addictStats += "<b>Marble Milk:</b> ";
-			if (player.findPerk(PerkLib.MarbleResistant) < 0 && player.findPerk(PerkLib.MarblesMilk) < 0)
+			if (!player.hasPerk(PerkLib.MarbleResistant) && !player.hasPerk(PerkLib.MarblesMilk))
 				addictStats += Math.round(player.statusEffectv2(StatusEffects.Marble)) + "%\n";
-			else if (player.findPerk(PerkLib.MarbleResistant) >= 0)
+			else if (player.hasPerk(PerkLib.MarbleResistant))
 				addictStats += "0%\n";
 			else
 				addictStats += "100%\n";
@@ -241,10 +241,10 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		// Mino Cum Addiction
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || player.findPerk(PerkLib.MinotaurCumResistance) >= 0 || player.findPerk(PerkLib.ManticoreCumAddict) >= 0) {
-			if (player.findPerk(PerkLib.MinotaurCumAddict) < 0)
+		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.hasPerk(PerkLib.MinotaurCumAddict) || player.hasPerk(PerkLib.MinotaurCumResistance) || player.hasPerk(PerkLib.ManticoreCumAddict)) {
+			if (!player.hasPerk(PerkLib.MinotaurCumAddict))
 				addictStats += "<b>Minotaur Cum:</b> " + Math.round(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] * 10) / 10 + "%\n";
-			else if (player.findPerk(PerkLib.MinotaurCumResistance) >= 0 || player.findPerk(PerkLib.ManticoreCumAddict) >= 0)
+			else if (player.hasPerk(PerkLib.MinotaurCumResistance) || player.hasPerk(PerkLib.ManticoreCumAddict))
 				addictStats += "<b>Minotaur Cum:</b> 0% (Immune)\n";
 			else
 				addictStats += "<b>Minotaur Cum:</b> 100+%\n";
@@ -400,15 +400,15 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Black Heals Cost:</b> " + combat.healCostBlack(100) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Accuracy (1st melee attack):</b> " + (combat.meleeAccuracy() / 2) + "%\n";
-		if (player.findPerk(PerkLib.DoubleAttackSmall) >= 0 || player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0) combatStats += "<b>Accuracy (2nd melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty())) + "%\n";
-		if (player.findPerk(PerkLib.TripleAttackSmall) >= 0 || player.findPerk(PerkLib.TripleAttack) >= 0 || player.findPerk(PerkLib.TripleAttackLarge) >= 0) combatStats += "<b>Accuracy (3rd melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 2)) + "%\n";
-		if (player.findPerk(PerkLib.QuadrupleAttackSmall) >= 0 || player.findPerk(PerkLib.QuadrupleAttack) >= 0) combatStats += "<b>Accuracy (4th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 3)) + "%\n";
-		if (player.findPerk(PerkLib.PentaAttackSmall) >= 0 || player.findPerk(PerkLib.PentaAttack) >= 0) combatStats += "<b>Accuracy (5th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 4)) + "%\n";
-		if (player.findPerk(PerkLib.HexaAttackSmall) >= 0 || player.findPerk(PerkLib.HexaAttack) >= 0) combatStats += "<b>Accuracy (6th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 5)) + "%\n";
-		if (player.findPerk(PerkLib.HectaAttackSmall) >= 0) combatStats += "<b>Accuracy (7th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 6)) + "%\n";
-		if (player.findPerk(PerkLib.OctaAttackSmall) >= 0) combatStats += "<b>Accuracy (8th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 7)) + "%\n";
-		if (player.findPerk(PerkLib.NonaAttackSmall) >= 0) combatStats += "<b>Accuracy (9th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 8)) + "%\n";
-		if (player.findPerk(PerkLib.DecaAttackSmall) >= 0) combatStats += "<b>Accuracy (10th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 9)) + "%\n";
+		if (player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge)) combatStats += "<b>Accuracy (2nd melee attack):</b> " + ((combat.meleeAccuracy() / 2) - (combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty())) + "%\n";
+		if (player.hasPerk(PerkLib.TripleAttackSmall) || player.hasPerk(PerkLib.TripleAttack) || player.hasPerk(PerkLib.TripleAttackLarge)) combatStats += "<b>Accuracy (3rd melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 2)) + "%\n";
+		if (player.hasPerk(PerkLib.QuadrupleAttackSmall) || player.hasPerk(PerkLib.QuadrupleAttack)) combatStats += "<b>Accuracy (4th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 3)) + "%\n";
+		if (player.hasPerk(PerkLib.PentaAttackSmall) || player.hasPerk(PerkLib.PentaAttack)) combatStats += "<b>Accuracy (5th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 4)) + "%\n";
+		if (player.hasPerk(PerkLib.HexaAttackSmall) || player.hasPerk(PerkLib.HexaAttack)) combatStats += "<b>Accuracy (6th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 5)) + "%\n";
+		if (player.hasPerk(PerkLib.HectaAttackSmall)) combatStats += "<b>Accuracy (7th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 6)) + "%\n";
+		if (player.hasPerk(PerkLib.OctaAttackSmall)) combatStats += "<b>Accuracy (8th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 7)) + "%\n";
+		if (player.hasPerk(PerkLib.NonaAttackSmall)) combatStats += "<b>Accuracy (9th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 8)) + "%\n";
+		if (player.hasPerk(PerkLib.DecaAttackSmall)) combatStats += "<b>Accuracy (10th melee attack):</b> " + ((combat.meleeAccuracy() / 2) - ((combat.meleeAccuracyPenalty() + combat.meleeDualWieldAccuracyPenalty()) * 9)) + "%\n";
 		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Archery Mastery)</i>\n";
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kindra) < 1)

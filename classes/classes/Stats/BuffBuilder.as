@@ -85,7 +85,7 @@ public class BuffBuilder {
 		return withOptions({rate:Buff.RATE_HOURS, tick:hours});
 	}
 	public function forDays(days:int): BuffBuilder {
-		return withOptions({rate:Buff.RATE_HOURS, tick:days});
+		return withOptions({rate:Buff.RATE_DAYS, tick:days});
 	}
 	public function combatTemporary(rounds:int): BuffBuilder {
 		return withOptions({rate:Buff.RATE_ROUNDS, tick:rounds});

@@ -52,6 +52,8 @@ public class Horns extends BodyPart {
 	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {name:"frostwyrm", Gore: true});
 	public static const USHI_ONI_ONNA:int            = 20;
 	EnumValue.add(Types, USHI_ONI_ONNA, "USHI_ONI_ONNA", {name:"ushi-oni", Gore: true});
+	public static const SEADRAGON:int            = 21;
+	EnumValue.add(Types, SEADRAGON, "SEADRAGON", {name:"sea dragon"});
 	
 	public function Horns() {
 		super(null, null);

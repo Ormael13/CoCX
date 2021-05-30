@@ -18,12 +18,15 @@ import classes.Items.Mutations;
 import classes.Items.ShieldLib;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
+import classes.Scenes.Areas.Caves.DisplacerBeast;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Camp.CampMakeWinions;
+import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.NPCs.Anemone;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.Places.WoodElves;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.StatusEffects;
@@ -357,6 +360,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasStatusEffect(StatusEffects.CooldownNet)) bd.disable("<b>You need more time before you can do it again.</b>\n\n");
 				else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+			//ELF ARCHERY
+			if (player.weaponRangePerk == "Bow" && WoodElves.WoodElfBowTraining >= 1) {
+				bd = buttons.add("Pin Down", ELFarcheryPinDown).hint("Shoot for your opponent legs dealing damage and incapacitating them. (cooldown of 5 rounds before it can be used again)");
+				if (player.hasStatusEffect(StatusEffects.CooldownPinDown)) bd.disable("<b>You need more time before you can do it again.</b>\n\n");
+				else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			if (player.weaponRangePerk == "Bow" && WoodElves.WoodElfBowTraining >= 2) {
+				bd = buttons.add("Elven Eye", ELFarcheryElvenEye).hint("Elven ability, focus your aim to increase critical chances and greatly raise archery critical damage with bows for 8 rounds.");
+				if (player.hasStatusEffect(StatusEffects.ElvenEye)) bd.disable("<b>You are already focusing your aim.</b>\n\n");
+			}
+			//KINDRA ARCHERY
 			if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
 				bd = buttons.add("Sidewinder", archerSidewinder).hint("The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
 				if (player.hasStatusEffect(StatusEffects.CooldownSideWinder)) bd.disable("<b>You already used Sidewinder today.</b>\n\n");
@@ -780,10 +794,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			damage *= 1.75;
+			var buffMultiplier:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+			damage *= 1.75+buffMultiplier;
 		}
 		damage = Math.round(damage);
 		doDamage(damage, true, true);
@@ -941,12 +958,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var critMulti:Number = 1.75;//coś innego tu wpisać jako perk pozwalający na wyższy mnożnik krytyków
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
-		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
-		critChance *= 2;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			damage *= critMulti;
+			var buffMultiplier:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+			damage *= 1.75+buffMultiplier;
 		}
 		damage = Math.round(damage);
 		doDamage(damage);
@@ -1025,14 +1043,35 @@ public class PhysicalSpecials extends BaseCombatContent {
 					player.tailVenom -= 5;
 				}
 				if (player.faceType == Face.SPIDER_FANGS) {
-					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
-					var lustDmg:int = 6 * monster.lustVuln;
-					monster.teased(lustDmg);
-					if (monster.lustVuln > 0) {
-						monster.lustVuln += 0.01;
-						if (monster.lustVuln > 1) monster.lustVuln = 1;
+					if (player.lowerBody == LowerBody.ATLACH_NACHA){
+						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
+						var damageB:Number = 35 + rand(player.lib / 10);
+						var poisonScaling:Number = 1;
+						poisonScaling += player.lib/100;
+						poisonScaling += player.tou/100;
+						if (player.level < 10) damageB += 20 + (player.level * 3);
+						else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
+						else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
+						else damageB += 80;
+						damageB *= 0.2;
+						damageB *= 1+(poisonScaling/10);
+						monster.teased(monster.lustVuln * damageB);
+						monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
+						if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+						} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+						player.tailVenom -= 5;
 					}
-					player.tailVenom -= 5;
+					else {
+						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+						var lustDmg:int = 6 * monster.lustVuln;
+						monster.teased(lustDmg);
+						if (monster.lustVuln > 0) {
+							monster.lustVuln += 0.01;
+							if (monster.lustVuln > 1) monster.lustVuln = 1;
+						}
+						player.tailVenom -= 5;
+					}
 				}
 				if (monster.lust >= monster.maxLust()) {
 					outputText("\n\n");
@@ -1142,11 +1181,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50 && player.weaponRangePerk == "Bow") critChance += 5;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
 		critChance *= 2;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			damage *= critMulti;
+			var buffMultiplier:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+			damage *= critMulti+buffMultiplier;
 		}
 		damage = Math.round(damage);
 		doDamage(damage);
@@ -3129,9 +3171,20 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//LAND A HIT!
 		else {
+			var Multiplier = 1;
+			if(player.hasPerk(PerkLib.ArachnidBookLungEvolved)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.ArachnidBookLungFinalForm)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.Apex)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
 			if(!monster.plural) outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
 			else outputText("The adhesive strands cover " + monster.a + monster.short + " with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
-			monster.statStore.addBuffObject({spe:-45}, "Web",{text:"Web"});
+			monster.statStore.addBuffObject({spe:-45*Multiplier}, "Web",{text:"Web"});
+			if(player.hasPerk(PerkLib.ArachnidBookLungFinalForm)){
+				if(rand(100) > 50) {
+					monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				}
+			}
 		}
 		awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
 		outputText("\n\n");
@@ -3384,9 +3437,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//Gone		menuLoc = 1;
 			menu();
 			addButton(0, "Next", combatMenu, false);
-			return;
+			return
 		}
 		fatigue(10, USEFATG_PHYSICAL);
+		outputText("You attempt to slam both of your powerful forepaws on " + monster.a + monster.short + ". ");
 		//Amily!
 		if (monster.hasStatusEffect(StatusEffects.Concentration)) {
 			clearOutput();
@@ -3394,7 +3448,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		outputText("You attempt to slam both of your powerful forepaws on " + monster.a + monster.short + ". ");
 		//WRAP IT UPPP
 		if (40 + rand(player.spe) > monster.spe) {
 			outputText("You land both paws on " + monster.a + monster.short + " with brutal power using your claws to grab " + monster.pronoun2 + ".");
@@ -3761,17 +3814,41 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//React
 			if(monster.lustVuln == 0) outputText("  Your aphrodisiac toxin has no effect!");
 			else {
-				if(monster.plural) outputText("  The one you bit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.");
-				else outputText("  " + monster.mf("He","She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.","touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
-				var lustDmg:int = 30 * monster.lustVuln;
-				if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-				if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-				if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
-				if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
-				monster.teased(lustDmg);
-				if (monster.lustVuln > 0) {
-					monster.lustVuln += 0.05;
-					if (monster.lustVuln > 1) monster.lustVuln = 1;
+				if (player.lowerBody == LowerBody.ATLACH_NACHA){
+					if (monster.plural) outputText("  The one you bit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.");
+					else outputText("  " + monster.mf("He", "She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.", "touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
+					var lustDmg:Number = 35 + rand(player.lib / 10);
+					var poisonScaling:Number = 1;
+					poisonScaling += player.lib/100;
+					poisonScaling += player.tou/100;
+					if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
+					if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
+					if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
+					if (player.level < 10) lustDmg += 20 + (player.level * 3);
+					else if (player.level < 20) lustDmg += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) lustDmg += 70 + (player.level - 20) * 1;
+					else lustDmg += 80;
+					lustDmg *= 0.2;
+					lustDmg *= 1+(poisonScaling/10);
+					monster.teased(monster.lustVuln * lustDmg, true);
+					monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
+					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+						monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+				} else {
+					if (monster.plural) outputText("  The one you bit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.");
+					else outputText("  " + monster.mf("He", "She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.", "touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
+					var lustDmg:Number = 35 + rand(player.lib / 10);
+					if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
+					if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
+					if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
+					monster.teased(lustDmg, true);
+					if (monster.lustVuln > 0) {
+						monster.lustVuln += 0.05;
+						if (monster.lustVuln > 1) monster.lustVuln = 1;
+					}
 				}
 			}
 		}
@@ -4950,6 +5027,328 @@ public class PhysicalSpecials extends BaseCombatContent {
 		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
 		enemyAI();
 	}
+
+	public function ELFarcheryElvenEye():void {
+		clearOutput()
+		outputText("You focus your vision concentrating on the target and pinpointing weak points to maximise the damage of your arrows!\n\n");
+		player.createStatusEffect(StatusEffects.ElvenEye,8,0,0,0);
+		enemyAI();
+	}
+
+	public function ELFarcheryPinDown():void {
+		clearOutput()
+
+		var accRange:Number = 0;
+		accRange += (combat.arrowsAccuracy() / 2);
+		if (flags[kFLAGS.ARROWS_ACCURACY] > 0) accRange -= flags[kFLAGS.ARROWS_ACCURACY];
+		if (player.weaponRangeName == "Guided bow" || player.vehicles == vehicles.HB_MECH) accRange = 100;
+		fatigue(combat.oneArrowTotalCost());
+		var weaponRangePerk:String = player.weaponRangePerk;
+		var ammoWord:String;
+		switch (weaponRangePerk) {
+			case "Bow":
+				ammoWord = "arrow";
+				break;
+		}
+		if (rand(100) < accRange) {
+			var damage:Number = 0;
+			if (weaponRangePerk == "Bow") {
+				if (player.vehicles == vehicles.HB_MECH) damage += player.weaponRangeAttack * 10;
+				damage += player.spe;
+				damage += scalingBonusSpeed() * 0.2;
+				if (damage < 10) damage = 10;
+			}
+			if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
+			//Weapon addition!
+			if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
+			else if (player.weaponRangeAttack >= 51 && player.weaponRangeAttack < 101) damage *= (2.5 + ((player.weaponRangeAttack - 50) * 0.025));
+			else if (player.weaponRangeAttack >= 101 && player.weaponRangeAttack < 151) damage *= (3.75 + ((player.weaponRangeAttack - 100) * 0.02));
+			else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
+			else damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
+			if (player.isInNonGoblinMech()) {
+				if (player.vehicles == vehicles.HB_MECH) {
+					if (player.armor == armors.HBARMOR) damage *= 1.5;
+					if (player.headJewelry == headjewelries.HBHELM) damage *= 1.2;
+					if (player.upperGarment == undergarments.HBSHIRT) damage *= 1.1;
+					if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.1;
+					if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) damage *= 1.25;
+				}
+				else {
+					if (player.armor == armors.HBARMOR) damage *= 1.2;
+					if (player.headJewelry == headjewelries.HBHELM) damage *= 1.1;
+					if (player.upperGarment == undergarments.HBSHIRT) damage *= 1.05;
+					if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.05;
+				}
+			}
+			damage *= (1 + (0.01 * combat.masteryArcheryLevel()));
+			if (damage == 0) {
+				if (monster.inte > 0) {
+					outputText(monster.capitalA + monster.short + " shrugs as the " + ammoWord + " bounces off them harmlessly.\n\n");
+				} else {
+					outputText("The " + ammoWord + " bounces harmlessly off [monster a] [monster name].\n\n");
+				}
+				flags[kFLAGS.ARROWS_SHOT]++;
+				bowPerkUnlock();
+			}
+			if (monster is EncapsulationPod) {
+				outputText("While the " + ammoWord + " do lodges deep into the pod's fleshy wall it does not hinder it in any ways.");
+			} else {
+				outputText("You take aim at " + monster.a + monster.short + " legs in order to restrain " + monster.pronoun3 + " movement. Your shot hits the mark pinning your shocked opponent down.");
+			}
+			//Determine if critical hit!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			critChance += combatPhysicalCritical();
+			if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
+			if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				var buffMultiplier:Number = 0;
+				if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+				damage *= 1.75+buffMultiplier;
+			}
+			if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= combat.historyScoutBonus();
+			if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
+			if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+			if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
+				if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
+				else {
+					if (player.statusEffectv1(StatusEffects.Kindra) > 0) {
+						if (player.statusEffectv1(StatusEffects.Kindra) < 150) damage *= 2 + (0.01 * player.statusEffectv1(StatusEffects.Kindra));
+						else damage *= 3.5;
+					} else damage *= 2;
+				}
+			}
+			if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) damage *= 1.2;
+			if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
+			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
+				damage += player.inte * 0.2;
+				if (player.inte >= 50) damage += player.inte * 0.1;
+				if (player.inte >= 100) damage += player.inte * 0.1;
+				if (player.inte >= 150) damage += player.inte * 0.1;
+				if (player.inte >= 200) damage += player.inte * 0.1;
+			}
+			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
+				damage += player.inte * 0.2;
+				if (player.inte >= 50) damage += player.inte * 0.1;
+				if (player.inte >= 100) damage += player.inte * 0.1;
+				if (player.inte >= 150) damage += player.inte * 0.1;
+				if (player.inte >= 200) damage += player.inte * 0.1;
+			}
+			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
+				damage += player.inte * 0.2;
+				if (player.inte >= 50) damage += player.inte * 0.1;
+				if (player.inte >= 100) damage += player.inte * 0.1;
+				if (player.inte >= 150) damage += player.inte * 0.1;
+				if (player.inte >= 200) damage += player.inte * 0.1;
+			}
+			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
+				damage += player.inte * 0.2;
+				if (player.inte >= 50) damage += player.inte * 0.1;
+				if (player.inte >= 100) damage += player.inte * 0.1;
+				if (player.inte >= 150) damage += player.inte * 0.1;
+				if (player.inte >= 200) damage += player.inte * 0.1;
+			}
+			//Section for item damage modifiers
+			if (weaponRangePerk == "Bow"){
+				if (player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
+				if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isUsingSpear() && player.shield == ShieldLib.NOTHING)  damage *= 1.25;
+			}
+			damage = Math.round(damage);
+			if (monster.HP <= monster.minHP()) {
+				if (monster.short == "pod")
+					outputText(". ");
+				else if (monster.plural)
+					outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
+				else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
+				if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
+				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
+				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
+				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
+				else doDamage(damage, true, true);
+				if (crit) {
+					outputText(" <b>*Critical Hit!*</b>");
+					combat.archeryXP(1);
+				}
+				combat.archeryXP(1);
+				outputText("\n\n");
+				checkAchievementDamage(damage);
+				flags[kFLAGS.ARROWS_SHOT]++;
+				bowPerkUnlock();
+				doNext(endHpVictory);
+				return;
+			} else {
+				if (rand(100) < 15 && player.weaponRangeName == "Artemis" && !monster.hasStatusEffect(StatusEffects.Blind)) {
+					monster.createStatusEffect(StatusEffects.Blind, 3, 0, 0, 0);
+					outputText(",  your radiant shots blinded [monster he]");
+				}
+				if (!combat.MSGControll) {
+					outputText(".  It's clearly very painful. ");
+					if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
+					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
+					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
+					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
+					else doDamage(damage, true, true);
+					if (crit) combat.archeryXP(1);
+					combat.archeryXP(1);
+				}
+				if (crit) outputText(" <b>*Critical Hit!*</b>");
+				combat.WrathGenerationPerHit1(5);
+				combat.heroBaneProc(damage);
+			}
+			if (flags[kFLAGS.CUPID_ARROWS] == 1) {
+				outputText("  ");
+				if (monster.lustVuln == 0) {
+					if ((combat.MDOCount == combat.maxCurrentRangeAttacks()) && (combat.MSGControll)) outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.");
+				} else {
+					var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+					if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
+					if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
+						if (monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
+						else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
+					}
+					if (monster.lust >= (monster.maxLust() * 0.6)) {
+						outputText(monster.capitalA + monster.short + "'");
+						if (!monster.plural) outputText("s");
+						outputText(" eyes glaze over with desire for a moment.  ");
+					}
+					lustArrowDmg *= 0.25;
+					lustArrowDmg = Math.round(lustArrowDmg);
+					monster.lust += lustArrowDmg;
+					outputText("<b>(<font color=\"#ff00ff\">" + lustArrowDmg + "</font>)</b>");
+					if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+				}
+			}
+			if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom >= 10) {
+				outputText("  ");
+				if (monster.lustVuln == 0) {
+					outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
+				}
+				if (player.tailType == Tail.BEE_ABDOMEN) {
+					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+					var damageB:Number = 35 + rand(player.lib / 10);
+					if (player.level < 10) damageB += 20 + (player.level * 3);
+					else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
+					else damageB += 80;
+					damageB *= 0.2;
+					monster.teased(monster.lustVuln * damageB);
+					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+						monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+					player.tailVenom -= 5;
+				}
+				if (player.tailType == Tail.SCORPION) {
+					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
+					monster.statStore.addBuffObject({tou:-2, spe:-2}, "Poison",{text:"Poison"});
+					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+						monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+					player.tailVenom -= 5;
+				}
+				if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
+					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+					var lustdamage:Number = 35 + rand(player.lib / 10);
+					if (player.level < 10) lustdamage += 20 + (player.level * 3);
+					else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
+					else lustdamage += 80;
+					lustdamage *= 0.14;
+					monster.teased(monster.lustVuln * lustdamage, false);
+					monster.statStore.addBuffObject({tou:-2}, "Poison",{text:"Poison"});
+					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+						monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+					player.tailVenom -= 5;
+				}
+				if (player.faceType == Face.SNAKE_FANGS) {
+					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
+					monster.statStore.addBuffObject({spe:-1}, "Poison",{text:"Poison"});
+					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+						monster.addStatusValue(StatusEffects.NagaVenom, 2, 0.4);
+						monster.addStatusValue(StatusEffects.NagaVenom, 1, 0.4);
+					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0.4, 0.4, 0, 0);
+					player.tailVenom -= 5;
+				}
+				if (player.faceType == Face.SPIDER_FANGS) {
+					if (player.lowerBody == LowerBody.ATLACH_NACHA){
+						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
+						var damageB:Number = 35 + rand(player.lib / 10);
+						var poisonScaling:Number = 1;
+						poisonScaling += player.lib/100;
+						poisonScaling += player.tou/100;
+						if (player.level < 10) damageB += 20 + (player.level * 3);
+						else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
+						else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
+						else damageB += 80;
+						damageB *= 0.2;
+						damageB *= 1+(poisonScaling/10);
+						monster.teased(monster.lustVuln * damageB);
+						monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
+						if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+						} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+						player.tailVenom -= 5;
+					}
+					else{
+						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+						var lustDmg:int = 6 * monster.lustVuln;
+						monster.teased(lustDmg);
+						if (monster.lustVuln > 0) {
+							monster.lustVuln += 0.01;
+							if (monster.lustVuln > 1) monster.lustVuln = 1;
+						}
+						player.tailVenom -= 5;
+					}
+				}
+				if (monster.lust >= monster.maxLust()) {
+					outputText("\n\n");
+					checkAchievementDamage(damage);
+					flags[kFLAGS.ARROWS_SHOT]++;
+					bowPerkUnlock();
+					doNext(endLustVictory);
+				}
+				outputText("\n");
+			}
+			if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < 10) outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
+			if (player.weaponRangeName == "Hodr's bow" && !monster.hasStatusEffect(StatusEffects.Blind)) monster.createStatusEffect(StatusEffects.Blind, 1, 0, 0, 0);
+			outputText("\n");
+			if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
+			flags[kFLAGS.ARROWS_SHOT]++;
+			combat.WrathWeaponsProc();
+			bowPerkUnlock();
+		} else {
+			if (monster is DisplacerBeast) outputText("\n\nThe displacer beast teleports, dodging your attack.\n");
+			else {
+				outputText("The " + ammoWord + " goes wide, disappearing behind your foe");
+				if (monster.plural) outputText("s");
+				outputText(".\n\n");
+			}
+		}
+		if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1) {
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3) {
+				outputText("\n\n<i>“Ouch. Such a cowardly weapon,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your pathetic " + ammoWord + "s?”</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			}
+			enemyAI();
+		}
+		if (monster.HP <= monster.minHP()) {
+			doNext(endHpVictory);
+			return;
+		}
+		if (monster.lust >= monster.maxLust()) {
+			doNext(endLustVictory);
+			return;
+		}
+
+		player.createStatusEffect(StatusEffects.CooldownPinDown,8,0,0,0);
+		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
+		enemyAI();
+	}
+
+
 	public function archerSidewinder():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -4993,10 +5392,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			damage *= 1.75;
+			var buffMultiplier:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+			damage *= 1.75+buffMultiplier;
 		}
 		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= combat.historyScoutBonus();
 		if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
@@ -5086,6 +5488,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.hasPerk(PerkLib.TripleStrike)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
 		else if (player.hasPerk(PerkLib.DoubleStrike)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
 		else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
+		if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot) && player.weaponRangePerk == "Bow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
 		clearOutput();
 		if (player.fatigue + bowCost(200) > player.maxFatigue()) {
 			outputText("You are too tired to attack " + monster.a + " " + monster.short + ".");
@@ -5101,10 +5504,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			damage *= 1.75;
+			var buffMultiplier:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+			damage *= 1.75+buffMultiplier;
 		}
 		damage = Math.round(damage);
 		doDamage(damage);
@@ -5156,10 +5562,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		critChance += combat.combatPhysicalCritical();
 		if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
 		if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+		if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
-			damage *= 1.75;
+			var buffMultiplier:Number = 0;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+			damage *= 1.75+buffMultiplier;
 		}
 		damage = Math.round(damage);
 		outputText("Then do it another time showering them with an extra volley of arrows. ");

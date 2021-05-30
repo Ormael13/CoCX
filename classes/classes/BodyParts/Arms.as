@@ -384,6 +384,13 @@ public class Arms extends BodyPart {
 		wingSlap: true
 	});
 
+	public static const SEADRAGON:int = 55;
+	EnumValue.add(Types, SEADRAGON, "SEADRAGON", {
+		name:"sea dragon",
+		appearanceDesc: "A pair of fins have sprouted on each of your forearms near your elbows, and the skin between your fingers forms a small webbing which assists your swimming. You have sharp and deadly claws which allow you to impale your prey or rip your foes to shreds.",
+		claw: true
+	});
+
 	public static function canFly(id: int): Boolean {
 		return Types[id].canFly || false;
 	}

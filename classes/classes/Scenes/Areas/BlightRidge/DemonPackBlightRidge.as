@@ -113,8 +113,10 @@ public class DemonPackBlightRidge extends Monster
 							consumables.INCUBID,
 							consumables.OVIELIX,
 							consumables.B__BOOK);
-			this.special1 = SceneLib.combat.packAttack;
-			this.special2 = SceneLib.combat.lustAttack;
+			this.abilities = [
+				{call: SceneLib.combat.packAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: SceneLib.combat.lustAttack(), type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+			];
 			this.tailType = Tail.DEMONIC;
 			this.horns.type = Horns.DEMON;
 			this.horns.count = 2;

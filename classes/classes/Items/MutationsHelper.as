@@ -29,18 +29,8 @@ import classes.BodyParts.Wings;
 		public function MutationsHelper() { }
 
 		public function humanizeLowerBody():void {
-			if (player.isTaur()) outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!");
-			else if (player.isGoo()) outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>");
-			else if (player.isNaga()) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>");
-			else if (player.isScylla()) outputText("\n\nYou collapse as your tentacle legs starts to merge.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>");
-			else if (player.isAlraune()) {
-				outputText("\n\nYou suddenly lose all feeling from the waist down, your pitcher quickly withering and dying. Soon after it began, your pitcher is reduced to nothing but dust, leaving you to stand on two ordinary human legs. ");
-				outputText("On the ground is all that is left of your flower, a single petal still intact that you proceed to put in your bag. Something tells you you will need it to become an alraune again.  <b>You have human legs again.</b>");
-			}
-			else /*if (player.isBiped()) */outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>");
-			if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)) player.removeStatusEffect(StatusEffects.HydraTailsPlayer);
-			setLowerBody(LowerBody.HUMAN);
-			player.legCount = 2;
+			outputText("\n\n");
+			transformations.LegsHuman.applyEffect();
 			changes++;
 		}
 
@@ -617,6 +607,7 @@ import classes.BodyParts.Wings;
 	}
 	private const METAMORPH_LOWER_BODIES:Object = createMapFromPairs([
 		[LowerBody.AVIAN, null],
+		[LowerBody.ATLACH_NACHA, null],
 		[LowerBody.BEAR, null],
 		[LowerBody.BEE, StatusEffects.UnlockedBeeLegs],
 		[LowerBody.BUNNY, null],
@@ -684,6 +675,7 @@ import classes.BodyParts.Wings;
 		return setBodyPartType("rearBody.type", METAMORPH_REAR_BODIES, rearBody);
 	}
 	private const METAMORPH_REAR_BODIES:Object = createMapFromPairs([
+		[RearBody.ATLACH_NACHA, null],
 		[RearBody.BAT_COLLAR, StatusEffects.UnlockedBatCollar],
 		[RearBody.BEHEMOTH, null],
 		[RearBody.CENTIPEDE, null],
@@ -872,10 +864,12 @@ import classes.BodyParts.Wings;
 			return addGeneticMemory(sat, sat.id.replace("Unlocked ", ""));
 		} else return false;
 	}
-	public function addGeneticMemory(sat:StatusEffectType, name:String = null):Boolean {
+	public function addGeneticMemory(sat:StatusEffectType, name:String = null, doOutput: Boolean = true):Boolean {
 		if (player.findPerk(PerkLib.GeneticMemory) < 0) return false;
 		if (sat != null && !player.hasStatusEffect(sat)) {
-			outputText("\n\n<b>Genetic Memory: " + name + " - Memorized!</b>\n\n");
+			if (doOutput) {
+				outputText("\n\n<b>Genetic Memory: " + name + " - Memorized!</b>\n\n");
+			}
 			player.createStatusEffect(sat, 0, 0, 0, 0);
 			return true;
 		}

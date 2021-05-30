@@ -44,9 +44,33 @@ import flash.errors.IllegalOperationError;
 
 public class Creature extends Utils
 	{
+		// Ability types
+		public static const ABILITY_PHYSICAL: String = "physical";
+		public static const ABILITY_MAGIC: String = "magic";
+		public static const ABILITY_TEASE: String = "tease";
+		public static const ABILITY_SPECIAL: String = "special";
+
+		// Ability ranges
+		public static const RANGE_SELF: int = 0;
+		public static const RANGE_MELEE: int = 1;
+		public static const RANGE_RANGED: int = 2;
+
+		// Ability tags
+		/**
+		 * This ability uses one's weapon
+		 */
+		public static const TAG_WEAPON: String = "weapon";
+		public static const TAG_BODY: String = "body";
+		// element tags
+		public static const TAG_ACID: String = "acid";
+		public static const TAG_FIRE: String = "fire";
+		public static const TAG_ICE: String = "ice";
+		public static const TAG_HEAL: String = "heal";
+		public static const TAG_FLUID: String = "fluid";
 
 
-        public function get game():CoC {
+
+		public function get game():CoC {
 			return CoC.instance;
 		}
 		public function get flags():DefaultDict {
@@ -931,12 +955,20 @@ public class Creature extends Utils
 			if (!skin.hasCoat()) return hairColor;
 			return skin.coat.color;
 		}
+		public function get coatColor2():String {
+			if (!skin.hasCoat()) return hairColor;
+			return skin.coat.color2;
+		}
 		public function get NakedCoatColor():String {
 			return skin.coat.color;
 		}
 		public function set coatColor(value:String):void {
 			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
 			skin.coat.color = value;
+		}
+		public function set coatColor2(value:String):void {
+			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
+			skin.coat.color2 = value;
 		}
 
 		public var beardStyle:Number = Beard.NORMAL;
@@ -3237,8 +3269,8 @@ public class Creature extends Utils
 		public function hasGooSkin():Boolean { return skin.hasGooSkin(); }
 		public function hasGhostSkin():Boolean { return skin.hasGhostSkin(); }
 		public function isGargoyle():Boolean { return skin.hasBaseOnly(Skin.STONE); }
-		public function skinDescript():String { return skin.describe('basic'); }
-		public function skinFurScales():String { return skin.describe('cover'); }
+		public function skinDescript():String { return skin.describe('base'); }
+		public function skinFurScales():String { return skin.describe('coat'); }
 
 		// <mod name="Predator arms" author="Stadler76">
 		public function claws():String { return clawsPart.descriptionFull(); }
@@ -3258,6 +3290,9 @@ public class Creature extends Utils
 		public function isKraken():Boolean { return lowerBodyPart.isKraken(); }
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
+		public function isElf():Boolean {
+			return hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm) || game.player.elfScore() >= 10 || game.player.woodElfScore() >= 17
+		}
 
 		public function isFlying():Boolean {
 			return hasStatusEffect(StatusEffects.Flying);
@@ -4058,6 +4093,76 @@ public class Creature extends Utils
 			if (game.player.cheshireScore() >= 11 && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Phasing";
 			if (game.player.displacerbeastScore() >= 11 && ((!hasStatusEffect(StatusEffects.Displacement) && (roll < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (roll < 80)))) return "Displacing";
 			return null;
+		}
+
+		/**
+		 * Runs all checks on ability and returns true if it possible
+		 */
+		public function abilityIsPossible(ability:Object, target: Creature):Boolean {
+			if (!ability.call) return false; // no function specified
+			// ability has condition check that fails
+			if ('condition' in ability && !ability.condition()) return false;
+			if ('weight' in ability && ability.weight <= 0 && isNaN(ability.weight)) return false;
+			if (!canUseAbility(ability)) return false;
+			if (ability.range != RANGE_SELF && !target.canBeTargetedWith(ability)) return false;
+			return true;
+		}
+
+		/**
+		 * Pick and return one possible ability; or null if none are possible
+		 */
+		public function pickRandomAbility(abilities:/*Object*/Array, target: Creature):Object {
+			var n:int = abilities.length;
+			abilities = abilities.filter(
+					function (ability:Object, idx:int, array:Array):Boolean {
+						return abilityIsPossible(ability, target);
+					}
+			);
+			trace(short+" filtered "+abilities.length+" possible abilities out of "+n);
+			if (abilities.length == 0) return null;
+			// Run weighted random
+			var sum:Number = 0;
+			for each (var ability:Object in abilities) {
+				if ('weight' in ability) {
+					if (!isFinite(ability.weight)) {
+						// Infinite weight - pick only this ability, ignore others
+						return ability;
+					}
+				} else {
+					ability.weight = 1;
+				}
+				sum += ability.weight;
+			}
+			var pick:Number = Math.random()*sum;
+			for each (ability in abilities) {
+				pick -= ability.weight;
+				if (pick <= 0) return ability;
+			}
+			// Should never happen but just in case, return first ability
+			return abilities[0];
+		}
+
+
+
+		/**
+		 * Check if this creature is in condition to perform the ability (not sealed etc)
+		 * @param ability See Monster.abilities for documentation on structure
+		 * @return
+		 */
+		public function canUseAbility(ability:Object):Boolean {
+			return true;
+		}
+
+		/**
+		 * Check the ability for tags, if it applicable to current state of this creature
+		 * @param ability See Monster.abilities for documentation on structure
+		 * @return true if this creature can be targeted with ability
+		 */
+		public function canBeTargetedWith(ability:Object):Boolean {
+			if (ability.range == RANGE_MELEE && isFlying()) {
+				return false;
+			}
+			return true;
 		}
 
 		public function getEvasionRoll(useMonster:Boolean = true, attackSpeed:int = int.MIN_VALUE):Boolean

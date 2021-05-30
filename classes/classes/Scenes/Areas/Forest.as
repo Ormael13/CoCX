@@ -14,6 +14,7 @@ import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.AikoScene;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.Places.WoodElves;
 import classes.Scenes.SceneLib;
 import classes.lists.Gender;
 
@@ -166,7 +167,16 @@ use namespace CoC;
 						name  : "beegirl",
 						call  : beeGirlScene.beeEncounter,
 						chance: 0.50
-					}, {
+					}//,{
+					//	name  : "WoodElf",
+					//	call  : SceneLib.woodElves.findElves,
+					//	chance: 0.50,
+					//	when  : function ():Boolean {
+					//		return (WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED
+					//				|| WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELF) && !player.blockingBodyTransformations()
+					//	}
+					//}
+					, {
 						name  : "truffle",
 						call  : findTruffle,
 						chance: 0.35
