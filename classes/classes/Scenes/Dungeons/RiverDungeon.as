@@ -570,6 +570,7 @@ import classes.StatusEffects;
 			outputText("<b><u>Entrance</u></b>\n");
 			outputText("You run into an old campsite. By the looks of it an adventurer must have rested there, through the fire likely died a month ago by the look of it. What a peculiar fire too, just who the hell would grab bones, set them in a stone circle and then impale a skull on a rusty longsword before setting fire to it?");
 			dungeons.setDungeonButtonsRD(null, null, null, roomA02);
+			addButton(0, "Teleport C.", teleportCircleFloor1);
 			if (flags[kFLAGS.NEISA_AFFECTION] < 10 && flags[kFLAGS.NEISA_FOLLOWER] < 4) addButtonDisabled(10, "Up", "You would leave now but you have yet to find enough to pay Neisa."); 
 			else addButton(10, "Up", exitDungeon);
 		}
@@ -767,6 +768,7 @@ import classes.StatusEffects;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Your vision is obscured by thick fog. You instinctively tense as the echoes of footsteps bounce off the walls. Enemies could be right next to you, and you wouldn't know unless you bump into one. You break into a light sweat, or is that the moisture condescending onto your [skin]?");
 			dungeons.setDungeonButtonsRD(roomB02, null, null, null);
+			addButton(0, "Teleport C.", teleportCircleFloor2);
 			addButton(11, "Up", roomA06);
 		}
 		public function roomB02():void {
@@ -917,7 +919,7 @@ import classes.StatusEffects;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Your vision is obscured by thick fog. You instinctively tense as the echoes of footsteps bounce off the walls. Enemies could be right next to you, and you wouldn't know unless you bump into one. You break into a light sweat, or is that the moisture condescending onto your [skin]?");
 			dungeons.setDungeonButtonsRD(null, roomB14, null, null);
-			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButtonDisabled(6, "Down", "You still need to wait for our brave goblins team to clean up stairs leading into lower strata of the dungeon.");//addButton(6, "Down", );
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(6, "Down", roomC01);//addButtonDisabled(6, "Down", "You still need to wait for our brave goblins team to clean up stairs leading into lower strata of the dungeon.");
 			else addButtonDisabled(6, "Down", "You still need to beat guardian of this floor to descend into lower strata of the dungeon.");
 			//addButtonDisabled(6, "Down", "You still need to wait for our brave goblins team to come back (alive) to descend into lower strata of the dungeon.");
 		}
@@ -1062,8 +1064,19 @@ import classes.StatusEffects;
 			outputText("The eerie fog of the dungeon remains, tossed about by the raging fury of disturbed sand. Treading is nearly impossible, but you persevere, mindful of each step you take.");
 			dungeons.setDungeonButtonsRD(null, null, roomB26, null);
 		}
-		/*
 		public function roomC01():void {
+			dungeonLoc = 135;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+			addButton(0, "Teleport C.", teleportCircleFloor3);
+			addButton(6, "Up", roomB15);
+		}
+		/*
+		public function roomC02():void {
 			dungeonLoc = 1xx;
 			clearOutput();
 			encountersRuletteB();
@@ -1071,7 +1084,33 @@ import classes.StatusEffects;
 			outputText("<b><u></u>Underground Passage</b>\n");
 			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
 			dungeons.setDungeonButtonsRD(null, null, null, null);
-			addButton(6, "Up", roomA06);
+		}
+		public function roomC03():void {
+			dungeonLoc = 1xx;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomC04():void {
+			dungeonLoc = 1xx;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
+		}
+		public function roomC05():void {
+			dungeonLoc = 1xx;
+			clearOutput();
+			encountersRuletteB();
+			if (CoC.instance.inCombat) return;
+			outputText("<b><u></u>Underground Passage</b>\n");
+			outputText("Mists of mystery covers your surrounding making you unable to see what is around you aside passages to other parts of the dungeon.");
+			dungeons.setDungeonButtonsRD(null, null, null, null);
 		}
 		*/
 		private function tresureRoom1A():void {
@@ -1089,6 +1128,63 @@ import classes.StatusEffects;
 			outputText("After a little corpse pilfering, the two of you continue treading.\n\n");
 			flags[kFLAGS.NEISA_AFFECTION] = 10;
 			doNext(roomA10);
+		}
+		private function teleportCircleFloor1():void {
+			menu();
+			addButtonDisabled(0, "Floor 1", "You're currently at Floor 1.");
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 1) addButton(1, "Floor 2", teleportToFloor2);
+			else addButtonDisabled(1, "Floor 2", "You still need to beat guardians of floor 1 to use this teleport option.");
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
+			else addButtonDisabled(2, "Floor 3", "You still need to beat guardians of floor 2 to use this teleport option.");
+			addButton(14, "Back", roomA01);
+		}
+		private function teleportCircleFloor2():void {
+			menu();
+			addButton(0, "Floor 1", teleportToFloor1);
+			addButtonDisabled(1, "Floor 2", "You're currently at Floor 2.");
+			if (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6) addButton(2, "Floor 3", teleportToFloor3);
+			else addButtonDisabled(2, "Floor 3", "You still need to beat guardians of floor 2 to use this teleport option.");
+			addButton(14, "Back", roomB01);
+		}
+		private function teleportCircleFloor3():void {
+			menu();
+			addButton(0, "Floor 1", teleportToFloor1);
+			addButton(1, "Floor 2", teleportToFloor2);
+			addButtonDisabled(2, "Floor 3", "You're currently at Floor 3.");
+			addButton(14, "Back", roomC01);
+		}
+		private function teleportCircleFloor4():void {
+			
+		}
+		private function teleportCircleFloor5():void {
+			
+		}
+		private function teleportCircleFloor6():void {
+			
+		}
+		private function teleportCircleFloor7():void {
+			
+		}
+		private function teleportToFloor1():void {
+			clearOutput();
+			outputText("WiP\n\n");
+			inDungeon = true;
+			dungeonLoc = 68;
+			playerMenu();
+		}
+		private function teleportToFloor2():void {
+			clearOutput();
+			outputText("WiP\n\n");
+			inDungeon = true;
+			dungeonLoc = 104;
+			playerMenu();
+		}
+		private function teleportToFloor3():void {
+			clearOutput();
+			outputText("WiP\n\n");
+			inDungeon = true;
+			dungeonLoc = 135;
+			playerMenu();
 		}
 	}
 }

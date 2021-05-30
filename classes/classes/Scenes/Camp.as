@@ -4924,6 +4924,7 @@ public function wakeFromBadEnd():void {
 		if (flags[kFLAGS.GOBLINS_KILLED] > 0) TotalKillCount += flags[kFLAGS.GOBLINS_KILLED];
 		if (flags[kFLAGS.HELLHOUNDS_KILLED] > 0) TotalKillCount += flags[kFLAGS.HELLHOUNDS_KILLED];
 		if (flags[kFLAGS.MINOTAURS_KILLED] > 0) TotalKillCount += flags[kFLAGS.MINOTAURS_KILLED];
+		if (flags[kFLAGS.TRUE_DEMONS_KILLED] > 0) TotalKillCount += flags[kFLAGS.TRUE_DEMONS_KILLED];
 		if (TotalKillCount >= 47) awardAchievement("Body Count: Monty Python and the Holy Grail", kACHIEVEMENTS.GENERAL_BODY_COUNT_MPATHG);
 		if (TotalKillCount >= 80) awardAchievement("Body Count: Deadpool", kACHIEVEMENTS.GENERAL_BODY_COUNT_DEADPOOL);
 		if (TotalKillCount >= 144) awardAchievement("Body Count: Robocop", kACHIEVEMENTS.GENERAL_BODY_COUNT_ROBOCOP);
