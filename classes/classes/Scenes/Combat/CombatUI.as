@@ -13,6 +13,7 @@ import classes.Scenes.Areas.Beach.CancerAttack;
 import classes.Scenes.Areas.Desert.SandTrap;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.HighMountains.Izumi;
+import classes.Scenes.Combat.PhysicalSpecials;
 import classes.Scenes.Dungeons.D3.DriderIncubus;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.MinotaurKing;
@@ -357,6 +358,25 @@ public class CombatUI extends BaseCombatContent {
 			}
 			else addButtonDisabled(0, "Bite", "If only you had fangs.");
 			addButton(4, "Release", combat.VampireLeggoMyEggo);
+		} else if (monster.hasStatusEffect(StatusEffects.MysticWeb)) {
+			menu();
+			addButton(0, "Tease", combat.WebTease).hint("Toy with your opponent");
+			addButton(1, "Bite", combat.spiderBiteAttack).hint("Inject your venom.");
+			addButton(2, "Release", combat.BreakOutWeb);
+			vampireBiteDuringGrapple(3);
+
+			//combat.mspecials.buildMenu(magspButtons);
+			if (magspButtons.length > 0) btnMSpecials.show("M. Specials", submenuMagSpecials, "Mental and supernatural special attack menu.", "Magical Specials");
+			if (combat.isPlayerSilenced()) {
+				btnMSpecials.disable();
+			}
+			// Submenu - Spells
+			//BuildSpellBookMenu(spellBookButtons);
+			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
+			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathSpellcasting()) {
+				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
+			} else if (!combat.canUseMagic()) btnMagic.disable();
+
 		} else if (monster.hasStatusEffect(StatusEffects.Pounce)) {
 			menu();
 			if (player.arms.type == Arms.DISPLACER)

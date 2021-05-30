@@ -828,10 +828,9 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			else if (player.gender == 0) addButtonDisabled(2, "Werewolf", "You're going to need some special equipment to play with this pup.");
 			else if (player.lust <= 33) addButtonDisabled(2, "Werewolf", "Bringing the beast out in Luna when you're not up for sex is too terrible of an idea even for you. Please reconsider.");
 			if (player.lust > 33 && player.gender > 0) {
-				if (flags[kFLAGS.AYANE_FOLLOWER] >= 2 && flags[kFLAGS.LUNA_AFFECTION] == 100) addButton(3, "Fox&Hound", sexMenuSandwichWithAyane).hint("Some group action could be fun, and you bet Ayane would be up for it too.");
-				else if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) addButtonDisabled(3, "Fox&Hound", "Some group action could be fun if you were sure Luna would do it, but you don't want to push your luck. You know how jealous she gets...");
+				if (flags[kFLAGS.AYANE_FOLLOWER] >= 2 && flags[kFLAGS.LUNA_AFFECTION] == 100 && player.hasCock()) addButton(3, "Fox&Hound", sexMenuSandwichWithAyane).hint("Some group action could be fun, and you bet Ayane would be up for it too.");
+				else if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) addButtonDisabled(3, "Fox&Hound", "Some group action could be fun if you were sure Luna would do it, but you don't want to push your luck. You know how jealous she gets... Of course to even do 'that' you would also need a penis.");
 				else addButtonDisabled(3, "???", "Get a certain other fluffy-tailed follower to join your camp and maybe you can have some group fun.");
-				
 			}
 			addButton(14, "Back", mainLunaMenu);	
 		}

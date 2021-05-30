@@ -23,6 +23,9 @@ import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
 import classes.Parser.Parser;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Transformations.PossibleEffect;
+import classes.Transformations.Transformation;
+import classes.Transformations.Transformation;
 import classes.internals.EnumValue;
 
 import coc.view.Block;
@@ -40,6 +43,7 @@ import flash.display.DisplayObject;
 import flash.events.Event;
 import flash.events.TextEvent;
 import flash.utils.describeType;
+import flash.utils.setTimeout;
 
 public class DebugMenu extends BaseContent
 	{
@@ -91,6 +95,7 @@ public class DebugMenu extends BaseContent
 				addButton(5, "DumpEffects", dumpEffectsMenu).hint("Display your status effects");
 				addButton(7, "HACK STUFFZ", styleHackMenu).hint("H4X0RZ");
 	            addButton(8, "Test Scene", testScene);
+	            addButton(9, "Test Tf", testTfMenu);
 				addButton(14, "Exit", playerMenu);
 			}
             if (CoC.instance.inCombat) {
@@ -152,6 +157,48 @@ public class DebugMenu extends BaseContent
 				
 			}
 		}
+		
+		private function testTfMenu():void {
+			clearOutput();
+			mainView.mainText.addEventListener(TextEvent.LINK, linkhandler);
+			outputText("<b>Test transformations:</b>\n");
+			
+			var list:/*String*/Array = keys(transformations, true).sort();
+			for each (var key:String in list) {
+				var tf:PossibleEffect = transformations[key] as PossibleEffect;
+				if (!tf) continue;
+				outputText("\n");
+				if (tf.isPossible()) outputText("<u>");
+				outputText('<a href="event:'+key+'">'+key+"</a>");
+				if (tf.isPossible()) outputText("</u>");
+				outputText(" / "+tf.name);
+				if (tf is Transformation && (tf as Transformation).isPresent()) {
+					outputText(" <font color='#008000'>present</font>");
+				} else if (!tf.isPossible()) {
+					outputText(" <font color='#800000'>impossible</font>");
+				}
+			}
+			outputText("\n\n");
+			menu();
+			addButton(0,"Back",linkhandler,new TextEvent(TextEvent.LINK,false,false,"-1"));
+			
+			function linkhandler(e:TextEvent):void {
+				mainView.mainText.removeEventListener(TextEvent.LINK, linkhandler);
+				var tf:PossibleEffect = (e.text in transformations) ? transformations[e.text] as PossibleEffect : null;
+				if (e.text == "-1" || !tf) {
+					accessDebugMenu();
+				} else {
+					CoC.instance.currentText = "";
+					tf.applyEffect();
+					var text:String = CoC.instance.currentText;
+					mainViewManager.updateCharviewIfNeeded();
+					testTfMenu();
+					rawOutputText(text);
+					flushOutputTextToGUI();
+				}
+			}
+		}
+		
 		//Spawn items menu
 		private function itemSpawnMenu():void {
 			setItemArrays();
@@ -253,6 +300,7 @@ public class DebugMenu extends BaseContent
 			//Page 3
 			transformativeArray.push(consumables.LABOVA_);
 			transformativeArray.push(consumables.LARGEPP);
+			transformativeArray.push(consumables.M_GOSSR);
 			transformativeArray.push(consumables.MAGSEED);
 			transformativeArray.push(consumables.METHIRC);
 			transformativeArray.push(consumables.MGHTYVG);
@@ -262,8 +310,8 @@ public class DebugMenu extends BaseContent
 			transformativeArray.push(consumables.P_LBOVA);
 			transformativeArray.push(consumables.PIGTRUF);
 			transformativeArray.push(consumables.PRFRUIT);
-			transformativeArray.push(consumables.PROBOVA);
 			//Page 4
+			transformativeArray.push(consumables.PROBOVA);
 			transformativeArray.push(consumables.P_DRAFT);
 			transformativeArray.push(consumables.P_S_MLK);
 			transformativeArray.push(consumables.PSDELIT);
@@ -275,8 +323,8 @@ public class DebugMenu extends BaseContent
 			transformativeArray.push(consumables.REPTLUM);
 			transformativeArray.push(consumables.RINGFIG);
 			transformativeArray.push(consumables.RIZZART);
-			transformativeArray.push(consumables.S_GOSSR);
 			//Page 5
+			transformativeArray.push(consumables.S_GOSSR);
 			transformativeArray.push(consumables.SALAMFW);
 			transformativeArray.push(consumables.SHARK_T);
 			transformativeArray.push(consumables.SNAKOIL);

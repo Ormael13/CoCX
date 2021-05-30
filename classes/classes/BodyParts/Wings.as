@@ -83,6 +83,8 @@ public class Wings extends SaveableBodyPart {
 	EnumValue.add(Types, FAIRY, "FAIRY", {name:"fairy",canFly: true});
 	public static const WINDY_AURA:int    	 	 = 35;
 	EnumValue.add(Types, WINDY_AURA, "WINDY_AURA", {name:"windy aura",canFly: true});
+	public static const SEADRAGON:int        = 36;
+	EnumValue.add(Types, SEADRAGON, "SEADRAGON", {name:"large majestic aquatic", wingSlap: true,canFly: true});
 	//public static const :int    	 	 	 = 36;
 	//EnumValue.add(Types, , "", {name:"",canFly: true});
 

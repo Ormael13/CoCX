@@ -133,6 +133,12 @@ public class Hair extends BodyPart {
 		longDesc: "{hair}, stripped at the center with light tips not unlike the head of a chipmunk"
 	});
 
+	public static const PRISMATIC:int = 18;
+	EnumValue.add(Types, PRISMATIC, "PRISMATIC", {
+		name:"prismatic",
+		shortDesc: "{hair} with prismatic strands that vary in color like the rainbow"
+	});
+
 	public static const PLAIN:int  = 0;
 	public static const WILD:int = 1;
 	public static const PONYTAIL:int  = 2;

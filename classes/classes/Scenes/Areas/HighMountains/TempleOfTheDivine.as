@@ -110,6 +110,11 @@ use namespace CoC;
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.statStore.hasBuff("TaothBlessing")) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.statStore.hasBuff("FenrirBlessing")) addButton(2, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Pray to the god sharing your body for an increase to your might.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) addButton(3, "Fera", PlayerPrayAtTempleFeraAltair).hint("Pray the fallen goddess Fera for an increase to your innuendo and resilience to desire.");
+				//Remove curses
+				if (anyOfAltairsRepaired() && player.gems >= 1000) addButton(4, "Remove Curses", PlayerRemoveCurses).hint("Make a donation to a divinity in order to be freed of all curses and hexes.");
+				else if (!anyOfAltairsRepaired()) addButtonDisabled(4, "Remove Curses", "Without a functionning altar you cannot call upon divine power for deliverence.")
+				else if (!player.statStore.hasBuff("Curse") && !player.statStore.hasBuff("Hex")) addButtonDisabled(4, "Remove Curses", "You are not currently under the affliction of a curse or hex.")
+				else if (player.gems < 1000) addButtonDisabled(4, "Remove Curses", "You need at least 1000 gem in order to request deliverance from your maledictions.")
 				addButton(14, "Back", templemainmenu);
 			}
 			else {
@@ -117,10 +122,24 @@ use namespace CoC;
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
+
 		private function anyOfAltairsRepaired():Boolean {
 			return flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1;
-
 		}
+
+		public function PlayerRemoveCurses():void {
+			outputText("You approach one of the many altars, would you like to give a donation of 1000 gems to be freed from your curses and hexes?");
+			doYesNo(PlayerPrayAtTemple, PlayerPrayAtTemple);
+		}
+
+		public function PlayerRemoveCursesYes():void {
+			outputText("Divine powers radiate from the altar banishing the evil that has took a grip on your body to the void.");
+			player.gems -= 1000;
+			player.statStore.removeBuffs("Curse");
+			player.statStore.removeBuffs("Hex");
+			doNext(PlayerPrayAtTemple);
+		}
+
 		public function loosingMaraeBlessing():void {
 			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");

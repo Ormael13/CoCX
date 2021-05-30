@@ -11,6 +11,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.ConsumableLib;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 import classes.StatusEffects.Combat.WebDebuff;
@@ -30,15 +31,15 @@ use namespace CoC;
 				outputText(". You dodge away, avoiding the sticky strands!");
 			}
 			//Determine if evaded
-			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 				outputText(". You evade, avoiding the sticky strands!");
 			}
 			//("Misdirection"
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText(". Your misleading movements allow you to easily sidestep the sticky strands!");
 			}
 			//Determine if cat'ed
-			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
 				outputText(". You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			//Got hit
@@ -187,7 +188,7 @@ use namespace CoC;
 			this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.drop = NO_DROP;
+			this.drop = new WeightedDrop(consumables.M_GOSSR, 1);
 			this.checkMonster();
 		}
 	}

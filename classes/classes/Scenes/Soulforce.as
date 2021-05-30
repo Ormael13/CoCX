@@ -32,6 +32,7 @@ import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
+import classes.Scenes.Dungeons.EbonLabyrinth;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.RiverDungeon.QuatroElementalBoss;
 import classes.Scenes.Explore.Pierce;
@@ -202,7 +203,7 @@ use namespace CoC;
 			//9
 			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that don't fit anywhere else and etc.");
 			addButton(11, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
-			addButton(12, "FairyTest", FairyTest).hint("Become a fairy.");
+			addButton(12, "Atlach Test", SceneLib.ebonLabyrinth.encountersRuletteBossesEL2AtlachNachaDBUG).hint("Trigger Atlach scenes.");
 			addButton(13, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
 			addButton(14, "Back", accessSoulforceMenu);
 		}
@@ -1621,7 +1622,7 @@ use namespace CoC;
 				addButton(1, "F.Fish", AddFreshFish).hint("Add 1 Fresh Fish.");
 				addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
 				addButton(3, "TGOGossamer", AddThickGreenOnnaGossamer).hint("Add 1 Thick Green Onna Gossamer.");
-				addButton(4, "WhiteIceS.", AddWhiteIceShard).hint("White Ice Shard");
+				//addButton(4, "LeviSun.", AddLeviathanSunscreen).hint("Add 1 Leviathan Sunscreen");
 				addButton(5, "Enigmanium", AddEnigmanium).hint("Add 1 vial of Enigmanium.");
 				//addButton(6, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
 				addButton(6, "dragonshit", AddDragonShit).hint("Add dragon stuff for jabberwocky test.");
@@ -1629,9 +1630,9 @@ use namespace CoC;
 				addButton(8, "VT RV WF", AddVoltageTopaz).hint("Add 1 Voltage Topaz, 1 vial of Red Blood (Bat TF) and 1 Wonder Fruit.");
 				addButton(9, "DSJ HS FSS", AddDarkSlimeJelly).hint("Add 1 Dark Slime Jelly, 1 Hydra Scale and 1 Fire Snail Saliva.");
 				addButton(10, "Fafnir tear", AddFTear).hint("Add 1 Fafnir tear (WIP Frost wyrm TF).");
-				addButton(11, "Bubblegum", AddBubble).hint("Add 1 Bubblegum (WIP Cancer TF).");
+				addButton(11, "Midnight gossamer", AddGossa).hint("Add 1 Midnight Gossamer.");
 				//addButton(11, "", ).hint("Add 1 .");
-				if (player.findPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) < 0) addButton(12, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
+				if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice)) addButton(12, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
 				addButton(13, "-1-", NonEquipmentMenu, page - 1);
 				addButton(14, "Back", SoulforceCheats);
 			}
@@ -1905,6 +1906,11 @@ use namespace CoC;
 			outputText("\n\n<b>(Gained 1 Bubblegum!)</b>\n\n");
 			inventory.takeItem(consumables.BUBBLEG, curry(NonEquipmentMenu, 2));
 		}
+
+		public function AddGossa():void {
+			outputText("\n\n<b>(Gained 1 Midnight gossamer!)</b>\n\n");
+			inventory.takeItem(consumables.M_GOSSR, curry(NonEquipmentMenu, 2));
+		}
 		
 		public function AddMetalPieces():void {
 			outputText("\n\n<b>(Gained 50 Metal Pieces!)</b>\n\n");
@@ -1979,6 +1985,10 @@ use namespace CoC;
 		public function AddWhiteIceShard():void {
 			outputText("\n\n<b>(Gained 1 White Ice Shard!)</b>\n\n");
 			inventory.takeItem(consumables.WHITEIS, SoulforceCheats);
+		}
+		public function AddLeviathanSunscreen():void {
+			outputText("\n\n<b>(Gained 1 Leviathan Sunscreen!)</b>\n\n");
+			inventory.takeItem(consumables.LEVISUN, SoulforceCheats);
 		}
 		public function AddVeryDilutedArcaneRegenConcotion():void {
 			outputText("\n\n<b>(Gained 1 very diluted Arcane Regen Concotion!)</b>\n\n");

@@ -88,7 +88,7 @@ public class OnikiriSake extends Consumable {
 		if (changes < changeLimit && rand(3) == 0 && player.tone < player.maxToneCap()) {
 			outputText(player.modTone(player.maxToneCap(), 3));
 		}
-		if (game.mutations.blockingBodyTransformations()) changeLimit = 0;
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 		//Sexual changed
 		if ((player.gender == 1 || player.gender == 3) && player.cocks.length > 0 && changes < changeLimit && rand(3) == 0) {
 			var selectedCock:int = -1;

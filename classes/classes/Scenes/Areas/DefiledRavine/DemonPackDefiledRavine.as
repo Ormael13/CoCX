@@ -9,6 +9,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Horns;
 import classes.BodyParts.Tail;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 	
@@ -48,13 +49,13 @@ import classes.internals.WeightedDrop;
 			this.ballSize = 1;
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
-			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_LOOSE);
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(8) + 70;
-			this.hips.type = HIP_RATING_AMPLE + 2;
-			this.butt.type = BUTT_RATING_LARGE;
+			this.hips.type = Hips.RATING_AMPLE + 2;
+			this.butt.type = Butt.RATING_LARGE;
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -77,10 +78,12 @@ import classes.internals.WeightedDrop;
 							consumables.INCUBID,
 							consumables.OVIELIX,
 							consumables.B__BOOK);
-			this.special1 = SceneLib.combat.packAttack;
-			this.special2 = SceneLib.combat.lustAttack;
-			this.tailType = Tail.TAIL_TYPE_DEMONIC;
-			this.horns.type = Horns.HORNS_DEMON;
+			this.abilities = [
+				{call: SceneLib.combat.packAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: SceneLib.combat.lustAttack(), type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+			];
+			this.tailType = Tail.DEMONIC;
+			this.horns.type = Horns.DEMON;
 			this.horns.count = 2;
 			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);

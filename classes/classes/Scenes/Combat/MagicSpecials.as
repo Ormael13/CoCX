@@ -1,5 +1,6 @@
 package classes.Scenes.Combat {
 import classes.*;
+import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
@@ -8,12 +9,15 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
+import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
+import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.NPCs.Holli;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Codex;
@@ -99,7 +103,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("<b>You need more time before you can use Possess again.</b>\n\n");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if ((player.raijuScore() >= 7 || (player.thunderbirdScore() >= 10 && player.tailType == Tail.THUNDERBIRD)) && player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
+		if ((player.raijuScore() >= 7 || (player.thunderbirdScore() >= 10 && player.tailType == Tail.THUNDERBIRD)) && player.hasPerk(PerkLib.ElectrifiedDesire) >= 0) {
 			bd = buttons.add("Orgasmic L.S.", OrgasmicLightningStrike, "Masturbate to unleash a massive discharge.", "Orgasmic Lightning Strike");
 			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			bd = buttons.add("Pleasure bolt", PleasureBolt, "Release a discharge of your lust inducing electricity. It will rise your lust by 2% of max lust after each use.", "Pleasure bolt");
@@ -116,6 +120,17 @@ public class MagicSpecials extends BaseCombatContent {
 				bd = buttons.add("Lust storm", Luststorm).hint("Supercharge the air with your lusty electricity to unleash a thunderstorm.");
 				if (player.hasStatusEffect(StatusEffects.lustStorm)) bd.disable("<b>You already unleashed a thunderstorm on the battlefield</b>\n\n");
 			}
+		}
+		if (player.wings.type == Wings.SEADRAGON && player.antennae.type == Antennae.SEADRAGON && player.skin.base.pattern == Skin.PATTERN_SEADRAGON_UNDERBODY){
+			bd = buttons.add("Electric Discharge", ElectricDischarge, "Release a deadly discharge of electricity.", "Electric discharge");
+			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		}
+		if (player.hasPerk(PerkLib.TransformationImmunityAtlach) && player.lowerBody == LowerBody.ATLACH_NACHA && !monster.hasStatusEffect(StatusEffects.MysticWeb)) {
+			bd = buttons.add("'Mystic Web'", MysticWeb, "Spin a thread of animated web using your magic to tie up your victim in place. Also reduce opponent speed after each use. \n");
+			bd.requireMana(spellCost(50));
+			if (player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
+				bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
+			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.tailType == Tail.FOX && player.tailCount >= 2 && player.tailCount < 7) {
 			bd = buttons.add("Fox Fire", basicFoxFire, "Unleash fox flame at your opponent for high damage. \n");
@@ -352,6 +367,19 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireFatigue(spellCost(50));
 			//Not Ready Yet:
 			if(player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) {
+				bd.disable("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
+			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		}
+		if (player.hasPerk(PerkLib.DragonWaterBreath)) {
+			bd = buttons.add("Dragon(Fire)", dragonWaterBreath);
+			if (player.hasPerk(PerkLib.DraconicLungs) || player.hasPerk(PerkLib.DrakeLungsFinalForm)) {
+				bd.hint("Unleash water from your mouth. This can only be done once per fight. Massively increase lightning damage taken by the target\n", "Dragon Water Breath");
+			} else {
+				bd.hint("Unleash water from your mouth. This can only be done once a day. Massively increase lightning damage taken by the target \n", "Dragon Water Breath");
+			}
+			bd.requireFatigue(spellCost(50));
+			//Not Ready Yet:
+			if(player.hasStatusEffect(StatusEffects.DragonWaterBreathCooldown)) {
 				bd.disable("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
@@ -962,6 +990,46 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("\n\n");
 			enemyAI();
 		}
+	}
+
+	public function ElectricDischarge():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("You begin to gather energy within your electrocytes your bodily lights turning bright white as you enter overcharge. Suddenly you deliver the amassed current your energy running throught the air like a bright bolt of white death and roaring thunder.");
+		if (monster.hasStatusEffect(StatusEffects.DragonWaterBreath)){
+			outputText("Electrified Water is blasted all around your wet target as lightning and fluid turn into a booming explosion the force of wich plaster [monster him] to the ground dazed the the violence of the impact!");
+			monster.removeStatusEffect(StatusEffects.DragonWaterBreath);
+			monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
+		}
+		var damage:Number = scalingBonusIntelligence() * spellModWhite();
+		//Determine if critical hit!
+		var crit1:Boolean = false;
+		var critChance1:int = 5;
+		critChance1 += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
+		if (rand(100) < critChance1) {
+			crit1 = true;
+			damage *= 1.75;
+		}
+		//High damage to goes.
+		damage = calcVoltageMod(damage);
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage = Math.round(damage);
+		doLightingDamage(damage, true, true);
+		outputText(" damage. ");
+		if (crit1) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
 	}
 	
 	public function OrgasmicLightningStrike():void {
@@ -2323,6 +2391,101 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("too resolute to be stunned by your attack.</b> ");
 			}
 			doDarknessDamage(damage, true, true);
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+		{
+			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			enemyAI();
+		}
+		else combatRoundOver();
+	}
+
+	public function dragonWaterBreath():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		fatigue(50, USEFATG_MAGIC_NOBM);
+		player.createStatusEffect(StatusEffects.DragonDarknessBreathCooldown,0,0,0,0);
+		var damage:Number = 0;
+		var damult:Number = 1;
+		damage += scalingBonusIntelligence();
+		damage += scalingBonusWisdom();
+		damage *= 1 + (rand(51) / 100);
+		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
+			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
+			damage *= 1.5;
+		}
+		if (player.hasPerk(PerkLib.DraconicLungsEvolved)) damult += 3;
+		if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) damult += 6;
+		if (player.hasPerk(PerkLib.DrakeLungs)) damult += 3;
+		if (player.hasPerk(PerkLib.DrakeLungsEvolved)) damult += 3;
+		if (player.hasPerk(PerkLib.DrakeLungsFinalForm)) damult += 3;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage *= damult;
+		damage = Math.round(damage);
+		//Shell
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+			enemyAI();
+			return;
+		}
+		//Amily!
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
+			enemyAI();
+			return;
+		}
+		if (monster is LivingStatue)
+		{
+			outputText("The water courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of dark glow.");
+			enemyAI();
+			return;
+		}
+		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  " + monster.capitalA + monster.short + " does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.<b>Your opponent is now wet with water!</b>");
+		//Miss:
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+			outputText("  Despite the heavy impact caused by your roar, " + monster.a + monster.short + " manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+		}
+		//Special enemy avoidances
+		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+			outputText("Vala beats her wings with surprising strength, blowing the water breath back at you! ");
+			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
+				outputText("You dive out of the way and evade it!");
+			}
+			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
+				outputText("You use your flexibility to barely fold your body out of the way!");
+			}
+			//Determine if blocked!
+			else if (combatBlock(true)) {
+				outputText("You manage to block your own water with your [shield]!");
+			}
+			else {
+				damage = player.takeMagicDamage(damage);
+				outputText("Your own water smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+			}
+			outputText("\n\n");
+		}
+		else {
+			if(!monster.hasPerk(PerkLib.Resolute)) {
+				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back. ");
+				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+			}
+			else {
+				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+				if(!monster.plural) outputText("is ");
+				else outputText("are");
+				outputText("too resolute to be stunned by your attack.</b> ");
+			}
+			doDamage(damage, true, true);
+			monster.createStatusEffect(StatusEffects.DragonWaterBreath,0,0,0,0);
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
@@ -3774,7 +3937,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function pureFoxFire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		var soulforcecost:int = 40 * soulskillCost() * soulskillcostmulti();
+		var soulforcecost:int = Math.floor(40 * soulskillCost() * soulskillcostmulti());
 		player.soulforce -= soulforcecost;
 		pureFoxFire2();
 	}
@@ -3972,7 +4135,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		var soulforcecost:int = 20 * soulskillCost() * soulskillcostmulti();
+		var soulforcecost:int = Math.floor(20 * soulskillCost() * soulskillcostmulti());
 		player.soulforce -= soulforcecost;
 		kitsuneIllusion2();
 	}
@@ -4063,6 +4226,42 @@ public class MagicSpecials extends BaseCombatContent {
 		else {
 			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		}
+	}
+
+	public function MysticWeb():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		if (monster is EncapsulationPod) {
+			clearOutput();
+			outputText("You can't web something you're trapped inside of!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		outputText("You ready your spinner and weave a spell animating your webbing to immobilise " + monster.a + monster.short + ". ");
+		//WRAP IT UPPP
+		if (40 + rand((player.inte+player.lib)/2) > monster.spe) {
+			outputText("A second later [monster he] is firmly tied up by your enchanted thread.");
+			monster.createStatusEffect(StatusEffects.MysticWeb, 4 + rand(2),0,0,0);
+			var Multiplier = 1;
+			if(player.hasPerk(PerkLib.ArachnidBookLungEvolved)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.ArachnidBookLungFinalForm)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.Apex)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
+			monster.statStore.addBuffObject({spe:-45*Multiplier}, "Web",{text:"Web"});
+			if(player.hasPerk(PerkLib.ArachnidBookLungFinalForm)){
+				if(rand(100) > 50) {
+					monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				}
+			}
+			awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
+		}
+		//Failure
+		else outputText("Your target proves too fast for your technique to catch up.");
+		outputText("\n\n");
+		enemyAI();
 	}
 	
 	//Slime Bolt

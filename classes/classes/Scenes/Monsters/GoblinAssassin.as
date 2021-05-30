@@ -166,13 +166,15 @@ public class GoblinAssassin extends Monster
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
 							consumables.PURPDYE);// TODO this is a copy of goblin drop. consider replacement with higher-lever stuff
+			this.abilities = [
+				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},
+				{ call: dualShot, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_WEAPON]},
+				{ call: goblinExplosion, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_FIRE]},
+				{ call: lustNeedle, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_WEAPON]},
+			]
 			checkMonster();
 		}
 
-		override protected function performCombatAction():void
-		{
-			var actions:Array = [eAttack,goblinDrugAttack,lustNeedle,dualShot,goblinExplosion];
-			actions[rand(actions.length)]();
-		}
 	}
 }

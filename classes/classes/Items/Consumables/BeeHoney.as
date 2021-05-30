@@ -112,7 +112,7 @@ public class BeeHoney extends Consumable
 				}
 				else if (player.cor > 0) outputText(".");
 			}
-			if (mutations.blockingBodyTransformations()) changeLimit = 0;
+			if (player.blockingBodyTransformations()) changeLimit = 0;
 			//bee item corollary:
 			if (changes < changeLimit && player.hairType == 4 && Utils.rand(2) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:

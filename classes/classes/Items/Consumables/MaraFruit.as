@@ -58,7 +58,7 @@ public class MaraFruit extends Consumable{
 			dynStats("spe", -1);
 			changes++;
 		}
-		if (game.mutations.blockingBodyTransformations()) changeLimit = 0;
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 		//Female changes - pussy to flower (for now unused)
 		if (player.gender == 2 || (player.gender == 3 && player.mf("m", "f") == "f")) {
 			var boobsGrew:Boolean = false;

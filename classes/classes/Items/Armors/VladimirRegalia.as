@@ -19,13 +19,13 @@ import classes.StatusEffects;
 		}
 
 		override public function playerEquip():Armor {
-			while (game.player.findPerk(PerkLib.VladimirRegalia) >= 0) game.player.removePerk(PerkLib.VladimirRegalia);
+			while (game.player.hasPerk(PerkLib.VladimirRegalia)) game.player.removePerk(PerkLib.VladimirRegalia);
 			game.player.createPerk(PerkLib.VladimirRegalia,0,0,0,0);
 			return super.playerEquip();
 		}
 
 		override public function playerRemove():Armor {
-			while (game.player.findPerk(PerkLib.VladimirRegalia) >= 0) game.player.removePerk(PerkLib.VladimirRegalia);
+			while (game.player.hasPerk(PerkLib.VladimirRegalia)) game.player.removePerk(PerkLib.VladimirRegalia);
 			return super.playerRemove();
 		}
 

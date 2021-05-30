@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.GlacialRift 
+package classes.Scenes.Areas.GlacialRift
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -9,7 +9,7 @@ import classes.internals.WeightedDrop;
 
 public class FrostGiant extends Monster
 	{
-		
+
 		public function giantAttackPunch():void {
 			var damage:int = 0;
 			outputText("The giant strides toward you, closing the distance faster than you can run. He rears back and strikes at you!  ");
@@ -30,13 +30,13 @@ public class FrostGiant extends Monster
 				}
 			}
 		}
-		
+
 		public function giantGrab():void {
 			outputText("The giant yells something you don't understand and charges at you, hands outstretched!  ");
 			if (player.getEvasionRoll()) {
 				outputText("You ");
-				if (rand(player.spe) < spe) outputText("barely"); 
-				else outputText("ably"); 
+				if (rand(player.spe) < spe) outputText("barely");
+				else outputText("ably");
 				outputText(" avoid his charge, jumping just in time to avoid his hands, and then his feet. He's unable to stop himself in time and collides head first with a boulder slightly smaller than his head. ");
 				var giantDmg:Number = 100 + rand(80);
 				HP -= giantDmg;
@@ -134,7 +134,7 @@ public class FrostGiant extends Monster
 			}
 			player.removeStatusEffect(StatusEffects.GiantGrabbed);
 		}
-		
+
 		public function giantBoulderThrow():void {
 			outputText("The giant walks over to a boulder much larger than you and hefts it up. You had better wait and be ready to dodge, or this could be very bad. ");
 			outputText("<b>With a grunt and a shove, the giant throws the boulder directly at you!</b>");
@@ -146,7 +146,7 @@ public class FrostGiant extends Monster
 				if (player.biggestCockArea() >= 24) {
 					outputText("Oh wait, you could just fuck his ass with your ");
 					if (player.cocks.length > 1) outputText("collection of dicks. ");
-					else outputText(" one really big cock. "); 
+					else outputText(" one really big cock. ");
 					outputText("He might have a nice nose... You try to get a size of his nose. He’s too far away to gauge it");
 				}
 				else if (player.biggestCockArea() < 24) {
@@ -177,27 +177,18 @@ public class FrostGiant extends Monster
 			player.takePhysDamage(damage, true);
 			outputText("\n\n");
 		}
-		
-		override protected function performCombatAction():void
-		{
-			var chooser:Number = 0;
-			chooser = rand(10);
-			if (chooser < 6) giantAttackPunch(); //60% chance
-			if (chooser >= 6 && chooser < 9) giantGrab(); //30% chance
-			if (chooser >= 9) giantBoulderThrow(); //10% chance
-		}
-		
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.glacialRift.giantScene.winAgainstGiant();
 		}
-		
+
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			cleanupAfterCombat();
 		}
-		
-		public function FrostGiant() 
+
+		public function FrostGiant()
 		{
 			this.a = "the ";
 			this.short = "frost giant";
@@ -241,7 +232,13 @@ public class FrostGiant extends Monster
 			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0);
+			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0)
+			this.abilities = [
+				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: giantAttackPunch, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: giantGrab, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: giantBoulderThrow, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[]},
+			];
 			checkMonster();
 		}
 	}

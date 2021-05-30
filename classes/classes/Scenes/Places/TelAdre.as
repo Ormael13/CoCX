@@ -1090,6 +1090,7 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(4, "R.Ambidexty", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "E.R.Armor", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "L.Blaster", "You already bought item from Kaiba today.");
+			addButtonDisabled(7, "I.Q.Gown", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(0, "UnDefKingS", buyItem, jewelries.UNDKINS).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
@@ -1098,7 +1099,8 @@ public function kaibaShopMainMenu2():void {
 			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
 			addButton(4, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
 			addButton(5, "E.R.Armor", buyItem, armors.ERA).hint("Elven Ranger Armor - +50% to Bow and spear damage, Agile, Revealing, Slutty seduction +10.");
-			addButton(5, "L.Blaster", buyItem, weaponsrange.LBLASTR).hint("Lactoblaster - A rare weapon wich may only be in Kaiba inventory for a moment buy it while you can!");
+			addButton(6, "L.Blaster", buyItem, weaponsrange.LBLASTR).hint("Lactoblaster - A rare weapon wich may only be in Kaiba inventory for a moment buy it while you can!");
+			addButton(7, "I.Q.Gown", buyItem, armors.IQG).hint("Ice queen gown - A rare dress wich may only be in Kaiba inventory for a moment buy it while you can!");
 
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
