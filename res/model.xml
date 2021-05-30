@@ -1603,6 +1603,9 @@
             <case values="Antennae.CENTIPEDE">
                 <show part="antennae/bee"/> <!-- Temporary -->
             </case>
+			<case values="Antennae.SEADRAGON">
+                <show part="neck/seaDragonWhisker"/>
+            </case>
             <default>
                 <show part="antennae/bee"/>
             </default>
@@ -1659,6 +1662,9 @@
             </case>
 			<case values="Horns.ANTLERS">
 				<show part="horns_overclothe/deer"/>
+            </case>
+			<case values="Horns.SEADRAGON">
+                <show part="horns_bg/seaDragon"/>
             </case>
         </switch>
 
@@ -1983,6 +1989,18 @@
                         </default>
                     </switch>
                 </case>
+				<case values="Hair.PRISMATIC">
+					<switch>
+                        <case test="hairLength lt 16">
+							<show part="hair/rainbow"/>
+							<show part="hair_bg/rainbow"/>
+                        </case>
+                        <default>
+                            <show part="hair/rainbow"/>
+							<show part="hair_bg/rainbow"/>
+                        </default>
+                    </switch>
+                </case>
 
                 <default> <!-- covers Hair.NORMAL, Hair.GHOST, Hair.ANEMONE, Hair.QUILL, Hair.LEAF, Hair.FLUFFY, Hair.GRASS, Hair.SILKEN, Hair.STORM --> <!-- TODO  -->
                     <switch>
@@ -2002,7 +2020,7 @@
 		<!-- HAIR STYLE AREA -->
 		<if test="hairLength &gt; 0">
             <if test="hairType != Hair.FLUFFY and hairType != Hair.GORGON and hairType != Hair.ANEMONE and hairType != Hair.GOO">
-                <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR">
+                <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
                     <if test="hairStyle != Hair.PLAIN">
                         <hide part="hair/0"/>
                         <hide part="hair_bg/02"/>
@@ -2052,7 +2070,7 @@
                         </if>
                     </case>
                     <default>
-                        <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR">
+                        <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">
                             <switch>
                                 <case test="hairLength lt 16">
                                     <hide part="hair/*"/>
@@ -2607,7 +2625,7 @@
                 <show part="hands/scales"/>
                 <show part="hands_bg/scales"/>
             </case>
-            <case values="Arms.ORCA">
+            <case values="Arms.ORCA,Arms.SEADRAGON">
                 <hide part="arms/*"/>
                 <hide part="arms_bg/*"/>
                 <show part="arms_bg/orca"/>
@@ -3011,7 +3029,7 @@
 				</if>
 
             </case>
-			<case values="LowerBody.SHARK,LowerBody.ORCA">
+			<case values="LowerBody.SHARK,LowerBody.ORCA,LowerBody.SEADRAGON">
 				<if test="lowerBody==LowerBody.ORCA">
 					<hide part="legs/*"/>
 					<show part="legs/orca"/>
@@ -3286,6 +3304,10 @@
             </case>
 			<case values="Wings.WINDY_AURA">
                 <show part="aura/windyaura"/>
+            </case>
+			<case values="Wings.SEADRAGON">
+                <show part="wings_bg/SeaDragonLeft"/>
+				<show part="wings_bg/SeaDragonRight"/>
             </case>
 			<case values="Wings.VAMPIRE">
                 <show part="overclothe/vampire"/>

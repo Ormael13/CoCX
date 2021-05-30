@@ -535,6 +535,12 @@ public class LowerBody extends SaveableBodyPart {
 		appearanceDesc: "Where your legs would normally start you have grown the body of a spider, with {legCount} spindly legs that sprout from its sides."
 	});
 
+	public static const SEADRAGON:int = 70;
+	EnumValue.add(Types, SEADRAGON, "SEADRAGON", {
+		name: "sea dragon",
+		appearanceDesc: "Your {legCount} legs are mostly human save for the webbing between your clawed toes that assists you in swimming."
+	});
+
 	override public function set type(value:int):void {
 		super.type = value;
 		// Reset leg count

@@ -670,6 +670,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" Your skin is also covered in various place with "+player.skin.base.adj+".");
 		}
 		if (player.skin.base.pattern == Skin.PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
+		if (player.skin.base.pattern == Skin.PATTERN_SEADRAGON_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of a sea dragon. Your underbelly is also lined up with bioluminescent dots like those of a deep sea fish.\n");
 		if (player.skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY) outputText(" Your body is covered from head to toe in [skin color] with a [skin color2] underbelly, giving to your nimble frame a red-panda appearance.");
 		if (player.skin.base.pattern == Skin.PATTERN_USHI_ONI_ONNA_TATTOO) outputText(" You have strange ushi oni-onna tattoos in your body, they appear in your belly, chest, breasts, shoulders and even face, you don’t know why but some are like a black sheen plate while others are just fur.");
 	}
@@ -1208,6 +1209,9 @@ public class PlayerAppearance extends BaseContent {
 		if (wingType == Wings.FAIRY){
 			outputText(" A large pair of colorful butterfly wings rest on your shoulder blades. Your fairy wings give you a regal appearance fit for fey royalty.");
 		}
+		if (wingType == Wings.SEADRAGON){
+			outputText(" Two large majestic webbed wings not unlike the aquatic flippers of a deep-sea creature unfurls from your back, the interior lined with bright color patterns and bioluminescent specks that change depending on your mood. These wings are as good to fly as they are to swim.");
+		}
 	}
 	public function describeHorns():void {
 //Horns
@@ -1335,6 +1339,10 @@ public class PlayerAppearance extends BaseContent {
 		if (player.horns.type == Horns.USHI_ONI_ONNA) {
 			if (player.horns.count > 0)
 				outputText(" You have a pair of ushi-" + player.mf("oni", "onna") + " horns, both come out of your skull and go upward in a spiral pattern.\n");
+		}
+		if (player.horns.type == Horns.SEADRAGON) {
+			if (player.horns.count > 0)
+				outputText(" Two large-sized horns grow from the side of your head. The faint bioluminescent specks that line the length of each horn enhance with a mesmerizing glow. At the tip of each horn is a bright red glow, both as a gentle warning and an enthralling lure to unwary prey.\n");
 		}
 	}
 	public function describeTongue():void {
@@ -1543,7 +1551,7 @@ public class PlayerAppearance extends BaseContent {
 			else if(earType == Ears.YETI)
 				outputText(" A pair of yeti ears, bigger than your old human ones have sprouted from the top of your head.");
 			else if(earType == Ears.ORCA)
-				outputText(" A pair of very large fin at least twice as large as your head which help you orient yourself underwater have sprouted from the top of your head. Their underside is white while the top is black.");
+				outputText(" A pair of very large fin at least twice as large as your head which help you orient yourself underwater have sprouted from the top of your head. Their underside is [skin color2] while the top is [skin color].");
 			else if(earType == Ears.ORCA2)
 				outputText(" A pair of rounded protrusions with small holes on the sides of your head serve as your ears.");
 			else if(earType == Ears.SNAKE)
@@ -1612,6 +1620,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText(" Floppy antennae also appear on your skull, bouncing and swaying in the breeze.");
 			if(player.antennae.type == Antennae.CENTIPEDE)
 				outputText(" A pair of long antennae have grown just behind your hairline. They occasionally curl and twitch at the slightest of movements.");
+			if(player.antennae.type == Antennae.SEADRAGON)
+				outputText(" Just below your ears are four bioluminescent strands that run down your neck, beautifully lighting up your front and giving you an air of mystique.");
 		}
 		//not bald
 		else
@@ -2802,6 +2812,11 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.scyllaScore() >= 1) outputText("\n<font color=\"#008000\">Half Scylla: " + player.scyllaScore() + "</font>");
 		else if (player.scyllaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Scylla: 0</font>");
+		//Sea dragon
+		if (player.leviathanScore() >= 20) outputText("\n<font color=\"#0000a0\">Leviathan-boy/girl: " + player.leviathanScore() + " (+200% to Str racial multi, +100% to Tou racial multi, +100% to Spe racial multi, +50% to Int racial multi)</font>");
+		else if (player.leviathanScore() >= 14) outputText("\n<font color=\"#0000a0\">Sea dragon-boy/girl: " + player.leviathanScore() + " (+110% to Str racial multi, +70% to Tou racial multi, +70% to Spe racial multi, +50% to Int racial multi)</font>");
+		else if (player.leviathanScore() >= 1) outputText("\n<font color=\"#008000\">Sea dragon-boy/girl: " + player.leviathanScore() + "</font>");
+		else if (player.leviathanScore() < 1) outputText("\n<font color=\"#ff0000\">Sea dragon-boy/girl: 0</font>");
 		//Shark
 		if (player.sharkScore() >= 9 && player.vaginas.length > 0 && player.cocks.length > 0) outputText("\n<font color=\"#0000a0\">Tigershark-morph: " + player.sharkScore() + " (+60% to Str racial multi, +70% to Spe racial multi, +20% to Lib racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		else if (player.sharkScore() >= 8) outputText("\n<font color=\"#0000a0\">Shark-morph: " + player.sharkScore() + " (+40% to Str racial multi, +70% to Spe racial multi, +10% to Lib racial multi)</font>");

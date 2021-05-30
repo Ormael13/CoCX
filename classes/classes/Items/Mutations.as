@@ -203,13 +203,13 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.");
         dynStats("lib", -10, "lus", -25, "cor", -10);
-        if (player.findPerk(PerkLib.PurityBlessing) < 0) player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
+        if (!player.hasPerk(PerkLib.PurityBlessing)) player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
     }
 
     public function ezekielfruit(player:Player):void {
         clearOutput();
         outputText("You take first bite of fruit that Evangeline gave you.  Surprisingly it taste delicious as nothing else you tasted before so without thinking more you ate rest of the fruit.");
-        if (player.findPerk(PerkLib.EzekielBlessing) < 0) player.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
+        if (!player.hasPerk(PerkLib.EzekielBlessing)) player.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
         statScreenRefresh();
         player.statStore.addBuffObject({
             "str": 10,
@@ -309,17 +309,17 @@ public final class Mutations extends MutationsHelper {
     public function lowgradeelementalPearl(player:Player):void {
         clearOutput();
         outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of three steams of mystical energies spreading in your body.");
-        if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyResolve) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolve, 0, 0, 0, 0);
+        if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve)) player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolve, 0, 0, 0, 0);
     }
     public function middlegradeelementalPearl(player:Player):void {
         clearOutput();
         outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of five steams of mystical energies spreading in your body.");
-        if (player.findPerk(PerkLib.ElementalConjurerMindAndBodyDedication) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedication, 0, 0, 0, 0);
+        if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication)) player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedication, 0, 0, 0, 0);
     }
     public function highgradeelementalPearl(player:Player):void {
         clearOutput();
         outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of seven steams of mystical energies spreading in your body.");
-        if (player.findPerk(PerkLib.ElementalConjurerMindAndBodySacrifice) < 0) player.createPerk(PerkLib.ElementalConjurerMindAndBodySacrifice, 0, 0, 0, 0);
+        if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice)) player.createPerk(PerkLib.ElementalConjurerMindAndBodySacrifice, 0, 0, 0, 0);
     }
 
     public function bagofcosmosA1(player:Player):void {
@@ -838,16 +838,16 @@ public final class Mutations extends MutationsHelper {
 
     public function additionalTransformationChances():Number {
         var additionalTransformationChancesCounter:Number = 0;
-        if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) additionalTransformationChancesCounter++;
-        if (player.findPerk(PerkLib.Enhancement) >= 0) additionalTransformationChancesCounter++;
-        if (player.findPerk(PerkLib.Fusion) >= 0) additionalTransformationChancesCounter++;
-        if (player.findPerk(PerkLib.Enchantment) >= 0) additionalTransformationChancesCounter++;
-        if (player.findPerk(PerkLib.Refinement) >= 0) additionalTransformationChancesCounter++;
-        if (player.findPerk(PerkLib.Saturation) >= 0) additionalTransformationChancesCounter++;
-        if (player.findPerk(PerkLib.Perfection) >= 0) additionalTransformationChancesCounter++;
-        if (player.findPerk(PerkLib.Creationism) >= 0) additionalTransformationChancesCounter++;
-        if (player.findPerk(PerkLib.EzekielBlessing) >= 0) additionalTransformationChancesCounter++;
-        if (player.findPerk(PerkLib.TransformationResistance) >= 0) additionalTransformationChancesCounter--;
+        if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) additionalTransformationChancesCounter++;
+        if (player.hasPerk(PerkLib.Enhancement)) additionalTransformationChancesCounter++;
+        if (player.hasPerk(PerkLib.Fusion)) additionalTransformationChancesCounter++;
+        if (player.hasPerk(PerkLib.Enchantment)) additionalTransformationChancesCounter++;
+        if (player.hasPerk(PerkLib.Refinement)) additionalTransformationChancesCounter++;
+        if (player.hasPerk(PerkLib.Saturation)) additionalTransformationChancesCounter++;
+        if (player.hasPerk(PerkLib.Perfection)) additionalTransformationChancesCounter++;
+        if (player.hasPerk(PerkLib.Creationism)) additionalTransformationChancesCounter++;
+        if (player.hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
+        if (player.hasPerk(PerkLib.TransformationResistance)) additionalTransformationChancesCounter--;
         return additionalTransformationChancesCounter;
     }
 
@@ -1085,7 +1085,7 @@ public final class Mutations extends MutationsHelper {
         if (!purified) player.minoCumAddiction(7);
         else player.minoCumAddiction(-2);
         outputText("As soon as you crack the seal on the bottled white fluid, a ");
-        if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 0 && (player.findPerk(PerkLib.MinotaurCumResistance) < 0 || player.findPerk(PerkLib.ManticoreCumAddict) < 0)) outputText("potent musk washes over you.");
+        if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 0 && (!player.hasPerk(PerkLib.MinotaurCumResistance) || !player.hasPerk(PerkLib.ManticoreCumAddict))) outputText("potent musk washes over you.");
         else outputText("heavenly scent fills your nostrils.");
         if (!purified) {
             if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 50) outputText("  It makes you feel dizzy, ditzy, and placid.");
@@ -1119,25 +1119,25 @@ public final class Mutations extends MutationsHelper {
             else outputText("  Slick fluids soak your thighs as your body reacts to this new stimulus.");
         }
         //(Minotaur fantasy)
-        if (!CoC.instance.inCombat && rand(10) == 1 && (!purified && (player.findPerk(PerkLib.MinotaurCumResistance) < 0) || player.findPerk(PerkLib.ManticoreCumAddict) < 0)) {
+        if (!CoC.instance.inCombat && rand(10) == 1 && (!purified && (!player.hasPerk(PerkLib.MinotaurCumResistance)) || !player.hasPerk(PerkLib.ManticoreCumAddict))) {
             outputText("\n\nYour eyes flutter closed for a second as a fantasy violates your mind.  You're on your knees, prostrate before a minotaur.  Its narcotic scent fills the air around you, and you're swaying back and forth with your belly already sloshing and full of spunk.  Its equine-like member is rubbing over your face, and you submit to the beast, stretching your jaw wide to take its sweaty, glistening girth inside you.  Your tongue quivers happily as you begin sucking and slurping, swallowing each drop of pre-cum you entice from the beastly erection.  Gurgling happily, you give yourself to your inhuman master for a chance to swallow into unthinking bliss.");
             dynStats("lus", rand(5) + player.cor / 20 + flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] / 5);
             MutagenBonus("lib", 1);
         }
         //(Healing – if hurt and uber-addicted (hasperk))
-        if (player.HP < player.maxOverHP() && player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
+        if (player.HP < player.maxOverHP() && player.hasPerk(PerkLib.MinotaurCumAddict)) {
             outputText("\n\nThe fire of your arousal consumes your body, leaving vitality in its wake.  You feel much better!");
             HPChange(int(player.maxHP() / 4), false);
         }
         //Uber-addicted status!
-        if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] <= 0 && !purified) {
+        if (player.hasPerk(PerkLib.MinotaurCumAddict) && flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] <= 0 && !purified) {
             flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] = 3 + rand(2);
             outputText("\n\n<b>Your body feels so amazing and sensitive.  Experimentally you pinch yourself and discover that even pain is turning you on!</b>");
         }
         //Clear mind a bit
-        if (purified && (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 40)) {
+        if (purified && (player.hasPerk(PerkLib.MinotaurCumAddict) || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 40)) {
             outputText("\n\nYour mind feels a bit clearer just from drinking the purified minotaur cum. Maybe if you drink more of these, you'll be able to rid yourself of your addiction?");
-            if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] <= 50) {
+            if (player.hasPerk(PerkLib.MinotaurCumAddict) && flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] <= 50) {
                 outputText("  Suddenly, you black out and images flash in your mind about getting abducted by minotaurs and the abandonment of your quest that eventually leads to Lethice's success in taking over Mareth. No, it cannot be! You wake up and recover from the blackout, horrified to find out what would really happen if you spend the rest of your life with the Minotaurs! You shake your head and realize that you're no longer dependent on the cum.  ");
                 outputText("\n<b>(Lost Perk: Minotaur Cum Addict!)</b>");
                 player.removePerk(PerkLib.MinotaurCumAddict);
@@ -1320,9 +1320,9 @@ public final class Mutations extends MutationsHelper {
             if (player.skin.base.color == "blue" || player.skin.base.color == "gray" || player.skin.base.color == "red" || player.skin.base.color == "purple" || player.skin.base.color == "light purple" || player.skin.base.color == "ghostly white" || player.skin.base.color == "indigo" || player.skin.base.color == "sky blue" || player.skin.base.color == "shiny black") {
                 if (player.vaginas.length > 0) {
                     outputText("\n\nYour heart begins beating harder and harder as heat floods to your groin.  You feel your clit peeking out from under its hood, growing larger and longer as it takes in more and more blood.");
-                    if (player.clitLength > 3 && player.findPerk(PerkLib.BigClit) < 0) outputText("  After some time it shrinks, returning to its normal aroused size.  You guess it can't get any bigger.");
-                    if (player.clitLength > 5 && player.findPerk(PerkLib.BigClit) >= 0) outputText("  Eventually it shrinks back down to its normal (but still HUGE) size.  You guess it can't get any bigger.");
-                    if (((player.findPerk(PerkLib.BigClit) >= 0) && player.clitLength < 6)
+                    if (player.clitLength > 3 && !player.hasPerk(PerkLib.BigClit)) outputText("  After some time it shrinks, returning to its normal aroused size.  You guess it can't get any bigger.");
+                    if (player.clitLength > 5 && player.hasPerk(PerkLib.BigClit)) outputText("  Eventually it shrinks back down to its normal (but still HUGE) size.  You guess it can't get any bigger.");
+                    if (((player.hasPerk(PerkLib.BigClit)) && player.clitLength < 6)
                             || player.clitLength < 3) {
                         player.clitLength += (rand(4) + 2) / 10;
                     }
@@ -1674,7 +1674,7 @@ public final class Mutations extends MutationsHelper {
             else if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [haircolor] fur growing out from below!  <b>You are now partialy covered in [haircolor] fur from head to toe.</b>");
             else outputText("\n\nYour skin itch incessantly.  You scratch, feeling it current form shifting into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now partialy covered in [haircolor] fur from head to toe.</b>");
             player.skin.growFur({color: player.hairColor}, Skin.COVERAGE_LOW);
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                 outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
             }
@@ -1687,7 +1687,7 @@ public final class Mutations extends MutationsHelper {
             else if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [haircolor] fur growing out from below!  <b>You are now covered in [haircolor] fur from head to toe.</b>");
             else outputText("\n\nYour skin itch incessantly.  You scratch, feeling it current form shifting into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now covered in [haircolor] fur from head to toe.</b>");
             player.skin.growFur({color: player.hairColor}, Skin.COVERAGE_COMPLETE);
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                 outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
             }
@@ -1811,11 +1811,11 @@ public final class Mutations extends MutationsHelper {
             outputText("You eat the pepper, even the two orb-like growths that have grown out from the base.  It's delicious!");
         }
         //OVERDOSE Bad End!
-        if (type <= 0 && crit > 1 && player.hasFullCoatOfType(Skin.FUR) && player.faceType == Face.DOG && player.ears.type == Ears.DOG && player.lowerBody == LowerBody.DOG && player.tailType == Tail.DOG && rand(2) == 0 && player.hasStatusEffect(StatusEffects.DogWarning) && player.findPerk(PerkLib.TransformationResistance) < 0) {
+        if (type <= 0 && crit > 1 && player.hasFullCoatOfType(Skin.FUR) && player.faceType == Face.DOG && player.ears.type == Ears.DOG && player.lowerBody == LowerBody.DOG && player.tailType == Tail.DOG && rand(2) == 0 && player.hasStatusEffect(StatusEffects.DogWarning) && !player.hasPerk(PerkLib.TransformationResistance)) {
             var choice:int = rand(2);
             if (choice == 0) {
                 outputText("\n\nAs you swallow the pepper, you note that the spicy hotness on your tongue seems to be spreading. Your entire body seems to tingle and burn, making you feel far warmer than normal, feverish even. Unable to stand it any longer you tear away your clothes, hoping to cool down a little. Sadly, this does nothing to aid you with your problem. On the bright side, the sudden feeling of vertigo you've developed is more than enough to take your mind off your temperature issues. You fall forward onto your hands and knees, well not really hands and knees to be honest. More like paws and knees. That can't be good, you think for a moment, before the sensation of your bones shifting into a quadrupedal configuration robs you of your concentration. After that, it is only a short time before your form is remade completely into that of a large dog, or perhaps a wolf. The distinction would mean little to you now, even if you were capable of comprehending it. ");
-                if (player.findPerk(PerkLib.MarblesMilk) >= 0) outputText("All you know is that there is a scent on the wind, it is time to hunt, and at the end of the day you need to come home for your milk.");
+                if (player.hasPerk(PerkLib.MarblesMilk)) outputText("All you know is that there is a scent on the wind, it is time to hunt, and at the end of the day you need to come home for your milk.");
                 else outputText("All you know is that there is a scent on the wind, and it is time to hunt.");
             }
             if (choice == 1) outputText("\n\nYou devour the sweet pepper, carefully licking your fingers for all the succulent juices of the fruit, and are about to go on your way when suddenly a tightness begins to build in your chest and stomach, horrid cramps working their way first through your chest, then slowly flowing out to your extremities, the feeling soon joined by horrible, blood-curdling cracks as your bones begin to reform, twisting and shifting, your mind exploding with pain. You fall to the ground, reaching one hand forward. No... A paw, you realize in horror, as you try to push yourself back up. You watch in horror, looking down your foreleg as thicker fur erupts from your skin, a [haircolor] coat slowly creeping from your bare flesh to cover your body. Suddenly, you feel yourself slipping away, as if into a dream, your mind warping and twisting, your body finally settling into its new form. With one last crack of bone you let out a yelp, kicking free of the cloth that binds you, wresting yourself from its grasp and fleeing into the now setting sun, eager to find prey to dine on tonight.");
@@ -2095,7 +2095,7 @@ public final class Mutations extends MutationsHelper {
             if (player.cumMultiplier < 2 && rand(2) == 0 && changes < changeLimit && type != 6) {
                 choice = 1.5;
                 //Lots of cum raises cum multiplier cap to 3 instead of 1.5
-                if (player.findPerk(PerkLib.MessyOrgasms) >= 0) choice = 3;
+                if (player.hasPerk(PerkLib.MessyOrgasms)) choice = 3;
                 if (choice < player.cumMultiplier + .05 * crit) {
                     changes--;
                 } else {
@@ -2365,7 +2365,7 @@ public final class Mutations extends MutationsHelper {
                 player.skinAdj = "thick";
             } else {
                 player.skin.growCoat(Skin.FUR, {color: player.hairColor, adj: "thick"});
-                if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+                if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                     outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                     player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
                 }
@@ -2389,7 +2389,7 @@ public final class Mutations extends MutationsHelper {
                 });
             }
             outputText("  <b>You are now covered in [skin coat.color] fur from head to toe.</b>");
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                 outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
             }
@@ -2562,7 +2562,7 @@ public final class Mutations extends MutationsHelper {
             if (player.cumMultiplier < 6 && rand(2) == 0 && changes < changeLimit) {
                 var max:int = 3;
                 //Lots of cum raises cum multiplier cap to 6 instead of 3
-                if (player.findPerk(PerkLib.MessyOrgasms) >= 0) max = 6;
+                if (player.hasPerk(PerkLib.MessyOrgasms)) max = 6;
                 if (max < player.cumMultiplier + .4 * crit) {
                     changes--;
                 } else {
@@ -2650,7 +2650,7 @@ public final class Mutations extends MutationsHelper {
                 //Temp is the max it can be raised to
                 var max:int = 3;
                 //Lots of cum raises cum multiplier cap to 6 instead of 3
-                if (player.findPerk(PerkLib.MessyOrgasms) >= 0) max = 6;
+                if (player.hasPerk(PerkLib.MessyOrgasms)) max = 6;
                 if (max < player.cumMultiplier + .4 * crit) {
                     changes--;
                 } else {
@@ -3136,10 +3136,10 @@ public final class Mutations extends MutationsHelper {
         else if (player.statusEffectv3(StatusEffects.Marble) <= 0) outputText("You gulp down the bottle's contents; Marble makes some really good tasting milk.\n\n");
         else if (player.statusEffectv3(StatusEffects.Marble) > 0) {
             //[player is completely addicted]
-            if (player.findPerk(PerkLib.MarblesMilk) >= 0) outputText("You gulp down the bottle's contents; it's no substitute for the real thing, but it's a nice pick me up.\n\n");
+            if (player.hasPerk(PerkLib.MarblesMilk)) outputText("You gulp down the bottle's contents; it's no substitute for the real thing, but it's a nice pick me up.\n\n");
             else {
                 //[player is no longer addicted]
-                if (player.findPerk(PerkLib.MarbleResistant) >= 0) outputText("You gulp down the bottle's contents; you're careful not to get too attached to the taste.\n\n");
+                if (player.hasPerk(PerkLib.MarbleResistant)) outputText("You gulp down the bottle's contents; you're careful not to get too attached to the taste.\n\n");
                 //[player is addicted]
                 else outputText("You gulp down the bottle's contents; you really needed that.\n\n");
             }
@@ -4000,7 +4000,7 @@ public final class Mutations extends MutationsHelper {
                 outputText(vaginaDescript(0) + " soaks your thighs");
             }
             if (player.gender == 0) outputText("body begins to quiver with orgasmic bliss");
-            if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) outputText(" with charged, glowing, plasma");
+            if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) outputText(" with charged, glowing, plasma");
             outputText(".  Once you've had a chance to calm down, you notice that the explosion of pleasure you just experienced has rocked you to your core.  You are a little hornier than you were before.");
             //increase player libido, and maybe sensitivity too?
             player.orgasm();
@@ -4090,7 +4090,7 @@ public final class Mutations extends MutationsHelper {
             player.vaginaType(0);
             changes++;
         }
-        if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) || player.ass.analWetness > 1)) {
+        if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && !player.hasPerk(PerkLib.MaraesGiftButtslut)) || player.ass.analWetness > 1)) {
             outputText("\n\nYou feel a tightening up in your colon and your [asshole] sucks into itself.  You feel sharp pain at first but that thankfully fades.  Your ass seems to have dried and tightened up.");
             player.ass.analWetness--;
             if (player.ass.analLooseness > 1) player.ass.analLooseness--;
@@ -4111,7 +4111,7 @@ public final class Mutations extends MutationsHelper {
         }
         //GENERAL APPEARANCE STUFF BELOW
         //ADDING GOBLINOID BLOOD IF PC QUALIFY
-        if ((player.isGoblinoid()) && player.findPerk(PerkLib.GoblinoidBlood) < 0) {
+        if ((player.isGoblinoid()) && !player.hasPerk(PerkLib.GoblinoidBlood)) {
             outputText("\nDue to your body becoming closer to that of a gremlin chemicals and drugs have started to affect you with way more potency then before. It would seem you have gained the goblinoid blood quality.\n");
             outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
             player.createPerk(PerkLib.GoblinoidBlood, 0, 0, 0, 0);
@@ -4314,7 +4314,7 @@ public final class Mutations extends MutationsHelper {
             player.vaginaType(0);
             changes++;
         }
-        if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) || player.ass.analWetness > 1)) {
+        if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && !player.hasPerk(PerkLib.MaraesGiftButtslut)) || player.ass.analWetness > 1)) {
             outputText("\n\nYou feel a tightening up in your colon and your [asshole] sucks into itself.  You feel sharp pain at first but that thankfully fades.  Your ass seems to have dried and tightened up.");
             player.ass.analWetness--;
             if (player.ass.analLooseness > 1) player.ass.analLooseness--;
@@ -4335,7 +4335,7 @@ public final class Mutations extends MutationsHelper {
         }
         //GENERAL APPEARANCE STUFF BELOW
         //ADDING GOBLINOID BLOOD IF PC QUALIFY
-        if ((player.isGoblinoid()) && player.findPerk(PerkLib.GoblinoidBlood) < 0) {
+        if ((player.isGoblinoid()) && !player.hasPerk(PerkLib.GoblinoidBlood)) {
             outputText("\nDue to your body becoming closer to that of a goblin chemicals and drugs have started to affect you with way more potency then before. It would seem you have gained the goblinoid blood quality.\n");
             outputText("\n(<b>Gained Perk: Goblinoid blood</b>)\n");
             player.createPerk(PerkLib.GoblinoidBlood, 0, 0, 0, 0);
@@ -4572,7 +4572,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //5 Goopy rear body
-        if (player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO && (player.findPerk(PerkLib.SlimeCore) >= 0 || player.findPerk(PerkLib.DarkSlimeCore) >= 0) && changes < changeLimit && rand(3) == 0) {
+        if (player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO && (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore)) && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYou suddenly lose shape turning into a puddle on the ground. Confused you begin to try and stand up   At the center of the mass that is your translucent " + player.skinTone + " body, you actually do have something solid that allows you to shape your form, a heart, or more accurately, a core. You try and pull yourself back up, translucent liquid arms and torso shaping back from your body mass as you need them. ");
             outputText("Once you've recovered the top of your goey human shape you sigh in relief. Curious you begin to try out your new very malleable form reshaping yourself in various forms from a cube to a literal human dildo. Giggling you take back your standard shape thinking of the many naughty things you can do now with this gooey body of yours.");
             setRearBody(RearBody.METAMORPHIC_GOO);
@@ -4776,7 +4776,7 @@ public final class Mutations extends MutationsHelper {
                     player.skin.base.color2 = "black";
                     changes++;
                 }
-                if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedAquaScales)) {
+                if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedAquaScales)) {
                     outputText("\n\n<b>Genetic Memory: Scales - Memorized!</b>\n\n");
                     player.createStatusEffect(StatusEffects.UnlockedAquaScales, 0, 0, 0, 0);
                 }
@@ -5271,7 +5271,7 @@ public final class Mutations extends MutationsHelper {
         if (player.lowerBody == LowerBody.NAGA && player.lowerBody != LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit && type == 3) {
             outputText("\n\nWith a ripping sound your tail suddenly begins to tear apart, splitting from the junction just below your thigh level into two segments as if cut by a scalpel. Pain doubles up as bones snaps, your tail tip growing into larger bulbs which a few second later turns into snake heads hissing loudly and mirroring your pain ");
             outputText("as blood seeps out of the wound. Finally, the wound left by the splitting of your tail closes at high speed, filling in with new flesh and muscle as your newly acquired hydra regeneration kicks in. <b>You snake tail is now forked with two hydra heads!</b>");
-            if (player.findPerk(PerkLib.HydraRegeneration) < 0) player.createPerk(PerkLib.HydraRegeneration, 0, 0, 0, 0);
+            if (!player.hasPerk(PerkLib.HydraRegeneration)) player.createPerk(PerkLib.HydraRegeneration, 0, 0, 0, 0);
             player.createStatusEffect(StatusEffects.HydraTailsPlayer, 2, 0, 0, 0);
             player.tailCount = 2;
             setLowerBody(LowerBody.HYDRA);
@@ -5419,31 +5419,31 @@ public final class Mutations extends MutationsHelper {
             }
             changes++;
         }
-        if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonFireBreath) < 0) {
+        if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonFireBreath)) {
             outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
             outputText("\n\nIt seems vouivre oil has awaked some kind of power within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
             player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);
             changes++;
         }/*
-        if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonIceBreath) < 0) {
+        if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonIceBreath)) {
             outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
             outputText("\n\nIt seems vouivre oil has awaked some kind of power within you... your throat and chest feel very cold, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
             player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);
             changes++;
         }
-        if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonLightningBreath) < 0) {
+        if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonLightningBreath)) {
             outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
             outputText("\n\nIt seems vouivre oil has awaked some kind of power within you... your throat and chest feel like it was electrocuted, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
             player.createPerk(PerkLib.DragonLightningBreath, 0, 0, 0, 0);
             changes++;
         }
-        if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonDarknessBreath) < 0) {
+        if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonDarknessBreath)) {
             outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
             outputText("\n\nIt seems vouivre oil has awaked some kind of power within you... your throat and chest feel very... strange and you can't put a finger what this feeling exactly is, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
             player.createPerk(PerkLib.DragonDarknessBreath, 0, 0, 0, 0);
             changes++;
         }*/
-        if (type == 3 && player.hydraScore() >= 14 && changes < changeLimit && player.findPerk(PerkLib.HydraAcidBreath) < 0) {
+        if (type == 3 && player.hydraScore() >= 14 && changes < changeLimit && !player.hasPerk(PerkLib.HydraAcidBreath)) {
             outputText("\n\nYou feel sick, like very sick as if your stomach was bubbling up. You spontaneously vomit from all the heads below your waist but what comes out is not vomit. Your hydra heads retches out on the ground in front of you which is doused with smoking green fluids which begins to smoke right away as your powerful acid begin to dissolve whatever is beneath it. <b>It would seem you have developed the ability to use the hydra's infamous breath weapon.</b>  (<b>Gained Perk: Hydra acid breath!</b>)");
             player.createPerk(PerkLib.HydraAcidBreath, 0, 0, 0, 0);
             changes++;
@@ -5512,7 +5512,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, as new scales grew up filling the gaps. ");
             player.skin.growCoat(Skin.DRAGON_SCALES, {}, Skin.COVERAGE_COMPLETE);
             outputText("<b>Your body is now fully covered in " + color + " shield-shaped dragon scales.</b>");
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedDragonScales)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedDragonScales)) {
                 outputText("\n\n<b>Genetic Memory: Dragon Scales - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedDragonScales, 0, 0, 0, 0);
             }
@@ -5694,7 +5694,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Remove Incorporeality Perk
-        if (player.findPerk(PerkLib.Incorporeality) >= 0 && changes < changeLimit && rand(3) == 0) {
+        if (player.hasPerk(PerkLib.Incorporeality) && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYou feel a strange sensation in your [legs] as they start to feel more solid. They become more opaque until finally, you can no longer see through your [legs]. \n<b>(Perk Lost: Incorporeality!)</b>");
             player.removePerk(PerkLib.Incorporeality);
             changes++;
@@ -5734,7 +5734,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("\n\nYour skin tingles and you look down just in time to see your skin color patterns fade and back into the color of your " + player.skinTone + " skin leaving you with a uniform skin coloration.");
             player.skin.base.pattern = Skin.PATTERN_NONE;
             player.skin.base.adj = "";
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern)) {
                 outputText("\n\n<b>Genetic Memory: No Skin Patterns - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern, 0, 0, 0, 0);
             }
@@ -6321,7 +6321,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.tailType == Tail.NEKOMATA_FORKED_2_3 && player.level >= 12 && player.inte >= 20 && player.wis >= 50 && type == 1 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nA tingling pressure builds on your backside, and your soft, glossy, and partially forked tail begins to glow with an eerie, ghostly light.  With a crackle of electrical energy, your tail finishes splitting in two!  <b>You now have a pair of cat-tails.</b>");
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedCatTail2nd)) {
                 outputText("\n\n<b>Genetic Memory: 2nd Cat Tail - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedCatTail2nd, 0, 0, 0, 0);
             }
@@ -6480,7 +6480,7 @@ public final class Mutations extends MutationsHelper {
                 else player.skin.growCoat(Skin.FUR, {color: randomChoice(["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"])}, Skin.COVERAGE_COMPLETE);
                 outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of [skin coat.color] fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
             }
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                 outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
             }
@@ -6679,7 +6679,7 @@ public final class Mutations extends MutationsHelper {
             outputText(" nipples relax.  It's a strange feeling, and you pull back your top to touch one.  It feels fine, though there doesn't seem to be any milk leaking out.  You give it a squeeze and marvel when nothing ");
             if (player.hasFuckableNipples()) outputText("but sexual fluid ");
             outputText("escapes it.  <b>You are no longer lactating.</b>  That makes sense, only mammals lactate!  Smiling, you muse at how much time this will save you when cleaning your gear.");
-            if (player.findPerk(PerkLib.Feeder) >= 0 || player.hasStatusEffect(StatusEffects.Feeder)) {
+            if (player.hasPerk(PerkLib.Feeder) || player.hasStatusEffect(StatusEffects.Feeder)) {
                 outputText("\n\n(<b>Feeder perk lost!</b>)");
                 player.removePerk(PerkLib.Feeder);
                 player.removeStatusEffect(StatusEffects.Feeder);
@@ -6702,7 +6702,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //-VAGs
-        if (player.hasVagina() && player.findPerk(PerkLib.Oviposition) < 0 && changes < changeLimit && rand(5) == 0 && player.lizardScore() > 3) {
+        if (player.hasVagina() && !player.hasPerk(PerkLib.Oviposition) && changes < changeLimit && rand(5) == 0 && player.lizardScore() > 3) {
             outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly.  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n");
             outputText("(<b>Perk Gained: Oviposition</b>)");
             player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
@@ -6840,7 +6840,7 @@ public final class Mutations extends MutationsHelper {
             else {
                 outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard.  A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body.  <b>You're covered from head to toe in shiny " + color + " scales.</b>");
             }
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedScales)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedScales)) {
                 outputText("\n\n<b>Genetic Memory: Scales - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedScales, 0, 0, 0, 0);
             }
@@ -7298,14 +7298,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Acid Spit
-        if (player.findPerk(PerkLib.AcidSpit) < 0 && changes < changeLimit && rand(5) == 0 && player.cavewyrmScore() > 4) {
+        if (!player.hasPerk(PerkLib.AcidSpit) && changes < changeLimit && rand(5) == 0 && player.cavewyrmScore() > 4) {
             outputText("\n\nYour endowment begins to feel increasingly pleasurable to the point you drool small glowing blue drop of saliva on the ground lost in the pleasure of your oozing vagina/ and / dripping penis. You lose all desire as your eyes zero in on the smoking vegetation progressively corroded by your fluorescent drool. <b>It seems you now can drool acid!</b>\n");
             outputText("(<b>Perk Gained: Acid Spit</b>)");
             player.createPerk(PerkLib.AcidSpit, 0, 0, 0, 0);
             changes++;
         }
         //Azureflame Breath
-        if (player.findPerk(PerkLib.AzureflameBreath) < 0 && changes < changeLimit && rand(5) == 0 && player.cavewyrmScore() > 4) {
+        if (!player.hasPerk(PerkLib.AzureflameBreath) && changes < changeLimit && rand(5) == 0 && player.cavewyrmScore() > 4) {
             outputText("\n\nYou suddenly belch a long neon blue flame in front of you roasting the nearby vegetation. It didn't hurt your throat however so you shrug. <b>Well you will have to control your blue fire breath better not to set fire to your own camp.</b>\n");
             outputText("(<b>Perk Gained: Azureflame Breath</b>)");
             player.createPerk(PerkLib.AzureflameBreath, 0, 0, 0, 0);
@@ -7538,7 +7538,7 @@ public final class Mutations extends MutationsHelper {
         }
         //SPECIAL:
         //Harpy Womb – All eggs are automatically upgraded to large, requires legs + tail to be salamander.
-        if (player.findPerk(PerkLib.HarpyWomb) < 0 && (player.lowerBody == LowerBody.HARPY || player.lowerBody == LowerBody.SALAMANDER) && player.tailType == Tail.SALAMANDER && rand(4) == 0 && changes < changeLimit) {
+        if (!player.hasPerk(PerkLib.HarpyWomb) && (player.lowerBody == LowerBody.HARPY || player.lowerBody == LowerBody.SALAMANDER) && player.tailType == Tail.SALAMANDER && rand(4) == 0 && changes < changeLimit) {
             player.createPerk(PerkLib.HarpyWomb, 0, 0, 0, 0);
             outputText("\n\nThere's a rumbling in your womb, signifying that some strange change has taken place in your most feminine area. No doubt something in it has changed to be more like a harpy. (<b>You've gained the Harpy Womb perk! All the eggs you lay will always be large so long as you have harpy legs and a harpy tail.</b>)");
             changes++;
@@ -7646,7 +7646,7 @@ public final class Mutations extends MutationsHelper {
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
         //Phoenix Fire Breath
-        if (player.phoenixScore() >= 5 && changes < changeLimit && player.findPerk(PerkLib.PhoenixFireBreath) < 0) {
+        if (player.phoenixScore() >= 5 && changes < changeLimit && !player.hasPerk(PerkLib.PhoenixFireBreath)) {
             outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself.  It had enough force to sent a little bit of dirt and shattered gravel all around.");
             outputText("\n\nIt seems Nocello liqueur has awaked some kind of power within you... your throat feel quite dry.  (<b>Gained Perk: Phoenix fire breath!</b>)");
             player.createPerk(PerkLib.PhoenixFireBreath, 0, 0, 0, 0);
@@ -7844,7 +7844,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYou feel strange.  Fertile... somehow.  You don't know how else to think of it, but you know your body is just aching to be pregnant and give birth.");
         }
         //-VAGs
-        if (player.hasVagina() && player.findPerk(PerkLib.BunnyEggs) < 0 && changes < changeLimit && rand(4) == 0 && player.bunnyScore() > 3) {
+        if (player.hasVagina() && !player.hasPerk(PerkLib.BunnyEggs) && changes < changeLimit && rand(4) == 0 && player.bunnyScore() > 3) {
             outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly.  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n\n");
             outputText("(<b>Perk Gained: Bunny Eggs</b>)");
             player.createPerk(PerkLib.BunnyEggs, 0, 0, 0, 0);
@@ -7998,7 +7998,7 @@ public final class Mutations extends MutationsHelper {
                 player.skin.growCoat(Skin.FUR, {color: player.skin.coat.color}, Skin.COVERAGE_COMPLETE);
                 outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of [skin coat.color] fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
             }
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                 outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
             }
@@ -8009,7 +8009,7 @@ public final class Mutations extends MutationsHelper {
             if (player.coatColor == "") player.coatColor = player.hairColor;
             player.skin.growCoat(Skin.FUR, {color: player.skin.coat.color}, Skin.COVERAGE_LOW);
             outputText("\n\nYou feel your skin tickle as fur grow in various place over your body. It doesn’t cover your skin entirely but sure feels nice and silky to the touch wherever it has grown. Funnily the fur patterns looks nice on you and only helps your animalistic charm. <b>Some area of your body are now partially covered with fur!</b>");
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                 outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
             }
@@ -8021,7 +8021,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYour [skin.type] begins to tingle, then itch. ");
             player.skin.growCoat(Skin.FUR, {color: player.skin.coat.color}, Skin.COVERAGE_COMPLETE);
             outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of [skin coat.color] fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                 outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
             }
@@ -8402,12 +8402,12 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
         //SPECIAL:
         //Harpy Womb – All eggs are automatically upgraded to large, requires legs + tail to be harpy.
-        if (player.findPerk(PerkLib.HarpyWomb) < 0 && player.lowerBody == LowerBody.HARPY && player.tailType == Tail.HARPY && rand(4) == 0 && changes < changeLimit) {
+        if (!player.hasPerk(PerkLib.HarpyWomb) && player.lowerBody == LowerBody.HARPY && player.tailType == Tail.HARPY && rand(4) == 0 && changes < changeLimit) {
             player.createPerk(PerkLib.HarpyWomb, 0, 0, 0, 0);
             outputText("\n\nThere's a rumbling in your womb, signifying that some strange change has taken place in your most feminine area. No doubt something in it has changed to be more like a harpy. (<b>You've gained the Harpy Womb perk! All the eggs you lay will always be large so long as you have harpy legs and a harpy tail.</b>)");
             changes++;
         }
-        if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) || player.ass.analWetness > 1)) {
+        if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && !player.hasPerk(PerkLib.MaraesGiftButtslut)) || player.ass.analWetness > 1)) {
             outputText("\n\nYou feel a tightening up in your colon and your [asshole] sucks into itself.  You feel sharp pain at first but that thankfully fades.  Your ass seems to have dried and tightened up.");
             player.ass.analWetness--;
             if (player.ass.analLooseness > 1) player.ass.analLooseness--;
@@ -8750,7 +8750,7 @@ public final class Mutations extends MutationsHelper {
         //General Effects:
         //****************
         //-Int less than 10
-        if (player.inte < 10 && player.findPerk(PerkLib.TransformationResistance) < 0) {
+        if (player.inte < 10 && !player.hasPerk(PerkLib.TransformationResistance)) {
             if (player.inte < 8 && player.kangaScore() >= 5) {
                 outputText("\n\nWhile you gnaw on the fibrous fruit, your already vacant mind continues to empty, leaving nothing behind but the motion of your jaw as you slowly chew and swallow your favorite food.  Swallow.  Chew.  Swallow.  You don't even notice your posture worsening or your arms shortening.  Without a single thought, you start to hunch over but keep munching on the food in your paws as if were the most normal thing in the world.  Teeth sink into one of your fingers, leaving you to yelp in pain.  With the last of your senses, you look at your throbbing paw to notice you've run out of kanga fruit!");
                 outputText("\n\nStill hungry and licking your lips in anticipation, you sniff in deep lungfuls of air.  There's more of that wonderful fruit nearby!  You bound off in search of it on your incredibly muscular legs, their shape becoming more and more feral with every hop.  Now guided completely by instinct, you find a few stalks that grow from the ground.  Your belly rumbles, reminding you of your hunger, as you begin to dig into the kanga fruits...");
@@ -8886,7 +8886,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYour [skin.type] itches terribly all over and you try cartoonishly to scratch everywhere at once.  ");
             player.skin.growCoat(Skin.FUR, {color: "brown"});
             outputText("As you pull your hands in, you notice [skin coat.color] fur growing on the backs of them.  All over your body the scene is repeated, covering you in the stuff.  <b>You now have fur!</b>");
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                 outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
             }
@@ -8935,7 +8935,7 @@ public final class Mutations extends MutationsHelper {
         }
         //UBEROOOO
         //kangaroo perk: - any liquid or food intake will accelerate a pregnancy, but it will not progress otherwise
-        if (player.findPerk(PerkLib.Diapause) < 0 && player.kangaScore() > 4 && rand(4) == 0 && changes < changeLimit && player.hasVagina()) {
+        if (!player.hasPerk(PerkLib.Diapause) && player.kangaScore() > 4 && rand(4) == 0 && changes < changeLimit && player.hasVagina()) {
             //Perk name and description:
             player.createPerk(PerkLib.Diapause, 0, 0, 0, 0);
             outputText("\n\nYour womb rumbles as something inside it changes.\n<b>(You have gained the Diapause perk.  Pregnancies will not progress when fluid intake is scarce, and will progress much faster when it isn't.)</b>");
@@ -9125,7 +9125,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Drider butt
-        if (type == 1 && player.findPerk(PerkLib.SpiderOvipositor) < 0 && player.isDrider() && player.tailType == Tail.SPIDER_ADBOMEN && changes < changeLimit && rand(3) == 0 && (player.hasVagina() || rand(2) == 0)) {
+        if (type == 1 && !player.hasPerk(PerkLib.SpiderOvipositor) && player.isDrider() && player.tailType == Tail.SPIDER_ADBOMEN && changes < changeLimit && rand(3) == 0 && (player.hasVagina() || rand(2) == 0)) {
             outputText("\n\nAn odd swelling sensation floods your spider half.  Curling your abdomen underneath you for a better look, you gasp in recognition at your new 'equipment'!  Your semi-violent run-ins with the swamp's population have left you <i>intimately</i> familiar with the new appendage.  <b>It's a drider ovipositor!</b>  A few light prods confirm that it's just as sensitive as any of your other sexual organs.  You idly wonder what laying eggs with this thing will feel like...");
             outputText("\n\n(<b>Perk Gained:  Spider Ovipositor - Allows you to lay eggs in your foes!</b>)");
             //V1 - Egg Count
@@ -9228,7 +9228,7 @@ public final class Mutations extends MutationsHelper {
             return;
         }
         //no drink for bimbos!
-        if (player.findPerk(PerkLib.BimboBody) >= 0) {
+        if (player.hasPerk(PerkLib.BimboBody)) {
             outputText("The stuff hits you like a giant cube, nearly staggering you as it begins to settle.");
             if (player.tallness < 77) {
                 player.tallness = 77;
@@ -9261,7 +9261,7 @@ public final class Mutations extends MutationsHelper {
             var boost:Number = (player.inte - 35) / 5;
             MutagenBonus("lib", .1);
             outputText("\n\n<b>(Lost Perk - ");
-            if (player.findPerk(PerkLib.BimboBrains) >= 0) outputText("Bimbo Brains, ");
+            if (player.hasPerk(PerkLib.BimboBrains)) outputText("Bimbo Brains, ");
             outputText("Bimbo Body)\n");
             player.removePerk(PerkLib.BimboBrains);
             player.removePerk(PerkLib.BimboBody);
@@ -9271,7 +9271,7 @@ public final class Mutations extends MutationsHelper {
             return;
         }
         //HP restore for bros!
-        if (player.findPerk(PerkLib.BroBody) >= 0 || player.findPerk(PerkLib.FutaForm) >= 0) {
+        if (player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) {
             outputText("You crack open the can and guzzle it in a hurry.  Goddamn, this shit is the best.  As you crush the can against your forehead, you wonder if you can find a six-pack of it somewhere?\n\n");
             fatigue(-33);
             HPChange(100, true);
@@ -9365,7 +9365,7 @@ public final class Mutations extends MutationsHelper {
         player.createPerk(PerkLib.BroBody, 0, 0, 0, 0);
         outputText("<b>(Bro Body - Perk Gained!)\n");
         outputText("(Bro Brains - Perk Gained!)</b>\n");//int to 20.  max int 50)
-        if (player.findPerk(PerkLib.Feeder) >= 0) {
+        if (player.hasPerk(PerkLib.Feeder)) {
             outputText("<b>(Perk Lost - Feeder!)</b>\n");
             player.removePerk(PerkLib.Feeder);
         }
@@ -9497,7 +9497,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Incorporeality perk
-        if (changes < changeLimit && rand(3) == 0 && player.findPerk(PerkLib.Incorporeality) < 0 && (player.skin.base.color == "white" || player.skin.base.color == "sable") && player.hairType == 2) {
+        if (changes < changeLimit && rand(3) == 0 && !player.hasPerk(PerkLib.Incorporeality) && (player.skin.base.color == "white" || player.skin.base.color == "sable") && player.hairType == 2) {
             //(ghost-legs!  Absolutely no problem with regular encounters, though! [if you somehow got this with a centaur it'd probably do nothing cuz you're not supposed to be a centaur with ectoplasm ya dingus])
             outputText("\n\nAn otherworldly sensation begins in your belly, working its way to your [hips]. Before you can react, your [legs] begin to tingle, and you fall on your rump as a large shudder runs through them. As you watch, your lower body shimmers, becoming ethereal, wisps rising from the newly ghost-like [legs]. You manage to rise, surprised to find your new, ghostly form to be as sturdy as its former corporeal version. Suddenly, like a dam breaking, fleeting visions and images flow into your head, never lasting long enough for you to concentrate on one. You don't even realize it, but your arms fly up to your head, grasping your temples as you groan in pain. As fast as the mental bombardment came, it disappears, leaving you with a surprising sense of spiritual superiority.  <b>You have ghost legs!</b>\n\n");
             outputText("<b>(Gained Perk: Incorporeality</b>)");
@@ -9560,7 +9560,7 @@ public final class Mutations extends MutationsHelper {
             if (player.skin.base.color == "sable") outputText("white");
             if (player.skin.base.color == "white") outputText("black");
             outputText(" veins.</b>");/*
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
+				if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
 					outputText("\n\n<b>Genetic Memory: White/Black Veins - Memorized!</b>\n\n");
 					player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
 				}*/
@@ -9694,7 +9694,7 @@ public final class Mutations extends MutationsHelper {
             } else humanizeEyes();
             changes++;
         }
-        if (changes < changeLimit && player.findPerk(PerkLib.ElvenSense) < 0 && player.ears.type == Ears.ELVEN && player.eyes.type == Eyes.ELF) {
+        if (changes < changeLimit && !player.hasPerk(PerkLib.ElvenSense) && player.ears.type == Ears.ELVEN && player.eyes.type == Eyes.ELF) {
             outputText("\n\nYour acute hearing warns you of imminent danger and you dodge as a branch falls from a nearby tree missing your head by mere inches. You realise your newly sharpened senses granted you increased agility and precision.  <b>You gained the ability Elven Senses.</b>\n\n");
             outputText("<b>(Gained Perk: Elven Sense</b>)");
             player.createPerk(PerkLib.ElvenSense, 0, 0, 0, 0);
@@ -9721,7 +9721,7 @@ public final class Mutations extends MutationsHelper {
             player.skin.base.color = color;
             outputText("\n\nYour skin begins to change again, impurities, scars and bruises disappearing entirely as your skin color changes to a " + player.skinTone + " tone. You examine your body discovering with surprise your skin is now extremely sensitive but also flawless just like that of an elf. ");
             outputText("It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your " + player.skinTone + " skin is now flawless just like that of the elves.</b>");
-            if (player.findPerk(PerkLib.FlawlessBody) < 0) {
+            if (!player.hasPerk(PerkLib.FlawlessBody)) {
                 player.createPerk(PerkLib.FlawlessBody, 0, 0, 0, 0);
                 outputText("\n\n<b>(Gained Perk: Flawless Body</b>)");
             }
@@ -9859,7 +9859,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasPlainSkinOnly() && !player.skin.hasScarShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou double over suddenly as a harsh, stabbing pain runs across your skin, tattoos in the shape of scars forming on various parts of your body. Considering how you look now, you might as well proudly display your <b>Orc scar tattooed skin.</b>");
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedScarTattoed)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedScarTattoed)) {
                 outputText("\n\n<b>Genetic Memory: Scar Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedScarTattoed, 0, 0, 0, 0);
             }
@@ -9868,7 +9868,7 @@ public final class Mutations extends MutationsHelper {
             player.skin.base.adj = "scar shaped tattooed";
             changes++;
         }
-        if (player.lowerBody == LowerBody.ORC && player.arms.type == Arms.ORC && player.faceType == Face.ORC_FANGS && player.eyes.type == Eyes.ORC && player.skin.hasScarShapedTattoo() && player.orcScore() >= 11 && player.findPerk(PerkLib.Ferocity) < 0 && changes < changeLimit) {
+        if (player.lowerBody == LowerBody.ORC && player.arms.type == Arms.ORC && player.faceType == Face.ORC_FANGS && player.eyes.type == Eyes.ORC && player.skin.hasScarShapedTattoo() && player.orcScore() >= 11 && !player.hasPerk(PerkLib.Ferocity) && changes < changeLimit) {
             outputText("\n\nYou feel a limitless energy fill your orcish limbs, as your body tenses, rippling muscle making your scar-like tattoos look even more realistic. Your [face] gains a look of reverence has you hear the all mighty words of your goddess, telling you to go and claim new lands, conquer all living things, bring them beneath your rule.");
             outputText("\n\nShe tells you that as long as you bear her blessing, you will not fall in battle, even if fatal blows are dealt. Go forth and prove that puny human who said people die when they are killed wrong.");
             outputText("\n\n<b>(Gained Perk: Ferocity</b>)");
@@ -10014,7 +10014,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
                 outputText("\n\n<b>Genetic Memory: Lighting Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
             }
@@ -10121,7 +10121,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nThere's a rumbling in your womb, signifying that some strange change has taken place in your most feminine area. No doubt something in it has changed to be more like a harpy. (<b>You've gained the Harpy Womb perk! All the eggs you lay will always be large so long as you have harpy legs and a harpy tail.</b>)");
             changes++;
         }
-        if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) || player.ass.analWetness > 1)) {
+        if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && !player.hasPerk(PerkLib.MaraesGiftButtslut)) || player.ass.analWetness > 1)) {
             outputText("\n\nYou feel a tightening up in your colon and your [asshole] sucks into itself.  You feel sharp pain at first but that thankfully fades.  Your ass seems to have dried and tightened up.");
             player.ass.analWetness--;
             if (player.ass.analLooseness > 1) player.ass.analLooseness--;
@@ -10197,7 +10197,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
                 outputText("\n\n<b>Genetic Memory: Lighting Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
             }
@@ -10333,7 +10333,7 @@ public final class Mutations extends MutationsHelper {
 			}
 			if (!player.skin.hasOilySkin() && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nThe black tar like substance begins to drip everywhere around your body now, from your ass, your shoulders and even your chest Soon your torso looks like it bathed into tar some of it dripping down your body. The fluids however are regularly produced like sweat from your skin so you never run out. <b>Your body now drips black fluids.</b>");
-				/*if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
+				/*if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
 					outputText("\n\n<b>Genetic Memory: Lighting Tattooed Skin - Memorized!</b>\n\n");
 					player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
 				}*/
@@ -10694,7 +10694,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.skin.hasWindSweptScars() && player.wings.type == Wings.WINDY_AURA && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou scream in pain as your aura flares again, leaving clean cuts all over your body. The cuts glows green for an instant before taking back on a more ordinary brown tone, closing into what looks like innocuous scars at first glance." +
                     " <b>Clearly those new windswept scars of yours actually improves your wind control, marking you as a full Kamaitachi.</b>");
-            //if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
+            //if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
             //    outputText("\n\n<b>Genetic Memory: Lighting Tattoed Skin - Memorized!</b>\n\n");
             //    player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
             //}
@@ -10888,7 +10888,7 @@ public final class Mutations extends MutationsHelper {
         //Used for dick and boob TFs
         var counter:int = 0;
 
-        if (player.faceType == Face.FOX && player.tailType == Tail.FOX && player.ears.type == Ears.FOX && player.lowerBody == LowerBody.FOX && player.hasFur() && rand(3) == 0 && player.findPerk(PerkLib.TransformationResistance) < 0) {
+        if (player.faceType == Face.FOX && player.tailType == Tail.FOX && player.ears.type == Ears.FOX && player.lowerBody == LowerBody.FOX && player.hasFur() && rand(3) == 0 && !player.hasPerk(PerkLib.TransformationResistance)) {
             if (flags[kFLAGS.FOX_BAD_END_WARNING] == 0) {
                 outputText("\n\nYou get a massive headache and a craving to raid a henhouse.  Thankfully, both pass in seconds, but <b>maybe you should cut back on the vulpine items...</b>");
                 flags[kFLAGS.FOX_BAD_END_WARNING] = 1;
@@ -11033,7 +11033,7 @@ public final class Mutations extends MutationsHelper {
         if (player.cumQ() < 5000 && rand(3) == 0 && changes < changeLimit && player.hasCock()) {
             var mult:int = 2 + rand(4);
             //Lots of cum raises cum multiplier cap to 3 instead of 1.5
-            if (player.findPerk(PerkLib.MessyOrgasms) >= 0) mult += rand(20);
+            if (player.hasPerk(PerkLib.MessyOrgasms)) mult += rand(20);
             player.cumMultiplier += mult;
             //Flavor text
             if (player.balls == 0) outputText("\n\nYou feel a churning inside your gut as something inside you changes.");
@@ -11126,7 +11126,7 @@ public final class Mutations extends MutationsHelper {
                 // TODO patterns
                 player.skin.coat.color = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
             }
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                 outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
             }
@@ -11578,7 +11578,7 @@ public final class Mutations extends MutationsHelper {
         //Effect:
         //Boosts the special effect of Dragonbreath by 20% for 1 use. ie: if Tainted's breath weapon has a 80% chance to stun on hit, +20% equals 100% chance to stun.
         outputText("You crack the shell easily and swallow the large yolk and the copious amounts of albumen - the yolk is blue, while the rest is crimson-tinted.  It tastes like... well, it tastes mostly of spiced mint, you think.");
-        if (player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.DragonIceBreath) >= 0 || player.findPerk(PerkLib.DragonLightningBreath) >= 0 || player.findPerk(PerkLib.DragonDarknessBreath) >= 0) {
+        if (player.hasPerk(PerkLib.DragonFireBreath) || player.hasPerk(PerkLib.DragonIceBreath) || player.hasPerk(PerkLib.DragonLightningBreath) || player.hasPerk(PerkLib.DragonDarknessBreath)) {
             var changes:int = 0;
             var changeLimit:int = 1;
             if (!player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) && !player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) && !player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown) && !player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) && !player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && !player.hasStatusEffect(StatusEffects.DragonBreathBoost) && changes < changeLimit) {
@@ -11765,8 +11765,8 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
             setTailType(Tail.FOX, 6);
         });
-        mutationStep(nFoxTails == 6 && player.level >= 30 && player.inte >= 90 && player.wis >= 90 && (player.findPerk(PerkLib.EnlightenedKitsune) < 0 || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 3, function ():void {
-            if (player.findPerk(PerkLib.CorruptedKitsune) < 0) {
+        mutationStep(nFoxTails == 6 && player.level >= 30 && player.inte >= 90 && player.wis >= 90 && (!player.hasPerk(PerkLib.EnlightenedKitsune) || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 3, function ():void {
+            if (!player.hasPerk(PerkLib.CorruptedKitsune)) {
                 outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  But something is wrong...  The cosmic power radiating from your body feels...  tainted somehow.  The corruption pouring off your body feels...  good.</b>");
                 outputText("\n\n(Perk Gained: Corrupted Kitsune - Grants Corrupted Fox Fire and Terror special attacks.)");
                 player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
@@ -11774,22 +11774,22 @@ public final class Mutations extends MutationsHelper {
                 MutagenBonus("lib", 1);
             } else outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
             player.tailCount = 7;
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
                 outputText("\n\n<b>Genetic Memory: 7th Fox Tail - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFoxTail7th, 0, 0, 0, 0);
             }
         });
-        mutationStep(nFoxTails == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && (player.findPerk(PerkLib.EnlightenedKitsune) < 0 || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function ():void {
+        mutationStep(nFoxTails == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && (!player.hasPerk(PerkLib.EnlightenedKitsune) || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function ():void {
             outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
             player.tailCount++;
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th) && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
                 outputText("\n\n<b>Genetic Memory: 8th Fox Tail - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFoxTail8th, 0, 0, 0, 0);
             }
         });
         //[Grow 9th tail and gain Corrupted Nine-tails perk]
-        mutationStep(nFoxTails == 8 && player.level >= 42 && player.inte >= 120 && player.wis >= 120 && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function ():void {
-            if (player.findPerk(PerkLib.CorruptedNinetails) < 0) {
+        mutationStep(nFoxTails == 8 && player.level >= 42 && player.inte >= 120 && player.wis >= 120 && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function ():void {
+            if (!player.hasPerk(PerkLib.CorruptedNinetails)) {
                 outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  But something is strange...  The cosmic power radiating from your body feels...  somehow more tainted than before.  The corruption pouring off your body feels...  amazing good.</b>");
                 outputText("\n\nYou have the inexplicable urge to set fire to the world, just to watch it burn.  With your newfound power, it's a goal that is well within reach.");
                 outputText("\n\n(Perk Gained: Corrupted Nine-tails - Grants boosts to your racial special attacks.)");
@@ -11798,7 +11798,7 @@ public final class Mutations extends MutationsHelper {
                 MutagenBonus("lib", 2);
             } else outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
             player.tailCount = 9;
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
                 outputText("\n\n<b>Genetic Memory: 9th Fox Tail - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFoxTail9th, 0, 0, 0, 0);
             }
@@ -11861,7 +11861,7 @@ public final class Mutations extends MutationsHelper {
             if (mystic) outputText("angular");
             else outputText("curved");
             outputText(" markings remain, as if etched into your skin. <b>You now have Kitsune tattooed skin.</b>");
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
                 outputText("\n\n<b>Genetic Memory: Magic Tattooed Skin - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
             }
@@ -12097,7 +12097,7 @@ public final class Mutations extends MutationsHelper {
         if (!CoC.instance.inCombat) outputText("You sit down and unbag your fresh fish. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.");
         //(In combat?)
         else {
-            if (player.orcaScore() >= 12) outputText("You produce the fresh fish from your bag and prety much just open wide your hungry mouth and toss it in. Your salty meal is gone in a flash, your stomach giving an appreciative gurgle.  ");
+            if (player.orcaScore() >= 12 || player.leviathanScore() >= 12) outputText("You produce the fresh fish from your bag and prety much just open wide your hungry mouth and toss it in. Your salty meal is gone in a flash, your stomach giving an appreciative gurgle.  ");
             else outputText("You produce the fresh fish from your bag. Instead of eating slowly it and savor the taste as you normally would, you take a large bite out of it.  In no time your salty meal is gone, your stomach giving an appreciative gurgle.  ");
         }
         //Increase HP by quite a bit!)
@@ -12276,7 +12276,7 @@ public final class Mutations extends MutationsHelper {
             if (rand(4) == 0 && changes < changeLimit) {
                 if (player.femininity < 70 && player.femininity >= 60) {
                     outputText("\n\nYou laugh as you feel your features once again soften, before stopping abruptly.  Your laugh sounded more like a girly giggle than anything else.  Feeling slightly more sober, you touch the soft flesh of your face prospectively.  The trap oil has changed you profoundly, making your innate maleness... difficult to discern, to say the least.  You suspect you could make yourself look even more like a girl now if you wanted to.");
-                    if (player.findPerk(PerkLib.Androgyny) < 0) {
+                    if (!player.hasPerk(PerkLib.Androgyny)) {
                         player.createPerk(PerkLib.Androgyny, 0, 0, 0, 0);
                         outputText("\n\n(<b>Perk Gained: Androgyny</b>)");
                     }
@@ -12307,7 +12307,7 @@ public final class Mutations extends MutationsHelper {
                     player.femininity = 30;
                     //Masculinity Increase Final (max masculinity allowed increased by +10):
                     outputText("\n\nYou laugh as you feel your features once again soften, before stopping abruptly.  Your laugh sounded more like a boyish crow than anything else.  Feeling slightly more sober, you touch the defined lines of your face prospectively.  The trap oil has changed you profoundly, making your innate femaleness... difficult to discern, to say the least.  You suspect you could make yourself look even more like a boy now if you wanted to.");
-                    if (player.findPerk(PerkLib.Androgyny) < 0) {
+                    if (!player.hasPerk(PerkLib.Androgyny)) {
                         player.createPerk(PerkLib.Androgyny, 0, 0, 0, 0);
                         outputText("\n\n(<b>Perk Gained: Androgyny</b>)");
                     }
@@ -12612,7 +12612,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYou shiver, feeling a bit cold.  Just as you begin to wish for something to cover up with, it seems your request is granted; thick, bushy fur begins to grow all over your body!  You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft.  Huh.  ");
             player.skin.growCoat(Skin.FUR, {color: color1});
             outputText("<b>You now have a warm coat of [skin coat.color] raccoon fur!</b>");
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                 outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
             }
@@ -12813,7 +12813,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.hasScales()) outputText(", pushing your scales out with little pinches");
                 outputText(", resolving the problem for you.  <b>You now have fur.</b>");
                 player.skin.growCoat(Skin.FUR, {color: player.coatColor});
-                if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+                if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                     outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                     player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
                 }
@@ -12991,7 +12991,7 @@ public final class Mutations extends MutationsHelper {
         outputText("Feeling parched, you gobble down the fruit without much hesitation. Despite the skin being fuzzy like a peach, the inside is relatively hard, and its taste reminds you of that of an apple.  It even has a core like an apple. Finished, you toss the core aside.");
 
         //BAD END:
-        if (player.ferretScore() >= 6 && player.findPerk(PerkLib.TransformationResistance) < 0) {
+        if (player.ferretScore() >= 6 && !player.hasPerk(PerkLib.TransformationResistance)) {
             //Get warned!
             if (flags[kFLAGS.FERRET_BAD_END_WARNING] == 0) {
                 outputText("\n\nYou find yourself staring off into the distance, dreaming idly of chasing rabbits through a warren.  You shake your head, returning to reality.  <b>Perhaps you should cut back on all the Ferret Fruit?</b>");
@@ -13157,7 +13157,7 @@ public final class Mutations extends MutationsHelper {
             }
             player.skin.growCoat(Skin.FUR, {color: player.hairColor});
             outputText("  <b>You now have [skin coat.color] fur!</b>");
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                 outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
             }
@@ -13272,7 +13272,7 @@ public final class Mutations extends MutationsHelper {
         //-----------------------
         // BAD END ALERT!
         //-----------------------
-        if (rand(5) == 0 && player.pigScore() >= 9 && player.findPerk(PerkLib.TransformationResistance) < 0) {
+        if (rand(5) == 0 && player.pigScore() >= 9 && !player.hasPerk(PerkLib.TransformationResistance)) {
             if (flags[kFLAGS.PIG_BAD_END_WARNING] == 0) {
                 outputText("\n\nYou find yourself idly daydreaming of flailing about in the mud, letting go of all of your troubles. Eventually, you shake off the thought. Why would you do something like that? Maybe you should cut back on all the truffles?");
                 flags[kFLAGS.PIG_BAD_END_WARNING] = 1;
@@ -13421,7 +13421,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYou shiver, feeling a bit cold.  Just as you begin to wish for something to cover up with, it seems your request is granted; thick, bushy fur begins to grow all over your body!  You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft.  Huh.  ");
             player.skin.growCoat(Skin.FUR, {color: furToBeChosen});
             outputText("<b>You now have a warm coat of [skin coat.color] boar fur!</b>");
-            if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+            if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
                 outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
                 player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
             }
@@ -13836,7 +13836,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Ink spray attack
-        if ((type == 0 && player.gender == 2 || type == 2 && player.gender == 1) && player.lowerBody == LowerBody.SCYLLA && player.findPerk(PerkLib.InkSpray) < 0) {
+        if ((type == 0 && player.gender == 2 || type == 2 && player.gender == 1) && player.lowerBody == LowerBody.SCYLLA && !player.hasPerk(PerkLib.InkSpray)) {
             if (type == 0) {
                 outputText("\n\nYour pussy suddenly start gushing around and you squirt so much your tentacle are drenched. Blushing red in embarrassment you examine the damage lifting a tentacle and suddenly a jet black shot of girl juice shoot out of your pussy like a spray dying a nearby tree black.");
                 outputText(" You smell the liquid and discover your girl juice turned into actual ink! Thinking about octopus behing able to spray ink you point your pussy at a random tree and take aim. As your relax the newly discovery organ a gush of ink splatter the tree.");
@@ -14286,7 +14286,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Ink spray attack
-        if ((type == 0 && player.gender == 2 || type == 2 && player.gender == 1) && (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) && player.findPerk(PerkLib.InkSpray) < 0) {
+        if ((type == 0 && player.gender == 2 || type == 2 && player.gender == 1) && (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) && !player.hasPerk(PerkLib.InkSpray)) {
             if (type == 0) {
                 outputText("\n\nYour pussy suddenly start gushing around and you squirt so much your tentacle are drenched. Blushing red in embarrassment you examine the damage lifting a tentacle and suddenly a jet black shot of girl juice shoot out of your pussy like a spray dying a nearby tree black.");
                 outputText(" You smell the liquid and discover your girl juice turned into actual ink! Thinking about octopus behing able to spray ink you point your pussy at a random tree and take aim. As your relax the newly discovery organ a gush of ink splatter the tree.");
@@ -14758,7 +14758,7 @@ public final class Mutations extends MutationsHelper {
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
-    public function orcaSunscreen(player:Player):void {
+    public function orcaSunscreen(type:Number, player:Player):void {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
@@ -14840,8 +14840,56 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
+        //-Existing horns become draconic, max of 4, max length of 1'
+        if (player.horns.type != Horns.SEADRAGON && type == 1 && changes < changeLimit && rand(5) == 0) {
+                if (player.horns.count > 0) {
+                    //High quantity demon horns
+                    if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
+                        outputText("\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have two sea dragon horns, each about twelve inches long.");
+                        CoC.instance.mutations.setHornType(Horns.SEADRAGON, 12);
+                    }
+                    else {
+                        outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They look must look like the horns of a sea dragon.");
+                        player.horns.type = Horns.SEADRAGON;
+                        if (player.horns.count > 13) {
+                            outputText("  The change also seems to have shrunken the horns, they're about a foot long now.");
+                            player.horns.count = 12;
+                        }
+                    }
+                    changes++;
+                }
+                //No horns
+                else {
+                    //-If no horns, grow a pair
+                    outputText("\n\nYou writhe in pain as two bony extrusions begin to push out of the side of your head. As a skull-splitting headache wracks through you, in an instant, the pain subsides as you feel two large, scale-colored horns on your head. They are as sensitive as they are sturdy.\n\nA quick look at a puddle also reveals they radiate several specks of bioluminescent light along the horns accompanied by red tips. <b>You have about twelve inches of sea dragon-like horns!</b>");
+                    CoC.instance.mutations.setHornType(Horns.DRACONIC_X2, 4);
+                    changes++;
+                }
+        }
+
+        //antenna
+        if (player.antennae.type != Antennae.SEADRAGON && type == 1 && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\nA strange feeling washes over you as something crawls along your neck. You reach your hand up as large, thin strands of flesh suddenly shoot out from right beneath your ears.\n\nIt would almost resemble tentacles, but instead, they start producing dim bioluminescent lights, much like the whiskers of deep-sea creatures. <b>Just like a sea dragon you now have four bioluminescent neck strands!</b>");
+            setAntennae(Antennae.SEADRAGON);
+            changes++;
+        }
+        //Change hair type to normal
+        if ((player.hairType != Hair.NORMAL && player.hairType != Hair.PRISMATIC) && type == 1 && changes < changeLimit && rand(2) == 0) {
+            humanizeHairs();
+            changes++;
+        }
+        //Change hair type to prismatic
+        if ((player.hairType == Hair.NORMAL) && type == 1 && changes < changeLimit && rand(2) == 0) {
+            player.hairType = Hair.PRISMATIC;
+            outputText("\n\nYou feel your hair begin to slicken with a strange mucus as a fresh coating covers them. You move over to the puddle, gazing at your reflection as the light bounces into your eyes." +
+                    "\n\nYou strain briefly before looking upon your reflection once more. Your hair now glows with a vibrant, multicolored hue, with every color in the spectrum. The prismatic beauty is quite the sight," +
+                    " though your hair remains slick as if you've recently gelled it. Still they turn to " + player.hairColor + " toward the root like your old human hairs." +
+                    "<b>Your hairs are now prismatic like those of a sea dragon!</b>");
+            changes++;
+        }
+
         //skin
-        if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+        if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && type == 0 && changes < changeLimit) {
             outputText("\n\n");
             if (player.hasFur()) outputText("You suddenly start sweating abundantly as your [skin.type] fall off leaving bare the smooth skin underneath.  ");
             if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ");
@@ -14857,8 +14905,46 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
+        var ColorList:Array = [
+            {color: 'aphotic blue', underbellycolor: 'pure white'},
+            {color: 'aphotic blue', underbellycolor: 'snow white'},
+            {color: 'aphotic blue', underbellycolor: 'light blue'},
+            {color: 'silky', underbellycolor: 'pure white'},
+            {color: 'silky', underbellycolor: 'snow white'},
+            {color: 'silky', underbellycolor: 'light blue'},
+            {color: 'aqua', underbellycolor: 'snow white'},
+            {color: 'aqua', underbellycolor: 'light blue'},
+            {color: 'turquoise', underbellycolor: 'snow white'},
+            {color: 'turquoise', underbellycolor: 'light blue'},
+            {color: 'pink', underbellycolor: 'pure white'},
+            {color: 'pink', underbellycolor: 'snow white'},
+            {color: 'pink', underbellycolor: 'light blue'},
+            {color: 'pink', underbellycolor: 'crimson platinum'},
+            {color: 'dark blue', underbellycolor: 'pure white'},
+            {color: 'dark blue', underbellycolor: 'snow white'},
+            {color: 'dark blue', underbellycolor: 'light blue'}
+        ]
+
+        //skin sea dragon
+        if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && type == 1 && changes < changeLimit) {
+            var colorPair:Number = rand(ColorList.length-1);
+            var underBellyColor:String = ColorList[colorPair].underbellycolor;
+            var bodyColor:String = ColorList[colorPair].color;
+            player.skin.setBaseOnly({
+                color: bodyColor,
+                color2: underBellyColor
+            });
+            outputText("\n\n");
+            if (player.hasFur()) outputText("You suddenly start sweating abundantly as your [skin.type] fall off leaving bare the smooth skin underneath.  ");
+            if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ");
+            if (player.hasScales()) outputText("You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ");
+            outputText("Your skin starts to change, turning [skin color]. Your underbelly, on the other hand , turns [skin color2]. Just as you thought it was over, your skin takes on a glossy shine. When you thought it was finaly over specks of light starts to form underneath your arms, spreading to your underbelly. The bioluminescence gives you an appearance akin to those of a deep-sea creature. <b>Your body is now [skin color] with a [skin color2] underbelly running on the underside of your limbs and up to your mouth with bioluminescent patterns on the belly just like those of a sea dragon!.</b>");
+            changes++;
+            player.skin.setBaseOnly({type: Skin.PLAIN, adj: "glossy", pattern: Skin.PATTERN_SEADRAGON_UNDERBODY});
+        }
+
         //legs
-        if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.ORCA && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.ORCA && player.lowerBody != LowerBody.GARGOYLE && type == 0 && changes < changeLimit && rand(4) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
                 outputText("\n\nYour toes suddenly are forced together. When you stretch them back you discover they are now webbed, ready for swimming. <b>You can only guess those Orca legs will help you to swim at great speed.</b>");
                 setLowerBody(LowerBody.ORCA);
@@ -14868,9 +14954,32 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //arms
-        if (player.lowerBody == LowerBody.ORCA && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.ORCA) && changes < changeLimit && rand(4) == 0) {
+        if (player.lowerBody == LowerBody.ORCA && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.ORCA) && type == 0 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYour fingers suddenly are forced together. When you stretch them back you discover they are now webbed, ready for swimming. You are still examining your hands when something not unlike a pair of fins grow out of your forearms. <b>You can only guess those Orca arms will help you to swim at high speeds!</b>");
             setArmType(Arms.ORCA);
+            changes++;
+        }
+        //Dragon legs
+        if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.SEADRAGON && player.lowerBody != LowerBody.GARGOYLE && type == 1 && changes < changeLimit && rand(4) == 0) {
+            if (player.lowerBody == LowerBody.HUMAN) {
+                outputText("\n\nYour toes press against each other together as sharp, reptilian claws protrude from your feet. As you unfurl your toes, you notice that they are now webbed. The phalanges seem more suited more for swimming than running. <b>You can only guess those Sea dragon legs will help you to swim at great speeds.</b>");
+                setLowerBody(LowerBody.SEADRAGON);
+            } else {
+                humanizeLowerBody();
+            }
+            changes++;
+        }
+        //Dragon arms
+        if (player.lowerBody == LowerBody.SEADRAGON && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.SEADRAGON) && type == 1 && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\nYour fingers slowly conjoin with a thin webbing between them. It's a strange, slimy feeling. As you examine your hands, something, not unlike a pair of fins, grows out of your forearms and your nails sharpen into curved reptilian claws. <b>You can only guess those Sea Dragons arms will help you to swim at high speeds!</b>");
+            setArmType(Arms.SEADRAGON);
+            changes++;
+        }
+        //Dragon Wings
+        if (player.lowerBody == LowerBody.SEADRAGON && player.arms.type == Arms.SEADRAGON && player.wings.type != Wings.SEADRAGON && type == 1 && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\nYou keel in pain as you feel something penetrating your back. No, nothing is stabbing your back. More so, something is about to burst from within you. The trauma subsides as large bones emerge. A thin yet sturdy layer of skin covers your wings are covered as they fall into place behind you." +
+                    "\n\nAs you examine the fleshy appendage, you realize it's webbed. It seems to resemble more of a giant aquatic flipper than wings. The insides are not only colorful but also display several minute light specks. Not unlike those of a deep-sea beast. <b>You can now fly and swim at great speed with your brand new sea dragon wings!</b>");
+            setWingType(Wings.SEADRAGON, "large majestic aquatic");
             changes++;
         }
         //tail
@@ -14888,7 +14997,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //ears alternative
-        if (player.tailType == Tail.ORCA && player.ears.type != Ears.ORCA2 && changes < changeLimit && rand(4) == 0) {
+        if (player.tailType == Tail.ORCA && player.ears.type != Ears.ORCA2 && type == 0 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nTightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, fleshy bumps with holes in their centers.  <b>You have whales ears!</b>");
             setEarType(Ears.ORCA2);
             changes++;
@@ -14903,15 +15012,39 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //eyes to human
-        if (player.eyes.type != Eyes.HUMAN && changes < changeLimit && rand(4) == 0) {
+        if (player.eyes.type != Eyes.HUMAN && changes < changeLimit && type == 0 && rand(4) == 0) {
+            humanizeEyes();
+            changes++;
+        }
+        //eyes to human if not dragon
+        if (player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.DRAGON && changes < changeLimit && type == 1 && rand(4) == 0) {
             humanizeEyes();
             changes++;
         }
         //eyes to orange
-        if (player.eyes.colour != "orange" && changes < changeLimit && rand(4) == 0) {
+        if (player.eyes.colour != "orange" && changes < changeLimit && type == 0 && rand(4) == 0) {
             player.eyes.colour = "orange";
             outputText("\n\nYour eyes begins to tingle and you hurry to a puddle to check what is going on. <b>You discover to your surprise that your eyes have turned orange!</b>");
             changes++;
+        }
+        //eyes to sea dragon list
+        if (!InCollection(player.eyes.colour,"orange","yellow","light green") && changes < changeLimit && type == 1 && rand(4) == 0) {
+            player.eyes.colour = randomChoice("orange","yellow","light green");
+            outputText("\n\nYour eyes begins to tingle and you hurry to a puddle to check what is going on. <b>You discover to your surprise that your eyes have turned "+player.eyes.colour+"!</b>");
+            changes++;
+        }
+        //Gain Dragon Eyes
+        if (player.eyes.type == Eyes.HUMAN && rand(3) == 0 && type == 1 && changes < changeLimit) {
+            CoC.instance.mutations.setEyeType(Eyes.DRAGON);
+            outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a dragon.  <b>You now have dragon eyes!</b>.");
+            changes++;
+        }
+        //Gain Dragon Tongue
+        if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.tongue.type != Tongue.DRACONIC && type == 1) {
+            outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
+            CoC.instance.mutations.setTongueType(Tongue.DRACONIC);
+            changes++;
+            //Note: This type of tongue should be eligible for all things you can do with demon tongue... Dunno if it's best attaching a boolean just to change the description or creating a whole new tongue type.
         }
         //tallness
         if (player.tallness < 132 && changes < changeLimit && rand(4) == 0) {
@@ -14921,6 +15054,13 @@ public final class Mutations extends MutationsHelper {
             else if (heightGain >= 10 && heightGain < 20) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");
             else if (heightGain == 20) outputText("\n\nStaggering forwards, you clutch at your head dizzily.  You spend a moment getting your balance, and stand up, feeling noticeably taller.");
             player.tallness += heightGain;
+            changes++;
+        }
+        //BREATH WEAPON
+        if (player.leviathanScore() >= 20 && changes < changeLimit && !player.hasPerk(PerkLib.DragonWaterBreath)) {
+            outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself accompanyed by a geyser of steaming water... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small steaming crater you have literally blasted into the landscape with a mixture of awe and surprise.");
+            outputText("\n\nIt seems some kind of power has awakened within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon Water breath!</b>)");
+            player.createPerk(PerkLib.DragonWaterBreath, 0, 0, 0, 0);
             changes++;
         }
         //FAILSAFE CHANGE
@@ -16902,7 +17042,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.skin.base.type == Skin.PLAIN && !player.skin.hasUshiOniOnnaTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYour chest burns as strange marks appear on it, burning your skin until it creates a <b>black spider glyph in your chest</b>. You feel like something is coming up throughout your skin and upon taking your [armor] off, strokes of coarse fur travelling from your abdomen, all the way up to your breasts. Conveniently ending around the nipples, covering them, <b>you know have a Ushi-" + player.mf("Oni", "Onna") + " torso pattern.</b>");
-            /*if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) {
+            /*if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) {
 					outputText("\n\n<b>Genetic Memory: Battle Tattoed Skin - Memorized!</b>\n\n");
 					player.createStatusEffect(StatusEffects.UnlockedBattleTattoed, 0, 0, 0, 0);
 				}*/
@@ -17609,7 +17749,7 @@ public final class Mutations extends MutationsHelper {
                 outputText(vaginaDescript(0) + " soaks your thighs");
             }
             if (player.gender == 0) outputText("body begins to quiver with orgasmic bliss");
-            if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) outputText(" with charged, glowing, plasma");
+            if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) outputText(" with charged, glowing, plasma");
             outputText(".  Once you've had a chance to calm down, you notice that the explosion of pleasure you just experienced has rocked you to your core.  You are a little hornier than you were before.");
             //increase player libido, and maybe sensitivity too?
             player.orgasm();

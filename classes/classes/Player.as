@@ -3103,6 +3103,7 @@ use namespace CoC;
 				{name: 'cyclop', score: cyclopScore(), minscore: 6},
 				{name: 'gazer', score: gazerScore(), minscore: 7},
 				{name: 'atlach nacha', score: atlachNachaScore(), minscore: 10},
+				{name: 'sea dragon', score: leviathanScore(), minscore: 20},
 			];
 
 			ScoreList = ScoreList.filter(function(element:Object, index:int, array:Array):Boolean {
@@ -3611,6 +3612,23 @@ use namespace CoC;
 						if (isTaur()) race = "half orca-taur";
 						else {
 							race = "half orca-";
+							race += mf("boy", "girl");
+						}
+					}
+				}
+			}
+			if (TopRace == "sea dragon") {
+				if (TopScore >= 20) {
+					if (TopScore >= 30) {
+						if (isTaur()) race = "leviathan-taur";
+						else {
+							race = "leviathan-";
+							race += mf("boy", "girl");
+						}
+					} else {
+						if (isTaur()) race = "sea dragon-taur";
+						else {
+							race = "sea dragon-";
 							race += mf("boy", "girl");
 						}
 					}
@@ -7132,7 +7150,7 @@ use namespace CoC;
 				orcaCounter++;
 			if (wings.type == Wings.NONE)
 				orcaCounter += 2;
-			if (game.player.tone < 10)
+			if (tone < 10)
 				orcaCounter++;
 			if (tallness >= 84)
 				orcaCounter++;
@@ -7160,10 +7178,98 @@ use namespace CoC;
 				orcaCounter += 1;
 			if (isGargoyle()) orcaCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) orcaCounter = 0;
+			if (wings.type == Wings.SEADRAGON || lowerBody == LowerBody.SEADRAGON || arms.type == Arms.SEADRAGON)
+				orcaCounter = 0;
 			orcaCounter = finalRacialScore(orcaCounter, Race.ORCA);
 			End("Player","racialScore");
 			return orcaCounter;
 		}
+
+		//Leviathan score
+		public function leviathanScore():Number {
+			Begin("Player","racialScore","orca");
+			var LeviathanCounter:Number = 0;
+			if (horns.type == Horns.SEADRAGON)
+				LeviathanCounter++;
+			if (antennae.type == Antennae.SEADRAGON)
+				LeviathanCounter++;
+			if (ears.type == Ears.ORCA)
+				LeviathanCounter++;
+			if (tailType == Tail.ORCA)
+				LeviathanCounter++;
+			if (faceType == Face.ORCA)
+				LeviathanCounter++;
+			if (tongue.type == Tongue.DRACONIC)
+				LeviathanCounter++;
+			if (eyes.type == Eyes.DRAGON)
+				LeviathanCounter++;
+			if (InCollection(eyes.colour,"orange","yellow","light green"))
+				LeviathanCounter++;
+			if (hairType == Hair.PRISMATIC)
+				LeviathanCounter++;
+			if (lowerBody == LowerBody.SEADRAGON)
+				LeviathanCounter++;
+			if (arms.type == Arms.SEADRAGON)
+				LeviathanCounter++;
+			if (rearBody.type == RearBody.ORCA_BLOWHOLE)
+				LeviathanCounter++;
+			if (hasPlainSkinOnly())
+				LeviathanCounter++;
+			if (skinAdj == "glossy")
+				LeviathanCounter++;
+			if (skin.base.pattern == Skin.PATTERN_SEADRAGON_UNDERBODY)
+				LeviathanCounter++;
+			if (wings.type == Wings.SEADRAGON)
+				LeviathanCounter += 4;
+			if (tone < 10)
+				LeviathanCounter++;
+			if (tallness >= 84)
+				LeviathanCounter++;
+			if (biggestTitSize() > 19 || (cocks.length > 18))
+				LeviathanCounter++;
+			if (hasPerk(PerkLib.DrakeLungs))
+				LeviathanCounter++;
+			if (hasPerk(PerkLib.DrakeLungsEvolved))
+				LeviathanCounter++;
+			if (hasPerk(PerkLib.DrakeLungsFinalForm))
+				LeviathanCounter++;
+			if (hasPerk(PerkLib.DraconicHeart))
+				LeviathanCounter++;
+			if (hasPerk(PerkLib.DraconicHeartEvolved))
+				LeviathanCounter++;
+			if (hasPerk(PerkLib.DraconicHeartFinalForm))
+				LeviathanCounter++;
+			if (hasPerk(PerkLib.WhaleFat))
+				LeviathanCounter++;
+			if (hasPerk(PerkLib.WhaleFatEvolved))
+				LeviathanCounter++;
+			if (hasPerk(PerkLib.WhaleFatFinalForm))
+				LeviathanCounter++;
+			if (hasPerk(PerkLib.DragonWaterBreath))
+				LeviathanCounter++;
+			if (hasPerk(PerkLib.WhaleFat) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+				LeviathanCounter++;
+			if (hasPerk(PerkLib.WhaleFatEvolved) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+				LeviathanCounter++;
+			if (hasPerk(PerkLib.WhaleFatFinalForm) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+				LeviathanCounter++;
+			if (faceType != Face.ORCA)
+				LeviathanCounter = 0;
+			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
+				LeviathanCounter += 50;
+			if (hasPerk(PerkLib.AscensionHybridTheory) && LeviathanCounter >= 4)
+				LeviathanCounter += 1;
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && LeviathanCounter >= 8)
+				LeviathanCounter += 1;
+			if (isGargoyle()) LeviathanCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) LeviathanCounter = 0;
+			if (wings.type == Wings.NONE || lowerBody != LowerBody.SEADRAGON || arms.type != Arms.SEADRAGON)
+				LeviathanCounter = 0;
+			LeviathanCounter = finalRacialScore(LeviathanCounter, Race.SEADRAGON);
+			End("Player","racialScore");
+			return LeviathanCounter;
+		}
+
 
 		//Oni score
 		public function oniScore():Number {
@@ -11888,6 +11994,19 @@ use namespace CoC;
 					maxSpeCap2 += 35;
 				}
 			}//+10/10-20
+			if (leviathanScore() >= 20) {
+				if (leviathanScore() >= 30) {
+					maxStrCap2 += 200;
+					maxSpeCap2 += 100;
+					maxTouCap2 += 100;
+					maxIntCap2 += 50;
+				} else {
+					maxStrCap2 += 110;
+					maxSpeCap2 += 70;
+					maxTouCap2 += 70;
+					maxIntCap2 += 50;
+				}
+			}//+60/50-60
 			if (oniScore() >= 6) {
 				if (oniScore() >= 18) {
 					maxStrCap2 += 150;
