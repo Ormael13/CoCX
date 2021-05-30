@@ -1,5 +1,6 @@
 package classes.Scenes.Combat {
 import classes.*;
+import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
@@ -8,6 +9,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
@@ -101,7 +103,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("<b>You need more time before you can use Possess again.</b>\n\n");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if ((player.raijuScore() >= 7 || (player.thunderbirdScore() >= 10 && player.tailType == Tail.THUNDERBIRD)) && player.findPerk(PerkLib.ElectrifiedDesire) >= 0) {
+		if ((player.raijuScore() >= 7 || (player.thunderbirdScore() >= 10 && player.tailType == Tail.THUNDERBIRD)) && player.hasPerk(PerkLib.ElectrifiedDesire) >= 0) {
 			bd = buttons.add("Orgasmic L.S.", OrgasmicLightningStrike, "Masturbate to unleash a massive discharge.", "Orgasmic Lightning Strike");
 			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			bd = buttons.add("Pleasure bolt", PleasureBolt, "Release a discharge of your lust inducing electricity. It will rise your lust by 2% of max lust after each use.", "Pleasure bolt");
@@ -118,6 +120,10 @@ public class MagicSpecials extends BaseCombatContent {
 				bd = buttons.add("Lust storm", Luststorm).hint("Supercharge the air with your lusty electricity to unleash a thunderstorm.");
 				if (player.hasStatusEffect(StatusEffects.lustStorm)) bd.disable("<b>You already unleashed a thunderstorm on the battlefield</b>\n\n");
 			}
+		}
+		if (player.wings.type == Wings.SEADRAGON && player.antennae.type == Antennae.SEADRAGON && player.skin.base.pattern == Skin.PATTERN_SEADRAGON_UNDERBODY){
+			bd = buttons.add("Electric Discharge", ElectricDischarge, "Release a deadly discharge of electricity.", "Electric discharge");
+			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.hasPerk(PerkLib.TransformationImmunityAtlach) && player.lowerBody == LowerBody.ATLACH_NACHA && !monster.hasStatusEffect(StatusEffects.MysticWeb)) {
 			bd = buttons.add("'Mystic Web'", MysticWeb, "Spin a thread of animated web using your magic to tie up your victim in place. Also reduce opponent speed after each use. \n");
@@ -984,6 +990,46 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("\n\n");
 			enemyAI();
 		}
+	}
+
+	public function ElectricDischarge():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		outputText("You begin to gather energy within your electrocytes your bodily lights turning bright white as you enter overcharge. Suddenly you deliver the amassed current your energy running throught the air like a bright bolt of white death and roaring thunder.");
+		if (monster.hasStatusEffect(StatusEffects.DragonWaterBreath)){
+			outputText("Electrified Water is blasted all around your wet target as lightning and fluid turn into a booming explosion the force of wich plaster [monster him] to the ground dazed the the violence of the impact!");
+			monster.removeStatusEffect(StatusEffects.DragonWaterBreath);
+			monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
+		}
+		var damage:Number = scalingBonusIntelligence() * spellModWhite();
+		//Determine if critical hit!
+		var crit1:Boolean = false;
+		var critChance1:int = 5;
+		critChance1 += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
+		if (rand(100) < critChance1) {
+			crit1 = true;
+			damage *= 1.75;
+		}
+		//High damage to goes.
+		damage = calcVoltageMod(damage);
+		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage = Math.round(damage);
+		doLightingDamage(damage, true, true);
+		outputText(" damage. ");
+		if (crit1) outputText(" <b>*Critical Hit!*</b>");
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
 	}
 	
 	public function OrgasmicLightningStrike():void {
