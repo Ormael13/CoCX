@@ -7233,11 +7233,11 @@ use namespace CoC;
 				LeviathanCounter++;
 			if (hasPerk(PerkLib.DrakeLungsFinalForm))
 				LeviathanCounter++;
-			if (hasPerk(PerkLib.DraconicHeart))
+			if (hasPerk(PerkLib.DraconicBones))
 				LeviathanCounter++;
-			if (hasPerk(PerkLib.DraconicHeartEvolved))
+			if (hasPerk(PerkLib.DraconicBonesEvolved))
 				LeviathanCounter++;
-			if (hasPerk(PerkLib.DraconicHeartFinalForm))
+			if (hasPerk(PerkLib.DraconicBonesFinalForm))
 				LeviathanCounter++;
 			if (hasPerk(PerkLib.WhaleFat))
 				LeviathanCounter++;

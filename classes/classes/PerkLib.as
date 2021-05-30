@@ -5971,22 +5971,22 @@ public class PerkLib
 			}, "Displacer beast");
 			DraconicBones.requireBonesAndMarrowMutationSlot()
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.arms.type == Arms.DRAGON || player.arms.type == Arms.FROSTWYRM);
+                return (player.arms.type == Arms.DRAGON || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.SEADRAGON);
 				}, "Dragon race or its variants arms")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.lowerBody == LowerBody.DRAGON || player.lowerBody == LowerBody.FROSTWYRM);
+                return (player.lowerBody == LowerBody.DRAGON || player.lowerBody == LowerBody.FROSTWYRM || player.lowerBody == LowerBody.SEADRAGON);
 				}, "Dragon race or its variants legs")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.tailType == Tail.DRACONIC || player.lowerBody == LowerBody.FROSTWYRM);
+                return (player.tailType == Tail.DRACONIC || player.lowerBody == LowerBody.FROSTWYRM || player.tailType == Tail.ORCA);
 				}, "Dragon race or its variants tail")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10);
+                return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
             }, "Dragon race or its variants");
 			DraconicHeart.requireHeartMutationSlot()
                 .requirePerk(DraconicBones)
                 .requireAnyPerk(DraconicLungs, DrakeLungs)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10);
+                return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
             }, "Dragon race or its variants");
 			DraconicLungs.requireLungsMutationSlot()
 				.requirePerk(DragonFireBreath)
@@ -5997,7 +5997,7 @@ public class PerkLib
             }, "Dragon race");
 			DrakeLungs.requireLungsMutationSlot().requireAnyPerk(DragonFireBreath, DragonIceBreath, DragonLightningBreath, DragonDarknessBreath)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.frostWyrmScore() >= 10 || player.jabberwockyScore() >= 10 || player.vouivreScore() >= 11);
+                return (player.frostWyrmScore() >= 10 || player.jabberwockyScore() >= 10 || player.vouivreScore() >= 11 || player.leviathanScore() >= 20);
             }, "Variants of the dragon race");
 			EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
@@ -6133,7 +6133,7 @@ public class PerkLib
                 return player.spiderScore() >= 4 || player.nagaScore() >= 4 || player.gorgonScore() >= 4 || player.vouivreScore() >= 4 || player.couatlScore() >= 4 || player.hydraScore() >= 4;
             }, "Spider or any snake-like race");
 			WhaleFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-				return player.orcaScore() >= 6;
+				return player.orcaScore() >= 6 || player.leviathanScore() >= 20;
 			}, "Orca race");
 			YetiFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.yetiScore() >= 14;
@@ -6404,14 +6404,14 @@ public class PerkLib
                     .requirePerk(DraconicHeart)
                     .requireAnyPerk(DraconicLungs, DrakeLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12);
+						return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12 || player.leviathanScore() >= 20);
             }, "Dragon race or its variants");
 			DraconicHeartEvolved.requireLevel(12)
                     .requirePerk(DraconicBones)
                     .requirePerk(DraconicHeart)
                     .requireAnyPerk(DraconicLungs, DrakeLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12);
+						return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12 || player.leviathanScore() >= 20);
             }, "Dragon race or its variants");
 			DraconicLungsEvolved.requireLevel(12)
                     .requirePerk(DraconicBones)
@@ -6422,7 +6422,7 @@ public class PerkLib
             }, "Dragon race");
 			DrakeLungsEvolved.requireLevel(12).requirePerk(DrakeLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.frostWyrmScore() >= 12 || player.jabberwockyScore() >= 12 || player.vouivreScore() >= 12);
+						return (player.frostWyrmScore() >= 12 || player.jabberwockyScore() >= 12 || player.vouivreScore() >= 12 || player.leviathanScore() >= 20);
             }, "Variants of the dragon race");
 			EasterBunnyEggBagEvolved.requireLevel(12).requirePerk(EasterBunnyEggBag).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
@@ -6485,7 +6485,7 @@ public class PerkLib
                 return player.spiderScore() >= 8 || player.atlachNachaScore() >= 17 || player.nagaScore() >= 6 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
             }, "Spider or any snake-like race");
 			WhaleFatEvolved.requireLevel(12).requirePerk(WhaleFat).requireCustomFunction(function (player:Player):Boolean {
-				return player.orcaScore() >= 9;
+				return player.orcaScore() >= 9 || player.leviathanScore() >= 20;
 			}, "Orca race");
 			YetiFatEvolved.requireLevel(12).requirePerk(YetiFat).requireCustomFunction(function (player:Player):Boolean {
 				return player.yetiScore() >= 15;
@@ -6738,7 +6738,7 @@ public class PerkLib
                 return player.spiderScore() >= 12 || player.atlachNachaScore() >= 17 || player.nagaScore() >= 8 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
             }, "Spider or any snake-like race");
 			WhaleFatFinalForm.requireLevel(24).requirePerk(WhaleFatEvolved).requireCustomFunction(function (player:Player):Boolean {
-				return player.orcaScore() >= 12;
+				return player.orcaScore() >= 12 || player.leviathanScore() >= 20;
 			}, "Orca race");
 			YetiFatFinalForm.requireLevel(24).requirePerk(YetiFatEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.yetiScore() >= 16;
@@ -6847,14 +6847,14 @@ public class PerkLib
                 .requirePerk(DraconicHeartEvolved)
                 .requireAnyPerk(DraconicLungsEvolved, DrakeLungsEvolved)
                 .requireCustomFunction(function (player:Player):Boolean {
-					return (player.dragonScore() >= 16 || player.frostWyrmScore() >= 15);
+					return (player.dragonScore() >= 16 || player.frostWyrmScore() >= 15 || player.leviathanScore() >= 20);
             }, "Dragon race or its variants");
 			DraconicHeartFinalForm.requireLevel(30)
                 .requirePerk(DraconicBonesEvolved)
                 .requirePerk(DraconicHeartEvolved)
                 .requireAnyPerk(DraconicLungsEvolved, DrakeLungsEvolved)
                 .requireCustomFunction(function (player:Player):Boolean {
-					return (player.dragonScore() >= 16 || player.jabberwockyScore() >= 16 || player.frostWyrmScore() >= 15);
+					return (player.dragonScore() >= 16 || player.jabberwockyScore() >= 16 || player.frostWyrmScore() >= 15 || player.leviathanScore() >= 20);
             }, "Dragon race or its variants");
 			DraconicLungsFinalForm.requireLevel(30)
                 .requirePerk(DraconicBonesEvolved)
@@ -6865,7 +6865,7 @@ public class PerkLib
             }, "Dragon race");
 			DrakeLungsFinalForm.requireLevel(30).requirePerk(DrakeLungsEvolved)
                  .requireCustomFunction(function (player:Player):Boolean {
-					return (player.frostWyrmScore() >= 15 || player.jabberwockyScore() >= 15 || player.vouivreScore() >= 13);
+					return (player.frostWyrmScore() >= 15 || player.jabberwockyScore() >= 15 || player.vouivreScore() >= 13 || player.leviathanScore() >= 20);
             }, "Variants of the dragon race");
 			EasterBunnyEggBagFinalForm.requireLevel(30).requirePerk(EasterBunnyEggBagEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
