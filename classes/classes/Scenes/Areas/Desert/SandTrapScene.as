@@ -549,7 +549,7 @@ private function nagaThreesomeWithSandTrap():void {
 	if(flags[kFLAGS.SANDTRAP_NAGA_3SOME] == 0) {
 		outputText("\n\nA small cough from above you makes you start.  Looking up you are startled to see the desert naga peering down at the two of you.  Anxiety vies with amusement on her face.");
 		outputText("\n\n\"<i>I heard fighting and I heard you,</i>\" she says, in your lonely, shared tongue.  \"<i>I thought you might need help.</i>\"  She gestures with disdain at the creature held in your coils, the six eyes of whom are bulging with fright at the sight of the pair of you.  \"<i>I have encountered these creatures before.  They do... bad things if you let them surprise you.</i>\"  She twists her mouth, and you do the math yourself.");
-		outputText("\n\n\"<i>Perhaps you're in the mood for a spot of revenge, then?</i>\" you suggest, languidly corkscrewing your coils around your prize.  She blinks, and then smiles warmly.  \"<i>We </i>are<i> of one blood, you and I,</i>\" she says fondly, as she slowly slides down to join you.");
+		outputText("\n\nAs you languidly corkscrewing your coils around your prize, you ask the Naga if she's in the mood for revenge against all the bad things he's done.  She blinks, and then smiles warmly.  \"<i>We </i>are<i> of one blood, you and I,</i>\" she says fondly, as she slowly slides down to join you.");
 	}
 	//Repeat encounter: 
 	else {
