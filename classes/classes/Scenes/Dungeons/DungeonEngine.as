@@ -384,6 +384,9 @@ public class DungeonEngine extends BaseContent
 		public function checkRiverDungeon2ndFloorClear():Boolean {
 			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6);//3,4,5,6 - pokonanie każdego z sub-bossów, 7 - pokonanie chimerycznego żywiołaka
 		}
+		public function checkRiverDungeon3rdFloorClear():Boolean {
+			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8);//8 - pokonanie subbossa, 9 - pokonanie bossa
+		}
 		public function checkEbonLabyrinthClear():Boolean {
 			return (flags[kFLAGS.EBON_LABYRINTH] > 1);//exploracja 50 pokoi bez porażki
 		}

@@ -313,10 +313,10 @@ public function startUrtaQuest():void {
 	player.wisStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 18);
 	player.libStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
 	var UrtaMulti:Number = 1;
-	if (flags[kFLAGS.GAME_DIFFICULTY] == 1) UrtaMulti += 0.1;
-	if (flags[kFLAGS.GAME_DIFFICULTY] == 2) UrtaMulti += 0.3;
-	if (flags[kFLAGS.GAME_DIFFICULTY] == 3) UrtaMulti += 0.6;
-	if (flags[kFLAGS.GAME_DIFFICULTY] == 4) UrtaMulti += 1;
+	if (flags[kFLAGS.GAME_DIFFICULTY] == 1) UrtaMulti += 0.2;
+	if (flags[kFLAGS.GAME_DIFFICULTY] == 2) UrtaMulti += 0.5;
+	if (flags[kFLAGS.GAME_DIFFICULTY] == 3) UrtaMulti += 1;
+	if (flags[kFLAGS.GAME_DIFFICULTY] == 4) UrtaMulti += 2.5;
 	player.strStat.core.value = Math.round(player.str * UrtaMulti);
 	player.touStat.core.value = Math.round(player.tou * UrtaMulti);
 	player.speStat.core.value = Math.round(player.spe * UrtaMulti);
@@ -2670,4 +2670,4 @@ private function urtaAndEdrynGodChildEpilogueII():void {
     doNext(camp.returnToCampUseOneHour);
 }
 }
-}
+}
