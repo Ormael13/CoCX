@@ -167,15 +167,15 @@ use namespace CoC;
 						name  : "beegirl",
 						call  : beeGirlScene.beeEncounter,
 						chance: 0.50
-					}//,{
-					//	name  : "WoodElf",
-					//	call  : SceneLib.woodElves.findElves,
-					//	chance: 0.50,
-					//	when  : function ():Boolean {
-					//		return (WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED
-					//				|| WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELF) && !player.blockingBodyTransformations()
-					//	}
-					//}
+					},{
+						name  : "WoodElf",
+						call  : SceneLib.woodElves.findElves,
+						chance: 0.50,
+						when  : function ():Boolean {
+							return (WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED
+									|| WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELF) && !player.blockingBodyTransformations()
+						}
+					}
 					, {
 						name  : "truffle",
 						call  : findTruffle,
