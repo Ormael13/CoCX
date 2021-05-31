@@ -2408,7 +2408,7 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		fatigue(50, USEFATG_MAGIC_NOBM);
-		player.createStatusEffect(StatusEffects.DragonDarknessBreathCooldown,0,0,0,0);
+		player.createStatusEffect(StatusEffects.DragonWaterBreathCooldown,0,0,0,0);
 		var damage:Number = 0;
 		var damult:Number = 1;
 		damage += scalingBonusIntelligence();
