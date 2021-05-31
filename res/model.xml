@@ -3979,9 +3979,14 @@
 			<show part="clotheUnderAmulet/sphinxregalia"/>
 		</if>
 		
-		<!-- Sphinx Regalia -->
+		<!-- Skull Ornament -->
 		<if test="skullOrnament">
 			<show part="clotheHead_bg/warlockSkulls"/>
+		</if>
+		
+		<!-- Demon tail ring -->
+		<if test="demonTailRing">
+			<show part="tailAccessory/demonTailJewelery"/>
 		</if>
 		
 		<!-- Oni Gourd -->
