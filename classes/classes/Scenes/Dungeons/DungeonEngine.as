@@ -185,7 +185,14 @@ public class DungeonEngine extends BaseContent
 		private static const DUNGEON_RIVER_FLOOR_03_ROOM_28:int = 162;
 		private static const DUNGEON_RIVER_FLOOR_03_ROOM_29:int = 163;
 		private static const DUNGEON_RIVER_FLOOR_03_ROOM_30:int = 164;
-		
+		/*
+		private static const DUNGEON_BEE_HIVE_ENTRANCE:int	= 165;
+		private static const DUNGEON_BEE_HIVE_1:int	= 166;
+		private static const DUNGEON_BEE_HIVE_2:int	= 167;
+		private static const DUNGEON_BEE_HIVE_3:int	= 168;
+		private static const DUNGEON_BEE_HIVE_4:int	= 169;
+		private static const DUNGEON_BEE_HIVE_5:int	= 170;
+		*/
 		//Register dungeons
 		public var factory:Factory = new Factory;
 		public var deepcave:DeepCave = new DeepCave;
@@ -325,6 +332,38 @@ public class DungeonEngine extends BaseContent
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_25) riverdungeon.roomB25();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_26) riverdungeon.roomB26();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_27) riverdungeon.roomB27();
+			//River Dungeon 3rd floor
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_01) riverdungeon.roomC01();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_02) riverdungeon.roomC02();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_03) riverdungeon.roomC03();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_04) riverdungeon.roomC04();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_05) riverdungeon.roomC05();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_06) riverdungeon.roomC06();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_07) riverdungeon.roomC07();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_08) riverdungeon.roomC08();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_09) riverdungeon.roomC09();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_10) riverdungeon.roomC10();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_11) riverdungeon.roomC11();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_12) riverdungeon.roomC12();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_13) riverdungeon.roomC13();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_14) riverdungeon.roomC14();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_15) riverdungeon.roomC15();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_16) riverdungeon.roomC16();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_17) riverdungeon.roomC17();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_18) riverdungeon.roomC18();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_19) riverdungeon.roomC19();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_20) riverdungeon.roomC20();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_21) riverdungeon.roomC21();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_22) riverdungeon.roomC22();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_23) riverdungeon.roomC23();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_24) riverdungeon.roomC24();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_25) riverdungeon.roomC25();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_26) riverdungeon.roomC26();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_27) riverdungeon.roomC27();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_28) riverdungeon.roomC28();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_29) riverdungeon.roomC29();
+			if (DungeonAbstractContent.dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_30) riverdungeon.roomC30();
+			//River Dungeon 4th floor
 			//Den of Desire
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_DEN_OF_DESIRE_ENTRANCE) denofdesire.roomEntrance();
 			if (DungeonAbstractContent.dungeonLoc == DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA) denofdesire.roomGreatHallArea();
@@ -383,6 +422,9 @@ public class DungeonEngine extends BaseContent
 		}
 		public function checkRiverDungeon2ndFloorClear():Boolean {
 			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 6);//3,4,5,6 - pokonanie każdego z sub-bossów, 7 - pokonanie chimerycznego żywiołaka
+		}
+		public function checkRiverDungeon3rdFloorClear():Boolean {
+			return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8);//8 - pokonanie subbossa, 9 - pokonanie bossa
 		}
 		public function checkEbonLabyrinthClear():Boolean {
 			return (flags[kFLAGS.EBON_LABYRINTH] > 1);//exploracja 50 pokoi bez porażki

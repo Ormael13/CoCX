@@ -1569,7 +1569,7 @@ import coc.view.MainView;
 		//-----------------
 		private function chooseModeNormal():void {
 			clearOutput();
-			outputText("You have chosen Normal Mode. This is a classic gameplay mode. \n\n<b>Difficulty can be adjusted at any time.</b>");
+			outputText("You have chosen Normal Mode. This is a classic gameplay mode. Accumulated wrath will not affect ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.\n\n<b>Difficulty can be adjusted at any time.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 0;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
@@ -1578,59 +1578,52 @@ import coc.view.MainView;
 
 		private function chooseModeSurvival():void {
 			clearOutput();
-			outputText("You have chosen Survival Mode. This is similar to the normal mode but with hunger enabled. \n\n<b>Difficulty can be adjusted at any time.</b>");
+			outputText("You have chosen Survival Mode. This is similar to the normal mode but with hunger enabled. Accumulated wrath will not affect ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.\n\n<b>Difficulty can be adjusted at any time.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
-			player.hunger = 80;
+			player.hunger = 100;
 			doNext(startTheGame);
 		}
 
 		private function chooseModeRealistic():void {
 			clearOutput();
-			outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically. Also, your cum production is capped and having oversized parts will weigh you down. \n\n<b>Difficulty can be adjusted at any time.</b>");
+			outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically. Accumulated wrath will not affect ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score. Also, your cum production is capped and having oversized parts will weigh you down.\n\n<b>Difficulty can be adjusted at any time.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
-			player.hunger = 80;
+			player.hunger = 100;
 			doNext(startTheGame);
 		}
 
 		private function chooseModeHard():void {
 			clearOutput();
-			outputText("You have chosen Hard Mode. In this mode, hunger is enabled so you have to eat periodically. In addition, the game forces autosave and if you encounter a Bad End, your save file is <b>DELETED</b>! \n\nDebug Mode and Easy Mode are disabled in this game mode. \n\nPlease choose a slot to save in. You may not make multiple copies of saves. \n\n<b>Difficulty is locked to hard.</b>");
-			flags[kFLAGS.HARDCORE_MODE] = 1;
+			outputText("You have chosen Hard Mode. In this mode, hunger is enabled so you have to eat periodically. Accumulated wrath will not affect ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 6 points in internal mutation score.\n\n<b>Difficulty is locked to hard.</b>");
+			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 1;
-			player.hunger = 80;
-			menu();
-			for (var i:int = 0; i < 14; i++) {
-				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
-			}
-			addButton(14, "Back", chooseGameModes);
+			player.hunger = 100;
+			doNext(startTheGame);
 		}
 
-		private function chooseModeHardcore():void {
+		private function chooseModeNightmare():void {
 			clearOutput();
-			outputText("You have chosen Hardcore Mode. This is the HARDEST mode of all. \n\n<b>Difficulty is locked to <i>NIGHTMARE</i>.</b>");
+			outputText("You have chosen Nightmare Mode. Hunger would be all time active so go get that food or your gonna starve... to death. If you want to spellcast or use magic specials you have to pay attention to your accumulated wrath. Also negative effects of internal mutations starts right away. You have been warned: it not gonna be walk in park anymore...\n\n<b>Difficulty is locked to <i>NIGHTMARE</i>.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 1;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 2;
-			player.hunger = 80;
+			player.hunger = 50;
 			menu();
-			for (var i:int = 0; i < 14; i++) {
-				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
-			}
-			addButton(14, "Back", chooseGameModes);
+			doNext(startTheGame);
 		}
 
-		private function chooseModeBrutalHardcore():void {
+		private function chooseModeExtreme():void {
 			clearOutput();
-			outputText("You have chosen Brutal Hardcore Mode. This is the more than HARDEST mode of all. \n\n<b>Difficulty is locked to <i>EXTREME</i>.</b>");
+			outputText("You have chosen EXTREME Mode. So you feel that neither death from starvation, nor accumulated wrath blocking your bright path of mage and not even internal mutation can stop you? Fine then let take it to next level. Game forces autosave and if you encounter a Bad End, your save file is <b>DELETED</b>! \n\nDebug Mode and Easy Mode are disabled in this game mode. \n\nPlease choose a slot to save in. You may not make multiple copies of saves. \n\n<b>Difficulty is locked to <i>EXTREME</i>.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 1;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 3;
-			player.hunger = 80;
+			player.hunger = 50;
 			menu();
 			for (var i:int = 0; i < 14; i++) {
 				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
@@ -1640,11 +1633,11 @@ import coc.view.MainView;
 
 		private function chooseModeXianxia():void {
 			clearOutput();
-			outputText("You have chosen Xianxia MC Mode. This is the mode to feel like a true XIANXIA MC. \n\n<b>Difficulty is locked to <i>XIANXIA</i>.</b>");
+			outputText("You have chosen Xianxia MC Mode. Since you feel all previous difficulty setting was too easy you can try this one option. Sure it would be rough but you came here to suffe...err feeling like a true XIANXIA MC, right? \n\n<b>Difficulty is locked to <i>XIANXIA</i>.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 1;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 4;
-			player.hunger = 80;
+			player.hunger = 50;
 			menu();
 			for (var i:int = 0; i < 14; i++) {
 				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
@@ -1674,8 +1667,8 @@ import coc.view.MainView;
 			addButton(1, "Survival", chooseModeSurvival);
 			addButton(2, "Realistic", chooseModeRealistic);
 			addButton(3, "Hard", chooseModeHard);
-			addButton(4, "Hardcore", chooseModeHardcore);
-			addButton(5, "Brutal HC", chooseModeBrutalHardcore);
+			addButton(4, "Nightmare", chooseModeNightmare);
+			addButton(5, "EXTREME", chooseModeExtreme);
 			addButton(6, "Xianxia MC", chooseModeXianxia);
 		}
 

@@ -21,7 +21,7 @@ public class SimpleTransformation extends Transformation {
 	}
 	
 	override public function isPossible():Boolean {
-		return isPossibleFn ? isPossibleFn() : !isPresentFn();
+		return (isPossibleFn != null) ? isPossibleFn() : !isPresentFn();
 	}
 	
 	override public function applyEffect(doOutput:Boolean = true):void {
