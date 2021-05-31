@@ -4814,7 +4814,7 @@ public class Combat extends BaseContent {
                 damage += scalingBonusToughness() * 0.25;
             }
             else{
-                if (player.isElf && player.isUsingSpear() && player.hasPerk(PerkLib.ELFElvenBattleStyle)) {
+                if (player.isElf() && player.isUsingSpear() && player.hasPerk(PerkLib.ELFElvenBattleStyle)) {
                     damage += player.inte;
                     damage += scalingBonusToughness() * 0.25;
                 }

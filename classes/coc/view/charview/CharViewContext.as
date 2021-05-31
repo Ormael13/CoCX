@@ -210,7 +210,8 @@ import coc.xlogic.ExecContext;
 					foxHairpin: player.headJewelry == game.headjewelries.FOXHAIR,
 					goldenNagaHairpin: player.headJewelry == game.headjewelries.GNHAIR,
 					machinistGoggles: player.headJewelry == game.headjewelries.MACHGOG || player.headJewelry == game.headjewelries.SATGOG || player.headJewelry == game.headjewelries.SCANGOG,
-					//sphinxRegalia: player.headJewelry == game.headjewelries.SphinxAS
+					sphinxRegalia: player.headJewelry == game.headjewelries.SPHINXAS,
+					skullOrnament: player.headJewelry == game.headjewelries.DMONSKUL,
 					yukiHairpin: player.headJewelry == game.headjewelries.SNOWFH,
 
 					// Viewable amulet Accessory lists

@@ -598,10 +598,10 @@ import classes.Scenes.SceneLib;
 			addButtonDisabled(2,"Fletching table","Under Construction.");
 			addButton(3, "Elenwen", Elenwen);
 			if (hasTrainedToday) addButtonDisabled(3,"Elenwen","You need a break from your recent training before you can train again.");
-		    else if (!player.isElf || !player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train maybe you should make yourself more elf like.");
+		    else if (!player.isElf() || !player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train maybe you should make yourself more elf like.");
 			addButton(4, "Alyssa", Alyssa);
 			if (hasTrainedToday) addButtonDisabled(4,"Alyssa","You need a break from your recent training before you can train again.");
-			else if (!player.isElf || !player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train maybe you should make yourself more elf like.");
+			else if (!player.isElf() || !player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train maybe you should make yourself more elf like.");
 			addButton(5, "Leave", camp.returnToCampUseOneHour);
 		}
 

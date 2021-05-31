@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armor;
+import classes.Items.HeadJewelry;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.JojoScene;
@@ -1146,6 +1147,7 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(7, "T.C.Kimono", "You already bought item from Kaiba today.");
 			addButtonDisabled(8, "I.B.Kimono", "You already bought item from Kaiba today.");
 			addButtonDisabled(9, "C.B.G.Armor", "You already bought item from Kaiba today.");
+			addButtonDisabled(10, "S.Ornament", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(0, "HBHelmet", buyItem, headjewelries.HBHELM).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
@@ -1159,6 +1161,8 @@ public function kaibaShopMainMenu2():void {
 			addButton(7, "T.C.Kimono", buyItem, armors.TCKIMO).hint("Tamamo no Mae Cursed Kimono - Slutty seduction 15, Count as naked and empower magical and soulforce ability, An unique find buy it while you can because this won't last forever!");
 			addButton(8, "I.B.Kimono", buyItem, armors.IBKIMO).hint("Inari Blessed Kimono - Slutty seduction 15, Count as naked and empower magical and soulforce ability, An unique find buy it while you can because this won't last forever!");
 			addButton(9, "C.B.G.Armor", buyItem, armors.CTBGUAR).hint("Centaur Blackguard Armor - Count as a light and heavy armor, An unique find buy it while you can because this won't last forever!");
+			addButton(10, "S.Ornament", buyItem, headjewelries.DMONSKUL).hint("Skull hair ornament - An unique hair accessory for evil wizards greatly empower ones magic power scaling with corruption, An unique find buy it while you can because this won't last forever!");
+
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(13, "-1-", kaibaShopMainMenuPage1);
