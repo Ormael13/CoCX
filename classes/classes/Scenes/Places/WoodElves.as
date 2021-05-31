@@ -130,7 +130,7 @@ import classes.Scenes.SceneLib;
 			outputText("You decide to turn and exit the area." +
 					"\n\nThe elf speaks up as you attempt to leave, \"<i>Oh my, you wish to leave already? I’m very sorry, but you won’t be going anywhere at the moment, not so long as we have you surrounded. There's so many things left we'd like to talk about and besides... I don't think <b>he</b> would agree to let you leave either. Please don’t hold it against us, though - this is all for your own good, I promise. By the end of it you will be thanking us for it.</i>\"\n\n" +
 					"The elves tighten their circle around you to prevent any chance of escape as their sinister intentions become clear.");
-			if (silly) outputText(" Those dastardly ladies! Of all things you're in the midst of a circle of hedonistic elves!")
+			if (silly()) outputText(" Those dastardly ladies! Of all things you're in the midst of a circle of hedonistic elves!")
 			outputText(" You brace for the incoming combat.");
 			doNext(StartElfFight);
 		}
@@ -598,10 +598,10 @@ import classes.Scenes.SceneLib;
 			addButtonDisabled(2,"Fletching table","Under Construction.");
 			addButton(3, "Elenwen", Elenwen);
 			if (hasTrainedToday) addButtonDisabled(3,"Elenwen","You need a break from your recent training before you can train again.");
-		    else if (!player.isElf || !player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train maybe you should make yourself more elf like.");
+		    else if (!player.isElf() || !player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train maybe you should make yourself more elf like.");
 			addButton(4, "Alyssa", Alyssa);
 			if (hasTrainedToday) addButtonDisabled(4,"Alyssa","You need a break from your recent training before you can train again.");
-			else if (!player.isElf || !player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train maybe you should make yourself more elf like.");
+			else if (!player.isElf() || !player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train maybe you should make yourself more elf like.");
 			addButton(5, "Leave", camp.returnToCampUseOneHour);
 		}
 
@@ -931,4 +931,4 @@ import classes.Scenes.SceneLib;
 
 	}
 
-}
+}

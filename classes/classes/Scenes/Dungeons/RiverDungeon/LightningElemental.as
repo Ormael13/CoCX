@@ -31,7 +31,7 @@ public class LightningElemental extends Monster
 		}
 		
 		public function fluffyOfPunches():void {
-			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"Lightning elemental")+" wraps its fists within several jagged ice crystals before launching a flurry of jabs against you.");
+			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"Lightning elemental")+" wraps its fists with lighting before launching a flurry of jabs against you.");
 			var damage:Number = inte + wis;
 			if (player.findPerk(PerkLib.LightningAffinity) >= 0) damage *= 0.3;
 			//if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;

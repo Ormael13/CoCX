@@ -990,13 +990,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				if (player.tailType == Tail.BEE_ABDOMEN) {
 					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
-					var damageB:Number = 35 + rand(player.lib/10);
-					if (player.level < 10) damageB += 20 + (player.level * 3);
-					else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
-					else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
-					else damageB += 80;
-					damageB *= 0.2;
-					monster.teased(monster.lustVuln * damageB);
+					var damage1B:Number = 35 + rand(player.lib/10);
+					if (player.level < 10) damage1B += 20 + (player.level * 3);
+					else if (player.level < 20) damage1B += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) damage1B += 70 + (player.level - 20) * 1;
+					else damage1B += 80;
+					damage1B *= 0.2;
+					monster.teased(monster.lustVuln * damage1B);
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 					{
 						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
@@ -1045,17 +1045,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.faceType == Face.SPIDER_FANGS) {
 					if (player.lowerBody == LowerBody.ATLACH_NACHA){
 						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
-						var damageB:Number = 35 + rand(player.lib / 10);
+						var damage2B:Number = 35 + rand(player.lib / 10);
 						var poisonScaling:Number = 1;
 						poisonScaling += player.lib/100;
 						poisonScaling += player.tou/100;
-						if (player.level < 10) damageB += 20 + (player.level * 3);
-						else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
-						else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
-						else damageB += 80;
-						damageB *= 0.2;
-						damageB *= 1+(poisonScaling/10);
-						monster.teased(monster.lustVuln * damageB);
+						if (player.level < 10) damage2B += 20 + (player.level * 3);
+						else if (player.level < 20) damage2B += 50 + (player.level - 10) * 2;
+						else if (player.level < 30) damage2B += 70 + (player.level - 20) * 1;
+						else damage2B += 80;
+						damage2B *= 0.2;
+						damage2B *= 1+(poisonScaling/10);
+						monster.teased(monster.lustVuln * damage2B);
 						monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
 						if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
@@ -3171,7 +3171,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//LAND A HIT!
 		else {
-			var Multiplier = 1;
+			var Multiplier:Number = 1;
 			if(player.hasPerk(PerkLib.ArachnidBookLungEvolved)) Multiplier += 0.5;
 			if(player.hasPerk(PerkLib.ArachnidBookLungFinalForm)) Multiplier += 0.5;
 			if(player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
@@ -3817,21 +3817,21 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.lowerBody == LowerBody.ATLACH_NACHA){
 					if (monster.plural) outputText("  The one you bit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.");
 					else outputText("  " + monster.mf("He", "She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.", "touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
-					var lustDmg:Number = 35 + rand(player.lib / 10);
+					var lustDmg2:Number = 35 + rand(player.lib / 10);
 					var poisonScaling:Number = 1;
 					poisonScaling += player.lib/100;
 					poisonScaling += player.tou/100;
-					if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-					if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-					if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
-					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
-					if (player.level < 10) lustDmg += 20 + (player.level * 3);
-					else if (player.level < 20) lustDmg += 50 + (player.level - 10) * 2;
-					else if (player.level < 30) lustDmg += 70 + (player.level - 20) * 1;
-					else lustDmg += 80;
-					lustDmg *= 0.2;
-					lustDmg *= 1+(poisonScaling/10);
-					monster.teased(monster.lustVuln * lustDmg, true);
+					if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= 1.50;
+					if (player.hasPerk(PerkLib.Apex)) lustDmg2 *= 1.50;
+					if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg2 *= 1.50;
+					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg2 *= 1.50;
+					if (player.level < 10) lustDmg2 += 20 + (player.level * 3);
+					else if (player.level < 20) lustDmg2 += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) lustDmg2 += 70 + (player.level - 20) * 1;
+					else lustDmg2 += 80;
+					lustDmg2 *= 0.2;
+					lustDmg2 *= 1+(poisonScaling/10);
+					monster.teased(monster.lustVuln * lustDmg2, true);
 					monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 						monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
@@ -5228,13 +5228,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				if (player.tailType == Tail.BEE_ABDOMEN) {
 					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
-					var damageB:Number = 35 + rand(player.lib / 10);
-					if (player.level < 10) damageB += 20 + (player.level * 3);
-					else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
-					else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
-					else damageB += 80;
-					damageB *= 0.2;
-					monster.teased(monster.lustVuln * damageB);
+					var damage3B:Number = 35 + rand(player.lib / 10);
+					if (player.level < 10) damage3B += 20 + (player.level * 3);
+					else if (player.level < 20) damage3B += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) damage3B += 70 + (player.level - 20) * 1;
+					else damage3B += 80;
+					damage3B *= 0.2;
+					monster.teased(monster.lustVuln * damage3B);
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 						monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
 					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
@@ -5275,17 +5275,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.faceType == Face.SPIDER_FANGS) {
 					if (player.lowerBody == LowerBody.ATLACH_NACHA){
 						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
-						var damageB:Number = 35 + rand(player.lib / 10);
+						var damage4B:Number = 35 + rand(player.lib / 10);
 						var poisonScaling:Number = 1;
 						poisonScaling += player.lib/100;
 						poisonScaling += player.tou/100;
-						if (player.level < 10) damageB += 20 + (player.level * 3);
-						else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
-						else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
-						else damageB += 80;
-						damageB *= 0.2;
-						damageB *= 1+(poisonScaling/10);
-						monster.teased(monster.lustVuln * damageB);
+						if (player.level < 10) damage4B += 20 + (player.level * 3);
+						else if (player.level < 20) damage4B += 50 + (player.level - 10) * 2;
+						else if (player.level < 30) damage4B += 70 + (player.level - 20) * 1;
+						else damage4B += 80;
+						damage4B *= 0.2;
+						damage4B *= 1+(poisonScaling/10);
+						monster.teased(monster.lustVuln * damage4B);
 						monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
 						if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);

@@ -14,7 +14,7 @@ public class SimpleEffect extends PossibleEffect {
 	}
 	
 	override public function isPossible():Boolean {
-		return isPossibleFn ? isPossibleFn() : true;
+		return (isPossibleFn != null) ? isPossibleFn() : true;
 	}
 	
 	override public function applyEffect(doOutput:Boolean = true):void {

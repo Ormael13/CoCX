@@ -3031,13 +3031,13 @@ public class Combat extends BaseContent {
                 }
                 if (player.tailType == Tail.BEE_ABDOMEN) {
                     outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
-                    var damageB:Number = 35 + rand(player.lib / 10);
-                    if (player.level < 10) damageB += 20 + (player.level * 3);
-                    else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
-                    else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
-                    else damageB += 80;
-                    damageB *= 0.2;
-                    monster.teased(monster.lustVuln * damageB);
+                    var damage1B:Number = 35 + rand(player.lib / 10);
+                    if (player.level < 10) damage1B += 20 + (player.level * 3);
+                    else if (player.level < 20) damage1B += 50 + (player.level - 10) * 2;
+                    else if (player.level < 30) damage1B += 70 + (player.level - 20) * 1;
+                    else damage1B += 80;
+                    damage1B *= 0.2;
+                    monster.teased(monster.lustVuln * damage1B);
                     if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
@@ -3078,17 +3078,17 @@ public class Combat extends BaseContent {
                 if (player.faceType == Face.SPIDER_FANGS) {
                     if (player.lowerBody == LowerBody.ATLACH_NACHA){
                         outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
-                        var damageB:Number = 35 + rand(player.lib / 10);
+                        var damage2B:Number = 35 + rand(player.lib / 10);
                         var poisonScaling:Number = 1;
                         poisonScaling += player.lib/100;
                         poisonScaling += player.tou/100;
-                        if (player.level < 10) damageB += 20 + (player.level * 3);
-                        else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
-                        else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
-                        else damageB += 80;
-                        damageB *= 0.2;
-                        damageB *= 1+(poisonScaling/10);
-                        monster.teased(monster.lustVuln * damageB);
+                        if (player.level < 10) damage2B += 20 + (player.level * 3);
+                        else if (player.level < 20) damage2B += 50 + (player.level - 10) * 2;
+                        else if (player.level < 30) damage2B += 70 + (player.level - 20) * 1;
+                        else damage2B += 80;
+                        damage2B *= 0.2;
+                        damage2B *= 1+(poisonScaling/10);
+                        monster.teased(monster.lustVuln * damage2B);
                         monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
@@ -4256,17 +4256,17 @@ public class Combat extends BaseContent {
                     if(player.faceType == Face.SPIDER_FANGS){
                         if (player.lowerBody == LowerBody.ATLACH_NACHA){
                             outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
-                            var damageB:Number = 35 + rand(player.lib / 10);
+                            var damage3B:Number = 35 + rand(player.lib / 10);
                             var poisonScaling:Number = 1;
                             poisonScaling += player.lib/100;
                             poisonScaling += player.tou/100;
-                            if (player.level < 10) damageB += 20 + (player.level * 3);
-                            else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
-                            else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
-                            else damageB += 80;
-                            damageB *= 0.2;
-                            damageB *= 1+(poisonScaling/10);
-                            monster.teased(monster.lustVuln * damageB);
+                            if (player.level < 10) damage3B += 20 + (player.level * 3);
+                            else if (player.level < 20) damage3B += 50 + (player.level - 10) * 2;
+                            else if (player.level < 30) damage3B += 70 + (player.level - 20) * 1;
+                            else damage3B += 80;
+                            damage3B *= 0.2;
+                            damage3B *= 1+(poisonScaling/10);
+                            monster.teased(monster.lustVuln * damage3B);
                             monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
                             if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
@@ -5342,17 +5342,17 @@ public class Combat extends BaseContent {
                     if (player.faceType == Face.SPIDER_FANGS) {
                         if (player.lowerBody == LowerBody.ATLACH_NACHA){
                             outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
-                            var damageB:Number = 35 + rand(player.lib / 10);
+                            var damage4B:Number = 35 + rand(player.lib / 10);
                             var poisonScaling:Number = 1;
                             poisonScaling += player.lib/100;
                             poisonScaling += player.tou/100;
-                            if (player.level < 10) damageB += 20 + (player.level * 3);
-                            else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
-                            else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
-                            else damageB += 80;
-                            damageB *= 0.2;
-                            damageB *= 1+(poisonScaling/10);
-                            monster.teased(monster.lustVuln * damageB);
+                            if (player.level < 10) damage4B += 20 + (player.level * 3);
+                            else if (player.level < 20) damage4B += 50 + (player.level - 10) * 2;
+                            else if (player.level < 30) damage4B += 70 + (player.level - 20) * 1;
+                            else damage4B += 80;
+                            damage4B *= 0.2;
+                            damage4B *= 1+(poisonScaling/10);
+                            monster.teased(monster.lustVuln * damage4B);
                             monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
                             if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
@@ -8032,35 +8032,35 @@ public class Combat extends BaseContent {
         //Black Frost Aura
         if (player.hasPerk(PerkLib.IceQueenGown) && player.yukiOnnaScore()>=14) {
             if (!monster.hasPerk(PerkLib.IceNature)) {
-                var damage:Number = (scalingBonusIntelligence() * 1);
+                var damageBFA:Number = scalingBonusIntelligence();
                 //Determine if critical hit!
-                var crit:Boolean = false;
-                var critChance:int = 5;
-                critChance += combatMagicalCritical();
-                if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-                if (rand(100) < critChance) {
-                    crit = true;
-                    damage *= 1.75;
+                var crit3:Boolean = false;
+                var critChance3:int = 5;
+                critChance3 += combatMagicalCritical();
+                if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance3 = 0;
+                if (rand(100) < critChance3) {
+                    crit3 = true;
+                    damageBFA *= 1.75;
                 }
-                damage = magic.calcGlacialModImpl(damage);
-                damage *= 0.5;
-                var SpellMultiplier:Number = 1;
-                SpellMultiplier += spellMod() - 1;
-                damage *= SpellMultiplier;
-                if (monster.cor < 33) damage = Math.round(damage * 1.0);
-                else if (monster.cor < 50) damage = Math.round(damage * 1.1);
-                else if (monster.cor < 75) damage = Math.round(damage * 1.2);
-                else if (monster.cor < 90) damage = Math.round(damage * 1.3);
-                else damage = Math.round(damage * 1.4); //30% more damage against very high corruption.
-                if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-                if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-                if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
-                damage = Math.round(damage);
-                if (damage > (monster.maxHP()/10)) damage = Math.round(monster.maxHP()/10);
+                damageBFA = magic.calcGlacialModImpl(damage);
+                damageBFA *= 0.5;
+                var SpellMultiplier2:Number = 1;
+                SpellMultiplier2 += spellMod() - 1;
+                damageBFA *= SpellMultiplier2;
+                if (monster.cor < 33) damageBFA = Math.round(damage * 1.0);
+                else if (monster.cor < 50) damageBFA = Math.round(damage * 1.1);
+                else if (monster.cor < 75) damageBFA = Math.round(damage * 1.2);
+                else if (monster.cor < 90) damageBFA = Math.round(damage * 1.3);
+                else damageBFA = Math.round(damage * 1.4); //30% more damage against very high corruption.
+                if (player.hasPerk(PerkLib.RacialParagon)) damageBFA *= 1.50;
+                if (player.hasPerk(PerkLib.Apex)) damageBFA *= 1.50;
+                if (player.hasPerk(PerkLib.AlphaAndOmega)) damageBFA *= 1.50;
+                damageBFA = Math.round(damageBFA);
+                if (damageBFA > (monster.maxHP()/10)) damageBFA = Math.round(monster.maxHP()/10);
                 outputText("Your black frost aura chills [monster a] [monster name] to the bone dealing ");
-                doIceDamage(damage, true, true);
+                doIceDamage(damageBFA, true, true);
                 outputText(" damage!");
-                if (crit) outputText(" <b>*Critical Hit!*</b>");
+                if (crit3) outputText(" <b>*Critical Hit!*</b>");
                 if (monster.plural) outputText(" Your opponent are affected by the freezing cold, slowing down their reflexes and thoughts as ice creeps on their body.");
                 else outputText(" Your opponent is affected by the freezing cold, slowing  down [monster his] reflexes and thoughts as ice creeps on [monster his] body.");
                 monster.statStore.addBuffObject({"spe.mult":-5, "int.mult":-5}, "Black Frost",{text:"Black Frost"});
@@ -13424,3 +13424,4 @@ public class Combat extends BaseContent {
     }
 }
 }
+
