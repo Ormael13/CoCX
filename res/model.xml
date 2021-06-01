@@ -546,6 +546,7 @@
         <cell rect="607,70,40,28" name="clotheHead/machinistGoggles" dx="84" dy="32"/>
         <cell rect="486,1574,30,20" name="clotheHead/fairyQueenCirclet" dx="88" dy="38"/>
         <cell rect="1013,12,40,28" name="clotheHead/merchantClotheHat" dx="81" dy="30"/>
+        <cell rect="150,123,49,25" name="clotheHead_bg/warlockSkulls" dx="79" dy="36"/>
         <cell rect="607,41,15,13" name="clotheAmulet/GoldStatAmulet" dx="97" dy="65"/>
         <cell rect="67,26,80,28" name="clotheScarf/scarfBlue" dx="94" dy="64"/>
         <cell rect="67,184,80,28" name="clotheScarf/scarfRed" dx="94" dy="64"/>
@@ -1253,6 +1254,7 @@
         <layer name="eyes"/>
 		<layer name="forehead"/>
         <layer name="ears_bg"/>
+		<layer name="clotheHead_bg"/>
 
 		<layer name="faceShading"/>
         <layer name="face"/>
@@ -1367,7 +1369,7 @@
 
 		<!-- CLOTHING VARIABLES AREA -->
 
-		<set var="sphinxRegalia" value="hasStatusEffect(StatusEffects.SphinxAS)"/>
+		<!--<set var="sphinxRegalia" value="hasStatusEffect(StatusEffects.SphinxAS)"/> OLD LEGACY CODE FOR DETECTING CLOTHING-->
 
 		<!-- WEAPON AREA -->
 		<if test="playerHasWeaponBannedArms">
@@ -1440,7 +1442,7 @@
 					
 					<!-- Tetsubo -->
 					<if test="PlayerHasATetsu">
-						<if test="PlayerHasAHammerHoly or PlayerHasAHammerUnholy">
+						<if test="PlayerHasATetsuHoly or PlayerHasATetsuUnholy">
 							<if test="PlayerHasATetsuHoly">
 								<show part="weapon/tetsuHoly"/>
 							</if>
@@ -3977,6 +3979,16 @@
 			<show part="clotheUnderAmulet/sphinxregalia"/>
 		</if>
 		
+		<!-- Skull Ornament -->
+		<if test="skullOrnament">
+			<show part="clotheHead_bg/warlockSkulls"/>
+		</if>
+		
+		<!-- Demon tail ring -->
+		<if test="demonTailRing">
+			<show part="tailAccessory/demonTailJewelery"/>
+		</if>
+		
 		<!-- Oni Gourd -->
 		<if test="oniGourd">
 			<show part="backAccessory/oniGourd"/>
@@ -4315,6 +4327,8 @@
 				</if>
 				<if test="showLegClothing">
 					<show part="clotheLegs/mageRobe"/>
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
 				</if>
 			</if>
 		</if>

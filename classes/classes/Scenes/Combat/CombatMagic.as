@@ -438,8 +438,8 @@ public class CombatMagic extends BaseCombatContent {
 		return mod;
 	}
 
-	internal function spellModWhiteImpl():Number {
-		var mod:Number = 1;
+	internal function spellModBase():Number {
+		var mod:Number = 0;
 		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) mod += .3;
 		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) mod += .2;
 		if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) mod += .4;
@@ -461,9 +461,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Ambition)) {
 			mod += player.perkv2(PerkLib.Ambition);
 		}
-		if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
-			mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
-		}
 		if (player.hasPerk(PerkLib.WizardsFocus)) {
 			mod += player.perkv1(PerkLib.WizardsFocus);
 		}
@@ -474,10 +471,6 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
-		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .2;
-		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
-		if (player.hasPerk(PerkLib.HexKnowledge)) mod -= .4;
-		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -491,6 +484,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
 		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
+		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
 			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
 				if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) mod += 2.5;
@@ -511,6 +505,20 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
+	internal function spellModWhiteImpl():Number {
+		var mod:Number = 1;
+		mod += spellModBase();
+		if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
+			mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
+		}
+		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .2;
+		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
+		if (player.hasPerk(PerkLib.HexKnowledge)) mod -= .4;
+		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -556,8 +564,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .02;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .017;
 		if (player.weapon == weapons.B_STAFF) {
 			var mod1:Number = 0.4;
 			mod1 -= player.cor / 10;
@@ -572,73 +580,11 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellModBlackImpl():Number {
 		var mod:Number = 1;
-		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) mod += .3;
-		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) mod += .2;
-		if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) mod += .4;
-		if (player.hasPerk(PerkLib.GrandArchmage2ndCircle) && player.inte >= 150) mod += .5;
-		if (player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) mod += .6;
-		if (player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) mod += .2;
-		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 275) mod += 1;
-		if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 225) mod += .8;
-		if (player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
-		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) mod += .2;
-		if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .1;
-		if (player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) mod += .1;
-		if (player.hasPerk(PerkLib.TraditionalMageI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageIII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageIV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageVI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.Obsession)) {
-			mod += player.perkv2(PerkLib.Obsession);
-		}
-		if (player.hasPerk(PerkLib.WizardsFocus)) {
-			mod += player.perkv1(PerkLib.WizardsFocus);
-		}
-		if (player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) {
-			mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
-		}
-		if (player.hasPerk(PerkLib.SagesKnowledge)) {
-			mod += player.perkv1(PerkLib.SagesKnowledge);
-		}
-		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		mod += spellModBase();
 		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
 		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
 		if (player.hasPerk(PerkLib.HexKnowledge)) mod += .2;
-		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
-		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
-		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
-		if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
-		if (player.jewelryEffectId4 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
-		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
-		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
-		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.shield == shields.SPI_FOC) mod += .2;
-		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
-		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
-			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
-				if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) mod += 2.5;
-				else mod += 1.25;
-			} else mod += 1;
-		}
-		if (player.weapon == weapons.B_STAFF) {
-			var mod1:Number = 0.4;
-			mod1 -= player.cor / 10;
-			if (mod1 < 0.1) mod1 = 0.1;
-			mod += mod1;
-		}
-		if (player.hasPerk(PerkLib.InariBlessedKimono)){
-			var mod2:Number = 0.5;
-			mod2 -= player.cor / 10;
-			if (mod1 < 0.1) mod2 = 0.1;
-			mod += mod2;
-		}
-		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
-		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		if (player.jewelry == jewelries.DMTO || player.jewelry2 == jewelries.DMTO || player.jewelry3 == jewelries.DMTO || player.jewelry4 == jewelries.DMTO) mod += 0.25;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
