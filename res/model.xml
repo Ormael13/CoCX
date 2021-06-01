@@ -1251,10 +1251,10 @@
 		<layer name="hairTop"/>
 		<layer name="hairRight"/>
 		<layer name="hair"/>
-		<layer name="clotheHead_bg"/>
         <layer name="eyes"/>
 		<layer name="forehead"/>
         <layer name="ears_bg"/>
+		<layer name="clotheHead_bg"/>
 
 		<layer name="faceShading"/>
         <layer name="face"/>
