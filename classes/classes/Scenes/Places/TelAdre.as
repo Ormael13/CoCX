@@ -1132,7 +1132,7 @@ public function kaibaShopMainMenu2():void {
 			addButton(7, "Oni enchanted drinking jug", buyItem, jewelries.ONIGOURD).hint("A magical drinking jug beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
 			addButton(8, "Oni Noble Kimono", buyItem, armors.OEKIMO).hint("The garbs of an oni noble. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
 			addButton(9, "Oni Tyrant Kimono", buyItem, armors.OTKIMO).hint("The garbs of an oni tyrant. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
-			addButton(1, "Demon tail ornament", buyItem, jewelries.DMTO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
+			addButton(10, "Demon tail ornament", buyItem, jewelries.DMTO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
 
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
