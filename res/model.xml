@@ -4327,6 +4327,8 @@
 				</if>
 				<if test="showLegClothing">
 					<show part="clotheLegs/mageRobe"/>
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
 				</if>
 			</if>
 		</if>
