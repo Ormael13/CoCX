@@ -1613,7 +1613,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.ElectrifiedDesire);
 				needNext = true;
 			}
-			else if (player.leviathanScore() < 20 && player.hasPerk(PerkLib.LightningAffinity)) {
+			else if (player.leviathanScore() < 20 && player.hasPerk(PerkLib.LightningAffinity) && !player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
 				outputText("\nYour natural electricity production starts dropping at a dramatic rate until finally there is no more. You realise you likely aren’t a sea dragon enough to build electricity anymore.\n\n<b>(Lost the lightning affinity perk and electric discharge ability!!)</b>\n");
 				player.removePerk(PerkLib.LightningAffinity);
 				needNext = true;

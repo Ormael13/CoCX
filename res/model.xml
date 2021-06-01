@@ -1442,7 +1442,7 @@
 					
 					<!-- Tetsubo -->
 					<if test="PlayerHasATetsu">
-						<if test="PlayerHasAHammerHoly or PlayerHasAHammerUnholy">
+						<if test="PlayerHasATetsuHoly or PlayerHasATetsuUnholy">
 							<if test="PlayerHasATetsuHoly">
 								<show part="weapon/tetsuHoly"/>
 							</if>
