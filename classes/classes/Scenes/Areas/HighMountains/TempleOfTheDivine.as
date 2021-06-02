@@ -1634,8 +1634,8 @@ use namespace CoC;
 		}
 		public function becomingGargoyleYes2():void {
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
-				player.skinTone = "light grey";
-				player.hairColor = "light grey";
+				player.skinTone = "light gray";
+				player.hairColor = "light gray";
 			}
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
 				player.skinTone = "quartz white";

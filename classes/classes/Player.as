@@ -10009,7 +10009,7 @@ use namespace CoC;
 		public function gargoyleScore():Number {
 			Begin("Player","racialScore","gargoyle");
 			var gargoyleCounter:Number = 0;
-			if (InCollection(hairColor, ["light grey", "quartz white"]))
+			if (InCollection(hairColor, ["light gray", "quartz white"]))
 				gargoyleCounter++;
 			if (InCollection(skin.base.color, ["light gray", "quartz white"]))
 				gargoyleCounter++;
