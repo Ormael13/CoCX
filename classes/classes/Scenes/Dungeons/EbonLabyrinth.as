@@ -277,8 +277,8 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		public function defeatEyeTyrant():void {
 			clearOutput();
 			outputText("You watch in confusion as the omni eyed girl simply vanishes from existence with a growl of anger. Well the passage ahead of you is free now so might as well take it.\n\n");
-			//if (player.hasStatusEffect(StatusEffects.TFDealer2) && player.statusEffectv1(StatusEffects.TFDealer2) < 1) player.addStatusValue(StatusEffects.TFDealer2, 1, 1);
-			//else player.createStatusEffect(StatusEffects.TFDealer2, 1, 0, 0, 0); - kiedy bedzie dodane gazer tf
+			if (player.hasStatusEffect(StatusEffects.TFDealer2) && player.statusEffectv1(StatusEffects.TFDealer2) < 1) player.addStatusValue(StatusEffects.TFDealer2, 1, 1);
+			else player.createStatusEffect(StatusEffects.TFDealer2, 1, 0, 0, 0);
 			cleanupAfterCombat();
 		}
 		public function defeatedByAtlachNacha():void {
@@ -291,6 +291,8 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		public function defeatAtlachNacha():void {
 			clearOutput();
 			outputText("You barely manage to force the spider back into the back of the room as you finally escape the web rushing for the exit, your nightmarish pursuer only meters away from you as you finally leave the room. It claws and flail but you prove faster and manage to outrun it. This was a close one but now you can keep on exploring the labyrinth.\n\n");
+			if (player.hasStatusEffect(StatusEffects.TFDealer2) && player.statusEffectv2(StatusEffects.TFDealer2) < 1) player.addStatusValue(StatusEffects.TFDealer2, 2, 1);
+			else player.createStatusEffect(StatusEffects.TFDealer2, 0, 1, 0, 0);
 			cleanupAfterCombat();
 		}
 		public function defeatedByLivingFailure():void {

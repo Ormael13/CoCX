@@ -16,6 +16,8 @@ import classes.internals.Utils;
 		public function DinahFollower() 
 		{}
 		
+		private var _extra:Number = 0;
+		
 		public function dinahAffection(changes:Number = 0):Number {
 			flags[kFLAGS.DINAH_AFFECTION] += changes;
 			if (flags[kFLAGS.DINAH_AFFECTION] > 100) flags[kFLAGS.DINAH_AFFECTION] = 100;
@@ -24,6 +26,7 @@ import classes.internals.Utils;
 		
 		public function DinahIntro1():void {
 			clearOutput();//non-camp intro
+			_extra = (3 + rand(5));
 			//Camp offer!
 			if (flags[kFLAGS.DINAH_DEFEATS_COUNTER] >= 3 && flags[kFLAGS.DINAH_LVL_UP] < 0.5) {
 				flags[kFLAGS.DINAH_LVL_UP] = 0.5;
@@ -66,6 +69,7 @@ import classes.internals.Utils;
 		}
 		public function DinahIntro2():void {
 			clearOutput();//camp intro
+			_extra = (1 + rand(3));
 			outputText("\"<i>Oh, Great Lady Godiva, tell us your will!</i>\" With religious zeal, Dinah pulls a coin out of nowhere and throws it into the air. But before it can fall on the ground, it vanishes. ");
 			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90) {
 				outputText("\"<i>The Coin Told Me To <b>Cuddle</b> You.</i>\" her smile becomes even wider. You've got a <i>very</i> bad feeling about this. It looks like there is no other choice. You've gotta to beat some sense into her before getting back to buisness.");
@@ -191,17 +195,26 @@ import classes.internals.Utils;
 			addButton(7, consumables.REDVIAL.shortName, buyItem3, 7).hint("Buy a vial of ominous red liquid.");
 			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
 			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
-			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] >= 1) addButton(10, consumables.JABBERS.shortName, buyItem3, 13).hint("Buy a Jabberwocky scale.");
-			else addButtonDisabled(10, "???", "Req. to beat one of bosses in Wonderland to have access to this TF item.");
-			if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
-				if (player.statusEffectv2(StatusEffects.TFDealer1) > 0) addButton(11, consumables.HYDRASC.shortName, buyItem3, 11).hint("Buy a hydra scale.");
-				else addButtonDisabled(11, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
-				if (player.statusEffectv3(StatusEffects.TFDealer1) > 0) addButton(12, consumables.FSNAILS.shortName, buyItem3, 12).hint("Buy a Fire snail Saliva.");
-				else addButtonDisabled(12, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
-				if (player.statusEffectv1(StatusEffects.TFDealer1) > 0) addButton(13, consumables.DSLIMEJ.shortName, buyItem3, 10).hint("Buy a Big Dark slime jelly.");
-				else addButtonDisabled(13, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
-			}
+			addButton(10, "Boss D.", DinahShopMainMenu2);
 			addButton(14, "Back", DinahMainMenu);
+		}
+		public function DinahShopMainMenu2():void {
+			menu();
+			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] >= 1) addButton(0, consumables.JABBERS.shortName, buyItem4, 23).hint("Buy a Jabberwocky Scale.");
+			else addButtonDisabled(0, "???", "Req. to beat one of bosses in Wonderland to have access to this TF item.");
+			if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
+				if (player.statusEffectv2(StatusEffects.TFDealer1) > 0) addButton(1, consumables.HYDRASC.shortName, buyItem4, 21).hint("Buy a Hydra Scale.");
+				else addButtonDisabled(1, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+				if (player.statusEffectv3(StatusEffects.TFDealer1) > 0) addButton(2, consumables.FSNAILS.shortName, buyItem4, 22).hint("Buy a Fire Snail Saliva.");
+				else addButtonDisabled(2, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+				if (player.statusEffectv1(StatusEffects.TFDealer1) > 0) addButton(3, consumables.DSLIMEJ.shortName, buyItem4, 20).hint("Buy a Dark Slime Jelly.");
+				else addButtonDisabled(3, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+				if (player.statusEffectv1(StatusEffects.TFDealer2) > 0) addButton(4, consumables.ME_DROP.shortName, buyItem4, 24).hint("Buy a Magic Eye Drop.");
+				else addButtonDisabled(3, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+				if (player.statusEffectv2(StatusEffects.TFDealer2) > 0) addButton(5, consumables.M_GOSSR.shortName, buyItem4, 25).hint("Buy a Midnight Black Glossamer.");
+				else addButtonDisabled(3, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
+			}
+			addButton(14, "Back", DinahShopMainMenu);
 		}
 		private function buyItem1(item:Number = 0):void {
 			if (item == 0) catChimeraBuy1(consumables.AGILI_E);
@@ -215,19 +228,23 @@ import classes.internals.Utils;
 			if (item == 9) catChimeraBuy2(consumables.BCHCAKE);
 		}
 		private function buyItem3(item:Number = 0):void {
-			if (item == 5) catChimeraBuy2(consumables.MANTICV);
-			if (item == 6) catChimeraBuy2(consumables.VOLTTOP);
-			if (item == 7) catChimeraBuy2(consumables.REDVIAL);
-			if (item == 10) catChimeraBuy2(consumables.DSLIMEJ);
-			if (item == 11) catChimeraBuy2(consumables.HYDRASC);
-			if (item == 12) catChimeraBuy2(consumables.FSNAILS);
-			if (item == 13) catChimeraBuy2(consumables.JABBERS);
+			if (item == 5) catChimeraBuy3(consumables.MANTICV);
+			if (item == 6) catChimeraBuy3(consumables.VOLTTOP);
+			if (item == 7) catChimeraBuy3(consumables.REDVIAL);
+		}
+		private function buyItem4(item:Number = 0):void {
+			if (item == 20) catChimeraBuy4(consumables.DSLIMEJ);
+			if (item == 21) catChimeraBuy4(consumables.HYDRASC);
+			if (item == 22) catChimeraBuy4(consumables.FSNAILS);
+			if (item == 23) catChimeraBuy4(consumables.JABBERS);
+			if (item == 24) catChimeraBuy4(consumables.ME_DROP);
+			if (item == 25) catChimeraBuy4(consumables.M_GOSSR);
 		}
 		public function catChimeraBuy1(itype:ItemType):void {
 			clearOutput();
 			outputText("You point out the " + itype.longName + ".\n\n");
-			outputText("\"<i>Oh this one? It costs " + itype.value + " gems.</i>\"");
-			if (player.gems < itype.value) {
+			outputText("\"<i>Oh this one? It costs " + (itype.value * (1 + _extra)) + " gems.</i>\"");
+			if (player.gems < (itype.value * (1 + _extra))) {
 				outputText("\n<b>You don't have enough gems...</b>");
 				doNext(DinahShopMainMenu);
 				return;
@@ -237,8 +254,8 @@ import classes.internals.Utils;
 		public function catChimeraBuy2(itype:ItemType):void {
 			clearOutput();
 			outputText("You point out the " + itype.longName + ".\n\n");
-			outputText("\"<i>Oh this one? It costs " + (itype.value * 2) + " gems.</i>\"");
-			if (player.gems < (itype.value * 2)) {
+			outputText("\"<i>Oh this one? It costs " + (itype.value * (2 + _extra)) + " gems.</i>\"");
+			if (player.gems < (itype.value * (2 + _extra))) {
 				outputText("\n<b>You don't have enough gems...</b>");
 				doNext(DinahShopMainMenu);
 				return;
@@ -248,31 +265,48 @@ import classes.internals.Utils;
 		public function catChimeraBuy3(itype:ItemType):void {
 			clearOutput();
 			outputText("You point out the " + itype.longName + ".\n\n");
-			outputText("\"<i>Oh this one? It costs " + (itype.value * 4) + " gems.</i>\"");
-			if (player.gems < (itype.value * 4)) {
+			outputText("\"<i>Oh this one? It costs " + (itype.value * (4 + _extra)) + " gems.</i>\"");
+			if (player.gems < (itype.value * (4 + _extra))) {
 				outputText("\n<b>You don't have enough gems...</b>");
 				doNext(DinahShopMainMenu);
 				return;
 			}
 			doYesNo(Utils.curry(catChimeraTransact3,itype), DinahShopMainMenu);
 		}
+		public function catChimeraBuy4(itype:ItemType):void {
+			clearOutput();
+			outputText("You point out the " + itype.longName + ".\n\n");
+			outputText("\"<i>Oh this one? It costs " + (itype.value * (6 + _extra)) + " gems.</i>\"");
+			if (player.gems < (itype.value * (6 + _extra))) {
+				outputText("\n<b>You don't have enough gems...</b>");
+				doNext(DinahShopMainMenu2);
+				return;
+			}
+			doYesNo(Utils.curry(catChimeraTransact4,itype), DinahShopMainMenu2);
+		}
 		public function catChimeraTransact1(itype:ItemType):void {
 			clearOutput();
-			player.gems -= itype.value;
+			player.gems -= itype.value * (1 + _extra);
 			statScreenRefresh();
 			inventory.takeItem(itype, DinahShopMainMenu);
 		}
 		public function catChimeraTransact2(itype:ItemType):void {
 			clearOutput();
-			player.gems -= itype.value * 2;
+			player.gems -= itype.value * (2 + _extra);
 			statScreenRefresh();
 			inventory.takeItem(itype, DinahShopMainMenu);
 		}
 		public function catChimeraTransact3(itype:ItemType):void {
 			clearOutput();
-			player.gems -= itype.value * 4;
+			player.gems -= itype.value * (4 + _extra);
 			statScreenRefresh();
 			inventory.takeItem(itype, DinahShopMainMenu);
+		}
+		public function catChimeraTransact4(itype:ItemType):void {
+			clearOutput();
+			player.gems -= itype.value * (6 + _extra);
+			statScreenRefresh();
+			inventory.takeItem(itype, DinahShopMainMenu2);
 		}
 	}
 }
