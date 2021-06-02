@@ -1394,8 +1394,8 @@
 			
 					<!-- Sword -->
 					<if test="PlayerHasASword">
-						<if test="PlayerHasAswordHoly or PlayerHasASwordUnholy">
-							<if test="PlayerHasAswordHoly">
+						<if test="PlayerHasASwordHoly or PlayerHasASwordUnholy">
+							<if test="PlayerHasASwordHoly">
 								<show part="weapon/swordHoly"/>
 							</if>
 							<if test="PlayerHasASwordUnholy">
