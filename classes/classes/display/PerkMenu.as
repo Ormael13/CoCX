@@ -722,6 +722,7 @@ public class PerkMenu extends BaseContent {
 
 		//Lungs Mutations
 		outputText("<b>\nLungs Mutations:</b>");
+		mutationsDatabaseVerify([PerkLib.ArachnidBookLung, PerkLib.ArachnidBookLungEvolved, PerkLib.ArachnidBookLungFinalForm]);
 		mutationsDatabaseVerify([PerkLib.DraconicLungs, PerkLib.DraconicLungsEvolved, PerkLib.DraconicLungsFinalForm]);
 		mutationsDatabaseVerify([PerkLib.CaveWyrmLungs, PerkLib.CaveWyrmLungsEvolved, PerkLib.CaveWyrmLungsFinalForm]);
 		mutationsDatabaseVerify([PerkLib.MelkieLung, PerkLib.MelkieLungEvolved, PerkLib.MelkieLungFinalForm]);
