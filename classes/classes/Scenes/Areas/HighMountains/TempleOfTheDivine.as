@@ -1649,6 +1649,7 @@ use namespace CoC;
 			player.horns.count = 12 + rand(4);
 			player.beardLength = 0;
 			player.beardStyle = 0;
+			player.createPerk(PerkLib.StrengthOfStone,0,0,0,0);
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 1) player.femininity = 100;
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2) player.femininity = 0;
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) {
@@ -1708,6 +1709,18 @@ use namespace CoC;
 			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) >= 2) {
 				player.balls = 2;
 				player.ballSize = player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) - 1;
+			}
+			if (player.hasPerk(PerkLib.ArachnidBookLung)) {
+				player.removePerk(PerkLib.ArachnidBookLung);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ArachnidBookLungEvolved)) {
+				player.removePerk(PerkLib.ArachnidBookLungEvolved);
+				player.perkPoints += 1;
+			}
+			if (player.hasPerk(PerkLib.ArachnidBookLungFinalForm)) {
+				player.removePerk(PerkLib.ArachnidBookLungFinalForm);
+				player.perkPoints += 1;
 			}
 			if (player.hasPerk(PerkLib.BlackHeart)) {
 				player.removePerk(PerkLib.BlackHeart);
