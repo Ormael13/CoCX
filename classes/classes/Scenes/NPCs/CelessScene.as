@@ -250,17 +250,9 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				"<i>“Eep!!! Mom, I’m scared. It feels all weird... S..something is comiiiiiiing!”</i>\n\n" +
 				""+_name+" whines as she finally orgasms, her sweet cum flooding your throat. It tastes like cake icing, making it an exercise on willpower to keep from desperately trying to get more. " +
 				"As her erection finally dies down, you feel something change in you as the cum reaches your stomach.");
-		CelessGoIntoHeatRut();
+		doHeatOrRut();
 		pureChildCorruption();
 		doNext(camp.returnToCampUseOneHour);
-	}
-
-	public function CelessGoIntoHeatRut():void{
-		outputText("Lewd images of cocks ");
-		if (player.hasCock()) outputText("and vaginas");
-		outputText("of all sizes and shapes fill your mind, making you drool in anticipation. It seems your daughter’s condition is spreading over to you.");
-		if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(true);
-		else if (player.hasVagina()) player.goIntoHeat(true);
 	}
 
 		//region INTERFACE classes.TimeAwareInterface
@@ -385,6 +377,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 
 		function improveItem(item:ItemType, from:ItemType):void {
 			//scene("strings/itemImprove/improveThatItem", myLocals);
+			clearOutput();
 			outputText("You ask" + _name + " if she could imbue an item with her power.\n\n"+
 			"<i>\"Certainly mother! Just leave the item on the ground and let me get to work.\"</i>\n\n"+
 			_name + " trots over to the item and starts channeling power.");
@@ -654,7 +647,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			outputText("Wait, didn’t you have your clothes still on? How is she already at your pucker entrance without removing anything? ");
 			if (player.inte > 70) outputText("Is she seriously using spatial magic of all things just to avoid the bother of undressing you?");
 		}
-		outputText("<i>\"A unicorn ‘horns’ can pierce through anything, just relax, it will be easier for you.\"</i> ");
+		outputText("<i>\"A unicorn's ‘horns’ can pierce through anything, just relax, it will be easier for you.\"</i> ");
 		if (silly() && player.inte > 70) outputText("Part of you is mildly surprised, and grateful, no Demon has realized this potential application of spatial magic, otherwise they would have pushed to develop it until they learnt how to open portals to other realms by ramming a dick against space-time until they fucked it into submission.")
 		outputText("Without warning she suddenly shoves her huge horsecock inside, stretching your ass wide! "+
 				"As expected it hurts a fair bit, but eventually pain recedes as you acclimate to it. ");
@@ -671,11 +664,11 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				"You see her looming shadow above your crouched female form, her horse length already hard again and casting a shadow across your face. Well, shit.");
 		}
 		else {
-			outputText("Well after a few minutes of this the unicorn finaly look like she's reaching her peak."+
+			outputText("Well after a few minutes of this the unicorn finally looks like she's reaching her peak."+
 					"\n\n\"<i>Ahhhn I can’t hold myself! Take it all!</i>\"\n\n"+
-					"As she cums into your ass filling you full of horse splonge. The centauress sigh in disapointment for reasons unknown to you." +
-					"\n\n\"<i>It's a shame realy had you been more maleable I could have perhaps granted you a final gift but a deal is a deal, here is your shield. I wish you safe travel hero.</i>\"\n\n"+
-					"She picks up sanctuary from its pedestal and hand it over to you. waving you off. Guess your back on your quest now.");
+					"As she cums into your ass filling you full of horse splooge. The centauress sighs in disappointment for reasons unknown to you." +
+					"\n\n\"<i>It's a shame really, had you been more maleable I could have perhaps granted you a final gift but a deal is a deal, here is your shield. I wish you safe travels, hero.</i>\"\n\n"+
+					"She picks up Sanctuary from its pedestal and hands it over to you. waving you off. Guess you're back on your quest now.");
 		}
 	}
 
@@ -780,7 +773,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		outputText("As you wake up this morning, you check the space next to you where "+_name+" usually sleeps, and find it empty.\n\n" +
 				"You almost panic for a moment, before calming down and deciding to go look for her. When you finally find her by the stream, she’s holding her forehead, visibly in pain.\n\n");
 		if (isCorrupt) {
-			outputText("\"<i>Ahhhh so good… this feels way too good!…Mom please look!</i>\"\n\n");
+			outputText("\"<i>Ahhhh so good… this feels way too good! …Mom please look!</i>\"\n\n");
 			outputText("Well, looks like it wasn’t pain, not at all. You watch spellbound as a duo of parallel horns, symbols of her corruption, push out of "+_name+"’s forehead. " +
 					"She holds her horns like a pair of dicks, playing her hands along their length as if trying to masturbate them. " +
 					"Speaking of which, her 25 inch long horse cock is now fully erect and throbbing, almost as if an invisible hand was toying with it, a thick flow of precum steadily seeping out already. " +
@@ -804,7 +797,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		}
 		if (player.isFemaleOrHerm()) {
 			outputText("This is a… somewhat unusual situation, but as a ");
-			if (player.isFemale()) outputText("female ");
+			if (player.isFemale()) outputText("female");
 			if (player.isHerm()) outputText("herm like her");
 			outputText(" it’s something you can understand. ");
 		}
@@ -816,11 +809,11 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				"You suck on her cock until she finally orgasms, the sweet cum flooding your throat.");
 		if (isCorrupt) {
 			outputText("Weirdly enough, you feel something change in you as the corrupted cum reaches your stomach. ");
-			CelessGoIntoHeatRut();
-			outputText(" Aroused like you are its barely if you can hold yourself from");
-			if(player.hasStatusEffect(StatusEffects.Heat)) outputText(" impaling yourself on her alluring cock.");
-			else if(player.hasStatusEffect(StatusEffects.Rut)) outputText(" moving behind her and plowing her alluring pussy with your painfully erect "+player.cockDescript()+".");
-			outputText(" how will you handle the situation?");
+			doHeatOrRut();
+			outputText("Aroused like you are its barely if you can hold yourself from ");
+			if(player.hasStatusEffect(StatusEffects.Heat)) outputText("impaling yourself on her alluring cock.");
+			else if(player.hasStatusEffect(StatusEffects.Rut)) outputText("moving behind her and plowing her alluring pussy with your painfully erect "+player.cockDescript()+".");
+			outputText(" How will you handle the situation?");
 		}
 		else {
 			outputText("Her cum somehow makes your mind feel clearer and sharper, purifying some of the darker thoughts plaguing you. " +
@@ -831,9 +824,9 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					"The morning pretty much continues as normal, aside from a lecture on sex you put some time aside to give her, mainly on what and who to avoid and why.");
 		}
 
+		menu();
 		if (isCorrupt) {
 			//addButton(0, "MasturbateHer", incestScene, "masturbateHer");
-			menu();
 			addButton(0,"Masturbate Her", incestMasturbate);
 			if (player.isMaleOrHerm()) {
 				//addButton(1, "Fuck Her", incestScene, "fuckHer");
@@ -847,6 +840,9 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			} else {
 				addButtonDisabled(2, "Centaur Toys");
 			}
+		}
+		else{
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 

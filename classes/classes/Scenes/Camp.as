@@ -4574,6 +4574,10 @@ public function wakeFromBadEnd():void {
 			clearOutput();
 			outputText("Less harcore saves been taken out of protection of one save that get deleted on bad end.");
 			if (flags[kFLAGS.GAME_DIFFICULTY] < 2 && flags[kFLAGS.HARDCORE_MODE] == 1) flags[kFLAGS.HARDCORE_MODE] = 0;
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards) && player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards) > 2) {
+				player.removeStatusEffect(StatusEffects.RiverDungeonFloorRewards);
+				player.createStatusEffect(StatusEffects.RiverDungeonFloorRewards,2,0,0,0);
+			}
 			doNext(doCamp);
 			return;
 		}
