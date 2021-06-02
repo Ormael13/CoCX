@@ -2670,4 +2670,4 @@ private function urtaAndEdrynGodChildEpilogueII():void {
     doNext(camp.returnToCampUseOneHour);
 }
 }
-}
+}
