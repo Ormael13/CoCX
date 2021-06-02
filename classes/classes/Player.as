@@ -491,10 +491,13 @@ use namespace CoC;
 			return (lowerBody == LowerBody.HINEZUMI && arms.type == Arms.HINEZUMI) || isFeralStancing() || isSitStancing();
 		}
 		public function isSitStancing():Boolean {
-			return (lowerBody == LowerBody.LION && arms.type == Arms.LION) || ((lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2) && (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2));
+			return (lowerBody == LowerBody.LION && arms.type == Arms.LION);
 		}
 		public function isFeralStancing():Boolean {
 			return (lowerBody == LowerBody.WOLF && arms.type == Arms.WOLF) || (lowerBody == LowerBody.LION && arms.type == Arms.DISPLACER);
+		}
+		public function isGargoyleStancing():Boolean {
+			return (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2) && (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2);
 		}
 		//Natural Armor (need at least to partialy covering whole body)
 		public function haveNaturalArmor():Boolean
