@@ -1653,7 +1653,7 @@ use namespace CoC;
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2) player.femininity = 0;
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) {
 				player.femininity = 50;
-				if (player.findPerk(PerkLib.Androgyny) < 0) player.createPerk(PerkLib.Androgyny,0,0,0,0);
+				if (!player.hasPerk(PerkLib.Androgyny)) player.createPerk(PerkLib.Androgyny,0,0,0,0);
 			}
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 1) player.hairLength = 0;
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 2) player.hairLength = 2;
