@@ -1622,7 +1622,7 @@ use namespace CoC;
 				addButton(1, "F.Fish", AddFreshFish).hint("Add 1 Fresh Fish.");
 				addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
 				addButton(3, "TGOGossamer", AddThickGreenOnnaGossamer).hint("Add 1 Thick Green Onna Gossamer.");
-				//addButton(4, "LeviSun.", AddLeviathanSunscreen).hint("Add 1 Leviathan Sunscreen");
+				addButton(4, "LeviSun.", AddLeviathanSunscreen).hint("Add 1 Leviathan Sunscreen");
 				addButton(5, "Enigmanium", AddEnigmanium).hint("Add 1 vial of Enigmanium.");
 				//addButton(6, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
 				addButton(6, "dragonshit", AddDragonShit).hint("Add dragon stuff for jabberwocky test.");
