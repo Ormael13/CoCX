@@ -7791,8 +7791,8 @@ public class Combat extends BaseContent {
                 }
             }
             var power:Number = CalcAlchemyPower()/5;
-            if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
-            else monster.lust += monster.lustVuln * (2 + rand(4));
+            if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) monster.lust += monster.lustVuln * 1.2 * (2+power + rand(4));
+            else monster.lust += monster.lustVuln * (2+power+ rand(4));
         }
 
         //Unicorn and Bicorn aura
