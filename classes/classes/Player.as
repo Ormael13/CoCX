@@ -491,10 +491,13 @@ use namespace CoC;
 			return (lowerBody == LowerBody.HINEZUMI && arms.type == Arms.HINEZUMI) || isFeralStancing() || isSitStancing();
 		}
 		public function isSitStancing():Boolean {
-			return (lowerBody == LowerBody.LION && arms.type == Arms.LION) || ((lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2) && (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2));
+			return (lowerBody == LowerBody.LION && arms.type == Arms.LION);
 		}
 		public function isFeralStancing():Boolean {
 			return (lowerBody == LowerBody.WOLF && arms.type == Arms.WOLF) || (lowerBody == LowerBody.LION && arms.type == Arms.DISPLACER);
+		}
+		public function isGargoyleStancing():Boolean {
+			return (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2) && (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2);
 		}
 		//Natural Armor (need at least to partialy covering whole body)
 		public function haveNaturalArmor():Boolean
@@ -564,17 +567,27 @@ use namespace CoC;
 				else if (dragonScore() >= 24) armorDef += (4 * newGamePlusMod);
 				else armorDef += (1 * newGamePlusMod);
 			}
+			if (frostWyrmScore() >= 20) {
+				if (frostWyrmScore() >= 30) armorDef += (10 * newGamePlusMod);
+				else if (frostWyrmScore() >= 24) armorDef += (4 * newGamePlusMod);
+				else armorDef += (1 * newGamePlusMod);
+			}
+			if (leviathanScore() >= 20) {
+				if (leviathanScore() >= 30) armorDef += (5 * newGamePlusMod);
+				else if (leviathanScore() >= 24) armorDef += (2 * newGamePlusMod);
+				else armorDef += (1 * newGamePlusMod);
+			}
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorDef += (1 * newGamePlusMod);
 			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (arms.type == Arms.DRAGON || arms.type == Arms.FROSTWYRM) armorDef += (3 * newGamePlusMod);
+			if (arms.type == Arms.DRAGON || arms.type == Arms.FROSTWYRM || arms.type == Arms.SEADRAGON) armorDef += (3 * newGamePlusMod);
 			if (arms.type == Arms.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorDef += (2 * newGamePlusMod);
 			if (tailType == Tail.DRACONIC) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.FROSTWYRM) armorDef += (6 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorDef += (1 * newGamePlusMod);
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRAGON) armorDef += (3 * newGamePlusMod);
+			if (lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.SEADRAGON) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (rearBody.type == RearBody.YETI_FUR) armorDef += (4 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
@@ -3095,7 +3108,7 @@ use namespace CoC;
 				{name: 'bat', score: batScore(), minscore: 6},
 				{name: 'vampire', score: vampireScore(), minscore: 6},
 				{name: 'jiangshi', score: jiangshiScore(), minscore: 20},
-				{name: 'gargoyle', score: gargoyleScore(), minscore: 20},
+				{name: 'gargoyle', score: gargoyleScore(), minscore: 22},
 				{name: 'kamaitachi', score: kamaitachiScore(), minscore: 7},
 				{name: 'ratatoskr', score: ratatoskrScore(), minscore: 6},
 				{name: 'wendigo', score: wendigoScore(), minscore: 10},
@@ -4721,7 +4734,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (avianScore() >= 9)
 				chimeraCounter++;
-			if (gargoyleScore() >= 20)
+			if (gargoyleScore() >= 22)
 				chimeraCounter++;
 			if (gooScore() >= 11)
 				chimeraCounter++;
@@ -7225,7 +7238,7 @@ use namespace CoC;
 				LeviathanCounter++;
 			if (tallness >= 84)
 				LeviathanCounter++;
-			if (biggestTitSize() > 19 || (cocks.length > 18))
+			if ((hasVagina() && biggestTitSize() > 19) || (cocks.length > 18))
 				LeviathanCounter++;
 			if (hasPerk(PerkLib.DrakeLungs))
 				LeviathanCounter++;
@@ -9999,7 +10012,7 @@ use namespace CoC;
 		public function gargoyleScore():Number {
 			Begin("Player","racialScore","gargoyle");
 			var gargoyleCounter:Number = 0;
-			if (InCollection(hairColor, ["light grey", "quartz white"]))
+			if (InCollection(hairColor, ["light gray", "quartz white"]))
 				gargoyleCounter++;
 			if (InCollection(skin.base.color, ["light gray", "quartz white"]))
 				gargoyleCounter++;
@@ -10024,7 +10037,7 @@ use namespace CoC;
 			if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2)
 				gargoyleCounter++;
 			if (wings.type == Wings.GARGOYLE_LIKE_LARGE)
-				gargoyleCounter += 2;
+				gargoyleCounter += 4;
 			if (gills.type == Gills.NONE)
 				gargoyleCounter++;
 			if (rearBody.type == RearBody.NONE)
@@ -12747,9 +12760,9 @@ use namespace CoC;
 				maxWisCap2 += 130;
 				maxLibCap2 += 200;
 			}//+110 strength +80 toughness +60 Wisdom +100 Libido +50 sensitivity
-			if (gargoyleScore() >= 20) {
+			if (gargoyleScore() >= 22) {
 				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
-					maxStrCap2 += 165;
+					maxStrCap2 += 195;
 					maxTouCap2 += 250;
 					maxSpeCap2 += 50;
 					maxIntCap2 += 30;
@@ -12758,7 +12771,7 @@ use namespace CoC;
 					maxStrCap2 += 50;
 					maxTouCap2 += 250;
 					maxSpeCap2 += 30;
-					maxIntCap2 += 165;
+					maxIntCap2 += 195;
 				}
 				if (hasPerk(PerkLib.GargoylePure)) {
 					maxWisCap2 += 80;
@@ -12809,6 +12822,8 @@ use namespace CoC;
 			if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':((0.01 * Math.round(inte/2))+(0.01 * Math.round(wis/2))),'tou.mult':((0.01 * Math.round(inte/2))+(0.01 * Math.round(wis/2)))}, 'Enigma', { text: 'Enigma' });
 			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
+			if (hasPerk(PerkLib.StrengthOfStone)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tou/2))}, 'Strength of stone', { text: 'Strength of stone' });
+			if (!hasPerk(PerkLib.StrengthOfStone) && statStore.hasBuff('Strength of stone')) statStore.removeBuffs('Strength of stone');
 			var power:Number = 0;
 			if (hasPerk(PerkLib.BullStrength)){
 				if (cowScore() >=15) power = lactationQ()*0.001;
@@ -12847,6 +12862,545 @@ use namespace CoC;
 				"lib.mult":statusEffectv1(StatusEffects.LibSensCounter2)/100,
 				"sens":statusEffectv2(StatusEffects.LibSensCounter2)
 			}, "Racials", {text:"Racials"});
+		}
+
+		public function removeAllRacialMutation(){
+			if (hasPerk(PerkLib.ArachnidBookLung)) {
+				removePerk(PerkLib.ArachnidBookLung);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ArachnidBookLungEvolved)) {
+				removePerk(PerkLib.ArachnidBookLungEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ArachnidBookLungFinalForm)) {
+				removePerk(PerkLib.ArachnidBookLungFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.BlackHeart)) {
+				removePerk(PerkLib.BlackHeart);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.BlackHeartEvolved)) {
+				removePerk(PerkLib.BlackHeartEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.BlackHeartFinalForm)) {
+				removePerk(PerkLib.BlackHeartFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.CatlikeNimbleness)) {
+				removePerk(PerkLib.CatlikeNimbleness);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.CatlikeNimblenessEvolved)) {
+				removePerk(PerkLib.CatlikeNimblenessEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.CatlikeNimblenessFinalForm)) {
+				removePerk(PerkLib.CatlikeNimblenessFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.CaveWyrmLungs)) {
+				removePerk(PerkLib.HinezumiBurningBlood);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.CaveWyrmLungsEvolved)) {
+				removePerk(PerkLib.HinezumiBurningBloodEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.CaveWyrmLungsFinalForm)) {
+				removePerk(PerkLib.HinezumiBurningBloodFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.DisplacerMetabolism)) {
+				removePerk(PerkLib.DisplacerMetabolism);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.DisplacerMetabolismEvolved)) {
+				removePerk(PerkLib.DisplacerMetabolismEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.DraconicBones)) {
+				removePerk(PerkLib.DraconicBones);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.DraconicBonesEvolved)) {
+				removePerk(PerkLib.DraconicBonesEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.DraconicBonesFinalForm)) {
+				removePerk(PerkLib.DraconicBonesFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.DraconicHeart)) {
+				removePerk(PerkLib.DraconicHeart);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.DraconicHeartEvolved)) {
+				removePerk(PerkLib.DraconicHeartEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.DraconicHeartFinalForm)) {
+				removePerk(PerkLib.DraconicHeartFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.DraconicLungs)) {
+				removePerk(PerkLib.DraconicLungs);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.DraconicLungsEvolved)) {
+				removePerk(PerkLib.DraconicLungsEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.DraconicLungsFinalForm)) {
+				removePerk(PerkLib.DraconicLungsFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ElvishPeripheralNervSys)) {
+				removePerk(PerkLib.ElvishPeripheralNervSys);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved)) {
+				removePerk(PerkLib.ElvishPeripheralNervSysEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm)) {
+				removePerk(PerkLib.ElvishPeripheralNervSysFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.EasterBunnyEggBag)) {
+				removePerk(PerkLib.EasterBunnyEggBag);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.EasterBunnyEggBagEvolved)) {
+				removePerk(PerkLib.EasterBunnyEggBagEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.EasterBunnyEggBagFinalForm)) {
+				removePerk(PerkLib.EasterBunnyEggBagFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.FloralOvaries)) {
+				removePerk(PerkLib.FloralOvaries);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.FloralOvariesEvolved)) {
+				removePerk(PerkLib.FloralOvariesEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.FloralOvariesFinalForm)) {
+				removePerk(PerkLib.FloralOvariesFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.FrozenHeart)) {
+				removePerk(PerkLib.FrozenHeart);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.FrozenHeartEvolved)) {
+				removePerk(PerkLib.FrozenHeartEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.FrozenHeartFinalForm)) {
+				removePerk(PerkLib.FrozenHeartFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.GazerEye)) {
+				removePerk(PerkLib.GazerEye);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.GazerEyeEvolved)) {
+				removePerk(PerkLib.GazerEyeEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.GazerEyeFinalForm)) {
+				removePerk(PerkLib.GazerEyeFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.GorgonsEyes)) {
+				removePerk(PerkLib.GorgonsEyes);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.GorgonsEyesEvolved)) {
+				removePerk(PerkLib.GorgonsEyesEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HarpyHollowBones)) {
+				removePerk(PerkLib.HarpyHollowBones);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HarpyHollowBonesEvolved)) {
+				removePerk(PerkLib.HarpyHollowBonesEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HarpyHollowBonesFinalForm)) {
+				removePerk(PerkLib.HarpyHollowBonesFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HeartOfTheStorm)) {
+				removePerk(PerkLib.HeartOfTheStorm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HeartOfTheStormEvolved)) {
+				removePerk(PerkLib.HeartOfTheStormEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HeartOfTheStormFinalForm)) {
+				removePerk(PerkLib.HeartOfTheStormFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HellcatParathyroidGlands)) {
+				removePerk(PerkLib.HellcatParathyroidGlands);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HellcatParathyroidGlandsEvolved)) {
+				removePerk(PerkLib.HellcatParathyroidGlandsEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HellcatParathyroidGlandsFinalForm)) {
+				removePerk(PerkLib.HellcatParathyroidGlandsFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HinezumiBurningBlood)) {
+				removePerk(PerkLib.HinezumiBurningBlood);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HinezumiBurningBloodEvolved)) {
+				removePerk(PerkLib.HinezumiBurningBloodEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HinezumiBurningBloodFinalForm)) {
+				removePerk(PerkLib.HinezumiBurningBloodFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HollowFangs)) {
+				removePerk(PerkLib.HollowFangs);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HollowFangsEvolved)) {
+				removePerk(PerkLib.HollowFangsEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.HollowFangsFinalForm)) {
+				removePerk(PerkLib.HollowFangsFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.KitsuneThyroidGland)) {
+				removePerk(PerkLib.KitsuneThyroidGland);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.KitsuneThyroidGlandEvolved)) {
+				removePerk(PerkLib.KitsuneThyroidGlandEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.KitsuneThyroidGlandFinalForm)) {
+				removePerk(PerkLib.KitsuneThyroidGlandFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.LactaBovinaOvaries)) {
+				removePerk(PerkLib.LactaBovinaOvaries);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.LactaBovinaOvariesEvolved)) {
+				removePerk(PerkLib.LactaBovinaOvariesEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.LactaBovinaOvariesFinalForm)) {
+				removePerk(PerkLib.LactaBovinaOvariesFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.LizanMarrow)) {
+				removePerk(PerkLib.LizanMarrow);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.LizanMarrowEvolved)) {
+				removePerk(PerkLib.LizanMarrowEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.LizanMarrowFinalForm)) {
+				removePerk(PerkLib.LizanMarrowFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ManticoreMetabolism)) {
+				removePerk(PerkLib.ManticoreMetabolism);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ManticoreMetabolismEvolved)) {
+				removePerk(PerkLib.ManticoreMetabolismEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.MantislikeAgility)) {
+				removePerk(PerkLib.MantislikeAgility);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.MantislikeAgilityEvolved)) {
+				removePerk(PerkLib.MantislikeAgilityEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.MantislikeAgilityFinalForm)) {
+				removePerk(PerkLib.MantislikeAgilityFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.MelkieLung)) {
+				removePerk(PerkLib.MelkieLung);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.MelkieLungEvolved)) {
+				removePerk(PerkLib.MelkieLungEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.MelkieLungFinalForm)) {
+				removePerk(PerkLib.MelkieLungFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.MinotaurTesticles)) {
+				removePerk(PerkLib.MinotaurTesticles);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.MinotaurTesticlesEvolved)) {
+				removePerk(PerkLib.MinotaurTesticlesEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.MinotaurTesticlesFinalForm)) {
+				removePerk(PerkLib.MinotaurTesticlesFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.NaturalPunchingBag)) {
+				removePerk(PerkLib.NaturalPunchingBag);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.NaturalPunchingBagEvolved)) {
+				removePerk(PerkLib.NaturalPunchingBagEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.NaturalPunchingBagFinalForm)) {
+				removePerk(PerkLib.NaturalPunchingBagFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.NekomataThyroidGland)) {
+				removePerk(PerkLib.NekomataThyroidGland);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.NekomataThyroidGlandEvolved)) {
+				removePerk(PerkLib.NekomataThyroidGlandEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.NekomataThyroidGlandFinalForm)) {
+				removePerk(PerkLib.NekomataThyroidGlandFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.NukiNuts)) {
+				removePerk(PerkLib.NukiNuts);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.NukiNutsEvolved)) {
+				removePerk(PerkLib.NukiNutsEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.NukiNutsFinalForm)) {
+				removePerk(PerkLib.NukiNutsFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ObsidianHeart)) {
+				removePerk(PerkLib.ObsidianHeart);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ObsidianHeartEvolved)) {
+				removePerk(PerkLib.ObsidianHeartEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ObsidianHeartFinalForm)) {
+				removePerk(PerkLib.ObsidianHeartFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.OniMusculature)) {
+				removePerk(PerkLib.OniMusculature);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.OniMusculatureEvolved)) {
+				removePerk(PerkLib.OniMusculatureEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.OniMusculatureFinalForm)) {
+				removePerk(PerkLib.OniMusculatureFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.OrcAdrenalGlands)) {
+				removePerk(PerkLib.OrcAdrenalGlands);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.OrcAdrenalGlandsEvolved)) {
+				removePerk(PerkLib.OrcAdrenalGlandsEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) {
+				removePerk(PerkLib.OrcAdrenalGlandsFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.PigBoarFat)) {
+				removePerk(PerkLib.PigBoarFat);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.PigBoarFatEvolved)) {
+				removePerk(PerkLib.PigBoarFatEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.PigBoarFatFinalForm)) {
+				removePerk(PerkLib.PigBoarFatFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.SalamanderAdrenalGlands)) {
+				removePerk(PerkLib.SalamanderAdrenalGlands);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved)) {
+				removePerk(PerkLib.SalamanderAdrenalGlandsEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
+				removePerk(PerkLib.SalamanderAdrenalGlandsFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ScyllaInkGlands)) {
+				removePerk(PerkLib.ScyllaInkGlands);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ScyllaInkGlandsEvolved)) {
+				removePerk(PerkLib.ScyllaInkGlandsEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.TrachealSystem)) {
+				removePerk(PerkLib.TrachealSystem);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.TrachealSystemEvolved)) {
+				removePerk(PerkLib.TrachealSystemEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.TrachealSystemFinalForm)) {
+				removePerk(PerkLib.TrachealSystemFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.VampiricBloodsteam)) {
+				removePerk(PerkLib.VampiricBloodsteam);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.VampiricBloodsteamEvolved)) {
+				removePerk(PerkLib.VampiricBloodsteamEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.VampiricBloodsteamFinalForm)) {
+				removePerk(PerkLib.VampiricBloodsteamFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.FeyArcaneBloodstream)) {
+				removePerk(PerkLib.FeyArcaneBloodstream);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.FeyArcaneBloodstreamEvolved)) {
+				removePerk(PerkLib.FeyArcaneBloodstreamEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.FeyArcaneBloodstreamFinalForm)) {
+				removePerk(PerkLib.FeyArcaneBloodstreamFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.EclipticMind)) {
+				removePerk(PerkLib.EclipticMind);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.EclipticMindEvolved)) {
+				removePerk(PerkLib.EclipticMindEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.EclipticMindFinalForm)) {
+				removePerk(PerkLib.EclipticMindFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.VenomGlands)) {
+				removePerk(PerkLib.VenomGlands);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.VenomGlandsEvolved)) {
+				removePerk(PerkLib.VenomGlandsEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.VenomGlandsFinalForm)) {
+				removePerk(PerkLib.VenomGlandsFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.WhaleFat)) {
+				removePerk(PerkLib.WhaleFat);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.WhaleFatEvolved)) {
+				removePerk(PerkLib.WhaleFatEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.WhaleFatFinalForm)) {
+				removePerk(PerkLib.WhaleFatFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.YetiFat)) {
+				removePerk(PerkLib.YetiFat);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.YetiFatEvolved)) {
+				removePerk(PerkLib.YetiFatEvolved);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.YetiFatFinalForm)) {
+				removePerk(PerkLib.YetiFatFinalForm);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ChimericalBodyInitialStage)){
+				removePerk(PerkLib.ChimericalBodyInitialStage);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ChimericalBodySemiBasicStage)){
+				removePerk(PerkLib.ChimericalBodySemiBasicStage);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ChimericalBodyBasicStage)){
+				removePerk(PerkLib.ChimericalBodyBasicStage);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ChimericalBodySemiImprovedStage)){
+				removePerk(PerkLib.ChimericalBodySemiImprovedStage);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ChimericalBodyImprovedStage)){
+				removePerk(PerkLib.ChimericalBodyImprovedStage);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ChimericalBodySemiAdvancedStage)){
+				removePerk(PerkLib.ChimericalBodySemiAdvancedStage);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ChimericalBodyAdvancedStage)){
+				removePerk(PerkLib.ChimericalBodyAdvancedStage);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)){
+				removePerk(PerkLib.ChimericalBodySemiSuperiorStage);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ChimericalBodySuperiorStage)){
+				removePerk(PerkLib.ChimericalBodySuperiorStage);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ChimericalBodySemiPeerlessStage)){
+				removePerk(PerkLib.ChimericalBodySemiPeerlessStage);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ChimericalBodyPeerlessStage)) {
+				removePerk(PerkLib.ChimericalBodyPeerlessStage);
+				perkPoints += 1;
+			}
+			if (hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
+				removePerk(PerkLib.ChimericalBodySemiEpicStage);
+				perkPoints += 1;
+			}
 		}
 
 		public function requiredXP():int {
@@ -14573,4 +15127,3 @@ use namespace CoC;
 		}
 	}
 }
-

@@ -13,6 +13,7 @@ import classes.Items.*;
 import classes.Items.ConsumableLib;
 import classes.Items.Consumables.SimpleConsumable;
 import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
+import classes.Scenes.Camp.CampScenes;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Camp.*;
 import classes.Scenes.Dungeons.*;
@@ -20,8 +21,12 @@ import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao;
 import classes.Scenes.Places.Boat.MaraeScene;
 import classes.Scenes.Soulforce;
+import classes.Scenes.Camp.HarvestMoonScenes;
 import classes.lists.Gender;
 import classes.display.SpriteDb;
+import classes.internals.SaveableState;
+
+import coc.view.ButtonData;
 
 import coc.view.CoCButton;
 import coc.view.ButtonDataList;
@@ -29,7 +34,7 @@ import coc.view.MainView;
 
 use namespace CoC;
 
-public class Camp extends NPCAwareContent {
+public class Camp extends NPCAwareContent{
 
 	protected function set timeQ(value:Number):void {
 		CoC.instance.timeQ = value;
@@ -2068,7 +2073,147 @@ public class Camp extends NPCAwareContent {
 		addButton(5, "Perfume", HerbalismCraftItem,CoC.instance.consumables.RAUNENECT, "alraune nectar", PotionType.PERFUME).hint("Craft a Perfume using Alraune nectar.\n\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
 		if (player.herbalismLevel < 10) button(5).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
 		if (player.itemCount(CoC.instance.consumables.RAUNENECT) == 0) button(5).disable("You lack the ingrediants to craft this item. \n\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
+
+		//THE GARDEN!
+		addButton(10, "Garden", Garden).hint("Manage your garden of medicinal plants")
+		.disableIf(1!=1, "You haven't built a garden yet."); //TO DO
 		addButton(14, "Back", campActions);
+	}
+
+	private function Garden():void{
+		hideMenus();
+		menu();
+		clearOutput();
+		//Checks if pc has this ingrediant growing
+		outputText("You move over to your gardening fields. You can plant and grow herbs here.");
+		//plants typicaly takes 1 week to grow from a single ingrediant into 5 new ingrediants sample player can use this button to go to the harvest selection
+		addButton(1, "Seed", Seed).hint("plant down some seeds sacrificing an ingrediants.");
+		addFiveArgButton(2, "Harvest", Harvest, HarvestMoonScenes.harvestmoonstageHH >= 1, HarvestMoonScenes.harvestmoonstageMG >= 1, HarvestMoonScenes.harvestmoonstageSB >= 1, HarvestMoonScenes.harvestmoonstageIW >= 1, HarvestMoonScenes.harvestmoonstageBF >= 1).hint("Check your harvests.")
+		addButton(14, "Back", campActions).hint("Go back to camp action menu.");
+	}
+
+	private function Seed():void{
+		hideMenus();
+		menu();
+		clearOutput();
+		outputText("What kind of herb would you like to grow?");
+		addButton(0, "Healing herb", Seed2,CoC.instance.consumables.HEALHERB).hint("Plant new seeds.");
+		if (HarvestMoonScenes.harvestmoonstageHH >= HarvestMoonScenes.HARVESTMOONPENDINGHH) addButtonDisabled(0,"Healing herb", "You already got crops growing.");
+		else if (player.itemCount(CoC.instance.consumables.HEALHERB) == 0) addButtonDisabled(0,"Healing herb", "You lack a plant sample to get seeds from.");
+
+		addButton(1, "Moon grass", Seed2,CoC.instance.consumables.MOONGRASS).hint("Harvest your ingrediants.");
+		if (HarvestMoonScenes.harvestmoonstageMG >= HarvestMoonScenes.HARVESTMOONPENDINGMG) addButtonDisabled(1,"Moon grass", "You already got crops growing.");
+		else if (player.itemCount(CoC.instance.consumables.MOONGRASS) == 0) addButtonDisabled(1,"Moon grass", "You lack a plant sample to get seeds from.");
+
+		addButton(2, "Snakebane", Seed2,CoC.instance.consumables.SNAKEBANE).hint("Harvest your ingrediants.");
+		if (HarvestMoonScenes.harvestmoonstageSB >= HarvestMoonScenes.HARVESTMOONPENDINGSB) addButtonDisabled(2,"Snakebane", "You already got crops growing.");
+		else if (player.itemCount(CoC.instance.consumables.SNAKEBANE) == 0) addButtonDisabled(2,"Snakebane", "You lack a plant sample to get seeds from.");
+
+		addButton(3, "Ironweed", Seed2,CoC.instance.consumables.IRONWEED).hint("Harvest your ingrediants.");
+		if (HarvestMoonScenes.harvestmoonstageIW >= HarvestMoonScenes.HARVESTMOONPENDINGIW) addButtonDisabled(3,"Ironweed", "You already got crops growing.");
+		else if (player.itemCount(CoC.instance.consumables.IRONWEED) == 0) addButtonDisabled(3, "Ironweed","You lack a plant sample to get seeds from.");
+
+		addButton(4, "Blade fern", Seed2,CoC.instance.consumables.BLADEFERN).hint("Harvest your ingrediants.");
+		if (HarvestMoonScenes.harvestmoonstageBF >= HarvestMoonScenes.HARVESTMOONPENDINGBF) addButtonDisabled(4,"Blade fern", "You already got crops growing.");
+		else if (player.itemCount(CoC.instance.consumables.BLADEFERN) == 0) addButtonDisabled(4,"Blade fern", "You lack a plant sample to get seeds from.");
+
+		addButton(14, "Back", Garden).hint("Go back to garden menu.");
+	}
+
+	public function Seed2(ItemID:SimpleConsumable):void{
+		hideMenus();
+		clearOutput();
+		outputText("Planting a new herb will consume one of your herb items, proceed anyway?");
+		doYesNo(curry(Seed3,ItemID), Seed);
+	}
+
+	public function Seed3(ItemID:SimpleConsumable):void{
+		clearOutput();
+		outputText("FANCY FARMING TEXT RIGHT HERE! WOOOOOOO! AND GAIN HERB EXPERIANCE!");
+		player.destroyItems(ItemID, 1);
+		if (ItemID == CoC.instance.consumables.HEALHERB) HarvestMoonScenes.harvestmoonstageHH = HarvestMoonScenes.HARVESTMOONPENDINGHH;
+		if (ItemID == CoC.instance.consumables.MOONGRASS) HarvestMoonScenes.harvestmoonstageMG = HarvestMoonScenes.HARVESTMOONPENDINGMG;
+		if (ItemID == CoC.instance.consumables.SNAKEBANE) HarvestMoonScenes.harvestmoonstageSB = HarvestMoonScenes.HARVESTMOONPENDINGSB;
+		if (ItemID == CoC.instance.consumables.IRONWEED) HarvestMoonScenes.harvestmoonstageIW = HarvestMoonScenes.HARVESTMOONPENDINGIW;
+		if (ItemID == CoC.instance.consumables.BLADEFERN) HarvestMoonScenes.harvestmoonstageBF = HarvestMoonScenes.HARVESTMOONPENDINGBF;
+		var HE:Number = 20 + player.level;
+		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
+		player.herbXP(HE);
+		doNext(Seed);
+	}
+
+	private function Harvest(HealingHerb:Boolean = false, MoonGrass:Boolean = false, Snakebane:Boolean = false, Ironweed:Boolean = false, BladeFern:Boolean = false):void{
+		hideMenus();
+		menu();
+		clearOutput();
+		outputText("You survey your crops for readied harvests.");
+		if (!HealingHerb && !MoonGrass && !Snakebane && !Ironweed && !BladeFern) outputText("\n\n There is no crops left to harvest you will need to plan new seeds.");
+		if (HealingHerb)
+		{
+			addButton(0, "Healing herb", Harvest2,CoC.instance.consumables.HEALHERB,"Healing herbs").hint("Harvest your ingrediants.");
+			if (HarvestMoonScenes.harvestmoonstageHH != HarvestMoonScenes.HARVESTMOONREADYHH) addButtonDisabled(0,"Healing herb","Your crops are still growing.");
+		}
+		if (MoonGrass)
+		{
+			addButton(1, "Moon grass", Harvest2,CoC.instance.consumables.MOONGRASS,"Moongrass").hint("Harvest your ingrediants.");
+			if (HarvestMoonScenes.harvestmoonstageMG != HarvestMoonScenes.HARVESTMOONREADYMG) addButtonDisabled(1,"Moon grass","Your crops are still growing.");
+		}
+		if (Snakebane)
+		{
+			addButton(2, "Snakebane", Harvest2,CoC.instance.consumables.SNAKEBANE,"Snakebane").hint("Harvest your ingrediants.");
+			if (HarvestMoonScenes.harvestmoonstageSB != HarvestMoonScenes.HARVESTMOONREADYSB) addButtonDisabled(2,"Snakebane","Your crops are still growing.");
+		}
+		if (Ironweed)
+		{
+			addButton(3, "Ironweed", Harvest2,CoC.instance.consumables.IRONWEED,"Ironweed").hint("Harvest your ingrediants.");
+			if (HarvestMoonScenes.harvestmoonstageIW != HarvestMoonScenes.HARVESTMOONREADYIW) addButtonDisabled(3,"Ironweed","Your crops are still growing.");
+		}
+		if (BladeFern)
+		{
+			addButton(4, "Blade fern", Harvest2,CoC.instance.consumables.BLADEFERN,"Blade ferns").hint("Harvest your ingrediants.");
+			if (HarvestMoonScenes.harvestmoonstageBF != HarvestMoonScenes.HARVESTMOONREADYBF) addButtonDisabled(4,"Blade fern","Your crops are still growing.");
+		}
+		addButton(14, "Back", Garden).hint("Go back to garden menu.")
+	}
+
+	public function Harvest2(ItemID:SimpleConsumable,IngrediantName:String):void{
+		hideMenus();
+		menu();
+		clearOutput();
+		if (ItemID == CoC.instance.consumables.HEALHERB) HarvestMoonScenes.harvestmoonstageHH = HarvestMoonScenes.HARVESTMOONNOTSTARTEDHH;
+		if (ItemID == CoC.instance.consumables.MOONGRASS) HarvestMoonScenes.harvestmoonstageMG = HarvestMoonScenes.HARVESTMOONNOTSTARTEDMG;
+		if (ItemID == CoC.instance.consumables.SNAKEBANE) HarvestMoonScenes.harvestmoonstageSB = HarvestMoonScenes.HARVESTMOONNOTSTARTEDSB;
+		if (ItemID == CoC.instance.consumables.IRONWEED) HarvestMoonScenes.harvestmoonstageIW = HarvestMoonScenes.HARVESTMOONNOTSTARTEDIW;
+		if (ItemID == CoC.instance.consumables.BLADEFERN) HarvestMoonScenes.harvestmoonstageBF = HarvestMoonScenes.HARVESTMOONNOTSTARTEDBF;
+		outputText("Click to collect your "+IngrediantName+".");
+		addButton(0, "Collect", curry(recoverHerbLoot,ItemID)).hint("Click to collect your "+IngrediantName+".");
+	}
+
+	public function recoverHerbLoot(ItemID:SimpleConsumable):void{
+		clearOutput();
+		inventory.takeItem(ItemID,curry(recoverHerbLoot2,ItemID));
+	}
+	public function recoverHerbLoot2(ItemID:SimpleConsumable):void{
+		clearOutput();
+		inventory.takeItem(ItemID,curry(recoverHerbLoot3,ItemID));
+	}
+	public function recoverHerbLoot3(ItemID:SimpleConsumable):void{
+		clearOutput();
+		inventory.takeItem(ItemID,curry(recoverHerbLoot4,ItemID));
+	}
+	public function recoverHerbLoot4(ItemID:SimpleConsumable):void{
+		clearOutput();
+		inventory.takeItem(ItemID,curry(recoverHerbLoot5,ItemID));
+	}
+	public function recoverHerbLoot5(ItemID:SimpleConsumable):void{
+		clearOutput();
+		inventory.takeItem(ItemID,recoverHerbLoot6);
+	}
+	public function recoverHerbLoot6():void{
+		clearOutput();
+		outputText("Youve collected all of the ingrediants.");
+		doNext(Harvest);
 	}
 
 	private function HerbalismCraftItem(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
@@ -2092,7 +2237,7 @@ public class Camp extends NPCAwareContent {
 		player.destroyItems(ItemID, 1);
 		var HE:Number = 20 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE * 2;
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
 		player.herbXP(HE);
 		doNext(HerbalismMenu);
 	}
@@ -2789,7 +2934,9 @@ private function SparrableNPCsMenu():void {
 			if (player.isGargoyle()) {
 				outputText("You sit on your pedestal, your body petrifying like stone as you sleep for " + num2Text(timeQ) + " ");
 				if (timeQ == 1) outputText("hour.\n");
-				else outputText("hours.\n");
+				else outputText("hours.\n")
+				sleepRecovery(true);
+				return;
 			} else if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble")) {
 				outputText("You enter your cabin to turn yourself in for the night. ")
 			}

@@ -8,6 +8,7 @@ import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Areas.GlacialRift.FrostGiantScene;
 import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
 import classes.Scenes.Areas.Ocean.ScyllaScene;
+import classes.Scenes.Camp.HarvestMoonScenes;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.AnzuPalace.AnzuScene;
 import classes.Scenes.Dungeons.D3.D3;
@@ -146,6 +147,8 @@ public class SceneLib {
     public static var exgartuan:Exgartuan = new Exgartuan();
 
     public static var galiaFollower:GaliaFollower = new GaliaFollower();
+
+    public static var harvestMoonScene:HarvestMoonScenes = new HarvestMoonScenes();
 
     public static var helFollower:HelFollower = new HelFollower();
 

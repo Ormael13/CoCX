@@ -595,6 +595,23 @@ public class EngineCore {
         return btn;
     }
 
+    public static function fiveArgButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, arg4:* = -9000, arg5:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):CoCButton{
+        var btn:CoCButton = button(pos);
+        if (func1 == null) {
+            return btn.hide();
+        }
+        var callback:Function;
+
+        callback = createCallBackFunction2(func1, arg1, arg2, arg3, arg4, arg5);
+
+        if (toolTipText == "") toolTipText = getButtonToolTipText(text);
+        if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
+        btn.show(text, callback, toolTipText, toolTipHeader);
+        //CoC.instance.mainView.setOutputText( CoC.instance.currentText );
+        CoC.instance.flushOutputTextToGUI();
+        return btn;
+    }
+
     public static function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton {
         var btn:CoCButton = button(pos);
         //Removes sex-related button in SFW mode.

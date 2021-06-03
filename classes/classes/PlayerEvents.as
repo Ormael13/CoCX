@@ -15,6 +15,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.*;
 import classes.Items.*;
 import classes.Scenes.Camp.CampScenes;
+import classes.Scenes.Camp.HarvestMoonScenes;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.Dreams;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
@@ -2708,6 +2709,22 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				{
 					WoodElves.hasTrainedToday = false;
 				}
+			}
+			//Process crops harvest moon
+			if (HarvestMoonScenes.harvestmoonstageHH < 7 && HarvestMoonScenes.harvestmoonstageHH > 0) {
+				HarvestMoonScenes.harvestmoonstageHH += 1;
+			}
+			if (HarvestMoonScenes.harvestmoonstageMG < 7 && HarvestMoonScenes.harvestmoonstageMG > 0) {
+				HarvestMoonScenes.harvestmoonstageMG += 1;
+			}
+			if (HarvestMoonScenes.harvestmoonstageSB < 7 && HarvestMoonScenes.harvestmoonstageSB > 0) {
+				HarvestMoonScenes.harvestmoonstageSB += 1;
+			}
+			if (HarvestMoonScenes.harvestmoonstageIW < 7 && HarvestMoonScenes.harvestmoonstageIW > 0) {
+				HarvestMoonScenes.harvestmoonstageIW += 1;
+			}
+			if (HarvestMoonScenes.harvestmoonstageBF < 7 && HarvestMoonScenes.harvestmoonstageBF > 0) {
+				HarvestMoonScenes.harvestmoonstageBF += 1;
 			}
 			//Wrap it up
 			return needNext;

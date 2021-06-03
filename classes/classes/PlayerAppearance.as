@@ -2470,8 +2470,8 @@ public class PlayerAppearance extends BaseContent {
 		//GARGOYLE
 		if (player.gargoyleScore() >= 20 && player.hasPerk(PerkLib.GargoylePure)) {
 			outputText("\n<font color=\"#0000a0\">PURE GARGOYLE: " + player.gargoyleScore() + " (+");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("165% to Str racial multi, +250% to Tou racial multi, +50% to Spe racial multi, +30");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("50% to Str racial multi, +250% to Tou racial multi, +30% to Spe racial multi, +165");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("195% to Str racial multi, +250% to Tou racial multi, +50% to Spe racial multi, +30");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("50% to Str racial multi, +250% to Tou racial multi, +30% to Spe racial multi, +195");
 			outputText("% to Int racial multi, +80% to Wis racial multi, -10% to Lib racial multi, -10 max Sens, +");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("" + (60 * (1 + player.newGamePlusMod())) + " Armor, +" + (10 * (1 + player.newGamePlusMod())) + " spell resistance");
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("" + (10 * (1 + player.newGamePlusMod())) + " Armor, +" + (60 * (1 + player.newGamePlusMod())) + " spell resistance");

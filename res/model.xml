@@ -1394,8 +1394,8 @@
 			
 					<!-- Sword -->
 					<if test="PlayerHasASword">
-						<if test="PlayerHasAswordHoly or PlayerHasASwordUnholy">
-							<if test="PlayerHasAswordHoly">
+						<if test="PlayerHasASwordHoly or PlayerHasASwordUnholy">
+							<if test="PlayerHasASwordHoly">
 								<show part="weapon/swordHoly"/>
 							</if>
 							<if test="PlayerHasASwordUnholy">
@@ -2466,9 +2466,15 @@
                 <show part="hands_bg/fins-orca"/>
             </case>
             <case values="Arms.GARGOYLE,Arms.GARGOYLE_2">
-                <hide part="arms/*"/>
-                <hide part="arms_bg/*"/>
-				<show part="arms/gargoyle_sit"/>
+				<if test="PlayerHasAWeapon or PlayerHasAShield or PlayerHasADualWeapon">
+					<show part="arms/human"/>
+					<show part="arms_bg/human"/>
+					<else>
+						<hide part="arms/*"/>
+						<hide part="arms_bg/*"/>
+						<show part="arms/gargoyle_sit"/>
+					</else>
+				</if>
             </case>
 			<case values="Arms.YETI">
                 <hide part="arms/*"/>
@@ -5229,6 +5235,10 @@
 					</if>
 				</if>
 			</if>
+		</if>
+		
+		<if test="showClothing == false">
+			<hide part="panty/*"/>	
 		</if>
 		
 		

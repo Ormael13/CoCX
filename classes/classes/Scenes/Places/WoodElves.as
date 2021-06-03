@@ -572,6 +572,7 @@ import classes.Scenes.SceneLib;
 					"It takes great effort from you not to turn back right away and give up, but you are determined to see this through, at least for now.");
 			WoodElvesQuest = QUEST_STAGE_PCELF;
 			player.createPerk(PerkLib.BlessingOfTheAncestorTree,0,0,0,0);
+			player.removeAllRacialMutation();
 			doNext(camp.returnToCampUseSixteenHours);
 		}
 

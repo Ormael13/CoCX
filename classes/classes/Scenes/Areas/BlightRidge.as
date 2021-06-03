@@ -38,6 +38,22 @@ use namespace CoC;
                 addButton(3, "Fall back", findDefiledRavineNo);
 				return;
 			}
+
+			var ChanceToFindTheDen = 20;
+			if (SceneLib.dungeons.canFindDenOfDesire()) ChanceToFindTheDen -= 9;
+			if (flags[kFLAGS.DEN_OF_DESIRE_QUEST] > 0) ChanceToFindTheDen -= 9;
+			//Den of Desire
+			if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 1 && rand(ChanceToFindTheDen) == 0) {
+				clearOutput();
+				outputText("You come across a set of old ruins, their grounds littered with statues, with an underground entrance leading deeper inside. ");
+				if (flags[kFLAGS.DEN_OF_DESIRE_QUEST] > 0) outputText("This looks to be the lair of the golemancer Rathazul mentioned. ");
+				outputText("Do you enter?");
+				flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 1;
+				menu();
+				addButton(0, "Yes", SceneLib.dungeons.enterDenOfDesire);
+				addButton(1, "No", camp.returnToCampUseOneHour);
+				return;
+			}
 			
 			//Dart pistol
 			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Dart pistol") < 0 && rand(2) == 0) {
@@ -56,18 +72,6 @@ use namespace CoC;
 				outputText("Something flashes at the corner of your eye, and as you twist your head to look for the source, the demon mage collapses and the force holding you dissipates. You stand and raise your [weapon], much to the surprise of the demons watching from the circle they form around you. You glance at the incubus mage, seeing an ugly purple welt forming on his forehead. ");
 				outputText("\"<i>Sorry to interrupt the party</i>\" comes a cheerful voice from behind you. You turn around to see a robed figure vaulting over the line of demons. The mysterious mage gestures, \"<i>You deal with your half, i’ll deal with mine!</i>\" You nod, turning to face the other demon mob.\n\n");
 				startCombat(new DemonPackBlightRidge());
-				return;
-			}
-			//Den of Desire
-            if (SceneLib.dungeons.canFindDenOfDesire() && flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 1 && ((rand(10) == 0) || (flags[kFLAGS.DEN_OF_DESIRE_QUEST] > 0 && rand(2) == 0))) {
-                clearOutput();
-				outputText("You come across a set of old ruins, their grounds littered with statues, with an underground entrance leading deeper inside. ");
-				if (flags[kFLAGS.DEN_OF_DESIRE_QUEST] > 0) outputText("This looks to be the lair of the golemancer Rathazul mentioned. ");
-				outputText("Do you enter?");
-				flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 1;
-				menu();
-                addButton(0, "Yes", SceneLib.dungeons.enterDenOfDesire);
-                addButton(1, "No", camp.returnToCampUseOneHour);
 				return;
 			}
 			//Siegweird
