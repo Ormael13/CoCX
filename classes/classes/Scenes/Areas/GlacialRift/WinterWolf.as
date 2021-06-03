@@ -83,7 +83,7 @@ public class WinterWolf extends Monster
 		{
 			this.a = "the ";
 			this.short = "winter wolf";
-			this.imageName = "winter-wolf";
+			this.imageName = "s_winterWolf";
 			this.long = "You're facing a wolf that can only be described as oversized. The beast bigger than a horse is easily 10 feet tall with a pelt about just as white as the landscape below it. A small blue mist trail regularly escape its mouth subjesting its bite might be way worse then it appear.";
 			// this.plural = false;
 			this.createCock(18, 3, CockTypesEnum.WOLF);
