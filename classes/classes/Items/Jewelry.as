@@ -49,5 +49,14 @@ package classes.Items
 		}
 		
 		public function removeText():void {} //Produces any text seen when removing the armor normally
+
+		public function get sexiness():int {
+			switch(this.name) {
+				case "Demonic mage tail ornament":
+					return 4;
+				default:
+					return 0;
+			}
+		}
 	}
 }

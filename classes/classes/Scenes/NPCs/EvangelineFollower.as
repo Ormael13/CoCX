@@ -784,7 +784,7 @@ private function curingWendigo():void {
 	}
 	else {
 		outputText("Evangeline barely turns to look at you before jumping in surprise.\n\n");
-		outputText("\"<i>Oh god just what happened to you [name]! There is a clear obvious issue with your body, some curse has taken hold of your soul.</i>\"\n\n");
+		outputText("\"<i>Oh god, what has happened to you [name]! There clearly is an obvious issue with your body, it looks as though a curse has taken hold of your soul!</i>\"\n\n");
 		outputText("You explain your situation to her somewhat.\n\n");
 		outputText("\"<i>Look, I will need five pure peaches and five purity philters to fix this up, how you get the two is up to you.</i>\"\n\n");
 		player.addPerkValue(PerkLib.WendigoCurse, 1, 1);
@@ -798,8 +798,8 @@ private function curingJiangshi():void {
 	if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 3) {
 		player.destroyItems(consumables.VITAL_T, 5);
 		player.destroyItems(consumables.PPHILTR, 5);
-		outputText("Evangeline nods as you bring her the ingredients, getting to work. As soon as the potion is finished she pours it over your cursed talisman, causing it to smoke and crumble. The first thing you do as the nasty thing peels off is head back to He’Xin’Dao and look for your gear. Thankfully it doesn't take you long to find it in a chest not to far from the table on which the crazy cat messed you up. Gosh, it feels good to be alive, like REALLY alive.\n\n");
-		if (player.weapon == WeaponLib.FISTS || flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
+		outputText("Evangeline nods as you bring her the ingredients, getting to work. As soon as the potion is finished she pours it over your cursed talisman, causing it to smoke and crumble. The first thing you do as the nasty thing peels off is head back to He’Xin’Dao and look for your gear. Thankfully it doesn't take you long to find it in a chest not too far from the table on which the crazy cat messed you up. Gosh, it feels good to be alive, like REALLY alive.\n\n");
+		if (player.weapon == WeaponLib.FISTS || flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) { //Shouldn't Aether flag be 1?
 			player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
 		}
 		if (player.weaponRange == WeaponRangeLib.NOTHING) {
@@ -841,9 +841,9 @@ private function curingJiangshi():void {
 	}
 	else {
 		outputText("Evangeline barely turns to look at you before jumping in surprise.\n\n");
-		outputText("\"<i>Oh god just what happened to you [name]! There is a clear obvious issue with your vitality.</i>\"\n\n");
+		outputText("\"<i>Oh god, what has happened to you [name]! There clearly is an obvious issue with your vitality.</i>\"\n\n");
 		outputText("You explain your situation to her somewhat.\n\n");
-		outputText("\"<i>Look, I will need five vitality tinctures and five purity philters to fix this up, how you get the two is up you you.</i>\"\n\n");
+		outputText("\"<i>Look, I will need five vitality tinctures and five purity philters to fix this up, how you get the two is up to you.</i>\"\n\n");
 		flags[kFLAGS.CURSE_OF_THE_JIANGSHI]++;
 		doNext(camp.campFollowers);
 		cheatTime2(15);

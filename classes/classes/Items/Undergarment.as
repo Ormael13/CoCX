@@ -1,5 +1,6 @@
 package classes.Items 
 {
+import classes.BodyParts.LowerBody;
 	/**
 	 * @author Kitteh6660
 	 */
@@ -130,7 +131,7 @@ package classes.Items
 					outputText("Your form makes it impossible to put on any form of lower undergarments. You put it back into your inventory.");
 					return false;
 				}
-				else if (game.player.isNaga()) {
+				else if (game.player.isNaga() || game.player.lowerBody == LowerBody.GHOST_2) {
 					if (perk != "NagaWearable") {
 						outputText("It's impossible to put on this undergarment as it's designed for someone with two legs. You put it back into your inventory.");
 						return false;

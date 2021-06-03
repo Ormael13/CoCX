@@ -115,6 +115,8 @@ public class Skin extends SaveableBodyPart {
 	EnumValue.add(PatternTypes, PATTERN_SCAR_WINDSWEPT, "SCAR_WINDSWEPT", {name:"windswept scars", base:true});
 	public static const PATTERN_OIL:int = 14;
 	EnumValue.add(PatternTypes, PATTERN_OIL, "OIL", {name:"oily skin", base:true});
+	public static const PATTERN_SEADRAGON_UNDERBODY:int = 15;
+	EnumValue.add(PatternTypes, PATTERN_SEADRAGON_UNDERBODY, "SEADRAGON_UNDERBODY", {name:"sea dragon underbody", base:true});
 	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES
 	
 	public var base:SkinLayer;

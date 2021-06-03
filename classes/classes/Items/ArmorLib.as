@@ -16,24 +16,24 @@ package classes.Items
 		public const A_ROBE_:ArmorWithPerk = new ArmorWithPerk("A.Robe","A.Robe","apprentice's robe","an apprentice's robe",0,1,25,"This drab robe lacks adornment, yet retains an air of mysticality. The low quality of the fabric coupled with its mystic air suggests that it is a garment meant for mages in training.","Light",
 				PerkLib.WizardsEndurance,10,0,0,0);
 		public const ARCBANG:ArmorWithPerk = new ArmorWithPerk("ArcaBangl","ArcaneBangles","arcane bangles","a set of arcane bangles",0,1,150,"Silver bangles to be worn from the wrists and ankles, inscribed with arcane runes.  For some reason, you feel like wearing these with armor or clothes is somehow wrong.","Light",
-				PerkLib.WizardsEnduranceAndSluttySeduction,20,5,0,0,"Your arcane bangles allows you access to 'Seduce', an improved form of 'Tease'.");
+				PerkLib.WizardsEnduranceAndSluttySeduction,20,5,0,0,"Your arcane bangles allows you access to 'Seduce', an improved form of 'Tease'.").withTag(ItemTags.REVEALING) as ArmorWithPerk;
 		public const B_CHANG:Armor = new Armor("B.Chang","BlueChangshan","Blue Lunar new year dress (m)","a Blue Lunar new year dress (m)",0,0,100,"A simple yet elegant blue changshan with dragon motif. This clothing is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const B_DRESS:Armor = new Armor("B.Dress","Long Dress","long ballroom dress patterned with sequins","a ballroom dress patterned with sequins",0,0,40,"A long ballroom dress patterned with sequins.  Perfect for important occasions.","Medium");
 		public const B_QIPAO:Armor = new Armor("B.Qipao","BlueQipao","Blue Lunar new year dress (f)","a Blue Lunar new year dress (f)",0,0,100,"A simple yet elegant blue qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const BEEARMR:Armor = new BeeArmor();
 		public const BERA:Armor = new BerserkerArmor();
 		public const BIMBOSK:ArmorWithPerk = new ArmorWithPerk("BimboSk","BimboSk","bimbo skirt","a skirt that looks like it belongs on a bimbo",1,0,40,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light",
-				PerkLib.SluttySeduction,10,0,0,0,"Your delightfully slutty yet upbeat garb helps you seduce your foes!", false, false);
+				PerkLib.SluttySeduction,10,0,0,0,"Your delightfully slutty yet upbeat garb helps you seduce your foes!", false, false).withTag(ItemTags.REVEALING) as ArmorWithPerk;
 		public const BLIZZ_K:BlizzardKimono = new BlizzardKimono();
 		public const BLKIMONO:ArmorWithPerk = new ArmorWithPerk("Bl.Kimono","Bl.Kimono","black kimono","a black kimono",0,1,200,"This lovely black kimono is adorned with a red floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		public const BKIMONO:ArmorWithPerk = new ArmorWithPerk("B.Kimono","B.Kimono","blue kimono","a blue kimono",0,1,200,"This lovely blue kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		public const BONSTRP:ArmorWithPerk = new ArmorWithPerk("BonStrp","BonStrp","barely-decent bondage straps","a set of bondage straps",0,0,40,"These leather straps and well-placed hooks are actually designed in such a way as to be worn as clothing.  While they technically would cover your naughty bits, virtually every other inch of your body would be exposed.","Light",
-				PerkLib.SluttySeduction,10,0,0,0,"Your fetishy bondage outfit allows you access to an improved form of 'Tease'.", false, false);
+				PerkLib.SluttySeduction,10,0,0,0,"Your fetishy bondage outfit allows you access to an improved form of 'Tease'.", false, false).withTag(ItemTags.REVEALING,ItemTags.AGILE) as ArmorWithPerk;
 		public const C_CLOTH:ComfortableClothes = new ComfortableClothes();
 		public const CHBIKNI:ArmorWithPerk = new ArmorWithPerk("ChBikni","Chn Bikini","revealing chainmail bikini","a chainmail bikini",2,0,80,"A revealing chainmail bikini that barely covers anything.  The bottom half is little more than a triangle of metal and a leather thong.","Light",
-				PerkLib.SluttySeduction,5,0,0,0,"Your revealing chain bikini allows you access to 'Seduce', an improved form of 'Tease'.", false, false);
+				PerkLib.SluttySeduction,5,0,0,0,"Your revealing chain bikini allows you access to 'Seduce', an improved form of 'Tease'.", false, false).withTag(ItemTags.REVEALING,ItemTags.AGILE) as ArmorWithPerk;
 		public const CLSSYCL:Armor = new Armor("ClssyCl", "Suitclothes", "classy suitclothes", "a set of classy suit-clothes", 1, 0, 40, "A set of classy suitclothes.", "Light");
 		public const CTPALAD:CentaurArmor = new CentaurArmor();
 		public const CTBGUAR:CentaurBlackguardArmor = new CentaurBlackguardArmor();
@@ -62,13 +62,13 @@ package classes.Items
 		public const I_CORST:InquisitorsCorset = new InquisitorsCorset();
 		public const I_ROBES:InquisitorsRobes = new InquisitorsRobes();
 		public const INDECST:ArmorWithPerk = new ArmorWithPerk("IndecSt","Indec StAr","practically indecent steel armor","a suit of practically indecent steel armor",5,0,400,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium",
-				PerkLib.SluttySeduction,6,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
+				PerkLib.SluttySeduction,6,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.").withTag(ItemTags.REVEALING) as ArmorWithPerk;
 		public const INDEDSR:ArmorWithPerk = new ArmorWithPerk("IndeDSR","Indec D.Scale Robe","indecent dragonscale robe","an indecent dragonscale robe",0,4,400,"More of a longcoat than a robe, this outfit is crafted from dragon scales. Discrete straps centered around the belt keep the front perpetually open, displaying your groin and any cleavage you might have. The dragonscale is treated to be durable yet remain comfortable.","Light",
-				PerkLib.WizardsEnduranceAndSluttySeduction,15,5,0,0,"Your indecent dragonscale robe allows you access to 'Seduce', an improved form of 'Tease'.");
+				PerkLib.WizardsEnduranceAndSluttySeduction,15,5,0,0,"Your indecent dragonscale robe allows you access to 'Seduce', an improved form of 'Tease'.").withTag(ItemTags.REVEALING) as ArmorWithPerk;
 		public const INDEEWR:ArmorWithPerk = new ArmorWithPerk("IndeEWR","Indec. E.W. Robe","indecent ebonweave robe","an indecent ebonweave robe",0,6,600,"More of a longcoat than a robe, this outfit is crafted from refined ebonbloom petals. Discrete straps centered around the belt keep the front perpetually open, displaying your groin and any cleavage you might have. The cloth has a mystic aura, helpful when working magic.","Light",
-				PerkLib.WizardsEnduranceAndSluttySeduction,20,5,0,0,"Your indecent ebonweave robe allows you access to 'Seduce', an improved form of 'Tease'.");
+				PerkLib.WizardsEnduranceAndSluttySeduction,20,5,0,0,"Your indecent ebonweave robe allows you access to 'Seduce', an improved form of 'Tease'.").withTag(ItemTags.REVEALING) as ArmorWithPerk;
 		public const INDESSR:ArmorWithPerk = new ArmorWithPerk("IndeSSR","Indec S.S. Robe","indecent spider silk robe","an indecent spider silk robe",0,2,200,"More of a longcoat than a robe, this outfit is crafted from alchemically treated spider silk. Discrete straps centered around the belt keep the front perpetually open, displaying your groin and any cleavage you might have.","Light",
-				PerkLib.WizardsEnduranceAndSluttySeduction,15,5,0,0,"Your indecent spider silk robe allows you access to 'Seduce', an improved form of 'Tease'.");
+				PerkLib.WizardsEnduranceAndSluttySeduction,15,5,0,0,"Your indecent spider silk robe allows you access to 'Seduce', an improved form of 'Tease'.").withTag(ItemTags.REVEALING) as ArmorWithPerk;
 		public const KBDRESS:Armor = new KrakenBlackDress();
 		public const LEATHRA:Armor = new Armor("LeathrA","LeathrA","leather armor segments","a set of leather armor",5,0,100,"This is a suit of well-made leather armor.  It looks fairly rugged.","Light");
 		public const URTALTA:LeatherArmorSegments = new LeatherArmorSegments();
@@ -79,15 +79,17 @@ package classes.Items
 		public const LTHRROB:Armor = new Armor("LthrRob","Lthr Robes","black leather armor surrounded by voluminous robes","a suit of black leather armor with voluminous robes",3,3,150,"This is a suit of flexible leather armor with a voluminous set of concealing black robes.","Light");
 		public const M_ROBES:Armor = new Armor("M.Robes","Robes","modest robes","a set of modest robes",0,0,25,"A set of modest robes, not dissimilar from what the monks back home would wear.","Light");
 		public const NAGASLK:ArmorWithPerk = new ArmorWithPerk("NagaSlk","NagaDress","desert naga pink and black silk dress","a desert naga pink and black silk dress",0,0,0,"A very seductive dress made for naga or females without a human set of legs. It has a black collar, bikini top, sleeves with golden bangles and a waistcloth, all decorated with a golden trim. The bottom has a pink silk veil that runs down to what would be the human knee while the center of the bikini is also covered by a small strand of silk. It helps accentuate your curves and increase your natural charm. The dress obviously is so minimalist that you could as well say you are naked yet it looks quite classy on a tauric or naga body giving you the air of a master seducer.","Light",
-				PerkLib.SluttySeduction,10,0,0,0,"Your desert naga pink and black silk dress allows you access to 'Seduce', an improved form of 'Tease'.", false, false);
+				PerkLib.SluttySeduction,10,0,0,0,"Your desert naga pink and black silk dress allows you access to 'Seduce', an improved form of 'Tease'.", false, false).withTag(ItemTags.REVEALING, ItemTags.AGILE) as ArmorWithPerk;
 		public const NURSECL:ArmorWithPerk = new ArmorWithPerk("NurseCl","NurseCl","skimpy nurse's outfit","a nurse's outfit",0,0,100,"This borderline obscene nurse's outfit would barely cover your hips and crotch.  The midriff is totally exposed, and the white top leaves plenty of room for cleavage.  A tiny white hat tops off the whole ensemble.  It would grant a small regeneration to your HP.","Light",
 				PerkLib.SluttySeduction,8,0,0,0,"Your fetishy nurse outfit allows you access to an improved form of 'Tease'.");
 		public const OVERALL:Armor = new Armor("Overall", "Overalls", "white shirt and overalls", "a white shirt and overalls", 0, 0, 25, "A simple white shirt and overalls.", "Light", true);
+		public const OEKIMO :OniEnlightenedKimono = new OniEnlightenedKimono();
+		public const OTKIMO :OniTyrantKimono = new OniTyrantKimono();
 		public const P_CHANG:Armor = new Armor("P.Chang","PurpleChangshan","Purple Lunar new year dress (m)","a Purple Lunar new year dress (m)",0,0,100,"A simple yet elegant purple changshan with dragon motif. This clothing is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const P_QIPAO:Armor = new Armor("P.Qipao","PurpleQipao","Purple Lunar new year dress (f)","a Purple Lunar new year dress (f)",0,0,100,"A simple yet elegant purple qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const PKIMONO:ArmorWithPerk = new ArmorWithPerk("P.Kimono","P.Kimono","purple kimono","a purple kimono",0,1,200,"This lovely purple kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
-		public const R_BDYST:Armor = new Armor("R.BdySt","R.BdySt","red, high-society bodysuit","a red bodysuit for high society",1,0,50,"A high society bodysuit. It is as easy to mistake it for ballroom apparel as it is for boudoir lingerie. The thin transparent fabric is so light and airy that it makes avoiding blows a second nature.","Light", true, false);
+		public const R_BDYST:Armor = new Armor("R.BdySt","R.BdySt","red, high-society bodysuit","a red bodysuit for high society",1,0,50,"A high society bodysuit. It is as easy to mistake it for ballroom apparel as it is for boudoir lingerie. The thin transparent fabric is so light and airy that it makes avoiding blows a second nature.","Light", true, false).withTag(ItemTags.AGILE) as Armor;
 		public const R_CHANG:Armor = new Armor("R.Chang","RedChangshan","Red Lunar new year dress (m)","a Red Lunar new year dress (m)",0,0,100,"A simple yet elegant red changshan with dragon motif. This clothing is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const R_QIPAO:Armor = new Armor("R.Qipao","RedQipao","Red Lunar new year dress (f)","a Red Lunar new year dress (f)",0,0,100,"A simple yet elegant red qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const RBBRCLT:ArmorWithPerk = new ArmorWithPerk("RbbrClt","Rbbr Fetish","rubber fetish clothes","a set of revealing rubber fetish clothes",3,0,150,"A revealing set of fetish-wear.  Upgrades your tease attack with the \"Slutty Seduction\" perk.","Light",
@@ -135,6 +137,8 @@ package classes.Items
 				PerkLib.WizardsEndurance,25,0,0,0);
 		public const WALIC:ArmorWithPerk = new WalpurgisIzaliaRobe();
 		public const VLAR:ArmorWithPerk = new VladimirRegalia();
+		public const ERA:ArmorWithPerk = new ElvenRangerArmor();
+		public const IQG:ArmorWithPerk = new IceQueenGown();
 		public const WKIMONO:ArmorWithPerk = new ArmorWithPerk("W.Kimono","W.Kimono","white kimono","a white kimono",0,1,200,"This lovely white kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		/*

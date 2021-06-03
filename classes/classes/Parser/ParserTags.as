@@ -5,6 +5,7 @@ import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Measurements;
 import classes.Scenes.SceneLib;
+import classes.internals.Utils;
 
 public class ParserTags {
 
@@ -58,6 +59,7 @@ public class ParserTags {
         "foot"                  : function ():* { return CoC.instance.player.foot(); },
         "fullchest"             : function ():* { return CoC.instance.player.allChestDesc(); },
         "hair"                  : function ():* { return CoC.instance.player.hairDescript(); },
+        "hairlongdesc"         : function ():* { return CoC.instance.player.hairDescript(true); },
         "haircolor"             : function ():* { return CoC.instance.player.hairColor; },
         "hairorfur"             : function ():* { return CoC.instance.player.hairOrFur(); },
         "he"                    : function ():* { return CoC.instance.player.mf("he", "she"); },
@@ -73,6 +75,7 @@ public class ParserTags {
         "his2"                  : function ():* { return CoC.instance.player2.mf("his", "her"); },
         "horns"                 : function ():* { return CoC.instance.player.hornDescript(); },
         "leg"                   : function ():* { return CoC.instance.player.leg(); },
+        "legcount"              : function ():* { return Utils.num2Text(CoC.instance.player.legCount) },
         "legs"                  : function ():* { return CoC.instance.player.legs(); },
         "lowergarment"          : function ():* { return CoC.instance.player.lowerGarmentName; },
         "man"                   : function ():* { return CoC.instance.player.mf("man", "woman"); },
@@ -231,6 +234,7 @@ public class ParserTags {
         "foot"                  : function ():* { return CoC.instance.monster.foot(); },
         "fullchest"             : function ():* { return CoC.instance.monster.allChestDesc(); },
         "hair"                  : function ():* { return CoC.instance.monster.hairDescript(); },
+        "hairlongdesc"         : function ():* { return CoC.instance.monster.hairDescript(true); },
         "haircolor"             : function ():* { return CoC.instance.monster.hairColor; },
         "hairorfur"             : function ():* { return CoC.instance.monster.hairOrFur(); },
         "he"                    : function ():* { return CoC.instance.monster.pronoun1; },

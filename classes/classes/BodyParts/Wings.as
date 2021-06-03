@@ -1,7 +1,7 @@
 package classes.BodyParts {
 import classes.internals.EnumValue;
 
-public class Wings extends BodyPart {
+public class Wings extends SaveableBodyPart {
 	/**
 	 * Entry properties:
 	 * - value: numerical id (1, 4)
@@ -58,6 +58,7 @@ public class Wings extends BodyPart {
 	EnumValue.add(Types, MANTICORE_LIKE_SMALL, "MANTICORE_LIKE_SMALL", {name:"small manticore-like"});
 	public static const MANTICORE_LIKE_LARGE:int = 23;
 	EnumValue.add(Types, MANTICORE_LIKE_LARGE, "MANTICORE_LIKE_LARGE", {name:"large manticore-like", wingSlap: true,canFly: true});
+	// Deprecated, became an Arms body part
 	public static const BAT_ARM:int              = 24;
 	EnumValue.add(Types, BAT_ARM, "BAT_ARM", {name:"bat", wingSlap: true,canFly: true});
 	public static const VAMPIRE:int              = 25;
@@ -82,12 +83,25 @@ public class Wings extends BodyPart {
 	EnumValue.add(Types, FAIRY, "FAIRY", {name:"fairy",canFly: true});
 	public static const WINDY_AURA:int    	 	 = 35;
 	EnumValue.add(Types, WINDY_AURA, "WINDY_AURA", {name:"windy aura",canFly: true});
+	public static const SEADRAGON:int        = 36;
+	EnumValue.add(Types, SEADRAGON, "SEADRAGON", {name:"large majestic aquatic", wingSlap: true,canFly: true});
 	//public static const :int    	 	 	 = 36;
 	//EnumValue.add(Types, , "", {name:"",canFly: true});
 
 	public var desc:String = "non-existant";
 	public function Wings() {
-		super(null, null);
+		super(creature, "wings", []);
+	}
+
+	override protected function loadFromOldSave(savedata:Object):void {
+		// For the Arms to be properly replaced, in the loadGameObject function of Saves.as, player.wings.loadFromSaveData must be called *before* saveFile.data.armType is checked
+		// Otherwise, the new savedata.armType won't be checked as the arm's type was already extracted from the save file
+		if (savedata.wingType === BAT_ARM) {
+			savedata.wingType = NONE;
+			savedata.armType = Arms.BAT;
+		}
+
+		type = intOr(savedata.wingType, NONE);
 	}
 }
 }

@@ -76,7 +76,7 @@ use namespace CoC;
 				else SceneLib.etnaScene.repeatEnc();
 				return;
 			}
-			//Wild manticore/malicore
+			//Wild manticore/malikore
 			if (chooser == 5) {
 				if (flags[kFLAGS.ETNA_AFFECTION] < 5) chooser = rand(5);
 				else {

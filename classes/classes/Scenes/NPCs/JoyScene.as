@@ -896,7 +896,7 @@ import classes.lists.Gender;
 			outputText("You tell Joy that training your strength sounds good, and ask her how does she intend to help you with that?");
 			outputText("\n\n\"<i>Like, lemme think a moment...</i>\" She tells you, tapping her lip thoughtfully. Then she grins. \"<i>Okay; the best way to train your muscles is, like, to lift stuff? So, try lifting me.</i>\" She declares proudly.");
 			outputText("\n\nAt first you think she's joking but a second look at her makes it clear that she's serious... well it might be worth a try right? You walk towards her and loops one arm behind her back, the other one hooking behind her legs, and then you sweep her off her feet and lift her onto your arms. Joy is not that heavy to begin with, but you can see how it might be strenuous to lift her about.");
-			outputText("\n\n\"<i>Eep! Be gentle, [name]!\" She insists, squirming instinctively in your grip.");
+			outputText("\n\n\"<i>Eep! Be gentle, [name]!</i>\" She insists, squirming instinctively in your grip.");
 			outputText("\n\nYou smirk at her, telling her this is her idea, so you hope she won't regret this.");
 			outputText("\n\n\"<i>Like, don't worry about me. You just took me by surprise.</i>\" The bimbo mouse says, repositioning herself to be more comfortable in yours. \"<i>Okey-dokey, lift away!</i>\" She commands.");
 			//Strength check
@@ -2289,4 +2289,4 @@ import classes.lists.Gender;
 			doNext(playerMenu);
 		}
 	}
-}
+}

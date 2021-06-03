@@ -92,7 +92,7 @@ package classes.Items
 		public const POCDEST:PurifiedOniChieftainDestroyer = new PurifiedOniChieftainDestroyer();
 		public const PRURUMI:PrithvirajUrumi = new PrithvirajUrumi();
 		public const PSWHIP :DualSuccubiWhip = new DualSuccubiWhip();
-		public const PTCHFRK:Weapon = new Weapon("PtchFrk","Pitchfork","pitchfork","a pitchfork","stab",10,400,"This is a pitchfork.  Intended for farm work but also useful as stabbing weapon.");
+		public const PTCHFRK:Weapon = new Weapon("PtchFrk","Pitchfork","pitchfork","a pitchfork","stab",10,400,"This is a pitchfork.  Intended for farm work but also useful as stabbing weapon.", "", "Spear");
 		public const PWHIP  :DualWhip = new DualWhip();
 		public const PURITAS:Puritas = new Puritas();
 		public const Q_GUARD:QueensGuard = new QueensGuard();

@@ -116,7 +116,12 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) costPercent -= 5;
 		if (player.hasPerk(PerkLib.WayOfTheBlood)) costPercent -= 5;
 		if (player.hasPerk(PerkLib.YourPainMyPower)) costPercent -= 5;
-		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) costPercent -= 5
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) costPercent -= 5;
+		if (player.hasPerk(PerkLib.BloodDemonToughness)) costPercent -= 5;
+		//
+		if (player.hasPerk(PerkLib.BloodDemonWisdom)) costPercent -= 5;
+		//
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) costPercent -= 5;
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
@@ -372,6 +377,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WayOfTheBlood)) mod += .1;
 		if (player.hasPerk(PerkLib.YourPainMyPower)) mod += .1;
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) mod += .1;
+		if (player.hasPerk(PerkLib.BloodDemonToughness)) mod += .1;
+		//
+		if (player.hasPerk(PerkLib.BloodDemonWisdom)) mod += .1;
+		//
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) mod += .1;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -428,8 +438,8 @@ public class CombatMagic extends BaseCombatContent {
 		return mod;
 	}
 
-	internal function spellModWhiteImpl():Number {
-		var mod:Number = 1;
+	internal function spellModBase():Number {
+		var mod:Number = 0;
 		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) mod += .3;
 		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) mod += .2;
 		if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) mod += .4;
@@ -451,9 +461,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Ambition)) {
 			mod += player.perkv2(PerkLib.Ambition);
 		}
-		if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
-			mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
-		}
 		if (player.hasPerk(PerkLib.WizardsFocus)) {
 			mod += player.perkv1(PerkLib.WizardsFocus);
 		}
@@ -464,10 +471,6 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
-		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .2;
-		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
-		if (player.hasPerk(PerkLib.HexKnowledge)) mod -= .4;
-		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -481,6 +484,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
 		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
+		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
 			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
 				if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) mod += 2.5;
@@ -501,6 +505,20 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
+	internal function spellModWhiteImpl():Number {
+		var mod:Number = 1;
+		mod += spellModBase();
+		if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
+			mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
+		}
+		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .2;
+		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
+		if (player.hasPerk(PerkLib.HexKnowledge)) mod -= .4;
+		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -546,8 +564,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .02;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .017;
 		if (player.weapon == weapons.B_STAFF) {
 			var mod1:Number = 0.4;
 			mod1 -= player.cor / 10;
@@ -562,73 +580,11 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellModBlackImpl():Number {
 		var mod:Number = 1;
-		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) mod += .3;
-		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) mod += .2;
-		if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) mod += .4;
-		if (player.hasPerk(PerkLib.GrandArchmage2ndCircle) && player.inte >= 150) mod += .5;
-		if (player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) mod += .6;
-		if (player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) mod += .2;
-		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 275) mod += 1;
-		if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 225) mod += .8;
-		if (player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
-		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) mod += .2;
-		if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .1;
-		if (player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) mod += .1;
-		if (player.hasPerk(PerkLib.TraditionalMageI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageIII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageIV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageVI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.Obsession)) {
-			mod += player.perkv2(PerkLib.Obsession);
-		}
-		if (player.hasPerk(PerkLib.WizardsFocus)) {
-			mod += player.perkv1(PerkLib.WizardsFocus);
-		}
-		if (player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) {
-			mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
-		}
-		if (player.hasPerk(PerkLib.SagesKnowledge)) {
-			mod += player.perkv1(PerkLib.SagesKnowledge);
-		}
-		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		mod += spellModBase();
 		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
 		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
 		if (player.hasPerk(PerkLib.HexKnowledge)) mod += .2;
-		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
-		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
-		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
-		if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
-		if (player.jewelryEffectId4 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
-		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
-		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
-		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.shield == shields.SPI_FOC) mod += .2;
-		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
-		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
-			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
-				if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) mod += 2.5;
-				else mod += 1.25;
-			} else mod += 1;
-		}
-		if (player.weapon == weapons.B_STAFF) {
-			var mod1:Number = 0.4;
-			mod1 -= player.cor / 10;
-			if (mod1 < 0.1) mod1 = 0.1;
-			mod += mod1;
-		}
-		if (player.hasPerk(PerkLib.InariBlessedKimono)){
-			var mod2:Number = 0.5;
-			mod2 -= player.cor / 10;
-			if (mod1 < 0.1) mod2 = 0.1;
-			mod += mod2;
-		}
-		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
-		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		if (player.jewelry == jewelries.DMTO || player.jewelry2 == jewelries.DMTO || player.jewelry3 == jewelries.DMTO || player.jewelry4 == jewelries.DMTO) mod += 0.25;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -852,19 +808,45 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(40)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier1)) {
-				bd.disable("You need more time before you can cast a first tier white magic spell again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhitefire)) {
+				bd.disable("You need more time before you can cast Whitefire again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
-			bd.disable("You can only use buff magic while underground.");
+				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
 				bd.disable("Your ability to use white magic was sealed.");
 			}
+			if (player.hasPerk(PerkLib.MagesWrathEx)) {
+				bd = buttons.add("Whitefire(Ex)", spellWhitefire2)
+						.hint("Whitefire (Ex) is a potent wrath-empowered fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  " +
+								"\n\nMana Cost: " + spellCostWhite(40) + ", Wrath Cost: 100");
+				if (badLustForWhite) {
+					bd.disable("You are far too aroused to focus on white magic.");
+				} else if (player.hasPerk(PerkLib.HexKnowledge)) {
+					bd.disable("Your chosen path of magic locked out this spell.");
+				} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(40)) {
+					bd.disable("Your mana is too low to cast this spell.");
+				} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40) && player.HP < spellCostWhite(40)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(40)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.wrath < 100) {
+					bd.disable("Your wrath is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhitefireEx)) {
+					bd.disable("You need more time before you can cast Whitefire (Ex) again.");
+				} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+					bd.disable("You can only use buff magic while underground.");
+				} else if (combat.isEnnemyInvisible) {
+					bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+				} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+					bd.disable("Your ability to use white magic was sealed.");
+				}
+			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
 			bd = buttons.add("Pyre Burst", spellPyreBurst)
-					.hint("Teach your foes a lesson with the strenght of a firestorm.  \n\n<b>AoE Spell.</b>  " +
+					.hint("Teach your foes a lesson with the strength of a firestorm.  \n\n<b>AoE Spell.</b>  " +
 							"\n\nMana Cost: " + spellCostWhite(200) + "");
 			if (badLustForWhite) {
 				bd.disable("You are far too aroused to focus on white magic.");
@@ -876,14 +858,40 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier2)) {
-				bd.disable("You need more time before you can cast a second tier white magic spell again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellPyreBurst)) {
+				bd.disable("You need more time before you can cast Pyre Burst again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
 				bd.disable("Your ability to use white magic was sealed.");
+			}
+			if (player.hasPerk(PerkLib.MagesWrathEx)) {
+				bd = buttons.add("Pyre Burst(Ex)", spellPyreBurst2)
+						.hint("Teach your foes a lesson with the strength of a wrath-enpowered firestorm.  \n\n<b>AoE Spell.</b>  " +
+								"\n\nMana Cost: " + spellCostWhite(200) + ", Wrath Cost: 100");
+				if (badLustForWhite) {
+					bd.disable("You are far too aroused to focus on white magic.");
+				} else if (player.hasPerk(PerkLib.HexKnowledge)) {
+					bd.disable("Your chosen path of magic locked out this spell.");
+				} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(200)) {
+					bd.disable("Your mana is too low to cast this spell.");
+				} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200) && player.HP < spellCostWhite(200)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(200)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.wrath < 100) {
+					bd.disable("Your wrath is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.CooldownSpellPyreBurstEx)) {
+					bd.disable("You need more time before you can cast Pyre Burst (Ex) again.");
+				} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+					bd.disable("You can only use buff magic while underground.");
+				} else if (combat.isEnnemyInvisible) {
+					bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+				} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+					bd.disable("Your ability to use white magic was sealed.");
+				}
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsMeteorShower)) {
@@ -902,7 +910,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(250)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier3)) {
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellMeteorShower)) {
 				bd.disable("You need more time before you can cast Meteor Shower again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
@@ -926,14 +934,40 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(40)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier1)) {
-				bd.disable("You need more time before you can cast a first tier white magic spell again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellLightningBolt)) {
+				bd.disable("You need more time before you can cast Lightning Bolt again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
 				bd.disable("Your ability to use white magic was sealed.");
+			}
+			if (player.hasPerk(PerkLib.MagesWrathEx)) {
+				bd = buttons.add("LightningBolt(Ex)", spellLightningBolt2)
+						.hint("Lightning Bolt (Ex) is a basic wrath-enpowered lightning attack that will electrocute your foe with a single bolt of lightning.  " +
+								"\n\nMana Cost: " + spellCostWhite(40) + ", Wrath Cost: 100");
+				if (badLustForWhite) {
+					bd.disable("You are far too aroused to focus on white magic.");
+				} else if (player.hasPerk(PerkLib.HexKnowledge)) {
+					bd.disable("Your chosen path of magic locked out this spell.");
+				} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(40)) {
+					bd.disable("Your mana is too low to cast this spell.");
+				} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40) && player.HP < spellCostWhite(40)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(40)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.wrath < 100) {
+					bd.disable("Your wrath is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.CooldownSpellLightningBoltEx)) {
+					bd.disable("You need more time before you can cast Lightning Bolt (Ex) again.");
+				} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+					bd.disable("You can only use buff magic while underground.");
+				} else if (combat.isEnnemyInvisible) {
+					bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+				} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+					bd.disable("Your ability to use white magic was sealed.");
+				}
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
@@ -950,14 +984,40 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellWhiteTier2)) {
-				bd.disable("You need more time before you can cast a second tier white magic spell again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLighting)) {
+				bd.disable("You need more time before you can cast Chain Lighting again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
 				bd.disable("Your ability to use white magic was sealed.");
+			}
+			if (player.hasPerk(PerkLib.MagesWrathEx)) {
+				bd = buttons.add("ChainLighting(Ex)", spellChainLightning2)
+						.hint("Chain Lighting (Ex) is a wrath-enpowered lightning attack that will electrocute your foes with a chain bolts of lightning.  \n\n<b>AoE Spell.</b>  " +
+								"\n\nMana Cost: " + spellCostWhite(200) + ", Wrath Cost: 100");
+				if (badLustForWhite) {
+					bd.disable("You are far too aroused to focus on white magic.");
+				} else if (player.hasPerk(PerkLib.HexKnowledge)) {
+					bd.disable("Your chosen path of magic locked out this spell.");
+				} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostWhite(200)) {
+					bd.disable("Your mana is too low to cast this spell.");
+				} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200) && player.HP < spellCostWhite(200)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostWhite(200)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.wrath < 100) {
+					bd.disable("Your wrath is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLightingEx)) {
+					bd.disable("You need more time before you can cast Chain Lighting (Ex) again.");
+				} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+					bd.disable("You can only use buff magic while underground.");
+				} else if (combat.isEnnemyInvisible) {
+					bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+				} else if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 10) {
+					bd.disable("Your ability to use white magic was sealed.");
+				}
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBlind)) {
@@ -1086,12 +1146,34 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(40)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier1)) {
-				bd.disable("You need more time before you can cast a first tier black magic spell again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellIceSpike)) {
+				bd.disable("You need more time before you can cast Ice Spike again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+			if (player.hasPerk(PerkLib.MagesWrathEx)) {
+				bd = buttons.add("Ice Spike", spellIceSpike2)
+						.hint("Drawning your own lust and wrath to concentrate them into chilling spike of ice that will attack your enemies.  " +
+								"\n\nMana Cost: " + spellCostBlack(40) + ", Wrath Cost: 100");
+				if (badLustForBlack) {
+					bd.disable("You aren't turned on enough to use any black magics.");
+				} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(40)) {
+					bd.disable("Your mana is too low to cast this spell.");
+				} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40) && player.HP < spellCostBlack(40)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(40)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.wrath < 100) {
+					bd.disable("Your wrath is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.CooldownSpellIceSpikeEx)) {
+					bd.disable("You need more time before you can cast Ice Spike (Ex) again.");
+				} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+					bd.disable("You can only use buff magic while underground.");
+				} else if (combat.isEnnemyInvisible) {
+					bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+				}
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsArcticGale)) {
@@ -1106,12 +1188,34 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier2)) {
-				bd.disable("You need more time before you can cast a second tier black magic spell again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellArcticGale)) {
+				bd.disable("You need more time before you can cast Arctic Gale again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+			if (player.hasPerk(PerkLib.MagesWrathEx)) {
+				bd = buttons.add("Arctic Gale(Ex)", spellArcticGale2)
+						.hint("Devastate the enemy ranks with a blast of wrath-enpowered icy wind sharper then steel blades.  \n\n<b>AoE Spell.</b>  " +
+								"\n\nMana Cost: " + spellCostBlack(200) + ", Wrath Cost: 100");
+				if (badLustForBlack) {
+					bd.disable("You aren't turned on enough to use any black magics.");
+				} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(200)) {
+					bd.disable("Your mana is too low to cast this spell.");
+				} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200) && player.HP < spellCostBlack(200)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(200)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.wrath < 100) {
+					bd.disable("Your wrath is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.CooldownSpellArcticGaleEx)) {
+					bd.disable("You need more time before you can cast Arctic Gale (Ex) again.");
+				} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+					bd.disable("You can only use buff magic while underground.");
+				} else if (combat.isEnnemyInvisible) {
+					bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+				}
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsPolarMidnight)) {
@@ -1126,7 +1230,7 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCost(250)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier3)) {
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellPolarMidnight)) {
 				bd.disable("You need more time before you can cast Polar Midnight again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
@@ -1146,12 +1250,34 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(40)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier1)) {
-				bd.disable("You need more time before you can cast a first tier black magic spell again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellDarknessShard)) {
+				bd.disable("You need more time before you can cast Darkness Shard again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+			if (player.hasPerk(PerkLib.MagesWrathEx)) {
+				bd = buttons.add("DarknessShard(Ex)", spellDarknessShard2)
+						.hint("Drawning your own lust and wrath to condense part of the the ambivalent darkness into a shard to attack your enemies.  " +
+								"\n\nMana Cost: " + spellCostBlack(40) + ", Wrath Cost: 100");
+				if (badLustForBlack) {
+					bd.disable("You aren't turned on enough to use any black magics.");
+				} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(40)) {
+					bd.disable("Your mana is too low to cast this spell.");
+				} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40) && player.HP < spellCostBlack(40)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(40)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.wrath < 100) {
+					bd.disable("Your wrath is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.CooldownSpellDarknessShardEx)) {
+					bd.disable("You need more time before you can cast Darkness Shard (Ex) again.");
+				} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+					bd.disable("You can only use buff magic while underground.");
+				} else if (combat.isEnnemyInvisible) {
+					bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+				}
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsDuskWave)) {
@@ -1166,12 +1292,34 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBlackTier2)) {
-				bd.disable("You need more time before you can cast a second tier black magic spell again.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellDuskWave)) {
+				bd.disable("You need more time before you can cast Dusk Wave again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+			if (player.hasPerk(PerkLib.MagesWrathEx)) {
+				bd = buttons.add("Dusk Wave(Ex)", spellDuskWave2)
+						.hint("Drawning your own lust and wrath to condense part of the the ambivalent darkness into a wave to attack your enemies.  \n\n<b>AoE Spell.</b>  " +
+								"\n\nMana Cost: " + spellCostBlack(200) + "");
+				if (badLustForBlack) {
+					bd.disable("You aren't turned on enough to use any black magics.");
+				} else if (!player.hasPerk(PerkLib.BloodMage) && !player.hasPerk(PerkLib.LastResort) && !player.hasStatusEffect(StatusEffects.BloodMage) && player.mana < spellCostBlack(200)) {
+					bd.disable("Your mana is too low to cast this spell.");
+				} else if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200) && player.HP < spellCostBlack(200)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.BloodMage) && (bloodForBloodGod - 1) < spellCostBlack(200)) {
+					bd.disable("Your hp is too low to cast this spell.");
+				} else if (player.wrath < 100) {
+					bd.disable("Your wrath is too low to cast this spell.");
+				} else if (player.hasStatusEffect(StatusEffects.CooldownSpellDuskWaveEx)) {
+					bd.disable("You need more time before you can cast Dusk Wave (Ex) again.");
+				} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+					bd.disable("You can only use buff magic while underground.");
+				} else if (combat.isEnnemyInvisible) {
+					bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+				}
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsArouse)) {
@@ -1453,6 +1601,37 @@ public class CombatMagic extends BaseCombatContent {
 			}
 		}
 	}
+
+	//THIS FEATURE GOVERS EVERY POST CAST EFFECT YOUR SPELLS MAY CAUSE
+	public function MagicAddonEffect(numberOfProcs:Number = 1):void {
+		if (player.hasStatusEffect(StatusEffects.Venomancy)) {
+			if (player.tailVenom >= 25) {
+				var injections:Number = 0;
+				while (player.tailVenom >= 25 && injections < numberOfProcs) {
+					var damageB:Number = 35 + rand(player.lib / 10);
+					var poisonScaling:Number = 1;
+					poisonScaling += player.lib/100;
+					poisonScaling += player.tou/100;
+					if (player.level < 10) damageB += 20 + (player.level * 3);
+					else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
+					else damageB += 80;
+					damageB *= 0.2;
+					damageB *= 1+(poisonScaling/10);
+					monster.teased(monster.lustVuln * damageB, false);
+					monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
+					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+					player.tailVenom -= 25;
+					injections++;
+				}
+				outputText(" Your venom is forcefully injected ");
+				if (injections > 1) outputText(""+injections+" times");
+				outputText(" in " + monster.a + monster.short + " through your magic!");
+			}
+		}
+	}
 	
 	public function spellBloodMissiles():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -1485,6 +1664,7 @@ public class CombatMagic extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
+		MagicAddonEffect(5);
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -1527,6 +1707,7 @@ public class CombatMagic extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		outputText(" damage.");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -1558,7 +1739,7 @@ public class CombatMagic extends BaseCombatContent {
 		if(handleShell()){return;}
 		spellMagicBolt2();
 	}
-	public function spellEdyMagicBolt():void {
+	public function spellEdgyMagicBolt():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		useMana(40, 1);
@@ -1604,11 +1785,10 @@ public class CombatMagic extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		outputText(" damage.");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (edgy) {
-			awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
-		}
+		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
@@ -1729,8 +1909,9 @@ public class CombatMagic extends BaseCombatContent {
 			lustDmg *= 1.75;
 		}
 		lustDmg = Math.round(lustDmg);
-		monster.teased(lustDmg);
+		monster.teased(lustDmg, false);
 		if (crit) outputText(" <b>Critical!</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -1981,7 +2162,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
 		else useMana(40, 6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellBlackTier1,spellBlackCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellIceSpike,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -1998,14 +2179,43 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		spellIceSpike2();
+		spellIceSpike3();
 		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 	public function spellIceSpike2():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
+		else useMana(40, 6);
+		player.wrath -= 100;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellIceSpikeEx,spellBlackCooldown(),0,0,0);
+		if (handleShell()){return;}
+		//if (monster is Doppleganger)
+		//{
+		//(monster as Doppleganger).handleSpellResistance("whitefire");
+		//flags[kFLAGS.SPELLS_CAST]++;
+		//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		//spellPerkUnlock();
+		//return;
+		//}
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		clearOutput();
+		spellIceSpike3(true);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	public function spellIceSpike3(edgy:Boolean = false):void {
 		outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form ice spike that shots toward " + monster.a + monster.short + " !\n");
 		var damage:Number = scalingBonusIntelligence() * spellModBlack();
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -2053,8 +2263,10 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -2070,7 +2282,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
 		else useMana(40, 6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellBlackTier1,spellBlackCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellDarknessShard,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -2087,14 +2299,43 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		spellDarknessShard2();
+		spellDarknessShard3();
 		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 	public function spellDarknessShard2():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
+		else useMana(40, 6);
+		player.wrath -= 100;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellDarknessShardEx,spellBlackCooldown(),0,0,0);
+		if (handleShell()){return;}
+		//if (monster is Doppleganger)
+		//{
+		//(monster as Doppleganger).handleSpellResistance("whitefire");
+		//flags[kFLAGS.SPELLS_CAST]++;
+		//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		//spellPerkUnlock();
+		//return;
+		//}
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		clearOutput();
+		spellDarknessShard3(true);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	public function spellDarknessShard3(edgy:Boolean = false):void {
 		outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form a shard from pure darkness that shots toward " + monster.a + monster.short + " !\n");
 		var damage:Number = scalingBonusIntelligence() * spellModBlack();
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -2139,8 +2380,10 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -2224,6 +2467,7 @@ public class CombatMagic extends BaseCombatContent {
 		monster.teased(lustDmg);
 		outputText(" damage.");
 		if (crit) outputText(" <b>Critical!</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -2243,7 +2487,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
 		else useMana(200,6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellBlackTier2,spellBlackCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellArcticGale,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -2259,11 +2503,40 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
+		spellArcticGale3();
+	}
+	public function spellArcticGale2():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
+		else useMana(200, 6);
+		player.wrath -= 100;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellArcticGaleEx,spellBlackCooldown(),0,0,0);
+		if (handleShell()){return;}
+		//if (monster is Doppleganger)
+		//{
+		//(monster as Doppleganger).handleSpellResistance("whitefire");
+		//flags[kFLAGS.SPELLS_CAST]++;
+		//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		//spellPerkUnlock();
+		//return;
+		//}
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		spellArcticGale3(true);
+	}
+	public function spellArcticGale3(edgy:Boolean = false):void {
 		clearOutput();
 		outputText("You wave the signs with your hands and unleash an howling blast of cold magic upon " + monster.a + monster.short + ".  \n");
 		var damage:Number = scalingBonusIntelligence() * spellModBlack();
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (monster.plural) damage *= 5;
+		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -2311,8 +2584,10 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -2330,7 +2605,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
 		else useMana(200,6);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellBlackTier2,spellBlackCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellDuskWave,spellBlackCooldown(),0,0,0);
 		if (handleShell()){return;}
 		//if (monster is Doppleganger)
 		//{
@@ -2346,11 +2621,40 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
+		spellDuskWave3();
+	}
+	public function spellDuskWave2():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(200)) player.HP -= spellCostBlack(200);
+		else useMana(200, 6);
+		player.wrath -= 100;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellDuskWaveEx,spellBlackCooldown(),0,0,0);
+		if (handleShell()){return;}
+		//if (monster is Doppleganger)
+		//{
+		//(monster as Doppleganger).handleSpellResistance("whitefire");
+		//flags[kFLAGS.SPELLS_CAST]++;
+		//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		//spellPerkUnlock();
+		//return;
+		//}
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		spellDuskWave3(true);
+	}
+	public function spellDuskWave3(edgy:Boolean = false):void {
 		clearOutput();
 		outputText("You wave the signs with your hands and all light fades as you call down to the primordial darkness to gnaw at " + monster.a + monster.short + ".  \n");
 		var damage:Number = scalingBonusIntelligence() * spellModBlack();
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (monster.plural) damage *= 5;
+		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -2395,8 +2699,10 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -2491,6 +2797,7 @@ public class CombatMagic extends BaseCombatContent {
 			monster.HP -= lifesiphon;
 			HPChange(lifesiphon, false);
 			player.createStatusEffect(StatusEffects.LifeSiphon, 15, lifesiphon, 0, 0);
+			MagicAddonEffect();
 		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -2540,6 +2847,7 @@ public class CombatMagic extends BaseCombatContent {
 			consumingdarkness = Math.round(consumingdarkness);
 			monster.createStatusEffect(StatusEffects.ConsumingDarkness, 7, consumingdarkness, 0, 0);
 			doDarknessDamage(consumingdarkness, true, true);
+			MagicAddonEffect();
 		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -2596,6 +2904,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (lustDmg < 1) lustDmg = 1;
 			monster.teased(lustDmg, false);
 			dynStats("lus", 10);
+			MagicAddonEffect();
 		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -2646,6 +2955,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) CurseOfWeepingMod = Math.round(CurseOfWeepingMod * 1.2);
 		monster.createStatusEffect(StatusEffects.CurseOfWeeping, 6, CurseOfWeepingMod, 0, 0);
 		doDamage(CurseOfWeepingMod, true, true);
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
@@ -2773,6 +3083,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
@@ -2844,6 +3155,7 @@ public class CombatMagic extends BaseCombatContent {
 			//}
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" " + monster.a + monster.short + " is encased in a thick layer of ice.\n\n");
+			MagicAddonEffect();
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 			if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
 			monster.createStatusEffect(StatusEffects.FrozenSolid,5,0,0,0);
@@ -2879,7 +3191,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText("You begin to channel magic, the air temperature dropping around you.");
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 5, 0, 0, 0);
-			player.createStatusEffect(StatusEffects.CooldownSpellBlackTier3, 12, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.CooldownSpellPolarMidnight, 12, 0, 0, 0);
 			if (player.hasPerk(PerkLib.GlacialStormSu)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 3, 1);
 			outputText("\n\n");
 			enemyAI();
@@ -3002,6 +3314,7 @@ public class CombatMagic extends BaseCombatContent {
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
@@ -3073,6 +3386,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" " + monster.capitalA + monster.short + " reels from the impact, trying to recover from this devastating assault as a meteor crash in the area.\n\n");
+			MagicAddonEffect();
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 			damage *= 10;
 			if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
@@ -3109,7 +3423,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText("You begin to channel magic, the sky reddening above you.");
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.ChanneledAttackType, 6, 0, 0, 0);
-			player.createStatusEffect(StatusEffects.CooldownSpellWhiteTier3, 12, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.CooldownSpellMeteorShower, 12, 0, 0, 0);
 			if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 3, 1);
 			outputText("\n\n");
 			enemyAI();
@@ -3177,6 +3491,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText(", gorging on its owner’s life force to replenish your own. Soon enough the spell is over and your shadow returns to you, leaving you better for the wear. <b>(<font color=\"#800000\">" + nosferatu + "</font>)</b>");
 			monster.HP -= nosferatu;
 			HPChange(nosferatu,false);
+			MagicAddonEffect();
 		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -3448,6 +3763,7 @@ public class CombatMagic extends BaseCombatContent {
 				if(monster.plural && monster.short != "imp horde") outputText("are blinded!</b>");
 				else outputText("is blinded!</b>");
 				monster.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20,0,0,0);
+				MagicAddonEffect();
                 if(monster is Diva){(monster as Diva).handlePlayerSpell("blind");}
 				if(monster.short == "Isabella")
 					if (SceneLib.isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.");
@@ -3470,13 +3786,12 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	//(30) Whitefire – burns the enemy for 10 + int/3 + rand(int/2) * spellMod.
 	public function spellWhitefire():void {
-		var damage:Number;
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
 		else useMana(40, 5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhiteTier1,spellWhiteCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhitefire,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if (monster is Doppleganger)
 		{
@@ -3492,62 +3807,8 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
-		{
-			//Attack gains burn DoT for 2-3 turns.
-			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
-			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
-			damage = scalingBonusIntelligence() * spellModWhite();
-			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
-			//Determine if critical hit!
-			var crit:Boolean = false;
-			var critChance:int = 5;
-			critChance += combatMagicalCritical();
-			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-			if (rand(100) < critChance) {
-				crit = true;
-				damage *= 1.75;
-			}
-			damage *= 1.75;
-			if (player.armor == armors.BLIZZ_K) damage *= 0.5;
-			if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
-			if (player.hasPerk(PerkLib.Omnicaster)) {
-				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
-				else damage *= 0.2;
-				damage = Math.round(damage);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
-					doFireDamage(damage, true, true);
-					doFireDamage(damage, true, true);
-				}
-				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
-					doFireDamage(damage, true, true);
-					doFireDamage(damage, true, true);
-				}
-			}
-			else doFireDamage(damage, true, true);
-			if (crit) outputText(" <b>*Critical Hit!*</b>");
-			if (monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
-			outputText("\n\n");
-			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-			checkAchievementDamage(damage);
-			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-			spellPerkUnlock();
-			combat.heroBaneProc(damage);
-			statScreenRefresh();
-		}
-		else
-		{
-			clearOutput();
-			spellWhitefire2();
-		}
+		else if (monster is Lethice && (monster as Lethice).fightPhase == 2) spellWhitefire3();
+		else spellWhitefire4();
 		if (monster.HP <= monster.minHP())
 		{
 			doNext(endHpVictory);
@@ -3563,10 +3824,104 @@ public class CombatMagic extends BaseCombatContent {
 		}
 	}
 	public function spellWhitefire2():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
+		else useMana(40, 5);
+		player.wrath -= 100;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhitefireEx,spellWhiteCooldown(),0,0,0);
+		if (handleShell()){return;}
+		if (monster is Doppleganger)
+		{
+			(monster as Doppleganger).handleSpellResistance("whitefire");
+			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+			spellPerkUnlock();
+			return;
+		}
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		else if (monster is Lethice && (monster as Lethice).fightPhase == 2) spellWhitefire3(true);
+		else spellWhitefire4(true);
+		if (monster.HP <= monster.minHP())
+		{
+			doNext(endHpVictory);
+		}
+		else
+		{
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+			{
+				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			}
+			enemyAI();
+		}
+	}
+	public function spellWhitefire3(edgy:Boolean = false):void {
+		//Attack gains burn DoT for 2-3 turns.
+		var damage:Number = 0;
+		outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
+		monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
+		damage = scalingBonusIntelligence() * spellModWhite();
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (edgy) damage *= 2;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage *= 1.75;
+		if (player.armor == armors.BLIZZ_K) damage *= 0.5;
+		if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+			}
+		}
+		else doFireDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		if (monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		MagicAddonEffect();
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
+		checkAchievementDamage(damage);
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+	}
+	public function spellWhitefire4(edgy:Boolean = false):void {
 		outputText("You narrow your eyes, focusing your mind with deadly intent.  You snap your fingers and " + monster.a + monster.short + " is enveloped in a flash of white flames!\n");
 		if(monster is Diva){(monster as Diva).handlePlayerSpell("whitefire");}
 		var damage:Number = scalingBonusIntelligence() * spellModWhite();
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -3612,8 +3967,10 @@ public class CombatMagic extends BaseCombatContent {
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -3629,7 +3986,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
 		else useMana(40, 5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhiteTier1,spellWhiteCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellLightningBolt,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -3638,14 +3995,35 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		spellLightningBolt2();
+		spellLightningBolt3();
 		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
 	public function spellLightningBolt2():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
+		else useMana(40, 5);
+		player.wrath -= 100;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellLightningBoltEx,spellWhiteCooldown(),0,0,0);
+		if (handleShell()){return;}
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		clearOutput();
+		spellLightningBolt3(true);
+		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	public function spellLightningBolt3(edgy:Boolean = false):void {
 		outputText("You charge out energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " !\n");
 		var damage:Number = scalingBonusIntelligence() * spellModWhite();
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -3690,8 +4068,10 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -3702,13 +4082,13 @@ public class CombatMagic extends BaseCombatContent {
 	
 	//(50) Pyre Burst – aoe fire spell
 	public function spellPyreBurst():void {
-		var damage:Number;
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) player.HP -= spellCostWhite(200);
-		else useMana(200,5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhiteTier2,spellWhiteCooldown(),0,0,0);
+		else useMana(200, 5);
+		player.wrath -= 100;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellPyreBurst,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -3716,109 +4096,8 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
-		{
-			//Attack gains burn DoT for 2-3 turns.
-			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
-			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
-			damage = scalingBonusIntelligence() * spellModWhite();
-			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
-			if (monster.plural) damage *= 5;
-			//Determine if critical hit!
-			var crit:Boolean = false;
-			var critChance:int = 5;
-			critChance += combatMagicalCritical();
-			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-			if (rand(100) < critChance) {
-				crit = true;
-				damage *= 1.75;
-			}
-			damage *= 1.75;
-			if (player.armor == armors.BLIZZ_K) damage *= 0.5;
-			if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
-			if (player.hasPerk(PerkLib.Omnicaster)) {
-				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
-				else damage *= 0.2;
-				damage = Math.round(damage);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
-					doFireDamage(damage, true, true);
-					doFireDamage(damage, true, true);
-				}
-				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
-					doFireDamage(damage, true, true);
-					doFireDamage(damage, true, true);
-				}
-			}
-			else doFireDamage(damage, true, true);
-			if (crit) outputText(" <b>*Critical Hit!*</b>");
-		}
-		else
-		{
-			clearOutput();
-			outputText("You wave the signs with your hands before striking the grounds causing an expending wave of flames to wash over " + monster.a + monster.short + ".\n");
-			damage = scalingBonusIntelligence() * spellModWhite();
-			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
-			if (monster.plural) damage *= 5;
-			//Determine if critical hit!
-			var critChance2:int = 5;
-			critChance2 += combatMagicalCritical();
-			if (rand(100) < critChance2) {
-				crit = true;
-				damage *= 1.75;
-			}
-			//High damage to goes.
-			damage = calcInfernoMod(damage);
-			if (player.armor == armors.BLIZZ_K) damage *= 0.5;
-			if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
-			if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
-			if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
-			damage = Math.round(damage);
-			outputText(monster.capitalA + monster.short + " takes ");
-			if (player.hasPerk(PerkLib.Omnicaster)) {
-				if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
-				else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
-				else damage *= 0.2;
-				damage = Math.round(damage);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				doFireDamage(damage, true, true);
-				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
-					doFireDamage(damage, true, true);
-					doFireDamage(damage, true, true);
-				}
-				if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
-					doFireDamage(damage, true, true);
-					doFireDamage(damage, true, true);
-				}
-			}
-			else doFireDamage(damage, true, true);
-			outputText(" damage.");
-			if (crit) outputText(" <b>*Critical Hit!*</b>");
-			//Using fire attacks on the goo]
-			if(monster.short == "goo-girl") {
-				outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
-				if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
-			}
-		}
-		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
-		outputText("\n\n");
-		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-		checkAchievementDamage(damage);
-		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
-		spellPerkUnlock();
-		combat.heroBaneProc(damage);
-		statScreenRefresh();
+		else if (monster is Lethice && (monster as Lethice).fightPhase == 2) spellPyreBurst3(true);
+		else spellPyreBurst4(true);
 		if (monster.HP <= monster.minHP())
 		{
 			doNext(endHpVictory);
@@ -3833,6 +4112,155 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 		}
 	}
+	public function spellPyreBurst2():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) player.HP -= spellCostWhite(200);
+		else useMana(200,5);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellPyreBurstEx,spellWhiteCooldown(),0,0,0);
+		if (handleShell()){return;}
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		else if (monster is Lethice && (monster as Lethice).fightPhase == 2) spellPyreBurst3(true);
+		else spellPyreBurst4(true);
+		if (monster.HP <= monster.minHP())
+		{
+			doNext(endHpVictory);
+		}
+		else
+		{
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+			{
+				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			}
+			enemyAI();
+		}
+	}
+	public function spellPyreBurst3(edgy:Boolean = false):void {
+		var damage:Number = 0;
+		//Attack gains burn DoT for 2-3 turns.
+		outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
+		monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
+		damage = scalingBonusIntelligence() * spellModWhite();
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (monster.plural) damage *= 5;
+		if (edgy) damage *= 2;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage *= 1.75;
+		if (player.armor == armors.BLIZZ_K) damage *= 0.5;
+		if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+			}
+		}
+		else doFireDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		MagicAddonEffect();
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
+		checkAchievementDamage(damage);
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+	}
+	public function spellPyreBurst4(edgy:Boolean = false):void {
+		var damage:Number = 0;
+		clearOutput();
+		outputText("You wave the signs with your hands before striking the grounds causing an expending wave of flames to wash over " + monster.a + monster.short + ".\n");
+		damage = scalingBonusIntelligence() * spellModWhite();
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (monster.plural) damage *= 5;
+		if (edgy) damage *= 2;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance2:int = 5;
+		critChance2 += combatMagicalCritical();
+		if (rand(100) < critChance2) {
+			crit = true;
+			damage *= 1.75;
+		}
+		//High damage to goes.
+		damage = calcInfernoMod(damage);
+		if (player.armor == armors.BLIZZ_K) damage *= 0.5;
+		if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
+		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
+		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
+		damage = Math.round(damage);
+		outputText(monster.capitalA + monster.short + " takes ");
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doFireDamage(damage, true, true);
+				doFireDamage(damage, true, true);
+			}
+		}
+		else doFireDamage(damage, true, true);
+		outputText(" damage.");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		//Using fire attacks on the goo]
+		if(monster.short == "goo-girl") {
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
+			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
+		}
+		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		MagicAddonEffect();
+		outputText("\n\n");
+		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
+		checkAchievementDamage(damage);
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+	}
 
 //(50) Chain Lightning - aoe lighting spell
 	public function spellChainLightning():void {
@@ -3841,7 +4269,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) player.HP -= spellCostWhite(200);
 		else useMana(200,5);
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellWhiteTier2,spellWhiteCooldown(),0,0,0);
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellChainLighting,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
@@ -3849,6 +4277,26 @@ public class CombatMagic extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
+		spellChainLightning3();
+	}
+	public function spellChainLightning2():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		doNext(combatMenu);
+		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) player.HP -= spellCostWhite(200);
+		else useMana(200, 5);
+		player.wrath -= 100;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellChainLightingEx,spellWhiteCooldown(),0,0,0);
+		if (handleShell()){return;}
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		spellChainLightning3(true);
+	}
+	public function spellChainLightning3(edgy:Boolean = false):void {
 		clearOutput();
 		outputText("You charge energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " ");
 		var damage:Number = scalingBonusIntelligence() * spellModWhite();
@@ -3857,6 +4305,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText("that jumps from one target to another ");
 			damage *= 5;
 		}
+		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -3901,8 +4350,10 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);

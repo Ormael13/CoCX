@@ -19,22 +19,16 @@ import classes.internals.*;
 	public class Minotaur extends Monster
 	{
 		public var hasAxe:Boolean;
-		
-		override protected function performCombatAction():void
-		{
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-				if (rand(4) == 0) special1();
-				else {
-					createStatusEffect(StatusEffects.Attacks, 1, 0, 0, 0);
-					eAttack();
-				}
+
+		public var hasTwoAttacks:Boolean = false;
+
+		override public function eAttack():void {
+			if (hasTwoAttacks) {
+				createStatusEffect(StatusEffects.Attacks, 1, 0, 0, 0);
 			}
-			else {
-				if (rand(4) == 0) special1();
-				else eAttack();
-			}
+			super.eAttack();
 		}
-		
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			/*if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
@@ -196,7 +190,13 @@ import classes.internals.*;
 			this.lustVuln = hasAxe?0.84:0.87;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(15) + 15;
-			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
+			this.abilities = [
+				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[], weight: 3},
+				{call: SceneLib.mountain.minotaurScene.minoPheromones, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]}
+			];
+			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
+				hasTwoAttacks = true;
+			}
 			this.tailType = Tail.COW;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();

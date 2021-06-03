@@ -51,6 +51,7 @@ package classes.Items
 		
 		//Pre-Enchanted rings
 		public const CRIMRNG:Jewelry = new Jewelry("CrimRng", "Crimst.Ring", "crimstone ring", "an enchanted crimstone ring", MODIFIER_MINIMUM_LUST, 10, 1000, "This ring is topped with crimstone. It is said that this will help to keep your desires burning. \n\nType: Jewelry (Ring) \nBase value: 1,000 \nSpecial: Increases minimum lust by 10.","Ring");
+		public const DMTO:DemonicMageTailOrnament = new DemonicMageTailOrnament();
 		public const FERTRNG:Jewelry = new Jewelry("FertRng", "FertiteRing", "fertite ring", "an enchanted fertite ring", MODIFIER_FERTILITY, 20, 1000, "This ring is topped with fertite. It is said that this will make you more virile and fertile. \n\nType: Jewelry (Ring) \nBase value: 1,000 \nSpecial: Increases cum production by 20 percent and ferility by 20.","Ring");
 		public const ICE_RNG:Jewelry = new Jewelry("Ice_Rng", "Icestn.Ring", "icestone ring", "an enchanted icestone ring", MODIFIER_MINIMUM_LUST, -10, 2000, "This ring is topped with icestone. It is said that this will counter ever-burning desires. \n\nType: Jewelry (Ring) \nBase value: 2,000 \nSpecial: Reduces minimum lust by 10.","Ring");
 		public const SOULRNG:Jewelry = new Jewelry("SoulRng", "Soul Ring", "soulmetal ring", "a soulmetal ring", MODIFIER_SF, 100, 1250, "This simple ring is made from low quality soulmetal. Despite it seemly simplicity it allow for slight compresion of it weaver soulforce allowing storing a little bit more of it. \n\nType: Jewelry (Ring) \nBase value: 1250 \nSpecial: Increases maximum Soulforce by 100.","Ring");
@@ -87,6 +88,7 @@ package classes.Items
 		public const RINGTOU:RingOfToughness = new RingOfToughness();
 		public const RINGWIS:RingOfWisdom = new RingOfWisdom();
 		public const EZEKIELS:Jewelry = new Jewelry("EzekielS", "EzekielSignet", "Ezekiel's Signet", "an Ezekiel's Signet", 0, 0, 100, "A signet rumored to be blessed by the Ezekiel himself. Is that real one or just another fake signet merchant sold you? \n\nType: Jewelry (Ring) \nBase value: 100","Ring");
+		public const ONIGOURD:OniGourd = new OniGourd();
 		//public const RINGWIS:Bullseye = new RingWisdom();
 			
 		//Normal ring

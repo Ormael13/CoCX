@@ -5,7 +5,9 @@ package classes.internals
 {
 	import classes.*;
 
-	public class Utils extends Object
+import flash.utils.describeType;
+
+public class Utils extends Object
 	{
 		private static const NUMBER_WORDS_NORMAL:Array		= ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 		private static const NUMBER_WORDS_CAPITAL:Array		= ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
@@ -40,7 +42,7 @@ package classes.internals
 			for (var x:int = 1; x < stringList.length - 1; x++) concat += ", " + stringList[x];
 			return concat + " and " + stringList[stringList.length - 1];
 		}
-		
+
 		/**
 		 * @return input if it is not null or undefined, otherwise defaultValue
 		 */
@@ -100,18 +102,31 @@ package classes.internals
 		}
 		/**
 		 * Mimics JS Object.keys
+		 * For non-dynamic objects and/or getting all defined properties, set reflect = true
 		 */
-		public static function keys(o:Object):/*String*/Array {
+		public static function keys(o:Object, reflect:Boolean = false):/*String*/Array {
 			var r:/*String*/Array = [];
-			for (var k:String in o) r.push(k);
+			if (reflect) {
+				var desc:XML = describeType(o);
+				for each (var node:XML in desc.*) {
+					var tag:String = node.name();
+					if (tag === "variable" || tag === "constant" || tag === "method") {
+						r.push(node.@name.toString());
+					}
+				}
+			} else {
+				for (var k:String in o) r.push(k);
+			}
 			return r;
 		}
 		/**
 		 * Mimics JS Object.values
+		 * For non-dynamic objects and/or getting all defined properties, set reflect = true
 		 */
-		public static function values(o:Object):Array {
+		public static function values(o:Object, reflect:Boolean = false):Array {
 			var r:Array = [];
-			for each(var k:* in o) r.push(k);
+			var ks:Array = keys(o, reflect);
+			for each(var k:String in ks) r.push(o[k]);
 			return r;
 		}
 		/**
@@ -121,7 +136,7 @@ package classes.internals
 			target.push.apply(target, values);
 			return target;
 		}
-		
+
 		/**
 		 * @return src.find( el => el[propName] == propValue ) || defaultValue
 		 */
@@ -131,7 +146,7 @@ package classes.internals
 			}
 			return defaultValue;
 		}
-		
+
 		/**
 		 * @return src.filter( el => el && el[propName] == propValue )
 		 */
@@ -161,6 +176,13 @@ package classes.internals
 				if (!el) continue;
 				result.push({label: propname ? el[propname] : (""+el), data:el});
 			}
+			result.sort(function(a:*, b:*):int {
+				if (a.label > b.label) {
+					return 1;
+				} else {
+					return -1;
+				}
+			});
 			return result;
 		}
 		/**

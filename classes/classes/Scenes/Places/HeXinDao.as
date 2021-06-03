@@ -63,46 +63,9 @@ public class HeXinDao extends BaseContent
 	}
 	public function riverislandVillageStuffLunar():void {
 		clearOutput();
+        var zodiacName:Array = ["monkey", "rooster", "dog", "pig", "rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "goat"];
 		flags[kFLAGS.LUNAR_NEW_YEAR] = date.fullYear%12;
-        switch (flags[kFLAGS.LUNAR_NEW_YEAR]){
-            case 0:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "monkey"
-                break;
-            case 1:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rooster"
-                break;
-            case 2:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "dog"
-                break;
-            case 3:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "pig"
-                break;
-            case 4:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rat"
-                break;
-            case 5:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "ox"
-                break;
-            case 6:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "tiger"
-                break;
-            case 7:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "rabbit"
-                break;
-            case 8:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "dragon"
-                break;
-            case 9:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "snake"
-                break;
-            case 10:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "horse"
-                break;
-            case 11:
-                flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = "goat"
-                break;
-        }
-
+        flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = zodiacName[int(flags[kFLAGS.LUNAR_NEW_YEAR])];
         outputText("You go deeper in town and discover the whole place is indeed covered in red. The big question now is what should you check upon first?");
 		menu();
 		if (!player.hasStatusEffect(StatusEffects.CanGetLunarGift)) addButton(0, "Gifts", riverislandVillageStuffLunarGifts);
@@ -231,7 +194,7 @@ public class HeXinDao extends BaseContent
     }
     public function golemmerchant():void {
         clearOutput();
-        outputText("You enter a shop titled 'Soul Items' from the sign on its entrance. Inside you see a few shelves with many different items on display.  It doesn't seem like this merchant has a wide choice of things to sell, but for someone at the beginning of their soul cultivation path, it's probably enough.  Sensing motion from a corner of the shop pernamently covered in darkness, a person appears without making a sound.  'He' is around five feet tall with the appearance of some kind of demonic monster.");
+        outputText("You enter a shop titled 'Soul Items' from the sign on its entrance. Inside you see a few shelves with many different items on display.  It doesn't seem like this merchant has a wide choice of things to sell, but for someone at the beginning of their soul cultivation path, it's probably enough.  Sensing motion from a corner of the shop permanently covered in darkness, a person appears without making a sound.  'He' is around five feet tall with the appearance of some kind of demonic monster.");
         if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) outputText(" But he does look quite similar to the gargoyle from the cathedral.");
         outputText("\n\n\"<i>Welcome to my master's shop, dear customer. Feel free to look around,</i>\" he says. \n\n");
         if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
@@ -792,7 +755,7 @@ public class HeXinDao extends BaseContent
 	}
 	public function ermaswiftarrowmerchantarcherytrainingYes():void {
 		if (player.statusEffectv1(StatusEffects.Kelt) > 99) {
-			outputText("\"<i>Need more training? Sure, but it's 100 gems, and as usual paid up front.</i>\"");
+			outputText("\n\nShe looks up and down at you, and says \"<i>I'm sorry, but I don't think I have much more that I can teach you that you don't already know.</i>\"");
 			doNext(ermaswiftarrowmerchant);
 		}
 		else {

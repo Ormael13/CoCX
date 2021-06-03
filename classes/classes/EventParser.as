@@ -1,5 +1,6 @@
 package classes {
 import classes.BodyParts.Hair;
+import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ArmorLib;
@@ -187,8 +188,8 @@ public class EventParser {
             }
             player.HP = HPPercent*player.maxHP();
             SceneLib.combat.regeneration(false);
-            if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration(false);
-            if (player.findPerk(PerkLib.JobSorcerer) >= 0 || player.findPerk(PerkLib.JobElementalConjurer) >= 0) SceneLib.combat.manaregeneration(false);
+            if (player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration(false);
+            if (player.hasPerk(PerkLib.JobSorcerer) || player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration(false);
             SceneLib.combat.wrathregeneration(false);
             //Inform all time aware classes that a new hour has arrived
             for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) {
@@ -346,14 +347,14 @@ public class EventParser {
         }
         //Unequip undergarment if you have bizarre lower body.
         if (player.lowerGarment != UndergarmentLib.NOTHING) {
-            if (player.isTaur() || player.isDrider() || player.isScylla() || (player.isNaga() && player.lowerGarmentPerk != "NagaWearable")) {
+            if (player.isTaur() || player.isDrider() || player.isScylla() || (player.isNaga() && player.lowerGarmentPerk != "NagaWearable") || player.lowerBody == LowerBody.GHOST_2) {
                 EngineCore.outputText("You feel something slipping off as if by magic. Looking down on the ground, you realize it's your [lowergarment]. Looking down at your lower body, you let out a sigh and pick up your [lowergarment]. ");
                 SceneLib.inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 1), playerMenu);
                 return true;
             }
         }
         //Unequip shield if you're wielding a large weapon.
-        if (((player.weaponPerk == "Large" && player.findPerk(PerkLib.GigantGrip) < 0) || player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") && player.shield != ShieldLib.NOTHING) {
+        if (((player.weaponPerk == "Large" && !player.hasPerk(PerkLib.GigantGrip)) || player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") && player.shield != ShieldLib.NOTHING) {
             EngineCore.outputText("Your current weapon requires the use of two hands. As such, your shield has been unequipped automatically. ");
             SceneLib.inventory.takeItem(player.setShield(ShieldLib.NOTHING), playerMenu);
             return true;
@@ -452,28 +453,28 @@ public class EventParser {
         //No diapause?  Normal!
         var player:Player = CoC.instance.player;
         var flags:DefaultDict = CoC.instance.flags;
-        if (player.findPerk(PerkLib.Diapause) < 0) {
+        if (!player.hasPerk(PerkLib.Diapause)) {
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
                 flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
                 return 2;
             }
             //DOUBLE PREGGERS SPEED
-            if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+            if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             //DOUBLE PREGGERS SPEED
-            if (player.findPerk(PerkLib.MagicalFertility) >= 0) {
+            if (player.hasPerk(PerkLib.MagicalFertility)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
                 flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
                 return 2;
             }
-            if (player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) {
+            if (player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
-            if (player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) {
+            if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
@@ -481,7 +482,7 @@ public class EventParser {
                 return 2;
             }
             //DOUBLE PREGGERS SPEED
-            if (player.findPerk(PerkLib.BroodMother) >= 0) {
+            if (player.hasPerk(PerkLib.BroodMother)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
@@ -517,21 +518,21 @@ public class EventParser {
                 return 2;
             }
             //DOUBLE PREGGERS SPEED
-            if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+            if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             //DOUBLE PREGGERS SPEED
-            if (player.findPerk(PerkLib.MagicalFertility) >= 0) {
+            if (player.hasPerk(PerkLib.MagicalFertility)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
                 flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
                 return 2;
             }
-            if (player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) {
+            if (player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
-            if (player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) {
+            if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
@@ -539,7 +540,7 @@ public class EventParser {
                 return 2;
             }
             //DOUBLE PREGGERS SPEED
-            if (player.findPerk(PerkLib.BroodMother) >= 0) {
+            if (player.hasPerk(PerkLib.BroodMother)) {
                 if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             }
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
@@ -556,7 +557,7 @@ public class EventParser {
         var player:Player = CoC.instance.player;
         var chance:Number = player.statusEffectv1(StatusEffects.BirthedImps) * 2;
         if (chance > 7) chance = 7;
-        if (player.findPerk(PerkLib.PiercedLethite) >= 0) chance += 4;
+        if (player.hasPerk(PerkLib.PiercedLethite)) chance += 4;
         if (player.inHeat) chance += 2;
         if (SceneLib.vapula.vapulaSlave()) chance += 7;
         //Reduce chance
@@ -693,59 +694,59 @@ public class EventParser {
             return true;
         }
         else if (player.hairLength >= 1 && currentLength < 1) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairLength >= 3 && currentLength < 3) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairLength >= 6 && currentLength < 6) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairType == Hair.GORGON && player.hairLength >= 6 && currentLength < 6) {
-            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairLength >= 10 && currentLength < 10) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairType == Hair.GORGON && player.hairLength >= 10 && currentLength < 10) {
-            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairLength >= 16 && currentLength < 16) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairType == Hair.GORGON && player.hairLength >= 16 && currentLength < 16) {
-            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairLength >= 26 && currentLength < 26) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairType == Hair.GORGON && player.hairLength >= 26 && currentLength < 26) {
-            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairLength >= 40 && currentLength < 40) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairType == Hair.GORGON && player.hairLength >= 40 && currentLength < 40) {
-            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairLength >= 40 && player.hairLength >= player.tallness && currentLength < player.tallness) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairType == Hair.GORGON && player.hairLength >= 40 && player.hairLength >= player.tallness && currentLength < player.tallness) {
-            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         return false;
@@ -762,23 +763,23 @@ public class EventParser {
             return true;
         }
         else if (player.beardLength >= 0.2 && tempBeard < 0.2) {
-            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.beardLength >= 0.5 && tempBeard < 0.5) {
-            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.beardLength >= 1.5 && tempBeard < 1.5) {
-            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.beardLength >= 3 && tempBeard < 3) {
-            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.beardLength >= 6 && tempBeard < 6) {
-            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
             return true;
         }
 

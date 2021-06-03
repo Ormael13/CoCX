@@ -67,10 +67,10 @@ public class GoblinShaman extends Goblin
 					damage *= 1.5;
 					outputText("It's super effective! ");
 				}
-				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damage *= 1.15;
-				else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damage *= 1.3;
-				else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 1.5;
-				else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 2;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damage *= 1.2;
+				else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damage *= 1.5;
+				else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 2;
+				else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 3.5;
 				damage = Math.round(damage);
 				player.takeFireDamage(damage, true);
 				fatigue += spellCostWhitefire;
@@ -177,9 +177,12 @@ public class GoblinShaman extends Goblin
 							consumables.ORANGDY,
 							consumables.GREEN_D,
 							consumables.PURPDYE);
-			this.special1 = goblinDrugAttack;
-			this.special2 = goblinTeaseAttack;
-			this.special3 = castSpell;
+			this.abilities = [
+				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
+				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},
+				{ call: goblinTeaseAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+				{ call: castSpell, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[], weight:2},
+			]
 			checkMonster();
 		}
 		

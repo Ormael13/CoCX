@@ -109,7 +109,7 @@ public class MinotaurBlood extends Consumable {
 			}
 			changes++;
 		}
-		if (game.mutations.blockingBodyTransformations()) changeLimit = 0;
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 		//SEXUAL
 		//Boosts ball size MORE than equinum :D:D:D:D:D:D:
 		if (changes < changeLimit && rand(2) == 0 && player.ballSize <= 5 && player.horseCocks() > 0) {

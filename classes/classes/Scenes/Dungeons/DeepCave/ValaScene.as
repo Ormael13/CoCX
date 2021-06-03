@@ -932,7 +932,8 @@ public class ValaScene extends BaseContent implements SaveableState
 				if (player.breastRows[0].breastRating < 5 && rand(4) == 0) growth++;
 				if (player.breastRows[0].breastRating < 6 && rand(5) == 0) growth++;
 			}
-			player.createPerk(PerkLib.TransformationImmunity,0,0,0,0)
+			player.createPerk(PerkLib.TransformationImmunityFairy,0,0,0,0)
+			player.removeAllRacialMutation();
 			outputText("\n\n");
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			inventory.takeItem(armors.FQR, camp.returnToCampUseOneHour);
@@ -941,7 +942,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			spriteSelect(60);
 			clearOutput();
 			outputText("You announce your decision to a somewhat disappointed Vala but she nods in understanding.\n\n" +
-					"\"<i>It’s ok, [name]. No one will force you to make that choice through I wish you did.<i>\"\n\n" +
+					"\"<i>It’s ok, [name]. No one will force you to make that choice through I wish you did.</i>\"\n\n" +
 					"You wave Vala and the fairies goodbye as you head back to camp. Still you can feel their disappointed eyes on your back as you leave the grove, likely not to return again.\n");
 			ValaFairyQueenQuest = QUEST_STAGE_PCDECLINED;
 			doNext(camp.returnToCampUseOneHour);

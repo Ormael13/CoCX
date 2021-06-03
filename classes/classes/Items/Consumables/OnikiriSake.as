@@ -88,7 +88,7 @@ public class OnikiriSake extends Consumable {
 		if (changes < changeLimit && rand(3) == 0 && player.tone < player.maxToneCap()) {
 			outputText(player.modTone(player.maxToneCap(), 3));
 		}
-		if (game.mutations.blockingBodyTransformations()) changeLimit = 0;
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 		//Sexual changed
 		if ((player.gender == 1 || player.gender == 3) && player.cocks.length > 0 && changes < changeLimit && rand(3) == 0) {
 			var selectedCock:int = -1;
@@ -192,9 +192,9 @@ public class OnikiriSake extends Consumable {
 			changes++;
 		}
 		//Skin
-		if (player.skinTone != "red" && player.skinTone != "reddish orange" && player.skinTone != "purple" && player.skinTone != "blue" && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
+		if (player.skinTone != "red" && player.skinTone != "reddish-orange" && player.skinTone != "purple" && player.skinTone != "blue" && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
 			var colorSkin:String;
-			colorSkin = randomChoice("purple","reddish orange","red","blue");
+			colorSkin = randomChoice("purple","reddish-orange","red","blue");
 			player.skinTone = colorSkin;
 			changes++;
 			outputText("\n\nThe heat of the alcohol is getting to you; it's like if your ");
