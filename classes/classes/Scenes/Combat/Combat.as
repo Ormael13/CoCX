@@ -8065,6 +8065,7 @@ public class Combat extends BaseContent {
                 else outputText(" Your opponent is affected by the freezing cold, slowing  down [monster his] reflexes and thoughts as ice creeps on [monster his] body.");
                 monster.statStore.addBuffObject({"spe.mult":-5, "int.mult":-5}, "Black Frost",{text:"Black Frost"});
                 outputText("\n\n");
+                if (monster.HP <= monster.minHP()) doNext(endHpVictory);
             } else {
                 outputText("Your opponent seems not to be affected by the cold of your aura of black frost. Probably because [monster he] is immune to cold temperature effects.");
             }
