@@ -1268,8 +1268,5 @@ import classes.Items.JewelryLib;
 			if (max > 2030) max = 2030;//obecnie max to 2030
 			return max;
 		}
-
-
 	}
-
 }

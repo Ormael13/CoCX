@@ -592,12 +592,13 @@ use namespace CoC;
 			if (rearBody.type == RearBody.YETI_FUR) armorDef += (4 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
-				if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorDef += (10 * newGamePlusMod);
-				if (tailType == Tail.GARGOYLE || tailType == Tail.GARGOYLE_2) armorDef += (10 * newGamePlusMod);
-				if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2) armorDef += (10 * newGamePlusMod);
-				if (wings.type == Wings.GARGOYLE_LIKE_LARGE) armorDef += (10 * newGamePlusMod);
-				if (faceType == Face.DEVIL_FANGS) armorDef += (10 * newGamePlusMod);
+				if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
+				if (tailType == Tail.GARGOYLE || tailType == Tail.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
+				if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
+				if (wings.type == Wings.GARGOYLE_LIKE_LARGE) armorDef += (30 * newGamePlusMod);
+				if (faceType == Face.DEVIL_FANGS) armorDef += (30 * newGamePlusMod);
 			}
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) armorDef += (25 * newGamePlusMod);
 			//Soul Cultivators bonuses
 			if (hasPerk(PerkLib.BodyCultivator)) {
 				armorDef += (1 * newGamePlusMod);
@@ -795,12 +796,13 @@ use namespace CoC;
 			if (lowerBody == LowerBody.DRAGON) armorMDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER) armorMDef += (4 * newGamePlusMod);
 			//if (hasPerk(PerkLib.Vulpesthropy)) armorMDef += 10 * newGamePlusMod;
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) armorMDef += (25 * newGamePlusMod);
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
-				if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorMDef += (10 * newGamePlusMod);
-				if (tailType == Tail.GARGOYLE || tailType == Tail.GARGOYLE_2) armorMDef += (10 * newGamePlusMod);
-				if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2) armorMDef += (10 * newGamePlusMod);
-				if (wings.type == Wings.GARGOYLE_LIKE_LARGE) armorMDef += (10 * newGamePlusMod);
-				if (faceType == Face.DEVIL_FANGS) armorMDef += (10 * newGamePlusMod);
+				if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorMDef += (30 * newGamePlusMod);
+				if (tailType == Tail.GARGOYLE || tailType == Tail.GARGOYLE_2) armorMDef += (30 * newGamePlusMod);
+				if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2) armorMDef += (30 * newGamePlusMod);
+				if (wings.type == Wings.GARGOYLE_LIKE_LARGE) armorMDef += (30 * newGamePlusMod);
+				if (faceType == Face.DEVIL_FANGS) armorMDef += (30 * newGamePlusMod);
 			}
 			//Soul Cultivators bonuses
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
@@ -1115,6 +1117,11 @@ use namespace CoC;
 			return weaponRangePerk == "Bow" || weaponRangePerk == "Crossbow";
 		}
 		//Is in ... mech (large sized races mech)(have upgrade option to allow smaller than large races pilot it)
+		//Player have any party member with them
+		public function companionsInPCParty():Boolean
+		{
+			return flags[kFLAGS.PLAYER_COMPANION_1] != "" || flags[kFLAGS.PLAYER_COMPANION_2] != "" || flags[kFLAGS.PLAYER_COMPANION_3] != "";
+		}
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
 		{
@@ -5429,11 +5436,11 @@ use namespace CoC;
 			if (skinType == Skin.PLAIN && skinAdj == "flawless")
 				fairyCounter++;
 			if (hasPerk(PerkLib.FeyArcaneBloodstream))
-				fairyCounter++;
+				fairyCounter += 3;
 			if (hasPerk(PerkLib.FeyArcaneBloodstreamEvolved))
-				fairyCounter++;
+				fairyCounter += 3;
 			if (hasPerk(PerkLib.FeyArcaneBloodstreamFinalForm))
-				fairyCounter++;
+				fairyCounter += 3;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				fairyCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && fairyCounter >= 4)
@@ -11527,24 +11534,6 @@ use namespace CoC;
 					maxIntCap2 += 25;
 				}
 			}
-			if (fairyScore() >= 23) {
-				if (fairyScore() >= 26) {
-					maxStrCap2 -= 25;
-					maxTouCap2 -= 10;
-					maxSpeCap2 += 200;
-					maxIntCap2 += 200;
-					maxWisCap2 += 45;
-					currentSen += 20;
-				}
-				else {
-					maxStrCap2 -= 25;
-					maxTouCap2 -= 10;
-					maxSpeCap2 += 185;
-					maxIntCap2 += 185;
-					maxWisCap2 += 30;
-					currentSen += 20;
-				}
-			}//+10/10-20
 			if (cancerScore() >= 8) {
 				if (cancerScore() >= 20) {
 					maxStrCap2 += 125;
@@ -12760,29 +12749,57 @@ use namespace CoC;
 				maxWisCap2 += 130;
 				maxLibCap2 += 200;
 			}//+110 strength +80 toughness +60 Wisdom +100 Libido +50 sensitivity
-			if (gargoyleScore() >= 22) {
+			if (gargoyleScore() >= 22) {//990
 				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
-					maxStrCap2 += 195;
-					maxTouCap2 += 250;
-					maxSpeCap2 += 50;
-					maxIntCap2 += 30;
+					maxStrCap2 += 300;
+					maxTouCap2 += 510;
+					maxSpeCap2 += 100;
+					maxIntCap2 += 80;
 				}
 				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
-					maxStrCap2 += 50;
-					maxTouCap2 += 250;
-					maxSpeCap2 += 30;
-					maxIntCap2 += 195;
+					maxStrCap2 += 100;
+					maxTouCap2 += 510;
+					maxSpeCap2 += 80;
+					maxIntCap2 += 300;
 				}
 				if (hasPerk(PerkLib.GargoylePure)) {
-					maxWisCap2 += 80;
-					maxLibCap2 -= 10;
+					maxWisCap2 += 130;
+					maxLibCap2 -= 20;
 					currentSen -= 10;
 				}
 				if (hasPerk(PerkLib.GargoyleCorrupted)) {
-					maxWisCap2 -= 10;
-					maxLibCap2 += 80;
+					maxWisCap2 -= 20;
+					maxLibCap2 += 140;
 				}
 			}
+			if (fairyScore() >= 23) {
+				maxStrCap2 -= 20;
+				maxTouCap2 -= 10;
+				if (fairyScore() >= 32) {
+					maxSpeCap2 += 660;
+					maxIntCap2 += 660;
+					maxWisCap2 += 200;
+					currentSen += 50;
+				}
+				else if (fairyScore() >= 29) {
+					maxSpeCap2 += 600;
+					maxIntCap2 += 600;
+					maxWisCap2 += 175;
+					currentSen += 40;
+				}
+				else if (fairyScore() >= 26) {
+					maxSpeCap2 += 540;
+					maxIntCap2 += 540;
+					maxWisCap2 += 150;
+					currentSen += 30;
+				}
+				else {
+					maxSpeCap2 += 480;
+					maxIntCap2 += 480;
+					maxWisCap2 += 125;
+					currentSen += 20;
+				}
+			}//+10/10-20
 			score = atlachNachaScore();
 			if (score >= 30) {
 				//30 Greater Atlach Nacha(360) +115 Strength +135 Toughness +150 Intelligence +150 Libido -50 wisdom +50 min/max sensitivity
@@ -12864,7 +12881,7 @@ use namespace CoC;
 			}, "Racials", {text:"Racials"});
 		}
 
-		public function removeAllRacialMutation(){
+		public function removeAllRacialMutation():void {
 			if (hasPerk(PerkLib.ArachnidBookLung)) {
 				removePerk(PerkLib.ArachnidBookLung);
 				perkPoints += 1;

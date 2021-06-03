@@ -14,7 +14,7 @@ import classes.Scenes.SceneLib;
 public class DarknessElemental extends Monster
 	{
 		public function baseElementalAttack():void {
-			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"Darkness elemental")+" solidifies its fist within condensed darkness before jabbing at you.");
+			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"The darkness elemental")+" envelops its fists within inky shadows before throwing a punch toward you.");
 			var damage:Number = inte + wis;
 			//if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0) damage *= 0.3;
 			if (player.findPerk(PerkLib.LightningAffinity) >= 0) damage *= 3;
@@ -31,7 +31,7 @@ public class DarknessElemental extends Monster
 		}
 		
 		public function fluffyOfPunches():void {
-			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"Darkness elemental")+" wraps darkness around its fists before launching a flurry of jabs against you.");
+			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"The darkness elemental")+" wraps its fists in wicks of darkness before zeroing in for a flurry of punches.");
 			var damage:Number = inte + wis;
 			//if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0) damage *= 0.3;
 			if (player.findPerk(PerkLib.LightningAffinity) >= 0) damage *= 3;

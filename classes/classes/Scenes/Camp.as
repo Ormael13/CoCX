@@ -231,7 +231,7 @@ public class Camp extends NPCAwareContent{
 			//Purifying Murble
 			if (player.cor < 50 && !campCorruptJojo() && !amilyScene.amilyCorrupt() && !vapulaSlave()
 					&& flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 0 && flags[kFLAGS.MARBLE_COUNTUP_TO_PURIFYING] >= 200
-					&& player.findPerk(PerkLib.MarblesMilk) < 0) {
+					&& !player.hasPerk(PerkLib.MarblesMilk)) {
 				hideMenus();
 				marblePurification.BLUHBLUH();
 				return;
@@ -980,7 +980,7 @@ public class Camp extends NPCAwareContent{
 		var canFap:Boolean = !player.hasStatusEffect(StatusEffects.Dysfunction) && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
 		if (player.lust >= 30) {
 			addButton(11, "Masturbate", SceneLib.masturbation.masturbateMenu);
-			if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(11, "Meditate", SceneLib.masturbation.masturbateMenu);
+			if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(11, "Meditate", SceneLib.masturbation.masturbateMenu);
 		}
 		addButton(12, "Wait", doWaitMenu).hint("Wait for one to eigth hours. Or until the night comes.");
 		if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to eight hours. Or until fully healed / night comes.");
@@ -2687,11 +2687,11 @@ private function SparrableNPCsMenu():void {
 			fatRecovery += 2;
 			hpRecovery += 5;
 		}
-		if (player.findPerk(PerkLib.Medicine) >= 0) hpRecovery *= 1.5;
-		if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery += 2;
-		if (player.findPerk(PerkLib.SpeedyRecuperation) >= 0) fatRecovery += 4;
-		if (player.findPerk(PerkLib.SpeedyRejuvenation) >= 0) fatRecovery += 8;
-		if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
+		if (player.hasPerk(PerkLib.Medicine)) hpRecovery *= 1.5;
+		if (player.hasPerk(PerkLib.SpeedyRecovery)) fatRecovery += 2;
+		if (player.hasPerk(PerkLib.SpeedyRecuperation)) fatRecovery += 4;
+		if (player.hasPerk(PerkLib.SpeedyRejuvenation)) fatRecovery += 8;
+		if (player.hasPerk(PerkLib.ControlledBreath)) fatRecovery *= 1.1;
 		if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
 		if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) fatRecovery *= 3;
 		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam)
@@ -2822,10 +2822,10 @@ private function SparrableNPCsMenu():void {
 		var fatRecovery:Number = 2;
 		if (player.level >= 24) fatRecovery += 1;
 		if (player.level >= 42) fatRecovery += 1;
-		if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery += 1;
-		if (player.findPerk(PerkLib.SpeedyRecuperation) >= 0) fatRecovery += 2;
-		if (player.findPerk(PerkLib.SpeedyRejuvenation) >= 0) fatRecovery += 4;
-		if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
+		if (player.hasPerk(PerkLib.SpeedyRecovery)) fatRecovery += 1;
+		if (player.hasPerk(PerkLib.SpeedyRecuperation)) fatRecovery += 2;
+		if (player.hasPerk(PerkLib.SpeedyRejuvenation)) fatRecovery += 4;
+		if (player.hasPerk(PerkLib.ControlledBreath)) fatRecovery *= 1.1;
 		if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
 		if (timeQ == 0) {
 			timeQ = waitingORresting;
@@ -3094,14 +3094,14 @@ private function SparrableNPCsMenu():void {
 		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble")) {
 			multiplier += 0.5;
 		}
-		if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery += 5;
-		if (player.findPerk(PerkLib.SpeedyRecuperation) >= 0) fatRecovery += 10;
-		if (player.findPerk(PerkLib.SpeedyRejuvenation) >= 0) fatRecovery += 20;
-		if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
+		if (player.hasPerk(PerkLib.SpeedyRecovery)) fatRecovery += 5;
+		if (player.hasPerk(PerkLib.SpeedyRecuperation)) fatRecovery += 10;
+		if (player.hasPerk(PerkLib.SpeedyRejuvenation)) fatRecovery += 20;
+		if (player.hasPerk(PerkLib.ControlledBreath)) fatRecovery *= 1.1;
 		if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
 		if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) fatRecovery *= 3;
-		if (player.findPerk(PerkLib.RecuperationSleep) >= 0) multiplier += 1;
-		if (player.findPerk(PerkLib.RejuvenationSleep) >= 0) multiplier += 2;
+		if (player.hasPerk(PerkLib.RecuperationSleep)) multiplier += 1;
+		if (player.hasPerk(PerkLib.RejuvenationSleep)) multiplier += 2;
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
 			if (player.hunger < 25) {
 				outputText("\nYou have difficulty sleeping as your stomach is growling loudly.\n");
@@ -3649,7 +3649,7 @@ public function wakeFromBadEnd():void {
 		fatigueAmount -= player.str / 5;
 		fatigueAmount -= player.tou / 10;
 		fatigueAmount -= player.spe / 10;
-		if (player.findPerk(PerkLib.IronMan) >= 0) fatigueAmount -= 20;
+		if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
 		fatigueAmount /= (helpers + 1);
 		if (fatigueAmount < 15) fatigueAmount = 15;
 		fatigue(fatigueAmount);
@@ -3791,7 +3791,7 @@ public function wakeFromBadEnd():void {
 		if (flags[kFLAGS.MARBLE_PURIFIED] > 0) performancePointsPrediction += 2;
 		if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) performancePointsPrediction += 2;
 		if (flags[kFLAGS.URTA_QUEST_STATUS] > 0) performancePointsPrediction += 2;
-		if (player.findPerk(PerkLib.Enlightened) >= 0) performancePointsPrediction += 1;
+		if (player.hasPerk(PerkLib.Enlightened)) performancePointsPrediction += 1;
 		if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 || flags[kFLAGS.PURE_MARAE_ENDGAME] >= 2) performancePointsPrediction += 3;
 		if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPrediction += 2;
 		if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) >= 4) performancePointsPrediction += 2;
@@ -3865,50 +3865,50 @@ public function wakeFromBadEnd():void {
 					wrath += 5;
 					lust += 3;
 				}
-				if (player.findPerk(PerkLib.AscensionUnlockedPotential) >= 0) {
+				if (player.hasPerk(PerkLib.AscensionUnlockedPotential)) {
 					hp += 80;
 					lust += 6;
 					fatigue += 6;
 				}
-				if (player.findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) {
+				if (player.hasPerk(PerkLib.AscensionUnlockedPotential2ndStage)) {
 					wrath += 10;
 					mana += 12;
 					soulforce += 6;
 				}
-				if (player.findPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) {
+				if (player.hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) {
 					hp += 80;
 					lust += 6;
 					fatigue += 6;
 				}
-				if (player.findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) {
+				if (player.hasPerk(PerkLib.AscensionUnlockedPotential4thStage)) {
 					wrath += 10;
 					mana += 12;
 					soulforce += 6;
 				}
-				if (player.findPerk(PerkLib.UnlockBody) >= 0) hp += 60;
-				if (player.findPerk(PerkLib.UnlockBody2ndStage) >= 0) hp += 60;
-				if (player.findPerk(PerkLib.UnlockBody3rdStage) >= 0) hp += 60;
-				if (player.findPerk(PerkLib.UnlockBody4thStage) >= 0) hp += 60;
-				if (player.findPerk(PerkLib.UnlockEndurance) >= 0) fatigue += 5;
-				if (player.findPerk(PerkLib.UnlockEndurance2ndStage) >= 0) fatigue += 5;
-				if (player.findPerk(PerkLib.UnlockEndurance3rdStage) >= 0) fatigue += 5;
-				if (player.findPerk(PerkLib.UnlockEndurance4thStage) >= 0) fatigue += 5;
-				if (player.findPerk(PerkLib.UnlockForce) >= 0) mana += 10;
-				if (player.findPerk(PerkLib.UnlockForce2ndStage) >= 0) mana += 10;
-				if (player.findPerk(PerkLib.UnlockForce3rdStage) >= 0) mana += 10;
-				if (player.findPerk(PerkLib.UnlockForce4thStage) >= 0) mana += 10;
-				if (player.findPerk(PerkLib.UnlockSpirit) >= 0) soulforce += 5;
-				if (player.findPerk(PerkLib.UnlockSpirit2ndStage) >= 0) soulforce += 5;
-				if (player.findPerk(PerkLib.UnlockSpirit3rdStage) >= 0) soulforce += 5;
-				if (player.findPerk(PerkLib.UnlockSpirit4thStage) >= 0) soulforce += 5;
-				if (player.findPerk(PerkLib.UnlockId) >= 0) wrath += 5;
-				if (player.findPerk(PerkLib.UnlockId2ndStage) >= 0) wrath += 5;
-				if (player.findPerk(PerkLib.UnlockId3rdStage) >= 0) wrath += 5;
-				if (player.findPerk(PerkLib.UnlockId4thStage) >= 0) wrath += 5;
-				if (player.findPerk(PerkLib.UnlockArdor) >= 0) lust += 3;
-				if (player.findPerk(PerkLib.UnlockArdor2ndStage) >= 0) lust += 3;
-				if (player.findPerk(PerkLib.UnlockArdor3rdStage) >= 0) lust += 3;
-				if (player.findPerk(PerkLib.UnlockArdor4thStage) >= 0) lust += 3;
+				if (player.hasPerk(PerkLib.UnlockBody)) hp += 60;
+				if (player.hasPerk(PerkLib.UnlockBody2ndStage)) hp += 60;
+				if (player.hasPerk(PerkLib.UnlockBody3rdStage)) hp += 60;
+				if (player.hasPerk(PerkLib.UnlockBody4thStage)) hp += 60;
+				if (player.hasPerk(PerkLib.UnlockEndurance)) fatigue += 5;
+				if (player.hasPerk(PerkLib.UnlockEndurance2ndStage)) fatigue += 5;
+				if (player.hasPerk(PerkLib.UnlockEndurance3rdStage)) fatigue += 5;
+				if (player.hasPerk(PerkLib.UnlockEndurance4thStage)) fatigue += 5;
+				if (player.hasPerk(PerkLib.UnlockForce)) mana += 10;
+				if (player.hasPerk(PerkLib.UnlockForce2ndStage)) mana += 10;
+				if (player.hasPerk(PerkLib.UnlockForce3rdStage)) mana += 10;
+				if (player.hasPerk(PerkLib.UnlockForce4thStage)) mana += 10;
+				if (player.hasPerk(PerkLib.UnlockSpirit)) soulforce += 5;
+				if (player.hasPerk(PerkLib.UnlockSpirit2ndStage)) soulforce += 5;
+				if (player.hasPerk(PerkLib.UnlockSpirit3rdStage)) soulforce += 5;
+				if (player.hasPerk(PerkLib.UnlockSpirit4thStage)) soulforce += 5;
+				if (player.hasPerk(PerkLib.UnlockId)) wrath += 5;
+				if (player.hasPerk(PerkLib.UnlockId2ndStage)) wrath += 5;
+				if (player.hasPerk(PerkLib.UnlockId3rdStage)) wrath += 5;
+				if (player.hasPerk(PerkLib.UnlockId4thStage)) wrath += 5;
+				if (player.hasPerk(PerkLib.UnlockArdor)) lust += 3;
+				if (player.hasPerk(PerkLib.UnlockArdor2ndStage)) lust += 3;
+				if (player.hasPerk(PerkLib.UnlockArdor3rdStage)) lust += 3;
+				if (player.hasPerk(PerkLib.UnlockArdor4thStage)) lust += 3;
 				if (player.level < 6) {
 					statpoints += 5;
 					perkpoints += 1;
@@ -4129,7 +4129,7 @@ public function wakeFromBadEnd():void {
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 10) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 11;
-			if (player.findPerk(PerkLib.JobMonk) >= 0) {
+			if (player.hasPerk(PerkLib.JobMonk)) {
 				player.removePerk(PerkLib.JobMonk);
 				player.createPerk(PerkLib.JobBrawler, 0, 0, 0, 0);
 			}
@@ -4150,14 +4150,14 @@ public function wakeFromBadEnd():void {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 13;
 			clearOutput();
 			outputText("And we do it again since game got more shiny then before so we would fast give additional polishing to your save. No worry it will be now +20% more shiny ;)");
-			if (player.findPerk(PerkLib.JobSoulCultivator) < 0) player.perkPoints += 1;
+			if (!player.hasPerk(PerkLib.JobSoulCultivator)) player.perkPoints += 1;
 			var refund:int = 0;
 			if (player.perkv1(PerkLib.AscensionTolerance) > 10) {
 				refund += player.perkv1(PerkLib.AscensionTolerance) - 10;
 				player.setPerkValue(PerkLib.AscensionTolerance, 1, 10);
 				player.ascensionPerkPoints += refund;
 			}
-			if (player.findPerk(PerkLib.JobArcher) >= 0) {
+			if (player.hasPerk(PerkLib.JobArcher)) {
 				player.removePerk(PerkLib.JobArcher);
 				player.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
 			}
@@ -4168,7 +4168,7 @@ public function wakeFromBadEnd():void {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 14;
 			clearOutput();
 			outputText("Attention! All Munchkins Kindly leave thou gate sixty and nine. As replacements there will be whole legion of All-Rounders commin in five, four, ...........aaaand they're here ^^");
-			if (player.findPerk(PerkLib.DeityJobMunchkin) >= 0) {
+			if (player.hasPerk(PerkLib.DeityJobMunchkin)) {
 				player.removePerk(PerkLib.DeityJobMunchkin);
 				player.createPerk(PerkLib.JobAllRounder, 0, 0, 0, 0);
 			}
@@ -4191,27 +4191,27 @@ public function wakeFromBadEnd():void {
 				statScreenRefresh();
 				player.setWeaponRange(weaponsrange.BOWKELT);
 			}
-			if (player.findPerk(PerkLib.ImprovedEndurance) >= 0) {
+			if (player.hasPerk(PerkLib.ImprovedEndurance)) {
 				player.removePerk(PerkLib.ImprovedEndurance);
 				player.createPerk(PerkLib.BasicEndurance, 0, 0, 0, 0);
 			}
-			if (player.findPerk(PerkLib.AdvancedEndurance) >= 0) {
+			if (player.hasPerk(PerkLib.AdvancedEndurance)) {
 				player.removePerk(PerkLib.AdvancedEndurance);
 				player.createPerk(PerkLib.HalfStepToImprovedEndurance, 0, 0, 0, 0);
 			}
-			if (player.findPerk(PerkLib.SuperiorEndurance) >= 0) {
+			if (player.hasPerk(PerkLib.SuperiorEndurance)) {
 				player.removePerk(PerkLib.SuperiorEndurance);
 				player.createPerk(PerkLib.ImprovedEndurance, 0, 0, 0, 0);
 			}
-			if (player.findPerk(PerkLib.ImprovedSelfControl) >= 0) {
+			if (player.hasPerk(PerkLib.ImprovedSelfControl)) {
 				player.removePerk(PerkLib.ImprovedSelfControl);
 				player.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
 			}
-			if (player.findPerk(PerkLib.AdvancedSelfControl) >= 0) {
+			if (player.hasPerk(PerkLib.AdvancedSelfControl)) {
 				player.removePerk(PerkLib.AdvancedSelfControl);
 				player.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
 			}
-			if (player.findPerk(PerkLib.SuperiorSelfControl) >= 0) {
+			if (player.hasPerk(PerkLib.SuperiorSelfControl)) {
 				player.removePerk(PerkLib.SuperiorSelfControl);
 				player.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			}
@@ -4222,9 +4222,9 @@ public function wakeFromBadEnd():void {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 16;
 			clearOutput();
 			outputText("Time for...save upgrade ^^");
-			if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0) player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0) player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.Manyshot) >= 0 && player.findPerk(PerkLib.TripleStrike) < 0) {
+			if (player.hasPerk(PerkLib.EnlightenedNinetails)) player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.CorruptedNinetails)) player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.Manyshot) && !player.hasPerk(PerkLib.TripleStrike)) {
 				player.removePerk(PerkLib.Manyshot);
 				player.createPerk(PerkLib.TripleStrike, 0, 0, 0, 0);
 			}
@@ -4243,7 +4243,7 @@ public function wakeFromBadEnd():void {
 				player.removeKeyItem("Divine Bark Plates");
 				flags[kFLAGS.PURE_MARAE_ENDGAME] = 1;
 			}
-			if (player.findPerk(PerkLib.JobSoulArcher) >= 0) {
+			if (player.hasPerk(PerkLib.JobSoulArcher)) {
 				player.removePerk(PerkLib.JobSoulArcher);
 				player.perkPoints = player.perkPoints + 1;
 			}
@@ -4271,15 +4271,15 @@ public function wakeFromBadEnd():void {
 			if (player.faceType == Face.SNAKE_FANGS) {
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
 			}
-			if (player.findPerk(PerkLib.Cupid) >= 0) {
+			if (player.hasPerk(PerkLib.Cupid)) {
 				player.removePerk(PerkLib.Cupid);
 				player.perkPoints = player.perkPoints + 1;
 			}
-			if (player.findPerk(PerkLib.ElementalArrows) >= 0) {
+			if (player.hasPerk(PerkLib.ElementalArrows)) {
 				player.removePerk(PerkLib.ElementalArrows);
 				player.perkPoints = player.perkPoints + 1;
 			}
-			if (player.findPerk(PerkLib.JobArcaneArcher) >= 0) {
+			if (player.hasPerk(PerkLib.JobArcaneArcher)) {
 				player.removePerk(PerkLib.JobArcaneArcher);
 				player.createPerk(PerkLib.JobHunter, 0, 0, 0, 0);
 			}
@@ -4290,11 +4290,11 @@ public function wakeFromBadEnd():void {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 19;
 			clearOutput();
 			outputText("Small reorganizing of the house interiors...err I mean mod interiors so not mind it if you not have Soul Cultivator PC. I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too.");
-			if (player.findPerk(PerkLib.SoulExalt) >= 0) {
+			if (player.hasPerk(PerkLib.SoulExalt)) {
 				player.removePerk(PerkLib.SoulExalt);
 				player.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
 			}
-			if (player.findPerk(PerkLib.SoulOverlord) >= 0) {
+			if (player.hasPerk(PerkLib.SoulOverlord)) {
 				player.removePerk(PerkLib.SoulOverlord);
 				player.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
 			}
@@ -4305,7 +4305,7 @@ public function wakeFromBadEnd():void {
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 19) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 20;
-			if (player.findPerk(PerkLib.JobBarbarian) >= 0) {
+			if (player.hasPerk(PerkLib.JobBarbarian)) {
 				player.removePerk(PerkLib.JobBarbarian);
 				player.createPerk(PerkLib.JobSwordsman, 0, 0, 0, 0);
 			}
@@ -4725,6 +4725,7 @@ public function wakeFromBadEnd():void {
 				player.removeStatusEffect(StatusEffects.RiverDungeonFloorRewards);
 				player.createStatusEffect(StatusEffects.RiverDungeonFloorRewards,2,0,0,0);
 			}
+			if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) player.createPerk(PerkLib.StrengthOfStone,0,0,0,0);
 			doNext(doCamp);
 			return;
 		}
