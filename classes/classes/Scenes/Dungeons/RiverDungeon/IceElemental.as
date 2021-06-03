@@ -14,7 +14,7 @@ import classes.Scenes.SceneLib;
 public class IceElemental extends Monster
 	{
 		public function baseElementalAttack():void {
-			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"Ice elemental")+" solidifies its fist within hardened ice before jabbing at you.");
+			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"The ice elemental")+" crystalizes its fist within a block of hardened ice before jabbing at you.");
 			var damage:Number = inte + wis;
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
@@ -31,7 +31,7 @@ public class IceElemental extends Monster
 		}
 		
 		public function fluffyOfPunches():void {
-			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"Ice elemental")+" wraps its fists within several jagged ice crystals before launching a flurry of jabs against you.");
+			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"The ice elemental")+" crystalizes its fist in ice. Jagged icicles emerge as the elemental jabs at you.");
 			var damage:Number = inte + wis;
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;

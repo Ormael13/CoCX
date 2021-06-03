@@ -34,7 +34,7 @@ package classes.Scenes
 			outputText("-On diffuculty below Nightmare there will be no penalty for having too high wrath like unable to cast spells or m.specials. Also penalties for internal mutation would be reduced by 5 on Hard and by 10 on Normal.\n");
 			outputText("-New enemies: Ice/Lightning/Darkness Elemental. They are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");///Water/Air/Earth
 			outputText("-The Coin spoke back to Dinah telling her to review shop content. Or so legends was saying. Either way Dinah shop have now subtab for boss drops (it include now gazer and atlach nacha drops). Also each time visiting her would change the cost of all items she sells a bit.\n");
-			outputText("-\n");
+			outputText("-Pernament race TF getting bit of love and higher stat multi bonuses (as to compasate for fact of been perm and without option to gain more stat bonuses from race scores). They also would have ranks that would a bit enhance their racial stat bonuses as long PC do task specific for each pernament TF to rise it rnak from 1 up to even rank 4. Name of the race can change or not depending on rank.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -45,7 +45,7 @@ package classes.Scenes
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed bugs: \n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to emantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");

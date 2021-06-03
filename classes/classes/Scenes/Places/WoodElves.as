@@ -594,7 +594,7 @@ import classes.Scenes.SceneLib;
 			addButton(0, "River", River);
 			if ((player.elfScore() <=10 && player.woodElfScore() <=16) || !player.hasVagina()) addButtonDisabled(0,"River","You need to be an elf and female or herm in order to go bath with the girls just what where you thinking?");
 			addButton(1, "Tent", Tent);
-			if ((player.elfScore() <=10 && player.woodElfScore() <=16) || !player.hasVagina()) addButtonDisabled(0,"Tent","You need to be an elf and female or herm  in order to use the tents.");
+			if ((player.elfScore() <=10 && player.woodElfScore() <=16) || !player.hasVagina()) addButtonDisabled(0,"Tent","You need to be an elf and female or herm in order to use the tents.");
 			//addButton(2, "Fletching table", Fletching);
 			addButtonDisabled(2,"Fletching table","Under Construction.");
 			addButton(3, "Elenwen", Elenwen);
