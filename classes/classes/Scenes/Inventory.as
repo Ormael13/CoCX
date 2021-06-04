@@ -9,10 +9,14 @@ import classes.CoC;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
 import classes.Items.Consumable;
+import classes.Items.FlyingSwords;
+import classes.Items.FlyingSwordsLib;
 import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
+import classes.Items.MiscJewelry;
+import classes.Items.MiscJewelryLib;
 import classes.Items.Necklace;
 import classes.Items.NecklaceLib;
 import classes.Items.Shield;
@@ -119,7 +123,10 @@ use namespace CoC;
 			else outputText("<b>Ring (3rd):</b> <i>LOCKED</i> (req. Third Ring perk)\n");
 			if (player.findPerk(PerkLib.FourthRing) >= 0) outputText("<b>Ring (4th):</b> " + player.jewelry4.name + "\n");
 			else outputText("<b>Ring (4th):</b> <i>LOCKED</i> (req. Fourth Ring perk)\n");
-			//outputText("<b>Accessory:</b> " + player.jewelryName + "\n");
+			outputText("<b>Accessory (1st):</b> " + player.miscjewelryName + "\n");
+			outputText("<b>Accessory (2nd):</b> " + player.miscjewelryName2 + "\n");
+			if (player.findPerk(PerkLib.FlyingSwordPath) >= 0) outputText("<b>Flying Sword:</b> " + player.weaponFlyingSwordsName + "\n");
+			else outputText("<b>Flying Sword:</b> <i>LOCKED</i> (req. Flying Swords Control perk)\n");
 			outputText("<b>Vehicle:</b> " + player.vehiclesName + "\n");
 			if (player.hasKeyItem("Bag of Cosmos") >= 0 || player.hasKeyItem("Sky Poison Pearl") >= 0) {
 				outputText("\n");
@@ -337,7 +344,7 @@ use namespace CoC;
 			addButton(3, "Charge 500", AyoArmorRecharge4);
 			addButton(4, "FullRechar", AyoArmorRecharge5);
 			if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) addButton(10, "Power UP", AyoArmorPowerUP).hint("Activate Ayo Armor (and feel faster and stronger than before ^^)");
-			else addButtonDisabled(10, "Power UP", "You need ");
+			else addButtonDisabled(10, "Power UP", "You need to charge your Ayo Armor with Soulforce before using Power UP function.");
 			addButton(14, "Back", inventoryMenu);
 		}
 		public function AyoArmorRecharge1():void {
@@ -907,6 +914,26 @@ use namespace CoC;
 					itemGoNext();
 				else takeItem(item, callNext);
 			}
+			else if (item is FlyingSwords) {
+				player.weaponFlyingSwords.removeText();
+				item = player.setWeaponFlyingSwords(item as FlyingSwords); //Item is now the player's old weapon range
+				if (item == null)
+					itemGoNext();
+				else takeItem(item, callNext);
+			}
+			else if (item is MiscJewelry) {
+				if (player.miscJewelry2 == MiscJewelryLib.NOTHING) { //if 2nd misc jewelry slot is empty, equip in that slot
+					player.setMiscJewelry2(item as MiscJewelry);
+					itemGoNext();
+				}
+				else { // otherwise replace 1nd misc jewelry slot
+					player.miscJewelry.removeText();
+					item = player.setMiscJewelry(item as MiscJewelry); //Item is now the player's old misc jewelry
+					if (item == null)
+						itemGoNext();
+					else takeItem(item, callNext);
+				}
+			}
 			else if (item is HeadJewelry) {
 				player.headJewelry.removeText();
 				item = player.setHeadJewelry(item as HeadJewelry); //Item is now the player's old head jewelry
@@ -1169,6 +1196,13 @@ use namespace CoC;
 					addButton(2, "Shield", unequipShield).hint(player.shield.description, capitalizeFirstLetter(player.shield.name));
 				}
 				else addButtonDisabled(2, "Shield", "You not have shield equipped.");
+				if (player.weaponFlyingSwords != FlyingSwordsLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
+					addButton(3, "Flying Sword", unequipFlyingSwords).hint(player.weaponFlyingSwords.description, capitalizeFirstLetter(player.weaponFlyingSwords.name));
+				}
+				else {
+					if (player.hasPerk(PerkLib.FlyingSwordPath)) addButtonDisabled(3, "Flying Sword", "You not have flying sword equipped.");
+					else addButtonDisabled(3, "Flying Sword", "You not have flying sword equipped. (Req. perk: Flying Swords Control)");
+				}
 				if (player.armor != ArmorLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
 					addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
 				}
@@ -1197,6 +1231,14 @@ use namespace CoC;
 					addButton(1, "Necklace", unequipNecklace).hint(player.necklace.description, capitalizeFirstLetter(player.necklace.name));
 				}
 				else addButtonDisabled(1, "Necklace", "You not have equipped any necklace.");
+				if (player.miscJewelry != MiscJewelryLib.NOTHING) {
+					addButton(2, "Acc 1", unequipMiscJewel1).hint(player.miscJewelry.description, capitalizeFirstLetter(player.miscJewelry.name));
+				}
+				else addButtonDisabled(2, "Acc 1", "You not have equipped any accessory.");
+				if (player.miscJewelry2 != MiscJewelryLib.NOTHING) {
+					addButton(3, "Acc 2", unequipMiscJewel2).hint(player.miscJewelry2.description, capitalizeFirstLetter(player.miscJewelry2.name));
+				}
+				else addButtonDisabled(3, "Acc 2", "You not have equipped any accessory.");
 				if (player.jewelry != JewelryLib.NOTHING) {
 					addButton(5, "Ring 1", unequipJewel1).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
 				}
@@ -1254,6 +1296,10 @@ use namespace CoC;
 			takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), inventoryMenu);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
+		private function unequipFlyingSwords():void {
+			takeItem(player.setWeaponFlyingSwords(FlyingSwordsLib.NOTHING), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+		}
 		public function unequipShield():void {
 			if (player.shieldName == "Aether (Sin)") {
 				player.shield.removeText();
@@ -1286,6 +1332,14 @@ use namespace CoC;
 		}
 		public function unequipNecklace():void {
 			takeItem(player.setNecklace(NecklaceLib.NOTHING), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+		}
+		public function unequipMiscJewel1():void {
+			takeItem(player.setMiscJewelry(MiscJewelryLib.NOTHING), inventoryMenu);
+			CoC.instance.mainViewManager.updateCharviewIfNeeded();
+		}
+		public function unequipMiscJewel2():void {
+			takeItem(player.setMiscJewelry2(MiscJewelryLib.NOTHING), inventoryMenu);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipJewel1():void {

@@ -35,11 +35,11 @@ package classes.Scenes
 			outputText("-New enemies: Ice/Lightning/Darkness Elemental. They are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");///Water/Air/Earth
 			outputText("-The Coin spoke back to Dinah telling her to review shop content. Or so legends was saying. Either way Dinah shop have now subtab for boss drops (it include now gazer and atlach nacha drops). Also each time visiting her would change the cost of all items she sells a bit.\n");
 			outputText("-Pernament race TF getting bit of love and higher stat multi bonuses (as to compasate for fact of been perm and without option to gain more stat bonuses from race scores). They also would have ranks that would a bit enhance their racial stat bonuses as long PC do task specific for each pernament TF to rise it rnak from 1 up to even rank 4. Name of the race can change or not depending on rank.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New tier 0 soulforce lvl-up perk: Flying Sword Path. Req. Job: Soul Cultivator perk. Effect: Allow to control flying swords. With spending enough soulforce can even fly on them.\n");
+			outputText("-Fairy TF quest part that req. to gather pieces of Scepter would be bit easier with Phoukas dropping more often scepter pieces during gathering phase (actualy they will drop those pieces only then).\n");
+			outputText("-New item slots: 2 misc accesory slots and 1 Flying Sword slot.\n");
+			outputText("-New flying sword: Training soul flying sword - buyable at Soul Equipment shop in He'Xin'Dao. Cost 100 gems. Base atk is 1. Can be used to train soulforce.\n");//, to attack (acting like range weapon - each attack cost 5 SF) or even fly on it (50 SF per turn of sustaining flight)
+			outputText("-New misc accesory: Demonic mage tail ornament - buyable at Kaiba shop (temporaly). Cost 5000 gems.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's

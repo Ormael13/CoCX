@@ -74,7 +74,7 @@ public class Wings extends SaveableBodyPart {
 	public static const ETHEREAL_WINGS:int    	 = 30;
 	EnumValue.add(Types, ETHEREAL_WINGS, "ETHEREAL_WINGS", {name:"ethereal tendrils",canFly: true});
 	public static const THUNDEROUS_AURA:int    	 = 31;
-	EnumValue.add(Types, THUNDEROUS_AURA, "THUNDEROUS_AURA", {name:"thunderous aura",canFly: true});
+	EnumValue.add(Types, THUNDEROUS_AURA, "THUNDEROUS_AURA", {name:"thunderous aura",canFly: true});//can pc really fly on with that?
 	public static const LEVITATION:int    		 = 32;
 	EnumValue.add(Types, LEVITATION, "LEVITATION", {name:"non-existant",canFly: true});
 	public static const DEVILFEATHER:int       	 = 33;
@@ -82,7 +82,7 @@ public class Wings extends SaveableBodyPart {
 	public static const FAIRY:int     			 = 34;
 	EnumValue.add(Types, FAIRY, "FAIRY", {name:"fairy",canFly: true});
 	public static const WINDY_AURA:int    	 	 = 35;
-	EnumValue.add(Types, WINDY_AURA, "WINDY_AURA", {name:"windy aura",canFly: true});
+	EnumValue.add(Types, WINDY_AURA, "WINDY_AURA", {name:"windy aura",canFly: true});//can pc really fly on with that?
 	public static const SEADRAGON:int        = 36;
 	EnumValue.add(Types, SEADRAGON, "SEADRAGON", {name:"large majestic aquatic", wingSlap: true,canFly: true});
 	//public static const :int    	 	 	 = 36;

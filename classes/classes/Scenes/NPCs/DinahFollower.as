@@ -196,6 +196,7 @@ import classes.internals.Utils;
 			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
 			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
 			addButton(10, "Boss D.", DinahShopMainMenu2);
+			//randomn items rulette - set items
 			addButton(14, "Back", DinahMainMenu);
 		}
 		public function DinahShopMainMenu2():void {

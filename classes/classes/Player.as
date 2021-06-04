@@ -19,11 +19,15 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
+import classes.Items.FlyingSwords;
+import classes.Items.FlyingSwordsLib;
 import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
 import classes.Items.ItemTags;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
+import classes.Items.MiscJewelry;
+import classes.Items.MiscJewelryLib;
 import classes.Items.Mutations;
 import classes.Items.Necklace;
 import classes.Items.NecklaceLib;
@@ -201,7 +205,10 @@ use namespace CoC;
 
 		private var _weapon:Weapon = WeaponLib.FISTS;
 		private var _weaponRange:WeaponRange = WeaponRangeLib.NOTHING;
+		private var _weaponFlyingSwords:FlyingSwords = FlyingSwordsLib.NOTHING;
 		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+		private var _miscjewelry:MiscJewelry = MiscJewelryLib.NOTHING;
+		private var _miscjewelry2:MiscJewelry = MiscJewelryLib.NOTHING;
 		private var _headjewelry:HeadJewelry = HeadJewelryLib.NOTHING;
 		private var _necklace:Necklace = NecklaceLib.NOTHING;
 		private var _jewelry:Jewelry = JewelryLib.NOTHING;
@@ -290,6 +297,56 @@ use namespace CoC;
 		override public function set weaponRangeValue(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.weaponRangeValue.");
+		}
+
+		//override public function set misc jewelries
+		override public function set miscjewelryName(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryName.");
+		}
+
+		override public function set miscjewelryEffectId(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryEffectId.");
+		}
+
+		override public function set miscjewelryEffectMagnitude(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryEffectMagnitude.");
+		}
+
+		override public function set miscjewelryPerk(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryPerk.");
+		}
+
+		override public function set miscjewelryValue(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryValue.");
+		}
+		override public function set miscjewelryName2(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryName2.");
+		}
+
+		override public function set miscjewelryEffectId2(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryEffectId2.");
+		}
+
+		override public function set miscjewelryEffectMagnitude2(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryEffectMagnitude2.");
+		}
+
+		override public function set miscjewelryPerk2(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryPerk2.");
+		}
+
+		override public function set miscjewelryValue2(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryValue2.");
 		}
 
 		//override public function set head jewelries
@@ -1356,6 +1413,61 @@ use namespace CoC;
 		public function set ammo(value:int):void {
 			flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = value;
 		}
+		
+		//override public function get weapons
+		override public function get weaponFlyingSwordsName():String {
+			return _weaponFlyingSwords.name;
+		}
+		override public function get weaponFlyingSwordsVerb():String {
+			return _weaponFlyingSwords.verb;
+		}
+		override public function get weaponFlyingSwordsAttack():Number {
+			//var newGamePlusMod:int = this.newGamePlusMod()+1;
+			var flyingswordsattack:Number = _weaponFlyingSwords.attack;
+			//flyingswordsattack = Math.round(flyingswordsattack);
+			return flyingswordsattack;
+		}
+		public function get weaponFlyingSwordsBaseAttack():Number {
+			return _weaponFlyingSwords.attack;
+		}
+		override public function get weaponFlyingSwordsPerk():String {
+			return _weaponFlyingSwords.perk || "";
+		}
+		override public function get weaponFlyingSwordsValue():Number {
+			return _weaponFlyingSwords.value;
+		}
+
+		//override public function get miscjewelries.
+		override public function get miscjewelryName():String {
+			return _miscjewelry.name;
+		}
+		override public function get miscjewelryEffectId():Number {
+			return _miscjewelry.effectId;
+		}
+		override public function get miscjewelryEffectMagnitude():Number {
+			return _miscjewelry.effectMagnitude;
+		}
+		override public function get miscjewelryPerk():String {
+			return _miscjewelry.perk;
+		}
+		override public function get miscjewelryValue():Number {
+			return _miscjewelry.value;
+		}
+		override public function get miscjewelryName2():String {
+			return _miscjewelry2.name;
+		}
+		override public function get miscjewelryEffectId2():Number {
+			return _miscjewelry2.effectId;
+		}
+		override public function get miscjewelryEffectMagnitude2():Number {
+			return _miscjewelry2.effectMagnitude;
+		}
+		override public function get miscjewelryPerk2():String {
+			return _miscjewelry2.perk;
+		}
+		override public function get miscjewelryValue2():Number {
+			return _miscjewelry2.value;
+		}
 
 		//override public function get headjewelries.
 		override public function get headjewelryName():String {
@@ -1634,6 +1746,75 @@ use namespace CoC;
 		public function setWeaponRangeHiddenField(value:WeaponRange):void
 		{
 			this._weaponRange = value;
+		}
+
+		//Flying Swords, added by Ormael
+		public function get weaponFlyingSwords():FlyingSwords
+		{
+			return _weaponFlyingSwords;
+		}
+
+		public function setWeaponFlyingSwords(newWeaponFlyingSwords:FlyingSwords):FlyingSwords {
+			//Returns the old flying Swords, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldWeaponFlyingSwords:FlyingSwords = _weaponFlyingSwords.playerRemove();
+			if (newWeaponFlyingSwords == null) {
+				CoC_Settings.error(short + ".weapon (flying swords) is set to null");
+				newWeaponFlyingSwords = FlyingSwordsLib.NOTHING;
+			}
+			_weaponFlyingSwords = newWeaponFlyingSwords.playerEquip();
+			return oldWeaponFlyingSwords;
+		}
+
+		// in case you don't want to call the value.equip
+		public function setWeaponFlyingSwordsHiddenField(value:FlyingSwords):void
+		{
+			this._weaponFlyingSwords = value;
+		}
+
+		//Misc Jewelry, added by Ormael
+		public function get miscJewelry():MiscJewelry
+		{
+			return _miscjewelry;
+		}
+
+		public function setMiscJewelry(newMiscJewelry:MiscJewelry):MiscJewelry {
+			//Returns the old misc jewelery, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldMiscJewelry:MiscJewelry = _miscjewelry.playerRemove();
+			if (newMiscJewelry == null) {
+				CoC_Settings.error(short + ".miscjewelry is set to null");
+				newMiscJewelry = MiscJewelryLib.NOTHING;
+			}
+			_miscjewelry = newMiscJewelry.playerEquip(); //The head jewelry can also choose to equip something else - useful for Ceraph's trap armor
+			return oldMiscJewelry;
+		}
+		// in case you don't want to call the value.equip
+		public function setMiscJewelryHiddenField(value:MiscJewelry):void
+		{
+			this._miscjewelry = value;
+		}
+
+		public function get miscJewelry2():MiscJewelry
+		{
+			return _miscjewelry2;
+		}
+
+		public function setMiscJewelry2(newMiscJewelry:MiscJewelry):MiscJewelry {
+			//Returns the old misc jewelery, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldMiscJewelry:MiscJewelry = _miscjewelry2.playerRemove();
+			if (newMiscJewelry == null) {
+				CoC_Settings.error(short + ".miscjewelry2 is set to null");
+				newMiscJewelry = MiscJewelryLib.NOTHING;
+			}
+			_miscjewelry2 = newMiscJewelry.playerEquip(); //The head jewelry can also choose to equip something else - useful for Ceraph's trap armor
+			return oldMiscJewelry;
+		}
+		// in case you don't want to call the value.equip
+		public function setMiscJewelryHiddenField2(value:MiscJewelry):void
+		{
+			this._miscjewelry2 = value;
 		}
 
 		//Head Jewelry, added by Ormael
