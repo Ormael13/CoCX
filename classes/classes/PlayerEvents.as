@@ -947,7 +947,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				//Armor daily event
 				//Scandalous succubus armor and other corruption updates
-				if ((player.armor == armors.SCANSC || player.jewelry == jewelries.DMTO || player.jewelry2 == jewelries.DMTO || player.jewelry3 == jewelries.DMTO || player.jewelry4 == jewelries.DMTO) && player.cor < 100) {
+				if ((player.armor == armors.SCANSC || player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) && player.cor < 100) {
 					outputText("\nCorruption seethes from your defiled equipment into you.\n");
 					player.cor += 5;
 				}
@@ -2896,4 +2896,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		}
 		//End of Interface Implementation
 	}
-}
+}

@@ -27,7 +27,7 @@ package classes.Items
 		public static const MODIFIER_LUST_R:int = 			15;
 		public static const MODIFIER_PHYS_R:int = 			16;
 		
-		public static const DEFAULT_VALUE:Number = 6;
+		public static const DEFAULT_VALUE:Number = 6;//base cost 200 gems, each effect increase up to 2x cost
 		
 		public static const NOTHING:Nothing = new Nothing();
 		

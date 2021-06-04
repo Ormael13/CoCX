@@ -10,7 +10,7 @@ package classes.Items
 	
 	public final class MiscJewelryLib 
 	{
-		public static const DEFAULT_VALUE:Number = 6;
+		public static const DEFAULT_VALUE:Number = 6;//base cost 200 gems, each effect increase up to 2x cost
 		
 		public static const NOTHING:Nothing = new Nothing();
 		

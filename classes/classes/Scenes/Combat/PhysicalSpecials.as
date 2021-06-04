@@ -4786,34 +4786,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function Drink():void {
 		clearOutput();
-		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
-		outputText("You merrily chug from the gourd quenching your thirst for sake.\n\n");
-		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= DrunkenPowerEmpowerOni()) outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alchoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.\n\n");
-		enemyAI();
-	}
-
-	public function DrunkenPowerEmpower():void {
-		var bonusempower:Number = 60;
-		var bonusdepower:Number = 20;
-		var durationhour:Number = 4;
-		if (player.spe < 21 || player.inte < 21) {
-			if (player.inte < 21) bonusdepower -= (player.inte - 1);
-			else bonusdepower -= (player.spe - 1);
+		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) {
+			player.addPerkValue(PerkLib.OniDrinkingJug, 1, 1);
+			CoC.instance.mutations.DrunkenPowerEmpower();
 		}
-		bonusempower += (20 * (1 + player.newGamePlusMod()));
-		player.statStore.replaceBuffObject({
-			str: bonusempower,
-			spe: -bonusdepower,
-			inte: -bonusdepower,
-			lib: bonusempower
-		}, "DrunkenPowerEmpower", {text: "Drunken Power", rate: Buff.RATE_HOURS, tick: durationhour});
-	}
-
-	public function DrunkenPowerEmpowerOni():Number {
-		var bonusempoweroni:Number = 12;
-		if (player.hasPerk(PerkLib.OniMusculature)) bonusempoweroni -= 6;
-		if (player.hasPerk(PerkLib.OniMusculatureEvolved)) bonusempoweroni -= 3;
-		return bonusempoweroni;
+		outputText("You merrily chug from the gourd quenching your thirst for sake.\n\n");
+		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alchoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.\n\n");
+		enemyAI();
 	}
 
 	public function kick():void {

@@ -10322,7 +10322,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.VenomGlandsFinalForm))
 				score++;
 			// Perk +3 (TransformationImmunity)
-			if (hasPerk(PerkLib.TransformationImmunity))
+			if (hasPerk(PerkLib.TransformationImmunityAtlach))
 				score+=3;
 			if (isGargoyle()) score = 0;
 			if (hasPerk(PerkLib.ElementalBody)) score = 0;
