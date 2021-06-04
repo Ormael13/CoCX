@@ -2931,13 +2931,7 @@ private function SparrableNPCsMenu():void {
 			/******************************************************************/
 			/*       SLEEP WITH SYSTEM GOOOO                                  */
 			/******************************************************************/
-			if (player.isGargoyle()) {
-				outputText("You sit on your pedestal, your body petrifying like stone as you sleep for " + num2Text(timeQ) + " ");
-				if (timeQ == 1) outputText("hour.\n");
-				else outputText("hours.\n")
-				sleepRecovery(true);
-				return;
-			} else if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble")) {
+			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble")) {
 				outputText("You enter your cabin to turn yourself in for the night. ")
 			}
 			//Marble Sleepies
@@ -3035,14 +3029,22 @@ private function SparrableNPCsMenu():void {
 					outputText(".  She sleeps next to you, just barely touching you.  You rub her shoulder affectionately before the two of you nod off.");
 				}
 				outputText("\n");
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Helia" && SceneLib.helScene.followerHel()) {
+				outputText("You curl up next to Helia, planning to sleep for " + num2Text(timeQ) + " ");
+
 			} else {
-				if (flags[kFLAGS.SLEEP_WITH] == "Helia" && SceneLib.helScene.followerHel()) {
-					outputText("You curl up next to Helia, planning to sleep for " + num2Text(timeQ) + " ");
-				}
 				//Normal sleep message
-				else outputText("You curl up, planning to sleep for " + num2Text(timeQ) + " ");
-				if (timeQ == 1) outputText("hour.\n");
-				else outputText("hours.\n");
+				if (player.isGargoyle()) {
+					outputText("You sit on your pedestal, your body petrifying like stone as you sleep for " + num2Text(timeQ) + " ");
+					if (timeQ == 1) outputText("hour.\n");
+					else outputText("hours.\n")
+					sleepRecovery(false);
+				}
+				else{
+					outputText("You curl up, planning to sleep for " + num2Text(timeQ) + " ");
+					if (timeQ == 1) outputText("hour.\n");
+					else outputText("hours.\n");
+				}
 			}
 			sleepRecovery(true);
 		} else {
