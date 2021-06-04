@@ -472,7 +472,7 @@ public class CombatUI extends BaseCombatContent {
 				if (!drider.goblinFree) btnSpecial1.show("Free Goblin", drider.freeGoblin);
 			} else if (monster is MinotaurKing) {
 				var minoking:MinotaurKing = monster as MinotaurKing;
-				if (!player.hasStatusEffect(StatusEffects.MinoKing)) btnSpecial1.show("Dish Helper", minoking.dishHelper);
+				if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", minoking.dishHelper);
 			} else if (monster is Lethice) {
 				var lethice:Lethice = monster as Lethice;
 				if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {

@@ -14,7 +14,7 @@ import classes.Scenes.SceneLib;
 public class LightningElemental extends Monster
 	{
 		public function baseElementalAttack():void {
-			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"Lightning elemental")+" concentrates lightning on its fist before launching a punch toward you.");
+			outputText("Sparks of electricity wrap around "+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"the lightning elemental")+"'s fists before it hurts its fist toward you.");
 			var damage:Number = inte + wis;
 			if (player.findPerk(PerkLib.LightningAffinity) >= 0) damage *= 0.3;
 			//if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
@@ -31,7 +31,7 @@ public class LightningElemental extends Monster
 		}
 		
 		public function fluffyOfPunches():void {
-			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"Lightning elemental")+" wraps its fists with lighting before launching a flurry of jabs against you.");
+			outputText("Electricity crackles around "+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"the lightning elemental")+"'s fists before it launches itself into a flurry of punches against you.");
 			var damage:Number = inte + wis;
 			if (player.findPerk(PerkLib.LightningAffinity) >= 0) damage *= 0.3;
 			//if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;

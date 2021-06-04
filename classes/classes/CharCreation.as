@@ -2444,6 +2444,11 @@ import coc.view.MainView;
 				player.createPerk(PerkLib.BloodlineOrc,0,0,0,1);
 				bloodlineACQ2();
 			}
+			else if (player.hasPerk(PerkLib.VampiresDescendant)) {
+				player.removePerk(PerkLib.VampiresDescendant);
+				player.createPerk(PerkLib.BloodlineVampire,0,0,0,1);
+				bloodlineACQ2();
+			}
 			else if (player.hasPerk(PerkLib.MelkiesDescendant)) {
 				player.removePerk(PerkLib.MelkiesDescendant);
 				player.createPerk(PerkLib.BloodlineMelkie,0,0,0,1);

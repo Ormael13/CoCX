@@ -12,12 +12,11 @@ import classes.Scenes.SceneLib;
 
 use namespace CoC;
 	
-	public class CampScenes extends NPCAwareContent
-{
+	public class CampScenes extends NPCAwareContent{
 
-public static var elderKitsuneColors:Array = ["metallic golden", "golden blonde", "metallic silver", "silver blonde", "snow white", "iridescent gray"];
+	public static var elderKitsuneColors:Array = ["metallic golden", "golden blonde", "metallic silver", "silver blonde", "snow white", "iridescent gray"];
 
-private var daughtersCount:Number = 0;
+	private var daughtersCount:Number = 0;
 
 public function KitsuneShrine():void {
     var tailz:int = SceneLib.kitsuneScene.meditateAtKitsuneShrine();
