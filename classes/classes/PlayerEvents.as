@@ -2711,7 +2711,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Process crops harvest moon
-			if (CoC.instance.model.time.hours == 0){
+			if (CoC.instance.model.time.hours == 24){
 				if (HarvestMoonScenes.harvestmoonstageHH < 7 && HarvestMoonScenes.harvestmoonstageHH > 0) {
 					HarvestMoonScenes.harvestmoonstageHH += 1;
 				}
