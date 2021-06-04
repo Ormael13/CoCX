@@ -592,17 +592,21 @@ import classes.Scenes.SceneLib;
 			if (!isFirstTime)outputText("TEMPORARY PLACEHOLDER STUB UNTIL WE GOT A PROPER ELVEN GROVE INTRO");
 			menu();
 			addButton(0, "River", River);
-			if ((player.elfScore() <=10 && player.woodElfScore() <=16) || !player.hasVagina()) addButtonDisabled(0,"River","You need to be an elf and female or herm in order to go bath with the girls just what where you thinking?");
+			if ((player.elfScore() <=10 && player.woodElfScore() <=16)) addButtonDisabled(0,"River","You need to be an elf in order to go bath with the girls.");
+			else if (!player.hasVagina()) addButtonDisabled(0,"River","You can't seriously go back naked with girls as a guy! Just what where you thinking You degenerate pervert!?");
 			addButton(1, "Tent", Tent);
-			if ((player.elfScore() <=10 && player.woodElfScore() <=16) || !player.hasVagina()) addButtonDisabled(1,"Tent","You need to be an elf and female or herm in order to use the tents.");
+			if ((player.elfScore() <=10 && player.woodElfScore() <=16)) addButtonDisabled(1,"Tent","You need to be an elf.");
+			else if (!player.hasVagina()) addButtonDisabled(1,"Tent","You need to be female or herm in order to use the tents.");
 			//addButton(2, "Fletching table", Fletching);
 			addButtonDisabled(2,"Fletching table","Under Construction.");
 			addButton(3, "Elenwen", Elenwen);
 			if (hasTrainedToday) addButtonDisabled(3,"Elenwen","You need a break from your recent training before you can train again.");
-		    else if (!player.isElf() || !player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train maybe you should make yourself more elf like.");
+		    else if (!player.isElf()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
+			else if (!player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train with... it's not like archery is a girl only thing but considering the fact that she's practicing naked...");
 			addButton(4, "Alyssa", Alyssa);
 			if (hasTrainedToday) addButtonDisabled(4,"Alyssa","You need a break from your recent training before you can train again.");
-			else if (!player.isElf() || !player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train maybe you should make yourself more elf like.");
+			else if (!player.isElf()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
+			else if (!player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train with... it's not like the spear is a girl only discipline but the way she use it might as well be...");
 			addButton(5, "Leave", camp.returnToCampUseOneHour);
 		}
 
@@ -658,6 +662,11 @@ import classes.Scenes.SceneLib;
 				player.sexReward("vaginalFluids", "Vaginal");
 				player.sexReward("vaginalFluids", "Vaginal");
 				player.sexReward("vaginalFluids", "Vaginal");
+				player.trainStat("lib", +1, 80);
+				player.trainStat("lib", +1, 80);
+				player.trainStat("lib", +1, 80);
+				player.trainStat("lib", +1, 80);
+				CoC.instance.timeQ = 1;
 				player.buff("Sisterly bathing").addStats({int:20,wis:20}).withText("Sisterly bathing").forDays(1);
 			} else {
 				outputText("You approach the clear, spritely waters of the stream that runs through the elven Village to clean yourself off again." +
@@ -732,7 +741,9 @@ import classes.Scenes.SceneLib;
 			player.sexReward("vaginalFluids", "Vaginal");
 			player.sexReward("vaginalFluids", "Vaginal");
 			player.sexReward("vaginalFluids", "Vaginal");
-			player.sexReward("vaginalFluids", "Vaginal");
+			player.sexReward("vaginalFluids", "Vaginal")
+			player.trainStat("lib", +1, 80);
+			CoC.instance.timeQ = 1;
 			doNext(GroveLayout);
 		}
 
@@ -829,7 +840,8 @@ import classes.Scenes.SceneLib;
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
-			bowSkill(5);
+			bowSkill(5)
+			CoC.instance.timeQ = 1;
 			doNext(GroveLayout);
 		}
 
@@ -886,6 +898,7 @@ import classes.Scenes.SceneLib;
 			player.trainStat("tou", +1, 80);
 			player.trainStat("tou", +1, 80);
 			player.trainStat("tou", +1, 80);
+			CoC.instance.timeQ = 1;
 			if (player.spe >= 50 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING0 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING1;
 				player.createPerk(PerkLib.ELFElvenSpearDancingFlurry,0,0,0,0);
