@@ -663,7 +663,7 @@ public class PerkMenu extends BaseContent {
         }
 	}
 
-	public function mutationsDatabase(page:Number = 0, review:Boolean = false):void{
+	public function mutationsDatabase(page:int = 0, review:Boolean = false):void{
 		/*
 		Every time a new mutation is added, it will need to be added in manually, since there's nowhere I can just pull the information from.
 		When (/If) Orm reworks perks to use v1/v2/v3 things, can be made simplier. Current workaround to make it easier for player to use mutation menu.
@@ -672,7 +672,7 @@ public class PerkMenu extends BaseContent {
 		if (review) {	//Initial screen for user to know how many points they haveper part
 			clearOutput();
 			displayHeader("Mutation Stats");
-			var mutationCount:Number = 1
+			var mutationCount:int = 1
 			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation01))
 				mutationCount++;
 			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation02))
@@ -681,16 +681,11 @@ public class PerkMenu extends BaseContent {
 				mutationCount++;
 			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutation04))
 				mutationCount++;
-			if (mutationCount == 1) {
-				outputText("\nYou have 1 mutation slot per part.");
-			}
-			else {
-				outputText("\nYou have " + mutationCount + " mutation slots per part.");
-			}
-			outputText("\nNote: Not all body parts will use all available slots.");
+			outputText("\nYou have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
+					"\nNote: Not all body parts will use all available slots.");
 		}
 
-		function menuGen(menuItems:Array, page:Number):void{
+		function menuGen(menuItems:Array, page:int):void{
 			var selectMenu:ButtonDataList = new ButtonDataList();
 			for (var i:int = 0; i < menuItems.length; i++){
 				if (i%2 == 0){
