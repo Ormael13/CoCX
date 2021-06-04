@@ -791,7 +791,7 @@ public class PerkMenu extends BaseContent {
 			//Testicle Mutations
 			displayHeader("Balls Mutations");
 			mutationsDatabaseVerify([PerkLib.MinotaurTesticles, PerkLib.MinotaurTesticlesEvolved, PerkLib.MinotaurTesticlesFinalForm]);
-			mutationsDatabaseVerify([PerkLib.EasterBunnyBalls], "Neon Pink Eggs");
+			mutationsDatabaseVerify([PerkLib.EasterBunnyEggBag, PerkLib.EasterBunnyEggBagEvolved, PerkLib.EasterBunnyEggBagFinalForm]);
 			mutationsDatabaseVerify([PerkLib.NukiNuts, PerkLib.NukiNutsEvolved, PerkLib.NukiNutsFinalForm]);
 			mutationsDatabase();
 		}
