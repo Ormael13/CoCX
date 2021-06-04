@@ -10324,6 +10324,8 @@ use namespace CoC;
 			// Perk +3 (TransformationImmunity)
 			if (hasPerk(PerkLib.TransformationImmunity))
 				score+=3;
+			if (isGargoyle()) score = 0;
+			if (hasPerk(PerkLib.ElementalBody)) score = 0;
 			End("Player","racialScore");
 			return score;
 		}
