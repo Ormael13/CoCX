@@ -39,7 +39,7 @@ package classes.Scenes
 			outputText("-Fairy TF quest part that req. to gather pieces of Scepter would be bit easier with Phoukas dropping more often scepter pieces during gathering phase (actualy they will drop those pieces only then).\n");
 			outputText("-New item slots: 2 misc accesory slots and 1 Flying Sword slot.\n");
 			outputText("-New flying sword: Training soul flying sword - buyable at Soul Equipment shop in He'Xin'Dao. Cost 100 gems. Base atk is 1. Can be used to train soulforce.\n");//, to attack (acting like range weapon - each attack cost 5 SF) or even fly on it (50 SF per turn of sustaining flight)
-			outputText("-New misc accesory: Demonic mage tail ornament - buyable at Kaiba shop (temporaly). Cost 5000 gems.\n");
+			outputText("-New misc accesory: Demonic mage tail ornament - buyable at Kaiba shop (temporaly). Cost 9600 gems.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's

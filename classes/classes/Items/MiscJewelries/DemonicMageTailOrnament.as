@@ -15,7 +15,7 @@ import classes.Player;
 		
 		public function DemonicMageTailOrnament() 
 		{
-			super("DMAGETO", "Demonic mage tail ornament", "Demonic mage tail ornament", "a Demonic mage tail ornament", 0, 0, 5000, "This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. Sexiness +4, +5 intelligence, raise black magic and Infernal flare power by 25%, Increase mana recovery by 2% per round, Slowly corrupt the user.","Ring");
+			super("DMAGETO", "Demonic mage tail ornament", "Demonic mage tail ornament", "a Demonic mage tail ornament", 0, 0, 9600, "This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. Sexiness +4, +5 intelligence, raise black magic and Infernal flare power by 25%, Increase mana recovery by 2% per round, Slowly corrupt the user.","Ring");
 		}
 
 		override public function canUse():Boolean{

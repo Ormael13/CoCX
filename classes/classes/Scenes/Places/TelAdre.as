@@ -1084,9 +1084,6 @@ public function kaibaShopMainMenu2():void {
 	menu();
 	if (flags[kFLAGS.KAIBA_SHELFS] == 0) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
-			addButtonDisabled(0, "UnDefKingS", "You already bought item from Kaiba today.");
-			addButtonDisabled(1, "CroUndefKing", "You already bought item from Kaiba today.");
-			addButtonDisabled(2, "UnDefKingDest", "You already bought item from Kaiba today.");
 			addButtonDisabled(3, "R.DeadeyeAim", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "R.Ambidexty", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "E.R.Armor", "You already bought item from Kaiba today.");
@@ -1094,9 +1091,6 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(7, "I.Q.Gown", "You already bought item from Kaiba today.");
 		}
 		else {
-			addButton(0, "UnDefKingS", buyItem, jewelries.UNDKINS).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
-			addButton(1, "CroUndefKing", buyItem, headjewelries.CUNDKIN).hint("Crown of the Undefeated King - You can't loose by HP until reaching droping into negative health larger than 5% of max HP + 500(scalable). When below 0 HP PC would gain additional 1% of max HP per turn regeneration effect.");
-			addButton(2, "UnDefKingDest", buyItem, weapons.UDKDEST).hint("Undefeated King's Destroyer - Massive mace weapon that will increase PC parry chance by 20%. Have 20% base chance for stun (3 rounds).");
 			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
 			addButton(4, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
 			addButton(5, "E.R.Armor", buyItem, armors.ERA).hint("Elven Ranger Armor - +50% to Bow and spear damage, Agile, Revealing, Slutty seduction +10.");
@@ -1109,8 +1103,6 @@ public function kaibaShopMainMenu2():void {
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 1) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
-			addButtonDisabled(0, "FlameLizR", "You already bought item from Kaiba today.");
-			addButtonDisabled(1, "InferMouseR", "You already bought item from Kaiba today.");
 			addButtonDisabled(2, "C.S.Necklace", "You already bought item from Kaiba today.");
 			addButtonDisabled(3, "B.Armor", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "Soul Drill", "You already bought item from Kaiba today.");
@@ -1122,8 +1114,6 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(10, "Demon tail ring", "You already bought item from Kaiba today.");
 		}
 		else {
-			addButton(0, "FlameLizR", buyItem, jewelries.FLLIRNG).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
-			addButton(1, "InferMouseR", buyItem, jewelries.INMORNG).hint("Infernal Mouse ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
 			addButton(2, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace - Allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior.");
 			addButton(3, "B.Armor", buyItem, armors.BERA).hint("Berzerker Armor - Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
 			addButton(4, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
@@ -1132,8 +1122,7 @@ public function kaibaShopMainMenu2():void {
 			addButton(7, "Oni enchanted drinking jug", buyItem, jewelries.ONIGOURD).hint("A magical drinking jug beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
 			addButton(8, "Oni Noble Kimono", buyItem, armors.OEKIMO).hint("The garbs of an oni noble. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
 			addButton(9, "Oni Tyrant Kimono", buyItem, armors.OTKIMO).hint("The garbs of an oni tyrant. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
-			addButton(10, "Demon tail ornament", buyItem, jewelries.DMTO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
-			addButton(11, "Demon tail ornament", buyItem, miscjewelries.DMAGETO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
+			addButton(10, "Demon tail ornament", buyItem, miscjewelries.DMAGETO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(13, "-3-", kaibaShopMainMenuPage3);

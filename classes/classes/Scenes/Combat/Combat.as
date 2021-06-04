@@ -9580,7 +9580,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.FeyArcaneBloodstream)) manaregen += 10;
         if (player.hasPerk(PerkLib.FeyArcaneBloodstream)) manaregen += 15;
         if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm) && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 2);
-        if (player.jewelry == jewelries.DMTO || player.jewelry2 == jewelries.DMTO || player.jewelry3 == jewelries.DMTO || player.jewelry4 == jewelries.DMTO) manaregen += player.maxMana()*0.02;
+        if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) manaregen += player.maxMana()*0.02;
         return manaregen;
     }
 
@@ -10843,7 +10843,10 @@ public class Combat extends BaseContent {
             TeaseFunctionList.push(RandomTeaseManticoreTailSpike);
         }
         if (player.tail.type == Tail.LIZARD || player.tail.type == Tail.CAVE_WYRM || player.tail.type == Tail.SALAMANDER) TeaseFunctionList.push(RandomTeaseButtfuckTail);
-        if (player.lowerBody == LowerBody.PLANT_FLOWER) TeaseFunctionList.push(RandomTeaseAlraune);
+        if (player.lowerBody == LowerBody.PLANT_FLOWER){
+            if (player.isLiliraune()) TeaseFunctionList.push(RandomTeaseLiliraune);
+            else TeaseFunctionList.push(RandomTeaseAlraune);
+        }
         if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) TeaseFunctionList.push(RandomTeaseDisplacerMilkingInitiate);
         if (player.lowerBody == LowerBody.GOO){
             TeaseFunctionList.push(RandomTeaseSlime);
@@ -11059,13 +11062,29 @@ public class Combat extends BaseContent {
         if (Randomcrit) outputText(" <b>Critical!</b>");
     }
 
-    //public function RandomTeaseLiliraune(Damage:Number,crit:Boolean):void {
-    //outputText("");
-    //Damage *= 1+(scalingBonusToughness()*2/100);
-    //Damage = Math.round(Damage);
-    //Damage *= 2;
-    //monster.teased(monster.lustVuln * Damage, false);
-    //}
+    public function RandomTeaseLiliraune():void {
+        outputText("With your lovely guest comfortably set in your pitcher its time for you to get to the fun part." +
+                "\n\n\"Oh my! An early treat sister, look at how she/he is well tied up.\"" +
+                "\n\n\"It sure gets my sap pumping.\"\n\n");
+        outputText("Now that [monster a] [monster name] is nicely tied up you giggle and you pull [monster him] into a kiss, " +
+                "feeding [monster him] your aphrodisiac nectar as your hand sweetly traces [monster his] cheek, one of your stamen going straight for");
+        if (monster.hasVagina()) outputText(" the waiting love canal up front as another takes aim and plunge into ");
+        outputText("his/her waiting backdoor hole stretching the passage up and going as deep as [monster his] bowels. " +
+                "Meanwhile, your sister going into position to take care of your guest other available areas, not leaving any inches of that body unstimulated.");
+        if (monster.hasCock()) outputText("Not one to waste any potential seed she sit [monster him] deeper in the bath and wrap her tight around [monster his]" +
+                " waist impaling herself on [monster his] already drooling stamen so to pollinate the both of you with [monster his] fertile pollen. ");
+        outputText("\n\nThe sex is mind melting but short lived as suddenly aware of what is going on [monster a] [monster name] " +
+                "begins trashing about eventualy forcing [monster him]self out of your grip with enough strength to force the three of you back into the previous position. " +
+                "\n\n\"You're just delaying the inevitable you know? You should just surrender and let us take good care of your pleasure.\"" +
+                "\n\n\"Were going to give you the sweetest orgasm of your life. So sweet your eyes will probably cross thehehe...\"\n\n" +
+                "You will mate eventually… it's just a matter of time now.");
+        //(Add a toughness modifier and double lust damage)
+        StraddleDamage *= 1+(scalingBonusToughness()*2/100);
+        StraddleDamage = Math.round(StraddleDamage);
+        StraddleDamage *= 3;
+        monster.teased(monster.lustVuln * StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
+    }
 
     public function RandomTeaseLustStrike():void {
         outputText("You smile lewdly, almost moaning the syllables as you pose your hand on [monster a] [monster name] crotch " +
