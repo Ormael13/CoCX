@@ -877,11 +877,22 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.SoulDrill1)) {
             buttons.add("Soul Drill", soul1Drill).hint("Menu to adjust your Soul Drill spinning speed.");
         }
-        if (!player.isFlying()) {
-            if (player.canFly()) {
-                buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+		if (player.weaponFlyingSwordsName != "nothing" && !player.hasStatusEffect(StatusEffects.Flying) && player.statusEffectv1(StatusEffects.Flying) != 1) {
+			buttons.add("Flying Sword", attackFlyingSword).hint("Attack the enemy with your " + player.weaponFlyingSwordsName + ".  Damage done is determined only by your weapon.");
+			if (player.soulforce < flyingSwordAttackCost()) {
+                bd.disable("Your current soulforce is too low.");
             }
-        } else if (player.isFlying()) {
+		}
+        if (!player.isFlying()) {
+            if (player.canFly()) buttons.add("Take Flight", takeFlightWings).hint("Make use of your wings or other options avilable to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+			if (player.canFlyNoWings()) {
+				//if (player.hasPerk(PerkLib.Dantain) && player.perkv1(PerkLib.Dantain) > 0) buttons.add("Take Flight", takeFlightNoWings).hint("Use your own soulforce to take flight into the air. \n\nSoulforce cost per turn:"+flyingWithSoulforceCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+				buttons.add("Take Flight", takeFlightByFlyingSword).hint("Make use of your flying sword to take flight into the air. \n\nSoulforce cost per turn:"+flyingSwordUseCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+			}
+        }
+		if (player.isFlying()) {
+			if (player.statusEffectv1(StatusEffects.Flying) == 1) buttons.add("Land", landAfterUsingFlyingSword);
+			if (player.statusEffectv1(StatusEffects.Flying) == 2) buttons.add("Land", landAfterUsingSoulforce);
             buttons.add("Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
         }
         if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
@@ -8547,13 +8558,32 @@ public class Combat extends BaseContent {
         }
         //Flying
         if (player.isFlying()) {
-            player.addStatusValue(StatusEffects.Flying, 1, -1);
+			if (player.statusEffectv1(StatusEffects.Flying) == 0) {
+				if (!player.hasPerk(PerkLib.HeartOfTheStormFinalForm)) player.addStatusValue(StatusEffects.Flying, 1, -1);
+			}
+            if (player.statusEffectv1(StatusEffects.Flying) == 1) {
+				if (player.soulforce < flyingSwordUseCost()) {
+					player.addStatusValue(StatusEffects.Flying, 1, -2);
+					outputText("<b>You land gently on the ground having too little soulforce to keep flying using "+player.weaponFlyingSwordsName+".</b>\n\n");
+				}
+				else player.soulforce -= flyingSwordUseCost();
+			}
+			if (player.statusEffectv1(StatusEffects.Flying) == 2) {
+				if (player.soulforce < flyingWithSoulforceCost()) {
+					player.addStatusValue(StatusEffects.Flying, 1, -2);
+					outputText("<b>You land gently on the ground having too little soulforce to sustain flying.</b>\n\n");
+				}
+				else player.soulforce -= flyingWithSoulforceCost();
+			}
             if (player.statusEffectv1(StatusEffects.Flying) >= 0) outputText("<b>You keep making circles in the air around your opponent.</b>\n\n");
             else {
-                if (player.hasKeyItem("Jetpack") >= 0 || player.hasKeyItem("MK2 Jetpack") >= 0) {
-                    outputText("<b>You need to give some time for your mech to recharge and thus land back to the ground.</b>\n\n");
-                    player.createStatusEffect(StatusEffects.CooldownJetpack, 3, 0, 0, 0);
-                } else outputText("<b>You land too tired to keep flying.</b>\n\n");
+				if (player.statusEffectv1(StatusEffects.Flying) == 0) {
+					if (player.hasKeyItem("Jetpack") >= 0 || player.hasKeyItem("MK2 Jetpack") >= 0) {
+						outputText("<b>You need to give some time for your mech to recharge and thus land back to the ground.</b>\n\n");
+						player.createStatusEffect(StatusEffects.CooldownJetpack, 3, 0, 0, 0);
+					}
+					else outputText("<b>You land too tired to keep flying.</b>\n\n");
+				}
                 if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
                     player.removeStatusEffect(StatusEffects.FlyingNoStun);
                     player.removePerk(PerkLib.Resolute);
@@ -12725,19 +12755,29 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
-    public function takeFlight():void {
-        clearOutput();
-        if (player.wings.type == Wings.WINDY_AURA && player.arms.type == Arms.KAMAITACHI){
-            outputText("You create a small cyclone to ride upon and lift yourself up in the air.\n\n");
-        }
-        else if (player.wings.type == Wings.THUNDEROUS_AURA){
-            outputText("You take flight letting the storm carry you up.\n\n");
-        }
-        else{
-            outputText("You open you wing taking flight.\n\n");
-        }
+	public function takeFlightWings():void {
+		clearOutput();
+        if (player.wings.type == Wings.WINDY_AURA && player.arms.type == Arms.KAMAITACHI) outputText("You create a small cyclone to ride upon and lift yourself up in the air.\n\n");
+        else if (player.wings.type == Wings.THUNDEROUS_AURA) outputText("You take flight letting the storm carry you up.\n\n");
+        else if (player.wings.type == Wings.ETHEREAL_WINGS) outputText("You take flight letting the storm carry you up.\n\n");
+        else if (player.wings.type == Wings.LEVITATION) outputText("You take flight letting the storm carry you up.\n\n");
+        else outputText("You open you wing taking flight.\n\n");
         player.createStatusEffect(StatusEffects.Flying, 7, 0, 0, 0);
-        if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)) player.addStatusValue(StatusEffects.Flying, 1, 999);
+        takeFlight();
+	}
+	public function takeFlightByFlyingSword():void {
+		clearOutput();
+		outputText("You jump on your "+player.weaponFlyingSwordsName+" taking flight.\n\n");
+        player.createStatusEffect(StatusEffects.Flying, 1, 1, 0, 0);
+        takeFlight();
+	}
+	public function takeFlightNoWings():void {
+		clearOutput();
+		outputText("You ... taking flight"+(player.weaponFlyingSwordsName != "nothing"?"":"")+".\n\n");
+        player.createStatusEffect(StatusEffects.Flying, 1, 2, 0, 0);
+        takeFlight();
+	}
+    public function takeFlight():void {
         if (player.hasPerk(PerkLib.Resolute) < 0) {
             player.createStatusEffect(StatusEffects.FlyingNoStun, 0, 0, 0, 0);
             player.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
@@ -12745,6 +12785,57 @@ public class Combat extends BaseContent {
         monster.createStatusEffect(StatusEffects.MonsterAttacksDisabled, 0, 0, 0, 0);
         enemyAI();
     }
+	
+	public function landAfterUsingFlyingSword():void {
+		clearOutput();
+		outputText("You descend to the ground and step down from your "+player.weaponFlyingSwordsName+".\n\n");
+		if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
+			player.removeStatusEffect(StatusEffects.FlyingNoStun);
+			player.removePerk(PerkLib.Resolute);
+        }
+        monster.removeStatusEffect(StatusEffects.MonsterAttacksDisabled);
+        player.removeStatusEffect(StatusEffects.Flying);
+		doNext(curry(combatMenu, false));
+	}
+	public function landAfterUsingSoulforce():void {
+		clearOutput();
+		outputText("You descend to the ground.\n\n");
+		if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
+			player.removeStatusEffect(StatusEffects.FlyingNoStun);
+			player.removePerk(PerkLib.Resolute);
+        }
+        monster.removeStatusEffect(StatusEffects.MonsterAttacksDisabled);
+        player.removeStatusEffect(StatusEffects.Flying);
+		doNext(curry(combatMenu, false));
+	}
+	
+	public function attackFlyingSword():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+        clearOutput();
+		player.soulforce -= flyingSwordAttackCost();
+		var damage:Number = 0;
+        damage += player.weaponRangeAttack * 10;
+		//Weapon addition!
+        if (player.weaponFlyingSwordsAttack < 51) damage *= (1 + (player.weaponFlyingSwordsAttack * 0.03));
+        else if (player.weaponFlyingSwordsAttack >= 51 && player.weaponFlyingSwordsAttack < 101) damage *= (2.5 + ((player.weaponFlyingSwordsAttack - 50) * 0.025));
+        else if (player.weaponFlyingSwordsAttack >= 101 && player.weaponFlyingSwordsAttack < 151) damage *= (3.75 + ((player.weaponFlyingSwordsAttack - 100) * 0.02));
+        else if (player.weaponFlyingSwordsAttack >= 151 && player.weaponFlyingSwordsAttack < 201) damage *= (4.75 + ((player.weaponFlyingSwordsAttack - 150) * 0.015));
+        else damage *= (5.5 + ((player.weaponFlyingSwordsAttack - 200) * 0.01));
+		//damage *= (1 + (0.01 * masteryArcheryLevel()));
+        //Determine if critical hit!
+        var crit:Boolean = false;
+        var critChance:int = 5;
+        critChance += combatPhysicalCritical();
+        if (rand(100) < critChance) {
+            crit = true;
+            damage *= 1.75;
+        }
+        damage = Math.round(damage);
+		outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and sends it towards " + monster.a + monster.short + ". It slash target leaving minor wound. ");
+		doDamage(damage, true, true);
+        if (crit) outputText(" <b>*Critical Hit!*</b>");
+		enemyAI();
+	}
 
     public function greatDive():void {
         flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -12770,7 +12861,11 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.HarpyHollowBones)) damage *= 1.2;
         if (player.hasPerk(PerkLib.HarpyHollowBonesEvolved)) damage *= 1.5;
         if (player.hasPerk(PerkLib.HarpyHollowBonesFinalForm)) damage *= 2;
-        outputText("You focus on " + monster.capitalA + monster.short + ", fold your wing and dive down, using gravity to increase the impact");
+        outputText("You focus on " + monster.capitalA + monster.short + ", ");
+		if (player.statusEffectv1(StatusEffects.Flying) == 0) outputText("fold your wing and dive down");
+		if (player.statusEffectv1(StatusEffects.Flying) == 1) outputText("direct your "+player.weaponFlyingSwordsName+" downward and dive down");
+		if (player.statusEffectv1(StatusEffects.Flying) == 2) outputText("fold your arms and dive down");
+		outputText(", using gravity to increase the impact");
         if (player.hasPerk(PerkLib.DeathPlunge)) {
             if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
             else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
@@ -12778,24 +12873,38 @@ public class Combat extends BaseContent {
             else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
             else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
             outputText(" of your [weapon]. Your [weapon] strikes true, inflicting severe wounds as ");
-            if (player.lowerBody == LowerBody.HARPY) {
+            if (player.lowerBody == LowerBody.HARPY && player.statusEffectv1(StatusEffects.Flying) != 1) {
                 outputText("your talons leaves a bloody trail");
                 damage *= 1.5;
-            } else {
-                outputText("the rest of your body collides against your target");
-                if (monster.plural) outputText("s");
-                outputText(".");
             }
+			else outputText("the rest of your body collides against your target" + (monster.plural?"s":"") + "");
+            if (player.statusEffectv1(StatusEffects.Flying) > 0 && player.weaponFlyingSwordsName != "nothing") {
+				outputText(". At the same time " + player.weaponFlyingSwordsName+" impales your target" + (monster.plural?"s":"") + "");
+				if (player.weaponFlyingSwordsAttack < 51) damage *= (1 + (player.weaponFlyingSwordsAttack * 0.03));
+				else if (player.weaponFlyingSwordsAttack >= 51 && player.weaponFlyingSwordsAttack < 101) damage *= (2.5 + ((player.weaponFlyingSwordsAttack - 50) * 0.025));
+				else if (player.weaponFlyingSwordsAttack >= 101 && player.weaponFlyingSwordsAttack < 151) damage *= (3.75 + ((player.weaponFlyingSwordsAttack - 100) * 0.02));
+				else if (player.weaponFlyingSwordsAttack >= 151 && player.weaponFlyingSwordsAttack < 201) damage *= (4.75 + ((player.weaponFlyingSwordsAttack - 150) * 0.015));
+				else damage *= (5.5 + ((player.weaponFlyingSwordsAttack - 200) * 0.01));
+			}
             if (player.haveWeaponForJouster()) {
                 if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 60) && player.hasPerk(PerkLib.Naturaljouster)) || (player.spe >= 150 && player.hasPerk(PerkLib.Naturaljouster))) damage *= 3;
                 if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 180) && player.hasPerk(PerkLib.NaturaljousterMastergrade)) || (player.spe >= 450 && player.hasPerk(PerkLib.NaturaljousterMastergrade))) damage *= 5;
             }
 			damage *= (1 + PASPAS());
         } else {
-            if (player.lowerBody == LowerBody.HARPY) {
-                outputText("making a bloody trail with your talons ");
+            if (player.lowerBody == LowerBody.HARPY && player.statusEffectv1(StatusEffects.Flying) != 1) {
+                outputText(" making a bloody trail with your talons");
                 damage *= 1.5;
-            } else outputText(" hitting your target with violence ");
+            }
+			else outputText(" hitting your target with violence");
+			if (player.statusEffectv1(StatusEffects.Flying) > 0 && player.weaponFlyingSwordsName != "nothing") {
+				outputText(". At the same time " + player.weaponFlyingSwordsName+" impales your target" + (monster.plural?"s":"") + "");
+				if (player.weaponFlyingSwordsAttack < 51) damage *= (1 + (player.weaponFlyingSwordsAttack * 0.03));
+				else if (player.weaponFlyingSwordsAttack >= 51 && player.weaponFlyingSwordsAttack < 101) damage *= (2.5 + ((player.weaponFlyingSwordsAttack - 50) * 0.025));
+				else if (player.weaponFlyingSwordsAttack >= 101 && player.weaponFlyingSwordsAttack < 151) damage *= (3.75 + ((player.weaponFlyingSwordsAttack - 100) * 0.02));
+				else if (player.weaponFlyingSwordsAttack >= 151 && player.weaponFlyingSwordsAttack < 201) damage *= (4.75 + ((player.weaponFlyingSwordsAttack - 150) * 0.015));
+				else damage *= (5.5 + ((player.weaponFlyingSwordsAttack - 200) * 0.01));
+			}
         }
         if (player.hasPerk(PerkLib.SpiritedDive)) {
             if (monster.plural) damage *= 5;
@@ -12805,12 +12914,14 @@ public class Combat extends BaseContent {
         var critChance:int = 5;
         critChance += combatPhysicalCritical();
         if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
-        if (player.hasPerk(PerkLib.DeathPlunge) && player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
-        if (player.hasPerk(PerkLib.DeathPlunge) && player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
-        if (player.hasPerk(PerkLib.DeathPlunge) && player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive") {
-            if (player.str >= 100) critChance += 10;
-            if (player.str >= 140) critChance += 10;
-        }
+        if (player.hasPerk(PerkLib.DeathPlunge)) {
+			if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
+			if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
+			if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponPerk == "Massive") {
+				if (player.str >= 100) critChance += 10;
+				if (player.str >= 140) critChance += 10;
+			}
+		}
         if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
         if (rand(100) < critChance) {
@@ -12818,6 +12929,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= 2.5;
             else damage *= 1.75;
         }
+		outputText(".");
         damage = Math.round(damage);
         doDamage(damage, true, true);
         if (crit) {
@@ -12828,7 +12940,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
             else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
         }
-        if (!player.hasPerk(PerkLib.HarpyHollowBonesFinalForm)) {
+        if (!player.hasPerk(PerkLib.HarpyHollowBonesFinalForm) || player.statusEffectv1(StatusEffects.Flying) > 0) {
             if (player.isFlying()) player.removeStatusEffect(StatusEffects.Flying);
             if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
                 player.removeStatusEffect(StatusEffects.FlyingNoStun);
@@ -13278,6 +13390,21 @@ public class Combat extends BaseContent {
         modssc = Math.round(modssc * 100) / 100;
         return modssc;
     }
+	
+	public function flyingSwordAttackCost():Number {
+		var fsac:Number = 25;
+		return fsac;
+	}
+	
+	public function flyingSwordUseCost():Number {
+		var fsuc:Number = 100;
+		return fsuc;
+	}
+	
+	public function flyingWithSoulforceCost():Number {
+		var fwsc:Number = 500;
+		return fwsc;
+	}
 
     public function ghostStrength():Number {
         var ghostStr:Number = player.strStat.core.value;

@@ -4,6 +4,7 @@ import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
+import classes.Items.NecklaceLib;
 
 /**
 	 * Character class for player and NPCs. Has subclasses Player and NonPlayer.
@@ -831,7 +832,7 @@ import classes.Items.JewelryLib;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude2;//+100
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude3;//+100
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude4;//+100
-			if (necklaceName == "soulmetal necklace") max += necklaceEffectMagnitude;//+100
+			if (necklaceEffectId == NecklaceLib.MODIFIER_SF) max += necklaceEffectMagnitude;//+100	 necklaceName == "soulmetal necklace"
 			max += level * 5;
 			if (level <= 6) max += level * 5;
 			if (hasPerk(PerkLib.UnlockSpirit)) max += level * 5;

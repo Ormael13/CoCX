@@ -1179,6 +1179,11 @@ use namespace CoC;
 		{
 			return flags[kFLAGS.PLAYER_COMPANION_1] != "" || flags[kFLAGS.PLAYER_COMPANION_2] != "" || flags[kFLAGS.PLAYER_COMPANION_3] != "";
 		}
+		//PC can fly without natural wings
+		public function canFlyNoWings():Boolean
+		{
+			return weaponFlyingSwordsName != "nothing";// || ma daintain(golden core stage)
+		}
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
 		{

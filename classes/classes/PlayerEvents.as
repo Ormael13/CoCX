@@ -2868,7 +2868,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					EngineCore.doNext(playerMenu);
 					return true;
 				}
-				if (player.lib > 50 || player.lust > 40) { //Randomly generated dreams here
+				if (player.lib > (player.libStat.max * 0.5) || player.lust > (player.maxLust() * 0.4)) { //Randomly generated dreams here
 					if (dreams.dreamSelect()) return true;
 				}
 			}
