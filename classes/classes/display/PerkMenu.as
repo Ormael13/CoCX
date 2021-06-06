@@ -669,7 +669,7 @@ public class PerkMenu extends BaseContent {
 		When (/If) Orm reworks perks to use v1/v2/v3 things, can be made simplier. Current workaround to make it easier for player to use mutation menu.
 		Source: Player.as for list of mutations under function maxHeartMutations, PerkLib.as for mutation descriptions.
  		*/
-		if (review) {	//Initial screen for user to know how many points they haveper part
+		if (review) {	//Initial screen for user to know how many points they have per part
 			clearOutput();
 			displayHeader("Mutation Stats");
 			var mutationCount:int = 1
@@ -695,6 +695,11 @@ public class PerkMenu extends BaseContent {
 			submenu(selectMenu, displayPerks, page, false);
 		}
 
+		/*
+		Example:
+		mutationsDatabaseVerify([PerkLib.mutationperkhere, PerkLib.mutationperkevolvedhere, PerkLib.mutationperkfinalformhere], "optional manual acquisition comment")
+		Manual comment overwrites Requirements output, and is assumed that there will only be 1 perk in that chain.
+		 */
 		function mutationsDBHeart():void{
 			clearOutput();
 			//Heart Mutations
