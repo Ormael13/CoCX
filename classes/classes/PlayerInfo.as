@@ -438,6 +438,11 @@ public class PlayerInfo extends BaseContent {
 		if (player.hasPerk(PerkLib.MasterGunslinger)) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((combat.firearmsAccuracy() / 2) - ((combat.firearmsAccuracyPenalty() + combat.firearmsDualWieldAccuracyPenalty()) * 3)) + "%\n";
 		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Firearms Mastery)</i>\n";
 		combatStats += "\n";
+		//if () combatStats += "<b>Cost of flying without Flying Sword (Soulforce / per turn): </b> " + combat.flyingWithSoulforceCost() + "\n";
+		if (player.hasPerk(PerkLib.FlyingSwordPath)) {
+			combatStats += "<b>Cost of flying on Flying Sword (Soulforce / per turn): </b> " + combat.flyingSwordUseCost() + "\n";
+			combatStats += "<b>Flying Sword Attack Cost (Soulforce / per attack): </b> " + combat.flyingSwordAttackCost() + "\n";
+		}
 		combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMod()) + "%\n";
 		combatStats += "<b>Physical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillPhysicalMod()) + "%\n";
 		combatStats += "<b>Magical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMagicalMod()) + "%\n";

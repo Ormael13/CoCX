@@ -878,7 +878,7 @@ public class Combat extends BaseContent {
             buttons.add("Soul Drill", soul1Drill).hint("Menu to adjust your Soul Drill spinning speed.");
         }
 		if (player.weaponFlyingSwordsName != "nothing" && !player.hasStatusEffect(StatusEffects.Flying) && player.statusEffectv1(StatusEffects.Flying) != 1) {
-			buttons.add("Flying Sword", attackFlyingSword).hint("Attack the enemy with your " + player.weaponFlyingSwordsName + ".  Damage done is determined only by your weapon.");
+			buttons.add("Flying Sword", attackFlyingSword).hint("Attack the enemy with your " + player.weaponFlyingSwordsName + ".  Damage done is determined by your wisdom and weapon.\n\nSoulforce cost per attack: "+flyingSwordAttackCost()+"");
 			if (player.soulforce < flyingSwordAttackCost()) {
                 bd.disable("Your current soulforce is too low.");
             }
@@ -886,7 +886,7 @@ public class Combat extends BaseContent {
         if (!player.isFlying()) {
             if (player.canFly()) buttons.add("Take Flight", takeFlightWings).hint("Make use of your wings or other options avilable to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 			if (player.canFlyNoWings()) {
-				//if (player.hasPerk(PerkLib.Dantain) && player.perkv1(PerkLib.Dantain) > 0) buttons.add("Take Flight", takeFlightNoWings).hint("Use your own soulforce to take flight into the air. \n\nSoulforce cost per turn:"+flyingWithSoulforceCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+				if (player.hasPerk(PerkLib.Dantain) && player.perkv1(PerkLib.Dantain) > 1) buttons.add("Take Flight", takeFlightNoWings).hint("Use your own soulforce to take flight into the air. \n\nSoulforce cost per turn:"+flyingWithSoulforceCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 				buttons.add("Take Flight", takeFlightByFlyingSword).hint("Make use of your flying sword to take flight into the air. \n\nSoulforce cost per turn:"+flyingSwordUseCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 			}
         }
@@ -5992,7 +5992,23 @@ public class Combat extends BaseContent {
     }
 
     public function WeaponRangeStatusProcs():void {
+		
+    }
 
+    public function WeaponFlyingSwordsStatusProcs():void {
+		var bleed:Boolean = false;
+        var bleedChance:int = 10;
+        if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
+        if (rand(100) < bleedChance) bleed = true;
+        if (bleed) {
+            if (monster.hasPerk(PerkLib.EnemyConstructType)) {
+                if (monster is LivingStatue) outputText("Despite the rents you've torn in its stony exterior, the statue does not bleed.");
+                else outputText("Despite the rents you've torn in its exterior, [monster a] [monster name] does not bleed.");
+            }
+			else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
+            if (monster.plural) outputText("\n" + monster.capitalA + monster.short + " bleed profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave behind.");
+            else outputText("\n" + monster.capitalA + monster.short + " bleeds profusely from the many bloody gashes your "+player.weaponFlyingSwordsName+" leave behind.");
+        }
     }
 
 	public function ShieldsStatusProcs():void {
@@ -12814,17 +12830,19 @@ public class Combat extends BaseContent {
         clearOutput();
 		player.soulforce -= flyingSwordAttackCost();
 		var damage:Number = 0;
-        damage += player.weaponRangeAttack * 10;
+        damage += player.weaponFlyingSwordsAttack * 10;
+		damage += scalingBonusWisdom() * 0.2;
 		//Weapon addition!
         if (player.weaponFlyingSwordsAttack < 51) damage *= (1 + (player.weaponFlyingSwordsAttack * 0.03));
         else if (player.weaponFlyingSwordsAttack >= 51 && player.weaponFlyingSwordsAttack < 101) damage *= (2.5 + ((player.weaponFlyingSwordsAttack - 50) * 0.025));
         else if (player.weaponFlyingSwordsAttack >= 101 && player.weaponFlyingSwordsAttack < 151) damage *= (3.75 + ((player.weaponFlyingSwordsAttack - 100) * 0.02));
         else if (player.weaponFlyingSwordsAttack >= 151 && player.weaponFlyingSwordsAttack < 201) damage *= (4.75 + ((player.weaponFlyingSwordsAttack - 150) * 0.015));
         else damage *= (5.5 + ((player.weaponFlyingSwordsAttack - 200) * 0.01));
+		if (player.hasPerk(PerkLib.SoaringBlades)) damage *= 1;
 		//damage *= (1 + (0.01 * masteryArcheryLevel()));
         //Determine if critical hit!
         var crit:Boolean = false;
-        var critChance:int = 5;
+        var critChance:int = 25;
         critChance += combatPhysicalCritical();
         if (rand(100) < critChance) {
             crit = true;
@@ -12834,6 +12852,8 @@ public class Combat extends BaseContent {
 		outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and sends it towards " + monster.a + monster.short + ". It slash target leaving minor wound. ");
 		doDamage(damage, true, true);
         if (crit) outputText(" <b>*Critical Hit!*</b>");
+		WeaponFlyingSwordsStatusProcs();
+		outputText("\n\n");
 		enemyAI();
 	}
 
@@ -13393,11 +13413,23 @@ public class Combat extends BaseContent {
 	
 	public function flyingSwordAttackCost():Number {
 		var fsac:Number = 25;
+		if (player.hasPerk(PerkLib.SoaringBlades)) {
+			fsac -= 5;
+			if (player.perkv1(PerkLib.Dantain) > 0) fsac -= 5;
+			if (player.perkv1(PerkLib.Dantain) > 1) fsac -= 5;
+			if (player.perkv1(PerkLib.Dantain) > 2) fsac -= 5;
+		}
 		return fsac;
 	}
 	
 	public function flyingSwordUseCost():Number {
 		var fsuc:Number = 100;
+		if (player.hasPerk(PerkLib.SoaringBlades)) {
+			fsuc -= 20;
+			if (player.perkv1(PerkLib.Dantain) > 0) fsuc -= 20;
+			if (player.perkv1(PerkLib.Dantain) > 1) fsuc -= 20;
+			if (player.perkv1(PerkLib.Dantain) > 2) fsuc -= 20;
+		}
 		return fsuc;
 	}
 	

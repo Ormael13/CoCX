@@ -1129,10 +1129,6 @@ public function kaibaShopMainMenu2():void {
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 2) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
-			addButtonDisabled(0, "HBHelmet", "You already bought item from Kaiba today.");
-			addButtonDisabled(1, "HBArmor", "You already bought item from Kaiba today.");
-			addButtonDisabled(2, "HBShirt", "You already bought item from Kaiba today.");
-			addButtonDisabled(3, "HBShorts", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "T.M.Outfit", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "W.I.Cloak", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "S.S.Clothing", "You already bought item from Kaiba today.");
@@ -1142,11 +1138,6 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(10, "S.Ornament", "You already bought item from Kaiba today.");
 		}
 		else {
-			addButton(0, "HBHelmet", buyItem, headjewelries.HBHELM).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
-			addButton(1, "HBArmor", buyItem, armors.HBARMOR).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
-			//later put her lower body armor part of HB set
-			addButton(2, "HBShirt", buyItem, undergarments.HBSHIRT).hint("HB Shirt - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
-			addButton(3, "HBShorts", buyItem, undergarments.HBSHORT).hint("HB Shorts - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
 			addButton(4, "T.M.Outfit", buyItem, armors.TRMOUTF).hint("Traveling Merchant Outfit - Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");
 			addButton(5, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak - Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 			addButton(6, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");

@@ -19,6 +19,7 @@ import classes.internals.Utils;
 		private var _extra:Number = 0;
 		private var _roulette1:Number = 0;
 		private var _roulette2:Number = 0;
+		private var _roulette3:Number = 0;
 		
 		public function dinahAffection(changes:Number = 0):Number {
 			flags[kFLAGS.DINAH_AFFECTION] += changes;
@@ -72,8 +73,9 @@ import classes.internals.Utils;
 		public function DinahIntro2():void {
 			clearOutput();//camp intro
 			_extra = (1 + rand(3));
-			if (rand(2) == 0) _roulette1 = (1 + rand(3));
-			if (rand(2) == 0) _roulette2 = (1 + rand(2));
+			if (rand(2) == 0) _roulette1 = (1 + rand(4));
+			if (rand(2) == 0) _roulette2 = (1 + rand(3));
+			if (rand(2) == 0) _roulette3 = (1 + rand(5));
 			outputText("\"<i>Oh, Great Lady Godiva, tell us your will!</i>\" With religious zeal, Dinah pulls a coin out of nowhere and throws it into the air. But before it can fall on the ground, it vanishes. ");
 			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90) {
 				outputText("\"<i>The Coin Told Me To <b>Cuddle</b> You.</i>\" her smile becomes even wider. You've got a <i>very</i> bad feeling about this. It looks like there is no other choice. You've gotta to beat some sense into her before getting back to buisness.");
@@ -240,6 +242,12 @@ import classes.internals.Utils;
 			if (_roulette2 == 0) addButtonDisabled(2, "???", "Dud. Shame, shame.");
 			if (_roulette2 == 1) addButton(2, "FlameLizR", buyItem5, 45).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
 			if (_roulette2 == 2) addButton(2, "InferMouseR", buyItem5, 46).hint("Infernal Mouse ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
+			if (_roulette3 == 0) addButtonDisabled(3, "???", "Dud. Shame, shame.");
+			if (_roulette3 == 1) addButton(3, "HBHelmet", buyItem5, 50).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
+			if (_roulette3 == 2) addButton(3, "HBArmor", buyItem5, 51).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
+			//later put her lower body armor part of HB set
+			if (_roulette3 == 3) addButton(3, "HBShirt", buyItem5, 52).hint("HB Shirt - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
+			if (_roulette3 == 4) addButton(3, "HBShorts", buyItem5, 53).hint("HB Shorts - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
 			addButton(14, "Back", DinahShopMainMenu);
 		}
 		private function buyItem1(item:Number = 0):void {
@@ -272,6 +280,10 @@ import classes.internals.Utils;
 			if (item == 42) catChimeraBuy5(weapons.UDKDEST);
 			if (item == 45) catChimeraBuy5(jewelries.FLLIRNG);
 			if (item == 46) catChimeraBuy5(jewelries.INMORNG);
+			if (item == 50) catChimeraBuy5(headjewelries.HBHELM);
+			if (item == 51) catChimeraBuy5(armors.HBARMOR);
+			if (item == 52) catChimeraBuy5(undergarments.HBSHIRT);
+			if (item == 53) catChimeraBuy5(undergarments.HBSHORT);
 			//if (item == 40) catChimeraBuy5();
 			//if (item == 40) catChimeraBuy5();
 		}

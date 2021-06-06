@@ -29,7 +29,7 @@ package classes.Scenes
 		private function Changelog36():void {
 			clearOutput();
 			outputText("<b>Version 0.8s:</b>\n\n");
-			outputText("-New tier 0 soulforce lvl-up perk: Flying Sword Path. Req. Job: Soul Cultivator perk. Effect: Allow to control flying swords. With spending enough soulforce can even fly on them.\n");
+			outputText("-New tier 0 soulforce lvl-up perk: Flying Sword Path. Req. Job: Soul Cultivator perk. Effect: Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)\n");
 			outputText("-New item slots: 2 misc accesory slots and 1 Flying Sword slot.\n");
 			outputText("-Killing true demon will count now toward counter of true demons killed not imps (sadly it won't retroactively move all demons kills from imps count kills thou).\n");
 			outputText("-Teleporting Circle to move between each of River Dungeon Floors been instaled by... someone. It sstill req. to beat each floor boss/es to open teleport option to deeper floors but after that it will amke easier to travel deeper without need to go thro all previous floors.\n");
@@ -45,11 +45,11 @@ package classes.Scenes
 			outputText("-New flying sword: Training soul flying sword - buyable at Soul Equipment shop in He'Xin'Dao. Cost 100 gems. Base atk is 1. Can be used to train soulforce, to attack (acting like range weapon - each attack cost 25 SF) or even fly on it (100 SF per turn of sustaining flight).\n");
 			outputText("-New misc accesory: Demonic mage tail ornament - buyable at Kaiba shop (temporaly). Cost 9600 gems.\n");
 			outputText("-Dreams proc after reaching 50% of max libido or 40% of max lust instead of 50 libido or 40 lust.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-All flying swords have chance to proc bleed status effect (10%) and have the same chance to deal crit damage as dueling swords.\n");
+			outputText("-New tier 0 soulforce lvl-up perk: Soaring Blades. Req. Dantain and Flying Sword Path perks. Effect: Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of daintain attained.\n");
+			outputText("-Added current cost of fly on f.sword or attack with it to combat subpage of stats.\n");
+			outputText("-Some of items from Kaiba have been 'repurposed' and now Dinah proudly seels them. And she change varies nearly each time pc start interactions with her so no need to wait whole day to refresh it. But she also likes to give unpredictable price 'discounts' so item player want may be in offer but cost very high sum of gems.\n");
+			outputText("-Jtex many code corrections.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's

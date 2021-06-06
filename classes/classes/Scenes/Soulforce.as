@@ -80,6 +80,14 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.SoulAncestor)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 			outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
 			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1830\n");
+			if (player.hasPerk(PerkLib.Dantain)) {
+				outputText("<b>Dantain:</b> ");
+				if (player.perkv1(PerkLib.Dantain) == 3) outputText("Nascent Soul");
+				else if (player.perkv1(PerkLib.Dantain) == 2) outputText("Core Formation");
+				else if (player.perkv1(PerkLib.Dantain) == 1) outputText("Foundation Establishment");
+				else outputText("Qi Condensation");
+				outputText("\n");
+			}
 		/*	outputText("<b>Progress toward clearing next meridian: </b>");
 			if (flags[kFLAGS.UNLOCKED_MERIDIANS] == 2)
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
@@ -88,7 +96,8 @@ use namespace CoC;
 			else
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 			outputText("<b>PC Speed %:</b> " + player.getMaxStats("spe") + "\n");
-			if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
+		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
+		/*	if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
 				outputText("<b>TelAdre Tripxi Guns general timer:</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxi) + "\n");
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) {
 					outputText("<b>TelAdre Tripxi Guns 1 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) + " (Desert Eagle)\n");
@@ -127,8 +136,7 @@ use namespace CoC;
 					outputText("<b>TelAdre Tripxi Guns 6 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns6) + "\n");
 				}
 			}
-		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
-			menu();
+		*/	menu();
 			if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Cultivate", "You're unable to recover soulforce by cultivating.");
 			else addButton(0, "Cultivate", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) {

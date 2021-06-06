@@ -376,7 +376,6 @@ public class HeXinDao extends BaseContent
         function sayLine(itype:ItemType,desc:String):String{
             return introText+desc+costText+(itype.value*3)+endText;
         }
-
         menu();
         addButton(0, "1st Stall", Tier1).hint("Check out the first stall with the cheapest TF items.");
         addButton(1, "2nd Stall", Tier2).hint("Check out the second stall with the cheaper TF items.");

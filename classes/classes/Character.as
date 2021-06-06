@@ -757,6 +757,7 @@ import classes.Items.NecklaceLib;
 		public override function maxSoulforce():Number
 		{
 			var max:Number = 50;
+			if (hasPerk(PerkLib.FlyingSwordPath)) max += 50;
 			if (hasPerk(PerkLib.DemonicLethicite)) max += Math.round(lib);
 			if (hasPerk(PerkLib.Metamorph)) max += (50 * (1 + perkv1(PerkLib.Metamorph)));
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) max += 25;
