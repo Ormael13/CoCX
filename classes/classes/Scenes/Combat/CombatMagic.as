@@ -2464,7 +2464,7 @@ public class CombatMagic extends BaseCombatContent {
 			lustDmg *= 1.75;
 		}
 		lustDmg = Math.round(lustDmg);
-		monster.teased(lustDmg);
+		monster.teased(lustDmg, false);
 		outputText(" damage.");
 		if (crit) outputText(" <b>Critical!</b>");
 		MagicAddonEffect();
