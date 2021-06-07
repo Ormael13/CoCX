@@ -802,8 +802,14 @@ import coc.xxc.StoryContext;
 		protected function get weaponsrange():WeaponRangeLib{
 			return CoC.instance.weaponsrange;
 		}
+		protected function get weaponsflyingswords():FlyingSwordsLib{
+			return CoC.instance.weaponsflyingswords;
+		}
 		protected function get armors():ArmorLib{
 			return CoC.instance.armors;
+		}
+		protected function get miscjewelries():MiscJewelryLib{
+			return CoC.instance.miscjewelries;
 		}
 		protected function get headjewelries():HeadJewelryLib{
 			return CoC.instance.headjewelries;

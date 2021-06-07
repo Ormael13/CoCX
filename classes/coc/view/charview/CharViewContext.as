@@ -199,7 +199,7 @@ import coc.xlogic.ExecContext;
 
 					// Unique ring Accessories
 					oniGourd: player.jewelry == game.jewelries.ONIGOURD || player.jewelry2 == game.jewelries.ONIGOURD || player.jewelry3 == game.jewelries.ONIGOURD || player.jewelry4 == game.jewelries.ONIGOURD,
-					demonTailRing: player.jewelry == game.jewelries.DMTO || player.jewelry2 == game.jewelries.DMTO || player.jewelry3 == game.jewelries.DMTO || player.jewelry4 == game.jewelries.DMTO,
+					//demonTailRing: player.jewelry == game.jewelries.DMTO || player.jewelry2 == game.jewelries.DMTO || player.jewelry3 == game.jewelries.DMTO || player.jewelry4 == game.jewelries.DMTO,
 
 					// Viewable neck Accessory lists
 					blueScarf: player.necklace == game.necklaces.BWSCARF,

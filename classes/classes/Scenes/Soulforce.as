@@ -79,7 +79,15 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.SoulTyrant)) dailySoulforceUsesLimit++;
 			if (player.hasPerk(PerkLib.SoulAncestor)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 			outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
-			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1730\n");
+			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1830\n");
+			if (player.hasPerk(PerkLib.Dantain)) {
+				outputText("<b>Dantain:</b> ");
+				if (player.perkv1(PerkLib.Dantain) == 3) outputText("Nascent Soul");
+				else if (player.perkv1(PerkLib.Dantain) == 2) outputText("Core Formation");
+				else if (player.perkv1(PerkLib.Dantain) == 1) outputText("Foundation Establishment");
+				else outputText("Qi Condensation");
+				outputText("\n");
+			}
 		/*	outputText("<b>Progress toward clearing next meridian: </b>");
 			if (flags[kFLAGS.UNLOCKED_MERIDIANS] == 2)
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
@@ -88,7 +96,8 @@ use namespace CoC;
 			else
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 			outputText("<b>PC Speed %:</b> " + player.getMaxStats("spe") + "\n");
-			if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
+		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
+		/*	if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
 				outputText("<b>TelAdre Tripxi Guns general timer:</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxi) + "\n");
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) {
 					outputText("<b>TelAdre Tripxi Guns 1 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) + " (Desert Eagle)\n");
@@ -127,8 +136,7 @@ use namespace CoC;
 					outputText("<b>TelAdre Tripxi Guns 6 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns6) + "\n");
 				}
 			}
-		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
-			menu();
+		*/	menu();
 			if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Cultivate", "You're unable to recover soulforce by cultivating.");
 			else addButton(0, "Cultivate", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) {
@@ -2925,6 +2933,11 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.DaoistTyrantStage)) SFR00 += 20;
 			return SFR00;
 		}
+		private function SoulforceRegenerationCompatibileTrainingItems():Boolean {
+			return player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
+			|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring"
+			|| player.weaponFlyingSwordsName == "training soul flying sword";
+		}
 		public function SoulforceRegeneration1():void {
 			clearOutput();
 			var soulforceamountrestored:int = 16;
@@ -2943,8 +2956,7 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 16;
 			if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 16;
 			player.soulforce += soulforceamountrestored;
-			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
-				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring") {
+			if (SoulforceRegenerationCompatibileTrainingItems()) {
 				var bonussoulforce:Number = 0;
 				bonussoulforce += SoulforceGainedFromCultivation1();
 				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
@@ -3216,8 +3228,9 @@ use namespace CoC;
 		public function SoulforceGainedFromCultivation1():Number {
 			var cumulativegains:Number = 0;
 			if (player.weaponName == "training soul axe" && player.weaponRangeName == "training soul crossbow" && player.shieldName == "training soul buckler" && player.armorName == "training soul armor" && player.upperGarmentName == "soul training shirt" && player.lowerGarmentName == "soul training panties"
-				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
-				cumulativegains += 26;//+120% jak wszystkie 12 slotów - każdy kolejny dodany slot dodaje kolejne 10%
+				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring"
+				&& player.weaponFlyingSwordsName == "training soul flying sword") {
+				cumulativegains += 28;//+130% jak wszystkie 13 slotów - każdy kolejny dodany slot dodaje kolejne 10%
 			}
 			else if (player.weaponName == "training soul axe" && player.weaponRangeName == "training soul crossbow" && player.shieldName == "training soul buckler" && player.armorName == "training soul armor" && player.upperGarmentName == "soul training shirt" && player.lowerGarmentName == "soul training panties"
 				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring") {
@@ -3236,6 +3249,7 @@ use namespace CoC;
 				if (player.jewelryName2 == "training soul ring") cumulativegains += 1;
 				if (player.jewelryName3 == "training soul ring") cumulativegains += 1;
 				if (player.jewelryName4 == "training soul ring") cumulativegains += 1;
+				if (player.weaponFlyingSwordsName == "training soul flying sword") cumulativegains += 1;
 			}
 			return cumulativegains;
 		}
@@ -3253,6 +3267,7 @@ use namespace CoC;
 			if (player.jewelryName2 == "training soul ring") bonussoulforce2 += 100;
 			if (player.jewelryName3 == "training soul ring") bonussoulforce2 += 100;
 			if (player.jewelryName4 == "training soul ring") bonussoulforce2 += 100;
+			if (player.weaponFlyingSwordsName == "training soul flying sword") bonussoulforce2 += 100;
 			if ((bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) > 0) {
 				if ((bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) > flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2]) flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2];
 				else flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] += (bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]);

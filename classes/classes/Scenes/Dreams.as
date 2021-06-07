@@ -20,7 +20,7 @@ public class Dreams {
         //dream quantity
         var dreamtemp:Number;
 	    var player:Player = CoC.instance.player;
-	    dreamtemp = Utils.rand(player.lib / 10 + player.cor / 20) + player.cor / 20;
+	    dreamtemp = Utils.rand(player.lib100 / 10 + player.cor / 20) + player.cor / 20;
         //BUILD UP CHOICES ARRAY
         var scores:Array = [
                 [player.humanScore(), 0],

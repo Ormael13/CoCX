@@ -396,6 +396,12 @@ public class PerkLib
 		public static const VexedNocking:PerkType = mk("Vexed nocking", "Vexed nocking",
 				"Increase Power Attack/Shoot damage multiplier ratio from 1:2/5/10 to 1:4/10/20. Additional increase initial bonus to damage from 50 to 100%.",
 				"You've chosen the 'Vexed nocking' perk. Increase Power Attack/Shoot damage multiplier ratio from 1:2/5/10 to 1:4/10/20. Additional increase initial bonus to damage from 50 to 100%.");
+		public static const FlyingSwordPath:PerkType = mk("Flying Sword Path", "Flying Sword Path",
+				"Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)",
+				"You've chosen the 'Flying Sword Path' perk. Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)");
+		public static const SoaringBlades:PerkType = mk("Soaring Blades", "Soaring Blades",
+				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of daintain attained.",
+				"You've chosen the 'Soaring Blades' perk. Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of daintain attained.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -456,9 +462,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -5868,7 +5871,9 @@ public class PerkLib
             DaoistCultivator.requirePerk(JobSoulCultivator);
             //HeartCultivator.requirePerk(JobSoulCultivator);		//psionic/min powers cultivation/psion class from D&D?
             //requirePerk(JobSoulCultivator)		//allowing to use soulforce options more times per day - 1/2/3 time more?
-            //requirePerk(JobSoulCultivator)		//allowing to use soul artifacts - new slot?
+            FlyingSwordPath.requirePerk(JobSoulCultivator);
+			SoaringBlades.requirePerk(Dantain)
+					.requirePerk(FlyingSwordPath);
             //Tier 1
             SoulApprentice.requireWis(20)
                     .requireLevel(6)

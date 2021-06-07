@@ -126,6 +126,22 @@ public class Creature extends Utils
 		public function set weaponRangeAttack(value:Number):void { _weaponRangeAttack = value; }
 		public function set weaponRangePerk(value:String):void { _weaponRangePerk = value; }
 		public function set weaponRangeValue(value:Number):void { _weaponRangeValue = value; }
+		//Weapon flying swords
+		private var _weaponFlyingSwordsName:String = "";
+		private var _weaponFlyingSwordsVerb:String = "";
+		private var _weaponFlyingSwordsAttack:Number = 0;
+		private var _weaponFlyingSwordsPerk:String = "";
+		private var _weaponFlyingSwordsValue:Number = 0;
+		public function get weaponFlyingSwordsName():String { return _weaponFlyingSwordsName; }
+		public function get weaponFlyingSwordsVerb():String { return _weaponFlyingSwordsVerb; }
+		public function get weaponFlyingSwordsAttack():Number { return _weaponFlyingSwordsAttack; }
+		public function get weaponFlyingSwordsPerk():String { return _weaponFlyingSwordsPerk; }
+		public function get weaponFlyingSwordsValue():Number { return _weaponFlyingSwordsValue; }
+		public function set weaponFlyingSwordsName(value:String):void { _weaponFlyingSwordsName = value; }
+		public function set weaponFlyingSwordsVerb(value:String):void { _weaponFlyingSwordsVerb = value; }
+		public function set weaponFlyingSwordsAttack(value:Number):void { _weaponFlyingSwordsAttack = value; }
+		public function set weaponFlyingSwordsPerk(value:String):void { _weaponFlyingSwordsPerk = value; }
+		public function set weaponFlyingSwordsValue(value:Number):void { _weaponFlyingSwordsValue = value; }
 		//Clothing/Armor
 		private var _armorName:String = "";
 		private var _armorDef:Number = 0;
@@ -142,6 +158,37 @@ public class Creature extends Utils
 		public function set armorDef(value:Number):void { _armorDef = value; }
 		public function set armorMDef(value:Number):void { _armorMDef = value; }
 		public function set armorPerk(value:String):void { _armorPerk = value; }
+		//Misc Jewelry
+		private var _miscjewelryName:String = "";
+		private var _miscjewelryEffectId:Number = 0;
+		private var _miscjewelryEffectMagnitude:Number = 0;
+		private var _miscjewelryPerk:String = "";
+		private var _miscjewelryValue:Number = 0;
+		public function get miscjewelryName():String { return _miscjewelryName; }
+		public function get miscjewelryEffectId():Number { return _miscjewelryEffectId; }
+		public function get miscjewelryEffectMagnitude():Number { return _miscjewelryEffectMagnitude; }
+		public function get miscjewelryPerk():String { return _miscjewelryPerk; }
+		public function get miscjewelryValue():Number { return _miscjewelryValue; }
+		public function set miscjewelryValue(value:Number):void { _miscjewelryValue = value; }
+		public function set miscjewelryName(value:String):void { _miscjewelryName = value; }
+		public function set miscjewelryEffectId(value:Number):void { _miscjewelryEffectId = value; }
+		public function set miscjewelryEffectMagnitude(value:Number):void { _miscjewelryEffectId = value; }
+		public function set miscjewelryPerk(value:String):void { _miscjewelryPerk = value; }
+		private var _miscjewelryName2:String = "";
+		private var _miscjewelryEffectId2:Number = 0;
+		private var _miscjewelryEffectMagnitude2:Number = 0;
+		private var _miscjewelryPerk2:String = "";
+		private var _miscjewelryValue2:Number = 0;
+		public function get miscjewelryName2():String { return _miscjewelryName2; }
+		public function get miscjewelryEffectId2():Number { return _miscjewelryEffectId2; }
+		public function get miscjewelryEffectMagnitude2():Number { return _miscjewelryEffectMagnitude2; }
+		public function get miscjewelryPerk2():String { return _miscjewelryPerk2; }
+		public function get miscjewelryValue2():Number { return _miscjewelryValue2; }
+		public function set miscjewelryValue2(value:Number):void { _miscjewelryValue2 = value; }
+		public function set miscjewelryName2(value:String):void { _miscjewelryName2 = value; }
+		public function set miscjewelryEffectId2(value:Number):void { _miscjewelryEffectId2 = value; }
+		public function set miscjewelryEffectMagnitude2(value:Number):void { _miscjewelryEffectId2 = value; }
+		public function set miscjewelryPerk2(value:String):void { _miscjewelryPerk2 = value; }
 		//Head Jewelery
 		private var _headjewelryName:String = "";
 		private var _headjewelryEffectId:Number = 0;
