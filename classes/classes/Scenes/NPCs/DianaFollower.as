@@ -777,6 +777,7 @@ public function CuringCurseScene1():void {	//value related curses removal
 	dynStats("lus", 50);
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
 		player.removeCurse(stat, 10);
+		player.removeHex(stat, 10);
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -789,9 +790,11 @@ public function CuringCurseScene2():void {	//bonus multi related curses removal
 	dynStats("lus", 50);
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
 		player.removeCurse(stat, 10);
+		player.removeHex(stat, 10);
 		if (stat != "sens")
 		{
 			player.removeCurse(stat+".mult", 0.10);
+			player.removeHex(stat, 0.10);
 		}
 	}
 	doNext(camp.returnToCampUseOneHour);

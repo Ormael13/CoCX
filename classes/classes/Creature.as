@@ -428,6 +428,53 @@ public class Creature extends Utils
 			}
 		}
 
+		public function addHex(statName:String, power:Number):void {
+			if (this.hasPerk(PerkLib.ZenjisInfluence2)) power *= 0.60;
+			if (statName == "sens" || statName == "cor") {
+				statStore.addBuff(statName, power, 'Hex', {text: 'Hex'});
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp(statName);
+			} else {
+				statStore.addBuff(statName, -power, 'Hex', {text: 'Hex'});
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatDown(statName);
+			}
+		}
+		public function removeHex(statName:String, power:Number):void {
+			var stat:BuffableStat = statStore.findBuffableStat(statName);
+			if (!stat) {
+				// Error? No stat with such name
+				throw new Error("No such stat "+statName);
+			}
+			var current:Number = stat.valueOfBuff('Hex');
+			if (statName == "sens" || statName == "cor") {
+				if (current >0){
+					if (power*2 >= current) {
+						stat.removeBuff('Hex');
+						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+						CoC.instance.mainView.statsView.showStatDown(statName);
+					} else if (power*2 < current) {
+						stat.addOrIncreaseBuff('Hex', -power*2);
+						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+						CoC.instance.mainView.statsView.showStatUp(statName);
+					}
+				}
+			}
+			else {
+				if (current < 0) {
+					if (power*2 >= -current) {
+						stat.removeBuff('Hex');
+						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+						CoC.instance.mainView.statsView.showStatUp(statName);
+					} else if (power*2 < -current) {
+						stat.addOrIncreaseBuff('Hex', power*2);
+						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+						CoC.instance.mainView.statsView.showStatDown(statName);
+					}
+				}
+			}
+		}
+
 		//Primary stats
 		public function get sens():Number { return sensStat.value; }
 		public var cor:Number = 0;

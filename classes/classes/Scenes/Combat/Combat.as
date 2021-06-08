@@ -7764,8 +7764,8 @@ public class Combat extends BaseContent {
             outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
         }
         if (monster.hasStatusEffect(StatusEffects.AuraOfMadness) && !player.hasPerk(PerkLib.Insanity)) {
-			player.addCurse("int", monster.statusEffectv1(StatusEffects.AuraOfMadness));//non bosses have it 5
-			player.addCurse("wis", monster.statusEffectv2(StatusEffects.AuraOfMadness));//bosses have it at 20
+			player.addHex("int", monster.statusEffectv1(StatusEffects.AuraOfMadness));//non bosses have it 5
+			player.addHex("wis", monster.statusEffectv2(StatusEffects.AuraOfMadness));//bosses have it at 20
             outputText("<b>As the battle draws on you feel yourself slowly losing your grip on reality.</b>\n\n");
 			if (player.inte <= 1 || player.wis <= 1) {
                 doNext(endHpLoss);
