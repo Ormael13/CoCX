@@ -13,13 +13,13 @@ public class DemonPackDesert extends Monster
 	{
 
 
-		override protected function performCombatAction():void
-		{
-			//Demon pack has different AI
-			if (rand(2) == 0)
-				special1();
-			else special2();
-		}
+		//override protected function performCombatAction():void
+		//{
+		//	//Demon pack has different AI
+		//	if (rand(2) == 0)
+		//		special1();
+		//	else special2();
+		//}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
@@ -137,8 +137,10 @@ public class DemonPackDesert extends Monster
 							consumables.OVIELIX,
 							consumables.B__BOOK);
 			this.abilities = [
-				{call: SceneLib.combat.packAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
-				{call: SceneLib.combat.lustAttack(), type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+				//{call: SceneLib.combat.packAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				//{call: SceneLib.combat.lustAttack(), type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+				{call: special1, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: special2, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 			];
 			this.tailType = Tail.DEMONIC;
 			this.horns.type = Horns.DEMON;
