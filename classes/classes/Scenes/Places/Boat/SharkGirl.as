@@ -79,8 +79,13 @@ public class SharkGirl extends Monster
 					add(armors.S_SWMWR,1).
 					add(consumables.SHARK_T,5).
 					add(null,1);
-			this.special1 = sharkTease;
-			this.special2 = sharkTease;
+			this.abilities = [
+				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+				{call: sharkTease, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+				{call: sharkTease, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+			];
+			//this.special1 = sharkTease;
+			//this.special2 = sharkTease;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();
 		}

@@ -216,6 +216,7 @@
     </palette>
     <colorkeys>
         <key src="#FF88FF" base="hair" transform="lighten(25)"/>
+		<key src="#f934f9" base="hair" transform="lighten(10)"/>
         <key src="#CC00CC" base="hair"/>
         <key src="#880088" base="hair" transform="darken(25)"/>
         <key src="#440044" base="hair" transform="darken(50)"/>
@@ -737,7 +738,9 @@
         <cell rect="271,251,89,98" name="hair_bg/yeti" dx="60" dy="4"/>
         <cell rect="361,251,89,98" name="hair_bg/dwarven" dx="59" dy="7"/>
         <cell rect="451,251,89,98" name="hair_bg/ponytail" dx="74" dy="4"/>
-        <cell rect="541,251,89,98" name="hair_bg/twinPigtail" dx="59" dy="6"/>
+        <cell rect="541,251,87,98" name="hair_bg/twinPigtail" dx="59" dy="6"/>
+        <cell rect="991,251,87,98" name="hair/fourWindBraid" dx="69" dy="3"/>
+        <cell rect="991,350,89,164" name="hair_bg/fourWindBraid" dx="69" dy="2"/>
         <cell rect="1,350,89,98" name="hair/raiju" dx="60" dy="4"/>
         <cell rect="91,350,89,164" name="hair_bg/raiju3" dx="60" dy="4"/>
         <cell rect="181,350,89,98" name="hair/hellcat" dx="60" dy="4"/>
@@ -2070,6 +2073,18 @@
                             <hide part="hair_bg/raiju3"/>
                             <hide part="hair_bg/hellcat"/>
                         </if>
+                    </case>
+					<case values="Hair.SNOWLILY">
+						<hide part="hair/*"/>
+						<hide part="hair_bg/*"/>
+                        <show part="hair/yukionna"/>
+						<show part="hair_bg/yukionna"/>
+                    </case>
+					<case values="Hair.FOURWIND">
+						<hide part="hair/*"/>
+						<hide part="hair_bg/*"/>
+                        <show part="hair/fourWindBraid"/>
+						<show part="hair_bg/fourWindBraid"/>
                     </case>
                     <default>
                         <if test="hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.PRISMATIC">

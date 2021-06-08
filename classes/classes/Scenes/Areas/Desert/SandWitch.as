@@ -98,9 +98,15 @@ public class SandWitch extends Monster
 					consumables.RMANUSC,
 					consumables.CRIMS_J,
 					null);
-			this.special1 = lustMagicAttack;
-			this.special2 = special2;
-			this.special3 = special3;
+			this.abilities = [
+				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+				{call: lustMagicAttack, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]},
+				{call: special2, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]},
+				{call: special3, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]}
+			];
+			//this.special1 = lustMagicAttack;
+			//this.special2 = special2;
+			//this.special3 = special3;
 			checkMonster();
 		}
 
