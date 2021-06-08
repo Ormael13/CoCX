@@ -283,7 +283,7 @@
 
 
 	<!-- LOCATION IN SCREEN AREA -->
-    <spritemap file="body.png">
+        <spritemap file="body.png">
         <cell rect="1,90,49,59" name="torso/human" dx="79" dy="64"/>
         <cell rect="51,90,49,59" name="torso/fur" dx="79" dy="64"/>
         <cell rect="101,90,49,59" name="torso/chitin" dx="79" dy="64"/>
@@ -629,7 +629,9 @@
         <cell rect="1003,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArmLewd" dx="85" dy="59"/>
         <cell rect="1234,158,20,55" name="clothLeftArm/vampireClothingleftArm" dx="81" dy="68"/>
         <cell rect="1276,158,20,55" name="clothLeftArm/vampireClothingleftArmLewd" dx="85" dy="64"/>
-        <cell rect="1099,543,70,90" name="clothLeftArm/fairyQueenDressUnderClothes" dx="64" dy="66"/>
+        <cell rect="1099,543,70,90" name="clothLeftArm/fairyqueendressleftarmAndLeg" dx="64" dy="66"/>
+		<cell rect="1181,586,35,40" name="clothLeftArm/fairyQueenDressArmBack" dx="99" dy="62"/>
+        <cell rect="1181,543,35,40" name="clothLeftArm/fairyqueendressrightarmShield" dx="101" dy="68"/>
         <cell rect="1272,434,40,44" name="clothLeftArm/berserkerArmorArmsFeralLeft" dx="56" dy="56"/>
         <cell rect="1322,434,40,44" name="clothLeftArm/berserkerArmorArmsFeralQuadLeft" dx="56" dy="56"/>
         <cell rect="1486,158,40,55" name="clothLeftArm/mageRobe" dx="70" dy="59"/>
@@ -5146,7 +5148,8 @@
 
 		<if test="fairyQueenRegalia">
 			<show part="clothe/fairyQueenDressFront"/>
-			<show part="clothLeftArm/fairyQueenDressUnderClothes"/>
+			<show part="clothLeftArm/fairyqueendressleftarmAndLeg"/>
+			<show part="clothLeftArm/fairyQueenDressArmBack"/>
 			<show part="clothCape/fairyQueenDressUnder"/>
 			<show part="glove_fg/fairyQueenDressArmFront"/>
 			<show part="clotheHead/fairyQueenCirclet"/>
@@ -5157,6 +5160,14 @@
 			<show part="arms_bg/human"/>
 			<hide part="legs/*"/>
 			<show part="legs/fairyFlying"/>
+			<if test="PlayerHasAShield or PlayerHasADualWeapon">
+				<hide part="arms/*"/>
+				<hide part="arms_fg/*"/>
+				<hide part="glove_fg/*"/>
+				<hide part="clothLeftArm/fairyQueenDressArmBack"/>
+				<show part="arms/human"/>
+				<show part="clothLeftArm/fairyqueendressrightarmShield"/>
+			</if>
 		</if>
 
         <if test="berserkerArmor">
