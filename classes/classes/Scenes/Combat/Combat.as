@@ -7963,7 +7963,7 @@ public class Combat extends BaseContent {
                 damage0 *= 1.75;
             }
             //High damage to goes.
-            damage0 = magic.calcVoltageModImpl(damage);
+            damage0 = magic.calcVoltageModImpl(damage0);
             if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage0 *= (1 + (player.lust100 * 0.01));
             if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage0 *= 4;
             if (player.hasPerk(PerkLib.Apex)) lustDmgA *= 1.50;
@@ -8069,16 +8069,10 @@ public class Combat extends BaseContent {
                     crit3 = true;
                     damageBFA *= 1.75;
                 }
-                damageBFA = magic.calcGlacialModImpl(damage);
-                damageBFA *= 0.5;
+                damageBFA = magic.calcGlacialModImpl(damageBFA)/2;
                 var SpellMultiplier2:Number = 1;
                 SpellMultiplier2 += spellMod() - 1;
                 damageBFA *= SpellMultiplier2;
-                if (monster.cor < 33) damageBFA = Math.round(damage * 1.0);
-                else if (monster.cor < 50) damageBFA = Math.round(damage * 1.1);
-                else if (monster.cor < 75) damageBFA = Math.round(damage * 1.2);
-                else if (monster.cor < 90) damageBFA = Math.round(damage * 1.3);
-                else damageBFA = Math.round(damage * 1.4); //30% more damage against very high corruption.
                 if (player.hasPerk(PerkLib.RacialParagon)) damageBFA *= 1.50;
                 if (player.hasPerk(PerkLib.Apex)) damageBFA *= 1.50;
                 if (player.hasPerk(PerkLib.AlphaAndOmega)) damageBFA *= 1.50;
@@ -8088,7 +8082,7 @@ public class Combat extends BaseContent {
                 doIceDamage(damageBFA, true, true);
                 outputText(" damage!");
                 if (crit3) outputText(" <b>*Critical Hit!*</b>");
-                if (monster.plural) outputText(" Your opponent are affected by the freezing cold, slowing down their reflexes and thoughts as ice creeps on their body.");
+                if (monster.plural) outputText(" Your opponents are affected by the freezing cold, slowing down their reflexes and thoughts as ice creeps on their body.");
                 else outputText(" Your opponent is affected by the freezing cold, slowing  down [monster his] reflexes and thoughts as ice creeps on [monster his] body.");
                 monster.statStore.replaceBuffObject({"spe.mult":-5, "int.mult":-5}, "Black Frost",{text:"Black Frost"});
                 outputText("\n\n");
