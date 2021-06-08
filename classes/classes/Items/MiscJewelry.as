@@ -1,20 +1,20 @@
 /**
- * Created by Kitteh6660 on 08.29.14.
+ * Created by Ormael on 04.06.21.
  */
-package classes.Items
+package classes.Items 
 {
 	import classes.ItemType;
 	import classes.PerkLib;
 	import classes.Player;
 
-	public class Jewelry extends Useable
+	public class MiscJewelry extends Useable
 	{
 		private var _effectId:Number;
 		private var _effectMagnitude:Number;
 		private var _perk:String;
 		private var _name:String;
-
-		public function Jewelry(id:String, shortName:String, name:String, longName:String, effectId:Number, effectMagnitude:Number, value:Number = 0, description:String = null, type:String = "", perk:String = "")
+		
+		public function MiscJewelry(id:String, shortName:String, name:String, longName:String, effectId:Number, effectMagnitude:Number, value:Number = 0, description:String = null, type:String = "", perk:String = "") 
 		{
 			super(id, shortName, longName, value, description);
 			this._name = name;
@@ -40,23 +40,25 @@ package classes.Items
 			outputText("You equip " + longName + ".  ");
 		}
 		
-		public function playerEquip():Jewelry { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
+		public function playerEquip():MiscJewelry { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
 			return this;
 		}
 		
-		public function playerRemove():Jewelry { //This item is being removed by the player. Remove any perks, etc. - This function should only handle mechanics, not text output
+		public function playerRemove():MiscJewelry { //This item is being removed by the player. Remove any perks, etc. - This function should only handle mechanics, not text output
 			return this;
 		}
 		
 		public function removeText():void {} //Produces any text seen when removing the armor normally
 
-		/*public function get sexiness():int {
+		public function get sexiness():int {
 			switch(this.name) {
 				case "Demonic mage tail ornament":
 					return 4;
 				default:
 					return 0;
 			}
-		}*/
+		}
+		
 	}
+
 }

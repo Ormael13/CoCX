@@ -17,6 +17,9 @@ import classes.internals.Utils;
 		{}
 		
 		private var _extra:Number = 0;
+		private var _roulette1:Number = 0;
+		private var _roulette2:Number = 0;
+		private var _roulette3:Number = 0;
 		
 		public function dinahAffection(changes:Number = 0):Number {
 			flags[kFLAGS.DINAH_AFFECTION] += changes;
@@ -70,6 +73,9 @@ import classes.internals.Utils;
 		public function DinahIntro2():void {
 			clearOutput();//camp intro
 			_extra = (1 + rand(3));
+			if (rand(2) == 0) _roulette1 = (1 + rand(4));
+			if (rand(2) == 0) _roulette2 = (1 + rand(3));
+			if (rand(2) == 0) _roulette3 = (1 + rand(5));
 			outputText("\"<i>Oh, Great Lady Godiva, tell us your will!</i>\" With religious zeal, Dinah pulls a coin out of nowhere and throws it into the air. But before it can fall on the ground, it vanishes. ");
 			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90) {
 				outputText("\"<i>The Coin Told Me To <b>Cuddle</b> You.</i>\" her smile becomes even wider. You've got a <i>very</i> bad feeling about this. It looks like there is no other choice. You've gotta to beat some sense into her before getting back to buisness.");
@@ -195,10 +201,19 @@ import classes.internals.Utils;
 			addButton(7, consumables.REDVIAL.shortName, buyItem3, 7).hint("Buy a vial of ominous red liquid.");
 			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
 			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
-			addButton(10, "Boss D.", DinahShopMainMenu2);
+			if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
+				addButton(10, "Boss D.", DinahShopMainMenu2);
+				addButton(12, "Roulette", DinahShopMainMenu3).hint("You feelin' lucky champion?");
+			}
+			else {
+				addButtonDisabled(10, "Boss D.", "Maybe if merchant would be more interested in you...");
+				addButtonDisabled(12, "Roulette", "Maybe if merchant would be more interested in you...");
+			}
 			addButton(14, "Back", DinahMainMenu);
 		}
 		public function DinahShopMainMenu2():void {
+			clearOutput();
+			outputText("You begin to browse Dinah shop inventory.");
 			menu();
 			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] >= 1) addButton(0, consumables.JABBERS.shortName, buyItem4, 23).hint("Buy a Jabberwocky Scale.");
 			else addButtonDisabled(0, "???", "Req. to beat one of bosses in Wonderland to have access to this TF item.");
@@ -214,6 +229,25 @@ import classes.internals.Utils;
 				if (player.statusEffectv2(StatusEffects.TFDealer2) > 0) addButton(5, consumables.M_GOSSR.shortName, buyItem4, 25).hint("Buy a Midnight Black Glossamer.");
 				else addButtonDisabled(3, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
 			}
+			addButton(14, "Back", DinahShopMainMenu);
+		}
+		public function DinahShopMainMenu3():void {
+			clearOutput();
+			outputText("You begin to browse Dinah shop inventory.");
+			menu();
+			if (_roulette1 == 0) addButtonDisabled(1, "???", "Dud. Shame, shame.");
+			if (_roulette1 == 1) addButton(1, "UnDefKingS", buyItem5, 40).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
+			if (_roulette1 == 2) addButton(1, "CroUndefKing", buyItem5, 41).hint("Crown of the Undefeated King - You can't loose by HP until reaching droping into negative health larger than 5% of max HP + 500(scalable). When below 0 HP PC would gain additional 1% of max HP per turn regeneration effect.");
+			if (_roulette1 == 3) addButton(1, "UnDefKingDest", buyItem5, 42).hint("Undefeated King's Destroyer - Massive mace weapon that will increase PC parry chance by 20%. Have 20% base chance for stun (3 rounds).");
+			if (_roulette2 == 0) addButtonDisabled(2, "???", "Dud. Shame, shame.");
+			if (_roulette2 == 1) addButton(2, "FlameLizR", buyItem5, 45).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
+			if (_roulette2 == 2) addButton(2, "InferMouseR", buyItem5, 46).hint("Infernal Mouse ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
+			if (_roulette3 == 0) addButtonDisabled(3, "???", "Dud. Shame, shame.");
+			if (_roulette3 == 1) addButton(3, "HBHelmet", buyItem5, 50).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
+			if (_roulette3 == 2) addButton(3, "HBArmor", buyItem5, 51).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
+			//later put her lower body armor part of HB set
+			if (_roulette3 == 3) addButton(3, "HBShirt", buyItem5, 52).hint("HB Shirt - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
+			if (_roulette3 == 4) addButton(3, "HBShorts", buyItem5, 53).hint("HB Shorts - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
 			addButton(14, "Back", DinahShopMainMenu);
 		}
 		private function buyItem1(item:Number = 0):void {
@@ -239,6 +273,19 @@ import classes.internals.Utils;
 			if (item == 23) catChimeraBuy4(consumables.JABBERS);
 			if (item == 24) catChimeraBuy4(consumables.ME_DROP);
 			if (item == 25) catChimeraBuy4(consumables.M_GOSSR);
+		}
+		private function buyItem5(item:Number = 0):void {
+			if (item == 40) catChimeraBuy5(jewelries.UNDKINS);
+			if (item == 41) catChimeraBuy5(headjewelries.CUNDKIN);
+			if (item == 42) catChimeraBuy5(weapons.UDKDEST);
+			if (item == 45) catChimeraBuy5(jewelries.FLLIRNG);
+			if (item == 46) catChimeraBuy5(jewelries.INMORNG);
+			if (item == 50) catChimeraBuy5(headjewelries.HBHELM);
+			if (item == 51) catChimeraBuy5(armors.HBARMOR);
+			if (item == 52) catChimeraBuy5(undergarments.HBSHIRT);
+			if (item == 53) catChimeraBuy5(undergarments.HBSHORT);
+			//if (item == 40) catChimeraBuy5();
+			//if (item == 40) catChimeraBuy5();
 		}
 		public function catChimeraBuy1(itype:ItemType):void {
 			clearOutput();
@@ -284,6 +331,17 @@ import classes.internals.Utils;
 			}
 			doYesNo(Utils.curry(catChimeraTransact4,itype), DinahShopMainMenu2);
 		}
+		public function catChimeraBuy5(itype:ItemType):void {
+			clearOutput();
+			outputText("You point out the " + itype.longName + ".\n\n");
+			outputText("\"<i>Oh this one? It costs " + (itype.value * _extra) + " gems.</i>\"");
+			if (player.gems < (itype.value * _extra)) {
+				outputText("\n<b>You don't have enough gems...</b>");
+				doNext(DinahShopMainMenu3);
+				return;
+			}
+			doYesNo(Utils.curry(catChimeraTransact4,itype), DinahShopMainMenu2);
+		}
 		public function catChimeraTransact1(itype:ItemType):void {
 			clearOutput();
 			player.gems -= itype.value * (1 + _extra);
@@ -307,6 +365,12 @@ import classes.internals.Utils;
 			player.gems -= itype.value * (6 + _extra);
 			statScreenRefresh();
 			inventory.takeItem(itype, DinahShopMainMenu2);
+		}
+		public function catChimeraTransact5(itype:ItemType):void {
+			clearOutput();
+			player.gems -= itype.value * _extra;
+			statScreenRefresh();
+			inventory.takeItem(itype, DinahShopMainMenu3);
 		}
 	}
 }

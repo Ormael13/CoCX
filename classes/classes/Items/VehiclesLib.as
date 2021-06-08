@@ -1,9 +1,9 @@
+/**
+ * ...
+ * @author Ormael
+ */
 package classes.Items 
 {
-	/**
-	 * ...
-	 * @author Ormael
-	 */
 	import classes.Items.Vehicles.*;
 	import classes.PerkLib;
 	import classes.PerkType;

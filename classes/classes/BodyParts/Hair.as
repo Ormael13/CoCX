@@ -145,6 +145,8 @@ public class Hair extends BodyPart {
 	public static const LONGTRESSES:int  = 3;
 	public static const TWINPIGTAIL:int  = 4;
 	public static const DWARVEN:int  = 5;
+	public static const SNOWLILY:int  = 6;
+	public static const FOURWIND:int  = 7;
 
 	public var color:String = "no";
 	public var length:Number = 0.0;

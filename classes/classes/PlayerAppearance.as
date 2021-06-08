@@ -1767,6 +1767,10 @@ public class PlayerAppearance extends BaseContent {
 				outputText(" Your hairs are tied up into a pair of pigtail.");
 			else if(hairStyle == Hair.DWARVEN)
 				outputText(" Your hairs are tied up into a dwarven fashion.");
+			else if(hairStyle == Hair.SNOWLILY)
+				outputText(" Your hairs are tied up into a snow lily blossom fashion.");
+			else if(hairStyle == Hair.FOURWIND)
+				outputText(" Your hairs are tied up in the traditionnal four wind braid style.");
 		}
 	}
 

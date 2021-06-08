@@ -12,8 +12,8 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
-	import classes.Scenes.Areas.Desert.SandWitchScene;
-	import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.Scenes.Areas.Desert.SandWitchScene;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
@@ -820,12 +820,15 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.armorId = player.armor.id;
 		saveFile.data.weaponId = player.weapon.id;
 		saveFile.data.weaponRangeId = player.weaponRange.id;
+		saveFile.data.weaponFlyingSwordsId = player.weaponFlyingSwords.id;
 		saveFile.data.headJewelryId = player.headJewelry.id;
 		saveFile.data.necklaceId = player.necklace.id;
 		saveFile.data.jewelryId = player.jewelry.id;
 		saveFile.data.jewelryId2 = player.jewelry2.id;
 		saveFile.data.jewelryId3 = player.jewelry3.id;
 		saveFile.data.jewelryId4 = player.jewelry4.id;
+		saveFile.data.miscJewelryId = player.miscJewelry.id;
+		saveFile.data.miscJewelryId2 = player.miscJewelry2.id;
 		saveFile.data.shieldId = player.shield.id;
 		saveFile.data.upperGarmentId = player.upperGarment.id;
 		saveFile.data.lowerGarmentId = player.lowerGarment.id;
@@ -1675,6 +1678,18 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				}
 			}
 		}
+		if (saveFile.data.weaponFlyingSwordsId){
+			player.setWeaponFlyingSwordsHiddenField((ItemType.lookupItem(saveFile.data.weaponFlyingSwordsId) as FlyingSwords) || FlyingSwordsLib.NOTHING);
+		} else {
+			player.setWeaponFlyingSwords(FlyingSwordsLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is FlyingSwords && (itype as FlyingSwords).name == saveFile.data.weaponFlyingSwordsName){
+					player.setWeaponFlyingSwordsHiddenField(itype as FlyingSwords || FlyingSwordsLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}
 		if (saveFile.data.shieldId){
 			player.setShieldHiddenField((ItemType.lookupItem(saveFile.data.shieldId) as Shield) || ShieldLib.NOTHING);
 		} else {
@@ -1682,6 +1697,30 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			for each (itype in ItemType.getItemLibrary()) {
 				if (itype is Shield && (itype as Shield).name == saveFile.data.shieldName){
 					player.setShieldHiddenField(itype as Shield || ShieldLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}
+		if (saveFile.data.miscJewelryId){
+			player.setMiscJewelryHiddenField((ItemType.lookupItem(saveFile.data.miscJewelryId) as MiscJewelry) || MiscJewelryLib.NOTHING);
+		} else {
+			player.setMiscJewelry(MiscJewelryLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is MiscJewelry && (itype as MiscJewelry).name == saveFile.data.miscjewelryName){
+					player.setMiscJewelryHiddenField(itype as MiscJewelry || MiscJewelryLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}
+		if (saveFile.data.miscJewelryId2){
+			player.setMiscJewelryHiddenField2((ItemType.lookupItem(saveFile.data.miscJewelryId2) as MiscJewelry) || MiscJewelryLib.NOTHING);
+		} else {
+			player.setMiscJewelry2(MiscJewelryLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is MiscJewelry && (itype as MiscJewelry).name == saveFile.data.miscjewelryName2){
+					player.setMiscJewelryHiddenField2(itype as MiscJewelry || MiscJewelryLib.NOTHING);
 					found = true;
 					break;
 				}
@@ -1698,7 +1737,19 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 					break;
 				}
 			}
-		}
+		}/*
+		if (saveFile.data.jewelryId2){
+			player.setJewelryHiddenField2((ItemType.lookupItem(saveFile.data.jewelryId2) as Jewelry) || JewelryLib.NOTHING);
+		} else {
+			player.setJewelry2(JewelryLib.NOTHING);
+			for each (itype in ItemType.getItemLibrary()) {
+				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName2){
+					player.setJewelryHiddenField2(itype as Jewelry || JewelryLib.NOTHING);
+					found = true;
+					break;
+				}
+			}
+		}*/
 		if (saveFile.data.necklaceId){
 			player.setNecklaceHiddenField((ItemType.lookupItem(saveFile.data.necklaceId) as Necklace) || NecklaceLib.NOTHING);
 		} else {
