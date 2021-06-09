@@ -190,11 +190,11 @@ public function aethertwinsFollowers():void {
 	clearOutput();
 	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] >= 1 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] >= 1) AetherTwinsCount = 1;
 	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] >= 1 && flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] >= 1) AetherTwinsCount = 2;
-	outputText("You walk over to Aether Twins resting place.  Seeing you approach, the sentient weapon"+(AetherTwinsCount > 1 ? "s":"")+" turns the golem "+(AetherTwinsCount > 1 ? "they":"it")+" used as temporal host in your direction.\n\n");
+	outputText("You walk over to the Aether Twins' resting place.  Seeing you approach, the sentient weapon"+(AetherTwinsCount > 1 ? "s turn the golem they":" turns the golem it")+" used as a temporal host in your direction.\n\n");
 	outputText("\"<i>Hey there, [name]! Need anything while we're safe at camp?</i>\"\n\n");
 	menu();
 	//addButton(0, "Appearance", valeriaAppearance).hint("Examine Aether Twins appearance.");
-	addButton(1, "Talk", aethertwinsFollowersTalk).hint("Discuss with Aether Twins.");
+	addButton(1, "Talk", aethertwinsFollowersTalk).hint("Discuss with the Aether Twins.");
 	if (AetherTwinsFoodMenu) addButton(2, "Feed", aethertwinsFollowersFeed).hint("Give Aether Twins some equipment or materials to eat.");
 	else addButtonDisabled(2, "???", "Maybe you should talk with them to unlock this option?");
 	//if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", valeriaSpar).hint("Do a quick battle with Valeria!");
@@ -231,7 +231,7 @@ public function aethertwinsFollowersAppearance():void {
 
 public function aethertwinsFollowersTalk():void {
 	clearOutput();
-	outputText("\"<i>So what you wanna talk about?</i>\" Sentient weapon"+(AetherTwinsCount > 1 ? "s":"")+" ask"+(AetherTwinsCount > 1 ? "s":"")+". \"<i>Or you wanna go smash someone till they are reduced to blood pulp?</i>\"\n\n");
+	outputText("\"<i>So what do you wanna talk about?</i>\" The sentient weapon"+(AetherTwinsCount > 1 ? "s ask":"asks")+". \"<i>Or do you wanna go smash someone till they are reduced to a blood pulp?</i>\"\n\n");
 	menu();
 	addButton(0, "Them", aethertwinsFollowersTalkThem);
 	if (AetherTwinsTalkMenu > 0) {
@@ -246,13 +246,13 @@ public function aethertwinsFollowersTalk():void {
 }
 public function aethertwinsFollowersTalkThem():void {
 	clearOutput();
-	outputText("\"<i>Oh, so you're interested in "+(AetherTwinsCount > 1 ? "us":"me")+"? "+(AetherTwinsCount > 1 ? "We're":"I'm")+" just a ordinary sentient weapon"+(AetherTwinsCount > 1 ? "s":"")+" crafted by some vip blacksmith. Maybe even VERY VIP one blacksmith. If you know what "+(AetherTwinsCount > 1 ? "we":"i")+" mean.</i>\"\n\n");
-	outputText("No you not don't know or at least you react in a way they take it as not knowing. With light reminder to return to subject "+(AetherTwinsCount > 1 ? "they":"she")+" continue"+(AetherTwinsCount > 1 ? "s":"")+".\n\n");
-	outputText("\"<i>Maybe you think "+(AetherTwinsCount > 1 ? "we're":"i'm")+" weak but that all relative. Just givine "+(AetherTwinsCount > 1 ? "us":"me")+" some snacks and "+(AetherTwinsCount > 1 ? "we":"i")+"'ll get stronger in no time.</i>\"\n\n");
-	outputText("Giving them snacks? Like some food? Aren't "+(AetherTwinsCount > 1 ? "they":"she")+" a weapon. How would "+(AetherTwinsCount > 1 ? "they":"she")+" eat all that food?\n\n");
-	outputText("\"<i>Hella no. "+(AetherTwinsCount > 1 ? "We":"I")+" not interested in food you eating. Bring "+(AetherTwinsCount > 1 ? "us":"me")+" all those tasty metals or equipment like swords or shields. That should be enough</i>\"\n\n");
-	outputText("That certainly would make thigns easier... or harder? As long "+(AetherTwinsCount > 1 ? "their":"her")+" 'appetite' won't be bottomless.\n\n");
-	outputText("\"<i>So then ummm.. did you brought some snacks?</i>\" "+(AetherTwinsCount > 1 ? "Their":"Her")+" voice sounds like "+(AetherTwinsCount > 1 ? "they":"she")+" expecting to get some 'food' now. Making excuse of need to go bring it you ends this conversation.\n\n");
+	outputText("\"<i>Oh, so you're interested in "+(AetherTwinsCount > 1 ? "us":"me")+"? "+(AetherTwinsCount > 1 ? "We're just":"I'm just an")+" ordinary sentient weapon"+(AetherTwinsCount > 1 ? "s":"")+" crafted by some gifted blacksmith. Maybe even a very 'gifted' blacksmith If you know what "+(AetherTwinsCount > 1 ? "we":"I")+" mean.</i>\"\n\n");
+	outputText("No you not don't know or at least you react in a way they take it as you not knowing. With a light reminder to return to the subject "+(AetherTwinsCount > 1 ? "they":"she")+" continue"+(AetherTwinsCount > 1 ? "s":"")+".\n\n");
+	outputText("\"<i>Maybe you think "+(AetherTwinsCount > 1 ? "we're":"i'm")+" weak but that's all relative. Just give "+(AetherTwinsCount > 1 ? "us":"me")+" some snacks and "+(AetherTwinsCount > 1 ? "we":"I")+"'ll get stronger in no time.</i>\"\n\n");
+	outputText("Giving "+(AetherTwinsCount > 1 ? "them":"her")+" snacks? Like some food? Aren't "+(AetherTwinsCount > 1 ? "they":"she")+" a weapon? How would "+(AetherTwinsCount > 1 ? "they":"she")+" eat all that food?\n\n");
+	outputText("\"<i>Hella no. "+(AetherTwinsCount > 1 ? "We are":"I am")+" not interested in food your kind eats. Bring "+(AetherTwinsCount > 1 ? "us":"me")+" all those tasty metals or equipment like gloves, claws and shields. That should be enough.</i>\"\n\n");
+	outputText("That certainly would make thigns easier... or harder? As long "+(AetherTwinsCount > 1 ? "their":"her")+" 'appetite' isn't bottomless.\n\n");
+	outputText("\"<i>So then ummm.. did you bring us some snacks?</i>\" "+(AetherTwinsCount > 1 ? "Their":"Her")+" voice sounds like "+(AetherTwinsCount > 1 ? "they are":"she is")+" expecting to get some 'food' now. You make an excuse like 'you need to go' and bring an end to the conversation.\n\n");
 	if (!AetherTwinsFoodMenu && flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] >= 1 && flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] >= 1) {
 		outputText("<b>Feed Option has been unlocked!!!</b>\n\n");
 		AetherTwinsFoodMenu = true;
@@ -262,18 +262,18 @@ public function aethertwinsFollowersTalkThem():void {
 }
 public function aethertwinsFollowersTalkEvolutions():void {
 	clearOutput();
-	outputText("\"<i>That what makes "+(AetherTwinsCount > 1 ? "us":"me")+" special, right? To keep devour and evolve reaching pinnacle.</i>\" Reaching pinnacle? But why? \"<i>That a silly question isn't it? Because...</i>\" "+(AetherTwinsCount > 1 ? "they":"she")+" fall silent for very long moment as if trying recall reason. \"<i>... because it's purpose of ");
-	outputText((AetherTwinsCount > 1 ? "our":"my")+" existance.</i>\"\n\nJust like that? Merely existing to devour and evolve? nothign more to "+(AetherTwinsCount > 1 ? "their":"her")+" evolutions than this?\n\n");
-	outputText("\"<i>Doesn't you also changed since comming to this realm? You also evolve in your own way so why you think "+(AetherTwinsCount > 1 ? "our":"my")+" evolutions have no purpose. Survival of the fittest, right?</i>\"\n\n");
-	outputText("You fall silent thinking over that. Yes you changed since comming here. Before you can continue conversation "+(AetherTwinsCount > 1 ? "they":"she")+" ends it, \"<i>"+(AetherTwinsCount > 1 ? "We're":"I'm")+" bored. Let get find someone to beat or something to eat. Come on... talking is so boring!!!</i>\"\n\n");
+	outputText("\"<i>That's what makes "+(AetherTwinsCount > 1 ? "us":"me")+" special, right? To keep devouring and evolving reaching our pinnacle.</i>\" Reaching your pinnacle? But why? \"<i>That's a silly question isn't it? Because...</i>\" "+(AetherTwinsCount > 1 ? "they":"she")+" fall silent for very long moment as if trying recall a reason. \"<i>... because it's the purpose of ");
+	outputText((AetherTwinsCount > 1 ? "our":"my")+" existance.</i>\"\n\nJust like that? Merely existing to devour and evolve? Nothing more to "+(AetherTwinsCount > 1 ? "their":"her")+" evolutions than this?\n\n");
+	outputText("\"<i>Haven't you also changed since coming to this realm? You also evolve in your own way, so why do you think "+(AetherTwinsCount > 1 ? "our":"my")+" evolutions have no purpose? Survival of the fittest, right?</i>\"\n\n");
+	outputText("You fall silent thinking that over. Yes, you changed since comming here. Before you can continue conversation "+(AetherTwinsCount > 1 ? "they end":"she ends")+" it, \"<i>"+(AetherTwinsCount > 1 ? "We're":"I'm")+" bored, let's find someone to beat or something to eat. Come on... talking is so boring!!!</i>\"\n\n");
 	doNext(aethertwinsFollowersTalk);
 	cheatTime(1/4);
 }
 public function aethertwinsFollowersTalkPast():void {
 	clearOutput();
-	outputText("\"<i>Past?</i>\" "+(AetherTwinsCount > 1 ? "They":"She")+" focusing for a longer moment trying recall it. It last very long moment before "+(AetherTwinsCount > 1 ? "they":"she")+" stay silent.\n\n\"<i>All "+(AetherTwinsCount > 1 ? "we":"i")+" could recall is awaking ");
-	outputText("inside dungeon next to the golem that "+(AetherTwinsCount > 1 ? "we":"i")+" bonded with and started controling like "+(AetherTwinsCount > 1 ? "our":"my")+" own bod"+(AetherTwinsCount > 1 ? "ies":"y")+". Anything before that time still is veiled like some sort of mist covering "+(AetherTwinsCount > 1 ? "our":"my")+" older memories.</i>\"\n\n");
-	outputText("Well that wasn't much. You ends converstaion assuring "+(AetherTwinsCount > 1 ? "them":"her")+" that with more evolutions "+(AetherTwinsCount > 1 ? "they":"she")+" will recall more details about "+(AetherTwinsCount > 1 ? "their":"her")+" past.\n\n");
+	outputText("\"<i>Past?</i>\" "+(AetherTwinsCount > 1 ? "They focus":"She focuses")+" for a longer moment trying recall it. "+(AetherTwinsCount > 1 ? "They stay":"She stays")+" silent for very long moment before "+(AetherTwinsCount > 1 ? "They speak":"She speaks")+" again.\n\n\"<i>All "+(AetherTwinsCount > 1 ? "we":"I")+" could recall is awaking ");
+	outputText("inside the dungeon next to the golem that "+(AetherTwinsCount > 1 ? "we":"I")+" bonded with and started controling like "+(AetherTwinsCount > 1 ? "our":"my")+" own bod"+(AetherTwinsCount > 1 ? "ies":"y")+". Anything before that time is still veiled like some sort of mist covering "+(AetherTwinsCount > 1 ? "our":"my")+" older memories.</i>\"\n\n");
+	outputText("Well that wasn't much. You end the converstaion asuring "+(AetherTwinsCount > 1 ? "them":"her")+" that with more evolutions "+(AetherTwinsCount > 1 ? "they":"she")+" will recall more details about "+(AetherTwinsCount > 1 ? "their":"her")+" past.\n\n");
 	doNext(aethertwinsFollowersTalk);
 	cheatTime(1/4);
 }
@@ -387,8 +387,8 @@ public function aethertwinsFollowersFeedMaterial(itype:ItemType):void {
 }
 public function aethertwinsFollowersFeedEquipment(itype:ItemType):void {
 	clearOutput();
-	outputText("You deposit the item on the ground and approach the aether twins from it. Not to your surprise the item begins to melt as if turning to sludge as the twins zap them with some unknown magic the twins growing something not unlike magical teeth with which it begins munching at this new material. Before long the item is fully assimilated into the twins which acquires some of its powers.\n\n");
-	outputText("\"<i>Thank you for the meal.</i>\" they grins.\n\n");
+	outputText("You deposit the item on the ground and approach the aether twins from it. Not to your surprise the item begins to melt as if turning to sludge as the twins zap them with some unknown magic the twins growing something not unlike magical teeth with which they begin munching on this new material. Before long the item is fully assimilated into the twins which acquire some of its powers.\n\n");
+	outputText("\"<i>Thank you for the meal.</i>\" they grin.\n\n");
 	switch (itype) {
 		case shields.BUCKLER:	AetherTwinsFoodMenuBuckler = true;		break;
 		case shields.SPIL_SH:	AetherTwinsFoodMenuSpikeLShield = true;	break;
@@ -400,8 +400,8 @@ public function aethertwinsFollowersFeedEquipment(itype:ItemType):void {
 	}
 	player.destroyItems(itype, 1);
 	if (AetherTwinsFoodMenuBuckler && AetherTwinsFoodMenuSGauntlet && AetherTwinsFoodMenuClaws) {
-		outputText("\"<i>Woohoo we're evolving.</i>\" they exclaims. \"<i>We going Faster Harder Better Stronger Curvier!!!</i>\"\n\n");
-		outputText("<b>Aether Twins base form evolved unlocking some of their sealed memories.</b>\n\n");
+		outputText("\"<i>Woohoo we're evolving.</i>\" they exclaim. \"<i>We're going Faster Harder Better Stronger Curvier!!!</i>\"\n\n");
+		outputText("<b>The Aether Twins base form evolved unlocking some of their sealed memories.</b>\n\n");
 		player.createStatusEffect(StatusEffects.AetherTwins1, 0, 5, 0, 0);
 		//player.addStatusValue(StatusEffects.AetherTwins1, 2, 5);
 		AetherTwinsShape = "Human-tier Gaunlets";
