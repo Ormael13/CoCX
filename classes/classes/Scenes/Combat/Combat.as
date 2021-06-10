@@ -7963,7 +7963,7 @@ public class Combat extends BaseContent {
                 damage0 *= 1.75;
             }
             //High damage to goes.
-            damage0 = magic.calcVoltageModImpl(damage);
+            damage0 = magic.calcVoltageModImpl(damage0);
             if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage0 *= (1 + (player.lust100 * 0.01));
             if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage0 *= 4;
             if (player.hasPerk(PerkLib.Apex)) lustDmgA *= 1.50;

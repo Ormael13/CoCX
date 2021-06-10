@@ -10247,9 +10247,9 @@ use namespace CoC;
 		}
 
 		public function atlachFullTfCheck():Boolean {
-			return lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && arms.type == Arms.SPIDER && eyes.type == Eyes.FOUR_SPIDER_EYES
-			&& eyes.colour == "red" && rearBody.type == RearBody.ATLACH_NACHA && faceType == Face.SPIDER_FANGS
-			&& hasCoatOfType(Skin.CHITIN) && coatColor == "midnight purple" && hairColor == "midnight purple";
+			return lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && arms.type == Arms.SPIDER && eyes.type == Eyes.FOUR_SPIDER_EYES && ears.type == Ears.ELFIN
+			&& rearBody.type == RearBody.ATLACH_NACHA && faceType == Face.SPIDER_FANGS && hasCoatOfType(Skin.CHITIN)
+			&& eyes.colour == "red" && coatColor == "midnight purple" && hairColor == "midnight purple";
 		}
 		
 		public function atlachNachaScore():int {
@@ -10290,11 +10290,8 @@ use namespace CoC;
 			// Midnight purple hair 1
 			if (hairColor == "midnight purple")
 				score++;
-			// Pussy 1
-			if (hasVagina())
-				score++;
-			// Female 1
-			if (isFemale())
+			// elfin ears
+			if (ears.type == Ears.ELFIN)
 				score++;
 			// Corruption 50+ 1
 			if (cor >= 50)
@@ -10305,6 +10302,9 @@ use namespace CoC;
 			// Insanity +1 (Gained from merging)
 			if (hasPerk(PerkLib.Insanity))
 				score++;
+			// Perk +3 (TransformationImmunity)
+			if (hasPerk(PerkLib.TransformationImmunityAtlach))
+				score+=3;/*
 			// Perk +6 (Arachnid book lung)
 			if (hasPerk(PerkLib.ArachnidBookLung))
 				score+=2;
@@ -10325,10 +10325,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.VenomGlandsEvolved))
 				score++;
 			if (hasPerk(PerkLib.VenomGlandsFinalForm))
-				score++;
-			// Perk +3 (TransformationImmunity)
-			if (hasPerk(PerkLib.TransformationImmunityAtlach))
-				score+=3;
+				score++;*/
 			if (isGargoyle()) score = 0;
 			if (hasPerk(PerkLib.ElementalBody)) score = 0;
 			End("Player","racialScore");
@@ -12997,20 +12994,20 @@ use namespace CoC;
 				maxLibCap2 += 150;
 				maxWisCap2 -= 50;
 				currentSen += 50;
-			} else if (score >= 18) {
-				//18 Atlach Nacha(270) +80 Strength +90 Toughness +100 Intelligence +100 Libido -50 wisdom +50 min/max sensitivity
-				maxStrCap2 += 80;
-				maxTouCap2 += 90;
-				maxIntCap2 += 100;
-				maxLibCap2 += 100;
+			} else if (score >= 21) {
+				//21 Atlach Nacha(945) +80 Strength +90 Toughness +100 Intelligence +100 Libido -50 wisdom +50 sensitivity
+				maxStrCap2 += 280;
+				maxTouCap2 += 315;
+				maxIntCap2 += 350;
+				maxLibCap2 += 350;
 				maxWisCap2 -= 50;
-				currentSen += 50;
-			} else if (score >= 10) {
-				//10 Incomplete Atlach Nacha(150) +50 toughness +75 intelligence +20 Libido  -20 wisdom
-				maxTouCap2 += 50;
-				maxIntCap2 += 75;
-				maxLibCap2 += 20;
-				maxWisCap2 -= 20;
+				currentSen += 90;
+			} else if (score >= 14) {
+				//14 Incomplete Atlach Nacha(190) +50 toughness +75 intelligence +20 Libido -20 wisdom
+				maxTouCap2 += 60;
+				maxIntCap2 += 100;
+				maxLibCap2 += 40;
+				maxWisCap2 -= 10;
 			}
 			addStatusValue(StatusEffects.StrTouSpeCounter2, 1, maxStrCap2);
 			addStatusValue(StatusEffects.StrTouSpeCounter2, 2, maxTouCap2);

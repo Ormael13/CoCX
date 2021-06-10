@@ -364,7 +364,6 @@ public class CombatUI extends BaseCombatContent {
 			addButton(1, "Bite", combat.spiderBiteAttack).hint("Inject your venom.");
 			addButton(2, "Release", combat.BreakOutWeb);
 			vampireBiteDuringGrapple(3);
-
 			//combat.mspecials.buildMenu(magspButtons);
 			if (magspButtons.length > 0) btnMSpecials.show("M. Specials", submenuMagSpecials, "Mental and supernatural special attack menu.", "Magical Specials");
 			if (combat.isPlayerSilenced()) {
