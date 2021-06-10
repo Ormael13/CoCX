@@ -2649,36 +2649,72 @@
 			<case values="Arms.DRAGON">
                 <show part="hands/scale"/>
                 <show part="hands_bg/scale"/>
-				<if test="legCount==2">
-					<if test="lowerBody==LowerBody.DRAGON">
-						<hide part="arms/*"/>
-						<hide part="arms_bg/*"/>
-						<hide part="hands/*"/>
-						<hide part="hands_bg/*"/>
-						<hide part="weapon/*"/>
-						<hide part="shield/*"/>
-						<show part="arms/feral_dragon"/>
-						<show part="arms_bg/feral_dragon"/>
-						<switch>
-							<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
-								<show part="arms_overlay/feral_pscales"/>
-								<show part="arms_overlay_bg/feral_pscales"/>
-							</case>
-							<case test="hasFullCoatOfType(Skin.FUR)">
-								<show part="arms_overlay/feral_fur"/>
-								<show part="arms_overlay_bg/feral_fur"/>
-							</case>
-							<case test="hasFullCoatOfType(Skin.CHITIN)">
-								<show part="arms_overlay/feral_chitin"/>
-								<show part="arms_overlay_bg/feral_chitin"/>
-							</case>
-							<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
-								<show part="arms_overlay/feral_scales"/>
-								<show part="arms_overlay_bg/feral_scales"/>
-							</case>
-						</switch>
+				<if test="PlayerHasViewableOutfit">
+					<if test="armStanceNonBannedList">
+						<if test="legCount==2">
+							<if test="lowerBody==LowerBody.DRAGON">
+								<hide part="arms/*"/>
+								<hide part="arms_bg/*"/>
+								<hide part="hands/*"/>
+								<hide part="hands_bg/*"/>
+								<hide part="weapon/*"/>
+								<hide part="shield/*"/>
+								<show part="arms/feral_dragon"/>
+								<show part="arms_bg/feral_dragon"/>
+								<switch>
+									<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+										<show part="arms_overlay/feral_pscales"/>
+										<show part="arms_overlay_bg/feral_pscales"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.FUR)">
+										<show part="arms_overlay/feral_fur"/>
+										<show part="arms_overlay_bg/feral_fur"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.CHITIN)">
+										<show part="arms_overlay/feral_chitin"/>
+										<show part="arms_overlay_bg/feral_chitin"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+										<show part="arms_overlay/feral_scales"/>
+										<show part="arms_overlay_bg/feral_scales"/>
+									</case>
+								</switch>
+							</if>
+						</if>
 					</if>
-                </if>
+					<else>
+						<if test="legCount==2">
+							<if test="lowerBody==LowerBody.DRAGON">
+								<hide part="arms/*"/>
+								<hide part="arms_bg/*"/>
+								<hide part="hands/*"/>
+								<hide part="hands_bg/*"/>
+								<hide part="weapon/*"/>
+								<hide part="shield/*"/>
+								<show part="arms/feral_dragon"/>
+								<show part="arms_bg/feral_dragon"/>
+								<switch>
+									<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+										<show part="arms_overlay/feral_pscales"/>
+										<show part="arms_overlay_bg/feral_pscales"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.FUR)">
+										<show part="arms_overlay/feral_fur"/>
+										<show part="arms_overlay_bg/feral_fur"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.CHITIN)">
+										<show part="arms_overlay/feral_chitin"/>
+										<show part="arms_overlay_bg/feral_chitin"/>
+									</case>
+									<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+										<show part="arms_overlay/feral_scales"/>
+										<show part="arms_overlay_bg/feral_scales"/>
+									</case>
+								</switch>
+							</if>
+						</if>
+					</else>
+				</if>
             </case>
 			<case values="Arms.DISPLACER">
 				<hide part="arms/*"/>
@@ -3011,10 +3047,21 @@
                     <show part="legs_fg/reptaur"/>
 					<else>
 						<show part="feet/scales"/>
-						<if test="arms.type==Arms.DRAGON">
-							<hide part="legs/*"/>
-							<hide part="feet/*"/>
-							<show part="legs/dragon"/>
+						<if test="PlayerHasViewableOutfit">
+							<if test="armStanceNonBannedList">
+								<if test="arms.type==Arms.DRAGON">
+									<hide part="legs/*"/>
+									<hide part="feet/*"/>
+									<show part="legs/dragon"/>
+								</if>	
+							</if>
+							<else>
+								<if test="arms.type==Arms.DRAGON">
+									<hide part="legs/*"/>
+									<hide part="feet/*"/>
+									<show part="legs/dragon"/>
+								</if>	
+							</else>
 						</if>
 					</else>
                 </if>          
