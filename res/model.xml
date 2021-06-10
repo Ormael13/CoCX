@@ -317,6 +317,7 @@
         <cell rect="251,150,49,59" name="arms_bg/orca" dx="56" dy="64"/>
         <cell rect="301,150,49,59" name="arms_bg/pscales" dx="56" dy="64"/>
         <cell rect="351,150,49,59" name="arms_bg/scales" dx="56" dy="64"/>
+		<cell rect="351,150,49,59" name="arms_bg/dscales" dx="56" dy="64"/>
         <cell rect="401,150,49,59" name="arms_bg/goo" dx="56" dy="64"/>
         <cell rect="701,150,49,59" name="arms_bg/panda" dx="56" dy="64"/>
         <cell rect="801,150,49,59" name="arms_bg/demonlewd" dx="56" dy="64"/>
@@ -347,6 +348,7 @@
         <cell rect="251,210,49,59" name="arms/orca" dx="104" dy="64"/>
         <cell rect="301,210,49,59" name="arms/pscales" dx="104" dy="64"/>
         <cell rect="351,210,49,59" name="arms/scales" dx="104" dy="64"/>
+		<cell rect="351,210,49,59" name="arms/dscales" dx="104" dy="64"/>
         <cell rect="401,210,49,59" name="arms/goo" dx="104" dy="64"/>
         <cell rect="701,210,49,59" name="arms/panda" dx="104" dy="64"/>
         <cell rect="638,520,90,90" name="arms/yeti" dx="57" dy="43"/>
@@ -439,6 +441,7 @@
         <cell rect="201,390,49,59" name="legs/orca" dx="79" dy="115"/>
         <cell rect="251,390,49,59" name="legs/pscales" dx="79" dy="115"/>
         <cell rect="301,390,49,59" name="legs/scales" dx="79" dy="115"/>
+		<cell rect="301,390,49,59" name="legs/dscales" dx="79" dy="115"/>
         <cell rect="351,390,49,59" name="legs/hoof_human" dx="79" dy="115"/>
         <cell rect="1,793,49,59" name="legs/hoof_fur" dx="79" dy="115"/>
         <cell rect="51,793,49,59" name="legs/hoof_scales" dx="79" dy="115"/>
@@ -890,7 +893,7 @@
         <cell rect="261,110,49,29" name="breasts/Bscales" dx="79" dy="68"/>
         <cell rect="311,110,49,29" name="breasts/Borca" dx="79" dy="68"/>
         <cell rect="361,110,49,29" name="breasts/Bgoo" dx="79" dy="68"/>
-		<cell rect="661,110,49,29" name="breasts/BDscales" dx="79" dy="68"/>
+		<cell rect="661,110,49,29" name="breasts/Bdscales" dx="79" dy="68"/>
         <cell rect="11,140,49,29" name="breasts/Dhuman" dx="79" dy="68"/>
         <cell rect="61,140,49,29" name="breasts/Dfur" dx="79" dy="68"/>
         <cell rect="61,140,49,29" name="breasts/Dpanda" dx="79" dy="68"/>
@@ -900,7 +903,7 @@
         <cell rect="261,140,49,29" name="breasts/Dscales" dx="79" dy="68"/>
         <cell rect="311,140,49,29" name="breasts/Dorca" dx="79" dy="68"/>
         <cell rect="361,140,49,29" name="breasts/Dgoo" dx="79" dy="68"/>
-		<cell rect="661,140,49,29" name="breasts/DDscales" dx="79" dy="68"/>
+		<cell rect="661,140,49,29" name="breasts/Ddscales" dx="79" dy="68"/>
         <cell rect="11,170,49,29" name="breasts/Fhuman" dx="79" dy="68"/>
         <cell rect="61,170,49,29" name="breasts/Ffur" dx="79" dy="68"/>
         <cell rect="61,170,49,29" name="breasts/Fpanda" dx="79" dy="68"/>
@@ -910,7 +913,7 @@
         <cell rect="261,170,49,29" name="breasts/Fscales" dx="79" dy="68"/>
         <cell rect="311,170,49,29" name="breasts/Forca" dx="79" dy="68"/>
         <cell rect="361,170,49,29" name="breasts/Fgoo" dx="79" dy="68"/>
-		<cell rect="661,170,49,29" name="breasts/FDscales" dx="79" dy="68"/>
+		<cell rect="661,170,49,29" name="breasts/Fdscales" dx="79" dy="68"/>
         <cell rect="411,110,49,29" name="breasts_pattern/Bpstripe" dx="79" dy="68"/>
         <cell rect="411,140,49,29" name="breasts_pattern/Bstripe" dx="79" dy="69"/>
         <cell rect="411,170,49,29" name="breasts_pattern/Blstripe" dx="79" dy="69"/>
@@ -960,6 +963,10 @@
         <cell rect="161,320,49,29" name="balls/Bscaleslarge" dx="79" dy="104"/>
         <cell rect="161,350,49,29" name="balls/Bscaleshuge" dx="79" dy="105"/>
         <cell rect="161,380,49,29" name="balls/Bscalessillyhuge" dx="79" dy="106"/>
+		<cell rect="161,290,49,29" name="balls/Bdscalesmall" dx="79" dy="104"/>
+        <cell rect="161,320,49,29" name="balls/Bdscaleslarge" dx="79" dy="104"/>
+        <cell rect="161,350,49,29" name="balls/Bdscaleshuge" dx="79" dy="105"/>
+        <cell rect="161,380,49,29" name="balls/Bdscalessillyhuge" dx="79" dy="106"/>
         <cell rect="211,290,49,29" name="balls/Borcasmall" dx="79" dy="104"/>
         <cell rect="211,320,49,29" name="balls/Borcalarge" dx="79" dy="104"/>
         <cell rect="211,350,49,29" name="balls/Borcahuge" dx="79" dy="105"/>
@@ -2159,9 +2166,13 @@
 							<set var="skinx">panda</set>
 						</if>
                     </case>
-                    <case values="Skin.SCALES,Skin,Skin.DRAGON_SCALES">
+                    <case values="Skin.SCALES,Skin">
                         <set var="skinb">scales</set>
                         <set var="skinx">scales</set>
+                    </case>
+					<case values="Skin.DRAGON_SCALES">
+                        <set var="skinb">dscales</set>
+                        <set var="skinx">dscales</set>
                     </case>
                     <case values="Skin.GOO">
                         <set var="skinb">goo</set>
@@ -3496,11 +3507,19 @@
 					</else>
 				</if>
             </case>
-            <case values="Tail.LIZARD,Tail.DRACONIC,Tail.CAVE_WYRM">
+            <case values="Tail.LIZARD,Tail.CAVE_WYRM">
 				<if test="isTaur()">
 					<show part="tail/reptile_taur"/>
 					<else>
 						<show part="tail/reptile"/>
+					</else>
+				</if>
+            </case>
+			<case values="Tail.DRACONIC">
+				<if test="isTaur()">
+					<show part="tail/dragon_taur"/>
+					<else>
+						<show part="tail/dragon"/>
 					</else>
 				</if>
             </case>
