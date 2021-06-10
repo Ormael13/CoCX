@@ -50,6 +50,19 @@ package classes.Scenes
 			outputText("-Added current cost of fly on f.sword or attack with it to combat subpage of stats.\n");
 			outputText("-Some of items from Kaiba have been 'repurposed' and now Dinah proudly seels them. And she change varies nearly each time pc start interactions with her so no need to wait whole day to refresh it. But she also likes to give unpredictable price 'discounts' so item player want may be in offer but cost very high sum of gems.\n");
 			outputText("-Jtex many code corrections.\n");
+			outputText("-Luna meal would recover 2x less HP/mana but would restore 2x more fatigue. Her nurse option would heal only 10% max HP not 50% and lust gain would be 20% of max lust not 33.\n");
+			outputText("-Temple of Divine keeper recieved divine messages form multiple deities that it was so cheap to heal such difficult things that used much of gods super low pool of faith so she been given instruction form gods to make price more fitting service weakened gods giving to those praying. (Curse/hex cleansing cost 5k per session and will remove either curses or hexes)\n");
+			outputText("-New necklace (by Ormael): Wrathless - buyable at Kaiba shop in Tel'Adre. Cost 4000 gems. +5% to spellpower and removes all penalty to spellcasting or using m. specials if wrath is not at max value.\n");
+			outputText("-Diana was whip... err disciplined by her deity to stop been so slowass and make her services bit faster depending on service itself. (15 to 45 min instead of 60 min)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's

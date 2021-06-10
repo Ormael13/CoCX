@@ -1129,6 +1129,7 @@ public function kaibaShopMainMenu2():void {
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 2) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
+			addButtonDisabled(3, "Wrathless", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "T.M.Outfit", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "W.I.Cloak", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "S.S.Clothing", "You already bought item from Kaiba today.");
@@ -1138,6 +1139,7 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(10, "S.Ornament", "You already bought item from Kaiba today.");
 		}
 		else {
+			addButton(3, "Wrathless", buyItem, necklaces.WRATHLE).hint("Wrathless - +5% to spellpower and removes all penalty to spellcasting or using m. specials if wrath is not at max value.");
 			addButton(4, "T.M.Outfit", buyItem, armors.TRMOUTF).hint("Traveling Merchant Outfit - Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");
 			addButton(5, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak - Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 			addButton(6, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
