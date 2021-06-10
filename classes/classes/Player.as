@@ -10265,6 +10265,9 @@ use namespace CoC;
 			// Chitin glove arm 1
 			if (arms.type == Arms.SPIDER)
 				score++;
+			// Elfin ears 1
+			if (ears.type == Ears.ELFIN)
+				score++;
 			// Omni Eye on forehead 1
 			if (eyes.type == Eyes.FOUR_SPIDER_EYES) {
 				score++;
@@ -10289,12 +10292,6 @@ use namespace CoC;
 			}
 			// Midnight purple hair 1
 			if (hairColor == "midnight purple")
-				score++;
-			// Pussy 1
-			if (hasVagina())
-				score++;
-			// Female 1
-			if (isFemale())
 				score++;
 			// Corruption 50+ 1
 			if (cor >= 50)

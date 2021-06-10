@@ -763,9 +763,10 @@ public function HealingScene():void {
 	outputText("Diana starts to rub her chest against yours, causing more of the strange feeling as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move to your intimate area, sparks of pleasure shooting up your spine as across your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("But soon it is all over, she lets go of you, all your wounds and injuries all healed, although now you feel rather aroused.\n\n");
 	dynStats("lus", 33);
-	HPChange(player.maxHP(), true);
+	HPChange(player.maxOverHP(), true);
 	EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.5)));
-	doNext(camp.returnToCampUseOneHour);
+	doNext(mainCampMenu);
+	cheatTime2(45);
 }
 
 public function CuringCurseScene1():void {	//value related curses removal
@@ -779,7 +780,8 @@ public function CuringCurseScene1():void {	//value related curses removal
 		player.removeCurse(stat, 10);
 		player.removeHex(stat, 10);
 	}
-	doNext(camp.returnToCampUseOneHour);
+	doNext(mainCampMenu);
+	cheatTime2(15);
 }
 public function CuringCurseScene2():void {	//bonus multi related curses removal
 	clearOutput();
@@ -797,7 +799,8 @@ public function CuringCurseScene2():void {	//bonus multi related curses removal
 			player.removeHex(stat, 0.10);
 		}
 	}
-	doNext(camp.returnToCampUseOneHour);
+	doNext(mainCampMenu);
+	cheatTime2(30);
 }
 
 public function mainSexMenu():void {
@@ -808,8 +811,11 @@ public function mainSexMenu():void {
 	if (player.lust > 33 && player.hasCock()) {
 		//addButton(0, "Breeding", SexMenuBreeding);
 		if (!player.isTaur()) addButton(1, "Vaginal", SexMenuVaginal);
+		else addButtonDisabled(1, "Vaginal", "Not for Taurs or Dickless!");
 		if (!player.isTaur()) addButton(2, "Anal", SexMenuAnal);
+		else addButtonDisabled(2, "Anal", "Not for Taurs or Dickless!");
 		if (!player.isTaur()) addButton(3, "Titfuck", SexMenuTitsfuck);
+		else addButtonDisabled(3, "Titfuck", "Not for Taurs or Dickless!");
 	}
 	addButton(14, "Back", mainCampMenu);
 }

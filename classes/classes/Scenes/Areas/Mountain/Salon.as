@@ -525,7 +525,8 @@ private function changeHairStyle():void {
 	addButton(4, "TwinPigtail", chooseHairStyleFinalize, 4).hint("Whats cuter then two pigtail realy?");
 	addButton(5, "Dwarven", chooseHairStyleFinalize, 5).hint("A traditionnal dwarven female haircut.");
 	addButton(7, "Snow Lily", chooseHairStyleFinalize, 6).hint("A nowaday rare haircut mostly seen amonst people of the long lost snow kingdom.");
-	addButton(8, "Four Wind", chooseHairStyleFinalize, 7).hint("The four wind braid seen almost seldomly amonst student of the now near extinct four wind school.");
+	addButton(8, "Wind Braid", chooseHairStyleFinalize, 7).hint("The four wind braid seen almost seldomly amonst student of the now near extinct four wind school.");
+	addButton(9, "Wind Long", chooseHairStyleFinalize, 8).hint("The four wind long hair cut seen almost seldomly amonst student of the now near extinct four wind school.");
 	addButton(6, "Back", salonPurchaseMenu);
 }
 

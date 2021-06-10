@@ -497,11 +497,11 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 						"You nod and Luna comes back with your tea, and then in a moment your meal. You have no idea where she's finding the ingredients, but so great is her culinary skill even with your crude mess kit and a campfire that you doubt most of Tel'Andre is eating so well. You finish with gusto, feeling fully satisfied, and thank Luna for the magnificent meal. She nods, blushing endearingly with honest, innocent pride at your praise.\n\n" +
 						"\"<i>It is my pride and my pleasure to serve you, " + player.mf("Master","Mistress") + ". Your praise is all I could desire and more.</i>\"\n\n");
 				player.hunger = player.maxHunger();
-				HPChange(Math.round(player.maxHP() * .1), true);
-				player.mana += Math.round(player.maxMana() * 0.1);
+				HPChange(Math.round(player.maxHP() * .05), true);
+				player.mana += Math.round(player.maxMana() * 0.05);
 				if (player.mana > player.maxMana()) player.mana = player.maxMana();
 				player.buff("WellFed").setStats({"str.mult":0.05,"tou.mult":0.05,"spe.mult":0.05}).forDays(1).withText("Well Fed");
-				EngineCore.changeFatigue(-(Math.round(player.maxFatigue() * 0.1)));
+				EngineCore.changeFatigue(-(Math.round(player.maxFatigue() * 0.2)));
 				flags[kFLAGS.LUNA_MEAL] = 1;
 				lunaJealousy(-100);
 				lunaAffection(10);
