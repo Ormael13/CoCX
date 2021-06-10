@@ -70,7 +70,8 @@ public final class KitsuneGift extends Consumable {
 
 				outputText("\n\n<b>The kitsune has shared some of its knowledge with you!</b>  But in the process, you've gained some of the kitsune's promiscuous trickster nature...");
 				//Increase INT and Libido, +10 LUST
-				game.player.dynStats("sen", 2, "lus", 10);
+				dynStats("lus", 10);
+				player.addCurse("sen", 2, 1);
 				player.KnowledgeBonus("int", 4);
 				break;
 
@@ -90,7 +91,7 @@ public final class KitsuneGift extends Consumable {
 
 				outputText("\n\n<b>The kitsune's familiar has drawn all over your face!</b>  The resilient marks take about an hour to completely scrub off in the nearby stream.  You could swear you heard some mirthful snickering among the trees while you were cleaning yourself off.");
 				//Advance time 1 hour, -20 LUST
-				game.player.dynStats("lus", -20);
+				dynStats("lus", -20);
 				break;
 
 			//[Aphrodisiac]
@@ -98,14 +99,15 @@ public final class KitsuneGift extends Consumable {
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it tosses a handful of sweet-smelling pink dust into your face, then hops over the rim of the box and gallavants off into the woods.  Before you know what has happened, you feel yourself growing hot and flushed, unable to keep your hands away from your groin.");
 				outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a powerful aphrodisiac!  You are debilitatingly aroused and can think of nothing other than masturbating.</b>");
 				//+100 LUST
-				game.player.dynStats("lus", 100, "scale", false);
+				dynStats("lus", 100, "scale", false);
 				break;
 
 			//[Wither]
 				case 9:
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it tosses a handful of sour-smelling orange powder into your face, then hops over the rim of the box and gallavants off into the woods.  Before you know what has happened, you feel the strength draining from your muscles, withering away before your eyes.");
 				outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a strength draining spell!  Hopefully it's only temporary...</b>");
-				game.player.dynStats("str", -5, "tou", -5);
+				player.addCurse("str", -5);
+				player.addCurse("tou", -5);
 				break;
 
 			//[Dud]

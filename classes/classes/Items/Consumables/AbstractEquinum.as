@@ -165,27 +165,27 @@ public class AbstractEquinum extends Consumable {
 				outputText("\n\nYou let out a throaty \"Neiiiigh\" as your animalistic instincts take over.");
 			}
 			if (player.inte < 10 && player.inte > 5) {
-				dynStats("int", -1);
+				player.addCurse("int", -1, 1);
 				outputText("\n\nYou smile vacantly as you drink the potion, knowing you're just a big dumb animal who loves to fuck.");
 				changes++;
 			}
 			if (player.inte <= 20 && player.inte >= 10) {
-				dynStats("int", -2);
+				player.addCurse("int", -2, 1);
 				outputText("\n\nYou find yourself looking down at the empty bottle in your hand and realize you haven't thought ANYTHING since your first sip.");
 				changes++;
 			}
 			if (player.inte <= 30 && player.inte > 20) {
-				dynStats("int", -3);
+				player.addCurse("int", -3, 1);
 				outputText("\n\nYou smile broadly as your cares seem to melt away.  A small part of you worries that you're getting dumber.");
 				changes++;
 			}
 			if (player.inte <= 50 && player.inte > 30) {
-				dynStats("int", -4);
+				player.addCurse("int", -4, 1);
 				outputText("\n\nIt becomes harder to keep your mind focused as your intellect diminishes.");
 				changes++;
 			}
 			if (player.inte > 50) {
-				dynStats("int", -5);
+				player.addCurse("int", -5, 1);
 				outputText("\n\nYour usually intelligent mind feels much more sluggish.");
 				changes++;
 			}
@@ -238,7 +238,8 @@ public class AbstractEquinum extends Consumable {
 						temp  = player.addHorseCock();
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.DOG) {
@@ -246,7 +247,8 @@ public class AbstractEquinum extends Consumable {
 						outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
@@ -254,7 +256,8 @@ public class AbstractEquinum extends Consumable {
 						outputText("\n\nYour " + player.cockDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + player.cockDescript(0) + " as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType.Index > 4) {
@@ -262,14 +265,16 @@ public class AbstractEquinum extends Consumable {
 						temp  = player.addHorseCock();
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (temp3 == 1) outputText("  <b>Your penis has transformed into a horse's!</b>");
 				}
 				//MULTICOCK
 				else {
-					dynStats("sen", 4, "lus", 35);
+					dynStats("lus", 35);
+					player.addCurse("sen", 4, 1);
 					player.MutagenBonus("lib", 5);
 					temp = player.addHorseCock();
 					outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see the skin of your " + player.cockDescript(temp) + " darkening to a mottled brown and black pattern.");
@@ -295,7 +300,8 @@ public class AbstractEquinum extends Consumable {
 				if (player.cocks.length == 1) {
 					temp2 = player.increaseCock(0, rand(3) + 1);
 					temp  = 0;
-					dynStats("sen", 1, "lus", 10);
+					dynStats("lus", 10);
+					player.addCurse("sen", 1, 1);
 				}
 				//Multicock
 				else {
@@ -315,7 +321,8 @@ public class AbstractEquinum extends Consumable {
 					//Grow smallest cock!
 					//temp2 changes to growth amount
 					temp2 = player.increaseCock(temp, rand(4) + 1);
-					dynStats("sen", 1, "lus", 10);
+					dynStats("lus", 10);
+					player.addCurse("sen", 1, 1);
 				}
 				outputText("\n\n");
 				if (temp2 > 2) outputText("Your " + player.cockDescript(temp) + " tightens painfully, inches of taut horse-flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");

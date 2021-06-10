@@ -21,11 +21,11 @@ public class PrincessPucker extends Consumable
 
 			if (rand(2) == 0)
 			{
-				dynStats("lus-", 20, "lib-", 2);
+				dynStats("lus", 20, "lib", 2);
 			}
 			else
 			{
-				dynStats("lus-", 20, "sen-", 2);
+				dynStats("lus", 20, "sen", 2);
 			}
 
 			if (player.lowerBody != LowerBody.GARGOYLE && player.hairColor != "pink")

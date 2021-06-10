@@ -31,16 +31,16 @@ public class PotentVenom extends Consumable {
 		var changeLimit:Number = 1;
 		var temp2:Number = 0;
 		if (rand(3) == 0) changeLimit++;
-		if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+		if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
+		if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
+		if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
+		if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
+		if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
+		if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
+		if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
+		if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
+		if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
+		if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
 		player.slimeFeed();
 		clearOutput();
 		outputText("You pop the cork on the vial and quickly chug the clear liquid. It tastes somewhat sweet, leaving your body feeling warm all over.");
@@ -66,7 +66,7 @@ public class PotentVenom extends Consumable {
 
 		if (player.wis > 20 && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nSomehow everything around seems so much duller. The world around you just seems so much more bland and uneventful.\n");
-			dynStats("wis", -5);
+			player.addCurse("wis",-5,1)
 			changes++;
 		}
 		//end of stat change list and starts of body changes

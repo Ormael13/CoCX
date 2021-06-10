@@ -62,7 +62,8 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		else outputText("but you sternly rein in your hands and tuck them into your armpits as the arousing changes run their course.");
 		outputText("  <b>You now have a dragon penis.</b>");
 		//lose lust if sens>=50, gain lust if else
-		dynStats("sen", 10, "lus", 10);
+		dynStats("lus", 10)
+		player.addCurse("sen", 10, 1);
 		changes++;
 		//Apply the TF
 		player.cocks[select].cockType = CockTypesEnum.DRAGON;

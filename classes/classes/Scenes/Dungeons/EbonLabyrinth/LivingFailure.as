@@ -41,8 +41,8 @@ use namespace CoC;
 		
 		private function livingFailureMadness():void {
 			outputText("The thing begins blabbering incomprehensible but harmful words. These words, these horrible words resonate all the way up into your soul rending your sanity. Let them out, LET THEM OUT!!\n\n");
-			player.addHex("int", 10);
-			player.addHex("wis", 10);
+			player.addCurse("int.mult", 0.10,3);
+			player.addCurse("wis.mult", 0.10,3);
 		}
 		
 		private function livingFailurePrimalDemonfire():void {
@@ -81,8 +81,8 @@ use namespace CoC;
 			if (player.biggestTitSize() >= 1) player.breastRows[0].breastRating++;
 			if (player.hasCock()) player.increaseCock(0, rand(2) + 1);
 			if (player.hasVagina()) player.clitLength += .25;
-			player.addHex("spe.mult", 0.10);
-			player.addHex("sens", 10);
+			player.addCurse("spe.mult", 0.10,3);
+			player.addCurse("sen", 10,3);
 		}
 		
 		override protected function performCombatAction():void
