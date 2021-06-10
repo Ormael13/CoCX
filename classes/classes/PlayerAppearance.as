@@ -1771,6 +1771,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText(" Your hairs are tied up into a snow lily blossom fashion.");
 			else if(hairStyle == Hair.FOURWIND)
 				outputText(" Your hairs are tied up in the traditionnal four wind braid style.");
+			else if(hairStyle == Hair.FOURWINDL)
+				outputText(" Your hairs are tied up in the traditionnal four wind long hair style.");
 		}
 	}
 
