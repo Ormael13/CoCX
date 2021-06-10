@@ -2166,7 +2166,7 @@
 							<set var="skinx">panda</set>
 						</if>
                     </case>
-                    <case values="Skin.SCALES,Skin">
+                    <case values="Skin.SCALES">
                         <set var="skinb">scales</set>
                         <set var="skinx">scales</set>
                     </case>
