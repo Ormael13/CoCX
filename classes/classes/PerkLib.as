@@ -400,8 +400,8 @@ public class PerkLib
 				"Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)",
 				"You've chosen the 'Flying Sword Path' perk. Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)");
 		public static const SoaringBlades:PerkType = mk("Soaring Blades", "Soaring Blades",
-				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of daintain attained.",
-				"You've chosen the 'Soaring Blades' perk. Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of daintain attained.");
+				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.",
+				"You've chosen the 'Soaring Blades' perk. Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -2710,10 +2710,10 @@ public class PerkLib
 				"You've chosen the 'Saint' perk, lowering min libido by 2 and rise lust resistance by 5%.");
 		public static const SalamanderAdrenalGlands:PerkType = mk("Salamander Adrenal Glands", "Salamander Adrenal Glands",
 				"Your Salamander adrenal glands are giving you slight boost to your natural stamina and libido.",
-				"You've chosen the 'Salamander Adrenal Glands' perk, due to repeadly exposure to effects of lustzerk your adrenal glands mutated.").withBuffs({'tou.mult':0.5,'lib.mult':0.5});
+				"You've chosen the 'Salamander Adrenal Glands' perk, due to repeadly exposure to effects of lustzerk your adrenal glands mutated.").withBuffs({'tou.mult':0.05,'lib.mult':0.05});
 		public static const SalamanderAdrenalGlandsEvolved:PerkType = mk("Salamander Adrenal Glands (Evolved)", "Salamander Adrenal Glands (Evolved)",
 				"Your Salamander adrenal glands are giving you slight boost to your natural strength, stamina, speed and libido and extend lustzerker and berserker duration by 2 turns.",
-				"You've chosen the 'Salamander Adrenal Glands (Evolved)' perk, repeadly use of lustzerk caused your adrenal glands mutate even more.").withBuffs({'str.mult':0.5,'tou.mult':0.5,'spe.mult':0.5,'lib.mult':0.5});
+				"You've chosen the 'Salamander Adrenal Glands (Evolved)' perk, repeadly use of lustzerk caused your adrenal glands mutate even more.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'lib.mult':0.05});
 		public static const SalamanderAdrenalGlandsFinalForm:PerkType = mk("Salamander Adrenal Glands (Final Form)", "Salamander Adrenal Glands (Final Form)",
 				"Your Salamander adrenal glands are giving you slight boost to your natural strength, stamina, speed, libido; double bonus to attack, boost slight natural wrath generation rate, extend berserking/lustzerking by 8 turns and enable to start with one or both of them.",
 				"You've chosen the 'Salamander Adrenal Glands (Final Form)' perk, repeadly use of lustzerk caused your adrenal glands mutate for the third time.").withBuffs({'str.mult':0.15,'tou.mult':0.05,'spe.mult':0.15,'lib.mult':0.5});
@@ -3601,7 +3601,7 @@ public class PerkLib
 		public static const InkSpray:PerkType = mk("Ink Spray", "Ink Spray",
 				"Allows you to shoot blinding and probably slightly arousing ink out of your genitalia similar like octopus.");
 		public static const Insanity:PerkType = mk("Insanity", "Insanity",
-				".");
+				"You have become immune to anything that would damage your mind and gained increased insight however your unhinged personality greatly weakens your wisdom.").withBuffs({'int.mult':0.20,'wis.mult':-0.40});
 		public static const JunglesWanderer:PerkType = mk("Jungle’s Wanderer", "Jungle’s Wanderer",
 				"Your nimble body has adapted to moving through jungles and forests, evading enemy attacks with ease and making yourself harder to catch. (+35 to the Evasion percentage)");
 		public static const KitsuneEnergyThirst:PerkType = mk("Kitsune hunger", "Kitsune hunger",
@@ -7275,4 +7275,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}

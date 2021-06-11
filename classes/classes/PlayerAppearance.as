@@ -2302,8 +2302,8 @@ public class PlayerAppearance extends BaseContent {
 		//Atlach Nacha
 		score = player.atlachNachaScore();
 		if (score >= 30) outputText("\n<font color=\"#0000a0\">Greater Atlach Nacha: " + score + " (+115% to Str racial multi, +135% to Tou racial multi, +150% to Int racial multi, +150% to Lib racial multi, -50% to Wis racial multi, +50 to Sens)</font>");
-		else if (score >= 18) outputText("\n<font color=\"#0000a0\">Atlach Nacha: " + score + " (+80% to Str racial multi, +90% to Tou racial multi, +100% to Int racial multi, +100% to Lib racial multi, -50% to Wis racial multi, +50 to Sens)</font>");
-		else if (score >= 10) outputText("\n<font color=\"#0000a0\">Incomplete Atlach Nacha: " + score + " (+50% to Tou racial multi, +75% to Int racial multi, +20% to Lib racial multi, -20% to Wis racial multi)</font>");
+		else if (score >= 21) outputText("\n<font color=\"#0000a0\">Atlach Nacha: " + score + " (+280% to Str racial multi, +315% to Tou racial multi, +350% to Int racial multi, +350% to Lib racial multi, -50% to Wis racial multi, +90 to Sens)</font>");
+		else if (score >= 14) outputText("\n<font color=\"#0000a0\">Incomplete Atlach Nacha: " + score + " (+60% to Tou racial multi, +100% to Int racial multi, +40% to Lib racial multi, -10% to Wis racial multi)</font>");
 		else if (score >= 1) outputText("\n<font color=\"#008000\">Incomplete Atlach Nacha: " + score + "</font>");
 		else if (score < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>");
 		//Avian
@@ -3003,4 +3003,4 @@ public class PlayerAppearance extends BaseContent {
 		}
 	}
 }
-}
+}

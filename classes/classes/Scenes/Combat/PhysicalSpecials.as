@@ -1049,11 +1049,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 						var poisonScaling:Number = 1;
 						poisonScaling += player.lib/100;
 						poisonScaling += player.tou/100;
+						poisonScaling *= 0.2;
 						if (player.level < 10) damage2B += 20 + (player.level * 3);
 						else if (player.level < 20) damage2B += 50 + (player.level - 10) * 2;
 						else if (player.level < 30) damage2B += 70 + (player.level - 20) * 1;
 						else damage2B += 80;
-						damage2B *= 0.2;
+						damage2B *= 0.04;
 						damage2B *= 1+(poisonScaling/10);
 						monster.teased(monster.lustVuln * damage2B);
 						monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
@@ -5258,11 +5259,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 						var poisonScaling:Number = 1;
 						poisonScaling += player.lib/100;
 						poisonScaling += player.tou/100;
+						poisonScaling *= 0.2;
 						if (player.level < 10) damage4B += 20 + (player.level * 3);
 						else if (player.level < 20) damage4B += 50 + (player.level - 10) * 2;
 						else if (player.level < 30) damage4B += 70 + (player.level - 20) * 1;
 						else damage4B += 80;
-						damage4B *= 0.2;
+						damage4B *= 0.04;
 						damage4B *= 1+(poisonScaling/10);
 						monster.teased(monster.lustVuln * damage4B);
 						monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
