@@ -358,9 +358,9 @@ public class Creature extends Utils
 		public function get str():Number { return strStat.value; }
 		public function get tou():Number {if (this.hasPerk(PerkLib.IcyFlesh) || this.hasPerk(PerkLib.HaltedVitals)) {
 			return 1;
-		} else {
-			return touStat.value;
-		}
+			} else {
+				return touStat.value;
+			}
 		}
 
 		public function get spe():Number { return speStat.value; }
