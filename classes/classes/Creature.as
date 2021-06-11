@@ -385,7 +385,7 @@ public class Creature extends Utils
 			var tierPower:String = "NOT PROPERLY ADDED STAT!";
 			if (tier == 1) tierPower = "Weakened";
 			if (tier == 2) tierPower = "Drained";
-			if (tier == 2) tierPower = "Damaged";
+			if (tier == 3) tierPower = "Damaged";
 			if (this.hasPerk(PerkLib.ZenjisInfluence2)) power *= 0.60;
 			if (statName == "sens" || statName == "cor") {
 				statStore.addBuff(statName, power, tierPower, {text: tierPower});
@@ -401,7 +401,7 @@ public class Creature extends Utils
 			var tierPower:String = "NOT PROPERLY ADDED STAT!";
 			if (tier == 1) tierPower = "Weakened";
 			if (tier == 2) tierPower = "Drained";
-			if (tier == 2) tierPower = "Damaged";
+			if (tier == 3) tierPower = "Damaged";
 			var stat:BuffableStat = statStore.findBuffableStat(statName);
 			if (!stat) {
 				// Error? No stat with such name
