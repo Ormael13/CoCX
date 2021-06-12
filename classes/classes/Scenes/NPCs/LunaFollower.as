@@ -522,8 +522,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				player.removeCurse(stat, 5);
 				if (stat != "sens")
 				{
-					player.removeCurse(stat+".mult", 0.05,1);
-					player.removeCurse(stat+".mult", 0.10);
+					player.removeCurse(stat+".mult", 0.10,1);
+					player.removeCurse(stat+".mult", 0.05);
 				}
 			}
 			lunaJealousy(-100);

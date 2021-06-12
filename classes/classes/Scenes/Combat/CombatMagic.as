@@ -3097,7 +3097,7 @@ public class CombatMagic extends BaseCombatContent {
 		else enemyAI();
 	}
 
-//(100) Polar Midnight - AoE Ice spell
+	//(100) Polar Midnight - AoE Ice spell
 	public function spellPolarMidnight():void {
 		if (rand(2) == 0) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
@@ -3155,7 +3155,6 @@ public class CombatMagic extends BaseCombatContent {
 			//}
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" " + monster.a + monster.short + " is encased in a thick layer of ice.\n\n");
-			MagicAddonEffect();
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 			if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
 			monster.createStatusEffect(StatusEffects.FrozenSolid,5,0,0,0);
