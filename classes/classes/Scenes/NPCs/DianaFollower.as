@@ -790,8 +790,11 @@ public function CuringCurseScene2():void {	//bonus multi related curses removal
 	outputText("But soon it is all over, she lets go of you, your curses are partialy removed, although now you feel rather aroused.\n\n");
 	dynStats("lus", 50);
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
-		if (stat == "sens") player.removeCurse(stat, 10);
-		else player.removeCurse(stat+".mult", 0.10);
+		player.removeCurse(stat, 10);
+		if (stat != "sens")
+		{
+			player.removeCurse(stat+".mult", 0.10);
+		}
 	}
 	doNext(mainCampMenu);
 	cheatTime2(30);

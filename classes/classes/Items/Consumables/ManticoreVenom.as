@@ -50,7 +50,7 @@ public class ManticoreVenom extends Consumable {
 		}
 		if (changes < changeLimit && rand(2) == 0) {
 			outputText("\n\nYou suddenly became exceedingly aware of your surroundings, feeling the caress of the wind on your skin and especially its passage next to your endowment. You make a musical note of delighted pleasure at it.");
-			dynStats("sen", 2);
+			player.addCurse("sen", 2,1);
 			changes++;
 		}
 		if (player.cor < 100 && changes < changeLimit && rand(2) == 0) {
@@ -69,7 +69,7 @@ public class ManticoreVenom extends Consumable {
 				else outputText("\n\nYou feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size.");
 				player.growTits(1 + rand(3), 1, false, 3);
 				changes++;
-				dynStats("sen", .5);
+				player.addCurse("sen", 2,1);
 				boobsGrew = true;
 			}
 		}
@@ -78,7 +78,7 @@ public class ManticoreVenom extends Consumable {
 					"Out of curiosity you slid a single digit inside your pussy to test your new sensitiveness and yelp a sound note unlike a singing. " +
 					"Your pussy has reached the sensitiveness of a manticore and the mere act of touching it will now cause you to moan an entire partition!" +
 					"<b>Your ultrasensitive pussy is now exactly like that of a manticore!</b>");
-			dynStats("sen", 20);
+			player.addCurse("sen", 20,1);
 			player.vaginaType(VaginaClass.MANTICORE);
 			changes++;
 		}

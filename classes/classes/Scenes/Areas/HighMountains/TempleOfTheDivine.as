@@ -116,8 +116,8 @@ use namespace CoC;
 				//Remove curses
 				if (anyOfAltairsRepaired() && player.gems >= 5000) addButton(4, "Remove Curses", PlayerRemoveCurses).hint("Make a donation to a divinity in order to be freed of all curses or hexes.");
 				else if (!anyOfAltairsRepaired()) addButtonDisabled(4, "Remove Curses", "Without a functionning altar you cannot call upon divine power for deliverence.")
-				else if (!player.statStore.hasBuff("Curse") && !player.statStore.hasBuff("Hex")) addButtonDisabled(4, "Remove Curses", "You are not currently under the affliction of a curse or hex.")
-				else if (player.gems < 1000) addButtonDisabled(4, "Remove Curses", "You need at least 1000 gem in order to request deliverance from your maledictions.")
+				else if (!player.statStore.hasBuff("Weakened") && !player.statStore.hasBuff("Drain") && !player.statStore.hasBuff("Damaged")) addButtonDisabled(4, "Remove Curses", "You are not currently under the affliction of a curse or hex.")
+				else if (player.gems < 1000) addButtonDisabled(4, "Remove Curses", "You need at least 1000 gem in order to request deliverance from your maledictions and other status ailments.")
 				addButton(14, "Back", templemainmenu);
 			}
 			else {
@@ -138,8 +138,9 @@ use namespace CoC;
 		public function PlayerRemoveCursesYes():void {
 			outputText("Divine powers radiate from the altar banishing the evil that has took a grip on your body to the void.");
 			player.gems -= 5000;
-			if (player.buff("Curse").isPresent()) player.statStore.removeBuffs("Curse");
-			else player.statStore.removeBuffs("Hex");
+			player.statStore.removeBuffs("Weakened");
+			player.statStore.removeBuffs("Drained");
+			player.statStore.removeBuffs("Damaged");
 			doNext(PlayerPrayAtTemple);
 		}
 

@@ -75,7 +75,7 @@ public class Enigmanium extends Consumable{
 			//Does not add to change total
 			if (player.tou > 50 && rand(2) == 0) {
 				outputText("\n\nYour body seems to compress momentarily, becoming leaner and noticeably less tough.");
-				dynStats("tou", -2);
+				player.addCurse("tou", -2, 1);
 			}
 			//IntelliWisGain
 			if (rand(4) == 0 && changes < changeLimit) {
@@ -102,7 +102,7 @@ public class Enigmanium extends Consumable{
 					if (player.lust > 60) outputText("even more ");
 					outputText("turned on.");
 				}
-				dynStats("sen", .25);
+				player.addCurse("sen", 2, 1);
 				player.MutagenBonus("lib", 1);
 				changes++;
 			}
@@ -231,7 +231,8 @@ public class Enigmanium extends Consumable{
 						player.cocks[i].knotMultiplier = 1;
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.DOG) {
@@ -240,7 +241,8 @@ public class Enigmanium extends Consumable{
 						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. Your new feline dong throbs powerfully and spurts a few droplets of cum.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
@@ -249,7 +251,8 @@ public class Enigmanium extends Consumable{
 						outputText("\n\nYour [cock] swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. Your new feline dong throbs powerfully and spurts a few droplets of cum.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType.Index > 4) {
@@ -258,7 +261,8 @@ public class Enigmanium extends Consumable{
 						player.cocks[i].knotMultiplier = 1;
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					}
@@ -266,7 +270,8 @@ public class Enigmanium extends Consumable{
 				}
 				//MULTICOCK
 				else {
-					dynStats("sen", 4, "lus", 35);
+					dynStats("lus", 35);
+					player.addCurse("sen", 4, 1);
 					player.MutagenBonus("lib", 5);
 					player.cocks[i].cockType = CockTypesEnum.CAT;
 					player.cocks[i].knotMultiplier = 1;
@@ -293,7 +298,8 @@ public class Enigmanium extends Consumable{
 				if (player.cocks.length == 1) {
 					temp2 = player.increaseCock(0, rand(3) + 1);
 					temp = 0;
-					dynStats("sen", 1, "lus", 10);
+					dynStats("lus", 10);
+					player.addCurse("sen", 1, 1);
 				}
 				//Multicock
 				else {

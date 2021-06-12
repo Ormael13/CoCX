@@ -358,9 +358,9 @@ public class Creature extends Utils
 		public function get str():Number { return strStat.value; }
 		public function get tou():Number {if (this.hasPerk(PerkLib.IcyFlesh) || this.hasPerk(PerkLib.HaltedVitals)) {
 			return 1;
-		} else {
-			return touStat.value;
-		}
+			} else {
+				return touStat.value;
+			}
 		}
 
 		public function get spe():Number { return speStat.value; }
@@ -381,33 +381,41 @@ public class Creature extends Utils
 			}
 		}
 
-		public function addCurse(statName:String, power:Number):void {
+		public function addCurse(statName:String, power:Number, tier:Number = 2):void{
+			var tierPower:String = "NOT PROPERLY ADDED STAT!";
+			if (tier == 1) tierPower = "Weakened";
+			if (tier == 2) tierPower = "Drained";
+			if (tier == 3) tierPower = "Damaged";
 			if (this.hasPerk(PerkLib.ZenjisInfluence2)) power *= 0.60;
 			if (statName == "sens" || statName == "cor") {
-				statStore.addBuff(statName, power, 'Curse', {text: 'Curse'});
+				statStore.addBuff(statName, power, tierPower, {text: tierPower});
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
 			} else {
-				statStore.addBuff(statName, -power, 'Curse', {text: 'Curse'});
+				statStore.addBuff(statName, -power, tierPower, {text: tierPower});
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatDown(statName);
 			}
 		}
-		public function removeCurse(statName:String, power:Number):void {
+		public function removeCurse(statName:String, power:Number, tier:Number = 2):void {
+			var tierPower:String = "NOT PROPERLY ADDED STAT!";
+			if (tier == 1) tierPower = "Weakened";
+			if (tier == 2) tierPower = "Drained";
+			if (tier == 3) tierPower = "Damaged";
 			var stat:BuffableStat = statStore.findBuffableStat(statName);
 			if (!stat) {
 				// Error? No stat with such name
 				throw new Error("No such stat "+statName);
 			}
-			var current:Number = stat.valueOfBuff('Curse');
+			var current:Number = stat.valueOfBuff(tierPower);
 			if (statName == "sens" || statName == "cor") {
 				if (current >0){
 					if (power*2 >= current) {
-						stat.removeBuff('Curse');
+						stat.removeBuff(tierPower);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
 					} else if (power*2 < current) {
-						stat.addOrIncreaseBuff('Curse', -power*2);
+						stat.addOrIncreaseBuff(tierPower, -power*2);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);
 					}
@@ -416,11 +424,11 @@ public class Creature extends Utils
 			else {
 				if (current < 0) {
 					if (power*2 >= -current) {
-						stat.removeBuff('Curse');
+						stat.removeBuff(tierPower);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);
 					} else if (power*2 < -current) {
-						stat.addOrIncreaseBuff('Curse', power*2);
+						stat.addOrIncreaseBuff(tierPower, power*2);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
 					}

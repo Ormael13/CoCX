@@ -55,7 +55,7 @@ public class MaraFruit extends Consumable{
 		//-Reduces speed down to 60.
 		if (player.spe > 60 && changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nYou start to feel sluggish and cold.  Lying down to bask in the sun might make you feel better.");
-			dynStats("spe", -1);
+			player.addCurse("spe", -2,1);
 			changes++;
 		}
 		if (player.blockingBodyTransformations()) changeLimit = 0;
@@ -67,7 +67,7 @@ public class MaraFruit extends Consumable{
 				else outputText("\n\nYou feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size.");
 				player.growTits(1 + rand(3), 1, false, 3);
 				changes++;
-				dynStats("sen", .5);
+				player.addCurse("sen", 1,1);
 				boobsGrew = true;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.hips.type < 10) {
@@ -139,7 +139,8 @@ public class MaraFruit extends Consumable{
 				outputText(" tentacle-cock!</b>");
 				player.cocks[temp].cockType = CockTypesEnum.TENTACLE;
 				player.cocks[temp].knotMultiplier = 1.3;
-				dynStats("sen", 3, "lus", 10);
+				dynStats("lus", 10);
+				player.addCurse("sen", 3,1);
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.breastRows.length > 0) {
 				//Single row

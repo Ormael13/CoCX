@@ -7764,10 +7764,10 @@ public class Combat extends BaseContent {
             outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
         }
         if (monster.hasStatusEffect(StatusEffects.AuraOfMadness) && !player.hasPerk(PerkLib.Insanity)) {
-			player.addCurse("int", monster.statusEffectv1(StatusEffects.AuraOfMadness));//non bosses have it 5
-			player.addCurse("wis", monster.statusEffectv2(StatusEffects.AuraOfMadness));//bosses have it at 20
+			player.addCurse("int.mult", monster.statusEffectv1(StatusEffects.AuraOfMadness)/100,3);//non bosses have it 5
+			player.addCurse("wis.mult", monster.statusEffectv2(StatusEffects.AuraOfMadness)/100,3);//bosses have it at 20
             outputText("<b>As the battle draws on you feel yourself slowly losing your grip on reality.</b>\n\n");
-			if (player.inte <= 1 || player.wis <= 1) {
+			if (player.inte <= 10 || player.wis <= 10) {
                 doNext(endHpLoss);
                 return;
             }
@@ -8069,16 +8069,10 @@ public class Combat extends BaseContent {
                     crit3 = true;
                     damageBFA *= 1.75;
                 }
-                damageBFA = magic.calcGlacialModImpl(damage);
-                damageBFA *= 0.5;
+                damageBFA = magic.calcGlacialModImpl(damageBFA)/2;
                 var SpellMultiplier2:Number = 1;
                 SpellMultiplier2 += spellMod() - 1;
                 damageBFA *= SpellMultiplier2;
-                if (monster.cor < 33) damageBFA = Math.round(damage * 1.0);
-                else if (monster.cor < 50) damageBFA = Math.round(damage * 1.1);
-                else if (monster.cor < 75) damageBFA = Math.round(damage * 1.2);
-                else if (monster.cor < 90) damageBFA = Math.round(damage * 1.3);
-                else damageBFA = Math.round(damage * 1.4); //30% more damage against very high corruption.
                 if (player.hasPerk(PerkLib.RacialParagon)) damageBFA *= 1.50;
                 if (player.hasPerk(PerkLib.Apex)) damageBFA *= 1.50;
                 if (player.hasPerk(PerkLib.AlphaAndOmega)) damageBFA *= 1.50;
@@ -8088,7 +8082,7 @@ public class Combat extends BaseContent {
                 doIceDamage(damageBFA, true, true);
                 outputText(" damage!");
                 if (crit3) outputText(" <b>*Critical Hit!*</b>");
-                if (monster.plural) outputText(" Your opponent are affected by the freezing cold, slowing down their reflexes and thoughts as ice creeps on their body.");
+                if (monster.plural) outputText(" Your opponents are affected by the freezing cold, slowing down their reflexes and thoughts as ice creeps on their body.");
                 else outputText(" Your opponent is affected by the freezing cold, slowing  down [monster his] reflexes and thoughts as ice creeps on [monster his] body.");
                 monster.statStore.replaceBuffObject({"spe.mult":-5, "int.mult":-5}, "Black Frost",{text:"Black Frost"});
                 outputText("\n\n");
