@@ -5456,80 +5456,80 @@ public class Combat extends BaseContent {
                 if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
                 if (player.fatigue < 0) player.fatigue = 0;
             }
-        } else {
-            if (monster is DisplacerBeast) outputText("\n\nThe displacer beast teleports, dodging your attack.\n");
-            else outputText("\n\nYou swing your [weapon] ferociously, confident that you can strike a crushing blow. In the end you fails to actually hit anything.\n");
-        }
-
-        //Damage Unarmed Strike chaining combos.
-        var extraHitChance:Number;
-        var extraHitDamage:Number;
-        var extraHitDamage2:Number;
-        if (crit){
-            extraHitDamage = damage / critDamage;
-            extraHitDamage2 = damage / critDamage;
-        }
-        else {
-            extraHitDamage = damage;
-            extraHitDamage2 = damage;
-        }
-        if (player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING){
-            if (player.hasPerk(PerkLib.JabbingStyle)){
-                if (player.hasPerk(PerkLib.JabbingGrandmaster)){
+            //Damage Unarmed Strike chaining combos. GRABBING STYLE AND JABBING STYLE
+            var extraHitChance:Number;
+            var extraHitDamage:Number;
+            var extraHitDamage2:Number;
+            if (crit){
+                extraHitDamage = damage / critDamage;
+                extraHitDamage2 = damage / critDamage;
+            }
+            else {
+                extraHitDamage = damage;
+                extraHitDamage2 = damage;
+            }
+            if (player.isFistOrFistWeapon() && player.shield == ShieldLib.NOTHING){
+                if (player.hasPerk(PerkLib.JabbingStyle)){
+                    if (player.hasPerk(PerkLib.JabbingGrandmaster)){
+                        extraHitChance = 10;
+                        if (player.hasPerk(PerkLib.MeteorStrike)) extraHitChance = 20
+                        if (rand(100) < extraHitChance){
+                            if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
+                                if(player.hasStatusEffect(StatusEffects.JabbingStyle)){
+                                    extraHitDamage += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
+                                }
+                            }
+                            //var critJab:Boolean = false;
+                            var critJab:Boolean = CritRoll()
+                            extraHitDamage = CritDamage(extraHitDamage, critJab);
+                            //Deal the fellow up blow!
+                            outputText(" You chain up the jab with a second blow! ");
+                            extraHitDamage2 = Math.round(extraHitDamage);
+                            doDamage(extraHitDamage, true ,true);
+                            if (critJab) outputText("<b>Critical! </b>");
+                            outputText("\n");
+                            JabbingStyleIncrement();
+                        }
+                    }
+                }
+                if (player.hasPerk(PerkLib.GrabbingStyle)){
                     extraHitChance = 10;
-                    if (player.hasPerk(PerkLib.MeteorStrike)) extraHitChance = 20
-                    if (rand(100) < extraHitChance){
+                    var playerMaxCarry:Number = player.str+(player.tallness/12*100)
+                    if (player.hasPerk(PerkLib.GrabbingMaster)) playerMaxCarry += player.str;
+                    var ennemyMaxSize:Boolean = playerMaxCarry > (monster.tallness/12*100)
+                    if (player.hasPerk(PerkLib.GrabbingMaster)) extraHitChance = 20;
+                    if (rand(100) < extraHitChance && ennemyMaxSize){
                         if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
                             if(player.hasStatusEffect(StatusEffects.JabbingStyle)){
-                                extraHitDamage += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
+                                extraHitDamage2 += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
                             }
                         }
-                        //var critJab:Boolean = false;
-                        var critJab:Boolean = CritRoll()
-                        extraHitDamage = CritDamage(extraHitDamage, critJab);
+                        //Determine if critical hit!
+                        var critGrab:Boolean = CritRoll()
+                        extraHitDamage2 = CritDamage(extraHitDamage2, critJab);
                         //Deal the fellow up blow!
-                        outputText(" You chain up the jab with a second blow! ");
-                        extraHitDamage2 = Math.round(extraHitDamage);
-                        doDamage(extraHitDamage, true ,true);
-                        if (critJab) outputText("<b>Critical! </b>");
+                        outputText(" You grab your opponent mid swing and supplex it against the ground! ");
+                        if (player.hasPerk(PerkLib.MeteorStrike)) extraHitDamage2 *= 2;
+                        extraHitDamage2 = Math.round(extraHitDamage2);
+                        doDamage(extraHitDamage2, true ,true);
+                        if (critGrab) outputText("<b>Critical! </b>");
+                        if (player.hasPerk(PerkLib.GrabbingGrandmaster)){
+                            var extraHitStunChance:Number = 20;
+                            if (rand(100) < extraHitStunChance){
+                                outputText("The concusion leaves your opponent dazed! ");
+                                monster.createStatusEffect(StatusEffects.Stunned, 1,0,0,0);
+                            }
+                        }
                         outputText("\n");
                         JabbingStyleIncrement();
                     }
                 }
             }
-            if (player.hasPerk(PerkLib.GrabbingStyle)){
-                extraHitChance = 10;
-                var playerMaxCarry:Number = player.str+(player.tallness/12*100)
-                if (player.hasPerk(PerkLib.GrabbingMaster)) playerMaxCarry += player.str;
-                var ennemyMaxSize:Boolean = playerMaxCarry > (monster.tallness/12*100)
-                if (player.hasPerk(PerkLib.GrabbingMaster)) extraHitChance = 20;
-                if (rand(100) < extraHitChance && ennemyMaxSize){
-                    if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
-                        if(player.hasStatusEffect(StatusEffects.JabbingStyle)){
-                            extraHitDamage2 += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
-                        }
-                    }
-                    //Determine if critical hit!
-                    var critGrab:Boolean = CritRoll()
-                    extraHitDamage2 = CritDamage(extraHitDamage2, critJab);
-                    //Deal the fellow up blow!
-                    outputText(" You grab your opponent mid swing and supplex it against the ground! ");
-                    if (player.hasPerk(PerkLib.MeteorStrike)) extraHitDamage2 *= 2;
-                    extraHitDamage2 = Math.round(extraHitDamage2);
-                    doDamage(extraHitDamage2, true ,true);
-                    if (critGrab) outputText("<b>Critical! </b>");
-                    if (player.hasPerk(PerkLib.GrabbingGrandmaster)){
-                        var extraHitStunChance:Number = 20;
-                        if (rand(100) < extraHitStunChance){
-                            outputText("The concusion leaves your opponent dazed! ");
-                            monster.createStatusEffect(StatusEffects.Stunned, 1,0,0,0);
-                        }
-                    }
-                    outputText("\n");
-                    JabbingStyleIncrement();
-                }
-            }
+        } else { //MISSED THE TARGET THUS DAMAGE = 0;
+            if (monster is DisplacerBeast) outputText("\n\nThe displacer beast teleports, dodging your attack.\n");
+            else outputText("\n\nYou swing your [weapon] ferociously, confident that you can strike a crushing blow. In the end you fails to actually hit anything.\n");
         }
+
         if (monster.HP <= monster.minHP()) {
             doNext(endHpVictory);
             return;
