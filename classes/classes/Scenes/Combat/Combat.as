@@ -5488,7 +5488,7 @@ public class Combat extends BaseContent {
                             extraHitDamage2 = Math.round(extraHitDamage);
                             doDamage(extraHitDamage, true ,true);
                             if (critJab) outputText("<b>Critical! </b>");
-                            outputText("\n");
+                            outputText("\n\n");
                             JabbingStyleIncrement();
                         }
                     }
