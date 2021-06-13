@@ -5414,6 +5414,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 25);
             }
             outputText(" ");
+            outputText("\n\n"); //Move to next attack line
             if (MDOCount == maxCurrentAttacks()) outputText("\n");
             checkAchievementDamage(damage);
 			WrathGenerationPerHit1(5);
@@ -5483,7 +5484,7 @@ public class Combat extends BaseContent {
                             var critJab:Boolean = CritRoll()
                             extraHitDamage = CritDamage(extraHitDamage, critJab);
                             //Deal the fellow up blow!
-                            outputText(" You chain up the jab with a second blow! ");
+                            outputText("You chain up the jab with a second blow! ");
                             extraHitDamage2 = Math.round(extraHitDamage);
                             doDamage(extraHitDamage, true ,true);
                             if (critJab) outputText("<b>Critical! </b>");
@@ -5508,7 +5509,7 @@ public class Combat extends BaseContent {
                         var critGrab:Boolean = CritRoll()
                         extraHitDamage2 = CritDamage(extraHitDamage2, critJab);
                         //Deal the fellow up blow!
-                        outputText(" You grab your opponent mid swing and supplex it against the ground! ");
+                        outputText("You grab your opponent mid swing and supplex it against the ground! ");
                         if (player.hasPerk(PerkLib.MeteorStrike)) extraHitDamage2 *= 2;
                         extraHitDamage2 = Math.round(extraHitDamage2);
                         doDamage(extraHitDamage2, true ,true);
@@ -5520,14 +5521,14 @@ public class Combat extends BaseContent {
                                 monster.createStatusEffect(StatusEffects.Stunned, 1,0,0,0);
                             }
                         }
-                        outputText("\n");
+                        outputText("\n\n");
                         JabbingStyleIncrement();
                     }
                 }
             }
         } else { //MISSED THE TARGET THUS DAMAGE = 0;
-            if (monster is DisplacerBeast) outputText("\n\nThe displacer beast teleports, dodging your attack.\n");
-            else outputText("\n\nYou swing your [weapon] ferociously, confident that you can strike a crushing blow. In the end you fails to actually hit anything.\n");
+            if (monster is DisplacerBeast) outputText("The displacer beast teleports, dodging your attack.\n");
+            else outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow. In the end you fails to actually hit anything.\n");
         }
 
         if (monster.HP <= monster.minHP()) {
