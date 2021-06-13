@@ -181,7 +181,7 @@ use namespace CoC;
 			this.armorName = "chitin";
 			this.additionalXP = 1500;
 			this.lustVuln = 0.45;
-			this.createStatusEffect(StatusEffects.AuraOfMadness, 20, 20, 0, 0);
+			this.createStatusEffect(StatusEffects.AuraOfMadness, 0.20, 0.20, 0, 0);
 			this.createPerk(PerkLib.DarknessNature, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

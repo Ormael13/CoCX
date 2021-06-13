@@ -3154,7 +3154,8 @@ public class CombatMagic extends BaseCombatContent {
 			//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			//}
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
-			outputText(" " + monster.a + monster.short + " is encased in a thick layer of ice.\n\n");
+			MagicAddonEffect();
+			outputText("\n\n" + monster.a + monster.short + " is encased in a thick layer of ice.\n\n");
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 			if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
 			monster.createStatusEffect(StatusEffects.FrozenSolid,5,0,0,0);
