@@ -3283,7 +3283,7 @@ public final class Mutations extends MutationsHelper {
                 outputText("\n\nThe body mass you've gained is making your movements more sluggish.");
                 changes++;
                 temp = (player.spe - 30) / 10;
-                player.addCurse("spe", -temp, 1);
+                player.addCurse("spe", temp, 1);
             }
         }
         //Increase Corr, up to a max of 50.
