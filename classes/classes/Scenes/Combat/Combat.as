@@ -5503,7 +5503,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.GrabbingMaster)) playerMaxCarry += player.str;
                 var ennemyMaxSize:Boolean = playerMaxCarry > (monster.tallness/12*100)
                 if (player.hasPerk(PerkLib.GrabbingMaster)) extraHitChance = 20;
-                if (rand(100) < extraHitChance){
+                if (rand(100) < extraHitChance && ennemyMaxSize){
                     if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
                         if(player.hasStatusEffect(StatusEffects.JabbingStyle)){
                             extraHitDamage2 += player.spe*player.statusEffectv1(StatusEffects.JabbingStyle);
