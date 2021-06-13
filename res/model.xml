@@ -802,6 +802,7 @@
         <cell rect="571,110,29,32" name="face/melancholic" dx="91" dy="38"/>
         <cell rect="601,110,29,32" name="face/caveWyrm" dx="91" dy="38"/>
         <cell rect="631,110,29,32" name="face/fairySmile" dx="91" dy="38"/>
+		<cell rect="661,110,29,32" name="face/tusk" dx="91" dy="38"/>
         <cell rect="1,150,29,32" name="eyes/human" dx="90" dy="37"/>
         <cell rect="31,150,29,32" name="eyes/devil" dx="90" dy="37"/>
         <cell rect="61,150,29,32" name="eyes/cat" dx="90" dy="37"/>
@@ -2313,6 +2314,9 @@
 					<show part="face/ghost"/>
 				</if>
             </case>
+			<case values="Face.TROLL">
+                <show part="face/tusk"/>
+            </case>
             <case values="'never'"><!--TODO-->
                 <show part="face/insect"/>
             </case>
@@ -3616,7 +3620,7 @@
 					</else>
 				</if>
             </case>
-			<case values="Tail.COW">
+			<case values="Tail.COW,Tail.TROLL">
 				<if test="isTaur()">
 					<show part="tail/cow_taur"/>
 					<else>
