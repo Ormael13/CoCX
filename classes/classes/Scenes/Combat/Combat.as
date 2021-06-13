@@ -5495,9 +5495,9 @@ public class Combat extends BaseContent {
                 }
                 if (player.hasPerk(PerkLib.GrabbingStyle)){
                     extraHitChance = 10;
-                    var playerMaxCarry:Number = player.str+(player.tallness/12*100)
+                    var playerMaxCarry:Number = player.str+(player.tallness/12*100);
                     if (player.hasPerk(PerkLib.GrabbingMaster)) playerMaxCarry += player.str;
-                    var ennemyMaxSize:Boolean = playerMaxCarry > (monster.tallness/12*100)
+                    var ennemyMaxSize:Boolean = playerMaxCarry > (monster.tallness/12*100);
                     if (player.hasPerk(PerkLib.GrabbingMaster)) extraHitChance = 20;
                     if (rand(100) < extraHitChance && ennemyMaxSize){
                         if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
@@ -5506,7 +5506,7 @@ public class Combat extends BaseContent {
                             }
                         }
                         //Determine if critical hit!
-                        var critGrab:Boolean = CritRoll()
+                        var critGrab:Boolean = CritRoll();
                         extraHitDamage2 = CritDamage(extraHitDamage2, critJab);
                         //Deal the fellow up blow!
                         outputText("You grab your opponent mid swing and supplex it against the ground! ");
