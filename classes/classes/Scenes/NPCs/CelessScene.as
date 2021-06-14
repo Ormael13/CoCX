@@ -279,7 +279,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			_age = _ageShouldDoBirth;
 		}
 		else {
-			if (isCorrupt){
+			if (player.cor > 39){
 				spriteSelect(SpriteDb.s_celessBlack);
 			}
 			else {
@@ -760,16 +760,16 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		}
 		else{
 			outputText("\"<i>Oww! It hurts!...Mom… don’t look!</i>\"\n\n");
-			outputText("You see your daughter is holding a large horns on her forehead. It seems she finally reached adulthood, her breasts inflating to E-cups only confirms your suspicion. She seems to be in pain");
+			outputText("You see your daughter is holding a large horn on her forehead. It seems she finally reached adulthood, her breasts inflating to E-cups only confirms your suspicion. She seems to be in pain");
 			if (silly()) outputText(", kinda obvious, what with her outright telling you less than two seconds ago,");
-			outputText(" and it’s your duty as her mother to do all you can to help her. You hug her, trying your best to comfort and distract her from the pain as the horns pushes forward, eventually growing to a length just shy of her sire’s own horns." +
+			outputText(" and it’s your duty as her mother to do all you can to help her. You hug her, trying your best to comfort and distract her from the pain as the horn pushes forward, eventually growing to a length just shy of her sire’s own horn." +
 					"\"<i>Mom… It’s terrible! I've grown this weird bony stump on my head, what do I do?</i>\"\n\n" +
-					"You explain to your daughter that it's normal for unicorns to have a horns on their forehead and that you love her all the same, horns or not. " +
+					"You explain to your daughter that it's normal for unicorns to have a horn on their forehead and that you love her all the same, horn or not. " +
 					"She calms down and hugs you warmly like she always does. This time, however, you can’t help but notice the large horsecock between her leg rising to full mast. " +
 					"Noticing where you’re looking, she blushes and tries to hide it from you, failing miserably due to being unable to reach it with her hands. All she achieves is looking somewhat silly. " +
-					"You tell her it’s alright , that you’re here for her and that, as you already said, you love her, horns or no horns, no matter what kind. This manages to get a chuckle out of her, easing some of her worry, but not all of it. " +
+					"You tell her it’s alright , that you’re here for her and that, as you already said, you love her, horn or no horn, no matter what kind. This manages to get a chuckle out of her, easing some of her worry, but not all of it. " +
 					"You sigh, she’s your daughter, and no matter the problems she might have, she can always come to you and you will gladly go to any length to help her with it. No exceptions...\n\n" +
-					"\"<i>Mom, I’m a little scared…why did it get so big?! How do I get rid of this huge thing between my legs?</i>\"\n\n");
+					"\"<i>Mom, I’m a little scared… Why did it get so big?! How do I get rid of this huge thing between my legs?</i>\"\n\n");
 		}
 		if (player.isFemaleOrHerm()) {
 			outputText("This is a… somewhat unusual situation, but as a ");
