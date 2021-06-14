@@ -896,6 +896,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const GooBind:StatusEffectType                   = mkCombat("GooBind");
 		public static const GoreBleed:StatusEffectType                 = mkCombat("Gore Bleed");
 		public static const HarpyBind:StatusEffectType                 = mkCombat("HarpyBind");
+		public static const HeavenTribulationCR:StatusEffectType   	   = mkCombat("Heaven Tribulation Combat Rounds");
 		public static const Hemorrhage:StatusEffectType                = mkCombat("Hemorrhage");
 		public static const Hemorrhage2:StatusEffectType               = mkCombat("Hemorrhage2");
 		public static const HemorrhageArmor:StatusEffectType           = mkCombat("HemorrhageArmor");

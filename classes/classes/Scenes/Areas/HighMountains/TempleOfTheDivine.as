@@ -140,9 +140,9 @@ use namespace CoC;
 			clearOutput();
 			outputText("Divine powers radiate from the altar banishing the evil that has took a grip on your body to the void.");
 			player.gems -= 5000;
-			player.statStore.removeBuffs("Weakened");
-			player.statStore.removeBuffs("Drained");
-			player.statStore.removeBuffs("Damaged");
+			if (player.statStore.hasBuff("Weakened")) player.statStore.removeBuffs("Weakened");
+			else if (!player.statStore.hasBuff("Drain")) player.statStore.removeBuffs("Drained");
+			else player.statStore.removeBuffs("Damaged");
 			doNext(PlayerPrayAtTemple);
 		}
 

@@ -232,10 +232,13 @@ public function ayaneCuringCurse():void {
 	outputText("\"<i>With due haste my " + player.mf("lord", "lady") + " I will alleviate your wounds and break some of the curses afflicting you.</i>\"\n\n");
 	outputText("On this she lifts her staff and begins a ritual. A few seconds later you feel infinitely better as the kitsune shrine maiden curative magic does its work alleviating your wounds both physical and spiritual.\n\n");
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
-		player.removeCurse(stat, 5);
-		if (stat != "sens")
-		{
-			player.removeCurse(stat+".mult", 0.05);
+		player.removeCurse(stat, 15,1);
+		player.removeCurse(stat, 10,2);
+		player.removeCurse(stat, 5,3);
+		if (stat != "sens") {
+			player.removeCurse(stat+".mult", 0.15,1);
+			player.removeCurse(stat+".mult", 0.10,2);
+			player.removeCurse(stat+".mult", 0.05,3);
 		}
 	}
 	doNext(camp.returnToCampUseOneHour);

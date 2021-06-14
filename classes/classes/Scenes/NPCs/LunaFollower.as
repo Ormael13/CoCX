@@ -516,19 +516,17 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					"\"<i>Of course, " + player.mf("Master","Mistress") + ", please undress and I shall do so at once.</i>\"\n\n" +
 					"Luna apply medicines and healing ointments on your wounds treating and check for any trace of changes left by harming chemicals. She traces your skin up and down, gently, with her slender, clean fingers, soothing your pains and closing your cuts and scrapes as she does. Her treatment is highly effective, but also a bit arousing; the young maid's touch feels loving and warm, and you soon find yourself flushed with lust under her tender caresses.\n\n");
 			dynStats("lus", Math.round(player.maxLust() * 0.2));
-			dynStats("lus", 33);
-			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]){
+			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
 				player.removeCurse(stat, 10,1);
-				player.removeCurse(stat, 5);
-				if (stat != "sens")
-				{
+				player.removeCurse(stat, 5,2);
+				if (stat != "sens") {
 					player.removeCurse(stat+".mult", 0.10,1);
-					player.removeCurse(stat+".mult", 0.05);
+					player.removeCurse(stat+".mult", 0.05,2);
 				}
 			}
 			lunaJealousy(-100);
 			lunaAffection(5);
-			HPChange(Math.round(player.maxHP() * .25), true);
+			HPChange(Math.round(player.maxHP() * .1), true);
 			Nursed = true;
 			NursedCooldown = 24;
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 10) {

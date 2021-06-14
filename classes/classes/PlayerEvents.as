@@ -16,15 +16,16 @@ import classes.GlobalFlags.*;
 import classes.Items.*;
 import classes.Scenes.Camp.CampScenes;
 import classes.Scenes.Camp.HarvestMoonScenes;
+import classes.Scenes.Camp.HclassHeavenTribulation;
 import classes.Scenes.Camp.UniqueCampScenes;
-import classes.Scenes.Dreams;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
-import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.LunaFollower;
-import classes.Scenes.Places.WoodElves;
 import classes.Scenes.NPCs.ZenjiScenes;
+import classes.Scenes.Places.WoodElves;
+import classes.Scenes.Holidays;
+import classes.Scenes.Dreams;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
 import classes.lists.BreastCup;
@@ -485,7 +486,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.hasKeyItem("Ruby Orb") >= 0) { //Regain DARK slime core
 				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.DarkSlimeCore) && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == LowerBody.GOO) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
-
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
 					//(Reduces Fluid Addiction to a 24 hour intake requirement).
 					outputText("(<b>Gained New Perk: Dark Slime Core - Moisture craving builds at a greatly reduced rate.</b>\n)");
@@ -1034,6 +1034,27 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv2(StatusEffects.ZenjiZList) == 3) SceneLib.zenjiScene.loverZenjiSleepWithNoSexMorning();
 					needNext = true;
 				}
+			}
+			//Heaven Tribulations
+			if (player.hasStatusEffect(StatusEffects.TribulationCountdown)) {
+				if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
+					player.removeStatusEffect(StatusEffects.TribulationCountdown);
+					campScenes.HclassHTintro();
+					needNext = true;
+				}
+				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) {
+					player.removeStatusEffect(StatusEffects.TribulationCountdown);
+					outputText("\nAN ENDURANCE FIGHT STARTS HERE\n");
+					startCombat(new HclassHeavenTribulation());//startCombat(new GclassHeavenTribulation());
+					needNext = true;
+				}
+				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) {
+					player.removeStatusEffect(StatusEffects.TribulationCountdown);
+					outputText("\nAN ENDURANCE FIGHT STARTS HERE\n");
+					//startCombat(new FclassHeavenTribulation());
+					needNext = true;
+				}
+				else player.addStatusValue(StatusEffects.TribulationCountdown, 1, -1);
 			}
 			return needNext;
 		}
@@ -1917,26 +1938,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				inventory.takeItem(vehicles.HB_MECH, null);
 				needNext = true;
 			}
-			//H class Heaven Tribulation
-			//		if (player.level >= 24 && player.hasPerk(PerkLib.SoulApprentice) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
-			//			outputText("\nPLACEHOLDER TEXT 1\n");
-			//			player.createStatusEffect(StatusEffects.TribulationCountdown, 25, 0, 0, 0);
-			//			needNext = true;
-			//		}
-			//		if (player.hasStatusEffect(StatusEffects.TribulationCountdown)) {
-			//			if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
-			//				player.removeStatusEffect(StatusEffects.TribulationCountdown);
-			//				outputText("\nAN ENDURANCE FIGHT STARTS HERE\n");
-			//				startCombat(new HclassHeavenTribulation());
-			//	needNext = true;
-			//			}
-			//	else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
-			//		player.removeStatusEffect(StatusEffects.TribulationCountdown);
-			//		outputText("\nYou feel a tingling in your nethers... at last full sensation has returned to your groin.  <b>You can masturbate again!</b>\n");
-			//		needNext = true;
-			//	}
-			//			else player.addStatusValue(StatusEffects.TribulationCountdown, 1, -1);
-			//		}
 			//Hot Spring
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 1 && rand(4) == 0) {
 				outputText("\nWhile wandering around the border of your camp, you randomly kick a rock and a stream of water sprays out. Surprised, you touch the water, discovering it to be startlingly hot. An idea comes to your mind. You get a shovel, digging around the fountaining water which soon turns into a small pool. This is the perfect place to build a hot spring. You smile, delighted at the idea of being able to take frequent baths in it! You resolve to get to work as soon as possible.");

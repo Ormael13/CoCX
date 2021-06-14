@@ -52,12 +52,12 @@ package classes.Scenes
 			outputText("-Jtex many code corrections.\n");
 			outputText("-Luna meal would recover 2x less HP/mana but would restore 2x more fatigue. Her nurse option would heal only 10% max HP not 50% and lust gain would be 20% of max lust not 33.\n");
 			outputText("-Temple of Divine keeper recieved divine messages form multiple deities that it was so cheap to heal such difficult things that used much of gods super low pool of faith so she been given instruction form gods to make price more fitting service weakened gods giving to those praying. (Curse/hex cleansing cost 5k per session and will remove either curses or hexes)\n");
-			outputText("-New necklace (by Ormael): Wrathless - buyable at Kaiba shop in Tel'Adre. Cost 4000 gems. +5% to spellpower and removes all penalty to spellcasting or using m. specials if wrath is not at max value.\n");
+			outputText("-New necklace (by Ormael): Wrathless - buyable at Kaiba shop in Tel'Adre. Cost 4500 gems. +10% to spellpower and removes all penalty to spellcasting or using m. specials if wrath is not at max value.\n");
 			outputText("-Diana was whip... err disciplined by her deity to stop been so slowass and make her services bit faster depending on service itself. (15 to 45 min instead of 60 min)\n");
 			outputText("-Llaenwynn typo/scenes texts corrections.\n");
 			outputText("-Each Troll Fig given to Zenji would increase bonus to his cum capacity by 25 more. (2nd +25, 3rd +50, 4th +75 and so on)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Added disbaled buttons for soulforce menu.\n");
+			outputText("-Transhumanism ascension perks effects been increased 2 times. Monsters increase after each ascenison been increased 3 times.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -68,7 +68,8 @@ package classes.Scenes
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation eprks giving 10x too high stats multi bonuses\n");/*ostatni punkt changelogu
+			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation eprks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
+			outputText("bad-end\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

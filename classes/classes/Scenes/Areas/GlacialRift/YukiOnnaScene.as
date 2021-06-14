@@ -86,7 +86,7 @@ public class YukiOnnaScene extends BaseContent
 				outputText("You feel like you nearly died for that matter so Yu finding you was timely indeed. You thank her for the save.\n\n");
 				outputText("\"<i>Yu did nothing big. If [name] want for heart warmth though [name] should ask Yu, not sketchy girl in blizzard.</i>\"\n\n");
 				outputText("You will remember that one.\n\n");
-				player.addCurse("tou", 30);
+				player.addCurse("tou", 30,2);
 			}
 			else {
 				if (rand(3) == 0) player.skinTone = "snow white";

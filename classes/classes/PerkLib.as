@@ -3393,7 +3393,7 @@ public class PerkLib
 				"Pregnancy moves twice as fast as a normal woman's.");
 		public static const SpellcastingAffinity:SpellcastingAffinityPerk = new SpellcastingAffinityPerk();
 		public static const Cultivation:PerkType = mk("Cultivation", "Cultivation",
-				"Allow to cultivate powers of the soul.",
+				"Allow to cultivate powers of the soul.",//nigdzie nieużyty wcześniej perk name
 				"You've chosen the 'Cultivation' perk, starting your journey on the soul cultivation path!");//potem przerobić na coć innego - moze jak perki do czarów i łuku bedzie dawać jakieś korzyści do soul skills po odpowiednio dużej ilości ich użycia czy cos xD
 
 		// Hidden/Deity Jobs perks
@@ -3699,6 +3699,7 @@ public class PerkLib
 				"Allows to form 2 people party.");
 		public static const BasiliskResistance:PerkType = mk("Basilisk Resistance", "Basilisk Resistance",
 				"Grants immunity to Basilisk's paralyzing gaze. Disables Basilisk Bad End.");
+		public static const BodyTempering:BodyTemperingPerk = new BodyTemperingPerk();
 		public static const BulgeArmor:PerkType = mk("Bulge Armor", "Bulge Armor",
 				"Grants a 5 point damage bonus to dick-based tease attacks.");
 		public static const Cornucopia:PerkType = mk("Cornucopia", "Cornucopia",
@@ -5917,7 +5918,8 @@ public class PerkLib
             //Tier 4
             SoulSprite.requireLevel(24)
                     .requirePerk(SoulWarrior)
-                    .requireWis(80); // && requirePerk(HclassHeavenTribulationSurvivor)
+					.requirePerk(HclassHeavenTribulationSurvivor)
+                    .requireWis(80);
             FleshBodyWarriorStage.requireLevel(24)
                     .requirePerk(FleshBodyApprenticeStage);
             DaoistWarriorStage.requireLevel(24)
@@ -5933,7 +5935,7 @@ public class PerkLib
             //Tier 7
             SoulExalt.requirePerk(SoulElder)
                     .requireWis(140)
-                    .requireLevel(42);// && requirePerk(GclassHeavenTribulationSurvivor)
+                    .requireLevel(42);//.requirePerk(GclassHeavenTribulationSurvivor)
             FleshBodyElderStage.requireLevel(42)
                     .requirePerk(FleshBodyWarriorStage);
             DaoistElderStage.requireLevel(42)
@@ -5949,7 +5951,7 @@ public class PerkLib
             //Tier 10
      /*		SoulKing.requirePerk(SoulTyrant)
                     .requireWis(200)
-                    .requireLevel(60);
+                    .requireLevel(60);//.requirePerk(FclassHeavenTribulationSurvivor)
             FleshBodyOverlordStage.requireLevel(60)
                     .requirePerk(FleshBodyElderStage);
             DaoistOverlordStage.requireLevel(60)
