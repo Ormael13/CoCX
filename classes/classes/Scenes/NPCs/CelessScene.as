@@ -279,7 +279,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			_age = _ageShouldDoBirth;
 		}
 		else {
-			if (isCorrupt){
+			if (player.cor > 39){
 				spriteSelect(SpriteDb.s_celessBlack);
 			}
 			else {
