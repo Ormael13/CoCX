@@ -1124,7 +1124,8 @@
         <cell rect="1011,500,49,29" name="panty/comfortablePanty" dx="79" dy="99"/>
     </spritemap>
     <spritemap file="tails.png">
-        <cell rect="1,71,168,139" name="tail/manticore" dx="20" dy="40"/>
+        <cell rect="1,71,168,139" name="tail_bg/manticore" dx="20" dy="40"/>
+        <cell rect="1,71,60,139" name="tail_front/manticore" dx="20" dy="40"/>
         <cell rect="507,71,168,139" name="tail/manticore_taur" dx="45" dy="82"/>
         <cell rect="676,71,168,139" name="tail_front/manticore_taur" dx="45" dy="82"/>
         <cell rect="1,211,83,139" name="tail/orca" dx="78" dy="39"/>
@@ -1135,27 +1136,19 @@
         <cell rect="86,211,83,139" name="tail/mouse_taur" dx="145" dy="46"/>
         <cell rect="170,211,83,139" name="tail/mouse_fire" dx="95" dy="40"/>
         <cell rect="170,211,83,139" name="tail/mouse_fire_taur" dx="145" dy="46"/>
-        <cell rect="255,211,83,139" name="tail/cat" dx="108" dy="40"/>
-        <cell rect="255,211,83,139" name="tail/cat_taur" dx="158" dy="51"/>
-        <cell rect="339,211,83,139" name="tail/cat2" dx="108" dy="40"/>
-        <cell rect="339,211,83,139" name="tail/cat2_taur" dx="158" dy="55"/>
-        <cell rect="593,211,83,139" name="tail/hellcat" dx="108" dy="39"/>
-        <cell rect="593,211,83,139" name="tail/hellcat_taur" dx="158" dy="55"/>
-        <cell rect="761,211,83,139" name="tail/kasha" dx="108" dy="40"/>
-        <cell rect="761,211,83,139" name="tail/kasha_taur" dx="158" dy="55"/>
         <cell rect="509,211,83,139" name="tail/horse" dx="95" dy="40"/>
         <cell rect="509,211,83,139" name="tail/horse_taur" dx="143" dy="45"/>
         <cell rect="1,351,168,69" name="tail/reptile" dx="20" dy="90"/>
         <cell rect="1,351,168,69" name="tail/reptile_taur" dx="67" dy="102"/>
-        <cell rect="170,351,168,69" name="tail/demon" dx="25" dy="91"/>
+        <cell rect="170,351,168,69" name="tail/demon" dx="19" dy="90"/>
         <cell rect="170,351,168,69" name="tail/demon_taur" dx="74" dy="93"/>
-        <cell rect="339,351,168,69" name="tail/gargoyle_axe" dx="20" dy="90"/>
-        <cell rect="339,421,168,69" name="tail/gargoyle_mace" dx="20" dy="90"/>
+        <cell rect="339,351,168,69" name="tail/gargoyle_axe" dx="16" dy="99"/>
+        <cell rect="339,421,168,69" name="tail/gargoyle_mace" dx="16" dy="94"/>
         <cell rect="1,421,168,69" name="tail_fg/reptile_fire" dx="20" dy="90"/>
         <cell rect="1,421,168,69" name="tail/reptile_fire_taur" dx="67" dy="102"/>
-        <cell rect="170,421,168,69" name="tail/cow" dx="20" dy="90"/>
+        <cell rect="170,421,168,69" name="tail/cow" dx="19" dy="90"/>
         <cell rect="170,421,168,69" name="tail/cow_taur" dx="74" dy="93"/>
-        <cell rect="508,421,168,69" name="tail/balrog" dx="20" dy="90"/>
+        <cell rect="508,421,168,69" name="tail/balrog" dx="19" dy="90"/>
         <cell rect="508,421,168,69" name="tail/balrog_taur" dx="74" dy="93"/>
         <cell rect="677,421,168,69" name="tail/dragon" dx="18" dy="90"/>
         <cell rect="677,421,168,69" name="tail/dragon_taur" dx="74" dy="93"/>
@@ -1177,7 +1170,7 @@
         <cell rect="675,561,83,139" name="tail/mantis_taur" dx="135" dy="50"/>
         <cell rect="339,561,83,139" name="tail/weasel" dx="95" dy="40"/>
         <cell rect="339,561,83,139" name="tail/weasel_taur" dx="144" dy="49"/>
-        <cell rect="423,561,168,139" name="tail/thunderbird" dx="20" dy="46"/>
+        <cell rect="423,561,168,139" name="tail/thunderbird" dx="19" dy="46"/>
         <cell rect="423,561,168,139" name="tail/thunderbird_taur" dx="34" dy="49"/>
         <cell rect="592,561,82,139" name="tail/raccoon" dx="95" dy="40"/>
         <cell rect="592,561,82,139" name="tail/raccoon_taur" dx="149" dy="50"/>
@@ -1185,8 +1178,16 @@
         <cell rect="759,561,83,139" name="tail/wendigo_taur" dx="144" dy="49"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi" dx="95" dy="87"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi_taur" dx="144" dy="50"/>
-        <cell rect="170,71,168,139" name="tail/ratatoskr" dx="58" dy="15"/>
-        <cell rect="170,71,168,139" name="tail/ratatoskr_taur" dx="101" dy="21"/>
+        <cell rect="255,211,83,139" name="tail_bg/cat" dx="108" dy="40"/>
+        <cell rect="255,211,83,139" name="tail_bg/cat_taur" dx="158" dy="51"/>
+        <cell rect="339,211,83,139" name="tail_bg/cat2" dx="108" dy="40"/>
+        <cell rect="339,211,83,139" name="tail_bg/cat2_taur" dx="158" dy="55"/>
+        <cell rect="593,211,83,139" name="tail_bg/hellcat" dx="108" dy="39"/>
+        <cell rect="593,211,83,139" name="tail_bg/hellcat_taur" dx="158" dy="55"/>
+        <cell rect="761,211,83,139" name="tail_bg/kasha" dx="108" dy="40"/>
+        <cell rect="761,211,83,139" name="tail_bg/kasha_taur" dx="158" dy="55"/>
+        <cell rect="170,71,168,139" name="tail_bg/ratatoskr" dx="58" dy="15"/>
+        <cell rect="170,71,168,139" name="tail_bg/ratatoskr_taur" dx="101" dy="21"/>
         <cell rect="1,1015,173,156" name="tail_bg/fox1" dx="4" dy="31"/>
         <cell rect="1,1015,173,156" name="tail_bg/fox1_taur" dx="60" dy="47"/>
         <cell rect="523,858,173,156" name="tail_bg/fox2" dx="16" dy="36"/>
@@ -1332,15 +1333,15 @@
         <layer name="torso"/>
 		<layer name="ears_truebg"/>
 		<layer name="rearbody"/>
+		<layer name="tailAccessory"/>
+        <layer name="tail_fg"/>
+        <layer name="tail"/>
 		<layer name="clothCape"/>
 		<layer name="clothCape_bg"/>
 		<layer name="backAccessory"/>
 		<layer name="hair_bg"/>
 		<layer name="hairLeft"/>
 		<layer name="wings"/>
-		<layer name="tailAccessory"/>
-        <layer name="tail_fg"/>
-        <layer name="tail"/>
         <layer name="wings_bg"/>
 		<layer name="tail_bg"/>
 		<layer name="legs_bg"/>
@@ -3533,9 +3534,9 @@
             </case>
 			<case values="Tail.SQUIRREL">
 				<if test="isTaur()">
-					<show part="tail/ratatoskr_taur"/>
+					<show part="tail_bg/ratatoskr_taur"/>
 					<else>
-						<show part="tail/ratatoskr"/>
+						<show part="tail_bg/ratatoskr"/>
 					</else>
 				</if>
             </case>
@@ -3701,7 +3702,8 @@
 					<show part="tail/manticore_taur"/>
 					<show part="tail_front/manticore_taur"/>
 				<else>
-					<show part="tail/manticore"/>
+					<show part="tail_bg/manticore"/>
+					<show part="tail_front/manticore"/>
 				</else>
 				</if>
             </case>
