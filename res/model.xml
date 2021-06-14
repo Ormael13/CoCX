@@ -3544,25 +3544,25 @@
                 <switch value="tailCount">
                     <case values="1">
 						<if test="isTaur()">
-							<show part="tail/cat_taur"/>
+							<show part="tail_bg/cat_taur"/>
 							<else>
-								<show part="tail/cat"/>
+								<show part="tail_bg/cat"/>
 							</else>
 						</if>
                     </case>
                     <case values="2">
 						<if test="isTaur()">
-							<show part="tail/cat2_taur"/>
+							<show part="tail_bg/cat2_taur"/>
 							<else>
-								<show part="tail/cat2"/>
+								<show part="tail_bg/cat2"/>
 							</else>
 						</if>
                     </case>
                     <default>
 						<if test="isTaur()">
-							<show part="tail/cat2_taur"/>
+							<show part="tail_bg/cat2_taur"/>
 							<else>
-								<show part="tail/cat2"/>
+								<show part="tail_bg/cat2"/>
 							</else>
 						</if>
                     </default>
@@ -3570,17 +3570,17 @@
             </case>
 			<case values="Tail.BURNING">
 				<if test="isTaur()">
-					<show part="tail/hellcat_taur"/>
+					<show part="tail_bg/hellcat_taur"/>
 					<else>
-						<show part="tail/hellcat"/>
+						<show part="tail_bg/hellcat"/>
 					</else>
 				</if>
             </case>
 			<case values="Tail.TWINKASHA">
 				<if test="isTaur()">
-					<show part="tail/kasha_taur"/>
+					<show part="tail_bg/kasha_taur"/>
 					<else>
-						<show part="tail/kasha"/>
+						<show part="tail_bg/kasha"/>
 					</else>
 				</if>
             </case>
