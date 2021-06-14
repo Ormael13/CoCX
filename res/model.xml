@@ -3967,7 +3967,6 @@
 											<hide part="arms_pattern/*"/>
 											<hide part="arms_bg_pattern/*"/>
 											<hide part="legs_pattern/*"/>
-											<hide part="shield/*"/>
 										</case>
 										<default>
 										</default>
