@@ -64,7 +64,7 @@
                 value CDATA #IMPLIED>
         ]>
 <!--suppress EqualityComparisonWithCoercionJS, CheckTagEmptyBody -->
-<model name="demo" dir="./res/charview/" width="200" height="220" scale="2" originX="15" originY="10">
+    <model name="demo" dir="./res/charview/" width="200" height="220" scale="2" originX="15" originY="10">
     <palette>
         <!--Colors common for skin/hair/fur/scales/... go here. Can be overriden later-->
             <common>
@@ -317,7 +317,7 @@
         <cell rect="251,150,49,59" name="arms_bg/orca" dx="56" dy="64"/>
         <cell rect="301,150,49,59" name="arms_bg/pscales" dx="56" dy="64"/>
         <cell rect="351,150,49,59" name="arms_bg/scales" dx="56" dy="64"/>
-		<cell rect="351,150,49,59" name="arms_bg/dscales" dx="56" dy="64"/>
+        <cell rect="351,150,49,59" name="arms_bg/dscales" dx="56" dy="64"/>
         <cell rect="401,150,49,59" name="arms_bg/goo" dx="56" dy="64"/>
         <cell rect="701,150,49,59" name="arms_bg/panda" dx="56" dy="64"/>
         <cell rect="801,150,49,59" name="arms_bg/demonlewd" dx="56" dy="64"/>
@@ -348,7 +348,7 @@
         <cell rect="251,210,49,59" name="arms/orca" dx="104" dy="64"/>
         <cell rect="301,210,49,59" name="arms/pscales" dx="104" dy="64"/>
         <cell rect="351,210,49,59" name="arms/scales" dx="104" dy="64"/>
-		<cell rect="351,210,49,59" name="arms/dscales" dx="104" dy="64"/>
+        <cell rect="351,210,49,59" name="arms/dscales" dx="104" dy="64"/>
         <cell rect="401,210,49,59" name="arms/goo" dx="104" dy="64"/>
         <cell rect="701,210,49,59" name="arms/panda" dx="104" dy="64"/>
         <cell rect="638,520,90,90" name="arms/yeti" dx="57" dy="43"/>
@@ -441,7 +441,7 @@
         <cell rect="201,390,49,59" name="legs/orca" dx="79" dy="115"/>
         <cell rect="251,390,49,59" name="legs/pscales" dx="79" dy="115"/>
         <cell rect="301,390,49,59" name="legs/scales" dx="79" dy="115"/>
-		<cell rect="301,390,49,59" name="legs/dscales" dx="79" dy="115"/>
+        <cell rect="301,390,49,59" name="legs/dscales" dx="79" dy="115"/>
         <cell rect="351,390,49,59" name="legs/hoof_human" dx="79" dy="115"/>
         <cell rect="1,793,49,59" name="legs/hoof_fur" dx="79" dy="115"/>
         <cell rect="51,793,49,59" name="legs/hoof_scales" dx="79" dy="115"/>
@@ -698,13 +698,23 @@
         <cell rect="212,1620,80,90" name="weapon/swordGeneric" dx="38" dy="55"/>
         <cell rect="212,1726,80,90" name="weapon/swordHoly" dx="38" dy="55"/>
         <cell rect="212,1832,80,90" name="weapon/swordUnholy" dx="38" dy="55"/>
-        <cell rect="212,1938,80,90" name="weaponBuff/swordFireBuff" dx="34" dy="31"/>
+        <cell rect="122,1938,80,90" name="weaponBuff/swordFireBuff" dx="34" dy="31"/>
         <cell rect="302,1620,80,90" name="weapon/axeGeneric" dx="38" dy="55"/>
         <cell rect="302,1726,80,90" name="weapon/axeHoly" dx="38" dy="55"/>
         <cell rect="302,1832,80,90" name="weapon/axeUnholy" dx="38" dy="55"/>
         <cell rect="392,1620,80,90" name="weapon/hammerGeneric" dx="38" dy="55"/>
         <cell rect="392,1726,80,90" name="weapon/hammerHoly" dx="38" dy="55"/>
         <cell rect="392,1832,80,90" name="weapon/hammerUnholy" dx="38" dy="55"/>
+        <cell rect="212,1938,80,90" name="weapon/swordGenericOH" dx="82" dy="55"/>
+        <cell rect="212,2044,80,90" name="weapon/swordHolyOH" dx="82" dy="55"/>
+        <cell rect="212,2150,80,90" name="weapon/swordUnholyOH" dx="82" dy="55"/>
+        <cell rect="122,2044,80,90" name="weaponBuff/swordFireBuffOH" dx="86" dy="31"/>
+        <cell rect="302,1938,80,90" name="weapon/axeGenericOH" dx="82" dy="55"/>
+        <cell rect="302,2044,80,90" name="weapon/axeHolyOH" dx="82" dy="55"/>
+        <cell rect="302,2150,80,90" name="weapon/axeUnholyOH" dx="82" dy="55"/>
+        <cell rect="392,1938,80,90" name="weapon/hammerGenericOH" dx="82" dy="55"/>
+        <cell rect="392,2044,80,90" name="weapon/hammerHolyOH" dx="82" dy="55"/>
+        <cell rect="392,2150,80,90" name="weapon/hammerUnholyOH" dx="82" dy="55"/>
         <cell rect="482,1620,80,107" name="weapon/spearGeneric" dx="39" dy="53"/>
         <cell rect="482,1729,80,107" name="weapon/spearHoly" dx="39" dy="53"/>
         <cell rect="482,1838,80,107" name="weapon/spearUnholy" dx="39" dy="53"/>
@@ -779,7 +789,7 @@
         <cell rect="181,70,29,32" name="head/orca" dx="91" dy="37"/>
         <cell rect="211,70,29,32" name="head/goo" dx="90" dy="37"/>
         <cell rect="271,70,29,32" name="head/panda" dx="90" dy="37"/>
-		<cell rect="301,70,29,32" name="head/dscales" dx="90" dy="37"/>
+        <cell rect="301,70,29,32" name="head/dscales" dx="90" dy="37"/>
         <cell rect="1,110,29,32" name="face/human" dx="90" dy="37"/>
         <cell rect="31,110,29,32" name="face/human_fang" dx="90" dy="37"/>
         <cell rect="61,110,29,32" name="face/fur" dx="90" dy="37"/>
@@ -802,7 +812,7 @@
         <cell rect="571,110,29,32" name="face/melancholic" dx="91" dy="38"/>
         <cell rect="601,110,29,32" name="face/caveWyrm" dx="91" dy="38"/>
         <cell rect="631,110,29,32" name="face/fairySmile" dx="91" dy="38"/>
-		<cell rect="661,110,29,32" name="face/tusk" dx="91" dy="38"/>
+        <cell rect="661,110,29,32" name="face/tusk" dx="91" dy="38"/>
         <cell rect="1,150,29,32" name="eyes/human" dx="90" dy="37"/>
         <cell rect="31,150,29,32" name="eyes/devil" dx="90" dy="37"/>
         <cell rect="61,150,29,32" name="eyes/cat" dx="90" dy="37"/>
@@ -894,7 +904,7 @@
         <cell rect="261,110,49,29" name="breasts/Bscales" dx="79" dy="68"/>
         <cell rect="311,110,49,29" name="breasts/Borca" dx="79" dy="68"/>
         <cell rect="361,110,49,29" name="breasts/Bgoo" dx="79" dy="68"/>
-		<cell rect="661,110,49,29" name="breasts/Bdscales" dx="79" dy="68"/>
+        <cell rect="661,110,49,29" name="breasts/Bdscales" dx="79" dy="68"/>
         <cell rect="11,140,49,29" name="breasts/Dhuman" dx="79" dy="68"/>
         <cell rect="61,140,49,29" name="breasts/Dfur" dx="79" dy="68"/>
         <cell rect="61,140,49,29" name="breasts/Dpanda" dx="79" dy="68"/>
@@ -904,7 +914,7 @@
         <cell rect="261,140,49,29" name="breasts/Dscales" dx="79" dy="68"/>
         <cell rect="311,140,49,29" name="breasts/Dorca" dx="79" dy="68"/>
         <cell rect="361,140,49,29" name="breasts/Dgoo" dx="79" dy="68"/>
-		<cell rect="661,140,49,29" name="breasts/Ddscales" dx="79" dy="68"/>
+        <cell rect="661,140,49,29" name="breasts/Ddscales" dx="79" dy="68"/>
         <cell rect="11,170,49,29" name="breasts/Fhuman" dx="79" dy="68"/>
         <cell rect="61,170,49,29" name="breasts/Ffur" dx="79" dy="68"/>
         <cell rect="61,170,49,29" name="breasts/Fpanda" dx="79" dy="68"/>
@@ -914,7 +924,7 @@
         <cell rect="261,170,49,29" name="breasts/Fscales" dx="79" dy="68"/>
         <cell rect="311,170,49,29" name="breasts/Forca" dx="79" dy="68"/>
         <cell rect="361,170,49,29" name="breasts/Fgoo" dx="79" dy="68"/>
-		<cell rect="661,170,49,29" name="breasts/Fdscales" dx="79" dy="68"/>
+        <cell rect="661,170,49,29" name="breasts/Fdscales" dx="79" dy="68"/>
         <cell rect="411,110,49,29" name="breasts_pattern/Bpstripe" dx="79" dy="68"/>
         <cell rect="411,140,49,29" name="breasts_pattern/Bstripe" dx="79" dy="69"/>
         <cell rect="411,170,49,29" name="breasts_pattern/Blstripe" dx="79" dy="69"/>
@@ -964,7 +974,7 @@
         <cell rect="161,320,49,29" name="balls/Bscaleslarge" dx="79" dy="104"/>
         <cell rect="161,350,49,29" name="balls/Bscaleshuge" dx="79" dy="105"/>
         <cell rect="161,380,49,29" name="balls/Bscalessillyhuge" dx="79" dy="106"/>
-		<cell rect="161,290,49,29" name="balls/Bdscalesmall" dx="79" dy="104"/>
+        <cell rect="161,290,49,29" name="balls/Bdscalesmall" dx="79" dy="104"/>
         <cell rect="161,320,49,29" name="balls/Bdscaleslarge" dx="79" dy="104"/>
         <cell rect="161,350,49,29" name="balls/Bdscaleshuge" dx="79" dy="105"/>
         <cell rect="161,380,49,29" name="balls/Bdscalessillyhuge" dx="79" dy="106"/>
@@ -1114,7 +1124,8 @@
         <cell rect="1011,500,49,29" name="panty/comfortablePanty" dx="79" dy="99"/>
     </spritemap>
     <spritemap file="tails.png">
-        <cell rect="1,71,168,139" name="tail/manticore" dx="20" dy="40"/>
+        <cell rect="1,71,168,139" name="tail_bg/manticore" dx="20" dy="40"/>
+        <cell rect="1,71,60,139" name="tail_front/manticore" dx="20" dy="40"/>
         <cell rect="507,71,168,139" name="tail/manticore_taur" dx="45" dy="82"/>
         <cell rect="676,71,168,139" name="tail_front/manticore_taur" dx="45" dy="82"/>
         <cell rect="1,211,83,139" name="tail/orca" dx="78" dy="39"/>
@@ -1125,27 +1136,19 @@
         <cell rect="86,211,83,139" name="tail/mouse_taur" dx="145" dy="46"/>
         <cell rect="170,211,83,139" name="tail/mouse_fire" dx="95" dy="40"/>
         <cell rect="170,211,83,139" name="tail/mouse_fire_taur" dx="145" dy="46"/>
-        <cell rect="255,211,83,139" name="tail/cat" dx="108" dy="40"/>
-        <cell rect="255,211,83,139" name="tail/cat_taur" dx="158" dy="51"/>
-        <cell rect="339,211,83,139" name="tail/cat2" dx="108" dy="40"/>
-        <cell rect="339,211,83,139" name="tail/cat2_taur" dx="158" dy="55"/>
-        <cell rect="593,211,83,139" name="tail/hellcat" dx="108" dy="39"/>
-        <cell rect="593,211,83,139" name="tail/hellcat_taur" dx="158" dy="55"/>
-        <cell rect="761,211,83,139" name="tail/kasha" dx="108" dy="40"/>
-        <cell rect="761,211,83,139" name="tail/kasha_taur" dx="158" dy="55"/>
         <cell rect="509,211,83,139" name="tail/horse" dx="95" dy="40"/>
         <cell rect="509,211,83,139" name="tail/horse_taur" dx="143" dy="45"/>
         <cell rect="1,351,168,69" name="tail/reptile" dx="20" dy="90"/>
         <cell rect="1,351,168,69" name="tail/reptile_taur" dx="67" dy="102"/>
-        <cell rect="170,351,168,69" name="tail/demon" dx="25" dy="91"/>
+        <cell rect="170,351,168,69" name="tail/demon" dx="19" dy="90"/>
         <cell rect="170,351,168,69" name="tail/demon_taur" dx="74" dy="93"/>
-        <cell rect="339,351,168,69" name="tail/gargoyle_axe" dx="20" dy="90"/>
-        <cell rect="339,421,168,69" name="tail/gargoyle_mace" dx="20" dy="90"/>
+        <cell rect="339,351,168,69" name="tail/gargoyle_axe" dx="16" dy="99"/>
+        <cell rect="339,421,168,69" name="tail/gargoyle_mace" dx="16" dy="94"/>
         <cell rect="1,421,168,69" name="tail_fg/reptile_fire" dx="20" dy="90"/>
         <cell rect="1,421,168,69" name="tail/reptile_fire_taur" dx="67" dy="102"/>
-        <cell rect="170,421,168,69" name="tail/cow" dx="20" dy="90"/>
+        <cell rect="170,421,168,69" name="tail/cow" dx="19" dy="90"/>
         <cell rect="170,421,168,69" name="tail/cow_taur" dx="74" dy="93"/>
-        <cell rect="508,421,168,69" name="tail/balrog" dx="20" dy="90"/>
+        <cell rect="508,421,168,69" name="tail/balrog" dx="19" dy="90"/>
         <cell rect="508,421,168,69" name="tail/balrog_taur" dx="74" dy="93"/>
         <cell rect="677,421,168,69" name="tail/dragon" dx="18" dy="90"/>
         <cell rect="677,421,168,69" name="tail/dragon_taur" dx="74" dy="93"/>
@@ -1167,7 +1170,7 @@
         <cell rect="675,561,83,139" name="tail/mantis_taur" dx="135" dy="50"/>
         <cell rect="339,561,83,139" name="tail/weasel" dx="95" dy="40"/>
         <cell rect="339,561,83,139" name="tail/weasel_taur" dx="144" dy="49"/>
-        <cell rect="423,561,168,139" name="tail/thunderbird" dx="20" dy="46"/>
+        <cell rect="423,561,168,139" name="tail/thunderbird" dx="19" dy="46"/>
         <cell rect="423,561,168,139" name="tail/thunderbird_taur" dx="34" dy="49"/>
         <cell rect="592,561,82,139" name="tail/raccoon" dx="95" dy="40"/>
         <cell rect="592,561,82,139" name="tail/raccoon_taur" dx="149" dy="50"/>
@@ -1175,8 +1178,16 @@
         <cell rect="759,561,83,139" name="tail/wendigo_taur" dx="144" dy="49"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi" dx="95" dy="87"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi_taur" dx="144" dy="50"/>
-        <cell rect="170,71,168,139" name="tail/ratatoskr" dx="58" dy="15"/>
-        <cell rect="170,71,168,139" name="tail/ratatoskr_taur" dx="101" dy="21"/>
+        <cell rect="255,211,83,139" name="tail_bg/cat" dx="108" dy="40"/>
+        <cell rect="255,211,83,139" name="tail_bg/cat_taur" dx="158" dy="51"/>
+        <cell rect="339,211,83,139" name="tail_bg/cat2" dx="108" dy="40"/>
+        <cell rect="339,211,83,139" name="tail_bg/cat2_taur" dx="158" dy="55"/>
+        <cell rect="593,211,83,139" name="tail_bg/hellcat" dx="108" dy="39"/>
+        <cell rect="593,211,83,139" name="tail_bg/hellcat_taur" dx="158" dy="55"/>
+        <cell rect="761,211,83,139" name="tail_bg/kasha" dx="108" dy="40"/>
+        <cell rect="761,211,83,139" name="tail_bg/kasha_taur" dx="158" dy="55"/>
+        <cell rect="170,71,168,139" name="tail_bg/ratatoskr" dx="58" dy="15"/>
+        <cell rect="170,71,168,139" name="tail_bg/ratatoskr_taur" dx="101" dy="21"/>
         <cell rect="1,1015,173,156" name="tail_bg/fox1" dx="4" dy="31"/>
         <cell rect="1,1015,173,156" name="tail_bg/fox1_taur" dx="60" dy="47"/>
         <cell rect="523,858,173,156" name="tail_bg/fox2" dx="16" dy="36"/>
@@ -1232,7 +1243,7 @@
         <cell rect="676,630,116,139" name="wings_bg/greatDragonLeft" dx="-12" dy="26"/>
         <cell rect="793,630,135,139" name="wings_bg/greatDragonRight" dx="105" dy="26"/>
     </spritemap>
-
+	
 	<!-- LAYER AREA -->
     <layers>
 		<layer name="fullbody"/>
@@ -1322,15 +1333,15 @@
         <layer name="torso"/>
 		<layer name="ears_truebg"/>
 		<layer name="rearbody"/>
-		<layer name="clothCape"/>
-		<layer name="hair_bg"/>
-		<layer name="hairLeft"/>
-		<layer name="wings"/>
 		<layer name="tailAccessory"/>
         <layer name="tail_fg"/>
         <layer name="tail"/>
+		<layer name="clothCape"/>
 		<layer name="clothCape_bg"/>
 		<layer name="backAccessory"/>
+		<layer name="hair_bg"/>
+		<layer name="hairLeft"/>
+		<layer name="wings"/>
         <layer name="wings_bg"/>
 		<layer name="tail_bg"/>
 		<layer name="legs_bg"/>
@@ -1425,16 +1436,28 @@
 						<if test="PlayerHasASwordHoly or PlayerHasASwordUnholy">
 							<if test="PlayerHasASwordHoly">
 								<show part="weapon/swordHoly"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/swordHolyOH"/>
+								</if>
 							</if>
 							<if test="PlayerHasASwordUnholy">
 								<show part="weapon/swordUnholy"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/swordUnholyOH"/>
+								</if>
 							</if>
 							<else>
 								<show part="weapon/swordGeneric"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/swordGenericOH"/>
+								</if>
 							</else>
 						</if>
 						<if test="FireBuff">
 							<show part="weaponBuff/swordFireBuff"/>
+							<if test="PlayerHasADualWeapon">
+									<show part="weapon/swordFireBuffOH"/>
+							</if>
 						</if>
 					</if>
 			
@@ -1443,27 +1466,21 @@
 						<if test="PlayerHasAnAxeHoly or PlayerHasAnAxeUnholy">
 							<if test="PlayerHasAnAxeHoly">
 								<show part="weapon/axeHoly"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/axeHolyOH"/>
+								</if>
 							</if>
 							<if test="PlayerHasAnAxeUnholy">
 								<show part="weapon/axeUnholy"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/axeUnholyOH"/>
+								</if>
 							</if>
 							<else>
 								<show part="weapon/axeGeneric"/>
-							</else>
-						</if>
-					</if>
-			
-					<!-- Hammer -->
-					<if test="PlayerHasAHammer">
-						<if test="PlayerHasAHammerHoly or PlayerHasAHammerUnholy">
-							<if test="PlayerHasAHammerHoly">
-								<show part="weapon/hammerHoly"/>
-							</if>
-							<if test="PlayerHasAHammerUnholy">
-								<show part="weapon/hammerUnholy"/>
-							</if>
-							<else>
-								<show part="weapon/hammerGeneric"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/axeGenericOH"/>
+								</if>
 							</else>
 						</if>
 					</if>
@@ -1488,12 +1505,21 @@
 						<if test="PlayerHasAHammerHoly or PlayerHasAHammerUnholy">
 							<if test="PlayerHasAHammerHoly">
 								<show part="weapon/hammerHoly"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/hammerHolyOH"/>
+								</if>
 							</if>
 							<if test="PlayerHasAHammerUnholy">
 								<show part="weapon/hammerUnholy"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/hammerUnholyOH"/>
+								</if>
 							</if>
 							<else>
 								<show part="weapon/hammerGeneric"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/hammerGenericOH"/>
+								</if>
 							</else>
 						</if>
 					</if>
@@ -3508,9 +3534,9 @@
             </case>
 			<case values="Tail.SQUIRREL">
 				<if test="isTaur()">
-					<show part="tail/ratatoskr_taur"/>
+					<show part="tail_bg/ratatoskr_taur"/>
 					<else>
-						<show part="tail/ratatoskr"/>
+						<show part="tail_bg/ratatoskr"/>
 					</else>
 				</if>
             </case>
@@ -3676,7 +3702,8 @@
 					<show part="tail/manticore_taur"/>
 					<show part="tail_front/manticore_taur"/>
 				<else>
-					<show part="tail/manticore"/>
+					<show part="tail_bg/manticore"/>
+					<show part="tail_front/manticore"/>
 				</else>
 				</if>
             </case>
