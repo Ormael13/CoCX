@@ -122,7 +122,7 @@ use namespace CoC;
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatedByAncientTentacleBeast();
+			SceneLib.dungeons.ebonlabyrinth.defeatedByAtlachNacha();
 		}
 		
 		override public function get long():String

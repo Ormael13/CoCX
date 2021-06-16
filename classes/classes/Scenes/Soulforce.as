@@ -97,6 +97,7 @@ use namespace CoC;
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 			outputText("<b>PC Speed %:</b> " + player.getMaxStats("spe") + "\n");
 		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
+			if (player.hasStatusEffect(StatusEffects.TribulationCountdown)) outputText(""+player.statusEffectv1(StatusEffects.TribulationCountdown)+"\n");
 		/*	if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
 				outputText("<b>TelAdre Tripxi Guns general timer:</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxi) + "\n");
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) {
@@ -144,14 +145,27 @@ use namespace CoC;
 				addButton(2, "Repres. Lust", RepresLust).hint("Spend some soulforce on calming your sexual urges."); //używanie soulforce do zmniejszania lust w stosunku 1:2
 				addButton(4, "Adj. Corr.", CorruptionAndSoulforce).hint("Spend some soulforce on affecting your current corruption."); //używanie soulforce do zmniejszania corruption w stosunku 1:100 a zdobywanie corruption w stosunku 1:50
 			}
-			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit && player.hasPerk(PerkLib.SoulApprentice)) addButton(3, "Mana", ManaAndSoulforce).hint("Convert some soulforce into mana or vice versa."); //używanie soulforce do zamiany na mane w stosunku 1:1 a many do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
+			else {
+				addButtonDisabled(1, "Self-sustain", "Wait till new day arrive to use this option again.");
+				addButtonDisabled(2, "Repres. Lust", "Wait till new day arrive to use this option again.");
+				addButtonDisabled(4, "Adj. Corr.", "Wait till new day arrive to use this option again.");
+			}
+			if (player.hasPerk(PerkLib.SoulApprentice)) {
+				if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) addButton(3, "Mana", ManaAndSoulforce).hint("Convert some soulforce into mana or vice versa."); //używanie soulforce do zamiany na mane w stosunku 1:1 a many do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
+				else addButtonDisabled(3, "Mana", "Wait till new day arrive to use this option again.");
+			}
+			else addButtonDisabled(3, "???", "Req. Soul Apprentice stage.");
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.hasPerk(PerkLib.Metamorph)) {
 				if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) addButtonDisabled(6, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
 				else addButton(6, "Metamorph", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold your body.");//używanie metamorfowania z użyciem soulforce
 			}
+			else addButtonDisabled(6, "???", "Req. Metamorph.");
 			if (player.hasPerk(PerkLib.SoulSense)) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounters."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
+			else addButtonDisabled(7, "???", "Req. Soul Sense.");
 			addButton(10, "Cheats", SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
+			if (canfaceTribulation()) addButton(13, "Tribulation", tribulationsPrompt).hint("To face it or not? That's the question.");
+			else addButtonDisabled(13, "Tribulation", "It's not (yet) time for this.");
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 
@@ -4119,5 +4133,36 @@ use namespace CoC;
 				doNext(SoulSense);
 			}
 		}
+		private function canfaceTribulation():Boolean {
+			if ((player.level >= 24 && player.hasPerk(PerkLib.SoulWarrior) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor))/* ||
+				(player.level >= 42 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) ||
+				(player.level >= 60 && player.hasPerk(PerkLib.SoulTyrant) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)*/) return true;
+			else return false;
+		}
+		public function tribulationsPrompt():void {
+			clearOutput();
+			outputText("For some time you could feel that you've reached apex of cultivation as Soul ");
+			//outputText("");
+			if (player.level >= 42 && !player.hasPerk(PerkLib.SoulExalt)) outputText("Elder");
+			else outputText("Warrior");
+			outputText(" and only tiny step is needed to advance to next step. Yet your intuition telling you that before you make this step would descent on you heavenly tribulation that will even here in Mareth test if you're worthy to continue your soul cultivation path.");
+			outputText("\n\nWhat should you do? Keep supressing your soulforce or let it naturaly develop triggering descend of tribulation in near future?");
+			menu();
+			addButton(1, "No", tribulationsPromptNo);
+			addButton(3, "Yes", tribulationsPromptYes);
+		}
+		public function tribulationsPromptYes():void {
+			clearOutput();
+			outputText("You can't delay something that will come. All great soul cultivators before you wasn't covering in fear from some petty tribulation. You will face it with head rised high above and laughing in it face asking if it's all it got. And you can fell in your soul it would descent soon...in matter of hours at worst a day.");
+			if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.createStatusEffect(StatusEffects.TribulationCountdown, (2 + rand(4)), 0, 0, 0);
+			if (!player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) player.createStatusEffect(StatusEffects.TribulationCountdown, (2 + rand(4)), 0, 0, 0);
+			//if (!player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.createStatusEffect(StatusEffects.TribulationCountdown, (2 + rand(4)), 0, 0, 0);
+			doNext(playerMenu);
+		}
+		public function tribulationsPromptNo():void {
+			clearOutput();
+			outputText("No it's not yet time. You would continue to suppres your soulforce from reaching moment when tribulation will descent. Maybe after some time you will be ready for facing it.");
+			doNext(accessSoulforceMenu);
+		}
 	}
-}
+}

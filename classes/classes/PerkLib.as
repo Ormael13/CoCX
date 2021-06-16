@@ -954,8 +954,8 @@ public class PerkLib
 				"+1.5 extra fatigue per point of speed.",
 				"You've chosen the 'Dancer's Vitality VI' perk, granting +1.5 extra maximum fatigue for each point of speed.");
 		public static const Dantain:PerkType = mk("Dantian", "Dantian",
-				"Increase max soulforce by 10% + 10% to 25% (per each attained cultivation stage) of base value.",
-				"You've chosen the 'Dantian' perk.  As a result of many cultivation sessions you managed to find dantian in your body, which resulted in increased capacity to store soulforce.");
+				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.",
+				"You've chosen the 'Soaring Blades' perk. Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.");
 		public static const DaoistCultivator:PerkType = mk("Daoist Cultivator", "Daoist Cultivator",
 				"Allow you to train your soul cultivator mind to unleash soulskills with their apex power. (+10% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)",
 				"You've chosen the 'Daoist Cultivator' perk, starting journey on the daoist cultivators path! (+10% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)");
@@ -2710,13 +2710,13 @@ public class PerkLib
 				"You've chosen the 'Saint' perk, lowering min libido by 2 and rise lust resistance by 5%.");
 		public static const SalamanderAdrenalGlands:PerkType = mk("Salamander Adrenal Glands", "Salamander Adrenal Glands",
 				"Your Salamander adrenal glands are giving you slight boost to your natural stamina and libido.",
-				"You've chosen the 'Salamander Adrenal Glands' perk, due to repeadly exposure to effects of lustzerk your adrenal glands mutated.").withBuffs({'tou.mult':0.5,'lib.mult':0.5});
+				"You've chosen the 'Salamander Adrenal Glands' perk, due to repeadly exposure to effects of lustzerk your adrenal glands mutated.").withBuffs({'tou.mult':0.05,'lib.mult':0.05});
 		public static const SalamanderAdrenalGlandsEvolved:PerkType = mk("Salamander Adrenal Glands (Evolved)", "Salamander Adrenal Glands (Evolved)",
 				"Your Salamander adrenal glands are giving you slight boost to your natural strength, stamina, speed and libido and extend lustzerker and berserker duration by 2 turns.",
-				"You've chosen the 'Salamander Adrenal Glands (Evolved)' perk, repeadly use of lustzerk caused your adrenal glands mutate even more.").withBuffs({'str.mult':0.5,'tou.mult':0.5,'spe.mult':0.5,'lib.mult':0.5});
+				"You've chosen the 'Salamander Adrenal Glands (Evolved)' perk, repeadly use of lustzerk caused your adrenal glands mutate even more.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'lib.mult':0.05});
 		public static const SalamanderAdrenalGlandsFinalForm:PerkType = mk("Salamander Adrenal Glands (Final Form)", "Salamander Adrenal Glands (Final Form)",
 				"Your Salamander adrenal glands are giving you slight boost to your natural strength, stamina, speed, libido; double bonus to attack, boost slight natural wrath generation rate, extend berserking/lustzerking by 8 turns and enable to start with one or both of them.",
-				"You've chosen the 'Salamander Adrenal Glands (Final Form)' perk, repeadly use of lustzerk caused your adrenal glands mutate for the third time.").withBuffs({'str.mult':0.15,'tou.mult':0.05,'spe.mult':0.15,'lib.mult':0.5});
+				"You've chosen the 'Salamander Adrenal Glands (Final Form)' perk, repeadly use of lustzerk caused your adrenal glands mutate for the third time.").withBuffs({'str.mult':0.15,'tou.mult':0.05,'spe.mult':0.15,'lib.mult':0.05});
 		public static const Saturation:PerkType = mk("Saturation", "Saturation",
 				"Using your advanced knowledge, you soak each transformative in a special liquid to enhance their effects +1 effect.",
 				"You've chosen the 'Saturation' perk, number of possible effects of transformatives +1.");
@@ -3393,7 +3393,7 @@ public class PerkLib
 				"Pregnancy moves twice as fast as a normal woman's.");
 		public static const SpellcastingAffinity:SpellcastingAffinityPerk = new SpellcastingAffinityPerk();
 		public static const Cultivation:PerkType = mk("Cultivation", "Cultivation",
-				"Allow to cultivate powers of the soul.",
+				"Allow to cultivate powers of the soul.",//nigdzie nieużyty wcześniej perk name
 				"You've chosen the 'Cultivation' perk, starting your journey on the soul cultivation path!");//potem przerobić na coć innego - moze jak perki do czarów i łuku bedzie dawać jakieś korzyści do soul skills po odpowiednio dużej ilości ich użycia czy cos xD
 
 		// Hidden/Deity Jobs perks
@@ -3601,7 +3601,7 @@ public class PerkLib
 		public static const InkSpray:PerkType = mk("Ink Spray", "Ink Spray",
 				"Allows you to shoot blinding and probably slightly arousing ink out of your genitalia similar like octopus.");
 		public static const Insanity:PerkType = mk("Insanity", "Insanity",
-				".");
+				"You have become immune to anything that would damage your mind and gained increased insight however your unhinged personality greatly weakens your wisdom.").withBuffs({'int.mult':0.20,'wis.mult':-0.40});
 		public static const JunglesWanderer:PerkType = mk("Jungle’s Wanderer", "Jungle’s Wanderer",
 				"Your nimble body has adapted to moving through jungles and forests, evading enemy attacks with ease and making yourself harder to catch. (+35 to the Evasion percentage)");
 		public static const KitsuneEnergyThirst:PerkType = mk("Kitsune hunger", "Kitsune hunger",
@@ -3699,6 +3699,7 @@ public class PerkLib
 				"Allows to form 2 people party.");
 		public static const BasiliskResistance:PerkType = mk("Basilisk Resistance", "Basilisk Resistance",
 				"Grants immunity to Basilisk's paralyzing gaze. Disables Basilisk Bad End.");
+		public static const BodyTempering:BodyTemperingPerk = new BodyTemperingPerk();
 		public static const BulgeArmor:PerkType = mk("Bulge Armor", "Bulge Armor",
 				"Grants a 5 point damage bonus to dick-based tease attacks.");
 		public static const Cornucopia:PerkType = mk("Cornucopia", "Cornucopia",
@@ -5917,7 +5918,8 @@ public class PerkLib
             //Tier 4
             SoulSprite.requireLevel(24)
                     .requirePerk(SoulWarrior)
-                    .requireWis(80); // && requirePerk(HclassHeavenTribulationSurvivor)
+					.requirePerk(HclassHeavenTribulationSurvivor)
+                    .requireWis(80);
             FleshBodyWarriorStage.requireLevel(24)
                     .requirePerk(FleshBodyApprenticeStage);
             DaoistWarriorStage.requireLevel(24)
@@ -5933,7 +5935,7 @@ public class PerkLib
             //Tier 7
             SoulExalt.requirePerk(SoulElder)
                     .requireWis(140)
-                    .requireLevel(42);// && requirePerk(GclassHeavenTribulationSurvivor)
+                    .requireLevel(42);//.requirePerk(GclassHeavenTribulationSurvivor)
             FleshBodyElderStage.requireLevel(42)
                     .requirePerk(FleshBodyWarriorStage);
             DaoistElderStage.requireLevel(42)
@@ -5949,7 +5951,7 @@ public class PerkLib
             //Tier 10
      /*		SoulKing.requirePerk(SoulTyrant)
                     .requireWis(200)
-                    .requireLevel(60);
+                    .requireLevel(60);//.requirePerk(FclassHeavenTribulationSurvivor)
             FleshBodyOverlordStage.requireLevel(60)
                     .requirePerk(FleshBodyElderStage);
             DaoistOverlordStage.requireLevel(60)
