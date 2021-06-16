@@ -400,8 +400,8 @@ public class PerkLib
 				"Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)",
 				"You've chosen the 'Flying Sword Path' perk. Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)");
 		public static const SoaringBlades:PerkType = mk("Soaring Blades", "Soaring Blades",
-				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of daintain attained.",
-				"You've chosen the 'Soaring Blades' perk. Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of daintain attained.");
+				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.",
+				"You've chosen the 'Soaring Blades' perk. Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -954,8 +954,8 @@ public class PerkLib
 				"+1.5 extra fatigue per point of speed.",
 				"You've chosen the 'Dancer's Vitality VI' perk, granting +1.5 extra maximum fatigue for each point of speed.");
 		public static const Dantain:PerkType = mk("Dantian", "Dantian",
-				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.",
-				"You've chosen the 'Soaring Blades' perk. Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.");
+				"Increase max soulforce by 10% + 10% to 25% (per each attained cultivation stage) of base value.",
+				"You've chosen the 'Dantian' perk.  As a result of many cultivation sessions you managed to find dantian in your body, which resulted in increased capacity to store soulforce.");
 		public static const DaoistCultivator:PerkType = mk("Daoist Cultivator", "Daoist Cultivator",
 				"Allow you to train your soul cultivator mind to unleash soulskills with their apex power. (+10% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)",
 				"You've chosen the 'Daoist Cultivator' perk, starting journey on the daoist cultivators path! (+10% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)");
