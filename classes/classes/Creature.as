@@ -381,8 +381,9 @@ public class Creature extends Utils
 			}
 		}
 
-		public function addCurse(statName:String, power:Number, tier:Number = 2):void{
+		public function addCurse(statName:String, power:Number, tier:Number = 0):void{
 			var tierPower:String = "NOT PROPERLY ADDED STAT!";
+			if (tier == 0) tierPower = "Tribulation Vestiges";
 			if (tier == 1) tierPower = "Weakened";
 			if (tier == 2) tierPower = "Drained";
 			if (tier == 3) tierPower = "Damaged";
@@ -397,8 +398,9 @@ public class Creature extends Utils
 				CoC.instance.mainView.statsView.showStatDown(statName);
 			}
 		}
-		public function removeCurse(statName:String, power:Number, tier:Number = 2):void {
+		public function removeCurse(statName:String, power:Number, tier:Number = 0):void {
 			var tierPower:String = "NOT PROPERLY ADDED STAT!";
+			if (tier == 0) tierPower = "Tribulation Vestiges";
 			if (tier == 1) tierPower = "Weakened";
 			if (tier == 2) tierPower = "Drained";
 			if (tier == 3) tierPower = "Damaged";
@@ -861,52 +863,52 @@ public class Creature extends Utils
 			var oldHPratio:Number = hp100/100;
 			//Strength
 			if (dstr < 0){
-				addCurse("str", -dstr);
+				addCurse("str", -dstr,2);
 			}
 			if (dstr > 0){
-				removeCurse("str", dstr);
+				removeCurse("str", dstr,2);
 			}
 			//toughness
 			if (dtou < 0){
-				addCurse("tou", -dtou);
+				addCurse("tou", -dtou,2);
 			}
 			if (dtou > 0){
-				removeCurse("tou", dtou);
+				removeCurse("tou", dtou,2);
 			}
 			//Speed
 			if (dspe < 0){
-				addCurse("spe", -dspe);
+				addCurse("spe", -dspe,2);
 			}
 			if (dspe > 0){
-				removeCurse("spe", dspe);
+				removeCurse("spe", dspe,2);
 			}
 			//Intelligence
 			if (dint < 0){
-				addCurse("int", -dint);
+				addCurse("int", -dint,2);
 			}
 			if (dint > 0){
-				removeCurse("int", dint);
+				removeCurse("int", dint,2);
 			}
 			//Wisdom
 			if (dwis < 0){
-				addCurse("wis", -dwis);
+				addCurse("wis", -dwis,2);
 			}
 			if (dwis > 0){
-				removeCurse("wis", dwis);
+				removeCurse("wis", dwis,2);
 			}
 			//Libido
 			if (dlib < 0){
-				addCurse("lib", -dlib);
+				addCurse("lib", -dlib,2);
 			}
 			if (dlib > 0){
-				removeCurse("lib", dlib);
+				removeCurse("lib", dlib,2);
 			}
 			//Sensitivity
 			if (dsens > 0){
-				addCurse("sens", dsens);
+				addCurse("sens", dsens,2);
 			}
 			if (dsens < 0){
-				removeCurse("sens", -dsens);
+				removeCurse("sens", -dsens,2);
 			}
 			lust = Utils.boundFloat(mins.lust, lust + dlust, maxLust());
 			cor  = Utils.boundFloat(mins.cor, cor + dcor, 100);

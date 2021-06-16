@@ -218,19 +218,39 @@ public function HaveAGirlBath():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
+public function HclassHTintro():void {
+	outputText("\nAn expanse of dark clouds that are jet black like ink suddenly surged over in the sky, and it roiled without end while enveloping the sky above you. Crimson red bolts of lightning that were dazzling like fireworks interweave with each other within the dark cloud, and it emits a destructive force that cause one’s heart to palpitate.\n");
+	startCombat(new HclassHeavenTribulation());
+}
 public function HclassHTbeaten():void {
 	clearOutput();
-	outputText("\nPLACEHOLDER TEXT 2\n");
+	outputText("After your attack clouds starts to disperce. Not from sending all their attacks against but due to been forcefully scattered by your counterattacks. Looking upward with contempt and haunty arrogance toward dispering tribulation clouds feeling few of blockages in your body been broken up.\n\n");
+	outputText("<b>You can now cultivate Daos of Elements.\n");
+	outputText("(Gained Perk: H class Heaven Tribulation Survivor)\n"); 
+	outputText("(Gained Perk: Body Tempering)</b>\n\n");
 	player.createPerk(PerkLib.HclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-	player.XP = player.XP + 5000;
+	player.createPerk(PerkLib.BodyTempering, 5, 0, 0, 0);
+	player.XP = player.XP + 8000;
 	cleanupAfterCombat();
 }
 public function HclassHTsurvived():void {
 	clearOutput();
-	outputText("\nPLACEHOLDER TEXT 3\n");
+	outputText("You survived, albeit in rough shape, but things could be worse. The Tribulations clouds disperse now that your trial has ended.\n\n");
+	outputText("<b>You can now cultivate Daos of Elements.\n");
+	outputText("(Gained Perk: H class Heaven Tribulation Survivor)</b>\n\n");
 	player.createPerk(PerkLib.HclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-	player.XP = player.XP + 2500;
 	cleanupAfterCombat();
+}
+public function HclassHTThunderDoom():void {
+	clearOutput();
+	outputText("You failed. And not even in a fancy style but been defeated by merely tribulation strike. Heavenly thunder curse throu your body wrecking untold destruction on your five viscera and six bowels.\n\n");
+	outputText("Whatever was the reason you not passed this tribulation you may have chance to correct them if you ever reincarnate to have second chance.\n\n");
+	//[GAME OVER]
+	EventParser.gameOver();
+}
+public function GclassHTintro():void {
+	outputText("\nAn expanse of dark clouds that are jet black like ink suddenly surged over in the sky, and it roiled without end while enveloping the sky above you. Crimson red bolts of lightning that were dazzling like fireworks interweave with each other within the dark cloud, and it emits a destructive force that cause one’s heart to palpitate.\n");
+	startCombat(new HclassHeavenTribulation());
 }
 
 public function goblinsBirthScene():void {
@@ -293,7 +313,7 @@ private function goblinsBirthScene2():void {
 	if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 	player.orgasm();
 	player.dynStats("tou", -2, "spe", 3, "lib", 1, "sen", .5);
-	player.addCurse("str", 1);
+	player.addCurse("str", 1, 2);
 	daughtersCount = 0;
 	player.removeStatusEffect(StatusEffects.PCDaughters);
 	doNext(camp.returnToCampUseOneHour);

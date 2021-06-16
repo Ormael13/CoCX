@@ -2070,7 +2070,7 @@ import flash.utils.getQualifiedClassName;
 		 */
 		protected function performCombatAction():void
 		{
-			if (!abilities) {
+			if (!abilities || abilities.length == 0) {
 				// Old monster, has no tagged abilities configured
 				abilities = [
 					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
@@ -3204,10 +3204,10 @@ import flash.utils.getQualifiedClassName;
 			return 8; //This allows different monsters to delay the player by different amounts of time after a combat loss. Normal loss causes an eight hour blackout
 		}
 		public function prepareForCombat():void {
-			var bonusStatsAmp:Number = 0.2;
+			var bonusStatsAmp:Number = 0.6;
 			if (hasPerk(PerkLib.MantislikeAgility)) this.speStat.core.value += (10 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.MantislikeAgilityEvolved)) this.speStat.core.value += (20 * (1 + newGamePlusMod()));
-			if (level > 25) bonusStatsAmp += 0.1*((int)(level-1)/25);
+			if (level > 25) bonusStatsAmp += 0.3*((int)(level-1)/25);
 			bonusAscStr += bonusStatsAmp * str * newGamePlusMod();
 			bonusAscTou += bonusStatsAmp * tou * newGamePlusMod();
 			bonusAscSpe += bonusStatsAmp * spe * newGamePlusMod();
@@ -3239,9 +3239,9 @@ import flash.utils.getQualifiedClassName;
 			this.libStat.core.value += multiStatsAmp2;
 			statStore.addBuff("sens", multiStatsAmp2, "AscensionMultiplier", {});
 			bonusAscMaxHP += bonusAscStr + bonusAscTou + bonusAscSpe + bonusAscInt + bonusAscWis + bonusAscLib + bonusAscSen;
-			if (level > 10) bonusAscMaxHP *= (int)(level / 10 + 1);
-			weaponAttack += (1 + (int)(weaponAttack / 5)) * newGamePlusMod();
-			if (weaponRangeAttack > 0) weaponRangeAttack += (1 + (int)(weaponRangeAttack / 5)) * newGamePlusMod();
+			if (level > 10) bonusAscMaxHP *= (int)((level / 10 + 1) * 3);
+			weaponAttack += (1 + (int)(weaponAttack / 5)) * 3 * newGamePlusMod();
+			if (weaponRangeAttack > 0) weaponRangeAttack += (1 + (int)(weaponRangeAttack / 5)) * 3 * newGamePlusMod();
 			if (hasPerk(PerkLib.ToughHide)) {
 				armorDef += (2 * (1 + newGamePlusMod()));
 				armorMDef += (1 * (1 + newGamePlusMod()));
@@ -3320,8 +3320,8 @@ import flash.utils.getQualifiedClassName;
 					armorMDef += (1 * (1 + newGamePlusMod()));
 				}
 			}*/
-			armorDef += ((int)(1 + armorDef / 10)) * newGamePlusMod();
-			armorMDef += ((int)(1 + armorMDef / 10)) * newGamePlusMod();
+			armorDef += ((int)(1 + armorDef / 10)) * 3 * newGamePlusMod();
+			armorMDef += ((int)(1 + armorMDef / 10)) * 3 * newGamePlusMod();
 			if (hasPerk(PerkLib.EnemyHugeType)) {
 				this.strStat.core.value += Math.round(this.strStat.core.value * 0.1);
 				this.touStat.core.value += Math.round(this.touStat.core.value * 0.1);

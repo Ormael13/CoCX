@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Combat {
+﻿﻿package classes.Scenes.Combat {
 import classes.BaseContent;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
@@ -5426,7 +5426,7 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(40)) player.HP -= spellCostWhite(40);
                     else useMana(40, 5);
                     outputText("\n\n");
-                    magic.spellWhitefire3();
+                    magic.spellWhitefire4();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 2 && player.mana >= spellCostBlack(40)) {
                     if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostBlack(40)) player.HP -= spellCostBlack(40);
@@ -5668,8 +5668,8 @@ public class Combat extends BaseContent {
                 else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*2);
             }
             if (SpecialEffect == "WendigoClaw"){
-                monster.addCurse("tou.mult",0.05);
-                monster.addCurse("str.mult",0.05);
+                monster.addCurse("tou.mult",0.05,2);
+                monster.addCurse("str.mult",0.05,2);
             }
             // Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
             if (monster is Doppleganger) {
@@ -9101,6 +9101,13 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellPyreBurstEx, 1, -1);
             }
         }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLighting)) { 
+            if (player.statusEffectv1(StatusEffects.CooldownSpellChainLighting) <= 0) { 
+                player.removeStatusEffect(StatusEffects.CooldownSpellChainLighting); 
+            } else { 
+                player.addStatusValue(StatusEffects.CooldownSpellChainLighting, 1, -1); 
+            } 
+        } 
         if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLightingEx)) {
             if (player.statusEffectv1(StatusEffects.CooldownSpellChainLightingEx) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellChainLightingEx);
