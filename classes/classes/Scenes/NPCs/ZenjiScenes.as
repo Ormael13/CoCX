@@ -22,6 +22,7 @@ import coc.view.ButtonDataList;
 		public static var ZenjiMarae:Boolean;
 		public static var ZenjiHolli:Boolean;
 		public static var ZenjiMarried:Boolean;
+		public static var ZenjiFigMulti:Number;
 
 		public function stateObjectName():String {
 			return "ZenjiScenes";
@@ -35,6 +36,7 @@ import coc.view.ButtonDataList;
 			ZenjiMarae = false;
 			ZenjiHolli = false;
 			ZenjiMarried = false;
+			ZenjiFigMulti = 0;
 		}
 
 		public function saveToObject():Object {
@@ -45,7 +47,8 @@ import coc.view.ButtonDataList;
 				"ZenjiFood": ZenjiFood,
 				"ZenjiMarae": ZenjiMarae,
 				"ZenjiHolli": ZenjiHolli,
-				"ZenjiMarried": ZenjiMarried
+				"ZenjiMarried": ZenjiMarried,
+				"ZenjiFigMulti": ZenjiFigMulti
 			};
 		}
 
@@ -58,6 +61,7 @@ import coc.view.ButtonDataList;
 				ZenjiMarae = o["ZenjiMarae"];
 				ZenjiHolli = o["ZenjiHolli"];
 				ZenjiMarried = o["ZenjiMarried"];
+				ZenjiFigMulti = o["ZenjiFigMulti"];
 			} else {
 				// loading from old save
 				resetState();
@@ -1591,7 +1595,8 @@ public function loverZenjiGiveItemTrollFig():void {
 	spriteSelect(SpriteDb.s_zenji);
 	clearOutput();
 	player.consumeItem(consumables.TROLFIG);
-	player.addStatusValue(StatusEffects.ZenjiModificationsList, 2, 250);
+	player.addStatusValue(StatusEffects.ZenjiModificationsList, 2, (250 + ZenjiFigMulti));
+	ZenjiFigMulti += 25;
 	outputText("You tell Zenji that you found something a little more special that you think he’d be interested in.\n\n");
 	outputText("Zenji raises an eyebrow inquisitively, \"<i>Ah..? Someting... special ya say?</i>\"\n\n");
 	outputText("You nod as you reach into your pockets and pull out a small, hairy fig. Zenji’s eyes light up as soon as he sees the piece of fruit.\n\n");
