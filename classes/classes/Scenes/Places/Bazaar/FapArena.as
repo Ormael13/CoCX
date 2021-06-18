@@ -115,33 +115,40 @@ private function fapArenaPageII():void {
 	var winner:Boolean = true;
 	if(rand(100) <= 4) winner = false;
 	//[how the game rolls:
-	//5% chance of losing no matter what.
-	//If that check fails,
-	//Let S be the PC's sensitivity
-	var s:Number = player.sens;
-	//D the number of hours since he last came 
-	var d:Number = player.hoursSinceCum;
-	var c:Number = 0;
-	if(player.cocks[x].cockType == CockTypesEnum.DEMON) c = 10;
-	else if(player.cocks[x].cockType == CockTypesEnum.TENTACLE) c = 5;
-	else if(player.cocks[x].cockType == CockTypesEnum.LIZARD || player.cocks[x].cockType == CockTypesEnum.CAVE_WYRM) c = 3;
-	else if(player.cocks[x].cockType == CockTypesEnum.HORSE) c = 2;
-	//R the player's lust resistance (0<R<1)
-	var r:Number = EngineCore.lustPercent()/100;
-	//The game does a roll between 0 and 100, call it N.
-	var n:Number = rand(100);
-	//We define the PC's stamina as ST = (N-S*R-4*D)/(D+1) + C
-	var st:Number = c + (n-s*r-4*d)/(1.2+(d/10));
-	//outputText("<B>CHEAT: " + st + "</b> N: " + n + " c: " + c + " s: " + s + " r: " + r + " D: " + d + "\n");
-	//If ST is 0 or less, the PC loses.
-	//If ST > 30, the PC wins.
-	//Otherwise the PC's rating is ST, rounded up.]
-	//[if the player loses]
-	if(st <= 0) doNext(createCallBackFunction(fapResults,3));
-	//[else if the player doesn't lose, but doesn't win either - he cums neither first nor last]
-	else if(st < 29.5) doNext(createCallBackFunction(fapResults,2));
-	//[else, the player wins]
-	else doNext(createCallBackFunction(fapResults,1));
+	if (winner){
+		//5% chance of losing no matter what.
+		//If that check fails,
+		//Let S be the PC's sensitivity
+		var s:Number = player.sens;
+		//D the number of hours since he last came
+		var d:Number = player.hoursSinceCum;
+		var c:Number = 0;
+		if(player.cocks[x].cockType == CockTypesEnum.DEMON) c = 10;
+		else if(player.cocks[x].cockType == CockTypesEnum.TENTACLE) c = 5;
+		else if(player.cocks[x].cockType == CockTypesEnum.LIZARD || player.cocks[x].cockType == CockTypesEnum.CAVE_WYRM) c = 3;
+		else if(player.cocks[x].cockType == CockTypesEnum.HORSE) c = 2;
+		//R the player's lust resistance (0<R<1)
+		var r:Number = 1 - EngineCore.lustPercent()/100;
+		//The game does a roll between 0 and 100, call it N.
+		var n:Number = rand(100);
+		//We define the PC's stamina as ST = (N-S*R-4*D)/(D+1) + C
+		var st:Number = c + (n-s*r-4*d)/(1.2+(d/10));
+		//outputText("<B>CHEAT: " + st + "</b> N: " + n + " c: " + c + " s: " + s + " r: " + r + " D: " + d + "\n");
+		//If ST is 0 or less, the PC loses.
+		//If ST > 30, the PC wins.
+		//Otherwise the PC's rating is ST, rounded up.]
+		//[if the player loses]
+		if(st <= 0) doNext(createCallBackFunction(fapResults,3));
+		//[else if the player doesn't lose, but doesn't win either - he cums neither first nor last]
+		else if(st < 29.5) doNext(createCallBackFunction(fapResults,2));
+		//[else, the player wins]
+		else doNext(createCallBackFunction(fapResults,1));
+	}
+	else {
+		var cval:int = rand(1) + 2
+		doNext(createCallBackFunction(fapResults, cval))
+	}
+
 }
 
 private function fapResults(place:Number = 3):void {
