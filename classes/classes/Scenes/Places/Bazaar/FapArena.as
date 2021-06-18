@@ -145,7 +145,7 @@ private function fapArenaPageII():void {
 		else doNext(createCallBackFunction(fapResults,1));
 	}
 	else{
-		var cval:int = rand(1) + 2
+		var cval:int = rand(2) + 2 //Either 2/3
 		doNext(createCallBackFunction(fapResults,cval));
 	}
 }
