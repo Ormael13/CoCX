@@ -409,7 +409,7 @@ import classes.Scenes.SceneLib;
 			// If player is Exhibitionist
 			if (flags[kFLAGS.PC_FETISH] >= 1)
 			{
-				outputText("flushing with arousal at the idea of being naked before the mare, ");
+				outputText(" flushing with arousal at the idea of being naked before the mare, ");
 			}
 			
 			outputText("and move over to lay yourself on the table.  You get yourself comfortable and tell Uma that you're ready.\n\n");
