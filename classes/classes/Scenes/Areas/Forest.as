@@ -176,7 +176,7 @@ use namespace CoC;
 					//				|| WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELF) && !player.blockingBodyTransformations()
 					//	}
 					//}
-					, {
+					,{
 						name  : "truffle",
 						call  : findTruffle,
 						chance: 0.35
