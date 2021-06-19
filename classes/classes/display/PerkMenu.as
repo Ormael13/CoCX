@@ -25,10 +25,13 @@ public class PerkMenu extends BaseContent {
 		var temp:int = 0;
 		clearOutput();
 		displayHeader("Perks");
+		/*
 		while(temp < player.perks.length) {
 			outputText("<b>" + player.perk(temp).perkName + "</b> - " + player.perk(temp).perkDesc + "\n");
 			temp++;
 		}
+		 */
+		playerPerksList();
 		menu();
 		addButton(0, "Next", playerMenu);
 		if (player.perkPoints > 0) {
@@ -1011,6 +1014,94 @@ public class PerkMenu extends BaseContent {
 	private function setFlag(returnTo:Function,flag:int,val:int):void{
 		flags[flag] =  val;
 		returnTo();
+	}
+
+	public function playerPerksList():void {
+		var pPerkList:Array = player.perks;	 //Player Perks
+		var masterlist:Array = [];	//Temp hold of above
+
+		var ignorelist:Array = [];	//List to check against repetitively
+		var endlist:Array = [];		//Final list of perks to output
+
+		function initSet():void {
+			for each(var i:PerkClass in pPerkList) { //Is this stupid? It probably is.
+				masterlist.push(i.ptype);
+			}
+			var mutationignorelist:Array = []; //Removing Mutations from the menu, cause they really shouldn't show up here.
+			var mutationList:Array = [PerkLib.BlackHeart, PerkLib.FrozenHeart, PerkLib.ObsidianHeart, PerkLib.TwinHeart, PerkLib.HeartOfTheStorm, PerkLib.DraconicHeart, PerkLib.MantislikeAgility, PerkLib.OniMusculature, PerkLib.VenomGlands, PerkLib.HollowFangs, PerkLib.SalamanderAdrenalGlands, PerkLib.OrcAdrenalGlands, PerkLib.VampiricBloodsteam, PerkLib.HinezumiBurningBlood, PerkLib.FeyArcaneBloodstream, PerkLib.PigBoarFat, PerkLib.NaturalPunchingBag, PerkLib.WhaleFat, PerkLib.YetiFat, PerkLib.ArachnidBookLung, PerkLib.DraconicLungs, PerkLib.CaveWyrmLungs, PerkLib.MelkieLung, PerkLib.DrakeLungs, PerkLib.ManticoreMetabolism, PerkLib.DisplacerMetabolism, PerkLib.LactaBovinaOvaries, PerkLib.FloralOvaries, PerkLib.MinotaurTesticles, PerkLib.EasterBunnyEggBag, PerkLib.NukiNuts, PerkLib.GorgonsEyes, PerkLib.GazerEye, PerkLib.ElvishPeripheralNervSys, PerkLib.LizanMarrow, PerkLib.DraconicBones, PerkLib.HarpyHollowBones, PerkLib.KitsuneThyroidGland, PerkLib.NekomataThyroidGland, PerkLib.KitsuneParathyroidGlands, PerkLib.HellcatParathyroidGlands]
+			for each(var perkremove:PerkType in mutationList) {
+				if (player.hasPerk(perkremove)) {
+					masterlist.removeAt(masterlist.indexOf(perkremove));
+					mutationignorelist.push(perkremove);
+				}
+			}
+
+			for each(var j:PerkType in masterlist) { //Baseline perks
+				if (j.requirements.length == 0) {	//If no perks requirements at all
+					masterlist.removeAt(masterlist.indexOf(j));
+					ignorelist.push(j);
+					endlist.push(j);
+				} else if (mutationignorelist.indexOf(j.requirements.perk) != -1){ //Removing mutations tier.
+					masterlist.removeAt(masterlist.indexOf(j));
+					mutationignorelist.push(j);
+				} else {	//Or if perk requirements but none that actually require a prereq perk
+					var perkyes:Boolean = false;
+					for each (var cond:Object in j.requirements) {
+						var temp1:PerkType = cond.perk
+						if (temp1 != null) {
+							perkyes = true;
+						}
+					}
+					if (!(perkyes)) {
+						masterlist.removeAt(masterlist.indexOf(j));
+						ignorelist.push(j);
+						endlist.push(j);
+					}
+				}
+			}
+			repPerkClr();
+		}
+
+		function repPerkClr():void { //Cycling perks against requirements until no higher can be achieved per.
+			var change:Boolean = false;
+			for each(var k:PerkType in masterlist) {
+				var multbrk:Boolean = false;
+				for each (var cond:Object in k.requirements) {
+					var temp1:PerkType = cond.perk
+					if (temp1 != null && !multbrk) {
+						multbrk = true;
+						if (ignorelist.indexOf(temp1) != -1) {
+							masterlist.removeAt(masterlist.indexOf(k));
+							ignorelist.push(k);
+							endlist.removeAt(endlist.indexOf(temp1));
+							endlist.push(k);
+							change = true;
+						}
+					}
+				}
+			}
+			if (change) {
+				repPerkClr();
+			}
+			else {
+
+				perkOut();
+				}
+		}
+
+		function perkOut():void {	//Results of just the perks that are left.
+			endlist.sort()
+			for each(var l:Object in endlist) {
+				outputText("<b>" + l.name + ":</b> ");
+				try {
+					outputText(l.desc());
+				} catch (error:Error) {
+					outputText("No description.");
+				}
+				outputText(" \n");
+			}
+		}
+		initSet();
 	}
 	/* [INTERMOD: revamp]
 	 public function ascToleranceOption():void{
