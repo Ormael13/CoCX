@@ -22,7 +22,7 @@ public class PerkMenu extends BaseContent {
 	public function PerkMenu() {
 	}
 	public function displayPerks(e:MouseEvent = null):void {
-		var temp:int = 0;
+		//var temp:int = 0;
 		clearOutput();
 		displayHeader("Perks");
 		/*
@@ -1019,7 +1019,6 @@ public class PerkMenu extends BaseContent {
 	public function playerPerksList():void {
 		var pPerkList:Array = player.perks;	 //Player Perks
 		var masterlist:Array = [];	//Temp hold of above
-
 		var ignorelist:Array = [];	//List to check against repetitively
 		var endlist:Array = [];		//Final list of perks to output
 
