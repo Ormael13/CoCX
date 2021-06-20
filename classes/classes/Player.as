@@ -1182,7 +1182,7 @@ use namespace CoC;
 		//PC can fly without natural wings
 		public function canFlyNoWings():Boolean
 		{
-			return weaponFlyingSwordsName != "nothing";// || ma daintain(golden core stage)
+			return weaponFlyingSwordsName != "nothing" || hasPerk(PerkLib.GclassHeavenTribulationSurvivor);
 		}
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean

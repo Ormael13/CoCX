@@ -56,11 +56,11 @@ package classes.Scenes
 			outputText("-Diana was whip... err disciplined by her deity to stop been so slowass and make her services bit faster depending on service itself. (15 to 45 min instead of 60 min)\n");
 			outputText("-Llaenwynn typo/scenes texts corrections.\n");
 			outputText("-Each Troll Fig given to Zenji would increase bonus to his cum capacity by 25 more. (2nd +25, 3rd +50, 4th +75 and so on)\n");
-			outputText("-Added disbaled buttons for soulforce menu.\n");
+			outputText("-Added disbaled buttons for soulforce menu. Also slight arrange some of the buttons there.\n");
 			outputText("-Transhumanism ascension perks effects been increased 2 times. Monsters increase after each ascenison been increased 3 times.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Added new cultivators specific events: Heavenly Tribulations (H class and G class). They last only for 3/4 turns and req. PC to survive tribulation attacks without dropping to min hp or maxing up lust bar.\n");
+			outputText("-New event perk: H class Heaven Tribulation Survivor. Gained by surviving 3 rounds of H class Heaven tribulation attacks. Effects: +10% to all stats multi/+10 to sens. Allow to comprehend Dao of Elements.\n");
+			outputText("-New event perk: G class Heaven Tribulation Survivor. Gained by surviving 4 rounds of G class Heaven tribulation attacks. Effects: +15% to all stats multi/+15 to sens. Allow to use soulforce to fly without need for wings.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

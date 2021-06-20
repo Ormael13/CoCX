@@ -12,11 +12,11 @@ import classes.Scenes.SceneLib;
 
 use namespace CoC;
 	
-	public class CampScenes extends NPCAwareContent{
+public class CampScenes extends NPCAwareContent{
 
-	public static var elderKitsuneColors:Array = ["metallic golden", "golden blonde", "metallic silver", "silver blonde", "snow white", "iridescent gray"];
+public static var elderKitsuneColors:Array = ["metallic golden", "golden blonde", "metallic silver", "silver blonde", "snow white", "iridescent gray"];
 
-	private var daughtersCount:Number = 0;
+private var daughtersCount:Number = 0;
 
 public function KitsuneShrine():void {
     var tailz:int = SceneLib.kitsuneScene.meditateAtKitsuneShrine();
@@ -218,18 +218,30 @@ public function HaveAGirlBath():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
+public function HeavenTribulationThunderDoom():void {
+	clearOutput();
+	outputText("You failed. And not even in a fancy style but been defeated by merely tribulation strike. Heavenly thunder curse throu your body wrecking untold destruction on your five viscera and six bowels.\n\n");
+	outputText("Whatever was the reason you not passed this tribulation you may have chance to correct them if you ever reincarnate to have second chance.\n\n");
+	//[GAME OVER]
+	EventParser.gameOver();
+}
 public function HclassHTintro():void {
 	outputText("\nAn expanse of dark clouds that are jet black like ink suddenly surged over in the sky, and it roiled without end while enveloping the sky above you. Crimson red bolts of lightning that were dazzling like fireworks interweave with each other within the dark cloud, and it emits a destructive force that cause one’s heart to palpitate.\n");
 	startCombat(new HclassHeavenTribulation());
 }
 public function HclassHTbeaten():void {
 	clearOutput();
-	outputText("After your attack clouds starts to disperce. Not from sending all their attacks against but due to been forcefully scattered by your counterattacks. Looking upward with contempt and haunty arrogance toward dispering tribulation clouds feeling few of blockages in your body been broken up.\n\n");
+	outputText("After your attack clouds starts to disperce. Not from sending all their attacks against but due to been forcefully scattered by your counterattacks. Looking upward with contempt and haunty arrogance toward dispering tribulation clouds feeling few of blockages in your body have been broken throu.\n\n");
 	outputText("<b>You can now cultivate Daos of Elements.\n");
-	outputText("(Gained Perk: H class Heaven Tribulation Survivor)\n"); 
-	outputText("(Gained Perk: Body Tempering)</b>\n\n");
+	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 0) {
+		var BTB:Number = 1;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 1) BTB += 2;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 2) BTB += 3;
+		outputText("(Gained Perk: Body Tempering)\n");
+		player.createPerk(PerkLib.BodyTempering, BTB, 0, 0, 0);
+	}
+	outputText("(Gained Perk: H class Heaven Tribulation Survivor)</b>\n");
 	player.createPerk(PerkLib.HclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-	player.createPerk(PerkLib.BodyTempering, 5, 0, 0, 0);
 	player.XP = player.XP + 8000;
 	cleanupAfterCombat();
 }
@@ -237,20 +249,48 @@ public function HclassHTsurvived():void {
 	clearOutput();
 	outputText("You survived, albeit in rough shape, but things could be worse. The Tribulations clouds disperse now that your trial has ended.\n\n");
 	outputText("<b>You can now cultivate Daos of Elements.\n");
-	outputText("(Gained Perk: H class Heaven Tribulation Survivor)</b>\n\n");
+	outputText("(Gained Perk: H class Heaven Tribulation Survivor)</b>\n");
 	player.createPerk(PerkLib.HclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 	cleanupAfterCombat();
 }
-public function HclassHTThunderDoom():void {
-	clearOutput();
-	outputText("You failed. And not even in a fancy style but been defeated by merely tribulation strike. Heavenly thunder curse throu your body wrecking untold destruction on your five viscera and six bowels.\n\n");
-	outputText("Whatever was the reason you not passed this tribulation you may have chance to correct them if you ever reincarnate to have second chance.\n\n");
-	//[GAME OVER]
-	EventParser.gameOver();
-}
 public function GclassHTintro():void {
-	outputText("\nAn expanse of dark clouds that are jet black like ink suddenly surged over in the sky, and it roiled without end while enveloping the sky above you. Crimson red bolts of lightning that were dazzling like fireworks interweave with each other within the dark cloud, and it emits a destructive force that cause one’s heart to palpitate.\n");
-	startCombat(new HclassHeavenTribulation());
+	outputText("\nAn expanse of dark clouds that are jet black like ink suddenly surged over in the sky, and it roiled without end while enveloping the sky above you. Crimson red bolts of lightning that were dazzling like fireworks interweave with each other within the dark cloud, and it emits a destructive force that cause one’s heart to palpitate. Your second tribulation starts now.\n");
+	startCombat(new GclassHeavenTribulation());
+}
+public function GclassHTbeaten():void {
+	clearOutput();
+	outputText("After your attack clouds starts to disperce. Not from sending all their attacks against but due to been forcefully scattered by your counterattacks. Looking upward with contempt and haunty arrogance toward dispering tribulation clouds feeling few of blockages in your body"+(player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3 ? " and soul":"")+" have been broken throu.\n\n");
+	outputText("<b>You can now freely fly.\n");
+	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 0) {
+		var BTB:Number = 1;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 1) BTB += 2;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 2) BTB += 3;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3) BTB += 4;
+		if (player.hasPerk(PerkLib.BodyTempering)) {
+			outputText("Your Body Tempering have progressed.\n");
+			player.addPerkValue(PerkLib.BodyTempering, 1, BTB);
+		}
+		else {
+			outputText("(Gained Perk: Body Tempering)\n");
+			player.createPerk(PerkLib.BodyTempering, BTB, 0, 0, 0);
+		}
+	}
+	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3) {
+		outputText("(Gained Perk: Soul Tempering)\n");
+		player.createPerk(PerkLib.SoulTempering, 4, 0, 0, 0);
+	}
+	outputText("(Gained Perk: G class Heaven Tribulation Survivor)</b>\n");
+	player.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+	player.XP = player.XP + 27000;
+	cleanupAfterCombat();
+}
+public function GclassHTsurvived():void {
+	clearOutput();
+	outputText("You survived, albeit in rough shape, but things could be worse. The Tribulations clouds disperse now that your trial has ended.\n\n");
+	outputText("<b>You can now freely fly.\n");
+	outputText("(Gained Perk: G class Heaven Tribulation Survivor)</b>\n");
+	player.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+	cleanupAfterCombat();
 }
 
 public function goblinsBirthScene():void {

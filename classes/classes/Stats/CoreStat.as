@@ -34,16 +34,19 @@ public class CoreStat extends RawStat{
 				break;
 			case 'int.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismInt);
+				base += host.perkv1(PerkLib.SoulTempering);
 				if (host.hasPerk(PerkLib.BloodDemonIntelligence)) base *= 1.1;
 				base = Math.round(base);
 				break;
 			case 'wis.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismWis);
+				base += host.perkv1(PerkLib.SoulTempering);
 				if (host.hasPerk(PerkLib.BloodDemonWisdom)) base *= 1.1;
 				base = Math.round(base);
 				break;
 			case 'lib.core':
 				base += 16 * host.perkv1(PerkLib.AscensionTranshumanismLib);
+				base += host.perkv1(PerkLib.SoulTempering);
 				break;
 		}
 		return base;

@@ -1044,16 +1044,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) {
 					player.removeStatusEffect(StatusEffects.TribulationCountdown);
-					outputText("\nAN ENDURANCE FIGHT STARTS HERE\n");
-					startCombat(new HclassHeavenTribulation());//startCombat(new GclassHeavenTribulation());
+					campScenes.GclassHTintro();
 					needNext = true;
-				}
+				}/*
 				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) {
 					player.removeStatusEffect(StatusEffects.TribulationCountdown);
-					outputText("\nAN ENDURANCE FIGHT STARTS HERE\n");
-					//startCombat(new FclassHeavenTribulation());
+					campScenes.FclassHTintro();
 					needNext = true;
-				}
+				}*/
 				else player.addStatusValue(StatusEffects.TribulationCountdown, 1, -1);
 			}
 			return needNext;
