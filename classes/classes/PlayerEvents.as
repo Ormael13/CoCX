@@ -1254,7 +1254,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (flags[kFLAGS.VENOM_TIMES_USED] >= 50 && !player.hasPerk(PerkLib.ImprovedVenomGland)) {
 				outputText("\nYou feel wonderfully healthy. After using your venom so many time your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production. \n\n(<b>Gained Perk: Improved venom gland</b>)\n");
 				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
-			}
+			}/*
+			if (flags[kFLAGS.VENOM_TIMES_USED] >= 125 && !player.hasPerk(PerkLib.ImprovedVenomGlandEx)) {
+				outputText("\nYou feel wonderfully healthy. After using your venom so many time your venom gland development reached it next stage. Allowing for increased capacity, production and lowering usage of venom. \n\n(<b>Gained Perk: Improved venom gland (Ex)</b>)\n");
+				player.createPerk(PerkLib.ImprovedVenomGlandEx, 0, 0, 0, 0);
+			}*/
 			//Kitsune hunger perk
 			if (player.kitsuneScore() >= 10) { //Check for being a kitsune enough
 				if (!player.hasPerk(PerkLib.KitsuneEnergyThirst)) {
@@ -1263,7 +1267,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			//Kitsune hunger perk
 			if (player.kitsuneScore() < 10) { //Check for being a kitsune enough
 				if (player.hasPerk(PerkLib.KitsuneEnergyThirst)) {
 					outputText("\nYour mind clears up as you become less of a kitsune. You also lost the hunger for life force only sex could provide you. \n\n(<b>Lost Perk: Kitsune Hunger</b>)\n");
@@ -1391,11 +1394,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Recharge tail
-			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) { //Spider, Bee, Scorpion, Manticore and Naga Venom Recharge
+			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS || player.lowerBody == LowerBody.ATLACH_NACHA
+			|| player.hasPerk(PerkLib.ImprovedVenomGland)|| player.hasPerk(PerkLib.VenomGlandsEvolved)) { //Spider, Bee, Scorpion, Manticore, Naga and Altach Nacha Venom Recharge
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
 				if (player.hasPerk(PerkLib.ImprovedVenomGland)) player.tailRecharge += 5;
+				if (player.hasPerk(PerkLib.ImprovedVenomGlandEx)) player.tailRecharge += 15;
+				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) player.tailRecharge += 45;
 				if (player.hasPerk(PerkLib.VenomGlandsEvolved)) player.tailRecharge += 2;
 				if (player.hasPerk(PerkLib.VenomGlandsFinalForm)) player.tailRecharge += 8;
+				if (player.lowerBody == LowerBody.ATLACH_NACHA) player.tailRecharge *= 2;
 				player.tailVenom += player.tailRecharge;
 				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 			}

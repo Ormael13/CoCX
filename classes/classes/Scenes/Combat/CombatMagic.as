@@ -1605,9 +1605,9 @@ public class CombatMagic extends BaseCombatContent {
 	//THIS FEATURE GOVERS EVERY POST CAST EFFECT YOUR SPELLS MAY CAUSE
 	public function MagicAddonEffect(numberOfProcs:Number = 1):void {
 		if (player.hasStatusEffect(StatusEffects.Venomancy)) {
-			if (player.tailVenom >= 25) {
+			if (player.tailVenom >= 4) {
 				var injections:Number = 0;
-				while (player.tailVenom >= 25 && injections < numberOfProcs) {
+				while (player.tailVenom >= 4 && injections < numberOfProcs) {
 					var damageB:Number = 35 + rand(player.lib / 10);
 					var poisonScaling:Number = 1;
 					poisonScaling += player.lib/100;
@@ -1616,14 +1616,15 @@ public class CombatMagic extends BaseCombatContent {
 					else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
 					else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
 					else damageB += 80;
-					damageB *= 0.2;
+					damageB *= 0.04;
 					damageB *= 1+(poisonScaling/10);
 					monster.teased(monster.lustVuln * damageB, false);
 					monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
 					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 25;
+					player.tailVenom -= 4;
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					injections++;
 				}
 				outputText(" Your venom is forcefully injected ");
@@ -4404,4 +4405,4 @@ public class CombatMagic extends BaseCombatContent {
 		return false;
 	}
 }
-}
+}

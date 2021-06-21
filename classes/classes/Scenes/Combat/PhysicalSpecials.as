@@ -122,21 +122,21 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.faceType == Face.SNAKE_FANGS || player.hasPerk(PerkLib.VenomGlands)) {
 				if (player.lowerBody == LowerBody.HYDRA) {
 					bd = buttons.add("HydraBite", hydraBiteAttack).hint("Deal as many attacks as pc got heads. Also delivers naga poison for as many time as pc got heads. (lower enemy str and spe)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-					if (player.tailVenom < 25) {
+					if (player.tailVenom < 20) {
 						bd.disable("You do not have enough venom to use hydra bite right now! (Req. 25+)");
 					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					bd.requireFatigue(physicalCost(10 * player.statusEffectv1(StatusEffects.HydraTailsPlayer)));
 				}
 				else {
 					bd = buttons.add("SnakeBite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom. (lower enemy str and spe)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-					if (player.tailVenom < 25) {
+					if (player.tailVenom < 20) {
 						bd.disable("You do not have enough venom to use snake bite right now! (Req. 25+)");
 					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
 			if (player.faceType == Face.SPIDER_FANGS || player.faceType == Face.USHI_ONI_ONNA || player.hasPerk(PerkLib.VenomGlands)) {
 				bd = buttons.add("SpiderBite", spiderBiteAttack).hint("Attempt to bite your opponent and inject venom. (deal lust dmg and lower gradualy enemy lust resistance)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-				if (player.tailVenom < 25) {
+				if (player.tailVenom < 20) {
 					bd.disable("You do not have enough venom to use spider bite right now!");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -261,25 +261,25 @@ public class PhysicalSpecials extends BaseCombatContent {
 					period = "your refractory period";
 				}
 				bd.hint("Attempt to use your " + stingername + " on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on " + period + ", you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-				if (player.tailVenom < 25) {
-					bd.disable("You do not have enough venom to sting right now! (Req. 25+)");
+				if (player.tailVenom < 20) {
+					bd.disable("You do not have enough venom to sting right now! (Req. 20+)");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
 				bd = buttons.add("Tail Spike", playerTailSpike).hint("Shoot an envenomed spike at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-				if (player.tailVenom < 25) {
-					bd.disable("You do not have enough venom to shoot a spike right now! (Req. 25+)");
+				if (player.tailVenom < 20) {
+					bd.disable("You do not have enough venom to shoot a spike right now! (Req. 20+)");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				if (player.hasPerk(PerkLib.ManticoreMetabolism)) {
 					bd = buttons.add("Omni Tail Spike", playerOmniTailSpike).hint("Shoot a volley of envenomed spikes at your opponent dealing minor physical damage, slowing its movement speed and inflicting serious lust damage.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-					if (player.tailVenom < 50 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
-						bd.disable("You do not have enough venom to shoot multiple spikes right now! (Req. 50+)");
+					if (player.tailVenom < 40 && player.hasPerk(PerkLib.ManticoreMetabolism)) {
+						bd.disable("You do not have enough venom to shoot multiple spikes right now! (Req. 40+)");
 					} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 			}
 			if (player.tailType == Tail.SPIDER_ADBOMEN) {
 				bd = buttons.add("Web", PCWebAttack).hint("Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-				if (player.tailVenom < 25) {
+				if (player.tailVenom < 20) {
 					bd.disable("You do not have enough webbing to shoot right now!");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -983,7 +983,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 1 && (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small")) {
-			if (player.tailVenom >= 10) {
+			if (player.tailVenom >= 4) {
 				outputText("  ");
 				if(monster.lustVuln == 0) {
 					outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
@@ -1002,7 +1002,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
 					}
 					else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 5;
+					player.tailVenom -= 4;
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.tailType == Tail.SCORPION) {
 					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
@@ -1012,7 +1013,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
 					}
 					else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 5;
+					player.tailVenom -= 4;
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
 					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
@@ -1029,7 +1031,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 						monster.addStatusValue(StatusEffects.NagaVenom,3,1);
 					}
 					else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 5;
+					player.tailVenom -= 4;
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.faceType == Face.SNAKE_FANGS) {
 					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
@@ -1040,7 +1043,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 						monster.addStatusValue(StatusEffects.NagaVenom,1,0.4);
 					}
 					else monster.createStatusEffect(StatusEffects.NagaVenom, 0.4, 0.4, 0, 0);
-					player.tailVenom -= 5;
+					player.tailVenom -= 4;
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.faceType == Face.SPIDER_FANGS) {
 					if (player.lowerBody == LowerBody.ATLACH_NACHA){
@@ -1060,7 +1064,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 						if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
 						} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-						player.tailVenom -= 5;
+						player.tailVenom -= 4;
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					}
 					else {
 						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
@@ -1070,7 +1075,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 							monster.lustVuln += 0.01;
 							if (monster.lustVuln > 1) monster.lustVuln = 1;
 						}
-						player.tailVenom -= 5;
+						player.tailVenom -= 4;
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					}
 				}
 				if (monster.lust >= monster.maxLust()) {
@@ -3137,7 +3143,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		//Keep logic sane if this attack brings victory
-		player.tailVenom -= 25;
+		player.tailVenom -= 20;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		//Amily!
 		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
@@ -3716,7 +3722,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else monster.createStatusEffect(StatusEffects.NagaVenom,2,2,0,0);
 		outputText("\n\n");
-		player.tailVenom -= 25;
+		player.tailVenom -= 20;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		if (!combatIsOver()) enemyAI();
 	}
@@ -3781,7 +3787,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
-		player.tailVenom -= 25;
+		player.tailVenom -= 20;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		if (!combatIsOver()) enemyAI();
 	}
@@ -3857,7 +3863,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
-		player.tailVenom -= 25;
+		player.tailVenom -= 20;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		if (!combatIsOver()) enemyAI();
 	}
@@ -4396,7 +4402,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
 		//Use tail mp
-		player.tailVenom -= 25;
+		player.tailVenom -= 20;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		//Kick back to main if no damage occured!
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
@@ -4462,7 +4468,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//New line before monster attack
 		monster.statStore.addBuffObject({spe:-(2+rand(3))}, "Poison",{text:"Poison"});
 		//Use tail mp
-		player.tailVenom -= 25;
+		player.tailVenom -= 20;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
@@ -4541,10 +4547,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//deal damage repeatedly
 		tailspikedamage();
 		tailspikedamage();
-		if (player.hasPerk(PerkLib.ClawTraining) && player.tailVenom >= 25) tailspikedamage();
-		if (player.hasPerk(PerkLib.ExtraClawAttack) && player.tailVenom >= 25) tailspikedamage();
-		if (player.hasPerk(PerkLib.MultiClawAttack) && player.tailVenom >= 25) tailspikedamage();
-		if (player.hasPerk(PerkLib.ClawingFlurry) && player.tailVenom >= 25) tailspikedamage();
+		if (player.hasPerk(PerkLib.ClawTraining) && player.tailVenom >= 20) tailspikedamage();
+		if (player.hasPerk(PerkLib.ExtraClawAttack) && player.tailVenom >= 20) tailspikedamage();
+		if (player.hasPerk(PerkLib.MultiClawAttack) && player.tailVenom >= 20) tailspikedamage();
+		if (player.hasPerk(PerkLib.ClawingFlurry) && player.tailVenom >= 20) tailspikedamage();
 		outputText("\n\n");
 		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
 		else doNext(endLustVictory);
@@ -5200,7 +5206,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
 				}
 			}
-			if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom >= 10) {
+			if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom >= 4) {
 				outputText("  ");
 				if (monster.lustVuln == 0) {
 					outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
@@ -5217,7 +5223,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 						monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
 					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 5;
+					player.tailVenom -= 4;
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.tailType == Tail.SCORPION) {
 					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
@@ -5225,7 +5232,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 						monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
 					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 5;
+					player.tailVenom -= 4;
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
 					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
@@ -5240,7 +5248,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 						monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
 					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 5;
+					player.tailVenom -= 4;
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.faceType == Face.SNAKE_FANGS) {
 					outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
@@ -5249,7 +5258,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 						monster.addStatusValue(StatusEffects.NagaVenom, 2, 0.4);
 						monster.addStatusValue(StatusEffects.NagaVenom, 1, 0.4);
 					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0.4, 0.4, 0, 0);
-					player.tailVenom -= 5;
+					player.tailVenom -= 4;
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 				if (player.faceType == Face.SPIDER_FANGS) {
 					if (player.lowerBody == LowerBody.ATLACH_NACHA){
@@ -5269,7 +5279,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 						if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
 						} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-						player.tailVenom -= 5;
+						player.tailVenom -= 4;
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					}
 					else{
 						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
@@ -5279,7 +5290,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 							monster.lustVuln += 0.01;
 							if (monster.lustVuln > 1) monster.lustVuln = 1;
 						}
-						player.tailVenom -= 5;
+						player.tailVenom -= 4;
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					}
 				}
 				if (monster.lust >= monster.maxLust()) {
@@ -5291,7 +5303,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 				outputText("\n");
 			}
-			if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < 10) outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
+			if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < 4) outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
 			if (player.weaponRangeName == "Hodr's bow" && !monster.hasStatusEffect(StatusEffects.Blind)) monster.createStatusEffect(StatusEffects.Blind, 1, 0, 0, 0);
 			outputText("\n");
 			if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);

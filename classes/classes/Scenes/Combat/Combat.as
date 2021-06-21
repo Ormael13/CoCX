@@ -3035,7 +3035,7 @@ public class Combat extends BaseContent {
                     if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
                 }
             }
-            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom >= 10) {
+            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom >= 4) {
                 outputText("  ");
                 if (monster.lustVuln == 0) {
                     outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
@@ -3052,7 +3052,8 @@ public class Combat extends BaseContent {
                     if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-                    player.tailVenom -= 5;
+                    player.tailVenom -= 4;
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
                 if (player.tailType == Tail.SCORPION) {
                     outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
@@ -3060,7 +3061,8 @@ public class Combat extends BaseContent {
                     if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-                    player.tailVenom -= 5;
+                    player.tailVenom -= 4;
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
                 if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
                     outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
@@ -3075,7 +3077,8 @@ public class Combat extends BaseContent {
                     if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-                    player.tailVenom -= 5;
+                    player.tailVenom -= 4;
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
                 if (player.faceType == Face.SNAKE_FANGS) {
                     outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
@@ -3084,7 +3087,8 @@ public class Combat extends BaseContent {
                         monster.addStatusValue(StatusEffects.NagaVenom, 2, 0.4);
                         monster.addStatusValue(StatusEffects.NagaVenom, 1, 0.4);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0.4, 0.4, 0, 0);
-                    player.tailVenom -= 5;
+                    player.tailVenom -= 4;
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
                 if (player.faceType == Face.SPIDER_FANGS) {
                     if (player.lowerBody == LowerBody.ATLACH_NACHA){
@@ -3104,7 +3108,8 @@ public class Combat extends BaseContent {
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-                        player.tailVenom -= 5;
+                        player.tailVenom -= 4;
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
                     else{
                         outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
@@ -3114,7 +3119,8 @@ public class Combat extends BaseContent {
                             monster.lustVuln += 0.01;
                             if (monster.lustVuln > 1) monster.lustVuln = 1;
                         }
-                        player.tailVenom -= 5;
+                        player.tailVenom -= 4;
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
                 }
                 if (monster.lust >= monster.maxLust()) {
@@ -3126,7 +3132,7 @@ public class Combat extends BaseContent {
                 }
                 outputText("\n");
             }
-            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < 10) outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
+            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < 4) outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
             if (player.weaponRangeName == "Hodr's bow" && !monster.hasStatusEffect(StatusEffects.Blind)) monster.createStatusEffect(StatusEffects.Blind, 1, 0, 0, 0);
             outputText("\n");
             if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
@@ -4254,7 +4260,7 @@ public class Combat extends BaseContent {
                         monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
                     }
                 }
-                if ((player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) && player.tailVenom >= 5) {
+                if ((player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) && player.tailVenom >= 4) {
                     outputText(" and inject your venom into their body!");
                     if(player.faceType == Face.SNAKE_FANGS){
                         monster.statStore.addBuffObject({spe:-1}, "Poison",{text:"Poison"});
@@ -4262,7 +4268,8 @@ public class Combat extends BaseContent {
                             monster.addStatusValue(StatusEffects.NagaVenom, 2, 0.4);
                             monster.addStatusValue(StatusEffects.NagaVenom, 1, 0.4);
                         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0.4, 0.4, 0, 0);
-                        player.tailVenom -= 5;
+                        player.tailVenom -= 4;
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
                     if(player.faceType == Face.SPIDER_FANGS){
                         if (player.lowerBody == LowerBody.ATLACH_NACHA){
@@ -4282,7 +4289,8 @@ public class Combat extends BaseContent {
                             if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                             } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-                            player.tailVenom -= 5;
+                            player.tailVenom -= 4;
+							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                         } else {
                             var lustDmg:int = 6 * monster.lustVuln;
                             monster.teased(lustDmg);
@@ -4290,7 +4298,8 @@ public class Combat extends BaseContent {
                                 monster.lustVuln += 0.01;
                                 if (monster.lustVuln > 1) monster.lustVuln = 1;
                             }
-                            player.tailVenom -= 5;
+                            player.tailVenom -= 4;
+							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                         }
                     }
                 }
@@ -4503,7 +4512,7 @@ public class Combat extends BaseContent {
                 if (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.FROSTWYRM) TailDamageMultiplier = 3;
                 if (player.tail.type == Tail.MANTICORE_PUSSYTAIL){
                     outputText("You hiss and raise your tail. You strike at blinding speed impaling your opponent twice with your spike");
-                    if (player.tailVenom >= 5) {
+                    if (player.tailVenom >= 4) {
                             outputText(" and injecting your venom in the process");
                         //TailVenomArea
                         var lustdamage:Number = 35 + rand(player.lib / 10);
@@ -4514,12 +4523,13 @@ public class Combat extends BaseContent {
                         lustdamage *= 0.14;
                         monster.teased(monster.lustVuln * lustdamage, false);
                         monster.statStore.addBuffObject({tou:-2}, "Poison",{text:"Poison"});
-                        player.tailVenom -= 5;
-
-                        if (player.tailVenom >= 5) {
+                        player.tailVenom -= 4;
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+                        if (player.tailVenom >= 4) {
                             monster.teased(monster.lustVuln * lustdamage, false);
                             monster.statStore.addBuffObject({tou:-2}, "Poison",{text:"Poison"});
-                            player.tailVenom -= 5;
+                            player.tailVenom -= 4;
+							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                         }
                     }
                     outputText(".")
@@ -5296,7 +5306,7 @@ public class Combat extends BaseContent {
                 }
             }
             if (flags[kFLAGS.ENVENOMED_MELEE_ATTACK] == 1 && (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small")) {
-                if (player.tailVenom >= 10) {
+                if (player.tailVenom >= 4) {
                     outputText("  ");
                     if (monster.lustVuln == 0) {
                         outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
@@ -5313,7 +5323,8 @@ public class Combat extends BaseContent {
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-                        player.tailVenom -= 5;
+                        player.tailVenom -= 4;
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
                     if (player.tailType == Tail.SCORPION) {
                         outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
@@ -5321,7 +5332,8 @@ public class Combat extends BaseContent {
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-                        player.tailVenom -= 5;
+                        player.tailVenom -= 4;
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
                     if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
                         outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
@@ -5339,7 +5351,8 @@ public class Combat extends BaseContent {
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-                        player.tailVenom -= 5;
+                        player.tailVenom -= 4;
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
                     if (player.faceType == Face.SNAKE_FANGS) {
                         outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
@@ -5348,7 +5361,8 @@ public class Combat extends BaseContent {
                             monster.addStatusValue(StatusEffects.NagaVenom, 2, 0.4);
                             monster.addStatusValue(StatusEffects.NagaVenom, 1, 0.4);
                         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0.4, 0.4, 0, 0);
-                        player.tailVenom -= 5;
+                        player.tailVenom -= 4;
+						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
                     if (player.faceType == Face.SPIDER_FANGS) {
                         if (player.lowerBody == LowerBody.ATLACH_NACHA){
@@ -5368,7 +5382,8 @@ public class Combat extends BaseContent {
                             if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
                             } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-                            player.tailVenom -= 5;
+                            player.tailVenom -= 4;
+							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                         } else {
                             outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
                             var lustDmg:int = 6 * monster.lustVuln;
@@ -5377,7 +5392,8 @@ public class Combat extends BaseContent {
                                 monster.lustVuln += 0.01;
                                 if (monster.lustVuln > 1) monster.lustVuln = 1;
                             }
-                            player.tailVenom -= 5;
+                            player.tailVenom -= 4;
+							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                         }
                     }
                     if (monster.lust >= monster.maxLust()) {
@@ -7156,10 +7172,6 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
             damage = player.maxHP() * 0.1;
             player.takePhysDamage(damage);
-            //statScreenRefresh();
-        }
-        if (player.hasStatusEffect(StatusEffects.Venomancy)) {
-            if (player.tailVenom >= 25) player.tailVenom -= 25;
             //statScreenRefresh();
         }
         if (mod < 0) {
@@ -10886,10 +10898,7 @@ public class Combat extends BaseContent {
             if (player.tail.type == Tail.DEMONIC || player.tail.type == Tail.MOUSE || player.tail.type == Tail.THUNDERBIRD || player.tail.type == Tail.HINEZUMI) TeaseFunctionList.push(RandomTeaseStranglingTail);
             if (player.tail.type == Tail.MANTICORE_PUSSYTAIL) TeaseFunctionList.push(RandomTeaseManticoreTailfuckInitiate);
         }
-        if (player.tail.type == Tail.MANTICORE_PUSSYTAIL && player.tailVenom >= 5)
-        {
-            TeaseFunctionList.push(RandomTeaseManticoreTailSpike);
-        }
+        if (player.tail.type == Tail.MANTICORE_PUSSYTAIL && player.tailVenom >= 4) TeaseFunctionList.push(RandomTeaseManticoreTailSpike);
         if (player.tail.type == Tail.LIZARD || player.tail.type == Tail.CAVE_WYRM || player.tail.type == Tail.SALAMANDER) TeaseFunctionList.push(RandomTeaseButtfuckTail);
         if (player.lowerBody == LowerBody.PLANT_FLOWER){
             if (player.isLiliraune()) TeaseFunctionList.push(RandomTeaseLiliraune);
@@ -11030,7 +11039,8 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
             monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
         } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-        player.tailVenom -= 5;
+        player.tailVenom -= 4;
+		flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
     }
 
     public function RandomTeaseManticoreTailfuckInitiate():void {
@@ -11800,7 +11810,7 @@ public class Combat extends BaseContent {
         }
         outputText("\n\n");
         combat.WrathGenerationPerHit2(5);
-        player.tailVenom -= 25;
+        player.tailVenom -= 20;
         flags[kFLAGS.VENOM_TIMES_USED] += 1;
         if (!combatIsOver()) enemyAI();
     }
