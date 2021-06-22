@@ -54,11 +54,7 @@ use namespace CoC;
 		override protected function performCombatAction():void
 		{
 			this.addStatusValue(StatusEffects.RisingInferno, 1, 1);
-			if (player.hasStatusEffect(StatusEffects.GooBind)) hellfireSnailBurningEmbrace();
-			else {
-				if (!player.hasStatusEffect(StatusEffects.GooBind) && rand(3) == 0) hellfireSnailEngulph();
-				else hellfireSnailSpitMagma();
-			}
+			super.performCombatAction();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -134,6 +130,11 @@ use namespace CoC;
 			this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 0, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.RisingInferno, 0, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.EruptingRiposte, 0, 0, 0, 0);
+			this.abilities = [
+				{ call: hellfireSnailSpitMagma, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_FLUID,]},
+				{ call: hellfireSnailEngulph, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_FLUID], condition: function():Boolean { return !player.hasStatusEffect(StatusEffects.GooBind) }},
+				{ call: hellfireSnailBurningEmbrace, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_FLUID], condition: function():Boolean { return player.hasStatusEffect(StatusEffects.GooBind) }, weight:Infinity}
+			]
 			checkMonster();
 		}
 	}

@@ -44,9 +44,33 @@ import flash.errors.IllegalOperationError;
 
 public class Creature extends Utils
 	{
+		// Ability types
+		public static const ABILITY_PHYSICAL: String = "physical";
+		public static const ABILITY_MAGIC: String = "magic";
+		public static const ABILITY_TEASE: String = "tease";
+		public static const ABILITY_SPECIAL: String = "special";
+
+		// Ability ranges
+		public static const RANGE_SELF: int = 0;
+		public static const RANGE_MELEE: int = 1;
+		public static const RANGE_RANGED: int = 2;
+
+		// Ability tags
+		/**
+		 * This ability uses one's weapon
+		 */
+		public static const TAG_WEAPON: String = "weapon";
+		public static const TAG_BODY: String = "body";
+		// element tags
+		public static const TAG_ACID: String = "acid";
+		public static const TAG_FIRE: String = "fire";
+		public static const TAG_ICE: String = "ice";
+		public static const TAG_HEAL: String = "heal";
+		public static const TAG_FLUID: String = "fluid";
 
 
-        public function get game():CoC {
+
+		public function get game():CoC {
 			return CoC.instance;
 		}
 		public function get flags():DefaultDict {
@@ -102,6 +126,22 @@ public class Creature extends Utils
 		public function set weaponRangeAttack(value:Number):void { _weaponRangeAttack = value; }
 		public function set weaponRangePerk(value:String):void { _weaponRangePerk = value; }
 		public function set weaponRangeValue(value:Number):void { _weaponRangeValue = value; }
+		//Weapon flying swords
+		private var _weaponFlyingSwordsName:String = "";
+		private var _weaponFlyingSwordsVerb:String = "";
+		private var _weaponFlyingSwordsAttack:Number = 0;
+		private var _weaponFlyingSwordsPerk:String = "";
+		private var _weaponFlyingSwordsValue:Number = 0;
+		public function get weaponFlyingSwordsName():String { return _weaponFlyingSwordsName; }
+		public function get weaponFlyingSwordsVerb():String { return _weaponFlyingSwordsVerb; }
+		public function get weaponFlyingSwordsAttack():Number { return _weaponFlyingSwordsAttack; }
+		public function get weaponFlyingSwordsPerk():String { return _weaponFlyingSwordsPerk; }
+		public function get weaponFlyingSwordsValue():Number { return _weaponFlyingSwordsValue; }
+		public function set weaponFlyingSwordsName(value:String):void { _weaponFlyingSwordsName = value; }
+		public function set weaponFlyingSwordsVerb(value:String):void { _weaponFlyingSwordsVerb = value; }
+		public function set weaponFlyingSwordsAttack(value:Number):void { _weaponFlyingSwordsAttack = value; }
+		public function set weaponFlyingSwordsPerk(value:String):void { _weaponFlyingSwordsPerk = value; }
+		public function set weaponFlyingSwordsValue(value:Number):void { _weaponFlyingSwordsValue = value; }
 		//Clothing/Armor
 		private var _armorName:String = "";
 		private var _armorDef:Number = 0;
@@ -118,6 +158,37 @@ public class Creature extends Utils
 		public function set armorDef(value:Number):void { _armorDef = value; }
 		public function set armorMDef(value:Number):void { _armorMDef = value; }
 		public function set armorPerk(value:String):void { _armorPerk = value; }
+		//Misc Jewelry
+		private var _miscjewelryName:String = "";
+		private var _miscjewelryEffectId:Number = 0;
+		private var _miscjewelryEffectMagnitude:Number = 0;
+		private var _miscjewelryPerk:String = "";
+		private var _miscjewelryValue:Number = 0;
+		public function get miscjewelryName():String { return _miscjewelryName; }
+		public function get miscjewelryEffectId():Number { return _miscjewelryEffectId; }
+		public function get miscjewelryEffectMagnitude():Number { return _miscjewelryEffectMagnitude; }
+		public function get miscjewelryPerk():String { return _miscjewelryPerk; }
+		public function get miscjewelryValue():Number { return _miscjewelryValue; }
+		public function set miscjewelryValue(value:Number):void { _miscjewelryValue = value; }
+		public function set miscjewelryName(value:String):void { _miscjewelryName = value; }
+		public function set miscjewelryEffectId(value:Number):void { _miscjewelryEffectId = value; }
+		public function set miscjewelryEffectMagnitude(value:Number):void { _miscjewelryEffectId = value; }
+		public function set miscjewelryPerk(value:String):void { _miscjewelryPerk = value; }
+		private var _miscjewelryName2:String = "";
+		private var _miscjewelryEffectId2:Number = 0;
+		private var _miscjewelryEffectMagnitude2:Number = 0;
+		private var _miscjewelryPerk2:String = "";
+		private var _miscjewelryValue2:Number = 0;
+		public function get miscjewelryName2():String { return _miscjewelryName2; }
+		public function get miscjewelryEffectId2():Number { return _miscjewelryEffectId2; }
+		public function get miscjewelryEffectMagnitude2():Number { return _miscjewelryEffectMagnitude2; }
+		public function get miscjewelryPerk2():String { return _miscjewelryPerk2; }
+		public function get miscjewelryValue2():Number { return _miscjewelryValue2; }
+		public function set miscjewelryValue2(value:Number):void { _miscjewelryValue2 = value; }
+		public function set miscjewelryName2(value:String):void { _miscjewelryName2 = value; }
+		public function set miscjewelryEffectId2(value:Number):void { _miscjewelryEffectId2 = value; }
+		public function set miscjewelryEffectMagnitude2(value:Number):void { _miscjewelryEffectId2 = value; }
+		public function set miscjewelryPerk2(value:String):void { _miscjewelryPerk2 = value; }
 		//Head Jewelery
 		private var _headjewelryName:String = "";
 		private var _headjewelryEffectId:Number = 0;
@@ -287,9 +358,9 @@ public class Creature extends Utils
 		public function get str():Number { return strStat.value; }
 		public function get tou():Number {if (this.hasPerk(PerkLib.IcyFlesh) || this.hasPerk(PerkLib.HaltedVitals)) {
 			return 1;
-		} else {
-			return touStat.value;
-		}
+			} else {
+				return touStat.value;
+			}
 		}
 
 		public function get spe():Number { return speStat.value; }
@@ -310,33 +381,43 @@ public class Creature extends Utils
 			}
 		}
 
-		public function addCurse(statName:String, power:Number):void {
+		public function addCurse(statName:String, power:Number, tier:Number = 0):void{
+			var tierPower:String = "NOT PROPERLY ADDED STAT!";
+			if (tier == 0) tierPower = "Tribulation Vestiges";
+			if (tier == 1) tierPower = "Weakened";
+			if (tier == 2) tierPower = "Drained";
+			if (tier == 3) tierPower = "Damaged";
 			if (this.hasPerk(PerkLib.ZenjisInfluence2)) power *= 0.60;
 			if (statName == "sens" || statName == "cor") {
-				statStore.addBuff(statName, power, 'Curse', {text: 'Curse'});
+				statStore.addBuff(statName, power, tierPower, {text: tierPower});
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
 			} else {
-				statStore.addBuff(statName, -power, 'Curse', {text: 'Curse'});
+				statStore.addBuff(statName, -power, tierPower, {text: tierPower});
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatDown(statName);
 			}
 		}
-		public function removeCurse(statName:String, power:Number):void {
+		public function removeCurse(statName:String, power:Number, tier:Number = 0):void {
+			var tierPower:String = "NOT PROPERLY ADDED STAT!";
+			if (tier == 0) tierPower = "Tribulation Vestiges";
+			if (tier == 1) tierPower = "Weakened";
+			if (tier == 2) tierPower = "Drained";
+			if (tier == 3) tierPower = "Damaged";
 			var stat:BuffableStat = statStore.findBuffableStat(statName);
 			if (!stat) {
 				// Error? No stat with such name
 				throw new Error("No such stat "+statName);
 			}
-			var current:Number = stat.valueOfBuff('Curse');
+			var current:Number = stat.valueOfBuff(tierPower);
 			if (statName == "sens" || statName == "cor") {
 				if (current >0){
 					if (power*2 >= current) {
-						stat.removeBuff('Curse');
+						stat.removeBuff(tierPower);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
 					} else if (power*2 < current) {
-						stat.addOrIncreaseBuff('Curse', -power*2);
+						stat.addOrIncreaseBuff(tierPower, -power*2);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);
 					}
@@ -345,11 +426,11 @@ public class Creature extends Utils
 			else {
 				if (current < 0) {
 					if (power*2 >= -current) {
-						stat.removeBuff('Curse');
+						stat.removeBuff(tierPower);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);
 					} else if (power*2 < -current) {
-						stat.addOrIncreaseBuff('Curse', power*2);
+						stat.addOrIncreaseBuff(tierPower, power*2);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
 					}
@@ -782,52 +863,52 @@ public class Creature extends Utils
 			var oldHPratio:Number = hp100/100;
 			//Strength
 			if (dstr < 0){
-				addCurse("str", -dstr);
+				addCurse("str", -dstr,2);
 			}
 			if (dstr > 0){
-				removeCurse("str", dstr);
+				removeCurse("str", dstr,2);
 			}
 			//toughness
 			if (dtou < 0){
-				addCurse("tou", -dtou);
+				addCurse("tou", -dtou,2);
 			}
 			if (dtou > 0){
-				removeCurse("tou", dtou);
+				removeCurse("tou", dtou,2);
 			}
 			//Speed
 			if (dspe < 0){
-				addCurse("spe", -dspe);
+				addCurse("spe", -dspe,2);
 			}
 			if (dspe > 0){
-				removeCurse("spe", dspe);
+				removeCurse("spe", dspe,2);
 			}
 			//Intelligence
 			if (dint < 0){
-				addCurse("int", -dint);
+				addCurse("int", -dint,2);
 			}
 			if (dint > 0){
-				removeCurse("int", dint);
+				removeCurse("int", dint,2);
 			}
 			//Wisdom
 			if (dwis < 0){
-				addCurse("wis", -dwis);
+				addCurse("wis", -dwis,2);
 			}
 			if (dwis > 0){
-				removeCurse("wis", dwis);
+				removeCurse("wis", dwis,2);
 			}
 			//Libido
 			if (dlib < 0){
-				addCurse("lib", -dlib);
+				addCurse("lib", -dlib,2);
 			}
 			if (dlib > 0){
-				removeCurse("lib", dlib);
+				removeCurse("lib", dlib,2);
 			}
 			//Sensitivity
 			if (dsens > 0){
-				addCurse("sens", dsens);
+				addCurse("sens", dsens,2);
 			}
 			if (dsens < 0){
-				removeCurse("sens", -dsens);
+				removeCurse("sens", -dsens,2);
 			}
 			lust = Utils.boundFloat(mins.lust, lust + dlust, maxLust());
 			cor  = Utils.boundFloat(mins.cor, cor + dcor, 100);
@@ -931,12 +1012,20 @@ public class Creature extends Utils
 			if (!skin.hasCoat()) return hairColor;
 			return skin.coat.color;
 		}
+		public function get coatColor2():String {
+			if (!skin.hasCoat()) return hairColor;
+			return skin.coat.color2;
+		}
 		public function get nakedCoatColor():String {
 			return skin.coat.color;
 		}
 		public function set coatColor(value:String):void {
 			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
 			skin.coat.color = value;
+		}
+		public function set coatColor2(value:String):void {
+			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
+			skin.coat.color2 = value;
 		}
 
 		public var beardStyle:Number = Beard.NORMAL;
@@ -3237,8 +3326,8 @@ public class Creature extends Utils
 		public function hasGooSkin():Boolean { return skin.hasGooSkin(); }
 		public function hasGhostSkin():Boolean { return skin.hasGhostSkin(); }
 		public function isGargoyle():Boolean { return skin.hasBaseOnly(Skin.STONE); }
-		public function skinDescript():String { return skin.describe('basic'); }
-		public function skinFurScales():String { return skin.describe('cover'); }
+		public function skinDescript():String { return skin.describe('base'); }
+		public function skinFurScales():String { return skin.describe('coat'); }
 
 		// <mod name="Predator arms" author="Stadler76">
 		public function claws():String { return clawsPart.descriptionFull(); }
@@ -3258,6 +3347,9 @@ public class Creature extends Utils
 		public function isKraken():Boolean { return lowerBodyPart.isKraken(); }
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
+		public function isElf():Boolean {
+			return hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm) || game.player.elfScore() >= 10 || game.player.woodElfScore() >= 17;
+		}
 
 		public function isFlying():Boolean {
 			return hasStatusEffect(StatusEffects.Flying);
@@ -4058,6 +4150,76 @@ public class Creature extends Utils
 			if (game.player.cheshireScore() >= 11 && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Phasing";
 			if (game.player.displacerbeastScore() >= 11 && ((!hasStatusEffect(StatusEffects.Displacement) && (roll < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (roll < 80)))) return "Displacing";
 			return null;
+		}
+
+		/**
+		 * Runs all checks on ability and returns true if it possible
+		 */
+		public function abilityIsPossible(ability:Object, target: Creature):Boolean {
+			if (!ability.call) return false; // no function specified
+			// ability has condition check that fails
+			if ('condition' in ability && !ability.condition()) return false;
+			if ('weight' in ability && ability.weight <= 0 && isNaN(ability.weight)) return false;
+			if (!canUseAbility(ability)) return false;
+			if (ability.range != RANGE_SELF && !target.canBeTargetedWith(ability)) return false;
+			return true;
+		}
+
+		/**
+		 * Pick and return one possible ability; or null if none are possible
+		 */
+		public function pickRandomAbility(abilities:/*Object*/Array, target: Creature):Object {
+			var n:int = abilities.length;
+			abilities = abilities.filter(
+					function (ability:Object, idx:int, array:Array):Boolean {
+						return abilityIsPossible(ability, target);
+					}
+			);
+			trace(short+" filtered "+abilities.length+" possible abilities out of "+n);
+			if (abilities.length == 0) return null;
+			// Run weighted random
+			var sum:Number = 0;
+			for each (var ability:Object in abilities) {
+				if ('weight' in ability) {
+					if (!isFinite(ability.weight)) {
+						// Infinite weight - pick only this ability, ignore others
+						return ability;
+					}
+				} else {
+					ability.weight = 1;
+				}
+				sum += ability.weight;
+			}
+			var pick:Number = Math.random()*sum;
+			for each (ability in abilities) {
+				pick -= ability.weight;
+				if (pick <= 0) return ability;
+			}
+			// Should never happen but just in case, return first ability
+			return abilities[0];
+		}
+
+
+
+		/**
+		 * Check if this creature is in condition to perform the ability (not sealed etc)
+		 * @param ability See Monster.abilities for documentation on structure
+		 * @return
+		 */
+		public function canUseAbility(ability:Object):Boolean {
+			return true;
+		}
+
+		/**
+		 * Check the ability for tags, if it applicable to current state of this creature
+		 * @param ability See Monster.abilities for documentation on structure
+		 * @return true if this creature can be targeted with ability
+		 */
+		public function canBeTargetedWith(ability:Object):Boolean {
+			if (ability.range == RANGE_MELEE && isFlying()) {
+				return false;
+			}
+			return true;
 		}
 
 		public function getEvasionRoll(useMonster:Boolean = true, attackSpeed:int = int.MIN_VALUE):Boolean

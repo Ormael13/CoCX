@@ -1101,7 +1101,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[P]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
+					rawOutputText("\n[S] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1113,7 +1113,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
+					rawOutputText("\n[S] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1125,7 +1125,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
+					rawOutputText("\n[S] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [P]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1137,7 +1137,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [P]-[ ]-[ ] [S]");
+					rawOutputText("\n[S] [P]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1149,7 +1149,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[P]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
+					rawOutputText("\n[S] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1161,7 +1161,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
+					rawOutputText("\n[S] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[P]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1173,7 +1173,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[P]-[ ] [S]");
+					rawOutputText("\n[S] [ ]-[P]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1185,7 +1185,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[P]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
+					rawOutputText("\n[S] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1197,7 +1197,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
+					rawOutputText("\n[S] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[P]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1209,7 +1209,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[P] [S]");
+					rawOutputText("\n[S] [ ]-[ ]-[P] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1221,7 +1221,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[P]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
+					rawOutputText("\n[S] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1233,7 +1233,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
+					rawOutputText("\n[S] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1245,7 +1245,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [S]");
+					rawOutputText("\n[S] [ ]-[ ]-[ ] [S]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[P]");
 					rawOutputText("\n     |           | ");
@@ -1257,7 +1257,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |     ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]    ");
 					rawOutputText("\n |   |   |   |     ");
-					rawOutputText("\n[ ] [ ]-[ ]-[ ] [P]");
+					rawOutputText("\n[S] [ ]-[ ]-[ ] [P]");
 					rawOutputText("\n     |   |   |   | ");
 					rawOutputText("\n    [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n     |           | ");
@@ -1383,11 +1383,11 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |   |       | ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [ ]");
 					rawOutputText("\n |       |       |         ");
-					rawOutputText("\n[ ]     [ ]-[ ]-[ ]-[ ]    ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
 				else if (DungeonAbstractContent.dungeonLoc == 136) {
 					rawOutputText(", Floor 3");
-					rawOutputText("\n                [ ]        ");
+					rawOutputText("\n                [S]        ");
 					rawOutputText("\n                 |         ");
 					rawOutputText("\n       -[ ]-[ ]-[P]        ");
 					rawOutputText("\n             |             ");
@@ -1395,11 +1395,11 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |   |       | ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [ ]");
 					rawOutputText("\n |       |       |         ");
-					rawOutputText("\n[ ]     [ ]-[ ]-[ ]-[ ]    ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
 				else if (DungeonAbstractContent.dungeonLoc == 137) {
 					rawOutputText(", Floor 3");
-					rawOutputText("\n                [ ]        ");
+					rawOutputText("\n                [S]        ");
 					rawOutputText("\n                 |         ");
 					rawOutputText("\n       -[ ]-[P]-[ ]        ");
 					rawOutputText("\n             |             ");
@@ -1407,11 +1407,11 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |   |       | ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [ ]");
 					rawOutputText("\n |       |       |         ");
-					rawOutputText("\n[ ]     [ ]-[ ]-[ ]-[ ]    ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
 				else if (DungeonAbstractContent.dungeonLoc == 138) {
 					rawOutputText(", Floor 3");
-					rawOutputText("\n                [ ]        ");
+					rawOutputText("\n                [S]        ");
 					rawOutputText("\n                 |         ");
 					rawOutputText("\n       -[P]-[ ]-[ ]        ");
 					rawOutputText("\n             |             ");
@@ -1419,11 +1419,11 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |   |       | ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [ ]");
 					rawOutputText("\n |       |       |         ");
-					rawOutputText("\n[ ]     [ ]-[ ]-[ ]-[ ]    ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
 				else if (DungeonAbstractContent.dungeonLoc == 139) {
 					rawOutputText(", Floor 3");
-					rawOutputText("\n                [ ]        ");
+					rawOutputText("\n                [S]        ");
 					rawOutputText("\n                 |         ");
 					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
 					rawOutputText("\n             |             ");
@@ -1431,11 +1431,11 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |   |       | ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [ ]");
 					rawOutputText("\n |       |       |         ");
-					rawOutputText("\n[ ]     [ ]-[ ]-[ ]-[ ]    ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
 				else if (DungeonAbstractContent.dungeonLoc == 140) {
 					rawOutputText(", Floor 3");
-					rawOutputText("\n                [ ]        ");
+					rawOutputText("\n                [S]        ");
 					rawOutputText("\n                 |         ");
 					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
 					rawOutputText("\n             |             ");
@@ -1443,7 +1443,255 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |           |   |       | ");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [ ]");
 					rawOutputText("\n |       |       |         ");
-					rawOutputText("\n[ ]     [ ]-[ ]-[ ]-[ ]    ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 141) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n                [S]        ");
+					rawOutputText("\n                 |         ");
+					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n             |             ");
+					rawOutputText("\n[ ]         [ ]-[P]-[ ]-[ ]");
+					rawOutputText("\n |           |   |       | ");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [ ]");
+					rawOutputText("\n |       |       |         ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 142) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n                [S]        ");
+					rawOutputText("\n                 |         ");
+					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n             |             ");
+					rawOutputText("\n[ ]         [P]-[ ]-[ ]-[ ]");
+					rawOutputText("\n |           |   |       | ");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [ ]");
+					rawOutputText("\n |       |       |         ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 143) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n                [S]        ");
+					rawOutputText("\n                 |         ");
+					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n             |             ");
+					rawOutputText("\n[P]         [ ]-[ ]-[ ]-[ ]");
+					rawOutputText("\n |           |   |       | ");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [ ]");
+					rawOutputText("\n |       |       |         ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 144) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n                [S]        ");
+					rawOutputText("\n                 |         ");
+					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n             |             ");
+					rawOutputText("\n[ ]         [ ]-[ ]-[ ]-[ ]");
+					rawOutputText("\n |           |   |       | ");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [P]");
+					rawOutputText("\n |       |       |         ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 145) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n                [S]        ");
+					rawOutputText("\n                 |         ");
+					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n             |             ");
+					rawOutputText("\n[ ]         [ ]-[ ]-[ ]-[ ]");
+					rawOutputText("\n |           |   |       | ");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [P]     [ ]");
+					rawOutputText("\n |       |       |         ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 146) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n                [S]        ");
+					rawOutputText("\n                 |         ");
+					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n             |             ");
+					rawOutputText("\n[ ]         [ ]-[ ]-[ ]-[ ]");
+					rawOutputText("\n |           |   |       | ");
+					rawOutputText("\n[ ]-[ ]-[ ]-[P] [ ]     [ ]");
+					rawOutputText("\n |       |       |         ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 147) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n                [S]        ");
+					rawOutputText("\n                 |         ");
+					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n             |             ");
+					rawOutputText("\n[ ]         [ ]-[ ]-[ ]-[ ]");
+					rawOutputText("\n |           |   |       | ");
+					rawOutputText("\n[ ]-[ ]-[P]-[ ] [ ]     [ ]");
+					rawOutputText("\n |       |       |         ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 148) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n                [S]        ");
+					rawOutputText("\n                 |         ");
+					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n             |             ");
+					rawOutputText("\n[ ]         [ ]-[ ]-[ ]-[ ]");
+					rawOutputText("\n |           |   |       | ");
+					rawOutputText("\n[ ]-[P]-[ ]-[ ] [ ]     [ ]");
+					rawOutputText("\n |       |       |         ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 149) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n                [S]        ");
+					rawOutputText("\n                 |         ");
+					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n             |             ");
+					rawOutputText("\n[ ]         [ ]-[ ]-[ ]-[ ]");
+					rawOutputText("\n |           |   |       | ");
+					rawOutputText("\n[P]-[ ]-[ ]-[ ] [ ]     [ ]");
+					rawOutputText("\n |       |       |         ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 150) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n                [S]        ");
+					rawOutputText("\n                 |         ");
+					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n             |             ");
+					rawOutputText("\n[ ]         [ ]-[ ]-[ ]-[ ]");
+					rawOutputText("\n |           |   |       | ");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [ ]");
+					rawOutputText("\n |       |       |         ");
+					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[P]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 151) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n                [S]        ");
+					rawOutputText("\n                 |         ");
+					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n             |             ");
+					rawOutputText("\n[ ]         [ ]-[ ]-[ ]-[ ]");
+					rawOutputText("\n |           |   |       | ");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [ ]");
+					rawOutputText("\n |       |       |         ");
+					rawOutputText("\n[S]     [ ]-[ ]-[P]-[ ]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 152) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n                [S]        ");
+					rawOutputText("\n                 |         ");
+					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n             |             ");
+					rawOutputText("\n[ ]         [ ]-[ ]-[ ]-[ ]");
+					rawOutputText("\n |           |   |       | ");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [ ]");
+					rawOutputText("\n |       |       |         ");
+					rawOutputText("\n[S]     [ ]-[P]-[ ]-[ ]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 153) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n                [S]        ");
+					rawOutputText("\n                 |         ");
+					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n             |             ");
+					rawOutputText("\n[ ]         [ ]-[ ]-[ ]-[ ]");
+					rawOutputText("\n |           |   |       | ");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [ ]");
+					rawOutputText("\n |       |       |         ");
+					rawOutputText("\n[S]     [P]-[ ]-[ ]-[ ]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 154) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n                [S]        ");
+					rawOutputText("\n                 |         ");
+					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n             |             ");
+					rawOutputText("\n[ ]         [ ]-[ ]-[ ]-[ ]");
+					rawOutputText("\n |           |   |       | ");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] [ ]     [ ]");
+					rawOutputText("\n |       |       |         ");
+					rawOutputText("\n[P]     [ ]-[ ]-[ ]-[ ]    ");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 155) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[P]-");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 156) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[P]-[ ]-");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 157) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [P]-[ ]-[ ]-");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 158) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[P] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[ ]-");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 159) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[P]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[ ]-");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 160) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n[ ]-[ ]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [P]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[ ]-");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 161) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n[ ]-[ ]-[ ]-[P] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[ ]-");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 162) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n[ ]-[ ]-[P]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[ ]-");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 163) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n[ ]-[P]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[ ]-");
+				}
+				else if (DungeonAbstractContent.dungeonLoc == 164) {
+					rawOutputText(", Floor 3");
+					rawOutputText("\n[P]-[ ]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[ ] ");
+					rawOutputText("\n     |   |   |  ");
+					rawOutputText("\n    [ ]-[ ]-[ ]-");
 				}
 			}
 			

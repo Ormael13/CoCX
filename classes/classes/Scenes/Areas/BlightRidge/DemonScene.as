@@ -803,7 +803,7 @@ import classes.Scenes.UniqueSexScenes;
 		
 		private function killDemon():void {
 			clearOutput();
-			flags[kFLAGS.IMPS_KILLED]++;
+			flags[kFLAGS.TRUE_DEMONS_KILLED]++;
 			outputText("You make a quick work of the ");
 			if (monster.short == "succubus") outputText("succubus");
 			if (monster.short == "incubus") outputText("incubus");

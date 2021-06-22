@@ -35,16 +35,16 @@ public class OnikiriSake extends Consumable {
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(3) == 0) changeLimit++;
-		if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+		if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
+		if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
+		if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
+		if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
+		if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
+		if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
+		if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
+		if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
+		if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
+		if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
 		//Temporary storage
 		var temp:Number = 0;
 		player.slimeFeed();
@@ -88,7 +88,7 @@ public class OnikiriSake extends Consumable {
 		if (changes < changeLimit && rand(3) == 0 && player.tone < player.maxToneCap()) {
 			outputText(player.modTone(player.maxToneCap(), 3));
 		}
-		if (game.mutations.blockingBodyTransformations()) changeLimit = 0;
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 		//Sexual changed
 		if ((player.gender == 1 || player.gender == 3) && player.cocks.length > 0 && changes < changeLimit && rand(3) == 0) {
 			var selectedCock:int = -1;

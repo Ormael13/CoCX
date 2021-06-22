@@ -1413,7 +1413,7 @@ import classes.lists.Gender;
 					dynStats("lib", 1);
 				}
 			}
-			if (CoC.instance.mutations.blockingBodyTransformations()) changeLimit = 0;
+			if (player.blockingBodyTransformations()) changeLimit = 0;
 			if (rand(3) == 0 && changes < changeLimit && player.cocks[player.smallestCockIndex()].length < 12) {
 				outputText("\n\nHeat funnels into your cock as the alcohol flushes through you. Reaching down to inspect it, you find it has grown longer.");
 				player.cocks[player.smallestCockIndex()].length++;

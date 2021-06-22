@@ -14,12 +14,12 @@ import classes.internals.*;
 public class SecretarialSuccubus extends AbstractSuccubus
 	{
 		public var factory:Factory = new Factory();
-		
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.gender > 0) {
 				var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? succubusGetsDildoed : null);
-				
+
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you rape her?", true);
 					player.dynStats("lus", 1);
@@ -87,9 +87,12 @@ public class SecretarialSuccubus extends AbstractSuccubus
 			this.wings.type = Wings.BAT_LIKE_TINY;
 			this.wings.desc = "tiny hidden";
 			this.tailType = Tail.DEMONIC;
-			this.special1 = kissAttack;
-			this.special2 = seduceAttack;
-			this.special3 = whipAttack;
+			this.abilities = [
+				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: kissAttack, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: seduceAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
+				{ call: whipAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]}
+			]
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();

@@ -5,8 +5,8 @@
 package classes.Items.WeaponsRange 
 {
 	import classes.Items.WeaponRange;
-import classes.PerkClass;
-import classes.PerkType;
+	import classes.PerkClass;
+	import classes.PerkType;
 	import classes.PerkLib;
 	import classes.Player;
 	

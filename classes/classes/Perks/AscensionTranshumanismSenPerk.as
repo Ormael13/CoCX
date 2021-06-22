@@ -13,12 +13,12 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_TRANSHUMANISM_SEN_LEVEL + ") Increases maximum Sen by " + params.value1 * 8 + ".";
+			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_TRANSHUMANISM_SEN_LEVEL + ") Increases Sen by " + params.value1 * 16 + ".";
 		}
 		
 		public function AscensionTranshumanismSenPerk() 
 		{
-			super("Ascension: Transhumanism (Sen)", "Ascension: Transhumanism (Sen)", "", "Increases maximum Sen by 40.");
+			super("Ascension: Transhumanism (Sen)", "Ascension: Transhumanism (Sen)", "", "Increases Sen by 16.");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean 

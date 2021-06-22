@@ -396,6 +396,12 @@ public class PerkLib
 		public static const VexedNocking:PerkType = mk("Vexed nocking", "Vexed nocking",
 				"Increase Power Attack/Shoot damage multiplier ratio from 1:2/5/10 to 1:4/10/20. Additional increase initial bonus to damage from 50 to 100%.",
 				"You've chosen the 'Vexed nocking' perk. Increase Power Attack/Shoot damage multiplier ratio from 1:2/5/10 to 1:4/10/20. Additional increase initial bonus to damage from 50 to 100%.");
+		public static const FlyingSwordPath:PerkType = mk("Flying Sword Path", "Flying Sword Path",
+				"Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)",
+				"You've chosen the 'Flying Sword Path' perk. Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)");
+		public static const SoaringBlades:PerkType = mk("Soaring Blades", "Soaring Blades",
+				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.",
+				"You've chosen the 'Soaring Blades' perk. Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -476,9 +482,6 @@ public class PerkLib
 				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
 				"You've chosen the '' perk, .");*/
 		public static const Acclimation:PerkType = mk("Acclimation", "Acclimation",
 				"Reduces lust gain by 15%.",
@@ -488,10 +491,10 @@ public class PerkLib
 				"You've chosen the 'Acolyte' perk, lowering min libido by 2 and rise lust resistance by 5%.");
 		public static const AdvancedAerialCombat:PerkType = mk("Advanced Aerial Combat", "Advanced Aerial Combat",
 				"You are trained to fight while in flight. (extend flight duration by 2 turns and increase evasion when flying by 5%)",
-				"You've chosen the 'Advanced Aerial Combat' perk, you trained to fight while in flight.");
+				"You've chosen the 'Advanced Aerial Combat' perk, you trained to fight while in flight. (extend flight duration by 2 turns and increase evasion when flying by 5%)");
 		public static const AdvancedAerobatics:PerkType = mk("Advanced Aerobatics", "Advanced Aerobatics",
 				"You understand the properties of wind resistance and aerodynamics nearly perfectly. (increase accuracy to melee/range attacks by 50% when flying)",
-				"You've chosen the 'Advanced Aerobatics' perk. You understand the properties of wind resistance and aerodynamics nearly perfectly.");
+				"You've chosen the 'Advanced Aerobatics' perk. You understand the properties of wind resistance and aerodynamics nearly perfectly. (increase accuracy to melee/range attacks by 50% when flying)");
 		public static const AdvancedAllRounderEducation:PerkType = mk("Advanced All-Rounder Education", "Advanced All-Rounder Education",
 				"Limit of advanced job you can learn is increased by 3.",
 				"You've chosen the 'Advanced All-Rounder Education' perk, expanding amount of advanced jobs you can learn. (+3)");
@@ -734,6 +737,9 @@ public class PerkLib
 		public static const BlessedByLadyGodiva:PerkType = mk("Blessed by Lady Godiva", "Blessed by Lady Godiva",
 				"Oh now she blesses you? As it's painfully obvious you have the Goddess of chance's favor... you get even more money upon victory... yay... (15% more gems from victories)",
 				"You've chosen the 'Blessed by Lady Godiva' perk, increasing gem gains from victories by 15%.");
+		public static const BlessingOfTheAncestorTree:PerkType = mk("Blessing of the ancestor tree", "Blessing of the ancestor tree",
+				"You have been 'blessed' by an elven ancestor tree and made into a true elf, binding your soul to the forest," +
+				" however you no longer have the ability to transform again. +50% Speed, +30% intelligence, +40% Libido +50 permanent corruption.").withBuffs({'spe.mult':0.5,'int.mult':0.3,'lib.mult':0.4});
 		public static const BodyCultivator:PerkType = mk("Body Cultivator", "Body Cultivator",
 				"Allow you to train your soul cultivator body to make it as tough as artifacts. (+1 to armor, +2 to unarmed attack, +100 max HP, +0.5% HP regen)",
 				"You've chosen the 'Body Cultivator' perk, starting journey on the body cultivators path! (+1 to armor, +2 to unarmed attack, +100 max HP, +0.5% HP regen)");
@@ -1219,6 +1225,22 @@ public class PerkLib
 				"You've chosen the 'Elements of the orthodox Path' perk, your time spent on studing elements allowing you to call those mentioned in more orthodox writings.");
 		public static const ElvenRangerArmor:PerkType = mk("Elven Ranger Armor", "Elven Ranger Armor",
 				"+50% to Bow and spear damage, Count as naked, Slutty seduction +8.");
+		public static const ELFArcherCovenant:PerkType = mk("Archer Covenant", "Archer Covenant",
+				"As an elf, gain a 25% increase to bow damage when not wielding a shield or a melee weapon other than a Spear.");
+		public static const ELFMasterShot:PerkType = mk("Master Shot", "Master Shot",
+				"As an elf, add one extra attack to archery full attacks.");
+		public static const ELFElvenBattleStyle:PerkType = mk("Elven Battle Style", "Elven Battle Style",
+				"As an elf, substitute your strenght to your intelligence modifier for spear damage when full attacking.");
+		public static const ELFElvenSpearDancingFlurry:PerkType = mk("Elven Spear Dancing Flurry", "Elven Spear Dancing Flurry",
+				"As an elf add 1 extra attacks when full attacking using a one handed or two handed spear with no shield equipped. and increase spear damage by 20% when full attacking.");
+		public static const ELFElvenSpearDancingFlurryII:PerkType = mk("Elven Spear Dancing Flurry II", "Elven Spear Dancing Flurry II",
+				"As an elf add 2 extra attacks when full attacking using a one handed or two handed spear with no shield equipped. and increase spear damage by 20% when full attacking.");
+		public static const ELFElvenSpearDancingFlurryIII:PerkType = mk("Elven Spear Dancing Flurry III", "Elven Spear Dancing Flurry III",
+				"As an elf add 3 extra attacks when full attacking using a one handed or two handed spear with no shield equipped. and increase spear damage by 20% when full attacking.");
+		public static const ELFElvenSpearDancingFlurryIV:PerkType = mk("Elven Spear Dancing Flurry IV", "Elven Spear Dancing Flurry IV",
+				"As an elf add 4 extra attacks when full attacking using a one handed or two handed spear with no shield equipped. and increase spear damage by 20% when full attacking.");
+		public static const ELFElvenSpearDancingTechnique:PerkType = mk("Elven Spear Dancing Technique", "Elven Spear Dancing Technique",
+				"As an elf, deal additional tease damage based on your speed while wielding a spear.");
 		public static const ElvishPeripheralNervSys:PerkType = mk("Elvish Peripheral NervSys", "Elvish Peripheral NervSys",
 				"Your Elvish Peripheral NervSys is giving you +5% of max core Spe as phantom Spe and allow to keep Elven Sense even without elf arms/legs.",
 				"You've chosen the 'Elvish Peripheral NervSys' perk, due to repeadly balancing on line between life and death your peripheral nervous system started to work like that of elfs.");
@@ -1226,8 +1248,8 @@ public class PerkLib
 				"Your Elvish Peripheral NervSys is giving you +10% of max core Spe as phantom Spe.",
 				"You've chosen the 'Elvish Peripheral NervSys (Evolved)' perk, your peripheral nervous system continue subtile changes leading to be more elf-like.").withBuffs({'spe.mult':0.05});
 		public static const ElvishPeripheralNervSysFinalForm:PerkType = mk("Elvish Peripheral NervSys (Final Form)", "Elvish Peripheral NervSys (Final Form)",
-				"Your Elvish Peripheral NervSys is giving you +15% of max core Spe as phantom Spe, increase your natural evasion, decrease melee/range accuracy penalty when using multiattack options.",
-				"You've chosen the 'Elvish Peripheral NervSys (Final Form)' perk, your peripheral nervous system reached it final changes to reassamble elvish peripheral nervous system.").withBuffs({'spe.mult':0.05});
+				"Your Elvish Peripheral NervSys is giving you +15% of max core Spe as phantom Spe, increase your natural evasion, decrease melee/range accuracy penalty when using multiattack options. Furthermore elven signature abilities will keep working weither you are a full blooded elf or not.",
+				"You've chosen the 'Elvish Peripheral NervSys (Final Form)' perk, your peripheral nervous system reached it final changes to reassamble elvish peripheral nervous system. Furthermore elven signature abilities will keep working weither you are a full blooded elf or not.").withBuffs({'spe.mult':0.05});
 		public static const Embodiment:PerkType = mk("Embodiment", "Embodiment",
 				"You embody the principles of the monks... as usual you should only expect the 10% soulforce gain.",
 				"You've chosen the 'Embodiment' perk, gaining +10% max Soulforce.");
@@ -2688,13 +2710,13 @@ public class PerkLib
 				"You've chosen the 'Saint' perk, lowering min libido by 2 and rise lust resistance by 5%.");
 		public static const SalamanderAdrenalGlands:PerkType = mk("Salamander Adrenal Glands", "Salamander Adrenal Glands",
 				"Your Salamander adrenal glands are giving you slight boost to your natural stamina and libido.",
-				"You've chosen the 'Salamander Adrenal Glands' perk, due to repeadly exposure to effects of lustzerk your adrenal glands mutated.").withBuffs({'tou.mult':0.5,'lib.mult':0.5});
+				"You've chosen the 'Salamander Adrenal Glands' perk, due to repeadly exposure to effects of lustzerk your adrenal glands mutated.").withBuffs({'tou.mult':0.05,'lib.mult':0.05});
 		public static const SalamanderAdrenalGlandsEvolved:PerkType = mk("Salamander Adrenal Glands (Evolved)", "Salamander Adrenal Glands (Evolved)",
 				"Your Salamander adrenal glands are giving you slight boost to your natural strength, stamina, speed and libido and extend lustzerker and berserker duration by 2 turns.",
-				"You've chosen the 'Salamander Adrenal Glands (Evolved)' perk, repeadly use of lustzerk caused your adrenal glands mutate even more.").withBuffs({'str.mult':0.5,'tou.mult':0.5,'spe.mult':0.5,'lib.mult':0.5});
+				"You've chosen the 'Salamander Adrenal Glands (Evolved)' perk, repeadly use of lustzerk caused your adrenal glands mutate even more.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'lib.mult':0.05});
 		public static const SalamanderAdrenalGlandsFinalForm:PerkType = mk("Salamander Adrenal Glands (Final Form)", "Salamander Adrenal Glands (Final Form)",
 				"Your Salamander adrenal glands are giving you slight boost to your natural strength, stamina, speed, libido; double bonus to attack, boost slight natural wrath generation rate, extend berserking/lustzerking by 8 turns and enable to start with one or both of them.",
-				"You've chosen the 'Salamander Adrenal Glands (Final Form)' perk, repeadly use of lustzerk caused your adrenal glands mutate for the third time.").withBuffs({'str.mult':0.15,'tou.mult':0.05,'spe.mult':0.15,'lib.mult':0.5});
+				"You've chosen the 'Salamander Adrenal Glands (Final Form)' perk, repeadly use of lustzerk caused your adrenal glands mutate for the third time.").withBuffs({'str.mult':0.15,'tou.mult':0.05,'spe.mult':0.15,'lib.mult':0.05});
 		public static const Saturation:PerkType = mk("Saturation", "Saturation",
 				"Using your advanced knowledge, you soak each transformative in a special liquid to enhance their effects +1 effect.",
 				"You've chosen the 'Saturation' perk, number of possible effects of transformatives +1.");
@@ -3166,6 +3188,8 @@ public class PerkLib
 		public static const VampiricBloodsteamFinalForm:PerkType = mk("Vampiric Bloodsteam (Final Form)", "Vampiric Bloodsteam (Final Form)",
 				"Your bloodsteam fully adapted to presence of vampiric blood. Increases the maximum numbers of stacks of Vampire Thirst by 60 and increase their potency by 50%.",
 				"You've chosen the 'Vampiric Bloodsteam (Final Form)' perk. Your bloodsteam fully adapted to presence of vampiric blood. Increases the maximum numbers of stacks of Vampire Thirst by 60 and increase their potency by 50%.").withBuffs({'lib.mult':0.15});
+		public static const Venomancy:PerkType = mk("Venomancy", "Venomancy",
+				"Grants the Venomancy ability. While active, apply venom effect to spellcasting the venom benefiting from caster perks multipliers but cost a charge each time.")
 		public static const VenomGlands:PerkType = mk("Venom Glands", "Venom Glands",
 				"Your body possesses rudimentary venom glands along with changes in teeth to been able use this venom when biting.",
 				"You've chosen the 'Venom Glands' perk. Your body possesses rudimentary venom glands along with changes in teeth to been able use this venom when biting.").withBuffs({'tou.mult':0.05});
@@ -3187,6 +3211,8 @@ public class PerkLib
 		public static const WalpurgisIzaliaRobe:PerkType = mk("Walpurgis Izalia Robe", "Walpurgis Izalia Robe",
 				"Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.",
 				"Increase fire damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
+		public static const IceQueenGown:PerkType = mk("Ice Queen Gown", "Ice Queen Gown",
+				"Freeze the heart of the wielder and grant a weakness to fire and a resistance to ice but double cold and light damage. A yuki onna also gains greater regeneration and the black frost aura.");
 		public static const WarCaster:PerkType = mk("War caster", "War caster",
 				"Increases magical and physical critical chance by up to 25% based on intelligence.",
 				"You've chosen the 'War caster' perk, increasing magical and physical critical chance by up to 25% based on intelligence.");
@@ -3329,6 +3355,8 @@ public class PerkLib
 		public static const SeersInsight:SeersInsightPerk = new SeersInsightPerk();
 		public static const ScandalousSuccubusClothing:PerkType = mk("Scandalous Succubus Clothing", "Scandalous Succubus Clothing",
 				"Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.",null,true);
+		public static const SkullOrnament:PerkType = mk("Skull hair ornament", "Skull hair ornament",
+				"Raise magic damage by up to 60% based on user corruption.",null,true);
 		public static const SluttySeduction:SluttySeductionPerk = new SluttySeductionPerk();
 		public static const WellspringOfLust:PerkType = mk("Wellspring of Lust", "Wellspring of Lust",
 				"At the beginning of combat, gain lust up to black magic threshold if lust is bellow black magic threshold.",null,true);
@@ -3365,7 +3393,7 @@ public class PerkLib
 				"Pregnancy moves twice as fast as a normal woman's.");
 		public static const SpellcastingAffinity:SpellcastingAffinityPerk = new SpellcastingAffinityPerk();
 		public static const Cultivation:PerkType = mk("Cultivation", "Cultivation",
-				"Allow to cultivate powers of the soul.",
+				"Allow to cultivate powers of the soul.",//nigdzie nieużyty wcześniej perk name
 				"You've chosen the 'Cultivation' perk, starting your journey on the soul cultivation path!");//potem przerobić na coć innego - moze jak perki do czarów i łuku bedzie dawać jakieś korzyści do soul skills po odpowiednio dużej ilości ich użycia czy cos xD
 
 		// Hidden/Deity Jobs perks
@@ -3425,6 +3453,15 @@ public class PerkLib
 				"Allows access to a cave wyrm acid spit attack.");
 		public static const AlrauneNectar:PerkType = mk("Alraune Nectar", "Alraune Nectar",
 				"You yourself produce an endless supply of alraune nectar.");
+		public static const ArachnidBookLung:PerkType = mk("Arachnid Book Lung", "Arachnid Book Lung",
+				"Increase the amount of web and poison generated by 100%.",
+				"You've chosen the 'Arachnid Book Lung' perk. Increase the amount of web and poison generated by 100%.").withBuffs({'int.mult':0.05});
+		public static const ArachnidBookLungEvolved:PerkType = mk("Arachnid Book Lung (Evolved)", "Arachnid Book Lung (Evolved)",
+				"Increase the amount of web and poison generated by an additional 100% and increase the effectiveness of all Web abilities by half.",
+				"You've chosen the 'Arachnid Book Lung Evolved' perk. Increase the amount of web and poison generated by an additional 100% and increase the effectiveness of all Web abilities by half.").withBuffs({'int.mult':0.10});
+		public static const ArachnidBookLungFinalForm:PerkType = mk("Arachnid Book Lung (Final Form)", "Arachnid Book Lung (Final Form)",
+				"Increase the amount of web and poison generated by an additional 100%, increase the effectiveness of all Web abilities by half. Web abilities have a 50% chance to immobilize opponents for 2 rounds when used as the opponent struggles to get free. ",
+				"You've chosen the 'Arachnid Book Lung Final Form' perk. Increase the amount of web and poison generated by an additional 100%, increase the effectiveness of all Web abilities by half. Web abilities have a 50% chance to immobilize opponents for 2 rounds when used as the opponent struggles to get free. ").withBuffs({'int.mult':0.15});
 		public static const AzureflameBreath:PerkType = mk("Azureflame Breath", "Azureflame Breath",
 				"Allows access to a cave wyrm azureflame breath attack.");
 		public static const Androgyny:PerkType = mk("Androgyny", "Androgyny",
@@ -3490,6 +3527,8 @@ public class PerkLib
 				"Allows access to a dragon ice breath attack.");
 		public static const DragonLightningBreath:PerkType = mk("Dragon lightning breath", "Dragon lightning breath",
 				"Allows access to a dragon lightning breath attack.");
+		public static const DragonWaterBreath:PerkType = mk("Dragon water breath", "Dragon water breath",
+				"Allows access to a sea dragon water breath attack. Mixing water with electricity may yield surprising results.");
 		public static const EasterBunnyBalls:PerkType = mk("Easter bunny balls", "Easter bunny balls",
 				"Your balls constantly grows until emptied through your cock, producing eggs.");
 		public static const ElectrifiedDesire:PerkType = mk("Electrified Desire", "Electrified Desire",
@@ -3556,13 +3595,17 @@ public class PerkLib
 		public static const IcyFlesh:PerkType = mk("Icy flesh", "Icy flesh",
 				"You are about as frigid and dead as a corpse however your mastery of ice magic grants you the ability to harden your flesh to the durability of diamonds. Gain an intelligence modifier as a bonus to health calculation equal to that of toughness as well as 1% regeneration. Gain an extra 40% resistance to cold.");
 		public static const ImprovedVenomGland:PerkType = mk("Improved venom gland", "Improved venom gland",
-				"Increase your venom max capacity and refill speed.");
+				"Increase slightly your venom max capacity and refill speed.");
+		public static const ImprovedVenomGlandEx:PerkType = mk("Improved venom gland (Ex)", "Improved venom gland (Ex)",
+				"Increase your venom max capacity and refill speed. Decrease by 25% costs of specials/passives that req. use of venom/web.");
+		public static const ImprovedVenomGlandSu:PerkType = mk("Improved venom gland (Su)", "Improved venom gland (Su)",
+				"Increase slightly your venom max capacity and refill speed.");
 		public static const Incorporeality:PerkType = mk("Incorporeality", "Incorporeality",
 				"Allows you to fade into a ghost-like state and temporarily possess others.");
 		public static const InkSpray:PerkType = mk("Ink Spray", "Ink Spray",
 				"Allows you to shoot blinding and probably slightly arousing ink out of your genitalia similar like octopus.");
 		public static const Insanity:PerkType = mk("Insanity", "Insanity",
-				".");
+				"You have become immune to anything that would damage your mind and gained increased insight however your unhinged personality greatly weakens your wisdom.").withBuffs({'int.mult':0.20,'wis.mult':-0.40});
 		public static const JunglesWanderer:PerkType = mk("Jungle’s Wanderer", "Jungle’s Wanderer",
 				"Your nimble body has adapted to moving through jungles and forests, evading enemy attacks with ease and making yourself harder to catch. (+35 to the Evasion percentage)");
 		public static const KitsuneEnergyThirst:PerkType = mk("Kitsune hunger", "Kitsune hunger",
@@ -3632,6 +3675,8 @@ public class PerkLib
 				"Grants more control over your slimy body, allowing you to go twice as long without fluids.");
 		public static const SpiderOvipositor:PerkType = mk("Spider Ovipositor", "Spider Ovipositor",
 				"Allows you to lay eggs through a special organ on your arachnid abdomen, though you need at least 10 eggs to lay.");
+		public static const StrengthOfStone:PerkType = mk("Strenght of stone", "Strenght of stone",
+				"Add half of the gargoyle toughness as a bonus to strength.");
 		public static const SuperStrength:PerkType = mk("Super strength", "Super strength",
 				"Unarmed strike damage modifier from strength is doubled.");
 		public static const ThickSkin:PerkType = mk("Thick Skin", "Thick Skin",
@@ -3658,6 +3703,7 @@ public class PerkLib
 				"Allows to form 2 people party.");
 		public static const BasiliskResistance:PerkType = mk("Basilisk Resistance", "Basilisk Resistance",
 				"Grants immunity to Basilisk's paralyzing gaze. Disables Basilisk Bad End.");
+		public static const BodyTempering:BodyTemperingPerk = new BodyTemperingPerk();
 		public static const BulgeArmor:PerkType = mk("Bulge Armor", "Bulge Armor",
 				"Grants a 5 point damage bonus to dick-based tease attacks.");
 		public static const Cornucopia:PerkType = mk("Cornucopia", "Cornucopia",
@@ -3738,8 +3784,13 @@ public class PerkLib
 				"Your sensual attitude towards love and romance makes your tease ability slightly more effective.");
 		public static const SoulSense:PerkType = mk("Soul Sense", "Soul Sense",
 				"Your strong affinity toward soullforce helped to denvelop another sense called 'Soul Sense' by a fellow soul cultivators.");
-		public static const TransformationImmunity:PerkType = mk("Transformation immunity", "Transformation Immunity",
+		public static const SoulTempering:SoulTemperingPerk = new SoulTemperingPerk();
+		public static const TransformationImmunity:PerkType = mk("Construct Transformation immunity", "Construct Transformation Immunity",
 				"As a magical construct you are immune to all effects that change the body of living beings, including most transformatives on Mareth (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
+		public static const TransformationImmunityAtlach:PerkType = mk("Atlach Nacha Transformation immunity", "Eldritch Transformation Immunity",
+				"Your body is far too warped by eldritch powers to be transformed into anything else (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
+		public static const TransformationImmunityFairy:PerkType = mk("Fae Transformation immunity", "Fae Transformation Immunity",
+				"Fae magic has turned you into a full fairy, lacking a normal human constitution you have become immune to transformations (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
 		public static const TrollResistance:PerkType = mk("Troll Resistance", "Troll Resistance",
 				"Your troll hide grants you protection from magical effects. (Increases magic resist by 15% (fire resist by 7,5%))");
 		public static const Undeath:PerkType = mk("Undeath", "Undeath",
@@ -3783,7 +3834,7 @@ public class PerkLib
 		public static const FireVulnerability:PerkType = mk("Fire Vulnerability", "Fire Vulnerability", "");
 		public static const IceNature:PerkType = mk("Ice Nature", "Ice Nature", "");
 		public static const IceVulnerability:PerkType = mk("Ice Vulnerability", "Ice Vulnerability", "");
-		public static const LightningNature:PerkType = mk("Lightning Nature", "Lightning Nature", "");//NYU
+		public static const LightningNature:PerkType = mk("Lightning Nature", "Lightning Nature", "");
 		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");
 		public static const MonsterRegeneration:PerkType = mk("Monster Regeneration", "Monster Regeneration", "");
 		public static const NoGemsLost:PerkType = mk("No Gems Lost", "No Gems Lost", "");
@@ -5826,7 +5877,9 @@ public class PerkLib
             DaoistCultivator.requirePerk(JobSoulCultivator);
             //HeartCultivator.requirePerk(JobSoulCultivator);		//psionic/min powers cultivation/psion class from D&D?
             //requirePerk(JobSoulCultivator)		//allowing to use soulforce options more times per day - 1/2/3 time more?
-            //requirePerk(JobSoulCultivator)		//allowing to use soul artifacts - new slot?
+            FlyingSwordPath.requirePerk(JobSoulCultivator);
+			SoaringBlades.requirePerk(Dantain)
+					.requirePerk(FlyingSwordPath);
             //Tier 1
             SoulApprentice.requireWis(20)
                     .requireLevel(6)
@@ -5870,7 +5923,8 @@ public class PerkLib
             //Tier 4
             SoulSprite.requireLevel(24)
                     .requirePerk(SoulWarrior)
-                    .requireWis(80); // && requirePerk(HclassHeavenTribulationSurvivor)
+					.requirePerk(HclassHeavenTribulationSurvivor)
+                    .requireWis(80);
             FleshBodyWarriorStage.requireLevel(24)
                     .requirePerk(FleshBodyApprenticeStage);
             DaoistWarriorStage.requireLevel(24)
@@ -5886,7 +5940,7 @@ public class PerkLib
             //Tier 7
             SoulExalt.requirePerk(SoulElder)
                     .requireWis(140)
-                    .requireLevel(42);// && requirePerk(GclassHeavenTribulationSurvivor)
+                    .requireLevel(42);//.requirePerk(GclassHeavenTribulationSurvivor)
             FleshBodyElderStage.requireLevel(42)
                     .requirePerk(FleshBodyWarriorStage);
             DaoistElderStage.requireLevel(42)
@@ -5902,7 +5956,7 @@ public class PerkLib
             //Tier 10
      /*		SoulKing.requirePerk(SoulTyrant)
                     .requireWis(200)
-                    .requireLevel(60);
+                    .requireLevel(60);//.requirePerk(FclassHeavenTribulationSurvivor)
             FleshBodyOverlordStage.requireLevel(60)
                     .requirePerk(FleshBodyElderStage);
             DaoistOverlordStage.requireLevel(60)
@@ -5919,6 +5973,9 @@ public class PerkLib
             // MISCELLANEOUS
             //------------
             //Tier 0
+			ArachnidBookLung.requireLungsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+				return player.spiderScore() >= 5 || player.atlachNachaScore() >= 5;
+			}, "Arachnid race");
             BlackHeart.requireHeartMutationSlot().requirePerk(DarkCharm).requireCor(100).requireCustomFunction(function (player:Player):Boolean {
                 return player.demonScore() >= 5;
             }, "Demon race");
@@ -5930,22 +5987,22 @@ public class PerkLib
 			}, "Displacer beast");
 			DraconicBones.requireBonesAndMarrowMutationSlot()
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.arms.type == Arms.DRAGON || player.arms.type == Arms.FROSTWYRM);
+                return (player.arms.type == Arms.DRAGON || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.SEADRAGON);
 				}, "Dragon race or its variants arms")
 				.requireCustomFunction(function (player:Player):Boolean {
                 return (LowerBody.hasDraconicLegs(player));
 				}, "Dragon race or its variants legs")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.tailType == Tail.DRACONIC || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
+                return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
 				}, "Dragon race or its variants tail")
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10);
+                return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
             }, "Dragon race or its variants");
 			DraconicHeart.requireHeartMutationSlot()
                 .requirePerk(DraconicBones)
                 .requireAnyPerk(DraconicLungs, DrakeLungs)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10);
+                return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
             }, "Dragon race or its variants");
 			DraconicLungs.requireLungsMutationSlot()
 				.requirePerk(DragonFireBreath)
@@ -5954,9 +6011,9 @@ public class PerkLib
                 .requirePerk(DragonDarknessBreath).requireCustomFunction(function (player:Player):Boolean {
                 return (player.dragonScore() >= 8);
             }, "Dragon race");
-			DrakeLungs.requireLungsMutationSlot().requireAnyPerk(DragonFireBreath, DragonIceBreath, DragonLightningBreath, DragonDarknessBreath)
+			DrakeLungs.requireLungsMutationSlot().requireAnyPerk(DragonFireBreath, DragonIceBreath, DragonLightningBreath, DragonDarknessBreath, DragonWaterBreath)
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.frostWyrmScore() >= 10 || player.jabberwockyScore() >= 10 || player.vouivreScore() >= 11);
+                return (player.frostWyrmScore() >= 10 || player.jabberwockyScore() >= 10 || player.vouivreScore() >= 11 || player.leviathanScore() >= 20);
             }, "Variants of the dragon race");
 			EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
@@ -5965,7 +6022,7 @@ public class PerkLib
 				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
 			}, "Unicorn or Bicorn race");
 			ElvishPeripheralNervSys.requirePerk(ElvenSense).requireCustomFunction(function (player:Player):Boolean {
-                return player.elfScore() >= 4;
+                return player.elfScore() >= 4 || player.woodElfScore() >= 17;
             }, "Elf race");
 			FeyArcaneBloodstream.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.fairyScore() >= 20;
@@ -6074,7 +6131,7 @@ public class PerkLib
                 return player.scyllaScore() >= 5;
             }, "Scylla race");
             TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
-                return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4 || player.cancerScore() >= 4;
+                return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4 || player.cancerScore() >= 4 || player.atlachNachaScore() >= 17;
             }, "Any insect race");
             TwinHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.centaurScore() >= 4 || player.unicornScore() >= 8 || player.sphinxScore() >= 15 || player.cancerScore() >= 8;
@@ -6092,7 +6149,7 @@ public class PerkLib
                 return player.spiderScore() >= 4 || player.nagaScore() >= 4 || player.gorgonScore() >= 4 || player.vouivreScore() >= 4 || player.couatlScore() >= 4 || player.hydraScore() >= 4;
             }, "Spider or any snake-like race");
 			WhaleFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-				return player.orcaScore() >= 6;
+				return player.orcaScore() >= 6 || player.leviathanScore() >= 20;
 			}, "Orca race");
 			YetiFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.yetiScore() >= 14;
@@ -6135,7 +6192,7 @@ public class PerkLib
 			AerialCombat.requireStr(20)
 					.requireSpe(20)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.canFly();
+                        return player.canFly() || player.canFlyNoWings();
                     }, "Can fly");
             IronStomach.requireHungerEnabled();
             JobLeader.requireInt(10)
@@ -6143,6 +6200,11 @@ public class PerkLib
             Motivation.requirePerk(JobLeader)
 					.requirePerk(BasicLeadership);
             //Tier 1
+			ArachnidBookLungEvolved.requireLevel(6)
+				.requirePerk(ArachnidBookLung)
+				.requireCustomFunction(function (player:Player):Boolean {
+				return player.spiderScore() >= 9 || player.atlachNachaScore() >= 9;
+			}, "Arachnid race");
             BlackHeartEvolved.requireLevel(6)
 				.requirePerk(BlackHeart)
 				.requireCor(100)
@@ -6208,7 +6270,7 @@ public class PerkLib
                 return player.scyllaScore() >= 10;
             }, "Scylla race");*/
             TrachealSystemEvolved.requireLevel(6).requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
-                return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8 || player.cancerScore() >= 8;
+                return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8 || player.cancerScore() >= 8 || player.atlachNachaScore() >= 17;
             }, "Any insect race");
             TwinHeartEvolved.requireLevel(6)
 				.requirePerk(TwinHeart)
@@ -6358,14 +6420,14 @@ public class PerkLib
                     .requirePerk(DraconicHeart)
                     .requireAnyPerk(DraconicLungs, DrakeLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12);
+						return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12 || player.leviathanScore() >= 20);
             }, "Dragon race or its variants");
 			DraconicHeartEvolved.requireLevel(12)
                     .requirePerk(DraconicBones)
                     .requirePerk(DraconicHeart)
                     .requireAnyPerk(DraconicLungs, DrakeLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12);
+						return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12 || player.leviathanScore() >= 20);
             }, "Dragon race or its variants");
 			DraconicLungsEvolved.requireLevel(12)
                     .requirePerk(DraconicBones)
@@ -6376,7 +6438,7 @@ public class PerkLib
             }, "Dragon race");
 			DrakeLungsEvolved.requireLevel(12).requirePerk(DrakeLungs)
                     .requireCustomFunction(function (player:Player):Boolean {
-						return (player.frostWyrmScore() >= 12 || player.jabberwockyScore() >= 12 || player.vouivreScore() >= 12);
+						return (player.frostWyrmScore() >= 12 || player.jabberwockyScore() >= 12 || player.vouivreScore() >= 12 || player.leviathanScore() >= 20);
             }, "Variants of the dragon race");
 			EasterBunnyEggBagEvolved.requireLevel(12).requirePerk(EasterBunnyEggBag).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
@@ -6385,7 +6447,7 @@ public class PerkLib
 				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
 			}, "Unicorn or Bicorn race");
 			ElvishPeripheralNervSysEvolved.requireLevel(12).requirePerk(ElvishPeripheralNervSys).requireCustomFunction(function (player:Player):Boolean {
-                return player.elfScore() >= 8;
+                return player.elfScore() >= 8 || player.woodElfScore() >= 17;
             }, "Elf race");
 			HollowFangsEvolved.requireLevel(12).requirePerk(HollowFangs)
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -6436,10 +6498,10 @@ public class PerkLib
                 return player.vampireScore() >= 8;//potem dodać mosquito race i ew. inne co mogą wypijać krew
             }, "Vampire race");
 			VenomGlandsEvolved.requireLevel(12).requirePerk(VenomGlands).requireCustomFunction(function (player:Player):Boolean {
-                return player.spiderScore() >= 8 || player.nagaScore() >= 6 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
+                return player.spiderScore() >= 8 || player.atlachNachaScore() >= 17 || player.nagaScore() >= 6 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
             }, "Spider or any snake-like race");
 			WhaleFatEvolved.requireLevel(12).requirePerk(WhaleFat).requireCustomFunction(function (player:Player):Boolean {
-				return player.orcaScore() >= 9;
+				return player.orcaScore() >= 9 || player.leviathanScore() >= 20;
 			}, "Orca race");
 			YetiFatEvolved.requireLevel(12).requirePerk(YetiFat).requireCustomFunction(function (player:Player):Boolean {
 				return player.yetiScore() >= 15;
@@ -6647,6 +6709,11 @@ public class PerkLib
 					.requireStr(10)
 					.requireSpe(10);
             //Tier 4
+			ArachnidBookLungFinalForm.requireLevel(24)
+					.requirePerk(ArachnidBookLungEvolved)
+					.requireCustomFunction(function (player:Player):Boolean {
+						return player.spiderScore() >= 9 || player.atlachNachaScore() >= 9;
+					}, "Arachnid race");
             BlackHeartFinalForm.requireLevel(24)
 				.requirePerk(BlackHeartEvolved)
 				.requireCor(100)
@@ -6676,7 +6743,7 @@ public class PerkLib
 					return player.devilkinScore() >= 14;
             }, "Devil race");
             TrachealSystemFinalForm.requireLevel(24).requirePerk(TrachealSystemEvolved).requireCustomFunction(function (player:Player):Boolean {
-                return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12 || player.cancerScore() >= 12;
+                return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12 || player.cancerScore() >= 12 || player.atlachNachaScore() >= 17;
             }, "Any insect race");
             TwinHeartFinalForm.requireLevel(24)
 				.requirePerk(TwinHeartEvolved)
@@ -6684,10 +6751,10 @@ public class PerkLib
 					return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.sphinxScore() >= 17 || player.cancerScore() >= 12;
             }, "Tauric or Unicorn race");
 			VenomGlandsFinalForm.requireLevel(24).requirePerk(VenomGlandsEvolved).requireCustomFunction(function (player:Player):Boolean {
-                return player.spiderScore() >= 12 || player.nagaScore() >= 8 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
+                return player.spiderScore() >= 12 || player.atlachNachaScore() >= 17 || player.nagaScore() >= 8 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
             }, "Spider or any snake-like race");
 			WhaleFatFinalForm.requireLevel(24).requirePerk(WhaleFatEvolved).requireCustomFunction(function (player:Player):Boolean {
-				return player.orcaScore() >= 12;
+				return player.orcaScore() >= 12 || player.leviathanScore() >= 20;
 			}, "Orca race");
 			YetiFatFinalForm.requireLevel(24).requirePerk(YetiFatEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.yetiScore() >= 16;
@@ -6796,14 +6863,14 @@ public class PerkLib
                 .requirePerk(DraconicHeartEvolved)
                 .requireAnyPerk(DraconicLungsEvolved, DrakeLungsEvolved)
                 .requireCustomFunction(function (player:Player):Boolean {
-					return (player.dragonScore() >= 16 || player.frostWyrmScore() >= 15);
+					return (player.dragonScore() >= 16 || player.frostWyrmScore() >= 15 || player.leviathanScore() >= 20);
             }, "Dragon race or its variants");
 			DraconicHeartFinalForm.requireLevel(30)
                 .requirePerk(DraconicBonesEvolved)
                 .requirePerk(DraconicHeartEvolved)
                 .requireAnyPerk(DraconicLungsEvolved, DrakeLungsEvolved)
                 .requireCustomFunction(function (player:Player):Boolean {
-					return (player.dragonScore() >= 16 || player.jabberwockyScore() >= 16 || player.frostWyrmScore() >= 15);
+					return (player.dragonScore() >= 16 || player.jabberwockyScore() >= 16 || player.frostWyrmScore() >= 15 || player.leviathanScore() >= 20);
             }, "Dragon race or its variants");
 			DraconicLungsFinalForm.requireLevel(30)
                 .requirePerk(DraconicBonesEvolved)
@@ -6814,7 +6881,7 @@ public class PerkLib
             }, "Dragon race");
 			DrakeLungsFinalForm.requireLevel(30).requirePerk(DrakeLungsEvolved)
                  .requireCustomFunction(function (player:Player):Boolean {
-					return (player.frostWyrmScore() >= 15 || player.jabberwockyScore() >= 15 || player.vouivreScore() >= 13);
+					return (player.frostWyrmScore() >= 15 || player.jabberwockyScore() >= 15 || player.vouivreScore() >= 13 || player.leviathanScore() >= 20);
             }, "Variants of the dragon race");
 			EasterBunnyEggBagFinalForm.requireLevel(30).requirePerk(EasterBunnyEggBagEvolved).requireCustomFunction(function (player:Player):Boolean {
 				return player.easterbunnyScore() >= 12;
@@ -6823,7 +6890,7 @@ public class PerkLib
 				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
 			}, "Unicorn or Bicorn race");
 			ElvishPeripheralNervSysFinalForm.requireLevel(30).requirePerk(ElvishPeripheralNervSysEvolved).requireCustomFunction(function (player:Player):Boolean {
-                return player.elfScore() >= 12;
+                return player.elfScore() >= 12 || player.woodElfScore() >= 17;
             }, "Elf race");
 			HollowFangsFinalForm.requireLevel(30).requirePerk(HollowFangsEvolved)
 				.requireCustomFunction(function (player:Player):Boolean {

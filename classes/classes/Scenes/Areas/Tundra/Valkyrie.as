@@ -71,7 +71,7 @@ public class Valkyrie extends Monster
 			else
 			{
 				outputText("but you leave yourself vulnerable as she spins around and slams her heavy shield into you, knocking you ");
-				if (player.findPerk(PerkLib.Resolute) < 0 && rand(2) == 0) 
+				if (!player.hasPerk(PerkLib.Resolute) && rand(2) == 0)
 				{
 					outputText("off balance. ");
 					player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
@@ -162,10 +162,14 @@ public class Valkyrie extends Monster
 					.add(null, 15);
 			this.wings.type = Wings.HARPY;
 			this.wings.desc = "fluffy feathery";
-			this.special1 = spearAttack;
-			this.special2 = shieldBash;
-			this.special3 = aerialRave;
+			this.abilities = [
+				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: spearAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
+				{call: shieldBash, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
+				{call: aerialRave, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
+			];
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.Flying,50,0,0,0);
 			checkMonster();			
 		}
 		

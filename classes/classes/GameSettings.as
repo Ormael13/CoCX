@@ -51,23 +51,23 @@ public class GameSettings extends BaseContent {
 		else outputText("Debug Mode: <font color=\"#800000\"><b>OFF</b></font>\n Items consumption will occur as normal.");
 		outputText("\n\n");
 		if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) {
-			outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent stats modifiers. You can resume from bad-ends with penalties.");
+			outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent stats modifiers. You can resume from bad-ends with penalties. No penatlies for too high wrath.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) {
-			outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 1,5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 15% more damage and gives ~10% more EXP. Bad-ends can ruin your game.");
+			outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 2x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 20% more damage and gives ~10% more EXP. No penatlies for too high wrath. Bad-ends can ruin your game.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) {
-			outputText("Difficulty: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 2x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 30% more damage and gives ~20% more EXP.");
+			outputText("Difficulty: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does 50% more damage and gives ~30% more EXP.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) {
-			outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 3x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 50% damage and gives ~30% more EXP.");
+			outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 10x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 100% damage and gives ~60% more EXP.");
 		}
 		else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) {
-			outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 100% damage and gives ~40% more EXP.");
+			outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia MC</font></b>\n Opponent has 25x more HP/Lust/Wrath/Fatigue/Mana/Soulforce, does more 250% damage and gives ~100% more EXP.");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) {
-			outputText("Easy Mode: <font color=\"#008000\"><b>ON</b></font>\n Bad-ends can be ignored and combat is as easy that even coc1 and coc2 makers can't breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
+			outputText("Easy Mode: <font color=\"#008000\"><b>ON</b></font>\n Bad-ends can be ignored and combat is so super easy that even CoC Vanilla and CoC2 devs can't breeze it with one hand ^^ (dmg monsters deal is 10x lower, no scaling of some of their combat stats and no penalty for level difference)");
 		}
 		else {
 			outputText("Easy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Bad-ends can ruin your game and combat is back to what it should be.");

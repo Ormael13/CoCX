@@ -26,7 +26,7 @@ package classes.Items.Consumables
 		override public function useItem():Boolean {
 			clearOutput();
 			outputText("You toss Poisoned Balls at your foe");
-			if (game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) outputText("s");
+			if (game.monster.hasPerk(PerkLib.EnemyGroupType) || game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) outputText("s");
 			outputText("!  The toxic spheres fly straight and true, almost as if they are sentient as they arc towards " + game.monster.a + game.monster.short + "!\n");
 			if (game.monster.spe - 320 > Utils.rand(100) + 1) { //1% dodge for each point of speed over 320
 				outputText("Quick reflexes allow " + game.monster.pronoun2 + " to avoid the balls!  The deadly spheres shatter into a toxic cloud far from your opponent upon landing somewhere in the distance.");

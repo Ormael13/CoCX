@@ -52,8 +52,8 @@ package classes.Scenes.Areas.DefiledRavine
 			this.drop = new WeightedDrop().
 					add(consumables.CENTARI, 1).
 					add(consumables.EQUINUM, 10);
-			this.tailType = Tail.TAIL_TYPE_DEMONIC;
-			this.horns.type = Horns.HORNS_DEMON;
+			this.tailType = Tail.DEMONIC;
+			this.horns.type = Horns.DEMON;
 			this.horns.count = 4;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
 			//this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);

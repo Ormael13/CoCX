@@ -438,8 +438,8 @@ public class CombatMagic extends BaseCombatContent {
 		return mod;
 	}
 
-	internal function spellModWhiteImpl():Number {
-		var mod:Number = 1;
+	internal function spellModBase():Number {
+		var mod:Number = 0;
 		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) mod += .3;
 		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) mod += .2;
 		if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) mod += .4;
@@ -461,9 +461,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Ambition)) {
 			mod += player.perkv2(PerkLib.Ambition);
 		}
-		if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
-			mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
-		}
 		if (player.hasPerk(PerkLib.WizardsFocus)) {
 			mod += player.perkv1(PerkLib.WizardsFocus);
 		}
@@ -474,10 +471,6 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
-		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .2;
-		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
-		if (player.hasPerk(PerkLib.HexKnowledge)) mod -= .4;
-		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -491,6 +484,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
 		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
 		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
+		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
 			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
 				if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) mod += 2.5;
@@ -511,6 +505,20 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
+	internal function spellModWhiteImpl():Number {
+		var mod:Number = 1;
+		mod += spellModBase();
+		if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
+			mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
+		}
+		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .2;
+		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
+		if (player.hasPerk(PerkLib.HexKnowledge)) mod -= .4;
+		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -556,8 +564,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .02;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .017;
 		if (player.weapon == weapons.B_STAFF) {
 			var mod1:Number = 0.4;
 			mod1 -= player.cor / 10;
@@ -572,73 +580,11 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellModBlackImpl():Number {
 		var mod:Number = 1;
-		if (player.hasPerk(PerkLib.Archmage) && player.inte >= 100) mod += .3;
-		if (player.hasPerk(PerkLib.Channeling) && player.inte >= 60) mod += .2;
-		if (player.hasPerk(PerkLib.GrandArchmage) && player.inte >= 125) mod += .4;
-		if (player.hasPerk(PerkLib.GrandArchmage2ndCircle) && player.inte >= 150) mod += .5;
-		if (player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) mod += .6;
-		if (player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) mod += .2;
-		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 275) mod += 1;
-		if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 225) mod += .8;
-		if (player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
-		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) mod += .2;
-		if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .1;
-		if (player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) mod += .1;
-		if (player.hasPerk(PerkLib.TraditionalMageI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageIII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageIV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageVI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.Obsession)) {
-			mod += player.perkv2(PerkLib.Obsession);
-		}
-		if (player.hasPerk(PerkLib.WizardsFocus)) {
-			mod += player.perkv1(PerkLib.WizardsFocus);
-		}
-		if (player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) {
-			mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
-		}
-		if (player.hasPerk(PerkLib.SagesKnowledge)) {
-			mod += player.perkv1(PerkLib.SagesKnowledge);
-		}
-		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		mod += spellModBase();
 		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
 		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
 		if (player.hasPerk(PerkLib.HexKnowledge)) mod += .2;
-		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
-		if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
-		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
-		if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
-		if (player.jewelryEffectId4 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
-		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
-		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
-		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.shield == shields.SPI_FOC) mod += .2;
-		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
-		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
-			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
-				if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) mod += 2.5;
-				else mod += 1.25;
-			} else mod += 1;
-		}
-		if (player.weapon == weapons.B_STAFF) {
-			var mod1:Number = 0.4;
-			mod1 -= player.cor / 10;
-			if (mod1 < 0.1) mod1 = 0.1;
-			mod += mod1;
-		}
-		if (player.hasPerk(PerkLib.InariBlessedKimono)){
-			var mod2:Number = 0.5;
-			mod2 -= player.cor / 10;
-			if (mod1 < 0.1) mod2 = 0.1;
-			mod += mod2;
-		}
-		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
-		if (player.weapon == weapons.ASCENSU) mod *= 1.8;
+		if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) mod += 0.25;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -1655,6 +1601,38 @@ public class CombatMagic extends BaseCombatContent {
 			}
 		}
 	}
+
+	//THIS FEATURE GOVERS EVERY POST CAST EFFECT YOUR SPELLS MAY CAUSE
+	public function MagicAddonEffect(numberOfProcs:Number = 1):void {
+		if (player.hasStatusEffect(StatusEffects.Venomancy)) {
+			if (player.tailVenom >= 4) {
+				var injections:Number = 0;
+				while (player.tailVenom >= 4 && injections < numberOfProcs) {
+					var damageB:Number = 35 + rand(player.lib / 10);
+					var poisonScaling:Number = 1;
+					poisonScaling += player.lib/100;
+					poisonScaling += player.tou/100;
+					if (player.level < 10) damageB += 20 + (player.level * 3);
+					else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
+					else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
+					else damageB += 80;
+					damageB *= 0.04;
+					damageB *= 1+(poisonScaling/10);
+					monster.teased(monster.lustVuln * damageB, false);
+					monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
+					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
+					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+					player.tailVenom -= 4;
+					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+					injections++;
+				}
+				outputText(" Your venom is forcefully injected ");
+				if (injections > 1) outputText(""+injections+" times");
+				outputText(" in " + monster.a + monster.short + " through your magic!");
+			}
+		}
+	}
 	
 	public function spellBloodMissiles():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -1687,6 +1665,7 @@ public class CombatMagic extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
+		MagicAddonEffect(5);
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -1729,6 +1708,7 @@ public class CombatMagic extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		outputText(" damage.");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -1806,6 +1786,7 @@ public class CombatMagic extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		outputText(" damage.");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -1929,8 +1910,9 @@ public class CombatMagic extends BaseCombatContent {
 			lustDmg *= 1.75;
 		}
 		lustDmg = Math.round(lustDmg);
-		monster.teased(lustDmg);
+		monster.teased(lustDmg, false);
 		if (crit) outputText(" <b>Critical!</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -2282,6 +2264,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -2398,6 +2381,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -2481,9 +2465,10 @@ public class CombatMagic extends BaseCombatContent {
 			lustDmg *= 1.75;
 		}
 		lustDmg = Math.round(lustDmg);
-		monster.teased(lustDmg);
+		monster.teased(lustDmg, false);
 		outputText(" damage.");
 		if (crit) outputText(" <b>Critical!</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -2600,6 +2585,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -2714,6 +2700,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -2811,6 +2798,7 @@ public class CombatMagic extends BaseCombatContent {
 			monster.HP -= lifesiphon;
 			HPChange(lifesiphon, false);
 			player.createStatusEffect(StatusEffects.LifeSiphon, 15, lifesiphon, 0, 0);
+			MagicAddonEffect();
 		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -2860,6 +2848,7 @@ public class CombatMagic extends BaseCombatContent {
 			consumingdarkness = Math.round(consumingdarkness);
 			monster.createStatusEffect(StatusEffects.ConsumingDarkness, 7, consumingdarkness, 0, 0);
 			doDarknessDamage(consumingdarkness, true, true);
+			MagicAddonEffect();
 		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -2916,6 +2905,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (lustDmg < 1) lustDmg = 1;
 			monster.teased(lustDmg, false);
 			dynStats("lus", 10);
+			MagicAddonEffect();
 		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -2966,6 +2956,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) CurseOfWeepingMod = Math.round(CurseOfWeepingMod * 1.2);
 		monster.createStatusEffect(StatusEffects.CurseOfWeeping, 6, CurseOfWeepingMod, 0, 0);
 		doDamage(CurseOfWeepingMod, true, true);
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		statScreenRefresh();
@@ -3093,6 +3084,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
@@ -3106,7 +3098,7 @@ public class CombatMagic extends BaseCombatContent {
 		else enemyAI();
 	}
 
-//(100) Polar Midnight - AoE Ice spell
+	//(100) Polar Midnight - AoE Ice spell
 	public function spellPolarMidnight():void {
 		if (rand(2) == 0) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
@@ -3163,7 +3155,8 @@ public class CombatMagic extends BaseCombatContent {
 			//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			//}
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
-			outputText(" " + monster.a + monster.short + " is encased in a thick layer of ice.\n\n");
+			MagicAddonEffect();
+			outputText("\n\n" + monster.a + monster.short + " is encased in a thick layer of ice.\n\n");
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 			if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
 			monster.createStatusEffect(StatusEffects.FrozenSolid,5,0,0,0);
@@ -3322,6 +3315,7 @@ public class CombatMagic extends BaseCombatContent {
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
@@ -3393,6 +3387,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" " + monster.capitalA + monster.short + " reels from the impact, trying to recover from this devastating assault as a meteor crash in the area.\n\n");
+			MagicAddonEffect();
 			if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 			damage *= 10;
 			if (!monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && player.hasPerk(PerkLib.Convergence)) damage *= 3;
@@ -3497,6 +3492,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText(", gorging on its owner’s life force to replenish your own. Soon enough the spell is over and your shadow returns to you, leaving you better for the wear. <b>(<font color=\"#800000\">" + nosferatu + "</font>)</b>");
 			monster.HP -= nosferatu;
 			HPChange(nosferatu,false);
+			MagicAddonEffect();
 		}
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -3768,6 +3764,7 @@ public class CombatMagic extends BaseCombatContent {
 				if(monster.plural && monster.short != "imp horde") outputText("are blinded!</b>");
 				else outputText("is blinded!</b>");
 				monster.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20,0,0,0);
+				MagicAddonEffect();
                 if(monster is Diva){(monster as Diva).handlePlayerSpell("blind");}
 				if(monster.short == "Isabella")
 					if (SceneLib.isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.");
@@ -3909,6 +3906,7 @@ public class CombatMagic extends BaseCombatContent {
 		else doFireDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -3970,6 +3968,7 @@ public class CombatMagic extends BaseCombatContent {
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -4070,6 +4069,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -4187,6 +4187,7 @@ public class CombatMagic extends BaseCombatContent {
 		else doFireDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -4250,6 +4251,7 @@ public class CombatMagic extends BaseCombatContent {
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -4349,6 +4351,7 @@ public class CombatMagic extends BaseCombatContent {
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
 		outputText("\n\n");
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		if (edgy) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
@@ -4402,4 +4405,4 @@ public class CombatMagic extends BaseCombatContent {
 		return false;
 	}
 }
-}
+}

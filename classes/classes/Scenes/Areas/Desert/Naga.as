@@ -11,7 +11,7 @@ import classes.internals.*;
 
 public class Naga extends Monster
 	{
-		//2a)  Ability -  Poison Bite - poisons player
+		//2a) Ability - Poison Bite - poisons player
 		protected function nagaPoisonBiteAttack():void {
 			//(Deals damage over 4-5 turns, invariably reducing 
 			//your speed. It wears off once combat is over.)
@@ -45,12 +45,12 @@ public class Naga extends Monster
 			}
 		}
 		
-		//2b)  Ability - Constrict - entangles player, raises lust 
+		//2b) Ability - Constrict - entangles player, raises lust
 		//every turn until you break free
 		protected function nagaConstrict():void {
 			outputText("The " + this.short + " draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!");
-			player.createStatusEffect(StatusEffects.NagaBind,0,0,0,0); 
-			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+			player.createStatusEffect(StatusEffects.NagaBind,0,0,0,0);
+			if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {
 				player.takePhysDamage(2+rand(4));
 			}
 		}
@@ -60,10 +60,10 @@ public class Naga extends Monster
 		protected function nagaTailWhip():void {
 			outputText("The naga tenses and twists herself forcefully.  ");
 			//[if evaded]
-			if((player.findPerk(PerkLib.Evade) && rand(6) == 0)) {
+			if((player.hasPerk(PerkLib.Evade) && rand(6) == 0)) {
 				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.");
 			}
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.");
 			}
 			else if(player.spe > rand(300)) {
@@ -74,7 +74,7 @@ public class Naga extends Monster
 				var damage:Number = str;
 				if(player.armorDef < 20) damage += 20 - player.armorDef;
 				damage += rand(10);
-				damage = player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		
@@ -153,9 +153,12 @@ public class Naga extends Monster
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 9;
 			this.gems = rand(5) + 8;
-			this.special1 = nagaPoisonBiteAttack;
-			this.special2 = nagaConstrict;
-			this.special3 = nagaTailWhip;
+			this.abilities = [
+				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+				{ call: nagaPoisonBiteAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+				{ call: nagaConstrict, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+				{ call: nagaTailWhip, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]}
+			]
 			checkMonster();
 		}
 

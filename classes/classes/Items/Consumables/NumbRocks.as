@@ -49,7 +49,7 @@ package classes.Items.Consumables
 			}
 			else if (rand(4) == 0 && player.inte > 15) {
 				outputText("\n\nNumbness clouds your mind, making you feel slow witted and dull.  Maybe these candies weren't such a exceptio... fantas... good idea.");
-				dynStats("int", -(1 + rand(5)));
+				player.addCurse("int", -(1 + rand(5)),1);
 			}
 			if (!player.hasPerk(PerkLib.ThickSkin) && rand(5) == 0) {
 				outputText("Slowly, ");
