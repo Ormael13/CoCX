@@ -69,7 +69,8 @@ public final class GroPlus extends Consumable {
 			outputText("You sink the needle into your clit, nearly crying with how much it hurts.  You push down the plunger and the pain vanishes as your clit starts to grow.\n\n");
 			game.player.clitLength++;
 			outputText("Your " + game.player.clitDescript() + " stops growing after an inch of new flesh surges free of your netherlips.  It twitches, feeling incredibly sensitive.");
-			game.player.dynStats("sen", 2, "lus", 10);
+			game.player.dynStats("lus", 10);
+			player.addCurse("sen", 2, 1);
 			SceneLib.inventory.itemGoNext();
 		}
 
@@ -95,7 +96,8 @@ public final class GroPlus extends Consumable {
 			if (game.player.hasSheath())
 				outputText("sheath.");
 			else outputText("crotch.");
-			game.player.dynStats("sen", 2, "lus", 10);
+			game.player.dynStats("lus", 10);
+			player.addCurse("sen", 2, 1);
 			SceneLib.inventory.itemGoNext();
 		}
 

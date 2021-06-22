@@ -154,8 +154,14 @@ public class ImpLord extends Imp
 					add(consumables.INCUBID,6).
 					add(consumables.SUCMILK,6);
 			this.wings.type = Wings.IMP;
-			if (player.hasStatusEffect(StatusEffects.SiegweirdImp)) this.special1 = sMaSh;
-			else this.special1 = lustMagicAttack;
+			if (player.hasStatusEffect(StatusEffects.SiegweirdImp)) this.abilities = [
+				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+				{call: sMaSh, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[TAG_WEAPON]}
+			];
+			else this.abilities = [
+				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+				{call: lustMagicAttack1, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]}
+			];
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			checkMonster();
 		}

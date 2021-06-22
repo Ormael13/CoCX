@@ -143,7 +143,7 @@ public class Face extends SaveableBodyPart {
 		return [
 			HORSE, DOG, CAT, LIZARD, KANGAROO,
 			FOX, DRAGON, RHINO, ECHIDNA, DEER,
-			WOLF
+			WOLF, SQUIRREL, BEAR, PANDA
 			   ].indexOf(type) >= 0;
 	}
 	public function hasBeak():Boolean {
@@ -166,7 +166,8 @@ public class Face extends SaveableBodyPart {
 		return isAny(HUMAN,
 				MANTICORE, BUCKTEETH, BUNNY, SHARK_TEETH, SNAKE_FANGS, SPIDER_FANGS,
 				YETI_FANGS, SALAMANDER_FANGS, ONI_TEETH, ORC_FANGS, CHESHIRE_SMILE,
-				FERRET_MASK, VAMPIRE, ANIMAL_TOOTHS, FIRE_SNAIL, GHOST);
+				FERRET_MASK, VAMPIRE, ANIMAL_TOOTHS, FIRE_SNAIL, GHOST, ELF, FAIRY,
+				SMUG, JIANGSHI, KUDERE, YUKI_ONNA, USHI_ONI_ONNA, CRAZY, WOLF_FANGS);
 	}
 	public function nounPhrase():String {
 		var stringo:String = "";

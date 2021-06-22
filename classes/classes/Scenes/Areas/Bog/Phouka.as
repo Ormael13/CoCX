@@ -13,6 +13,7 @@ import classes.BodyParts.Wings;
 import classes.Items.Useable;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
+import classes.Scenes.Dungeons.DeepCave.ValaScene;
 
 public class Phouka extends Monster
 	{
@@ -302,13 +303,22 @@ public class Phouka extends Monster
 			this.lustVuln = .5;
 			this.level = 32;
 			this.gems = 0;
-			this.drop = new WeightedDrop().add(consumables.BLACK_D, 20)
-				.add(consumables.RIZZART, 10)
-				.add(consumables.GROPLUS, 2)
-				.add(consumables.SDELITE, 13)
-				.add(consumables.P_WHSKY, 10)
-				.add(useables.S_SHARD, 35)
-				.add(null, 10);
+			if (ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_STARTED || ValaScene.ValaFairyQueenQuest == ValaScene.QUEST_STAGE_ITEM_GATHERED) {
+				this.drop = new WeightedDrop().add(consumables.BLACK_D, 2)
+					.add(consumables.RIZZART, 2)
+					.add(consumables.GROPLUS, 2)
+					.add(consumables.SDELITE, 2)
+					.add(consumables.P_WHSKY, 2)
+					.add(useables.S_SHARD, 40);
+			}
+			else {
+				this.drop = new WeightedDrop().add(consumables.BLACK_D, 20)
+					.add(consumables.RIZZART, 10)
+					.add(consumables.GROPLUS, 2)
+					.add(consumables.SDELITE, 13)
+					.add(consumables.P_WHSKY, 10)
+					.add(null, 10);
+			}
 			this.wings.type = Wings.FAIRY;
 			this.wings.desc = "small black faerie wings";
 			checkMonster();

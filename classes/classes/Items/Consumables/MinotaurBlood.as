@@ -71,7 +71,7 @@ public class MinotaurBlood extends Consumable {
 			//Chance of speed drop
 			if (rand(2) == 0 && player.str > 50) {
 				outputText("\n\nYou begin to feel that the size of your muscles is starting to slow you down.");
-				dynStats("spe", -1);
+				player.addCurse("spe", -1,1);
 			}
 			changes++;
 		}
@@ -109,7 +109,7 @@ public class MinotaurBlood extends Consumable {
 			}
 			changes++;
 		}
-		if (game.mutations.blockingBodyTransformations()) changeLimit = 0;
+		if (player.blockingBodyTransformations()) changeLimit = 0;
 		//SEXUAL
 		//Boosts ball size MORE than equinum :D:D:D:D:D:D:
 		if (changes < changeLimit && rand(2) == 0 && player.ballSize <= 5 && player.horseCocks() > 0) {
@@ -268,7 +268,8 @@ public class MinotaurBlood extends Consumable {
 				if (player.cocks[selectedCockValue].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.");
 				player.cocks[selectedCockValue].cockType = CockTypesEnum.HORSE;
 				player.increaseCock(selectedCockValue, 4);
-				dynStats("sen", 4, "lus", 35);
+				dynStats("lus", 35);
+				player.addCurse("spe", 4,1);
 				player.MutagenBonus("lib", 5);
 				outputText("<b>  You now have a");
 				if (player.horseCocks() > 1) outputText("nother");

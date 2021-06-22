@@ -434,8 +434,8 @@ public class PlayerAppearance extends BaseContent {
 					outputText(", unlike a normal pussy, feels and acts akin to a mouth that allows you to taste and savor the flavor of the cum injected within as if it landed on your tongue. Your sensitive walls are also prehensile, and you can control them to milk a cock just as well as your hand could. Your dexterous, cum-hungry twat hides a ");
 					break;
 				case VaginaClass.NAGA:
-					outputText(" is deep and wide enought to insert your entire arm lenght inside and some more. Sometime you lament that most of your partners are no longer big enough to satisfy you");
-					if (player.isNaga()) outputText("as your hot spot is now way further inside your lenghtly canal, requiring quite a longer member to reach");
+					outputText(" is deep and wide enough to insert your entire arm length inside and some more. Sometimes you lament that most of your partners are no longer big enough to satisfy you");
+					if (player.isNaga()) outputText("as your hot spot is now way further inside your deep canal, requiring quite a longer member to reach");
 							outputText(". Inside you have a ");
 					break;
 				default:
@@ -656,6 +656,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" Your skin is also covered in various place with "+player.skin.base.adj+".");
 		}
 		if (player.skin.base.pattern == Skin.PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
+		if (player.skin.base.pattern == Skin.PATTERN_SEADRAGON_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of a sea dragon. Your underbelly is also lined up with bioluminescent dots like those of a deep sea fish.\n");
 		if (player.skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY) outputText(" Your body is covered from head to toe in [skin color] with a [skin color2] underbelly, giving to your nimble frame a red-panda appearance.");
 		if (player.skin.base.pattern == Skin.PATTERN_USHI_ONI_ONNA_TATTOO) outputText(" You have strange ushi oni-onna tattoos in your body, they appear in your belly, chest, breasts, shoulders and even face, you don’t know why but some are like a black sheen plate while others are just fur.");
 	}
@@ -922,6 +923,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS) {
 			outputText(" A set of "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" tentacle eyestalks expand from your back giving you all around vision. Their gazes are charged with lethal magical powers.");
 		}
+		else if (player.rearBody.type == RearBody.ATLACH_NACHA) {
+			outputText(" Two pairs of chitinous, black spider legs sprout from your shoulders and back. Red eyes blink and close at the tips.")
+		}
 	}
 	public function describeWings():void {
 		//WINGS!
@@ -998,6 +1002,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (wingType == Wings.FAIRY){
 			outputText(" A large pair of colorful butterfly wings rest on your shoulder blades. Your fairy wings give you a regal appearance fit for fey royalty.");
+		}
+		if (wingType == Wings.SEADRAGON){
+			outputText(" Two large majestic webbed wings not unlike the aquatic flippers of a deep-sea creature unfurls from your back, the interior lined with bright color patterns and bioluminescent specks that change depending on your mood. These wings are as good to fly as they are to swim.");
 		}
 	}
 	public function describeHorns():void {
@@ -1126,6 +1133,10 @@ public class PlayerAppearance extends BaseContent {
 			if (player.horns.count > 0)
 				outputText(" You have a pair of ushi-" + player.mf("oni", "onna") + " horns, both come out of your skull and go upward in a spiral pattern.\n");
 		}
+		if (player.horns.type == Horns.SEADRAGON) {
+			if (player.horns.count > 0)
+				outputText(" Two large-sized horns grow from the side of your head. The faint bioluminescent specks that line the length of each horn enhance with a mesmerizing glow. At the tip of each horn is a bright red glow, both as a gentle warning and an enthralling lure to unwary prey.\n");
+		}
 	}
 	public function describeTongue():void {
 		if (player.tongue.type == Tongue.SNAKE)
@@ -1200,6 +1211,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" Your eyes look normal enough save for their fiendish [eyecolor] iris and slitted pupils.");
 		else if(eyeType == Eyes.ELF)
 			outputText(" Your [eyecolor] elven eyes looks somewhat human, save for their cat-like vertical slit which draws light right in, allowing you to see with perfect precision both at day and night time.");
+			if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) outputText(" Despite their otherwordly beauty the misty hollow at the center of your eyes denounce the absence of a soul that wich now resides with the forest.")
 		else if(eyeType == Eyes.RAIJU)
 			outputText(" Your eyes are of an electric [eyecolor] hue that constantly glows with voltage power. They have slitted pupils like those of a beast.");
 		else if(eyeType == Eyes.RATATOSKR)
@@ -1333,7 +1345,7 @@ public class PlayerAppearance extends BaseContent {
 			else if(earType == Ears.YETI)
 				outputText(" A pair of yeti ears, bigger than your old human ones have sprouted from the top of your head.");
 			else if(earType == Ears.ORCA)
-				outputText(" A pair of very large fin at least twice as large as your head which help you orient yourself underwater have sprouted from the top of your head. Their underside is white while the top is black.");
+				outputText(" A pair of very large fin at least twice as large as your head which help you orient yourself underwater have sprouted from the top of your head. Their underside is [skin color2] while the top is [skin color].");
 			else if(earType == Ears.ORCA2)
 				outputText(" A pair of rounded protrusions with small holes on the sides of your head serve as your ears.");
 			else if(earType == Ears.SNAKE)
@@ -1402,6 +1414,8 @@ public class PlayerAppearance extends BaseContent {
 				outputText(" Floppy antennae also appear on your skull, bouncing and swaying in the breeze.");
 			if(player.antennae.type == Antennae.CENTIPEDE)
 				outputText(" A pair of long antennae have grown just behind your hairline. They occasionally curl and twitch at the slightest of movements.");
+			if(player.antennae.type == Antennae.SEADRAGON)
+				outputText(" Just below your ears are four bioluminescent strands that run down your neck, beautifully lighting up your front and giving you an air of mystique.");
 		}
 		//not bald
 		else {
@@ -1952,12 +1966,18 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (faceType == Face.FIRE_SNAIL) {
 			outputText(" Your face is human in shape and structure");
-			tattooAndPatternGeneric();
+			if (!player.skin.hasNoPattern()){
+				outputText("with ");
+				tattooAndPatternGeneric();
+			}
 			outputText(" but your mouth is drooling from constant arousal.");
 		}
 		if (faceType == Face.GHOST) {
 			outputText(" Your face is in human shape and structure");
-			tattooAndPatternGeneric();
+			if (!player.skin.hasNoPattern()){
+				outputText("with ");
+				tattooAndPatternGeneric();
+			}
 			outputText(". The only thing out of place is the ever present wide smile on your face. Your unsettling smile often hides your true emotions much to the dismay of others.");
 		}
 		if (faceType == Face.JIANGSHI) {
@@ -1966,8 +1986,10 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.KUDERE) {
 			outputText(" Your face is human in shape and structure with [skintone]. The most unsettling thing about it is your complete and constant lack of emotion.");
 			if (!player.hasCoat()) {
-				outputText(" The [skin] is");
-				tattooAndPatternGeneric();
+				if (!player.skin.hasNoPattern()){
+					outputText(" The [skin] is");
+					tattooAndPatternGeneric();
+				}
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText(" It's covered in [skin coat] that covers your [skintone] skin underneath.");
 			} else {
@@ -1975,10 +1997,12 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 		if (faceType == Face.YUKI_ONNA) {
-			outputText(" Your face is fully human in appearance although your lips are dyed blue by the cold.");
+			outputText(" Your face is fully human in appearance although your lips are dyed blue by the cold. As for your [skin] it yearns for the warmth of life.");
 			if (!player.hasCoat()) {
-				outputText(" Your [skin] is");
-				tattooAndPatternGeneric();
+				if (!player.skin.hasNoPattern()){
+					outputText(" Your [skin] is");
+					tattooAndPatternGeneric();
+				}
 			} else if (player.hasFullCoatOfType(Skin.FUR)) {
 				outputText(" It's covered in [skin coat] that covers your [skintone] skin underneath.");
 			} else {
@@ -2015,6 +2039,7 @@ public class PlayerAppearance extends BaseContent {
 		//</mod>
 	}
 	public function RacialScores():void {
+		var score:int;
 		clearOutput();
 		outputText("<b>Current racial scores (and bonuses to stats if applicable):</b>\n");
 		//Alicorn
@@ -2040,6 +2065,13 @@ public class PlayerAppearance extends BaseContent {
 			else if (player.alrauneScore() >= 1) outputText("\n<font color=\"#008000\">Liliraune: " + player.alrauneScore() + "</font>");
 			else if (player.alrauneScore() < 1) outputText("\n<font color=\"#ff0000\">Liliraune: 0</font>");
 		}
+		//Atlach Nacha
+		score = player.atlachNachaScore();
+		if (score >= 30) outputText("\n<font color=\"#0000a0\">Greater Atlach Nacha: " + score + " (+115% to Str racial multi, +135% to Tou racial multi, +150% to Int racial multi, +150% to Lib racial multi, -50% to Wis racial multi, +50 to Sens)</font>");
+		else if (score >= 21) outputText("\n<font color=\"#0000a0\">Atlach Nacha: " + score + " (+280% to Str racial multi, +315% to Tou racial multi, +350% to Int racial multi, +350% to Lib racial multi, -50% to Wis racial multi, +90 to Sens)</font>");
+		else if (score >= 14) outputText("\n<font color=\"#0000a0\">Incomplete Atlach Nacha: " + score + " (+60% to Tou racial multi, +100% to Int racial multi, +40% to Lib racial multi, -10% to Wis racial multi)</font>");
+		else if (score >= 1) outputText("\n<font color=\"#008000\">Incomplete Atlach Nacha: " + score + "</font>");
+		else if (score < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>");
 		//Avian
 		if (player.avianScore() >= 9) outputText("\n<font color=\"#0000a0\">Avian-morph: " + player.avianScore() + " (+30% to Str racial multi, +75% to Spe racial multi, +30% to Int racial multib)</font>");
 		else if (player.avianScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Avian-morph: " + player.avianScore() + " (+15% to Str racial multi, +30% to Spe racial multi, +15% to Int racial multi)</font>");
@@ -2180,6 +2212,11 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.elfScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Elf: " + player.elfScore() + " (-5% to Str racial multi, -10% to Tou racial multi, +45% to Spe / Int racial multi, +30% to Wis racial multi, +15 min Sens, +10% max Mana)</font>");
 		else if (player.elfScore() >= 1) outputText("\n<font color=\"#008000\">Half Elf: " + player.elfScore() + "</font>");
 		else if (player.elfScore() < 1) outputText("\n<font color=\"#ff0000\">Half Elf: 0</font>");
+		//Wood Elf
+		if (player.woodElfScore() >= 25) outputText("\n<font color=\"#0000a0\">Wood Elf: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +150% to Spe racial multi, +125% to Int racial multi, +100% to Lib racial multi, +50 min Sens, +20% max Mana)</font>");
+		else if (player.woodElfScore() >= 17) outputText("\n<font color=\"#0000a0\">Wood Elf little sister: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +100% to Spe / Int / Lib racial multi, +50 min Sens, +10% max Mana)</font>");
+		else if (player.woodElfScore() >= 1) outputText("\n<font color=\"#008000\">Wood Elf: " + player.woodElfScore() + "</font>");
+		else if (player.woodElfScore() < 1) outputText("\n<font color=\"#ff0000\">Wood Elf: 0</font>");
 		//Ferret
 		outputText("\nFerret-morph: " + player.ferretScore());
 		//Fire snail
@@ -2192,10 +2229,12 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.foxScore() >= 1) outputText("\n<font color=\"#008000\">Half Fox: " + player.foxScore() + "</font>");
 		else if (player.foxScore() < 1) outputText("\n<font color=\"#ff0000\">Half Fox: 0</font>");
 		//Fairy
-		if (player.fairyScore() >= 26) outputText("\n<font color=\"#0000a0\">Fairy Queen: " + player.fairyScore() + " (-25% to Str racial multi, -10% to Tou racial multi, +200% to Spe racial multi, +200% to Int racial multi, +45% to Wis racial multi, +20 min Sens)</font>");
-		if (player.fairyScore() >= 23) outputText("\n<font color=\"#0000a0\">Greater Fairy: " + player.fairyScore() + " (-25% to Str racial multi, -10% to Tou racial multi, +185% to Spe racial multi, +185% to Int racial multi, +30% to Wis racial multi, +20 min Sens)</font>");
-		else if (player.fairyScore() >= 1) outputText("\n<font color=\"#008000\">Greater Fairy: " + player.fairyScore() + "</font>");
-		else if (player.fairyScore() < 1) outputText("\n<font color=\"#ff0000\">Greater Fairy: 0</font>");
+		if (player.fairyScore() >= 32) outputText("\n<font color=\"#0000a0\">Titania: " + player.fairyScore() + " (-20% to Str racial multi, -10% to Tou racial multi, +660% to Spe racial multi, +660% to Int racial multi, +200% to Wis racial multi, +50 Sens)</font>");
+		else if (player.fairyScore() >= 29) outputText("\n<font color=\"#0000a0\">Fairy Queen: " + player.fairyScore() + " (-20% to Str racial multi, -10% to Tou racial multi, +600% to Spe racial multi, +600% to Int racial multi, +175% to Wis racial multi, +40 Sens)</font>");
+		else if (player.fairyScore() >= 26) outputText("\n<font color=\"#0000a0\">Noble Fairy: " + player.fairyScore() + " (-20% to Str racial multi, -10% to Tou racial multi, +540% to Spe racial multi, +540% to Int racial multi, +150% to Wis racial multi, +30 Sens)</font>");
+		else if (player.fairyScore() >= 23) outputText("\n<font color=\"#0000a0\">Greater Fairy: " + player.fairyScore() + " (-20% to Str racial multi, -10% to Tou racial multi, +480% to Spe racial multi, +480% to Int racial multi, +125% to Wis racial multi, +20 Sens)</font>");
+		else if (player.fairyScore() >= 1) outputText("\n<font color=\"#008000\">Fairy: " + player.fairyScore() + "</font>");
+		else if (player.fairyScore() < 1) outputText("\n<font color=\"#ff0000\">Fairy: 0</font>");
 		//Frost Wyrm
 		if (player.frostWyrmScore() >= 26) outputText("\n<font color=\"#0000a0\">Greater Frost Wyrm: " + player.frostWyrmScore() + " (+200% to Str racial multi, +90% to Spe racial multi, +160% to Tou racial multi, -90% to Int racial multi, +75% to Lib racial multi)</font>");
 		else if (player.frostWyrmScore() >= 18) outputText("\n<font color=\"#0000a0\">Frost Wyrm: " + player.frostWyrmScore() + " (+140% to Str racial multi, +75% to Spe racial multi, +125% to Tou racial multi, -90% to Int racial multi, +50% to Lib racial multi)</font>");
@@ -2203,22 +2242,14 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.frostWyrmScore() >= 1) outputText("\n<font color=\"#008000\">Half Frost Wyrm: " + player.frostWyrmScore() + "</font>");
 		else if (player.frostWyrmScore() < 1) outputText("\n<font color=\"#ff0000\">Half Frost Wyrm: 0</font>");
 		//GARGOYLE
-		if (player.gargoyleScore() >= 20 && player.hasPerk(PerkLib.GargoylePure)) {
-			outputText("\n<font color=\"#0000a0\">PURE GARGOYLE: " + player.gargoyleScore() + " (+");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("165% to Str racial multi, +250% to Tou racial multi, +50% to Spe racial multi, +30");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("50% to Str racial multi, +250% to Tou racial multi, +30% to Spe racial multi, +165");
-			outputText("% to Int racial multi, +80% to Wis racial multi, -10% to Lib racial multi, -10 max Sens, +");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("" + (60 * (1 + player.newGamePlusMod())) + " Armor, +" + (10 * (1 + player.newGamePlusMod())) + " spell resistance");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("" + (10 * (1 + player.newGamePlusMod())) + " Armor, +" + (60 * (1 + player.newGamePlusMod())) + " spell resistance");
-			outputText(")</font>");
-		}
-		else if (player.gargoyleScore() >= 20 && player.hasPerk(PerkLib.GargoyleCorrupted)) {
-			outputText("\n<font color=\"#0000a0\">CORRUPTED GARGOYLE: " + player.gargoyleScore() + " (+");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("165% to Str racial multi, +250% to Tou racial multi, +50% to Spe racial multi, +30");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("50% to Str racial multi, +250% to Tou racial multi, +30% to Spe racial multi, +165");
-			outputText("% to Int racial multi, -10% to Wis racial multi, +80% to Lib racial multi, +15 min Sens, +");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("" + (60 * (1 + player.newGamePlusMod())) + " Armor, +" + (10 * (1 + player.newGamePlusMod())) + " spell resistance");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("" + (10 * (1 + player.newGamePlusMod())) + " Armor, +" + (60 * (1 + player.newGamePlusMod())) + " spell resistance");
+		if (player.gargoyleScore() >= 20 && (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted))) {
+			outputText("\n<font color=\"#0000a0\">" + (player.hasPerk(PerkLib.GargoylePure) ? "PURE":"CORRUPTED") + " GARGOYLE: " + player.gargoyleScore() + " (+");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("300% to Str racial multi, +510% to Tou racial multi, +100% to Spe racial multi, +80% to Int racial multi, ");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("100% to Str racial multi, +510% to Tou racial multi, +80% to Spe racial multi, +300% to Int racial multi, ");
+			if (player.hasPerk(PerkLib.GargoylePure)) outputText("+130% to Wis racial multi, -20% to Lib racial multi, -10 Sens, +");
+			if (player.hasPerk(PerkLib.GargoyleCorrupted)) outputText("-20% to Wis racial multi, +140% to Lib racial multi, +");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("" + (150 * (1 + player.newGamePlusMod())) + " Armor, +" + (25 * (1 + player.newGamePlusMod())) + " spell resistance");
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("" + (25 * (1 + player.newGamePlusMod())) + " Armor, +" + (150 * (1 + player.newGamePlusMod())) + " spell resistance");
 			outputText(")</font>");
 		}
 		else if (player.gargoyleScore() >= 1) outputText("\n<font color=\"#008000\">GARGOYLE: " + player.gargoyleScore() + "</font>");
@@ -2260,9 +2291,9 @@ public class PlayerAppearance extends BaseContent {
 		//Hellcat
 		if (player.hellcatScore() >= 17 && player.tailType == Tail.TWINKASHA && player.tailCount == 2) {
 			outputText("\n<font color=\"#0000a0\">Kasha: " + player.hellcatScore() + " (+");
-			if (player.findPerk(PerkLib.Flexibility) > 0) {
-				if (player.findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) outputText("100");
-				else if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("90");
+			if (player.hasPerk(PerkLib.Flexibility)) {
+				if (player.hasPerk(PerkLib.CatlikeNimblenessFinalForm)) outputText("100");
+				else if (player.hasPerk(PerkLib.CatlikeNimblenessEvolved)) outputText("90");
 				else outputText("80");
 			}
 			else outputText("70");
@@ -2270,9 +2301,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.hellcatScore() >= 10) {
 			outputText("\n<font color=\"#0000a0\">Hellcat: " + player.hellcatScore() + " (+");
-			if (player.findPerk(PerkLib.Flexibility) > 0) {
-				if (player.findPerk(PerkLib.CatlikeNimblenessFinalForm) > 0) outputText("70");
-				else if (player.findPerk(PerkLib.CatlikeNimblenessEvolved) > 0) outputText("60");
+			if (player.hasPerk(PerkLib.Flexibility)) {
+				if (player.hasPerk(PerkLib.CatlikeNimblenessFinalForm)) outputText("70");
+				else if (player.hasPerk(PerkLib.CatlikeNimblenessEvolved)) outputText("60");
 				else outputText("50");
 			}
 			else outputText("40");
@@ -2338,7 +2369,7 @@ public class PlayerAppearance extends BaseContent {
 		//Kitsune
 		if (player.kitsuneScore() >= 9 && player.tailType == Tail.FOX && player.tailCount >= 2) {
 			if (player.kitsuneScore() >= 16 && player.tailCount == 9) {
-				if (player.kitsuneScore() >= 21 && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+				if (player.kitsuneScore() >= 21 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
 					if (player.kitsuneScore() >= 26 && player.tailCount >= 9) outputText("\n<font color=\"#0000a0\">Inari: " + player.kitsuneScore() + " (-50% to Str racial multi, +50% to Spe racial multi, +140% to Int racial multi, +200% to Wis racial multi, +110% to Lib racial multi, +60 to min Sens, +" + (1000 * (1 + player.newGamePlusMod())) + " max Fatigue, +100% max Soulforce)</font>");
 					else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune of Balance: " + player.kitsuneScore() + " (-45% to Str racial multi, +40% to Spe racial multi, +125% to Int racial multi, +160% to Wis racial multi, +80% to Lib racial multi, +45 to min Sens, +" + (500 * (1 + player.newGamePlusMod())) + " max Fatigue, +65% max Soulforce)</font>");
 				}
@@ -2369,22 +2400,22 @@ public class PlayerAppearance extends BaseContent {
 		//Mantis
 		if (player.mantisScore() >= 12) {
 			outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-40% to Str racial multi, +60% to Tou racial multi, +");
-			if (player.findPerk(PerkLib.MantislikeAgilityFinalForm) >= 0) {
-				if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("185");
-				else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("170");
-				else if (player.skinType == Skin.SCALES || player.findPerk(PerkLib.ThickSkin) >= 0) outputText("155");
+			if (player.hasPerk(PerkLib.MantislikeAgilityFinalForm)) {
+				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("185");
+				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("170");
+				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("155");
 				else outputText("140");
 			}
-			else if (player.findPerk(PerkLib.MantislikeAgilityEvolved) >= 0) {
-				if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("170");
-				else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("160");
-				else if (player.skinType == Skin.SCALES || player.findPerk(PerkLib.ThickSkin) >= 0) outputText("150");
+			else if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) {
+				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("170");
+				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("160");
+				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("150");
 				else outputText("140");
 			}
-			else if (player.findPerk(PerkLib.MantislikeAgility) >= 0) {
-				if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("155");
-				else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("150");
-				else if (player.skinType == Skin.SCALES || player.findPerk(PerkLib.ThickSkin) >= 0) outputText("145");
+			else if (player.hasPerk(PerkLib.MantislikeAgility)) {
+				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("155");
+				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("150");
+				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("145");
 				else outputText("140");
 			}
 			else outputText("140");
@@ -2392,15 +2423,15 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if (player.mantisScore() >= 6) {
 			outputText("\n<font color=\"#0000a0\">Half Mantis-morph: " + player.mantisScore() + " (-20% to Str racial multi, +30% to Tou racial multi, +");
-			if (player.findPerk(PerkLib.MantislikeAgilityEvolved) >= 0) {
-				if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("100");
-				else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("90");
-				else if (player.skinType == Skin.SCALES || player.findPerk(PerkLib.ThickSkin) >= 0) outputText("80");
+			if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) {
+				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("100");
+				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("90");
+				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("80");
 				else outputText("70");
-			} else if (player.findPerk(PerkLib.MantislikeAgility) >= 0) {
-				if (player.hasCoatOfType(Skin.CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("85");
-				else if ((player.skinType == Skin.SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) || player.hasCoatOfType(Skin.CHITIN)) outputText("80");
-				else if (player.skinType == Skin.SCALES || player.findPerk(PerkLib.ThickSkin) >= 0) outputText("75");
+			} else if (player.hasPerk(PerkLib.MantislikeAgility)) {
+				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("85");
+				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("80");
+				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("75");
 				else outputText("70 ");
 			}
 			else outputText("70");
@@ -2536,17 +2567,22 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\nScorpion-morph: " + player.scorpionScore());
 		//Scylla
 		var scyllakrakengland:Number = 0;
-		if (player.findPerk(PerkLib.ScyllaInkGlands) > 0) scyllakrakengland += 10;
+		if (player.hasPerk(PerkLib.ScyllaInkGlands)) scyllakrakengland += 10;
 		if (player.scyllaScore() >= 12 && player.isKraken()) {
 			if (player.scyllaScore() >= 17) outputText("\n<font color=\"#0000a0\">Elder Kraken: " + player.scyllaScore() + " (+"+(195+scyllakrakengland)+"% to Str racial multi, +60% to Tou racial multi, +60% to Int racial multi, +15 min sens, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 			else outputText("\n<font color=\"#0000a0\">Kraken: " + player.scyllaScore() + " (+"+(180+scyllakrakengland)+"% to Str racial multi, +60% to Int racial multi, +15 min sens, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 		}
 		else if (player.scyllaScore() >= 4 && player.isScylla()) {
 			if (player.scyllaScore() >= 7) outputText("\n<font color=\"#0000a0\">Scylla: " + player.scyllaScore() + " (+"+(95+scyllakrakengland)+"% to Str racial multi, +40% to Int racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-			else outputText("\n<font color=\"#0000a0\">Half Scylla: " + player.scyllaScore() + " (+"+(player.findPerk(PerkLib.ScyllaInkGlands) > 0 ? "80":"70")+"% to Str racial multi, +20% to Int racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+			else outputText("\n<font color=\"#0000a0\">Half Scylla: " + player.scyllaScore() + " (+"+(player.hasPerk(PerkLib.ScyllaInkGlands) ? "80":"70")+"% to Str racial multi, +20% to Int racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 		}
 		else if (player.scyllaScore() >= 1) outputText("\n<font color=\"#008000\">Half Scylla: " + player.scyllaScore() + "</font>");
 		else if (player.scyllaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Scylla: 0</font>");
+		//Sea dragon
+		if (player.leviathanScore() >= 30) outputText("\n<font color=\"#0000a0\">Leviathan-boy/girl: " + player.leviathanScore() + " (+200% to Str racial multi, +100% to Tou racial multi, +100% to Spe racial multi, +50% to Int racial multi)</font>");
+		else if (player.leviathanScore() >= 20) outputText("\n<font color=\"#0000a0\">Sea dragon-boy/girl: " + player.leviathanScore() + " (+110% to Str racial multi, +70% to Tou racial multi, +70% to Spe racial multi, +50% to Int racial multi)</font>");
+		else if (player.leviathanScore() >= 1) outputText("\n<font color=\"#008000\">Sea dragon-boy/girl: " + player.leviathanScore() + "</font>");
+		else if (player.leviathanScore() < 1) outputText("\n<font color=\"#ff0000\">Sea dragon-boy/girl: 0</font>");
 		//Shark
 		if (player.sharkScore() >= 9 && player.vaginas.length > 0 && player.cocks.length > 0) outputText("\n<font color=\"#0000a0\">Tigershark-morph: " + player.sharkScore() + " (+60% to Str racial multi, +70% to Spe racial multi, +20% to Lib racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		else if (player.sharkScore() >= 8) outputText("\n<font color=\"#0000a0\">Shark-morph: " + player.sharkScore() + " (+40% to Str racial multi, +70% to Spe racial multi, +10% to Lib racial multi)</font>");
@@ -2725,7 +2761,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function describeVisage():void{ //expressions!
-		if (player.findPerk(PerkLib.DarkenedKitsune) > 0) {
+		if (player.hasPerk(PerkLib.DarkenedKitsune)) {
 			outputText(SceneLib.darkenedKitsuneScene.darkenedKitsuneExpression());
 		}
 	}

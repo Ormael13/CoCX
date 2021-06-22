@@ -63,15 +63,15 @@ public class EngineCore {
         if (changeNum == 0) return 0;
         if (changeNum > 0) {
             //Increase by 20%!
-            if (CoC.instance.player.findPerk(PerkLib.HistoryHealer) >= 0 || CoC.instance.player.findPerk(PerkLib.PastLifeHealer) >= 0) {
+            if (CoC.instance.player.hasPerk(PerkLib.HistoryHealer) || CoC.instance.player.hasPerk(PerkLib.PastLifeHealer)) {
 				healingFromHealer += 0.2;
-				if (CoC.instance.player.findPerk(PerkLib.Nurse) >= 0) healingFromHealer += 0.2;
-				if (CoC.instance.player.findPerk(PerkLib.Doctor) >= 0) healingFromHealer += 0.2;
-				if (CoC.instance.player.findPerk(PerkLib.FirstResponse) >= 0) healingFromHealer += 0.2;
-				if (CoC.instance.player.findPerk(PerkLib.Paramedic) >= 0) healingFromHealer += 0.2;
-				if (CoC.instance.player.findPerk(PerkLib.SurgeonsAide) >= 0) healingFromHealer += 0.2;
-				if (CoC.instance.player.findPerk(PerkLib.Surgeon) >= 0) healingFromHealer += 0.2;
-				if (CoC.instance.player.findPerk(PerkLib.Medic) >= 0) healingFromHealer += 0.2;
+				if (CoC.instance.player.hasPerk(PerkLib.Nurse)) healingFromHealer += 0.2;
+				if (CoC.instance.player.hasPerk(PerkLib.Doctor)) healingFromHealer += 0.2;
+				if (CoC.instance.player.hasPerk(PerkLib.FirstResponse)) healingFromHealer += 0.2;
+				if (CoC.instance.player.hasPerk(PerkLib.Paramedic)) healingFromHealer += 0.2;
+				if (CoC.instance.player.hasPerk(PerkLib.SurgeonsAide)) healingFromHealer += 0.2;
+				if (CoC.instance.player.hasPerk(PerkLib.Surgeon)) healingFromHealer += 0.2;
+				if (CoC.instance.player.hasPerk(PerkLib.Medic)) healingFromHealer += 0.2;
 				changeNum *= healingFromHealer;
 			}
             if (CoC.instance.player.HP + int(changeNum) > maxOverHP()) {
@@ -586,6 +586,23 @@ public class EngineCore {
             }
         }
         callback = createCallBackFunction(func1, arg1, arg2, arg3);
+
+        if (toolTipText == "") toolTipText = getButtonToolTipText(text);
+        if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
+        btn.show(text, callback, toolTipText, toolTipHeader);
+        //CoC.instance.mainView.setOutputText( CoC.instance.currentText );
+        CoC.instance.flushOutputTextToGUI();
+        return btn;
+    }
+
+    public static function fiveArgButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, arg4:* = -9000, arg5:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):CoCButton{
+        var btn:CoCButton = button(pos);
+        if (func1 == null) {
+            return btn.hide();
+        }
+        var callback:Function;
+
+        callback = createCallBackFunction2(func1, arg1, arg2, arg3, arg4, arg5);
 
         if (toolTipText == "") toolTipText = getButtonToolTipText(text);
         if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);

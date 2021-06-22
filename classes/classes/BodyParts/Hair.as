@@ -171,6 +171,13 @@ public class Hair extends BodyPart {
 		appearanceDesc: "Though your {hairInfo} could almost pass for human, it's stripped at the center with light tips not unlike the head of a chipmunk."
 	});
 
+	public static const PRISMATIC:int = 18;
+	EnumValue.add(Types, PRISMATIC, "PRISMATIC", {
+		name:"prismatic",
+		shortDesc: "prismatic {hair}",
+		appearanceDesc: "Although your {hairInfo} looks mostly human, that notion is quickly discarded by its prismatic strands, varying in hue along their length to display all the colors of a rainbow."
+	});
+
 	// Additional modifiers for hair descriptions
 	public static var Styles:/*EnumValue*/Array = [];
 
@@ -203,6 +210,22 @@ public class Hair extends BodyPart {
 	EnumValue.add(Styles, DWARVEN, "DWARVEN", {
 		adjective: "twintailed"
 	});
+
+	public static const SNOWLILY:int  = 6;
+	EnumValue.add(Styles, SNOWLILY, "SNOWLILY", {
+		adjective: ""
+	});
+
+	public static const FOURWIND:int  = 7;
+	EnumValue.add(Styles, FOURWIND, "FOURWIND", {
+		adjective: ""
+	});
+
+	public static const FOURWINDL:int  = 8;
+	EnumValue.add(Styles, FOURWINDL, "FOURWINDL", {
+		adjective: ""
+	});
+
 
 	public var color:String = "no";
 	public var length:Number = 0.0;

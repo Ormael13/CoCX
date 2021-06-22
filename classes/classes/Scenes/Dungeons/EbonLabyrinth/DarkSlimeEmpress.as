@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Dungeons.EbonLabyrinth 
+package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -32,7 +32,7 @@ use namespace CoC;
 			player.dynStats("lus", 17 + rand(7) + this.sens / 5, "scale", false);
 			if (!hasStatusEffect(StatusEffects.LingeringSlime)) createStatusEffect(StatusEffects.LingeringSlime, 0, 0, 0, 0);
 		}
-		
+
 		private function gooSlimeBarrage():void
 		{
 			outputText("The slimes suddenly create bows and arrows out of their body, shooting at you with a volley of slimy aphrodisiac bolts!\n");
@@ -60,7 +60,7 @@ use namespace CoC;
 			outputText("\nLust swells up in your body as the substance splash on you. <b>(<font color=\"#ff00ff\">" + (Math.round(td * 10) / 10) + "</font>)</b> lust damage.");
 			player.dynStats("lus", td, "scale", false);
 		}
-		
+
 		private function gooGroupGrapple():void
 		{
 			outputText("The slime girls suddenly attempt to grapple you one after another to restrict your movements!");
@@ -70,32 +70,28 @@ use namespace CoC;
 				if (!player.hasStatusEffect(StatusEffects.GooBind)) player.createStatusEffect(StatusEffects.GooBind, 0, 0, 0, 0);
 			}
 		}
-		
-		override protected function performCombatAction():void
-		{
+
+		override protected function performCombatAction():void {
 			if (hasStatusEffect(StatusEffects.LingeringSlime)) {
 				outputText("Small stains of lingering slimes cling to your body, insidiously pouring you with aphrodisiacs.\n\n");
 				player.dynStats("lus", (10 + int(player.lib / 12 + player.cor / 14)));
 				removeStatusEffect(StatusEffects.LingeringSlime);
-			}			
-			if (player.hasStatusEffect(StatusEffects.GooBind)) gooHaremStrike();
-			else {
-				if (rand(3) == 0) gooGroupGrapple();
-				else gooSlimeBarrage();
 			}
+			super.performCombatAction();
 		}
-		
-		override public function defeated(hpVictory:Boolean):void
+
+
+				override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.dungeons.ebonlabyrinth.defeatDarkSlimeEmpress();
 		}
-		
+
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			SceneLib.dungeons.ebonlabyrinth.defeatedByDarkSlimeEmpress();
 		}
-		
-		public function DarkSlimeEmpress() 
+
+		public function DarkSlimeEmpress()
 		{
 			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 65) {
 				initStrTouSpeInte(120, 240, 160, 150);
@@ -159,6 +155,12 @@ use namespace CoC;
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGooType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
+			this.abilities = [
+				{ call: gooHaremStrike, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_FLUID,]},
+				{ call: gooGroupGrapple, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_FLUID]},
+				{ call: gooHaremStrike, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_FLUID], condition: function():Boolean { return player.hasStatusEffect(StatusEffects.GooBind) }, weight:Infinity},
+				{ call: gooSlimeBarrage, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_FLUID]}
+			]
 			checkMonster();
 		}
 	}

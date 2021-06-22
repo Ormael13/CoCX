@@ -1,7 +1,7 @@
 /**
  * Ormael - 28.07.2017
  */
-package classes.Items.Consumables 
+package classes.Items.Consumables
 {
 import classes.BaseContent;
 import classes.BodyParts.Arms;
@@ -31,19 +31,19 @@ public class EmberTF extends BaseContent
 public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	var changes:int = 0;
 	var changeLimit:int = 2;
-	if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-	if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-	if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-	if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-	if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-	if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-	if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-	if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-	if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-	if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+	if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
+	if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
+	if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
+	if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
+	if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
+	if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
+	if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
+	if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
+	if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
+	if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
 	//Temporary storage
 	var temp:Number = 0;
-	if (CoC.instance.mutations.blockingBodyTransformations()) changeLimit = 0;
+	if (player.blockingBodyTransformations()) changeLimit = 0;
 	//Gain Dragon Dick
 	if (changes < changeLimit && player.dragonCocks() < player.cockTotal() && rand(3) == 0) {
 		temp = 0;
@@ -62,7 +62,8 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		else outputText("but you sternly rein in your hands and tuck them into your armpits as the arousing changes run their course.");
 		outputText("  <b>You now have a dragon penis.</b>");
 		//lose lust if sens>=50, gain lust if else
-		dynStats("sen", 10, "lus", 10);
+		dynStats("lus", 10)
+		player.addCurse("sen", 10, 1);
 		changes++;
 		//Apply the TF
 		player.cocks[select].cockType = CockTypesEnum.DRAGON;
@@ -154,12 +155,14 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		}
         changes++;
 	}
+	var dragon_coat_color:Array = ["red", "golden", "metallic golden", "metallic silver", "silver", "snow white", "green", "blue", "bronzed", "black", "midnight"];
 	//Gain Dragon Scales
 	if (player.hasPartialCoat(Skin.DRAGON_SCALES) && changes < changeLimit && rand(3) == 0) {
 		outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, as new scales grew up filling the gaps. ");
 		player.skin.growCoat(Skin.DRAGON_SCALES,{},Skin.COVERAGE_COMPLETE);
+		player.coatColor = randomChoice(dragon_coat_color);
 		outputText("<b>Your body is now fully covered in " + player.skin.coat.color + " shield-shaped dragon scales.</b>");
-		if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedDragonScales)) {
+		if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedDragonScales)) {
 			outputText("\n\n<b>Genetic Memory: Dragon Scales - Memorized!</b>\n\n");
 			player.createStatusEffect(StatusEffects.UnlockedDragonScales, 0, 0, 0, 0);
 		}
@@ -180,7 +183,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	//Gain Dragon Legs
 	if (player.lowerBody != LowerBody.DRAGON && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
 		//(if drider)
-		if (player.lowerBody == LowerBody.DRIDER) outputText("\n\nA disquieting feeling ripples through your arachnid abdomen, and you find yourself losing control of your body from the waist down.  Your spidery legs flail madly as your abdomen visibly swells, chitin cracking ominously as the pressure builds up inside of you... and then explodes!  You wipe the gore from your face in disgust, wondering why you feel no pain.  Rolling over, you see that, caked with spider-slime, you now have a new pair of legs, human-like save for the scales and the bestial paws that serve as feet.  <b>You now have dragon feet.</b>");
+		if (player.isDrider()) outputText("\n\nA disquieting feeling ripples through your arachnid abdomen, and you find yourself losing control of your body from the waist down.  Your spidery legs flail madly as your abdomen visibly swells, chitin cracking ominously as the pressure builds up inside of you... and then explodes!  You wipe the gore from your face in disgust, wondering why you feel no pain.  Rolling over, you see that, caked with spider-slime, you now have a new pair of legs, human-like save for the scales and the bestial paws that serve as feet.  <b>You now have dragon feet.</b>");
 		//(If naga)
 		else if (player.isNaga()) outputText("\n\nYou fall on your face to the ground, hissing and screeching in pain - it feels like someone has grabbed the tip of your tail, pulled it viciously straight, and is now splitting it up the middle with a knife!  Paralyzed from the waist down, you claw desperately at the earth to try and alleviate the pain, and can only think to thank your lucky stars when it fades away.  Looking down where your tail was, though the scales remain, you realize you've become a biped again, your new feet sporting bestial claws on their toes.  <b>You now have dragon feet.</b>");
 		//(If Goo)
@@ -208,7 +211,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	//Arms
 	if (player.arms.type != Arms.DRAGON && player.lowerBody == LowerBody.DRAGON && changes < changeLimit && rand(3) == 0) {
 		outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  dragon, one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
-	//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLizardArms)) {
+	//	if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedLizardArms)) {
 	//		outputText("\n\n<b>Genetic Memory: Lizard Arms - Memorized!</b>\n\n");
 	//		player.createStatusEffect(StatusEffects.UnlockedLizardArms, 0, 0, 0, 0);
 	//	}
@@ -259,28 +262,28 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	}
 	//Get Dragon Breath (Tainted version)
 	//Can only be obtained if you are considered a dragon-morph, once you do get it though, it won't just go away even if you aren't a dragon-morph anymore.
-	if (player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonFireBreath) < 0) {
+	if (player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonFireBreath)) {
 		outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
 		outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
 		player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);
         if (SceneLib.emberScene.emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
         changes++;
 	}
-	if (player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonIceBreath) < 0) {
+	if (player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonIceBreath)) {
 		outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
 		outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel very cold, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
 		player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);
         if (SceneLib.emberScene.emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
         changes++;
 	}
-	if (player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonLightningBreath) < 0) {
+	if (player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonLightningBreath)) {
 		outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
 		outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel like it was electrocuted, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon lightning breath!</b>)");
 		player.createPerk(PerkLib.DragonLightningBreath, 0, 0, 0, 0);
         if (SceneLib.emberScene.emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
         changes++;
 	}
-	if (player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonDarknessBreath) < 0) {
+	if (player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonDarknessBreath)) {
 		outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
 		outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel very... strange and you can't put a finger what this feeling exactly is, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon darkness breath!</b>)");
 		player.createPerk(PerkLib.DragonDarknessBreath, 0, 0, 0, 0);
@@ -336,6 +339,6 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	}
 	if (changes == 0) outputText("\n\nRemarkably, " + (drakesHeart ? "the flower" : "Ember's blood") + " has no effect.  Maybe next time?");
 	flags[kFLAGS.TIMES_TRANSFORMED] += changes;
-}	
+}
 }
 }

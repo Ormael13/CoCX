@@ -138,6 +138,7 @@ package classes.Items
 		public const WALIC:ArmorWithPerk = new WalpurgisIzaliaRobe();
 		public const VLAR:ArmorWithPerk = new VladimirRegalia();
 		public const ERA:ArmorWithPerk = new ElvenRangerArmor();
+		public const IQG:ArmorWithPerk = new IceQueenGown();
 		public const WKIMONO:ArmorWithPerk = new ArmorWithPerk("W.Kimono","W.Kimono","white kimono","a white kimono",0,1,200,"This lovely white kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		/*

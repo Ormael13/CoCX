@@ -23,6 +23,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 
@@ -42,6 +43,7 @@ use namespace CoC;
 		public function firstvisitintro():void {
 			flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] = 1;
 			flags[kFLAGS.SAPPHIRE_TALKS] = 0;
+			spriteSelect(SpriteDb.s_gargoyle);
 			clearOutput();
 			outputText("As you wander the mountains, you eventually climb to the very top, something you never expected to do. Weirdly enough, sitting on a nearby peak is what appears to be a massive temple. You approach the intimidating doors of the building and open them wide. Instantly you’re taken aback by the sight in front of you. ");
 			outputText("There are ancient bloodstains marking the stone floor and stained glass windows depicting various deities adorning each wall. At the end of the building that obviously once was a holy site, sits one depicting Marae. Under each window is a somewhat damaged altar, the light outside shining faintly upon it.");
@@ -69,6 +71,7 @@ use namespace CoC;
 
 		public function repeatvisitintro():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_gargoyle);
 			outputText("You decide to make a trip to the temple. However as soon as you enter the sacred ground, Sapphire screeches and takes flight, spear at the ready. Luckily, she calms down once she recognizes you, assuming a relaxed pose in the middle of the temple.");
 			outputText("\n\n\"<i>Well, hello there! Nice to see you again [name]. You're welcome here, as usual... So are you here to pray?");
 			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 99) outputText(" Or perhaps you're here for something more... mutually agreeable, instead?");
@@ -110,6 +113,11 @@ use namespace CoC;
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.statStore.hasBuff("TaothBlessing")) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.statStore.hasBuff("FenrirBlessing")) addButton(2, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Pray to the god sharing your body for an increase to your might.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) addButton(3, "Fera", PlayerPrayAtTempleFeraAltair).hint("Pray the fallen goddess Fera for an increase to your innuendo and resilience to desire.");
+				//Remove curses
+				if (anyOfAltairsRepaired() && player.gems >= 5000) addButton(4, "Remove Curses", PlayerRemoveCurses).hint("Make a donation to a divinity in order to be freed of all curses or hexes.");
+				else if (!anyOfAltairsRepaired()) addButtonDisabled(4, "Remove Curses", "Without a functionning altar you cannot call upon divine power for deliverence.")
+				else if (!player.statStore.hasBuff("Weakened") && !player.statStore.hasBuff("Drain") && !player.statStore.hasBuff("Damaged")) addButtonDisabled(4, "Remove Curses", "You are not currently under the affliction of a curse or hex.")
+				else if (player.gems < 5000) addButtonDisabled(4, "Remove Curses", "You need at least 5000 gem in order to request deliverance from your maledictions and other status ailments.")
 				addButton(14, "Back", templemainmenu);
 			}
 			else {
@@ -117,10 +125,27 @@ use namespace CoC;
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
+
 		private function anyOfAltairsRepaired():Boolean {
 			return flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1;
-
 		}
+
+		public function PlayerRemoveCurses():void {
+			clearOutput();
+			outputText("You approach one of the many altars, would you like to give a donation of 5000 gems to be freed from your curses or hexes?");
+			doYesNo(PlayerRemoveCursesYes, PlayerPrayAtTemple);
+		}
+
+		public function PlayerRemoveCursesYes():void {
+			clearOutput();
+			outputText("Divine powers radiate from the altar banishing the evil that has took a grip on your body to the void.");
+			player.gems -= 5000;
+			if (player.statStore.hasBuff("Weakened")) player.statStore.removeBuffs("Weakened");
+			else if (!player.statStore.hasBuff("Drain")) player.statStore.removeBuffs("Drained");
+			else player.statStore.removeBuffs("Damaged");
+			doNext(PlayerPrayAtTemple);
+		}
+
 		public function loosingMaraeBlessing():void {
 			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
@@ -429,7 +454,8 @@ use namespace CoC;
 		}
 
 		public function sapphiremenu():void {
-			clearOutput();
+			clearOutput()
+			spriteSelect(SpriteDb.s_gargoyle);
 			outputText("You admit that you were actually looking for her, a response which she seems happy about, as she casually sits next to you and starts conversing.\n\n");
 			outputText("\n\n\"<i>So [name] what did you want to talk about?</i>\"");
 			menu();
@@ -440,6 +466,7 @@ use namespace CoC;
 		}
 		public function TalkThisPlace():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_gargoyle);
 			outputText(" You admit to being curious and Sapphire is glad to tell you about the history of the building. She starts to ");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 1) {
 				outputText("explain again.\n\n");
@@ -458,6 +485,7 @@ use namespace CoC;
 		}
 		public function TalkHer():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_gargoyle);
 			if (flags[kFLAGS.SAPPHIRE_TALKS] == 2 || flags[kFLAGS.SAPPHIRE_TALKS] == 6) {
 				outputText("Now that some time has passed you ask her if she is ready to tell you more about the events she foreshadowed in your previous discussion.\n\n");
 				outputText("\"<i>It pains me to even think about the events of that day, the day the demons appeared. They poured into the cities below us like a tidal wave, devouring souls and corrupting everything in their path. Eventually they began climbing the mountain, and we knew they would be on our doorstep within hours. To prevent them from destroying this holy ground we devised a plan. No matter what the cost to us, the temple had to be protected. ");
@@ -490,6 +518,7 @@ use namespace CoC;
 		}
 		public function TalkSex():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_gargoyle);
 			if (flags[kFLAGS.SAPPHIRE_SEX] == 1) {
 				outputText("Sapphire looks at you expectantly her tail agitated by the excitement of potential physical release.\n\n");
 				outputText("\"<i>Feeling antsy? How would you like us to do it then?");
@@ -525,6 +554,7 @@ use namespace CoC;
 
 		public function SapphireGargoyleDoubleTailfuck():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_gargoyle);
 			outputText("You check Sapphire’s tail then look at yours. An idea sparks in your mind as you tell Sapphire to get on all fours.\n\n");
 			outputText("\"<i>I don't know what’s on your mind but I'm very curious to try it now.</i>\"\n\n");
 			outputText("She complies and you go to her backside, positioning yourself to have your [ass] facing hers. You tell her to entwine her tail around yours, then insert her tip in your pussy. She gets the hint as you proceed to do the same with hers. Now, having both of your tail tips in each others pussies, you tell her to move forward and backward. She yelps in surprise as you do the same, both of your tails sliding in and out of each other's pussies at a decent rhythm. Gosh truth be told you are enjoying your tail just as much as your pussy right now. It’s like discovering you had a ");
@@ -541,6 +571,7 @@ use namespace CoC;
 		}
 		public function SapphireTripleTailOuroboros():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_gargoyle);
 			outputText("You think it over then remember about " + flags[kFLAGS.ONYX_NAME] + " being there too. The third gargoyle must be starving for sex. Unable to decide which one you want to fuck or get fucked by you propose the lot of you tail fuck each other, something to which your two stony mates are more then happy to agree. You all sit in a perfect triangle, positioning your tails appropriately and smiling in anticipation for a threesome that will go down in history.\n\n");
 			outputText("You begin by kissing Sapphire then exchanging with " + flags[kFLAGS.ONYX_NAME] + " the tree of you taking turns in order to feel each other's properly. You are not surprised to discover that out of the three of you " + flags[kFLAGS.ONYX_NAME] + " is the best kisser. Once you all are suitably aroused you playfully insert your tail in Sapphire’s pussy as she position hers over ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Krystal’s waiting cunt");
@@ -605,6 +636,7 @@ use namespace CoC;
 		}
 		public function SapphireMutualMasturbation():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_gargoyle);
 			outputText("Unable to decide on a position you decide to help the temple guardian blow some steam by fingering her. The both of you sit down next to each other and you open the games by kissing Sapphire.");
 			if (player.isGargoyle()) outputText(" While neither of you actually have Saliva the feeling of her stone rugged tongue against yours is quite good.");
 			else outputText(" Her mouth lacking fluids is a weird experience at first but once her tongue is slick with your saliva it starts to feel like anyone else’s, albeit her tongue is slightly longer.");
@@ -631,6 +663,7 @@ use namespace CoC;
 		}
 		public function SapphireFuckHer():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_gargoyle);
 			outputText("Her pussy lips shine polished gems and you can’t stop your cock from hardening in prospect of the gargoyle waiting folds.\n\n");
 			outputText("You begin to gently pull sapphire into a kiss as you lay her over the nearest altar. Sapphire tongue is actually quite skilled for someone who barely discovered the joy of sex. You entwine and seek each other's out for a few minute caressing the gargoyle smooth stone skin with your hand. Sapphire gasp as your fingers trace the outline of her perfectly sculpted curves.\n\n");
 			outputText("\"<i>Ahhhn [name] I...mmm</i>\"\n\n");
@@ -657,6 +690,7 @@ use namespace CoC;
 
 		public function krystalonyxmenu():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_gargoyle);
 			outputText("Waving over at " + flags[kFLAGS.ONYX_NAME] + ", you ask ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
 			else outputText("him");
@@ -728,6 +762,7 @@ use namespace CoC;
 
 		public function KrystalOnyxTailFuck():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_gargoyle);
 			outputText("Lying under ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
 			else outputText("him");
@@ -824,6 +859,7 @@ use namespace CoC;
 		}
 		public function KrystalTribadism():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_gargoyle);
 			outputText("Krystal's pussy looks like it could use some attention and so does yours. You slowly push the gargoyle down on her back as you begin to grind your pussy against her nether lips. With the lubrication of your feminine juices, her smooth stone pussy soon becomes as slippery as wet ice, and grinding yourself on it is even easier than it would be with a woman made of flesh. ");
 			outputText("The both of you moan like cheap whores as your clits engorge from the repeated motions. You begin to grope Krystal's breasts, which are surprisingly malleable despite her stone skin, making her gasp in pleasure as she grabs your [breasts]. Seems she enjoys it just like any normal woman would, despite her stony body.\n\n");
 			outputText("Soon you climax ");
@@ -834,6 +870,7 @@ use namespace CoC;
 		}
 		public function KrystalOnyx69():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_gargoyle);
 			outputText("Your eyes zero in on ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Krystal's smoothly shaped pussy");
 			else outputText("Onyx's perfectly carved cock");
@@ -881,6 +918,7 @@ use namespace CoC;
 		}
 		public function KrystalOnyxGetFucked():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_gargoyle);
 			outputText("The moment you made " + flags[kFLAGS.ONYX_NAME] + "'s perfectly defined shaft you knew you would use it! You begin to slide your hand against ");
 			if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
 			else outputText("his");
@@ -965,6 +1003,7 @@ use namespace CoC;
 		}
 		public function KrystalFuckHer():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_gargoyle);
 			outputText("Krystal sure has a lovely body, you can’t deny that. Her breasts are perfectly shaped, her face could make any man fall for her and that pussy looks so inviting it would be impossible to say no. You slowly push Krystal to the ground ");
 			if (player.isGargoyle()) {
 				outputText("readying your [cock] for the smoking hot gargoyle ");
@@ -1615,8 +1654,8 @@ use namespace CoC;
 		}
 		public function becomingGargoyleYes2():void {
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
-				player.skinTone = "light grey";
-				player.hairColor = "light grey";
+				player.skinTone = "light gray";
+				player.hairColor = "light gray";
 			}
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
 				player.skinTone = "quartz white";
@@ -1630,11 +1669,13 @@ use namespace CoC;
 			player.horns.count = 12 + rand(4);
 			player.beardLength = 0;
 			player.beardStyle = 0;
+			player.createPerk(PerkLib.StrengthOfStone,0,0,0,0);
+			player.removeAllRacialMutation();
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 1) player.femininity = 100;
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2) player.femininity = 0;
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) {
 				player.femininity = 50;
-				if (player.findPerk(PerkLib.Androgyny) < 0) player.createPerk(PerkLib.Androgyny,0,0,0,0);
+				if (!player.hasPerk(PerkLib.Androgyny)) player.createPerk(PerkLib.Androgyny,0,0,0,0);
 			}
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 1) player.hairLength = 0;
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 2) player.hairLength = 2;
@@ -1690,532 +1731,10 @@ use namespace CoC;
 				player.balls = 2;
 				player.ballSize = player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) - 1;
 			}
-			if (player.hasPerk(PerkLib.BlackHeart)) {
-				player.removePerk(PerkLib.BlackHeart);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.BlackHeartEvolved)) {
-				player.removePerk(PerkLib.BlackHeartEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.BlackHeartFinalForm)) {
-				player.removePerk(PerkLib.BlackHeartFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.CatlikeNimbleness)) {
-				player.removePerk(PerkLib.CatlikeNimbleness);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.CatlikeNimblenessEvolved)) {
-				player.removePerk(PerkLib.CatlikeNimblenessEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.CatlikeNimblenessFinalForm)) {
-				player.removePerk(PerkLib.CatlikeNimblenessFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.CaveWyrmLungs)) {
-				player.removePerk(PerkLib.HinezumiBurningBlood);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.CaveWyrmLungsEvolved)) {
-				player.removePerk(PerkLib.HinezumiBurningBloodEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.CaveWyrmLungsFinalForm)) {
-				player.removePerk(PerkLib.HinezumiBurningBloodFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.DisplacerMetabolism)) {
-				player.removePerk(PerkLib.DisplacerMetabolism);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.DisplacerMetabolismEvolved)) {
-				player.removePerk(PerkLib.DisplacerMetabolismEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.DraconicBones)) {
-				player.removePerk(PerkLib.DraconicBones);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.DraconicBonesEvolved)) {
-				player.removePerk(PerkLib.DraconicBonesEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.DraconicBonesFinalForm)) {
-				player.removePerk(PerkLib.DraconicBonesFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.DraconicHeart)) {
-				player.removePerk(PerkLib.DraconicHeart);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.DraconicHeartEvolved)) {
-				player.removePerk(PerkLib.DraconicHeartEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.DraconicHeartFinalForm)) {
-				player.removePerk(PerkLib.DraconicHeartFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.DraconicLungs)) {
-				player.removePerk(PerkLib.DraconicLungs);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.DraconicLungsEvolved)) {
-				player.removePerk(PerkLib.DraconicLungsEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.DraconicLungsFinalForm)) {
-				player.removePerk(PerkLib.DraconicLungsFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ElvishPeripheralNervSys)) {
-				player.removePerk(PerkLib.ElvishPeripheralNervSys);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ElvishPeripheralNervSysEvolved)) {
-				player.removePerk(PerkLib.ElvishPeripheralNervSysEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm)) {
-				player.removePerk(PerkLib.ElvishPeripheralNervSysFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.EasterBunnyEggBag)) {
-				player.removePerk(PerkLib.EasterBunnyEggBag);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.EasterBunnyEggBagEvolved)) {
-				player.removePerk(PerkLib.EasterBunnyEggBagEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.EasterBunnyEggBagFinalForm)) {
-				player.removePerk(PerkLib.EasterBunnyEggBagFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.FloralOvaries)) {
-				player.removePerk(PerkLib.FloralOvaries);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.FloralOvariesEvolved)) {
-				player.removePerk(PerkLib.FloralOvariesEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.FloralOvariesFinalForm)) {
-				player.removePerk(PerkLib.FloralOvariesFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.FrozenHeart)) {
-				player.removePerk(PerkLib.FrozenHeart);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.FrozenHeartEvolved)) {
-				player.removePerk(PerkLib.FrozenHeartEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.FrozenHeartFinalForm)) {
-				player.removePerk(PerkLib.FrozenHeartFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.GazerEye)) {
-				player.removePerk(PerkLib.GazerEye);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.GazerEyeEvolved)) {
-				player.removePerk(PerkLib.GazerEyeEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) {
-				player.removePerk(PerkLib.GazerEyeFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.GorgonsEyes)) {
-				player.removePerk(PerkLib.GorgonsEyes);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.GorgonsEyesEvolved)) {
-				player.removePerk(PerkLib.GorgonsEyesEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HarpyHollowBones)) {
-				player.removePerk(PerkLib.HarpyHollowBones);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HarpyHollowBonesEvolved)) {
-				player.removePerk(PerkLib.HarpyHollowBonesEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HarpyHollowBonesFinalForm)) {
-				player.removePerk(PerkLib.HarpyHollowBonesFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HeartOfTheStorm)) {
-				player.removePerk(PerkLib.HeartOfTheStorm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HeartOfTheStormEvolved)) {
-				player.removePerk(PerkLib.HeartOfTheStormEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HeartOfTheStormFinalForm)) {
-				player.removePerk(PerkLib.HeartOfTheStormFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HellcatParathyroidGlands)) {
-				player.removePerk(PerkLib.HellcatParathyroidGlands);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HellcatParathyroidGlandsEvolved)) {
-				player.removePerk(PerkLib.HellcatParathyroidGlandsEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HellcatParathyroidGlandsFinalForm)) {
-				player.removePerk(PerkLib.HellcatParathyroidGlandsFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HinezumiBurningBlood)) {
-				player.removePerk(PerkLib.HinezumiBurningBlood);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HinezumiBurningBloodEvolved)) {
-				player.removePerk(PerkLib.HinezumiBurningBloodEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HinezumiBurningBloodFinalForm)) {
-				player.removePerk(PerkLib.HinezumiBurningBloodFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HollowFangs)) {
-				player.removePerk(PerkLib.HollowFangs);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HollowFangsEvolved)) {
-				player.removePerk(PerkLib.HollowFangsEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.HollowFangsFinalForm)) {
-				player.removePerk(PerkLib.HollowFangsFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.KitsuneThyroidGland)) {
-				player.removePerk(PerkLib.KitsuneThyroidGland);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.KitsuneThyroidGlandEvolved)) {
-				player.removePerk(PerkLib.KitsuneThyroidGlandEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.KitsuneThyroidGlandFinalForm)) {
-				player.removePerk(PerkLib.KitsuneThyroidGlandFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.LactaBovinaOvaries)) {
-				player.removePerk(PerkLib.LactaBovinaOvaries);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.LactaBovinaOvariesEvolved)) {
-				player.removePerk(PerkLib.LactaBovinaOvariesEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.LactaBovinaOvariesFinalForm)) {
-				player.removePerk(PerkLib.LactaBovinaOvariesFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.LizanMarrow)) {
-				player.removePerk(PerkLib.LizanMarrow);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.LizanMarrowEvolved)) {
-				player.removePerk(PerkLib.LizanMarrowEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.LizanMarrowFinalForm)) {
-				player.removePerk(PerkLib.LizanMarrowFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ManticoreMetabolism)) {
-				player.removePerk(PerkLib.ManticoreMetabolism);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ManticoreMetabolismEvolved)) {
-				player.removePerk(PerkLib.ManticoreMetabolismEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.MantislikeAgility)) {
-				player.removePerk(PerkLib.MantislikeAgility);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.MantislikeAgilityEvolved)) {
-				player.removePerk(PerkLib.MantislikeAgilityEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.MantislikeAgilityFinalForm)) {
-				player.removePerk(PerkLib.MantislikeAgilityFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.MelkieLung)) {
-				player.removePerk(PerkLib.MelkieLung);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.MelkieLungEvolved)) {
-				player.removePerk(PerkLib.MelkieLungEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.MelkieLungFinalForm)) {
-				player.removePerk(PerkLib.MelkieLungFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.MinotaurTesticles)) {
-				player.removePerk(PerkLib.MinotaurTesticles);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.MinotaurTesticlesEvolved)) {
-				player.removePerk(PerkLib.MinotaurTesticlesEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.MinotaurTesticlesFinalForm)) {
-				player.removePerk(PerkLib.MinotaurTesticlesFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.NaturalPunchingBag)) {
-				player.removePerk(PerkLib.NaturalPunchingBag);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.NaturalPunchingBagEvolved)) {
-				player.removePerk(PerkLib.NaturalPunchingBagEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) {
-				player.removePerk(PerkLib.NaturalPunchingBagFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.NekomataThyroidGland)) {
-				player.removePerk(PerkLib.NekomataThyroidGland);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.NekomataThyroidGlandEvolved)) {
-				player.removePerk(PerkLib.NekomataThyroidGlandEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.NekomataThyroidGlandFinalForm)) {
-				player.removePerk(PerkLib.NekomataThyroidGlandFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.NukiNuts)) {
-				player.removePerk(PerkLib.NukiNuts);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.NukiNutsEvolved)) {
-				player.removePerk(PerkLib.NukiNutsEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.NukiNutsFinalForm)) {
-				player.removePerk(PerkLib.NukiNutsFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ObsidianHeart)) {
-				player.removePerk(PerkLib.ObsidianHeart);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ObsidianHeartEvolved)) {
-				player.removePerk(PerkLib.ObsidianHeartEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ObsidianHeartFinalForm)) {
-				player.removePerk(PerkLib.ObsidianHeartFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.OniMusculature)) {
-				player.removePerk(PerkLib.OniMusculature);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.OniMusculatureEvolved)) {
-				player.removePerk(PerkLib.OniMusculatureEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.OniMusculatureFinalForm)) {
-				player.removePerk(PerkLib.OniMusculatureFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.OrcAdrenalGlands)) {
-				player.removePerk(PerkLib.OrcAdrenalGlands);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.OrcAdrenalGlandsEvolved)) {
-				player.removePerk(PerkLib.OrcAdrenalGlandsEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.OrcAdrenalGlandsFinalForm)) {
-				player.removePerk(PerkLib.OrcAdrenalGlandsFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.PigBoarFat)) {
-				player.removePerk(PerkLib.PigBoarFat);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.PigBoarFatEvolved)) {
-				player.removePerk(PerkLib.PigBoarFatEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.PigBoarFatFinalForm)) {
-				player.removePerk(PerkLib.PigBoarFatFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.SalamanderAdrenalGlands)) {
-				player.removePerk(PerkLib.SalamanderAdrenalGlands);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsEvolved)) {
-				player.removePerk(PerkLib.SalamanderAdrenalGlandsEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.SalamanderAdrenalGlandsFinalForm)) {
-				player.removePerk(PerkLib.SalamanderAdrenalGlandsFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ScyllaInkGlands)) {
-				player.removePerk(PerkLib.ScyllaInkGlands);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ScyllaInkGlandsEvolved)) {
-				player.removePerk(PerkLib.ScyllaInkGlandsEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.TrachealSystem)) {
-				player.removePerk(PerkLib.TrachealSystem);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.TrachealSystemEvolved)) {
-				player.removePerk(PerkLib.TrachealSystemEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.TrachealSystemFinalForm)) {
-				player.removePerk(PerkLib.TrachealSystemFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.VampiricBloodsteam)) {
-				player.removePerk(PerkLib.VampiricBloodsteam);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.VampiricBloodsteamEvolved)) {
-				player.removePerk(PerkLib.VampiricBloodsteamEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.VampiricBloodsteamFinalForm)) {
-				player.removePerk(PerkLib.VampiricBloodsteamFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.FeyArcaneBloodstream)) {
-				player.removePerk(PerkLib.FeyArcaneBloodstream);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.FeyArcaneBloodstreamEvolved)) {
-				player.removePerk(PerkLib.FeyArcaneBloodstreamEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.FeyArcaneBloodstreamFinalForm)) {
-				player.removePerk(PerkLib.FeyArcaneBloodstreamFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.EclipticMind)) {
-				player.removePerk(PerkLib.EclipticMind);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.EclipticMindEvolved)) {
-				player.removePerk(PerkLib.EclipticMindEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.EclipticMindFinalForm)) {
-				player.removePerk(PerkLib.EclipticMindFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.VenomGlands)) {
-				player.removePerk(PerkLib.VenomGlands);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.VenomGlandsEvolved)) {
-				player.removePerk(PerkLib.VenomGlandsEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.VenomGlandsFinalForm)) {
-				player.removePerk(PerkLib.VenomGlandsFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.WhaleFat)) {
-				player.removePerk(PerkLib.WhaleFat);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.WhaleFatEvolved)) {
-				player.removePerk(PerkLib.WhaleFatEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.WhaleFatFinalForm)) {
-				player.removePerk(PerkLib.WhaleFatFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.YetiFat)) {
-				player.removePerk(PerkLib.YetiFat);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.YetiFatEvolved)) {
-				player.removePerk(PerkLib.YetiFatEvolved);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.YetiFatFinalForm)) {
-				player.removePerk(PerkLib.YetiFatFinalForm);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodyInitialStage)){
-				player.removePerk(PerkLib.ChimericalBodyInitialStage);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodySemiBasicStage)){
-				player.removePerk(PerkLib.ChimericalBodySemiBasicStage);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodyBasicStage)){
-				player.removePerk(PerkLib.ChimericalBodyBasicStage);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage)){
-				player.removePerk(PerkLib.ChimericalBodySemiImprovedStage);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodyImprovedStage)){
-				player.removePerk(PerkLib.ChimericalBodyImprovedStage);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodySemiAdvancedStage)){
-				player.removePerk(PerkLib.ChimericalBodySemiAdvancedStage);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodyAdvancedStage)){
-				player.removePerk(PerkLib.ChimericalBodyAdvancedStage);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)){
-				player.removePerk(PerkLib.ChimericalBodySemiSuperiorStage);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodySuperiorStage)){
-				player.removePerk(PerkLib.ChimericalBodySuperiorStage);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodySemiPeerlessStage)){
-				player.removePerk(PerkLib.ChimericalBodySemiPeerlessStage);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodyPeerlessStage)) {
-				player.removePerk(PerkLib.ChimericalBodyPeerlessStage);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
-				player.removePerk(PerkLib.ChimericalBodySemiEpicStage);
-				player.perkPoints += 1;
-			}
 			becomingGargoyleYes3();
 		}
+
+
 		public function becomingGargoyleYes3():void {
 			outputText("You mix the blood with powdered coal, honey and drakeheart, creating the mixture required to paint the arcanic circles. You draw them around the statue under the worried gaze of Sapphire. Once done, you lay down on the altar, touching the statue with the soul gem and ask Sapphire to recite the words written in the book for you.\n\n");
 			outputText("Sapphire protests for a few seconds, clearly upset by this \"<i>You can't be serious! You're planning to insert your own soul inside a gargoyle? Are you actually attempting suicide? This isn't something one should do so lightly!</i>\"\n\n");

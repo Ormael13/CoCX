@@ -872,7 +872,7 @@ public static const ESSRAYLE_ESCAPED_DUNGEON:int                                
 public static const TOLD_MOTHER_TO_RELEASE_ESSY:int                                 =  864; //
 public static const ESSY_DUNGEON_FUCKED:int                                         =  865; //
 public static const ESSY_MET_IN_DUNGEON:int                                         =  866; //
-public static const DOUBLE_ATTACK_STYLE:int                                         =  867; // DOUBLE_ATTACK_STYLE" Description="0 = always, 1 = dynamic, 2 = single
+public static const DOUBLE_ATTACK_STYLE:int                                         =  867; // DOUBLE_ATTACK_STYLE" Description="prefered number of attacks is (X+1)
 public static const SPELLS_CAST:int                                                 =  868; //
 public static const MILK_NAME:int                                                   =  869; //
 public static const MILK_SIZE:int                                                   =  870; //
@@ -1979,7 +1979,7 @@ public static const UNKNOWN_FLAG_NUMBER_01970:int                               
 public static const UNKNOWN_FLAG_NUMBER_01971:int                                   = 1971;
 public static const UNKNOWN_FLAG_NUMBER_01972:int                                   = 1972;
 public static const UNKNOWN_FLAG_NUMBER_01973:int                                   = 1973;
-public static const UNKNOWN_FLAG_NUMBER_01974:int                                   = 1974;
+public static const TRUE_DEMONS_KILLED:int                                   		= 1974;
 public static const WRATH_GIANT_SLAYER_GOBLIN_MECH:int                              = 1975;
 public static const UNKNOWN_FLAG_NUMBER_01976:int                                   = 1976;
 public static const UNKNOWN_FLAG_NUMBER_01977:int                                   = 1977;
@@ -3006,4 +3006,4 @@ public static const LOW_STANDARDS_FOR_ALL:int                                   
 public static const HYPER_HAPPY:int                                                 = 2998;
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
 	}
-}
+}

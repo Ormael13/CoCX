@@ -102,14 +102,6 @@ public class TentacleBeast extends Monster
 			}
 		}
 
-		override protected function performCombatAction():void
-		{
-			//tentacle beasts have special AI
-			if (rand(2) == 0 || hasStatusEffect(StatusEffects.TentacleCoolDown))
-				special1();
-			else special2();
-		}
-
 		public function TentacleBeast()
 		{
 			trace("TentacleBeast Constructor!");
@@ -233,8 +225,10 @@ public class TentacleBeast extends Monster
 					consumables.SNAKEBANE,
 					consumables.IRONWEED,
 					consumables.BLADEFERN);
-			this.special1 = tentaclePhysicalAttack;
-			this.special2 = tentacleEntwine;
+			this.abilities = [
+				{ call: tentaclePhysicalAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[], condition: function():Boolean { return hasStatusEffect(StatusEffects.TentacleCoolDown) }},
+				{ call: tentacleEntwine, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
+			]
 			this.tailType = Tail.DEMONIC;
 			checkMonster();
 		}

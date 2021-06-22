@@ -19,13 +19,13 @@ import classes.Player;
 		}
 
 		override public function playerEquip():Jewelry {
-			while (game.player.findPerk(PerkLib.OniDrinkingJug) >= 0) game.player.removePerk(PerkLib.OniDrinkingJug);
+			while (game.player.hasPerk(PerkLib.OniDrinkingJug)) game.player.removePerk(PerkLib.OniDrinkingJug);
 			game.player.createPerk(PerkLib.OniDrinkingJug,0,0,0,0);
 			return super.playerEquip();
 		}
 
 		override public function playerRemove():Jewelry {
-			while (game.player.findPerk(PerkLib.OniDrinkingJug) >= 0) game.player.removePerk(PerkLib.OniDrinkingJug);
+			while (game.player.hasPerk(PerkLib.OniDrinkingJug)) game.player.removePerk(PerkLib.OniDrinkingJug);
 			return super.playerRemove();
 		}
 	}

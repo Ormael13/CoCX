@@ -23,6 +23,8 @@ public class Tail extends SaveableBodyPart {
 	 * - appearanceDesc: description for PlayerAppearance.as
 	 * - appearanceDescFunc: a function that returns a description for PlayerAppearance.as (appearanceDesc is ignored if this exists)
 	 *
+	 * - draconic: part counts as "dragon or variant"
+	 *
 	 * - stinger: whether part has a stringer
 	 * - tailSlam: whether part enables tail slam
 	 * - isLong: Wwhether the tail is long
@@ -163,6 +165,7 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, DRACONIC, "DRACONIC", {
 		name:"draconic",
 		appearanceDesc: "A thin, scaly, prehensile reptilian tail, almost as long as you are tall, swings behind you like a living bullwhip. The end of its tip is equipped with spikes of bone, meant to deliver painful blows.",
+		draconic: true,
 		tailSlam: true,
 		isLong: true
 	});
@@ -274,6 +277,7 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, ORCA, "ORCA", {
 		name:"orca",
 		appearanceDesc: "A long, powerful orca tail trails down from your backside, swaying to and fro, always ready to propulse you through the water or smack an opponent on the head. It has a huge fin at the end, and a smaller one not so far from your ass.",
+		draconic: true,
 		tailSlam: true
 	});
 	public static const YGGDRASIL: int = 32;
@@ -439,6 +443,12 @@ public class Tail extends SaveableBodyPart {
 			.replace(legCountPattern, num2Text(creature.legCount))
 			.replace(legCountMinusTwoPattern, num2Text(creature.legCount - 2))
 			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
+	}
+
+	public static function hasDraconicTail(creature: *):Boolean {
+		const id: int = creature.tailType;
+
+		return Types[id].draconic || false;
 	}
 }
 }

@@ -120,7 +120,7 @@ public class WaterElemental extends Monster
 				this.imageName = "water elemental";
 				this.long = "You're currently fighting water elemental. It's a four feet tall body of water shaped into a humanoid form. It's using bare fists to fight.";
 				this.tallness = 48;
-				initStrTouSpeInte(10, 35, 45, 45);
+				initStrTouSpeInte(10, 25, 45, 45);
 				initWisLibSensCor(45, 10, 20, 50);
 				this.weaponAttack = 5;
 				this.armorDef = 5;

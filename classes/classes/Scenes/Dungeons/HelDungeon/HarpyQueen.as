@@ -12,23 +12,23 @@ import classes.Scenes.SceneLib;
 public class HarpyQueen extends Monster
 	{
 		public var spellCostWhitefire:int = 12;
-		
+
 		//ATTACK ONE: ELDRITCH ROPES
 		public function eldritchRopes():void {
 			outputText("The Harpy Queen flicks her left wrist at you. Before you can blink, ropes of white-hot magic hurtle toward you. You manage to duck and dodge a few of them, but a pair still grab your wrists, pulling painfully at your arms.");
 			//(Effect: Grab + Physical Damage)
 			var damage:int = 25 + rand(this.inte / 5);
-			damage = player.takeMagicDamage(damage, true);
+			player.takeMagicDamage(damage, true);
 			createStatusEffect(StatusEffects.QueenBind,0,0,0,0);
 		}
 
 		public function ropeStruggles(wait:Boolean = false):void {
 			clearOutput();
-			//Struggle Fail: 
+			//Struggle Fail:
 			if(rand(10) > 0 && player.str/5 + rand(20) < 23 || wait) {
 				outputText("You give a mighty try, but cannot pull free of the magic ropes!  The Harpy Queen laughs uproariously, pulling at your arms harder.");
-				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {var damage:int = 25 + rand(10);
-				damage = player.takeMagicDamage(damage, true);
+				if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {var damage:int = 25 + rand(10);
+				player.takeMagicDamage(damage, true);
 				}
 			}
 			else {
@@ -49,9 +49,9 @@ public class HarpyQueen extends Monster
 			outputText("The queen swings her arm at you and, despite being a few feet away, you feel a kinetic wall slam into you, and you go flying - right into the harpy brood!  You feel claws, teeth and talons dig into you, but you're saved by a familiar pair of scaled arms.  \"<i>Get back in there!</i>\" Helia shouts, throwing you back into the battle!");
 			//(Effect; Heavy Damage)
 			var damage:Number = 100 + rand(this.wis);
-			damage = player.takeMagicDamage(damage, true);
+			player.takeMagicDamage(damage, true);
 		}
-		
+
 		//ATTACK FOUR: Whitefire!
 		public function whitefire():void {
 			outputText("The queen narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!");
@@ -65,30 +65,22 @@ public class HarpyQueen extends Monster
 				damage *= 1.5;
 				outputText("It's super effective! ");
 			}
-			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damage *= 1.15;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damage *= 1.3;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 1.5;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 2;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 1) damage *= 1.2;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) damage *= 1.5;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] == 3) damage *= 2;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 3.5;
 			damage = Math.round(damage);
 			player.takeFireDamage(damage, true);
 			mana -= spellCostWhitefire;
 		}
-		
+
 		public function SpellMod():Number {
 			var mod:Number = 1;
-			if (findPerk(PerkLib.JobSorcerer) >= 0) mod += .1;
-			if (findPerk(PerkLib.Mage) >= 0) mod += .2;
-			if (findPerk(PerkLib.Spellpower) >= 0) mod += .2;
-			if (findPerk(PerkLib.WizardsFocus) >= 0) mod += .6;
+			if (hasPerk(PerkLib.JobSorcerer)) mod += .1;
+			if (hasPerk(PerkLib.Mage)) mod += .2;
+			if (hasPerk(PerkLib.Spellpower)) mod += .2;
+			if (hasPerk(PerkLib.WizardsFocus)) mod += .6;
 			return mod;
-		}
-		
-		override protected function performCombatAction():void
-		{
-			if (rand(4) == 0) eldritchRopes();
-			else if(rand(3) == 0 && mana >= spellCostWhitefire) whitefire();
-			else if(rand(2) == 0) lustSpikeAttack();
-			else windSlamAttack();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
@@ -141,6 +133,12 @@ public class HarpyQueen extends Monster
 			this.tailType = Tail.HARPY;
 			this.wings.type = Wings.FEATHERED_LARGE;
 			this.drop = NO_DROP;
+			this.abilities = [
+				{ call: eldritchRopes, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]},
+				{ call: lustSpikeAttack, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]},
+				{ call: windSlamAttack, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[]},
+				{ call: whitefire, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[TAG_FIRE], condition: function():Boolean { return mana >= spellCostWhitefire }}
+			]
 			this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Mage, 0, 0, 0, 0);
@@ -150,7 +148,7 @@ public class HarpyQueen extends Monster
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}
-		
+
 	}
 
 }

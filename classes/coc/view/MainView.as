@@ -812,6 +812,9 @@ public class MainView extends Block {
 
 	public function appendOutputText(text:String):void {
 		var fmt:TextFormat = this.mainText.defaultTextFormat;
+		fmt.bold = false;
+		fmt.italic = false;
+		fmt.underline = false;
 		this.mainText.htmlText += text;
 		this.mainText.defaultTextFormat = fmt;
 		this.scrollBar.update();
@@ -819,6 +822,10 @@ public class MainView extends Block {
 
 	public function setOutputText(text:String):void {
 		var fmt:TextFormat     = this.mainText.defaultTextFormat;
+		fmt.bold = false;
+		fmt.italic = false;
+		fmt.underline = false;
+		this.mainText.defaultTextFormat = fmt;
 		this.mainText.htmlText = text; // Altering htmlText can cause changes in defaultTextFormat
 		var fmtnew:TextFormat  = this.mainText.defaultTextFormat;
 		this.mainText.defaultTextFormat = fmt;

@@ -6,8 +6,9 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Measurements;
 import classes.internals.Utils;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects
-import classes.PlayerAppearance
+import classes.StatusEffects;
+import classes.PlayerAppearance;
+import classes.internals.Utils;
 
 public class ParserTags {
 
@@ -79,6 +80,7 @@ public class ParserTags {
         "horns"                 : function ():* { return CoC.instance.player.hornDescript(); },
         "hydraheads"            : function ():* { return Utils.num2Text(CoC.instance.player.statusEffectv1(StatusEffects.HydraTailsPlayer)); },
         "leg"                   : function ():* { return CoC.instance.player.leg(); },
+        "legcount"              : function ():* { return Utils.num2Text(CoC.instance.player.legCount) },
         "legs"                  : function ():* { return CoC.instance.player.legs(); },
         "lowergarment"          : function ():* { return CoC.instance.player.lowerGarmentName; },
         "man"                   : function ():* { return CoC.instance.player.mf("man", "woman"); },

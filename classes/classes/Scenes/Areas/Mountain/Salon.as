@@ -518,12 +518,15 @@ private function changeHairStyle():void {
 	clearOutput();
 	outputText("What hair style would you like?");
 	menu();
-	addButton(0, "Normal", chooseHairStyleFinalize, 0);
-	addButton(1, "Wild", chooseHairStyleFinalize, 1);
-	addButton(2, "Ponytail", chooseHairStyleFinalize, 2);
-	addButton(3, "G.Ponytail", chooseHairStyleFinalize, 3);
-	addButton(4, "TwinPigtail", chooseHairStyleFinalize, 4);
-	addButton(5, "Dwarven", chooseHairStyleFinalize, 5);
+	addButton(0, "Normal", chooseHairStyleFinalize, 0).hint("The standard straith cut.");
+	addButton(1, "Wild", chooseHairStyleFinalize, 1).hint("Ruffle and shuffle those hair some.");
+	addButton(2, "Ponytail", chooseHairStyleFinalize, 2).hint("The basic ponytail, a classic.");
+	addButton(3, "G.Tress", chooseHairStyleFinalize, 3).hint("A very long tress that reach all the way to ground level, favored by martial artist all around Mareth.");
+	addButton(4, "TwinPigtail", chooseHairStyleFinalize, 4).hint("Whats cuter then two pigtail realy?");
+	addButton(5, "Dwarven", chooseHairStyleFinalize, 5).hint("A traditionnal dwarven female haircut.");
+	addButton(7, "Snow Lily", chooseHairStyleFinalize, 6).hint("A nowaday rare haircut mostly seen amonst people of the long lost snow kingdom.");
+	addButton(8, "Wind Braid", chooseHairStyleFinalize, 7).hint("The four wind braid seen almost seldomly amonst student of the now near extinct four wind school.");
+	addButton(9, "Wind Long", chooseHairStyleFinalize, 8).hint("The four wind long hair cut seen almost seldomly amonst student of the now near extinct four wind school.");
 	addButton(6, "Back", salonPurchaseMenu);
 }
 

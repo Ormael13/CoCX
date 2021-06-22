@@ -13,11 +13,11 @@ public class Harpy extends Monster
 	{
 
 //*Note, special attack one is an idea based on Ceraph.
-//About the attack that raises your Lust to 100 if you 
-//don't "wait" when she unleashes it. Alright, I 
+//About the attack that raises your Lust to 100 if you
+//don't "wait" when she unleashes it. Alright, I
 //basically used the idea, sorry. But it's a neat idea
-//so it should be fitting, right? Or you could just 
-//dump it out altogether. It'd cause severe damage, 
+//so it should be fitting, right? Or you could just
+//dump it out altogether. It'd cause severe damage,
 //in the 150 region if you don't wise up.*
 
 		protected function harpyUberCharge():void
@@ -32,7 +32,7 @@ public class Harpy extends Monster
 				if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 0) {
 					outputText("The harpy lets out a terrible cry and drops, reaching an almost impossible speed as she dives down at you.  Her eyes are narrowed like a true bird of prey.  You were too busy with your own attack to avoid it!  Her claws surge down and pierce your [armor] like paper, driving hard into the flesh beneath and making you cry out in pain.  The harpy dumps you onto the ground, your wounds bleeding profusely. ");
 					var damage:Number = (160 + rand(20)) * (1 + (player.newGamePlusMod() / 2));
-					player.takePhysDamage(damage, true);					
+					player.takePhysDamage(damage, true);
 					removeStatusEffect(StatusEffects.Uber);
 				}
 				else {
@@ -51,15 +51,8 @@ public class Harpy extends Monster
 			player.dynStats("lus", (12 + rand(player.effectiveSensitivity() / 5)));
 		}
 
-
-		override protected function performCombatAction():void
-		{
-			var select:Number = 1;
-			if (hasStatusEffect(StatusEffects.Uber)) {
-				harpyUberCharge();
-				return;
-			}
-			super.performCombatAction();
+		public function hasUber():Boolean {
+			return hasStatusEffect(StatusEffects.Uber)
 		}
 
 		override public function defeated(hpVictory:Boolean):void
@@ -134,8 +127,12 @@ public class Harpy extends Monster
 					.add(consumables.SKYSEED,1/5)
 					.elseDrop(consumables.GLDSEED);
 			this.wings.type = Wings.HARPY;
-			this.special1 = harpyUberCharge;
-			this.special2 = harpyTease;
+			this.abilities = [
+				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: harpyTease, type: ABILITY_TEASE, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: harpyUberCharge, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{ call: harpyUberCharge, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY], condition: hasUber, weight: Infinity}
+			]
 			this.createStatusEffect(StatusEffects.Flying,50,0,0,0);
 			checkMonster();
 		}
