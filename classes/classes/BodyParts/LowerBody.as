@@ -1167,7 +1167,7 @@ public class LowerBody extends SaveableBodyPart {
 		name: "wendigo",
 		appearanceDesc: "Your legs are covered in fur up to the knee however they are entirely devoid of feet."
 	});
-	
+
 	public static const ATLACH_NACHA:int          = 69;
 	EnumValue.add(Types, ATLACH_NACHA, "ATLACH_NACHA", {
 		name: "atlach nacha",
@@ -1180,7 +1180,8 @@ public class LowerBody extends SaveableBodyPart {
 	public static const SEADRAGON:int = 70;
 	EnumValue.add(Types, SEADRAGON, "SEADRAGON", {
 		name: "sea dragon",
-		appearanceDesc: "Your {legCount} legs are mostly human save for the webbing between your clawed toes that assists you in swimming."
+		appearanceDesc: "Your {legCount} legs are mostly human save for the webbing between your clawed toes that assists you in swimming.",
+		draconic: true
 	});
 
 	override public function set type(value:int):void {
