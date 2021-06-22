@@ -1935,7 +1935,7 @@ public static const UNKNOWN_FLAG_NUMBER_01926:int                               
 public static const UNKNOWN_FLAG_NUMBER_01927:int                                   = 1927;
 public static const UNKNOWN_FLAG_NUMBER_01928:int                                   = 1928;
 public static const UNKNOWN_FLAG_NUMBER_01929:int                                   = 1929;
-public static const UNKNOWN_FLAG_NUMBER_01930:int                                   = 1930;
+public static const AHRI_FOLLOWER:int                                   			= 1930;
 public static const UNKNOWN_FLAG_NUMBER_01931:int                                   = 1931;
 public static const UNKNOWN_FLAG_NUMBER_01932:int                                   = 1932;
 public static const UNKNOWN_FLAG_NUMBER_01933:int                                   = 1933;

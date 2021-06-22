@@ -1605,11 +1605,13 @@ public class CombatMagic extends BaseCombatContent {
 	//THIS FEATURE GOVERS EVERY POST CAST EFFECT YOUR SPELLS MAY CAUSE
 	public function MagicAddonEffect(numberOfProcs:Number = 1):void {
 		if (player.hasStatusEffect(StatusEffects.Venomancy)) {
-			if (player.tailVenom >= 4) {
+			if (player.tailVenom >= player.VenomWebCost()) {
 				var injections:Number = 0;
-				while (player.tailVenom >= 4 && injections < numberOfProcs) {
+				while (player.tailVenom >= player.VenomWebCost() && injections < numberOfProcs) {
 					var damageB:Number = 35 + rand(player.lib / 10);
 					var poisonScaling:Number = 1;
+					var dam4Bab:Number = 1;
+					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dam4Bab *= 2;
 					poisonScaling += player.lib/100;
 					poisonScaling += player.tou/100;
 					if (player.level < 10) damageB += 20 + (player.level * 3);
@@ -1617,13 +1619,15 @@ public class CombatMagic extends BaseCombatContent {
 					else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
 					else damageB += 80;
 					damageB *= 0.04;
+					damageB *= dam4Bab;
+					poisonScaling *= dam4Bab;
 					damageB *= 1+(poisonScaling/10);
 					monster.teased(monster.lustVuln * damageB, false);
 					monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
 					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
-					player.tailVenom -= 4;
+					player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					injections++;
 				}

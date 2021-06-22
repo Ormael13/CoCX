@@ -20,10 +20,12 @@ package classes.Scenes.Places.HeXinDao
 	import classes.Items.UndergarmentLib;
 	import classes.Items.WeaponLib;
 	import classes.Items.WeaponRangeLib;
+	import classes.Scenes.NPCs.AhriFollower;
 
 	public class JourneyToTheEast extends HeXinDaoAbstractContent
 	{
 		public var riverdungeon:RiverDungeon = new RiverDungeon();
+		public var ahriScene:AhriFollower = new AhriFollower();
 
 		public function JourneyToTheEast()
 		{}
@@ -44,7 +46,8 @@ package classes.Scenes.Places.HeXinDao
 			addButton(4, "Adv.Guild", BoardkeeperYangMain);
 			//addButtonDisabled(5, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
 			//addButtonDisabled(6, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
-			//addButtonDisabled(7, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
+			if (flags[kFLAGS.AHRI_FOLLOWER] == 1) addButtonDisabled(7, "Madam", "You see 'Madam' in one of inn corners.");
+			else addButtonDisabled(7, "???", "You see some suspicious looking animal-morph in one of inn corners.");//Ahri
 			if (flags[kFLAGS.MICHIKO_FOLLOWER] < 1) addButton(8, "???", SceneLib.michikoFollower.firstMeetingMichiko).hint("You see some suspicious looking squirrel in one of inn corners.");
 			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore()))) {
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 1) addButton(9, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");

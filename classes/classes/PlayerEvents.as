@@ -1252,13 +1252,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Improved venom gland
 			if (flags[kFLAGS.VENOM_TIMES_USED] >= 50 && !player.hasPerk(PerkLib.ImprovedVenomGland)) {
-				outputText("\nYou feel wonderfully healthy. After using your venom so many time your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production. \n\n(<b>Gained Perk: Improved venom gland</b>)\n");
+				outputText("\nYou feel wonderfully healthy. After using your venom so many times your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production. \n\n(<b>Gained Perk: Improved venom gland</b>)\n");
 				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
-			}/*
+			}
 			if (flags[kFLAGS.VENOM_TIMES_USED] >= 125 && !player.hasPerk(PerkLib.ImprovedVenomGlandEx)) {
-				outputText("\nYou feel wonderfully healthy. After using your venom so many time your venom gland development reached it next stage. Allowing for increased capacity, production and lowering usage of venom. \n\n(<b>Gained Perk: Improved venom gland (Ex)</b>)\n");
+				outputText("\nYou feel wonderfully healthy. After using your venom so many times your venom gland development reached it next stage. Allowing for increased capacity, production and lowering usage of venom. \n\n(<b>Gained Perk: Improved venom gland (Ex)</b>)\n");
 				player.createPerk(PerkLib.ImprovedVenomGlandEx, 0, 0, 0, 0);
-			}*/
+			}
+			if (flags[kFLAGS.VENOM_TIMES_USED] >= 375 && !player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
+				outputText("\nYou feel wonderfully healthy. After using your venom so many times your venom gland started to produce more potent venom. Allowing for increased capacity, production and increased effects of venom. \n\n(<b>Gained Perk: Improved venom gland (Su)</b>)\n");
+				player.createPerk(PerkLib.ImprovedVenomGlandSu, 0, 0, 0, 0);
+			}
 			//Kitsune hunger perk
 			if (player.kitsuneScore() >= 10) { //Check for being a kitsune enough
 				if (!player.hasPerk(PerkLib.KitsuneEnergyThirst)) {

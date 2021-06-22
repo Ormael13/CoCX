@@ -3599,7 +3599,7 @@ public class PerkLib
 		public static const ImprovedVenomGlandEx:PerkType = mk("Improved venom gland (Ex)", "Improved venom gland (Ex)",
 				"Increase your venom max capacity and refill speed. Decrease by 25% costs of specials/passives that req. use of venom/web.");
 		public static const ImprovedVenomGlandSu:PerkType = mk("Improved venom gland (Su)", "Improved venom gland (Su)",
-				"Increase slightly your venom max capacity and refill speed.");
+				"Increase by large margin your venom max capacity and refill speed. Venom specials effects increased by 100% at 50% increased cost.");
 		public static const Incorporeality:PerkType = mk("Incorporeality", "Incorporeality",
 				"Allows you to fade into a ghost-like state and temporarily possess others.");
 		public static const InkSpray:PerkType = mk("Ink Spray", "Ink Spray",

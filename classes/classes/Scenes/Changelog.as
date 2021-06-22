@@ -61,15 +61,22 @@ package classes.Scenes
 			outputText("-Added new cultivators specific events: Heavenly Tribulations (H class and G class). They last only for 3/4 turns and req. PC to survive tribulation attacks without dropping to min hp or maxing up lust bar.\n");
 			outputText("-New event perk: H class Heaven Tribulation Survivor. Gained by surviving 3 rounds of H class Heaven tribulation attacks. Effects: +10% to all stats multi/+10 to sens. Allow to comprehend Dao of Elements.\n");
 			outputText("-New event perk: G class Heaven Tribulation Survivor. Gained by surviving 4 rounds of G class Heaven tribulation attacks. Effects: +15% to all stats multi/+15 to sens. Allow to use soulforce to fly without need for wings.\n");
-			outputText("-Each use of venom to apply passive effect on arrows or spells would now increase a bit venom use counter. Maximum venom pool cap been increased and globaly venom costs for use of specials/apssives decreased by 20%.\n");
-			outputText("-\n");//New event perk: Improved venom gland (Ex). Gained by reaching 125 pts on venom use counter. Effects: +200 to max venom, +15 venom recharge, -25% venom costs.
-			outputText("-\n");//New event perk: Improved venom gland (Su). Gained by reaching 250 pts on venom use counter. Effects: +400 to max venom, +45 venom recharge, +25-33% venom specials effects magnitude.
+			outputText("-Each use of venom to apply passive effect on arrows or spells would now increase a bit venom use counter. Maximum venom pool increase from perks or bodypart has been boosted.\n");
+			outputText("-New event perk: Improved venom gland (Ex). Gained by reaching 125 pts on venom use counter. Effects: +200 to max venom, +15 venom recharge, -20% venom costs.\n");
+			outputText("-New event perk: Improved venom gland (Su). Gained by reaching 375 pts on venom use counter. Effects: +400 to max venom, +45 venom recharge, venom specials effects increased by 100% at 50% increased cost.\n");
+			outputText("-Some of setting menu options been greyed out when there isn't any loaded save.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation eprks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
-			outputText("bad-end\n");/*ostatni punkt changelogu
+			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -82,7 +89,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -163,9 +169,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -214,10 +218,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
