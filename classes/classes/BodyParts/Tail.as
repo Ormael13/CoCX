@@ -426,6 +426,10 @@ public class Tail extends SaveableBodyPart {
 		return formatDescription((Types[id].appearanceDescFunc? Types[id].appearanceDescFunc(creature) : Types[id].appearanceDesc) || "", creature);
 	}
 
+	public static function getTFDescription(creature: *, bodyPart: *):String {
+		return formatDescription((bodyPart.tfDescFunc ? bodyPart.tfDescFunc(creature) : bodyPart.tfDesc) || "", creature);
+	}
+
 	private static function formatDescription(desc:String, creature: *): String {
 		const upperCasePattern:RegExp = /^./;
 		const legCountPattern:RegExp = /{legCount}/g;

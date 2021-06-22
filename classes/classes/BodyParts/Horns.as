@@ -9,7 +9,7 @@ public class Horns extends BodyPart {
 	 * - name: human-readable default name, ("non-existant", "demon")
 	 */
 	public static var Types:/*EnumValue*/Array = [];
-	
+
 	public static const NONE:int                     = 0;
 	EnumValue.add(Types, NONE, "NONE", {name:"non-existant"});
 	public static const DEMON:int                    = 1;
@@ -52,10 +52,21 @@ public class Horns extends BodyPart {
 	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {name:"frostwyrm", Gore: true});
 	public static const USHI_ONI_ONNA:int            = 20;
 	EnumValue.add(Types, USHI_ONI_ONNA, "USHI_ONI_ONNA", {name:"ushi-oni", Gore: true});
-	
+
 	public function Horns() {
 		super(null, null);
 	}
 	public var count:int = 0;
+
+	public static function getTFDescription(creature: *, bodyPart: *):String {
+		return formatDescription((bodyPart.tfDescFunc ? bodyPart.tfDescFunc(creature) : bodyPart.tfDesc) || "", creature);
+	}
+
+	private static function formatDescription(desc:String, creature: *): String {
+		const upperCasePattern:RegExp = /^./;
+
+		return " " + desc
+			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
+	}
 }
 }

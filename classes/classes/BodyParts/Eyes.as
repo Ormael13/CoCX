@@ -9,7 +9,7 @@ public class Eyes extends BodyPart {
 	 * - name: human-readable default name, ("human", "4 spider")
 	 */
 	public static var Types:/*EnumValue*/Array = [];
-	
+
 	public static const HUMAN:int                = 0;
 	EnumValue.add(Types, HUMAN, "HUMAN", {name:"human"})
 	public static const FOUR_SPIDER_EYES:int     = 1;
@@ -90,11 +90,22 @@ public class Eyes extends BodyPart {
 	EnumValue.add(Types, FIENDISH, "FIENDISH", {name:"fiendish"})
 	public static const DEAD_EYES:int            = 39;
 	EnumValue.add(Types, DEAD_EYES, "DEAD_EYES", {name:"dead"})
-	
+
 	public var count:int;
 	public var colour:String = "brown";
 	public function Eyes() {
 		super(null, null);
+	}
+
+	public static function getTFDescription(creature: *, bodyPart: *):String {
+		return formatDescription((bodyPart.tfDescFunc ? bodyPart.tfDescFunc(creature) : bodyPart.tfDesc) || "", creature);
+	}
+
+	private static function formatDescription(desc:String, creature: *): String {
+		const upperCasePattern:RegExp = /^./;
+
+		return " " + desc
+			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }
 }

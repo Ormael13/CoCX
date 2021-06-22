@@ -9,7 +9,7 @@ public class Antennae extends BodyPart {
 	 * - name: human-readable name, ("non-existant", "mantis")
 	 */
 	public static var Types:/*EnumValue*/Array = [];
-	
+
 	public static const NONE:int 		= 0;
 	EnumValue.add(Types, NONE, "NONE", {name: "non-existant"});
 	public static const MANTIS:int 		= 1;
@@ -24,9 +24,20 @@ public class Antennae extends BodyPart {
 	EnumValue.add(Types, MOTH, "MOTH", {name: "moth"});
 	public static const CENTIPEDE:int 	= 6;
 	EnumValue.add(Types, CENTIPEDE, "CENTIPEDE", {name: "centipede"});
-	
+
 	public function Antennae() {
 		super(null, null);
+	}
+
+	public static function getTFDescription(creature: *, bodyPart: *):String {
+		return formatDescription((bodyPart.tfDescFunc ? bodyPart.tfDescFunc(creature) : bodyPart.tfDesc) || "", creature);
+	}
+
+	private static function formatDescription(desc:String, creature: *): String {
+		const upperCasePattern:RegExp = /^./;
+
+		return " " + desc
+			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }
 }

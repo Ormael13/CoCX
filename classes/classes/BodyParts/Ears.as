@@ -9,7 +9,7 @@ public class Ears extends BodyPart {
 	 * - name: human-readable name, ("human", "horse")
 	 */
 	public static var Types:/*EnumValue*/Array = [];
-	
+
 	public static const HUMAN:int     = 0;
 	EnumValue.add(Types, HUMAN, "HUMAN", {name: "human"});
 	public static const HORSE:int     = 1;
@@ -94,9 +94,20 @@ public class Ears extends BodyPart {
 	EnumValue.add(Types, WEASEL, "WEASEL", {name: "weasel"});
 	public static const SQUIRREL:int  = 41;
 	EnumValue.add(Types, SQUIRREL, "SQUIRREL", {name: "squirrel"});
-	
+
 	public function Ears() {
 		super(null, null);
+	}
+
+	public static function getTFDescription(creature: *, bodyPart: *):String {
+		return formatDescription((bodyPart.tfDescFunc ? bodyPart.tfDescFunc(creature) : bodyPart.tfDesc) || "", creature);
+	}
+
+	private static function formatDescription(desc:String, creature: *): String {
+		const upperCasePattern:RegExp = /^./;
+
+		return " " + desc
+			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }
 }

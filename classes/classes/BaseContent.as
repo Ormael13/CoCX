@@ -270,7 +270,7 @@ import coc.xxc.StoryContext;
 			EngineCore.rawOutputText(output, purgeText);
 		}
 
-		protected function outputText(output:String):void
+		protected static function outputText(output:String):void
 		{
 			EngineCore.outputText(output);
 		}

@@ -25,8 +25,8 @@ public class Skin extends SaveableBodyPart {
 	public static const COVERAGE_MEDIUM:int   = 2;
 	public static const COVERAGE_HIGH:int     = 3;
 	public static const COVERAGE_COMPLETE:int = 4;
-	
-	
+
+
 	/**
 	 * Entry properties:
 	 * - value: numerical id (0, 1, 2)
@@ -37,7 +37,7 @@ public class Skin extends SaveableBodyPart {
 	 * - coat: is valid coat layer type (false, true, true)
 	 */
 	public static var SkinTypes:/*EnumValue*/Array = [];
-	
+
 	public static const PLAIN:int                 = 0;
 	EnumValue.add(SkinTypes, PLAIN, "PLAIN", {name:"skin", plural: false,base:true});
 	public static const FUR:int                   = 1;
@@ -74,7 +74,7 @@ public class Skin extends SaveableBodyPart {
 	EnumValue.add(SkinTypes, FEATHER, "FEATHER", {name:"feather", plural: false,base:true});
 	public static const TRANSPARENT:int 	      = 22;
 	EnumValue.add(SkinTypes, TRANSPARENT, "TRANSPARENT", {name:"transparent", plural: false,base:true});
-	
+
 	/**
 	 * Entry properties:
 	 * - value: numerical id (0, 1)
@@ -84,7 +84,7 @@ public class Skin extends SaveableBodyPart {
 	 * - coat: valid pattern for coat layer
 	 */
 	public static var PatternTypes:/*EnumValue*/Array = [];
-	
+
 	public static const PATTERN_NONE:int = 0;
 	EnumValue.add(PatternTypes, PATTERN_NONE, "NONE", {name:"none", base:true, coat:true});
 	public static const PATTERN_MAGICAL_TATTOO:int = 1;
@@ -116,11 +116,11 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_OIL:int = 14;
 	EnumValue.add(PatternTypes, PATTERN_OIL, "OIL", {name:"oily skin", base:true});
 	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES
-	
+
 	public var base:SkinLayer;
 	public var coat:SkinLayer;
 	private var _coverage:int = COVERAGE_NONE;
-	
+
 	public function Skin(creature:Creature) {
 		super(creature, "skin", ["coverage"]);
 		base = new SkinLayer(this);
@@ -550,6 +550,17 @@ public class Skin extends SaveableBodyPart {
 		savedata.furColor    = coat.color;
 		savedata.scalesColor = coat.color;
 		savedata.chitinColor = coat.color;
+	}
+
+	public static function getTFDescription(creature: *, bodyPart: *):String {
+		return formatDescription((bodyPart.tfDescFunc ? bodyPart.tfDescFunc(creature) : bodyPart.tfDesc) || "", creature);
+	}
+
+	private static function formatDescription(desc:String, creature: *): String {
+		const upperCasePattern:RegExp = /^./;
+
+		return " " + desc
+			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }
 }

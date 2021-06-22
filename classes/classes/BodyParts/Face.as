@@ -288,5 +288,16 @@ public class Face extends SaveableBodyPart {
 	override protected function saveToOldSave(savedata:Object):void {
 		savedata.faceType = type;
 	}
+
+	public static function getTFDescription(creature: *, bodyPart: *):String {
+		return formatDescription((bodyPart.tfDescFunc ? bodyPart.tfDescFunc(creature) : bodyPart.tfDesc) || "", creature);
+	}
+
+	private static function formatDescription(desc:String, creature: *): String {
+		const upperCasePattern:RegExp = /^./;
+
+		return " " + desc
+			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
+	}
 }
 }

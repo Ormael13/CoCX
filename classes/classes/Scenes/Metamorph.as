@@ -5,13 +5,14 @@
 package classes.Scenes
 {
 import classes.*;
+import classes.BodyParts.Hair;
+import classes.GeneticMemories.HairMem;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
 import classes.BodyParts.Gills;
-import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
@@ -31,23 +32,129 @@ use namespace CoC;
 
 		}
 
-public function accessMetamorphMenu():void {
+public function accessMetamorphMenu(currentPage: int = 0):void {
 	clearOutput();
-		outputText("<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph</u></font>\n");
-	outputText("Use your Soulforce to regain any body parts which your body remembers.\n");
-	outputText("<i>Bonus to Max Soulforce: " + 50 * (1 + player.perkv1(PerkLib.Metamorph)) + "</i>\n\n");
-	outputText("<b>Races added to Metamorph:\n");
-	outputText("Alicorn, Bat, Bee, Bicorn, Boar, Cat, Cheshire Cat, Cow, Couatl, Demon, Devil, Displacer Beast, Dragon, Elf, Fox, Gorgon, Harpy, Hellcat, Horse, Human, Kitsune, Lizard, Manticore, Mantis, Minotaur, Naga, Nekomata, Nightmare, Oni, Orc, Orca, Phoenix, Pig, Raiju, Red Panda, Salamander, Shark, Sphinx, Spider (+Drider), Unicorn, Vampire</b>");
+	outputText("<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph</u></font>\n");
+	outputText("You calm your thoughts and take a moment to center yourself, recalling your past experiences. The transformations you have experienced so far have left their mark, not so easily forgotten even when undone and replaced innumerable times. When you focus, you can feel the threads in place, echoes of the many bodies you called your own, of limbs you once owned and skins you wore as comfortably as your current one.\n\nWith a little effort, you could imprint some of those recollections upon yourself. Powerful wings which carried you above the clouds, attentive ears which kept you safe; any such memories will return to you just as easily as they left, still rightfully yours.\n\nIs there anything you would like to change about your current form?");
+
+	outputText("\n\n<b>Bonus to Max Soulforce:</b> " + 50 * (1 + player.perkv1(PerkLib.Metamorph)));
+
 	menu();
 
-	addButton(0, "Hair", accessHairMenu)
-	addButton(8, "Lower Body", accessLowerBodyMenu);;
-	addButton(10, "Page 1", accessPage1MetamorphMenu).hint("Face, Tongue, Eyes, Ears, Horns");
-	addButton(11, "Page 2", accessPage2MetamorphMenu).hint("Arms, Wings");
-	addButton(12, "Page 3", accessPage3MetamorphMenu).hint("Skin, Skin Patterns/Tattoos, Rear Body, Antennae, Gills, Tail");
-	//addButton(13, "Page 4", accessPage4MetamorphMenu);
+	const menusList: Array = [
+		{
+			name: "Hair",
+			func: accessHairMenu
+		},
+		{
+			name: "Face",
+			func: accessFaceMenu
+		},
+		{
+			name: "Eyes",
+			func: accessEyesMenu
+		},
+		{
+			name: "Tongue",
+			func: accessTongueMenu
+		},
+		{
+			name: "Ears",
+			func: accessEarsMenu
+		},
+		{
+			name: "Arms",
+			func: accessArmsMenu
+		},
+		{
+			name: "Lower Body",
+			func: accessLowerBodyMenu
+		},
+		{
+			name: "Rear Body",
+			func: accessRearBodyMenu
+		},
+		{
+			name: "Skin",
+			func: accessSkinMenu
+		},
+		{
+			name: "Patterns",
+			func: accessSkinPatternsMenu
+		},
+		{
+			name: "Antennae",
+			func: accessAntennaeMenu
+		},
+		{
+			name: "Horns",
+			func: accessHornsMenu
+		},
+		{
+			name: "Gills",
+			func: accessGillsMenu
+		},
+		{
+			name: "Wings",
+			func: accessWingsMenu
+		},
+		{
+			name: "Tail",
+			func: accessTailMenu
+		},
+		{
+			name: "Page 1",
+			func: accessPage1MetamorphMenu,
+			hint: "Face, Tongue, Eyes, Ears, Horns"
+		},
+		{
+			name: "Page 2",
+			func: accessPage2MetamorphMenu,
+			hint: "Arms, Wings"
+		},
+		{
+			name: "Page 3",
+			func: accessPage3MetamorphMenu,
+			hint: "Skin, Skin Patterns/Tattoos, Rear Body, Antennae, Gills, Tail"
+		}
+	];
+
+	const menusPerPage: int = menusList.length > 14 ? 12 : 14;
+
+	const lastPage: int = Math.ceil(menusList.length/menusPerPage) - 1;
+
+	const pageMenus: Array = menusList.slice(currentPage * menusPerPage, (currentPage * menusPerPage) + menusPerPage);
+
+	var currentButton: int = 0;
+
+	for each (var menuObj: * in pageMenus) {
+		if (menuObj.hint) {
+			addButton(currentButton, menuObj.name, menuObj.func).hint(menuObj.hint);
+		} else {
+			addButton(currentButton, menuObj.name, menuObj.func);
+		}
+		currentButton++;
+	}
+
+	if (lastPage > 0) {
+		if (currentPage > 0) addButton(12, "Prev Page", accessMetamorphMenu, currentPage - 1);
+		else addButtonDisabled (12, "Prev Page");
+		if (currentPage < lastPage) addButton(13, "Next Page", accessMetamorphMenu, currentPage + 1);
+		else addButtonDisabled (13, "Next Page");
+	}
+
 	if (player.hasPerk(PerkLib.JobSoulCultivator)) addButton(14, "Back", SceneLib.soulforce.accessSoulforceMenu);
 	else addButton(14, "Back", playerMenu);
+}
+
+private function accessHornsMenu(currentPage: int = 0): void {
+	const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Horns</u></font>\n";
+
+	clearOutput();
+	outputText(title);
+	outputText("What kind of horns do you want?");
+
+	openPaginatedMenuOld(title, accessHornsMenu, currentPage, Horns.Types, Horns.Types[player.horns.type], Horns.getTFDescription);
 }
 
 private function accessHairMenu(currentPage: int = 0): void {
@@ -55,9 +162,70 @@ private function accessHairMenu(currentPage: int = 0): void {
 
 	clearOutput();
 	outputText(title);
-	outputText("Choose what you want your hair to morph into.");
+	outputText(Hair.getAppearanceDescription(player));
+	outputText("\n\nYou wonder about changing it. In that case, what kind of hair would you like instead?");
 
-	openPaginatedMenu(title, accessLowerBodyMenu, currentPage, Hair.Types, Hair.Types[player.hairType], Hair.getTFDescription);
+	openPaginatedMenu(title, accessLowerBodyMenu, currentPage, HairMem.Memories);
+}
+
+private function accessFaceMenu(currentPage: int = 0): void {
+	const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Face</u></font>\n";
+
+	clearOutput();
+	outputText(title);
+	outputText("What kind of face do you want?");
+
+	openPaginatedMenuOld(title, accessFaceMenu, currentPage, Face.Types, Face.Types[player.faceType], Face.getTFDescription);
+}
+
+private function accessEyesMenu(currentPage: int = 0): void {
+	const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Eyes</u></font>\n";
+
+	clearOutput();
+	outputText(title);
+	outputText("What kind of eyes do you want?");
+
+	openPaginatedMenuOld(title, accessEyesMenu, currentPage, Eyes.Types, Eyes.Types[player.eyes.type], Eyes.getTFDescription);
+}
+
+private function accessTongueMenu(currentPage: int = 0): void {
+	const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Tongue</u></font>\n";
+
+	clearOutput();
+	outputText(title);
+	outputText("What kind of tongue do you want?");
+
+	openPaginatedMenuOld(title, accessTongueMenu, currentPage, Tongue.Types, Tongue.Types[player.tongue.type], Tongue.getTFDescription);
+}
+
+private function accessEarsMenu(currentPage: int = 0): void {
+	const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Ears</u></font>\n";
+
+	clearOutput();
+	outputText(title);
+	outputText("What kind of ears do you want?");
+
+	openPaginatedMenuOld(title, accessEarsMenu, currentPage, Ears.Types, Ears.Types[player.ears.type], Ears.getTFDescription);
+}
+
+private function accessArmsMenu(currentPage: int = 0): void {
+	const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Arms</u></font>\n";
+
+	clearOutput();
+	outputText(title);
+	outputText("What kind of arms do you want?");
+
+	openPaginatedMenuOld(title, accessArmsMenu, currentPage, Arms.Types, Arms.Types[player.arms.type], Arms.getTFDescription);
+}
+
+private function accessWingsMenu(currentPage: int = 0): void {
+	const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Wings</u></font>\n";
+
+	clearOutput();
+	outputText(title);
+	outputText("What kind of wings do you want?");
+
+	openPaginatedMenuOld(title, accessWingsMenu, currentPage, Wings.Types, Wings.Types[player.wings.type], Wings.getTFDescription);
 }
 
 private function accessLowerBodyMenu(currentPage: int = 0): void {
@@ -65,12 +233,72 @@ private function accessLowerBodyMenu(currentPage: int = 0): void {
 
 	clearOutput();
 	outputText(title);
-	outputText("Choose what you want your lower body to morph into.");
+	outputText("What kind of lower body do you want?");
 
-	openPaginatedMenu(title, accessLowerBodyMenu, currentPage, LowerBody.Types, LowerBody.Types[player.lowerBody], LowerBody.getTFDescription);
+	openPaginatedMenuOld(title, accessLowerBodyMenu, currentPage, LowerBody.Types, LowerBody.Types[player.lowerBody], LowerBody.getTFDescription);
 }
 
-private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int, partsArray:Array, currentPart: *, getTFDescription: *): void {
+private function accessSkinMenu(currentPage: int = 0): void {
+	const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Skin</u></font>\n";
+
+	clearOutput();
+	outputText(title);
+	outputText("What kind of skin do you want?");
+
+	openPaginatedMenuOld(title, accessSkinMenu, currentPage, Skin.SkinTypes, Skin.SkinTypes[player.skinType], Skin.getTFDescription);
+}
+
+private function accessRearBodyMenu(currentPage: int = 0): void {
+	const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Rear Body</u></font>\n";
+
+	clearOutput();
+	outputText(title);
+	outputText("What kind of rear body do you want?");
+
+	openPaginatedMenuOld(title, accessRearBodyMenu, currentPage, RearBody.Types, RearBody.Types[player.rearBody.type], RearBody.getTFDescription);
+}
+
+private function accessAntennaeMenu(currentPage: int = 0): void {
+	const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Antennae</u></font>\n";
+
+	clearOutput();
+	outputText(title);
+	outputText("What kind of antennae do you want?");
+
+	openPaginatedMenuOld(title, accessAntennaeMenu, currentPage, Antennae.Types, Antennae.Types[player.antennae.type], Antennae.getTFDescription);
+}
+
+private function accessSkinPatternsMenu(currentPage: int = 0): void {
+	const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Skin Patterns</u></font>\n";
+
+	clearOutput();
+	outputText(title);
+	outputText("What kind of skin patterns do you want?");
+
+	openPaginatedMenuOld(title, accessSkinPatternsMenu, currentPage, Skin.PatternTypes, Skin.PatternTypes[player.skin.base.pattern], Skin.getTFDescription);
+}
+
+private function accessGillsMenu(currentPage: int = 0): void {
+	const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Gills</u></font>\n";
+
+	clearOutput();
+	outputText(title);
+	outputText("What kind of gills do you want?");
+
+	openPaginatedMenuOld(title, accessGillsMenu, currentPage, Gills.Types, Gills.Types[player.gills.type], Gills.getTFDescription);
+}
+
+private function accessTailMenu(currentPage: int = 0): void {
+	const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Tail</u></font>\n";
+
+	clearOutput();
+	outputText(title);
+	outputText("What kind of tail do you want?");
+
+	openPaginatedMenuOld(title, accessTailMenu, currentPage, Tail.Types, Tail.Types[player.tailType], Tail.getTFDescription);
+}
+
+private function openPaginatedMenuOld (title: String, thisMenu: *, currentPage: int, partsArray:Array, currentPart: *, getTFDescription: *): void {
 	menu();
 
 	var partsList: Array = [];
@@ -95,14 +323,48 @@ private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int
 			const buttonStr: String = bodyPart.metamorphTitle || "";
 
 			const unlocked: Boolean = player.hasStatusEffect(bodyPart.metamorphFlag);
-			const usingPart: Boolean = currentPart === bodyPart;
+			const isPossible: Boolean = currentPart === bodyPart;
 			const enoughSF: Boolean = player.soulforce >= bodyPart.metamorphCost;
 
-			if (unlocked && !usingPart && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, bodyPart, getTFDescription);
-			else if (unlocked && usingPart) addButtonDisabled(currentButton, buttonStr, "You already have this body part.");
-			else if (unlocked && !usingPart && enoughSF) addButtonDisabled(currentButton, buttonStr, "You don't have enough Soulforce for this metamorphosis!");
+			if (unlocked && !isPossible && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, bodyPart, getTFDescription);
+			else if (unlocked && isPossible) addButtonDisabled(currentButton, buttonStr, "You already have this body part.");
+			else if (unlocked && !isPossible && enoughSF) addButtonDisabled(currentButton, buttonStr, "You don't have enough Soulforce for this metamorphosis!");
 			else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
+			currentButton++;
 		}
+	}
+
+	if (lastPage > 0) {
+		if (currentPage > 0) addButton(12, "Prev Page", thisMenu, currentPage - 1);
+		else addButtonDisabled (12, "Prev Page");
+		if (currentPage < lastPage) addButton(13, "Next Page", thisMenu, currentPage + 1);
+		else addButtonDisabled (13, "Next Page");
+	}
+
+	addButton(14, "Back", accessMetamorphMenu);
+}
+
+private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int, memArray:Array): void {
+	menu();
+
+	const memsPerPage: int = memArray.length > 14 ? 12 : 14;
+
+	const lastPage: int = Math.ceil(memArray.length/memsPerPage) - 1;
+
+	const pageMems: Array = memArray.slice(currentPage * memsPerPage, (currentPage * memsPerPage) + memsPerPage);
+
+	var currentButton: int = 0;
+
+	for each (var genMem: * in pageMems) {
+		const buttonStr: String = genMem.metamorphTitle || "";
+		const unlocked: Boolean = genMem.isUnlockedFunc(player);
+		const partsInUse: Boolean = genMem.partsInUseFunc(player);
+		const enoughSF: Boolean = player.soulforce >= genMem.metamorphCost;
+
+		if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem).hint("Cost: " + genMem.metamorphCost + " SF");
+		else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "This metamorphosis would have no effect!");
+		else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.metamorphCost + " SF (You don't have enough Soulforce for this metamorphosis!)");
+		else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
 		currentButton++;
 	}
 
@@ -116,12 +378,11 @@ private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int
 	addButton(14, "Back", accessMetamorphMenu);
 }
 
-private function doMetamorph (title: String, bodyPart: *, getTFDescription: *): void {
+private function doMetamorph (title: String, genMem: *): void {
 	clearOutput();
 	outputText(title);
-	outputText(getTFDescription(player, bodyPart));
-	bodyPart.tfFunc(player);
-	player.soulforce -= bodyPart.metamorphCost;
+	genMem.metamorphFunc(player);
+	player.soulforce -= genMem.metamorphCost;
 	CoC.instance.mainViewManager.updateCharviewIfNeeded();
 	doNext(accessMetamorphMenu);
 }
@@ -133,7 +394,7 @@ private function accessPage1MetamorphMenu():void {
 	addButton(2, "Face(2)", accessPage2FaceMenu);
 	addButton(3, "Face(3)", accessPage3FaceMenu);
 	addButton(4, "Face(4)", accessPage4FaceMenu);
-	addButton(5, "Tongue", accessTongueMenu);
+	addButton(5, "Tongue", accessTongueMenuOld);
 	addButton(6, "Eyes(1)", accessPage1EyesMenu);
 	addButton(7, "Eyes(2)", accessPage2EyesMenu);
 	addButton(8, "Ears(1)", accessPage1EarsMenu);
@@ -260,7 +521,7 @@ private function accessPage4FaceMenu():void {
 	else addButtonDisabled(1, "???", "You have not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
-private function accessTongueMenu():void {
+private function accessTongueMenuOld():void {
 	menu();
 	if (player.hasStatusEffect(StatusEffects.UnlockedHumanTongue) && player.tongue.type != Tongue.HUMAN && player.soulforce >= 500) addButton(0, "Human", metamorphHumanTongue);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanTongue) && player.tongue.type == Tongue.HUMAN) addButtonDisabled(0, "Human", "You already have human tongue.");
@@ -737,23 +998,19 @@ private function accessPage3WingsMenu():void {
 }
 private function accessPage3MetamorphMenu():void {
 	menu();
-	addButton(0, "Skin", accessSkinMenu);
-	addButton(1, "SkinPat.", accessSkinPatternsMenu);
-	addButton(2, "Rear B.", accessRearBodyMenu);
-	addButton(3, "Antennae", accessAntennaeMenu);
-	addButton(4, "Gills", accessGillsMenu);
+	addButton(0, "Skin", accessSkinMenuOld);
+	addButton(1, "SkinPat.", accessSkinPatternsMenuOld);
+	addButton(2, "Rear B.", accessRearBodyMenuOld);
+	addButton(3, "Antennae", accessAntennaeMenuOld);
+	addButton(4, "Gills", accessGillsMenuOld);
 	addButton(5, "Tail(1)", accessPage1TailMenu);
 	addButton(6, "Tail(2)", accessPage2TailMenu);
 	addButton(7, "Tail(3)", accessPage3TailMenu);
 	addButton(8, "Tail(4)", accessPage4TailMenu);
 	addButton(9, "Tail(5)", accessPage5TailMenu);
-	/*addButton(10, "Back", accessMetamorphMenu);
-	addButton(11, "Back", accessMetamorphMenu);
-	addButton(12, "Back", accessMetamorphMenu);
-	addButton(13, "Back", accessMetamorphMenu);*/
 	addButton(14, "Back", accessMetamorphMenu);
 }
-private function accessSkinMenu():void {
+private function accessSkinMenuOld():void {
 	menu();
 	if (player.hasStatusEffect(StatusEffects.UnlockedHumanSkin) && player.skinType != Skin.PLAIN && player.soulforce >= 500) addButton(0, "Human", metamorphHumanSkin);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanSkin) && player.skinType == Skin.PLAIN) addButtonDisabled(0, "Human", "You already have plain human skin.");
@@ -777,7 +1034,7 @@ private function accessSkinMenu():void {
 	else addButtonDisabled(8, "???", "You have not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage3MetamorphMenu);
 }
-private function accessSkinPatternsMenu():void {
+private function accessSkinPatternsMenuOld():void {
 	menu();
 	if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern) && player.skin.base.pattern != Skin.PATTERN_NONE && player.soulforce >= 500) addButton(0, "Human", metamorphHumanNoSkinPatterns);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoSkinPattern) && player.skin.base.pattern == Skin.PATTERN_NONE) addButtonDisabled(0, "Human", "You already have no skin patterns.");
@@ -801,7 +1058,7 @@ private function accessSkinPatternsMenu():void {
 	else addButtonDisabled(9, "???", "You have not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage3MetamorphMenu);
 }
-private function accessRearBodyMenu():void {
+private function accessRearBodyMenuOld():void {
 	menu();
 	if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoRearBody) && player.rearBody.type != RearBody.NONE && player.soulforce >= 500) addButton(0, "Human", metamorphHumanNoRearBody);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoRearBody) && player.rearBody.type == RearBody.NONE) addButtonDisabled(0, "Human", "You already have human rear body.");
@@ -833,7 +1090,7 @@ private function accessRearBodyMenu():void {
 	else addButtonDisabled(11, "???", "You have not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage3MetamorphMenu);
 }
-private function accessAntennaeMenu():void {
+private function accessAntennaeMenuOld():void {
 	menu();
 	if (player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae) && player.antennae.type != Antennae.NONE && player.soulforce >= 500) addButton(0, "Human", metamorphHumanNoAntennae);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedMantisAntennae) && player.antennae.type == Antennae.NONE) addButtonDisabled(0, "Human", "You already have no antennaes.");
@@ -849,7 +1106,7 @@ private function accessAntennaeMenu():void {
 	else addButtonDisabled(2, "???", "You have not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage3MetamorphMenu);
 }
-private function accessGillsMenu():void {
+private function accessGillsMenuOld():void {
 	menu();
 	if (player.hasStatusEffect(StatusEffects.UnlockedFishGills) && player.gills.type != Gills.NONE && player.soulforce >= 500) addButton(0, "Human", metamorphHumanNoGills);
 	else if (player.hasStatusEffect(StatusEffects.UnlockedFishGills) && player.gills.type == Gills.NONE) addButtonDisabled(0, "Human", "You already have no gills.");
@@ -1206,88 +1463,8 @@ private function metamorph002Fur():void {
 
 
 	doNext(accessMetamorphMenu);
-}/*
-private function metamorph1Fur():void {
-	clearOutput();
-	player.soulforce -= 100;
-
-
-	doNext(accessMetamorphMenu);
 }
-private function metamorph1Fur():void {
-	clearOutput();
-	player.soulforce -= 100;
 
-
-	doNext(accessMetamorphMenu);
-}
-private function metamorph1Fur():void {
-	clearOutput();
-	player.soulforce -= 100;
-
-
-	doNext(accessMetamorphMenu);
-}
-private function metamorph1Fur():void {
-	clearOutput();
-	player.soulforce -= 100;
-
-
-	doNext(accessMetamorphMenu);
-}*/
-
-
-
-/*
-private function metamorph1Fur():void {
-	clearOutput();
-	player.soulforce -= 100;
-
-
-	doNext(accessMetamorphMenu);
-}
-private function metamorph1Fur():void {
-	clearOutput();
-	player.soulforce -= 100;
-
-
-	doNext(accessMetamorphMenu);
-}
-private function metamorphGoo():void {
-	clearOutput();
-	player.soulforce -= 100;
-
-
-	doNext(accessMetamorphMenu);
-}
-private function metamorphGoo():void {
-	clearOutput();
-	player.soulforce -= 100;
-
-
-	doNext(accessMetamorphMenu);
-}
-private function metamorphGoo():void {
-	clearOutput();
-	player.soulforce -= 100;
-
-
-	doNext(accessMetamorphMenu);
-}
-private function metamorphGoo():void {
-	clearOutput();
-	player.soulforce -= 100;
-
-
-	doNext(accessMetamorphMenu);
-}
-private function metamorphGoo():void {
-	clearOutput();
-	player.soulforce -= 100;
-
-
-	doNext(accessMetamorphMenu);
-}*/
 private function metamorphSphinxArms():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1375,7 +1552,7 @@ private function metamorphLionMane():void {
 	player.soulforce -= 100;
 	outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon get so thick it almost looks as if you're wearing a [haircolor] fur collar. <b>You now have a full lion mane around your neck.</b>");
 	player.rearBody.type = RearBody.LION_MANE;
-	doNext(accessRearBodyMenu);
+	doNext(accessRearBodyMenuOld);
 }
 private function metamorphCat2ndTail():void {
 	clearOutput();
@@ -1452,7 +1629,7 @@ private function metamorphDisplacerBackTentacles():void {
 	if (player.rearBody.type != RearBody.NONE) outputText("A wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger in it. After a moment the pain passes, though your back is back to what you looked like when you entered this realm! ");
 	outputText("Two large fleshy lumps explode from your shoulders and you scream in pain. These fleshy appendages weave and move like whips in your back and only stop doing so when you finally manage to calm yourself. <b>As you look back to see what's going on, you notice you now have a pair of tentacles with thick, fleshy heads. You can feel the air brushing over the sensitive needles and suction cups that cover both of them, your new venom glistening on the tips.</b>");
 	player.rearBody.type = RearBody.DISPLACER_TENTACLES;
-	doNext(accessRearBodyMenu);
+	doNext(accessRearBodyMenuOld);
 }
 private function metamorphCheshireCatFangs():void {
 	clearOutput();
@@ -1489,7 +1666,7 @@ private function metamorphCatTongue():void {
 	player.soulforce -= 100;
 	outputText("\n\nYour tongue suddenly feel weird. You try to stick it out to see what’s going on and discover it changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>");
 	player.tongue.type = Tongue.CAT;
-	doNext(accessTongueMenu);
+	doNext(accessTongueMenuOld);
 }
 private function metamorphCatFangs():void {
 	clearOutput();
@@ -1669,7 +1846,7 @@ private function metamorphOrcSkinPattern():void {
 	outputText("\n\nYou double over suddenly as a harsh, stabbing pain runs across your skin, tattoos in the shape of scars forming on various parts of your body. Considering how you look now, you might as well proudly display your <b>Orc scar tattooed skin.</b>");
 	player.skin.base.pattern = Skin.PATTERN_SCAR_SHAPED_TATTOO;
 	player.skin.base.adj = "scar shaped tattooed";
-	doNext(accessSkinPatternsMenu);
+	doNext(accessSkinPatternsMenuOld);
 }
 private function metamorphOrcEyes():void {
 	clearOutput();
@@ -1702,7 +1879,7 @@ private function metamorphHumanNoRearBody():void {
 	player.soulforce -= 500;
 	outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger in it. After a moment the pain passes, though your back is back to what you looked like when you entered this realm!");
 	player.rearBody.type = RearBody.NONE;
-	doNext(accessRearBodyMenu);
+	doNext(accessRearBodyMenuOld);
 }
 private function metamorphHumanNoTail():void {
 	clearOutput();
@@ -1737,7 +1914,7 @@ private function metamorphHumanNoAntennae():void {
 	player.soulforce -= 500;
 	outputText("\n\nThe muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead. When it passes, you touch yourself and discover your antennae.type have vanished!");
 	player.antennae.type = Antennae.NONE;
-	doNext(accessAntennaeMenu);
+	doNext(accessAntennaeMenuOld);
 }
 private function metamorphHumanNoGills():void {
 	clearOutput();
@@ -1746,7 +1923,7 @@ private function metamorphHumanNoGills():void {
 	if (player.gills.type == Gills.FISH) outputText("\n\nYou feel your gills tighten, the slits seeming to close all at once. As you let out a choked gasp your gills shrink into nothingness, leaving only smooth skin behind. Seems you won't be able to stay in the water quite so long anymore.");
 	outputText(" <b>You no longer have gills!</b>");
 	player.gills.type = Gills.NONE;
-	doNext(accessGillsMenu);
+	doNext(accessGillsMenuOld);
 }
 private function metamorphHumanEars():void {
 	clearOutput();
@@ -1774,7 +1951,7 @@ private function metamorphHumanTongue():void {
 	player.soulforce -= 500;
 	outputText("\n\nYou feel something strange inside your face as your tongue shrinks and recedes until it feels smooth and rounded. <b>You realize your tongue has changed back into human tongue!</b>");
 	player.tongue.type = Tongue.HUMAN;
-	doNext(accessTongueMenu);
+	doNext(accessTongueMenuOld);
 }
 private function metamorphHumanFace():void {
 	clearOutput();
@@ -1795,7 +1972,7 @@ private function metamorphHumanNoSkinPatterns():void {
 	outputText("\n\nYour skin patterns itches incessantly, and as you scratch they shifts and changes, becoming less and less visible till they gone. <b>Your skin is without any skin patterns!</b>");
 	player.skin.base.pattern = Skin.PATTERN_NONE;
 	player.skin.base.adj = "";
-	doNext(accessSkinPatternsMenu);
+	doNext(accessSkinPatternsMenuOld);
 }
 private function metamorphHumanSkin():void {
 	clearOutput();
@@ -1814,7 +1991,7 @@ private function metamorphHumanSkin():void {
 			outputText("\n\nYour [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin. <b>Your skin is once again normal!</b>");
 	}
 	player.skin.setBaseOnly({type: Skin.PLAIN, adj:""});
-	doNext(accessSkinMenu);
+	doNext(accessSkinMenuOld);
 }
 private function metamorphBoarArms():void {
 	clearOutput();
@@ -1912,7 +2089,7 @@ private function metamorphBatCollar():void {
 	outputText("\n\nAn intense itching sets in around your neck. Bringing your hands to your neck to scratch it, you find sparse, downy fuzz. As you scratch away, it continues lengthening and growing in density until you have a collar of fur around your neck.");
 	outputText(" Well, this isn’t so bad, the scarf-like look is certainly nice, at the very least. <b>Your neck now sports a collar of fur.</b>");
 	player.hairType = RearBody.BAT_COLLAR;
-	doNext(accessRearBodyMenu);
+	doNext(accessRearBodyMenuOld);
 }
 private function metamorphBatWings():void {
 	clearOutput();
@@ -1951,7 +2128,7 @@ private function metamorphRaijuSkinPattern():void {
 	outputText("\n\nYou suddenly feel a rush of electricity on your skin as glowing tattoos in the shape of lightning bolts form in various place across your body. Well, how shocking. <b>Your skin is now inscribed with some lightning shaped tattoos.</b>");
 	player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
 	player.skin.base.adj = "lightning shaped tattooed";
-	doNext(accessSkinPatternsMenu);
+	doNext(accessSkinPatternsMenuOld);
 }
 private function metamorphRaijuEyes():void {
 	clearOutput();
@@ -1987,7 +2164,7 @@ private function metamorphRaijuMane():void {
 	player.soulforce -= 100;
 	outputText("\n\nThe base of your neck tingles with delight as little sparks travel across your skin. Strands of hair quickly grow in, giving you a [haircolor] collar of fur around your neck. Several strands of your new fur collar are quite dark, arcing around it like lightning.");
 	player.rearBody.type = RearBody.RAIJU_MANE;
-	doNext(accessRearBodyMenu);
+	doNext(accessRearBodyMenuOld);
 }
 private function metamorphRaijuTail():void {
 	clearOutput();
@@ -2017,7 +2194,7 @@ private function metamorphOniSkinPattern():void {
 	outputText("\n\nAs you thought your skin couldn't handle more tattoo a few localised skin burns reveal a new set of drawing along your skin, some decorating your chest. Well you might as well proudly display your <b>Oni tattooed skin.</b>");
 	player.skin.base.pattern = Skin.PATTERN_BATTLE_TATTOO;
 	player.skin.base.adj = "battle tattooed";
-	doNext(accessSkinPatternsMenu);
+	doNext(accessSkinPatternsMenuOld);
 }
 private function metamorphOniFace():void {
 	clearOutput();
@@ -2090,7 +2267,7 @@ private function metamorphElfTongue():void {
 	if (player.tongue.type != Tongue.HUMAN) outputText("\n\nYou feel something strange inside your face as your tongue shrinks and recedes until it feels smooth and rounded. <b>You realize your tongue has changed back into human tongue!</b>");
 	outputText("\n\nYour throat starts to ache and your tongue tingles. You try to gasp for air, your eyes opening wide in surprise as the voice that exits your throat is entirely changed. Your words are notes, your sentence a melody. Your voice is like music to your ears and you realize it is because your body became closer to that of an elf, adapting even your tongue and voice. <b>You now have the beautiful voice of the elves.</b>");
 	player.tongue.type = Tongue.ELF;
-	doNext(accessTongueMenu);
+	doNext(accessTongueMenuOld);
 }
 private function metamorphElfEyes():void {
 	clearOutput();
@@ -2159,7 +2336,7 @@ private function metamorphMantisAntennae():void {
 	if (player.antennae.type == Antennae.BEE) outputText("\n\nYour head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen at mantis.");
 	else outputText("\n\nYour head itches momentarily as two long prehensile antennae sprout from your [hair].");
 	player.antennae.type = Antennae.MANTIS;
-	doNext(accessAntennaeMenu);
+	doNext(accessAntennaeMenuOld);
 }
 private function metamorphDevilEyes():void {
 	clearOutput();
@@ -2297,7 +2474,7 @@ private function metamorphDragonTonuge():void {
 	player.soulforce -= 100;
 	outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer. For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb. You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue. <b>You now have a draconic tongue.</b>");
 	player.tongue.type = Tongue.DRACONIC;
-	doNext(accessTongueMenu);
+	doNext(accessTongueMenuOld);
 }
 private function metamorphDragonEyes():void {
 	clearOutput();
@@ -2373,7 +2550,7 @@ private function metamorphSnakeTongue():void {
 	if (player.tongue.type == Tongue.HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.");
 	else outputText("\n\nYour inhuman tongue shortens, pulling tight in the very back of your throat. After a moment the bunched-up tongue-flesh begins to flatten out, then extend forwards. By the time the transformation has finished, your tongue has changed into a long, forked snake-tongue.");
 	player.tongue.type = Tongue.SNAKE;
-	doNext(accessTongueMenu);
+	doNext(accessTongueMenuOld);
 }
 private function metamorphOrcaBlowhole():void {
 	clearOutput();
@@ -2383,7 +2560,7 @@ private function metamorphOrcaBlowhole():void {
 	outputText("Pain rushes just behind your shoulder blades as a hole opens up, air rushing in. The hole is burning making you groan in pain as air flows in and out. Eventually you get accustomed to breathing from your back like whales do, but it sure was a weird experience.");
 	if (silly()) outputText(" Well it doesn't matter because now you can break the world record of the longest breath holding by sitting on the ocean floor for more than 90 minutes.");
 	player.rearBody.type = RearBody.ORCA_BLOWHOLE;
-	doNext(accessRearBodyMenu);
+	doNext(accessRearBodyMenuOld);
 }
 private function metamorphOrcaFace():void {
 	clearOutput();
@@ -2456,7 +2633,7 @@ private function metamorphSharkFin():void {
 	player.soulforce -= 100;
 	outputText("\n\nYou groan and slump down in pain, almost instantly regretting eating the tooth. You start sweating profusely and panting loudly, feeling the space between your shoulder blades shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from in-between your shoulders. You examine it carefully and make a few modifications to your [armor] to accommodate your new fin.");
 	player.rearBody.type = RearBody.SHARK_FIN;
-	doNext(accessRearBodyMenu);
+	doNext(accessRearBodyMenuOld);
 }
 private function metamorphSharkArms():void {
 	clearOutput();
@@ -2600,7 +2777,7 @@ private function metamorphBeeAntennae():void {
 	if (player.antennae.type == Antennae.MANTIS) outputText("\n\nYour head itches momentarily as your two long prehensile antennae changes slowly into floppy ones similar to those seen at bees.");
 	else outputText("\n\nYour head itches momentarily as two floppy antennae sprout from your " + hairDescript() + ".");
 	player.antennae.type = Antennae.BEE;
-	doNext(accessAntennaeMenu);
+	doNext(accessAntennaeMenuOld);
 }
 private function metamorphLizardFace():void {
 	clearOutput();
@@ -2687,7 +2864,7 @@ private function metamorphTonugeDemonic():void {
 	outputText("\n\n");
 	outputText("Your snake-like tongue tingles, thickening in your mouth until it feels more like your old human tongue, at least for the first few inches. It bunches up inside you, and when you open up your mouth to release it, roughly two feet of tongue dangles out. You find it easy to move and control, as natural as walking. <b>You now have a long demon-tongue.</b>");
 	player.tongue.type = Tongue.DEMONIC;
-	doNext(accessTongueMenu);
+	doNext(accessTongueMenuOld);
 }
 private function metamorphHornsDemonic():void {
 	clearOutput();
@@ -2732,7 +2909,7 @@ private function metamorphKitsuneSkinPattern():void {
 	outputText(" markings remain, as if etched into your skin. <b>You now have Kitsune tattooed skin.</b>");
 	player.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;
 	player.skin.base.adj = "sexy tattooed";
-	doNext(accessSkinPatternsMenu);
+	doNext(accessSkinPatternsMenuOld);
 }
 private function metamorphKitsuneArms():void {
 	clearOutput();
@@ -2855,7 +3032,7 @@ private function metamorphFishGills():void {
 	}
 	outputText("\n\n<b>You now have fish like gills!</b>");
 	player.gills.type = Gills.FISH;
-	doNext(accessGillsMenu);
+	doNext(accessGillsMenuOld);
 }
 //all skin types TF effects goes here
 /*private function metamorphTattoed():void {
@@ -2876,7 +3053,7 @@ private function metamorphDragonScales():void {
 	}
 	outputText("<b>Your body is now fully covered in " + color + " shield-shaped dragon scales.</b>");
 	player.skin.growCoat(Skin.DRAGON_SCALES,{color:color});
-	doNext(accessSkinMenu);
+	doNext(accessSkinMenuOld);
 }
 private function metamorphChitin():void {
 	clearOutput();
@@ -2891,7 +3068,7 @@ private function metamorphChitin():void {
 	}
 	outputText(" <b>You now have " + chitinColor + " chitin exoskeleton covering your body.</b>");
 	player.skin.growCoat(Skin.CHITIN,{adj:"",color:chitinColor});
-	doNext(accessSkinMenu);
+	doNext(accessSkinMenuOld);
 }
 private function metamorphScales():void {
 	clearOutput();
@@ -2950,7 +3127,7 @@ private function metamorphScales():void {
 		outputText("<b>You're covered from head to toe in shiny " + player.coatColor + " scales.</b>");
 	}
 	player.skin.growCoat(Skin.SCALES,{color:player.coatColor});
-	doNext(accessSkinMenu);
+	doNext(accessSkinMenuOld);
 }
 private function metamorphFur():void {
 	clearOutput();
@@ -2958,7 +3135,7 @@ private function metamorphFur():void {
 	if (player.skinType == Skin.SCALES) outputText("Your skin shifts and every scale stands on end, sending you into a mild panic. No matter how you tense, you can't seem to flatten them again. The uncomfortable sensation continues for some minutes until, as one, every scale falls from your body and a fine coat of fur pushes out. You briefly consider collecting them, but when you pick one up, it's already as dry and brittle as if it were hundreds of years old. <b>Oh well; at least you won't need to sun yourself as much with your new fur.</b>");
 	else outputText("Your skin itches all over, the sudden intensity and uniformity making you too paranoid to scratch. As you hold still through an agony of tiny tingles and pinches, fine, luxuriant fur sprouts from every bare inch of your skin! <b>You'll have to get used to being furry...</b>");
 	player.skin.growFur();
-	doNext(accessSkinMenu);
+	doNext(accessSkinMenuOld);
 }
 
 private function removeOddEyes():void {

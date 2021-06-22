@@ -9,7 +9,7 @@ public class RearBody extends BodyPart {
 	 * - name: human-readable default name, ("none", "draconic hairy mane")
 	 */
 	public static var Types:/*EnumValue*/Array = [];
-	
+
 	public static const NONE:int				= 0;
 	EnumValue.add(Types, NONE, "NONE", {name: "none"});
 	public static const DRACONIC_MANE:int		= 1;
@@ -55,9 +55,20 @@ public class RearBody extends BodyPart {
 	EnumValue.add(Types, FUR_COAT, "FUR_COAT", {name: "fur coat"});
 	public static const TENTACLE_EYESTALKS:int	= 22;
 	EnumValue.add(Types, TENTACLE_EYESTALKS, "TENTACLE_EYESTALKS", {name: "tentacle eyestalks"});
-	
+
 	public function RearBody() {
 		super(null, null);
+	}
+
+	public static function getTFDescription(creature: *, bodyPart: *):String {
+		return formatDescription((bodyPart.tfDescFunc ? bodyPart.tfDescFunc(creature) : bodyPart.tfDesc) || "", creature);
+	}
+
+	private static function formatDescription(desc:String, creature: *): String {
+		const upperCasePattern:RegExp = /^./;
+
+		return " " + desc
+			.replace(upperCasePattern, function($0:*):* {return $0.toUpperCase();});
 	}
 }
 }
