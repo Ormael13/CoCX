@@ -1,6 +1,7 @@
 ﻿package classes 
 {
 import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
@@ -1170,17 +1171,20 @@ import classes.Items.NecklaceLib;
 		{
 			var maxven:Number = 0;
 			var multimaxven:Number = 1;
-			if (game.player.faceType == Face.SNAKE_FANGS) maxven += 100;
-			if (game.player.faceType == Face.SPIDER_FANGS) maxven += 100;
-			if (game.player.tailType == Tail.BEE_ABDOMEN) maxven += 150;
-			if (game.player.tailType == Tail.SPIDER_ADBOMEN) maxven += 150;
-			if (game.player.tailType == Tail.SCORPION) maxven += 150;
-			if (game.player.tailType == Tail.MANTICORE_PUSSYTAIL) maxven += 200;
+			if (game.player.faceType == Face.SNAKE_FANGS) maxven += 200;
+			if (game.player.faceType == Face.SPIDER_FANGS) maxven += 200;
+			if (game.player.tailType == Tail.BEE_ABDOMEN) maxven += 300;
+			if (game.player.tailType == Tail.SPIDER_ADBOMEN) maxven += 300;
+			if (game.player.tailType == Tail.SCORPION) maxven += 300;
+			if (game.player.tailType == Tail.MANTICORE_PUSSYTAIL) maxven += 400;
+			if (game.player.lowerBody == LowerBody.ATLACH_NACHA) maxven += 1200;
 			if (hasPerk(PerkLib.ImprovedVenomGland)) maxven += 100;
-			if (hasPerk(PerkLib.VenomGlands)) maxven += 25;
-			if (hasPerk(PerkLib.VenomGlandsEvolved)) maxven += 100;
+			if (hasPerk(PerkLib.ImprovedVenomGlandEx)) maxven += 200;
+			if (hasPerk(PerkLib.ImprovedVenomGlandSu)) maxven += 400;
+			if (hasPerk(PerkLib.VenomGlands)) maxven += 100;
+			if (hasPerk(PerkLib.VenomGlandsEvolved)) maxven += 400;
 			if (hasPerk(PerkLib.VenomGlandsFinalForm)) {
-				maxven += 175;
+				maxven += 700;
 				multimaxven += 1;
 			}
 			if (hasPerk(PerkLib.JobSoulCultivator)) {

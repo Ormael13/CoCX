@@ -13,27 +13,29 @@ package classes.Scenes.Camp
 		public var campscene:CampScenes = new CampScenes();
 		
 		public function tribulationThunderStrike():void {
-			var THUNDER:Number = (200 * player.statusEffectv1(StatusEffects.HeavenTribulationCR));
+			var ThDa:Number = player.statusEffectv2(StatusEffects.HeavenTribulationCR);
 			outputText("One of crimson red bolts of lightning change it course leaving clouds and heaving toward the ground below. ");
 			if (hasStatusEffect(StatusEffects.Dig)) outputText("But not finding target at the ground it hopelessly hits it leaving burn mark.");
 			else if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere)) outputText("But due to your current state it's unable to deal any harm.");
 			else {// || player.hasStatusEffect(StatusEffects.Displacement) || hasStatusEffect(StatusEffects.InvisibleOrStealth)
+				var THUNDER:Number = (200 * player.statusEffectv2(StatusEffects.HeavenTribulationCR));
 				var body_choice:Array = ["head", "arm", "[leg]", "[face]"];//, "[wings]", "[tail]"
-				outputText("it hits you directly in your "+randomChoice(body_choice)+". (" + THUNDER + ")");
+				outputText("It hits you directly in your "+randomChoice(body_choice)+". <b>(<font color=\"#800000\">" + THUNDER + "</font>)</b>");
 				player.HP -= THUNDER;//200-600-1,400-3,000-6,200-12,600-25,400-52,000
+				player.addStatusValue(StatusEffects.HeavenTribulationCR,2,ThDa);
 			}
 		}
 		
 		override protected function performCombatAction():void
 		{
-			if (!player.hasStatusEffect(StatusEffects.HeavenTribulationCR)) player.createStatusEffect(StatusEffects.HeavenTribulationCR,1,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.HeavenTribulationCR)) player.createStatusEffect(StatusEffects.HeavenTribulationCR,1,1,0,0);
 			else player.addStatusValue(StatusEffects.HeavenTribulationCR,1,1);
 			if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) >= 4) HP = 0;
 			else tribulationThunderStrike();
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void {
-			campscene.HclassHTThunderDoom();
+			campscene.HeavenTribulationThunderDoom();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -61,7 +63,7 @@ package classes.Scenes.Camp
 			this.bonusLust = 30;
 			this.weaponName = "tribulation thunder";
 			this.weaponVerb = "strike down";
-			this.weaponAttack = 20;
+			this.weaponAttack = 1;
 			this.armorName = "tribulation clouds";
 			this.armorDef = 0;
 			this.armorMDef = 0;

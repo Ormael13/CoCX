@@ -1182,7 +1182,7 @@ use namespace CoC;
 		//PC can fly without natural wings
 		public function canFlyNoWings():Boolean
 		{
-			return weaponFlyingSwordsName != "nothing";// || ma daintain(golden core stage)
+			return weaponFlyingSwordsName != "nothing" || hasPerk(PerkLib.GclassHeavenTribulationSurvivor);
 		}
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
@@ -15231,6 +15231,14 @@ use namespace CoC;
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
 			}
+		}
+
+		public function VenomWebCost():Number
+		{
+			var VWC:Number = 5;
+			if (hasPerk(PerkLib.ImprovedVenomGlandEx)) VWC -= 1;
+			if (hasPerk(PerkLib.ImprovedVenomGlandSu)) VWC += 2;
+			return VWC;
 		}
 
 		public override function mf(male:String, female:String):String {
