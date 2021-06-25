@@ -261,6 +261,9 @@ public class PerkLib
 		public static const AdrenalineRush:PerkType = mk("Adrenaline Rush", "Adrenaline Rush",
 				"Always start combat with 100 more points of wrath.",
 				"You've chosen the 'Adrenaline Rush' perk, to always start combat with 100 more points of wrath.");
+		public static const ChallengingShout:PerkType = mk("Challenging shout", "Challenging shout",
+				"You can now use the ability Warrior Shout! (+20% of max/overmax wrath)",
+				"You've chosen the 'Challenging shout' perk, gaining access to use Warrior Shout special. (+20% of max/overmax wrath)");
 		public static const DarkRitual:PerkType = mk("Dark Ritual", "Dark Ritual",
 				"Allow to use the Dark Ritual option wich can be Toggled on or off. While Dark Ritual is active spells are 300% stronger but consume 10% health on cast as they are paid in blood.",
 				"You've chosen the 'Dark Ritual' perk, Allowing you to sacricice health to empower your spells.");
@@ -378,9 +381,6 @@ public class PerkLib
 		public static const WarMageMaster:PerkType = mk("Master War Mage", "Master War Mage",
 				". Safe limit for spellcasting increased by 5%.",
 				"You've chosen the 'Master War Mage' perk, . Safe limit for spellcasting increased by 5%.");
-		public static const ChallengingShout:PerkType = mk("Challenging shout", "Challenging shout",
-				"You can now use the ability Warrior Shout! (+20% of max/overmax wrath)",
-				"You've chosen the 'Challenging shout' perk, gaining access to use Warrior Shout special. (+20% of max/overmax wrath)");
 		public static const BalanceBreaker:PerkType = mk("Balance breaker", "Balance breaker",
 				"Your brutal strikes while wielding maces or hammers may leave your opponents disoriented. (Attacks with maces/hammers can powerstun and ignore stun immunity but with halved stun chance)",
 				"You've chosen the 'Balance breaker' perk. Your brutal strikes while wielding maces or hammers may leave your opponents disoriented. (Attacks with maces/hammers can powerstun and ignore stun immunity but with halved stun chance)");
@@ -402,6 +402,21 @@ public class PerkLib
 		public static const SoaringBlades:PerkType = mk("Soaring Blades", "Soaring Blades",
 				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.",
 				"You've chosen the 'Soaring Blades' perk. Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.");
+		public static const Survivalist3:PerkType = mk("Survivalist 3", "Survivalist 3",
+				"Slows hunger rate by another 20%.",
+				"You've chosen the 'Survivalist 3' perk.  With this perk, your hunger rate is reduced second time by another 20%.");
+		public static const VenomousDiet:PerkType = mk("Venomous Diet", "Venomous Diet",
+				"Increase venom/web recharge speed based on current hunger level. (will have no effect if max venom/web is at 0)",
+				"You've chosen the 'Venomous Diet' perk. Increase venom/web recharge speed based on current hunger level. (will have no effect if max venom/web is at 0)");
+		public static const HighlyVenomousDiet:PerkType = mk("Higly Venomous Diet", "Higly Venomous Diet",
+				"Increase venom/web recharge speed at cost of faster getting hungry. (will have no effect if max venom/web is at 0)",
+				"You've chosen the 'Higly Venomous Diet' perk. Increase venom/web recharge speed at cost of faster getting hungry. (will have no effect if max venom/web is at 0)");
+		public static const AxillaryVenomGlands:PerkType = mk("Axillary Venom Glands", "Axillary Venom Glands",
+				"Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. (if hunger mode is active will instead drain hunger 2x faster)",
+				"You've chosen the 'Axillary Venom Glands' perk. Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. (if hunger mode is active will instead drain hunger 2x faster)");
+		public static const VenomousAdiposeTissue:PerkType = mk("Venomous Adipose Tissue", "Venomous Adipose Tissue",
+				"Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases) (will have no effect if max venom/web is at 0) (will have no effect if max venom/web is at 0)",
+				"You've chosen the 'Venomous Adipose Tissue' perk. Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases)");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -462,9 +477,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -3454,14 +3466,14 @@ public class PerkLib
 		public static const AlrauneNectar:PerkType = mk("Alraune Nectar", "Alraune Nectar",
 				"You yourself produce an endless supply of alraune nectar.");
 		public static const ArachnidBookLung:PerkType = mk("Arachnid Book Lung", "Arachnid Book Lung",
-				"Increase the amount of web and poison generated by 100%.",
-				"You've chosen the 'Arachnid Book Lung' perk. Increase the amount of web and poison generated by 100%.").withBuffs({'int.mult':0.05});
+				"Increase the web and poison capacity by 100%.",
+				"You've chosen the 'Arachnid Book Lung' perk. Increase the web and poison capacity by 100%.").withBuffs({'int.mult':0.05});
 		public static const ArachnidBookLungEvolved:PerkType = mk("Arachnid Book Lung (Evolved)", "Arachnid Book Lung (Evolved)",
-				"Increase the amount of web and poison generated by an additional 100% and increase the effectiveness of all Web abilities by half.",
-				"You've chosen the 'Arachnid Book Lung Evolved' perk. Increase the amount of web and poison generated by an additional 100% and increase the effectiveness of all Web abilities by half.").withBuffs({'int.mult':0.10});
+				"Increase the web and poison capacity by an additional 100% and increase the effectiveness of all Web abilities by half.",
+				"You've chosen the 'Arachnid Book Lung Evolved' perk. Increase the web and poison capacity by an additional 100% and increase the effectiveness of all Web abilities by half.").withBuffs({'int.mult':0.10});
 		public static const ArachnidBookLungFinalForm:PerkType = mk("Arachnid Book Lung (Final Form)", "Arachnid Book Lung (Final Form)",
-				"Increase the amount of web and poison generated by an additional 100%, increase the effectiveness of all Web abilities by half. Web abilities have a 50% chance to immobilize opponents for 2 rounds when used as the opponent struggles to get free. ",
-				"You've chosen the 'Arachnid Book Lung Final Form' perk. Increase the amount of web and poison generated by an additional 100%, increase the effectiveness of all Web abilities by half. Web abilities have a 50% chance to immobilize opponents for 2 rounds when used as the opponent struggles to get free. ").withBuffs({'int.mult':0.15});
+				"Increase the web and poison capacity by an additional 100%, increase the effectiveness of all Web abilities by half. Web abilities have a 50% chance to immobilize opponents for 2 rounds when used as the opponent struggles to get free. ",
+				"You've chosen the 'Arachnid Book Lung Final Form' perk. Increase the web and poison capacity by an additional 100%, increase the effectiveness of all Web abilities by half. Web abilities have a 50% chance to immobilize opponents for 2 rounds when used as the opponent struggles to get free. ").withBuffs({'int.mult':0.15});
 		public static const AzureflameBreath:PerkType = mk("Azureflame Breath", "Azureflame Breath",
 				"Allows access to a cave wyrm azureflame breath attack.");
 		public static const Androgyny:PerkType = mk("Androgyny", "Androgyny",
@@ -6199,6 +6211,8 @@ public class PerkLib
 					.requireWis(10);
             Motivation.requirePerk(JobLeader)
 					.requirePerk(BasicLeadership);
+			VenomousDiet.requireHungerEnabled();
+			VenomousAdiposeTissue.requireTou(10);
             //Tier 1
 			ArachnidBookLungEvolved.requireLevel(6)
 				.requirePerk(ArachnidBookLung)
@@ -6597,6 +6611,8 @@ public class PerkLib
 					.requirePerk(AerialCombat)
 					.requireStr(30)
 					.requireSpe(40);
+			HighlyVenomousDiet.requirePerk(VenomousDiet);
+			AxillaryVenomGlands.requirePerk(VenomousAdiposeTissue);
             //Tier 3
             HinezumiBurningBloodFinalForm.requireLevel(18)
 				.requirePerk(HinezumiBurningBloodEvolved)
@@ -6708,6 +6724,9 @@ public class PerkLib
             VexedNocking.requireLevel(18)
 					.requireStr(10)
 					.requireSpe(10);
+            Survivalist3.requireLevel(18)
+                    .requireHungerEnabled()
+                    .requirePerk(Survivalist2);
             //Tier 4
 			ArachnidBookLungFinalForm.requireLevel(24)
 					.requirePerk(ArachnidBookLungEvolved)
