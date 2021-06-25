@@ -1754,7 +1754,9 @@ import coc.view.MainView;
 			player.createStatusEffect(StatusEffects.LibSensCounter2,0,0,0,0);
 			player.sleepUpdateStat();
 			player.HP = player.maxHP();
-			doYesNo(goToIngnam, arrival);
+			//doYesNo(goToIngnam, arrival);
+			addButton(0, "Ingnam", goToIngnam);
+			addButton(1,"Skip Ingnam", arrival);
 		}
 
 		public function goToIngnam():void {
