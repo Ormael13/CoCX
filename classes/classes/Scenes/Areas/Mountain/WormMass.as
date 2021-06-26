@@ -14,7 +14,7 @@ public class WormMass extends Monster
 				return;
 			}
 			//Evade
-			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "' attacks.\n");
 				return;
 			}

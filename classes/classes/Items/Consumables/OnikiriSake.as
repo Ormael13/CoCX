@@ -35,16 +35,7 @@ public class OnikiriSake extends Consumable {
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(3) == 0) changeLimit++;
-		if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-		if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-		if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-		if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-		if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-		if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-		if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-		if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-		if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-		if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+		changeLimit += player.CheckMutationPerks();
 		//Temporary storage
 		var temp:Number = 0;
 		player.slimeFeed();
@@ -205,7 +196,7 @@ public class OnikiriSake extends Consumable {
 		//mutationStep(player.skin.base.type == PLAIN && !player.skin.hasBattleTattoo(), 3, function(): void {
 		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {
 			outputText("\n\nAs you thought your skin couldn't handle more tattoo a few localised skin burns reveal a new set of drawing along your skin, some decorating your chest. Well you might as well proudly display your <b>Oni tattooed skin.</b>");
-			if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) {
+			if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) {
 				outputText("\n\n<b>Genetic Memory: Battle Tattooed Skin - Memorized!</b>\n\n");
 				player.createStatusEffect(StatusEffects.UnlockedBattleTattoed, 0, 0, 0, 0);
 			}

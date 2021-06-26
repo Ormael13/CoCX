@@ -630,7 +630,7 @@ private function tentacleRapeContinuationForFemales():void {
 	if (player.vaginas.length == 1) { //single coochie
 		outputText("Satisfied, the creature drops you smartly, withdraws its limbs from you, and lumbers away.  Covered completely in cum, you see that your clitoris has swollen up to ");
 		//Big clit girls get huge clits
-		if ((player.findPerk(PerkLib.BigClit) >= 0 && player.clitLength > 2) || player.clitLength > 3)
+		if ((player.hasPerk(PerkLib.BigClit) && player.clitLength > 2) || player.clitLength > 3)
 			outputText("almost " + num2Text(Math.floor(player.clitLength * 1.75)) + " inches in length. ");
 		//normal girls get big clits
 		else
@@ -645,7 +645,7 @@ private function tentacleRapeContinuationForFemales():void {
 	//Very corrupt
 	else outputText("too intoxicated with lust to continue the pleasure. ");
 	//If has big-clit grow to max of 6"
-	if (player.clitLength < 7 && player.clitLength >= 3.5 && player.findPerk(PerkLib.BigClit) >= 0) {
+	if (player.clitLength < 7 && player.clitLength >= 3.5 && player.hasPerk(PerkLib.BigClit)) {
 		player.clitLength += .1 + player.cor / 100;
 		outputText("Your massive clitty eventually diminishes, retaining a fair portion of its former glory.  It is now " + int(player.clitLength * 10) / 10 + " inches long when aroused, ");
 		if (player.clitLength < 5)

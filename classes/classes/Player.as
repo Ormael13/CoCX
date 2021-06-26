@@ -15200,6 +15200,21 @@ use namespace CoC;
 			return max;
 		}
 
+		public function CheckMutationPerks():Number{
+			var changeLimit: Number;
+			if (hasPerk(PerkLib.HistoryAlchemist) || hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
+			if (hasPerk(PerkLib.Enhancement)) changeLimit++;
+			if (hasPerk(PerkLib.Fusion)) changeLimit++;
+			if (hasPerk(PerkLib.Enchantment)) changeLimit++;
+			if (hasPerk(PerkLib.Refinement)) changeLimit++;
+			if (hasPerk(PerkLib.Saturation)) changeLimit++;
+			if (hasPerk(PerkLib.Perfection)) changeLimit++;
+			if (hasPerk(PerkLib.Creationism)) changeLimit++;
+			if (hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
+			if (hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+			return changeLimit;
+		}
+
 		public function MutagenBonus(statName: String, bonus: Number):void
 		{
 			var MBCap:Number = 0.2;

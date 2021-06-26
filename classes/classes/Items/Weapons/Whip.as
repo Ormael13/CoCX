@@ -14,7 +14,7 @@ package classes.Items.Weapons
 		
 		override public function get attack():Number {
 			var boost:int = 0;
-			if (game.player.findPerk(PerkLib.ArcaneLash) >= 0) boost += 2;
+			if (game.player.hasPerk(PerkLib.ArcaneLash)) boost += 2;
 			return (5 + boost); 
 		}
 	}

@@ -62,16 +62,7 @@ public class BeeHoney extends Consumable
 			if (Utils.rand(2) == 0) changeLimit++;
 			if (Utils.rand(2) == 0) changeLimit++;
 			if (Utils.rand(2) == 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			changeLimit += player.CheckMutationPerks();
 			//Drink text
 			if (special) {
 				outputText("You uncork the bottle and pour the incredibly strong smelling concentrated honey down your throat.  Its taste is also mighty intense.  All at once you feel the effects of the substance start to course through your body.");
@@ -180,7 +171,7 @@ public class BeeHoney extends Consumable
 					pattern:Skin.PATTERN_BEE_STRIPES
 				},Skin.COVERAGE_LOW);
 				// TODO grow chitin text
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
+				if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
 					outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
 					player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
 				}
@@ -221,7 +212,7 @@ public class BeeHoney extends Consumable
 				}
 			}
 			//Gain oviposition!
-			if (changes < changeLimit && player.findPerk(PerkLib.BeeOvipositor) < 0 && player.tailType == Tail.BEE_ABDOMEN && Utils.rand(2) == 0) {
+			if (changes < changeLimit && !player.hasPerk(PerkLib.BeeOvipositor) && player.tailType == Tail.BEE_ABDOMEN && Utils.rand(2) == 0) {
 				outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous bee part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the stinger.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, black, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new bee ovipositor will feel like...");
 				outputText("\n\n(<b>Perk Gained:  Bee Ovipositor - Allows you to lay eggs in your foes!</b>)");
 				player.createPerk(PerkLib.BeeOvipositor, 0, 0, 0, 0);

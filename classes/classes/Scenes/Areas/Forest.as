@@ -142,7 +142,7 @@ use namespace CoC;
 						mods  : [fn.ifLevelMin(4)],
 						chance: function ():Number {
 							//Extra chance of Jojo encounter.
-							return (player.findPerk(PerkLib.PiercedFurrite) >= 0
+							return (player.hasPerk(PerkLib.PiercedFurrite)
 									&& rand(5) == 0
 									&& (player.cor > 25 || JojoScene.monk > 0)) ? 1.2 : 1;
 						},
@@ -377,8 +377,8 @@ use namespace CoC;
 				name: "fera_1",
 				when: function():Boolean {
 					return isHalloween()
-						   && player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0
-						   && player.findPerk(PerkLib.FerasBoonAlpha) < 0
+						   && !player.hasPerk(PerkLib.FerasBoonBreedingBitch)
+						   && !player.hasPerk(PerkLib.FerasBoonAlpha)
 						   && date.fullYear > flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE];
 				},
 				call: Holidays.pumpkinFuckEncounter

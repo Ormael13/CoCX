@@ -80,7 +80,7 @@ import classes.Stats.Buff;
 			{
 				outputText("As you wander the wasted landscape searching for anything of interest, you find yourself face to face with a familiar large boulder; the same one hiding the entrance to Izumi’s cave.  Once again, you become aware of a strange sound on the edge of your hearing.  Carefully positioning yourself at the gap between the boulder and the cave entrance, you turn your ear to the source of the noise and manage to pick out what it is that you’re hearing; somebody is loudly humming, the same lively tune you heard during your previous visit.\n\n");
 				outputText("Considering how your last visit to the cave ended, you hesitate for a moment and wonder if you should push forward to enter Izumi’s home... or if turning back to camp would be a wiser decision.\n\n");
-				if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_IZUMI] < 2) flags[kFLAGS.SOUL_SENSE_IZUMI]++;
+				if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_IZUMI] < 2) flags[kFLAGS.SOUL_SENSE_IZUMI]++;
 				if (flags[kFLAGS.SOUL_SENSE_IZUMI] == 2) {
 					flags[kFLAGS.SOUL_SENSE_IZUMI]++;
 					outputText("\n\n<b>You have meet her enough times to be able to find her in the future when using soul sense. (Removes Izumi from high mountains explore encounters pool!)</b>\n\n");

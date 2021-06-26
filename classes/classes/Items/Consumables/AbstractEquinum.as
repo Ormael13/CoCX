@@ -50,16 +50,7 @@ public class AbstractEquinum extends Consumable {
 		//Chancee to raise limit
 		if (rand(2) == 0) changeLimit++;
 		if (rand(3) == 0) changeLimit++;
-		if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+		changeLimit += player.CheckMutationPerks();
 		//Used for random chances
 		//Set up output
 		clearOutput();
@@ -80,7 +71,7 @@ public class AbstractEquinum extends Consumable {
 				player.createStatusEffect(StatusEffects.HorseWarning, 0, 0, 0, 0);
 			}
 			//Bad End
-			if (rand(4) == 0 && player.hasStatusEffect(StatusEffects.HorseWarning) && player.findPerk(PerkLib.TransformationResistance) < 0) {
+			if (rand(4) == 0 && player.hasStatusEffect(StatusEffects.HorseWarning) && !player.hasPerk(PerkLib.TransformationResistance)) {
 				//Must have been warned first...
 				if (player.statusEffectv1(StatusEffects.HorseWarning) > 0) {
 					//If player has dicks check for horsedicks
@@ -538,7 +529,7 @@ public class AbstractEquinum extends Consumable {
 			changes++;
 			if (type == 0) player.skin.growCoat(Skin.FUR, {color: randomChoice(["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"])});
 			else player.skin.growCoat(Skin.FUR, {color: randomChoice(["platinum blonde", "silver", "white", "pure white"])});
-			if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
+			if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
 				outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
 				player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
 			}

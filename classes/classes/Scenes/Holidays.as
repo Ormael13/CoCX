@@ -149,7 +149,7 @@ public class Holidays {
                     +"\n\n\"<i>I went ahead and gave you your reward.  It seemed fitting to give you a little bit more 'juice', since that was how you saved me.  My hero,</i>\" Fera explains before giving you a chaste kiss on the lips.  \"<i>You'll find yourself cumming a little harder and recovering a little faster in the future.  Now go, take what you want from the weak.  Do not disappoint me.</i>\""
                     +"\n\nFera disappears along with all the evidence of your encounter, her ruby lips hanging in the air for a split-second before fading as well.  You're left naked, alone with your discarded armor, lusts, and recently adjusted attitude.");
             //(+30 corrution, Fera's Boon - Alpha gained)
-            if (player.findPerk(PerkLib.FerasBoonAlpha) < 0) {
+            if (!player.hasPerk(PerkLib.FerasBoonAlpha)) {
                 EngineCore.outputText("\n\n(<b>Perk Gained: Fera's Boon - Alpha</b>)");
                 player.createPerk(PerkLib.FerasBoonAlpha, 0, 0, 0, 0);
             }
@@ -225,7 +225,7 @@ public class Holidays {
                     + "\n\nThe sultry orange-haired maiden pats your sloshing middle as the vines unwind, allowing you to stand on your own feet.  You go to wipe the cum from your nose and upper lip as soon as you're free.  It's dry.  Did any of that even happen?"
                     + "\n\n<i>\"I went ahead and gave you your reward.  It seemed fitting to enhance the power of your womb, since that was how you saved me.  My hero,\"</i> Fera explains before giving you a chaste kiss on the lips.  <i>\"You'll find yourself breeding easier and giving birth faster.  Now go, fill this world with strong offspring.  Do not disappoint me.\"</i>"
                     + "\n\nFera disappears along with all the evidence of your encounter, her ruby lips hanging in the air for a split-second before fading as well.  You're left naked, alone with your discarded armor, urge of release, and recently adjusted attitude.");
-            if (player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0) {
+            if (!player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
                 EngineCore.outputText("\n\n(<b>Perk Gained: Fera's Boon - Breeding Bitch</b>)");
                 player.createPerk(PerkLib.FerasBoonBreedingBitch, 0, 0, 0, 0);
             }
@@ -415,7 +415,7 @@ public class Holidays {
             }
             player.orgasm();
             player.dynStats("lib", 10, "cor", 5);
-            if (player.findPerk(PerkLib.FerasBoonSeeder) < 0) {
+            if (!player.hasPerk(PerkLib.FerasBoonSeeder)) {
                 player.createPerk(PerkLib.FerasBoonSeeder, 0, 0, 0, 0);
             }
             EngineCore.menu();
@@ -501,7 +501,7 @@ public class Holidays {
             player.cuntChange(90000, true, true, false);
             //(cum!)
             //Minimum size to 4
-            if (player.findPerk(PerkLib.FerasBoonWideOpen) < 0) {
+            if (!player.hasPerk(PerkLib.FerasBoonWideOpen)) {
                 player.createPerk(PerkLib.FerasBoonWideOpen, 0, 0, 0, 0);
             }
             //Boost fertility by a bunch
@@ -561,7 +561,7 @@ public class Holidays {
             player.orgasm();
             player.dynStats("lib", 5, "sen", 20, "cor", 3);
             //Maximum size to 2
-            if (player.findPerk(PerkLib.FerasBoonMilkingTwat) < 0) {
+            if (!player.hasPerk(PerkLib.FerasBoonMilkingTwat)) {
                 player.createPerk(PerkLib.FerasBoonMilkingTwat, 0, 0, 0, 0);
             }
             if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_LOOSE) player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_LOOSE;
@@ -607,7 +607,7 @@ public class Holidays {
             player.cocks[0].cockLength = 10;
             player.cocks[0].cockThickness = 2.5;
             //Add five corruption.
-            if (player.findPerk(PerkLib.FerasBoonSeeder) < 0) {
+            if (!player.hasPerk(PerkLib.FerasBoonSeeder)) {
                 player.createPerk(PerkLib.FerasBoonSeeder, 0, 0, 0, 0);
             }
             EngineCore.menu();
@@ -892,7 +892,7 @@ public class Holidays {
             EngineCore.clearOutput();
             EngineCore.outputText("Running your hand through the turkey-girl's hair, you whisper what a good little cockgobbler she is. However, you soon find that the poor thing's passed out, your rut finally over with.  You give her a gentle push over her back, giving you a nice soft tit-pillow to lay your head down upon as you pick up the lunch you'd been preparing to eat before the eager slut arrived."
                     +"\n\n\"<i>That'll do, turkey,</i>\" you say, patting her jiggling tit. \"<i>That'll do.</i>\"");
-            if (player.findPerk(PerkLib.PilgrimsBounty) < 0) {
+            if (!player.hasPerk(PerkLib.PilgrimsBounty)) {
                 player.createPerk(PerkLib.PilgrimsBounty, 0, 0, 0, 0);
                 EngineCore.outputText("\n\n(<b>Perk Gained: Pilgrim's Bounty - Lower lust values no longer reduce the size of your orgasm.</b>)");
             }
@@ -967,7 +967,7 @@ public class Holidays {
                     +"\nYour eyes crack open, mind still foggy as sleep still clings to the corners of your eyes.  Memories of the insatiable turkeygirl flood back as you start to sit up, dreading the inevitable clean-up after so much spilled fluid.  However, you quickly realize that you're already redressed! In fact, it seems like someone not only dressed you, but both your body and your [armor] are completely spotless, not even a trace of the girl remaining on your person.  Looking around you notice that your campfire still burns brightly, as if someone stoked it recently.  Even your stomach has returned to its previous state, leaving no sign of the massive amount of gorgeous gravy you guzzled not an hour ago."
                     +"\n\nLurching to your feet, you stretch your arms, feeling completely refreshed after the short nap.  If it wasn't for the sweet taste of pumpkin still lingering on your lips, you'd be prepared to call what had just happened one of the weirdest dreams you've had since arriving in Mareth."
                     +"\n\nThen again, you have to admit that it would also class as one of the most fun...");
-            if (player.findPerk(PerkLib.Cornucopia) < 0) {
+            if (!player.hasPerk(PerkLib.Cornucopia)) {
                 EngineCore.outputText("\n\n(<b>Gained Perk: Cornucopia - increases vaginal and anal capacities by 30.</b>)");
                 player.createPerk(PerkLib.Cornucopia, 0, 0, 0, 0);
             }
@@ -1495,7 +1495,7 @@ public class Holidays {
                     +"\n\nHer eyes sparkle a bit as the sun's last rays of light loom over the horizon, and by that time your wants have changed into a pleasant, calm passion and relaxation in the soft arms of the nun, her breast smooshed against your hand and even your own [fullChest], the warmth almost making you think you could simply fall asleep right there.  However, a couple of minutes after the sun has completely crossed the horizon, Scylla rouses you and moves up to her feet herself, helping you get up before planting a hand on the cheek of your [face] and sharing one last, tender kiss with you.  \"<i>Thank you for helping out and spending time with me today, [name].  I will not forget this, and I do appreciate everything you've done to make this day special.  I hope every day turns out great and full of love for you.</i>\" She says, putting a hand on your shoulder and leading you down the stairs."
                     +"\n\nLater, when you move through the desert around Tel'Adre towards your own camp, looking back at Scylla waving towards you, you're somehow glad things turned out that way, and feel more determined than ever to not only defeat the demons, but also spread the good will and positive feelings through any world you may call your own.");
 
-            if (player.findPerk(PerkLib.PureAndLoving) < 0) {
+            if (!player.hasPerk(PerkLib.PureAndLoving)) {
                 EngineCore.outputText("\n\n(<b>You have gained the Pure and Loving perk!</b>");
                 player.createPerk(PerkLib.PureAndLoving, 0, 0, 0, 0);
             }
@@ -1545,7 +1545,7 @@ public class Holidays {
                     +"\n\nAn hour or so later and quite a bit after sunset, you return to your camp, satisfied and pleased with how you celebrated this holiday...");
 
             // Only add the perk if the player doesn't already have it.
-            if (player.findPerk(PerkLib.SensualLover) < 0) {
+            if (!player.hasPerk(PerkLib.SensualLover)) {
                 EngineCore.outputText("\n\n(<b>You have gained the Sensual Lover perk!</b>)");
                 player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
             }
@@ -1560,7 +1560,7 @@ public class Holidays {
             //{The PC titfucks Scylla again, and then gets her to suck them off, resulting in two quick orgasm and a big nice load of food for Scylla. How far can you fall to get off? On such a nice day, too!}
             EngineCore.outputText("You feed Scylla what feels like a gallon of jizz!");
             player.orgasm();
-            if (player.findPerk(PerkLib.OneTrackMind) < 0) {
+            if (!player.hasPerk(PerkLib.OneTrackMind)) {
                 EngineCore.outputText("\n\n(<b>You have gained the One Track Mind perk.</b>");
                 player.createPerk(PerkLib.OneTrackMind, 0, 0, 0, 0);
             }
@@ -1626,7 +1626,7 @@ public class Holidays {
                     +"\n\nUnable to hold back any further, you pick up your pace, from tender strokes to urgent thrusts, pounding into the goblin paladin with deep, hard motions.  The force of your efforts sends the table toppling to its side, Abylon suspended in the air by her legs tightly wrapped around your back, your hand on her muscled abdomen, and her burnished crimson braid wrapped around your arm.  Clinging to your " + player.cockDescript(x) + " with single-minded bliss, the goblin girl doesn't even seem to notice the ruckus your love-making is causing.  Impassioned loins united by mutual delight, the cavalier rides her champion until the cold tickle of your climax rushes down your spine and through your core.  With a cry of joy, Abylon tightens the grip of her athletic legs on your [hips] and hugs you close as the first spurt of your cum lances into her belly.  Succumbing to her racial needs, the gallant orgasms from the touch of your seed, her tongue hanging from the side of her mouth as her eyes roll up in her head.  You fill her with your hot loads until the spunk gushes out of her quivering pussy and she weakly mutters a word of thanks to Scylla that you suspect she hadn't meant to say aloud."
                     +"\n\nSated, you disentangle yourself from the clinging girl and lay her into her bed, with a kiss on her sweat-slick forehead.  She absently strokes between her legs, feeling the oozing jizz dribbling out of her stuffed snatch.  Maybe, for her, this is the meaning of the holiday: not just a casual fuck, but taking the time to really savor the body of someone who's important to you.  Even if it isn't love, in the strictest sense, being close to the people who impact your life is reason enough to find joy in your days.  You wish the little paladin a good night and, blowing out her candles, you take your leave.");
 
-            if (player.findPerk(PerkLib.SensualLover) < 0) {
+            if (!player.hasPerk(PerkLib.SensualLover)) {
                 EngineCore.outputText("\n\n(<b>You've received the Sensual Lover Perk!</b>)");
                 player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
             }
@@ -1655,7 +1655,7 @@ public class Holidays {
                     +"\n\nAbylon blushes the whole time, for once not finding the words to retort or insult you in any way, as you pat her on the head, making your way out.  \"<i>Th...thanks,</i>\" she says in a stuttering voice, before you close the door behind yourself and leave for your camp."
                     +"\n\nAll in all, you're pleased that perhaps you've managed to show a goblin that real affection does exist... not to mention get somebody off twice on a new Mareth holiday!");
 
-            if (player.findPerk(PerkLib.PureAndLoving) < 0) {
+            if (!player.hasPerk(PerkLib.PureAndLoving)) {
                 EngineCore.outputText("\n\n(<b>You've received the Pure and Loving Perk!</b>)");
                 player.createPerk(PerkLib.PureAndLoving, 0, 0, 0, 0);
             }
@@ -1777,7 +1777,7 @@ public class Holidays {
             EngineCore.outputText("\n\nHaving gotten off so well, you pat the little fairy on the head and leave her on a nearby windowsill so no animal will harm her when she sleeps - and so nobody steps on her by accident.  She's out of it, but given that she's made such a good cumdump, she deserves a little safety in return."
                     +"\n\nYou grin and lick your lips as you return to camp.");
 
-            if (player.findPerk(PerkLib.OneTrackMind) < 0) {
+            if (!player.hasPerk(PerkLib.OneTrackMind)) {
                 EngineCore.outputText("\n\n(<b>You have gained the One Track Mind perk!</b>)");
                 player.createPerk(PerkLib.OneTrackMind, 0, 0, 0, 0);
             }
@@ -1809,7 +1809,7 @@ public class Holidays {
                     +"\n\nHaving gotten yourself off, and with the sprite showing no sign of slowing down in her insensible self-love, you pat the little fairy on the head and leave her on a nearby windowsill.  Eventually, you reason, she'll run out of steam and be so exhausted from the effort that she'll likely pass out.  You wouldn't want a stray animal—or footfall!—to harm the tanked girl while she sleeps.  She's too out of it to appreciate the compliment, but you thank her all the same for being such a wonderful cum-canvas."
                     +"\n\nYou grin and whistle a spritely tune as you return to camp.");
             // (You have gained the One Track Mind perk!)
-            if (player.findPerk(PerkLib.OneTrackMind) < 0) {
+            if (!player.hasPerk(PerkLib.OneTrackMind)) {
                 EngineCore.outputText("\n\n(<b>You have gained the One Track Mind perk!</b>)");
                 player.createPerk(PerkLib.OneTrackMind, 0, 0, 0, 0);
             }
@@ -1839,7 +1839,7 @@ public class Holidays {
             EngineCore.outputText("\n\nPastie giggles as she flies onto the nearby wall, heavily, completely soaked in your secretions.  As you look to her, she answers.  \"<i>I'm fine!  It's all okay.  Justtt.... too much to drink.  Feels gooood, though, hehe!  We should try that again.</i>\"  You nod and smile at her, gently wiping her with a finger and letting her taste your pussy juice off it before going back to camp."
                     +"\n\nTrue, this might not have been the most romantic sex act, but it was certainly enjoyable for the two of you.");
 
-            if (player.findPerk(PerkLib.SensualLover) < 0) {
+            if (!player.hasPerk(PerkLib.SensualLover)) {
                 EngineCore.outputText("\n\n(<b>You have gained the Sensual Lover perk!</b>)");
                 player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
             }
@@ -2080,7 +2080,7 @@ public class Holidays {
             EngineCore.clearOutput();
             EngineCore.outputText("You awaken in the morning, sore and exhausted, but more satisfied than you've ever felt before.  Your body feels INCREDIBLY sensitive from head to toe, but particularly on your well-used [cock].  In spite of the traumatic lovemaking, you feel remarkably clear-headed.\n\n"
                     +"Did you enjoy being able to cum so much");
-            if (player.findPerk(PerkLib.ElvenBounty) >= 0) EngineCore.outputText(" <b>again</b>");
+            if (!player.hasPerk(PerkLib.ElvenBounty)) EngineCore.outputText(" <b>again</b>");
             EngineCore.outputText("?");
             //[Yes][No] – yes awards (+250 mls cum volume), no awards +15 intellect
             EngineCore.doYesNo(Utils.curry(xmasPerkM,true), xmasSmart);
@@ -2099,7 +2099,7 @@ public class Holidays {
             EngineCore.outputText("You awaken in the morning, sore and exhausted, but more satisfied than you've ever felt before.  Your body feels INCREDIBLY sensitive from head to toe, but particularly in your well-used " + Appearance.vaginaDescript(player, 0) + ".  In spite of the traumatic lovemaking, you feel remarkably clear-headed.  The dildo appears to have completely dissolved inside you, leaving behind a pinkish fluid that drips from your lips.\n\n");
 
             EngineCore.outputText("Do you think it might have done anything to you");
-            if (player.findPerk(PerkLib.ElvenBounty) >= 0) EngineCore.outputText(" <b>again</b>");
+            if (!player.hasPerk(PerkLib.ElvenBounty)) EngineCore.outputText(" <b>again</b>");
             EngineCore.outputText("?");
             //[Yes][No] – yes awards (+15 fertility!), no awards +15 intellect
             EngineCore.doYesNo(Utils.curry(xmasPerkM,false), xmasSmart);
@@ -2112,7 +2112,7 @@ public class Holidays {
         }
 
         function xmasPerkM(cumQ:Boolean):void {
-            if (player.findPerk(PerkLib.ElvenBounty) < 0) {
+            if (!player.hasPerk(PerkLib.ElvenBounty)) {
                 if (cumQ) player.createPerk(PerkLib.ElvenBounty, 250, 0, 0, 0);
                 else player.createPerk(PerkLib.ElvenBounty, 0, 15, 0, 0);
                 EngineCore.clearOutput();
