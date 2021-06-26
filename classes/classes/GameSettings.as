@@ -140,16 +140,23 @@ public class GameSettings extends BaseContent {
 			addButton(1, "Difficulty", difficultySelectionMenu).hint("Adjust the game difficulty to make it easier or harder.");
 			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(7, "Easy Mode", toggleEasyModeFlag).hint("Toggles easy mode.  Enemy damage is 10% of normal and bad-ends can be ignored.");
 			else addButtonDisabled(7, "Easy Mode", "Diffulty setting is too high to allow toggle easy mod.");
+			addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
+			addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
+			addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
+		}
+		else {
+			addButtonDisabled(1, "Difficulty", "Req. to have loaded any save.");
+			addButtonDisabled(7, "Easy Mode", "Req. to have loaded any save.");
+			addButtonDisabled(8, "Enable Surv", "Req. to have loaded any save.");
+			addButtonDisabled(9, "Enable Real", "Req. to have loaded any save.");
+			addButtonDisabled(11, "Fetishes", "Req. to have loaded any save.");
 		}
 		addButton(2, "Silly Toggle", toggleSillyFlag).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
 		addButton(3, "Low Standards", toggleStandards);
 		addButton(4, "Hyper Happy", toggleHyperHappy);
 		addButton(5, "SFW Toggle", toggleSFW).hint("Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
 		addButton(6, "Auto level", toggleAutoLevel).hint("Toggles automatic leveling when you accumulate sufficient experience.");
-		if (player) addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
-		if (player) addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
 		addButton(10, "Fast Lvl", toggleInstaLvl).hint("Immediately level to highest possible from XP instead of spamming next.");
-		addButton(11, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
 		addButton(12, "Mutation Assist", mutationSubMenu).hint("Mutation Tracker Spoiler Mode. For when you want to discover mutations by yourself, or with some help.");
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5) {
 			removeButton(8);

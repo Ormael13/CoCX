@@ -25,10 +25,13 @@ public class PerkMenu extends BaseContent {
 		var temp:int = 0;
 		clearOutput();
 		displayHeader("Perks");
+		///*
 		while(temp < player.perks.length) {
 			outputText("<b>" + player.perk(temp).perkName + "</b> - " + player.perk(temp).perkDesc + "\n");
 			temp++;
 		}
+		// */
+		//playerPerksList();
 		menu();
 		addButton(0, "Next", playerMenu);
 		if (player.perkPoints > 0) {
@@ -1011,6 +1014,151 @@ public class PerkMenu extends BaseContent {
 	private function setFlag(returnTo:Function,flag:int,val:int):void{
 		flags[flag] =  val;
 		returnTo();
+	}
+
+	public function playerPerksList():void {	//Can this be done better? Very likely. But hell, I'm not a programmer.
+		var pPerkList:Array = player.perks;	 	//Player Perks
+		var masterlist:Array = [];				//Temp hold of above
+		var ignorelist:Array = [];				//List to check against repetitively
+		var endlist:Array = [];					//Final list of perks to output
+
+		function initSet():void {
+			var mutationList:Array = [PerkLib.BlackHeart, PerkLib.FrozenHeart, PerkLib.ObsidianHeart, PerkLib.TwinHeart, PerkLib.HeartOfTheStorm, PerkLib.DraconicHeart, PerkLib.MantislikeAgility, PerkLib.OniMusculature, PerkLib.VenomGlands, PerkLib.HollowFangs, PerkLib.SalamanderAdrenalGlands, PerkLib.OrcAdrenalGlands, PerkLib.VampiricBloodsteam, PerkLib.HinezumiBurningBlood, PerkLib.FeyArcaneBloodstream, PerkLib.PigBoarFat, PerkLib.NaturalPunchingBag, PerkLib.WhaleFat, PerkLib.YetiFat, PerkLib.ArachnidBookLung, PerkLib.DraconicLungs, PerkLib.CaveWyrmLungs, PerkLib.MelkieLung, PerkLib.DrakeLungs, PerkLib.ManticoreMetabolism, PerkLib.DisplacerMetabolism, PerkLib.LactaBovinaOvaries, PerkLib.FloralOvaries, PerkLib.MinotaurTesticles, PerkLib.EasterBunnyEggBag, PerkLib.NukiNuts, PerkLib.GorgonsEyes, PerkLib.GazerEye, PerkLib.ElvishPeripheralNervSys, PerkLib.LizanMarrow, PerkLib.DraconicBones, PerkLib.HarpyHollowBones, PerkLib.KitsuneThyroidGland, PerkLib.NekomataThyroidGland, PerkLib.KitsuneParathyroidGlands, PerkLib.HellcatParathyroidGlands]
+			var clearoutList:Array = [];
+			for each(var i:PerkClass in pPerkList) { //Is this stupid? It probably is.
+				if (!(mutationList.indexOf(i.ptype) >= 0)){	//Okay, proved that this does remove the base mutations properly.
+					masterlist.push(i.ptype);
+				}
+			}
+			for each(var j:PerkType in masterlist) { //Baseline perks
+				var perkyes:Boolean = false;
+				for each (var temp1:Object in j.requirements) {
+					if (temp1.hasOwnProperty("perk") || temp1.hasOwnProperty("perks")){
+						perkyes = true;
+						break;
+					}
+				}
+				if (!perkyes) {
+					masterlist.splice(masterlist.indexOf(j), 1);
+					//clearoutList.push(j);
+					ignorelist.push(j);
+					endlist.push(j);
+				}
+			}
+			var chkperk:PerkType = PerkLib.JobSorcerer
+			var hi:Boolean = false;
+			if (masterlist.indexOf(chkperk)){
+				outputText("MasterList\n");
+				//for each (var fuck:Object in chkperk.requirements){
+				//	outputText(fuck.text);
+				//}
+				hi = true
+			}
+			if (ignorelist.indexOf(chkperk)){
+				outputText("IgnoreList\n");
+				hi = true
+			}
+			if (endlist.indexOf(chkperk)){
+				outputText("EndList\n");
+				hi = true
+			}
+			if (!hi){
+				outputText("Lost to the void");
+			}
+			//for each (var h:PerkType in clearoutList){ //Remove after cause if removed during, apparently shifts the thing to break.
+				//masterlist.splice(masterlist.indexOf(h), 1);	//It....kinda removes things?
+			//}
+			repPerkClr();
+		}
+
+		function repPerkClr():void { //Cycling perks against requirements until no higher can be achieved per.
+			var change:Boolean = false;
+			//var clearoutList:Array = [];
+			//outputText(masterlist.length.toString() + " M \n");
+			//outputText(ignorelist.length.toString() + " I \n");
+			for each(var k:PerkType in masterlist) {
+				//if (k.name.indexOf("Evolved") >= 0 || k.name.indexOf("Final Form") >= 0){
+				//	clearoutList.push(k);
+				//	change = true;
+				//}
+				for each (var cond:Object in k.requirements) {
+					if (cond.hasOwnProperty("perks")){	//Or it might be this. V
+						//outputText(k.name + " perks 321 \n");
+						var temp3:Boolean = false
+						for each (var f:PerkType in cond.perks) {
+							if (ignorelist.indexOf(f) >= 0) {	//This isn't working
+								if (!temp3) {
+									masterlist.splice(masterlist.indexOf(k), 1);
+									ignorelist.push(k);
+									endlist.push(k);
+									temp3 = true
+								}
+								endlist.splice(endlist.indexOf(f), 1);	//So does this?
+								change = true;
+							}
+						}
+						break;
+					}
+					else if (cond.hasOwnProperty("perk")){	//And this.
+						//outputText(k.name + " perk 123 \n");
+						if (ignorelist.indexOf(cond.perk) >= 0) {	//This too.
+							masterlist.splice(masterlist.indexOf(k), 1);
+							ignorelist.push(k);
+							endlist.splice(endlist.indexOf(cond.perk), 1);	//So does this?
+							endlist.push(k);
+							change = true;
+							break;
+						}
+					}
+				}
+			}
+			if (change) {
+				//outputText("Hit!!\n")
+				//for each (var e:PerkType in clearoutList){
+					//masterlist.splice(masterlist.indexOf(e), 1);
+					//ignorelist.push(e);
+				//}
+				//outputText("---------------\n")
+				repPerkClr();
+			}
+			else {
+				/*
+				var chkperk:PerkType = PerkLib.BlackHeartFinalForm
+				var hi:Boolean = false;
+				if (masterlist.indexOf(chkperk)){
+					outputText("MasterList\n");
+					hi = true
+				}
+				if (ignorelist.indexOf(chkperk)){
+					outputText("IgnoreList\n");
+					hi = true
+				}
+				if (endlist.indexOf(chkperk)){
+					outputText("EndList\n");
+					hi = true
+				}
+				if (!hi){
+					outputText("Lost to the void");
+				}
+				outputText("\n");
+				// */
+				perkOut();
+			}
+		}
+
+		function perkOut():void {	//Results of just the perks that are left.
+			outputText("--------------\n");
+			for each(var l:PerkType in endlist.sort()) {	//The fuck, this doesn't do it right either.
+				outputText("<b>" + l.name + ":</b> ");
+				try {
+					outputText(l.desc());
+				} catch (error:Error) {
+					outputText("No description.");
+				}
+				outputText(" \n");
+			}
+		}
+		initSet();
 	}
 	/* [INTERMOD: revamp]
 	 public function ascToleranceOption():void{

@@ -114,7 +114,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				if (flags[kFLAGS.LUNA_FOLLOWER] > 4) {
 					addButton(3, "Meal", mealLuna);
 					addButton(4, "Nurse", nurseLuna);
-					button(4).disableIf(player.HP >= player.maxOverHP() && !player.statStore.hasBuff("Curse"), "You are currently in perfect health.");
+					button(4).disableIf(player.HP >= player.maxOverHP() && !player.statStore.hasBuff("Weakened") && !player.statStore.hasBuff("Drain") && !player.statStore.hasBuff("Damaged"), "You are currently in perfect health.");
 					button(4).disableIf(Nursed, "Luna needs time to recharge her Mana before she can heal you again. Try tomorrow.");
 				}
 				if (flags[kFLAGS.LUNA_AFFECTION] >= 50) {
@@ -673,7 +673,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			menu();
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(0, "Accept", fullMoonEventAccept2);
 			else addButton(0, "Accept", fullMoonEventAccept);
-			if (player.dogScore() > 5 || player.wolfScore() > 5) addButtonDisabled(1, "Resist", "The smell of a female wolf in heat drives your canine instincts into a frenzy. You ");
+			if (player.dogScore() > 5 || player.wolfScore() > 5) addButtonDisabled(1, "Resist", "The smell of a female wolf in heat drives your canine instincts into a frenzy. You must have her here and now!");
 			else addButton(1, "Resist", fullMoonEventResist);
 		}
 		public function fullMoonEventAccept():void {
