@@ -1238,6 +1238,15 @@ public class PlayerInfo extends BaseContent {
 				masteryStats += "<b>Dual Wield (Firearms) Skill:</b>  " + player.dualWFLevel + " / " + combat.maxDualWieldFirearmsLevel() + "(Exp: MAX)\n<i>(Effects: +" + player.dualWFLevel + "% damage, +" + (0.5 * Math.round((player.dualWFLevel - 1) / 2)) + "% accuracy)</i>\n";
 			masteryStats += "\n";
 		}
+		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
+			masteryStats += "<b>Dao of Fire:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
+			masteryStats += "<b>Dao of Ice:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
+			masteryStats += "<b>Dao of Lighting:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
+			masteryStats += "<b>Dao of Darkness:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
+			masteryStats += "<b>Dao of ???:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
+			masteryStats += "<b>Dao of ???:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
+			masteryStats += "\n";
+		}
 		if (player.teaseLevel < combat.maxTeaseLevel())
 			masteryStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + combat.teaseExpToLevelUp() + ")\n";
 		else

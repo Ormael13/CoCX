@@ -671,7 +671,8 @@ public function mainCampMenu():void {
 	//1 - Talk
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(2, "Spar", dianaSparsWithPC).hint("Ask Diana for a mock battle.");
 	//3 - ??
-	addButton(4, "Sex", mainSexMenu);
+	if (player.lust > 33) addButton(4, "Sex", mainSexMenu);
+	else addButtonDisabled(4, "Sex", "Req. 33+ lust");
 	if (player.HP < player.maxOverHP()) addButton(5, "Healing", HealingScene);
 	else addButtonDisabled(5, "Healing", "You're fully healed already.");
 	if (player.buff("Curse").isPresent()) {
@@ -808,14 +809,28 @@ public function mainSexMenu():void {
 	outputText("You ask your mare if she feels about spend some quality time with her ‘stallion’. Diana blush right away.\n\n");
 	outputText("\"<i>How would you want us to do it?</i>\"\n\n");
 	menu();
-	if (player.lust > 33 && player.hasCock()) {
-		//addButton(0, "Breeding", SexMenuBreeding);
-		if (!player.isTaur()) addButton(1, "Vaginal", SexMenuVaginal);
-		else addButtonDisabled(1, "Vaginal", "Not for Taurs or Dickless!");
-		if (!player.isTaur()) addButton(2, "Anal", SexMenuAnal);
-		else addButtonDisabled(2, "Anal", "Not for Taurs or Dickless!");
-		if (!player.isTaur()) addButton(3, "Titfuck", SexMenuTitsfuck);
-		else addButtonDisabled(3, "Titfuck", "Not for Taurs or Dickless!");
+	if (player.hasCock()) {
+		if (player.isTaur()) {
+			//addButtonDisabled(0, "Breeding", "Not for Taurs!");
+			addButtonDisabled(1, "Vaginal", "Not for Taurs!");
+			addButtonDisabled(2, "Anal", "Not for Taurs!");
+			addButtonDisabled(3, "Titfuck", "Not for Taurs!");
+		}
+		else {
+			//addButton(0, "Breeding", SexMenuBreeding);
+			if (player.cockThatFits(36, "length") >= 0) addButton(1, "Vaginal", SexMenuVaginal);
+			else addButtonDisabled(1, "Vaginal", "You're Too Big!");
+			if (player.cockThatFits(36, "length") >= 0) addButton(2, "Anal", SexMenuAnal);
+			else addButtonDisabled(2, "Anal", "You're Too Big!");
+			if (player.cockThatFits(36, "length") >= 0) addButton(3, "Titfuck", SexMenuTitsfuck);
+			else addButtonDisabled(3, "Titfuck", "You're Too Big!");
+		}
+	}
+	else {
+		//addButtonDisabled(0, "Breeding", "Not for Dickless!");
+		addButtonDisabled(1, "Vaginal", "Not for Dickless!");
+		addButtonDisabled(2, "Anal", "Not for Dickless!");
+		addButtonDisabled(3, "Titfuck", "Not for Dickless!");
 	}
 	addButton(14, "Back", mainCampMenu);
 }
@@ -958,4 +973,4 @@ public function SexMenuTitsfuck():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 	}
-}
+}
