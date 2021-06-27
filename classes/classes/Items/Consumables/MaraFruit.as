@@ -14,6 +14,7 @@ import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
+import classes.CoC;
 
 public class MaraFruit extends Consumable{
 	public function MaraFruit() {
@@ -284,12 +285,10 @@ public class MaraFruit extends Consumable{
 		if (player.hairColor == "green" && (player.hairType != Hair.LEAF && player.hairType != Hair.GRASS) && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit)
 		{
 			if (rand(2) == 0) {
-				outputText("\n\nYour [hair] begins to fall out in clumps, eventually leaving your scalp completely bald.  Although, thankfully, it does not remain like that for long.  Within moments a full head of grass sprouts from the skin of your scalp, protecting it from the chilly wind which was starting to annoy you.  You run your hands through your newly grown hair-like grass, stifling a moan at how sensitive the thousands of long, soft and leafy blades that replaced your hair are.  <b>Your hair has been replaced by grass, your scalp is now covered with soft blades of verdant greenery...</b>");
-				mutations.setHairType(Hair.GRASS);
+				CoC.instance.transformations.HairGrass.applyEffect(false);
 			}
 			else {
-				outputText("\n\nYour [hair] begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of leaf sprouts from the skin of your scalp.  You run your hands through your new growth, sighing at the pleasure of being able to feel each individual leaf.  <b>Your hair turned into thin leafs replacing your current hair!</b>");
-				mutations.setHairType(Hair.LEAF);
+				CoC.instance.transformations.HairLeaf.applyEffect(false);
 			}
 			changes++;
 		}

@@ -122,7 +122,7 @@ public class Hair extends BodyPart {
 	EnumValue.add(Types, BURNING, "BURNING", {
 		name:"burning",
 		shortDesc: "burning hair",
-		appearanceDesc: "Your wild {hair} has had its tips overtaken by a magic flame, burning anything you wish it to and nothing more.",
+		appearanceDesc: "Your wild {hair} has its tips overtaken by a magic flame, burning anything you wish it to and nothing more.",
 		ignoresStyle: true
 	});
 
@@ -281,6 +281,19 @@ public class Hair extends BodyPart {
 		const id: int = creature.hairType;
 
 		return formatDescription((Types[id].appearanceDescFunc ? Types[id].appearanceDescFunc(creature) : Types[id].appearanceDesc) || "", creature);
+	}
+
+	public static function getStyleDescription(creature: *): String {
+		const id: int = creature.hairStyle;
+
+		var hair:String = "hair";
+
+		//If furry and longish hair sometimes call it a mane (50%)
+		if (creature.hasFur() == 1 && creature.hairLength > 3 && rand(2) == 0) {
+			hair = "mane";
+		}
+
+		return Styles[id].adjective + ' ' + hair;
 	}
 
 	private static function formatDescription(desc: String, creature: *): String {

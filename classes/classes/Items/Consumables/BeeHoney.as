@@ -27,7 +27,7 @@ public class BeeHoney extends Consumable
     {
         private const PURE_HONEY_VALUE:int = 40;
         private const SPECIAL_HONEY_VALUE:int = 20;
-		
+
         public function BeeHoney(pure:Boolean, special:Boolean) {
 			var honeyName:String = special ? "SpHoney" : ((pure ? "PurHony" : "BeeHony"));
 			var honeyLong:String = special ? "a bottle of special bee honey" : ((pure ? "a crystal vial filled with glittering honey" : "a small vial filled with giant-bee honey"));
@@ -41,7 +41,7 @@ public class BeeHoney extends Consumable
 					honeyDesc
 			);
         }
-		
+
 		override public function canUse():Boolean {
             if (value == SPECIAL_HONEY_VALUE && CoC.instance.player.statusEffectv1(StatusEffects.Exgartuan) == 1) { //Exgartuan doesn't like the special honey
                 outputText("You uncork the bottle only to hear Exgartuan suddenly speak up.  <i>“Hey kid, this beautiful cock here doesn’t need any of that special bee shit.  Cork that bottle up right now or I’m going to make it so that you can’t drink anything but me.”</i>  You give an exasperated sigh and put the cork back in the bottle.");
@@ -49,7 +49,7 @@ public class BeeHoney extends Consumable
 			}
 			return true;
 		}
-		
+
 		override public function useItem():Boolean {
             var player:Player = CoC.instance.player;
             var pure:Boolean = (value == PURE_HONEY_VALUE);
@@ -118,7 +118,7 @@ public class BeeHoney extends Consumable
 			if (changes < changeLimit && player.hairType == 4 && Utils.rand(2) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
 				outputText("\n\nAs you down the sticky-sweet honey, your head begins to feel heavier.  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels and smells like the honey you just ate; you watch as it dissolves into many thin strands coated in the sugary syrup.  <b>Your hair is back to normal (well, once you wash the honey out)!</b>");
-				mutations.setHairType(Hair.NORMAL);
+				CoC.instance.transformations.HairHuman.applyEffect(false);
 				changes++;
 			}
 			//(removes tentacle hair status, restarts hair growth if not prevented by reptile status)

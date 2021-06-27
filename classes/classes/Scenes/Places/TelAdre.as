@@ -39,14 +39,14 @@ import classes.display.SpriteDb;
 		public var scylla:Scylla = new Scylla();
 		public var sexMachine:SexMachine = new SexMachine();
 		public var umasShop:UmasShop = new UmasShop();
-		
+
 		public var nails:Number = 0;
 		public var wood:Number = 0;
 		public var stone:Number = 0;
-		
+
 		public function TelAdre()
 		{
-		
+
 		}
 
 //const YVONNE_FUCK_COUNTER:int = 437;
@@ -419,7 +419,7 @@ public function barTelAdre():void {
 	outputText("The interior of The Wet Bitch is far different than the mental picture its name implied.  It looks like a normal tavern, complete with a large central hearth, numerous tables and chairs, and a polished dark wood bar.  The patrons all seem to be dressed and interacting like normal people, that is if normal people were mostly centaurs and dog-morphs of various sub-species.  The atmosphere is warm and friendly, and ");
 	if (player.humanScore() <= 3) outputText("despite your altered appearance, ");
 	outputText("you hardly get any odd stares.  There are a number of rooms towards the back, as well as a stairway leading up to an upper level.");
-	
+
 	scylla.scyllaBarSelectAction(); //Done before anything else so that other NPCs can check scylla.action to see what she's doing
 		//Thanks to this function and edryn.edrynHeliaThreesomePossible() the bar menu will always display the same possible options until the game time advances.
 		//So it's safe to return to this menu, Helia or Urta can't suddenly disappear or appear just from leaving and re-entering the bar.
@@ -1329,7 +1329,7 @@ public function tripxiShopMainMenu2c():void {
 	//3 - Lactoblasters
 	//addButton(0, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 	//addButton(1, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
-	
+
 	addButton(10, "-1-", tripxiShopMainMenu2a);
 	addButton(11, "-2-", tripxiShopMainMenu2b);
 	addButtonDisabled(12, "-3-", "Shelf 3");
@@ -1673,20 +1673,20 @@ private function goJogging():void {
 
 	//If butt is over 15 guaranteed reduction
 	if(player.butt.type >= 15) {
-		outputText("\n\nAll that running must have done some good, because your " + buttDescript() + " feels a little less bouncy.");
+		outputText("\n\nAll that running must have done some good, because your [butt] feels a little less bouncy.");
 		player.butt.type--;
 	}
 	else {
 		if(player.butt.type >= 10 && rand(3) == 0) {
-			outputText("\n\nThe jogging really helped trim up your " + buttDescript() + ".");
+			outputText("\n\nThe jogging really helped trim up your [butt].");
 			player.butt.type--;
 		}
 		else if(player.butt.type >= 5 && rand(3) == 0) {
-			outputText("\n\nYour " + buttDescript() + " seems to have gotten a little bit more compact from the work out.");
+			outputText("\n\nYour [butt] seems to have gotten a little bit more compact from the work out.");
 			player.butt.type--;
 		}
 		else if(player.butt.type > 1 && rand(4) == 0) {
-			outputText("\n\nYour " + buttDescript() + " seems to have gotten a little bit more compact from the work out.");
+			outputText("\n\nYour [butt] seems to have gotten a little bit more compact from the work out.");
 			player.butt.type--;
 		}
 	}//If hips is over 15 guaranteed reduction

@@ -109,7 +109,7 @@ public class YukiOnnaScene extends BaseContent
 				if (player.legCount != 2) player.legCount = 2;
 				CoC.instance.mutations.setArmType(Arms.YUKI_ONNA);
 				CoC.instance.mutations.setEyeTypeAndColor(Eyes.HUMAN,"light purple");
-				CoC.instance.mutations.setHairType(Hair.SNOWY);
+				CoC.instance.transformations.HairSnowy.applyEffect(false);
 				if (rand(3) == 0) player.hairColor = "snow white";
 				else {
 					if (rand(2) == 0) player.hairColor = "silver white";

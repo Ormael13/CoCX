@@ -37,6 +37,10 @@ public class Appearance extends Utils
 			return Hair.getShortDescription(i_creature);
 		}
 
+		public static function hairStyleDescription(i_creature:Creature):String {
+			return Hair.getStyleDescription(i_creature);
+		}
+
 		public static function beardDescription(i_creature:Creature):String
 		{
 			var description:String = "";

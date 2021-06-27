@@ -14,9 +14,10 @@
 	import classes.BodyParts.Tongue;
 	import classes.BodyParts.Wings;
 	import classes.GlobalFlags.kFLAGS;
-import classes.Items.Armors.Nothing;
-import classes.Scenes.SceneLib;
+	import classes.Items.Armors.Nothing;
+	import classes.Scenes.SceneLib;
 	import classes.internals.SaveableState;
+	import classes.CoC;
 
 	public class WoodElves extends BaseContent implements SaveableState{
 
@@ -204,7 +205,7 @@ import classes.Scenes.SceneLib;
 			player.tongue.type = Tongue.ELF;
 			player.arms.type = Arms.ELF;
 			player.lowerBody = LowerBody.ELF;
-			player.hairType = Hair.SILKEN;
+      CoC.instance.transformations.HairSilky.applyEffect(false);
 			player.wings.type = Wings.NONE;
 			player.eyes.colour = "light green";
 			player.skin.base.color = "light";

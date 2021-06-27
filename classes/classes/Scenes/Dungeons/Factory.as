@@ -1,5 +1,5 @@
 //Dungeon 1: Factory
-package classes.Scenes.Dungeons 
+package classes.Scenes.Dungeons
 {
 import classes.*;
 import classes.BodyParts.Antennae;
@@ -13,7 +13,7 @@ import classes.Scenes.Dungeons.Factory.*;
 import classes.lists.Gender;
 
 use namespace CoC;
-	
+
 	public class Factory extends DungeonAbstractContent
 	{
 		private static const DUNGEON_FACTORY_FOYER:int				= 0;
@@ -26,9 +26,9 @@ use namespace CoC;
 		private static const DUNGEON_FACTORY_PUMP_CONTROL:int		= 7;
 		private static const DUNGEON_FACTORY_STORE_ROOM:int			= 8;
 		private static const DUNGEON_FACTORY_BATHROOM:int			= 9;
-		
+
 		public function Factory() {}
-		
+
 		//EVENTS
 		public function enterDungeon():void {
 			clearOutput();
@@ -45,19 +45,19 @@ use namespace CoC;
 			if (flags[kFLAGS.FACTORY_FOUND] < 1) {
 				outputText("\n\n<b>The factory is now accessible from the 'Dungeons' submenu inside 'Places' menu.</b>");
 				flags[kFLAGS.FACTORY_FOUND] = 1
-			}			
+			}
 			simpleChoices("Enter", roomLobby, "", null, "", null, "", null, "Leave", exitDungeon);
 		}
-		
+
 		private function exitDungeon():void {
 			inDungeon = false;
 			clearOutput();
 			outputText("You slip out the door and disappear, heading back towards your camp, leaving the hellish factory behind.");
-			doNext(camp.returnToCampUseOneHour);	
+			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function checkDoor1():void {
-			if (player.hasKeyItem("Iron Key") < 0) 
+			if (player.hasKeyItem("Iron Key") < 0)
 			{
 				clearOutput();
 				outputText("The door is locked with a key that is not in your possession.");
@@ -67,7 +67,7 @@ use namespace CoC;
 			else roomPumpRoom();
 		}
 		private function checkDoor2():void {
-			if (player.hasKeyItem("Supervisor's Key") < 0) 
+			if (player.hasKeyItem("Supervisor's Key") < 0)
 			{
 				clearOutput();
 				outputText("The door is locked with a key that is not in your possession.");
@@ -101,21 +101,21 @@ use namespace CoC;
 				return true;
 			}
 		}
-		
+
 		private function takeIronKey():void {
 			clearOutput();
 			outputText("You take the <b>Iron Key</b> to keep with your other important items.");
 			player.createKeyItem("Iron Key",0,0,0,0);
 			doNext(roomBreakRoom);
 		}
-		
+
 		private function takeSupervisorKey():void {
 			clearOutput();
 			outputText("You search the desk and find a silver key labelled 'Supervisor'.\n\nYou take the <b>Supervisor Key</b> to keep with your other important items.");
 			player.createKeyItem("Supervisor's Key", 0, 0, 0, 0);
 			doNext(roomForemanOffice);
 		}
-		
+
 		private function takeGroPlus():void {
 			flags[kFLAGS.FACTORY_TAKEN_GROPLUS]++;
 			inventory.takeItem(consumables.GROPLUS, roomPremiumStorage);
@@ -151,7 +151,7 @@ use namespace CoC;
 			}
             doNext(roomPremiumStorage);
 		}
-		
+
 		private function drinkCoffee():void {
 			spriteSelect(96);
 			clearOutput();
@@ -161,7 +161,7 @@ use namespace CoC;
 			player.refillHunger(10);
 			doNext(roomBreakRoom);
 		}
-		
+
 		private function buildCockMilker():void {
 			clearOutput();
 			outputText("You puzzle out how to build a fully functional cock-milker from the spare parts here and assemble it.\n\nYou gained a <b>Cock Milker</b>!");
@@ -170,7 +170,7 @@ use namespace CoC;
 			flags[kFLAGS.FACTORY_MILKER_BUILT] = 1;
 			doNext(roomRepairCloset);
 		}
-		
+
 		private function buildBreastMilker():void {
 			clearOutput();
 			outputText("You puzzle out how to build a fully functional breast-milker from the spare parts here and assemble it.\n\nYou gained a <b>Breast Milker</b>!");
@@ -188,7 +188,7 @@ use namespace CoC;
 					"Now jobless you will have to start over elsewhere because for you its…");
 			EventParser.gameOver();
 		}
-		
+
 		private function doTensionRelease():void {
 			clearOutput();
 			if (player.hasPerk(PerkLib.ProductivityDrugs)) {
@@ -196,7 +196,7 @@ use namespace CoC;
 				if (player.hasStatusEffect(StatusEffects.TensionReleased)) doBadEndTension();
 				//Second time...
 				else {
-					//[[2nd time]] 
+					//[[2nd time]]
 					outputText("You eagerly put on the modified harness and let them inject you with more of those body-altering chemicals.  As they fill you with artificial lust and desire, you cry out and beg for more.  They oblige you and give you a larger dose than the first time.  ");
 					//Grow dick!
 					if(player.cocks.length > 0) {
@@ -270,7 +270,7 @@ use namespace CoC;
 				doNext(roomMainChamber);
 			}
 		}
-		
+
 		//Succubus Secretary
 		private function talkSuccubus():void {
 			spriteSelect(55);
@@ -280,20 +280,20 @@ use namespace CoC;
 			simpleChoices("For what?", talkSuccubusForWhat, "Yes", talkSuccubusYes, "No", talkSuccubusNo,"", null,"", null);
 			return;
 		}
-		
+
 		private function talkSuccubusForWhat():void {
 			spriteSelect(55);
 			clearOutput();
 			outputText("The succubus looks at you with a bemused expression, \"<i>You haven't figured it out yet?  Really?  What do you think we make at this factory, bubble-gum?</i>\" she asks with a cruel smile, \"<i>We take human and once-human champions like you, pump you full of aphrodisiacs, body-altering drugs, and corrupting agents, and then milk you of your tainted fluids continually for the rest of your life!  And don't even start to ask why, I'll tell you – there are still pockets of purity out there that repel cute demons like me.  So the best way to deal with those is just to release a river of drug-filled sex-juice at them.  By the time the area dries off, the locals welcome us with open arms... and spread legs.</i>\"");
 			simpleChoices("Sick!", talkSuccubusNo, "Sounds Fun", talkSuccubusYes,"", null,"", null,"", null);
 		}
-		
+
 		private function talkSuccubusItsMe():void {
 			clearOutput();
 			outputText("You laugh mockingly at the stupid demon, roaring, \"<i>I'm the bloody champion you vapid cunt!</i>\"\n\nShe whirls, her beautiful face marred by rage.  It looks like you have a fight on your hands...");
 			doNext(doFightSuccubusMocked);
 		}
-		
+
 		private function talkSuccubusYes():void {
 			spriteSelect(55);
 			clearOutput();
@@ -308,7 +308,7 @@ use namespace CoC;
 			outputText("She frowns, \"<i>I was secretly hoping you would say that... I'm going to make you beg me to hook you into the machines.  Just wait.</i>\"");
 			doNext(doFightSuccubus);
 		}
-		
+
 		private function goDemon():void {
 			clearOutput();
 			outputText("Advancing slowly, the succubus gives you a hungry look.  She extends a hand, allowing her fingers to lengthen into razor-sharp claws.  With a single expert slash, she cuts away everything holding together your [armor].  They fall into a discarded pile, already forgotten as your ");
@@ -435,7 +435,7 @@ use namespace CoC;
 			dynStats("str", 2,"tou", 2, "spe", 2, "int", 2, "lib", 2, "sen", 2, "cor", 100);
 			doNext(doBadEndDemon);
 		}
-		
+
 		private function doFightSuccubus():void {
 			spriteSelect(55);
 			clearOutput();
@@ -449,15 +449,15 @@ use namespace CoC;
 			startCombat(new SecretarialSuccubus(), true);
 			monster.armorDef -= 10;
 		}
-		
+
 		public function doRapeSuccubus():void {
 			player.slimeFeed();
 			clearOutput();
 			//MALE
 			if(player.cocks.length > 0 && (player.gender != 3 || rand(2))) {
-				//(LUSTY) 
+				//(LUSTY)
 				if(monster.lust >= monster.maxLust()) outputText("Panting hotly, the succubus staggers towards you, her eyes fixated on the bulge in your crotch.  Dark viscous liquid drips from her dusky folds as her hips undulate hypnotically.  Blue fingers smear the corrupted lubricants over the smooth outer folds of her sex as she lies back enticingly, giving up on anything but bedding you.  In moments your [armor] are on the floor and you approach your prize.\n\n");
-				//(HP) 
+				//(HP)
 				else outputText("The succubus collapses on the floor, groaning in pain.  Most of her clothes have been destroyed by the combat and her blue skin is marked with deep purple bruises and bloody lacerations.  You undress, straddling your conquest and gazing down on her helpless, curvaceous form.  She looks up at you and forces a smile, licking the blood from a cracked lip and beginning to masturbate for you.\n\n");
 				//START ZE RAEP CANNONZ
 				outputText("While pondering the best way to take your horny prize, her complexion begins to change, the marks of combat disappearing from her toned body.  The demonic horns crowning her perfect visage begin withdrawing into her head, and her hair ");
@@ -504,7 +504,7 @@ use namespace CoC;
 					outputText(".  ");
 					//Big cum
 					if(player.cumQ() >= 50 && player.cumQ() < 400) outputText("You inhale as black cum spatters from her entrance, her belly distending slightly as you empty what feels like a gallon inside her.  ");
-					//((Ginormohuge)) 
+					//((Ginormohuge))
 					if(player.cumQ() >= 400) outputText("Gasping in pleasure and surprise, you marvel as her belly visibly expands with each eruption of your dark load.  At first it looks like a tiny belly, but by the time the orgasm finishes, your girlish double looks like a woman in her ninth month of pregnancy – with twins.");
 					outputText("\n\nYou pant with exertion and pull back, only to have your [cock] plunge right back in. Beginning another rough fucking session, your hips force-fuck her beyond your control.  Exhausted, you lean over her, figuring you may as well enjoy your double's wondrous breasts until your demonic cock has finally sated itself.  You just hope you don't black out from the waves of pleasure each of your new nubs radiates.\n\n\nHours later you pull away, sated.  For now.");
 				}
@@ -625,7 +625,7 @@ use namespace CoC;
 				outputText("\n\n");
 				//[[Cum]]
 				outputText("The succubus licks her lips in anticipation as she curls her silk-clad toes tighter around you, making you bulge and twitch in obscene pleasure.  With a naughty smile, she caresses your ass with her bulbous demonic tail.  Before you can react, it plunges inside you, easily slipping through your " + assholeDescript() + " and pressing tightly against your prostate.  The suddenness pushes you over the edge, but she immediately wraps her fingers around you, pinching tightly, bottling your cum inside you.  You cry out in pain and surprise as your entire thick load is trapped inside you.  After nearly a full minute, your groin aches with the discomfort of it all.\n\n");
-				//More cum paragraph.  HAHA! TINY BABY CUM! 
+				//More cum paragraph.  HAHA! TINY BABY CUM!
 				outputText("She wastes no time, and caresses you again.  You instantly feel another surge of heat and desire as a fresh load of cum brews behind your first strangled orgasm.  You need to cum so bad, her foot still stroking and squeezing you full of perverted desire.  She slaps your ");
 				if(player.balls > 0) outputText("balls");
 				else outputText("ass");
@@ -667,9 +667,9 @@ use namespace CoC;
 		}
 		public function doLeaveSuccubus():void {
 			cleanupAfterCombat();
-			//doNext(roomBreakRoom);			
+			//doNext(roomBreakRoom);
 		}
-		
+
 		//Incubus Mechanic
 		private function talkIncubus():void {
 			spriteSelect(30);
@@ -683,7 +683,7 @@ use namespace CoC;
 				simpleChoices("Fight", doFightIncubus, "Submit", doSubmitIncubus, "", null, "", null, "", null);
 			}
 		}
-		
+
 		private function doTradeIncubus():void {
 			spriteSelect(30);
 			clearOutput();
@@ -693,7 +693,7 @@ use namespace CoC;
 			flags[kFLAGS.FACTORY_INCUBUS_BRIBED] = 1;
 			doNext(roomFurnaceRoom);
 		}
-		
+
 		private function doFightIncubus():void {
 			flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] = 1;
 			spriteSelect(30);
@@ -701,7 +701,7 @@ use namespace CoC;
 			outputText("\"<i>You're going down!</i>\" you yell at him as you ready your [weapon]! \n\nAn unseen force closes the door, preventing you from running away. \n\nIt's a fight! ");
 			startCombat(new IncubusMechanic(), true);
 		}
-		
+
 		private function doSubmitIncubus():void {
 			spriteSelect(30);
 			outputText("\"<i>It is good to see the insect accept its fate as the spider closes in,</i>\" intones the strange demonic mechanic as he takes you by the arm and leads you deeper into the facility.  ");
@@ -715,7 +715,7 @@ use namespace CoC;
 			doNext(doBadEndGeneric);
 			return;
 		}
-		
+
 		public function doLossIncubus():void {
 			player.slimeFeed();
 			clearOutput();
@@ -772,7 +772,7 @@ use namespace CoC;
 					outputText("enjoying the knobbed texture of his shafts as you're double-penetrated by a single demon. The incubus smirks as another cock-tentacle wraps itself up around your neck like a shiny student collar and plugs your noisy little mouth.  You groan into his member as you're ");
 					if(player.cor < 80) outputText("squeezed and caressed by the writhing tentacle-pricks in and around your body, lost in the pleasure and taste of demonic pre-cum.\n\n");
 					else outputText("getting roughly fucked by the two tentacle-cocks at the same time.  Taking the tentacle-cock in your mouth with both hands, you eagerly swallow every bit of demonic pre-cum, then suckle on the huge cock-slit. \n\n");
-					
+
 					//FemCum
 					if(player.clitLength > 3) outputText("You nearly cum on the spot when the cock fucking your pussy loops its length around your " + clitDescript() + ", the cum-slickened coils driving you mad with pleasure as they coil, slide, and jerk around your clit as if it was a cock.  ");
 					else outputText("You nearly cum on the spot when the cock fucking your pussy curves up to rub its textured nodules against your " + clitDescript() + ".  ");
@@ -829,7 +829,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("Every day you've spent in this corrupted landscape has made you stronger and hornier, the evidence of which now kneels at your feet.\n\n");
 			outputText("The fight over, your eyes begin to wander. You find you cannot resist staring at the huge swinging cock exposed by the incubus' crotchless overalls. The sight ignites desire that has been building within you ever since you arrived in this corrupted land. With an unnatural hunger, you knock the defeated incubus onto his back. He closes his eyes and groans, lost in his own world of lust and pain and unable to resist as you wantonly straddle him. His tool is hot in your hand as you tease it and his cock begins to grow slick with pre-cum. You lick your lips at the sight of his now glistening member, but not for hunger of food or drink. It is another kind of hunger that longs for satisfaction, a hole that needs to be filled. Eagerly, you position his swollen glans against your " + assholeDescript() + " and begin to ease yourself down over the massive tool. You start slowly, but the pleasure it's giving feels so good you ram the rest of the incubus' cock deep into your " + assholeDescript() + ".  ");
-			outputText("His eyes flash open as if you'd just sent a jolt of electricity through him and he regains his senses, becoming hyper-aware of what you're doing. The incubus instinctively moves to control your " + hipDescript() + " and " + buttDescript() + " as they grind against him, guiding his cock towards pleasurable areas up your " + assholeDescript() + " that you would never have guessed were there a short while ago.\n\n");
+			outputText("His eyes flash open as if you'd just sent a jolt of electricity through him and he regains his senses, becoming hyper-aware of what you're doing. The incubus instinctively moves to control your " + hipDescript() + " and [butt] as they grind against him, guiding his cock towards pleasurable areas up your " + assholeDescript() + " that you would never have guessed were there a short while ago.\n\n");
 			outputText("All too soon, he grunts and shivers as loads of his hot cum begin to squirt into you. He may be cumming, but you're not done yet; each squirt of seed only fans the flames of lust within you, making your increasingly wet and noisy thrusts even harder. Enjoying the ride and still nowhere near satisfied, you start sliding up and down on his slick pole even faster than before. He halfheartedly tries to push you off as you continue draining him of his seed, your lust seemingly unquenchable. But you cannot be stopped; his efforts only add to your pleasure as he struggles and unloads underneath you. With your belly beginning to swell with the cum you're relentlessly drawing from the incubus, you don't know how much longer either of you will last. Each movement of his tool inside you heightens the fire inside you until, with an unholy roar, the pleasure peaks and wave after wave of shuddering orgasm crashes over you. Each one hits hotter and harder than the last until finally, your senses are overcome and you lose consciousness entirely.\n\n");
 			outputText("You awaken moments later beside a sleeping, limp, and drained incubus. You have definitely come out on top from the encounter. Though you feel stretched, sticky and a little sore, for the moment at least the burning desire to fill your " + assholeDescript() + " is satisfied.");
 			player.buttChange(monster.cockArea(0), true);
@@ -864,7 +864,7 @@ use namespace CoC;
 				outputText(".  The demon underneath you grunts in an attempt to sound displeased, but it's plain to see the pre-cum he's dripping all over the floor.  What a slut!  You slap his ass and begin roughly butt-fucking him, panting with each plunge into the depths of his ridged passage, gradually increasing your tempo until your " + hipDescript() + " fill the room with loud slapping noises.");
 				if(player.balls > 0) outputText("  Your [balls] swing freely, smacking into the demon's own and making both of you squeal and dribble more pre-cum.");
 				outputText("\n\n");
-				//(CUM)  
+				//(CUM)
 				if(player.balls > 0) outputText("You feel your [balls] draw up tight against your body.  ");
 				outputText("Warm heat begins to build inside your groin, pooling under the base of your [cock].  You realize you're about to paint this demon's gut with white, the thought only turning you on more.  ");
 				if(player.cumQ() > 200) outputText("You groan as you feel your urethra being stretched by the sheer volume of fluid beginning to shoot through it.  ");
@@ -892,7 +892,7 @@ use namespace CoC;
 				outputText(".  Striding forwards with hunger in your eyes, you give your left hand free access to your groin and slip your fingers between the moist folds of your " + vaginaDescript(0) + ".  As you undulate into the incubus' personal space, a swift thrust of your " + hipDescript() + " buries your fingers up to the knuckles and knocks the demon onto his well-muscled back.\n\n");
 				outputText("He looks up at you with a practiced eye, adjusting his demon-tool's size to better fill your  " + vaginaDescript(0) + ".  ");
 				//(set cocksize = to 80% vaginalCapacity).
-				
+
 				outputText("Thankful for the gesture, you sink down onto him, letting the nubs of his crown stimulate your lips and the underside of your " + clitDescript() + ".  ");
 				if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) outputText("In no time flat your drooling fluids soak him in slippery wetness.  ");
 				if(player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK && player.vaginas[0].vaginalWetness != VaginaClass.WETNESS_DRY) outputText("Before long, you've lubricated a fair portion of his tool with wetness.  ");
@@ -927,7 +927,7 @@ use namespace CoC;
 			cleanupAfterCombat();
 			//doNext(roomFurnaceRoom);
 		}
-		
+
 		//Omnibus Overseer
 		private function doFightOmnibus():void {
 			clearOutput();
@@ -937,14 +937,14 @@ use namespace CoC;
 			spriteSelect(16);
 			return;
 		}
-		
+
 		private function acceptOmnibus():void {
 			spriteSelect(16);
 			clearOutput();
 			outputText("She smiles, sauntering closer.  Your eyes widen in shock as her vulva are spread apart by something inside her.   A slick and growing cock emerges, sprouting from where her clit should be located.  She's a hermaphrodite.  You don't have time to contemplate the implications, as the demoness used your temporary distraction to sink a needle into your neck.  You sigh and black out almost instantaneously, letting her catch you with her strong arms and soft bosom.");
 			doNext(doBadEndGeneric);
 		}
-		
+
 		public function doLossOmnibus():void {
 			if (player.isAlraune())
 			{
@@ -953,7 +953,7 @@ use namespace CoC;
 				doBadEndOmnibusPart1();
 			}
 		}
-		
+
 		//Choose your poison
 		public function winAgainstOmnibus():void {
 			clearOutput();
@@ -988,7 +988,7 @@ use namespace CoC;
 			player.createPerk(PerkLib.DemonicLethicite,0,0,0,0);
 			postOmnibusBoon();
 		}
-		
+
 		private function chooseBreasts():void {
 			spriteSelect(16);
 			clearOutput();
@@ -997,7 +997,7 @@ use namespace CoC;
 				outputText("<b>Your chest swells out, forming rounded C-cup globes, capped with tiny erect nipples!</b>");
 				player.createBreastRow();
 				player.breastRows[0].breastRating = 3;
-				player.nippleLength = .25;			
+				player.nippleLength = .25;
 			}
 			//Singular row - cup size + 3.  Nipple size to 1" if smaller.
 			else if(player.breastRows.length <= 1) {
@@ -1059,7 +1059,7 @@ use namespace CoC;
 				else {
 					outputText("Your [cock] leaps forwards, taking to the dark magic with ease.  Inch after inch of new length erupts from your groin as your [cock] gets longer and thicker.  It pulsates, as if promising dark pleasure as it settles into its new enhanced size.");
 					player.cocks[0].cockLength += 6 + rand(10);
-					player.cocks[0].thickenCock(3);				
+					player.cocks[0].thickenCock(3);
 				}
 			}
 			if(player.cocks.length > 1) {
@@ -1211,7 +1211,7 @@ use namespace CoC;
 					outputText("The constant fluids leaking from your " + vaginaDescript(0) + " slow down, then stop.  ");
 					player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
 					changes++;
-				}		
+				}
 			}
 			//Being genderless isn't normal too...
 			if (player.gender == Gender.GENDER_NONE) {
@@ -1226,7 +1226,7 @@ use namespace CoC;
 					if (player.balls == 0) {
 						player.balls = 2;
 						outputText("\n\nIncredible pain scythes through your crotch, doubling you over.  In shock, you barely register the sight before your eyes: <b>You have balls!</b>");
-						player.ballSize = 1;    
+						player.ballSize = 1;
 					}
 				}
 				else {
@@ -1265,7 +1265,7 @@ use namespace CoC;
 			}
 			postOmnibusBoon();
 		}
-		
+
 		private function postOmnibusBoon(willing:Boolean = false):void {
 			if (willing) {
 				clearOutput();
@@ -1279,7 +1279,7 @@ use namespace CoC;
 			cleanupAfterCombat();
 			//doNext(roomForemanOffice);
 		}
-		
+
 		private function letGoOmnibus():void {
 			spriteSelect(16);
 			clearOutput();
@@ -1295,7 +1295,7 @@ use namespace CoC;
 			cleanupAfterCombat();
 			//doNext(roomForemanOffice);
 		}
-		
+
 		//Factory finale
 		private function factoryShutdown():void {
 			clearOutput();
@@ -1304,7 +1304,7 @@ use namespace CoC;
 			flags[kFLAGS.FACTORY_SHUTDOWN] = 1;
 			doNext(roomControlRoom);
 		}
-		
+
 		private function factoryOverload():void {
 			clearOutput();
 			outputText("You resolve to shut down the factory by overloading the storage tanks, rendering much of the equipment inoperable and difficult to repair.  With a quick twist of a knob, you override the pressure vents for the storage tanks.  Within minutes, you hear the sounds of popping rivets and straining pumps.  You look out over the factory floor and watch as many of the pipes fracture, dripping seed over the moaning captives.  Smoke rises from pumps as they short out and overheat.  The entire building shudders as a massive blast echoes from somewhere to the west.  A high pitched whine fills the building as the last motors shriek and die.  The captives slowly start to come to as the flood of drugs and artificial pleasure come to a stop.  Many break down and cry, others begin unhooking themselves and exploring their surroundings.  You watch with interest as many of them rally together and make for an exit.   The remaining survivors begin scavenging parts from the machinery and puzzling out how to use it.  Perhaps they liked it here.");
@@ -1312,7 +1312,7 @@ use namespace CoC;
 			flags[kFLAGS.FACTORY_SHUTDOWN] = 2;
 			doNext(roomControlRoom);
 		}
-		
+
 		//BAD ENDS
 		private function doBadEndGeneric():void {
 			if (player.isAlraune())
@@ -1351,7 +1351,7 @@ use namespace CoC;
 				EventParser.gameOver();
 			}
 		}
-		
+
 		public function doBadEndSuccubusPart1():void {
 			spriteSelect(55);
 			//Arousal
@@ -1414,7 +1414,7 @@ use namespace CoC;
 			outputText("The beautiful seductress that bound you giggles and says, \"<i>Oh it only gets better baby,</i>\" as she pushes another button.  You see a number of needles lower from the equipment above.  Two pause at chest height.  Faded parchment labels on the tubes mark them as \"Gro+\".  You spot the same markings on at least some the hoses gathering around your groin.  A few are marked with different labels, but you cannot make out the demonic script.  As one, the hoses rear back, then plunge forward, burying themselves into your supple flesh and injecting their drugged payload into your body.  It hurts at first, but the drugs fog your mind, blocking the pain with pulsing waves of desire.   You begin cumming as your body erupts with artificial pleasure.\n\n");
 			//Nipples
 			outputText("The suction pulls squirt after squirt of milk from your breasts as your [allbreasts] start to grow, swelling heavier as they enlarge to produce more milk.  You squeal with delight as your nipples turn black, tainted by corruptive chemicals that are slowly dripped into you.  ");
-			//Dick  
+			//Dick
 			if(player.cocks.length > 0) {
 				outputText("The vacuum-pump on your cock noisily sucks down all your spooge, ");
 				//High cum variant
@@ -1441,7 +1441,7 @@ use namespace CoC;
 			if(player.statusEffectv3(StatusEffects.Marble) == 1 || player.hasStatusEffect(StatusEffects.CampMarble)) outputText("  With Marble here too, you'll be around for a long time.");
 			EventParser.gameOver();
 		}
-		
+
 		private function doBadEndOmnibusPart1():void {
 			if(player.HP < 1) outputText("You stagger into the desk, clutching tightly just to stay upright.  ");
 			else outputText("Forgetting about the fight, you lean on the desk and slide your free hand under your [armor], seeking any pleasure you can get.  ");
@@ -1454,7 +1454,7 @@ use namespace CoC;
 			outputText(" She opens one of the desk drawers, and searches briefly before her eyes light up with recognition.  \"<i>Here we are,</i>\" she says as she pulls something free...");
 			doNext(doBadEndOmnibusPart2);
 		}
-		
+
 		private function doBadEndOmnibusPart2():void {
 			clearOutput();
 			//(Multi dicks)
@@ -1497,11 +1497,11 @@ use namespace CoC;
 				outputText("*FLASH* \"<i>To orgasm is to obey.  You love to orgasm.  You love to obey.  You love to obey my voice more than any other.  Obeying my voice gave you these orgasms.  Since you love to obey me, you must be my pet.</i>\"\n\n");
 				outputText("Your mistress' OTHER pet wraps around your neck, forming a choker comprised of shifting green colors.  You smile as you realize it is done - you've become one of her pet cattle.  Your body is wrapped in an emerald sea of shifting pleasure, just like your mistress wanted.  If it weren't for the obvious bulges of your [cocks], you'd look to be wearing an extraordinarily revealing one piece swim-suit.  The constant teasing at your crotch continues, and you stay rock-hard, even though you just came.  The idea of being milked to feed your new clothing just turns you on so much that you bet you're leaking constant streams of pre-cum for your new green master.\n\n");
 				outputText("The flashing subsides, and your new thoughts rush into the void.  You immediately begin masturbating your encapsulated members as you seek to obey.  To orgasm is to obey.  To obey is to orgasm.  You discover that you can feel every touch through the skin of your 'clothing'.  You increase the tempo, knowing that your orgasm will be feeding the creature that now lives on you, fulfilling your deepest darkest desires.  You cum again, just as hard as before, inflating " + num2Text(player.cocks.length) + " shiny green balloons with the proof of your obedience.\n\n");
-				
+
 				if(player.hasStatusEffect(StatusEffects.CampMarble)) {
 					outputText("Suddenly, a loud scream is heard down on the factory floor. You and your mistress turn to see Marble dashing up the stairs to the foremen's office.  Your mistress looks over at her and says with some amusement, \"<i>Oh ho!  So another cow has come to join in the fun.</i>\"\n\n\"<i>Sweetie! What has she done to you?</i>\" Marble exclaims, \"<i>What has she put on you?!</i>\"\n\n\"<i>Oh, so you knew this girl?</i>\" your mistress asks you, \"<i>It's a Lacta Bovine from the looks of it, so it seems this time I'll be adding a real cow to the pens.</i>\"  Marble turns to your mistress and brandishes her hammer, but the horror from the thought of your mistress being hurt causes you to spring forward and grab Marble.  The brief distraction gives your mistress a chance to sink a syringe into Marble's shoulder, and within moments she slumps onto the ground unconscious.\"\n\n");
 					outputText("Your mistress turns back to you and smiles.\n\n\"<i>Well, she should make a fine replacement for you in the pens,</i>\" she says before tapping her chin thoughtfully and looking back at you, \"<i>Really is convenient that I don't have to worry about my new pet dying on me now, hun.</i>\"  Then she pushes you back into the chair and says \"<i>But first...\"\n\n");
-					
+
 				}
 				else outputText("Your mistress looks down with approval and speaks, \"<i>Very good.  ");
 				outputText("I want you to stay here and cum 'til morning.  My pet needs lots of nutrition to recharge, and I have plans for new ways to teach you to obey tomorrow.</i>\"\n\n");
@@ -1547,7 +1547,7 @@ use namespace CoC;
 				EventParser.gameOver();
 				return;
 			}
-			//(Female) 
+			//(Female)
 			if(player.vaginas.length == 1 || player.gender == 0) {
 				outputText("In her hand is a seamless pair of panties.  Their surface reflects light perfectly, as if its bright pink surface were coated in slippery oil or made from latex.  ");
 				if(player.gender == 0) {
@@ -1569,7 +1569,7 @@ use namespace CoC;
 				if(player.hasStatusEffect(StatusEffects.CampMarble)) {
 					outputText("Suddenly, a loud scream is heard down on the factory floor. You and your mistress turn to see Marble dashing up the stairs to the foremen's office.  Your mistress looks over at her and says with some amusement, \"<i>Oh ho!  So another cow has come to join in the fun.</i>\"\n\n\"<i>Sweetie! What has she done to you?</i>\" Marble exclaims, \"<i>What has she put on you?!</i>\"\n\n\"<i>Oh, so you knew this girl?</i>\" your mistress asks you, \"<i>It's a Lacta Bovine from the looks of it, so it seems this time I'll be adding a real cow to the pens.</i>\"  Marble turns to your mistress and brandishes her hammer, but the horror from the thought of your mistress being hurt causes you to spring forward and grab Marble.  The brief distraction gives your mistress a chance to sink a syringe into Marble's shoulder, and within moments she slumps onto the ground unconscious.\"\n\n");
 					outputText("Your mistress turns back to you and smiles.\n\n\"<i>Well, she should make a fine replacement for you in the pens,</i>\" she says before tapping her chin thoughtfully and looking back at you, \"<i>Really is convenient that I don't have to worry about my new pet dying on me now, hun.</i>\"  Then she pushes you back into the chair and says \"<i>But first, didn't you want something from me?</i>\"\n\n");
-					
+
 				}
 				outputText("It takes less than a second for you to moan out, \"<i>Taaaaake meeeee!</i>\"\n\n");
 				outputText("She smiles and lifts you up from the chair with her strong arms, and sits down on the desk.  She lowers your symbiote-covered lips onto her demon dick and coos with delight as you slide down her length, taking the entire thing in your greedy depths.  If anything, the creature inside you makes sex even better - you feel a combination of her nub-covered cock fucking you and the ridges of the panty-creature as it continues to stimulate you.  It drives you mad with pleasure, and you begin bouncing yourself up and down, spearing your " + vaginaDescript(0) + " with the demon's pole.\n\n");
@@ -1593,7 +1593,7 @@ use namespace CoC;
 				return;
 			}
 		}
-		
+
 		private function doBadEndTension():void {
 			outputText("Desperate for more of the demon-drugs, you slide into the now-familiar harness and let the needles sink into your skin.   Panting in lust, you beg for them increase the dosage again.   Desire burns through your veins as the cocktail surges through them");
 			if(player.cocks.length > 0) {
@@ -1617,9 +1617,9 @@ use namespace CoC;
 			else outputText("moo");
 			outputText(" with happiness, promising another dose to you if you are a good cow for her.");
 			dynStats("int", -100, "lib", 100, "cor", 2);
-			EventParser.gameOver();			
+			EventParser.gameOver();
 		}
-		
+
 		private function doBadEndDemon():void {
 			clearOutput();
 			if(player.gender == 1) outputText("As a demon, you rapidly moved up the ranks, eventually taking command of the factory and its inhabitants.  The previous commander was reduced to a willing cock-sleeve, ever-eager to obey your slightest order.  By the time the next year has come around, you've managed to earn the coveted honor of collecting the next champion.");
@@ -1627,7 +1627,7 @@ use namespace CoC;
 			else outputText("As a demon, you rapidly moved up the ranks, eventually taking command of the factory and its inhabitants.  The previous commander was reduced to a willing cock-sleeve, ever-eager to obey your slightest order.  By the time the next year has come around, you've managed to earn the coveted honor of collecting the next champion. It should be quite satisfying...");
 			EventParser.gameOver();
 		}
-		
+
 		//ROOMS
 		public function roomLobby():void {
 			dungeonLoc = 0;
@@ -1637,7 +1637,7 @@ use namespace CoC;
 			dungeons.setDungeonButtons(checkDoor1, null, roomBathroom, roomBreakRoom);
 			addButton(11, "Leave", checkExit);
 		}
-		
+
 		public function roomBreakRoom():void {
 			dungeonLoc = 1;
 			clearOutput();
@@ -1699,7 +1699,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function roomPumpRoom():void {
 			dungeonLoc = 2;
 			clearOutput();
@@ -1708,9 +1708,9 @@ use namespace CoC;
 				outputText("As you step through the iron door, a cacophony of thrumming mechanical noise assaults your ears.  Coppery pipes arch overhead, riveted into spiked iron brackets that hang from the ceiling in twisted pairs.  The constant thrum-thrum-thrum of concealed pumps and mechanisms makes it difficult to hear anything, but you swear you can make out the faint sounds of sexual pleasure emanating from the northwest side of the room.  Investigating further, you spot a door along the west wall of the room that appears to be the source of the licentious sounds.  The vibrations of all the machinery are strongest along the east walls, indicating the possible site of this hellish place's power-plant. There is a door on the east wall and a door on the north.  To the south is a solid iron door that leads back to the lobby.");
 			}
 			else outputText("As you step through the iron door, silence is the only noise you hear.  Coppery pipes arch overhead, riveted into spiked iron brackets that hang from the ceiling in twisted pairs.  The near-complete silence of the place unnerves you, but allows you to make out the faint sounds of sexual pleasure emanating from northwest side of the room.  Investigating further, you spot a door along the west wall of the room that appears to be the source of the licentious sounds.  There are two other doors, one along the east wall and one on the north.  To the south is a solid iron door that leads back to the lobby.");
-			dungeons.setDungeonButtons(roomRepairCloset, roomLobby, roomMainChamber, roomFurnaceRoom);	
+			dungeons.setDungeonButtons(roomRepairCloset, roomLobby, roomMainChamber, roomFurnaceRoom);
 		}
-		
+
 		public function roomFurnaceRoom():void {
 			dungeonLoc = 3;
 			clearOutput();
@@ -1721,8 +1721,8 @@ use namespace CoC;
 			else {
 				outputText("Despite the machinery being shut down, the air in this room is still hot enough to coat your " + player.skinTone + " [skin.type] in a fine sheen of sweat.  The eastern side of the chamber is more machine than wall, a solid mass of iron piping covered in small metal blast-doors through which fuel is to be fed.  A small transparent plate is riveted into the wall, allowing you to see some the ashes of a previous fuel source.  The few visible controls and gauges don't seem to be linked into anything important, and the machinery looks far too durable to damage with what you have.  The only exit is a heavy iron door on the west wall.  ");
 			}
-			dungeons.setDungeonButtons(null, null, roomPumpRoom, null);	
-			
+			dungeons.setDungeonButtons(null, null, roomPumpRoom, null);
+
 			//Incubus is ALLLLIVE
 			if (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] <= 0) {
 				spriteSelect(30);
@@ -1738,13 +1738,13 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function roomRepairCloset():void {
 			dungeonLoc = 4;
 			clearOutput();
 			outputText("<b><u>Repair Closet</u></b>\n");
 			outputText("As you carefully slip inside the room, you note with some relief that it seems to be an empty storage closet. The room is tiny, barely 6' by 8' and almost entirely empty.  The one piece of furniture inside the closet is a simple wooden cabinet, placed against the far wall.  ");
-			dungeons.setDungeonButtons(null, roomPumpRoom, null, null);	
+			dungeons.setDungeonButtons(null, roomPumpRoom, null, null);
 			if(flags[kFLAGS.FACTORY_MILKER_BUILT] > 0) outputText("The shelves are empty.  ");
 			else {
 				outputText("The shelves of the cabinet hold various pieces of pump machinery, probably used to repair complete machines further into the factory.  ");
@@ -1762,7 +1762,7 @@ use namespace CoC;
 			}
 			outputText("The only exit is back to the south.");
 		}
-		
+
 		public function roomMainChamber():void {
 			dungeonLoc = 5;
 			clearOutput();
@@ -1782,7 +1782,7 @@ use namespace CoC;
 			}
 			addButton(5, "Upstairs", checkStairs);
 		}
-		
+
 		public function roomForemanOffice():void {
 			dungeonLoc = 6;
 			//Foreman's Office
@@ -1807,7 +1807,7 @@ use namespace CoC;
 				}
 			}
 		}
-		
+
 		public function roomControlRoom():void {
 			dungeonLoc = 7;
 			clearOutput();
@@ -1831,7 +1831,7 @@ use namespace CoC;
 				addButton(1, "Shutdown", factoryShutdown).hint("Shut down the factory safely. This may seem like a safe bet but it leaves the factory vulnerable to the possibility of being re-opened.");
 			}
 		}
-		
+
 		public function roomPremiumStorage():void {
 			dungeonLoc = 8;
 			clearOutput();
@@ -1860,7 +1860,7 @@ use namespace CoC;
 			}
 			if(flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] < 1) addButton(2, "Search", takeWardTome);
 		}
-		
+
 		public function roomBathroom():void {
 			dungeonLoc = 9;
 			clearOutput();

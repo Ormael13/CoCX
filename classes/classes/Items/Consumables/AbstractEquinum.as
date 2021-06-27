@@ -23,6 +23,7 @@ import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
+import classes.CoC;
 
 public class AbstractEquinum extends Consumable {
 	public function AbstractEquinum(type:Number, id:String, shortName:String, longName:String, value:Number, description:String) {
@@ -203,22 +204,13 @@ public class AbstractEquinum extends Consumable {
 		}
 		//-Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
 		if (changes < changeLimit && (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) && rand(3) == 0) {
-			var word1:String;
-			if (player.hairType == Hair.FEATHER) word1 = "feather";
-			else word1 = "quill";
-			if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft " + word1 + "-hair droops over your eye.  Before you can blow the offending down away, you realize the " + word1 + " is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
-			else outputText("\n\nYou run your fingers through your downy-soft " + word1 + "-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your " + word1 + "s.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
+			CoC.instance.transformations.HairHuman.applyEffect();
 			changes++;
-			mutations.setHairType(Hair.NORMAL);
 		}
 		//-Remove leaf hair (copy for equinum, canine peppers, Labova)
 		if (changes < changeLimit && player.hairType == 7 && rand(4) == 0) {
-			//(long):
-			if (player.hairLength >= 6) outputText("\n\nA lock of your leaf-hair droops over your eye.  Before you can blow the offending down away, you realize the leaf is changing until all that remains is a normal strand of hair.  <b>Your hair is no longer leaf-like!</b>");
-			//(short)
-			else outputText("\n\nYou run your fingers through your leaf-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your leafs.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer leaf-like!</b>");
+			CoC.instance.transformations.HairHuman.applyEffect();
 			changes++;
-			mutations.setHairType(Hair.NORMAL);
 		}
 		//
 		//SEXUAL CHARACTERISTICS

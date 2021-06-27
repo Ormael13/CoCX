@@ -32,9 +32,9 @@ public function greetHeckel():void {
 	clearOutput();
 	if(flags[kFLAGS.MET_HECKEL] == 0) {
 		outputText("As you approach the edge of the track, the hyena comes around the bend towards you.  Her fur is a light brown mottled with spots of dark brown and black, with a thicker and longer black mane passing for hair.  You get a good view of her B-cup breasts bouncing inside her shirt, black workout bra straps sticking out on her shoulders.  She has simple black shorts on that hug her firm ass, and you can't help but admire her toned legs as they move beneath her.  As she stops running and turns toward you, you see something else entirely bouncing around in her groin.  Her body reminds you of a coiled spring, too much power and tension in too small a frame.\n\n");
-	
+
 		outputText("When she draws up to you, she slows down long enough to have a conversation.  She smiles at you with a grin that manages to show every single fang, and you realize she caught you staring.  \"<i>Fresh meat, huh? I'm Heckel, the alpha dog around here.</i>\"  She extends a large paw toward you as she wipes her face.  You ignore the sweat as you shake hands and introduce yourself.\n\n");
-	
+
 		outputText("\"<i>So, [name], what can I do for you?  The person working the desk can give you a tour if that's what you need... or maybe you were looking for a training partner?  If you can keep up with me, of course.</i>\"\n\n");
 		flags[kFLAGS.MET_HECKEL]++;
 	}
@@ -74,20 +74,20 @@ private function heckelTraining():void {
 	}
 	if(flags[kFLAGS.TIMES_FUCKED_HECKEL_BLOWJOB] + flags[kFLAGS.TIMES_FUCKED_HECKEL_ANAL] == 0) {
 		outputText("You tell Heckel that you're looking for a training partner, and she makes no attempt to hide her gaze as she looks you up and down.  When she's finished, her unsettling grin returns.  \"<i>Excellent!  Let me just get cleaned up and we'll start with some stretches.</i>\"\n\n");
-		
+
 		if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 			outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.\n\n");
 			player.gems -= 10;
 			statScreenRefresh();
 		}
 		outputText("You follow her towards the changing rooms, which are built into the wall like large shower stalls near the actual showers.  There is a larger locker room connecting them and the showers, making you pause.  It takes you a moment to realize that in a place where genders are so blurred, separating showers by genitalia is apparently impossible.  The locker room is unisex, and by the time you figure that out and walk in your guide has already disappeared.  A moment later, you hear the sound of a shower from around the corner.\n\n");
-	
+
 		outputText("You wander down the rows of aisles, but the room appears to be deserted.  Either the gym isn't doing as well as you thought, or this isn't a popular time to work out in Tel'Adre.  You barely finish walking into sight of the showers when the nozzle shuts off.  A moment later, Heckel walks out with a towel around her torso, her mouth splitting into a grin at the sight of you.  Her fur is matted down from the shower, and with every step you can see the movement of her toned muscles across her body.  Her fur is so short that it starts springing back to normal even as she approaches you, but you can see her muscles move under her skin even still.\n\n");
-	
+
 		outputText("She walks past you with a sway in her step and sits on a bench behind you.  With a shrug of her shoulders, she lets the towel fall down and reveal her body fully.  She doesn't seem as tall sitting down, but you'd still guess that she's a bit over six feet.  Her brown fur is mottled with black all over her body, except for a white square above and between her breasts.  Her breasts themselves are large B-cups, with black areolas surrounding pert nipples.  She leans back and spreads her legs, revealing her equipment fully.\n\n");
-	
+
 		outputText("A black cock hangs half erect between her legs, a pair of fist-sized testes underneath.  Fully erect, you estimate her dong would be around ten inches long; large, but fitting for her lithe body.  It grows a little stiffer as you stare down at it, and it isn't until Heckel starts cackling that you realize how long you've been staring.\n\n");
-	
+
 		outputText("\"<i>Like what you see?</i>\" she asks, looking you up and down.  \"<i>'Cause I like what I see.  It's not every day I get someone as fit as you brave enough to partner up with me.  Come on then fresh meat, every newbie has to start at the bottom.</i>\"  She tilts her head towards her hardening member and raises an eyebrow.");
 		if(player.str > 50 && player.hasCock()) {
 			outputText("\n\nYou feel pretty strong yourself, and you realize you could probably arm wrestle this hyena-bitch down to size.");
@@ -124,13 +124,13 @@ private function heckelOrallyFixated():void {
 		outputText("You walk over to Heckel and fall to your knees, already licking your lips. Heckel throws her head back in a barking laugh as she scoots forward, one paw coming around the back of your head. Without needing further encouragement, you grab the flaccid dog cock and give it an experimental pump.\n\n");
 
 		outputText("You can feel the blood flowing beneath your fingers as your hand works, the black shaft growing firmer and bigger in your grasp. You lean in for a lick from base to tip, and it feels unexpectedly rough on your tongue with the smell of the savanna. Before you can fall into another staring trance with it, you open your mouth and take the head in.\n\n");
-	
+
 		outputText("Heckel gasps above you in the most feminine sound you've heard from her yet, and you're awarded with a salty drop of pre. You start working your tongue around her point immediately, the dog cock becoming fully erect in your mouth. You look down your nose at the furry crotch beneath you and realize that your estimates of ten inches were definitely on the short side, and with a deep breath through your nose you begin to swallow her cock.\n\n");
-		
+
 		outputText("The first inch hits the back of your throat, but your practiced gag reflex keeps you from reacting. Heckel's paw begins moving through your " + hairDescript() + ", massaging you subconsciously. You force your head down another two inches as your throat opens around her head, but not before it deposits another spurt of pre-cum. Your tongue continues to massage the underside of her cock as you try not to gag, but the paw on the back of your head has already begun pressing you down further.\n\n");
-	
+
 		outputText("You take another inch into your throat before pulling off. Heckel growls above you until you lower your head again, this time further than before. Her growl becomes a moan instantly as the paw on your head is joined by another, both gripping your hair together. As you raise and lower your head, the furry balls in front of you begin to swing back and forth with Heckel's small thrusts, and you reach out a hand to fondle them.\n\n");
-	
+
 		outputText("As you fondle her balls, your fingers graze over something wet behind them. If you could smile around the mouthful of doggy-dick, you definitely would. You've discovered that Heckel is definitely a herm, and you make sure to give her gash another graze as you bob your head down. The head of her cock pulses as you take her length deeper than you had before, and the hands in your hair tighten their grip as Heckel rises from her seat suddenly. You lose pace at this sudden change, and the position forces you to look up at her face.");
 		doNext(heckelOralFixationII);
 	}
@@ -139,33 +139,33 @@ private function heckelOrallyFixated():void {
 		outputText("You lick your lips as you eye her swelling member. It pulses softly with her heartbeat, each jump leaving it slightly bigger than it was before. As you watch, it slowly stands to attention at around ten inches in length, Heckel's heavy balls drawing up beneath it. Her canine dick almost looks shiny with the skin taut like this, though it might also be the moisture from her shower. You make up your mind when you see a dribble of pre form at the tip, and you bend over to lick it up before it can drip down and escape.\n\n");
 
 		outputText("Heckel leans back to give you more room, and you wrap your hand around her hardening member. Even with her shower you still catch her light musk coming from her groin.  Whether this is from her workout or her arousal you can't tell, but it's a scent you are quickly coming to recognize as hers. You inhale deeply through your nose as you lick her cock from base to tip, pausing over her crown before letting your head fall down.\n\n");
-	
+
 		outputText("Heckel moans as you take a mouthful in, her dick fitting your mouth like a glove. In your first bob you manage to take about a third of it before your gag reflex kicks in, forcing you to back off for a breather. You set your hand to work as you pull away, lowering your head over her thigh as far as you can to suck on her balls. Once you've regained your breath, you stand off the bench and crawl around in front of her, sitting on your knees with her dick throbbing in front of your face.\n\n");
-	
+
 		outputText("You can see Heckel's face around her dick and over her breasts. For once, she isn't grinning at you. Instead, her tongue is lolling out of her mouth as she lets her head roll to the side, her eyes glazed and distant. Not giving her any time to recover, you give her sack a final suckle before licking back up the underside of her dong. In seconds, you've taken her as far in as you had before, and you begin to set up a rhythm.\n\n");
-	
+
 		outputText("\"<i>I don't know if I told you last time,</i>\" Heckel pants above you, \"<i>but you're really good at this.</i>\" You take a strange sense of pride in that and eagerly work your throat down to the halfway point on her dick, realizing that it has grown considerably in the last few minutes. What was once ten inches is now closer to thirteen, but it's still nothing you can't handle. With practiced patience, you take more and more of her dick down your throat with every bob, keeping your hand working in counterpoint on her firm shaft.\n\n");
-	
+
 		outputText("She grunts above you and you feel one of her paws around the back of your head, pushing you lightly with each of your bobs. Her hips begin thrusting lightly against your lips, and you're pretty sure you can feel the tip of her cock pushing against the entrance to your stomach. It isn't long before you can feel her balls against your chin, your throat distended and stiff with the length of her member.\n\n");
-	
-		//[<PC IS MALE OR HERM> 
+
+		//[<PC IS MALE OR HERM>
 		if(player.hasCock()) outputText("You use one hand to fondle her balls, letting them roll over your fingers and pinching the skin lightly. Your other hand finds its way to your crotch, where you begin stroking your [cock] in time with her weak thrusts. Within moments you've brought yourself to a stiffening arousal, the cold air making your exposed [cock] twitch slightly.\n\n");
 		//[<PC IS FEMALE>
 		else if(player.hasVagina()) outputText("You use one hand to fondle her balls, letting them roll over your fingers and pinching the skin lightly. Your other hand finds its way to your crotch, where you roll your " + clitDescript() + " between your first two fingers. You let two fingers sink into your " + vaginaDescript(0) + ", curling them upwards and moaning around the giant dog dick in your mouth.  Your fingers bring you to the edge of orgasm, but you lack the stimulation to send yourself over just yet.\n\n");
-	
+
 		outputText("As your bobbing head works over her dick, you feel her knot begin to form at its base. At first it's just a small bump that you make sure to rub your tongue over, but over the course of a minute it becomes the size of a plum. Before long it becomes too large for you to take into your mouth, but this also gives you some breathing space between Heckel's cock head and your stomach. The more the knot inflates however, the more your jaw and cheeks are stretched to just hold her member in your mouth. If you didn't know better, it would feel like her dick is slowly growing larger! Your fears are confirmed when, even with several inches outside of you, her cock fully extends down your gullet. It is definitely getting thicker.\n\n");
-	
+
 		outputText("You look up in growing alarm at Heckel, but her eyes are glazed over again. Despite her vacant stare, her hand is still forcing your head back and forth at the pace of a slow rut.  Deciding that the best way to avoid suffocation is to get her off quickly, you redouble your efforts and twist your head around her cock with each thrust, letting your tongue move in all the space it can to stimulate her as much as possible.\n\n");
-		
+
 		outputText("You can barely see around her knot - it has grown so large, but at least she isn't trying to make you swallow it. Even with all the things you've seen in this realm, you know that some feats of anatomy are simply not possible. The hyena certainly doesn't mind trying though, and you repeatedly find your nose and chin squashed up against the growing bulge.\n\n");
-	
+
 		//[<PC IS FEMALE>
 		if(player.gender == 2) outputText("A growl rises in Heckel's throat, and you recognize the sign of her impending orgasm. It's all you can do to keep your balance as her thrusts into your throat come more frequently. Although you are barely able to breath between thrusts, your free hand feverishly works at your wet slit, plumbing your depths as your own orgasm builds. Heckel's paws grab your head and pull you deeply on to her dick as you feel it spasm, and you begin to moan as you feel her load travelling through her cock and finally spilling directly into your stomach. The warmth of her seed spreads throughout your body until it meets the warmth of your groin, and your cunt begins to spasm around your fingers as it sets you over the edge.\n\n");
-		//<PC IS MALE OR HERM> 
+		//<PC IS MALE OR HERM>
 		else outputText("A growl rises in Heckel's throat, and you recognize the sign of her impending orgasm. It's all you can do to keep your balance as her thrusts into your throat come more frequently. Although you are barely able to breath between thrusts, your free hand feverishly strokes your [cock], your hand becoming slippery with pre as your own orgasm builds. Heckel's paws grab your head and pull you deeply on to her dick as you feel it spasm, and you begin to moan as you feel her load travelling through her cock and finally spilling directly into your stomach. The warmth of her seed spreads throughout your body until it meets the warmth of your groin, and your cock erupts in your hand as it sets your over the edge.\n\n");
-	
+
 		outputText("Heckel pulls herself slowly from your throat, her dick finally coming free with a loud POP.  You moan as its girth leaves you, your throat feeling strangely empty without it. A strand of semen drips from her tip as she stands above you, but you greedily move your head to catch it and swallow the salty treat down. Heckel snickers at this before falling down on the bench, looking you over appreciatively.\n\n");
-	
+
 		outputText("\"<i>By Marae, [name], you've got quite the mouth. I'm impressed, and that doesn't happen often.</i>\" She brings a paw to her chin as if thinking, before finally reaching it out and ruffling your hair. \"<i>You know, you aren't half bad to be around, and not just for the sex. Don't be a stranger around here, alright?</i>\" With that she stands and heads back into the showers, giving you time to clean up and head back to camp.");
 		player.orgasm();
 		dynStats("sen", 4);
@@ -181,7 +181,7 @@ private function heckelOralFixationII():void {
 
 	outputText("You let your eyes close as you focus on not gagging, but open them wide when something else presses against your lips. It takes you a moment to realize that her knot is pushing at the entrance to your mouth as Heckel grunts above you, her thrusts coming faster and faster. You look up at her in alarm, and she barks out a laugh from above her swaying breasts. \"<i>What? What did you think I meant by stretch?</i>\" Her voice wavers as her cock spasms, shooting another spurt of pre into your throat.\n\n");
 
-	outputText("Before you can start thinking of a way out of the situation, she growls loudly above you.  Her hands grip the back of your head and pull you towards her, burying your face in wet fur and her knot in your mouth. You feel her lean over you as your vision goes dark, your entire face buried in the fur of her groin. Her entire cock seems to flex inside you as her hips thrust forward, and a moment later you feel a burning heat travelling down your throat. Your hands go to the ground to steady yourself as she pulls herself suddenly away, her dick pulling out of your gullet with a long slurp and giving you a chance to breathe clearly again. You barely get one breath in before you realize that she's still cumming, and a thick stream of jism lands across your face and into your open mouth as she paws herself off the rest of the way. Unable to do anything else at this point, you simply fall back onto your " + buttDescript() + " and let her cum across your face two more times, her tongue lolling out of her mouth as she finishes.\n\n");
+	outputText("Before you can start thinking of a way out of the situation, she growls loudly above you.  Her hands grip the back of your head and pull you towards her, burying your face in wet fur and her knot in your mouth. You feel her lean over you as your vision goes dark, your entire face buried in the fur of her groin. Her entire cock seems to flex inside you as her hips thrust forward, and a moment later you feel a burning heat travelling down your throat. Your hands go to the ground to steady yourself as she pulls herself suddenly away, her dick pulling out of your gullet with a long slurp and giving you a chance to breathe clearly again. You barely get one breath in before you realize that she's still cumming, and a thick stream of jism lands across your face and into your open mouth as she paws herself off the rest of the way. Unable to do anything else at this point, you simply fall back onto your [butt] and let her cum across your face two more times, her tongue lolling out of her mouth as she finishes.\n\n");
 
 	outputText("When she's finally emptied herself on your face, she falls down onto the bench in front of you. Before you can say anything, she extends a paw and ruffles your semen-streaked hair. \"<i>Heh, not bad fresh meat. If you can learn your place on the food chain here, we might have a beautiful partnership ahead of us. If you still think you can keep up, that is.</i>\" She winks at you as she stands again, tossing you her towel from earlier as she heads towards the showers.\n\n");
 	dynStats("lib", 1, "sen", 4, "lus", (10+player.lib/10+player.sens/10));
@@ -200,22 +200,22 @@ private function heckelLovesDaAnal(loss:Boolean = false):void {
 	//success - requires ass to be 'a little loose'
 	outputText("Heckel's eyes flash as her grin splits her face, and for just a moment you wonder if this might have been a bad idea. Before you can object, however, she's pushing you down onto your stomach, your arms and [legs] draped over either side of the wooden bench.\n\n");
 
-	outputText("You half expect her to just shove herself in right there, but she thankfully holds off. Instead, you feel her rough paws grab and knead either side of your " + buttDescript() + " as she lets out a low growl.");
+	outputText("You half expect her to just shove herself in right there, but she thankfully holds off. Instead, you feel her rough paws grab and knead either side of your [butt] as she lets out a low growl.");
 	//[<IF TONE OVER 80>
 	if(player.tone >= 80) outputText("  \"<i>Damn [name], you've got one hell of an ass. I bet it's gonna feel even better than it looks.</i>\"");
 	//[<IF TONE BETWEEN 60-79>
 	else if(player.tone >= 60) outputText("  \"<i>Mmm, not bad [name], not perfect, but not bad.</i>\"");
 	outputText("\n\n");
-	
-	outputText("One hand releases your " + buttDescript() + " and you can hear the sound of her stroking herself. You start to turn your head around to watch, but she firmly presses you back down against the bench. \"<i>Now now partner, I told you to stay there. When you're the alpha dog around here, then you can make the rules.</i>\" Deciding this treatment isn't so bad anyway, you relax and let her hand continue to knead your " + buttDescript() + ".\n\n");
+
+	outputText("One hand releases your [butt] and you can hear the sound of her stroking herself. You start to turn your head around to watch, but she firmly presses you back down against the bench. \"<i>Now now partner, I told you to stay there. When you're the alpha dog around here, then you can make the rules.</i>\" Deciding this treatment isn't so bad anyway, you relax and let her hand continue to knead your [butt].\n\n");
 
 	outputText("The sound of her stroking stops, and you bite your lower lip. You feel the bench shift beneath you as she changes position, and a moment later she pulls both of your asscheeks apart to expose your " + assholeDescript() + ". You tense for the inevitable penetration, but instead of a hard cockhead poking at your backdoor you feel something warm and wet. Heckel is licking you!\n\n");
 
 	outputText("Her large tongue feels like sandpaper as it licks up and down your anus, your spread cheeks exposing you to the world. You can feel her wet nose on your sensitive skin, and the contrast with her warm tongue makes you shiver. Her tongue pokes and prods at your " + assholeDescript() + " before slipping painlessly in, swirling expertly around before pulling out and licking some more.\n\n");
 
-	//[<IF PC HAS PENIS AND VAGOO> 
+	//[<IF PC HAS PENIS AND VAGOO>
 	if(player.hasCock() && player.hasVagina()) outputText(SMultiCockDesc() + " is trapped between you and the wooden bench, and you know Heckel won't let you shift position to free it. Your " + vaginaDescript(0) + " is also being ignored, and having so much pleasure with so little stimulation is driving you crazy. You hump weakly up and down, trying to draw some pleasure out of the bench beneath you while simultaneously pushing her rolling and massaging tongue closer to your aching slit, but she ignores you and only licks deeper. She buries her face in your ass entirely, her cold nose and teeth rubbing up against your sensitive skin as her tongue pushes as far inside of you as she can get it.\n\n");
-	
+
 	//[<IF PC HAS PENIS>
 	else if(player.hasCock()) outputText(SMultiCockDesc() + " is trapped between you and the wooden bench, and you know Heckel won't let you shift position to free it. You hump weakly at the bench in a desperate attempt to get some stimulation, and you can feel the vibrations of Heckel's laugh as she buries her snout in your ass. She doesn't stop you, but the polished wood barely gives any pleasure anyway.\n\n");
 
@@ -240,13 +240,13 @@ private function heckelLovesAnal2():void {
 	outputText("As more and more doggie dick is pushed into your ass, you find your estimations of her size more and more ridiculous. There has to be an entire foot of cock in you already, but she's still going! When she does finally bottom out, your mind reels at the impossibility. Her dick must grow the longer she stays aroused, because she's at least 15 inches right now! The base of her dick stretches your ass painfully open, and she gives you a moment to adjust to it.");
 	player.buttChange(35,true,true,false);
 	outputText("\n\n");
-	
-	outputText("Just as the sting begins to fade, she draws herself out to the tip in one motion. You bite your lip in anticipation, but you still moan like a whore when she slams all 15 inches back into you. She draws back before pounding your " + assholeDescript() + " again, making your " + buttDescript() + " shake with the impact.\n\n");
+
+	outputText("Just as the sting begins to fade, she draws herself out to the tip in one motion. You bite your lip in anticipation, but you still moan like a whore when she slams all 15 inches back into you. She draws back before pounding your " + assholeDescript() + " again, making your [butt] shake with the impact.\n\n");
 
 	//[<IF PC HAS PENIS AND VAGOO>
 	if(player.hasCock() && player.hasVagina()) outputText("Although " + sMultiCockDesc() + " is trapped beneath you, Heckel's balls slap into your cunt with every one of her quickening thrusts.  Although neither your [cocks] or " + vaginaDescript(0) + " are getting much stimulation, your prostate is being milked better than it ever has. One thrust in particular makes you cry out, and Heckel laughs above you as she slams her furry thighs into yours again. \"<i>You moan like a whore, [name], a perfect bitch for me to ride.</i>\"\n\n");
 
-	//[<IF PC HAS PENIS AND BALLS> 
+	//[<IF PC HAS PENIS AND BALLS>
 	else if(player.hasCock() && player.balls > 0) outputText(SMultiCockDesc() + " pulses beneath you with every thrust, her duo of fist-sized balls slapping into your [balls]. You gasp in surprise as one of her thrusts rubs against your prostate, and she barks out a single laugh above you. \"<i>You moan like a whore, [name], a perfect bitch for me to ride.</i>\"\n\n");
 
 	//[<IF PC HAS VAGOO>
@@ -326,7 +326,7 @@ public function dominateHeckel():void {
 		flags[kFLAGS.TIMES_DOMMED_HECKEL]++;
 	}
 }
-	
+
 //[Fuck Heckel]
 private function dominateHeckelConclusion():void {
 	clearOutput();
@@ -348,7 +348,7 @@ private function dominateHeckelConclusion():void {
 	if(player.cockTotal() > 1) outputText("s throb and thicken");
 	else outputText(" throbs and thickens");
 	outputText(" further, too turned on to stop even if you wanted to.  You command her to open with a terse word.  She does, and you slide inside.");
-	
+
 	outputText("\n\nHeckel's mouth is a hot, wet cavern of fleshly delight for your [cock biggest], and an involuntary tremble of bliss travels through your swollen meat, depositing a ");
 	if(player.cumQ() < 250) outputText("single drop");
 	else if(player.cumQ() < 1000) outputText("steady drip");

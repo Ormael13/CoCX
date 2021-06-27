@@ -2379,25 +2379,13 @@ public final class Mutations extends MutationsHelper {
             setFaceType(Face.DOG);
             changes++;
         }
-        //-Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
-        if (changes < changeLimit && (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) && rand(3) == 0) {
-            var word1:String;
-            if (player.hairType == Hair.FEATHER) word1 = "feather";
-            else word1 = "quill";
-            if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft " + word1 + "-hair droops over your eye.  Before you can blow the offending down away, you realize the " + word1 + " is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
-            else outputText("\n\nYou run your fingers through your downy-soft " + word1 + "-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your " + word1 + "s.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
+
+        //Remove special hairs
+        if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
+		    CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
-            setHairType(Hair.NORMAL);
         }
-        //-Remove leaf hair (copy for equinum, canine peppers, Labova)
-        if (changes < changeLimit && player.hairType == 7 && rand(4) == 0) {
-            //(long):
-            if (player.hairLength >= 6) outputText("\n\nA lock of your leaf-hair droops over your eye.  Before you can blow the offending down away, you realize the leaf is changing until all that remains is a normal strand of hair.  <b>Your hair is no longer leaf-like!</b>");
-            //(short)
-            else outputText("\n\nYou run your fingers through your leaf-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your leafs.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer leaf-like!</b>");
-            changes++;
-            setHairType(Hair.NORMAL);
-        }
+
         if (type == 3 && player.hairColor != "midnight black" && player.lowerBody != LowerBody.GARGOYLE) {
             if (player.hasFur()) outputText("<b>\n\nYour fur and hair tingles, growing in thicker than ever as darkness begins to spread from the roots, turning it midnight black.</b>");
             else outputText("<b>\n\nYour [skin.type] itches like crazy as fur grows out from it, coating your body.  It's incredibly dense and black as the middle of a moonless night.</b>");
@@ -2794,11 +2782,11 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You devour the egg, momentarily sating your hunger.\n\n");
         if (!large) {
-            outputText("You feel a bit of additional weight on your backside as your " + buttDescript() + " gains a bit more padding.");
+            outputText("You feel a bit of additional weight on your backside as your [butt] gains a bit more padding.");
             player.butt.type++;
             player.refillHunger(20);
         } else {
-            outputText("Your " + buttDescript() + " wobbles, nearly throwing you off balance as it grows much bigger!");
+            outputText("Your [butt] wobbles, nearly throwing you off balance as it grows much bigger!");
             player.butt.type += 2 + rand(3);
             player.refillHunger(60);
         }
@@ -2970,7 +2958,7 @@ public final class Mutations extends MutationsHelper {
             }
             //Ass/hips shrinkage!
             if (player.butt.type > 5) {
-                outputText("Muscles firm and tone as you feel your " + buttDescript() + " become smaller and tighter.");
+                outputText("Muscles firm and tone as you feel your [butt] become smaller and tighter.");
                 if (player.hips.type > 5) outputText("  ");
                 player.butt.type -= 2;
             }
@@ -3351,25 +3339,13 @@ public final class Mutations extends MutationsHelper {
             player.addCurse("sen", 1, 1);
             boobsGrew = true;
         }
-        //-Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
-        if (changes < changeLimit && (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) && rand(3) == 0) {
-            var word1:String;
-            if (player.hairType == Hair.FEATHER) word1 = "feather";
-            else word1 = "quill";
-            if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft " + word1 + "-hair droops over your eye.  Before you can blow the offending down away, you realize the " + word1 + " is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
-            else outputText("\n\nYou run your fingers through your downy-soft " + word1 + "-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your " + word1 + "s.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
+
+        //Remove special hairs
+        if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
+		    CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
-            setHairType(Hair.NORMAL);
         }
-        //-Remove leaf hair (copy for equinum, canine peppers, Labova)
-        if (changes < changeLimit && player.hairType == 7 && rand(4) == 0) {
-            //(long):
-            if (player.hairLength >= 6) outputText("\n\nA lock of your leaf-hair droops over your eye.  Before you can blow the offending down away, you realize the leaf is changing until all that remains is a normal strand of hair.  <b>Your hair is no longer leaf-like!</b>");
-            //(short)
-            else outputText("\n\nYou run your fingers through your leaf-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your leafs.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer leaf-like!</b>");
-            changes++;
-            setHairType(Hair.NORMAL);
-        }
+
         //If breasts are D or bigger and are not lactating, they also start lactating:
         if (player.biggestTitSize() >= 4 && player.breastRows[0].lactationMultiplier < 1 && changes < changeLimit && (rand(3) == 0 || boobsGrew || enhanced)) {
             outputText("\n\nYou gasp as your [breasts] feel like they are filling up with something.  Within moments, a drop of milk leaks from your [breasts]; <b> you are now lactating</b>.");
@@ -3496,7 +3472,7 @@ public final class Mutations extends MutationsHelper {
         //General Appearance (Tail -> Ears -> Paws(fur stripper) -> Face -> Horns
         //Give the player a bovine tail, same as the minotaur
         if (tainted && player.tailType != Tail.COW && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            if (player.tailType == Tail.NONE) outputText("\n\nYou feel the flesh above your " + buttDescript() + " knotting and growing.  It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
+            if (player.tailType == Tail.NONE) outputText("\n\nYou feel the flesh above your [butt] knotting and growing.  It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
             else {
                 if (player.tailType < Tail.SPIDER_ADBOMEN || player.tailType > Tail.BEE_ABDOMEN) {
                     outputText("\n\nYour tail bunches uncomfortably, twisting and writhing around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
@@ -4164,10 +4140,10 @@ public final class Mutations extends MutationsHelper {
             player.createPerk(PerkLib.GoblinoidBlood, 0, 0, 0, 0);
         }
         //antianemone corollary:
-        if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
+        if (changes < changeLimit && player.hairType == Hair.ANEMONE && rand(2) == 0) {
             //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
             outputText("\n\nAs you down the potent ale, your head begins to feel heavier - and not just from the alcohol!  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels smooth, silky, and fibrous; you watch as it dissolves into many thin, hair-like strands.  <b>Your hair is now back to normal!</b>");
-            setHairType(Hair.NORMAL);
+		    CoC.instance.transformations.HairHuman.applyEffect(false);
             changes++;
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
@@ -4211,15 +4187,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Omg Crazy hairs
-        if (player.hairType != Hair.CRAZY && changes < changeLimit && rand(3) == 0) {
-            player.hairType = Hair.CRAZY;
-            outputText("\n\nYou feel as if electricity is running through you and responding to the static your hair distorts in all possible directions. When the statics drops your hair is permanently frozen in a new… spiked form? You've heard of hair curling, dropping flat and what not but naturally spiking up? <b>You won’t need to put gel in your hair anymore to look like some </b>");
-            if (silly()) {
-                outputText("<b>punk kid from an anime series</b>");
-            } else {
-                outputText("<b>weirdo</b>");
-            }
-            outputText("<b>, your hair naturally spikes up in a wild way which remind you of animal fur. </b>");
+        if (!CoC.instance.transformations.HairCrazy.isPresent() && changes < changeLimit && rand(3) == 0) {
+            CoC.instance.transformations.HairCrazy.applyEffect();
             changes++;
         }
         //Dye those hairs
@@ -4388,10 +4357,10 @@ public final class Mutations extends MutationsHelper {
             player.createPerk(PerkLib.GoblinoidBlood, 0, 0, 0, 0);
         }
         //antianemone corollary:
-        if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
+        if (changes < changeLimit && player.hairType == Hair.ANEMONE && rand(2) == 0) {
             //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
             outputText("\n\nAs you down the potent ale, your head begins to feel heavier - and not just from the alcohol!  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels smooth, silky, and fibrous; you watch as it dissolves into many thin, hair-like strands.  <b>Your hair is now back to normal!</b>");
-            setHairType(Hair.NORMAL);
+		    CoC.instance.transformations.HairHuman.applyEffect(false);
             changes++;
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
@@ -4581,34 +4550,15 @@ public final class Mutations extends MutationsHelper {
         }
         ////2a.Make alterations to dick/vaginal/nippular descriptors to match
         //3.Goopy hair
-        if (player.hasGooSkin() && player.hairType != 3 && rand(2) == 0 && changes < changeLimit) {
-            setHairType(Hair.GOO);
-            //if bald
-            if (player.hairLength <= 0) {
-                outputText("\n\nYour head buzzes pleasantly, feeling suddenly hot and wet.  You instinctively reach up to feel the source of your wetness, and discover you've grown some kind of gooey hair.  From time to time it drips, running down your back to the crack of your " + buttDescript() + ".");
-                player.hairLength = 5;
-            } else {
-                //if hair isnt rubbery or latexy
-                if (player.hairColor.indexOf("rubbery") == -1 && player.hairColor.indexOf("latex-textured") == -1) {
-                    outputText("\n\nYour head buzzes pleasantly, feeling suddenly hot and wet.  You instinctively reach up to feel the source of your wetness, and discover your hair has become a slippery, gooey mess.  From time to time it drips, running down your back to the crack of your " + buttDescript() + ".");
-                }
-                //Latexy stuff
-                else {
-                    outputText("\n\nYour oddly inorganic hair shifts, becoming partly molten as rivulets of liquid material roll down your back.  How strange.");
-                }
-            }
-            if (player.hairColor != "green" && player.hairColor != "purple" && player.hairColor != "blue" && player.hairColor != "cerulean" && player.hairColor != "emerald") {
-                outputText("  Stranger still, the hue of your semi-liquid hair changes to ");
-                player.hairColor = player.skin.base.color;
-                outputText(player.hairColor + ".");
-            }
+        if (player.hasGooSkin() && !CoC.instance.transformations.HairGoo.isPresent() && rand(2) == 0 && changes < changeLimit) {
+		    CoC.instance.transformations.HairGoo.applyEffect();
             dynStats("lus", 10);
             changes++;
         }
         //DONE EXCEPT FOR TITS & MULTIDICKS (UNFINISHED KINDA)
         //4.Goo legs
         if (player.skinAdj == "slimy" && player.skinDesc == "skin" && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYour viewpoint rapidly drops as everything below your " + buttDescript() + " and groin melts together into an amorphous blob.  Thankfully, you discover you can still roll about on your new slimey undercarriage, but it's still a whole new level of strange.");
+            outputText("\n\nYour viewpoint rapidly drops as everything below your [butt] and groin melts together into an amorphous blob.  Thankfully, you discover you can still roll about on your new slimey undercarriage, but it's still a whole new level of strange.");
             player.tallness -= 3 + rand(2);
             if (player.tallness < 36) {
                 player.tallness = 36;
@@ -5364,15 +5314,8 @@ public final class Mutations extends MutationsHelper {
             setEarType(Ears.SNAKE);
         }
         //Gorgon hair
-        if ((type == 0 || type == 3) && player.ears.type == Ears.SNAKE && player.hairType != Hair.GORGON && changes < changeLimit && rand(4) == 0) {
-            if (player.hairLength == 0) outputText("\n\nAt first nothing happening. Then you start to feel tingling at your head scalp.  You run your fingers over head you feel small numbs fast growning up forming something akin to dull spikes.  After brief pause those nubs starts to slowly grown and covered gradualy with....sclaes?");
-            else {
-                outputText("\n\nYou run your fingers through your [hair] while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your hair.  They're completely changing becoming more thick and slowly covered with delicate....scales?");
-                if (player.hairLength < 6) outputText("  Additionaly they seems to lenghten.");
-            }
-            outputText(" What even more worrisome seems at the ends of each strands form something that is similar to very small snake head.  Taking one of your hair 'strands' confirm your suspicions.  Your hair turned into bunch of tiny snakes similary to those possesed normaly by gorgons.  <b>Your hair turned into thin snakes replacing your current hair!</b>");
-            if (player.hairLength < 6) player.hairLength = 6;
-            setHairType(Hair.GORGON);
+        if ((type == 0 || type == 3) && player.ears.type == Ears.SNAKE && !CoC.instance.transformations.HairGorgon.isPresent() && changes < changeLimit && rand(4) == 0) {
+		    CoC.instance.transformations.HairGorgon.applyEffect();
             changes++;
         }
         //Gorgon eyes
@@ -5530,12 +5473,13 @@ public final class Mutations extends MutationsHelper {
             setArmType(Arms.HYDRA);
             changes++;
         }
+
         //Feathery Hair
-        if (type == 2 && player.hairType != 1 && player.wings.type == Wings.FEATHERED_LARGE && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a couatl!");
-            setHairType(Hair.FEATHER);
+        if (type == 2 && !CoC.instance.transformations.HairFeather.isPresent() && player.wings.type == Wings.FEATHERED_LARGE && changes < changeLimit && rand(4) == 0) {
+            CoC.instance.transformations.HairFeather.applyEffect();
             changes++;
         }
+
         //Scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
         if (!player.hasFullCoatOfType(Skin.SCALES) && ((type == 0 && player.eyes.type == Eyes.GORGON) || (type == 2 && player.hairType == 1)) && changes < changeLimit && rand(5) == 0) {
             //set new skinTone
@@ -5637,7 +5581,7 @@ public final class Mutations extends MutationsHelper {
         }
         outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.");
         player.refillHunger(100);
-        player.hairType = Hair.NORMAL;
+        CoC.instance.transformations.HairHuman.applyEffect(false);
         if (player.humanScore() > 4) {
             outputText("\n\nYou blink and the world twists around you.  You feel more like yourself than you have in a while, but exactly how isn't immediately apparent.  Maybe you should take a look at yourself?");
         } else {
@@ -5832,85 +5776,18 @@ public final class Mutations extends MutationsHelper {
             changes++;
             player.removeStatusEffect(StatusEffects.GlowingNipples);
         }
-        //Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
-        if (changes < changeLimit && (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) && rand(3) == 0) {
-            humanizeHairs();
-        }
-        //Remove anemone hair
-        if (changes < changeLimit && player.hairType == Hair.ANEMONE && rand(3) == 0) {
-            //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
-            outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your tentacle-hair, only to find out that the tentacles have vanished and replaced with normal hair.  <b>Your hair is normal again!</b>");
-            setHairType(Hair.NORMAL);
+
+        //Remove special hairs
+        if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
+		    CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
         }
-        //Remove goo hair
-        if (changes < changeLimit && player.hairType == Hair.GOO && rand(3) == 0) {
-            outputText("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of hair sprouts from the skin of your scalp.  <b>Your hair is normal again!</b>");
-            //Turn hair growth on.
-            flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
-        //Remove gorgon hair
-        if (changes < changeLimit && player.hairType == Hair.GORGON && rand(3) == 0) {
-            player.hairLength = 1;
-            outputText("\n\nAs you finish the root, the scaled critters on your head shake wildly in displeasure. Then, a sudden heat envelopes your scalp. The transformative effects of your spicy meal make themselves notorious, as the writhing mess of snakes start hissing uncontrollably. Many of them go rigid, any kind of life that they could had taken away by the root effects. Soon all the snakes that made your hair are limp and lifeless.");
-            outputText("\n\nTheir dead bodies are separated from you head by a scorching sensation, and start falling to the ground, turning to dust in a matter of seconds. Examining your head on the stream, you realize that you have a normal, healthy scalp, though devoid of any kind of hair.");
-            outputText("\n\nThe effects don’t end here, though as the familiar sensation of hair returns to your head a moment later. After looking yourself on the stream again, you confirm that <b>your once bald head now has normal, short [haircolor] hair</b>.");
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
-        //Remove ghost hair
-        if (changes < changeLimit && player.hairType == Hair.GHOST && rand(3) == 0) {
-            outputText("\n\nA sensation of weight assaults your scalp. You reach up and grab a handful of hair, confused. Your perplexion only heightens when you actually feel the follicles becoming heavier in your grasp.  Plucking a strand, you hold it up before you, surprised to see... it's no longer transparent!  You have normal hair!");
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
-        //Remove leaf hair
-        if (changes < changeLimit && player.hairType == Hair.LEAF && rand(4) == 0) {
-            //(long):
-            if (player.hairLength >= 6) outputText("\n\nA lock of your leaf-hair droops over your eye.  Before you can blow the offending down away, you realize the leaf is changing until all that remains is a normal strand of hair.  <b>Your hair is no longer leaf-like!</b>");
-            //(short)
-            else outputText("\n\nYou run your fingers through your leaf-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your leafs.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer leaf-like!</b>");
-            changes++;
-            setHairType(Hair.NORMAL);
-        }
-        //Remove fluffy hair
-        if (changes < changeLimit && player.hairType == Hair.FLUFFY && rand(3) == 0) {
-            outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your fluffy hair, only to find out that they have vanished and replaced with normal hair.  <b>Your hair is normal again!</b>");
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
-        //Remove grass hair
-        if (changes < changeLimit && player.hairType == Hair.GRASS && rand(3) == 0) {
-            outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your grass-hair, only to find out that the long, soft and leafy blades have vanished and replaced with normal hair.  <b>Your hair is normal again!</b>");
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
-        //Remove silken hair
-        if (changes < changeLimit && player.hairType == Hair.SILKEN && rand(3) == 0) {
-            outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your silken-hair, only to find out that they have changed back to normal hair.  <b>Your hair is normal again!</b>");
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
-        //Remove storm hair
-        if (changes < changeLimit && player.hairType == Hair.STORM && rand(3) == 0) {
-            outputText("\n\nYour charged up hair begins to lose their luster, the fizzling bolts dying out as the current dies down before vanishing entirely, leaving you with normal human hair.  <b>Your hair is normal again!</b>");
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
-        //Remove burning hair
-        if (changes < changeLimit && player.hairType == Hair.BURNING && rand(3) == 0) {
-            outputText("\n\nYou're head begins to cool down until the flames entirely disapears leaving you with ordinary hairs.  <b>Your hair is normal again!</b>");
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
+
         //Restart hair growth
         if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0 && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYou feel an itching sensation in your scalp as you realize the change. <b>Your hair is growing normally again!</b>");
             //Turn hair growth on.
             flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-            //setHairType(Hair.NORMAL);
             changes++;
         }
         //-----------------------
@@ -7223,7 +7100,7 @@ public final class Mutations extends MutationsHelper {
         if (player.butt.type < 8 && changes < changeLimit && rand(3) == 0) {
             player.butt.type++;
             changes++;
-            outputText("\n\nYour butt cheeks itch as they inflates to a larger plumper size. When it stops, you find yourself the proud owner of a " + buttDescript() + ".");
+            outputText("\n\nYour butt cheeks itch as they inflates to a larger plumper size. When it stops, you find yourself the proud owner of a [butt].");
         }
 
         //Glowing Lizard Cock:
@@ -7569,13 +7446,13 @@ public final class Mutations extends MutationsHelper {
         if (player.butt.type < 8 && changes < changeLimit && rand(4) == 0) {
             player.butt.type++;
             changes++;
-            outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a " + buttDescript() + ".");
+            outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a [butt].");
         }
         //-Narrow booty if crazy huge.
         if (player.butt.type >= 14 && changes < changeLimit && rand(4) == 0) {
             changes++;
             player.butt.type--;
-            outputText("\n\nA feeling of tightness starts in your " + buttDescript() + ", increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
+            outputText("\n\nA feeling of tightness starts in your [butt], increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
         }
         //Physical changes:
         //Tail - unlocks enhanced with fire tail whip attack
@@ -7639,11 +7516,12 @@ public final class Mutations extends MutationsHelper {
             removeWings();
             changes++;
         }
+
         //-Feathery Hair
-        if (player.hairType != Hair.FEATHER && changes < changeLimit && player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0) {
+        if (!CoC.instance.transformations.HairFeather.isPresent() && changes < changeLimit && player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0) {
             outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy red fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a phoenix!");
-            setHairType(Hair.FEATHER);
             player.hairColor = "platinum crimson";
+            CoC.instance.transformations.HairFeather.applyEffect(false);
             changes++;
         }
         //Lizard eyes
@@ -8257,10 +8135,10 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //antianemone corollary:
-        if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
+        if (changes < changeLimit && player.hairType == Hair.ANEMONE && rand(2) == 0) {
             //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
             outputText("\n\nAs you down the seed, your head begins to feel heavier.  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels soft and fluffy, almost feathery; you watch as it dissolves into many thin, feathery strands.  <b>Your hair is now like that of a harpy!</b>");
-            setHairType(Hair.FEATHER);
+		    CoC.instance.transformations.HairFeather.applyEffect(false);
             changes++;
         }
         //****************
@@ -8374,13 +8252,13 @@ public final class Mutations extends MutationsHelper {
         if (player.butt.type < 8 && changes < changeLimit && rand(3) == 0) {
             player.butt.type++;
             changes++;
-            outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a " + buttDescript() + ".");
+            outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a [butt].");
         }
         //-Narrow booty if crazy huge.
         if (player.butt.type >= 14 && changes < changeLimit && rand(4) == 0) {
             changes++;
             player.butt.type--;
-            outputText("\n\nA feeling of tightness starts in your " + buttDescript() + ", increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
+            outputText("\n\nA feeling of tightness starts in your [butt], increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
         }
         //-Body thickness to 25ish
         if (player.thickness > 25 && changes < changeLimit && rand(3) == 0) {
@@ -8410,7 +8288,7 @@ public final class Mutations extends MutationsHelper {
         //-Feathery Tail
         if (player.tailType != Tail.HARPY && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && (type == 1 || player.wings.type == Wings.FEATHERED_LARGE) && rand(4) == 0) {
             //(tail)
-            if (player.tailType > Tail.NONE) outputText("\n\nYour tail shortens, folding into the crack of your " + buttDescript() + " before it disappears. A moment later, a fan of feathers erupts in its place, fluffing up and down instinctively every time the breeze shifts. <b>You have a feathery harpy tail!</b>");
+            if (player.tailType > Tail.NONE) outputText("\n\nYour tail shortens, folding into the crack of your [butt] before it disappears. A moment later, a fan of feathers erupts in its place, fluffing up and down instinctively every time the breeze shifts. <b>You have a feathery harpy tail!</b>");
             //(no tail)
             else outputText("\n\nA tingling tickles the base of your spine, making you squirm in place. A moment later, it fades, but a fan of feathers erupts from your [skin.type] in its place. The new tail fluffs up and down instinctively with every shift of the breeze. <b>You have a feathery harpy tail!</b>");
             setTailType(Tail.HARPY);
@@ -8433,10 +8311,10 @@ public final class Mutations extends MutationsHelper {
             setArmType(Arms.HARPY);
             changes++;
         }
+
         //-Feathery Hair
-        if (player.hairType != 1 && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && (type == 1 || player.faceType == Face.HUMAN) && rand(4) == 0) {
-            outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a harpy!");
-            setHairType(Hair.FEATHER);
+        if (!CoC.instance.transformations.HairFeather.isPresent() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && (type == 1 || player.faceType == Face.HUMAN) && rand(4) == 0) {
+            CoC.instance.transformations.HairFeather.applyEffect();
             changes++;
         }
         //-Human face
@@ -8625,7 +8503,7 @@ public final class Mutations extends MutationsHelper {
                 outputText("\n\nThe nutty fruit after effects show again, this time as an odd itch down your spine. It’s kind of a familiar feeling, as when you work a muscle to strengthen it. As you’re musing on what could be the cause, something sprouts just above your butt and you take of your lower clothing so you can examine it.");
                 outputText("\n\nWhen you lay your eyes on it, you notice a short, fleshy bump of a tail. It doesn’t keep that way long, as it lengthens and wides a little, and start sprouting large, " + player.skin.coat.color + " colored feathers, shaped as wide fan. Some of then are very long, while others, near you butt, are soft and downy.");
             }
-            outputText(" <b>In any case, you have now a full, fan-shaped avian tail above your " + buttDescript() + "!</b>");
+            outputText(" <b>In any case, you have now a full, fan-shaped avian tail above your [butt]!</b>");
             setTailType(Tail.AVIAN);
             changes++;
         }
@@ -8685,10 +8563,10 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Hair
-        if (player.hairType != 1 && player.hairLength > 0 && changes < changeLimit && type == 0 && rand(3) == 0) {
-            setHairType(Hair.FEATHER);
+        if (!CoC.instance.transformations.HairFeather.isPresent() && player.hairLength > 0 && changes < changeLimit && type == 0 && rand(3) == 0) {
             outputText("\n\nWhile you’re yet processing the taste of that odd seed, you suddenly start feeling an annoying itching coming from your scalp, without a doubt a change brought by the transformative nature of the seed.");
             outputText("\n\nThe base of each one of your hairs thicken noticeably, and from every one of them, small hairy filament start sprouting of each side. Soon you realize that your hairs are becoming feathers, and in a question of minute, <b>you’re left with a mane of [hair]!</b>");
+		    CoC.instance.transformations.HairFeather.applyEffect(false);
             changes++;
         }
         //Face
@@ -8846,25 +8724,13 @@ public final class Mutations extends MutationsHelper {
             humanizeArms();
             changes++;
         }
-        //-Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
-        if (changes < changeLimit && (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) && rand(3) == 0) {
-            var word1:String;
-            if (player.hairType == Hair.FEATHER) word1 = "feather";
-            else word1 = "quill";
-            if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft " + word1 + "-hair droops over your eye.  Before you can blow the offending down away, you realize the " + word1 + " is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
-            else outputText("\n\nYou run your fingers through your downy-soft " + word1 + "-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your " + word1 + "s.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer " + word1 + "-like!</b>");
+
+        //Remove special hairs
+        if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
+		    CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
-            setHairType(Hair.NORMAL);
         }
-        //-Remove leaf hair (copy for equinum, canine peppers, Labova)
-        if (changes < changeLimit && player.hairType == 7 && rand(4) == 0) {
-            //(long):
-            if (player.hairLength >= 6) outputText("\n\nA lock of your leaf-hair droops over your eye.  Before you can blow the offending down away, you realize the leaf is changing until all that remains is a normal strand of hair.  <b>Your hair is no longer leaf-like!</b>");
-            //(short)
-            else outputText("\n\nYou run your fingers through your leaf-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your leafs.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer leaf-like!</b>");
-            changes++;
-            setHairType(Hair.NORMAL);
-        }
+
         //Remove odd eyes
         if (changes < changeLimit && rand(5) == 0 && player.eyes.type > Eyes.HUMAN) {
             humanizeEyes();
@@ -9201,9 +9067,9 @@ public final class Mutations extends MutationsHelper {
         if (player.tailType != Tail.SPIDER_ADBOMEN && (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || player.lowerBody == LowerBody.DRIDER || player.lowerBody == LowerBody.ATLACH_NACHA) && player.arms.type == Arms.SPIDER && rand(4) == 0) {
             outputText("\n\n");
             //(Pre-existing tails)
-            if (player.tailType > Tail.NONE) outputText("Your tail shudders as heat races through it, twitching violently until it feels almost as if it's on fire.  You jump from the pain at your " + buttDescript() + " and grab at it with your hands.  It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape.  The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones.  That may prove useful.  <b>You now have a spider's abdomen hanging from above your " + buttDescript() + "!</b>\n\n");
+            if (player.tailType > Tail.NONE) outputText("Your tail shudders as heat races through it, twitching violently until it feels almost as if it's on fire.  You jump from the pain at your [butt] and grab at it with your hands.  It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape.  The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones.  That may prove useful.  <b>You now have a spider's abdomen hanging from above your [butt]!</b>\n\n");
             //(No tail)
-            else outputText("A burst of pain hits you just above your " + buttDescript() + ", coupled with a sensation of burning heat and pressure.  You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body.  Reaching back, you grab at it with your hands.  It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape.  The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones.  That may prove useful.  <b>You now have a spider's abdomen hanging from above your " + buttDescript() + "!</b>");
+            else outputText("A burst of pain hits you just above your [butt], coupled with a sensation of burning heat and pressure.  You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body.  Reaching back, you grab at it with your hands.  It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape.  The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones.  That may prove useful.  <b>You now have a spider's abdomen hanging from above your [butt]!</b>");
             setTailType(Tail.SPIDER_ADBOMEN);
             player.tailVenom = 5;
             player.tailRecharge = 5;
@@ -9212,7 +9078,7 @@ public final class Mutations extends MutationsHelper {
         }
         //(Drider Item Only: Carapace-Clad Legs to Drider Legs)
         if (type == 1 && player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && rand(4) == 0 && player.tailType == Tail.SPIDER_ADBOMEN) {
-            outputText("\n\nJust like when your legs changed to those of a spider-morph, you find yourself suddenly paralyzed below the waist.  Your dark, reflective legs splay out and drop you flat on your back.   Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them.  Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down.  As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs.  Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start.  Your abdomen has gotten even larger as well.  Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance.  As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance.  That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your " + buttDescript() + " is still positioned just above the start of your arachnid half.  <b>You're now a drider.</b>");
+            outputText("\n\nJust like when your legs changed to those of a spider-morph, you find yourself suddenly paralyzed below the waist.  Your dark, reflective legs splay out and drop you flat on your back.   Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them.  Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down.  As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs.  Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start.  Your abdomen has gotten even larger as well.  Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance.  As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance.  That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your [butt] is still positioned just above the start of your arachnid half.  <b>You're now a drider.</b>");
             setLowerBody(LowerBody.DRIDER);
             player.legCount = 8;
             player.coatColor = "black";
@@ -9252,7 +9118,7 @@ public final class Mutations extends MutationsHelper {
 
             }
     */
-	
+
 	public function midnightGossamer(player:Player):void {
 		clearOutput();
 		var changeLimit:Number = 1;
@@ -9475,11 +9341,10 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
         }
-        //Appearnace Change
+        //Appearance Change
         //Hair
-        if (rand(3) == 0 && changes < changeLimit && player.hairType != 2) {
-            outputText("\n\nA sensation of weightlessness assaults your scalp. You reach up and grab a handful of hair, confused. Your perplexion only heightens when you actually feel the follicles becoming lighter in your grasp, before you can hardly tell you're holding anything.  Plucking a strand, you hold it up before you, surprised to see... it's completely transparent!  You have transparent hair!");
-            setHairType(Hair.GHOST);
+        if (rand(3) == 0 && changes < changeLimit && !CoC.instance.transformations.HairGhost.isPresent()) {
+            CoC.instance.transformations.HairGhost.applyEffect();
             changes++;
         }
         //Eyes
@@ -9760,9 +9625,8 @@ public final class Mutations extends MutationsHelper {
             setTongueType(Tongue.HUMAN);
             changes++;
         }
-        if (player.hairType != 10 && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nSomething changes in your scalp and you pass a hand through to know what is going on. To your surprise your hair texture turned silky, feeling as if you had been tending it for years, the touch is so agreeable you can’t help but idly stroke it with your hand. <b>Your hair has taken on an almost silk-like texture, just like that of an elf!</b>");
-            setHairType(Hair.SILKEN);
+        if (!CoC.instance.transformations.HairSilky.isPresent() && changes < changeLimit && rand(4) == 0) {
+            CoC.instance.transformations.HairSilky.applyEffect();
             changes++;
         }
         if (player.lowerBody == LowerBody.ELF && player.arms.type == Arms.ELF && player.hasPlainSkinOnly() && !player.isGargoyle() && player.skinAdj != "flawless" && changes < changeLimit && rand(3) == 0) {
@@ -10057,9 +9921,9 @@ public final class Mutations extends MutationsHelper {
             } else humanizeEyes();
             changes++;
         }
-        if (player.hairType != 11 && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nThe ends of your hair seem to split before a quick jolt smacks you in the back of the head. Irritated and confused, you rub the back of your head only to get a small zap in return. You wander over to a puddle and make note of several glowing strands of hair shaped like the typical stylized lightning bolt. There's even a single strand that floats just off the side of your face!");//<b></b>
-            setHairType(Hair.STORM);
+
+        if (!CoC.instance.transformations.HairStorm.isPresent() && changes < changeLimit && rand(4) == 0) {
+            CoC.instance.transformations.HairStorm.applyEffect();
             changes++;
         }
         if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
@@ -10240,9 +10104,9 @@ public final class Mutations extends MutationsHelper {
             } else humanizeEyes();
             changes++;
         }
-        if (player.hairType != 11 && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nThe ends of your hair seem to split before a quick jolt smacks you in the back of the head. Irritated and confused, you rub the back of your head only to get a small zap in return. You wander over to a puddle and make note of several glowing strands of hair shaped like the typical stylized lightning bolt. There's even a single strand that floats just off the side of your face!");//<b></b>
-            setHairType(Hair.STORM);
+
+        if (!CoC.instance.transformations.HairStorm.isPresent() && changes < changeLimit && rand(4) == 0) {
+            CoC.instance.transformations.HairStorm.applyEffect();
             changes++;
         }
         if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
@@ -10556,11 +10420,9 @@ public final class Mutations extends MutationsHelper {
 			else humanizeEyes();
             changes++;
         }
-        if (player.hairType != Hair.RATATOSKR && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYou feel an itch in your hair and frustratedly go check on what is going on. To your surprise your hair took on a striped pattern" +
-                    " <b>like those of a ratatoskr.</b>");//<b></b>
-            player.hairLength = 1;
-            setHairType(Hair.RATATOSKR);
+
+        if (!CoC.instance.transformations.HairRatatoskr.isPresent() && changes < changeLimit && rand(4) == 0) {
+            CoC.instance.transformations.HairRatatoskr.applyEffect();
             changes++;
         }
         if (player.arms.type == Arms.SQUIRREL && player.tailType != Tail.SQUIRREL && changes < changeLimit && rand(3) == 0) {
@@ -10732,13 +10594,9 @@ public final class Mutations extends MutationsHelper {
             } else humanizeEyes();
             changes++;
         }
-        if (player.hairType != Hair.WINDSWEPT && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nThe sharp winds of your aura suddenly blow into your hair, some of the strands being cut clean." +
-                    " To your absolute surprise when you look them up your hair has now taken on a shape more fit to hang around without encumbering" +
-                    " you when in the middle of a windstorm, helping your aerodynamism. Oh well if they ever grow again you will probably tie them back into a braid." +
-                    " <b>You now have windswept hair.</b>");//<b></b>
-            player.hairLength = 1;
-            setHairType(Hair.WINDSWEPT);
+
+        if (!CoC.instance.transformations.HairWindswept.isPresent() && changes < changeLimit && rand(4) == 0) {
+            CoC.instance.transformations.HairWindswept.applyEffect();
             changes++;
         }
         if (!player.skin.hasWindSweptScars() && player.wings.type == Wings.WINDY_AURA && rand(3) == 0 && changes < changeLimit) {
@@ -10887,14 +10745,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-hair morphs to anemone tentacles, retains color, hair shrinks back to med-short('shaggy') and stops growing, lengthening treatments don't work and goblins won't cut it, but more anemone items can lengthen it one level at a time
-        if (player.gills.type == Gills.ANEMONE && player.hairType != 4 && changes < changeLimit && rand(5) == 0) {
-            outputText("\n\nYour balance slides way off, and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.");
-            setHairType(Hair.ANEMONE);
-            player.hairLength = 5;
-            if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
-                outputText("  <b>(Your hair has stopped growing.)</b>");
-                flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1;
-            }
+
+        if (player.gills.type == Gills.ANEMONE && !CoC.instance.transformations.HairAnemone.isPresent() && changes < changeLimit && rand(5) == 0) {
+            CoC.instance.transformations.HairAnemone.applyEffect();
             changes++;
             changes++;
             changes++;
@@ -11012,10 +10865,10 @@ public final class Mutations extends MutationsHelper {
         }
         //[Remove tentacle hair]
         //required if the hair length change below is triggered
-        if (changes < changeLimit && player.hairType == 4 && rand(3) == 0) {
+        if (changes < changeLimit && player.hairType == Hair.ANEMONE && rand(3) == 0) {
             //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
             outputText("\n\nEerie flames of the jewel migrate up your body to your head, where they cover your [hair].  Though they burned nowhere else in their lazy orbit, your head begins to heat up as they congregate.  Fearful, you raise your hands to it just as the temperature peaks, but as you touch your hair, the searing heat is suddenly gone - along with your tentacles!  <b>Your hair is normal again!</b>");
-            setHairType(Hair.NORMAL);
+            CoC.instance.transformations.HairHuman.applyEffect(false);
             changes++;
         }
         //[Adjust hair length toward range of 16-26 – very long to ass-length]
@@ -12852,11 +12705,10 @@ public final class Mutations extends MutationsHelper {
         //Hair
         var color1:String;
         var Hinezumi_HairColor:Array = ["red", "orange", "platinum crimson", "pinkish orange"];
-        if ((player.faceType == Face.BUCKTEETH || player.faceType == Face.MOUSE) && player.hairType != Hair.BURNING && changes < changeLimit && rand(3) == 0 && type == 1) {
+        if ((player.faceType == Face.BUCKTEETH || player.faceType == Face.MOUSE) && !CoC.instance.transformations.HairBurning.isPresent() && changes < changeLimit && rand(3) == 0 && type == 1) {
             color1 = randomChoice(Hinezumi_HairColor);
             player.hairColor = color1;
-            outputText("\n\nSomething weird happen in your hairs. The strands coloration slowly shift to a [haircolor] hue and to your absolute surprise the tips turns incandescent like embers. There's no doubt to the heat your hairs now produce as if the tips were on fire. <b>Better keep watch not to set anything on fire with your fiery hairs now.</b>");
-            setHairType(Hair.BURNING);
+            CoC.instance.transformations.HairBurning.applyEffect();
             changes++;
         }
         //get fur
@@ -13160,18 +13012,12 @@ public final class Mutations extends MutationsHelper {
         //	outputText("\n\nYou grit your teeth as a stinging sensation arises in your gills.  Within moments, the sensation passes, and <b>your gills are gone!</b>");
         //If the PC has tentacle hair:
         if (player.hairType == Hair.ANEMONE && rand(4) == 0 && changes < changeLimit) {
-            outputText("\n\nYour head feels strange as the tentacles you have for hair begin to recede back into your scalp, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of hair sprouts from the skin of your scalp.  <b>Your hair is normal again!</b>");
-            //Turn hair growth on.
-            flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-            setHairType(Hair.NORMAL);
+            CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
         }
         //If the PC has goo hair:
         if (player.hairType == Hair.GOO && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of hair sprouts from the skin of your scalp.  <b>Your hair is normal again!</b>");
-            //Turn hair growth on.
-            flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-            setHairType(Hair.NORMAL);
+            CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
         }
         //If the PC has four eyes:
@@ -14544,9 +14390,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Hair
-        if (player.faceType == Face.YETI_FANGS && player.hairType != Hair.FLUFFY && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYour hair starts to grow longer and fluffier. It covers all sides of your head perfectly, like a furry helmet, keeping it warm. Only your face and neck are devoid of this hairy armor which still manage to look like a nice short haircut. While it looks like hair at first, touching it proves it to be like a very thick coat of fluff. You now have <b>yeti fluffy [haircolor] hairs.</b>");
-            setHairType(Hair.FLUFFY);
+        if (player.faceType == Face.YETI_FANGS && !CoC.instance.transformations.HairFluffy.isPresent() && changes < changeLimit && rand(4) == 0) {
+            CoC.instance.transformations.HairFluffy.applyEffect();
             changes++;
         }
         //Fur
@@ -14739,15 +14584,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Hair
-        if (player.faceType == Face.YUKI_ONNA && player.hairType != Hair.SNOWY && changes < changeLimit && rand(4) == 0) {
-            if (rand(3) == 0) player.hairColor = "snow white";
-            else {
-                if (rand(2) == 0) player.hairColor = "silver white";
-                else player.hairColor = "platinum blonde";
-            }
-            outputText("\n\nThe feeling of your hair against your skin suddenly changes and it is now cold against you. You notice wisps of snow sometime falling down past your face and straining your eyes to look up you can see them slowly drifting down from your long snowy white hair.");
-            if (player.hairLength < 25) player.hairLength = 25;
-            setHairType(Hair.SNOWY);
+        if (player.faceType == Face.YUKI_ONNA && !CoC.instance.transformations.HairSnowy.isPresent() && changes < changeLimit && rand(4) == 0) {
+            CoC.instance.transformations.HairSnowy.applyEffect();
             changes++;
         }
         //Read body + Wings slot
@@ -14942,17 +14780,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Change hair type to normal
-        if ((player.hairType != Hair.NORMAL && player.hairType != Hair.PRISMATIC) && type == 1 && changes < changeLimit && rand(2) == 0) {
-            humanizeHairs();
+        if ((!CoC.instance.transformations.HairHuman.isPresent() && player.hairType != Hair.PRISMATIC) && type == 1 && changes < changeLimit && rand(2) == 0) {
+            CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
         }
         //Change hair type to prismatic
         if ((player.hairType == Hair.NORMAL) && type == 1 && changes < changeLimit && rand(2) == 0) {
-            player.hairType = Hair.PRISMATIC;
-            outputText("\n\nYou feel your hair begin to slicken with a strange mucus as a fresh coating covers them. You move over to the puddle, gazing at your reflection as the light bounces into your eyes." +
-                    "\n\nYou strain briefly before looking upon your reflection once more. Your hair now glows with a vibrant, multicolored hue, with every color in the spectrum. The prismatic beauty is quite the sight," +
-                    " though your hair remains slick as if you've recently gelled it. Still they turn to " + player.hairColor + " toward the root like your old human hairs." +
-                    "<b>Your hairs are now prismatic like those of a sea dragon!</b>");
+            CoC.instance.transformations.HairPrismatic.applyEffect();
             changes++;
         }
 
@@ -16099,13 +15933,13 @@ public final class Mutations extends MutationsHelper {
         if (player.butt.type < 8 && changes < changeLimit && rand(3) == 0) {
             player.butt.type++;
             changes++;
-            outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a " + buttDescript() + ".");
+            outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a [butt].");
         }
         //-Narrow booty if crazy huge.
         if (player.butt.type >= 14 && changes < changeLimit && rand(4) == 0) {
             changes++;
             player.butt.type--;
-            outputText("\n\nA feeling of tightness starts in your " + buttDescript() + ", increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
+            outputText("\n\nA feeling of tightness starts in your [butt], increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
         }
         //Physical changes
         //Ears
@@ -16310,8 +16144,8 @@ public final class Mutations extends MutationsHelper {
                 if (rand(2) == 0) player.hairColorOnly = "orange";
                 else player.hairColorOnly = "pinkish orange";
             }
-            outputText("\n\nAs if sweating wasn't bad enough your body temperature suddenly spikes again. Before you know it your entire body is set on fire, especially your hair of which the tips glows like smoldering embers. Not only that but Instead of normal sweat your entire body now quite literally seethes liquid fire. <b>Guess you’re a full fire snail now with this burning hair of yours.</b>");
-            setHairType(Hair.BURNING);
+            outputText("\n\nAs if sweating wasn't bad enough your body temperature suddenly spikes again. Before you know it your entire body is set on fire, especially your hair of which the tips glows like smoldering embers. Not only that but instead of normal sweat your entire body now quite literally seethes liquid fire. <b>Guess you’re a full fire snail now with this burning hair of yours.</b>");
+		    CoC.instance.transformations.HairBurning.applyEffect(false);
             changes++;
         }
         player.refillHunger(10);
@@ -16538,7 +16372,7 @@ public final class Mutations extends MutationsHelper {
                     outputText("\n\nAfter having consumed the root, a lock of gooey hair falls over your forehead. When you try to examine it, the bunch of goo falls to the ground and evaporates. As you tilt your head to see what happened, more and more patches of goo start falling from your head, disappearing on the ground with the same speed. Soon, your scalp is devoid of any kind of goo, albeit entirely bald.");
                     outputText("\n\nNot for long, it seems, as the familiar sensation of hair returns to your head a moment later. After looking yourself on the stream, you confirm that <b>your once bald head now has normal, short [haircolor] hair</b>.");
                 } else outputText("\n\nA mild tingling on your scalp makes your check yourself on the stream. Seems like the root is changing your hair this time, <b>turning it into [hair]</b>.");
-                setHairType(Hair.NORMAL);
+		        CoC.instance.transformations.HairHuman.applyEffect(false);
             }
             flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
             changes++;
@@ -16757,13 +16591,13 @@ public final class Mutations extends MutationsHelper {
             if (player.butt.type < 16 && changes < changeLimit && rand(3) == 0) {
                 player.butt.type++;
                 changes++;
-                outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a " + buttDescript() + ".");
+                outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a [butt].");
             }
             //-Narrow booty if crazy huge.
             if (player.butt.type >= 17 && changes < changeLimit && rand(3) == 0) {
                 changes++;
                 player.butt.type--;
-                outputText("\n\nA feeling of tightness starts in your " + buttDescript() + ", increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
+                outputText("\n\nA feeling of tightness starts in your [butt], increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
             }
 
             if (changes < changeLimit && player.cocks.length > 0 && rand(2) == 0) {
@@ -16896,13 +16730,13 @@ public final class Mutations extends MutationsHelper {
             if (player.butt.type < 20 && changes < changeLimit && rand(3) == 0) {
                 player.butt.type++;
                 changes++;
-                outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a " + buttDescript() + ".");
+                outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a [butt].");
             }
             //-Narrow booty if crazy huge.
             if (player.butt.type >= 21 && changes < changeLimit && rand(3) == 0) {
                 changes++;
                 player.butt.type--;
-                outputText("\n\nA feeling of tightness starts in your " + buttDescript() + ", increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
+                outputText("\n\nA feeling of tightness starts in your [butt], increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
             }
 
 
@@ -16984,13 +16818,13 @@ public final class Mutations extends MutationsHelper {
             if (player.butt.type < 4 && changes < changeLimit && rand(3) == 0) {
                 player.butt.type++;
                 changes++;
-                outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a " + buttDescript() + ".");
+                outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a [butt].");
             }
             //-Narrow booty if crazy huge.
             if (player.butt.type >= 5 && changes < changeLimit && rand(3) == 0) {
                 changes++;
                 player.butt.type--;
-                outputText("\n\nA feeling of tightness starts in your " + buttDescript() + ", increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
+                outputText("\n\nA feeling of tightness starts in your [butt], increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
             }
 
 
@@ -17037,79 +16871,13 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYour head tingles as something in your hair change, the strands flashing for an instant before they turn " + player.hairColor + ".");
             changes++;
         }
-        //Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
-        if (changes < changeLimit && (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) && rand(3) == 0) {
-            humanizeHairs();
-        }
-        //Remove anemone hair
-        if (changes < changeLimit && player.hairType == Hair.ANEMONE && rand(3) == 0) {
-            //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
-            outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your tentacle-hair, only to find out that the tentacles have vanished and replaced with normal hair.  <b>Your hair is normal again!</b>");
-            setHairType(Hair.NORMAL);
+
+        //Remove special hairs
+        if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
+		    CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
         }
-        //Remove goo hair
-        if (changes < changeLimit && player.hairType == Hair.GOO && rand(3) == 0) {
-            outputText("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of hair sprouts from the skin of your scalp.  <b>Your hair is normal again!</b>");
-            //Turn hair growth on.
-            flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
-        //Remove gorgon hair
-        if (changes < changeLimit && player.hairType == Hair.GORGON && rand(3) == 0) {
-            player.hairLength = 1;
-            outputText("\n\nAs you finish the root, the scaled critters on your head shake wildly in displeasure. Then, a sudden heat envelopes your scalp. The transformative effects of your spicy meal make themselves notorious, as the writhing mess of snakes start hissing uncontrollably. Many of them go rigid, any kind of life that they could had taken away by the root effects. Soon all the snakes that made your hair are limp and lifeless.");
-            outputText("\n\nTheir dead bodies are separated from you head by a scorching sensation, and start falling to the ground, turning to dust in a matter of seconds. Examining your head on the stream, you realize that you have a normal, healthy scalp, though devoid of any kind of hair.");
-            outputText("\n\nThe effects don’t end here, though as the familiar sensation of hair returns to your head a moment later. After looking yourself on the stream again, you confirm that <b>your once bald head now has normal, short [haircolor] hair</b>.");
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
-        //Remove ghost hair
-        if (changes < changeLimit && player.hairType == Hair.GHOST && rand(3) == 0) {
-            outputText("\n\nA sensation of weight assaults your scalp. You reach up and grab a handful of hair, confused. Your perplexion only heightens when you actually feel the follicles becoming heavier in your grasp.  Plucking a strand, you hold it up before you, surprised to see... it's no longer transparent!  You have normal hair!");
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
-        //Remove leaf hair
-        if (changes < changeLimit && player.hairType == Hair.LEAF && rand(4) == 0) {
-            //(long):
-            if (player.hairLength >= 6) outputText("\n\nA lock of your leaf-hair droops over your eye.  Before you can blow the offending down away, you realize the leaf is changing until all that remains is a normal strand of hair.  <b>Your hair is no longer leaf-like!</b>");
-            //(short)
-            else outputText("\n\nYou run your fingers through your leaf-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your leafs.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer leaf-like!</b>");
-            changes++;
-            setHairType(Hair.NORMAL);
-        }
-        //Remove fluffy hair
-        if (changes < changeLimit && player.hairType == Hair.FLUFFY && rand(3) == 0) {
-            outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your fluffy hair, only to find out that they have vanished and replaced with normal hair.  <b>Your hair is normal again!</b>");
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
-        //Remove grass hair
-        if (changes < changeLimit && player.hairType == Hair.GRASS && rand(3) == 0) {
-            outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your grass-hair, only to find out that the long, soft and leafy blades have vanished and replaced with normal hair.  <b>Your hair is normal again!</b>");
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
-        //Remove silken hair
-        if (changes < changeLimit && player.hairType == Hair.SILKEN && rand(3) == 0) {
-            outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your silken-hair, only to find out that they have changed back to normal hair.  <b>Your hair is normal again!</b>");
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
-        //Remove storm hair
-        if (changes < changeLimit && player.hairType == Hair.STORM && rand(3) == 0) {
-            outputText("\n\nYour charged up hair begins to lose their luster, the fizzling bolts dying out as the current dies down before vanishing entirely, leaving you with normal human hair.  <b>Your hair is normal again!</b>");
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
-        //Remove burning hair
-        if (changes < changeLimit && player.hairType == Hair.BURNING && rand(3) == 0) {
-            outputText("\n\nYou're head begins to cool down until the flames entirely disapears leaving you with ordinary hairs.  <b>Your hair is normal again!</b>");
-            setHairType(Hair.NORMAL);
-            changes++;
-        }
+
         if ((type == 0 || type == 1 || type == 2) && player.ears.type != Ears.COW && changes < changeLimit && rand(3) == 0) {
             if (player.hasStatusEffect(StatusEffects.UshiOnnaVariant)) {
                 player.removeStatusEffect(StatusEffects.UshiOnnaVariant);
@@ -17144,7 +16912,7 @@ public final class Mutations extends MutationsHelper {
 				) && player.lowerBody != LowerBody.GARGOYLE
 				&& changes < changeLimit && rand(4) == 0
 		) {
-            outputText("\n\nStarting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs.  From the waist down, your strength completely deserts you, leaving you to fall hard on your " + buttDescript() + " in the dirt.  With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf.  It crests up your knee to envelop the joint in a many-faceted onyx coating.  Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton.  From a distance it would look almost like a black, thigh-high boot, but you know the truth.  <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>");
+            outputText("\n\nStarting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs.  From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt.  With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf.  It crests up your knee to envelop the joint in a many-faceted onyx coating.  Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton.  From a distance it would look almost like a black, thigh-high boot, but you know the truth.  <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>");
             setLowerBody(LowerBody.CHITINOUS_SPIDER_LEGS);
             player.coatColor = "black";
             player.legCount = 2;
@@ -17162,7 +16930,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Drider Item Only: Carapace-Clad Legs to Drider Legs
         if (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && rand(4) == 0 && player.tailType == Tail.SPIDER_ADBOMEN) {
-            outputText("\n\nJust like when your legs changed to those of a spider-morph, you find yourself suddenly paralyzed below the waist.  Your dark, reflective legs splay out and drop you flat on your back.   Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them.  Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down.  As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs.  Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start.  Your abdomen has gotten even larger as well.  Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance.  As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance.  That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your " + buttDescript() + " is still positioned just above the start of your arachnid half.  <b>You're now a drider.</b>");
+            outputText("\n\nJust like when your legs changed to those of a spider-morph, you find yourself suddenly paralyzed below the waist.  Your dark, reflective legs splay out and drop you flat on your back.   Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them.  Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down.  As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs.  Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start.  Your abdomen has gotten even larger as well.  Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance.  As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance.  That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your [butt] is still positioned just above the start of your arachnid half.  <b>You're now a drider.</b>");
             setLowerBody(LowerBody.DRIDER);
             player.coatColor = "black";
             player.legCount = 8;
@@ -17442,10 +17210,13 @@ public final class Mutations extends MutationsHelper {
                 outputText("\n\nYour skin suddenly lightens. While lighter skin won't help you against cold weither you got the feeling that, despite this and against all logic, you won't die from freezing either, must be something related to Melkies.<b> You now have " + player.skinTone + " skin.</b>");
                 changes++;
             }
-            //Remove weird hairs
-            if (changes < changeLimit && rand(4) == 0 && player.hairType != Hair.NORMAL) {
-                humanizeHairs();
+
+            //Remove special hairs
+            if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(4) == 0) {
+		        CoC.instance.transformations.HairHuman.applyEffect();
+                changes++;
             }
+
             //Change hair color
             var melkie_hair:Array = ["blonde", "platinum blonde"];
             if ((!InCollection(player.hairColor, melkie_hair) || player.hairType == Hair.NORMAL) && changes < changeLimit && rand(2) == 0) {
@@ -17677,10 +17448,13 @@ public final class Mutations extends MutationsHelper {
                         "Likely you won’t need to blink while underwater with <b>your orange cancer eyes.</b>");
                 changes++;
             }
-            //Remove weird hairs
-            if (changes < changeLimit && rand(4) == 0 && player.hairType != Hair.NORMAL) {
-                humanizeHairs();
+
+            //Remove special hairs
+            if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(4) == 0) {
+		        CoC.instance.transformations.HairHuman.applyEffect();
+                changes++;
             }
+
             //Set ears to human
             if (changes < changeLimit && rand(4) == 0 && player.ears.type != Ears.HUMAN) {
                 humanizeEars();

@@ -1,5 +1,6 @@
 ﻿package classes
 {
+import classes.BodyParts.Hair;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
@@ -2140,7 +2141,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.tallness = saveFile.data.tallness;
 		player.hairColor = saveFile.data.hairColor;
 		if (saveFile.data.hairType == undefined)
-			player.hairType = 0;
+			player.hairType = Hair.NORMAL;
 		else
 			player.hairType = saveFile.data.hairType;
 		if (saveFile.data.hairStyle == undefined)

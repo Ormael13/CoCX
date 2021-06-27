@@ -60,6 +60,9 @@ import classes.Items.*;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Stats.Buff;
 
+import classes.Scenes.Metamorph;
+import classes.GeneticMemories.HairMem;
+
 use namespace CoC;
 
 	public class Soulforce extends BaseContent
@@ -402,6 +405,11 @@ use namespace CoC;
 			doNext(SoulforceCheats);
 		}
 		public function AllMetamorphOptionsUnlock():void {
+
+			for each (var genMem: * in HairMem.Memories) {
+				Metamorph.GeneticMemoryStorage[genMem.id] = true;
+			}
+
 			if (!player.hasStatusEffect(StatusEffects.UnlockedFur)) player.createStatusEffect(StatusEffects.UnlockedFur,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedScales)) player.createStatusEffect(StatusEffects.UnlockedScales,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedChitin)) player.createStatusEffect(StatusEffects.UnlockedChitin,0,0,0,0);
@@ -1619,7 +1627,7 @@ use namespace CoC;
 				addButton(13, "-1-", EquipmentMenu, page - 1);
 				addButton(14, "Back", SoulforceCheats);
 			}
-			
+
 		}
 		public function NonEquipmentMenu(page:int = 1):void {
 			menu();
@@ -1738,7 +1746,7 @@ use namespace CoC;
 				addButton(14, "Back", SoulforceCheats);
 			}
 		}
-		
+
 		public function AddRapPerk():void {
 			flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4;
 			player.createPerk(PerkLib.RapierTraining, 0, 0, 0, 0);
@@ -1857,7 +1865,7 @@ use namespace CoC;
 			outputText("\n\n<b>(Gained 1 Oni bead necklace!)</b>\n\n");
 			inventory.takeItem(necklaces.OBNECK, curry(EquipmentMenu, 2));
 		}
-		
+
 		public function AddFoxJewel():void {
 			outputText("\n\n<b>(Gained 1 Fox Jewel!)</b>\n\n");
 			inventory.takeItem(consumables.FOXJEWL, curry(NonEquipmentMenu, 1));
@@ -1938,7 +1946,7 @@ use namespace CoC;
 			outputText("\n\n<b>(Gained 1 Midnight gossamer!)</b>\n\n");
 			inventory.takeItem(consumables.M_GOSSR, curry(NonEquipmentMenu, 2));
 		}
-		
+
 		public function AddMetalPieces():void {
 			outputText("\n\n<b>(Gained 50 Metal Pieces!)</b>\n\n");
 			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] += 50;
@@ -1993,7 +2001,7 @@ use namespace CoC;
 			outputText("\n\n<b>(Gained 1 Feral Imp Skull!)</b>\n\n");
 			inventory.takeItem(useables.FIMPSKL, curry(MaterialMenu, 2));
 		}
-		
+
 		public function FightTheDummy():void {
 			clearOutput();
 			outputText("Entering battle with The Dummy! Enjoy ^^");
@@ -2004,7 +2012,7 @@ use namespace CoC;
 			outputText("Entering battle with Succubus Gardener! Enjoy ^^");
 			startCombat(new SuccubusGardener());
 		}
-		
+
 		public function AddThickGreenOnnaGossamer():void {
 			outputText("\n\n<b>(Gained 1 Thick Green Onna Gossamer!)</b>\n\n");
 			inventory.takeItem(consumables.WHITEIS, SoulforceCheats);

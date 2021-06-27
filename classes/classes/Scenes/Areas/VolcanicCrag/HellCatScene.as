@@ -13,6 +13,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.MutationsHelper;
 import classes.Scenes.UniqueSexScenes;
 import classes.display.SpriteDb;
+import classes.CoC;
 
 public class HellCatScene extends BaseContent
 	{
@@ -254,7 +255,7 @@ public function WitchesSabbathThirdVisitYes():void {
 	mutations.setEyeTypeAndColor(Eyes.INFERNAL,"ember");
 	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes)) player.createStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes, 0, 0, 0, 0);
 	outputText(" In a final spectacular explosion your hair is set ablaze, the fire refusing to be put out until it literally replaces them.");
-	mutations.setHairType(Hair.BURNING);
+	CoC.instance.transformations.HairBurning.applyEffect(false);
 	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningHair, 0, 0, 0, 0);
 	outputText(" Your skin tingle with residual heat as well, progressively and delightfully burning toward a ashen hue.");
 	player.skinTone = "ashen";
@@ -306,7 +307,7 @@ public function WitchesSabbathFourthVisitYeahSure2():void {
 	mutations.setEyeTypeAndColor(Eyes.INFERNAL,"ember");
 	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes)) player.createStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes, 0, 0, 0, 0);
 	outputText(" In a final spectacular explosion your hair is set ablaze, the fire refusing to be put out until it literally replaces them.");
-	mutations.setHairType(Hair.BURNING);
+	CoC.instance.transformations.HairBurning.applyEffect(false);
 	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningHair, 0, 0, 0, 0);
 	outputText(" Your skin tingle with residual heat as well, progressively and delightfully burning toward a ashen hue.");
 	player.skinTone = "ashen";

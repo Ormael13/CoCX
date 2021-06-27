@@ -71,7 +71,7 @@ private function faerieRAEP():void {
 	//Special Taurness
 	if(player.isTaur()) {
 		outputText("\n\nYou bop the tiny Faerie on the head to daze her briefly, then place her on a branch. You back yourself up against the tiny creature, lifting your tail so she can see your " + vaginaDescript(0) + ". The scent washes toward her and you hear a high pitched giggle; evidently that was more than enough to give her quite the contact high.  You feel a strange sensation in your slit as she slides her legs inside you and wraps her arms around your " + clitDescript() + ".\n\n");
-		
+
 		//[If cock-like clit:
 		if(player.clitLength >= 3) {
 			outputText("The tiny fae begins jerking your clit like a cock, squeezing her arms tightly around you and sliding in and out of your " + vaginaDescript(0) + ". Her motions are frenetic and unpredictable, but incredibly pleasurable.  She starts licking at your " + clitDescript() + " as your femcum runs down it, which only serves to make her more excited. She gets so excited that her legs start kicking wildly as she screams \"<i>Swim! Swim! Swim! Swim!</i>\" over and over again.  ");
@@ -104,11 +104,11 @@ private function faerieRAEP():void {
 		else if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_WET) outputText("growing so slippery the faerie nearly loses her footing");
 		else outputText("feeling yourself moistening with need");
 		outputText(" from the tiny touches.\n\n");
-		
-		//(small) <= .50\"  
+
+		//(small) <= .50\"
 		if(player.clitLength <= .5) {
 			outputText("She pulls apart your lips, revealing your tiny bud and repositioning herself to plant her feet inside you.  The flawless skin of her thighs pulls another gasp of pleasure from your lips.  They squeeze tightly around your " + clitDescript() + ", scissoring her gash across its sensitive surface.   You squirm, too engrossed in the rough grinding your button is receiving to worry about the faerie.   She clings to you, hanging on for dear life as your crotch nearly throws her free.  During the gyrations, she's slammed back into the " + clitDescript() + ", instantly penetrated by the nub with a wet 'schlick'.\n\n");
-			outputText("Squealing and bouncing as she hangs on tightly, the faerie noisily orgasms around your clit, squirting her own fluids into your aching " + vaginaDescript(0) + ".  The fluid tingles, and you shove your fingers in, smearing the sticky-sweet faerie-cum through your passage.   Before you can get far with it, your own orgasm goes off, squeezing your fingers and rippling around them, trying to milk your hand as if it was a dick.  Your legs go weak and wobbly, forcing you down on your " + buttDescript() + " as the waves of pleasure flow through you, soaking the faerie in girlcum.\n\n");
+			outputText("Squealing and bouncing as she hangs on tightly, the faerie noisily orgasms around your clit, squirting her own fluids into your aching " + vaginaDescript(0) + ".  The fluid tingles, and you shove your fingers in, smearing the sticky-sweet faerie-cum through your passage.   Before you can get far with it, your own orgasm goes off, squeezing your fingers and rippling around them, trying to milk your hand as if it was a dick.  Your legs go weak and wobbly, forcing you down on your [butt] as the waves of pleasure flow through you, soaking the faerie in girlcum.\n\n");
 		}
 		//(medium) <= .1.25\"
 		else if(player.clitLength <= 1.25) {
@@ -130,7 +130,7 @@ private function faerieRAEP():void {
 		}
 	}
 	//[OH SHIT ITS OVER, POOR BITCH CRAWLS OUT ALL STONE ON GIRLCUM]
-	//[FIRST TIME] 
+	//[FIRST TIME]
 	if(player.statusEffectv1(StatusEffects.FaerieFemFuck) == 1) {
 		outputText("Lying in the forest loam as you recover, you watch as the faerie stumbles out of your groin, holding her head and giggling nonstop.  She tries to put on a serious face but it's instantly overpowered by another fit of laughter, \"<i>Hehe, did you know I'd get stoned off your girlcum?  Omigod I've never been this -heheheheheh- high before!  Like I can see EVERYTHING.  Puuhleeeease don't make me do this again...</i>\"\n\n");
 		outputText("She flies off, hungry and looking for a flower to munch on.");
@@ -141,7 +141,7 @@ private function faerieRAEP():void {
 		outputText("The little woman spins around happily, proclaiming, \"<i>The colors are like, so bright!  Oh gosh, I'm hungry!  See you and your clit later, just don't let me fall in your snatch, it fucks me up so much.  I don't think I can handle much more or I'll be crawling between your legs every chance I get!</i>\"\n\n");
 		outputText("She flits away, calling out, \"<i>Bye sweetie!</i>\"");
 	}
-	//[SLUTTIN IT UP] 
+	//[SLUTTIN IT UP]
 	else {
 		outputText("The faerie stumbles out of your snatch, giggling and scooping the slippery girl-goo off her body, licking it up.  She crawls up your body to your lips, giving you a cunt-flavored kiss and babbling happily, \"<i>Mmm your cunt makes me so warm and giggly!  I'm so fucking stoned!  Gawddess, I'm hungry too – I'm gonna grab some food, and then come back for another dip in your honeypot, ok?</i>\"\n\n");
 		outputText("She flits away, a little unsteady and reeking of female sex and desire.");

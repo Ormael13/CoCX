@@ -3936,7 +3936,7 @@ public class Creature extends Utils
 
 		public function hairStyleDescript():String
 		{
-			return Appearance.beardDescription(this);
+			return Appearance.hairStyleDescription(this);
 		}
 
 		public function hipDescript():String

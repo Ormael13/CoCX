@@ -1547,12 +1547,12 @@ public class Pregnancy extends NPCAwareContent {
                 //Guaranteed increase up to level 10
                 if(player.butt.type < 13) {
                     player.butt.type++;
-                    EngineCore.outputText("\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.\n");
+                    EngineCore.outputText("\nYou notice your [butt] feeling larger and plumper after the ordeal.\n");
                 }
                 //Big butts only increase 50% of the time.
                 else if(rand(2) == 0){
                     player.butt.type++;
-                    EngineCore.outputText("\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.\n");
+                    EngineCore.outputText("\nYou notice your [butt] feeling larger and plumper after the ordeal.\n");
                 }
             }
             displayedUpdate = true;
@@ -1580,12 +1580,12 @@ public class Pregnancy extends NPCAwareContent {
                 //Guaranteed increase up to level 10
                 if(player.butt.type < 13) {
                     player.butt.type++;
-                    EngineCore.outputText("\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.");
+                    EngineCore.outputText("\nYou notice your [butt] feeling larger and plumper after the ordeal.");
                 }
                 //Big butts only increase 50% of the time.
                 else if(rand(2) == 0){
                     player.butt.type++;
-                    EngineCore.outputText("\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.");
+                    EngineCore.outputText("\nYou notice your [butt] feeling larger and plumper after the ordeal.");
                 }
             }
             EngineCore.outputText("\n");
@@ -1672,7 +1672,7 @@ public class Pregnancy extends NPCAwareContent {
                 EngineCore.outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ");
                 player.createVagina();
             }
-            EngineCore.outputText("A dangerous rumble comes from your womb, signaling that it's time to birth your body's cargo at last.  Your [legs] wobble unsteadily as your strength ebbs with every gush that erupts  from your now-broken water until you collapse on your " + buttDescript() + ", grunting and groaning.  At first it goes slow – there's just a few small contractions that are more strange than anything else, rippling down your " + vaginaDescript(0) + " and squirting out more of your pregnancy's fluid.  All too soon the tempo kicks up, and you feel something starting to stretch you wider and wider.\n\n");
+            EngineCore.outputText("A dangerous rumble comes from your womb, signaling that it's time to birth your body's cargo at last.  Your [legs] wobble unsteadily as your strength ebbs with every gush that erupts  from your now-broken water until you collapse on your [butt], grunting and groaning.  At first it goes slow – there's just a few small contractions that are more strange than anything else, rippling down your " + vaginaDescript(0) + " and squirting out more of your pregnancy's fluid.  All too soon the tempo kicks up, and you feel something starting to stretch you wider and wider.\n\n");
 
             EngineCore.outputText("You heave and push, instinctively driven to flex muscles you didn't even know you had to speed the super human labor you've entered into.  ");
             if(player.vaginalCapacity() < 60) EngineCore.outputText("It hurts a little as your cervix starts to stretch wide");
@@ -1838,7 +1838,7 @@ public class Pregnancy extends NPCAwareContent {
             player.dynStats("tou", -2, "spe", 2, "lib", 1, "sen", .5, "cor", 7);
             if(player.butt.type < 10 && rand(2) == 0) {
                 player.butt.type++;
-                EngineCore.outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.");
+                EngineCore.outputText("\n\nYou notice your [butt] feeling larger and plumper after the ordeal.");
             }
             else if(player.hips.type < 10) {
                 player.hips.type++;
@@ -1944,7 +1944,7 @@ public class Pregnancy extends NPCAwareContent {
             //Hip and butt increase
             if(player.butt.type < 12 && rand(2) == 0) {
                 player.butt.type++;
-                EngineCore.outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.");
+                EngineCore.outputText("\n\nYou notice your [butt] feeling larger and plumper after the ordeal.");
             }
             else if(player.hips.type < 15) {
                 player.hips.type++;
@@ -2033,12 +2033,12 @@ public class Pregnancy extends NPCAwareContent {
             if(player.butt.type < 14 && rand(2) == 0) {
                 if(player.butt.type < 10) {
                     player.butt.type++;
-                    EngineCore.outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.");
+                    EngineCore.outputText("\n\nYou notice your [butt] feeling larger and plumper after the ordeal.");
                 }
                 //Big butts grow slower!
                 else if(player.butt.type < 14 && rand(2) == 0) {
                     player.butt.type++;
-                    EngineCore.outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.");
+                    EngineCore.outputText("\n\nYou notice your [butt] feeling larger and plumper after the ordeal.");
                 }
             }
             EngineCore.outputText("\n");
@@ -2072,12 +2072,12 @@ public class Pregnancy extends NPCAwareContent {
             if(player.butt.type < 14 && rand(2) == 0) {
                 if(player.butt.type < 10) {
                     player.butt.type++;
-                    EngineCore.outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.");
+                    EngineCore.outputText("\n\nYou notice your [butt] feeling larger and plumper after the ordeal.");
                 }
                 //Big butts grow slower!
                 else if(player.butt.type < 14 && rand(2) == 0) {
                     player.butt.type++;
-                    EngineCore.outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.");
+                    EngineCore.outputText("\n\nYou notice your [butt] feeling larger and plumper after the ordeal.");
                 }
             }
             player.knockUpForce(); //Clear Pregnancy
@@ -2109,12 +2109,12 @@ public class Pregnancy extends NPCAwareContent {
             if(player.butt.type < 14 && rand(2) == 0) {
                 if(player.butt.type < 10) {
                     player.butt.type++;
-                    EngineCore.outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.");
+                    EngineCore.outputText("\n\nYou notice your [butt] feeling larger and plumper after the ordeal.");
                 }
                 //Big butts grow slower!
                 else if(player.butt.type < 14 && rand(2) == 0) {
                     player.butt.type++;
-                    EngineCore.outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.");
+                    EngineCore.outputText("\n\nYou notice your [butt] feeling larger and plumper after the ordeal.");
                 }
             }
             EngineCore.outputText("\n");

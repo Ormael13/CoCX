@@ -5,6 +5,7 @@
 package classes.Scenes
 {
 import classes.*;
+import classes.internals.SaveableState;
 import classes.BodyParts.Hair;
 import classes.GeneticMemories.HairMem;
 import classes.BodyParts.Antennae;
@@ -24,12 +25,44 @@ import classes.Items.MutationsHelper;
 
 use namespace CoC;
 
-	public class Metamorph extends BaseContent
-	{
+	public class Metamorph extends BaseContent implements SaveableState {
 
-		public function Metamorph()
-		{
+		public static var GeneticMemoryStorage: Object;
 
+		public function stateObjectName():String {
+			return "GeneticMemoryStorage";
+		}
+
+		public function resetState():void {
+			GeneticMemoryStorage = {};
+		}
+
+		public function saveToObject():Object {
+			return {
+				"storage": GeneticMemoryStorage
+			};
+		}
+
+		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+			if (o) {
+				GeneticMemoryStorage = o["storage"];
+			} else {
+				// loading from old save
+				resetState();
+			// TODO: Isolate migration properly after finished
+			}
+
+				// migration
+				if (player.hasStatusEffect(StatusEffects.UnlockedHumanHair)) GeneticMemoryStorage["Human Hair"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair)) GeneticMemoryStorage["Feather Hair"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedGorgonHair)) GeneticMemoryStorage["Gorgon Hair"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedElfHair)) GeneticMemoryStorage["Silky Hair"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuHair)) GeneticMemoryStorage["Storm Hair"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair)) GeneticMemoryStorage["Burning Hair"] = true;
+		}
+
+		public function Metamorph() {
+			Saves.registerSaveableState(this);
 		}
 
 public function accessMetamorphMenu(currentPage: int = 0):void {
@@ -357,12 +390,12 @@ private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int
 
 	for each (var genMem: * in pageMems) {
 		const buttonStr: String = genMem.metamorphTitle || "";
-		const unlocked: Boolean = genMem.isUnlockedFunc(player);
-		const partsInUse: Boolean = genMem.partsInUseFunc(player);
+		const unlocked: Boolean = GeneticMemoryStorage[genMem.name];
+		const partsInUse: Boolean = genMem.transformation().isPresent();
 		const enoughSF: Boolean = player.soulforce >= genMem.metamorphCost;
 
 		if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem).hint("Cost: " + genMem.metamorphCost + " SF");
-		else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "This metamorphosis would have no effect!");
+		else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "You already have this, the metamorphosis would have no effect!");
 		else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.metamorphCost + " SF (You don't have enough Soulforce for this metamorphosis!)");
 		else if (!unlocked) addButtonDisabled(currentButton, "???", "You haven't unlocked this metamorphosis yet!");
 		currentButton++;
@@ -381,10 +414,17 @@ private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int
 private function doMetamorph (title: String, genMem: *): void {
 	clearOutput();
 	outputText(title);
-	genMem.metamorphFunc(player);
+	genMem.transformation().applyEffect();
 	player.soulforce -= genMem.metamorphCost;
 	CoC.instance.mainViewManager.updateCharviewIfNeeded();
 	doNext(accessMetamorphMenu);
+}
+
+public static function unlockMetamorph (genMemName: String, doOutput: Boolean = true): void {
+	if (!GeneticMemoryStorage[genMemName]) {
+		GeneticMemoryStorage[genMemName] = true;
+		if (doOutput && player.hasPerk(PerkLib.Metamorph)) outputText("\n\n[Genetic Memory Obtained: " + genMemName + "]");
+	}
 }
 
 private function accessPage1MetamorphMenu():void {
@@ -2088,7 +2128,7 @@ private function metamorphBatCollar():void {
 	player.soulforce -= 100;
 	outputText("\n\nAn intense itching sets in around your neck. Bringing your hands to your neck to scratch it, you find sparse, downy fuzz. As you scratch away, it continues lengthening and growing in density until you have a collar of fur around your neck.");
 	outputText(" Well, this isn’t so bad, the scarf-like look is certainly nice, at the very least. <b>Your neck now sports a collar of fur.</b>");
-	player.hairType = RearBody.BAT_COLLAR;
+	player.rearBody.type = RearBody.BAT_COLLAR;
 	doNext(accessRearBodyMenuOld);
 }
 private function metamorphBatWings():void {
@@ -2427,7 +2467,7 @@ private function metamorphCowEars():void {
 private function metamorphCowTail():void {
 	clearOutput();
 	player.soulforce -= 100;
-	if (player.tailType == Tail.NONE) outputText("\n\nYou feel the flesh above your " + buttDescript() + " knotting and growing. It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form. You have a <b>cow tail</b>.");
+	if (player.tailType == Tail.NONE) outputText("\n\nYou feel the flesh above your [butt] knotting and growing. It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form. You have a <b>cow tail</b>.");
 	else {
 		if (player.tailType < Tail.SPIDER_ADBOMEN || player.tailType > Tail.BEE_ABDOMEN) {
 			outputText("\n\nYour tail bunches uncomfortably, twisting and writhing around itself before flopping straight down, now shaped into a distinctly bovine form. You have a <b>cow tail</b>.");
@@ -2443,7 +2483,7 @@ private function metamorphCowTail():void {
 private function metamorphDragonTail():void {
 	clearOutput();
 	player.soulforce -= 100;
-	if (player.tailType == Tail.NONE) outputText("\n\nA sudden dull, throbbing pain in your " + buttDescript() + " forces your hands to it; you can feel an ominous lump over your tail bone, swelling bigger and bigger with every heartbeat. All of a sudden, it seems to explode, jutting out and around until it hovers near your ankles, the skin under your flesh hard and scaly. <b>You now have a dragon tail flicking at your back, flexible as a whip.</b>");
+	if (player.tailType == Tail.NONE) outputText("\n\nA sudden dull, throbbing pain in your [butt] forces your hands to it; you can feel an ominous lump over your tail bone, swelling bigger and bigger with every heartbeat. All of a sudden, it seems to explode, jutting out and around until it hovers near your ankles, the skin under your flesh hard and scaly. <b>You now have a dragon tail flicking at your back, flexible as a whip.</b>");
 	else outputText("\n\nAn icy sensation fills your behind as your tail suddenly goes curiously numb. Twisting your head around, you watch as it melts and transforms into a reptilian appendage, long and flexible, its tip adorned with wicked spikes. <b>You now have a dragon tail.</b>");
 	player.tailType = Tail.DRACONIC;
 	doNext(accessPage2TailMenu);
@@ -2663,8 +2703,8 @@ private function metamorphSpiderTail():void {
 	clearOutput();
 	player.soulforce -= 100;
 	outputText("\n\n");
-	if (player.tailType > Tail.NONE) outputText("Your tail shudders as heat races through it, twitching violently until it feels almost as if it's on fire. You jump from the pain at your " + buttDescript() + " and grab at it with your hands. It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape. The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen! With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones. That may prove useful. <b>You now have a spider's abdomen hanging from above your " + buttDescript() + "!</b>\n\n");
-	else outputText("A burst of pain hits you just above your " + buttDescript() + ", coupled with a sensation of burning heat and pressure. You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body. Reaching back, you grab at it with your hands. It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape. The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen! With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones. That may prove useful. <b>You now have a spider's abdomen hanging from above your " + buttDescript() + "!</b>");
+	if (player.tailType > Tail.NONE) outputText("Your tail shudders as heat races through it, twitching violently until it feels almost as if it's on fire. You jump from the pain at your [butt] and grab at it with your hands. It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape. The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen! With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones. That may prove useful. <b>You now have a spider's abdomen hanging from above your [butt]!</b>\n\n");
+	else outputText("A burst of pain hits you just above your [butt], coupled with a sensation of burning heat and pressure. You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body. Reaching back, you grab at it with your hands. It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape. The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen! With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones. That may prove useful. <b>You now have a spider's abdomen hanging from above your [butt]!</b>");
 	player.tailType = Tail.SPIDER_ADBOMEN;
 	player.tailVenom = 5;
 	player.tailRecharge = 5;
@@ -2727,7 +2767,7 @@ private function metamorphHarpyArms():void {
 private function metamorphHarpyTail():void {
 	clearOutput();
 	player.soulforce -= 100;
-	if (player.tailType > Tail.NONE) outputText("\n\nYour tail shortens, folding into the crack of your " + buttDescript() + " before it disappears. A moment later, a fan of feathers erupts in its place, fluffing up and down instinctively every time the breeze shifts. <b>You have a feathery harpy tail!</b>");
+	if (player.tailType > Tail.NONE) outputText("\n\nYour tail shortens, folding into the crack of your [butt] before it disappears. A moment later, a fan of feathers erupts in its place, fluffing up and down instinctively every time the breeze shifts. <b>You have a feathery harpy tail!</b>");
 	else outputText("\n\nA tingling tickles the base of your spine, making you squirm in place. A moment later, it fades, but a fan of feathers erupts from your [skin.type] in its place. The new tail fluffs up and down instinctively with every shift of the breeze. <b>You have a feathery harpy tail!</b>");
 	player.tailType = Tail.HARPY;
 	doNext(accessPage1TailMenu);
@@ -2751,8 +2791,8 @@ private function metamorphBeeWingsSmall():void {
 private function metamorphBeeTail():void {
 	clearOutput();
 	player.soulforce -= 100;
-	if (player.tailType > Tail.NONE) outputText("\n\nPainful swelling just above your " + buttDescript() + " doubles you over, and you hear the sound of your tail dropping off onto the ground! Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a rounded bee-like abdomen grows in place of your old tail. It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.");
-	else outputText("\n\nPainful swelling just above your " + buttDescript() + " doubles you over. It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and rounding with a series of pops until you have a bulbous abdomen hanging just above your butt. The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide. You sigh as your stinger slides into place with a 'snick', finishing the transformation. <b>You have a bee's abdomen.</b>");
+	if (player.tailType > Tail.NONE) outputText("\n\nPainful swelling just above your [butt] doubles you over, and you hear the sound of your tail dropping off onto the ground! Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a rounded bee-like abdomen grows in place of your old tail. It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.");
+	else outputText("\n\nPainful swelling just above your [butt] doubles you over. It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and rounding with a series of pops until you have a bulbous abdomen hanging just above your butt. The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide. You sigh as your stinger slides into place with a 'snick', finishing the transformation. <b>You have a bee's abdomen.</b>");
 	player.tailType = Tail.BEE_ABDOMEN;
 	player.tailVenom = 10;
 	player.tailRecharge = 5;

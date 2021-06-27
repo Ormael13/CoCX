@@ -1,4 +1,4 @@
-package classes 
+package classes
 {
 import classes.BodyParts.Arms;
 import classes.BodyParts.Butt;
@@ -22,12 +22,12 @@ import classes.Items.*;
 	 */
 	public class CharSpecial extends BaseContent
 	{
-		
+
 		public function CharSpecial() {}
-		
+
 		// 2d array name | function | skip creation | description
 		public const customs:Array = [
-			// 
+			//
 			[ "Without pre-defined history:", null, false, "" ],
 			[ "Aria", customAria, false, "It's really no surprise that you were sent through the portal to deal with the demons - you look enough like one as-is.  Your numerous fetish-inducing piercings, magical fox-tails, and bimbo-licious personality were all the motivation the elders needed to keep you from corrupting the village youth." ],
 			[ "Betram", customBetram, false, "You're quite the foxy herm, and as different as you were compared to the rest of Ingnam, it's no surprise you were sent through first." ],
@@ -41,7 +41,7 @@ import classes.Items.*;
 			[ "Navorn", customNavorn, false, "There's been something special about you since day one, whether it's your numerous sexual endowments or your supernatural abilities.  You're a natural pick for champion." ],
 			[ "Rope", customRope, false, "Despite outward appearances, you're actually something of a neuter, with shark-like teeth, an androgynous face, and a complete lack of genitalia." ],
 			[ "Sora", customSora, false, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic..." ],
-			
+
 			[ "With a bloodline history:", null, false, "" ],
 			[ "Grigori", customGrigori, true, "You are a normal villager if not for that dragon cock and the ability to use an ice dragon's breath. That damn ancestor of yours had to go and fuck some dragoness, didn't he?" ],
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],kitsune start
@@ -54,7 +54,7 @@ import classes.Items.*;
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],chimera start (Layla - based on FoE companion - female herm pc)
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],race 1 start
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],race 2 start
-			
+
 			[ "With pre-defined history:", null, false, "" ],
 			[ "Annetta", customAnnetta, true, "You're a rather well-endowed hermaphrodite that sports a thick, dog-knotted cock, an unused pussy, and a nice, stretchy butt-hole.  You've also got horns and demonic high-heels on your feet.  It makes you wonder why you would ever get chosen to be champion!" ],
 			[ "Ceveo", customCeveo, true, "As a wandering mage you had found your way into no small amount of trouble in the search for knowledge." ],
@@ -78,7 +78,7 @@ import classes.Items.*;
 			[ "Vahdunbrii", customVahdunbrii, true, "You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal." ],
 			[ "Zavos", customZavos, true, "You are a local sorcerer, with a deep affinity for the dark arts.  You were assigned the role of champion as punishment for a crime you never committed." ],
 		];
-		
+
 		private function customAnnetta():void {
 			outputText("You're a rather well-endowed hermaphrodite that sports a thick, dog-knotted cock, an unused pussy, and a nice, stretchy butt-hole.  You've also got horns and demonic high-heels on your feet.  It makes you wonder why you would ever get chosen to be champion!");
 			//Specific Character	"Gender: Herm
@@ -117,7 +117,7 @@ import classes.Items.*;
 			player.breastRows[0].breastRating = 28;
 			player.nippleLength = 5;
 			player.breastRows[0].lactationMultiplier += 20;
-			
+
 			//Equipment: Starts with spiked fist
 			player.setWeapon(weapons.S_GAUNT);
 			//Perks: Fighter and Lotsa Jizz"	Annetta
@@ -125,7 +125,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
 			player.cumMultiplier = 40;
 		}
-		
+
 		private function customAria():void {
 			outputText("It's really no surprise that you were sent through the portal to deal with the demons - you look enough like one as-is.  Your numerous fetish-inducing piercings, magical fox-tails, and bimbo-licious personality were all the motivation the elders needed to keep you from corrupting the village youth.");
 			//2/26/2013 8:18:21	rdolave@gmail.com	Character Creation	"female DD breasts feminity 100 butt size 5 hip size 5 body thickness 10 clit I would like her nipples pierced with Ceraphs piercing
@@ -168,11 +168,11 @@ import classes.Items.*;
 			player.setWeapon(weapons.SUCWHIP);
 			player.setArmor(armors.NURSECL);
 		}
-		
+
 		private function customBetram():void {
-			//Character Creation	
-			//herm, canine cock - 8", virgin, tight, wet	
-			//fox ears, tails, A cup breasts with normal nipples	Betram															
+			//Character Creation
+			//herm, canine cock - 8", virgin, tight, wet
+			//fox ears, tails, A cup breasts with normal nipples	Betram
 			player.ears.type = Ears.FOX;
 			player.tailType = Tail.FOX;
 			player.tailCount = 1;
@@ -191,7 +191,7 @@ import classes.Items.*;
 			}
 			outputText("You're quite the foxy herm, and as different as you were compared to the rest of Ingnam, it's no surprise you were sent through first.");
 		}
-		
+
 		private function customCeveo():void {
 			//Male. 2 cock. 5.5 average thickness and 12 in with excessive thickness both pierced with silver rings. Balls, large, about the size of a billiard ball, four of them. All humanish, more details on the character.
 			player.createCock();
@@ -222,13 +222,13 @@ import classes.Items.*;
 			player.nipplesPierced = 1;
 			player.nipplesPShort = "silver studs";
 			player.nipplesPLong = "Silver studs";
-				
+
 			player.skinTone = "ghostly pale";
 			player.createPerk(PerkLib.Incorporeality, 0, 0, 0, 0);
 			player.setArmor(armors.I_CORST);
 			player.level = 5;
 			player.setWeapon(weapons.W_STAFF);
-	
+
 			player.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Smart, 1, 0, 0, 0);
 			player.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
@@ -249,10 +249,10 @@ import classes.Items.*;
 			player.cor = 30;
 			outputText("As a wandering mage you had found your way into no small amount of trouble in the search for knowledge.  A strange tome here, a ritual there, most people found your pale form unsettling. They would be further troubled if they could see your feet!  Lets not even begin on the blood magic.  Yes, your interest in examining every aspect of magic has run you down a strange path, so when you wandered into Ingram and began to hear of the exile of the Champion, and the superstitions that surrounded it you were intrigued, as every little rumor and ritual often had a grain of truth.  You snuck into the cave prior to the ritual, where the old man supposedly led every Champion, and there you found a strange portal that emanated a certain degree of spacial transparency -  more than the portal's own.  Within it must have been a whole new world!  Throwing caution to the wind, your curiosities engulfing you, you dove in with nary a thought for the consequences.");
 		}
-		
+
 		private function customCharaun():void {
 			outputText("As a gifted fox with a juicy, thick knot, a wet cunt, and magical powers, you have no problems with being chosen as champion.");
-			//Herm, Fox Cock: (27"l x 1.4"w, knot multiplier 3.6), No Balls, Cum Multiplier: 7,500, Vaginal Wetness: 5, Clit length: 0.5, Virgin, Fertility: 15	9-tailed "enlightened" kitsune( a pure-blooded kitsune with the "Enlightened Nine-tails" perk and magic specials) 
+			//Herm, Fox Cock: (27"l x 1.4"w, knot multiplier 3.6), No Balls, Cum Multiplier: 7,500, Vaginal Wetness: 5, Clit length: 0.5, Virgin, Fertility: 15	9-tailed "enlightened" kitsune( a pure-blooded kitsune with the "Enlightened Nine-tails" perk and magic specials)
 			if(!player.hasCock()) player.createCock();
 			if(!player.hasVagina()) player.createVagina();
 			player.cocks[0].cockLength = 27;
@@ -296,7 +296,7 @@ import classes.Items.*;
 			player.setArmor(armors.BONSTRP);
 			player.setWeapon(weapons.S_BLADE);
 		}
-		
+
 		private function customCharlie():void {
 			outputText("You're strong, smart, fast, and tough.  It also helps that you've got four dongs well beyond what others have lurking in their trousers.  With your wings, bow, weapon, and tough armor, you're a natural for protecting the town.");
 			player.touStat.core.value += 2;
@@ -319,7 +319,7 @@ import classes.Items.*;
 			//Large feathered wings (Any chance in heck I could get 'angel' as the race descriptor? Just asking. I'm fine if the answer is 'no')
 			player.wings.type = Wings.FEATHERED_LARGE;
 			player.wings.desc = "large, feathered";
-			
+
 			//While we're on the subject, would glowing eyes be possible? I'll take normal eyes if not.
 			//Beautiful Sword
 			player.setWeapon(weapons.B_SWORD);
@@ -367,14 +367,14 @@ import classes.Items.*;
 			player.cocks[3].cockLength = 12;
 			player.cocks[3].cockThickness = 2;
 			player.cocks[3].cockType = CockTypesEnum.CAT;
-	
+
 			//A pair of 8-inch balls
 			player.balls = 2;
 			player.ballSize = 8;
 			//A virility boost would be nice too if possible.
 			player.cumMultiplier = 50;
 		}
-		
+
 		private function customCody():void {
 			outputText("Your orange and black tiger stripes make you cut a more imposing visage than normal, and with your great strength, armor, and claymore, you're a natural pick for champion.");
 			//well to start off the name would be Cody
@@ -388,9 +388,9 @@ import classes.Items.*;
 			player.strStat.core.value = 40;
 			player.setWeapon(weapons.CLAYMOR);
 		}
-		
+
 		private function customGalatea():void {
-			//"(Dangit Fenoxo!  Stop adding sexy must-have things to the game!  If it's not too late to update it I've added in that sexy new armor.  Thanks!)		
+			//"(Dangit Fenoxo!  Stop adding sexy must-have things to the game!  If it's not too late to update it I've added in that sexy new armor.  Thanks!)
 			//Other:
 			if(!player.hasVagina()) {
 				player.createVagina();
@@ -404,22 +404,22 @@ import classes.Items.*;
 			player.femininity = 90;
 			// Height: 5'4
 			player.tallness = 64;
-	
+
 			//Perks: Feeder, Strong Back, Strong Back 2
 			player.createStatusEffect(StatusEffects.Feeder,0,0,0,0);
 			player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
-	
+
 			player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0);
 			player.createPerk(PerkLib.StrongBack2, 0, 0, 0, 0);
 			player.createPerk(PerkLib.StrongBack3, 0, 0, 0, 0);
-	
-			//Equipment: 
+
+			//Equipment:
 			//Weapon: Warhammer
 			player.setWeapon(weapons.WARHAMR);
 			//Armor: Lusty shit
 			player.setArmor(armors.LMARMOR);
 			//player.createPerk(PerkLib.SluttySeduction, 10 + flags[kFLAGS.BIKINI_ARMOR_BONUS], 0, 0, 0);
-	
+
 			//Stats: (if possible)
 			//Strength: 90
 			player.strStat.core.value = 90;
@@ -436,13 +436,13 @@ import classes.Items.*;
 			player.itemSlot8.unlocked = true;
 			outputText("You've got large breasts prone to lactation.  You aren't sure WHY you got chosen as a champion, but with your considerable strength, you're sure you'll do a good job protecting Ingnam.");
 		}
-		
+
 		private function customGundam():void {
 			outputText("You're fabulously rich, thanks to a rather well-placed bet on who would be the champion.  Hopefully you can buy yourself out of any trouble you might get in.");
 			player.gems = 1500 + rand(1000);
 			//for my custom character profile i want the name to be gundam all i want is to start out with around 1000-2500 gems like as a gift from the elder or something to help me out.
 		}
-		
+
 		private function customHikari():void {
 			//Character Creation	If possible I would like a herm with a cat cock that is 10 inches by 4 inches. Anything else is up to you.	I would like a herm catmorph with two large d breasts and shoulder length hair. Also if possible I would like to start with some gel armor. Everything else is fair game.	Hikari
 			outputText("As a herm with a super-thick cat-cock, D-cup breasts, and out-of-this-world armor, you're a natural pick for champion.");
@@ -455,14 +455,14 @@ import classes.Items.*;
 			player.hairLength = 10;
 			player.setArmor(armors.GELARMR);
 		}
-		
+
 		private function customIsaac():void {
 			outputText("Born of a disgraced priestess, Isaac was raised alone until she was taken by illness.  He worked a number of odd jobs until he was eventually chosen as champion.");
 			//- gift: fast
 			player.speStat.core.value += 5;
 			player.tone += 10;
 			player.createPerk(PerkLib.Fast, 1, 0, 0, 0);
-			//- history: religion 
+			//- history: religion
 			if (!player.hasPerk(PerkLib.PastLifeReligious)) player.createPerk(PerkLib.HistoryReligious,0,0,0,0);
 			//(and if possible)
 			//- history: fighter
@@ -498,7 +498,7 @@ import classes.Items.*;
 			player.hairLength = 9;
 			player.hairColor = "silver-white";
 			//- human face
-			//- fox ears 
+			//- fox ears
 			player.ears.type = Ears.FOX;
 			//- olive complexion
 			player.skinTone = "olive";
@@ -510,7 +510,7 @@ import classes.Items.*;
 			player.thickness = 50;
 			//- body thickness of  around 50
 			player.tone = 70;
-			//- 'tone of about 70  
+			//- 'tone of about 70
 			//- two flat breasts each supporting one 0.2-inch nipple
 			player.nippleLength = 0.2;
 			player.createBreastRow();
@@ -525,10 +525,10 @@ import classes.Items.*;
 			//- robes
 			player.setArmor(armors.M_ROBES);
 		}
-		
+
 		private function customKatti():void {
 			outputText("You have big breasts with big, fuckable nipples on them, and no matter what, your vagina always seems to be there to keep you company.");
-			//Gender: Female	
+			//Gender: Female
 			if(!player.hasVagina()) {
 				player.createVagina();
 			}
@@ -542,7 +542,7 @@ import classes.Items.*;
 			player.nippleLength = 4.5;
 			player.breastRows[0].fuckable = true;
 		}
-		
+
 		private function customLeah():void {
 			player.setArmor(armors.LEATHRA);
 	//		if(!player.hasPerk(PerkLib.WizardsEndurance)) player.createPerk(PerkLib.WizardsEndurance,30,0,0,0);
@@ -592,7 +592,7 @@ import classes.Items.*;
 			player.tone = 30;
 			player.thickness = 65;
 		}
-		
+
 		private function customLucina():void {
 			//428347355782040	Character Creation	Female,wetness=wet, Looseness=normal,not a virgin, Fertility high i guess i dont really care can be up to you.	for her face normal human, ears i want Elvin, no tails, just normal skin, body thickness i want to be slender, body tone kinda athletic but not too much, hair i want really long i think like a 30 on the codex number i think and her hair color light blonde, i want her to have normal D size breast with you can choose how you want them really though i dont think i really care, nipple size i dont care, her skin color a fair light light color but not too pale, for her starting equipment i want im not sure what i want her to wear but basically i want a Elvin archer with a bow. so maybe you can do something about the clothing. i just want a Elvin character in the game since theres goblins plus another archer besides kelt a female one add to that.	Lucina
 			outputText("You're a blond, fair-skinned lass with a well-made bow and the skills to use it.  You have D-cup breasts and a very moist cunt that's seen a little action.  You're fit and trim, but not too thin, nor too well-muscled.  All in all, you're a good fit for championing your village's cause.");
@@ -614,10 +614,10 @@ import classes.Items.*;
 			//player.createKeyItem("Bow",0,0,0,0);
 			player.setWeaponRange(weaponsrange.BOWOLD_);
 		}
-		
+
 		private function customLukaz():void {
-			//Specific Character	
-			//Male. 11.5 inch dog dick, 4 balls, 2 inches in diameter.	
+			//Specific Character
+			//Male. 11.5 inch dog dick, 4 balls, 2 inches in diameter.
 			player.createCock();
 			player.cocks[0].cockLength = 11.5;
 			player.cocks[0].cockThickness = 2;
@@ -671,7 +671,7 @@ import classes.Items.*;
 			if (!player.hasPerk(PerkLib.PastLifeFighter)) player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 			player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
 		}
-		
+
 		private function customMara():void {
 			//#226096893686530
 			//For the custom PC Profile can you make a Bimbo Bunny girl (no bunny feet) (named Mara) dont really care about clothes i can get what i want pretty quickly and I change from time to time.
@@ -703,7 +703,7 @@ import classes.Items.*;
 			player.hairColor = "platinum blonde";
 			player.teaseLevel = 3;
 		}
-		
+
 		private function customMihari():void {
 			//[Values will be listed as if taken from Minerva]
 			//I'm kinda going under the assumption you are letting us go hog wild if not, take what's allowed and do what you wish out of what's below
@@ -714,7 +714,7 @@ import classes.Items.*;
 			player.speStat.core.value = 100;
 			player.intStat.core.value = 80;
 			player.libStat.core.value = 25;
-			
+
 			//Body Values:
 			//breastRows
 			player.createBreastRow();
@@ -752,14 +752,14 @@ import classes.Items.*;
 			player.thickness = 10;
 			player.tone = 75;
 			player.tongue.type = Tongue.HUMAN;
-			
+
 			//Posted everything above sorry if it wasn't supposed to go there.
 			//starting equipment: black leather armor surrounded by voluminous robes
 			//starting weapon: Spellblade if not gamebreaking otherwise spear is fine.
 			player.setArmor(armors.LTHRROB);
 			player.setWeapon(weapons.S_BLADE);
 		}
-		
+
 		private function customMirvanna():void {
 			//Any equine or dragonny attributes accompanying it a big plus! As I'm a dragon-unicorn furry (Qilin~). Bonus points if you add a horns type for unicorn horns.
 			outputText("You're an equine dragon-herm with a rather well-proportioned body.  Ingnam is certainly going to miss having you whoring yourself out around town.  You don't think they'll miss cleaning up all the messy sex, though.");
@@ -797,7 +797,7 @@ import classes.Items.*;
 			player.skinTone = "brown";
 			player.hairColor = "black";
 			player.skin.growFur({});
-			//Legs/Feet = Digigrade hooved 
+			//Legs/Feet = Digigrade hooved
 			player.lowerBody = LowerBody.HOOFED;
 			//Wing type = Dragon
 			player.wings.type = Wings.DRACONIC_LARGE;
@@ -809,7 +809,7 @@ import classes.Items.*;
 			player.cocks[0].cockLength = 14;
 			player.cocks[0].cockThickness = 2.5;
 			//Vulva Type = Equine
-			
+
 			//Beautiful Sword & Wizard Robe
 			player.setWeapon(weapons.B_SWORD);
 			player.setArmor(armors.W_ROBES);
@@ -819,7 +819,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeWhore)) player.createPerk(PerkLib.HistoryWhore,0,0,0,0);
 		}
-		
+
 		private function customNami():void {
 			//Female with the sand-trap black pussy
 			//Non-Virgin
@@ -859,7 +859,7 @@ import classes.Items.*;
 			//Starting Equipment: Wizard's Robe, Wizards Staff, and one White and one Black book in inventory.
 			//equipArmor("inquisitor's corset",false);
 			player.setArmor(armors.W_ROBES);
-	
+
 			player.setWeapon(weapons.W_STAFF);
 			//Gift Perk- Smarts
 			player.createPerk(PerkLib.Smart,1,0,0,0);
@@ -874,14 +874,14 @@ import classes.Items.*;
 			player.intStat.core.value = 40;
 			player.strStat.core.value = 20;
 			player.speStat.core.value = 25;
-			
+
 			clearOutput();
 			outputText("Your exotic appearance caused you some trouble growing up, but you buried your nose in books until it came time to go through the portal.");
 		}
-		
+
 		private function customNavorn():void {
 			outputText("There's been something special about you since day one, whether it's your numerous sexual endowments or your supernatural abilities.  You're a natural pick for champion.");
-			//Character Creation	"Herm same number and types of cocks from email sent earlier. 
+			//Character Creation	"Herm same number and types of cocks from email sent earlier.
 			//Special abilities: Fire breath, fox fire?
 			player.createPerk(PerkLib.DragonFireBreath,0,0,0,0);
 			player.createPerk(PerkLib.DragonIceBreath,0,0,0,0);
@@ -972,7 +972,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.EnlightenedKitsune,0,0,0,0);
 			player.createPerk(PerkLib.EnlightenedNinetails,0,0,0,0);
 		}
-		
+
 		private function customNixi():void {
 			//-Perks
 			//fertility AND messy orgasm (hope that's not pushing it)
@@ -990,7 +990,7 @@ import classes.Items.*;
 			//no balls
 			//virgin pussy, 0.2"" clit
 			//wetness 2
-			//fertility 30 
+			//fertility 30
 			//virgin bum
 			//anal wetness 1
 			player.ass.analWetness = 2;
@@ -1052,7 +1052,7 @@ import classes.Items.*;
 			player.lowerBody = LowerBody.DOG;
 			player.tailType = Tail.DOG;
 			player.ears.type = Ears.DOG;
-			////"	"I'm picturing a tall, feminine German-Shepherd morph, solid white and gorgeous. She has both sets of genitals, with no balls, and a large set of breasts. She wields a large claymore and is dressed in a full chain vest and pants. 
+			////"	"I'm picturing a tall, feminine German-Shepherd morph, solid white and gorgeous. She has both sets of genitals, with no balls, and a large set of breasts. She wields a large claymore and is dressed in a full chain vest and pants.
 			//large claymore (and the strength to use it)
 			player.setWeapon(weapons.CLAYMOR);
 			player.strStat.core.value = 40;
@@ -1060,7 +1060,7 @@ import classes.Items.*;
 			player.setArmor(armors.FULLCHN);
 			outputText("As a German-Shepherd morph, the rest of the village never really knew what to do with you... until they sent you through the portal to face whatever's on the other side...");
 		}
-		
+
 		private function customPrismere():void {
 			//Specific Character	Female, virgin, high fertility, tight with standard wetness and clit.
 			player.createVagina();
@@ -1071,8 +1071,8 @@ import classes.Items.*;
 			//Perk is speed, she was a scout, and it'd be neat (if possible) to give her something akin to the Runner perk. She might not start out very strong or tough, but at least she's fast.
 			player.createPerk(PerkLib.Fast, 1, 0, 0, 0);
 			player.createPerk(PerkLib.Runner, 0, 0, 0, 0);
-			//In the human world, Prismere began as a scout, helping patrol areas with portals to make sure demonspawn and corruption didn't reach the human homeland. She's gotten herself into a few tight spots because of it, but she's hard to keep pinned down. She has a fiance back in her village whom she fully intends to get back to, so her libido isn't especially high. 
-			//As of the time the PC takes her on, she has some signs of demonic taint, so Corruption might start at 5 to 10 points."	"Breasts at E, height at 5'0, a curvy build with a more narrow waist and substantial hips and butt. Skin is olive, like a mocha, hair is long and wildly wavy, a deep red, and eyes are a stormy blue. Muscles are barely visible; what muscle she has is the lean build of a runner, not a fighter. Nipples aren't especially long, but more soft. 
+			//In the human world, Prismere began as a scout, helping patrol areas with portals to make sure demonspawn and corruption didn't reach the human homeland. She's gotten herself into a few tight spots because of it, but she's hard to keep pinned down. She has a fiance back in her village whom she fully intends to get back to, so her libido isn't especially high.
+			//As of the time the PC takes her on, she has some signs of demonic taint, so Corruption might start at 5 to 10 points."	"Breasts at E, height at 5'0, a curvy build with a more narrow waist and substantial hips and butt. Skin is olive, like a mocha, hair is long and wildly wavy, a deep red, and eyes are a stormy blue. Muscles are barely visible; what muscle she has is the lean build of a runner, not a fighter. Nipples aren't especially long, but more soft.
 			player.cor = 5;
 			player.createBreastRow();
 			player.breastRows[0].breastRating = 7;
@@ -1091,7 +1091,7 @@ import classes.Items.*;
 			player.tailType = Tail.DEMONIC;
 			//I feel really weird talking about all this, so if there's anything you need to change or can't do, or if I totally misinterpreted this, just shoot me an email! jordie.wierenga@gmail.com . Thanks in advance... I'm a big fan. "	Prismere
 		}
-		
+
 		private function customRannRayla():void {
 			//Specific Character	Virgin female.	Max femininity. Thin with a little muscle. Size C breasts. Long red hair. Light colored skin. 5'5" tall. 	Rann Rayla
 			outputText("You're a young, fiery redhead who\'s utterly feminine.  You've got C-cup breasts and long red hair.  Being a champion can\'t be that bad, right?");
@@ -1108,7 +1108,7 @@ import classes.Items.*;
 			player.tone = 65;
 			player.tallness = 65;
 		}
-		
+
 		private function customRope():void {
 			//529315025394020	Character Creation	Neuter (no genitals) "50-50 masculine-feminine ratio. Shark teeth."	Rope
 			outputText("Despite outward appearances, you're actually something of a neuter, with shark-like teeth, an androgynous face, and a complete lack of genitalia.");
@@ -1117,7 +1117,7 @@ import classes.Items.*;
 			player.femininity = 50;
 			player.faceType = Face.SHARK_TEETH;
 		}
-		
+
 		private function customSera():void {
 			outputText("You're something of a shemale - three rows of C-cup breasts matched with three, plump, juicy cocks.  Some decent sized balls, bat wings, and cat-like ears round out the package.");
 			player.touStat.core.value += 2;
@@ -1158,7 +1158,7 @@ import classes.Items.*;
 			//Gift: Lotz of Jizz
 			//History: Schooling
 			player.cumMultiplier = 11;
-	
+
 			player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 			//Apperance: Cat Ears, Large Bat Like Wings, 3 Rows of breasts (C cub, 0,2 nipples)
@@ -1171,7 +1171,7 @@ import classes.Items.*;
 			//Key Item: Deluxe Dildo
 			player.createKeyItem("Deluxe Dildo",0,0,0,0);
 		}
-		
+
 		private function customSiveen():void {
 			//Female
 			//Virgin
@@ -1214,7 +1214,7 @@ import classes.Items.*;
 			player.wisStat.core.value = 25;
 			outputText("You are a literal angel from beyond, and you take the place of a vilage's champion for your own reasons...");
 		}
-		
+
 		private function customSora():void {
 			//Character Creation	Female,virgin	A kitsune with a snake-like tongue	Sora
 			if(player.hasVagina()) player.vaginas[0].virgin = true;
@@ -1227,7 +1227,7 @@ import classes.Items.*;
 			else player.addStatusValue(StatusEffects.BonusVCapacity,1, 5 + rand(10));
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
-		
+
 		private function customGrigori():void {
 			//Character Creation	Male	A human with dragon bloodline	Grigori
 			player.createPerk(PerkLib.DragonIceBreath,0,0,0,0);
@@ -1252,7 +1252,7 @@ import classes.Items.*;
 			if (!player.hasPerk(PerkLib.PastLifeFortune)) player.createPerk(PerkLib.HistoryFortune,0,0,0,0);
 			outputText("You are a normal villager if not for that dragon cock and the ability to use an ice dragon's breath. That damn ancestor of yours had to go and fuck some dragoness, didn't he?");
 		}
-		
+
 		private function customSora2():void {
 			//Character Creation	Female,virgin	A human with kitsune bloodline	Sora
 			player.createPerk(PerkLib.BloodlineKitsune,0,0,0,0);
@@ -1261,7 +1261,7 @@ import classes.Items.*;
 			player.intStat.core.value = 30;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
-		
+
 		private function customSora3():void {
 			//Character Creation	Female,virgin	A human with cow/minotaur bloodline	Sora
 			player.createPerk(PerkLib.BloodlineMinotaur,0,0,0,0);
@@ -1270,7 +1270,7 @@ import classes.Items.*;
 			player.intStat.core.value = 30;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
-		
+
 		private function customVeseshe():void {
 			//Character Creation	Herm	A human with elf bloodline	Veseshe
 			player.createPerk(PerkLib.BloodlineElf,0,0,0,0);
@@ -1293,7 +1293,7 @@ import classes.Items.*;
 			if (!player.hasPerk(PerkLib.PastLifeWhore)) player.createPerk(PerkLib.HistoryScout,0,0,0,0);
 			outputText("The village sure liked to pierce their arrows into you. But with your natural agility and a bit of elven blood flowing in your veins they sure were trying...");
 		}
-		
+
 		private function customTeekna():void {
 			//Character Creation	Female,virgin	A human with goblin bloodline	Teekna
 			player.createPerk(PerkLib.BloodlineGoblin,0,0,0,0);
@@ -1323,7 +1323,7 @@ import classes.Items.*;
 			else player.addStatusValue(StatusEffects.BonusVCapacity,1, 5 + rand(10));
 			outputText("You were a pretty normal villager, the only oddity other people noticed was your dyed pink hair and yellow eyes. Your ancestor just couldn't keep it in his pants apparently. At least they left some goodies behind for you!");
 		}
-		
+
 		private function customSora6():void {
 			//Character Creation	Female,virgin	A human with raiju bloodline	Sora
 			player.createPerk(PerkLib.BloodlineRaiju,0,0,0,0);
@@ -1331,7 +1331,7 @@ import classes.Items.*;
 			player.intStat.core.value = 30;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
-		
+
 		private function customSora7():void {
 			//Character Creation	Female,virgin	A human with oni bloodline	Sora(tone at 100, fighter past story + second for fight too? oni beard necklace?)keeping titanic strength perk at any race score? start with this event perk?
 			player.createPerk(PerkLib.BloodlineOni,0,0,0,0);
@@ -1339,7 +1339,7 @@ import classes.Items.*;
 			player.intStat.core.value = 30;
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
-		
+
 		private function customTestChar():void {
 			player.XP = 500000;
 			player.level = 20;
@@ -1392,12 +1392,12 @@ import classes.Items.*;
 			player.lowerBody = LowerBody.HUMAN;
 			player.arms.type = Arms.HUMAN;
 			player.hairLength = 69.2;
-			player.hairType = 4;
+			player.hairType = Hair.ANEMONE;
 			//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
 			player.createStatusEffect(StatusEffects.Kelt,100,0,0,0);
-			
+
 			player.createKeyItem("Zetaz's Map", 0, 0, 0, 0);
-			
+
 			inventory.createStorage();
 			inventory.createStorage();
 			inventory.createStorage();
@@ -1441,45 +1441,45 @@ import classes.Items.*;
 			player.itemSlot2.setItemAndQty(consumables.L_PNKEG, 1);
 			player.itemSlot3.setItemAndQty(consumables.OVIELIX, 1);
 			player.itemSlot4.setItemAndQty(consumables.REPTLUM, 1);
-			
+
 			player.createStatusEffect(StatusEffects.TelAdre, 1, 0, 0, 0);
 			//player.createStatusEffect(StatusEffects.MetWhitney, 2, 0, 0, 0);
-			
+
 			// Izma
 			flags[kFLAGS.IZMA_FOLLOWER_STATUS] = 1;
-			
+
 			// Vapula
 			flags[kFLAGS.VAPULA_FOLLOWER] = 1;
-			
+
 			// Amily
 			//flags[kFLAGS.AMILY_FOLLOWER] = 2;
-			
+
 			// Jojo
 			//CoC.instance.monk = 5;
-			
+
 			// Bimbo Sophie
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] = 1;
-			
+
 			// Isabella
 			flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] = 1;
-			
+
 			// Latexy
 			flags[kFLAGS.GOO_SLAVE_RECRUITED] = 1;
 			flags[kFLAGS.GOO_NAME] = "Latexy";
 			flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
 			flags[kFLAGS.GOO_HAPPINESS] = 100;
 			flags[kFLAGS.GOO_OBEDIENCE] = 100;
-			
+
 			// Ceraph
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] = 1;
-			
+
 			// Holli
 			flags[kFLAGS.FUCK_FLOWER_LEVEL] = 4;
-			
+
 			// Milky
 			flags[kFLAGS.MILK_NAME] = "Milky";
 			flags[kFLAGS.MILK_SIZE] = 2;
-			
+
 			// Rubi Testing
 			//flags[kFLAGS.RUBI_SUITCLOTHES] = 1;
 			//flags[kFLAGS.RUBI_FETISH_CLOTHES] = 1;
@@ -1495,11 +1495,11 @@ import classes.Items.*;
 			//flags[kFLAGS.RUBI_INQUISITORS_CORSET] = 1;
 			flags[kFLAGS.RUBI_AFFECTION] = 75;
 			flags[kFLAGS.RUBI_INTRODUCED] = 1;
-			
+
 			// Bazaar
 			flags[kFLAGS.BAZAAR_ENTERED] = 1;
 		}
-		
+
 		private function customTyriana():void {
 			outputText("Your many, posh tits, incredible fertility, and well-used cunt made you more popular than the village bicycle.  With your cat-like ears, paws, and tail, you certainly had a feline appeal.  It's time to see how you fare in the next chapter of your life.");
 			//"Gender: Female
@@ -1537,16 +1537,16 @@ import classes.Items.*;
 			player.breastRows[1].breastRating = 5;
 			player.breastRows[2].breastRating = 4;
 			player.nippleLength = 3.5;
-			//Perks: Slut and Fertile"	
-			
+			//Perks: Slut and Fertile"
+
 			player.speStat.core.value += 3;
 			player.intStat.core.value += 2;
-	
+
 			if (!player.hasPerk(PerkLib.PastLifeSlut)) player.createPerk(PerkLib.HistorySlut, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 			player.teaseLevel = 3;
 		}
-		
+
 		private function customVahdunbrii():void {
 			player.createBreastRow();
 			player.createVagina();
@@ -1598,7 +1598,7 @@ import classes.Items.*;
 			player.faceType = Face.SPIDER_FANGS;
 			player.hairLength = 69.2;
 			player.hairColor = "dark blue";
-			player.hairType = 2;
+			player.hairType = Hair.GHOST;
 			player.skinAdj = "smooth";
 			player.skinTone = "sanguine";
 			player.tallness = 68;
@@ -1655,7 +1655,7 @@ import classes.Items.*;
 			player.gems += 300;
 			outputText("You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal.");
 		}
-		
+
 		private function customZavos():void {
 			player.createCock();
 			player.balls = 2;
@@ -1700,22 +1700,22 @@ import classes.Items.*;
 			outputText("You have been fascinated with magic as long as you can remember.  The villagers humored this at first, regaling you with stories about mages of old and providing â€œspellbooksâ€� that were more superstition than fact.  When you learned to cast whitefire without any instruction, the villagers got worried. Your salvation came in the form of a traveling mage, a hero himself in his youth. He provided the apprenticeship you craved and focused your eccentricities into mastering the art of magical healing.  While you had earned yourself a respectable livelihood well before your coming of age, your fascination with the unnatural has always unnerved your friends and neighbors.  One year, an unknown disease passed through the town.  You saw this peculiar sickness as a challenge, and devised a spell to neutralize it.  ");
 			outputText("While you saved several lives, a handful of villagers died before you bested the plague. Rumors spread that you used their deaths to fuel unnatural rituals, bringing all the fear and suspicion focused on you over the years to a crux.  Your trial was swift, but you accepted the outcome without a second thought.  Whatever lay beyond that portal, you knew it would fall to your powers.");
 		}
-		
+
 		private function customKitteh6660():void { //Not yet implemented.
-			
+
 		}
-		
+
 		private function customEtis():void {
 			// Herm kitsune-dragon with 3 tentacle cocks. And tentacle hair. And tentacle (well, draconic, but sort of) tongue.
 			// Was really struggling between dragonne and kitsune for alter ego character, 'cause feline body is more appealing, but kitsune's magic affinity turns the scales.
-			
+
 			// ascension cleanup
-			while (player.hasVagina())			
+			while (player.hasVagina())
 				player.removeVagina();
-			while (player.hasCock())			
-				player.removeCock(0, 1);				
-			while (player.bRows() > 1)			
-				player.removeBreastRow(0, 1);			
+			while (player.hasCock())
+				player.removeCock(0, 1);
+			while (player.bRows() > 1)
+				player.removeBreastRow(0, 1);
 
 			player.createVagina();
 			player.vaginas[0].vaginalLooseness = 0;
@@ -1724,11 +1724,11 @@ import classes.Items.*;
 			player.createStatusEffect(StatusEffects.BonusVCapacity, 8000, 0, 0, 0); // Vag of Holding kitsune trait
 			player.clitLength = 0.3;
 			player.fertility = 5;
-			
-			if (player.bRows() == 0) player.createBreastRow();			
+
+			if (player.bRows() == 0) player.createBreastRow();
 			player.breastRows[0].breastRating = 1; // a-cup, 'cause huge boobs wouldn't fit your small frame... in fact, you almost considered to have flats
 			player.breastRows[0].fuckable = true; // some people have hammerspace to store gear when they don't need it, and you are jealous. from other side, you have cockspace to store cocks when you need them!
-			
+
 			player.ballSize = 0;
 			player.balls = 0;
 			player.cumMultiplier = 100; // don't ask how it works, copyright for this potion was sold for Joey
@@ -1773,20 +1773,20 @@ import classes.Items.*;
 			if (debug) {
 				if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 100, 0, 0, 0); // Kelt, you are dick.
 				player.setWeaponRange(weaponsrange.BOWOLD_);
-				flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4; // Raphael is too picky, and also pretty much unfinished - you can't continue training after chase scene.			
-				if (player.teaseLevel < 3) player.teaseLevel = 3; }			
-			
+				flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4; // Raphael is too picky, and also pretty much unfinished - you can't continue training after chase scene.
+				if (player.teaseLevel < 3) player.teaseLevel = 3; }
+
 			// almost compulsive hoarder, start with backpack, chests and racks... never enough storage space
 			if (!player.hasPerk(PerkLib.StrongBack)) { player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0); player.itemSlot6.unlocked = true; }
 			if (!player.hasPerk(PerkLib.StrongBack2)) { player.createPerk(PerkLib.StrongBack2, 0, 0, 0, 0); player.itemSlot7.unlocked = true; }
 			if (!player.hasPerk(PerkLib.StrongBack3)) { player.createPerk(PerkLib.StrongBack3, 0, 0, 0, 0); player.itemSlot8.unlocked = true; }
-			var i:int = 0;			
-			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 5, 0, 0, 0);			
-			if (player.hasKeyItem("Camp - Chest") < 0) { player.createKeyItem("Camp - Chest", 0, 0, 0, 0); for (i = 0; i < 6; i++) inventory.createStorage(); }			
-			if (player.hasKeyItem("Camp - Murky Chest") < 0) { player.createKeyItem("Camp - Murky Chest", 0, 0, 0, 0); for (i = 0; i < 4; i++) inventory.createStorage(); }			
-			if (player.hasKeyItem("Camp - Ornate Chest") < 0) { player.createKeyItem("Camp - Ornate Chest", 0, 0, 0, 0); for (i = 0; i < 4; i++) inventory.createStorage(); }			
-			if (player.hasKeyItem("Equipment Rack - Weapons") < 0) { player.createKeyItem("Equipment Rack - Weapons", 0, 0, 0, 0); flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1; }			
-			if (player.hasKeyItem("Equipment Rack - Armor") < 0) { player.createKeyItem("Equipment Rack - Armor", 0, 0, 0, 0); flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1; }			
+			var i:int = 0;
+			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 5, 0, 0, 0);
+			if (player.hasKeyItem("Camp - Chest") < 0) { player.createKeyItem("Camp - Chest", 0, 0, 0, 0); for (i = 0; i < 6; i++) inventory.createStorage(); }
+			if (player.hasKeyItem("Camp - Murky Chest") < 0) { player.createKeyItem("Camp - Murky Chest", 0, 0, 0, 0); for (i = 0; i < 4; i++) inventory.createStorage(); }
+			if (player.hasKeyItem("Camp - Ornate Chest") < 0) { player.createKeyItem("Camp - Ornate Chest", 0, 0, 0, 0); for (i = 0; i < 4; i++) inventory.createStorage(); }
+			if (player.hasKeyItem("Equipment Rack - Weapons") < 0) { player.createKeyItem("Equipment Rack - Weapons", 0, 0, 0, 0); flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1; }
+			if (player.hasKeyItem("Equipment Rack - Armor") < 0) { player.createKeyItem("Equipment Rack - Armor", 0, 0, 0, 0); flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1; }
 			// have lots of different traits
 			if (!player.hasPerk(PerkLib.PastLifeReligious) && !player.hasPerk(PerkLib.HistoryReligious)) player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0); // abandoned religion after obtaining nine tails and being disappointed in achieved enlightment
 			if (!player.hasPerk(PerkLib.PastLifeFighter) && !player.hasPerk(PerkLib.HistoryAlchemist)) player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0); // and resorted to your hobby - alchemy
@@ -1825,32 +1825,32 @@ import classes.Items.*;
 			player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
 			player.createPerk(PerkLib.MagicMetabolism, 0, 0, 0, 0);
 			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
-			
+
 			// you still aren't sure about gender preferences, but have some stashed eggs just in case... [why almost all inventory functions are private?]
 			if (player.itemSlot1.isEmpty())  player.itemSlot1.setItemAndQty(consumables.L_PNKEG, 1); // if you want to get rid of tentacles, but still maintain dragon one you'll have to find Ceraph
 			if (player.itemSlot2.isEmpty())  player.itemSlot2.setItemAndQty(consumables.L_BLUEG, 1);
-			if (debug && player.itemSlot3.isEmpty())  player.itemSlot3.setItemAndQty(consumables.REDUCTO, 5); 			
-			if (debug && player.itemSlot4.isEmpty())  player.itemSlot4.setItemAndQty(consumables.GROPLUS, 5); 
-			
+			if (debug && player.itemSlot3.isEmpty())  player.itemSlot3.setItemAndQty(consumables.REDUCTO, 5);
+			if (debug && player.itemSlot4.isEmpty())  player.itemSlot4.setItemAndQty(consumables.GROPLUS, 5);
+
 			player.earsPierced = 1;
 			player.earsPShort = "crimstone earrings";
 			player.earsPLong = "Crimstone earrings";
 			player.createPerk(PerkLib.PiercedCrimstone, 5, 0, 0, 0); // with Omnibus' Gift it would give 50 min lust... perfect!
-			
+
 			player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0); // to compliment history
-			
+
 			if (debug) { player.createStatusEffect(StatusEffects.TelAdre, 1, 1, 0, 0); flags[kFLAGS.BAZAAR_ENTERED] = 1; } // small straightforward cheating
-			
+
 			player.hoursSinceCum = 0;
 			player.fatigue = 0;
 			player.HP = EngineCore.maxHP();
-			
+
 			player.gems += 20;
-			
+
 			outputText("You are young (by kitsune measure), but very talented.\n\nFormer priestess, you abandoned religion after obtaining nine tails due to disappointment in achieved enlightment and resorted to your hobby - alchemy.\n\nYou tried to improve your body with controlled transformations, and mostly successfull. Now you are half-dragon, and while most changes are hidden inside your body, you still possess magnificent wings, imposing horns, incredibly long tongue and odd cock. Sharing common for kitsune tentacle obsession, you was unable to resist temptation, and now you have 3 tentacle cocks and venomous tentacle hair. Otherwise you body is mostly what you would expect from kitsune - cute, graceful and having capacity, straightforward impossible for your thin and small 4 foot frame.\n\nWith both religious and alchemical training you are skilled healer, able to treat wounds and poisonings alike. Your kitsune's trickster nature and pervert inclinations are making you susceptable to corruption, but at the same time your enlightment keeps you from really turning into demon, so corruption level does not really affect you much. Even with your willpower and religious training you sometimes struggle to restrain your impulse, and you always are ready for something very lewd. With your knowledge of healing and innatural body it is easy for you to enjoy things which would be really painful for others, and you are always ready to return favor. Still, you tend to care about mutual enjoyment - there are difference between extreme entertainment and torture, and you are mischievous, not evil. Natural gift, strong even by kitsune's measures and complimented by nine tails, granted you with very strong magic affinity, so you can cast spells not exhausting yourself even without enchanted robe, but despite strong magic affinity you wasn't actually much interested in combat magic before, so only can use fox fire as offensive spell.\n\nYour experiments left some strange effects within your body. Some are nice (you have unusually fast regeneration), some are strange (you can shift to incorporeality for a few seconds and even try to possess someone while in this state), and some brought more problems than benefits (insignificant improvement in magic power came with crippling penalty for your physical abilities).\n\nAlso, you are almost compulsive hoarder, so you developed ability to carry and store huge amount of things.\n\nNow you want to give your new body thorough test run, and portal to demon infested world looks appealing. No one said that common sense is one of your strong sides...\n\nTroublesome villagers near portal had strange demands about things which you can carry to other side, but you managed to conceal magic whip, so you wouldn't be unarmed, bud damned (literally) thing takes it's toll on user.\n\nYou still aren't really sure about your gender - having both sets doubles the fun, you still are a bit shy of your tentacles (that's main reason for your concealing clothes - your body is your doubtless masterpiece in all other parts), and being female in demon infested worlds tends to be a problem, so you decided to bring few transformative eggs, just in case.");
  		}
-		
-		private function customChimera():void {		
+
+		private function customChimera():void {
 			// This one is sort of challenge character. It is supposed to be mage, at least at start.
 			// always one vagina with random stats
 			player.createVagina();
@@ -1860,7 +1860,7 @@ import classes.Items.*;
 
 			player.clitLength = rand(3) == 0 ? (rand(10)+1)*0.25 : 0.25; // from 0.25 to 2.5
 			player.fertility = (rand(5)+1)*5; // from 5 to 25 with 5 step
-			
+
 			// 1-4 breast rows, from flats to dd sized
 			var row:Number = 0;
 			do{
@@ -1872,16 +1872,16 @@ import classes.Items.*;
 				player.breastRows[row].breastRating = player.breastRows[row-1].breastRating - rand(2); // lower rows are same size or one size smaller than upper
 			row++;
 			}while(row < 4 && rand(2) == 0 && player.breastRows[0].breastRating > 1); // if last row was flat do not add more
-						
+
 			var tent:Boolean = rand(5) == 0; // 20% chance to have tentacle cluster
 			var cocks:Number = rand(5)+(tent ? 4 : 2); // 2-6 mixed cocks
-			var i:int; 
-			for (i = 0; i < cocks; i++) 
+			var i:int;
+			for (i = 0; i < cocks; i++)
 			{
 				player.createCock();
 				player.cocks[i].cockLength = Math.round((rand(220)/10+3)*10)/10; // 3-25 inches
 				player.cocks[i].cockThickness = Math.round((rand(player.cocks[i].cockLength)/10+1)*10)/10;
-				var type:Number = rand(90);			
+				var type:Number = rand(90);
 				if (tent)
 					player.cocks[i].cockType = CockTypesEnum.TENTACLE;
 				else if(type < 25) // high chance
@@ -1916,13 +1916,13 @@ import classes.Items.*;
 					player.cocks[i].knotMultiplier = 1.5;
 				}
 				else
-					player.cocks[i].cockType = CockTypesEnum.PIG;				
-					
+					player.cocks[i].cockType = CockTypesEnum.PIG;
+
 				if (player.cocks[i].knotMultiplier == 1 && rand(5) == 0)
 					player.cocks[i].knotMultiplier = 1.2 + rand(9) / 10.;
 			}
-			
-			
+
+
 			// 40% to have no balls, 40% to one pair, 20% to 2 pairs
 			var balls:Number = rand(5);
 			if(balls <= 1){player.balls = 0;}
@@ -1930,7 +1930,7 @@ import classes.Items.*;
 			else if(balls == 4){player.balls = 4;}
 			if(player.balls>0)player.ballSize = rand(4)+1;
 			player.cumMultiplier = 5+player.ballSize*player.balls*2.5+rand(25);
-			
+
 			player.ass.analLooseness = rand(3);
 			player.ass.analWetness = rand(3)+1;
 
@@ -1946,14 +1946,14 @@ import classes.Items.*;
 			player.femininity = rand(30)+35;
 			player.beardLength = 0;
 			player.beardStyle = 0;
-			
+
 			// wrecked body and obsessed mind...
 			player.intStat.core.value = 60;
 			//player.sens = 15;
 			//player.lib = 15;
 			player.cor += 2;
 
-			var skin:Number = rand(100);			
+			var skin:Number = rand(100);
 			if(skin < 50){
 				player.skin.restore(); // skin, 50%
 			} else if(skin < 80){
@@ -1963,12 +1963,12 @@ import classes.Items.*;
 			} else{
 				player.skin.base.type = Skin.GOO; // goo, 5%
 			}
-					
+
 			if(rand(3) != 0) // 2/3 to have human face
 				player.faceType = Face.HUMAN;
 			else // totally random one
 				player.faceType = rand(20)+1; // since it is not a enum, it is impossible to make it auto-adjust...
-				
+
 			if(player.faceType == Face.SPIDER_FANGS && rand(2) == 0)
 					player.eyes.type = Eyes.FOUR_SPIDER_EYES; // 50% to have spider eyes with spider fangs
 			else if(rand(20) == 0) // 5% for inhuman eyes otherwise
@@ -1999,7 +1999,7 @@ import classes.Items.*;
 				else if (rand(15) == 0)
 					player.legCount = 4;
 			}
-			
+
 			player.tailType = rand(21); // always have totally random tail
 			if(player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.BEE_ABDOMEN)
 			{ // insect abdomens comes with poison
@@ -2008,14 +2008,14 @@ import classes.Items.*;
 				if(player.tailType == Tail.SPIDER_ADBOMEN && rand(2)==0)
 					player.createPerk(PerkLib.SpiderOvipositor, 0, 0, 0, 0); // spider abdomen have chance 50/50 to have ovipositor
 			}
-			
+
 			// 70% normal tongue, 30% to non-human with even chances of every one
 			if(rand(100)<70)
 				player.tongue.type = Tongue.HUMAN;
 			else
 				player.tongue.type = randomChoice(Tongue.DEMONIC, Tongue.DRACONIC, Tongue.SNAKE);
-			
-			
+
+
 			var horns:Number = rand(100); // 70% no horns, 30% to random
 			if(horns<70)
 				player.horns.type = Horns.NONE;
@@ -2029,7 +2029,7 @@ import classes.Items.*;
 			else{
 				player.horns.type = Horns.DRACONIC_X2;
 				player.horns.count = 2;}
-			
+
 			var wings:Number = rand(4); // always have wings to fly... small boon to make up for lack of fighting power
 			if(wings == 0){
 				player.wings.type = Wings.BAT_LIKE_LARGE;
@@ -2043,8 +2043,8 @@ import classes.Items.*;
 			else{
 				player.wings.type = Wings.GIANT_DRAGONFLY;
 				player.wings.desc = "giant dragonfly";}
-				
-			
+
+
 			var arms:Number = rand(100); // if have harpy wings 33% chance to have harpy hands, otherwise 5% to have spider hands
 			if(player.wings.type == Wings.FEATHERED_LARGE && rand(4) == 0)
 				player.arms.type = Arms.HARPY;
@@ -2052,16 +2052,16 @@ import classes.Items.*;
 				player.arms.type = Arms.SPIDER;
 			else
 				player.arms.type = Arms.HUMAN;
-			
-			
+
+
 			// 90% to have normal hair, even chances to have feathers, anemone or goo otherwise
 			if(rand(100) < 90)	player.hairType = Hair.NORMAL;
 			else player.hairType = randomChoice(Hair.FEATHER, Hair.GOO, Hair.ANEMONE);
-			
+
 			// wizard staff and modest robes
 			player.setWeapon(weapons.W_STAFF);
 			player.setArmor(armors.M_ROBES);
-			
+
 			// have some perks from past
 			player.createPerk(PerkLib.Smart, 1, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
@@ -2069,7 +2069,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Mage, 0, 0, 0, 0);
 			player.createPerk(PerkLib.SpellcastingAffinity, 50, 0, 0, 0);
-			
+
 			// and knows white magic
 			player.createStatusEffect(StatusEffects.KnowsCharge,0,0,0,0);
 			player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
@@ -2080,10 +2080,10 @@ import classes.Items.*;
 			player.HP = EngineCore.maxHP();
 
 			player.gems += 15+ rand(55);
-			
+
 			outputText("Your body is wrecked by your own experiments with otherworldly transformation items, and now you have no more money to buy any more from smugglers... But you would make your body as strong as your will. Or die trying.");
 		}
-		
+
 	}
 
 }

@@ -1,4 +1,4 @@
-package classes.Scenes.Places.Bazaar 
+package classes.Scenes.Places.Bazaar
 {
 import classes.*;
 import classes.BodyParts.Antennae;
@@ -16,6 +16,7 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.*;
 import classes.lists.Gender;
+import classes.CoC;
 
 /**
 	 * The Black Cock by Foxxling
@@ -23,12 +24,12 @@ import classes.lists.Gender;
 	 */
 	public class BlackCock extends BazaarAbstractContent
 	{
-		
-		public function BlackCock() 
+
+		public function BlackCock()
 		{
-			
+
 		}
-		
+
 		//Will eventually be used to display sprites.
 		public function displayAnitaSprite():void {
 			//Anita's sprite code goes here
@@ -42,12 +43,12 @@ import classes.lists.Gender;
 		public function displayFridaSprite():void {
 			//Frida's sprite code goes here
 		}
-		
+
 		public function blackCockDescription():void {
 			if (isHolidays()) outputText("\n\nThere is also a large marquee-style tent made with black canvas. Smoke rises out of an open flap in the rear. There is a wooden sign next to the front flap depicting a small black rooster; beneath its yellow feet the words \"The Black Cock\" are etched into the old sign. Around the sign there is a festive Christmas wreath with flickering candles. The smell of greasy food and sweets wafts out of the open entrance.");
 			else outputText("\n\nThere is also a large marquee-style tent made with black canvas. Smoke rises from a metal pipe sticking out of a hole in the top. You see a wooden sign next to the front flap depicting a small black rooster; beneath its yellow feet the words \"The Black Cock\" are etched into the old sign. The smell of greasy food and sweets wafts out of the open entrance.");
 		}
-		
+
 		public function enterTheBlackCock():void {
 			clearOutput();
 			spriteSelect(-1);
@@ -60,10 +61,10 @@ import classes.lists.Gender;
 			//Staff descriptor
 			if (flags[kFLAGS.BLACK_COCK_MET_ANITA] == 0) outputText("\n\nThere is a harpy lady sitting next to a sign promising she'll sing if you pay her 5 gems.");
 			else outputText("\n\nAnita sits next to a sign promising she'll sing for you if you pay her 5 gems.");
-			
+
 			if (flags[kFLAGS.BLACK_COCK_MET_ANDY] == 0) outputText("\n\nThere is an odd satyr going about the place serving customers.");
 			else outputText("\n\nAndy walks around the tables serving customers.");
-			
+
 			if (flags[kFLAGS.BLACK_COCK_MET_FRIDA] == 0) outputText("\n\nThere is also an echidna-morph leaning on a counter towards the back of the tent.");
 			else outputText("\n\nFrida leans on a counter towards the back of the tent, looking a little bored.");
 			//General menu
@@ -73,7 +74,7 @@ import classes.lists.Gender;
 			addButton(2, "Patrons", checkPatrons);
 			addButton(14, "Leave", bazaar.enterTheBazaarAndMenu);
 		}
-		
+
 		//------------
 		// FOOD
 		//------------
@@ -89,7 +90,7 @@ import classes.lists.Gender;
 			addFoodToGo(consumables.SATYR_W, 10);
 			addFoodToGo(consumables.FR_BEER, 5);
 			addFoodToGo(consumables.GODMEAD, 100);
-			
+
 			outputText("\n\n<b><u>Special Meals</u></b>");
 			addFoodPlate("Rhino Steak", 10, "Despite the name, it doesn't come from any rhinoceros or a rhino-morph. We can guarantee you that no rhinoceros were harmed in the production of this food.\n\nDISCLAIMER: We are not responsible if you find yourself altered.", "When the satyr brings you your steak you can tell from the way it sizzles that it just came off the grill. You take a fork and knife and eat the succulent steak piece by juicy piece, enjoying the explosion of flavor as the tender, juicy meat disappears into your mouth and fills your belly.");
 			addFoodPlate("Echidna Cake", 10, "Try our special cake, a favorite among the echidna-morphs!\n\nDISCLAIMER: We are not responsible if you find yourself altered.", "You waste no time digging into the cake and it is absolutely delicious! Within moments every savory morsel is gone. Despite the generous size of the piece you were given you can't help wishing that there had been more.");
@@ -109,7 +110,7 @@ import classes.lists.Gender;
 			}
 			addButton(14, "Back", enterTheBlackCock);
 		}
-		
+
 		private function addFoodToGo(item:ItemType, price:int):void {
 			var button:int = 0;
 			for (var i:int = 0; i < 14; i++) {
@@ -118,7 +119,7 @@ import classes.lists.Gender;
 			outputText("\n" + capitalizeFirstLetter(item.longName) + " - " + price + " gems");
 			addButton(button, item.shortName, orderFoodToGo, item, price);
 		}
-		
+
 		private function orderFoodToGo(item:ItemType, gemCost:int):void {
 			clearOutput();
 			if (player.gems < gemCost) {
@@ -130,7 +131,7 @@ import classes.lists.Gender;
 			statScreenRefresh();
 			inventory.takeItem(item, checkFoodMenu);
 		}
-		
+
 		private function addFoodPlate(foodName:String, gems:int, tooltip:String, foodEatDesc:String):void {
 			var button:int = 0;
 			for (var i:int = 0; i < 14; i++) {
@@ -158,7 +159,7 @@ import classes.lists.Gender;
 			outputText("\n" + (header != "" ? header : foodName) + " - " + gems + " gems");
 			addButton(button, foodName, orderFoodPlate, foodName, gems, foodEatDesc, tooltip, header);
 		}
-		
+
 		private function orderFoodPlate(foodName:String, gemCost:int, foodEatDesc:String):void {
 			clearOutput();
 			if (player.gems < gemCost) {
@@ -175,7 +176,7 @@ import classes.lists.Gender;
 			statScreenRefresh();
 			eatFoodNomNom(foodName, foodEatDesc);
 		}
-		
+
 		private function eatFoodNomNom(foodName:String, foodEatDesc:String):void {
 			outputText(foodEatDesc);
 			switch(foodName) {
@@ -235,7 +236,7 @@ import classes.lists.Gender;
 			else player.changeStatusValue(StatusEffects.Fullness, 1, 4);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		//------------
 		// STAFF
 		//------------
@@ -280,7 +281,7 @@ import classes.lists.Gender;
 			}
 			addButton(14, "Back", enterTheBlackCock);
 		}
-		
+
 		//Anita Roswell
 		//------------
 		private function meetAnitaRoswell():void {
@@ -306,14 +307,14 @@ import classes.lists.Gender;
 			else addButtonDisabled(1, "Sex", "You aren't aroused enough to do that.");
 			addButton(4, "Nevermind", nevermindToAnita);
 		}
-		
+
 		private function nevermindToAnita():void {
 			clearOutput();
 			outputText("You decide not to take the slutty songbird up on her offer… either of them. You tell her you were just saying hi and she pouts slightly, \"<i>Well, if you need anything,</i>\" She leans in close and says in a sultry whisper, \"<i>... and I mean anything,</i>\" her eyes glance meaningfully towards your crotch, \"<i>...you don't hesitate to call me back over.</i>\"");
 			outputText("\n\nThen she leaves, walking back and swinging her ass every which way as she heads back to her stool.");
 			doNext(checkStaff);
 		}
-		
+
 		private function listenToAnitaSong():void {
 			clearOutput();
 			outputText(images.showImage("anita-song"));
@@ -364,7 +365,7 @@ import classes.lists.Gender;
 			flags[kFLAGS.BLACK_COCK_ANITA_SONGS_LISTENED]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function rompUpAnitaOffer():void {
 			clearOutput();
 			if (flags[kFLAGS.BLACK_COCK_ANITA_SEX_INTRO] == 0) {
@@ -387,7 +388,7 @@ import classes.lists.Gender;
 			else addButtonDisabled(2, "Sixty Nine", "You won't be able to do this with your unusual body shape.");
 			addButton(4, "Nevermind", nevermindToAnita);
 		}
-		
+
 		private function eagleFuckAnita():void { //Eagle fuck, must have wings
 			clearOutput();
 			outputText(images.showImage("anita-sex-eaglefuck"));
@@ -404,7 +405,7 @@ import classes.lists.Gender;
 				}
 				outputText("\n\nYou look down at the ground and realize there isn't much time for you to get your orgasm. With a snarl you grit your teeth, double down and fuck the little harpy's very accommodating pussy with rough needy strokes. Laughter as loud as screams come from her throat as you fuck her at full force until you feel the familiar tingling sensation of fluid rushing through your [cock].");
 				outputText("\n\nYou yell, a sound that rings with triumph and finality, as your [cock] explodes into Anita's already soaked pussy. You hold yourself inside of her, your trembling body stuck in that position as you flood Anita's more than accepting snatch with globs of baby batter, some of which flies behind the two of you, most of which is lost into your married fuck buddy's hungry pussy.");
-				outputText("\n\nOnce you're done you're spent; if it weren't for the whistling of the wind in your ears and the knowledge that doing so would result in your immediate death, you'd go to sleep right here. As it stands you, can't afford to do that, you have your mission… not to mention your desire to live long enough to do something like this again. The two of you break away, so as to make it easier to fly. "); 
+				outputText("\n\nOnce you're done you're spent; if it weren't for the whistling of the wind in your ears and the knowledge that doing so would result in your immediate death, you'd go to sleep right here. As it stands you, can't afford to do that, you have your mission… not to mention your desire to live long enough to do something like this again. The two of you break away, so as to make it easier to fly. ");
 				if (player.cumQ() >= 2500) outputText("Your chest swells with pride as you watch Anita fly, her snatch trailing a sticky trail of your glistening baby-batter as her swollen stomach and loosened lady parts empty.");
 			}
 			else { //Females (Sorry, no genderless)
@@ -422,7 +423,7 @@ import classes.lists.Gender;
 			flags[kFLAGS.BLACK_COCK_ANITA_SEX_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function vaginalFuckAnita():void { //Vaginal fuck, must have penis
 			clearOutput();
 			outputText(images.showImage("anita-sex-vaginalfuck"));
@@ -480,7 +481,7 @@ import classes.lists.Gender;
 			flags[kFLAGS.BLACK_COCK_ANITA_SEX_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function sex69Anita():void { //69 with Anita, must not be a taur.
 			clearOutput();
 			outputText(images.showImage("anita-sex-sixtynine"));
@@ -531,7 +532,7 @@ import classes.lists.Gender;
 			flags[kFLAGS.BLACK_COCK_ANITA_SEX_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		//Andy Mathis
 		//------------
 		private function meetAndyMathis():void {
@@ -560,13 +561,13 @@ import classes.lists.Gender;
 			else addButtonDisabled(1, "Sex", "You aren't aroused enough to consider this.");
 			addButton(4, "Nevermind", nevermindToAndy);
 		}
-		
+
 		private function nevermindToAndy():void {
 			clearOutput();
 			outputText("You decide to not take Andy up on his offer or make any offers of your own so you tell him you'll call him back over when you're actually ready. He nods and with a charming smile leaves you to it.");
 			doNext(checkStaff);
 		}
-		
+
 		private function checkAndyStash():void {
 			clearOutput();
 			if (flags[kFLAGS.BLACK_COCK_ANDY_STASH_STATE] == 0) {
@@ -590,7 +591,7 @@ import classes.lists.Gender;
 			}
 			doYesNo(smokeSomeHookah, dontSmokeItsBad);
 		}
-		
+
 		private function smokeSomeHookah():void {
 			clearOutput();
 			if (player.gems < 5) {
@@ -647,7 +648,7 @@ import classes.lists.Gender;
 			addButton(0, "Grab It", grabAndysDongAfterSmoking).hint("That cock looks fun to play with!");
 			addButton(1, "Do Nothing", doNothingAfterSmoking);
 		}
-		
+
 		private function doNothingAfterSmoking():void {
 			clearOutput();
 			outputText("You can't help laughing at the horny satyr's predicament as he exhales, this time creating a female dog morph, her fingers attached to her wispy snatch, \"<i>Yeah,</i>\" He says with a grin, \"<i>I gotta start wearing pants.</i>\"");
@@ -658,7 +659,7 @@ import classes.lists.Gender;
 			dynStats("lus", 10 + (player.lib / 5) + (player.cor / 10));
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function grabAndysDongAfterSmoking():void {
 			clearOutput();
 			outputText("Feeling adventurous you wrap a hand around the foot long doggy dong standing at attention next to you. Andy gives a soft gasp as you squeeze his hot dick. After giving it a few pumps he gently tugs your hand off of his leaking dog cock.");
@@ -707,7 +708,7 @@ import classes.lists.Gender;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function dontSmokeItsBad():void { //Remember kids, don't do drugs!
 			clearOutput();
 			outputText("With a shake of your head you tell Andy you don't want to smoke today. He doesn't press you about it, he simply flicks the lighter and pulls the little glass pipe towards his mouth. He stops midway and looks over at you. One of his dark eyebrows rises as he says, \"<i>Well um… you can stay if you want. I'm just gonna take a quick couple hits and head back to work. It'd be cool to have someone to talk to though, I feel kinda weird smoking alone.</i>\"");
@@ -716,7 +717,7 @@ import classes.lists.Gender;
 			addButton(0, "Stay", stayAfterNoSmoke);
 			addButton(1, "Leave", leaveAfterNoSmoke);
 		}
-		
+
 		private function stayAfterNoSmoke():void {
 			clearOutput();
 			outputText("You tell the satyr that you don't mind staying and keeping him company.");
@@ -743,7 +744,7 @@ import classes.lists.Gender;
 			addButton(2, "Rim my Ass", haveAndyRimYouOmgItsGross).hint("Have Andy rim your ass. \n\nNOTE: Contains rimjob! You have been warned.");
 			addButton(4, "Do Nothing", declineAndyOral);
 		}
-		
+
 		private function haveAndySuckYouOff():void {
 			clearOutput();
 			outputText(images.showImage("andy-sex-blowjob"));
@@ -800,7 +801,7 @@ import classes.lists.Gender;
 			flags[kFLAGS.BLACK_COCK_ANDY_ORAL_GIVEN]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function haveAndyLickYouOut():void {
 			clearOutput();
 			outputText(images.showImage("andy-sex-cunnilingus"));
@@ -819,7 +820,7 @@ import classes.lists.Gender;
 			flags[kFLAGS.BLACK_COCK_ANDY_ORAL_GIVEN]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function haveAndyRimYouOmgItsGross():void {
 			clearOutput();
 			outputText(images.showImage("andy-sex-rimjob"));
@@ -851,19 +852,19 @@ import classes.lists.Gender;
 			flags[kFLAGS.BLACK_COCK_ANDY_ORAL_GIVEN]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function declineAndyOral():void {
 			clearOutput();
 			outputText("Despite his obvious flirtation you're not really interested in his oral skills at the moment. After a few seconds of awkward silence he takes one last deep drag and blows more smokey shapes. The pleasing scent washes over you whenever he does and soon you're light headed and happy. After chatting with the satyr about nothing important he decides he has to get back to work. He lets you out of the large swinging gate and you wave goodbye as you depart for camp.");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function leaveAfterNoSmoke():void {
 			clearOutput();
 			outputText("You tell the satyr that you think you'd best be leaving. He smiles as he toys with his lighter before saying, \"<i>Alright… Feel free to come back whenever you want [name].</i>\"");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function rompUpWithAndyTheSatyr():void {
 			clearOutput();
 			if (flags[kFLAGS.BLACK_COCK_ANDY_SEX_COUNTER] == 0) {
@@ -883,7 +884,7 @@ import classes.lists.Gender;
 			else addButtonDisabled(0, "Fuck Him", "You will need a penis for that.");
 			addButton(1, "Get Fucked", haveAndyFuckYouPrompt).hint("Get Andy to fuck you good!");
 		}
-		
+
 		private function fuckAndyTheSatyr():void {
 			clearOutput();
 			outputText(images.showImage("andy-sex-analpitch"));
@@ -923,7 +924,7 @@ import classes.lists.Gender;
 					if (player.cockTotal() == 2) outputText("He takes your remaining [cock 2] into his hand and fists it with a sure and practiced hand. ");
 					else if (player.cockTotal() > 2) outputText("He takes two of your remaining dicks and fists them with two sure and practiced hands. ");
 					outputText("\n\nHe doesn’t choke or gag or even flinch when the sensation of his dick pleasing machinations cause you to thrust into his mouth. Throwing caution and decorum to the wind you grab a fist full of curly hair and pull the little sub up and down your [cock], roughly fucking his throat as strings of spit fly off the blur that is your [cock].");
-					
+
 				}
 				else {
 					outputText("\n\nAs you reveal your [eachCock] Andy’s jaw drops. Your [fullChest] swells with pride as he falls to his knees like a reverent priest praying at a treasured alter. He wraps a trembling hand around your [cock] and pulls it to his lips. He gags as you greedily shove forward but the little satyr sub doesn’t give up; he accepts your challenge and begins to furiously bob up and down the length of your [cock], fighting through the gagging sensation until he’s able to take about a foot of your dick into his hungry mouth.");
@@ -963,7 +964,7 @@ import classes.lists.Gender;
 			dynStats("sens", -1);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function haveAndyFuckYouPrompt():void {
 			if (player.hasVagina()) {
 				clearOutput();
@@ -975,12 +976,12 @@ import classes.lists.Gender;
 				haveAndyFuckYou(false);
 			}
 		}
-		
+
 		private function vagOrAss(vaginal:Boolean):String {
 			if (vaginal) return "[vagina]";
 			else return assDescript();
 		}
-		
+
 		private function haveAndyFuckYou(isVaginal:Boolean):void {
 			clearOutput();
 			if (isVaginal) outputText(images.showImage("andy-sex-vaginalcatch"));
@@ -999,7 +1000,7 @@ import classes.lists.Gender;
 				}
 				else if ((player.hasVagina() && player.vaginas[0].vaginalLooseness < 4 && isVaginal) || (!player.hasVagina() && player.ass.analLooseness < 4)) {
 					outputText("\n\nAndy spits into his hand and you turn to see him slickening his foot long cock. He smiles back at you and hooks a free finger inside your " + (vagOrAss(isVaginal)) + ". You watch his bitten lip as his finger moves in and out of you. He adds one, and then a third, pushing through your insides and spreading your entrance in preparation for his thick dog cock. It is a pleasurable sensation, there’s no doubt about that, but not the one you wanted. As he catches your eye and smiles at you like a happy kid with a new toy you give him an impatient glare. He obediently dislodges his fingers from your " + (vagOrAss(isVaginal)) + " and grabs his spit slickened member.");
-					outputText("\n\nAs he pushes into your hungry hole you squeeze his invading dog cock, loving the way it fills you up and stretches you open. "); 
+					outputText("\n\nAs he pushes into your hungry hole you squeeze his invading dog cock, loving the way it fills you up and stretches you open. ");
 					if (isVaginal) player.cuntChange(ANDY_COCK_AREA, true);
 					else player.buttChange(ANDY_COCK_AREA, true);
 					outputText("Andy wastes no time and begins sliding his rigid length in and out of your " + (vagOrAss(isVaginal)) + " with fevered need. Every time you feel his swollen knot bump against your entrance you squeeze, driving the satyr mad as he begins pounding you harder, his long dick making a glorious mess of your " + (vagOrAss(isVaginal)) + " as you push back, his knot threatening to spread you open even further every time it slams against your " + (vagOrAss(isVaginal)) + " before it is snatched away by Andy’s swiftly thrusting hips become sloppy and poorly timed. He’s close but a familiar tingle creeping up your spine tells you you are as well.");
@@ -1090,7 +1091,7 @@ import classes.lists.Gender;
 			dynStats("sens", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		//Harry Roswell
 		//------------
 		private function meetHarryRoswell():void {
@@ -1121,13 +1122,13 @@ import classes.lists.Gender;
 			else addButtonDisabled(0, "Sex", "You aren't horny enough to consider this.");
 			addButton(4, "Nevermind", nevermindToHarry);
 		}
-		
+
 		private function nevermindToHarry():void {
 			clearOutput();
 			outputText("You tell Harry you just wanted to chat and he tells you he'll be cooking while you talk. The conversation doesn't cover anything terribly important. Harry makes a bunch of sex jokes about harpies, satyrs, centaurs and even you as he continues to cook. By the time you leave your sides are hurting from laughing so hard.");
 			doNext(checkStaff);
 		}
-		
+
 		private function rompUpWithHarry():void {
 			clearOutput();
 			if (flags[kFLAGS.BLACK_COCK_HARRY_SEX_INTRO] == 0) {
@@ -1142,7 +1143,7 @@ import classes.lists.Gender;
 			addButton(0, "Get Fucked", haveHarryFuckYou);
 			addButton(1, "Nevermind", nevermindToHarrySex);
 		}
-		
+
 		private function haveHarryFuckYou():void {
 			clearOutput();
 			outputText(images.showImage("harry-sex-getfucked"));
@@ -1157,9 +1158,9 @@ import classes.lists.Gender;
 				outputText("\n\nThen he slides his dick belly first against your [asshole] again, sending a shudder through your body.");
 				outputText("\n\n\"<i>Oh shit.</i>\" He breathes into your ear as his muscular hands hold onto your [ass]. He begins hotdogging your upturned [ass] with rapid thrusts. Your [asshole] flutters in undeniably pleasurable sensations that cause you to release a loud moan trembling with need. Somewhere in the back of your mind you're thankful for his restraint. Thankful for his not breaking into your back door with reckless and selfish need. Thankful for his not splitting you open and forcibly raping you into unwilling submission. Being fucked in this manner only serves to heighten your lust and you quickly realize that the pleasurable sensations will never bring you to climax.");
 				if (player.hasCock() && player.hasVagina()) { //Hermaphrodite
-					outputText("\n\nAlmost the moment you think this, Harry dips his free hand into some creamy concoction and reaches down beneath the table. When his hand grazes your [cock] he wraps a fist around it and gives it a few pleasurable pumps. You push back against his oblong dick greasing up your hole as he massages your [cock] with a practiced and experienced hand. "); 
+					outputText("\n\nAlmost the moment you think this, Harry dips his free hand into some creamy concoction and reaches down beneath the table. When his hand grazes your [cock] he wraps a fist around it and gives it a few pleasurable pumps. You push back against his oblong dick greasing up your hole as he massages your [cock] with a practiced and experienced hand. ");
 					if (player.balls > 0) outputText("His powerful grip begins to slide down your [cock]. They continue down to your [balls] and give them a firm but gentle squeeze, one that sends you bucking back into his giant cock as it spills gobs of precum onto your [ass]. ");
-					else outputText("His powerful grip slides down your [cock] with firm squeezes, his thumb rubbing the top of your dick before it travels south. "); 
+					else outputText("His powerful grip slides down your [cock] with firm squeezes, his thumb rubbing the top of your dick before it travels south. ");
 					outputText("When he reaches your [pussy] he dips a practiced finger into your snatch, sending tingles through your body that have you gasping for air. The arm around your neck falls to your groin and wraps itself around your [cock]. \"<i>Time to cum, [name].</i>\" is whispered into your ear as one hand tugs at your [cock] and the other begins to slide in and out of your hungry [vagina]. The triple sensations of the teasing pressure on your [asshole], the firm tugging of your [cock] and the mind blowing finger fucking of your [pussy] is enough to drive you mad. He keeps you on the edge for a while, goading you on as you beg for release. You begin to tremble with need as he dominates your body, controlling you like a puppeteer manipulating an old marionette. Then, teeth clenched and ass pushing back against him, you explode, shivering and convulsing as you fall flat against the table, crushing your [fullChest] beneath you as the last dregs of your orgasm leak from [eachCock] and your [pussy].");
 				}
 				else if (player.hasCock()) { //Male
@@ -1208,14 +1209,14 @@ import classes.lists.Gender;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function nevermindToHarrySex():void {
 			clearOutput();
 			outputText("You put your hands up in an attempt to look innocent as you tell the man he's crazy and you weren't thinking any such thing.");
 			outputText("\n\nHe gives you a disbelieving look before rolling his eyes and saying, \"<i>Alright ya little cock tease, feel free to hang around if you want.</i>\" He reaches down and tugs at the thickening bulge swinging near his knees. After a few minutes of chatting and watching him cook you decide you'd best be leaving.");
 			doNext(enterTheBlackCock);
 		}
-		
+
 		//Frida
 		//------------
 		private function meetFrida():void {
@@ -1240,7 +1241,7 @@ import classes.lists.Gender;
 			}
 			doYesNo(orderFridasCake, noThanksToCake);
 		}
-		
+
 		private function orderFridasCake():void {
 			clearOutput();
 			outputText(images.showImage("frida-order-cake"));
@@ -1266,7 +1267,7 @@ import classes.lists.Gender;
 			flags[kFLAGS.BLACK_COCK_FRIDAS_CAKE_EATEN_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function noThanksToCake():void {
 			clearOutput();
 			if (flags[kFLAGS.BLACK_COCK_FRIDAS_CAKE_EATEN_COUNTER] == 0) outputText("You politely decline, not feeling very hungry at the moment.");
@@ -1276,7 +1277,7 @@ import classes.lists.Gender;
 			}
 			doNext(enterTheBlackCock);
 		}
-		
+
 		//------------
 		// PATRONS
 		//------------
@@ -1292,7 +1293,7 @@ import classes.lists.Gender;
 			if (patronCount == 0) outputText("There appears to be nobody interesting here.");
 			addButton(14, "Back", enterTheBlackCock);
 		}
-		
+
 		private function satyrGangIntro():void {
 			clearOutput();
 			outputText(images.showImage("satyr-gang-intro"));
@@ -1307,7 +1308,7 @@ import classes.lists.Gender;
 			else addButtonDisabled(0, "Let Them", "You aren't horny enough to consider that.");
 			addButton(1, "No", dontLetTheSatyrsFuck);
 		}
-		
+
 		private function letTheSatyrsHaveTheirWayWithYou():void {
 			clearOutput();
 			outputText(images.showImage("satyr-gang-bang"));
@@ -1381,13 +1382,13 @@ import classes.lists.Gender;
 			player.sexReward("cum","Anal");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function dontLetTheSatyrsFuck():void {
 			clearOutput();
 			outputText("Pulling your hands from their grip you tell the satyrs you weren't looking their way and make an abrupt U-turn, disappearing out the doors amidst a musical theme of laughter and feeling embarrassed as all hell.");
 			doNext(enterTheBlackCock);
 		}
-		
+
 		//------------
 		// TRANSFORMATIONS
 		//------------
@@ -1493,7 +1494,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN) {
-				outputText("\n\nYou feel an odd shifting sensation on the side of your head and, reaching up to inspect it, find a <b>pair of fleshy pointed ears</b>. "); 
+				outputText("\n\nYou feel an odd shifting sensation on the side of your head and, reaching up to inspect it, find a <b>pair of fleshy pointed ears</b>. ");
 				if (player.hasFur()) outputText("As you examine your new elvish ears you feel fur grow around them, matching the rest of you.");
 				CoC.instance.mutations.setEarType(Ears.ELFIN);
 				changes++;
@@ -1524,7 +1525,7 @@ import classes.lists.Gender;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
-		
+
 		public function rhinoTFs():void {
 			var changes:int = 0;
 			var changeLimit:int = 3;
@@ -1645,24 +1646,9 @@ import classes.lists.Gender;
 				player.antennae.type = Antennae.NONE;
 			}
 			//Hair turns back to normal
-			if (rand(4) == 0 && changes < changeLimit && player.hairType != Hair.NORMAL) {
-				switch(player.hairType) {
-					case Hair.FEATHER:
-						if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye. Before you can blow the offending down away, you realize the feather is collapsing in on itself. It continues to curl inward until all that remains is a normal strand of hair. <b>Your hair is no longer feathery!</b>");
-						else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested. While your hand is up there, it detects a change in the texture of your feathers. They're completely disappearing, merging down into strands of regular hair. <b>Your hair is no longer feathery!</b>");
-						break;
-					case Hair.GOO:
-						outputText("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head. Your head is not left bald for long, though. Within moments, a full head of hair sprouts from the skin of your scalp. <b>Your hair is normal again!</b>");
-						break;
-					case Hair.GHOST:
-						break;
-					case Hair.ANEMONE:
-						outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your tentacle-hair, only to find out that the tentacles have vanished and replaced with normal hair. <b>Your hair is normal again!</b>");
-						break;
-				}
+			if (rand(4) == 0 && changes < changeLimit && !CoC.instance.transformations.HairHuman.isPresent()) {
+				CoC.instance.transformations.HairHuman.applyEffect();
 				changes++;
-				player.hairType = Hair.NORMAL;
-				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 			}
 			//Restart hair growth
 			if(rand(3) == 0 && changes < changeLimit && flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0) {
@@ -1678,7 +1664,7 @@ import classes.lists.Gender;
 				player.gills.type = Gills.NONE;
 				changes++;
 			}
-			
+
 			// Rhino TFs
 			//------------
 			//Change a cock to rhino.
@@ -1829,7 +1815,7 @@ import classes.lists.Gender;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
-		
+
 		public function echidnaTFs():void {
 			var changes:int = 0;
 			var changeLimit:int = 3;
@@ -1847,12 +1833,12 @@ import classes.lists.Gender;
 			// Stats Changes
 			//------------
 			//None at the moment
-			
+
 			// Normal TFs
 			//------------
-			if (rand(4) == 0 && changes < changeLimit && player.hairType != Hair.NORMAL && player.hairType != Hair.QUILL) {
-				outputText("\n\nYour scalp feels really strange, but the sensation is brief. You feel your hair, and you immediately notice the change. <b>It would seem that your hair is normal again!</b>");
-				player.hairType = Hair.NORMAL;
+			//Hair turns back to normal
+			if (rand(4) == 0 && changes < changeLimit && !CoC.instance.transformations.HairHuman.isPresent() &&  !CoC.instance.transformations.HairQuill.isPresent()) {
+				CoC.instance.transformations.HairHuman.applyEffect();
 				changes++;
 			}
 			if (rand(4) == 0 && changes < changeLimit && player.arms.type == Arms.HARPY) {
@@ -1868,7 +1854,7 @@ import classes.lists.Gender;
 				player.gills.type = Gills.NONE;
 				changes++;
 			}
-			
+
 			if (rand(3) == 0 && changes < changeLimit && player.eyes.type == Eyes.FOUR_SPIDER_EYES) {
 				outputText("\n\nYour two forehead eyes start throbbing painfully, your sight in them eventually going dark. You touch your forehead to inspect your eyes, only to find out that they have disappeared. <b>You only have two eyes now!</b>");
 				player.eyes.type = Eyes.HUMAN;
@@ -2034,8 +2020,7 @@ import classes.lists.Gender;
 			}
 			//Gain quill hair
 			if (rand(4) == 0 && changes < changeLimit && flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 1 && player.lowerBody != LowerBody.GARGOYLE && player.hairType == Hair.NORMAL) {
-				outputText("\n\nYour scalp begins to tingle as your hair falls out in clumps, leaving you with a bald head. You aren’t bald for long, though. An uncomfortable pressure racks the entirety of your scalp as hard quills begin to sprout from your hair pores. Their growth stops as they reach shoulder length. <b>You now have quills in place of your hair!</b>");
-				player.hairType = Hair.QUILL;
+				CoC.instance.transformations.HairQuill.applyEffect();
 				changes++;
 			}
 			//Gain Echidna face if you have the right conditions.
@@ -2092,7 +2077,7 @@ import classes.lists.Gender;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
-		
+
 		public function mysteryMeatTFs():void {
 			//outputText("\n\n<b>Mystery meat transformations are not yet implemented.</b>");
 		}

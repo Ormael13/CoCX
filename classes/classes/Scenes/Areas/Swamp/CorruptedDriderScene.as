@@ -16,7 +16,7 @@ use namespace CoC;
 	public class CorruptedDriderScene extends BaseContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+
 		public function CorruptedDriderScene()
 		{
 		}
@@ -149,8 +149,8 @@ use namespace CoC;
 			var x:int = player.cockThatFits(monster.vaginalCapacity());
 			spriteSelect(77);
 			clearOutput();
-			//*Summary: Fuck her cunt with a wang that fits it, lose control of the 
-			//situation when she kisses you with potent, envenomed lips.  Get 
+			//*Summary: Fuck her cunt with a wang that fits it, lose control of the
+			//situation when she kisses you with potent, envenomed lips.  Get
 			//moderately hypno'ed into cumming into her over and over again?
 			outputText("Eager to plumb the depths of this greedy spider's snatch, you practically tear your way out of your [armor] in your hurry to get naked.  Through it all ");
 			if (monster.lust >= monster.maxLust()) {
@@ -321,7 +321,7 @@ use namespace CoC;
 
 			outputText("Avoiding the desperate drider's spindly legs, you walk around to grab onto her limp torso, pulling it over until she lands on her back with her lewd figure in full display.  The girl pauses hesitantly, cupping one of her heaving tits in her hand while placing a finger to her lips with the other as she waits for you to make your move - in her current state, it's unlikely she can retaliate even if she wanted to.  The drider's corrupted cock twitches with excitement, a thick rod standing tall amidst the collapsed heap of its owner.  A bead of pre-cum oozes from the tip as evidence of your quick work, reminding you it would be rude to leave the job unfinished.  Swaying your " + hipDescript() + " enticingly, you move slowly down towards her lower torso, reaching over and propping yourself on top of the spider-woman with your " + assDescript() + " pressing against her slick devil-dick.  You look into her eager eyes, the aroused pet almost screaming for relief with her pained stare and the equally responsive cock grinding along your " + vaginaDescript(0) + ".  Reaching behind you, you grab the base of her member and pull, eliciting a yelp and an involuntary thrust from your victim that almost forces her tip inside.  It misses, however, and instead slips out in front of you, the nubs of her cock pushing along your lips and accidentally brushing along your " + clitDescript() + ".  You stifle a moan - she'll pay for that.\n\n");
 
-			outputText("Holding on to the top portion of the drider's thick member, you squeeze her in between your upper legs, pressing the demonic dong against your labia and inner thighs, both hot with desire.  Sliding upwards, you begin to bounce on top of the drider in a cowgirl-like position, grinding against her length while your " + buttDescript() + " slaps against her soaking pussy with every downward thrust.  The arachnid-morph convulses and moans along with your movements, unable to handle the feeling of your warmth against her heated member and the expertise of your hands fondling her tip, your fingers soaked with her leaking pre.  Riding your new pet victoriously, you make sure that the spider-woman can't escape the confines of your " + hipDescript() + ".\n\n");
+			outputText("Holding on to the top portion of the drider's thick member, you squeeze her in between your upper legs, pressing the demonic dong against your labia and inner thighs, both hot with desire.  Sliding upwards, you begin to bounce on top of the drider in a cowgirl-like position, grinding against her length while your [butt] slaps against her soaking pussy with every downward thrust.  The arachnid-morph convulses and moans along with your movements, unable to handle the feeling of your warmth against her heated member and the expertise of your hands fondling her tip, your fingers soaked with her leaking pre.  Riding your new pet victoriously, you make sure that the spider-woman can't escape the confines of your " + hipDescript() + ".\n\n");
 
 			outputText("The drider's shaft begins to grow underneath your fingers, the slick head pulsing with the need to release into your palms.  You decide to lay still, driving your pet insane as she tries to thrust in between your thighs for a chance to ejaculate.  Before she can, however, you grab the base of her studded cock and squeeze firmly, a gasp of both pain and pleasure escaping from the arachnid's lips.  You inform the trembling plaything that if she wants an opportunity to release she'll have to make you do so first, otherwise - you grip harder - you'll beat her down again.  The busty spidertaur nods timidly, to which you respond with an eager grin.  She eyes you up as you position yourself above her bulbous member, giving it one last playful slap before slamming yourself down and taking as much of it as you can.\n\n");
 
@@ -352,7 +352,7 @@ use namespace CoC;
 		{
 			spriteSelect(77);
 			clearOutput();
-			//*Summary:  Roll the drider over and squat on an ovipositor - reuse anal intro? (fuck you bitch, i'm taking your shitty kids to the lake and turning them pink)	
+			//*Summary:  Roll the drider over and squat on an ovipositor - reuse anal intro? (fuck you bitch, i'm taking your shitty kids to the lake and turning them pink)
 			player.slimeFeed();
 			outputText("Eyeing the small lump of the spider's retracted ovipositor, you resolve to have a little fun with it, even if it means giving the spider exactly what she wants in a way that she doesn't.  You tear off your [armor] while the drider watches with ");
 			if (monster.HP < 1) outputText("hate");
@@ -449,7 +449,7 @@ use namespace CoC;
 
 			outputText("Climbing over the drider's bulbous body, you bend over to present your " + assDescript() + " to the twitching ovipositor, beckoning her to slide inside your twitching " + assholeDescript() + " as you stand atop its owner.  The sprawled-out spider looks up past all of her body to watch you, leaving you waiting.  Nothing happens at first.  You're just there, ass in the air and waiting to be violated, encouraging it on your own terms, but she doesn't do anything at all.  She simply watches you.  It isn't until a scowl of irritation makes its way across your face that she acts.\n\n");
 
-			outputText("The ovipositor lurches over, bending and flexing to reach up to your exposed hole, barely touching you while it explores your cheeks.   You pant and grab your " + buttDescript() + ", pulling yourself wide to expose the clenching, dark circle that is your pucker.  It rubs across your hand before finally finding its way into your anal cleavage, ridges sliding between your backside and flopping against your ring while it blindly tries to get adjusted.  The moist, dripping slime it exudes quickly turns your ass into a green-glazed slip-'n-slide.  A sudden shock of sensation alerts you that yes, the ovipositor has finally found your asshole.\n\n");
+			outputText("The ovipositor lurches over, bending and flexing to reach up to your exposed hole, barely touching you while it explores your cheeks.   You pant and grab your [butt], pulling yourself wide to expose the clenching, dark circle that is your pucker.  It rubs across your hand before finally finding its way into your anal cleavage, ridges sliding between your backside and flopping against your ring while it blindly tries to get adjusted.  The moist, dripping slime it exudes quickly turns your ass into a green-glazed slip-'n-slide.  A sudden shock of sensation alerts you that yes, the ovipositor has finally found your asshole.\n\n");
 
 			outputText("The tentacle-like tube prods forward, leaking ooze inside you as the first ring contracts to squeeze inside you.  You gasp when it pops into place, barely adjusting before the next ridge slides into the slightly-loosened sphincter.");
 			player.buttChange(30, true, true, false);
@@ -577,7 +577,7 @@ use namespace CoC;
 		{
 			spriteSelect(77);
 			clearOutput();
-			outputText("You fall to the ground, defeated by the agile arachnid-woman as she slowly advances towards you, her engorged clit growing larger and larger as it throbs in your direction.  You've managed to find yourself crumpled face down in the dirt, your " + buttDescript() + " in full display of the aroused drider while she grins lustfully at your broken figure.  Grunting, you begin to pull yourself off the ground, only to hear your attacker 'tsk' before feeling the warm stickiness of her web launch upon your limbs, gluing your hands to your ankles and leaving you completely vulnerable.  You struggle against the bindings, but to no avail.  Lifting your head, you turn to see the drider stroking her now fully-enlarged demon cock, replacing the hardened clit that once adorned her moist pussy.\n\n");
+			outputText("You fall to the ground, defeated by the agile arachnid-woman as she slowly advances towards you, her engorged clit growing larger and larger as it throbs in your direction.  You've managed to find yourself crumpled face down in the dirt, your [butt] in full display of the aroused drider while she grins lustfully at your broken figure.  Grunting, you begin to pull yourself off the ground, only to hear your attacker 'tsk' before feeling the warm stickiness of her web launch upon your limbs, gluing your hands to your ankles and leaving you completely vulnerable.  You struggle against the bindings, but to no avail.  Lifting your head, you turn to see the drider stroking her now fully-enlarged demon cock, replacing the hardened clit that once adorned her moist pussy.\n\n");
 			outputText("\"<i>You just had to make it harder for yourself, didn't you?</i>\"\n\n");
 
 			outputText("You grunt, too exhausted to move any further.  She chuckles at your disinterest, bending down to rest her thick member in between your cheeks and slowly grind along the cleft of your ass.  You feel the tiny nubs of her demonic cock rub along your eager asshole, pre-cum lubricating your hot entrance as she moans in unrequited pleasure.  Gritting your teeth, you force yourself to ");
@@ -589,7 +589,7 @@ use namespace CoC;
 			player.buttChange(monster.cockArea(0), true, true, false);
 			outputText("\n\n");
 
-			outputText("\"<i>Ungh, if I knew your ass was this eager to s-swallow my cock I wouldn't have wasted my time tying you up...</i>\"  She gasps, clearly the more impassioned of the two of you as she manages to bottom out inside of your " + buttDescript() + ".  You have very little time to regain your breath as the horny drider-woman begins to thrust in and out of your " + assholeDescript() + " with fevered abandon, tongue lolling out of her open mouth while you're forced to bounce against her crotch, your ");
+			outputText("\"<i>Ungh, if I knew your ass was this eager to s-swallow my cock I wouldn't have wasted my time tying you up...</i>\"  She gasps, clearly the more impassioned of the two of you as she manages to bottom out inside of your [butt].  You have very little time to regain your breath as the horny drider-woman begins to thrust in and out of your " + assholeDescript() + " with fevered abandon, tongue lolling out of her open mouth while you're forced to bounce against her crotch, your ");
 			if (player.balls > 0) outputText(ballsDescriptLight());
 			else if (player.hasVagina()) outputText(vaginaDescript(0));
 			else outputText("taint");
@@ -751,7 +751,7 @@ use namespace CoC;
 
 			outputText("\"<i>So eager!  I'm not going to let you fuck me, but I do want your sperm.  After all, I'll need to fertilize some more eggs.</i>\"\n\n");
 
-			outputText("Wait, eggs?  While you try to chew over the thought, you're battling with your raging, venom-enhanced libido in order to think about something other than how good her pussy feels.  Fuck it!  You go back to grinding against your mistress, nuzzling at her neck while she twists her spider-half around you, holding you tightly in her chitin and bringing her abdomen up behind you.  A weird, wet appendage rubs over your exposed " + buttDescript() + ", slapping at your cheeks until it finds the cleft between them.  Sliding deeper, it bumps into your sphincter, spurts something warm, wet, and sticky against it, then pushes through.");
+			outputText("Wait, eggs?  While you try to chew over the thought, you're battling with your raging, venom-enhanced libido in order to think about something other than how good her pussy feels.  Fuck it!  You go back to grinding against your mistress, nuzzling at her neck while she twists her spider-half around you, holding you tightly in her chitin and bringing her abdomen up behind you.  A weird, wet appendage rubs over your exposed [butt], slapping at your cheeks until it finds the cleft between them.  Sliding deeper, it bumps into your sphincter, spurts something warm, wet, and sticky against it, then pushes through.");
 			player.buttChange(8, true, true, false);
 			outputText("  You shudder from the anal violation and twist against the legs holding you in place, but with your " + cockDescript(x) + " locked inside her, it's a useless endeavor.  It isn't shaped like a dick, and besides, that's currently dripping on your belly.  Oh gods... she mentioned eggs.\n\n");
 
@@ -781,7 +781,7 @@ use namespace CoC;
 		public function birthSpiderEggsFromAnusITSBLEEDINGYAYYYYY():void
 		{
 			spriteSelect(77);
-			outputText("\nYour gut rumbles dangerously.  As if by instinct, you drop down and bend over, supporting half your weight on your hands while you lower your " + buttDescript() + " to just above ground level.  You grunt suddenly, your pregnant asshole dilating wide as a heavy weight seems to settle atop it, just inside you.  Clenching and tingling, your pucker slowly opens, releasing a torrent of green goop, along with a spherical white egg.  It drops into the messy puddle, cushioned from the fall by the heavy slime still leaking from your slightly agape anus.\n\n");
+			outputText("\nYour gut rumbles dangerously.  As if by instinct, you drop down and bend over, supporting half your weight on your hands while you lower your [butt] to just above ground level.  You grunt suddenly, your pregnant asshole dilating wide as a heavy weight seems to settle atop it, just inside you.  Clenching and tingling, your pucker slowly opens, releasing a torrent of green goop, along with a spherical white egg.  It drops into the messy puddle, cushioned from the fall by the heavy slime still leaking from your slightly agape anus.\n\n");
 			outputText("The feeling of giving birth in such a way is oddly soothing, almost pleasant.  Your muscles move on their own, slowly and repeatedly clenching, relaxing, and forcing the eggs downward.  The next orb slips through your ring more easily than the first, shooting tingles of pleasure out from your pucker and making you gasp in surprise.  Hot on its heels, another egg follows, catching at your anal ring for a moment before your next contraction squeezes it out into the growing pile of goop.  It feels even better, good enough to make you cross your eyes and exhale contentedly.");
 			//(buttstretch)
 			player.buttChange(40, true, true, false);
@@ -859,7 +859,7 @@ use namespace CoC;
 			outputText("You're pleased to see the drider's tongue loll out of her mouth, her eyes rolled up into her head. Clearly she's enjoying this!  Encouraged, you start to fuck her butt harder, hammering into her ass with every bit of force your powerful muscles can summon up.  You're rewarded with a sharp, high moan from the drider.  Once she starts, she doesn't stop.  A symphony of moans, grunts, and pleasured screams erupt from the spider-girl, all in concert with your rough anal ravishing.\n\n");
 
 			outputText("Without warning, the drider cums.  She cries out and grabs her fully-engaged corrupted cock, hosing down the trees in front of her with spider-cum as her butt squeezes down on your " + cockDescript(x) + ", milking your dick with her anal passage.  You pick up the tempo of your fucking to break-pelvis speeds, ramming your cock into her backdoor and letting loose a torrent of your spunk, shooting it deep inside her");
-			//(if Vagina: 
+			//(if Vagina:
 			if (player.hasVagina()) {
 				outputText(" while your unused cunt spurts girlcum across her carapace");
 				if (player.cockTotal() > 1) outputText(" and");
@@ -911,7 +911,7 @@ use namespace CoC;
 			}
 		}
 
-//[No] 
+//[No]
 		private function dontSilkRapeDrider():void
 		{
 			spriteSelect(77);

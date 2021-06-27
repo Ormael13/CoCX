@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Caves 
+package classes.Scenes.Areas.Caves
 {
 	import classes.*;
 	import classes.BodyParts.Antennae;
@@ -26,10 +26,11 @@ package classes.Scenes.Areas.Caves
 	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.lists.BreastCup;
-	
+	import classes.CoC;
+
 	public class DarkSlimeScene extends BaseContent
 	{
-		public function DarkSlimeScene() 
+		public function DarkSlimeScene()
 		{
 		}
 
@@ -128,7 +129,7 @@ public function LetzRape(letzRape:Boolean = false):void {
 		" You don’t have much time to think over this matter, as a sudden hunger takes hold of you. You thirst, your body mass thirsts for fluids… the fluids of others!" +
 		" You set out with a drooling pleasure addled smile looking for a fleshling to feed from.\n\n");
 		outputText("<b>You have been transformed into a dark slime!</b>\n\n");
-		player.hairType = Hair.GOO;
+		CoC.instance.transformations.HairGoo.applyEffect(false);
 		player.arms.type = Arms.GOO;
 		player.lowerBody = LowerBody.GOO;
 		player.rearBody.type = RearBody.METAMORPHIC_GOO;
