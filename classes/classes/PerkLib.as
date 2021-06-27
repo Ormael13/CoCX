@@ -417,6 +417,15 @@ public class PerkLib
 		public static const VenomousAdiposeTissue:PerkType = mk("Venomous Adipose Tissue", "Venomous Adipose Tissue",
 				"Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases) (will have no effect if max venom/web is at 0) (will have no effect if max venom/web is at 0)",
 				"You've chosen the 'Venomous Adipose Tissue' perk. Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases)");
+		public static const GreaterHarvest:PerkType = mk("Greater harvest", "Greater harvest",
+				"A demon is now considered to carry 5 to 20 bones and you may now have up to 6 Skeleton of each type.",
+				"You've chosen the 'Greater harvest' perk. A demon is now considered to carry 5 to 20 bones and you may now have up to 6 Skeleton of each type.");
+		public static const BoneSoul:PerkType = mk("Bone soul", "Bone soul",
+				"When the bone reserve is at 0 you can still cast necromancy spells. However the effect of these spells is reduced by 50%. If the player has more than 50 demon bones, damage is instead increased by 10% per 10 bone owned up to 200%.",
+				"You've chosen the 'Bone soul' perk. When the bone reserve is at 0 you can still cast necromancy spells. However the effect of these spells is reduced by 50%. If the player has more than 50 demon bones, damage is instead increased by 10% per 10 bone owned up to 200%.");
+		public static const SkeletonLord:PerkType = mk("Skeleton Lord", "Skeleton Lord",
+				"You may now control up to 10 skeleton of each type. Allow to levitate all skeletons.",
+				"You've chosen the 'Skeleton Lord' perk. You may now control up to 10 skeleton of each type. Allow to levitate all skeletons.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -477,6 +486,9 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -2562,12 +2574,15 @@ public class PerkLib
 		public static const PrestigeJobBerserker:PerkType = mk("Prestige Job: Berserker", "Prestige Job: Berserker",
 				"You've trained in prestige art of perfect mastery over all forms of berserking. (+60 to max str, +20 to max tou - scalable)",
 				"You've chosen the 'Prestige Job: Berserker' perk, training yourself to became Berserker.").withBuffs({'str.mult':0.60,'tou.mult':0.20});
+		public static const PrestigeJobDruid:PerkType = mk("Prestige Job: Druid", "Prestige Job: Druid",
+				"You've trained in prestige art of fusing with elementals. (+40 to max tou, +40 to max wis - scalable)",
+				"You've chosen the 'Prestige Job: Druid' perk, training yourself to became Druid.").withBuffs({'tou.mult':0.40,'wis.mult':0.40});
 		public static const PrestigeJobGreySage:PerkType = mk("Prestige Job: Grey Sage", "Prestige Job: Grey Sage",
 				"You've trained in prestige art of perfect mastery over all forms of aoe magic spells. (+80 to max int - scalable)",
 				"You've chosen the 'Prestige Job: Grey Sage' perk, training yourself to became Grey Sage - master of area spells.").withBuffs({'int.mult':0.80});
 		public static const PrestigeJobNecromancer:PerkType = mk("Prestige Job: Necromancer", "Prestige Job: Necromancer",
-				".",//golemancer + ?daoist path of soul cultivation or just soul cultivation path perk?
-				"You've chosen the 'Prestige Job: Necromancer' perk, training yourself to became Necromancer.");
+				"You've trained in prestige art of mastery over animating bone constructs and using necromancer spells. (+20 to max tou, +60 to max wis - scalable)",
+				"You've chosen the 'Prestige Job: Necromancer' perk, training yourself to became Necromancer.").withBuffs({'tou.mult':0.20,'wis.mult':0.60});
 		public static const PrestigeJobSeer:PerkType = mk("Prestige Job: Seer", "Prestige Job: Seer",
 				"You've trained in prestige art of combining soulforce and magic.",
 				"You've chosen the 'Prestige Job: Seer' perk, training yourself to became Seer.").withBuffs({'int.mult':0.60,'wis.mult':0.20});
@@ -3200,8 +3215,6 @@ public class PerkLib
 		public static const VampiricBloodsteamFinalForm:PerkType = mk("Vampiric Bloodsteam (Final Form)", "Vampiric Bloodsteam (Final Form)",
 				"Your bloodsteam fully adapted to presence of vampiric blood. Increases the maximum numbers of stacks of Vampire Thirst by 60 and increase their potency by 50%.",
 				"You've chosen the 'Vampiric Bloodsteam (Final Form)' perk. Your bloodsteam fully adapted to presence of vampiric blood. Increases the maximum numbers of stacks of Vampire Thirst by 60 and increase their potency by 50%.").withBuffs({'lib.mult':0.15});
-		public static const Venomancy:PerkType = mk("Venomancy", "Venomancy",
-				"Grants the Venomancy ability. While active, apply venom effect to spellcasting the venom benefiting from caster perks multipliers but cost a charge each time.")
 		public static const VenomGlands:PerkType = mk("Venom Glands", "Venom Glands",
 				"Your body possesses rudimentary venom glands along with changes in teeth to been able use this venom when biting.",
 				"You've chosen the 'Venom Glands' perk. Your body possesses rudimentary venom glands along with changes in teeth to been able use this venom when biting.").withBuffs({'tou.mult':0.05});
@@ -3809,6 +3822,8 @@ public class PerkLib
 				"With a body that lacks a heartbeat, breath or working digestive system you are unable to gain benefit from transformative items. You're bodily functions are pretty much dead for lack of a better word (it reduce the odds of getting a body part tf'd to 0%).");
 		public static const UnicornBlessing:PerkType = mk("Unicorn Blessing", "Unicorn Blessing",
 				"You are blessed with the power of a unicorn and while below 20 corruption all white magic spells are 20% stronger and lust resistance increased by 10%.");
+		public static const Venomancy:PerkType = mk("Venomancy", "Venomancy",
+				"Grants the Venomancy ability. While active, apply venom effect to spellcasting the venom benefiting from caster perks multipliers but cost a charge each time.")
 		public static const Whispered:PerkType = mk("Whispered", "Whispered",
 				"Akbal's blessings grant limited telepathy that can induce fear.");
 
@@ -5431,6 +5446,17 @@ public class PerkLib
             ElementalContractRank8.requirePerk(ElementalContractRank7)
                     .requireWis(200)
                     .requireLevel(42);
+			PrestigeJobNecromancer.requirePrestigeJobSlot()
+                    .requirePerk(DaoistApprenticeStage)
+                    .requirePerk(JobGolemancer)
+					.requireInt(125)
+					.requireWis(175)
+                    .requireLevel(42);/*
+			PrestigeJobDruid.requirePrestigeJobSlot()
+                    .requirePerk(GrandArchmage3rdCircle)
+                    .requirePerk(JobElementalConjurer)
+                    .requireWis(200)
+                    .requireLevel(42);*/
             //Tier 8 Wisdom perks
             ElementalContractRank9.requirePerk(ElementalContractRank8)
                     .requirePerk(ElementalConjurerSacrifice)
@@ -5441,6 +5467,8 @@ public class PerkLib
                     .requireLevel(48);
             PerfectStrike.requireLevel(48)
                     .requirePerk(PrestigeJobSoulArtMaster);
+            GreaterHarvest.requireLevel(48)
+                    .requirePerk(PrestigeJobNecromancer);
             //Tier 9 Wisdom perks
             ElementalContractRank10.requirePerk(ElementalContractRank9)
                     .requireWis(250)
@@ -5451,6 +5479,8 @@ public class PerkLib
                     .requireLevel(54);
             Backlash.requireLevel(54)
                     .requirePerk(PerfectStrike);
+            BoneSoul.requireLevel(54)
+                    .requirePerk(GreaterHarvest);
             //Tier 10 Wisdom perks
             ElementalContractRank11.requirePerk(ElementalContractRank10)
                     .requireWis(275)
@@ -5461,6 +5491,8 @@ public class PerkLib
             FlurryOfBlows.requireLevel(60)
                     .requirePerk(ComboMaster)
                     .requirePerk(Backlash);
+            SkeletonLord.requireLevel(60)
+                    .requirePerk(BoneSoul);
             //Tier 11 Wisdom perks
             ElementalContractRank12.requirePerk(ElementalContractRank11)
                     .requireWis(300)
@@ -7039,6 +7071,8 @@ public class PerkLib
                     .requireInt(120)
                     .requireWis(120)
                     .requirePerk(MasterGolemMaker);
+            MotivationSu.requireLevel(36)
+                    .requirePerk(MotivationEx);//.requirePerk(AdvancedLeadership)
             AdvancedAllRounderEducation.requireLevel(36)
                     .requirePerk(IntermediateAllRounderEducation);
             //Tier 7
@@ -7070,8 +7104,6 @@ public class PerkLib
 					.requireCustomFunction(function (player:Player):Boolean {
 					return (player.statusEffectv1(StatusEffects.SummonedElementals) + player.flags[kFLAGS.PERMANENT_GOLEMS_BAG]) >= 10;
 					}, "10+ pets/minions");
-            MotivationSu.requireLevel(36)
-                    .requirePerk(MotivationEx);//.requirePerk(AdvancedLeadership)
 			Enchantment.requireLevel(42)
 					.requirePerk(Fusion);
 			Embodiment.requireLevel(42)

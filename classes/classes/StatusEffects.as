@@ -397,8 +397,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KeltOff:StatusEffectType                        = mk("KeltOff");
 		public static const Kindra:StatusEffectType                         = mk("Kindra");
 		public static const KitsuneEnergyThirstFeed:StatusEffectType        = mk("kitsune fed from orgasm");
-		public static const KnowsDuskWave:StatusEffectType                  = mk("Knows Dusk Wave");
-		public static const KnowsPyreBurst:StatusEffectType                 = mk("Knows Pyre Burst");
 		public static const KnowsArcticGale:StatusEffectType                = mk("Knows Arctic Gale");
 		public static const KnowsChainLighting:StatusEffectType             = mk("Knows Chain Lighting");
 		public static const KnowsArouse:StatusEffectType                    = mk("Knows Arouse");
@@ -410,6 +408,9 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsBloodMissiles:StatusEffectType             = mk("Knows Blood Missiles");
 		public static const KnowsBloodSwipe:StatusEffectType             	= mk("Knows Blood Swipe");
 		public static const KnowsBloodSwipeSF:StatusEffectType             	= mk("Knows Blood Swipe (infused with Soulforce)");
+		public static const KnowsBoneshatter:StatusEffectType               = mk("Knows Boneshatter");
+		public static const KnowsBoneArmor:StatusEffectType                 = mk("Knows Bone armor");
+		public static const KnowsBoneSpirit:StatusEffectType                = mk("Knows Bone spirit");
 		public static const KnowsCharge:StatusEffectType                    = mk("Knows Charge");//Charge Weapon
 		public static const KnowsChargeA:StatusEffectType                   = mk("Knows Charge Armor");
 		public static const KnowsCleave:StatusEffectType                    = mk("Knows Cleave");
@@ -419,6 +420,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsCurseOfWeeping:StatusEffectType            = mk("Knows Curse of Weeping");
 		public static const KnowsDarknessShard:StatusEffectType             = mk("Knows Darkness Shard");
 		public static const KnowsDracoSweep:StatusEffectType                = mk("Knows Draco Sweep");
+		public static const KnowsDuskWave:StatusEffectType                  = mk("Knows Dusk Wave");
 		public static const KnowsEarthStance:StatusEffectType               = mk("Knows Earth Stance");
 		public static const KnowsFirePunch:StatusEffectType                 = mk("Knows Fire Punch");
 		public static const KnowsFireStorm:StatusEffectType                 = mk("Knows Fire Storm");
@@ -447,6 +449,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsOverlimit:StatusEffectType                 = mk("Knows Overlimit");
 		public static const KnowsPolarMidnight:StatusEffectType             = mk("Knows Polar Midnight");
 		public static const KnowsPunishingKick:StatusEffectType	            = mk("Knows Punishing Kick");
+		public static const KnowsPyreBurst:StatusEffectType                 = mk("Knows Pyre Burst");
 		public static const KnowsRegenerate:StatusEffectType                = mk("Knows Regenerate");
 		public static const KnowsSextupleThrust:StatusEffectType            = mk("Knows Sextuple Thrust");
 		public static const KnowsSidewinder:StatusEffectType                = mk("Knows Sidewinder");
@@ -834,6 +837,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Blink:StatusEffectType                     = mkCombat("Blink");
 		public static const Blizzard:StatusEffectType                  = mkCombat("Blizzard");
 		public static const Bloodlust:StatusEffectType                 = mkCombat("Bloodlust");
+		public static const BoneArmor:StatusEffectType           	   = mkCombat("Bone armor");
 		public static const Bound:StatusEffectType                     = mkCombat("Bound");
 		public static const BurnDoT:StatusEffectType                   = mkCombat("Burn DoT");
 		public static const BurnDoT2:StatusEffectType                  = mkCombat("Burn DoT 2");
@@ -990,6 +994,8 @@ import classes.StatusEffects.VampireThirstEffect;
 
 		//cooldowns
 		public static const CooldownBalefulPolymorph:StatusEffectType      		= mkCombat("Cooldown Baleful Polymorph");
+		public static const CooldownBoneshatter:StatusEffectType           		= mkCombat("Cooldown Boneshatter");
+		public static const CooldownBoneArmor:StatusEffectType           		= mkCombat("Cooldown Bone armor");
 		public static const CooldownCompellingAria:StatusEffectType      		= mkCombat("Cooldown Compelling Aria");
 		public static const CooldownConsumingDarkness:StatusEffectType         	= mkCombat("Cooldown Consuming darkness");
 		public static const CooldownCumCannon:StatusEffectType           		= mkCombat("Cooldown Cum Cannon");
@@ -1147,4 +1153,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}

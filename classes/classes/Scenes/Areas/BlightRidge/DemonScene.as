@@ -811,11 +811,22 @@ import classes.Scenes.UniqueSexScenes;
 			outputText(" before dragging the corpse away. That's one less foul creature prowling the realms. ");
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu(); 
-			addButton(0, "Take Skull", takeSkull);
 			addButton(1, "Leave", cleanupAfterCombat);
+			addButton(2, "Take Skull", takeSkull);
+			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(3, "Harvest", harvestBones);
+			else addButtonDisabled(3, "???", "Req. Prestige Job: Necromancer.");
 		}
 		private function takeSkull():void {
 			inventory.takeItem(useables.DEMSKLL, cleanupAfterCombat);
 		}
+		private function harvestBones():void {
+			var harvL:Number = 100;
+			var harv:Number = 1 + rand(5);
+			if (player.hasPerk(PerkLib.BoneSoul)) harvL += 100;
+			if (player.hasPerk(PerkLib.GreaterHarvest)) harv += 4 + rand(12);
+			if (harv + player.perkv1(PerkLib.PrestigeJobNecromancer) > harvL) harv = harvL - player.perkv2(PerkLib.PrestigeJobNecromancer);
+			outputText("You take your time to harvest material. You acquired "+harv+" bones!");
+			cleanupAfterCombat();
+		}
 	}
-}
+}

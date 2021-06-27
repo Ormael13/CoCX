@@ -30,7 +30,10 @@ package classes.Scenes
 			clearOutput();
 			outputText("<b>Version 0.8s:</b>\n\n");
 			outputText("-New tier 0 soulforce lvl-up perk: Flying Sword Path. Req. Job: Soul Cultivator perk. Effect: Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)\n");
+			outputText("-New tier 0 soulforce lvl-up perk: Soaring Blades. Req. Dantain and Flying Sword Path perks. Effect: Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of daintain attained.\n");
+			outputText("-New tier 4 misc lvl-up perk: Survivalist 3. Req. Survivalist 2 perk and hunger mode enabled. Effect: Slows hunger rate by another 20%.\n");
 			outputText("-New item slots: 2 misc accesory slots and 1 Flying Sword slot.\n");
+			outputText("-New flying sword: Training soul flying sword - buyable at Soul Equipment shop in He'Xin'Dao. Cost 100 gems. Base atk is 1. Can be used to train soulforce, to attack (acting like range weapon - each attack cost 25 SF) or even fly on it (100 SF per turn of sustaining flight).\n");
 			outputText("-Killing true demon will count now toward counter of true demons killed not imps (sadly it won't retroactively move all demons kills from imps count kills thou).\n");
 			outputText("-Teleporting Circle to move between each of River Dungeon Floors been instaled by... someone. It sstill req. to beat each floor boss/es to open teleport option to deeper floors but after that it will amke easier to travel deeper without need to go thro all previous floors.\n");
 			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
@@ -42,11 +45,9 @@ package classes.Scenes
 			outputText("-The Coin spoke back to Dinah telling her to review shop content. Or so legends was saying. Either way Dinah shop have now subtab for boss drops (it include now gazer and atlach nacha drops). Also each time visiting her would change the cost of all items she sells a bit.\n");
 			outputText("-Pernament race TF getting bit of love and higher stat multi bonuses (as to compasate for fact of been perm and without option to gain more stat bonuses from race scores). They also would have ranks that would a bit enhance their racial stat bonuses as long PC do task specific for each pernament TF to rise it rnak from 1 up to even rank 4. Name of the race can change or not depending on rank.\n");
 			outputText("-Fairy TF quest part that req. to gather pieces of Scepter would be bit easier with Phoukas dropping more often scepter pieces during gathering phase (actualy they will drop those pieces only then).\n");
-			outputText("-New flying sword: Training soul flying sword - buyable at Soul Equipment shop in He'Xin'Dao. Cost 100 gems. Base atk is 1. Can be used to train soulforce, to attack (acting like range weapon - each attack cost 25 SF) or even fly on it (100 SF per turn of sustaining flight).\n");
 			outputText("-New misc accesory: Demonic mage tail ornament - buyable at Kaiba shop (temporaly). Cost 9600 gems.\n");
 			outputText("-Dreams proc after reaching 50% of max libido or 40% of max lust instead of 50 libido or 40 lust.\n");
 			outputText("-All flying swords have chance to proc bleed status effect (10%) and have the same chance to deal crit damage as dueling swords.\n");
-			outputText("-New tier 0 soulforce lvl-up perk: Soaring Blades. Req. Dantain and Flying Sword Path perks. Effect: Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of daintain attained.\n");
 			outputText("-Added current cost of fly on f.sword or attack with it to combat subpage of stats.\n");
 			outputText("-Some of items from Kaiba have been 'repurposed' and now Dinah proudly seels them. And she change varies nearly each time pc start interactions with her so no need to wait whole day to refresh it. But she also likes to give unpredictable price 'discounts' so item player want may be in offer but cost very high sum of gems.\n");
 			outputText("-Jtex many code corrections.\n");
@@ -65,17 +66,22 @@ package classes.Scenes
 			outputText("-New event perk: Improved venom gland (Ex). Gained by reaching 125 pts on venom use counter. Effects: +200 to max venom, +15 venom recharge, -20% venom costs.\n");
 			outputText("-New event perk: Improved venom gland (Su). Gained by reaching 375 pts on venom use counter. Effects: +400 to max venom, +45 venom recharge, venom specials effects increased by 100% at 50% increased cost.\n");
 			outputText("-Some of setting menu options been greyed out when there isn't any loaded save.\n");
-			outputText("-New tier 4 misc lvl-up perk: Survivalist 3. Req. Survivalist 2 perk and hunger mode enabled. Effect: Slows hunger rate by another 20%.\n");
 			outputText("-New tier 0 misc lvl-up perk: Venomous Diet. Req. Enabled hunger mode. Effect: Increase venom/web recharge speed based on current hunger level.\n");
 			outputText("-New tier 2 misc lvl-up perk: Higly Venomous Diet. Req. Venomous Diet perk and enabled hunger mode. Effect: Increase venom/web recharge speed at cost of faster getting hungry.\n");
 			outputText("-New tier 2 misc lvl-up perk: Axillary Venom Glands. Req. Venomous Adipose Tissue perk. Effect: Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. (if hunger mode is active will instead drain hunger 2x faster)\n");
 			outputText("-New tier 0 misc lvl-up perk: Venomous Adipose Tissue. Req. 10+ tou. Effect: Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases)\n");
 			outputText("-Added in combat slow venom recharge.\n");
-			outputText("-\n");
-			outputText("-\n");//, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-New tier 7 wis lvl-up perk: Prestige Job: Necromancer. Req. Job: Golemancer and Daoist: Apprentice Stage perks, 125+ int, 175+ wis. Effect: +20 to max tou and +60 to max wis (scalable with NG tiers), able to harvest bones from true demons bodies, create up to 3 skeleton warriors, access to necromancer spells, gain a (very) small amount of soulforce after defeating enemies with soul (~1-3x enemy level).\n");
+			outputText("-New tier 8 wis lvl-up perk: Greater harvest. Req. Prestige Job: Necromancer perk. Effect: A demon is now considered to carry 5 to 20 bones and you may now have up to 6 Skeleton of each type.\n");
+			outputText("-New tier 9 wis lvl-up perk: Bone soul. Req. Greater harvest perk. Effect: When the bone reserve is at 0 you can still cast necromancy spells. However the effect of these spells is reduced by 50%. If the player has more than 50 demon bones, damage is instead increased by 10% per 10 bone owned up to 200%.\n");
+			outputText("-New tier 10 wis lvl-up perk: Skeleton Lord. Req. Bone soul perk. Effect: You may now control up to 10 skeleton of each type. Allow to levitate all skeletons.\n");
+			outputText("-New black spell: Bone spirit. It can be learned by using black book after picking Prestige Job: Necromancer perk. Effect: Turn an ordinary set of bones into a vengeance mad apparition that will charge at your target. Upon contact it will explode dealing massive true damage. Cost 5 demon bones to cast.\n");
+			outputText("-New black spell: Bone armor. It can be learned by using black book after picking Prestige Job: Necromancer perk. Effect: Animate bones to create an impenetrable shield lasting 5 rounds and reducing all damage taken by 50%. Cooldown: 10 turns.\n");
+			outputText("-New black spell: Boneshatter. It can be learned by using black book after picking Prestige Job: Necromancer perk. Effect: Strike at the target ossature causing it to explode from the inside and causing serious internal damage and weakening its blow. Single target only, monster take 10-90(20)% strength drain from this (not work on boneless creatures: construct, elemental, ghost, goo, plant). Cooldown: 3 turns\n");
+			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation eprks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
+			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation perks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
 			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
@@ -89,7 +95,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -168,9 +173,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -218,9 +221,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -1024,11 +1024,11 @@ package classes.Scenes
 			outputText("-New range weapon (by Liadri): M1 Cerberus - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Forest area. Cost 1080 gems. Base atk is 45 and ammo clip size 6. Shoot all 6 bullets in one attack and will multiply dmg for each perk that is giving more than one shoot per turn. It's 2H Firearm type range weapon.\n");
 			outputText("-New range weapon (by Liadri): Harpoon gun - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Beach area. Cost 1030 gems. Base atk is 50 and ammo clip size 1. +20% dmg underwater.\n");
 			outputText("-New range weapon (by Liadri): Tripxi Fatbilly - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from Vulcanic Crag area. Cost 5230 gems. Base atk is 260 and ammo clip size 1. Can't use multishoot, can't be used with sneak range attack, can't crit and it deal AoE damage. It's 2H Firearm type range weapon.\n");
-			outputText("-New black spell: Lifetap. The can be learned by using black book after picking Hex Knowledge perk. Effect: Sacrifice a quarter of your hp to recover a quarter of your mana.\n");
-			outputText("-New black spell: Life syphon. The can be learned by using black book after picking Hex Knowledge perk. Effect: Create a funnel between you and your target, forcefully stealing its vitality to recover your own. (Deals low damage but last 15 round.)\n");
-			outputText("-New black spell: Consuming darkness. The can be learned by using black book after picking Hex Knowledge perk. Effect: For the next 7 round the target is devoured by living shadow trying to tear its body apart deals good damage on each round.\n");
-			outputText("-New black spell: Curse of Desire. The can be learned by using black book after picking Hex Knowledge perk. Effect: Arouse yourself and curse the target with lewd thoughts, weakening its resistance to lust and forcing it to take low lust damage each round for 8 rounds.\n");
-			outputText("-New black spell: Curse of Weeping. The can be learned by using black book after picking Hex Knowledge perk. Effect: Draw your own blood (50%) and inflict on your target a terrible curse, dealing high damage for 6 rounds.\n");
+			outputText("-New black spell: Lifetap. It can be learned by using black book after picking Hex Knowledge perk. Effect: Sacrifice a quarter of your hp to recover a quarter of your mana.\n");
+			outputText("-New black spell: Life syphon. It can be learned by using black book after picking Hex Knowledge perk. Effect: Create a funnel between you and your target, forcefully stealing its vitality to recover your own. (Deals low damage but last 15 round.)\n");
+			outputText("-New black spell: Consuming darkness. It can be learned by using black book after picking Hex Knowledge perk. Effect: For the next 7 round the target is devoured by living shadow trying to tear its body apart deals good damage on each round.\n");
+			outputText("-New black spell: Curse of Desire. It can be learned by using black book after picking Hex Knowledge perk. Effect: Arouse yourself and curse the target with lewd thoughts, weakening its resistance to lust and forcing it to take low lust damage each round for 8 rounds.\n");
+			outputText("-New black spell: Curse of Weeping. It can be learned by using black book after picking Hex Knowledge perk. Effect: Draw your own blood (50%) and inflict on your target a terrible curse, dealing high damage for 6 rounds.\n");
 			outputText("-New m. special: Plasma blast. Req. to PC have Cum cannon/Milk blast and Orgasmic lightning strike. Work as Cum cannon/Milk blast with a 20% extra lust damage. However no longer deplete lust on use and instead raise lust by 5%. If pc shoot from both breast and dick add 50% more damage and lust damage but raise lust by 10% instead. (it have it own seperate cooldown)\n");
 			outputText("-New tag for range weapons - 2H Firearm. It will act the same way as Large/Massive melee weapons in regard to using/equiping shields.\n");
 			outputText("-New unique sex scene: Volt Transfer - req. to be raiju and enemy must be non gigant humanoid.\n");

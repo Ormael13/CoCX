@@ -591,6 +591,12 @@ public class Combat extends BaseContent {
                     outputText("  Somehow you came away from the encounter with " + ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]).longName + ".\n\n");
                     inventory.takeItem(ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]), createCallBackFunction(camp.returnToCamp, timePasses));
                 } else doNext(createCallBackFunction(camp.returnToCamp, timePasses));
+				//SF harvest
+				if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && monster.soulforce > 0) {
+					var SFHarvest:Number = monster.level * (1 + rand(3));
+					if (SFHarvest > monster.soulforce) SFHarvest = monster.soulforce;
+					EngineCore.SoulforceChange(SFHarvest, false);
+				}
             }
         }
         //Not actually in combat
@@ -957,6 +963,18 @@ public class Combat extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.JobGolemancer) && (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > 0 || flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0)) bd = buttons.add("Golems", GolemsMenu);
 		if (player.hasPerk(PerkLib.JobElementalConjurer) && player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) bd = buttons.add("Elem.Asp", ElementalAspectsMenu);
+		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && player.perkv2(PerkLib.PrestigeJobNecromancer) > 0) {
+			bd = buttons.add("S.S. to F.", sendSkeletonToFight).hint("Send Skeleton to fight - Order your Skeletons to beat the crap out of your foe.");
+			if (monster.isFlying() && (!player.hasPerk(PerkLib.GreaterHarvest) || player.perkv1(PerkLib.GreaterHarvest) == 0)) {
+				bd.disable("None of your skeletons can attack airborn enemy.");
+			}
+			if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 5) {
+				bd = buttons.add("S.S.", skeletonSmash).hint("Skeleton Smash - Order your Skeletons to go all out on your foe.");
+				if (monster.isFlying()) {
+					bd.disable("None of your skeletons can attack airborn enemy.");
+				}
+			}
+		}
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
 			bd = buttons.add("B.Puppies", bloodSwipeBloodPuppies).hint("Command Blood Puppies to attack enemy/ies. Would deal 2x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(20) + "");
 			var bloodForBloodGod:Number = (player.HP - player.minHP());
@@ -7172,6 +7190,85 @@ public class Combat extends BaseContent {
         if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
         return damage;
     }
+	
+	public function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+        MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
+        if (damage < 1) damage = 1;
+        if (player.hasPerk(PerkLib.Sadist)) {
+            damage *= 1.2;
+            if (player.armorName == "Scandalous Succubus Clothing") {
+                damage *= 1.2;
+                dynStats("lus", 3);
+            }
+            dynStats("lus", 3);
+        }
+        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
+        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+            var bonusDamageFromMissingHP:Number = 1;
+            if (player.hp100 < 100) {
+                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
+                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
+            }
+            damage *= bonusDamageFromMissingHP;
+        }
+        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
+            if (monster.statusEffectv3(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+            if (monster.statusEffectv4(StatusEffects.AcidDoT) > 0) damage *= (1 + (0.1 * monster.statusEffectv4(StatusEffects.AcidDoT)));
+        }
+		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
+			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
+			else damage *= (1 + Math.round(codex.checkUnlocked() / 100));
+		}
+        damage = DamageOverhaul(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            /* No monsters use this perk, so it's been removed for now
+		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
+		else doNext(endHpVictory);
+		*/
+            doNext(endHpVictory);
+        }
+        damage = Math.round(damage);
+        if (damage < 0) damage = 1;
+        if (apply) {
+            monster.HP -= damage;
+			var WrathGains:Number = 0;
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) WrathGains += Math.round((damage / 5)*BonusWrathMult);
+            else WrathGains += Math.round((damage / 10) * BonusWrathMult);
+			if ((monster.hasStatusEffect(StatusEffects.CouatlHurricane) || monster.hasStatusEffect(StatusEffects.IzmaBleed) || monster.hasStatusEffect(StatusEffects.SharkBiteBleed)
+			 || monster.hasStatusEffect(StatusEffects.KamaitachiBleed) || monster.hasStatusEffect(StatusEffects.GoreBleed)
+			 || monster.hasStatusEffect(StatusEffects.Hemorrhage) || monster.hasStatusEffect(StatusEffects.HemorrhageArmor)
+			 || monster.hasStatusEffect(StatusEffects.HemorrhageShield) || monster.hasStatusEffect(StatusEffects.Hemorrhage2))
+			 && player.hasPerk(PerkLib.YourPainMyPower)) {
+				player.HP += damage;
+				if (player.HP > (player.maxHP() + player.maxOverHP())) player.HP = player.maxHP() + player.maxOverHP();
+				EngineCore.WrathChange(WrathGains, false);
+			}
+			else monster.wrath += WrathGains;
+            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+        }
+        if (display) {
+            if (damage > 0) {
+                if (damage > 1000) CommasForDigits(damage);
+                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+        }
+        //Isabella gets mad
+        if (monster.short == "Isabella") {
+            flags[kFLAGS.ISABELLA_AFFECTION]--;
+            //Keep in bounds
+            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
+        }
+        //Interrupt gigaflare if necessary.
+        if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
+        //Keep shit in bounds.
+        if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
+        return damage;
+    }
 
     public static const USEMANA_NORMAL:int = 0;
     public static const USEMANA_MAGIC:int = 1;
@@ -8565,6 +8662,14 @@ public class Combat extends BaseContent {
                 HPChange(hpChange3, false);
             }
         }
+        //Bone armor
+        if (player.hasStatusEffect(StatusEffects.BoneArmor)) {
+            if (player.statusEffectv1(StatusEffects.BoneArmor) <= 0) {
+                player.removeStatusEffect(StatusEffects.BoneArmor);
+            } else {
+                player.addStatusValue(StatusEffects.BoneArmor, 1, -1);
+            }
+        }
         //Trance Transformation
         if (player.statStore.hasBuff("TranceTransformation")) {
             if (player.soulforce < 50) {
@@ -9358,12 +9463,28 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownChaosBeams, 1, -1);
             }
         }
-        //Sextuple Thrust
-        if (player.hasStatusEffect(StatusEffects.CooldownSextupleThrust)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSextupleThrust) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSextupleThrust);
+        //Baleful Polymorph
+        if (player.hasStatusEffect(StatusEffects.CooldownBalefulPolymorph)) {
+            if (player.statusEffectv1(StatusEffects.CooldownBalefulPolymorph) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownBalefulPolymorph);
             } else {
-                player.addStatusValue(StatusEffects.CooldownSextupleThrust, 1, -1);
+                player.addStatusValue(StatusEffects.CooldownBalefulPolymorph, 1, -1);
+            }
+        }
+        //Boneshatter
+        if (player.hasStatusEffect(StatusEffects.CooldownBoneshatter)) {
+            if (player.statusEffectv1(StatusEffects.CooldownBoneshatter) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownBoneshatter);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownBoneshatter, 1, -1);
+            }
+        }
+        //Bone armor
+        if (player.hasStatusEffect(StatusEffects.CooldownBoneArmor)) {
+            if (player.statusEffectv1(StatusEffects.CooldownBoneArmor) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownBoneArmor);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownBoneArmor, 1, -1);
             }
         }
         //Nonuple Thrust
@@ -9774,7 +9895,11 @@ public class Combat extends BaseContent {
     }
 
     public function venomCombatRecharge():void {
-        var venomCRecharge:Number = 0;
+        player.tailVenom += venomCombatRecharge2();
+		if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
+    }
+	public function venomCombatRecharge2():Number {
+		var venomCRecharge:Number = 0;
         venomCRecharge += player.tailRecharge;
 		if (player.hasPerk(PerkLib.ImprovedVenomGland)) venomCRecharge += 2.5;
 		if (player.hasPerk(PerkLib.ImprovedVenomGlandEx)) venomCRecharge += 7.5;
@@ -9831,9 +9956,9 @@ public class Combat extends BaseContent {
 		if (player.lowerBody == LowerBody.HYDRA) venomCRecharge += 4;
 		if (player.lowerBody == LowerBody.ATLACH_NACHA) venomCRecharge *= 2;
 		if (player.hasPerk(PerkLib.AxillaryVenomGlands)) venomCRecharge *= 2;
-        player.tailVenom += Math.round(venomCRecharge);
-		if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
-    }
+		venomCRecharge = Math.round(venomCRecharge);
+		return venomCRecharge;
+	}
 
     internal var combatRound:int = 0;
 
@@ -13412,6 +13537,117 @@ public class Combat extends BaseContent {
 		EruptingRiposte();
         statScreenRefresh();
         enemyAI();
+	}
+	
+	public function sendSkeletonToFight():void {
+		clearOutput();
+		outputText("Your skeleton warrior"+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "s":"")+" charge into battle swinging "+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "they're":"his")+" blade arounds. ");
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
+		damage += 300 + rand(121);
+		damage += scalingBonusIntelligence() * 0.1;
+		damage += scalingBonusWisdom() * 0.15;
+		if (player.hasPerk(PerkLib.GreaterHarvest)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.BoneSoul)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.SkeletonLord)) dmgamp += 0.1;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
+		damage *= dmgamp;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		doDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 1) doDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 2) doDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 3) doDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 4) doDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 5) doDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 6) doDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 7) doDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 8) doDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 9) doDamage(damage, true, true);
+		if (player.hasPerk(PerkLib.GreaterHarvest) && player.perkv1(PerkLib.GreaterHarvest) > 0) {
+			outputText("Your archer"+(player.perkv1(PerkLib.GreaterHarvest) > 1 ? "s":"")+" fellow suit unleashing a volley of arrows. ");
+			doDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 1) doDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 2) doDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 3) doDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 4) doDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 5) doDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 6) doDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 7) doDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 8) doDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 9) doDamage(damage, true, true);
+			if (player.perkv2(PerkLib.GreaterHarvest) > 0) {
+				outputText("Finally the skeletal mage"+(player.perkv2(PerkLib.GreaterHarvest) > 1 ? "s":"")+" unleash a barrage of magic missles. ");
+				doMagicDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 1) doMagicDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 2) doMagicDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 3) doMagicDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 4) doMagicDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 5) doMagicDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 6) doMagicDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 7) doMagicDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 8) doMagicDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 9) doMagicDamage(damage, true, true);
+			}
+		}
+		outputText("\n\n");
+		//checkAchievementDamage(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	public function skeletonSmash():void {
+		clearOutput();
+		outputText("Your Skeletons upon command gang up on " + monster.a + monster.short + " swarming from all side and leaving " + monster.pronoun2 + " stunned. ");
+		var damage:Number = 0;
+		var dmgamp:Number = 1;
+		damage += 300 + rand(121);
+		damage += scalingBonusIntelligence() * 0.1;
+		damage += scalingBonusWisdom() * 0.15;
+		if (player.hasPerk(PerkLib.GreaterHarvest)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.BoneSoul)) dmgamp += 0.1;
+		if (player.hasPerk(PerkLib.SkeletonLord)) dmgamp += 0.1;
+		if (player.weapon == weapons.SCECOMM) dmgamp += 0.5;
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 1) {
+			dmgamp += 0.1;
+			if (player.hasPerk(PerkLib.WispLieutenant)) dmgamp += 0.2;
+			if (player.hasPerk(PerkLib.WispCaptain)) dmgamp += 0.3;
+			if (player.hasPerk(PerkLib.WispMajor)) dmgamp += 0.4;
+			if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
+		}
+		damage *= dmgamp;
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0) damage *= player.perkv2(PerkLib.PrestigeJobNecromancer);
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		doDamage(damage, true, true);
+		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+		//checkAchievementDamage(damage);
+		outputText("\n\n");
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
 	}
 
     public function oniRampagePowerMulti():Number {
