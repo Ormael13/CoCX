@@ -545,7 +545,7 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
-		public function requirePerks(...perks:Array):PerkType {	//As opposed to the ones above, this checks for if player has all required perks instead of any of them or just the one.
+		public function requirePerks(...perks:Array):PerkType {	//As opposed to requirePerk or requireAnyPerk, this checks for if player has all required perks instead of any of them or just the one.
 			if (perks.length == 0) throw ("Incorrect call of requirePerks() - should NOT be empty");
 			var text:Array = [];
 			for each (var perk:PerkType in perks) {
