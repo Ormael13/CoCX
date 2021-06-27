@@ -107,7 +107,7 @@ public class GameSettings extends BaseContent {
 			outputText("Mutation Assist: <font color=\"#008000\"><b>ON</b></font>\nAll mutations are known, and hints to acquire them are provided.")
 		}
 		else {
-			outputText("Mutation Assist: <font color=\"#800000\"><b>OFF</b></font>\n For players that want to discover the mutations by themselves.")
+			outputText("Mutation Assist: <font color=\"#800000\"><b>OFF</b></font>\nFor players that want to discover the mutations by themselves.")
 		}
 		outputText("\n\n")
 
@@ -115,7 +115,7 @@ public class GameSettings extends BaseContent {
 			outputText("Perks Display: <font color=\"#008000\"><b>Enabled</b></font>\nPerks are collapsed to their highest tier. Beta, expect possible bugs. Use this for potentially speeding up perks menu, and less clutter.")
 		}
 		else {
-			outputText("Perks Display: <font color=\"#800000\"><b>Disabled</b></font>\n Perks display uses old method of just spewing everything out. Use this for max stability, but higher lag and a whole menu of perks.")
+			outputText("Perks Display: <font color=\"#800000\"><b>Disabled</b></font>\nPerks display uses old method of just spewing everything out. Use this for max stability, but higher lag and a whole menu of perks.")
 		}
 		outputText("\n\n")
 

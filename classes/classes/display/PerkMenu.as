@@ -1086,7 +1086,7 @@ public class PerkMenu extends BaseContent {
 								}
 							}
 						}
-						break;
+						//break;
 					}
 					else if (cond.hasOwnProperty("perk")){	//Checks if player has the perk
 						if (ignorelist.indexOf(cond.perk) >= 0) {
