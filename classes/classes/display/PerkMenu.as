@@ -1027,20 +1027,20 @@ public class PerkMenu extends BaseContent {
 
 		function initSet():void {
 			var mutationList:Array = [PerkLib.BlackHeart, PerkLib.FrozenHeart, PerkLib.ObsidianHeart, PerkLib.TwinHeart, PerkLib.HeartOfTheStorm, PerkLib.DraconicHeart, PerkLib.MantislikeAgility, PerkLib.OniMusculature, PerkLib.VenomGlands, PerkLib.HollowFangs, PerkLib.SalamanderAdrenalGlands, PerkLib.OrcAdrenalGlands, PerkLib.VampiricBloodsteam, PerkLib.HinezumiBurningBlood, PerkLib.FeyArcaneBloodstream, PerkLib.PigBoarFat, PerkLib.NaturalPunchingBag, PerkLib.WhaleFat, PerkLib.YetiFat, PerkLib.ArachnidBookLung, PerkLib.DraconicLungs, PerkLib.CaveWyrmLungs, PerkLib.MelkieLung, PerkLib.DrakeLungs, PerkLib.ManticoreMetabolism, PerkLib.DisplacerMetabolism, PerkLib.LactaBovinaOvaries, PerkLib.FloralOvaries, PerkLib.MinotaurTesticles, PerkLib.EasterBunnyEggBag, PerkLib.NukiNuts, PerkLib.GorgonsEyes, PerkLib.GazerEye, PerkLib.ElvishPeripheralNervSys, PerkLib.LizanMarrow, PerkLib.DraconicBones, PerkLib.HarpyHollowBones, PerkLib.KitsuneThyroidGland, PerkLib.NekomataThyroidGland, PerkLib.KitsuneParathyroidGlands, PerkLib.HellcatParathyroidGlands]
-			for each(var i:PerkClass in pPerkList) { //Cleans up the list of mutations and no-perk requiring perks
-				if (!(mutationList.indexOf(i.ptype) >= 0)){	//Okay, proved that this does remove the base mutations properly.
-					var j:PerkType = i.ptype
+			for each(var pPerks:PerkClass in pPerkList) { //Cleans up the list of mutations and no-perk requiring perks
+				if (!(mutationList.indexOf(pPerks.ptype) >= 0)){	//Okay, proved that this does remove the base mutations properly.
+					var pPerkReq:PerkType = pPerks.ptype
 					var perkno:Boolean = true;
-					for each (var temp1:Object in j.requirements) {
+					for each (var temp1:Object in pPerkReq.requirements) {
 						if (temp1.hasOwnProperty("perk") || temp1.hasOwnProperty("perks") || temp1.hasOwnProperty("allperks")){
-							masterlist.push(j);
+							masterlist.push(pPerkReq);
 							perkno = false;
 							break;
 						}
 					}
 					if (perkno) {
-						ignorelist.push(j);
-						endlist.push(j);
+						ignorelist.push(pPerkReq);
+						endlist.push(pPerkReq);
 					}
 				}
 			}
