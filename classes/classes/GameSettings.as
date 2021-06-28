@@ -107,7 +107,15 @@ public class GameSettings extends BaseContent {
 			outputText("Mutation Assist: <font color=\"#008000\"><b>ON</b></font>\nAll mutations are known, and hints to acquire them are provided.")
 		}
 		else {
-			outputText("Mutation Assist: <font color=\"#800000\"><b>OFF</b></font>\n For players that want to discover the mutations by themselves.")
+			outputText("Mutation Assist: <font color=\"#800000\"><b>OFF</b></font>\nFor players that want to discover the mutations by themselves.")
+		}
+		outputText("\n\n")
+
+		if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
+			outputText("Perks Display: <font color=\"#008000\"><b>Enabled</b></font>\nPerks are collapsed to their highest tier. Use this for potentially speeding up perks menu, and less clutter.")
+		}
+		else {
+			outputText("Perks Display: <font color=\"#800000\"><b>Disabled</b></font>\nPerks display uses old method of just spewing everything out. Use this for max stability, but higher lag and a whole menu of perks.")
 		}
 		outputText("\n\n")
 
@@ -158,6 +166,7 @@ public class GameSettings extends BaseContent {
 		addButton(6, "Auto level", toggleAutoLevel).hint("Toggles automatic leveling when you accumulate sufficient experience.");
 		addButton(10, "Fast Lvl", toggleInstaLvl).hint("Immediately level to highest possible from XP instead of spamming next.");
 		addButton(12, "Mutation Assist", mutationSubMenu).hint("Mutation Tracker Spoiler Mode. For when you want to discover mutations by yourself, or with some help.");
+		addButton(13, "PerkView Simplfied", perkSubMenu).hint("Simplified Perk Viewing. So duplicate entries/tiers don't show up.");
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5) {
 			removeButton(8);
 		}
@@ -348,6 +357,12 @@ public class GameSettings extends BaseContent {
 	public function mutationSubMenu():void {
 		if (flags[kFLAGS.MUTATIONS_SPOILERS] < 1) flags[kFLAGS.MUTATIONS_SPOILERS] = 1;
 		else flags[kFLAGS.MUTATIONS_SPOILERS] = 0;
+		settingsScreenGameSettings();
+	}
+
+	public function perkSubMenu():void {
+		if (flags[kFLAGS.NEWPERKSDISPLAY] < 1) flags[kFLAGS.NEWPERKSDISPLAY] = 1;
+		else flags[kFLAGS.NEWPERKSDISPLAY] = 0;
 		settingsScreenGameSettings();
 	}
 

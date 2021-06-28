@@ -624,6 +624,7 @@ public function savePermObject(isFile:Boolean):void {
 
 		saveFile.data.flags[kFLAGS.LVL_UP_FAST] = flags[kFLAGS.LVL_UP_FAST];
 		saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS] = flags[kFLAGS.MUTATIONS_SPOILERS];
+		saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY] = flags[kFLAGS.NEWPERKSDISPLAY];
 		saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE] = flags[kFLAGS.INVT_MGMT_TYPE];
 		saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED] = flags[kFLAGS.CHARVIEWER_ENABLED];
 		saveFile.data.flags[kFLAGS.CHARVIEW_STYLE] = flags[kFLAGS.CHARVIEW_STYLE];
@@ -684,6 +685,7 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] != undefined) flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
 
 			if (saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS] != undefined) flags[kFLAGS.MUTATIONS_SPOILERS] = saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS];
+			if (saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY] != undefined) flags[kFLAGS.NEWPERKSDISPLAY] = saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY];
 			if (saveFile.data.flags[kFLAGS.LVL_UP_FAST] != undefined) flags[kFLAGS.LVL_UP_FAST] = saveFile.data.flags[kFLAGS.LVL_UP_FAST];
 			if (saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE] != undefined) flags[kFLAGS.INVT_MGMT_TYPE] = saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE];
 			if (saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED] != undefined) flags[kFLAGS.CHARVIEWER_ENABLED] = saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED];

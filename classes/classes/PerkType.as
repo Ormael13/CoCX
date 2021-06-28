@@ -545,6 +545,29 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requirePerks(...perks:Array):PerkType {	//As opposed to requirePerk or requireAnyPerk, this checks for if player has all required perks instead of any of them or just the one.
+			if (perks.length == 0) throw ("Incorrect call of requirePerks() - should NOT be empty");
+			var text:Array = [];
+			for each (var perk:PerkType in perks) {
+				text.push(perk.name);
+			}
+			requirements.push({
+				fn  : function (player:Player):Boolean {
+					var allPerksYes:Boolean = true;
+					for each (var perk:PerkType in perks) {
+						if (!player.hasPerk(perk)) {
+							allPerksYes = false;
+							break;
+						}
+					}
+					return allPerksYes;
+				},
+				text: text.join(" and "),
+				type: "allperks",
+				allperks: perks
+			});
+			return this;
+		}
 
 		public function withBuffs(buffs:Object, showText:Boolean = true):PerkType {
 			this.buffs = buffs

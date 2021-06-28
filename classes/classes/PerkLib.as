@@ -4989,8 +4989,8 @@ public class PerkLib
                     .requireInt(90)
                     .requirePerk(HalfStepToImprovedSpirituality)
                     .requireLevel(12);
-            ArcaneRegenerationMajor.requirePerk(GrandMage)
-                    .requirePerk(ArcaneRegenerationMinor)
+            ArcaneRegenerationMajor.requirePerks(GrandMage, ArcaneRegenerationMinor)
+                    //.requirePerk(ArcaneRegenerationMinor)
                     .requireInt(75)
                     .requireLevel(12);
             MagicMetabolism.requireHungerEnabled()
@@ -5032,8 +5032,8 @@ public class PerkLib
                     .requirePerk(GrandMage)
                     .requireInt(100)
                     .requireLevel(18);
-            ArcaneRegenerationEpic.requirePerk(Archmage)
-                    .requirePerk(ArcaneRegenerationMajor)
+            ArcaneRegenerationEpic.requirePerks(Archmage, ArcaneRegenerationMajor)
+                    //.requirePerk(ArcaneRegenerationMajor)
                     .requireInt(100)
                     .requireLevel(18);
             //Tier 4 Intelligence perks
@@ -5068,8 +5068,8 @@ public class PerkLib
                     .requireInt(160)
                     .requireLevel(28)
                     .requireNGPlus(2);
-            ArcaneRegenerationLegendary.requirePerk(GrandArchmage)
-                    .requirePerk(ArcaneRegenerationEpic)
+            ArcaneRegenerationLegendary.requirePerks(GrandArchmage, ArcaneRegenerationEpic)
+                    //.requirePerk(ArcaneRegenerationEpic)
                     .requireInt(125)
                     .requireLevel(24);
 			ElementalBolt.requireAnyPerk(RagingInferno, GlacialStorm, HighVoltage, EclipsingShadow)
@@ -5101,24 +5101,24 @@ public class PerkLib
             EverLastingBuffs.requirePerk(JobEnchanter)
                     .requireInt(160)
                     .requireLevel(30);
-            ArcaneRegenerationMythical.requirePerk(GrandArchmage2ndCircle)
-                    .requirePerk(ArcaneRegenerationLegendary)
+            ArcaneRegenerationMythical.requirePerks(GrandArchmage2ndCircle, ArcaneRegenerationLegendary)
+                    //.requirePerk(ArcaneRegenerationLegendary)
                     .requireInt(150)
                     .requireLevel(30);
-            RagingInfernoEx.requirePerk(GrandArchmage)
-                    .requirePerk(RagingInferno)
+            RagingInfernoEx.requirePerks(GrandArchmage, RagingInferno)
+                    //.requirePerk(RagingInferno)
                     .requireLevel(30)
                     .requireInt(150);
-            GlacialStormEx.requirePerk(GrandArchmage)
-                    .requirePerk(GlacialStorm)
+            GlacialStormEx.requirePerks(GrandArchmage, GlacialStorm)
+                    //.requirePerk(GlacialStorm)
                     .requireLevel(30)
                     .requireInt(150);
-            HighVoltageEx.requirePerk(GrandArchmage)
-                    .requirePerk(HighVoltage)
+            HighVoltageEx.requirePerks(GrandArchmage, HighVoltage)
+                    //.requirePerk(HighVoltage)
                     .requireLevel(30)
                     .requireInt(150);
-            EclipsingShadowEx.requirePerk(GrandArchmage)
-                    .requirePerk(EclipsingShadow)
+            EclipsingShadowEx.requirePerks(GrandArchmage, EclipsingShadow)
+                    //.requirePerk(EclipsingShadow)
                     .requireLevel(30)
                     .requireInt(150);
             UnlockForce2ndStage.requirePerk(UnlockForce)
@@ -5383,8 +5383,8 @@ public class PerkLib
                     .requireWis(125)
                     .requireSpe(100)
                     .requireLevel(24);
-            ElementalContractRank5.requirePerk(ElementalContractRank4)
-                    .requirePerk(ElementalConjurerDedication)
+            ElementalContractRank5.requirePerks(ElementalContractRank4, ElementalConjurerDedication)
+                    //.requirePerk(ElementalConjurerDedication)
                     .requireWis(125)
                     .requireLevel(24);
             StrongerElementalBond.requirePerk(StrongElementalBond)
@@ -5458,8 +5458,8 @@ public class PerkLib
                     .requireWis(200)
                     .requireLevel(42);*/
             //Tier 8 Wisdom perks
-            ElementalContractRank9.requirePerk(ElementalContractRank8)
-                    .requirePerk(ElementalConjurerSacrifice)
+            ElementalContractRank9.requirePerks(ElementalContractRank8, ElementalConjurerSacrifice)
+                    //.requirePerk(ElementalConjurerSacrifice)
                     .requireWis(225)
                     .requireLevel(48);
             ElementalConjurerSacrifice.requirePerk(ElementalConjurerDedication)
@@ -6816,14 +6816,14 @@ public class PerkLib
                         return player.internalChimeraScore() >= 12;
                     }, "Twelve racial perks");
 			JobAllRounder.requireLevel(24)
-                    .requirePerk(JobBeastWarrior)
-                    .requirePerk(JobGuardian)
-                    .requirePerk(JobLeader)
-                    .requirePerk(JobRanger)
-                    .requirePerk(JobSeducer)
-                    .requirePerk(JobSorcerer)
-                    .requirePerk(JobSoulCultivator)
-                    .requirePerk(JobWarrior)
+                    .requirePerks(JobBeastWarrior, JobGuardian, JobLeader, JobRanger, JobSeducer, JobSorcerer, JobSoulCultivator, JobWarrior)
+                    //.requirePerk(JobGuardian)
+                    //.requirePerk(JobLeader)
+                    //.requirePerk(JobRanger)
+                    //.requirePerk(JobSeducer)
+                    //.requirePerk(JobSorcerer)
+                    //.requirePerk(JobSoulCultivator)
+                    //.requirePerk(JobWarrior)
                     .requireStr(75)
                     .requireTou(75)
                     .requireSpe(75)
@@ -7333,4 +7333,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}
