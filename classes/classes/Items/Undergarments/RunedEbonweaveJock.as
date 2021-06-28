@@ -23,7 +23,7 @@ package classes.Items.Undergarments
 		}
 		
 		override public function playerRemove():Undergarment {
-			while (game.player.findPerk(PerkLib.WellspringOfLust) >= 0) game.player.removePerk(PerkLib.WellspringOfLust);
+			while (game.player.hasPerk(PerkLib.WellspringOfLust)) game.player.removePerk(PerkLib.WellspringOfLust);
 			return super.playerRemove();
 		}
 		

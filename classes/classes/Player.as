@@ -3389,7 +3389,10 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "sphinx") {
-				if (TopScore >= 23) {
+				if (TopScore >= 30) {
+					race = "noble sphinx";
+				}
+				if (TopScore >= 21) {
 					race = "greater sphinx";
 				}
 				if (TopScore >= 14) {
@@ -8837,6 +8840,7 @@ use namespace CoC;
 		{
 			Begin("Player","racialScore","sphinx");
 			var sphinxCounter:Number = 0;
+			var SphinxSkinColor:Array = ["dark", "tan"];
 			if (isTaur()) {
 				if (lowerBody == LowerBody.CAT)
 					sphinxCounter += 2;
@@ -8851,6 +8855,8 @@ use namespace CoC;
 				if (faceType == Face.CAT_CANINES && (lowerBody == LowerBody.CAT))
 					sphinxCounter++;
 			}
+			if (InCollection(skinTone, SphinxSkinColor))
+				sphinxCounter++;
 			if (eyes.type == Eyes.CAT_SLITS)
 				sphinxCounter++;
 			if (tongue.type == Tongue.CAT)
@@ -8865,7 +8871,7 @@ use namespace CoC;
 				sphinxCounter++;
 			if (wings.type == Wings.FEATHERED_SPHINX)
 				sphinxCounter += 4;
-			if (catCocks() > 0)
+			if (catCocks() > 0 || hasVagina())
 				sphinxCounter++;
 			if (hasPartialCoat(Skin.FUR) || hasPlainSkinOnly())
 				sphinxCounter++;
@@ -11765,13 +11771,21 @@ use namespace CoC;
 				}
 			}//+10 / 10 - 20
 			if (sphinxScore() >= 14) {
-				if (sphinxScore() >= 26) {
+				if (sphinxScore() >= 30) {
 					maxStrCap2 += 110;
 					maxTouCap2 -= 20;
 					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 70;
 					else maxSpeCap2 += 60;
-					maxIntCap2 += 130;
-					maxWisCap2 += 110;
+					maxIntCap2 += 150;
+					maxWisCap2 += 150;
+				}
+				if (sphinxScore() >= 21) {
+					maxStrCap2 += 90;
+					maxTouCap2 -= 20;
+					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 60;
+					else maxSpeCap2 += 50;
+					maxIntCap2 += 100;
+					maxWisCap2 += 95;
 				}
 				else {
 					maxStrCap2 += 50;
@@ -15209,6 +15223,21 @@ use namespace CoC;
 			if (hasPerk(PerkLib.MinotaurTesticles)) max += (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.MinotaurTesticlesFinalForm)) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			return max;
+		}
+
+		public function CheckMutationPerks():Number{
+			var changeLimit: Number;
+			if (hasPerk(PerkLib.HistoryAlchemist) || hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
+			if (hasPerk(PerkLib.Enhancement)) changeLimit++;
+			if (hasPerk(PerkLib.Fusion)) changeLimit++;
+			if (hasPerk(PerkLib.Enchantment)) changeLimit++;
+			if (hasPerk(PerkLib.Refinement)) changeLimit++;
+			if (hasPerk(PerkLib.Saturation)) changeLimit++;
+			if (hasPerk(PerkLib.Perfection)) changeLimit++;
+			if (hasPerk(PerkLib.Creationism)) changeLimit++;
+			if (hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
+			if (hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+			return changeLimit;
 		}
 
 		public function MutagenBonus(statName: String, bonus: Number):void

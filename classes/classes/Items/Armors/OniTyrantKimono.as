@@ -25,13 +25,13 @@ import classes.Player;
 		}
 
 		override public function playerEquip():Armor {
-			while (game.player.findPerk(PerkLib.OniTyrantKimono) >= 0) game.player.removePerk(PerkLib.OniTyrantKimono);
+			while (game.player.hasPerk(PerkLib.OniTyrantKimono)) game.player.removePerk(PerkLib.OniTyrantKimono);
 			game.player.createPerk(PerkLib.OniTyrantKimono,0,0,0,0);
 			return super.playerEquip();
 		}
 
 		override public function playerRemove():Armor {
-			while (game.player.findPerk(PerkLib.OniTyrantKimono) >= 0) game.player.removePerk(PerkLib.OniTyrantKimono);
+			while (game.player.hasPerk(PerkLib.OniTyrantKimono)) game.player.removePerk(PerkLib.OniTyrantKimono);
 			return super.playerRemove();
 		}
 

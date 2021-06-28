@@ -32,20 +32,20 @@ package classes.Items.Weapons
 		}
 		
 		override public function get verb():String { 
-				return game.player.findPerk(PerkLib.StaffChanneling) >= 0 ? "shot" : "smack"; 
+				return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "smack";
 		}
 		
 		override public function playerEquip():Weapon {
-			while (game.player.findPerk(PerkLib.BodyCultivatorsFocus) >= 0) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
+			while (game.player.hasPerk(PerkLib.BodyCultivatorsFocus)) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
 			game.player.createPerk(PerkLib.BodyCultivatorsFocus,0.4,0,0,0);
-			while (game.player.findPerk(PerkLib.MageWarden) >= 0) game.player.removePerk(PerkLib.MageWarden);
+			while (game.player.hasPerk(PerkLib.MageWarden)) game.player.removePerk(PerkLib.MageWarden);
 			game.player.createPerk(PerkLib.MageWarden,0,0,0,0);
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Weapon {
-			while (game.player.findPerk(PerkLib.BodyCultivatorsFocus) >= 0) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
-			while (game.player.findPerk(PerkLib.MageWarden) >= 0) game.player.removePerk(PerkLib.MageWarden);
+			while (game.player.hasPerk(PerkLib.BodyCultivatorsFocus)) game.player.removePerk(PerkLib.BodyCultivatorsFocus);
+			while (game.player.hasPerk(PerkLib.MageWarden)) game.player.removePerk(PerkLib.MageWarden);
 			return super.playerRemove();
 		}
 	}

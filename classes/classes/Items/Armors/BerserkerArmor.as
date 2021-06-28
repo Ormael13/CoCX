@@ -20,16 +20,16 @@ import classes.StatusEffects;
 		}
 
 		override public function playerEquip():Armor {
-			while (game.player.findPerk(PerkLib.BerserkerArmor) >= 0) game.player.removePerk(PerkLib.BerserkerArmor);
+			while (game.player.hasPerk(PerkLib.BerserkerArmor)) game.player.removePerk(PerkLib.BerserkerArmor);
 			game.player.createPerk(PerkLib.BerserkerArmor,0,0,0,0);
-			while (game.player.findPerk(PerkLib.SluttySeduction) >= 0) game.player.removePerk(PerkLib.SluttySeduction);
+			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
 			game.player.createPerk(PerkLib.SluttySeduction,8,0,0,0);
 			return super.playerEquip();
 		}
 
 		override public function playerRemove():Armor {
-			while (game.player.findPerk(PerkLib.BerserkerArmor) >= 0) game.player.removePerk(PerkLib.BerserkerArmor);
-			while (game.player.findPerk(PerkLib.SluttySeduction) >= 0) game.player.removePerk(PerkLib.SluttySeduction);
+			while (game.player.hasPerk(PerkLib.BerserkerArmor)) game.player.removePerk(PerkLib.BerserkerArmor);
+			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
 			return super.playerRemove();
 		}
 

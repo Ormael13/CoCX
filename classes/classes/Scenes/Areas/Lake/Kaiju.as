@@ -76,7 +76,7 @@ private function insultTheKaijuFirstMeeting():void {
 		outputText("\n\n\"<i>You are too rude,</i>\" she says in a huff.  \"<i>But I know how to fix you!</i>\" she begins to rise, standing to her full towering height.  Though much of her legs are still beneath the waves, her genitalia are in full display.  The lips of her feminine sex are moist, dripping with lake water and substantial moisture of their own.  They are surprisingly pink against the almost olive green of the rest of her.  But most shocking of all is that where a clit should be is instead a massive, gigantic green dong!");
 		outputText("\n\n\"<i>How about you put that mean mouth of yours to some good,</i>\" she tells you as she roughly picks you up between two large fingers and brings you to her stiffening cock.");
 		//[If player has learned the Whitefire spell]
-		if(player.hasStatusEffect(StatusEffects.KnowsWhitefire) && (player.findPerk(PerkLib.BloodMage) < 0 && player.mana < combat.spellCostWhite(40))) {
+		if(player.hasStatusEffect(StatusEffects.KnowsWhitefire) && (!player.hasPerk(PerkLib.BloodMage) && player.mana < combat.spellCostWhite(40))) {
 			outputText("\n\nSensing her desires, you try to quickly think of how to avoid pleasing the giant's large cock.  It occurs to you that you could use the spell whitefire to attack her.  Do you cast it?");
 			//[Yes][No]
 			menu();

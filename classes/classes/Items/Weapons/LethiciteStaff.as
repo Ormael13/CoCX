@@ -14,17 +14,17 @@ package classes.Items.Weapons
 		}
 		
 		override public function get verb():String { 
-			return game.player.findPerk(PerkLib.StaffChanneling) >= 0 ? "shot" : "smack"; 
+			return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "smack";
 		}
 		
 		override public function playerEquip():Weapon {
-			while (game.player.findPerk(PerkLib.WizardsFocus) >= 0) game.player.removePerk(PerkLib.WizardsFocus);
+			while (game.player.hasPerk(PerkLib.WizardsFocus)) game.player.removePerk(PerkLib.WizardsFocus);
 			game.player.createPerk(PerkLib.WizardsFocus, 0.8, 0, 0, 0);
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Weapon {
-			while (game.player.findPerk(PerkLib.WizardsFocus) >= 0) game.player.removePerk(PerkLib.WizardsFocus);
+			while (game.player.hasPerk(PerkLib.WizardsFocus)) game.player.removePerk(PerkLib.WizardsFocus);
 			return super.playerRemove();
 		}
 	}

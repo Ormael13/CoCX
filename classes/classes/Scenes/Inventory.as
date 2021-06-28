@@ -117,15 +117,15 @@ use namespace CoC;
 			outputText("<b>Head Accessory/Helm:</b> " + player.headjewelryName + "\n");
 			outputText("<b>Necklace:</b> " + player.necklaceName + "\n");
 			outputText("<b>Ring (1st):</b> " + player.jewelry.name + "\n");
-			if (player.findPerk(PerkLib.SecondRing) >= 0) outputText("<b>Ring (2nd):</b> " + player.jewelry2.name + "\n");
+			if (player.hasPerk(PerkLib.SecondRing)) outputText("<b>Ring (2nd):</b> " + player.jewelry2.name + "\n");
 			else outputText("<b>Ring (2nd):</b> <i>LOCKED</i> (req. Second Ring perk)\n");
-			if (player.findPerk(PerkLib.ThirdRing) >= 0) outputText("<b>Ring (3rd):</b> " + player.jewelry3.name + "\n");
+			if (player.hasPerk(PerkLib.ThirdRing)) outputText("<b>Ring (3rd):</b> " + player.jewelry3.name + "\n");
 			else outputText("<b>Ring (3rd):</b> <i>LOCKED</i> (req. Third Ring perk)\n");
-			if (player.findPerk(PerkLib.FourthRing) >= 0) outputText("<b>Ring (4th):</b> " + player.jewelry4.name + "\n");
+			if (player.hasPerk(PerkLib.FourthRing)) outputText("<b>Ring (4th):</b> " + player.jewelry4.name + "\n");
 			else outputText("<b>Ring (4th):</b> <i>LOCKED</i> (req. Fourth Ring perk)\n");
 			outputText("<b>Accessory (1st):</b> " + player.miscjewelryName + "\n");
 			outputText("<b>Accessory (2nd):</b> " + player.miscjewelryName2 + "\n");
-			if (player.findPerk(PerkLib.FlyingSwordPath) >= 0) outputText("<b>Flying Sword:</b> " + player.weaponFlyingSwordsName + "\n");
+			if (player.hasPerk(PerkLib.FlyingSwordPath)) outputText("<b>Flying Sword:</b> " + player.weaponFlyingSwordsName + "\n");
 			else outputText("<b>Flying Sword:</b> <i>LOCKED</i> (req. Flying Swords Control perk)\n");
 			outputText("<b>Vehicle:</b> " + player.vehiclesName + "\n");
 			if (player.hasKeyItem("Bag of Cosmos") >= 0 || player.hasKeyItem("Sky Poison Pearl") >= 0) {
@@ -738,9 +738,9 @@ use namespace CoC;
 
 		public function getMaxSlots():int {
 			var slots:int = 5;
-			if (player.findPerk(PerkLib.StrongBack) >= 0) slots++;
-			if (player.findPerk(PerkLib.StrongBack2) >= 0) slots++;
-			if (player.findPerk(PerkLib.StrongBack3) >= 0) slots++;
+			if (player.hasPerk(PerkLib.StrongBack)) slots++;
+			if (player.hasPerk(PerkLib.StrongBack2)) slots++;
+			if (player.hasPerk(PerkLib.StrongBack3)) slots++;
 			slots += player.keyItemv1("Backpack");
 			//Constrain slots to between 5 and 20.
 			if (slots < 5) slots = 5;
@@ -949,15 +949,15 @@ use namespace CoC;
 				else takeItem(item, callNext);
 			}
 			else if (item is Jewelry) {
-				if (player.findPerk(PerkLib.FourthRing) >= 0 && player.jewelry4 == JewelryLib.NOTHING) { //if 4th ring slot is empty, equip in that slot
+				if (player.hasPerk(PerkLib.FourthRing) && player.jewelry4 == JewelryLib.NOTHING) { //if 4th ring slot is empty, equip in that slot
 					player.setJewelry4(item as Jewelry);
 					itemGoNext();
 				}
-				else if (player.findPerk(PerkLib.ThirdRing) >= 0 && player.jewelry3 == JewelryLib.NOTHING) { //if 3rd ring slot is empty, equip in that slot
+				else if (player.hasPerk(PerkLib.ThirdRing) && player.jewelry3 == JewelryLib.NOTHING) { //if 3rd ring slot is empty, equip in that slot
 					player.setJewelry3(item as Jewelry);
 					itemGoNext();
 				}
-				else if (player.findPerk(PerkLib.SecondRing) >= 0 && player.jewelry2 == JewelryLib.NOTHING) { //if 2nd ring slot is empty, equip in that slot
+				else if (player.hasPerk(PerkLib.SecondRing) && player.jewelry2 == JewelryLib.NOTHING) { //if 2nd ring slot is empty, equip in that slot
 					player.setJewelry2(item as Jewelry);
 					itemGoNext();
 				}

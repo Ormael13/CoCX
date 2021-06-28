@@ -19,13 +19,13 @@ import classes.StatusEffects;
 		}
 
 		override public function playerEquip():Armor {
-			while (game.player.findPerk(PerkLib.TravelingMerchantOutfit) >= 0) game.player.removePerk(PerkLib.TravelingMerchantOutfit);
+			while (game.player.hasPerk(PerkLib.TravelingMerchantOutfit)) game.player.removePerk(PerkLib.TravelingMerchantOutfit);
 			game.player.createPerk(PerkLib.TravelingMerchantOutfit,0,0,0,0);
 			return super.playerEquip();
 		}
 
 		override public function playerRemove():Armor {
-			while (game.player.findPerk(PerkLib.TravelingMerchantOutfit) >= 0) game.player.removePerk(PerkLib.TravelingMerchantOutfit);
+			while (game.player.hasPerk(PerkLib.TravelingMerchantOutfit)) game.player.removePerk(PerkLib.TravelingMerchantOutfit);
 			return super.playerRemove();
 		}
 

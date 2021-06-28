@@ -110,7 +110,7 @@ private function postfightoptions():void {
 		if (player.gender == 3 && x >= 0 && !player.isTaur()) addButton(2, "Use Both", minotaurGetsRapedByHerms);
 		if (tentaRape != null) addButton(3, "TentacleDick", rapeMinotaurTentacles);
 		if (urethralPen != null) addButton(4, "UrethraFuck", minoUrethralPen);
-		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict)) {
+		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.hasPerk(PerkLib.MinotaurCumAddict) || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict)) {
 			addButton(5, "Get Filled", takeMinoCumDirectly);
 			if(player.biggestTitSize() >= 5 && !player.isNaga()) addButton(6, "Titfuck Him", minoGetsTitFucked);
 			if(player.isNaga()) addButton(6, "ProstateMilk", minoGetsTitFucked);
@@ -118,7 +118,7 @@ private function postfightoptions():void {
 		if (bj != null) addButton(7, "MakeHimSuck", minotaurBlowjob);
 		if (player.canOvipositSpider() || (player.canOvipositBee() && player.gender > 0)) addButton(8, "Lay Eggs", layEggsInAMinotaurSpiderLike);
 		if ((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(9, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-		if (player.findPerk(PerkLib.Feeder) >= 0) addButton(10, "Nurse", minotaurDrinksMilkNewsAtEleven);
+		if (player.hasPerk(PerkLib.Feeder)) addButton(10, "Nurse", minotaurDrinksMilkNewsAtEleven);
 		if (player.isAlraune()) addButton(11, "Vine in Butt", alrauneVineInButtScene);
 	}
 	addButton(12, "Kill", killMinotaur);
@@ -537,7 +537,7 @@ public function minoPheromones():void {
 	else outputText("right past your head.  ");
 	outputText("The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin.");
 	dynStats("lus", 10 + player.lib/20);
-	if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) {
+	if(player.hasPerk(PerkLib.MinotaurCumAddict) || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) {
 		if(rand(2) == 0) outputText("\n<b>You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.</b>");
 		else outputText("\n<b>You groan and lick your lips over and over, craving the taste of him in your mouth.</b>");
 		dynStats("lus", 5+rand(5));
@@ -846,7 +846,7 @@ public function minoCumUpdate():Boolean {
 			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 0;
 			output = true;
 		}
-		if (flags[kFLAGS.MINOTAUR_CUM_RESISTANCE_TRACKER] >= 150 && player.findPerk(PerkLib.MinotaurCumAddict) < 0 && player.findPerk(PerkLib.MinotaurCumResistance) < 0) {
+		if (flags[kFLAGS.MINOTAUR_CUM_RESISTANCE_TRACKER] >= 150 && !player.hasPerk(PerkLib.MinotaurCumAddict) && !player.hasPerk(PerkLib.MinotaurCumResistance)) {
 			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
 			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 0;
 			player.createPerk(PerkLib.MinotaurCumResistance, 0, 0, 0, 0);
@@ -877,8 +877,8 @@ public function minoCumUpdate():Boolean {
 			outputText("\n<b>A steady fire of lust slowly grows within you as you shiver and grab at your head.  You're in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n");
 		}
 		//UBER ADDICTION MESSAGE
-		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 100 && player.findPerk(PerkLib.MinotaurCumResistance) < 0 && player.findPerk(PerkLib.ManticoreCumAddict) < 0) {
-			if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {}
+		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 100 && !player.hasPerk(PerkLib.MinotaurCumResistance) && !player.hasPerk(PerkLib.ManticoreCumAddict)) {
+			if(player.hasPerk(PerkLib.MinotaurCumAddict)) {}
 			else {
 				player.createPerk(PerkLib.MinotaurCumAddict,0,0,0,0);
 				outputText("<b>You are now a Minotaur Cum Addict</b> (Bottled Minotaur Cum now heals 25% of your HP, but causes HP damage to boost lust for a few hours.)\n");
@@ -895,7 +895,7 @@ public function minoCumUpdate():Boolean {
 	}
 
 	//Decrement addiction value as needed
-	if(flags[kFLAGS.TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 48 && player.findPerk(PerkLib.MinotaurCumAddict) < 0) {
+	if(flags[kFLAGS.TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 48 && !player.hasPerk(PerkLib.MinotaurCumAddict)) {
 		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 0.15) {
 			flags[kFLAGS.MINOTAUR_CUM_RESISTANCE_TRACKER] += 0.15;
 			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] -= 0.15;
@@ -1023,7 +1023,7 @@ private function minotaurBlowjob():void {
 
 	outputText("You grimace at the awkward feeling of the beast's snout against you, but soon regain confidence in your choice as the monster begins to take your prick into his mouth.  His eyes grow wide as his lips wrap around you, with ");
 	if(monster.lust >= monster.maxLust()) outputText("his own burning lusts");
-	else if(player.findPerk(PerkLib.ArousingAura) >= 0) outputText("the power of your corruption");
+	else if(player.hasPerk(PerkLib.ArousingAura)) outputText("the power of your corruption");
 	else outputText("the salty taste of your pre-cum");
 	outputText(" leaving him hungry for more.\n\n");
 
