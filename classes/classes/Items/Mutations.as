@@ -3721,33 +3721,51 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
             return;
         }
+        //Smart enough for Bone spirit and doesnt have it
+        if (player.inte >= 100 && player.hasPerk(PerkLib.PrestigeJobNecromancer) && !player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone spirit.</b>");
+            player.createStatusEffect(StatusEffects.KnowsBoneSpirit, 0, 0, 0, 0);
+            return;
+        }
+        //Smart enough for Bone armor and doesnt have it
+        if (player.inte >= 110 && player.hasPerk(PerkLib.PrestigeJobNecromancer) && !player.hasStatusEffect(StatusEffects.KnowsBoneArmor)) {
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone armor.</b>");
+            player.createStatusEffect(StatusEffects.KnowsBoneArmor, 0, 0, 0, 0);
+            return;
+        }
+        //Smart enough for Boneshatter and doesnt have it
+        if (player.inte >= 120 && player.hasPerk(PerkLib.PrestigeJobNecromancer) && !player.hasStatusEffect(StatusEffects.KnowsBoneshatter)) {
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Boneshatter.</b>");
+            player.createStatusEffect(StatusEffects.KnowsBoneshatter, 0, 0, 0, 0);
+            return;
+        }
         //Smart enough for lifetap and doesnt have it
         if (player.inte >= 150 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsLifetap)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Lifetap.</b>");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Lifetap.</b>");
             player.createStatusEffect(StatusEffects.KnowsLifetap, 0, 0, 0, 0);
             return;
         }
         //Smart enough for life siphon and doesnt have it
         if (player.inte >= 160 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsLifeSiphon)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Life siphon.</b>");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Life siphon.</b>");
             player.createStatusEffect(StatusEffects.KnowsLifeSiphon, 0, 0, 0, 0);
             return;
         }
         //Smart enough for consuming darkness and doesnt have it
         if (player.inte >= 170 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsConsumingDarkness)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Consuming darkness.</b>");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Consuming darkness.</b>");
             player.createStatusEffect(StatusEffects.KnowsConsumingDarkness, 0, 0, 0, 0);
             return;
         }
         //Smart enough for curse of desire and doesnt have it
         if (player.inte >= 180 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsCurseOfDesire)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Curse of Desire.</b>");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Curse of Desire.</b>");
             player.createStatusEffect(StatusEffects.KnowsCurseOfDesire, 0, 0, 0, 0);
             return;
         }
         //Smart enough for curse of weeping and doesnt have it
         if (player.inte >= 190 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsCurseOfWeeping)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Curse of Weeping.</b>");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Curse of Weeping.</b>");
             player.createStatusEffect(StatusEffects.KnowsCurseOfWeeping, 0, 0, 0, 0);
         }
     }

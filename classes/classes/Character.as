@@ -1177,6 +1177,7 @@ import classes.Items.NecklaceLib;
 			if (game.player.tailType == Tail.SPIDER_ADBOMEN) maxven += 300;
 			if (game.player.tailType == Tail.SCORPION) maxven += 300;
 			if (game.player.tailType == Tail.MANTICORE_PUSSYTAIL) maxven += 400;
+			if (game.player.lowerBody == LowerBody.HYDRA) maxven += 400;
 			if (game.player.lowerBody == LowerBody.ATLACH_NACHA) maxven += 1200;
 			if (hasPerk(PerkLib.ImprovedVenomGland)) maxven += 100;
 			if (hasPerk(PerkLib.ImprovedVenomGlandEx)) maxven += 200;
@@ -1186,6 +1187,22 @@ import classes.Items.NecklaceLib;
 			if (hasPerk(PerkLib.VenomGlandsFinalForm)) {
 				maxven += 700;
 				multimaxven += 1;
+			}
+			if (hasPerk(PerkLib.VenomousAdiposeTissue)) {
+				if (tou > 20000) maxven += 1000;
+				else if (tou > 10000) maxven += 900;
+				else if (tou > 5000) maxven += 800;
+				else if (tou > 2000) maxven += 700;
+				else if (tou > 1000) maxven += 600;
+				else if (tou > 500) maxven += 500;
+				else if (tou > 200) maxven += 400;
+				else if (tou > 100) maxven += 300;
+				else if (tou > 50) maxven += 200;
+				else maxven += 100;
+				if (thickness > 150) maxven += 200;
+				else if (thickness > 100) maxven += 150;
+				else if (thickness > 50) maxven += 100;
+				else maxven += 50;
 			}
 			if (hasPerk(PerkLib.JobSoulCultivator)) {
 				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) multimaxven += 0.1;

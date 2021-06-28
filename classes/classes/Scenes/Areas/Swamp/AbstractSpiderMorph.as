@@ -44,15 +44,15 @@ public class AbstractSpiderMorph extends Monster
 				outputText("You dodge away, avoiding the sticky strands!");
 			}
 			//Determine if evaded
-			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 				outputText("You evade, avoiding the sticky strands!");
 			}
 			//("Misdirection"
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Your misleading movements allow you to easily sidestep the sticky strands!");
 			}
 			//Determine if cat'ed
-			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
 				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			//Got hit
@@ -103,15 +103,15 @@ public class AbstractSpiderMorph extends Monster
 				outputText("You dodge away, avoiding " + mf("his", "her") + " bite!");
 			}
 			//Determine if evaded
-			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 				outputText("You evade, avoiding the bite!");
 			}
 			//("Misdirection"
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Your misleading movements allow you to easily sidestep the spider bite!");
 			}
 			//Determine if cat'ed
-			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
 				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			else {
@@ -142,19 +142,19 @@ public class AbstractSpiderMorph extends Monster
 				outputText("You pull your weapon back and the webbing goes wide, missing entirely.");
 			}
 			//Determine if evaded
-			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 				outputText("You pull your weapon back evasively and the webbing goes wide, missing entirely!");
 			}
 			//("Misdirection"
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Your misleading movements allow you to easily sidestep the webbing!");
 			}
 			//Determine if cat'ed
-			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
 				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			//Shield Ward
-			else if (player.findPerk(PerkLib.ShieldWard) >= 0 && rand (2) == 0) {
+			else if (player.hasPerk(PerkLib.ShieldWard) && rand (2) == 0) {
 				outputText("You block the webbing with your shield, causing it to miss it orginal target.");
 			}
 			else if (player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets") {
@@ -185,15 +185,15 @@ public class AbstractSpiderMorph extends Monster
 				outputText("You lean back and let them pass harmlessly overhead, avoiding the attack.");
 			}
 			//Determine if evaded
-			else if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 				outputText("You pull your weapon back evasively and the webbing goes wide, missing entirely.");
 			}
 			//("Misdirection"
-			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Your misleading movements allow you to easily sidestep the webbing!");
 			}
 			//Determine if cat'ed
-			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
 				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			else {

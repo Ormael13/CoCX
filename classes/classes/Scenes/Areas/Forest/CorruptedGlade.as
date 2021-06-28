@@ -117,7 +117,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 					booster += 3;
 				else if (player.ballSize < 6)
 					booster += 2;
-				if (player.findPerk(PerkLib.MessyOrgasms) >= 0 && player.cumMultiplier < 3) booster += 2;
+				if (player.hasPerk(PerkLib.MessyOrgasms) && player.cumMultiplier < 3) booster += 2;
 				player.cumMultiplier += booster;
 			}
 			else { //Oral sex for those without!
@@ -294,11 +294,11 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 			outputText("You ponder over how to destroy the foul glade.");
 			menu();
 			var button:int = 0;
-			if (player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0) {
+			if (player.hasPerk(PerkLib.DragonFireBreath) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire)) {
 				if (player.fatigue > player.maxFatigue() - 50) addButtonDisabled(button++, "Fire Breath", "You are too tired to destroy the foul glade this way.");
 				else addButton(button++, "Fire Breath", destroyTheCorruptedGlades, 0);
 			}
-			if ((player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) && player.tailType == Tail.FOX && player.tailCount >= 7) {
+			if ((player.hasPerk(PerkLib.EnlightenedNinetails) || player.hasPerk(PerkLib.CorruptedNinetails)) && player.tailType == Tail.FOX && player.tailCount >= 7) {
 				if (player.fatigue > player.maxFatigue() - 20) addButtonDisabled(button++, "Fox Fire", "You are too tired to destroy the foul glade this way.");
 				else addButton(button++, "Fox Fire", destroyTheCorruptedGlades, 1);
 			}

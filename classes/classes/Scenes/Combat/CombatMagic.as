@@ -1569,6 +1569,41 @@ public class CombatMagic extends BaseCombatContent {
 		}
 	}
 	
+	public function buildNecroMenu(buttons:ButtonDataList):void {
+		var bd:ButtonData;
+		if (player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
+			bd = buttons.add("Bone spirit", spellBoneSpirit)
+					.hint("Turn an ordinary set of bones into a vengeance mad apparition that will charge at your target. Upon contact it will explode dealing massive true damage.  \n\nBones cost: 5");
+			if (!player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 5) {
+				bd.disable("You not have enough demon bones to use any this necromancer spell.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBoneArmor)) {
+			bd = buttons.add("Bone armor", spellBoneArmor)
+					.hint("Animate bones to create an impenetrable shield lasting 5 rounds and reducing all damage taken by 50%.  \n\n<b>Cooldown: 10 turns</b>  \n\nBones cost: 10");
+			if (!player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 10) {
+				bd.disable("You not have enough demon bones to use any this necromancer spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownBoneArmor)) {
+				bd.disable("You need more time before you can cast Bone armor again.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBoneshatter)) {
+			bd = buttons.add("Boneshatter", spellBoneshatter)
+					.hint("Strike at the target ossature causing it to explode from the inside and causing serious internal damage and weakening its blow. Single target only (does not work on boneless creatures, Monster take 20% strength drain from this effect which stacks).  \n\n<b>Cooldown: 3 turns</b>  \n\nBones cost: 5");
+			if (!player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 5) {
+				bd.disable("You not have enough demon bones to use any this necromancer spell.");
+			} else if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyElementalType) || monster.hasPerk(PerkLib.EnemyGhostType) || monster.hasPerk(PerkLib.EnemyGooType) || monster.hasPerk(PerkLib.EnemyPlantType)) {
+				bd.disable("Your enemy lack bones.");
+			} else if (monster.plural || monster.hasPerk(PerkLib.Enemy300Type) || monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
+				bd.disable("You can only strike one target.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownBoneshatter)) {
+				bd.disable("You need more time before you can cast Boneshatter again.");
+			} else if (monster.statStore.hasBuff("Boneshatter")) {
+				bd.disable("Enemy is already affected by Boneshatter.");
+			}
+		}
+	}
+	
 	public function buildBloodMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var bloodForBloodGod:Number = (player.HP - player.minHP());
@@ -2716,6 +2751,142 @@ public class CombatMagic extends BaseCombatContent {
 		statScreenRefresh();
 		if(monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
+	}
+	
+	public function spellBoneSpirit():void {
+		clearOutput();
+		doNext(combatMenu);
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		outputText("You wrap your soulforce around the bones and shape them into a horrifying bone wraith sending it flying and laughing madly toward " + monster.a + monster.short + ". The ghastly apparition explodes upon contact into a hundred sharp bone shards grievously wounding " + monster.a + monster.short + ". ");
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 1.5;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 5) {
+			var minus1:Number = player.perkv1(PerkLib.PrestigeJobNecromancer);
+			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, minus1);
+			damage *= 0.5;
+		}
+		else player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, 5);
+		if (player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) >= 50) {
+			var plus1:Number = player.perkv1(PerkLib.PrestigeJobNecromancer) * 0.1;
+			plus1 = Math.round(plus1 - 0.5);
+			damage *= (1 + (0.1*plus1));
+		}
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doTrueDamage(damage, true, true);
+			doTrueDamage(damage, true, true);
+			doTrueDamage(damage, true, true);
+			doTrueDamage(damage, true, true);
+			doTrueDamage(damage, true, true);
+			doTrueDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doTrueDamage(damage, true, true);
+				doTrueDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doTrueDamage(damage, true, true);
+				doTrueDamage(damage, true, true);
+			}
+		}
+		else doTrueDamage(damage, true, true);
+		MagicAddonEffect();
+		outputText("\n\n");
+		statScreenRefresh();
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
+	}
+	
+	public function spellBoneArmor():void {
+		clearOutput();
+		doNext(combatMenu);
+		var dura:Number = 5;
+		outputText("You animate a set of bones to fly around you, deflecting incoming attacks.\n\n");
+		if (player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 10) {
+			var minus2:Number = player.perkv1(PerkLib.PrestigeJobNecromancer);
+			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, minus2);
+			dura -= 3;
+		}
+		else player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, 10);
+		if (player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) >= 50) {
+			var plus2:Number = player.perkv1(PerkLib.PrestigeJobNecromancer) * 0.1;
+			plus2 = Math.round(plus2 - 0.5);
+			dura += plus2;
+		}
+		player.createStatusEffect(StatusEffects.BoneArmor,dura,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownBoneArmor,10,0,0,0);
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
+	}
+	
+	public function spellBoneshatter():void {
+		clearOutput();
+		doNext(combatMenu);
+		var shatterIt:Number = 0.2;
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 0.25;
+		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 5) {
+			var minus3:Number = player.perkv1(PerkLib.PrestigeJobNecromancer);
+			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, minus3);
+			shatterIt *= 0.5;
+			damage *= 0.5;
+		}
+		if (player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) >= 50) {
+			var plus3:Number = player.perkv1(PerkLib.PrestigeJobNecromancer) * 0.1;
+			plus3 = Math.round(plus3 - 0.5);
+			shatterIt *= (1 + (0.1*plus3));
+			damage *= (1 + (0.1*plus3));
+		}
+		else player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, 5);
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) shatterIt *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) shatterIt *= 0.3;
+			else shatterIt *= 0.2;
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) shatterIt *= 10;
+			else if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) shatterIt *= 8;
+			else shatterIt *= 6;
+		}
+		if (shatterIt > 0.9) shatterIt = 0.9;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		outputText("You channel your powers in " + monster.a + monster.short + " bone structure stressing it and forcing the bones to snap. " + monster.capitalA + monster.short + " cough blood you wreck " + monster.pronoun3 + " from the inside. ");
+		doTrueDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
+		outputText("\n\n");
+		monster.buff("Boneshatter").addStats({str:-(Math.round(shatterIt * monster.str))}).withText("Boneshatter").combatPermanent();
+		player.createStatusEffect(StatusEffects.CooldownBoneshatter,3,0,0,0);
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		enemyAI();
 	}
 	
 	public function spellLifetap():void {
@@ -4409,4 +4580,4 @@ public class CombatMagic extends BaseCombatContent {
 		return false;
 	}
 }
-}
+}

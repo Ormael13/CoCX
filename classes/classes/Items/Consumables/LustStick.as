@@ -17,7 +17,7 @@ package classes.Items.Consumables
 		}
 
 		override public function canUse():Boolean {
-			if (game.player.hasCock() && game.player.findPerk(PerkLib.LuststickAdapted) < 0) {
+			if (game.player.hasCock() && !game.player.hasPerk(PerkLib.LuststickAdapted)) {
 				outputText("You look at the tube of lipstick, but get the idea it would be a pretty bad idea to smear a thick coating of cock-hardening aphrodisiacs over your own lips.  ");
 				return false;
 			}

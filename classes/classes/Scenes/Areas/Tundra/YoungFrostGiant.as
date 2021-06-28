@@ -72,13 +72,13 @@ import classes.internals.WeightedDrop;
 				}
 				else if (player.str >= 20 && player.str < 40) {
 					outputText("Young giant's grip nearly crushes you to bits right there; sheer force of will allows you to struggle and resist, though it proves futile. ");
-					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 10 + rand((str + weaponAttack) * 0.5);
+					if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {damage = 10 + rand((str + weaponAttack) * 0.5);
 					player.takePhysDamage(damage, true);
 					}
 				}
 				else if (player.str < 20) {
 					outputText("Young giant squeezes you mercilessly, the pressure on your body reaching critical levels. Young giant doesn't seem to want to murder you, fortunately, so he lessens his grip slightly. No dice escaping it though. ");
-					if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {damage = 20 + rand((str + weaponAttack) * 0.75);
+					if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {damage = 20 + rand((str + weaponAttack) * 0.75);
 					player.takePhysDamage(damage, true);
 					}
 				}

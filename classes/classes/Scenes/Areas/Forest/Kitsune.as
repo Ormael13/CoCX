@@ -82,8 +82,8 @@ public class Kitsune extends Monster
 			var resist:int = 0;
 			if (player.inte < 30) resist = Math.round(player.inte);
 			else resist = 30;
-			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 20;
-			if ((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor < 20) resist += 20 - player.cor;
+			if (player.hasPerk(PerkLib.Whispered)) resist += 20;
+			if ((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor < 20) resist += 20 - player.cor;
 			if (rand(100) < resist) {
 				outputText("\n\nThe kitsune seems to melt away before your eyes for a moment, as though the edges of reality are blurring around her.  You tighten your focus, keeping your eyes trained on her, and she suddenly reels in pain, clutching her forehead as she is thrust back into view.  She lets out a frustrated huff of disappointment, realizing that you have resisted her illusions.");
 			}
@@ -100,8 +100,8 @@ public class Kitsune extends Monster
 			var resist:int = 0;
 			if (player.inte < 30) resist = Math.round(player.inte);
 			else resist = 30;
-			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 20;
-			if ((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor < 20) resist += 20 - player.cor;
+			if (player.hasPerk(PerkLib.Whispered)) resist += 20;
+			if ((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor < 20) resist += 20 - player.cor;
 			var select:int = rand(7);
 			//Attack:
 			if (select == 0) {

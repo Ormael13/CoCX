@@ -36,7 +36,7 @@ package classes.Scenes.Areas.DefiledRavine
 			else outputText("right past your head.  ");
 			outputText("The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin.");
 			player.dynStats("lus", 20 + player.lib/16);
-			if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) {
+			if(player.hasPerk(PerkLib.MinotaurCumAddict) || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) {
 				if(rand(2) == 0) outputText("\n<b>You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.</b>");
 				else outputText("\n<b>You groan and lick your lips over and over, craving the taste of him in your mouth.</b>");
 				player.dynStats("lus", 15+rand(15));
@@ -46,13 +46,13 @@ package classes.Scenes.Areas.DefiledRavine
 		public function minoincubusHeadbutt():void {
 			outputText("\"<i>Catch,</i>\" the demonic brute growls, moments before attempting to slam his forehead into your own.");
 			var damage:Number = ((str + weaponAttack) * 0.5) - rand(player.tou * 0.75);
-			if (damage <= 0 || combatMiss() || player.findPerk(PerkLib.Flexibility) >= 0) {
+			if (damage <= 0 || combatMiss() || player.hasPerk(PerkLib.Flexibility)) {
 				outputText(" Luckily, you dodge aside.");
 			}
-			else if (player.findPerk(PerkLib.Evade) >= 0) {
+			else if (player.hasPerk(PerkLib.Evade)) {
 				outputText(" Luckily, you evade.");
 			}
-			else if (player.findPerk(PerkLib.Misdirection) >= 0) {
+			else if (player.hasPerk(PerkLib.Misdirection)) {
 				outputText(" Luckily, you misdirect his attack.");
 			}
 			else {
@@ -60,7 +60,7 @@ package classes.Scenes.Areas.DefiledRavine
 				damage = Math.round(damage);
 				player.takePhysDamage(damage, true);
 				//{Stun for one turn, minor HP damage}
-				if (player.findPerk(PerkLib.Resolute) < 0) {
+				if (!player.hasPerk(PerkLib.Resolute)) {
 					outputText(" <b>You're left stunned by the force of the blow!</b>");
 					player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 				}
@@ -69,14 +69,14 @@ package classes.Scenes.Areas.DefiledRavine
 		public function minoincubusDickslap():void {
 			//Used after stunning PC.
 			outputText("Before you can completely regain your wits, the brute is on you, easily holding your hand in one hand while he none-too-gently smacks his cock into your face, dragging his musky member back and forth across your cheeks before finally breaking contact.");
-			outputText(" Strands of his"+(player.findPerk(PerkLib.MinotaurCumAddict) >= 0 ? " god-like":"")+" spunk hang from your nose until your tongue lashes out to collect them. "+(player.findPerk(PerkLib.MinotaurCumAddict) >= 0 ? "Delicious.":"")+"Why did you do that? And why did it feel so good.");
+			outputText(" Strands of his"+(player.hasPerk(PerkLib.MinotaurCumAddict) ? " god-like":"")+" spunk hang from your nose until your tongue lashes out to collect them. "+(player.hasPerk(PerkLib.MinotaurCumAddict) ? "Delicious.":"")+"Why did you do that? And why did it feel so good.");
 			player.dynStats("lus", 20 + player.lib/16);
 		}
 		
 		public function  minoincubusBattleaxes():void {
 			outputText("The mino incubus carries his axes as if they weighed no more than a feather, brandishing them back and forth with such casual movements that you barely register his swings");
 			var damage:Number = ((str + weaponAttack) * 1.25) - rand(player.tou);
-			if (damage <= 0 || combatMiss() || player.findPerk(PerkLib.Evade) >= 0 || player.findPerk(PerkLib.Flexibility) >= 0 || player.findPerk(PerkLib.Misdirection) >= 0) {
+			if (damage <= 0 || combatMiss() || player.hasPerk(PerkLib.Evade) || player.hasPerk(PerkLib.Flexibility) || player.hasPerk(PerkLib.Misdirection)) {
 				outputText(" in time to avoid it.");
 			}
 			else {

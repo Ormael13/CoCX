@@ -25,13 +25,13 @@ package classes.Items.Armors
 		}
 		
 		override public function playerEquip():Armor { //This item is being equipped by the player. Add any perks, etc.
-			while (game.player.findPerk(playerPerk) >= 0) game.player.removePerk(playerPerk);
+			while (game.player.hasPerk(playerPerk)) game.player.removePerk(playerPerk);
 			game.player.createPerk(playerPerk, playerPerkV1, playerPerkV2, playerPerkV3, playerPerkV4);
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Armor { //This item is being removed by the player. Remove any perks, etc.
-			while (game.player.findPerk(playerPerk) >= 0) game.player.removePerk(playerPerk);
+			while (game.player.hasPerk(playerPerk)) game.player.removePerk(playerPerk);
 			return super.playerRemove();
 		}
 

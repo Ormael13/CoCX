@@ -49,7 +49,7 @@ use namespace CoC;
 			
 			var chooser:Number = rand(6);
 			//Boosts mino and hellhound rates!
-			if (player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(3) == 0) {
+			if (player.hasPerk(PerkLib.PiercedFurrite) && rand(3) == 0) {
 				chooser = 1;
 			}
 			//Helia monogamy fucks

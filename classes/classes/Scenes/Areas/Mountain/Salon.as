@@ -108,12 +108,12 @@ public function salonPurchaseMenu():void {
 	if(player.femininity < 100 && player.gender == 2) mudFacialEnabled = true;
 	else if(player.femininity < 85 && (player.gender == 0 || player.gender == 3)) mudFacialEnabled = true;
 	else if(player.femininity < 70 && player.gender == 1) mudFacialEnabled = true;
-	else if(player.femininity < 100 && player.findPerk(PerkLib.Androgyny) >= 0) mudFacialEnabled = true;
+	else if(player.femininity < 100 && player.hasPerk(PerkLib.Androgyny)) mudFacialEnabled = true;
 	//Enable sand facial
 	if(player.femininity > 0 && player.gender == 1) sandFacialEnabled = true;
 	else if(player.femininity > 30 && player.gender == 2) sandFacialEnabled = true;
 	else if(player.femininity > 20 && (player.gender == 0 || player.gender == 3))  sandFacialEnabled = true;
-	else if(player.femininity > 0 && player.findPerk(PerkLib.Androgyny) >= 0) sandFacialEnabled = true;
+	else if(player.femininity > 0 && player.hasPerk(PerkLib.Androgyny)) sandFacialEnabled = true;
 	
 	menu();
 	if (player.hairLength > 2) addButton(0, "Cut Short", cutShort);
@@ -153,7 +153,7 @@ private function hairDresserRepeatGreeting():void {
 	outputText(images.showImage("location-salon"));
 	var minoCum:Number = 0;
 	//Chance for mino craziness here
-	if(rand(5) == 0 && (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0)) {
+	if(rand(5) == 0 && (player.hasPerk(PerkLib.MinotaurCumAddict) || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0)) {
 		minotaurCumBukkakeInSalon();	
 		return;
 	}
