@@ -129,6 +129,13 @@ package classes.Scenes.Places.HeXinDao
 			inventory.takeItem(itype, shadyPerson);
 		}
 
+		private function visitMadam():void {
+			clearOutput();//Madam - female kishoo npc for stat points to perk points conversion
+			//outputText("\"<i>Wanna buy something?</i>\" askes the cat head while dog one adds almost barking, \"<i>Or get lost...</i>\"\n\n");
+			menu();
+			addButton(14, "Back", curry(enteringInn,false));
+		}
+
 		public function BoardkeeperYangMain():void {
 			clearOutput();
 			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0

@@ -1069,10 +1069,20 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				var multiplier:Number = 1.0;
 				if (player.hasPerk(PerkLib.Survivalist)) multiplier -= 0.2;
 				if (player.hasPerk(PerkLib.Survivalist2)) multiplier -= 0.2;
+				if (player.hasPerk(PerkLib.Survivalist3)) multiplier -= 0.2;
+				if (player.hasPerk(PerkLib.HighlyVenomousDiet)) {
+					if (player.maxHunger() > 1600) multiplier += 0.25;
+					else if (player.maxHunger() > 800) multiplier += 0.25;
+					else if (player.maxHunger() > 400) multiplier += 0.25;
+					else if (player.maxHunger() > 200) multiplier += 0.25;
+					else if (player.maxHunger() > 100) multiplier += 0.25;
+					else multiplier += 0.25;
+				}
 				if (player.hasPerk(PerkLib.ManticoreCumAddict)) multiplier *= 2;
 				if (player.hasPerk(PerkLib.HydraRegeneration)) multiplier *= 2;
+				if (player.hasPerk(PerkLib.AxillaryVenomGlands)) multiplier *= 2;
 				//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
-				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 hours with Survivalist perks.
+				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 and 250 hours with Survivalist perks.
 				if (player.hasStatusEffect(StatusEffects.FastingPill)) player.hunger += 2;
 				if (prison.inPrison) {
 					if (player.internalChimeraRating() >= 1) {
@@ -1089,7 +1099,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.hunger > 25) player.hunger -= (0.5 * multiplier);
 					if (player.hunger > 0) player.hunger -= (0.5 * multiplier);
 				}
-				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) player.hunger = 100; //After Valeria x Goo Girl, you'll never get hungry until you "birth" the goo-girl.
+				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) player.hunger = player.maxHunger(); //After Valeria x Goo Girl, you'll never get hungry until you "birth" the goo-girl.
 				if (player.hunger < 50 && player.hasPerk(PerkLib.MagicMetabolism)) {
 					var manaDrain:Number = 0;
 					manaDrain += 50 - player.hunger;
@@ -1397,16 +1407,65 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.PhantomShooting);
 				needNext = true;
 			}
-			//Recharge tail
-			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS || player.lowerBody == LowerBody.ATLACH_NACHA
-			|| player.hasPerk(PerkLib.ImprovedVenomGland)|| player.hasPerk(PerkLib.VenomGlandsEvolved)) { //Spider, Bee, Scorpion, Manticore, Naga and Altach Nacha Venom Recharge
+			//Recharge venom/web pool
+			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS || player.lowerBody == LowerBody.HYDRA || player.lowerBody == LowerBody.ATLACH_NACHA 
+			|| player.hasPerk(PerkLib.ImprovedVenomGland) || player.hasPerk(PerkLib.VenomGlandsEvolved) || player.hasPerk(PerkLib.VenomousDiet) || player.hasPerk(PerkLib.HighlyVenomousDiet) || player.hasPerk(PerkLib.AxillaryVenomGlands) || player.hasPerk(PerkLib.VenomousAdiposeTissue)) { //Spider, Bee, Scorpion, Manticore, Naga and Altach Nacha Venom Recharge
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
 				if (player.hasPerk(PerkLib.ImprovedVenomGland)) player.tailRecharge += 5;
 				if (player.hasPerk(PerkLib.ImprovedVenomGlandEx)) player.tailRecharge += 15;
 				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) player.tailRecharge += 45;
 				if (player.hasPerk(PerkLib.VenomGlandsEvolved)) player.tailRecharge += 2;
 				if (player.hasPerk(PerkLib.VenomGlandsFinalForm)) player.tailRecharge += 8;
+				if (player.hasPerk(PerkLib.VenomousDiet)) {
+					if (player.hunger > 1400) player.tailRecharge += 30;
+					else if (player.hunger > 1200) player.tailRecharge += 28;
+					else if (player.hunger > 1000) player.tailRecharge += 26;
+					else if (player.hunger > 900) player.tailRecharge += 24;
+					else if (player.hunger > 800) player.tailRecharge += 22;
+					else if (player.hunger > 700) player.tailRecharge += 20;
+					else if (player.hunger > 600) player.tailRecharge += 18;
+					else if (player.hunger > 500) player.tailRecharge += 16;
+					else if (player.hunger > 400) player.tailRecharge += 14;
+					else if (player.hunger > 300) player.tailRecharge += 12;
+					else if (player.hunger > 200) player.tailRecharge += 10;
+					else if (player.hunger > 150) player.tailRecharge += 8;
+					else if (player.hunger > 100) player.tailRecharge += 6;
+					else if (player.hunger > 50) player.tailRecharge += 4;
+					else player.tailRecharge += 2;
+				}
+				if (player.hasPerk(PerkLib.HighlyVenomousDiet)) {
+					if (player.maxHunger() > 1600) player.tailRecharge += 30;
+					else if (player.maxHunger() > 800) player.tailRecharge += 25;
+					else if (player.maxHunger() > 400) player.tailRecharge += 20;
+					else if (player.maxHunger() > 200) player.tailRecharge += 15;
+					else if (player.maxHunger() > 100) player.tailRecharge += 10;
+					else player.tailRecharge += 5;
+				}
+				if (player.hasPerk(PerkLib.VenomousAdiposeTissue)) {
+					if (player.tou > 20000) player.tailRecharge += 20;
+					else if (player.tou > 10000) player.tailRecharge += 18;
+					else if (player.tou > 5000) player.tailRecharge += 16;
+					else if (player.tou > 2000) player.tailRecharge += 14;
+					else if (player.tou > 1000) player.tailRecharge += 12;
+					else if (player.tou > 500) player.tailRecharge += 10;
+					else if (player.tou > 200) player.tailRecharge += 8;
+					else if (player.tou > 100) player.tailRecharge += 6;
+					else if (player.tou > 50) player.tailRecharge += 4;
+					else player.tailRecharge += 2;
+					if (player.thickness > 150) player.tailRecharge += 20;
+					else if (player.thickness > 100) player.tailRecharge += 15;
+					else if (player.thickness > 50) player.tailRecharge += 10;
+					else player.tailRecharge += 5;
+				}
+				if (player.faceType == Face.SNAKE_FANGS) player.tailRecharge += 4;
+				if (player.faceType == Face.SPIDER_FANGS) player.tailRecharge += 4;
+				if (player.tailType == Tail.BEE_ABDOMEN) player.tailRecharge += 6;
+				if (player.tailType == Tail.SPIDER_ADBOMEN) player.tailRecharge += 6;
+				if (player.tailType == Tail.SCORPION) player.tailRecharge += 6;
+				if (player.tailType == Tail.MANTICORE_PUSSYTAIL) player.tailRecharge += 8;
+				if (player.lowerBody == LowerBody.HYDRA) player.tailRecharge += 8;
 				if (player.lowerBody == LowerBody.ATLACH_NACHA) player.tailRecharge *= 2;
+				if (player.hasPerk(PerkLib.AxillaryVenomGlands)) player.tailRecharge *= 2;
 				player.tailVenom += player.tailRecharge;
 				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 			}
@@ -2906,4 +2965,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		}
 		//End of Interface Implementation
 	}
-}
+}

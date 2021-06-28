@@ -63,6 +63,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function doPoisonDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 		return combat.doPoisonDamage(damage, apply, display);
 	}
+	protected function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+		return combat.doTrueDamage(damage, apply, display);
+	}
 	protected function combatMiss():Boolean {
 		return combat.combatMiss();
 	}
@@ -231,16 +234,16 @@ public class BaseCombatContent extends BaseContent {
 	protected function healModWhite():Number {
 		return combat.magic.healModWhiteImpl();
 	}
-	protected function calcInfernoMod(damage:Number):int {
+	protected function calcInfernoMod(damage:Number):Number {
 		return combat.magic.calcInfernoModImpl(damage);
 	}
-	protected function calcGlacialMod(damage:Number):int {
+	protected function calcGlacialMod(damage:Number):Number {
 		return combat.magic.calcGlacialModImpl(damage);
 	}
-	protected function calcVoltageMod(damage:Number):int {
+	protected function calcVoltageMod(damage:Number):Number {
 		return combat.magic.calcVoltageModImpl(damage);
 	}
-	protected function calcEclypseMod(damage:Number):int {
+	protected function calcEclypseMod(damage:Number):Number {
 		return combat.magic.calcEclypseModImpl(damage);
 	}
 }

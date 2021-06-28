@@ -2341,6 +2341,7 @@ use namespace CoC;
 					damage = reducePhysDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2482,6 +2483,7 @@ use namespace CoC;
 					damage = reduceMagicDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2581,6 +2583,7 @@ use namespace CoC;
 					damage = reduceFireDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2689,6 +2692,7 @@ use namespace CoC;
 					damage = reduceIceDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2787,6 +2791,7 @@ use namespace CoC;
 					damage = reduceLightningDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2877,6 +2882,7 @@ use namespace CoC;
 					damage = reduceDarknessDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2969,6 +2975,7 @@ use namespace CoC;
 					damage = reducePoisonDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -10442,7 +10449,11 @@ use namespace CoC;
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobBerserker))
 				prestigeJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobDruid))
+				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobGreySage))
+				prestigeJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobNecromancer))
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobSeer))
 				prestigeJobs1++;
@@ -15365,4 +15376,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}
