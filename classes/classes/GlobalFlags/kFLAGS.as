@@ -2967,7 +2967,7 @@ public static const UNKNOWN_FLAG_NUMBER_02958:int                               
 public static const UNKNOWN_FLAG_NUMBER_02959:int                                   = 2959;
 public static const APEX_SELECTED_RACE:int                                   		= 2960;
 public static const UNKNOWN_FLAG_NUMBER_02961:int                                   = 2961;
-public static const UNKNOWN_FLAG_NUMBER_02962:int                                   = 2962;
+public static const NEWPERKSDISPLAY:int                                   			= 2962;//Perks Display cleanup
 public static const MUTATIONS_SPOILERS:int                                   		= 2963;//Mutations Help.
 public static const LVL_UP_FAST:int                                   				= 2964;//Bulk/Manual Incremental/Singular Levelling
 public static const SECONDARY_STATS_SCALING:int                                     = 2965;
