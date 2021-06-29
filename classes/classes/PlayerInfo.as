@@ -27,10 +27,10 @@ public class PlayerInfo extends BaseContent {
 		spriteSelect(-1);
 		clearOutput();
 		displayHeader("General Stats");
-
+		
 		// Begin Body Stats
 		var bodyStats:String = "";
-
+		
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0 || flags[kFLAGS.IN_PRISON] > 0) {
 			bodyStats += "<b>Satiety:</b> " + Math.floor(player.hunger) + " / " + player.maxHunger() + " (";
 			if (player.hunger <= 0) bodyStats += "<font color=\"#ff0000\">Dying</font>";
@@ -44,21 +44,11 @@ public class PlayerInfo extends BaseContent {
 			bodyStats += ")\n";
 		}
 		bodyStats += "<b>Times Transformed:</b> " + flags[kFLAGS.TIMES_TRANSFORMED] + "\n";
-		if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.tailType == Tail.SPIDER_ADBOMEN || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) {
-			if (player.tailType == Tail.SPIDER_ADBOMEN && player.faceType != Face.SNAKE_FANGS && player.faceType != Face.SPIDER_FANGS)
-				bodyStats += "<b>Web:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
-			else if (player.tailType == Tail.SPIDER_ADBOMEN && (player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS))
-				bodyStats += "<b>Venom/Web:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
-			else if (player.tailType != Tail.SPIDER_ADBOMEN)
-				bodyStats += "<b>Venom:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
-		}
 		bodyStats += "<b>Tone:</b> " + player.tone + " / " + player.maxToneCap() + "\n";
 		bodyStats += "<b>Thickness:</b> " + player.thickness + " / " + player.maxThicknessCap() + "\n";
 		bodyStats += "<b>Feminity:</b> " + player.femininity + " / 100\n";
-		
 		bodyStats += "<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n";
 		bodyStats += "<b>Anal Looseness:</b> " + Math.round(player.ass.analLooseness) + "\n";
-		
 		bodyStats += "<b>Fertility (Base) Rating:</b> " + Math.round(player.fertility) + "\n";
 		bodyStats += "<b>Fertility (With Bonuses) Rating:</b> " + Math.round(player.totalFertility()) + "\n";
 		if (player.cumQ() > 0)
@@ -67,14 +57,12 @@ public class PlayerInfo extends BaseContent {
 		else bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + "mL\n";
 		if (player.lactationQ() > 0)
 			bodyStats += "<b>Milk Production:</b> " + addComma(Math.round(player.lactationQ())) + "mL\n";
-
 		if (player.hasStatusEffect(StatusEffects.Feeder)) {
 			bodyStats += "<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusEffectv2(StatusEffects.Feeder);
 			if (player.statusEffectv2(StatusEffects.Feeder) >= 72)
 				bodyStats += " (Too long! Sensitivity Increasing!)";
 			bodyStats += "\n";
 		}
-
 		bodyStats += "<b>Pregnancy Speed Multiplier:</b> ";
 		var preg:Number = 1;
 		if (player.hasPerk(PerkLib.Diapause))
@@ -87,30 +75,22 @@ public class PlayerInfo extends BaseContent {
 			if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) preg++;
 			bodyStats += preg + "\n";
 		}
-
 		if (player.cocks.length > 0) {
 			bodyStats += "<b>Total Cocks:</b> " + player.cocks.length + "\n";
-
 			var totalCockLength:Number = 0;
 			var totalCockGirth:Number  = 0;
-
 			for (var i:Number = 0; i < player.cocks.length; i++) {
 				totalCockLength += player.cocks[i].cockLength;
 				totalCockGirth += player.cocks[i].cockThickness
 			}
-
 			bodyStats += "<b>Total Cock Length:</b> " + Math.round(totalCockLength) + " inches\n";
 			bodyStats += "<b>Total Cock Girth:</b> " + Math.round(totalCockGirth) + " inches\n";
 			bodyStats += "<b>Hours since last cum:</b> " + player.hoursSinceCum + "\n";
-
 		}
-
 		if (player.vaginas.length > 0)
 			bodyStats += "<b>Vaginal Capacity:</b> " + Math.round(player.vaginalCapacity()) + "\n" + "<b>Vaginal Looseness:</b> " + Math.round(player.looseness()) + "\n";
-
 		if (player.hasPerk(PerkLib.SpiderOvipositor) || player.hasPerk(PerkLib.BeeOvipositor))
 			bodyStats += "<b>Ovipositor Total Egg Count: " + player.eggs() + "\nOvipositor Fertilized Egg Count: " + player.fertilizedEggs() + "</b>\n";
-
 		if (player.hasStatusEffect(StatusEffects.SlimeCraving)) {
 			if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18)
 				bodyStats += "<b>Slime Craving:</b> Active! You are currently losing strength and speed.  You should find fluids.\n";
@@ -121,7 +101,6 @@ public class PlayerInfo extends BaseContent {
 					bodyStats += "<b>Slime Stored:</b> " + (17 - player.statusEffectv1(StatusEffects.SlimeCraving)) + " hours until you start losing strength.\n";
 			}
 		}
-
 		if (bodyStats != "")
 			outputText("\n<b><u>Body Stats</u></b>\n" + bodyStats);
 		// End Body Stats
@@ -449,8 +428,8 @@ public class PlayerInfo extends BaseContent {
 		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost()) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
-		combatStats += "<b>Venom:</b> " + Math.floor(player.tailVenom) + " / " + player.maxVenom() + "\n";
-		combatStats += "<b>Venom Recharge:</b> +" + combat.venomCombatRecharge2() + " / turn, +" + player.tailRecharge + " / hour\n";
+		combatStats += "<b>Venom/Web:</b> " + Math.floor(player.tailVenom) + " / " + player.maxVenom() + "\n";
+		combatStats += "<b>Venom/Web Recharge:</b> +" + combat.venomCombatRecharge2() + " / turn, +" + player.tailRecharge + " / hour\n";
 		combatStats += "\n";
 		var mins:Object = player.getAllMinStats();
 		combatStats += "<b>Strength Cap:</b> " + Math.floor(player.strStat.max) + "\n";

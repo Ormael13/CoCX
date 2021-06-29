@@ -8,6 +8,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Camp.ImpGang;
 import classes.Scenes.UniqueSexScenes;
 
@@ -16,6 +17,7 @@ use namespace CoC;
 	public class ImpScene extends BaseContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		public var campwinions:CampMakeWinions = new CampMakeWinions();
 		
 		public function ImpScene()
 		{
@@ -2326,12 +2328,11 @@ use namespace CoC;
 			inventory.takeItem(useables.FIMPSKL, cleanupAfterCombat);
 		}
 		private function harvestBones():void {
-			var harvL:Number = 100;
 			var harv:Number = 1 + rand(5);
-			if (player.hasPerk(PerkLib.BoneSoul)) harvL += 100;
 			if (player.hasPerk(PerkLib.GreaterHarvest)) harv += 4 + rand(12);
-			if (harv + player.perkv1(PerkLib.PrestigeJobNecromancer) > harvL) harv = harvL - player.perkv2(PerkLib.PrestigeJobNecromancer);
-			outputText("You take your time to harvest material. You acquired "+harv+" bones!");
+			if (harv + player.perkv1(PerkLib.PrestigeJobNecromancer) > campwinions.maxDemonBonesStored()) harv = campwinions.maxDemonBonesStored() - player.perkv1(PerkLib.PrestigeJobNecromancer);
+			outputText("You take your time to harvest material. You acquired " + harv + " bones!");
+			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, harv);
 			cleanupAfterCombat();
 		}
 	}

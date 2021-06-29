@@ -837,6 +837,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Blink:StatusEffectType                     = mkCombat("Blink");
 		public static const Blizzard:StatusEffectType                  = mkCombat("Blizzard");
 		public static const Bloodlust:StatusEffectType                 = mkCombat("Bloodlust");
+		public static const Boneshatter:StatusEffectType           	   = mkCombat("Boneshatter");
 		public static const BoneArmor:StatusEffectType           	   = mkCombat("Bone armor");
 		public static const Bound:StatusEffectType                     = mkCombat("Bound");
 		public static const BurnDoT:StatusEffectType                   = mkCombat("Burn DoT");
@@ -1153,4 +1154,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}
