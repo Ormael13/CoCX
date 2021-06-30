@@ -31,6 +31,10 @@ package classes.Scenes
 			outputText("<b>Version 0.8s:</b>\n\n");
 			outputText("-New tier 0 soulforce lvl-up perk: Flying Sword Path. Req. Job: Soul Cultivator perk. Effect: Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)\n");
 			outputText("-New tier 0 soulforce lvl-up perk: Soaring Blades. Req. Dantain and Flying Sword Path perks. Effect: Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of daintain attained.\n");
+			outputText("-New tier 0 misc lvl-up perk: Venomous Adipose Tissue. Req. 10+ tou. Effect: Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases)\n");
+			outputText("-New tier 0 misc lvl-up perk: Venomous Diet. Req. Enabled hunger mode. Effect: Increase venom/web recharge speed based on current hunger level.\n");
+			outputText("-New tier 2 misc lvl-up perk: Higly Venomous Diet. Req. Venomous Diet perk and enabled hunger mode. Effect: Increase venom/web recharge speed at cost of faster getting hungry.\n");
+			outputText("-New tier 2 misc lvl-up perk: Axillary Venom Glands. Req. Venomous Adipose Tissue perk. Effect: Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. (if hunger mode is active will instead drain hunger 2x faster)\n");
 			outputText("-New tier 4 misc lvl-up perk: Survivalist 3. Req. Survivalist 2 perk and hunger mode enabled. Effect: Slows hunger rate by another 20%.\n");
 			outputText("-New item slots: 2 misc accesory slots and 1 Flying Sword slot.\n");
 			outputText("-New flying sword: Training soul flying sword - buyable at Soul Equipment shop in He'Xin'Dao. Cost 100 gems. Base atk is 1. Can be used to train soulforce, to attack (acting like range weapon - each attack cost 25 SF) or even fly on it (100 SF per turn of sustaining flight).\n");
@@ -42,7 +46,7 @@ package classes.Scenes
 			//outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 96+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, \n");
 			outputText("-On diffuculty below Nightmare there will be no penalty for having too high wrath like unable to cast spells or m.specials. Also penalties for internal mutation would be reduced by 5 on Hard and by 10 on Normal.\n");
 			outputText("-New enemies: Ice/Lightning/Darkness Elemental. They are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");///Water/Air/Earth
-			outputText("-The Coin spoke back to Dinah telling her to review shop content. Or so legends was saying. Either way Dinah shop have now subtab for boss drops (it include now gazer and atlach nacha drops). Also each time visiting her would change the cost of all items she sells a bit.\n");
+			outputText("-The Coin spoke back to Dinah telling her to review shop content. Or so legends are saying. Either way Dinah shop have now subtab for boss drops (it include now gazer and atlach nacha drops). Also each time visiting her would change the cost of all items she sells a bit.\n");
 			outputText("-Pernament race TF getting bit of love and higher stat multi bonuses (as to compasate for fact of been perm and without option to gain more stat bonuses from race scores). They also would have ranks that would a bit enhance their racial stat bonuses as long PC do task specific for each pernament TF to rise it rnak from 1 up to even rank 4. Name of the race can change or not depending on rank.\n");
 			outputText("-Fairy TF quest part that req. to gather pieces of Scepter would be bit easier with Phoukas dropping more often scepter pieces during gathering phase (actualy they will drop those pieces only then).\n");
 			outputText("-New misc accesory: Demonic mage tail ornament - buyable at Kaiba shop (temporaly). Cost 9600 gems.\n");
@@ -58,7 +62,7 @@ package classes.Scenes
 			outputText("-Llaenwynn typo/scenes texts corrections.\n");
 			outputText("-Each Troll Fig given to Zenji would increase bonus to his cum capacity by 25 more. (2nd +25, 3rd +50, 4th +75 and so on)\n");
 			outputText("-Added disbaled buttons for soulforce menu. Also slight arrange some of the buttons there.\n");
-			outputText("-Transhumanism ascension perks effects been increased 2 times. Monsters increase after each ascenison been increased 3 times.\n");
+			outputText("-Transhumanism ascension perks effects been increased 2 times. Monsters increase after each ascenison been increased 5 times.\n");
 			outputText("-Added new cultivators specific events: Heavenly Tribulations (H class and G class). They last only for 3/4 turns and req. PC to survive tribulation attacks without dropping to min hp or maxing up lust bar.\n");
 			outputText("-New event perk: H class Heaven Tribulation Survivor. Gained by surviving 3 rounds of H class Heaven tribulation attacks. Effects: +10% to all stats multi/+10 to sens. Allow to comprehend Dao of Elements.\n");
 			outputText("-New event perk: G class Heaven Tribulation Survivor. Gained by surviving 4 rounds of G class Heaven tribulation attacks. Effects: +15% to all stats multi/+15 to sens. Allow to use soulforce to fly without need for wings.\n");
@@ -66,18 +70,20 @@ package classes.Scenes
 			outputText("-New event perk: Improved venom gland (Ex). Gained by reaching 125 pts on venom use counter. Effects: +200 to max venom, +15 venom recharge, -20% venom costs.\n");
 			outputText("-New event perk: Improved venom gland (Su). Gained by reaching 375 pts on venom use counter. Effects: +400 to max venom, +45 venom recharge, venom specials effects increased by 100% at 50% increased cost.\n");
 			outputText("-Some of setting menu options been greyed out when there isn't any loaded save.\n");
-			outputText("-New tier 0 misc lvl-up perk: Venomous Diet. Req. Enabled hunger mode. Effect: Increase venom/web recharge speed based on current hunger level.\n");
-			outputText("-New tier 2 misc lvl-up perk: Higly Venomous Diet. Req. Venomous Diet perk and enabled hunger mode. Effect: Increase venom/web recharge speed at cost of faster getting hungry.\n");
-			outputText("-New tier 2 misc lvl-up perk: Axillary Venom Glands. Req. Venomous Adipose Tissue perk. Effect: Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. (if hunger mode is active will instead drain hunger 2x faster)\n");
-			outputText("-New tier 0 misc lvl-up perk: Venomous Adipose Tissue. Req. 10+ tou. Effect: Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases)\n");
 			outputText("-Added in combat slow venom recharge.\n");
 			outputText("-New tier 7 wis lvl-up perk: Prestige Job: Necromancer. Req. Job: Golemancer and Daoist: Apprentice Stage perks, 125+ int, 175+ wis. Effect: +20 to max tou and +60 to max wis (scalable with NG tiers), able to harvest bones from true demons bodies, create up to 3 skeleton warriors, access to necromancer spells, gain a (very) small amount of soulforce after defeating enemies with soul (~1-3x enemy level).\n");
 			outputText("-New tier 8 wis lvl-up perk: Greater harvest. Req. Prestige Job: Necromancer perk. Effect: A demon is now considered to carry 5 to 20 bones and you may now have up to 6 Skeleton of each type.\n");
-			outputText("-New tier 9 wis lvl-up perk: Bone soul. Req. Greater harvest perk. Effect: When the bone reserve is at 0 you can still cast necromancy spells. However the effect of these spells is reduced by 50%. If the player has more than 50 demon bones, damage is instead increased by 10% per 10 bone owned up to 200%.\n");
+			outputText("-New tier 9 wis lvl-up perk: Bone soul. Req. Greater harvest perk. Effect: When the bone reserve is at 0 you can still cast necromancy spells. However the effect of these spells is reduced by 50%. If the player has more than 50 demon bones, damage is instead increased by 10% per 10 bone owned up to 200%. Increase limit of stored demonic bones by 100.\n");
 			outputText("-New tier 10 wis lvl-up perk: Skeleton Lord. Req. Bone soul perk. Effect: You may now control up to 10 skeleton of each type. Allow to levitate all skeletons.\n");
 			outputText("-New black spell: Bone spirit. It can be learned by using black book after picking Prestige Job: Necromancer perk. Effect: Turn an ordinary set of bones into a vengeance mad apparition that will charge at your target. Upon contact it will explode dealing massive true damage. Cost 5 demon bones to cast.\n");
 			outputText("-New black spell: Bone armor. It can be learned by using black book after picking Prestige Job: Necromancer perk. Effect: Animate bones to create an impenetrable shield lasting 5 rounds and reducing all damage taken by 50%. Cooldown: 10 turns.\n");
 			outputText("-New black spell: Boneshatter. It can be learned by using black book after picking Prestige Job: Necromancer perk. Effect: Strike at the target ossature causing it to explode from the inside and causing serious internal damage and weakening its blow. Single target only, monster take 10-90(20)% strength drain from this (not work on boneless creatures: construct, elemental, ghost, goo, plant). Cooldown: 3 turns\n");
+			outputText("-Lia code changes/corrections.\n");
+			outputText("-Jtex made changes to perks list screen that allow easier navigation.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
@@ -95,7 +101,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -172,9 +177,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -221,9 +224,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

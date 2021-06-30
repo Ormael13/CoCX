@@ -131,6 +131,7 @@ package classes.Scenes.Places.HeXinDao
 
 		private function visitMadam():void {
 			clearOutput();//Madam - female kishoo npc for stat points to perk points conversion
+			outputText("\n\n");
 			//outputText("\"<i>Wanna buy something?</i>\" askes the cat head while dog one adds almost barking, \"<i>Or get lost...</i>\"\n\n");
 			menu();
 			addButton(14, "Back", curry(enteringInn,false));

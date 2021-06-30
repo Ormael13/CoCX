@@ -1598,8 +1598,6 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only strike one target.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownBoneshatter)) {
 				bd.disable("You need more time before you can cast Boneshatter again.");
-			} else if (monster.statStore.hasBuff("Boneshatter")) {
-				bd.disable("Enemy is already affected by Boneshatter.");
 			}
 		}
 	}
@@ -2765,6 +2763,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("You wrap your soulforce around the bones and shape them into a horrifying bone wraith sending it flying and laughing madly toward " + monster.a + monster.short + ". The ghastly apparition explodes upon contact into a hundred sharp bone shards grievously wounding " + monster.a + monster.short + ". ");
 		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 1.5;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.Necromancy)) damage * 1.5;
 		if (player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 5) {
 			var minus1:Number = player.perkv1(PerkLib.PrestigeJobNecromancer);
 			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, minus1);
@@ -2843,8 +2842,9 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		doNext(combatMenu);
 		var shatterIt:Number = 0.2;
-		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 0.25;
+		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 0.75;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
+		if (player.hasPerk(PerkLib.Necromancy)) damage * 1.5;
 		if (player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 5) {
 			var minus3:Number = player.perkv1(PerkLib.PrestigeJobNecromancer);
 			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, minus3);
@@ -2859,14 +2859,26 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		else player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, 5);
 		if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) shatterIt *= 0.5;
-			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) shatterIt *= 0.3;
-			else shatterIt *= 0.2;
-			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) shatterIt *= 10;
-			else if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) shatterIt *= 8;
-			else shatterIt *= 6;
+			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
+			else if (player.hasPerk(PerkLib.GazerEyeEvolved)) damage *= 0.3;
+			else damage *= 0.2;
+			damage = Math.round(damage);
+			doTrueDamage(damage, true, true);
+			doTrueDamage(damage, true, true);
+			doTrueDamage(damage, true, true);
+			doTrueDamage(damage, true, true);
+			doTrueDamage(damage, true, true);
+			doTrueDamage(damage, true, true);
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
+				doTrueDamage(damage, true, true);
+				doTrueDamage(damage, true, true);
+			}
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
+				doTrueDamage(damage, true, true);
+				doTrueDamage(damage, true, true);
+			}
 		}
-		if (shatterIt > 0.9) shatterIt = 0.9;
+		else doTrueDamage(damage, true, true);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -2881,7 +2893,24 @@ public class CombatMagic extends BaseCombatContent {
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		MagicAddonEffect();
 		outputText("\n\n");
-		monster.buff("Boneshatter").addStats({str:-(Math.round(shatterIt * monster.str))}).withText("Boneshatter").combatPermanent();
+		if (monster.hasStatusEffect(StatusEffects.Boneshatter)) {
+			if (monster.statusEffectv1(StatusEffects.Boneshatter) < 0.9) {
+				if (monster.statusEffectv1(StatusEffects.Boneshatter) + shatterIt > 0.9) {
+					var shatterIt2:Number = (monster.statusEffectv1(StatusEffects.Boneshatter) + shatterIt) - 0.9;
+					shatterIt -= shatterIt2;
+					monster.addStatusValue(StatusEffects.Boneshatter, 1, shatterIt);
+					monster.buff("Boneshatter").addStats({str:-(Math.round(shatterIt * monster.str))}).withText("Boneshatter").combatPermanent();
+				}
+				else {
+					monster.addStatusValue(StatusEffects.Boneshatter, 1, shatterIt);
+					monster.buff("Boneshatter").addStats({str:-(Math.round(shatterIt * monster.str))}).withText("Boneshatter").combatPermanent();
+				}
+			}
+		}
+		else if (!monster.hasStatusEffect(StatusEffects.Boneshatter)) {
+			monster.createStatusEffect(StatusEffects.Boneshatter, shatterIt, 0, 0, 0);
+			monster.buff("Boneshatter").addStats({str:-(Math.round(shatterIt * monster.str))}).withText("Boneshatter").combatPermanent();
+		}
 		player.createStatusEffect(StatusEffects.CooldownBoneshatter,3,0,0,0);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
@@ -4580,4 +4609,4 @@ public class CombatMagic extends BaseCombatContent {
 		return false;
 	}
 }
-}
+}

@@ -2130,6 +2130,10 @@ package classes.Scenes.Camp
 		//
 		//-------------
 		
+		public function maxDemonBonesStored():Number {
+			var maxDemonBonesStoredCounter:Number = 100;
+			return maxDemonBonesStoredCounter;
+		}
 		public function maxSkeletonWarriors():Number {
 			var maxSkeletonWarriorsCounter:Number = 0;
 			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) maxSkeletonWarriorsCounter += 3;
@@ -2155,7 +2159,7 @@ package classes.Scenes.Camp
 		public function accessMakeSkeletonWinionsMainMenu():void {
 			clearOutput();
 			outputText("What skeleton would you like to make?\n\n");
-			outputText("<b>Stored Demon Bones:</b> " + player.perkv1(PerkLib.PrestigeJobNecromancer) + "\n");
+			outputText("<b>Stored Demon Bones:</b> " + player.perkv1(PerkLib.PrestigeJobNecromancer) + " / " + maxDemonBonesStored() + "\n");
 			outputText("<b>Skeleton Warriors:</b> " + player.perkv2(PerkLib.PrestigeJobNecromancer) + " / " + maxSkeletonWarriors() + "\n");
 			if (player.hasPerk(PerkLib.GreaterHarvest)) {
 				outputText("<b>Skeleton Archers:</b> " + player.perkv1(PerkLib.GreaterHarvest) + " / " + maxSkeletonArchers() + "\n");
