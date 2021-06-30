@@ -292,6 +292,54 @@ public function GclassHTsurvived():void {
 	player.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 	cleanupAfterCombat();
 }
+public function FclassHTintro():void {
+	outputText("\nAn expanse of dark clouds that are jet black like ink suddenly surged over in the sky, and it roiled without end while enveloping the sky above you. Crimson red bolts of lightning that were dazzling like fireworks interweave with each other within the dark cloud, and it emits a destructive force that cause one’s heart to palpitate. Your third tribulation starts now.\n");
+	startCombat(new FclassHeavenTribulation());
+}
+public function FclassHTbeaten():void {
+	clearOutput();
+	outputText("After your attack clouds starts to disperce. Not from sending all their attacks against but due to been forcefully scattered by your counterattacks. Looking upward with contempt and haunty arrogance toward dispering tribulation clouds feeling few of blockages in your body"+(player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3 ? " and soul":"")+" have been broken throu.\n\n");
+	outputText("<b>You can now create a clone, which could serve as main body replacement in case something bad happen to main body.\n");
+	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 0) {
+		var BTBa:Number = 1;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 1) BTBa += 2;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 2) BTBa += 3;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3) BTBa += 4;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 4) BTBa += 5;
+		if (player.hasPerk(PerkLib.BodyTempering)) {
+			outputText("Your Body Tempering have progressed.\n");
+			player.addPerkValue(PerkLib.BodyTempering, 1, BTBa);
+		}
+		else {
+			outputText("(Gained Perk: Body Tempering)\n");
+			player.createPerk(PerkLib.BodyTempering, BTBa, 0, 0, 0);
+		}
+	}
+	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3) {
+		var BTBaa:Number = 4;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 1) BTBaa += 5;
+		if (player.hasPerk(PerkLib.SoulTempering)) {
+			outputText("Your Soul Tempering have progressed.\n");
+			player.addPerkValue(PerkLib.SoulTempering, 1, BTBaa);
+		}
+		else {
+			outputText("(Gained Perk: Soul Tempering)\n");
+			player.createPerk(PerkLib.SoulTempering, BTBaa, 0, 0, 0);
+		}
+	}
+	outputText("(Gained Perk: F class Heaven Tribulation Survivor)</b>\n");
+	player.createPerk(PerkLib.FclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+	player.XP = player.XP + 40000;
+	cleanupAfterCombat();
+}
+public function FclassHTsurvived():void {
+	clearOutput();
+	outputText("You survived, albeit in rough shape, but things could be worse. The Tribulations clouds disperse now that your trial has ended.\n\n");
+	outputText("<b>You can now create a clone, which could serve as main body replacement in case something bad happen to main body.\n");
+	outputText("(Gained Perk: F class Heaven Tribulation Survivor)</b>\n");
+	player.createPerk(PerkLib.FclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+	cleanupAfterCombat();
+}
 
 public function goblinsBirthScene():void {
 	daughtersCount += 1 + rand(5);

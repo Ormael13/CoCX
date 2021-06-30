@@ -517,6 +517,13 @@ public class Combat extends BaseContent {
             player.setPerkValue(PerkLib.SpellcastingAffinity, 1, 50);
         }
     }
+	
+	internal function applyAutocast0():void {
+		outputText("\n\n");
+		if (flags[kFLAGS.AUTO_FLIGHT] == 1) {
+			
+		}
+	}
 
 //combat is over. Clear shit out and go to main
     public function cleanupAfterCombatImpl(nextFunc:Function = null):void {
@@ -883,17 +890,19 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.SoulDrill1)) {
             buttons.add("Soul Drill", soul1Drill).hint("Menu to adjust your Soul Drill spinning speed.");
         }
-		if (player.weaponFlyingSwordsName != "nothing" && !player.hasStatusEffect(StatusEffects.Flying) && player.statusEffectv1(StatusEffects.Flying) != 1) {
+		if (player.weaponFlyingSwordsName != "nothing") {
 			buttons.add("Flying Sword", attackFlyingSword).hint("Attack the enemy with your " + player.weaponFlyingSwordsName + ".  Damage done is determined by your wisdom and weapon.\n\nSoulforce cost per attack: "+flyingSwordAttackCost()+"");
 			if (player.soulforce < flyingSwordAttackCost()) {
                 bd.disable("Your current soulforce is too low.");
-            }
+            } else if (player.hasStatusEffect(StatusEffects.Flying) && player.statusEffectv2(StatusEffects.Flying) == 1) {
+				bd.disable("You currently use flying sword to fly on it.");
+			}
 		}
         if (!player.isFlying()) {
             if (player.canFly()) buttons.add("Take Flight", takeFlightWings).hint("Make use of your wings or other options avilable to take flight into the air for up to 7 turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 			if (player.canFlyNoWings()) {
-				if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) buttons.add("Take Flight", takeFlightNoWings).hint("Use your own soulforce to take flight into the air. \n\nSoulforce cost per turn:"+flyingWithSoulforceCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
-				buttons.add("Take Flight", takeFlightByFlyingSword).hint("Make use of your flying sword to take flight into the air. \n\nSoulforce cost per turn:"+flyingSwordUseCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+				if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) buttons.add("Take Flight", takeFlightNoWings).hint("Use your own soulforce to take flight into the air. \n\nSoulforce cost per turn: "+flyingWithSoulforceCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
+				buttons.add("Take Flight", takeFlightByFlyingSword).hint("Make use of your flying sword to take flight into the air. \n\nSoulforce cost per turn: "+flyingSwordUseCost()+" \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 			}
         }
 		if (player.isFlying()) {
@@ -9993,6 +10002,7 @@ public class Combat extends BaseContent {
 			player.wrath += 100;
 			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
 		}
+		applyAutocast0();
         magic.applyAutocast();
         mspecials.applyAutocast2();
         //Adjust lust vulnerability in New Game+.
@@ -13056,7 +13066,7 @@ public class Combat extends BaseContent {
 	}
 	public function takeFlightNoWings():void {
 		clearOutput();
-		outputText("You ... taking flight"+(player.weaponFlyingSwordsName != "nothing"?"":"")+".\n\n");
+		outputText("You surround your body with soulforce taking off int the air"+(player.weaponFlyingSwordsName != "nothing"?" as "+player.weaponFlyingSwordsName+" hover near you ready to be used at moment notice":"")+".\n\n");
         player.createStatusEffect(StatusEffects.Flying, 1, 2, 0, 0);
         takeFlight();
 	}

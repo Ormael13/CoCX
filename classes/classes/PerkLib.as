@@ -3739,10 +3739,10 @@ public class PerkLib
 		public static const DualMind:PerkType = mk("Dual Mind", "Dual Mind",
 				"Greatly empower the tease ability.");
 		public static const EclassHeavenTribulationSurvivor:PerkType = mk("E class Heaven Tribulation Survivor", "E class Heaven Tribulation Survivor",
-				"You have survived the fourth trial on cultivation path: E class Heaven Tribulation. +25% to all stats.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,'int.mult':0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':25}, false);
+				"You have survived the fourth trial on cultivation path: E class Heaven Tribulation. +25% to all stats.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,'int.mult':0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':125}, false);
 		public static const ElvenBounty:ElvenBountyPerk = new ElvenBountyPerk();
 		public static const FclassHeavenTribulationSurvivor:PerkType = mk("F class Heaven Tribulation Survivor", "F class Heaven Tribulation Survivor",
-				"You have survived the third trial on cultivation path: F class Heaven Tribulation. +20% to all stats.").withBuffs({'str.mult':0.20,'tou.mult':0.20,'spe.mult':0.20,'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20,'sens':20}, false);
+				"You have survived the third trial on cultivation path: F class Heaven Tribulation. +20% to all stats.").withBuffs({'str.mult':0.20,'tou.mult':0.20,'spe.mult':0.20,'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20,'sens':100}, false);
 		public static const FeralHunter:FeralHunterPerk = new FeralHunterPerk();
 		public static const FerasBoonAlpha:PerkType = mk("Fera's Boon - Alpha", "Fera's Boon - Alpha",
 				"Increases the rate your cum builds up and cum production in general.");
@@ -3763,9 +3763,9 @@ public class PerkLib
 		public static const GargoylePure:PerkType = mk("Gargoyle", "Pure Gargoyle",
 				"Need to gain sustenance from soulforce to stay alive.");
 		public static const GclassHeavenTribulationSurvivor:PerkType = mk("G class Heaven Tribulation Survivor", "G class Heaven Tribulation Survivor",
-				"You have survived the second trial on cultivation path: G class Heaven Tribulation. +15% to all stats.").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.15,'wis.mult':0.15,'lib.mult':0.15,'sens':15}, false);
+				"You have survived the second trial on cultivation path: G class Heaven Tribulation. +15% to all stats.").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.15,'wis.mult':0.15,'lib.mult':0.15,'sens':75}, false);
 		public static const HclassHeavenTribulationSurvivor:PerkType = mk("H class Heaven Tribulation Survivor", "H class Heaven Tribulation Survivor",
-				"You have survived the first trial on cultivation path: H class Heaven Tribulation. +10% to all stats.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':10}, false);
+				"You have survived the first trial on cultivation path: H class Heaven Tribulation. +10% to all stats.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':50}, false);
 		public static const Hellfire:PerkType = mk("Hellfire", "Hellfire",
 				"Grants a corrupted fire breath attack, like the hellhounds in the mountains.");
 		public static const IntermediateLeadership:PerkType = mk("Intermediate Leadership", "Intermediate Leadership",
@@ -5965,10 +5965,10 @@ public class PerkLib
                     .requireWis(60)
                     .requireLevel(18);
             //Tier 4
-            SoulSprite.requireLevel(24)
-                    .requirePerk(SoulWarrior)
+            SoulSprite.requirePerk(SoulWarrior)
 					.requirePerk(HclassHeavenTribulationSurvivor)
-                    .requireWis(80);
+					.requireWis(80)
+                    .requireLevel(24);
             FleshBodyWarriorStage.requireLevel(24)
                     .requirePerk(FleshBodyApprenticeStage);
             DaoistWarriorStage.requireLevel(24)
@@ -5983,8 +5983,9 @@ public class PerkLib
                     .requireLevel(36);
             //Tier 7
             SoulExalt.requirePerk(SoulElder)
+					.requirePerk(GclassHeavenTribulationSurvivor)
                     .requireWis(140)
-                    .requireLevel(42);//.requirePerk(GclassHeavenTribulationSurvivor)
+                    .requireLevel(42);
             FleshBodyElderStage.requireLevel(42)
                     .requirePerk(FleshBodyWarriorStage);
             DaoistElderStage.requireLevel(42)
@@ -5998,9 +5999,10 @@ public class PerkLib
                     .requirePerk(SoulOverlord)
                     .requireWis(180);
             //Tier 10
-     /*		SoulKing.requirePerk(SoulTyrant)
+     		SoulKing.requirePerk(SoulTyrant)
+					.requirePerk(FclassHeavenTribulationSurvivor)
                     .requireWis(200)
-                    .requireLevel(60);//.requirePerk(FclassHeavenTribulationSurvivor)
+                    .requireLevel(60);
             FleshBodyOverlordStage.requireLevel(60)
                     .requirePerk(FleshBodyElderStage);
             DaoistOverlordStage.requireLevel(60)
@@ -6013,7 +6015,7 @@ public class PerkLib
             SoulAncestor.requirePerk(SoulEmperor)
                     .requireWis(240)
                     .requireLevel(72);
-     */		//------------
+     		//------------
             // MISCELLANEOUS
             //------------
             //Tier 0
@@ -6024,7 +6026,7 @@ public class PerkLib
                 return player.demonScore() >= 5;
             }, "Demon race");
             CatlikeNimbleness.requirePerk(Flexibility).requireCustomFunction(function (player:Player):Boolean {
-                return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.displacerbeastScore() >= 4 || player.hellcatScore() >= 4 || player.cheshireScore() >= 4;
+                return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.displacerbeastScore() >= 4 || player.hellcatScore() >= 4 || player.cheshireScore() >= 4 || player.sphinxScore() >= 4;
             }, "Any cat race");
 			DisplacerMetabolism.requireMetabolismMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 				return player.displacerbeastScore() >= 8;
@@ -6260,7 +6262,7 @@ public class PerkLib
             CatlikeNimblenessEvolved.requireLevel(6)
 					.requirePerk(CatlikeNimbleness)
 					.requireCustomFunction(function (player:Player):Boolean {
-						return player.catScore() >= 8 || player.nekomataScore() >= 8 || player.displacerbeastScore() >= 8 || player.hellcatScore() >= 8 || player.cheshireScore() >= 8;
+						return player.catScore() >= 7 || player.nekomataScore() >= 8 || player.displacerbeastScore() >= 8 || player.hellcatScore() >= 8 || player.cheshireScore() >= 8 || player.sphinxScore() >= 8;
 					}, "Any cat race");
             FrozenHeartEvolved.requireLevel(6)
 				.requirePerk(FrozenHeart)
@@ -6759,6 +6761,10 @@ public class PerkLib
             Survivalist3.requireLevel(18)
                     .requireHungerEnabled()
                     .requirePerk(Survivalist2);
+			Aerobatics.requireLevel(18)
+					.requirePerk(AerialCombat)
+					.requireStr(40)
+					.requireSpe(45);
             //Tier 4
 			ArachnidBookLungFinalForm.requireLevel(24)
 					.requirePerk(ArachnidBookLungEvolved)
@@ -6774,7 +6780,7 @@ public class PerkLib
 			CatlikeNimblenessFinalForm.requireLevel(24)
 				.requirePerk(CatlikeNimblenessEvolved)
 				.requireCustomFunction(function (player:Player):Boolean {
-					return player.catScore() >= 8 || player.nekomataScore() >= 8 || player.displacerbeastScore() >= 8 || player.hellcatScore() >= 8 || player.cheshireScore() >= 8;
+					return player.catScore() >= 10 || player.nekomataScore() >= 12 || player.displacerbeastScore() >= 12 || player.hellcatScore() >= 12 || player.cheshireScore() >= 12 || player.sphinxScore() >= 12;
 			}, "Any cat race");
             FrozenHeartFinalForm.requireLevel(24)
 				.requirePerk(FrozenHeartEvolved)

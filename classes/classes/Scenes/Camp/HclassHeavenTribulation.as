@@ -67,7 +67,7 @@ package classes.Scenes.Camp
 			this.armorName = "tribulation clouds";
 			this.armorDef = 0;
 			this.armorMDef = 0;
-			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.Flying, 10, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			checkMonster();
 		}
