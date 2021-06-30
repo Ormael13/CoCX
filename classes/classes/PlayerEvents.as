@@ -1046,12 +1046,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removeStatusEffect(StatusEffects.TribulationCountdown);
 					campScenes.GclassHTintro();
 					needNext = true;
-				}/*
+				}
 				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) {
 					player.removeStatusEffect(StatusEffects.TribulationCountdown);
 					campScenes.FclassHTintro();
 					needNext = true;
-				}*/
+				}
 				else player.addStatusValue(StatusEffects.TribulationCountdown, 1, -1);
 			}
 			return needNext;

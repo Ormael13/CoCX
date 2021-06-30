@@ -244,12 +244,12 @@ use namespace CoC;
 			if (player.hasKeyItem("Fenrir Collar") >= 0) addButton(5, "Re-Collaring", AddMaxBackpack2).hint("Changing one godly collar to other godly collar.");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
+			//8
 			addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
 			addButton(10, "All4HiddenPrestige", AddMaxBackpack03).hint("A11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 			addButton(11, "PerkGalore1", PerkGalore1);
 			addButton(12, "PerkGalore2", PerkGalore2);
-			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(13, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock form Michiko for future clarity.");
+			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(13, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock from Michiko for future clarity.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function AddMaxBackpack033():void {
@@ -379,18 +379,6 @@ use namespace CoC;
 				else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
 			}
 			startCombat(new HellfireSnail());
-		}
-		public function AddReptaTongue():void {
-			outputText("\n\n<b>(Gained set of items to make Repta-Tongue Potion!)</b>\n\n");
-			inventory.takeItem(consumables.HUMMUS_, AddReptaTongue1);
-		}
-		public function AddReptaTongue1():void {
-			outputText("\n\n");
-			inventory.takeItem(consumables.REPTLUM, AddReptaTongue2);
-		}
-		public function AddReptaTongue2():void {
-			outputText("\n\n");
-			inventory.takeItem(consumables.OVIELIX, SoulforceCheats);
 		}
 		public function ChimeraBodyUltimateStage():void {
 			if (player.hasPerk(PerkLib.ChimericalBodyUltimateStage)) {
@@ -1128,8 +1116,8 @@ use namespace CoC;
 			addButton(6, "Add EXP 2", AddEXP2).hint("Add 1000 EXP.");
 			addButton(7, "Add EXP 3", AddEXP3).hint("Add 10000 EXP.");
 			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
-			if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(10, "Trib Perks", TribulationPerks).hint("Add 4 Tribulation perks.");
-			if (!player.hasPerk(PerkLib.SoulAncestor)) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Add all soul cultivator related perks for stages 10-12 of cultivation.");
+			if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(10, "Trib Perk", TribulationPerks).hint("Add E class Tribulation survivor perk.");
+			if (player.hasPerk(PerkLib.SoulAncestor)) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Remove all soul cultivator related perks for stages 10-12 of cultivation to keep save compatibility with public build saves.");
 			if (player.level < CoC.instance.levelCap) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
 			if (player.level < CoC.instance.levelCap - 9) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
 			addButton(14, "Back", SoulforceCheats);
@@ -1544,18 +1532,6 @@ use namespace CoC;
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function TribulationPerks():void {
-			if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
-				player.createPerk(PerkLib.HclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: H class Heaven Tribulation Survivor!)</b>");
-			}
-			if (!player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) {
-				player.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: G class Heaven Tribulation Survivor!)</b>");
-			}
-			if (!player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) {
-				player.createPerk(PerkLib.FclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: F class Heaven Tribulation Survivor!)</b>");
-			}
 			if (!player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) {
 				player.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: E class Heaven Tribulation Survivor!)</b>");
@@ -1563,25 +1539,25 @@ use namespace CoC;
 			doNext(SoulforceCheats);
 		}
 		public function Stage10to12SoulPerks():void {
-			if (!player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				player.createPerk(PerkLib.FleshBodyOverlordStage, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Flesh Body Overlord Stage!)</b>");
+			if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
+				player.removePerk(PerkLib.FleshBodyOverlordStage);
+				outputText("\n\n<b>(Lost Perk: Flesh Body Overlord Stage!)</b>");
 			}
-			if (!player.hasPerk(PerkLib.DaoistOverlordStage)) {
-				player.createPerk(PerkLib.DaoistOverlordStage, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Daoist Overlord Stage!)</b>");
+			if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
+				player.removePerk(PerkLib.DaoistOverlordStage);
+				outputText("\n\n<b>(Lost Perk: Daoist Overlord Stage!)</b>");
 			}
-			if (!player.hasPerk(PerkLib.SoulKing)) {
-				player.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Soul King!)</b>");
+			if (player.hasPerk(PerkLib.SoulKing)) {
+				player.removePerk(PerkLib.SoulKing);
+				outputText("\n\n<b>(Lost Perk: Soul King!)</b>");
 			}
-			if (!player.hasPerk(PerkLib.SoulEmperor)) {
-				player.createPerk(PerkLib.SoulEmperor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Soul Emperor!)</b>");
+			if (player.hasPerk(PerkLib.SoulEmperor)) {
+				player.removePerk(PerkLib.SoulEmperor);
+				outputText("\n\n<b>(Lost Perk: Soul Emperor!)</b>");
 			}
-			if (!player.hasPerk(PerkLib.SoulAncestor)) {
-				player.createPerk(PerkLib.SoulAncestor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Soul Ancestor!)</b>");
+			if (player.hasPerk(PerkLib.SoulAncestor)) {
+				player.removePerk(PerkLib.SoulAncestor);
+				outputText("\n\n<b>(Lost Perk: Soul Ancestor!)</b>");
 			}
 			doNext(SoulforceCheats);
 		}
@@ -4142,15 +4118,15 @@ use namespace CoC;
 		}
 		private function canfaceTribulation():Boolean {
 			if ((player.level >= 24 && player.hasPerk(PerkLib.SoulWarrior) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) ||
-				(player.level >= 42 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor))/* ||
-				(player.level >= 60 && player.hasPerk(PerkLib.SoulTyrant) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)*/) return true;
+				(player.level >= 42 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) ||
+				(player.level >= 60 && player.hasPerk(PerkLib.SoulTyrant) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor))) return true;
 			else return false;
 		}
 		public function tribulationsPrompt():void {
 			clearOutput();
 			outputText("Something within you speaks. You can sense that you’ve nearly reached the pinnacle of cultivation as a Soul ");
-			//outputText("");
-			if (player.level >= 42 && !player.hasPerk(PerkLib.SoulExalt)) outputText("Elder");
+			if (player.level >= 60 && !player.hasPerk(PerkLib.SoulKing)) outputText("Tyrant");
+			else if (player.level >= 42 && !player.hasPerk(PerkLib.SoulExalt)) outputText("Elder");
 			else outputText("Warrior");
 			outputText(". Now, only a tiny step is needed to advance further.");
 			outputText("\n\nThough, you pause. It’s a feeling so close, yet so far. Do you progress your skills naturally, or push for the goal that you’ve worked so hard to achieve.");
@@ -4162,9 +4138,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("There’s no use in delaying the inevitable. You do not fear the tribulation, you know you’re ready.");
 			outputText("\n\nYou know it’s time to give it your all. With determination and force of will, you cannot fail.");
-			if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.createStatusEffect(StatusEffects.TribulationCountdown, (2 + rand(4)), 0, 0, 0);
-			if (!player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) player.createStatusEffect(StatusEffects.TribulationCountdown, (2 + rand(4)), 0, 0, 0);
-			//if (!player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.createStatusEffect(StatusEffects.TribulationCountdown, (2 + rand(4)), 0, 0, 0);
+			player.createStatusEffect(StatusEffects.TribulationCountdown, (2 + rand(4)), 0, 0, 0);
 			doNext(playerMenu);
 		}
 		public function tribulationsPromptNo():void {

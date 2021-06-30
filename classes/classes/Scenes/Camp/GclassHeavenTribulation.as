@@ -12,17 +12,20 @@ package classes.Scenes.Camp
 	{
 		public function tribulationLustfullThunderStrike():void {
 			var ThDa:Number = player.statusEffectv2(StatusEffects.HeavenTribulationCR);
-			var LUSTFULL:Number = (200 * player.statusEffectv3(StatusEffects.HeavenTribulationCR));
+			var ThLu:Number = player.statusEffectv3(StatusEffects.HeavenTribulationCR);
 			outputText("One of pinkish and crimson red bolts of lightning change it course leaving clouds and heaving toward the ground below. ");
 			if (hasStatusEffect(StatusEffects.Dig)) outputText("But not finding target at the ground it hopelessly hits it leaving burn mark.");
 			else if (player.hasStatusEffect(StatusEffects.EverywhereAndNowhere)) outputText("But due to your current state it's unable to deal any harm.");
 			else {// || player.hasStatusEffect(StatusEffects.Displacement) || hasStatusEffect(StatusEffects.InvisibleOrStealth)
 				var THUNDER:Number = (200 * player.statusEffectv2(StatusEffects.HeavenTribulationCR));
+				var LUSTFULL:Number = (200 * player.statusEffectv3(StatusEffects.HeavenTribulationCR));
 				var body_choice:Array = ["head", "arm", "[leg]", "[face]"];//, "[wings]", "[tail]"
 				LUSTFULL = Math.round(LUSTFULL * player.lustPercent() * 0.01);
 				outputText("It hits you directly in your "+randomChoice(body_choice)+". <b>(<font color=\"#800000\">" + THUNDER + "</font>)(<font color=\"#ff00ff\">" + LUSTFULL + "</font>)</b>");
 				player.HP -= THUNDER;//200-600-1,400-3,000-6,200-12,600-25,400-52,000
 				player.lust += LUSTFULL;
+				player.addStatusValue(StatusEffects.HeavenTribulationCR,2,ThDa);
+				player.addStatusValue(StatusEffects.HeavenTribulationCR,3,ThLu);
 			}
 		}
 		
@@ -52,7 +55,7 @@ package classes.Scenes.Camp
 			this.a = "the ";
 			this.short = "G class Heaven Tribulation";
 			this.imageName = "G class Heaven Tribulation";
-			this.long = "You're currently facing H class Heaven Tribulation. A gathering of jet black clouds that sends down thunders to test any soul cultivator dreaming to break to Soul Exalt stage.";
+			this.long = "You're currently facing G class Heaven Tribulation. A gathering of jet black clouds that sends down thunders to test any soul cultivator dreaming to break to Soul Exalt stage.";
 			this.plural = false;
 			initStrTouSpeInte(10, 10, 10, 10);
 			initWisLibSensCor(10, 10, 10, 50);
@@ -64,7 +67,7 @@ package classes.Scenes.Camp
 			this.level = 42;
 			this.bonusHP = 20;
 			this.bonusLust = 30;
-			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.Flying, 12, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			checkMonster();
 		}
