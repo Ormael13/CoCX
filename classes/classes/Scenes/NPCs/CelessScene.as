@@ -912,11 +912,11 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	private function doHeatOrRut():void{
 		outputText("\n\nLewd images of cocks " +(player.isMaleOrHerm()?"and vaginas":"")+" of all sizes and shapes fill your mind, making you drool in anticipation.\n"+
 		"It seems your daughter’s condition is spreading over to you.");
-		if (player.goIntoHeat(true,10)){
-			//outputText("You are now in Heat!");
+		if (!player.inHeat && player.goIntoHeat(true,10)){		//This would put the C into a 20 day heat/rut tho...
+			outputText("\nYou are now in Heat!");
 		}
-		else if (player.goIntoRut(true, 10)) {
-			//outputText("You are now in Rut!");
+		else if (!player.inRut && player.goIntoRut(true, 10)) {	//This is based on the original.xml source.
+			outputText("\nYou are now in Rut!");
 		}
 		doNext(camp.returnToCampUseOneHour);
 	}
