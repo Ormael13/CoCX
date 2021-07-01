@@ -28,7 +28,7 @@ public class CentipedeVenom extends Consumable {
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(3) == 0) changeLimit++;
-		changeLimit += player.CheckMutationPerks();
+		changeLimit += player.additionalTransformationChances();
 		player.slimeFeed();
 		clearOutput();
 		outputText("You pop the cork on the vial and quickly chug the clear liquid. It tastes somewhat sweet, leaving your body feeling warm all over.");

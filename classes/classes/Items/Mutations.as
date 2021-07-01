@@ -842,28 +842,13 @@ public final class Mutations extends MutationsHelper {
         else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 200;
     }
 
-    public function additionalTransformationChances():Number {
-        var additionalTransformationChancesCounter:Number = 0;
-        if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.Enhancement)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.Fusion)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.Enchantment)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.Refinement)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.Saturation)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.Perfection)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.Creationism)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.TransformationResistance)) additionalTransformationChancesCounter--;
-        return additionalTransformationChancesCounter;
-    }
-
     /* ITEMZZZZZ FUNCTIONS GO HERE */
     public function incubiDraft(tainted:Boolean, player:Player):void {
         player.slimeFeed();
         var temp2:Number = 0;
         var temp3:Number = 0;
         var rando:Number = rand(100);
-        rando += (10 * additionalTransformationChances());
+        rando += (10 * player.additionalTransformationChances());
         clearOutput();
         outputText("The draft is slick and sticky, ");
         if (player.cor <= 33) outputText("just swallowing it makes you feel unclean.");
@@ -1173,7 +1158,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         var temp3:Number = 0;
         var rando:Number = Math.random() * 100;
-        rando += (10 * additionalTransformationChances());
+        rando += (10 * player.additionalTransformationChances());
         if (rando >= 90 && !tainted) rando -= 10;
         if (player.cor < 35) {
             clearOutput();
@@ -1410,7 +1395,7 @@ public final class Mutations extends MutationsHelper {
         var changes:Number = 0;
         var changeLimit:Number = 1;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         player.slimeFeed();
         clearOutput();
         outputText("The pepper taste and feels like trying to eat snow and ice. However you eat it anyway still feeling a cold tingling in your mouth.");
@@ -1804,7 +1789,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Initial outputs & crit level
         clearOutput();
         if (type == 0) {
@@ -2554,7 +2539,7 @@ public final class Mutations extends MutationsHelper {
         //Chances to up the max number of changes
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Generic drinking text
         clearOutput();
         outputText("You uncork the bottle and drink down the strange substance, struggling to down the thick liquid.");
@@ -2639,7 +2624,7 @@ public final class Mutations extends MutationsHelper {
         //Chances to up the max number of changes
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Generic drinking text
         clearOutput();
         outputText("You uncork the bottle and drink down the strange substance, struggling to down the thick liquid.");
@@ -3239,7 +3224,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         if (enhanced) changeLimit += 2;
         //Temporary storage
         var temp:Number = 0;
@@ -3715,59 +3700,57 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsWaveOfEcstasy, 0, 0, 0, 0);
             return;
         }
-        //Smart enough for nosferatu and doesnt have it
-        if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Nosferatu.</b>");
-            player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for Bone spirit and doesnt have it
-        if (player.inte >= 100 && player.hasPerk(PerkLib.PrestigeJobNecromancer) && !player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone spirit.</b>");
-            player.createStatusEffect(StatusEffects.KnowsBoneSpirit, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for Bone armor and doesnt have it
-        if (player.inte >= 110 && player.hasPerk(PerkLib.PrestigeJobNecromancer) && !player.hasStatusEffect(StatusEffects.KnowsBoneArmor)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone armor.</b>");
-            player.createStatusEffect(StatusEffects.KnowsBoneArmor, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for Boneshatter and doesnt have it
-        if (player.inte >= 120 && player.hasPerk(PerkLib.PrestigeJobNecromancer) && !player.hasStatusEffect(StatusEffects.KnowsBoneshatter)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Boneshatter.</b>");
-            player.createStatusEffect(StatusEffects.KnowsBoneshatter, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for lifetap and doesnt have it
-        if (player.inte >= 150 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsLifetap)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Lifetap.</b>");
-            player.createStatusEffect(StatusEffects.KnowsLifetap, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for life siphon and doesnt have it
-        if (player.inte >= 160 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsLifeSiphon)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Life siphon.</b>");
-            player.createStatusEffect(StatusEffects.KnowsLifeSiphon, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for consuming darkness and doesnt have it
-        if (player.inte >= 170 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsConsumingDarkness)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Consuming darkness.</b>");
-            player.createStatusEffect(StatusEffects.KnowsConsumingDarkness, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for curse of desire and doesnt have it
-        if (player.inte >= 180 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsCurseOfDesire)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Curse of Desire.</b>");
-            player.createStatusEffect(StatusEffects.KnowsCurseOfDesire, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for curse of weeping and doesnt have it
-        if (player.inte >= 190 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsCurseOfWeeping)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Curse of Weeping.</b>");
-            player.createStatusEffect(StatusEffects.KnowsCurseOfWeeping, 0, 0, 0, 0);
-        }
+		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) {
+			//Smart enough for Bone spirit and doesnt have it
+			if (player.inte >= 100 &&  !player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone spirit.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBoneSpirit, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Bone armor and doesnt have it
+			if (player.inte >= 110 && !player.hasStatusEffect(StatusEffects.KnowsBoneArmor)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone armor.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBoneArmor, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Boneshatter and doesnt have it
+			if (player.inte >= 120 && !player.hasStatusEffect(StatusEffects.KnowsBoneshatter)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Boneshatter.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBoneshatter, 0, 0, 0, 0);
+				return;
+			}
+		}
+		if (player.hasPerk(PerkLib.HexKnowledge)) {
+			//Smart enough for lifetap and doesnt have it
+			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsLifetap)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Lifetap.</b>");
+				player.createStatusEffect(StatusEffects.KnowsLifetap, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for life siphon and doesnt have it
+			if (player.inte >= 160 && !player.hasStatusEffect(StatusEffects.KnowsLifeSiphon)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Life siphon.</b>");
+				player.createStatusEffect(StatusEffects.KnowsLifeSiphon, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for consuming darkness and doesnt have it
+			if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsConsumingDarkness)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Consuming darkness.</b>");
+				player.createStatusEffect(StatusEffects.KnowsConsumingDarkness, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for curse of desire and doesnt have it
+			if (player.inte >= 180 && !player.hasStatusEffect(StatusEffects.KnowsCurseOfDesire)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Curse of Desire.</b>");
+				player.createStatusEffect(StatusEffects.KnowsCurseOfDesire, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for curse of weeping and doesnt have it
+			if (player.inte >= 190 && !player.hasStatusEffect(StatusEffects.KnowsCurseOfWeeping)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Curse of Weeping.</b>");
+				player.createStatusEffect(StatusEffects.KnowsCurseOfWeeping, 0, 0, 0, 0);
+			}
+		}
     }
 
     public function blackPolarMidnight(player:Player):void {
@@ -3800,48 +3783,54 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nThe contents of the book did little for your already considerable intellect.");
             KnowledgeBonus("int", 0.5);
         }
-        if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
+        if (player.hasPerk(PerkLib.GreyMagic)) {
             //Smart enough for (single target fire spell) and doesnt have it (player.inte >= 120)
-            /*if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.)) {
+            /*if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
                 player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
                 return;
             }*/
             //Smart enough for fire storm and doesnt have it
-            if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
+            if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Fire Storm.</b>");
                 player.createStatusEffect(StatusEffects.KnowsFireStorm, 0, 0, 0, 0);
                 return;
             }
             //Smart enough for (single target ice spell) and doesnt have it (player.inte >= 120)
-            /*if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.)) {
+            /*if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
                 player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
                 return;
             }*/
             //Smart enough for Fraction of heal and harm and doesnt have it
-            /*if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsFractionOfHealAndHarm)) {
+            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsFractionOfHealAndHarm)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Fraction of heal and harm.</b>");
                 player.createStatusEffect(StatusEffects.KnowsFractionOfHealAndHarm, 0, 0, 0, 0);
                 return;
             }*/
             //Smart enough for Clear Mind and doesnt have it
-            /*if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
+            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Clear Mind.</b>");
                 player.createStatusEffect(StatusEffects.KnowsClearMind, 0, 0, 0, 0);
                 return;
             }*/
             //Smart enough for ice rain and doesnt have it
-            if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
+            if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Rain.</b>");
                 player.createStatusEffect(StatusEffects.KnowsIceRain, 0, 0, 0, 0);
                 return;
             }
             //Smart enough for mana shield and doesnt have it
-            if (player.inte >= 190 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
+            if (player.inte >= 90 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
                 player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
             }
+			//Smart enough for nosferatu and doesnt have it
+			if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Nosferatu.</b>");
+				player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
+				return;
+			}
         }
     }
 
@@ -4086,7 +4075,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(5) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         outputText("Whoa it was definitely tasting just as bad as it smelled but hey it's not like your drinking this disgusting concoction for fun right? Or maybe you are?");
         if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
@@ -4311,7 +4300,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(5) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         outputText("You drink the ale, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
         if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
@@ -4528,7 +4517,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(5) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         if (type == 0) outputText("You take the wet cloth in hand and rub it over your body, smearing the strange slime over your [skin.type] slowly.");
         if (type == 2) outputText("Well here goes nothing, you gulp down the thing and sure enough, you begin to feel strange as you ingest the jelly. Well at least it tastes like grapes.");
@@ -4686,7 +4675,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         if (type == 0) {
             clearOutput();
             outputText("You have no idea why, but you decide to eat the pointed tooth. To your surprise, it's actually quite brittle, turning into a fishy-tasting dust. You figure it must just be a tablet made to look like a shark's tooth.");
@@ -4911,7 +4900,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //b) Description while used
         outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.");
         //(if outside combat)
@@ -5146,7 +5135,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         if (type != 3) {
             outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.  Minutes pass as you start wishing you had water with you, to get rid of the ");
             if (type == 0) outputText("aftertaste.");
@@ -5742,7 +5731,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.");
         player.refillHunger(5);
@@ -6114,7 +6103,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Text go!
         clearOutput();
         if (type == 0) outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
@@ -6581,7 +6570,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You uncork the vial of fluid and drink it down.  The taste is sour, like a dry wine with an aftertaste not entirely dissimilar to alcohol.  Instead of the warmth you'd expect, it leaves your throat feeling cold and a little numb.");
@@ -6942,7 +6931,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You uncork the hip flash and drink it down.  The taste is actualy quite good, like an alcohol but with a little fire within.  Just as you expected it makes you feel all hot and ready to take whole world head on.");
@@ -7183,7 +7172,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You chew on the weird glowy crystal, which begins to melt in your mouth like sugar. Your head spin for a moment as you begin to have hallucinations. This leaves you with weird feeling in your entire body, filling you with changes.");
@@ -7401,7 +7390,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You uncork the bottle and drink it down.  The taste is actualy quite sweet, like an alcohol but with a hint of hazelnuts flavor.  Would it change anything about you than making feeling of warmth spreading inside?");
@@ -7760,7 +7749,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //If this is a pregnancy change, only 1 change per proc.
         if (pregnantChange) changeLimit = 1;
         else clearOutput();
@@ -8182,7 +8171,7 @@ public final class Mutations extends MutationsHelper {
         if (type == 1) changeLimit += 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Generic eating text:
         clearOutput();
         outputText("You pop the nut into your mouth, chewing the delicious treat and swallowing it quickly.  No wonder harpies love these things so much!");
@@ -8509,7 +8498,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Generic eating text:
         clearOutput();
         if (type == 0) outputText("You crack open the seed easily, and eat the fruit inside. A bit dry, as you expected, but with a sweet and aromatic taste that leaves you wanting another one.");
@@ -8812,7 +8801,7 @@ public final class Mutations extends MutationsHelper {
         if (type == 1) changeLimit += 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Used as a holding variable for biggest dicks and the like
         var biggestCock:Number;
         //****************
@@ -9040,7 +9029,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Consuming Text
         if (type == 0) outputText("You wad up the sweet, pink gossamer and eat it, finding it to be delicious and chewy, almost like gum.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat.");
         else if (type == 1) outputText("You wad up the sweet, black gossamer and eat it, finding it to be delicious and chewy, almost like licorice.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat.");
@@ -9276,7 +9265,7 @@ public final class Mutations extends MutationsHelper {
 		var changeLimit:Number = 1;
 		if (rand(2) == 0) changeLimit++;
 		if (rand(2) == 0) changeLimit++;
-		changeLimit += additionalTransformationChances();
+		changeLimit += player.additionalTransformationChances();
 		outputText("You wad up the sweet, midnight gossamer and eat it, finding it to be delicious and chewy, almost like licorice.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat. ");
 		TransformationUtils.pickAndRunMultipleEffects(
 				transformations.List_AtlachNacha,
@@ -9459,7 +9448,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Effect script 1:  (higher intelligence)
         if (rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou groan softly as your head begins pounding something fierce.  Wincing in pain, you massage your temples as the throbbing continues, and soon, the pain begins to fade; in its place comes a strange sense of sureness and wit.");
@@ -9659,7 +9648,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         outputText("You really should’ve brought this to someone who knew about it first!  Your stomach grumbles, and you feel a short momentaneous pain in your head.  As you swallow you feel your body start to change into something else.");
         //Stats
         if (player.str > 40 && rand(3) == 0 && changes < changeLimit) {
@@ -9817,7 +9806,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         outputText("You drink the mead, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
         if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
         //Stats
@@ -9960,7 +9949,7 @@ public final class Mutations extends MutationsHelper {
         if (itemused) {
             if (rand(2) == 0) changeLimit++;
             if (rand(3) == 0) changeLimit++;
-            changeLimit += additionalTransformationChances();
+            changeLimit += player.additionalTransformationChances();
             outputText("As you admire the shiny jewel, you notice a flicker of energy flash across it, before a sudden jolt runs through your body! Letting out a howling moan, the jewel crumbles to dust as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
         }
         //Stats
@@ -10107,7 +10096,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         outputText("You eat up the seed and not to soon after let out a howling moan as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
         //Stats
         if (rand(3) == 0 && changes < changeLimit) {
@@ -10290,7 +10279,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         outputText("You apply the eyedrops to your eye"+(player.eyes.type == Eyes.MONOEYE ? "":"s")+" pointlessly hoping it can help you wash away all the dirty things you have seen on mareth. For a few seconds, your vision becomes… clearer? However this is not without other changes.");
         //Stats
 		if (rand(3) == 0 && changes < changeLimit) {
@@ -10435,7 +10424,7 @@ public final class Mutations extends MutationsHelper {
         var Ratatoskr_EyeColour:Array = ["green","light green","emerald"];
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         outputText("You chew at the nuts and begin to shake as your body is overcome with changes...");
         //Stats
         if (rand(4) == 0 && changes < changeLimit) {
@@ -10605,7 +10594,7 @@ public final class Mutations extends MutationsHelper {
         if (itemused) {
             if (rand(2) == 0) changeLimit++;
             if (rand(3) == 0) changeLimit++;
-            changeLimit += additionalTransformationChances();
+            changeLimit += player.additionalTransformationChances();
             outputText("As you admire the shiny jewel, the wind around you suddenly becomes stronger on sending debris around, before a sudden blade of winds runs through your body leaving a bleeding cut! Rather then pain the fresh wound begins to throb with increasing pleasure. You let out a howling moan, the jewel crumbles to dust before the feeling slowly subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
         }
         //Stats
@@ -10867,7 +10856,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //possible use effects:
         //- toughess up, sensitivity down
         if (rand(3) == 0 && changes < changeLimit) {
@@ -10952,7 +10941,7 @@ public final class Mutations extends MutationsHelper {
         if (enhanced) changeLimit += 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Used for dick and boob TFs
         var counter:int = 0;
 
@@ -11311,7 +11300,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You uncork the hip flash and drink it down.  The taste is actualy quite good, like an alcohol but with a little fire within.  Just as you expected it makes you feel all hot and ready to take whole world head on.");
@@ -11696,7 +11685,7 @@ public final class Mutations extends MutationsHelper {
     public function foxJewel(mystic:Boolean, player:Player):void {
         clearOutput();
         mutationStart("foxJewel" + (mystic ? "M" : ""), 3);
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         if (mystic) changeLimit += 2;
         if (mystic) outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie purple flame dancing within.  Without warning, the gem splits down the center, dissolving into nothing in your hand.  As the pale lavender flames swirl around you, the air is filled with a sickly sweet scent that drips with the bitter aroma of licorice, filling you with a dire warmth.");
         else outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie blue flame dancing within.  Without warning, the gem splits down the center, dissolving into nothing in your hand.  As the pale azure flames swirl around you, the air is filled with a sweet scent that drips with the aroma of wintergreen, sending chills down your spine.");
@@ -12191,7 +12180,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         outputText("You pour some of the oil onto your hands and ");
         if (player.cor < 30) outputText("hesitantly ");
         else if (player.cor > 70) outputText("eagerly ");
@@ -12490,7 +12479,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         var Coon_HairColor:Array = ["brown", "chocolate", "tan", "caramel"];
         //stat gains:
         //gain speed to ceiling of 80
@@ -12720,7 +12709,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //use:
         if (type == 0) {
             outputText("You pop several of the beans in your mouth and suck; they immediately reward you by giving up an oily, chocolatey flavor with a hint of bitterness.  For several minutes you ");
@@ -13097,7 +13086,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Ferret Fruit Effects
         //- + Thin:
         if (player.thickness > 15 && changes < changeLimit && rand(3) == 0) {
@@ -13325,7 +13314,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (boar) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         outputText("You take a bite into the pigtail truffle. It oddly tastes like bacon. You eventually finish eating. ");
         player.refillHunger(20);
         if (rand(3) == 0 && changes < changeLimit) {
@@ -13579,7 +13568,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("The ink taste salty and slimy, you really think you could use a full glass of fresh water to wash your aching throat.");
@@ -13986,7 +13975,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("The ink taste salty and slimy, you really think you could use a full glass of fresh water to wash your aching throat.");
@@ -14444,7 +14433,7 @@ public final class Mutations extends MutationsHelper {
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("The cum tastes pretty much like you expected it would, salty. Strangely, you feel warmer by the minute, perhaps it's your body adapting to the very hot feeling the cum left in your stomach.");
@@ -14634,7 +14623,7 @@ public final class Mutations extends MutationsHelper {
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("As you examine the shard it spontaneously melts. Rivulets of freezing liquid flow down your arms and a frigid chill spreads throughout your body.");
@@ -14832,7 +14821,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        //changeLimit += additionalTransformationChances();
+        //changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You eat the weird kelp seed and suddenly feel like singing. It seems like your talent for music are skyrocketing as you embrace the changes within you!");
@@ -14853,7 +14842,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You apply the sunscreen on your skin and suddenly feel some of your worries fly as you laugh cheerfully at the thought of taking a vacation day or two to rest and swim at the beach. Your body seems to react weirdly to the sunscreen.");
@@ -15179,7 +15168,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You bring the flower up to your nose and smell it. " +
@@ -15462,7 +15451,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You prepare the tea using grass you acquired and then drinks it. Its sharp taste fires up your palate and in moments, you find yourself more mentaly and physicaly sharp just like a blade.");
@@ -15707,7 +15696,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You raise the disgusting black concoction to your mouth. The taste is better than its texture but leaves you with a strong aftertaste of sulfur.");
@@ -16060,7 +16049,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Temporary storage
         var temp:Number = 0;
         //clear screen
@@ -16239,7 +16228,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("Sometimes you question your choices in life. Right now, for instance, your choice is to drink up the saliva of some fiery snail, thing. The first thing of note to happen is that your body begins to heat up. Whatever this thing is doing to you, it's clearly raising your arousal.");
@@ -16349,7 +16338,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         outputText("Having bought that odd-looking root on the bakery, you give it a try, only to face the mildly spicy taste of the transformative. Still, it has a rich flavour and texture, but soon that becomes secondary, as you realize that the foreign rhizome is changing your body!");
 
@@ -16674,7 +16663,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         outputText("You use all the courage you can muster and in one go, swallow the gossamer. At that very moment, your stomach groans as you feel your body changing...");
 
@@ -17289,7 +17278,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         if (type == 0) outputText("You bite into the fig, it’s sour, very sour. Trolls are supposed to enjoy this?");
 		if (type == 1) outputText("You bite into the fig. The icy crust gives a crunch before you’re met with the juice trapped within. It’s sour, very sour. Trolls are supposed to enjoy this?");
@@ -17323,7 +17312,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         outputText("You eat the kelp and a deep chill runs across your body as something in you begins to change.");
         if (player.blockingBodyTransformations()) {
@@ -17585,7 +17574,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         outputText("You bite into the candy, your mouth foaming small sweet bubbles. Your body seems to react to it as you begin to change.");
         if (player.blockingBodyTransformations()) {

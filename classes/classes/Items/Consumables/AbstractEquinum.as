@@ -50,7 +50,7 @@ public class AbstractEquinum extends Consumable {
 		//Chancee to raise limit
 		if (rand(2) == 0) changeLimit++;
 		if (rand(3) == 0) changeLimit++;
-		changeLimit += player.CheckMutationPerks();
+		changeLimit += player.additionalTransformationChances();
 		//Used for random chances
 		//Set up output
 		clearOutput();

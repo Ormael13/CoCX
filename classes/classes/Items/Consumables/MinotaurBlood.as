@@ -32,7 +32,7 @@ public class MinotaurBlood extends Consumable {
 		if (rand(2) == 0) changeLimit++;
 		if (rand(3) == 0) changeLimit++;
 		if (rand(3) == 0) changeLimit++;
-		changeLimit += player.CheckMutationPerks();
+		changeLimit += player.additionalTransformationChances();
 		if (changeLimit == 1) changeLimit = 2;
 		//Temporary storage
 		var temp:Number = 0;

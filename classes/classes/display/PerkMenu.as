@@ -63,7 +63,7 @@ public class PerkMenu extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.Venomancy) || player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)||
 			(player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect))) {
-			outputText("\n<b>You can choose and adjust various effect related to your magic.</b>");
+			outputText("\n<b>You can choose and adjust various effects related to your magic.</b>");
 			addButton(7, "Magic Opt",MagicOption);
 		}
 		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
@@ -76,7 +76,10 @@ public class PerkMenu extends BaseContent {
 		}
 		addButton(10, "Number of", EngineCore.doNothing);
 		addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
-
+		if (player.hasPerk(PerkLib.LiftOff)) {
+			outputText("\n<b>You can choose and adjust various misc effects.</b>");
+			addButton(12, "Misc Opt",MiscOption);
+		}
 		//if (player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
 		//	if (player.hasPerk(PerkLib.DarkRitual)) outputText("\n<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>");
 		//	if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) outputText("\n<b>You can adjust your Blood Demon hidden job settings.</b>");
@@ -104,6 +107,29 @@ public class PerkMenu extends BaseContent {
 			if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) outputText("\n<b>You can adjust your Blood Demon hidden job settings.</b>");
 			addButton(3, "Bloody Opt",DarkRitualOption);
 		}
+		addButton(14, "Back", displayPerks);
+	}
+
+	public function MiscOption(e:MouseEvent = null):void {
+		clearOutput();
+		menu();
+		var autoFlyingFlag:int = flags[kFLAGS.AUTO_FLIGHT];
+        var setflag:Function = curry(setFlag,MiscOption);
+		var autoFlyingType:Function = curry(setflag,kFLAGS.AUTO_FLIGHT);
+        if (player.hasPerk(PerkLib.LiftOff)) {
+			outputText("You can choose to start flying or not at the start of each combat.\n");
+			outputText("Start ");
+			switch(autoFlyingFlag) {
+				case 0: outputText("on the ground"); break;
+				case 1: outputText("flying (by wings)"); break;
+				case 2: outputText("flying (on flying sword)"); break;
+				case 3: outputText("flying (using soulforce)"); break;
+			}
+		}
+		if (autoFlyingFlag != 0) addButton(0, "On Ground", autoFlyingType,0);
+		if (player.canFly() && autoFlyingFlag != 1) addButton(1, "By Wings", autoFlyingType,1);
+		if (player.hasPerk(PerkLib.FlyingSwordPath) && autoFlyingFlag != 2) addButton(2, "By FlyingS", autoFlyingType,2);
+		if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && autoFlyingFlag != 3) addButton(3, "By SF", autoFlyingType,3);
 		addButton(14, "Back", displayPerks);
 	}
 

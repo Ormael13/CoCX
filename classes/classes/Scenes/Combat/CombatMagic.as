@@ -1500,12 +1500,45 @@ public class CombatMagic extends BaseCombatContent {
 			}
 		}
 	}
+	
+	public function buildNecroMenu(buttons:ButtonDataList):void {
+		var bd:ButtonData;
+		if (player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
+			bd = buttons.add("Bone spirit", spellBoneSpirit)
+					.hint("Turn an ordinary set of bones into a vengeance mad apparition that will charge at your target. Upon contact it will explode dealing massive true damage.  \n\nBones cost: 5");
+			if (!player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 5) {
+				bd.disable("You not have enough demon bones to use any this necromancer spell.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBoneArmor)) {
+			bd = buttons.add("Bone armor", spellBoneArmor)
+					.hint("Animate bones to create an impenetrable shield lasting 5 rounds and reducing all damage taken by 50%.  \n\n<b>Cooldown: 10 turns</b>  \n\nBones cost: 10");
+			if (!player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 10) {
+				bd.disable("You not have enough demon bones to use any this necromancer spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownBoneArmor)) {
+				bd.disable("You need more time before you can cast Bone armor again.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBoneshatter)) {
+			bd = buttons.add("Boneshatter", spellBoneshatter)
+					.hint("Strike at the target ossature causing it to explode from the inside and causing serious internal damage and weakening its blow. Single target only (does not work on boneless creatures, Monster take 20% strength drain from this effect which stacks).  \n\n<b>Cooldown: 3 turns</b>  \n\nBones cost: 5");
+			if (!player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 5) {
+				bd.disable("You not have enough demon bones to use any this necromancer spell.");
+			} else if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyElementalType) || monster.hasPerk(PerkLib.EnemyGhostType) || monster.hasPerk(PerkLib.EnemyGooType) || monster.hasPerk(PerkLib.EnemyPlantType)) {
+				bd.disable("Your enemy lack bones.");
+			} else if (monster.plural || monster.hasPerk(PerkLib.Enemy300Type) || monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
+				bd.disable("You can only strike one target.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownBoneshatter)) {
+				bd.disable("You need more time before you can cast Boneshatter again.");
+			}
+		}
+	}
 
 	public function buildGreyMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var badLustForGrey:Boolean = player.lust < 50 || player.lust > (player.maxLust() - 50);
 		var bloodForBloodGod:Number = (player.HP - player.minHP());
-
+//perki z grey mage line dajace spell mod * x% wiecej (nie wplywa na sam spell mod anu spell mod white/black)
 		// GRAY MAGIC
 		if (player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
 			if (player.hasStatusEffect(StatusEffects.ManaShield)) {
@@ -1565,39 +1598,6 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
-			}
-		}
-	}
-	
-	public function buildNecroMenu(buttons:ButtonDataList):void {
-		var bd:ButtonData;
-		if (player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
-			bd = buttons.add("Bone spirit", spellBoneSpirit)
-					.hint("Turn an ordinary set of bones into a vengeance mad apparition that will charge at your target. Upon contact it will explode dealing massive true damage.  \n\nBones cost: 5");
-			if (!player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 5) {
-				bd.disable("You not have enough demon bones to use any this necromancer spell.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.KnowsBoneArmor)) {
-			bd = buttons.add("Bone armor", spellBoneArmor)
-					.hint("Animate bones to create an impenetrable shield lasting 5 rounds and reducing all damage taken by 50%.  \n\n<b>Cooldown: 10 turns</b>  \n\nBones cost: 10");
-			if (!player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 10) {
-				bd.disable("You not have enough demon bones to use any this necromancer spell.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownBoneArmor)) {
-				bd.disable("You need more time before you can cast Bone armor again.");
-			}
-		}
-		if (player.hasStatusEffect(StatusEffects.KnowsBoneshatter)) {
-			bd = buttons.add("Boneshatter", spellBoneshatter)
-					.hint("Strike at the target ossature causing it to explode from the inside and causing serious internal damage and weakening its blow. Single target only (does not work on boneless creatures, Monster take 20% strength drain from this effect which stacks).  \n\n<b>Cooldown: 3 turns</b>  \n\nBones cost: 5");
-			if (!player.hasPerk(PerkLib.BoneSoul) && player.perkv1(PerkLib.PrestigeJobNecromancer) < 5) {
-				bd.disable("You not have enough demon bones to use any this necromancer spell.");
-			} else if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyElementalType) || monster.hasPerk(PerkLib.EnemyGhostType) || monster.hasPerk(PerkLib.EnemyGooType) || monster.hasPerk(PerkLib.EnemyPlantType)) {
-				bd.disable("Your enemy lack bones.");
-			} else if (monster.plural || monster.hasPerk(PerkLib.Enemy300Type) || monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
-				bd.disable("You can only strike one target.");
-			} else if (player.hasStatusEffect(StatusEffects.CooldownBoneshatter)) {
-				bd.disable("You need more time before you can cast Boneshatter again.");
 			}
 		}
 	}
@@ -3690,7 +3690,7 @@ public class CombatMagic extends BaseCombatContent {
 			nosferatu += player.inte;
 			nosferatu += scalingBonusIntelligence();
 			if (player.hasPerk(PerkLib.WisenedHealer)) nosferatu += scalingBonusWisdom();
-			nosferatu *= healModBlack();
+			nosferatu = Math.round(nosferatu * healMod());
 			outputText(" You chant as your shadow suddenly takes on a life of its own, sprouting a multitude of mouths and tentacles which seek and tear into " + monster.a + monster.short + " shadow");
 			if (monster.plural) outputText("s");
 			outputText(", gorging on its owner’s life force to replenish your own. Soon enough the spell is over and your shadow returns to you, leaving you better for the wear. <b>(<font color=\"#800000\">" + nosferatu + "</font>)</b>");
