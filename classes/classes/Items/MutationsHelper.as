@@ -853,12 +853,9 @@ import classes.BodyParts.Wings;
 			return addGeneticMemory(sat, sat.id.replace("Unlocked ", ""));
 		} else return false;
 	}
-	public function addGeneticMemory(sat:StatusEffectType, name:String = null, doOutput: Boolean = true):Boolean {
+	public function addGeneticMemory(sat:StatusEffectType, name:String = null):Boolean {
 		if (player.findPerk(PerkLib.GeneticMemory) < 0) return false;
 		if (sat != null && !player.hasStatusEffect(sat)) {
-			if (doOutput) {
-				outputText("\n\n<b>Genetic Memory: " + name + " - Memorized!</b>\n\n");
-			}
 			player.createStatusEffect(sat, 0, 0, 0, 0);
 			return true;
 		}

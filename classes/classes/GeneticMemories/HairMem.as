@@ -16,7 +16,7 @@ package classes.GeneticMemories {
 
 	 * Template:
 
-		public static const [NAME HERE]:int = IDHERE;
+		public static const [NAME HERE]:int = [ID HERE];
 		EnumValue.add(Memories, [NAME HERE], "[NAME HERE]", {
 			metamorphCost: [Cost Here],
 			metamorphTitle: "[Race Here]",

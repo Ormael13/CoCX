@@ -5,7 +5,7 @@ import classes.internals.Utils;
 public class TransformationUtils {
 	function TransformationUtils() {
 	}
-    
+
     public static function allPresent(transformations: /*Transformation*/Array): Boolean {
         return transformations.every(function(tf:Transformation, ...args):Boolean {
             return tf.isPresent();
@@ -41,7 +41,14 @@ public class TransformationUtils {
         trace("Picked "+choice.name+" out of "+Utils.mapOneProp(transformations,'name').join(", "));
         return choice;
     }
-    
+
+    public static function applyIfNotPresent(transformation: *, doOutput: Boolean = true): void {
+		if (!transformation.isPresent()) {
+			transformation.applyEffect(doOutput);
+			if (doOutput) EngineCore.outputText("\n\n");
+		}
+    }
+
     /**
      * Pick `count` effects from `effects` array (if `allowDuplicates` is false, don't pick them twice) and apply
      * their effects.

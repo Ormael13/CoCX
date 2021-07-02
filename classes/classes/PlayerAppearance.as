@@ -1557,7 +1557,7 @@ public class PlayerAppearance extends BaseContent {
 		// story.display("faceShape");
 		var faceType:Number = player.faceType;
 		var skin:Skin = player.skin;
-		if (player.facePart.isHumanShaped()) {
+		if (Face.isHumanShaped(player.faceType)) {
 			var odd:int = 0;
 			var skinAndSomething:String = "";
 			if (player.facePart.type == Face.BUCKTEETH) {
@@ -2012,26 +2012,7 @@ public class PlayerAppearance extends BaseContent {
 		if (faceType == Face.USHI_ONI_ONNA) {
 			outputText(" You have the face of a ushi " + player.mf("oni", "onna") + ", you have strange black tattoos circling your eyes and in your mouth small fangs with a weak poison can be seen when you smile or open you mouth.");
 		}
-		//WIP Code reformating of the face section
-		//section for the tatoo
-		//if (skin.hasMagicalTattoo()) outputText(" covered with magical tattoo.");
-		//else if (skin.hasBattleTattoo()) outputText(" covered with battle tattoo.");
-		//else if (skin.hasLightningShapedTattoo()) outputText(" covered with a few glowing lightning tattoos.");
-		//else if (skin.hasScarShapedTattoo()) outputText(" covered with a few scar tattoos.");
-		//else if (skin.hasWhiteBlackVeins()) outputText(" covered by [skin color2] veins.");
-		//else outputText(".");
-		//Section for the coat
-		//if (!player.hasPartialCoatNoTypeDeclaration){
-			//if (!player.hasPartialCoat(Skin.FUR)) outputText(" On your cheek you have [skin coat].");
-			//if (!player.hasPartialCoat(Skin.SCALES)){} outputText(" On your cheek you have [skin coat].");
-			//if (!player.hasPartialCoat(Skin.AQUA_SCALES)){} outputText(" On your cheek you have [skin coat].");
-			//if (!player.hasPartialCoat(Skin.CHITIN)){} outputText(" On your cheek you have [skin coat].");
-		//} else if (player.hasFullCoat()) {
-			//if (player.hasFullCoatOfType(Skin.FUR)) outputText(" Your skin is covered in [skin coat] that covers your [skintone] skin underneath.");
-			//if (player.hasFullCoatOfType(Skin.SCALES)){} outputText(" Your skin is covered in [skin coat] that covers your [skintone] skin underneath.");
-			//if (player.hasFullCoatOfType(Skin.AQUA_SCALES)){} outputText(" Your skin is covered in [skin coat] that covers your [skintone] skin underneath.");
-			//if (player.hasFullCoatOfType(Skin.CHITIN)){} outputText(" Your skin is covered in [skin coat] that covers your [skintone] skin underneath.");
-		//}
+
 		//Section for below the head
 		if (player.skin.hasVenomousMarking()) {
 			outputText(" Beneath your shoulder all the way down to your waist your skin is covered with purple venomous marking");

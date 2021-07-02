@@ -61,7 +61,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Stats.Buff;
 
 import classes.Scenes.Metamorph;
-import classes.GeneticMemories.HairMem;
+import classes.GeneticMemories.*;
 
 use namespace CoC;
 
@@ -406,8 +406,12 @@ use namespace CoC;
 		}
 		public function AllMetamorphOptionsUnlock():void {
 
-			for each (var genMem: * in HairMem.Memories) {
-				Metamorph.GeneticMemoryStorage[genMem.id] = true;
+			for each (var hairMem: * in HairMem.Memories) {
+				Metamorph.GeneticMemoryStorage[hairMem.name] = true;
+			}
+
+			for each (var faceMem: * in FaceMem.Memories) {
+				Metamorph.GeneticMemoryStorage[faceMem.name] = true;
 			}
 
 			if (!player.hasStatusEffect(StatusEffects.UnlockedFur)) player.createStatusEffect(StatusEffects.UnlockedFur,0,0,0,0);
