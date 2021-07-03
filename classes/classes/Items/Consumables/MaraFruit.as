@@ -24,7 +24,7 @@ public class MaraFruit extends Consumable{
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(3) == 0) changeLimit++;
-		changeLimit += player.CheckMutationPerks();
+		changeLimit += player.additionalTransformationChances();
 		player.slimeFeed();
 		//Temporary storage
 		var temp2:Number = 0;

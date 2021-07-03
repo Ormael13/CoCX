@@ -25,7 +25,7 @@ public class ManticoreVenom extends Consumable {
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(3) == 0) changeLimit++;
-		changeLimit += player.CheckMutationPerks();
+		changeLimit += player.additionalTransformationChances();
 		player.slimeFeed();
 		clearOutput();
 		outputText("You guzzle down the vial and your lust immediately spikes up, making you spontaneously orgasm. Your body seems to react strangely to the poison however.");

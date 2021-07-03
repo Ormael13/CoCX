@@ -24,7 +24,7 @@ public class Centaurinum extends Consumable{
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(2) == 0) changeLimit++;
-		changeLimit += player.CheckMutationPerks();
+		changeLimit += player.additionalTransformationChances();
 		//Temporary storage
 		var temp2:Number = 0;
 		var temp3:Number = 0;

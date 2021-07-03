@@ -520,8 +520,29 @@ public class Combat extends BaseContent {
 	
 	internal function applyAutocast0():void {
 		outputText("\n\n");
-		if (flags[kFLAGS.AUTO_FLIGHT] == 1) {
-			
+		if (flags[kFLAGS.AUTO_FLIGHT] > 0) {
+			if (flags[kFLAGS.AUTO_FLIGHT] == 1 && player.canFly()) {
+				if (player.wings.type == Wings.WINDY_AURA && player.arms.type == Arms.KAMAITACHI) outputText("You create a small cyclone to ride upon and lift yourself up in the air.");
+				else if (player.wings.type == Wings.THUNDEROUS_AURA) outputText("You take flight letting the storm carry you up.");
+				else if (player.wings.type == Wings.ETHEREAL_WINGS) outputText("You take flight letting the storm carry you up.");
+				else if (player.wings.type == Wings.LEVITATION) outputText("You take flight letting the storm carry you up.");
+				else outputText("You open you wing taking flight.");
+				player.createStatusEffect(StatusEffects.Flying, 7, 0, 0, 0);
+			}
+			else if (flags[kFLAGS.AUTO_FLIGHT] == 2 && player.weaponFlyingSwordsName != "nothing") {
+				outputText("You jump on your "+player.weaponFlyingSwordsName+" taking flight.");
+				player.createStatusEffect(StatusEffects.Flying, 1, 1, 0, 0);
+			}
+			else if (flags[kFLAGS.AUTO_FLIGHT] == 3) {
+				outputText("You surround your body with soulforce taking off int the air"+(player.weaponFlyingSwordsName != "nothing"?" as "+player.weaponFlyingSwordsName+" hover near you ready to be used at moment notice":"")+".");
+				player.createStatusEffect(StatusEffects.Flying, 1, 2, 0, 0);
+			}
+			if (player.hasPerk(PerkLib.Resolute) < 0) {
+				player.createStatusEffect(StatusEffects.FlyingNoStun, 0, 0, 0, 0);
+				player.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
+			}
+			monster.createStatusEffect(StatusEffects.MonsterAttacksDisabled, 0, 0, 0, 0);
+			outputText("\n\n");
 		}
 	}
 
@@ -10010,7 +10031,7 @@ public class Combat extends BaseContent {
         else if (player.newGamePlusMod() == 2) monster.lustVuln *= 0.8;
         else if (player.newGamePlusMod() == 3) monster.lustVuln *= 0.7;
         else if (player.newGamePlusMod() >= 4) monster.lustVuln *= 0.6;
-        monster.HP = monster.maxHP();
+        monster.HP = monster.maxOverHP();
         monster.mana = monster.maxMana();
         monster.soulforce = monster.maxSoulforce();
         monster.XP = monster.totalXP();
@@ -13992,4 +14013,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib);
     }
 }
-}
+}

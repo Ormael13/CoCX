@@ -124,14 +124,17 @@ package classes.Scenes.Camp
 			if (player.hasPerk(PerkLib.JobGolemancer)) outputText("<b>Temporal Golems Bag:</b> " + flags[kFLAGS.TEMPORAL_GOLEMS_BAG] + " / " + maxTemporalGolemsBagSize() + " golems\n");
 			if (player.hasPerk(PerkLib.MasterGolemMaker)) outputText("<b>Stone Golems Bag:</b> " + flags[kFLAGS.PERMANENT_GOLEMS_BAG] + " / " + maxPermanentStoneGolemsBagSize() + " golems\n");
 			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) outputText("<b>Improved Stone Golems Bag:</b> " + flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] + " / " + maxPermanentImprovedStoneGolemsBagSize() + " golems\n");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) outputText("<b>Metal Golems Bag:</b> " + flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] + " / " + maxPermanentSteelGolemsBagSize() + " golems\n");
+			//outputText("<b>Improved Metal Golems Bag:</b> " + flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] + " / " + maxPermanentImprovedSteelGolemsBagSize() + " golems\n");
 			outputText("<b>Stones:</b> " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "\n");
+			if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) outputText("<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "\n");
 			menu();
 			if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "T.S.Golem", makeTemporalStoneGolem).hint("Make the most simple golem out of a pile of stones.  <b>It will crumble after one attack!</b>\n\nCost: 1 Golem Core, " + temporalGolemMakingCost() + " Mana");
 			if (player.hasPerk(PerkLib.MasterGolemMaker)) addButton(1, "P.S.Golem", makePermanentStoneGolem).hint("Make stone golem.\n\nCost: 1 Golem Core, 10 Stones, " + permanentStoneGolemMakingCost() + " Mana");
-			/*if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) */addButtonDisabled(2, "M.S.Golem", "Make metal golem.\n\nSoon");//Cost: 2 Golem Plasma Cores, 10 Stones, 10 Metal Plates, 10 Mechanisms, i coś jeszcze innego? " + permanentSteelGolemMakingCost() + " Mana
+			/*if (player.hasPerk(PerkLib.AdvancedGolemancyTheory)) */addButtonDisabled(2, "M.Golem", "Make metal golem.\n\nSoon");//Cost: 1 Golem Plasma Core, 10 Stones, 10 Metal Plates, 10 Mechanisms, i coś jeszcze innego? " + permanentSteelGolemMakingCost() + " Mana
 			if (player.hasPerk(PerkLib.TemporalGolemsRestructuration)) addButton(5, "T.S.Golem(5x)", makeTemporalStoneGolems).hint("Make five of most simple golems.  <b>They will crumble after one attack!</b>\n\nCost: 5 Golem Core, " + temporalGolemMakingCost() * 5 + " Mana");
 			if (player.hasPerk(PerkLib.EpicGolemMaker3rdCircle)) addButton(6, "I.P.S.Golem", makePermanentImprovedStoneGolem).hint("Make improved stone golem.\n\nCost: 3 Golem Cores, 100 Stones, " + permanentImprovedStoneGolemMakingCost() + " Mana");
-			addButtonDisabled(7, "I.M.S.Golem", "Make improved metal golem.\n\nSoon");//Cost: 2 Golem ?Plasma? Cores, 10 Stones, 10 Metal Plates, 10 Mechanisms, " + permanentImprovedSteelGolemMakingCost() + " Mana
+			addButtonDisabled(7, "I.M.Golem", "Make improved metal golem.\n\nSoon");//Cost: 2 Golem ?Plasma? Cores, 10 Stones, 10 Metal Plates, 10 Mechanisms, " + permanentImprovedSteelGolemMakingCost() + " Mana
 			addButtonDisabled(12, "Upgrades", "Options to upgrade permanent golems.");
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(13, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.");
 			addButton(14, "Back", playerMenu);

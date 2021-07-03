@@ -15226,19 +15226,19 @@ use namespace CoC;
 			return max;
 		}
 
-		public function CheckMutationPerks():Number{
-			var changeLimit: Number;
-			if (hasPerk(PerkLib.HistoryAlchemist) || hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-			if (hasPerk(PerkLib.Enhancement)) changeLimit++;
-			if (hasPerk(PerkLib.Fusion)) changeLimit++;
-			if (hasPerk(PerkLib.Enchantment)) changeLimit++;
-			if (hasPerk(PerkLib.Refinement)) changeLimit++;
-			if (hasPerk(PerkLib.Saturation)) changeLimit++;
-			if (hasPerk(PerkLib.Perfection)) changeLimit++;
-			if (hasPerk(PerkLib.Creationism)) changeLimit++;
-			if (hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-			if (hasPerk(PerkLib.TransformationResistance)) changeLimit--;
-			return changeLimit;
+		public function additionalTransformationChances():Number {
+			var additionalTransformationChancesCounter:Number = 0;
+			if (hasPerk(PerkLib.HistoryAlchemist) || hasPerk(PerkLib.PastLifeAlchemist)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Enhancement)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Fusion)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Enchantment)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Refinement)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Saturation)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Perfection)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Creationism)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.TransformationResistance)) additionalTransformationChancesCounter--;
+			return additionalTransformationChancesCounter;
 		}
 
 		public function MutagenBonus(statName: String, bonus: Number):void
@@ -15377,4 +15377,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

@@ -739,6 +739,7 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.OmnibusGift)) max += 45;
 			if (hasPerk(PerkLib.JobCourtesan)) max += 60;
 			if (hasPerk(PerkLib.JobSeducer)) max += 30;
+			if (hasPerk(PerkLib.GreyMagic)) max += 30;
 			if (hasPerk(PerkLib.PrestigeJobGreySage)) max += 300;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (225 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
