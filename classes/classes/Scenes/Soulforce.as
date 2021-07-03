@@ -759,10 +759,6 @@ use namespace CoC;
 			doNext(submenucuzwhynot);
 		}
 		public function PerkGalore2():void {
-			if (!player.hasPerk(PerkLib.PrestigeJobNecromancer)) {
-				player.createPerk(PerkLib.PrestigeJobNecromancer, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Prestige Job: Necromancer!)</b>");
-			}
 			if (!player.hasPerk(PerkLib.PrestigeJobSeer)) {
 				player.createPerk(PerkLib.PrestigeJobSeer, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Prestige Job: Seer!)</b>");
@@ -770,18 +766,6 @@ use namespace CoC;
 			if (!player.hasPerk(PerkLib.PrestigeJobSoulArcher)) {
 				player.createPerk(PerkLib.PrestigeJobSoulArcher, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Prestige Job: Soul Archer!)</b>");
-			}
-			if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) {
-				player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Prestige Job: Grey Sage!)</b>");
-			}
-			if (!player.hasPerk(PerkLib.PrestigeJobSpellKnight)) {
-				player.createPerk(PerkLib.PrestigeJobSpellKnight, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Prestige Job: Spell Knight!)</b>");
-			}
-			if (!player.hasPerk(PerkLib.PrestigeJobWarlock)) {
-				player.createPerk(PerkLib.PrestigeJobWarlock, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Prestige Job: Warlock!)</b>");
 			}
 			if (!player.hasPerk(PerkLib.PiercedCrimstone)) {
 				player.createPerk(PerkLib.PiercedCrimstone, 5, 0, 0, 0);
