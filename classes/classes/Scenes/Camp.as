@@ -3331,8 +3331,8 @@ private function SparrableNPCsMenu():void {
 		else addButtonDisabled(7, "???", "???");
 		if (flags[kFLAGS.HEXINDAO_UNLOCKED] == 1) addButton(10, "He'Xin'Dao", hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, place where all greenhorn soul cultivators come together.");
 		else addButtonDisabled(10, "???", "???");
-		//if (WoodElves.WoodElvesQuest >= 5) addButton(11, "Elven grove", SceneLib.woodElves.GroveLayout).hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.");
-		//else addButtonDisabled(11, "???", "???");
+		if (WoodElves.WoodElvesQuest >= 5) addButton(11, "Elven grove", SceneLib.woodElves.GroveLayout).hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.");
+		else addButtonDisabled(11, "???", "???");
 		addButton(14, "Back", playerMenu);
 		return true;
 	}
@@ -4729,7 +4729,11 @@ public function wakeFromBadEnd():void {
 				player.removeStatusEffect(StatusEffects.RiverDungeonFloorRewards);
 				player.createStatusEffect(StatusEffects.RiverDungeonFloorRewards,2,0,0,0);
 			}
-			if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) player.createPerk(PerkLib.StrengthOfStone,0,0,0,0);
+			if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) player.createPerk(PerkLib.StrengthOfStone, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.Rigidity) && (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2)) {
+				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
+				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
+			}
 			doNext(doCamp);
 			return;
 		}

@@ -799,14 +799,14 @@ private function curingJiangshi():void {
 		player.destroyItems(consumables.VITAL_T, 5);
 		player.destroyItems(consumables.PPHILTR, 5);
 		outputText("Evangeline nods as you bring her the ingredients, getting to work. As soon as the potion is finished she pours it over your cursed talisman, causing it to smoke and crumble. The first thing you do as the nasty thing peels off is head back to He’Xin’Dao and look for your gear. Thankfully it doesn't take you long to find it in a chest not too far from the table on which the crazy cat messed you up. Gosh, it feels good to be alive, like REALLY alive.\n\n");
-		if (player.weapon == WeaponLib.FISTS || flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) { //Shouldn't Aether flag be 1?
-			player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
+		if (player.weapon == WeaponLib.FISTS) {
+			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] < 1) player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
 		}
 		if (player.weaponRange == WeaponRangeLib.NOTHING) {
 			player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]) as WeaponRange);
 		}
-		if (player.shield == ShieldLib.NOTHING || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) {
-			player.setShield(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID]) as Shield);
+		if (player.shield == ShieldLib.NOTHING) {
+			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] < 1) player.setShield(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID]) as Shield);
 		}
 		if (player.armor == armors.TRADITC) {
 			player.setArmor(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID]) as Armor);

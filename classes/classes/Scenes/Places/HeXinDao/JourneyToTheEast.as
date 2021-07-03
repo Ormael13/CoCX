@@ -1013,7 +1013,7 @@ package classes.Scenes.Places.HeXinDao
 			if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
 			if (player.weapon != WeaponLib.FISTS) {
 				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
+				else flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
 				player.setWeapon(WeaponLib.FISTS);
 			}
 			if (player.weaponRange != WeaponRangeLib.NOTHING) {
@@ -1022,7 +1022,7 @@ package classes.Scenes.Places.HeXinDao
 			}
 			if (player.shield != ShieldLib.NOTHING) {
 				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-				flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] = player.shield.id;
+				else flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] = player.shield.id;
 				player.setShield(ShieldLib.NOTHING);
 			}
 			if (player.armor != ArmorLib.NOTHING) {

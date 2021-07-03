@@ -2865,7 +2865,8 @@ import flash.utils.getQualifiedClassName;
 				}
 				//Deal damage if still wounded.
 				else {
-					var store2:Number = int(50+(player.inte/10));
+					var store2:Number = int(50 + (player.inte / 10));
+					store2 = Math.round(store2 * SceneLib.combat.fireDamageBoostedByDao());
 					store2 = SceneLib.combat.doFireDamage(store2);
 					if(plural) outputText(capitalA + short + " burn from lingering immolination after-effect. <b>(<font color=\"#800000\">" + store2 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering immolination after-effect. <b>(<font color=\"#800000\">" + store2 + "</font>)</b>\n\n");
@@ -2883,6 +2884,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store4:Number = (player.str + player.spe + player.tou) * 2.5;
+					store4 = Math.round(store4 * SceneLib.combat.fireDamageBoostedByDao());
 					store4 += maxHP() * statusEffectv2(StatusEffects.BurnDoT);
 					store4 = SceneLib.combat.doFireDamage(store4);
 					if(plural) outputText(capitalA + short + " burn from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
@@ -2901,6 +2903,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store8:Number = (player.str + player.spe + player.tou) * 2.5;
+					store8 = Math.round(store8 * SceneLib.combat.fireDamageBoostedByDao());
 					store8 += maxHP() * statusEffectv2(StatusEffects.BurnDoT2);
 					store8 = SceneLib.combat.doFireDamage(store8);
 					if(plural) outputText(capitalA + short + " burn from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store8 + "</font>)</b>\n\n");
@@ -2919,6 +2922,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store6:Number = (player.spe + player.inte) * SceneLib.combat.soulskillMod() * 0.5;
+					store6 = Math.round(store6 * SceneLib.combat.fireDamageBoostedByDao());
 					store6 = SceneLib.combat.doFireDamage(store6);
 					if(plural) outputText(capitalA + short + " burn from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
@@ -2958,6 +2962,7 @@ import flash.utils.getQualifiedClassName;
 					//Deal damage if still wounded.
 					else {
 						var store12:Number = (player.str + player.spe + player.tou) * 2.5;
+						store12 = Math.round(store12 * SceneLib.combat.iceDamageBoostedByDao());
 						store12 += maxHP() * statusEffectv2(StatusEffects.FrostburnDoT);
 						if(plural) outputText(capitalA + short + " are hurt by lingering Frostburn after-effect. ");
 						else outputText(capitalA + short + " is hurt by lingering Frostburn after-effect. ");
@@ -3108,7 +3113,7 @@ import flash.utils.getQualifiedClassName;
 					var store11:Number = 0;
 					store11 += statusEffectv2(StatusEffects.ConsumingDarkness);
 					store11 *= 0.2;
-					store11 = Math.round(store11);
+					store11 = Math.round(store11 * SceneLib.combat.darknessDamageBoostedByDao());
 					store11 = SceneLib.combat.doDarknessDamage(store11, true, true);
 					outputText("\n\n");
 				}

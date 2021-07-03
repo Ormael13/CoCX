@@ -213,7 +213,6 @@ import classes.Scenes.SceneLib;
 			player.tone = 0;
 			player.thickness = 20;
 			player.femininity = 80;
-
 			player.horns.type = Horns.NONE;
 			player.antennae.type = Antennae.NONE;
 			player.tailType = Tail.NONE;
@@ -442,6 +441,11 @@ import classes.Scenes.SceneLib;
 		public function Need2GoEndElfQuest():void {
 			clearOutput();
 			WoodElvesQuest = QUEST_STAGE_PCFUCKOFF;
+			outputText("The three look sad as you tell them you’ll be leaving." +
+                    "\n\nMerisiel sighs. \"<i>I figured you would when I realized your memories were returning. Don’t worry, we won’t try to stop you.</i>\"\n\n" +
+                    "Elenwen tells you where your old equipment is being stored. \"<i>We didn’t get rid of it… we were planning on giving it back to you after your naming ceremony tomorrow anyway. I suppose you’ll be wanting it.</i>\"\n\n" +
+                    "Alyssa has tears in her eyes as she pleads with you but your mind's made up and you decide to leave, heading back to your camp.");
+            doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function KeepName():void {
@@ -599,14 +603,16 @@ import classes.Scenes.SceneLib;
 			else if (!player.hasVagina()) addButtonDisabled(1,"Tent","You need to be female or herm in order to use the tents.");
 			//addButton(2, "Fletching table", Fletching);
 			addButtonDisabled(2,"Fletching table","Under Construction.");
-			addButton(3, "Elenwen", Elenwen);
-			if (hasTrainedToday) addButtonDisabled(3,"Elenwen","You need a break from your recent training before you can train again.");
-		    else if (!player.isElf()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
-			else if (!player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train with... it's not like archery is a girl only thing but considering the fact that she's practicing naked...");
-			addButton(4, "Alyssa", Alyssa);
-			if (hasTrainedToday) addButtonDisabled(4,"Alyssa","You need a break from your recent training before you can train again.");
-			else if (!player.isElf()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
-			else if (!player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train with... it's not like the spear is a girl only discipline but the way she use it might as well be...");
+			//addButton(3, "Elenwen", Elenwen);
+			//if (hasTrainedToday) addButtonDisabled(3,"Elenwen","You need a break from your recent training before you can train again.");
+		    //else if (!player.isElf()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
+			//else if (!player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train with... it's not like archery is a girl only thing but considering the fact that she's practicing naked...");
+			addButtonDisabled(3, "Elenwen", "Under Review.");
+			//addButton(4, "Alyssa", Alyssa);
+			//if (hasTrainedToday) addButtonDisabled(4,"Alyssa","You need a break from your recent training before you can train again.");
+			//else if (!player.isElf()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
+			//else if (!player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train with... it's not like the spear is a girl only discipline but the way she use it might as well be...");
+			addButtonDisabled(4, "Alyssa", "Under Review.");
 			addButton(5, "Leave", camp.returnToCampUseOneHour);
 		}
 

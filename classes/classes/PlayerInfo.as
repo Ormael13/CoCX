@@ -1218,12 +1218,48 @@ public class PlayerInfo extends BaseContent {
 			masteryStats += "\n";
 		}
 		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
-			masteryStats += "<b>Dao of Fire:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
-			masteryStats += "<b>Dao of Ice:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
-			masteryStats += "<b>Dao of Lighting:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
-			masteryStats += "<b>Dao of Darkness:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
-			masteryStats += "<b>Dao of ???:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
-			masteryStats += "<b>Dao of ???:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
+			if (player.hasStatusEffect(StatusEffects.DaoOfFire)) {
+				masteryStats += "<b>Major Dao of Fire:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfFire) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfFire) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfFire) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
+			if (player.hasStatusEffect(StatusEffects.DaoOfIce)) {
+				masteryStats += "<b>Major Dao of Ice:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfIce) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfIce) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfIce) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
+			if (player.hasStatusEffect(StatusEffects.DaoOfLighting)) {
+				masteryStats += "<b>Major Dao of Lighting:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfLighting) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfLighting) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfLighting) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
+			if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) {
+				masteryStats += "<b>Major Dao of Darkness:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
+			if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) {
+				masteryStats += "<b>Major Dao of Poison:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
+			//masteryStats += "<b>Dao of ???:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
+			//masteryStats += "<b>Dao of ???:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
 			masteryStats += "\n";
 		}
 		if (player.teaseLevel < combat.maxTeaseLevel())

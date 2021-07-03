@@ -2269,7 +2269,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.armor == armors.BLIZZ_K) damage *= 1.5;
 		if (player.headJewelry == headjewelries.SNOWFH) damage *= 1.3;
 		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) damage = Math.round(damage * 1.2);
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
@@ -2386,7 +2386,7 @@ public class CombatMagic extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcEclypseMod(damage);
 		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) damage = Math.round(damage * 1.2);
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
@@ -2590,7 +2590,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.armor == armors.BLIZZ_K) damage *= 1.5;
 		if (player.headJewelry == headjewelries.SNOWFH) damage *= 1.3;
 		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) damage = Math.round(damage * 1.2);
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
@@ -2705,7 +2705,7 @@ public class CombatMagic extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcEclypseMod(damage);
 		if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) damage = Math.round(damage * 1.2);
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
@@ -3049,7 +3049,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) consumingdarkness = Math.round(consumingdarkness * 1.2);
 			if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) consumingdarkness *= 4;
 			outputText("You call on the power of primordial darkness, which is all too happy to oblige your request of ripping your foe to shreds. The shadows all around you sprouting countless mouths and claws to do just that. " + monster.capitalA + monster.short + " can only scream in surprise, then in pain, at the sudden assault. ");
-			consumingdarkness = Math.round(consumingdarkness);
+			consumingdarkness = Math.round(consumingdarkness * combat.darknessDamageBoostedByDao());
 			monster.createStatusEffect(StatusEffects.ConsumingDarkness, 7, consumingdarkness, 0, 0);
 			doDarknessDamage(consumingdarkness, true, true);
 			MagicAddonEffect();
@@ -3211,7 +3211,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (player.armor == armors.BLIZZ_K) damage *= 1.5;
 		if (player.headJewelry == headjewelries.SNOWFH) damage *= 1.3;
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bedą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		if (monster.plural) damage *= 5;
@@ -3327,7 +3327,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (combat.wearingWinterScarf()) damage *= 1.2;
 			if (player.armor == armors.BLIZZ_K) damage *= 1.5;
 			if (player.headJewelry == headjewelries.SNOWFH) damage *= 1.3;
-			damage = Math.round(damage);
+			damage = Math.round(damage * combat.iceDamageBoostedByDao());
 			//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bedą dostawać bonusowe obrażenia
 			//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 			if (monster.plural) damage *= 5;
@@ -3445,7 +3445,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 		if (monster.plural) damage *= 5;
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
 			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
@@ -3552,7 +3552,7 @@ public class CombatMagic extends BaseCombatContent {
 				if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 				if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 				if (monster.plural) damage *= 5;
-				damage = Math.round(damage);
+				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 				var crit:Boolean = false;
 				var critChance:int = 5;
 				critChance += combatMagicalCritical();
@@ -4072,7 +4072,7 @@ public class CombatMagic extends BaseCombatContent {
 		var damage:Number = 0;
 		outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
 		monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
-		damage = scalingBonusIntelligence() * spellModWhite();
+		damage = scalingBonusIntelligence() * spellModWhite() * combat.fireDamageBoostedByDao();
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (edgy) damage *= 2;
 		//Determine if critical hit!
@@ -4141,7 +4141,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
 		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
 			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
@@ -4241,7 +4241,7 @@ public class CombatMagic extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcVoltageMod(damage);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.lightingDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
@@ -4292,7 +4292,6 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) player.HP -= spellCostWhite(200);
 		else useMana(200, 5);
-		player.wrath -= 100;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellPyreBurst,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
@@ -4323,6 +4322,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.hasPerk(PerkLib.LastResort) && player.mana < spellCostWhite(200)) player.HP -= spellCostWhite(200);
 		else useMana(200,5);
+		player.wrath -= 100;
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) player.createStatusEffect(StatusEffects.CooldownSpellPyreBurstEx,spellWhiteCooldown(),0,0,0);
 		if (handleShell()){return;}
 		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
@@ -4352,7 +4352,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Attack gains burn DoT for 2-3 turns.
 		outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
 		monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
-		damage = scalingBonusIntelligence() * spellModWhite();
+		damage = scalingBonusIntelligence() * spellModWhite() * combat.fireDamageBoostedByDao();
 		if (flags[kFLAGS.SPELLS_COOLDOWNS] == 0) damage *= 4;
 		if (monster.plural) damage *= 5;
 		if (edgy) damage *= 2;
@@ -4424,7 +4424,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
 		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
 		if (player.hasPerk(PerkLib.Omnicaster)) {
 			if (player.hasPerk(PerkLib.GazerEyeFinalForm)) damage *= 0.5;
@@ -4523,7 +4523,7 @@ public class CombatMagic extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcVoltageMod(damage);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.lightingDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText("for ");

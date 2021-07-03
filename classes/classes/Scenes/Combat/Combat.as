@@ -2993,6 +2993,7 @@ public class Combat extends BaseContent {
                 if (player.inte >= 100) damage += player.inte * 0.1;
                 if (player.inte >= 150) damage += player.inte * 0.1;
                 if (player.inte >= 200) damage += player.inte * 0.1;
+				damage *= fireDamageBoostedByDao();
             }
             if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
                 damage += player.inte * 0.2;
@@ -3000,6 +3001,7 @@ public class Combat extends BaseContent {
                 if (player.inte >= 100) damage += player.inte * 0.1;
                 if (player.inte >= 150) damage += player.inte * 0.1;
                 if (player.inte >= 200) damage += player.inte * 0.1;
+				damage *= iceDamageBoostedByDao();
             }
             if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
                 damage += player.inte * 0.2;
@@ -3007,6 +3009,7 @@ public class Combat extends BaseContent {
                 if (player.inte >= 100) damage += player.inte * 0.1;
                 if (player.inte >= 150) damage += player.inte * 0.1;
                 if (player.inte >= 200) damage += player.inte * 0.1;
+				damage *= lightingDamageBoostedByDao();
             }
             if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
                 damage += player.inte * 0.2;
@@ -3014,6 +3017,7 @@ public class Combat extends BaseContent {
                 if (player.inte >= 100) damage += player.inte * 0.1;
                 if (player.inte >= 150) damage += player.inte * 0.1;
                 if (player.inte >= 200) damage += player.inte * 0.1;
+				damage *= darknessDamageBoostedByDao();
             }
             //Section for item damage modifiers
             if (weaponRangePerk == "Bow"){
@@ -5262,10 +5266,22 @@ public class Combat extends BaseContent {
                     else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
                 }
                 //Damage is delivered HERE
-                if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doFireDamage(damage, true, true);
-                else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doIceDamage(damage, true, true);
-                else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doLightingDamage(damage, true, true);
-                else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doDarknessDamage(damage, true, true);
+                if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+					damage = Math.round(damage * fireDamageBoostedByDao());
+					doFireDamage(damage, true, true);
+				}
+                else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+					damage = Math.round(damage * iceDamageBoostedByDao());
+					doIceDamage(damage, true, true);
+				}
+                else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+					damage = Math.round(damage * lightingDamageBoostedByDao());
+					doLightingDamage(damage, true, true);
+				}
+                else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+					damage = Math.round(damage * darknessDamageBoostedByDao());
+					doDarknessDamage(damage, true, true);
+				}
                 else doDamage(damage, true, true);
                 if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                 if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
@@ -8051,6 +8067,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
                 if (player.hasPerk(PerkLib.EclipticMindEvolved) && monster.cor > player.cor / 2) damage = Math.round(damage * 2);
                 else if (player.hasPerk(PerkLib.EclipticMindFinalForm) && monster.cor > player.cor / 2) damage = Math.round(damage * 3);
+				damage *= fireDamageBoostedByDao();
                 damage = Math.round(damage);
                 if (damage > (monster.maxHP()/10)) damage = Math.round(monster.maxHP()/10);
                 outputText("Your aura of purity burns [monster a] [monster name] with holy fire for ");
@@ -8271,7 +8288,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.RacialParagon)) damageBFA *= 1.50;
                 if (player.hasPerk(PerkLib.Apex)) damageBFA *= 1.50;
                 if (player.hasPerk(PerkLib.AlphaAndOmega)) damageBFA *= 1.50;
-                damageBFA = Math.round(damageBFA);
+                damageBFA = Math.round(damageBFA * iceDamageBoostedByDao());
                 if (damageBFA > (monster.maxHP()/10)) damageBFA = Math.round(monster.maxHP()/10);
                 outputText("Your black frost aura chills [monster a] [monster name] to the bone dealing ");
                 doIceDamage(damageBFA, true, true);
@@ -13278,6 +13295,8 @@ public class Combat extends BaseContent {
         player.lust -= fireDMG;
         fireDMG *= 10;
 		if (monster.plural) fireDMG *= 2;
+		fireDMG *= fireDamageBoostedByDao();
+		fireDMG = Math.round(fireDMG);
         outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing flames of love with enemy. Shortly after that lust starts to gather around your hands getting hotter and hotter till it envelop your hands in flames.\n\n");
         outputText("And with almost orgasmic joy, you sends a wave of flames toward " + monster.a + monster.short + " while mumbling about 'sharing the flames of love'.");
 		doFireDamage(fireDMG);
@@ -13293,6 +13312,8 @@ public class Combat extends BaseContent {
         player.lust -= iceDMG;
         iceDMG *= 10;
         if (monster.plural) iceDMG *= 2;
+		iceDMG *= iceDamageBoostedByDao();
+		iceDMG = Math.round(iceDMG);
         outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing icicles of love with enemy. Shortly after that lust starts to gather around your hands getting colder and colder till it envelop your hands in icicles.\n\n");
         outputText("And with almost orgasmic joy, you sends a wave of ice shards toward " + monster.a + monster.short + " while mumbling about 'sharing the icicles of love'.");
 		doIceDamage(iceDMG);
@@ -13308,6 +13329,8 @@ public class Combat extends BaseContent {
         player.wrath -= lightingDMG;
         lightingDMG *= 10;
         if (monster.plural) lightingDMG *= 2;
+		lightingDMG *= lightingDamageBoostedByDao();
+		lightingDMG = Math.round(lightingDMG);
         outputText("You start concentrate on the wrath flowing in your body, your veins while imaging a joy of sharing storm of sisterhood with enemy. Shortly after that wrath starts to gather around your hands till it envelop your hands in ligthing.\n\n");
         outputText("With joy, you sends a mass of ligthing toward " + monster.a + monster.short + " while mumbling about 'sharing the storm of sisterhood'.");
 		doLightingDamage(lightingDMG);
@@ -13323,6 +13346,8 @@ public class Combat extends BaseContent {
         player.wrath -= darknessDMG;
         darknessDMG *= 10;
         if (monster.plural) darknessDMG *= 2;
+		darknessDMG *= darknessDamageBoostedByDao();
+		darknessDMG = Math.round(darknessDMG);
         outputText("You start concentrate on the wrath flowing in your body, your veins while imaging a joy of sharing night of brotherhood with enemy. Shortly after that wrath starts to gather around your hands till it envelop your hands in darkness.\n\n");
         outputText("With joy, you sends a mass of darkness toward " + monster.a + monster.short + " while mumbling about 'sharing the night of brotherhood'.");
 		doDarknessDamage(darknessDMG);
@@ -13679,6 +13704,52 @@ public class Combat extends BaseContent {
 		outputText("\n\n");
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
+	}
+	
+	public function fireDamageBoostedByDao():Number {
+		var boostF:Number = 1;
+		if (player.hasStatusEffect(StatusEffects.DaoOfFire)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 3) boostF += 0.3;
+			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 2) boostF += 0.2;
+			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 1) boostF += 0.1;
+		}
+		return boostF;
+	}
+	public function iceDamageBoostedByDao():Number {
+		var boostI:Number = 1;
+		if (player.hasStatusEffect(StatusEffects.DaoOfIce)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 3) boostI += 0.3;
+			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 2) boostI += 0.2;
+			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 1) boostI += 0.1;
+		}
+		return boostI;
+	}
+	public function lightingDamageBoostedByDao():Number {
+		var boostL:Number = 1;
+		if (player.hasStatusEffect(StatusEffects.DaoOfLighting)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfLighting) == 3) boostL += 0.3;
+			if (player.statusEffectv2(StatusEffects.DaoOfLighting) == 2) boostL += 0.2;
+			if (player.statusEffectv2(StatusEffects.DaoOfLighting) == 1) boostL += 0.1;
+		}
+		return boostL;
+	}
+	public function darknessDamageBoostedByDao():Number {
+		var boostD:Number = 1;
+		if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 3) boostD += 0.3;
+			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 2) boostD += 0.2;
+			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 1) boostD += 0.1;
+		}
+		return boostD;
+	}
+	public function poisonDamageBoostedByDao():Number {
+		var boostP:Number = 1;
+		if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 3) boostP += 0.3;
+			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 2) boostP += 0.2;
+			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 1) boostP += 0.1;
+		}
+		return boostP;
 	}
 
     public function oniRampagePowerMulti():Number {

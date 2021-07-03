@@ -555,10 +555,22 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		outputText(" ");
-		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doFireDamage(damage, true, true);
-		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doIceDamage(damage, true, true);
-		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doLightingDamage(damage, true, true);
-		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doDarknessDamage(damage, true, true);
+		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.iceDamageBoostedByDao());
+			doIceDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+			doLightingDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
+			doDarknessDamage(damage, true, true);
+		}
 		else doDamage(damage, true, true);
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
@@ -671,10 +683,22 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		outputText("Your [weapon] sweeps against " + monster.a + monster.short + ", dealing ");
-		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doFireDamage(damage, true, true);
-		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doIceDamage(damage, true, true);
-		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doLightingDamage(damage, true, true);
-		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doDarknessDamage(damage, true, true);
+		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.iceDamageBoostedByDao());
+			doIceDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+			doLightingDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
+			doDarknessDamage(damage, true, true);
+		}
 		else doDamage(damage, true, true);
 		outputText(" damage! ");
 		if (crit == true) {
@@ -1085,6 +1109,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
 		monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
 		outputText("Air seems to lose all temperature around your fist as you dash at " + monster.a + monster.short + " and shove your palm on " + monster.pronoun2 + ", " + monster.pronoun3 + " body suddenly is frozen solid, encased in a thick block of ice! ");
+		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		doIceDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
@@ -1161,6 +1186,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.findPerk(PerkLib.FlurryOfBlows) >= 0) damage *= 2;
 		monster.createStatusEffect(StatusEffects.FirePunchBurnDoT,16,0,0,0);
 		outputText("Setting your fist ablaze, you rush at " + monster.a + monster.short + " and scorch " + monster.pronoun2 + " with your searing flames. ");
+		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage += Math.round(damage * 0.1);
 			doFireDamage(damage, true, true);

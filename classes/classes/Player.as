@@ -2545,6 +2545,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult += 100;
 			if (hasPerk(PerkLib.FireAffinity)) mult -= 50;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
+			if (hasStatusEffect(StatusEffects.DaoOfFire) && (statusEffectv2(StatusEffects.DaoOfFire) > 2)) mult -= 10;
 			if (jewelryEffectId == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude3;
@@ -2664,6 +2665,7 @@ use namespace CoC;
 				if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI && (jewelryName == "Infernal Mouse ring" || jewelryName2 == "Infernal Mouse ring" || jewelryName3 == "Infernal Mouse ring" || jewelryName4 == "Infernal Mouse ring")) mult += 90;
 				else mult += 100;
 			}
+			if (hasStatusEffect(StatusEffects.DaoOfIce) && (statusEffectv2(StatusEffects.DaoOfIce) > 2)) mult -= 10;
 			if (rearBody.type == RearBody.YETI_FUR) mult -= 20;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
@@ -2764,6 +2766,7 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId2 == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId3 == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId4 == JewelryLib.MODIFIER_LIGH_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R && necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= 15;
+			if (hasStatusEffect(StatusEffects.DaoOfLighting) && (statusEffectv2(StatusEffects.DaoOfLighting) > 2)) mult -= 10;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -2855,6 +2858,7 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_DARK_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_DARK_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_DARK_R && jewelryEffectId2 == JewelryLib.MODIFIER_DARK_R && jewelryEffectId3 == JewelryLib.MODIFIER_DARK_R && jewelryEffectId4 == JewelryLib.MODIFIER_DARK_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_DARK_R && necklaceEffectId == NecklaceLib.MODIFIER_DARK_R) mult -= 15;
+			if (hasStatusEffect(StatusEffects.DaoOfDarkness) && (statusEffectv2(StatusEffects.DaoOfDarkness) > 2)) mult -= 10;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -2948,6 +2952,7 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;
+			if (hasStatusEffect(StatusEffects.DaoOfPoison) && (statusEffectv2(StatusEffects.DaoOfPoison) > 2)) mult -= 10;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -7709,7 +7714,7 @@ use namespace CoC;
 				WoodElfCounter++;
 			if (hasPerk(PerkLib.BlessingOfTheAncestorTree))
 				WoodElfCounter+= 4;
-			if (hasPerk(PerkLib.ElvishPeripheralNervSys))
+			/*if (hasPerk(PerkLib.ElvishPeripheralNervSys))
 				WoodElfCounter++;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved))
 				WoodElfCounter++;
@@ -7720,7 +7725,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				WoodElfCounter++;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				WoodElfCounter++;
+				WoodElfCounter++;*/
 			if (hasPerk(PerkLib.ElfsDescendant) || hasPerk(PerkLib.BloodlineElf))
 				WoodElfCounter += 2;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
@@ -12267,9 +12272,9 @@ use namespace CoC;
 				} else {
 					maxStrCap2 -= 10;
 					maxTouCap2 -= 15;
-					maxSpeCap2 += 100;
-					maxIntCap2 += 100;
-					maxLibCap2 += 100;
+					maxSpeCap2 += 300;
+					maxIntCap2 += 280;
+					maxLibCap2 += 260;
 					currentSen += 50;
 				}
 			}
