@@ -442,6 +442,11 @@ import classes.Scenes.SceneLib;
 		public function Need2GoEndElfQuest():void {
 			clearOutput();
 			WoodElvesQuest = QUEST_STAGE_PCFUCKOFF;
+			outputText("The three look sad as you tell them you’ll be leaving." +
+					"\n\nMerisiel sighs. \"<i>I figured you would when I realized your memories were returning. Don’t worry, we won’t try to stop you.</i>\"\n\n" +
+					"Elenwen tells you where your old equipment is being stored. \"<i>We didn’t get rid of it… we were planning on giving it back to you after your naming ceremony tomorrow anyway. I suppose you’ll be wanting it.</i>\"\n\n" +
+					"Alyssa has tears in her eyes as she pleads with you but your mind's made up and you decide to leave, heading back to your camp.");
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function KeepName():void {
