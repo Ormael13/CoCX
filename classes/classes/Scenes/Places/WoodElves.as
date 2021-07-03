@@ -859,7 +859,7 @@ import classes.Scenes.SceneLib;
 				else outputText("\n\nHer first instruction is to strip. Unlike her usual, somewhat perverted expression when she says that, she appears serious.");
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING0;
 			}
-			outputText("\n\n\"<i>Remember, [name], we Elves are fundamentally spiritual creatures. Elves do not fight with strength but rather by listening to the voices around us. Elves become one with the voices of the wind and the forest. To do that, you have to be able to feel the air around you, and the easiest way to learn to do that is, well, to have nothing between you and it. Once you’re confident with your abilities, you can wear clothes, but beginners must always learn naked, even before we came to Mareth. I still practice that way, as you can see.</i>\"" +
+			outputText("\n\n\"<i>Remember, [name], we Elves are fundamentally spiritual creatures. Elves do not fight with strength but rather by listening to the voices around us. Elves become one with the voices of the wind and the forest. To do that, you have to be able to feel the air around you, and the easiest way to learn to do that is, well, to have nothing between you and it. Once you’re confident with your abilities, you can wear clothes, but beginners must always learn naked. I still practice that way, as you can see.</i>\"" +
 					"\n\nWith that, you take up a practice spear and begin training your posture and movements." +
 					" Alyssa alternates between watching you and correcting your posture with her hands." +
 					" Though she constantly tells you not to force your movement in favor of feeling where the wind is directing you," +
