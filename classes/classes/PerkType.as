@@ -499,6 +499,17 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireMaxVenom(value:int):PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxVenom() >= value;
+				},
+				text: "Max. Venom/Web "+value,
+				type: "venom_web",
+				value: value
+			});
+			return this;
+		}
 		private function fnRequireAttr(attrname:String,value:int):Function {
 			return function(player:Player):Boolean {
 				return player[attrname] >= value;

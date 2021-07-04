@@ -325,7 +325,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DaoOfDarkness:StatusEffectType                  = mk("Dao of Darkness");
 		public static const DaoOfFire:StatusEffectType                      = mk("Dao of Fire");
 		public static const DaoOfIce:StatusEffectType                       = mk("Dao of Ice");
-		public static const DaoOfLighting:StatusEffectType                  = mk("Dao of Lighting");
+		public static const DaoOfLightning:StatusEffectType                  = mk("Dao of Lighting");
 		public static const DaoOfPoison:StatusEffectType                    = mk("Dao of Poison");
 		public static const DaoOfSmth1:StatusEffectType                    = mk("Dao of ?Water?");
 		public static const DaoOfSmth2:StatusEffectType                    = mk("Dao of ?Earth?");

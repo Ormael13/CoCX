@@ -1234,11 +1234,11 @@ public class PlayerInfo extends BaseContent {
 				else masteryStats += "None";
 				masteryStats += "\n";
 			}
-			if (player.hasStatusEffect(StatusEffects.DaoOfLighting)) {
-				masteryStats += "<b>Major Dao of Lighting:</b>  ";
-				if (player.statusEffectv2(StatusEffects.DaoOfLighting) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
-				else if (player.statusEffectv2(StatusEffects.DaoOfLighting) == 2) masteryStats += "2nd layer (+20% dmg)";
-				else if (player.statusEffectv2(StatusEffects.DaoOfLighting) == 1) masteryStats += "1st layer (+10% dmg)";
+			if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) {
+				masteryStats += "<b>Major Dao of Lightning:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 1) masteryStats += "1st layer (+10% dmg)";
 				else masteryStats += "None";
 				masteryStats += "\n";
 			}

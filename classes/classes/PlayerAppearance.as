@@ -2447,8 +2447,10 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.elfScore() >= 1) outputText("\n<font color=\"#008000\">Half Elf: " + player.elfScore() + "</font>");
 		else if (player.elfScore() < 1) outputText("\n<font color=\"#ff0000\">Half Elf: 0</font>");
 		//Wood Elf
-		if (player.woodElfScore() >= 25) outputText("\n<font color=\"#0000a0\">Wood Elf: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +150% to Spe racial multi, +125% to Int racial multi, +100% to Lib racial multi, +50 min Sens, +20% max Mana)</font>");
-		else if (player.woodElfScore() >= 17) outputText("\n<font color=\"#0000a0\">Wood Elf little sister: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +300% to Spe racial multi, +280% to Int racial multi, +260% to Lib racial multi, +50 min Sens, +10% max Mana)</font>");
+		if (player.woodElfScore() >= 31) outputText("\n<font color=\"#0000a0\">Wood Elf elder sister: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +550% to Spe racial multi, +495% to Int racial multi, +455% to Lib racial multi, +80 Sens, +40% max Mana)</font>");
+		else if (player.woodElfScore() >= 28) outputText("\n<font color=\"#0000a0\">Wood Elf sister: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +495% to Spe racial multi, +445% to Int racial multi, +415% to Lib racial multi, +70 Sens, +30% max Mana)</font>");
+		else if (player.woodElfScore() >= 25) outputText("\n<font color=\"#0000a0\">Wood Elf young sister: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +430% to Spe racial multi, +405% to Int racial multi, +375% to Lib racial multi, +60 Sens, +20% max Mana)</font>");
+		else if (player.woodElfScore() >= 22) outputText("\n<font color=\"#0000a0\">Wood Elf little sister: " + player.woodElfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +375% to Spe racial multi, +355% to Int racial multi, +335% to Lib racial multi, +50 Sens, +10% max Mana)</font>");
 		else if (player.woodElfScore() >= 1) outputText("\n<font color=\"#008000\">Wood Elf: " + player.woodElfScore() + "</font>");
 		else if (player.woodElfScore() < 1) outputText("\n<font color=\"#ff0000\">Wood Elf: 0</font>");
 		//Ferret

@@ -219,11 +219,17 @@ public class BaseCombatContent extends BaseContent {
 	protected function spellBlackCooldown():Number {
 		return combat.magic.spellBlackCooldownImpl();
 	}
+	protected function spellBlackTier2Cooldown():Number {
+		return combat.magic.spellBlackTier2CooldownImpl();
+	}
 	protected function spellGreyCooldown():Number {
 		return combat.magic.spellGreyCooldownImpl();
 	}
 	protected function spellWhiteCooldown():Number {
 		return combat.magic.spellWhiteCooldownImpl();
+	}
+	protected function spellWhiteTier2Cooldown():Number {
+		return combat.magic.spellWhiteTier2CooldownImpl();
 	}
 	protected function healMod():Number {
 		return combat.magic.healModImpl();
