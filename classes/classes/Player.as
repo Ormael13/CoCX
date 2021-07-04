@@ -7696,9 +7696,7 @@ use namespace CoC;
 					WoodElfCounter++;
 				if (thickness <= 50)
 					WoodElfCounter++;
-				if (hasCock() && cocks.length < 6)
-					WoodElfCounter++;
-				if (hasVagina() && biggestTitSize() >= 3)
+				if ((hasCock() && cocks.length < 6) || (hasVagina() && biggestTitSize() >= 3))
 					WoodElfCounter++;
 			}
 			if (cor >= 50)

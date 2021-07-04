@@ -24,6 +24,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
+import classes.PerkType;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Stats.Buff;
 import classes.Stats.BuffBuilder;

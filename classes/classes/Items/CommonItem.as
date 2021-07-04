@@ -3,7 +3,6 @@
  */
 package classes.Items
 {
-import classes.CoC;
 import classes.EngineCore;
 import classes.CoC;
 import classes.ItemType;

@@ -14,7 +14,7 @@ package classes.Items.Armors
 		private var playerPerkV2:Number;
 		private var playerPerkV3:Number;
 		private var playerPerkV4:Number;
-		
+
 		public function ArmorWithPerk(id:String, shortName:String,name:String, longName:String, def:Number, mdef:Number, value:Number, description:String, perk:String, playerPerk:PerkType, playerPerkV1:Number, playerPerkV2:Number, playerPerkV3:Number, playerPerkV4:Number, playerPerkDesc:String = "", supportsBulge:Boolean = false, supportsUndergarment:Boolean = true) {
 			super(id, shortName, name,longName, def, mdef, value, description, perk, supportsBulge, supportsUndergarment);
 			this.playerPerk = playerPerk;
@@ -23,13 +23,13 @@ package classes.Items.Armors
 			this.playerPerkV3 = playerPerkV3;
 			this.playerPerkV4 = playerPerkV4;
 		}
-		
+
 		override public function playerEquip():Armor { //This item is being equipped by the player. Add any perks, etc.
 			while (game.player.hasPerk(playerPerk)) game.player.removePerk(playerPerk);
 			game.player.createPerk(playerPerk, playerPerkV1, playerPerkV2, playerPerkV3, playerPerkV4);
 			return super.playerEquip();
 		}
-		
+
 		override public function playerRemove():Armor { //This item is being removed by the player. Remove any perks, etc.
 			while (game.player.hasPerk(playerPerk)) game.player.removePerk(playerPerk);
 			return super.playerRemove();
@@ -57,12 +57,12 @@ package classes.Items.Armors
 			//Value
 			if (value != 0) desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: " + playerPerk.name;
+			desc += "\nSpecial: " + playerPerk.name();
 			if (playerPerk == PerkLib.WizardsEndurance) desc += " (-" + playerPerkV1 + "% Spell Cost)";
 			else if (playerPerkV1 > 0) desc += " (Magnitude: " + playerPerkV1 + ")";
 			return desc;
 		}
-		
+
 /*
 		override public function equipEffect(player:Player, output:Boolean):void
 		{

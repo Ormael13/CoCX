@@ -906,7 +906,7 @@ import classes.Scenes.SceneLib;
 			CoC.instance.timeQ = 1;
 			if (player.spe >= 50 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING0 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING1;
-				player.createPerk(PerkLib.ELFElvenSpearDancingFlurry,0,0,0,0);
+				player.createPerk(PerkLib.ELFElvenSpearDancingFlurry1to4,1,0,0,0);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Spear Dancing Flurry! <b>Gained Perk:Elven Spear Dancing Flurry</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
@@ -914,16 +914,14 @@ import classes.Scenes.SceneLib;
 			else if (player.spe >= 100 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING1 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING2;
 				player.createPerk(PerkLib.ELFElvenBattleStyle,0,0,0,0);
-				player.createPerk(PerkLib.ELFElvenSpearDancingFlurryII,0,0,0,0);
-				player.removePerk(PerkLib.ELFElvenSpearDancingFlurry);
+				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,2);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Battle Style and Elven Spear Dancing Flurry IV Perk! <b>Gained Perk: Elven Battle Style and Elven Spear Dancing Flurry II</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 150 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING2 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING3;
-				player.createPerk(PerkLib.ELFElvenSpearDancingFlurryIII,0,0,0,0);
-				player.removePerk(PerkLib.ELFElvenSpearDancingFlurryII);
+				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,3);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Spear Dancing Flurry III Perk! <b>Gained Perk: Elven Spear Dancing Flurry III</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
@@ -931,8 +929,7 @@ import classes.Scenes.SceneLib;
 			else if (player.spe >= 200 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING3 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING4;
 				player.createPerk(PerkLib.ELFElvenSpearDancingTechnique,0,0,0,0);
-				player.createPerk(PerkLib.ELFElvenSpearDancingFlurryIV,0,0,0,0);
-				player.removePerk(PerkLib.ELFElvenSpearDancingFlurryIII);
+				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,4);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Spear Dancing Technique and Elven Spear Dancing Flurry IV Perk! <b>Gained Perk: Spear Dancing Technique and Elven Spear Dancing Flurry IV</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
