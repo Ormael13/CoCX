@@ -12261,7 +12261,7 @@ use namespace CoC;
 					currentSen += 15;
 				}
 			}
-			if (woodElfScore() >= 17) {
+			if (woodElfScore() >= 22) {
 				if (woodElfScore() >= 25) {
 					maxStrCap2 -= 10;
 					maxTouCap2 -= 15;
