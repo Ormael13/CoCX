@@ -652,7 +652,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			doIceDamage(damage, true, true);
 		}
 		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-			damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			doLightingDamage(damage, true, true);
 		}
 		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
@@ -5199,7 +5199,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.inte >= 100) damage += player.inte * 0.1;
 				if (player.inte >= 150) damage += player.inte * 0.1;
 				if (player.inte >= 200) damage += player.inte * 0.1;
-				damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+				damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			}
 			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
 				damage += player.inte * 0.2;
@@ -5514,7 +5514,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
-			damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
 			damage += player.inte * 0.2;
@@ -5664,7 +5664,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			doIceDamage(damage, true, true);
 		}
 		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
-			damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			doLightingDamage(damage, true, true);
 		}
 		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
@@ -5753,7 +5753,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 150) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 200) dmgBarrage += player.inte * 0.1;
-			dmgBarrage = Math.round(dmgBarrage * combat.lightingDamageBoostedByDao());
+			dmgBarrage = Math.round(dmgBarrage * combat.lightningDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
 			dmgBarrage += player.inte * 0.2;

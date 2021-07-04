@@ -298,8 +298,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GrandArchmage2ndCircle) && player.inte >= 150) mod += .5;
 		if (player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) mod += .6;
 		if (player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) mod += .2;
-		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 275) mod += 1;
-		if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 225) mod += .8;
 		if (player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
 		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) mod += .2;
 		if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .1;
@@ -446,8 +444,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GrandArchmage2ndCircle) && player.inte >= 150) mod += .5;
 		if (player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) mod += .6;
 		if (player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) mod += .2;
-		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 275) mod += 1;
-		if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 225) mod += .8;
 		if (player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
 		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) mod += .2;
 		if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .1;
@@ -508,6 +504,15 @@ public class CombatMagic extends BaseCombatContent {
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
+	
+	private function spellModGrey():Number {
+		var mod:Number = 1;
+		if (player.hasPerk(PerkLib.GreyMageApprentice) && player.inte >= 75) mod += .1;
+		if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 125) mod += .2;
+		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 175) mod += .3;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage) && player.inte >= 225) mod += .4;
+		return mod;
+	}
 
 	internal function spellModWhiteImpl():Number {
 		var mod:Number = 1;
@@ -525,6 +530,13 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellWhiteCooldownImpl():Number {
 		var mod:Number = 3;
+		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod -= 1;
+		if (mod < 0) mod = 0;
+		return mod;
+	}
+
+	internal function spellWhiteTier2CooldownImpl():Number {
+		var mod:Number = 6;
 		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
@@ -591,6 +603,13 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellBlackCooldownImpl():Number {
 		var mod:Number = 3;
+		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod -= 1;
+		if (mod < 0) mod = 0;
+		return mod;
+	}
+
+	internal function spellBlackTier2CooldownImpl():Number {
+		var mod:Number = 6;
 		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
@@ -1536,7 +1555,9 @@ public class CombatMagic extends BaseCombatContent {
 
 	public function buildGreyMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
-		var badLustForGrey:Boolean = player.lust < 50 || player.lust > (player.maxLust() - 50);
+		var numb:Number = 50;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage)) numb -= 50;
+		var badLustForGrey:Boolean = player.lust < numb || player.lust > (player.maxLust() - numb);
 		var bloodForBloodGod:Number = (player.HP - player.minHP());
 //perki z grey mage line dajace spell mod * x% wiecej (nie wplywa na sam spell mod anu spell mod white/black)
 		// GRAY MAGIC
@@ -3196,7 +3217,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You narrow your eyes, focusing on the force of your lust and willpower as you narrow your eyes with deadly intent. A dark cloud coalesces above you, stretching further until there is nothing but an eerie darkness above you. You narrow your gaze at  " + monster.a + monster.short + " as countless razor-like shards of ice rain upon your opponent.\n");
-		var damage:Number = scalingBonusIntelligence() * spellMod();
+		var damage:Number = scalingBonusIntelligence() * spellMod() * spellModGrey();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -3428,7 +3449,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You narrow your eyes, focusing your own lust and willpower with a deadly intent. You cojure a small vortex of embers that expand into a vicious gout of flames.  With a single thought, you send a pillar of flames at " + monster.a + monster.short + ". You intend to leave nothing but ashes!\n");
-		var damage:Number = scalingBonusIntelligence() * spellMod();
+		var damage:Number = scalingBonusIntelligence() * spellMod() * spellModGrey();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -3690,7 +3711,7 @@ public class CombatMagic extends BaseCombatContent {
 			nosferatu += player.inte;
 			nosferatu += scalingBonusIntelligence();
 			if (player.hasPerk(PerkLib.WisenedHealer)) nosferatu += scalingBonusWisdom();
-			nosferatu = Math.round(nosferatu * healMod());
+			nosferatu = Math.round(nosferatu * healMod() * spellModGrey());
 			outputText(" You chant as your shadow suddenly takes on a life of its own, sprouting a multitude of mouths and tentacles which seek and tear into " + monster.a + monster.short + " shadow");
 			if (monster.plural) outputText("s");
 			outputText(", gorging on its owner’s life force to replenish your own. Soon enough the spell is over and your shadow returns to you, leaving you better for the wear. <b>(<font color=\"#800000\">" + nosferatu + "</font>)</b>");
@@ -4241,7 +4262,7 @@ public class CombatMagic extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcVoltageMod(damage);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText(monster.capitalA + monster.short + " takes ");
@@ -4523,7 +4544,7 @@ public class CombatMagic extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcVoltageMod(damage);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
 		//if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
 		outputText("for ");

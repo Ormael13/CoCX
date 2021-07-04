@@ -564,7 +564,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			doIceDamage(damage, true, true);
 		}
 		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-			damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			doLightingDamage(damage, true, true);
 		}
 		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
@@ -692,7 +692,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			doIceDamage(damage, true, true);
 		}
 		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-			damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			doLightingDamage(damage, true, true);
 		}
 		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
@@ -1385,8 +1385,10 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.findPerk(PerkLib.Channeling) >= 0 && player.inte >= 60) TranceBoost += 10;
 			if (player.findPerk(PerkLib.Archmage) >= 0 && player.inte >= 75) TranceBoost += 15;
 			if (player.findPerk(PerkLib.GrandArchmage) >= 0 && player.inte >= 100) TranceBoost += 20;
-			if (player.findPerk(PerkLib.GreyMage) >= 0 && player.inte >= 125) TranceBoost += 25;
-			if (player.findPerk(PerkLib.GreyArchmage) >= 0 && player.inte >= 150) TranceBoost += 30;
+			if (player.findPerk(PerkLib.GreyMageApprentice) >= 0 && player.inte >= 75) TranceBoost += 10;
+			if (player.findPerk(PerkLib.GreyMage) >= 0 && player.inte >= 125) TranceBoost += 15;
+			if (player.findPerk(PerkLib.GreyArchmage) >= 0 && player.inte >= 175) TranceBoost += 20;
+			if (player.findPerk(PerkLib.GrandGreyArchmage) >= 0 && player.inte >= 225) TranceBoost += 25;
 			if (player.findPerk(PerkLib.JobEnchanter) >= 0 && player.inte >= 50) TranceBoost += 5;
 			if (player.findPerk(PerkLib.Battleflash) >= 0 && player.inte >= 50) TranceBoost += 15;
 			if (player.findPerk(PerkLib.JobSwordsman) >= 0) TranceBoost -= 10;

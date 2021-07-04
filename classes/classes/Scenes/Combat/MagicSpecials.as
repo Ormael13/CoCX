@@ -1021,7 +1021,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-		damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 		doLightingDamage(damage, true, true);
 		outputText(" damage. ");
 		if (crit1) outputText(" <b>*Critical Hit!*</b>");
@@ -1171,7 +1171,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.FloralOvaries)) damage *= 1.25;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-		damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 		doLightingDamage(damage, true, true);
 		outputText(" damage. ");
 		if (crit1) outputText(" <b>*Critical Hit!*</b>");
@@ -1267,7 +1267,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function Luststorm():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		var damage:Number = scalingBonusIntelligence() * spellModWhite() * combat.lightingDamageBoostedByDao();
+		var damage:Number = scalingBonusIntelligence() * spellModWhite() * combat.lightningDamageBoostedByDao();
 		//Determine if critical hit!
 		var crit1:Boolean = false;
 		var critChance1:int = 5;
@@ -1397,7 +1397,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-			damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			doLightingDamage(damage, true, true);
 			if (monster.lustVuln > 0) {
 				outputText(" ");
@@ -1419,7 +1419,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-			damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			doLightingDamage(damage, true, true);
 			if (monster.lustVuln > 0) {
 				outputText(" ");
@@ -1443,7 +1443,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-			damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			doLightingDamage(damage, true, true);
 			if (monster.lustVuln > 0) {
 				outputText(" ");
@@ -2248,7 +2248,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= damult;
-		damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -4510,7 +4510,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("begin spasming while [monster his] bodies are ran through by electricity");
 		}
 		else outputText("begin spasming while [monster his] body is ran through by electricity");
-		damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 		doLightingDamage(damage);
 	}
 	private function FaeStormAcid(damage:Number):void{
@@ -5169,7 +5169,7 @@ public class MagicSpecials extends BaseCombatContent {
 		switch (rand(10)) {
 			case 0:
 				outputText(monster.capitalA + monster.short + " takes heavy electricity damage from the eyebeam! ");
-				damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+				damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 				doLightingDamage((damage * 3), true, true);
 				break;
 			case 1:

@@ -719,8 +719,10 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.GrandArchmage)) max += 60;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle)) max += 75;
 			if (hasPerk(PerkLib.GrandArchmage3rdCircle)) max += 90;
-			if (hasPerk(PerkLib.GreyMage)) max += 120;
-			if (hasPerk(PerkLib.GreyArchmage)) max += 150;
+			if (hasPerk(PerkLib.GreyMageApprentice)) max += 20;
+			if (hasPerk(PerkLib.GreyMage)) max += 40;
+			if (hasPerk(PerkLib.GreyArchmage)) max += 80;
+			if (hasPerk(PerkLib.GrandGreyArchmage)) max += 160;
 			if (hasPerk(PerkLib.ElementalBondUrges)) {
 				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsAir);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
