@@ -11613,7 +11613,7 @@ public final class Mutations extends MutationsHelper {
         //-60 fatigue, -2 libido, -20 lust]
         fatigue(-180);
         dynStats("lus", -90, "cor", -2);
-        player.addCurse("lib", -2, 1);
+        player.addCurse("lib", 2, 1);
         player.refillHunger(40);
     }
 
