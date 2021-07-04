@@ -365,6 +365,19 @@ public class AbstractEquinum extends Consumable {
 				changes++;
 			}
 		}
+		//Unicorn grows cocks
+		if ((type == 1 || type == 2) && (!player.hasCock()) && player.isTaur() && changes < changeLimit && rand(3) == 0) {
+			outputText("\n\nYou feel a sudden stabbing pain between your back legs");
+			if (player.hasVagina()) outputText(" just below your [vagina]");
+			outputText(" and bend over, moaning in agony. falling on your back so you can get a stare at your hindquarters you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, you are the proud owner of ");
+			if (player.hasVagina()) outputText(" not only a [vagina], but");
+			outputText( " a new human-shaped penis!");
+			player.createCock(7, 1.4);
+			dynStats("lus", 20);
+			player.addCurse("sen", 5, 1);
+			player.MutagenBonus("lib", 4);
+			changes++;
+		}
 		//FEMALE
 		if (player.gender == 2 || player.gender == 3) {
 			//Single vag
