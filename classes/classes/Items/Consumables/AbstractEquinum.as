@@ -378,6 +378,19 @@ public class AbstractEquinum extends Consumable {
 			player.MutagenBonus("lib", 4);
 			changes++;
 		}
+		//Unicorn grows vag
+		if ((type == 1 || type == 2) && (!player.hasVagina()) && player.isTaur() && changes < changeLimit && rand(3) == 0) {
+			changes++;
+			//(balls)
+			if (player.balls > 0) outputText("\n\nAn itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, <b>you lift up your balls to reveal your new vagina.</b>");
+			//(dick)
+			else if (player.hasCock()) outputText("\n\nAn itch starts on your groin, just below your [cocks]. You pull the manhood aside to give you a better view, and you're able to watch as <b>your skin splits to give you a new vagina, complete with a tiny clit.</b>");
+			//(neither)
+			else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>");
+			player.createVagina();
+			player.clitLength = .25;
+			player.addCurse("sen", 10, 1);
+		}
 		//FEMALE
 		if (player.gender == 2 || player.gender == 3) {
 			//Single vag
