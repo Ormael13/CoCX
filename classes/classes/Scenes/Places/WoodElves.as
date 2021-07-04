@@ -213,7 +213,6 @@ import classes.Scenes.SceneLib;
 			player.tone = 0;
 			player.thickness = 20;
 			player.femininity = 80;
-
 			player.horns.type = Horns.NONE;
 			player.antennae.type = Antennae.NONE;
 			player.tailType = Tail.NONE;

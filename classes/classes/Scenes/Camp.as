@@ -4729,7 +4729,11 @@ public function wakeFromBadEnd():void {
 				player.removeStatusEffect(StatusEffects.RiverDungeonFloorRewards);
 				player.createStatusEffect(StatusEffects.RiverDungeonFloorRewards,2,0,0,0);
 			}
-			if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) player.createPerk(PerkLib.StrengthOfStone,0,0,0,0);
+			if (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) player.createPerk(PerkLib.StrengthOfStone, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.Rigidity) && (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2 || flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2)) {
+				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
+				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
+			}
 			doNext(doCamp);
 			return;
 		}

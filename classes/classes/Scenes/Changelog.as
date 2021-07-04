@@ -63,6 +63,14 @@ package classes.Scenes
 			outputText("-Added current cost of fly on f.sword or attack with it to combat subpage of stats.\n");
 			outputText("-Some of items from Kaiba have been 'repurposed' and now Dinah proudly sells them. And she change varies nearly each time pc start interactions with her so no need to wait whole day to refresh it. But she also likes to give unpredictable price 'discounts' so item player want may be in offer but cost very high sum of gems.\n");
 			outputText("-Luna meal would recover 2x less HP/mana but would restore 2x more fatigue. Her nurse option would heal only 10% max HP not 50% and lust gain would be 20% of max lust not 33.\n");
+			outputText("-Temple of Divine keeper recieved divine messages form multiple deities that it was so cheap to heal such difficult things that used much of gods super low pool of faith so she been given instruction form gods to make price more fitting service weakened gods giving to those praying. (Curse/hex cleansing cost 5k per session and will remove either curses or hexes)\n");
+			outputText("-Diana was whip... err disciplined by her deity to stop been so slowass and make her services bit faster depending on service itself. (15 to 45 min instead of 60 min)\n");
+			outputText("-Each Troll Fig given to Zenji would increase bonus to his cum capacity by 25 more. (2nd +25, 3rd +50, 4th +75 and so on)\n");
+			outputText("-Added disabled buttons for soulforce menu. Also slight arrange some of the buttons there.\n");
+			outputText("-Transhumanism ascension perks effects been increased 2 times. Monsters increase after each ascenison been increased 5 times.\n");
+			outputText("-Each use of venom to apply passive effect on arrows or spells would now increase a bit venom use counter. Maximum venom pool increase from perks or bodypart has been boosted. Refill speed was increased so without any other perks having body part that generate venom/web it would take around 2 days to refill fully (calculated base don new increased max venom values).\n");
+			outputText("-Some of setting menu options been greyed out when there isn't any loaded save.\n");
+			outputText("-Added in combat slow venom recharge.\n");
 			outputText("-Jtex many code corrections.\n");
 			outputText("-Llaenwynn typo/scenes texts corrections.\n");
 			outputText("-Lia code changes/corrections.\n");
@@ -72,14 +80,6 @@ package classes.Scenes
 			//outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 96+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, \n");
 			outputText("-New enemies: Ice/Lightning/Darkness Elemental. They are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");///Water/Air/Earth
 			outputText("-New misc accesory: Demonic mage tail ornament - buyable at Kaiba shop (temporaly). Cost 9600 gems.\n");
-			outputText("-Temple of Divine keeper recieved divine messages form multiple deities that it was so cheap to heal such difficult things that used much of gods super low pool of faith so she been given instruction form gods to make price more fitting service weakened gods giving to those praying. (Curse/hex cleansing cost 5k per session and will remove either curses or hexes)\n");
-			outputText("-Diana was whip... err disciplined by her deity to stop been so slowass and make her services bit faster depending on service itself. (15 to 45 min instead of 60 min)\n");
-			outputText("-Each Troll Fig given to Zenji would increase bonus to his cum capacity by 25 more. (2nd +25, 3rd +50, 4th +75 and so on)\n");
-			outputText("-Added disabled buttons for soulforce menu. Also slight arrange some of the buttons there.\n");
-			outputText("-Transhumanism ascension perks effects been increased 2 times. Monsters increase after each ascenison been increased 5 times.\n");
-			outputText("-Each use of venom to apply passive effect on arrows or spells would now increase a bit venom use counter. Maximum venom pool increase from perks or bodypart has been boosted. Refill speed was increased so without any other perks having body part that generate venom/web it would take around 2 days to refill fully (calculated base don new increased max venom values).\n");
-			outputText("-Some of setting menu options been greyed out when there isn't any loaded save.\n");
-			outputText("-Added in combat slow venom recharge.\n");
 			outputText("-Jtex made changes to perks list screen that allow easier navigation. It can be toggled on/off in Setting.\n");
 			outputText("-New tier 10 soulforce lvl-up perk: Soul King. Req. Soul Tyrant and F class Heaven Tribulation Survivor perks; 200+ wis. Effect: Allow reaching 10th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +120 max SF at lvl 60, 62, 64; +25% to max SF at lvl 60)\n");
 			outputText("-New tier 10 soulforce lvl-up perk: Flesh Body: Overlord Stage. Req. Flesh Body: Elder Stage perk. Effect: Your reached fourth stage of body cultivating. (+10 to unarmed attack, +5 to armor, +4 to magic resistance, +500 max HP S.King, S.Emperor, S.Ancestor stages\n");
@@ -90,9 +90,10 @@ package classes.Scenes
 			outputText("-New tier 0 misc lvl-up perk: Grey Magic. Req. One of 4 white spells: Whitefire, Pyre Burst, Lightning Bolt, Chain Lighting AND One of black spells: Ice Spike, Arctic Gale, Darkness Shard, Dusk Wave. Effect: Access to learn and cast grey magic spells. (+30 to max lust)\n");
 			outputText("-Lumi menu been bit chenged with buttons moved to diff spots. Also her enchance menu been split into two to accomodate all 15 options (earlier it missed succubus delight upgrade).\n");
 			outputText("-Nosferatu spell been moved to grey book. Learning any grey spells req. now having perk Grey Magic instead of Prestige Job: Grey Sage. Req. intelligence to learn most of those spells have been lowered.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-As Jiangshi PC can't anymore equip Aether Twins. Yes we know they can move on their own but it would make jiangshi PC potentialy have access to unexpewcted help in form of evolved twins for attacks and/or defense.\n");
+			outputText("-New unlockable option in SOulforce menu: Comprehend. Req. H class Heaven Tribulation Survivor perk. Allow to try comprehend one of daos: fire, ice, lighting, darkness, poison. Or it can be total dud and all time spent on contemplation session will not give any results at all. ");
+			outputText("Each layer PC reach would increase damage from attacks of this element and ocassionaly can even increase resistance to said element.\n");
+			outputText("-Exploring Forrest can trigger meeting with Wood Elfs. That carry a chance to become pernamenrtly TF'd into one of them. Or if correct decision will be chosen it would cause PC to never again meet them.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -100,7 +101,7 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation perks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
-			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks\n");/*ostatni punkt changelogu
+			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex)\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

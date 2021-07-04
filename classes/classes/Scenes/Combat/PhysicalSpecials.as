@@ -639,20 +639,40 @@ public class PhysicalSpecials extends BaseCombatContent {
 	}
 
 	public function checkForElementalEnchantmentAndDoDamage(damage:Number, canUseFist:Boolean = true, canUseWhip:Boolean = true):void{
-		if (player.weapon == weapons.L_WHIP) doFireDamage(damage, true, true);
-		else if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doFireDamage(damage, true, true);
-		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doIceDamage(damage, true, true);
-		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doLightingDamage(damage, true, true);
-		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) doDarknessDamage(damage, true, true);
-		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) doFireDamage(damage, true, true);
+		if (player.weapon == weapons.L_WHIP) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.iceDamageBoostedByDao());
+			doIceDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+			doLightingDamage(damage, true, true);
+		}
+		else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
+			doDarknessDamage(damage, true, true);
+		}
+		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
 		else if ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)){
 			damage += scalingBonusLibido() * 0.20;
 			doDamage(damage, true, true);
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(Math.round(damage*0.1), true, true);
 			damage = Math.round(damage * 1.1);
 		}
 		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			doDamage(damage, true, true);
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(Math.round(damage*0.1), true, true);
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 			damage = Math.round(damage * 1.1);
@@ -1513,7 +1533,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		damage *= (monster.damagePercent() / 100);
 		outputText("Your [weapon] whipped few of " + monster.a + monster.short + ", dealing ");
-		if (player.weapon == weapons.L_WHIP) doFireDamage(damage, true, true);
+		if (player.weapon == weapons.L_WHIP) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
 		else doDamage(damage, true, true);
 		outputText(" damage! ");
 		if (crit) {
@@ -1614,9 +1637,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		damage *= (monster.damagePercent() / 100);
 		outputText("Your claws hits few of " + monster.a + monster.short + ", dealing ");
-		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) doFireDamage(damage, true, true);
+		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
 		else if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			doDamage(damage, true, true);
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(Math.round(damage*0.1), true, true);
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 			damage = Math.round(damage * 1.1);
@@ -1751,7 +1778,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			damage *= monster.damagePercent() / 100;
 			if (damage < 5) damage = 5;
-			damage = Math.round(damage);
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			outputText("  Your tail slams against " + monster.a + monster.short + ", dealing ");
 			doFireDamage(damage, true, true);
 			outputText(" damage! ");
@@ -2064,9 +2091,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (damage < 5) damage = 5;
 			damage = Math.round(damage);
 			outputText("  Your wings slams against " + monster.a + monster.short + ", dealing ");
-			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) doFireDamage(damage, true, true);
+			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+				damage = Math.round(damage * combat.fireDamageBoostedByDao());
+				doFireDamage(damage, true, true);
+			}
 			else if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 				doDamage(damage, true, true);
+				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 				doFireDamage(Math.round(damage*0.1), true, true);
 				if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 				damage = Math.round(damage * 1.1);
@@ -4181,9 +4212,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) doFireDamage(damage, true, true);
+			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+				damage = Math.round(damage * combat.fireDamageBoostedByDao());
+				doFireDamage(damage, true, true);
+			}
 			else if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 				doDamage(damage, true, true);
+				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 				doFireDamage(Math.round(damage*0.1), true, true);
 				if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 				damage = Math.round(damage * 1.1);
@@ -4307,9 +4342,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 				if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 				if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) doFireDamage(damage, true, true);
+				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+					damage = Math.round(damage * combat.fireDamageBoostedByDao());
+					doFireDamage(damage, true, true);
+				}
 				else if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 					doDamage(damage, true, true);
+					damage = Math.round(damage * combat.fireDamageBoostedByDao());
 					doFireDamage(Math.round(damage*0.1), true, true);
 					if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 					damage = Math.round(damage * 1.1);
@@ -5144,6 +5183,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.inte >= 100) damage += player.inte * 0.1;
 				if (player.inte >= 150) damage += player.inte * 0.1;
 				if (player.inte >= 200) damage += player.inte * 0.1;
+				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			}
 			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
 				damage += player.inte * 0.2;
@@ -5151,6 +5191,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.inte >= 100) damage += player.inte * 0.1;
 				if (player.inte >= 150) damage += player.inte * 0.1;
 				if (player.inte >= 200) damage += player.inte * 0.1;
+				damage = Math.round(damage * combat.iceDamageBoostedByDao());
 			}
 			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
 				damage += player.inte * 0.2;
@@ -5158,6 +5199,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.inte >= 100) damage += player.inte * 0.1;
 				if (player.inte >= 150) damage += player.inte * 0.1;
 				if (player.inte >= 200) damage += player.inte * 0.1;
+				damage = Math.round(damage * combat.lightingDamageBoostedByDao());
 			}
 			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
 				damage += player.inte * 0.2;
@@ -5165,6 +5207,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.inte >= 100) damage += player.inte * 0.1;
 				if (player.inte >= 150) damage += player.inte * 0.1;
 				if (player.inte >= 200) damage += player.inte * 0.1;
+				damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 			}
 			//Section for item damage modifiers
 			if (weaponRangePerk == "Bow"){
@@ -5455,6 +5498,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
 			damage += player.inte * 0.2;
@@ -5462,6 +5506,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
+			damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
 			damage += player.inte * 0.2;
@@ -5469,6 +5514,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
+			damage = Math.round(damage * combat.lightingDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
 			damage += player.inte * 0.2;
@@ -5476,6 +5522,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) damage += player.inte * 0.1;
 			if (player.inte >= 150) damage += player.inte * 0.1;
 			if (player.inte >= 200) damage += player.inte * 0.1;
+			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 		}
 		damage = Math.round(damage);
 		outputText("You shoot the projectile toward your opponent the bolt flying at such speed and velocity all you see is a flash of light as it reach " + monster.a + monster.short + " and explode the blast projecting dirt and rock everywhere. It takes an entire minute for the smoke to settle. ");
@@ -5608,10 +5655,22 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		outputText("Then do it another time showering them with an extra volley of arrows. ");
-		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
-		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
+		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
+			damage = Math.round(damage * combat.fireDamageBoostedByDao());
+			doFireDamage(damage, true, true);
+		}
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
+			damage = Math.round(damage * combat.iceDamageBoostedByDao());
+			doIceDamage(damage, true, true);
+		}
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
+			damage = Math.round(damage * combat.lightingDamageBoostedByDao());
+			doLightingDamage(damage, true, true);
+		}
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
+			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
+			doDarknessDamage(damage, true, true);
+		}
 		else doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (flags[kFLAGS.CUPID_ARROWS] == 1) {
@@ -5678,6 +5737,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 150) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 200) dmgBarrage += player.inte * 0.1;
+			dmgBarrage = Math.round(dmgBarrage * combat.fireDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
 			dmgBarrage += player.inte * 0.2;
@@ -5685,6 +5745,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 150) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 200) dmgBarrage += player.inte * 0.1;
+			dmgBarrage = Math.round(dmgBarrage * combat.iceDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
 			dmgBarrage += player.inte * 0.2;
@@ -5692,6 +5753,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 150) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 200) dmgBarrage += player.inte * 0.1;
+			dmgBarrage = Math.round(dmgBarrage * combat.lightingDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
 			dmgBarrage += player.inte * 0.2;
@@ -5699,6 +5761,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.inte >= 100) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 150) dmgBarrage += player.inte * 0.1;
 			if (player.inte >= 200) dmgBarrage += player.inte * 0.1;
+			dmgBarrage = Math.round(dmgBarrage * combat.darknessDamageBoostedByDao());
 		}
 		return dmgBarrage;
 	}
