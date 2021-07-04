@@ -3636,13 +3636,13 @@ use namespace CoC;
 			}
 			if (TopRace == "unicorn") {
 				if (TopScore >= 8) {
-					if (TopScore >= 24) {
+					if (TopScore >= 27) {
 						if (horns.type == Horns.UNICORN) {
 							race = "true unicorn";
 						} else {
 							race = "true bicorn";
 						}
-					} else if (TopScore >= 12) {
+					} else if (TopScore >= 18) {
 						if (horns.type == Horns.UNICORN) {
 							race = "unicorn";
 						} else {
@@ -3668,13 +3668,13 @@ use namespace CoC;
 			}
 			if (TopRace == "alicorn") {
 				if (TopScore >= 8) {
-					if (TopScore >= 24) {
+					if (TopScore >= 27) {
 						if (horns.type == Horns.UNICORN) {
 							race = "true alicorn";
 						} else {
 							race = "true nightmare";
 						}
-					} else if (TopScore >= 12) {
+					} else if (TopScore >= 18) {
 						if (horns.type == Horns.UNICORN) {
 							race = "alicorn";
 						} else {
@@ -8933,7 +8933,7 @@ use namespace CoC;
 			if (eyes.type == Eyes.HUMAN)
 				unicornCounter++;
 			if (wings.type == Wings.NONE)
-				unicornCounter += 2;
+				unicornCounter += 4;
 			if (horns.type == Horns.UNICORN) {
 				if (horns.count < 6)
 					unicornCounter++;
@@ -8958,8 +8958,6 @@ use namespace CoC;
 				if (hasPerk(PerkLib.AvatorOfCorruption))
 					unicornCounter++;
 			}
-			if (wings.type == Wings.FEATHERED_ALICORN)
-				unicornCounter = 0;
 			if (hasFur())
 				unicornCounter++;
 			if (horseCocks() > 0)
@@ -9044,7 +9042,7 @@ use namespace CoC;
 					unicornCounter++;
 			}
 			if (wings.type == Wings.NONE)
-				unicornCounter += 2;
+				unicornCounter += 4;
 			if (horseCocks() > 0)
 				unicornCounter++;
 			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
@@ -9112,7 +9110,7 @@ use namespace CoC;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.FEATHERED_ALICORN)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, unicornHairPalette) && InCollection(coatColor, unicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "blue")
@@ -9126,7 +9124,7 @@ use namespace CoC;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.NIGHTMARE)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, bicornHairPalette) && InCollection(coatColor, bicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "red")
@@ -9134,8 +9132,6 @@ use namespace CoC;
 				if (hasPerk(PerkLib.AvatorOfCorruption))
 					alicornCounter++;
 			}
-			if (hasFur())
-				alicornCounter++;
 			if (horseCocks() > 0)
 				alicornCounter++;
 			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
@@ -9201,7 +9197,7 @@ use namespace CoC;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.FEATHERED_ALICORN)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, unicornHairPalette) && InCollection(coatColor, unicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "blue")
@@ -9215,7 +9211,7 @@ use namespace CoC;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.NIGHTMARE)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, bicornHairPalette) && InCollection(coatColor, bicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "red")
@@ -12533,15 +12529,15 @@ use namespace CoC;
 				}
 			}//+15/10-20
 			if (unicornScore() >= 8) {
-				if (unicornScore() >= 24) {
+				if (unicornScore() >= 27) {
 					maxStrCap2 += 60;
-					maxTouCap2 += 70;
-					maxSpeCap2 += 95;
-					maxIntCap2 += 120;
-				} else if (unicornScore() >= 12) {
-					maxTouCap2 += 35;
-					maxSpeCap2 += 70;
-					maxIntCap2 += 105;
+					maxTouCap2 += 90;
+					maxSpeCap2 += 115;
+					maxIntCap2 += 140;
+				} else if (unicornScore() >= 18) {
+					maxTouCap2 += 55;
+					maxSpeCap2 += 90;
+					maxIntCap2 += 125;
 				} else {
 					maxTouCap2 += 25;
 					maxSpeCap2 += 40;
@@ -12554,15 +12550,15 @@ use namespace CoC;
 				maxIntCap2 += 75;
 			}//+(15)30/(10-20)30-40
 			if (alicornScore() >= 8) {
-				if (alicornScore() >= 24) {
+				if (alicornScore() >= 27) {
 					maxStrCap2 += 60;
 					maxTouCap2 += 70;
+					maxSpeCap2 += 150;
+					maxIntCap2 += 125;
+				} else if (alicornScore() >= 18) {
+					maxTouCap2 += 55;
 					maxSpeCap2 += 120;
-					maxIntCap2 += 110;
-				} else if (alicornScore() >= 12) {
-					maxTouCap2 += 35;
-					maxSpeCap2 += 70;
-					maxIntCap2 += 75;
+					maxIntCap2 += 95;
 				} else {
 					maxTouCap2 += 15;
 					maxSpeCap2 += 50;
