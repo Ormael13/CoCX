@@ -15,14 +15,18 @@ import classes.internals.*;
 	{
 		public function kitsunespellMod():Number {
 			var kmods:Number = 1;
+			var kmods2:Number = 1;
 			if (hasPerk(PerkLib.Archmage) && inte >= 75) kmods += .3;
 			if (hasPerk(PerkLib.Channeling) && inte >= 60) kmods += .2;
 			if (hasPerk(PerkLib.GrandArchmage) && inte >= 100) kmods += .4;
-			if (hasPerk(PerkLib.GreyArchmage) && inte >= 150) kmods += 1;
-			if (hasPerk(PerkLib.GreyMage) && inte >= 125) kmods += .7;
+			if (hasPerk(PerkLib.GrandGreyArchmage) && inte >= 225) kmods2 += .4;
+			if (hasPerk(PerkLib.GreyArchmage) && inte >= 175) kmods2 += .3;
+			if (hasPerk(PerkLib.GreyMage) && inte >= 125) kmods2 += .2;
+			if (hasPerk(PerkLib.GreyMageApprentice) && inte >= 75) kmods2 += .1;
 			if (hasPerk(PerkLib.JobSorcerer) && inte >= 25) kmods += .1;
 			if (hasPerk(PerkLib.Mage) && inte >= 50) kmods += .2;
 			if (hasPerk(PerkLib.Spellpower) && inte >= 50) kmods += .1;
+			kmods *= kmods2;
 			return kmods;
 		}
 		
@@ -236,8 +240,10 @@ import classes.internals.*;
 			this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Archmage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.GrandArchmage, 0, 0, 0, 0);
+			this.createPerk(PerkLib.GreyMageApprentice, 0, 0, 0, 0);
 			this.createPerk(PerkLib.GreyMage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.GreyArchmage, 0, 0, 0, 0);
+			this.createPerk(PerkLib.GrandGreyArchmage, 0, 0, 0, 0);
 			checkMonster();
 		}	
 	}

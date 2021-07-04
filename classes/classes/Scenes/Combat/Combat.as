@@ -3009,7 +3009,7 @@ public class Combat extends BaseContent {
                 if (player.inte >= 100) damage += player.inte * 0.1;
                 if (player.inte >= 150) damage += player.inte * 0.1;
                 if (player.inte >= 200) damage += player.inte * 0.1;
-				damage *= lightingDamageBoostedByDao();
+				damage *= lightningDamageBoostedByDao();
             }
             if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
                 damage += player.inte * 0.2;
@@ -5275,7 +5275,7 @@ public class Combat extends BaseContent {
 					doIceDamage(damage, true, true);
 				}
                 else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
-					damage = Math.round(damage * lightingDamageBoostedByDao());
+					damage = Math.round(damage * lightningDamageBoostedByDao());
 					doLightingDamage(damage, true, true);
 				}
                 else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
@@ -7388,8 +7388,10 @@ public class Combat extends BaseContent {
     public function manaRecoveryMultiplier():Number {
         var multi:Number = 1;
         if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.3;
-        if (player.hasPerk(PerkLib.GreyMage)) multi += 0.5;
-        if (player.hasPerk(PerkLib.GreyArchmage)) multi += 1.5;
+		if (player.hasPerk(PerkLib.GreyMageApprentice)) multi += 0.25;
+		if (player.hasPerk(PerkLib.GreyMage)) multi += 0.5;
+        if (player.hasPerk(PerkLib.GreyArchmage)) multi += 0.75;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage)) multi += 1;
         if (player.hasPerk(PerkLib.ManaAffinityI)) multi += 0.25;
         if (player.hasPerk(PerkLib.ManaAffinityII)) multi += 0.25;
         if (player.hasPerk(PerkLib.ManaAffinityIII)) multi += 0.25;
@@ -13329,7 +13331,7 @@ public class Combat extends BaseContent {
         player.wrath -= lightingDMG;
         lightingDMG *= 10;
         if (monster.plural) lightingDMG *= 2;
-		lightingDMG *= lightingDamageBoostedByDao();
+		lightingDMG *= lightningDamageBoostedByDao();
 		lightingDMG = Math.round(lightingDMG);
         outputText("You start concentrate on the wrath flowing in your body, your veins while imaging a joy of sharing storm of sisterhood with enemy. Shortly after that wrath starts to gather around your hands till it envelop your hands in ligthing.\n\n");
         outputText("With joy, you sends a mass of ligthing toward " + monster.a + monster.short + " while mumbling about 'sharing the storm of sisterhood'.");
@@ -13724,12 +13726,12 @@ public class Combat extends BaseContent {
 		}
 		return boostI;
 	}
-	public function lightingDamageBoostedByDao():Number {
+	public function lightningDamageBoostedByDao():Number {
 		var boostL:Number = 1;
-		if (player.hasStatusEffect(StatusEffects.DaoOfLighting)) {
-			if (player.statusEffectv2(StatusEffects.DaoOfLighting) == 3) boostL += 0.3;
-			if (player.statusEffectv2(StatusEffects.DaoOfLighting) == 2) boostL += 0.2;
-			if (player.statusEffectv2(StatusEffects.DaoOfLighting) == 1) boostL += 0.1;
+		if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 3) boostL += 0.3;
+			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 2) boostL += 0.2;
+			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 1) boostL += 0.1;
 		}
 		return boostL;
 	}

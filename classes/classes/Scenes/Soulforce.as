@@ -2924,7 +2924,7 @@ use namespace CoC;
 			outputText("Which Dao would you try to comprehend?\n\n");
 			if (player.hasStatusEffect(StatusEffects.DaoOfFire)) outputText("Fire: "+player.statusEffectv1(StatusEffects.DaoOfFire)+"\n");
 			if (player.hasStatusEffect(StatusEffects.DaoOfIce)) outputText("Ice: "+player.statusEffectv1(StatusEffects.DaoOfIce)+"\n");
-			if (player.hasStatusEffect(StatusEffects.DaoOfLighting)) outputText("Lighting: "+player.statusEffectv1(StatusEffects.DaoOfLighting)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) outputText("Lightning: "+player.statusEffectv1(StatusEffects.DaoOfLightning)+"\n");
 			if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) outputText("Darkness: "+player.statusEffectv1(StatusEffects.DaoOfDarkness)+"\n");
 			if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) outputText("Poison: "+player.statusEffectv1(StatusEffects.DaoOfPoison)+"\n");
 			menu();
@@ -2932,8 +2932,8 @@ use namespace CoC;
 			else addButton(0, "Fire", DaoContemplationsEffect, StatusEffects.DaoOfFire, "Fire");
 			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 3) addButtonDisabled(1, "Ice", "You reached limit of comprehending this Dao.");
 			else addButton(1, "Ice", DaoContemplationsEffect, StatusEffects.DaoOfIce, "Ice");
-			if (player.statusEffectv2(StatusEffects.DaoOfLighting) == 3) addButtonDisabled(2, "Lighting", "You reached limit of comprehending this Dao.");
-			else addButton(2, "Lighting", DaoContemplationsEffect, StatusEffects.DaoOfLighting, "Lighting");
+			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 3) addButtonDisabled(2, "Lightning", "You reached limit of comprehending this Dao.");
+			else addButton(2, "Lightning", DaoContemplationsEffect, StatusEffects.DaoOfLightning, "Lightning");
 			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 3) addButtonDisabled(3, "Darkness", "You reached limit of comprehending this Dao.");
 			else addButton(3, "Darkness", DaoContemplationsEffect, StatusEffects.DaoOfDarkness, "Darkness");
 			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 3) addButtonDisabled(4, "Poison", "You reached limit of comprehending this Dao.");
@@ -2942,7 +2942,7 @@ use namespace CoC;
 		}
 		private function DaoContemplationsEffect(statusEffect:StatusEffectType, daoname:String):void {
 			clearOutput();
-			outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how their interact with each other.  All this while trying to understand that all despite been so insignificant to great daos manifesting itself around you.\n\n");
+			outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
 			var dao:Number = rand(6);
 			if (dao > 0) {
 				outputText("After session ends you managed to progress in Dao of "+daoname+".");
@@ -2966,7 +2966,7 @@ use namespace CoC;
 				}
 				else player.createStatusEffect(statusEffect, dao, 0, 0, 0);
 			}
-			else outputText("After session ends you not managed to do any progress in comprehension.");
+			else outputText("After the session ends, you did not manage to make an progress in your comprehension.");
 			outputText("\n\n");
 			doNext(camp.returnToCampUseEightHours);
 		}

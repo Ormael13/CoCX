@@ -2766,7 +2766,7 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId2 == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId3 == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId4 == JewelryLib.MODIFIER_LIGH_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R && necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= 15;
-			if (hasStatusEffect(StatusEffects.DaoOfLighting) && (statusEffectv2(StatusEffects.DaoOfLighting) > 2)) mult -= 10;
+			if (hasStatusEffect(StatusEffects.DaoOfLightning) && (statusEffectv2(StatusEffects.DaoOfLightning) > 2)) mult -= 10;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -3265,7 +3265,7 @@ use namespace CoC;
 				{name: 'orca', score: orcaScore(), minscore: 6},
 				{name: 'oni', score: oniScore(), minscore: 6},
 				{name: 'elf', score: elfScore(), minscore: 5},
-				{name: 'wood elf', score: woodElfScore(), minscore: 17},
+				{name: 'wood elf', score: woodElfScore(), minscore: 22},
 				{name: 'frost wyrm', score: frostWyrmScore(), minscore: 10},
 				{name: 'orc', score: orcScore(), minscore: 5},
 				{name: 'raiju', score: raijuScore(), minscore: 5},
@@ -4854,7 +4854,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (elfScore() >= 11)
 				chimeraCounter++;
-			if (woodElfScore() >= 17)
+			if (woodElfScore() >= 22)
 				chimeraCounter++;
 			if (orcScore() >= 11)
 				chimeraCounter++;
@@ -7672,23 +7672,24 @@ use namespace CoC;
 		public function woodElfScore():Number {
 			Begin("Player","racialScore","wood elf");
 			var WoodElfCounter:Number = 0;
-			if (ears.type == Ears.ELVEN)
-				WoodElfCounter++;
-			if (eyes.type == Eyes.ELF)
-				WoodElfCounter++;
-			if (faceType == Face.ELF)
-				WoodElfCounter++;
-			if (tongue.type == Tongue.ELF)
-				WoodElfCounter++;
-			if (arms.type == Arms.ELF)
-				WoodElfCounter++;
-			if (lowerBody == LowerBody.ELF)
-				WoodElfCounter++;
-			if (hairType == Hair.SILKEN)
-				WoodElfCounter++;
-			if (wings.type == Wings.NONE)
-				WoodElfCounter++;
-			if (WoodElfCounter >= 2) {
+			if (hasPerk(PerkLib.BlessingOfTheAncestorTree)) {
+				WoodElfCounter += 4;
+				if (ears.type == Ears.ELVEN)
+					WoodElfCounter++;
+				if (eyes.type == Eyes.ELF)
+					WoodElfCounter++;
+				if (faceType == Face.ELF)
+					WoodElfCounter++;
+				if (tongue.type == Tongue.ELF)
+					WoodElfCounter++;
+				if (arms.type == Arms.ELF)
+					WoodElfCounter++;
+				if (lowerBody == LowerBody.ELF)
+					WoodElfCounter++;
+				if (hairType == Hair.SILKEN)
+					WoodElfCounter++;
+				if (wings.type == Wings.NONE)
+					WoodElfCounter++;
 				if (InCollection(hairColor, ["golden blonde"]))
 					WoodElfCounter++;
 				if (eyes.colour == "light green")
@@ -7701,31 +7702,21 @@ use namespace CoC;
 					WoodElfCounter++;
 				if (thickness <= 50)
 					WoodElfCounter++;
-				if (hasCock() && cocks.length < 6)
+				if ((hasCock() && cocks.length < 6) || (hasVagina() && biggestTitSize() >= 3))
 					WoodElfCounter++;
-				if (hasVagina() && biggestTitSize() >= 3)
+				if (cor >= 50)
+					WoodElfCounter++;
+				if (hasPerk(PerkLib.FlawlessBody))
+					WoodElfCounter++;
+				if (hasPerk(PerkLib.ElvenSense))
 					WoodElfCounter++;
 			}
-			if (cor >= 50)
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.FlawlessBody))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.ElvenSense))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.BlessingOfTheAncestorTree))
-				WoodElfCounter+= 4;
-			/*if (hasPerk(PerkLib.ElvishPeripheralNervSys))
-				WoodElfCounter++;
+			if (hasPerk(PerkLib.ElvishPeripheralNervSys))
+				WoodElfCounter += 3;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved))
-				WoodElfCounter++;
+				WoodElfCounter += 3;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.ElvishPeripheralNervSys) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				WoodElfCounter++;*/
+				WoodElfCounter += 3;
 			if (hasPerk(PerkLib.ElfsDescendant) || hasPerk(PerkLib.BloodlineElf))
 				WoodElfCounter += 2;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
@@ -12261,20 +12252,34 @@ use namespace CoC;
 					currentSen += 15;
 				}
 			}
-			if (woodElfScore() >= 17) {
-				if (woodElfScore() >= 25) {
+			if (woodElfScore() >= 22) {
+				if (woodElfScore() >= 31) {
 					maxStrCap2 -= 10;
 					maxTouCap2 -= 15;
-					maxSpeCap2 += 150;
-					maxIntCap2 += 125;
-					maxLibCap2 += 100;
-					currentSen += 50;
+					maxSpeCap2 += 550;
+					maxIntCap2 += 495;
+					maxLibCap2 += 455;
+					currentSen += 80;
+				} else if (woodElfScore() >= 28) {
+					maxStrCap2 -= 10;
+					maxTouCap2 -= 15;
+					maxSpeCap2 += 495;
+					maxIntCap2 += 445;
+					maxLibCap2 += 415;
+					currentSen += 70;
+				} else if (woodElfScore() >= 25) {
+					maxStrCap2 -= 10;
+					maxTouCap2 -= 15;
+					maxSpeCap2 += 430;
+					maxIntCap2 += 405;
+					maxLibCap2 += 375;
+					currentSen += 60;
 				} else {
 					maxStrCap2 -= 10;
 					maxTouCap2 -= 15;
-					maxSpeCap2 += 300;
-					maxIntCap2 += 280;
-					maxLibCap2 += 260;
+					maxSpeCap2 += 375;
+					maxIntCap2 += 355;
+					maxLibCap2 += 335;
 					currentSen += 50;
 				}
 			}
@@ -15382,4 +15387,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

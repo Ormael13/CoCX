@@ -1574,6 +1574,13 @@ public class PerkLib
 		public static const GrandBlademaster:PerkType = mk("Grand Blademaster", "Grand Blademaster",
 				"Gain +15% to critical strike chance when wielding weapon with blade (sword, dueling sword, axe) and not using a shield.",
 				"You've chosen the 'Grand Blademaster' perk.  Your chance of critical hit is increased by 15% as long as you're wielding weapon with blade like sword and not using a shield.");
+		public static const GrandGreyArchmage:PerkType = mk("Grand Grey Archmage", "Grand Grey Archmage",
+				"[if (player.inte>=225)" +
+						"Increases grey spell strength by 40%, mana pool by 600, lust bar by 160, regain it 100% faster. Grey spells can be cast without limitation due to current lust." +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
+				"You've chosen the 'Grand Grey Archmage' perk. Your grey spell power, mana pool, lust bar and mana recovery are greatly increased. Grey spells can be cast without limitation due to current lust.");
 		public static const GrandMage:PerkType = mk("Grand Mage", "Grand Mage",
 				"[if (player.inte>=75)" +
 						"Increases base spell strength by 30%, base mana pool by 135 and lust bar by 30." +
@@ -1625,19 +1632,26 @@ public class PerkLib
 				"Double all gems gained!",
 				"Double all gems gained.");
 		public static const GreyArchmage:PerkType = mk("Grey Archmage", "Grey Archmage",
-				"[if (player.inte>=275)" +
-						"Increases base spell strength by 100%, mana pool by 600, lust bar by 150 and regain mana 150% faster." +
+				"[if (player.inte>=175)" +
+						"Increases grey spell strength by 30%, mana pool by 450, lust bar by 80 and regain mana 75% faster." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grey Archmage' perk, increasing base spell strength by 100%, mana pool by 600, lust bar by 150 and boosting mana recovery by large margin.");
+				"You've chosen the 'Grey Archmage' perk, increasing grey spell power strength by 30%, mana pool by 600, lust bar by 150 and boosting mana recovery by large margin.");
 		public static const GreyMage:PerkType = mk("Grey Mage", "Grey Mage",
-				"[if (player.inte>=225)" +
-						"Increases base spell strength by 80%, mana pool by 450, lust bar by 120, regain it 50% faster, treshold for Black Magic is 30 lust and for White 30 lust below current max." +
+				"[if (player.inte>=125)" +
+						"Increases grey spell strength by 20%, mana pool by 300, lust bar by 40, regain it 50% faster, treshold for Black Magic is 30 lust and for White 30 lust below current max." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grey Mage' perk. Your base spell, mana pool, lust bar and mana recovery are greatly increased, treshold for White Magic rised and for Black lowered.");
+				"You've chosen the 'Grey Mage' perk. Your grey spell power, mana pool, lust bar and mana recovery are greatly increased, treshold for White Magic rised and for Black lowered.");
+		public static const GreyMageApprentice:PerkType = mk("Grey Mage Apprentice", "Grey Mage Apprentice",
+				"[if (player.inte>=75)" +
+						"Increases grey spell strength by 10%, mana pool by 150, lust bar by 20, regain it 25% faster." +
+						"|" +
+						"<b>You are too dumb to gain benefit from this perk.</b>" +
+						"]",
+				"You've chosen the 'Grey Mage Apprentice' perk. Your grey spell power, mana pool, lust bar and mana recovery are increased.");
 		public static const HeavyArmorProficiency:PerkType = mk("Heavy Armor Proficiency", "Heavy Armor Proficiency",
 				"Wearing Heavy Armor's grants 10% damage reduction.",
 				"You've chosen the 'Heavy Armor Proficiency' perk.  Due to your specialization in wearing heavy armor's you gain a little bit of damage reduction.");
@@ -4855,6 +4869,13 @@ public class PerkLib
                     .requireNGPlus(2);
             BasicSpirituality.requireWis(20)
                     .requireInt(30);
+            GreyMagic.requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.CooldownSpellPyreBurst) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt) || player.hasStatusEffect(StatusEffects.KnowsChainLighting);
+                    }, "Whitefire or Pyre Burst or Lightning Bolt or Chain Lighting spell")
+					.requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsArcticGale) || player.hasStatusEffect(StatusEffects.KnowsDarknessShard) || player.hasStatusEffect(StatusEffects.KnowsDuskWave);
+                    }, "Ice Spike or Arctic Gale or Darkness Shard or Dusk Wave spell")
+					.requireInt(25);
             //Tier 1 Intelligence Perks
             Mage.requirePerk(Spellpower)
                     .requireInt(50)
@@ -4904,6 +4925,9 @@ public class PerkLib
                     .requireLevel(6);
             ArcaneRegenerationMinor.requirePerk(Mage)
                     .requireInt(50)
+                    .requireLevel(6);
+            GreyMageApprentice.requirePerk(GreyMagic)
+                    .requireInt(75)
                     .requireLevel(6);
             //Tier 2 Intelligence perks
             GrandMage.requirePerk(Mage)
@@ -4990,7 +5014,6 @@ public class PerkLib
                     .requirePerk(HalfStepToImprovedSpirituality)
                     .requireLevel(12);
             ArcaneRegenerationMajor.requirePerks(GrandMage, ArcaneRegenerationMinor)
-                    //.requirePerk(ArcaneRegenerationMinor)
                     .requireInt(75)
                     .requireLevel(12);
             MagicMetabolism.requireHungerEnabled()
@@ -5033,8 +5056,10 @@ public class PerkLib
                     .requireInt(100)
                     .requireLevel(18);
             ArcaneRegenerationEpic.requirePerks(Archmage, ArcaneRegenerationMajor)
-                    //.requirePerk(ArcaneRegenerationMajor)
                     .requireInt(100)
+                    .requireLevel(18);
+            GreyMage.requirePerk(GreyMageApprentice)
+                    .requireInt(125)
                     .requireLevel(18);
             //Tier 4 Intelligence perks
             GrandArchmage.requirePerk(Archmage)
@@ -5069,7 +5094,6 @@ public class PerkLib
                     .requireLevel(28)
                     .requireNGPlus(2);
             ArcaneRegenerationLegendary.requirePerks(GrandArchmage, ArcaneRegenerationEpic)
-                    //.requirePerk(ArcaneRegenerationEpic)
                     .requireInt(125)
                     .requireLevel(24);
 			ElementalBolt.requireAnyPerk(RagingInferno, GlacialStorm, HighVoltage, EclipsingShadow)
@@ -5102,23 +5126,18 @@ public class PerkLib
                     .requireInt(160)
                     .requireLevel(30);
             ArcaneRegenerationMythical.requirePerks(GrandArchmage2ndCircle, ArcaneRegenerationLegendary)
-                    //.requirePerk(ArcaneRegenerationLegendary)
                     .requireInt(150)
                     .requireLevel(30);
             RagingInfernoEx.requirePerks(GrandArchmage, RagingInferno)
-                    //.requirePerk(RagingInferno)
                     .requireLevel(30)
                     .requireInt(150);
             GlacialStormEx.requirePerks(GrandArchmage, GlacialStorm)
-                    //.requirePerk(GlacialStorm)
                     .requireLevel(30)
                     .requireInt(150);
             HighVoltageEx.requirePerks(GrandArchmage, HighVoltage)
-                    //.requirePerk(HighVoltage)
                     .requireLevel(30)
                     .requireInt(150);
             EclipsingShadowEx.requirePerks(GrandArchmage, EclipsingShadow)
-                    //.requirePerk(EclipsingShadow)
                     .requireLevel(30)
                     .requireInt(150);
             UnlockForce2ndStage.requirePerk(UnlockForce)
@@ -5139,6 +5158,12 @@ public class PerkLib
                     .requireLevel(36);
             GrandTactician.requirePerk(Tactician)
                     .requireInt(150)
+                    .requireLevel(36);
+            GreyArchmage.requirePerk(GreyMage)
+                    .requireInt(175)
+                    .requireLevel(36);
+            Convergence.requirePerk(GreyMage)
+                    .requireInt(175)
                     .requireLevel(36);
             //Tier 7 Intelligence perks
         /*	PrestigeJobSeer.requirePrestigeJobSlot()
@@ -5178,15 +5203,12 @@ public class PerkLib
             /*Trance.requirePerk(PrestigeJobSeer)
 					.requireInt(240)
 					.requireLevel(48);*/
-            Convergence.requirePerk(PrestigeJobGreySage)
-                    .requireInt(225)
-                    .requireLevel(48);
-            GreyMage.requirePerk(PrestigeJobGreySage)//później jeden z 2 grey mage prestige perks
-                    .requireInt(225)
-                    .requireLevel(48);
             HexKnowledge.requirePerk(PrestigeJobWarlock)
                     .requireInt(225)
-                    .requireLevel(43);
+                    .requireLevel(48);
+            GrandGreyArchmage.requirePerk(GreyArchmage)
+                    .requireInt(225)
+                    .requireLevel(48);
             //Tier 9 Intelligence perks
             HalfStepToInhumanSpirituality.requireWis(200)
                     .requireInt(300)
@@ -5209,9 +5231,6 @@ public class PerkLib
                     .requireLevel(54)
                     .requireInt(300);
             //Tier 10 Intelligence perks
-            GreyArchmage.requirePerk(GreyMage)
-                    .requireInt(275)
-                    .requireLevel(60);
             InhumanSpirituality.requireWis(220)
                     .requireInt(330)
                     .requirePerk(HalfStepToInhumanSpirituality)
@@ -6245,14 +6264,10 @@ public class PerkLib
 					.requireWis(10);
             Motivation.requirePerk(JobLeader)
 					.requirePerk(BasicLeadership);
-			VenomousDiet.requireHungerEnabled();
-			VenomousAdiposeTissue.requireTou(10);
-            GreyMagic.requireCustomFunction(function (player:Player):Boolean {
-                        return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.CooldownSpellPyreBurst) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt) || player.hasStatusEffect(StatusEffects.KnowsChainLighting);
-                    }, "Whitefire or Pyre Burst or Lightning Bolt or Chain Lighting spell")
-					.requireCustomFunction(function (player:Player):Boolean {
-                        return player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsArcticGale) || player.hasStatusEffect(StatusEffects.KnowsDarknessShard) || player.hasStatusEffect(StatusEffects.KnowsDuskWave);
-                    }, "Ice Spike or Arctic Gale or Darkness Shard or Dusk Wave spell");
+			VenomousDiet.requireHungerEnabled()
+					.requireMaxVenom(100);
+			VenomousAdiposeTissue.requireTou(10)
+					.requireMaxVenom(100);
             //Tier 1
 			ArachnidBookLungEvolved.requireLevel(6)
 				.requirePerk(ArachnidBookLung)
