@@ -9184,6 +9184,8 @@ use namespace CoC;
 				alicornCounter++;
 			if (eyes.type == Eyes.HUMAN)
 				alicornCounter++;
+			if (isTaur())
+				alicornCounter++;
 			if (horns.type == Horns.UNICORN) {
 				if (horns.count < 6)
 					alicornCounter++;
