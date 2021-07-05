@@ -91,7 +91,7 @@ package classes.Scenes
 			outputText("-Lumi menu been bit chenged with buttons moved to diff spots. Also her enchance menu been split into two to accomodate all 15 options (earlier it missed succubus delight upgrade).\n");
 			outputText("-Nosferatu spell been moved to grey book. Learning any grey spells req. now having perk Grey Magic instead of Prestige Job: Grey Sage. Req. intelligence to learn most of those spells have been lowered.\n");
 			outputText("-As Jiangshi PC can't anymore equip Aether Twins. Yes we know they can move on their own but it would make jiangshi PC potentialy have access to unexpewcted help in form of evolved twins for attacks and/or defense.\n");
-			outputText("-New unlockable option in Soulforce menu: Comprehend. Req. H class Heaven Tribulation Survivor perk. Allow to try comprehend one of daos: fire, ice, lighting, darkness, poison. Or it can be total dud and all time spent on contemplation session will not give any results at all. ");
+			outputText("-New unlockable option in Soulforce menu: Comprehend. Req. H class Heaven Tribulation Survivor perk. Allow to try comprehend one of daos: fire, ice, lightning, darkness, poison. Or it can be total dud and all time spent on contemplation session will not give any results at all. ");
 			outputText("Each layer PC reach would increase damage from attacks of this element and ocassionaly can even increase resistance to said element.\n");
 			outputText("-Exploring Forrest can trigger meeting with Wood Elfs. That carry a chance to become pernamenrtly TF'd into one of them. Or if correct decision will be chosen it would cause PC to never again meet them.\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Grey Mage Apprentice. Req. Grey Magic perk and 75+ int. Effect: Increases grey spell strength by 10%, mana pool by 150, lust bar by 20, regain it 25% faster.\n");
@@ -99,9 +99,9 @@ package classes.Scenes
 			outputText("-Grey Mage perk tier been lowered from tier 7 to tier 3 intelligence perk. Req. changed to having perk Grey Mage Apprentice and 125+ int. Effects changed to: Increases grey spell strength by 20%, mana pool by 300, lust bar by 40, regain it 50% faster. Treshold for white/black magic use effect stays unchanged.\n");
 			outputText("-Grey Archmage perk tier been lowered from tier 10 to tier 6 intelligence perk. Req. int lowered to 175+. Effects changed to: Increases grey spell strength by 30%, mana pool by 450, lust bar by 80 and regain mana 75% faster.\n");
 			outputText("-Convergence perk tier been lowered from tier 8 to tier 6 intelligence perk. Req. int lowered to 175+. Effects unchanged.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fire Storm and Ice Rain spells been moved from grey magic to tier 2 of white/black magic with matching change of scalling and added cooldowns. Polar Midnight and Meteor Shower are classied now as tier 3 white/black magic. All 4 spells got increase in mana cost to 500 (tier 2) or 1250 (tier 3).\n");
+			outputText("-Mana Shield changes by Shard: Mana Shield able to partial absorb damage instead of all dmg or none approach.\n");
+			outputText("-Depravatio, Element of Corruption and Puritas, Element of Purity are worth each 960 gems and effect changed from: x1,6 spellpower to +60% and then x1,6 spellpower. Ascensus, Element of Ascension is worth now 2400 gems and effects changed from: x1,8x spellpower to +150% spellpower and then x2,5 spellpower.\n");
 			outputText("-\n");
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk

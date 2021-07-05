@@ -2205,6 +2205,37 @@ use namespace CoC;
 				if (gainedWrath > 0) EngineCore.WrathChange(gainedWrath, false);
 			}
 		}
+		
+		public function manaShieldAbsorbMagic(damage:Number, display:Boolean = false):Number {
+			return manaShieldAbsorb(damage, display, true);
+		}
+		public function manaShieldAbsorb(damage:Number, display:Boolean = false, magic:Boolean = false):Number{
+			var magicmult:Number = 1;
+			// if magical damage, double efficiency
+			if (magic == true) magicmult /= 2;
+			if (damage * magicmult <= mana) {
+				mana -= (damage * magicmult);
+				if (display) {
+					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
+					else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
+				}
+				game.mainView.statsView.showStatDown('mana');
+				dynStats("lus", 0); //Force display arrow.
+				return 0;
+			}
+			else {
+				var partial:Number = Math.round(mana / magicmult);
+				damage -= partial;
+				if (display) {
+					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + partial + "</font>)</b>");
+					else outputText("<b>(<font color=\"#000080\">Absorbed " + partial + "</font>)</b>");
+				}
+				mana = 0;
+				game.mainView.statsView.showStatDown('mana');
+				dynStats("lus", 0); //Force display arrow.
+				return damage;
+			}
+		}
 		public override function damagePercent():Number {
 			var mult:Number = 100;
 			var armorMod:Number = armorDef;
@@ -2328,14 +2359,8 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && damage < mana) {
-					mana -= damage;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reducePhysDamage(damage);
@@ -2470,14 +2495,8 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceMagicDamage(damage);
@@ -2571,14 +2590,8 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceFireDamage(damage);
@@ -2681,14 +2694,8 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceIceDamage(damage);
@@ -2781,14 +2788,8 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceLightningDamage(damage);
@@ -2873,14 +2874,8 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceDarknessDamage(damage);
@@ -2967,14 +2962,8 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reducePoisonDamage(damage);
@@ -15387,4 +15376,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

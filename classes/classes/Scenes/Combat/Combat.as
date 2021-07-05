@@ -9273,6 +9273,13 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellDuskWaveEx, 1, -1);
             }
         }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellIceRain)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellIceRain) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellIceRain);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellIceRain, 1, -1);
+            }
+        }
         if (player.hasStatusEffect(StatusEffects.CooldownSpellPolarMidnight)) {
             if (player.statusEffectv1(StatusEffects.CooldownSpellPolarMidnight) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellPolarMidnight);
@@ -9336,13 +9343,6 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellChainLightingEx, 1, -1);
             }
         }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellMeteorShower)) {
-            if (player.statusEffectv1(StatusEffects.CooldownSpellMeteorShower) <= 0) {
-                player.removeStatusEffect(StatusEffects.CooldownSpellMeteorShower);
-            } else {
-                player.addStatusValue(StatusEffects.CooldownSpellMeteorShower, 1, -1);
-            }
-        }
         if (player.hasStatusEffect(StatusEffects.CooldownSpellRegenerate)) {
             if (player.statusEffectv1(StatusEffects.CooldownSpellRegenerate) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellRegenerate);
@@ -9355,6 +9355,20 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownSpellWaveOfEcstasy);
             } else {
                 player.addStatusValue(StatusEffects.CooldownSpellWaveOfEcstasy, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellFireStorm)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellFireStorm) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellFireStorm);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellFireStorm, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellMeteorShower)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellMeteorShower) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellMeteorShower);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellMeteorShower, 1, -1);
             }
         }
         if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodMissiles)) {
@@ -13711,6 +13725,8 @@ public class Combat extends BaseContent {
 	public function fireDamageBoostedByDao():Number {
 		var boostF:Number = 1;
 		if (player.hasStatusEffect(StatusEffects.DaoOfFire)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 5) boostF += 0.7;
+			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 4) boostF += 0.5;
 			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 3) boostF += 0.3;
 			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 2) boostF += 0.2;
 			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 1) boostF += 0.1;
@@ -13720,6 +13736,8 @@ public class Combat extends BaseContent {
 	public function iceDamageBoostedByDao():Number {
 		var boostI:Number = 1;
 		if (player.hasStatusEffect(StatusEffects.DaoOfIce)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 5) boostI += 0.7;
+			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 4) boostI += 0.5;
 			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 3) boostI += 0.3;
 			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 2) boostI += 0.2;
 			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 1) boostI += 0.1;
@@ -13729,6 +13747,8 @@ public class Combat extends BaseContent {
 	public function lightningDamageBoostedByDao():Number {
 		var boostL:Number = 1;
 		if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 5) boostL += 0.7;
+			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 4) boostL += 0.5;
 			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 3) boostL += 0.3;
 			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 2) boostL += 0.2;
 			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 1) boostL += 0.1;
@@ -13738,6 +13758,8 @@ public class Combat extends BaseContent {
 	public function darknessDamageBoostedByDao():Number {
 		var boostD:Number = 1;
 		if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 5) boostD += 0.7;
+			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 4) boostD += 0.5;
 			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 3) boostD += 0.3;
 			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 2) boostD += 0.2;
 			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 1) boostD += 0.1;
@@ -13747,6 +13769,8 @@ public class Combat extends BaseContent {
 	public function poisonDamageBoostedByDao():Number {
 		var boostP:Number = 1;
 		if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 5) boostP += 0.7;
+			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 4) boostP += 0.5;
 			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 3) boostP += 0.3;
 			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 2) boostP += 0.2;
 			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 1) boostP += 0.1;
