@@ -15,8 +15,8 @@ public class Scylla extends Monster
 	{
 		public function scyllaConstrict():void {
 			outputText("" + this.capitalA + this.short + "’s tentacles grab you all at once and start to squeeze you!");
-			player.createStatusEffect(StatusEffects.ScyllaBind,0,0,0,0); 
-			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+			player.createStatusEffect(StatusEffects.ScyllaBind,0,0,0,0);
+			if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {
 				player.takePhysDamage(4+rand(6));
 			}
 		}

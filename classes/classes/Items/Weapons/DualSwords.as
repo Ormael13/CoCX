@@ -15,7 +15,7 @@ package classes.Items.Weapons
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.findPerk(PerkLib.DualWield) >= 0) return true;
+			if (game.player.hasPerk(PerkLib.DualWield)) return true;
 			outputText("You aren't skilled enough to handle this pair of weapons!  ");
 			return false;
 		}	

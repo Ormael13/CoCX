@@ -82,24 +82,26 @@ public class CoC extends MovieClip
     /*private static var doCamp:Function; //Set by campInitialize, should only be called by playerMenu
     private static function campInitialize(passDoCamp:Function):void { doCamp = passDoCamp; }*/
 
-    public var charCreation:CharCreation         = new CharCreation();
-    public var saves:Saves                       = new Saves(gameStateDirectGet, gameStateDirectSet);
-    public var playerAppearance:PlayerAppearance = new PlayerAppearance();
+    public var charCreation:CharCreation           = new CharCreation();
+    public var saves:Saves                         = new Saves(gameStateDirectGet, gameStateDirectSet);
+    public var playerAppearance:PlayerAppearance   = new PlayerAppearance();
     // Libraries
-    public var mutations:Mutations               = new Mutations();
-    public var transformations:TransformationLib = new TransformationLib();
+    public var mutations:Mutations                 = new Mutations();
+    public var transformations:TransformationLib   = new TransformationLib();
     // Items/
-    public var consumables:ConsumableLib         = new ConsumableLib();
+    public var consumables:ConsumableLib           = new ConsumableLib();
     public var useables:UseableLib;
-    public var weapons:WeaponLib                 = new WeaponLib();
-    public var weaponsrange:WeaponRangeLib       = new WeaponRangeLib();
-    public var armors:ArmorLib                   = new ArmorLib();
-    public var undergarments:UndergarmentLib     = new UndergarmentLib();
-    public var headjewelries:HeadJewelryLib      = new HeadJewelryLib();
-    public var necklaces:NecklaceLib             = new NecklaceLib();
-    public var jewelries:JewelryLib              = new JewelryLib();
-    public var shields:ShieldLib                 = new ShieldLib();
-    public var vehicles:VehiclesLib              = new VehiclesLib();
+    public var weapons:WeaponLib                   = new WeaponLib();
+    public var weaponsrange:WeaponRangeLib         = new WeaponRangeLib();
+    public var weaponsflyingswords:FlyingSwordsLib = new FlyingSwordsLib();
+    public var armors:ArmorLib                     = new ArmorLib();
+    public var undergarments:UndergarmentLib       = new UndergarmentLib();
+    public var miscjewelries:MiscJewelryLib        = new MiscJewelryLib();
+    public var headjewelries:HeadJewelryLib        = new HeadJewelryLib();
+    public var necklaces:NecklaceLib               = new NecklaceLib();
+    public var jewelries:JewelryLib                = new JewelryLib();
+    public var shields:ShieldLib                   = new ShieldLib();
+    public var vehicles:VehiclesLib                = new VehiclesLib();
 
 
     // Force updates in Pepper Flash ahuehue

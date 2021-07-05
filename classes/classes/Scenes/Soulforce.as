@@ -79,7 +79,18 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.SoulTyrant)) dailySoulforceUsesLimit++;
 			if (player.hasPerk(PerkLib.SoulAncestor)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 			outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
-			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1730\n");
+			outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 1830\n");
+			if (player.hasPerk(PerkLib.Dantain)) {
+				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 0) player.addPerkValue(PerkLib.Dantain, 1, 1);
+				if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 1) player.addPerkValue(PerkLib.Dantain, 1, 1);
+				if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 2) player.addPerkValue(PerkLib.Dantain, 1, 1);
+				outputText("<b>Dantain:</b> ");
+				if (player.perkv1(PerkLib.Dantain) == 3) outputText("Nascent Soul");
+				else if (player.perkv1(PerkLib.Dantain) == 2) outputText("Core Formation");
+				else if (player.perkv1(PerkLib.Dantain) == 1) outputText("Foundation Establishment");
+				else outputText("Qi Condensation");
+				outputText("\n");
+			}
 		/*	outputText("<b>Progress toward clearing next meridian: </b>");
 			if (flags[kFLAGS.UNLOCKED_MERIDIANS] == 2)
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
@@ -88,7 +99,9 @@ use namespace CoC;
 			else
 				outputText(flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] + " / wartość liczbowa\n");
 			outputText("<b>PC Speed %:</b> " + player.getMaxStats("spe") + "\n");
-			if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
+		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
+			if (player.hasStatusEffect(StatusEffects.TribulationCountdown)) outputText(""+player.statusEffectv1(StatusEffects.TribulationCountdown)+"\n");
+		/*	if (player.hasStatusEffect(StatusEffects.TelAdreTripxi)) {
 				outputText("<b>TelAdre Tripxi Guns general timer:</b> " + player.statusEffectv2(StatusEffects.TelAdreTripxi) + "\n");
 				if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) {
 					outputText("<b>TelAdre Tripxi Guns 1 (v1):</b> " + player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) + " (Desert Eagle)\n");
@@ -127,23 +140,37 @@ use namespace CoC;
 					outputText("<b>TelAdre Tripxi Guns 6 (v4):</b> " + player.statusEffectv4(StatusEffects.TelAdreTripxiGuns6) + "\n");
 				}
 			}
-		*/	outputText("<b>Uses of soulforce per day (for 4 first option beside cultivate):</b> " + flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] + " / " + dailySoulforceUsesLimit + "\n");
-			menu();
+		*/	menu();
 			if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Cultivate", "You're unable to recover soulforce by cultivating.");
 			else addButton(0, "Cultivate", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
+			if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(1, "Contemplate", DaoContemplations).hint("Dao Contemplations");
+			else addButtonDisabled(1, "???", "Req. to succesfully survive 1st Tribulation.");
 			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) {
-				addButton(1, "Self-sustain", SelfSustain).hint("Spend some soulforce on suppresing hunger for a while."); //zamiana soulforce na satiety w stosunku 1:5
-				addButton(2, "Repres. Lust", RepresLust).hint("Spend some soulforce on calming your sexual urges."); //używanie soulforce do zmniejszania lust w stosunku 1:2
+				addButton(2, "Self-sustain", SelfSustain).hint("Spend some soulforce on suppresing hunger for a while."); //zamiana soulforce na satiety w stosunku 1:5
+				addButton(3, "Repres. Lust", RepresLust).hint("Spend some soulforce on calming your sexual urges."); //używanie soulforce do zmniejszania lust w stosunku 1:2
 				addButton(4, "Adj. Corr.", CorruptionAndSoulforce).hint("Spend some soulforce on affecting your current corruption."); //używanie soulforce do zmniejszania corruption w stosunku 1:100 a zdobywanie corruption w stosunku 1:50
 			}
-			if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit && player.hasPerk(PerkLib.SoulApprentice)) addButton(3, "Mana", ManaAndSoulforce).hint("Convert some soulforce into mana or vice versa."); //używanie soulforce do zamiany na mane w stosunku 1:1 a many do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
+			else {
+				addButtonDisabled(2, "Self-sustain", "Wait till new day arrive to use this option again.");
+				addButtonDisabled(3, "Repres. Lust", "Wait till new day arrive to use this option again.");
+				addButtonDisabled(4, "Adj. Corr.", "Wait till new day arrive to use this option again.");
+			}
 			//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 			if (player.hasPerk(PerkLib.Metamorph)) {
 				if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) addButtonDisabled(6, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
 				else addButton(6, "Metamorph", SceneLib.metamorph.accessMetamorphMenu).hint("Use your soulforce to mold your body.");//używanie metamorfowania z użyciem soulforce
 			}
+			else addButtonDisabled(6, "???", "Req. Metamorph.");
 			if (player.hasPerk(PerkLib.SoulSense)) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounters."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
+			else addButtonDisabled(7, "???", "Req. Soul Sense.");
+			if (player.hasPerk(PerkLib.SoulApprentice)) {
+				if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) addButton(9, "Mana", ManaAndSoulforce).hint("Convert some soulforce into mana or vice versa."); //używanie soulforce do zamiany na mane w stosunku 1:1 a many do soulforce 1:2, używalne nawet w walce też ale z wiekszym kosztem przeliczania czyli 1:2 i 1:4
+				else addButtonDisabled(9, "Mana", "Wait till new day arrive to use this option again.");
+			}
+			else addButtonDisabled(9, "???", "Req. Soul Apprentice stage.");
 			addButton(10, "Cheats", SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
+			if (canfaceTribulation()) addButton(13, "Tribulation", tribulationsPrompt).hint("To face it or not? That's the question.");
+			else addButtonDisabled(13, "Tribulation", "It's not (yet) time for this.");
 			addButton(14, "Back", playerMenu);
 		}//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić, zablokować perki soul king to soul ancestor w momencie robienia release version
 
@@ -217,12 +244,12 @@ use namespace CoC;
 			if (player.hasKeyItem("Fenrir Collar") >= 0) addButton(5, "Re-Collaring", AddMaxBackpack2).hint("Changing one godly collar to other godly collar.");
 			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
 			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] < 8) addButton(8, "Repta-Tongue", AddReptaTongue).hint("Items bungle for Repta-Tongue Potion.");
+			//8
 			addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
 			addButton(10, "All4HiddenPrestige", AddMaxBackpack03).hint("A11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 			addButton(11, "PerkGalore1", PerkGalore1);
 			addButton(12, "PerkGalore2", PerkGalore2);
-			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(13, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock form Michiko for future clarity.");
+			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(13, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock from Michiko for future clarity.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function AddMaxBackpack033():void {
@@ -235,7 +262,9 @@ use namespace CoC;
 			outputText("\n\nA11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 			if (!player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) player.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobDruid)) player.createPerk(PerkLib.PrestigeJobDruid, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
+			if (!player.hasPerk(PerkLib.PrestigeJobNecromancer)) player.createPerk(PerkLib.PrestigeJobNecromancer, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobSentinel)) player.createPerk(PerkLib.PrestigeJobSentinel, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobSoulArtMaster)) player.createPerk(PerkLib.PrestigeJobSoulArtMaster, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PrestigeJobSpellKnight)) player.createPerk(PerkLib.PrestigeJobSpellKnight, 0, 0, 0, 0);
@@ -350,18 +379,6 @@ use namespace CoC;
 				else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
 			}
 			startCombat(new HellfireSnail());
-		}
-		public function AddReptaTongue():void {
-			outputText("\n\n<b>(Gained set of items to make Repta-Tongue Potion!)</b>\n\n");
-			inventory.takeItem(consumables.HUMMUS_, AddReptaTongue1);
-		}
-		public function AddReptaTongue1():void {
-			outputText("\n\n");
-			inventory.takeItem(consumables.REPTLUM, AddReptaTongue2);
-		}
-		public function AddReptaTongue2():void {
-			outputText("\n\n");
-			inventory.takeItem(consumables.OVIELIX, SoulforceCheats);
 		}
 		public function ChimeraBodyUltimateStage():void {
 			if (player.hasPerk(PerkLib.ChimericalBodyUltimateStage)) {
@@ -742,10 +759,6 @@ use namespace CoC;
 			doNext(submenucuzwhynot);
 		}
 		public function PerkGalore2():void {
-			if (!player.hasPerk(PerkLib.PrestigeJobNecromancer)) {
-				player.createPerk(PerkLib.PrestigeJobNecromancer, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Prestige Job: Necromancer!)</b>");
-			}
 			if (!player.hasPerk(PerkLib.PrestigeJobSeer)) {
 				player.createPerk(PerkLib.PrestigeJobSeer, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Prestige Job: Seer!)</b>");
@@ -753,18 +766,6 @@ use namespace CoC;
 			if (!player.hasPerk(PerkLib.PrestigeJobSoulArcher)) {
 				player.createPerk(PerkLib.PrestigeJobSoulArcher, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: Prestige Job: Soul Archer!)</b>");
-			}
-			if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) {
-				player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Prestige Job: Grey Sage!)</b>");
-			}
-			if (!player.hasPerk(PerkLib.PrestigeJobSpellKnight)) {
-				player.createPerk(PerkLib.PrestigeJobSpellKnight, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Prestige Job: Spell Knight!)</b>");
-			}
-			if (!player.hasPerk(PerkLib.PrestigeJobWarlock)) {
-				player.createPerk(PerkLib.PrestigeJobWarlock, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Prestige Job: Warlock!)</b>");
 			}
 			if (!player.hasPerk(PerkLib.PiercedCrimstone)) {
 				player.createPerk(PerkLib.PiercedCrimstone, 5, 0, 0, 0);
@@ -1099,8 +1100,8 @@ use namespace CoC;
 			addButton(6, "Add EXP 2", AddEXP2).hint("Add 1000 EXP.");
 			addButton(7, "Add EXP 3", AddEXP3).hint("Add 10000 EXP.");
 			addButton(8, "Add EXP 4", AddEXP4).hint("Add 100000 EXP.");
-			if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(10, "Trib Perks", TribulationPerks).hint("Add 4 Tribulation perks.");
-			if (!player.hasPerk(PerkLib.SoulAncestor)) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Add all soul cultivator related perks for stages 10-12 of cultivation.");
+			if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(10, "Trib Perk", TribulationPerks).hint("Add E class Tribulation survivor perk.");
+			if (player.hasPerk(PerkLib.SoulAncestor)) addButton(11, "10-12 St.", Stage10to12SoulPerks).hint("Remove all soul cultivator related perks for stages 10-12 of cultivation to keep save compatibility with public build saves.");
 			if (player.level < CoC.instance.levelCap) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
 			if (player.level < CoC.instance.levelCap - 9) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
 			addButton(14, "Back", SoulforceCheats);
@@ -1515,18 +1516,6 @@ use namespace CoC;
 			doNext(FasterOrInstantCampNPCRecruitment);
 		}
 		public function TribulationPerks():void {
-			if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
-				player.createPerk(PerkLib.HclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: H class Heaven Tribulation Survivor!)</b>");
-			}
-			if (!player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) {
-				player.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: G class Heaven Tribulation Survivor!)</b>");
-			}
-			if (!player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) {
-				player.createPerk(PerkLib.FclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: F class Heaven Tribulation Survivor!)</b>");
-			}
 			if (!player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) {
 				player.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 				outputText("\n\n<b>(Gained Perk: E class Heaven Tribulation Survivor!)</b>");
@@ -1534,25 +1523,25 @@ use namespace CoC;
 			doNext(SoulforceCheats);
 		}
 		public function Stage10to12SoulPerks():void {
-			if (!player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				player.createPerk(PerkLib.FleshBodyOverlordStage, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Flesh Body Overlord Stage!)</b>");
+			if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
+				player.removePerk(PerkLib.FleshBodyOverlordStage);
+				outputText("\n\n<b>(Lost Perk: Flesh Body Overlord Stage!)</b>");
 			}
-			if (!player.hasPerk(PerkLib.DaoistOverlordStage)) {
-				player.createPerk(PerkLib.DaoistOverlordStage, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Daoist Overlord Stage!)</b>");
+			if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
+				player.removePerk(PerkLib.DaoistOverlordStage);
+				outputText("\n\n<b>(Lost Perk: Daoist Overlord Stage!)</b>");
 			}
-			if (!player.hasPerk(PerkLib.SoulKing)) {
-				player.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Soul King!)</b>");
+			if (player.hasPerk(PerkLib.SoulKing)) {
+				player.removePerk(PerkLib.SoulKing);
+				outputText("\n\n<b>(Lost Perk: Soul King!)</b>");
 			}
-			if (!player.hasPerk(PerkLib.SoulEmperor)) {
-				player.createPerk(PerkLib.SoulEmperor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Soul Emperor!)</b>");
+			if (player.hasPerk(PerkLib.SoulEmperor)) {
+				player.removePerk(PerkLib.SoulEmperor);
+				outputText("\n\n<b>(Lost Perk: Soul Emperor!)</b>");
 			}
-			if (!player.hasPerk(PerkLib.SoulAncestor)) {
-				player.createPerk(PerkLib.SoulAncestor, 0, 0, 0, 0);
-				outputText("\n\n<b>(Gained Perk: Soul Ancestor!)</b>");
+			if (player.hasPerk(PerkLib.SoulAncestor)) {
+				player.removePerk(PerkLib.SoulAncestor);
+				outputText("\n\n<b>(Lost Perk: Soul Ancestor!)</b>");
 			}
 			doNext(SoulforceCheats);
 		}
@@ -2925,37 +2914,61 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.DaoistTyrantStage)) SFR00 += 20;
 			return SFR00;
 		}
-		public function SoulforceRegeneration1():void {
+		private function SoulforceRegenerationCompatibileTrainingItems():Boolean {
+			return player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
+			|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring"
+			|| player.weaponFlyingSwordsName == "training soul flying sword";
+		}
+		public function DaoContemplations():void {
 			clearOutput();
-			var soulforceamountrestored:int = 16;
-			soulforceamountrestored += SoulforceRegeneration00();
-			if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 16;
-			if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 16;
-			if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 16;
-			if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 16;
-			if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 16;
-			if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 16;
-			if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 16;
-			if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 16;
-			if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 16;
-			if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 16;
-			if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 16;
-			if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 16;
-			if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 16;
-			player.soulforce += soulforceamountrestored;
-			if (player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
-				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring") {
-				var bonussoulforce:Number = 0;
-				bonussoulforce += SoulforceGainedFromCultivation1();
-				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
-				SoulforceGainedFromCultivation2();
+			outputText("Which Dao would you try to comprehend?\n\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfFire)) outputText("Fire: "+player.statusEffectv1(StatusEffects.DaoOfFire)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfIce)) outputText("Ice: "+player.statusEffectv1(StatusEffects.DaoOfIce)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) outputText("Lightning: "+player.statusEffectv1(StatusEffects.DaoOfLightning)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) outputText("Darkness: "+player.statusEffectv1(StatusEffects.DaoOfDarkness)+"\n");
+			if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) outputText("Poison: "+player.statusEffectv1(StatusEffects.DaoOfPoison)+"\n");
+			menu();
+			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 3) addButtonDisabled(0, "Fire", "You reached limit of comprehending this Dao.");
+			else addButton(0, "Fire", DaoContemplationsEffect, StatusEffects.DaoOfFire, "Fire");
+			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 3) addButtonDisabled(1, "Ice", "You reached limit of comprehending this Dao.");
+			else addButton(1, "Ice", DaoContemplationsEffect, StatusEffects.DaoOfIce, "Ice");
+			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 3) addButtonDisabled(2, "Lightning", "You reached limit of comprehending this Dao.");
+			else addButton(2, "Lightning", DaoContemplationsEffect, StatusEffects.DaoOfLightning, "Lightning");
+			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 3) addButtonDisabled(3, "Darkness", "You reached limit of comprehending this Dao.");
+			else addButton(3, "Darkness", DaoContemplationsEffect, StatusEffects.DaoOfDarkness, "Darkness");
+			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 3) addButtonDisabled(4, "Poison", "You reached limit of comprehending this Dao.");
+			else addButton(4, "Poison", DaoContemplationsEffect, StatusEffects.DaoOfPoison, "Poison");
+			addButton(14, "Back", accessSoulforceMenu);
+		}
+		private function DaoContemplationsEffect(statusEffect:StatusEffectType, daoname:String):void {
+			clearOutput();
+			outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
+			var dao:Number = rand(6);
+			if (dao > 0) {
+				outputText("After session ends you managed to progress in Dao of "+daoname+".");
+				if (player.hasStatusEffect(statusEffect)) {
+					player.addStatusValue(statusEffect, 1, dao);
+					if (player.statusEffectv1(statusEffect) > 20 && player.statusEffectv2(statusEffect) == 0) {
+						player.addStatusValue(statusEffect, 1, -20);
+						player.addStatusValue(statusEffect, 2, 1);
+						outputText("\n\n<b>Your comprehension reached 3rd layer.</b>");
+					}
+					if (player.statusEffectv1(statusEffect) > 50 && player.statusEffectv2(statusEffect) == 1) {
+						player.addStatusValue(statusEffect, 1, -50);
+						player.addStatusValue(statusEffect, 2, 1);
+						outputText("\n\n<b>Your comprehension reached 2nd layer.</b>");
+					}
+					if (player.statusEffectv1(statusEffect) > 130 && player.statusEffectv2(statusEffect) == 2) {
+						player.addStatusValue(statusEffect, 1, -130);
+						player.addStatusValue(statusEffect, 2, 1);
+						outputText("\n\n<b>Your comprehension reached 1st layer.</b>");
+					}
+				}
+				else player.createStatusEffect(statusEffect, dao, 0, 0, 0);
 			}
-			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-			outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
-			outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
-			outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(20);
-			doNext(camp.returnToCampUseOneHour);
+			else outputText("After the session ends, you did not manage to make an progress in your comprehension.");
+			outputText("\n\n");
+			doNext(camp.returnToCampUseEightHours);
 		}
 		public function SoulforceRegeneration2():void {
 			clearOutput();
@@ -3216,8 +3229,9 @@ use namespace CoC;
 		public function SoulforceGainedFromCultivation1():Number {
 			var cumulativegains:Number = 0;
 			if (player.weaponName == "training soul axe" && player.weaponRangeName == "training soul crossbow" && player.shieldName == "training soul buckler" && player.armorName == "training soul armor" && player.upperGarmentName == "soul training shirt" && player.lowerGarmentName == "soul training panties"
-				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring") {
-				cumulativegains += 26;//+120% jak wszystkie 12 slotów - każdy kolejny dodany slot dodaje kolejne 10%
+				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring"
+				&& player.weaponFlyingSwordsName == "training soul flying sword") {
+				cumulativegains += 28;//+130% jak wszystkie 13 slotów - każdy kolejny dodany slot dodaje kolejne 10%
 			}
 			else if (player.weaponName == "training soul axe" && player.weaponRangeName == "training soul crossbow" && player.shieldName == "training soul buckler" && player.armorName == "training soul armor" && player.upperGarmentName == "soul training shirt" && player.lowerGarmentName == "soul training panties"
 				&& player.headjewelryName == "training soul hairpin" && player.necklaceName == "training soul necklace" && player.jewelryName == "training soul ring") {
@@ -3236,6 +3250,7 @@ use namespace CoC;
 				if (player.jewelryName2 == "training soul ring") cumulativegains += 1;
 				if (player.jewelryName3 == "training soul ring") cumulativegains += 1;
 				if (player.jewelryName4 == "training soul ring") cumulativegains += 1;
+				if (player.weaponFlyingSwordsName == "training soul flying sword") cumulativegains += 1;
 			}
 			return cumulativegains;
 		}
@@ -3253,6 +3268,7 @@ use namespace CoC;
 			if (player.jewelryName2 == "training soul ring") bonussoulforce2 += 100;
 			if (player.jewelryName3 == "training soul ring") bonussoulforce2 += 100;
 			if (player.jewelryName4 == "training soul ring") bonussoulforce2 += 100;
+			if (player.weaponFlyingSwordsName == "training soul flying sword") bonussoulforce2 += 100;
 			if ((bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) > 0) {
 				if ((bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) > flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2]) flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2];
 				else flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] += (bonussoulforce2 - flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]);
@@ -3297,6 +3313,37 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.SoulAncestor)) costPercent += 250;
 			mod *= costPercent/100;
 			return mod;
+		}
+		public function SoulforceRegeneration1():void {
+			clearOutput();
+			var soulforceamountrestored:int = 16;
+			soulforceamountrestored += SoulforceRegeneration00();
+			if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 16;
+			if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 16;
+			player.soulforce += soulforceamountrestored;
+			if (SoulforceRegenerationCompatibileTrainingItems()) {
+				var bonussoulforce:Number = 0;
+				bonussoulforce += SoulforceGainedFromCultivation1();
+				flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
+				SoulforceGainedFromCultivation2();
+			}
+			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+			outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
+			outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
+			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(20);
+			doNext(camp.returnToCampUseOneHour);
 		}
 		public function SelfSustain():void {
 			clearOutput();
@@ -4103,6 +4150,36 @@ use namespace CoC;
 				outputText("\n\nYour current soulforce is too low.");
 				doNext(SoulSense);
 			}
+		}
+		private function canfaceTribulation():Boolean {
+			if ((player.level >= 24 && player.hasPerk(PerkLib.SoulWarrior) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) ||
+				(player.level >= 42 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) ||
+				(player.level >= 60 && player.hasPerk(PerkLib.SoulTyrant) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor))) return true;
+			else return false;
+		}
+		public function tribulationsPrompt():void {
+			clearOutput();
+			outputText("Something within you speaks. You can sense that you’ve nearly reached the pinnacle of cultivation as a Soul ");
+			if (player.level >= 60 && !player.hasPerk(PerkLib.SoulKing)) outputText("Tyrant");
+			else if (player.level >= 42 && !player.hasPerk(PerkLib.SoulExalt)) outputText("Elder");
+			else outputText("Warrior");
+			outputText(". Now, only a tiny step is needed to advance further.");
+			outputText("\n\nThough, you pause. It’s a feeling so close, yet so far. Do you progress your skills naturally, or push for the goal that you’ve worked so hard to achieve.");
+			menu();
+			addButton(1, "No", tribulationsPromptNo);
+			addButton(3, "Yes", tribulationsPromptYes);
+		}
+		public function tribulationsPromptYes():void {
+			clearOutput();
+			outputText("There’s no use in delaying the inevitable. You do not fear the tribulation, you know you’re ready.");
+			outputText("\n\nYou know it’s time to give it your all. With determination and force of will, you cannot fail.");
+			player.createStatusEffect(StatusEffects.TribulationCountdown, (2 + rand(4)), 0, 0, 0);
+			doNext(playerMenu);
+		}
+		public function tribulationsPromptNo():void {
+			clearOutput();
+			outputText("As you pause, you know it’s not time yet. You can suppress your soulforce until it’s time for the tribulation to descend. Hopefully, then you’ll be ready.");
+			doNext(accessSoulforceMenu);
 		}
 	}
 }

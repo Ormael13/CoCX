@@ -19,11 +19,15 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
+import classes.Items.FlyingSwords;
+import classes.Items.FlyingSwordsLib;
 import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
 import classes.Items.ItemTags;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
+import classes.Items.MiscJewelry;
+import classes.Items.MiscJewelryLib;
 import classes.Items.Mutations;
 import classes.Items.Necklace;
 import classes.Items.NecklaceLib;
@@ -201,7 +205,10 @@ use namespace CoC;
 
 		private var _weapon:Weapon = WeaponLib.FISTS;
 		private var _weaponRange:WeaponRange = WeaponRangeLib.NOTHING;
+		private var _weaponFlyingSwords:FlyingSwords = FlyingSwordsLib.NOTHING;
 		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+		private var _miscjewelry:MiscJewelry = MiscJewelryLib.NOTHING;
+		private var _miscjewelry2:MiscJewelry = MiscJewelryLib.NOTHING;
 		private var _headjewelry:HeadJewelry = HeadJewelryLib.NOTHING;
 		private var _necklace:Necklace = NecklaceLib.NOTHING;
 		private var _jewelry:Jewelry = JewelryLib.NOTHING;
@@ -290,6 +297,56 @@ use namespace CoC;
 		override public function set weaponRangeValue(value:Number):void
 		{
 			CoC_Settings.error("ERROR: attempt to directly set player.weaponRangeValue.");
+		}
+
+		//override public function set misc jewelries
+		override public function set miscjewelryName(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryName.");
+		}
+
+		override public function set miscjewelryEffectId(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryEffectId.");
+		}
+
+		override public function set miscjewelryEffectMagnitude(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryEffectMagnitude.");
+		}
+
+		override public function set miscjewelryPerk(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryPerk.");
+		}
+
+		override public function set miscjewelryValue(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryValue.");
+		}
+		override public function set miscjewelryName2(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryName2.");
+		}
+
+		override public function set miscjewelryEffectId2(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryEffectId2.");
+		}
+
+		override public function set miscjewelryEffectMagnitude2(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryEffectMagnitude2.");
+		}
+
+		override public function set miscjewelryPerk2(value:String):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryPerk2.");
+		}
+
+		override public function set miscjewelryValue2(value:Number):void
+		{
+			CoC_Settings.error("ERROR: attempt to directly set player.miscjewelryValue2.");
 		}
 
 		//override public function set head jewelries
@@ -1122,6 +1179,11 @@ use namespace CoC;
 		{
 			return flags[kFLAGS.PLAYER_COMPANION_1] != "" || flags[kFLAGS.PLAYER_COMPANION_2] != "" || flags[kFLAGS.PLAYER_COMPANION_3] != "";
 		}
+		//PC can fly without natural wings
+		public function canFlyNoWings():Boolean
+		{
+			return weaponFlyingSwordsName != "nothing" || hasPerk(PerkLib.GclassHeavenTribulationSurvivor);
+		}
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
 		{
@@ -1355,6 +1417,61 @@ use namespace CoC;
 		}
 		public function set ammo(value:int):void {
 			flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = value;
+		}
+		
+		//override public function get weapons
+		override public function get weaponFlyingSwordsName():String {
+			return _weaponFlyingSwords.name;
+		}
+		override public function get weaponFlyingSwordsVerb():String {
+			return _weaponFlyingSwords.verb;
+		}
+		override public function get weaponFlyingSwordsAttack():Number {
+			//var newGamePlusMod:int = this.newGamePlusMod()+1;
+			var flyingswordsattack:Number = _weaponFlyingSwords.attack;
+			//flyingswordsattack = Math.round(flyingswordsattack);
+			return flyingswordsattack;
+		}
+		public function get weaponFlyingSwordsBaseAttack():Number {
+			return _weaponFlyingSwords.attack;
+		}
+		override public function get weaponFlyingSwordsPerk():String {
+			return _weaponFlyingSwords.perk || "";
+		}
+		override public function get weaponFlyingSwordsValue():Number {
+			return _weaponFlyingSwords.value;
+		}
+
+		//override public function get miscjewelries.
+		override public function get miscjewelryName():String {
+			return _miscjewelry.name;
+		}
+		override public function get miscjewelryEffectId():Number {
+			return _miscjewelry.effectId;
+		}
+		override public function get miscjewelryEffectMagnitude():Number {
+			return _miscjewelry.effectMagnitude;
+		}
+		override public function get miscjewelryPerk():String {
+			return _miscjewelry.perk;
+		}
+		override public function get miscjewelryValue():Number {
+			return _miscjewelry.value;
+		}
+		override public function get miscjewelryName2():String {
+			return _miscjewelry2.name;
+		}
+		override public function get miscjewelryEffectId2():Number {
+			return _miscjewelry2.effectId;
+		}
+		override public function get miscjewelryEffectMagnitude2():Number {
+			return _miscjewelry2.effectMagnitude;
+		}
+		override public function get miscjewelryPerk2():String {
+			return _miscjewelry2.perk;
+		}
+		override public function get miscjewelryValue2():Number {
+			return _miscjewelry2.value;
 		}
 
 		//override public function get headjewelries.
@@ -1634,6 +1751,75 @@ use namespace CoC;
 		public function setWeaponRangeHiddenField(value:WeaponRange):void
 		{
 			this._weaponRange = value;
+		}
+
+		//Flying Swords, added by Ormael
+		public function get weaponFlyingSwords():FlyingSwords
+		{
+			return _weaponFlyingSwords;
+		}
+
+		public function setWeaponFlyingSwords(newWeaponFlyingSwords:FlyingSwords):FlyingSwords {
+			//Returns the old flying Swords, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldWeaponFlyingSwords:FlyingSwords = _weaponFlyingSwords.playerRemove();
+			if (newWeaponFlyingSwords == null) {
+				CoC_Settings.error(short + ".weapon (flying swords) is set to null");
+				newWeaponFlyingSwords = FlyingSwordsLib.NOTHING;
+			}
+			_weaponFlyingSwords = newWeaponFlyingSwords.playerEquip();
+			return oldWeaponFlyingSwords;
+		}
+
+		// in case you don't want to call the value.equip
+		public function setWeaponFlyingSwordsHiddenField(value:FlyingSwords):void
+		{
+			this._weaponFlyingSwords = value;
+		}
+
+		//Misc Jewelry, added by Ormael
+		public function get miscJewelry():MiscJewelry
+		{
+			return _miscjewelry;
+		}
+
+		public function setMiscJewelry(newMiscJewelry:MiscJewelry):MiscJewelry {
+			//Returns the old misc jewelery, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldMiscJewelry:MiscJewelry = _miscjewelry.playerRemove();
+			if (newMiscJewelry == null) {
+				CoC_Settings.error(short + ".miscjewelry is set to null");
+				newMiscJewelry = MiscJewelryLib.NOTHING;
+			}
+			_miscjewelry = newMiscJewelry.playerEquip(); //The head jewelry can also choose to equip something else - useful for Ceraph's trap armor
+			return oldMiscJewelry;
+		}
+		// in case you don't want to call the value.equip
+		public function setMiscJewelryHiddenField(value:MiscJewelry):void
+		{
+			this._miscjewelry = value;
+		}
+
+		public function get miscJewelry2():MiscJewelry
+		{
+			return _miscjewelry2;
+		}
+
+		public function setMiscJewelry2(newMiscJewelry:MiscJewelry):MiscJewelry {
+			//Returns the old misc jewelery, allowing the caller to discard it, store it or try to place it in the player's inventory
+			//Can return null, in which case caller should discard.
+			var oldMiscJewelry:MiscJewelry = _miscjewelry2.playerRemove();
+			if (newMiscJewelry == null) {
+				CoC_Settings.error(short + ".miscjewelry2 is set to null");
+				newMiscJewelry = MiscJewelryLib.NOTHING;
+			}
+			_miscjewelry2 = newMiscJewelry.playerEquip(); //The head jewelry can also choose to equip something else - useful for Ceraph's trap armor
+			return oldMiscJewelry;
+		}
+		// in case you don't want to call the value.equip
+		public function setMiscJewelryHiddenField2(value:MiscJewelry):void
+		{
+			this._miscjewelry2 = value;
 		}
 
 		//Head Jewelry, added by Ormael
@@ -2155,6 +2341,7 @@ use namespace CoC;
 					damage = reducePhysDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2296,6 +2483,7 @@ use namespace CoC;
 					damage = reduceMagicDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2357,6 +2545,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult += 100;
 			if (hasPerk(PerkLib.FireAffinity)) mult -= 50;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
+			if (hasStatusEffect(StatusEffects.DaoOfFire) && (statusEffectv2(StatusEffects.DaoOfFire) > 2)) mult -= 10;
 			if (jewelryEffectId == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude3;
@@ -2395,6 +2584,7 @@ use namespace CoC;
 					damage = reduceFireDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2475,6 +2665,7 @@ use namespace CoC;
 				if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI && (jewelryName == "Infernal Mouse ring" || jewelryName2 == "Infernal Mouse ring" || jewelryName3 == "Infernal Mouse ring" || jewelryName4 == "Infernal Mouse ring")) mult += 90;
 				else mult += 100;
 			}
+			if (hasStatusEffect(StatusEffects.DaoOfIce) && (statusEffectv2(StatusEffects.DaoOfIce) > 2)) mult -= 10;
 			if (rearBody.type == RearBody.YETI_FUR) mult -= 20;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
@@ -2503,6 +2694,7 @@ use namespace CoC;
 					damage = reduceIceDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2574,6 +2766,7 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId2 == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId3 == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId4 == JewelryLib.MODIFIER_LIGH_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R && necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= 15;
+			if (hasStatusEffect(StatusEffects.DaoOfLightning) && (statusEffectv2(StatusEffects.DaoOfLightning) > 2)) mult -= 10;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -2601,6 +2794,7 @@ use namespace CoC;
 					damage = reduceLightningDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2664,6 +2858,7 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_DARK_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_DARK_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_DARK_R && jewelryEffectId2 == JewelryLib.MODIFIER_DARK_R && jewelryEffectId3 == JewelryLib.MODIFIER_DARK_R && jewelryEffectId4 == JewelryLib.MODIFIER_DARK_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_DARK_R && necklaceEffectId == NecklaceLib.MODIFIER_DARK_R) mult -= 15;
+			if (hasStatusEffect(StatusEffects.DaoOfDarkness) && (statusEffectv2(StatusEffects.DaoOfDarkness) > 2)) mult -= 10;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -2691,6 +2886,7 @@ use namespace CoC;
 					damage = reduceDarknessDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2756,6 +2952,7 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;
+			if (hasStatusEffect(StatusEffects.DaoOfPoison) && (statusEffectv2(StatusEffects.DaoOfPoison) > 2)) mult -= 10;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -2783,6 +2980,7 @@ use namespace CoC;
 					damage = reducePoisonDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -3067,7 +3265,7 @@ use namespace CoC;
 				{name: 'orca', score: orcaScore(), minscore: 6},
 				{name: 'oni', score: oniScore(), minscore: 6},
 				{name: 'elf', score: elfScore(), minscore: 5},
-				{name: 'wood elf', score: woodElfScore(), minscore: 17},
+				{name: 'wood elf', score: woodElfScore(), minscore: 22},
 				{name: 'frost wyrm', score: frostWyrmScore(), minscore: 10},
 				{name: 'orc', score: orcScore(), minscore: 5},
 				{name: 'raiju', score: raijuScore(), minscore: 5},
@@ -3196,7 +3394,10 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "sphinx") {
-				if (TopScore >= 23) {
+				if (TopScore >= 30) {
+					race = "noble sphinx";
+				}
+				if (TopScore >= 21) {
 					race = "greater sphinx";
 				}
 				if (TopScore >= 14) {
@@ -3435,13 +3636,13 @@ use namespace CoC;
 			}
 			if (TopRace == "unicorn") {
 				if (TopScore >= 8) {
-					if (TopScore >= 24) {
+					if (TopScore >= 27) {
 						if (horns.type == Horns.UNICORN) {
 							race = "true unicorn";
 						} else {
 							race = "true bicorn";
 						}
-					} else if (TopScore >= 12) {
+					} else if (TopScore >= 18) {
 						if (horns.type == Horns.UNICORN) {
 							race = "unicorn";
 						} else {
@@ -3467,13 +3668,13 @@ use namespace CoC;
 			}
 			if (TopRace == "alicorn") {
 				if (TopScore >= 8) {
-					if (TopScore >= 24) {
+					if (TopScore >= 27) {
 						if (horns.type == Horns.UNICORN) {
 							race = "true alicorn";
 						} else {
 							race = "true nightmare";
 						}
-					} else if (TopScore >= 12) {
+					} else if (TopScore >= 18) {
 						if (horns.type == Horns.UNICORN) {
 							race = "alicorn";
 						} else {
@@ -4653,7 +4854,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (elfScore() >= 11)
 				chimeraCounter++;
-			if (woodElfScore() >= 17)
+			if (woodElfScore() >= 22)
 				chimeraCounter++;
 			if (orcScore() >= 11)
 				chimeraCounter++;
@@ -7471,23 +7672,24 @@ use namespace CoC;
 		public function woodElfScore():Number {
 			Begin("Player","racialScore","wood elf");
 			var WoodElfCounter:Number = 0;
-			if (ears.type == Ears.ELVEN)
-				WoodElfCounter++;
-			if (eyes.type == Eyes.ELF)
-				WoodElfCounter++;
-			if (faceType == Face.ELF)
-				WoodElfCounter++;
-			if (tongue.type == Tongue.ELF)
-				WoodElfCounter++;
-			if (arms.type == Arms.ELF)
-				WoodElfCounter++;
-			if (lowerBody == LowerBody.ELF)
-				WoodElfCounter++;
-			if (hairType == Hair.SILKEN)
-				WoodElfCounter++;
-			if (wings.type == Wings.NONE)
-				WoodElfCounter++;
-			if (WoodElfCounter >= 2) {
+			if (hasPerk(PerkLib.BlessingOfTheAncestorTree)) {
+				WoodElfCounter += 4;
+				if (ears.type == Ears.ELVEN)
+					WoodElfCounter++;
+				if (eyes.type == Eyes.ELF)
+					WoodElfCounter++;
+				if (faceType == Face.ELF)
+					WoodElfCounter++;
+				if (tongue.type == Tongue.ELF)
+					WoodElfCounter++;
+				if (arms.type == Arms.ELF)
+					WoodElfCounter++;
+				if (lowerBody == LowerBody.ELF)
+					WoodElfCounter++;
+				if (hairType == Hair.SILKEN)
+					WoodElfCounter++;
+				if (wings.type == Wings.NONE)
+					WoodElfCounter++;
 				if (InCollection(hairColor, ["golden blonde"]))
 					WoodElfCounter++;
 				if (eyes.colour == "light green")
@@ -7500,31 +7702,21 @@ use namespace CoC;
 					WoodElfCounter++;
 				if (thickness <= 50)
 					WoodElfCounter++;
-				if (hasCock() && cocks.length < 6)
+				if ((hasCock() && cocks.length < 6) || (hasVagina() && biggestTitSize() >= 3))
 					WoodElfCounter++;
-				if (hasVagina() && biggestTitSize() >= 3)
+				if (cor >= 50)
+					WoodElfCounter++;
+				if (hasPerk(PerkLib.FlawlessBody))
+					WoodElfCounter++;
+				if (hasPerk(PerkLib.ElvenSense))
 					WoodElfCounter++;
 			}
-			if (cor >= 50)
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.FlawlessBody))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.ElvenSense))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.BlessingOfTheAncestorTree))
-				WoodElfCounter+= 4;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSys))
-				WoodElfCounter++;
+				WoodElfCounter += 3;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved))
-				WoodElfCounter++;
+				WoodElfCounter += 3;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.ElvishPeripheralNervSys) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				WoodElfCounter++;
+				WoodElfCounter += 3;
 			if (hasPerk(PerkLib.ElfsDescendant) || hasPerk(PerkLib.BloodlineElf))
 				WoodElfCounter += 2;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
@@ -8644,6 +8836,7 @@ use namespace CoC;
 		{
 			Begin("Player","racialScore","sphinx");
 			var sphinxCounter:Number = 0;
+			var SphinxSkinColor:Array = ["dark", "tan"];
 			if (isTaur()) {
 				if (lowerBody == LowerBody.CAT)
 					sphinxCounter += 2;
@@ -8658,6 +8851,8 @@ use namespace CoC;
 				if (faceType == Face.CAT_CANINES && (lowerBody == LowerBody.CAT))
 					sphinxCounter++;
 			}
+			if (InCollection(skinTone, SphinxSkinColor))
+				sphinxCounter++;
 			if (eyes.type == Eyes.CAT_SLITS)
 				sphinxCounter++;
 			if (tongue.type == Tongue.CAT)
@@ -8672,7 +8867,7 @@ use namespace CoC;
 				sphinxCounter++;
 			if (wings.type == Wings.FEATHERED_SPHINX)
 				sphinxCounter += 4;
-			if (catCocks() > 0)
+			if (catCocks() > 0 || hasVagina())
 				sphinxCounter++;
 			if (hasPartialCoat(Skin.FUR) || hasPlainSkinOnly())
 				sphinxCounter++;
@@ -8729,7 +8924,7 @@ use namespace CoC;
 			if (eyes.type == Eyes.HUMAN)
 				unicornCounter++;
 			if (wings.type == Wings.NONE)
-				unicornCounter += 2;
+				unicornCounter += 4;
 			if (horns.type == Horns.UNICORN) {
 				if (horns.count < 6)
 					unicornCounter++;
@@ -8754,8 +8949,6 @@ use namespace CoC;
 				if (hasPerk(PerkLib.AvatorOfCorruption))
 					unicornCounter++;
 			}
-			if (wings.type == Wings.FEATHERED_ALICORN)
-				unicornCounter = 0;
 			if (hasFur())
 				unicornCounter++;
 			if (horseCocks() > 0)
@@ -8840,7 +9033,7 @@ use namespace CoC;
 					unicornCounter++;
 			}
 			if (wings.type == Wings.NONE)
-				unicornCounter += 2;
+				unicornCounter += 4;
 			if (horseCocks() > 0)
 				unicornCounter++;
 			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
@@ -8908,7 +9101,7 @@ use namespace CoC;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.FEATHERED_ALICORN)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, unicornHairPalette) && InCollection(coatColor, unicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "blue")
@@ -8922,7 +9115,7 @@ use namespace CoC;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.NIGHTMARE)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, bicornHairPalette) && InCollection(coatColor, bicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "red")
@@ -8991,13 +9184,15 @@ use namespace CoC;
 				alicornCounter++;
 			if (eyes.type == Eyes.HUMAN)
 				alicornCounter++;
+			if (isTaur())
+				alicornCounter++;
 			if (horns.type == Horns.UNICORN) {
 				if (horns.count < 6)
 					alicornCounter++;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.FEATHERED_ALICORN)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, unicornHairPalette) && InCollection(coatColor, unicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "blue")
@@ -9011,7 +9206,7 @@ use namespace CoC;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.NIGHTMARE)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, bicornHairPalette) && InCollection(coatColor, bicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "red")
@@ -10061,9 +10256,9 @@ use namespace CoC;
 		}
 
 		public function atlachFullTfCheck():Boolean {
-			return lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && arms.type == Arms.SPIDER && eyes.type == Eyes.FOUR_SPIDER_EYES
-			&& eyes.colour == "red" && rearBody.type == RearBody.ATLACH_NACHA && faceType == Face.SPIDER_FANGS
-			&& hasCoatOfType(Skin.CHITIN) && coatColor == "midnight purple" && hairColor == "midnight purple";
+			return lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && arms.type == Arms.SPIDER && eyes.type == Eyes.FOUR_SPIDER_EYES && ears.type == Ears.ELFIN
+			&& rearBody.type == RearBody.ATLACH_NACHA && faceType == Face.SPIDER_FANGS && hasCoatOfType(Skin.CHITIN)
+			&& eyes.colour == "red" && coatColor == "midnight purple" && hairColor == "midnight purple";
 		}
 		
 		public function atlachNachaScore():int {
@@ -10104,11 +10299,8 @@ use namespace CoC;
 			// Midnight purple hair 1
 			if (hairColor == "midnight purple")
 				score++;
-			// Pussy 1
-			if (hasVagina())
-				score++;
-			// Female 1
-			if (isFemale())
+			// elfin ears
+			if (ears.type == Ears.ELFIN)
 				score++;
 			// Corruption 50+ 1
 			if (cor >= 50)
@@ -10119,6 +10311,9 @@ use namespace CoC;
 			// Insanity +1 (Gained from merging)
 			if (hasPerk(PerkLib.Insanity))
 				score++;
+			// Perk +3 (TransformationImmunity)
+			if (hasPerk(PerkLib.TransformationImmunityAtlach))
+				score+=3;/*
 			// Perk +6 (Arachnid book lung)
 			if (hasPerk(PerkLib.ArachnidBookLung))
 				score+=2;
@@ -10139,10 +10334,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.VenomGlandsEvolved))
 				score++;
 			if (hasPerk(PerkLib.VenomGlandsFinalForm))
-				score++;
-			// Perk +3 (TransformationImmunity)
-			if (hasPerk(PerkLib.TransformationImmunity))
-				score+=3;
+				score++;*/
 			if (isGargoyle()) score = 0;
 			if (hasPerk(PerkLib.ElementalBody)) score = 0;
 			End("Player","racialScore");
@@ -10253,7 +10445,11 @@ use namespace CoC;
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobBerserker))
 				prestigeJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobDruid))
+				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobGreySage))
+				prestigeJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobNecromancer))
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobSeer))
 				prestigeJobs1++;
@@ -11571,13 +11767,21 @@ use namespace CoC;
 				}
 			}//+10 / 10 - 20
 			if (sphinxScore() >= 14) {
-				if (sphinxScore() >= 26) {
+				if (sphinxScore() >= 30) {
 					maxStrCap2 += 110;
 					maxTouCap2 -= 20;
 					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 70;
 					else maxSpeCap2 += 60;
-					maxIntCap2 += 130;
-					maxWisCap2 += 110;
+					maxIntCap2 += 150;
+					maxWisCap2 += 150;
+				}
+				if (sphinxScore() >= 21) {
+					maxStrCap2 += 90;
+					maxTouCap2 -= 20;
+					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 60;
+					else maxSpeCap2 += 50;
+					maxIntCap2 += 100;
+					maxWisCap2 += 95;
 				}
 				else {
 					maxStrCap2 += 50;
@@ -12048,20 +12252,34 @@ use namespace CoC;
 					currentSen += 15;
 				}
 			}
-			if (woodElfScore() >= 17) {
-				if (woodElfScore() >= 25) {
+			if (woodElfScore() >= 22) {
+				if (woodElfScore() >= 31) {
 					maxStrCap2 -= 10;
 					maxTouCap2 -= 15;
-					maxSpeCap2 += 150;
-					maxIntCap2 += 125;
-					maxLibCap2 += 100;
-					currentSen += 50;
+					maxSpeCap2 += 550;
+					maxIntCap2 += 495;
+					maxLibCap2 += 455;
+					currentSen += 80;
+				} else if (woodElfScore() >= 28) {
+					maxStrCap2 -= 10;
+					maxTouCap2 -= 15;
+					maxSpeCap2 += 495;
+					maxIntCap2 += 445;
+					maxLibCap2 += 415;
+					currentSen += 70;
+				} else if (woodElfScore() >= 25) {
+					maxStrCap2 -= 10;
+					maxTouCap2 -= 15;
+					maxSpeCap2 += 430;
+					maxIntCap2 += 405;
+					maxLibCap2 += 375;
+					currentSen += 60;
 				} else {
 					maxStrCap2 -= 10;
 					maxTouCap2 -= 15;
-					maxSpeCap2 += 100;
-					maxIntCap2 += 100;
-					maxLibCap2 += 100;
+					maxSpeCap2 += 375;
+					maxIntCap2 += 355;
+					maxLibCap2 += 335;
 					currentSen += 50;
 				}
 			}
@@ -12320,15 +12538,15 @@ use namespace CoC;
 				}
 			}//+15/10-20
 			if (unicornScore() >= 8) {
-				if (unicornScore() >= 24) {
+				if (unicornScore() >= 27) {
 					maxStrCap2 += 60;
-					maxTouCap2 += 70;
-					maxSpeCap2 += 95;
-					maxIntCap2 += 120;
-				} else if (unicornScore() >= 12) {
-					maxTouCap2 += 35;
-					maxSpeCap2 += 70;
-					maxIntCap2 += 105;
+					maxTouCap2 += 90;
+					maxSpeCap2 += 115;
+					maxIntCap2 += 140;
+				} else if (unicornScore() >= 18) {
+					maxTouCap2 += 55;
+					maxSpeCap2 += 90;
+					maxIntCap2 += 125;
 				} else {
 					maxTouCap2 += 25;
 					maxSpeCap2 += 40;
@@ -12341,15 +12559,15 @@ use namespace CoC;
 				maxIntCap2 += 75;
 			}//+(15)30/(10-20)30-40
 			if (alicornScore() >= 8) {
-				if (alicornScore() >= 24) {
+				if (alicornScore() >= 27) {
 					maxStrCap2 += 60;
 					maxTouCap2 += 70;
+					maxSpeCap2 += 150;
+					maxIntCap2 += 125;
+				} else if (alicornScore() >= 18) {
+					maxTouCap2 += 55;
 					maxSpeCap2 += 120;
-					maxIntCap2 += 110;
-				} else if (alicornScore() >= 12) {
-					maxTouCap2 += 35;
-					maxSpeCap2 += 70;
-					maxIntCap2 += 75;
+					maxIntCap2 += 95;
 				} else {
 					maxTouCap2 += 15;
 					maxSpeCap2 += 50;
@@ -12811,20 +13029,20 @@ use namespace CoC;
 				maxLibCap2 += 150;
 				maxWisCap2 -= 50;
 				currentSen += 50;
-			} else if (score >= 18) {
-				//18 Atlach Nacha(270) +80 Strength +90 Toughness +100 Intelligence +100 Libido -50 wisdom +50 min/max sensitivity
-				maxStrCap2 += 80;
-				maxTouCap2 += 90;
-				maxIntCap2 += 100;
-				maxLibCap2 += 100;
+			} else if (score >= 21) {
+				//21 Atlach Nacha(945) +80 Strength +90 Toughness +100 Intelligence +100 Libido -50 wisdom +50 sensitivity
+				maxStrCap2 += 280;
+				maxTouCap2 += 315;
+				maxIntCap2 += 350;
+				maxLibCap2 += 350;
 				maxWisCap2 -= 50;
-				currentSen += 50;
-			} else if (score >= 10) {
-				//10 Incomplete Atlach Nacha(150) +50 toughness +75 intelligence +20 Libido  -20 wisdom
-				maxTouCap2 += 50;
-				maxIntCap2 += 75;
-				maxLibCap2 += 20;
-				maxWisCap2 -= 20;
+				currentSen += 90;
+			} else if (score >= 14) {
+				//14 Incomplete Atlach Nacha(190) +50 toughness +75 intelligence +20 Libido -20 wisdom
+				maxTouCap2 += 60;
+				maxIntCap2 += 100;
+				maxLibCap2 += 40;
+				maxWisCap2 -= 10;
 			}
 			addStatusValue(StatusEffects.StrTouSpeCounter2, 1, maxStrCap2);
 			addStatusValue(StatusEffects.StrTouSpeCounter2, 2, maxTouCap2);
@@ -12839,11 +13057,12 @@ use namespace CoC;
 			strtouspeintwislibsenCalculation2();
 			if (hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tallness*4))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
-			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':((0.01 * Math.round(inte/2))+(0.01 * Math.round(wis/2))),'tou.mult':((0.01 * Math.round(inte/2))+(0.01 * Math.round(wis/2)))}, 'Enigma', { text: 'Enigma' });
+			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2))),'tou.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2)))}, 'Enigma', { text: 'Enigma' });
 			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
 			if (hasPerk(PerkLib.StrengthOfStone)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tou/2))}, 'Strength of stone', { text: 'Strength of stone' });
 			if (!hasPerk(PerkLib.StrengthOfStone) && statStore.hasBuff('Strength of stone')) statStore.removeBuffs('Strength of stone');
 			var power:Number = 0;
+
 			if (hasPerk(PerkLib.BullStrength)){
 				if (cowScore() >=15) power = lactationQ()*0.001;
 				if (minotaurScore() >=15) power = cumCapacity()*0.001;
@@ -15017,6 +15236,21 @@ use namespace CoC;
 			return max;
 		}
 
+		public function additionalTransformationChances():Number {
+			var additionalTransformationChancesCounter:Number = 0;
+			if (hasPerk(PerkLib.HistoryAlchemist) || hasPerk(PerkLib.PastLifeAlchemist)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Enhancement)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Fusion)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Enchantment)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Refinement)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Saturation)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Perfection)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Creationism)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.TransformationResistance)) additionalTransformationChancesCounter--;
+			return additionalTransformationChancesCounter;
+		}
+
 		public function MutagenBonus(statName: String, bonus: Number):void
 		{
 			var MBCap:Number = 0.2;
@@ -15048,6 +15282,14 @@ use namespace CoC;
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
 			}
+		}
+
+		public function VenomWebCost():Number
+		{
+			var VWC:Number = 5;
+			if (hasPerk(PerkLib.ImprovedVenomGlandEx)) VWC -= 1;
+			if (hasPerk(PerkLib.ImprovedVenomGlandSu)) VWC += 2;
+			return VWC;
 		}
 
 		public override function mf(male:String, female:String):String {

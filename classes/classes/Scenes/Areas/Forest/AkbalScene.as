@@ -479,7 +479,7 @@ public class AkbalScene extends BaseContent
 				outputText("You grin as you flip him over onto his back, staring down at his breeding tool between his legs, firmly erect as it rests on his rather full set of balls. Quite clearly, this \"<i>God</i>\" hasn't had much action for quite some time, hence his aggressive nature towards you. You finger yourself slightly as you examine his feline shaft, coated with layers of barbs that look as though they would be quite painful. Leaning down, you run your fingers over them, smirking as they bend slightly. They may not be enough to harm you, but sex would definitely be unpleasant... unless you happened to have a source of suitable lube nearby.\n\n");
 				outputText("Remembering the cats back home");
 				//({If player has the flexibility Perk}
-				if (player.findPerk(PerkLib.Flexibility) >= 0)
+				if (player.hasPerk(PerkLib.Flexibility))
 					outputText(" and your own experience with such matters");
 				outputText(", you figure you have a pretty good idea where a reliable source of lube could be. You grin as you grab the demon cat by the scruff of his neck, ");
 				//({If strength >60}
@@ -1108,7 +1108,7 @@ public class AkbalScene extends BaseContent
 			//(fighting Akbal disables this scene, but you retain the ability if you rape him after)
 			else if (flags[kFLAGS.PLAYER_RESISTED_AKBAL] == 0 && flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] >= 8 && player.cor > 80)
 			{
-				if (player.cor < 80 || player.findPerk(PerkLib.FireLord) >= 0)
+				if (player.cor < 80 || player.hasPerk(PerkLib.FireLord))
 				{
 					outputText("You awake in your camp feeling dangerous, powerful and fiercely satisfied.");
 				}
@@ -1125,10 +1125,10 @@ public class AkbalScene extends BaseContent
 				}
 			}
 			//[After 4th submission if corruption is greater than 40%]
-			else if (player.findPerk(PerkLib.Whispered) < 0 && player.cor >= 40)
+			else if (!player.hasPerk(PerkLib.Whispered) && player.cor >= 40)
 			{
 				outputText("You awake in your camp with Akbal standing over you, the chorus of voices in your head reaching the apex of an agonizingly beautiful song, and then falling silent.  When you rise, Akbal licks your face before turning away and sprinting into the forest.\n\n");
-				if (player.findPerk(PerkLib.Whispered) < 0)
+				if (!player.hasPerk(PerkLib.Whispered))
 				{
 					outputText("(You are now Whispered.)");
 					player.createPerk(PerkLib.Whispered, 0, 0, 0, 0);
@@ -1241,7 +1241,7 @@ public class AkbalScene extends BaseContent
 			outputText("As you explore the deep woods you begin to hear a soft slurping sound. In this world you know that any strange sound, especially the wet ones, most likely means something dangerous is up ahead... or something dangerous is fucking something a little less dangerous.  As you cautiously advance you spy the pelt of the jaguar demon, Akbal.  The demon jaguar sits in the middle of the clearing with one leg extended as he repeatedly swipes his wide tongue against his hole, probably cleaning up imp spunk thanks to you.  He is so utterly focused on the task that he doesn’t notice your approach.");
 			flags[kFLAGS.AKBAL_BITCH_Q] = 1;
 			//{corruption < 40/choose no}
-			if ((player.cor < 40 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0 && player.findPerk(PerkLib.Pervert) < 0 && player.findPerk(PerkLib.Sadist) < 0) || player.lust < 33)
+			if ((player.cor < 40 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0 && !player.hasPerk(PerkLib.Pervert) && !player.hasPerk(PerkLib.Sadist)) || player.lust < 33)
 				akbitchNoThnx(false);
 			//{corruption > 40}
 			else

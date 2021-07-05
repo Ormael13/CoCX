@@ -28,13 +28,13 @@ package classes.Items.HeadJewelries
 		}
 		
 		override public function playerEquip():HeadJewelry {
-			while (game.player.findPerk(PerkLib.SeersInsight) >= 0) game.player.removePerk(PerkLib.SeersInsight);
+			while (game.player.hasPerk(PerkLib.SeersInsight)) game.player.removePerk(PerkLib.SeersInsight);
 			game.player.createPerk(PerkLib.SeersInsight,0.2,0,0,0);
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():HeadJewelry {
-			while (game.player.findPerk(PerkLib.SeersInsight) >= 0) game.player.removePerk(PerkLib.SeersInsight);
+			while (game.player.hasPerk(PerkLib.SeersInsight)) game.player.removePerk(PerkLib.SeersInsight);
 			return super.playerRemove();
 		}
 		

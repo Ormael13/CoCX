@@ -62,16 +62,7 @@ public class BeeHoney extends Consumable
 			if (Utils.rand(2) == 0) changeLimit++;
 			if (Utils.rand(2) == 0) changeLimit++;
 			if (Utils.rand(2) == 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			changeLimit += player.additionalTransformationChances();
 			//Drink text
 			if (special) {
 				outputText("You uncork the bottle and pour the incredibly strong smelling concentrated honey down your throat.  Its taste is also mighty intense.  All at once you feel the effects of the substance start to course through your body.");
@@ -107,7 +98,8 @@ public class BeeHoney extends Consumable
 				//Libido Reduction
 				if (player.cor > 0 && changes < changeLimit && Utils.rand(1.5) == 0 && player.lib > 40) {
 					outputText(" and settling your overcharged sex-drive a bit.");
-					game.player.dynStats("lib", -3, "lus", -20);
+					dynStats("lus", -20);
+					player.addCurse("lib", -3, 1);
 					changes++;
 				}
 				else if (player.cor > 0) outputText(".");
@@ -155,7 +147,7 @@ public class BeeHoney extends Consumable
 				if (player.hasFur()) outputText(player.skin.coat.color + " " + player.skinDesc);
 				else outputText(player.skinTone + " " + player.skinDesc);
 				outputText(" remains. <b>You've lost a row of breasts!</b>");
-				game.player.dynStats("sen", -5);
+				dynStats("sen", -5);
 				player.removeBreastRow(player.breastRows.length - 1, 1);
 			}
 			//Antennae
@@ -179,7 +171,7 @@ public class BeeHoney extends Consumable
 					pattern:Skin.PATTERN_BEE_STRIPES
 				},Skin.COVERAGE_LOW);
 				// TODO grow chitin text
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
+				if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
 					outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
 					player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
 				}
@@ -220,7 +212,7 @@ public class BeeHoney extends Consumable
 				}
 			}
 			//Gain oviposition!
-			if (changes < changeLimit && player.findPerk(PerkLib.BeeOvipositor) < 0 && player.tailType == Tail.BEE_ABDOMEN && Utils.rand(2) == 0) {
+			if (changes < changeLimit && !player.hasPerk(PerkLib.BeeOvipositor) && player.tailType == Tail.BEE_ABDOMEN && Utils.rand(2) == 0) {
 				outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous bee part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the stinger.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, black, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new bee ovipositor will feel like...");
 				outputText("\n\n(<b>Perk Gained:  Bee Ovipositor - Allows you to lay eggs in your foes!</b>)");
 				player.createPerk(PerkLib.BeeOvipositor, 0, 0, 0, 0);
@@ -289,7 +281,7 @@ public class BeeHoney extends Consumable
 					player.cocks[0].cockLength = Utils.rand(3) + 8;
 					player.cocks[0].cockThickness = 2;
 					player.orgasm();
-					game.player.dynStats("sen", 10);
+					player.addCurse("sen", 10, 1);
 				}
 				else if (player.cocks.length > 1) {
 					var biggest:int = player.biggestCockIndex();
@@ -298,7 +290,7 @@ public class BeeHoney extends Consumable
 					player.cocks[0].cockThickness	+= Math.sqrt(0.2 * player.cocks[biggest].cArea());
 					player.removeCock(biggest, 1);
 					player.orgasm();
-					game.player.dynStats("sen", 5);
+					player.addCurse("sen", 5, 1);
 				}
 				else if (player.cocks[0].cArea() < 100) {
 					outputText("\n\nYour [cock] suddenly becomes rock hard and incredibly sensitive to the touch.  You pull away your [armor], and start to masturbate furiously as it rapidly swells in size.  When the change finally finishes, you realize that your [cock] has both grown much longer and wider!  <b>");
@@ -310,7 +302,7 @@ public class BeeHoney extends Consumable
 					outputText("</b>");
 					player.cocks[0].cockLength += (Utils.rand(3) + 4) * mult; //4 to 6 inches in length
 					player.cocks[0].cockThickness += (0.1 * Utils.rand(5) + 0.5) * mult; //0.5 to 1 inches in thickness
-					game.player.dynStats("sen", 5);
+					player.addCurse("sen", 5, 1);
 				}
 				else if (player.cocks[0].cockType != CockTypesEnum.BEE && player.race() == "bee-morph") {
 					outputText("\n\nYour huge member suddenly starts to hurt, especially the tip of the thing.  At the same time, you feel your length start to get incredibly sensitive and the base of your shaft starts to itch.  You tear off your [armor] and watch in fascination as your [cock] starts to change.  The shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.\n\n");
@@ -319,7 +311,7 @@ public class BeeHoney extends Consumable
 					player.cocks[0].cockType = CockTypesEnum.BEE;
 					player.cocks[0].cockLength += 5 * mult;
 					player.cocks[0].cockThickness += 1 * mult;
-					game.player.dynStats("sen", 15);
+					player.addCurse("sen", 15, 1);
 				}
 				else {
 					if (mult > 0) {
@@ -330,16 +322,18 @@ public class BeeHoney extends Consumable
 					else {
 						outputText("\n\nThe effects of the honey don’t seem to focus on your groin this time and you have a feeling that your " + player.cockDescript(0) + " hasn't grown at all! Perhaps you've reached the upper limit of cock growth from special honey?");
 					}
-					game.player.dynStats("sen", 3);
+					player.addCurse("sen", 3, 1);
 				}
 				if (player.cor >= 5) {
 					outputText("\n\nYour mind feels surprisingly clear of the twisted thoughts that have plagued it as of late, but you find yourself feeling more and more aroused than usual.");
 					var corLoss:int = Math.min(0.1 * player.cor + 5, player.cor);
-					game.player.dynStats("cor", -corLoss, "lib", corLoss); //Lose corruption and gains that much libido
+					dynStats("cor", -corLoss); //Lose corruption and gains that much libido
+					player.MutagenBonus("lib", corLoss);
 				}
 				else {
 					outputText("\n\nYou find your mind is drifting to the thought of using your member to fertilize hundreds and hundreds of eggs every day.  You shake your head, the bizarre fantasy catching you completely off guard.");
-					game.player.dynStats("cor=", 0, "lib", 5);
+					dynStats("cor=", 0);
+					player.MutagenBonus("lib", 5);
 				}
 				if (player.femininity >= 60 || player.femininity <= 40) {
 					outputText("\n\nYour face shifts in shape, becoming more androgynous.");

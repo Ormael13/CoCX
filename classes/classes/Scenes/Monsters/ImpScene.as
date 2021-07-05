@@ -8,6 +8,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Camp.ImpGang;
 import classes.Scenes.UniqueSexScenes;
 
@@ -16,6 +17,7 @@ use namespace CoC;
 	public class ImpScene extends BaseContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		public var campwinions:CampMakeWinions = new CampMakeWinions();
 		
 		public function ImpScene()
 		{
@@ -2303,8 +2305,10 @@ use namespace CoC;
 			outputText("You make a quick work of the imp before dragging the corpse away. That's one less foul creature prowling the realms. ");
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu();
-			addButton(0, "Take Skull", takeSkull);
 			addButton(1, "Leave", cleanupAfterCombat);
+			addButton(2, "Take Skull", takeSkull);
+			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(3, "Harvest", harvestBones);
+			else addButtonDisabled(3, "???", "Req. Prestige Job: Necromancer.");
 		}
 		private function killFeralImp():void {
 			clearOutput();
@@ -2312,14 +2316,24 @@ use namespace CoC;
 			outputText("You make a quick work of the feral imp before dragging the corpse away. That's one less foul creature prowling the realms. ");
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu();
-			addButton(0, "Take Skull", takeSkull2);
 			addButton(1, "Leave", cleanupAfterCombat);
+			addButton(2, "Take Skull", takeSkull2);
+			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(3, "Harvest", harvestBones);
+			else addButtonDisabled(3, "???", "Req. Prestige Job: Necromancer.");
 		}
 		private function takeSkull():void {
 			inventory.takeItem(useables.IMPSKLL, cleanupAfterCombat);
 		}
 		private function takeSkull2():void {
 			inventory.takeItem(useables.FIMPSKL, cleanupAfterCombat);
+		}
+		private function harvestBones():void {
+			var harv:Number = 1 + rand(5);
+			if (player.hasPerk(PerkLib.GreaterHarvest)) harv += 4 + rand(12);
+			if (harv + player.perkv1(PerkLib.PrestigeJobNecromancer) > campwinions.maxDemonBonesStored()) harv = campwinions.maxDemonBonesStored() - player.perkv1(PerkLib.PrestigeJobNecromancer);
+			outputText("You take your time to harvest material. You acquired " + harv + " bones!");
+			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, harv);
+			cleanupAfterCombat();
 		}
 	}
 }

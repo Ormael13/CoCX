@@ -11,6 +11,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.DefiledRavine.CowSuccubus;
 import classes.Scenes.Areas.DefiledRavine.MinoIncubus;
+import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Dungeons.Factory;
 import classes.Scenes.UniqueSexScenes;
 
@@ -20,6 +21,7 @@ import classes.Scenes.UniqueSexScenes;
 	{
 		public var FactoryScene:Factory = new Factory();
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		public var campwinions:CampMakeWinions = new CampMakeWinions();
 		
 		public function DemonScene() 
 		{}
@@ -811,11 +813,21 @@ import classes.Scenes.UniqueSexScenes;
 			outputText(" before dragging the corpse away. That's one less foul creature prowling the realms. ");
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu(); 
-			addButton(0, "Take Skull", takeSkull);
 			addButton(1, "Leave", cleanupAfterCombat);
+			addButton(2, "Take Skull", takeSkull);
+			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(3, "Harvest", harvestBones);
+			else addButtonDisabled(3, "???", "Req. Prestige Job: Necromancer.");
 		}
 		private function takeSkull():void {
 			inventory.takeItem(useables.DEMSKLL, cleanupAfterCombat);
+		}
+		private function harvestBones():void {
+			var harv:Number = 1 + rand(5);
+			if (player.hasPerk(PerkLib.GreaterHarvest)) harv += 4 + rand(12);
+			if (harv + player.perkv1(PerkLib.PrestigeJobNecromancer) > campwinions.maxDemonBonesStored()) harv = campwinions.maxDemonBonesStored() - player.perkv1(PerkLib.PrestigeJobNecromancer);
+			outputText("You take your time to harvest material. You acquired " + harv + " bones!");
+			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, harv);
+			cleanupAfterCombat();
 		}
 	}
 }

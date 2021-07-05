@@ -228,7 +228,7 @@ private function tamaniMaleRepeatEncounter():void {
 	}
 	//(+1 lust per 10 sensitivity)
 	dynStats("lus", player.sens / 10);
-	if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_TAMANI] < 2) flags[kFLAGS.SOUL_SENSE_TAMANI]++;
+	if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_TAMANI] < 2) flags[kFLAGS.SOUL_SENSE_TAMANI]++;
 	if (flags[kFLAGS.SOUL_SENSE_TAMANI] == 2) {
 		flags[kFLAGS.SOUL_SENSE_TAMANI]++;
 		outputText("\n\n<b>You have meet her enough times to be able to find her in the future when using soul sense. (Removes Tamani from forest explore encounters pool!)</b>\n\n");
@@ -685,7 +685,7 @@ internal function tamaniKnockUp():void {
 	flags[kFLAGS.TAMANI_PREGNANCY_COUNT] = 2;
 	var cum:Number = player.cumQ();
 	//Breeder perk is awesome
-	if (player.findPerk(PerkLib.MaraesGiftStud) >= 0) flags[kFLAGS.TAMANI_PREGNANCY_COUNT] += 3;
+	if (player.hasPerk(PerkLib.MaraesGiftStud)) flags[kFLAGS.TAMANI_PREGNANCY_COUNT] += 3;
 	if (cum >=  50 && rand(2) == 0) flags[kFLAGS.TAMANI_PREGNANCY_COUNT]++;
 	if (cum >= 100 && rand(2) == 0) flags[kFLAGS.TAMANI_PREGNANCY_COUNT]++;
 	if (cum >= 200 && rand(2) == 0) flags[kFLAGS.TAMANI_PREGNANCY_COUNT]++;

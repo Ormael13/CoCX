@@ -15,7 +15,7 @@ public class Kraken extends Monster
 		public function krakenConstrict():void {
 			outputText("The " + this.short + "’s tentacles grab you all at once and start to squeeze you!");
 			player.createStatusEffect(StatusEffects.ScyllaBind,0,0,0,0); 
-			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+			if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {
 				player.takePhysDamage(4+rand(6));
 			}
 		}

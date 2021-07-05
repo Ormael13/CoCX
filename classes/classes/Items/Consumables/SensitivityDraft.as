@@ -39,7 +39,7 @@ import classes.internals.Utils;
 				outputText("You shiver and think of how much better it'll make sex and masturbation.");
 			}
 			else outputText("You worry it'll make it harder to resist the attentions of a demon.");
-			player.addCurse("sens", 10);
+			player.addCurse("sens", 10,2);
 			dynStats("lus", 5);
 			player.refillHunger(5);
 			

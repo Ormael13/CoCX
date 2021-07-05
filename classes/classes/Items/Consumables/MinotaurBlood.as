@@ -32,16 +32,7 @@ public class MinotaurBlood extends Consumable {
 		if (rand(2) == 0) changeLimit++;
 		if (rand(3) == 0) changeLimit++;
 		if (rand(3) == 0) changeLimit++;
-		if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+		changeLimit += player.additionalTransformationChances();
 		if (changeLimit == 1) changeLimit = 2;
 		//Temporary storage
 		var temp:Number = 0;
@@ -71,7 +62,7 @@ public class MinotaurBlood extends Consumable {
 			//Chance of speed drop
 			if (rand(2) == 0 && player.str > 50) {
 				outputText("\n\nYou begin to feel that the size of your muscles is starting to slow you down.");
-				dynStats("spe", -1);
+				player.addCurse("spe", -1,1);
 			}
 			changes++;
 		}
@@ -268,7 +259,8 @@ public class MinotaurBlood extends Consumable {
 				if (player.cocks[selectedCockValue].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.");
 				player.cocks[selectedCockValue].cockType = CockTypesEnum.HORSE;
 				player.increaseCock(selectedCockValue, 4);
-				dynStats("sen", 4, "lus", 35);
+				dynStats("lus", 35);
+				player.addCurse("spe", 4,1);
 				player.MutagenBonus("lib", 5);
 				outputText("<b>  You now have a");
 				if (player.horseCocks() > 1) outputText("nother");
@@ -417,7 +409,7 @@ public class MinotaurBlood extends Consumable {
 		// Remove gills
 		if (rand(4) == 0 && player.hasGills() && changes < changeLimit) mutations.updateGills();
 
-		if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) || player.ass.analWetness > 1)) {
+		if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && !player.hasPerk(PerkLib.MaraesGiftButtslut)) || player.ass.analWetness > 1)) {
 			outputText("\n\nYou feel a tightening up in your colon and your [asshole] sucks into itself.  You feel sharp pain at first but that thankfully fades.  Your ass seems to have dried and tightened up.");
 			player.ass.analWetness--;
 			if (player.ass.analLooseness > 1) player.ass.analLooseness--;

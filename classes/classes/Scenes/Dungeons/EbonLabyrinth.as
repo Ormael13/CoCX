@@ -689,10 +689,11 @@ public class EbonLabyrinth extends DungeonAbstractContent
 					" You are completely satisfied with merging with your host or perhaps were you the host? Does it matter? You know it doesn't anymore as you head back into the labyrinth.");
 			//TF list
 			dynStats("cor", 100);
-			player.tailType = Tail.SPIDER_ADBOMEN
-			player.lowerBody = LowerBody.ATLACH_NACHA
+			player.tailType = Tail.SPIDER_ADBOMEN;
+			player.lowerBody = LowerBody.ATLACH_NACHA;
 			if (!player.hasVagina()) player.createVagina();
 			player.vaginaType(5);
+			if (player.tailRecharge < 15) player.tailRecharge = 15;
 			player.createPerk(PerkLib.SpiderOvipositor,0,0,0,0);
 			player.createPerk(PerkLib.TransformationImmunityAtlach,0,0,0,0);
 			player.createPerk(PerkLib.Venomancy,0,0,0,0);

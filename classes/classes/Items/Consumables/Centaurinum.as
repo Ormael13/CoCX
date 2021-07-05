@@ -24,16 +24,7 @@ public class Centaurinum extends Consumable{
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
 		if (rand(2) == 0) changeLimit++;
-		if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+		changeLimit += player.additionalTransformationChances();
 		//Temporary storage
 		var temp2:Number = 0;
 		var temp3:Number = 0;
@@ -74,7 +65,8 @@ public class Centaurinum extends Consumable{
 						temp = player.addHorseCock();
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.DOG) {
@@ -82,7 +74,8 @@ public class Centaurinum extends Consumable{
 						outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
@@ -90,7 +83,8 @@ public class Centaurinum extends Consumable{
 						outputText("\n\nYour [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35)
+						dynStats("lus", 35)
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType.Index > 4) {
@@ -98,14 +92,16 @@ public class Centaurinum extends Consumable{
 						temp = player.addHorseCock();
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
-						dynStats("sen", 4, "lus", 35);
+						dynStats("lus", 35);
+						player.addCurse("sen", 4, 1);
 						player.MutagenBonus("lib", 5);
 					}
 					if (temp3 == 1) outputText("  <b>Your penis has transformed into a horse's!</b>");
 				}
 				//MULTICOCK
 				else {
-					dynStats("sen", 4, "lus", 35);
+					dynStats("lus", 35);
+					player.addCurse("sen", 4, 1);
 					player.MutagenBonus("lib", 5);
 					temp = player.addHorseCock();
 					outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see the skin of your " + player.cockDescript(temp) + " darkening to a mottled brown and black pattern.");
@@ -131,7 +127,8 @@ public class Centaurinum extends Consumable{
 				if (player.cocks.length == 1) {
 					temp2 = player.increaseCock(0, rand(3) + 1);
 					temp = 0;
-					dynStats("sen", 1, "lus", 10);
+					dynStats("lus", 10);
+					player.addCurse("sen", 1, 1);
 				}
 				//Multicock
 				else {
@@ -151,7 +148,8 @@ public class Centaurinum extends Consumable{
 					//Grow smallest cock!
 					//temp2 changes to growth amount
 					temp2 = player.increaseCock(temp, rand(4) + 1);
-					dynStats("sen", 1, "lus", 10);
+					dynStats("lus", 10);
+					player.addCurse("sen", 1, 1);
 				}
 				outputText("\n\n");
 				if (temp2 > 2) outputText("Your " + player.cockDescript(temp) + " tightens painfully, inches of taut horse-flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");

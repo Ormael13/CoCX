@@ -32,7 +32,7 @@ import classes.internals.*;
 			damage += eBaseIntelligenceDamage();
 			player.takeMagicDamage(damage, true);
 			player.createStatusEffect(StatusEffects.Fear, 3, 0, 0, 0);
-			player.addCurse("wis.mult",0.05);
+			player.addCurse("wis.mult", 1,3);
 		}
 		
 		public function WendigoClaw():void {
@@ -71,7 +71,7 @@ import classes.internals.*;
 				player.takePhysDamage(damage, true);
 				//if (!isCursed) player.buff("Wendigo curse").addStats( {"tou.mult": -0.05} ).withText("Wendigo curse!").combatPermanent();
 				//else player.buff("Wendigo curse").addStats( {"tou.mult":-0.05} ).combatPermanent();
-				player.addCurse("tou.mult",0.05);
+				player.addCurse("tou.mult", 1,3);
 				if (!player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger)) player.createStatusEffect(StatusEffects.WendigoPsychosis,168,0,0,0);
 			}
 		}

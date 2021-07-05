@@ -16,15 +16,16 @@ import classes.GlobalFlags.*;
 import classes.Items.*;
 import classes.Scenes.Camp.CampScenes;
 import classes.Scenes.Camp.HarvestMoonScenes;
+import classes.Scenes.Camp.HclassHeavenTribulation;
 import classes.Scenes.Camp.UniqueCampScenes;
-import classes.Scenes.Dreams;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
-import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.LunaFollower;
-import classes.Scenes.Places.WoodElves;
 import classes.Scenes.NPCs.ZenjiScenes;
+import classes.Scenes.Places.WoodElves;
+import classes.Scenes.Holidays;
+import classes.Scenes.Dreams;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
 import classes.lists.BreastCup;
@@ -485,7 +486,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.hasKeyItem("Ruby Orb") >= 0) { //Regain DARK slime core
 				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.DarkSlimeCore) && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == LowerBody.GOO) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
-
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
 					//(Reduces Fluid Addiction to a 24 hour intake requirement).
 					outputText("(<b>Gained New Perk: Dark Slime Core - Moisture craving builds at a greatly reduced rate.</b>\n)");
@@ -947,7 +947,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				//Armor daily event
 				//Scandalous succubus armor and other corruption updates
-				if ((player.armor == armors.SCANSC || player.jewelry == jewelries.DMTO || player.jewelry2 == jewelries.DMTO || player.jewelry3 == jewelries.DMTO || player.jewelry4 == jewelries.DMTO) && player.cor < 100) {
+				if ((player.armor == armors.SCANSC || player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) && player.cor < 100) {
 					outputText("\nCorruption seethes from your defiled equipment into you.\n");
 					player.cor += 5;
 				}
@@ -1035,6 +1035,25 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			//Heaven Tribulations
+			if (player.hasStatusEffect(StatusEffects.TribulationCountdown)) {
+				if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
+					player.removeStatusEffect(StatusEffects.TribulationCountdown);
+					campScenes.HclassHTintro();
+					needNext = true;
+				}
+				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) {
+					player.removeStatusEffect(StatusEffects.TribulationCountdown);
+					campScenes.GclassHTintro();
+					needNext = true;
+				}
+				else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) {
+					player.removeStatusEffect(StatusEffects.TribulationCountdown);
+					campScenes.FclassHTintro();
+					needNext = true;
+				}
+				else player.addStatusValue(StatusEffects.TribulationCountdown, 1, -1);
+			}
 			return needNext;
 		}
 
@@ -1050,10 +1069,20 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				var multiplier:Number = 1.0;
 				if (player.hasPerk(PerkLib.Survivalist)) multiplier -= 0.2;
 				if (player.hasPerk(PerkLib.Survivalist2)) multiplier -= 0.2;
+				if (player.hasPerk(PerkLib.Survivalist3)) multiplier -= 0.2;
+				if (player.hasPerk(PerkLib.HighlyVenomousDiet)) {
+					if (player.maxHunger() > 1600) multiplier += 0.25;
+					else if (player.maxHunger() > 800) multiplier += 0.25;
+					else if (player.maxHunger() > 400) multiplier += 0.25;
+					else if (player.maxHunger() > 200) multiplier += 0.25;
+					else if (player.maxHunger() > 100) multiplier += 0.25;
+					else multiplier += 0.25;
+				}
 				if (player.hasPerk(PerkLib.ManticoreCumAddict)) multiplier *= 2;
 				if (player.hasPerk(PerkLib.HydraRegeneration)) multiplier *= 2;
+				if (player.hasPerk(PerkLib.AxillaryVenomGlands)) multiplier *= 2;
 				//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
-				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 hours with Survivalist perks.
+				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 and 250 hours with Survivalist perks.
 				if (player.hasStatusEffect(StatusEffects.FastingPill)) player.hunger += 2;
 				if (prison.inPrison) {
 					if (player.internalChimeraRating() >= 1) {
@@ -1070,7 +1099,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.hunger > 25) player.hunger -= (0.5 * multiplier);
 					if (player.hunger > 0) player.hunger -= (0.5 * multiplier);
 				}
-				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) player.hunger = 100; //After Valeria x Goo Girl, you'll never get hungry until you "birth" the goo-girl.
+				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) player.hunger = player.maxHunger(); //After Valeria x Goo Girl, you'll never get hungry until you "birth" the goo-girl.
 				if (player.hunger < 50 && player.hasPerk(PerkLib.MagicMetabolism)) {
 					var manaDrain:Number = 0;
 					manaDrain += 50 - player.hunger;
@@ -1233,8 +1262,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Improved venom gland
 			if (flags[kFLAGS.VENOM_TIMES_USED] >= 50 && !player.hasPerk(PerkLib.ImprovedVenomGland)) {
-				outputText("\nYou feel wonderfully healthy. After using your venom so many time your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production. \n\n(<b>Gained Perk: Improved venom gland</b>)\n");
+				outputText("\nYou feel wonderfully healthy. After using your venom so many times your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production. \n\n(<b>Gained Perk: Improved venom gland</b>)\n");
 				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.VENOM_TIMES_USED] >= 125 && !player.hasPerk(PerkLib.ImprovedVenomGlandEx)) {
+				outputText("\nYou feel wonderfully healthy. After using your venom so many times your venom gland development reached it next stage. Allowing for increased capacity, production and lowering usage of venom. \n\n(<b>Gained Perk: Improved venom gland (Ex)</b>)\n");
+				player.createPerk(PerkLib.ImprovedVenomGlandEx, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.VENOM_TIMES_USED] >= 375 && !player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
+				outputText("\nYou feel wonderfully healthy. After using your venom so many times your venom gland started to produce more potent venom. Allowing for increased capacity, production and increased effects of venom. \n\n(<b>Gained Perk: Improved venom gland (Su)</b>)\n");
+				player.createPerk(PerkLib.ImprovedVenomGlandSu, 0, 0, 0, 0);
 			}
 			//Kitsune hunger perk
 			if (player.kitsuneScore() >= 10) { //Check for being a kitsune enough
@@ -1244,7 +1281,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			//Kitsune hunger perk
 			if (player.kitsuneScore() < 10) { //Check for being a kitsune enough
 				if (player.hasPerk(PerkLib.KitsuneEnergyThirst)) {
 					outputText("\nYour mind clears up as you become less of a kitsune. You also lost the hunger for life force only sex could provide you. \n\n(<b>Lost Perk: Kitsune Hunger</b>)\n");
@@ -1371,12 +1407,65 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.PhantomShooting);
 				needNext = true;
 			}
-			//Recharge tail
-			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) { //Spider, Bee, Scorpion, Manticore and Naga Venom Recharge
+			//Recharge venom/web pool
+			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS || player.lowerBody == LowerBody.HYDRA || player.lowerBody == LowerBody.ATLACH_NACHA 
+			|| player.hasPerk(PerkLib.ImprovedVenomGland) || player.hasPerk(PerkLib.VenomGlandsEvolved) || player.hasPerk(PerkLib.VenomousDiet) || player.hasPerk(PerkLib.HighlyVenomousDiet) || player.hasPerk(PerkLib.AxillaryVenomGlands) || player.hasPerk(PerkLib.VenomousAdiposeTissue)) { //Spider, Bee, Scorpion, Manticore, Naga and Altach Nacha Venom Recharge
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
 				if (player.hasPerk(PerkLib.ImprovedVenomGland)) player.tailRecharge += 5;
+				if (player.hasPerk(PerkLib.ImprovedVenomGlandEx)) player.tailRecharge += 15;
+				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) player.tailRecharge += 45;
 				if (player.hasPerk(PerkLib.VenomGlandsEvolved)) player.tailRecharge += 2;
 				if (player.hasPerk(PerkLib.VenomGlandsFinalForm)) player.tailRecharge += 8;
+				if (player.hasPerk(PerkLib.VenomousDiet)) {
+					if (player.hunger > 1400) player.tailRecharge += 30;
+					else if (player.hunger > 1200) player.tailRecharge += 28;
+					else if (player.hunger > 1000) player.tailRecharge += 26;
+					else if (player.hunger > 900) player.tailRecharge += 24;
+					else if (player.hunger > 800) player.tailRecharge += 22;
+					else if (player.hunger > 700) player.tailRecharge += 20;
+					else if (player.hunger > 600) player.tailRecharge += 18;
+					else if (player.hunger > 500) player.tailRecharge += 16;
+					else if (player.hunger > 400) player.tailRecharge += 14;
+					else if (player.hunger > 300) player.tailRecharge += 12;
+					else if (player.hunger > 200) player.tailRecharge += 10;
+					else if (player.hunger > 150) player.tailRecharge += 8;
+					else if (player.hunger > 100) player.tailRecharge += 6;
+					else if (player.hunger > 50) player.tailRecharge += 4;
+					else player.tailRecharge += 2;
+				}
+				if (player.hasPerk(PerkLib.HighlyVenomousDiet)) {
+					if (player.maxHunger() > 1600) player.tailRecharge += 30;
+					else if (player.maxHunger() > 800) player.tailRecharge += 25;
+					else if (player.maxHunger() > 400) player.tailRecharge += 20;
+					else if (player.maxHunger() > 200) player.tailRecharge += 15;
+					else if (player.maxHunger() > 100) player.tailRecharge += 10;
+					else player.tailRecharge += 5;
+				}
+				if (player.hasPerk(PerkLib.VenomousAdiposeTissue)) {
+					if (player.tou > 20000) player.tailRecharge += 20;
+					else if (player.tou > 10000) player.tailRecharge += 18;
+					else if (player.tou > 5000) player.tailRecharge += 16;
+					else if (player.tou > 2000) player.tailRecharge += 14;
+					else if (player.tou > 1000) player.tailRecharge += 12;
+					else if (player.tou > 500) player.tailRecharge += 10;
+					else if (player.tou > 200) player.tailRecharge += 8;
+					else if (player.tou > 100) player.tailRecharge += 6;
+					else if (player.tou > 50) player.tailRecharge += 4;
+					else player.tailRecharge += 2;
+					if (player.thickness > 150) player.tailRecharge += 20;
+					else if (player.thickness > 100) player.tailRecharge += 15;
+					else if (player.thickness > 50) player.tailRecharge += 10;
+					else player.tailRecharge += 5;
+				}
+				if (player.faceType == Face.SNAKE_FANGS) player.tailRecharge += 4;
+				if (player.faceType == Face.SPIDER_FANGS) player.tailRecharge += 4;
+				if (player.tailType == Tail.BEE_ABDOMEN) player.tailRecharge += 6;
+				if (player.tailType == Tail.SPIDER_ADBOMEN) player.tailRecharge += 6;
+				if (player.tailType == Tail.SCORPION) player.tailRecharge += 6;
+				if (player.tailType == Tail.MANTICORE_PUSSYTAIL) player.tailRecharge += 8;
+				if (player.lowerBody == LowerBody.HYDRA) player.tailRecharge += 8;
+				if (player.lowerBody == LowerBody.ATLACH_NACHA) player.tailRecharge *= 2;
+				if (player.hasPerk(PerkLib.AxillaryVenomGlands)) player.tailRecharge *= 2;
 				player.tailVenom += player.tailRecharge;
 				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 			}
@@ -1807,7 +1896,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Hinezumi Coat
 			if (player.mouseScore() >= 12 && player.lowerBody == LowerBody.HINEZUMI && player.arms.type == Arms.HINEZUMI && player.tailType == Tail.HINEZUMI && !player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-				outputText("\nYour body suddenly coats itself with fire turning incandescent as your lust and body heat spikes up reaching a critical point, this must be the infamous hinezumi coat. You gasp as your lust reaches a critical point. The flare of desire burns in you and you need to vent it one way or another. ");
+				outputText("\nYour body suddenly coats itself with fire turning incandescent as your lust and body heat spikes up reaching a critical point, this must be the infamous hinezumi coat. You gasp as your lust begins to overwelm you, the flare of desire burns in you and you need to vent it one way or another. ");
 				outputText("Feeling inspired you try and expel it through kick and punch on a tree and indeed it works the more you discharge your flames the clearer your mind get. Your hinezumi coat finally stable you sigh in relief.\n\n<b>(Gained Hinezumi Coat!)</b>\n");
 				player.createStatusEffect(StatusEffects.HinezumiCoat, 1, 0, 0, 0);
 				needNext = true;
@@ -1917,26 +2006,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				inventory.takeItem(vehicles.HB_MECH, null);
 				needNext = true;
 			}
-			//H class Heaven Tribulation
-			//		if (player.level >= 24 && player.hasPerk(PerkLib.SoulApprentice) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
-			//			outputText("\nPLACEHOLDER TEXT 1\n");
-			//			player.createStatusEffect(StatusEffects.TribulationCountdown, 25, 0, 0, 0);
-			//			needNext = true;
-			//		}
-			//		if (player.hasStatusEffect(StatusEffects.TribulationCountdown)) {
-			//			if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
-			//				player.removeStatusEffect(StatusEffects.TribulationCountdown);
-			//				outputText("\nAN ENDURANCE FIGHT STARTS HERE\n");
-			//				startCombat(new HclassHeavenTribulation());
-			//	needNext = true;
-			//			}
-			//	else if (player.statusEffectv1(StatusEffects.TribulationCountdown) <= 1 && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
-			//		player.removeStatusEffect(StatusEffects.TribulationCountdown);
-			//		outputText("\nYou feel a tingling in your nethers... at last full sensation has returned to your groin.  <b>You can masturbate again!</b>\n");
-			//		needNext = true;
-			//	}
-			//			else player.addStatusValue(StatusEffects.TribulationCountdown, 1, -1);
-			//		}
 			//Hot Spring
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 1 && rand(4) == 0) {
 				outputText("\nWhile wandering around the border of your camp, you randomly kick a rock and a stream of water sprays out. Surprised, you touch the water, discovering it to be startlingly hot. An idea comes to your mind. You get a shovel, digging around the fountaining water which soon turns into a small pool. This is the perfect place to build a hot spring. You smile, delighted at the idea of being able to take frequent baths in it! You resolve to get to work as soon as possible.");
@@ -2868,7 +2937,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					EngineCore.doNext(playerMenu);
 					return true;
 				}
-				if (player.lib > 50 || player.lust > 40) { //Randomly generated dreams here
+				if (player.lib > (player.libStat.max * 0.5) || player.lust > (player.maxLust() * 0.4)) { //Randomly generated dreams here
 					if (dreams.dreamSelect()) return true;
 				}
 			}

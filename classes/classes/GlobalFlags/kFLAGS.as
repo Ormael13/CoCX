@@ -1935,7 +1935,7 @@ public static const UNKNOWN_FLAG_NUMBER_01926:int                               
 public static const UNKNOWN_FLAG_NUMBER_01927:int                                   = 1927;
 public static const UNKNOWN_FLAG_NUMBER_01928:int                                   = 1928;
 public static const UNKNOWN_FLAG_NUMBER_01929:int                                   = 1929;
-public static const UNKNOWN_FLAG_NUMBER_01930:int                                   = 1930;
+public static const AHRI_FOLLOWER:int                                   			= 1930;
 public static const UNKNOWN_FLAG_NUMBER_01931:int                                   = 1931;
 public static const UNKNOWN_FLAG_NUMBER_01932:int                                   = 1932;
 public static const UNKNOWN_FLAG_NUMBER_01933:int                                   = 1933;
@@ -1981,7 +1981,7 @@ public static const UNKNOWN_FLAG_NUMBER_01972:int                               
 public static const UNKNOWN_FLAG_NUMBER_01973:int                                   = 1973;
 public static const TRUE_DEMONS_KILLED:int                                   		= 1974;
 public static const WRATH_GIANT_SLAYER_GOBLIN_MECH:int                              = 1975;
-public static const UNKNOWN_FLAG_NUMBER_01976:int                                   = 1976;
+public static const AUTO_FLIGHT:int                                   				= 1976;
 public static const UNKNOWN_FLAG_NUMBER_01977:int                                   = 1977;
 public static const UNKNOWN_FLAG_NUMBER_01978:int                                   = 1978;
 public static const UNKNOWN_FLAG_NUMBER_01979:int                                   = 1979;
@@ -2734,8 +2734,8 @@ public static const CODEX_ENTRY_2:int                                   			= 272
 public static const CODEX_ENTRY_3:int                                  			 	= 2726;//squirrel
 public static const CODEX_ENTRY_4:int                                   			= 2727;//cave wyrm
 public static const CODEX_ENTRY_TROLLS:int                                   		= 2728;
-public static const CODEX_ENTRY_02729:int                                   		= 2729;
-public static const CODEX_ENTRY_02730:int                                   		= 2730;
+public static const CODEX_ENTRY_02729:int                                   		= 2729;//dark elfs
+public static const CODEX_ENTRY_02730:int                                   		= 2730;//light elfs
 public static const UNKNOWN_FLAG_NUMBER_02731:int                                   = 2731;
 public static const UNKNOWN_FLAG_NUMBER_02732:int                                   = 2732;
 public static const UNKNOWN_FLAG_NUMBER_02733:int                                   = 2733;
@@ -2967,7 +2967,7 @@ public static const UNKNOWN_FLAG_NUMBER_02958:int                               
 public static const UNKNOWN_FLAG_NUMBER_02959:int                                   = 2959;
 public static const APEX_SELECTED_RACE:int                                   		= 2960;
 public static const UNKNOWN_FLAG_NUMBER_02961:int                                   = 2961;
-public static const UNKNOWN_FLAG_NUMBER_02962:int                                   = 2962;
+public static const NEWPERKSDISPLAY:int                                   			= 2962;//Perks Display cleanup
 public static const MUTATIONS_SPOILERS:int                                   		= 2963;//Mutations Help.
 public static const LVL_UP_FAST:int                                   				= 2964;//Bulk/Manual Incremental/Singular Levelling
 public static const SECONDARY_STATS_SCALING:int                                     = 2965;

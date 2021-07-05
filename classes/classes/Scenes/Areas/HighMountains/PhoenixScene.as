@@ -176,7 +176,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\n\"<i>Heeeey,</i>\" the phoenix whines squirming to get out of your grip.");
 			outputText("\n\nYou maintain your grasp on her long, purple lizard dick and tell her that you’re doing her a favor: you’re going to let her fuck your " + vaginaDescript() + ". She stops struggling at the invitation.");
 			outputText("\n\n\"<i>Oh. Well,</i>\" she says, smirking slightly. \"<i>If you want a bit of phoenix seed... I guess I wouldn’t mind a chance at being a daddy.</i>\"\n\n");
-			if (player.findPerk(PerkLib.BroodMother) >= 0 && player.pregnancyType > 0) outputText("You assure her she will be soon");
+			if (player.hasPerk(PerkLib.BroodMother) && player.pregnancyType > 0) outputText("You assure her she will be soon");
 			else outputText("You grin at her");
 			outputText(" and strip out of your [armor]. The phoenix, a bit more dominant than you might have liked, roughly grabs your [chest], pinching your nipples as she takes over wringing her cock from you. Oh well. You decide to roll with it and slide a hand down to your [vagina], stroking your pussy as your lover warms up.");
 			outputText("\n\nWhen she’s nice and hard, you give the phoenix a little push onto her back and clamber into her lap, lining her lizard prick up with your [vagina]. Before you can get properly situated, though, the girl pulls you down onto her cock, impaling you up to her hilt in one massive thrust. You roll your head back and scream, a mix of pleasure and burning pain shooting through you as her white-hot rod slams into your innermost depths.");
@@ -273,7 +273,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\nYou gingerly take a couple of steps, all too aware of the stinging of your stretched ass, before stopping as something begins to seep down your inner thigh. Your heart sinks as you reach back behind you, fingers trailing between your legs until you find a streak of wet, still slightly warm. ");
 			outputText("\n\nAlmost too afraid to look, you bring your fingers back around to find them covered with a layer of cum, groaning out loud as you quickly piece together that the phoenix must’ve decided to blow her last load in your now-impossibly sensitive ass. The gentle sloshing in your gut coupled with how much warm spunk is now leaking out of your abused body leaves you to suspect that the girl took her time with you. After grabbing your scattered gear as quickly as possible and finding your gem pouch a little lighter, you start to hobble back to camp, desperate for some rest after this ordeal. ");
 			outputText("\n\nToo pained to redress yourself, the spunk dripping from you marks out your path back down the mountain, almost as if the gods are making sure you have a way of finding the route back for another round.");
-			player.addCurse("str",2);
+			player.addCurse("str",2,2);
 			player.sexReward("cum","Vaginal");
 			player.sexReward("cum","Anal");
 			dynStats("tou", -2);
@@ -304,7 +304,7 @@ public class PhoenixScene extends BaseContent
 			}
 			if (player.gender == 0) outputText("r body spasms with pleasure");
 			outputText(". \"<i>I hope you've learned your lesson,</i>\" she says as she pulls her cock out of your leaking backdoor. She wipes her cock clean on your [armor], before she moves her loincloth back in place. \"<i>See you around!</i>\" The phoenix says with a wink as she walks off.");
-			player.addCurse("str",1);
+			player.addCurse("str",1,2);
 			player.sexReward("cum","Anal");
 			cleanupAfterCombat();
 		}

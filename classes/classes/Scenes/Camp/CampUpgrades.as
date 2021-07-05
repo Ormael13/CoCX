@@ -115,15 +115,15 @@ public function buildmisc1Menu():void {
 	if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4 || flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) addButton(1, "2nd Warehouse", warehousegranary).hint("Build 2nd part of the Warehouse to expand your storage space. (Req. 250 fatigue)");
 	if (player.kitsuneScore() >= 6 && (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] < 1 || flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 1 || flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 2)) addButton(2, "Shrine", kitsuneshrine).hint("Build up kitsune shrine at the camp. (Req. 300 fatigue)");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] == 3) {
-		if (player.findPerk(PerkLib.StarSphereMastery) < 0 && !(player.hasItem(useables.GLDSTAT))) addButtonDisabled(2, "Shrine", "You need to have Kitsune Statue and your own Star Sphere to finish the shrine!");
-		if (player.findPerk(PerkLib.StarSphereMastery) >= 0 && player.hasItem(useables.GLDSTAT)) addButton(2, "Shrine", kitsuneshrine2).hint("Finish up kitsune shrine at the camp.");
+		if (!player.hasPerk(PerkLib.StarSphereMastery) && !(player.hasItem(useables.GLDSTAT))) addButtonDisabled(2, "Shrine", "You need to have Kitsune Statue and your own Star Sphere to finish the shrine!");
+		if (player.hasPerk(PerkLib.StarSphereMastery) && player.hasItem(useables.GLDSTAT)) addButton(2, "Shrine", kitsuneshrine2).hint("Finish up kitsune shrine at the camp.");
 	}
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 2 || flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] == 3) addButton(3, "Hot Spring", hotspring).hint("Build up hot spring at the camp. (Req. 100 fatigue)");
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 0) {
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2) addButton(4, "Sparring Ring", sparringRing).hint("Build up sparring ring at the camp. (Unlock sparring option for all camp members that have this option)(Req. 50 fatigue)");
 		//if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 3) addButton(4, "Sparring Ring", sparringRing).hint("Build up sparring ring at the camp. (Unlock sparring option for all camp members that have this option)(Req. 50 fatigue)");
 	}
-	if (player.findPerk(PerkLib.JobElementalConjurer) >= 0 && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 8) addButton(5, "Arcane Circle", arcaneCircle).hint("Build an arcane circle at the camp. (Unlock elementals summons related options)(Req. 50 fatigue, enough stones, mana and blood)");
+	if (player.hasPerk(PerkLib.JobElementalConjurer) && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 8) addButton(5, "Arcane Circle", arcaneCircle).hint("Build an arcane circle at the camp. (Unlock elementals summons related options)(Req. 50 fatigue, enough stones, mana and blood)");
 	if (player.inte >= 50 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) addButton(6, "Magic Ward", magicWard).hint("Set up a Magic Ward around the camp. (Req. 200 fatigue)");
 	if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1) addButton(7, "Dam", dam).hint("Build up a dam on the steam next to the camp. (Req. 200 fatigue * tier of built dam)");
 	if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1 && flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) addButton(8, "Fishery", fishery).hint("Build up a fishery on the steam next to the camp. (Req. 200 fatigue)");
@@ -1212,7 +1212,7 @@ public function arcaneCircle():void {
 			return; 
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 1) { 
-			if (player.findPerk(PerkLib.ElementalContractRank4) >= 0) {
+			if (player.hasPerk(PerkLib.ElementalContractRank4)) {
 				buildSecondArcaneCircle();
 				return; 
 			}
@@ -1222,7 +1222,7 @@ public function arcaneCircle():void {
 			}
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) { 
-			if (player.findPerk(PerkLib.ElementalContractRank8) >= 0) {
+			if (player.hasPerk(PerkLib.ElementalContractRank8)) {
 				buildThirdArcaneCircle();
 				return;
 			}
@@ -1232,7 +1232,7 @@ public function arcaneCircle():void {
 			}
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) { 
-			if (player.findPerk(PerkLib.ElementalContractRank12) >= 0) {
+			if (player.hasPerk(PerkLib.ElementalContractRank12)) {
 				buildFourthArcaneCircle();
 				return;
 			}
@@ -1242,7 +1242,7 @@ public function arcaneCircle():void {
 			}
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) { 
-			if (player.findPerk(PerkLib.ElementalContractRank16) >= 0) {
+			if (player.hasPerk(PerkLib.ElementalContractRank16)) {
 				buildFifthArcaneCircle();
 				return;
 			}
@@ -1252,7 +1252,7 @@ public function arcaneCircle():void {
 			} 
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 5) { 
-			if (player.findPerk(PerkLib.ElementalContractRank20) >= 0) {
+			if (player.hasPerk(PerkLib.ElementalContractRank20)) {
 				buildSixthArcaneCircle();
 				return;
 			}
@@ -1262,7 +1262,7 @@ public function arcaneCircle():void {
 			} 
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 6) { 
-			if (player.findPerk(PerkLib.ElementalContractRank24) >= 0) {
+			if (player.hasPerk(PerkLib.ElementalContractRank24)) {
 				buildSeventhArcaneCircle();
 				return;
 			}
@@ -1272,7 +1272,7 @@ public function arcaneCircle():void {
 			} 
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 7) { 
-			if (player.findPerk(PerkLib.ElementalContractRank28) >= 0) {
+			if (player.hasPerk(PerkLib.ElementalContractRank28)) {
 				buildEighthArcaneCircle();
 				return;
 			}

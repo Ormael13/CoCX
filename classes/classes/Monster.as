@@ -422,8 +422,10 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.GrandArchmage)) temp += 60;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle)) temp += 75;
 			if (hasPerk(PerkLib.GrandArchmage3rdCircle)) temp += 90;
-			if (hasPerk(PerkLib.GreyMage)) temp += 120;
-			if (hasPerk(PerkLib.GreyArchmage)) temp += 150;
+			if (hasPerk(PerkLib.GreyMageApprentice)) temp += 20;
+			if (hasPerk(PerkLib.GreyMage)) temp += 40;
+			if (hasPerk(PerkLib.GreyArchmage)) temp += 80;
+			if (hasPerk(PerkLib.GrandGreyArchmage)) temp += 160;
 			if (hasPerk(PerkLib.InhumanDesireI)) temp += Math.round(this.lib * 3 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.JobCourtesan)) temp += 60;
 			if (hasPerk(PerkLib.JobSeducer)) temp += 30;
@@ -696,9 +698,11 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.GrandArchmage) && inte >= 125) temp += 225;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle) && inte >= 150) temp += 270;
 			if (hasPerk(PerkLib.GrandArchmage3rdCircle) && inte >= 175) temp += 315;
+			if (hasPerk(PerkLib.GrandGreyArchmage) && inte >= 225) temp += 600;
 			if (hasPerk(PerkLib.GrandMage) && inte >= 75) temp += 135;
-			if (hasPerk(PerkLib.GreyArchmage) && inte >= 225) temp += 600;
-			if (hasPerk(PerkLib.GreyMage) && inte >= 200) temp += 450;
+			if (hasPerk(PerkLib.GreyArchmage) && inte >= 175) temp += 450;
+			if (hasPerk(PerkLib.GreyMage) && inte >= 125) temp += 300;
+			if (hasPerk(PerkLib.GreyMageApprentice) && inte >= 75) temp += 150;
 			if (hasPerk(PerkLib.Mage) && inte >= 50) temp += 90;
 			if (hasPerk(PerkLib.Spellpower) && inte >= 50) temp += 45;
 			if (hasPerk(PerkLib.JobSorcerer)) temp += 45;
@@ -2070,7 +2074,7 @@ import flash.utils.getQualifiedClassName;
 		 */
 		protected function performCombatAction():void
 		{
-			if (!abilities) {
+			if (!abilities || abilities.length == 0) {
 				// Old monster, has no tagged abilities configured
 				abilities = [
 					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
@@ -2427,8 +2431,10 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.DraconicHeartFinalForm)) manaRecovery += 5;
 				if (hasPerk(PerkLib.WarMageApprentice)) manaRecovery += 10;
 				if (hasPerk(PerkLib.WarMageAdept)) manaRecovery += 15;
+				if (hasPerk(PerkLib.GreyMageApprentice)) manaRecoveryMulti += 0.25;
 				if (hasPerk(PerkLib.GreyMage)) manaRecoveryMulti += 0.5;
-				if (hasPerk(PerkLib.GreyArchmage)) manaRecoveryMulti += 1.5;
+				if (hasPerk(PerkLib.GreyArchmage)) manaRecoveryMulti += 0.75;
+				if (hasPerk(PerkLib.GrandGreyArchmage)) manaRecoveryMulti += 1;
 				if (hasPerk(PerkLib.ManaAffinityI)) manaRecoveryMulti += (0.2 * (1 + newGamePlusMod()));
 				manaRecovery *= manaRecoveryMulti;
 				addMana(manaRecovery);
@@ -2865,7 +2871,8 @@ import flash.utils.getQualifiedClassName;
 				}
 				//Deal damage if still wounded.
 				else {
-					var store2:Number = int(50+(player.inte/10));
+					var store2:Number = int(50 + (player.inte / 10));
+					store2 = Math.round(store2 * SceneLib.combat.fireDamageBoostedByDao());
 					store2 = SceneLib.combat.doFireDamage(store2);
 					if(plural) outputText(capitalA + short + " burn from lingering immolination after-effect. <b>(<font color=\"#800000\">" + store2 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering immolination after-effect. <b>(<font color=\"#800000\">" + store2 + "</font>)</b>\n\n");
@@ -2883,6 +2890,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store4:Number = (player.str + player.spe + player.tou) * 2.5;
+					store4 = Math.round(store4 * SceneLib.combat.fireDamageBoostedByDao());
 					store4 += maxHP() * statusEffectv2(StatusEffects.BurnDoT);
 					store4 = SceneLib.combat.doFireDamage(store4);
 					if(plural) outputText(capitalA + short + " burn from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
@@ -2901,6 +2909,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store8:Number = (player.str + player.spe + player.tou) * 2.5;
+					store8 = Math.round(store8 * SceneLib.combat.fireDamageBoostedByDao());
 					store8 += maxHP() * statusEffectv2(StatusEffects.BurnDoT2);
 					store8 = SceneLib.combat.doFireDamage(store8);
 					if(plural) outputText(capitalA + short + " burn from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store8 + "</font>)</b>\n\n");
@@ -2919,6 +2928,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store6:Number = (player.spe + player.inte) * SceneLib.combat.soulskillMod() * 0.5;
+					store6 = Math.round(store6 * SceneLib.combat.fireDamageBoostedByDao());
 					store6 = SceneLib.combat.doFireDamage(store6);
 					if(plural) outputText(capitalA + short + " burn from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
@@ -2958,6 +2968,7 @@ import flash.utils.getQualifiedClassName;
 					//Deal damage if still wounded.
 					else {
 						var store12:Number = (player.str + player.spe + player.tou) * 2.5;
+						store12 = Math.round(store12 * SceneLib.combat.iceDamageBoostedByDao());
 						store12 += maxHP() * statusEffectv2(StatusEffects.FrostburnDoT);
 						if(plural) outputText(capitalA + short + " are hurt by lingering Frostburn after-effect. ");
 						else outputText(capitalA + short + " is hurt by lingering Frostburn after-effect. ");
@@ -3108,7 +3119,7 @@ import flash.utils.getQualifiedClassName;
 					var store11:Number = 0;
 					store11 += statusEffectv2(StatusEffects.ConsumingDarkness);
 					store11 *= 0.2;
-					store11 = Math.round(store11);
+					store11 = Math.round(store11 * SceneLib.combat.darknessDamageBoostedByDao());
 					store11 = SceneLib.combat.doDarknessDamage(store11, true, true);
 					outputText("\n\n");
 				}
@@ -3204,10 +3215,10 @@ import flash.utils.getQualifiedClassName;
 			return 8; //This allows different monsters to delay the player by different amounts of time after a combat loss. Normal loss causes an eight hour blackout
 		}
 		public function prepareForCombat():void {
-			var bonusStatsAmp:Number = 0.2;
+			var bonusStatsAmp:Number = 0.6;
 			if (hasPerk(PerkLib.MantislikeAgility)) this.speStat.core.value += (10 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.MantislikeAgilityEvolved)) this.speStat.core.value += (20 * (1 + newGamePlusMod()));
-			if (level > 25) bonusStatsAmp += 0.1*((int)(level-1)/25);
+			if (level > 25) bonusStatsAmp += 0.3*((int)(level-1)/25);
 			bonusAscStr += bonusStatsAmp * str * newGamePlusMod();
 			bonusAscTou += bonusStatsAmp * tou * newGamePlusMod();
 			bonusAscSpe += bonusStatsAmp * spe * newGamePlusMod();
@@ -3239,9 +3250,9 @@ import flash.utils.getQualifiedClassName;
 			this.libStat.core.value += multiStatsAmp2;
 			statStore.addBuff("sens", multiStatsAmp2, "AscensionMultiplier", {});
 			bonusAscMaxHP += bonusAscStr + bonusAscTou + bonusAscSpe + bonusAscInt + bonusAscWis + bonusAscLib + bonusAscSen;
-			if (level > 10) bonusAscMaxHP *= (int)(level / 10 + 1);
-			weaponAttack += (1 + (int)(weaponAttack / 5)) * newGamePlusMod();
-			if (weaponRangeAttack > 0) weaponRangeAttack += (1 + (int)(weaponRangeAttack / 5)) * newGamePlusMod();
+			if (level > 10) bonusAscMaxHP *= (int)((level / 10 + 1) * 3);
+			weaponAttack += (1 + (int)(weaponAttack / 5)) * 3 * newGamePlusMod();
+			if (weaponRangeAttack > 0) weaponRangeAttack += (1 + (int)(weaponRangeAttack / 5)) * 3 * newGamePlusMod();
 			if (hasPerk(PerkLib.ToughHide)) {
 				armorDef += (2 * (1 + newGamePlusMod()));
 				armorMDef += (1 * (1 + newGamePlusMod()));
@@ -3320,8 +3331,8 @@ import flash.utils.getQualifiedClassName;
 					armorMDef += (1 * (1 + newGamePlusMod()));
 				}
 			}*/
-			armorDef += ((int)(1 + armorDef / 10)) * newGamePlusMod();
-			armorMDef += ((int)(1 + armorMDef / 10)) * newGamePlusMod();
+			armorDef += ((int)(1 + armorDef / 10)) * 3 * newGamePlusMod();
+			armorMDef += ((int)(1 + armorMDef / 10)) * 3 * newGamePlusMod();
 			if (hasPerk(PerkLib.EnemyHugeType)) {
 				this.strStat.core.value += Math.round(this.strStat.core.value * 0.1);
 				this.touStat.core.value += Math.round(this.touStat.core.value * 0.1);

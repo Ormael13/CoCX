@@ -44,21 +44,11 @@ public class PlayerInfo extends BaseContent {
 			bodyStats += ")\n";
 		}
 		bodyStats += "<b>Times Transformed:</b> " + flags[kFLAGS.TIMES_TRANSFORMED] + "\n";
-		if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.tailType == Tail.SPIDER_ADBOMEN || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS) {
-			if (player.tailType == Tail.SPIDER_ADBOMEN && player.faceType != Face.SNAKE_FANGS && player.faceType != Face.SPIDER_FANGS)
-				bodyStats += "<b>Web:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
-			else if (player.tailType == Tail.SPIDER_ADBOMEN && (player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS))
-				bodyStats += "<b>Venom/Web:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
-			else if (player.tailType != Tail.SPIDER_ADBOMEN)
-				bodyStats += "<b>Venom:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
-		}
 		bodyStats += "<b>Tone:</b> " + player.tone + " / " + player.maxToneCap() + "\n";
 		bodyStats += "<b>Thickness:</b> " + player.thickness + " / " + player.maxThicknessCap() + "\n";
 		bodyStats += "<b>Feminity:</b> " + player.femininity + " / 100\n";
-		
 		bodyStats += "<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n";
 		bodyStats += "<b>Anal Looseness:</b> " + Math.round(player.ass.analLooseness) + "\n";
-		
 		bodyStats += "<b>Fertility (Base) Rating:</b> " + Math.round(player.fertility) + "\n";
 		bodyStats += "<b>Fertility (With Bonuses) Rating:</b> " + Math.round(player.totalFertility()) + "\n";
 		if (player.cumQ() > 0)
@@ -67,14 +57,12 @@ public class PlayerInfo extends BaseContent {
 		else bodyStats += "<b>Cum Production:</b> " + addComma(Math.round(player.cumQ())) + "mL\n";
 		if (player.lactationQ() > 0)
 			bodyStats += "<b>Milk Production:</b> " + addComma(Math.round(player.lactationQ())) + "mL\n";
-
 		if (player.hasStatusEffect(StatusEffects.Feeder)) {
 			bodyStats += "<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusEffectv2(StatusEffects.Feeder);
 			if (player.statusEffectv2(StatusEffects.Feeder) >= 72)
 				bodyStats += " (Too long! Sensitivity Increasing!)";
 			bodyStats += "\n";
 		}
-
 		bodyStats += "<b>Pregnancy Speed Multiplier:</b> ";
 		var preg:Number = 1;
 		if (player.hasPerk(PerkLib.Diapause))
@@ -87,30 +75,22 @@ public class PlayerInfo extends BaseContent {
 			if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) preg++;
 			bodyStats += preg + "\n";
 		}
-
 		if (player.cocks.length > 0) {
 			bodyStats += "<b>Total Cocks:</b> " + player.cocks.length + "\n";
-
 			var totalCockLength:Number = 0;
 			var totalCockGirth:Number  = 0;
-
 			for (var i:Number = 0; i < player.cocks.length; i++) {
 				totalCockLength += player.cocks[i].cockLength;
 				totalCockGirth += player.cocks[i].cockThickness
 			}
-
 			bodyStats += "<b>Total Cock Length:</b> " + Math.round(totalCockLength) + " inches\n";
 			bodyStats += "<b>Total Cock Girth:</b> " + Math.round(totalCockGirth) + " inches\n";
 			bodyStats += "<b>Hours since last cum:</b> " + player.hoursSinceCum + "\n";
-
 		}
-
 		if (player.vaginas.length > 0)
 			bodyStats += "<b>Vaginal Capacity:</b> " + Math.round(player.vaginalCapacity()) + "\n" + "<b>Vaginal Looseness:</b> " + Math.round(player.looseness()) + "\n";
-
 		if (player.hasPerk(PerkLib.SpiderOvipositor) || player.hasPerk(PerkLib.BeeOvipositor))
 			bodyStats += "<b>Ovipositor Total Egg Count: " + player.eggs() + "\nOvipositor Fertilized Egg Count: " + player.fertilizedEggs() + "</b>\n";
-
 		if (player.hasStatusEffect(StatusEffects.SlimeCraving)) {
 			if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18)
 				bodyStats += "<b>Slime Craving:</b> Active! You are currently losing strength and speed.  You should find fluids.\n";
@@ -121,7 +101,6 @@ public class PlayerInfo extends BaseContent {
 					bodyStats += "<b>Slime Stored:</b> " + (17 - player.statusEffectv1(StatusEffects.SlimeCraving)) + " hours until you start losing strength.\n";
 			}
 		}
-
 		if (bodyStats != "")
 			outputText("\n<b><u>Body Stats</u></b>\n" + bodyStats);
 		// End Body Stats
@@ -161,7 +140,7 @@ public class PlayerInfo extends BaseContent {
 		miscStats += "<b>Advanced Jobs:</b> " + player.currentAdvancedJobs() + " / " + player.maxAdvancedJobs() + "\n";
 		miscStats += "<b>Hidden Jobs:</b> " + player.currentHiddenJobs() + " / " + player.maxHiddenJobs() + "\n";
 		miscStats += "<b>Prestige Jobs:</b> " + player.currentPrestigeJobs() + " / " + player.maxPrestigeJobs() + "\n";
-		
+
 		if (player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter1)) {
 			miscStats += "<b>Imps Hunt Quests completed:</b> " + player.statusEffectv1(StatusEffects.AdventureGuildQuestsCounter1) + "\n";
 			miscStats += "<b>Demons Hunt Quests completed:</b> " + player.statusEffectv2(StatusEffects.AdventureGuildQuestsCounter1) + "\n";
@@ -217,7 +196,7 @@ public class PlayerInfo extends BaseContent {
 		else miscStats += "N/A (You already at max lvl)\n";
 		miscStats += "<b>Ascension points (curently possesed):</b> " + player.ascensionPerkPoints + "\n";
 		miscStats += "<b>Ascension points (possible to gain during next ascension):</b> " + camp.possibleToGainAscensionPoints() + "\n";
-		
+
 		if (miscStats != "")
 			outputText("\n<b><u>Miscellaneous Stats</u></b>\n" + miscStats);
 		// End Misc Stats
@@ -438,14 +417,19 @@ public class PlayerInfo extends BaseContent {
 		if (player.hasPerk(PerkLib.MasterGunslinger)) combatStats += "<b>Firearms Accuracy (4th range attack):</b> " + ((combat.firearmsAccuracy() / 2) - ((combat.firearmsAccuracyPenalty() + combat.firearmsDualWieldAccuracyPenalty()) * 3)) + "%\n";
 		combatStats += "<i>(All accuracy values above includes bonus to accuracy from Firearms Mastery)</i>\n";
 		combatStats += "\n";
+		if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) combatStats += "<b>Cost of flying without Flying Sword (Soulforce / per turn): </b> " + combat.flyingWithSoulforceCost() + "\n";
+		if (player.hasPerk(PerkLib.FlyingSwordPath)) {
+			combatStats += "<b>Cost of flying on Flying Sword (Soulforce / per turn): </b> " + combat.flyingSwordUseCost() + "\n";
+			combatStats += "<b>Flying Sword Attack Cost (Soulforce / per attack): </b> " + combat.flyingSwordAttackCost() + "\n";
+		}
 		combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMod()) + "%\n";
 		combatStats += "<b>Physical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillPhysicalMod()) + "%\n";
 		combatStats += "<b>Magical Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMagicalMod()) + "%\n";
 		combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost()) + "%\n";
 		combatStats += "\n";
 		combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
-		combatStats += "<b>Venom:</b> " + Math.floor(player.tailVenom) + " / " + player.maxVenom() + "\n";
-		combatStats += "<b>Venom Recharge:</b> +" + player.tailRecharge + " / hour\n";
+		combatStats += "<b>Venom/Web:</b> " + Math.floor(player.tailVenom) + " / " + player.maxVenom() + "\n";
+		combatStats += "<b>Venom/Web Recharge:</b> +" + combat.venomCombatRecharge2() + " / turn, +" + player.tailRecharge + " / hour\n";
 		combatStats += "\n";
 		var mins:Object = player.getAllMinStats();
 		combatStats += "<b>Strength Cap:</b> " + Math.floor(player.strStat.max) + "\n";
@@ -492,7 +476,7 @@ public class PlayerInfo extends BaseContent {
 		if (combatStats != "")
 			outputText("\n<b><u>Combat Stats</u></b>\n" + combatStats);
 		// End Combat Stats
-		
+
 		// Begin Kill Counters Stats
 		var killCountStats:String = "";
 
@@ -505,9 +489,9 @@ public class PlayerInfo extends BaseContent {
 		if (killCountStats != "")
 			outputText("\n<b><u>Kill Counters</u></b>\n" + killCountStats);
 		// End Kill Counters Stats
-		
+
 		if (prison.inPrison || flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) prison.displayPrisonStats();
-		
+
 		menu();
 		addButton(0, "Next", playerMenu);
 		addButton(5, "General", displayStats);
@@ -523,7 +507,7 @@ public class PlayerInfo extends BaseContent {
 
 		// Begin Interpersonal Stats
 		var interpersonStats:String = "";
-			
+
 		if (flags[kFLAGS.AIKO_TIMES_MET] > 0) {
 			interpersonStats  += "<b>Aiko Affection:</b> "+flags[kFLAGS.AIKO_AFFECTION]+"\n";
 			if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0)
@@ -538,7 +522,7 @@ public class PlayerInfo extends BaseContent {
 			interpersonStats += "<b>Anzu's Affection:</b> " + flags[kFLAGS.ANZU_AFFECTION] + "%\n";
 			interpersonStats += "<b>Anzu's Relationship Level:</b> " + (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 1 ? "Acquaintances" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 2 ? "Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 3 ? "Close Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 4 ? "Lover" : "Undefined") + "\n";
 		}
-			
+
 		if (flags[kFLAGS.ARIAN_PARK] > 0)
             interpersonStats += "<b>Arian's Health:</b> " + Math.round(SceneLib.arianScene.arianHealth()) + "\n";
         if (flags[kFLAGS.ARIAN_VIRGIN] > 0)
@@ -561,7 +545,7 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.AURORA_LVL] == 2) interpersonStats += "<b>Aurora lvl:</b> 7\n";
 			if (flags[kFLAGS.AURORA_LVL] == 1) interpersonStats += "<b>Aurora lvl:</b> 1\n";
 		}
-			
+
 		if (SceneLib.bazaar.benoit.benoitAffection() > 0)
             interpersonStats += "<b>" + SceneLib.bazaar.benoit.benoitMF("Benoit", "Benoite") + " Affection:</b> " + Math.round(SceneLib.bazaar.benoit.benoitAffection()) + "%\n";
         if (flags[kFLAGS.BROOKE_MET] > 0)
@@ -804,7 +788,7 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.LUNA_LVL_UP] == 1) interpersonStats += "<b>Luna lvl:</b> 15\n";
 			if (flags[kFLAGS.LUNA_LVL_UP] == 0) interpersonStats += "<b>Luna lvl:</b> 9\n";
 		}
-		
+
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7)  {
 			if (flags[kFLAGS.NEISA_AFFECTION] < 50) interpersonStats += "<b>Neisa Loyalty:</b> " + Math.round(flags[kFLAGS.NEISA_AFFECTION]) * 2 + "%\n";
 			else interpersonStats += "<b>Neisa Loyalty:</b> 100%\n";
@@ -821,13 +805,13 @@ public class PlayerInfo extends BaseContent {
 
 		if (SceneLib.telAdre.rubi.rubiAffection() > 0)
             interpersonStats += "<b>Rubi's Affection:</b> " + Math.round(SceneLib.telAdre.rubi.rubiAffection()) + "%\n" + "<b>Rubi's Orifice Capacity:</b> " + Math.round(SceneLib.telAdre.rubi.rubiCapacity()) + "%\n";
-        
+
 		if (flags[kFLAGS.SAMIRAH_AFFECTION] > 0)
 			interpersonStats += "<b>Samirah Affection:</b> " + Math.round(flags[kFLAGS.SAMIRAH_AFFECTION]) + "%\n";
-		
+
 		if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 0)
 			interpersonStats += "<b>Sapphire Affection:</b> " + Math.round(flags[kFLAGS.SAPPHIRE_AFFECTION]) + "%\n";
-		
+
 		if (flags[kFLAGS.SHEILA_XP] != 0) {
             interpersonStats += "<b>Sheila's Corruption:</b> " + SceneLib.sheilaScene.sheilaCorruption();
             if (SceneLib.sheilaScene.sheilaCorruption() > 100)
@@ -922,13 +906,13 @@ public class PlayerInfo extends BaseContent {
 		if (evangelineStats != "")
 			outputText("\n<b><u>Evangeline Stats</u></b>\n" + evangelineStats);
 		// End Evangeline Stats
-		
+
 		// Begin RyuBi Stats
 		var ryubiStats:String = "";
 		if (ryubiStats != "")
 			outputText("\n<b><u>RyuBi Stats</u></b>\n" + ryubiStats);
 		// End RyuBi Stats
-		
+
 		// Begin Galia Stats
 		var galiaStats:String = "";
 		if (galiaStats != "")
@@ -1041,7 +1025,7 @@ public class PlayerInfo extends BaseContent {
             childStats += "<b>Total Children With Ember:</b> " + (SceneLib.emberScene.emberChildren()) + "\n";
         if (flags[kFLAGS.EMBER_EGGS] > 0)
 			childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
-			
+
         if (flags[kFLAGS.EXCELLIA_MALE_KIDS] > 0)
 			childStats += "<b>Excellia Offspring (Human Males):</b> " + flags[kFLAGS.EXCELLIA_MALE_KIDS] + "\n";
 		if (flags[kFLAGS.EXCELLIA_FEMALE_KIDS] > 0)
@@ -1231,6 +1215,51 @@ public class PlayerInfo extends BaseContent {
 				masteryStats += "<b>Dual Wield (Firearms) Skill:</b>  " + player.dualWFLevel + " / " + combat.maxDualWieldFirearmsLevel() + " (Exp: " + player.dualWFXP + " / " + combat.DualWieldFirearmsExpToLevelUp() + ")\n<i>(Effects: +" + player.dualWFLevel + "% damage, +" + (0.5 * Math.round((player.dualWFLevel - 1) / 2)) + "% accuracy)</i>\n";
 			else
 				masteryStats += "<b>Dual Wield (Firearms) Skill:</b>  " + player.dualWFLevel + " / " + combat.maxDualWieldFirearmsLevel() + "(Exp: MAX)\n<i>(Effects: +" + player.dualWFLevel + "% damage, +" + (0.5 * Math.round((player.dualWFLevel - 1) / 2)) + "% accuracy)</i>\n";
+			masteryStats += "\n";
+		}
+		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) {
+			if (player.hasStatusEffect(StatusEffects.DaoOfFire)) {
+				masteryStats += "<b>Major Dao of Fire:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfFire) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfFire) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfFire) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
+			if (player.hasStatusEffect(StatusEffects.DaoOfIce)) {
+				masteryStats += "<b>Major Dao of Ice:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfIce) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfIce) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfIce) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
+			if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) {
+				masteryStats += "<b>Major Dao of Lightning:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
+			if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) {
+				masteryStats += "<b>Major Dao of Darkness:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
+			if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) {
+				masteryStats += "<b>Major Dao of Poison:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
+			//masteryStats += "<b>Dao of ???:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
+			//masteryStats += "<b>Dao of ???:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
 			masteryStats += "\n";
 		}
 		if (player.teaseLevel < combat.maxTeaseLevel())
@@ -1645,7 +1674,7 @@ public class PlayerInfo extends BaseContent {
         var unlocks:Array = CoC.instance.perkTree.listUnlocks(selected.ptype);
         if (unlocks.length > 0) {
 			outputText("<b>Unlocks:</b> <ul>");
-			for each (var pt:PerkType in unlocks) outputText("<li>" + pt.name + " (" + pt.longDesc + ")</li>");
+			for each (var pt:PerkType in unlocks) outputText("<li>" + pt.name() + " (" + pt.longDesc + ")</li>");
 			outputText("</ul>");
 		}
 		outputText("If you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.\n");
@@ -1709,7 +1738,7 @@ public class PlayerInfo extends BaseContent {
 								.requireSen(90)
                                 .requireLevel(30); //requirePerk(JobEromancer)
 			*/	//(Still need some other related stuff added to make PC true Munchkin
-	
+
 	public function superPerkBuyMenu(page:int = 1):void {
 		clearOutput();
 		outputText("If you meet requirements and have enough points you can pick one or more super perks.\n");
@@ -1840,10 +1869,10 @@ public class PlayerInfo extends BaseContent {
 		}
 		if (page == 3) {
 			if (player.superPerkPoints > 0) {
-				
+
 			}
 			else {
-				
+
 			}
 			//12 -> page + 1 button
 			//13 -> page - 1 button

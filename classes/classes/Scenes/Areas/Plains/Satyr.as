@@ -66,7 +66,7 @@ public class Satyr extends Monster
 					var damage:Number = int((str + weaponAttack) - rand(player.tou));
 					if(damage > 0) {
 						outputText("He charges at you with a loud bleat, catching you off-guard and sending you flying into the ground.");
-						if(player.findPerk(PerkLib.Resolute) < 0 && rand(2) == 0) {
+						if(!player.hasPerk(PerkLib.Resolute) && rand(2) == 0) {
 							outputText("  The pain of the impact is so big you feel completely dazed, almost seeing stars.");
 							player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 						}

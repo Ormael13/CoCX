@@ -51,6 +51,10 @@ public final class Mutations extends MutationsHelper {
             else bonusdepower -= (player.spe - 1);
         }
         bonusempower += (20 * (1 + player.newGamePlusMod()));
+		if (player.hasPerk(PerkLib.OniDrinkingJug) && player.perkv1(PerkLib.OniDrinkingJug) == 1) {
+			player.addPerkValue(PerkLib.OniDrinkingJug, 1, -1);
+			durationhour *= 2;
+		}
         player.statStore.replaceBuffObject({
             str: bonusempower,
             spe: -bonusdepower,
@@ -162,7 +166,8 @@ public final class Mutations extends MutationsHelper {
         outputText("As you eat the soup you shiver as your bodily temperature drop. Not only that but the last thing on your mind right now is sex as you feel yourself freezing from the inside. The cold crisis eventualy passes but you remain relatively less libidinous afterward.");
         player.buff("Curse").addStats( {"lib.mult": -0.05} ).permanent();
 		if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(PerkLib.NaturalPunchingBagFinalForm)) dynStats("lib", -4, "lus", -20);
-        else dynStats("lib", -2, "lus", -10);
+        else dynStats("lus", -10);
+        player.addCurse("lib", -2, 1);
         player.refillHunger(15);
     }
 
@@ -202,7 +207,8 @@ public final class Mutations extends MutationsHelper {
     public function purePearl(player:Player):void {
         clearOutput();
         outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.");
-        dynStats("lib", -10, "lus", -25, "cor", -10);
+        dynStats("lus", -25, "cor", -10);
+        player.addCurse("lib", -10, 1);
         if (!player.hasPerk(PerkLib.PurityBlessing)) player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
     }
 
@@ -265,7 +271,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (rand >= 70 && rand <= 90) {
             outputText("Your body tingles and feels more sensitive.");
-            dynStats("sens", 3);
+            player.addCurse("sens", 3, 1);
         }
         if (rand > 90) {
             outputText("You shudder as a small orgasm passes through you. When you recover you actually feel more aroused.");
@@ -288,7 +294,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (rand >= 70 && rand <= 90) {
             outputText("Your body tingles and feels more sensitive.");
-            dynStats("sens", 9);
+            player.addCurse("sens", 9, 1);
         }
         if (rand > 90) {
             outputText("You shudder as a small orgasm passes through you. When you recover you actually feel more aroused.");
@@ -836,28 +842,13 @@ public final class Mutations extends MutationsHelper {
         else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 200;
     }
 
-    public function additionalTransformationChances():Number {
-        var additionalTransformationChancesCounter:Number = 0;
-        if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.Enhancement)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.Fusion)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.Enchantment)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.Refinement)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.Saturation)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.Perfection)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.Creationism)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
-        if (player.hasPerk(PerkLib.TransformationResistance)) additionalTransformationChancesCounter--;
-        return additionalTransformationChancesCounter;
-    }
-
     /* ITEMZZZZZ FUNCTIONS GO HERE */
     public function incubiDraft(tainted:Boolean, player:Player):void {
         player.slimeFeed();
         var temp2:Number = 0;
         var temp3:Number = 0;
         var rando:Number = rand(100);
-        rando += (10 * additionalTransformationChances());
+        rando += (10 * player.additionalTransformationChances());
         clearOutput();
         outputText("The draft is slick and sticky, ");
         if (player.cor <= 33) outputText("just swallowing it makes you feel unclean.");
@@ -873,7 +864,8 @@ public final class Mutations extends MutationsHelper {
                     var selectedCock:int;
                     if (rand(4) == 0) selectedCock = player.increaseCock(0, 3);
                     else selectedCock = player.increaseCock(0, 1);
-                    dynStats("sen", 1, "lust", 5 + selectedCock * 3, "cor", tainted ? 1 : 0);
+                    dynStats("lust", 5 + selectedCock * 3, "cor", tainted ? 1 : 0);
+                    player.addCurse("sens", 1, 1);
                     MutagenBonus("int", 1);
                     MutagenBonus("lib", 2);
                     if (selectedCock < .5) outputText("  It stops almost as soon as it starts, growing only a tiny bit longer.");
@@ -881,11 +873,13 @@ public final class Mutations extends MutationsHelper {
                     if (selectedCock >= 1 && selectedCock <= 2) outputText("  The sensation is incredible as more than an inch of lengthened dick-flesh grows in.");
                     if (selectedCock > 2) outputText("  You smile and idly stroke your lengthening [cock] as a few more inches sprout.");
                     if (tainted) {
-                        dynStats("sen", 1, "lus", 5 + selectedCock * 3, "cor", 1);
+                        dynStats("lus", 5 + selectedCock * 3, "cor", 1);
+                        player.addCurse("sens", 1, 1);
                         MutagenBonus("int", 1);
                         MutagenBonus("lib", 2);
                     } else {
-                        dynStats("sen", 1, "lus", 5 + selectedCock * 3);
+                        dynStats("lus", 5 + selectedCock * 3);
+                        player.addCurse("sens", 1, 1);
                         MutagenBonus("int", 1);
                         MutagenBonus("lib", 2);
                     }
@@ -905,11 +899,13 @@ public final class Mutations extends MutationsHelper {
                     if (int(Math.random() * 4) == 0) temp3 = player.increaseCock(temp2, 3);
                     else temp3 = player.increaseCock(temp2, 1);
                     if (tainted) {
-                        dynStats("sen", 1, "lus", 5 + selectedCock * 3, "cor", 1);
+                        dynStats("lus", 5 + selectedCock * 3, "cor", 1);
+                        player.addCurse("sens", 1, 1);
                         MutagenBonus("int", 1);
                         MutagenBonus("lib", 2);
                     } else {
-                        dynStats("sen", 1, "lus", 5 + selectedCock * 3);
+                        dynStats("lus", 5 + selectedCock * 3);
+                        player.addCurse("sens", 1, 1);
                         MutagenBonus("int", 1);
                         MutagenBonus("lib", 2);
                     }
@@ -932,10 +928,12 @@ public final class Mutations extends MutationsHelper {
                     outputText("\n\nYou shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
                     outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
                     if (tainted) {
-                        dynStats("sen", 5, "lus", 10, "cor", 5);
+                        dynStats("lus", 10, "cor", 5);
+                        player.addCurse("sens", 5, 1);
                         MutagenBonus("lib", 3);
                     } else {
-                        dynStats("sen", 5, "lus", 10);
+                        dynStats("lus", 10);
+                        player.addCurse("sens", 5, 1);
                         MutagenBonus("lib", 3);
                     }
                 }
@@ -972,10 +970,12 @@ public final class Mutations extends MutationsHelper {
                         if (player.cocks.length > 1) outputText("\n\nYour cocks seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.");
                     }
                     if (tainted) {
-                        dynStats("sen", 5, "lus", 10, "cor", 3);
+                        dynStats("lus", 10, "cor", 3);
+                        player.addCurse("sens", 5, 1);
                         MutagenBonus("lib", 3);
                     } else {
-                        dynStats("sen", 5, "lus", 10);
+                        dynStats("lus", 10);
+                        player.addCurse("sens", 5, 1);
                         MutagenBonus("lib", 3);
                     }
                 }
@@ -998,10 +998,12 @@ public final class Mutations extends MutationsHelper {
                         if (player.cocks.length > 1) outputText("  Your cocks seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.");
                     }
                     if (tainted) {
-                        dynStats("sen", 5, "lus", 10, "cor", 3);
+                        dynStats("lus", 10, "cor", 3);
+                        player.addCurse("sens", 5, 1);
                         MutagenBonus("lib", 3);
                     } else {
-                        dynStats("sen", 5, "lus", 10);
+                        dynStats("lus", 10);
+                        player.addCurse("sens", 5, 1);
                         MutagenBonus("lib", 3);
                     }
                 }
@@ -1012,10 +1014,12 @@ public final class Mutations extends MutationsHelper {
                     outputText("\n\nYou shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
                     outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
                     if (tainted) {
-                        dynStats("sen", 5, "lus", 10, "cor", 3);
+                        dynStats("lus", 10, "cor", 3);
+                        player.addCurse("sens", 5, 1);
                         MutagenBonus("lib", 3);
                     } else {
-                        dynStats("sen", 5, "lus", 10);
+                        dynStats("lus", 10);
+                        player.addCurse("sens", 5, 1);
                         MutagenBonus("lib", 3);
                     }
                 }
@@ -1034,10 +1038,12 @@ public final class Mutations extends MutationsHelper {
                         outputText("\n\n");
                         growDemonCock(rand(2) + 2);
                         if (tainted) {
-                            dynStats("sen", 5, "lus", 10, "cor", 5);
+                            dynStats("lus", 10, "cor", 5);
+                            player.addCurse("sens", 5, 1);
                             MutagenBonus("lib", 3);
                         } else {
-                            dynStats("sen", 5, "lus", 10);
+                            dynStats("lus", 10);
+                            player.addCurse("sens", 5, 1);
                             MutagenBonus("lib", 3);
                         }
                     } else {
@@ -1152,7 +1158,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         var temp3:Number = 0;
         var rando:Number = Math.random() * 100;
-        rando += (10 * additionalTransformationChances());
+        rando += (10 * player.additionalTransformationChances());
         if (rando >= 90 && !tainted) rando -= 10;
         if (player.cor < 35) {
             clearOutput();
@@ -1326,7 +1332,8 @@ public final class Mutations extends MutationsHelper {
                             || player.clitLength < 3) {
                         player.clitLength += (rand(4) + 2) / 10;
                     }
-                    dynStats("sen", 3, "lus", 8);
+                    dynStats("lus", 8);
+                    player.addCurse("sens", 3, 1);
                 } else {
                     player.createVagina();
                     player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
@@ -1388,7 +1395,7 @@ public final class Mutations extends MutationsHelper {
         var changes:Number = 0;
         var changeLimit:Number = 1;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         player.slimeFeed();
         clearOutput();
         outputText("The pepper taste and feels like trying to eat snow and ice. However you eat it anyway still feeling a cold tingling in your mouth.");
@@ -1461,7 +1468,8 @@ public final class Mutations extends MutationsHelper {
                 if (temp3 < .06) outputText("\n\nYour " + cockDescript(temp2) + " feels unusually tight in your sheath as your knot grows.");
                 if (temp3 >= .06 && temp3 <= .12) outputText("\n\nYour " + cockDescript(temp2) + " pops free of your sheath, thickening nicely into a bigger knot.");
                 if (temp3 > .12) outputText("\n\nYour " + cockDescript(temp2) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
-                dynStats("sen", .5, "lus", 10);
+                dynStats("lus", 10);
+                player.addCurse("sens", 1, 1);
                 changes++;
             }
         }
@@ -1496,12 +1504,14 @@ public final class Mutations extends MutationsHelper {
                         if (player.breastRows[0].breastRating - 1 == 0) outputText("\n\nA second set of breasts forms under your current pair, stopping while they are still fairly flat and masculine looking.");
                         else outputText("\n\nA second set of breasts bulges forth under your current pair, stopping as they reach " + player.breastCup(choice) + "s.");
                         outputText("  A sensitive nub grows on the summit of each new tit, becoming a new nipple.");
-                        dynStats("sen", 6, "lus", 5);
+                        dynStats("lus", 5);
+                        player.addCurse("sens", 6, 1);
                         changes++;
                     }
                     //Many breast Rows - requires larger primary tits...
                     if (player.breastRows.length > 2 && player.breastRows[0].breastRating > player.breastRows.length) {
-                        dynStats("sen", 6, "lus", 5);
+                        dynStats("lus", 5);
+                        player.addCurse("sens", 6, 1);
                         //New row's size = the size of the row above -1
                         player.breastRows[choice].breastRating = player.breastRows[choice - 1].breastRating - 1;
                         //If second row are super small but primary row is huge it could go negative.
@@ -1517,10 +1527,12 @@ public final class Mutations extends MutationsHelper {
                     if (rand(3) == 0) {
                         if (rand(3) == 0) {
                             outputText("  You heft your new chest experimentally, exploring the new flesh with tender touches.  Your eyes nearly roll back in your head from the intense feelings.");
-                            dynStats("sen", 6, "lus", 15, "cor", 0)
+                            dynStats("lus", 15, "cor", 0)
+                            player.addCurse("sens", 6, 1);
                         } else {
                             outputText("  You touch your new nipples with a mixture of awe and desire, the experience arousing beyond measure.  You squeal in delight, nearly orgasming, but in time finding the willpower to stop yourself.");
-                            dynStats("sen", 3, "lus", 10);
+                            dynStats("lus", 10);
+                            player.addCurse("sens", 3, 1);
                         }
                     }
                 }
@@ -1563,7 +1575,8 @@ public final class Mutations extends MutationsHelper {
             player.createBreastRow();
             player.breastRows[0].breastRating = 2;
             player.breastRows[0].breasts = 2;
-            dynStats("sen", 4, "lus", 6);
+            dynStats("lus", 6);
+            player.addCurse("sens", 4, 1);
             changes++;
         }
         //Go into heat
@@ -1776,7 +1789,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Initial outputs & crit level
         clearOutput();
         if (type == 0) {
@@ -1850,7 +1863,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.inte > 30 && rand(3) == 0 && changes < changeLimit && type != 3) {
-            dynStats("int", (-1 * crit));
+            player.addCurse("int", (-1 * crit), 1);
             outputText("\n\nYou feel ");
             if (crit > 1) outputText("MUCH ");
             outputText("dumber.");
@@ -1965,7 +1978,8 @@ public final class Mutations extends MutationsHelper {
                     if (temp3 < .06) outputText("Your " + Appearance.cockNoun(CockTypesEnum.DOG) + " feels unusually tight in your sheath as your knot grows.");
                     if (temp3 >= .06 && temp3 <= .12) outputText("Your " + Appearance.cockNoun(CockTypesEnum.DOG) + " pops free of your sheath, thickening nicely into a bigger knot.");
                     if (temp3 > .12) outputText("Your " + Appearance.cockNoun(CockTypesEnum.DOG) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
-                    dynStats("sen", .5, "lus", 5 * crit);
+                    dynStats("lus", 5 * crit);
+                    player.addCurse("sen", 1, 1);
                 }
                 //Grow dogdick with big knot
                 else {
@@ -2031,7 +2045,8 @@ public final class Mutations extends MutationsHelper {
                 if (temp3 < .06) outputText("\n\nYour " + cockDescript(temp2) + " feels unusually tight in your sheath as your knot grows.");
                 if (temp3 >= .06 && temp3 <= .12) outputText("\n\nYour " + cockDescript(temp2) + " pops free of your sheath, thickening nicely into a bigger knot.");
                 if (temp3 > .12) outputText("\n\nYour " + cockDescript(temp2) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
-                dynStats("sen", .5, "lus", 5 * crit);
+                dynStats("lus", 5 * crit);
+                player.addCurse("sen", 1, 1);
                 changes++;
             }
             //Cock Xform if player has free cocks.
@@ -2052,7 +2067,8 @@ public final class Mutations extends MutationsHelper {
                 //Hooooman
                 if (player.cocks[temp3].cockType == CockTypesEnum.HUMAN) {
                     outputText("\n\nYour " + cockDescript(temp3) + " clenches painfully, becoming achingly, throbbingly erect.  A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath.  You shudder as the crown of your " + cockDescript(temp3) + " reshapes into a point, the sensations nearly too much for you.  You throw back your head as the transformation completes, your " + Appearance.cockNoun(CockTypesEnum.DOG) + " much thicker than it ever was before.  <b>You now have a dog-cock.</b>");
-                    dynStats("sen", 10, "lus", 5 * crit);
+                    dynStats("lus", 5 * crit);
+                    player.addCurse("sen", 10, 1);
                 }
                 //Horse
                 if (player.cocks[temp3].cockType == CockTypesEnum.HORSE) {
@@ -2062,23 +2078,27 @@ public final class Mutations extends MutationsHelper {
                     else player.cocks[temp3].cockLength -= .5;
                     player.cocks[temp3].cockThickness += .5;
 
-                    dynStats("sen", 4, "lus", 5 * crit);
+                    dynStats("lus", 5 * crit);
+                    player.addCurse("sen", 4, 1);
                 }
                 //Tentacular Tuesday!
                 if (player.cocks[temp3].cockType == CockTypesEnum.TENTACLE) {
                     outputText("\n\nYour " + cockDescript(temp3) + " coils in on itself, reshaping and losing its plant-like coloration as it thickens near the base, bulging out in a very canine-looking knot.  Your skin bunches painfully around the base, forming into a sheath.  <b>You now have a dog-cock.</b>");
-                    dynStats("sen", 4, "lus", 5 * crit);
+                    dynStats("lus", 5 * crit);
+                    player.addCurse("sen", 4, 1);
                 }
                 //Misc
                 if (player.cocks[temp3].cockType.Index > 4) {
                     outputText("\n\nYour " + cockDescript(temp3) + " trembles, reshaping itself into a shiny red doggie-dick with a fat knot at the base.  <b>You now have a dog-cock.</b>");
-                    dynStats("sen", 4, "lus", 5 * crit);
+                    dynStats("lus", 5 * crit);
+                    player.addCurse("sen", 4, 1);
                 }
                 choice = 0;
                 //Demon
                 if (player.cocks[temp3].cockType == CockTypesEnum.DEMON) {
                     outputText("\n\nYour " + cockDescript(temp3) + " color shifts red for a moment and begins to swell at the base, but within moments it smooths out, retaining its distinctive demonic shape, only perhaps a bit thicker.");
-                    dynStats("sen", 1, "lus", 2 * crit);
+                    dynStats("lus", 2 * crit);
+                    player.addCurse("sen", 1, 1);
                     choice = 1;
                 }
                 //Xform it!
@@ -2114,7 +2134,8 @@ public final class Mutations extends MutationsHelper {
                 if (player.cocks.length == 1) {
                     temp2 = player.increaseCock(0, rand(4) + 3);
                     choice = 0;
-                    dynStats("sen", 1, "lus", 10);
+                    dynStats("lus", 10);
+                    player.addCurse("sen", 1, 1);
                 }
                 //Multicock
                 else {
@@ -2134,7 +2155,8 @@ public final class Mutations extends MutationsHelper {
                     //Grow smallest cock!
                     //temp2 changes to growth amount
                     temp2 = player.increaseCock(choice, rand(4) + 3);
-                    dynStats("sen", 1, "lus", 10);
+                    dynStats("lus", 10);
+                    player.addCurse("sen", 1, 1);
                     if (player.cocks[choice].cockThickness <= 2) player.cocks[choice].thickenCock(1);
                 }
                 if (temp2 > 2) outputText("\n\nYour " + cockDescript(choice) + " tightens painfully, inches of bulging dick-flesh pouring out from your crotch as it grows longer.  Thick pre forms at the pointed tip, drawn out from the pleasure of the change.");
@@ -2167,12 +2189,14 @@ public final class Mutations extends MutationsHelper {
                         if (player.breastRows[0].breastRating - 1 == 0) outputText("\n\nA second set of breasts forms under your current pair, stopping while they are still fairly flat and masculine looking.");
                         else outputText("\n\nA second set of breasts bulges forth under your current pair, stopping as they reach " + player.breastCup(choice) + "s.");
                         outputText("  A sensitive nub grows on the summit of each new tit, becoming a new nipple.");
-                        dynStats("sen", 6, "lus", 5);
+                        dynStats("lus", 5);
+                        player.addCurse("sen", 6, 1);
                         changes++;
                     }
                     //Many breast Rows - requires larger primary tits...
                     if (player.breastRows.length > 2 && player.breastRows[0].breastRating > player.breastRows.length) {
-                        dynStats("sen", 6, "lus", 5);
+                        dynStats("lus", 5);
+                        player.addCurse("sen", 6, 1);
                         //New row's size = the size of the row above -1
                         player.breastRows[choice].breastRating = player.breastRows[choice - 1].breastRating - 1;
                         //If second row are super small but primary row is huge it could go negative.
@@ -2188,10 +2212,12 @@ public final class Mutations extends MutationsHelper {
                     if (crit > 1 && type != 6) {
                         if (crit > 2) {
                             outputText("  You heft your new chest experimentally, exploring the new flesh with tender touches.  Your eyes nearly roll back in your head from the intense feelings.");
-                            dynStats("sen", 6, "lus", 15, "cor", 0)
+                            dynStats("lus", 15, "cor", 0)
+                            player.addCurse("sen", 6, 1);
                         } else {
                             outputText("  You touch your new nipples with a mixture of awe and desire, the experience arousing beyond measure.  You squeal in delight, nearly orgasming, but in time finding the willpower to stop yourself.");
-                            dynStats("sen", 3, "lus", 10);
+                            dynStats("lus", 10);
+                            player.addCurse("sen", 3, 1);
                         }
                     }
                 }
@@ -2234,7 +2260,8 @@ public final class Mutations extends MutationsHelper {
             player.createBreastRow();
             player.breastRows[0].breastRating = 2;
             player.breastRows[0].breasts = 2;
-            dynStats("sen", 4, "lus", 6);
+            dynStats("lus", 6);
+            player.addCurse("sen", 4, 1);
             changes++;
         }
         //Go into heat
@@ -2433,7 +2460,6 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
         if (player.hasFullCoatOfType(Skin.FUR) && changes < changeLimit && rand(3) == 0 && type != 6) {
             outputText("\n\nYou become more... solid.  Sinewy.  A memory comes unbidden from your youth of a grizzled wolf you encountered while hunting, covered in scars, yet still moving with an easy grace.  You imagine that must have felt something like this.");
-            dynStats("sen", -3);
             MutagenBonus("tou", 4);
             changes++;
         }
@@ -2513,7 +2539,7 @@ public final class Mutations extends MutationsHelper {
         //Chances to up the max number of changes
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Generic drinking text
         clearOutput();
         outputText("You uncork the bottle and drink down the strange substance, struggling to down the thick liquid.");
@@ -2598,7 +2624,7 @@ public final class Mutations extends MutationsHelper {
         //Chances to up the max number of changes
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Generic drinking text
         clearOutput();
         outputText("You uncork the bottle and drink down the strange substance, struggling to down the thick liquid.");
@@ -2878,7 +2904,8 @@ public final class Mutations extends MutationsHelper {
                         if (player.cocks.length == 1) outputText("\n\nYour [cocks] seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.");
                         if (player.cocks.length > 1) outputText("\n\nYour [cocks] seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.");
                     }
-                    dynStats("sen", 1, "lus", 20);
+                    dynStats("lus", 20);
+                    player.addCurse("sen", 1, 1);
                     MutagenBonus("lib", 1);
                 }
                 //SINGLEZ
@@ -2900,7 +2927,8 @@ public final class Mutations extends MutationsHelper {
                         if (player.cocks.length == 1) outputText("  Your [cocks] seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.");
                         if (player.cocks.length > 1) outputText("  Your [cocks] seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.");
                     }
-                    dynStats("sen", 1, "lus", 20);
+                    dynStats("lus", 20);
+                    player.addCurse("sen", 1, 1);
                     MutagenBonus("lib", 1);
                 }
 
@@ -2963,7 +2991,8 @@ public final class Mutations extends MutationsHelper {
                         if (player.cocks.length == 1) outputText("\n\nYour [cocks] seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.");
                         if (player.cocks.length > 1) outputText("\n\nYour [cocks] seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.");
                     }
-                    dynStats("sen", 1, "lus", 20);
+                    dynStats("lus", 20);
+                    player.addCurse("sen", 1, 1);
                     MutagenBonus("lib", 1);
                 }
                 //SINGLEZ
@@ -2985,7 +3014,8 @@ public final class Mutations extends MutationsHelper {
                         if (player.cocks.length == 1) outputText("  Your [cocks] seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.");
                         if (player.cocks.length > 1) outputText("  Your [cocks] seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.");
                     }
-                    dynStats("sen", 1, "lus", 20);
+                    dynStats("lus", 20);
+                    player.addCurse("sen", 1, 1);
                     MutagenBonus("lib", 1);
                 }
             }
@@ -3089,7 +3119,9 @@ public final class Mutations extends MutationsHelper {
                 flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] = 1;
                 if (player.cor < 66) outputText("You feel like some kind of freak.");
                 else outputText("You feel like some kind of sexy [skin.type] love-doll.");
-                dynStats("spe", -3, "sen", 8, "lus", 10, "cor", 2);
+                dynStats("lus", 10, "cor", 2);
+                player.addCurse("spe", -3, 1);
+                player.addCurse("sen", 8, 1);
             }
             //Change skin to normal if not flawless!
             if ((player.skinAdj != "smooth" && player.skinAdj != "latex" && player.skinAdj != "rubber") || player.skinDesc != "skin") {
@@ -3192,7 +3224,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         if (enhanced) changeLimit += 2;
         //Temporary storage
         var temp:Number = 0;
@@ -3236,7 +3268,7 @@ public final class Mutations extends MutationsHelper {
                 outputText("\n\nThe body mass you've gained is making your movements more sluggish.");
                 changes++;
                 temp = (player.spe - 30) / 10;
-                dynStats("spe", -temp);
+                player.addCurse("spe", temp, 1);
             }
         }
         //Increase Corr, up to a max of 50.
@@ -3301,7 +3333,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("\n\nYou feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size.");
             player.growTits(1 + rand(3), 1, false, 3);
             changes++;
-            dynStats("sen", .5);
+            player.addCurse("sen", 1, 1);
             boobsGrew = true;
         }
         //-Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
@@ -3328,7 +3360,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYou gasp as your [breasts] feel like they are filling up with something.  Within moments, a drop of milk leaks from your [breasts]; <b> you are now lactating</b>.");
             player.breastRows[0].lactationMultiplier = 1.25;
             changes++;
-            dynStats("sen", .5);
+            player.addCurse("sen", 1, 1);
         }
         //Quad nipples and other 'special enhanced things.
         if (enhanced) {
@@ -3380,7 +3412,7 @@ public final class Mutations extends MutationsHelper {
                 if ((player.nippleLength < 1.5 && tainted) || (!tainted && player.nippleLength < 1)) {
                     outputText("  Your " + nippleDescript(0) + "s swell up, growing larger to accommodate your increased milk flow.");
                     player.nippleLength += .25;
-                    dynStats("sen", .5);
+                    player.addCurse("sen", 1, 1);
                 }
                 changes++;
             }
@@ -3394,7 +3426,7 @@ public final class Mutations extends MutationsHelper {
                 if ((player.nippleLength < 1.5 && tainted) || (!tainted && player.nippleLength < 1)) {
                     outputText("  Your " + nippleDescript(0) + "s swell up, growing larger to accommodate your increased milk flow.");
                     player.nippleLength += .25;
-                    dynStats("sen", .5);
+                    player.addCurse("sen", 1, 1);
                 }
                 changes++;
             }
@@ -3406,7 +3438,7 @@ public final class Mutations extends MutationsHelper {
                     if ((player.nippleLength < 1.5 && tainted) || (!tainted && player.nippleLength < 1)) {
                         outputText("  Your " + nippleDescript(0) + "s swell up, growing larger to accommodate your increased milk flow.");
                         player.nippleLength += .25;
-                        dynStats("sen", .5);
+                        player.addCurse("sen", 1, 1);
                     }
                     changes++;
                 }
@@ -3414,7 +3446,7 @@ public final class Mutations extends MutationsHelper {
                     if (rand(2) == 0) outputText("\n\nYour breasts suddenly feel less full, it seems you aren't lactating at quite the level you were.");
                     else outputText("\n\nThe insides of your breasts suddenly feel bloated.  There is a spray of milk from them, and they settle closer to a more natural level of lactation.");
                     changes++;
-                    dynStats("sen", .5);
+                    player.addCurse("sen", 1, 1);
                     player.boostLactation(-1);
                 }
             }
@@ -3668,41 +3700,57 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsWaveOfEcstasy, 0, 0, 0, 0);
             return;
         }
-        //Smart enough for nosferatu and doesnt have it
-        if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Nosferatu.</b>");
-            player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for lifetap and doesnt have it
-        if (player.inte >= 150 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsLifetap)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Lifetap.</b>");
-            player.createStatusEffect(StatusEffects.KnowsLifetap, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for life siphon and doesnt have it
-        if (player.inte >= 160 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsLifeSiphon)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Life siphon.</b>");
-            player.createStatusEffect(StatusEffects.KnowsLifeSiphon, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for consuming darkness and doesnt have it
-        if (player.inte >= 170 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsConsumingDarkness)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Consuming darkness.</b>");
-            player.createStatusEffect(StatusEffects.KnowsConsumingDarkness, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for curse of desire and doesnt have it
-        if (player.inte >= 180 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsCurseOfDesire)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Curse of Desire.</b>");
-            player.createStatusEffect(StatusEffects.KnowsCurseOfDesire, 0, 0, 0, 0);
-            return;
-        }
-        //Smart enough for curse of weeping and doesnt have it
-        if (player.inte >= 190 && player.hasPerk(PerkLib.HexKnowledge) && !player.hasStatusEffect(StatusEffects.KnowsCurseOfWeeping)) {
-            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Curse of Weeping.</b>");
-            player.createStatusEffect(StatusEffects.KnowsCurseOfWeeping, 0, 0, 0, 0);
-        }
+		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) {
+			//Smart enough for Bone spirit and doesnt have it
+			if (player.inte >= 100 &&  !player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone spirit.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBoneSpirit, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Bone armor and doesnt have it
+			if (player.inte >= 110 && !player.hasStatusEffect(StatusEffects.KnowsBoneArmor)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone armor.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBoneArmor, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Boneshatter and doesnt have it
+			if (player.inte >= 120 && !player.hasStatusEffect(StatusEffects.KnowsBoneshatter)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Boneshatter.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBoneshatter, 0, 0, 0, 0);
+				return;
+			}
+		}
+		if (player.hasPerk(PerkLib.HexKnowledge)) {
+			//Smart enough for lifetap and doesnt have it
+			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsLifetap)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Lifetap.</b>");
+				player.createStatusEffect(StatusEffects.KnowsLifetap, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for life siphon and doesnt have it
+			if (player.inte >= 160 && !player.hasStatusEffect(StatusEffects.KnowsLifeSiphon)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Life siphon.</b>");
+				player.createStatusEffect(StatusEffects.KnowsLifeSiphon, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for consuming darkness and doesnt have it
+			if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsConsumingDarkness)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Consuming darkness.</b>");
+				player.createStatusEffect(StatusEffects.KnowsConsumingDarkness, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for curse of desire and doesnt have it
+			if (player.inte >= 180 && !player.hasStatusEffect(StatusEffects.KnowsCurseOfDesire)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Curse of Desire.</b>");
+				player.createStatusEffect(StatusEffects.KnowsCurseOfDesire, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for curse of weeping and doesnt have it
+			if (player.inte >= 190 && !player.hasStatusEffect(StatusEffects.KnowsCurseOfWeeping)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Curse of Weeping.</b>");
+				player.createStatusEffect(StatusEffects.KnowsCurseOfWeeping, 0, 0, 0, 0);
+			}
+		}
     }
 
     public function blackPolarMidnight(player:Player):void {
@@ -3735,48 +3783,54 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nThe contents of the book did little for your already considerable intellect.");
             KnowledgeBonus("int", 0.5);
         }
-        if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
+        if (player.hasPerk(PerkLib.GreyMagic)) {
             //Smart enough for (single target fire spell) and doesnt have it (player.inte >= 120)
-            /*if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.)) {
+            /*if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
                 player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
                 return;
             }*/
             //Smart enough for fire storm and doesnt have it
-            if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
+            if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Fire Storm.</b>");
                 player.createStatusEffect(StatusEffects.KnowsFireStorm, 0, 0, 0, 0);
                 return;
             }
             //Smart enough for (single target ice spell) and doesnt have it (player.inte >= 120)
-            /*if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.)) {
+            /*if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
                 player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
                 return;
             }*/
             //Smart enough for Fraction of heal and harm and doesnt have it
-            /*if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsFractionOfHealAndHarm)) {
+            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsFractionOfHealAndHarm)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Fraction of heal and harm.</b>");
                 player.createStatusEffect(StatusEffects.KnowsFractionOfHealAndHarm, 0, 0, 0, 0);
                 return;
             }*/
             //Smart enough for Clear Mind and doesnt have it
-            /*if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
+            /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Clear Mind.</b>");
                 player.createStatusEffect(StatusEffects.KnowsClearMind, 0, 0, 0, 0);
                 return;
             }*/
             //Smart enough for ice rain and doesnt have it
-            if (player.inte >= 170 && !player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
+            if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Rain.</b>");
                 player.createStatusEffect(StatusEffects.KnowsIceRain, 0, 0, 0, 0);
                 return;
             }
             //Smart enough for mana shield and doesnt have it
-            if (player.inte >= 190 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
+            if (player.inte >= 90 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
                 player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
             }
+			//Smart enough for nosferatu and doesnt have it
+			if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Nosferatu.</b>");
+				player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
+				return;
+			}
         }
     }
 
@@ -4004,7 +4058,7 @@ public final class Mutations extends MutationsHelper {
             outputText(".  Once you've had a chance to calm down, you notice that the explosion of pleasure you just experienced has rocked you to your core.  You are a little hornier than you were before.");
             //increase player libido, and maybe sensitivity too?
             player.orgasm();
-            dynStats("sen", 1);
+            player.addCurse("sen", 1, 1);
             MutagenBonus("lib", 2);
             if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.addStatusValue(StatusEffects.RaijuLightningStatus, 1, 24);
         }
@@ -4021,7 +4075,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(5) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         outputText("Whoa it was definitely tasting just as bad as it smelled but hey it's not like your drinking this disgusting concoction for fun right? Or maybe you are?");
         if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
@@ -4030,8 +4084,8 @@ public final class Mutations extends MutationsHelper {
         //Stronger
         if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
             dynStats("str", -1);
-            if (player.str > 70) dynStats("str", -1);
-            if (player.str > 90) dynStats("str", -2);
+            if (player.str > 70) player.addCurse("str", -1, 1);
+            if (player.str > 90) player.addCurse("str", -2, 1);
             outputText("\n\nYou feel a little weaker, but maybe it's just the alcohol.");
             changes++;
         }
@@ -4039,8 +4093,8 @@ public final class Mutations extends MutationsHelper {
         if (player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nGiggling, you poke yourself, which only makes you giggle harder when you realize how much softer you feel.");
             dynStats("tou", -1);
-            if (player.tou > 70) dynStats("tou", -1);
-            if (player.tou > 90) dynStats("tou", -2);
+            if (player.tou > 70) player.addCurse("tou", -1, 1);
+            if (player.tou > 90) player.addCurse("tou", -2, 1);
             changes++;
         }
         //Speed boost
@@ -4246,7 +4300,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(5) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         outputText("You drink the ale, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
         if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
@@ -4254,8 +4308,8 @@ public final class Mutations extends MutationsHelper {
         //Stronger
         if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
             dynStats("str", -1);
-            if (player.str > 70) dynStats("str", -1);
-            if (player.str > 90) dynStats("str", -2);
+            if (player.str > 70) player.addCurse("str", -2, 1);
+            if (player.str > 90) player.addCurse("str", -2, 1);
             outputText("\n\nYou feel a little weaker, but maybe it's just the alcohol.");
             changes++;
         }
@@ -4263,8 +4317,8 @@ public final class Mutations extends MutationsHelper {
         if (player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nGiggling, you poke yourself, which only makes you giggle harder when you realize how much softer you feel.");
             dynStats("tou", -1);
-            if (player.tou > 70) dynStats("tou", -1);
-            if (player.tou > 90) dynStats("tou", -2);
+            if (player.tou > 70) player.addCurse("tou", -1, 1);
+            if (player.tou > 90) player.addCurse("tou", -2, 1);
             changes++;
         }
         //Speed boost
@@ -4463,7 +4517,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(5) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         if (type == 0) outputText("You take the wet cloth in hand and rub it over your body, smearing the strange slime over your [skin.type] slowly.");
         if (type == 2) outputText("Well here goes nothing, you gulp down the thing and sure enough, you begin to feel strange as you ingest the jelly. Well at least it tastes like grapes.");
@@ -4478,7 +4532,7 @@ public final class Mutations extends MutationsHelper {
         //sensitivity moves towards 50
         if (player.sens < 50 && changes < changeLimit) {
             outputText("\n\nThe slippery slime soaks into your [skin.type], making it tingle with warmth, sensitive to every touch.");
-            dynStats("sen", 1);
+            player.addCurse("sen",1, 1);
             changes++;
         } else if (player.sens > 50 && changes < changeLimit) {
             outputText("\n\nThe slippery slime numbs your [skin.type] slightly, leaving behind only gentle warmth.");
@@ -4621,7 +4675,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         if (type == 0) {
             clearOutput();
             outputText("You have no idea why, but you decide to eat the pointed tooth. To your surprise, it's actually quite brittle, turning into a fishy-tasting dust. You figure it must just be a tablet made to look like a shark's tooth.");
@@ -4656,7 +4710,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Decrease intellect 1-3 points (Down to 40 points)
         if (player.inte > 40 && rand(3) == 0 && changes < changeLimit) {
-            dynStats("int", -(1 + rand(3)));
+            player.addCurse("int", -(1 + rand(3)), 1);
             changes++;
             outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
         }
@@ -4674,7 +4728,7 @@ public final class Mutations extends MutationsHelper {
                 else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>");
                 player.createVagina();
                 player.clitLength = .25;
-                dynStats("sen", 10);
+                player.addCurse("sen", 10, 1);
             }
             //WANG GROWTH - TIGGERSHARK ONLY
             if (type == 1 && (!player.hasCock()) && changes < changeLimit && rand(3) == 0) {
@@ -4689,7 +4743,8 @@ public final class Mutations extends MutationsHelper {
                 }
                 outputText("!");
                 player.createCock(7, 1.4);
-                dynStats("sen", 5, "lus", 20);
+                dynStats("lus", 20);
+                player.addCurse("sen", 5, 1);
                 MutagenBonus("lib", 4);
                 changes++;
             }
@@ -4703,7 +4758,8 @@ public final class Mutations extends MutationsHelper {
                     player.balls = 2;
                     player.ballSize = 2;
                 }
-                dynStats("sen", 3, "lus", 10);
+                dynStats("lus", 10);
+                player.addCurse("sen", 3, 1);
                 MutagenBonus("lib", 2);
                 changes++;
             }
@@ -4844,7 +4900,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //b) Description while used
         outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.");
         //(if outside combat)
@@ -4989,7 +5045,7 @@ public final class Mutations extends MutationsHelper {
             if (player.tongue.type == Tongue.HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.");
             else outputText("\n\nYour inhuman tongue shortens, pulling tight in the very back of your throat.  After a moment the bunched-up tongue-flesh begins to flatten out, then extend forwards.  By the time the transformation has finished, your tongue has changed into a long, forked snake-tongue.");
             setTongueType(Tongue.SNAKE);
-            dynStats("sen", 5);
+            player.addCurse("sen", 5, 1);
             changes++;
         }
         //9c) III The fangs
@@ -5079,7 +5135,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         if (type != 3) {
             outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.  Minutes pass as you start wishing you had water with you, to get rid of the ");
             if (type == 0) outputText("aftertaste.");
@@ -5228,7 +5284,7 @@ public final class Mutations extends MutationsHelper {
             if (player.tongue.type == Tongue.HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.");
             else outputText("\n\nYour inhuman tongue shortens, pulling tight in the very back of your throat.  After a moment the bunched-up tongue-flesh begins to flatten out, then extend forwards.  By the time the transformation has finished, your tongue has changed into a long, forked snake-tongue.");
             setTongueType(Tongue.SNAKE);
-            dynStats("sen", 5);
+            player.addCurse("sen", 5, 1);
             changes++;
         }
         //Dragon tongue
@@ -5675,7 +5731,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.");
         player.refillHunger(5);
@@ -6047,7 +6103,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Text go!
         clearOutput();
         if (type == 0) outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
@@ -6090,7 +6146,7 @@ public final class Mutations extends MutationsHelper {
         //Does not add to change total
         if (player.tou > 50 && rand(3) == 0) {
             outputText("\n\nYour body seems to compress momentarily, becoming leaner and noticeably less tough.");
-            dynStats("tou", -2);
+            player.addCurse("tou", -2, 1);
         }
         //Intelliloss
         if (type == 0 && rand(3) == 0 && changes < changeLimit) {
@@ -6117,7 +6173,7 @@ public final class Mutations extends MutationsHelper {
             }
             //High intelligence
             else outputText("\n\nYou start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this fruit may have actually made you dumber.  It would be best not to eat too much of it.");
-            dynStats("int", -1);
+            player.addCurse("int", -1, 1);
             changes++;
         }
         if ((type == 1 || type == 2) && rand(3) == 0 && changes < changeLimit) {
@@ -6127,7 +6183,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (type == 3 && player.inte > 12 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nSomething alerts your senses. You walk on all " + (player.arms.type == Arms.DISPLACER ? "six" : "four") + " sniffing the air around you and growling as your mind regresses into a feral state not unlike that of a beast or rather in your case that of a displacer beast.");
-            dynStats("int", -3);
+            player.addCurse("int", -3, 1);
             changes++;
         }
         //Libido gain
@@ -6146,7 +6202,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.lust > 60) outputText("even more ");
                 outputText("turned on.");
             }
-            dynStats("sen", .25);
+            player.addCurse("sen", 1, 1);
             MutagenBonus("lib", 1);
             changes++;
         }
@@ -6260,7 +6316,7 @@ public final class Mutations extends MutationsHelper {
                 }
                 //(big sensitivity boost)
                 outputText("  Although the package is smaller, it feels even more sensitive – as if it retained all sensation of its larger size in its smaller form.");
-                dynStats("sen", 5);
+                player.addCurse("sen", 5, 1);
                 //Make note of other dicks changing
                 if (temp2 == 1) outputText("  Upon further inspection, all your " + Appearance.cockNoun(CockTypesEnum.CAT) + "s have shrunk!");
                 changes++;
@@ -6514,7 +6570,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You uncork the vial of fluid and drink it down.  The taste is sour, like a dry wine with an aftertaste not entirely dissimilar to alcohol.  Instead of the warmth you'd expect, it leaves your throat feeling cold and a little numb.");
@@ -6523,7 +6579,7 @@ public final class Mutations extends MutationsHelper {
         //-Reduces speed down to 50.
         if (player.spe > 50 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou start to feel sluggish and cold.  Lying down to bask in the sun might make you feel better.");
-            dynStats("spe", -1);
+            player.addCurse("spe", -1, 1);
             changes++;
         }
         //-Reduces sensitivity.
@@ -6875,7 +6931,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You uncork the hip flash and drink it down.  The taste is actualy quite good, like an alcohol but with a little fire within.  Just as you expected it makes you feel all hot and ready to take whole world head on.");
@@ -6884,13 +6940,13 @@ public final class Mutations extends MutationsHelper {
         //-Reduces speed down to 70.
         if (player.spe > 70 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou start to feel sluggish.  Lying down and enjoying liquor might make you feel better.");
-            dynStats("spe", -1);
+            player.addCurse("spe", -1, 1);
             changes++;
         }
         //-Reduces intelligence down to 60.
         if (player.inte > 60 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this firewater may have actually made you dumber.  It would be best not to drink too much of it.");
-            dynStats("int", -1);
+            player.addCurse("int", -1, 1);
             changes++;
         }
         //-Raises libido up to 90.
@@ -7116,7 +7172,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You chew on the weird glowy crystal, which begins to melt in your mouth like sugar. Your head spin for a moment as you begin to have hallucinations. This leaves you with weird feeling in your entire body, filling you with changes.");
@@ -7196,7 +7252,8 @@ public final class Mutations extends MutationsHelper {
         //Vagina Turns Glowing:
         if (player.hasVagina() && player.vaginaType() != 6 && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\nYou feel a sudden jolt in your pussy and undress as an irrepressible desire to masturbate takes hold of you. You keep fingering your itchy pussy moaning as you cum neon blue fluids. Wait, what? When you inspect your [vagina] you discover it has changed color to neon blue. Furthermore it seems to naturally glow in the dark like the fluids it now squirt.  <b>You now have a neon blue pussy that glow in the dark.</b>");
-            dynStats("sen", 2, "lus", 10);
+            dynStats("lus", 10);
+            player.addCurse("sen", 2, 1);
             player.vaginaType(6);
             changes++;
         }
@@ -7333,7 +7390,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You uncork the bottle and drink it down.  The taste is actualy quite sweet, like an alcohol but with a hint of hazelnuts flavor.  Would it change anything about you than making feeling of warmth spreading inside?");
@@ -7351,7 +7408,7 @@ public final class Mutations extends MutationsHelper {
         //-Reduces intelligence down to 60.
         if (player.inte > 60 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this firewater may have actually made you dumber.  It would be best not to drink too much of it.");
-            dynStats("int", -1);
+            player.addCurse("int", -1, 1);
             changes++;
         }
         //-Raises libido up to 80.
@@ -7392,9 +7449,9 @@ public final class Mutations extends MutationsHelper {
         }
         //-Reduces strength down to 70.
         if (player.str > 70) {
-            dynStats("str", -1);
-            if (player.str > 80) dynStats("str", -1);
-            if (player.str > 90) dynStats("str", -1);
+            player.addCurse("str", -1, 1);
+            if (player.str > 80) player.addCurse("str", -1, 1);
+            if (player.str > 90) player.addCurse("str", -1, 1);
             outputText("\n\nYou feel a little weaker, but maybe it's just the liqueur.");
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
@@ -7461,7 +7518,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>");
             player.createVagina();
             player.clitLength = .25;
-            dynStats("sen", 10);
+            player.addCurse("sen", 10, 1);
             changes++;
         }
         //WANG GROWTH
@@ -7477,7 +7534,8 @@ public final class Mutations extends MutationsHelper {
             }
             outputText("!");
             player.createCock(7, 1.4);
-            dynStats("sen", 5, "lus", 20);
+            dynStats("lus", 20);
+            player.addCurse("sen", 5, 1);
             MutagenBonus("lib", 4);
             changes++;
         }
@@ -7691,7 +7749,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //If this is a pregnancy change, only 1 change per proc.
         if (pregnantChange) changeLimit = 1;
         else clearOutput();
@@ -7783,11 +7841,11 @@ public final class Mutations extends MutationsHelper {
             //(low)
             if (rand(3) != 2) {
                 outputText("The feeling of small breezes blowing over your [skin.type] gets a little bit stronger.  How strange.  You pinch yourself and nearly jump when it hurts a tad more than you'd think. You've gotten more sensitive!");
-                dynStats("sen", 5);
+                player.addCurse("sen", 5, 1);
             }
             //(BIG boost 1/3 chance)
             else {
-                dynStats("sen", 15);
+                player.addCurse("sen", 15, 1);
                 outputText("Every movement of your body seems to bring heightened waves of sensation that make you woozy.  Your [armor] rubs your " + nippleDescript(0) + "s deliciously");
                 if (player.hasFuckableNipples()) {
                     outputText(", sticking to the ");
@@ -8113,7 +8171,7 @@ public final class Mutations extends MutationsHelper {
         if (type == 1) changeLimit += 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Generic eating text:
         clearOutput();
         outputText("You pop the nut into your mouth, chewing the delicious treat and swallowing it quickly.  No wonder harpies love these things so much!");
@@ -8135,7 +8193,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
             if (rand(2) == 0) outputText("\n\nA nice, slow warmth rolls from your gut out to your limbs, flowing through them before dissipating entirely. As it leaves, you note that your body feels softer and less resilient.");
             else outputText("\n\nYou feel somewhat lighter, but consequently more fragile.  Perhaps your bones have changed to be more harpy-like in structure?");
-            dynStats("tou", -1);
+            player.addCurse("tou", -1, 1);
         }
         //-Strength increase to 70
         if (rand(3) == 0 && changes < changeLimit) {
@@ -8226,7 +8284,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>");
             player.createVagina();
             player.clitLength = .25;
-            dynStats("sen", 10);
+            player.addCurse("sen", 10, 1);
         }
         //-Remove extra breast rows
         if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
@@ -8440,7 +8498,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Generic eating text:
         clearOutput();
         if (type == 0) outputText("You crack open the seed easily, and eat the fruit inside. A bit dry, as you expected, but with a sweet and aromatic taste that leaves you wanting another one.");
@@ -8462,7 +8520,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
             if (rand(2) == 0) outputText("\n\nA nice, slow warmth rolls from your gut out to your limbs, flowing through them before dissipating entirely. As it leaves, you note that your body feels softer and less resilient.");
             else outputText("\n\nYou feel somewhat lighter, but consequently more fragile.  Perhaps your bones have changed to be more avian-like in structure?");
-            dynStats("tou", -1);
+            player.addCurse("tou", -1, 1);
         }
         //-Strength increase to 70
         if (type == 0 && rand(3) == 0 && changes < changeLimit) {
@@ -8743,7 +8801,7 @@ public final class Mutations extends MutationsHelper {
         if (type == 1) changeLimit += 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Used as a holding variable for biggest dicks and the like
         var biggestCock:Number;
         //****************
@@ -8778,7 +8836,7 @@ public final class Mutations extends MutationsHelper {
             else if (player.inte > 10) outputText("\n\nYour mind wanders as you eat; you think of what it would be like to run forever, bounding across the wastes of Mareth in the simple joy of movement.  You bring the kanga fruit to your mouth one last time, only to realize there's nothing edible left on it.  The thought brings you back to yourself with a start.");
             //gain dumb (10-1 int):
             else outputText("\n\nYou lose track of everything as you eat, staring at the bugs crawling across the ground.  After a while you notice the dull taste of saliva in your mouth and realize you've been sitting there, chewing the same mouthful for five minutes.  You vacantly swallow and take another bite, then go back to staring at the ground.  Was there anything else to do today?");
-            dynStats("int", -1);
+            player.addCurse("int", -1, 1);
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //****************
@@ -8971,7 +9029,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Consuming Text
         if (type == 0) outputText("You wad up the sweet, pink gossamer and eat it, finding it to be delicious and chewy, almost like gum.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat.");
         else if (type == 1) outputText("You wad up the sweet, black gossamer and eat it, finding it to be delicious and chewy, almost like licorice.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat.");
@@ -8988,7 +9046,7 @@ public final class Mutations extends MutationsHelper {
         //(If speed>80, decreases speed down to minimum of 80)
         if (player.spe > 80 && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYou feel like resting high in the trees and waiting for your unsuspecting prey to wander below so you can take them without having to exert yourself.  What an odd thought!");
-            dynStats("spe", -1.5);
+            player.addCurse("spe", -2, 1);
             changes++;
         }
         //(increases sensitivity)
@@ -9014,7 +9072,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nLethargy rolls through you while you burp noisily.  You rub at your muscles and sigh, wondering why you need to be strong when you could just sew up a nice sticky web to catch your enemies.  ");
             if (player.spiderScore() < 4) outputText("Wait, you're not a spider, that doesn't make any sense!");
             else outputText("Well, maybe you should put your nice, heavy abdomen to work.");
-            dynStats("str", -1);
+            player.addCurse("str", -1, 1);
             changes++;
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
@@ -9207,7 +9265,7 @@ public final class Mutations extends MutationsHelper {
 		var changeLimit:Number = 1;
 		if (rand(2) == 0) changeLimit++;
 		if (rand(2) == 0) changeLimit++;
-		changeLimit += additionalTransformationChances();
+		changeLimit += player.additionalTransformationChances();
 		outputText("You wad up the sweet, midnight gossamer and eat it, finding it to be delicious and chewy, almost like licorice.  Munching away, your mouth generates an enormous amount of spit until you're drooling all over yourself while you devour the sweet treat. ");
 		TransformationUtils.pickAndRunMultipleEffects(
 				transformations.List_AtlachNacha,
@@ -9368,7 +9426,8 @@ public final class Mutations extends MutationsHelper {
             player.removePerk(PerkLib.Feeder);
         }
         if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
-        dynStats("str", 35, "tou", 35, "int", -1, "lib", 5, "lus", 40);
+        dynStats("str", 35, "tou", 35, "lib", 5, "lus", 40);
+        player.addCurse("int", -1, 1);
         player.refillHunger(30);
     }
 
@@ -9389,7 +9448,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Effect script 1:  (higher intelligence)
         if (rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou groan softly as your head begins pounding something fierce.  Wincing in pain, you massage your temples as the throbbing continues, and soon, the pain begins to fade; in its place comes a strange sense of sureness and wit.");
@@ -9589,12 +9648,12 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         outputText("You really should’ve brought this to someone who knew about it first!  Your stomach grumbles, and you feel a short momentaneous pain in your head.  As you swallow you feel your body start to change into something else.");
         //Stats
         if (player.str > 40 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nA sense of helplessness settles upon you as your limbs lose mass, leaving you feeling weaker and punier.");
-            dynStats("str", -1);
+            player.addCurse("str", -1, 1);
             changes++;
         }
         if (rand(3) == 0 && changes < changeLimit) {
@@ -9610,8 +9669,8 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.sens < 80 && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\nYour body becomes overwhelmed by stimuli for a moment making you shiver with a moan of pleasure at the mere caress of the wind. The excess sensation eventually dies down but leaves you more sensitive than before.");
-            dynStats("sen", 2);
-            if (player.sens < 40) dynStats("sen", 2);
+            player.addCurse("sen", 2, 1);
+            if (player.sens < 40) player.addCurse("sen", 2, 1);
             changes++;
         }
         if ((player.hairLength > 26 || player.hairLength < 16) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
@@ -9747,7 +9806,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         outputText("You drink the mead, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
         if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
         //Stats
@@ -9768,7 +9827,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.inte > 15 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
-            dynStats("int", -1);
+            player.addCurse("int", -1, 1);
             changes++;
         }
         if (rand(3) == 0 && changes < changeLimit && player.thickness > 20) {
@@ -9890,7 +9949,7 @@ public final class Mutations extends MutationsHelper {
         if (itemused) {
             if (rand(2) == 0) changeLimit++;
             if (rand(3) == 0) changeLimit++;
-            changeLimit += additionalTransformationChances();
+            changeLimit += player.additionalTransformationChances();
             outputText("As you admire the shiny jewel, you notice a flicker of energy flash across it, before a sudden jolt runs through your body! Letting out a howling moan, the jewel crumbles to dust as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
         }
         //Stats
@@ -9906,8 +9965,8 @@ public final class Mutations extends MutationsHelper {
             if (player.gender == 3) outputText(" and ");
             if (player.gender > 1) outputText("fingering your [clit]");
             outputText(". This is going to be fun.");
-            dynStats("sen", 1);
-            if (player.sens < 40) dynStats("sen", 1);
+            player.addCurse("sen", 1, 1);
+            if (player.sens < 40) player.addCurse("sen", 1, 1);
             changes++;
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
@@ -10037,7 +10096,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         outputText("You eat up the seed and not to soon after let out a howling moan as your body spasms in pleasure before the feeling subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
         //Stats
         if (rand(3) == 0 && changes < changeLimit) {
@@ -10053,7 +10112,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
             if (rand(2) == 0) outputText("\n\nA nice, slow warmth rolls from your gut out to your limbs, flowing through them before dissipating entirely. As it leaves, you note that your body feels softer and less resilient.");
             else outputText("\n\nYou feel somewhat lighter, but consequently more fragile.  Perhaps your bones have changed to be more harpy-like in structure?");
-            dynStats("tou", -1);
+            player.addCurse("tou", -1, 1);
         }
         if (rand(4) == 0 && changes < changeLimit) {
             outputText("\n\nYou roll your tongue over your lips as residual tingles run all over your body. Your nipples are tight and your groin warmed with jolting pleasure. You growl as you feel hornier and hornier before the feeling ebbs. Part of you says you should be concerned by this turn of events, but there are <i>sooo</i> many cuties out there to molest!");
@@ -10067,8 +10126,8 @@ public final class Mutations extends MutationsHelper {
             if (player.gender == 3) outputText(" and ");
             if (player.gender > 1) outputText("fingering your [clit]");
             outputText(". This is going to be fun.");
-            dynStats("sen", 1);
-            if (player.sens < 40) dynStats("sen", 1);
+            player.addCurse("sen", 1, 1);
+            if (player.sens < 40)  player.addCurse("sen", 1, 1);
             changes++;
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
@@ -10220,7 +10279,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         outputText("You apply the eyedrops to your eye"+(player.eyes.type == Eyes.MONOEYE ? "":"s")+" pointlessly hoping it can help you wash away all the dirty things you have seen on mareth. For a few seconds, your vision becomes… clearer? However this is not without other changes.");
         //Stats
 		if (rand(3) == 0 && changes < changeLimit) {
@@ -10247,10 +10306,10 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && rand(3) == 0 && player.spe > 15 && type == 1) {
             outputText("\n\nUgh why are you even in such a hurry all the time you should just relax and take your time instead of rushing ahead. The world ain't gonna end overnight.");
 			if (player.wings.type != Wings.LEVITATION) outputText(" Heck walking takes so much effort, if you could levitate you would skip on that too.");
-            dynStats("spe", -1);
-            if (player.str > 60) dynStats("spe", -1);
-            if (player.str > 80) dynStats("spe", -1);
-            if (player.str > 90) dynStats("spe", -1);
+            player.addCurse("spe", -1, 1);
+            if (player.str > 60) player.addCurse("spe", -1, 1);
+            if (player.str > 80) player.addCurse("spe", -1, 1);
+            if (player.str > 90) player.addCurse("spe", -1, 1);
             changes++;
         }
 		if (rand(4) == 0 && changes < changeLimit && type == 1) {
@@ -10365,7 +10424,7 @@ public final class Mutations extends MutationsHelper {
         var Ratatoskr_EyeColour:Array = ["green","light green","emerald"];
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         outputText("You chew at the nuts and begin to shake as your body is overcome with changes...");
         //Stats
         if (rand(4) == 0 && changes < changeLimit) {
@@ -10385,20 +10444,20 @@ public final class Mutations extends MutationsHelper {
         //[decrease Strength] (to some floor) // I figured 15 was fair, but you're in a better position to judge that than I am.
         if (changes < changeLimit && rand(3) == 0 && player.str > 15) {
             outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you are this smart?  You tilt your head a bit, wondering where that thought came from.");
-            dynStats("str", -1);
-            if (player.str > 60) dynStats("str", -1);
-            if (player.str > 80) dynStats("str", -1);
-            if (player.str > 90) dynStats("str", -1);
+            player.addCurse("str", -1, 1);
+            if (player.str > 60) player.addCurse("str", -1, 1);
+            if (player.str > 80) player.addCurse("str", -1, 1);
+            if (player.str > 90) player.addCurse("str", -1, 1);
             changes++;
         }
         //[decrease Toughness] (to some floor) // 20 or so was my thought here
         if (changes < changeLimit && rand(3) == 0 && player.tou > 20) {
             if (player.tou < 60) outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your supple skin isn't going to offer you much protection.");
             else outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
-            dynStats("tou", -1);
-            if (player.tou > 60) dynStats("tou", -1);
-            if (player.tou > 80) dynStats("tou", -1);
-            if (player.tou > 90) dynStats("tou", -1);
+            player.addCurse("tou", -1, 1);
+            if (player.tou > 60) player.addCurse("tou", -1, 1);
+            if (player.tou > 80) player.addCurse("tou", -1, 1);
+            if (player.tou > 90) player.addCurse("tou", -1, 1);
             changes++;
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
@@ -10535,7 +10594,7 @@ public final class Mutations extends MutationsHelper {
         if (itemused) {
             if (rand(2) == 0) changeLimit++;
             if (rand(3) == 0) changeLimit++;
-            changeLimit += additionalTransformationChances();
+            changeLimit += player.additionalTransformationChances();
             outputText("As you admire the shiny jewel, the wind around you suddenly becomes stronger on sending debris around, before a sudden blade of winds runs through your body leaving a bleeding cut! Rather then pain the fresh wound begins to throb with increasing pleasure. You let out a howling moan, the jewel crumbles to dust before the feeling slowly subsides into dull ecstasy. You twitch and drool as something seems to be happening to your body...");
         }
         //Stats
@@ -10551,8 +10610,8 @@ public final class Mutations extends MutationsHelper {
             if (player.gender == 3) outputText(" and ");
             if (player.gender > 1) outputText("fingering your [clit]");
             outputText(". This is going to be fun.");
-            dynStats("sen", 1);
-            if (player.sens < 40) dynStats("sen", 1);
+            player.addCurse("sen", 1, 1);
+            if (player.sens < 40) player.addCurse("sen", 1, 1);
             changes++;
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
@@ -10797,7 +10856,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //possible use effects:
         //- toughess up, sensitivity down
         if (rand(3) == 0 && changes < changeLimit) {
@@ -10810,7 +10869,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nA pinprick sensation radiates from your stomach down to your knees, as though your legs were falling asleep.  Wobbling slightly, you stand up and take a few stumbling steps to work the blood back into them.  The sensation fades, but your grace fails to return and you stumble again.  You'll have to be a little more careful moving around for a while.");
             changes++;
-            dynStats("spe", -1);
+            player.addCurse("spe", -1, 1);
         }
         //- corruption increases by 1 up to low threshold (~20)
         if (rand(3) == 0 && player.cor < 20 && changes < changeLimit) {
@@ -10882,7 +10941,7 @@ public final class Mutations extends MutationsHelper {
         if (enhanced) changeLimit += 2;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Used for dick and boob TFs
         var counter:int = 0;
 
@@ -10908,7 +10967,7 @@ public final class Mutations extends MutationsHelper {
             outputText("\n\nYou close your eyes, smirking to yourself mischievously as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental picture of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
             if (player.inte < 80) MutagenBonus("int", 4);
             if (player.lib < 80) MutagenBonus("lib", 1);
-            if (player.sens < 80) dynStats("sen", 1);
+            if (player.sens < 80) player.addCurse("sen", 1, 1);
             //gain small lust also
             dynStats("lus", 10);
             changes++;
@@ -10916,20 +10975,20 @@ public final class Mutations extends MutationsHelper {
         //[decrease Strength] (to some floor) // I figured 15 was fair, but you're in a better position to judge that than I am.
         if (changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you can outwit your foes with trickery and mischief?  You tilt your head a bit, wondering where that thought came from.");
-            dynStats("str", -1);
-            if (player.str > 60) dynStats("str", -1);
-            if (player.str > 80) dynStats("str", -1);
-            if (player.str > 90) dynStats("str", -1);
+            player.addCurse("str", -1, 1);
+            if (player.str > 60) player.addCurse("str", -1, 1);
+            if (player.str > 80) player.addCurse("str", -1, 1);
+            if (player.str > 90) player.addCurse("str", -1, 1);
             changes++;
         }
         //[decrease Toughness] (to some floor) // 20 or so was my thought here
         if (changes < changeLimit && rand(3) == 0) {
             if (player.tou < 60) outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your supple skin isn't going to offer you much protection.");
             else outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
-            dynStats("tou", -1);
-            if (player.tou > 60) dynStats("tou", -1);
-            if (player.tou > 80) dynStats("tou", -1);
-            if (player.tou > 90) dynStats("tou", -1);
+            player.addCurse("tou", -1, 1);
+            if (player.tou > 60) player.addCurse("tou", -1, 1);
+            if (player.tou > 80) player.addCurse("tou", -1, 1);
+            if (player.tou > 90) player.addCurse("tou", -1, 1);
             changes++;
         }
 
@@ -10999,7 +11058,8 @@ public final class Mutations extends MutationsHelper {
                 if (player.cocks[select].cockType == CockTypesEnum.HUMAN) {
                     outputText("\n\nYour " + cockDescript(select) + " clenches painfully, becoming achingly, throbbingly erect.  A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a vulpine-looking sheath.  You shudder as the crown of your " + cockDescript(select) + " reshapes into a point, the sensations nearly too much for you.  You throw back your head as the transformation completes, your " + Appearance.cockNoun(CockTypesEnum.FOX) + " much thicker than it ever was before.  <b>You now have a fox-cock.</b>");
                     player.cocks[select].cockThickness += .3;
-                    dynStats("sen", 10, "lus", 5);
+                    dynStats("lus", 5);
+                    player.addCurse("sen", 10, 1);
                 }
                 //Horse
                 else if (player.cocks[select].cockType == CockTypesEnum.HORSE) {
@@ -11009,17 +11069,20 @@ public final class Mutations extends MutationsHelper {
                     else player.cocks[select].cockLength -= .5;
                     player.cocks[select].cockThickness += .5;
 
-                    dynStats("sen", 4, "lus", 5);
+                    dynStats("lus", 5);
+                    player.addCurse("sen", 4, 1);
                 }
                 //Tentacular Tuesday!
                 else if (player.cocks[select].cockType == CockTypesEnum.TENTACLE) {
                     outputText("\n\nYour " + cockDescript(select) + " coils in on itself, reshaping and losing its plant-like coloration as thickens near the base, bulging out in a very canine-looking knot.  Your skin bunches painfully around the base, forming into a sheath.  <b>You now have a fox-cock.</b>");
-                    dynStats("sen", 4, "lus", 10);
+                    dynStats("lus", 10);
+                    player.addCurse("sen", 4, 1);
                 }
                 //Misc
                 else {
                     outputText("\n\nYour " + cockDescript(select) + " trembles, reshaping itself into a shiny red fox-shaped dick with a fat knot at the base.  <b>You now have a fox-cock.</b>");
-                    dynStats("sen", 4, "lus", 10);
+                    dynStats("lus", 10);
+                    player.addCurse("sen", 4, 1);
                 }
                 player.cocks[select].cockType = CockTypesEnum.FOX;
                 player.cocks[select].knotMultiplier = 1.25;
@@ -11066,7 +11129,8 @@ public final class Mutations extends MutationsHelper {
             player.breastRows[player.bRows() - 1].nipplesPerBreast = player.breastRows[player.bRows() - 2].nipplesPerBreast;
             if (player.hasFuckableNipples()) player.breastRows[player.bRows() - 1].fuckable = true;
             player.breastRows[player.bRows() - 1].lactationMultiplier = player.breastRows[player.bRows() - 2].lactationMultiplier;
-            dynStats("sen", 2, "lus", 30);
+            dynStats("lus", 30);
+            player.addCurse("sen", 2, 1);
             changes++;
         }
         //Find out if tits are eligible for evening
@@ -11096,7 +11160,8 @@ public final class Mutations extends MutationsHelper {
                     tits = true;
                     changes++;
                 }
-                dynStats("sen", 2, "lus", 10);
+                dynStats("lus", 10);
+                player.addCurse("sen", 2, 1);
             }
         }
         //HEAT!
@@ -11235,7 +11300,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You uncork the hip flash and drink it down.  The taste is actualy quite good, like an alcohol but with a little fire within.  Just as you expected it makes you feel all hot and ready to take whole world head on.");
@@ -11244,13 +11309,13 @@ public final class Mutations extends MutationsHelper {
         //-Reduces speed down to 70.
         if (player.spe > 70 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou start to feel sluggish.  Lying down and enjoying liquor might make you feel better.");
-            dynStats("spe", -1);
+            player.addCurse("spe", -1, 1);
             changes++;
         }
         //-Reduces intelligence down to 60.
         if (player.inte > 60 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this firewater may have actually made you dumber.  It would be best not to drink too much of it.");
-            dynStats("int", -1);
+            player.addCurse("int", -1, 1);
             changes++;
         }
         //-Raises libido up to 90.
@@ -11322,7 +11387,8 @@ public final class Mutations extends MutationsHelper {
                 if (!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
             } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
             changes++;
-            dynStats("lib", 3, "lus", 10);
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
         }
         //(CHANGE OTHER DICK)
         //Requires 1 lizard cock, multiple cocks
@@ -11546,7 +11612,8 @@ public final class Mutations extends MutationsHelper {
         outputText("You gulp the bottle's contents, and its sweet taste immediately invigorates you, making you feel calm and concentrated");
         //-60 fatigue, -2 libido, -20 lust]
         fatigue(-180);
-        dynStats("lib", -2, "lus", -90, "cor", -2);
+        dynStats("lus", -90, "cor", -2);
+        player.addCurse("lib", 2, 1);
         player.refillHunger(40);
     }
 
@@ -11556,7 +11623,8 @@ public final class Mutations extends MutationsHelper {
         outputText("The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body. ");
         //-30 fatigue, -2 libido, -10 lust]
         fatigue(-40);
-        dynStats("lib", -2, "lus", -100, "cor", (-4 - rand(3)), "scale", false);
+        dynStats("lus", -100, "cor", (-4 - rand(3)), "scale", false);
+        player.addCurse("lib", -2, 1);
         HPChange(100 + (10 * player.level) + rand(10 * player.level), true);
         player.refillHunger(30);
         if (player.cor > 50) dynStats("cor", -2);
@@ -11617,7 +11685,7 @@ public final class Mutations extends MutationsHelper {
     public function foxJewel(mystic:Boolean, player:Player):void {
         clearOutput();
         mutationStart("foxJewel" + (mystic ? "M" : ""), 3);
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         if (mystic) changeLimit += 2;
         if (mystic) outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie purple flame dancing within.  Without warning, the gem splits down the center, dissolving into nothing in your hand.  As the pale lavender flames swirl around you, the air is filled with a sickly sweet scent that drips with the bitter aroma of licorice, filling you with a dire warmth.");
         else outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie blue flame dancing within.  Without warning, the gem splits down the center, dissolving into nothing in your hand.  As the pale azure flames swirl around you, the air is filled with a sweet scent that drips with the aroma of wintergreen, sending chills down your spine.");
@@ -11636,10 +11704,10 @@ public final class Mutations extends MutationsHelper {
         //[decrease Strength toward 15]
         mutationStep(player.str > 15, mystic ? 2 : 3, function ():void {
             outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you can outwit your foes with trickery and mischief?  You tilt your head a bit, wondering where that thought came from.");
-            dynStats("str", -1);
-            if (player.str > 70) dynStats("str", -1);
-            if (player.str > 50) dynStats("str", -1);
-            if (player.str > 30) dynStats("str", -1);
+            player.addCurse("str", -1, 1);
+            if (player.str > 70) player.addCurse("str", -1, 1);
+            if (player.str > 50) player.addCurse("str", -1, 1);
+            if (player.str > 30) player.addCurse("str", -1, 1);
         });
         //[decrease Toughness toward 20]
         mutationStep(player.tou > 20, mystic ? 2 : 3, function ():void {
@@ -11648,7 +11716,7 @@ public final class Mutations extends MutationsHelper {
             //from 66 or greater toughness
             else outputText("\n\nYou feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
             dynStats("tou", -1);
-            if (player.tou > 66) dynStats("tou", -1);
+            if (player.tou > 66) player.addCurse("tou", -1, 1);
         });
         mutationStep(mystic && player.cor < 100, 2, function ():void {
             if (player.cor < 33) outputText("\n\nA sense of dirtiness comes over you, like the magic of this gem is doing some perverse impropriety to you.");
@@ -12083,7 +12151,8 @@ public final class Mutations extends MutationsHelper {
     public function urtaCum(player:Player):void {
         clearOutput();
         outputText("You uncork the bottle and drink the vulpine cum; it tastes great. Urta definitely produces good-tasting cum!");
-        dynStats("sens", 1, "lus", 5 + (player.cor / 5));
+        dynStats("lus", 5 + (player.cor / 5));
+        player.addCurse("sen", 1, 1);
         HPChange(Math.round(player.maxHP() * .25), true);
         player.slimeFeed();
         player.refillHunger(25);
@@ -12111,7 +12180,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         outputText("You pour some of the oil onto your hands and ");
         if (player.cor < 30) outputText("hesitantly ");
         else if (player.cor > 70) outputText("eagerly ");
@@ -12125,13 +12194,13 @@ public final class Mutations extends MutationsHelper {
         //Strength Loss:
         else if (player.str > 40 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nA sense of helplessness settles upon you as your limbs lose mass, leaving you feeling weaker and punier.");
-            dynStats("str", -1);
+            player.addCurse("str", -1, 1);
             changes++;
         }
         //Sensitivity Increase:
         if (player.sens < 70 && player.hasCock() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nA light breeze brushes over you and your skin tingles.  You have become more sensitive to physical sensation.");
-            dynStats("sen", 5);
+            player.addCurse("sen", 5, 1);
             changes++;
         }
         //Libido Increase:
@@ -12246,7 +12315,7 @@ public final class Mutations extends MutationsHelper {
             //buttChange(30,false,false,false);
             if (player.ass.analLooseness < 3) player.ass.analLooseness++;
             changes++;
-            dynStats("sen", 2);
+            player.addCurse("sen", 2, 1);
         }
         //Fertility Decrease:
         if (player.hasVagina() && rand(4) == 0 && changes < changeLimit) {
@@ -12352,7 +12421,8 @@ public final class Mutations extends MutationsHelper {
             if (player.cor < 50) outputText("  After a few cautious touches you decide it doesn't feel any different- it does certainly look odd, though.");
             else outputText("  After a few cautious touches you decide it doesn't feel any different - the sheer bizarreness of it is a big turn on though, and you feel it beginning to shine with anticipation at the thought of using it.");
             outputText("  <b>Your vagina is now ebony in color.</b>");
-            dynStats("sen", 2, "lus", 10);
+            dynStats("lus", 10);
+            player.addCurse("sen", 2, 1);
             player.vaginaType(5);
             changes++;
         }
@@ -12409,7 +12479,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         var Coon_HairColor:Array = ["brown", "chocolate", "tan", "caramel"];
         //stat gains:
         //gain speed to ceiling of 80
@@ -12422,14 +12492,14 @@ public final class Mutations extends MutationsHelper {
         //gain sensitivity
         if (player.sens < 80 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nThe wrinkled rind suddenly feels alarmingly distinct in your hands, and you drop the remnants of the fruit.  Wonderingly, you touch yourself with a finger - you can feel even the lightest pressure on your " + player.skinFurScales() + " much more clearly now!");
-            dynStats("sen", 2);
+            player.addCurse("sen", 2, 1);
             changes++;
         }
         //lose toughness to floor of 50
         if (rand(4) && player.tou > 50 && changes < changeLimit) {
             outputText("\n\nYou find yourself wishing you could just sit around and eat all day, and spend a while lazing about and doing nothing before you can rouse yourself to get moving.");
-            if (player.tou > 75) dynStats("tou", -1);
-            dynStats("tou", -1);
+            if (player.tou > 75) player.addCurse("tou", -1, 1);
+            player.addCurse("tou", -1, 1);
             changes++;
         }
 
@@ -12639,7 +12709,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //use:
         if (type == 0) {
             outputText("You pop several of the beans in your mouth and suck; they immediately reward you by giving up an oily, chocolatey flavor with a hint of bitterness.  For several minutes you ");
@@ -12667,9 +12737,9 @@ public final class Mutations extends MutationsHelper {
         if (player.tou > 50 && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYou feel a bit less sturdy, both physically and mentally.  In fact, you'd prefer to have somewhere to hide for the time being, until your confidence returns.  The next few minutes are passed in a mousey funk - even afterward, you can't quite regain the same sense of invincibility you had before.");
             changes++;
-            dynStats("tou", -1);
-            if (player.tou >= 75) dynStats("tou", -1);
-            if (player.tou >= 90) dynStats("tou", -1);
+            player.addCurse("tou", -1, 1);
+            if (player.tou >= 75) player.addCurse("tou", -1, 1);
+            if (player.tou >= 90) player.addCurse("tou", -1, 1);
         }
 
         //SEXYYYYYYYYYYY
@@ -12993,7 +13063,7 @@ public final class Mutations extends MutationsHelper {
             //Get warned!
             if (flags[kFLAGS.FERRET_BAD_END_WARNING] == 0) {
                 outputText("\n\nYou find yourself staring off into the distance, dreaming idly of chasing rabbits through a warren.  You shake your head, returning to reality.  <b>Perhaps you should cut back on all the Ferret Fruit?</b>");
-                dynStats("int", -(5 + rand(3)));
+                player.addCurse("int", -(5 + rand(3)), 1);
                 flags[kFLAGS.FERRET_BAD_END_WARNING] = 1;
             }
             //BEEN WARNED! BAD END! DUN DUN DUN
@@ -13016,7 +13086,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Ferret Fruit Effects
         //- + Thin:
         if (player.thickness > 15 && changes < changeLimit && rand(3) == 0) {
@@ -13244,7 +13314,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (boar) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         outputText("You take a bite into the pigtail truffle. It oddly tastes like bacon. You eventually finish eating. ");
         player.refillHunger(20);
         if (rand(3) == 0 && changes < changeLimit) {
@@ -13259,12 +13329,12 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.spe > 50 && changes < changeLimit && rand(4) == 0) {
             outputText("\n\nYou start to feel sluggish and cold.  Lying down to bask in the sun might make you feel better.");
-            dynStats("spe", -1);
+            player.addCurse("spe", -(1 + rand(3)), 1);
             changes++;
         }
         if (player.inte > 15 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
-            dynStats("int", -1);
+            player.addCurse("int", -(1 + rand(3)), 1);
             changes++;
         }
         //-----------------------
@@ -13274,7 +13344,7 @@ public final class Mutations extends MutationsHelper {
             if (flags[kFLAGS.PIG_BAD_END_WARNING] == 0) {
                 outputText("\n\nYou find yourself idly daydreaming of flailing about in the mud, letting go of all of your troubles. Eventually, you shake off the thought. Why would you do something like that? Maybe you should cut back on all the truffles?");
                 flags[kFLAGS.PIG_BAD_END_WARNING] = 1;
-                dynStats("inte", -3);
+                player.addCurse("int", -3, 1);
             } else {
                 outputText("\n\nAs you down the last of your truffle, your entire body begins to convulse violently. Your vision becomes blurry, and you black out.");
                 outputText("\n\nWhen you awaken, you are greeted by a large dog licking at your face. The dog seems oddly familiar. \"<i>Bessy, whatcha doin’ girl?</i>\" a voice calls. The voice seems familiar as well. A funny-looking pig on two legs soon appears at the dog’s side. \"<i>Now, now, what do we have here?</i>\" The pig inspects you for a moment, eventually finding a hint of pigtail truffle on your snout.");
@@ -13498,7 +13568,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("The ink taste salty and slimy, you really think you could use a full glass of fresh water to wash your aching throat.");
@@ -13777,7 +13847,8 @@ public final class Mutations extends MutationsHelper {
             if (player.cocks.length == 1) {
                 temp2 = player.increaseCock(0, rand(4) + 3);
                 temp = 0;
-                dynStats("sen", 1, "lus", 10);
+                dynStats("lus", 10);
+                player.addCurse("sen", 1, 1);
             }
             //Multicock
             else {
@@ -13797,7 +13868,8 @@ public final class Mutations extends MutationsHelper {
                 //Grow smallest cock!
                 //temp2 changes to growth amount
                 temp2 = player.increaseCock(temp, rand(4) + 3);
-                dynStats("sen", 1, "lus", 10);
+                dynStats("lus", 10);
+                player.addCurse("sen", 1, 1);
                 if (player.cocks[temp].cockThickness <= 2) player.cocks[temp].thickenCock(1);
             }
             if (temp2 > 2) outputText("\n\nYour " + cockDescript(temp) + " tightens painfully, inches of bulging dick-flesh pouring out from your crotch as it grows longer.  Thick pre forms at the pointed tip, drawn out from the pleasure of the change.");
@@ -13903,7 +13975,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("The ink taste salty and slimy, you really think you could use a full glass of fresh water to wash your aching throat.");
@@ -14187,7 +14259,8 @@ public final class Mutations extends MutationsHelper {
             if (player.cocks.length == 1) {
                 temp2 = player.increaseCock(0, rand(4) + 3);
                 temp = 0;
-                dynStats("sen", 1, "lus", 10);
+                dynStats("lus", 10);
+                player.addCurse("sen", 1, 1);
             }
             //Multicock
             else {
@@ -14207,7 +14280,8 @@ public final class Mutations extends MutationsHelper {
                 //Grow smallest cock!
                 //temp2 changes to growth amount
                 temp2 = player.increaseCock(temp, rand(4) + 3);
-                dynStats("sen", 1, "lus", 10);
+                dynStats("lus", 10);
+                player.addCurse("sen", 1, 1);
                 if (player.cocks[temp].cockThickness <= 2) player.cocks[temp].thickenCock(1);
             }
             if (temp2 > 2) outputText("\n\nYour " + cockDescript(temp) + " tightens painfully, inches of bulging dick-flesh pouring out from your crotch as it grows longer.  Thick pre forms at the pointed tip, drawn out from the pleasure of the change.");
@@ -14359,7 +14433,7 @@ public final class Mutations extends MutationsHelper {
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("The cum tastes pretty much like you expected it would, salty. Strangely, you feel warmer by the minute, perhaps it's your body adapting to the very hot feeling the cum left in your stomach.");
@@ -14384,7 +14458,7 @@ public final class Mutations extends MutationsHelper {
         //int down to 15
         if (player.inte > 15 && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
-            dynStats("int", -1);
+            player.addCurse("int", -1, 1);
             changes++;
         }
         //lib up to 75
@@ -14400,14 +14474,16 @@ public final class Mutations extends MutationsHelper {
                 outputText("\n\nYour [cock] becomes shockingly hard.  It turns a shiny inhuman purple and spasms, dribbling hot demon-like cum as it begins to grow.");
                 if (rand(4) == 0) temp = player.increaseCock(0, 3);
                 else temp = player.increaseCock(0, 1);
-                dynStats("sen", 1, "lust", 5 + temp * 3);
+                dynStats("lust", 5 + temp * 3);
+                player.addCurse("sen", 1, 1);
                 MutagenBonus("int", 1);
                 MutagenBonus("lib", 2);
                 if (temp < .5) outputText("  It stops almost as soon as it starts, growing only a tiny bit longer.");
                 if (temp >= .5 && temp < 1) outputText("  It grows slowly, stopping after roughly half an inch of growth.");
                 if (temp >= 1 && temp <= 2) outputText("  The sensation is incredible as more than an inch of lengthened dick-flesh grows in.");
                 if (temp > 2) outputText("  You smile and idly stroke your lengthening [cock] as a few more inches sprout.");
-                dynStats("sen", 1, "lus", 5 + temp * 3);
+                dynStats("lus", 5 + temp * 3);
+                player.addCurse("sen", 1, 1);
                 MutagenBonus("int", 1);
                 MutagenBonus("lib", 2);
                 outputText("  With the transformation complete, your [cock] returns to its normal coloration.");
@@ -14424,7 +14500,8 @@ public final class Mutations extends MutationsHelper {
                 }
                 if (int(Math.random() * 4) == 0) temp3 = player.increaseCock(temp2, 3);
                 else temp3 = player.increaseCock(temp2, 1);
-                dynStats("sen", 1, "lus", 5 + temp * 3);
+                dynStats("lus", 5 + temp * 3);
+                player.addCurse("sen", 1, 1);
                 MutagenBonus("int", 1);
                 MutagenBonus("lib", 2);
                 //Grammar police for 2 cocks
@@ -14546,14 +14623,14 @@ public final class Mutations extends MutationsHelper {
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("As you examine the shard it spontaneously melts. Rivulets of freezing liquid flow down your arms and a frigid chill spreads throughout your body.");
         //tou down to 20
         if (player.tou > 20 && rand(2) == 0 && changes < changeLimit) {
             outputText("\n\nAs the cold spreads through your frame, your vitality drains away and you feel oddly fragile, almost as if you were made of the ice yourself.");
-            dynStats("tou", -1);
+            player.addCurse("tou", -1, 1);
             changes++;
         }
         //spe up to 80
@@ -14626,7 +14703,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("\n\nYou feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size.");
             player.growTits(1 + rand(3), 1, false, 3);
             changes++;
-            dynStats("sen", .5);
+            player.addCurse("sen", 1, 1);
         }
         if (player.breastRows.length == 0) {
             outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
@@ -14744,7 +14821,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        //changeLimit += additionalTransformationChances();
+        //changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You eat the weird kelp seed and suddenly feel like singing. It seems like your talent for music are skyrocketing as you embrace the changes within you!");
@@ -14765,7 +14842,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You apply the sunscreen on your skin and suddenly feel some of your worries fly as you laugh cheerfully at the thought of taking a vacation day or two to rest and swim at the beach. Your body seems to react weirdly to the sunscreen.");
@@ -15091,7 +15168,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You bring the flower up to your nose and smell it. " +
@@ -15127,7 +15204,7 @@ public final class Mutations extends MutationsHelper {
         if (player.inte > 15 && rand(2) == 0 && changes < changeLimit) {
             outputText("\n\nYour train of thought begins to slow down as if your head been dipped into cold water for a few minutes.");
             if (player.inte < 30) outputText("  You're starting to have trouble speaking normally, using pronouns like I less and less and [name] more often than not when describing yourself. Ugh that's fine, doesn't matter if you're not the smartest person on Mareth so long as you got a body that can do the talking for you or fuck some nice mate into doing it in your stead.");
-            dynStats("int", -20);
+            player.addCurse("int", -20, 2);
             changes++;
         }
 
@@ -15161,7 +15238,8 @@ public final class Mutations extends MutationsHelper {
             else outputText("but you sternly rein in your hands and tuck them into your armpits as the arousing changes run their course.");
             outputText("  <b>You now have a dragon penis.</b>");
             //lose lust if sens>=50, gain lust if else
-            dynStats("sen", 10, "lus", 10);
+            dynStats("lus", 10);
+            player.addCurse("sen", 10, 1);
             changes++;
             //Apply the TF
             player.cocks[select].cockType = CockTypesEnum.DRAGON;
@@ -15174,7 +15252,7 @@ public final class Mutations extends MutationsHelper {
                     "Maybe it’s not that bad. You will need that fat when it’s cold outside.\n");
             player.growTits(1 + rand(3), 1, false, 3);
             changes++;
-            dynStats("sen", .5);
+            player.addCurse("sen", 1, 1);
         }
 
         //Normalchanges
@@ -15373,7 +15451,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You prepare the tea using grass you acquired and then drinks it. Its sharp taste fires up your palate and in moments, you find yourself more mentaly and physicaly sharp just like a blade.");
@@ -15395,10 +15473,10 @@ public final class Mutations extends MutationsHelper {
         //-Decrease strength toward 30
         if (changes < changeLimit && rand(3) == 0 && player.str > 30) {
             outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you can beat your foes with superior speed?");
-            dynStats("str", -1);
-            if (player.str > 60) dynStats("str", -1);
-            if (player.str > 80) dynStats("str", -1);
-            if (player.str > 90) dynStats("str", -1);
+            player.addCurse("str", -1, 1);
+            if (player.str > 60) player.addCurse("str", -1, 1);
+            if (player.str > 80) player.addCurse("str", -1, 1);
+            if (player.str > 90) player.addCurse("str", -1, 1);
             changes++;
         }
 
@@ -15618,7 +15696,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("You raise the disgusting black concoction to your mouth. The taste is better than its texture but leaves you with a strong aftertaste of sulfur.");
@@ -15639,7 +15717,7 @@ public final class Mutations extends MutationsHelper {
                 else outputText("\n\nYou feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size.");
                 player.growTits(1 + rand(3), 1, false, 3);
                 changes++;
-                dynStats("sen", .5);
+                player.addCurse("sen", 1, 1);
             }
             if (player.breastRows.length == 0) {
                 outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
@@ -15661,7 +15739,8 @@ public final class Mutations extends MutationsHelper {
                         temp = player.addHorseCock();
                         temp2 = player.increaseCock(temp, rand(4) + 4);
                         temp3 = 1;
-                        dynStats("sen", 4, "lus", 35);
+                        dynStats("lus", 35);
+                        player.addCurse("sen", 4, 1);
                         MutagenBonus("lib", 5);
                     }
                     if (player.cocks[0].cockType == CockTypesEnum.DOG) {
@@ -15669,7 +15748,8 @@ public final class Mutations extends MutationsHelper {
                         outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
                         temp2 = player.increaseCock(temp, rand(4) + 4);
                         temp3 = 1;
-                        dynStats("sen", 4, "lus", 35);
+                        dynStats("lus", 35);
+                        player.addCurse("sen", 4, 1);
                         MutagenBonus("lib", 5);
                     }
                     if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
@@ -15969,7 +16049,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //Temporary storage
         var temp:Number = 0;
         //clear screen
@@ -16148,7 +16228,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         //clear screen
         clearOutput();
         outputText("Sometimes you question your choices in life. Right now, for instance, your choice is to drink up the saliva of some fiery snail, thing. The first thing of note to happen is that your body begins to heat up. Whatever this thing is doing to you, it's clearly raising your arousal.");
@@ -16258,7 +16338,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         outputText("Having bought that odd-looking root on the bakery, you give it a try, only to face the mildly spicy taste of the transformative. Still, it has a rich flavour and texture, but soon that becomes secondary, as you realize that the foreign rhizome is changing your body!");
 
@@ -16583,7 +16663,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         outputText("You use all the courage you can muster and in one go, swallow the gossamer. At that very moment, your stomach groans as you feel your body changing...");
 
@@ -17198,7 +17278,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         if (type == 0) outputText("You bite into the fig, it’s sour, very sour. Trolls are supposed to enjoy this?");
 		if (type == 1) outputText("You bite into the fig. The icy crust gives a crunch before you’re met with the juice trapped within. It’s sour, very sour. Trolls are supposed to enjoy this?");
@@ -17232,7 +17312,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         outputText("You eat the kelp and a deep chill runs across your body as something in you begins to change.");
         if (player.blockingBodyTransformations()) {
@@ -17494,7 +17574,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
-        changeLimit += additionalTransformationChances();
+        changeLimit += player.additionalTransformationChances();
         clearOutput();
         outputText("You bite into the candy, your mouth foaming small sweet bubbles. Your body seems to react to it as you begin to change.");
         if (player.blockingBodyTransformations()) {

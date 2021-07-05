@@ -828,7 +828,7 @@ public function alvinaCampAdvancedStudy():void
 		outputText("You continue incanting until the white mist has been entirely absorbed, then sigh in relief now that the incantation is complete. Allowing yourself to masturbate to satisfaction. Alvina eyes you up and down then congratulates you on your success.\n\n");
 		outputText("\"<i>Congratulations, for not only are you now a true demon, you’ve kept your soul intact. A small piece of advice: don't lose that pendant or you will die. I suggest you keep it next to you at all times. ");
 		outputText("If a demon got ahold of it, he could likely drink it in the same way as Lethicite and you would wind up soulless like all the other idiots. Depending on the way your opponent uses the pendant, you could end up dead as well.</i>\"\n\n");
-		outputText("Wait WHAT!!! the phylactery has such a fatal flaw!? Couldn’t she had told it to you sooner! Now you will have to live with the terror of knowing your life is tied to an item and that alone is terrifying in itself. Alvina, however, does not seem bothered.\n\n");
+		outputText("Wait WHAT!!! The phylactery has such a fatal flaw!? Couldn’t she had told it to you sooner! Now you will have to live with the terror of knowing your life is tied to an item and that alone is terrifying in itself. Alvina, however, does not seem bothered.\n\n");
 		outputText("\"<i>And now for the last test... if you want to learn that one final spell I need you to kill someone.</i>\"\n\n");
 		outputText("Wait, kill someone? Who?\n\n");
 		outputText("\"<i>You heard me right. I need you to kill a paladin by the name of Siegweird who patrols the Blighted Ridge. Bring me back his holy symbol as proof of your deed and I will teach you the greatest spell in my arsenal.</i>\"\n\n");

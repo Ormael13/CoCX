@@ -376,7 +376,6 @@ public class HeXinDao extends BaseContent
         function sayLine(itype:ItemType,desc:String):String{
             return introText+desc+costText+(itype.value*3)+endText;
         }
-
         menu();
         addButton(0, "1st Stall", Tier1).hint("Check out the first stall with the cheapest TF items.");
         addButton(1, "2nd Stall", Tier2).hint("Check out the second stall with the cheaper TF items.");
@@ -565,71 +564,76 @@ public class HeXinDao extends BaseContent
         outputText("After entering the shop with a sign saying 'Equipment' over the doors you see a few shelves filled with various weapons, shields, armors and even rarer items like rings and necklaces. Behind the desk located in the central point of the shop you see a woman that seems to have mixed race traits. A shark face and a tail that sometimes show up on either side of the desk contrasts it's owner's feather covered arms that look more similar to bird wings.");
         outputText("\n\n\"<i>Greetings dear customer. I'm Serena and this is my humble shop. Look around and if something catches your eyes let me know,</i>\" she say all that almost entirely in one breath after noticing your presence.");
         menu();
-        addButton(1, "Shelf 1", soulequipmentshelf1).hint("Misc");
+        addButton(1, "Shelf 1", soulequipmentshelf1).hint("Soul Training Equipment");
         addButton(2, "Shelf 2", soulequipmentshelf2).hint("Weapons");
-        addButton(3, "Shelf 3", soulequipmentshelf3).hint("Consumables");
-        addButton(4, "Shelf 4", soulequipmentshelf4).hint("Armors");
+        addButton(3, "Shelf 3", soulequipmentshelf3).hint("Armors");
+        addButton(6, "Shelf 4", soulequipmentshelf4).hint("Consumables");
+        addButton(7, "Shelf 5", soulequipmentshelf5).hint("Misc");
 		//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
         //addButton(12, "Talk", ).hint("Tak with .");
-        addButton(5, undergarments.STSHIRT.shortName, weaponBuy, undergarments.STSHIRT);
-        addButton(6, undergarments.STPANTY.shortName, weaponBuy, undergarments.STPANTY);
-        addButton(7, headjewelries.TSHAIR.shortName, weaponBuy, headjewelries.TSHAIR);
-        addButton(8, necklaces.TSNECK.shortName, weaponBuy, necklaces.TSNECK);
-        addButton(9, jewelries.TSRNG.shortName, weaponBuy, jewelries.TSRNG);
-        addButton(10, necklaces.SMNECK.shortName, weaponBuy, necklaces.SMNECK);
-        addButton(11, jewelries.SOULRNG.shortName, weaponBuy, jewelries.SOULRNG);
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
     public function soulequipmentshelf1():void {
         menu();
-        addButton(0, weapons.TRASAXE.shortName, weaponBuy, weapons.TRASAXE);
-        addButton(1, weaponsrange.TRSXBOW.shortName, weaponBuy, weaponsrange.TRSXBOW);
-        addButton(2, shields.TRASBUC.shortName, weaponBuy, shields.TRASBUC);
-        addButton(3, armors.TRASARM.shortName, weaponBuy, armors.TRASARM);
-        addButton(5, weapons.W_STAFF.shortName, weaponBuy, weapons.W_STAFF);
-        addButton(6, weapons.GUANDAO.shortName, weaponBuy, weapons.GUANDAO);
-        addButton(7, weapons.HSWORDS.shortName, weaponBuy, weapons.HSWORDS);
-		addButton(8, weapons.SNAKESW.shortName, weaponBuy, weapons.SNAKESW);
-		//addButton(9, Changdao
-        addButton(10, weapons.FLYWHIS.shortName, weaponBuy, weapons.FLYWHIS);
-        addButton(11, weapons.CHAKRAM.shortName, weaponBuy, weapons.CHAKRAM);
-        addButton(12, shields.MABRACE.shortName, weaponBuy, shields.MABRACE);
+		addButton(0, weapons.TRASAXE.shortName, weaponBuy1, weapons.TRASAXE);
+        addButton(1, weaponsrange.TRSXBOW.shortName, weaponBuy1, weaponsrange.TRSXBOW);
+        addButton(2, shields.TRASBUC.shortName, weaponBuy1, shields.TRASBUC);
+        addButton(3, armors.TRASARM.shortName, weaponBuy1, armors.TRASARM);
+        addButton(4, weaponsflyingswords.TRASFLS.shortName, weaponBuy1, weaponsflyingswords.TRASFLS);
+        addButton(5, undergarments.STSHIRT.shortName, weaponBuy1, undergarments.STSHIRT);
+        addButton(6, undergarments.STPANTY.shortName, weaponBuy1, undergarments.STPANTY);
+        addButton(7, headjewelries.TSHAIR.shortName, weaponBuy1, headjewelries.TSHAIR);
+        addButton(8, necklaces.TSNECK.shortName, weaponBuy1, necklaces.TSNECK);
+        addButton(9, jewelries.TSRNG.shortName, weaponBuy1, jewelries.TSRNG);
+        addButton(10, necklaces.SMNECK.shortName, weaponBuy1, necklaces.SMNECK);
+        addButton(11, jewelries.SOULRNG.shortName, weaponBuy1, jewelries.SOULRNG);
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf2():void {
         menu();
-        addButton(0, weapons.UGATANA.shortName, weaponBuy, weapons.UGATANA);
-        addButton(1, weapons.KATANA.shortName, weaponBuy, weapons.KATANA);
-        addButton(2, weapons.NODACHI.shortName, weaponBuy, weapons.NODACHI);
-        addButton(3, weapons.RCLAYMO.shortName, weaponBuy, weapons.RCLAYMO);
-        addButton(4, weapons.SCLAYMO.shortName, weaponBuy, weapons.SCLAYMO);
-        addButton(5, weapons.S_GAUNT.shortName, weaponBuy, weapons.S_GAUNT);
-        addButton(6, weapons.CLAWS.shortName, weaponBuy, weapons.CLAWS);
-        addButton(7, weapons.RIBBON.shortName, weaponBuy, weapons.RIBBON);
-        addButton(8, weapons.TCLAYMO.shortName, weaponBuy, weapons.TCLAYMO);
-        addButton(9, weapons.ACLAYMO.shortName, weaponBuy, weapons.ACLAYMO);
-        addButton(10, weapons.WHIP.shortName, weaponBuy, weapons.WHIP);
-        addButton(11, weapons.PWHIP.shortName, weaponBuy, weapons.PWHIP);
-        addButton(12, weapons.ZWNDER.shortName, weaponBuy, weapons.ZWNDER);
-        addButton(13, weapons.PRURUMI.shortName, weaponBuy, weapons.PRURUMI);
+        addButton(0, weapons.UGATANA.shortName, weaponBuy2, weapons.UGATANA);
+        addButton(1, weapons.KATANA.shortName, weaponBuy2, weapons.KATANA);
+        addButton(2, weapons.NODACHI.shortName, weaponBuy2, weapons.NODACHI);
+        addButton(3, weapons.RCLAYMO.shortName, weaponBuy2, weapons.RCLAYMO);
+        addButton(4, weapons.SCLAYMO.shortName, weaponBuy2, weapons.SCLAYMO);
+        addButton(5, weapons.S_GAUNT.shortName, weaponBuy2, weapons.S_GAUNT);
+        addButton(6, weapons.CLAWS.shortName, weaponBuy2, weapons.CLAWS);
+        addButton(7, weapons.RIBBON.shortName, weaponBuy2, weapons.RIBBON);
+        addButton(8, weapons.TCLAYMO.shortName, weaponBuy2, weapons.TCLAYMO);
+        addButton(9, weapons.ACLAYMO.shortName, weaponBuy2, weapons.ACLAYMO);
+        addButton(10, weapons.WHIP.shortName, weaponBuy2, weapons.WHIP);
+        addButton(11, weapons.PWHIP.shortName, weaponBuy2, weapons.PWHIP);
+        addButton(12, weapons.ZWNDER.shortName, weaponBuy2, weapons.ZWNDER);
+        addButton(13, weapons.PRURUMI.shortName, weaponBuy2, weapons.PRURUMI);
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf3():void {
         menu();
-        if (player.level >= 6) addButton(5, consumables.BANGBM1.shortName, weaponBuy, consumables.BANGBM1);
+        if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(0, armors.LAYOARM.shortName, weaponBuy3, armors.LAYOARM);
+		else addButtonDisabled(0, "???", "Req. Soul Apprentice");
+        if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(1, armors.HAYOARM.shortName, weaponBuy3, armors.HAYOARM);
+		else addButtonDisabled(1, "???", "Req. Soul Personage");
+        //addButton(11, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
+        //addButton(12, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
+        //addButton(10, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic heavy armor made of soulmetal
+        addButton(14, "Back", serenamerchant);
+    }
+    public function soulequipmentshelf4():void {
+        menu();
+        if (player.level >= 6) addButton(5, consumables.BANGBM1.shortName, weaponBuy4, consumables.BANGBM1);
 		else addButtonDisabled(5, "???", "Req. lvl 6+");
-        if (player.level >= 24) addButton(6, consumables.BANGBM2.shortName, weaponBuy, consumables.BANGBM2);
+        if (player.level >= 24) addButton(6, consumables.BANGBM2.shortName, weaponBuy4, consumables.BANGBM2);
         else addButtonDisabled(6, "???", "Req. lvl 24+");
         if (player.level >= 42) {
-			addButton(0, consumables.BALLOFL.shortName, weaponBuy, consumables.BALLOFL);
-			addButton(1, consumables.FROZENB.shortName, weaponBuy, consumables.FROZENB);
-			addButton(2, consumables.THUNDBl.shortName, weaponBuy, consumables.THUNDBl);
-			addButton(3, consumables.BALLOTD.shortName, weaponBuy, consumables.BALLOTD);
-			addButton(4, consumables.POISONB.shortName, weaponBuy, consumables.POISONB);
-			addButton(7, consumables.BANGBM3.shortName, weaponBuy, consumables.BANGBM3);
-			addButton(8, consumables.BANGBM3.shortName, weaponBuy, consumables.BANGBM3);
+			addButton(0, consumables.BALLOFL.shortName, weaponBuy4, consumables.BALLOFL);
+			addButton(1, consumables.FROZENB.shortName, weaponBuy4, consumables.FROZENB);
+			addButton(2, consumables.THUNDBl.shortName, weaponBuy4, consumables.THUNDBl);
+			addButton(3, consumables.BALLOTD.shortName, weaponBuy4, consumables.BALLOTD);
+			addButton(4, consumables.POISONB.shortName, weaponBuy4, consumables.POISONB);
+			addButton(7, consumables.BANGBM3.shortName, weaponBuy4, consumables.BANGBM3);
+			addButton(8, consumables.BANGBM3.shortName, weaponBuy4, consumables.BANGBM3);
 		}
         else {
 			addButtonDisabled(0, "???", "Req. lvl 42+");
@@ -640,40 +644,117 @@ public class HeXinDao extends BaseContent
 			addButtonDisabled(7, "???", "Req. lvl 42+");
 			addButtonDisabled(8, "???", "Req. lvl 42+");
 		}
-        addButton(10, consumables.BANGB_M.shortName, weaponBuy, consumables.BANGB_M);
-        addButton(11, consumables.W_STICK.shortName, weaponBuy, consumables.W_STICK);
+        addButton(10, consumables.BANGB_M.shortName, weaponBuy4, consumables.BANGB_M);
+        addButton(11, consumables.W_STICK.shortName, weaponBuy4, consumables.W_STICK);
         addButton(14, "Back", serenamerchant);
     }
-    public function soulequipmentshelf4():void {
+    public function soulequipmentshelf5():void {
         menu();
-        if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(0, armors.LAYOARM.shortName, weaponBuy, armors.LAYOARM);
-		else addButtonDisabled(0, "???", "Req. Soul Apprentice");
-        if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(1, armors.HAYOARM.shortName, weaponBuy, armors.HAYOARM);
-		else addButtonDisabled(1, "???", "Req. Soul Personage");
-        //addButton(11, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
-        //addButton(12, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
-        //addButton(10, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic heavy armor made of soulmetal
+		addButton(5, weapons.W_STAFF.shortName, weaponBuy5, weapons.W_STAFF);
+        addButton(6, weapons.GUANDAO.shortName, weaponBuy5, weapons.GUANDAO);
+        addButton(7, weapons.HSWORDS.shortName, weaponBuy5, weapons.HSWORDS);
+		addButton(8, weapons.SNAKESW.shortName, weaponBuy5, weapons.SNAKESW);
+		//addButton(9, Changdao
+        addButton(10, weapons.FLYWHIS.shortName, weaponBuy5, weapons.FLYWHIS);
+        addButton(11, weapons.CHAKRAM.shortName, weaponBuy5, weapons.CHAKRAM);
+        addButton(12, shields.MABRACE.shortName, weaponBuy5, shields.MABRACE);
         addButton(14, "Back", serenamerchant);
     }
 
-    private function weaponBuy(itype:ItemType):void {
+    private function weaponBuy1(itype:ItemType):void {
         clearOutput();
         outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
         //outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
         if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
             outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
             //Goto shop main menu
-            doNext(serenamerchant);
+            doNext(soulequipmentshelf1);
             return;
         }
         else outputText("\n\nDo you buy it?\n\n");
         //Go to debit/update function or back to shop window
-        doYesNo(curry(debitWeapon,itype), serenamerchant);
+        doYesNo(curry(debitWeapon1,itype), soulequipmentshelf1);
     }
-    private function debitWeapon(itype:ItemType):void {
+    private function debitWeapon1(itype:ItemType):void {
         flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
         statScreenRefresh();
-        inventory.takeItem(itype, serenamerchant);
+        inventory.takeItem(itype, soulequipmentshelf1);
+    }
+    private function weaponBuy2(itype:ItemType):void {
+        clearOutput();
+        outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
+        //outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
+        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
+            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
+            //Goto shop main menu
+            doNext(soulequipmentshelf2);
+            return;
+        }
+        else outputText("\n\nDo you buy it?\n\n");
+        //Go to debit/update function or back to shop window
+        doYesNo(curry(debitWeapon2,itype), soulequipmentshelf2);
+    }
+    private function debitWeapon2(itype:ItemType):void {
+        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
+        statScreenRefresh();
+        inventory.takeItem(itype, soulequipmentshelf2);
+    }
+    private function weaponBuy3(itype:ItemType):void {
+        clearOutput();
+        outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
+        //outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
+        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
+            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
+            //Goto shop main menu
+            doNext(soulequipmentshelf3);
+            return;
+        }
+        else outputText("\n\nDo you buy it?\n\n");
+        //Go to debit/update function or back to shop window
+        doYesNo(curry(debitWeapon3,itype), soulequipmentshelf3);
+    }
+    private function debitWeapon3(itype:ItemType):void {
+        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
+        statScreenRefresh();
+        inventory.takeItem(itype, soulequipmentshelf3);
+    }
+    private function weaponBuy4(itype:ItemType):void {
+        clearOutput();
+        outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
+        //outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
+        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
+            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
+            //Goto shop main menu
+            doNext(soulequipmentshelf4);
+            return;
+        }
+        else outputText("\n\nDo you buy it?\n\n");
+        //Go to debit/update function or back to shop window
+        doYesNo(curry(debitWeapon4,itype), soulequipmentshelf4);
+    }
+    private function debitWeapon4(itype:ItemType):void {
+        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
+        statScreenRefresh();
+        inventory.takeItem(itype, soulequipmentshelf4);
+    }
+    private function weaponBuy5(itype:ItemType):void {
+        clearOutput();
+        outputText("\"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
+        //outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
+        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
+            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
+            //Goto shop main menu
+            doNext(soulequipmentshelf5);
+            return;
+        }
+        else outputText("\n\nDo you buy it?\n\n");
+        //Go to debit/update function or back to shop window
+        doYesNo(curry(debitWeapon5,itype), soulequipmentshelf5);
+    }
+    private function debitWeapon5(itype:ItemType):void {
+        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
+        statScreenRefresh();
+        inventory.takeItem(itype, soulequipmentshelf5);
     }
 	
 	public function entranceToRiverDungeon():void {

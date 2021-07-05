@@ -59,13 +59,13 @@ public class Exploration extends BaseContent
 
 		public function furriteFnGen(iftrue:Number = 3, iffalse:Number = 1):Function {
 			return function ():Number {
-				return player.findPerk(PerkLib.PiercedFurrite) >= 0 ? iftrue : iffalse;
+				return player.hasPerk(PerkLib.PiercedFurrite) ? iftrue : iffalse;
 			}
 		}
 		
 		public function lethiteFnGen(iftrue:Number = 3, iffalse:Number = 1):Function {
 			return function ():Number {
-				return player.findPerk(PerkLib.PiercedLethite) >= 0 ? iftrue : iffalse;
+				return player.hasPerk(PerkLib.PiercedLethite) ? iftrue : iffalse;
 			}
 		}
 		//const MET_OTTERGIRL:int = 777;
@@ -196,7 +196,7 @@ public class Exploration extends BaseContent
 				if (player.hasVagina()) impGobGol++;
 				if (player.totalFertility() >= 30) impGobGol++;
 				if (player.cumQ() >= 200) impGobGol--;
-				if (player.findPerk(PerkLib.PiercedLethite) >= 0) {
+				if (player.hasPerk(PerkLib.PiercedLethite)) {
 					if (impGobGol <= 3) impGobGol += 2;
 					else if (impGobGol < 7) impGobGol = 7;
 				}

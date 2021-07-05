@@ -47,7 +47,7 @@ public class Pregnancy extends NPCAwareContent {
             if(!player.hasStatusEffect(StatusEffects.Birthed)) player.createStatusEffect(StatusEffects.Birthed,1,0,0,0);
             else {
                 player.addStatusValue(StatusEffects.Birthed,1,1);
-                if(player.findPerk(PerkLib.BroodMother) < 0 && player.statusEffectv1(StatusEffects.Birthed) >= 10) {
+                if(!player.hasPerk(PerkLib.BroodMother) && player.statusEffectv1(StatusEffects.Birthed) >= 10) {
                     EngineCore.outputText("\n<b>You have gained the Brood Mother perk</b> (Pregnancies progress twice as fast as a normal woman's).\n");
                     player.createPerk(PerkLib.BroodMother,0,0,0,0);
                 }
@@ -613,13 +613,13 @@ public class Pregnancy extends NPCAwareContent {
                         EngineCore.outputText("\nYou tell her that she'll just have to wait, you want them out too. It's getting heavy.\n");
                         EngineCore.outputText("\nJoy pouts, \"<i>But I want them to come out now!</i>\" She whines, then she heaves a heavy sigh. \"<i>Alright, I guess it'll be, like, worth the wait...</i>\" She looks at your [breasts] and develops a sly expression. \"<i>Like... some nice creamy milk would make me feel better...</i>\" She wheedles.\n");
                         EngineCore.outputText("\n");
-                        if (player.findPerk(PerkLib.Feeder) >= 0) EngineCore.outputText("You grin at Joy's idea, but you can't simply mash her against your breasts and nurse her without some teasing first.");
+                        if (player.hasPerk(PerkLib.Feeder)) EngineCore.outputText("You grin at Joy's idea, but you can't simply mash her against your breasts and nurse her without some teasing first.");
                         EngineCore.outputText("You tell Joy that she can have some, but she has to ask nicely, like a good girl.\n");
                         EngineCore.outputText("\nThe bimbo mouse presses her hands together and gives you a winning smile, eyes wide with an uncharacteristic innocence. \"<i>Like, [name], will you please let your little Joyjoy suck on your [breasts] and drink all the yummy mommy-milk she can hold? Puh-lease?</i>\" She begs.\n");
                         EngineCore.outputText("\nYou expose your breasts and open your arms in invitation.\n");
                         EngineCore.outputText("\nJoy squeaks in glee and rushes into your embrace, rubbing her " + (jojoScene.pregnancy.isPregnant ? "swollen " : "") + "belly against your baby-filled stomach and nuzzling your breastdescript excitedly. She wastes no time in slurping on your nipplesdescript until they are painfully erect, then sucks the closest one into her mouth and starts suckling as if her life depends on it.\n");
                         EngineCore.outputText("\nBy the time Joy's had her fill, your babies have calmed down a little. It seems like being close to Joy might have actually helped calm the little mice down. Joy yawns and nuzzles your [breasts].\n");
-                        EngineCore.outputText("\n\"<i>Mmm... Sooo good.</i>\" Joy murmurs, then burps softly. \"<i>I feel, like, so sleepy now...</i>\" She mumbles, yawning hugely, then reluctantly she pushes herself off of you and starts stumbling away in the direction of her bed" + (player.lactationQ() >= 750 || player.findPerk(PerkLib.Feeder) >= 0 ? ", her belly audibly sloshing from all the milk you let her stuff herself with" : "") + ".\n");
+                        EngineCore.outputText("\n\"<i>Mmm... Sooo good.</i>\" Joy murmurs, then burps softly. \"<i>I feel, like, so sleepy now...</i>\" She mumbles, yawning hugely, then reluctantly she pushes herself off of you and starts stumbling away in the direction of her bed" + (player.lactationQ() >= 750 || player.hasPerk(PerkLib.Feeder) ? ", her belly audibly sloshing from all the milk you let her stuff herself with" : "") + ".\n");
                         EngineCore.outputText("\nYou sigh, glad to finally have a moment to rest.\n");
                     }
                     else {

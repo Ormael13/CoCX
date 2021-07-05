@@ -82,7 +82,9 @@ public class CombatTeases extends BaseCombatContent {
 		//Extra chance for sexy undergarments.
 		chance += player.upperGarment.sexiness;
 		chance += player.lowerGarment.sexiness;
-		chance += player.jewelry.sexiness;
+		//chance += player.jewelry.sexiness;
+		chance += player.miscJewelry.sexiness;
+		chance += player.miscJewelry2.sexiness;
 		//10% for seduction perk
 		if (player.hasPerk(PerkLib.Seduction)) chance += 10;
 		//10% for sexy armor types

@@ -1,9 +1,11 @@
 ﻿package classes 
 {
 import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
+import classes.Items.NecklaceLib;
 
 /**
 	 * Character class for player and NPCs. Has subclasses Player and NonPlayer.
@@ -756,6 +758,7 @@ import classes.Items.JewelryLib;
 		public override function maxSoulforce():Number
 		{
 			var max:Number = 50;
+			if (hasPerk(PerkLib.FlyingSwordPath)) max += 50;
 			if (hasPerk(PerkLib.DemonicLethicite)) max += Math.round(lib);
 			if (hasPerk(PerkLib.Metamorph)) max += (50 * (1 + perkv1(PerkLib.Metamorph)));
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) max += 25;
@@ -831,7 +834,7 @@ import classes.Items.JewelryLib;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude2;//+100
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude3;//+100
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude4;//+100
-			if (necklaceName == "soulmetal necklace") max += necklaceEffectMagnitude;//+100
+			if (necklaceEffectId == NecklaceLib.MODIFIER_SF) max += necklaceEffectMagnitude;//+100	 necklaceName == "soulmetal necklace"
 			max += level * 5;
 			if (level <= 6) max += level * 5;
 			if (hasPerk(PerkLib.UnlockSpirit)) max += level * 5;
@@ -1013,9 +1016,10 @@ import classes.Items.JewelryLib;
 			var max1:Number = 0;
 			if (hasPerk(PerkLib.ICastAsuraFist)) max1 += maxOverWrath();
 			else max1 += maxWrath();
-			var max2:Number = 0.8;
-			if (flags[kFLAGS.GAME_DIFFICULTY] < 2) max2 += 0.2;
+			var max2:Number = 0.75;
+			if (flags[kFLAGS.GAME_DIFFICULTY] < 2) max2 += 0.25;
 			//if (hasPerk(PerkLib.)) max2 += 0.1;
+			if (necklaceName == "Wrathless") max2 += 0.25;
 			max1 *= max2;
 			max1 = Math.round(max1);
 			return max1;
@@ -1024,8 +1028,8 @@ import classes.Items.JewelryLib;
 			var max1:Number = 0;
 			if (hasPerk(PerkLib.ICastAsuraFist)) max1 += maxOverWrath();
 			else max1 += maxWrath();
-			var max2:Number = 0.6;
-			if (flags[kFLAGS.GAME_DIFFICULTY] < 2) max2 += 0.4;
+			var max2:Number = 0.5;
+			if (flags[kFLAGS.GAME_DIFFICULTY] < 2) max2 += 0.5;
 			if (hasPerk(PerkLib.MagesWrath)) max2 += 0.05;
 			if (hasPerk(PerkLib.MagesWrathEx)) max2 += 0.05;
 			if (hasPerk(PerkLib.WarMageNovice)) max2 += 0.05;
@@ -1033,6 +1037,7 @@ import classes.Items.JewelryLib;
 			if (hasPerk(PerkLib.WarMageAdept)) max2 += 0.05;
 			if (hasPerk(PerkLib.WarMageExpert)) max2 += 0.05;
 			if (hasPerk(PerkLib.WarMageMaster)) max2 += 0.05;
+			if (necklaceName == "Wrathless") max2 += 0.5;
 			max1 *= max2;
 			max1 = Math.round(max1);
 			return max1;
@@ -1093,9 +1098,11 @@ import classes.Items.JewelryLib;
 			if (hasPerk(PerkLib.GrandArchmage) && inte >= 125) max += 225;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle) && inte >= 150) max += 270;
 			if (hasPerk(PerkLib.GrandArchmage3rdCircle) && inte >= 175) max += 315;
+			if (hasPerk(PerkLib.GrandGreyArchmage) && inte >= 225) max += 600;
 			if (hasPerk(PerkLib.GrandMage) && inte >= 75) max += 135;
-			if (hasPerk(PerkLib.GreyArchmage) && inte >= 225) max += 600;
-			if (hasPerk(PerkLib.GreyMage) && inte >= 200) max += 450;
+			if (hasPerk(PerkLib.GreyArchmage) && inte >= 175) max += 450;
+			if (hasPerk(PerkLib.GreyMage) && inte >= 125) max += 300;
+			if (hasPerk(PerkLib.GreyMageApprentice) && inte >= 75) max += 150;
 			if (hasPerk(PerkLib.Mage) && inte >= 50) max += 90;
 			if (hasPerk(PerkLib.Spellpower) && inte >= 50) max += 45;
 			if (hasPerk(PerkLib.JobSorcerer)) max += 45;
@@ -1107,6 +1114,10 @@ import classes.Items.JewelryLib;
 			var multimax:Number = 1;
 			if (game.player.elfScore() >= 5) multimax += 0.1;
 			if (game.player.elfScore() >= 11) multimax += 0.1;
+			if (game.player.woodElfScore() >= 22) multimax += 0.1;
+			if (game.player.woodElfScore() >= 25) multimax += 0.1;
+			if (game.player.woodElfScore() >= 28) multimax += 0.1;
+			if (game.player.woodElfScore() >= 31) multimax += 0.1;
 			if (hasPerk(PerkLib.HistoryScholar) || hasPerk(PerkLib.PastLifeScholar)) multimax += 0.1;
 			if (hasPerk(PerkLib.Studious)) multimax += 0.1;
 			if (hasPerk(PerkLib.Teacher)) multimax += 0.1;
@@ -1134,9 +1145,11 @@ import classes.Items.JewelryLib;
 				if (hasPerk(PerkLib.GrandArchmage) && inte >= 125) multimax += 0.15;
 				if (hasPerk(PerkLib.GrandArchmage2ndCircle) && inte >= 150) multimax += 0.15;
 				if (hasPerk(PerkLib.GrandArchmage3rdCircle) && inte >= 175) multimax += 0.15;
+				if (hasPerk(PerkLib.GrandGreyArchmage) && inte >= 225) multimax += 0.2;
 				if (hasPerk(PerkLib.GrandMage) && inte >= 75) multimax += 0.1;
-				//if (hasPerk(PerkLib.GreyArchmage) && inte >= 225) max += 600;
-				//if (hasPerk(PerkLib.GreyMage) && inte >= 200) max += 450;
+				if (hasPerk(PerkLib.GreyArchmage) && inte >= 175) multimax += 0.15;
+				if (hasPerk(PerkLib.GreyMage) && inte >= 125) multimax += 0.15;
+				if (hasPerk(PerkLib.GreyMageApprentice) && inte >= 75) multimax += 0.1;
 				if (hasPerk(PerkLib.Mage) && inte >= 50) multimax += 0.1;
 				if (hasPerk(PerkLib.JobSorcerer)) multimax += 0.1;
 			}
@@ -1166,18 +1179,38 @@ import classes.Items.JewelryLib;
 		{
 			var maxven:Number = 0;
 			var multimaxven:Number = 1;
-			if (game.player.faceType == Face.SNAKE_FANGS) maxven += 100;
-			if (game.player.faceType == Face.SPIDER_FANGS) maxven += 100;
-			if (game.player.tailType == Tail.BEE_ABDOMEN) maxven += 150;
-			if (game.player.tailType == Tail.SPIDER_ADBOMEN) maxven += 150;
-			if (game.player.tailType == Tail.SCORPION) maxven += 150;
-			if (game.player.tailType == Tail.MANTICORE_PUSSYTAIL) maxven += 200;
+			if (game.player.faceType == Face.SNAKE_FANGS) maxven += 200;
+			if (game.player.faceType == Face.SPIDER_FANGS) maxven += 200;
+			if (game.player.tailType == Tail.BEE_ABDOMEN) maxven += 300;
+			if (game.player.tailType == Tail.SPIDER_ADBOMEN) maxven += 300;
+			if (game.player.tailType == Tail.SCORPION) maxven += 300;
+			if (game.player.tailType == Tail.MANTICORE_PUSSYTAIL) maxven += 400;
+			if (game.player.lowerBody == LowerBody.HYDRA) maxven += 400;
+			if (game.player.lowerBody == LowerBody.ATLACH_NACHA) maxven += 1200;
 			if (hasPerk(PerkLib.ImprovedVenomGland)) maxven += 100;
-			if (hasPerk(PerkLib.VenomGlands)) maxven += 25;
-			if (hasPerk(PerkLib.VenomGlandsEvolved)) maxven += 100;
+			if (hasPerk(PerkLib.ImprovedVenomGlandEx)) maxven += 200;
+			if (hasPerk(PerkLib.ImprovedVenomGlandSu)) maxven += 400;
+			if (hasPerk(PerkLib.VenomGlands)) maxven += 100;
+			if (hasPerk(PerkLib.VenomGlandsEvolved)) maxven += 400;
 			if (hasPerk(PerkLib.VenomGlandsFinalForm)) {
-				maxven += 175;
+				maxven += 700;
 				multimaxven += 1;
+			}
+			if (hasPerk(PerkLib.VenomousAdiposeTissue)) {
+				if (tou > 20000) maxven += 1000;
+				else if (tou > 10000) maxven += 900;
+				else if (tou > 5000) maxven += 800;
+				else if (tou > 2000) maxven += 700;
+				else if (tou > 1000) maxven += 600;
+				else if (tou > 500) maxven += 500;
+				else if (tou > 200) maxven += 400;
+				else if (tou > 100) maxven += 300;
+				else if (tou > 50) maxven += 200;
+				else maxven += 100;
+				if (thickness > 150) maxven += 200;
+				else if (thickness > 100) maxven += 150;
+				else if (thickness > 50) maxven += 100;
+				else maxven += 50;
 			}
 			if (hasPerk(PerkLib.JobSoulCultivator)) {
 				if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) multimaxven += 0.1;
