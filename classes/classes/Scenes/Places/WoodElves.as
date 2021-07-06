@@ -814,7 +814,7 @@ import classes.Scenes.SceneLib;
 			player.trainStat("int", +1, 80);
 			player.trainStat("int", +1, 80);
 			player.trainStat("int", +1, 80);
-			/*if (player.spe >= 50 && player.statusEffectv1(StatusEffects.Kelt) >= 25 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING0 && !hasTrainedToday){
+			if (player.spe >= 50 && player.statusEffectv1(StatusEffects.Kelt) >= 25 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING0 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING1;
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Pin down ability! <b>Gained P.Ability: Pin Down</b>");
 				hasTrainedToday = true;
@@ -844,7 +844,7 @@ import classes.Scenes.SceneLib;
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
-			bowSkill(5) */
+			bowSkill(5)
 			CoC.instance.timeQ = 1;
 			doNext(GroveLayout);
 		}
