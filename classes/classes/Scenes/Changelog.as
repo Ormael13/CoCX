@@ -35,6 +35,7 @@ package classes.Scenes
 			outputText("-New tier 0 misc lvl-up perk: Venomous Diet. Req. Enabled hunger mode and having 100 points in venom/web pool. Effect: Increase venom/web recharge speed based on current hunger level.\n");
 			outputText("-New tier 2 misc lvl-up perk: Higly Venomous Diet. Req. Venomous Diet perk and enabled hunger mode. Effect: Increase venom/web recharge speed at cost of faster getting hungry.\n");
 			outputText("-New tier 2 misc lvl-up perk: Axillary Venom Glands. Req. Venomous Adipose Tissue perk. Effect: Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. (if hunger mode is active will instead drain hunger 2x faster)\n");
+			outputText("-New tier 3 misc lvl-up perk: Lift Off. Req. Aerobatics perk, 45+ str and 40+ spe. Effect: Allows you to start combat already flying.\n");
 			outputText("-New tier 4 misc lvl-up perk: Survivalist 3. Req. Survivalist 2 perk and hunger mode enabled. Effect: Slows hunger rate by another 20%.\n");
 			outputText("-New tier 7 wisdom lvl-up perk: Prestige Job: Necromancer. Req. Job: Golemancer and Daoist: Apprentice Stage perks, 125+ int, 175+ wis. Effect: +20 to max tou and +60 to max wis (scalable with NG tiers), able to harvest bones from true demons bodies, create up to 3 skeleton warriors, access to necromancer spells, gain a (very) small amount of soulforce after defeating enemies with soul (~1-3x enemy level).\n");
 			outputText("-New tier 8 wisdom lvl-up perk: Greater harvest. Req. Prestige Job: Necromancer perk. Effect: A demon is now considered to carry 5 to 20 bones and you may now have up to 6 Skeleton of each type.\n");
@@ -71,6 +72,7 @@ package classes.Scenes
 			outputText("-Each use of venom to apply passive effect on arrows or spells would now increase a bit venom use counter. Maximum venom pool increase from perks or bodypart has been boosted. Refill speed was increased so without any other perks having body part that generate venom/web it would take around 2 days to refill fully (calculated base don new increased max venom values).\n");
 			outputText("-Some of setting menu options been greyed out when there isn't any loaded save.\n");
 			outputText("-Added in combat slow venom recharge.\n");
+			outputText("-Lumi menu been bit chenged with buttons moved to diff spots. Also her enchance menu been split into two to accomodate all 15 options (earlier it missed succubus delight upgrade).\n");
 			outputText("-Jtex many code corrections.\n");
 			outputText("-Llaenwynn typo/scenes texts corrections.\n");
 			outputText("-Lia code changes/corrections.\n");
@@ -86,9 +88,7 @@ package classes.Scenes
 			outputText("-New tier 10 soulforce lvl-up perk: Daoist: Overlord Stage. Req. Daoist: Elder Stage perk. Effect: Your reached fourth stage of Daoist path. (+50% soulskill/m.soulskill power, +60 max SF S.King, S.Emperor, S.Ancestor stages)\n");
 			outputText("-New tier 11 soulforce lvl-up perk: Soul Emperor. Req. Soul King perk and 220+ wis. Effect: Allow reaching 11th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +130 max SF at lvl 66, 68, 70; +25% to max SF at lvl 66)\n");
 			outputText("-New tier 12 soulforce lvl-up perk: Soul Ancestor. Req. Soul Emperor perk and 240+ wis. Effect: Allow reaching 12th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)\n");
-			outputText("-New tier 3 misc lvl-up perk: Lift Off. Req. Aerobatics perk, 45+ str and 40+ spe. Effect: Allows you to start combat already flying.\n");
 			outputText("-New tier 0 int lvl-up perk: Grey Magic. Req. One of 4 white spells: Whitefire, Pyre Burst, Lightning Bolt, Chain Lighting AND One of black spells: Ice Spike, Arctic Gale, Darkness Shard, Dusk Wave; 50+ int. Effect: Access to learn and cast grey magic spells. (+30 to max lust)\n");
-			outputText("-Lumi menu been bit chenged with buttons moved to diff spots. Also her enchance menu been split into two to accomodate all 15 options (earlier it missed succubus delight upgrade).\n");
 			outputText("-Nosferatu spell been moved to grey book. Learning any grey spells req. now having perk Grey Magic instead of Prestige Job: Grey Sage. Req. intelligence to learn most of those spells have been lowered.\n");
 			outputText("-As Jiangshi PC can't anymore equip Aether Twins. Yes we know they can move on their own but it would make jiangshi PC potentialy have access to unexpewcted help in form of evolved twins for attacks and/or defense.\n");
 			outputText("-New unlockable option in Soulforce menu: Comprehend. Req. H class Heaven Tribulation Survivor perk. Allow to try comprehend one of daos: fire, ice, lightning, darkness, poison. Or it can be total dud and all time spent on contemplation session will not give any results at all. ");
@@ -102,6 +102,12 @@ package classes.Scenes
 			outputText("-Fire Storm and Ice Rain spells been moved from grey magic to tier 2 of white/black magic with matching change of scalling and added cooldowns. Polar Midnight and Meteor Shower are classied now as tier 3 white/black magic. All 4 spells got increase in mana cost to 500 (tier 2) or 1250 (tier 3).\n");
 			outputText("-Mana Shield changes by Shard: Mana Shield able to partial absorb damage instead of all dmg or none approach.\n");
 			outputText("-Depravatio, Element of Corruption and Puritas, Element of Purity are worth each 960 gems and effect changed from: x1,6 spellpower to +60% and then x1,6 spellpower. Ascensus, Element of Ascension is worth now 2400 gems and effects changed from: x1,8x spellpower to +150% spellpower and then x2,5 spellpower.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
@@ -120,7 +126,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -189,9 +194,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -234,9 +237,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
