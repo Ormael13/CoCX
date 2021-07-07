@@ -1645,7 +1645,7 @@ public class PlayerInfo extends BaseContent {
             if (player.perkPoints>1) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
 	        mainView.mainText.addEventListener(TextEvent.LINK, linkhandler);
 	        perkList = [];
-	        for each(var perk:PerkType in perks) {
+	        for each(var perk:PerkType in perks.sort()) {
 		        var p:PerkClass = new PerkClass(perk,
 				        perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
 		        var lab:* = {label: p.perkName, perk: p};
