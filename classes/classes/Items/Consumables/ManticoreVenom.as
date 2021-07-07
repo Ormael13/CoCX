@@ -15,6 +15,7 @@ import classes.BodyParts.Wings;
 import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.VaginaClass;
+import classes.CoC;
 
 public class ManticoreVenom extends Consumable {
 	public function ManticoreVenom() {

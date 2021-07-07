@@ -20,6 +20,7 @@ import classes.internals.EnumValue;
 import classes.Scenes.Metamorph;
 import classes.GlobalFlags.kFLAGS;
 import classes.Transformations.TransformationUtils;
+import classes.PerkLib;
 
 public class TransformationLib extends MutationsHelper {
 	public function TransformationLib() {
