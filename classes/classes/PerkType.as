@@ -43,11 +43,11 @@ public class PerkType extends BaseContent
 		}
 
 		/**
-		 * Perk short name, could be changed in future game versions
+		 * Perk short name.
+		 * If this is perk player has, `params` is not-null and has value1-4 properties
 		 */
-		public function get name():String
-		{
-			return _name;
+		public function name(params:PerkClass=null):String {
+			return _name
 		}
 
 		/**
@@ -531,7 +531,7 @@ public class PerkType extends BaseContent
 				fn  : function (player:Player):Boolean {
 					return player.hasPerk(perk);
 				},
-				text: perk.name,
+				text: perk.name(),
 				type: "perk",
 				perk: perk
 			});
@@ -541,7 +541,7 @@ public class PerkType extends BaseContent
 			if (perks.length == 0) throw ("Incorrect call of requireAnyPerk() - should NOT be empty");
 			var text:Array = [];
 			for each (var perk:PerkType in perks) {
-				text.push(perk.name);
+				text.push(perk.name());
 			}
 			requirements.push({
 				fn  : function (player:Player):Boolean {
@@ -560,7 +560,7 @@ public class PerkType extends BaseContent
 			if (perks.length == 0) throw ("Incorrect call of requirePerks() - should NOT be empty");
 			var text:Array = [];
 			for each (var perk:PerkType in perks) {
-				text.push(perk.name);
+				text.push(perk.name());
 			}
 			requirements.push({
 				fn  : function (player:Player):Boolean {

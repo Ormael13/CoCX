@@ -109,7 +109,7 @@ import classes.Scenes.SceneLib;
 			 // Doc has ellipses around friend, seemed akward
 			outputText("You politely offer Loppe's mother your name, telling her that you're a... friend of Loppe's.\n\n");
 			outputText("Loppe looks at you with disdain, then adds, \"<i>Yes, [he]'s a friend alright.</i>\"  Loppe clears her throat.  \"<i>Mom, I would like to introduce you to [name], my [boyfriend].</i>\"\n\n");
-			
+
 			// Tempted to add in some variance shit here for corrupt/times-sexed stuff, like low corrupt/low sex count;
 			// Loppe's revelation about your apparant relationship comes as something of a shock to you, but you try - and fail - to hide the suprise from your face." etc
 
@@ -119,13 +119,13 @@ import classes.Scenes.SceneLib;
 			outputText("You give them your best confused expression, realising that Uma and her daughter must have similar tastes in humor; she was evidently joking with you.\n\n");
 			outputText("Uma is the first to break the awkwardness.  \"<i>Well then, care to give me the details?  How did you two meet?  When did you start fooling around?  Has my daughter worked so hard you had to seek a healer yet?</i>\"\n\n");
 			outputText("Loppe holds your hand and the two of you begin detailing how you met....\n\n");
-			
+
 			menu();
 			addButton(0, "Next", firstVisitPart3);
-			
+
 
 		}
-		
+
 		/**
 		 * Page 3 of introduction scene
 		 * Edit Status: 95%
@@ -133,26 +133,26 @@ import classes.Scenes.SceneLib;
 		public function firstVisitPart3():void
 		{
 			clearOutput();
-			
+
 			outputText("\"<i>I see... that is so like my daughter to do something like that.</i>\"  Uma glares mischievously at Loppe.  \"<i>Aww mom... cut me some slack!</i>\"  Loppe protests, playfully.  You can't resist laughing softly at the two; it reminds you of people back in Ingnam... albeit they're joking about subject matter you'd normally not touch back in your world.</i>\n\n");
 			outputText("Your conversation is interrupted when a cat man enters the clinic.  \"<i>Umm... hello?</i>\" he says, shyly as he enters.  Uma turns to you.  \"<i>You'll have to excuse me, but I must get back to work.</i>\"  Understanding that Uma is currently working, you politely step back and watch as Uma walks to attend to her client.\n\n");
 			outputText("\"<i>We should go, sugar,</i>\" Loppe whispers in your ear.  You nod to her, tell Uma that it was nice meeting her, and indicate Loppe should lead you out.  You follow the Laquine out of the building, and tell her that her mother is a nice woman.\n\n");
 			outputText("\"<i>Yeah, she is nice, she's just a little... quirky sometimes,</i>\" Loppe agrees.  \"<i>And I think she likes you too, sugar; nice work.</i>\"  She grins, patting you on the shoulder.\n\n");
 			outputText("You tell her that you're glad, but you have other things to do, so you'll catch her some other time. \"<i>Alright sugar, see you around,</i>\" Loppe announces as she turns and walks away, back in the direction of her home, leaving you to start heading back to what passes for yours in this world.\n\n");
-			
+
 			outputText("<b>Uma's Clinic is now available from the Tel'Adre shops menu!</b>");
-			
-			
+
+
 
 			// Flag the shop visit
 			// There's still a flag left over from Loppe's initial content that I dont' think is actually used.
 			flags[kFLAGS.LOPPE_PC_MET_UMA] = 1;
-			
+
 			// Player returns to Camp
 			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		/**
 		 * Repeat visits.
 		 * Edit Status: 90%
@@ -161,18 +161,18 @@ import classes.Scenes.SceneLib;
 		public function enterClinic(returnedTo:Boolean = false):void
 		{
 			clearOutput();
-			
+
 			// Hide the stuff that dun make no sense if you're dropping back from a menu inside the clinic
 			if (!returnedTo)
 			{
 				outputText("You decide to pay Uma a visit at the clinic, so you follow the way through the streets to the apparently humble clinic.  Once there, you open the door and enter.\n\n");
 				outputText("The interior of Uma's clinic is as calm and quiet as usual.  There don't seem to be any customers present at this moment, and you announce your presence by knocking gently on a counter.  The tall horse-woman walks softly out through the beaded curtain, giving you a friendly smile.\n\n");
-				outputText("\"<i>Why, if it isn't my little girl's special someone.  What brings you here, hmm?  Wanted to try my services?  A friendly little chat?  Or...</i>\" She saunters confidently over to you and gives you a knowing grin.  \"<i>I bet my loose-lipped little Loppe has hinted that I'm not currently seeing anybody, hmm?  Is that why you're here - you wanted to see how the mother measures up to the daughter?</i>\"\n\n"); 
-			
+				outputText("\"<i>Why, if it isn't my little girl's special someone.  What brings you here, hmm?  Wanted to try my services?  A friendly little chat?  Or...</i>\" She saunters confidently over to you and gives you a knowing grin.  \"<i>I bet my loose-lipped little Loppe has hinted that I'm not currently seeing anybody, hmm?  Is that why you're here - you wanted to see how the mother measures up to the daughter?</i>\"\n\n");
+
 				// ima change this to the minvalue required for sex scenes to be available methinks, or atleast lower it to around that bracket
 				if (player.femininity >= UMA_CONSIDER_PC_FEM)
 				{
-					outputText("You notice her appraising your form as you stand before her, Uma's approval of your appearance clear."); 
+					outputText("You notice her appraising your form as you stand before her, Uma's approval of your appearance clear.");
 				}
 			}
 			else
@@ -181,15 +181,15 @@ import classes.Scenes.SceneLib;
 				{
 					outputText("\"<i>So then, [name], what can I do you for?</i>\"  She flashes you a knowing grin, the innuendo clearly intended.");
 				}
-				else 
+				else
 				{
 					outputText("\"<i>So then, [name], what can I do for you?</i>\"  She flashes you a friendly smile, her professionalism ever present.");
 				}
 			}
-			
+
 			buildCoreMenu();
 		}
-		
+
 		/**
 		 * Build the primary interface menu to interact with Uma.
 		 * @param	noSex	Indicates if the Sex button should be hidden from display.
@@ -206,20 +206,20 @@ import classes.Scenes.SceneLib;
 			addButton(0, "Massage", massageMenu);
 			addButton(1, "Acupunct.", acupunctureMenu);
 			addButton(2, "Talk", talkMenu);
-			
+
 			if (!noSex)
 			{
 				addButton(3, "Sex", sexMenu);
 			}
-			
+
 			//addButton(4, "Train Loppe", trainLoppe); // Unfinished in the doc
 			addButton(14, "Leave", telAdre.telAdreMenu);
 		}
-		
+
 		/**
 		 * MASSAGEU
 		 */
-		
+
 		/**
 		 * Primary massage intro & selection menu
 		 * Edit Status: 95%
@@ -227,7 +227,7 @@ import classes.Scenes.SceneLib;
  		public function massageMenu():void
 		{
 			clearOutput();
-			
+
 			outputText("You ask if she'd like to have a little business.  You could really use one of her famous massage sessions.\n\n");
 			outputText("\"<i>Of course, dear.  I have a selection of a few types of special massages I can give you, but you're only able to keep the effects of one of them, we can't risk disturbing your flow of chi, right?</i>\" she says smiling happily, \"<i>Here's the list.</i>\"  She hands you a small catalogue with her available massages.\n\n");
 			outputText("You study the catalogue, noting the description of each one as you do so...\n\n");
@@ -237,7 +237,7 @@ import classes.Scenes.SceneLib;
 			outputText("\"Muscles sore and aching?  Weary down to your bones?  A nice relaxing massage can alleviate your pain and fatigue, and help you unwind more effectively,\" is how the fourth option describes itself.\n\n");
 			outputText("Finally, the last message in the catalogue reads, \"Need a little more power?  Going to have a fight on your hands soon?  With the special arts of do-in, we can boost your muscles and let you deliver a real knock-out punch - it doesn't last forever, so be careful!\"\n\n");
 			outputText("You contemplate your choices carefully.");
-			
+
 			menu();
 			addButton(0, "Relief", massageRelief);
 			addButton(1, "Lust", massageLust);
@@ -246,7 +246,7 @@ import classes.Scenes.SceneLib;
 			addButton(4, "Power", massagePower);
 			addButton(9, "No Thanks", massageNope);
 		}
-		
+
 		/**
 		 * Player changed mind about MASSAGEU TIEMU
 		 * Edit Status: 100%
@@ -254,14 +254,14 @@ import classes.Scenes.SceneLib;
 		public function massageNope():void
 		{
 			clearOutput();
-			
+
 			outputText("You apologize and tell Uma that you've changed your mind, you don't want a massage right now.\n\n");
 			outputText("\"<i>Very well, dear.</i>\"  Uma takes the catalogue back.");
-			
+
 			menu();
 			addButton(0, "Next", enterClinic, true);
 		}
-		 
+
 		/**
 		 * Player selected "Relief" massage
 		 * Adds a 10% reduction to lust gain while active.
@@ -273,15 +273,15 @@ import classes.Scenes.SceneLib;
 		public function massageRelief():void
 		{
 			clearOutput();
-			
+
 			outputText("You tell Uma that you're interested in the lust-relieving massage.\n\n");
 			outputText("\"<i>Are sure about that honey?  Wouldn't that make it hard to keep up with my little Loppe?</i>\"\n\n");
 			outputText("You admit that it may, but you feel you could use it.  Besides, you do spend most of your time out in the wilderness; the people, to use the term loosely, out there aren't quite as understanding about sex as Uma's daughter is.\n\n");
 			outputText("\"<i>I see... come along then,</i>\" Uma replies, motioning for you to follow.  You nod and promptly do as she asks.");
-			
+
 			massageMain(MASSAGE_RELIEF);
 		}
-		
+
 		/**
 		 * Player selected "Lust" massage
 		 * Adds a 10% increase to lust gain while active.
@@ -293,15 +293,15 @@ import classes.Scenes.SceneLib;
 		public function massageLust():void
 		{
 			clearOutput();
-			
+
 			outputText("You tell Uma that you're interested in the arousal-inducing massage.\n\n");
 			outputText("\"<i>Oh... feel like getting some help handling my little Loppe, perhaps?</i>\"\n\n");
 			outputText("You give her a playful smile and a wink, telling her that's not really any of her business; it's not good form for a [boyfriend] to kiss and tell.  Can she help you?\n\n");
 			outputText("Uma gasps in mock hurt.  \"<i>Are you doubting my skills, dear?  Of course I can help you!  Follow me.</i>\" Uma replies, motioning for you to follow her, and you trail along behind the mare masseur.\n\n");
-			
+
 			massageMain(MASSAGE_LUST);
 		}
-		
+
 		/**
 		 * Player selected "Modelling" massage
 		 * Adds a +10 bonus to femininity?
@@ -313,9 +313,9 @@ import classes.Scenes.SceneLib;
 		public function massageModelling():void
 		{
 			clearOutput();
-			
+
 			outputText("You tell Uma that you're interested in the attractiveness-boosting massage.\n\n");
-			
+
 			// Not too sure where "androgynous < female" falls on the official scale~ PAGING FENOXO!
 			if (player.femininity <= 60)
 			{
@@ -327,10 +327,10 @@ import classes.Scenes.SceneLib;
 			}
 
 			outputText("You thank her for the professional opinion, and indicate she should lead the way.\n\n");
-			
+
 			massageMain(MASSAGE_MODELLING);
 		}
-		
+
 		/**
 		 * Player selected "Relaxation" massage
 		 * Add a 10% reduction in damage taken?
@@ -342,7 +342,7 @@ import classes.Scenes.SceneLib;
 		public function massageRelaxation(): void
 		{
 			clearOutput();
-			
+
 			outputText("You tell Uma that you're interested in the relaxing massage.\n\n");
 			outputText("\"<i>I wonder if Loppe is the reason you're asking for this kind of massage... either way, sure, let's do this.</i>\"");
 			outputText("You tell her that you won't deny or admit to Loppe being a cause.  However, it's also pretty rough out in the wilderness, so you could really use the relief.\n\n");
@@ -350,7 +350,7 @@ import classes.Scenes.SceneLib;
 
 			massageMain(MASSAGE_RELAXATION);
 		}
-		
+
 		/**
 		 * Player selected "Power" massage
 		 * Add a 10% increase to damage inflicted?
@@ -359,20 +359,20 @@ import classes.Scenes.SceneLib;
 		public static const MASSAGE_POWER:int = 4;
 		public static const MASSAGE_POWER_BONUS:Number = 1.1;	// Multiplicative bonus to damage done -- these seem a little op with current values
 		private static const MASSAGE_POWER_BONUS_TEXT:String = "<b>(10% Increase to all Damage inflicted whilst active!)</b>";
-		public function massagePower():void 
+		public function massagePower():void
 		{
 			clearOutput();
-			
+
 			outputText("You tell Uma that you're interested in the strength-boosting massage.\n\n");
 			outputText("\"<i>Feel like getting involved in a fight, do you?  Okay, let Uma give you a little help!</i>\"  She grins happily.\n\n");
 			outputText("You thank her; her massage could mean the difference between life and death for you.\n\n");
 			outputText("\"<i>Now, now, dear.  There's no need to be so dramatic... but I'm worried about what you intend to do?  I have heard of, and even seen, some of the dangers that are out there, beyond the walls of this city.  Shouldn't you just come live with us, instead?  I'd hate to have anything happen to you, and Loppe would be crushed...</i>\"\n\n");
 			outputText("You tell her that you appreciate your sentiment, and you have no intention of hurting Loppe, but you have a mission and you are sworn to complete it; the demons must fall, and you won't stop until they have been defeated.");
 			outputText("\"<i>I understand.  In that case, follow me,</i>\" Uma replies, motioning for you to follow her.  You let her lead the way and follow close behind.\n\n");
-			
+
 			massageMain(MASSAGE_POWER);
 		}
-		
+
 		/**
 		 * "Joiner" scene for all of the subtypes of massage selection
 		 * @param	selectedMassage		int key of the massage type, for later application of benefits.
@@ -381,7 +381,7 @@ import classes.Scenes.SceneLib;
 		public function massageMain(selectedMassage:int):void
 		{
 			clearOutput();
-			
+
 			outputText("The room is light, but not overwhelmingly bright, with cool breezes gently wafting through, tingling deliciously on your exposed [skin] and setting the chimes hanging from the rafters gently a-tinkle.  A number of large potted plants occupy the corners of the room, and there's even a tiny fountain with stones in it, the tumble of water over rocks creating a strangely soothing melody.  A small brazier produces a sweet, calming smell from incense burning in it.  The pride of the room is a sizable table, made from bamboo; it's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.\n\n");
 			outputText("\"<i>Before we get started, I'll have to ask you to hand over a few gems for my services, dear.  Even if you are my little Loppe's [boyfriend], this is still a business.</i>\"\n\n");
 			outputText("You tell her that's alright, fishing in your belongings for the gems that the mare masseur needs for this particular service... which you remember she hasn't told you yet?\n\n");
@@ -394,48 +394,48 @@ import classes.Scenes.SceneLib;
 				outputText("Uma sighs and shakes her head.  \"<i>Sorry dear, but if you can't pay I can't treat you.</i>\"\n\n");
 				outputText("You sigh in turn, and tell her that you accept that; she is a business-woman, after all.  You'll have to come back another day, when you do have the money to pay for it.\n\n");
 				outputText("Wishing her well, you calmly let yourself out of the shop and head back to camp.");
-				
+
 				menu();
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			
+
 			outputText("You tell her that sounds fair, withdrawing the gems and handing them to her.\n\n");
 			player.gems -= 75;
 
 			outputText("\"<i>Thanks, dear,</i>\" Uma  beams, pocketing the gems and walking towards the table.  \"<i>Okay, get yourself stripped naked and lay down on the table, face up for me dear.</i>\"\n\n");
 			outputText("You promptly set about removing your [armorname], ");
-			
+
 			// If player is Exhibitionist
 			if (flags[kFLAGS.PC_FETISH] >= 1)
 			{
 				outputText("flushing with arousal at the idea of being naked before the mare, ");
 			}
-			
+
 			outputText("and move over to lay yourself on the table.  You get yourself comfortable and tell Uma that you're ready.\n\n");
 
 			menu();
 			addButton(0, "Next", massageCommence, selectedMassage);
 		}
-		
+
 		/**
 		 * Extensions to Massage Joiner.
 		 * @param	selectedMassage		Massage bonus ID to apply
 		 * Edit Status: 95%
 		 */
-		public function massageCommence(selectedMassage:int):void 
+		public function massageCommence(selectedMassage:int):void
 		{
 			clearOutput();
-			
+
 			outputText("\"<i>Very well, dear.</i>\"  She cracks her knuckles ominously, \"<i>This might hurt a bit, but bear with it,</i>\" she adds, rolling up the sleeves of her kimono.\n\n");
 			outputText("You swallow audibly and brace yourself for what's to come.\n\n");
 			outputText("Uma presses her elbow against your chest ");
-			
+
 			if (player.biggestTitSize() >= 1)
 			{
 				outputText("between your [chest] ");
 			}
-			
+
 			outputText("and pushes hard.  You can't help but scream at the initial bout of pain.  \"<i>Relax dear.  It will only hurt for a little while.</i>\"  You squirm at the pain but slowly it begins to dissipate... you're pretty sure Uma is pressing against your chest even harder than before, yet the pain is quickly ebbing away...\n\n");
 			outputText("Uma chuckles.  \"<i>See dear?  I told you it would get better, but I'm afraid it will hurt a bit more later... I have other spots to take care of,</i>\" she warns, removing her elbow and moving away, only to return shortly with a small metal stick prominently featuring a rounded tip.  \"<i>Get ready, dear.</i>\"  You brace yourself for the next part of the treatment.\n\n");
 			outputText("The treatment on your front is painful, but at the same time it gets easier and easier to relax as it goes on... and it hurts less and less, until by the time Uma is finished it just doesn't hurt anymore...\n\n");
@@ -458,7 +458,7 @@ import classes.Scenes.SceneLib;
 			outputText("By the time Uma is finished you feel sore all over, the pain on your back seemingly bringing back the pain on your front.\n\n");
 			outputText("\"<i>It will be a little while before the flow of chi inside your body stabilizes, dear.  But by the time you're out of this clinic, you should feel much better,</i>\" Uma explains.\n\n");
 			outputText("You thank the mare and get dressed, bidding her farewell before you exit the clinic. Once outside, true to her words, you start to feel better... in fact you feel amazing!  It's no wonder her treatment is expensive, you feel just... amazing!\n\n");
-			
+
 			// Apply bonus & back to camp!
 			applyMassageBonus(selectedMassage);
 			menu();
@@ -481,17 +481,17 @@ import classes.Scenes.SceneLib;
 			{
 				var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
 				var bonusValue:Number;
-				
+
 				// Remove the old massage bonus if present
 				if (sac)
 				{
 					player.removeStatusEffect(StatusEffects.UmasMassage);
 				}
-				
+
 				if (selectedMassage == MASSAGE_RELIEF)
 				{
 					outputText("<b>You feel so relaxed and mellow... you don't think you'll be able to get in the mood for sex while you feel this blissed out.</b> " + MASSAGE_RELIEF_BONUS_TEXT);
-					bonusValue = MASSAGE_RELIEF_BONUS;					
+					bonusValue = MASSAGE_RELIEF_BONUS;
 				}
 				else if (selectedMassage == MASSAGE_LUST)
 				{
@@ -513,7 +513,7 @@ import classes.Scenes.SceneLib;
 					outputText("<b>Your muscles tingle and burn with energy; you feel like you could knock out a minotaur in one punch!</b> " + MASSAGE_POWER_BONUS_TEXT);
 					bonusValue = MASSAGE_POWER_BONUS;
 				}
-				
+
 				if (bonusValue != 0)
 				{
 					player.createStatusEffect(StatusEffects.UmasMassage, selectedMassage, bonusValue, MAX_MASSAGE_BONUS_DURATION, 0);
@@ -521,7 +521,7 @@ import classes.Scenes.SceneLib;
 				}
 			}
 		}
-		
+
 		/**
 		 * Handle reducing the remaining time that the bonus is active for.
 		 * When expired, remove and include a message to the effect.
@@ -529,32 +529,32 @@ import classes.Scenes.SceneLib;
 		public function updateBonusDuration(hours:int):void
 		{
 			var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
-			
+
 			if (sac)
 			{
 				sac.value3 -= hours;
-				
+
 				if (sac.value3 <= 0)
 				{
 					bonusExpired();
 				}
 			}
 		}
-		
+
 		/**
 		 * Spam a message about the bonus being removed.
 		 */
 		public function bonusExpired():void
 		{
 			outputText("\n<b>You groan softly as a feeling of increased tension washes over you, no longer as loose as you were before.  It looks like the effects of Uma's massage have worn off.</b>\n");
-			
+
 			player.removeStatusEffect(StatusEffects.UmasMassage);
 		}
-		
+
 		/**
 		 * ACUPUNCTURO
 		 */
-		
+
 		/**
 		 * Available Acupucture Types
 		 * All of the associated bonuses for the Acupuncture perks are listed here, and reference throughout the codebase. If Fenoxo wants to tweak the values,
@@ -571,30 +571,30 @@ import classes.Scenes.SceneLib;
 		public static const NEEDLEWORK_SPEED_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Speed' perk. As a result your strength is capped but speed reductions are halved.";
 		public static const NEEDLEWORK_SPEED_STRENGTH_CAP:int = 60;
 		public static const NEEDLEWORK_SPEED_SPEED_MULTI:Number = 0.5;
-		
+
 		public const NEEDLEWORK_LUST_PERK:PerkType = PerkLib.ChiReflowLust;
 		public static const NEEDLEWORK_LUST_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Lust' perk. As a result your Lust resistance and Tease attack are enhanced, but Libido and Sensitivity gains are increased.";
 		public static const NEEDLEWORK_LUST_LUST_RESIST:int = 10;
 		public static const NEEDLEWORK_LUST_TEASE_MULTI:Number = 10;
 		public static const NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI:Number = 1.1;
 		public static const NEEDLEWORK_LUST_LIBSENSE_MULTI:Number = 1.1;
-		
+
 		public const NEEDLEWORK_DEFENSE_PERK:PerkType = PerkLib.ChiReflowDefense;
 		public static const NEEDLEWORK_DEFENSE_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Defense' perk. As a result your body has gained passive damage resistance and extra health, but speed is capped.";
 		public static const NEEDLEWORK_DEFENSE_DEFENSE_MULTI:Number = 1.1;
 		public static const NEEDLEWORK_DEFENSE_EXTRA_HP:int = 50;
 		public static const NEEDLEWORK_DEFENSE_SPEED_CAP:int = 60;
-		
+
 		public const NEEDLEWORK_MAGIC_PERK:PerkType = PerkLib.ChiReflowMagic;
 		public static const NEEDLEWORK_MAGIC_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Magic' perk. As a result your spells are now more powerful, but regular attacks are weaker.";
 		public static const NEEDLEWORK_MAGIC_SPELL_MULTI:Number = 0.25; // Additive bonus to the other magic damage bonuses
 		public static const NEEDLEWORK_MAGIC_REGULAR_MULTI:Number = 0.75; // Multiplier tagged onto the end of damage calculations for the player.
-		
+
 		public const NEEDLEWORK_ATTACK_PERK:PerkType = PerkLib.ChiReflowAttack;
 		public static const NEEDLEWORK_ATTACK_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Attack' perk. As a result your regular attacks are more powerful, but your damage reduction is decreased.";
 		public static const NEEDLEWORK_ATTACK_REGULAR_MULTI:Number = 1.1;
 		public static const NEEDLEWORK_ATTACK_DEFENSE_MULTI:Number = 0.9;
-		
+
 		/**
 		 * Return a short string representation of the selected bonus index
 		 * @param	needleworkType		Static index value of the selected bonus scene
@@ -622,10 +622,10 @@ import classes.Scenes.SceneLib;
 			{
 				return "\"Attack\"";
 			}
-			
+
 			return "<b>Somethin' dun fucked up.  Please insert bugreport!</b> ";
 		}
-		
+
 		/**
 		 * To save having to bullshit around with the perk list description stuff, the functions been modified to call this function to get
 		 * descriptions about accpuncture PerkLib. Let's us contain all of the related content together in a neater manner.
@@ -636,19 +636,19 @@ import classes.Scenes.SceneLib;
 		{
 			switch(perkName)
 			{
-				case PerkLib.ChiReflowAttack.name:
+				case PerkLib.ChiReflowAttack.name():
 					return PerkLib.ChiReflowAttack.desc();
 					break;
-				case PerkLib.ChiReflowDefense.name:
+				case PerkLib.ChiReflowDefense.name():
 					return PerkLib.ChiReflowDefense.desc();
 					break;
-				case PerkLib.ChiReflowLust.name:
+				case PerkLib.ChiReflowLust.name():
 					return PerkLib.ChiReflowLust.desc();
 					break;
-				case PerkLib.ChiReflowMagic.name:
+				case PerkLib.ChiReflowMagic.name():
 					return PerkLib.ChiReflowMagic.desc();
 					break;
-				case PerkLib.ChiReflowSpeed.name:
+				case PerkLib.ChiReflowSpeed.name():
 					return PerkLib.ChiReflowSpeed.desc();
 					break;
 				default:
@@ -656,7 +656,7 @@ import classes.Scenes.SceneLib;
 					break;
 			}
 		}
-		
+
 		/**
 		 * Calculate the current undo cost of the players needlework
 		 * @return	calculated cost
@@ -664,7 +664,7 @@ import classes.Scenes.SceneLib;
 		public function needleworkUndoCost():int
 		{
 			var baseCost:int = 125;
-			
+
 			if (flags[kFLAGS.UMA_TIMES_ACUPUNCTURE_UNDO] != 0)
 			{
 				// 25 per undo?
@@ -673,7 +673,7 @@ import classes.Scenes.SceneLib;
 			if (baseCost > 1000) baseCost = 1000;
 			return baseCost;
 		}
-		
+
 		/**
 		 * Figure out if the player currently has ANY needlework perk so we can modify scenes accordingly
 		 * @return	true if player has a needlework perk
@@ -683,7 +683,7 @@ import classes.Scenes.SceneLib;
 			var pType:PerkType = this.getNeedleworkPerk();
 			return pType != null;
 		}
-		
+
 		/**
 		 * Figure out exactly WHICH needlework perk the player has
 		 * @return	Perk name that the player currently has
@@ -704,7 +704,7 @@ import classes.Scenes.SceneLib;
 			}
 			return null;
 		}
-		
+
 		/**
 		 * Apply a Needlework perk to the player.
 		 * I don't want to stuff the stat values themselves into the Perk itself, because then we have to figure out if a player was saved with different bonuses applied to the perk than what we currently have defined.
@@ -744,7 +744,7 @@ import classes.Scenes.SceneLib;
 				outputText("<b>" + NEEDLEWORK_ATTACK_PERK_DESC + "</b>");
 			}
 		}
-		 
+
 		/**
 		 * Present player with acupuncture details.
 		 * Edit Status: 85%
@@ -753,18 +753,18 @@ import classes.Scenes.SceneLib;
 		public function acupunctureMenu():void
 		{
 			clearOutput();
-			
+
 			outputText("You tell her that you want to try one of those acupuncture sessions of hers.\n\n");
-			
+
 			var sessionCost:int = 125;
-			
+
 			if (hasNeedleworkPerk())
 			{
 				sessionCost = this.needleworkUndoCost();
 				outputText("\"<i>Well, since I have already modified your chi in the past, we would first have to undo those changes... I cannot predict how further modifications to the natural flow through your body could interact.  Reversing past changes becomes increasingly more complex, so I have to warn you that it can become a costly process.</i>\"\n\n");
 				outputText("You tell her that you understand what she's saying, and consider the decision carefully.  You ask her how difficult she estimates the process would be, given the past sessions you have endured.\n\n");
 				outputText("The mare takes a moment to inspect you carefully, seeming to look through rather than at you.  \"<i>This could be quite a challenge, even for my skills... but, seeing as you're my little hoppers special someone, just for you I will have to ask for " + String(sessionCost) + " gems.  That's half the price of what I'd usually charge for work this difficult.</i>\"\n\n");
-				
+
 				menu();
 				addButton(0, "Undo", needleworkSession, NEEDLEWORK_UNDO);
 			}
@@ -781,7 +781,7 @@ import classes.Scenes.SceneLib;
 				outputText("\"<i>One of my special needleworks favored by mages will redirect chi from your muscles to your mind; your blows will be weaker, but your spells will be far more potent.</i>\"\n\n");
 				outputText("\"<i>Finally, I can use my needles to rearrange your chi flow and optimise your offense; your blows will be far more powerful, but your natural defense will be impaired, making you more vulnerable to strikes by the enemy.</i>\"\n\n");
 				outputText("The mare tries to remember any other types of needlework that might be useful to you, but ultimately, she can't think of anything else.  \"<i>That's all you might use, I think...</i>\"  She then pauses.  \"<i>As for a price, given you're my little Loppe's special someone, shall we say " + String(sessionCost) + " gems?  That's half-price of what I'd usually charge.</i>\"\n\n");
-				
+
 				menu();
 				addButton(0, "Speed", needleworkSession, NEEDLEWORK_SPEED);
 				addButton(1, "Lust", needleworkSession, NEEDLEWORK_LUST);
@@ -789,7 +789,7 @@ import classes.Scenes.SceneLib;
 				addButton(3, "Magic", needleworkSession, NEEDLEWORK_MAGIC);
 				addButton(4, "Attack", needleworkSession, NEEDLEWORK_ATTACK);
 			}
-			
+
 			// Add a leave button for both
 			addButton(9, "No Thanks", needleworkTurnDown);
 
@@ -798,7 +798,7 @@ import classes.Scenes.SceneLib;
 			{
 				outputText("You click your tongue and apologize to Uma, but you don't have enough gems to pay for your treatment...\n\n");
 				outputText("Uma sighs, \"It's okay, dear.  Just come back when you do, my doors are always open.\"");
-				
+
 				menu();
 				doNext(camp.returnToCampUseOneHour);
 				return;
@@ -814,9 +814,9 @@ import classes.Scenes.SceneLib;
 			{
 				outputText("wondering what you should choose...\n\n");
 			}
-			
+
 		}
-		
+
 		/**
 		 * Player changes mind about going through with Accupuncture session.
 		 * Edit Status: 100%
@@ -824,12 +824,12 @@ import classes.Scenes.SceneLib;
 		public function needleworkTurnDown():void
 		{
 			clearOutput();
-			
+
 			outputText("You shake your head and tell Uma that you'd actually rather not get one of her acupuncture treatments at this point in time.\n\n");
 			outputText("\"<i>Very well, dear.  It's important that you think this through, they're not easy to undo.</i>\"");
-			
+
 			menu();
-			
+
 			addButton(0, "Next", enterClinic, true);
 		}
 
@@ -841,28 +841,28 @@ import classes.Scenes.SceneLib;
 		public function needleworkSession(selectedSession:int):void
 		{
 			clearOutput();
-			
+
 			// Pay up
 			// These could REALLY do with being a little longer. And also not being as akward.
 			if (selectedSession == NEEDLEWORK_UNDO)
 			{
 				outputText("You tell Uma that you'd like her to remove the effects of your last acupuncture session from your body.  Then hand over the gems.\n\n");
 				outputText("\"<i>Alright, dear,</i>\" Uma replies, pocketing the gems.  \"<i>It might take some time, but I think I can help you with that... follow me.</i>\"\n\n");
-				
+
 				player.gems -= this.needleworkUndoCost();
 			}
 			else
 			{
 				outputText("You tell Uma that you would like her to give you the " + this.needleworkString(selectedSession) + " acupuncture session, please. Then hand over the gems.\n\n");
 				outputText("\"<i>Alright dear,</i>\" Uma replies, pocketing the gems.  \"<i>Let's go then.</i>\"  She motions for you to follow her.");
-				
+
 				player.gems -= 125;
 			}
-			
+
 			menu();
 			addButton(0, "Next", doNeedleworkSession, selectedSession);
 		}
-		
+
 		/**
 		 * Actual scene for the acupuncture stuff to happen.
 		 * Edit Status: 90%
@@ -871,10 +871,10 @@ import classes.Scenes.SceneLib;
 		public function doNeedleworkSession(selectedSession:int):void
 		{
 			clearOutput();
-			
+
 			outputText("The room is light, but not overwhelmingly bright, with cool breezes gently wafting through, tingling deliciously on your exposed [skin] and setting the chimes hanging from the rafters gently a-tinkle. A number of large potted plants occupy the corners of the room, and there's even a tiny fountain with stones in it, the tumble of water over rocks creating a strangely soothing melody.  A small brazier produces a sweet, calming smell from incense burning in it.  The pride of the room is a sizable table, made from bamboo; it's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.\n\n");
 			outputText("\"<i>I want you to strip and lay face down on my table, while I go fetch my needles and some numbing cream.  Unless you'd like me to stick needles in your body without anything to dull the pain?\"</i>  Uma asks jokingly.\n\n");
-			outputText("You quickly shake your head, and indicate she should go, promising to be properly undressed and ready by the time she gets back.  As the mare heads off to fetch her things, you do as you were instructed; you quickly slip out of your [armorname] and position yourself on the table.  Sticking your head in the table's hole is a little awkward, and makes you feel rather vulnerable... which is natural, given what Uma mentioned about needles"); 
+			outputText("You quickly shake your head, and indicate she should go, promising to be properly undressed and ready by the time she gets back.  As the mare heads off to fetch her things, you do as you were instructed; you quickly slip out of your [armorname] and position yourself on the table.  Sticking your head in the table's hole is a little awkward, and makes you feel rather vulnerable... which is natural, given what Uma mentioned about needles");
 
 			if (flags[kFLAGS.PC_FETISH] >= 1)
 			{
@@ -889,17 +889,17 @@ import classes.Scenes.SceneLib;
 			outputText("\"<i>I'll be applying the cream now,</i>\" she notifies you, slowly pouring the cold cream on your back and rubbing it all over, ensuring every single spot is covered before she puts the vial away.  You shiver and repress a verbal protest at the chill in her cream.  \"<i>It will take a few minutes before you start to feel the effects, I want you to tell me when you no longer feel my fingers on your back.</i>\"  She then begins a slow circular massage on your back.\n\n");
 			outputText("You promise you will, and wait patiently.  Slowly the sensation of her fingers fades away, until at last you aren't sure if she's even touching you any more, and you report this to the mare currently planning on sticking you full of needles.\n\n");
 			outputText("\"<i>Very good.  I'll start the treatment now, you might feel a slight pricking sensation, though it shouldn't hurt... if at any point it starts hurting, tell me and I'll do something to ease your pain, alright?</i>\"\n\n");
-			outputText("You tell her that you understand.  True to her words, you feel the slight pricking sensation of needles gently poking into your back. Some of them are removed shortly after, while others stay in place for a while longer.  Eventually, you feel all needles gradually being removed from your back and Uma happily declares,  \"<i>All done!</i>\"\n\n"); 
+			outputText("You tell her that you understand.  True to her words, you feel the slight pricking sensation of needles gently poking into your back. Some of them are removed shortly after, while others stay in place for a while longer.  Eventually, you feel all needles gradually being removed from your back and Uma happily declares,  \"<i>All done!</i>\"\n\n");
 			outputText("You ask if you can get up now, or do you need to stay where you are so that it has time to settle?\n\n");
 			outputText("\"<i>No, you can get up and get dressed dear.  The needles are out and your chi should be stable enough now... though you won't feel much of a change until some time has passed. </i>\"  She takes off her gloves and scratches her chin before continuing, \"<i>I should think you will start to feel the changes soon; maybe by the time you get back to your home, if not shortly after.</i>\"\n\n");
 			outputText("You thank her for her work, get yourself up and proceed to dress.  You politely excuse yourself and start the long journey back to your camp.\n\n");
-			
+
 			applyNeedlework(selectedSession);
-			
+
 			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		/**
 		 * LIPFLAP COMMENCE.
 		 * Most of these will need breaking into multiple pages methinks.
@@ -908,19 +908,19 @@ import classes.Scenes.SceneLib;
 		public function talkMenu():void
 		{
 			clearOutput();
-			
+
 			outputText("You tell Uma that you'd like to chat; you're interested in getting to know her better, and who knows, maybe she can help you get to know her daughter better?\n\n");
 			outputText("\"<i>Sure, what would you like to talk about?</i>\"  Uma replies with a smile.");
-			
+
 			menu();
-			
+
 			addButton(0, "Job", talkJob);
 			addButton(1, "Sexuality", talkSexuality);
 			addButton(2, "Loppe", talkLoppe);
 			addButton(3, "Loppe's Dad", talkLoppesDad);
 			addButton(14, "Back", enterClinic, true);
 		}
-		
+
 		/**
 		 * Talk Job
 		 * Edit Status: 95%
@@ -928,7 +928,7 @@ import classes.Scenes.SceneLib;
 		public function talkJob():void
 		{
 			clearOutput();
-			
+
 			outputText("You tell her that you're curious about the work she does and what it can do.\n\n");
 			outputText("\"<i>My work?</i>\" Uma repeats in a thoughtful tone.  \"<i>Well, I'm something of a healer - my specific skills lie in acupuncture and do-in, a form of deep muscle massage.  As for what they can do... In short, my skills allow me to modify a person's flows of chi - I presume you've heard of that?</i>\"\n\n");
 			outputText("You shake your head, which prompts her to sigh.  \"<i>Chi is the energy that permeates one's body, to put it simply.  Every living thing has a certain flow of chi, and this is what determines your talents, abilities and, some would argue, even fate.  Some talented individuals can actually gather chi from other beings, to some effect, and some, like yours truly, can manipulate the flow of the chi inside someone; although there is a limit to how much I can manipulate it,</i>\" Uma explains.\n\n");
@@ -947,7 +947,7 @@ import classes.Scenes.SceneLib;
 			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		/**
 		 * Talk Sexuality
 		 * Edit Status: 90%
@@ -955,7 +955,7 @@ import classes.Scenes.SceneLib;
 		public function talkSexuality():void
 		{
 			clearOutput();
-			
+
 			outputText("You tell her that, if it's not too personal, you'd like to ask her some questions about her sexuality?\n\n");
 			outputText("\"<i>Oh, I'm okay with talking about that.  You're not the first person to ask me about that...</i>\"  She looks distant for a short while, but then looks at you and smiles.  \"<i>So, what do you want to know, exactly?</i>\"\n\n");
 			outputText("You think for a while, and finally ask why she considers herself a lesbian?  Won't she have sex with herms too?  Wouldn't that make her bisexual?  In fact... what made her think of herself as a lesbian in the first place?\n\n");
@@ -975,7 +975,7 @@ import classes.Scenes.SceneLib;
 			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		/**
 		 * Talk about Loppe. Randomly selects a specific scene after selection.
 		 * Edit Status: 100%
@@ -983,16 +983,16 @@ import classes.Scenes.SceneLib;
 		public function talkLoppe():void
 		{
 			clearOutput();
-			
+
 			outputText("You tell her that you wouldn't mind hearing some stories about Loppe; what was she like as a little Loppe?  Maybe her mom's got some embarrassing secrets to share about her, you grin?\n\n");
 			outputText("Uma taps her chin, thinking of something to tell you about...\n\n");
-			
+
 			// random call to one of the loppeTalks functors
 			_loppeTalks[rand(_loppeTalks.length)]();
 		}
 
 		private var _sceneNum:int = 0;
-		
+
 		/**
 		 * Centralise the end-of-talk loppe stuffs
 		 */
@@ -1002,7 +1002,7 @@ import classes.Scenes.SceneLib;
 			doNext(camp.returnToCampUseOneHour);
 			//addButton(1, "Debugz", talkMenu);
 		}
-		
+
 		/**
 		 * Random talk scene about Loppe's Attitudes.
 		 * Edit Status: 90%
@@ -1032,7 +1032,7 @@ import classes.Scenes.SceneLib;
 			// Join the exit back up from all the loppeTalks
 			talkLoppeJoiner();
 		}
-		
+
 		/**
 		 * Loppe Talk - The Carrot Incident
 		 * Edit Status: 90%
@@ -1060,7 +1060,7 @@ import classes.Scenes.SceneLib;
 			// Join the exit back up
 			talkLoppeJoiner();
 		}
-		
+
 		/**
 		 * Loppe Talk - Loppe Puberty
 		 * Edit Status: 80%
@@ -1091,7 +1091,7 @@ import classes.Scenes.SceneLib;
 				outputText("\"<i>Old? Why you... take off your clothes and hop on my table, I'll show you old!</i>\"  Uma replies with indignation.  \"<i>I promise you that by the time I'm done with you, you won't be able to stand on your own two feet, ");
 				if (player.feet() != "feet")
 				{
-					outputText("or whatever the term is for you, ");	
+					outputText("or whatever the term is for you, ");
 				}
 				outputText("then we'll see who is old!</i>\"\n\n");
 			}
@@ -1100,7 +1100,7 @@ import classes.Scenes.SceneLib;
 				outputText("\"<i>Old? Why you... if you were girly enough to be my type I would show you who's old!</i>\"  Uma replies indignantly.  \"<i>I promise you wouldn't be able to stand on your own two feet, ");
 				if (player.feet() != "feet")
 				{
-					outputText("or whatever the term is for you, ");	
+					outputText("or whatever the term is for you, ");
 				}
 				outputText("then we'll see who is old!</i>\"\n\n");
 			}
@@ -1118,7 +1118,7 @@ import classes.Scenes.SceneLib;
 			outputText("You blink in shock, then stifle a laugh.  Yeah, that sounds like Loppe, alright.  You shake your head with a smile, thank Uma for talking to you, and then head off again.\n\n");
 			talkLoppeJoiner();
 		}
-		
+
 		/**
 		 * Loppe Talk - Loppe's Last Girlfriend
 		 * whoaboy. SublimeText, my hero~ <3
@@ -1139,19 +1139,19 @@ import classes.Scenes.SceneLib;
 			outputText("\"<i>Yes.  One day, I had my little Loppe take a request to the local carpenter, which happens to be close to where Puff used to... hunt.</i>\"\n\n");
 
 			menu();
-			
+
 			addButton(0, "Next", talkLoppesFirstGirlPart2);
 		}
-		
+
 		public function talkLoppesFirstGirlPart2():void
 		{
 			clearOutput();
-			
+
 			outputText("<b>Years ago in a village to the east...</b>\n\n");
 			outputText("Bored.  She was utterly, totally bored. There are good days, and there are slow days... but today wasn't just a slow day, it was completely dead.  Not even her regulars came to see her.\n\n");
 			outputText("Puff had been standing in her usual corner next to the carpenter.  The old man, being a fan of her services, didn't mind having her hang around.  However, apparently he was way too busy to indulge.  So Puff had been left all alone and bored bored... so bored.  It does not do well for a nymphomaniac like her to stand in a corner for so long without a big cock shoved between her legs, or hell, even a fine pussy to lick.  One of the perks of being bisexual, anything goes!  She laughed to herself, yes, anything goes indeed.  But today nothing seemed to be going... or is it coming?  The slutty wolfess chuckled to herself at her own joke.  Maybe she should go home and whip out \"ol' thrusty\".  That's what she liked to call her carved-wood dildo...\n\n");
 			outputText("Loppe hummed to herself as she made her way through a familiar, but seldom visited, part of town where the local carpenter made his trade.  Mom had warned her to be wary of strangers, since this side of the town was full of people with questionable interests... or so said mom.  Thus far she hadn't seen a single weird individual.  Most people she passed by seemed to be busy with their own tasks; fishermen carrying buckets of fish to sell on the main street; mailmen busy with deliveries and the occasional street performer buying make-up for their street shows.  Along the way, Loppe stopped by a bakery to eye what tasty delicacies they had to offer.\n\n");
-			outputText("\"<i>Can I help you, dear?</i>\"  The cat behind the counter asked.\n\n"); 
+			outputText("\"<i>Can I help you, dear?</i>\"  The cat behind the counter asked.\n\n");
 			outputText("\"<i>Oh, umm, no thanks miss, just browsing, that's all.</i>\"  Loppe smiled.\n\n");
 			outputText("The elderly cat smiled and replied, \"<i>Aren't you a cute little thing?  If you see anything you'd like, don't hesitate to call.</i>\"\n\n");
 			outputText("Loppe nodded and continued to browse... until her eyes set upon a wonderful sight; a slice of carrot cake, fresh from the oven.  Being part rabbit and part horse, two species known to love carrots, Loppe's mouth instantly watered. She eagerly looked into her small purse, but she only had a few gems, not nearly enough to buy the cake.  Loppe sighed, well... best not dwell... maybe when she made it home her mother would be willing to reward her with some gems for her service?\n\n");
@@ -1162,14 +1162,14 @@ import classes.Scenes.SceneLib;
 			outputText("When Loppe approached the carpentry, written request in hand, a melodic, feminine voice called,  \"<i>Hey, bunny-girl!</i>\"\n\n");
 
 			menu();
-			
+
 			addButton(0, "Next", talkLoppesFirstGirlPart3);
 		}
-		
+
 		public function talkLoppesFirstGirlPart3():void
 		{
 			clearOutput();
-			
+
 			outputText("Loppe blinks in surprise, wondering who was talking to her.  \"<i>Yes?  Who?</i>\" She began, looking around and then realising who was calling to her...  \"<i>Oh, Ms. Puff, hello.</i>\"  She replied, quietly.  She still wasn't really sure why her mother and everyone else seemed to call her \"Puffy Lips\", or \"Puff\" for short - though she had to admit, the she-wolf's lips certainly looked kissable.\n\n");
 			outputText("She licked her own lips nervously; the busty wolfess had been a prominent star in more than a few wet dreams.  She felt a distinctive twitch from her nethers and cursed in the privacy of her head, quickly falling into the breathing exercises her mom had helped her develop to help her control little <i>incidents</i> like this.  In a meditative fashion she inhaled and exhaled, hoping to quell her erection before it grew to full prominence.\n\n");
 			outputText("\"<i>Hey, are you okay?</i>\"  Puff asked, as the girl seemed to be having some trouble with her breathing.\n\n");
@@ -1192,16 +1192,16 @@ import classes.Scenes.SceneLib;
 			outputText("\"<i>...Loppe. My name's Loppe Kemono.</i>\"  The laquine answered.  \"<i>Good... I'll remember that.  So hurry along with your task, Loppe, and when you're done go to my place, over there.</i>\"  She points towards a small house a little ways away.  Slowly approaching the laquine, she whispers in her ears.  \"<i>I'll be waiting...</i>\"  With that the wolfess sashays away to her home.\n\n");
 			outputText("Swallowing nervously, heart pounding like a drum, Loppe does her best to not watch Puff go - she's already hard enough, after all.  Long minutes pass as she tries to quell her raging erection, and then finally she remembers what she's supposed to be doing and heads to the carpentry store.\n\n");
 			outputText("Back in her house, Puff goes to the bathroom to freshen up and prepare for the young laquine.  But first, she should add the laquine's name to her list.  Being a hooker and proud of her trade, she kept a list with the names of all customers she'd serviced in the past.  It was sorta like a trophy list... but she marked the people who had been able to pleasure her the most, for future contact.  Well, she hoped this girl knows how to use her pony, she really needed more favorites on her list. Humming to herself she quickly retrieved the notebook from the cupboard nearby, and carefully added Loppe's name to it, then she closed it and stripped naked; those clothes would only get in the way...\n\n");
-		
+
 			menu();
-			
+
 			addButton(0, "Next", talkLoppesFirstGirlPart4);
 		}
-		
+
 		public function talkLoppesFirstGirlPart4():void
 		{
 			clearOutput();
-			
+
 			outputText("<b>Moments later in Puffy Lips' house...</b>\n\n");
 			outputText("Loppe, swallowing nervously, mustered her courage and managed to knock loudly on the she-wolf's door.  She could hardly believe she was about to do what she was going to do... \n\n");
 			outputText("\"<i>It's open.</i>\" Loppe hears through the door. Well, here goes...\n\n");
@@ -1230,32 +1230,32 @@ import classes.Scenes.SceneLib;
 			outputText("Puff starts having second thoughts about this arrangement.  \"<i>Err, maybe we shouldn't go at it that long - Ahh - it might not be healthy.</i>\"\n\n");
 			outputText("\"<i>What? But you promised!</i>\" Loppe pleads, eyes widened to make herself more appealing.  \"<i>Plus, weren't you 'going to fuck me until you ran my balls dry'?</i>\"  She quotes the wolfess jokingly.  \"<i>I thought you took pride in being a - Yesss - a whore, and never left a customer unsatisfied.</i>\"  Loppe continues to tease.\n\n");
 			outputText("\"<i>That sounded like a challenge... okay!  You're on bunny-girl!</i>\"  Puff replies with a grin.\n\n");
-			
+
 			menu();
-			
+
 			addButton(0, "Next", talkLoppesFirstGirlPart5);
 		}
-		
+
 		public function talkLoppesFirstGirlPart5():void
 		{
 			clearOutput();
-			
+
 			outputText("<b>Many orgasms later...</b>\n\n");
 			outputText("\"<i>I - oh, oh Marae's bounty, I'm cum...</i>\" Loppe trails off in a moan as cum explodes from her one last time.  \"<i>I - Marae - I'm fuh-finally done...</i>\" She groans, sliding bonelessly forward onto her partner, a landing that is well-cushioned by both her lover's swollen, heaving breasts and the pregnant-looking fluid-filled bulge of her gut.\n\n");
 			outputText("Puff's fur is completely caked with spilled laquine cum; her eyes have since rolled to the back of her head; her well-used pussy is now gaping open and oozing cum out of her bloated belly.  In her current state, all Puff can manage is one last dry heave as her tongue lolls out of her mouth and she closes her eyes, passing out.\n\n");
 			outputText("\"<i>You... That was incredible, Puff.  Thanks.</i>\"  The laquine give a peck on the comatose she-wolf's cheek.  \"<i>Sorry, but I really have to get back now.</i>\"  She says, redressing herself and making her way home.\n\n");
 			outputText("As she began heading merrily home, the laquine whistled with glee; she just got laid!  And by the utterly gorgeous Puffy Lips, no less!  Nothing could ruin her day now... at least, not until she took a look at the sun...\n\n");
 			outputText("\"<i>Oh crap!  Mom's gonna kill me for staying out this late!</i>\"  The half-breed wailed, clasping her head in anguish.  She promptly began sprinting home at full speed, desperate to get there as quickly as possible and assuage the full fury of a mother whose daughter is out past her bedtime.\n\n");
-			
+
 			menu();
-			
+
 			addButton(0, "Next", talkLoppesFirstGirlPart6);
 		}
-		
+
 		public function talkLoppesFirstGirlPart6():void
 		{
 			clearOutput();
-			
+
 			outputText("<b>Uma's detailed description of events over...</b>\n\n");
 			outputText("...That, you finally manage to say, was quite a story.  So, was Uma really that mad Loppe was out late?\n\n");
 			outputText("\"<i>Not that much, no.  I grounded her of course, but when I learned what she had done... then I was really mad.  I taught my little girl better than to hang out with Puffy Lips and her kind.  Though I suppose some good came of it, since she stopped having wet dreams about that vulgar wolf bitch.</i>\"\n\n");
@@ -1279,7 +1279,7 @@ import classes.Scenes.SceneLib;
 
 			talkLoppeJoiner();
 		}
-		
+
 		/**
 		 * Talk Loppe - Loppe's First Boyfriend
 		 * Edit Status: 75% Some akwardness, and its fukken long. I did what I could without stomping all over everything.
@@ -1312,16 +1312,16 @@ import classes.Scenes.SceneLib;
 			outputText("\"<i>It wasn't always like this, back then we were just simple people trying to live simple lives.</i>\"\n\n");
 			outputText("You admit that, and tell her to continue.\n\n");
 			outputText("\"<i>So they started dating.  And as is normal for a young couple, one day, after they had come back from a nice dinner, he suggested that he wanted to see Loppe naked.</i>\"\n\n");
-			
+
 			menu();
-			
+
 			addButton(0, "Next", talkLoppesFirstBoyfriendPart2);
 		}
-		
+
 		public function talkLoppesFirstBoyfriendPart2():void
 		{
 			clearOutput();
-			
+
 			outputText("<b>Some years ago...</b>\n\n");
 			outputText("\"<i>There's no need to be ashamed Loppe... I'm your boyfriend, and all I want to do is see my beautiful laquine girlfriend in all her glory.  You aren't going to deny me that, are you?</i>\"  He asks hopefully.\n\n");
 			outputText("Loppe swallows, hands flush over her crotch in an effort to conceal her swelling erection. 'Why am I such a sucker for sweet talk? She mentally laments.  \"<i>I...I don't want to deny you, Hyou, but... are you sure?  I mean, I haven't forgotten that you didn't say anything about it to the others, but there's a difference actually seeing it up close</i>\" She pleads.\n\n");
@@ -1347,11 +1347,11 @@ import classes.Scenes.SceneLib;
 
 			addButton(0, "Next", talkLoppesFirstBoyfriendPart3)
 		}
-		
+
 		public function talkLoppesFirstBoyfriendPart3():void
 		{
 			clearOutput();
-			
+
 			outputText("She trails off, looking at the smug smirk of the cat beneath her.  \"<i>Alright, the time for fooling is over; let's try something from one of my mom's books.</i>\"  With the awkwardness of someone who's never actually done this before, Loppe pivots in her \"seat\" in Hyou's lap, rotating around until she's facing away from him.  \"<i>Okay, let me see... just gotta find your dick... damn it's hard to do this when your own dick is in the way.</i>\" She mutters to herself, wriggling around in an effort to try and line up her waiting pussy with Hyou's shaft.\n\n");
 			outputText("Hyou moans as Loppe gyrates her hips.  \"<i>That feels good, even if I'm not in yet.</i>\"  He begins gyrating his hips as well, rubbing himself against Loppe, which only serves to make Loppe's task more difficult.\n\n");
 			outputText("Loppe moans.  \"<i>Y-you know, if you want to help, you could try and slot this into the right hole, instead of rubbing it against my pussy - yee!  I think you just rubbed that one through my balls and up along my cock!  Where are you aiming?</i>\" She shakes her head strongly, coincidentally flicking her partner in the face with her ears. \"<i>Okay, that's it, stay still - let me handle this.</i>\" Loppe commands. \n\n");
@@ -1375,16 +1375,16 @@ import classes.Scenes.SceneLib;
 			outputText("A distant part of Loppe's mind catches these words and files them away with suspicion.  The rest of it is too busy melting at the sensations of losing her female virginity.  She continues to eagerly buck and thrust and impale herself, anxious in pushing on to her first <i>real</i> climax as a woman.\n\n");
 			outputText("Hyou yowls one last time and bucks against Loppe, his claws digging into her hips as his eyes cross, looking straight at a dollop of pre that seems to have formed on the flared tip of Loppe's member.  Finally, he relaxes and lets his orgasm overtake him, spewing rope after rope of cum inside Loppe's eager pussy.\n\n");
 			outputText("The laquine moans in pleasure at the sudden sensation of being filled... then blinks in surprise as she feels the cat-prick inside her needy pussy going soft.  \"<i>What's wrong?  What happened?</i>\" She asks, baffled; she tries to ride the limp dick a little more, but it's futile.\n\n");
-			
+
 			menu();
-			
+
 			addButton(0, "Next", talkLoppesFirstBoyfriendPart4);
 		}
-		
+
 		public function talkLoppesFirstBoyfriendPart4():void
 		{
 			clearOutput();
-			
+
 			outputText("Panting, but unable to hide the rumbling purr rising from his chest, Hyou sighs.  \"<i>S-Sorry Lops.  That was AMAZING... I-I couldn't help myself.</i>\"\n\n");
 			outputText("\"<i>That's all well and good, I'm feeling pretty amazing myself, but I'm not done yet!  Come on, get hard again so we can keep going - you can't be feeling all limp already, not after just one cum!</i>\"  The frustrated laquine declares.  She continues to rise and fall, \"<i>Come on, surely you can go for at least half an hour!</i>\"\n\n");
 			outputText("\"<i>H-Half an hour!</i>\"  Hyou groans, flopping on Loppe's bed limply.\n\n");
@@ -1423,7 +1423,7 @@ import classes.Scenes.SceneLib;
 			clearOutput();
 
 			outputText("<b>Uma's detailed description of events over...</b>\n\n");
-			
+
 			outputText("You can't resist dryly pointing out that maybe it wasn't so much the girl part of Loppe that Hyou was interested in when he started dating the young dickgirl.  You would not be too surprised if Uma told you that the \"next time\" never came - or, at least, the version of it that Loppe wanted never came.\n\n");
 			outputText("\"<i>Yes, dear.  I'm afraid that's true... Hyou is as manly as a harpy, I'm afraid.</i>\"  She chuckles.  \"<i>Now you see why there would never have been anything between the two of us, huh?</i>\"\n\n");
 			outputText("A gay man and a gay woman; the very opposite of compatibilities.  So, you ask, raising an eyebrow for emphasis; in denial, or just didn't realize it until that first night?\n\n");
@@ -1441,7 +1441,7 @@ import classes.Scenes.SceneLib;
 			outputText("You tell her that you hope so, too, but it's time for you to leave.\n\n");
 			outputText("\"<i>Very well, dear.  Hope you don't disappoint.  If you ever have to pick between walking and my daughter, I hope you'll pick my daughter.</i>\"  She jokes, chuckling to herself.\n\n");
 			outputText("You chuckle and tell her that if Loppe hasn't chased you off despite the fact she's twice as bad as she ever was, if not worse, then you're not likely to make that choice against her favor soon.  That said, you take your things and head back to camp.\n\n");
-			
+
 			talkLoppeJoiner();
 		}
 		/**
@@ -1474,7 +1474,7 @@ import classes.Scenes.SceneLib;
 			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		/**
 		 * SEXY TIMES
 		 */
@@ -1492,11 +1492,11 @@ import classes.Scenes.SceneLib;
 			if (player.gender == 0)
 			{
 				outputText("You are about to ask if Uma would be willing to have sex with you, but then stop and think. Given you have no genitalia, and she's a lesbian woman, you can't really think of anything the two of you could do together that would be good for both of you.  You decide to ask her something else instead.\n\n");
-				
+
 				buildCoreMenu(true);
 				return;
 			}
-			
+
 			outputText("You tell Uma that, if it's alright with her, you'd like to have sex with her.  Uma looks you over appraisingly.\n\n");
 
 			// Check femininity
@@ -1678,22 +1678,22 @@ import classes.Scenes.SceneLib;
 
 			outputText("\"<i>Just relax,</i>\" the mare prompts as she runs her hands over your body.  She gently teases your [nipples] with soft fingers, kneading your [chest] with smooth touches; her delicate grasp gradually increasing in force until she's pawing at your sensitive tit-flesh with authority.\n\n");
 			outputText("With your attention focused on your chest, you don't notice one of the mares hands ceasing its sensual massage of a breast, ");
-			
-			
+
+
 			if (player.thickness < 10 && player.tone > 90) outputText("her fingertips trailing against your chiseled, muscular abdomen, ");
 			else if (player.thickness < 30 && player.tone > 70) outputText("her fingertips gliding across your toned midriff, ");
 			else if (player.thickness > 90 && player.tone < 10) outputText("her fingertips stealing a grope of your chubby belly as they travel lower, ");
 			else if (player.thickness > 70 && player.tone < 30) outputText("her fingertips sinking into paunch of your belly, ");
-			
-			
+
+
 			if (player.hasCock()) outputText("past [eachCock], and ");
 
-			if (player.hasVagina()) 
+			if (player.hasVagina())
 			{
 				outputText("down towards the honeypot ");
 				if (player.isNaga()) outputText("on your [legs].  ");
 				else outputText("nestled between your [legs].  ");
-				
+
 				outputText("Slowly she spreads your folds open, massaging your labia and gathering moisture from your [vagina].\n\n");
 			}
 			else outputText(".\n\n");
@@ -1730,7 +1730,7 @@ import classes.Scenes.SceneLib;
 				outputText("Loppe isn't that bad, you find yourself saying - and doesn't it feel so weird to be talking about Uma's daughter when you're letting Uma herself do you, you privately note.\n\n");
 				outputText("\"<i>Oh, but this is where you're mistaken my dear.  Loppe is pretty bad and I should know.  She got that from me,</i>\" the mare laughs lightly, adding another finger to massage your opening.\n\n");
 				outputText("You moan loudly, wriggling in your seat to allow Uma better access to your more sensitive spots.  Mmm, she's good at this...\n\n");
-				outputText("\"<i>Thanks dear, but we are just about to get started with the real thing,</i>\" she replies with a chuckle.  Uma begins massaging your inner walls while she roams your insides, trying to find something.\n\n"); 
+				outputText("\"<i>Thanks dear, but we are just about to get started with the real thing,</i>\" she replies with a chuckle.  Uma begins massaging your inner walls while she roams your insides, trying to find something.\n\n");
 				outputText("You quickly realize what the mare is searching for, her expertise in matters of pleasure clear as your G-Spot is teased, crying out in delight as she sends the most delicious wave of pleasure rippling through your loins, doing your best to squeeze her fingers with your experienced but still-tight cunt.\n\n");
 				outputText("\"<i>Aha!  Found it!</i>\" the mare says with delight, \"<i>Now I can finally get started on removing all of this bad tension you've been accumulating, dear.</i>\"  She starts pumping her fingers inside you, making sure to tease your G-Spot with careful touches at every pump.\n\n");
 				outputText("You gasp and moan as the mare masseur's expert fingers tease you in all the right ways, slightly bucking in place to properly enjoy your finger-fucking, that oh-so-familiar and wonderful tightness building up in your belly before, with a cry of lust, you give in and ride the resultant crescendo of orgasm.  You give yourself over to the bliss of cumming into Uma's hand, slumping down in relaxed stupor after you finish emptying yourself.\n\n");
@@ -1743,7 +1743,7 @@ import classes.Scenes.SceneLib;
 			else
 			{
 				outputText("\"<i>Oh, moist and easy.  I wonder how much of this is Loppe's fault?  Maybe I should tell her to be a bit more gentle?</i>\" the mare suggests, adding a couple more fingers inside you.\n\n");
-				outputText("Well, maybe a little you manage to squeak out; you're really more concerned with just how good Uma's fingers feel inside you - they're not a nice big fat cock, but they're a pretty good substitute.\n\n"); 
+				outputText("Well, maybe a little you manage to squeak out; you're really more concerned with just how good Uma's fingers feel inside you - they're not a nice big fat cock, but they're a pretty good substitute.\n\n");
 				outputText("\"<i>Still feels like I have some room to work with here, so how about another one?</i>\" the mare states, even as she adds another finger to the ones already inside you.  \"<i>If we continue down this road I might just be able to squeeze a hand down there, you don't mind do you, dear?</i>\"\n\n");
 				outputText("Mmm, the more the merrier you unthinkingly reply.  You didn't get this stretched out by not liking to be filled, after all.\n\n");
 				outputText("\"<i>Good, I'll see if I can't accommodate you later, but for now there's something I'm looking for,</i>\"  She begins moving her fingers inside of you, feeling around your rippling walls, looking for that special spot within you.\n\n");
@@ -1775,7 +1775,7 @@ import classes.Scenes.SceneLib;
 			outputText("and a sizable table, made from bamboo; it's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.  This is the only piece of furniture in the room, apart from a small cupboard in the corner.  Though spartan in its layout, the room is quite comfortably warm.\n\n");
 			outputText("She starts stripping and motions for you to do the same.  \"<i>As talented as I am with my hands, I still haven't figured a way to properly take care of you while dressed, dear,</i>\" she giggles.  You nod your head in understanding and promptly strip down, ");
 
-			if (flags[kFLAGS.PC_FETISH] >= 1) outputText("unable to resist either the tingle of lust that runs through you at being naked in front of Uma, nor the urge to flaunt your feminine physique for her own gratification, "); 
+			if (flags[kFLAGS.PC_FETISH] >= 1) outputText("unable to resist either the tingle of lust that runs through you at being naked in front of Uma, nor the urge to flaunt your feminine physique for her own gratification, ");
 
 			outputText("and gather your [armorname] up in your arms as you do so. Walking over to the cupboard, you find a couple of folded towels and ample space to store your clothes, which is exactly what you do.\n\n");
 			outputText("\"<i>Be a dear and store mine too, please,</i>\"  Uma asks, handing her folded clothes to you.  You nod your head and place them in the cupboard like she asked, then walk over to the table and sit down, ready to begin.\n\n");
@@ -1856,11 +1856,11 @@ import classes.Scenes.SceneLib;
 			outputText("tell her that would be plenty, and thank her for her consideration.  \"<i>Okay, follow me then.</i>\"  The mare leads you away, out her office and down the corridor towards the far back of the clinic. Her enticing equine tail swishes lazily side to side the entire way, an organic magnet for your roving eyes.  You follow closely in her wake, looking forward to her “special treatment” with such ardor that you give up on concealing the tenting mass under your [armor]. It makes walking a little more difficult, but the feeling of your length");
 			if(player.cockTotal() > 1) outputText("s");
 			outputText(" grinding and growing is well-worth the obvious discomfort.");
-			
+
 			outputText("\n\nThe room she leads you to is quite simple: wooden walls and floor, a couple of drains set in the boards that are probably for the more... fluid generous clientele, ");
 			if(SceneLib.urta.urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
 			outputText("and a sizable bamboo table.  It's covered in a white cloth and has an upraised board with a hole in it that looks like it’s big enough to fit your head through.  It is the only piece of furniture in the room apart from a small cupboard in the corner. Though spartan in its layout, this odd chamber is quite comfortably warm.");
-			
+
 			outputText("\n\n\"<i>Strip, dear,</i>\" Uma says cheerfully while beginning to strip herself.  You need no further encouragement, eagerly getting naked ");
 			if(flags[kFLAGS.PC_FETISH] >= 1) {
 				outputText(", unable to resist either the tingle of lust that runs through you at being naked in front of Uma or the urge to flaunt your feminine physique for her own gratification.  Gathering your clothes up is a bit of an afterthought, but you make sure to bend over and proudly present your [butt]");
@@ -1871,9 +1871,9 @@ import classes.Scenes.SceneLib;
 			outputText("  Walking over to the cupboard, you find a couple of folded towels and ample space to stow your clothes.");
 
 			outputText("\n\n\"<i>Step aside, if you please</i>\" you hear Uma say from behind you as she approaches, clothes in hand.  You move over with a smile while she finds an empty spot to put her garments.  \"<i>Now... why don't get on my table so I can take a look at the problem.</i>\"");
-			
+
 			outputText("\n\nYou eagerly settle yourself onto her table as instructed, placing your head through the hole, [eachCock] jutting into the air and awaiting Uma’s mouth with anxious twitches.  You idly wonder how she’ll go about this...");
-			
+
 			outputText("\n\nThe motherly mare kneels before you, examining your shaft.  ");
 			//VARIANTS NEEDED
 			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 2) outputText("It’s clear that she doesn’t really enjoy the notion that much, considering the way she’s looking at you.  \"<i>All right, let’s get this over with.</i>\"  ");
@@ -1883,7 +1883,7 @@ import classes.Scenes.SceneLib;
 			if(player.cockTotal() == 1) outputText("your");
 			else outputText("a single");
 			outputText(" dick into her mouth, slurping on it.");
-			
+
 
 			outputText("\n\nIt's immediately apparent how her longer, equine-style face affords many advantages when it comes to oral pleasure.  Her capacitive mouth takes inch after inch after inch, long past when you would be normally threatening a gag-reflex, sliding you along her long, flat tongue as she goes.  Her efforts are far from expert, and you can tell that her heart isn't truly in this.  She stops her ministrations, adjusting her hair and saying, \"<i>Sorry dear.  I haven't gotten much practice at these.  They're not really my thing, normally");
 			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] >= 2) outputText(", but I guess you're changing that, aren't you?");
@@ -1893,12 +1893,12 @@ import classes.Scenes.SceneLib;
 			else if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 5) outputText("I think I'm starting to get used to your taste, [name].");
 			else outputText("Mmmm...  Don't tell anyone, but I think I'm starting to like helping you like this.");
 			outputText("</i>\"");
-			
+
 			outputText("\n\nGrunting softly at her ministrations, you let your [hips] shiver as she passes over your " + player.cockHead(x) + " once more.  Her tightly sealed lips glide over your spit-slicked length at an even, nerve-tickling pace");
 			if(player.cocks[x].cockLength < 9) outputText(" until she hits your [sheath]");
 			else outputText(" until she has her mouth as full as she can handle");
 			outputText(".  She holds you like that, letting you feel her hot breath wash over the [skinFurScales] of your crotch.  Her tongue wags back and forth underneath you, slipping and sliding against you. Inside her mouth, your " + cockDescript(x) + " twitches and jumps in her maw.  Beads of pre-cum are beading and dripping out onto her busy organ.");
-			
+
 			outputText("\n\nUma's shaft-muffled voice mumbles, \"<i>");
 			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 2) outputText("Girls taste better.");
 			else if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 5) outputText("Not too bad.");
@@ -1927,7 +1927,7 @@ import classes.Scenes.SceneLib;
 				if(player.cockTotal() > 2) outputText("s");
 				outputText(", and soon you are dribbling and dripping from all of your [cocks].");
 			}
-			
+
 			outputText("\n\nWhile the steady pleasure her mouth and tongue gives you has you feeling very, very good, it isn't quite bringing you towards the orgasm you came here craving.  You suggest she begin to bob up and down on you. \"<i>Cocks need to feel like they're fucking something,</i>\" you ");
 			if(player.cor <= 33) outputText("pleasantly explain");
 			else if(player.cor <= 66) outputText("explain");
@@ -1935,9 +1935,9 @@ import classes.Scenes.SceneLib;
 			outputText(".  ");
 			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 2) outputText("You can feel her nod in agreement through your pole, and soon after, she's plunging rhythmically up and down.");
 			else outputText("Before you can even finish, she's plunging up and down along your length, letting you know that she's learned this particular song and dance quite well under your tutelage.");
-			
+
 			outputText("\n\nYou give up a moan of pleasure as your [hips] lift off the table's coverings.  The building ecstasy within you is rolling around your abdomen like an ingot of molten metal, bubbling and ready to explode.  It's all you can do to stop yourself from thrashing against Uma's tongue in an effort to bring that release on as quickly as possible.  You steady yourself, and with a gasp of pleasure, feel [eachCock] swell, as big and hard as it can get without exploding from the pressure.  Uma slows her fucking motions and starts to suck with the languid blowjob, getting more and more pre-cum on her tongue with each slide down.  Quiet, excited noises slip out of your throat, one after another as you come to the very edge of orgasm.");
-			
+
 			//{Less than five blowjobs}
 			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 5)
 			{
@@ -1952,7 +1952,7 @@ import classes.Scenes.SceneLib;
 			else {
 				outputText("\n\nUma valiantly holds herself in place on your " + cockDescript(x) + ", just in time for the flow of your juices to turn white and salty, an inevitable prelude to the coming discharge of your orgasm.  She noisily slurps, emptying her mouth of precum to make room, and in the process, inadvertently provides you with even more impetus to unload.  ");
 				if(player.cumQ() <= 25) outputText("She dutifully swallows every drop of your average-sized load, her long tongue slipping and sliding around your shaft as she ensures it is completely cleaned.");
-				else if(player.cumQ() <= 100) 
+				else if(player.cumQ() <= 100)
 				{
 					outputText("She dutifully attempts to swallow every drop, but your load is a little bigger than average, and she's forced to let some of the frothy spit and jizz mixture wash back out over your length.");
 					if(player.balls > 0) outputText("  It rolls down to your [sack], coating it in warm, wet cum-shine.");
@@ -1986,7 +1986,7 @@ import classes.Scenes.SceneLib;
 			}
 			//epilogue
 			//Came on her face
-			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 2) 
+			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 2)
 			{
 				outputText("\n\nUma wipes her face off some of your seed.  \"<i>I’m fine.  Sorry about that, dear... but blowing is not really my thing, you know?  The only other person I did this for was Loppe’s father, and even then I didn’t like it so much... maybe you should have gone to Loppe instead?</i>\"");
 				outputText("\n\nYou tell her you’ll remember that, ");
@@ -1994,7 +1994,7 @@ import classes.Scenes.SceneLib;
 				outputText("get up to start getting dressed before quietly heading back to camp.");
 			}
 			//Came on her face after second time:
-			else if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 5) 
+			else if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 5)
 			{
 				outputText("\n\nUma wipes her face off some of your seed.  \"<i>I’m fine.  Sorry about that, dear... I'm trying but to be honest, the idea of having a male member go off in my mouth like that startles me.  The gush of a wet pussy on your lips is just so much more understandable.  I bet Loppe wouldn't mind doing this for you, you know.</i>\"  She suddenly smirks, \"<i>Unless you've got some kind of fetish for letting older mares milk you?</i>\"");
 				outputText("\n\nYou give her a wink and a smile as you depart.  She's getting better at this.");
@@ -2046,8 +2046,8 @@ import classes.Scenes.SceneLib;
 			outputText("You respond by eagerly digging your mouth even deeper into the soft folds of Uma's sex, extending your tongue to reach even deeper inside the pretty filly.  Her taste is wonderful. Familiar and yet distinct, with a spice you attribute to being the mare's personal taste.  So intent you are on eating her out, that you're almost like a horse, eager to taste the dewy grass of the morning pasture.\n\n");
 			outputText("Uma moans and groans appreciatively, one hand reaching down to rub your head ");
 
-			if (player.ears.type == 2 || player.ears.type == 9 || player.ears.type == 5 || player.ears.type == 7) outputText("between your "); 
-			
+			if (player.ears.type == 2 || player.ears.type == 9 || player.ears.type == 5 || player.ears.type == 7) outputText("between your ");
+
 			if (player.ears.type == 2) outputText("canine ");
 			if (player.ears.type == 9) outputText("vulpine ");
 			if (player.ears.type == 5) outputText("feline ");

@@ -3,6 +3,7 @@
  */
 package classes
 {
+import classes.Player;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
@@ -12,7 +13,9 @@ import classes.Perks.*;
 
 public class PerkLib
 	{
-
+		public function get game():CoC{
+			return CoC.instance;
+		}
 		// UNSORTED perks TODO these are mostly incorrect perks: tested but never created
 		public static const Buttslut:PerkType = mk("Buttslut", "Buttslut",
 				"");
@@ -1253,16 +1256,9 @@ public class PerkLib
 				"As an elf, gain a 25% increase to bow damage when not wielding a shield or a melee weapon other than a Spear.");
 		public static const ELFMasterShot:PerkType = mk("Master Shot", "Master Shot",
 				"As an elf, add one extra attack to archery full attacks.");
+		public static const ELFElvenSpearDancingFlurry1to4:ELFElvenSpearDancingFlurry = new ELFElvenSpearDancingFlurry();
 		public static const ELFElvenBattleStyle:PerkType = mk("Elven Battle Style", "Elven Battle Style",
 				"As an elf, substitute your strenght to your intelligence modifier for spear damage when full attacking.");
-		public static const ELFElvenSpearDancingFlurry:PerkType = mk("Elven Spear Dancing Flurry", "Elven Spear Dancing Flurry",
-				"As an elf add 1 extra attacks when full attacking using a one handed or two handed spear with no shield equipped. and increase spear damage by 20% when full attacking.");
-		public static const ELFElvenSpearDancingFlurryII:PerkType = mk("Elven Spear Dancing Flurry II", "Elven Spear Dancing Flurry II",
-				"As an elf add 2 extra attacks when full attacking using a one handed or two handed spear with no shield equipped. and increase spear damage by 20% when full attacking.");
-		public static const ELFElvenSpearDancingFlurryIII:PerkType = mk("Elven Spear Dancing Flurry III", "Elven Spear Dancing Flurry III",
-				"As an elf add 3 extra attacks when full attacking using a one handed or two handed spear with no shield equipped. and increase spear damage by 20% when full attacking.");
-		public static const ELFElvenSpearDancingFlurryIV:PerkType = mk("Elven Spear Dancing Flurry IV", "Elven Spear Dancing Flurry IV",
-				"As an elf add 4 extra attacks when full attacking using a one handed or two handed spear with no shield equipped. and increase spear damage by 20% when full attacking.");
 		public static const ELFElvenSpearDancingTechnique:PerkType = mk("Elven Spear Dancing Technique", "Elven Spear Dancing Technique",
 				"As an elf, deal additional tease damage based on your speed while wielding a spear.");
 		public static const ElvishPeripheralNervSys:PerkType = mk("Elvish Peripheral NervSys", "Elvish Peripheral NervSys",

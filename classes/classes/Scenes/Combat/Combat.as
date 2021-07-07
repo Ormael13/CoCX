@@ -1,4 +1,4 @@
-﻿﻿package classes.Scenes.Combat {
+﻿package classes.Scenes.Combat {
 import classes.BaseContent;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
@@ -405,11 +405,7 @@ public class Combat extends BaseContent {
     }
 
     public function canSpearDance():Boolean{
-        return ((player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry)
-                || player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryII)
-                || player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIII)
-                || player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIV))
-                && player.isElf())
+        return (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4) && player.isElf());
     }
 
     public function maxCurrentAttacks():int {
@@ -420,10 +416,7 @@ public class Combat extends BaseContent {
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.haveNaturalClawsTypeWeapon())) return maxClawsAttacks();
         else if (canSpearDance() && player.isUsingSpear() && player.shield == ShieldLib.NOTHING){
             var Special:Number = 0;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry)) Special = 1;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryII)) Special = 2;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIII)) Special = 3;
-            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurryIV)) Special = 4;
+            if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) Special += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
             if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large") return maxLargeAttacks()+Special;
             else if (player.weaponPerk == "Small" || player.weaponPerk == "Dual Small") return maxSmallAttacks()+Special;
             else return maxCommonAttacks()+Special;
@@ -517,7 +510,7 @@ public class Combat extends BaseContent {
             player.setPerkValue(PerkLib.SpellcastingAffinity, 1, 50);
         }
     }
-	
+
 	internal function applyAutocast0():void {
 		outputText("\n\n");
 		if (flags[kFLAGS.AUTO_FLIGHT] > 0) {
@@ -1029,13 +1022,13 @@ public class Combat extends BaseContent {
 					}
 				}
 				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-					
+
 				}
 				if (player.hasPerk(PerkLib.ICastAsuraFist)) {
-					
+
 				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
-					
+
 				}
 			} else {
 				bd = buttons.add("Asura Form", assumeAsuraForm).hint("Let your wrath flow thou you, transforming you into Asura! \n\nWrath Cost: " + asuraformCost() + " per turn");
@@ -4928,6 +4921,7 @@ public class Combat extends BaseContent {
                 if (player.isElf() && player.isUsingSpear() && player.hasPerk(PerkLib.ELFElvenBattleStyle)) {
                     damage += player.inte;
                     damage += scalingBonusToughness() * 0.25;
+                    if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.20*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
                 }
                 else{
                     damage += player.str;
@@ -6128,7 +6122,7 @@ public class Combat extends BaseContent {
     }
 
     public function WeaponRangeStatusProcs():void {
-		
+
     }
 
     public function WeaponFlyingSwordsStatusProcs():void {
@@ -7236,7 +7230,7 @@ public class Combat extends BaseContent {
         if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
         return damage;
     }
-	
+
 	public function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         if (damage < 1) damage = 1;
@@ -9329,13 +9323,13 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellPyreBurstEx, 1, -1);
             }
         }
-        if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLighting)) { 
-            if (player.statusEffectv1(StatusEffects.CooldownSpellChainLighting) <= 0) { 
-                player.removeStatusEffect(StatusEffects.CooldownSpellChainLighting); 
-            } else { 
-                player.addStatusValue(StatusEffects.CooldownSpellChainLighting, 1, -1); 
-            } 
-        } 
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLighting)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellChainLighting) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellChainLighting);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellChainLighting, 1, -1);
+            }
+        }
         if (player.hasStatusEffect(StatusEffects.CooldownSpellChainLightingEx)) {
             if (player.statusEffectv1(StatusEffects.CooldownSpellChainLightingEx) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellChainLightingEx);
@@ -13132,7 +13126,7 @@ public class Combat extends BaseContent {
         monster.createStatusEffect(StatusEffects.MonsterAttacksDisabled, 0, 0, 0, 0);
         enemyAI();
     }
-	
+
 	public function landAfterUsingFlyingSword():void {
 		clearOutput();
 		outputText("You descend to the ground and step down from your "+player.weaponFlyingSwordsName+".\n\n");
@@ -13155,7 +13149,7 @@ public class Combat extends BaseContent {
         player.removeStatusEffect(StatusEffects.Flying);
 		doNext(curry(combatMenu, false));
 	}
-	
+
 	public function attackFlyingSword():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
         clearOutput();
@@ -13610,7 +13604,7 @@ public class Combat extends BaseContent {
         statScreenRefresh();
         enemyAI();
 	}
-	
+
 	public function sendSkeletonToFight():void {
 		clearOutput();
 		outputText("Your skeleton warrior"+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "s":"")+" charge into battle swinging "+(player.perkv2(PerkLib.PrestigeJobNecromancer) > 1 ? "they're":"his")+" blade arounds. ");
@@ -13916,7 +13910,7 @@ public class Combat extends BaseContent {
         modssc = Math.round(modssc * 100) / 100;
         return modssc;
     }
-	
+
 	public function flyingSwordAttackCost():Number {
 		var fsac:Number = 25;
 		if (player.hasPerk(PerkLib.SoaringBlades)) {
@@ -13927,7 +13921,7 @@ public class Combat extends BaseContent {
 		}
 		return fsac;
 	}
-	
+
 	public function flyingSwordUseCost():Number {
 		var fsuc:Number = 100;
 		if (player.hasPerk(PerkLib.SoaringBlades)) {
@@ -13938,7 +13932,7 @@ public class Combat extends BaseContent {
 		}
 		return fsuc;
 	}
-	
+
 	public function flyingWithSoulforceCost():Number {
 		var fwsc:Number = 500;
 		if (player.perkv1(PerkLib.Dantain) > 2) fwsc -= 100;

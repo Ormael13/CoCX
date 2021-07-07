@@ -27,10 +27,10 @@ public class PlayerInfo extends BaseContent {
 		spriteSelect(-1);
 		clearOutput();
 		displayHeader("General Stats");
-		
+
 		// Begin Body Stats
 		var bodyStats:String = "";
-		
+
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0 || flags[kFLAGS.IN_PRISON] > 0) {
 			bodyStats += "<b>Satiety:</b> " + Math.floor(player.hunger) + " / " + player.maxHunger() + " (";
 			if (player.hunger <= 0) bodyStats += "<font color=\"#ff0000\">Dying</font>";
@@ -140,7 +140,7 @@ public class PlayerInfo extends BaseContent {
 		miscStats += "<b>Advanced Jobs:</b> " + player.currentAdvancedJobs() + " / " + player.maxAdvancedJobs() + "\n";
 		miscStats += "<b>Hidden Jobs:</b> " + player.currentHiddenJobs() + " / " + player.maxHiddenJobs() + "\n";
 		miscStats += "<b>Prestige Jobs:</b> " + player.currentPrestigeJobs() + " / " + player.maxPrestigeJobs() + "\n";
-		
+
 		if (player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter1)) {
 			miscStats += "<b>Imps Hunt Quests completed:</b> " + player.statusEffectv1(StatusEffects.AdventureGuildQuestsCounter1) + "\n";
 			miscStats += "<b>Demons Hunt Quests completed:</b> " + player.statusEffectv2(StatusEffects.AdventureGuildQuestsCounter1) + "\n";
@@ -196,7 +196,7 @@ public class PlayerInfo extends BaseContent {
 		else miscStats += "N/A (You already at max lvl)\n";
 		miscStats += "<b>Ascension points (curently possesed):</b> " + player.ascensionPerkPoints + "\n";
 		miscStats += "<b>Ascension points (possible to gain during next ascension):</b> " + camp.possibleToGainAscensionPoints() + "\n";
-		
+
 		if (miscStats != "")
 			outputText("\n<b><u>Miscellaneous Stats</u></b>\n" + miscStats);
 		// End Misc Stats
@@ -476,7 +476,7 @@ public class PlayerInfo extends BaseContent {
 		if (combatStats != "")
 			outputText("\n<b><u>Combat Stats</u></b>\n" + combatStats);
 		// End Combat Stats
-		
+
 		// Begin Kill Counters Stats
 		var killCountStats:String = "";
 
@@ -489,9 +489,9 @@ public class PlayerInfo extends BaseContent {
 		if (killCountStats != "")
 			outputText("\n<b><u>Kill Counters</u></b>\n" + killCountStats);
 		// End Kill Counters Stats
-		
+
 		if (prison.inPrison || flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) prison.displayPrisonStats();
-		
+
 		menu();
 		addButton(0, "Next", playerMenu);
 		addButton(5, "General", displayStats);
@@ -507,7 +507,7 @@ public class PlayerInfo extends BaseContent {
 
 		// Begin Interpersonal Stats
 		var interpersonStats:String = "";
-			
+
 		if (flags[kFLAGS.AIKO_TIMES_MET] > 0) {
 			interpersonStats  += "<b>Aiko Affection:</b> "+flags[kFLAGS.AIKO_AFFECTION]+"\n";
 			if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0)
@@ -522,7 +522,7 @@ public class PlayerInfo extends BaseContent {
 			interpersonStats += "<b>Anzu's Affection:</b> " + flags[kFLAGS.ANZU_AFFECTION] + "%\n";
 			interpersonStats += "<b>Anzu's Relationship Level:</b> " + (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 1 ? "Acquaintances" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 2 ? "Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 3 ? "Close Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 4 ? "Lover" : "Undefined") + "\n";
 		}
-			
+
 		if (flags[kFLAGS.ARIAN_PARK] > 0)
             interpersonStats += "<b>Arian's Health:</b> " + Math.round(SceneLib.arianScene.arianHealth()) + "\n";
         if (flags[kFLAGS.ARIAN_VIRGIN] > 0)
@@ -545,7 +545,7 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.AURORA_LVL] == 2) interpersonStats += "<b>Aurora lvl:</b> 7\n";
 			if (flags[kFLAGS.AURORA_LVL] == 1) interpersonStats += "<b>Aurora lvl:</b> 1\n";
 		}
-			
+
 		if (SceneLib.bazaar.benoit.benoitAffection() > 0)
             interpersonStats += "<b>" + SceneLib.bazaar.benoit.benoitMF("Benoit", "Benoite") + " Affection:</b> " + Math.round(SceneLib.bazaar.benoit.benoitAffection()) + "%\n";
         if (flags[kFLAGS.BROOKE_MET] > 0)
@@ -788,7 +788,7 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.LUNA_LVL_UP] == 1) interpersonStats += "<b>Luna lvl:</b> 15\n";
 			if (flags[kFLAGS.LUNA_LVL_UP] == 0) interpersonStats += "<b>Luna lvl:</b> 9\n";
 		}
-		
+
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7)  {
 			if (flags[kFLAGS.NEISA_AFFECTION] < 50) interpersonStats += "<b>Neisa Loyalty:</b> " + Math.round(flags[kFLAGS.NEISA_AFFECTION]) * 2 + "%\n";
 			else interpersonStats += "<b>Neisa Loyalty:</b> 100%\n";
@@ -805,13 +805,13 @@ public class PlayerInfo extends BaseContent {
 
 		if (SceneLib.telAdre.rubi.rubiAffection() > 0)
             interpersonStats += "<b>Rubi's Affection:</b> " + Math.round(SceneLib.telAdre.rubi.rubiAffection()) + "%\n" + "<b>Rubi's Orifice Capacity:</b> " + Math.round(SceneLib.telAdre.rubi.rubiCapacity()) + "%\n";
-        
+
 		if (flags[kFLAGS.SAMIRAH_AFFECTION] > 0)
 			interpersonStats += "<b>Samirah Affection:</b> " + Math.round(flags[kFLAGS.SAMIRAH_AFFECTION]) + "%\n";
-		
+
 		if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 0)
 			interpersonStats += "<b>Sapphire Affection:</b> " + Math.round(flags[kFLAGS.SAPPHIRE_AFFECTION]) + "%\n";
-		
+
 		if (flags[kFLAGS.SHEILA_XP] != 0) {
             interpersonStats += "<b>Sheila's Corruption:</b> " + SceneLib.sheilaScene.sheilaCorruption();
             if (SceneLib.sheilaScene.sheilaCorruption() > 100)
@@ -906,13 +906,13 @@ public class PlayerInfo extends BaseContent {
 		if (evangelineStats != "")
 			outputText("\n<b><u>Evangeline Stats</u></b>\n" + evangelineStats);
 		// End Evangeline Stats
-		
+
 		// Begin RyuBi Stats
 		var ryubiStats:String = "";
 		if (ryubiStats != "")
 			outputText("\n<b><u>RyuBi Stats</u></b>\n" + ryubiStats);
 		// End RyuBi Stats
-		
+
 		// Begin Galia Stats
 		var galiaStats:String = "";
 		if (galiaStats != "")
@@ -1025,7 +1025,7 @@ public class PlayerInfo extends BaseContent {
             childStats += "<b>Total Children With Ember:</b> " + (SceneLib.emberScene.emberChildren()) + "\n";
         if (flags[kFLAGS.EMBER_EGGS] > 0)
 			childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
-			
+
         if (flags[kFLAGS.EXCELLIA_MALE_KIDS] > 0)
 			childStats += "<b>Excellia Offspring (Human Males):</b> " + flags[kFLAGS.EXCELLIA_MALE_KIDS] + "\n";
 		if (flags[kFLAGS.EXCELLIA_FEMALE_KIDS] > 0)
@@ -1645,7 +1645,7 @@ public class PlayerInfo extends BaseContent {
             if (player.perkPoints>1) outputText("You have "+numberOfThings(player.perkPoints,"perk point","perk points")+".\n\n");
 	        mainView.mainText.addEventListener(TextEvent.LINK, linkhandler);
 	        perkList = [];
-	        for each(var perk:PerkType in perks) {
+	        for each(var perk:PerkType in perks.sort()) {
 		        var p:PerkClass = new PerkClass(perk,
 				        perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
 		        var lab:* = {label: p.perkName, perk: p};
@@ -1684,7 +1684,7 @@ public class PlayerInfo extends BaseContent {
         var unlocks:Array = CoC.instance.perkTree.listUnlocks(selected.ptype);
         if (unlocks.length > 0) {
 			outputText("<b>Unlocks:</b> <ul>");
-			for each (var pt:PerkType in unlocks) outputText("<li>" + pt.name + " (" + pt.longDesc + ")</li>");
+			for each (var pt:PerkType in unlocks) outputText("<li>" + pt.name() + " (" + pt.longDesc + ")</li>");
 			outputText("</ul>");
 		}
 		outputText("If you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.\n");
@@ -1748,7 +1748,7 @@ public class PlayerInfo extends BaseContent {
 								.requireSen(90)
                                 .requireLevel(30); //requirePerk(JobEromancer)
 			*/	//(Still need some other related stuff added to make PC true Munchkin
-	
+
 	public function superPerkBuyMenu(page:int = 1):void {
 		clearOutput();
 		outputText("If you meet requirements and have enough points you can pick one or more super perks.\n");
@@ -1879,10 +1879,10 @@ public class PlayerInfo extends BaseContent {
 		}
 		if (page == 3) {
 			if (player.superPerkPoints > 0) {
-				
+
 			}
 			else {
-				
+
 			}
 			//12 -> page + 1 button
 			//13 -> page - 1 button
@@ -1988,4 +1988,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(curry(superPerkBuyMenu, 3));
 	}
 }
-}
+}

@@ -442,10 +442,10 @@ import classes.Scenes.SceneLib;
 			clearOutput();
 			WoodElvesQuest = QUEST_STAGE_PCFUCKOFF;
 			outputText("The three look sad as you tell them you’ll be leaving." +
-                    "\n\nMerisiel sighs. \"<i>I figured you would when I realized your memories were returning. Don’t worry, we won’t try to stop you.</i>\"\n\n" +
-                    "Elenwen tells you where your old equipment is being stored. \"<i>We didn’t get rid of it… we were planning on giving it back to you after your naming ceremony tomorrow anyway. I suppose you’ll be wanting it.</i>\"\n\n" +
-                    "Alyssa has tears in her eyes as she pleads with you but your mind's made up and you decide to leave, heading back to your camp.");
-            doNext(camp.returnToCampUseOneHour);
+					"\n\nMerisiel sighs. \"<i>I figured you would when I realized your memories were returning. Don’t worry, we won’t try to stop you.</i>\"\n\n" +
+					"Elenwen tells you where your old equipment is being stored. \"<i>We didn’t get rid of it… we were planning on giving it back to you after your naming ceremony tomorrow anyway. I suppose you’ll be wanting it.</i>\"\n\n" +
+					"Alyssa has tears in her eyes as she pleads with you but your mind's made up and you decide to leave, heading back to your camp.");
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function KeepName():void {
@@ -864,7 +864,7 @@ import classes.Scenes.SceneLib;
 				else outputText("\n\nHer first instruction is to strip. Unlike her usual, somewhat perverted expression when she says that, she appears serious.");
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING0;
 			}
-			outputText("\n\n\"<i>Remember, [name], we Elves are fundamentally spiritual creatures. Elves do not fight with strength but rather by listening to the voices around us. Elves become one with the voices of the wind and the forest. To do that, you have to be able to feel the air around you, and the easiest way to learn to do that is, well, to have nothing between you and it. Once you’re confident with your abilities, you can wear clothes, but beginners must always learn naked, even before we came to Mareth. I still practice that way, as you can see.</i>\"" +
+			outputText("\n\n\"<i>Remember, [name], we Elves are fundamentally spiritual creatures. Elves do not fight with strength but rather by listening to the voices around us. Elves become one with the voices of the wind and the forest. To do that, you have to be able to feel the air around you, and the easiest way to learn to do that is, well, to have nothing between you and it. Once you’re confident with your abilities, you can wear clothes, but beginners must always learn naked. I still practice that way, as you can see.</i>\"" +
 					"\n\nWith that, you take up a practice spear and begin training your posture and movements." +
 					" Alyssa alternates between watching you and correcting your posture with her hands." +
 					" Though she constantly tells you not to force your movement in favor of feeling where the wind is directing you," +
@@ -906,7 +906,7 @@ import classes.Scenes.SceneLib;
 			CoC.instance.timeQ = 1;
 			if (player.spe >= 50 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING0 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING1;
-				player.createPerk(PerkLib.ELFElvenSpearDancingFlurry,0,0,0,0);
+				player.createPerk(PerkLib.ELFElvenSpearDancingFlurry1to4,1,0,0,0);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Spear Dancing Flurry! <b>Gained Perk:Elven Spear Dancing Flurry</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
@@ -914,16 +914,14 @@ import classes.Scenes.SceneLib;
 			else if (player.spe >= 100 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING1 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING2;
 				player.createPerk(PerkLib.ELFElvenBattleStyle,0,0,0,0);
-				player.createPerk(PerkLib.ELFElvenSpearDancingFlurryII,0,0,0,0);
-				player.removePerk(PerkLib.ELFElvenSpearDancingFlurry);
+				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,2);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Battle Style and Elven Spear Dancing Flurry IV Perk! <b>Gained Perk: Elven Battle Style and Elven Spear Dancing Flurry II</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
 			}
 			else if (player.spe >= 150 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING2 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING3;
-				player.createPerk(PerkLib.ELFElvenSpearDancingFlurryIII,0,0,0,0);
-				player.removePerk(PerkLib.ELFElvenSpearDancingFlurryII);
+				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,3);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Spear Dancing Flurry III Perk! <b>Gained Perk: Elven Spear Dancing Flurry III</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
@@ -931,8 +929,7 @@ import classes.Scenes.SceneLib;
 			else if (player.spe >= 200 && WoodElfSpearTraining == QUEST_STAGE_SPEARTRAINING3 && !hasTrainedToday){
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING4;
 				player.createPerk(PerkLib.ELFElvenSpearDancingTechnique,0,0,0,0);
-				player.createPerk(PerkLib.ELFElvenSpearDancingFlurryIV,0,0,0,0);
-				player.removePerk(PerkLib.ELFElvenSpearDancingFlurryIII);
+				player.setPerkValue(PerkLib.ELFElvenSpearDancingFlurry1to4,1,4);
 				outputText("\n\nThanks to your extensive training in elven spear techniques you have unlocked the Elven Spear Dancing Technique and Elven Spear Dancing Flurry IV Perk! <b>Gained Perk: Spear Dancing Technique and Elven Spear Dancing Flurry IV</b>");
 				hasTrainedToday = true;
 				hasTrainedTodayCooldown = 24;
