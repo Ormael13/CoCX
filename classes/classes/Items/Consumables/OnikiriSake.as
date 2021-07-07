@@ -18,11 +18,11 @@ import classes.PerkLib;
 import classes.StatusEffects;
 
 public class OnikiriSake extends Consumable {
-	public function OnikiriSake() 
+	public function OnikiriSake()
 	{
 		super("OniSake", "Onikiri Sake", "a bottle of Onikiri Sake", 6, "A drink favored by oni.");
 	}
-	
+
 	override public function get description():String {
 		var desc:String = _description;
 		if (flags[kFLAGS.IZUMI_MET] > 0) desc += " Izumi kept a full stock of this in her camp. A strong beverage just like the people who drinks it.";
@@ -30,7 +30,7 @@ public class OnikiriSake extends Consumable {
 		desc += "\nBase value: " + String(value);
 		return desc;
 	}
-	
+
 	override public function useItem():Boolean {
 		var changes:Number = 0;
 		var changeLimit:Number = 1;
@@ -185,10 +185,8 @@ public class OnikiriSake extends Consumable {
 		}
 		//Face
 		if (player.ears.type == Ears.ONI && player.faceType != Face.ONI_TEETH && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nY");
-			if (player.faceType != Face.HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
-			outputText("ou feel your canines changing, growing bigger and slightly sharper. Hey you could pretend to be some kind of demon with that kind of mouth. <b>You now have oni canines.</b>");
-			mutations.setFaceType(Face.ONI_TEETH);
+			outputText("\n\n");
+      CoC.instance.transformations.FaceOniTeeth.applyEffect();
 			changes++;
 		}
 		//Skin

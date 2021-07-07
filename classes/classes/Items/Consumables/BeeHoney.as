@@ -118,6 +118,7 @@ public class BeeHoney extends Consumable
 			if (changes < changeLimit && player.hairType == 4 && Utils.rand(2) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
 				outputText("\n\nAs you down the sticky-sweet honey, your head begins to feel heavier.  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels and smells like the honey you just ate; you watch as it dissolves into many thin strands coated in the sugary syrup.  <b>Your hair is back to normal (well, once you wash the honey out)!</b>");
+				outputText("\n\n");
 				CoC.instance.transformations.HairHuman.applyEffect(false);
 				changes++;
 			}

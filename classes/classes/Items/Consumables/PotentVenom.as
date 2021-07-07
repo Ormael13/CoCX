@@ -20,6 +20,7 @@ import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.VaginaClass;
+import classes.CoC;
 
 public class PotentVenom extends Consumable {
 	public function PotentVenom() {
@@ -111,12 +112,8 @@ public class PotentVenom extends Consumable {
 		}
 		//Face
 		if ((player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(3) == 0) {
-			if (player.faceType != Face.HUMAN) {
-				mutations.humanizeFace();
-			}
-			outputText("\n\nYou feel your some of your tooths changing, elongating into sharper dagger like form. Funnily, your face remained fully human even after the change. " +
-					"<b>Your mouth is now a cross over between animal and human!</b>");
-			mutations.setFaceType(Face.ANIMAL_TOOTHS);
+      outputText("\n\n");
+      CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
 			changes++;
 		}
 		//NeckMaxilipeds

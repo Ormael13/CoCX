@@ -201,10 +201,11 @@
 			player.sexReward("vaginalFluids", "Vaginal");
 			player.ears.type = Ears.ELVEN;
 			player.eyes.type = Eyes.ELF;
-			player.faceType = Face.ELF;
+      CoC.instance.transformations.FaceElf.applyEffect(false);
 			player.tongue.type = Tongue.ELF;
 			player.arms.type = Arms.ELF;
 			player.lowerBody = LowerBody.ELF;
+      outputText("\n\n");
       CoC.instance.transformations.HairSilky.applyEffect(false);
 			player.wings.type = Wings.NONE;
 			player.eyes.colour = "light green";

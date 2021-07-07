@@ -16,6 +16,7 @@ import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
+import classes.CoC;
 
 public class MinotaurBlood extends Consumable {
 	public function MinotaurBlood() {
@@ -396,9 +397,9 @@ public class MinotaurBlood extends Consumable {
 		//Face change, requires Ears + Height + Hooves
 		if (player.ears.type == Ears.COW && player.lowerBody == LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE && player.tallness >= 90 && changes < changeLimit && rand(3) == 0) {
 			if (player.faceType != Face.COW_MINOTAUR) {
-				outputText("\n\nBones shift and twist painfully as your visage twists and morphs to resemble that of the beast whose blood you now drink.  <b>You now have a minotaur-like face.</b>");
+				outputText("\n\n");
+				CoC.instance.transformations.FaceCowMinotaur.applyEffect();
 				changes++;
-				mutations.setFaceType(Face.COW_MINOTAUR);
 			}
 		}
 		//+height up to 9 foot

@@ -241,23 +241,29 @@ public class WorldTree extends BaseContent
 			if (player.hairColor == "green" && player.hairLength > 0 && (player.hairType != Hair.LEAF && player.hairType != Hair.GRASS && player.hairType != Hair.ANEMONE) && !player.isGargoyle() && changes < changeLimit)
 			{
 				if (player.cor >= 66) {
+					outputText("\n\n");
 					CoC.instance.transformations.HairAnemone.applyEffect();
 				}
 				if (player.cor >= 33 && player.cor < 66) {
 					if (rand(2) == 0) {
+						outputText("\n\n");
 						CoC.instance.transformations.HairAnemone.applyEffect();
 					} else {
 						if (rand(2) == 0) {
+							outputText("\n\n");
 							CoC.instance.transformations.HairGrass.applyEffect();
 						}	else {
+							outputText("\n\n");
 							CoC.instance.transformations.HairLeaf.applyEffect();
 						}
 					}
 				}
 				if (player.cor < 33) {
 					if (rand(2) == 0) {
+						outputText("\n\n");
 						CoC.instance.transformations.HairGrass.applyEffect();
 					}	else {
+						outputText("\n\n");
 						CoC.instance.transformations.HairLeaf.applyEffect();
 					}
 				}
@@ -325,11 +331,7 @@ public class WorldTree extends BaseContent
 			}
 			//Plant Dragon face
 			if (player.lowerBody == LowerBody.YGG_ROOT_CLAWS && player.faceType != Face.PLANT_DRAGON && changes < changeLimit) {
-				outputText("The familiar tingle of transformation spreads across your face. Your ");
-				if (player.hasMuzzle()) outputText("muzzle");
-				else outputText("face");
-				outputText(" shifts into a vaguely triangular shape, something that would look at home on a predatory reptile...  or a dragon. You feel pride swell within you as you look at your reflection inh a puddle at your feet, your new look now resembles a majestic creature of the old myths. <b>Your face is now a dragonlike muzzle!</b>\n\n");
-				player.faceType = Face.PLANT_DRAGON;
+        CoC.instance.transformations.FacePlantDragon.applyEffect();
 				changes++;
 			}
 			//Plant dragon tail

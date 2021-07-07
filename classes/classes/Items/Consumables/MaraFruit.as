@@ -278,16 +278,19 @@ public class MaraFruit extends Consumable{
 		//Face
 		if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
 			changes++;
-			mutations.setFaceType(Face.HUMAN);
-			outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>");
+      outputText("\n\n");
+      CoC.instance.transformations.FaceHuman.applyEffect(false);
+			outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look. <b>You have a human looking face again!</b>");
 		}
 		//Leaf Hair
 		if (player.hairColor == "green" && (player.hairType != Hair.LEAF && player.hairType != Hair.GRASS) && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit)
 		{
 			if (rand(2) == 0) {
+				outputText("\n\n");
 				CoC.instance.transformations.HairGrass.applyEffect(false);
 			}
 			else {
+				outputText("\n\n");
 				CoC.instance.transformations.HairLeaf.applyEffect(false);
 			}
 			changes++;

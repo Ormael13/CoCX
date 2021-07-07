@@ -24,6 +24,7 @@ import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
+import classes.CoC;
 
 public class Enigmanium extends Consumable{
 	public function Enigmanium() {
@@ -44,7 +45,7 @@ public class Enigmanium extends Consumable{
 			//Text go!
 			clearOutput();
 			outputText("You chug down the potion pinching your nose and hoping for the best. Knowledge flood your mind. Hey you could as well get to making riddles as a pastime.");
-			
+
 			//Speed raises up to 75
 			if (rand(3) == 0 && changes < changeLimit) {
 				//low speed
@@ -84,8 +85,8 @@ public class Enigmanium extends Consumable{
 				player.MutagenBonus("wis", 2);
 				changes++;
 			}
-			
-			
+
+
 			//Libido gain
 			if (changes < changeLimit && rand(4) == 0) {
 				//Cat dicked folks
@@ -170,14 +171,14 @@ public class Enigmanium extends Consumable{
 			}
 		}
 		//Mare-gina
-			
+
 		//Increase player's breast size, if they are big FF or smaller
 			if (player.smallestTitSize() <= 14 && player.gender >= 2 && changes < changeLimit && rand(4) == 0) {
 			outputText("\n\nAfter eating it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + player.breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.");
 			player.breastRows[player.smallestTitRow()].breastRating++;
 			changes++;
 		}
-		
+
 		//Sexual changes would go here if I wasn't a tard.
 		//Heat
 		if (rand(4) == 0 && changes < changeLimit)
@@ -214,7 +215,7 @@ public class Enigmanium extends Consumable{
 				player.cocks[i].knotMultiplier = 1;
 				changes++;
 			}
-			
+
 			if ((player.isMaleOrHerm()) && rand(3) == 0 && changes < changeLimit) {
 			//If cocks that aren't Catsified!
 			if ((player.catCocks() + player.demonCocks()) < player.cocks.length) {
@@ -382,7 +383,7 @@ public class Enigmanium extends Consumable{
 			mutations.setLowerBody(LowerBody.CAT);
 			player.legCount = 4;
 		}
-			
+
 			//Wings
 			if (player.wings.type == Wings.NONE && changes < changeLimit && player.arms.type == Arms.SPHINX && rand(4) == 0) {
 				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, [haircolor] wings.</b>");
@@ -394,8 +395,8 @@ public class Enigmanium extends Consumable{
 				mutations.removeWings();
 				changes++;
 			}
-			
-			
+
+
 			//generic version
 			if (player.lowerBody != LowerBody.CAT && player.lowerBody != LowerBody.GARGOYLE && !player.isTaur() && changes < changeLimit && rand(3) == 0) {
 				//else if (player.lowerBody == DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
@@ -422,13 +423,13 @@ public class Enigmanium extends Consumable{
 				//dynStats("cor", 0);
 				changes++;
 			}
-			
-			//Human skin	
+
+			//Human skin
 			if (player.tailType == Tail.CAT && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
 				mutations.humanizeSkin();
 				changes++;
 			}
-			
+
 			//Body type changes.  Teh rarest of the rare.
 			//DA EARZ
 			if (player.ears.type != Ears.LION && player.tailType != Tail.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
@@ -458,17 +459,14 @@ public class Enigmanium extends Consumable{
 				mutations.setTailType(Tail.CAT);
 				changes++;
 			}
-			
+
 			//DA Mouth
 			if (player.faceType != Face.CAT_CANINES && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit) {
-				if (player.faceType != Face.HUMAN) { outputText("\n\nYour face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
-				}		
-				else { outputText("\n\nYou feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");
-				}
-			mutations.setFaceType(Face.CAT_CANINES);
-			changes++;
+				outputText("\n\n");
+				CoC.instance.transformations.FaceCatCanines.applyEffect();
+				changes++;
 			}
-			
+
 			//Da paws (if already haz ears & tail)
 			if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
 				//hoof to cat:
@@ -486,7 +484,7 @@ public class Enigmanium extends Consumable{
 				player.legCount = 2;
 				changes++;
 			}
-			
+
 			//Sphinx Arms
 			if (player.lowerBody == LowerBody.CAT && rand(4) == 0 && changes < changeLimit && player.arms.type != Arms.SPHINX) {
 				if (player.arms.type != Arms.HUMAN) {
@@ -500,8 +498,8 @@ public class Enigmanium extends Consumable{
 			}
 			//CAT TOUNGE CUZ WHY NOT?
 			if (player.faceType == Face.HUMAN && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
-				outputText("\n\nYour tongue suddenly feel weird. You try to stick it out to see what’s going on and discover it changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>");
-				mutations.setTongueType(Tongue.CAT);
+				outputText("\n\n");
+				CoC.instance.transformations.TongueCat.applyEffect();
 				changes++;
 			}
 
@@ -525,6 +523,6 @@ public class Enigmanium extends Consumable{
 			}
 			player.refillHunger(20);
 			return false;
-		}		
+		}
 	}
 }

@@ -129,6 +129,7 @@ public function LetzRape(letzRape:Boolean = false):void {
 		" You don’t have much time to think over this matter, as a sudden hunger takes hold of you. You thirst, your body mass thirsts for fluids… the fluids of others!" +
 		" You set out with a drooling pleasure addled smile looking for a fleshling to feed from.\n\n");
 		outputText("<b>You have been transformed into a dark slime!</b>\n\n");
+		outputText("\n\n");
 		CoC.instance.transformations.HairGoo.applyEffect(false);
 		player.arms.type = Arms.GOO;
 		player.lowerBody = LowerBody.GOO;
@@ -142,7 +143,7 @@ public function LetzRape(letzRape:Boolean = false):void {
 		player.eyes.type = Eyes.FIENDISH;
 		player.eyes.colour = "red";
 		player.ears.type = Ears.ELFIN;
-		player.faceType = Face.HUMAN;
+		CoC.instance.transformations.FaceHuman.applyEffect(false);
 		player.tongue.type = Tongue.HUMAN;
 		player.createVagina()
 		if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);

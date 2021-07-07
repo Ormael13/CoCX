@@ -15,6 +15,7 @@ import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
+import classes.CoC;
 
 public class Centaurinum extends Consumable{
 	public function Centaurinum() {
@@ -345,7 +346,7 @@ public class Centaurinum extends Consumable{
 			player.tailRecharge = 0;
 			changes++;
 		}
-		//Human skin	
+		//Human skin
 		if (player.tailType == Tail.HORSE && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
 			mutations.humanizeSkin();
 			changes++;
@@ -367,7 +368,8 @@ public class Centaurinum extends Consumable{
 		}
 		//Human face
 		if (player.ears.type == Ears.HUMAN && player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
-			mutations.humanizeFace();
+			outputText("\n\n");
+			CoC.instance.transformations.FaceHuman.applyEffect();
 			changes++;
 		}
 		if (rand(3) == 0) outputText(player.modTone(60, 1));

@@ -309,7 +309,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (player.tailCount != 1) player.tailCount = 1;
 			player.rearBody.type = RearBody.WOLF_COLLAR;
 			player.arms.type = Arms.WOLF;
-			player.faceType = Face.WOLF_FANGS;
+			CoC.instance.transformations.FaceWolfFangs.applyEffect(false);
 			player.ears.type = Ears.WOLF;
 			player.eyes.type = Eyes.FERAL;
 			player.tongue.type = Tongue.DOG;
@@ -624,8 +624,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 									"\"<i>" + player.mf("Master","Mistress") + ", I did warn you I can only hold myself back so long. Tonight I will not take 'no' for an answer.</i>\"\n\n" +
 									"GThere's nothing for it; already ");
 						}else{
-						
-						
+
+
 							outputText("You were about to take a break, but you turn at the sound of footsteps and see that Luna has other plans tonight; ");
 						}
 					} else {
@@ -784,7 +784,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (player.tailCount != 1) player.tailCount = 1;
 			player.rearBody.type = RearBody.WOLF_COLLAR;
 			player.arms.type = Arms.WOLF;
-			player.faceType = Face.WOLF_FANGS;
+      CoC.instance.transformations.FaceWolfFangs.applyEffect(false);
 			player.ears.type = Ears.WOLF;
 			player.eyes.type = Eyes.FERAL;
 			player.tongue.type = Tongue.DOG;
@@ -833,7 +833,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				else if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) addButtonDisabled(3, "Fox&Hound", "Some group action could be fun if you were sure Luna would do it, but you don't want to push your luck. You know how jealous she gets... Of course to even do 'that' you would also need a penis.");
 				else addButtonDisabled(3, "???", "Get a certain other fluffy-tailed follower to join your camp and maybe you can have some group fun.");
 			}
-			addButton(14, "Back", mainLunaMenu);	
+			addButton(14, "Back", mainLunaMenu);
 		}
 		/*
 		public function sexMenuMain():void {
@@ -855,7 +855,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			}
 			if (player.cor >= 30) addButton(10, "Headpat", sexMenuHeadpat);
 			else addButtonDisabled(10, "Headpat", "You're too pure for that!");
-			addButton(14, "Back", mainLunaMenu);			
+			addButton(14, "Back", mainLunaMenu);
 		}
 		*/
 		public function sexMenuDomesticService():void {
@@ -1081,7 +1081,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("You feel a fuzzy protrusion press out against your forehead and realize her tail is growing in. Just as it does, Luna starts screaming. \"<i>HaaaaaaAAAA... haaaaaaaa... aaaaaaaaHHHNNNNMMmmmmmmmmohhhh god oh oh god oh GODS [name]... this is... I can't... I'm cummaaaAAAAAAAAAAAOOOOOOOOOOOOOOOOOO!</i>\" Luna's words fail a third time and she howls bestially under your furious assault. You know from experience her transformation already inflicts corrupted, orgasmic pleasure on her body, and just as it peaks your own famished, greedy lapping at her flooded pussy brings her to a more natural one. She spasms violently; her thighs squeeze and slam against the side of your head , and her pussy sprays your face with enough liquid to fill your waterskin. Then she faceplants into the ground as her arms give out from under her. You hold her hips down to your kneeling thighs while she thrashes in her mindless ecstasy, afraid she might actually hurt one of you, and her climax lasts a good ten seconds before she finally goes limp.");
 			outputText("She is fully lupine now. Ashen fur covers her arms and legs, fading to a lighter fuzz over the rest of her curvy butt and hips, her melon-sized breasts, and her tight, muscular stomach. Her frilly headband, forgotten in your sudden attack, still sits absurdly behind her lupine ears over her now ruined hair, and her white panties are still wrapped around one of her back paws like a lewd, cum-soaked anklet. You gently massage her hips and rear as she gasps and moans, and occasionally twitches again with a small aftershock after the earth-shattering orgasm you just inflicted on her. Finally with a heaving groan she manages to get back on her hands and knees, albeit shakily. \"<i>Haaaa... haaaa... [name], you're even more of a beast than <b>I</b> am... haaaaaa.... that was <b>incredible</b>.</i>\" she gasps out in a lusty moan between panting, ragged breaths.\n\n");
 			outputText("Smiling deviously you give her a couple hard slaps on the ass just beside where her tail emerges, eliciting a satisfying <i>yip</i> from your already well-fucked bitch. You remind her sternly to call you " + player.mf("Master","Mistress") + ", as she has forgotten to do twice now. Then you tell her you're happy she's enjoying herself, because you're <b>just getting started</b>. As soon as you scold her she begins making quiet whining sounds, and she submissively lowers her front half to the ground until her pillowy breasts are squished into the grass. Her rear is still sticking up at you. Despite her dejected posture and tone, however, you can clearly see she her wolf-cunt drooling even harder than before. Her clit sticks out a good half-inch from her folds, which are splayed open and puffy, revealing her wet depths visibly throbbing and squeezing, begging for her " + player.mf("Master","Mistress") + "'s rod inside it. She wriggles her behind at you, her tail curled saucily over her back, in as clear a 'come hither' as you've ever seen, and you're more than ready to oblige...\n\n");
-			
+
 			doNext(sexMenuDoggyTreats2);
 		}
 		*/

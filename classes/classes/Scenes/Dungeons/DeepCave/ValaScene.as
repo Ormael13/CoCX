@@ -913,11 +913,11 @@ public class ValaScene extends BaseContent implements SaveableState
 					"The fairies give you an ovation, everyone clapping for the new fairy queen. You are in awe before the thousands of butterfly girls cheering for you and while your charge is a big one, you are confident that you will succeed. It's time for you to make good on your promise to them thus you head back out to your adventure ready to face the agents of evil in the name of your people.\n");
 			ValaFairyQueenQuest = QUEST_STAGE_PCDACCEPTED;
 			//Turn pc into a proper fairy
-			player.faceType = Face.FAIRY;
+			CoC.instance.transformations.FaceFairy.applyEffect(false);
 			player.tongue.type = Tongue.ELF;
 			player.eyes.type = Eyes.FAIRY
 			player.ears.type = Ears.ELVEN
-			player.hairType = Hair.FAIRY;
+			CoC.instance.transformations.HairFairy.applyEffect(false);
 			player.tailType = Tail.NONE
 			player.arms.type = Arms.ELF
 			player.lowerBody = LowerBody.ELF;

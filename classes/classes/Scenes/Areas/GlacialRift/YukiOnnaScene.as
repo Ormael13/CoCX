@@ -104,11 +104,12 @@ public class YukiOnnaScene extends BaseContent
 				outputText("You still breathe, drawing air in and out, yet the air coming out is cold and creates none of the warm cloud a living being should make when breathing at such temperatures. Your feet are naked yet the snow feels pleasant underneath them."+(player.gender == 3 ? " Whatever male asset you had is gone from your nether as well… you’re definitely fully female now.":"")+" You don't feel cold despite the ambient temperature yet… you yearn for the warmth of others, the warmth that you lost, this is all so unfair. ");
 				outputText("You desperately need to fill this empty void within you with something... anything. Surely they will share it if you ask nicely and if they don't... you will simply have to steal it from them.\n\n");
 				outputText("As if to mirror your growing jealous indignation the snow around you becomes agitated, turning into a small indoor blizzard which only calms down once you do. You need to feel warmth again no matter what and it doesn't matter if everyone around you has to freeze to death in order to satisfy YOUR needs. <b>Your soul has frozen over, you have become a Yuki Onna in body and heart.</b>\n\n");
-				CoC.instance.mutations.setFaceType(Face.YUKI_ONNA);
+				CoC.instance.transformations.FaceYukiOnna.applyEffect(false);
 				CoC.instance.mutations.setLowerBody(LowerBody.YUKI_ONNA);
 				if (player.legCount != 2) player.legCount = 2;
 				CoC.instance.mutations.setArmType(Arms.YUKI_ONNA);
 				CoC.instance.mutations.setEyeTypeAndColor(Eyes.HUMAN,"light purple");
+				outputText("\n\n");
 				CoC.instance.transformations.HairSnowy.applyEffect(false);
 				if (rand(3) == 0) player.hairColor = "snow white";
 				else {

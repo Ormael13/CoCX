@@ -152,10 +152,8 @@ public class ManticoreVenom extends Consumable {
 		}
 		//Face
 		if (player.ears.type == Ears.LION && player.faceType != Face.MANTICORE && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nY");
-			if (player.faceType != Face.HUMAN) outputText("our face suddenly mold back into it’s former human shape. However you feel your canines changing, elongating into sharp, dagger-like teeth capable of causing severe injuries. Y");
-			outputText("ou feel your canines changing, elongating into sharp, dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You feel the need to roar like a lion, to show the world how ferocious you look. <b>Your mouth is now filled with dagger-like canines.</b>");
-			mutations.setFaceType(Face.MANTICORE);
+			outputText("\n\n");
+      CoC.instance.transformations.FaceManticore.applyEffect();
 			changes++;
 		}
 		//Eyes
@@ -166,8 +164,8 @@ public class ManticoreVenom extends Consumable {
 		}
 		//Cat tounge
 		if (player.faceType == Face.MANTICORE && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
-			outputText("\n\nYour tongue suddenly feels weird. You try to stick it out to see what’s going on and discover it changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>");
-			mutations.setTongueType(Tongue.CAT);
+			outputText("\n\n");
+			CoC.instance.transformations.TongueCat.applyEffect();
 			changes++;
 		}
 		//Venom Increase

@@ -2681,11 +2681,11 @@ use namespace CoC;
 		public function FairyTest():void {
 			clearOutput();
 			outputText("FAIRYTIME ^^");
-			player.faceType = Face.FAIRY;
+			CoC.instance.transformations.FaceFairy.applyEffect(false);
 			player.tongue.type = Tongue.ELF;
 			player.eyes.type = Eyes.FAIRY
 			player.ears.type = Ears.ELVEN
-			player.hairType = Hair.FAIRY;
+			CoC.instance.transformations.HairFairy.applyEffect(false);
 			player.tailType = Tail.NONE
 			player.arms.type = Arms.ELF
 			player.lowerBody = LowerBody.ELF;

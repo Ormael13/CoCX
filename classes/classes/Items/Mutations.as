@@ -1683,16 +1683,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Animal tooth face
         if (rand(2) == 0 && changes < changeLimit && player.faceType != Face.ANIMAL_TOOTHS && player.hasFur()) {
-            outputText("\n\n");
-            if (player.faceType != Face.HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
-            outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. <b>Your mouth is now filled with wolf like canines.</b>");
-            setFaceType(Face.ANIMAL_TOOTHS);
+            transformations.FaceAnimalTeeth.applyEffect();
             changes++;
         }
         //Wolf face
         if (rand(2) == 0 && changes < changeLimit && player.faceType == Face.ANIMAL_TOOTHS && player.hasFur()) {
-            outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting reforming into something... different, your screams turning into a howl as the change ends. You go to find a puddle in order to view your reflection...  <b>Your face looks like the one of a feral looking wolf composed of a maw jagged with threatening canines a wet muzzle and a animalistic tongue.</b>");
-            setFaceType(Face.WOLF);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceWolf.applyEffect();
             changes++;
         }
         //Winter wolf fur partial fur
@@ -2374,14 +2371,14 @@ public final class Mutations extends MutationsHelper {
         //Tail -> Ears -> Paws -> Arms -> Fur -> Face
         //Dog-face requires fur & paws  Should be last morph to take place
         if (rand(4) == 0 && changes < changeLimit && player.faceType != Face.DOG && player.hasFullCoatOfType(Skin.FUR) && player.lowerBody == LowerBody.DOG) {
-            if (player.faceType == Face.HORSE) outputText("\n\nYour face is wracked with pain.  You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something else.  <b>Your horse-like features rearrange to take on many canine aspects.</b>");
-            else outputText("\n\nYour face is wracked with pain.  You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different.  You find a puddle to view your reflection...<b>your face is now a cross between human and canine features.</b>");
-            setFaceType(Face.DOG);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceDog.applyEffect();
             changes++;
         }
 
         //Remove special hairs
         if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
+		    outputText("\n\n");
 		    CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
         }
@@ -3342,6 +3339,7 @@ public final class Mutations extends MutationsHelper {
 
         //Remove special hairs
         if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
+		    outputText("\n\n");
 		    CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
         }
@@ -3562,8 +3560,8 @@ public final class Mutations extends MutationsHelper {
         //If the player's face is non-human, they gain a human face
         if (!enhanced && player.horns.type != Horns.COW_MINOTAUR && player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
             //Remove face before fur!
-            outputText("\n\nYour visage twists painfully, returning to a normal human shape.  <b>Your face is human again!</b>");
-            setFaceType(Face.HUMAN);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //enhanced get shitty fur
@@ -3580,8 +3578,8 @@ public final class Mutations extends MutationsHelper {
         }
         //if enhanced to probova give a shitty cow face
         else if (enhanced && player.faceType != Face.COW_MINOTAUR && player.tailType != Tail.GARGOYLE) {
-            outputText("\n\nYour visage twists painfully, warping and crackling as your bones are molded into a new shape.  Once it finishes, you reach up to touch it, and you discover that <b>your face is like that of a cow!</b>");
-            setFaceType(Face.COW_MINOTAUR);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceCowMinotaur.applyEffect();
             changes++;
         }
         //Increase the size of the player's hips, if they are not already childbearing or larger
@@ -4143,6 +4141,7 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && player.hairType == Hair.ANEMONE && rand(2) == 0) {
             //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
             outputText("\n\nAs you down the potent ale, your head begins to feel heavier - and not just from the alcohol!  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels smooth, silky, and fibrous; you watch as it dissolves into many thin, hair-like strands.  <b>Your hair is now back to normal!</b>");
+		    outputText("\n\n");
 		    CoC.instance.transformations.HairHuman.applyEffect(false);
             changes++;
         }
@@ -4188,6 +4187,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Omg Crazy hairs
         if (!CoC.instance.transformations.HairCrazy.isPresent() && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
             CoC.instance.transformations.HairCrazy.applyEffect();
             changes++;
         }
@@ -4230,10 +4230,11 @@ public final class Mutations extends MutationsHelper {
         if ((player.faceType != Face.CRAZY) && changes < changeLimit && rand(4) == 0 && player.ears.type == Ears.GREMLIN && player.tallness < 55) {
             if (player.faceType != Face.HUMAN) {
                 outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>");
-                setFaceType(Face.HUMAN);
+                outputText("\n\n");
+                CoC.instance.transformations.FaceHuman.applyEffect(false);
             } else {
-                outputText("\n\nThinking on it, you’re smart, small and smuggly. The whole idea makes you laugh uncontrollably. But hey seriously since you’re the superior genius around here, might as well flash these idiots an unsettling smile, heck just thinking about how stupid everyone else is makes you smirk constantly, halfway to laughter. Well they might call you crazy but once you bury these primitive fools in the ground they'll all be the crazy ones. <b>You’re now constantly flashing a crazy grin just like a gremlin.</b>");
-                setFaceType(Face.CRAZY);
+                outputText("\n\n");
+                CoC.instance.transformations.FaceCrazy.applyEffect();
             }
             changes++;
         }
@@ -4360,6 +4361,7 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && player.hairType == Hair.ANEMONE && rand(2) == 0) {
             //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
             outputText("\n\nAs you down the potent ale, your head begins to feel heavier - and not just from the alcohol!  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels smooth, silky, and fibrous; you watch as it dissolves into many thin, hair-like strands.  <b>Your hair is now back to normal!</b>");
+		    outputText("\n\n");
 		    CoC.instance.transformations.HairHuman.applyEffect(false);
             changes++;
         }
@@ -4441,11 +4443,12 @@ public final class Mutations extends MutationsHelper {
         //Face!
         if ((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(4) == 0 && player.ears.type == Ears.ELFIN) {
             if (player.faceType != Face.ANIMAL_TOOTHS) {
-                outputText("You feel your some of your tooths changing, elongating into sharper dagger like form. Funnily, your face remained fully human even after the change.  <b>Your mouth is now a cross over between animal and human!</b>");
-                setFaceType(Face.ANIMAL_TOOTHS);
+                outputText("\n\n");
+                CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
             } else {
                 outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>");
-                setFaceType(Face.HUMAN);
+                outputText("\n\n");
+                CoC.instance.transformations.FaceHuman.applyEffect(false);
             }
             changes++;
         }
@@ -4518,7 +4521,8 @@ public final class Mutations extends MutationsHelper {
         //Human face
         if (player.faceType != Face.HUMAN && rand(2) == 0 && changes < changeLimit) {
             outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>");
-            setFaceType(Face.HUMAN);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect(false);
             changes++;
         }
         //1.Goopy arms
@@ -4551,6 +4555,7 @@ public final class Mutations extends MutationsHelper {
         ////2a.Make alterations to dick/vaginal/nippular descriptors to match
         //3.Goopy hair
         if (player.hasGooSkin() && !CoC.instance.transformations.HairGoo.isPresent() && rand(2) == 0 && changes < changeLimit) {
+		    outputText("\n\n");
 		    CoC.instance.transformations.HairGoo.applyEffect();
             dynStats("lus", 10);
             changes++;
@@ -4710,9 +4715,7 @@ public final class Mutations extends MutationsHelper {
             //Mouth TF
             if (player.faceType != Face.SHARK_TEETH && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
                 outputText("\n\n");
-                if (player.faceType > Face.HUMAN && player.faceType != Face.SHARK_TEETH) outputText("Your [face] explodes with agony, reshaping into a more human-like visage.  ");
-                outputText("You firmly grasp your mouth, an intense pain racking your oral cavity. Your gums shift around and the bones in your jaw reset. You blink a few times wondering what just happened. You move over to a puddle to catch sight of your reflection, and you are thoroughly surprised by what you see. A set of retractable shark fangs have grown in front of your normal teeth, and your face has elongated slightly to accommodate them!  They even scare you a little.\n(Gain: 'Bite' special attack)");
-                setFaceType(Face.SHARK_TEETH);
+                CoC.instance.transformations.FaceSharkTeeth.applyEffect();
                 changes++;
             }
             //Ear tf
@@ -4985,19 +4988,15 @@ public final class Mutations extends MutationsHelper {
         }
         //9c) II The tongue (sensitivity bonus, stored as a perk?)
         if (changes == 0 && player.tongue.type != Tongue.SNAKE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
-            if (player.tongue.type == Tongue.HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.");
-            else outputText("\n\nYour inhuman tongue shortens, pulling tight in the very back of your throat.  After a moment the bunched-up tongue-flesh begins to flatten out, then extend forwards.  By the time the transformation has finished, your tongue has changed into a long, forked snake-tongue.");
-            setTongueType(Tongue.SNAKE);
+            outputText("\n\n");
+            CoC.instance.transformations.TongueSnake.applyEffect();
             player.addCurse("sen", 5, 1);
             changes++;
         }
         //9c) III The fangs
         if (changes == 0 && player.tongue.type == Tongue.SNAKE && player.faceType != Face.SNAKE_FANGS && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nWithout warning, you feel your canine teeth jump almost an inch in size, clashing on your gums, cutting yourself quite badly. As you attempt to find a new way to close your mouth without dislocating your jaw, you notice that they are dripping with a bitter, khaki liquid.  Watch out, and <b>try not to bite your tongue with your poisonous fangs!</b>");
-            if (player.faceType != Face.HUMAN && player.faceType != Face.SHARK_TEETH && player.faceType != Face.BUNNY && player.faceType != Face.SPIDER_FANGS) {
-                outputText("  As the change progresses, your [face] reshapes.  The sensation is far more pleasant than teeth cutting into gums, and as the tingling transformation completes, <b>you've gained with a normal-looking, human visage.</b>");
-            }
-            setFaceType(Face.SNAKE_FANGS);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceSnakeFangs.applyEffect();
             if (player.tailRecharge < 5) player.tailRecharge = 5;
             changes++;
         }
@@ -5224,25 +5223,21 @@ public final class Mutations extends MutationsHelper {
 
         //Snake tounge
         if (player.tongue.type != Tongue.SNAKE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
-            if (player.tongue.type == Tongue.HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.");
-            else outputText("\n\nYour inhuman tongue shortens, pulling tight in the very back of your throat.  After a moment the bunched-up tongue-flesh begins to flatten out, then extend forwards.  By the time the transformation has finished, your tongue has changed into a long, forked snake-tongue.");
-            setTongueType(Tongue.SNAKE);
+            outputText("\n\n");
+            CoC.instance.transformations.TongueSnake.applyEffect();
             player.addCurse("sen", 5, 1);
             changes++;
         }
         //Dragon tongue
         if (type == 1 && player.tongue.type != Tongue.DRACONIC && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
-            setTongueType(Tongue.DRACONIC);
+            outputText("\n\n");
+            CoC.instance.transformations.TongueDraconic.applyEffect();
             changes++;
         }
         //Face with snake fangs
         if (player.tongue.type == Tongue.SNAKE && player.faceType != Face.SNAKE_FANGS && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nWithout warning, you feel your canine teeth jump almost an inch in size, clashing on your gums, cutting yourself quite badly. As you attempt to find a new way to close your mouth without dislocating your jaw, you notice that they are dripping with a bitter, khaki liquid.  Watch out, and <b>try not to bite your tongue with your poisonous fangs!</b>");
-            if (player.faceType != Face.HUMAN && player.faceType != Face.SHARK_TEETH && player.faceType != Face.BUNNY && player.faceType != Face.SPIDER_FANGS) {
-                outputText("  As the change progresses, your [face] reshapes.  The sensation is far more pleasant than teeth cutting into gums, and as the tingling transformation completes, <b>you've gained with a normal-looking, human visage.</b>");
-            }
-            setFaceType(Face.SNAKE_FANGS);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceSnakeFangs.applyEffect();
             if (player.tailRecharge < 5) player.tailRecharge = 5;
             changes++;
         }
@@ -5315,6 +5310,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Gorgon hair
         if ((type == 0 || type == 3) && player.ears.type == Ears.SNAKE && !CoC.instance.transformations.HairGorgon.isPresent() && changes < changeLimit && rand(4) == 0) {
+		    outputText("\n\n");
 		    CoC.instance.transformations.HairGorgon.applyEffect();
             changes++;
         }
@@ -5476,6 +5472,7 @@ public final class Mutations extends MutationsHelper {
 
         //Feathery Hair
         if (type == 2 && !CoC.instance.transformations.HairFeather.isPresent() && player.wings.type == Wings.FEATHERED_LARGE && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\n");
             CoC.instance.transformations.HairFeather.applyEffect();
             changes++;
         }
@@ -5581,6 +5578,7 @@ public final class Mutations extends MutationsHelper {
         }
         outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.");
         player.refillHunger(100);
+        outputText("\n\n");
         CoC.instance.transformations.HairHuman.applyEffect(false);
         if (player.humanScore() > 4) {
             outputText("\n\nYou blink and the world twists around you.  You feel more like yourself than you have in a while, but exactly how isn't immediately apparent.  Maybe you should take a look at yourself?");
@@ -5590,7 +5588,7 @@ public final class Mutations extends MutationsHelper {
         player.arms.type = Arms.HUMAN;
         player.eyes.type = Eyes.HUMAN;
         player.antennae.type = Antennae.NONE;
-        player.faceType = Face.HUMAN;
+        CoC.instance.transformations.FaceHuman.applyEffect(false);
         player.lowerBody = LowerBody.HUMAN;
         player.legCount = 2;
         player.wings.type = Wings.NONE;
@@ -5743,13 +5741,14 @@ public final class Mutations extends MutationsHelper {
         }
         //-Human face
         if (player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
-            humanizeFace();
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //-Human tongue
         if (player.tongue.type != Tongue.HUMAN && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou feel something strange inside your face as your tongue shrinks and recedes until it feels smooth and rounded.  <b>You realize your tongue has changed back into human tongue!</b>");
-            setTongueType(Tongue.HUMAN);
+            outputText("\n\n");
+            CoC.instance.transformations.TongueHuman.applyEffect();
             changes++;
         }
         //Remove odd eyes
@@ -5779,6 +5778,7 @@ public final class Mutations extends MutationsHelper {
 
         //Remove special hairs
         if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
+		    outputText("\n\n");
 		    CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
         }
@@ -6319,38 +6319,30 @@ public final class Mutations extends MutationsHelper {
         }
         //CAT-FACE!
         if ((player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) && rand(3) == 0 && changes < changeLimit && type != 1 && (player.faceType != Face.CAT || player.faceType != Face.CAT_CANINES || player.faceType != Face.CHESHIRE || player.faceType != Face.CHESHIRE_SMILE) && type != 3) {
-            if (player.faceType != Face.CAT_CANINES) {
-                outputText("\n\n");
-                if (player.faceType != Face.HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
-                outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");
-                setFaceType(Face.CAT_CANINES);
-            } else {
-                choice = rand(3);
-                if (choice == 0) outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection and discover <b>your face is now a cross between human and feline features.</b>");
-                else if (choice == 1) outputText("\n\nMind-numbing pain courses through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your facial characteristics with those of a feline. <b>You now have an anthropomorphic cat-face.</b>");
-                else outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something else. <b>Your facial features rearrange to take on many feline aspects.</b>");
-                setFaceType(Face.CAT);
-            }
+            outputText("\n\n");
+            CoC.instance.transformations.FaceCat.applyEffect();
             changes++;
         }
         if ((player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) && rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT_CANINES && (type == 1 || type == 3)) {
             //This scenario exist only for cat tf that have no furry version!
             outputText("\n\n");
-            if (player.faceType != Face.HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
-            outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>");
-            setFaceType(Face.CAT_CANINES);
+            CoC.instance.transformations.FaceCatCanines.applyEffect();
             changes++;
         }
         if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES) && type == 2 && rand(3) == 0 && changes < changeLimit && player.faceType != Face.CHESHIRE && player.faceType != Face.CHESHIRE_SMILE) {
-            outputText("\n\nYou suddenly feel like smiling. Why actually look so serious? Everything is easier if you take it with a smile and a laughter. Perhaps it's just you taking on that mentality or it's that weird wonderfruit you took but now you feel you could smile forever showing that wide grin of yours. <b>You now have a cheshire smile.</b>");
-            if (player.faceType == Face.CAT) setFaceType(Face.CHESHIRE);
-            if (player.faceType == Face.CAT_CANINES) setFaceType(Face.CHESHIRE_SMILE);
+            outputText("\n\n");
+            if (player.faceType == Face.CAT) {
+                CoC.instance.transformations.FaceCheshire.applyEffect();
+            }
+            if (player.faceType == Face.CAT_CANINES) {
+                CoC.instance.transformations.FaceCheshireSmile.applyEffect();
+            }
             changes++;
         }
         //CAT TOUNGE CUZ WHY NOT?
         if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES || player.faceType == Face.CHESHIRE || player.faceType == Face.CHESHIRE_SMILE) && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYour tongue suddenly feel weird. You try to stick it out to see what’s going on and discover it changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>");
-            setTongueType(Tongue.CAT);
+            outputText("\n\n");
+            CoC.instance.transformations.TongueCat.applyEffect();
             changes++;
         }
         //DAT EYES
@@ -6775,8 +6767,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Lizard-like face.
         if (player.faceType != Face.LIZARD && player.hasScales() && player.ears.type == Ears.LIZARD && player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && changes < changeLimit && rand(5) == 0) {
-            outputText("\n\nTerrible agony wracks your [face] as bones crack and shift.  Your jawbone rearranges while your cranium shortens.  The changes seem to last forever; once they've finished, no time seems to have passed.  Your fingers brush against your toothy snout as you get used to your new face.  It seems <b>you have a toothy, reptilian visage now.</b>");
-            setFaceType(Face.LIZARD);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceLizard.applyEffect();
             changes++;
         }
         // Remove gills
@@ -6996,12 +6988,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Fanged face
         if (player.faceType == Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour tooth's suddenly hurt as you feel them changing. Your canines getting sharper and more adapted to eating meat.  <b>You now have fangs.</b>");
-            setFaceType(Face.SALAMANDER_FANGS);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceSalamanderFangs.applyEffect();
             changes++;
         }
         if (player.faceType != Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(4) == 0) {
-            humanizeFace();
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Human ears
@@ -7171,12 +7164,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Fanged face
         if (player.faceType == Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour tooth's suddenly hurt as you feel them changing. Your canines getting sharper and more adapted to eating meat.  <b>You now have fangs.</b>");
-            setFaceType(Face.SALAMANDER_FANGS);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceSalamanderFangs.applyEffect();
             changes++;
         }
         if (player.faceType != Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(4) == 0) {
-            humanizeFace();
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Lizard eyes
@@ -7198,13 +7192,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Tongue
         if (player.tongue.type == Tongue.HUMAN && player.tongue.type != Tongue.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nSomething change in your mouth and you feel like you are about to choke! You stick your tongue out and discover to your surprise that it now glows with a neon blue light. Furthermore it stick out way further then it should, just like a lizard.  <b>You now have a neon blue lizard tongue that glow in the dark.</b>");
-            setTongueType(Tongue.CAVE_WYRM);
+            outputText("\n\n");
+            CoC.instance.transformations.TongueCaveWyrm.applyEffect();
             changes++;
         }
         if (player.tongue.type != Tongue.HUMAN && player.tongue.type != Tongue.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou feel something strange inside your face as your tongue shrinks and recedes until it feels smooth and rounded.  <b>You realize your tongue has changed back into human tongue!</b>");
-            setTongueType(Tongue.HUMAN);
+            outputText("\n\n");
+            CoC.instance.transformations.TongueHuman.applyEffect();
             changes++;
         }
         //Partial scaled skin
@@ -7521,6 +7515,7 @@ public final class Mutations extends MutationsHelper {
         if (!CoC.instance.transformations.HairFeather.isPresent() && changes < changeLimit && player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0) {
             outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy red fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a phoenix!");
             player.hairColor = "platinum crimson";
+            outputText("\n\n");
             CoC.instance.transformations.HairFeather.applyEffect(false);
             changes++;
         }
@@ -7537,13 +7532,14 @@ public final class Mutations extends MutationsHelper {
         }
         //Human face
         if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
-            humanizeFace();
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Fanged face
         if (player.faceType == Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour tooth's suddenly hurt as you feel them changing. Your canines getting sharper and more adapted to eating meat.  <b>You now have fangs.</b>");
-            setFaceType(Face.SALAMANDER_FANGS);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceSalamanderFangs.applyEffect();
             changes++;
         }
         //Human ears
@@ -7885,21 +7881,14 @@ public final class Mutations extends MutationsHelper {
         //get teeth - from human, bunny, coonmask, or other humanoid teeth faces
         if (player.ears.type == Ears.BUNNY && player.faceType != Face.BUCKTEETH && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            changes++;
-            //Human(ish) face
-            if (player.faceType == Face.HUMAN || player.faceType == Face.SHARK_TEETH) outputText("You catch your nose twitching on its own at the bottom of your vision, but as soon as you focus on it, it stops.  A moment later, some of your teeth tingle and brush past your lips, exposing a white pair of buckteeth! <b>Your mouth has taken on some rabbit-like characteristics!</b>");
-            //Crazy furry TF shit
-            outputText("\n\nYour teeth grind on their own, and you feel a strange, insistent pressure just under your nose.  As you open your mouth and run your tongue along them, you can feel ");
-            if (player.faceType != Face.HUMAN) outputText("the sharp teeth receding and ");
-            outputText("your incisors lengthening.  It's not long before they're twice as long as their neighbors and the obvious growth stops, but the pressure doesn't go away completely. Well, you now have rodent incisors and your face aches a tiny bit - wonder if they're going to keep growing? <b>Your mouth has taken on some rabbit-like characteristics!</b>");
-            setFaceType(Face.BUCKTEETH);
+            if (player.faceType == Face.HUMAN || player.faceType == Face.SHARK_TEETH) outputText("You catch your nose twitching on its own at the bottom of your vision, but as soon as you focus on it, it stops.  A moment later, some of your teeth tingle and brush past your lips, exposing a white pair of buckteeth! <b>Your mouth has taken on some rabbit-like characteristics!</b>\n\n");
+            CoC.instance.transformations.FaceBuckteeth.applyEffect();
             changes++;
         }
         //FULL BUN FACE!  REQUIREZ EARZ
         if (player.ears.type == Ears.BUNNY && player.faceType == Face.BUCKTEETH && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            outputText("You grunt as your [face] twists and reforms.  Even your teeth ache as their positions are rearranged to match some new, undetermined order. When the process finishes, <b>you're left with a bunny face complete with a constantly twitching nose and prominent buck-teeth.</b>");
-            setFaceType(Face.BUNNY);
+            CoC.instance.transformations.FaceBunny.applyEffect();
             changes++;
         }
         //DAH BUNBUN EARZ - requires poofbutt!
@@ -7963,7 +7952,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Human face
         if (player.faceType != Face.HUMAN && changes < changeLimit && rand(3) == 0) {
-            humanizeFace();
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Remove odd eyes
@@ -8138,6 +8128,7 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && player.hairType == Hair.ANEMONE && rand(2) == 0) {
             //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
             outputText("\n\nAs you down the seed, your head begins to feel heavier.  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels soft and fluffy, almost feathery; you watch as it dissolves into many thin, feathery strands.  <b>Your hair is now like that of a harpy!</b>");
+		    outputText("\n\n");
 		    CoC.instance.transformations.HairFeather.applyEffect(false);
             changes++;
         }
@@ -8314,12 +8305,14 @@ public final class Mutations extends MutationsHelper {
 
         //-Feathery Hair
         if (!CoC.instance.transformations.HairFeather.isPresent() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && (type == 1 || player.faceType == Face.HUMAN) && rand(4) == 0) {
+            outputText("\n\n");
             CoC.instance.transformations.HairFeather.applyEffect();
             changes++;
         }
         //-Human face
         if (player.faceType != Face.HUMAN && changes < changeLimit && (type == 1 || (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN)) && rand(4) == 0) {
-            humanizeFace();
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //-Gain human ears (keep elf ears)
@@ -8566,23 +8559,19 @@ public final class Mutations extends MutationsHelper {
         if (!CoC.instance.transformations.HairFeather.isPresent() && player.hairLength > 0 && changes < changeLimit && type == 0 && rand(3) == 0) {
             outputText("\n\nWhile you’re yet processing the taste of that odd seed, you suddenly start feeling an annoying itching coming from your scalp, without a doubt a change brought by the transformative nature of the seed.");
             outputText("\n\nThe base of each one of your hairs thicken noticeably, and from every one of them, small hairy filament start sprouting of each side. Soon you realize that your hairs are becoming feathers, and in a question of minute, <b>you’re left with a mane of [hair]!</b>");
+		    outputText("\n\n");
 		    CoC.instance.transformations.HairFeather.applyEffect(false);
             changes++;
         }
         //Face
         if (player.faceType != Face.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
+            outputText("\n\n");
             if (player.faceType == Face.HUMAN) {
-                outputText("\n\nWith the nutty flavor of the fruit still lingering, you gasp as your face feels weird and tingling, and aware of the transformative nature of the food on this strange land, you quickly associate it with the strange fruit that you’ve just eaten. Your mouth and nose feels numb, and you’re left a bit confused, dizzy even, so your sit until your head clears. As you do so, several feathers start sprouting on your head, those ones small and downy, and cover every bit of skin.");
-                outputText("\n\nToo busy giving attention to this, you don’t notice when something big and hard suddenly obscures your vision. Sensing it with your hands, you feel it attached to your face. Rushing to the nearest pool of water, you look up your reflection, only to realize that you have a full avian, face, covered in feathers and complete with a hooked beak.");
-                outputText("\n\nA bit worried about the new…implications of this on your sexual life, you test the borders on your beak, fearing it sharp and dangerous, only to happily discover that it's not sharpened in any way, only not as soft as an usual set of lips. If you wanted to damage someone with it, you’ll had to apply pressure, not unlike on an usual set of tooth. Even with that, kisses would be…interesting from now on, to say the least.");
-                outputText("\n\nThis isn’t the only major change, as you feel your ears twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always. <b>Anyways, after a lot of changes, you’re left with an avian head!</b>");
+                outputText("With the nutty flavor of the fruit still lingering, you gasp as your face feels weird and tingling, and aware of the transformative nature of the food on this strange land, you quickly associate it with the strange fruit that you’ve just eaten. Your mouth and nose feels numb, and you’re left a bit confused, dizzy even, so your sit until your head clears. As you do so, several feathers start sprouting on your head, those ones small and downy, and cover every bit of skin.\n\nToo busy giving attention to this, you don’t notice when something big and hard suddenly obscures your vision. Sensing it with your hands, you feel it attached to your face. Rushing to the nearest pool of water, you look up your reflection, only to realize that you have a full avian, face, covered in feathers and complete with a hooked beak.\n\nA bit worried about the new…implications of this on your sexual life, you test the borders on your beak, fearing it sharp and dangerous, only to happily discover that it's not sharpened in any way, only not as soft as an usual set of lips. If you wanted to damage someone with it, you’ll had to apply pressure, not unlike on an usual set of tooth. Even with that, kisses would be…interesting from now on, to say the least.\n\nThis isn’t the only major change, as you feel your ears twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always. <b>Anyways, after a lot of changes, you’re left with an avian head!</b>");
             } else {
-                outputText("\n\nWith the nutty flavor of the fruit still lingering, you gasp as your face feels weird and tingling, and aware of the transformative nature of the food on this strange land, you quickly associate it with the strange fruit that you’ve just eaten. Your [face] feels numb, and you’re left a bit confused, dizzy even, so your sit until your head clears. As you do so, several feathers start sprouting on your head, those ones small and downy, and cover every bit of skin.");
-                outputText("\n\nToo busy giving attention to this, you don’t notice when something big and hard suddenly obscures your vision. Sensing it with your hands, you feel it attached to your face. Rushing to the nearest pool of water, you look up your reflection, only to realize that you have a full avian, face, covered in feathers and complete with a hooked beak. That's quite the change, even for your [face].");
-                outputText("\n\nA bit worried about the new…implications of this on your sexual life, you test the borders on your beak, fearing it sharp and dangerous, only to happily discover that it's not sharpened in any way, only not as soft as an usual set of lips. If you wanted to damage someone with it, you’ll had to apply pressure, not unlike of an usual set of tooth. Even with that, kisses would be…interesting from now on, to say the least.");
-                outputText("\n\nThis isn’t the only major change, as you feel your [ears] twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always. <b>Anyways, after a lot of changes, you’re left with an avian head!</b>");
+                outputText("With the nutty flavor of the fruit still lingering, you gasp as your face feels weird and tingling, and aware of the transformative nature of the food on this strange land, you quickly associate it with the strange fruit that you’ve just eaten. Your [face] feels numb, and you’re left a bit confused, dizzy even, so your sit until your head clears. As you do so, several feathers start sprouting on your head, those ones small and downy, and cover every bit of skin.\n\nToo busy giving attention to this, you don’t notice when something big and hard suddenly obscures your vision. Sensing it with your hands, you feel it attached to your face. Rushing to the nearest pool of water, you look up your reflection, only to realize that you have a full avian, face, covered in feathers and complete with a hooked beak. That's quite the change, even for your [face].\n\nA bit worried about the new…implications of this on your sexual life, you test the borders on your beak, fearing it sharp and dangerous, only to happily discover that it's not sharpened in any way, only not as soft as an usual set of lips. If you wanted to damage someone with it, you’ll had to apply pressure, not unlike of an usual set of tooth. Even with that, kisses would be…interesting from now on, to say the least.\n\nThis isn’t the only major change, as you feel your [ears] twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always. <b>Anyways, after a lot of changes, you’re left with an avian head!</b>");
             }
-            setFaceType(Face.AVIAN);
+            CoC.instance.transformations.FaceAvian.applyEffect(false);
             changes++;
         }
         //Ears
@@ -8727,6 +8716,7 @@ public final class Mutations extends MutationsHelper {
 
         //Remove special hairs
         if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
+		    outputText("\n\n");
 		    CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
         }
@@ -8790,12 +8780,9 @@ public final class Mutations extends MutationsHelper {
         //****************
         //-Face (Req: Fur + Feet)
         if (player.faceType != Face.KANGAROO && ((player.hasFur() && player.lowerBody == LowerBody.KANGAROO) || type == 1) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-            //gain roo face from human/naga/shark/bun:
-            if (player.faceType == Face.HUMAN || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SHARK_TEETH || player.faceType == Face.BUNNY) outputText("\n\nThe base of your nose suddenly hurts, as though someone were pinching and pulling at it.  As you shut your eyes against the pain and bring your hands to your face, you can feel your nose and palate shifting and elongating.  This continues for about twenty seconds as you stand there, quaking.  When the pain subsides, you run your hands all over your face; what you feel is a long muzzle sticking out, whiskered at the end and with a cleft lip under a pair of flat nostrils.  You open your eyes and receive confirmation. <b>You now have a kangaroo face!  Crikey!</b>");
-            //gain roo face from other snout:
-            else outputText("\n\nYour nose tingles. As you focus your eyes toward the end of it, it twitches and shifts into a muzzle similar to a stretched-out rabbit's, complete with harelip and whiskers.  <b>You now have a kangaroo face!</b>");
+            outputText("\n\n");
+            CoC.instance.transformations.FaceKangaroo.applyEffect();
             changes++;
-            setFaceType(Face.KANGAROO);
         }
         //-Fur (Req: Footsies)
         if (!player.hasFur() && (player.lowerBody == LowerBody.KANGAROO || type == 1) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
@@ -8995,7 +8982,7 @@ public final class Mutations extends MutationsHelper {
         //(Gain human face)
         if (player.hasCoatOfType(Skin.CHITIN) && (player.faceType != Face.SPIDER_FANGS && player.faceType != Face.HUMAN) && changes < changeLimit && rand(4) == 0) {
 			outputText("\n\n");
-			transformations.FaceHuman.applyEffect();
+			CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //-Remove breast rows over 2.
@@ -9344,6 +9331,7 @@ public final class Mutations extends MutationsHelper {
         //Appearance Change
         //Hair
         if (rand(3) == 0 && changes < changeLimit && !CoC.instance.transformations.HairGhost.isPresent()) {
+            outputText("\n\n");
             CoC.instance.transformations.HairGhost.applyEffect();
             changes++;
         }
@@ -9420,19 +9408,19 @@ public final class Mutations extends MutationsHelper {
         }
         //Face
         if (player.eyes.type == Eyes.GHOST && player.faceType != Face.GHOST && changes < changeLimit && rand(3) == 0 && type == 1) {
-            outputText("\n\nYour face slowly grows numb and stiff. The muscles in your face seem to pull and shift. As the numbness fades, you notice that your face is stuck in a permanent smile. You try to stop smiling but the muscles in your face refuse to budge. <b>People might be disturbed by your unsettling smile.</b>");
-            setFaceType(Face.GHOST);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceGhost.applyEffect();
             changes++;
         }
         //Tongue
         if (player.tongue.type == Tongue.HUMAN && player.tongue.type != Tongue.GHOST && changes < changeLimit && rand(3) == 0 && type == 1) {
-            outputText("\n\nYour tongue tingles and feels heavy in your mouth. Your tongue slips out further than what is considered normal. Your tongue grows at least a foot in length, tapering to a point. It slowly becomes more transparent until you’re able to see right through it. <b>You now have a long transparent ghostly tongue.</b>");
-            setTongueType(Tongue.GHOST);
+            outputText("\n\n");
+            CoC.instance.transformations.TongueGhost.applyEffect();
             changes++;
         }
         if (player.tongue.type != Tongue.HUMAN && player.tongue.type != Tongue.GHOST && changes < changeLimit && rand(3) == 0 && type == 1) {
-            outputText("\n\nYou feel something strange inside your face as your tongue shrinks and recedes until it feels smooth and rounded.  <b>You realize your tongue has changed back into human tongue!</b>");
-            setTongueType(Tongue.HUMAN);
+            outputText("\n\n");
+            CoC.instance.transformations.TongueHuman.applyEffect();
             changes++;
         }
         //Horns
@@ -9576,9 +9564,12 @@ public final class Mutations extends MutationsHelper {
         //Physical
         if (player.faceType != Face.ELF && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             if (player.faceType == Face.HUMAN) {
-                outputText("\n\nYou feel tingling across your visage as some small changes begin to happen to it. Curious, you go look down by the nearest pool of water and notice to your amazement that the general shape of your mouth has changed to be in perfect alignment! No tooth is misaligned and your disarming, innocent smile revealing pearlescent white teeth would melt the coldest of hearts.<b>Guess your face is more like that of an elf now.</b>");
-                setFaceType(Face.ELF);
-            } else humanizeFace();
+                outputText("\n\n");
+                CoC.instance.transformations.FaceElf.applyEffect();
+            } else {
+                outputText("\n\n");
+                CoC.instance.transformations.FaceHuman.applyEffect();
+            }
             changes++;
         }
         if (player.lowerBody != LowerBody.ELF && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
@@ -9616,16 +9607,17 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.tongue.type == Tongue.HUMAN && player.tongue.type != Tongue.ELF && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour throat starts to ache and your tongue tingles. You try to gasp for air, your eyes opening wide in surprise as the voice that exits your throat is entirely changed. Your words are notes, your sentence a melody. Your voice is like music to your ears and you realize it is because your body became closer to that of an elf, adapting even your tongue and voice.  <b>You now have the beautiful voice of the elves.</b>");
-            setTongueType(Tongue.ELF);
+            outputText("\n\n");
+            CoC.instance.transformations.TongueElf.applyEffect();
             changes++;
         }
         if (player.tongue.type != Tongue.HUMAN && player.tongue.type != Tongue.ELF && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou feel something strange inside your face as your tongue shrinks and recedes until it feels smooth and rounded.  <b>You realize your tongue has changed back into human tongue!</b>");
-            setTongueType(Tongue.HUMAN);
+            outputText("\n\n");
+            CoC.instance.transformations.TongueHuman.applyEffect();
             changes++;
         }
         if (!CoC.instance.transformations.HairSilky.isPresent() && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\n");
             CoC.instance.transformations.HairSilky.applyEffect();
             changes++;
         }
@@ -9739,10 +9731,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.arms.type == Arms.ORC && player.faceType != Face.ORC_FANGS && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nY");
-            if (player.faceType != Face.HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
-            outputText("ou feel your two lower canines grow bigger and slightly sharper, similar to those of a boar, or in your case, an orc. <b>You now have orc canines.</b>");
-            setFaceType(Face.ORC_FANGS);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceOrcFangs.applyEffect();
             changes++;
         }
         if (player.ears.type != Ears.ELFIN && rand(3) == 0 && changes < changeLimit) {
@@ -9899,10 +9889,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.WEASEL && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nY");
-            if (player.faceType != Face.HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
-            outputText("ou feel your two canines grow bigger and slightly sharper, not unlike those of a weasel or in your case a raiju. <b>You now have raiju canines.</b>");
-            setFaceType(Face.WEASEL);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceWeasel.applyEffect();
             changes++;
         }
         if (player.faceType == Face.WEASEL && player.ears.type != Ears.RAIJU && changes < changeLimit && rand(3) == 0) {
@@ -9923,6 +9911,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         if (!CoC.instance.transformations.HairStorm.isPresent() && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\n");
             CoC.instance.transformations.HairStorm.applyEffect();
             changes++;
         }
@@ -10082,8 +10071,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.rearBody.type == RearBody.RAIJU_MANE && player.faceType != Face.HUMAN && player.faceType != Face.WEASEL && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour visage twists painfully, returning to a more normal human shape, albeit with flawless skin.  <b>Your face is human again!</b>");
-            setFaceType(Face.HUMAN);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         if (player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
@@ -10106,6 +10095,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         if (!CoC.instance.transformations.HairStorm.isPresent() && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\n");
             CoC.instance.transformations.HairStorm.applyEffect();
             changes++;
         }
@@ -10193,9 +10183,7 @@ public final class Mutations extends MutationsHelper {
         }
 		if (player.faceType != Face.ANIMAL_TOOTHS && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
-            if (player.faceType != Face.HUMAN) outputText("Your face suddenly mold back into its former human shape. However you feel your canine changing elongating into sharp dagger-like teeth capable of causing severe injuries. ");
-            outputText("You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. <b>Your mouth is now filled with wolf like canines.</b>");
-            setFaceType(Face.ANIMAL_TOOTHS);
+            CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
             changes++;
         }
 		if (((!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.NONE) && type == 0) || (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.LEVITATION, Wings.NONE) && type == 1)) && rand(3) == 0 && changes < changeLimit) {
@@ -10376,21 +10364,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.faceType != Face.SMUG && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nY");
-            if (player.faceType != Face.HUMAN) outputText("our face begins to change as if melting, becoming more human however");
-            outputText("ou suddenly feel pain in your mouth as if something had suddenly grown." +
-                    " At first you think nothing happened but after double checking you confirm that your buck teeth are slightly larger than normal." +
-                    " <b>Your face is now human save for your two buck teeth like those of a squirrel.</b>");
-            setFaceType(Face.SMUG);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceSmug.applyEffect();
             changes++;
         }
         if (player.faceType == Face.SMUG && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nA wave of lightheadedness hits you and you black out. In your unconsciousness, you dream of chewing - food, wood, cloth, " +
-                    "paper, leather, even metal... whatever you can fit in your mouth, " +
-                    "even if it doesn’t taste like anything though, what you dream most of is big hard nuts. For several minutes you just chew and chew your way " +
-                    "through a parade of ordinary objects, savoring the texture of each one against your teeth, until finally you awaken. Your teeth work, " +
-                    "feeling longer and more prominent than before, and you hunt up your reflection. <b>Your face has shifted to resemble a squirrel’s!</b>");
-            setFaceType(Face.SQUIRREL);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceSquirrel.applyEffect();
             changes++;
         }
         if ((player.faceType == Face.SMUG || player.faceType == Face.SQUIRREL) && player.ears.type != Ears.SQUIRREL && changes < changeLimit && rand(3) == 0) {
@@ -10404,10 +10384,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 		if ((player.faceType == Face.SMUG || player.faceType == Face.SQUIRREL) && player.tongue.type != Tongue.RATATOSKR && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYour tongue begins to feel stingy and dry, your throat too. You have difficulty speaking so you drink some water and try some basic pronunciation exercises. " +
-				"You find out to your absolute surprise you now have a talent with words and linguistics that you didn't use to, heck it's like the range and variety of sounds you can make just doubled. " +
-				" <b>Your skill with words just improved by leaps and bounds with your new Ratatoskr tongue.</b>");
-			setTongueType(Tongue.RATATOSKR);
+			outputText("\n\n");
+			CoC.instance.transformations.TongueRatatoskr.applyEffect();
 			changes++;
 		}
         if (player.ears.type == Ears.SQUIRREL && player.eyes.type != Eyes.RATATOSKR && changes < changeLimit && rand(3) == 0) {
@@ -10422,6 +10400,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         if (!CoC.instance.transformations.HairRatatoskr.isPresent() && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\n");
             CoC.instance.transformations.HairRatatoskr.applyEffect();
             changes++;
         }
@@ -10571,10 +10550,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.faceType != Face.WEASEL && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nY");
-            if (player.faceType != Face.HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y");
-            outputText("ou feel your two canines grow bigger and slightly sharper, not unlike those of a weasel or in your case a kamaitachi. <b>You now have weasel canines.</b>");
-            setFaceType(Face.WEASEL);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceWeasel.applyEffect();
             changes++;
         }
         if (player.faceType == Face.WEASEL && player.ears.type != Ears.WEASEL && changes < changeLimit && rand(3) == 0) {
@@ -10596,6 +10573,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         if (!CoC.instance.transformations.HairWindswept.isPresent() && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\n");
             CoC.instance.transformations.HairWindswept.applyEffect();
             changes++;
         }
@@ -10747,6 +10725,7 @@ public final class Mutations extends MutationsHelper {
         //-hair morphs to anemone tentacles, retains color, hair shrinks back to med-short('shaggy') and stops growing, lengthening treatments don't work and goblins won't cut it, but more anemone items can lengthen it one level at a time
 
         if (player.gills.type == Gills.ANEMONE && !CoC.instance.transformations.HairAnemone.isPresent() && changes < changeLimit && rand(5) == 0) {
+            outputText("\n\n");
             CoC.instance.transformations.HairAnemone.applyEffect();
             changes++;
             changes++;
@@ -10868,6 +10847,7 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && player.hairType == Hair.ANEMONE && rand(3) == 0) {
             //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
             outputText("\n\nEerie flames of the jewel migrate up your body to your head, where they cover your [hair].  Though they burned nowhere else in their lazy orbit, your head begins to heat up as they congregate.  Fearful, you raise your hands to it just as the temperature peaks, but as you touch your hair, the searing heat is suddenly gone - along with your tentacles!  <b>Your hair is normal again!</b>");
+            outputText("\n\n");
             CoC.instance.transformations.HairHuman.applyEffect(false);
             changes++;
         }
@@ -11101,9 +11081,8 @@ public final class Mutations extends MutationsHelper {
         //LAST - muzzlygoodness
         //should work from any face, including other muzzles
         if (player.tailType == Tail.FOX && player.faceType != Face.FOX && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYour face pinches and you clap your hands to it.  Within seconds, your nose is poking through those hands, pushing them slightly to the side as new flesh and bone build and shift behind it, until it stops in a clearly defined, tapered, and familiar point you can see even without the aid of a mirror.  <b>Looks like you now have a fox's face.</b>");
-            if (silly()) outputText("  And they called you crazy...");
-            setFaceType(Face.FOX);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Fox Eyes
@@ -11341,12 +11320,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Fanged face
         if (player.faceType == Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour tooth's suddenly hurt as you feel them changing. Your canines getting sharper and more adapted to eating meat.  <b>You now have fangs.</b>");
-            setFaceType(Face.SALAMANDER_FANGS);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceSalamanderFangs.applyEffect();
             changes++;
         }
         if (player.faceType != Face.HUMAN && player.faceType != Face.SALAMANDER_FANGS && changes < changeLimit && rand(4) == 0) {
-            humanizeFace();
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Human ears
@@ -12455,43 +12435,22 @@ public final class Mutations extends MutationsHelper {
 
         //gain half-coon face (prevented if already full-coon)
         if (player.faceType != Face.RACCOON_MASK && player.faceType != Face.RACCOON && (player.skin.coverage != Skin.COVERAGE_COMPLETE || player.skin.coverage != Skin.COVERAGE_HIGH) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-            //from human/naga/shark/bun face
-            if (player.faceType == Face.HUMAN || player.faceType == Face.SHARK_TEETH || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.BUNNY) {
-                outputText("\n\nA sudden wave of exhaustion passes over you, and your face goes partially numb around your eyes.  ");
-                //(nagasharkbunnies)
-                if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.BUNNY) {
-                    outputText("Your prominent teeth chatter noisily at first, then with diminishing violence, until you can no longer feel them jutting past the rest!  ");
-                }
-                outputText("Shaking your head a bit, you wait for your energy to return, then examine your appearance.  ");
-                //(if player skinTone = ebony/black/ebony with tats and no fur/scales or if black/midnight fur or if black scales
-                if (((player.skin.base.color == "ebony" || player.skin.base.color == "black") && !player.hasCoat()) || ((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) {
-                    outputText("Nothing seems different at first.  Strange... you look closer and discover a darker, mask-line outline on your already inky visage. Furthermore your canines have slightly alongated not unlike those of an animal. <b>You now have a barely-visible raccoon mask and sharp canines like those of a raccoon.</b>");
-                } else outputText("A dark, almost black mask shades the " + player.skinFurScales() + " around your eyes and over the topmost portion of your nose, lending you a criminal air! Furthermore your canines have slightly alongated not unlike those of an animal. <b>You now have a raccoon mask and sharp canines like those of a raccoon!</b>");
-            }
-            //from snout (will not overwrite full-coon snout but will overwrite others)
-            else {
-                outputText("\n\nA sudden migraine sweeps over you and you clutch your head in agony as your nose collapses back to human dimensions.  A worrying numb spot grows around your eyes, and you entertain several horrible premonitions until it passes as suddenly as it came.  Checking your reflection in your water barrel, you find ");
-                //[(if black/midnight fur or if black scales)
-                if (((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) outputText("your face apparently returned to normal shape, albeit still covered in " + player.skinFurScales() + ".  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your otherwise normal human face.</b>");
-                else if ((player.skin.base.color == "ebony" || player.skin.base.color == "black") && (!player.hasCoat())) outputText("your face apparently returned to normal shape.  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your normal human face.</b>");
-                else outputText("your face returned to human dimensions, but shaded by a black mask around the eyes and over the nose!  <b>You now have a humanoid face with a raccoon mask!</b>");
-            }
-            setFaceType(Face.RACCOON_MASK);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceRaccoonMask.applyEffect();
             changes++;
         }
                 //gain full-coon face (requires half-coon and fur)
         //from humanoid - should be the only one possible
         else if (player.faceType == Face.RACCOON_MASK && player.lowerBody == LowerBody.RACCOON && player.hasFur() && (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH) && rand(4) == 0 && changes < changeLimit) {
-            outputText("\n\nYour face pinches with tension, and you rub the bridge of your nose to release it.  The action starts a miniature slide in your bone structure, and your nose extends out in front of you!  You shut your eyes, waiting for the sinus pressure to subside, and when you open them, a triangular, pointed snout dotted with whiskers and capped by a black nose greets you!  <b>You now have a raccoon's face!</b>");
-            //from muzzleoid - should not be possible, but included if things change
-            //Your face goes numb, and you can see your snout shifting into a medium-long, tapered shape.  Closing your eyes, you rub at your forehead to try and get sensation back into it; it takes several minutes before full feeling returns.  <b>When it does, you look again at yourself and see a raccoon's pointy face, appointed with numerous whiskers and a black nose!</b>
+            outputText("\n\n");
+            CoC.instance.transformations.FaceRaccoon.applyEffect();
             changes++;
-            setFaceType(Face.RACCOON);
         }
         //Reset coon face
         if (player.faceType == Face.RACCOON && rand(4) == 0 && (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH) && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
-            humanizeFace();
         }
 
         //FUR TIME
@@ -12708,6 +12667,7 @@ public final class Mutations extends MutationsHelper {
         if ((player.faceType == Face.BUCKTEETH || player.faceType == Face.MOUSE) && !CoC.instance.transformations.HairBurning.isPresent() && changes < changeLimit && rand(3) == 0 && type == 1) {
             color1 = randomChoice(Hinezumi_HairColor);
             player.hairColor = color1;
+            outputText("\n\n");
             CoC.instance.transformations.HairBurning.applyEffect();
             changes++;
         }
@@ -12752,22 +12712,20 @@ public final class Mutations extends MutationsHelper {
         }
         //get teeth - from human, bunny, coonmask, or other humanoid teeth faces
         if (player.ears.type == Ears.MOUSE && (player.faceType == Face.HUMAN || player.faceType == Face.SHARK_TEETH || player.faceType == Face.BUNNY || player.faceType == Face.SPIDER_FANGS || player.faceType == Face.RACCOON_MASK) && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYour teeth grind on their own, and you feel a strange, insistent pressure just under your nose.  As you open your mouth and run your tongue along them, you can feel ");
-            if (player.faceType != Face.HUMAN) outputText("the sharp teeth receding and ");
-            outputText("your incisors lengthening.  It's not long before they're twice as long as their neighbors and the obvious growth stops, but the pressure doesn't go away completely.  <b>Well, you now have mouse incisors and your face aches a tiny bit - wonder if they're going to keep growing?</b>");
-            setFaceType(Face.BUCKTEETH);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceBuckteeth.applyEffect();
             changes++;
         }
         //get mouse muzzle from mouse teeth or other muzzle
         if (player.hasFur() && player.faceType != Face.MOUSE && (player.faceType != Face.HUMAN || player.faceType != Face.SHARK_TEETH || player.faceType != Face.BUNNY || player.faceType != Face.SPIDER_FANGS || player.faceType != Face.RACCOON_MASK) && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nA wave of light-headedness hits you, and you black out.  In your unconsciousness, you dream of chewing - food, wood, cloth, paper, leather, even metal... whatever you can fit in your mouth, even if it doesn't taste like anything much.  For several minutes you just chew and chew your way through a parade of ordinary objects, savoring the texture of each one against your teeth, until finally you awaken.  Your teeth work, feeling longer and more prominent than before, and you hunt up your reflection.  <b>Your face has shifted to resemble a mouse's, down to the whiskers!</b>");
-            setFaceType(Face.MOUSE);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceMouse.applyEffect();
             changes++;
         }
         //get mouse teeth from mouse muzzle
         if (player.hasFur() && player.faceType == Face.MOUSE && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYour mouse face begins to change as if melting. When you pass your hand over it you discover to your surprise its back to being human.or well it would be if not for your buck teeth way larger than normal.  <b>Your face is now human save for your two incisor like buck teeth.</b>");
-            setFaceType(Face.BUCKTEETH);
+            CoC.instance.transformations.FaceBuckteeth.applyEffect(false);
             changes++;
         }
         player.refillHunger(10);
@@ -12820,8 +12778,7 @@ public final class Mutations extends MutationsHelper {
             //Remove face before fur!
             if (player.faceType != Face.HUMAN) {
                 outputText("\n\n");
-                outputText("Your visage twists painfully, returning to a more normal human shape, albeit with flawless skin.  <b>Your face is human again!</b>");
-                setFaceType(Face.HUMAN);
+                CoC.instance.transformations.FaceHuman.applyEffect();
             }
             //De-fur
             else if (!player.hasPlainSkinOnly()) {
@@ -12834,10 +12791,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Demon tongue
         if (player.tongue.type != Tongue.DEMONIC && rand(2) == 0) {
-            outputText("\n\nYour tongue tingles");
-            if (player.tongue.type != Tongue.HUMAN) outputText(", thickening in your mouth until it feels more like your old human tongue, at least for the first few inches");
-            outputText(".  It bunches up inside you, and when you open up your mouth to release it, roughly two feet of tongue dangles out.  You find it easy to move and control, as natural as walking.  <b>You now have a long demon-tongue.</b>");
-            setTongueType(Tongue.DEMONIC);
+            outputText("\n\n");
+            CoC.instance.transformations.TongueDemonic.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
@@ -13012,11 +12967,13 @@ public final class Mutations extends MutationsHelper {
         //	outputText("\n\nYou grit your teeth as a stinging sensation arises in your gills.  Within moments, the sensation passes, and <b>your gills are gone!</b>");
         //If the PC has tentacle hair:
         if (player.hairType == Hair.ANEMONE && rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\n");
             CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
         }
         //If the PC has goo hair:
         if (player.hairType == Hair.GOO && rand(3) == 0 && changes < changeLimit) {
+            outputText("\n\n");
             CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
         }
@@ -13034,20 +12991,20 @@ public final class Mutations extends MutationsHelper {
         }
         //Turn ferret mask to full furface.
         if (player.faceType == Face.FERRET_MASK && player.hasFur() && player.ears.type == Ears.FERRET && player.tailType == Tail.FERRET && player.lowerBody == LowerBody.FERRET && rand(4) == 0 && changes < changeLimit) {
-            outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange.  You rub your face furiously in an attempt to ease the pain, but to no avail.  As the sensations pass, you examine your face in a nearby puddle.  <b>You nearly gasp in shock at the sight of your new ferret face!</b>");
-            setFaceType(Face.FERRET);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceFerret.applyEffect();
             changes++;
         }
         //If face is human:
         if (player.faceType == 0 && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nA horrible itching begins to encompass the area around your eyes.  You grunt annoyedly, rubbing furiously at the afflicted area.  Once the feeling passes, you make your way to the nearest reflective surface to see if anything has changed.  Your suspicions are confirmed.  The [skinFurScales] around your eyes has darkened.  <b>You now have a ferret mask!</b>");
-            setFaceType(Face.FERRET_MASK);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceFerretMask.applyEffect();
             changes++;
         }
         //If face is not ferret, has ferret ears, tail, and legs:
         if (player.faceType != Face.HUMAN && player.faceType != Face.FERRET_MASK && player.faceType != Face.FERRET && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYou groan uncomfortably as the bones in your [face] begin to rearrange.  You grab your head with both hands, rubbing at your temples in an attempt to ease the pain.  As the shifting stops, you frantically feel at your face.  The familiar feeling is unmistakable.  <b>Your face is human again!</b>");
-            setFaceType(Face.HUMAN);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //No fur, has ferret ears, tail, and legs:
@@ -13298,12 +13255,12 @@ public final class Mutations extends MutationsHelper {
         //Gain pig/boar face when you have the first three pig TFs.
         if (rand(2) == 0 && changes < changeLimit && player.ears.type == Ears.PIG && player.tailType == Tail.PIG && player.lowerBody == LowerBody.CLOVEN_HOOFED && (player.faceType != Face.PIG || player.faceType != Face.BOAR)) {
             if (boar) {
-                outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange. You rub your face furiously in an attempt to ease the pain, but to no avail. Your bottom teeth ache as well. What’s happening to you? As the sensations pass, you examine your face in a nearby puddle. <b>You nearly gasp in shock at the sight of your new tusky boar face!</b>");
-                setFaceType(Face.BOAR);
+                outputText("\n\n");
+                CoC.instance.transformations.FaceBoar.applyEffect();
                 changes++;
             } else {
-                outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange. You rub your face furiously in an attempt to ease the pain, but to no avail. As the sensations pass, you examine your face in a nearby puddle. <b>You nearly gasp in shock at the sight of your new pig face!</b>");
-                setFaceType(Face.PIG);
+                outputText("\n\n");
+                CoC.instance.transformations.FacePig.applyEffect();
                 changes++;
             }
         }
@@ -13731,7 +13688,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Face
         if (player.hasPlainSkinOnly() && player.skinAdj == "slippery" && player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
-            humanizeFace();
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Ears
@@ -14165,7 +14123,8 @@ public final class Mutations extends MutationsHelper {
 
         //Face
         if (player.faceType != Face.HUMAN && changes < changeLimit && rand(4) == 0) {
-            humanizeFace();
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
 
@@ -14385,12 +14344,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Face
         if (player.ears.type == Ears.YETI && player.faceType != Face.YETI_FANGS && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYou feel your canines elongate and sharpen. Your mouth feels somewhat like a human one still, but when you feel your teeth with your tongue you discover that your canines have pretty much turned into proper fangs. <b>You now have yeti fangs.</b>");
-            setFaceType(Face.YETI_FANGS);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceYetiFangs.applyEffect();
             changes++;
         }
         //Hair
         if (player.faceType == Face.YETI_FANGS && !CoC.instance.transformations.HairFluffy.isPresent() && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\n");
             CoC.instance.transformations.HairFluffy.applyEffect();
             changes++;
         }
@@ -14555,8 +14515,8 @@ public final class Mutations extends MutationsHelper {
         //Physical
         //Face
         if (player.lowerBody != LowerBody.GARGOYLE && player.faceType != Face.YUKI_ONNA && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYour lips go numb with cold for a moment and you can barely feel them. You raise your hands and poke at them finding that they are still there and slowly feeling trickles back into them. You examine them and find that they have turned pale blue in color, a sign of the cold nature you now possess, small fumes of cold air regularly escaping your lip.");
-            setFaceType(Face.YUKI_ONNA);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceYukiOnna.applyEffect();
             changes++;
         }
         //Legs
@@ -14585,6 +14545,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Hair
         if (player.faceType == Face.YUKI_ONNA && !CoC.instance.transformations.HairSnowy.isPresent() && changes < changeLimit && rand(4) == 0) {
+            outputText("\n\n");
             CoC.instance.transformations.HairSnowy.applyEffect();
             changes++;
         }
@@ -14741,8 +14702,8 @@ public final class Mutations extends MutationsHelper {
 
         //face
         if (player.faceType != Face.ORCA && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYour nose starts to tingle, getting bigger and rounder as your facial features take on a bombed shape. Your nasal hole disappears entirely as you feel your mouth change, your dentition turning into pointed teeth fit for an orca. You go look at your reflection in the water to be sure, and discover your face is now similar in shape to that of a killer whale. Um… you could use a fish or two, you are getting pretty hungry. <b>Taking a bite out of fresh fish would be great with your new orca face.</b>");
-            setFaceType(Face.ORCA);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceOrca.applyEffect();
             changes++;
         }
 
@@ -14781,11 +14742,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Change hair type to normal
         if ((!CoC.instance.transformations.HairHuman.isPresent() && player.hairType != Hair.PRISMATIC) && type == 1 && changes < changeLimit && rand(2) == 0) {
+            outputText("\n\n");
             CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
         }
         //Change hair type to prismatic
         if ((player.hairType == Hair.NORMAL) && type == 1 && changes < changeLimit && rand(2) == 0) {
+            outputText("\n\n");
             CoC.instance.transformations.HairPrismatic.applyEffect();
             changes++;
         }
@@ -14951,8 +14914,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Gain Dragon Tongue
         if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.tongue.type != Tongue.DRACONIC && type == 1) {
-            outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
-            CoC.instance.mutations.setTongueType(Tongue.DRACONIC);
+            outputText("\n\n");
+            CoC.instance.transformations.TongueDraconic.applyEffect();
             changes++;
             //Note: This type of tongue should be eligible for all things you can do with demon tongue... Dunno if it's best attaching a boolean just to change the description or creating a whole new tongue type.
         }
@@ -15134,16 +15097,15 @@ public final class Mutations extends MutationsHelper {
         }
         //Gain Frost wyrm face
         if (player.faceType != Face.ANIMAL_TOOTHS && rand(3) == 0 && changes < changeLimit) {
-            setFaceType(Face.ANIMAL_TOOTHS);
-            outputText("\n\nWhoa! Something weird happens in your mouth as your canines starts changing, becoming sharper. Well now that you think of it, a frost wyrm’s diet mostly consists of meat, " +
-                    "so getting sharper canines to properly eat your meat is a formality. " +
-                    "<b>You now have sharp canine just like a frost wyrm.</b>");
+            outputText("\n\n");
+            CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
+            outputText("\n\nWell, now that you think about it, a frost wyrm’s diet mostly consists of meat, so getting sharper canines to properly eat your meat makes enough sense.");
             changes++;
         }
         //Gain Dragon Tongue
         if (changes < changeLimit && rand(3) == 0 && player.tongue.type != Tongue.DRACONIC) {
-            outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
-            setTongueType(Tongue.DRACONIC);
+            outputText("\n\n");
+            CoC.instance.transformations.TongueDraconic.applyEffect();
             changes++;
             //Note: This type of tongue should be eligible for all things you can do with demon tongue... Dunno if it's best attaching a boolean just to change the description or creating a whole new tongue type.
         }
@@ -15758,8 +15720,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Fangs
         if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.DEVIL_FANGS && player.ears.type == Ears.GOAT) {
-            outputText("\n\nYou feel your canines grow slightly longer, taking on a sharp appearance like those of a beast. Perhaps not as long as you thought they would end up as, but clearly they make your smile all the more fiendish. <b>You now have demonic fangs!</b>");
-            setFaceType(Face.DEVIL_FANGS);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceDevilFangs.applyEffect();
             changes++;
         }
         //Eyes
@@ -15848,13 +15810,11 @@ public final class Mutations extends MutationsHelper {
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //-Jabberwocky face/bucktooth
         if ((player.faceType == Face.DRAGON || player.faceType == Face.DRAGON_FANGS) && changes < changeLimit) {
-            outputText("\n\nWhile you are busy laughing at the ridicule of this situation your bucktooth begin to pulse in accordance with your laughter growing almost to rabbit like size. You now have ");
+            outputText("\n\n");
             if (player.faceType == Face.DRAGON_FANGS) {
-                outputText("<b>Jabberwocky buck tooths!</b>");
-                setFaceType(Face.BUCKTOOTH);
+                CoC.instance.transformations.FaceBucktooth.applyEffect();
             } else {
-                outputText("<b>a Jabberwocky face.</b>");
-                setFaceType(Face.JABBERWOCKY);
+                CoC.instance.transformations.FaceJabberwocky.applyEffect();
             }
             changes++;
         }
@@ -15993,18 +15953,17 @@ public final class Mutations extends MutationsHelper {
         }
         //Face
         if (((player.ears.type == Ears.BEAR && player.faceType != Face.BEAR) || (player.ears.type == Ears.PANDA && player.faceType != Face.PANDA)) && player.faceType == Face.HUMAN && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour nose start to tingle as your general face shape surge forward into a muzzle complete with sharp teeth. At first you though it was a dog face but after further examination conclude it has more in common with bears then canines. ");
+            outputText("\n\n");
             if (player.ears.type == Ears.BEAR) {
-                outputText("<b>You now have a bear face.</b>");
-                setFaceType(Face.BEAR);
+                CoC.instance.transformations.FaceBear.applyEffect();
             } else {
-                outputText("<b>You now have a bear face.</b>");
-                setFaceType(Face.PANDA);
+                CoC.instance.transformations.FacePanda.applyEffect();
             }
             changes++;
         }
         if (player.faceType != Face.HUMAN && player.faceType != Face.BEAR && player.faceType != Face.PANDA && changes < changeLimit && rand(4) == 0) {
-            humanizeFace();
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Fur
@@ -16114,8 +16073,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Face
         if (player.rearBody.type == RearBody.SNAIL_SHELL && player.faceType != Face.FIRE_SNAIL && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nJust as you though the whole sweating situation couldn't get worse you’re suddenly are assaulted by a spike of pleasure, your entire undercarriage feeling like one single sexual organ. You begin to drool and before you know it you’re constantly drooling from arousal and can't stop. You eventually manage to recover bodily motions but not exactly full control of the drooling which persist. <b>Guess you're stuck with a drooling mouth for a while.</b>");
-            setFaceType(Face.FIRE_SNAIL);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceFireSnail.applyEffect();
             changes++;
         }
         //Eyes
@@ -16145,6 +16104,7 @@ public final class Mutations extends MutationsHelper {
                 else player.hairColorOnly = "pinkish orange";
             }
             outputText("\n\nAs if sweating wasn't bad enough your body temperature suddenly spikes again. Before you know it your entire body is set on fire, especially your hair of which the tips glows like smoldering embers. Not only that but instead of normal sweat your entire body now quite literally seethes liquid fire. <b>Guess you’re a full fire snail now with this burning hair of yours.</b>");
+		    outputText("\n\n");
 		    CoC.instance.transformations.HairBurning.applyEffect(false);
             changes++;
         }
@@ -16372,6 +16332,7 @@ public final class Mutations extends MutationsHelper {
                     outputText("\n\nAfter having consumed the root, a lock of gooey hair falls over your forehead. When you try to examine it, the bunch of goo falls to the ground and evaporates. As you tilt your head to see what happened, more and more patches of goo start falling from your head, disappearing on the ground with the same speed. Soon, your scalp is devoid of any kind of goo, albeit entirely bald.");
                     outputText("\n\nNot for long, it seems, as the familiar sensation of hair returns to your head a moment later. After looking yourself on the stream, you confirm that <b>your once bald head now has normal, short [haircolor] hair</b>.");
                 } else outputText("\n\nA mild tingling on your scalp makes your check yourself on the stream. Seems like the root is changing your hair this time, <b>turning it into [hair]</b>.");
+		        outputText("\n\n");
 		        CoC.instance.transformations.HairHuman.applyEffect(false);
             }
             flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
@@ -16379,9 +16340,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Face
         if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.RED_PANDA && player.ears.type == Ears.RED_PANDA) {
-            outputText("\n\nNumbness comes to your cheekbones and jaw, while the rest of your head is overwhelmed by a tingling sensation. Every muscle on your face tenses and shifts, while the bones and tissue rearrange, radically changing the shape of your head. You have troubles breathing as the changes reach your nose, but you manage to see as it changes into an animalistic muzzle. You jaw joins it and your teeth sharpen a little, not to the point of being true menacing, but gaining unequivocally the shape of those belonging on a little carnivore.");
-            outputText("\n\nOnce you’re face and jaw has reshaped, fur covers the whole of your head. The soft sensation is quite pleasant. It has a russet-red coloration, that turns to white on your muzzle and cheeks. Small, rounded patches of white cover the area where your eyebrows were. <b>You now have a red-panda head!</b>");
-            setFaceType(Face.RED_PANDA);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceRedPanda.applyEffect();
             changes++;
         }
         //Arms
@@ -16874,6 +16834,7 @@ public final class Mutations extends MutationsHelper {
 
         //Remove special hairs
         if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(3) == 0) {
+		    outputText("\n\n");
 		    CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
         }
@@ -16969,13 +16930,14 @@ public final class Mutations extends MutationsHelper {
         }
         //Ushi oni/onna fangs
         if (player.faceType == Face.HUMAN && player.faceType != Face.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou feel something under the skin around your eyes and in your mouth as they begin to burn, smoke coming out of it, from the bottom of your eyes, circling to the upper part. In your mouth your teeth make cracking noises as they remodel themselves. After the torturing experience you feel like <b>you've gained Ushi-" + player.mf("Oni", "Onna") + " fangs,</b> going to a barrel with water you see your face now has a strange tattoo around your eyes.");
-            setFaceType(Face.USHI_ONI_ONNA);
+            outputText("\n\n");
+            CoC.instance.transformations.FaceUshiOniOnna.applyEffect();
             if (player.tailRecharge < 5) player.tailRecharge = 5;
             changes++;
         }
         if (player.faceType != Face.HUMAN && player.faceType != Face.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
-            humanizeFace();
+            outputText("\n\n");
+            CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Ushi oni/onna horns
@@ -17213,6 +17175,7 @@ public final class Mutations extends MutationsHelper {
 
             //Remove special hairs
             if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(4) == 0) {
+		        outputText("\n\n");
 		        CoC.instance.transformations.HairHuman.applyEffect();
                 changes++;
             }
@@ -17250,25 +17213,22 @@ public final class Mutations extends MutationsHelper {
             }
             //Set weird face to human
             if (changes < changeLimit && rand(4) == 0 && player.faceType != Face.HUMAN && player.faceType != Face.ANIMAL_TOOTHS) {
-                humanizeFace()
+                outputText("\n\n");
+                CoC.instance.transformations.FaceHuman.applyEffect();
             }
             //Set face to Melkie
             if (changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN && player.faceType != Face.ANIMAL_TOOTHS) {
-                setFaceType(Face.ANIMAL_TOOTHS);
-                outputText("\n\nWhoa! Something weird happens in your mouth as your canines starts changing, becoming sharper. Well now that you think of it, a Melkie’s diet mostly consists of fish, " +
-                        "so getting sharper canines to properly eat your meat is a formality. " +
-                        "<b>You now have sharp canine just like a Melkie.</b>");
+                outputText("\n\n");
+                CoC.instance.transformations.FaceAnimalTeeth.applyEffect();
+                outputText("\n\nWell, now that you think about it, a Melkie’s diet mostly consists of fish, so getting sharper canines to properly eat your meat makes enough sense.");
                 changes++;
             }
             if (changes < changeLimit && rand(4) == 0 && player.tongue.type != Tongue.HUMAN && player.tongue.type != Tongue.MELKIE) {
-                humaniseTongue();
+                CoC.instance.transformations.TongueHuman.applyEffect();
             }
             if (changes < changeLimit && rand(4) == 0 && player.tongue.type == Tongue.HUMAN && player.tongue.type != Tongue.MELKIE) {
-                outputText("\n\nYour throat starts to ache and your tongue tingles. You try to gasp for air, your eyes opening wide in surprise as your voice exit your throat entirely changed. " +
-                        "Your words are notes, your sentence a melody. Your voice is like music to your ears and you realise it is because your body became closer to that of a Melkie adapting " +
-                        "even your tongue and voice. Well you could always go sit on a rock and sing in case some sailor came by." +
-                        "<b>You now have the mermaid like voice of a Melkie.</b>");
-                setTongueType(Tongue.MELKIE);
+                outputText("\n\n");
+                CoC.instance.transformations.TongueMelkie.applyEffect();
                 player.createPerk(PerkLib.MelkieSong, 0, 0, 0, 0);
                 changes++;
             }
@@ -17365,19 +17325,15 @@ public final class Mutations extends MutationsHelper {
                         "Well what your face won't show, your body will.");
                 dynStats("spe", -5);
                 if (player.faceType == Face.HUMAN && player.faceType != Face.KUDERE) {
-                    outputText("\n\nHey, why do you even bother with those expressions? " +
-                            "Your flat tone and emotionless face is the perfect armor against all the lust mongers out there. Let them guess whether you are aroused or not. " +
-                            "Only your bodily movement can betray your hidden desires to mate or your anger now. " +
-                            "<b>You now have an expressionless visage.");
-                    if (silly()) outputText("Card sharks would gladly sell their souls for a poker face as good as yours.");
-                    outputText("</b>");
-                    setFaceType(Face.KUDERE);
+                    outputText("\n\n");
+                    CoC.instance.transformations.FaceKudere.applyEffect();
                 }
                 changes++;
             }
             //Fix the face if player face isn't human
             if (player.faceType != Face.HUMAN && player.faceType != Face.KUDERE) {
-                humanizeFace()
+                outputText("\n\n");
+                CoC.instance.transformations.FaceHuman.applyEffect();
             }
             //Get those Cock to bubble:
             if (player.cockTotal() > 0 && player.cocks[0].cockType != CockTypesEnum.CANCER && rand(4) == 0 && changes < changeLimit) {
@@ -17451,6 +17407,7 @@ public final class Mutations extends MutationsHelper {
 
             //Remove special hairs
             if (changes < changeLimit && player.hairType != Hair.NORMAL && rand(4) == 0) {
+		        outputText("\n\n");
 		        CoC.instance.transformations.HairHuman.applyEffect();
                 changes++;
             }
@@ -17485,7 +17442,8 @@ public final class Mutations extends MutationsHelper {
             }
             //Set weird face to human
             if (changes < changeLimit && rand(4) == 0 && player.faceType != Face.HUMAN && player.faceType != Face.KUDERE) {
-                humanizeFace()
+                outputText("\n\n");
+                CoC.instance.transformations.FaceHuman.applyEffect();
             }
             //Dump that damn coat away
             if (player.hasCoat() && rand(4) == 0) {

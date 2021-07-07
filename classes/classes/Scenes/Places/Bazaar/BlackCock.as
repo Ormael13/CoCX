@@ -1490,7 +1490,7 @@ import classes.CoC;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.GOAT && player.faceType != Face.HUMAN) {
 				outputText("\n\nYour face grows warm as suddenly your vision is engulfed in smoke, coughing and beating the smoke back you noticed a marked change in your features. Touching yourself you confirm you have a <b>normal human shaped face once again</b>.");
-				player.faceType = Face.HUMAN;
+        CoC.instance.transformations.FaceHuman.applyEffect(false);
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN) {
@@ -1647,6 +1647,7 @@ import classes.CoC;
 			}
 			//Hair turns back to normal
 			if (rand(4) == 0 && changes < changeLimit && !CoC.instance.transformations.HairHuman.isPresent()) {
+				outputText("\n\n");
 				CoC.instance.transformations.HairHuman.applyEffect();
 				changes++;
 			}
@@ -1689,8 +1690,8 @@ import classes.CoC;
 			}
 			//Change face to rhino
 			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.RHINO && player.skinTone == "gray" && player.faceType != Face.RHINO) {
-				outputText("\n\nYour face suddenly goes numb. You begin to hear bone cracking as you vision suddenly shifts as you face stretches out and thickens. When your face is done growing you can see the edges of your elongated mouth and noise in the center of your field of vision. They barely impede your vision though. <b>You now have a rhino face.</b>");
-				player.faceType = Face.RHINO;
+				outputText("\n\n");
+        CoC.instance.transformations.FaceRhino.applyEffect();
 				changes++;
 			}
 			//Change tail to rhino
@@ -1838,6 +1839,7 @@ import classes.CoC;
 			//------------
 			//Hair turns back to normal
 			if (rand(4) == 0 && changes < changeLimit && !CoC.instance.transformations.HairHuman.isPresent() &&  !CoC.instance.transformations.HairQuill.isPresent()) {
+				outputText("\n\n");
 				CoC.instance.transformations.HairHuman.applyEffect();
 				changes++;
 			}
@@ -2020,13 +2022,14 @@ import classes.CoC;
 			}
 			//Gain quill hair
 			if (rand(4) == 0 && changes < changeLimit && flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 1 && player.lowerBody != LowerBody.GARGOYLE && player.hairType == Hair.NORMAL) {
+				outputText("\n\n");
 				CoC.instance.transformations.HairQuill.applyEffect();
 				changes++;
 			}
 			//Gain Echidna face if you have the right conditions.
 			if (rand(4) == 0 && changes < changeLimit && player.hasFur() && player.ears.type == Ears.ECHIDNA && player.tailType == Tail.ECHIDNA && player.tongue.type == Tongue.ECHIDNA) {
-				outputText("You groan loudly as the bones in your face begin to reshape and rearrange. Most notable, you feel your mouth lengthening into a long, thin snout. <b>You now have an echidna face!</b>");
-				player.faceType = Face.ECHIDNA;
+				outputText("\n\n");
+        CoC.instance.transformations.FaceEchidna.applyEffect();
 				changes++;
 			}
 			// Other Changes

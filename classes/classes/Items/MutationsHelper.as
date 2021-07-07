@@ -79,12 +79,6 @@ import classes.BodyParts.Wings;
 			changes++;
 		}
 
-		public function humanizeFace():void {
-			outputText("\n\nSudden agony sweeps over your [face], your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, <b>human face</b>.");
-			setFaceType(Face.HUMAN);
-			changes++;
-		}
-
 		public function humanizeEyes():void {
 			if (player.eyes.type == Eyes.BLACK_EYES_SAND_TRAP) {
 				outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
@@ -95,12 +89,6 @@ import classes.BodyParts.Wings;
 				outputText("  <b>You have normal, humanoid eyes again.</b>");
 			}
 			setEyeType(Eyes.HUMAN);
-			changes++;
-		}
-
-		public function humaniseTongue():void {
-			outputText("\n\nYour tongue suddenly begins to feel weird. When you pull it out to check what is going on you discover to your surprise it returned to its human state just like before you entered the portal.");
-			setTongueType(Tongue.HUMAN);
 			changes++;
 		}
 
@@ -470,64 +458,6 @@ import classes.BodyParts.Wings;
 		[Eyes.WEASEL, null],
 	]);
 
-	public function setFaceType(faceType:int):Boolean {
-		return setBodyPartType("faceType", METAMORPH_FACES, faceType);
-	}
-	private const METAMORPH_FACES:Object = createMapFromPairs([
-		[Face.AVIAN, null],
-		[Face.BEAR, null],
-		[Face.BOAR, StatusEffects.UnlockedBoarFace],
-		[Face.BUCKTEETH, null],
-		[Face.BUCKTOOTH, null],
-		[Face.BUNNY, null],
-		[Face.CAT, StatusEffects.UnlockedCatFace],
-		[Face.CAT_CANINES, StatusEffects.UnlockedCatFangs],
-		[Face.CHESHIRE, StatusEffects.UnlockedCheshireFace],
-		[Face.CHESHIRE_SMILE,StatusEffects.UnlockedCheshireSmile],
-		[Face.COW_MINOTAUR, StatusEffects.UnlockedCowMinotaurFace],
-		[Face.DEER, null],
-		[Face.DOG, null],
-		[Face.DRAGON, StatusEffects.UnlockedDraconicFace],
-		[Face.DRAGON_FANGS, StatusEffects.UnlockedDraconicFangs],
-		[Face.DEVIL_FANGS, StatusEffects.UnlockedDevilFangs],
-		[Face.ECHIDNA, null],
-		[Face.FERRET, null],
-		[Face.FERRET_MASK, null],
-		[Face.FIRE_SNAIL, null],
-		[Face.FOX, StatusEffects.UnlockedFoxFace],
-		[Face.GHOST, null],
-		[Face.HORSE, StatusEffects.UnlockedHorseFace],
-		[Face.HUMAN, StatusEffects.UnlockedHumanFace],
-		[Face.JABBERWOCKY, null],
-		[Face.JIANGSHI, null],
-		[Face.KANGAROO, null],
-		[Face.KUDERE, null],
-		[Face.LIZARD, StatusEffects.UnlockedLizardFace],
-		[Face.MANTICORE, StatusEffects.UnlockedManticoreFace],
-		[Face.MOUSE, null],
-		[Face.ONI_TEETH, StatusEffects.UnlockedOniFace],
-		[Face.ORC_FANGS, StatusEffects.UnlockedOrcFangs],
-		[Face.ORCA, StatusEffects.UnlockedOrcaFace],
-		[Face.PANDA, null],
-		[Face.PIG, StatusEffects.UnlockedPigFace],
-		[Face.PLANT_DRAGON, null],
-		[Face.RACCOON, null],
-		[Face.RACCOON_MASK, null],
-		[Face.WEASEL, StatusEffects.UnlockedRaijuFace],
-		[Face.RED_PANDA, StatusEffects.UnlockedRedPandaFace],
-		[Face.RHINO, null],
-		[Face.SALAMANDER_FANGS, StatusEffects.UnlockedSalamanderFace],
-		[Face.SHARK_TEETH, StatusEffects.UnlockedSharkTeeth],
-		[Face.SNAKE_FANGS, StatusEffects.UnlockedSnakeFangs],
-		[Face.SPIDER_FANGS, StatusEffects.UnlockedSpiderFangs],
-		[Face.USHI_ONI_ONNA, null],
-		[Face.VAMPIRE, StatusEffects.UnlockedVampireFace],
-		[Face.WOLF, null],
-		[Face.WOLF_FANGS, null],
-		[Face.YETI_FANGS, null],
-		[Face.YUKI_ONNA, null],
-	]);
-
 	public function setGillType(gillType:int):Boolean {
 		return setBodyPartType("gills.type", METAMORPH_GILLS, gillType);
 	}
@@ -536,26 +466,6 @@ import classes.BodyParts.Wings;
 		[Gills.FISH, StatusEffects.UnlockedFishGills],
 		[Gills.GILLS_IN_TENTACLE_LEGS, null],
 		[Gills.NONE, StatusEffects.UnlockedHumanNoGills],
-	]);
-
-	public function setHairType(hairType:int):Boolean {
-		return setBodyPartType("hairType", METAMORPH_HAIR_TYPES, hairType);
-	}
-	private const METAMORPH_HAIR_TYPES:Object = createMapFromPairs([
-		[Hair.ANEMONE, null],
-		[Hair.BURNING, StatusEffects.UnlockedHellcatBurningHair],
-		[Hair.FEATHER, StatusEffects.UnlockedHarpyHair],
-		[Hair.FLUFFY, null],
-		[Hair.GHOST, null],
-		[Hair.GOO, null],
-		[Hair.GORGON, StatusEffects.UnlockedGorgonHair],
-		[Hair.GRASS, null],
-		[Hair.LEAF, null],
-		[Hair.NORMAL, StatusEffects.UnlockedHumanHair],
-		[Hair.QUILL, null],
-		[Hair.SILKEN, StatusEffects.UnlockedElfHair],
-		[Hair.SNOWY, null],
-		[Hair.STORM, StatusEffects.UnlockedRaijuHair],
 	]);
 
 	/**
@@ -687,27 +597,6 @@ import classes.BodyParts.Wings;
 		[RearBody.TENTACLE_EYESTALKS, null],
 		[RearBody.WOLF_COLLAR, null],
 		[RearBody.YETI_FUR, null],
-	]);
-
-	public function setTongueType(tongueType:int):Boolean {
-		return setBodyPartType("tongue.type", METAMORPH_TONGUES, tongueType);
-	}
-	// Here we override flavour text because it is 'tonuge' in StatusEffect id
-	// but changing that would break the saves
-	private const METAMORPH_TONGUES:Object = createMapFromPairs([
-		[Tongue.CAT, [StatusEffects.UnlockedCatTongue, "Cat Tongue"]],
-		[Tongue.DEMONIC, [StatusEffects.UnlockedDemonTonuge, "Demonic Tongue"]],
-		[Tongue.DRACONIC, [StatusEffects.UnlockedDraconicTongue, "Draconic Tongue"]],
-		[Tongue.ECHIDNA, [null, "Echidna Tongue"]],
-		[Tongue.GHOST, [null, "Ghost Tongue"]],
-		[Tongue.HUMAN, [StatusEffects.UnlockedHumanTongue, "Human Tongue"]],
-		[Tongue.ELF, [StatusEffects.UnlockedElfTongue, "Elf Tongue"]],
-		[Tongue.SNAKE, [StatusEffects.UnlockedSnakeTongue, "Snake Tongue"]],
-		[Tongue.DOG, [null, "Dog Tongue"]],
-		[Tongue.CAVE_WYRM, [null, "Cave Wyrm Tongue"]],
-		[Tongue.GHOST, [null, "Ghost Tongue"]],
-		[Tongue.MELKIE, [null, "Melkie Tongue"]],
-		[Tongue.RAVENOUS_TONGUE, [null, "Ravenous Tongue"]],
 	]);
 
 	/**

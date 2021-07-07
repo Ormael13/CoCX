@@ -21,7 +21,7 @@ package classes.GeneticMemories {
 			metamorphCost: [Cost Here],
 			metamorphTitle: "[Race Here]",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.[TF Object from TransformationLib]
+				return CoC.instance.transformations.[TF Object from TransformationLib];
 			}
 		});
 
@@ -35,7 +35,7 @@ package classes.GeneticMemories {
 			metamorphCost: 500,
 			metamorphTitle: "Human",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceHuman
+				return CoC.instance.transformations.FaceHuman;
 			}
 		});
 
@@ -45,7 +45,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Horse",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceHorse
+				return CoC.instance.transformations.FaceHorse;
 			}
 		});
 
@@ -55,7 +55,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Cow/Mino",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceCowMinotaur
+				return CoC.instance.transformations.FaceCowMinotaur;
 			}
 		});
 
@@ -65,7 +65,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Shark",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceSharkTeeth
+				return CoC.instance.transformations.FaceSharkTeeth;
 			}
 		});
 
@@ -75,7 +75,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Snake",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceSnakeFangs
+				return CoC.instance.transformations.FaceSnakeFangs;
 			}
 		});
 
@@ -85,7 +85,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Cat",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceCat
+				return CoC.instance.transformations.FaceCat;
 			}
 		});
 
@@ -95,7 +95,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Cat Canines",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceCatCanines
+				return CoC.instance.transformations.FaceCatCanines;
 			}
 		});
 
@@ -105,7 +105,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Lizard",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceLizard
+				return CoC.instance.transformations.FaceLizard;
 			}
 		});
 
@@ -115,7 +115,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Spider Fangs",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceSpiderFangs
+				return CoC.instance.transformations.FaceSpiderFangs;
 			}
 		});
 
@@ -125,7 +125,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Fox",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceFox
+				return CoC.instance.transformations.FaceFox;
 			}
 		});
 
@@ -135,7 +135,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Pig",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FacePig
+				return CoC.instance.transformations.FacePig;
 			}
 		});
 
@@ -145,7 +145,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Boar",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceBoar
+				return CoC.instance.transformations.FaceBoar;
 			}
 		});
 
@@ -155,7 +155,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Manticore",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceManticore
+				return CoC.instance.transformations.FaceManticore;
 			}
 		});
 
@@ -165,7 +165,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Salamander F.",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceSalamanderFangs
+				return CoC.instance.transformations.FaceSalamanderFangs;
 			}
 		});
 
@@ -175,7 +175,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Orca",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceOrca
+				return CoC.instance.transformations.FaceOrca;
 			}
 		});
 
@@ -185,7 +185,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Dragon",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceDragon
+				return CoC.instance.transformations.FaceDragon;
 			}
 		});
 
@@ -195,7 +195,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Dragon Fangs",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceDragonFangs
+				return CoC.instance.transformations.FaceDragonFangs;
 			}
 		});
 
@@ -205,7 +205,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Oni Teeh",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceOniTeeth
+				return CoC.instance.transformations.FaceOniTeeth;
 			}
 		});
 
@@ -215,7 +215,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Weasel",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceWeasel
+				return CoC.instance.transformations.FaceWeasel;
 			}
 		});
 
@@ -225,7 +225,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Vampire",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceVampire
+				return CoC.instance.transformations.FaceVampire;
 			}
 		});
 
@@ -235,7 +235,7 @@ package classes.GeneticMemories {
 			metamorphCost: 100,
 			metamorphTitle: "Red Panda",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceRedPanda
+				return CoC.instance.transformations.FaceRedPanda;
 			}
 		});
 
@@ -245,7 +245,7 @@ package classes.GeneticMemories {
 			metamorphCost: 200,
 			metamorphTitle: "Cheshire",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceCheshire
+				return CoC.instance.transformations.FaceCheshire;
 			}
 		});
 
@@ -255,7 +255,7 @@ package classes.GeneticMemories {
 			metamorphCost: 200,
 			metamorphTitle: "Cheshire Smile",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceCheshireSmile
+				return CoC.instance.transformations.FaceCheshireSmile;
 			}
 		});
 
@@ -265,7 +265,7 @@ package classes.GeneticMemories {
 			metamorphCost: 200,
 			metamorphTitle: "Orc Fangs",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceOrcFangs
+				return CoC.instance.transformations.FaceOrcFangs;
 			}
 		});
   }

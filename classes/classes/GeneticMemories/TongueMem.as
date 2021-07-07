@@ -2,12 +2,12 @@ package classes.GeneticMemories {
   import classes.BaseContent;
   import classes.StatusEffects;
   import classes.BodyParts.*;
-  import classes.BodyParts.Hair;
+  import classes.BodyParts.Tongue;
 	import classes.internals.EnumValue;
 	import classes.Transformations.Transformation;
 	import classes.CoC;
 
-  public class HairMem extends BaseContent {
+  public class TongueMem extends BaseContent {
 	/**
 	 * Entry properties:
 	 * - metamorphCost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
@@ -29,63 +29,63 @@ package classes.GeneticMemories {
 
     public static var Memories:/*EnumValue*/ Array = [];
 
-		public static const NORMAL:int = 0;
-		EnumValue.add(Memories, NORMAL, "NORMAL", {
-			name: "Human Hair",
+		public static const HUMAN:int = 0;
+		EnumValue.add(Memories, HUMAN, "HUMAN", {
+			name: "Human Tongue",
 			metamorphCost: 500,
 			metamorphTitle: "Human",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.HairHuman;
+				return CoC.instance.transformations.TongueHuman;
 			}
 		});
 
-		public static const FEATHER:int = 1;
-		EnumValue.add(Memories, FEATHER, "FEATHER", {
-			name: "Feather Hair",
+		public static const SNAKE:int = 1;
+		EnumValue.add(Memories, SNAKE, "SNAKE", {
+			name: "Snake Tongue",
 			metamorphCost: 100,
-			metamorphTitle: "Feather",
+			metamorphTitle: "Snake",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.HairFeather;
+				return CoC.instance.transformations.TongueSnake;
 			}
 		});
 
-		public static const GORGON:int = 2;
-		EnumValue.add(Memories, GORGON, "GORGON", {
-			name: "Gorgon Hair",
+		public static const DEMONIC:int = 2;
+		EnumValue.add(Memories, DEMONIC, "DEMONIC", {
+			name: "Demon Tongue",
 			metamorphCost: 100,
-			metamorphTitle: "Gorgon",
+			metamorphTitle: "Demon",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.HairGorgon;
+				return CoC.instance.transformations.TongueDemonic;
 			}
 		});
 
-		public static const ELF:int = 3;
+		public static const DRACONIC:int = 3;
+		EnumValue.add(Memories, DRACONIC, "DRACONIC", {
+			name: "Dragon Tongue",
+			metamorphCost: 100,
+			metamorphTitle: "Dragon",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TongueDraconic;
+			}
+		});
+
+		public static const CAT:int = 4;
+		EnumValue.add(Memories, CAT, "CAT", {
+			name: "Cat Tongue",
+			metamorphCost: 100,
+			metamorphTitle: "Cat",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TongueCat;
+			}
+		});
+
+		public static const ELF:int = 5;
 		EnumValue.add(Memories, ELF, "ELF", {
-			name: "Silky Hair",
+			name: "Elf Tongue",
 			metamorphCost: 100,
 			metamorphTitle: "Elf",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.HairSilky;
-			}
-		});
-
-		public static const STORM:int = 4;
-		EnumValue.add(Memories, STORM, "STORM", {
-			name: "Storm Hair",
-			metamorphCost: 100,
-			metamorphTitle: "Storm",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.HairStorm;
-			}
-		});
-
-		public static const BURNING:int = 5;
-		EnumValue.add(Memories, BURNING, "BURNING", {
-			name: "Burning Hair",
-			metamorphCost: 100,
-			metamorphTitle: "Burning",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.HairBurning;
+				return CoC.instance.transformations.TongueElf;
 			}
 		});
   }

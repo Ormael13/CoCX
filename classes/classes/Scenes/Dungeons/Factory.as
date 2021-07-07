@@ -1115,8 +1115,7 @@ use namespace CoC;
 			}
 			//Face
 			if(player.faceType != Face.HUMAN) {
-				outputText("Your facial structure rearranges itself into a normal human visage, exactly like yours was before you came to this horrid place.");
-				player.faceType = Face.HUMAN;
+				CoC.instance.transformations.FaceHuman.applyEffect();
 			}
 			postOmnibusBoon();
 		}

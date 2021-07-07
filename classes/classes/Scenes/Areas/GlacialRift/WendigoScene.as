@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.GlacialRift  
+package classes.Scenes.Areas.GlacialRift
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
@@ -13,11 +13,11 @@ package classes.Scenes.Areas.GlacialRift
 
 	public class WendigoScene extends BaseContent
 	{
-		
-		public function WendigoScene() 
+
+		public function WendigoScene()
 		{
 		}
-		
+
 		public function encounterWendigo():void {
 			clearOutput();
 			outputText("As you explore the rift you hear an unsettling scream in the far distance. Unsure about what that was you keep going along your current path until the scream happens again somewhat closer now. Now persuaded that something is stalking you, you look around for your opponent.\n\n");
@@ -58,7 +58,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("You head back to camp in due haste, not looking back for who is crying out loud for help.\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		public function loseToWendigo():void {
 			clearOutput();
 			if (!player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger)) player.createStatusEffect(StatusEffects.WendigoPsychosis,168,0,0,0);
@@ -86,7 +86,7 @@ package classes.Scenes.Areas.GlacialRift
 			}
 			cleanupAfterCombat();
 		}
-		
+
 		public function winAgainstWendigo():void {
 			clearOutput();
 			outputText("The wendigo falls to the ground too weak to keep on floating.\n\n");
@@ -94,7 +94,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Unable to find the monster anymore, you decide to head back to camp still feeling the unsettling sensation of two hungry eyes fixating you from the depths of the blizzard until the magic of the realm spirits you away.\n\n");
 			cleanupAfterCombat();
 		}
-		
+
 		public function becomeWendigo():void {
 			clearOutput();
 			outputText("Hungry… so damn hungry! You have been "+((flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxLust()) ? "sexually ":"")+"starved for days now!\n\n");
@@ -110,12 +110,13 @@ package classes.Scenes.Areas.GlacialRift
 			player.hairColor = "silver-white";
 			player.coatColor = "snow white";
 			if (player.faceType == Face.ANIMAL_TOOTHS) {
-				CoC.instance.mutations.setFaceType(Face.DEER);
+				CoC.instance.transformations.FaceDeer.applyEffect(false);
 				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.mutations.humanizeSkin();
 				else if (player.hasPlainSkinOnly()) player.skin.growFur({color: player.coatColor}, Skin.COVERAGE_LOW);
 			}
 			else {
-				CoC.instance.mutations.setFaceType(Face.ANIMAL_TOOTHS);
+        outputText("\n\n");
+        CoC.instance.transformations.FaceAnimalTeeth.applyEffect(false);
 				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.mutations.humanizeSkin();
 			}
 			if (player.tailType != Tail.WENDIGO) CoC.instance.mutations.setTailType(Tail.WENDIGO);
@@ -124,7 +125,7 @@ package classes.Scenes.Areas.GlacialRift
 			if (player.legCount != 2) player.legCount = 2;
 			if (player.arms.type != Arms.WENDIGO) CoC.instance.mutations.setArmType(Arms.WENDIGO);
 			if (player.eyes.type != Eyes.DEAD_EYES) CoC.instance.mutations.setEyeTypeAndColor(Eyes.DEAD_EYES, "spectral blue");
-			if (player.tongue.type != Tongue.RAVENOUS_TONGUE) CoC.instance.mutations.setTongueType(Tongue.RAVENOUS_TONGUE);
+			if (player.tongue.type != Tongue.RAVENOUS_TONGUE) CoC.instance.transformations.TongueRavenous.applyEffect(false);
 			if (player.horns.type != Horns.ANTLERS) CoC.instance.mutations.setHornType(Horns.ANTLERS, 30);
 			if (player.ears.type != Ears.DEER) CoC.instance.mutations.setEarType(Ears.DEER);
 			if (player.wings.type != Wings.LEVITATION) CoC.instance.mutations.setWingType(Wings.LEVITATION, "levitation");
@@ -143,7 +144,7 @@ package classes.Scenes.Areas.GlacialRift
 			player.hunger = 80;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 	}
-	
+
 }

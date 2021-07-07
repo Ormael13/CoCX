@@ -255,6 +255,7 @@ public function WitchesSabbathThirdVisitYes():void {
 	mutations.setEyeTypeAndColor(Eyes.INFERNAL,"ember");
 	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes)) player.createStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes, 0, 0, 0, 0);
 	outputText(" In a final spectacular explosion your hair is set ablaze, the fire refusing to be put out until it literally replaces them.");
+	outputText("\n\n");
 	CoC.instance.transformations.HairBurning.applyEffect(false);
 	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningHair, 0, 0, 0, 0);
 	outputText(" Your skin tingle with residual heat as well, progressively and delightfully burning toward a ashen hue.");
@@ -307,6 +308,7 @@ public function WitchesSabbathFourthVisitYeahSure2():void {
 	mutations.setEyeTypeAndColor(Eyes.INFERNAL,"ember");
 	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes)) player.createStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes, 0, 0, 0, 0);
 	outputText(" In a final spectacular explosion your hair is set ablaze, the fire refusing to be put out until it literally replaces them.");
+	outputText("\n\n");
 	CoC.instance.transformations.HairBurning.applyEffect(false);
 	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningHair)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningHair, 0, 0, 0, 0);
 	outputText(" Your skin tingle with residual heat as well, progressively and delightfully burning toward a ashen hue.");

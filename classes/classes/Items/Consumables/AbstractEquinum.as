@@ -204,11 +204,13 @@ public class AbstractEquinum extends Consumable {
 		}
 		//-Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
 		if (changes < changeLimit && (player.hairType == Hair.FEATHER || player.hairType == Hair.QUILL) && rand(3) == 0) {
+			outputText("\n\n");
 			CoC.instance.transformations.HairHuman.applyEffect();
 			changes++;
 		}
 		//-Remove leaf hair (copy for equinum, canine peppers, Labova)
 		if (changes < changeLimit && player.hairType == 7 && rand(4) == 0) {
+			outputText("\n\n");
 			CoC.instance.transformations.HairHuman.applyEffect();
 			changes++;
 		}
@@ -509,10 +511,9 @@ public class AbstractEquinum extends Consumable {
 		}
 		//HorseFace - Req's Fur && Ears
 		if (player.faceType != Face.HORSE && !player.isGargoyle() && player.hasFur() && changes < changeLimit && rand(4) == 0 && player.ears.type == Ears.HORSE) {
-			if (player.faceType == Face.DOG) outputText("\n\nMind-numbing pain shatters through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your dog-like characteristics with those of a horse.  <b>You now have a horse's face.</b>");
-			else outputText("\n\nMind-numbing pain shatters through you as you feel your facial bones breaking and shifting.  You clutch at yourself in agony as you feel your skin crawl and elongate under your fingers.  Eventually the pain subsides, leaving you with a face that seamlessly blends human and equine features.  <b>You have a very equine-looking face.</b>");
+			outputText("\n\n");
+			CoC.instance.transformations.FaceHorse.applyEffect();
 			changes++;
-			mutations.setFaceType(Face.HORSE);
 		}
 		//Fur - if has horsetail && ears and not at changelimit
 		if (!player.hasFur() && !player.isTaur() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.tailType == Tail.HORSE) {

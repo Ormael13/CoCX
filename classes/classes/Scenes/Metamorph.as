@@ -24,6 +24,7 @@ import classes.Items.MutationsHelper;
 
 import classes.GeneticMemories.HairMem;
 import classes.GeneticMemories.FaceMem;
+import classes.GeneticMemories.TongueMem;
 
 use namespace CoC;
 
@@ -51,6 +52,8 @@ use namespace CoC;
 			} else {
 				// loading from old save
 				resetState();
+			}
+
 
 				// migration
 				if (player.hasStatusEffect(StatusEffects.UnlockedHumanHair)) GeneticMemoryStorage["Human Hair"] = true;
@@ -84,7 +87,13 @@ use namespace CoC;
 				if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaFace)) GeneticMemoryStorage["Red Panda Face"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedCheshireFace)) GeneticMemoryStorage["Cheshire Face"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedCheshireSmile)) GeneticMemoryStorage["Cheshire Smile Face"] = true;
-			}
+
+				if (player.hasStatusEffect(StatusEffects.UnlockedHumanTongue)) GeneticMemoryStorage["Human Tongue"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedSnakeTongue)) GeneticMemoryStorage["Snake Tongue"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedDemonTonuge)) GeneticMemoryStorage["Demonic Tongue"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTongue)) GeneticMemoryStorage["Draconic Tongue"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedCatTongue)) GeneticMemoryStorage["Cat Tongue"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedElfTongue)) GeneticMemoryStorage["Elf Tongue"] = true;
 
 		}
 
@@ -257,7 +266,7 @@ private function accessTongueMenu(currentPage: int = 0): void {
 	outputText(title);
 	outputText("What kind of tongue do you want?");
 
-	openPaginatedMenuOld(title, accessTongueMenu, currentPage, Tongue.Types, Tongue.Types[player.tongue.type], Tongue.getTFDescription);
+	openPaginatedMenu(title, accessTongueMenu, currentPage, TongueMem.Memories);
 }
 
 private function accessEarsMenu(currentPage: int = 0): void {
@@ -459,7 +468,6 @@ public static function unlockMetamorph (genMemName: String, doOutput: Boolean = 
 private function accessPage1MetamorphMenu():void {
 	menu();
 
-	addButton(5, "Tongue", accessTongueMenuOld);
 	addButton(6, "Eyes(1)", accessPage1EyesMenu);
 	addButton(7, "Eyes(2)", accessPage2EyesMenu);
 	addButton(8, "Ears(1)", accessPage1EarsMenu);
@@ -468,35 +476,6 @@ private function accessPage1MetamorphMenu():void {
 	addButton(11, "Horns(1)", accessPage1HornsMenu);
 	addButton(12, "Horns(2)", accessPage2HornsMenu);
 	addButton(14, "Back", accessMetamorphMenu);
-}
-
-private function accessTongueMenuOld():void {
-	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedHumanTongue) && player.tongue.type != Tongue.HUMAN && player.soulforce >= 500) addButton(0, "Human", metamorphHumanTongue);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanTongue) && player.tongue.type == Tongue.HUMAN) addButtonDisabled(0, "Human", "You already have human tongue.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanTongue) && player.tongue.type != Tongue.HUMAN && player.soulforce < 500) addButtonDisabled(0, "Human", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedSnakeTongue) && player.tongue.type != Tongue.SNAKE && player.soulforce >= 100) addButton(1, "Snake", metamorphSnakeTongue);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeTongue) && player.tongue.type == Tongue.SNAKE) addButtonDisabled(1, "Snake", "You already have snake tongue.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeTongue) && player.tongue.type != Tongue.SNAKE && player.soulforce < 100) addButtonDisabled(1, "Snake", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(1, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedDemonTonuge) && player.tongue.type != Tongue.DEMONIC && player.soulforce >= 100) addButton(2, "Demon", metamorphTonugeDemonic);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonTonuge) && player.tongue.type == Tongue.DEMONIC) addButtonDisabled(2, "Demon", "You already have demon tongue.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonTonuge) && player.tongue.type != Tongue.DEMONIC && player.soulforce < 100) addButtonDisabled(2, "Demon", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(2, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTongue) && player.tongue.type != Tongue.DRACONIC && player.soulforce >= 100) addButton(3, "Dragon", metamorphDragonTonuge);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTongue) && player.tongue.type == Tongue.DRACONIC) addButtonDisabled(3, "Dragon", "You already have dragon tongue.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicTongue) && player.tongue.type != Tongue.DRACONIC && player.soulforce < 100) addButtonDisabled(3, "Dragon", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(3, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedCatTongue) && player.tongue.type != Tongue.CAT && player.soulforce >= 100) addButton(5, "Cat", metamorphCatTongue);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedCatTongue) && player.tongue.type == Tongue.CAT) addButtonDisabled(5, "Cat", "You already have cat tongue.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedCatTongue) && player.tongue.type != Tongue.CAT && player.soulforce < 100) addButtonDisabled(5, "Cat", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(5, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedElfTongue) && player.tongue.type != Tongue.ELF && player.soulforce >= 100) addButton(6, "Elf", metamorphElfTongue);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedElfTongue) && player.tongue.type == Tongue.ELF) addButtonDisabled(6, "Elf", "You already have elf tongue.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedElfTongue) && player.tongue.type != Tongue.ELF && player.soulforce < 100) addButtonDisabled(6, "Elf", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(6, "???", "You have not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessPage1EyesMenu():void {
 	menu();
@@ -1578,13 +1557,7 @@ private function metamorphCatEyes():void {
 	player.eyes.type = Eyes.CAT_SLITS;
 	doNext(accessPage1EyesMenu);
 }
-private function metamorphCatTongue():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYour tongue suddenly feel weird. You try to stick it out to see what’s going on and discover it changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>");
-	player.tongue.type = Tongue.CAT;
-	doNext(accessTongueMenuOld);
-}
+
 private function metamorphCatArms():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1817,13 +1790,7 @@ private function metamorphHumanEyes():void {
 	player.eyes.type = Eyes.HUMAN;
 	doNext(accessPage1EyesMenu);
 }
-private function metamorphHumanTongue():void {
-	clearOutput();
-	player.soulforce -= 500;
-	outputText("\n\nYou feel something strange inside your face as your tongue shrinks and recedes until it feels smooth and rounded. <b>You realize your tongue has changed back into human tongue!</b>");
-	player.tongue.type = Tongue.HUMAN;
-	doNext(accessTongueMenuOld);
-}
+
 private function metamorphHumanArms():void {
 	clearOutput();
 	player.soulforce -= 500;
@@ -2086,14 +2053,7 @@ private function metamorphOniArms():void {
 	player.arms.type = Arms.ONI;
 	doNext(accessPage2ArmsMenu);
 }
-private function metamorphElfTongue():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.tongue.type != Tongue.HUMAN) outputText("\n\nYou feel something strange inside your face as your tongue shrinks and recedes until it feels smooth and rounded. <b>You realize your tongue has changed back into human tongue!</b>");
-	outputText("\n\nYour throat starts to ache and your tongue tingles. You try to gasp for air, your eyes opening wide in surprise as the voice that exits your throat is entirely changed. Your words are notes, your sentence a melody. Your voice is like music to your ears and you realize it is because your body became closer to that of an elf, adapting even your tongue and voice. <b>You now have the beautiful voice of the elves.</b>");
-	player.tongue.type = Tongue.ELF;
-	doNext(accessTongueMenuOld);
-}
+
 private function metamorphElfEyes():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2266,13 +2226,7 @@ private function metamorphDragonArms():void {
 	player.arms.type = Arms.DRAGON;
 	doNext(accessPage2ArmsMenu);
 }
-private function metamorphDragonTonuge():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer. For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb. You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue. <b>You now have a draconic tongue.</b>");
-	player.tongue.type = Tongue.DRACONIC;
-	doNext(accessTongueMenuOld);
-}
+
 private function metamorphDragonEyes():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2333,14 +2287,7 @@ private function metamorphSnakeEyes():void {
 	player.eyes.type = Eyes.SNAKE;
 	doNext(accessPage1EyesMenu);
 }
-private function metamorphSnakeTongue():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.tongue.type == Tongue.HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.");
-	else outputText("\n\nYour inhuman tongue shortens, pulling tight in the very back of your throat. After a moment the bunched-up tongue-flesh begins to flatten out, then extend forwards. By the time the transformation has finished, your tongue has changed into a long, forked snake-tongue.");
-	player.tongue.type = Tongue.SNAKE;
-	doNext(accessTongueMenuOld);
-}
+
 private function metamorphOrcaBlowhole():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2610,14 +2557,7 @@ private function metamorphWingsDemonicTiny():void {
 	player.wings.desc = "tiny, bat-like";
 	doNext(accessPage1WingsMenu);
 }
-private function metamorphTonugeDemonic():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\n");
-	outputText("Your snake-like tongue tingles, thickening in your mouth until it feels more like your old human tongue, at least for the first few inches. It bunches up inside you, and when you open up your mouth to release it, roughly two feet of tongue dangles out. You find it easy to move and control, as natural as walking. <b>You now have a long demon-tongue.</b>");
-	player.tongue.type = Tongue.DEMONIC;
-	doNext(accessTongueMenuOld);
-}
+
 private function metamorphHornsDemonic():void {
 	clearOutput();
 	player.soulforce -= 100;
