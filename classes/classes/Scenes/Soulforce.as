@@ -2948,23 +2948,23 @@ use namespace CoC;
 				outputText("After session ends you managed to progress in Dao of "+daoname+".");
 				if (player.hasStatusEffect(statusEffect)) {
 					player.addStatusValue(statusEffect, 1, dao);
-					if (player.statusEffectv1(statusEffect) > 830 && player.statusEffectv2(statusEffect) == 4) {
-						player.addStatusValue(statusEffect, 1, -830);
+					if (player.statusEffectv1(statusEffect) > 140 && player.statusEffectv2(statusEffect) == 4) {
+						player.addStatusValue(statusEffect, 1, -140);
 						player.addStatusValue(statusEffect, 2, 1);
 						outputText("\n\n<b>Your comprehension reached 5th layer.</b>");
 					}
-					if (player.statusEffectv1(statusEffect) > 330 && player.statusEffectv2(statusEffect) == 3) {
-						player.addStatusValue(statusEffect, 1, -330);
+					if (player.statusEffectv1(statusEffect) > 100 && player.statusEffectv2(statusEffect) == 3) {
+						player.addStatusValue(statusEffect, 1, -100);
 						player.addStatusValue(statusEffect, 2, 1);
 						outputText("\n\n<b>Your comprehension reached 4th layer.</b>");
 					}
-					if (player.statusEffectv1(statusEffect) > 130 && player.statusEffectv2(statusEffect) == 2) {
-						player.addStatusValue(statusEffect, 1, -130);
+					if (player.statusEffectv1(statusEffect) > 60 && player.statusEffectv2(statusEffect) == 2) {
+						player.addStatusValue(statusEffect, 1, -60);
 						player.addStatusValue(statusEffect, 2, 1);
 						outputText("\n\n<b>Your comprehension reached 3rd layer.</b>");
 					}
-					if (player.statusEffectv1(statusEffect) > 50 && player.statusEffectv2(statusEffect) == 1) {
-						player.addStatusValue(statusEffect, 1, -50);
+					if (player.statusEffectv1(statusEffect) > 40 && player.statusEffectv2(statusEffect) == 1) {
+						player.addStatusValue(statusEffect, 1, -40);
 						player.addStatusValue(statusEffect, 2, 1);
 						outputText("\n\n<b>Your comprehension reached 2nd layer.</b>");
 					}
