@@ -1155,9 +1155,9 @@ public class PerkMenu extends BaseContent {
 
 		function perkOut():void {	//Results of just the perks that are left.
 			for each(var pPerk:PerkType in endlist.sort()) {	//The fuck, this doesn't do it right either.
-				outputText("<b>" + pPerk.name() + ":</b> ");
+				outputText("<b>" + player.getPerk(pPerk).perkName + ":</b> ");
 				try {
-					outputText(pPerk.desc());
+					outputText(player.getPerk(pPerk).perkDesc);
 				} catch (error:Error) {
 					outputText("No description.");
 				}
