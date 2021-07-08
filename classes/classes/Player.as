@@ -2205,6 +2205,37 @@ use namespace CoC;
 				if (gainedWrath > 0) EngineCore.WrathChange(gainedWrath, false);
 			}
 		}
+
+		public function manaShieldAbsorbMagic(damage:Number, display:Boolean = false):Number {
+			return manaShieldAbsorb(damage, display, true);
+		}
+		public function manaShieldAbsorb(damage:Number, display:Boolean = false, magic:Boolean = false):Number{
+			var magicmult:Number = 1;
+			// if magical damage, double efficiency
+			if (magic == true) magicmult /= 2;
+			if (damage * magicmult <= mana) {
+				mana -= (damage * magicmult);
+				if (display) {
+					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
+					else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
+				}
+				game.mainView.statsView.showStatDown('mana');
+				dynStats("lus", 0); //Force display arrow.
+				return 0;
+			}
+			else {
+				var partial:Number = Math.round(mana / magicmult);
+				damage -= partial;
+				if (display) {
+					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + partial + "</font>)</b>");
+					else outputText("<b>(<font color=\"#000080\">Absorbed " + partial + "</font>)</b>");
+				}
+				mana = 0;
+				game.mainView.statsView.showStatDown('mana');
+				dynStats("lus", 0); //Force display arrow.
+				return damage;
+			}
+		}
 		public override function damagePercent():Number {
 			var mult:Number = 100;
 			var armorMod:Number = armorDef;
@@ -2328,14 +2359,8 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && damage < mana) {
-					mana -= damage;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reducePhysDamage(damage);
@@ -2470,14 +2495,8 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceMagicDamage(damage);
@@ -2571,14 +2590,8 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceFireDamage(damage);
@@ -2681,14 +2694,8 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceIceDamage(damage);
@@ -2781,14 +2788,8 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceLightningDamage(damage);
@@ -2873,14 +2874,8 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceDarknessDamage(damage);
@@ -2967,14 +2962,8 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reducePoisonDamage(damage);
@@ -3636,13 +3625,13 @@ use namespace CoC;
 			}
 			if (TopRace == "unicorn") {
 				if (TopScore >= 8) {
-					if (TopScore >= 24) {
+					if (TopScore >= 27) {
 						if (horns.type == Horns.UNICORN) {
 							race = "true unicorn";
 						} else {
 							race = "true bicorn";
 						}
-					} else if (TopScore >= 12) {
+					} else if (TopScore >= 18) {
 						if (horns.type == Horns.UNICORN) {
 							race = "unicorn";
 						} else {
@@ -3668,13 +3657,13 @@ use namespace CoC;
 			}
 			if (TopRace == "alicorn") {
 				if (TopScore >= 8) {
-					if (TopScore >= 24) {
+					if (TopScore >= 27) {
 						if (horns.type == Horns.UNICORN) {
 							race = "true alicorn";
 						} else {
 							race = "true nightmare";
 						}
-					} else if (TopScore >= 12) {
+					} else if (TopScore >= 18) {
 						if (horns.type == Horns.UNICORN) {
 							race = "alicorn";
 						} else {
@@ -8924,7 +8913,7 @@ use namespace CoC;
 			if (eyes.type == Eyes.HUMAN)
 				unicornCounter++;
 			if (wings.type == Wings.NONE)
-				unicornCounter += 2;
+				unicornCounter += 4;
 			if (horns.type == Horns.UNICORN) {
 				if (horns.count < 6)
 					unicornCounter++;
@@ -8949,8 +8938,6 @@ use namespace CoC;
 				if (hasPerk(PerkLib.AvatorOfCorruption))
 					unicornCounter++;
 			}
-			if (wings.type == Wings.FEATHERED_ALICORN)
-				unicornCounter = 0;
 			if (hasFur())
 				unicornCounter++;
 			if (horseCocks() > 0)
@@ -9035,7 +9022,7 @@ use namespace CoC;
 					unicornCounter++;
 			}
 			if (wings.type == Wings.NONE)
-				unicornCounter += 2;
+				unicornCounter += 4;
 			if (horseCocks() > 0)
 				unicornCounter++;
 			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
@@ -9103,7 +9090,7 @@ use namespace CoC;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.FEATHERED_ALICORN)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, unicornHairPalette) && InCollection(coatColor, unicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "blue")
@@ -9117,7 +9104,7 @@ use namespace CoC;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.NIGHTMARE)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, bicornHairPalette) && InCollection(coatColor, bicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "red")
@@ -9186,13 +9173,15 @@ use namespace CoC;
 				alicornCounter++;
 			if (eyes.type == Eyes.HUMAN)
 				alicornCounter++;
+			if (isTaur())
+				alicornCounter++;
 			if (horns.type == Horns.UNICORN) {
 				if (horns.count < 6)
 					alicornCounter++;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.FEATHERED_ALICORN)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, unicornHairPalette) && InCollection(coatColor, unicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "blue")
@@ -9206,7 +9195,7 @@ use namespace CoC;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.NIGHTMARE)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, bicornHairPalette) && InCollection(coatColor, bicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "red")
@@ -12538,15 +12527,15 @@ use namespace CoC;
 				}
 			}//+15/10-20
 			if (unicornScore() >= 8) {
-				if (unicornScore() >= 24) {
+				if (unicornScore() >= 27) {
 					maxStrCap2 += 60;
-					maxTouCap2 += 70;
-					maxSpeCap2 += 95;
-					maxIntCap2 += 120;
-				} else if (unicornScore() >= 12) {
-					maxTouCap2 += 35;
-					maxSpeCap2 += 70;
-					maxIntCap2 += 105;
+					maxTouCap2 += 90;
+					maxSpeCap2 += 115;
+					maxIntCap2 += 140;
+				} else if (unicornScore() >= 18) {
+					maxTouCap2 += 55;
+					maxSpeCap2 += 90;
+					maxIntCap2 += 125;
 				} else {
 					maxTouCap2 += 25;
 					maxSpeCap2 += 40;
@@ -12559,15 +12548,15 @@ use namespace CoC;
 				maxIntCap2 += 75;
 			}//+(15)30/(10-20)30-40
 			if (alicornScore() >= 8) {
-				if (alicornScore() >= 24) {
+				if (alicornScore() >= 27) {
 					maxStrCap2 += 60;
 					maxTouCap2 += 70;
+					maxSpeCap2 += 150;
+					maxIntCap2 += 125;
+				} else if (alicornScore() >= 18) {
+					maxTouCap2 += 55;
 					maxSpeCap2 += 120;
-					maxIntCap2 += 110;
-				} else if (alicornScore() >= 12) {
-					maxTouCap2 += 35;
-					maxSpeCap2 += 70;
-					maxIntCap2 += 75;
+					maxIntCap2 += 95;
 				} else {
 					maxTouCap2 += 15;
 					maxSpeCap2 += 50;
@@ -15387,4 +15376,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

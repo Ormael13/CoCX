@@ -3700,6 +3700,12 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsWaveOfEcstasy, 0, 0, 0, 0);
             return;
         }
+        //Smart enough for ice rain and doesnt have it
+        if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Rain.</b>");
+            player.createStatusEffect(StatusEffects.KnowsIceRain, 0, 0, 0, 0);
+            return;
+        }
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) {
 			//Smart enough for Bone spirit and doesnt have it
 			if (player.inte >= 100 &&  !player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
@@ -3790,12 +3796,6 @@ public final class Mutations extends MutationsHelper {
                 player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
                 return;
             }*/
-            //Smart enough for fire storm and doesnt have it
-            if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Fire Storm.</b>");
-                player.createStatusEffect(StatusEffects.KnowsFireStorm, 0, 0, 0, 0);
-                return;
-            }
             //Smart enough for (single target ice spell) and doesnt have it (player.inte >= 120)
             /*if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
@@ -3814,19 +3814,13 @@ public final class Mutations extends MutationsHelper {
                 player.createStatusEffect(StatusEffects.KnowsClearMind, 0, 0, 0, 0);
                 return;
             }*/
-            //Smart enough for ice rain and doesnt have it
-            if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Rain.</b>");
-                player.createStatusEffect(StatusEffects.KnowsIceRain, 0, 0, 0, 0);
-                return;
-            }
             //Smart enough for mana shield and doesnt have it
-            if (player.inte >= 90 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
+            if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
                 outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
                 player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
             }
 			//Smart enough for nosferatu and doesnt have it
-			if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
+			if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Nosferatu.</b>");
 				player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
 				return;
@@ -3902,6 +3896,12 @@ public final class Mutations extends MutationsHelper {
         if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
             outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
             player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
+        }
+        //Smart enough for fire storm and doesnt have it
+        if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Fire Storm.</b>");
+            player.createStatusEffect(StatusEffects.KnowsFireStorm, 0, 0, 0, 0);
+            return;
         }
         //Smart enough for Mental Shield and doesnt have it
         /*if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
@@ -11613,7 +11613,7 @@ public final class Mutations extends MutationsHelper {
         //-60 fatigue, -2 libido, -20 lust]
         fatigue(-180);
         dynStats("lus", -90, "cor", -2);
-        player.addCurse("lib", -2, 1);
+        player.addCurse("lib", 2, 1);
         player.refillHunger(40);
     }
 

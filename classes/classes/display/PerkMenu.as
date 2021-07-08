@@ -1012,7 +1012,7 @@ public class PerkMenu extends BaseContent {
 			else if (ptype.available(player)) color=darkTheme()?'#44cc44':'#228822'; // can take on next lvl
 			else color=darkTheme()?'#ffcc44':'#aa8822'; // requirements not met
 
-			outputText("<font color='" +color +"'><b>"+ptype.name+"</b></font>: ");
+			outputText("<font color='" +color +"'><b>"+ptype.name()+"</b></font>: ");
 			outputText(pclass?ptype.desc(pclass):ptype.longDesc);
 			if (!pclass && ptype.requirements.length>0) {
 				var reqs:Array = [];
@@ -1128,7 +1128,7 @@ public class PerkMenu extends BaseContent {
 					}
 				}
 				if (requirelen == pPerk.requirements.len){
-					outputText(pPerk.name + "shouldn't be here. This is a bug. Please report it.");
+					outputText(pPerk.name() + "shouldn't be here. This is a bug. Please report it.");
 				}
 			}
 			if (change) {	//This feels terrible. But I suppose it works as a workaround to me not being able to directly splice arrays, since it seems to fuck up in odd ways.

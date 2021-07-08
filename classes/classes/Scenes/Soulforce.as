@@ -2928,15 +2928,15 @@ use namespace CoC;
 			if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) outputText("Darkness: "+player.statusEffectv1(StatusEffects.DaoOfDarkness)+"\n");
 			if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) outputText("Poison: "+player.statusEffectv1(StatusEffects.DaoOfPoison)+"\n");
 			menu();
-			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 3) addButtonDisabled(0, "Fire", "You reached limit of comprehending this Dao.");
+			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 5) addButtonDisabled(0, "Fire", "You reached limit of comprehending this Dao.");
 			else addButton(0, "Fire", DaoContemplationsEffect, StatusEffects.DaoOfFire, "Fire");
-			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 3) addButtonDisabled(1, "Ice", "You reached limit of comprehending this Dao.");
+			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 5) addButtonDisabled(1, "Ice", "You reached limit of comprehending this Dao.");
 			else addButton(1, "Ice", DaoContemplationsEffect, StatusEffects.DaoOfIce, "Ice");
-			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 3) addButtonDisabled(2, "Lightning", "You reached limit of comprehending this Dao.");
+			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 5) addButtonDisabled(2, "Lightning", "You reached limit of comprehending this Dao.");
 			else addButton(2, "Lightning", DaoContemplationsEffect, StatusEffects.DaoOfLightning, "Lightning");
-			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 3) addButtonDisabled(3, "Darkness", "You reached limit of comprehending this Dao.");
+			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 5) addButtonDisabled(3, "Darkness", "You reached limit of comprehending this Dao.");
 			else addButton(3, "Darkness", DaoContemplationsEffect, StatusEffects.DaoOfDarkness, "Darkness");
-			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 3) addButtonDisabled(4, "Poison", "You reached limit of comprehending this Dao.");
+			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 5) addButtonDisabled(4, "Poison", "You reached limit of comprehending this Dao.");
 			else addButton(4, "Poison", DaoContemplationsEffect, StatusEffects.DaoOfPoison, "Poison");
 			addButton(14, "Back", accessSoulforceMenu);
 		}
@@ -2948,18 +2948,28 @@ use namespace CoC;
 				outputText("After session ends you managed to progress in Dao of "+daoname+".");
 				if (player.hasStatusEffect(statusEffect)) {
 					player.addStatusValue(statusEffect, 1, dao);
-					if (player.statusEffectv1(statusEffect) > 20 && player.statusEffectv2(statusEffect) == 0) {
-						player.addStatusValue(statusEffect, 1, -20);
+					if (player.statusEffectv1(statusEffect) > 140 && player.statusEffectv2(statusEffect) == 4) {
+						player.addStatusValue(statusEffect, 1, -140);
+						player.addStatusValue(statusEffect, 2, 1);
+						outputText("\n\n<b>Your comprehension reached 5th layer.</b>");
+					}
+					if (player.statusEffectv1(statusEffect) > 100 && player.statusEffectv2(statusEffect) == 3) {
+						player.addStatusValue(statusEffect, 1, -100);
+						player.addStatusValue(statusEffect, 2, 1);
+						outputText("\n\n<b>Your comprehension reached 4th layer.</b>");
+					}
+					if (player.statusEffectv1(statusEffect) > 60 && player.statusEffectv2(statusEffect) == 2) {
+						player.addStatusValue(statusEffect, 1, -60);
 						player.addStatusValue(statusEffect, 2, 1);
 						outputText("\n\n<b>Your comprehension reached 3rd layer.</b>");
 					}
-					if (player.statusEffectv1(statusEffect) > 50 && player.statusEffectv2(statusEffect) == 1) {
-						player.addStatusValue(statusEffect, 1, -50);
+					if (player.statusEffectv1(statusEffect) > 40 && player.statusEffectv2(statusEffect) == 1) {
+						player.addStatusValue(statusEffect, 1, -40);
 						player.addStatusValue(statusEffect, 2, 1);
 						outputText("\n\n<b>Your comprehension reached 2nd layer.</b>");
 					}
-					if (player.statusEffectv1(statusEffect) > 130 && player.statusEffectv2(statusEffect) == 2) {
-						player.addStatusValue(statusEffect, 1, -130);
+					if (player.statusEffectv1(statusEffect) > 20 && player.statusEffectv2(statusEffect) == 0) {
+						player.addStatusValue(statusEffect, 1, -20);
 						player.addStatusValue(statusEffect, 2, 1);
 						outputText("\n\n<b>Your comprehension reached 1st layer.</b>");
 					}
