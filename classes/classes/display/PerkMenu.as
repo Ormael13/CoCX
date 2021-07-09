@@ -942,9 +942,9 @@ public class PerkMenu extends BaseContent {
 		}
 		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
 			if (player.hasPerk(perkName[0])) {	//Just checking if you have the base.
-				outputText("\n" + perkName[0].name + ": <font color=\"#008000\">Acquired.</font>");
+				outputText("\n" + perkName[0].name() + ": <font color=\"#008000\">Acquired.</font>");
 			} else {
-				outputText("\n" + perkName[0].name + ": <font color=\"#800000\">Missing.</font>");
+				outputText("\n" + perkName[0].name() + ": <font color=\"#800000\">Missing.</font>");
 			}
 			outputText("\nTier: " + String(perkCount) + " of " + String(perkName.length) + ".");
 			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
@@ -982,7 +982,7 @@ public class PerkMenu extends BaseContent {
 		}
 		else { //Help Off
 			if (player.hasPerk(perkName[0])) {
-				outputText("\n" + perkName[0].name + ": <font color=\"#008000\">Acquired.</font>");
+				outputText("\n" + perkName[0].name() + ": <font color=\"#008000\">Acquired.</font>");
 				outputText("\nTier: " + String(perkCount));
 				if (!perkCount == 0){	//De-sync between desc.
 					perkCount -= 1;
@@ -999,7 +999,7 @@ public class PerkMenu extends BaseContent {
 	}
 
 	public function perkDatabase(page:int=0, count:int=20):void {
-		var allPerks:Array = PerkTree.obtainablePerks();
+		var allPerks:Array = PerkTree.obtainablePerks().sort();
 		clearOutput();
 		var perks:Array = allPerks.slice(page*count,(page+1)*count);
 		displayHeader("All Perks ("+(1+page*count)+"-"+(page*count+perks.length)+
