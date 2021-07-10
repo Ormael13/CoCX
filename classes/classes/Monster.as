@@ -1795,7 +1795,8 @@ import flash.utils.getQualifiedClassName;
 			if (player.hasPerk(PerkLib.DarkenedKitsune)>0) {//&& rand(4) ==0){
 				if (SceneLib.darkenedKitsuneScene.darkKitsuneCombat()) EngineCore.outputText("\n\n")
 			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug) || hasStatusEffect(StatusEffects.MysticWeb)) {
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)
+			|| hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug) || hasStatusEffect(StatusEffects.MysticWeb)) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
@@ -1853,9 +1854,11 @@ import flash.utils.getQualifiedClassName;
 				EngineCore.outputText("" + capitalA + short + " struggle to get free from your web!");
 				if (statusEffectv1(StatusEffects.MysticWeb) <= 0) {
 					EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove you break off your webbing.");
+					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 					removeStatusEffect(StatusEffects.MysticWeb);
 				}
 				addStatusValue(StatusEffects.MysticWeb, 1, -1);
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
 				return false;
 			}
 			if (hasStatusEffect(StatusEffects.Pounce)) {
@@ -1916,9 +1919,11 @@ import flash.utils.getQualifiedClassName;
 			EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
 			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
 				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 				removeStatusEffect(StatusEffects.ConstrictedScylla);
 			}
 			addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
+			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
 			return false;
 			}
 			else if (player.lowerBody == LowerBody.CANCER) {
@@ -1934,9 +1939,22 @@ import flash.utils.getQualifiedClassName;
 			EngineCore.outputText("" + capitalA + short + " struggle in your fluid form kicking and screaming to try and get out.");
 			if (statusEffectv1(StatusEffects.GooEngulf) <= 0) {
 				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your slimy body to handle, breaking free of your fluids.");
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 				removeStatusEffect(StatusEffects.GooEngulf);
 			}
 			addStatusValue(StatusEffects.GooEngulf, 1, -1);
+			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+			return false;
+			}
+			else if (hasStatusEffect(StatusEffects.ConstrictedWhip)) {
+			EngineCore.outputText("" + capitalA + short + " pushes, twisting and writhing in an effort to escape from your whip's tight bonds.");
+			if (statusEffectv1(StatusEffects.ConstrictedWhip) <= 0) {
+				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your whip to handle, breaking free of your tightly bound whip coils.");
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
+				removeStatusEffect(StatusEffects.ConstrictedWhip);
+			}
+			addStatusValue(StatusEffects.ConstrictedWhip, 1, -1);
+			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
 			return false;
 			}
 			else if (hasStatusEffect(StatusEffects.EmbraceVampire)) {
@@ -1961,11 +1979,17 @@ import flash.utils.getQualifiedClassName;
 			EngineCore.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
 			if (statusEffectv1(StatusEffects.Constricted) <= 0) {
 				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 				removeStatusEffect(StatusEffects.Constricted);
 			}
 			addStatusValue(StatusEffects.Constricted, 1, -1);
+			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
 			return false;
 			}
+		}
+		private function ControlFreakStacking():void {
+			if (player.hasStatusEffect(StatusEffects.ControlFreak)) player.addStatusValue(StatusEffects.ControlFreak, 1, 0.5);
+			else player.createStatusEffect(StatusEffects.ControlFreak, 1.5, 0, 0, 0);
 		}
 
 		/**
@@ -3368,3 +3392,4 @@ import flash.utils.getQualifiedClassName;
 		}
 	}
 }
+

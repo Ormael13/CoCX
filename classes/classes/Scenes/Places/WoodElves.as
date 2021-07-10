@@ -14,8 +14,8 @@
 	import classes.BodyParts.Tongue;
 	import classes.BodyParts.Wings;
 	import classes.GlobalFlags.kFLAGS;
-import classes.Items.Armors.Nothing;
-import classes.Scenes.SceneLib;
+	import classes.Items.Armors.Nothing;
+	import classes.Scenes.SceneLib;
 	import classes.internals.SaveableState;
 
 	public class WoodElves extends BaseContent implements SaveableState{
@@ -603,10 +603,10 @@ import classes.Scenes.SceneLib;
 			else if (!player.hasVagina()) addButtonDisabled(1,"Tent","You need to be female or herm in order to use the tents.");
 			//addButton(2, "Fletching table", Fletching);
 			addButtonDisabled(2,"Fletching table","Under Construction.");
-			//addButton(3, "Elenwen", Elenwen);
-			//if (hasTrainedToday) addButtonDisabled(3,"Elenwen","You need a break from your recent training before you can train again.");
-		    //else if (!player.isElf()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
-			//else if (!player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train with... it's not like archery is a girl only thing but considering the fact that she's practicing naked...");
+			addButton(3, "Elenwen", Elenwen);
+			if (hasTrainedToday) addButtonDisabled(3,"Elenwen","You need a break from your recent training before you can train again.");
+		    else if (!player.isElf()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
+			else if (!player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train with... it's not like archery is a girl only thing but considering the fact that she's practicing naked...");
 			addButtonDisabled(3, "Elenwen", "Under Review.");
 			addButton(4, "Alyssa", Alyssa);
 			if (hasTrainedToday) addButtonDisabled(4,"Alyssa","You need a break from your recent training before you can train again.");

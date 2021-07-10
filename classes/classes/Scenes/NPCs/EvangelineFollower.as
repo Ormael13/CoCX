@@ -153,7 +153,10 @@ public function meetEvangeline():void {
 	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5 && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!");
 	addButton(4, "Alchemy", evangelineAlchemyMenu).hint("Ask Evangeline to make some transformation item.");
 	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) {
+		addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");
+		addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
+	}
 	if (player.hasPerk(PerkLib.WendigoCurse)) {
 		if (player.perkv1(PerkLib.WendigoCurse) > 0) {
 			if (player.hasItem(consumables.PURPEAC, 5) && player.hasItem(consumables.PPHILTR, 5)) addButton(11, "Wendigo", curingWendigo);
@@ -876,6 +879,13 @@ private function recivingCraftedSoulGem():void {
 	if (flags[kFLAGS.GARGOYLE_QUEST] == 3) flags[kFLAGS.GARGOYLE_QUEST]++;
 	player.removeStatusEffect(StatusEffects.SoulGemCrafting);
 	inventory.takeItem(useables.SOULGEM, meetEvangeline);
+}
+
+private function InternalMutations():void {
+	clearOutput();
+	outputText("Placeholder Text.");
+	menu();
+	addButton(14, "Back", meetEvangeline);
 }
 
 private function Experiments():void {

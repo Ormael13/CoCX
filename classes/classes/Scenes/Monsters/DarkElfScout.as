@@ -8,18 +8,17 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
-import classes.Scenes.Places.HeXinDao;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class DarkElfScout extends Monster
 	{
 		public var darkelf:DarkElfScene = new DarkElfScene();
-		public var golems:HeXinDao = new HeXinDao();
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
-				golems.gaunletchallange1postfight();
+				SceneLib.hexindao.gaunletchallange1postfight();
 			}
 			else darkelf.wonWithDarkElf();
 		}

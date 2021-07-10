@@ -10434,6 +10434,8 @@ use namespace CoC;
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobBerserker))
 				prestigeJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobBindmaster))
+				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobDruid))
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobGreySage))
@@ -15223,6 +15225,13 @@ use namespace CoC;
 			if (hasPerk(PerkLib.MinotaurTesticles)) max += (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.MinotaurTesticlesFinalForm)) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			return max;
+		}
+
+		public function sadomasochismBoost():Number {
+			var sadomasochismBoost:Number = 1;
+			if (HP < maxHP() * 0.25) sadomasochismBoost += 0.2;
+			if (lust > maxLust() * 75) sadomasochismBoost += 0.2;
+			return sadomasochismBoost;
 		}
 
 		public function additionalTransformationChances():Number {

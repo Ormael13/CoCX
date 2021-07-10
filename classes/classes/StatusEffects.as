@@ -708,6 +708,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Concentration:StatusEffectType      	= mk("Concentration");
 		public static const Constricted:StatusEffectType        	= mk("Constricted");
 		public static const ConstrictedScylla:StatusEffectType  	= mk("Constricted Scylla");
+		public static const ConstrictedWhip:StatusEffectType  		= mk("Constricted Whip");
 		public static const CoonWhip:StatusEffectType           	= mk("Coon Whip");
 		public static const Counter:StatusEffectType            	= mk("Counter");
 		public static const CreepingDoom:StatusEffectType       	= mk("Creeping doom");
@@ -863,6 +864,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CompBoostingPCArmorValue:StatusEffectType  = mkCombat("Companion Boosting PC Armor Value");
 		public static const Confusion:StatusEffectType                 = mkCombat("Confusion");
 		public static const ConsumingDarkness:StatusEffectType         = mkCombat("Consuming darkness");
+		public static const ControlFreak:StatusEffectType			   = mkCombat("Control Freak");
 		public static const CouatlHurricane:StatusEffectType           = mkCombat("Coualt Hurricane");
 		public static const CounterAction:StatusEffectType             = mkCombat("Counter Action");
 		public static const CounterEclipsingShadow:StatusEffectType    = mkCombat("Counter Eclipsing Shadow");
@@ -1163,4 +1165,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}
