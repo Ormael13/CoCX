@@ -5,19 +5,19 @@ public class Eyes extends BodyPart {
 	/**
 	 * Entry properties:
 	 * - value: numerical id (0, 1)
-	 * - id: name of the constant ("HUMAN", "FOUR_SPIDER_EYES")
+	 * - id: name of the constant ("HUMAN", "SPIDER")
 	 * - name: human-readable default name, ("human", "4 spider")
 	 */
 	public static var Types:/*EnumValue*/Array = [];
 
 	public static const HUMAN:int                = 0;
 	EnumValue.add(Types, HUMAN, "HUMAN", {name:"human"})
-	public static const FOUR_SPIDER_EYES:int     = 1;
-	EnumValue.add(Types, FOUR_SPIDER_EYES, "FOUR_SPIDER_EYES", {name:"six spider"})
+	public static const SPIDER:int     = 1;
+	EnumValue.add(Types, SPIDER, "SPIDER", {name:"six spider"})
 	public static const BLACK_EYES_SAND_TRAP:int = 2;
 	EnumValue.add(Types, BLACK_EYES_SAND_TRAP, "BLACK_EYES_SAND_TRAP", {name:"sandtrap"})
-	public static const CAT_SLITS:int            = 3;
-	EnumValue.add(Types, CAT_SLITS, "CAT_SLITS", {name:"cat"})
+	public static const CAT:int            = 3;
+	EnumValue.add(Types, CAT, "CAT", {name:"cat"})
 	public static const GORGON:int               = 4;
 	EnumValue.add(Types, GORGON, "GORGON", {name:"snake"})
 	public static const FENRIR:int               = 5;
@@ -26,12 +26,12 @@ public class Eyes extends BodyPart {
 	EnumValue.add(Types, MANTICORE, "MANTICORE", {name:"manticore"})
 	public static const FOX:int                  = 7;
 	EnumValue.add(Types, FOX, "FOX", {name:"fox"})
-	public static const REPTILIAN:int            = 8;
-	EnumValue.add(Types, REPTILIAN, "REPTILIAN", {name:"reptilian"})
+	public static const LIZARD:int            = 8;
+	EnumValue.add(Types, LIZARD, "LIZARD", {name:"lizard"})
 	public static const SNAKE:int                = 9;
 	EnumValue.add(Types, SNAKE, "SNAKE", {name:"snake"})
-	public static const DRAGON:int               = 10;
-	EnumValue.add(Types, DRAGON, "DRAGON", {name:"dragon"})
+	public static const DRACONIC:int               = 10;
+	EnumValue.add(Types, DRACONIC, "DRACONIC", {name:"draconic"})
 	public static const DEVIL:int                = 11;
 	EnumValue.add(Types, DEVIL, "DEVIL", {name:"devil"})
 	public static const ONI:int                  = 12;
@@ -88,8 +88,8 @@ public class Eyes extends BodyPart {
 	EnumValue.add(Types, RATATOSKR, "RATATOSKR", {name:"ratatoskr"})
 	public static const FIENDISH:int             = 38;
 	EnumValue.add(Types, FIENDISH, "FIENDISH", {name:"fiendish"})
-	public static const DEAD_EYES:int            = 39;
-	EnumValue.add(Types, DEAD_EYES, "DEAD_EYES", {name:"dead"})
+	public static const DEAD:int            = 39;
+	EnumValue.add(Types, DEAD, "DEAD", {name:"dead"})
 
 	public var count:int;
 	public var colour:String = "brown";

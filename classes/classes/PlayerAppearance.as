@@ -1062,7 +1062,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.horns.type == Horns.RHINO) {
 			if (player.horns.count >= 2) {
-				if (player.faceType == Face.RHINO)
+				if (CoC.instance.transformations.FaceRhino.isPresent())
 					outputText(" A second horns sprouts from your forehead just above the horns on your nose.");
 				else
 					outputText(" A single horns sprouts from your forehead. It is conical and resembles a rhino's horns.");
@@ -1181,11 +1181,11 @@ public class PlayerAppearance extends BaseContent {
 	}
 	public function describeEyes():void {
 		var eyeType:Number = player.eyes.type;
-		if(eyeType == Eyes.FOUR_SPIDER_EYES)
+		if(eyeType == Eyes.SPIDER)
 			outputText(" In addition to your primary two [eyecolor] eyes, you have a second, smaller pair on your forehead.");
 		else if(eyeType == Eyes.BLACK_EYES_SAND_TRAP)
 			outputText(" Your eyes are solid spheres of inky, alien darkness.");
-		else if(eyeType == Eyes.CAT_SLITS)
+		else if(eyeType == Eyes.CAT)
 			outputText(" Your [eyecolor] eyes have vertically slit like those of cat.");
 		else if(eyeType == Eyes.CANCER)
 			outputText(" Your eyes look human at first glance, save for their natural [eyecolor] irises covered by a completely transparent layer of protective tissue to protect them against things such as salt and sand in the water.");
@@ -1199,11 +1199,11 @@ public class PlayerAppearance extends BaseContent {
 			outputText(" Your [eyecolor] eyes looks like those of a fox with a slit in the middle.");
 		else if(eyeType == Eyes.FIENDISH)
 			outputText(" Your [eyecolor] eyes looks like those of a fiend with a slit in the middle.");
-		else if(eyeType == Eyes.REPTILIAN)
+		else if(eyeType == Eyes.LIZARD)
 			outputText(" Your eyes looks like those of a reptile with [eyecolor] irises and a slit.");
 		else if(eyeType == Eyes.SNAKE)
 			outputText(" Your [eyecolor] eyes have slitted pupils like that of a snake.");
-		else if(eyeType == Eyes.DRAGON)
+		else if(eyeType == Eyes.DRACONIC)
 			outputText(" Your [eyecolor] eyes have slitted pupils like that of a dragon.");
 		else if(player.eyes.type == Eyes.DEVIL)
 			outputText(" Your eyes look fiendish, with their black sclera and glowing [eyecolor] iris.");
@@ -1275,7 +1275,7 @@ public class PlayerAppearance extends BaseContent {
 		else if(eyeType == Eyes.GREMLIN){
 			outputText(" Your [eyecolor] eyes looks human enough though your eyelids are dark, just as if you very tired althought it's more likely traces of your demonic corruption.");
 		}
-		else if(eyeType == Eyes.DEAD_EYES){
+		else if(eyeType == Eyes.DEAD){
 			outputText(" Your eyes look dead, but the pupils glow in the dark with a [eyecolor].");
 		}
 		else outputText(" Your eyes are [eyecolor].");

@@ -202,13 +202,13 @@
 			player.ears.type = Ears.ELVEN;
 			player.eyes.type = Eyes.ELF;
       CoC.instance.transformations.FaceElf.applyEffect(false);
-			player.tongue.type = Tongue.ELF;
+			CoC.instance.transformations.TongueElf.applyEffect(false);
 			player.arms.type = Arms.ELF;
 			player.lowerBody = LowerBody.ELF;
       outputText("\n\n");
       CoC.instance.transformations.HairSilky.applyEffect(false);
 			player.wings.type = Wings.NONE;
-			player.eyes.colour = "light green";
+			CoC.instance.transformations.EyesChangeColor(["light green"]).applyEffect(false);
 			player.skin.base.color = "light";
 			player.skinAdj = "flawless";
 			player.skinType = Skin.PLAIN;

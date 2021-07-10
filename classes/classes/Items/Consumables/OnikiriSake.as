@@ -165,12 +165,14 @@ public class OnikiriSake extends Consumable {
 			changes++;
 		}
 		//Eyes
-		if ((player.horns.type == Horns.ONI_X2 || player.horns.type == Horns.ONI)
-		    && (player.eyes.type != Eyes.ONI || !InCollection(player.eyes.colour, Mutations.oniEyeColors)) && changes < changeLimit && rand(3) == 0) {
-			var colorEyes:String;
-			colorEyes = randomChoice(Mutations.oniEyeColors);
-			mutations.setEyeTypeAndColor(Eyes.ONI,colorEyes);
-			outputText("\n\nYou feel something fundamental change in your sight when you go check yourself in a puddle you notice your iris now are <b>[eyecolor] just like that of an Oni with a slit at the center giving them a fiendish outlook.</b>");
+		if ((player.horns.type == Horns.ONI_X2 || player.horns.type == Horns.ONI) && (!CoC.instance.transformations.EyesOni.isPresent() || !CoC.instance.transformations.EyesOniColors.isPresent()) && changes < changeLimit && rand(3) == 0) {
+			if (!CoC.instance.transformations.EyesOniColors.isPresent()) {
+				CoC.instance.transformations.EyesOniColors.applyEffect();
+			}
+
+			if (!CoC.instance.transformations.EyesOni.isPresent()) {
+				CoC.instance.transformations.EyesOni.applyEffect();
+			}
 			changes++;
 		}
 		//Ears

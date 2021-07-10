@@ -18,6 +18,7 @@ package classes.GeneticMemories {
 
 		public static const [NAME HERE]:int = [ID HERE];
 		EnumValue.add(Memories, [NAME HERE], "[NAME HERE]", {
+			name: [Full Name to identify],
 			metamorphCost: [Cost Here],
 			metamorphTitle: "[Race Here]",
 			transformation: function(): Transformation {

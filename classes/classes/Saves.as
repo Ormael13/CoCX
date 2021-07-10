@@ -2116,9 +2116,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.eyes.type = saveFile.data.eyeType;
 		if (saveFile.data.eyeColor == undefined)
-			player.eyes.colour = "brown";
+			CoC.instance.transformations.EyesChangeColor(["brown"]).applyEffect(false);
 		else
-			player.eyes.colour = saveFile.data.eyeColor;
+			CoC.instance.transformations.EyesChangeColor([saveFile.data.eyeColor]).applyEffect(false);
 		//BEARS
 		if (saveFile.data.beardLength == undefined)
 			player.beardLength = 0;

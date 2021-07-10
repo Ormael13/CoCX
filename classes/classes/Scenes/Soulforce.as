@@ -414,6 +414,10 @@ use namespace CoC;
 				Metamorph.GeneticMemoryStorage[faceMem.name] = true;
 			}
 
+			for each (var eyesMem: * in EyesMem.Memories) {
+				Metamorph.GeneticMemoryStorage[eyesMem.name] = true;
+			}
+
 			if (!player.hasStatusEffect(StatusEffects.UnlockedFur)) player.createStatusEffect(StatusEffects.UnlockedFur,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedScales)) player.createStatusEffect(StatusEffects.UnlockedScales,0,0,0,0);
 			if (!player.hasStatusEffect(StatusEffects.UnlockedChitin)) player.createStatusEffect(StatusEffects.UnlockedChitin,0,0,0,0);

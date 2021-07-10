@@ -269,10 +269,10 @@ public class MaraFruit extends Consumable{
 			changes++;
 			mutations.setEarType(Ears.ELFIN);
 		}
-		var plant_eyeColor:Array = ["light purple", "green", "light green"];
-		if ((!InCollection(player.eyes.colour, plant_eyeColor) && changes < changeLimit && rand(4) == 0)) {
-			player.eyes.colour = randomChoice(plant_eyeColor);
-			outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady yourself and open your eyes, you realize something seems different, as if the nerves have been optimized.  Your vision has been changed somehow absorbing more light then normal. When you go look into a water puddle you notice your the changes in full. <b>Your eyes color has changed to "+player.eyes.colour+".</b>");
+
+		if (!CoC.instance.transformations.EyesPlantColors.isPresent() && changes < changeLimit && rand(4) == 0) {
+			CoC.instance.transformations.EyesPlantColors.applyEffect(false);
+			outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady yourself and open your eyes, you realize something seems different, as if the nerves have been optimized.  Your vision has been changed somehow absorbing more light then normal. When you go look into a water puddle you notice your the changes in full. <b>Your eyes color has changed to [eyecolor].</b>");
 			changes++;
 		}
 		//Face

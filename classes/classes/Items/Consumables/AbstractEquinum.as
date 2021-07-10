@@ -499,14 +499,23 @@ public class AbstractEquinum extends Consumable {
 			}
 		}
 		//Remove odd eyes
-		if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN) {
-			mutations.humanizeEyes();
+		if (changes < changeLimit && rand(4) == 0 && !CoC.instance.transformations.EyesHuman.isPresent()) {
+			outputText("\n\n");
+			CoC.instance.transformations.EyesHuman.applyEffect();
 			changes++;
 		}
-		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && player.eyes.colour != "blue" && player.eyes.colour != "red") {
-			if (player.cor >= 50) mutations.setEyeTypeAndColor(Eyes.HUMAN, "red");
-			else mutations.setEyeTypeAndColor(Eyes.HUMAN, "blue");
-			outputText("\n\nSomething weird is happening in your eyes, when you go to see what is going on you discover your irises turned [eyecolor]!");
+		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && !CoC.instance.transformations.EyesChangeColor(["blue", "red"]).isPresent()) {
+			outputText("\n\n");
+			if (player.cor >= 50) {
+				CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect();
+			} else {
+				CoC.instance.transformations.EyesChangeColor(["blue"]).applyEffect();
+			}
+
+			if (!CoC.instance.transformations.EyesHuman.isPresent()) {
+				outputText("\n\n");
+				CoC.instance.transformations.EyesHuman.applyEffect();
+			}
 			changes++;
 		}
 		//HorseFace - Req's Fur && Ears

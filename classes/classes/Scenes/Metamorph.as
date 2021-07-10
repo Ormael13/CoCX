@@ -22,9 +22,7 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.Items.MutationsHelper;
 
-import classes.GeneticMemories.HairMem;
-import classes.GeneticMemories.FaceMem;
-import classes.GeneticMemories.TongueMem;
+import classes.GeneticMemories.*;
 
 use namespace CoC;
 
@@ -54,7 +52,18 @@ use namespace CoC;
 				resetState();
 			}
 
+				// resetState();
 
+				// GeneticMemoryStorage["Human Hair"] = true;
+				// GeneticMemoryStorage["Storm Hair"] = true;
+				// GeneticMemoryStorage["Human Face"] = true;
+				// GeneticMemoryStorage["Human Tongue"] = true;
+				// GeneticMemoryStorage["Vampire Face"] = true;
+				// GeneticMemoryStorage["Vampire Eyes"] = true;
+				// GeneticMemoryStorage["Fox Eyes"] = true;
+				// GeneticMemoryStorage["Elf Tongue"] = true;
+
+				// TODO: Move migration inside else after finished
 				// migration
 				if (player.hasStatusEffect(StatusEffects.UnlockedHumanHair)) GeneticMemoryStorage["Human Hair"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair)) GeneticMemoryStorage["Feather Hair"] = true;
@@ -87,6 +96,24 @@ use namespace CoC;
 				if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaFace)) GeneticMemoryStorage["Red Panda Face"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedCheshireFace)) GeneticMemoryStorage["Cheshire Face"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedCheshireSmile)) GeneticMemoryStorage["Cheshire Smile Face"] = true;
+
+				if (player.hasStatusEffect(StatusEffects.UnlockedHumanEyes)) GeneticMemoryStorage["Human Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes)) GeneticMemoryStorage["Spider Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedCatEyes)) GeneticMemoryStorage["Cat Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedGorgonEyes)) GeneticMemoryStorage["Gorgon Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedManticoreEyes)) GeneticMemoryStorage["Manticore Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedFoxEyes)) GeneticMemoryStorage["Fox Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedLizardEyes)) GeneticMemoryStorage["Lizard Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEyes)) GeneticMemoryStorage["Snake Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEyes)) GeneticMemoryStorage["Draconic Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedDevilEyes)) GeneticMemoryStorage["Devil Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedOniEyes)) GeneticMemoryStorage["Oni Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedElfEyes)) GeneticMemoryStorage["Elf Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes)) GeneticMemoryStorage["Raiju Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedVampireEyes)) GeneticMemoryStorage["Vampire Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes)) GeneticMemoryStorage["Infernal Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedOrcEyes)) GeneticMemoryStorage["Orc Eyes"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEyes)) GeneticMemoryStorage["Displacer Eyes"] = true;
 
 				if (player.hasStatusEffect(StatusEffects.UnlockedHumanTongue)) GeneticMemoryStorage["Human Tongue"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedSnakeTongue)) GeneticMemoryStorage["Snake Tongue"] = true;
@@ -256,7 +283,7 @@ private function accessEyesMenu(currentPage: int = 0): void {
 	outputText(title);
 	outputText("What kind of eyes do you want?");
 
-	openPaginatedMenuOld(title, accessEyesMenu, currentPage, Eyes.Types, Eyes.Types[player.eyes.type], Eyes.getTFDescription);
+	openPaginatedMenu(title, accessEyesMenu, currentPage, EyesMem.Memories);
 }
 
 private function accessTongueMenu(currentPage: int = 0): void {
@@ -461,97 +488,19 @@ private function doMetamorph (title: String, genMem: *): void {
 public static function unlockMetamorph (genMemName: String, doOutput: Boolean = true): void {
 	if (!GeneticMemoryStorage[genMemName] && player.hasPerk(PerkLib.GeneticMemory)) {
 		GeneticMemoryStorage[genMemName] = true;
-		if (doOutput && player.hasPerk(PerkLib.Metamorph)) outputText("\n\n[Genetic Memory Obtained: " + genMemName + "]");
+		if (doOutput && player.hasPerk(PerkLib.Metamorph)) outputText("\n\n<b>Genetic Memory Obtained: " + genMemName + "</b>");
 	}
 }
 
 private function accessPage1MetamorphMenu():void {
 	menu();
 
-	addButton(6, "Eyes(1)", accessPage1EyesMenu);
-	addButton(7, "Eyes(2)", accessPage2EyesMenu);
 	addButton(8, "Ears(1)", accessPage1EarsMenu);
 	addButton(9, "Ears(2)", accessPage2EarsMenu);
 	addButton(10, "Ears(3)", accessPage3EarsMenu);
 	addButton(11, "Horns(1)", accessPage1HornsMenu);
 	addButton(12, "Horns(2)", accessPage2HornsMenu);
 	addButton(14, "Back", accessMetamorphMenu);
-}
-private function accessPage1EyesMenu():void {
-	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedHumanEyes) && player.eyes.type != Eyes.HUMAN && player.soulforce >= 500) addButton(0, "Human", metamorphHumanEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanEyes) && player.eyes.type == Eyes.HUMAN) addButtonDisabled(0, "Human", "You already have human eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanEyes) && player.eyes.type != Eyes.HUMAN && player.soulforce < 500) addButtonDisabled(0, "Human", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyes.type != Eyes.FOUR_SPIDER_EYES && player.soulforce >= 100) addButton(1, "Spider", metamorphSpiderFourEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyes.type == Eyes.FOUR_SPIDER_EYES) addButtonDisabled(1, "Spider", "You already have spider four eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderFourEyes) && player.eyes.type != Eyes.FOUR_SPIDER_EYES && player.soulforce < 100) addButtonDisabled(1, "Spider", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(1, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedCatEyes) && player.eyes.type != Eyes.CAT_SLITS && player.soulforce >= 100) addButton(3, "Cat", metamorphCatEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedCatEyes) && player.eyes.type == Eyes.CAT_SLITS) addButtonDisabled(3, "Cat", "You already have cat eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedCatEyes) && player.eyes.type != Eyes.CAT_SLITS && player.soulforce < 100) addButtonDisabled(3, "Cat", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(3, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedGorgonEyes) && player.eyes.type != Eyes.GORGON && player.soulforce >= 100) addButton(4, "Gorgon", metamorphGorgonEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedGorgonEyes) && player.eyes.type == Eyes.GORGON) addButtonDisabled(4, "Gorgon", "You already have gorgon eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedGorgonEyes) && player.eyes.type != Eyes.GORGON && player.soulforce < 100) addButtonDisabled(4, "Gorgon", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(4, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedManticoreEyes) && player.eyes.type != Eyes.MANTICORE && player.soulforce >= 100) addButton(6, "Manticore", metamorphManticoreEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedManticoreEyes) && player.eyes.type == Eyes.MANTICORE) addButtonDisabled(6, "Manticore", "You already have manticore eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedManticoreEyes) && player.eyes.type != Eyes.MANTICORE && player.soulforce < 100) addButtonDisabled(6, "Manticore", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(6, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedFoxEyes) && player.eyes.type != Eyes.FOX && player.soulforce >= 100) addButton(7, "Fox", metamorphEyesFox);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxEyes) && player.eyes.type == Eyes.FOX) addButtonDisabled(7, "Fox", "You already have fox eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxEyes) && player.eyes.type != Eyes.FOX && player.soulforce < 100) addButtonDisabled(7, "Fox", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(7, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedLizardEyes) && player.eyes.type != Eyes.REPTILIAN && player.soulforce >= 100) addButton(8, "Lizard", metamorphLizardEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardEyes) && player.eyes.type == Eyes.REPTILIAN) addButtonDisabled(8, "Lizard", "You already have lizard eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardEyes) && player.eyes.type != Eyes.REPTILIAN && player.soulforce < 100) addButtonDisabled(8, "Lizard", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(8, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEyes) && player.eyes.type != Eyes.SNAKE && player.soulforce >= 100) addButton(9, "Snake", metamorphSnakeEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEyes) && player.eyes.type == Eyes.SNAKE) addButtonDisabled(9, "Snake", "You already have snake eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEyes) && player.eyes.type != Eyes.SNAKE && player.soulforce < 100) addButtonDisabled(9, "Snake", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(9, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEyes) && player.eyes.type != Eyes.DRAGON && player.soulforce >= 100) addButton(10, "Dragon", metamorphDragonEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEyes) && player.eyes.type == Eyes.DRAGON) addButtonDisabled(10, "Dragon", "You already have dragon eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEyes) && player.eyes.type != Eyes.DRAGON && player.soulforce < 100) addButtonDisabled(10, "Dragon", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(10, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedDevilEyes) && player.eyes.type != Eyes.DEVIL && player.soulforce >= 100) addButton(11, "Devil", metamorphDevilEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDevilEyes) && player.eyes.type == Eyes.DEVIL) addButtonDisabled(11, "Devil", "You already have devil eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDevilEyes) && player.eyes.type != Eyes.DEVIL && player.soulforce < 100) addButtonDisabled(11, "Devil", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(11, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedOniEyes) && player.eyes.type != Eyes.ONI && player.soulforce >= 100) addButton(12, "Oni", metamorphOniEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOniEyes) && player.eyes.type == Eyes.ONI) addButtonDisabled(12, "Oni", "You already have oni eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOniEyes) && player.eyes.type != Eyes.ONI && player.soulforce < 100) addButtonDisabled(12, "Oni", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(12, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedElfEyes) && player.eyes.type != Eyes.ELF && player.soulforce >= 100) addButton(13, "Elf", metamorphElfEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedElfEyes) && player.eyes.type == Eyes.ELF) addButtonDisabled(13, "Elf", "You already have elf eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedElfEyes) && player.eyes.type != Eyes.ELF && player.soulforce < 100) addButtonDisabled(13, "Elf", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(13, "???", "You have not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
-}
-private function accessPage2EyesMenu():void {
-	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes) && player.eyes.type != Eyes.RAIJU && player.soulforce >= 100) addButton(0, "Raiju", metamorphRaijuEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes) && player.eyes.type == Eyes.RAIJU) addButtonDisabled(0, "Raiju", "You already have raiju eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEyes) && player.eyes.type != Eyes.RAIJU && player.soulforce < 100) addButtonDisabled(0, "Raiju", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedVampireEyes) && player.eyes.type != Eyes.VAMPIRE && player.soulforce >= 100) addButton(1, "Vampire", metamorphVampireEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireEyes) && player.eyes.type == Eyes.VAMPIRE) addButtonDisabled(1, "Vampire", "You already have vampire eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireEyes) && player.eyes.type != Eyes.VAMPIRE && player.soulforce < 100) addButtonDisabled(1, "Vampire", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(1, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes) && player.eyes.type != Eyes.INFERNAL && player.soulforce >= 100) addButton(5, "Hellcat", metamorphHellcatInfernalEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes) && player.eyes.type == Eyes.INFERNAL) addButtonDisabled(5, "Hellcat", "You already have hellcat infernal eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHellcatInfernalEyes) && player.eyes.type != Eyes.INFERNAL && player.soulforce < 100) addButtonDisabled(5, "Hellcat", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(5, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedOrcEyes) && player.eyes.type != Eyes.ORC && player.soulforce >= 100) addButton(6, "Orc", metamorphOrcEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcEyes) && player.eyes.type == Eyes.ORC) addButtonDisabled(6, "Orc", "You already have orc eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcEyes) && player.eyes.type != Eyes.ORC && player.soulforce < 100) addButtonDisabled(6, "Orc", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(6, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEyes) && player.eyes.type != Eyes.DISPLACER && player.soulforce >= 100) addButton(10, "Displacer", metamorphDisplacerEyes);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEyes) && player.eyes.type == Eyes.DISPLACER) addButtonDisabled(10, "Displacer", "You already have displacer eyes.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEyes) && player.eyes.type != Eyes.DISPLACER && player.soulforce < 100) addButtonDisabled(10, "Displacer", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(10, "???", "You have not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 private function accessPage1EarsMenu():void {
 	menu();
@@ -1244,24 +1193,6 @@ private function accessPage5TailMenu():void {
 	else addButtonDisabled(2, "???", "You have not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage3MetamorphMenu);
 }
-private function accessPage4MetamorphMenu():void {
-	menu();
-	addButton(0, "Back", accessMetamorphMenu);
-	addButton(1, "Back", accessMetamorphMenu);
-	addButton(2, "Back", accessMetamorphMenu);
-	addButton(3, "Back", accessMetamorphMenu);
-	addButton(4, "Back", accessMetamorphMenu);
-	addButton(5, "Back", accessMetamorphMenu);
-	addButton(6, "Back", accessMetamorphMenu);
-	addButton(7, "Back", accessMetamorphMenu);
-	addButton(8, "Back", accessMetamorphMenu);
-	addButton(9, "Back", accessMetamorphMenu);
-	addButton(10, "Back", accessMetamorphMenu);
-	addButton(11, "Back", accessMetamorphMenu);
-	addButton(12, "Back", accessMetamorphMenu);
-	addButton(13, "Back", accessMetamorphMenu);
-	addButton(14, "Back", accessMetamorphMenu);
-}
 private function accessPageEx1MetamorphMenu():void {
 	menu();
 	if (player.soulforce >= 300) addButton(0, "Height +1", metamorphHeight1U);
@@ -1412,14 +1343,6 @@ private function metamorphSphinxWings():void {
 	player.wings.desc = "large feathered";
 	doNext(accessPage3WingsMenu);
 }
-private function metamorphManticoreEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nFor a moment your sight shifts as the ambient light suddenly turns extremely bright, almost blinding you. You walk around disoriented for a moment until the luminosity fades back to normal. You run to a puddle of water to check your reflection and quickly notice your pupils have become cat-like. While you do see way better in the dark, your now red iris are extremely intimidating and clearly don't belong on any normal feline. <b>You now have manticore eyes.</b>");
-	player.eyes.type = Eyes.MANTICORE;
-	player.eyes.colour = "red";
-	doNext(accessPage1EyesMenu);
-}
 private function metamorphManticoreWingsLarge():void {
 	clearOutput();
 	player.soulforce -= 200;
@@ -1495,14 +1418,6 @@ private function metamorphNekomataOneThirdForkedTail():void {
 	player.tailType = Tail.NEKOMATA_FORKED_1_3;
 	doNext(accessPage5TailMenu);
 }
-private function metamorphHellcatInfernalEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nWarmth then rampage all around body altering your body. All of these pleasurable changes are driving you insane with pleasure to the point you would try to cry but just as soon as a tear pearls out of your eye it evaporates as two small flames leaks from their corners instead. <b>You now have infernal eyes.</b>");
-	player.eyes.type = Eyes.INFERNAL;
-	player.eyes.colour = "ember";
-	doNext(accessPage2EyesMenu);
-}
 private function metamorphHellcatBurningTail():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1525,14 +1440,6 @@ private function metamorphDisplacerEars():void {
 	player.ears.type = Ears.DISPLACER;
 	doNext(accessPage3EarsMenu);
 }
-private function metamorphDisplacerEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nFor a moment your sight shifts as the ambient light suddenly turns extremely bright, almost blinding you. You walk around disoriented for a moment until the luminosity fades back to normal. You run to a puddle of water to check your reflection and quickly notice your eyes are now yellow and cat-like however just as you watch your reflection the white of your eyes also begins to darken turning black not unlike the eyes of a displacer beast. <b>You now have displacer beast eyes.</b>");
-	player.eyes.type = Eyes.DISPLACER;
-	player.eyes.colour = "yellow";
-	doNext(accessPage2EyesMenu);
-}
 private function metamorphDisplacerArms():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1549,13 +1456,6 @@ private function metamorphDisplacerBackTentacles():void {
 	outputText("Two large fleshy lumps explode from your shoulders and you scream in pain. These fleshy appendages weave and move like whips in your back and only stop doing so when you finally manage to calm yourself. <b>As you look back to see what's going on, you notice you now have a pair of tentacles with thick, fleshy heads. You can feel the air brushing over the sensitive needles and suction cups that cover both of them, your new venom glistening on the tips.</b>");
 	player.rearBody.type = RearBody.DISPLACER_TENTACLES;
 	doNext(accessRearBodyMenuOld);
-}
-private function metamorphCatEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you. As you steady and open your eyes, you realize something seems different. Your vision is changed somehow. <b>Your eyes has turned into those of cat with vertical slit.</b>");
-	player.eyes.type = Eyes.CAT_SLITS;
-	doNext(accessPage1EyesMenu);
 }
 
 private function metamorphCatArms():void {
@@ -1701,15 +1601,6 @@ private function metamorphOrcSkinPattern():void {
 	player.skin.base.adj = "scar shaped tattooed";
 	doNext(accessSkinPatternsMenuOld);
 }
-private function metamorphOrcEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.eyes.type != Eyes.HUMAN) removeOddEyes();
-	player.eyes.colour = "bloody red";
-	outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you. As you steady yourself and open your eyes, you realize something seems different, as if the nerves have been optimized. Your vision has been changed somehow. <b>Your eyes has turned into those of orc.</b>");
-	player.eyes.type = Eyes.ORC;
-	doNext(accessPage2EyesMenu);
-}
 private function metamorphOrcArms():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1776,20 +1667,6 @@ private function metamorphHumanEars():void {
 	player.ears.type = Ears.HUMAN;
 	doNext(accessPage1EarsMenu);
 }
-private function metamorphHumanEyes():void {
-	clearOutput();
-	player.soulforce -= 500;
-	if (player.eyes.type == Eyes.BLACK_EYES_SAND_TRAP) {
-		outputText("\n\nYou feel a twinge in your eyes and you blink. It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
-	}
-	else {
-		outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you. As you steady and open your eyes, you realize something seems different. Your vision is changed somehow.");
-		if (player.eyes.type == Eyes.FOUR_SPIDER_EYES) outputText(" Your multiple, arachnid eyes are gone!</b>");
-		outputText(" <b>You have normal, humanoid eyes again.</b>");
-	}
-	player.eyes.type = Eyes.HUMAN;
-	doNext(accessPage1EyesMenu);
-}
 
 private function metamorphHumanArms():void {
 	clearOutput();
@@ -1854,15 +1731,6 @@ private function metamorphPigEars():void {
 	outputText("\n\nYou feel a pressure on your ears as they begin to reshape. Once the changes finish, you flick them about experimentally, <b>and you’re left with pointed, floppy pig ears.</b>");
 	player.ears.type = Ears.PIG;
 	doNext(accessPage2EarsMenu);
-}
-private function metamorphVampireEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.eyes.type != Eyes.HUMAN) removeOddEyes();
-	outputText("\n\nYour eyes shift, causing sunlight to suddenly become annoyingly bright for you. It takes several minutes for your eyes to get used to it and, once they do, you still have to keep them half closed, so as to not be blinded by the sun’s glare.");
-	outputText(" Upon looking at your reflection in the water, you discover your irises have taken on a blood-red shade. <b>You have Vampire Eyes.</b>");
-	player.eyes.type = Eyes.VAMPIRE;
-	doNext(accessPage2EyesMenu);
 }
 private function metamorphVampireWings():void {
 	clearOutput();
@@ -1939,19 +1807,6 @@ private function metamorphRaijuSkinPattern():void {
 	player.skin.base.adj = "lightning shaped tattooed";
 	doNext(accessSkinPatternsMenuOld);
 }
-private function metamorphRaijuEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.eyes.type != Eyes.HUMAN) removeOddEyes();
-	player.eyes.type = Eyes.RAIJU;
-	if (rand(2) == 0) player.eyes.colour = "blue";
-	else {
-		if (rand(2) == 0) player.eyes.colour = "green";
-		else player.eyes.colour = "teal";
-	}
-	outputText("\n\nBright lights flash into your vision as your eyes glow with electric light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment, but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>glowing [eyecolor] bestial slitted eyes staring back at you.</b>");
-	doNext(accessPage2EyesMenu);
-}
 private function metamorphRaijuEars():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2004,18 +1859,6 @@ private function metamorphOniEars():void {
 	player.ears.type = Ears.ONI;
 	doNext(accessPage2EarsMenu);
 }
-private function metamorphOniEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	player.eyes.type = Eyes.ONI;
-	if (rand(2) == 0) player.eyes.colour = "red";
-	else {
-		if (rand(2) == 0) player.eyes.colour = "orange";
-		else player.eyes.colour = "yellow";
-	}
-	outputText("\n\nYou feel something fundamental change in your sight when you go check yourself in a puddle you notice your iris now are <b>[eyecolor] just like that of an Oni with a slit at the center giving them a fiendish outlook.</b>");
-	doNext(accessPage1EyesMenu);
-}
 private function metamorphOniDualHorns():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2054,14 +1897,6 @@ private function metamorphOniArms():void {
 	doNext(accessPage2ArmsMenu);
 }
 
-private function metamorphElfEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.eyes.type != Eyes.HUMAN) removeOddEyes();
-	outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your feet out from under you. As you steady yourself and open your eyes, you realize something seems different. Your vision is changed somehow. Your pupils draw in light and the color and shapes seems more defined even at great distance. Your new eyes granting you better vision. You go to a puddle to check what happened to them and notice <b>your new eyes are like those of an elf’s with a vertical slit that reflects lights.</b>");
-	player.eyes.type = Eyes.ELF;
-	doNext(accessPage1EyesMenu);
-}
 private function metamorphElfEars():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2122,14 +1957,6 @@ private function metamorphMantisAntennae():void {
 	else outputText("\n\nYour head itches momentarily as two long prehensile antennae sprout from your [hair].");
 	player.antennae.type = Antennae.MANTIS;
 	doNext(accessAntennaeMenuOld);
-}
-private function metamorphDevilEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYour eyes feels like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a demonic appearance: the sclera is black and the pupils ember. Furthermore they seem to glow with a faint inner light. <b>You now have fiendish eyes!</b>");
-	player.eyes.type = Eyes.DEVIL;
-	player.eyes.colour = "ember";
-	doNext(accessPage1EyesMenu);
 }
 private function metamorphDevilArms():void {
 	clearOutput();
@@ -2227,13 +2054,6 @@ private function metamorphDragonArms():void {
 	doNext(accessPage2ArmsMenu);
 }
 
-private function metamorphDragonEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a dragon. <b>You now have dragon eyes!</b>.");
-	player.eyes.type = Eyes.DRAGON;
-	doNext(accessPage1EyesMenu);
-}
 private function metamorphDragonWingsHuge():void {
 	clearOutput();
 	player.soulforce -= 300;
@@ -2266,26 +2086,12 @@ private function metamorphDragonEars():void {
 	player.ears.type = Ears.DRAGON;
 	doNext(accessPage1EarsMenu);
 }
-private function metamorphGorgonEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you. As you steady and open your eyes, all seems to be fine until at least it seems so. But when moment later, when you casualy look at your hands pondering if there is any other effect the numbing sensation starts to spread starting from your hands fingers. Worried you focus your gaze at them to notice, that they typical texture becoming grey colored much similar to that of... stone? And slowy you realize the more you look at them, the faster change. Panicked for a moment you look away and then this numbing feeling starting to slowly receed. But looking back at them causing it to return. After moment, and closing eyelids, you conclude that your eyes must have gained an useful ability. <b>Your eyes has turned into gorgon eyes.</b>");
-	player.eyes.type = Eyes.GORGON;
-	doNext(accessPage1EyesMenu);
-}
 private function metamorphSnakeEars():void {
 	clearOutput();
 	player.soulforce -= 100;
 	outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed ears covered in small scales</b>. You bet they look cute!");
 	player.ears.type = Ears.SNAKE;
 	doNext(accessPage2EarsMenu);
-}
-private function metamorphSnakeEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake. <b>You now have snake eyes!</b>.");
-	player.eyes.type = Eyes.SNAKE;
-	doNext(accessPage1EyesMenu);
 }
 
 private function metamorphOrcaBlowhole():void {
@@ -2400,13 +2206,6 @@ private function metamorphSpiderArms():void {
 	player.arms.type = Arms.SPIDER;
 	doNext(accessPage1ArmsMenu);
 }
-private function metamorphSpiderFourEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYou suddenly get the strangest case of double vision. Stumbling and blinking around, you clutch at your face, but you draw your hands back when you poke yourself in the eye. Wait, those fingers were on your forehead! You tentatively run your fingertips across your forehead, not quite believing what you felt. <b>There's a pair of eyes on your forehead, positioned just above your normal ones!</b> This will take some getting used to!");
-	player.eyes.type = Eyes.FOUR_SPIDER_EYES;
-	doNext(accessPage1EyesMenu);
-}
 private function metamorphElfinEars():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2491,15 +2290,6 @@ private function metamorphLizardEars():void {
 	outputText("\n\nTightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, scaley bumps with holes in their centers. <b>You have reptilian ears!</b>");
 	player.ears.type = Ears.LIZARD;
 	doNext(accessPage1EarsMenu);
-}
-private function metamorphLizardEyes():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.eyes.type != Eyes.HUMAN) removeOddEyes();
-	player.eyes.colour = "yellow";
-	outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a reptile taking on a [eyecolor] hue with a slit. <b>You now have reptilian eyes!</b>");
-	player.eyes.type = Eyes.REPTILIAN;
-	doNext(accessPage1EyesMenu);
 }
 private function metamorphLizardTail():void {
 	clearOutput();
@@ -2667,13 +2457,6 @@ private function metamorphTailFox2nd():void {
 	player.tailCount++;
 	doNext(accessPage2TailMenu);
 }
-private function metamorphEyesFox():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("You blink for an instant as the light and darkness seems to shift within your vision. You head to a pool to check it up and notice your pupils shifted to look more fox-like in a fashion similar to the kitsunes. <b>You now have fox pupils.</b>");
-	player.eyes.type = Eyes.FOX;
-	doNext(accessPage1EyesMenu);
-}
 private function metamorphTailFox():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2829,7 +2612,7 @@ private function removeOddEyes():void {
 	}
 	else {
 		outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you. As you steady and open your eyes, you realize something seems different. Your vision is changed somehow.");
-		if (player.eyes.type == Eyes.FOUR_SPIDER_EYES) outputText(" Your multiple, arachnid eyes are gone!</b>");
+		if (player.eyes.type == Eyes.SPIDER) outputText(" Your multiple, arachnid eyes are gone!</b>");
 		outputText(" <b>You have normal, humanoid eyes again.</b>");
 	}
 	player.eyes.type = Eyes.HUMAN;

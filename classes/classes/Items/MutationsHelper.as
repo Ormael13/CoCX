@@ -79,19 +79,6 @@ import classes.BodyParts.Wings;
 			changes++;
 		}
 
-		public function humanizeEyes():void {
-			if (player.eyes.type == Eyes.BLACK_EYES_SAND_TRAP) {
-				outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
-			}
-			else {
-				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
-				if (player.eyes.type == Eyes.FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
-				outputText("  <b>You have normal, humanoid eyes again.</b>");
-			}
-			setEyeType(Eyes.HUMAN);
-			changes++;
-		}
-
 		public function humanizeArms(degargoylize:Boolean=false):void {
 			switch (player.arms.type) {
 				case Arms.HUMAN:
@@ -408,31 +395,24 @@ import classes.BodyParts.Wings;
 		[Ears.WEASEL, null],
 	]);
 
-	public function setEyeType(eyeType:int):Boolean {
-		return setBodyPartType("eyes.type", METAMORPH_EYES, eyeType);
-	}
-	public function setEyeTypeAndColor(eyeType:int, color:String):Boolean {
-		player.eyes.colour = color;
-		return setBodyPartType("eyes.type", METAMORPH_EYES, eyeType);
-	}
 	private const METAMORPH_EYES:Object = createMapFromPairs([
 		[Eyes.BEAR, null],
 		[Eyes.BLACK_EYES_SAND_TRAP, null],
 		[Eyes.CANCER, null],
-		[Eyes.CAT_SLITS, StatusEffects.UnlockedCatEyes],
+		[Eyes.CAT, StatusEffects.UnlockedCatEyes],
 		[Eyes.CAVE_WYRM, null],
 		[Eyes.CENTIPEDE, null],
-		[Eyes.DEAD_EYES, null],
+		[Eyes.DEAD, null],
 		[Eyes.DEVIL, StatusEffects.UnlockedDevilEyes],
 		[Eyes.DISPLACER, StatusEffects.UnlockedDisplacerEyes],
-		[Eyes.DRAGON, StatusEffects.UnlockedDraconicEyes],
+		[Eyes.DRACONIC, StatusEffects.UnlockedDraconicEyes],
 		[Eyes.FAIRY, null],
 		[Eyes.ELF, StatusEffects.UnlockedElfEyes],
 		[Eyes.FENRIR, null],
 		[Eyes.FERAL, null],
 		[Eyes.FIENDISH, null],
 		[Eyes.FIRE_SNAIL, null],
-		[Eyes.FOUR_SPIDER_EYES, StatusEffects.UnlockedSpiderFourEyes],
+		[Eyes.SPIDER, StatusEffects.UnlockedSpiderFourEyes],
 		[Eyes.FOX, StatusEffects.UnlockedFoxEyes],
 		[Eyes.FROSTWYRM, null],
 		[Eyes.GEMSTONES, null],
@@ -452,7 +432,7 @@ import classes.BodyParts.Wings;
 		[Eyes.ORC, StatusEffects.UnlockedOrcEyes],
 		[Eyes.RAIJU, StatusEffects.UnlockedRaijuEyes],
 		[Eyes.RATATOSKR, null],
-		[Eyes.REPTILIAN, StatusEffects.UnlockedLizardEyes],
+		[Eyes.LIZARD, StatusEffects.UnlockedLizardEyes],
 		[Eyes.SNAKE, StatusEffects.UnlockedSnakeEyes],
 		[Eyes.VAMPIRE, StatusEffects.UnlockedVampireEyes],
 		[Eyes.WEASEL, null],

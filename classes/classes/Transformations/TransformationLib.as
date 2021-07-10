@@ -419,7 +419,7 @@ public class TransformationLib extends MutationsHelper {
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				TransformationUtils.applyIfNotPresent(transformations.HairHuman, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.HairHuman, doOutput);
 
 				desc += "Your head is suddenly attacked by warmth, as though it were right next to a campfire. Before you can wonder what's going on, your hair is set ablaze in an spectacular explosion. You very nearly have a panic attack before realizing you're not being harmed by the flames, which instead fade until they only cover your hair's tips.\n\nA few tests later, and you confirm that thankfully the flames don't seem to actually burn anything unless you will them to. <b>You now have burning hellcat hair!</b>";
 
@@ -745,7 +745,7 @@ public class TransformationLib extends MutationsHelper {
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				TransformationUtils.applyIfNotPresent(transformations.FaceHuman, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
 
 				desc += "Your [face] explodes with agony, reshaping into a more human-like visage. You firmly grasp your mouth, an intense pain racking your oral cavity. Your gums shift around and the bones in your jaw reset. You blink a few times wondering what just happened. You move over to a puddle to catch sight of your reflection, and you are thoroughly surprised by what you see. A set of retractable shark fangs have grown in front of your normal teeth, and your face has elongated slightly to accommodate them! They even scare you a little.\n(Gain: 'Bite' special attack)";
 
@@ -802,7 +802,7 @@ public class TransformationLib extends MutationsHelper {
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				TransformationUtils.applyIfNotPresent(transformations.FaceHuman, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
 
 				desc += "You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with cat-like canines.</b>";
 
@@ -1150,7 +1150,7 @@ public class TransformationLib extends MutationsHelper {
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				TransformationUtils.applyIfNotPresent(transformations.FaceHuman, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
 
 				desc += "You feel your canines changing, elongating into sharp, dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You feel the need to roar like a lion, to show the world how ferocious you are. <b>Your mouth is now filled with dagger-like canines!</b>";
 
@@ -1255,7 +1255,7 @@ public class TransformationLib extends MutationsHelper {
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				TransformationUtils.applyIfNotPresent(transformations.FaceHuman, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
 
 				desc += "You feel your canines changing, growing bigger and slightly sharper. Hey, you could pretend to be some kind of demon with that kind of mouth. <b>You now have oni canines.</b>";
 
@@ -1274,7 +1274,7 @@ public class TransformationLib extends MutationsHelper {
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				TransformationUtils.applyIfNotPresent(transformations.FaceHuman, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
 
 				desc += "You feel your two canines grow bigger and slightly sharper, not unlike those of a weasel or in your case a raiju. <b>You now have raiju canines.</b>";
 
@@ -1360,7 +1360,7 @@ public class TransformationLib extends MutationsHelper {
 				var desc: String = "";
 				var choice: int = rand(3);
 
-				TransformationUtils.applyIfNotPresent(transformations.FaceCat, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceCat, doOutput);
 
 				if (choice == 0) desc += "Your face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection and discover <b>your face is now a cross between human and feline features.</b>";
 				else if (choice == 1) desc += "Mind-numbing pain courses through you as you feel your facial bones rearranging. You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your facial characteristics with those of a feline. <b>You now have an anthropomorphic cat-face.</b>";
@@ -1384,7 +1384,7 @@ public class TransformationLib extends MutationsHelper {
 				var desc: String = "";
 				var choice:int;
 
-				TransformationUtils.applyIfNotPresent(transformations.FaceCatCanines, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceCatCanines, doOutput);
 
 				desc += "You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You purr at the change it gives you a cute look. <b>Your mouth is now filled with Cat-like canines.</b>";
 
@@ -1433,7 +1433,7 @@ public class TransformationLib extends MutationsHelper {
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				TransformationUtils.applyIfNotPresent(transformations.FaceHuman, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
 
 				desc += "You feel your two lower canines grow bigger and slightly sharper, similar to those of a boar, or in your case, an orc. <b>You now have orc canines.</b>";
 
@@ -1451,7 +1451,7 @@ public class TransformationLib extends MutationsHelper {
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				TransformationUtils.applyIfNotPresent(transformations.FaceHuman, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
 
         desc += "You feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. That said, your face remained relatively human even after the change. <b>Your mouth is now filled with sharp canines.</b>";
 
@@ -1627,7 +1627,7 @@ public class TransformationLib extends MutationsHelper {
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-				TransformationUtils.applyIfNotPresent(transformations.FaceHuman, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
 
 				desc += "You suddenly feel pain in your mouth as if something had suddenly grown. At first you think nothing happened but after double checking you confirm that your buck teeth are slightly larger than normal. <b>Your face is now human save for your two buck teeth like those of a squirrel.</b>";
 
@@ -1716,7 +1716,7 @@ public class TransformationLib extends MutationsHelper {
 			function (doOutput:Boolean):void {
 				var desc: String = "";
 
-	      TransformationUtils.applyIfNotPresent(transformations.HairHuman, doOutput);
+	      TransformationUtils.applyTFIfNotPresent(transformations.HairHuman, doOutput);
 
 	      desc += "Your throat starts to ache and your tongue tingles. You try to gasp for air, your eyes opening wide in surprise as the voice that exits your throat is entirely changed. Your words are notes, your sentence a melody. Your voice is like music to your ears and you realize it is because your body became closer to that of an elf, adapting even your tongue and voice. <b>You now have the beautiful voice of the elves.</b>";
 	      player.tongue.type = Tongue.ELF;
@@ -1890,8 +1890,633 @@ public class TransformationLib extends MutationsHelper {
 	 *    ██         ██    ██           ██
 	 *    ███████    ██    ███████ ███████
 	 */
+	public const EyesHuman:Transformation = new SimpleTransformation("Human Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
 
-	public function makeEyeColorTf(colors:/*String*/Array):Transformation {
+				if (player.eyes.type == Eyes.BLACK_EYES_SAND_TRAP) {
+					desc += "You feel a twinge in your eyes and you blink. It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.";
+				}
+				else {
+					desc += "You blink and stumble, a wave of vertigo threatening to pull your [feet] from under you. As you steady and open your eyes, you realize something seems different. Your vision is changed somehow.";
+					if (player.eyes.type == Eyes.SPIDER) desc += " Your multiple, arachnid eyes are gone!</b>";
+					desc += " <b>You have normal, humanoid eyes again.</b>";
+				}
+
+				if (doOutput) outputText(desc);
+				player.eyes.type = Eyes.HUMAN;
+				Metamorph.unlockMetamorph("Human Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.HUMAN;
+			}
+	);
+
+	public const EyesManticore:Transformation = new SimpleTransformation("Manticore Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["red"]), doOutput);
+
+				desc += "For a moment your sight shifts as the ambient light suddenly turns extremely bright, almost blinding you. You walk around disoriented for a moment until the luminosity fades back to normal. You run to a puddle of water to check your reflection and quickly notice your pupils have become cat-like. While you do see way better in the dark, your red eyes are extremely intimidating and clearly don't belong on any normal feline. <b>You now have manticore eyes.</b>";
+
+				if (doOutput) outputText(desc);
+				player.eyes.type = Eyes.MANTICORE;
+				Metamorph.unlockMetamorph("Manticore Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.MANTICORE;
+			}
+	);
+
+	public const EyesInfernal:Transformation = new SimpleTransformation("Infernal Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["ember"]), doOutput);
+
+				desc += "Warmth then rampage all around body altering your body. All of these pleasurable changes are driving you insane with pleasure to the point you would try to cry but just as soon as a tear pearls out of your eye it evaporates as two small flames leaks from their corners instead. <b>You now have infernal eyes.</b>";
+
+				if (doOutput) outputText(desc);
+				player.eyes.type = Eyes.INFERNAL;
+				Metamorph.unlockMetamorph("Infernal Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.INFERNAL;
+			}
+	);
+
+	public const EyesDisplacer:Transformation = new SimpleTransformation("Displacer Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["yellow"]), doOutput);
+
+				desc += "For a moment your sight shifts as the ambient light suddenly turns extremely bright, almost blinding you. You walk around disoriented for a moment until the luminosity fades back to normal. You run to a puddle of water to check your reflection and quickly notice your eyes are now yellow and cat-like however just as you watch your reflection the white of your eyes also begins to darken turning black not unlike the eyes of a displacer beast. <b>You now have displacer beast eyes.</b>";
+
+				if (doOutput) outputText(desc);
+				player.eyes.type = Eyes.DISPLACER;
+				Metamorph.unlockMetamorph("Displacer Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.DISPLACER;
+			}
+	);
+
+	public const EyesCat:Transformation = new SimpleTransformation("Cat Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				desc += "You blink and stumble, a wave of vertigo threatening to pull your [feet] from under you. As you steady and open your eyes, you realize something seems different. Your vision is changed somehow. <b>Your eyes have turned into those of cat with vertical slit.</b>";
+
+				if (doOutput) outputText(desc);
+				player.eyes.type = Eyes.CAT;
+				Metamorph.unlockMetamorph("Cat Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.CAT;
+			}
+	);
+
+	public const EyesOrc:Transformation = new SimpleTransformation("Orc Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesHuman, doOutput);
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["bloody red"]), doOutput);
+
+				desc += "You blink and stumble, a wave of vertigo threatening to pull your [feet] from under you. As you steady yourself and open your eyes, you realize something seems different, as if the nerves have been optimized. Your vision has been changed somehow. <b>Your eyes has turned into those of orc.</b>";
+
+				if (doOutput) outputText(desc);
+				player.eyes.type = Eyes.ORC;
+				Metamorph.unlockMetamorph("Orc Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.ORC;
+			}
+	);
+
+	public const EyesVampire:Transformation = new SimpleTransformation("Vampire Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesHuman, doOutput);
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["bloody red"]), doOutput);
+
+				desc += "Your eyes shift, causing sunlight to suddenly become annoyingly bright for you. It takes several minutes for your eyes to get used to it and, once they do, you still have to keep them half closed, so as to not be blinded by the sun’s glare.";
+				desc += " Upon looking at your reflection in the water, you discover your irises have taken on a blood-red shade. <b>You have Vampire Eyes.</b>";
+
+				if (doOutput) outputText(desc);
+				player.eyes.type = Eyes.VAMPIRE;
+				Metamorph.unlockMetamorph("Vampire Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.VAMPIRE;
+			}
+	);
+
+	public const EyesRaiju:Transformation = new SimpleTransformation("Raiju Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesHuman, doOutput);
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["blue", "green", "teal"]), doOutput);
+
+				desc += "Bright lights flash into your vision as your eyes glow with electric light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment, but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>glowing [eyecolor] bestial slitted eyes staring back at you.</b>";
+
+				if (doOutput) outputText(desc);
+				player.eyes.type = Eyes.RAIJU;
+				Metamorph.unlockMetamorph("Raiju Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.RAIJU;
+			}
+	);
+
+	public const EyesWeasel:Transformation = new SimpleTransformation("Weasel Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				desc += "A sudden gust of wind send sand into your face. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>[eyecolor] bestial slitted eyes staring back at you not unlike those of a weasel.</b>";
+
+				if (doOutput) outputText(desc);
+				player.eyes.type = Eyes.WEASEL;
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.RAIJU;
+			}
+	);
+
+	public const EyesOni:Transformation = new SimpleTransformation("Oni Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesOniColors, doOutput);
+
+				desc += "You feel something fundamental change in your sight when you go check yourself in a puddle you notice <b>your iris now have a slit at the center, giving them a fiendish outlook like an Oni.</b>";
+
+				player.eyes.type = Eyes.ONI;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph("Oni Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.ONI;
+			}
+	);
+
+	public const EyesElf:Transformation = new SimpleTransformation("Elf Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesHuman, doOutput);
+
+				desc += "You blink and stumble, a wave of vertigo threatening to pull your feet out from under you. As you steady yourself and open your eyes, you realize something seems different. Your vision is changed somehow. Your pupils draw in light and the color and shapes seems more defined even at great distance. Your new eyes granting you better vision. You go to a puddle to check what happened to them and notice <b>your new eyes are like those of an elf’s with a vertical slit that reflects lights.</b>";
+
+				player.eyes.type = Eyes.ELF;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph("Elf Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.ELF;
+			}
+	);
+
+	public const EyesDevil:Transformation = new SimpleTransformation("Devil Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["ember"]), doOutput);
+
+				desc += "Your eyes feels like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a demonic appearance: the sclera is black and the pupils ember. Furthermore they seem to glow with a faint inner light. <b>You now have fiendish eyes!</b>";
+
+				player.eyes.type = Eyes.DEVIL;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph("Devil Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.DEVIL;
+			}
+	);
+
+	public const EyesDraconic:Transformation = new SimpleTransformation("Draconic Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				desc += "You suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a dragon. <b>You now have dragon eyes!</b>.";
+
+				player.eyes.type = Eyes.DRACONIC;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph("Draconic Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.DRACONIC;
+			}
+	);
+
+	public const EyesGorgon:Transformation = new SimpleTransformation("Gorgon Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				desc += "You blink and stumble, a wave of vertigo threatening to pull your [feet] from under you. As you steady and open your eyes, all seems to be fine until at least it seems so. But when moment later, when you casualy look at your hands pondering if there is any other effect the numbing sensation starts to spread starting from your hands fingers. Worried you focus your gaze at them to notice, that they typical texture becoming grey colored much similar to that of... stone? And slowy you realize the more you look at them, the faster change. Panicked for a moment you look away and then this numbing feeling starting to slowly receed. But looking back at them causing it to return. After moment, and closing eyelids, you conclude that your eyes must have gained an useful ability. <b>Your eyes has turned into gorgon eyes.</b>";
+
+				player.eyes.type = Eyes.GORGON;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph("Gorgon Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.GORGON;
+			}
+	);
+
+	public const EyesSnake:Transformation = new SimpleTransformation("Snake Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				desc += "You suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake. <b>You now have snake eyes!</b>.";
+
+				player.eyes.type = Eyes.SNAKE;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph("Snake Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.SNAKE;
+			}
+	);
+
+	public const EyesSpider:Transformation = new SimpleTransformation("Spider Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				desc += "You suddenly get the strangest case of double vision. Stumbling and blinking around, you clutch at your face, but you draw your hands back when you poke yourself in the eye. Wait, those fingers were on your forehead! You tentatively run your fingertips across your forehead, not quite believing what you felt. <b>There's a pair of eyes on your forehead, positioned just above your normal ones!</b> This will take some getting used to!";
+
+				player.eyes.type = Eyes.SPIDER;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph("Spider Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.SPIDER;
+			}
+	);
+
+	public const EyesLizard:Transformation = new SimpleTransformation("Lizard Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesHuman, doOutput);
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["yellow"]), doOutput);
+
+				desc += "You suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice <b>your eyes now have a slitted pupil like that of a reptile.</b>";
+
+				player.eyes.type = Eyes.LIZARD;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph("Lizard Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.LIZARD;
+			}
+	);
+
+	public const EyesFox:Transformation = new SimpleTransformation("Fox Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				desc += "You blink for an instant as the light and darkness seems to shift within your vision. You head to a pool to check it up and notice your pupils shifted to look more fox-like in a fashion similar to the kitsunes. <b>You now have fox pupils.</b>";
+
+				player.eyes.type = Eyes.FOX;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph("Fox Eyes", doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.FOX;
+			}
+	);
+
+	public const EyesMonoeye:Transformation = new SimpleTransformation("Monoeye Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				desc += "";
+
+				player.eyes.type = Eyes.MONOEYE;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.MONOEYE;
+			}
+	);
+
+	public const EyesRatatoskr:Transformation = new SimpleTransformation("Ratatoskr Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesRatatoskrColors, doOutput);
+
+				desc += "Geeze you know so much now it's like everyone around you is an idiot. How come they don't know about this and that is beyond you. <b>It's going to be hard to wipe away that somewhat permanent know it all smug expression from your face when you’re spreading words around your [eyecolor] eyes looking down teasingly on about everyone.</b>";
+
+				player.eyes.type = Eyes.RATATOSKR;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.RATATOSKR;
+			}
+	);
+
+	public const EyesKraken:Transformation = new SimpleTransformation("Kraken Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				desc += "You feel something fundamental change in your sight when you go check yourself in a puddle you notice that <b>they now have horizontal slit like those of an octupus.</b>";
+
+				player.eyes.type = Eyes.KRAKEN;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.KRAKEN;
+			}
+	);
+
+	public const EyesFireSnail:Transformation = new SimpleTransformation("Fire Snail Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesFireSnailColors, doOutput);
+
+				desc += "Something weird happens with your eyes as they suddenly begin to burn and tickle. After a while it stops and as you go check them up in a water puddle the first thing you notice is that your two irises now burn like two incandescent embers, just like those of a fiery creature. <b>Your irises are now incandescent.</b>";
+
+				player.eyes.type = Eyes.FIRE_SNAIL;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.FIRE_SNAIL;
+			}
+	);
+
+	public const EyesFenrir:Transformation = new SimpleTransformation("Fenrir Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["glacial blue"]), false);
+
+				desc += "You feel an icy chill run through your body as your divine nature reasserts itself over your body. You won't escape your destiny as the Fenrir so easily, it seems.\n\nYou cry out in pain as your eyes once more freeze over, eventually settling back into their proper form. <b>You now have glowing icy eyes.</b>";
+
+				player.eyes.type = Eyes.FENRIR;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.FENRIR;
+			}
+	);
+
+	public const EyesDead:Transformation = new SimpleTransformation("Dead Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				desc += "";
+
+				player.eyes.type = Eyes.DEAD;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.DEAD;
+			}
+	);
+
+	public const EyesCaveWyrm:Transformation = new SimpleTransformation("Cave Wyrm Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["neon blue"]), false);
+
+				desc += "Something shift in your eyes as the level of light around you seems to increase. You go to check on what happened and discover your pupils not only changed to reptilian slits but now glow with a neon blue light. Well seeing in the dark will be easy with your <b>new dark blue iris with reptilian neon blue pupils that glow in the dark.</b>";
+
+				player.eyes.type = Eyes.CAVE_WYRM;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.CAVE_WYRM;
+			}
+	);
+
+	public const EyesGryphon:Transformation = new SimpleTransformation("Gryphon Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["golden-orange"]), false);
+
+				desc += "The mysterious energy coming from the statue continues adapting your body into a more fierce, strong shape. This time, it has affected you eyesight, as you suddenly notice how the long distances that you once had trouble seeing are clear as if you were in front of them, and that you can perceive even the minimal move even from several miles afar.\n\nChecking your changes on the river, you see clearly how your sclera has acquired a golden-orange coloration, as well as your outer iris, separated from the former by a thin circle of black. Both your pupil and your inner iris, which now has enlarged, are solid black. <b>Now you’ll have a blessed vision due those raptor, gryphon-like eyes.</b>";
+
+				player.eyes.type = Eyes.GRYPHON;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.GRYPHON;
+			}
+	);
+
+	public const EyesSandTrap:Transformation = new SimpleTransformation("Sand Trap Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["black"]), false);
+
+				desc += "You blink, and then blink again.  It feels like something is irritating your eyes. Panic sets in as black suddenly blooms in the corner of your left eye and then your right, as if drops of ink were falling into them.  You calm yourself down with the thought that rubbing at your eyes will certainly make whatever is happening to them worse; through force of will you hold your hands behind your back and wait for the strange affliction to run its course. The strange inky substance pools over your entire vision before slowly fading, thankfully taking the irritation with it. As soon as it goes you stride quickly over to the stream and stare at your reflection. <b>Your pupils, your irises, your entire eye has turned a liquid black</b>, leaving you looking vaguely like the many half insect creatures which inhabit these lands. You find you are merely grateful the change apparently hasn't affected your vision.";
+
+				player.eyes.type = Eyes.BLACK_EYES_SAND_TRAP;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.BLACK_EYES_SAND_TRAP;
+			}
+	);
+
+	public const EyesHinezumi:Transformation = new SimpleTransformation("Hinezumi Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesHuman, doOutput);
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["blazing red"]), doOutput);
+
+				desc += "Your eyes start to hurt and as a reaction, you start shedding tears. Once your vision clears, you head to a puddle to check what is going on. <b>To your surprise, it seems your irises turned blazing red like those of an Hinezumi.</b>";
+
+				player.eyes.type = Eyes.HINEZUMI;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.HINEZUMI;
+			}
+	);
+
+	public const EyesFrostwyrm:Transformation = new SimpleTransformation("Frostwyrm Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["yellow"]), doOutput);
+
+				desc += "You suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil and black sclera like that of a frost wyrm. <b>You now have frost wyrm eyes!</b>.";
+
+				player.eyes.type = Eyes.FROSTWYRM;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.FROSTWYRM;
+			}
+	);
+
+	public const EyesGoat:Transformation = new SimpleTransformation("Goat Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["golden"]), doOutput);
+
+				desc += "Your eyes feel like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a goat like appearance with horizontal pupils in the middle, the schlera turning back to white. <b>You now have eyes with horizontal pupils just like those of a goat!</b>";
+
+				player.eyes.type = Eyes.GOAT;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.GOAT;
+			}
+	);
+
+	public const EyesBear:Transformation = new SimpleTransformation("Bear Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesHuman, doOutput);
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["golden"]), doOutput);
+
+				desc += "Your eyes begin to water for a moment. When your view clears up you move on to a puddle and notice their coloration changed to a golden brown hue not unlike those of a bears. <b>You now have golden bear eyes.</b>";
+
+				player.eyes.type = Eyes.BEAR;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.BEAR;
+			}
+	);
+
+	public const EyesCancer:Transformation = new SimpleTransformation("Cancer Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesHuman, doOutput);
+
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["orange"]), doOutput);
+
+				desc += "A slight change happens in your eyes as they begin to water. You clear away the tears, going to a puddle to see what's going on. Your eyes look about the same, save for the fact that your irises now have the particular orange hue characteristic of cancers, with slightly larger pupils. Likely you won’t need to blink while underwater with <b>your orange cancer eyes.</b>";
+
+				player.eyes.type = Eyes.CANCER;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.CANCER;
+			}
+	);
+
+	public const EyesCentipede:Transformation = new SimpleTransformation("Centipede Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				desc += "You feel a sudden wave of sadness come over you. You sulk, wanting to find some dank dark place to curl up and hide in. If anyone saw you now they would wonder why you appear so downtrodden. [if (silly) You could really use a hug and a tub of ice cream right now.] You vaguely register the feeling of your teeth sharpening. <b>Though saddened you suppose you could leave someone with a nasty bite with your new sharp teeth.</b>";
+
+				player.eyes.type = Eyes.CENTIPEDE;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.CENTIPEDE;
+			}
+	);
+
+	public const EyesGhost:Transformation = new SimpleTransformation("Ghost Eyes",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				desc += "Your vision becomes blurry, making it hard to see. You blink repeatedly, trying to clear your eyes. As your vision returns to normal, you notice that your surroundings appear sharper than normal. The shadows are as clear as day, though everything is tinted with a faint ethereal glow. You look in a puddle to see that your eyes glow an eerie [eyecolor]. <b>You now have glowing ghost eyes.</b>";
+
+				player.eyes.type = Eyes.GHOST;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.eyes.type === Eyes.GHOST;
+			}
+	);
+
+	// EYE COLORS
+	public function EyesChangeColor(colors:/*String*/Array):Transformation {
 		return new SimpleTransformation("Eye color: " + colors.join("|"),
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -1899,8 +2524,7 @@ public class TransformationLib extends MutationsHelper {
 					player.eyes.colour = color;
 					var desc: String = "";
 
-					desc += "You feel something fundamental change in your sight when you go check yourself in a puddle you notice that not only do they look human but your irises are now <b>[eyecolor].</b>";
-
+					desc += "You feel something change around the upper half of your face, but you're not sure what. There doesn't seem to be much difference, but you should probably check it out the first chance you get. <b>Your eye color is now [eyecolor]!</b>";
 
 					if (doOutput) outputText(desc);
 				},
@@ -1911,34 +2535,121 @@ public class TransformationLib extends MutationsHelper {
 		)
 	}
 
-	public const EyesSpider:Transformation        = new SimpleTransformation("Spider eyes",
+	public const EyesOniColors:Transformation = new SimpleTransformation("Oni Eye Colors",
 			// apply effect
 			function (doOutput:Boolean):void {
-				var desc: String = "";
-
-				desc += "You suddenly get the strangest case of double vision.  Stumbling and blinking around, you clutch at your face, but you draw your hands back when you poke yourself in the eye.  Wait, those fingers were on your forehead!  You tentatively run your fingertips across your forehead, not quite believing what you felt.  <b>There's a pair of eyes on your forehead, positioned just above your normal ones!</b>  This will take some getting used to!";
-
-				if (doOutput) outputText(desc);
-				setEyeType(Eyes.FOUR_SPIDER_EYES);
+				transformations.EyesChangeColor(["red", "orange", "yellow", "green"]).applyEffect(doOutput);
 			},
 			// is present
 			function ():Boolean {
-				return player.eyes.type === Eyes.FOUR_SPIDER_EYES
+				return InCollection(player.eyes.colour, ["red", "orange", "yellow", "green"]);
 			}
 	);
+
+	public const EyesPlantColors:Transformation = new SimpleTransformation("Plant Eye Colors",
+			// apply effect
+			function (doOutput:Boolean):void {
+				transformations.EyesChangeColor(["light purple", "green", "light green"]).applyEffect(doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return InCollection(player.eyes.colour, ["light purple", "green", "light green"]);
+			}
+	);
+
+	public const EyesGoblinColors:Transformation = new SimpleTransformation("Goblin Eye Colors",
+			// apply effect
+			function (doOutput:Boolean):void {
+				transformations.EyesChangeColor(["red", "yellow", "purple", "orange"]).applyEffect(doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return InCollection(player.eyes.colour, ["red", "yellow", "purple", "orange"]);
+			}
+	);
+
+	public const EyesRaijuColors:Transformation = new SimpleTransformation("Raiju Eye Colors",
+			// apply effect
+			function (doOutput:Boolean):void {
+				transformations.EyesChangeColor(["blue", "green", "turquoise"]).applyEffect(doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return InCollection(player.eyes.colour, ["blue", "green", "turquoise"]);
+			}
+	);
+
+	public const EyesKamaitachiColors:Transformation = new SimpleTransformation("Kamaitachi Eye Colors",
+			// apply effect
+			function (doOutput:Boolean):void {
+				transformations.EyesChangeColor(["golden"]).applyEffect(doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return InCollection(player.eyes.colour, ["golden"]);
+			}
+	);
+
+	public const EyesRatatoskrColors:Transformation = new SimpleTransformation("Ratatoskr Eye Colors",
+			// apply effect
+			function (doOutput:Boolean):void {
+				transformations.EyesChangeColor(["green","light green","emerald"]).applyEffect(doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return InCollection(player.eyes.colour, ["green","light green","emerald"]);
+			}
+	);
+
+	public const EyesRaccoonColors:Transformation = new SimpleTransformation("Raccoon Eye Colors",
+			// apply effect
+			function (doOutput:Boolean):void {
+				transformations.EyesChangeColor(["golden"]).applyEffect(doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return InCollection(player.eyes.colour, ["golden"]);
+			}
+	);
+
+	public const EyesKrakenColors:Transformation = new SimpleTransformation("Kraken Eye Colors",
+			// apply effect
+			function (doOutput:Boolean):void {
+				transformations.EyesChangeColor(["bright pink", "light purple", "purple"]).applyEffect(doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return InCollection(player.eyes.colour, ["bright pink", "light purple", "purple"]);
+			}
+	);
+
+	public const EyesSeadragonColors:Transformation = new SimpleTransformation("Seadragon Eye Colors",
+			// apply effect
+			function (doOutput:Boolean):void {
+				transformations.EyesChangeColor(["orange", "yellow", "light green"]).applyEffect(doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return InCollection(player.eyes.colour, ["orange", "yellow", "light green"]);
+			}
+	);
+
+	public const EyesFireSnailColors:Transformation = new SimpleTransformation("Fire Snail Eye Colors",
+			// apply effect
+			function (doOutput:Boolean):void {
+				transformations.EyesChangeColor(["red", "orange", "yellow"]).applyEffect(doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return InCollection(player.eyes.colour, ["red", "orange", "yellow"]);
+			}
+	);
+
 	public const EyesSpiderAndMutagenInt:Transformation = EyesSpider.copyWithExtraEffect(
 			"Spider eyes + Mutagen Bonus INT",
 			// extra effect
 			function (doOutput:Boolean):void {
 				MutagenBonus("int", 5);
-			}
-	);
-
-	public const EyesHumanToSpider:Transformation = EyesSpider.copyWithExtraCondition(
-			"Human eyes to spider eyes",
-			// extra condition
-			function ():Boolean {
-				return player.eyes.type === Eyes.HUMAN
 			}
 	);
 
@@ -2315,7 +3026,7 @@ public class TransformationLib extends MutationsHelper {
 		TieredSpiderFace,
 		makeHairColorTf(["midnight purple"]),
 		new OrderedTransformation("EyesRedThenSpider", [
-			makeEyeColorTf(["red"]),
+			EyesChangeColor(["red"]),
 			EyesSpiderAndMutagenInt
 		]),
 		BreastRowsRemoveToOne,

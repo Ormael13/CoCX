@@ -124,7 +124,10 @@ package classes.Scenes.Areas.GlacialRift
 			if (player.lowerBody != LowerBody.WENDIGO) CoC.instance.mutations.setLowerBody(LowerBody.WENDIGO);
 			if (player.legCount != 2) player.legCount = 2;
 			if (player.arms.type != Arms.WENDIGO) CoC.instance.mutations.setArmType(Arms.WENDIGO);
-			if (player.eyes.type != Eyes.DEAD_EYES) CoC.instance.mutations.setEyeTypeAndColor(Eyes.DEAD_EYES, "spectral blue");
+			if (!CoC.instance.transformations.EyesDead.isPresent()) {
+				CoC.instance.transformations.EyesDead.applyEffect(false);
+				CoC.instance.transformations.EyesChangeColor(["spectral blue"]).applyEffect(false);
+			}
 			if (player.tongue.type != Tongue.RAVENOUS_TONGUE) CoC.instance.transformations.TongueRavenous.applyEffect(false);
 			if (player.horns.type != Horns.ANTLERS) CoC.instance.mutations.setHornType(Horns.ANTLERS, 30);
 			if (player.ears.type != Ears.DEER) CoC.instance.mutations.setEarType(Ears.DEER);

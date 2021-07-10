@@ -126,13 +126,8 @@ public class PotentVenom extends Consumable {
 		}
 		//Eyes
 		if (player.faceType == Face.ANIMAL_TOOTHS && player.eyes.type != Eyes.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYou feel a sudden wave of sadness come over you. You sulk, wanting to find some dank dark place to curl up and hide in. " +
-					"If anyone saw you now they would wonder why you appear so downtrodden." +
-					//"" + (EngineCore.silly() ? "You could really use a hug and a tub of ice cream right now.": "You could really use a hug and a tub of ice cream right now.") + "" +
-					"[if (silly) You could really use a hug and a tub of ice cream right now.] " +
-					"You vaguely register the feeling of your teeth sharpening. " +
-					"<b>Though saddened you suppose you could leave someone with a nasty bite with your new sharp teeth.</b>");
-			mutations.setEyeType(Eyes.CENTIPEDE);
+			outputText("\n\n");
+			CoC.instance.transformations.EyesCentipede.applyEffect();
 			changes++;
 		}
 		//Tatoo

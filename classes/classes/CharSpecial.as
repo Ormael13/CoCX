@@ -1970,10 +1970,10 @@ import classes.Items.*;
 				player.faceType = rand(20)+1; // since it is not a enum, it is impossible to make it auto-adjust...
 
 			if(player.faceType == Face.SPIDER_FANGS && rand(2) == 0)
-					player.eyes.type = Eyes.FOUR_SPIDER_EYES; // 50% to have spider eyes with spider fangs
+					player.eyes.type = Eyes.SPIDER; // 50% to have spider eyes with spider fangs
 			else if(rand(20) == 0) // 5% for inhuman eyes otherwise
 				if(rand(2) == 0)
-					player.eyes.type = Eyes.FOUR_SPIDER_EYES;
+					player.eyes.type = Eyes.SPIDER;
 				else
 					player.eyes.type = Eyes.BLACK_EYES_SAND_TRAP;
 

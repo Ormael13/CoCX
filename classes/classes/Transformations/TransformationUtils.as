@@ -42,7 +42,7 @@ public class TransformationUtils {
         return choice;
     }
 
-    public static function applyIfNotPresent(transformation: *, doOutput: Boolean = true): void {
+    public static function applyTFIfNotPresent(transformation: *, doOutput: Boolean = true): void {
 		if (!transformation.isPresent()) {
 			transformation.applyEffect(doOutput);
 			if (doOutput) EngineCore.outputText("\n\n");

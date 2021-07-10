@@ -990,7 +990,7 @@ public class Camp extends NPCAwareContent{
 				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
 			}
 		}
-		
+
 		//Remove buttons according to conditions.
 		if (isNightTime) {
 			if (model.time.hours >= 22 || model.time.hours < 6) {
@@ -1201,19 +1201,19 @@ public class Camp extends NPCAwareContent{
 		if (followerKiha()) counter++;
 		return counter;
 	}
-	
+
 	public function nightTimeActiveFollowers():Number {
 		var counter:Number = 0;
 		if (followerShouldra()) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] > 10 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		return counter;
 	}
-	
+
 	public function nightTimeActiveLovers():Number {
 		var counter:Number = 0;
 		return counter;
 	}
-	
+
 	public function nightTimeActiveSlaves():Number {
 		var counter:Number = 0;
 		return counter;
@@ -3320,7 +3320,7 @@ private function SparrableNPCsMenu():void {
 		if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(3, "Boat", SceneLib.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 12");
 		else addButtonDisabled(3, "???", "???");
 		addButton(4, "Next", placesPage2);
-		
+
 		if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(5, "Tel'Adre", SceneLib.telAdre.telAdreMenu).hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
 		else addButtonDisabled(5, "???", "???");
 		if (flags[kFLAGS.BAZAAR_ENTERED] > 0) addButton(6, "Bazaar", SceneLib.bazaar.enterTheBazaar).hint("Visit the Bizarre Bazaar where the demons and corrupted beings hang out.");
@@ -3360,7 +3360,7 @@ private function SparrableNPCsMenu():void {
 		if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");
 		else addButtonDisabled(8, "???", "???");
 		addButton(9, "Previous", placesToPage1);
-		
+
 		if (flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(10, "Great Tree", SceneLib.aikoScene.encounterAiko).hint("Visit the Great Tree in the Deep Woods where Aiko lives.");
 		else addButtonDisabled(10, "???", "???");
 //	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", CoC.instance.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
@@ -3381,7 +3381,7 @@ private function SparrableNPCsMenu():void {
 			addButtonDisabled(0, "???", "???");
 			addButtonDisabled(1, "???", "???");
 		}
-		
+
 		addButton(9, "Previous", placesToPage2);
 		addButton(14, "Back", playerMenu);
 	}
@@ -3422,7 +3422,7 @@ private function SparrableNPCsMenu():void {
 		else addButtonDisabled(13, "???", "???");
 		addButton(14, "Back", places);
 	}
-	
+
 	private function maraeIsland():void {
 		menu();
 		if (flags[kFLAGS.MARAE_QUEST_COMPLETE] < 1 && flags[kFLAGS.MET_MARAE_CORRUPTED] < 2 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] < 1) addButton(0, "Visit", marae.encounterMarae).hint("Normal visit on godess island.");
@@ -4828,8 +4828,8 @@ public function wakeFromBadEnd():void {
 
 	private function chooseEyesColorSaveUpdate(color:String):void {
 		clearOutput();
-		player.eyes.colour = color;
-		outputText("You now have " + color + " eyes. You will be returned to your [camp] now and you can continue your usual gameplay.");
+		CoC.instance.transformations.EyesChangeColor([color]).applyEffect(false);
+		outputText("You now have [eyecolor] eyes. You will be returned to your [camp] now and you can continue your usual gameplay.");
 		doNext(doCamp);
 	}
 

@@ -1418,7 +1418,7 @@ use namespace CoC;
 		public function set ammo(value:int):void {
 			flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = value;
 		}
-		
+
 		//override public function get weapons
 		override public function get weaponFlyingSwordsName():String {
 			return _weaponFlyingSwords.name;
@@ -5650,7 +5650,7 @@ use namespace CoC;
 				catCounter++;
 			if (faceType == Face.CHESHIRE || faceType == Face.CHESHIRE_SMILE)
 				catCounter -= 7;
-			if (eyes.type == Eyes.CAT_SLITS)
+			if (eyes.type == Eyes.CAT)
 				catCounter++;
 			if (ears.type == Ears.CAT)
 				catCounter++;
@@ -5713,7 +5713,7 @@ use namespace CoC;
 			var nekomataCounter:Number = 0;
 			if (faceType == Face.CAT_CANINES)
 				nekomataCounter++;
-			if (eyes.type == Eyes.CAT_SLITS)
+			if (eyes.type == Eyes.CAT)
 				nekomataCounter++;
 			if (ears.type == Ears.CAT)
 				nekomataCounter++;
@@ -5771,7 +5771,7 @@ use namespace CoC;
 			var cheshireCounter:Number = 0;
 			if (faceType == Face.CHESHIRE || faceType == Face.CHESHIRE_SMILE)
 				cheshireCounter += 2;
-			if (eyes.type == Eyes.CAT_SLITS)
+			if (eyes.type == Eyes.CAT)
 				cheshireCounter++;
 			if (ears.type == Ears.CAT)
 				cheshireCounter++;
@@ -5939,7 +5939,7 @@ use namespace CoC;
 				lizardCounter++;
 			if (ears.type == Ears.LIZARD)
 				lizardCounter++;
-			if (eyes.type == Eyes.REPTILIAN)
+			if (eyes.type == Eyes.LIZARD)
 				lizardCounter++;
 			if (tailType == Tail.LIZARD)
 				lizardCounter++;
@@ -5984,7 +5984,7 @@ use namespace CoC;
 		public function spiderScore():Number {
 			Begin("Player","racialScore","spider");
 			var spiderCounter:Number = 0;
-			if (eyes.type == Eyes.FOUR_SPIDER_EYES)
+			if (eyes.type == Eyes.SPIDER)
 				spiderCounter++;
 			if (faceType == Face.SPIDER_FANGS)
 				spiderCounter++;
@@ -6117,7 +6117,7 @@ use namespace CoC;
 				kitsuneCounter -= 2;
 			if (skin.base.type != Skin.PLAIN)
 				kitsuneCounter -= 3;
-			if (arms.type == Arms.HUMAN || arms.type == Arms.KITSUNE)
+			if (arms.type == Arms.HUMAN || arms.type == Arms.KITSUNE || arms.type == Arms.FOX)
 				kitsuneCounter++;
 				kitsuneCounter2++;
 			if (lowerBody == LowerBody.FOX || lowerBody == LowerBody.HUMAN)
@@ -6184,7 +6184,7 @@ use namespace CoC;
 				dragonCounter2++;
 			if (faceType == Face.JABBERWOCKY || faceType == Face.BUCKTOOTH)
 				dragonCounter -= 10;
-			if (eyes.type == Eyes.DRAGON)
+			if (eyes.type == Eyes.DRACONIC)
 				dragonCounter++;
 				dragonCounter2++;
 			if (ears.type == Ears.DRAGON)
@@ -6282,7 +6282,7 @@ use namespace CoC;
 				jabberwockyCounter++;
 			if (faceType == Face.DRAGON || faceType == Face.DRAGON_FANGS)
 				jabberwockyCounter -= 10;
-			if (eyes.type == Eyes.DRAGON)
+			if (eyes.type == Eyes.DRACONIC)
 				jabberwockyCounter++;
 			if (ears.type == Ears.DRAGON)
 				jabberwockyCounter++;
@@ -7407,7 +7407,7 @@ use namespace CoC;
 				LeviathanCounter++;
 			if (tongue.type == Tongue.DRACONIC)
 				LeviathanCounter++;
-			if (eyes.type == Eyes.DRAGON)
+			if (eyes.type == Eyes.DRACONIC)
 				LeviathanCounter++;
 			if (InCollection(eyes.colour,"orange","yellow","light green"))
 				LeviathanCounter++;
@@ -8384,7 +8384,7 @@ use namespace CoC;
 				if (ears.type == Ears.HUMAN || ears.type == Ears.LIZARD || ears.type == Ears.DRAGON)
 					salamanderCounter++;
 			}
-			if (eyes.type == Eyes.REPTILIAN)
+			if (eyes.type == Eyes.LIZARD)
 				salamanderCounter++;
 			if (arms.type == Arms.SALAMANDER)
 				salamanderCounter++;
@@ -8601,7 +8601,7 @@ use namespace CoC;
 				wendigoCounter++;
 			if (coatColor == "snow white")
 				wendigoCounter++;
-			if (eyes.type == Eyes.DEAD_EYES)
+			if (eyes.type == Eyes.DEAD)
 				wendigoCounter++;
 			if (eyes.colour == "spectral blue")
 				wendigoCounter++;
@@ -8844,7 +8844,7 @@ use namespace CoC;
 				if (faceType == Face.CAT_CANINES && (lowerBody == LowerBody.CAT))
 					sphinxCounter++;
 			}
-			if (eyes.type == Eyes.CAT_SLITS)
+			if (eyes.type == Eyes.CAT)
 				sphinxCounter++;
 			if (tongue.type == Tongue.CAT)
 				sphinxCounter++;
@@ -9269,7 +9269,7 @@ use namespace CoC;
 				if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN || ears.type == Ears.LIZARD || ears.type == Ears.DRAGON && phoenixCounter > 2)
 					phoenixCounter++;
 			}
-			if (eyes.type == Eyes.REPTILIAN)
+			if (eyes.type == Eyes.LIZARD)
 				phoenixCounter++;
 			if (lowerBody == LowerBody.SALAMANDER || lowerBody == LowerBody.HARPY)
 				phoenixCounter++;
@@ -10247,11 +10247,11 @@ use namespace CoC;
 		}
 
 		public function atlachFullTfCheck():Boolean {
-			return lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && arms.type == Arms.SPIDER && eyes.type == Eyes.FOUR_SPIDER_EYES && ears.type == Ears.ELFIN
+			return lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && arms.type == Arms.SPIDER && eyes.type == Eyes.SPIDER && ears.type == Ears.ELFIN
 			&& rearBody.type == RearBody.ATLACH_NACHA && faceType == Face.SPIDER_FANGS && hasCoatOfType(Skin.CHITIN)
 			&& eyes.colour == "red" && coatColor == "midnight purple" && hairColor == "midnight purple";
 		}
-		
+
 		public function atlachNachaScore():int {
 			var score:int = 0;
 			Begin("Player","racialScore","atlachNacha");
@@ -10266,7 +10266,7 @@ use namespace CoC;
 			if (arms.type == Arms.SPIDER)
 				score++;
 			// Omni Eye on forehead 1
-			if (eyes.type == Eyes.FOUR_SPIDER_EYES) {
+			if (eyes.type == Eyes.SPIDER) {
 				score++;
 				// Red eye color 1
 				if (eyes.colour == "red")
@@ -12683,7 +12683,7 @@ use namespace CoC;
 					currentSen += 25;
 				}
 			}
-			
+
 			if (poltergeistScore() >= 6) {
 				if (poltergeistScore() >= 18) {
 					maxStrCap2 -= 45;
@@ -12706,7 +12706,7 @@ use namespace CoC;
 				}
 			}
 			if (bansheeScore() >= 4) {
-			
+
 			}
 			if (firesnailScore() >= 15) {
 				maxStrCap2 += 70;

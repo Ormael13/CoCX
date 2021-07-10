@@ -141,7 +141,7 @@ public function LetzRape(letzRape:Boolean = false):void {
 		player.skin.base.pattern = Skin.PATTERN_NONE;
 		player.hairColor = choosencolor;
 		player.eyes.type = Eyes.FIENDISH;
-		player.eyes.colour = "red";
+		CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
 		player.ears.type = Ears.ELFIN;
 		CoC.instance.transformations.FaceHuman.applyEffect(false);
 		player.tongue.type = Tongue.HUMAN;

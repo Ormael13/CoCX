@@ -108,7 +108,9 @@ public class YukiOnnaScene extends BaseContent
 				CoC.instance.mutations.setLowerBody(LowerBody.YUKI_ONNA);
 				if (player.legCount != 2) player.legCount = 2;
 				CoC.instance.mutations.setArmType(Arms.YUKI_ONNA);
-				CoC.instance.mutations.setEyeTypeAndColor(Eyes.HUMAN,"light purple");
+				CoC.instance.transformations.EyesHuman.applyEffect(false);
+				CoC.instance.transformations.EyesChangeColor(["light purple"]).applyEffect(false);
+				CoC.instance.transformations.EyesHuman.applyEffect(false);
 				outputText("\n\n");
 				CoC.instance.transformations.HairSnowy.applyEffect(false);
 				if (rand(3) == 0) player.hairColor = "snow white";

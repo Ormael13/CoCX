@@ -1857,7 +1857,7 @@ import classes.CoC;
 				changes++;
 			}
 
-			if (rand(3) == 0 && changes < changeLimit && player.eyes.type == Eyes.FOUR_SPIDER_EYES) {
+			if (rand(3) == 0 && changes < changeLimit && player.eyes.type == Eyes.SPIDER) {
 				outputText("\n\nYour two forehead eyes start throbbing painfully, your sight in them eventually going dark. You touch your forehead to inspect your eyes, only to find out that they have disappeared. <b>You only have two eyes now!</b>");
 				player.eyes.type = Eyes.HUMAN;
 				changes++;

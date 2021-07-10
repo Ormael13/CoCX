@@ -25,6 +25,8 @@ import classes.Transformations.PossibleEffect;
 import classes.Transformations.Transformation;
 import classes.Transformations.TransformationUtils;
 
+import classes.CoC;
+
 public final class Mutations extends MutationsHelper {
     public function Mutations() {
     }
@@ -2364,7 +2366,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(5) == 0 && player.eyes.type != Eyes.HUMAN && type != 6) {
-            humanizeEyes();
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Master Furry Appearance Order:
@@ -4168,15 +4171,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Eye colors
-        var goblin_eyes_color:Array = ["red", "yellow", "purple", "orange"];
-        if (player.eyes.type == Eyes.HUMAN && player.eyes.colour != "red" && player.eyes.colour != "yellow" && player.eyes.colour != "purple" && player.eyes.colour != "orange" && changes < changeLimit && rand(3) == 0) {
-            player.eyes.colour = randomChoice(goblin_eyes_color);
-            outputText("\n\nSomething weird happens in your eyes… like colors have slightly become brighter and wilder. <b>You make sure you ain’t on some drug trip from the Gremlin Oil before checking yourself in a puddle, discovering that your iris changed to [eyecolor].</b>");
+        if (player.eyes.type == Eyes.HUMAN && !CoC.instance.transformations.EyesGoblinColors.isPresent() && changes < changeLimit && rand(3) == 0) {
+            CoC.instance.transformations.EyesGoblinColors.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(5) == 0 && player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.GREMLIN) {
-            humanizeEyes();
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Add gremlin eyes
@@ -4387,10 +4389,8 @@ public final class Mutations extends MutationsHelper {
             humanizeLowerBody();
             changes++;
         }
-        var goblin_eyes_color:Array = ["red", "yellow", "purple"];
-        if (player.eyes.type == Eyes.HUMAN && player.eyes.colour != "red" && player.eyes.colour != "yellow" && player.eyes.colour != "purple" && changes < changeLimit && rand(3) == 0) {
-            player.eyes.colour = randomChoice(goblin_eyes_color);
-            outputText("\n\nBright lights flash into your vision as your eyes glow with light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment, but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>[eyecolor] human eyes staring back at you.</b>");
+        if (player.eyes.type == Eyes.HUMAN && !CoC.instance.transformations.EyesGoblinColors.isPresent() && changes < changeLimit && rand(3) == 0) {
+            CoC.instance.transformations.EyesGoblinColors.applyEffect();
             changes++;
         }
         var goblin_hair_color:Array = ["red", "purple", "green", "blue", "pink", "orange"];
@@ -4401,7 +4401,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(5) == 0 && player.eyes.type > Eyes.HUMAN) {
-            humanizeEyes();
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //-Remove extra breast rows
@@ -4730,7 +4731,8 @@ public final class Mutations extends MutationsHelper {
             }
             //Remove odd eyes
             if (changes < changeLimit && rand(5) == 0 && player.eyes.type != Eyes.HUMAN) {
-                humanizeEyes();
+                outputText("\n\n");
+                CoC.instance.transformations.EyesHuman.applyEffect();
                 changes++;
             }
             //Tail TF
@@ -5045,8 +5047,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Snake eyes
         if (player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && rand(4) == 0 && changes < changeLimit) {
-            setEyeType(Eyes.SNAKE);
-            outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake.  <b>You now have snake eyes!</b>.");
+            outputText("\n\n");
+            CoC.instance.transformations.EyesSnake.applyEffect();
             changes++;
         }
         //Ears!
@@ -5292,14 +5294,14 @@ public final class Mutations extends MutationsHelper {
         }
         //Snake eyes for hydra
         if (player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.lowerBody == LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit) {
-            setEyeType(Eyes.SNAKE);
-            outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake.  <b>You now have snake eyes!</b>.");
+            outputText("\n\n");
+            CoC.instance.transformations.EyesSnake.applyEffect();
             changes++;
         }
         //Snake eyes
         if (player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.eyes.type != Eyes.GORGON && rand(4) == 0 && changes < changeLimit) {
-            setEyeType(Eyes.SNAKE);
-            outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake.  <b>You now have snake eyes!</b>.");
+            outputText("\n\n");
+            CoC.instance.transformations.EyesSnake.applyEffect();
             changes++;
         }
         //Ears!
@@ -5316,14 +5318,14 @@ public final class Mutations extends MutationsHelper {
         }
         //Gorgon eyes
         if (type == 0 && player.hairType == Hair.GORGON && player.eyes.type == Eyes.SNAKE && player.eyes.type != Eyes.GORGON && rand(4) == 0 && changes < changeLimit) {
-            setEyeType(Eyes.GORGON);
-            outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, all seems to be fine until at least it seems so. But when moment later, when you casualy look at your hands pondering if there is drinking this vial of oil maybe have some other effect the numbing sensation starts to spread starting from your hands fingers. Worried you focus your gaze at them to notice, that they typical texture becoming grey colored much similar to that of... stone? And slowy you realize the more you look at them, the faster change. Panicked for a moment you look away and then this numbing feeling starting to slowly receed. But looking back at them causing it to return. After moment, and closing eyelids, you conclude that your eyes must have gained an useful ability.  <b>Your eyes has turned into gorgon eyes.</b>");
+            outputText("\n\n");
+            CoC.instance.transformations.EyesGorgon.applyEffect();
             changes++;
         }
         //Snake eyes for hydra
         if (type == 3 && player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && player.lowerBody == LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit) {
-            setEyeType(Eyes.SNAKE);
-            outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake.  <b>You now have snake eyes!</b>.");
+            outputText("\n\n");
+            CoC.instance.transformations.EyesSnake.applyEffect();
             changes++;
         }
         //-Existing horns become draconic, max of 4, max length of 1'
@@ -5753,7 +5755,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(3) == 0 && player.eyes.type > Eyes.HUMAN) {
-            humanizeEyes();
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //-Gain human ears (If you have human face)
@@ -6346,16 +6349,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //DAT EYES
-        if (rand(3) == 0 && changes < changeLimit && player.tongue.type == Tongue.CAT && player.eyes.type != Eyes.CAT_SLITS && player.eyes.type != Eyes.INFERNAL && type != 3) {
-            //Gain cat-like eyes
-            outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.  <b>Your eyes has turned into those of cat with vertical slit.</b>");
-            setEyeType(Eyes.CAT_SLITS);
+        if (rand(3) == 0 && changes < changeLimit && player.tongue.type == Tongue.CAT && player.eyes.type != Eyes.CAT && player.eyes.type != Eyes.INFERNAL && type != 3) {
+            outputText("\n\n");
+            CoC.instance.transformations.EyesCat.applyEffect();
             changes++;
         }
-        if (rand(3) == 0 && changes < changeLimit && player.tongue.type == Tongue.CAT && player.eyes.type != Eyes.DISPLACER && type == 3) {
-            //Gain displacer eyes
-            outputText("\n\nFor a moment your sight shifts as the ambient light suddenly turns extremely bright, almost blinding you. You walk around disoriented for a moment until the luminosity fades back to normal. You run to a puddle of water to check your reflection and quickly notice your eyes are now yellow and cat-like however just as you watch your reflection the white of your eyes also begins to darken turning black not unlike the eyes of a displacer beast.  <b>You now have displacer beast eyes.</b>");
-            setEyeTypeAndColor(Eyes.DISPLACER, "yellow");
+        if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.TongueCat.isPresent() && !CoC.instance.transformations.EyesDisplacer.isPresent() && type == 3) {
+            CoC.instance.transformations.EyesDisplacer.applyEffect();
             changes++;
         }
         //cheshire fur color
@@ -6387,7 +6387,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //TURN INTO A FURRAH!  OH SHIT
-        if ((player.eyes.type == Eyes.CAT_SLITS || player.eyes.type == Eyes.DISPLACER) && rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
+        if ((player.eyes.type == Eyes.CAT || player.eyes.type == Eyes.DISPLACER) && rand(3) == 0 && changes < changeLimit && !player.hasCoatOfType(Skin.FUR)) {
             if (!player.hasCoatOfType(Skin.FUR)) humanizeSkin();
             if (type == 1) {
                 player.skin.growCoat(Skin.FUR, {color: randomChoice(["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"])}, Skin.COVERAGE_LOW);
@@ -6727,13 +6727,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Lizard eyes
         if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.eyes.type == Eyes.HUMAN) {
-            outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a reptile taking on a yellow hue.  <b>You now have reptilian eyes!</b>");
-            setEyeTypeAndColor(Eyes.REPTILIAN, "yellow");
+            CoC.instance.transformations.EyesLizard.applyEffect();
             changes++;
         }
         //Remove odd eyes
-        if (changes < changeLimit && rand(5) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.REPTILIAN) {
-            humanizeEyes();
+        if (changes < changeLimit && rand(5) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.LIZARD) {
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //-Ears become smaller nub-like openings?
@@ -6977,13 +6977,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Lizard eyes
         if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.eyes.type == Eyes.HUMAN) {
-            outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a reptile taking on a yellow hue.  <b>You now have reptilian eyes!</b>");
-            setEyeTypeAndColor(Eyes.REPTILIAN, "ember");
+            CoC.instance.transformations.EyesLizard.applyEffect();
             changes++;
         }
         //Remove odd eyes
-        if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.REPTILIAN) {
-            humanizeEyes();
+        if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.LIZARD) {
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Fanged face
@@ -7174,14 +7174,15 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Lizard eyes
-        if (changes < changeLimit && rand(3) == 0 && player.faceType == Face.SALAMANDER_FANGS && player.eyes.type == Eyes.HUMAN) {
-            outputText("\n\nSomething shift in your eyes as the level of light around you seems to increase. You go to check on what happened and discover your pupils not only changed to reptilian slits but now glow with a neon blue light. Well seeing in the dark will be easy with your <b>new dark blue iris with reptilian neon blue pupils that glow in the dark.</b>");
-            setEyeTypeAndColor(Eyes.CAVE_WYRM, "neon blue");
+        if (changes < changeLimit && rand(3) == 0 && CoC.instance.transformations.FaceSalamanderFangs.isPresent() && CoC.instance.transformations.EyesHuman.isPresent()) {
+            outputText("\n\n");
+            CoC.instance.transformations.EyesCaveWyrm.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.CAVE_WYRM) {
-            humanizeEyes();
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Ears
@@ -7520,14 +7521,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Lizard eyes
-        if (changes < changeLimit && rand(4) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.eyes.type == Eyes.HUMAN) {
-            outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a reptile taking on a yellow hue.  <b>You now have reptilian eyes!</b>");
-            setEyeTypeAndColor(Eyes.REPTILIAN, "yellow");
+        if (changes < changeLimit && rand(4) == 0 && player.lowerBody != LowerBody.GARGOYLE && CoC.instance.transformations.EyesHuman.isPresent()) {
+            CoC.instance.transformations.EyesLizard.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN) {
-            humanizeEyes();
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Human face
@@ -7958,7 +7959,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(3) == 0 && player.eyes.type > Eyes.HUMAN) {
-            humanizeEyes();
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         // Remove gills
@@ -8258,7 +8260,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(5) == 0 && player.eyes.type > Eyes.HUMAN) {
-            humanizeEyes();
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //****************
@@ -8620,9 +8623,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Eyes
         if (player.eyes.type != Eyes.GRYPHON && player.arms.type == Arms.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
-            outputText("\n\nThe mysterious energy coming from the statue continues adapting your body into a more fierce, strong shape. This time, it has affected you eyesight, as you suddenly notice how the long distances that you once had trouble seeing are clear as if you were in front of them, and that you can perceive even the minimal move even from several miles afar.");
-            outputText("\n\nChecking your changes on the river, you see clearly how your sclera has acquired a golden-orange coloration, as well as your outer iris, separated from the former by a thin circle of black. Both your pupil and your inner iris, which now has enlarged, are solid black. <b>Now you’ll have a blessed vision due those raptor, gryphon-like eyes.</b>");
-            setEyeTypeAndColor(Eyes.GRYPHON, "golden-orange");
+            CoC.instance.transformations.EyesGryphon.applyEffect();
             changes++;
         }
         if (changes == 0 && type == 0) outputText("\n\nIt seems like the fruit had no effect this time. Maybe it was spoiled, or kept in storage for too much time?");
@@ -8723,7 +8724,8 @@ public final class Mutations extends MutationsHelper {
 
         //Remove odd eyes
         if (changes < changeLimit && rand(5) == 0 && player.eyes.type > Eyes.HUMAN) {
-            humanizeEyes();
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //****************
@@ -9336,9 +9338,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Eyes
-        if (player.hairType == 2 && player.eyes.type != Eyes.GHOST && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYour vision becomes blurry, making it hard to see. You blink repeatedly, trying to clear your eyes. As your vision returns to normal, you notice that your surroundings appear sharper than normal. The shadows are as clear as day, though everything is tinted with a faint ethereal glow. You look in a puddle to see that your eyes glow an eerie [eyecolor]. <b>You now have glowing ghost eyes.</b>");
-            setEyeType(Eyes.GHOST);
+        if (player.hairType == Hair.GHOST && !CoC.instance.transformations.EyesGhost.isPresent() && rand(3) == 0 && changes < changeLimit) {
+            outputText("\n\n");
+			CoC.instance.transformations.EyesGhost.applyEffect();
             changes++;
         }
         //Skin
@@ -9594,10 +9596,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.ears.type == Ears.ELVEN && player.eyes.type != Eyes.ELF && changes < changeLimit && rand(3) == 0) {
-            if (player.eyes.type == Eyes.HUMAN) {
-                outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your feet out from under you. As you steady yourself and open your eyes, you realize something seems different. Your vision is changed somehow. Your pupils draw in light and the color and shapes seems more defined even at great distance. Your new eyes granting you better vision. You go to a puddle to check what happened to them and notice <b>your new eyes are like those of an elf’s with a vertical slit that reflects lights.</b>");
-                setEyeType(Eyes.ELF);
-            } else humanizeEyes();
+            if (CoC.instance.transformations.EyesHuman.isPresent()) {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesElf.applyEffect();
+            } else {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesHuman.applyEffect();
+            }
             changes++;
         }
         if (changes < changeLimit && !player.hasPerk(PerkLib.ElvenSense) && player.ears.type == Ears.ELVEN && player.eyes.type == Eyes.ELF) {
@@ -9742,12 +9747,13 @@ public final class Mutations extends MutationsHelper {
             } else humanizeEars();
             changes++;
         }
-        if (player.ears.type == Ears.ELFIN && player.eyes.type != Eyes.ORC && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type == Ears.ELFIN && !CoC.instance.transformations.EyesOrc.isPresent() && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
             if (player.eyes.type == Eyes.HUMAN) {
-                player.eyes.colour = "bloody red";
-                outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady yourself and open your eyes, you realize something seems different, as if the nerves have been optimized.  Your vision has been changed somehow.  <b>Your eyes has turned into those of orc.</b>");
-                setEyeType(Eyes.ORC);
-            } else humanizeEyes();
+                CoC.instance.transformations.EyesOrc.applyEffect();
+            } else {
+                CoC.instance.transformations.EyesHuman.applyEffect();
+            }
             changes++;
         }
         if (player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
@@ -9900,13 +9906,13 @@ public final class Mutations extends MutationsHelper {
             } else humanizeEars();
             changes++;
         }
-        var raiju_eyes_color:Array = ["blue", "green", "turquoise"];
-        if (player.ears.type == Ears.RAIJU && player.eyes.type != Eyes.RAIJU && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type == Ears.RAIJU && !CoC.instance.transformations.EyesRaijuColors.isPresent() && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
             if (player.eyes.type == Eyes.HUMAN) {
-                player.eyes.colour = randomChoice(raiju_eyes_color);
-                outputText("\n\nBright lights flash into your vision as your eyes glow with electric light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>glowing [eyecolor] bestial slitted eyes staring back at you.</b>");
-                setEyeType(Eyes.RAIJU);
-            } else humanizeEyes();
+                CoC.instance.transformations.EyesRaijuColors.applyEffect();
+            } else {
+                CoC.instance.transformations.EyesHuman.applyEffect();
+            }
             changes++;
         }
 
@@ -10084,13 +10090,14 @@ public final class Mutations extends MutationsHelper {
             setEarType(Ears.ELFIN);
             changes++;
         }
-        var raiju_eyes_color:Array = ["blue", "green", "turquoise"];
-        if (player.ears.type == Ears.ELFIN && player.eyes.type != Eyes.RAIJU && changes < changeLimit && rand(3) == 0) {
+
+        if (player.ears.type == Ears.ELFIN && !CoC.instance.transformations.EyesRaijuColors.isPresent() && changes < changeLimit && rand(3) == 0) {
+                outputText("\n\n");
             if (player.eyes.type == Eyes.HUMAN) {
-                player.eyes.colour = randomChoice(raiju_eyes_color);
-                outputText("\n\nBright lights flash into your vision as your eyes glow with electric light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment, but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>glowing [eyecolor] bestial slitted eyes staring back at you.</b>");
-                setEyeType(Eyes.RAIJU);
-            } else humanizeEyes();
+                CoC.instance.transformations.EyesRaijuColors.applyEffect();
+            } else {
+                CoC.instance.transformations.EyesHuman.applyEffect();
+            }
             changes++;
         }
 
@@ -10167,18 +10174,19 @@ public final class Mutations extends MutationsHelper {
         }
 		if (player.blockingBodyTransformations()) changeLimit = 0;
         //Physical
-		if (player.eyes.type == Eyes.MONOEYE && player.eyes.colour != "red" && changes < changeLimit && rand(3) == 0) {
-            player.eyes.colour = "red";
-            outputText("\n\nBright lights flash into your vision as your eyes glow with light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment, but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>[eyecolor] monoeye staring back at you.</b>");
+		if (CoC.instance.transformations.EyesMonoeye.isPresent() && !CoC.instance.transformations.EyesChangeColor(["red"]).isPresent() && changes < changeLimit && rand(3) == 0) {
+            CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect();
             changes++;
         }
         if (player.eyes.type != Eyes.MONOEYE && changes < changeLimit && rand(3) == 0) {
-            if (player.eyes.type == Eyes.HUMAN) {
-                outputText("\n\nYou gasp in discomfort as your vision troubles and blurr for a moment. You pass your hand to feel for your face and discover to your absolute surprise you can't feel your nose ridge heck as you poke yourself in the eye and recoil back in surprise. " +
-                        "<b>Seems your eyes merged together into one single all encompassing eye like that of some cyclopean creature.</b>");
-                setEyeType(Eyes.MONOEYE);
+            if (CoC.instance.transformations.EyesHuman.isPresent()) {
+                outputText("\n\n");
+			CoC.instance.transformations.EyesMonoeye.applyEffect();
             }
-			else humanizeEyes();
+			else {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesHuman.applyEffect();
+            }
             changes++;
         }
 		if (player.faceType != Face.ANIMAL_TOOTHS && rand(3) == 0 && changes < changeLimit) {
@@ -10266,7 +10274,6 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         var temp2:Number = 0;
         var Ratatoskr_Colour:Array = ["brown","light brown","caramel","chocolate","russet"];
-        var Ratatoskr_EyeColour:Array = ["green","light green","emerald"];
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         changeLimit += additionalTransformationChances();
@@ -10388,14 +10395,13 @@ public final class Mutations extends MutationsHelper {
 			CoC.instance.transformations.TongueRatatoskr.applyEffect();
 			changes++;
 		}
-        if (player.ears.type == Ears.SQUIRREL && player.eyes.type != Eyes.RATATOSKR && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type == Ears.SQUIRREL && !CoC.instance.transformations.EyesRatatoskr.isPresent() && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
             if (player.eyes.type == Eyes.HUMAN) {
-                player.eyes.colour = randomChoice(Ratatoskr_EyeColour);
-                outputText("\n\nGeeze you know so much now it's like everyone around you is an idiot. How come they don't know about this and that is beyond you." +
-                        " <b>It's going to be hard to wipe away that somewhat permanent know it all smug expression from your face when you’re spreading words around your [eyecolor] eyes looking down teasingly on about everyone.</b>");
-                setEyeType(Eyes.RATATOSKR);
+                CoC.instance.transformations.EyesRatatoskr.applyEffect();
+            } else {
+                CoC.instance.transformations.EyesHuman.applyEffect();
             }
-			else humanizeEyes();
             changes++;
         }
 
@@ -10556,19 +10562,22 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.faceType == Face.WEASEL && player.ears.type != Ears.WEASEL && changes < changeLimit && rand(3) == 0) {
             if (player.ears.type == Ears.HUMAN) {
-                outputText("\n\nYour ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. " +
-                        "Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have weasel ears.</b>");
+                outputText("\n\nYour ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have weasel ears.</b>");
                 setEarType(Ears.WEASEL);
             } else humanizeEars();
             changes++;
         }
-        var raiju_eyes_color:Array = ["golden"];
-        if (player.ears.type == Ears.WEASEL && player.eyes.type != Eyes.WEASEL && changes < changeLimit && rand(3) == 0) {
-            if (player.eyes.type == Eyes.HUMAN) {
-                player.eyes.colour = randomChoice(raiju_eyes_color);
-                outputText("\n\nA sudden gust of wind send sand into your face. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>[eyecolor] bestial slitted eyes staring back at you not unlike those of a weasel.</b>");
-                setEyeType(Eyes.WEASEL);
-            } else humanizeEyes();
+        if (player.ears.type == Ears.WEASEL && !CoC.instance.transformations.EyesWeasel.isPresent() && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
+            if (transformations.EyesHuman.isPresent()) {
+                if (!CoC.instance.transformations.EyesKamaitachiColors.isPresent()) {
+                    outputText("\n\n");
+                    CoC.instance.transformations.EyesKamaitachiColors.applyEffect();
+                }
+                CoC.instance.transformations.EyesWeasel.applyEffect();
+            } else {
+                CoC.instance.transformations.EyesHuman.applyEffect();
+            }
             changes++;
         }
 
@@ -11087,8 +11096,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Fox Eyes
         if (player.faceType == Face.FOX && player.eyes.type != Eyes.FOX && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYou blink for an instant as the light and darkness seems to shift within your vision. You head to a pool to check it up and notice your eyes shifted to look more fox-like in a fashion similar to the kitsunes.  <b>You now have fox eyes.</b>");
-            setEyeType(Eyes.FOX);
+            outputText("\n\n");
+            CoC.instance.transformations.EyesFox.applyEffect();
             changes++;
         }
         if (player.tone > 40 && changes < changeLimit && rand(2) == 0) {
@@ -11308,14 +11317,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Lizard eyes
-        if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.eyes.type == Eyes.HUMAN) {
-            outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a reptile taking on a yellow hue.  <b>You now have reptilian eyes!</b>");
-            setEyeTypeAndColor(Eyes.REPTILIAN, "ember");
+        if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && CoC.instance.transformations.EyesHuman.isPresent()) {
+            CoC.instance.transformations.EyesLizard.applyEffect();
             changes++;
         }
         //Remove odd eyes
-        if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.REPTILIAN) {
-            humanizeEyes();
+        if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.LIZARD) {
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Fanged face
@@ -11698,8 +11707,8 @@ public final class Mutations extends MutationsHelper {
         });
         //Fox Eyes
         mutationStep(player.ears.type == Ears.FOX && player.eyes.type != Eyes.FOX, 3, function ():void {
-            outputText("\n\nYou blink for an instant as the light and darkness seems to shift within your vision. You head to a pool to check it up and notice your eyes shifted to look more fox-like in a fashion similar to the kitsunes.  <b>You now have fox eyes.</b>");
-            setEyeType(Eyes.FOX);
+            outputText("\n\n");
+            CoC.instance.transformations.EyesFox.applyEffect();
         });
         //Kitsune arms
         mutationStep(player.arms.type == Arms.HUMAN, 2, function ():void {
@@ -12223,19 +12232,15 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Remove odd eyes
-        if ((player.eyes.type == Eyes.FOUR_SPIDER_EYES || player.eyes.type == Eyes.CAT_SLITS) && rand(2) == 0 && changes < changeLimit) {
-            outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
-            if (player.eyes.type == Eyes.FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
-            else if (player.eyes.type == Eyes.CAT_SLITS) outputText("  Your cat-like eyes are gone!</b>");
-            outputText("  <b>You have normal, humanoid eyes again.</b>");
-            setEyeType(Eyes.HUMAN);
+        if ((player.eyes.type == Eyes.SPIDER || player.eyes.type == Eyes.CAT) && rand(2) == 0 && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //PC Trap Effects
-        if (player.eyes.type != Eyes.BLACK_EYES_SAND_TRAP && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-            setEyeTypeAndColor(Eyes.BLACK_EYES_SAND_TRAP, "black");
-            //Eyes Turn Black:
-            outputText("\n\nYou blink, and then blink again.  It feels like something is irritating your eyes.  Panic sets in as black suddenly blooms in the corner of your left eye and then your right, as if drops of ink were falling into them.  You calm yourself down with the thought that rubbing at your eyes will certainly make whatever is happening to them worse; through force of will you hold your hands behind your back and wait for the strange affliction to run its course.  The strange inky substance pools over your entire vision before slowly fading, thankfully taking the irritation with it.  As soon as it goes you stride quickly over to the stream and stare at your reflection.  <b>Your pupils, your irises, your entire eye has turned a liquid black</b>, leaving you looking vaguely like the many half insect creatures which inhabit these lands.  You find you are merely grateful the change apparently hasn't affected your vision.");
+        if (!CoC.instance.transformations.EyesSandTrap.isPresent() && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.EyesSandTrap.applyEffect();
             changes++;
         }
         //Vagina Turns Black:
@@ -12374,10 +12379,15 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Eyes Color
-        var coonEyeColor:Array = ["golden"];
-        if (!InCollection(player.eyes.colour, coonEyeColor) || player.eyes.type != Eyes.HUMAN) {
-            setEyeTypeAndColor(Eyes.HUMAN, randomChoice(coonEyeColor));
-            outputText("\n\nYou feel something fundamental change in your sight when you go check yourself in a puddle you notice that not only do they look human but your iris are now <b>[eyecolor].</b>");
+        if (!CoC.instance.transformations.EyesRaccoonColors.isPresent() || !CoC.instance.transformations.EyesHuman.isPresent()) {
+            if (!CoC.instance.transformations.EyesRaccoonColors.isPresent()) {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesRaccoonColors.applyEffect();
+            }
+            if (!CoC.instance.transformations.EyesHuman.isPresent()) {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesHuman.applyEffect();
+            }
             changes++;
         }
 
@@ -12647,18 +12657,15 @@ public final class Mutations extends MutationsHelper {
             setArmType(Arms.HINEZUMI);
         }
         //get hinezumi eyes
-        if (player.eyes.type != Eyes.HINEZUMI && player.eyes.type == Eyes.HUMAN && rand(3) == 0 && changes < changeLimit && type == 1) {
-            outputText("\n\nYour eyes start to hurt and as a reaction, you start shedding tears. Once your vision clears, you head to a puddle to check what is going on. <b>To your surprise, it seems your irises turned blazing red like those of an Hinezumi.</b>");
-            setEyeTypeAndColor(Eyes.HINEZUMI, "blazing red");
+        if (!CoC.instance.transformations.EyesHinezumi.isPresent() && CoC.instance.transformations.EyesHuman.isPresent() && rand(3) == 0 && changes < changeLimit && type == 1) {
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHinezumi.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.HINEZUMI && rand(2) == 0 && changes < changeLimit && type == 1) {
-            outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
-            if (player.eyes.type == Eyes.FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
-            else if (player.eyes.type == Eyes.CAT_SLITS) outputText("  Your cat-like eyes are gone!</b>");
-            outputText("  <b>You have normal, humanoid eyes again.</b>");
-            setEyeType(Eyes.HUMAN);
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Hair
@@ -12978,9 +12985,10 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //If the PC has four eyes:
-        if (player.eyes.type == Eyes.FOUR_SPIDER_EYES && rand(3) == 0 && changes < changeLimit) {
+        if (player.eyes.type == Eyes.SPIDER && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\nYour two forehead eyes start throbbing painfully, your sight in them eventually going dark.  You touch your forehead to inspect your eyes, only to find out that they have disappeared.  <b>You only have two eyes now!</b>");
-            humanizeEyes();
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Go into heat
@@ -14148,10 +14156,15 @@ public final class Mutations extends MutationsHelper {
 
 
         //Eyes Color
-        var krakenEyeColor:Array = ["bright pink", "light purple", "purple"];
-        if (!InCollection(player.eyes.colour, krakenEyeColor) || player.eyes.type != Eyes.KRAKEN) {
-            setEyeTypeAndColor(Eyes.KRAKEN, randomChoice(krakenEyeColor));
-            outputText("\n\nYou feel something fundamental change in your sight when you go check yourself in a puddle you notice that not only they now have horizontal slit like those of an octupus but your iris are now <b>[eyecolor].</b>");
+        if (!CoC.instance.transformations.EyesKrakenColors.isPresent() || !CoC.instance.transformations.EyesKraken.isPresent()) {
+            if (!CoC.instance.transformations.EyesKrakenColors.isPresent()) {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesKrakenColors.applyEffect();
+            }
+            if (!CoC.instance.transformations.EyesKraken.isPresent()) {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesKraken.applyEffect();
+            }
             changes++;
         }
 
@@ -14366,13 +14379,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Eyes
         if (changes < changeLimit && rand(3) == 0 && player.eyes.type > Eyes.HUMAN) {
-            humanizeEyes();
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
-        if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN && (player.eyes.colour != "silver" && player.eyes.colour != "gray")) {
-            if (rand(2) == 0) player.eyes.colour = "silver";
-            else player.eyes.colour = "gray";
-            outputText("\n\nYour eyes begin to water for a moment. When your view clears up you move on to a puddle and notice their coloration changed to a " + player.eyes.colour + " hue. <b>You now have " + player.eyes.colour + " pupils.</b>");
+        if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN && (!CoC.instance.transformations.EyesChangeColor(["silver", "gray"]).isPresent())) {
+            CoC.instance.transformations.EyesChangeColor(["silver", "gray"]).applyEffect(false);
+            outputText("\n\nYour eyes begin to water for a moment. When your view clears up you move on to a puddle and notice their coloration changed to [eyecolor]. <b>You now have [eyecolor] irises.</b>");
             changes++;
         }
         //hips
@@ -14536,11 +14549,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //eyes color
-        if (player.eyes.colour != "light purple" && changes < changeLimit && rand(3) == 0) {
+        if (!CoC.instance.transformations.EyesChangeColor(["light purple"]).isPresent() && changes < changeLimit && rand(3) == 0) {
             if (player.eyes.type == Eyes.HUMAN) {
-                player.eyes.colour = "light purple";
+                CoC.instance.transformations.EyesChangeColor(["light purple"]).applyEffect(false);
                 outputText("\n\nFrigid water trickles from your eyes as if you are crying and pain forces them closed. You double over as they burn but slowly the agonizing sensation fades away and you blink to clear them. At first everything looks hazy as if seen through a clouded glass but it eventually clears up. <b>You glance down at your reflection in a puddle and find that your irises turned light purple like the reflection of the sun on snow.</b>");
-            } else humanizeEyes();
+            } else {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesHuman.applyEffect();
+            }
             changes++;
         }
         //Hair
@@ -14886,30 +14902,30 @@ public final class Mutations extends MutationsHelper {
         }
         //eyes to human
         if (player.eyes.type != Eyes.HUMAN && changes < changeLimit && type == 0 && rand(4) == 0) {
-            humanizeEyes();
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //eyes to human if not dragon
-        if (player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.DRAGON && changes < changeLimit && type == 1 && rand(4) == 0) {
-            humanizeEyes();
+        if (player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.DRACONIC && changes < changeLimit && type == 1 && rand(4) == 0) {
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //eyes to orange
-        if (player.eyes.colour != "orange" && changes < changeLimit && type == 0 && rand(4) == 0) {
-            player.eyes.colour = "orange";
-            outputText("\n\nYour eyes begins to tingle and you hurry to a puddle to check what is going on. <b>You discover to your surprise that your eyes have turned orange!</b>");
+        if (!CoC.instance.transformations.EyesChangeColor(["orange"]).isPresent() && changes < changeLimit && type == 0 && rand(4) == 0) {
+            CoC.instance.transformations.EyesChangeColor(["orange"]).applyEffect();
             changes++;
         }
         //eyes to sea dragon list
-        if (!InCollection(player.eyes.colour,"orange","yellow","light green") && changes < changeLimit && type == 1 && rand(4) == 0) {
-            player.eyes.colour = randomChoice("orange","yellow","light green");
-            outputText("\n\nYour eyes begins to tingle and you hurry to a puddle to check what is going on. <b>You discover to your surprise that your eyes have turned "+player.eyes.colour+"!</b>");
+        if (!CoC.instance.transformations.EyesSeadragonColors.isPresent() && changes < changeLimit && type == 1 && rand(4) == 0) {
+            CoC.instance.transformations.EyesSeadragonColors.applyEffect();
             changes++;
         }
         //Gain Dragon Eyes
         if (player.eyes.type == Eyes.HUMAN && rand(3) == 0 && type == 1 && changes < changeLimit) {
-            CoC.instance.mutations.setEyeType(Eyes.DRAGON);
-            outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a dragon.  <b>You now have dragon eyes!</b>.");
+            outputText("\n\n");
+            CoC.instance.transformations.EyesDraconic.applyEffect();
             changes++;
         }
         //Gain Dragon Tongue
@@ -15090,9 +15106,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Gain Frost wyrm Eyes
-        if (player.eyes.type != Eyes.FROSTWYRM && rand(3) == 0 && changes < changeLimit) {
-            setEyeTypeAndColor(Eyes.FROSTWYRM, "yellow");
-            outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil and black sclera like that of a frost wyrm. <b>You now have frost wyrm eyes!</b>.");
+        if (!CoC.instance.transformations.EyesFrostwyrm.isPresent() && rand(3) == 0 && changes < changeLimit) {
+            outputText("\n\n");
+            CoC.instance.transformations.EyesFrostwyrm.applyEffect();
             changes++;
         }
         //Gain Frost wyrm face
@@ -15725,19 +15741,16 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Eyes
-        if (rand(3) == 0 && changes < changeLimit && player.faceType == Face.DEVIL_FANGS) {
-            if (player.eyes.type == Eyes.GOAT) {
-                outputText("\n\nYour eyes feel like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a demonic appearance. ");
-                outputText("The sclera is black with a glowing embery iris. Furthermore, they seem to glow with a faint inner light. <b>You now have fiendish eyes!</b>");
-                setEyeTypeAndColor(Eyes.DEVIL, "golden");
-            } else if (player.eyes.type == Eyes.DEVIL) {
-                outputText("\n\nYour eyes feel like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a goat like appearance with horizontal pupils in the middle, the schlera turning back to white. ");
-                outputText("<b>You now have eyes with horizontal pupils just like those of a goat!</b>");
-                setEyeTypeAndColor(Eyes.GOAT, "golden");
+        if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.FaceDevilFangs.isPresent()) {
+            if (CoC.instance.transformations.EyesGoat.isPresent()) {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesDevil.applyEffect();
+            } else if (CoC.instance.transformations.EyesDevil.isPresent()) {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesGoat.applyEffect();
             } else {
-                outputText("\n\nYour eyes feel like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a demonic appearance. ");
-                outputText("The sclera is black with a glowing embery iris. Furthermore, they seem to glow with a faint inner light. <b>You now have fiendish eyes!</b>");
-                setEyeTypeAndColor(Eyes.DEVIL, "golden");
+                outputText("\n\n");
+                CoC.instance.transformations.EyesDevil.applyEffect();
             }
             changes++;
         }
@@ -15915,14 +15928,15 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Eyes
-        if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN && player.ears.type == Ears.BEAR) {
-            outputText("\n\nYour eyes begin to water for a moment. When your view clears up you move on to a puddle and notice their coloration changed to a golden brown hue not unlike those of a bears. <b>You now have golden pupils.</b>");
-            setEyeTypeAndColor(Eyes.BEAR, "golden");
+        if (changes < changeLimit && rand(3) == 0 && CoC.instance.transformations.EyesHuman.isPresent() && player.ears.type == Ears.BEAR) {
+            outputText("\n\n");
+            CoC.instance.transformations.EyesBear.applyEffect();
             changes++;
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN && player.eyes.type != Eyes.BEAR) {
-            humanizeEyes();
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Arms
@@ -16078,13 +16092,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Eyes
-        var fire_snail_eyes_color:Array = ["red", "orange", "yellow"];
-        if (player.faceType == Face.FIRE_SNAIL && player.eyes.type != Eyes.FIRE_SNAIL && changes < changeLimit && rand(3) == 0) {
+        if (!CoC.instance.transformations.FaceFireSnail.isPresent() && !CoC.instance.transformations.EyesFireSnail.isPresent() && changes < changeLimit && rand(3) == 0) {
             if (player.eyes.type == Eyes.HUMAN) {
-                player.eyes.colour = randomChoice(fire_snail_eyes_color);
-                outputText("\n\nSomething weird happens with your eyes as they suddenly begin to burn and tickle. After a while it stops and as you go check them up in a water puddle the first thing you notice is that your two irises now burn like two incandescent embers, just like those of a fiery creature. <b>Your irises are now incandescent.</b>");
-                setEyeType(Eyes.FIRE_SNAIL);
-            } else humanizeEyes();
+                outputText("\n\n");
+                CoC.instance.transformations.EyesFireSnail.applyEffect();
+            } else {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesHuman.applyEffect();
+            }
             changes++;
         }
         //Antennae
@@ -16306,7 +16321,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Remove odd eyes
         if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN) {
-            humanizeEyes();
+            outputText("\n\n");
+            CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
         //Hair
@@ -16954,33 +16970,33 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //eyes color change
-        if ((type == 0 || type == 1 || type == 2) && player.eyes.colour != "black" && changes < changeLimit && rand(2) == 0) {
-            player.eyes.colour = "black";
+        if ((type == 0 || type == 1 || type == 2) && !CoC.instance.transformations.EyesChangeColor(["black"]).isPresent() && changes < changeLimit && rand(2) == 0) {
+            CoC.instance.transformations.EyesChangeColor(["black"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now black.");
             changes++;
         }
-        if ((type == 3 || type == 4 || type == 5) && player.eyes.colour != "red" && changes < changeLimit && rand(2) == 0) {
-            player.eyes.colour = "red";
+        if ((type == 3 || type == 4 || type == 5) && !CoC.instance.transformations.EyesChangeColor(["red"]).isPresent() && changes < changeLimit && rand(2) == 0) {
+            CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now red.");
             changes++;
         }
-        if ((type == 6 || type == 7 || type == 8) && player.eyes.colour != "gray" && changes < changeLimit && rand(2) == 0) {
-            player.eyes.colour = "gray";
+        if ((type == 6 || type == 7 || type == 8) && !CoC.instance.transformations.EyesChangeColor(["gray"]).isPresent() && changes < changeLimit && rand(2) == 0) {
+            CoC.instance.transformations.EyesChangeColor(["gray"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now gray.");
             changes++;
         }
-        if ((type == 9 || type == 10 || type == 11) && player.eyes.colour != "brown" && changes < changeLimit && rand(2) == 0) {
-            player.eyes.colour = "brown";
+        if ((type == 9 || type == 10 || type == 11) && !CoC.instance.transformations.EyesChangeColor(["brown"]).isPresent() && changes < changeLimit && rand(2) == 0) {
+            CoC.instance.transformations.EyesChangeColor(["brown"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now brown.");
             changes++;
         }
-        if ((type == 12 || type == 13 || type == 14) && player.eyes.colour != "light blue" && changes < changeLimit && rand(2) == 0) {
-            player.eyes.colour = "light blue";
+        if ((type == 12 || type == 13 || type == 14) && !CoC.instance.transformations.EyesChangeColor(["light blue"]).isPresent() && changes < changeLimit && rand(2) == 0) {
+            CoC.instance.transformations.EyesChangeColor(["light blue"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now light blue.");
             changes++;
         }
-        if ((type == 15 || type == 16 || type == 17) && player.eyes.colour != "yellow" && changes < changeLimit && rand(2) == 0) {
-            player.eyes.colour = "yellow";
+        if ((type == 15 || type == 16 || type == 17) && !CoC.instance.transformations.EyesChangeColor(["yellow"]).isPresent() && changes < changeLimit && rand(2) == 0) {
+            CoC.instance.transformations.EyesChangeColor(["yellow"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now yellow.");
             changes++;
         }
@@ -17157,13 +17173,14 @@ public final class Mutations extends MutationsHelper {
             }
             //Remove odd eyes
             if (changes < changeLimit && rand(4) == 0 && player.eyes.type > Eyes.HUMAN) {
-                humanizeEyes();
+                outputText("\n\n");
+                CoC.instance.transformations.EyesHuman.applyEffect();
+                changes++;
             }
             //Set eyes to the racial coloration
-            if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && player.eyes.colour != "blue") {
-                player.eyes.colour = "blue";
-                outputText("\n\nYou shiver as cold wind passes over your face. Something’s changed in your vision, and though you’re not sure what, you press on regardless. " +
-                        "After going out and checking your reflection in a puddle, you discover your pupil color has changed to a blue as cold as ice. <b>You now have cold blue eyes.\n</b>");
+            if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && !CoC.instance.transformations.EyesChangeColor(["blue"]).isPresent()) {
+                CoC.instance.transformations.EyesChangeColor(["blue"]).applyEffect(false);
+                outputText("\n\nYou shiver as cold wind passes over your face. Something’s changed in your vision, and though you’re not sure what, you press on regardless. After going out and checking your reflection in a puddle, you discover your pupil color has changed to a blue as cold as ice. <b>You now have cold blue eyes.\n</b>");
                 changes++;
             }
             var melkie_skinTone:Array = ["light", "fair", "pale"];
@@ -17393,15 +17410,14 @@ public final class Mutations extends MutationsHelper {
             }
             //Remove odd eyes
             if (changes < changeLimit && rand(4) == 0 && player.eyes.type != Eyes.HUMAN && player.eyes.type != Eyes.CANCER) {
-                humanizeEyes();
+                outputText("\n\n");
+                CoC.instance.transformations.EyesHuman.applyEffect();
+                changes++;
             }
             //Set eyes to the racial coloration and change them to cancer type
-            if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && player.eyes.type != Eyes.CANCER && player.faceType == Face.KUDERE) {
-                setEyeTypeAndColor(Eyes.CANCER, "orange");
-                outputText("\n\nA slight change happens in your eyes as they begin to water. " +
-                        "You clear away the tears, going to a puddle to see what's going on. " +
-                        "Your eyes look about the same, save for the fact that your irises now have the particular orange hue characteristic of cancers, with slightly larger pupils. " +
-                        "Likely you won’t need to blink while underwater with <b>your orange cancer eyes.</b>");
+            if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && !CoC.instance.transformations.EyesCancer.isPresent() && CoC.instance.transformations.FaceKudere.isPresent()) {
+                outputText("\n\n");
+                CoC.instance.transformations.EyesCancer.applyEffect();
                 changes++;
             }
 

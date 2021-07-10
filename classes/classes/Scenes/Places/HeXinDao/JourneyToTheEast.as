@@ -985,9 +985,9 @@ package classes.Scenes.Places.HeXinDao
 			if (skincolor == 0) player.skinTone = "snow white";
 			else if (skincolor == 1) player.skinTone = "ghostly pale";
 			else player.skinTone = "light blue";
-			player.faceType = Face.JIANGSHI;
+			CoC.instance.transformations.FaceJiangshi.applyEffect(false);
 			player.eyes.type = Eyes.JIANGSHI;
-			player.eyes.colour = "turquoise";
+			CoC.instance.transformations.EyesChangeColor(["turquoise"]).applyEffect(false);
 			player.horns.type = Horns.SPELL_TAG;
 			player.horns.count = 1;
 			player.arms.type = Arms.JIANGSHI;

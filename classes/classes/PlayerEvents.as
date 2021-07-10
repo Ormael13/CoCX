@@ -1458,10 +1458,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Fenrir Eyes
-			if (player.eyes.type != Eyes.FENRIR && player.hasKeyItem("Gleipnir Collar") >= 0) {
-				outputText("\nYou feel an icy chill run through your body as your divine nature reasserts itself over your body. You won't escape your destiny as the Fenrir so easily, it seems.");
-				outputText("\n\nYou cry out in pain as your eyes once more freeze over, eventually settling back into their proper form. \"<b>You now have glowing icy eyes.</b>\"\n");
-				CoC.instance.mutations.setEyeTypeAndColor(Eyes.FENRIR, "glacial blue");
+			if (!CoC.instance.transformations.EyesFenrir.isPresent() && player.hasKeyItem("Gleipnir Collar") >= 0) {
+				outputText("\n");
+
+				CoC.instance.transformations.EyesFenrir.applyEffect();
+
+				outputText("\n");
 				needNext = true;
 			}
 			//Fenrir Back Ice Shards
@@ -1996,7 +1998,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText("\nAs you become less of a hellcat your inner fire entirely dies down, your body reverting to that of a standard feline.\n");
 					if (player.tailType == Tail.BURNING || player.tailType == Tail.TWINKASHA) player.tailType = Tail.CAT;
 					if (player.hairType == Hair.BURNING) transformations.HairHuman.applyEffect(false);
-					if (player.eyes.type == Eyes.INFERNAL) player.eyes.type = Eyes.CAT_SLITS;
+					if (player.eyes.type == Eyes.INFERNAL) player.eyes.type = Eyes.CAT;
 					if (flags[kFLAGS.WITCHES_SABBATH] > 1) flags[kFLAGS.WITCHES_SABBATH] = 1;
 					needNext = true;
 				}
@@ -2069,9 +2071,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText(" Your fur tingle and you coo in delight as it turn "+CurentColor+".");
 					player.coatColor = CurentColor;
 				}
-				if (player.eyes.colour != "red") {
+				if (!CoC.instance.transformations.EyesChangeColor(["red"]).isPresent()) {
 					outputText(" Meanwhile your eyes shine with malice as they take on a red corrupted tone reflecting the sorry state of your soul.");
-					player.eyes.colour = "red";
+					CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
 				}
 				if (player.wings.type == Wings.FEATHERED_ALICORN) {
 					outputText(" Your wings aren’t spared either all the feather falling off to reveal a membranous demonic pair of bat wings.");
@@ -2136,9 +2138,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText(" You sigh in relief as your fur turns "+CurentColor+".");
 					player.coatColor = CurentColor;
 				}
-				if (player.eyes.colour != "blue") {
+				if (!CoC.instance.transformations.EyesChangeColor(["blue"]).isPresent()) {
 					outputText(" Meanwhile your irises shift toward the sapphire blue as your mind clears off.");
-					player.eyes.colour = "blue";
+					CoC.instance.transformations.EyesChangeColor(["blue"]).applyEffect(false);
 				}
 				if (player.wings.type == Wings.NIGHTMARE) {
 					outputText(" Your wings also redeem themselves changing into a pair of angelic wings covered with white feathers.");
