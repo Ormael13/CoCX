@@ -20,15 +20,41 @@ package classes.Scenes.Places.HeXinDao
 	import classes.Items.UndergarmentLib;
 	import classes.Items.WeaponLib;
 	import classes.Items.WeaponRangeLib;
-	import classes.Scenes.NPCs.AhriFollower;
+	import classes.internals.SaveableState;
 
-	public class JourneyToTheEast extends HeXinDaoAbstractContent
+	public class JourneyToTheEast extends HeXinDaoAbstractContent implements SaveableState
 	{
 		public var riverdungeon:RiverDungeon = new RiverDungeon();
-		public var ahriScene:AhriFollower = new AhriFollower();
+
+		public static var AhriStatsToPerksConvertCounter:Number;
+
+		public function stateObjectName():String {
+			return "JourneyToTheEast";
+		}
+
+		public function resetState():void {
+			AhriStatsToPerksConvertCounter = 0;
+		}
+
+		public function saveToObject():Object {
+			return {
+				"AhriStatsToPerksConvertCounter": AhriStatsToPerksConvertCounter
+			};
+		}
+
+		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+			if (o) {
+				AhriStatsToPerksConvertCounter = o["AhriStatsToPerksConvertCounter"];
+			} else {
+				// loading from old save
+				resetState();
+			}
+		}
 
 		public function JourneyToTheEast()
-		{}
+		{
+			Saves.registerSaveableState(this);
+		}
 
 		public function enteringInn(first:Boolean = true):void {
 			clearOutput();
@@ -43,11 +69,16 @@ package classes.Scenes.Places.HeXinDao
 			menu();
 			addButton(0, "Drink", drinkAlcohol);
 			addButton(2, "???", shadyPerson).hint("A strange two headed morph with two tails is sitting at one of the tables.");
-			addButton(4, "Adv.Guild", BoardkeeperYangMain);
+			addButton(4, "Adv.Guild", BoardkeeperYangMain);/*
 			//addButtonDisabled(5, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
 			//addButtonDisabled(6, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
-			if (flags[kFLAGS.AHRI_FOLLOWER] == 1) addButtonDisabled(7, "Madam", "You see 'Madam' in one of inn corners.");
-			else addButtonDisabled(7, "???", "You see some suspicious looking animal-morph in one of inn corners.");//Ahri
+			if (workHoursMadam()) {
+				if (flags[kFLAGS.AHRI_FOLLOWER] > 0) addButton(7, "Madam", visitMadam).hint("You see 'Madam' sitting at one of the inn tables.");
+				else addButtonDisabled(7, "???", "You see mysterious looking animal-morph sitting at one of the inn tables.");//Ahri
+			}
+			else {
+				if (flags[kFLAGS.AHRI_FOLLOWER] > 0) addButtonDisabled(7, "Madam", "'Madam' isn't currently at her usual table in the inn.");
+			}*/
 			if (flags[kFLAGS.MICHIKO_FOLLOWER] < 1) addButton(8, "???", SceneLib.michikoFollower.firstMeetingMichiko).hint("You see some suspicious looking squirrel in one of inn corners.");
 			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore()))) {
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 1) addButton(9, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
@@ -129,12 +160,50 @@ package classes.Scenes.Places.HeXinDao
 			inventory.takeItem(itype, shadyPerson);
 		}
 
+		private function workHoursMadam():Boolean {
+			if ((model.time.hours >= 7 && model.time.hours <= 9) || (model.time.hours >= 19 && model.time.hours <= 21)) return true;
+			return false;
+		}
 		private function visitMadam():void {
-			clearOutput();//Madam - female kishoo npc for stat points to perk points conversion
-			outputText("\n\n");
+			clearOutput();//Madam - female kishoo npc for stat points to perk points conversion		outputText("\n\n");
+			if (flags[kFLAGS.AHRI_FOLLOWER] > 0) {
+				outputText("\"<i>You came back? What do you seek from this Madam?</i>\" You can swear to see her eyes glow for a moment under the hood as she looking at you. \"<i>Another session to exchange your grown potential to some thing more elusive?</i>\"\n\n");
+			}
+			else {
+				outputText("When you apporach the table you see a person covered wholy by the loose robe. For a moment it looks like it not noticed your presence next to it.\n\n");
+				outputText("\"<i>Greeting potential customer. You can call me Madam,</i>\" clearly female voice with undeniable subtle charm interrupts the silence. \"<i>You came to my table seeking my services? I not able to provide alot aside something i calls 'conversion'.</i>\"\n\n");
+				outputText("Conversion? Seeing your puzzle expression she continues, \"<i>I would take a bit of your grown potential to exchange it for increased ability to develop more mystical abilities. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers \"<i>...I shall only do this five times. No more and no less than five.</i>\"\n\n");
+				outputText("Just like that without any string attatched?\n\n");
+				outputText("\"<i>Of course there would be additional price. (opis dodatkowego kosztu) </i>\" She pause before asking \"<i>So dear customer would you like me to perform this conversion on you?</i>\"\n\n");
+				flags[kFLAGS.AHRI_FOLLOWER] = 1;
+			}
 			//outputText("\"<i>Wanna buy something?</i>\" askes the cat head while dog one adds almost barking, \"<i>Or get lost...</i>\"\n\n");
 			menu();
-			addButton(14, "Back", curry(enteringInn,false));
+			addButton(1, "Convert", visitMadamConvert);
+			addButton(3, "Back", curry(enteringInn,false));
+		}
+		private function visitMadamConvert():void {
+			clearOutput();
+			if (player.statPoints < 5) {
+				outputText("\"<i>(brak dodatkowego kosztu).</i>\" Madam shakes her head, \"<i>Come see me again when (opis dodatkowego kosztu).</i>\"\n\n");
+				doNext(visitMadam);
+			}
+			else if (player.statPoints < 5) {
+				outputText("\"<i>Seems your grown potential isn't sufficient.</i>\" Madam shakes her head, \"<i>Come see me again when it would increase.</i>\"\n\n");
+				doNext(visitMadam);
+			}
+			else if (AhriStatsToPerksConvertCounter > 4 && flags[kFLAGS.AHRI_FOLLOWER] <= 1) {
+				outputText("\"<i>It's unfotunate but i can't help you anymore,</i>\" Madam rise her hand to show five fingers, \"<i>My service can be repeated maximum five times and you dear customer reached this limit.</i>\"\n\n");
+				doNext(visitMadam);
+			}
+			else {
+				outputText("\"<i>(brak dodatkowego kosztu).</i>\"\n\n");
+				//zabranie przedmiotu/ów jakie potrzebne są do konwersji
+				if (AhriStatsToPerksConvertCounter > 0) AhriStatsToPerksConvertCounter += 1;
+				else AhriStatsToPerksConvertCounter = 1;
+				doNext(visitMadam);
+				cheatTime2(30);
+			}
 		}
 
 		public function BoardkeeperYangMain():void {

@@ -1023,6 +1023,9 @@ public function naggaSqueeze():void {
 		damageBonus = combat.unarmedAttack();
 		damageBonus *= combat.scalingBonusStrength() * 2;
 	}
+	if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
+	if (player.hasStatusEffect(StatusEffects.ControlFreak)) damage *= player.statusEffectv1(StatusEffects.ControlFreak);
+	if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
 	damage = damage+damageBonus;
 	SceneLib.combat.doDamage(damage, true, true);
 	fatigue(20, USEFATG_PHYSICAL);
@@ -1149,6 +1152,9 @@ public function naggaTease():void {
 		if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
 		if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
 		if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
+		if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
+		if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (1 - player.statusEffectv1(StatusEffects.ControlFreak));
+		if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
 		damage *= damagemultiplier;
         //Determine if critical tease!
         var crit:Boolean = false;
@@ -1277,4 +1283,4 @@ private function beePositANagaPlease():void {
 	cleanupAfterCombat();
 }
 	}
-}
+}

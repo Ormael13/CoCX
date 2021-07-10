@@ -5,12 +5,10 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
-import classes.Scenes.Places.HeXinDao;
 import classes.internals.*;
 
 public class GoblinAssassin extends Monster
 	{
-		public var adventure:HeXinDao = new HeXinDao();
 		
 		protected function goblinDrugAttack():void {
 			var temp2:Number = rand(5);
@@ -104,7 +102,7 @@ public class GoblinAssassin extends Monster
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) adventure.gaunletchallange2fight2();
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) SceneLib.hexindao.gaunletchallange2fight2();
 			else SceneLib.goblinAssassinScene.gobboAssassinRapeIntro1();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

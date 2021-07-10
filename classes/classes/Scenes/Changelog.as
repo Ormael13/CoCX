@@ -37,7 +37,7 @@ package classes.Scenes
 			outputText("-New tier 2 misc lvl-up perk: Axillary Venom Glands. Req. Venomous Adipose Tissue perk. Effect: Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. (if hunger mode is active will instead drain hunger 2x faster)\n");
 			outputText("-New tier 3 misc lvl-up perk: Lift Off. Req. Aerobatics perk, 45+ str and 40+ spe. Effect: Allows you to start combat already flying.\n");
 			outputText("-New tier 4 misc lvl-up perk: Survivalist 3. Req. Survivalist 2 perk and hunger mode enabled. Effect: Slows hunger rate by another 20%.\n");
-			outputText("-New tier 7 wisdom lvl-up perk: Prestige Job: Necromancer. Req. Job: Golemancer and Daoist: Apprentice Stage perks, 125+ int, 175+ wis. Effect: +20 to max tou and +60 to max wis (scalable with NG tiers), able to harvest bones from true demons bodies, create up to 3 skeleton warriors, access to necromancer spells, gain a (very) small amount of soulforce after defeating enemies with soul (~1-3x enemy level).\n");
+			outputText("-New tier 7 wisdom lvl-up perk: Prestige Job: Necromancer. Req. Job: Golemancer and Daoist: Apprentice Stage perks, 125+ int, 175+ wis. Effect: +20 to tou multi and +60 to wis multi (scalable with NG tiers), able to harvest bones from true demons bodies, create up to 3 skeleton warriors, access to necromancer spells, gain a (very) small amount of soulforce after defeating enemies with soul (~1-3x enemy level).\n");
 			outputText("-New tier 8 wisdom lvl-up perk: Greater harvest. Req. Prestige Job: Necromancer perk. Effect: A demon is now considered to carry 5 to 20 bones and you may now have up to 6 Skeleton of each type.\n");
 			outputText("-New tier 9 wisdom lvl-up perk: Bone soul. Req. Greater harvest perk. Effect: When the bone reserve is at 0 you can still cast necromancy spells. However the effect of these spells is reduced by 50%. If the player has more than 50 demon bones, damage is instead increased by 10% per 10 bone owned up to 200%. Increase limit of stored demonic bones by 100.\n");
 			outputText("-New tier 10 wisdom lvl-up perk: Skeleton Lord. Req. Bone soul perk. Effect: You may now control up to 10 skeleton of each type. Allow to levitate all skeletons.\n");
@@ -102,6 +102,12 @@ package classes.Scenes
 			outputText("-Fire Storm and Ice Rain spells been moved from grey magic to tier 2 of white/black magic with matching change of scalling and added cooldowns. Polar Midnight and Meteor Shower are classied now as tier 3 white/black magic. All 4 spells got increase in mana cost to 500 (tier 2) or 1250 (tier 3).\n");
 			outputText("-Mana Shield changes by Shard: Mana Shield able to partial absorb damage instead of all dmg or none approach.\n");
 			outputText("-Depravatio, Element of Corruption and Puritas, Element of Purity are worth each 960 gems and effect changed from: x1,6 spellpower to +60% and then x1,6 spellpower. Ascensus, Element of Ascension is worth now 2400 gems and effects changed from: x1,8x spellpower to +150% spellpower and then x2,5 spellpower.\n");
+			outputText("-New tier 7 libido lvl-up perk: Prestige Job: Bindmaster. Req. Job: Eromancer and Guardian perks, 200+ lib. Effect: +20 to tou multi and +60 to lib multi (scalable with NG tiers), gain the ability to tie up opponents using a whip (work similar to naga grapple).\n");
+			outputText("-New tier 8 libido lvl-up perk: Unbreakable bind. Req. Prestige Job: Bindmaster perk. Effect: Improves all binding abilities efficiency by 100%.\n");
+			outputText("-New tier 9 libido lvl-up perk: Sadomasochism. Req. Unbreakable bind perk. Effect: You are aroused by the helplessness of your opponent just as much as you get aroused in getting hit. This causes your tease to become stronger when you are close to defeat. (PC gains +20% tease damage with low health and +20% tease damage with high arousal to either PC or the target.)\n");
+			outputText("-New tier 10 libido lvl-up perk: Control freak. Req. Sadomasochism perk. Effect: Grapple damage and tease damage increase by 50% for each consecutive round you are holding grapple. Damage multiplier reset to 1 once grapple ends.\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -126,7 +132,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -193,9 +198,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Cave Wyrm, Hinezumi, Bear/Panda, Fire Snail, Melkie, Centipede, Frost Wyrm(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -237,9 +240,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

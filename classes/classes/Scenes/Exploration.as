@@ -23,7 +23,6 @@ import classes.Scenes.Explore.RNGod;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.RyuBiDragon;
-import classes.Scenes.Places.HeXinDao;
 import classes.Scenes.Explore.KitsuneElder;
 import classes.Scenes.Explore.KitsuneAncestor;
 import classes.Scenes.Explore.SeabedAlrauneBoss;
@@ -36,7 +35,6 @@ import classes.display.SpriteDb;
 public class Exploration extends BaseContent
 	{
 		public var exploreDebug:ExploreDebug = new ExploreDebug();
-		public var hexindao:HeXinDao = new HeXinDao();
 		public var hiddencave:HiddenCave = new HiddenCave();
 		public var TrueDemons:DemonScene = new DemonScene();
 		public var Evangeline:EvangelineFollower = new EvangelineFollower();

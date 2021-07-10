@@ -11598,6 +11598,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
         if (monster.plural) damage *= 5;
         if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
+		if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.ControlFreak)) damage *= player.statusEffectv1(StatusEffects.ControlFreak);
         //Squeeze -
         outputText("You start squeezing your");
         if (monster.plural) {
@@ -11747,6 +11749,9 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
                 if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
                 if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
+				if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (1 - player.statusEffectv1(StatusEffects.ControlFreak));
+				if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
                 damage *= damagemultiplier;
                 //Determine if critical tease!
                 var crit:Boolean = false;
@@ -11784,6 +11789,14 @@ public class Combat extends BaseContent {
         outputText("You release [monster a] [monster name] from [monster his] bonds, and [monster he] drops to the ground, catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.");
         outputText("\n\n");
         monster.removeStatusEffect(StatusEffects.ConstrictedScylla);
+        enemyAI();
+    }
+
+    public function WhipLeggoMyEggo():void {
+        clearOutput();
+        outputText("You release [monster a] [monster name] from your "+player.weaponName+", and [monster he] drops to the ground, catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.");
+        outputText("\n\n");
+        monster.removeStatusEffect(StatusEffects.ConstrictedWhip);
         enemyAI();
     }
 
@@ -11898,6 +11911,9 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.Apex)) damagemultiplier *= 1.50;
                 if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
                 if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
+				if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (1 - player.statusEffectv1(StatusEffects.ControlFreak));
+				if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
                 damage *= damagemultiplier;
                 //Determine if critical tease!
                 var crit:Boolean = false;
@@ -12044,6 +12060,9 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.Apex)) damagemultiplier *= 1.50;
                 if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
                 if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
+				if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (1 - player.statusEffectv1(StatusEffects.ControlFreak));
+				if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
                 damage *= damagemultiplier;
                 //Determine if critical tease!
                 var crit:Boolean = false;
