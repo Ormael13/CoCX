@@ -364,24 +364,24 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else {
 			var sdesc:String;
-			if (player.skin.hasMagicalTattoo()) sdesc = " covered by magical tattoo";
-			else if (player.skin.hasBattleTattoo()) sdesc = " covered by battle tattoo";
+			if (player.skin.hasMagicalTattoo()) sdesc = " covered by magical tattoos";
+			else if (player.skin.hasBattleTattoo()) sdesc = " covered by battle tattoos";
 			else if (player.skin.hasLightningShapedTattoo()) sdesc = " covered with a few glowing lightning tattoos";
 			else if (player.skin.hasWindSweptScars()) sdesc = " covered with scars as if your skin was cut in various place by a windstorm";
 			else if (player.skin.hasOilySkin()) sdesc =" dripping with oily black fluids.";
 			else if (player.skin.hasScarShapedTattoo()) sdesc = " covered by scar tattoos";
-			else if (player.skin.hasVenomousMarking()) sdesc = " covered by venomous marking";
+			else if (player.skin.hasVenomousMarking()) sdesc = " covered by venomous markings";
 			else if (player.skin.hasWhiteBlackVeins()) sdesc = " covered by [base.color2] veins";
 			else sdesc = "";
 			var swingsWhere:String;
 			if (player.cockTotal() == 0) swingsWhere = " where a penis would normally grow.";
 			else swingsWhere = " under your [cocks].";
 			if (player.hasPlainSkinOnly() || player.hasRubberSkin()) outputText("A [sack]" + sdesc + " with [balls] swings heavily" + swingsWhere);
-			else if (player.hasFur()) outputText("A fuzzy [sack] filled with [balls] swings low" + swingsWhere);
-			else if (player.hasCoatOfType(Skin.CHITIN)) outputText("A chitin [sack] hugs your [balls] tightly against your body.");
-			else if (player.hasScales()) outputText("A scaly [sack] hugs your [balls] tightly against your body.");
-			else if (player.skinType == Skin.STONE) outputText("A stone-solid sack with [balls] swings heavily" + swingsWhere);
-			else if (player.skinType == Skin.GOO) outputText("An oozing, semi-solid sack with [balls] swings heavily" + swingsWhere);
+			else if (player.hasFur()) outputText("A fuzzy [sack]" + sdesc + "  filled with [balls] swings low" + swingsWhere);
+			else if (player.hasCoatOfType(Skin.CHITIN)) outputText("A chitin [sack]" + sdesc + "  hugs your [balls] tightly against your body.");
+			else if (player.hasScales()) outputText("A scaly [sack]" + sdesc + "  hugs your [balls] tightly against your body.");
+			else if (player.skinType == Skin.STONE) outputText("A stone-solid sack" + sdesc + "  with [balls] swings heavily" + swingsWhere);
+			else if (player.skinType == Skin.GOO) outputText("An oozing, semi-solid sack" + sdesc + "  with [balls] swings heavily" + swingsWhere);
 		}
 
 		outputText(" You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ");
