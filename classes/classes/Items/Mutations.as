@@ -466,8 +466,8 @@ public final class Mutations extends MutationsHelper {
     //	}
     public function fasteningpill(player:Player):void {
         outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a sensation of your stomach been full.");
-        if (player.hasStatusEffect(StatusEffects.FastingPill)) player.addStatusValue(StatusEffects.FastingPill, 1, 24);
-        else player.createStatusEffect(StatusEffects.FastingPill, 73, 0, 0, 0);
+        if (player.hasStatusEffect(StatusEffects.FastingPill)) player.addStatusValue(StatusEffects.FastingPill, 1, 8);
+        else player.createStatusEffect(StatusEffects.FastingPill, 25, 0, 0, 0);
         statScreenRefresh();
     }
 
@@ -693,12 +693,27 @@ public final class Mutations extends MutationsHelper {
         player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
     }
 
-    public function basicflamesoflovemanual(player:Player):void {
+    public function flamesoflovemanualrankless(player:Player):void {
+        clearOutput();
+        if (!player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
+            outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love (Rankless).</b>");
+            player.createStatusEffect(StatusEffects.KnowsFlamesOfLove, 1, 0, 0, 0);
+            return;
+        }
+        if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
+            outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+            player.soulforce += 25;
+            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+        }
+    }
+
+    public function flamesoflovemanuallowrank(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love (Basic Rank).</b>");
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love (Rankless).</b>");
                 player.createStatusEffect(StatusEffects.KnowsFlamesOfLove, 1, 0, 0, 0);
                 return;
             }
@@ -713,19 +728,27 @@ public final class Mutations extends MutationsHelper {
         }
     }
 
-    public function higherrankflamesoflovemanual(player:Player):void {
+    public function iciclesoflovemanualrankless(player:Player):void {
         clearOutput();
-        outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into (burning hot) flames.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-        outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Flames of Love ( Rank).</b>");
-        player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
+        if (!player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
+            outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love (Rankless).</b>");
+            player.createStatusEffect(StatusEffects.KnowsIciclesOfLove, 1, 0, 0, 0);
+            return;
+        }
+        if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
+            outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+            player.soulforce += 25;
+            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+        }
     }
 
-    public function basiciciclesoflovemanual(player:Player):void {
+    public function iciclesoflovemanuallowrank(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love (Basic Rank).</b>");
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love (Low Rank).</b>");
                 player.createStatusEffect(StatusEffects.KnowsIciclesOfLove, 1, 0, 0, 0);
                 return;
             }
@@ -740,19 +763,27 @@ public final class Mutations extends MutationsHelper {
         }
     }
 
-    public function higherrankiciclesoflovemanual(player:Player):void {
+    public function stormofsisterhoodmanualrankless(player:Player):void {
         clearOutput();
-        outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling lust into (freezing cold) icicles.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-        outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Icicles of Love ( Rank).</b>");
-        player.createStatusEffect(StatusEffects.KnowsSoulBlast, 0, 0, 0, 0);
+        if (!player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
+            outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into lighting.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Storm of Sisterhood (Rankless).</b>");
+            player.createStatusEffect(StatusEffects.KnowsStormOfSisterhood, 1, 0, 0, 0);
+            return;
+        }
+        if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
+            outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+            player.soulforce += 25;
+            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+        }
     }
 
-    public function basicstormofsisterhoodmanual(player:Player):void {
+    public function stormofsisterhoodmanuallowrank(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into lighting.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Storm of Sisterhood (Basic Rank).</b>");
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Storm of Sisterhood (Rankless).</b>");
                 player.createStatusEffect(StatusEffects.KnowsStormOfSisterhood, 1, 0, 0, 0);
                 return;
             }
@@ -767,12 +798,27 @@ public final class Mutations extends MutationsHelper {
         }
     }
 
-    public function basicnightofbrotherhoodmanual(player:Player):void {
+    public function nightofbrotherhoodmanualrankless(player:Player):void {
+        clearOutput();
+        if (!player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
+            outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into darkness.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
+            outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Night of Brotherhood (Rankless).</b>");
+            player.createStatusEffect(StatusEffects.KnowsNightOfBrotherhood, 1, 0, 0, 0);
+            return;
+        }
+        if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
+            outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
+            player.soulforce += 25;
+            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+        }
+    }
+
+    public function nightofbrotherhoodmanuallowrank(player:Player):void {
         clearOutput();
         if (player.hasPerk(PerkLib.SoulApprentice)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling wrath into darkness.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Night of Brotherhood (Basic Rank).</b>");
+                outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Night of Brotherhood (Rankless).</b>");
                 player.createStatusEffect(StatusEffects.KnowsNightOfBrotherhood, 1, 0, 0, 0);
                 return;
             }

@@ -1,10 +1,10 @@
+/**
+ * ...
+ * @author Ormael
+ */
+
 package classes.Scenes.NPCs 
 {
-	/**
-	 * ...
-	 * @author Ormael
-	 */
-	
 	import classes.*;
 	import classes.BodyParts.Arms;
 	import classes.BodyParts.Eyes;
@@ -24,11 +24,42 @@ package classes.Scenes.NPCs
 	import classes.Items.WeaponLib;
 	import classes.Items.WeaponRange;
 	import classes.Items.WeaponRangeLib;
+	//import classes.internals.SaveableState;
 	
-	public class EvangelineFollower extends NPCAwareContent
-	{	
+	public class EvangelineFollower extends NPCAwareContent// implements SaveableState
+	{
+		/*public static var EvangelinePeepTalkOnInternalMutations:Number;
+		public static var :Number;
+
+		public function stateObjectName():String {
+			return "EvangelineFollower";
+		}
+
+		public function resetState():void {
+			EvangelinePeepTalkOnInternalMutations = 0;
+			 = ;
+		}
+
+		public function saveToObject():Object {
+			return {
+				"EvangelinePeepTalkOnInternalMutations": EvangelinePeepTalkOnInternalMutations,
+				"AhriTavernTalks": AhriTavernTalks
+			};
+		}
+
+		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+			if (o) {
+				EvangelinePeepTalkOnInternalMutations = o["EvangelinePeepTalkOnInternalMutations"];
+				AhriTavernTalks = o["AhriTavernTalks"];
+			} else {
+				// loading from old save
+				resetState();
+			}
+		}*/
+
 		public function EvangelineFollower() 
 		{
+			//Saves.registerSaveableState(this);
 		}
 
 	public function evangelineAffection(changes:Number = 0):Number
@@ -153,8 +184,9 @@ public function meetEvangeline():void {
 	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5 && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!");
 	addButton(4, "Alchemy", evangelineAlchemyMenu).hint("Ask Evangeline to make some transformation item.");
 	if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
+	addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");//temporaly here until normal unlock will be placed
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7) {
-		addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");
+		//addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");
 		addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
 	}
 	if (player.hasPerk(PerkLib.WendigoCurse)) {
@@ -883,9 +915,109 @@ private function recivingCraftedSoulGem():void {
 
 private function InternalMutations():void {
 	clearOutput();
-	outputText("Placeholder Text.");
+	outputText("Placeholder Text on dangers of internal mutation and etc.");
+	outputText("Placeholder Text on repeat use of the menu.");
+	InternalMutations0();
+}
+private function InternalMutations0(page:int = 1):void {
 	menu();
-	addButton(14, "Back", meetEvangeline);
+	if (page == 1) {
+		addButton(0, "Heart", InternalMutationsHeart);
+		addButton(1, "Muscle", InternalMutationsMuscles);
+		addButton(2, "Mouth", InternalMutationsMouth);
+		addButton(3, "Bloodstream", InternalMutationsBloodstream);
+		addButton(4, "Fat and Tissue", InternalMutationsFatTissue);
+		addButton(5, "Lungs", InternalMutationsLungs);
+		addButton(6, "Metabolism", InternalMutations);
+		addButton(7, "Eyes", InternalMutationsEyes);
+		addButton(8, "Nerv/Sys", InternalMutationsPeripheralNervousSystem);
+		addButton(9, "Bone/Marrow", InternalMutationsBones);
+		addButton(13, "-2-", InternalMutations0, page + 1);
+		addButton(14, "Back", meetEvangeline);
+	}
+	if (page == 2) {
+		addButton(0, "Adrenal Glands", InternalMutationsAdrenalGlands);
+		addButton(1, "Thyroid Gland", InternalMutationsThyroidGland);
+		addButton(2, "Parathyroid Gland", InternalMutationsParaThyroidGlands);
+		addButton(3, "Ovaries", InternalMutationsOvaries);
+		addButton(4, "Testicles", InternalMutationsTesticles);
+		addButton(13, "-1-", InternalMutations0, page - 1);
+		addButton(14, "Back", meetEvangeline);
+	}
+}
+private function InternalMutationsHeart():void {
+	menu();
+	addButton(14, "Back", curry(InternalMutations0, 1));
+}
+private function InternalMutationsMuscles():void {
+	menu();
+	addButton(14, "Back", curry(InternalMutations0, 1));
+}
+private function InternalMutationsMouth():void {
+	menu();
+	addButton(14, "Back", curry(InternalMutations0, 1));
+}
+private function InternalMutationsBloodstream():void {
+	menu();
+	addButton(14, "Back", curry(InternalMutations0, 1));
+}
+private function InternalMutationsFatTissue():void {
+	menu();
+	addButton(14, "Back", curry(InternalMutations0, 1));
+}
+private function InternalMutationsLungs():void {
+	menu();
+	addButton(14, "Back", curry(InternalMutations0, 1));
+}
+private function InternalMutationsMetabolism():void {
+	menu();
+	addButton(14, "Back", curry(InternalMutations0, 1));
+}
+private function InternalMutationsEyes():void {
+	menu();
+	if (!player.hasPerk(PerkLib.GazerEyeFinalForm) && player.maxEyesMutations() > 0) addButton(0, "Gazer", InternalMutationsEyesGazer);
+	else {
+		if (player.maxEyesMutations() == 0) addButtonDisabled(0, "Gazer", "Your eyes can't handle any more mutations.");
+		else addButtonDisabled(0, "Gazer", "You already have best avialable variant of this mutation.");
+	}
+	addButton(14, "Back", curry(InternalMutations0, 1));
+}
+private function InternalMutationsEyesGazer():void {
+	clearOutput();
+	outputText("Placeholder Text on grafting mutation.");
+	if (player.hasPerk(PerkLib.GazerEyeEvolved)) player.createPerk(PerkLib.GazerEyeFinalForm,0,0,0,0);
+	else if (player.hasPerk(PerkLib.GazerEye)) player.createPerk(PerkLib.GazerEyeEvolved,0,0,0,0);
+	else player.createPerk(PerkLib.GazerEye,0,0,0,0);
+	doNext(InternalMutationsEyes);
+	cheatTime2(30);
+}
+private function InternalMutationsPeripheralNervousSystem():void {
+	menu();
+	addButton(14, "Back", curry(InternalMutations0, 1));
+}
+private function InternalMutationsBones():void {
+	menu();
+	addButton(14, "Back", curry(InternalMutations0, 1));
+}
+private function InternalMutationsAdrenalGlands():void {
+	menu();
+	addButton(14, "Back", curry(InternalMutations0, 2));
+}
+private function InternalMutationsThyroidGland():void {
+	menu();
+	addButton(14, "Back", curry(InternalMutations0, 2));
+}
+private function InternalMutationsParaThyroidGlands():void {
+	menu();
+	addButton(14, "Back", curry(InternalMutations0, 2));
+}
+private function InternalMutationsOvaries():void {
+	menu();
+	addButton(14, "Back", curry(InternalMutations0, 2));
+}
+private function InternalMutationsTesticles():void {
+	menu();
+	addButton(14, "Back", curry(InternalMutations0, 2));
 }
 
 private function Experiments():void {

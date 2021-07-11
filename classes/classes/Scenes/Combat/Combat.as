@@ -925,7 +925,7 @@ public class Combat extends BaseContent {
             buttons.add("Great Dive", greatDive).hint("Make a Great Dive to deal TONS of damage!");
         }
         if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
-            bd = buttons.add("Flames of Love", flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
+            bd = buttons.add("Flames of Love", flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: "+Math.round(player.statusEffectv1(StatusEffects.KnowsFlamesOfLove))+" round  \n\nLust cost: "+flamesOfLoveLC()+"% of current lust");
             if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
                 bd.disable("You need more time before you can use Flames of Love again.");
             } else if (player.lust < 50) {
@@ -941,7 +941,7 @@ public class Combat extends BaseContent {
             }
         }*/
         if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
-            bd = buttons.add("Icicles of Love", iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
+            bd = buttons.add("Icicles of Love", iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: "+Math.round(player.statusEffectv1(StatusEffects.KnowsIciclesOfLove))+" round  \n\nLust cost: "+iciclesOfLoveLC()+"% of current lust");
             if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
                 bd.disable("You need more time before you can use Icicles of Love again.");
             } else if (player.lust < 50) {
@@ -957,7 +957,7 @@ public class Combat extends BaseContent {
             }
         }*/
 		if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
-			bd = buttons.add("Storm of Sisterhood", stormOfSisterhood).hint("Use a little bit of wrath to transform it into storm of sisterhood that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			bd = buttons.add("Storm of Sisterhood", stormOfSisterhood).hint("Use a little bit of wrath to transform it into storm of sisterhood that you throw at enemy.  \n\nWould go into cooldown after use for: "+Math.round(player.statusEffectv1(StatusEffects.KnowsStormOfSisterhood))+" round  \n\nWrath cost: "+stormOfSisterhoodWC()+"% of current wrath");
 			if (player.hasStatusEffect(StatusEffects.CooldownStormOfSisterhood)) {
 				bd.disable("You need more time before you can use Storm of Sisterhood again.");
 			} else if (player.wrath < 50) {
@@ -965,7 +965,7 @@ public class Combat extends BaseContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
-			bd = buttons.add("Night of Brotherhood", nightOfBrotherhood).hint("Use a little bit of wrath to transform it into night of brotherhood that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			bd = buttons.add("Night of Brotherhood", nightOfBrotherhood).hint("Use a little bit of wrath to transform it into night of brotherhood that you throw at enemy.  \n\nWould go into cooldown after use for: "+Math.round(player.statusEffectv1(StatusEffects.KnowsNightOfBrotherhood))+" round  \n\nWrath cost: "+nightOfBrotherhoodWC()+"% of current wrath");
 			if (player.hasStatusEffect(StatusEffects.CooldownNightOfBrotherhood)) {
 				bd.disable("You need more time before you can use Night of Brotherhood again.");
 			} else if (player.wrath < 50) {
@@ -13316,70 +13316,86 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
-    public function flamesOfLove():void {
+    public function flamesOfLoveLC():Number {
+		var follc:Number = 10;
+		return follc;
+	}
+	public function flamesOfLove():void {
         clearOutput();
         var fireDMG:Number = 0;
-        fireDMG += Math.round(player.lust * 0.3);
-        player.createStatusEffect(StatusEffects.CooldownFlamesOfLove, 2, 0, 0, 0);
+        fireDMG += Math.round(player.lust * (flamesOfLoveLC() * 0.01));
+        player.createStatusEffect(StatusEffects.CooldownFlamesOfLove, Math.round(player.statusEffectv1(StatusEffects.KnowsFlamesOfLove)), 0, 0, 0);
         player.lust -= fireDMG;
-        fireDMG *= 10;
+        fireDMG *= (5 * player.statusEffectv1(StatusEffects.KnowsFlamesOfLove));
 		if (monster.plural) fireDMG *= 2;
 		fireDMG *= fireDamageBoostedByDao();
 		fireDMG = Math.round(fireDMG);
         outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing flames of love with enemy. Shortly after that lust starts to gather around your hands getting hotter and hotter till it envelop your hands in flames.\n\n");
-        outputText("And with almost orgasmic joy, you sends a wave of flames toward " + monster.a + monster.short + " while mumbling about 'sharing the flames of love'.");
-		doFireDamage(fireDMG);
+        outputText("And with almost orgasmic joy, you sends a wave of flames toward " + monster.a + monster.short + " while mumbling about 'sharing the flames of love'. ");
+		doFireDamage(fireDMG, true, true);
         outputText("\n\n");
         enemyAI();
     }
 
-    public function iciclesOfLove():void {
+    public function iciclesOfLoveLC():Number {
+		var iollc:Number = 10;
+		return iollc;
+	}
+	public function iciclesOfLove():void {
         clearOutput();
         var iceDMG:Number = 0;
-        iceDMG += Math.round(player.lust * 0.3);
-        player.createStatusEffect(StatusEffects.CooldownIciclesOfLove, 2, 0, 0, 0);
+        iceDMG += Math.round(player.lust * (iciclesOfLoveLC() * 0.01));
+        player.createStatusEffect(StatusEffects.CooldownIciclesOfLove, Math.round(player.statusEffectv1(StatusEffects.KnowsIciclesOfLove)), 0, 0, 0);
         player.lust -= iceDMG;
-        iceDMG *= 10;
+        iceDMG *= (5 * player.statusEffectv1(StatusEffects.KnowsIciclesOfLove));
         if (monster.plural) iceDMG *= 2;
 		iceDMG *= iceDamageBoostedByDao();
 		iceDMG = Math.round(iceDMG);
         outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing icicles of love with enemy. Shortly after that lust starts to gather around your hands getting colder and colder till it envelop your hands in icicles.\n\n");
-        outputText("And with almost orgasmic joy, you sends a wave of ice shards toward " + monster.a + monster.short + " while mumbling about 'sharing the icicles of love'.");
-		doIceDamage(iceDMG);
+        outputText("And with almost orgasmic joy, you sends a wave of ice shards toward " + monster.a + monster.short + " while mumbling about 'sharing the icicles of love'. ");
+		doIceDamage(iceDMG, true, true);
         outputText("\n\n");
         enemyAI();
     }
 
-    public function stormOfSisterhood():void {
+    public function stormOfSisterhoodWC():Number {
+		var soswc:Number = 10;
+		return soswc;
+	}
+	public function stormOfSisterhood():void {
         clearOutput();
         var lightingDMG:Number = 0;
-        lightingDMG += Math.round(player.wrath * 0.3);
-        player.createStatusEffect(StatusEffects.CooldownStormOfSisterhood, 2, 0, 0, 0);
+        lightingDMG += Math.round(player.wrath * (stormOfSisterhoodWC() * 0.01));
+        player.createStatusEffect(StatusEffects.CooldownStormOfSisterhood, Math.round(player.statusEffectv1(StatusEffects.KnowsStormOfSisterhood)), 0, 0, 0);
         player.wrath -= lightingDMG;
-        lightingDMG *= 10;
+        lightingDMG *= (5 * player.statusEffectv1(StatusEffects.KnowsStormOfSisterhood));
         if (monster.plural) lightingDMG *= 2;
 		lightingDMG *= lightningDamageBoostedByDao();
 		lightingDMG = Math.round(lightingDMG);
         outputText("You start concentrate on the wrath flowing in your body, your veins while imaging a joy of sharing storm of sisterhood with enemy. Shortly after that wrath starts to gather around your hands till it envelop your hands in ligthing.\n\n");
-        outputText("With joy, you sends a mass of ligthing toward " + monster.a + monster.short + " while mumbling about 'sharing the storm of sisterhood'.");
-		doLightingDamage(lightingDMG);
+        outputText("With joy, you sends a mass of ligthing toward " + monster.a + monster.short + " while mumbling about 'sharing the storm of sisterhood'. ");
+		doLightingDamage(lightingDMG, true, true);
         outputText("\n\n");
         enemyAI();
     }
 
-    public function nightOfBrotherhood():void {
+    public function nightOfBrotherhoodWC():Number {
+		var nobwc:Number = 10;
+		return nobwc;
+	}
+	public function nightOfBrotherhood():void {
         clearOutput();
         var darknessDMG:Number = 0;
-        darknessDMG += Math.round(player.wrath * 0.3);
-        player.createStatusEffect(StatusEffects.CooldownNightOfBrotherhood, 2, 0, 0, 0);
+		darknessDMG += Math.round(player.wrath * (nightOfBrotherhoodWC() * 0.01));
+        player.createStatusEffect(StatusEffects.CooldownNightOfBrotherhood, Math.round(player.statusEffectv1(StatusEffects.KnowsNightOfBrotherhood)), 0, 0, 0);
         player.wrath -= darknessDMG;
-        darknessDMG *= 10;
+        darknessDMG *= (5 * player.statusEffectv1(StatusEffects.KnowsNightOfBrotherhood));
         if (monster.plural) darknessDMG *= 2;
 		darknessDMG *= darknessDamageBoostedByDao();
 		darknessDMG = Math.round(darknessDMG);
         outputText("You start concentrate on the wrath flowing in your body, your veins while imaging a joy of sharing night of brotherhood with enemy. Shortly after that wrath starts to gather around your hands till it envelop your hands in darkness.\n\n");
-        outputText("With joy, you sends a mass of darkness toward " + monster.a + monster.short + " while mumbling about 'sharing the night of brotherhood'.");
-		doDarknessDamage(darknessDMG);
+        outputText("With joy, you sends a mass of darkness toward " + monster.a + monster.short + " while mumbling about 'sharing the night of brotherhood'. ");
+		doDarknessDamage(darknessDMG, true, true);
         outputText("\n\n");
         enemyAI();
     }
