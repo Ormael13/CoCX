@@ -9,7 +9,6 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CoC;
 	import classes.Scenes.Monsters.OniIncubus;
-	import classes.Scenes.Places.HeXinDao;
 	import classes.Scenes.SceneLib;
 	import classes.display.SpriteDb;
 
@@ -17,7 +16,6 @@ use namespace CoC;
 	
 	public class ChiChiFollower extends NPCAwareContent
 	{
-		//public var backtoHeXinDao:HeXinDao = new HeXinDao();
 		
 		public function ChiChiFollower() 
 		{}

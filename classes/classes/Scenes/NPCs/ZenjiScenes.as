@@ -61,7 +61,7 @@ import coc.view.ButtonDataList;
 				ZenjiMarae = o["ZenjiMarae"];
 				ZenjiHolli = o["ZenjiHolli"];
 				ZenjiMarried = o["ZenjiMarried"];
-				ZenjiFigMulti = o["ZenjiFigMulti"];
+				ZenjiFigMulti = valueOr(o["ZenjiFigMulti"], 0);
 			} else {
 				// loading from old save
 				resetState();

@@ -254,8 +254,9 @@ public class CombatUI extends BaseCombatContent {
 			} else {
 				btnMelee.show("Approach", combat.approachAfterKnockback3, "Close some distance between you and your opponent.");
 			}
+		}
 		//HYPNOSIS
-		} else if (monster.hasStatusEffect(StatusEffects.HypnosisNaga) && !monster.hasStatusEffect(StatusEffects.Constricted)) {
+		else if (monster.hasStatusEffect(StatusEffects.HypnosisNaga) && !monster.hasStatusEffect(StatusEffects.Constricted)) {
 			menu();
 			addButton(0, "Heal", combat.HypnosisHeal);
 			addButton(1, "Attack", combat.HypnosisAttack);
@@ -273,21 +274,22 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 			addButton(4, "Maintain", combat.HypnosisMaintain);
+		}
 		//Naga grapple
-		} else if (monster.hasStatusEffect(StatusEffects.Constricted) && !monster.hasStatusEffect(StatusEffects.HypnosisNaga)) {
+		else if (monster.hasStatusEffect(StatusEffects.Constricted) && !monster.hasStatusEffect(StatusEffects.HypnosisNaga)) {
 			menu();
 			addButton(0, "Squeeze", SceneLib.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
 			addButton(1, "Tease", SceneLib.desert.nagaScene.naggaTease);
 			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", SceneLib.desert.nagaScene.nagaLeggoMyEggo);
-		//Grappling Cancer
 		} else if (monster.hasStatusEffect(StatusEffects.CancerGrab)) {
 			menu();
 			addButton(0, "Guillotine", combat.Guillotine).hint("Crush your foe with your pincer and attempt to break it appart! \n\nFatigue Cost: " + physicalCost(20) + "");
 			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", combat.CrabLeggoMyEggo);
+		}
 		//Grappling scylla
-		} else if (monster.hasStatusEffect(StatusEffects.ConstrictedScylla)) {
+		else if (monster.hasStatusEffect(StatusEffects.ConstrictedScylla)) {
 			menu();
 			addButton(0, "Squeeze", combat.ScyllaSqueeze);
 			if (monster.plural) {
@@ -298,8 +300,13 @@ public class CombatUI extends BaseCombatContent {
 			addButton(1, "Tease", combat.ScyllaTease).hint("Use a free limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
 			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", combat.ScyllaLeggoMyEggo);
+		} else if (monster.hasStatusEffect(StatusEffects.ConstrictedWhip)) {
+			menu();
+			vampireBiteDuringGrapple(3);
+			addButton(4, "Release", combat.WhipLeggoMyEggo);
+		}
 		//Orca be playing rought
-		} else if (monster.hasStatusEffect(StatusEffects.OrcaPlay)) {
+		else if (monster.hasStatusEffect(StatusEffects.OrcaPlay)) {
 			menu();
 			addButton(0, "Juggle", combat.OrcaJuggle).hint("Deal bite damage and send your foe back in the air at the cost of a fairly decent amount of fatigue. Extend the duration of play by 2 rounds up to twice. \n\nFatigue Cost: " + physicalCost(50) + "");
 			addButton(1, "Tail wack", combat.OrcaWack).hint("Stun your opponent and smash it back into the air with your tail.\n\nFatigue Cost: " + physicalCost(20) + "");
@@ -366,7 +373,6 @@ public class CombatUI extends BaseCombatContent {
 			addButton(1, "Bite", combat.spiderBiteAttack).hint("Inject your venom.");
 			addButton(2, "Release", combat.BreakOutWeb);
 			vampireBiteDuringGrapple(3);
-
 			//combat.mspecials.buildMenu(magspButtons);
 			if (magspButtons.length > 0) btnMSpecials.show("M. Specials", submenuMagSpecials, "Mental and supernatural special attack menu.", "Magical Specials");
 			if (combat.isPlayerSilenced()) {
@@ -378,7 +384,6 @@ public class CombatUI extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathSpellcasting()) {
 				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
 			} else if (!combat.canUseMagic()) btnMagic.disable();
-
 		} else if (monster.hasStatusEffect(StatusEffects.Pounce)) {
 			menu();
 			if (player.arms.type == Arms.DISPLACER)

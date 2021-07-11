@@ -200,6 +200,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+			//Whip Grapple
+			if (player.isWeaponsForWhipping()) {
+				bd = buttons.add("Grapple(W)", whipGrapple).hint("Attempt to grapple a foe with your whip.");
+				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				else if (monster.plural) bd.disable("You cannot grapple more than one foe at once.");
+			}
 			//Kick
 			if (player.isTaur() || player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.BUNNY || player.lowerBody == LowerBody.KANGAROO) {
 				bd = buttons.add("Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
@@ -3284,6 +3290,52 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else {
 			//Failure (-10 HPs) -
 			outputText("As you attempt to grapple your target it slips out of your reach delivering a glancing blow to your limbs. ");
+			player.takePhysDamage(5, true);
+			if(player.HP <= player.minHP()) {
+				doNext(endHpLoss);
+				return;
+			}
+		}
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function whipGrapple():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
+			clearOutput();
+			outputText("You just don't have the energy to wrap your whip so tightly around someone right now...");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		if(monster.short == "pod") {
+			clearOutput();
+			outputText("You can't constrict something you're trapped inside of!");
+			//Gone		menuLoc = 1;
+			menu();
+			addButton(0, "Next", combatMenu, false);
+			return;
+		}
+		fatigue(10, USEFATG_PHYSICAL);
+		//Amily!
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
+			clearOutput();
+			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.");
+			enemyAI();
+			return;
+		}
+		outputText("You entangle your opponent with your whip, attempting to bind its movement. ");
+		//WRAP IT UPPP
+		if(40 + rand(player.spe) > monster.spe) {
+			outputText("[monster a] [monster name] is tied up!");
+			monster.createStatusEffect(StatusEffects.ConstrictedWhip, 3 + rand(3),0,0,0);
+		}
+		//Failure
+		else {
+			//Failure (-10 HPs) -
+			outputText("[monster a] [monster name] manage to avoid the binding! ");
 			player.takePhysDamage(5, true);
 			if(player.HP <= player.minHP()) {
 				doNext(endHpLoss);

@@ -204,7 +204,7 @@ use namespace CoC;
 				if (cLvlTier == 3) cLvlTier = 0;
 				if (!lNeed){
 					if (flags[kFLAGS.SOUL_CULTIVATION] >=4){
-						cultStanding = cultRankTier[cLvlTier] + cultTier[floor(int((pLvl-2)/6))].name;
+						cultStanding = cultRankTier[cLvlTier] + cultTier[floor(int((pLvl-2)/6))].name();
 					}
 				}
 				pLvl += 2;

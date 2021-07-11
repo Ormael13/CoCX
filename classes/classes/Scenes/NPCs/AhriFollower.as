@@ -5,7 +5,7 @@
 package classes.Scenes.NPCs 
 {
 	import classes.*;
-	import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
+	//import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 	
 	public class AhriFollower extends NPCAwareContent
 	{

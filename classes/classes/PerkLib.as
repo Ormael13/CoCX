@@ -435,6 +435,15 @@ public class PerkLib
 		public static const GreyMagic:PerkType = mk("Grey Magic", "Grey Magic",
 				"Access to learn and cast grey magic spells. (+30 to max lust)",
 				"You've chosen the 'Grey Magic' perk, gaining access to grey spells. (+30 to max lust)");
+		public static const UnbreakableBind:PerkType = mk("Unbreakable bind", "Unbreakable bind",
+				"Improves all binding abilities efficiency by 100%.",
+				"You've chosen the 'Unbreakable bind' perk. Improves all binding abilities efficiency by 100%.");
+		public static const Sadomasochism:PerkType = mk("Sadomasochism", "Sadomasochism",
+				"You are aroused by the helplessness of your opponent just as much as you get aroused in getting hit. This causes your tease to become stronger when you are close to defeat. (PC gains +20% tease damage with low health and +20% tease damage with high arousal to either PC or the target.)",
+				"You've chosen the 'Sadomasochism' perk. You are aroused by the helplessness of your opponent just as much as you get aroused in getting hit. This causes your tease to become stronger when you are close to defeat.");
+		public static const ControlFreak:PerkType = mk("Control freak", "Control freak",
+				"Grapple damage and tease damage increase by 50% for each consecutive round you are holding grapple. Damage multiplier reset to 1 once grapple ends.",
+				"You've chosen the 'Control freak' perk. Grapple damage and tease damage increase by 50% for each consecutive round you are holding grapple. Damage multiplier reset to 1 once grapple ends.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -495,15 +504,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -2584,6 +2584,9 @@ public class PerkLib
 		public static const PrestigeJobBerserker:PerkType = mk("Prestige Job: Berserker", "Prestige Job: Berserker",
 				"You've trained in prestige art of perfect mastery over all forms of berserking. (+60 to max str, +20 to max tou - scalable)",
 				"You've chosen the 'Prestige Job: Berserker' perk, training yourself to became Berserker.").withBuffs({'str.mult':0.60,'tou.mult':0.20});
+		public static const PrestigeJobBindmaster:PerkType = mk("Prestige Job: Bindmaster", "Prestige Job: Bindmaster",
+				"You've trained in prestige art of perfect mastery over all forms of binding. (+60 to max str, +20 to max tou - scalable)",
+				"You've chosen the 'Prestige Job: Bindmaster' perk, training yourself to became Bindmaster.").withBuffs({'tou.mult':0.20,'lib.mult':0.60});
 		public static const PrestigeJobDruid:PerkType = mk("Prestige Job: Druid", "Prestige Job: Druid",
 				"You've trained in prestige art of fusing with elementals. (+40 to max tou, +40 to max wis - scalable)",
 				"You've chosen the 'Prestige Job: Druid' perk, training yourself to became Druid.").withBuffs({'tou.mult':0.40,'wis.mult':0.40});
@@ -5777,21 +5780,32 @@ public class PerkLib
 					.requireLevel(36)
                     .requireLib(150);
             //Tier 7 Libido Perks
-            HalfStepToPeerlessSelfControl.requireLib(240)
+            PrestigeJobBindmaster.requirePrestigeJobSlot()
+                    .requirePerk(JobEromancer)
+                    .requirePerk(JobGuardian)
+                    .requireLib(200)
+                    .requireLevel(42);
+        	HalfStepToPeerlessSelfControl.requireLib(240)
                     .requireInt(160)
                     .requirePerk(SuperiorSelfControl)
                     .requireLevel(42);
             //Tier 8 Libido Perks
+            UnbreakableBind.requirePerk(PrestigeJobBindmaster)
+                    .requireLevel(48);
             PeerlessSelfControl.requireLib(270)
                     .requireInt(180)
                     .requirePerk(HalfStepToPeerlessSelfControl)
                     .requireLevel(48);
             //Tier 9 Libido Perks
+            Sadomasochism.requirePerk(UnbreakableBind)
+                    .requireLevel(54);
             HalfStepToInhumanSelfControl.requireLib(300)
                     .requireInt(200)
                     .requirePerk(PeerlessSelfControl)
                     .requireLevel(54);
             //Tier 10 Libido Perks
+            ControlFreak.requirePerk(Sadomasochism)
+                    .requireLevel(60);
             InhumanSelfControl.requireLib(330)
                     .requireInt(220)
                     .requirePerk(HalfStepToInhumanSelfControl)

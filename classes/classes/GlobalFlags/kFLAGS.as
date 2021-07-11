@@ -1935,7 +1935,7 @@ public static const UNKNOWN_FLAG_NUMBER_01926:int                               
 public static const UNKNOWN_FLAG_NUMBER_01927:int                                   = 1927;
 public static const UNKNOWN_FLAG_NUMBER_01928:int                                   = 1928;
 public static const UNKNOWN_FLAG_NUMBER_01929:int                                   = 1929;
-public static const AHRI_FOLLOWER:int                                   			= 1930;
+public static const UNKNOWN_FLAG_NUMBER_01930:int                                   			= 1930;
 public static const UNKNOWN_FLAG_NUMBER_01931:int                                   = 1931;
 public static const UNKNOWN_FLAG_NUMBER_01932:int                                   = 1932;
 public static const UNKNOWN_FLAG_NUMBER_01933:int                                   = 1933;
@@ -1984,10 +1984,10 @@ public static const WRATH_GIANT_SLAYER_GOBLIN_MECH:int                          
 public static const AUTO_FLIGHT:int                                   				= 1976;
 public static const UNKNOWN_FLAG_NUMBER_01977:int                                   = 1977;
 public static const UNKNOWN_FLAG_NUMBER_01978:int                                   = 1978;
-public static const UNKNOWN_FLAG_NUMBER_01979:int                                   = 1979;
-public static const UNKNOWN_FLAG_NUMBER_01980:int                                   = 1980;
-public static const UNKNOWN_FLAG_NUMBER_01981:int                                   = 1981;
-public static const UNKNOWN_FLAG_NUMBER_01982:int                                   = 1982;
+public static const AKALI_FOLLOWER:int                                   			= 1979;
+public static const KAI_SA_FOLLOWER:int                                   			= 1980;
+public static const EVELYNN_FOLLOWER:int                                   			= 1981;
+public static const AHRI_FOLLOWER:int                                   			= 1982;
 public static const UNKNOWN_FLAG_NUMBER_01983:int                                   = 1983;
 public static const UNKNOWN_FLAG_NUMBER_01984:int                                   = 1984;
 public static const UNKNOWN_FLAG_NUMBER_01985:int                                   = 1985;
