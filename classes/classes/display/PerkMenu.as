@@ -811,6 +811,7 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Metabolism Mutations");
 			mutationsDatabaseVerify([PerkLib.ManticoreMetabolism, PerkLib.ManticoreMetabolismEvolved]);
 			mutationsDatabaseVerify([PerkLib.DisplacerMetabolism, PerkLib.DisplacerMetabolismEvolved]);
+			mutationsDatabaseVerify([PerkLib.SlimeMetabolism, PerkLib.SlimeMetabolismEvolved]);
 			mutationsDatabase();
 		}
 

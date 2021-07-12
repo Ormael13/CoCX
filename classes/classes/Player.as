@@ -43,6 +43,7 @@ import classes.Items.Undergarment;
 import classes.Items.UndergarmentLib;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
+import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Pregnancy;
 import classes.Scenes.SceneLib;
@@ -10452,6 +10453,8 @@ use namespace CoC;
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobSpellKnight))
 				prestigeJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobStalker))
+				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobTempest))
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobWarlock))
@@ -13705,7 +13708,7 @@ use namespace CoC;
 				dynStats("spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost), "scale", false);
 				removeStatusEffect(StatusEffects.UnderwaterCombatBoost);
 			}
-			if(hasStatusEffect(StatusEffects.EzekielCurse) && flags[kFLAGS.EVANGELINE_AFFECTION] >= 3 && hasPerk(PerkLib.EzekielBlessing)) {
+			if(hasStatusEffect(StatusEffects.EzekielCurse) && EvangelineFollower.EvangelineAffectionMeter >= 3 && hasPerk(PerkLib.EzekielBlessing)) {
 				removeStatusEffect(StatusEffects.EzekielCurse);
 			}
 			if(hasStatusEffect(StatusEffects.DragonBreathCooldown) && hasPerk(PerkLib.DraconicLungsFinalForm)) {
@@ -15385,4 +15388,4 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 	}
-}
+}

@@ -63,6 +63,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function doPoisonDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 		return combat.doPoisonDamage(damage, apply, display);
 	}
+	protected function doWindDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+		return combat.doWindDamage(damage, apply, display);
+	}
 	protected function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 		return combat.doTrueDamage(damage, apply, display);
 	}

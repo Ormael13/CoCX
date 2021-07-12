@@ -3171,9 +3171,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("You start to channel power into your body unleashing it it into the form of a mighty swirling tornado. " + monster.capitalA + monster.short + " is caught in it and carried into the windstorm taking hit from various other flying objects. <b><font color=\"#800000\">" + damage + "</font></b> damage.");
+		damage = Math.round(damage * combat.windDamageBoostedByDao());
+		outputText("You start to channel power into your body unleashing it it into the form of a mighty swirling tornado. " + monster.capitalA + monster.short + " is caught in it and carried into the windstorm taking hit from various other flying objects. ");
+		doWindDamage(damage);
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);

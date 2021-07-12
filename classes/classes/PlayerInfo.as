@@ -4,6 +4,7 @@ import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
+import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.IsabellaScene;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.SceneLib;
@@ -875,7 +876,7 @@ public class PlayerInfo extends BaseContent {
 
 		// Begin Evangeline Stats
 		var evangelineStats:String = "";
-		if (flags[kFLAGS.EVANGELINE_AFFECTION] > 2) {
+		if (EvangelineFollower.EvangelineAffectionMeter > 2) {
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 17) evangelineStats += "<b>Evangeline lvl:</b> 42\n";
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 16) evangelineStats += "<b>Evangeline lvl:</b> 40\n";
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 15) evangelineStats += "<b>Evangeline lvl:</b> 36\n";
@@ -893,10 +894,10 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) evangelineStats += "<b>Evangeline lvl:</b> 6\n";
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2) evangelineStats += "<b>Evangeline lvl:</b> 4\n";
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] < 2) evangelineStats += "<b>Evangeline lvl:</b> 2\n";
-			evangelineStats += "<b>Evangeline Affection:</b> " + Math.round(flags[kFLAGS.EVANGELINE_AFFECTION]) + "%\n";
+			evangelineStats += "<b>Evangeline Affection:</b> " + Math.round(EvangelineFollower.EvangelineAffectionMeter) + "%\n";
 		}
-		if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 5) {
-			evangelineStats += "<b>Gems Purse:</b> " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems\n";
+		if (EvangelineFollower.EvangelineAffectionMeter >= 5) {
+			evangelineStats += "<b>Gems Purse:</b> " + EvangelineFollower.EvangelineGemsPurse + " gems\n";
 			evangelineStats += "<b>Spells Casted:</b> " + flags[kFLAGS.EVANGELINE_SPELLS_CASTED] + "\n";
 			if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 0) {
 				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 10) evangelineStats += "<b>Spells Cost:</b> 100%\n";
@@ -1272,8 +1273,16 @@ public class PlayerInfo extends BaseContent {
 				else masteryStats += "None";
 				masteryStats += "\n";
 			}
-			//masteryStats += "<b>Dao of ???:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
-			//masteryStats += "<b>Dao of ???:</b>  Soon to be implemented\n";//" + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)
+			if (player.hasStatusEffect(StatusEffects.DaoOfWind)) {
+				masteryStats += "<b>Minor Dao of Wind:</b>  ";
+				if (player.statusEffectv2(StatusEffects.DaoOfWind) == 5) masteryStats += "5th layer (+70% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWind) == 4) masteryStats += "4th layer (+50% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWind) == 3) masteryStats += "3rd layer (+30% dmg, +10% resistance)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWind) == 2) masteryStats += "2nd layer (+20% dmg)";
+				else if (player.statusEffectv2(StatusEffects.DaoOfWind) == 1) masteryStats += "1st layer (+10% dmg)";
+				else masteryStats += "None";
+				masteryStats += "\n";
+			}
 			masteryStats += "\n";
 		}
 		if (player.teaseLevel < combat.maxTeaseLevel())

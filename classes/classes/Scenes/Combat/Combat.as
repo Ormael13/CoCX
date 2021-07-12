@@ -3475,6 +3475,7 @@ public class Combat extends BaseContent {
             //Determine if critical hit!
             var crit:Boolean = false;
             var critChance:int = 5;
+            var critDmg:Number = 1.75;
             critChance += combatPhysicalCritical();
             if (player.weaponRangeName == "gnoll throwing axes") critChance += 10;
             if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
@@ -3483,9 +3484,11 @@ public class Combat extends BaseContent {
             if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
             if (rand(100) < critChance) {
                 crit = true;
-                if (player.hasPerk(PerkLib.AnatomyExpert)) damage *= 2.25;
-                else damage *= 1.75;
+                if (player.hasPerk(PerkLib.AnatomyExpert)) critDmg += 0.5;
+                if (player.hasPerk(PerkLib.PrestigeJobStalker)) critDmg += 0.2;
+                damage *= critDmg;
             }
+			if (player.hasPerk(PerkLib.PrestigeJobStalker)) damage *= 1.2;
             if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
             if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
@@ -7231,6 +7234,78 @@ public class Combat extends BaseContent {
         return damage;
     }
 
+    public function doWindDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+        MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
+        damage *= doDamageReduction();
+		if (damage < 1) damage = 1;
+        if (player.hasPerk(PerkLib.Sadist)) {
+            damage *= 1.2;
+            dynStats("lus", 3);
+            if (player.armorName == "Scandalous Succubus Clothing") {
+                damage *= 1.2;
+                dynStats("lus", 3);
+            }
+        }
+        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
+        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+            var bonusDamageFromMissingHP:Number = 1;
+            if (player.hp100 < 100) {
+                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
+                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
+            }
+            damage *= bonusDamageFromMissingHP;
+        }
+        if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
+        if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
+        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
+		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+        if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+        damage = DamageOverhaul(damage);
+        if (damage == 0) MSGControllForEvasion = true;
+        if (monster.HP - damage <= monster.minHP()) {
+            /* No monsters use this perk, so it's been removed for now
+		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
+		else doNext(endHpVictory);
+		*/
+            doNext(endHpVictory);
+        }
+        // Uma's Massage Bonuses
+        var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
+        if (sac) {
+            if (sac.value1 == UmasShop.MASSAGE_POWER) {
+                damage *= sac.value2;
+            }
+        }
+        damage = Math.round(damage);
+        if (damage < 0) damage = 1;
+        if (apply) {
+            monster.HP -= damage;
+            var BonusWrathMult:Number = 1;
+            if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
+            if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
+            else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
+            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+        }
+        if (display) {
+            if (damage > 0) {
+                if (damage > 1000) CommasForDigits(damage);
+                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+        }
+        //Isabella gets mad
+        if (monster.short == "Isabella") {
+            flags[kFLAGS.ISABELLA_AFFECTION]--;
+            //Keep in bounds
+            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
+        }
+        //Interrupt gigaflare if necessary.
+        if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
+        //Keep shit in bounds.
+        if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
+        return damage;
+    }
+
 	public function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         if (damage < 1) damage = 1;
@@ -8773,10 +8848,10 @@ public class Combat extends BaseContent {
         }
         //Ezekiel Curse
         if (player.hasStatusEffect(StatusEffects.EzekielCurse)) {
-            if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 2 && player.hasPerk(PerkLib.EzekielBlessing)) {
+            if (EvangelineFollower.EvangelineAffectionMeter >= 2 && player.hasPerk(PerkLib.EzekielBlessing)) {
                 outputText("<b>You feel familiar feeling of your own lifeforce been slowly extinquished.  Maybe you should finish this fight as soon as possible to start healing this aligment?</b>\n\n");
                 player.takePhysDamage(500);
-            } else if (flags[kFLAGS.EVANGELINE_AFFECTION] >= 2) {
+            } else if (EvangelineFollower.EvangelineAffectionMeter >= 2) {
                 outputText("<b>You suddenly feel like you very own lifeforce are been at steady pace extinquished the longer you keep fighting.  You better finsh this fight fast or find way to cure your current situation as otherwise...</b>\n\n");
                 if (player.maxHP() < 1000) player.takePhysDamage(player.maxHP() * 0.1);
                 else player.takePhysDamage(100);
@@ -13805,6 +13880,17 @@ public class Combat extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 1) boostP += 0.1;
 		}
 		return boostP;
+	}
+	public function windDamageBoostedByDao():Number {
+		var boostWi:Number = 1;
+		if (player.hasStatusEffect(StatusEffects.DaoOfWind)) {
+			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 5) boostWi += 0.7;
+			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 4) boostWi += 0.5;
+			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 3) boostWi += 0.3;
+			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 2) boostWi += 0.2;
+			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 1) boostWi += 0.1;
+		}
+		return boostWi;
 	}
 
     public function oniRampagePowerMulti():Number {

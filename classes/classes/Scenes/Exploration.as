@@ -37,7 +37,6 @@ public class Exploration extends BaseContent
 		public var exploreDebug:ExploreDebug = new ExploreDebug();
 		public var hiddencave:HiddenCave = new HiddenCave();
 		public var TrueDemons:DemonScene = new DemonScene();
-		public var Evangeline:EvangelineFollower = new EvangelineFollower();
 
 		public function Exploration()
 		{
@@ -580,12 +579,12 @@ public class Exploration extends BaseContent
 			// CoC.instance.goblinAssassinScene.goblinAssassinEncounter();
 			// return;
 
-			if (flags[kFLAGS.EVANGELINE_AFFECTION] < 1 && rand(2) == 0 && player.level > 0) {
-				Evangeline.enterTheEvangeline();
+			if (EvangelineFollower.EvangelineAffectionMeter < 1 && rand(2) == 0 && player.level > 0) {
+				SceneLib.evangelineFollower.enterTheEvangeline();
 				return;
 			}
-			if (flags[kFLAGS.EVANGELINE_AFFECTION] == 2 && rand(6) == 0) {
-				Evangeline.alternativEvangelineRecruit();
+			if (EvangelineFollower.EvangelineAffectionMeter == 2 && rand(6) == 0) {
+				SceneLib.evangelineFollower.alternativEvangelineRecruit();
 				return;
 			}
 			if (player.level > 2 && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1 && rand(10) == 0) {

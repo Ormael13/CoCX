@@ -77,7 +77,6 @@ public class Camp extends NPCAwareContent{
 	public var dungeonDD:DenOfDesire = new DenOfDesire();
 	public var dungeonAP:AnzuPalace = new AnzuPalace();
 	public var dungeonEL:EbonLabyrinth = new EbonLabyrinth();
-	public var EvangelineF:EvangelineFollower = new EvangelineFollower();
 	public var Magnolia:MagnoliaFollower = new MagnoliaFollower();
 	public var HolliPure:HolliPureScene = new HolliPureScene();
 	public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
@@ -1050,7 +1049,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
 		if (followerShouldra()) counter++;
 		if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
-		if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
+		if (EvangelineFollower.EvangelineFollowerStage >= 1) counter++;
 		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
 		if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) counter++;
@@ -1181,7 +1180,7 @@ public class Camp extends NPCAwareContent{
 		if (emberScene.followerEmber()) counter++;
 		if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
 		if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
-		if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
+		if (EvangelineFollower.EvangelineFollowerStage >= 1) counter++;
 		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 		if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
@@ -1762,14 +1761,14 @@ public class Camp extends NPCAwareContent{
 			}
 			//Celess
 			//Evangeline
-			if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] <= 0) {
+			if (EvangelineFollower.EvangelineFollowerStage >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] <= 0) {
 				outputText("There is a small bedroll for Evangeline near the [camp] edge");
 				if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and she's sleeping on it right now.");
 				else outputText(", though she probably wander somewhere near [camp] looking for more ingredients to make her potions.");
 				outputText(" Next to it stands a small chest with her personal stuff.\n\n");
-				buttons.add("Evangeline", EvangelineF.meetEvangeline).hint("Visit Evangeline.");
+				buttons.add("Evangeline", SceneLib.evangelineFollower.meetEvangeline).hint("Visit Evangeline.");
 			}
-			else if (flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1) {
+			else if (EvangelineFollower.EvangelineFollowerStage >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1) {
 				/*if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1)*/
 				outputText("Evangeline isn't in the [camp] as she went to buy some items. She should be out no longer than a few hours.\n\n");
 				//if () outputText("Evangeline is busy training now. She should be done with it in a few hours.\n\n");
@@ -4140,7 +4139,6 @@ public function wakeFromBadEnd():void {
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 11) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 12;
 			outputText("No worry it's not a bug it's an airplan...err ok your save is just upgraded to the next level ^^");
-			if (flags[kFLAGS.EVANGELINE_GEMS_PURSE] < 0) flags[kFLAGS.EVANGELINE_GEMS_PURSE] = 0;
 			if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 0) flags[kFLAGS.EVANGELINE_SPELLS_CASTED] = 0;
 			if (flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] < 0) flags[kFLAGS.SOULFORCE_USED_FOR_BREAKTHROUGH] = 0;
 			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 5) flags[kFLAGS.CAMP_CABIN_PROGRESS] -= 2;
@@ -4173,7 +4171,6 @@ public function wakeFromBadEnd():void {
 				player.removePerk(PerkLib.DeityJobMunchkin);
 				player.createPerk(PerkLib.JobAllRounder, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.EVANGELINE_TALKS] < 0) flags[kFLAGS.EVANGELINE_TALKS] = 0;
 			doNext(doCamp);
 			return;
 		}
@@ -4731,6 +4728,14 @@ public function wakeFromBadEnd():void {
 				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
 				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
 			}
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) flags[kFLAGS.EVANGELINE_LVL_UP] = 0;
+			if (flags[kFLAGS.EVANGELINE_DEFEATS_COUNTER] > 0) flags[kFLAGS.EVANGELINE_DEFEATS_COUNTER] = 0;
+			if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] > 0) flags[kFLAGS.EVANGELINE_SPELLS_CASTED] = 0;
+			if (flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] > 0) flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] = 0;
+			if (flags[kFLAGS.EVANGELINE_02330] > 0) flags[kFLAGS.EVANGELINE_02330] = 0;
+			if (flags[kFLAGS.EVANGELINE_02331] > 0) flags[kFLAGS.EVANGELINE_02331] = 0;
+			if (flags[kFLAGS.EVANGELINE_02332] > 0) flags[kFLAGS.EVANGELINE_02332] = 0;
+			if (flags[kFLAGS.EVANGELINE_02333] > 0) flags[kFLAGS.EVANGELINE_02333] = 0;
 			doNext(doCamp);
 			return;
 		}

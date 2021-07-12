@@ -444,6 +444,12 @@ public class PerkLib
 		public static const ControlFreak:PerkType = mk("Control freak", "Control freak",
 				"Grapple damage and tease damage increase by 50% for each consecutive round you are holding grapple. Damage multiplier reset to 1 once grapple ends.",
 				"You've chosen the 'Control freak' perk. Grapple damage and tease damage increase by 50% for each consecutive round you are holding grapple. Damage multiplier reset to 1 once grapple ends.");
+		public static const SlimeMetabolism:PerkType = mk("Slime Metabolism", "Slime Metabolism",
+				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow attack twice with tail spike per turn.",
+				"You've chosen the 'Manticore Metabolism' perk, allows you to gain a boost of speed after an intake of cum and allow atack more often with tail spike.");
+		public static const SlimeMetabolismEvolved:PerkType = mk("Slime Metabolism (Evolved)", "Slime Metabolism (Evolved)",
+				"Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of cum and increase max Hunger cap by 50 (if PC have Hunger bar active).",
+				"You've chosen the 'Manticore Metabolism (Evolved)' perk, allows you to increase max boost of speed after an intake of cum and keeping it for 50% longer.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
@@ -1522,12 +1528,6 @@ public class PerkLib
 		public static const GoliathVI:PerkType = mk("Goliath VI", "Goliath VI",
 				"+8 extra HP per point of strength.",
 				"You've chosen the 'Goliath VI' perk, granting +8 extra maximum HP for each point of strength.");
-		public static const GorgonsEyes:PerkType = mk("Gorgon's Eyes", "Gorgon's Eyes",
-				"Can use Petrify with any type of eyes and improves your resistance to attacks that are related to sight.",
-				"You've chosen the 'Gorgon's Eyes' perk. Can use Petrify with any type of eyes and improves your resistance to all attacks that are related to sight.").withBuffs({'spe.mult':0.05,'sens':5});
-		public static const GorgonsEyesEvolved:PerkType = mk("Gorgon's Eyes (Evolved)", "Gorgon's Eyes (Evolved)",
-				"Another mutation of your eyes allows you to move a bit faster, increase the duration of Petrify and change negative effect of resistance to basilisks and similar effects into positive effect.",
-				"You've chosen the 'Gorgon's Eyes (Evolved)' perk. Increases the duration of Petrify and change negative effect of resistance to basilisks and similar effects into positive effect.").withBuffs({'spe.mult':0.10,'sens':10});
 		public static const GrabbingGrandmaster:PerkType = mk("Grabbing Grandmaster", "Grabbing Grandmaster",
 				"The toss to the floor from Grabbing Styles comes with such power that the foe is left out of breath. Scaling with strength, up to 20% chance of stunning the opponent for 1 round after the toss. This only work when fighting unarmed with no shield equiped.",
 				"You've chosen the 'Grabbing Grandmaster' perk, wich makes the toss to the floor from Grabbing Styles increase in power to the point that the foe is left out of breath. Scaling with strength, up to 20% chance of stunning the opponent for 1 round after the toss. This only work when fighting unarmed with no shield equiped.");
@@ -2602,6 +2602,9 @@ public class PerkLib
 		public static const PrestigeJobSpellKnight:PerkType = mk("Prestige Job: Spell-Knight", "Prestige Job: Spell-Knight",
 				"You've trained in prestige art of combining swordplay and magic. (+40 to max str/int - scalable)",
 				"You've chosen the 'Prestige Job: Spell-Knight' perk, training yourself to became Spell-Knight.").withBuffs({'str.mult':0.40,'int.mult':0.40});
+		public static const PrestigeJobStalker:PerkType = mk("Prestige Job: Stalker", "Prestige Job: Stalker",
+				"You've trained in prestige art of combining master survivalist and expert huntsman. (+60 to max str, +20 to max spe - scalable)",
+				"You've chosen the 'Prestige Job: Stalker' perk, training yourself to became Stalker.").withBuffs({'str.mult':0.60,'spe.mult':0.20});
 		public static const PrestigeJobTempest:PerkType = mk("Prestige Job: Tempest", "Prestige Job: Tempest",
 				"You've trained in prestige art of dual wielding as you hack and slice through your opponents like a raging storm of steel. (+40 to max str/spe - scalable)",
 				"You've chosen the 'Prestige Job: Tempest' perk, training yourself to became Tempest.").withBuffs({'str.mult':0.40,'spe.mult':0.40});
@@ -2823,12 +2826,6 @@ public class PerkLib
 		public static const Slayer:PerkType = mk("Slayer", "Slayer",
 				"Increase sneaky attack dmg by another 300% base value (7x).",
 				"You've chosen the 'Slayer' perk. Increase sneaky attack dmg by another 300% base value (7x).");
-		public static const SlimeMetabolism:PerkType = mk("Slime Metabolism", "Slime Metabolism",
-				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow attack twice with tail spike per turn.",
-				"You've chosen the 'Manticore Metabolism' perk, allows you to gain a boost of speed after an intake of cum and allow atack more often with tail spike.");
-		public static const SlimeMetabolismEvolved:PerkType = mk("Slime Metabolism (Evolved)", "Slime Metabolism (Evolved)",
-				"Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of cum and increase max Hunger cap by 50 (if PC have Hunger bar active).",
-				"You've chosen the 'Manticore Metabolism (Evolved)' perk, allows you to increase max boost of speed after an intake of cum and keeping it for 50% longer.");
 		public static const SluttySimplicity:PerkType = mk("Slutty Simplicity", "Slutty Simplicity",
 				"Increases by 10% tease effect when you are naked. (Undergarments won't disable this perk.)",
 				"You've chosen the 'Slutty Simplicity' perk, granting increased tease effect when you are naked.");
@@ -3617,6 +3614,10 @@ public class PerkLib
 				"Increases damage with guns and thrown weapons by 15%.");
 		public static const GoblinoidBlood:PerkType = mk("Goblinoid blood", "Goblinoid blood",
 				"Your blood is highly susceptible to chemical drugs, stimulants and poisons.");
+		public static const GorgonsEyes:PerkType = mk("Gorgon's Eyes", "Gorgon's Eyes",
+				"Can use Petrify with any type of eyes and improves your resistance to attacks that are related to sight.").withBuffs({'spe.mult':0.05,'sens':5});
+		public static const GorgonsEyesEvolved:PerkType = mk("Gorgon's Eyes (Evolved)", "Gorgon's Eyes (Evolved)",
+				"Another mutation of your eyes allows you to move a bit faster, increase the duration of Petrify and change negative effect of resistance to basilisks and similar effects into positive effect.").withBuffs({'spe.mult':0.10,'sens':10});
 		public static const HaltedVitals:PerkType = mk("Halted vitals", "Halted vitals",
 				"Your vitals are frozen in time by the magic of the curse tag, allowing you to live without the need for breathing, eating and a heartbeat. It also reduces damage taken from physical attacks by 20%. Furthermore your vitality is based of your libido rather then your toughness.");
 		public static const HarpySong:PerkType = mk("Harpy Song", "Harpy Song",
@@ -4097,6 +4098,12 @@ public class PerkLib
                     .requirePerk(JobGuardian)
                     .requireAnyPerk(Berzerker, Lustzerker)
                     .requireStr(200)
+                    .requireLevel(42);
+            PrestigeJobStalker.requirePrestigeJobSlot()
+                    .requirePerk(JobWarrior)
+                    .requirePerk(JobHunter)
+                    .requireStr(150)
+                    .requireSpe(150)
                     .requireLevel(42);
             PrestigeJobSpellKnight.requirePrestigeJobSlot()
                     .requireStr(200)
@@ -6105,13 +6112,13 @@ public class PerkLib
             FrozenHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
                 return player.yukiOnnaScore() >= 14;
             }, "Yuki onna race");
-            GorgonsEyes.requireEyesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+        /*    GorgonsEyes.requireEyesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
                 return player.eyes.type == 4;
 				}, "Gorgon eyes")
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.gorgonScore() >= 5;
             }, "Gorgon race");
-			HinezumiBurningBlood.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+		*/	HinezumiBurningBlood.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
                 return player.arms.type == 34;
 				}, "Hinezumi arms")
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -6303,12 +6310,12 @@ public class PerkLib
 			FloralOvariesEvolved.requireLevel(6).requirePerk(FloralOvaries).requireCustomFunction(function (player:Player):Boolean {
 				return player.alrauneScore() >= 13;
 			}, "Alraune race");
-            GorgonsEyesEvolved.requireLevel(6)
+        /*    GorgonsEyesEvolved.requireLevel(6)
 				.requirePerk(GorgonsEyes)
 				.requireCustomFunction(function (player:Player):Boolean {
 					return player.gorgonScore() >= 10;
             }, "Gorgon race");
-            HinezumiBurningBloodEvolved.requireLevel(6)
+        */    HinezumiBurningBloodEvolved.requireLevel(6)
 				.requirePerk(HinezumiBurningBlood)
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.arms.type == 34;

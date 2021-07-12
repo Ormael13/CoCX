@@ -4960,7 +4960,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.windDamageBoostedByDao());
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your winds touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -4983,11 +4983,11 @@ public class MagicSpecials extends BaseCombatContent {
 		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
 		{
 			//Attack gains burn DoT for 2-3 turns.
-			outputText("You gather winds around you and unleash them on the horde of demons like a tidal wave, tossing them around like mere chaff to the wind. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!\n\n");
+			outputText("You gather winds around you and unleash them on the horde of demons like a tidal wave, tossing them around like mere chaff to the wind. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them! ");
 			damage = int(player.level * 8 + 25 + rand(10));
-			damage *= 1.75;
-			outputText(" (" + damage + ")");
-			monster.HP -= damage;
+			damage *= (1.75 * combat.windDamageBoostedByDao());
+			damage = Math.round(damage);
+			doWindDamage(damage, true, true);
 			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,(player.spe*5)+(player.inte*5),1,0,0);
 			else{
 				monster.createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
@@ -5020,7 +5020,7 @@ public class MagicSpecials extends BaseCombatContent {
 				else outputText("are");
 				outputText("too resolute to be stunned by your attack.</b> ");
 			}
-			doDamage(damage, true, true);
+			doWindDamage(damage, true, true);
 			if (!monster.hasStatusEffect(StatusEffects.CouatlHurricane)) monster.createStatusEffect(StatusEffects.CouatlHurricane,(player.spe*5)+(player.inte*5),0,0,0);
 			else {
 				monster.createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
@@ -5057,7 +5057,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.windDamageBoostedByDao());
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your winds touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -5080,11 +5080,11 @@ public class MagicSpecials extends BaseCombatContent {
 		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
 		{
 			//Attack gains burn DoT for 2-3 turns.
-			outputText("You gather winds around you and unleash them on the horde of demons like a tidal wave, scarring and bleeding their tainted flesh. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!\n\n");
+			outputText("You gather winds around you and unleash them on the horde of demons like a tidal wave, scarring and bleeding their tainted flesh. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them! ");
 			damage = int(player.level * 8 + 25 + rand(10));
-			damage *= 1.75;
-			outputText(" (" + damage + ")");
-			monster.HP -= damage;
+			damage *= (1.75 * combat.windDamageBoostedByDao());
+			damage = Math.round(damage);
+			doWindDamage(damage, true, true);
 			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,player.spe*10,1,0,0);
 			else{
 				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*10);
@@ -5117,7 +5117,7 @@ public class MagicSpecials extends BaseCombatContent {
 				else outputText("are");
 				outputText("too resolute to be stunned by your attack.</b> ");
 			}
-			doDamage(damage, true, true);
+			doWindDamage(damage, true, true);
 			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,player.spe*10,0,0,0);
 			else {
 				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*10);
