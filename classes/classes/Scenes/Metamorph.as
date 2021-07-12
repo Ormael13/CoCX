@@ -24,6 +24,8 @@ import classes.Items.MutationsHelper;
 
 import classes.GeneticMemories.*;
 
+import classes.internals.Utils;
+
 use namespace CoC;
 
 	public class Metamorph extends BaseContent implements SaveableState {
@@ -46,7 +48,13 @@ use namespace CoC;
 
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
-				GeneticMemoryStorage = o["storage"];
+				GeneticMemoryStorage = Utils.copyObject({}, o["storage"]);
+
+				GeneticMemoryStorage = {};
+				var storage:* = o["storage"];
+				for (var k:String in storage) {
+    			if (storage.hasOwnProperty(k)) GeneticMemoryStorage[k] = !!storage[k];
+				}
 			} else {
 				// loading from old save
 				resetState();
@@ -65,6 +73,7 @@ use namespace CoC;
 
 				// TODO: Move migration inside else after finished
 				// migration
+
 				if (player.hasStatusEffect(StatusEffects.UnlockedHumanHair)) GeneticMemoryStorage["Human Hair"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedHarpyHair)) GeneticMemoryStorage["Feather Hair"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedGorgonHair)) GeneticMemoryStorage["Gorgon Hair"] = true;
@@ -122,6 +131,65 @@ use namespace CoC;
 				if (player.hasStatusEffect(StatusEffects.UnlockedCatTongue)) GeneticMemoryStorage["Cat Tongue"] = true;
 				if (player.hasStatusEffect(StatusEffects.UnlockedElfTongue)) GeneticMemoryStorage["Elf Tongue"] = true;
 
+				if (player.hasStatusEffect(StatusEffects.UnlockedHumanEars)) GeneticMemoryStorage["Human Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedHorseEars)) GeneticMemoryStorage["Horse Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedCowEars)) GeneticMemoryStorage["Cow Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedElfinEars)) GeneticMemoryStorage["Elfin Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedCatEars)) GeneticMemoryStorage["Cat Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedLizardEars)) GeneticMemoryStorage["Lizard Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedFoxEars)) GeneticMemoryStorage["Fox Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars)) GeneticMemoryStorage["Draconic Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedPigEars)) GeneticMemoryStorage["Pig Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedLionEars)) GeneticMemoryStorage["Lion Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedOrcaEars)) GeneticMemoryStorage["Orca Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEars)) GeneticMemoryStorage["Snake Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedGoatEars)) GeneticMemoryStorage["Goat Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedOniEars)) GeneticMemoryStorage["Oni Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedElfEars)) GeneticMemoryStorage["Elven Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEars)) GeneticMemoryStorage["Weasel Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedBatEars)) GeneticMemoryStorage["Bat Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedVampireEars)) GeneticMemoryStorage["Vampire Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaEars)) GeneticMemoryStorage["Red Panda Ears"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEars)) GeneticMemoryStorage["Displacer Ears"] = true;
+
+				if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoHorns)) GeneticMemoryStorage["No Horns"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedDemonHorns)) GeneticMemoryStorage["Demon Horns"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurHorns)) GeneticMemoryStorage["Cow Minotaur Horns"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX2)) GeneticMemoryStorage["Draconic Dual Horns"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX4)) GeneticMemoryStorage["Draconic Quadruple Horns"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedGoatHorns)) GeneticMemoryStorage["Goat Horns"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedUnicornHorn)) GeneticMemoryStorage["Unicorn Horn"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedOniSingleHorn)) GeneticMemoryStorage["Oni Horn"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedOniTwinHorns)) GeneticMemoryStorage["Oni Dual Horns"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedBicornHorns)) GeneticMemoryStorage["Bicorn Horns"] = true;
+
+				if (player.hasStatusEffect(StatusEffects.UnlockedHumanArms)) GeneticMemoryStorage["Human Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedHarpyArms)) GeneticMemoryStorage["Harpy Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedSpiderArms)) GeneticMemoryStorage["Spider Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedMantisArms)) GeneticMemoryStorage["Mantis Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedBeeArms)) GeneticMemoryStorage["Bee Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms)) GeneticMemoryStorage["Salamander Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixArms)) GeneticMemoryStorage["Phoenix Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedSharkArms)) GeneticMemoryStorage["Shark Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedLionArms)) GeneticMemoryStorage["Lion Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedFoxArms)) GeneticMemoryStorage["Fox Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms)) GeneticMemoryStorage["Kitsune Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedLizardArms)) GeneticMemoryStorage["Lizard Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedDraconicArms)) GeneticMemoryStorage["Draconic Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedOrcaArms)) GeneticMemoryStorage["Orca Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedDevilArms)) GeneticMemoryStorage["Devil Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedOniArms)) GeneticMemoryStorage["Oni Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedElfArms)) GeneticMemoryStorage["Elf Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms)) GeneticMemoryStorage["Raiju Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaArms)) GeneticMemoryStorage["Red Panda Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedCatArms)) GeneticMemoryStorage["Cat Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedSphinxArms)) GeneticMemoryStorage["Sphinx Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedPigArms)) GeneticMemoryStorage["Pig Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedBoarArms)) GeneticMemoryStorage["Boar Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedOrcArms)) GeneticMemoryStorage["Orc Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerArms)) GeneticMemoryStorage["Displacer Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms2)) GeneticMemoryStorage["Raiju Paws Arms"] = true;
+				if (player.hasStatusEffect(StatusEffects.UnlockedBatWings)) GeneticMemoryStorage["Bat Wing Arms"] = true;
 		}
 
 		public function Metamorph() {
@@ -199,11 +267,6 @@ public function accessMetamorphMenu(currentPage: int = 0):void {
 			func: accessTailMenu
 		},
 		{
-			name: "Page 1",
-			func: accessPage1MetamorphMenu,
-			hint: "Face, Tongue, Eyes, Ears, Horns"
-		},
-		{
 			name: "Page 2",
 			func: accessPage2MetamorphMenu,
 			hint: "Arms, Wings"
@@ -250,7 +313,7 @@ private function accessHornsMenu(currentPage: int = 0): void {
 	outputText(title);
 	outputText("What kind of horns do you want?");
 
-	openPaginatedMenuOld(title, accessHornsMenu, currentPage, Horns.Types, Horns.Types[player.horns.type], Horns.getTFDescription);
+	openPaginatedMenu(title, accessHornsMenu, currentPage, HornsMem.Memories);
 }
 
 private function accessHairMenu(currentPage: int = 0): void {
@@ -303,7 +366,7 @@ private function accessEarsMenu(currentPage: int = 0): void {
 	outputText(title);
 	outputText("What kind of ears do you want?");
 
-	openPaginatedMenuOld(title, accessEarsMenu, currentPage, Ears.Types, Ears.Types[player.ears.type], Ears.getTFDescription);
+	openPaginatedMenu(title, accessEarsMenu, currentPage, EarsMem.Memories);
 }
 
 private function accessArmsMenu(currentPage: int = 0): void {
@@ -313,7 +376,7 @@ private function accessArmsMenu(currentPage: int = 0): void {
 	outputText(title);
 	outputText("What kind of arms do you want?");
 
-	openPaginatedMenuOld(title, accessArmsMenu, currentPage, Arms.Types, Arms.Types[player.arms.type], Arms.getTFDescription);
+	openPaginatedMenu(title, accessArmsMenu, currentPage, ArmsMem.Memories);
 }
 
 private function accessWingsMenu(currentPage: int = 0): void {
@@ -492,287 +555,12 @@ public static function unlockMetamorph (genMemName: String, doOutput: Boolean = 
 	}
 }
 
-private function accessPage1MetamorphMenu():void {
-	menu();
-
-	addButton(8, "Ears(1)", accessPage1EarsMenu);
-	addButton(9, "Ears(2)", accessPage2EarsMenu);
-	addButton(10, "Ears(3)", accessPage3EarsMenu);
-	addButton(11, "Horns(1)", accessPage1HornsMenu);
-	addButton(12, "Horns(2)", accessPage2HornsMenu);
-	addButton(14, "Back", accessMetamorphMenu);
-}
-private function accessPage1EarsMenu():void {
-	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedHumanEars) && player.ears.type != Ears.HUMAN && player.soulforce >= 500) addButton(0, "Human", metamorphHumanEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanEars) && player.ears.type == Ears.HUMAN) addButtonDisabled(0, "Human", "You already have human ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanEars) && player.ears.type != Ears.HUMAN && player.soulforce < 500) addButtonDisabled(0, "Human", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedHorseEars) && player.ears.type != Ears.HUMAN && player.soulforce >= 100) addButton(1, "Horse", metamorphHorseEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHorseEars) && player.ears.type == Ears.HUMAN) addButtonDisabled(1, "Horse", "You already have horse ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHorseEars) && player.ears.type != Ears.HUMAN && player.soulforce < 100) addButtonDisabled(1, "Horse", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(1, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedCowEars) && player.ears.type != Ears.COW && player.soulforce >= 100) addButton(3, "Cow", metamorphCowEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedCowEars) && player.ears.type == Ears.COW) addButtonDisabled(3, "Cow", "You already have cow ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedCowEars) && player.ears.type != Ears.COW && player.soulforce < 100) addButtonDisabled(3, "Cow", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(3, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedElfinEars) && player.ears.type != Ears.ELFIN && player.soulforce >= 100) addButton(4, "Elfin", metamorphElfinEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedElfinEars) && player.ears.type == Ears.ELFIN) addButtonDisabled(4, "Elfin", "You already have elfin ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedElfinEars) && player.ears.type != Ears.ELFIN && player.soulforce < 100) addButtonDisabled(4, "Elfin", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(4, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedCatEars) && player.ears.type != Ears.CAT && player.soulforce >= 100) addButton(5, "Cat", metamorphCatEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedCatEars) && player.ears.type == Ears.CAT) addButtonDisabled(5, "Cat", "You already have cat ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedCatEars) && player.ears.type != Ears.CAT && player.soulforce < 100) addButtonDisabled(5, "Cat", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(5, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedLizardEars) && player.ears.type != Ears.LIZARD && player.soulforce >= 100) addButton(6, "Lizard", metamorphLizardEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardEars) && player.ears.type == Ears.LIZARD) addButtonDisabled(6, "Lizard", "You already have lizard ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardEars) && player.ears.type != Ears.LIZARD && player.soulforce < 100) addButtonDisabled(6, "Lizard", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(6, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedFoxEars) && player.ears.type != Ears.FOX && player.soulforce >= 100) addButton(9, "Fox", metamorphEarsFox);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxEars) && player.ears.type == Ears.FOX) addButtonDisabled(9, "Fox", "You already have fox ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxEars) && player.ears.type != Ears.FOX && player.soulforce < 100) addButtonDisabled(9, "Fox", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(9, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars) && player.ears.type != Ears.DRAGON && player.soulforce >= 100) addButton(10, "Dragon", metamorphDragonEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars) && player.ears.type == Ears.DRAGON) addButtonDisabled(10, "Dragon", "You already have dragon ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicEars) && player.ears.type != Ears.DRAGON && player.soulforce < 100) addButtonDisabled(10, "Dragon", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(10, "???", "You have not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
-}
-private function accessPage2EarsMenu():void {
-	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedPigEars) && player.ears.type != Ears.PIG && player.soulforce >= 100) addButton(0, "Pig", metamorphPigEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedPigEars) && player.ears.type == Ears.PIG) addButtonDisabled(0, "Pig", "You already have pig ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedPigEars) && player.ears.type != Ears.PIG && player.soulforce < 100) addButtonDisabled(0, "Pig", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedLionEars) && player.ears.type != Ears.LION && player.soulforce >= 100) addButton(5, "Lion", metamorphLionEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedLionEars) && player.ears.type == Ears.LION) addButtonDisabled(5, "Lion", "You already have lion ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedLionEars) && player.ears.type != Ears.LION && player.soulforce < 100) addButtonDisabled(5, "Lion", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(5, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedOrcaEars) && player.ears.type != Ears.ORCA && player.soulforce >= 100) addButton(7, "Orca", metamorphOrcaEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaEars) && player.ears.type == Ears.ORCA) addButtonDisabled(7, "Orca", "You already have orca ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaEars) && player.ears.type != Ears.ORCA && player.soulforce < 100) addButtonDisabled(7, "Orca", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(7, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEars) && player.ears.type != Ears.SNAKE && player.soulforce >= 100) addButton(8, "Snake", metamorphSnakeEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEars) && player.ears.type == Ears.SNAKE) addButtonDisabled(8, "Snake", "You already have snake ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSnakeEars) && player.ears.type != Ears.SNAKE && player.soulforce < 100) addButtonDisabled(8, "Snake", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(8, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedGoatEars) && player.ears.type != Ears.GOAT && player.soulforce >= 100) addButton(9, "Goat", metamorphGoatEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedGoatEars) && player.ears.type == Ears.GOAT) addButtonDisabled(9, "Goat", "You already have goat ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedGoatEars) && player.ears.type != Ears.GOAT && player.soulforce < 100) addButtonDisabled(9, "Goat", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(9, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedOniEars) && player.ears.type != Ears.ONI && player.soulforce >= 100) addButton(10, "Oni", metamorphOniEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOniEars) && player.ears.type == Ears.ONI) addButtonDisabled(10, "Oni", "You already have oni ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOniEars) && player.ears.type != Ears.ONI && player.soulforce < 100) addButtonDisabled(10, "Oni", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(10, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedElfEars) && player.ears.type != Ears.ELVEN && player.soulforce >= 100) addButton(11, "Elf", metamorphElfEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedElfEars) && player.ears.type == Ears.ELVEN) addButtonDisabled(11, "Elf", "You already have elf ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedElfEars) && player.ears.type != Ears.ELVEN && player.soulforce < 100) addButtonDisabled(11, "Elf", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(11, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEars) && player.ears.type != Ears.WEASEL && player.soulforce >= 100) addButton(12, "Raiju", metamorphRaijuEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEars) && player.ears.type == Ears.WEASEL) addButtonDisabled(12, "Raiju", "You already have raiju ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuEars) && player.ears.type != Ears.WEASEL && player.soulforce < 100) addButtonDisabled(12, "Raiju", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(12, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedBatEars) && player.ears.type != Ears.BAT && player.soulforce >= 100) addButton(13, "Bat", metamorphBatEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedBatEars) && player.ears.type == Ears.BAT) addButtonDisabled(13, "Bat", "You already have bat ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedBatEars) && player.ears.type != Ears.BAT && player.soulforce < 100) addButtonDisabled(13, "Bat", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(13, "???", "You have not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
-}
-private function accessPage3EarsMenu():void {
-	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedVampireEars) && player.ears.type != Ears.VAMPIRE && player.soulforce >= 100) addButton(0, "Vampire", metamorphVampireEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireEars) && player.ears.type == Ears.VAMPIRE) addButtonDisabled(0, "Vampire", "You already have vampire ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedVampireEars) && player.ears.type != Ears.VAMPIRE && player.soulforce < 100) addButtonDisabled(0, "Vampire", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaEars) && player.ears.type != Ears.RED_PANDA && player.soulforce >= 100) addButton(1, "Red Panda", metamorphRedPandaEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaEars) && player.ears.type == Ears.RED_PANDA) addButtonDisabled(1, "Red Panda", "You already have red panda ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaEars) && player.ears.type != Ears.RED_PANDA && player.soulforce < 100) addButtonDisabled(1, "Red Panda", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(1, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEars) && player.ears.type != Ears.DISPLACER && player.soulforce >= 100) addButton(8, "Displacer", metamorphDisplacerEars);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEars) && player.ears.type == Ears.DISPLACER) addButtonDisabled(8, "Displacer", "You already have displacer ears.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerEars) && player.ears.type != Ears.DISPLACER && player.soulforce < 100) addButtonDisabled(8, "Displacer", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(8, "???", "You have not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
-}
-private function accessPage1HornsMenu():void {
-	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoHorns) && player.horns.type != Horns.NONE && player.soulforce >= 500) addButton(0, "Human", metamorphHumanNoHorns);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoHorns) && player.horns.type == Horns.NONE) addButtonDisabled(0, "Human", "You already not have horns.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanNoHorns) && player.horns.type != Horns.NONE && player.soulforce < 500) addButtonDisabled(0, "Human", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedDemonHorns) && player.horns.type != Horns.DEMON && player.soulforce >= 100) addButton(1, "Demon", metamorphHornsDemonic);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonHorns) && player.horns.type == Horns.DEMON) addButtonDisabled(1, "Demon", "You already have demon horns.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDemonHorns) && player.horns.type != Horns.DEMON && player.soulforce < 100) addButtonDisabled(1, "Demon", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(1, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurHorns) && player.horns.type != Horns.COW_MINOTAUR && player.soulforce >= 100) addButton(2, "Cow/Mino", metamorphCowMinotaurHorns);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurHorns) && player.horns.type == Horns.COW_MINOTAUR) addButtonDisabled(2, "Cow/Mino", "You already have cow/minotaur horns.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedCowMinotaurHorns) && player.horns.type != Horns.COW_MINOTAUR && player.soulforce < 100) addButtonDisabled(2, "Cow/Mino", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(2, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX2) && player.horns.type != Horns.DRACONIC_X2 && player.soulforce >= 100) addButton(3, "DraconicX2", metamorphHornsDraconicX2);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX2) && player.horns.type == Horns.DRACONIC_X2) addButtonDisabled(3, "DraconicX2", "You already have draconic horns.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX2) && player.horns.type != Horns.DRACONIC_X2 && player.soulforce < 100) addButtonDisabled(3, "DraconicX2", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(3, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX4) && player.horns.type == Horns.DRACONIC_X2 && player.soulforce >= 200) addButton(4, "DraconicX4", metamorphHornsDraconicX4);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX4) && player.horns.type == Horns.DRACONIC_X4_12_INCH_LONG) addButtonDisabled(4, "DraconicX4", "You already have two pairs of drconic horns.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX4) && player.horns.type == Horns.DRACONIC_X2 && player.soulforce < 200) addButtonDisabled(4, "DraconicX4", "You do not have enough Soulforce for this metamorphosis.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicX4) && player.horns.type != Horns.DRACONIC_X2) addButtonDisabled(4, "DraconicX4", "You do not have proper type of horns for this metamorphosis.");
-	else addButtonDisabled(4, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedGoatHorns) && player.horns.type != Horns.GOAT && player.soulforce >= 100) addButton(6, "Goat", metamorphGoatHorns);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedGoatHorns) && player.horns.type == Horns.GOAT) addButtonDisabled(6, "Goat", "You already have goat horns.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedGoatHorns) && player.horns.type != Horns.GOAT && player.soulforce < 100) addButtonDisabled(6, "Goat", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(6, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedUnicornHorn) && player.horns.type != Horns.UNICORN && player.soulforce >= 100) addButton(7, "Unicorn", metamorphUnicornHorn);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedUnicornHorn) && player.horns.type == Horns.UNICORN) addButtonDisabled(7, "Unicorn", "You already have unicron horn.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedUnicornHorn) && player.horns.type != Horns.UNICORN && player.soulforce < 100) addButtonDisabled(7, "Unicorn", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(7, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedOniSingleHorn) && player.horns.type != Horns.ONI && player.soulforce >= 100) addButton(12, "Oni", metamorphOniSingleHorn);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOniSingleHorn) && player.horns.type == Horns.ONI) addButtonDisabled(12, "Oni", "You already have oni horns.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOniSingleHorn) && player.horns.type != Horns.ONI && player.soulforce < 100) addButtonDisabled(12, "Oni", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(12, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedOniTwinHorns) && player.horns.type != Horns.ONI_X2 && player.soulforce >= 100) addButton(13, "OniX2", metamorphOniDualHorns);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOniTwinHorns) && player.horns.type == Horns.ONI_X2) addButtonDisabled(13, "OniX2", "You already have oni horns.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOniTwinHorns) && player.horns.type != Horns.ONI_X2 && player.soulforce < 100) addButtonDisabled(13, "OniX2", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(13, "???", "You have not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
-}
-private function accessPage2HornsMenu():void {
-	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedBicornHorns) && player.horns.type != Horns.BICORN && player.soulforce >= 100) addButton(0, "Bicorn", metamorphBicornHorns);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedBicornHorns) && player.horns.type == Horns.BICORN) addButtonDisabled(0, "Bicorn", "You already have goat horns.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedBicornHorns) && player.horns.type != Horns.BICORN && player.soulforce < 100) addButtonDisabled(0, "Bicorn", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage1MetamorphMenu);
-}
-
 private function accessPage2MetamorphMenu():void {
 	menu();
-	addButton(0, "Arms(1)", accessPage1ArmsMenu);
-	addButton(1, "Arms(2)", accessPage2ArmsMenu);
-	addButton(2, "Arms(3)", accessPage3ArmsMenu);
 	addButton(3, "Wings(1)", accessPage1WingsMenu);
 	addButton(4, "Wings(2)", accessPage2WingsMenu);
 	addButton(5, "Wings(3)", accessPage3WingsMenu);
 	addButton(14, "Back", accessMetamorphMenu);
-}
-private function accessPage1ArmsMenu():void {
-	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedHumanArms) && player.arms.type != Arms.HUMAN && player.soulforce >= 500) addButton(0, "Human", metamorphHumanArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanArms) && player.arms.type == Arms.HUMAN) addButtonDisabled(0, "Human", "You already have human arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHumanArms) && player.arms.type != Arms.HUMAN && player.soulforce < 500) addButtonDisabled(0, "Human", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedHarpyArms) && player.arms.type != Arms.HARPY && player.soulforce >= 100) addButton(1, "Harpy", metamorphHarpyArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyArms) && player.arms.type == Arms.HARPY) addButtonDisabled(1, "Harpy", "You already have harpy arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedHarpyArms) && player.arms.type != Arms.HARPY && player.soulforce < 100) addButtonDisabled(1, "Harpy", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(1, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedSpiderArms) && player.arms.type != Arms.SPIDER && player.soulforce >= 100) addButton(2, "Spider", metamorphSpiderArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderArms) && player.arms.type == Arms.SPIDER) addButtonDisabled(2, "Spider", "You already have spider arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSpiderArms) && player.arms.type != Arms.SPIDER && player.soulforce < 100) addButtonDisabled(2, "Spider", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(2, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedMantisArms) && player.arms.type != Arms.MANTIS && player.soulforce >= 100) addButton(3, "Mantis", metamorphMantisArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedMantisArms) && player.arms.type == Arms.MANTIS) addButtonDisabled(3, "Mantis", "You already have mantis arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedMantisArms) && player.arms.type != Arms.MANTIS && player.soulforce < 100) addButtonDisabled(3, "Mantis", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(3, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedBeeArms) && player.arms.type != Arms.BEE && player.soulforce >= 100) addButton(4, "Bee", metamorphBeeArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedBeeArms) && player.arms.type == Arms.BEE) addButtonDisabled(4, "Bee", "You already have bee arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedBeeArms) && player.arms.type != Arms.BEE && player.soulforce < 100) addButtonDisabled(4, "Bee", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(4, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms) && player.arms.type != Arms.SALAMANDER && player.soulforce >= 100) addButton(5, "Salamander", metamorphSalamanderArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms) && player.arms.type == Arms.SALAMANDER) addButtonDisabled(5, "Salamander", "You already have salamander arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSalamanderArms) && player.arms.type != Arms.SALAMANDER && player.soulforce < 100) addButtonDisabled(5, "Salamander", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(5, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixArms) && player.arms.type != Arms.PHOENIX && player.soulforce >= 100) addButton(6, "Phoenix", metamorphPhoenixArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixArms) && player.arms.type == Arms.PHOENIX) addButtonDisabled(6, "Phoenix", "You already have phoenix arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedPhoenixArms) && player.arms.type != Arms.PHOENIX && player.soulforce < 100) addButtonDisabled(6, "Phoenix", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(6, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedSharkArms) && player.arms.type != Arms.SHARK && player.soulforce >= 100) addButton(8, "Shark", metamorphSharkArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSharkArms) && player.arms.type == Arms.SHARK) addButtonDisabled(8, "Shark", "You already have shark arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSharkArms) && player.arms.type != Arms.SHARK && player.soulforce < 100) addButtonDisabled(8, "Shark", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(8, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedLionArms) && player.arms.type != Arms.LION && player.soulforce >= 100) addButton(11, "Lion", metamorphLionArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedLionArms) && player.arms.type == Arms.LION) addButtonDisabled(11, "Lion", "You already have lion arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedLionArms) && player.arms.type != Arms.LION && player.soulforce < 100) addButtonDisabled(11, "Lion", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(11, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedFoxArms) && player.arms.type != Arms.FOX && player.soulforce >= 100) addButton(12, "Fox", metamorphArmsFox);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxArms) && player.arms.type == Arms.FOX) addButtonDisabled(12, "Fox", "You already have fox arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedFoxArms) && player.arms.type != Arms.FOX && player.soulforce < 100) addButtonDisabled(12, "Fox", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(12, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms) && player.arms.type != Arms.KITSUNE && player.soulforce >= 100) addButton(13, "Kitsune", metamorphKitsuneArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms) && player.arms.type == Arms.KITSUNE) addButtonDisabled(13, "Kitsune", "You already have kitsune arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedKitsuneArms) && player.arms.type != Arms.KITSUNE && player.soulforce < 100) addButtonDisabled(13, "Kitsune", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(13, "???", "You have not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage2MetamorphMenu);
-}
-private function accessPage2ArmsMenu():void {
-	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedLizardArms) && player.arms.type != Arms.LIZARD && player.soulforce >= 100) addButton(0, "Lizard", metamorphLizardArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardArms) && player.arms.type == Arms.LIZARD) addButtonDisabled(0, "Lizard", "You already have lizard arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedLizardArms) && player.arms.type != Arms.LIZARD && player.soulforce < 100) addButtonDisabled(0, "Lizard", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedDraconicArms) && player.arms.type != Arms.DRAGON && player.soulforce >= 100) addButton(1, "Dragon", metamorphDragonArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicArms) && player.arms.type == Arms.DRAGON) addButtonDisabled(1, "Dragon", "You already have dragon arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDraconicArms) && player.arms.type != Arms.DRAGON && player.soulforce < 100) addButtonDisabled(1, "Dragon", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(1, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedOrcaArms) && player.arms.type != Arms.ORCA && player.soulforce >= 100) addButton(3, "Orca", metamorphOrcaArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaArms) && player.arms.type == Arms.ORCA) addButtonDisabled(3, "Orca", "You already have orca arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcaArms) && player.arms.type != Arms.ORCA && player.soulforce < 100) addButtonDisabled(3, "Orca", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(3, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedDevilArms) && player.arms.type != Arms.DEVIL && player.soulforce >= 100) addButton(5, "Devil", metamorphDevilArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDevilArms) && player.arms.type == Arms.DEVIL) addButtonDisabled(5, "Devil", "You already have devil arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDevilArms) && player.arms.type != Arms.DEVIL && player.soulforce < 100) addButtonDisabled(5, "Devil", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(5, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedOniArms) && player.arms.type != Arms.ONI && player.soulforce >= 100) addButton(6, "Oni", metamorphOniArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOniArms) && player.arms.type == Arms.ONI) addButtonDisabled(6, "Oni", "You already have oni arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOniArms) && player.arms.type != Arms.ONI && player.soulforce < 100) addButtonDisabled(6, "Oni", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(6, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedElfArms) && player.arms.type != Arms.ELF && player.soulforce >= 100) addButton(7, "Elf", metamorphElfArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedElfArms) && player.arms.type == Arms.ELF) addButtonDisabled(7, "Elf", "You already have elf arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedElfArms) && player.arms.type != Arms.ELF && player.soulforce < 100) addButtonDisabled(7, "Elf", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(7, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms) && player.arms.type != Arms.RAIJU && player.soulforce >= 100) addButton(8, "Raiju", metamorphRaijuArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms) && player.arms.type == Arms.RAIJU) addButtonDisabled(8, "Raiju", "You already have raiju arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms) && player.arms.type != Arms.RAIJU && player.soulforce < 100) addButtonDisabled(8, "Raiju", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(8, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaArms) && player.arms.type != Arms.RED_PANDA && player.soulforce >= 100) addButton(9, "Red Panda", metamorphRedPandaArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaArms) && player.arms.type == Arms.RED_PANDA) addButtonDisabled(9, "Red Panda", "You already have red panda arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRedPandaArms) && player.arms.type != Arms.RED_PANDA && player.soulforce < 100) addButtonDisabled(9, "Red Panda", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(9, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedCatArms) && player.arms.type != Arms.CAT && player.soulforce >= 100) addButton(11, "Cat", metamorphCatArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedCatArms) && player.arms.type == Arms.CAT) addButtonDisabled(11, "Cat", "You already have cat arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedCatArms) && player.arms.type != Arms.CAT && player.soulforce < 100) addButtonDisabled(11, "Cat", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(11, "???", "You have not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage2MetamorphMenu);
-}
-private function accessPage3ArmsMenu():void {
-	menu();
-	if (player.hasStatusEffect(StatusEffects.UnlockedSphinxArms) && player.arms.type != Arms.SPHINX && player.soulforce >= 100) addButton(0, "Sphinx", metamorphSphinxArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSphinxArms) && player.arms.type == Arms.SPHINX) addButtonDisabled(0, "Sphinx", "You already have sphinx arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedSphinxArms) && player.arms.type != Arms.SPHINX && player.soulforce < 100) addButtonDisabled(0, "Sphinx", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(0, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedPigArms) && player.arms.type != Arms.PIG && player.soulforce >= 100) addButton(1, "Pig", metamorphPigArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedPigArms) && player.arms.type == Arms.PIG) addButtonDisabled(1, "Pig", "You already have pig arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedPigArms) && player.arms.type != Arms.PIG && player.soulforce < 100) addButtonDisabled(1, "Pig", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(1, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedBoarArms) && player.arms.type != Arms.BOAR && player.soulforce >= 100) addButton(2, "Boar", metamorphBoarArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedBoarArms) && player.arms.type == Arms.BOAR) addButtonDisabled(2, "Boar", "You already have boar arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedBoarArms) && player.arms.type != Arms.BOAR && player.soulforce < 100) addButtonDisabled(2, "Boar", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(2, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedOrcArms) && player.arms.type != Arms.ORC && player.soulforce >= 100) addButton(3, "Orc", metamorphOrcArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcArms) && player.arms.type == Arms.ORC) addButtonDisabled(3, "Orc", "You already have orc arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedOrcArms) && player.arms.type != Arms.ORC && player.soulforce < 100) addButtonDisabled(3, "Orc", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(3, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerArms) && player.arms.type != Arms.DISPLACER && player.soulforce >= 100) addButton(4, "Displacer", metamorphDisplacerArms);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerArms) && player.arms.type == Arms.DISPLACER) addButtonDisabled(4, "Displacer", "You already have displacer beast arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedDisplacerArms) && player.arms.type != Arms.DISPLACER && player.soulforce < 100) addButtonDisabled(4, "Displacer", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(4, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms2) && player.arms.type != Arms.RAIJU_2 && player.soulforce >= 100) addButton(12, "Raiju Paws", metamorphRaijuArms2);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms2) && player.arms.type == Arms.RAIJU_2) addButtonDisabled(12, "Raiju Paws", "You already have raiju paws.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedRaijuArms2) && player.arms.type != Arms.RAIJU_2 && player.soulforce < 100) addButtonDisabled(12, "Raiju Paws", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(12, "???", "You have not yet unlocked this metamorphosis!");
-	if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.arms.type != Arms.BAT && player.soulforce >= 100) addButton(9, "Bat", metamorphBatWings);
-	else if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.arms.type == Arms.BAT) addButtonDisabled(9, "Bat", "You already have winged bat arms.");
-	else if (player.hasStatusEffect(StatusEffects.UnlockedBatWings) && player.arms.type != Arms.BAT && player.soulforce < 100) addButtonDisabled(9, "Bat", "You do not have enough Soulforce for this metamorphosis.");
-	else addButtonDisabled(9, "???", "You have not yet unlocked this metamorphosis!");
-	addButton(14, "Back", accessPage2MetamorphMenu);
 }
 private function accessPage1WingsMenu():void {
 	menu();
@@ -1324,15 +1112,7 @@ private function metamorph002Fur():void {
 	doNext(accessMetamorphMenu);
 }
 
-private function metamorphSphinxArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\n");
-	if (player.arms.type != Arms.HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
-	outputText("Your hands suddenly start to tingle as your arms grow a thin layer of -fur color- fur up to your shoulders. You watch, enthralled, as your nails fall off your fingers, feline claws taking their place on your five-fingered hands. That said, they don't look exactly like paws as your hands retain their dexterity and general appearance which is a perfect mix between human and leonine features. Thanks to their shape, your new bestial hands should not hinder your spellcasting abilities.. <b>Your arms are now covered in fur and end with clawed hands like those of a sphinx.</b>");
-	player.arms.type = Arms.SPHINX;
-	doNext(accessPage3ArmsMenu);
-}
+
 private function metamorphSphinxWings():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1380,15 +1160,7 @@ private function metamorphScorpionTail():void {
 	player.tailRecharge = 5;
 	doNext(accessPage3TailMenu);
 }
-private function metamorphLionArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\n");
-	if (player.arms.type != Arms.HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
-	outputText("Your hands suddenly start to hurt as your arms grows a thick coat of [skin coat.color] fur up to your shoulders where it turns [haircolor]. You watch enthralled as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have leonine paw hands.</b>");
-	player.arms.type = Arms.LION;
-	doNext(accessPage1ArmsMenu);
-}
+
 private function metamorphLionMane():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1426,28 +1198,7 @@ private function metamorphHellcatBurningTail():void {
 	player.tailCount = 1;
 	doNext(accessPage5TailMenu);
 }
-private function metamorphLionEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYour ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have lion ears.</b>");
-	player.ears.type = Ears.LION;
-	doNext(accessPage2EarsMenu);
-}
-private function metamorphDisplacerEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYour ears begin to prickle and burn as the skin tears and stretches migrating to the top of your head as they change into long wide, deep ears, perfect for catching any stray sound. Which becomes apparent when your hearing becomes far more clear than it has ever been. <b>Sound has become an entirely new experience now that you have displacer beast ears!</b>");
-	player.ears.type = Ears.DISPLACER;
-	doNext(accessPage3EarsMenu);
-}
-private function metamorphDisplacerArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
-	outputText("\n\nSomething weird is happening around the level of your ribcage. Painfully large bumps start expanding on the side of your body. You fall on all fours panting heavily from the pain as two new limbs surge under your arms. As you sit, trying to grab these new limbs to check them out, you grab your arms instead. No wait your arm grabbed your arm that grabs another arm?! As you examine yourself you discover a second set of limbs grew under your arms. <b>Guess if your mind actually managed to process the action correctly you could actually use four weapons at once, instead you move around on your three set of limbs not unlike a displacer beast.</b>");
-	player.arms.type = Arms.DISPLACER;
-	doNext(accessPage3ArmsMenu);
-}
+
 private function metamorphDisplacerBackTentacles():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1458,14 +1209,7 @@ private function metamorphDisplacerBackTentacles():void {
 	doNext(accessRearBodyMenuOld);
 }
 
-private function metamorphCatArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
-	outputText("\n\nYour hands suddenly start to hurt as your arms grows a thick coat of [skin coat.color] fur up to your shoulders. You watch enthralled as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have cat paw hands.</b>");
-	player.arms.type = Arms.CAT;
-	doNext(accessPage2ArmsMenu);
-}
+
 private function metamorphCatTail():void {
 	clearOutput();
 	var choice:int;
@@ -1480,20 +1224,6 @@ private function metamorphCatTail():void {
 	player.tailType = Tail.CAT;
 	player.tailCount = 1;
 	doNext(accessPage1TailMenu);
-}
-private function metamorphCatEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.ears.type == Ears.HUMAN) {
-		if (rand(2) == 0) outputText("\n\nThe skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head. They shift and elongate a little, fur growing on them as they become feline in nature. <b>You now have cat ears.</b>");
-		else outputText("\n\nYour ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they've migrated up to the top of your head and increased in size. The tingling stops and you find yourself hearing noises in a whole new way. <b>You now have cat ears.</b>");
-	}
-	else {
-		if (rand(2) == 0) outputText("\n\nYour ears change shape, morphing into pointed, feline ears! They swivel about reflexively as you adjust to them. <b>You now have cat ears.</b>");
-		else outputText("\n\nYour ears tingle and begin to change shape. Within a few moments, they've become long and feline. Thanks to the new fuzzy organs, you find yourself able to hear things that eluded your notice up until now. <b>You now have cat ears.</b>");
-	}
-	player.ears.type = Ears.CAT;
-	doNext(accessPage1EarsMenu);
 }
 private function metamorphRedPandaTail():void {
 	clearOutput();
@@ -1522,20 +1252,7 @@ private function metamorphRedPandaTail():void {
 	player.tailType = Tail.RED_PANDA;
 	doNext(accessPage4TailMenu);
 }
-private function metamorphRedPandaArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nWeakness overcomes your arms, and no matter what you do, you can’t muster the strength to raise or move them. Sighing you attribute this to the consumption of that strange root. Sitting on the ground, you wait for the limpness to end. As you do so, you realize that the bones at your hands are changing, as well as the muscles on your arms. They’re soon covered, from the shoulders to the tip of your digits, on a layer of soft, fluffy black-brown fur. Your hands gain pink, padded paws where your palms were once, and your nails become short claws, not sharp enough to tear flesh, but nimble enough to make climbing and exploring much easier. <b>Your arms have become like those of a red-panda!</b>");
-	player.arms.type = Arms.RED_PANDA;
-	doNext(accessPage2ArmsMenu);
-}
-private function metamorphRedPandaEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nA sudden dizziness seems to overcome your head. Your ears tingle, and you’re sure you can feel the flesh on them shifting, as you gradually have trouble hearing. A couple of minutes later the feeling stops. Curious of what has changed you go to check yourself on the stream, only to find that they’ve changed into cute, triangular ears, covered with white fur. <b>You’ve got red-panda ears!</b>");
-	player.ears.type = Ears.RED_PANDA;
-	doNext(accessPage3EarsMenu);
-}
+
 private function metamorphNightmareWings():void {
 	clearOutput();
 	player.soulforce -= 200;
@@ -1545,15 +1262,7 @@ private function metamorphNightmareWings():void {
 	player.wings.desc = "large black leathery";
 	doNext(accessPage2WingsMenu);
 }
-private function metamorphBicornHorns():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.horns.type == Horns.NONE) outputText("\n\nWith painful pressure, the skin on your forehead splits around two tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland.");
-	else outputText("\n\nYour horns vibrate and shift as if made of clay, reforming into horns with a bicorn-like shape.");
-	player.horns.count = 2;
-	player.horns.type = Horns.BICORN;
-	doNext(accessPage2HornsMenu);
-}
+
 private function metamorphAlicornWings():void {
 	clearOutput();
 	player.soulforce -= 200;
@@ -1563,15 +1272,7 @@ private function metamorphAlicornWings():void {
 	player.wings.desc = "large white feathered";
 	doNext(accessPage2WingsMenu);
 }
-private function metamorphUnicornHorn():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.horns.type == Horns.NONE) outputText("\n\nWith painful pressure, the skin on your forehead splits around tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland.");
-	else outputText("\n\nYour horns vibrate and shift as if made of clay, reforming into horn with a unicorn-like shape.");
-	player.horns.count = 2;
-	player.horns.type = Horns.UNICORN;
-	doNext(accessPage1HornsMenu);
-}
+
 private function metamorphHorseTail():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1583,16 +1284,6 @@ private function metamorphHorseTail():void {
 	player.tailType = Tail.HORSE;
 	doNext(accessPage1TailMenu);
 }
-private function metamorphHorseEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.ears.type == Ears.HUMAN) outputText("\n\nYour ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into a upright animalistic ears. ");
-	if (player.ears.type == Ears.DOG) outputText("\n\nYour ears change shape, morphing into from their doglike shape into equine-like ears! ");
-	else outputText("\n\nYour ears change shape, morphing into teardrop-shaped horse ears! ");
-	outputText("<b>You now have horse ears.</b>");
-	player.ears.type = Ears.HORSE;
-	doNext(accessPage1EarsMenu);
-}
 private function metamorphOrcSkinPattern():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1601,14 +1292,7 @@ private function metamorphOrcSkinPattern():void {
 	player.skin.base.adj = "scar shaped tattooed";
 	doNext(accessSkinPatternsMenuOld);
 }
-private function metamorphOrcArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
-	outputText("\n\nThe skin on your arms feels as if they’re being cut open as a whole new set of intricate scar-like tattoos covers them. Furthermore your nails become increasingly pointed just like a set of claws and your arms in general grow a bit longer. Well, it seems you’re going to have some issues hiding your <b>scar tattooed arms and sharp nails.</b>");
-	player.arms.type = Arms.ORC;
-	doNext(accessPage3ArmsMenu);
-}
+
 private function metamorphHumanNoRearBody():void {
 	clearOutput();
 	player.soulforce -= 500;
@@ -1634,16 +1318,7 @@ private function metamorphHumanNoWings():void {
 	player.wings.desc = "non-existant";
 	doNext(accessPage1WingsMenu);
 }
-private function metamorphHumanNoHorns():void {
-	clearOutput();
-	player.soulforce -= 500;
-	if (player.horns.type == Horns.ORCHID) outputText("\n\nYour orchid flowers crumble, falling apart");
-	else outputText("\n\nYour horns crumble, falling apart in large chunks");
-	outputText(" until they flake away to nothing.");
-	player.horns.count = 0;
-	player.horns.type = Horns.NONE;
-	doNext(accessPage1HornsMenu);
-}
+
 private function metamorphHumanNoAntennae():void {
 	clearOutput();
 	player.soulforce -= 500;
@@ -1660,20 +1335,8 @@ private function metamorphHumanNoGills():void {
 	player.gills.type = Gills.NONE;
 	doNext(accessGillsMenuOld);
 }
-private function metamorphHumanEars():void {
-	clearOutput();
-	player.soulforce -= 500;
-	outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!");
-	player.ears.type = Ears.HUMAN;
-	doNext(accessPage1EarsMenu);
-}
 
-private function metamorphHumanArms():void {
-	clearOutput();
-	player.soulforce -= 500;
-	restoreHumanArms();
-	doNext(accessPage1ArmsMenu);
-}
+
 private function metamorphHumanNoSkinPatterns():void {
 	clearOutput();
 	player.soulforce -= 500;
@@ -1701,22 +1364,8 @@ private function metamorphHumanSkin():void {
 	player.skin.setBaseOnly({type: Skin.PLAIN, adj:""});
 	doNext(accessSkinMenuOld);
 }
-private function metamorphBoarArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
-	outputText("\n\nYour arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive. Furthermore your nails become increasingly pointed turning black just like a set of claws. <b>You now have boar arms.</b>");
-	player.arms.type = Arms.BOAR;
-	doNext(accessPage3ArmsMenu);
-}
-private function metamorphPigArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
-	outputText("\n\nYour finguers starts to feel like some bee stung them as they inflates to a more chubby size your nails tickening and darkening turning into clover-like claws. Aside of your now fat finguers and darker claws your arms remains about the same. <b>You now have pig arms.</b>");
-	player.arms.type = Arms.PIG;
-	doNext(accessPage3ArmsMenu);
-}
+
+
 private function metamorphPigTail():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1724,13 +1373,6 @@ private function metamorphPigTail():void {
 	else outputText("\n\nYou feel a pinching sensation in your [tail] as it begins to warp in change. When the sensation dissipates, <b>you are left with a small, curly pig tail.</b>");
 	player.tailType = Tail.PIG;
 	doNext(accessPage3TailMenu);
-}
-private function metamorphPigEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYou feel a pressure on your ears as they begin to reshape. Once the changes finish, you flick them about experimentally, <b>and you’re left with pointed, floppy pig ears.</b>");
-	player.ears.type = Ears.PIG;
-	doNext(accessPage2EarsMenu);
 }
 private function metamorphVampireWings():void {
 	clearOutput();
@@ -1751,15 +1393,6 @@ private function metamorphVampireWings():void {
 	player.wings.desc = "large bat";
 	doNext(accessPage2WingsMenu);
 }
-private function metamorphVampireEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\n");
-	if (player.ears.type != Ears.HUMAN) outputText("Your ears revert back to their old human shape you had almost forgotten what humans ears felt like, before you can dwell on the implications of that, the changes continue. ");
-	outputText("Your ears begin to prickle as they elongate to a point, being now reminiscent of those of elves, goblins, or in your case, vampires. Aside from looking cute, you find your new ears have drastically improved your hearing. <b>Sound has become an entirely new experience now that you have pointy vampire ears!</b>");
-	player.ears.type = Ears.VAMPIRE;
-	doNext(accessPage3EarsMenu);
-}
 private function metamorphBatCollar():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1768,21 +1401,7 @@ private function metamorphBatCollar():void {
 	player.rearBody.type = RearBody.BAT_COLLAR;
 	doNext(accessRearBodyMenuOld);
 }
-private function metamorphBatWings():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
-	outputText("\n\nLarge bones surge out of your wrists and elbows. You can feel your bones shifting and grinding all over your body as your skeletal structure begins changing into one more fit for a flyincreature, with light, hollow bones. You collapse to the ground as they begin shifting proportions, becoming thinner and longer to maximize area while reducing their density. Leathery flesh begins to cover your new bony protrusions, spreading between each of them like creeping moss. Eventually, the skin stops growing and you admire your new arms. They are very obviously winged bat arms. You close them around your waist, and like this they could easily be mistaken for a large cape when seen from afar. <b>You now have large winged bat arms.</b>");
-	player.arms.type = Arms.BAT;
-	doNext(accessPage2WingsMenu);
-}
-private function metamorphBatEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYour ears begin to prickle and burn as the skin tears and stretches, changing into wide, deep ears, perfect for catching any stray sound. Which becomes apparent when your hearing becomes far more clear than it has ever been. <b>Sound has become an entirely new experience now that you have bat ears!</b>");
-	player.ears.type = Ears.BAT;
-	doNext(accessPage2EarsMenu);
-}
+
 private function metamorphRaijuThunderousAura():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1791,14 +1410,7 @@ private function metamorphRaijuThunderousAura():void {
 	player.wings.desc = "thunderous aura";
 	doNext((accessPage3WingsMenu));
 }
-private function metamorphRaijuArms2():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
-	outputText("\n\nYou shiver in delight as fur begins to form on your forearms, high voltage running along from your shoulders to your fingertips. Before you know it your hands turned to paws and your sharp nails to vicious looking claws coated with electricity. You can't wait to wrap those around a juicy cock or dip them into a waiting snatch.");
-	player.arms.type = Arms.RAIJU_2;
-	doNext(accessPage3ArmsMenu);
-}
+
 private function metamorphRaijuSkinPattern():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1806,14 +1418,6 @@ private function metamorphRaijuSkinPattern():void {
 	player.skin.base.pattern = Skin.PATTERN_LIGHTNING_SHAPED_TATTOO;
 	player.skin.base.adj = "lightning shaped tattooed";
 	doNext(accessSkinPatternsMenuOld);
-}
-private function metamorphRaijuEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.ears.type != Ears.HUMAN) restoreHumanEars();
-	outputText("\n\nYour ears twitch as jolt of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new weasel ears!</b>");
-	player.ears.type = Ears.WEASEL;
-	doNext(accessPage2EarsMenu);
 }
 private function metamorphRaijuMane():void {
 	clearOutput();
@@ -1830,20 +1434,7 @@ private function metamorphRaijuTail():void {
 	player.tailType = Tail.RAIJU;
 	doNext(accessPage4TailMenu);
 }
-private function metamorphRaijuArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
-	outputText("\n\nYour nails tingle as they elongate into white claws! They look quite dangerous, but you feel the strange need to use them to stimulate your ");
-	if (player.gender == 1 || player.gender == 3) outputText("[cock]");
-	if (player.gender == 3) outputText(" and ");
-	if (player.gender > 1) outputText("[clit]");
-	outputText(". ");
-	if (player.cor >= 50) outputText("You give a lusty smile, thinking that it wouldn't be so bad...");
-	else outputText("You scowl, shaking away the impure thoughts.");
-	player.arms.type = Arms.RAIJU;
-	doNext(accessPage2ArmsMenu);
-}
+
 private function metamorphOniSkinPattern():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1852,67 +1443,11 @@ private function metamorphOniSkinPattern():void {
 	player.skin.base.adj = "battle tattooed";
 	doNext(accessSkinPatternsMenuOld);
 }
-private function metamorphOniEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYour ears tingle slightly as their shape sharpen to a point not unlike those of some kind of demonic fiend. Still you know all too well those are <b>Oni ears.</b>");
-	player.ears.type = Ears.ONI;
-	doNext(accessPage2EarsMenu);
-}
-private function metamorphOniDualHorns():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.horns.type == Horns.NONE) outputText("You moan in pleasure as a pair of bony horns push forward out of your forehead,");
-	else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning,");
-	outputText(" the things are actually surprisingly sensitive and you reach orgasm just from them reaching full size,");
-	if (player.gender == 1 || player.gender == 3) outputText(" your [cock] splatering cum on the ground");
-	if (player.gender == 3) outputText(" and");
-	if (player.gender == 2 || player.gender == 3) outputText(" your pussy gushing with a copious amount of juice");
-	outputText(". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a pair of horns just like an oni.</b>");
-	player.horns.count = 1;
-	player.horns.type = Horns.ONI_X2;
-	doNext(accessPage1HornsMenu);
-}
-private function metamorphOniSingleHorn():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.horns.type == Horns.NONE) outputText("You moan in pleasure as a single bony horns push forward out of your forehead,");
-	else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning and merging into one,");
-	outputText(" the thing is actually surprisingly sensitive and you reach orgasm just from it reaching full size,");
-	if (player.gender == 1 || player.gender == 3) outputText(" your [cock] splatering cum on the ground");
-	if (player.gender == 3) outputText(" and");
-	if (player.gender == 2 || player.gender == 3) outputText(" your pussy gushing with a copious amount of juice");
-	outputText(". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a horns just like an oni.</b>");
-	player.horns.count = 1;
-	player.horns.type = Horns.ONI;
-	doNext(accessPage1HornsMenu);
-}
-private function metamorphOniArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\n");
-	if (player.arms.type != Arms.HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
-	outputText("The skin on your arms feels like it’s burning as a whole set of intricate warlike tattoos covers them. Furthermore your nails become increasingly pointed turning black just like a set of claws. Well it seems you will have issues hiding your <b>war tattooed arms with sharp nails.</b>");
-	player.arms.type = Arms.ONI;
-	doNext(accessPage2ArmsMenu);
-}
 
-private function metamorphElfEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.ears.type != Ears.HUMAN) restoreHumanEars();
-	outputText("\n\nSounds become increasingly audible as a weird tingling runs through your scalp and your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed elven ears.</b> The points are quite sensitive and you will have to get used to your new enhanced hearing ability.");
-	player.ears.type = Ears.ELVEN;
-	doNext(accessPage2EarsMenu);
-}
-private function metamorphElfArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
-	outputText("\n\nSomething in your hands shift as they change taking on a more feminine fragile yet agile structure. You discover with surprise your dexterity has greatly increased allowing you to manipulate things in your delicate elven fingers with almost unreal precision. However your grip has become weaker as a result, weakening your ability to use raw force over finesse. <b>You now have delicate elven hands.</b>");
-	player.arms.type = Arms.ELF;
-	doNext(accessPage2ArmsMenu);
-}
+
+
+
+
 private function metamorphMantisWingsLarge():void {
 	clearOutput();
 	player.soulforce -= 200;
@@ -1940,16 +1475,7 @@ private function metamorphMantisTail():void {
 	player.tailType = Tail.MANTIS_ABDOMEN;
 	doNext(accessPage4TailMenu);
 }
-private function metamorphMantisArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYou watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, turning the [skin.type] into a shiny green carapace.");
-	outputText("\nA moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining green chitin from the upper arm down.");
-	outputText("\nThe transformation end as down the lenght of your forearms you grow a pair of massive scythe like appendage just like a mantis.");
-	outputText("\nYou nonchalantly run them across a young tree slicing the plant trunk in half. This might prove a deadly weapon if used as part of your unarmed strikes. <b>You now have mantis arms.</b>");
-	player.arms.type = Arms.MANTIS;
-	doNext(accessPage1ArmsMenu);
-}
+
 private function metamorphMantisAntennae():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1958,29 +1484,8 @@ private function metamorphMantisAntennae():void {
 	player.antennae.type = Antennae.MANTIS;
 	doNext(accessAntennaeMenuOld);
 }
-private function metamorphDevilArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYour hands shapeshift as they cover in fur and morph into the clawed hands of some unknown beast. They retain their dexterity despite their weird shape and paw pads. At least this won't hinder spellcasting. <b>You now have bestial clawed hands!</b>");
-	player.arms.type = Arms.DEVIL;
-	doNext(accessPage2ArmsMenu);
-}
-private function metamorphGoatEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYour ears elongate and flatten on your head. You flap them a little and discover they have turned into something similar to the ears of a goat. <b>You now have goat ears!</b>");
-	player.ears.type = Ears.GOAT;
-	doNext(accessPage2EarsMenu);
-}
-private function metamorphGoatHorns():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.horns.type == Horns.NONE) outputText("You begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
-	else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning. Once it's over, you reach up and find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
-	player.horns.count = 1;
-	player.horns.type = Horns.GOAT;
-	doNext(accessPage1HornsMenu);
-}
+
+
 private function metamorphGoatTail():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -1988,40 +1493,7 @@ private function metamorphGoatTail():void {
 	player.tailType = Tail.GOAT;
 	doNext(accessPage3TailMenu);
 }
-private function metamorphCowMinotaurHorns():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.NONE) {
-		if (player.horns.type == Horns.COW_MINOTAUR) {
-			if (player.horns.count < 5) {
-				outputText("\n\nYour small horns get a bit bigger, stopping as medium sized nubs.");
-				player.horns.count += 1 + rand(2);
-			}
-		}
-		if (player.horns.type == Horns.NONE || player.horns.count == 0) {
-			outputText("\n\nWith painful pressure, the skin on your forehead splits around two tiny nub-like horns, similar to those you would see on the cattle back in your homeland.");
-			player.horns.count = 1;
-			player.horns.type = Horns.COW_MINOTAUR;
-		}
-		if (player.horns.type != Horns.NONE && player.horns.type != Horns.COW_MINOTAUR && player.horns.type != Horns.ORCHID && player.horns.count > 0) {
-			outputText("\n\nYour horns twist, filling your skull with agonizing pain for a moment as they transform into cow-horns.");
-			player.horns.type = Horns.COW_MINOTAUR;
-		}
-	}
-	if ((player.horns.type == Horns.DEMON || player.horns.type > Horns.COW_MINOTAUR) && player.horns.type != Horns.ORCHID) {
-		outputText("\n\nYour horns vibrate and shift as if made of clay, reforming into two small bovine nubs.");
-		player.horns.count = 2;
-		player.horns.type = Horns.COW_MINOTAUR;
-	}
-	doNext(accessPage1HornsMenu);
-}
-private function metamorphCowEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYou feel your ears tug on your scalp as they twist shape, becoming oblong and cow-like. <b>You now have cow ears.</b>");
-	player.ears.type = Ears.COW;
-	doNext(accessPage1EarsMenu);
-}
+
 private function metamorphCowTail():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2046,13 +1518,7 @@ private function metamorphDragonTail():void {
 	player.tailType = Tail.DRACONIC;
 	doNext(accessPage2TailMenu);
 }
-private function metamorphDragonArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a dragon, one with leathery scales and short claws replacing your fingernails. <b>You now have a dragon arms.</b>");
-	player.arms.type = Arms.DRAGON;
-	doNext(accessPage2ArmsMenu);
-}
+
 
 private function metamorphDragonWingsHuge():void {
 	clearOutput();
@@ -2079,20 +1545,6 @@ private function metamorphDragonWingsSmall():void {
 	player.wings.desc = "small, draconic";
 	doNext(accessPage1WingsMenu);
 }
-private function metamorphDragonEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful. It grows and grows until you can't stand it any more, and reach up to scratch at them. To your surprise, you find them melting away like overheated candles. You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion. Then, all of a sudden, hearing returns to you. Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head. A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins. With a little patience, you begin to adjust these fins just like ears to aid your hearing. <b>You now have dragon ears!</b>");
-	player.ears.type = Ears.DRAGON;
-	doNext(accessPage1EarsMenu);
-}
-private function metamorphSnakeEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed ears covered in small scales</b>. You bet they look cute!");
-	player.ears.type = Ears.SNAKE;
-	doNext(accessPage2EarsMenu);
-}
 
 private function metamorphOrcaBlowhole():void {
 	clearOutput();
@@ -2104,13 +1556,6 @@ private function metamorphOrcaBlowhole():void {
 	player.rearBody.type = RearBody.ORCA_BLOWHOLE;
 	doNext(accessRearBodyMenuOld);
 }
-private function metamorphOrcaEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYour ears suddenly begin to lengthen, growing bigger and bigger until their length reaches your shoulders. When you examine them you discover they have grown into a pair of large fins, easily twice as big as your head. <b>Orienting yourself underwater will be easy with your large orca fin ears.</b>");
-	player.ears.type = Ears.ORCA;
-	doNext(accessPage2EarsMenu);
-}
 private function metamorphOrcaTail():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2119,13 +1564,7 @@ private function metamorphOrcaTail():void {
 	player.tailType = Tail.ORCA;
 	doNext(accessPage4TailMenu);
 }
-private function metamorphOrcaArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYour fingers suddenly are forced together. When you stretch them back you discover they are now webbed, ready for swimming. You are still examining your hands when something not unlike a pair of fins grow out of your forearms. <b>You can only guess those Orca arms will help you to swim at high speeds!</b>");
-	player.arms.type = Arms.ORCA;
-	doNext(accessPage2ArmsMenu);
-}
+
 private function metamorphPhoenixWings():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2134,20 +1573,8 @@ private function metamorphPhoenixWings():void {
 	player.wings.desc = "large crimson feathered";
 	doNext(accessPage2WingsMenu);
 }
-private function metamorphPhoenixArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nA crimson colored avian plumage starts to sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.");
-	player.arms.type = Arms.PHOENIX;
-	doNext(accessPage1ArmsMenu);
-}
-private function metamorphSalamanderArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a salamander, one with leathery, red scales and short claws replacing your fingernails. <b>You now have a salamander arms.</b>");
-	player.arms.type = Arms.SALAMANDER;
-	doNext(accessPage1ArmsMenu);
-}
+
+
 private function metamorphSalamanderTail():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2163,13 +1590,7 @@ private function metamorphSharkFin():void {
 	player.rearBody.type = RearBody.SHARK_FIN;
 	doNext(accessRearBodyMenuOld);
 }
-private function metamorphSharkArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form with exception places between your finger which starting show signs to growing webbing. Soon after you start sweating profusely and panting loudly, feeling the space near your elbows shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from your forearms. You examine them carefully and make a few modifications to your [armor] to accommodate your new fins. <b>You now have shark arms.</b>");
-	player.arms.type = Arms.SHARK;
-	doNext(accessPage1ArmsMenu);
-}
+
 private function metamorphSharkTail():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2189,30 +1610,7 @@ private function metamorphSpiderTail():void {
 	player.tailRecharge = 5;
 	doNext(accessPage1TailMenu);
 }
-private function metamorphSpiderArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\n");
-	if (player.arms.type == Arms.HARPY || player.arms.type == Arms.HUMAN) {
-		if (player.arms.type == Arms.HARPY) outputText("The feathers covering your arms fall away, leaving them to return to a far more human appearance. ");
-		outputText("You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.");
-	}
-	else {
-		if (player.arms.type == Arms.BEE) outputText("The fizz covering your upper arms starting to fall down leaving only shiny black chitin clad arms.");
-		else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRAGON) outputText("The sclaes covering your upper arms starting to fall down leaving only shiny black chitin clad arms.");
-		else if (player.arms.type == Arms.MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.");
-		else outputText("You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.");
-	}
-	player.arms.type = Arms.SPIDER;
-	doNext(accessPage1ArmsMenu);
-}
-private function metamorphElfinEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly. They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>");
-	player.ears.type = Ears.ELFIN;
-	doNext(accessPage1EarsMenu);
-}
+
 private function metamorphHarpyWings():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2222,13 +1620,7 @@ private function metamorphHarpyWings():void {
 	player.wings.desc = "large, feathered";
 	doNext(accessPage1WingsMenu);
 }
-private function metamorphHarpyArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nAn avian plumage sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.");
-	player.arms.type = Arms.HARPY;
-	doNext(accessPage1ArmsMenu);
-}
+
 private function metamorphHarpyTail():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2263,19 +1655,7 @@ private function metamorphBeeTail():void {
 	player.tailRecharge = 5;
 	doNext(accessPage1TailMenu);
 }
-private function metamorphBeeArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\n");
-	if (player.arms.type == Arms.SPIDER) outputText("On your upper arms slowly starting to grown yellow fuzz making them looks more like those of bee.");
-	else if (player.arms.type == Arms.MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>. Additionaly on your upper arms appear yellow fuzz.");
-	else {
-		if (player.arms.type == Arms.HARPY) outputText("The feathers covering your arms fall away, leaving them to return to a far more human appearance. ");
-		outputText("You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>. A moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining black chitin from the upper arm down, and downy yellow fuzz along your upper arm.");
-	}
-	player.arms.type = Arms.BEE;
-	doNext(accessPage1ArmsMenu);
-}
+
 private function metamorphBeeAntennae():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2283,13 +1663,6 @@ private function metamorphBeeAntennae():void {
 	else outputText("\n\nYour head itches momentarily as two floppy antennae sprout from your " + hairDescript() + ".");
 	player.antennae.type = Antennae.BEE;
 	doNext(accessAntennaeMenuOld);
-}
-private function metamorphLizardEars():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nTightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, scaley bumps with holes in their centers. <b>You have reptilian ears!</b>");
-	player.ears.type = Ears.LIZARD;
-	doNext(accessPage1EarsMenu);
 }
 private function metamorphLizardTail():void {
 	clearOutput();
@@ -2299,29 +1672,9 @@ private function metamorphLizardTail():void {
 	player.tailType = Tail.LIZARD;
 	doNext(accessPage1TailMenu);
 }
-private function metamorphLizardArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a lizard, one with leathery scales and short claws replacing your fingernails. <b>You now have a lizard arms.</b>");
-	player.arms.type = Arms.LIZARD;
-	doNext(accessPage2ArmsMenu);
-}
-private function metamorphHornsDraconicX4():void {
-	clearOutput();
-	player.soulforce -= 200;
-	outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop. A sense of finality settles over you. <b>You have as many horns as a lizan can grow.</b>");
-	player.horns.count = 12;
-	player.horns.type = Horns.DRACONIC_X4_12_INCH_LONG;
-	doNext(accessPage1HornsMenu);
-}
-private function metamorphHornsDraconicX2():void {
-	clearOutput();
-	player.soulforce -= 100;
-	outputText("\n\nYou feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. They must look something like the horns the dragons in your village's legends always had.");
-	player.horns.count = 4;
-	player.horns.type = Horns.DRACONIC_X2;
-	doNext(accessPage1HornsMenu);
-}
+
+
+
 private function metamorphWingsDemonicLarge2():void {
 	clearOutput();
 	player.soulforce -= 300;
@@ -2348,27 +1701,7 @@ private function metamorphWingsDemonicTiny():void {
 	doNext(accessPage1WingsMenu);
 }
 
-private function metamorphHornsDemonic():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.horns.count < 12 && (player.horns.type == Horns.NONE || player.horns.type == Horns.DEMON)) {
-		outputText("\n\n");
-		if (player.horns.count == 0) {
-			outputText("A small pair of demon horns erupts from your forehead. They actually look kind of cute. <b>You have horns!</b>");
-		}
-		else outputText("Another pair of demon horns, larger than the last, forms behind the first row.");
-		if (player.horns.type == Horns.NONE) player.horns.type = Horns.DEMON;
-		player.horns.count++;
-		player.horns.count++;
-	}
-	else if (player.horns.type > Horns.DEMON && player.horns.type != Horns.ORCHID) {
-		outputText("\n\n");
-		outputText("Your horns shift, shrinking into two small demonic-looking horns.");
-		player.horns.count = 2;
-		player.horns.type = Horns.DEMON;
-	}
-	doNext(accessPage1HornsMenu);
-}
+
 private function metamorphTailDemonic():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2393,14 +1726,7 @@ private function metamorphKitsuneSkinPattern():void {
 	player.skin.base.adj = "sexy tattooed";
 	doNext(accessSkinPatternsMenuOld);
 }
-private function metamorphKitsuneArms():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
-	outputText("\n\nYour finger tingle as your nails sharpen to point. You run them on a tree bark and they feel way harder than your old human nails. <b>You will be able to claw at your opponent with your sharp kitsune nails.</b>");
-	player.arms.type = Arms.KITSUNE;
-	doNext(accessPage1ArmsMenu);
-}
+
 private function metamorphTailFox9th():void {
 	clearOutput();
 	player.soulforce -= 900;
@@ -2466,26 +1792,7 @@ private function metamorphTailFox():void {
 	player.tailCount = 1;
 	doNext(accessPage2TailMenu);
 }
-private function metamorphEarsFox():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN || player.ears.type == Ears.LIZARD) {
-		outputText("The sides of your face painfully stretch as your ears elongate and begin to push past your hairline, toward the top of your head. They elongate, becoming large vulpine triangles covered in bushy fur. <b>You now have fox ears.</b>");
-	}
-	else {
-		outputText("Your ears change, shifting from their current shape to become vulpine in nature. <b>You now have fox ears.</b>");
-	}
-	player.ears.type = Ears.FOX;
-	doNext(accessPage1EarsMenu);
-}
-private function metamorphArmsFox():void {
-	clearOutput();
-	player.soulforce -= 100;
-	if (player.arms.type != Arms.HUMAN) restoreHumanArms();
-	outputText("Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into wolf like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>");
-	player.arms.type = Arms.FOX;
-	doNext(accessPage1ArmsMenu);
-}
+
 private function metamorphFishGills():void {
 	clearOutput();
 	player.soulforce -= 100;
@@ -2606,25 +1913,10 @@ private function metamorphFur():void {
 	doNext(accessSkinMenuOld);
 }
 
-private function removeOddEyes():void {
-	if (player.eyes.type == Eyes.BLACK_EYES_SAND_TRAP) {
-		outputText("\n\nYou feel a twinge in your eyes and you blink. It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
-	}
-	else {
-		outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you. As you steady and open your eyes, you realize something seems different. Your vision is changed somehow.");
-		if (player.eyes.type == Eyes.SPIDER) outputText(" Your multiple, arachnid eyes are gone!</b>");
-		outputText(" <b>You have normal, humanoid eyes again.</b>");
-	}
-	player.eyes.type = Eyes.HUMAN;
-}
 private function removeOldWings():void {
 	outputText("\n\nSensation fades from your " + player.wings.desc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.");
 	player.wings.type = Wings.NONE;
 	player.wings.desc = "non-existant";
-}
-private function restoreHumanEars():void {
-	outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!");
-	player.ears.type = Ears.HUMAN;
 }
 private function restoreHumanLegs():void {
 	if (player.isTaur()) {
@@ -2663,7 +1955,7 @@ private function restoreHumanArms():void {
 	if (player.arms.type == Arms.BEE) {
 		outputText("arms' chitinous covering and fuzz is flaking away. The glossy black and yellow coating is soon gone, leaving [skin.type] behind.");
 	}
-	if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRAGON) {
+	if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRACONIC) {
 		outputText("arms' scales are flaking away. The leathery ");
 		if (player.arms.type == Arms.SALAMANDER) outputText("red ");
 		outputText("scales are soon gone, leaving [skin.type] behind.");

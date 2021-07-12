@@ -433,17 +433,8 @@ public class Enigmanium extends Consumable{
 			//Body type changes.  Teh rarest of the rare.
 			//DA EARZ
 			if (player.ears.type != Ears.LION && player.tailType != Tail.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-				//human to lion:
-				if (player.ears.type == Ears.HUMAN) {
-					if (rand(2) == 0) outputText("\n\nThe skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head. They shift and elongate a little, fur growing on them as they become feline in nature. <b>You now have Lion ears.</b>");
-					else outputText("\n\nYour ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they've migrated up to the top of your head and increased in size. The tingling stops and you find yourself hearing noises in a whole new way. <b>You now have Lion ears.</b>");
-				}
-				//non human to lion:
-				else {
-					if (rand(2) == 0) outputText("\n\nYour ears change shape, morphing into round, feline ears not unlike those of a lion!  They swivel about reflexively as you adjust to them.  <b>You now have lion ears.</b>");
-					else outputText("\n\nYour ears tingle and begin to change shape. Within a few moments, they've become long and feline.  Thanks to the new fuzzy organs, you find yourself able to hear things that eluded your notice up until now. <b>You now have lion ears.</b>");
-				}
-				mutations.setEarType(Ears.LION);
+				outputText("\n\n");
+				CoC.instance.transformations.EarsLion.applyEffect();
 				changes++;
 			}
 			//DA TAIL (IF ALREADY HAZ URZ)
@@ -487,13 +478,8 @@ public class Enigmanium extends Consumable{
 
 			//Sphinx Arms
 			if (player.lowerBody == LowerBody.CAT && rand(4) == 0 && changes < changeLimit && player.arms.type != Arms.SPHINX) {
-				if (player.arms.type != Arms.HUMAN) {
-					mutations.humanizeArms();
-					outputText(" ");
-				}
-				else outputText("\n\n");
-				outputText("Your hands suddenly start to tingle as your arms grow a thin layer of -fur color- fur up to your shoulders. You watch, enthralled, as your nails fall off your fingers, feline claws taking their place on your five-fingered hands. That said, they don't look exactly like paws as your hands retain their dexterity and general appearance which is a perfect mix between human and leonine features. Thanks to their shape, your new bestial hands should not hinder your spellcasting abilities.. <b>Your arms are now covered in fur and end with clawed hands like those of a sphinx.</b>");
-				mutations.setArmType(Arms.SPHINX);
+				outputText("\n\n");
+				CoC.instance.transformations.ArmsSphinx.applyEffect();
 				changes++;
 			}
 			//CAT TOUNGE CUZ WHY NOT?

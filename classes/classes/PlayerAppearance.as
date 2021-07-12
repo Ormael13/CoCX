@@ -658,7 +658,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.skin.base.pattern == Skin.PATTERN_ORCA_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
 		if (player.skin.base.pattern == Skin.PATTERN_SEADRAGON_UNDERBODY) outputText(" However your skin is [skin color] with a [skin color2] underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of a sea dragon. Your underbelly is also lined up with bioluminescent dots like those of a deep sea fish.\n");
 		if (player.skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY) outputText(" Your body is covered from head to toe in [skin color] with a [skin color2] underbelly, giving to your nimble frame a red-panda appearance.");
-		if (player.skin.base.pattern == Skin.PATTERN_USHI_ONI_ONNA_TATTOO) outputText(" You have strange ushi oni-onna tattoos in your body, they appear in your belly, chest, breasts, shoulders and even face, you don’t know why but some are like a black sheen plate while others are just fur.");
+		if (player.skin.base.pattern == Skin.PATTERN_USHI_ONI_TATTOO) outputText(" You have strange ushi-oni tattoos in your body, they appear in your belly, chest, breasts, shoulders and even face, you don’t know why but some are like a black sheen plate while others are just fur.");
 	}
 
 	public function describeGear():void {
@@ -1129,7 +1129,7 @@ public class PlayerAppearance extends BaseContent {
 			if (player.horns.count > 0)
 				outputText(" Crowning above your head is a fleshy Kraken hood easily adding you a few extra inch in height.\n");
 		}
-		if (player.horns.type == Horns.USHI_ONI_ONNA) {
+		if (player.horns.type == Horns.USHI_ONI) {
 			if (player.horns.count > 0)
 				outputText(" You have a pair of ushi-" + player.mf("oni", "onna") + " horns, both come out of your skull and go upward in a spiral pattern.\n");
 		}
@@ -2009,7 +2009,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText(" It's covered in [skin coat] that covers your [skintone] skin underneath, making your face looks more unusual.");
 			}
 		}
-		if (faceType == Face.USHI_ONI_ONNA) {
+		if (faceType == Face.USHI_ONI) {
 			outputText(" You have the face of a ushi " + player.mf("oni", "onna") + ", you have strange black tattoos circling your eyes and in your mouth small fangs with a weak poison can be seen when you smile or open you mouth.");
 		}
 

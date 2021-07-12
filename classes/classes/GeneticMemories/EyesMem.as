@@ -18,7 +18,7 @@ package classes.GeneticMemories {
 
 		public static const [NAME HERE]:int = [ID HERE];
 		EnumValue.add(Memories, [NAME HERE], "[NAME HERE]", {
-			name: [Full Name to identify],
+			name: [Name Saved in GeneticStorage],
 			metamorphCost: [Cost Here],
 			metamorphTitle: "[Race Here]",
 			transformation: function(): Transformation {
@@ -114,7 +114,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, DRACONIC, "DRACONIC", {
 			name: "Draconic Eyes",
 			metamorphCost: 100,
-			metamorphTitle: "Draconic",
+			metamorphTitle: "Dragon",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.EyesDraconic;
 			}

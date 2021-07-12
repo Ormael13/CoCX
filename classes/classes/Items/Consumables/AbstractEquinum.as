@@ -199,7 +199,8 @@ public class AbstractEquinum extends Consumable {
 		if (player.blockingBodyTransformations()) changeLimit = 0;
 		//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
 		if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
-			mutations.humanizeArms();
+			outputText("\n\n");
+			CoC.instance.transformations.ArmsHuman.applyEffect();
 			changes++;
 		}
 		//-Remove feathery/quill hair (copy for equinum, canine peppers, Labova)
@@ -499,12 +500,12 @@ public class AbstractEquinum extends Consumable {
 			}
 		}
 		//Remove odd eyes
-		if (changes < changeLimit && rand(4) == 0 && !CoC.instance.transformations.EyesHuman.isPresent()) {
+		if (changes < changeLimit && rand(4) == 0 && CoC.instance.transformations.EyesHuman.isPossible()) {
 			outputText("\n\n");
 			CoC.instance.transformations.EyesHuman.applyEffect();
 			changes++;
 		}
-		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && !CoC.instance.transformations.EyesChangeColor(["blue", "red"]).isPresent()) {
+		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && CoC.instance.transformations.EyesChangeColor(["blue", "red"]).isPossible()) {
 			outputText("\n\n");
 			if (player.cor >= 50) {
 				CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect();
@@ -512,7 +513,7 @@ public class AbstractEquinum extends Consumable {
 				CoC.instance.transformations.EyesChangeColor(["blue"]).applyEffect();
 			}
 
-			if (!CoC.instance.transformations.EyesHuman.isPresent()) {
+			if (CoC.instance.transformations.EyesHuman.isPossible()) {
 				outputText("\n\n");
 				CoC.instance.transformations.EyesHuman.applyEffect();
 			}
@@ -547,12 +548,8 @@ public class AbstractEquinum extends Consumable {
 		}
 		//Ears - requires tail
 		if (player.ears.type != Ears.HORSE && player.tailType == Tail.HORSE && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-			if (player.ears.type == -1) outputText("\n\nTwo painful lumps sprout on the top of your head, forming into tear-drop shaped ears, covered with short fur.  ");
-			if (player.ears.type == Ears.HUMAN) outputText("\n\nYour ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into a upright animalistic ears.  ");
-			if (player.ears.type == Ears.DOG) outputText("\n\nYour ears change shape, morphing into from their doglike shape into equine-like ears!  ");
-			if (player.ears.type > Ears.DOG) outputText("\n\nYour ears change shape, morphing into teardrop-shaped horse ears!  ");
-			mutations.setEarType(Ears.HORSE);
-			outputText("<b>You now have horse ears.</b>");
+			outputText("\n\n");
+			CoC.instance.transformations.EarsHorse.applyEffect();
 			changes++;
 		}
 		//Tail - requires legs
@@ -604,15 +601,15 @@ public class AbstractEquinum extends Consumable {
 				}
 				//If no horns yet..
 				else {
-					outputText("\n\nWith painful pressure, the skin on your forehead splits around tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland.");
-					mutations.setHornType(Horns.UNICORN, 2);
+					outputText("\n\n");
+					CoC.instance.transformations.HornsUnicorn.applyEffect();
 					changes++;
 				}
 			}
 			//Not uni/ali horns, change to uni/ali-horns
 			if (player.horns.type != Horns.UNICORN && player.horns.type != Horns.ORCHID) {
-				outputText("\n\nYour horns vibrate and shift as if made of clay, reforming into horns with a unicorn-like shape.");
-				mutations.setHornType(Horns.UNICORN);
+				outputText("\n\n");
+				CoC.instance.transformations.HornsUnicorn.applyEffect();
 				changes++;
 			}
 		}

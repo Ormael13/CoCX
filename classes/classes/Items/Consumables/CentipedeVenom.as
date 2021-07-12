@@ -74,7 +74,8 @@ public class CentipedeVenom extends Consumable {
 		}
 		//Arms
 		if (player.arms.type != Arms.HUMAN && changes < changeLimit && rand(3) == 0) {
-			mutations.humanizeArms();
+			outputText("\n\n");
+			CoC.instance.transformations.ArmsHuman.applyEffect();
 			changes++;
 		}
 		//Antenna
@@ -85,8 +86,8 @@ public class CentipedeVenom extends Consumable {
 		}
 		//Ears
 		if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
-			mutations.setEarType(Ears.ELFIN);
+			outputText("\n\n");
+			CoC.instance.transformations.EarsElfin.applyEffect();
 			changes++;
 		}
 		//Face

@@ -353,17 +353,19 @@ public class Centaurinum extends Consumable{
 		}
 		//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
 		if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(3) == 0) {
-			mutations.humanizeArms();
+			outputText("\n\n");
+			CoC.instance.transformations.ArmsHuman.applyEffect();
 			changes++;
 		}
 		//Human ears
 		if (player.arms.type == Arms.HUMAN && player.ears.type != Ears.HUMAN && changes < changeLimit && rand(3) == 0) {
-			mutations.humanizeEars();
+			outputText("\n\n");
+			CoC.instance.transformations.EarsHuman.applyEffect();
 			changes++;
 		}
 		if (player.ears.type != Ears.HORSE && player.ears.type == Ears.HUMAN && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYour ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into a upright animalistic ears.  <b>You now have horse ears.</b>");
-			mutations.setEarType(Ears.HORSE);
+			outputText("\n\n");
+			CoC.instance.transformations.EarsHorse.applyEffect();
 			changes++;
 		}
 		//Human face

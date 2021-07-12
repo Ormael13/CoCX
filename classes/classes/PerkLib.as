@@ -5987,7 +5987,7 @@ public class PerkLib
 			}, "Displacer beast");
 			DraconicBones.requireBonesAndMarrowMutationSlot()
 				.requireCustomFunction(function (player:Player):Boolean {
-                return (player.arms.type == Arms.DRAGON || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.SEADRAGON);
+                return (player.arms.type == Arms.DRACONIC || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.SEADRAGON);
 				}, "Dragon race or its variants arms")
 				.requireCustomFunction(function (player:Player):Boolean {
                 return (LowerBody.hasDraconicLegs(player));

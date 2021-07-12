@@ -73,85 +73,6 @@ import classes.BodyParts.Wings;
 			changes++;
 		}
 
-		public function humanizeEars():void {
-			outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!");
-			setEarType(Ears.HUMAN);
-			changes++;
-		}
-
-		public function humanizeArms(degargoylize:Boolean=false):void {
-			switch (player.arms.type) {
-				case Arms.HUMAN:
-					return;
-				case Arms.WOLF:
-				case Arms.FOX:
-				case Arms.LION:
-				case Arms.YETI:
-				case Arms.DEVIL:
-				case Arms.CAT:
-				case Arms.BOAR:
-				case Arms.BEAR:
-				case Arms.RAIJU_2:
-					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
-					break;
-				case Arms.DISPLACER:
-					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
-					outputText("\n\nYou feel highly uncomfortable as your extra set of arms vanishes into your body following the loss of your leonine paw hands. Guess your back with only two arms now.");
-					break;
-				case Arms.ELF:
-				case Arms.KITSUNE:
-				case Arms.ONI:
-				case Arms.ORC:
-				case Arms.RAIJU:
-				case Arms.PIG:
-				case Arms.YUKI_ONNA:
-					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.");
-					break;
-				case Arms.SHARK:
-				case Arms.ORCA:
-					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' fin suddenly fell down, leaving [skin base.type] behind.  Also webbing between your fingers slowly disappearing.");
-					break;
-				case Arms.PLANT:
-				case Arms.PLANT2:
-					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' vines are withering.  Leaves also falling donw, leaving [skin base.type] behind.");
-					break;
-				case Arms.SALAMANDER:
-				case Arms.LIZARD:
-				case Arms.DRAGON:
-				case Arms.HYDRA:
-					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' scales are flaking away.  The leathery [skin coat.noadj] [skin coat.isare] soon gone, leaving [skin base.type] behind.");
-					break;
-				case Arms.BEE:
-					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering and fuzz is flaking away.  The glossy black and yellow coating is soon gone, leaving [skin base.type] behind.");
-					break;
-				case Arms.MANTIS:
-					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly.  The glossy green coating is soon gone, leaving [skin base.type] behind.");
-					break;
-				case Arms.SPIDER:
-				case Arms.USHI_ONI_ONNA:
-					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving [skin base.type] behind.");
-					break;
-				case Arms.HARPY:
-				case Arms.PHOENIX:
-				case Arms.AVIAN:
-					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving [skin] behind.");
-					break;
-				case Arms.GARGOYLE:
-					if (!degargoylize) return;
-					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
-					break;
-				case Arms.BAT:
-					outputText("You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your bones are breaking down and reforming in a frenzy. Your parchment-like skin begins to fall off in clumps, leaving the mess of malformed bones that are your arms right now naked for all to see. However, even as you watch, dark blood creeps over the bone, properly aligning them before healing them over, although not in their old form. Within seconds, your bones are remade into ones alike those you were born with, in structure if nothing else, the eldritch power of your blood finally ebbing away, but not before the last of it settles and turns into a brand new patch of skin.");
-					break;
-				default:
-					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
-					break;
-			}
-			outputText("You now have <b>human arms</b>!");
-			setArmType(Arms.HUMAN);
-			changes++;
-		}
-
 		public function removeWings(degargoylize:Boolean=false):void {
 			if (player.wings.type == Wings.GARGOYLE_LIKE_LARGE && !degargoylize) return;
 			if (player.wings.type == Wings.NONE) return;
@@ -298,145 +219,6 @@ import classes.BodyParts.Wings;
 		[Antennae.MANTIS, StatusEffects.UnlockedMantisAntennae],
 		[Antennae.MOTH, null],
 	]);
-	public function setArmType(armType:int):Boolean {
-		return setBodyPartType("arms.type", METAMORPH_ARMS, armType);
-	}
-	private const METAMORPH_ARMS:Object = createMapFromPairs([
-		[Arms.AVIAN, null],
-		[Arms.BEAR, null],
-		[Arms.BEE, StatusEffects.UnlockedBeeArms],
-		[Arms.BOAR, StatusEffects.UnlockedBoarArms],
-		[Arms.CANCER, null],
-		[Arms.CAT, StatusEffects.UnlockedCatArms],
-		[Arms.CENTIPEDE, null],
-		[Arms.DISPLACER, StatusEffects.UnlockedDisplacerArms],
-		[Arms.DRAGON, StatusEffects.UnlockedDraconicArms],
-		[Arms.DEVIL, StatusEffects.UnlockedDevilArms],
-		[Arms.ELF, StatusEffects.UnlockedElfArms],
-		[Arms.FOX, StatusEffects.UnlockedFoxArms],
-		[Arms.FROSTWYRM, null],
-		[Arms.GARGOYLE, null],
-		[Arms.GARGOYLE_2, null],
-		[Arms.GHOST, null],
-		[Arms.GOO, null],
-		[Arms.GRYPHON, null],
-		[Arms.HARPY, StatusEffects.UnlockedHarpyArms],
-		[Arms.HINEZUMI, null],
-		[Arms.HUMAN, StatusEffects.UnlockedHumanArms],
-		[Arms.HYDRA, null],
-		[Arms.JIANGSHI, null],
-		[Arms.KITSUNE, StatusEffects.UnlockedKitsuneArms],
-		[Arms.KRAKEN, null],
-		[Arms.LION, StatusEffects.UnlockedLionArms],
-		[Arms.LIZARD, StatusEffects.UnlockedLizardArms],
-		[Arms.MANTIS, StatusEffects.UnlockedMantisArms],
-		[Arms.MELKIE, null],
-		[Arms.ONI, StatusEffects.UnlockedOniArms],
-		[Arms.ORC, StatusEffects.UnlockedOrcArms],
-		[Arms.ORCA, StatusEffects.UnlockedOrcaArms],
-		[Arms.PHOENIX, StatusEffects.UnlockedPhoenixArms],
-		[Arms.PIG, StatusEffects.UnlockedPigArms],
-		[Arms.PLANT, null],
-		[Arms.PLANT2, null],
-		[Arms.RAIJU, StatusEffects.UnlockedRaijuArms],
-		[Arms.RAIJU_2, StatusEffects.UnlockedRaijuArms2],
-		[Arms.RED_PANDA, StatusEffects.UnlockedRedPandaArms],
-		[Arms.SALAMANDER, StatusEffects.UnlockedSalamanderArms],
-		[Arms.SHARK, StatusEffects.UnlockedSharkArms],
-		[Arms.SPHINX, StatusEffects.UnlockedSphinxArms],
-		[Arms.SPIDER, StatusEffects.UnlockedSpiderArms],
-		[Arms.USHI_ONI_ONNA, null],
-		[Arms.WENDIGO, null],
-		[Arms.WOLF, null],
-		[Arms.YETI, null],
-		[Arms.YUKI_ONNA, null],
-	]);
-
-	public function setEarType(earType:int):Boolean {
-		return setBodyPartType("ears.type", METAMORPH_EARS, earType);
-	}
-	private const METAMORPH_EARS:Object = createMapFromPairs([
-		[Ears.AVIAN, null],
-		[Ears.BAT, StatusEffects.UnlockedBatEars],
-		[Ears.BEAR, null],
-		[Ears.BUNNY, null],
-		[Ears.CAT, StatusEffects.UnlockedCatEars],
-		[Ears.COW, StatusEffects.UnlockedCowEars],
-		[Ears.DEER, null],
-		[Ears.DISPLACER, StatusEffects.UnlockedDisplacerEars],
-		[Ears.DOG, null],
-		[Ears.DRAGON, StatusEffects.UnlockedDraconicEars],
-		[Ears.ECHIDNA, null],
-		[Ears.ELFIN, StatusEffects.UnlockedElfinEars],
-		[Ears.ELVEN, StatusEffects.UnlockedElfEars],
-		[Ears.FERRET, null],
-		[Ears.FOX, StatusEffects.UnlockedFoxEars],
-		[Ears.GOAT, StatusEffects.UnlockedGoatEars],
-		[Ears.GRYPHON, null],
-		[Ears.HORSE, StatusEffects.UnlockedHorseEars],
-		[Ears.HUMAN, StatusEffects.UnlockedHumanEars],
-		[Ears.KANGAROO, null],
-		[Ears.LION, StatusEffects.UnlockedLionEars],
-		[Ears.LIZARD, StatusEffects.UnlockedLizardEars],
-		[Ears.MOUSE, null],
-		[Ears.ONI, StatusEffects.UnlockedOniEars],
-		[Ears.ORCA, StatusEffects.UnlockedOrcaEars],
-		[Ears.PANDA, null],
-		[Ears.PIG, StatusEffects.UnlockedPigEars],
-		[Ears.RACCOON, null],
-		[Ears.RED_PANDA, StatusEffects.UnlockedRedPandaEars],
-		[Ears.RHINO, null],
-		[Ears.SHARK, null],
-		[Ears.SNAKE, StatusEffects.UnlockedSnakeEars],
-		[Ears.VAMPIRE, StatusEffects.UnlockedVampireEars],
-		[Ears.RAIJU, StatusEffects.UnlockedRaijuEars],
-		[Ears.WOLF, null],
-		[Ears.YETI, null],
-		[Ears.WEASEL, null],
-	]);
-
-	private const METAMORPH_EYES:Object = createMapFromPairs([
-		[Eyes.BEAR, null],
-		[Eyes.BLACK_EYES_SAND_TRAP, null],
-		[Eyes.CANCER, null],
-		[Eyes.CAT, StatusEffects.UnlockedCatEyes],
-		[Eyes.CAVE_WYRM, null],
-		[Eyes.CENTIPEDE, null],
-		[Eyes.DEAD, null],
-		[Eyes.DEVIL, StatusEffects.UnlockedDevilEyes],
-		[Eyes.DISPLACER, StatusEffects.UnlockedDisplacerEyes],
-		[Eyes.DRACONIC, StatusEffects.UnlockedDraconicEyes],
-		[Eyes.FAIRY, null],
-		[Eyes.ELF, StatusEffects.UnlockedElfEyes],
-		[Eyes.FENRIR, null],
-		[Eyes.FERAL, null],
-		[Eyes.FIENDISH, null],
-		[Eyes.FIRE_SNAIL, null],
-		[Eyes.SPIDER, StatusEffects.UnlockedSpiderFourEyes],
-		[Eyes.FOX, StatusEffects.UnlockedFoxEyes],
-		[Eyes.FROSTWYRM, null],
-		[Eyes.GEMSTONES, null],
-		[Eyes.GHOST, null],
-		[Eyes.GOAT, null],
-		[Eyes.GORGON, StatusEffects.UnlockedGorgonEyes],
-		[Eyes.GREMLIN, null],
-		[Eyes.GRYPHON, null],
-		[Eyes.HINEZUMI, null],
-		[Eyes.HUMAN, StatusEffects.UnlockedHumanEyes],
-		[Eyes.INFERNAL, StatusEffects.UnlockedHellcatInfernalEyes],
-		[Eyes.JIANGSHI, null],
-		[Eyes.KRAKEN, null],
-		[Eyes.MANTICORE, StatusEffects.UnlockedManticoreEyes],
-		[Eyes.MONOEYE, null],
-		[Eyes.ONI, StatusEffects.UnlockedOniEyes],
-		[Eyes.ORC, StatusEffects.UnlockedOrcEyes],
-		[Eyes.RAIJU, StatusEffects.UnlockedRaijuEyes],
-		[Eyes.RATATOSKR, null],
-		[Eyes.LIZARD, StatusEffects.UnlockedLizardEyes],
-		[Eyes.SNAKE, StatusEffects.UnlockedSnakeEyes],
-		[Eyes.VAMPIRE, StatusEffects.UnlockedVampireEyes],
-		[Eyes.WEASEL, null],
-	]);
 
 	public function setGillType(gillType:int):Boolean {
 		return setBodyPartType("gills.type", METAMORPH_GILLS, gillType);
@@ -446,39 +228,6 @@ import classes.BodyParts.Wings;
 		[Gills.FISH, StatusEffects.UnlockedFishGills],
 		[Gills.GILLS_IN_TENTACLE_LEGS, null],
 		[Gills.NONE, StatusEffects.UnlockedHumanNoGills],
-	]);
-
-	/**
-	 * @param hornType HORN_TYPE_xxxx
-	 * @param hornCount New horns count; -1 if "don't change"
-	 */
-	public function setHornType(hornType:int, hornCount:int = -1):Boolean {
-		var a:Boolean = setBodyPartType("horns.type", METAMORPH_HORNS, hornType);
-		if (hornCount >= 0) player.horns.count = hornCount;
-		return a;
-	}
-	private const METAMORPH_HORNS:Object = createMapFromPairs([
-		[Horns.ANTLERS, null],
-		[Horns.BICORN, StatusEffects.UnlockedBicornHorns],
-		[Horns.COW_MINOTAUR, StatusEffects.UnlockedCowMinotaurHorns],
-		[Horns.DEMON, StatusEffects.UnlockedDemonHorns],
-		[Horns.DRACONIC_X2, StatusEffects.UnlockedDraconicX2],
-		[Horns.DRACONIC_X4_12_INCH_LONG, StatusEffects.UnlockedDraconicX4],
-		[Horns.FROSTWYRM, null],
-		[Horns.GARGOYLE, null],
-		[Horns.GHOSTLY_WISPS, null],
-		[Horns.GOAT, StatusEffects.UnlockedGoatHorns],
-		[Horns.GOATQUAD, null],
-		[Horns.KRAKEN, null],
-		[Horns.NONE, StatusEffects.UnlockedHumanNoHorns],
-		[Horns.OAK, null],
-		[Horns.ONI, StatusEffects.UnlockedOniSingleHorn],
-		[Horns.ONI_X2, StatusEffects.UnlockedOniTwinHorns],
-		[Horns.ORCHID, null],
-		[Horns.RHINO, null],
-		[Horns.SPELL_TAG, null],
-		[Horns.UNICORN, StatusEffects.UnlockedUnicornHorn],
-		[Horns.USHI_ONI_ONNA, null],
 	]);
 
 	public function setLowerBody(lowerBody:int):Boolean {
@@ -542,7 +291,7 @@ import classes.BodyParts.Wings;
 		[LowerBody.SALAMANDER, StatusEffects.UnlockedSalamanderLegs],
 		[LowerBody.SCYLLA, null],
 		[LowerBody.SHARK, StatusEffects.UnlockedSharkLegs],
-		[LowerBody.USHI_ONI_ONNA, null],
+		[LowerBody.USHI_ONI, null],
 		[LowerBody.WENDIGO, null],
 		[LowerBody.WOLF, null],
 		[LowerBody.YETI, null],
@@ -642,7 +391,7 @@ import classes.BodyParts.Wings;
 		[Tail.SQUIRREL, null],
 		[Tail.THUNDERBIRD, null],
 		[Tail.TWINKASHA, null],
-		[Tail.USHI_ONI_ONNA, null],
+		[Tail.USHI_ONI, null],
 		[Tail.WEASEL, null],
 		[Tail.WENDIGO, null],
 		[Tail.WOLF, null],

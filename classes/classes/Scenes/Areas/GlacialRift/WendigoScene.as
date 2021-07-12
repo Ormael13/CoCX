@@ -123,14 +123,14 @@ package classes.Scenes.Areas.GlacialRift
 			if (player.tailCount != 1) player.tailCount = 1;
 			if (player.lowerBody != LowerBody.WENDIGO) CoC.instance.mutations.setLowerBody(LowerBody.WENDIGO);
 			if (player.legCount != 2) player.legCount = 2;
-			if (player.arms.type != Arms.WENDIGO) CoC.instance.mutations.setArmType(Arms.WENDIGO);
-			if (!CoC.instance.transformations.EyesDead.isPresent()) {
+			if (player.arms.type != Arms.WENDIGO) CoC.instance.transformations.ArmsWendigo.applyEffect(false);
+			if (CoC.instance.transformations.EyesDead.isPossible()) {
 				CoC.instance.transformations.EyesDead.applyEffect(false);
 				CoC.instance.transformations.EyesChangeColor(["spectral blue"]).applyEffect(false);
 			}
 			if (player.tongue.type != Tongue.RAVENOUS_TONGUE) CoC.instance.transformations.TongueRavenous.applyEffect(false);
-			if (player.horns.type != Horns.ANTLERS) CoC.instance.mutations.setHornType(Horns.ANTLERS, 30);
-			if (player.ears.type != Ears.DEER) CoC.instance.mutations.setEarType(Ears.DEER);
+			if (player.horns.type != Horns.ANTLERS) CoC.instance.transformations.HornsAntlersWendigo.applyEffect(false);
+			if (player.ears.type != Ears.DEER) CoC.instance.transformations.EarsDeer.applyEffect(false);
 			if (player.wings.type != Wings.LEVITATION) CoC.instance.mutations.setWingType(Wings.LEVITATION, "levitation");
 			if (player.rearBody.type != RearBody.FUR_COAT) CoC.instance.mutations.setRearBody(RearBody.FUR_COAT);
 			if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE) player.vaginaType(VaginaClass.EQUINE);

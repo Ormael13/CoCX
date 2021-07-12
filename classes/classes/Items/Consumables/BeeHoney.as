@@ -169,8 +169,8 @@ public class BeeHoney extends Consumable
 			}
 			//Horns
 			if (changes < changeLimit && player.horns.count > 0 && player.lowerBody != LowerBody.GARGOYLE && Utils.rand(3) == 0) {
-				outputText("\n\nYour horns crumble, falling apart in large chunks until they flake away to nothing.");
-				mutations.setHornType(Horns.NONE);
+				outputText("\n\n");
+				CoC.instance.transformations.HornsNone.applyEffect();
 				changes++;
 			}
 			// Chitin
@@ -200,14 +200,7 @@ public class BeeHoney extends Consumable
 			//(Arms to carapace-covered arms)
 			if (player.arms.type != Arms.BEE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && Utils.rand(4) == 0) {
 				outputText("\n\n");
-				if (player.arms.type == Arms.SPIDER) outputText("On your upper arms slowly starting to grown yellow fuzz making them looks more like those of bee.");
-				else if (player.arms.type == Arms.MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>. Additionaly on your upper arms appear yellow fuzz.");
-				else {
-					//(Bird pretext)
-					if (player.arms.type == Arms.HARPY) outputText("The feathers covering your arms fall away, leaving them to return to a far more human appearance.  ");
-					outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  A moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining black chitin from the upper arm down, and downy yellow fuzz along your upper arm.");
-				}
-				mutations.setArmType(Arms.BEE);
+				CoC.instance.transformations.ArmsBee.applyEffect();
 				changes++;
 			}
 			//-Nipples reduction to 1 per tit.

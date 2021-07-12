@@ -536,8 +536,7 @@ use namespace CoC;
 			return _modArmorName;
 		}
 
-		public function set modArmorName(value:String):void
-		{
+		public function set modArmorName(value:String):void {
 			if (value == null) value = "";
 			_modArmorName = value;
 		}
@@ -637,7 +636,7 @@ use namespace CoC;
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorDef += (1 * newGamePlusMod);
 			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (arms.type == Arms.DRAGON || arms.type == Arms.FROSTWYRM || arms.type == Arms.SEADRAGON) armorDef += (3 * newGamePlusMod);
+			if (arms.type == Arms.DRACONIC || arms.type == Arms.FROSTWYRM || arms.type == Arms.SEADRAGON) armorDef += (3 * newGamePlusMod);
 			if (arms.type == Arms.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorDef += (2 * newGamePlusMod);
 			if (tailType == Tail.DRACONIC) armorDef += (3 * newGamePlusMod);
@@ -843,7 +842,7 @@ use namespace CoC;
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorMDef += (1 * newGamePlusMod);
 			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorMDef += (2 * newGamePlusMod);
-			if (arms.type == Arms.DRAGON || arms.type == Arms.FROSTWYRM) armorMDef += (3 * newGamePlusMod);
+			if (arms.type == Arms.DRACONIC || arms.type == Arms.FROSTWYRM) armorMDef += (3 * newGamePlusMod);
 			if (arms.type == Arms.HYDRA) armorMDef += (4 * newGamePlusMod);
 			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorMDef += (2 * newGamePlusMod);
 			if (tailType == Tail.DRACONIC) armorMDef += (3 * newGamePlusMod);
@@ -3262,7 +3261,7 @@ use namespace CoC;
 				{name: 'devil', score: devilkinScore(), minscore: 7},
 				{name: 'rhino', score: rhinoScore(), minscore: 4},
 				{name: 'echidna', score: echidnaScore(), minscore: 4},
-				{name: 'ushi-onna', score: ushionnaScore(), minscore: 11},
+				{name: 'ushi-oni', score: ushionnaScore(), minscore: 11},
 				{name: 'satyr', score: satyrScore(), minscore: 4},
 				{name: 'manticore', score: manticoreScore(), minscore: 7},
 				{name: 'red panda', score: redpandaScore(), minscore: 4},
@@ -4213,7 +4212,7 @@ use namespace CoC;
 					if (faceType == Face.HUMAN) race = "echidna-" + mf("boy", "girl");
 				}
 			}
-			if (TopRace == "ushi-onna") {
+			if (TopRace == "ushi-oni") {
 				if (TopScore >= 5) {
 					if (statusEffectv1(StatusEffects.UshiOnnaVariant) == 1) race = "fiery ushi-" + mf("oni", "onna");
 					else if (statusEffectv1(StatusEffects.UshiOnnaVariant) == 2) race = "frozen ushi-" + mf("oni", "onna");
@@ -6210,7 +6209,7 @@ use namespace CoC;
 			if (lowerBody == LowerBody.DRAGON)
 				dragonCounter++;
 				dragonCounter2++;
-			if (arms.type == Arms.DRAGON)
+			if (arms.type == Arms.DRACONIC)
 				dragonCounter++;
 				dragonCounter2++;
 			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES))
@@ -6296,7 +6295,7 @@ use namespace CoC;
 				jabberwockyCounter -= 10;
 			if (lowerBody == LowerBody.DRAGON)
 				jabberwockyCounter++;
-			if (arms.type == Arms.DRAGON)
+			if (arms.type == Arms.DRACONIC)
 				jabberwockyCounter++;
 			if (tallness > 120 && jabberwockyCounter >= 10)
 				jabberwockyCounter++;
@@ -6780,7 +6779,7 @@ use namespace CoC;
 				vouivreCounter++;
 			if (faceType == Face.SNAKE_FANGS)
 				vouivreCounter++;
-			if (arms.type == Arms.DRAGON)
+			if (arms.type == Arms.DRACONIC)
 				vouivreCounter++;
 			if (hasCoatOfType(Skin.DRAGON_SCALES))
 				vouivreCounter++;
@@ -7895,7 +7894,7 @@ use namespace CoC;
 				raijuCounter++;
 			if (faceType == Face.WEASEL)
 				raijuCounter++;
-			if (arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_2)
+			if (arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_PAWS)
 				raijuCounter++;
 			if (lowerBody == LowerBody.RAIJU)
 				raijuCounter++;
@@ -9861,15 +9860,15 @@ use namespace CoC;
 			var ushionnaCounter:Number = 0;
 			if (ears.type == Ears.COW)
 				ushionnaCounter++;
-			if (tailType == Tail.USHI_ONI_ONNA)
+			if (tailType == Tail.USHI_ONI)
 				ushionnaCounter++;
-			if (faceType == Face.USHI_ONI_ONNA)
+			if (faceType == Face.USHI_ONI)
 				ushionnaCounter++;
-			if (horns.type == Horns.USHI_ONI_ONNA)
+			if (horns.type == Horns.USHI_ONI)
 				ushionnaCounter++;
-			if (arms.type == Arms.USHI_ONI_ONNA)
+			if (arms.type == Arms.USHI_ONI)
 				ushionnaCounter++;
-			if (lowerBody == LowerBody.USHI_ONI_ONNA)
+			if (lowerBody == LowerBody.USHI_ONI)
 				ushionnaCounter += 2;
 			if (skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY)
 				ushionnaCounter += 2;
@@ -15326,6 +15325,23 @@ use namespace CoC;
 			//mainView.statsView.showUpDown();
 			EngineCore.showUpDown();
 			EngineCore.statScreenRefresh();
+		}
+
+		public function get changeLimit():int {
+			var changeLimit: int = 1;
+			if (hasPerk(PerkLib.HistoryAlchemist) || hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
+			if (hasPerk(PerkLib.Enhancement)) changeLimit++;
+			if (hasPerk(PerkLib.Fusion)) changeLimit++;
+			if (hasPerk(PerkLib.Enchantment)) changeLimit++;
+			if (hasPerk(PerkLib.Refinement)) changeLimit++;
+			if (hasPerk(PerkLib.Saturation)) changeLimit++;
+			if (hasPerk(PerkLib.Perfection)) changeLimit++;
+			if (hasPerk(PerkLib.Creationism)) changeLimit++;
+			if (hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
+			if (hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+    	if (blockingBodyTransformations()) changeLimit = 0;
+
+			return changeLimit;
 		}
 	}
 }

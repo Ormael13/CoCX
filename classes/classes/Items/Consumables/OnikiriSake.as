@@ -33,18 +33,7 @@ public class OnikiriSake extends Consumable {
 
 	override public function useItem():Boolean {
 		var changes:Number = 0;
-		var changeLimit:Number = 1;
-		if (rand(3) == 0) changeLimit++;
-		if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-		if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-		if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-		if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-		if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-		if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-		if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-		if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-		if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-		if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+		var changeLimit:Number = player.changeLimit;
 		//Temporary storage
 		var temp:Number = 0;
 		player.slimeFeed();
@@ -134,55 +123,40 @@ public class OnikiriSake extends Consumable {
 		//Arms
 		if (player.arms.type != Arms.ONI && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.ONI && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-			if (player.arms.type != Arms.HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
-			outputText("The skin on your arms feels like it’s burning as a whole set of intricate warlike tattoos covers them. Furthermore your nails become increasingly pointed turning black just like a set of claws. Well it seems you will have issues hiding your <b>war tattooed arms with sharp nails.</b>");
-			mutations.setArmType(Arms.ONI);
+			CoC.instance.transformations.ArmsOni.applyEffect();
 			changes++;
 		}
 		//Horn
 		if (rand(3) == 0 && changes < changeLimit && (player.horns.type != Horns.ONI_X2 || player.horns.type != Horns.ONI) && player.arms.type == Arms.ONI) {
 			outputText("\n\n");
 			if (rand(2) == 0) {
-				if (player.horns.type == Horns.NONE) outputText("You moan in pleasure as a pair of bony horns push forward out of your forehead,");
-				else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning,");
-				outputText(" the things are actually surprisingly sensitive and you reach orgasm just from them reaching full size,");
-				if (player.gender == 1 || player.gender == 3) outputText(" your [cock] splatering cum on the ground");
-				if (player.gender == 3) outputText(" and");
-				if (player.gender == 2 || player.gender == 3) outputText(" your pussy gushing with a copious amount of juice");
-				outputText(". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a pair of horns just like an oni.</b>");
-				mutations.setHornType(Horns.ONI_X2, 1);
+				CoC.instance.transformations.HornsOniDual.applyEffect();
 			}
 			else {
-				if (player.horns.type == Horns.NONE) outputText("You moan in pleasure as a single bony horns push forward out of your forehead,");
-				else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning and merging into one,");
-				outputText(" the thing is actually surprisingly sensitive and you reach orgasm just from it reaching full size,");
-				if (player.gender == 1 || player.gender == 3) outputText(" your [cock] splatering cum on the ground");
-				if (player.gender == 3) outputText(" and");
-				if (player.gender == 2 || player.gender == 3) outputText(" your pussy gushing with a copious amount of juice");
-				outputText(". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a horns just like an oni.</b>");
-				mutations.setHornType(Horns.ONI, 1);
+				CoC.instance.transformations.HornsOni.applyEffect();
 			}
 			changes++;
 		}
 		//Eyes
-		if ((player.horns.type == Horns.ONI_X2 || player.horns.type == Horns.ONI) && (!CoC.instance.transformations.EyesOni.isPresent() || !CoC.instance.transformations.EyesOniColors.isPresent()) && changes < changeLimit && rand(3) == 0) {
-			if (!CoC.instance.transformations.EyesOniColors.isPresent()) {
+		if ((player.horns.type == Horns.ONI_X2 || player.horns.type == Horns.ONI) && (CoC.instance.transformations.EyesOni.isPossible() || CoC.instance.transformations.EyesOniColors.isPossible()) && changes < changeLimit && rand(3) == 0) {
+			if (CoC.instance.transformations.EyesOniColors.isPossible()) {
 				CoC.instance.transformations.EyesOniColors.applyEffect();
 			}
 
-			if (!CoC.instance.transformations.EyesOni.isPresent()) {
+			if (CoC.instance.transformations.EyesOni.isPossible()) {
 				CoC.instance.transformations.EyesOni.applyEffect();
 			}
 			changes++;
 		}
 		//Ears
 		if (player.eyes.type == Eyes.ONI && player.ears.type == Ears.HUMAN && player.ears.type != Ears.ONI && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYour ears tingle slightly as their shape sharpen to a point not unlike those of some kind of demonic fiend. Still you know all too well those are <b>Oni ears.</b>");
-			mutations.setEarType(Ears.ONI);
+			outputText("\n\n");
+			CoC.instance.transformations.EarsOni.applyEffect();
 			changes++;
 		}
 		if (player.eyes.type == Eyes.ONI && player.ears.type != Ears.HUMAN && player.ears.type != Ears.ONI && changes < changeLimit && rand(3) == 0) {
-			mutations.humanizeEars();
+			outputText("\n\n");
+			CoC.instance.transformations.EarsHuman.applyEffect();
 			changes++;
 		}
 		//Face

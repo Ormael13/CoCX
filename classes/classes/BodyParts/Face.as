@@ -285,8 +285,8 @@ public class Face extends SaveableBodyPart {
 		name: "kuudere",
 		humanShaped: true
 	});
-	public static const USHI_ONI_ONNA: int = 52;
-	EnumValue.add(Types, USHI_ONI_ONNA, "USHI_ONI_ONNA", {
+	public static const USHI_ONI: int = 52;
+	EnumValue.add(Types, USHI_ONI, "USHI_ONI", {
 		name: "ushi-oni",
 		bite: true,
 		humanShaped: true

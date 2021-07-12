@@ -109,8 +109,8 @@ public class Skin extends SaveableBodyPart {
 	EnumValue.add(PatternTypes, PATTERN_WHITE_BLACK_VEINS, "WHITE_BLACK_VEINS", {name:"white and black veins", base:true});
 	public static const PATTERN_VENOMOUS_MARKINGS:int = 11;
 	EnumValue.add(PatternTypes, PATTERN_VENOMOUS_MARKINGS, "VENOMOUS_MARKINGS", {name:"venomous markings", base:true});
-	public static const PATTERN_USHI_ONI_ONNA_TATTOO:int = 12;
-	EnumValue.add(PatternTypes, PATTERN_USHI_ONI_ONNA_TATTOO, "USHI_ONI_ONNA_TATTOO", {name:"ushi-oni tattoo", base:true});
+	public static const PATTERN_USHI_ONI_TATTOO:int = 12;
+	EnumValue.add(PatternTypes, PATTERN_USHI_ONI_TATTOO, "USHI_ONI_TATTOO", {name:"ushi-oni tattoo", base:true});
 	public static const PATTERN_SCAR_WINDSWEPT:int = 13;
 	EnumValue.add(PatternTypes, PATTERN_SCAR_WINDSWEPT, "SCAR_WINDSWEPT", {name:"windswept scars", base:true});
 	public static const PATTERN_OIL:int = 14;
@@ -382,7 +382,7 @@ public class Skin extends SaveableBodyPart {
 		return base.pattern == PATTERN_WHITE_BLACK_VEINS;
 	}
 	public function hasUshiOniOnnaTattoo():Boolean {
-		return base.pattern == PATTERN_USHI_ONI_ONNA_TATTOO;
+		return base.pattern == PATTERN_USHI_ONI_TATTOO;
 	}
 	override public function restore(keepTone:Boolean = true):void {
 		coverage = COVERAGE_NONE;

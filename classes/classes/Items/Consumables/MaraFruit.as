@@ -249,8 +249,8 @@ public class MaraFruit extends Consumable{
 		}
 		//Arms
 		if ((player.lowerBody == LowerBody.PLANT_HIGH_HEELS || player.lowerBody == LowerBody.PLANT_ROOT_CLAWS) && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.PLANT) && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>");
-			mutations.setArmType(Arms.PLANT);
+			outputText("\n\n");
+			CoC.instance.transformations.ArmsPlant.applyEffect();
 			changes++;
 		}
 		//Wings slot aka tentacle cockvine wings
@@ -265,12 +265,12 @@ public class MaraFruit extends Consumable{
 		}
 		//Ears
 		if (player.ears.type != Ears.ELFIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
+			outputText("\n\n");
+			CoC.instance.transformations.EarsElfin.applyEffect();
 			changes++;
-			mutations.setEarType(Ears.ELFIN);
 		}
 
-		if (!CoC.instance.transformations.EyesPlantColors.isPresent() && changes < changeLimit && rand(4) == 0) {
+		if (CoC.instance.transformations.EyesPlantColors.isPossible() && changes < changeLimit && rand(4) == 0) {
 			CoC.instance.transformations.EyesPlantColors.applyEffect(false);
 			outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady yourself and open your eyes, you realize something seems different, as if the nerves have been optimized.  Your vision has been changed somehow absorbing more light then normal. When you go look into a water puddle you notice your the changes in full. <b>Your eyes color has changed to [eyecolor].</b>");
 			changes++;
@@ -305,27 +305,13 @@ public class MaraFruit extends Consumable{
 		if ((player.hairType == Hair.LEAF || player.hairType == Hair.GRASS) && changes < changeLimit && rand(2) == 0) {
 			//Males/genderless get oak horns
 			if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
-				if (player.horns.count == 0) {
-					outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  Small bulges on either side of your head advance outwards in a straight line, eventually spreading out in multiple directions like a miniature tree.  Investigating the exotic additions sprouting from your head, the situation becomes clear.  <b>You've grown oak horns!</b>");
-					mutations.setHornType(Horns.OAK, 4 + rand(4));
-				}
-				if (player.horns.count > 0 && player.horns.type != Horns.OAK) {
-					outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else.  Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained oak horns!</b>");
-					mutations.setHornType(Horns.OAK, 4 + rand(4));
-				}
+				outputText("\n\n");
+				CoC.instance.transformations.HornsOak.applyEffect();
 			}
 			//Females/futa get orchid flowers
 			else {
-				if (player.horns.count == 0 && player.horns.type == Horns.NONE) {
-					outputText("\n\nA spot on each side of your head has been getting steadily sorer.  You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your [hair]. A huge orchids is now flourishing their floppy petals and stamen above your head!  <b>You've grown twin orchid flowers!</b>");
-					mutations.setHornType(Horns.ORCHID, 2);
-					player.coatColor = "pink";
-				}
-				if (player.horns.count > 0 && player.horns.type != Horns.ORCHID) {
-					outputText("\n\nYour old horns slowly crumbling away until nothing is left.  Then a spot on each side of your head has been getting steadily sorer.  You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your [hair]. A huge pair of orchids is now flourishing their floppy petals and stamen above your head!  <b>You've grown a pair of orchid flowers!</b>");
-					mutations.setHornType(Horns.ORCHID, 2);
-					player.coatColor = "pink";
-				}
+				outputText("\n\n");
+				CoC.instance.transformations.HornsOrchid.applyEffect();
 			}
 			changes++;
 		}

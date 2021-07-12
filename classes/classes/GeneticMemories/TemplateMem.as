@@ -2,12 +2,12 @@ package classes.GeneticMemories {
   import classes.BaseContent;
   import classes.StatusEffects;
   import classes.BodyParts.*;
-  import classes.BodyParts.Temp;
+  import classes.BodyParts.Example;
 	import classes.internals.EnumValue;
 	import classes.Transformations.Transformation;
 	import classes.CoC;
 
-  public class TempMem extends BaseContent {
+  public class ExampleMem extends BaseContent {
 	/**
 	 * Entry properties:
 	 * - metamorphCost: how much SF it costs to metamorph this part (is discounted automatically in Metamorph.as, do not alter the player's SF in metamorphFunc)
@@ -18,7 +18,7 @@ package classes.GeneticMemories {
 
 		public static const [NAME HERE]:int = [ID HERE];
 		EnumValue.add(Memories, [NAME HERE], "[NAME HERE]", {
-			name: [Full Name to identify],
+			name: [Name Saved in GeneticStorage],
 			metamorphCost: [Cost Here],
 			metamorphTitle: "[Race Here]",
 			transformation: function(): Transformation {

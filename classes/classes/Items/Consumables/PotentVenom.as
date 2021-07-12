@@ -90,12 +90,13 @@ public class PotentVenom extends Consumable {
 		}
 		//Arms
 		if (player.arms.type != Arms.HUMAN && player.arms.type != Arms.CENTIPEDE && changes < changeLimit && rand(3) == 0) {
-			mutations.humanizeArms();
+			outputText("\n\n");
+			CoC.instance.transformations.ArmsHuman.applyEffect();
 			changes++;
 		}
 		if (player.arms.type != Arms.CENTIPEDE && player.arms.type == Arms.HUMAN && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYour arms feel strangely warm. You look down at them, noticing purple markings being etched into your skin. Your nails sharpen and take on the same purple hue. <b>You could do some serious damage with your sharp nails.</b>");
-			mutations.setArmType(Arms.CENTIPEDE);
+			outputText("\n\n");
+			CoC.instance.transformations.ArmsCentipede.applyEffect();
 			changes++;
 		}
 		//Antenna
@@ -106,8 +107,8 @@ public class PotentVenom extends Consumable {
 		}
 		//Ears
 		if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
-			mutations.setEarType(Ears.ELFIN);
+			outputText("\n\n");
+			CoC.instance.transformations.EarsElfin.applyEffect();
 			changes++;
 		}
 		//Face

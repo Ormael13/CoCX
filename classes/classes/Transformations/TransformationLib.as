@@ -1,6 +1,7 @@
 package classes.Transformations {
 import classes.BaseContent;
 
+import classes.BodyParts.Horns;
 import classes.BodyParts.Hair;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
@@ -261,6 +262,461 @@ public class TransformationLib extends MutationsHelper {
 			}
 	);
 
+	/***
+	 *    ██   ██  ██████  ██████  ███    ██ ███████
+	 *    ██   ██ ██    ██ ██   ██ ████   ██ ██
+	 *    ███████ ██    ██ ██████  ██ ██  ██ ███████
+	 *    ██   ██ ██    ██ ██   ██ ██  ██ ██      ██
+	 *    ██   ██  ██████  ██   ██ ██   ████ ███████
+	 */
+	public const HornsNone: Transformation = new SimpleTransformation("No Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        if (player.horns.type == Horns.ORCHID) desc += "Your orchid flowers crumble, falling apart";
+	        else desc += "Your horns crumble, falling apart in large chunks";
+	        desc += " until they flake away to nothing.";
+	        player.horns.count = 0;
+	        player.horns.type = Horns.NONE;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("No Horns", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.NONE;
+	    }
+	);
+
+	public const HornsBicorn: Transformation = new SimpleTransformation("Bicorn Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        if (player.horns.type == Horns.NONE) desc += "With painful pressure, the skin on your forehead splits around two tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland.";
+	        else desc += "Your horns vibrate and shift as if made of clay, reforming into horns with a bicorn-like shape.";
+	        player.horns.count = 2;
+	        player.horns.type = Horns.BICORN;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Bicorn Horns", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.BICORN;
+	    }
+	);
+
+	public const HornsUnicorn: Transformation = new SimpleTransformation("Unicorn Horn",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        if (player.horns.type == Horns.NONE) desc += "With painful pressure, the skin on your forehead splits around tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland.";
+	        else desc += "Your horns vibrate and shift as if made of clay, reforming into horn with a unicorn-like shape.";
+	        player.horns.count = 1;
+	        player.horns.type = Horns.UNICORN;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Unicorn Horn", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.UNICORN;
+	    }
+	);
+
+	public const HornsOniDual: Transformation = new SimpleTransformation("Oni Dual Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        if (player.horns.type == Horns.NONE) desc += "You moan in pleasure as a pair of bony horns push forward out of your forehead,";
+	        else desc += "You begin to feel an odd itching sensation as you feel your horns repositioning,";
+	        desc += " the things are actually surprisingly sensitive and you reach orgasm just from them reaching full size,";
+	        if (player.gender == 1 || player.gender == 3) desc += " your [cock] splatering cum on the ground";
+	        if (player.gender == 3) desc += " and";
+	        if (player.gender == 2 || player.gender == 3) desc += " your pussy gushing with a copious amount of juice";
+	        desc += ". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a pair of horns just like an oni.</b>";
+	        player.horns.count = 2;
+	        player.horns.type = Horns.ONI_X2;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Oni Dual Horns", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.ONI_X2;
+	    }
+	);
+
+	public const HornsOni: Transformation = new SimpleTransformation("Oni Horn",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        if (player.horns.type == Horns.NONE) desc += "You moan in pleasure as a single bony horns push forward out of your forehead,";
+	        else desc += "You begin to feel an odd itching sensation as you feel your horns repositioning and merging into one,";
+	        desc += " the thing is actually surprisingly sensitive and you reach orgasm just from it reaching full size,";
+	        if (player.gender == 1 || player.gender == 3) desc += " your [cock] splatering cum on the ground";
+	        if (player.gender == 3) desc += " and";
+	        if (player.gender == 2 || player.gender == 3) desc += " your pussy gushing with a copious amount of juice";
+	        desc += ". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a horns just like an oni.</b>";
+	        player.horns.count = 1;
+	        player.horns.type = Horns.ONI;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Oni Horn", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.ONI;
+	    }
+	);
+
+	public const HornsGoat: Transformation = new SimpleTransformation("Goat Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        if (player.horns.type == Horns.NONE) {
+						desc += "You begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of hard stubs. <b>You now have a pair of goat horns.</b>";
+					} else if(player.horns.type == Horns.GOATQUAD) {
+						desc += "You begin to feel an odd itching sensation as you feel your horns repositioning and merging back togueter. Once it's over, you reach up and find a pair of tall-standing goat horns where your four horns used to be. <b>You now have a pair of goat horns.</b>"
+					} else desc += "You begin to feel an odd itching sensation as you feel your horns repositioning. Once it's over, you reach up and find a pair of hard stubs. <b>You now have a pair of goat horns.</b>";
+
+	        player.horns.count = 1;
+	        player.horns.type = Horns.GOAT;
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Goat Horns", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.GOAT;
+	    }
+	);
+
+	public const HornsGoatQuadruple: Transformation = new SimpleTransformation("Goat Quadruple Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        if(player.horns.type == Horns.GOAT) {
+						desc += "You groan in pleasure mixed pains as your horns begins to split into a second pair ornating the side of your head. If the original pair made you look fiendish your four horns now definitively denounce your demonic nature. <b> You now have four devil horns curving backward behind your head.</b>"
+					}
+
+	        player.horns.count = 1;
+	        player.horns.type = Horns.GOATQUAD;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.GOAT;
+	    }
+	);
+
+	public const HornsDraconicQuadruple: Transformation = new SimpleTransformation("Draconic Quadruple Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+					TransformationUtils.applyTFIfNotPresent(transformations.HornsDraconicDual, doOutput);
+
+					if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
+						desc += "Your horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish <b>you have four draconic-looking horns, each about twelve inches long.</b>"
+					} else {
+						desc += "A second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop. A sense of finality settles over you. <b>You have four draconic-looking horns, each about twelve inches long.</b>";
+					}
+
+					player.horns.count = 12;
+	        player.horns.type = Horns.DRACONIC_X4_12_INCH_LONG;
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Draconic Quadruple Horns", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.DRACONIC_X4_12_INCH_LONG;
+	    }
+	);
+
+	public const HornsDraconicDual: Transformation = new SimpleTransformation("Draconic Dual Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+					if (player.horns.type === Horns.NONE) {
+						desc += "With painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horns sprout from your head before stopping.  <b>You have about four inches of dragon-like horns.</b>";
+					} else {
+						desc += "You feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. They must look something like the horns the dragons in your village's legends always had.";
+
+						if (player.horns.count > 13) {
+							desc += " The change seems to have shrunken the horns, they're about a foot long now.";
+							player.horns.count = 12;
+						}
+					}
+
+					if (player.horns.count < 4) {
+	        	player.horns.count = 4;
+					}
+
+	        player.horns.type = Horns.DRACONIC_X2;
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Draconic Dual Horns", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.DRACONIC_X2;
+	    }
+	);
+
+	public const HornsCowMinotaur: Transformation = new SimpleTransformation("Cow Minotaur Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.NONE) {
+	            if (player.horns.type == Horns.COW_MINOTAUR) {
+	                if (player.horns.count < 5) {
+	                    desc += "Your small horns get a bit bigger, stopping as medium sized nubs.";
+	                    player.horns.count += 1 + rand(2);
+	                }
+	            }
+	            if (player.horns.type == Horns.NONE || player.horns.count == 0) {
+	                desc += "With painful pressure, the skin on your forehead splits around two tiny nub-like horns, similar to those you would see on the cattle back in your homeland.";
+	                player.horns.count = 1;
+	            }
+	            if (player.horns.type != Horns.NONE && player.horns.type != Horns.COW_MINOTAUR && player.horns.type != Horns.ORCHID && player.horns.count > 0) {
+	                desc += "Your horns twist, filling your skull with agonizing pain for a moment as they transform into cow-horns.";
+	            }
+	        }
+	        if ((player.horns.type == Horns.DEMON || player.horns.type > Horns.COW_MINOTAUR) && player.horns.type != Horns.ORCHID) {
+	            desc += "Your horns vibrate and shift as if made of clay, reforming into two small bovine nubs.";
+	            player.horns.count = 2;
+	        }
+	        player.horns.type = Horns.COW_MINOTAUR;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Cow minotaur Horns", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.COW_MINOTAUR;
+	    }
+	);
+
+	public const HornsDemonic: Transformation = new SimpleTransformation("Demonic Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        if (player.horns.count < 12 && (player.horns.type == Horns.NONE || player.horns.type == Horns.DEMON)) {
+	            desc += "";
+	            if (player.horns.count == 0) {
+	                desc += "A small pair of demon horns erupts from your forehead. They actually look kind of cute. <b>You have horns!</b>";
+	            } else desc += "Another pair of demon horns, larger than the last, forms behind the first row.";
+	        } else if (player.horns.type > Horns.DEMON && player.horns.type != Horns.ORCHID) {
+	            desc += "";
+	            desc += "Your horns shift, shrinking into two small demonic-looking horns.";
+	        }
+	        player.horns.count = 2;
+	        player.horns.type = Horns.DEMON;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Demon Horns", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.DEMON;
+	    }
+	);
+
+	public const HornsAntlers: Transformation = new SimpleTransformation("Antlers Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+					if (player.horns.type === Horns.NONE) {
+						desc += "You hear the sound of cracking branches erupting from the tip of your skull. Small bulges on either side of your head advance outwards in a straight line, eventually spreading out in multiple directions like a miniature tree.  Investigating the exotic additions sprouting from your head, the situation becomes clear. <b>You've grown antlers!</b>";
+					} else {
+						desc += "You hear the sound of cracking branches erupting from the tip of your skull.  The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else.  Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained antlers!</b>";
+					}
+
+	        player.horns.count = 4 + rand(12);
+
+	        player.horns.type = Horns.ANTLERS;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.ANTLERS;
+	    }
+	);
+
+	public const HornsAntlersWendigo: Transformation = new SimpleTransformation("Wendigo Antlers Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+				var desc: String = "";
+
+				transformations.HornsAntlers.applyEffect(false);
+				player.horns.count = 30;
+
+	      if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.ANTLERS && player.horns.count >= 30;
+	    }
+	);
+
+	public const HornsGhostlyWisps: Transformation = new SimpleTransformation("Ghostly Wisps Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+					if (player.horns.type === Horns.NONE) {
+						desc += "You notice something bright moving out of the corner of your eye. You look over to see an ethereal ball of light floating above your head. You can see four more floating with it slowly circling above your head. You touch one, surprised that you can actually feel it accompanied by a chilling sensation. <b>It seems that these ghostly wisps are a part of you.</b>";
+					} else {
+						desc += "Your old horns slowly crumbling away until nothing is left. Then you notice something bright moving out of the corner of your eye. You look over to see an ethereal ball of light floating above your head. You can see four more floating with it slowly circling above your head. You touch one, surprised that you can actually feel it accompanied by a chilling sensation. <b>It seems that these ghostly wisps are a part of you.</b>";
+					}
+
+	        player.horns.count = 2;
+	        player.horns.type = Horns.GHOSTLY_WISPS;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.GHOSTLY_WISPS;
+	    }
+	);
+
+	public const HornsOak: Transformation = new SimpleTransformation("Oak Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+					if (player.horns.type === Horns.NONE) {
+						desc += "You hear the sound of cracking branches erupting from the tip of your skull.  Small bulges on either side of your head advance outwards in a straight line, eventually spreading out in multiple directions like a miniature tree.  Investigating the exotic additions sprouting from your head, the situation becomes clear.  <b>You've grown oak horns!</b>";
+					} else {
+						desc += "You hear the sound of cracking branches erupting from the tip of your skull.  The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else.  Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained oak horns!</b>";
+					}
+
+	        player.horns.count = 4 + rand(12);
+
+	        player.horns.type = Horns.OAK;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.OAK;
+	    }
+	);
+
+	public const HornsOrchid: Transformation = new SimpleTransformation("Orchid Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+					if (player.horns.type === Horns.NONE) {
+						desc += "A spot on each side of your head has been getting steadily sorer.  You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your [hair]. A huge orchids is now flourishing their floppy petals and stamen above your head!  <b>You've grown twin orchid flowers!</b>";
+					} else {
+						desc += "Your old horns slowly crumbling away until nothing is left.  Then a spot on each side of your head has been getting steadily sorer.  You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your [hair]. A huge pair of orchids is now flourishing their floppy petals and stamen above your head! <b>You've grown a pair of orchid flowers!</b>";
+					}
+
+	        player.horns.count = 2;
+	        player.horns.type = Horns.ORCHID;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.ORCHID;
+	    }
+	);
+
+	public const HornsKraken: Transformation = new SimpleTransformation("Kraken Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+					desc += "You feel like your head is going to explode and, in a way, it does. Something large and fleshy grows out of the top of your head. When you move toward the water to check your reflection, you discover that you have grown a <b>large fleshy hood, crowning your head just like a Kraken.</b>";
+
+	        player.horns.count = 4 + rand(12);
+	        player.horns.type = Horns.KRAKEN;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.KRAKEN;
+	    }
+	);
+
+	public const HornsSeadragon: Transformation = new SimpleTransformation("Seadragon Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+					if (player.horns.type === Horns.NONE) {
+						desc += "You writhe in pain as two bony extrusions begin to push out of the side of your head. As a skull-splitting headache wracks through you, in an instant, the pain subsides as you feel two large, scale-colored horns on your head. They are as sensitive as they are sturdy.\n\nA quick look at a puddle also reveals they radiate several specks of bioluminescent light along the horns accompanied by red tips. <b>You have about twelve inches of sea dragon-like horns!</b>";
+					} else {
+						if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
+              desc += "Your horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have two sea dragon horns, each about twelve inches long.";
+              player.horns.count = 12;
+            } else {
+              desc += "\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They look must look like the horns of a sea dragon.";
+              if (player.horns.count > 13) {
+                  desc += " The change also seems to have shrunken the horns, they're about a foot long now.";
+                  player.horns.count = 12;
+              }
+            }
+					}
+
+	        player.horns.count = 4;
+	        player.horns.type = Horns.SEADRAGON;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.SEADRAGON;
+	    }
+	);
+
+	public const HornsFrostwyrm: Transformation = new SimpleTransformation("Frostwyrm Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+					TransformationUtils.applyTFIfNotPresent(transformations.HornsNone);
+
+					desc += "You write in pain as two bony lumps begins to push out of the side of your head. The transformation gives you a hell of a headache but as soon as it is over you feel for the two large spiraling horns on your head similar to those of a ram and unsurprisingly they are as sensitive as they are sturdy. <b>You now have frost wyrm horns!</b>";
+
+	        player.horns.count = 2;
+
+	        player.horns.type = Horns.FROSTWYRM;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.FROSTWYRM;
+	    }
+	);
+
+	public const HornsUshiOni: Transformation = new SimpleTransformation("Ushi-Oni Horns",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+					desc += "From the back of your head you feel like something is pushing out of your skull and from the pressure a pair of horns begin to grow, continuing to get bigger and bigger, curving up along the sides of your head. You reach up to feel them and see they have a spiral shape, <b>you now have an Ushi-Oni pair of horns.</b>";
+
+	        player.horns.count = 2;
+
+	        player.horns.type = Horns.USHI_ONI;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.horns.type === Horns.USHI_ONI;
+	    }
+	);
 
 	/***
 	 *    ██   ██  █████  ██████ ██████
@@ -1584,11 +2040,11 @@ public class TransformationLib extends MutationsHelper {
 				desc += "You feel something under the skin around your eyes and in your mouth as they begin to burn, smoke coming out of it, from the bottom of your eyes, circling to the upper part. In your mouth your teeth make cracking noises as they remodel themselves. After the torturing experience you feel like <b>you've gained Ushi-" + player.mf("Oni", "Onna") + " fangs,</b> going to a barrel with water you see your face now has a strange tattoo around your eyes.";
 
 				if (doOutput) outputText(desc);
-				player.faceType = Face.USHI_ONI_ONNA;
+				player.faceType = Face.USHI_ONI;
 			},
 			// is present
 			function ():Boolean {
-				return player.faceType === Face.USHI_ONI_ONNA;
+				return player.faceType === Face.USHI_ONI;
 			}
 	);
 
@@ -1862,26 +2318,706 @@ public class TransformationLib extends MutationsHelper {
 	 *
 	 *
 	 */
-	public const EarsElfin:Transformation = new SimpleTransformation("Elfin ears",
-			// apply effect
-			function (doOutput:Boolean):void {
-				var desc: String = "";
+  public const EarsHuman: Transformation = new SimpleTransformation("Human Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
 
-				if (player.ears.type != Ears.HUMAN) {
-					desc += "Your ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>";
-				} else {
-					desc += "A weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!";
+          desc += "Ouch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!";
+          player.ears.type = Ears.HUMAN;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Human Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.HUMAN;
+      }
+  );
+
+  public const EarsLion: Transformation = new SimpleTransformation("Lion Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+					if (player.ears.type == Ears.HUMAN) {
+						if (rand(3) == 0) desc += "The skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head. They shift and elongate a little, fur growing on them as they become feline in nature. <b>You now have lion ears.</b>";
+						else if (rand(3) == 1) desc += "Your ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they've migrated up to the top of your head and increased in size. The tingling stops and you find yourself hearing noises in a whole new way. <b>You now have lion ears.</b>";
+						else desc += "Your ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have lion ears.</b>";
+					} else {
+						if (rand(2) == 0) desc += "Your ears change shape, morphing into round, feline ears not unlike those of a lion!  They swivel about reflexively as you adjust to them.  <b>You now have lion ears.</b>";
+						else desc += "Your ears tingle and begin to change shape. Within a few moments, they've become long and feline.  Thanks to the new fuzzy organs, you find yourself able to hear things that eluded your notice up until now. <b>You now have lion ears.</b>";
 					}
 
+          player.ears.type = Ears.LION;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Lion Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.LION;
+      }
+  );
 
-				if (doOutput) outputText(desc);
-				setEarType(Ears.ELFIN);
-			},
-			// is present
-			function ():Boolean {
-				return player.ears.type === Ears.ELFIN
-			}
-	)
+  public const EarsDisplacer: Transformation = new SimpleTransformation("Displacer Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Your ears begin to prickle and burn as the skin tears and stretches migrating to the top of your head as they change into long wide, deep ears, perfect for catching any stray sound. Which becomes apparent when your hearing becomes far more clear than it has ever been. <b>Sound has become an entirely new experience now that you have displacer beast ears!</b>";
+          player.coatColor = "midnight";
+          player.ears.type = Ears.DISPLACER;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Displacer Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.DISPLACER;
+      }
+  );
+
+  public const EarsCat: Transformation = new SimpleTransformation("Cat Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          if (player.ears.type == Ears.HUMAN) {
+              if (rand(2) == 0) desc += "The skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head. They shift and elongate a little, fur growing on them as they become feline in nature. <b>You now have cat ears.</b>";
+              else desc += "Your ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they've migrated up to the top of your head and increased in size. The tingling stops and you find yourself hearing noises in a whole new way. <b>You now have cat ears.</b>";
+          } else {
+              if (rand(2) == 0) desc += "Your ears change shape, morphing into pointed, feline ears! They swivel about reflexively as you adjust to them. <b>You now have cat ears.</b>";
+              else desc += "Your ears tingle and begin to change shape. Within a few moments, they've become long and feline. Thanks to the new fuzzy organs, you find yourself able to hear things that eluded your notice up until now. <b>You now have cat ears.</b>";
+          }
+          player.ears.type = Ears.CAT;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Cat Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.CAT;
+      }
+  );
+
+  public const EarsRedPanda: Transformation = new SimpleTransformation("RedPanda Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+					if (flags[kFLAGS.MINO_CHEF_TALKED_RED_RIVER_ROOT] > 0) desc+= "The warned dizziness";
+          else desc += "A sudden dizziness";
+
+          desc += " seems to overcome your head. Your ears tingle, and you’re sure you can feel the flesh on them shifting, as you gradually have trouble hearing. A couple of minutes later the feeling stops. Curious of what has changed you go to check yourself on the stream, only to find that they’ve changed into cute, triangular ears, covered with white fur. <b>You’ve got red-panda ears!</b>";
+          player.ears.type = Ears.RED_PANDA;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Red_panda Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.RED_PANDA;
+      }
+  );
+
+  public const EarsHorse: Transformation = new SimpleTransformation("Horse Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+					if (player.ears.type == -1) desc += "Two painful lumps sprout on the top of your head, forming into tear-drop shaped ears, covered with short fur.  ";
+          if (player.ears.type == Ears.HUMAN) desc += "Your ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into a upright animalistic ears. ";
+          if (player.ears.type == Ears.DOG) desc += "Your ears change shape, morphing into from their doglike shape into equine-like ears! ";
+          else desc += "Your ears change shape, morphing into teardrop-shaped horse ears! ";
+          desc += "<b>You now have horse ears.</b>";
+          player.ears.type = Ears.HORSE;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Horse Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.HORSE;
+      }
+  );
+
+  public const EarsPig: Transformation = new SimpleTransformation("Pig Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "You feel a pressure on your ears as they begin to reshape. Once the changes finish, you flick them about experimentally, <b>and you’re left with pointed, floppy pig ears.</b>";
+          player.ears.type = Ears.PIG;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Pig Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.PIG;
+      }
+  );
+
+  public const EarsVampire: Transformation = new SimpleTransformation("Vampire Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+					TransformationUtils.applyTFIfNotPresent(transformations.EarsHuman, doOutput);
+
+          desc += "Your ears begin to prickle as they elongate to a point, being now reminiscent of those of elves, goblins, or in your case, vampires. Aside from looking cute, you find your new ears have drastically improved your hearing. <b>Sound has become an entirely new experience now that you have pointy vampire ears!</b>";
+
+          player.ears.type = Ears.VAMPIRE;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Vampire Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.VAMPIRE;
+      }
+  );
+
+  public const EarsBat: Transformation = new SimpleTransformation("Bat Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+					TransformationUtils.applyTFIfNotPresent(transformations.EarsHuman, doOutput);
+
+          desc += "Your ears begin to prickle and burn as the skin tears and stretches, changing into wide, deep ears, perfect for catching any stray sound. Which becomes apparent when your hearing becomes far more clear than it has ever been. <b>Sound has become an entirely new experience now that you have bat ears!</b>";
+
+          player.ears.type = Ears.BAT;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Bat Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.BAT;
+      }
+  );
+
+  public const EarsWeasel: Transformation = new SimpleTransformation("Weasel Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          TransformationUtils.applyTFIfNotPresent(transformations.EarsHuman, doOutput);
+
+					if (player.raijuScore() >= 5) {
+						desc += "Your ears twitch as jolt of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new weasel ears!</b>";
+					} else {
+						desc += "Your ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have weasel ears.</b>";
+					}
+
+          player.ears.type = Ears.WEASEL;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Weasel Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.WEASEL;
+      }
+  );
+
+  public const EarsOni: Transformation = new SimpleTransformation("Oni Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Your ears tingle slightly as their shape sharpen to a point not unlike those of some kind of demonic fiend. Still you know all too well those are <b>Oni ears.</b>";
+          player.ears.type = Ears.ONI;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Oni Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.ONI;
+      }
+  );
+
+  public const EarsElven: Transformation = new SimpleTransformation("Elven Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          TransformationUtils.applyTFIfNotPresent(transformations.EarsHuman, doOutput);
+
+          desc += "Sounds become increasingly audible as a weird tingling runs through your scalp and your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed elven ears.</b> The points are quite sensitive and you will have to get used to your new enhanced hearing ability.";
+          player.ears.type = Ears.ELVEN;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Elven Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.ELVEN;
+      }
+  );
+
+  public const EarsGoat: Transformation = new SimpleTransformation("Goat Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Your ears elongate and flatten on your head. You flap them a little and discover they have turned into something similar to the ears of a goat. <b>You now have goat ears!</b>";
+          player.ears.type = Ears.GOAT;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Goat Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.GOAT;
+      }
+  );
+
+  public const EarsCow: Transformation = new SimpleTransformation("Cow Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "You feel your ears tug on your scalp as they twist shape, becoming oblong and cow-like. <b>You now have [haircolor] cow ears.</b>";
+          player.ears.type = Ears.COW;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Cow Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.COW;
+      }
+  );
+
+  public const EarsDraconic: Transformation = new SimpleTransformation("Draconic Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "A prickling sensation suddenly fills your ears; unpleasant, but hardly painful. It grows and grows until you can't stand it any more, and reach up to scratch at them. To your surprise, you find them melting away like overheated candles. You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion. Then, all of a sudden, hearing returns to you. Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head. A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins. With a little patience, you begin to adjust these fins just like ears to aid your hearing. <b>You now have dragon ears!</b>";
+          player.ears.type = Ears.DRAGON;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Draconic Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.DRAGON;
+      }
+  );
+
+  public const EarsSnake: Transformation = new SimpleTransformation("Snake Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "A weird tingling runs through your scalp as your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed ears covered in small scales</b>. You bet they look cute!";
+          player.ears.type = Ears.SNAKE;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Snake Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.SNAKE;
+      }
+  );
+
+  public const EarsOrca: Transformation = new SimpleTransformation("Orca Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Your ears suddenly begin to lengthen, growing bigger and bigger until their length reaches your shoulders. When you examine them you discover they have grown into a pair of large fins, easily twice as big as your head. <b>Orienting yourself underwater will be easy with your large orca fin ears.</b>";
+
+          player.ears.type = Ears.ORCA;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Orca Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.ORCA;
+      }
+  );
+
+  public const EarsOrca2: Transformation = new SimpleTransformation("Orca Ears 2",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Tightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, fleshy bumps with holes in their centers.  <b>You have whales ears!</b>";
+
+          player.ears.type = Ears.ORCA;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.ORCA;
+      }
+  );
+
+  public const EarsLizard: Transformation = new SimpleTransformation("Lizard Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Tightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, scaley bumps with holes in their centers. <b>You have reptilian ears!</b>";
+          player.ears.type = Ears.LIZARD;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Lizard Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.LIZARD;
+      }
+  );
+
+  public const EarsFox: Transformation = new SimpleTransformation("Fox Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          if (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN || player.ears.type == Ears.LIZARD) {
+              desc += "The sides of your face painfully stretch as your ears elongate and begin to push past your hairline, toward the top of your head. They elongate, becoming large vulpine triangles covered in bushy fur. <b>You now have fox ears.</b>";
+          } else {
+              desc += "Your ears change, shifting from their current shape to become vulpine in nature. <b>You now have fox ears.</b>";
+          }
+          player.ears.type = Ears.FOX;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Fox Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.FOX;
+      }
+  );
+
+  public const EarsElfin: Transformation = new SimpleTransformation("Elfin Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+					TransformationUtils.applyTFIfNotPresent(transformations.EarsHuman, doOutput);
+
+          desc += "A weird tingling runs through your scalp as your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed elfin ears</b>!";
+
+					if (player.hasFur()) desc += " As you examine your new elfin ears you feel fur grow around them, matching the rest of you.";
+
+          player.ears.type = Ears.ELFIN;
+          if (doOutput) outputText(desc);
+          Metamorph.unlockMetamorph("Elfin Ears", doOutput);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.ELFIN;
+      }
+  );
+
+  public const EarsWolf: Transformation = new SimpleTransformation("Wolf Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "The skin on the sides of your face stretches painfully as your ears migrate upwards, toward the top of your head. They shift and elongate becoming lupine in nature. You won't have much trouble hearing through the howling blizzards of the glacial rift with <b>your new Lupine ears.</b>";
+
+          player.ears.type = Ears.WOLF;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.WOLF;
+      }
+  );
+
+  public const EarsDog: Transformation = new SimpleTransformation("Dog Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          if (player.ears.type == -1) desc += "Two painful nubs begin sprouting from your head, growing and opening into canine ears.  ";
+          if (player.ears.type == Ears.HUMAN) desc += "The skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head.  They shift and elongate, becoming canine in nature. ";
+          if (player.ears.type == Ears.HORSE) desc += "Your equine ears twist as they transform into canine versions. ";
+          if (player.ears.type > Ears.DOG) desc += "Your ears transform, becoming more canine in appearance. ";
+          desc += "<b>You now have dog ears.</b>";
+
+          player.ears.type = Ears.DOG;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.DOG;
+      }
+  );
+
+  public const EarsGremlin: Transformation = new SimpleTransformation("Gremlin Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Whoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in [haircolor] fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears!</b>";
+
+          player.ears.type = Ears.GREMLIN;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.GREMLIN;
+      }
+  );
+
+  public const EarsShark: Transformation = new SimpleTransformation("Shark Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          if (player.ears.type != Ears.HUMAN) {
+            desc += "Your ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, fin like ears just like those of a shark girl.</b>";
+          } else {
+            desc += "A weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed fin like ears just like those of a shark girl</b>.  You bet they look cute!";
+          }
+
+          player.ears.type = Ears.SHARK;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.SHARK;
+      }
+  );
+
+  public const EarsCaveWyrm: Transformation = new SimpleTransformation("Cave Wyrm Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Your ears suddenly start to tingle. Strangely they change shape into something entirely different from what you would expect on a reptile covering in fur like those of cave wyrms. You can hear sound more acutely with your <b>new cave wyrm furry ears.</b>";
+
+          player.ears.type = Ears.CAVE_WYRM;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.CAVE_WYRM;
+      }
+  );
+
+  public const EarsBunny: Transformation = new SimpleTransformation("Bunny Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Your ears twitch and curl in on themselves, sliding around on the flesh of your head.  They grow warmer and warmer before they finally settle on the top of your head and unfurl into long, fluffy bunny-ears.  <b>You now have a pair of bunny ears.</b>";
+
+          player.ears.type = Ears.BUNNY;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.BUNNY;
+      }
+  );
+
+  public const EarsAvian: Transformation = new SimpleTransformation("Avian Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "You feel your ears twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always.";
+
+          player.ears.type = Ears.AVIAN;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.AVIAN;
+      }
+  );
+
+  public const EarsGryphon: Transformation = new SimpleTransformation("Gryphon Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "After another session under the statue magic, the lingering effects seem to having taken a toll on you, as your ears buzz. The sound turns worse for a second, and then vanish. You hear for a second a light flapping sound, and then, nothing.\n\nWhen everything seems to have finished, you realize that your hearing range has changed, and while your overall sense of hearing remains the same, pinpointing the source of a sounds is much easier. On a nearby reflection you discover the reason: two triangular ears have sprouted at your head, streamlined to flight and with a gryphon like appearance. A short layer of downy feathers covers them, the tip having a distinctive tuft. Checking that your ears are rightly placed on the new auricles, <b>you smile happily at the sight of your gryphon ears,</b> noting how well they compliment your looks.";
+
+          player.ears.type = Ears.GRYPHON;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.GRYPHON;
+      }
+  );
+
+  public const EarsKangaroo: Transformation = new SimpleTransformation("Kangaroo Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          if (player.ears.type == Ears.BUNNY) desc += "Your ears stiffen and shift to the sides!  You reach up and find them pointed outwards instead of up and down; they feel a bit wider now as well.  As you touch them, you can feel them swiveling in place in response to nearby sounds.  <b>You now have a pair of kangaroo ears!</b>";
+          else desc += "Your ears twist painfully as though being yanked upwards and you clap your hands to your head.  Feeling them out, you discover them growing!  They stretch upwards, reaching past your fingertips, and then the tugging stops.  You cautiously feel along their lengths; they're long and stiff, but pointed outwards now, and they swivel around as you listen.  <b>You now have a pair of kangaroo ears!</b>";
+
+          player.ears.type = Ears.KANGAROO;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.KANGAROO;
+      }
+  );
+
+  public const EarsRaiju: Transformation = new SimpleTransformation("Raiju Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Your ears twitch as jolts of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new raiju ears!</b>";
+
+          player.ears.type = Ears.RAIJU;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.RAIJU;
+      }
+  );
+
+  public const EarsSquirrel: Transformation = new SimpleTransformation("Squirrel Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Your ears suddenly stretch painfully, making you scream in pain as they move towards the top of your head, growing bigger. Putting your hands to your ears you discover they are now covered with a fair amount of fur. <b>You now have squirrel ears.</b>";
+
+          player.ears.type = Ears.SQUIRREL;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.SQUIRREL;
+      }
+  );
+
+  public const EarsRaccoon: Transformation = new SimpleTransformation("Raccoon Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          if (player.ears.type == Ears.DOG || player.ears.type == Ears.BUNNY || player.ears.type == Ears.KANGAROO) desc += "Your ears compress, constricting your ear canal momentarily.  You shake your head to get sound back, and reach up to touch the auricles, to find a pair of stubby egg-shaped ears in their place.  <b>You now have raccoon ears!</b>";
+          else if (player.ears.type == Ears.HORSE || player.ears.type == Ears.COW || player.ears.type == Ears.CAT) desc += "Your ears tingle.  Huh.  Do they feel a bit rounder at the tip now?  <b>Looks like you have raccoon ears.</b>";
+          else desc += "Your ears prick and stretch uncomfortably, poking up through your [hair].  Covering them with your hands, you feel them shaping into little eggdrop ornaments resting atop your head.  <b>You have raccoon ears!</b>";
+
+          player.ears.type = Ears.RACCOON;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.RACCOON;
+      }
+  );
+
+  public const EarsMouse: Transformation = new SimpleTransformation("Mouse Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Your ears ";
+          if (player.ears.type == Ears.HORSE || player.ears.type == Ears.COW || player.ears.type == Ears.DOG || player.ears.type == Ears.BUNNY || player.ears.type == Ears.KANGAROO) desc += "shrink suddenly";
+          else desc += "pull away from your head";
+          desc += ", like they're being pinched, and you can distinctly feel the auricles taking a rounded shape through the pain.  Reaching up to try and massage away their stings, <b>you're not terribly surprised when you find a pair of fuzzy mouse's ears poking through your [hair].</b>";
+
+          player.ears.type = Ears.MOUSE;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.MOUSE;
+      }
+  );
+
+  public const EarsFerret: Transformation = new SimpleTransformation("Ferret Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "You squint as you feel a change in your ears.  Inspecting your reflection in a nearby puddle you find that <b>your ears have become small, fuzzy, and rounded, just like a ferret’s!</b>";
+
+          player.ears.type = Ears.FERRET;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.FERRET;
+      }
+  );
+
+  public const EarsYeti: Transformation = new SimpleTransformation("Yeti Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "You feel your ears as though they’re growing bigger for a moment. It feels weird, but when you touch them to check what happened they still feel somewhat human. Looking down in a puddle you notice the term human isn’t correct, in your case they look more like those of a monkey. <b>You now have yeti ears.</b>";
+
+          player.ears.type = Ears.YETI;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.YETI;
+      }
+  );
+
+  public const EarsBear: Transformation = new SimpleTransformation("Bear Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Your ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they’ve migrated up to the top of your head and increased in size, taking on a rounded shape. The tingling stops and you find yourself hearing noises in a whole new way. <b>You could pass for cute with your new bear ears.</b>";
+
+          player.ears.type = Ears.BEAR;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.BEAR;
+      }
+  );
+
+  public const EarsPanda: Transformation = new SimpleTransformation("Panda Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Your ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they’ve migrated up to the top of your head and increased in size, taking on a rounded shape. The tingling stops and you find yourself hearing noises in a whole new way. <b>You could pass for cute with your new panda ears.</b>";
+
+          player.ears.type = Ears.PANDA;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.PANDA;
+      }
+  );
+
+  public const EarsMelkie: Transformation = new SimpleTransformation("Melkie Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "Your ears start feeling weird as they get longer and longer, eventually reaching your knees and covering with fur. These look like the ears of some sea rabbit or mammal, namely a Melkie. <b>You now have Melkie ears safeguarding your audition from the cold.</b>";
+
+          player.ears.type = Ears.MELKIE;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.MELKIE;
+      }
+  );
+
+  public const EarsDeer: Transformation = new SimpleTransformation("Deer Ears",
+      // apply effect
+      function(doOutput: Boolean): void {
+          var desc: String = "";
+
+          desc += "";
+
+          player.ears.type = Ears.DEER;
+          if (doOutput) outputText(desc);
+      },
+      // is present
+      function(): Boolean {
+          return player.ears.type === Ears.DEER;
+      }
+  );
 
 	/***
 	 *    ███████ ██    ██ ███████ ███████
@@ -2016,7 +3152,7 @@ public class TransformationLib extends MutationsHelper {
 
 				TransformationUtils.applyTFIfNotPresent(transformations.EyesHuman, doOutput);
 
-				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["bloody red"]), doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["blood-red"]), doOutput);
 
 				desc += "Your eyes shift, causing sunlight to suddenly become annoyingly bright for you. It takes several minutes for your eyes to get used to it and, once they do, you still have to keep them half closed, so as to not be blinded by the sun’s glare.";
 				desc += " Upon looking at your reflection in the water, you discover your irises have taken on a blood-red shade. <b>You have Vampire Eyes.</b>";
@@ -2772,31 +3908,989 @@ public class TransformationLib extends MutationsHelper {
 	 *    ██   ██ ██   ██ ██      ██ ███████
 	 */
 
-	/**
-	 * Also paint coat black
-	 */
-	public const ArmsSpider:Transformation = new SimpleTransformation("Spider arms",
-			// apply effect
-			function (doOutput:Boolean):void {
-				var desc: String = "";
 
-				if (player.arms.type == Arms.HARPY || player.arms.type == Arms.HUMAN) {
+	public const ArmsHuman: Transformation = new SimpleTransformation("Human Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+					switch (player.arms.type) {
+						case Arms.WOLF:
+						case Arms.FOX:
+						case Arms.LION:
+						case Arms.YETI:
+						case Arms.DEVIL:
+						case Arms.CAT:
+						case Arms.BOAR:
+						case Arms.BEAR:
+						case Arms.RAIJU_PAWS:
+							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind. Also the claws on your fingers reverts back into ordinary nails.";
+							break;
+						case Arms.DISPLACER:
+							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind. Also the claws on your fingers reverts back into ordinary nails.\n\nYou feel highly uncomfortable as your extra set of arms vanishes into your body following the loss of your leonine paw hands. Guess your back with only two arms now.";
+							break;
+						case Arms.ELF:
+						case Arms.KITSUNE:
+						case Arms.ONI:
+						case Arms.ORC:
+						case Arms.RAIJU:
+						case Arms.PIG:
+						case Arms.YUKI_ONNA:
+							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.";
+							break;
+						case Arms.SHARK:
+						case Arms.ORCA:
+							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' fin suddenly fell down, leaving [skin base.type] behind. Also webbing between your fingers slowly disappearing.";
+							break;
+						case Arms.PLANT:
+						case Arms.PLANT2:
+							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' vines are withering. Leaves also falling donw, leaving [skin base.type] behind.";
+							break;
+						case Arms.SALAMANDER:
+						case Arms.LIZARD:
+						case Arms.DRACONIC:
+						case Arms.HYDRA:
+							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' scales are flaking away. The leathery [skin coat.noadj] [skin coat.isare] soon gone, leaving [skin base.type] behind.";
+							break;
+						case Arms.BEE:
+							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' chitinous covering and fuzz is flaking away. The glossy black and yellow coating is soon gone, leaving [skin base.type] behind.";
+							break;
+						case Arms.MANTIS:
+							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly. The glossy green coating is soon gone, leaving [skin base.type] behind.";
+							break;
+						case Arms.SPIDER:
+						case Arms.USHI_ONI:
+							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving [skin base.type] behind.";
+							break;
+						case Arms.HARPY:
+						case Arms.PHOENIX:
+						case Arms.AVIAN:
+							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving [skin] behind.";
+							break;
+						case Arms.GARGOYLE:
+							desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form.";
+							break;
+						case Arms.BAT:
+							desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your bones are breaking down and reforming in a frenzy. Your parchment-like skin begins to fall off in clumps, leaving the mess of malformed bones that are your arms right now naked for all to see. However, even as you watch, dark blood creeps over the bone, properly aligning them before healing them over, although not in their old form. Within seconds, your bones are remade into ones alike those you were born with, in structure if nothing else, the eldritch power of your blood finally ebbing away, but not before the last of it settles and turns into a brand new patch of skin.";
+							break;
+						default:
+							desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form.";
+							break;
+					}
+					desc += " You now have <b>human arms</b>!";
+
+	        player.arms.type = Arms.HUMAN;
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Human Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.HUMAN;
+	    }
+	);
+
+	public const ArmsSphinx: Transformation = new SimpleTransformation("Sphinx Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+					TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+	        desc += "Your hands suddenly start to tingle as your arms grow a thin layer of -fur color- fur up to your shoulders. You watch, enthralled, as your nails fall off your fingers, feline claws taking their place on your five-fingered hands. That said, they don't look exactly like paws as your hands retain their dexterity and general appearance which is a perfect mix between human and leonine features. Thanks to their shape, your new bestial hands should not hinder your spellcasting abilities.. <b>Your arms are now covered in fur and end with clawed hands like those of a sphinx.</b>";
+	        player.arms.type = Arms.SPHINX;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Sphinx Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.SPHINX;
+	    }
+	);
+
+	public const ArmsLion: Transformation = new SimpleTransformation("Lion Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+	        desc += "Your hands suddenly start to hurt as your arms grows a thick coat of [skin coat.color] fur up to your shoulders where it turns [haircolor]. You watch enthralled as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have leonine paw hands.</b>";
+	        player.arms.type = Arms.LION;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Lion Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.LION;
+	    }
+	);
+
+	public const ArmsDisplacer: Transformation = new SimpleTransformation("Displacer Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+	        desc += "Something weird is happening around the level of your ribcage. Painfully large bumps start expanding on the side of your body. You fall on all fours panting heavily from the pain as two new limbs surge under your arms. As you sit, trying to grab these new limbs to check them out, you grab your arms instead. No wait your arm grabbed your arm that grabs another arm?! As you examine yourself you discover a second set of limbs grew under your arms. <b>Guess if your mind actually managed to process the action correctly you could actually use four weapons at once, instead you move around on your three set of limbs not unlike a displacer beast.</b>";
+	        player.arms.type = Arms.DISPLACER;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Displacer Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.DISPLACER;
+	    }
+	);
+
+	public const ArmsCat: Transformation = new SimpleTransformation("Cat Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+	        desc += "Your hands suddenly start to hurt as your arms grows a thick coat of [skin coat.color] fur up to your shoulders. You watch enthralled as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have cat paw hands.</b>";
+	        player.arms.type = Arms.CAT;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Cat Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.CAT;
+	    }
+	);
+
+	public const ArmsRedPanda: Transformation = new SimpleTransformation("Red Panda Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Weakness overcomes your arms, and no matter what you do, you can’t muster the strength to raise or move them. Sighing you attribute this to the consumption of that strange root. Sitting on the ground, you wait for the limpness to end. As you do so, you realize that the bones at your hands are changing, as well as the muscles on your arms. They’re soon covered, from the shoulders to the tip of your digits, on a layer of soft, fluffy black-brown fur. Your hands gain pink, padded paws where your palms were once, and your nails become short claws, not sharp enough to tear flesh, but nimble enough to make climbing and exploring much easier. <b>Your arms have become like those of a red-panda!</b>";
+	        player.arms.type = Arms.RED_PANDA;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Red Panda Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.RED_PANDA;
+	    }
+	);
+
+	public const ArmsOrc: Transformation = new SimpleTransformation("Orc Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+	        desc += "The skin on your arms feels as if they’re being cut open as a whole new set of intricate scar-like tattoos covers them. Furthermore your nails become increasingly pointed just like a set of claws and your arms in general grow a bit longer. Well, it seems you’re going to have some issues hiding your <b>scar tattooed arms and sharp nails.</b>";
+	        player.arms.type = Arms.ORC;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Orc Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.ORC;
+	    }
+	);
+
+	public const ArmsBoar: Transformation = new SimpleTransformation("Boar Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+	        desc += "Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive. Furthermore your nails become increasingly pointed turning black just like a set of claws. <b>You now have boar arms.</b>";
+					player.skin.coat.color = player.hairColor;
+	        player.arms.type = Arms.BOAR;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Boar Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.BOAR;
+	    }
+	);
+
+	public const ArmsPig: Transformation = new SimpleTransformation("Pig Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+	        desc += "Your finguers starts to feels like some bee stungs them as they inflates to a more chubby sizes yours nails tickening and darkening turning into clover-like claws. Aside of your now fat finguers and darker claws your arms remains about the same. <b>You now have pig arms.</b>";
+	        player.arms.type = Arms.PIG;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Pig Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.PIG;
+	    }
+	);
+
+	public const ArmsBatWing: Transformation = new SimpleTransformation("Bat Wing Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+	        desc += "Large bones surge out of your wrists and elbows. You can feel your bones shifting and grinding all over your body as your skeletal structure begins changing into one more fit for a flyincreature, with light, hollow bones. You collapse to the ground as they begin shifting proportions, becoming thinner and longer to maximize area while reducing their density. Leathery flesh begins to cover your new bony protrusions, spreading between each of them like creeping moss. Eventually, the skin stops growing and you admire your new arms. They are very obviously winged bat arms. You close them around your waist, and like this they could easily be mistaken for a large cape when seen from afar. <b>You now have large winged bat arms.</b>";
+	        player.arms.type = Arms.BAT;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Bat Wing Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.BAT;
+	    }
+	);
+
+	public const ArmsRaijuPaws: Transformation = new SimpleTransformation("Raiju Paws Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+	        desc += "You shiver in delight as fur begins to form on your forearms, high voltage running along from your shoulders to your fingertips. Before you know it your hands turned to paws and your sharp nails to vicious looking claws coated with electricity. You can't wait to wrap those around a juicy cock or dip them into a waiting snatch.";
+					if (player.coatColor == "") player.coatColor = player.hairColor;
+	        player.arms.type = Arms.RAIJU_PAWS;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Raiju Paws Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.RAIJU_PAWS;
+	    }
+	);
+
+	public const ArmsRaiju: Transformation = new SimpleTransformation("Raiju Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+					if (transformations.ArmsRaijuPaws.isPresent()) {
+						desc += "Fur falls of your arms as your pawed hands revert back to human ones. Almost human ones actually as you nail retained their claw like sharpness.";
+					} else {
+						TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+	        	desc += "Your nails tingle as they elongate into white claws! They look quite dangerous, but you feel the strange need to use them to stimulate your ";
+	        	if (player.gender == 1 || player.gender == 3) desc += "[cock]";
+	        	if (player.gender == 3) desc += " and ";
+	        	if (player.gender > 1) desc += "[clit]";
+	        	desc += ". ";
+	        	if (player.cor >= 50) desc += "You give a lusty smile, thinking that it wouldn't be so bad...";
+	        	else desc += "You scowl, shaking away the impure thoughts.";
+					}
+
+	        player.arms.type = Arms.RAIJU;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Raiju Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.RAIJU;
+	    }
+	);
+
+	public const ArmsOni: Transformation = new SimpleTransformation("Oni Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "";
+	        if (player.arms.type != Arms.HUMAN) desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ";
+	        desc += "The skin on your arms feels like it’s burning as a whole set of intricate warlike tattoos covers them. Furthermore your nails become increasingly pointed turning black just like a set of claws. Well it seems you will have issues hiding your <b>war tattooed arms with sharp nails.</b>";
+	        player.arms.type = Arms.ONI;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Oni Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.ONI;
+	    }
+	);
+
+	public const ArmsElf: Transformation = new SimpleTransformation("Elf Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+	        desc += "Something in your hands shift as they change taking on a more feminine fragile yet agile structure. You discover with surprise your dexterity has greatly increased allowing you to manipulate things in your delicate elven fingers with almost unreal precision. However your grip has become weaker as a result, weakening your ability to use raw force over finesse. <b>You now have delicate elven hands.</b>";
+	        player.arms.type = Arms.ELF;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Elf Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.ELF;
+	    }
+	);
+
+	public const ArmsMantis: Transformation = new SimpleTransformation("Mantis Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, turning the [skin.type] into a shiny green carapace.";
+	        desc += "\nA moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining green chitin from the upper arm down.";
+	        desc += "\nThe transformation end as down the lenght of your forearms you grow a pair of massive scythe like appendage just like a mantis.";
+	        desc += "\nYou nonchalantly run them across a young tree slicing the plant trunk in half. This might prove a deadly weapon if used as part of your unarmed strikes. <b>You now have mantis arms.</b>";
+	        player.arms.type = Arms.MANTIS;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Mantis Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.MANTIS;
+	    }
+	);
+
+	public const ArmsDevil: Transformation = new SimpleTransformation("Devil Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Your hands shapeshift as they cover in fur and morph into the clawed hands of some unknown beast. They retain their dexterity despite their weird shape and paw pads. At least this won't hinder spellcasting. <b>You now have bestial clawed hands!</b>";
+	        player.arms.type = Arms.DEVIL;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Devil Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.DEVIL;
+	    }
+	);
+
+	public const ArmsDraconic: Transformation = new SimpleTransformation("Draconic Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a draconic, one with leathery scales and short claws replacing your fingernails. <b>You now have a draconic arms.</b>";
+	        player.arms.type = Arms.DRACONIC;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Draconic Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.DRACONIC;
+	    }
+	);
+
+	public const ArmsOrca: Transformation = new SimpleTransformation("Orca Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Your fingers suddenly are forced together. When you stretch them back you discover they are now webbed, ready for swimming. You are still examining your hands when something not unlike a pair of fins grow out of your forearms. <b>You can only guess those Orca arms will help you to swim at high speeds!</b>";
+	        player.arms.type = Arms.ORCA;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Orca Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.ORCA;
+	    }
+	);
+
+	public const ArmsPhoenix: Transformation = new SimpleTransformation("Phoenix Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "A crimson colored avian plumage starts to sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.";
+	        player.arms.type = Arms.PHOENIX;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Phoenix Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.PHOENIX;
+	    }
+	);
+
+	public const ArmsSalamander: Transformation = new SimpleTransformation("Salamander Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a salamander, one with leathery, red scales and short claws replacing your fingernails. <b>You now have a salamander arms.</b>";
+	        player.arms.type = Arms.SALAMANDER;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Salamander Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.SALAMANDER;
+	    }
+	);
+
+	public const ArmsShark: Transformation = new SimpleTransformation("Shark Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form with exception places between your finger which starting show signs to growing webbing. Soon after you start sweating profusely and panting loudly, feeling the space near your elbows shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from your forearms. You examine them carefully and make a few modifications to your [armor] to accommodate your new fins. <b>You now have shark arms.</b>";
+	        player.arms.type = Arms.SHARK;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Shark Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.SHARK;
+	    }
+	);
+
+	public const ArmsSpider: Transformation = new SimpleTransformation("Spider Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        if (player.arms.type == Arms.HARPY || player.arms.type == Arms.HUMAN) {
 					if (player.arms.type == Arms.HARPY) desc += "The feathers covering your arms fall away, leaving them to return to a far more human appearance. You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny black carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
-				} else {
-					if (player.arms.type == Arms.BEE) desc += "The fizz covering your upper arms starting to fall down leaving only shiny black chitin clad arms.";
-					else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRAGON) desc += "The scales covering your upper arms starting to fall down leaving only shiny black chitin clad arms.";
-					else if (player.arms.type == Arms.MANTIS) desc += "The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the [skinfurscales] into a shiny black carapace</b>.";
-					else desc += "You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
-				}
+					} else {
+						if (player.arms.type == Arms.BEE) desc += "The fizz covering your upper arms starting to fall down leaving only shiny black chitin clad arms.";
+						else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRACONIC) desc += "The scales covering your upper arms starting to fall down leaving only shiny black chitin clad arms.";
+						else if (player.arms.type == Arms.MANTIS) desc += "The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the [skinfurscales] into a shiny black carapace</b>.";
+						else desc += "You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+					}
 
-				if (doOutput) outputText(desc);
-				setArmType(Arms.SPIDER);
-				player.coatColor = "black";
-			},
-			// is present
-			function ():Boolean {
-				return player.arms.type === Arms.SPIDER;
-			}
+					player.coatColor = "black";
+	        player.arms.type = Arms.SPIDER;
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Spider Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.SPIDER;
+	    }
+	);
+
+	public const ArmsHarpy: Transformation = new SimpleTransformation("Harpy Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "An avian plumage sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.";
+	        player.arms.type = Arms.HARPY;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Harpy Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.HARPY;
+	    }
+	);
+
+	public const ArmsBee: Transformation = new SimpleTransformation("Bee Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "";
+	        if (player.arms.type == Arms.SPIDER) desc += "On your upper arms slowly starting to grown yellow fuzz making them looks more like those of bee.";
+	        else if (player.arms.type == Arms.MANTIS) desc += "The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>. Additionaly on your upper arms appear yellow fuzz.";
+	        else {
+	            if (player.arms.type == Arms.HARPY) desc += "The feathers covering your arms fall away, leaving them to return to a far more human appearance. ";
+	            desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>. A moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining black chitin from the upper arm down, and downy yellow fuzz along your upper arm.";
+	        }
+	        player.arms.type = Arms.BEE;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Bee Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.BEE;
+	    }
+	);
+
+	public const ArmsLizard: Transformation = new SimpleTransformation("Lizard Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a lizard, one with leathery scales and short claws replacing your fingernails. <b>You now have a lizard arms.</b>";
+	        player.arms.type = Arms.LIZARD;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Lizard Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.LIZARD;
+	    }
+	);
+
+	public const ArmsKitsune: Transformation = new SimpleTransformation("Kitsune Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+	        desc += "Your finger tingle as your nails sharpen to point. You run them on a tree bark and they feel way harder than your old human nails. <b>You will be able to claw at your opponent with your sharp kitsune nails.</b>";
+	        player.arms.type = Arms.KITSUNE;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Kitsune Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.KITSUNE;
+	    }
+	);
+
+	public const ArmsFox: Transformation = new SimpleTransformation("Fox Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+	        desc += "Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into wolf like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>";
+	        player.arms.type = Arms.FOX;
+
+	        if (doOutput) outputText(desc);
+	        Metamorph.unlockMetamorph("Fox Arms", doOutput);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.FOX;
+	    }
+	);
+
+	public const ArmsPlant: Transformation = new SimpleTransformation("Plant Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>";
+
+					player.arms.type = Arms.PLANT;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.PLANT;
+	    }
+	);
+
+	public const ArmsCentipede: Transformation = new SimpleTransformation("Centipede Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Your arms feel strangely warm. You look down at them, noticing purple markings being etched into your skin. Your nails sharpen and take on the same purple hue. <b>You could do some serious damage with your sharp nails.</b>";
+
+					player.arms.type = Arms.CENTIPEDE;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.CENTIPEDE;
+	    }
+	);
+
+	public const ArmsWendigo: Transformation = new SimpleTransformation("Wendigo Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "";
+
+					player.arms.type = Arms.WENDIGO;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.WENDIGO;
+	    }
+	);
+
+	public const ArmsYukiOnna: Transformation = new SimpleTransformation("Yuki Onna Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Something weird happens in your hands. For a few seconds you lose the sense of touch and as it comes back your nails turn pale blue. You can feel terrible cold running at your fingertips.  While you can dismiss this cold and enable it at will you can’t help but smirk at your newfound ability. <b>Woe to whoever you decide to touch with your glacial hands.</b>";
+
+					player.arms.type = Arms.YUKI_ONNA;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.YUKI_ONNA;
+	    }
+	);
+
+	public const ArmsWolf: Transformation = new SimpleTransformation("Wolf Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into wolf like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>";
+
+					player.arms.type = Arms.WOLF;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.WOLF;
+	    }
+	);
+
+	public const ArmsGoo: Transformation = new SimpleTransformation("Goo Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Your arms become increasingly wet, as if they were sweating heavily, until eventually you're unsure whether or not they are even solid. The sweat clears up, turning to [skintone] slime. At first, it feels weird, because they are neither entirely solid or liquid, but the simple act of lengthening your limbs to ridiculous reach amuses you. Furthermore you can see right through your hands as if looking through water. Perhaps there's some use to your <b>new goo dripping arms.</b>";
+
+					player.arms.type = Arms.GOO;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.GOO;
+	    }
+	);
+
+	public const ArmsHydra: Transformation = new SimpleTransformation("Hydra Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn’t getting rid of the itch. After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance changed into that of a reptile with leathery scales and vicious claws replacing your fingernails. <b>You now have hydra arms.</b>";
+
+					player.arms.type = Arms.HYDRA;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.HYDRA;
+	    }
+	);
+
+	public const ArmsCaveWyrm: Transformation = new SimpleTransformation("Cave Wyrm Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  cave wyrm, one with leathery, black scales and short claws replacing your fingernails. <b>You now have a cave wyrm arms.</b>";
+
+					player.arms.type = Arms.CAVE_WYRM;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.CAVE_WYRM;
+	    }
+	);
+
+	public const ArmsAvian: Transformation = new SimpleTransformation("Avian Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+          if (player.skin.hasChitin()) {
+              desc += "Ughh, was that seed good for your body? You wince in pain, as some part of you is obviously not happy of being subjected to the fruit mysterious properties. As you direct your attention to your arms, you’re alarmed by their increasingly rigid feeling, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.";
+              desc += "Just when you thought that nothing could feel worse, you see how the chitin on your arms fissures, falling to the ground like pieces of a broken vase and leaving a mellified tissue beneath. To you relief, the ‘jelly’ also fall, leaving only normal skin on your arms.";
+              desc += "Then, a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, tough your fingernails turn into short talons.";
+          } else if (player.hasFur()) {
+              desc += "A bit weary about the possible effects of the seed on your body, you quickly notice when the fur covering your starts thickening, some patches merging an thickening, first forming barbs, and then straight-out feathers. To your surprise, your hand and forearms become strangely numb, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.";
+              desc += "The newly formed feathers keep growing making the excess fur fall, until you’ve gained a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. Once the effects on that area end, the fur over your hands changes too, falling quickly and leaving behind soft, bare skin, that quickly turns into a layer of [skin], skin, ";
+              desc += "albeit rougher than the usual, made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.";
+          } else if (player.hasScales()) {
+              desc += "Undoubtedly affected by the dry fruit reactives, the layer of scales covering your arms falls like snowflakes, leaving only a soft layer of [skin] behind. To your surprise, your hand and forearms become strangely numb, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.";
+              desc += "Then, a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.";
+          } else {
+              desc += "Just after finishing the fruit, your hand and forearms become strangely numb, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.";
+              desc += "Then, a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.";
+          }
+          desc += "Luckily, the sensation returns to your arms, and you’re able to use them with normalcy, with the difference that <b>they’re now avian looking ones!</b>.";
+
+					player.arms.type = Arms.AVIAN;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.AVIAN;
+	    }
+	);
+
+	public const ArmsGryphon: Transformation = new SimpleTransformation("Gryphon Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+          desc += "The skin on your arms change a bit, as the " + player.skin.coat.color2 + " turning into soft, feline fur. Your palms and fingers acquire pink paw pads, while at the end of each one of your fingers, the talons sharpen and become prehensile, adopting a posture better suited to pounce over a unsuspecting victim.";
+          desc += "From the fringe on your elbows to your armpits, your " + player.skin.coat.color + " colored plumage remains the same. <b>At the end, you’ve gotten gryphon-like arms!</b>.";
+
+					player.arms.type = Arms.GRYPHON;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.GRYPHON;
+	    }
+	);
+
+	public const ArmsGhost: Transformation = new SimpleTransformation("Ghost Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "A numbing sensation crawls upwards from your hands to your elbows, lingering for a few moments. As the pain subsides, you see that your hands have become incorporeal! Panicking, you reach for your weapon, something to grasp and… surprisingly, you manage to hold it normally. After a few moments when you calm down, you drop it. It seems you need to take extra care when you hold things from now on, as <b>you have ghastly hands!</b>";
+
+					player.arms.type = Arms.GHOST;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.GHOST;
+	    }
+	);
+
+	public const ArmsGazer: Transformation = new SimpleTransformation("Gazer Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Your arms begin to sweat and drip at high rate until they cover in some kind of oily ink black mucus. It drops from your hands down to the ground oozing like tar. You would say ew but for some reason it doesn't smell so bad, heck taking a whiff it almost smells like perfume or rather aphrodisiacs. Heck thinking on it now from a far glance it looks like you are wearing sleeved gloves. <b>Your arms are now covered from the forearm to the digits into tar like fluids.</b>";
+
+					player.arms.type = Arms.GAZER;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.GAZER;
+	    }
+	);
+
+	public const ArmsSquirrel: Transformation = new SimpleTransformation("Squirrel Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Your nails tingle as they elongate into white claws. A coat of fur then begins to form up from your wrist to your elbows, coating your forearms like bracers. Your hands feels stronger in every way, heck <b>with these new claws you could just climb and stick to any surface just like a squirrel.</b>";
+
+          if (player.coatColor == "") player.coatColor = player.hairColor;
+					player.arms.type = Arms.SQUIRREL;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.SQUIRREL;
+	    }
+	);
+
+	public const ArmsWeasel: Transformation = new SimpleTransformation("Weasel Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Your arms begins cover with fur and you watch spellbound as your nails elongate into small sharp animal claws. They aren't exactly strong enough to deal damage but they'll be fine if you ever want to scratch yourself. <b>You now have furry animal arms with paw-like hands not unlike those of a weasel.</b>";
+
+					if (player.coatColor == "") player.coatColor = player.hairColor;
+					player.arms.type = Arms.WEASEL;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.WEASEL;
+	    }
+	);
+
+	public const ArmsKamaitachi: Transformation = new SimpleTransformation("Kamaitachi Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Something in your arm bones begins to shift as they suddenly curve and grow awkwardly through the skin, piercing through your fur like a spike. Now juting outside of your wrists like a pair of natural tonfas. the bones begin to reshape, polish and alter itself, fully taking on the consistency of steel! You admire your two Kamaitachi scythes with stupor, they are sharp and hard enough to leave clean deep cuts even in the hardest material and light enough that you can swing them around as if they weren't even there to begin with, lighter than air indeed. Enemies better fear you now that you got those <b>Kamaitachi arm-scythes.</b>";
+
+					if (player.coatColor == "") player.coatColor = player.hairColor;
+					player.arms.type = Arms.KAMAITACHI;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.KAMAITACHI;
+	    }
+	);
+
+	public const ArmsRaccoon: Transformation = new SimpleTransformation("Raccoon Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into small like claws so no wonder you felt it that much. <b>You now have pawed hands like those of a raccoon.</b>";
+
+					player.arms.type = Arms.RACCOON;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.RACCOON;
+	    }
+	);
+
+	public const ArmsHinezumi: Transformation = new SimpleTransformation("Hinezumi Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "You suddenly feel like your forearms are burning. Burning they indeed begin to do, as they suddenly start blazing, a thick coat of fire covering them up to the fist. That’s going to be a very interesting ability to use in combat. <b>You now have blazing arms!</b>";
+
+					player.arms.type = Arms.HINEZUMI;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.HINEZUMI;
+	    }
+	);
+
+	public const ArmsKraken: Transformation = new SimpleTransformation("Kraken Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "You notice your hand and forearm skin slowly darkening until it turns pitch black as your nails disappear entirely. Your hands now look like they’re covered in a thin layer of black rubber like gloves, but you know the truth. These truly are your arms and you can feel the touch on your black hands. At least you'll always be dressed elegantly with your<b> new kraken arms.</b>";
+
+					player.arms.type = Arms.KRAKEN;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.KRAKEN;
+	    }
+	);
+
+	public const ArmsYeti: Transformation = new SimpleTransformation("Yeti Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Your arms start to become excessively hairy down almost to your hands. They're so hairy that you can no longer see your skin. As the fur growth stops, your hands enlarge to twice their size. They look like huge monkey paws. Well, you guess punching people will be easy with your enormous <b>yeti hands!</b>";
+
+					player.arms.type = Arms.YETI;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.YETI;
+	    }
+	);
+
+	public const ArmsSeaDragon: Transformation = new SimpleTransformation("Sea Dragon Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Your fingers slowly conjoin with a thin webbing between them. It's a strange, slimy feeling. As you examine your hands, something, not unlike a pair of fins, grows out of your forearms and your nails sharpen into curved reptilian claws. <b>You can only guess those Sea Dragons arms will help you to swim at high speeds!</b>";
+
+					player.arms.type = Arms.SEADRAGON;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.SEADRAGON;
+	    }
+	);
+
+	public const ArmsFrostwyrm: Transformation = new SimpleTransformation("Frostwyrm Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Your arms and hands suddenly begins to get thicker and bigger, way beyond human size. Your entire forearms and now massive hands first cover with -scale color- scales then with white fur, giving them the appearance of fluffy padded gloves. From the fur however surges out what used to be your nails, now powerful claws capable of digging through solid rock and ice just like those of a frost wyrm. <b>You now have frost wyrm arms!</b>";
+
+					player.arms.type = Arms.FROSTWYRM;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.FROSTWYRM;
+	    }
+	);
+
+	public const ArmsBear: Transformation = new SimpleTransformation("Bear Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Your hands suddenly start to hurt as your arms grows a thick coat of [skin coat.color] fur up to your shoulders. You watch enthralled as your nails turn into large ursan claws on your now five-fingered paw-like hands. <b>You now have bear-like paw hands.</b>";
+
+					player.arms.type = Arms.BEAR;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.BEAR;
+	    }
+	);
+
+	public const ArmsUshiOni: Transformation = new SimpleTransformation("Ushi-Oni Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Your onyx exoskeleton begins to itch. You begin to scratch at it incessantly until you can see [haircolor] fur begin to sprout from your arms from the biceps down, forming a diamond spiral where the fur meets skin. Your fingers begin to shake and sink into your hands as 4 huge strong claws grow in their places. <b>After the painful experience you see that you now have Ushi-Oni bestial arms.</b>";
+
+          player.coatColor = "black";
+					player.arms.type = Arms.USHI_ONI;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.USHI_ONI;
+	    }
+	);
+
+	public const ArmsMelkie: Transformation = new SimpleTransformation("Melkie Arms",
+	    // apply effect
+	    function(doOutput: Boolean): void {
+	        var desc: String = "";
+
+	        desc += "Similar to when your legs merged in your tail your forearm begin to change, turning into a pair of glove like seal arms armed with claws. What's more, you have a pair of fins on your elbow similar to a Melkie. <b>Well it'll take some time to get used to your new seal forearms with fins.</b>";
+
+					player.arms.type = Arms.MELKIE;
+	        if (doOutput) outputText(desc);
+	    },
+	    // is present
+	    function(): Boolean {
+	        return player.arms.type === Arms.MELKIE;
+	    }
 	);
 
 	public const ArmsAtlach:Transformation = new SimpleTransformation("Spider arms",
@@ -2809,14 +4903,15 @@ public class TransformationLib extends MutationsHelper {
 					desc += "You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a midnight purple carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
 				} else {
 					if (player.arms.type == Arms.BEE) desc += "The fizz covering your upper arms starting to fall down leaving only midnight purple chitin clad arms.";
-					else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRAGON) desc += "The scales covering your upper arms starting to fall down leaving only midnight purple chitin clad arms.";
+					else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRACONIC) desc += "The scales covering your upper arms starting to fall down leaving only midnight purple chitin clad arms.";
 					else if (player.arms.type == Arms.MANTIS) desc += "The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the [skinfurscales] into a midnight purple carapace</b>.";
 					else desc += "You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a midnight purple carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
 				}
 				if (doOutput) outputText(desc);
-				setArmType(Arms.SPIDER);
 				player.coatColor = "midnight purple";
 				player.coatColor2 = "midnight purple";
+	      player.arms.type = Arms.SPIDER;
+	      Metamorph.unlockMetamorph("Spider Arms", doOutput);
 			},
 			// is present
 			function ():Boolean {

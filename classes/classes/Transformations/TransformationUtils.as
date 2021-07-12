@@ -43,7 +43,7 @@ public class TransformationUtils {
     }
 
     public static function applyTFIfNotPresent(transformation: *, doOutput: Boolean = true): void {
-		if (!transformation.isPresent()) {
+		if (transformation.isPossible()) {
 			transformation.applyEffect(doOutput);
 			if (doOutput) EngineCore.outputText("\n\n");
 		}

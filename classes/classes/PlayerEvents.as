@@ -1458,7 +1458,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Fenrir Eyes
-			if (!CoC.instance.transformations.EyesFenrir.isPresent() && player.hasKeyItem("Gleipnir Collar") >= 0) {
+			if (CoC.instance.transformations.EyesFenrir.isPossible() && player.hasKeyItem("Gleipnir Collar") >= 0) {
 				outputText("\n");
 
 				CoC.instance.transformations.EyesFenrir.applyEffect();
@@ -2055,11 +2055,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nA sudden wave of pleasure strike you making you moan");
 				if (player.horns.type == Horns.UNICORN) {
 					outputText(" as your horn begins to split in two");
-					player.horns.type = Horns.BICORN;
-					if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedBicornHorns)) {
-						outputText("\n\n<b>Genetic Memory: Bicorn Horns - Memorized!</b>\n\n");
-						player.createStatusEffect(StatusEffects.UnlockedBicornHorns, 0, 0, 0, 0);
-					}
+					CoC.instance.transformations.HornsBicorn.applyEffect(false);
 				}
 				if (!InCollection(player.hairColor, bicornHairPalette)) {
 					CurentColor = randomChoice(bicornHairPalette);
@@ -2071,7 +2067,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText(" Your fur tingle and you coo in delight as it turn "+CurentColor+".");
 					player.coatColor = CurentColor;
 				}
-				if (!CoC.instance.transformations.EyesChangeColor(["red"]).isPresent()) {
+				if (CoC.instance.transformations.EyesChangeColor(["red"]).isPossible()) {
 					outputText(" Meanwhile your eyes shine with malice as they take on a red corrupted tone reflecting the sorry state of your soul.");
 					CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
 				}
@@ -2122,11 +2118,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nA sudden wave of serenity pass over you as you realise how pure you have become.");
 				if (player.horns.type == Horns.BICORN) {
 					outputText(" Your two horns merges into a single one and you can feel the pure unity of your horn restored.");
-					player.horns.type = Horns.UNICORN;
-					if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedUnicornHorn)) {
-						outputText("\n\n<b>Genetic Memory: Unicorn Horn - Memorized!</b>\n\n");
-						player.createStatusEffect(StatusEffects.UnlockedUnicornHorn, 0, 0, 0, 0);
-					}
+					CoC.instance.transformations.HornsUnicorn.applyEffect(false);
 				}
 				if (!InCollection(player.hairColor, unicornHairPalette)) {
 					CurentColor = randomChoice(unicornHairPalette);
@@ -2138,7 +2130,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText(" You sigh in relief as your fur turns "+CurentColor+".");
 					player.coatColor = CurentColor;
 				}
-				if (!CoC.instance.transformations.EyesChangeColor(["blue"]).isPresent()) {
+				if (CoC.instance.transformations.EyesChangeColor(["blue"]).isPossible()) {
 					outputText(" Meanwhile your irises shift toward the sapphire blue as your mind clears off.");
 					CoC.instance.transformations.EyesChangeColor(["blue"]).applyEffect(false);
 				}

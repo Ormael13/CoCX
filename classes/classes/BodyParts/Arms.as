@@ -118,8 +118,8 @@ public class Arms extends BodyPart {
 		claw: true
 	});
 
-	public static const DRAGON:int = 15;
-	EnumValue.add(Types, DRAGON, "DRAGON", {
+	public static const DRACONIC:int = 15;
+	EnumValue.add(Types, DRACONIC, "DRACONIC", {
 		name:"dragon",
 		appearanceDesc: "Thick, leathery scales cover your arms from the biceps down, and your fingernails are short curved claws.",
 		claw: true
@@ -286,8 +286,8 @@ public class Arms extends BodyPart {
 		claw: true
 	});
 
-	public static const RAIJU_2:int = 40;
-	EnumValue.add(Types, RAIJU_2, "RAIJU_2", {
+	public static const RAIJU_PAWS:int = 40;
+	EnumValue.add(Types, RAIJU_PAWS, "RAIJU_PAWS", {
 		name:"raiju paws",
 		appearanceDesc: "Your forearms are covered by dense fur upon which an electric current runs free. Your pawed hands end in sharp claws capable of delivering powerful discharges.",
 		claw: true
@@ -331,8 +331,8 @@ public class Arms extends BodyPart {
 		appearanceDesc: ""
 	});
 
-	public static const USHI_ONI_ONNA:int = 47;
-	EnumValue.add(Types, USHI_ONI_ONNA, "USHI_ONI_ONNA", {
+	public static const USHI_ONI:int = 47;
+	EnumValue.add(Types, USHI_ONI, "USHI_ONI", {
 		name:"ushi-oni",
 		appearanceDesc: "You have ushi-oni arms, longer and thicker than those of most races. A strange pattern of fur descends from your middle biceps down to your hands, where you have bone-like claws rather than fingers."
 	});

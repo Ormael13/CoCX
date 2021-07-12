@@ -362,8 +362,8 @@ public class Tail extends SaveableBodyPart {
 		name:"twinkasha",
 		appearanceDesc: "A pair blazing cat tail pokes out from your [butt]. They have a tendency to light things on fire if you are not careful, but at least they assist with your balance. From these tails you draw in tremendous fell power."
 	});
-	public static const USHI_ONI_ONNA: int = 47;
-	EnumValue.add(Types, USHI_ONI_ONNA, "USHI_ONI_ONNA", {
+	public static const USHI_ONI: int = 47;
+	EnumValue.add(Types, USHI_ONI, "USHI_ONI", {
 		name:"ushi-oni",
 		appearanceDescFunc: function(creature: *): String {
 			var desc: String = "You have an ushi-oni tail whose furred member is " + (creature.tallness > 72 ? "five" : "four") + " feet long and prehensile. Its tip can shoot very thick and strong web strings which double as an aphrodisiac when in contact with the victim.";

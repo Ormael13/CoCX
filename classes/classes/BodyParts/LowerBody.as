@@ -1128,8 +1128,8 @@ public class LowerBody extends SaveableBodyPart {
 		draconic: true
 	});
 
-	public static const USHI_ONI_ONNA:int = 63;
-	EnumValue.add(Types, USHI_ONI_ONNA, "USHI_ONI_ONNA", {
+	public static const USHI_ONI:int = 63;
+	EnumValue.add(Types, USHI_ONI, "USHI_ONI", {
 		name: "ushi-oni",
 		appearanceDesc: "You have the lower body of an ushi-oni, it is like the one of a drider except that it is covered in fur with the exoskeleton under it, the usually black sheen legs of a drider are replaced with rough bone ones of an ushi-oni.",
 		isDrider: true

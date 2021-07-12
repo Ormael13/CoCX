@@ -2676,7 +2676,7 @@
 					</if>
                 </if>
             </case>
-			<case values="Arms.DRAGON">
+			<case values="Arms.DRACONIC">
                 <show part="hands/scale"/>
                 <show part="hands_bg/scale"/>
 				<if test="PlayerHasViewableOutfit">
@@ -2786,7 +2786,7 @@
                 <show part="hands/fins-orca"/>
                 <show part="hands_bg/fins-orca"/>
             </case>
-            <case values="Arms.DEVIL,Arms.RAIJU_2">
+            <case values="Arms.DEVIL,Arms.RAIJU_PAWS">
                 <show part="hands/devil"/>
                 <show part="hands_bg/devil"/>
             </case>
@@ -3079,14 +3079,14 @@
 						<show part="feet/scales"/>
 						<if test="PlayerHasViewableOutfit">
 							<if test="armStanceNonBannedList">
-								<if test="arms.type==Arms.DRAGON">
+								<if test="arms.type==Arms.DRACONIC">
 									<hide part="legs/*"/>
 									<hide part="feet/*"/>
 									<show part="legs/dragon"/>
 								</if>
 							</if>
 							<else>
-								<if test="arms.type==Arms.DRAGON">
+								<if test="arms.type==Arms.DRACONIC">
 									<hide part="legs/*"/>
 									<hide part="feet/*"/>
 									<show part="legs/dragon"/>

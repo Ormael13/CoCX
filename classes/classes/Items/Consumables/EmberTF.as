@@ -77,25 +77,17 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 			if (player.horns.count > 0) {
 				//High quantity demon horns
 				if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
-					outputText("\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have four draconic-looking horns, each about twelve inches long.");
-                    CoC.instance.mutations.setHornType(Horns.DRACONIC_X4_12_INCH_LONG, 12);
-                }
-				else {
-					outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They must look something like the horns the dragons in your village's legends always had.");
-					player.horns.type = Horns.DRACONIC_X2;
-					if (player.horns.count > 13) {
-						outputText("  The change seems to have shrunken the horns, they're about a foot long now.");
-						player.horns.count = 12;
-					}
+					CoC.instance.transformations.HornsDraconicQuadruple.applyEffect();
+        }	else {
+					CoC.instance.transformations.HornsDraconicDual.applyEffect();
 				}
 				changes++;
 			}
 			//No horns
 			else {
 				//-If no horns, grow a pair
-				outputText("\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horns sprout from your head before stopping.  <b>You have about four inches of dragon-like horns.</b>");
-                CoC.instance.mutations.setHornType(Horns.DRACONIC_X2, 4);
-                changes++;
+				CoC.instance.transformations.HornsDraconicDual.applyEffect();
+        changes++;
 			}
 		}
 		//ALREADY DRAGON
@@ -116,17 +108,16 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 				//maxxed out, new row
 				else {
 					//--Next horns growth adds second row and brings length up to 12\"
-					outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a lizan can grow.</b>");
-                    CoC.instance.mutations.setHornType(Horns.DRACONIC_X4_12_INCH_LONG);
-                    changes++;
+					CoC.instance.transformations.HornsDraconicQuadruple.applyEffect();
+          changes++;
 				}
 			}
 		}
 	}
 	//Gain Dragon Ears
 	if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.DRAGON) {
-        CoC.instance.mutations.setEarType(Ears.DRAGON);
-        outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.  <b>You now have dragon ears!</b>");
+		outputText("\n\n");
+		CoC.instance.transformations.EarsDraconic.applyEffect();
 		changes++;
 	}
 	//Gain Dragon Eyes
@@ -209,14 +200,10 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		changes++;
 	}
 	//Arms
-	if (player.arms.type != Arms.DRAGON && player.lowerBody == LowerBody.DRAGON && changes < changeLimit && rand(3) == 0) {
-		outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  dragon, one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
-	//	if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedLizardArms)) {
-	//		outputText("\n\n<b>Genetic Memory: Lizard Arms - Memorized!</b>\n\n");
-	//		player.createStatusEffect(StatusEffects.UnlockedLizardArms, 0, 0, 0, 0);
-	//	}
-        CoC.instance.mutations.setArmType(Arms.DRAGON);
-        changes++;
+	if (player.arms.type != Arms.DRACONIC && player.lowerBody == LowerBody.DRAGON && changes < changeLimit && rand(3) == 0) {
+		outputText("\n\n");
+		CoC.instance.transformations.ArmsDraconic.applyEffect();
+    changes++;
 	}
 	//Gain Dragon Tail
 	if (player.tailType != Tail.DRACONIC && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {

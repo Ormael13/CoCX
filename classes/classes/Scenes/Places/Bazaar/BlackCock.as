@@ -1477,10 +1477,8 @@ import classes.CoC;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.horns.type != Horns.GOAT && player.horns.type != Horns.ORCHID) {
-				if (player.horns.type == Horns.NONE)outputText("You begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
-				else outputText("You begin to feel an odd itching sensation as you feel your horns repositioning. Once it's over, you reach up and find a pair of hard stubs. <b>You now have a pair of goat horns.</b>");
-				player.horns.count = 1;
-				CoC.instance.mutations.setHornType(Horns.GOAT);
+				outputText("\n\n");
+				CoC.instance.transformations.HornsGoat.applyEffect();
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.GOAT && player.horns.count == 1) {
@@ -1494,9 +1492,8 @@ import classes.CoC;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN) {
-				outputText("\n\nYou feel an odd shifting sensation on the side of your head and, reaching up to inspect it, find a <b>pair of fleshy pointed ears</b>. ");
-				if (player.hasFur()) outputText("As you examine your new elvish ears you feel fur grow around them, matching the rest of you.");
-				CoC.instance.mutations.setEarType(Ears.ELFIN);
+				outputText("\n\n");
+				CoC.instance.transformations.EarsElfin.applyEffect();
 				changes++;
 			}
 			if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0 && player.faceType == Face.HUMAN) {
@@ -1646,7 +1643,7 @@ import classes.CoC;
 				player.antennae.type = Antennae.NONE;
 			}
 			//Hair turns back to normal
-			if (rand(4) == 0 && changes < changeLimit && !CoC.instance.transformations.HairHuman.isPresent()) {
+			if (rand(4) == 0 && changes < changeLimit && CoC.instance.transformations.HairHuman.isPossible()) {
 				outputText("\n\n");
 				CoC.instance.transformations.HairHuman.applyEffect();
 				changes++;
@@ -1838,7 +1835,7 @@ import classes.CoC;
 			// Normal TFs
 			//------------
 			//Hair turns back to normal
-			if (rand(4) == 0 && changes < changeLimit && !CoC.instance.transformations.HairHuman.isPresent() &&  !CoC.instance.transformations.HairQuill.isPresent()) {
+			if (rand(4) == 0 && changes < changeLimit && CoC.instance.transformations.HairHuman.isPossible() &&  CoC.instance.transformations.HairQuill.isPossible()) {
 				outputText("\n\n");
 				CoC.instance.transformations.HairHuman.applyEffect();
 				changes++;

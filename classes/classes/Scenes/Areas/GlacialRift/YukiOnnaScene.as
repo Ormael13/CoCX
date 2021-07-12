@@ -107,7 +107,7 @@ public class YukiOnnaScene extends BaseContent
 				CoC.instance.transformations.FaceYukiOnna.applyEffect(false);
 				CoC.instance.mutations.setLowerBody(LowerBody.YUKI_ONNA);
 				if (player.legCount != 2) player.legCount = 2;
-				CoC.instance.mutations.setArmType(Arms.YUKI_ONNA);
+				CoC.instance.transformations.ArmsYukiOnna.applyEffect(false);
 				CoC.instance.transformations.EyesHuman.applyEffect(false);
 				CoC.instance.transformations.EyesChangeColor(["light purple"]).applyEffect(false);
 				CoC.instance.transformations.EyesHuman.applyEffect(false);

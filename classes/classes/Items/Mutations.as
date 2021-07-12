@@ -1727,13 +1727,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (changes < changeLimit && player.arms.type == Arms.HUMAN && rand(2) == 0) {
-            outputText("\n\nYour arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into wolf like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>");
-            setArmType(Arms.WOLF);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsWolf.applyEffect();
             changes++;
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE, Arms.WOLF) && rand(4) == 0) {
-            humanizeArms();
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //Wolf paws
@@ -1752,12 +1753,13 @@ public final class Mutations extends MutationsHelper {
         //Wolf ears
         if (rand(2) == 0 && player.ears.type != Ears.WOLF && player.tailType == Tail.WOLF && changes < changeLimit) {
             if (player.ears.type == Ears.HUMAN) {
-                outputText("\n\nThe skin on the sides of your face stretches painfully as your ears migrate upwards, toward the top of your head. They shift and elongate becoming lupine in nature. You won't have much trouble hearing through the howling blizzards of the glacial rift with <b>your new Lupine ears.</b>  ");
-                setEarType(Ears.WOLF);
+                outputText("\n\n");
+                CoC.instance.transformations.EarsWolf.applyEffect();
                 changes++;
             }
             if (player.ears.type != Ears.HUMAN && player.ears.type != Ears.WOLF && player.tailType == Tail.WOLF) {
-                humanizeEars();
+                outputText("\n\n");
+                CoC.instance.transformations.EarsHuman.applyEffect();
                 changes++;
             }
         }
@@ -2438,12 +2440,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Change to dog-ears!  Requires dog-tail
         if (rand(2) == 0 && player.ears.type != Ears.DOG && player.tailType == Tail.DOG && changes < changeLimit) {
-            if (player.ears.type == -1) outputText("\n\nTwo painful nubs begin sprouting from your head, growing and opening into canine ears.  ");
-            if (player.ears.type == Ears.HUMAN) outputText("\n\nThe skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head.  They shift and elongate, becoming canine in nature.  ");
-            if (player.ears.type == Ears.HORSE) outputText("\n\nYour equine ears twist as they transform into canine versions.  ");
-            if (player.ears.type > Ears.DOG) outputText("\n\nYour ears transform, becoming more canine in appearance.  ");
-            setEarType(Ears.DOG);
-            outputText("<b>You now have dog ears.</b>");
+            CoC.instance.transformations.EarsDog.applyEffect();
             changes++;
         }
         //Grow tail if not dog-tailed
@@ -3488,8 +3485,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Give the player bovine ears, same as the minotaur
         if (tainted && player.ears.type != Ears.COW && changes < changeLimit && rand(4) == 0 && player.tailType == Tail.COW) {
-            outputText("\n\nYou feel your ears tug on your scalp as they twist shape, becoming oblong and cow-like.  <b>You now have cow ears.</b>");
-            setEarType(Ears.COW);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsCow.applyEffect();
             changes++;
         }
         //If the player is under 7 feet in height, increase their height, similar to the minotaur
@@ -3539,25 +3536,26 @@ public final class Mutations extends MutationsHelper {
                 }
                 //If no horns yet..
                 if (player.horns.type == Horns.NONE || player.horns.count == 0) {
-                    outputText("\n\nWith painful pressure, the skin on your forehead splits around two tiny nub-like horns, similar to those you would see on the cattle back in your homeland.");
-                    setHornType(Horns.COW_MINOTAUR, 1);
+                    outputText("\n\n");
+                    CoC.instance.transformations.HornsCowMinotaur.applyEffect();
                     changes++;
                 }
                 //TF other horns
                 if (player.horns.type != Horns.NONE && player.horns.type != Horns.COW_MINOTAUR && player.horns.type != Horns.ORCHID && player.horns.count > 0) {
-                    outputText("\n\nYour horns twist, filling your skull with agonizing pain for a moment as they transform into cow-horns.");
-                    setHornType(Horns.COW_MINOTAUR);
+                    outputText("\n\n");
+                    CoC.instance.transformations.HornsCowMinotaur.applyEffect();
                 }
             }
             //Not mino horns, change to cow-horns
             if ((player.horns.type == Horns.DEMON || player.horns.type > Horns.COW_MINOTAUR) && player.horns.type != Horns.ORCHID) {
-                outputText("\n\nYour horns vibrate and shift as if made of clay, reforming into two small bovine nubs.");
-                setHornType(Horns.COW_MINOTAUR, 2);
+                outputText("\n\n");
+                CoC.instance.transformations.HornsCowMinotaur.applyEffect();
                 changes++;
             }
         }
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
-            humanizeArms();
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //If the player's face is non-human, they gain a human face
@@ -4150,7 +4148,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
-            humanizeArms();
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //Removes wings!
@@ -4171,7 +4170,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Eye colors
-        if (player.eyes.type == Eyes.HUMAN && !CoC.instance.transformations.EyesGoblinColors.isPresent() && changes < changeLimit && rand(3) == 0) {
+        if (player.eyes.type == Eyes.HUMAN && CoC.instance.transformations.EyesGoblinColors.isPossible() && changes < changeLimit && rand(3) == 0) {
             CoC.instance.transformations.EyesGoblinColors.applyEffect();
             changes++;
         }
@@ -4188,7 +4187,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Omg Crazy hairs
-        if (!CoC.instance.transformations.HairCrazy.isPresent() && changes < changeLimit && rand(3) == 0) {
+        if (CoC.instance.transformations.HairCrazy.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.HairCrazy.applyEffect();
             changes++;
@@ -4242,8 +4241,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Ears!
         if (player.ears.type != Ears.GREMLIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nWhoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in "+player.hairColor+" fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears!</b>");
-            setEarType(Ears.GREMLIN);
+            outputText("\n\n");
+            CoC.instance.transformations.EarsGremlin.applyEffect();
             changes++;
         }
         // Remove gills
@@ -4369,7 +4368,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
-            humanizeArms();
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //Removes wings!
@@ -4389,7 +4389,7 @@ public final class Mutations extends MutationsHelper {
             humanizeLowerBody();
             changes++;
         }
-        if (player.eyes.type == Eyes.HUMAN && !CoC.instance.transformations.EyesGoblinColors.isPresent() && changes < changeLimit && rand(3) == 0) {
+        if (player.eyes.type == Eyes.HUMAN && CoC.instance.transformations.EyesGoblinColors.isPossible() && changes < changeLimit && rand(3) == 0) {
             CoC.instance.transformations.EyesGoblinColors.applyEffect();
             changes++;
         }
@@ -4455,8 +4455,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Ears!
         if (player.ears.type != Ears.ELFIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
-            setEarType(Ears.ELFIN);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsElfin.applyEffect();
             changes++;
         }
         // Remove gills
@@ -4528,8 +4528,8 @@ public final class Mutations extends MutationsHelper {
         }
         //1.Goopy arms
         if (player.arms.type != Arms.GOO && changes < changeLimit && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYour arms become increasingly wet, as if they were sweating heavily, until eventually you're unsure whether or not they are even solid. The sweat clears up, turning to " + player.skinTone + " slime. At first, it feels weird, because they are neither entirely solid or liquid, but the simple act of lengthening your limbs to ridiculous reach amuses you. Furthermore you can see right through your hands as if looking through water. Perhaps there's some use to your <b>new goo dripping arms.</b>");
-            setArmType(Arms.GOO);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsGoo.applyEffect();
             changes++;
         }
         //2.Goopy skin
@@ -4555,7 +4555,7 @@ public final class Mutations extends MutationsHelper {
         }
         ////2a.Make alterations to dick/vaginal/nippular descriptors to match
         //3.Goopy hair
-        if (player.hasGooSkin() && !CoC.instance.transformations.HairGoo.isPresent() && rand(2) == 0 && changes < changeLimit) {
+        if (player.hasGooSkin() && CoC.instance.transformations.HairGoo.isPossible() && rand(2) == 0 && changes < changeLimit) {
 		    outputText("\n\n");
 		    CoC.instance.transformations.HairGoo.applyEffect();
             dynStats("lus", 10);
@@ -4721,12 +4721,7 @@ public final class Mutations extends MutationsHelper {
             }
             //Ear tf
             if (player.faceType == Face.SHARK_TEETH && player.ears.type != Ears.SHARK && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-                if (player.ears.type != Ears.HUMAN) {
-                    outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, fin like ears just like those of a shark girl.</b>");
-                } else {
-                    outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed fin like ears just like those of a shark girl</b>.  You bet they look cute!");
-                }
-                setEarType(Ears.SHARK);
+                CoC.instance.transformations.EarsShark.applyEffect();
                 changes++;
             }
             //Remove odd eyes
@@ -4797,8 +4792,8 @@ public final class Mutations extends MutationsHelper {
             }
             //Arms
             if (player.lowerBody == LowerBody.SHARK && !InCollection(player.arms.type, Arms.SHARK, Arms.GARGOYLE) && changes < changeLimit && rand(3) == 0) {
-                outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form with exception places between your finger which starting show signs to growing webbing. Soon after you start sweating profusely and panting loudly, feeling the space near your elbows shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from your forearms. You examine them carefully and make a few modifications to your [armor] to accommodate your new fins. <b>You now have shark arms.</b>");
-                setArmType(Arms.SHARK);
+                outputText("\n\n");
+                CoC.instance.transformations.ArmsShark.applyEffect();
                 changes++;
             }
             //FINZ
@@ -5053,9 +5048,9 @@ public final class Mutations extends MutationsHelper {
         }
         //Ears!
         if (player.ears.type != Ears.SNAKE && player.eyes.type == Eyes.SNAKE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed ears covered in small scales</b>.  You bet they look cute!");
+            outputText("\n\n");
+			CoC.instance.transformations.EarsSnake.applyEffect();
             changes++;
-            setEarType(Ears.SNAKE);
         }
         // Remove gills
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
@@ -5306,12 +5301,12 @@ public final class Mutations extends MutationsHelper {
         }
         //Ears!
         if ((type == 0 || type == 2) && player.ears.type != Ears.SNAKE && player.eyes.type == Eyes.SNAKE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed ears covered in small scales</b>.  You bet they look cute!");
+            outputText("\n\n");
+			CoC.instance.transformations.EarsSnake.applyEffect();
             changes++;
-            setEarType(Ears.SNAKE);
         }
         //Gorgon hair
-        if ((type == 0 || type == 3) && player.ears.type == Ears.SNAKE && !CoC.instance.transformations.HairGorgon.isPresent() && changes < changeLimit && rand(4) == 0) {
+        if ((type == 0 || type == 3) && player.ears.type == Ears.SNAKE && CoC.instance.transformations.HairGorgon.isPossible() && changes < changeLimit && rand(4) == 0) {
 		    outputText("\n\n");
 		    CoC.instance.transformations.HairGorgon.applyEffect();
             changes++;
@@ -5336,23 +5331,19 @@ public final class Mutations extends MutationsHelper {
                 if (player.horns.count > 0) {
                     //High quantity demon horns
                     if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
-                        outputText("\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have four draconic-looking horns, each about twelve inches long.");
-                        setHornType(Horns.DRACONIC_X4_12_INCH_LONG, 12);
+                        outputText("\n\n");
+                        CoC.instance.transformations.HornsDraconicQuadruple.applyEffect();
                     } else {
-                        outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They must look something like the horns the dragons in your village's legends always had.");
-                        setHornType(Horns.DRACONIC_X2);
-                        if (player.horns.count > 13) {
-                            outputText("  The change seems to have shrunken the horns, they're about a foot long now.");
-                            player.horns.count = 12;
-                        }
+                        outputText("\n\n");
+                        CoC.instance.transformations.HornsDraconicDual.applyEffect();
                     }
                     changes++;
                 }
                 //No horns
                 else {
                     //-If no horns, grow a pair
-                    outputText("\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horns sprout from your head before stopping.  <b>You have about four inches of dragon-like horns.</b>");
-                    setHornType(Horns.DRACONIC_X2, 4);
+                    outputText("\n\n");
+                    CoC.instance.transformations.HornsDraconicDual.applyEffect();
                     changes++;
                 }
             }
@@ -5373,8 +5364,8 @@ public final class Mutations extends MutationsHelper {
                     //maxxed out, new row
                     else {
                         //--Next horns growth adds second row and brings length up to 12\"
-                        outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a vouivre can grow.</b>");
-                        setHornType(Horns.DRACONIC_X4_12_INCH_LONG);
+                        outputText("\n\n");
+                        CoC.instance.transformations.HornsDraconicQuadruple.applyEffect();
                         changes++;
                     }
                 }
@@ -5382,8 +5373,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Gain Dragon Ears
         if (type == 1 && changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.SNAKE && player.ears.type != Ears.DRAGON) {
-            setEarType(Ears.DRAGON);
-            outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.  <b>You now have dragon ears!</b>");
+            outputText("\n\n");
+			CoC.instance.transformations.EarsDraconic.applyEffect();
             changes++;
         }
         //Grow Dragon Wings
@@ -5454,26 +5445,26 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Dragon Arms
-        if (type == 1 && player.wings.type == Wings.DRACONIC_HUGE && player.arms.type != Arms.DRAGON && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  dragon, one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>");
-            setArmType(Arms.DRAGON);
+        if (type == 1 && player.wings.type == Wings.DRACONIC_HUGE && player.arms.type != Arms.DRACONIC && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsDraconic.applyEffect();
             changes++;
         }
         //Feathery Arms
         if (type == 2 && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.HARPY) && player.ears.type == Ears.SNAKE && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nWhen you go to wipe your mouth form remains of the oil, instead of the usual texture of your [skin.type] on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.");
-            setArmType(Arms.HARPY);
+            outputText("\n\nWhen you go to wipe your mouth form remains of the oil, instead of the usual texture of your [skin.type] on your lips, you feel feathers! ");
+            CoC.instance.transformations.ArmsHarpy.applyEffect();
             changes++;
         }
         //Hydra Arms
         if (type == 3 && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.HYDRA) && player.ears.type == Ears.SNAKE && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn’t getting rid of the itch. After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance changed into that of a reptile with leathery scales and vicious claws replacing your fingernails. <b>You now have hydra arms.</b>");
-            setArmType(Arms.HYDRA);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsHydra.applyEffect();
             changes++;
         }
 
         //Feathery Hair
-        if (type == 2 && !CoC.instance.transformations.HairFeather.isPresent() && player.wings.type == Wings.FEATHERED_LARGE && changes < changeLimit && rand(4) == 0) {
+        if (type == 2 && CoC.instance.transformations.HairFeather.isPossible() && player.wings.type == Wings.FEATHERED_LARGE && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.HairFeather.applyEffect();
             changes++;
@@ -5738,7 +5729,8 @@ public final class Mutations extends MutationsHelper {
         //-----------------------
         //-Human arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(3) == 0) {
-            humanizeArms();
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //-Human face
@@ -5761,7 +5753,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Gain human ears (If you have human face)
         if ((player.ears.type != Ears.HUMAN && player.faceType == Face.HUMAN) && changes < changeLimit && rand(3) == 0) {
-            humanizeEars();
+            outputText("\n\n");
+            CoC.instance.transformations.EarsHuman.applyEffect();
             changes++;
         }
         // Remove gills
@@ -5804,10 +5797,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Removes horns
         if (changes < changeLimit && player.horns.count > 0 && player.horns.type != Horns.GARGOYLE && rand(3) == 0) {
-            if (player.horns.type == Horns.ORCHID) outputText("\n\nYour orchid flowers crumble, falling apart");
-            else outputText("\n\nYour horns crumble, falling apart in large chunks");
-            outputText(" until they flake away to nothing.");
-            setHornType(Horns.NONE, 0);
+            outputText("\n\n");
+            CoC.instance.transformations.HornsNone.applyEffect();
             changes++;
         }
         //Removes wings
@@ -6198,23 +6189,13 @@ public final class Mutations extends MutationsHelper {
         //Body type changes
         //DA EARZ
         if (player.ears.type != Ears.CAT && player.tailType != Tail.GARGOYLE && type != 3 && rand(3) == 0 && changes < changeLimit) {
-            //human to cat:
-            if (player.ears.type == Ears.HUMAN) {
-                if (rand(2) == 0) outputText("\n\nThe skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head. They shift and elongate a little, fur growing on them as they become feline in nature. <b>You now have cat ears.</b>");
-                else outputText("\n\nYour ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they've migrated up to the top of your head and increased in size. The tingling stops and you find yourself hearing noises in a whole new way. <b>You now have cat ears.</b>");
-            }
-            //non human to cat:
-            else {
-                if (rand(2) == 0) outputText("\n\nYour ears change shape, morphing into pointed, feline ears!  They swivel about reflexively as you adjust to them.  <b>You now have cat ears.</b>");
-                else outputText("\n\nYour ears tingle and begin to change shape. Within a few moments, they've become long and feline.  Thanks to the new fuzzy organs, you find yourself able to hear things that eluded your notice up until now. <b>You now have cat ears.</b>");
-            }
-            setEarType(Ears.CAT);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsCat.applyEffect();
             changes++;
         }
         if (player.ears.type != Ears.DISPLACER && player.tailType != Tail.GARGOYLE && type == 3 && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYour ears begin to prickle and burn as the skin tears and stretches migrating to the top of your head as they change into long wide, deep ears, perfect for catching any stray sound. Which becomes apparent when your hearing becomes far more clear than it has ever been. <b>Sound has become an entirely new experience now that you have displacer beast ears!</b>");
-            setEarType(Ears.DISPLACER);
-            player.coatColor = "midnight";
+            outputText("\n\n");
+			CoC.instance.transformations.EarsDisplacer.applyEffect();
             changes++;
         }
         //DA TAIL (IF ALREADY HAZ URZ)
@@ -6290,21 +6271,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Da cat arm
         if (player.lowerBody == LowerBody.CAT && type != 3 && rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.CAT) {
-            if (player.arms.type != Arms.HUMAN) {
-                humanizeArms();
-                outputText(" ");
-            } else outputText("\n\n");
-            outputText("Your hands suddenly start to hurt as your arms grows a thick coat of [skin coat.color] fur up to your shoulders. You watch enthralled as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have cat paw hands.</b>");
-            setArmType(Arms.CAT);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsCat.applyEffect();
             changes++;
         }
         if (player.lowerBody == LowerBody.LION && type == 3 && rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.DISPLACER) {
-            if (player.arms.type != Arms.HUMAN) {
-                humanizeArms();
-                outputText(" ");
-            } else outputText("\n\n");
-            outputText("Something weird is happening around the level of your ribcage. Painfully large bumps start expanding on the side of your body. You fall on all fours panting heavily from the pain as two new limbs surge under your arms. As you sit, trying to grab these new limbs to check them out, you grab your arms instead. No wait your arm grabbed your arm that grabs another arm?! As you examine yourself you discover a second set of limbs grew under your arms. <b>Guess if your mind actually managed to process the action correctly you could actually use four weapons at once, instead you move around on your three set of limbs not unlike a displacer beast.</b>");
-            setArmType(Arms.DISPLACER);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsDisplacer.applyEffect();
             changes++;
         }
         if (player.arms.type == Arms.CAT && type == 1 && player.rearBody.type != RearBody.LION_MANE && player.tailType == Tail.CAT && player.tailCount == 2 && changes < changeLimit && rand(3) == 0) {
@@ -6354,7 +6327,7 @@ public final class Mutations extends MutationsHelper {
             CoC.instance.transformations.EyesCat.applyEffect();
             changes++;
         }
-        if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.TongueCat.isPresent() && !CoC.instance.transformations.EyesDisplacer.isPresent() && type == 3) {
+        if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.TongueCat.isPresent() && CoC.instance.transformations.EyesDisplacer.isPossible() && type == 3) {
             CoC.instance.transformations.EyesDisplacer.applyEffect();
             changes++;
         }
@@ -6633,26 +6606,20 @@ public final class Mutations extends MutationsHelper {
             //No dragon horns yet.
             if (player.horns.type != Horns.DRACONIC_X2 && player.horns.type != Horns.DRACONIC_X4_12_INCH_LONG) {
                 //Already have horns
+                outputText("\n\n");
                 if (player.horns.count > 0) {
                     //High quantity demon horns
                     if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
-                        outputText("\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have four draconic-looking horns, each about twelve inches long.");
-                        setHornType(Horns.DRACONIC_X4_12_INCH_LONG, 12);
+                        CoC.instance.transformations.HornsDraconicQuadruple.applyEffect();
                     } else {
-                        outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They must look something like the horns the dragons in your village's legends always had.");
-                        setHornType(Horns.DRACONIC_X2);
-                        if (player.horns.count > 13) {
-                            outputText("  The change seems to have shrunken the horns, they're about a foot long now.");
-                            player.horns.count = 12;
-                        }
+                        CoC.instance.transformations.HornsDraconicDual.applyEffect();
                     }
                     changes++;
                 }
                 //No horns
                 else {
                     //-If no horns, grow a pair
-                    outputText("\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horns sprout from your head before stopping.  <b>You have about four inches of dragon-like horns.</b>");
-                    setHornType(Horns.DRACONIC_X2, 4);
+                    CoC.instance.transformations.HornsDraconicDual.applyEffect();
                     changes++;
                 }
             }
@@ -6673,8 +6640,8 @@ public final class Mutations extends MutationsHelper {
                     //maxxed out, new row
                     else {
                         //--Next horns growth adds second row and brings length up to 12\"
-                        outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a lizan can grow.</b>");
-                        setHornType(Horns.DRACONIC_X4_12_INCH_LONG);
+                        outputText("\n\n");
+                        CoC.instance.transformations.HornsDraconicQuadruple.applyEffect();
                         changes++;
                     }
                 }
@@ -6712,8 +6679,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.LIZARD && player.lowerBody == LowerBody.LIZARD && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  lizard, one with leathery scales and short claws replacing your fingernails.  <b>You now have lizard arms.</b>");
-            setArmType(Arms.LIZARD);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsLizard.applyEffect();
             changes++;
         }
         //-Tail – sinuous lizard tail
@@ -6738,8 +6705,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Ears become smaller nub-like openings?
         if (player.ears.type != Ears.LIZARD && player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && changes < changeLimit && rand(5) == 0) {
-            outputText("\n\nTightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, scaley bumps with holes in their centers.  <b>You have reptilian ears!</b>");
-            setEarType(Ears.LIZARD);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsLizard.applyEffect();
             changes++;
         }
         //-Scales – color changes to red, green, white, blue, or black.  Rarely: purple or silver.
@@ -6971,8 +6938,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.SALAMANDER && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.SALAMANDER && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  salamander, one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
-            setArmType(Arms.SALAMANDER);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsSalamander.applyEffect();
             changes++;
         }
         //Lizard eyes
@@ -6999,7 +6966,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Human ears
         if (player.faceType == Face.SALAMANDER_FANGS && player.ears.type != Ears.HUMAN && changes < changeLimit && rand(4) == 0) {
-            humanizeEars();
+            outputText("\n\n");
+            CoC.instance.transformations.EarsHuman.applyEffect();
             changes++;
         }
         //Partial scaled skin
@@ -7158,8 +7126,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.CAVE_WYRM && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  cave wyrm, one with leathery, black scales and short claws replacing your fingernails.  <b>You now have a cave wyrm arms.</b>");
-            setArmType(Arms.CAVE_WYRM);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsCaveWyrm.applyEffect();
             changes++;
         }
         //Fanged face
@@ -7187,8 +7155,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Ears
         if (player.faceType == Face.SALAMANDER_FANGS && player.ears.type != Ears.CAVE_WYRM && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYour ears suddenly start to tingle. Strangely they change shape into something entirely different from what you would expect on a reptile covering in fur like those of cave wyrms. You can hear sound more acutely with your <b>new cave wyrm furry ears.</b>");
-            setEarType(Ears.CAVE_WYRM);
+            outputText("\n\n");
+            CoC.instance.transformations.EarsCaveWyrm.applyEffect();
             changes++;
         }
         //Tongue
@@ -7495,9 +7463,9 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.PHOENIX && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYou smile impishly as you lick the remains of the liqueur from your teeth, but when you go to wipe your mouth, instead of the usual texture of your [skin.type] on your lips, you feel feathers! You look on in horror while more of the crimson colored avian plumage sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.");
+            outputText("\n\nYou smile impishly as you lick the remains of the liqueur from your teeth, but then you notice something changing. ");
+            CoC.instance.transformations.ArmsPhoenix.applyEffect();
             changes++;
-            setArmType(Arms.PHOENIX);
         }
         //Wings
         if (player.wings.type == Wings.NONE && changes < changeLimit && player.arms.type == Arms.PHOENIX && rand(4) == 0) {
@@ -7513,7 +7481,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //-Feathery Hair
-        if (!CoC.instance.transformations.HairFeather.isPresent() && changes < changeLimit && player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0) {
+        if (CoC.instance.transformations.HairFeather.isPossible() && changes < changeLimit && player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0) {
             outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy red fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a phoenix!");
             player.hairColor = "platinum crimson";
             outputText("\n\n");
@@ -7545,17 +7513,14 @@ public final class Mutations extends MutationsHelper {
         }
         //Human ears
         if (player.faceType == Face.HUMAN && player.ears.type != Ears.HUMAN && changes < changeLimit && rand(4) == 0) {
-            humanizeEars();
+            outputText("\n\n");
+            CoC.instance.transformations.EarsHuman.applyEffect();
             changes++;
         }
         //Elfin ears
         if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
-            if (player.ears.type != Ears.HUMAN) {
-                outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>");
-            } else {
-                outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
-            }
-            setEarType(Ears.ELFIN);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsElfin.applyEffect();
             changes++;
         }
         //Partial scaled skin
@@ -7894,8 +7859,8 @@ public final class Mutations extends MutationsHelper {
         }
         //DAH BUNBUN EARZ - requires poofbutt!
         if (player.ears.type != Ears.BUNNY && changes < changeLimit && rand(3) == 0 && player.tailType == Tail.RABBIT) {
-            outputText("\n\nYour ears twitch and curl in on themselves, sliding around on the flesh of your head.  They grow warmer and warmer before they finally settle on the top of your head and unfurl into long, fluffy bunny-ears.  <b>You now have a pair of bunny ears.</b>");
-            setEarType(Ears.BUNNY);
+            outputText("\n\n");
+            CoC.instance.transformations.EarsBunny.applyEffect();
             changes++;
         }
         //DAH BUNBUNTAILZ
@@ -7948,7 +7913,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Human arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(3) == 0) {
-            humanizeArms();
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //-Human face
@@ -8301,13 +8267,13 @@ public final class Mutations extends MutationsHelper {
         }
         //-Feathery Arms
         if (!InCollection(player.arms.type, Arms.GARGOYLE, Arms.HARPY) && changes < changeLimit && (type == 1 || player.hairType == 1) && rand(4) == 0) {
-            outputText("\n\nYou smile impishly as you lick the last bits of the nut from your teeth, but when you go to wipe your mouth, instead of the usual texture of your [skin.type] on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.");
-            setArmType(Arms.HARPY);
+            outputText("\n\nYou smile impishly as you lick the last bits of the nut from your teeth, but when you go to wipe your mouth, instead of the usual texture of your [skin.type] on your lips, you feel feathers! ");
+            CoC.instance.transformations.ArmsHarpy.applyEffect();
             changes++;
         }
 
         //-Feathery Hair
-        if (!CoC.instance.transformations.HairFeather.isPresent() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && (type == 1 || player.faceType == Face.HUMAN) && rand(4) == 0) {
+        if (CoC.instance.transformations.HairFeather.isPossible() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && (type == 1 || player.faceType == Face.HUMAN) && rand(4) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.HairFeather.applyEffect();
             changes++;
@@ -8320,7 +8286,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Gain human ears (keep elf ears)
         if ((player.ears.type != Ears.HUMAN && player.ears.type != Ears.ELFIN) && changes < changeLimit && rand(4) == 0) {
-            humanizeEars();
+            outputText("\n\n");
+            CoC.instance.transformations.EarsHuman.applyEffect();
             changes++;
         }
         // Remove gills
@@ -8511,29 +8478,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.AVIAN && player.tailType == Tail.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
-            if (player.skin.hasChitin()) {
-                outputText("\n\nUghh, was that seed good for your body? You wince in pain, as some part of you is obviously not happy of being subjected to the fruit mysterious properties. As you direct your attention to your arms, you’re alarmed by their increasingly rigid feeling, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.");
-                outputText("\n\nJust when you thought that nothing could feel worse, you see how the chitin on your arms fissures, falling to the ground like pieces of a broken vase and leaving a mellified tissue beneath. To you relief, the ‘jelly’ also fall, leaving only normal skin on your arms.");
-                outputText("\n\nThen, a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, tough your fingernails turn into short talons.");
-            } else if (player.hasFur()) {
-                outputText("\n\nA bit weary about the possible effects of the seed on your body, you quickly notice when the fur covering your starts thickening, some patches merging an thickening, first forming barbs, and then straight-out feathers. To your surprise, your hand and forearms become strangely numb, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.");
-                outputText("\n\nThe newly formed feathers keep growing making the excess fur fall, until you’ve gained a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. Once the effects on that area end, the fur over your hands changes too, falling quickly and leaving behind soft, bare skin, that quickly turns into a layer of [skin], skin, ");
-                outputText("albeit rougher than the usual, made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.");
-            } else if (player.hasScales()) {
-                outputText("\n\nUndoubtedly affected by the dry fruit reactives, the layer of scales covering your arms falls like snowflakes, leaving only a soft layer of [skin] behind. To your surprise, your hand and forearms become strangely numb, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.");
-                outputText("\n\nThen, a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.");
-            } else {
-                outputText("\n\nJust after finishing the fruit, your hand and forearms become strangely numb, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.");
-                outputText("\n\nThen, a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.");
-            }
-            outputText("\n\nLuckily, the sensation returns to your arms, and you’re able to use them with normalcy, with the difference that <b>they’re now avian looking ones!</b>.");
-            setArmType(Arms.AVIAN);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsAvian.applyEffect();
             changes++;
         }
         if (player.arms.type != Arms.GRYPHON && changes < changeLimit && type == 1 && rand(3) == 0) {
-            outputText("\n\nThe skin on your arms change a bit, as the " + player.skin.coat.color2 + " turning into soft, feline fur. Your palms and fingers acquire pink paw pads, while at the end of each one of your fingers, the talons sharpen and become prehensile, adopting a posture better suited to pounce over a unsuspecting victim.");
-            outputText("\n\nFrom the fringe on your elbows to your armpits, your " + player.skin.coat.color + " colored plumage remains the same. <b>At the end, you’ve gotten gryphon-like arms!</b>.");
-            setArmType(Arms.GRYPHON);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsGryphon.applyEffect();
             changes++;
         }
         //Wings
@@ -8559,7 +8510,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Hair
-        if (!CoC.instance.transformations.HairFeather.isPresent() && player.hairLength > 0 && changes < changeLimit && type == 0 && rand(3) == 0) {
+        if (CoC.instance.transformations.HairFeather.isPossible() && player.hairLength > 0 && changes < changeLimit && type == 0 && rand(3) == 0) {
             outputText("\n\nWhile you’re yet processing the taste of that odd seed, you suddenly start feeling an annoying itching coming from your scalp, without a doubt a change brought by the transformative nature of the seed.");
             outputText("\n\nThe base of each one of your hairs thicken noticeably, and from every one of them, small hairy filament start sprouting of each side. Soon you realize that your hairs are becoming feathers, and in a question of minute, <b>you’re left with a mane of [hair]!</b>");
 		    outputText("\n\n");
@@ -8579,14 +8530,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Ears
         if (player.ears.type != Ears.AVIAN && changes < changeLimit && type == 0 && rand(3) == 0) {
-            outputText("\n\nYou feel your ears twitching, and before you can realize, they recede on your body, leaving behind two holes, almost completely hidden by feathers and your [hair]. Fearing that most of your hearing range and ability was damaged or is blocked by the feathers, you test the sounds around your, and breathe on relief at the realization that your hearing is as good as always.");
-            setEarType(Ears.AVIAN);
+            outputText("\n\n");
+            CoC.instance.transformations.EarsAvian.applyEffect();
             changes++;
         }
         if (player.ears.type != Ears.GRYPHON && player.tailType == Tail.GRIFFIN && changes < changeLimit && type == 1 && rand(3) == 0) {
-            outputText("\n\nAfter another session under the statue magic, the lingering effects seem to having taken a toll on you, as your ears buzz. The sound turns worse for a second, and then vanish. You hear for a second a light flapping sound, and then, nothing.\n\nWhen everything seems to have finished, you realize that your hearing range has changed, and while your overall sense of hearing remains the same, pinpointing the source of a sounds is much easier. On a nearby reflection you discover the reason: ");
-            outputText("two triangular ears have sprouted at your head, streamlined to flight and with a gryphon like appearance. A short layer of downy feathers covers them, the tip having a distinctive tuft. Checking that your ears are rightly placed on the new auricles, <b>you smile happily at the sight of your gryphon ears,</b> noting how well they compliment your looks.");
-            setEarType(Ears.GRYPHON);
+            outputText("\n\n");
+            CoC.instance.transformations.EarsGryphon.applyEffect();
             changes++;
         }
         //Skin
@@ -8711,7 +8661,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
-            humanizeArms();
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsHuman.applyEffect();
             changes++;
         }
 
@@ -8832,12 +8783,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Roo ears
         if (player.ears.type != Ears.KANGAROO && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-            //Bunbun ears get special texts!
-            if (player.ears.type == Ears.BUNNY) outputText("\n\nYour ears stiffen and shift to the sides!  You reach up and find them pointed outwards instead of up and down; they feel a bit wider now as well.  As you touch them, you can feel them swiveling in place in response to nearby sounds.  <b>You now have a pair of kangaroo ears!</b>");
-            //Everybody else?  Yeah lazy.
-            else outputText("\n\nYour ears twist painfully as though being yanked upwards and you clap your hands to your head.  Feeling them out, you discover them growing!  They stretch upwards, reaching past your fingertips, and then the tugging stops.  You cautiously feel along their lengths; they're long and stiff, but pointed outwards now, and they swivel around as you listen.  <b>You now have a pair of kangaroo ears!</b>");
+            CoC.instance.transformations.EarsKangaroo.applyEffect();
             changes++;
-            setEarType(Ears.KANGAROO);
         }
         //UBEROOOO
         //kangaroo perk: - any liquid or food intake will accelerate a pregnancy, but it will not progress otherwise
@@ -9332,13 +9279,13 @@ public final class Mutations extends MutationsHelper {
         }
         //Appearance Change
         //Hair
-        if (rand(3) == 0 && changes < changeLimit && !CoC.instance.transformations.HairGhost.isPresent()) {
+        if (rand(3) == 0 && changes < changeLimit && CoC.instance.transformations.HairGhost.isPossible()) {
             outputText("\n\n");
             CoC.instance.transformations.HairGhost.applyEffect();
             changes++;
         }
         //Eyes
-        if (player.hairType == Hair.GHOST && !CoC.instance.transformations.EyesGhost.isPresent() && rand(3) == 0 && changes < changeLimit) {
+        if (player.hairType == Hair.GHOST && CoC.instance.transformations.EyesGhost.isPossible() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
 			CoC.instance.transformations.EyesGhost.applyEffect();
             changes++;
@@ -9377,8 +9324,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (!InCollection(player.arms.type, Arms.GARGOYLE, Arms.GHOST) && player.lowerBody == LowerBody.GHOST && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nA numbing sensation crawls upwards from your hands to your elbows, lingering for a few moments. As the pain subsides, you see that your hands have become incorporeal! Panicking, you reach for your weapon, something to grasp and… surprisingly, you manage to hold it normally. After a few moments when you calm down, you drop it. It seems you need to take extra care when you hold things from now on, as <b>you have ghastly hands!</b>");
-            setArmType(Arms.GHOST);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsGhost.applyEffect();
             changes++;
         }
         //Removes antennae
@@ -9426,17 +9373,10 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Horns
-        if (player.hairType == Hair.GHOST && changes < changeLimit && rand(3) == 0 && type == 1) {
-            if (player.horns.count == 0 && player.horns.type == Horns.NONE) {
-                outputText("\n\nYou notice something bright moving out of the corner of your eye. You look over to see an ethereal ball of light floating above your head. You can see four more floating with it slowly circling above your head. You touch one, surprised that you can actually feel it accompanied by a chilling sensation. <b>It seems that these ghostly wisps are a part of you.</b>");
-                setHornType(Horns.GHOSTLY_WISPS, 2);
-                changes++;
-            }
-            if (player.horns.count > 0 && player.horns.type != Horns.GHOSTLY_WISPS) {
-                outputText("\n\nYour old horns slowly crumbling away until nothing is left. Then you notice something bright moving out of the corner of your eye. You look over to see an ethereal ball of light floating above your head. You can see four more floating with it slowly circling above your head. You touch one, surprised that you can actually feel it accompanied by a chilling sensation. <b>It seems that these ghostly wisps are a part of you.</b>");
-                setHornType(Horns.GHOSTLY_WISPS, 2);
-                changes++;
-            }
+        if (player.hairType == Hair.GHOST && changes < changeLimit && rand(3) == 0 && type == 1 && player.horns.type != Horns.GHOSTLY_WISPS) {
+            outputText("\n\n");
+            CoC.instance.transformations.HornsGhostlyWisps.applyEffect();
+            changes++;
         }
         //Rear body
         if (player.lowerBody == LowerBody.GHOST_2 && player.rearBody.type != RearBody.GHOSTLY_AURA && changes < changeLimit && rand(3) == 0 && type == 1) {
@@ -9464,11 +9404,7 @@ public final class Mutations extends MutationsHelper {
             outputText(" veins etching deep into your skin across the entirety of your body. <b>You now have ");
             if (player.skin.base.color == "sable") outputText("white");
             if (player.skin.base.color == "white") outputText("black");
-            outputText(" veins.</b>");/*
-				if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
-					outputText("\n\n<b>Genetic Memory: White/Black Veins - Memorized!</b>\n\n");
-					player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
-				}*/
+            outputText(" veins.</b>");
             player.skin.base.pattern = Skin.PATTERN_WHITE_BLACK_VEINS;
             if (player.skin.base.color == "sable") player.skin.base.color2 = "white";
             if (player.skin.base.color == "white") player.skin.base.color2 = "black";
@@ -9582,17 +9518,21 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.lowerBody == LowerBody.ELF && player.arms.type != Arms.ELF && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
             if (player.arms.type == Arms.HUMAN) {
-                outputText("\n\nSomething in your hands shift as they change taking on a more feminine fragile yet agile structure. You discover with surprise your dexterity has greatly increased allowing you to manipulate things in your delicate elven fingers with almost unreal precision. However your grip has become weaker as a result, weakening your ability to use raw force over finesse. <b>You now have delicate elven hands.</b>");
-                setArmType(Arms.ELF);
-            } else humanizeArms();
+                CoC.instance.transformations.ArmsElf.applyEffect();
+            } else {
+                CoC.instance.transformations.ArmsHuman.applyEffect();
+            }
             changes++;
         }
         if (player.arms.type == Arms.ELF && player.ears.type != Ears.ELVEN && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
             if (player.ears.type == Ears.HUMAN) {
-                outputText("\n\nSounds become increasingly audible as a weird tingling runs through your scalp and your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed elven ears.</b> The points are quite sensitive and you will have to get used to your new enhanced hearing ability.");
-                setEarType(Ears.ELVEN);
-            } else humanizeEars();
+			    CoC.instance.transformations.EarsElven.applyEffect();
+            } else {
+                CoC.instance.transformations.EarsHuman.applyEffect();
+            }
             changes++;
         }
         if (player.ears.type == Ears.ELVEN && player.eyes.type != Eyes.ELF && changes < changeLimit && rand(3) == 0) {
@@ -9621,7 +9561,7 @@ public final class Mutations extends MutationsHelper {
             CoC.instance.transformations.TongueHuman.applyEffect();
             changes++;
         }
-        if (!CoC.instance.transformations.HairSilky.isPresent() && changes < changeLimit && rand(4) == 0) {
+        if (CoC.instance.transformations.HairSilky.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.HairSilky.applyEffect();
             changes++;
@@ -9729,10 +9669,12 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.lowerBody == LowerBody.ORC && player.arms.type != Arms.ORC && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
             if (player.arms.type == Arms.HUMAN) {
-                outputText("\n\nThe skin on your arms feels as if they’re being cut open as a whole new set of intricate scar-like tattoos covers them. Furthermore your nails become increasingly pointed just like a set of claws and your arms in general grow a bit longer. Well, it seems you’re going to have some issues hiding your <b>scar tattooed arms and sharp nails.</b>");
-                setArmType(Arms.ORC);
-            } else humanizeArms();
+                CoC.instance.transformations.ArmsOrc.applyEffect();
+            } else {
+                CoC.instance.transformations.ArmsHuman.applyEffect();
+            }
             changes++;
         }
         if (player.arms.type == Arms.ORC && player.faceType != Face.ORC_FANGS && changes < changeLimit && rand(3) == 0) {
@@ -9742,12 +9684,15 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.ears.type != Ears.ELFIN && rand(3) == 0 && changes < changeLimit) {
             if (player.ears.type == Ears.HUMAN) {
-                outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>");
-                setEarType(Ears.ELFIN);
-            } else humanizeEars();
+                outputText("\n\n");
+			    CoC.instance.transformations.EarsElfin.applyEffect();
+            } else {
+            	outputText("\n\n");
+            	CoC.instance.transformations.EarsHuman.applyEffect();
+            }
             changes++;
         }
-        if (player.ears.type == Ears.ELFIN && !CoC.instance.transformations.EyesOrc.isPresent() && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type == Ears.ELFIN && CoC.instance.transformations.EyesOrc.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (player.eyes.type == Eyes.HUMAN) {
                 CoC.instance.transformations.EyesOrc.applyEffect();
@@ -9851,27 +9796,22 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.lowerBody == LowerBody.RAIJU && player.arms.type != Arms.RAIJU && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
             if (player.arms.type == Arms.HUMAN) {
-                outputText("\n\nYour nails tingle as they elongate into white claws! They look quite dangerous, but you feel the strange need to use them to stimulate your ");
-                if (player.gender == 1 || player.gender == 3) outputText("[cock]");
-                if (player.gender == 3) outputText(" and ");
-                if (player.gender > 1) outputText("[clit]");
-                outputText(". ");
-                if (player.cor >= 50) outputText("You give a lusty smile, thinking that it wouldn't be so bad...");
-                else outputText("You scowl, shaking away the impure thoughts.");
-                setArmType(Arms.RAIJU);
-            } else humanizeArms();
+                CoC.instance.transformations.ArmsRaiju.applyEffect();
+            } else {
+                CoC.instance.transformations.ArmsHuman.applyEffect();
+            }
             changes++;
         }
         if (player.arms.type == Arms.RAIJU && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou shiver in delight as fur begins to form on your forearms, high voltage running along from your shoulders to your fingertips. Before you know it your hands turned to paws and your sharp nails to vicious looking claws coated with electricity. You can't wait to wrap those around a juicy cock or dip them into a waiting snatch.");
-            if (player.coatColor == "") player.coatColor = player.hairColor;
-            setArmType(Arms.RAIJU_2);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsRaijuPaws.applyEffect();
             changes++;
         }
-        if (player.arms.type == Arms.RAIJU_2 && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nFur falls of your arms as your pawed hands revert back to human ones. Almost human ones actually as you nail retained their claw like sharpness.");
-            setArmType(Arms.RAIJU);
+        if (player.arms.type == Arms.RAIJU_PAWS && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsRaiju.applyEffect();
             changes++;
         }
         if (player.arms.type == Arms.RAIJU && player.tailType != Tail.RAIJU && changes < changeLimit && rand(3) == 0) {
@@ -9901,12 +9841,15 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.faceType == Face.WEASEL && player.ears.type != Ears.RAIJU && changes < changeLimit && rand(3) == 0) {
             if (player.ears.type == Ears.HUMAN) {
-                outputText("\n\nYour ears twitch as jolts of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new raiju ears!</b>");
-                setEarType(Ears.RAIJU);
-            } else humanizeEars();
+                outputText("\n\n");
+                CoC.instance.transformations.EarsRaiju.applyEffect();
+            } else {
+            	outputText("\n\n");
+            	CoC.instance.transformations.EarsHuman.applyEffect();
+            }
             changes++;
         }
-        if (player.ears.type == Ears.RAIJU && !CoC.instance.transformations.EyesRaijuColors.isPresent() && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type == Ears.RAIJU && CoC.instance.transformations.EyesRaijuColors.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (player.eyes.type == Eyes.HUMAN) {
                 CoC.instance.transformations.EyesRaijuColors.applyEffect();
@@ -9916,7 +9859,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (!CoC.instance.transformations.HairStorm.isPresent() && changes < changeLimit && rand(4) == 0) {
+        if (CoC.instance.transformations.HairStorm.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.HairStorm.applyEffect();
             changes++;
@@ -10061,8 +10004,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Feathery Arms
         if (!InCollection(player.arms.type, Arms.GARGOYLE, Arms.HARPY) && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou smile impishly as you lick the last bits of the seed from your teeth, but when you go to wipe your mouth, instead of the usual texture of your [skin.type] on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your [skin.type], covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.");
-            setArmType(Arms.HARPY);
+            outputText("\n\nYou smile impishly as you lick the last bits of the seed from your teeth, but when you go to wipe your mouth, instead of the usual texture of your [skin.type] on your lips, you feel feathers! ");
+            CoC.instance.transformations.ArmsHarpy.applyEffect();
             changes++;
         }
         if (player.arms.type == Arms.HARPY && player.tailType != Tail.THUNDERBIRD && changes < changeLimit && rand(3) == 0) {
@@ -10082,16 +10025,12 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            if (player.ears.type != Ears.HUMAN) {
-                outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>");
-            } else {
-                outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
-            }
-            setEarType(Ears.ELFIN);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsElfin.applyEffect();
             changes++;
         }
 
-        if (player.ears.type == Ears.ELFIN && !CoC.instance.transformations.EyesRaijuColors.isPresent() && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type == Ears.ELFIN && CoC.instance.transformations.EyesRaijuColors.isPossible() && changes < changeLimit && rand(3) == 0) {
                 outputText("\n\n");
             if (player.eyes.type == Eyes.HUMAN) {
                 CoC.instance.transformations.EyesRaijuColors.applyEffect();
@@ -10101,7 +10040,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (!CoC.instance.transformations.HairStorm.isPresent() && changes < changeLimit && rand(4) == 0) {
+        if (CoC.instance.transformations.HairStorm.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.HairStorm.applyEffect();
             changes++;
@@ -10174,7 +10113,7 @@ public final class Mutations extends MutationsHelper {
         }
 		if (player.blockingBodyTransformations()) changeLimit = 0;
         //Physical
-		if (CoC.instance.transformations.EyesMonoeye.isPresent() && !CoC.instance.transformations.EyesChangeColor(["red"]).isPresent() && changes < changeLimit && rand(3) == 0) {
+		if (CoC.instance.transformations.EyesMonoeye.isPresent() && CoC.instance.transformations.EyesChangeColor(["red"]).isPossible() && changes < changeLimit && rand(3) == 0) {
             CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect();
             changes++;
         }
@@ -10217,12 +10156,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 		if (changes < changeLimit && player.lowerBody == LowerBody.GAZER && player.arms.type == Arms.HUMAN && player.arms.type != Arms.GAZER && rand(3) == 0 && type == 1) {
-            outputText("\n\nYour arms begin to sweat and drip at high rate until they cover in some kind of oily ink black mucus. It drops from your hands down to the ground oozing like tar. You would say ew but for some reason it doesn't smell so bad, heck taking a whiff it almost smells like perfume or rather aphrodisiacs. Heck thinking on it now from a far glance it looks like you are wearing sleeved gloves.  <b>Your arms are now covered from the forearm to the digits into tar like fluids.</b>");
-			setArmType(Arms.GAZER);
+            outputText("\n\n");
+			CoC.instance.transformations.ArmsGazer.applyEffect();
             changes++;
         }
 		if (changes < changeLimit && ((!InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && type == 0) || (!InCollection(player.arms.type, Arms.HUMAN, Arms.GAZER, Arms.GARGOYLE) && type == 1)) && rand(3) == 0) {
-            humanizeArms();
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsHuman.applyEffect();
             changes++;
         }
         if (!player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
@@ -10243,10 +10183,6 @@ public final class Mutations extends MutationsHelper {
 			}
 			if (!player.skin.hasOilySkin() && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nThe black tar like substance begins to drip everywhere around your body now, from your ass, your shoulders and even your chest Soon your torso looks like it bathed into tar some of it dripping down your body. The fluids however are regularly produced like sweat from your skin so you never run out. <b>Your body now drips black fluids.</b>");
-				/*if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
-					outputText("\n\n<b>Genetic Memory: Lighting Tattooed Skin - Memorized!</b>\n\n");
-					player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
-				}*/
 				player.skin.base.pattern = Skin.PATTERN_OIL;
 				player.skin.base.adj = "oily skin";
 				changes++;
@@ -10360,14 +10296,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.lowerBody == LowerBody.SQUIRREL && player.arms.type != Arms.SQUIRREL && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
             if (player.arms.type == Arms.HUMAN) {
-                outputText("\n\nYour nails tingle as they elongate into white claws. A coat of fur then begins to form up from your wrist to your elbows, " +
-                        "coating your forearms like bracers. Your hands feels stronger in every way, heck" +
-                        "<b> with these new claws you could just climb and stick to any surface just like a squirrel.</b>");
-                setArmType(Arms.SQUIRREL);
-                if (player.coatColor == "") player.coatColor = player.hairColor;
+                CoC.instance.transformations.ArmsSquirrel.applyEffect();
             }
-			else humanizeArms();
+			else {
+                CoC.instance.transformations.ArmsHuman.applyEffect();
+            }
             changes++;
         }
         if (player.faceType != Face.SMUG && changes < changeLimit && rand(3) == 0) {
@@ -10382,12 +10317,12 @@ public final class Mutations extends MutationsHelper {
         }
         if ((player.faceType == Face.SMUG || player.faceType == Face.SQUIRREL) && player.ears.type != Ears.SQUIRREL && changes < changeLimit && rand(3) == 0) {
             if (player.ears.type == Ears.HUMAN) {
-                outputText("\n\nYour ears suddenly stretch painfully, making you scream in pain as they move towards the top of your head, growing bigger. " +
-                        "Putting your hands to your ears you discover they are now covered with a fair amount of fur. " +
-                        " <b>You now have squirrel ears.</b>");
-                setEarType(Ears.SQUIRREL);
+                outputText("\n\n");
+                CoC.instance.transformations.EarsSquirrel.applyEffect();
+            } else {
+                outputText("\n\n");
+                CoC.instance.transformations.EarsHuman.applyEffect();
             }
-			else humanizeEars();
             changes++;
         }
 		if ((player.faceType == Face.SMUG || player.faceType == Face.SQUIRREL) && player.tongue.type != Tongue.RATATOSKR && changes < changeLimit && rand(3) == 0) {
@@ -10395,7 +10330,7 @@ public final class Mutations extends MutationsHelper {
 			CoC.instance.transformations.TongueRatatoskr.applyEffect();
 			changes++;
 		}
-        if (player.ears.type == Ears.SQUIRREL && !CoC.instance.transformations.EyesRatatoskr.isPresent() && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type == Ears.SQUIRREL && CoC.instance.transformations.EyesRatatoskr.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (player.eyes.type == Eyes.HUMAN) {
                 CoC.instance.transformations.EyesRatatoskr.applyEffect();
@@ -10405,7 +10340,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (!CoC.instance.transformations.HairRatatoskr.isPresent() && changes < changeLimit && rand(4) == 0) {
+        if (CoC.instance.transformations.HairRatatoskr.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.HairRatatoskr.applyEffect();
             changes++;
@@ -10512,24 +10447,17 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.lowerBody == LowerBody.WEASEL && player.arms.type != Arms.WEASEL && player.arms.type != Arms.KAMAITACHI && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
             if (player.arms.type == Arms.HUMAN) {
-                outputText("\n\nYour arms begins cover with fur and you watch spellbound as your nails elongate into small sharp animal claws. " +
-                        "They aren't exactly strong enough to deal damage but they'll be fine if you ever want to scratch yourself. " +
-                        "<b>You now have furry animal arms with paw-like hands not unlike those of a weasel.</b>");
-                setArmType(Arms.WEASEL);
-                if (player.coatColor == "") player.coatColor = player.hairColor;
-            } else humanizeArms();
+                CoC.instance.transformations.ArmsWeasel.applyEffect();
+            } else {
+                CoC.instance.transformations.ArmsHuman.applyEffect();
+            }
             changes++;
         }
         if (player.arms.type == Arms.WEASEL && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nSomething in your arm bones begins to shift as they suddenly curve and grow awkwardly through the skin, " +
-                    "piercing through your fur like a spike. Now juting outside of your wrists like a pair of natural tonfas, " +
-                    "the bones begin to reshape, polish and alter itself, fully taking on the consistency of steel! " +
-                    "You admire your two Kamaitachi scythes with stupor, they are sharp and hard enough to leave clean deep cuts even in the hardest " +
-                    "material and light enough that you can swing them around as if they weren't even there to begin with, lighter than air indeed. " +
-                    "Enemies better fear you now that you got those <b>Kamaitachi arm-scythes.</b>");
-            if (player.coatColor == "") player.coatColor = player.hairColor;
-            setArmType(Arms.KAMAITACHI);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsKamaitachi.applyEffect();
             changes++;
         }
         if (player.arms.type == Arms.KAMAITACHI && player.tailType != Tail.WEASEL && changes < changeLimit && rand(3) == 0) {
@@ -10562,15 +10490,18 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.faceType == Face.WEASEL && player.ears.type != Ears.WEASEL && changes < changeLimit && rand(3) == 0) {
             if (player.ears.type == Ears.HUMAN) {
-                outputText("\n\nYour ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have weasel ears.</b>");
-                setEarType(Ears.WEASEL);
-            } else humanizeEars();
+                outputText("\n\n");
+			    CoC.instance.transformations.EarsWeasel.applyEffect();
+            } else {
+            	outputText("\n\n");
+            	CoC.instance.transformations.EarsHuman.applyEffect();
+            }
             changes++;
         }
-        if (player.ears.type == Ears.WEASEL && !CoC.instance.transformations.EyesWeasel.isPresent() && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type == Ears.WEASEL && CoC.instance.transformations.EyesWeasel.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             if (transformations.EyesHuman.isPresent()) {
-                if (!CoC.instance.transformations.EyesKamaitachiColors.isPresent()) {
+                if (CoC.instance.transformations.EyesKamaitachiColors.isPossible()) {
                     outputText("\n\n");
                     CoC.instance.transformations.EyesKamaitachiColors.applyEffect();
                 }
@@ -10581,18 +10512,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (!CoC.instance.transformations.HairWindswept.isPresent() && changes < changeLimit && rand(4) == 0) {
+        if (CoC.instance.transformations.HairWindswept.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.HairWindswept.applyEffect();
             changes++;
         }
         if (!player.skin.hasWindSweptScars() && player.wings.type == Wings.WINDY_AURA && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYou scream in pain as your aura flares again, leaving clean cuts all over your body. The cuts glows green for an instant before taking back on a more ordinary brown tone, closing into what looks like innocuous scars at first glance." +
-                    " <b>Clearly those new windswept scars of yours actually improves your wind control, marking you as a full Kamaitachi.</b>");
-            //if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedLightningTattoed)) {
-            //    outputText("\n\n<b>Genetic Memory: Lighting Tattoed Skin - Memorized!</b>\n\n");
-            //    player.createStatusEffect(StatusEffects.UnlockedLightningTattoed, 0, 0, 0, 0);
-            //}
+            outputText("\n\nYou scream in pain as your aura flares again, leaving clean cuts all over your body. The cuts glows green for an instant before taking back on a more ordinary brown tone, closing into what looks like innocuous scars at first glance. <b>Clearly those new windswept scars of yours actually improves your wind control, marking you as a full Kamaitachi.</b>");
             player.skin.base.pattern = Skin.PATTERN_SCAR_WINDSWEPT;
             player.skin.base.adj = "windswept scars";
             changes++;
@@ -10733,7 +10659,7 @@ public final class Mutations extends MutationsHelper {
         }
         //-hair morphs to anemone tentacles, retains color, hair shrinks back to med-short('shaggy') and stops growing, lengthening treatments don't work and goblins won't cut it, but more anemone items can lengthen it one level at a time
 
-        if (player.gills.type == Gills.ANEMONE && !CoC.instance.transformations.HairAnemone.isPresent() && changes < changeLimit && rand(5) == 0) {
+        if (player.gills.type == Gills.ANEMONE && CoC.instance.transformations.HairAnemone.isPossible() && changes < changeLimit && rand(5) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.HairAnemone.applyEffect();
             changes++;
@@ -11058,22 +10984,15 @@ public final class Mutations extends MutationsHelper {
         }
         //Grow Fox Arms
         if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.FOX && player.lowerBody != LowerBody.GARGOYLE && rand(2) == 0) {
-            outputText("\n\nYour arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into wolf like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>");
-            setArmType(Arms.FOX);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsFox.applyEffect();
             changes++;
         }
         //Grow Fox Ears]
         //SECOND
         if ((enhanced || player.tailType == Tail.FOX) && player.ears.type != Ears.FOX && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-            //from human/gob/liz ears
-            if (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN || player.ears.type == Ears.LIZARD) {
-                outputText("\n\nThe sides of your face painfully stretch as your ears elongate and begin to push past your hairline, toward the top of your head.  They elongate, becoming large vulpine triangles covered in bushy fur.  <b>You now have fox ears.</b>");
-            }
-            //from dog/cat/roo ears
-            else {
-                outputText("\n\nYour ears change, shifting from their current shape to become vulpine in nature.  <b>You now have fox ears.</b>");
-            }
-            setEarType(Ears.FOX);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsFox.applyEffect();
             changes++;
         }
         //[Grow Fox Tail](fairly common)
@@ -11312,8 +11231,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.SALAMANDER && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.SALAMANDER && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After ignoring the sensation for a while, you finally glance down in irritation, only to discover that your arms had changed from it's former appearance to that of a  salamander, one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>");
-            setArmType(Arms.SALAMANDER);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsSalamander.applyEffect();
             changes++;
         }
         //Lizard eyes
@@ -11340,7 +11259,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Human ears
         if (player.faceType == Face.SALAMANDER_FANGS && player.ears.type != Ears.HUMAN && changes < changeLimit && rand(4) == 0) {
-            humanizeEars();
+            outputText("\n\n");
+            CoC.instance.transformations.EarsHuman.applyEffect();
             changes++;
         }
         //Partial scaled skin
@@ -11712,20 +11632,18 @@ public final class Mutations extends MutationsHelper {
         });
         //Kitsune arms
         mutationStep(player.arms.type == Arms.HUMAN, 2, function ():void {
-            outputText("\n\n Your finger tingle as your nails sharpen to point. You run them on a tree bark and they feel way harder than your old human nails. <b>You will be able to claw at your opponent with your sharp kitsune nails.</b>");
-            setArmType(Arms.KITSUNE);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsKitsune.applyEffect();
         });
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         mutationStep(!InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE, Arms.FOX, Arms.KITSUNE), 4, function ():void {
-            humanizeArms();
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsHuman.applyEffect();
         });
         //[Grow Fox Ears]
         mutationStep(player.tailType == Tail.FOX && player.ears.type != Ears.FOX, mystic ? 2 : 4, function ():void {
-            //if PC has non-animal ears
-            if (player.ears.type == Ears.HUMAN) outputText("\n\nThe sides of your face painfully stretch as your ears morph and begin to migrate up past your hairline, toward the top of your head.  They elongate, becoming large vulpine triangles covered in bushy fur.  <b>You now have fox ears.</b>");
-            //if PC has animal ears
-            else outputText("\n\nYour ears change shape, shifting from their current shape to become vulpine in nature.  <b>You now have fox ears.</b>");
-            setEarType(Ears.FOX);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsFox.applyEffect();
         });
         //[Change Hair Color: Golden-blonde, SIlver Blonde, White, Black, Red]
         mutationStep(!InCollection(player.hairColor, KitsuneScene.basicKitsuneHair) && player.lowerBody != LowerBody.GARGOYLE && !InCollection(player.hairColor, KitsuneScene.elderKitsuneColors), mystic ? 2 : 4, function ():void {
@@ -12238,7 +12156,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //PC Trap Effects
-        if (!CoC.instance.transformations.EyesSandTrap.isPresent() && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+        if (CoC.instance.transformations.EyesSandTrap.isPossible() && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
             outputText("\n\n");
             CoC.instance.transformations.EyesSandTrap.applyEffect();
             changes++;
@@ -12379,12 +12297,12 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Eyes Color
-        if (!CoC.instance.transformations.EyesRaccoonColors.isPresent() || !CoC.instance.transformations.EyesHuman.isPresent()) {
-            if (!CoC.instance.transformations.EyesRaccoonColors.isPresent()) {
+        if (CoC.instance.transformations.EyesRaccoonColors.isPossible() || CoC.instance.transformations.EyesHuman.isPossible()) {
+            if (CoC.instance.transformations.EyesRaccoonColors.isPossible()) {
                 outputText("\n\n");
                 CoC.instance.transformations.EyesRaccoonColors.applyEffect();
             }
-            if (!CoC.instance.transformations.EyesHuman.isPresent()) {
+            if (CoC.instance.transformations.EyesHuman.isPossible()) {
                 outputText("\n\n");
                 CoC.instance.transformations.EyesHuman.applyEffect();
             }
@@ -12393,13 +12311,8 @@ public final class Mutations extends MutationsHelper {
 
         //gain coon ears
         if (player.tailType == Tail.RACCOON && player.ears.type != Ears.RACCOON && rand(4) == 0 && changes < changeLimit) {
-            //from dog, kangaroo, bunny, other long ears
-            if (player.ears.type == Ears.DOG || player.ears.type == Ears.BUNNY || player.ears.type == Ears.KANGAROO) outputText("\n\nYour ears compress, constricting your ear canal momentarily.  You shake your head to get sound back, and reach up to touch the auricles, to find a pair of stubby egg-shaped ears in their place.  <b>You now have raccoon ears!</b>");
-            //from cat, horse, cow ears
-            else if (player.ears.type == Ears.HORSE || player.ears.type == Ears.COW || player.ears.type == Ears.CAT) outputText("\n\nYour ears tingle.  Huh.  Do they feel a bit rounder at the tip now?  <b>Looks like you have raccoon ears.</b>");
-            //from human, goblin, lizard or other short ears
-            else outputText("\n\nYour ears prick and stretch uncomfortably, poking up through your [hair].  Covering them with your hands, you feel them shaping into little eggdrop ornaments resting atop your head.  <b>You have raccoon ears!</b>");
-            setEarType(Ears.RACCOON);
+            outputText("\n\n");
+            CoC.instance.transformations.EarsRaccoon.applyEffect();
             changes++;
         }
         //gain feet-coon
@@ -12438,8 +12351,8 @@ public final class Mutations extends MutationsHelper {
 
         //Grow coon Arms
         if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.RACCOON && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0) {
-            outputText("\n\nYour arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into small like claws so no wonder you felt it that much. <b>You now have pawed hands like those of a raccoon.</b>");
-            setArmType(Arms.RACCOON);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsRaccoon.applyEffect();
             changes++;
         }
 
@@ -12613,11 +12526,8 @@ public final class Mutations extends MutationsHelper {
         //bodypart changes:
         //gain ears
         if (player.ears.type != Ears.MOUSE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour ears ");
-            if (player.ears.type == Ears.HORSE || player.ears.type == Ears.COW || player.ears.type == Ears.DOG || player.ears.type == Ears.BUNNY || player.ears.type == Ears.KANGAROO) outputText("shrink suddenly");
-            else outputText("pull away from your head");
-            outputText(", like they're being pinched, and you can distinctly feel the auricles taking a rounded shape through the pain.  Reaching up to try and massage away their stings, <b>you're not terribly surprised when you find a pair of fuzzy mouse's ears poking through your [hair].</b>");
-            setEarType(Ears.MOUSE);
+            outputText("\n\n");
+            CoC.instance.transformations.EarsMouse.applyEffect();
             changes++;
         }
         //gain tail
@@ -12653,11 +12563,11 @@ public final class Mutations extends MutationsHelper {
         }
         //gain arms
         if (player.arms.type != Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && changes < changeLimit && rand(3) == 0 && type == 1) {
-            outputText("\n\nYou suddenly feel like your forearms are burning. Burning they indeed begin to do, as they suddenly start blazing, a thick coat of fire covering them up to the fist. That’s going to be a very interesting ability to use in combat. <b>You now have blazing arms!</b>");
-            setArmType(Arms.HINEZUMI);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsHinezumi.applyEffect();
         }
         //get hinezumi eyes
-        if (!CoC.instance.transformations.EyesHinezumi.isPresent() && CoC.instance.transformations.EyesHuman.isPresent() && rand(3) == 0 && changes < changeLimit && type == 1) {
+        if (CoC.instance.transformations.EyesHinezumi.isPossible() && CoC.instance.transformations.EyesHuman.isPresent() && rand(3) == 0 && changes < changeLimit && type == 1) {
             outputText("\n\n");
             CoC.instance.transformations.EyesHinezumi.applyEffect();
             changes++;
@@ -12671,7 +12581,7 @@ public final class Mutations extends MutationsHelper {
         //Hair
         var color1:String;
         var Hinezumi_HairColor:Array = ["red", "orange", "platinum crimson", "pinkish orange"];
-        if ((player.faceType == Face.BUCKTEETH || player.faceType == Face.MOUSE) && !CoC.instance.transformations.HairBurning.isPresent() && changes < changeLimit && rand(3) == 0 && type == 1) {
+        if ((player.faceType == Face.BUCKTEETH || player.faceType == Face.MOUSE) && CoC.instance.transformations.HairBurning.isPossible() && changes < changeLimit && rand(3) == 0 && type == 1) {
             color1 = randomChoice(Hinezumi_HairColor);
             player.hairColor = color1;
             outputText("\n\n");
@@ -12756,8 +12666,8 @@ public final class Mutations extends MutationsHelper {
         //grow horns!
         if (player.lowerBody != LowerBody.GARGOYLE && (player.horns.count == 0 || (rand(player.horns.count + 3) == 0))) {
             if (player.horns.type == Horns.NONE) {
-                outputText("A small pair of demon horns erupts from your forehead.  They actually look kind of cute.  <b>You have horns!</b>");
-                setHornType(Horns.DEMON, 2);
+                outputText("\n\n");
+                CoC.instance.transformations.HornsDemonic.applyEffect();
             } else if (player.horns.count < 12 && player.horns.type == Horns.DEMON) {
                 outputText("\n\n");
                 outputText("Another pair of demon horns, larger than the last, forms behind the first row.");
@@ -12768,8 +12678,7 @@ public final class Mutations extends MutationsHelper {
             //Text for shifting horns
             else if (player.horns.type != Horns.DEMON && player.horns.type != Horns.ORCHID) {
                 outputText("\n\n");
-                outputText("Your horns shift, shrinking into two small demonic-looking horns.");
-                setHornType(Horns.DEMON, 2);
+                CoC.instance.transformations.HornsDemonic.applyEffect();
                 dynStats("cor", 3);
             }
             flags[kFLAGS.TIMES_TRANSFORMED]++;
@@ -12804,7 +12713,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
-            humanizeArms();
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //foot changes - requires furless
@@ -13097,8 +13007,8 @@ public final class Mutations extends MutationsHelper {
         }
         //If ears are not ferret:
         if (player.ears.type != Ears.FERRET && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYou squint as you feel a change in your ears.  Inspecting your reflection in a nearby puddle you find that <b>your ears have become small, fuzzy, and rounded, just like a ferret’s!</b>");
-            setEarType(Ears.FERRET);
+            outputText("\n\n");
+            CoC.instance.transformations.EarsFerret.applyEffect();
             changes++;
         }
         //If no other effect occurred, fatigue decreases:
@@ -13208,8 +13118,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Gain pig ears!
         if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.PIG) {
-            outputText("\n\nYou feel a pressure on your ears as they begin to reshape. Once the changes finish, you flick them about experimentally, <b>and you’re left with pointed, floppy pig ears.</b>");
-            setEarType(Ears.PIG);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsPig.applyEffect();
             changes++;
         }
         //Gain pig tail if you already have pig ears!
@@ -13244,20 +13154,19 @@ public final class Mutations extends MutationsHelper {
         }
         //Gain pig/boar arms
         if (rand(2) == 0 && changes < changeLimit && player.tailType == Tail.PIG && player.lowerBody == LowerBody.CLOVEN_HOOFED && (player.arms.type != Arms.PIG || player.arms.type != Arms.BOAR)) {
+            outputText("\n\n");
             if (boar) {
-                outputText("\n\nYour arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive. Furthermore your nails become increasingly pointed turning black just like a set of claws. <b>You now have boar arms.</b>");
-                player.skin.coat.color = player.hairColor;
-                setArmType(Arms.BOAR);
+                CoC.instance.transformations.ArmsBoar.applyEffect();
                 changes++;
             } else {
-                outputText("\n\nYour finguers starts to feel like some bee stung them as they inflates to a more chubby size your nails tickening and darkening turning into clover-like claws. Aside of your now fat finguers and darker claws your arms remains about the same. <b>You now have pig arms.</b>");
-                setArmType(Arms.PIG);
+                CoC.instance.transformations.ArmsPig.applyEffect();
                 changes++;
             }
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
         if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.PIG, Arms.BOAR) && rand(3) == 0) {
-            humanizeArms();
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //Gain pig/boar face when you have the first three pig TFs.
@@ -13336,16 +13245,16 @@ public final class Mutations extends MutationsHelper {
 
         //[Optional, give the player antlers! (30% chance) Show this description if the player doesn't have horns already.]
         if (player.horns.count == 0 && player.lowerBody != LowerBody.GARGOYLE && rand(2) == 0) {
-            outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  Small bulges on either side of your head advance outwards in a straight line, eventually spreading out in multiple directions like a miniature tree.  Investigating the exotic additions sprouting from your head, the situation becomes clear.  <b>You've grown antlers!</b>");
+            outputText("\n\n");
             //[Player horns type changed to Antlers.]
-            setHornType(Horns.ANTLERS, 4 + rand(12));
+            CoC.instance.transformations.HornsAntlers.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //[Show this description instead if the player already had horns when the transformation occurred.]
         else if (player.horns.count > 0 && player.horns.type != Horns.ANTLERS && player.horns.type != Horns.ORCHID && player.lowerBody != LowerBody.GARGOYLE && rand(2) == 0) {
-            outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else.  Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained antlers!</b>");
+            outputText("\n\n");
             //[Player horns type changed to Antlers.]
-            setHornType(Horns.ANTLERS, 4 + rand(12));
+            CoC.instance.transformations.HornsAntlers.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         if (returnToBakery) {
@@ -13702,12 +13611,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Ears
         if (player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
-            if (player.ears.type != Ears.HUMAN) {
-                outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>");
-            } else {
-                outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
-            }
-            setEarType(Ears.ELFIN);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsElfin.applyEffect();
             changes++;
         }
         //Ink spray attack
@@ -14097,8 +14002,8 @@ public final class Mutations extends MutationsHelper {
         //Physical changes:
         //Hood
         if (player.lowerBody == LowerBody.KRAKEN && player.horns.type != Horns.KRAKEN && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou feel like your head is going to explode and, in a way, it does. Something large and fleshy grows out of the top of your head. When you move toward the water to check your reflection, you discover that you have grown a <b>large fleshy hood, crowning your head just like a Kraken.</b>");
-            setHornType(Horns.KRAKEN);
+            outputText("\n\n");
+            CoC.instance.transformations.HornsKraken.applyEffect();
             changes++;
         }
 
@@ -14138,30 +14043,26 @@ public final class Mutations extends MutationsHelper {
 
         //Ears
         if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
-            if (player.ears.type != Ears.HUMAN) {
-                outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>");
-            } else {
-                outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!");
-            }
-            setEarType(Ears.ELFIN);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsElfin.applyEffect();
             changes++;
         }
 
         //Arms
         if (player.arms.type != Arms.KRAKEN && changes < changeLimit && rand(3) == 0) {
-            setArmType(Arms.KRAKEN);
-            outputText("\n\nYou notice your hand and forearm skin slowly darkening until it turns pitch black as your nails disappear entirely. Your hands now look like they’re covered in a thin layer of black rubber like gloves, but you know the truth. These truly are your arms and you can feel the touch on your black hands. At least you'll always be dressed elegantly with your<b> new kraken arms.</b>");
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsKraken.applyEffect();
             changes++;
         }
 
 
         //Eyes Color
-        if (!CoC.instance.transformations.EyesKrakenColors.isPresent() || !CoC.instance.transformations.EyesKraken.isPresent()) {
-            if (!CoC.instance.transformations.EyesKrakenColors.isPresent()) {
+        if (CoC.instance.transformations.EyesKrakenColors.isPossible() || CoC.instance.transformations.EyesKraken.isPossible()) {
+            if (CoC.instance.transformations.EyesKrakenColors.isPossible()) {
                 outputText("\n\n");
                 CoC.instance.transformations.EyesKrakenColors.applyEffect();
             }
-            if (!CoC.instance.transformations.EyesKraken.isPresent()) {
+            if (CoC.instance.transformations.EyesKraken.isPossible()) {
                 outputText("\n\n");
                 CoC.instance.transformations.EyesKraken.applyEffect();
             }
@@ -14345,14 +14246,14 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.lowerBody == LowerBody.YETI && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.YETI) && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYour arms start to become excessively hairy down almost to your hands. They're so hairy that you can no longer see your skin. As the fur growth stops, your hands enlarge to twice their size. They look like huge monkey paws. Well, you guess punching people will be easy with your enormous <b>yeti hands!</b>");
-            setArmType(Arms.YETI);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsYeti.applyEffect();
             changes++;
         }
         //Ears
         if (player.arms.type == Arms.YETI && player.ears.type != Ears.YETI && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYou feel your ears as though they’re growing bigger for a moment. It feels weird, but when you touch them to check what happened they still feel somewhat human. Looking down in a puddle you notice the term human isn’t correct, in your case they look more like those of a monkey. <b>You now have yeti ears.</b>");
-            setEarType(Ears.YETI);
+            outputText("\n\n");
+            CoC.instance.transformations.EarsYeti.applyEffect();
             changes++;
         }
         //Face
@@ -14362,7 +14263,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Hair
-        if (player.faceType == Face.YETI_FANGS && !CoC.instance.transformations.HairFluffy.isPresent() && changes < changeLimit && rand(4) == 0) {
+        if (player.faceType == Face.YETI_FANGS && CoC.instance.transformations.HairFluffy.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.HairFluffy.applyEffect();
             changes++;
@@ -14383,7 +14284,7 @@ public final class Mutations extends MutationsHelper {
             CoC.instance.transformations.EyesHuman.applyEffect();
             changes++;
         }
-        if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN && (!CoC.instance.transformations.EyesChangeColor(["silver", "gray"]).isPresent())) {
+        if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN && (CoC.instance.transformations.EyesChangeColor(["silver", "gray"]).isPossible())) {
             CoC.instance.transformations.EyesChangeColor(["silver", "gray"]).applyEffect(false);
             outputText("\n\nYour eyes begin to water for a moment. When your view clears up you move on to a puddle and notice their coloration changed to [eyecolor]. <b>You now have [eyecolor] irises.</b>");
             changes++;
@@ -14544,12 +14445,12 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.lowerBody == LowerBody.YUKI_ONNA && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.YUKI_ONNA) && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nSomething weird happens in your hands. For a few seconds you lose the sense of touch and as it comes back your nails turn pale blue. You can feel terrible cold running at your fingertips.  While you can dismiss this cold and enable it at will you can’t help but smirk at your newfound ability. <b>Woe to whoever you decide to touch with your glacial hands.</b>");
-            setArmType(Arms.YUKI_ONNA);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsYukiOnna.applyEffect();
             changes++;
         }
         //eyes color
-        if (!CoC.instance.transformations.EyesChangeColor(["light purple"]).isPresent() && changes < changeLimit && rand(3) == 0) {
+        if (CoC.instance.transformations.EyesChangeColor(["light purple"]).isPossible() && changes < changeLimit && rand(3) == 0) {
             if (player.eyes.type == Eyes.HUMAN) {
                 CoC.instance.transformations.EyesChangeColor(["light purple"]).applyEffect(false);
                 outputText("\n\nFrigid water trickles from your eyes as if you are crying and pain forces them closed. You double over as they burn but slowly the agonizing sensation fades away and you blink to clear them. At first everything looks hazy as if seen through a clouded glass but it eventually clears up. <b>You glance down at your reflection in a puddle and find that your irises turned light purple like the reflection of the sun on snow.</b>");
@@ -14560,7 +14461,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Hair
-        if (player.faceType == Face.YUKI_ONNA && !CoC.instance.transformations.HairSnowy.isPresent() && changes < changeLimit && rand(4) == 0) {
+        if (player.faceType == Face.YUKI_ONNA && CoC.instance.transformations.HairSnowy.isPossible() && changes < changeLimit && rand(4) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.HairSnowy.applyEffect();
             changes++;
@@ -14725,29 +14626,9 @@ public final class Mutations extends MutationsHelper {
 
         //-Existing horns become draconic, max of 4, max length of 1'
         if (player.horns.type != Horns.SEADRAGON && type == 1 && changes < changeLimit && rand(5) == 0) {
-                if (player.horns.count > 0) {
-                    //High quantity demon horns
-                    if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
-                        outputText("\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have two sea dragon horns, each about twelve inches long.");
-                        CoC.instance.mutations.setHornType(Horns.SEADRAGON, 12);
-                    }
-                    else {
-                        outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They look must look like the horns of a sea dragon.");
-                        player.horns.type = Horns.SEADRAGON;
-                        if (player.horns.count > 13) {
-                            outputText("  The change also seems to have shrunken the horns, they're about a foot long now.");
-                            player.horns.count = 12;
-                        }
-                    }
-                    changes++;
-                }
-                //No horns
-                else {
-                    //-If no horns, grow a pair
-                    outputText("\n\nYou writhe in pain as two bony extrusions begin to push out of the side of your head. As a skull-splitting headache wracks through you, in an instant, the pain subsides as you feel two large, scale-colored horns on your head. They are as sensitive as they are sturdy.\n\nA quick look at a puddle also reveals they radiate several specks of bioluminescent light along the horns accompanied by red tips. <b>You have about twelve inches of sea dragon-like horns!</b>");
-                    CoC.instance.mutations.setHornType(Horns.SEADRAGON, 4);
-                    changes++;
-                }
+            outputText("\n\n");
+            CoC.instance.transformations.HornsSeadragon.applyEffect();
+            changes++;
         }
 
         //antenna
@@ -14757,7 +14638,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Change hair type to normal
-        if ((!CoC.instance.transformations.HairHuman.isPresent() && player.hairType != Hair.PRISMATIC) && type == 1 && changes < changeLimit && rand(2) == 0) {
+        if ((CoC.instance.transformations.HairHuman.isPossible() && player.hairType != Hair.PRISMATIC) && type == 1 && changes < changeLimit && rand(2) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.HairHuman.applyEffect();
             changes++;
@@ -14836,8 +14717,8 @@ public final class Mutations extends MutationsHelper {
         }
         //arms
         if (player.lowerBody == LowerBody.ORCA && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.ORCA) && type == 0 && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYour fingers suddenly are forced together. When you stretch them back you discover they are now webbed, ready for swimming. You are still examining your hands when something not unlike a pair of fins grow out of your forearms. <b>You can only guess those Orca arms will help you to swim at high speeds!</b>");
-            setArmType(Arms.ORCA);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsOrca.applyEffect();
             changes++;
         }
         //Dragon legs
@@ -14852,8 +14733,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Dragon arms
         if (player.lowerBody == LowerBody.SEADRAGON && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.SEADRAGON) && type == 1 && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYour fingers slowly conjoin with a thin webbing between them. It's a strange, slimy feeling. As you examine your hands, something, not unlike a pair of fins, grows out of your forearms and your nails sharpen into curved reptilian claws. <b>You can only guess those Sea Dragons arms will help you to swim at high speeds!</b>");
-            setArmType(Arms.SEADRAGON);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsSeaDragon.applyEffect();
             changes++;
         }
         //Dragon Wings
@@ -14881,14 +14762,14 @@ public final class Mutations extends MutationsHelper {
         }
         //ears
         if (player.tailType == Tail.ORCA && player.ears.type != Ears.ORCA && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nYour ears suddenly begin to lengthen, growing bigger and bigger until their length reaches your shoulders. When you examine them you discover they have grown into a pair of large fins, easily twice as big as your head. <b>Orienting yourself underwater will be easy with your large orca fin ears.</b>");
-            setEarType(Ears.ORCA);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsOrca.applyEffect();
             changes++;
         }
         //ears alternative
         if (player.tailType == Tail.ORCA && player.ears.type != Ears.ORCA2 && type == 0 && changes < changeLimit && rand(4) == 0) {
-            outputText("\n\nTightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, fleshy bumps with holes in their centers.  <b>You have whales ears!</b>");
-            setEarType(Ears.ORCA2);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsOrca2.applyEffect();
             changes++;
         }
         //blowhole
@@ -14913,12 +14794,12 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //eyes to orange
-        if (!CoC.instance.transformations.EyesChangeColor(["orange"]).isPresent() && changes < changeLimit && type == 0 && rand(4) == 0) {
+        if (CoC.instance.transformations.EyesChangeColor(["orange"]).isPossible() && changes < changeLimit && type == 0 && rand(4) == 0) {
             CoC.instance.transformations.EyesChangeColor(["orange"]).applyEffect();
             changes++;
         }
         //eyes to sea dragon list
-        if (!CoC.instance.transformations.EyesSeadragonColors.isPresent() && changes < changeLimit && type == 1 && rand(4) == 0) {
+        if (CoC.instance.transformations.EyesSeadragonColors.isPossible() && changes < changeLimit && type == 1 && rand(4) == 0) {
             CoC.instance.transformations.EyesSeadragonColors.applyEffect();
             changes++;
         }
@@ -15084,29 +14965,27 @@ public final class Mutations extends MutationsHelper {
         //Gain frost wyrm Horns
         if (changes < changeLimit && rand(3) == 0 && player.horns.type != Horns.FROSTWYRM) {
             if (player.horns.type != Horns.NONE) {
-                if (player.horns.type == Horns.ORCHID) outputText("\n\nYour orchid flowers crumble, falling apart");
-                else outputText("\n\nYour old horns crumble, falling apart in large chunks");
-                outputText(" until they flake away to nothing. This said something soon replaces them.");
-                setHornType(Horns.NONE, 0);
+                outputText("\n\n");
+                CoC.instance.transformations.HornsNone.applyEffect();
             }
-            setHornType(Horns.FROSTWYRM, 2);
-            outputText("\n\nYou write in pain as two bony lumps begins to push out of the side of your head. The transformation gives you a hell of a headache but as soon as it is over you feel for the two large spiraling horns on your head similar to those of a ram and unsurprisingly they are as sensitive as they are sturdy. <b>You now have frost wyrm horns!</b>");
+            outputText("\n\n");
+            CoC.instance.transformations.HornsFrostwyrm.applyEffect();
             changes++;
         }
         //Gain frost wyrm Ears
         if (changes < changeLimit && rand(3) == 0 && player.ears.type != Ears.SNAKE) {
-            setEarType(Ears.SNAKE);
-            outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up to touch and bump <b>your new pointed ears covered in small scales</b>.  You bet they look cute!");
+            outputText("\n\n");
+			CoC.instance.transformations.EarsSnake.applyEffect();
             changes++;
         }
         //Gain Dragon Ears
         if (changes < changeLimit && rand(3) == 0 && player.ears.type != Ears.DRAGON) {
-            setEarType(Ears.DRAGON);
-            outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.  <b>You now have dragon ears!</b>");
+            outputText("\n\n");
+			CoC.instance.transformations.EarsDraconic.applyEffect();
             changes++;
         }
         //Gain Frost wyrm Eyes
-        if (!CoC.instance.transformations.EyesFrostwyrm.isPresent() && rand(3) == 0 && changes < changeLimit) {
+        if (CoC.instance.transformations.EyesFrostwyrm.isPossible() && rand(3) == 0 && changes < changeLimit) {
             outputText("\n\n");
             CoC.instance.transformations.EyesFrostwyrm.applyEffect();
             changes++;
@@ -15195,13 +15074,14 @@ public final class Mutations extends MutationsHelper {
 
         //Fix non human arms
         if (changes < changeLimit && rand(3) == 0 && player.arms.type != Arms.FROSTWYRM && player.arms.type != Arms.HUMAN) {
-            humanizeArms();
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //Gain frost wyrm Arms
         if (changes < changeLimit && rand(3) == 0 && player.arms.type == Arms.HUMAN) {
-            setArmType(Arms.FROSTWYRM);
-            outputText("\n\nYour arms and hands suddenly begins to get thicker and bigger, way beyond human size. Your entire forearms and now massive hands first cover with -scale color- scales then with white fur, giving them the appearance of fluffy padded gloves. From the fur however surges out what used to be your nails, now powerful claws capable of digging through solid rock and ice just like those of a frost wyrm. <b>You now have frost wyrm arms!</b>");
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsFrostwyrm.applyEffect();
             changes++;
         }
 
@@ -15412,8 +15292,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Horns
         if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.horns.count > 0 && player.horns.type != Horns.ORCHID && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0) {
-            setHornType(Horns.NONE, 0);
-            outputText("\n\nYour horns crumble, falling apart in large chunks until they flake away to nothing.");
+            outputText("\n\n");
+            CoC.instance.transformations.HornsNone.applyEffect();
             changes++;
         }
 
@@ -15436,11 +15316,8 @@ public final class Mutations extends MutationsHelper {
 
         //Arms
         if (player.lowerBody == LowerBody.MANTIS && player.hasCoatOfType(Skin.CHITIN) && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.MANTIS) && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYou watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, turning the [skin.type] into a shiny green carapace.");
-            outputText("\nA moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining green chitin from the upper arm down.");
-            outputText("\nThe transformation end as down the lenght of your forearms you grow a pair of massive scythe like appendage just like a mantis.");
-            outputText("\nYou nonchalantly run them across a young tree slicing the plant trunk in half. This might prove a deadly weapon if used as part of your unarmed strikes. <b>You now have mantis arms.</b>");
-            setArmType(Arms.MANTIS);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsMantis.applyEffect();
             changes++;
         }
 
@@ -15704,34 +15581,27 @@ public final class Mutations extends MutationsHelper {
 
         //arms
         if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.DEVIL && (player.wings.type == Wings.BAT_LIKE_TINY || player.wings.type == Wings.BAT_LIKE_LARGE)) {
-            outputText("\n\nYour hands shapeshift as they cover in fur and morph into the clawed hands of some unknown beast. They retain their dexterity despite their weird shape and paw pads. At least this won't hinder spellcasting. <b>You now have bestial clawed hands!</b>");
-            setArmType(Arms.DEVIL);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsDevil.applyEffect();
             changes++;
         }
         //Horns
         if (rand(3) == 0 && changes < changeLimit && player.arms.type == Arms.DEVIL) {
+            outputText("\n\n");
             if (player.horns.type == Horns.NONE) {
-                outputText("You begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of tall-standing goat horns. <b>You now have a pair of goat horns.</b>");
-                setHornType(Horns.GOAT, 2);
+                CoC.instance.transformations.HornsGoat.applyEffect();
             } else if (player.horns.type == Horns.GOAT) {
-                outputText("\n\n");
-                outputText("You groan in pleasure mixed pains as your horns begins to split into a second pair ornating the side of your head. If the original pair made you look fiendish your four horns now definitively denounce your demonic nature. <b> You now have four devil horns curving backward behind your head.</b>");
-                setHornType(Horns.GOATQUAD, 1);
-            } else if (player.horns.type == Horns.GOATQUAD) {
-                outputText("\n\n");
-                outputText("You begin to feel an odd itching sensation as you feel your horns repositioning and merging back togueter. Once it's over, you reach up and find a pair of tall-standing goat horns where your four horns used to be. <b>You now have a pair of goat horns.</b>");
-                setHornType(Horns.GOAT, 2);
+                CoC.instance.transformations.HornsGoatQuadruple.applyEffect();
             } else {
-                outputText("You begin to feel an odd itching sensation as you feel your horns repositioning. Once it's over, you reach up and find a pair of tall-standing goat horns. <b>You now have a pair of goat horns.</b>");
-                setHornType(Horns.GOAT, 2);
+                CoC.instance.transformations.HornsGoat.applyEffect();
             }
             changes++;
         }
 
         //Ears
         if (rand(3) == 0 && changes < changeLimit && player.ears.type != Ears.GOAT && player.horns.type == Horns.GOAT) {
-            outputText("\n\nYour ears elongate and flatten on your head. You flap them a little and discover they have turned into something similar to the ears of a goat. <b>You now have goat ears!</b>");
-            setEarType(Ears.GOAT);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsGoat.applyEffect();
             changes++;
         }
         //Fangs
@@ -15917,13 +15787,11 @@ public final class Mutations extends MutationsHelper {
         //Physical changes
         //Ears
         if (player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.BEAR && player.ears.type != Ears.PANDA && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour ears begin to tingle. You reach up with one hand and gently rub them. They appear to be growing fur. Within a few moments, they’ve migrated up to the top of your head and increased in size, taking on a rounded shape. The tingling stops and you find yourself hearing noises in a whole new way. ");
+            outputText("\n\n");
             if (rand(2) == 0) {
-                outputText("<b>You could pass for cute with your new bear ears.</b>");
-                setEarType(Ears.BEAR);
+                CoC.instance.transformations.EarsBear.applyEffect();
             } else {
-                outputText("<b>You could pass for cute with your new panda ears.</b>");
-                setEarType(Ears.PANDA);
+                CoC.instance.transformations.EarsPanda.applyEffect();
             }
             changes++;
         }
@@ -15941,10 +15809,12 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (player.arms.type != Arms.BEAR && player.arms.type != Arms.GARGOYLE && player.eyes.type == Eyes.BEAR && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
             if (player.arms.type == Arms.HUMAN) {
-                outputText("\n\nYour hands suddenly start to hurt as your arms grows a thick coat of [skin coat.color] fur up to your shoulders. You watch enthralled as your nails turn into large ursan claws on your now five-fingered paw-like hands. <b>You now have bear-like paw hands.</b>");
-                setArmType(Arms.BEAR);
-            } else humanizeArms();
+                CoC.instance.transformations.ArmsBear.applyEffect();
+            } else {
+                CoC.instance.transformations.ArmsHuman.applyEffect();
+            }
             changes++;
         }
         //Legs
@@ -16092,7 +15962,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Eyes
-        if (!CoC.instance.transformations.FaceFireSnail.isPresent() && !CoC.instance.transformations.EyesFireSnail.isPresent() && changes < changeLimit && rand(3) == 0) {
+        if (CoC.instance.transformations.FaceFireSnail.isPossible() && CoC.instance.transformations.EyesFireSnail.isPossible() && changes < changeLimit && rand(3) == 0) {
             if (player.eyes.type == Eyes.HUMAN) {
                 outputText("\n\n");
                 CoC.instance.transformations.EyesFireSnail.applyEffect();
@@ -16307,10 +16177,7 @@ public final class Mutations extends MutationsHelper {
         //Ears
         if (rand(3) == 0 && changes < changeLimit && player.ears.type != Ears.RED_PANDA) {
             outputText("\n\n");
-            if (flags[kFLAGS.MINO_CHEF_TALKED_RED_RIVER_ROOT] > 0) outputText("The warned dizziness");
-            else outputText("A sudden dizziness");
-            outputText(" seems to overcome your head. Your ears tingle, and you’re sure you can feel the flesh on them shifting, as you gradually have trouble hearing. A couple of minutes later the feeling stops. Curious of what has changed you go to check yourself on the stream, only to find that they’ve changed into cute, triangular ears, covered with white fur. <b>You’ve got red-panda ears!</b>");
-            setEarType(Ears.RED_PANDA);
+			CoC.instance.transformations.EarsRedPanda.applyEffect();
             changes++;
         }
         //Removes antennae
@@ -16362,8 +16229,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Arms
         if (rand(3) == 0 && changes < changeLimit && player.arms.type != Arms.RED_PANDA && player.tailType == Tail.RED_PANDA) {
-            outputText("\n\nWeakness overcomes your arms, and no matter what you do, you can’t muster the strength to raise or move them. Sighing you attribute this to the consumption of that strange root. Sitting on the ground, you wait for the limpness to end. As you do so, you realize that the bones at your hands are changing, as well as the muscles on your arms. They’re soon covered, from the shoulders to the tip of your digits, on a layer of soft, fluffy black-brown fur. Your hands gain pink, padded paws where your palms were once, and your nails become short claws, not sharp enough to tear flesh, but nimble enough to make climbing and exploring much easier. <b>Your arms have become like those of a red-panda!</b>");
-            setArmType(Arms.RED_PANDA);
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsRedPanda.applyEffect();
             changes++;
         }
         //Legs
@@ -16860,17 +16727,13 @@ public final class Mutations extends MutationsHelper {
                 player.removeStatusEffect(StatusEffects.UshiOnnaVariant);
                 player.createStatusEffect(StatusEffects.UshiOnnaVariant, 0, 0, 0, 0);
             } else player.createStatusEffect(StatusEffects.UshiOnnaVariant, 0, 0, 0, 0);
-            outputText("\n\nYou feel your ears tug on your scalp as they twist shape, becoming oblong and cow-like.  <b>You now have " + player.hairColor + " cow ears.</b>");
-            setEarType(Ears.COW);
+            outputText("\n\n");
+			CoC.instance.transformations.EarsCow.applyEffect();
             changes++;
         }
         if (player.skin.base.type == Skin.PLAIN && !player.skin.hasUshiOniOnnaTattoo() && rand(3) == 0 && changes < changeLimit) {
-            outputText("\n\nYour chest burns as strange marks appear on it, burning your skin until it creates a <b>black spider glyph in your chest</b>. You feel like something is coming up throughout your skin and upon taking your [armor] off, strokes of coarse fur travelling from your abdomen, all the way up to your breasts. Conveniently ending around the nipples, covering them, <b>you know have a Ushi-" + player.mf("Oni", "Onna") + " torso pattern.</b>");
-            /*if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedBattleTattoed)) {
-					outputText("\n\n<b>Genetic Memory: Battle Tattoed Skin - Memorized!</b>\n\n");
-					player.createStatusEffect(StatusEffects.UnlockedBattleTattoed, 0, 0, 0, 0);
-				}*/
-            player.skin.base.pattern = Skin.PATTERN_USHI_ONI_ONNA_TATTOO;
+            outputText("\n\nYour chest burns as strange marks appear on it, burning your skin until it creates a <b>black spider glyph in your chest</b>. You feel like something is coming up throughout your skin and upon taking your [armor] off, strokes of coarse fur travelling from your abdomen, all the way up to your breasts. Conveniently ending around the nipples, covering them, <b>you know have a Ushi-Oni torso pattern.</b>");
+            player.skin.base.pattern = Skin.PATTERN_USHI_ONI_TATTOO;
             player.skin.base.adj = "black spider glyph tattooed";
             changes++;
         }
@@ -16896,11 +16759,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Tail
-        if (player.tailType != Tail.USHI_ONI_ONNA && (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || player.lowerBody == LowerBody.DRIDER) && rand(4) == 0) {// && player.arms.type == Arms.SPIDER
+        if (player.tailType != Tail.USHI_ONI && (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || player.lowerBody == LowerBody.DRIDER) && rand(4) == 0) {// && player.arms.type == Arms.SPIDER
             outputText("\n\n");
             if (player.tailType > Tail.NONE) outputText("You feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground. ");
             outputText("You feel a little pressure in your rear as you look back you see something emerging from it, a long, dexterous tail appear from it, It looks something along 25 inches witha little orifice in the tip, where the spinneret is located, <b>you now have an Ushi-" + player.mf("Oni", "Onna") + " tail.</b>\n\n");
-            setTailType(Tail.USHI_ONI_ONNA, 1);
+            setTailType(Tail.USHI_ONI, 1);
             //player.tailVenom = 5;
             //player.tailRecharge = 5;
             changes++;
@@ -16914,88 +16777,74 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Drider butt
-        if (player.isDrider() && player.tailType == Tail.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
+        if (player.isDrider() && player.tailType == Tail.USHI_ONI && changes < changeLimit && rand(3) == 0) {
             outputText("\n\nYour spider body trembles, an intense pressure forming under the chitin, at the same time your plates fall to the ground and " + player.hairColor + " fur begins to sprout all over your abdomen. You wince in pain from the sudden growth, your drider legs chitin falls off as well,  getting thicker and harder turning into bone. After the torturous session, you look back to see <b>you now have an Ushi-" + player.mf("Oni", "Onna") + " lower body with an internal skeleton and fur.</b>");
-            setLowerBody(LowerBody.USHI_ONI_ONNA);
+            setLowerBody(LowerBody.USHI_ONI);
             player.coatColor = "black";
             changes++;
         }
         //Ushi oni/onna arms
-        if (player.arms.type == Arms.SPIDER && player.arms.type != Arms.USHI_ONI_ONNA && player.lowerBody == LowerBody.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nYour onyx exoskeleton begins to itch. You begin to scratch at it incessantly until you can see " + player.hairColor + " fur begin to sprout from your arms from the biceps down, forming a diamond spiral where the fur meets skin. Your fingers begin to shake and sink into your hands as 4 huge strong claws grow in their places. <b>After the painful experience you see that you now have Ushi-" + player.mf("Oni", "Onna") + " bestial arms.</b>");
-            setArmType(Arms.USHI_ONI_ONNA);
-            player.coatColor = "black";
+        if (player.arms.type == Arms.SPIDER && player.arms.type != Arms.USHI_ONI && player.lowerBody == LowerBody.USHI_ONI && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
+            CoC.instance.transformations.ArmsUshiOni.applyEffect();
             changes++;
         }
         //(Arms to carapace-covered arms)
-        if (!InCollection(Arms.GARGOYLE, Arms.SPIDER) && player.lowerBody == LowerBody.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
+        if (!InCollection(Arms.GARGOYLE, Arms.SPIDER) && player.lowerBody == LowerBody.USHI_ONI && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
-            if (player.arms.type == Arms.HARPY || player.arms.type == Arms.HUMAN) {
-                //(Bird pretext)
-                if (player.arms.type == Arms.HARPY) outputText("The feathers covering your arms fall away, leaving them to return to a far more human appearance.  ");
-                outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.");
-            } else {
-                if (player.arms.type == Arms.BEE) outputText("The fizz covering your upper arms starting to fall down leaving only shiny black chitin clad arms.");
-                else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRAGON) outputText("The scales covering your upper arms starting to fall down leaving only shiny black chitin clad arms.");
-                else if (player.arms.type == Arms.MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.");
-                else outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.");
-            }
-            setArmType(Arms.SPIDER);
-            player.coatColor = "black";
+            CoC.instance.transformations.ArmsSpider.applyEffect();
             changes++;
         }
         //Ushi oni/onna fangs
-        if (player.faceType == Face.HUMAN && player.faceType != Face.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
+        if (player.faceType == Face.HUMAN && player.faceType != Face.USHI_ONI && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.FaceUshiOniOnna.applyEffect();
             if (player.tailRecharge < 5) player.tailRecharge = 5;
             changes++;
         }
-        if (player.faceType != Face.HUMAN && player.faceType != Face.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
+        if (player.faceType != Face.HUMAN && player.faceType != Face.USHI_ONI && changes < changeLimit && rand(3) == 0) {
             outputText("\n\n");
             CoC.instance.transformations.FaceHuman.applyEffect();
             changes++;
         }
         //Ushi oni/onna horns
-        if (player.horns.type != Horns.USHI_ONI_ONNA && player.horns.type == Horns.NONE && player.faceType == Face.USHI_ONI_ONNA && changes < changeLimit && rand(3) == 0) {
-            outputText("\n\nFrom the back of your head you feel like something is pushing out of your skull and from the pressure a pair of horns begin to grow, continuing to get bigger and bigger, curving up along the sides of your head. You reach up to feel them and see they have a spiral shape, <b>you now have a Ushi-" + player.mf("Oni", "Onna") + " pair of horns.</b>");
-            setHornType(Horns.USHI_ONI_ONNA, 2);
+        if (player.horns.type != Horns.USHI_ONI && player.horns.type == Horns.NONE && player.faceType == Face.USHI_ONI && changes < changeLimit && rand(3) == 0) {
+            outputText("\n\n");
+            CoC.instance.transformations.HornsUshiOni.applyEffect();
             changes++;
         }
-        if (changes < changeLimit && player.horns.count > 0 && player.horns.type != Horns.USHI_ONI_ONNA && rand(3) == 0) {
-            if (player.horns.type == Horns.ORCHID) outputText("\n\nYour orchid flowers crumble, falling apart");
-            else outputText("\n\nYour horns crumble, falling apart in large chunks");
-            outputText(" until they flake away to nothing.");
-            setHornType(Horns.NONE, 0);
+        if (changes < changeLimit && player.horns.count > 0 && player.horns.type != Horns.USHI_ONI && rand(3) == 0) {
+            outputText("\n\n");
+            CoC.instance.transformations.HornsNone.applyEffect();
             changes++;
         }
         //eyes color change
-        if ((type == 0 || type == 1 || type == 2) && !CoC.instance.transformations.EyesChangeColor(["black"]).isPresent() && changes < changeLimit && rand(2) == 0) {
+        if ((type == 0 || type == 1 || type == 2) && CoC.instance.transformations.EyesChangeColor(["black"]).isPossible() && changes < changeLimit && rand(2) == 0) {
             CoC.instance.transformations.EyesChangeColor(["black"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now black.");
             changes++;
         }
-        if ((type == 3 || type == 4 || type == 5) && !CoC.instance.transformations.EyesChangeColor(["red"]).isPresent() && changes < changeLimit && rand(2) == 0) {
+        if ((type == 3 || type == 4 || type == 5) && CoC.instance.transformations.EyesChangeColor(["red"]).isPossible() && changes < changeLimit && rand(2) == 0) {
             CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now red.");
             changes++;
         }
-        if ((type == 6 || type == 7 || type == 8) && !CoC.instance.transformations.EyesChangeColor(["gray"]).isPresent() && changes < changeLimit && rand(2) == 0) {
+        if ((type == 6 || type == 7 || type == 8) && CoC.instance.transformations.EyesChangeColor(["gray"]).isPossible() && changes < changeLimit && rand(2) == 0) {
             CoC.instance.transformations.EyesChangeColor(["gray"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now gray.");
             changes++;
         }
-        if ((type == 9 || type == 10 || type == 11) && !CoC.instance.transformations.EyesChangeColor(["brown"]).isPresent() && changes < changeLimit && rand(2) == 0) {
+        if ((type == 9 || type == 10 || type == 11) && CoC.instance.transformations.EyesChangeColor(["brown"]).isPossible() && changes < changeLimit && rand(2) == 0) {
             CoC.instance.transformations.EyesChangeColor(["brown"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now brown.");
             changes++;
         }
-        if ((type == 12 || type == 13 || type == 14) && !CoC.instance.transformations.EyesChangeColor(["light blue"]).isPresent() && changes < changeLimit && rand(2) == 0) {
+        if ((type == 12 || type == 13 || type == 14) && CoC.instance.transformations.EyesChangeColor(["light blue"]).isPossible() && changes < changeLimit && rand(2) == 0) {
             CoC.instance.transformations.EyesChangeColor(["light blue"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now light blue.");
             changes++;
         }
-        if ((type == 15 || type == 16 || type == 17) && !CoC.instance.transformations.EyesChangeColor(["yellow"]).isPresent() && changes < changeLimit && rand(2) == 0) {
+        if ((type == 15 || type == 16 || type == 17) && CoC.instance.transformations.EyesChangeColor(["yellow"]).isPossible() && changes < changeLimit && rand(2) == 0) {
             CoC.instance.transformations.EyesChangeColor(["yellow"]).applyEffect(false);
             outputText("\n\nYour vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now yellow.");
             changes++;
@@ -17178,7 +17027,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //Set eyes to the racial coloration
-            if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && !CoC.instance.transformations.EyesChangeColor(["blue"]).isPresent()) {
+            if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && CoC.instance.transformations.EyesChangeColor(["blue"]).isPossible()) {
                 CoC.instance.transformations.EyesChangeColor(["blue"]).applyEffect(false);
                 outputText("\n\nYou shiver as cold wind passes over your face. Something’s changed in your vision, and though you’re not sure what, you press on regardless. After going out and checking your reflection in a puddle, you discover your pupil color has changed to a blue as cold as ice. <b>You now have cold blue eyes.\n</b>");
                 changes++;
@@ -17208,9 +17057,8 @@ public final class Mutations extends MutationsHelper {
             }
             //Set ears to melkie
             if (changes < changeLimit && rand(4) == 0 && player.ears.type != Ears.MELKIE) {
-                setEarType(Ears.MELKIE);
-                outputText("\n\nYour ears start feeling weird as they get longer and longer, eventually reaching your knees and covering with fur. These look like the ears of some sea rabbit or mammal, namely a Melkie." +
-                        " <b>You now have Melkie ears safeguarding your audition from the cold.\n</b>");
+                outputText("\n\n");
+                CoC.instance.transformations.EarsMelkie.applyEffect();
                 changes++;
             }
             //Set legs to human
@@ -17289,13 +17137,12 @@ public final class Mutations extends MutationsHelper {
             }
             //Arms
             if (changes < changeLimit && rand(4) == 0 && player.arms.type != Arms.HUMAN && player.arms.type != Arms.MELKIE) {
-                humanizeArms();
+                outputText("\n\n");
+                CoC.instance.transformations.ArmsHuman.applyEffect();
             }
             if (changes < changeLimit && rand(4) == 0 && player.arms.type == Arms.HUMAN && player.arms.type != Arms.MELKIE && player.hasPartialCoat(Skin.FUR) && player.lowerBody == LowerBody.MELKIE) {
-                outputText("\n\nSimilar to when your legs merged in your tail your forearm begin to change, turning into a pair of glove like seal arms armed with claws. " +
-                        "What's more, you have a pair of fins on your elbow similar to a Melkie." +
-                        "<b>Well it'll take some time to get used to your new seal forearms with fins.</b>");
-                setArmType(Arms.MELKIE);
+                outputText("\n\n");
+                CoC.instance.transformations.ArmsMelkie.applyEffect();
                 changes++;
             }
             if (changes < changeLimit && rand(4) == 0) outputText(player.modFem(100, 3));
@@ -17415,7 +17262,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //Set eyes to the racial coloration and change them to cancer type
-            if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && !CoC.instance.transformations.EyesCancer.isPresent() && CoC.instance.transformations.FaceKudere.isPresent()) {
+            if (changes < changeLimit && rand(4) == 0 && player.eyes.type == Eyes.HUMAN && CoC.instance.transformations.EyesCancer.isPossible() && CoC.instance.transformations.FaceKudere.isPresent()) {
                 outputText("\n\n");
                 CoC.instance.transformations.EyesCancer.applyEffect();
                 changes++;
@@ -17430,7 +17277,8 @@ public final class Mutations extends MutationsHelper {
 
             //Set ears to human
             if (changes < changeLimit && rand(4) == 0 && player.ears.type != Ears.HUMAN) {
-                humanizeEars();
+                outputText("\n\n");
+                CoC.instance.transformations.EarsHuman.applyEffect();
             }
             //Set legs to human
             if (changes < changeLimit && rand(4) == 0 && player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.CRAB && player.lowerBody != LowerBody.CANCER) {
@@ -17468,7 +17316,8 @@ public final class Mutations extends MutationsHelper {
             }
             //Arms
             if (changes < changeLimit && rand(4) == 0 && player.arms.type != Arms.HUMAN) {
-                humanizeArms();
+                outputText("\n\n");
+                CoC.instance.transformations.ArmsHuman.applyEffect();
             }
             if (changes == 0) {
                 outputText("\n\nNothing happened.  Weird.");

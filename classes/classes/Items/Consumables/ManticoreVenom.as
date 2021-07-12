@@ -96,9 +96,7 @@ public class ManticoreVenom extends Consumable {
 		//Arms
 		if (player.lowerBody == LowerBody.LION && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.LION) && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-			if (player.arms.type != Arms.HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
-			outputText("Your hands suddenly start to hurt as your arms grow a thick coat of "+player.coatColor+" fur up to your shoulders where it turns "+player.hairColor+". You watch, enthralled, as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have leonine paw hands.</b>");
-			mutations.setArmType(Arms.LION);
+			CoC.instance.transformations.ArmsLion.applyEffect();
 			changes++;
 		}
 		//Scorpion tail
@@ -143,12 +141,13 @@ public class ManticoreVenom extends Consumable {
 		}
 		//Ears
 		if (player.rearBody.type == RearBody.LION_MANE && player.ears.type == Ears.HUMAN && player.ears.type != Ears.LION && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYour ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have lion ears.</b>");
-			mutations.setEarType(Ears.LION);
+			outputText("\n\n");
+			CoC.instance.transformations.EarsLion.applyEffect();
 			changes++;
 		}
 		if (player.rearBody.type == RearBody.LION_MANE && player.ears.type != Ears.HUMAN && player.ears.type != Ears.LION && changes < changeLimit && rand(3) == 0) {
-			mutations.humanizeEars();
+			outputText("\n\n");
+			CoC.instance.transformations.EarsHuman.applyEffect();
 			changes++;
 		}
 		//Face

@@ -312,8 +312,8 @@ public class MinotaurBlood extends Consumable {
 		}
 		//+cow ears	- requires tail
 		if (player.ears.type != Ears.COW && changes < changeLimit && player.tailType == Tail.COW && player.tailType != Tail.GARGOYLE && rand(2) == 0) {
-			outputText("\n\nYou feel your ears tug on your scalp as they twist shape, becoming oblong and cow-like.  <b>You now have cow ears.</b>");
-			mutations.setEarType(Ears.COW);
+			outputText("\n\n");
+			CoC.instance.transformations.EarsCow.applyEffect();
 			changes++;
 		}
 		//+hooves
@@ -378,20 +378,21 @@ public class MinotaurBlood extends Consumable {
 				}
 				//If no horns yet..
 				else {
-					outputText("\n\nWith painful pressure, the skin on your forehead splits around two tiny nub-like horns, similar to those you would see on the cattle back in your homeland.");
-					mutations.setHornType(Horns.COW_MINOTAUR, 2);
+					outputText("\n\n");
+					CoC.instance.transformations.HornsCowMinotaur.applyEffect();
 					changes++;
 				}
 			}
 			//Not mino horns, change to cow-horns
 			if ((player.horns.type == Horns.DEMON || player.horns.type > Horns.COW_MINOTAUR) && player.horns.type != Horns.ORCHID) {
-				outputText("\n\nYour horns vibrate and shift as if made of clay, reforming into two horns with a bovine-like shape.");
-				mutations.setHornType(Horns.COW_MINOTAUR);
+				outputText("\n\n");
+				CoC.instance.transformations.HornsCowMinotaur.applyEffect();
 				changes++;
 			}
 		}
 		if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
-			mutations.humanizeArms();
+			outputText("\n\n");
+			CoC.instance.transformations.ArmsHuman.applyEffect();
 			changes++;
 		}
 		//Face change, requires Ears + Height + Hooves
