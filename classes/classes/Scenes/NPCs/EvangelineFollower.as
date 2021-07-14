@@ -1146,13 +1146,13 @@ private function InternalMutations0(page:int = 0):void {
 				if (perkTier.available(player)) {
 					addButton(menuButton, perkName[0].name(), perkChoice, perkTier)
 				} else {
-					addButtonDisabled(menuButton, perkName[0].name(), "Requirements not met. Check MutationsDB.")
+					addButtonDisabled(menuButton, perkName[0].name(), "Requirements not met. Check MutationsDB.");
 				}
 				break;
 			}
 		}
 		if (perkCount == perkName.length) {
-			addButtonDisabled(menuButton, perkTier.name(), "Highest Tier obtained!")
+			addButtonDisabled(menuButton, perkTier.name(), "Highest Tier obtained!");
 		}
 	}
 
