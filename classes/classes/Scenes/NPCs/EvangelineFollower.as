@@ -968,6 +968,7 @@ private function InternalMutations0(page:int = 0):void {
 	//menuItems.push("Testicles", InternalMutationsTesticles);
 	menuItems.push("Eyes", InternalMutationsEyes);
 	//menuItems.push("Nerv/Sys", InternalMutationsPNervSys);
+	//Next Page
 	//menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow);
 	//menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands);
 	//menuItems.push("Parathyroid Gland", InternalMutationsParathyroid);
@@ -987,14 +988,12 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Heart Mutations
-		//outputText("Hit!1")
 		mutationsAssistant([PerkLib.BlackHeart, PerkLib.BlackHeartEvolved, PerkLib.BlackHeartFinalForm], btnNum++);
 		mutationsAssistant([PerkLib.FrozenHeart, PerkLib.FrozenHeartEvolved, PerkLib.FrozenHeartFinalForm], btnNum++);
 		mutationsAssistant([PerkLib.ObsidianHeart, PerkLib.ObsidianHeartEvolved, PerkLib.ObsidianHeartFinalForm], btnNum++);
 		mutationsAssistant([PerkLib.TwinHeart, PerkLib.TwinHeartEvolved, PerkLib.TwinHeartFinalForm], btnNum++);
 		mutationsAssistant([PerkLib.HeartOfTheStorm, PerkLib.HeartOfTheStormEvolved, PerkLib.HeartOfTheStormFinalForm], btnNum++);
 		mutationsAssistant([PerkLib.DraconicHeart, PerkLib.DraconicHeartEvolved, PerkLib.DraconicHeartFinalForm], btnNum++);
-		//outputText("Hit!2")
 		addButton(14, "Back", InternalMutations0);
 	}
 
@@ -1100,7 +1099,6 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Peripheral/NervSys Mutations
-		displayHeader("Peripheral Nervous System Mutations");
 		mutationsAssistant([PerkLib.ElvishPeripheralNervSys, PerkLib.ElvishPeripheralNervSysEvolved, PerkLib.ElvishPeripheralNervSysFinalForm], btnNum++);
 		addButton(14, "Back", InternalMutations0);
 	}
@@ -1112,7 +1110,7 @@ private function InternalMutations0(page:int = 0):void {
 		mutationsAssistant([PerkLib.LizanMarrow, PerkLib.LizanMarrowEvolved, PerkLib.LizanMarrowFinalForm], btnNum++);
 		mutationsAssistant([PerkLib.DraconicBones, PerkLib.DraconicBonesEvolved, PerkLib.DraconicBonesFinalForm], btnNum++);
 		mutationsAssistant([PerkLib.HarpyHollowBones, PerkLib.HarpyHollowBonesEvolved, PerkLib.HarpyHollowBonesFinalForm], btnNum++);
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", curry(InternalMutations0, 1));
 	}
 
 	function InternalMutationsThyroidGlands():void{
@@ -1121,7 +1119,7 @@ private function InternalMutations0(page:int = 0):void {
 		//Thyroid Glands Mutations
 		mutationsAssistant([PerkLib.KitsuneThyroidGland, PerkLib.KitsuneThyroidGlandEvolved, PerkLib.KitsuneThyroidGlandFinalForm], btnNum++);
 		mutationsAssistant([PerkLib.NekomataThyroidGland, PerkLib.NekomataThyroidGlandEvolved, PerkLib.NekomataThyroidGlandFinalForm], btnNum++);
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", curry(InternalMutations0, 1));
 	}
 
 	function InternalMutationsParathyroid():void{
@@ -1130,7 +1128,7 @@ private function InternalMutations0(page:int = 0):void {
 		//ParaThyroid Glands Mutations. What's the difference between this and the above???
 		mutationsAssistant([PerkLib.KitsuneParathyroidGlands, PerkLib.KitsuneParathyroidGlandsEvolved, PerkLib.KitsuneParathyroidGlandsFinalForm], btnNum++);
 		mutationsAssistant([PerkLib.HellcatParathyroidGlands, PerkLib.HellcatParathyroidGlandsEvolved, PerkLib.HellcatParathyroidGlandsFinalForm], btnNum++);
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", curry(InternalMutations0, 1));
 	}
 
 	function InternalMutationsText():void {
@@ -1146,9 +1144,9 @@ private function InternalMutations0(page:int = 0):void {
 			perkCount++
 			if (!(player.hasPerk(perkTier))) {
 				if (perkTier.available(player)) {
-					addButton(menuButton, perkTier[0].name(), perkChoice, perkTier)
+					addButton(menuButton, perkName[0].name(), perkChoice, perkTier)
 				} else {
-					addButtonDisabled(menuButton, perkTier[0].name(), "Requirements not met. Check MutationsDB.")
+					addButtonDisabled(menuButton, perkName[0].name(), "Requirements not met. Check MutationsDB.")
 				}
 				break;
 			}
