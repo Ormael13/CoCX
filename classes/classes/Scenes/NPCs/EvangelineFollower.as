@@ -25,6 +25,7 @@ package classes.Scenes.NPCs
 	import classes.Items.WeaponRange;
 	import classes.Items.WeaponRangeLib;
 	import classes.internals.SaveableState;
+	import coc.view.ButtonDataList;
 	
 	public class EvangelineFollower extends NPCAwareContent implements SaveableState
 	{
@@ -938,7 +939,7 @@ private function InternalMutations():void {
 		addButton(3, "Yes", InternalMutationsTak);
 	}
 	else if (EvangelinePeepTalkOnInternalMutations == 2) {
-		outputText("Evangeline smile widen when she hears you would like to undergone another 'grafting'. So what today would you like to change [name]?");
+		outputText("Evangeline's smile widens when she hears you would like to undergo another 'grafting'. \n\"So what today would you like to change [name]?\"");
 		InternalMutations0();
 	}
 }
@@ -952,150 +953,218 @@ private function InternalMutationsTak():void {
 	EvangelinePeepTalkOnInternalMutations = 2;
 	doNext(meetEvangeline);
 }
-private function InternalMutations0(page:int = 1):void {
+private function InternalMutations0(page:int = 0):void {
 	menu();
-	if (page == 1) {
-		addButton(0, "Heart", InternalMutationsHeart);
-		addButton(1, "Muscle", InternalMutationsMuscles);
-		addButton(2, "Mouth", InternalMutationsMouth);
-		addButton(3, "Bloodstream", InternalMutationsBloodstream);
-		addButton(4, "Fat and Tissue", InternalMutationsFatTissue);
-		addButton(5, "Lungs", InternalMutationsLungs);
-		addButton(6, "Eyes", InternalMutationsEyes);
-		addButtonDisabled(7, "Nerv/Sys", "CentralNervousSystem");
-		addButton(8, "Nerv/Sys", InternalMutationsPeripheralNervousSystem);
-		addButton(9, "Bone/Marrow", InternalMutationsBones);
-		addButton(13, "-2-", InternalMutations0, page + 1);
-		addButton(14, "Back", meetEvangeline);
-	}
-	if (page == 2) {
-		addButton(0, "Adrenal Glands", InternalMutationsAdrenalGlands);
-		addButton(1, "Thyroid Gland", InternalMutationsThyroidGland);
-		addButton(2, "Parathyroid Gland", InternalMutationsParaThyroidGlands);
-		addButton(5, "Ovaries", InternalMutationsOvaries);
-		addButton(6, "Testicles", InternalMutationsTesticles);
-		addButton(7, "Metabolism", InternalMutationsMetabolism);
-		addButton(13, "-1-", InternalMutations0, page - 1);
-		addButton(14, "Back", meetEvangeline);
-	}
-}
-private function InternalMutationsHeart():void {
-	menu();
-	addButton(14, "Back", curry(InternalMutations0, 1));
-}
-private function InternalMutationsMuscles():void {
-	menu();
-	addButton(14, "Back", curry(InternalMutations0, 1));
-}
-private function InternalMutationsMouth():void {
-	menu();
-	addButton(14, "Back", curry(InternalMutations0, 1));
-}
-private function InternalMutationsBloodstream():void {
-	menu();
-	addButton(14, "Back", curry(InternalMutations0, 1));
-}
-private function InternalMutationsFatTissue():void {
-	menu();
-	addButton(14, "Back", curry(InternalMutations0, 1));
-}
-private function InternalMutationsLungs():void {
-	menu();
-	addButton(14, "Back", curry(InternalMutations0, 1));
-}
-private function InternalMutationsEyes():void {
-	menu();
-	if (!player.hasPerk(PerkLib.GorgonsEyesEvolved) && player.hasPerk(PerkLib.GorgonsEyes) && player.gorgonScore() >= 10) addButton(0, "Gorgon", InternalMutationsEyesGorgonT2);
-	else addButtonDisabled(0, "Gorgon", "You not meet this req: Gorgon's Eyes mutation, Gorgon race (10+)");
-	if (!player.hasPerk(PerkLib.GorgonsEyes) && player.maxEyesMutations() > 0 && player.eyes.type == 4 && player.gorgonScore() >= 5) addButton(0, "Gorgon", InternalMutationsEyesGorgonT1);
-	else {
-		if (player.maxEyesMutations() == 0) addButtonDisabled(0, "Gorgon", "Your eyes can't handle any more mutations.");
-		else addButtonDisabled(0, "Gorgon", "You not meet one/all of those req: Gorgon’s Eyes, Gorgon race (5+)");
-	}
-	if (!player.hasPerk(PerkLib.GazerEyeFinalForm) && player.hasPerk(PerkLib.GazerEyeEvolved) && player.gazerScore() >= 15) addButton(0, "Gazer", InternalMutationsEyesGazerT3);
-	else addButtonDisabled(1, "Gazer", "You not meet this req: Gazer Eye (Evolved) mutation, Gazer race (15+)");
-	if (!player.hasPerk(PerkLib.GazerEyeEvolved) && player.hasPerk(PerkLib.GazerEye) && player.gazerScore() >= 10) addButton(0, "Gazer", InternalMutationsEyesGazerT2);
-	else addButtonDisabled(1, "Gazer", "You not meet this req: Gazer Eye mutation, Gazer race (10+)");
-	if (!player.hasPerk(PerkLib.GazerEye) && player.maxEyesMutations() > 0 && player.eyes.type == 36 && player.gazerScore() >= 5) addButton(0, "Gazer", InternalMutationsEyesGazerT1);
-	else {
-		if (player.maxEyesMutations() == 0) addButtonDisabled(1, "Gazer", "Your eyes can't handle any more mutations.");
-		else addButtonDisabled(1, "Gazer", "You not meet one/all of those req: Monoeye, Gazer race (5+)");
-	}
-	addButton(14, "Back", curry(InternalMutations0, 1));
-}
-private function InternalMutationsEyesGorgonT1():void {
-	clearOutput();
-	InternalMutationsText();
-	player.createPerk(PerkLib.GorgonsEyes,0,0,0,0);
-	doNext(InternalMutationsEyes);
-	cheatTime2(30);
-}
-private function InternalMutationsEyesGorgonT2():void {
-	clearOutput();
-	InternalMutationsText();
-	player.createPerk(PerkLib.GorgonsEyesEvolved,0,0,0,0);
-	doNext(InternalMutationsEyes);
-	cheatTime2(30);
-}
-private function InternalMutationsEyesGazerT1():void {
-	clearOutput();
-	InternalMutationsText();
-	player.createPerk(PerkLib.GazerEye,0,0,0,0);
-	doNext(InternalMutationsEyes);
-	cheatTime2(30);
-}
-private function InternalMutationsEyesGazerT2():void {
-	clearOutput();
-	InternalMutationsText();
-	player.createPerk(PerkLib.GazerEyeEvolved,0,0,0,0);
-	doNext(InternalMutationsEyes);
-	cheatTime2(30);
-}
-private function InternalMutationsEyesGazerT3():void {
-	clearOutput();
-	InternalMutationsText();
-	player.createPerk(PerkLib.GazerEyeFinalForm,0,0,0,0);
-	doNext(InternalMutationsEyes);
-	cheatTime2(30);
-}
-private function InternalMutationsPeripheralNervousSystem():void {
-	menu();
-	addButton(14, "Back", curry(InternalMutations0, 1));
-}
-private function InternalMutationsBones():void {
-	menu();
-	addButton(14, "Back", curry(InternalMutations0, 1));
-}
-private function InternalMutationsAdrenalGlands():void {
-	menu();
-	addButton(14, "Back", curry(InternalMutations0, 2));
-}
-private function InternalMutationsThyroidGland():void {
-	menu();
-	addButton(14, "Back", curry(InternalMutations0, 2));
-}
-private function InternalMutationsParaThyroidGlands():void {
-	menu();
-	addButton(14, "Back", curry(InternalMutations0, 2));
-}
-private function InternalMutationsOvaries():void {
-	menu();
-	addButton(14, "Back", curry(InternalMutations0, 2));
-}
-private function InternalMutationsTesticles():void {
-	menu();
-	addButton(14, "Back", curry(InternalMutations0, 2));
-}
-private function InternalMutationsMetabolism():void {
-	menu();
-	addButton(14, "Back", curry(InternalMutations0, 2));
-}
-private function InternalMutationsText():void {
-	outputText("Placeholder Text on grafting mutation.\n\n");
-	outputText("Placeholder Text on grafting mutation.\n\n");
-	outputText("Placeholder Text on grafting mutation.");
-}
+	var menuItems:Array = [];
+	//menuItems.push("Heart", InternalMutationsHeart);
+	//menuItems.push("Muscle", InternalMutationsMuscle);
+	//menuItems.push("Mouth", InternalMutationsMouth);
+	//menuItems.push("Adrenal Glands",InternalMutationsAdrenals);
+	//menuItems.push("Bloodstream",InternalMutationsBloodstream);
+	//menuItems.push("Fat and Tissue", InternalMutationsFaTissue);
+	//menuItems.push("Lungs",InternalMutationsLungs);
+	//menuItems.push("Metabolism", InternalMutationsMetabolism);
+	//menuItems.push("Ovaries", InternalMutationsOvaries);
+	//menuItems.push("Testicles", InternalMutationsTesticles);
+	menuItems.push("Eyes", InternalMutationsEyes);
+	//menuItems.push("Nerv/Sys", InternalMutationsPNervSys);
+	//Next Page
+	//menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow);
+	//menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands);
+	//menuItems.push("Parathyroid Gland", InternalMutationsParathyroid);
+	menuGen(menuItems, page);
 
+	function menuGen(menuItems:Array, page:int):void {
+		var selectMenu:ButtonDataList = new ButtonDataList();
+		for (var i:int = 0; i < menuItems.length; i++) {
+			if (i % 2 == 0) {
+				selectMenu.add(menuItems[i], curry(menuItems[i + 1]));
+			}
+		}
+		submenu(selectMenu, meetEvangeline, page, false);
+	}
+
+	function InternalMutationsHeart():void{
+		var btnNum:int = 0
+		menu();
+		//Heart Mutations
+		mutationsAssistant([PerkLib.BlackHeart, PerkLib.BlackHeartEvolved, PerkLib.BlackHeartFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.FrozenHeart, PerkLib.FrozenHeartEvolved, PerkLib.FrozenHeartFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.ObsidianHeart, PerkLib.ObsidianHeartEvolved, PerkLib.ObsidianHeartFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.TwinHeart, PerkLib.TwinHeartEvolved, PerkLib.TwinHeartFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.HeartOfTheStorm, PerkLib.HeartOfTheStormEvolved, PerkLib.HeartOfTheStormFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.DraconicHeart, PerkLib.DraconicHeartEvolved, PerkLib.DraconicHeartFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsMuscle():void{
+		var btnNum:int = 0;
+		menu();
+		//Muscle Mutations
+		mutationsAssistant([PerkLib.MantislikeAgility, PerkLib.MantislikeAgilityEvolved, PerkLib.MantislikeAgilityFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.OniMusculature, PerkLib.OniMusculatureEvolved, PerkLib.OniMusculatureFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsMouth():void{
+		var btnNum:int = 0
+		menu();
+		//Mouth Mutations
+		mutationsAssistant([PerkLib.VenomGlands, PerkLib.VenomGlandsEvolved, PerkLib.VenomGlandsFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.HollowFangs, PerkLib.HollowFangsEvolved, PerkLib.HollowFangsFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsAdrenals():void{
+		var btnNum:int = 0
+		menu();
+		//Adrenal Glands Mutations
+		mutationsAssistant([PerkLib.SalamanderAdrenalGlands, PerkLib.SalamanderAdrenalGlandsEvolved, PerkLib.SalamanderAdrenalGlandsFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.OrcAdrenalGlands, PerkLib.OrcAdrenalGlandsEvolved, PerkLib.OrcAdrenalGlandsFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsBloodstream():void{
+		var btnNum:int = 0
+		menu();
+		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
+		mutationsAssistant([PerkLib.VampiricBloodsteam, PerkLib.VampiricBloodsteamEvolved, PerkLib.VampiricBloodsteamFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.HinezumiBurningBlood, PerkLib.HinezumiBurningBloodEvolved, PerkLib.HinezumiBurningBloodFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.FeyArcaneBloodstream, PerkLib.FeyArcaneBloodstreamEvolved, PerkLib.FeyArcaneBloodstreamFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsFaTissue():void{
+		var btnNum:int = 0
+		menu();
+		//Fat tissue Mutations
+		mutationsAssistant([PerkLib.PigBoarFat, PerkLib.PigBoarFatEvolved, PerkLib.PigBoarFatFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.NaturalPunchingBag, PerkLib.NaturalPunchingBagEvolved, PerkLib.NaturalPunchingBagFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.WhaleFat, PerkLib.WhaleFatEvolved, PerkLib.WhaleFatFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.YetiFat, PerkLib.YetiFatEvolved, PerkLib.YetiFatFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsLungs():void{
+		var btnNum:int = 0
+		menu();
+		//Lungs Mutations
+		mutationsAssistant([PerkLib.ArachnidBookLung, PerkLib.ArachnidBookLungEvolved, PerkLib.ArachnidBookLungFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.DraconicLungs, PerkLib.DraconicLungsEvolved, PerkLib.DraconicLungsFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.CaveWyrmLungs, PerkLib.CaveWyrmLungsEvolved, PerkLib.CaveWyrmLungsFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.MelkieLung, PerkLib.MelkieLungEvolved, PerkLib.MelkieLungFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.DrakeLungs, PerkLib.DrakeLungsEvolved, PerkLib.DrakeLungsFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsMetabolism():void{
+		var btnNum:int = 0
+		menu();
+		//Metabolism Mutations
+		mutationsAssistant([PerkLib.ManticoreMetabolism, PerkLib.ManticoreMetabolismEvolved], btnNum++);
+		mutationsAssistant([PerkLib.DisplacerMetabolism, PerkLib.DisplacerMetabolismEvolved], btnNum++);
+		mutationsAssistant([PerkLib.SlimeMetabolism, PerkLib.SlimeMetabolismEvolved], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsOvaries():void{
+		var btnNum:int = 0
+		menu();
+		//Ovaries Mutations
+		mutationsAssistant([PerkLib.LactaBovinaOvaries, PerkLib.LactaBovinaOvariesEvolved, PerkLib.LactaBovinaOvariesFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.FloralOvaries, PerkLib.FloralOvariesEvolved, PerkLib.FloralOvariesFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsTesticles():void{
+		var btnNum:int = 0
+		menu();
+		//Testicle Mutations
+		mutationsAssistant([PerkLib.MinotaurTesticles, PerkLib.MinotaurTesticlesEvolved, PerkLib.MinotaurTesticlesFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.EasterBunnyEggBag, PerkLib.EasterBunnyEggBagEvolved, PerkLib.EasterBunnyEggBagFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.NukiNuts, PerkLib.NukiNutsEvolved, PerkLib.NukiNutsFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsEyes():void {
+		var btnNum:int = 0
+		menu();
+		//Eyes Mutations
+		mutationsAssistant([PerkLib.GazerEye, PerkLib.GazerEyeEvolved, PerkLib.GazerEyeFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.GorgonsEyes, PerkLib.GorgonsEyesEvolved], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsPNervSys():void{
+		var btnNum:int = 0
+		menu();
+		//Peripheral/NervSys Mutations
+		mutationsAssistant([PerkLib.ElvishPeripheralNervSys, PerkLib.ElvishPeripheralNervSysEvolved, PerkLib.ElvishPeripheralNervSysFinalForm], btnNum++);
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsBoneMarrow():void{
+		var btnNum:int = 0
+		menu();
+		//Bones and Marrow Mutations
+		mutationsAssistant([PerkLib.LizanMarrow, PerkLib.LizanMarrowEvolved, PerkLib.LizanMarrowFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.DraconicBones, PerkLib.DraconicBonesEvolved, PerkLib.DraconicBonesFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.HarpyHollowBones, PerkLib.HarpyHollowBonesEvolved, PerkLib.HarpyHollowBonesFinalForm], btnNum++);
+		addButton(14, "Back", curry(InternalMutations0, 1));
+	}
+
+	function InternalMutationsThyroidGlands():void{
+		var btnNum:int = 0
+		menu();
+		//Thyroid Glands Mutations
+		mutationsAssistant([PerkLib.KitsuneThyroidGland, PerkLib.KitsuneThyroidGlandEvolved, PerkLib.KitsuneThyroidGlandFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.NekomataThyroidGland, PerkLib.NekomataThyroidGlandEvolved, PerkLib.NekomataThyroidGlandFinalForm], btnNum++);
+		addButton(14, "Back", curry(InternalMutations0, 1));
+	}
+
+	function InternalMutationsParathyroid():void{
+		var btnNum:int = 0
+		menu();
+		//ParaThyroid Glands Mutations. What's the difference between this and the above???
+		mutationsAssistant([PerkLib.KitsuneParathyroidGlands, PerkLib.KitsuneParathyroidGlandsEvolved, PerkLib.KitsuneParathyroidGlandsFinalForm], btnNum++);
+		mutationsAssistant([PerkLib.HellcatParathyroidGlands, PerkLib.HellcatParathyroidGlandsEvolved, PerkLib.HellcatParathyroidGlandsFinalForm], btnNum++);
+		addButton(14, "Back", curry(InternalMutations0, 1));
+	}
+
+	function InternalMutationsText():void {
+		outputText("Placeholder Text on grafting mutation.\n\n");
+		outputText("Placeholder Text on grafting mutation.\n\n");
+		outputText("Placeholder Text on grafting mutation.");
+	}
+	
+	function mutationsAssistant(perkName:Array, menuButton:int):void {
+		//outputText(menuButton.toString() + perkName[0].name() + "\n");
+		var perkCount:int = 0
+		for each(var perkTier:PerkType in perkName) {
+			perkCount++
+			if (!(player.hasPerk(perkTier))) {
+				if (perkTier.available(player)) {
+					addButton(menuButton, perkName[0].name(), perkChoice, perkTier)
+				} else {
+					addButtonDisabled(menuButton, perkName[0].name(), "Requirements not met. Check MutationsDB.");
+				}
+				break;
+			}
+		}
+		if (perkCount == perkName.length) {
+			addButtonDisabled(menuButton, perkTier.name(), "Highest Tier obtained!");
+		}
+	}
+
+	function perkChoice(perkTier:PerkType):void {
+		clearOutput();
+		InternalMutationsText();
+		player.createPerk(perkTier, 0, 0, 0, 0);
+		cheatTime2(30);
+		InternalMutations0();
+	}
+}
+		
 private function Experiments():void {
 	clearOutput();
 	outputText("Placeholder Text.");
