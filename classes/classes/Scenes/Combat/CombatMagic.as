@@ -1688,6 +1688,20 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBloodChains)) {
+			bd = buttons.add("BloodChains", spellBloodChains)
+					.hint("Blood Chains is simple blood spell that will immobilize foe briefly.  " +
+							"\n\nBlood Cost: " + spellCostBlood(100) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(100)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodChains)) {
+				bd.disable("You need more time before you can cast this spell again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+		}
 	}
 
 	//THIS FEATURE GOVERS EVERY POST CAST EFFECT YOUR SPELLS MAY CAUSE
@@ -1816,6 +1830,21 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			enemyAI();
 		}
+	}
+	
+	public function spellBloodChains():void {
+		clearOutput();
+		HPChange(spellCostBlood(100), false);
+		player.createStatusEffect(StatusEffects.CooldownSpellBloodChains,3,0,0,0);
+		if(handleShell()){return;}
+		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather before your chest, coalescing into a crimson sphere. ");
+		outputText("The blood emitted by you splited into dozens of stems and surrounded " + monster.a + monster.short + ", bounding " + monster.pronoun2 + " tight enought to prevent any movemewnt for some time.\n\n");
+		monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		statScreenRefresh();
+		enemyAI();
 	}
 
 	public function spellMagicBolt():void {

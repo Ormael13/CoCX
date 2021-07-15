@@ -1153,7 +1153,7 @@ public function naggaTease():void {
 		if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
 		if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 		if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
-		if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (1 - player.statusEffectv1(StatusEffects.ControlFreak));
+		if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
 		if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
 		damage *= damagemultiplier;
         //Determine if critical tease!

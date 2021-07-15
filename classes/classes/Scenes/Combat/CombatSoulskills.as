@@ -303,7 +303,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.Trance)) {
 			if (!player.statStore.hasBuff("TranceTransformation")) {
-				bd = buttons.add("Trance", TranceTransformation).hint("Activate Trance state, whcih enhancing physical and mental abilities at constant cost of soulforce.  \n\n(MAGICAL SOULSKILL)  \n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
+				bd = buttons.add("Trance", TranceTransformation).hint("Activate Trance state, which enhancing physical and mental abilities at constant cost of soulforce.  \n\n(MAGICAL SOULSKILL)  \n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
 				if (player.soulforce < 100) {
 					bd.disable("Your current soulforce is too low.");
 				} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
@@ -336,6 +336,36 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (player.soulforce < 60 * soulskillCost() * soulskillcostmulti()) {
 				bd.disable("Your current soulforce is too low.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF)) {
+				bd.disable("You need more time before you can cast this soulskill again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff soulskills while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
+			bd = buttons.add("Blood Dewdrops", bloodDewdrops)
+					.hint("Blood Dewdrops is simple blood soulskill that will fire many blood droplets from your hand.  " +
+							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(240) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(240)) {
+				bd.disable("Your hp is too low to cast this soulskill.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodDewdrops)) {
+				bd.disable("You need more time before you can cast this soulskill again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff soulskills while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
+			bd = buttons.add("Blood Dewdrops (SF)", bloodDewdropsSF)
+					.hint("(Soulforce infused) Blood Dewdrops is simple blood soulskill, which was infused by small amount of soulforce to enhance it power, that will fire many blood droplets from your hand.  " +
+							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(240) + "\n\nSoulforce cost: " + Math.round(240 * soulskillCost() * soulskillcostmulti()));
+			if ((bloodForBloodGod - 1) < spellCostBlood(240)) {
+				bd.disable("Your hp is too low to cast this soulskill.");
+			} else if (player.soulforce < 240 * soulskillCost() * soulskillcostmulti()) {
+				bd.disable("Your current soulforce is too low.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodDewdropsSF)) {
 				bd.disable("You need more time before you can cast this soulskill again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff soulskills while underground.");
@@ -1553,7 +1583,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF,3,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you you infuse a bit of soulforce into the blood, before making swipe gesture with your hand. In instant three red claw-like lines, with soulfroce infused blood, leaves your hands flying toward " + monster.a + monster.short + ".\n\n");
+		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before making swipe gesture with your hand. In instant three red claw-like lines, with soulfroce infused blood, leaves your hands flying toward " + monster.a + monster.short + ".\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 3;
 		if (damage < 10) damage = 10;
 		//soulskill mod effect
@@ -1573,6 +1603,85 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave many bloody gashes.");
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(15);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	
+	public function bloodDewdrops():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(spellCostBlood(240), false);
+		player.createStatusEffect(StatusEffects.CooldownSpellBloodDewdrops,2,0,0,0);
+		outputText("You concentrate, focusing on the power of your blood before opening your hand and pointing it toward enem"+(monster.plural?"ies":"y")+". Within an instant, many small blood pellets shot from your hands, flying toward " + monster.a + monster.short + ".\n\n");
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
+		if (damage < 10) damage = 10;
+		if (monster.plural) damage *= 5;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		outputText(monster.capitalA + monster.short + " takes ");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave many bloody gashes.");
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		combat.WrathGenerationPerHit2(15);
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else enemyAI();
+	}
+	
+	public function bloodDewdropsSF():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(spellCostBlood(240), false);
+		var soulforcecost:Number = 240 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		player.soulforce -= soulforcecost;
+		player.createStatusEffect(StatusEffects.CooldownSpellBloodDewdropsSF,3,0,0,0);
+		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before opening your hand and pointing it toward enem"+(monster.plural?"ies":"y")+". Within an instant, many small blood droplets shot from your hands, flying toward " + monster.a + monster.short + ".\n\n");
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
+		if (damage < 10) damage = 10;
+		if (monster.plural) damage *= 5;
+		//soulskill mod effect
+		damage *= soulskillPhysicalMod();
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		outputText(monster.capitalA + monster.short + " takes ");
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
@@ -1779,4 +1888,4 @@ public class CombatSoulskills extends BaseCombatContent {
 	 else enemyAI();
 	 }*/
 }
-}
+}

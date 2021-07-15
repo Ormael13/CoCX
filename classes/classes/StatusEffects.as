@@ -413,8 +413,11 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsBlind:StatusEffectType                     = mk("Knows Blind");
 		public static const KnowsBlink:StatusEffectType                     = mk("Knows Blink");
 		public static const KnowsBlizzard:StatusEffectType                  = mk("Knows Blizzard");
+		public static const KnowsBloodChains:StatusEffectType            	= mk("Knows Blood Chains");
 		public static const KnowsBloodExplosion:StatusEffectType            = mk("Knows Blood Explosion");
 		public static const KnowsBloodMissiles:StatusEffectType             = mk("Knows Blood Missiles");
+		public static const KnowsBloodDewdrops:StatusEffectType             = mk("Knows Blood Dewdrops");
+		public static const KnowsBloodDewdropsSF:StatusEffectType           = mk("Knows Blood Dewdrops (infused with Soulforce)");
 		public static const KnowsBloodSwipe:StatusEffectType             	= mk("Knows Blood Swipe");
 		public static const KnowsBloodSwipeSF:StatusEffectType             	= mk("Knows Blood Swipe (infused with Soulforce)");
 		public static const KnowsBoneshatter:StatusEffectType               = mk("Knows Boneshatter");
@@ -1081,8 +1084,11 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownSpectralScream:StatusEffectType           	= mkCombat("Cooldown Spectral scream");
 		public static const CooldownSpellArcticGale:StatusEffectType      		= mkCombat("Cooldown Spell Arctic Gale");
 		public static const CooldownSpellArcticGaleEx:StatusEffectType      	= mkCombat("Cooldown Spell Arctic Gale (Ex)");
+		public static const CooldownSpellBloodChains:StatusEffectType     		= mkCombat("Cooldown Spell Blood Chains");
 		public static const CooldownSpellBloodExplosion:StatusEffectType     	= mkCombat("Cooldown Spell Blood Explosion");
 		public static const CooldownSpellBloodMissiles:StatusEffectType     	= mkCombat("Cooldown Spell Blood Missiles");
+		public static const CooldownSpellBloodDewdrops:StatusEffectType     	= mkCombat("Cooldown Spell Blood Dewdrops");
+		public static const CooldownSpellBloodDewdropsSF:StatusEffectType     	= mkCombat("Cooldown Spell Blood Dewdrops (infused with Soulforce)");
 		public static const CooldownSpellBloodSwipe:StatusEffectType     		= mkCombat("Cooldown Spell Blood Swipe");
 		public static const CooldownSpellBloodSwipeSF:StatusEffectType     		= mkCombat("Cooldown Spell Blood Swipe (infused with Soulforce)");
 		public static const CooldownSpellChainLighting:StatusEffectType      	= mkCombat("Cooldown Spell Chain Lighting");
@@ -1165,4 +1171,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}

@@ -999,9 +999,16 @@ public class Combat extends BaseContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
-			bd = buttons.add("B.Puppies", bloodSwipeBloodPuppies).hint("Command Blood Puppies to attack enemy/ies. Would deal 2x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(20) + "");
 			var bloodForBloodGod:Number = (player.HP - player.minHP());
-			if ((bloodForBloodGod - 1) < spellCostBlood(60)) {
+			bd = buttons.add("B.P. BS", bloodSwipeBloodPuppies).hint("Command Blood Puppies to attack enemy/ies with Blood Swipe. Would deal 2x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(20) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(20)) {
+				bd.disable("Your hp is too low to allow Blood Puppies use this soulskill.");
+			}
+			else if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] == 1) {
+				bd.disable("Your already commanded Puppies to attack this turn.");
+			}
+			bd = buttons.add("B.P. BD", bloodDewdropsBloodPuppies).hint("Command Blood Puppies to attack enemy/ies with Blood Dewdrops. Would deal 10x dmg to group enemies. (Can be used once per turn and will not end PC combat turn after use)  Blood Cost: " + spellCostBlood(80) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(80)) {
 				bd.disable("Your hp is too low to allow Blood Puppies use this soulskill.");
 			}
 			else if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] == 1) {
@@ -9454,6 +9461,13 @@ public class Combat extends BaseContent {
                 player.addStatusValue(StatusEffects.CooldownSpellBloodExplosion, 1, -1);
             }
         }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodChains)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodChains) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBloodChains);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBloodChains, 1, -1);
+            }
+        }
         if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodSwipe)) {
             if (player.statusEffectv1(StatusEffects.CooldownSpellBloodSwipe) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownSpellBloodSwipe);
@@ -9466,6 +9480,20 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF);
             } else {
                 player.addStatusValue(StatusEffects.CooldownSpellBloodSwipeSF, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodDewdrops)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodDewdrops) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBloodDewdrops);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBloodDewdrops, 1, -1);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodDewdropsSF)) {
+            if (player.statusEffectv1(StatusEffects.CooldownSpellBloodDewdropsSF) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownSpellBloodDewdropsSF);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownSpellBloodDewdropsSF, 1, -1);
             }
         }
         //Companion Boosting PC Armor Value
@@ -11825,7 +11853,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
                 if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 				if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
-				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (1 - player.statusEffectv1(StatusEffects.ControlFreak));
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
 				if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
                 damage *= damagemultiplier;
                 //Determine if critical tease!
@@ -11987,7 +12015,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
                 if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 				if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
-				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (1 - player.statusEffectv1(StatusEffects.ControlFreak));
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
 				if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
                 damage *= damagemultiplier;
                 //Determine if critical tease!
@@ -12136,7 +12164,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
                 if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 				if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
-				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (1 - player.statusEffectv1(StatusEffects.ControlFreak));
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
 				if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
                 damage *= damagemultiplier;
                 //Determine if critical tease!
@@ -13516,7 +13544,7 @@ public class Combat extends BaseContent {
 	public function bloodSwipeBloodPuppies():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		HPChange(spellCostBlood(60), false);
+		HPChange(spellCostBlood(20), false);
 		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, many red claw-like lines coalesce briefly before being shot from their paws, flying toward " + monster.a + monster.short + ".\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.125;
 		if (damage < 10) damage = 10;
@@ -13539,6 +13567,54 @@ public class Combat extends BaseContent {
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		doMagicDamage(damage, true, true);
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		outputText(" damage.");
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave many bloody gashes.");
+		}
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		WrathGenerationPerHit2(15);
+		heroBaneProc(damage);
+		statScreenRefresh();
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 1;
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else {
+			menu();
+			addButton(0, "Next", combatMenu, false);
+		}
+	}
+	public function bloodDewdropsBloodPuppies():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(spellCostBlood(80), false);
+		outputText("Giving command your blood puppies, they start focusing the power of blood. Within an instant, many red dewdrops shoots from one of their front paws their rised for short moment, flying toward " + monster.a + monster.short + ".\n\n");
+		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.5;
+		if (damage < 10) damage = 10;
+		var puppies:Number = 1;
+		if (player.hasPerk(PerkLib.AsuraStrength)) puppies += 0.1;
+		damage *= puppies;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatPhysicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= ((puppies / 2) + 1.25);
+		}
+		if (monster.plural) damage *= 10;
+		damage = Math.round(damage);
+		outputText(monster.capitalA + monster.short + " takes ");
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		doMagicDamage(damage, true, true);
@@ -14226,3 +14302,4 @@ public class Combat extends BaseContent {
     }
 }
 }
+

@@ -6112,13 +6112,13 @@ public class PerkLib
             FrozenHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
                 return player.yukiOnnaScore() >= 14;
             }, "Yuki onna race");
-        /*    GorgonsEyes.requireEyesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+            GorgonsEyes.requireEyesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
                 return player.eyes.type == 4;
 				}, "Gorgon eyes")
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.gorgonScore() >= 5;
             }, "Gorgon race");
-		*/	HinezumiBurningBlood.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+			HinezumiBurningBlood.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
                 return player.arms.type == 34;
 				}, "Hinezumi arms")
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -6310,12 +6310,12 @@ public class PerkLib
 			FloralOvariesEvolved.requireLevel(6).requirePerk(FloralOvaries).requireCustomFunction(function (player:Player):Boolean {
 				return player.alrauneScore() >= 13;
 			}, "Alraune race");
-        /*    GorgonsEyesEvolved.requireLevel(6)
+            GorgonsEyesEvolved.requireLevel(6)
 				.requirePerk(GorgonsEyes)
 				.requireCustomFunction(function (player:Player):Boolean {
 					return player.gorgonScore() >= 10;
             }, "Gorgon race");
-        */    HinezumiBurningBloodEvolved.requireLevel(6)
+            HinezumiBurningBloodEvolved.requireLevel(6)
 				.requirePerk(HinezumiBurningBlood)
 				.requireCustomFunction(function (player:Player):Boolean {
                 return player.arms.type == 34;

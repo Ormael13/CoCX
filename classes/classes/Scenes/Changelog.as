@@ -111,8 +111,8 @@ package classes.Scenes
 			outputText("-Flames/Icicles of Love and Storm of Sisterhood/Night of Brotherhood soulskills been slight changed. Their are considered (Rankless) instead of (Basic Rank), they not req. any cultivation perk to be bought (that mean they on first stall of golem merchant now). Due to reduction of req. their power been decreased, less lust/wrath used and cooldown decreased to 1 turn.\n");
 			outputText("-Added Wind elmental attack type. Tornado Strike, Hurricane, Wind scythe specials dmg been changed to this new type of elemental dmg.\n");
 			outputText("-New tier 7 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New Blood Soulskill: Blood Dewdrops - learned from Crimson Jade. Cost 240 health. Deal AoE phys dmg and have cooldown of 2 turns.\n");
+			outputText("-New Blood Spell: Blood Chains - learned from Red Manuscript. Cost 100 health. Would immobilize enemy (stun effect) for 2 turns and have cooldown of 3 turns.\n");//and deal AoE ice dmg and stun enemies for 5 turns. Have 1 turn channel time and cooldown of 12 turns.
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -124,7 +124,7 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed bugs: Dish Helper option showing in Mino King fight even if PC not have any henchman, Mitzi line to meantion Jojo even after he became Joy, inability to change Vampire's descendant into Bloodline: Vampire during ascension, two of three salamander mutation perks giving 10x too high stats multi bonuses, Chain Lighting cooldown freeze, Atlach Nacha boss in EL giving Ancient Tentacle Beast ");
-			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex)\n");/*ostatni punkt changelogu
+			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -625,7 +625,7 @@ package classes.Scenes
 			outputText("-New consumable items (by Ormael): Balls of Flame, Frozen Balls, THUNDERballs, Balls of the Darkness, Poisoned Balls - buyable at Serena shop in HXD (Shelf 3 - all of them req. lvl 42+ to be accessable). Each costs 60 gems and deal same damage as bangball mk 3 but with elemental affix (fire, ice, lighting, darkness, poison).\n");
 			outputText("-New consumable item: Red Manuscript. Dropped by Sand Witch or Cum Witch. Allow to learn Blood Spells when PC have Hidden Job: Blood Demon.\n");
 			outputText("-New consumable item: Crimson Jade. Dropped by Sand Witch or Cum Witch. Allow to learn Blood Soulskills when PC have Way of the Blood.\n");
-			outputText("-New Blood Spell: Blood Missiles - learned from Red Manuscript. Cost 50 health. Deal magic dmg and have cooldown of 2 turns.\n");//and deal AoE ice dmg and stun enemies for 5 turns. Have 1 turn channel time and cooldown of 12 turns.
+			outputText("-New Blood Spell: Blood Missiles - learned from Red Manuscript. Cost 50 health. Deal magic dmg and have cooldown of 2 turns.\n");
 			outputText("-New Blood Spell: Blood Explosion - learned from Red Manuscript. Cost 200 health. Deal AoE magic dmg and have cooldown of 3 turns.\n");
 			outputText("-New Blood Soulskill: Blood Swipe - learned from Crimson Jade. Cost 60 health. Deal phys dmg and have cooldown of 2 turns.\n");
 			outputText("-New TF item (by Liandri): Smarty Nuts. Buyable at Moga'Hen TF items shop. Using this item would turn PC into Ratatoskr (squirrel-morph). Racial bonuses for Half squirrel-morph (6+) /  squirrel-morph (12+) / Ratatoskr (18+): -10/20/25% to Str multi, +60/90/140% to Spe multi, +40/95/155% to Int multi\n");
