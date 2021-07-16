@@ -445,11 +445,11 @@ public class PerkLib
 				"Grapple damage and tease damage increase by 50% for each consecutive round you are holding grapple. Damage multiplier reset to 1 once grapple ends.",
 				"You've chosen the 'Control freak' perk. Grapple damage and tease damage increase by 50% for each consecutive round you are holding grapple. Damage multiplier reset to 1 once grapple ends.");
 		public static const SlimeMetabolism:PerkType = mk("Slime Metabolism", "Slime Metabolism",
-				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow attack twice with tail spike per turn.",
-				"You've chosen the 'Manticore Metabolism' perk, allows you to gain a boost of speed after an intake of cum and allow atack more often with tail spike.");
+				"Allows you to gain a boost of speed for a few hours after an intake of cum and allows you to attack twice per turn.",
+				"You've chosen the 'Slime Metabolism' perk, allows you to gain a boost of speed after an intake of cum and attack more often.");
 		public static const SlimeMetabolismEvolved:PerkType = mk("Slime Metabolism (Evolved)", "Slime Metabolism (Evolved)",
 				"Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of cum and increase max Hunger cap by 50 (if PC have Hunger bar active).",
-				"You've chosen the 'Manticore Metabolism (Evolved)' perk, allows you to increase max boost of speed after an intake of cum and keeping it for 50% longer.");
+				"You've chosen the 'Slime Metabolism (Evolved)' perk, allows you to increase max boost of speed after an intake of cum and keeping it for 50% longer.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.",
 				"You are currently in elemental form.");
