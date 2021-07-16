@@ -352,14 +352,14 @@ private function sandwitchCentaurBoning():void {
 	player.sexReward("vaginalFluids","Dick");
 	outputText("The Sand Witch is panting before you, her clothes in disarray ");
 	//[win via HP]
-	if(monster.HP < 1) outputText("and torn in many places. ");
+	if(monster.HP <= monster.minHP()) outputText("and torn in many places. ");
 	//[win via lust]
 	else outputText("and her fingers squeezing her nipples as lust overwhelms her. ");
 	//[has breasts]
 	if(player.biggestTitSize() > 3) {
 		outputText("As you approach, her eyes drift up to your [allbreasts] and she ");
 		//[win via HP]
-		if(monster.HP < 1) outputText("is unable to stop herself from slowly licking her lips. ");
+		if(monster.HP <= monster.minHP()) outputText("is unable to stop herself from slowly licking her lips. ");
 		//[win via lust]
 		else outputText("sensually licks her parted lips. ");
 	}
@@ -763,14 +763,14 @@ private function missingoSex6():void {
 private function ovipositSandWitches():void {
 	clearOutput();
 	outputText("As you glance down at the ");
-	if(monster.HP < 1) outputText("bruised and battered");
+	if(monster.HP <= monster.minHP()) outputText("bruised and battered");
 	else outputText("lusty");
 	outputText(" sand witch, you feel the familiar tug of arousal in your loins.  Yet your current... situation offers quite the opportunity to relieve some tension through the use of your 'other' sexual appendage.  Licking your lips in anticipation, you lower yourself down to the obstinate spell caster, who immediately reacts with ");
-	if(monster.HP < 1) outputText("fright as she clamors to get away.");
+	if(monster.HP <= monster.minHP()) outputText("fright as she clamors to get away.");
 	else outputText("an uneasy curiosity to see what exactly you have planned.");
 	
 	//PC won through HP victory: 
-	if(monster.HP < 1) outputText("\n\nRolling your eyes, you offer a sympathetic hand to the defeated witch, showing her that you don't mean to hurt her any further, that you have something more... pleasurable in mind.  ");
+	if(monster.HP <= monster.minHP()) outputText("\n\nRolling your eyes, you offer a sympathetic hand to the defeated witch, showing her that you don't mean to hurt her any further, that you have something more... pleasurable in mind.  ");
 	outputText("The sand witch slows to a dead stop as she assesses your intentions, which are made all the more clear as you disrobe and toss your [armor] aside, exposing your ");
 	if(player.hasCock()) outputText("hardened  " + multiCockDescriptLight());
 	if(player.gender == 3) outputText(" and ");
@@ -1022,7 +1022,7 @@ public function witchBirfsSomeBees():void {
 private function sandwitchSpanking():void {
 	clearOutput();
 	outputText("Feeling euphoric after your clear victory, you lazily circle the panting witch and laugh at her.  \"<i>Look at you,</i>\" you taunt, \"<i>A mighty witch of the sands, laid low by a helpless traveller.");
-	if(monster.HP < 1) outputText("  You can't even stand up!");
+	if(monster.HP <= monster.minHP()) outputText("  You can't even stand up!");
 	else outputText("  You can't even stop masturbating, can you?");
 	outputText("</i>\"  You kick her hand away, and she tumbles down into a distraught heap, crying softly");
 	if(monster.lust >= monster.maxLust()) outputText(" but still masturbating");

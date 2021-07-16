@@ -302,6 +302,7 @@ public class CombatUI extends BaseCombatContent {
 			addButton(4, "Release", combat.ScyllaLeggoMyEggo);
 		} else if (monster.hasStatusEffect(StatusEffects.ConstrictedWhip)) {
 			menu();
+			addButton(0, "Strangulate", combat.WhipStrangulate);
 			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", combat.WhipLeggoMyEggo);
 		}

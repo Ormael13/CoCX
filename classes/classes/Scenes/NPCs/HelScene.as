@@ -275,7 +275,7 @@ public function beatUpHel():void {
 	spriteSelect(68);
 	clearOutput();
 	//Various intros
-	if(monster.HP < 1) outputText("Unable to withstand your onslaught, the salamander collapses to a knee, barely supporting her weight on her sword.");
+	if(monster.HP <= monster.minHP()) outputText("Unable to withstand your onslaught, the salamander collapses to a knee, barely supporting her weight on her sword.");
 	else outputText("Panting heavily, knees shaking, she collapses onto the ground, heavily leaning upon her sword.");
 	outputText("\n\n");
 	if(player.cor < 85) helDefeatedNormal();

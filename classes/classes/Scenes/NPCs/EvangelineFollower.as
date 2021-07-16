@@ -956,22 +956,22 @@ private function InternalMutationsTak():void {
 private function InternalMutations0(page:int = 0):void {
 	menu();
 	var menuItems:Array = [];
-	//menuItems.push("Heart", InternalMutationsHeart);
-	//menuItems.push("Muscle", InternalMutationsMuscle);
-	//menuItems.push("Mouth", InternalMutationsMouth);
-	//menuItems.push("Adrenal Glands",InternalMutationsAdrenals);
-	//menuItems.push("Bloodstream",InternalMutationsBloodstream);
-	//menuItems.push("Fat and Tissue", InternalMutationsFaTissue);
-	//menuItems.push("Lungs",InternalMutationsLungs);
-	//menuItems.push("Metabolism", InternalMutationsMetabolism);
-	//menuItems.push("Ovaries", InternalMutationsOvaries);
-	//menuItems.push("Testicles", InternalMutationsTesticles);
+	menuItems.push("Heart", InternalMutationsHeart);
+	menuItems.push("Muscle", InternalMutationsMuscle);
+	menuItems.push("Mouth", InternalMutationsMouth);
+	menuItems.push("Adrenal Glands",InternalMutationsAdrenals);
+	menuItems.push("Bloodstream",InternalMutationsBloodstream);
+	menuItems.push("Fat and Tissue", InternalMutationsFaTissue);
+	menuItems.push("Lungs",InternalMutationsLungs);
+	menuItems.push("Metabolism", InternalMutationsMetabolism);
+	menuItems.push("Ovaries", InternalMutationsOvaries);
+	menuItems.push("Testicles", InternalMutationsTesticles);
 	menuItems.push("Eyes", InternalMutationsEyes);
-	//menuItems.push("Nerv/Sys", InternalMutationsPNervSys);
+	menuItems.push("Nerv/Sys", InternalMutationsPNervSys);
 	//Next Page
-	//menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow);
-	//menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands);
-	//menuItems.push("Parathyroid Gland", InternalMutationsParathyroid);
+	menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow);
+	menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands);
+	menuItems.push("Parathyroid Gland", InternalMutationsParathyroid);
 	menuGen(menuItems, page);
 
 	function menuGen(menuItems:Array, page:int):void {

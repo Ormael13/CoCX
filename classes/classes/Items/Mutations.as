@@ -3979,30 +3979,36 @@ public final class Mutations extends MutationsHelper {
 				player.createStatusEffect(StatusEffects.KnowsBloodMissiles, 0, 0, 0, 0);
 				return;
 			}
+			//Smart enough for Blood Shield and doesnt have it
+			if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBloodShield)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Shield.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodShield, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Blood Explosion and doesnt have it
+			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Explosion.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodExplosion, 0, 0, 0, 0);
+				return;
+			}
 			//Smart enough for Blood Chains and doesnt have it
-			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodChains)) {
+			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodChains)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Chains.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodChains, 0, 0, 0, 0);
 				return;
 			}
-			//Smart enough for Blood Explosion and doesnt have it
-			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Explosion.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodExplosion, 0, 0, 0, 0);
-				return;
-			}/*
-			//Smart enough for  and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			//Smart enough for Blood Wave and doesnt have it
+			if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodWave)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Wave.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodWave, 0, 0, 0, 0);
 				return;
 			}
-			//Smart enough for  and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			//Smart enough for Blood Field and doesnt have it
+			if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsBloodField)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Field.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodField, 0, 0, 0, 0);
 				return;
-			}*/
+			}
 		}
 	}
 
@@ -4030,24 +4036,24 @@ public final class Mutations extends MutationsHelper {
 				player.createStatusEffect(StatusEffects.KnowsBloodSwipe, 0, 0, 0, 0);
 				return;
 			}
-			//Smart enough for Blood Pellets and doesnt have it
-			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Pellets.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodDewdrops, 0, 0, 0, 0);
-				return;
-			}/*
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			//Smart enough for Heart Seeker and doesnt have it
+			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeeker)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Heart Seeker.</b>");
+				player.createStatusEffect(StatusEffects.KnowsHeartSeeker, 0, 0, 0, 0);
 				return;
 			}
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			//Smart enough for Blood Dewdrops and doesnt have it
+			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Dewdrops.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodDewdrops, 0, 0, 0, 0);
 				return;
-			}*/
+			}
+			//Smart enough for Blood Requiem and doesnt have it
+			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Requiem.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodRequiem, 0, 0, 0, 0);
+				return;
+			}
 		}
 		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) {
 			//Smart enough for SF Infused Blood Swipe and doesnt have it
@@ -4056,24 +4062,24 @@ public final class Mutations extends MutationsHelper {
 				player.createStatusEffect(StatusEffects.KnowsBloodSwipeSF, 0, 0, 0, 0);
 				return;
 			}
-			//Smart enough for SF Infused Blood Pellets and doesnt have it
-			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Pellets.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBloodDewdropsSF, 0, 0, 0, 0);
-				return;
-			}/*
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			//Smart enough for SF Infused Heart Seeker and doesnt have it
+			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeekerSF)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Heart Seeker.</b>");
+				player.createStatusEffect(StatusEffects.KnowsHeartSeekerSF, 0, 0, 0, 0);
 				return;
 			}
-			//Smart enough for  and doesnt have it
-			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: .</b>");
-				player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
+			//Smart enough for SF Infused Blood Dewdrops and doesnt have it
+			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Dewdrops.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodDewdropsSF, 0, 0, 0, 0);
 				return;
-			}*/
+			}
+			//Smart enough for SF Infused Blood Requiem and doesnt have it
+			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Requiem.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodRequiemSF, 0, 0, 0, 0);
+				return;
+			}
 		}
 	}
 

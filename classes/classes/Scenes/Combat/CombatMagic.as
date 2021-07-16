@@ -1662,7 +1662,7 @@ public class CombatMagic extends BaseCombatContent {
 		var bloodForBloodGod:Number = (player.HP - player.minHP());
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodMissiles)) {
 			bd = buttons.add("BloodMissiles", spellBloodMissiles)
-					.hint("Blood Missiles is simple blood spell that will attack foe with five blood spheres.  " +
+					.hint("Blood Missiles will attack foe with five blood spheres.  " +
 							"\n\nBlood Cost: " + spellCostBlood(50) + "");
 			if ((bloodForBloodGod - 1) < spellCostBlood(50)) {
 				bd.disable("Your hp is too low to cast this spell.");
@@ -1674,9 +1674,23 @@ public class CombatMagic extends BaseCombatContent {
 				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
 			}
 		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBloodShield)) {
+			bd = buttons.add("BloodShield", spellBloodShield)
+					.hint("Blood Shield will form many blood shields to block enemy attacks.  " +
+							"\n\nBlood Cost: " + spellCostBlood(spellBloodShieldCost()) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(spellBloodShieldCost())) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodShield)) {
+				bd.disable("You can't cast this spell again before shields is broken.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {
 			bd = buttons.add("BloodExplosion", spellBloodExplosion)
-					.hint("Blood Explosion is simple blood spell that will attack foe with blood orb.  \n\n<b>AoE Spell.</b>  " +
+					.hint("Blood Explosion will attack foe with blood orb.  \n\n<b>AoE Spell.</b>  " +
 							"\n\nBlood Cost: " + spellCostBlood(200) + "");
 			if ((bloodForBloodGod - 1) < spellCostBlood(200)) {
 				bd.disable("Your hp is too low to cast this spell.");
@@ -1690,12 +1704,40 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodChains)) {
 			bd = buttons.add("BloodChains", spellBloodChains)
-					.hint("Blood Chains is simple blood spell that will immobilize foe briefly.  " +
+					.hint("Blood Chains will immobilize foe briefly.  " +
 							"\n\nBlood Cost: " + spellCostBlood(100) + "");
 			if ((bloodForBloodGod - 1) < spellCostBlood(100)) {
 				bd.disable("Your hp is too low to cast this spell.");
 			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodChains)) {
 				bd.disable("You need more time before you can cast this spell again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBloodWave)) {//blood wave (deal more to larger groups of enemies than normal small groups)
+			bd = buttons.add("BloodWave", spellBloodWave)
+					.hint("Blood Shield will attack all surrounding foes with a wave of blood.  It would deal more damage when used against larger than averange sized group of enemies.  \n\n<b>AoE Spell.</b>  " +
+							"\n\nBlood Cost: " + spellCostBlood(400) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(400)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.CooldownSpellBloodWave)) {
+				bd.disable("You need more time before you can cast this spell again.");
+			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
+				bd.disable("You can only use buff magic while underground.");
+			} else if (combat.isEnnemyInvisible) {
+				bd.disable("You cannot use offensive spells against an opponent you cannot see or target.");
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsBloodField)) {
+			bd = buttons.add("BloodField", spellBloodField)
+					.hint("Blood Field will form field on the ground that would slow down enemies, drain their health and heal the caster.  " +
+							"\n\nBlood Cost: " + spellCostBlood(600) + "");
+			if ((bloodForBloodGod - 1) < spellCostBlood(600)) {
+				bd.disable("Your hp is too low to cast this spell.");
+			} else if (player.hasStatusEffect(StatusEffects.BloodField)) {
+				bd.disable("You can recast this spell only after it duration ended.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff magic while underground.");
 			} else if (combat.isEnnemyInvisible) {
@@ -1758,7 +1800,7 @@ public class CombatMagic extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -1789,6 +1831,23 @@ public class CombatMagic extends BaseCombatContent {
 		}
 	}
 	
+	public function spellBloodShieldCost():Number {
+		var shieldcost:Number = 0;
+		shieldcost += (player.maxOverHP() * 0.2);
+		return shieldcost;
+	}
+	public function spellBloodShield():void {
+		clearOutput();
+		HPChange(spellCostBlood(spellBloodShieldCost()), false);
+		player.createStatusEffect(StatusEffects.BloodShield,Math.round(spellBloodShieldCost() * spellModBlood()),0,0,0);
+		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather around you, coalescing into a semi transparent crimson "+(player.hasStatusEffect(StatusEffects.Flying)?"":"hemi")+"sphere.\n\n");
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		statScreenRefresh();
+		enemyAI();
+	}
+	
 	public function spellBloodExplosion():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -1809,7 +1868,7 @@ public class CombatMagic extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
 		doMagicDamage(damage, true, true);
 		outputText(" damage.");
@@ -1836,10 +1895,68 @@ public class CombatMagic extends BaseCombatContent {
 		clearOutput();
 		HPChange(spellCostBlood(100), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodChains,3,0,0,0);
+		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather before your chest, coalescing into a crimson sphere. ");
+		outputText("The blood emitted by you splited into dozens of stems and surrounded " + monster.a + monster.short + ", bounding " + monster.pronoun2 + " tight enought to prevent any movements for some time.\n\n");
+		monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		statScreenRefresh();
+		enemyAI();
+	}
+	
+	public function spellBloodWave():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		HPChange(spellCostBlood(400), false);
+		player.createStatusEffect(StatusEffects.CooldownSpellBloodWave,5,0,0,0);
+		if(handleShell()){return;}
+		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather around you, coalescing into a crimson ring. ");
+		outputText("It roils as you concentrate on it before you release it. It moves in all directions looking like a raging waves until it hits " + monster.a + monster.short + ".\n\n");
+		var damage:Number = scalingBonusIntelligence() * spellModBlood() * 4;
+		if (damage < 10) damage = 10;
+		if (monster.plural) damage *= 5;
+		if (monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage * combat.bloodDamageBoostedByDao());
+		outputText(monster.capitalA + monster.short + " takes ");
+		doMagicDamage(damage, true, true);
+		outputText(" damage.");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		MagicAddonEffect();
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+		spellPerkUnlock();
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
+		else {
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3) {
+				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			}
+			enemyAI();
+		}
+	}
+	
+	public function spellBloodField():void {
+		clearOutput();
+		HPChange(spellCostBlood(600), false);
+		player.createStatusEffect(StatusEffects.BloodField,3,Math.round(player.maxOverHP() * 0.01),0,0);
 		if(handleShell()){return;}
 		outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds":"skin pores") + ". Blood starts to gather before your chest, coalescing into a crimson sphere. ");
-		outputText("The blood emitted by you splited into dozens of stems and surrounded " + monster.a + monster.short + ", bounding " + monster.pronoun2 + " tight enought to prevent any movemewnt for some time.\n\n");
-		monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+		outputText("It roils as you concentrate on it before aim the orb at the ground, it brusts and seeps into it causing to appear a crimson field beneath your feet that start spread around until it cover large area. Additionaly small blood thorns grows from it imparing your enem" + (monster.plural ? "es":"y") + " movements.\n\n");
+		if (!monster.isFlying()) monster.buff("BloodThorns").addStats({spe:-20}).withText("Blood Thorns").combatTemporary(3);
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();

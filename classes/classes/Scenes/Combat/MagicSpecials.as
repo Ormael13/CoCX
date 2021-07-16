@@ -1865,7 +1865,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else {
 			outputText(" ");
-			doMagicDamage(damage, true, true);
+			doAcidDamage(damage, true, true);
 		}
 		outputText("\n\n");
 		if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
@@ -3454,7 +3454,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage);
-		doMagicDamage(damage, true, true);
+		doAcidDamage(damage, true, true);
 		if (monster.hasStatusEffect(StatusEffects.AcidDoT)) monster.addStatusValue(StatusEffects.AcidDoT, 4, 1); //More heads will produce more potent acid
 		else monster.createStatusEffect(StatusEffects.AcidDoT, 6, 0, 0, 1);
 		checkAchievementDamage(damage);

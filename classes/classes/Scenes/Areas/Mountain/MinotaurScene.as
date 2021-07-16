@@ -749,7 +749,7 @@ private function minoGetsTitFucked():void {
 	//(Rape – titfuck) Requires F+ cup breasts or DD+ breasts on top two rows.  
 	clearOutput();
 	outputText("The helpless minotaur lays in the dirt, ");
-	if(monster.HP < 1) outputText("defeated.  ");
+	if(monster.HP <= monster.minHP()) outputText("defeated.  ");
 	else outputText("masturbating uncontrollably.  ");
 	outputText("He's yours for the moment, and for right now, you want to see if that throbbing horse-cock will splatter its heavenly spunk all over your [allbreasts] and [face].  You really could use a fix, just enough to fuzz over all the worry and stress you've had to deal with.\n\n");
 	if(monster.lust >= monster.maxLust()) outputText("You push his hands away and y");
@@ -781,7 +781,7 @@ private function takeMinoCumDirectly():void {
 	spriteSelect(44);
 	clearOutput();
 	outputText("Relishing your victory, you breathe deeply, shivering and stretching.  ");
-	if(monster.HP < 1) outputText("The beast-man has fallen on his back, comatose and insensate, though his shaft has risen to full erectness, displacing his loincloth.");
+	if(monster.HP <= monster.minHP()) outputText("The beast-man has fallen on his back, comatose and insensate, though his shaft has risen to full erectness, displacing his loincloth.");
 	else outputText("The beast-man is on his back with his legs splayed, masturbating hopelessly.  His anguished moans tell you all you need to know – he'll never get off alone.");
 	outputText("  You smile, blushing in anticipation, readying yourself for the coming bliss.\n\n");
 	
