@@ -1013,7 +1013,7 @@ public class KitsuneScene extends BaseContent
 			player.sexReward("Default", "Default", true, false);
 			dynStats("lib", 1, "sen", 1);
 			player.boostLactation(1.5);
-			if (player.findPerk(PerkLib.Feeder) >= 0) {
+			if (player.hasPerk(PerkLib.Feeder)) {
 				player.addStatusValue(StatusEffects.Feeder, 1, 1);
 				player.changeStatusValue(StatusEffects.Feeder, 2, 0);
 			}
@@ -1207,7 +1207,7 @@ public class KitsuneScene extends BaseContent
 					button = kitsuneButton(button, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			}
 			//[Feeder]
-			if (player.findPerk(PerkLib.Feeder) >= 0)
+			if (player.hasPerk(PerkLib.Feeder))
 				button = kitsuneButton(button, "Breastfeed", feederTheKitsunes);
 			//Remove buttons in SFW mode. No rapes!
 			if (flags[kFLAGS.SFW_MODE] > 0) {

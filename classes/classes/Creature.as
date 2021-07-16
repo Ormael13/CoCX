@@ -1,4 +1,4 @@
-﻿//CoC Creature.as
+//CoC Creature.as
 package classes
 {
 import classes.BodyParts.Antennae;
@@ -22,6 +22,7 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.UnderBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Stats.Buff;
@@ -72,11 +73,13 @@ public class Creature extends Utils
 		private var _weaponVerb:String = "";
 		private var _weaponAttack:Number = 0;
 		private var _weaponPerk:String = "";
+		private var _weaponType:String = "";
 		private var _weaponValue:Number = 0;
 		public function get weaponName():String { return _weaponName; }
 		public function get weaponVerb():String { return _weaponVerb; }
 		public function get weaponAttack():Number { return _weaponAttack; }
 		public function get weaponPerk():String { return _weaponPerk; }
+		public function get weaponType():String { return _weaponType; }
 		public function get weaponValue():Number { return _weaponValue; }
 		public function set weaponName(value:String):void { _weaponName = value; }
 		public function set weaponVerb(value:String):void { _weaponVerb = value; }
@@ -398,16 +401,16 @@ public class Creature extends Utils
 		protected function maxHP_base():Number {
 			var max:Number = 0;
 			var multimax:Number = 1;
-			if (findPerk(PerkLib.IcyFlesh) >= 0) {
+			if (hasPerk(PerkLib.IcyFlesh)) {
 				max += int(inte * 2 + 50);
 				if (inte >= 21) max += Math.round(inte);
 				if (inte >= 41) max += Math.round(inte);
 				if (inte >= 61) max += Math.round(inte);
 				if (inte >= 81) max += Math.round(inte);
 				if (inte >= 101) max += Math.round(inte) * Math.floor( (inte-100)/50 + 1);
-				if (findPerk(PerkLib.FrozenHeartFinalForm) >= 0) max *= 1.5;
+				if (hasPerk(PerkLib.FrozenHeartFinalForm)) max *= 1.5;
 			}
-			else if (findPerk(PerkLib.HaltedVitals) >= 0) {
+			else if (hasPerk(PerkLib.HaltedVitals)) {
 				max += int(lib * 2 + 50);
 				if (lib >= 21) max += Math.round(lib);
 				if (lib >= 41) max += Math.round(lib);
@@ -423,45 +426,45 @@ public class Creature extends Utils
 				if (tou >= 81) max += Math.round(tou);
 				if (tou >= 101) max += Math.round(tou) * Math.floor( (tou-100)/50 + 1);
 			}
-			if (findPerk(PerkLib.IcyFlesh) >= 0) {
-				if (findPerk(PerkLib.FrozenHeartFinalForm) >= 0) {
-					if (findPerk(PerkLib.TankI) >= 0) max += Math.round(inte*18);
-					if (findPerk(PerkLib.TankII) >= 0) max += Math.round(inte*18);
-					if (findPerk(PerkLib.TankIII) >= 0) max += Math.round(inte*18);
-					if (findPerk(PerkLib.TankIV) >= 0) max += Math.round(inte*18);
-					if (findPerk(PerkLib.TankV) >= 0) max += Math.round(inte*18);
-					if (findPerk(PerkLib.TankVI) >= 0) max += Math.round(inte*18);
+			if (hasPerk(PerkLib.IcyFlesh)) {
+				if (hasPerk(PerkLib.FrozenHeartFinalForm)) {
+					if (hasPerk(PerkLib.TankI)) max += Math.round(inte*18);
+					if (hasPerk(PerkLib.TankII)) max += Math.round(inte*18);
+					if (hasPerk(PerkLib.TankIII)) max += Math.round(inte*18);
+					if (hasPerk(PerkLib.TankIV)) max += Math.round(inte*18);
+					if (hasPerk(PerkLib.TankV)) max += Math.round(inte*18);
+					if (hasPerk(PerkLib.TankVI)) max += Math.round(inte*18);
 				}
 				else {
-					if (findPerk(PerkLib.TankI) >= 0) max += Math.round(inte*12);
-					if (findPerk(PerkLib.TankII) >= 0) max += Math.round(inte*12);
-					if (findPerk(PerkLib.TankIII) >= 0) max += Math.round(inte*12);
-					if (findPerk(PerkLib.TankIV) >= 0) max += Math.round(inte*12);
-					if (findPerk(PerkLib.TankV) >= 0) max += Math.round(inte*12);
-					if (findPerk(PerkLib.TankVI) >= 0) max += Math.round(inte*12);
+					if (hasPerk(PerkLib.TankI)) max += Math.round(inte*12);
+					if (hasPerk(PerkLib.TankII)) max += Math.round(inte*12);
+					if (hasPerk(PerkLib.TankIII)) max += Math.round(inte*12);
+					if (hasPerk(PerkLib.TankIV)) max += Math.round(inte*12);
+					if (hasPerk(PerkLib.TankV)) max += Math.round(inte*12);
+					if (hasPerk(PerkLib.TankVI)) max += Math.round(inte*12);
 				}
 			}
 			else {
-				if (findPerk(PerkLib.TankI) >= 0) max += Math.round(tou*12);
-				if (findPerk(PerkLib.TankII) >= 0) max += Math.round(tou*12);
-				if (findPerk(PerkLib.TankIII) >= 0) max += Math.round(tou*12);
-				if (findPerk(PerkLib.TankIV) >= 0) max += Math.round(tou*12);
-				if (findPerk(PerkLib.TankV) >= 0) max += Math.round(tou*12);
-				if (findPerk(PerkLib.TankVI) >= 0) max += Math.round(tou*12);
+				if (hasPerk(PerkLib.TankI)) max += Math.round(tou*12);
+				if (hasPerk(PerkLib.TankII)) max += Math.round(tou*12);
+				if (hasPerk(PerkLib.TankIII)) max += Math.round(tou*12);
+				if (hasPerk(PerkLib.TankIV)) max += Math.round(tou*12);
+				if (hasPerk(PerkLib.TankV)) max += Math.round(tou*12);
+				if (hasPerk(PerkLib.TankVI)) max += Math.round(tou*12);
 			}
-			if (findPerk(PerkLib.GoliathI) >= 0) max += Math.round(str*8);
-			if (findPerk(PerkLib.GoliathII) >= 0) max += Math.round(str*8);
-			if (findPerk(PerkLib.GoliathIII) >= 0) max += Math.round(str*8);
-			if (findPerk(PerkLib.GoliathIV) >= 0) max += Math.round(str*8);
-			if (findPerk(PerkLib.GoliathV) >= 0) max += Math.round(str*8);
-			if (findPerk(PerkLib.GoliathVI) >= 0) max += Math.round(str*8);
-			if (findPerk(PerkLib.CheetahI) >= 0) max += Math.round(spe*4);
-			if (findPerk(PerkLib.CheetahII) >= 0) max += Math.round(spe*4);
-			if (findPerk(PerkLib.CheetahIII) >= 0) max += Math.round(spe*4);
-			if (findPerk(PerkLib.CheetahIV) >= 0) max += Math.round(spe*4);
-			if (findPerk(PerkLib.CheetahV) >= 0) max += Math.round(spe*4);
-			if (findPerk(PerkLib.CheetahVI) >= 0) max += Math.round(spe*4);
-			if (findPerk(PerkLib.ElementalBondFlesh) >= 0) {
+			if (hasPerk(PerkLib.GoliathI)) max += Math.round(str*8);
+			if (hasPerk(PerkLib.GoliathII)) max += Math.round(str*8);
+			if (hasPerk(PerkLib.GoliathIII)) max += Math.round(str*8);
+			if (hasPerk(PerkLib.GoliathIV)) max += Math.round(str*8);
+			if (hasPerk(PerkLib.GoliathV)) max += Math.round(str*8);
+			if (hasPerk(PerkLib.GoliathVI)) max += Math.round(str*8);
+			if (hasPerk(PerkLib.CheetahI)) max += Math.round(spe*4);
+			if (hasPerk(PerkLib.CheetahII)) max += Math.round(spe*4);
+			if (hasPerk(PerkLib.CheetahIII)) max += Math.round(spe*4);
+			if (hasPerk(PerkLib.CheetahIV)) max += Math.round(spe*4);
+			if (hasPerk(PerkLib.CheetahV)) max += Math.round(spe*4);
+			if (hasPerk(PerkLib.CheetahVI)) max += Math.round(spe*4);
+			if (hasPerk(PerkLib.ElementalBondFlesh)) {
 				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += maxHP_ElementalBondFleshMulti() * 4 * statusEffectv2(StatusEffects.SummonedElementalsAir);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += maxHP_ElementalBondFleshMulti() * 4 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsFire)) max += maxHP_ElementalBondFleshMulti() * 4 * statusEffectv2(StatusEffects.SummonedElementalsFire);
@@ -476,55 +479,55 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.SummonedElementalsPurity)) max += maxHP_ElementalBondFleshMulti() * 4 * statusEffectv2(StatusEffects.SummonedElementalsPurity);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) max += maxHP_ElementalBondFleshMulti() * 4 * statusEffectv2(StatusEffects.SummonedElementalsCorruption);
 			}
-			if (findPerk(PerkLib.JobGuardian) >= 0) max += 120;
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 600;
-			if (findPerk(PerkLib.BodyCultivator) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
-				if (findPerk(PerkLib.SoulApprentice) >= 0) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulPersonage) >= 0) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulWarrior) >= 0) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.JobGuardian)) max += 120;
+			if (hasPerk(PerkLib.BodyCultivator)) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
+				if (hasPerk(PerkLib.SoulApprentice)) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulPersonage)) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulWarrior)) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
-			if (findPerk(PerkLib.FleshBodyWarriorStage) >= 0) {
-				if (findPerk(PerkLib.SoulSprite) >= 0) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulScholar) >= 0) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulElder) >= 0) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
+				if (hasPerk(PerkLib.SoulSprite)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulScholar)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulElder)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
-			if (findPerk(PerkLib.FleshBodyElderStage) >= 0) {
-				if (findPerk(PerkLib.SoulExalt) >= 0) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulOverlord) >= 0) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulTyrant) >= 0) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.FleshBodyElderStage)) {
+				if (hasPerk(PerkLib.SoulExalt)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulOverlord)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulTyrant)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
-			if (findPerk(PerkLib.FleshBodyOverlordStage) >= 0) {
-				if (findPerk(PerkLib.SoulKing) >= 0) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulEmperor) >= 0) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (findPerk(PerkLib.SoulAncestor) >= 0) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
+				if (hasPerk(PerkLib.SoulKing)) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulEmperor)) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulAncestor)) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
-			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += (900 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) max += (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) max += (1500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (findPerk(PerkLib.AscensionHardiness) >= 0) max += perkv1(PerkLib.AscensionHardiness) * 400;
-			if (findPerk(PerkLib.ChiReflowDefense) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
+			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (900 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) max += (1200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (1500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.AscensionHardiness)) max += perkv1(PerkLib.AscensionHardiness) * 400;
+			if (hasPerk(PerkLib.ChiReflowDefense)) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
 			max += level * 60;
 			if (level <= 6) max += level * 60;
-			if (findPerk(PerkLib.UnlockBody) >= 0) max += level * 60;
-			if (findPerk(PerkLib.UnlockBody2ndStage) >= 0) max += level * 60;
-			if (findPerk(PerkLib.UnlockBody3rdStage) >= 0) max += level * 60;
-			if (findPerk(PerkLib.UnlockBody4thStage) >= 0) max += level * 60;
-			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 80;
-			if (findPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) max += level * 80;
+			if (hasPerk(PerkLib.UnlockBody)) max += level * 60;
+			if (hasPerk(PerkLib.UnlockBody2ndStage)) max += level * 60;
+			if (hasPerk(PerkLib.UnlockBody3rdStage)) max += level * 60;
+			if (hasPerk(PerkLib.UnlockBody4thStage)) max += level * 60;
+			if (hasPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 80;
+			if (hasPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) max += level * 80;
 			if (jewelryEffectId == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude3;
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude4;
-			if (findPerk(PerkLib.RefinedBodyI) >= 0) multimax += 0.05;
-			if (findPerk(PerkLib.RefinedBodyII) >= 0) multimax += 0.05;
-			if (findPerk(PerkLib.RefinedBodyIII) >= 0) multimax += 0.05;
-			if (findPerk(PerkLib.RefinedBodyIV) >= 0) multimax += 0.05;
-			if (findPerk(PerkLib.RefinedBodyV) >= 0) multimax += 0.05;
-			if (findPerk(PerkLib.RefinedBodyVI) >= 0) multimax += 0.05;
-			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
-			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
+			if (hasPerk(PerkLib.RefinedBodyI)) multimax += 0.05;
+			if (hasPerk(PerkLib.RefinedBodyII)) multimax += 0.05;
+			if (hasPerk(PerkLib.RefinedBodyIII)) multimax += 0.05;
+			if (hasPerk(PerkLib.RefinedBodyIV)) multimax += 0.05;
+			if (hasPerk(PerkLib.RefinedBodyV)) multimax += 0.05;
+			if (hasPerk(PerkLib.RefinedBodyVI)) multimax += 0.05;
+			if (hasPerk(PerkLib.LimitBreakerBody1stStage)) multimax += 0.05;
+			if (hasPerk(PerkLib.LimitBreakerBody2ndStage)) multimax += 0.1;
+			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.2;
 			max *= multimax;
 			max = Math.round(max);
 			return max;
@@ -567,21 +570,35 @@ public class Creature extends Utils
 		}
 		public function maxOverHP():Number {
 			var maxOver:Number = maxHP();
-			if (findPerk(PerkLib.HiddenJobBloodDemon) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 10);
+			if (hasPerk(PerkLib.HiddenJobBloodDemon)) {
+				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
 				else maxOver += Math.round(tou * 10);
 			}
-			if (findPerk(PerkLib.WayOfTheBlood) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 10);
+			if (hasPerk(PerkLib.WayOfTheBlood)) {
+				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
 				else maxOver += Math.round(tou * 10);
 			}
-			if (findPerk(PerkLib.YourPainMyPower) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 10);
+			if (hasPerk(PerkLib.YourPainMyPower)) {
+				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
 				else maxOver += Math.round(tou * 10);
 			}
-			if (findPerk(PerkLib.MyBloodForBloodPuppies) >= 0) {
-				if (findPerk(PerkLib.IcyFlesh) >= 0) maxOver += Math.round(inte * 10);
+			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) {
+				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
 				else maxOver += Math.round(tou * 10);
+			}
+			if (hasPerk(PerkLib.BloodDemonToughness)) {
+				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
+				else maxOver += Math.round(tou*10);
+			}
+			//
+			if (hasPerk(PerkLib.BloodDemonWisdom)) {
+				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
+				else maxOver += Math.round(tou*10);
+			}
+			//
+			if (hasPerk(PerkLib.BloodDemonIntelligence)) {
+				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
+				else maxOver += Math.round(tou*10);
 			}
 			return Math.min(19999999,maxOver);
 		}
@@ -591,38 +608,38 @@ public class Creature extends Utils
 		protected function maxLust_base():Number {
 			var max:Number = 100;
 			var multimax:Number = 1;
-			if (findPerk(PerkLib.InhumanDesireI) >= 0) max += Math.round(lib*3);
-			if (findPerk(PerkLib.InhumanDesireII) >= 0) max += Math.round(lib*3);
-			if (findPerk(PerkLib.InhumanDesireIII) >= 0) max += Math.round(lib*3);
-			if (findPerk(PerkLib.InhumanDesireIV) >= 0) max += Math.round(lib*3);
-			if (findPerk(PerkLib.InhumanDesireV) >= 0) max += Math.round(lib*3);
-			if (findPerk(PerkLib.InhumanDesireVI) >= 0) max += Math.round(lib*3);
-			if (findPerk(PerkLib.BasicSelfControl) >= 0) max += 45;
-			if (findPerk(PerkLib.HalfStepToImprovedSelfControl) >= 0) max += 75;
-			if (findPerk(PerkLib.ImprovedSelfControl) >= 0) max += 120;
-			if (findPerk(PerkLib.HalfStepToAdvancedSelfControl) >= 0) max += 180;
-			if (findPerk(PerkLib.AdvancedSelfControl) >= 0) max += 300;
-			if (findPerk(PerkLib.HalfStepToSuperiorSelfControl) >= 0) max += 480;
-			if (findPerk(PerkLib.SuperiorSelfControl) >= 0) max += 750;
-			if (findPerk(PerkLib.HalfStepToPeerlessSelfControl) >= 0) max += 1050;
-			if (findPerk(PerkLib.PeerlessSelfControl) >= 0) max += 1500;
-			if (findPerk(PerkLib.HalfStepToInhumanSelfControl) >= 0) max += 2250;
-			if (findPerk(PerkLib.InhumanSelfControl) >= 0) max += 3000;
-			if (findPerk(PerkLib.HalfStepToEpicSelfControl) >= 0) max += 4500;
-			if (findPerk(PerkLib.EpicSelfControl) >= 0) max += 6750;
-			if (findPerk(PerkLib.HalfStepToLegendarySelfControl) >= 0) max += 10500;
-			if (findPerk(PerkLib.LegendarySelfControl) >= 0) max += 15000;
-			if (findPerk(PerkLib.HalfStepToMythicalSelfControl) >= 0) max += 22500;
-			if (findPerk(PerkLib.MythicalSelfControl) >= 0) max += 30000;
-			if (findPerk(PerkLib.Mage) >= 0) max += 15;
-			if (findPerk(PerkLib.GrandMage) >= 0) max += 30;
-			if (findPerk(PerkLib.Archmage) >= 0) max += 45;
-			if (findPerk(PerkLib.GrandArchmage) >= 0) max += 60;
-			if (findPerk(PerkLib.GrandArchmage2ndCircle) >= 0) max += 75;
-			if (findPerk(PerkLib.GrandArchmage3rdCircle) >= 0) max += 90;
-			if (findPerk(PerkLib.GreyMage) >= 0) max += 120;
-			if (findPerk(PerkLib.GreyArchmage) >= 0) max += 150;
-			if (findPerk(PerkLib.ElementalBondUrges) >= 0) {
+			if (hasPerk(PerkLib.InhumanDesireI)) max += Math.round(lib*3);
+			if (hasPerk(PerkLib.InhumanDesireII)) max += Math.round(lib*3);
+			if (hasPerk(PerkLib.InhumanDesireIII)) max += Math.round(lib*3);
+			if (hasPerk(PerkLib.InhumanDesireIV)) max += Math.round(lib*3);
+			if (hasPerk(PerkLib.InhumanDesireV)) max += Math.round(lib*3);
+			if (hasPerk(PerkLib.InhumanDesireVI)) max += Math.round(lib*3);
+			if (hasPerk(PerkLib.BasicSelfControl)) max += 45;
+			if (hasPerk(PerkLib.HalfStepToImprovedSelfControl)) max += 75;
+			if (hasPerk(PerkLib.ImprovedSelfControl)) max += 120;
+			if (hasPerk(PerkLib.HalfStepToAdvancedSelfControl)) max += 180;
+			if (hasPerk(PerkLib.AdvancedSelfControl)) max += 300;
+			if (hasPerk(PerkLib.HalfStepToSuperiorSelfControl)) max += 480;
+			if (hasPerk(PerkLib.SuperiorSelfControl)) max += 750;
+			if (hasPerk(PerkLib.HalfStepToPeerlessSelfControl)) max += 1050;
+			if (hasPerk(PerkLib.PeerlessSelfControl)) max += 1500;
+			if (hasPerk(PerkLib.HalfStepToInhumanSelfControl)) max += 2250;
+			if (hasPerk(PerkLib.InhumanSelfControl)) max += 3000;
+			if (hasPerk(PerkLib.HalfStepToEpicSelfControl)) max += 4500;
+			if (hasPerk(PerkLib.EpicSelfControl)) max += 6750;
+			if (hasPerk(PerkLib.HalfStepToLegendarySelfControl)) max += 10500;
+			if (hasPerk(PerkLib.LegendarySelfControl)) max += 15000;
+			if (hasPerk(PerkLib.HalfStepToMythicalSelfControl)) max += 22500;
+			if (hasPerk(PerkLib.MythicalSelfControl)) max += 30000;
+			if (hasPerk(PerkLib.Mage)) max += 15;
+			if (hasPerk(PerkLib.GrandMage)) max += 30;
+			if (hasPerk(PerkLib.Archmage)) max += 45;
+			if (hasPerk(PerkLib.GrandArchmage)) max += 60;
+			if (hasPerk(PerkLib.GrandArchmage2ndCircle)) max += 75;
+			if (hasPerk(PerkLib.GrandArchmage3rdCircle)) max += 90;
+			if (hasPerk(PerkLib.GreyMage)) max += 120;
+			if (hasPerk(PerkLib.GreyArchmage)) max += 150;
+			if (hasPerk(PerkLib.ElementalBondUrges)) {
 				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsAir);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsFire)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsFire);
@@ -637,33 +654,33 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.SummonedElementalsPurity)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsPurity);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsCorruption);
 			}
-			if (findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) max += 60;
-			if (findPerk(PerkLib.OmnibusGift) >= 0) max += 45;
-			if (findPerk(PerkLib.JobCourtesan) >= 0) max += 60;
-			if (findPerk(PerkLib.JobSeducer) >= 0) max += 30;
-			if (findPerk(PerkLib.PrestigeJobGreySage) >= 0) max += 300;
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 150;
-			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += (225 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (findPerk(PerkLib.FclassHeavenTribulationSurvivor) >= 0) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (findPerk(PerkLib.EclassHeavenTribulationSurvivor) >= 0) max += (375 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (findPerk(PerkLib.AscensionDesires) >= 0) max += perkv1(PerkLib.AscensionDesires) * 30;
+			if (hasPerk(PerkLib.BroBody) || hasPerk(PerkLib.BimboBody) || hasPerk(PerkLib.FutaForm)) max += 60;
+			if (hasPerk(PerkLib.OmnibusGift)) max += 45;
+			if (hasPerk(PerkLib.JobCourtesan)) max += 60;
+			if (hasPerk(PerkLib.JobSeducer)) max += 30;
+			if (hasPerk(PerkLib.PrestigeJobGreySage)) max += 300;
+			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (225 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (375 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (hasPerk(PerkLib.AscensionDesires)) max += perkv1(PerkLib.AscensionDesires) * 30;
 			max += level * 3;
 			if (level <= 6) max += level * 3;
-			if (findPerk(PerkLib.UnlockArdor) >= 0) max += level * 3;
-			if (findPerk(PerkLib.UnlockArdor2ndStage) >= 0) max += level * 3;
-			if (findPerk(PerkLib.UnlockArdor3rdStage) >= 0) max += level * 3;
-			if (findPerk(PerkLib.UnlockArdor4thStage) >= 0) max += level * 3;
-			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 6;
-			if (findPerk(PerkLib.AscensionUnlockedPotential3rdStage) >= 0) max += level * 6;
-			if (findPerk(PerkLib.DemonicDesireI) >= 0) multimax += 0.05;
-			if (findPerk(PerkLib.DemonicDesireII) >= 0) multimax += 0.05;
-			if (findPerk(PerkLib.DemonicDesireIII) >= 0) multimax += 0.05;
-			if (findPerk(PerkLib.DemonicDesireVI) >= 0) multimax += 0.05;
-			if (findPerk(PerkLib.DemonicDesireV) >= 0) multimax += 0.05;
-			if (findPerk(PerkLib.DemonicDesireVI) >= 0) multimax += 0.05;
-			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
-			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
+			if (hasPerk(PerkLib.UnlockArdor)) max += level * 3;
+			if (hasPerk(PerkLib.UnlockArdor2ndStage)) max += level * 3;
+			if (hasPerk(PerkLib.UnlockArdor3rdStage)) max += level * 3;
+			if (hasPerk(PerkLib.UnlockArdor4thStage)) max += level * 3;
+			if (hasPerk(PerkLib.AscensionUnlockedPotential)) max += level * 6;
+			if (hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) max += level * 6;
+			if (hasPerk(PerkLib.DemonicDesireI)) multimax += 0.05;
+			if (hasPerk(PerkLib.DemonicDesireII)) multimax += 0.05;
+			if (hasPerk(PerkLib.DemonicDesireIII)) multimax += 0.05;
+			if (hasPerk(PerkLib.DemonicDesireVI)) multimax += 0.05;
+			if (hasPerk(PerkLib.DemonicDesireV)) multimax += 0.05;
+			if (hasPerk(PerkLib.DemonicDesireVI)) multimax += 0.05;
+			if (hasPerk(PerkLib.LimitBreakerHeart1stStage)) multimax += 0.05;
+			if (hasPerk(PerkLib.LimitBreakerHeart2ndStage)) multimax += 0.1;
+			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.2;
 			max *= multimax;
 			max = Math.round(max);
 			return max;
@@ -1110,8 +1127,8 @@ public class Creature extends Utils
 			ass           = new AssClass();
 			ass.host      = this;
 			breastRows    = [];
-			_perks        = [];
-			statusEffects = [];
+			_perks        = new PerkManager(this);
+			_statusEffects = new StatusEffectManager(this);
 			this.strStat.core.value = 15;
 			this.touStat.core.value = 15;
 			this.speStat.core.value = 15;
@@ -1234,108 +1251,49 @@ public class Creature extends Utils
 		*/
 		//Monsters have few perks, which I think should be a status effect for clarity's sake.
 		//TODO: Move perks into monster status effects.
-		private var _perks:Array;
-		public function perk(i:int):PerkClass{
-			return _perks[i];
-		}
-		public function get perks():Array {
-			return _perks;
-		}
-		public function get numPerks():int {
-			return _perks.length;
-		}
-		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
-		//Someone call the grammar police!
-		//TODO: Move monster status effects into perks. Needs investigation though.
-		public var statusEffects:Array;
+		private var _perks:PerkManager;
 
+		public function get perkManager():PerkManager
+		{
+			return this._perks;
+		}
+
+		/**
+		 * STOP USING THIS! Use getPerk instead!
+		 * @deprecated
+		 * @param i
+		 * @return
+		 */
+		public function perk(i:int):PerkClass {
+			return _perks.asArray()[i];
+		}
+
+		/**
+		 * Perks as an array. Only use this when needing a full list of active perks.
+		 * If searching for a perk, use hasPerk or getPerk instead.
+		 */
+		public function get perks():Array {
+			return _perks.asArray();
+		}
+
+		/**
+		 * Get count of active perks
+		 * @return {Number} Number of active perks.
+		 */
+		public function get numPerks():int {
+			return _perks.count();
+		}
 
 		//Functions
 
 		//Create a perk
 		public function createPerk(ptype:PerkType, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{
-			var newKeyItem:PerkClass = new PerkClass(ptype);
-			//used to denote that the array has already had its new spot pushed on.
-			var arrayed:Boolean = false;
-			//used to store where the array goes
-			var keySlot:Number = 0;
-			var counter:Number = 0;
-			//Start the array if its the first bit
-			if (perks.length == 0)
-			{
-				//trace("New Perk Started Array! " + keyName);
-				perks.push(newKeyItem);
-				arrayed = true;
-				keySlot = 0;
-			}
-			//If it belongs at the end, push it on
-			if (perk(perks.length - 1).perkName < ptype.name && !arrayed)
-			{
-				//trace("New Perk Belongs at the end!! " + keyName);
-				perks.push(newKeyItem);
-				arrayed = true;
-				keySlot = perks.length - 1;
-			}
-			//If it belongs in the beginning, splice it in
-			if (perk(0).perkName > ptype.name && !arrayed)
-			{
-				//trace("New Perk Belongs at the beginning! " + keyName);
-				perks.splice(0, 0, newKeyItem);
-				arrayed = true;
-				keySlot = 0;
-			}
-			//Find the spot it needs to go in and splice it in.
-			if (!arrayed)
-			{
-				//trace("New Perk using alphabetizer! " + keyName);
-				counter = perks.length;
-				while (counter > 0 && !arrayed)
-				{
-					counter--;
-					//If the current slot is later than new key
-					if (perk(counter).perkName > ptype.name)
-					{
-						//If the earlier slot is earlier than new key && a real spot
-						if (counter - 1 >= 0)
-						{
-							//If the earlier slot is earlier slot in!
-							if (perk(counter - 1).perkName <= ptype.name)
-							{
-								arrayed = true;
-								perks.splice(counter, 0, newKeyItem);
-								keySlot = counter;
-							}
-						}
-						//If the item after 0 slot is later put here!
-						else
-						{
-							//If the next slot is later we are go
-							if (perk(counter).perkName <= ptype.name) {
-								arrayed = true;
-								perks.splice(counter, 0, newKeyItem);
-								keySlot = counter;
-							}
-						}
-					}
-				}
-			}
-			//Fallback
-			if (!arrayed)
-			{
-				//trace("New Perk Belongs at the end!! " + keyName);
-				perks.push(newKeyItem);
-				keySlot = perks.length - 1;
-			}
-			if (ptype.buffs != null)
-			{
-				statStore.addBuffObject(ptype.buffs, "perk_"+ptype.id, {text:ptype.name, save:false});
-			}
-			perk(keySlot).value1 = value1;
-			perk(keySlot).value2 = value2;
-			perk(keySlot).value3 = value3;
-			perk(keySlot).value4 = value4;
-			//trace("NEW PERK FOR PLAYER in slot " + keySlot + ": " + perk(keySlot).perkName);
+			this._perks.createPerk(ptype, value1, value2, value3, value4);
+		}
+
+		public function addPerkInstance(pclass:PerkClass):void {
+			this._perks.add(pclass);
 		}
 
 		/**
@@ -1343,281 +1301,182 @@ public class Creature extends Utils
 		 */
 		public function removePerk(ptype:PerkType):Boolean
 		{
-			var counter:Number = perks.length;
-			//Various Errors preventing action
-			if (perks.length <= 0)
-			{
-				return false;
-			}
-			if (perkv4(ptype) > 0)
-			{
-				// trace('ERROR! Attempted to remove permanent "' + ptype.name + '" perk.');
-				return false;
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (perk(counter).ptype == ptype)
-				{
-					perks.splice(counter, 1);
-					//trace("Attempted to remove \"" + perkName + "\" perk.");
-					if (ptype.buffs != null)
-					{
-						statStore.removeBuffs("perk_"+ptype.id);
-					}
-					return true;
-				}
-			}
-			return false;
+			return this._perks.remove(ptype);
 		}
 
-		//has perk?
+		/**
+		 * STOP USING THIS! Use Creature.hasPerk or Creature.getPerk instead!
+		 * Perks are no longer stored as an array this is an extremely slow compatibility measure.
+		 * @deprecated
+		 * @see Creature.hasPerk
+		 * @see Creature.getPerk
+		 * @param ptype
+		 * @return {Number} Index of perk in array if it exists. -1 if perk does not exist.
+		 */
 		public function findPerk(ptype:PerkType):Number
 		{
-			if (perks.length <= 0)
-				return -2;
-			for (var counter:int = 0; counter<perks.length; counter++)
-			{
-				if (perk(counter).ptype.id == ptype.id)
-					return counter;
+			var perk:PerkClass = this._perks.get(ptype);
+			if (perk) {
+				return this._perks.asArray().indexOf(perk);
 			}
 			return -1;
 		}
+
+		/**
+		 * Check if this creature has a perk.
+		 * @param ptype {PerkType}
+		 * @return {Boolean} True if creature has the perk, otherwise false.
+		 */
 		public function hasPerk(ptype:PerkType):Boolean {
-			return findPerk(ptype) >= 0;
+			return this._perks.has(ptype);
 		}
 
-		//Duplicate perk
-		//Deprecated?
+		/**
+		 * Get the instance of a perk.
+		 * @param {PerkType} ptype
+		 */
+		public function getPerk(ptype:PerkType):PerkClass {
+			return this._perks.get(ptype);
+		}
+
+		/**
+		 * Check if a perk is duplicated.
+		 * Always returns false as PerkManager forbids duplicates. Attempting to add an existing perk keeps the original
+		 * perk and aborts adding the new one.
+		 * @deprecated
+		 * @return {Boolean} False.
+		 */
 		public function perkDuplicated(ptype:PerkType):Boolean
 		{
-			var timesFound:int = 0;
-			if (perks.length <= 0)
-				return false;
-			for (var counter:int = 0; counter<perks.length; counter++)
-			{
-				if (perk(counter).ptype == ptype)
-					timesFound++;
-			}
-			return (timesFound > 1);
+			return false;
 		}
 
 		//remove all perks
 		public function removePerks():void
 		{
-			for each(var pc:PerkClass in _perks){
-				this.statStore.removeBuffs("perk_"+pc.ptype.id);
+			for each(var pc:PerkClass in _perks.asArray()){
+				this._perks.remove(pc.ptype);
 			}
-			_perks = [];
+			_perks.clear(); // Clean up anything else, just in case.
 		}
 
 		public function addPerkValue(ptype:PerkType, valueIdx:Number = 1, bonus:Number = 0): void
 		{
-			var counter:int = findPerk(ptype);
-			if (counter < 0) {
-				trace("ERROR? Looking for perk '" + ptype + "' to change value " + valueIdx + ", and player does not have the perk.");
-				return;
-			}
-			if (valueIdx < 1 || valueIdx > 4) {
-				CoC_Settings.error("addPerkValue(" + ptype.id + ", " + valueIdx + ", " + bonus + ").");
-				return;
-			}
-			if (valueIdx == 1)
-				perk(counter).value1 += bonus;
-			if (valueIdx == 2)
-				perk(counter).value2 += bonus;
-			if (valueIdx == 3)
-				perk(counter).value3 += bonus;
-			if (valueIdx == 4)
-				perk(counter).value4 += bonus;
+			this._perks.addPerkValue(ptype, valueIdx, bonus);
 		}
 
 		public function setPerkValue(ptype:PerkType, valueIdx:Number = 1, newNum:Number = 0): void
 		{
-			var counter:Number = findPerk(ptype);
-			//Various Errors preventing action
-			if (counter < 0) {
-				trace("ERROR? Looking for perk '" + ptype + "' to change value " + valueIdx + ", and player does not have the perk.");
-				return;
-			}
-			if (valueIdx < 1 || valueIdx > 4)
-			{
-				CoC_Settings.error("setPerkValue(" + ptype.id + ", " + valueIdx + ", " + newNum + ").");
-				return;
-			}
-			if (valueIdx == 1)
-				perk(counter).value1 = newNum;
-			if (valueIdx == 2)
-				perk(counter).value2 = newNum;
-			if (valueIdx == 3)
-				perk(counter).value3 = newNum;
-			if (valueIdx == 4)
-				perk(counter).value4 = newNum;
+			this._perks.setPerkValue(ptype, valueIdx, newNum);
 		}
 
 		public function perkv1(ptype:PerkType):Number
 		{
-			var counter:Number = findPerk(ptype);
-			if (counter < 0)
-			{
-				// trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
-				return 0;
-			}
-			return perk(counter).value1;
+			return this._perks.getPerkValue(ptype, 1);
 		}
 
-	public function perkv2(ptype:PerkType):Number
-	{
-		var counter:Number = findPerk(ptype);
-		if (counter < 0)
+		public function perkv2(ptype:PerkType):Number
 		{
-			// trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
-			return 0;
+			return this._perks.getPerkValue(ptype, 2);
 		}
-		return perk(counter).value2;
-	}
 
-	public function perkv3(ptype:PerkType):Number
-	{
-		var counter:Number = findPerk(ptype);
-		if (counter < 0)
+		public function perkv3(ptype:PerkType):Number
 		{
-			trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
-			return 0;
+			return this._perks.getPerkValue(ptype, 3);
 		}
-		return perk(counter).value3;
-	}
 
-	public function perkv4(ptype:PerkType):Number
-	{
-		var counter:Number = findPerk(ptype);
-		if (counter < 0)
+		public function perkv4(ptype:PerkType):Number
 		{
-			// trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
-			return 0;
+			return this._perks.getPerkValue(ptype, 4);
 		}
-		return perk(counter).value4;
-	}
-
 		/*
 
 		[    S T A T U S   E F F E C T S    ]
 
 		*/
 		//{region StatusEffects
+
+		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
+		//Someone call the grammar police!
+		//TODO: Move monster status effects into perks. Needs investigation though.
+		private var _statusEffects:StatusEffectManager;
+
+		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
+		//Someone call the grammar police!
+		//TODO: Move monster status effects into perks. Needs investigation though.
+		/**
+		 * List of all status effects.
+		 */
+		public function get statusEffects():Array {
+			return this._statusEffects.asArray();
+		}
 		public function createOrFindStatusEffect(stype:StatusEffectType):StatusEffectClass
 		{
-			var sec:StatusEffectClass = statusEffectByType(stype);
-			if (!sec) sec = createStatusEffect(stype,0,0,0,0);
-			return sec;
+			return this._statusEffects.createOrFindStatusEffect(stype);
 		}
-		//Create a status
 		public function createStatusEffect(stype:StatusEffectType, value1:Number, value2:Number, value3:Number, value4:Number, fireEvent:Boolean = true):StatusEffectClass
 		{
-			var newStatusEffect:StatusEffectClass = stype.create(value1,value2,value3,value4);
-			statusEffects.push(newStatusEffect);
-			newStatusEffect.addedToHostList(this,fireEvent);
-			return newStatusEffect;
+			return this._statusEffects.createStatusEffect(stype, value1, value2, value3, value4, fireEvent);
 		}
-		public function addStatusEffect(sec:StatusEffectClass/*,fireEvent:Boolean = true*/):void {
-			if (sec.host != this) {
-				sec.remove();
-				sec.attach(this/*,fireEvent*/);
-			} else {
-				statusEffects.push(sec);
-				sec.addedToHostList(this,true);
-			}
+		public function addStatusEffect(sec:StatusEffectClass/*,fireEvent:Boolean = true*/):void
+		{
+			return this._statusEffects.addStatusEffect(sec);
 		}
-		//Remove a status
 		public function removeStatusEffect(stype:StatusEffectType/*, fireEvent:Boolean = true*/):StatusEffectClass
 		{
-			var counter:Number = indexOfStatusEffect(stype);
-			if (counter < 0) return null;
-			var sec:StatusEffectClass = statusEffects[counter];
-			statusEffects.splice(counter, 1);
-			sec.removedFromHostList(true);
-			return sec;
+			return this._statusEffects.removeStatusEffect(stype);
 		}
-		public function removeStatusEffectInstance(sec:StatusEffectClass/*, fireEvent:Boolean = true*/):void {
-			var i:int = statusEffects.indexOf(sec);
-			if (i < 0) return;
-			statusEffects.splice(i, 1);
-			sec.removedFromHostList(true);
+		public function removeStatusEffectInstance(sec:StatusEffectClass/*, fireEvent:Boolean = true*/):void
+		{
+			return this._statusEffects.removeStatusEffectInstance(sec);
 		}
 
-		public function indexOfStatusEffect(stype:StatusEffectType):int {
-			for (var counter:int = 0; counter < statusEffects.length; counter++) {
-				if ((statusEffects[counter] as StatusEffectClass).stype == stype)
-					return counter;
-			}
-			return -1;
-		}
-		public function statusEffectByType(stype:StatusEffectType):StatusEffectClass {
-			var idx:int = indexOfStatusEffect(stype);
-			return idx<0 ? null : statusEffects[idx];
+		public function statusEffectByType(stype:StatusEffectType):StatusEffectClass
+		{
+			return this._statusEffects.statusEffectByType(stype);
 		}
 		public function hasStatusEffect(stype:StatusEffectType):Boolean {
-			return indexOfStatusEffect(stype) >= 0;
+			return this._statusEffects.hasStatusEffect(stype);
 		}
-		//}endregion
-
-
 		public function changeStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, newNum:Number = 0):void
 		{
-			if (statusValueNum < 1 || statusValueNum > 4) {
-				CoC_Settings.error("ChangeStatusValue called with invalid status value number.");
-				return;
-			}
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			//Various Errors preventing action
-			if (!sac)return;
-			if (statusValueNum == 1) sac.value1 = newNum;
-			if (statusValueNum == 2) sac.value2 = newNum;
-			if (statusValueNum == 3) sac.value3 = newNum;
-			if (statusValueNum == 4) sac.value4 = newNum;
+			return this._statusEffects.changeStatusValue(stype, statusValueNum, newNum);
 		}
-
 		public function addStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, bonus:Number = 0):void
 		{
-			if (statusValueNum < 1 || statusValueNum > 4) {
-				CoC_Settings.error("ChangeStatusValue called with invalid status value number.");
-				return;
-			}
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			//Various Errors preventing action
-			if (!sac)return;
-			if (statusValueNum == 1) sac.value1 += bonus;
-			if (statusValueNum == 2) sac.value2 += bonus;
-			if (statusValueNum == 3) sac.value3 += bonus;
-			if (statusValueNum == 4) sac.value4 += bonus;
-		}
-
-		public function statusEffectByIndex(idx:int):StatusEffectClass {
-			return statusEffects[idx];
+			return this._statusEffects.addStatusValue(stype, statusValueNum, bonus);
 		}
 
 		public function statusEffectv1(stype:StatusEffectType):Number
 		{
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			return sac?sac.value1:0;
+			if (this._statusEffects.hasStatusEffect(stype)) {
+				return this._statusEffects.getStatusValue(stype, 1);
+			}
+			return 0;
 		}
 
 		public function statusEffectv2(stype:StatusEffectType):Number
 		{
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			return sac?sac.value2:0
+			if (this._statusEffects.hasStatusEffect(stype)) {
+				return this._statusEffects.getStatusValue(stype, 2);
+			}
+			return 0;
 		}
 
 		public function statusEffectv3(stype:StatusEffectType):Number
 		{
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			return sac?sac.value3:0
+			if (this._statusEffects.hasStatusEffect(stype)) {
+				return this._statusEffects.getStatusValue(stype, 3);
+			}
+			return 0;
 		}
 
 		public function statusEffectv4(stype:StatusEffectType):Number
 		{
-			var sac:StatusEffectClass = statusEffectByType(stype);
-			return sac?sac.value4:0
+			if (this._statusEffects.hasStatusEffect(stype)) {
+				return this._statusEffects.getStatusValue(stype, 4);
+			}
+			return 0;
 		}
 
 		public function cleanAllBuffs():void
@@ -1630,8 +1489,9 @@ public class Creature extends Utils
 
 		public function removeStatuses():void
 		{
-			statusEffects = [];
+			this._statusEffects.removeStatuses();
 		}
+
 
 		/**
 		 * Applies (creates or increases) a combat-long debuff to stat.
@@ -2246,17 +2106,17 @@ public class Creature extends Utils
 			else if (lowerBody == 3)
 				bonus = 20;
 			//Wet pussy provides 50 point boost
-			if (findPerk(PerkLib.WetPussy) >= 0)
+			if (hasPerk(PerkLib.WetPussy))
 				bonus += 50;
-			if (findPerk(PerkLib.HistorySlut) >= 0 || findPerk(PerkLib.PastLifeSlut) >= 0)
+			if (hasPerk(PerkLib.HistorySlut) || hasPerk(PerkLib.PastLifeSlut))
 				bonus += 20;
-			if (findPerk(PerkLib.OneTrackMind) >= 0)
+			if (hasPerk(PerkLib.OneTrackMind))
 				bonus += 10;
-			if (findPerk(PerkLib.Cornucopia) >= 0)
+			if (hasPerk(PerkLib.Cornucopia))
 				bonus += 30;
-			if(findPerk(PerkLib.FerasBoonWideOpen) >= 0)
+			if(hasPerk(PerkLib.FerasBoonWideOpen))
 				bonus += 25;
-			if(findPerk(PerkLib.FerasBoonMilkingTwat) >= 0)
+			if(hasPerk(PerkLib.FerasBoonMilkingTwat))
 				bonus += 40;
 			total = (bonus + statusEffectv1(StatusEffects.BonusVCapacity) + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10);
 			return total;
@@ -2268,11 +2128,11 @@ public class Creature extends Utils
 			//Centaurs = +30 capacity
 			if (isTaur())
 				bonus = 30;
-			if (findPerk(PerkLib.HistorySlut) >= 0 || findPerk(PerkLib.PastLifeSlut) >= 0)
+			if (hasPerk(PerkLib.HistorySlut) || hasPerk(PerkLib.PastLifeSlut))
 				bonus += 20;
-			if (findPerk(PerkLib.Cornucopia) >= 0)
+			if (hasPerk(PerkLib.Cornucopia))
 				bonus += 30;
-			if (findPerk(PerkLib.OneTrackMind) >= 0)
+			if (hasPerk(PerkLib.OneTrackMind))
 				bonus += 10;
 			if (ass.analWetness > 0)
 				bonus += 15;
@@ -2345,7 +2205,7 @@ public class Creature extends Utils
 				removeStatusEffect(StatusEffects.LactationReduc2);
 			if (hasStatusEffect(StatusEffects.LactationReduc3))
 				removeStatusEffect(StatusEffects.LactationReduc3);
-			if (findPerk(PerkLib.Feeder) >= 0)
+			if (hasPerk(PerkLib.Feeder))
 			{
 				//You've now been milked, reset the timer for that
 				addStatusValue(StatusEffects.Feeder,1,1);
@@ -2464,34 +2324,34 @@ public class Creature extends Utils
 				percent += 0.01;
 			if (cumQ() >= 1600)
 				percent += 0.02;
-			if (findPerk(PerkLib.BroBody) >= 0)
+			if (hasPerk(PerkLib.BroBody))
 				percent += 0.05;
-			if (findPerk(PerkLib.MaraesGiftStud) >= 0)
+			if (hasPerk(PerkLib.MaraesGiftStud))
 				percent += 0.15;
-			if (findPerk(PerkLib.FerasBoonAlpha) >= 0)
+			if (hasPerk(PerkLib.FerasBoonAlpha))
 				percent += 0.10;
 			if (perkv1(PerkLib.ElvenBounty) > 0)
 				percent += 0.05;
-			if (findPerk(PerkLib.FertilityPlus) >= 0)
+			if (hasPerk(PerkLib.FertilityPlus))
 				percent += 0.03;
-			if (findPerk(PerkLib.FertilityMinus) >= 0 && lib < 25) //Reduces virility by 3%.
+			if (hasPerk(PerkLib.FertilityMinus) && lib < 25) //Reduces virility by 3%.
 				percent -= 0.03;
-			if (findPerk(PerkLib.PiercedFertite) >= 0)
+			if (hasPerk(PerkLib.PiercedFertite))
 				percent += 0.03;
-			if (findPerk(PerkLib.OneTrackMind) >= 0)
+			if (hasPerk(PerkLib.OneTrackMind))
 				percent += 0.03;
-			if (findPerk(PerkLib.MagicalVirility) >= 0)
+			if (hasPerk(PerkLib.MagicalVirility))
 				percent += 0.05 + (perkv1(PerkLib.MagicalVirility) * 0.01);
 			//Messy Orgasms?
-			if (findPerk(PerkLib.MessyOrgasms) >= 0)
+			if (hasPerk(PerkLib.MessyOrgasms))
 				percent += 0.06;
 			//Satyr Sexuality
-			if (findPerk(PerkLib.SatyrSexuality) >= 0)
+			if (hasPerk(PerkLib.SatyrSexuality))
 				percent += 0.10;
 			//Fertite ring bonus!
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
 				percent += (jewelryEffectMagnitude / 100);
-			if (findPerk(PerkLib.AscensionVirility) >= 0)
+			if (hasPerk(PerkLib.AscensionVirility))
 				percent += perkv1(PerkLib.AscensionVirility) * 0.05;
 			if (percent > 1)
 				percent = 1;
@@ -2516,7 +2376,7 @@ public class Creature extends Utils
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
 				lustCoefficient = (lust + 50) / 5;
-				if (findPerk(PerkLib.PilgrimsBounty) >= 0) lustCoefficient = 30;
+				if (hasPerk(PerkLib.PilgrimsBounty)) lustCoefficient = 30;
 				var percent:Number = 0;
 				percent = lustCoefficient + (hoursSinceCum + 10);
 				if (percent > 100)
@@ -2526,55 +2386,55 @@ public class Creature extends Utils
 				return (percent / 100) * cumCapacity();
 			}
 			//Pilgrim's bounty maxes lust coefficient
-			if (findPerk(PerkLib.PilgrimsBounty) >= 0)
+			if (hasPerk(PerkLib.PilgrimsBounty))
 				lustCoefficient = 150 / 10;
 			if (balls == 0)
 				quantity = int(1.25 * 2 * cumMultiplier * 2 * lustCoefficient * (hoursSinceCum + 10) / 24) / 10;
 			else
 				quantity = int(ballSize * balls * cumMultiplier * 2 * lustCoefficient * (hoursSinceCum + 10) / 24) / 10;
-			if (findPerk(PerkLib.BroBody) >= 0)
+			if (hasPerk(PerkLib.BroBody))
 				quantity *= 1.3;
-			if (findPerk(PerkLib.FertilityPlus) >= 0)
+			if (hasPerk(PerkLib.FertilityPlus))
 				quantity *= 1.5;
-			if (findPerk(PerkLib.FertilityMinus) >= 0 && lib < 25)
+			if (hasPerk(PerkLib.FertilityMinus) && lib < 25)
 				quantity *= 0.7;
-			if (findPerk(PerkLib.MessyOrgasms) >= 0)
+			if (hasPerk(PerkLib.MessyOrgasms))
 				quantity *= 2;
-			if (findPerk(PerkLib.OneTrackMind) >= 0)
+			if (hasPerk(PerkLib.OneTrackMind))
 				quantity *= 1.1;
-			if (findPerk(PerkLib.MinotaurTesticlesFinalForm) >= 0)
+			if (hasPerk(PerkLib.MinotaurTesticlesFinalForm))
 				quantity *= 2.5;
-			if (findPerk(PerkLib.MaraesGiftStud) >= 0)
+			if (hasPerk(PerkLib.MaraesGiftStud))
 				quantity += 350;
-			if (findPerk(PerkLib.FerasBoonAlpha) >= 0)
+			if (hasPerk(PerkLib.FerasBoonAlpha))
 				quantity += 200;
-			if (findPerk(PerkLib.MagicalVirility) >= 0)
+			if (hasPerk(PerkLib.MagicalVirility))
 				quantity += 200 + (perkv1(PerkLib.MagicalVirility) * 100);
-			if (findPerk(PerkLib.FerasBoonSeeder) >= 0)
+			if (hasPerk(PerkLib.FerasBoonSeeder))
 				quantity += 1000;
-			if (findPerk(PerkLib.MinotaurTesticlesEvolved) >= 0)
+			if (hasPerk(PerkLib.MinotaurTesticlesEvolved))
 				quantity += 200;
-			if (findPerk(PerkLib.NukiNutsEvolved) >= 0)
+			if (hasPerk(PerkLib.NukiNutsEvolved))
 				quantity += 200;
-			if (findPerk(PerkLib.NukiNutsFinalForm) >= 0)
+			if (hasPerk(PerkLib.NukiNutsFinalForm))
 				quantity *= 2;
-			if (findPerk(PerkLib.EasterBunnyEggBagEvolved) >= 0)
+			if (hasPerk(PerkLib.EasterBunnyEggBagEvolved))
 				quantity *= 1.5;
-			if (findPerk(PerkLib.EasterBunnyEggBagFinalForm) >= 0)
+			if (hasPerk(PerkLib.EasterBunnyEggBagFinalForm))
 				quantity *= 3;
-			if (findPerk(PerkLib.ProductivityDrugs) >= 0)
+			if (hasPerk(PerkLib.ProductivityDrugs))
 				quantity += (perkv3(PerkLib.ProductivityDrugs));
 			//if(hasPerk("Elven Bounty") >= 0) quantity += 250;;
 			quantity += perkv1(PerkLib.ElvenBounty);
-			if (findPerk(PerkLib.BroBody) >= 0)
+			if (hasPerk(PerkLib.BroBody))
 				quantity += 200;
-			if (findPerk(PerkLib.SatyrSexuality) >= 0)
+			if (hasPerk(PerkLib.SatyrSexuality))
 				quantity += 50;
 			quantity += statusEffectv1(StatusEffects.Rut);
 			quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
 				quantity *= (1 + (jewelryEffectMagnitude / 100));
-			if (findPerk(PerkLib.AscensionCumHose) >= 0)
+			if (hasPerk(PerkLib.AscensionCumHose))
 				quantity += perkv1(PerkLib.AscensionCumHose) * 200;
 			//trace("Final Cum Volume: " + int(quantity) + "mLs.");
 			//if (quantity < 0) trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
@@ -2600,18 +2460,18 @@ public class Creature extends Utils
 			cumCap += Math.pow(((4 / 3) * Math.PI * (ballSize / 2)), 3) * balls;// * cumMultiplier
 			// * cumMultiplier
 			//Alter capacity by perks.
-			if (findPerk(PerkLib.BroBody) >= 0) cumCap *= 1.3;
-			if (findPerk(PerkLib.FertilityPlus) >= 0) cumCap *= 1.5;
-			if (findPerk(PerkLib.FertilityMinus) >= 0 && lib < 25) cumCap *= 0.7;
-			if (findPerk(PerkLib.MessyOrgasms) >= 0) cumCap *= 2;
-			if (findPerk(PerkLib.OneTrackMind) >= 0) cumCap *= 1.1;
-			if (findPerk(PerkLib.MaraesGiftStud) >= 0) cumCap += 350;
-			if (findPerk(PerkLib.FerasBoonAlpha) >= 0) cumCap += 200;
-			if (findPerk(PerkLib.MagicalVirility) >= 0) cumCap += 200;
-			if (findPerk(PerkLib.FerasBoonSeeder) >= 0) cumCap += 1000;
-			if (findPerk(PerkLib.ElvenBounty) >= 0) cumCap += perkv1(PerkLib.ElvenBounty);
-			if (findPerk(PerkLib.BroBody) >= 0) cumCap += 200;
-			if (findPerk(PerkLib.PiercedFertite) >= 0) cumCap *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
+			if (hasPerk(PerkLib.BroBody)) cumCap *= 1.3;
+			if (hasPerk(PerkLib.FertilityPlus)) cumCap *= 1.5;
+			if (hasPerk(PerkLib.FertilityMinus) && lib < 25) cumCap *= 0.7;
+			if (hasPerk(PerkLib.MessyOrgasms)) cumCap *= 2;
+			if (hasPerk(PerkLib.OneTrackMind)) cumCap *= 1.1;
+			if (hasPerk(PerkLib.MaraesGiftStud)) cumCap += 350;
+			if (hasPerk(PerkLib.FerasBoonAlpha)) cumCap += 200;
+			if (hasPerk(PerkLib.MagicalVirility)) cumCap += 200;
+			if (hasPerk(PerkLib.FerasBoonSeeder)) cumCap += 1000;
+			if (hasPerk(PerkLib.ElvenBounty)) cumCap += perkv1(PerkLib.ElvenBounty);
+			if (hasPerk(PerkLib.BroBody)) cumCap += 200;
+			if (hasPerk(PerkLib.PiercedFertite)) cumCap *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			if (hasStatusEffect(StatusEffects.Rut)) cumCap += statusEffectv1(StatusEffects.Rut);
 			//Alter capacity by accessories.
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY) cumCap *= (1 + (jewelryEffectMagnitude / 100));
@@ -2859,7 +2719,7 @@ public class Creature extends Utils
 			//web also makes false!
 			if (hasStatusEffect(StatusEffects.Web))
 				return false;
-			return Wings.Types[wings.type].canFly;
+			return Arms.Types[arms.type].canFly || Wings.Types[wings.type].canFly;
 		}
 
 		public function canPounce():Boolean
@@ -2907,7 +2767,7 @@ public class Creature extends Utils
 		//Crit immunity
 		public function isImmuneToCrits():Boolean
 		{
-			if (game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyFleshConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyGooType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0 || game.monster.findPerk(PerkLib.EnemyElementalType) >= 0)
+			if (game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyFleshConstructType) || game.monster.hasPerk(PerkLib.EnemyGooType) || game.monster.hasPerk(PerkLib.EnemyPlantType) || game.monster.hasPerk(PerkLib.EnemyElementalType))
 				return true;//dodać inne typy wrogów: nieumarli/duchy
 			return false;
 		}
@@ -2915,21 +2775,21 @@ public class Creature extends Utils
 		//Eyes of the Hunter
 		public function whenEyesOfTheHunterActivates():Boolean
 		{
-			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyFeralType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyFleshConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyElementalType) >= 0
-					|| game.monster.findPerk(PerkLib.EnemyGooType) >= 0 || game.monster.findPerk(PerkLib.EnemyHugeType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyColossalType) >= 0 || game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyPlantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGhostType) >= 0)
-					|| game.monster.findPerk(PerkLib.EnemyLargeGroupType) >= 0) || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0 || game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0
-                    || game.monster.findPerk(PerkLib.LightningNature) >= 0)) || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
+			return (game.player.hasPerk(PerkLib.EyesOfTheHunterNovice) && game.player.sens >= 25 && (game.monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType) || game.monster.hasPerk(PerkLib.EnemyFeralType) || game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyFleshConstructType) || game.monster.hasPerk(PerkLib.EnemyElementalType)
+					|| game.monster.hasPerk(PerkLib.EnemyGooType) || game.monster.hasPerk(PerkLib.EnemyHugeType) || game.monster.hasPerk(PerkLib.EnemyGigantType) || game.monster.hasPerk(PerkLib.EnemyColossalType) || game.monster.hasPerk(PerkLib.EnemyGroupType) || game.monster.hasPerk(PerkLib.EnemyPlantType) || game.monster.hasPerk(PerkLib.EnemyGhostType))
+					|| game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) || (game.player.hasPerk(PerkLib.EyesOfTheHunterAdept) && game.player.sens >= 50 && (game.monster.hasPerk(PerkLib.EnemyGodType) || game.monster.hasPerk(PerkLib.EnemyBossType) || game.monster.hasPerk(PerkLib.DarknessNature) || game.monster.hasPerk(PerkLib.FireNature) || game.monster.hasPerk(PerkLib.IceNature)
+                    || game.monster.hasPerk(PerkLib.LightningNature))) || (game.player.hasPerk(PerkLib.EyesOfTheHunterMaster) && game.player.sens >= 75 && (game.monster.hasPerk(PerkLib.DarknessVulnerability) || game.monster.hasPerk(PerkLib.FireVulnerability) || game.monster.hasPerk(PerkLib.IceVulnerability) || game.monster.hasPerk(PerkLib.LightningVulnerability)));
 		}
 		public function whenGeneralEnemyPerksDisplayed():Boolean
 		{
-			return (game.player.findPerk(PerkLib.EyesOfTheHunterNovice) >= 0 && game.player.sens >= 25 && (game.monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0 || game.monster.findPerk(PerkLib.EnemyFeralType) >= 0 || game.monster.findPerk(PerkLib.EnemyConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyFleshConstructType) >= 0 || game.monster.findPerk(PerkLib.EnemyElementalType) >= 0
-					|| game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyLargeGroupType) >= 0 || game.monster.findPerk(PerkLib.EnemyGooType) >= 0 || game.monster.findPerk(PerkLib.EnemyHugeType) >= 0 || game.monster.findPerk(PerkLib.EnemyGigantType) >= 0 || game.monster.findPerk(PerkLib.EnemyColossalType) >= 0 || game.monster.findPerk(PerkLib.EnemyGhostType) >= 0
-					|| game.monster.findPerk(PerkLib.EnemyPlantType) >= 0 || game.monster.findPerk(PerkLib.EnemyGhostType) >= 0)) || (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.EnemyGodType) >= 0 || game.monster.findPerk(PerkLib.EnemyBossType) >= 0));
+			return (game.player.hasPerk(PerkLib.EyesOfTheHunterNovice) && game.player.sens >= 25 && (game.monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType) || game.monster.hasPerk(PerkLib.EnemyFeralType) || game.monster.hasPerk(PerkLib.EnemyConstructType) || game.monster.hasPerk(PerkLib.EnemyFleshConstructType) || game.monster.hasPerk(PerkLib.EnemyElementalType)
+					|| game.monster.hasPerk(PerkLib.EnemyGroupType) || game.monster.hasPerk(PerkLib.EnemyLargeGroupType) || game.monster.hasPerk(PerkLib.EnemyGooType) || game.monster.hasPerk(PerkLib.EnemyHugeType) || game.monster.hasPerk(PerkLib.EnemyGigantType) || game.monster.hasPerk(PerkLib.EnemyColossalType) || game.monster.hasPerk(PerkLib.EnemyGhostType)
+					|| game.monster.hasPerk(PerkLib.EnemyPlantType) || game.monster.hasPerk(PerkLib.EnemyGhostType))) || (game.player.hasPerk(PerkLib.EyesOfTheHunterAdept) && game.player.sens >= 50 && (game.monster.hasPerk(PerkLib.EnemyGodType) || game.monster.hasPerk(PerkLib.EnemyBossType)));
 		}
 		public function whenElementalEnemyPerksDisplayed():Boolean
 		{
-			return (game.player.findPerk(PerkLib.EyesOfTheHunterAdept) >= 0 && game.player.sens >= 50 && (game.monster.findPerk(PerkLib.DarknessNature) >= 0 || game.monster.findPerk(PerkLib.FireNature) >= 0 || game.monster.findPerk(PerkLib.IceNature) >= 0 || game.monster.findPerk(PerkLib.LightningNature) >= 0))
-                    || (game.player.findPerk(PerkLib.EyesOfTheHunterMaster) >= 0 && game.player.sens >= 75 && (game.monster.findPerk(PerkLib.DarknessVulnerability) >= 0 || game.monster.findPerk(PerkLib.FireVulnerability) >= 0 || game.monster.findPerk(PerkLib.IceVulnerability) >= 0 || game.monster.findPerk(PerkLib.LightningVulnerability) >= 0));
+			return (game.player.hasPerk(PerkLib.EyesOfTheHunterAdept) && game.player.sens >= 50 && (game.monster.hasPerk(PerkLib.DarknessNature) || game.monster.hasPerk(PerkLib.FireNature) || game.monster.hasPerk(PerkLib.IceNature) || game.monster.hasPerk(PerkLib.LightningNature)))
+                    || (game.player.hasPerk(PerkLib.EyesOfTheHunterMaster) && game.player.sens >= 75 && (game.monster.hasPerk(PerkLib.DarknessVulnerability) || game.monster.hasPerk(PerkLib.FireVulnerability) || game.monster.hasPerk(PerkLib.IceVulnerability) || game.monster.hasPerk(PerkLib.LightningVulnerability)));
 		}
 
 		//Unique sex scenes
@@ -3289,7 +3149,7 @@ public class Creature extends Utils
 		public function cuntChangeNoDisplay(cArea:Number):Boolean{
 			if(vaginas.length == 0) return false;
 			var stretched:Boolean = false;
-			if(findPerk(PerkLib.FerasBoonMilkingTwat) < 0 || vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_NORMAL) {
+			if(!hasPerk(PerkLib.FerasBoonMilkingTwat) || vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_NORMAL) {
 			//cArea > capacity = autostreeeeetch.
 			if(cArea >= vaginalCapacity()) {
 				if(vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR) {}
@@ -3337,15 +3197,15 @@ public class Creature extends Utils
 			var counter:Number = 0;
 			if (inHeat)
 				counter += statusEffectv1(StatusEffects.Heat);
-			if (findPerk(PerkLib.FertilityPlus) >= 0)
+			if (hasPerk(PerkLib.FertilityPlus))
 				counter += 15;
-			if (findPerk(PerkLib.FertilityMinus) >= 0 && lib < 25)
+			if (hasPerk(PerkLib.FertilityMinus) && lib < 25)
 				counter -= 15;
-			if (findPerk(PerkLib.MaraesGiftFertility) >= 0)
+			if (hasPerk(PerkLib.MaraesGiftFertility))
 				counter += 50;
-			if (findPerk(PerkLib.FerasBoonBreedingBitch) >= 0)
+			if (hasPerk(PerkLib.FerasBoonBreedingBitch))
 				counter += 30;
-			if (findPerk(PerkLib.MagicalFertility) >= 0)
+			if (hasPerk(PerkLib.MagicalFertility))
 				counter += 10 + (perkv1(PerkLib.MagicalFertility) * 5);
 			counter += perkv2(PerkLib.ElvenBounty);
 			counter += perkv1(PerkLib.PiercedFertite);
@@ -3405,17 +3265,17 @@ public class Creature extends Utils
 
 		public function canOvipositSpider():Boolean
 		{
-			return eggs() >= 10 && findPerk(PerkLib.SpiderOvipositor) >= 0 && isDrider() && tail.type == Tail.SPIDER_ADBOMEN;
+			return eggs() >= 10 && hasPerk(PerkLib.SpiderOvipositor) && isDrider() && tail.type == Tail.SPIDER_ADBOMEN;
 		}
 
 		public function canOvipositBee():Boolean
 		{
-			return eggs() >= 10 && findPerk(PerkLib.BeeOvipositor) >= 0 && tail.type == Tail.BEE_ABDOMEN;
+			return eggs() >= 10 && hasPerk(PerkLib.BeeOvipositor) && tail.type == Tail.BEE_ABDOMEN;
 		}
 
 		public function canOvipositMantis():Boolean
 		{
-			return eggs() >= 10 && findPerk(PerkLib.MantisOvipositor) >= 0 && tail.type == Tail.MANTIS_ABDOMEN;
+			return eggs() >= 10 && hasPerk(PerkLib.MantisOvipositor) && tail.type == Tail.MANTIS_ABDOMEN;
 		}
 
 		public function canOviposit():Boolean
@@ -3425,11 +3285,11 @@ public class Creature extends Utils
 
 		public function eggs():int
 		{
-			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0 && findPerk(PerkLib.MantisOvipositor) < 0)
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
 				return -1;
-			else if (findPerk(PerkLib.SpiderOvipositor) >= 0)
+			else if (hasPerk(PerkLib.SpiderOvipositor))
 				return perkv1(PerkLib.SpiderOvipositor);
-			else if (findPerk(PerkLib.BeeOvipositor) >= 0)
+			else if (hasPerk(PerkLib.BeeOvipositor))
 				return perkv1(PerkLib.BeeOvipositor);
 			else
 				return perkv1(PerkLib.MantisOvipositor);
@@ -3437,16 +3297,16 @@ public class Creature extends Utils
 
 		public function addEggs(arg:int = 0):int
 		{
-			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0 && findPerk(PerkLib.MantisOvipositor) < 0)
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
 				return -1;
 			else {
-				if (findPerk(PerkLib.SpiderOvipositor) >= 0) {
+				if (hasPerk(PerkLib.SpiderOvipositor)) {
 					addPerkValue(PerkLib.SpiderOvipositor, 1, arg);
 					if (eggs() > 50)
 						setPerkValue(PerkLib.SpiderOvipositor, 1, 50);
 					return perkv1(PerkLib.SpiderOvipositor);
 				}
-				else if (findPerk(PerkLib.BeeOvipositor) >= 0) {
+				else if (hasPerk(PerkLib.BeeOvipositor)) {
 					addPerkValue(PerkLib.BeeOvipositor, 1, arg);
 					if (eggs() > 50)
 						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
@@ -3463,7 +3323,7 @@ public class Creature extends Utils
 
 		public function dumpEggs():void
 		{
-			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0 && findPerk(PerkLib.MantisOvipositor) < 0)
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
 				return;
 			setEggs(0);
 			//Sets fertile eggs = regular eggs (which are 0)
@@ -3472,16 +3332,16 @@ public class Creature extends Utils
 
 		public function setEggs(arg:int = 0):int
 		{
-			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0 && findPerk(PerkLib.MantisOvipositor) < 0)
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
 				return -1;
 			else {
-				if (findPerk(PerkLib.SpiderOvipositor) >= 0) {
+				if (hasPerk(PerkLib.SpiderOvipositor)) {
 					setPerkValue(PerkLib.SpiderOvipositor, 1, arg);
 					if (eggs() > 50)
 						setPerkValue(PerkLib.SpiderOvipositor, 1, 50);
 					return perkv1(PerkLib.SpiderOvipositor);
 				}
-				else if (findPerk(PerkLib.BeeOvipositor) >= 0) {
+				else if (hasPerk(PerkLib.BeeOvipositor)) {
 					setPerkValue(PerkLib.BeeOvipositor, 1, arg);
 					if (eggs() > 50)
 						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
@@ -3498,11 +3358,11 @@ public class Creature extends Utils
 
 		public function fertilizedEggs():int
 		{
-			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0 && findPerk(PerkLib.MantisOvipositor) < 0)
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
 				return -1;
-			else if (findPerk(PerkLib.SpiderOvipositor) >= 0)
+			else if (hasPerk(PerkLib.SpiderOvipositor))
 				return perkv2(PerkLib.SpiderOvipositor);
-			else if (findPerk(PerkLib.BeeOvipositor) >= 0)
+			else if (hasPerk(PerkLib.BeeOvipositor))
 				return perkv2(PerkLib.BeeOvipositor);
 			else
 				return perkv2(PerkLib.MantisOvipositor);
@@ -3510,11 +3370,11 @@ public class Creature extends Utils
 
 		public function fertilizeEggs():int
 		{
-			if (findPerk(PerkLib.SpiderOvipositor) < 0 && findPerk(PerkLib.BeeOvipositor) < 0 && findPerk(PerkLib.MantisOvipositor) < 0)
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
 				return -1;
-			else if (findPerk(PerkLib.SpiderOvipositor) >= 0)
+			else if (hasPerk(PerkLib.SpiderOvipositor))
 				setPerkValue(PerkLib.SpiderOvipositor, 2, eggs());
-			else if (findPerk(PerkLib.BeeOvipositor) >= 0)
+			else if (hasPerk(PerkLib.BeeOvipositor))
 				setPerkValue(PerkLib.BeeOvipositor, 2, eggs());
 			else
 				setPerkValue(PerkLib.MantisOvipositor, 2, eggs());
@@ -3972,9 +3832,9 @@ public class Creature extends Utils
 			return Appearance.hairOrFur(this);
 		}
 
-		public function hairDescript():String
+		public function hairDescript(longDesc:Boolean = false):String
 		{
-			return Appearance.hairDescription(this);
+			return Appearance.hairDescription(this, longDesc);
 		}
 
 		public function beardDescript():String
@@ -4089,33 +3949,33 @@ public class Creature extends Utils
 		{
 			var chance:Number = 0;
 			var flychance:Number = 20;
-			if (findPerk(PerkLib.AdvancedAerialCombat) >= 0) flychance += 5;
-			if (findPerk(PerkLib.GreaterAerialCombat) >= 0) flychance += 15;
-			if (findPerk(PerkLib.HarpyHollowBonesEvolved) >= 0) flychance += 10;
+			if (hasPerk(PerkLib.AdvancedAerialCombat)) flychance += 5;
+			if (hasPerk(PerkLib.GreaterAerialCombat)) flychance += 15;
+			if (hasPerk(PerkLib.HarpyHollowBonesEvolved)) flychance += 10;
 			if ((game.player.hasKeyItem("Jetpack") >= 0 || game.player.hasKeyItem("MK2 Jetpack") >= 0) && game.player.isInGoblinMech()) flychance += 25;
-			if (findPerk(PerkLib.Evade) >= 0) {
+			if (hasPerk(PerkLib.Evade)) {
 				chance += 5;
-				if (findPerk(PerkLib.ImprovedEvade) >= 0) chance += 10;
-				if (findPerk(PerkLib.GreaterEvade) >= 0) chance += 15;
-				if (findPerk(PerkLib.JobRogue) >= 0) chance += 5;
-				if (findPerk(PerkLib.Spectre) >= 0 && findPerk(PerkLib.Incorporeality) >= 0) chance += 10;
+				if (hasPerk(PerkLib.ImprovedEvade)) chance += 10;
+				if (hasPerk(PerkLib.GreaterEvade)) chance += 15;
+				if (hasPerk(PerkLib.JobRogue)) chance += 5;
+				if (hasPerk(PerkLib.Spectre) && hasPerk(PerkLib.Incorporeality)) chance += 10;
 			}
-			if (findPerk(PerkLib.ElvenSense) >= 0) {
+			if (hasPerk(PerkLib.ElvenSense)) {
 				chance += 5;
-				if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0) chance += 10;
-				if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0) chance += 15;
+				if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved)) chance += 10;
+				if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm)) chance += 15;
 			}
-			if (findPerk(PerkLib.Flexibility) >= 0) chance += 6;
-			if (findPerk(PerkLib.Misdirection) >= 0 && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
-			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq()) chance += 10;
-			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "berserker armor" || game.player.armorName == "nothing")) chance += 10;
+			if (hasPerk(PerkLib.Flexibility)) chance += 6;
+			if (hasPerk(PerkLib.Misdirection) && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
+			//if (hasPerk(PerkLib.Unhindered) && meetUnhinderedReq()) chance += 10;
+			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.AGILE)) chance += 10;
 			if (game.player.armor == game.armors.R_CHANG || game.player.armor == game.armors.R_QIPAO || game.player.armor == game.armors.G_CHANG || game.player.armor == game.armors.G_QIPAO || game.player.armor == game.armors.B_CHANG || game.player.armor == game.armors.B_QIPAO || game.player.armor == game.armors.P_CHANG || game.player.armor == game.armors.P_QIPAO) chance += 5;
 			if (game.player.hasKeyItem("Spring Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 10;
 			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 20;
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 30;
-			if (findPerk(PerkLib.JunglesWanderer) >= 0) chance += 35;
+			if (hasPerk(PerkLib.JunglesWanderer)) chance += 35;
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (findPerk(PerkLib.KitsuneThyroidGlandFinalForm) >= 0) chance += 20;
+				if (hasPerk(PerkLib.KitsuneThyroidGlandFinalForm)) chance += 20;
 				else chance += 10;
 			}
 			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
@@ -4129,9 +3989,9 @@ public class Creature extends Utils
 				else chance += 30;
 			}
 			if (hasStatusEffect(StatusEffects.Displacement)) chance += 60;
-			if (game.player.shieldPerk == "Large" && findPerk(PerkLib.GigantGrip) < 0) chance -= 20;
+			if (game.player.shieldPerk == "Large" && !hasPerk(PerkLib.GigantGrip)) chance -= 20;
 			if (game.player.shieldPerk == "Massive") {
-				if (findPerk(PerkLib.GigantGrip) < 0) chance -= 75;
+				if (!hasPerk(PerkLib.GigantGrip)) chance -= 75;
 				else chance -= 30;
 			}
 			if (game.player.hasStatusEffect(StatusEffects.Snow) && game.player.tallness < 84) chance -= 50;
@@ -4166,29 +4026,29 @@ public class Creature extends Utils
 			var roll:Number = rand(100);
 			var generalevasion:Number = 0;
 			var flyeavsion:Number = 20;
-			if (findPerk(PerkLib.Evade) >= 0) generalevasion += 5;
-			if (findPerk(PerkLib.ImprovedEvade) >= 0) generalevasion += 10;
-			if (findPerk(PerkLib.GreaterEvade) >= 0) generalevasion += 15;
-			if (findPerk(PerkLib.JobRogue) >= 0) generalevasion += 5;
-			if (findPerk(PerkLib.Spectre) >= 0 && findPerk(PerkLib.Incorporeality) >= 0) generalevasion += 10;
-			if (findPerk(PerkLib.ElvenSense) >= 0) generalevasion += 5;
-			if (findPerk(PerkLib.ElvishPeripheralNervSysEvolved) >= 0) generalevasion += 10;
-			if (findPerk(PerkLib.ElvishPeripheralNervSysFinalForm) >= 0) generalevasion += 15;
+			if (hasPerk(PerkLib.Evade)) generalevasion += 5;
+			if (hasPerk(PerkLib.ImprovedEvade)) generalevasion += 10;
+			if (hasPerk(PerkLib.GreaterEvade)) generalevasion += 15;
+			if (hasPerk(PerkLib.JobRogue)) generalevasion += 5;
+			if (hasPerk(PerkLib.Spectre) && hasPerk(PerkLib.Incorporeality)) generalevasion += 10;
+			if (hasPerk(PerkLib.ElvenSense)) generalevasion += 5;
+			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved)) generalevasion += 10;
+			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm)) generalevasion += 15;
 			if (generalevasion > 0) flyeavsion += generalevasion;
-			if (findPerk(PerkLib.AdvancedAerialCombat) >= 0) flyeavsion += 5;
-			if (findPerk(PerkLib.GreaterAerialCombat) >= 0) flyeavsion += 15;
+			if (hasPerk(PerkLib.AdvancedAerialCombat)) flyeavsion += 5;
+			if (hasPerk(PerkLib.GreaterAerialCombat)) flyeavsion += 15;
 			if (game.player.hasKeyItem("Spring Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 10;
 			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 20;
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 30;
 			// perks
-			if ((findPerk(PerkLib.Evade) >= 0 || findPerk(PerkLib.ElvenSense) >= 0 || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (roll < generalevasion)) return "Evade";
-			if (findPerk(PerkLib.Flexibility) >= 0 && (roll < 6)) return "Flexibility";
-			if (findPerk(PerkLib.Misdirection) >= 0 && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia") && (roll < 10)) return "Misdirection";
-			//if (findPerk(PerkLib.Unhindered) >= 0 && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
-			if (findPerk(PerkLib.Unhindered) >= 0 && (game.player.armorName == "arcane bangles" || game.player.armorName == "practically indecent steel armor" || game.player.armorName == "revealing chainmail bikini" || game.player.armorName == "slutty swimwear" || game.player.armorName == "barely-decent bondage straps" || game.player.armorName == "berserker armor" || game.player.armorName == "nothing") && (roll < 10)) return "Unhindered";
-			if (findPerk(PerkLib.JunglesWanderer) >= 0 && (roll < 35)) return "Jungle's Wanderer";
+			if ((hasPerk(PerkLib.Evade) || hasPerk(PerkLib.ElvenSense) || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (roll < generalevasion)) return "Evade";
+			if (hasPerk(PerkLib.Flexibility) && (roll < 6)) return "Flexibility";
+			if (hasPerk(PerkLib.Misdirection) && (game.player.armor.hasTag(ItemTags.AGILE)) && (roll < 10)) return "Misdirection";
+			//if (hasPerk(PerkLib.Unhindered) && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
+			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.AGILE) && (roll < 10)) return "Unhindered";
+			if (hasPerk(PerkLib.JunglesWanderer) && (roll < 35)) return "Jungle's Wanderer";
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (findPerk(PerkLib.KitsuneThyroidGlandFinalForm) >= 0 && roll < 20) return "Illusion";
+				if (hasPerk(PerkLib.KitsuneThyroidGlandFinalForm) && roll < 20) return "Illusion";
 				else if (roll < 10) return "Illusion";
 			}
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < flyeavsion)) return "Flying";

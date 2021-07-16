@@ -1118,7 +1118,7 @@ public class AkbalScene extends BaseContent
 					outputText("\"<i>You are a loyal pet,</i>\" Akbal says as he stands. The compliment makes you smile, but it quickly fades into a look of fear when he suddenly releases a bone-chilling roar right in your face.  Green flames begin to pour from his open maw, and you scream as you flail your hands in a pointless attempt to block the fire.\n\n");
 					outputText("After a moment of horror, you realize you aren't burning.  You can feel the emerald flames inside your lungs, glowing with a palpable warmth.  Akbal snaps his teeth together, a feral grin on his face as he halts the torrent of flame.\n\n");
 					outputText("You can feel Akbal's demonic presence inside your lungs, slowly building up until it finally explodes out of your open mouth in a titanic roar, accompanied with a jet of emerald flame.\n\n");
-					outputText("(You are now capable of breathing Akbal's fire.)");
+					outputText("<b>(You are now capable of breathing Akbal's fire!)</b>");
 					//['LOTF' or 'Terrestrial Fire Lord' appears as perk]
 					//[Gain 'Terrestrial Fire' in Specials]
 					player.createPerk(PerkLib.FireLord, 0, 0, 0, 0);

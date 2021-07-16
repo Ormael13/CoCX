@@ -1,5 +1,6 @@
 package classes {
 import classes.BodyParts.Hair;
+import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ArmorLib;
@@ -346,7 +347,7 @@ public class EventParser {
         }
         //Unequip undergarment if you have bizarre lower body.
         if (player.lowerGarment != UndergarmentLib.NOTHING) {
-            if (player.isTaur() || player.isDrider() || player.isScylla() || (player.isNaga() && player.lowerGarmentPerk != "NagaWearable")) {
+            if (player.isTaur() || player.isDrider() || player.isScylla() || (player.isNaga() && player.lowerGarmentPerk != "NagaWearable") || player.lowerBody == LowerBody.GHOST_2) {
                 EngineCore.outputText("You feel something slipping off as if by magic. Looking down on the ground, you realize it's your [lowergarment]. Looking down at your lower body, you let out a sigh and pick up your [lowergarment]. ");
                 SceneLib.inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 1), playerMenu);
                 return true;
@@ -693,59 +694,59 @@ public class EventParser {
             return true;
         }
         else if (player.hairLength >= 1 && currentLength < 1) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairLength >= 3 && currentLength < 3) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairLength >= 6 && currentLength < 6) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairType == Hair.GORGON && player.hairLength >= 6 && currentLength < 6) {
-            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairLength >= 10 && currentLength < 10) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairType == Hair.GORGON && player.hairLength >= 10 && currentLength < 10) {
-            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairLength >= 16 && currentLength < 16) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairType == Hair.GORGON && player.hairLength >= 16 && currentLength < 16) {
-            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairLength >= 26 && currentLength < 26) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairType == Hair.GORGON && player.hairLength >= 26 && currentLength < 26) {
-            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairLength >= 40 && currentLength < 40) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairType == Hair.GORGON && player.hairLength >= 40 && currentLength < 40) {
-            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairLength >= 40 && player.hairLength >= player.tallness && currentLength < player.tallness) {
-            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your hair's growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.hairType == Hair.GORGON && player.hairLength >= 40 && player.hairLength >= player.tallness && currentLength < player.tallness) {
-            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshhold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your gorgon's hair growth has reached a new threshold, giving you " + Appearance.hairDescription(player) + ".\n</b>");
             return true;
         }
         return false;
@@ -762,23 +763,23 @@ public class EventParser {
             return true;
         }
         else if (player.beardLength >= 0.2 && tempBeard < 0.2) {
-            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.beardLength >= 0.5 && tempBeard < 0.5) {
-            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.beardLength >= 1.5 && tempBeard < 1.5) {
-            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.beardLength >= 3 && tempBeard < 3) {
-            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
             return true;
         }
         else if (player.beardLength >= 6 && tempBeard < 6) {
-            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshhold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
+            EngineCore.outputText("\n<b>Your beard's growth has reached a new threshold, giving you " + Appearance.beardDescription(player) + ".\n</b>");
             return true;
         }
 

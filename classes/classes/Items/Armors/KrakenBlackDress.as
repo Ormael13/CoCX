@@ -1,7 +1,8 @@
 package classes.Items.Armors 
 {
 	import classes.Items.Armor;
-	import classes.Scenes.NPCs.CelessScene;
+import classes.Items.ItemTags;
+import classes.Scenes.NPCs.CelessScene;
 	import classes.Player;
 	import classes.PerkLib;
 	import classes.Player;
@@ -20,6 +21,7 @@ package classes.Items.Armors
 					" Instead of the standard skirt or bikini panty the bottom is shaped in a sun like pattern made to cover each of a kraken tentacle joint properly up to tight level. " +
 					"Sadly, due to the dress shape itself and the way it only seems to adhere to a scylla-kin skin, it is obvious a normal human would be unable to use it.","Light",
 					PerkLib.KrakenBlackDress, 0,0,0,0, "Increase the duration of ink spray stun and blind by 1 round and empower all grappling moves.",false,false);
+			withTag(ItemTags.REVEALING,ItemTags.AGILE);
 		}
 		override public function canUse():Boolean{
 			if (game.player.isKraken() || game.player.isScylla()){return true}

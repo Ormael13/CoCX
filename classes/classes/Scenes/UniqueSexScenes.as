@@ -443,8 +443,8 @@ package classes.Scenes
 		public function HeatTransfer():void {
 			clearOutput();
 			outputText("You ponder what to do with your defeated opponent then realize your body is on the brink of overheating with lust. Your opponent shudders as you grab [monster him] by the neck." +
-					"\"<i>Do you know how hot I am right now? I’ll need to get rid of that before I loose my mind. Thankfully you came along at the perfect moment.</i>\"\n\n" +
-					"Your opponent only understands what you mean when you kiss [monster him], your flames starting to lick his/her skin, leaving a tingle of pleasure and arousal as you start to vent your heat out." +
+					"You ask if [monster he] can feel the heat you radiate. You truly are thankful to be gifted the sight of your new victim. You must purge the bubbling warmth, and you wonder if [monster he] knows what you're about to do.\n\n" +
+					"Your opponent only realizes your intent when you kiss [monster him], your flames starting to lick his/her skin, leaving a tingle of pleasure and arousal as you start to vent your heat out." +
 					"Your flames stretch out from your ");
 			if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText("coat,");
 			else outputText("body,");
@@ -459,11 +459,11 @@ package classes.Scenes
 			else outputText("fire ");
 			outputText("out of yourself.\n\n" +
 					"Your victim, however, is not so lucky. As you pour in your lust it begins to completely lose control attempting to fiercely masturbate this excess of desire out, to no avail. " +
-					"As you are close to done your partner is a writing mess on the floor desperate to cum but unable to achieve complete release as the supernatural fire keeps fueling [monster his] desire " +
+					"As you draw closer to the end, your partner is a writing mess on the floor. Desperate to cum but unable to achieve complete release as the supernatural fire keeps fueling [monster his] desire " +
 					"way beyond normal obliterating self-restraint and pride along the way. You move away from " + monster.a + monster.short + " just as [monster his] hands begin to draw fluids out of [monster his] lust filled endowment. " +
-					"You stay clear as your victim lust explode spewing fluids");
-			if (monster.biggestTitSize() >= 1)outputText(" and milk ");
-			outputText("everywhere in the vicinity. You can see the pulse of your flames as a small embery glow in every thrust of [monster his] hips as [monster he] keeps fiercely masturbating in an attempt to expel the lust.\n\n" +
+					"You move back as your victim reaches the height of their orgasm.");
+			if (monster.biggestTitSize() >= 1)outputText(" You notice [monster his] breasts begin to dribble milk as well. ");
+			outputText("There are fluids everywhere in the vicinity. You can see the pulse of your flames as a small embery glow in every thrust of [monster his] hips as [monster he] keeps fiercely masturbating in an attempt to expel the lust.\n\n" +
 					"You leave your writhing lust receptacle there, it's unlikely [monster he] will stop masturbating anytime soon.");
 			//We give both sex reward so to end player rut or heat in the event pc has either
 			if (monster.hasCock()) player.sexReward("cum");
@@ -491,7 +491,7 @@ package classes.Scenes
 		public function yukionnaStealWarmthScene():void {
 			clearOutput();
 			outputText("You eye your defeated opponent’s form with delight. " + monster.Pronoun1 + "'s so warm and full of life, certainly sharing some of it with you should be no problem? Yet the greedy creature squirms and crawl away in a vain attempt to escape you and this angers you to no end. Even worse this thing is a guy. You freeze " + monster.a + monster.short + " limbs in place, trapping them with ice, and approach him.\n\n");
-			outputText("\"<i>You're hoarding that sweet warmth all to yourself aren't you? How about you share.</i>\"\n\n");
+			outputText("Your icy glare stares into them as you feel the warmth from them linger. You'll be sure not to leave an ounce of heat left.\n\n");
 			outputText("He looks at you fearfully and rightly so, there's no telling how far you will go to get the warmth you’re craving from him. You spread " + monster.pronoun3 + " leg wide to reveal the already hardening " + monster.cockDescriptShort() + " between. You lick his length to lube it properly for what is coming next, your cool saliva making " + monster.a + monster.short + " shiver. You rub your body along his while doing this, enjoying the sensation of warmth over your skin. A few seconds later you're already straddling the towering erection, inserting inch after inch inside your folds. Moans are exchanged as you begins to lower your body on your victim’s cock, moving at a steady pace. Midway you kiss " + monster.a + monster.short + " silencing his pain and pleasure mixed groans ");
 			outputText("as your cool breath pours in and you draw out his warm one. He begins to shake as his cock hardens further, both from the pleasure and the thin layer of ice preventing his release and softening, freezing the very blood inside and spreading out across his body. He would be screaming half mad right now if you weren't choking his loud reply with a kiss, breathing in his warmth. He keeps thrusting until his lower body loses mobility to the creeping frost, not one to end so soon you prolong his agonizing pleasure and yours by your own efforts, moaning in delight each time his diamond hard frozen member bottoms in.\n\n");
 			outputText("As you achieve your fifth orgasm, his body is entirely covered in creeping ice and he's no better than a frozen statue, devoid of all warmth and life. What a bore, you were just barely satiated and could've went on for several hours. You kick him in anger, causing his form to crack and explode like glass in the opposite direction. Guess you had fun while it lasted, time to head back to camp.\n\n");

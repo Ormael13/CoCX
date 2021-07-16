@@ -24,6 +24,7 @@ import classes.display.SpriteDb;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
+import coc.view.CoCButton;
 import coc.view.MainView;
 import coc.xxc.Story;
 import coc.xxc.StoryCompiler;
@@ -69,7 +70,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 31;
+    public var modSaveVersion:Number = 32;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
@@ -94,9 +95,6 @@ public class CoC extends MovieClip
     public var headjewelries:HeadJewelryLib		= new HeadJewelryLib();
     public var necklaces:NecklaceLib			= new NecklaceLib();
     public var jewelries:JewelryLib				= new JewelryLib();
-    public var jewelries2:JewelryLib			= new JewelryLib();
-    public var jewelries3:JewelryLib			= new JewelryLib();
-    public var jewelries4:JewelryLib			= new JewelryLib();
     public var shields:ShieldLib				= new ShieldLib();
     public var vehicles:VehiclesLib				= new VehiclesLib();
 
@@ -223,6 +221,12 @@ public class CoC extends MovieClip
         this.mainView.onBottomButtonClick = function(i:int):void {
             textHistory.push("<br>["+EngineCore.button(i).labelText+"]<br>");
         };
+        CoCButton.clickErrorHandler = function(error:Error, button:CoCButton):void {
+            trace(error.getStackTrace());
+            EngineCore.addButton(0, "Rescue", EventParser.playerMenu);
+            mainView.mainText.htmlText +=
+                    "\n----\nError in scene: "+error.message+"\n"+error.getStackTrace()+"\n----\n";
+        }
 
         // Set up all the messy global stuff:
 
@@ -247,8 +251,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8r";
-			version = ver + " (<b>2nd marriage option, new type of enemeis + 2nd floor of RD opened, wrath changes (part 1), 2nd hidden job, many small QoL changes and bugfixes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8r2";
+			version = ver + " (<b>Wrath changes (part 2), 2nd floor of RD main boss, Wait/Sleep delays decreased</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

@@ -526,14 +526,15 @@ public class CombatSoulskills extends BaseCombatContent {
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
 		//other bonuses
-		if (player.findPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
-		if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
-		if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) damage *= combat.historyFighterBonus();
+		if (player.hasPerk(PerkLib.HoldWithBothHands) >= 0 && player.weapon != WeaponLib.FISTS && player.shield == ShieldLib.NOTHING && !isWieldingRangedWeapon()) damage *= 1.2;
+		if (player.hasPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
+		if (player.hasPerk(PerkLib.HistoryFighter) >= 0 || player.hasPerk(PerkLib.PastLifeFighter) >= 0) damage *= combat.historyFighterBonus();
 		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
-		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyHugeType) >= 0)) damage *= 2;
+		if (player.hasPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
+		if (player.hasPerk(PerkLib.Heroism) >= 0 && (monster.hasPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyHugeType) >= 0)) damage *= 2;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -653,6 +654,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 		if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyHugeType) >= 0)) damage *= 2;
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
+		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
@@ -1501,6 +1503,11 @@ public class CombatSoulskills extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave many bloody gashes.");
+		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		combat.WrathGenerationPerHit2(15);
@@ -1541,6 +1548,11 @@ public class CombatSoulskills extends BaseCombatContent {
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
+		if (rand(20) < 4) {
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage))  monster.removeStatusEffect(StatusEffects.Hemorrhage);
+			monster.createStatusEffect(StatusEffects.Hemorrhage, 2, 0.05, 0, 0);
+			outputText(" Attack leave many bloody gashes.");
+		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		combat.WrathGenerationPerHit2(15);
@@ -1618,6 +1630,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 	 if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
 	 if (player.armor == armors.SPKIMO) damage *= 1.2;
+	 if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 	 //Determine if critical hit!
 	 var crit:Boolean = false;
@@ -1720,6 +1733,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 if (player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
 	 if (player.findPerk(PerkLib.Heroism) >= 0 && (monster.findPerk(PerkLib.EnemyBossType) >= 0 || monster.findPerk(PerkLib.EnemyHugeType) >= 0)) damage *= 2;
 	if (player.armor == armors.SPKIMO) damage *= 1.2;
+	if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 	if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 	 //triple strike bonus
 	 damage *= 3;

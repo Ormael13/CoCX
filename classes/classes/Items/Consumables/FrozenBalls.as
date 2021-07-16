@@ -41,7 +41,7 @@ package classes.Items.Consumables
 					else damage *= 2;
 				}
 				if (game.monster.findPerk(PerkLib.EnemyGroupType) >= 0 || game.monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
-				outputText(game.monster.capitalA + game.monster.short + " is hit with the Frozen Balls!  They breaks apart as razor-like ice sharps dig into " + game.monster.pronoun2 + ". ");
+				outputText(game.monster.capitalA + game.monster.short + " is hit with the Frozen Balls!  They break apart as razor-like ice shards dig into " + game.monster.pronoun2 + ". ");
 				damage = SceneLib.combat.doIceDamage(damage, true, true);
 				if (game.monster.HP < game.monster.minHP()) game.monster.HP = game.monster.minHP() - 1;
 			}

@@ -721,7 +721,6 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.JobHunter) >= 0) max += 50;
 			if (findPerk(PerkLib.JobRanger) >= 0) max += 5;
 			if (findPerk(PerkLib.JobGunslinger) >= 0) max += 10;
-			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) max += 100;
 			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) max += 600;
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) max += 150;
 			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) max += 900;
@@ -747,6 +746,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.ZenjisInfluence1) >= 0) multimax += 0.1;
 			if (findPerk(PerkLib.LimitBreakerHeart1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerHeart2ndStage) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) multimax += 0.1;
 			max *= multimax;
 			max = Math.round(max);
 			if (max > 1499999) max = 1499999;
@@ -949,6 +949,9 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.FuelForTheFire) >= 0) max += 2500;
 			if (findPerk(PerkLib.TooAngryToDie) >= 0) max += 3000;
 			if (findPerk(PerkLib.PrestigeJobTempest) >= 0) max += 500;
+			if (findPerk(PerkLib.WarMageNovice) >= 0) max += 50;
+			if (findPerk(PerkLib.WarMageApprentice) >= 0) max += 50;
+			if (findPerk(PerkLib.WarMageAdept) >= 0) max += 150;
 			if (findPerk(PerkLib.AscensionFury) >= 0) max += perkv1(PerkLib.AscensionFury) * 100;
 			if (jewelryEffectId == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude;//+75 to +175
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_WR) max += jewelryEffectMagnitude2;//+75 to +175
@@ -957,12 +960,13 @@ import classes.Items.JewelryLib;
 			if (jewelryName == "Undefeated King's Signet" || jewelryName3 == "Undefeated King's Signet") max += 150;
 			max += level * 5;
 			if (level <= 6) max += level * 5;
+			else max += 30;
 			if (findPerk(PerkLib.UnlockId) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockId2ndStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockId3rdStage) >= 0) max += level * 5;
 			if (findPerk(PerkLib.UnlockId4thStage) >= 0) max += level * 5;
-			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 10;//~35,730
-			if (findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) max += level * 10;
+			if (findPerk(PerkLib.AscensionUnlockedPotential2ndStage) >= 0) max += level * 10;
+			if (findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) max += level * 10;//~194,455
 			var multimax:Number = 1;
 			if (game.player.orcScore() >= 5) multimax += 0.1;
 			if (game.player.orcScore() >= 11) multimax += 0.1;
@@ -974,6 +978,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.PrimalFuryVI) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerBody2ndStage) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) multimax += 0.2;
 			if (findPerk(PerkLib.ICastAsuraFist) >= 0) multimax += 0.5;
 			if (vehiclesName == "Giant Slayer Mech") {
 				multimax += 0.1;
@@ -982,10 +987,9 @@ import classes.Items.JewelryLib;
 				//if (upgrade mecha) multimax += 0.1;
 				//if (upgrade mecha) multimax += 0.1;
 			}
-			max *= multimax;
-			max = Math.round(max);
-			//if (max > 69999) max = 69999;
-			if (max > 139999) max = 139999;
+			max *= multimax;//~245%
+			max = Math.round(max);//476 414,75
+			if (max > 476999) max = 476999;
 			return max;
 		}
 		public override function maxOverWrath():Number {
@@ -995,16 +999,21 @@ import classes.Items.JewelryLib;
 			if (hasPerk(PerkLib.AbsoluteStrength)) max2 += 0.1;
 			if (hasPerk(PerkLib.LikeAnAsuraBoss)) max2 += 0.1;
 			if (hasPerk(PerkLib.ICastAsuraFist)) max2 += 0.1;
-			max1 *= max2;
-			max1 = Math.round(max1);
-			if (max1 > 79999) max1 = 79999;
+			if (hasPerk(PerkLib.AsuraStrength)) max2 += 0.1;
+			//
+			if (hasPerk(PerkLib.AsuraToughness)) max2 += 0.1;
+			//
+			if (hasPerk(PerkLib.AsuraSpeed)) max2 += 0.1;
+			max1 *= max2;//~170%
+			max1 = Math.round(max1);//~809 905,5
+			if (max1 > 809999) max1 = 809999;
 			return max1;
 		}
 		public function maxSafeWrathMagicalAbilities():Number {
 			var max1:Number = 0;
 			if (hasPerk(PerkLib.ICastAsuraFist)) max1 += maxOverWrath();
 			else max1 += maxWrath();
-			var max2:Number = 0.9;
+			var max2:Number = 0.8;
 			//if (hasPerk(PerkLib.)) max2 += 0.1;
 			max1 *= max2;
 			max1 = Math.round(max1);
@@ -1014,9 +1023,14 @@ import classes.Items.JewelryLib;
 			var max1:Number = 0;
 			if (hasPerk(PerkLib.ICastAsuraFist)) max1 += maxOverWrath();
 			else max1 += maxWrath();
-			var max2:Number = 0.7;
+			var max2:Number = 0.6;
 			if (hasPerk(PerkLib.MagesWrath)) max2 += 0.05;
-			//if (hasPerk(PerkLib.)) max2 += 0.1;
+			if (hasPerk(PerkLib.MagesWrathEx)) max2 += 0.05;
+			if (hasPerk(PerkLib.WarMageNovice)) max2 += 0.05;
+			if (hasPerk(PerkLib.WarMageApprentice)) max2 += 0.05;
+			if (hasPerk(PerkLib.WarMageAdept)) max2 += 0.05;
+			if (hasPerk(PerkLib.WarMageExpert)) max2 += 0.05;
+			if (hasPerk(PerkLib.WarMageMaster)) max2 += 0.05;
 			max1 *= max2;
 			max1 = Math.round(max1);
 			return max1;
@@ -1139,6 +1153,7 @@ import classes.Items.JewelryLib;
 			if (findPerk(PerkLib.AscensionUnlockedPotential4thStage) >= 0) max += level * 12;
 			if (findPerk(PerkLib.LimitBreakerSoul1stStage) >= 0) multimax += 0.05;
 			if (findPerk(PerkLib.LimitBreakerSoul2ndStage) >= 0) multimax += 0.1;
+			if (findPerk(PerkLib.DeityJobMunchkin) >= 0) multimax += 0.1;
 			max *= multimax;
 			max = Math.round(max);
 			if (max > 2499999) max = 2499999;

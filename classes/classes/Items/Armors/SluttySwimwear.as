@@ -5,13 +5,15 @@ package classes.Items.Armors
 {
 	import classes.Items.Armor;
 	import classes.Items.ArmorLib;
-	import classes.PerkLib;
+import classes.Items.ItemTags;
+import classes.PerkLib;
 	import classes.Player;
 
 	public class SluttySwimwear extends ArmorWithPerk {
 		
 		public function SluttySwimwear() {
 			super("S.Swmwr", "S.Swmwr", "slutty swimwear", "a skimpy black bikini", 0, 0, 40, "An impossibly skimpy black bikini. You feel dirty just looking at it... and a little aroused, actually.", "Light", PerkLib.SluttySeduction, 6, 0, 0, 0, "", true, false);
+			withTag(ItemTags.REVEALING,ItemTags.AGILE);
 		}
 		
 		override public function useText():void { //Produces any text seen when equipping the armor normally

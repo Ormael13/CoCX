@@ -84,12 +84,12 @@ use namespace CoC;
 					if (rand(2) == 0) {
 						//50/50 strength/speed
 						if (rand(2) == 0 && player.str < 150) {
-							outputText("Despite tiredness you feel that you became stronger.");
+							outputText("Despite the exaustion, you feel like you have become stronger.");
 							dynStats("str", .5);
 						}
 						//Toughness
 						else if (player.spe < 150) {
-							outputText("Despite tiredness you feel that you became faster.");
+							outputText("Despite the exaustion, you feel like you have become faster.");
 							dynStats("spe", .5);
 						}
 					}

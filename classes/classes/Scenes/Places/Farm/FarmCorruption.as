@@ -235,10 +235,7 @@ import classes.StatusEffects;
 			// Bimbo if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) modValue += 2;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) modValue += 4;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] == 1) modValue += 1;
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] > 0)
-			{
-				modValue += 4;
-			}
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] > 0) modValue += 4;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_KELLY] == 1) modValue += 2;
 
 			whitneyCorruption(modValue);

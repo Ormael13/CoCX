@@ -129,6 +129,8 @@ public class Face extends SaveableBodyPart {
 	EnumValue.add(Types, SMUG, "SMUG", {name: "smug"});
 	public static const SQUIRREL:int         = 56;
 	EnumValue.add(Types, SQUIRREL, "SQUIRREL", {name: "squirrel", bite: true});
+	public static const ELF:int           	 = 57;
+	EnumValue.add(Types, ELF, "ELF", {name: "elf"});
 
 	public function Face(creature:Creature) {
 		super(creature,"facePart",[]);

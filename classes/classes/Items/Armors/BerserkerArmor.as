@@ -5,6 +5,7 @@
 package classes.Items.Armors 
 {
 import classes.Items.Armor;
+import classes.Items.ItemTags;
 import classes.PerkLib;
 import classes.Player;
 import classes.StatusEffects;
@@ -15,6 +16,7 @@ import classes.StatusEffects;
 		public function BerserkerArmor()
 		{
 			super("B.Armor","B.Armor","berserker armor","a berserker armor",12,0,30720,"A sturdy albeith skimpy armor made of leather and metal plates tied up to the body with straps. While it offers limited protections it also does not hinder the movement of its owner allowing for greater agility then most armors.","Medium");
+			withTag(ItemTags.AGILE);
 		}
 
 		override public function playerEquip():Armor {
