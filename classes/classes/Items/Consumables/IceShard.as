@@ -24,12 +24,12 @@ package classes.Items.Consumables
 			}
 			if (rand(2) == 0 && (player.spe > 25)) {
 				outputText("You feel a chill spread through you; when it passes, you feel more slothful and sluggish.  ");
-				if (player.spe > 25) player.addCurse("spe", -5, 1)
+				if (player.spe > 25) player.addCurse("spe", 5, 1)
 			}
 			if (rand(2) == 0) {
 				outputText("You also feel a little numb all over, in more ways than one...  ");
-				player.addCurse("lib", -2, 1);
-				player.addCurse("sen", -2, 1);
+				player.addCurse("lib", 2, 1);
+				player.addCurse("sen", 2, 1);
 			}
 			player.refillHunger(5);
 			

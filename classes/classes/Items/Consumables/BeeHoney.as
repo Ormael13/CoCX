@@ -99,7 +99,7 @@ public class BeeHoney extends Consumable
 				if (player.cor > 0 && changes < changeLimit && Utils.rand(1.5) == 0 && player.lib > 40) {
 					outputText(" and settling your overcharged sex-drive a bit.");
 					dynStats("lus", -20);
-					player.addCurse("lib", -3, 1);
+					player.addCurse("lib", 3, 1);
 					changes++;
 				}
 				else if (player.cor > 0) outputText(".");

@@ -106,8 +106,8 @@ public final class KitsuneGift extends Consumable {
 				case 9:
 				outputText("As the paper falls away, you carefully lift the cover of the box, your hands trembling nervously.  The inside of the box is lined with purple velvet, and sitting in the center is an artfully crafted paper doll.  Before your eyes, the doll springs to life, dancing about fancifully.  Without warning, it tosses a handful of sour-smelling orange powder into your face, then hops over the rim of the box and gallavants off into the woods.  Before you know what has happened, you feel the strength draining from your muscles, withering away before your eyes.");
 				outputText("\n\n<b>Oh no!  The kitsune's familiar has hit you with a strength draining spell!  Hopefully it's only temporary...</b>");
-				player.addCurse("str", -5,2);
-				player.addCurse("tou", -5,2);
+				player.addCurse("str", 5,2);
+				player.addCurse("tou", 5,2);
 				break;
 
 			//[Dud]
