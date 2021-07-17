@@ -971,7 +971,7 @@ private function InternalMutations0(page:int = 0):void {
 	//Next Page
 	menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow);
 	menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands);
-	menuItems.push("Parathyroid Gland", InternalMutationsParathyroid);
+	//menuItems.push("Parathyroid Gland", InternalMutationsParathyroid);
 	menuGen(menuItems, page);
 
 	function menuGen(menuItems:Array, page:int):void {
@@ -1051,7 +1051,7 @@ private function InternalMutations0(page:int = 0):void {
 		//Lungs Mutations
 		mutationsAssistant([PerkLib.ArachnidBookLung, PerkLib.ArachnidBookLungEvolved, PerkLib.ArachnidBookLungFinalForm], btnNum++);
 		mutationsAssistant([PerkLib.DraconicLungs, PerkLib.DraconicLungsEvolved, PerkLib.DraconicLungsFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.CaveWyrmLungs, PerkLib.CaveWyrmLungsEvolved, PerkLib.CaveWyrmLungsFinalForm], btnNum++);
+		//mutationsAssistant([PerkLib.CaveWyrmLungs, PerkLib.CaveWyrmLungsEvolved, PerkLib.CaveWyrmLungsFinalForm], btnNum++);
 		mutationsAssistant([PerkLib.MelkieLung, PerkLib.MelkieLungEvolved, PerkLib.MelkieLungFinalForm], btnNum++);
 		mutationsAssistant([PerkLib.DrakeLungs, PerkLib.DrakeLungsEvolved, PerkLib.DrakeLungsFinalForm], btnNum++);
 		addButton(14, "Back", InternalMutations0);
@@ -1118,7 +1118,7 @@ private function InternalMutations0(page:int = 0):void {
 		menu();
 		//Thyroid Glands Mutations
 		mutationsAssistant([PerkLib.KitsuneThyroidGland, PerkLib.KitsuneThyroidGlandEvolved, PerkLib.KitsuneThyroidGlandFinalForm], btnNum++);
-		mutationsAssistant([PerkLib.NekomataThyroidGland, PerkLib.NekomataThyroidGlandEvolved, PerkLib.NekomataThyroidGlandFinalForm], btnNum++);
+		//mutationsAssistant([PerkLib.NekomataThyroidGland, PerkLib.NekomataThyroidGlandEvolved, PerkLib.NekomataThyroidGlandFinalForm], btnNum++);
 		addButton(14, "Back", curry(InternalMutations0, 1));
 	}
 
@@ -1138,21 +1138,20 @@ private function InternalMutations0(page:int = 0):void {
 	}
 	
 	function mutationsAssistant(perkName:Array, menuButton:int):void {
-		//outputText(menuButton.toString() + perkName[0].name() + "\n");
 		var perkCount:int = 0
 		for each(var perkTier:PerkType in perkName) {
-			perkCount++
 			if (!(player.hasPerk(perkTier))) {
 				if (perkTier.available(player)) {
-					addButton(menuButton, perkName[0].name(), perkChoice, perkTier)
+					addButton(menuButton, perkName[0].name(), perkChoice, perkTier, -9000, -9000, "Next Perk: " + perkTier.name())
 				} else {
 					addButtonDisabled(menuButton, perkName[0].name(), "Requirements not met. Check MutationsDB.");
 				}
 				break;
 			}
+			perkCount++
 		}
 		if (perkCount == perkName.length) {
-			addButtonDisabled(menuButton, perkTier.name(), "Highest Tier obtained!");
+			addButtonDisabled(menuButton, perkName[0].name(), "Highest Tier obtained!");
 		}
 	}
 
