@@ -29,13 +29,13 @@ package classes.Items.Jewelries
 		}
 		
 		override public function playerEquip():Jewelry {
-			while (game.player.findPerk(PerkLib.Ambition) >= 0) game.player.removePerk(PerkLib.Ambition);
+			while (game.player.hasPerk(PerkLib.Ambition)) game.player.removePerk(PerkLib.Ambition);
 			game.player.createPerk(PerkLib.Ambition,0.2,0.15,0,0);
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Jewelry {
-			while (game.player.findPerk(PerkLib.Ambition) >= 0) game.player.removePerk(PerkLib.Ambition);
+			while (game.player.hasPerk(PerkLib.Ambition)) game.player.removePerk(PerkLib.Ambition);
 			return super.playerRemove();
 		}
 		

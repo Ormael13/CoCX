@@ -624,11 +624,11 @@ internal function loseToSparringHeliaLikeAButtRapedChump():void {
 internal function PCBeatsUpSalamanderSparring():void {
 	clearOutput();
 	//(If HP loss) 
-	if(monster.HP < 1) outputText("Unable to withstand your onslaught, the salamander collapses to a knee, barely supporting her weight on her sword.");
+	if(monster.HP <= monster.minHP()) outputText("Unable to withstand your onslaught, the salamander collapses to a knee, barely supporting her weight on her sword.");
 	else outputText("Panting heavily, knees snaking, she collapses, heavily leaning upon her sword.");
 	
 	outputText("\n\n<i>\"Come on, [name],\"</i> Hel groans, swaying unsteadily.  ");
-	if(monster.HP < 1) outputText("<i>\"Kick my ass a little harder, why don't you?\"</i>");
+	if(monster.HP <= monster.minHP()) outputText("<i>\"Kick my ass a little harder, why don't you?\"</i>");
 	else outputText("<i>\"Turn me on till I can't think straight, why don't you?\"</i>");
 	outputText("  You chuckle and offer her a hand up. The blushing Salamander takes it as you pull her into a tight embrace.  The cool wetness between her thighs a potent reminder of how much your lover seems to get off on violence.  Since she's so turned on, you could easily turn this into some rough loving.");
 	

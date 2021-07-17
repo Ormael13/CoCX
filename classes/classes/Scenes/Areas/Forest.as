@@ -142,7 +142,7 @@ use namespace CoC;
 						mods  : [fn.ifLevelMin(4)],
 						chance: function ():Number {
 							//Extra chance of Jojo encounter.
-							return (player.findPerk(PerkLib.PiercedFurrite) >= 0
+							return (player.hasPerk(PerkLib.PiercedFurrite)
 									&& rand(5) == 0
 									&& (player.cor > 25 || JojoScene.monk > 0)) ? 1.2 : 1;
 						},
@@ -151,7 +151,7 @@ use namespace CoC;
 						name  : "tentaBeast",
 						call  : tentacleBeastEncounterFn,
 						when  : fn.ifLevelMin(3)
-					},{
+					}, {
 						name  : "corrGlade",
 						call  : corruptedGladeFn,
 						when  : function():Boolean {
@@ -160,23 +160,22 @@ use namespace CoC;
 						chance: function():Number {
 							return (100 - 0.75*(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]||0))/100;
 						}
-					},{
+					}, {
 						name: "trip",
 						call: tripOnARoot
-					},{
+					}, {
 						name  : "beegirl",
 						call  : beeGirlScene.beeEncounter,
 						chance: 0.50
-					}//,{
-					//	name  : "WoodElf",
-					//	call  : SceneLib.woodElves.findElves,
-					//	chance: 0.50,
-					//	when  : function ():Boolean {
-					//		return (WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED
-					//				|| WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELF) && !player.blockingBodyTransformations()
-					//	}
-					//}
-					,{
+					}, {
+						name  : "WoodElf",
+						call  : SceneLib.woodElves.findElves,
+						chance: 0.50,
+						when  : function ():Boolean {
+							return (WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED
+									|| WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELF) && !player.blockingBodyTransformations()
+						}
+					}, {
 						name  : "truffle",
 						call  : findTruffle,
 						chance: 0.35
@@ -377,8 +376,8 @@ use namespace CoC;
 				name: "fera_1",
 				when: function():Boolean {
 					return isHalloween()
-						   && player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0
-						   && player.findPerk(PerkLib.FerasBoonAlpha) < 0
+						   && !player.hasPerk(PerkLib.FerasBoonBreedingBitch)
+						   && !player.hasPerk(PerkLib.FerasBoonAlpha)
 						   && date.fullYear > flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE];
 				},
 				call: Holidays.pumpkinFuckEncounter

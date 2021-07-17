@@ -24,6 +24,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
+import classes.PerkType;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Stats.Buff;
 import classes.Stats.BuffBuilder;
@@ -718,8 +719,10 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.GrandArchmage)) max += 60;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle)) max += 75;
 			if (hasPerk(PerkLib.GrandArchmage3rdCircle)) max += 90;
-			if (hasPerk(PerkLib.GreyMage)) max += 120;
-			if (hasPerk(PerkLib.GreyArchmage)) max += 150;
+			if (hasPerk(PerkLib.GreyMageApprentice)) max += 20;
+			if (hasPerk(PerkLib.GreyMage)) max += 40;
+			if (hasPerk(PerkLib.GreyArchmage)) max += 80;
+			if (hasPerk(PerkLib.GrandGreyArchmage)) max += 160;
 			if (hasPerk(PerkLib.ElementalBondUrges)) {
 				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsAir);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
@@ -739,6 +742,7 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.OmnibusGift)) max += 45;
 			if (hasPerk(PerkLib.JobCourtesan)) max += 60;
 			if (hasPerk(PerkLib.JobSeducer)) max += 30;
+			if (hasPerk(PerkLib.GreyMagic)) max += 30;
 			if (hasPerk(PerkLib.PrestigeJobGreySage)) max += 300;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (225 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));

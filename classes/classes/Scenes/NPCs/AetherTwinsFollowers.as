@@ -199,8 +199,14 @@ public function aethertwinsFollowers():void {
 	else addButtonDisabled(2, "???", "Maybe you should talk with them to unlock this option?");
 	//if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", valeriaSpar).hint("Do a quick battle with Valeria!");
 	//if (player.lust >= 33) addButton(4, "Sex", followersValeriaSex).hint("Initiate sexy time with the armor-goo.");
-	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 1) addButton(10, "Take A.D.", takeAetherD).hint(weapons.AETHERD.description);
-	if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 1) addButton(11, "Take A.S.", takeAetherS).hint(shields.AETHERS.description);
+	if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 1) {
+		if (player.hasPerk(PerkLib.Rigidity)) addButtonDisabled(10, "Take A.D.", "Your current rigid state not allowing you to take her with you.");
+		else addButton(10, "Take A.D.", takeAetherD).hint(weapons.AETHERD.description);
+	}
+	if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 1) {
+		if (player.hasPerk(PerkLib.Rigidity)) addButtonDisabled(11, "Take A.S.", "Your current rigid state not allowing you to take her with you.");
+		else addButton(11, "Take A.S.", takeAetherS).hint(shields.AETHERS.description);
+	}
 	addButton(14, "Back", camp.campFollowers);
 }
 

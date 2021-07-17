@@ -23,7 +23,6 @@ import classes.Scenes.Explore.RNGod;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.RyuBiDragon;
-import classes.Scenes.Places.HeXinDao;
 import classes.Scenes.Explore.KitsuneElder;
 import classes.Scenes.Explore.KitsuneAncestor;
 import classes.Scenes.Explore.SeabedAlrauneBoss;
@@ -36,10 +35,8 @@ import classes.display.SpriteDb;
 public class Exploration extends BaseContent
 	{
 		public var exploreDebug:ExploreDebug = new ExploreDebug();
-		public var hexindao:HeXinDao = new HeXinDao();
 		public var hiddencave:HiddenCave = new HiddenCave();
 		public var TrueDemons:DemonScene = new DemonScene();
-		public var Evangeline:EvangelineFollower = new EvangelineFollower();
 
 		public function Exploration()
 		{
@@ -59,13 +56,13 @@ public class Exploration extends BaseContent
 
 		public function furriteFnGen(iftrue:Number = 3, iffalse:Number = 1):Function {
 			return function ():Number {
-				return player.findPerk(PerkLib.PiercedFurrite) >= 0 ? iftrue : iffalse;
+				return player.hasPerk(PerkLib.PiercedFurrite) ? iftrue : iffalse;
 			}
 		}
 
 		public function lethiteFnGen(iftrue:Number = 3, iffalse:Number = 1):Function {
 			return function ():Number {
-				return player.findPerk(PerkLib.PiercedLethite) >= 0 ? iftrue : iffalse;
+				return player.hasPerk(PerkLib.PiercedLethite) ? iftrue : iffalse;
 			}
 		}
 		//const MET_OTTERGIRL:int = 777;
@@ -196,7 +193,7 @@ public class Exploration extends BaseContent
 				if (player.hasVagina()) impGobGol++;
 				if (player.totalFertility() >= 30) impGobGol++;
 				if (player.cumQ() >= 200) impGobGol--;
-				if (player.findPerk(PerkLib.PiercedLethite) >= 0) {
+				if (player.hasPerk(PerkLib.PiercedLethite)) {
 					if (impGobGol <= 3) impGobGol += 2;
 					else if (impGobGol < 7) impGobGol = 7;
 				}
@@ -582,12 +579,12 @@ public class Exploration extends BaseContent
 			// CoC.instance.goblinAssassinScene.goblinAssassinEncounter();
 			// return;
 
-			if (flags[kFLAGS.EVANGELINE_AFFECTION] < 1 && rand(2) == 0 && player.level > 0) {
-				Evangeline.enterTheEvangeline();
+			if (EvangelineFollower.EvangelineAffectionMeter < 1 && rand(2) == 0 && player.level > 0) {
+				SceneLib.evangelineFollower.enterTheEvangeline();
 				return;
 			}
-			if (flags[kFLAGS.EVANGELINE_AFFECTION] == 2 && rand(6) == 0) {
-				Evangeline.alternativEvangelineRecruit();
+			if (EvangelineFollower.EvangelineAffectionMeter == 2 && rand(6) == 0) {
+				SceneLib.evangelineFollower.alternativEvangelineRecruit();
 				return;
 			}
 			if (player.level > 2 && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1 && rand(10) == 0) {

@@ -33,16 +33,7 @@ public class MinotaurBlood extends Consumable {
 		if (rand(2) == 0) changeLimit++;
 		if (rand(3) == 0) changeLimit++;
 		if (rand(3) == 0) changeLimit++;
-		if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+		changeLimit += player.additionalTransformationChances();
 		if (changeLimit == 1) changeLimit = 2;
 		//Temporary storage
 		var temp:Number = 0;
@@ -420,7 +411,7 @@ public class MinotaurBlood extends Consumable {
 		// Remove gills
 		if (rand(4) == 0 && player.hasGills() && changes < changeLimit) mutations.updateGills();
 
-		if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) || player.ass.analWetness > 1)) {
+		if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && !player.hasPerk(PerkLib.MaraesGiftButtslut)) || player.ass.analWetness > 1)) {
 			outputText("\n\nYou feel a tightening up in your colon and your [asshole] sucks into itself.  You feel sharp pain at first but that thankfully fades.  Your ass seems to have dried and tightened up.");
 			player.ass.analWetness--;
 			if (player.ass.analLooseness > 1) player.ass.analLooseness--;

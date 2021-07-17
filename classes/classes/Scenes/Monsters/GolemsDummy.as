@@ -6,7 +6,6 @@ package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Places.HeXinDao;
 import classes.CoC;
 import classes.internals.*;
 import classes.Scenes.Camp.CampMakeWinions;
@@ -14,7 +13,6 @@ import classes.Scenes.SceneLib;
 
 public class GolemsDummy extends AbstractGolem
 	{
-		public var golems:HeXinDao = new HeXinDao();
 		public var campMake:CampMakeWinions = new CampMakeWinions();
 		
 		public function backhand():void {
@@ -49,7 +47,7 @@ public class GolemsDummy extends AbstractGolem
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) golems.gaunletchallange1fight2();
+			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) SceneLib.hexindao.gaunletchallange1fight2();
 			else {
 				if (player.hasStatusEffect(StatusEffects.SoulArena)) SceneLib.combat.finishCombat();
 				else campMake.postFightGolemOptions2();

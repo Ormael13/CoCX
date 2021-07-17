@@ -43,6 +43,7 @@ import classes.Items.Undergarment;
 import classes.Items.UndergarmentLib;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
+import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Pregnancy;
 import classes.Scenes.SceneLib;
@@ -2204,6 +2205,57 @@ use namespace CoC;
 				if (gainedWrath > 0) EngineCore.WrathChange(gainedWrath, false);
 			}
 		}
+
+		public function manaShieldAbsorbMagic(damage:Number, display:Boolean = false):Number {
+			return manaShieldAbsorb(damage, display, true);
+		}
+		public function manaShieldAbsorb(damage:Number, display:Boolean = false, magic:Boolean = false):Number{
+			var magicmult:Number = 1;
+			// if magical damage, double efficiency
+			if (magic == true) magicmult /= 2;
+			if (damage * magicmult <= mana) {
+				mana -= (damage * magicmult);
+				if (display) {
+					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
+					else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
+				}
+				game.mainView.statsView.showStatDown('mana');
+				dynStats("lus", 0); //Force display arrow.
+				return 0;
+			}
+			else {
+				var partial:Number = Math.round(mana / magicmult);
+				damage -= partial;
+				if (display) {
+					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + partial + "</font>)</b>");
+					else outputText("<b>(<font color=\"#000080\">Absorbed " + partial + "</font>)</b>");
+				}
+				mana = 0;
+				game.mainView.statsView.showStatDown('mana');
+				dynStats("lus", 0); //Force display arrow.
+				return damage;
+			}
+		}
+		public function bloodShieldAbsorb(damage:Number, display:Boolean = false):Number{
+			if (damage <= statusEffectv1(StatusEffects.BloodShield)) {
+				addStatusValue(StatusEffects.BloodShield,1,-damage);
+				if (display) {
+					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
+					else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
+				}
+				return 0;
+			}
+			else {
+				var partial:Number = statusEffectv1(StatusEffects.BloodShield);
+				damage -= partial;
+				if (display) {
+					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + partial + "</font>)</b>");
+					else outputText("<b>(<font color=\"#000080\">Absorbed " + partial + "</font>)</b>");
+				}
+				removeStatusEffect(StatusEffects.BloodShield);
+				return damage;
+			}
+		}
 		public override function damagePercent():Number {
 			var mult:Number = 100;
 			var armorMod:Number = armorDef;
@@ -2327,19 +2379,17 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && damage < mana) {
-					mana -= damage;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
+				}
+				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
+					damage = bloodShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reducePhysDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2468,19 +2518,17 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
+				}
+				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
+					damage = bloodShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceMagicDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2542,6 +2590,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult += 100;
 			if (hasPerk(PerkLib.FireAffinity)) mult -= 50;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
+			if (hasStatusEffect(StatusEffects.DaoOfFire) && (statusEffectv2(StatusEffects.DaoOfFire) > 2)) mult -= 10;
 			if (jewelryEffectId == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude3;
@@ -2567,19 +2616,17 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
+				}
+				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
+					damage = bloodShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceFireDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2660,6 +2707,7 @@ use namespace CoC;
 				if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI && (jewelryName == "Infernal Mouse ring" || jewelryName2 == "Infernal Mouse ring" || jewelryName3 == "Infernal Mouse ring" || jewelryName4 == "Infernal Mouse ring")) mult += 90;
 				else mult += 100;
 			}
+			if (hasStatusEffect(StatusEffects.DaoOfIce) && (statusEffectv2(StatusEffects.DaoOfIce) > 2)) mult -= 10;
 			if (rearBody.type == RearBody.YETI_FUR) mult -= 20;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
@@ -2675,19 +2723,17 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
+				}
+				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
+					damage = bloodShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceIceDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2759,6 +2805,7 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId2 == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId3 == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId4 == JewelryLib.MODIFIER_LIGH_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R && necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= 15;
+			if (hasStatusEffect(StatusEffects.DaoOfLightning) && (statusEffectv2(StatusEffects.DaoOfLightning) > 2)) mult -= 10;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -2773,19 +2820,17 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
+				}
+				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
+					damage = bloodShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceLightningDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2849,6 +2894,7 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_DARK_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_DARK_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_DARK_R && jewelryEffectId2 == JewelryLib.MODIFIER_DARK_R && jewelryEffectId3 == JewelryLib.MODIFIER_DARK_R && jewelryEffectId4 == JewelryLib.MODIFIER_DARK_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_DARK_R && necklaceEffectId == NecklaceLib.MODIFIER_DARK_R) mult -= 15;
+			if (hasStatusEffect(StatusEffects.DaoOfDarkness) && (statusEffectv2(StatusEffects.DaoOfDarkness) > 2)) mult -= 10;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -2863,19 +2909,17 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
+				}
+				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
+					damage = bloodShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reduceDarknessDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -2941,6 +2985,7 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;
+			if (hasStatusEffect(StatusEffects.DaoOfPoison) && (statusEffectv2(StatusEffects.DaoOfPoison) > 2)) mult -= 10;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
@@ -2955,19 +3000,17 @@ use namespace CoC;
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
-				else if (hasStatusEffect(StatusEffects.ManaShield) && (damage / 2) < mana) {
-					mana -= damage / 2;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-					}
-					game.mainView.statsView.showStatDown('mana');
-					dynStats("lus", 0); //Force display arrow.
+				else if (hasStatusEffect(StatusEffects.ManaShield)) {
+					damage = manaShieldAbsorb(damage, display);
+				}
+				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
+					damage = bloodShieldAbsorb(damage, display);
 				}
 				else {
 					damage = reducePoisonDamage(damage);
 					//Wrath
 					wrathFromBeenPunchingBag(damage);
+					if (hasStatusEffect(StatusEffects.BoneArmor)) damage = Math.round(damage * 0.5);
 					//game.HPChange(-damage, display);
 					HP -= damage;
 					if (display) {
@@ -3252,7 +3295,7 @@ use namespace CoC;
 				{name: 'orca', score: orcaScore(), minscore: 6},
 				{name: 'oni', score: oniScore(), minscore: 6},
 				{name: 'elf', score: elfScore(), minscore: 5},
-				{name: 'wood elf', score: woodElfScore(), minscore: 17},
+				{name: 'wood elf', score: woodElfScore(), minscore: 22},
 				{name: 'frost wyrm', score: frostWyrmScore(), minscore: 10},
 				{name: 'orc', score: orcScore(), minscore: 5},
 				{name: 'raiju', score: raijuScore(), minscore: 5},
@@ -3381,7 +3424,10 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "sphinx") {
-				if (TopScore >= 23) {
+				if (TopScore >= 30) {
+					race = "noble sphinx";
+				}
+				if (TopScore >= 21) {
 					race = "greater sphinx";
 				}
 				if (TopScore >= 14) {
@@ -3620,13 +3666,13 @@ use namespace CoC;
 			}
 			if (TopRace == "unicorn") {
 				if (TopScore >= 8) {
-					if (TopScore >= 24) {
+					if (TopScore >= 27) {
 						if (horns.type == Horns.UNICORN) {
 							race = "true unicorn";
 						} else {
 							race = "true bicorn";
 						}
-					} else if (TopScore >= 12) {
+					} else if (TopScore >= 18) {
 						if (horns.type == Horns.UNICORN) {
 							race = "unicorn";
 						} else {
@@ -3652,13 +3698,13 @@ use namespace CoC;
 			}
 			if (TopRace == "alicorn") {
 				if (TopScore >= 8) {
-					if (TopScore >= 24) {
+					if (TopScore >= 27) {
 						if (horns.type == Horns.UNICORN) {
 							race = "true alicorn";
 						} else {
 							race = "true nightmare";
 						}
-					} else if (TopScore >= 12) {
+					} else if (TopScore >= 18) {
 						if (horns.type == Horns.UNICORN) {
 							race = "alicorn";
 						} else {
@@ -4838,7 +4884,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (elfScore() >= 11)
 				chimeraCounter++;
-			if (woodElfScore() >= 17)
+			if (woodElfScore() >= 22)
 				chimeraCounter++;
 			if (orcScore() >= 11)
 				chimeraCounter++;
@@ -7656,23 +7702,24 @@ use namespace CoC;
 		public function woodElfScore():Number {
 			Begin("Player","racialScore","wood elf");
 			var WoodElfCounter:Number = 0;
-			if (ears.type == Ears.ELVEN)
-				WoodElfCounter++;
-			if (eyes.type == Eyes.ELF)
-				WoodElfCounter++;
-			if (faceType == Face.ELF)
-				WoodElfCounter++;
-			if (tongue.type == Tongue.ELF)
-				WoodElfCounter++;
-			if (arms.type == Arms.ELF)
-				WoodElfCounter++;
-			if (lowerBody == LowerBody.ELF)
-				WoodElfCounter++;
-			if (hairType == Hair.SILKEN)
-				WoodElfCounter++;
-			if (wings.type == Wings.NONE)
-				WoodElfCounter++;
-			if (WoodElfCounter >= 2) {
+			if (hasPerk(PerkLib.BlessingOfTheAncestorTree)) {
+				WoodElfCounter += 4;
+				if (ears.type == Ears.ELVEN)
+					WoodElfCounter++;
+				if (eyes.type == Eyes.ELF)
+					WoodElfCounter++;
+				if (faceType == Face.ELF)
+					WoodElfCounter++;
+				if (tongue.type == Tongue.ELF)
+					WoodElfCounter++;
+				if (arms.type == Arms.ELF)
+					WoodElfCounter++;
+				if (lowerBody == LowerBody.ELF)
+					WoodElfCounter++;
+				if (hairType == Hair.SILKEN)
+					WoodElfCounter++;
+				if (wings.type == Wings.NONE)
+					WoodElfCounter++;
 				if (InCollection(hairColor, ["golden blonde"]))
 					WoodElfCounter++;
 				if (eyes.colour == "light green")
@@ -7685,31 +7732,21 @@ use namespace CoC;
 					WoodElfCounter++;
 				if (thickness <= 50)
 					WoodElfCounter++;
-				if (hasCock() && cocks.length < 6)
+				if ((hasCock() && cocks.length < 6) || (hasVagina() && biggestTitSize() >= 3))
 					WoodElfCounter++;
-				if (hasVagina() && biggestTitSize() >= 3)
+				if (cor >= 50)
+					WoodElfCounter++;
+				if (hasPerk(PerkLib.FlawlessBody))
+					WoodElfCounter++;
+				if (hasPerk(PerkLib.ElvenSense))
 					WoodElfCounter++;
 			}
-			if (cor >= 50)
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.FlawlessBody))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.ElvenSense))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.BlessingOfTheAncestorTree))
-				WoodElfCounter+= 4;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSys))
-				WoodElfCounter++;
+				WoodElfCounter += 3;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved))
-				WoodElfCounter++;
+				WoodElfCounter += 3;
 			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.ElvishPeripheralNervSys) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.ElvishPeripheralNervSysEvolved) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				WoodElfCounter++;
-			if (hasPerk(PerkLib.ElvishPeripheralNervSysFinalForm) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				WoodElfCounter++;
+				WoodElfCounter += 3;
 			if (hasPerk(PerkLib.ElfsDescendant) || hasPerk(PerkLib.BloodlineElf))
 				WoodElfCounter += 2;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
@@ -8829,6 +8866,7 @@ use namespace CoC;
 		{
 			Begin("Player","racialScore","sphinx");
 			var sphinxCounter:Number = 0;
+			var SphinxSkinColor:Array = ["dark", "tan"];
 			if (isTaur()) {
 				if (lowerBody == LowerBody.CAT)
 					sphinxCounter += 2;
@@ -8843,7 +8881,9 @@ use namespace CoC;
 				if (faceType == Face.CAT_CANINES && (lowerBody == LowerBody.CAT))
 					sphinxCounter++;
 			}
-			if (eyes.type == Eyes.CAT)
+			if (InCollection(skinTone, SphinxSkinColor))
+				sphinxCounter++;
+			if (eyes.type == Eyes.CAT_SLITS)
 				sphinxCounter++;
 			if (tongue.type == Tongue.CAT)
 				sphinxCounter++;
@@ -8857,7 +8897,7 @@ use namespace CoC;
 				sphinxCounter++;
 			if (wings.type == Wings.FEATHERED_SPHINX)
 				sphinxCounter += 4;
-			if (catCocks() > 0)
+			if (catCocks() > 0 || hasVagina())
 				sphinxCounter++;
 			if (hasPartialCoat(Skin.FUR) || hasPlainSkinOnly())
 				sphinxCounter++;
@@ -8914,7 +8954,7 @@ use namespace CoC;
 			if (eyes.type == Eyes.HUMAN)
 				unicornCounter++;
 			if (wings.type == Wings.NONE)
-				unicornCounter += 2;
+				unicornCounter += 4;
 			if (horns.type == Horns.UNICORN) {
 				if (horns.count < 6)
 					unicornCounter++;
@@ -8939,8 +8979,6 @@ use namespace CoC;
 				if (hasPerk(PerkLib.AvatorOfCorruption))
 					unicornCounter++;
 			}
-			if (wings.type == Wings.FEATHERED_ALICORN)
-				unicornCounter = 0;
 			if (hasFur())
 				unicornCounter++;
 			if (horseCocks() > 0)
@@ -9025,7 +9063,7 @@ use namespace CoC;
 					unicornCounter++;
 			}
 			if (wings.type == Wings.NONE)
-				unicornCounter += 2;
+				unicornCounter += 4;
 			if (horseCocks() > 0)
 				unicornCounter++;
 			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
@@ -9093,7 +9131,7 @@ use namespace CoC;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.FEATHERED_ALICORN)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, unicornHairPalette) && InCollection(coatColor, unicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "blue")
@@ -9107,7 +9145,7 @@ use namespace CoC;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.NIGHTMARE)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, bicornHairPalette) && InCollection(coatColor, bicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "red")
@@ -9176,13 +9214,15 @@ use namespace CoC;
 				alicornCounter++;
 			if (eyes.type == Eyes.HUMAN)
 				alicornCounter++;
+			if (isTaur())
+				alicornCounter++;
 			if (horns.type == Horns.UNICORN) {
 				if (horns.count < 6)
 					alicornCounter++;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.FEATHERED_ALICORN)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, unicornHairPalette) && InCollection(coatColor, unicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "blue")
@@ -9196,7 +9236,7 @@ use namespace CoC;
 				if (horns.count >= 6)
 					alicornCounter += 2;
 				if (wings.type == Wings.NIGHTMARE)
-					alicornCounter += 2;
+					alicornCounter += 4;
 				if (InCollection(hairColor, bicornHairPalette) && InCollection(coatColor, bicornColorPalette))
 					alicornCounter++;
 				if (eyes.colour == "red")
@@ -10435,7 +10475,13 @@ use namespace CoC;
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobBerserker))
 				prestigeJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobBindmaster))
+				prestigeJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobDruid))
+				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobGreySage))
+				prestigeJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobNecromancer))
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobSeer))
 				prestigeJobs1++;
@@ -10446,6 +10492,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.PrestigeJobSoulArtMaster))
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobSpellKnight))
+				prestigeJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobStalker))
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobTempest))
 				prestigeJobs1++;
@@ -11009,8 +11057,9 @@ use namespace CoC;
 
 		public function spellCount():Number
 		{
-			return [StatusEffects.KnowsArcticGale, StatusEffects.KnowsArouse, StatusEffects.KnowsBlind, StatusEffects.KnowsBlink, StatusEffects.KnowsBlizzard, StatusEffects.KnowsBloodExplosion, StatusEffects.KnowsBloodMissiles, StatusEffects.KnowsChainLighting, StatusEffects.KnowsCharge, StatusEffects.KnowsChargeA, StatusEffects.KnowsDarknessShard, StatusEffects.KnowsDuskWave,
-			StatusEffects.KnowsFireStorm, StatusEffects.KnowsHeal, StatusEffects.KnowsIceRain, StatusEffects.KnowsIceSpike,StatusEffects.KnowsLightningBolt, StatusEffects.KnowsManaShield,StatusEffects.KnowsMight,StatusEffects.KnowsNosferatu,StatusEffects.KnowsRegenerate,StatusEffects.KnowsWhitefire]
+			return [StatusEffects.KnowsArcticGale, StatusEffects.KnowsArouse, StatusEffects.KnowsBlind, StatusEffects.KnowsBlink, StatusEffects.KnowsBlizzard, StatusEffects.KnowsBloodChains, StatusEffects.KnowsBloodExplosion, StatusEffects.KnowsBloodField, StatusEffects.KnowsBloodMissiles, StatusEffects.KnowsBloodShield, StatusEffects.KnowsBloodWave,
+			StatusEffects.KnowsChainLighting, StatusEffects.KnowsCharge, StatusEffects.KnowsChargeA, StatusEffects.KnowsDarknessShard, StatusEffects.KnowsDuskWave, StatusEffects.KnowsFireStorm, StatusEffects.KnowsHeal, StatusEffects.KnowsIceRain, StatusEffects.KnowsIceSpike, StatusEffects.KnowsLightningBolt, StatusEffects.KnowsManaShield, StatusEffects.KnowsMight,
+			StatusEffects.KnowsNosferatu, StatusEffects.KnowsRegenerate, StatusEffects.KnowsWhitefire]
 					.filter(function(item:StatusEffectType, index:int, array:Array):Boolean{
 						return this.hasStatusEffect(item);},this)
 					.length;
@@ -11018,7 +11067,7 @@ use namespace CoC;
 		public function spellCountWhiteBlack():Number
 		{
 			return [StatusEffects.KnowsIceSpike, StatusEffects.KnowsDarknessShard, StatusEffects.KnowsMight, StatusEffects.KnowsBlink, StatusEffects.KnowsRegenerate, StatusEffects.KnowsArouse, StatusEffects.KnowsWhitefire, StatusEffects.KnowsLightningBolt, StatusEffects.KnowsCharge, StatusEffects.KnowsChargeA, StatusEffects.KnowsHeal, StatusEffects.KnowsBlind,
-			StatusEffects.KnowsPyreBurst, StatusEffects.KnowsChainLighting, StatusEffects.KnowsArcticGale, StatusEffects.KnowsDuskWave, StatusEffects.KnowsBlizzard]
+			StatusEffects.KnowsPyreBurst, StatusEffects.KnowsChainLighting, StatusEffects.KnowsArcticGale, StatusEffects.KnowsDuskWave, StatusEffects.KnowsBlizzard, StatusEffects.KnowsFireStorm, StatusEffects.KnowsIceRain]
 					.filter(function(item:StatusEffectType, index:int, array:Array):Boolean{
 						return this.hasStatusEffect(item);},this)
 					.length;
@@ -11753,13 +11802,21 @@ use namespace CoC;
 				}
 			}//+10 / 10 - 20
 			if (sphinxScore() >= 14) {
-				if (sphinxScore() >= 26) {
+				if (sphinxScore() >= 30) {
 					maxStrCap2 += 110;
 					maxTouCap2 -= 20;
 					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 70;
 					else maxSpeCap2 += 60;
-					maxIntCap2 += 130;
-					maxWisCap2 += 110;
+					maxIntCap2 += 150;
+					maxWisCap2 += 150;
+				}
+				if (sphinxScore() >= 21) {
+					maxStrCap2 += 90;
+					maxTouCap2 -= 20;
+					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 60;
+					else maxSpeCap2 += 50;
+					maxIntCap2 += 100;
+					maxWisCap2 += 95;
 				}
 				else {
 					maxStrCap2 += 50;
@@ -12230,20 +12287,34 @@ use namespace CoC;
 					currentSen += 15;
 				}
 			}
-			if (woodElfScore() >= 17) {
-				if (woodElfScore() >= 25) {
+			if (woodElfScore() >= 22) {
+				if (woodElfScore() >= 31) {
 					maxStrCap2 -= 10;
 					maxTouCap2 -= 15;
-					maxSpeCap2 += 150;
-					maxIntCap2 += 125;
-					maxLibCap2 += 100;
-					currentSen += 50;
+					maxSpeCap2 += 550;
+					maxIntCap2 += 495;
+					maxLibCap2 += 455;
+					currentSen += 80;
+				} else if (woodElfScore() >= 28) {
+					maxStrCap2 -= 10;
+					maxTouCap2 -= 15;
+					maxSpeCap2 += 495;
+					maxIntCap2 += 445;
+					maxLibCap2 += 415;
+					currentSen += 70;
+				} else if (woodElfScore() >= 25) {
+					maxStrCap2 -= 10;
+					maxTouCap2 -= 15;
+					maxSpeCap2 += 430;
+					maxIntCap2 += 405;
+					maxLibCap2 += 375;
+					currentSen += 60;
 				} else {
 					maxStrCap2 -= 10;
 					maxTouCap2 -= 15;
-					maxSpeCap2 += 100;
-					maxIntCap2 += 100;
-					maxLibCap2 += 100;
+					maxSpeCap2 += 375;
+					maxIntCap2 += 355;
+					maxLibCap2 += 335;
 					currentSen += 50;
 				}
 			}
@@ -12502,15 +12573,15 @@ use namespace CoC;
 				}
 			}//+15/10-20
 			if (unicornScore() >= 8) {
-				if (unicornScore() >= 24) {
+				if (unicornScore() >= 27) {
 					maxStrCap2 += 60;
-					maxTouCap2 += 70;
-					maxSpeCap2 += 95;
-					maxIntCap2 += 120;
-				} else if (unicornScore() >= 12) {
-					maxTouCap2 += 35;
-					maxSpeCap2 += 70;
-					maxIntCap2 += 105;
+					maxTouCap2 += 90;
+					maxSpeCap2 += 115;
+					maxIntCap2 += 140;
+				} else if (unicornScore() >= 18) {
+					maxTouCap2 += 55;
+					maxSpeCap2 += 90;
+					maxIntCap2 += 125;
 				} else {
 					maxTouCap2 += 25;
 					maxSpeCap2 += 40;
@@ -12523,15 +12594,15 @@ use namespace CoC;
 				maxIntCap2 += 75;
 			}//+(15)30/(10-20)30-40
 			if (alicornScore() >= 8) {
-				if (alicornScore() >= 24) {
+				if (alicornScore() >= 27) {
 					maxStrCap2 += 60;
 					maxTouCap2 += 70;
+					maxSpeCap2 += 150;
+					maxIntCap2 += 125;
+				} else if (alicornScore() >= 18) {
+					maxTouCap2 += 55;
 					maxSpeCap2 += 120;
-					maxIntCap2 += 110;
-				} else if (alicornScore() >= 12) {
-					maxTouCap2 += 35;
-					maxSpeCap2 += 70;
-					maxIntCap2 += 75;
+					maxIntCap2 += 95;
 				} else {
 					maxTouCap2 += 15;
 					maxSpeCap2 += 50;
@@ -13021,11 +13092,12 @@ use namespace CoC;
 			strtouspeintwislibsenCalculation2();
 			if (hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tallness*4))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
-			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':((0.01 * Math.round(inte/2))+(0.01 * Math.round(wis/2))),'tou.mult':((0.01 * Math.round(inte/2))+(0.01 * Math.round(wis/2)))}, 'Enigma', { text: 'Enigma' });
+			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2))),'tou.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2)))}, 'Enigma', { text: 'Enigma' });
 			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
 			if (hasPerk(PerkLib.StrengthOfStone)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tou/2))}, 'Strength of stone', { text: 'Strength of stone' });
 			if (!hasPerk(PerkLib.StrengthOfStone) && statStore.hasBuff('Strength of stone')) statStore.removeBuffs('Strength of stone');
 			var power:Number = 0;
+
 			if (hasPerk(PerkLib.BullStrength)){
 				if (cowScore() >=15) power = lactationQ()*0.001;
 				if (minotaurScore() >=15) power = cumCapacity()*0.001;
@@ -13677,7 +13749,7 @@ use namespace CoC;
 				dynStats("spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost), "scale", false);
 				removeStatusEffect(StatusEffects.UnderwaterCombatBoost);
 			}
-			if(hasStatusEffect(StatusEffects.EzekielCurse) && flags[kFLAGS.EVANGELINE_AFFECTION] >= 3 && hasPerk(PerkLib.EzekielBlessing)) {
+			if(hasStatusEffect(StatusEffects.EzekielCurse) && EvangelineFollower.EvangelineAffectionMeter >= 3 && hasPerk(PerkLib.EzekielBlessing)) {
 				removeStatusEffect(StatusEffects.EzekielCurse);
 			}
 			if(hasStatusEffect(StatusEffects.DragonBreathCooldown) && hasPerk(PerkLib.DraconicLungsFinalForm)) {
@@ -15199,6 +15271,28 @@ use namespace CoC;
 			return max;
 		}
 
+		public function sadomasochismBoost():Number {
+			var sadomasochismBoost:Number = 1;
+			if (HP < maxHP() * 0.25) sadomasochismBoost += 0.2;
+			if (lust > maxLust() * 75) sadomasochismBoost += 0.2;
+			return sadomasochismBoost;
+		}
+
+		public function additionalTransformationChances():Number {
+			var additionalTransformationChancesCounter:Number = 0;
+			if (hasPerk(PerkLib.HistoryAlchemist) || hasPerk(PerkLib.PastLifeAlchemist)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Enhancement)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Fusion)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Enchantment)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Refinement)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Saturation)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Perfection)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Creationism)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.TransformationResistance)) additionalTransformationChancesCounter--;
+			return additionalTransformationChancesCounter;
+		}
+
 		public function MutagenBonus(statName: String, bonus: Number):void
 		{
 			var MBCap:Number = 0.2;
@@ -15230,6 +15324,14 @@ use namespace CoC;
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 				CoC.instance.mainView.statsView.showStatUp(statName);
 			}
+		}
+
+		public function VenomWebCost():Number
+		{
+			var VWC:Number = 5;
+			if (hasPerk(PerkLib.ImprovedVenomGlandEx)) VWC -= 1;
+			if (hasPerk(PerkLib.ImprovedVenomGlandSu)) VWC += 2;
+			return VWC;
 		}
 
 		public override function mf(male:String, female:String):String {

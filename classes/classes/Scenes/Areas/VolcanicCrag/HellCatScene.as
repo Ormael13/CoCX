@@ -250,17 +250,18 @@ public function WitchesSabbathThirdVisitYes():void {
 	player.modFem(100, 100);
 	outputText(" The heat is almost gone, it heads for your tail exploding there in a sheath of flame before spiraling toward your head.");
 	mutations.setTailType(Tail.BURNING);
-	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningTail, 0, 0, 0, 0);
+	if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningTail, 0, 0, 0, 0);
 	outputText(" All of these pleasurable changes are driving you insane with desire to the point you would try to cry but just as soon as a tear pearls out of your eye it evaporates as two small flames leaks from their corners instead.");
-	CoC.instance.transformations.EyesInfernal.applyEffect(false);
 	outputText(" In a final spectacular explosion your hair is set ablaze, the fire refusing to be put out until it literally replaces them.");
 	outputText("\n\n");
-	CoC.instance.transformations.HairBurning.applyEffect(false);
 	outputText(" Your skin tingle with residual heat as well, progressively and delightfully burning toward a ashen hue.");
 	player.skinTone = "ashen";
 	player.hairColor = "midnight black";
 	player.coatColor = "midnight black";
 	outputText(" Speaking of fire you having some hellish hot thoughts right now. You really wish you could stick that cock of yours in some cunt or get yourself filled good and hell with a body like yours going in heat likely is going to be a recurring two sided joke. <b>You were altered and transformed into a Hellcat!</b>");
+
+	CoC.instance.transformations.HairBurning.applyEffect(false);
+	CoC.instance.transformations.EyesInfernal.applyEffect(false);
 	if (rand(2) == 0) player.goIntoRut(false);
 	else player.goIntoHeat(false);
 	flags[kFLAGS.WITCHES_SABBATH]++;
@@ -301,20 +302,20 @@ public function WitchesSabbathFourthVisitYeahSure2():void {
 	if (playerWasAlreadyHerm) outputText(" your body begins to change.");
 	outputText(" The heat heads for your tail exploding there in a sheath of flame before spiraling toward your head.");
 	mutations.setTailType(Tail.BURNING);
-	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningTail, 0, 0, 0, 0);
+	if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedHellcatBurningTail)) player.createStatusEffect(StatusEffects.UnlockedHellcatBurningTail, 0, 0, 0, 0);
 	outputText(" All of these pleasurable changes are driving you insane with desire to the point you would try to cry but just as soon as a tear pearls out of your eye it evaporates as two small flames leaks from their corners instead.");
-	CoC.instance.transformations.EyesInfernal.applyEffect(false);
 	outputText(" In a final spectacular explosion your hair is set ablaze, the fire refusing to be put out until it literally replaces them.");
-	outputText("\n\n");
-	CoC.instance.transformations.HairBurning.applyEffect(false);
 	outputText(" Your skin tingle with residual heat as well, progressively and delightfully burning toward a ashen hue.");
 	player.skinTone = "ashen";
 	player.hairColor = "midnight black";
 	player.coatColor = "midnight black";
 	outputText(" Speaking of fire you having some hellish hot thoughts right now. You really wish you could stick that cock of yours in some cunt or get yourself filled good.");
+	CoC.instance.transformations.EyesInfernal.applyEffect(false);
+	CoC.instance.transformations.HairBurning.applyEffect(false);
 	if (rand(2) == 0) player.goIntoRut(false);
 	else player.goIntoHeat(false);
 
+	outputText("\n\n");
 	outputText("The hellcat nod with a satisfied smile.\n\n\"<i>All over now. I don’t know how your body became warped, must have been transformatives. Come and see me if that ever happens again.</i>\"\n\n");
 	outputText("She waves off and leave you there to enjoy your new toys. After a few minute pleasuring yourself in order to kill that raging erection and aching pussy you head back to camp.");
 	CoC.instance.mainViewManager.updateCharviewIfNeeded();

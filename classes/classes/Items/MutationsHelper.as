@@ -49,7 +49,7 @@ import classes.BodyParts.Wings;
 					outputText("\n\nYour [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>");
 			}
 			player.skin.setBaseOnly({type: Skin.PLAIN, adj:""});
-			if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedHumanSkin)) {
+			if (player.hasPerk(PerkLib.GeneticMemory) && !player.hasStatusEffect(StatusEffects.UnlockedHumanSkin)) {
 				outputText("\n\n<b>Genetic Memory: Human skin - Memorized!</b>\n\n");
 				player.createStatusEffect(StatusEffects.UnlockedHumanSkin, 0, 0, 0, 0);
 			}
@@ -148,16 +148,16 @@ import classes.BodyParts.Wings;
 		for (var i:int = 2; i <= maxChanges; i++) {
 			if (rand(i) == 0) changeLimit++;
 		}
-		if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-		if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+		if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
+		if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
+		if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
+		if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
+		if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
+		if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
+		if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
+		if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
+		if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
+		if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
 		return changes;
 	}
 	/**
@@ -408,7 +408,7 @@ import classes.BodyParts.Wings;
 			if (player[key] == tgtType) return false;
 			player[key] = tgtType;
 		}
-		if (player.findPerk(PerkLib.GeneticMemory) < 0) return false;
+		if (!player.hasPerk(PerkLib.GeneticMemory)) return false;
 
 		var o:* = dict[tgtType];
 		if (o is Array) {
@@ -418,8 +418,8 @@ import classes.BodyParts.Wings;
 			return addGeneticMemory(sat, sat.id.replace("Unlocked ", ""));
 		} else return false;
 	}
-	public function addGeneticMemory(sat:StatusEffectType, name:String = null):Boolean {
-		if (player.findPerk(PerkLib.GeneticMemory) < 0) return false;
+	public function addGeneticMemory(sat:StatusEffectType, name:String = null, doOutput: Boolean = true):Boolean {
+		if (!player.hasPerk(PerkLib.GeneticMemory)) return false;
 		if (sat != null && !player.hasStatusEffect(sat)) {
 			player.createStatusEffect(sat, 0, 0, 0, 0);
 			return true;

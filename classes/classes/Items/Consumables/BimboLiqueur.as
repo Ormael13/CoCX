@@ -170,7 +170,7 @@ public class BimboLiqueur extends Consumable {
 					game.player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
 				}
 				game.player.orgasm();
-				player.addCurse("int", -20, 2);
+				player.addCurse("int", 20, 2);
 				player.MutagenBonus("lib", 5);
 				if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni()) mutations.DrunkenPowerEmpower();
 				//FULL ON BITCHFACE

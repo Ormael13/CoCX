@@ -35,7 +35,7 @@ public class Masturbation extends BaseContent {
 					outputText("\n\nFortunately, you could smear honey all over your [cock] and relieve yourself if you want to.");
 					addButton(1, "Use Honey", masturbateGo);
 				}
-				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
+				if (((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) {
 					outputText("\n\nYou could meditate to cleanse your urges.");
 					addButton(2, "Meditate", meditate);
 				}
@@ -44,10 +44,10 @@ public class Masturbation extends BaseContent {
 			var button:int = 0;
 			
 			//FAP BUTTON GOAADFADHAKDADK
-			if (((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
+			if (((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) {
 				if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0)
 					addButton(button++, "Masturbate", masturbateGo);
-				else if (player.findPerk(PerkLib.Enlightened) >= 0 && (player.findPerk(PerkLib.HistoryReligious) < 0 || player.findPerk(PerkLib.PastLifeReligious) < 0)) {
+				else if (player.hasPerk(PerkLib.Enlightened) && (!player.hasPerk(PerkLib.HistoryReligious) || !player.hasPerk(PerkLib.PastLifeReligious))) {
 					addButton(button++, "Masturbate", masturbateGo);
 					addButton(button++, "Meditate", meditate);
 				}
@@ -55,10 +55,10 @@ public class Masturbation extends BaseContent {
 			}
 			else addButton(button++,"Masturbate", masturbateGo);
 			//catofellato
-			if (player.hasCock() && (player.findPerk(PerkLib.Flexibility) >= 0 || flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)) {
+			if (player.hasCock() && (player.hasPerk(PerkLib.Flexibility) || flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)) {
 				addButton(button++, "Lick Cock", catAutoLick);
 			}
-			if (player.hasVagina() && (player.findPerk(PerkLib.Flexibility) >= 0 || flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)) {
+			if (player.hasVagina() && (player.hasPerk(PerkLib.Flexibility) || flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)) {
 				addButton(button++, "Lick 'Gina", lickYerGirlParts);
 			}
 			//Easter bunny egging
@@ -95,7 +95,7 @@ public class Masturbation extends BaseContent {
 			if (fappingItems(false))
 				addButton(13 ,"Items", fappingItems);
 			else if (button == 1) { //If you can only masturbate or meditate the normal way then do that automatically
-				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
+				if (((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) {
 					if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0)
 						masturbateGo();
 					else meditate();
@@ -808,7 +808,7 @@ public class Masturbation extends BaseContent {
 			//ORGASM GOES HERE
 			orgazmo(autofellatio, nippleFuck);
 			//POST MASTUBLATORY BLISS
-			if (player.findPerk(PerkLib.ElectrifiedDesire) < 0 || !player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (!player.hasPerk(PerkLib.ElectrifiedDesire) || !player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				outputText("\n\n");
 				if (player.cocks.length > 0) {
 					//Single Cock
@@ -1942,7 +1942,7 @@ public class Masturbation extends BaseContent {
 			}
 			//DONE!
 			flags[kFLAGS.TIMES_MASTURBATED]++;
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", 0.5);
 			}
@@ -2066,7 +2066,7 @@ public class Masturbation extends BaseContent {
 						outputText("his tentacles splattering mouse-jizz everywhere as he gets off from your show.");
 					else outputText("splattering himself with mouse-spunk as he finishes enjoying your inadvertent show.  He runs off before you have a chance to react.");
 				}
-				if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+				if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
 				else player.orgasm();
 				flags[kFLAGS.TIMES_MASTURBATED]++;
 				doNext(camp.returnToCampUseOneHour);
@@ -2137,7 +2137,7 @@ public class Masturbation extends BaseContent {
 			else if (player.gender == 3)
 				doNext(onaholeFutaContinuation);
 			else {
-				if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+				if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
 				else player.orgasm();
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -2148,7 +2148,7 @@ public class Masturbation extends BaseContent {
 			if (player.balls > 0)
 				outputText("you pass out with aching, empty balls.");
 			else outputText("you pass out with [cocks] sore from exertion.");
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", 1);
 			}
@@ -2164,7 +2164,7 @@ public class Masturbation extends BaseContent {
 			outputText(String(int(((Math.random() * player.str / 12) + player.str / 6) * 10) / 10));
 			outputText(" feet away from you. Delirious with pleasure, you continue your 'impression' of a semen volcano, covering yourself and the area with your seed. ");
 			outputText(" As your orgasms fade, you find yourself a well-fucked mess, and pass out.");
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", 1);
 			}
@@ -2207,7 +2207,7 @@ public class Masturbation extends BaseContent {
 		
 			dynStats("sen", .75, "cor", .5);
 			flags[kFLAGS.TIMES_MASTURBATED]++;
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
 			else player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2222,7 +2222,7 @@ public class Masturbation extends BaseContent {
 					outputText("Brimming with anticipation, you wind up the small gearbox on the weird contraption. You place the machine down and strip yourself naked. Stepping through the straps of the garment, you pull it up. The dildo does not come out, so you take the time to ease the artificial phallus to rest deep in your womanhood. After nestling the false cock in your pussy, you finish pulling up the belt and you tighten the straps. You lay down and you flip the switch. The machine vibrates around and inside you vigorously. Immediately, waves and cramps of pleasure swirl around your cunt and shoot up and down your spine. The machine, free of human limitations and fatigue, ceaselessly rubs and caresses your insides at impossibly high speeds. Within minutes, you begin experiencing the tell-tale contractions of an impending orgasm. With your hands free, you are able to explore your breasts and body as the device hammers away. You squeeze your ");
 					outputText(player.breastCup(0));
 					outputText(" tits as your body convulses with multiple orgasms. Savoring every moment, you relish in the pangs of delight searing your body. Eventually, the belt moves slower and slower, until it comes to a stop, along with your fun. You realize that the gears have wound down and the box needs to be wound for your pleasure to continue. Deciding not to overwhelm yourself, you carefully remove your toy and save it for another time.");
-					if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+					if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 						player.orgasmRaijuStyle();
 						dynStats("sen", 1);
 					}
@@ -2238,7 +2238,7 @@ public class Masturbation extends BaseContent {
 					outputText("Switching the belt on, it begins to immediately vibrate and rub every sensitive part of your [vagina]. You immediately glow with pleasure as the machine works its magic on your hungry pussy. Worried about the machine winding down, you re-crank the gear box occasionally to ensure that you get worked over by the tireless device as long as you can handle it.\n\n");
 					outputText("Eventually, the machine tweaks your nerves and your [clit] just right, triggering a massive orgasm that leaves you bucking wildly like an untamed horse, screaming in mind-numbing pleasure. Your uncontrollable movement dislodges the key from the gear box and you have no choice but to wait for the machine and your still-orgasming body to wind down, and THEN find the goddamn thing. After about fifteen minutes, the machine expends the last of its energy, leaving you a twitching heap until you can move to find the meddlesome key.\n\n");
 					outputText("Fortunately, you locate the key near your feet, saving you the money of having another made for the device. You put aside your machine, your lusts slaked, for now.");
-					if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+					if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 						player.orgasmRaijuStyle();
 						dynStats("sen", 1);
 					}
@@ -2319,7 +2319,7 @@ public class Masturbation extends BaseContent {
 		
 		private function lickYerGirlParts():void { //Female cat masturbation
 		clearOutput();
-		if (player.findPerk(PerkLib.Flexibility) < 0) {
+		if (!player.hasPerk(PerkLib.Flexibility)) {
 			outputText("You undress from your [armor] and take a seat down on the ground. You spread your legs and look down at your sex. It's aching for something more than just your fingers, and you have a craving to taste the lustful juices leaking out. A very perverted idea of cats flashes through your brain, putting a naughty smile on your face. You lay on your side and spread your legs, giving you a perfect view of your [vagina] You lean your head down towards the pleasure-hole, only to be stopped half-way there. You stick your tongue out, trying to add a few more inches, but this doesn't do anything except increase your appetite and your lust as a drop of warm saliva falls onto your [vagina]. You stretch and wriggle your tongue out in a fruitless effort to taste your dripping wet cunt, craving the feeling of your tongue caressing your lips and penetrating into your depths... but it is not to be. You sit back up, frustrated and even more aroused than you were before.");
 			dynStats("lus", 15);
 			doNext(camp.returnToCampUseOneHour);
@@ -2345,7 +2345,7 @@ public class Masturbation extends BaseContent {
 		//Stats & next event
 		//DONE!
 		flags[kFLAGS.TIMES_MASTURBATED]++;
-		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+		if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 			player.orgasmRaijuStyle();
 			dynStats("sen", 0.5);
 		}
@@ -2366,7 +2366,7 @@ public class Masturbation extends BaseContent {
 		//Stats & next event
 		//DONE!
 		flags[kFLAGS.TIMES_MASTURBATED]++;
-		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+		if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 			player.orgasmRaijuStyle();
 			dynStats("sen", 0.5);
 		}
@@ -2408,7 +2408,7 @@ public class Masturbation extends BaseContent {
 		private function catAutoLick():void { //Male cat masturbation
 			clearOutput();
 			//NOT FLEXABLE
-			if (player.findPerk(PerkLib.Flexibility) < 0) {
+			if (!player.hasPerk(PerkLib.Flexibility)) {
 				//Fails [Herm has a 50/50 chance of getting either.]
 				//[Male]
 				outputText("You undress from your [armor] and take a seat down on the ground, your [cock] pointing straight at your face. You stroke the erect member a few times, but then remember the cats back at the village. You stare at your [cock]; the more you look at the cock, the more your mouth craves to suck on it. You open your mouth as wide as you can and lean towards your cock, only to be stopped halfway to the tip. You stick your tongue out and try to lick the head. You pretend you're rolling your tongue around the head, but this only makes your cock harder in eagerness. You throw your head forward in an attempt to flick your tongue against it, but the [cock] is pulled back as you go forward. You slump your back onto the ground and let out a frustrated groan. The only thing you've managed to do is make yourself more aroused than when you started.");
@@ -2506,7 +2506,7 @@ public class Masturbation extends BaseContent {
 			//Stats & next event
 			//DONE!
 			flags[kFLAGS.TIMES_MASTURBATED]++;
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", 0.5);
 			}
@@ -2525,7 +2525,7 @@ public class Masturbation extends BaseContent {
 			outputText(" of the day.");
 			dynStats("lus", -50);
 			dynStats("cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
-			if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10) HPChange(50, true);
+			if (player.hasPerk(PerkLib.Enlightened) && player.cor < 10) HPChange(50, true);
 			fatigue( -10);
 			doNext(camp.returnToCampUseOneHour);//później z kolejnymi perkami jak bedzie zbijane wiecej lust naraz to wydłuży si czas medytacjo do 2h
 			//doNext(camp.returnToCampUseTwoHours);
@@ -2550,7 +2550,7 @@ public class Masturbation extends BaseContent {
 			if (player.biggestLactation() >= 2) outputText("Thin streams of creamy milk flow from your [allbreasts], your torso and midsection dripping wet from the stuff. ");
 			outputText("Completely sated, you take off the belt, finding it slides off easily, and put it away in your campsite, eagerly awaiting the time you can next use it and have the suit work you over once more.");
 			flags[kFLAGS.TIMES_MASTURBATED]++;
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", 1);
 			}
@@ -2666,7 +2666,7 @@ public class Masturbation extends BaseContent {
 				outputText("You're a bit confused by how much you enjoyed the perverse activity.");
 			else outputText("You're horrified at what you're doing to deal with your inner perversions.");
 			//DONE!
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", 0.5);
 			}
@@ -2832,7 +2832,7 @@ public class Masturbation extends BaseContent {
 			}
 			outputText("Sated for now, you rest for an hour or so before climbing back atop your hooves.");
 			//DONE!
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", 0.5);
 			}
@@ -2912,7 +2912,7 @@ public class Masturbation extends BaseContent {
 				outputText(", until she's full up and leaking onto the ground.\n\n");		
 				outputText("Sated, you spend a few blissful minutes enjoying the warmth and tightness of the mare-like onahole until your " + player.cockDescript(x) + " is soft inside it.  You scamper off of her, dropping back to your four equine feet.  With a contented yawn, you disassemble the toy and haul it off back to your stash, leaking your cum the entire way.");
 			}
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", 2);
 			}
@@ -2949,7 +2949,7 @@ public class Masturbation extends BaseContent {
 			outputText("You sense your own orgasm coming as a hot, sticky fluid rushes into you.  You scream your pleasure as the statue unloads a load of hot faux-spunk into your womb, flooding your cunt with its strange seed.  So utterly and completely filled, you cannot hold back your orgasm.  You cum, your [vagina] clamping down hard on the fake cock buried inside you, milking it for more and more of its thick, creamy spooge.\n\n");
 		
 			outputText("When your climax finally passes, you've collapsed on all fours, swaying light-headed as the statue continues to leak a steady trickle of spooge onto your [ass].  You stagger to your legs and begin to disassemble the pole.  You drag it back to your stash, your hips making a lewd squishing noise with every step as globs of fake cum leak out of your horsecunt.");
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", 2);
 			}
@@ -3103,7 +3103,7 @@ public class Masturbation extends BaseContent {
 				flags[kFLAGS.DICK_EGG_INCUBATION] = 48;
 			}
 			player.dumpEggs();
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
 			else player.orgasm();
 			flags[kFLAGS.TIMES_EGGED_IN_COCK]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -3165,7 +3165,7 @@ public class Masturbation extends BaseContent {
 			
 			outputText("\n\nFeeling lighter and a bit happier than you have in a while, you pick yourself up and redress, quickly heading back to camp.\n");
 			flags[kFLAGS.DICK_EGG_INCUBATION] = 0;
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
 			else player.orgasm();
 		}
 		
@@ -3270,7 +3270,7 @@ public class Masturbation extends BaseContent {
 				player.createStatusEffect(StatusEffects.Eggchest, 3 + rand(10), 1 + rand(4), 0, 0);
 				
 			}
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
 			else player.orgasm();
 			dynStats("sen", 1);
 			player.dumpEggs();
@@ -3289,7 +3289,7 @@ public class Masturbation extends BaseContent {
 			outputText(" Fucking yourself with abandon your black girlcum starts to rain on the ground until everywhere around you is entirely soaked but you don't care this feels way too good to stop.");
 			outputText(" For hour your lock yourself in constant bliss until after a number of incalculable consecutive orgasm you collapse to the ground exhausted and entirely drenched in black ink.\n\n");
 			outputText("You proceed to clean yourself up in the nearby stream then go lay down on the grass to dry drifting off into a quick nap.");
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
 			else player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -3473,7 +3473,7 @@ public class Masturbation extends BaseContent {
 			if (player.tentacleCocks() > 1 || player.stamenCocks() > 1) outputText("s");
 			outputText(" to dribble the spent passion on the ground.  Damn, that was satisfying.");
 			//(-2 sens + 1 per tentacle dick, -100 lust)
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", (1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
 			}
@@ -3566,7 +3566,7 @@ public class Masturbation extends BaseContent {
 			outputText("\n\nFamiliar twinges start down in your pitcher. Orgasm is rapidly closing in, and there’s no slowing your frenzied vines at this point.  You gurgle as your inner muscles begin to contract into tight knots, the pressure building to a turgid, throbbing peak. Then, as your multitude of stamens thrust deep inside yourself, a volcano of pleasure erupts, pumping thick flows of liquid pollen straight into your snatch, ass, and mouth.  You gulp the flow down as best you are able. Your birth canal is quickly flooded with pollen, while your squeezable ass’s interior is painted with more plant juice.");
 			outputText("\n\nAt once, your whole body sags back, limp and drained. You move your vines move back to their normal position, popping out of your vagina, ass, and mouth, leaving your orifices to dribble the spent passion. Damn, that was satisfying.");
 			//(-2 sens + 1 per tentacle dick, -100 lust)
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", (1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
 			}
@@ -3617,7 +3617,7 @@ public class Masturbation extends BaseContent {
 				"\"<i>Who needs anyone else when we can just fuck ourselves?</i>\"\n\n" +
 				"\"<i>I think we only do it for variety. Truthfully, I would get bored if it was just us two all the time… Plus, who says no to a threesome?</i>\"\n\n" +
 				"The two of you giggle at this idea as you resume your journey, highly satisfied.");
-		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+		if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 			player.orgasmRaijuStyle();
 			dynStats("sen", (1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
 		}
@@ -3711,7 +3711,7 @@ public class Masturbation extends BaseContent {
 					}
 				}
 			}
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", 2);
 			}
@@ -3773,7 +3773,7 @@ public class Masturbation extends BaseContent {
 			if(player.isLiliraune()) outputText("both ");
 			outputText("cry in a mixture of pleasure and pain, your moist tight butthole being overloaded with intense sensations. Fortunately the tender and rubbery texture of your vines allows them for more sensitivity, the subtle friction sending tingles from your pitcher all the way up your spine. You shiver from the sheer cocktail of raw pleasure you’re inflicting on your own body. Your vine keeps squirming against your insides, making you quiver and giggle like a whore, until it lodges all the way inside your colon, adopting a more comfortable position. You then proceed to ferociously fuck your own [asshole], stretching it a bit more at every thrust.");
 			outputText("\n\nThe conjugated friction of your vine writhing inside your devastated interior (as well as the rough hanjdob you’re giving yourself) eventually proves too much for your horny body, and all of your stamens releases a massive load, squirting flower juices everywhere inside (and outside) your body. Pressure builds in your ass (and your hands) as pollen flows out of you. You groan and lazily remove your stamen from your anus as you give in to your pleasure-induced drowsiness. You drift into a brief catnap, your stamens mounted vines pulsing and throbbing with continual lust.");
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", 2);
 			}
@@ -3820,7 +3820,7 @@ public class Masturbation extends BaseContent {
 			var gems:int = midasCockJackingGemsRoll();
 		
 			outputText("\n\n<b>You have just enough wherewithal to gather up the spent " + num2Text(gems) + " gems before falling asleep for a quick nap.</b>");
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", 1);
 			}
@@ -3869,7 +3869,7 @@ public class Masturbation extends BaseContent {
 				outputText("\n\nThe erotic pumping of the phallic object picks up the pace as you gently build a rhythm with the beating of your heart and tensing of your vaginal walls. Your breathing heaves, and your moans become almost as desperate as they are lustful. Soon the pleasure is rising up into unstoppable tide of phallus-induced ecstasy, and you slide from against the rock to on your side, still fucking yourself with blissful joy. The constant thrusting of the toy begins to make you shake and lose rhythm, your body wanting only to fuck as hard and fast as possible.");
 				outputText("\n\nYour orgasm arrives with supreme relief as you force the dildo to your furthest depths. Juices spurt from your genitals, and you roll onto your back to rest. When your breathing regulates, you pull the thoroughly used toy from your [vagina] and prepare to return to camp.");
 			}
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.orgasmRaijuStyle();
 				dynStats("sen", 1.5);
 			}
@@ -3908,7 +3908,7 @@ public class Masturbation extends BaseContent {
 			else outputText("\n\n");
 			outputText("Your body shakes and rocks from the anal orgasm before slumping onto your back. Happily tightening around the toy with each beat of your hammering heart, you rest.");
 			outputText("\n\nSome time later, you gather your things and return to camp.");
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
 			else player.orgasm();
 			dynStats("sen", 0.5);
 			statScreenRefresh();

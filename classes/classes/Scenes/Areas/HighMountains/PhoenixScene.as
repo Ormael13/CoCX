@@ -176,7 +176,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\n\"<i>Heeeey,</i>\" the phoenix whines squirming to get out of your grip.");
 			outputText("\n\nYou maintain your grasp on her long, purple lizard dick and tell her that you’re doing her a favor: you’re going to let her fuck your " + vaginaDescript() + ". She stops struggling at the invitation.");
 			outputText("\n\n\"<i>Oh. Well,</i>\" she says, smirking slightly. \"<i>If you want a bit of phoenix seed... I guess I wouldn’t mind a chance at being a daddy.</i>\"\n\n");
-			if (player.findPerk(PerkLib.BroodMother) >= 0 && player.pregnancyType > 0) outputText("You assure her she will be soon");
+			if (player.hasPerk(PerkLib.BroodMother) && player.pregnancyType > 0) outputText("You assure her she will be soon");
 			else outputText("You grin at her");
 			outputText(" and strip out of your [armor]. The phoenix, a bit more dominant than you might have liked, roughly grabs your [chest], pinching your nipples as she takes over wringing her cock from you. Oh well. You decide to roll with it and slide a hand down to your [vagina], stroking your pussy as your lover warms up.");
 			outputText("\n\nWhen she’s nice and hard, you give the phoenix a little push onto her back and clamber into her lap, lining her lizard prick up with your [vagina]. Before you can get properly situated, though, the girl pulls you down onto her cock, impaling you up to her hilt in one massive thrust. You roll your head back and scream, a mix of pleasure and burning pain shooting through you as her white-hot rod slams into your innermost depths.");

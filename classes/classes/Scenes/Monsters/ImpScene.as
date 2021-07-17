@@ -8,6 +8,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Camp.ImpGang;
 import classes.Scenes.UniqueSexScenes;
 
@@ -16,6 +17,7 @@ use namespace CoC;
 	public class ImpScene extends BaseContent
 	{
 		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+		public var campwinions:CampMakeWinions = new CampMakeWinions();
 
 		public function ImpScene()
 		{
@@ -1587,7 +1589,7 @@ use namespace CoC;
 		public function defeatImpLord():void {
 			clearOutput();
 			menu();
-			if(monster.HP < 1) {
+			if(monster.HP <= monster.minHP()) {
 				outputText("The greater imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.");
 			} else {
 				outputText("The muscular imp groans in pained arousal, his loincloth being pushed to the side by his thick, powerful dick.  Grabbing the useless clothing, he rips it from his body, discarding it.  The imp's eyes lock on his cock as he becomes completely ignorant of your presence.  His now insatiable lust has completely clouded his judgment.  Wrapping both of his hands around his pulsing member he begins to masturbate furiously, attempting to relieve the pressure you've caused.");
@@ -2153,7 +2155,7 @@ use namespace CoC;
 		public function defeatImpPack():void {
 			clearOutput();
 			menu();
-			if(monster.HP < 1) outputText("The last of the imps collapses into the pile of his defeated comrades.  You're not sure how you managed to win a lopsided fight, but it's a testament to your new-found prowess that you succeeded at all.");
+			if(monster.HP <= monster.minHP()) outputText("The last of the imps collapses into the pile of his defeated comrades.  You're not sure how you managed to win a lopsided fight, but it's a testament to your new-found prowess that you succeeded at all.");
 			else outputText("The last of the imps collapses, pulling its demon-prick free from the confines of its loincloth.  Surrounded by masturbating imps, you sigh as you realize how enslaved by their libidos the foul creatures are.");
 			if(player.lust >= 33 && player.gender > 0) {
 				outputText("\n\nFeeling a bit horny, you wonder if you should use them to sate your budding urges before moving on.  Do you rape them?");
@@ -2303,8 +2305,10 @@ use namespace CoC;
 			outputText("You make a quick work of the imp before dragging the corpse away. That's one less foul creature prowling the realms. ");
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu();
-			addButton(0, "Take Skull", takeSkull);
 			addButton(1, "Leave", cleanupAfterCombat);
+			addButton(2, "Take Skull", takeSkull);
+			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(3, "Harvest", harvestBones);
+			else addButtonDisabled(3, "???", "Req. Prestige Job: Necromancer.");
 		}
 		private function killFeralImp():void {
 			clearOutput();
@@ -2312,14 +2316,24 @@ use namespace CoC;
 			outputText("You make a quick work of the feral imp before dragging the corpse away. That's one less foul creature prowling the realms. ");
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu();
-			addButton(0, "Take Skull", takeSkull2);
 			addButton(1, "Leave", cleanupAfterCombat);
+			addButton(2, "Take Skull", takeSkull2);
+			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(3, "Harvest", harvestBones);
+			else addButtonDisabled(3, "???", "Req. Prestige Job: Necromancer.");
 		}
 		private function takeSkull():void {
 			inventory.takeItem(useables.IMPSKLL, cleanupAfterCombat);
 		}
 		private function takeSkull2():void {
 			inventory.takeItem(useables.FIMPSKL, cleanupAfterCombat);
+		}
+		private function harvestBones():void {
+			var harv:Number = 1 + rand(5);
+			if (player.hasPerk(PerkLib.GreaterHarvest)) harv += 4 + rand(12);
+			if (harv + player.perkv1(PerkLib.PrestigeJobNecromancer) > campwinions.maxDemonBonesStored()) harv = campwinions.maxDemonBonesStored() - player.perkv1(PerkLib.PrestigeJobNecromancer);
+			outputText("You take your time to harvest material. You acquired " + harv + " bones!");
+			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, harv);
+			cleanupAfterCombat();
 		}
 	}
 }

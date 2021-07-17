@@ -187,7 +187,7 @@ import classes.VaginaClass;
 				outputText("Your duplicate is too stunned, buying you another round!");
 				return;
 			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug)) {
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug)) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaPlay)) {

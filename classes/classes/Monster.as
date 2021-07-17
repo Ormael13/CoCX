@@ -422,8 +422,10 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.GrandArchmage)) temp += 60;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle)) temp += 75;
 			if (hasPerk(PerkLib.GrandArchmage3rdCircle)) temp += 90;
-			if (hasPerk(PerkLib.GreyMage)) temp += 120;
-			if (hasPerk(PerkLib.GreyArchmage)) temp += 150;
+			if (hasPerk(PerkLib.GreyMageApprentice)) temp += 20;
+			if (hasPerk(PerkLib.GreyMage)) temp += 40;
+			if (hasPerk(PerkLib.GreyArchmage)) temp += 80;
+			if (hasPerk(PerkLib.GrandGreyArchmage)) temp += 160;
 			if (hasPerk(PerkLib.InhumanDesireI)) temp += Math.round(this.lib * 3 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.JobCourtesan)) temp += 60;
 			if (hasPerk(PerkLib.JobSeducer)) temp += 30;
@@ -696,9 +698,11 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.GrandArchmage) && inte >= 125) temp += 225;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle) && inte >= 150) temp += 270;
 			if (hasPerk(PerkLib.GrandArchmage3rdCircle) && inte >= 175) temp += 315;
+			if (hasPerk(PerkLib.GrandGreyArchmage) && inte >= 225) temp += 600;
 			if (hasPerk(PerkLib.GrandMage) && inte >= 75) temp += 135;
-			if (hasPerk(PerkLib.GreyArchmage) && inte >= 225) temp += 600;
-			if (hasPerk(PerkLib.GreyMage) && inte >= 200) temp += 450;
+			if (hasPerk(PerkLib.GreyArchmage) && inte >= 175) temp += 450;
+			if (hasPerk(PerkLib.GreyMage) && inte >= 125) temp += 300;
+			if (hasPerk(PerkLib.GreyMageApprentice) && inte >= 75) temp += 150;
 			if (hasPerk(PerkLib.Mage) && inte >= 50) temp += 90;
 			if (hasPerk(PerkLib.Spellpower) && inte >= 50) temp += 45;
 			if (hasPerk(PerkLib.JobSorcerer)) temp += 45;
@@ -1791,7 +1795,8 @@ import flash.utils.getQualifiedClassName;
 			if (player.hasPerk(PerkLib.DarkenedKitsune)>0) {//&& rand(4) ==0){
 				if (SceneLib.darkenedKitsuneScene.darkKitsuneCombat()) EngineCore.outputText("\n\n")
 			}
-			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug) || hasStatusEffect(StatusEffects.MysticWeb)) {
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)
+			|| hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug) || hasStatusEffect(StatusEffects.MysticWeb)) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
@@ -1849,9 +1854,11 @@ import flash.utils.getQualifiedClassName;
 				EngineCore.outputText("" + capitalA + short + " struggle to get free from your web!");
 				if (statusEffectv1(StatusEffects.MysticWeb) <= 0) {
 					EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove you break off your webbing.");
+					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 					removeStatusEffect(StatusEffects.MysticWeb);
 				}
 				addStatusValue(StatusEffects.MysticWeb, 1, -1);
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
 				return false;
 			}
 			if (hasStatusEffect(StatusEffects.Pounce)) {
@@ -1912,9 +1919,11 @@ import flash.utils.getQualifiedClassName;
 			EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
 			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
 				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 				removeStatusEffect(StatusEffects.ConstrictedScylla);
 			}
 			addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
+			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
 			return false;
 			}
 			else if (LowerBody.hasPincers(player)) {
@@ -1930,9 +1939,22 @@ import flash.utils.getQualifiedClassName;
 			EngineCore.outputText("" + capitalA + short + " struggle in your fluid form kicking and screaming to try and get out.");
 			if (statusEffectv1(StatusEffects.GooEngulf) <= 0) {
 				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your slimy body to handle, breaking free of your fluids.");
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 				removeStatusEffect(StatusEffects.GooEngulf);
 			}
 			addStatusValue(StatusEffects.GooEngulf, 1, -1);
+			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+			return false;
+			}
+			else if (hasStatusEffect(StatusEffects.ConstrictedWhip)) {
+			EngineCore.outputText("" + capitalA + short + " pushes, twisting and writhing in an effort to escape from your whip's tight bonds.");
+			if (statusEffectv1(StatusEffects.ConstrictedWhip) <= 0) {
+				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your whip to handle, breaking free of your tightly bound whip coils.");
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
+				removeStatusEffect(StatusEffects.ConstrictedWhip);
+			}
+			addStatusValue(StatusEffects.ConstrictedWhip, 1, -1);
+			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
 			return false;
 			}
 			else if (hasStatusEffect(StatusEffects.EmbraceVampire)) {
@@ -1957,11 +1979,17 @@ import flash.utils.getQualifiedClassName;
 			EngineCore.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
 			if (statusEffectv1(StatusEffects.Constricted) <= 0) {
 				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
+				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 				removeStatusEffect(StatusEffects.Constricted);
 			}
 			addStatusValue(StatusEffects.Constricted, 1, -1);
+			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
 			return false;
 			}
+		}
+		private function ControlFreakStacking():void {
+			if (player.hasStatusEffect(StatusEffects.ControlFreak)) player.addStatusValue(StatusEffects.ControlFreak, 1, 0.5);
+			else player.createStatusEffect(StatusEffects.ControlFreak, 1.5, 0, 0, 0);
 		}
 
 		/**
@@ -2368,6 +2396,11 @@ import flash.utils.getQualifiedClassName;
 				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
 				if (hasPerk(PerkLib.Diehard) && !hasPerk(PerkLib.EpicDiehard) && this.HP < 1) healingPercent -= 1;
 				if (hasPerk(PerkLib.LizanMarrowFinalForm) && this.HP < 1) healingPercent -= 1;
+				if (hasStatusEffect(StatusEffects.BloodRequiem) && healingPercent > 0) {
+					if (hasPerk(PerkLib.EnemyConstructType) || hasPerk(PerkLib.EnemyElementalType) || hasPerk(PerkLib.EnemyFleshConstructType) || hasPerk(PerkLib.EnemyGhostType)) healingPercent *= 0.8;
+					else if (hasPerk(PerkLib.EnemyPlantType)) healingPercent *= 0.5;
+					else healingPercent *= 0.2;
+				}
 				temp2 = Math.round(maxHP() * healingPercent / 100);
 				if (hasPerk(PerkLib.Lifeline)) temp2 += (45 * (1 + newGamePlusMod()));
 				if (hasPerk(PerkLib.ImprovedLifeline)) temp2 += (60 * (1 + newGamePlusMod()));
@@ -2427,8 +2460,10 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.DraconicHeartFinalForm)) manaRecovery += 5;
 				if (hasPerk(PerkLib.WarMageApprentice)) manaRecovery += 10;
 				if (hasPerk(PerkLib.WarMageAdept)) manaRecovery += 15;
+				if (hasPerk(PerkLib.GreyMageApprentice)) manaRecoveryMulti += 0.25;
 				if (hasPerk(PerkLib.GreyMage)) manaRecoveryMulti += 0.5;
-				if (hasPerk(PerkLib.GreyArchmage)) manaRecoveryMulti += 1.5;
+				if (hasPerk(PerkLib.GreyArchmage)) manaRecoveryMulti += 0.75;
+				if (hasPerk(PerkLib.GrandGreyArchmage)) manaRecoveryMulti += 1;
 				if (hasPerk(PerkLib.ManaAffinityI)) manaRecoveryMulti += (0.2 * (1 + newGamePlusMod()));
 				manaRecovery *= manaRecoveryMulti;
 				addMana(manaRecovery);
@@ -2767,6 +2802,21 @@ import flash.utils.getQualifiedClassName;
 					outputText("As blood flows through the water the "+(this is UnderwaterTigersharkGirl ? "tiger ":"")+"shark girl"+(this is UnderwaterSharkGirlsPack ? "s":"")+" grows increasingly vicious. ");
 				}
 			}
+			if (game.player.hasStatusEffect(StatusEffects.BloodField)) {
+				game.player.addStatusValue(StatusEffects.BloodField, 1, -1);
+				if (game.player.statusEffectv1(StatusEffects.BloodField) <= 0) game.player.removeStatusEffect(StatusEffects.BloodField);
+				if (!game.player.hasStatusEffect(StatusEffects.MonsterDig) && !isFlying()) {
+					var bloodfield:Number = statusEffectv2(StatusEffects.Hemorrhage);
+					if (plural) bloodfield *= 5;
+					if (hasPerk(PerkLib.EnemyLargeGroupType)) bloodfield *= 5;
+					bloodfield = SceneLib.combat.doDamage(bloodfield);
+					EngineCore.HPChange(bloodfield, false);
+				}
+			}
+			if (hasStatusEffect(StatusEffects.BloodRequiem)) {
+				addStatusValue(StatusEffects.BloodRequiem, 1, -1);
+				if (statusEffectv1(StatusEffects.BloodRequiem) <= 0) removeStatusEffect(StatusEffects.BloodRequiem);
+			}
 			if(hasStatusEffect(StatusEffects.MonsterRegen)) {
 				if(statusEffectv1(StatusEffects.MonsterRegen) <= 0)
 					removeStatusEffect(StatusEffects.MonsterRegen);
@@ -2865,7 +2915,8 @@ import flash.utils.getQualifiedClassName;
 				}
 				//Deal damage if still wounded.
 				else {
-					var store2:Number = int(50+(player.inte/10));
+					var store2:Number = int(50 + (player.inte / 10));
+					store2 = Math.round(store2 * SceneLib.combat.fireDamageBoostedByDao());
 					store2 = SceneLib.combat.doFireDamage(store2);
 					if(plural) outputText(capitalA + short + " burn from lingering immolination after-effect. <b>(<font color=\"#800000\">" + store2 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering immolination after-effect. <b>(<font color=\"#800000\">" + store2 + "</font>)</b>\n\n");
@@ -2883,6 +2934,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store4:Number = (player.str + player.spe + player.tou) * 2.5;
+					store4 = Math.round(store4 * SceneLib.combat.fireDamageBoostedByDao());
 					store4 += maxHP() * statusEffectv2(StatusEffects.BurnDoT);
 					store4 = SceneLib.combat.doFireDamage(store4);
 					if(plural) outputText(capitalA + short + " burn from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
@@ -2901,6 +2953,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store8:Number = (player.str + player.spe + player.tou) * 2.5;
+					store8 = Math.round(store8 * SceneLib.combat.fireDamageBoostedByDao());
 					store8 += maxHP() * statusEffectv2(StatusEffects.BurnDoT2);
 					store8 = SceneLib.combat.doFireDamage(store8);
 					if(plural) outputText(capitalA + short + " burn from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store8 + "</font>)</b>\n\n");
@@ -2919,6 +2972,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store6:Number = (player.spe + player.inte) * SceneLib.combat.soulskillMod() * 0.5;
+					store6 = Math.round(store6 * SceneLib.combat.fireDamageBoostedByDao());
 					store6 = SceneLib.combat.doFireDamage(store6);
 					if(plural) outputText(capitalA + short + " burn from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
@@ -2958,6 +3012,7 @@ import flash.utils.getQualifiedClassName;
 					//Deal damage if still wounded.
 					else {
 						var store12:Number = (player.str + player.spe + player.tou) * 2.5;
+						store12 = Math.round(store12 * SceneLib.combat.iceDamageBoostedByDao());
 						store12 += maxHP() * statusEffectv2(StatusEffects.FrostburnDoT);
 						if(plural) outputText(capitalA + short + " are hurt by lingering Frostburn after-effect. ");
 						else outputText(capitalA + short + " is hurt by lingering Frostburn after-effect. ");
@@ -2983,7 +3038,7 @@ import flash.utils.getQualifiedClassName;
 						store7 += maxHP() * statusEffectv2(StatusEffects.AcidDoT);
 						if(plural) outputText(capitalA + short + " are hurt by lingering Acid after-effect. ");
 						else outputText(capitalA + short + " is hurt by lingering Acid after-effect. ");
-						store7 = SceneLib.combat.doMagicDamage(store7, true, true);
+						store7 = SceneLib.combat.doAcidDamage(store7, true, true);
 						outputText("\n\n");
 					}
 				}
@@ -3005,7 +3060,7 @@ import flash.utils.getQualifiedClassName;
 						store10 += maxHP() * statusEffectv2(StatusEffects.PoisonDoT);
 						if(plural) outputText(capitalA + short + " are hurt by lingering Poison after-effect. ");
 						else outputText(capitalA + short + " is hurt by lingering Poison after-effect. ");
-						store10 = SceneLib.combat.doMagicDamage(store10, true, true);
+						store10 = SceneLib.combat.doPoisonDamage(store10, true, true);
 						outputText("\n\n");
 					}
 				}
@@ -3026,7 +3081,7 @@ import flash.utils.getQualifiedClassName;
 						store9 += maxHP() * statusEffectv2(StatusEffects.PoisonDoTH);
 						if(plural) outputText(capitalA + short + " are hurt by lingering Poison after-effect. ");
 						else outputText(capitalA + short + " is hurt by lingering Poison after-effect. ");
-						store9 = SceneLib.combat.doMagicDamage(store9, true, true);
+						store9 = SceneLib.combat.doPoisonDamage(store9, true, true);
 						outputText("\n\n");
 					}
 				}
@@ -3108,7 +3163,7 @@ import flash.utils.getQualifiedClassName;
 					var store11:Number = 0;
 					store11 += statusEffectv2(StatusEffects.ConsumingDarkness);
 					store11 *= 0.2;
-					store11 = Math.round(store11);
+					store11 = Math.round(store11 * SceneLib.combat.darknessDamageBoostedByDao());
 					store11 = SceneLib.combat.doDarknessDamage(store11, true, true);
 					outputText("\n\n");
 				}
@@ -3357,3 +3412,4 @@ import flash.utils.getQualifiedClassName;
 		}
 	}
 }
+
